@@ -2,10 +2,11 @@
     var model = Y.lane.Model,
         doc = Y.one("doc"),
         ie = Y.UA.ie,
-        query = model.get(model.URL_ENCODED_QUERY),
+        query = model.get(	model.URL_ENCODED_QUERY),
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = Y.one('.solrFacets'),
+      
         handleArrowKey = function(event, direction) {
             var browseFacetNavContainer = Y.one(".facetBrowse .s-pagination"),
                 selectorString = ".pagingButton." + direction,
@@ -57,7 +58,7 @@
                 }
             });
         };
-        if (query && facetsContainer) {
+        if (query && facetsContainer && !Y.one("#bassettContent") ) {
             makeRequest();
             // listeners for left/right arrows
             doc.on("key", handleArrowKey, "up:37", this, "previous");

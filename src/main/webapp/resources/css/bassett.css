@@ -7,24 +7,47 @@
 	padding: 10px ;
 }
 
+#paging span{
+	margin-left: 10px;
+}
+
+#bassett-title-header{
+	margin-left: 10px; 
+	margin-top: 12px;
+}
+
+#bassett-menu span{
+	float:right;
+	color: black;
+}
+
+.region .enabled a, .region .enabled span{
+	color: white !important;	
+}
+
 
 /* Multi IMAGES VIEW */
 .bassett-images, .paging, .bassett-image {
 	clear: both;
 }
 
+.see-all{
+	float: right ;
+}
 
 .bassett-images div {
-	padding: 0 0 30px 9px;
+	padding: 0px 10px 0px 10px;
 	float: left;
 }
 #bassettContent .hr {
-	padding: 0 0 7px 0;
+	padding: 0px;
 	float: none;
 }
+
 #bassettContent .image-text {
-	padding: 3px 0 0 0;
-}
+	padding: 0px 0px 24px 0px;
+	margin-top: -5px
+} 
 
 .pagination-disabled  , .pagination-disabled span, .pagination-disabled label {
 	color: white !important;

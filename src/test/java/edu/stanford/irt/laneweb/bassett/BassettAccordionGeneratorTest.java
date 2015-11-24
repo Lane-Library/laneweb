@@ -8,60 +8,66 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.solr.BassettImage;
+import edu.stanford.irt.solr.service.SolrImageService;
 
 public class BassettAccordionGeneratorTest {
 
-    private BassettCollectionManager collectionManager;
+    protected SolrImageService service;
 
     private BassettAccordionGenerator generator;
 
-    private SAXStrategy<Map<String, Integer>> saxStrategy;
+    private SAXStrategy<FacetPage<BassettImage>> saxStrategy;
 
     private XMLConsumer xmlConsumer;
 
+    FacetPage<BassettImage> facetPage;
+    
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.collectionManager = createMock(BassettCollectionManager.class);
+        this.service = createMock(SolrImageService.class);
+        this.facetPage = createMock(FacetPage.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new BassettAccordionGenerator(this.collectionManager, this.saxStrategy);
+        this.generator = new BassettAccordionGenerator(this.service, this.saxStrategy);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 
     @Test
     public void testDoGenerate() {
-        expect(this.collectionManager.searchCount("query")).andReturn(null);
+        expect(this.service.facetBassettOnRegionAndSubRegion("query")).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
-        replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
+        replay(this.service, this.saxStrategy, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
+        verify(this.service, this.saxStrategy, this.xmlConsumer);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testDoGenerateEmptyQuery() {
-        this.saxStrategy.toSAX(isA(Map.class), eq(this.xmlConsumer));
-        replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
+       expect(this.service.facetBassettOnRegionAndSubRegion("*")).andReturn(this.facetPage);
+        this.saxStrategy.toSAX(isA(FacetPage.class), eq(this.xmlConsumer));
+        replay(this.saxStrategy, this.xmlConsumer, this.service);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, ""));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
+        verify(this.service, this.saxStrategy, this.xmlConsumer);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoGenerateNullQuery() {
-        this.saxStrategy.toSAX(isA(Map.class), eq(this.xmlConsumer));
-        replay(this.collectionManager, this.saxStrategy, this.xmlConsumer);
+        expect(this.service.facetBassettOnRegionAndSubRegion("*")).andReturn(this.facetPage);
+        this.saxStrategy.toSAX(this.facetPage, this.xmlConsumer);
+        replay(this.service, this.saxStrategy, this.xmlConsumer, this.facetPage);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.saxStrategy, this.xmlConsumer);
+        verify(this.service, this.saxStrategy, this.xmlConsumer);
     }
 }

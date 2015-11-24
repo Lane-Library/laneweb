@@ -1,8 +1,6 @@
 (function() {
 
 
-
-
         var bassettContent = Y.one('#bassettContent'),
             model = Y.lane.Model,
             basePath = model.get(model.BASE_PATH) || "",
@@ -10,6 +8,7 @@
             accordion,
             history,
             registerLinksContainer,
+            subRegionToShow = 4,
 
             formatAjaxUrl = function(href) {
                 var url;
@@ -81,13 +80,87 @@
             }
         };
 
+        
+       //For the bassett menu
+        
+
+	    expandSubRegion = function(event) {
+			var region = event.currentTarget.ancestor('ul');
+			var seeAll = region.one('.see-all');
+			hideRegions();
+			resetSubregion();
+			if ( seeAll.getHTML() &&  seeAll.getHTML() != "hide") {
+				seeAll.setHTML('hide');
+				var subRegions = region.all('li');
+				for (i = subRegionToShow + 1; i < subRegions.size(); i++) {
+					subRegions.item(i).show();
+				}
+			}
+	    }
+        
+        surlineSubRegion = function(event){
+        	resetSubregion();
+        	var anchor = event.currentTarget;
+        	selectedSubRegion = anchor.ancestor();
+        	selectedSubRegion.addClass('enabled');
+        	var i = selectedSubRegion.one('i');
+        	i.removeClass('fa-square-o');
+        	i.addClass('fa-check-circle-o');
+        }
+
+        resetSubregion = function(){
+        	var liList = Y.all('.region li:not(:first-child)');
+        	for(i= 0; i< liList.size(); i++){
+        		var li = liList.item(i);
+        		li.removeClass('enabled');
+        		var iElement = li.one('i');
+        		if(iElement != null){
+	        		iElement.addClass('fa-square-o');
+	            	iElement.removeClass('fa-check-circle-o');
+        		}
+            }
+        }
+        
+        hideRegions = function() {
+			var region = Y.all('.region');
+			for (i = 0; i < region.size(); i++) {
+				hideSubRegion( region.item(i));
+			}
+			
+        }
+        
+
+	    hideSubRegion = function(region) {
+			var seeAll = region.one('.see-all');
+			if (seeAll) {
+				seeAll.setHTML('see all');
+				var subRegion = region.all('li');
+				for (j = 0; j < subRegion.size(); j++) {
+					if (j > subRegionToShow) {
+						subRegion.item(j).hide();
+					}
+				}
+			}
+		}
+        
         if (bassettContent) {
-            accordion = Y.one('#accordion');
+            accordion = Y.one('#bassett-menu');
             // not if largerView.html
             if (accordion) {
+            	hideRegions();
                 registerLinksContainer(accordion);
                 registerLinksContainer(Y.one('#bassettContent'));
+                var seeAll = Y.all('.see-all');
+                for (i = 0; i < seeAll.size(); i++) {
+                    seeAll.item(i).on('click', expandSubRegion);
+                }
+                var li = Y.all('.region li:not(:first-child) a');
+                for (i = 0; i < li.size(); i++) {
+                    li.item(i).on('click', surlineSubRegion);
+                }
                 initializeHistory();
             }
         }
+        
+        
 })();

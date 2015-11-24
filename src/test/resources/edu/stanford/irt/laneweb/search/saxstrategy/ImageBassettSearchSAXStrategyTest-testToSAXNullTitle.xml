@@ -6,7 +6,7 @@
    </div>
    <ul id="imageList">
       <li>
-         <a href="/biomed-resources/bassett/bassettView.html?bn=bassettNumber">
+         <a href="/biomed-resources/bassett/solr-bassett-view.html?bn=bassettNumber">
             <div id="image">
                <image src="http://elane.stanford.edu/public/L254573/small/bassettSrc"/>
             </div>

@@ -6,26 +6,17 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/bassett"
         class="edu.stanford.irt.laneweb.bassett.BassettImageGenerator"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
+        <constructor-arg ref="edu.stanford.irt.solr.service"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-list"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion"
         class="edu.stanford.irt.laneweb.bassett.BassettAccordionGenerator"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"/>
+        <constructor-arg ref="edu.stanford.irt.solr.service"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-count"/>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.bassett.BassettCollectionManager"
-        class="edu.stanford.irt.laneweb.bassett.BassettCollectionManager">
-        <constructor-arg ref="javax.sql.DataSource/eresources"/>
-        <constructor-arg>
-            <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-                <property name="location" value="classpath:edu/stanford/irt/laneweb/bassett/bassett-sql.properties"/>
-            </bean>
-        </constructor-arg>
-    </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/bassett-list"
         class="edu.stanford.irt.laneweb.bassett.BassettImageListSAXStrategy"/>
