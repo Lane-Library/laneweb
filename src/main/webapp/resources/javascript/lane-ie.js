@@ -1,8 +1,5 @@
 (function() {
     var node, ie = Y.UA.ie;
-    if (!String.prototype.trim) {
-        String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
-    }
     if (ie) {
         //toggle bookmarklet instructions for IE on favorites page
         node = Y.one("#bookmarkletNotIE");
