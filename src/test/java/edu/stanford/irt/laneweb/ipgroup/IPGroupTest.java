@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -95,8 +96,8 @@ public class IPGroupTest {
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.50.255.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("159.140.183.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("159.140.183.255"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.112.0"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.112.255"));
+        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.112.0"));
+        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.112.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("209.11.188.0"));
@@ -208,24 +209,25 @@ public class IPGroupTest {
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("10.255.255.255"));
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.115.0"));
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.115.255"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.125.0"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.125.255"));
+        assertNotEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.125.0"));
+        assertNotEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.125.255"));
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.127.0"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.159.255"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.168.0"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.255.255"));
+        assertNotEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.159.255"));
+        assertNotEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.168.0"));
+        assertNotEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.255.255"));
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.46.0"));
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.47.255"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("204.161.120.0"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("204.161.120.255"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("209.11.184.0"));
-        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("209.11.187.255"));
+        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("204.161.120.0"));
+        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("204.161.120.255"));
+        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("209.11.184.0"));
+        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("209.11.187.255"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.20.0"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.4.0"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.95.255"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.40.64"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.82.167"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.167.255"));
+        assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.179.100"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.0.0"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.1.212"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.65.160.0"));
@@ -254,8 +256,8 @@ public class IPGroupTest {
 
     @Test
     public void testLPCHIps() throws IOException {
-        BufferedReader lpchIps = new BufferedReader(new InputStreamReader(getClass()
-                .getResourceAsStream("lpch-ips.txt")));
+        BufferedReader lpchIps = new BufferedReader(
+                new InputStreamReader(getClass().getResourceAsStream("lpch-ips.txt")));
         String ip = null;
         while ((ip = lpchIps.readLine()) != null) {
             assertEquals(ip, IPGroup.LPCH, IPGroup.getGroupForIP(ip));
@@ -269,8 +271,8 @@ public class IPGroupTest {
 
     @Test
     public void testSomSHCIps() throws IOException {
-        BufferedReader shcIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
-                "som-shc-ips.txt")));
+        BufferedReader shcIps = new BufferedReader(
+                new InputStreamReader(getClass().getResourceAsStream("som-shc-ips.txt")));
         String ip = null;
         while ((ip = shcIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SHC, IPGroup.getGroupForIP(ip));
