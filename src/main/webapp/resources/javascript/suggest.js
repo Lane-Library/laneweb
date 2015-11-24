@@ -19,8 +19,6 @@
      */
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
-            //TODO: remove this commented out code once histor site is live
-//            minQueryLength: limit === "history" ? -1 : 3,
             minQueryLength: 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
         });

@@ -1,63 +1,63 @@
 .module {
     margin-top: 12px;
-	padding: 12px;
-	box-sizing:border-box;
-	line-height: 1.6em;
-	background-color: white;
-	border: 1px solid #ccc;
-	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    box-sizing:border-box;
+    line-height: 1.6em;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
 }
 
 .module:after,.module .after{
-	content: ".";
-	display: block;
-	height: 0;
-	font-size: 0;
-	clear: both;
-	visibility: hidden;
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 .module-img {
-	float: left;
-	margin-right: 1em;
+    float: left;
+    margin-right: 1em;
 }
 
 /* book covers in 2 columns*/
 .core-covers {
-	float: left;
-	width: 47%;
-	margin:0 1em 13px 0;
+    float: left;
+    width: 47%;
+    margin:0 1em 13px 0;
 }
 /* book covers in 3 columns*/
 .core-covers-3 {
-	float: left;
-	width: 31%;
-	margin:0 1em 13px 0;
+    float: left;
+    width: 31%;
+    margin:0 1em 13px 0;
 }
 
 .landing {
-	padding: 0
+    padding: 0
 }
 
 .landing img, .landing iframe {
-	vertical-align:bottom;
-	width: 100%
+    vertical-align:bottom;
+    width: 100%
 }
 
 .landing h3 {
-	color: white;
-	background-color: #09425a;
-	background-image: none;
+    color: white;
+    background-color: #09425a;
+    background-image: none;
     margin-bottom:0;
-	padding: 10px 0;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 18px;
-	line-height: 19.8px;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 19.8px;
 }
 
 .landing h3 a {
-	color: white;
+    color: white;
 }
 
 .landing-content {

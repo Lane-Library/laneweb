@@ -80,6 +80,11 @@
     </filter>
     
     <filter>
+        <filter-name>FrameOptionsFilter</filter-name>
+        <filter-class>edu.stanford.irt.laneweb.servlet.FrameOptionsFilter</filter-class>
+    </filter>
+    
+    <filter>
         <filter-name>searchImageFilter</filter-name>
         <filter-class>edu.stanford.irt.laneweb.servlet.SearchImageFilter</filter-class>
     </filter>
@@ -115,6 +120,11 @@
     
     <filter-mapping>
         <filter-name>ieCompatibilityFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>FrameOptionsFilter</filter-name>
         <url-pattern>*.html</url-pattern>
     </filter-mapping>
     
@@ -185,6 +195,27 @@
     <servlet-mapping>
         <servlet-name>ErrordocsServlet</servlet-name>
         <url-pattern>/errordocs/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>listings</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/BingSiteAuth.xml</url-pattern>
+        <url-pattern>/google708f1eef3c6d1e52.html</url-pattern>
+        <url-pattern>/y_key_01fe447429961ab5.html</url-pattern>
     </servlet-mapping>
     
     <error-page>

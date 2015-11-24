@@ -85,11 +85,15 @@
         
 
 	    expandSubRegion = function(event) {
-			var region = event.currentTarget.ancestor('ul');
-			var seeAll = region.one('.see-all');
+			var region = event.currentTarget.ancestor('ul'),
+			seeAllContent,
+			seeAll = region.one('.see-all');
+			if(seeAll){
+				seeAllContent = seeAll.getHTML();
+			}
 			hideRegions();
 			resetSubregion();
-			if ( seeAll.getHTML() &&  seeAll.getHTML() != "hide") {
+			if ( "see all" == seeAllContent) {
 				seeAll.setHTML('hide');
 				var subRegions = region.all('li');
 				for (i = subRegionToShow + 1; i < subRegions.size(); i++) {

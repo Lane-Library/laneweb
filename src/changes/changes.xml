@@ -7,6 +7,69 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-23" version="laneweb-solr-rc-4.0" description="beta solr release rc-4">
+            <action date="2015-11-10" dev="ryanmax" issue="112734" type="fix">
+            	improve pubmed id searching 
+			</action>
+        </release>
+        <release date="2015-11-16" version="3.1.14" description="3.1.14 bug fix release">
+            <action date="2015-11-11" dev="ryanmax" issue="112757" type="fix">
+                Reflected Cross-Site Scripting (XSS) Vulnerabilities on qwa.8822348 (lane-local-02.stanford.edu)
+            </action>
+            <action date="2015-11-11" dev="ryanmax" issue="112750" type="fix">
+                long query text can bleed through search reset
+            </action>
+            <action date="2015-11-09" dev="ceyates" issue="112705" type="add">
+                create an animated arrow to point to the solr search ad
+            </action>
+        </release>
+        <release date="2015-11-09" version="3.1.13" description="3.1.13 bug fix release">
+            <action date="2015-11-09" dev="ceyates" issue="112620" type="fix">
+                Not Found using-lib/docdeliver.html DocXpress 
+            </action>
+            <action date="2015-11-06" dev="ceyates" issue="112616" type="fix">
+                crawler site validation not working (google and yahoo)
+            </action>
+            <action date="2015-11-06" dev="ceyates" issue="112590" type="remove">
+                remove email obfuscation
+            </action>
+            <action date="2015-11-03" dev="ryanmax" issue="112552" type="update">
+                change bookmark error messages
+            </action>
+            <action date="2015-11-02" dev="ryanmax" issue="112333" type="update">
+                do not force authentication for Stanford wireless users
+            </action>
+            <action date="2015-11-03" dev="ryanmax" issue="111475" type="update">
+                odd placements for spelling, querymapping and FindIt suggestions
+            </action>
+        </release>
+        <release date="2015-11-03" version="laneweb-solr-rc-3.0" description="beta solr release rc-3">
+            <action date="2015-11-02" dev="ryanmax" issue="112523" type="fix">
+            	browse pages missing "Also available: Print" links and "Print Material" labels
+			</action>
+        </release>
+        <release date="2015-11-02" version="3.1.12" description="3.1.12 bug fix release">
+            <action date="2015-11-02" dev="alainb" issue="112445" type="fix">
+                search includes empty Scopus result
+            </action>
+        </release>
+        <release date="2015-10-26" version="3.1.11" description="3.1.11 bug fix release">
+            <action date="2015-10-26" dev="ceyates" issue="112260" type="update">
+                Update links in History pages header
+            </action>
+            <action date="2015-10-22" dev="ryanmax" issue="112236" type="update">
+                increase the size of 'i' icon
+            </action>
+            <action date="2015-10-22" dev="ceyates" issue="112206" type="fix">
+                using hash no longer selects feedback form
+            </action>
+            <action date="2015-10-22" dev="ryanmax" issue="112176" type="add">
+                add a link for solr beta in the header
+            </action>
+            <action date="2015-10-20" dev="ceyates" issue="112116" type="fix">
+                lightbox widget breaks when lightbox link is clicked when it is visible
+            </action>
+        </release>
         <release date="2015-10-20" version="laneweb-solr-rc-2.0" description="beta solr release rc-2">
             <action date="2015-10-19" dev="ryanmax" issue="112112" type="feature">js for Lane Beta Survey on search results</action>
             <action date="2015-10-19" dev="ryanmax" issue="111741" type="feature">update overlay text</action>

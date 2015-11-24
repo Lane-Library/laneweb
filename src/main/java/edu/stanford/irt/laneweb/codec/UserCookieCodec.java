@@ -17,7 +17,6 @@ import org.apache.commons.codec.binary.Base64;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.user.User;
 
-// TODO: remove code duplicated with SHCCodec
 public class UserCookieCodec {
 
     private static final String COOKIE_VALUE_SEPARATOR = "%";

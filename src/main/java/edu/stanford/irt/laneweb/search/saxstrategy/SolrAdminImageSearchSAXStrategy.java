@@ -13,10 +13,6 @@ import edu.stanford.irt.solr.Image;
 
 public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy {
 
-    public SolrAdminImageSearchSAXStrategy() {
-        // TODO Auto-generated constructor stub
-    }
-
     @Override
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
             throws SAXException {

@@ -162,7 +162,7 @@ Y.use('console', 'test', function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.addBookmark(new Bookmark("label9", "url9"));
-            Y.Assert.areSame("Sorry, add bookmark failed.", this.message);
+            Y.Assert.areSame("Sorry, add bookmark failed. Please try again later.", this.message);
         },
 
         testMoveFail: function() {
@@ -170,7 +170,7 @@ Y.use('console', 'test', function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.moveBookmark(3, 0);
-            Y.Assert.areSame("Sorry, move bookmark failed.", this.message);
+            Y.Assert.areSame("Sorry, move bookmark failed. Please try again later.", this.message);
         },
 
         testRemoveFail: function() {
@@ -178,7 +178,7 @@ Y.use('console', 'test', function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.removeBookmarks([0]);
-            Y.Assert.areSame("Sorry, delete bookmark failed.", this.message);
+            Y.Assert.areSame("Sorry, delete bookmark failed. Please try again later.", this.message);
         },
 
         testUpdateFail: function() {
@@ -186,7 +186,7 @@ Y.use('console', 'test', function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.getBookmark(0).setLabel("foo");
-            Y.Assert.areSame("Sorry, bookmark update failed.", this.message);
+            Y.Assert.areSame("Sorry, update bookmark failed. Please try again later.", this.message);
         }
     });
 

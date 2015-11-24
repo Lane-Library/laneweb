@@ -36,18 +36,17 @@
 }
 
 .bassett-images div {
-	padding: 0px 10px 0px 10px;
-	float: left;
+    padding: 0 0 30px 9px;
+    float: left;
 }
 #bassettContent .hr {
-	padding: 0px;
-	float: none;
+    padding: 0 0 7px 0;
+    float: none;
 }
 
 #bassettContent .image-text {
-	padding: 0px 0px 24px 0px;
-	margin-top: -5px
-} 
+	padding: 3px 0 0 0;
+}
 
 .pagination-disabled  , .pagination-disabled span, .pagination-disabled label {
 	color: white !important;

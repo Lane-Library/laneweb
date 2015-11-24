@@ -59,14 +59,13 @@
                     eventHandle1.detach();
                     eventHandle2.detach();
                     self.destroy();
+                    var drag = this.get("drag");
+                    if (drag) {
+                        drag.destroy();
+                    }
                 }
-            });
+            }, this);
             Y.one("#feedback .close").on("click", function(event) {
-                // TODO: shouldn't have to do this with drag, only because purchase-suggestions extends feedback
-                var drag = this.get("drag");
-                if (drag) {
-                    drag.destroy();
-                }
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
             }, this);
@@ -176,12 +175,11 @@
     Y.lane.Lightbox.on("contentChanged", function() {
         if (Y.one("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
-                url = Y.lane.Lightbox.get("url"),
-                hash, items, index;
+                hash = Y.lane.Lightbox.get("hash"),
+                items, index;
             feedback.render();
-            //if there is a hash in the url, choose that as the active item
-            if (url.indexOf("#") > -1) {
-                hash = url.substring(url.indexOf("#"));
+            //if lightbox has a hash, choose that as the active item
+            if (hash) {
                 items = feedback.get("items");
                 index = items.indexOf(feedback.get("contentBox").one(hash));
                 if (index > -1) {

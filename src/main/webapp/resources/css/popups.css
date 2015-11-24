@@ -10,10 +10,10 @@
 }
 .yui3-popup-content {
     border-radius: 3px;
-	background-color: white;
-	padding: 20px;
-	text-align: left;
-	border: 1px solid #9e9d98;
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid #9e9d98;
 }
 .yui3-popup-content .yui3-widget-hd {
     color: #820000;
@@ -24,6 +24,6 @@
     cursor: move;
 }
 .yui3-popup-content .yui3-widget-bd {
-	font-size: 1em;
+    font-size: 1em;
     line-height: 1.6em;
 }

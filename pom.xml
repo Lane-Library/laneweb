@@ -4,14 +4,17 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>4</version>
+        <version>7</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>solr-RC-1.2-SNAPSHOT</version>
+    <version>solr-RC-1.5-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
     <inceptionYear>2002</inceptionYear>
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
     <developers>
         <developer>
             <id>ceyates</id>
@@ -113,24 +116,18 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.5</version>
+            <version>3.0.8</version>
             <scope>runtime</scope>
-            <exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <artifactId>search-spring</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.3</version>
+            <version>3.0.4</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -218,10 +215,10 @@
             <artifactId>solr-image-repository</artifactId>
             <version>1.0.13</version>
             <exclusions>
-            	<exclusion>
-            		<artifactId>log4j</artifactId>
-            		<groupId>log4j</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -270,7 +267,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>1.4.0.RELEASE</version>
+            <version>1.5.0.RELEASE</version>
             <exclusions>
              <exclusion>
                 <groupId>org.apache.httpcomponents</groupId>
@@ -338,14 +335,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>catalog</artifactId>
-        	<version>3.7.0</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>catalog</artifactId>
+            <version>3.7.0</version>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>grandrounds</artifactId>
-        	<version>2.1.0</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>grandrounds</artifactId>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -557,18 +554,18 @@
                 </executions>
             </plugin>
             <plugin>
-            	<groupId>uk.org.adamretter.maven</groupId>
-            	<artifactId>xspec-maven-plugin</artifactId>
-            	<version>1.2</version>
-            	<executions>
-            	    <execution>
+                <groupId>uk.org.adamretter.maven</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
                         <id>test</id>
                         <phase>test</phase>
                         <goals>
                             <goal>run-xspec</goal>
                         </goals>
-            	    </execution>
-            	</executions>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
+import edu.stanford.irt.querymap.ResourceMap;
 
 @Controller
 public class QueryMapController {
@@ -21,9 +22,9 @@ public class QueryMapController {
 
     @RequestMapping(value = "/apps/querymap/json")
     @ResponseBody
-    public QueryMap getJSONQueryMap(@RequestParam final String q) {
+    public ResourceMap getJSONResourceMap(@RequestParam final String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(q);
         LOG.info(queryMap.toString());
-        return new QueryMap(q, null, queryMap.getResourceMap(), null, null);
+        return queryMap.getResourceMap();
     }
 }

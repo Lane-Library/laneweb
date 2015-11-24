@@ -63,7 +63,7 @@
     }
 
 
-    function confirmAdminAction(id, o, args){
+    function confirmAdminAction(id, o){
         var image = Y.JSON.parse(o.responseText),
         id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
         div = Y.one( id);
@@ -86,11 +86,11 @@
 
         imageDetail.one(".image").setAttribute("src", image.src);
         imageDetail.one("h3").setContent(image.shortTitle);
-        if (undefined != image.description) {
+        if (undefined !== image.description) {
             imageDetail.one(".desc p").setContent(image.shortDescription);
         }
 
-        if (undefined != image.articleTitle) {
+        if (undefined !== image.articleTitle) {
             imageDetail.one(".article-title").show();
             imageDetail.one(".article-title p").setContent(image.shortArticleTitle);
         }else{

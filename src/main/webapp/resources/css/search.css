@@ -33,30 +33,36 @@
 .popInContent {
     display:none;
     position:absolute;
-    top:-16px;
-    left:220px;
+    top:55px;
+    left:216px;
+    width:762px;
     overflow:hidden;
     background-color: #F4F5EF;
-    border: 1px solid #E6E4DC;
+    border: none;
     padding: 7px 0 7px 10px;
     white-space: nowrap;
+    box-sizing:border-box;
 }
 .popInContent .popInLabel {
     color:#FF6600;
     padding-right:25px;
 }
+#spellCheck .popInLabel {
+    padding-right:5px;
+}
 .popInContent.active {
     display: block;
 }
 .popInContent.hitCountPopIn {
-    top: 32px;
-    left: 172px;
+    border: 1px solid #E6E4DC;
+    top:55px;
+    width:auto;
 }
 #searchResults {
     padding-top:10px;
 }
 .lwSearchResults li {
-	margin-bottom:10px;
+    margin-bottom:10px;
     padding:5px;
 }
 
@@ -89,7 +95,7 @@ li.active .description {
     margin-left:20px;
 }
 .hvrTrig:hover .showAbstract, .active .showAbstract {
-	display:none
+    display:none
 }
 .hvrTarg {
     display:none;
