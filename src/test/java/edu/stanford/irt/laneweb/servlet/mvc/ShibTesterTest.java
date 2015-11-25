@@ -42,8 +42,8 @@ public class ShibTesterTest {
     public void testTestUrl() throws IOException {
         expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
         expect(this.request.getHeader("name")).andReturn("value");
-        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
         expect(this.request.getRemoteUser()).andReturn("user");
+        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
         expect(this.request.getAttribute("displayName")).andReturn("name");
         expect(this.request.getAttribute("uid")).andReturn("uid");
         expect(this.request.getAttribute("mail")).andReturn("mail");
@@ -63,8 +63,8 @@ public class ShibTesterTest {
     public void testTestUrlThrowsException() throws IOException {
         expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
         expect(this.request.getHeader("name")).andReturn("value");
-        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
         expect(this.request.getRemoteUser()).andReturn("user");
+        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
         expect(this.request.getAttribute("displayName")).andReturn("name");
         expect(this.request.getAttribute("uid")).andReturn("uid");
         expect(this.request.getAttribute("mail")).andReturn("mail");

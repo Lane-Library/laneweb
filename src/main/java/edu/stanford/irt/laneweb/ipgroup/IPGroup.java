@@ -30,6 +30,7 @@ public final class IPGroup implements Serializable {
     };
 
     private static final long serialVersionUID = 1L;
+
     static {
         ROOT.addSubrange(new CIDRRange("10.252.0.0/14", SHC));
         ROOT.addSubrange(new CIDRRange("10.0.0.0/8", SU));
@@ -99,24 +100,22 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("152.131.10.128/32", PAVA));
         ROOT.addSubrange(new CIDRRange("152.132.10.128/32", PAVA));
         ROOT.addSubrange(new CIDRRange("152.133.10.128/32", PAVA));
-        ROOT.addSubrange(new CIDRRange("204.161.120.0/24", SHC));
-        ROOT.addSubrange(new CIDRRange("209.11.184.0/22", SHC));
+        ROOT.addSubrange(new CIDRRange("10.39.8.0/21", SHC));
+        ROOT.addSubrange(new CIDRRange("10.39.16.0/22", SHC));
+        ROOT.addSubrange(new CIDRRange("10.39.20.0/22", SHC));
+        ROOT.addSubrange(new CIDRRange("10.243.0.0/16", SHC));
         ROOT.addSubrange(new CIDRRange("10.247.0.0/16", SHC));
         ROOT.addSubrange(new CIDRRange("10.248.0.0/16", SHC));
         ROOT.addSubrange(new CIDRRange("10.250.0.0/17", SHC));
         ROOT.addSubrange(new CIDRRange("10.251.0.0/17", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.112.0/24", LPCH));
+        ROOT.addSubrange(new CIDRRange("171.65.112.0/24", SHC));
+        ROOT.addSubrange(new CIDRRange("171.65.116.0/22", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.126.0/24", LPCH));
         ROOT.addSubrange(new CIDRRange("171.65.44.0/24", PAVA));
         ROOT.addSubrange(new CIDRRange("171.65.65.46/32", OTHER));
         ROOT.addSubrange(new CIDRRange("171.65.46.0/23", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.115.0/24", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.125.0/24", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.127.0/24", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.128.0/19", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.168.0/21", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.176.0/20", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.192.0/18", SHC));
         ROOT.addSubrange(new CIDRRange("128.12.0.0/16", SU));
         ROOT.addSubrange(new CIDRRange("134.79.0.0/16", SU));
         ROOT.addSubrange(new CIDRRange("171.64.0.0/14", SU));

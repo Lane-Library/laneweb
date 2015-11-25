@@ -78,10 +78,10 @@ Y.use('node-event-simulate','console','test', function(T) {
             T.Assert.isTrue(submitted);
         },
         testSearchTipLinkChange : function() {
-            T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("#option1") > 0 );
-            this.searchSource.set('selectedIndex',1);
+            T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("lanesearch.html") > 0 );
+            this.searchSource.set('selectedIndex',3);
             this.searchSource.simulate("change");
-            T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("#option2") > 0 );
+            T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("bassettsearch.html") > 0 );
         },
         testSearchTermsHintChange : function() {
             var placeholderCapable = 'placeholder' in Y.Node.getDOMNode(Y.one("#searchTerms"));

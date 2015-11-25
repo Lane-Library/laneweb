@@ -1,6 +1,8 @@
 (function() {
 
     var Lane = Y.lane,
+    Model = Y.lane.Model,
+    basePath = Model.get(Model.BASE_PATH) || "",
 
     SearchIndicator = Lane.SearchIndicator,
 
@@ -35,7 +37,7 @@
 
             //set up the search tips link
             this._tips = Y.one('#searchTips');
-            this._tips.set("href", this._tips.get("href") + "#" + this._select.getSelected());
+            this._setSearchTipsUrl();
 
             //set up the auto-complete suggestions
             this._suggest = new Lane.Suggest(this._input.getInput());
@@ -126,14 +128,35 @@
         },
 
         /**
-         * Default handler for sourceChange. Changes the hash on the search tips,
+         * Set the proper url for search tips.
+         * @method _setSearchTipsUrl
+         * @private
+         */
+        _setSearchTipsUrl : function() {
+            var url = "lane", source = this._select.getSelected();
+            if (source.match(/^(clinical|peds)/)) {
+            	url = "pico";
+            } else if (source.match(/^bioresearch/)) {
+            	url = "bioresearch";
+            } else if (source.match(/^bassett/)) {
+                url = "bassett";
+            } else if (source.match(/^images/)) {
+            	url = "bioimage";
+            } else if (source.match(/^textbook/)) {
+            	url = "textbook";
+            }
+            this._tips.set("href", basePath + "/" + url + "search.html");
+        },
+
+        /**
+         * Default handler for sourceChange. Changes the search tips url,
          * the limit parameter for the suggestions, and the input hint text.
          * @method _sourceChange
          * @private
          */
         _sourceChange : function(event) {
             this._input.setHintText(this._select.getSelectedTitle());
-            this._tips.set("href", this._tips.get("href").replace(/#.*/, "#" + event.newVal));
+            this._setSearchTipsUrl();
             this._suggest.setLimitForSource(event.newVal);
         },
 
