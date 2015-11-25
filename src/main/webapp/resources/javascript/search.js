@@ -86,9 +86,9 @@
          * @private
          */
         _handleResetClick : function() {
-        	this.fire("reset");
+            this.fire("reset");
         },
-        
+
         /**
          * Handles search input value changes and toggles the active class
          * of the reset button appropriately.
@@ -128,7 +128,7 @@
         },
 
         /**
-         * Set the proper url for search tips. 
+         * Set the proper url for search tips.
          * @method _setSearchTipsUrl
          * @private
          */
