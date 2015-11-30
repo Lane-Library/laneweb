@@ -26,44 +26,44 @@
             <action date="2015-11-02" dev="ryanmax" issue="112523" type="fix">
             	browse pages missing "Also available: Print" links and "Print Material" labels
 			</action>
-            <action date="2015-10-19" dev="ryanmax" issue="112112" type="feature">js for Lane Beta Survey on search results</action>
-            <action date="2015-10-19" dev="ryanmax" issue="111741" type="feature">update overlay text</action>
-            <action date="2015-10-15" dev="ryanmax" issue="111996" type="feature">change "Lane Class" to plural</action>
-            <action date="2015-10-13" dev="ryanmax" issue="102124" type="feature">add a capability to 'search by call number' in Lane search</action>
-            <action date="2015-10-15" dev="ryanmax" issue="110118" type="feature">solr Changes/Features</action>
-            <action date="2015-08-06" dev="ryanmax" issue="110121" type="feature">Display an X on top right corner under "all" to provide close button for facet pop-ups</action>
-            <action date="2015-08-06" dev="ryanmax" issue="110122" type="feature">Rename Lane web Page -> Lane Web Site under Sources Searched</action>
-            <action date="2015-08-06" dev="ryanmax" issue="110123" type="feature">Capitalize Narrow your search -> Narrow Your Search</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110124" type="feature">Take "Sort by" outside sort dropdown and bold it</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110125" type="feature">Have article type display 3 items at all times (even if results are 0).</action>
-            <action date="2015-09-09" dev="ryanmax" issue="110128" type="feature">option to sort facets in alphabetical order.</action>
-            <action date="2015-08-24" dev="ryanmax" issue="110184" type="bug">question marks need escaping</action>
-            <action date="2015-08-26" dev="ryanmax" issue="110195" type="bug">treat "et al" as stopword?</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110197" type="bug">year/vol/issue/pages not indexed?</action>
-            <action date="2015-09-02" dev="ryanmax" issue="110336" type="feature">Add Grand Rounds Resource Type</action>
-            <action date="2015-08-26" dev="ryanmax" issue="110338" type="feature">Add Words "Next" and "Previous" under all Filter options</action>
-            <action date="2015-09-02" dev="ryanmax" issue="110340" type="feature">MeSH facet visible values</action>
-            <action date="2015-09-15" dev="ryanmax" issue="110506" type="bug">Double periods after last author's name</action>
-            <action date="2015-09-10" dev="ryanmax" issue="110507" type="bug">Displays for components(articles and chapters) are not very informative</action>
-            <action date="2015-09-25" dev="ryanmax" issue="110525" type="feature">Make filter interactions clearer</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110546" type="feature">Add first name to author filter</action>
-            <action date="2015-08-31" dev="ryanmax" issue="110630" type="feature">Filter order</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110640" type="bug">pmid and doi searches</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110701" type="feature">add author affiliation to Solr keyword index</action>
-            <action date="2015-09-01" dev="ryanmax" issue="110740" type="bug">stopwords should include those used by PubMed</action>
-            <action date="2015-09-15" dev="ryanmax" issue="110830" type="feature">Move journal edition to second line</action>
-            <action date="2015-09-10" dev="ryanmax" issue="110834" type="bug">duplication between PubMed and Lane Catalog</action>
-            <action date="2015-09-15" dev="ryanmax" issue="110943" type="bug">The search "Netter's anatomy" </action>
-            <action date="2015-09-10" dev="ryanmax" issue="110961" type="bug">remove trailing slash from Lane Catalog titles</action>
-            <action date="2015-09-22" dev="ryanmax" issue="111307" type="bug">Remove authority records from search results</action>
-            <action date="2015-09-25" dev="ryanmax" issue="111391" type="feature">Solr: increase space below the filters on top</action>
-            <action date="2015-10-12" dev="ryanmax" issue="111502" type="feature">Add additional item for total of 4 per filter move all link to heading line </action>
-            <action date="2015-10-12" dev="ryanmax" issue="111534" type="feature">browse criteria</action>
-            <action date="2015-10-07" dev="ryanmax" issue="111706" type="feature">margin-top for h3 </action>
-            <action date="2015-10-12" dev="ryanmax" issue="111733" type="feature">Small change to clear all link</action>
-            <action date="2015-10-12" dev="ryanmax" issue="111736" type="feature">Analytics for Solr Beta</action>
-            <action date="2015-10-15" dev="ryanmax" issue="111741" type="feature">Overlay to cover Header/Navigation for Lane Search Beta</action>
-            <action date="2015-10-12" dev="ryanmax" issue="111838" type="bug">duplicate Lane Catalog Record links in browse</action>
+            <action date="2015-10-19" dev="ryanmax" issue="112112" type="add">js for Lane Beta Survey on search results</action>
+            <action date="2015-10-19" dev="ryanmax" issue="111741" type="add">update overlay text</action>
+            <action date="2015-10-15" dev="ryanmax" issue="111996" type="add">change "Lane Class" to plural</action>
+            <action date="2015-10-13" dev="ryanmax" issue="102124" type="add">add a capability to 'search by call number' in Lane search</action>
+            <action date="2015-10-15" dev="ryanmax" issue="110118" type="add">solr Changes/Features</action>
+            <action date="2015-08-06" dev="ryanmax" issue="110121" type="add">Display an X on top right corner under "all" to provide close button for facet pop-ups</action>
+            <action date="2015-08-06" dev="ryanmax" issue="110122" type="add">Rename Lane web Page -> Lane Web Site under Sources Searched</action>
+            <action date="2015-08-06" dev="ryanmax" issue="110123" type="add">Capitalize Narrow your search -> Narrow Your Search</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110124" type="add">Take "Sort by" outside sort dropdown and bold it</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110125" type="add">Have article type display 3 items at all times (even if results are 0).</action>
+            <action date="2015-09-09" dev="ryanmax" issue="110128" type="add">option to sort facets in alphabetical order.</action>
+            <action date="2015-08-24" dev="ryanmax" issue="110184" type="fix">question marks need escaping</action>
+            <action date="2015-08-26" dev="ryanmax" issue="110195" type="fix">treat "et al" as stopword?</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110197" type="fix">year/vol/issue/pages not indexed?</action>
+            <action date="2015-09-02" dev="ryanmax" issue="110336" type="add">Add Grand Rounds Resource Type</action>
+            <action date="2015-08-26" dev="ryanmax" issue="110338" type="add">Add Words "Next" and "Previous" under all Filter options</action>
+            <action date="2015-09-02" dev="ryanmax" issue="110340" type="add">MeSH facet visible values</action>
+            <action date="2015-09-15" dev="ryanmax" issue="110506" type="fix">Double periods after last author's name</action>
+            <action date="2015-09-10" dev="ryanmax" issue="110507" type="fix">Displays for components(articles and chapters) are not very informative</action>
+            <action date="2015-09-25" dev="ryanmax" issue="110525" type="add">Make filter interactions clearer</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110546" type="add">Add first name to author filter</action>
+            <action date="2015-08-31" dev="ryanmax" issue="110630" type="add">Filter order</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110640" type="fix">pmid and doi searches</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110701" type="add">add author affiliation to Solr keyword index</action>
+            <action date="2015-09-01" dev="ryanmax" issue="110740" type="fix">stopwords should include those used by PubMed</action>
+            <action date="2015-09-15" dev="ryanmax" issue="110830" type="add">Move journal edition to second line</action>
+            <action date="2015-09-10" dev="ryanmax" issue="110834" type="fix">duplication between PubMed and Lane Catalog</action>
+            <action date="2015-09-15" dev="ryanmax" issue="110943" type="fix">The search "Netter's anatomy" </action>
+            <action date="2015-09-10" dev="ryanmax" issue="110961" type="fix">remove trailing slash from Lane Catalog titles</action>
+            <action date="2015-09-22" dev="ryanmax" issue="111307" type="fix">Remove authority records from search results</action>
+            <action date="2015-09-25" dev="ryanmax" issue="111391" type="add">Solr: increase space below the filters on top</action>
+            <action date="2015-10-12" dev="ryanmax" issue="111502" type="add">Add additional item for total of 4 per filter move all link to heading line </action>
+            <action date="2015-10-12" dev="ryanmax" issue="111534" type="add">browse criteria</action>
+            <action date="2015-10-07" dev="ryanmax" issue="111706" type="add">margin-top for h3 </action>
+            <action date="2015-10-12" dev="ryanmax" issue="111733" type="add">Small change to clear all link</action>
+            <action date="2015-10-12" dev="ryanmax" issue="111736" type="add">Analytics for Solr Beta</action>
+            <action date="2015-10-15" dev="ryanmax" issue="111741" type="add">Overlay to cover Header/Navigation for Lane Search Beta</action>
+            <action date="2015-10-12" dev="ryanmax" issue="111838" type="fix">duplicate Lane Catalog Record links in browse</action>
         </release>
         <release date="2015-11-23" version="3.1.15" description="3.1.15 bug fix release">
             <action date="2015-11-17" dev="ryanmax" issue="112758" type="fix">
