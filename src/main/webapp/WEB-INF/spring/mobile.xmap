@@ -4,25 +4,6 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <!-- publishable paths for mobile search and browse -->
     <map:pipeline type="noncaching">
-        <!-- Merged Search Content (er and metasearch) -->
-        <!-- disable merged search results ... use er instead
-        <map:match pattern="search/lane/*" type="wildcard">
-            <map:generate type="merged-search">
-                <map:parameter name="timeout" value="5000"/>
-                <map:parameter name="engines" value="{1}"/>
-            </map:generate>
-            <map:transform type="description-labeling"/>
-            <map:transform type="query-highlighting"/>
-            <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
-            <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-            <map:select type="proxy-links">
-                <map:when test="true">
-                    <map:transform type="proxy-links"/>
-                </map:when>
-            </map:select>
-            <map:serialize type="xml"/>
-        </map:match>
-        -->
         <!-- Search Content (metasearch) -->
         <map:match pattern="search/content/*" type="wildcard">
             <map:generate type="search-content">
@@ -40,7 +21,21 @@
             <map:serialize type="xml"/>
         </map:match>
         <!-- EResources search -->
-        <map:match pattern="search/(er|lane)/.*" type="regexp">
+        <map:match pattern="search/lane" type="wildcard">
+            <map:generate type="er-search"/>
+            <map:transform type="description-labeling"/>
+            <map:transform type="query-highlighting"/>
+            <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+            <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+            <map:select type="proxy-links">
+                <map:when test="true">
+                    <map:transform type="proxy-links"/>
+                </map:when>
+            </map:select>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!--  remove next matcher after /m/search/lane.html points to cocoon://mobile/search/lane -->
+        <map:match pattern="search/lane/*" type="wildcard">
             <map:generate type="er-search"/>
             <map:transform type="description-labeling"/>
             <map:transform type="query-highlighting"/>
