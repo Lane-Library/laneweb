@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-11-24" version="laneweb-solr-rc-5.0" description="beta solr release rc-5">
+            <action date="2015-11-24" dev="ryanmax" issue="113127" type="fix">
+            	improve doi searching 
+			</action>
+        </release>
         <release date="2015-11-23" version="laneweb-solr-rc-4.0" description="beta solr release rc-4">
             <action date="2015-11-10" dev="ryanmax" issue="112734" type="fix">
             	improve pubmed id searching 

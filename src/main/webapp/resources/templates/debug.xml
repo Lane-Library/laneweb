@@ -110,7 +110,7 @@
                         </fieldset>
                     </form>
                     <img class="searchIndicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
-                    <a id="searchTips" href="/help/choose-search.html">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    <a id="searchTips" href="/lanesearch.html">Need Help? <i class="fa fa-arrow-right"></i></a>
                     <a id="searchTools" href="/help/searchtools.html" title="Search Tools">Search Tools <i class="fa fa-arrow-right"></i></a>
                     <ul id="qlinks">
                         <li>
