@@ -21,6 +21,11 @@
 	color: black;
 }
 
+#bassett-menu li:nth-child(n + 6){
+	display:none;
+}
+
+
 .region .enabled a, .region .enabled span{
 	color: white !important;	
 }
