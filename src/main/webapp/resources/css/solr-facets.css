@@ -101,7 +101,7 @@
 }
 
 .facetLabel {
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 /* solr-specific mods for search suggestions ... move to search.css if keep */
