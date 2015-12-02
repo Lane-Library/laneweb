@@ -111,9 +111,11 @@
         _reset : function() {
             this._input.reset();
             this._searchReset.removeClass("active");
-            if (Y.one(".search")) {
-                Y.one(".search").setStyle("visibility", "hidden");
-            }
+            this._form.all('input[type=hidden]').each(function(){
+                if(this.get("name").match(/sort|facets/)){
+                    this.remove();
+                }
+            });
             this._input.getInput().focus();
         },
 

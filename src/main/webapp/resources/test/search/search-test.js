@@ -98,6 +98,18 @@ Y.use('node-event-simulate','console','test', function(T) {
                 T.Assert.areEqual("", T.one("#searchTerms").get("value"));
             },1000);
         },
+        testResetClickClearsFacetsAndSortParams : function() {
+            T.one("#searchFields").append('<input type="hidden" name="facets" value="foo">');
+            T.one("#searchFields").append('<input type="hidden" name="sort" value="foo">');
+            T.one("#searchFields").append('<input type="hidden" name="other" value="foo">');
+            T.one("#searchTerms").set("value","foo");
+            T.Assert.areEqual(3, T.all("#searchFields input[type=hidden]").size());
+            T.one(".searchReset").simulate("click");
+            this.wait(function() {
+                T.Assert.areEqual("", T.one("#searchTerms").get("value"));
+                T.Assert.areEqual(1, T.all("#searchFields input[type=hidden]").size());
+            },1000);
+        },
         testResetVisbleOnInputText : function() {
             Y.one("#searchTerms").set("value","foo");
             //TODO: fix this, the valueChange event doesn't happen before checking the changed style
