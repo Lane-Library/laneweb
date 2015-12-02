@@ -135,15 +135,15 @@
         _setSearchTipsUrl : function() {
             var url = "lane", source = this._select.getSelected();
             if (source.match(/^(clinical|peds)/)) {
-            	url = "pico";
+                url = "pico";
             } else if (source.match(/^bioresearch/)) {
-            	url = "bioresearch";
+                url = "bioresearch";
             } else if (source.match(/^bassett/)) {
                 url = "bassett";
             } else if (source.match(/^images/)) {
-            	url = "bioimage";
+                url = "bioimage";
             } else if (source.match(/^textbook/)) {
-            	url = "textbook";
+                url = "textbook";
             }
             this._tips.set("href", basePath + "/" + url + "search.html");
         },
