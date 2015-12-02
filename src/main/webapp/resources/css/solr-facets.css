@@ -104,17 +104,6 @@
     padding-left: 5px;
 }
 
-/* solr-specific mods for search suggestions ... move to search.css if keep */
-.solr.popInContent {
-    top: -45px;
-    left: 0;
-    min-width: 690px;
-}
-
-.solr #queryMapping span, .solr #spellCheckLink, .solr #findItLink {
-    font-weight: bold;
-}
-
 #solrLimits {
     font-size: 14px;
     margin-top: 30px;

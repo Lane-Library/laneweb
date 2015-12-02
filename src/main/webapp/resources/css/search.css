@@ -12,6 +12,7 @@
 }
 #queryMapping span, #spellCheckLink, #findItLink {
     padding-right:25px;
+    font-weight:bold;
 }
 .primaryLink {
     font-size:16px;
@@ -57,6 +58,11 @@
     border: 1px solid #E6E4DC;
     top:55px;
     width:auto;
+}
+.solr.popInContent {
+    top: -45px;
+    left: 0;
+    min-width: 690px;
 }
 #searchResults {
     padding-top:10px;
