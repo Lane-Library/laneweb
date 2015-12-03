@@ -3,10 +3,10 @@
 	var bassettContent = Y.one('#bassettContent'), model = Y.lane.Model, 
 	basePath = model.get(model.BASE_PATH)|| "", 
 	diagramDisplay = false,
-	accordion, history, registerLinksContainer, subRegionToShow = 4, prevRegion, prevSubRegion, 
-	seeAll, region, subRegion, anchor,
-	formatAjaxUrl = function(
-			href) {
+	accordion, history, registerLinksContainer, 
+	subRegionToShow = 4, prevRegion, prevSubRegion, 
+	
+	formatAjaxUrl = function(href) {
 		var url;
 		href = href.replace("search.html",
 				"/biomed-resources/bassett/bassettsView.html");
@@ -70,9 +70,8 @@
 	};
 
 	registerLinksContainer = function(container) {
-		anchor;
 		if (container) {
-			anchor = container.all('a');
+			var anchor = container.all('a');
 			for (var i = 0; i < anchor.size(); i++) {
 				if (anchor.item(i).get('rel') === null
 						|| anchor.item(i).get('rel') === ""
@@ -86,8 +85,8 @@
 	// For the bassett menu
 
 	expandSubRegion = function(event) {
-		region = event.currentTarget.ancestor('ul');
-		var display = region.all('li').item(subRegionToShow+1).getStyle('display');
+		var subRegion, region = event.currentTarget.ancestor('ul'),
+		display = region.all('li').item(subRegionToShow+1).getStyle('display');
 		hideSubRegions(region);
 		resetSubRegion();
 		if (display == 'none') {
@@ -102,7 +101,7 @@
 	hideSubRegions = function(region) {
 		if (prevRegion && prevRegion.one('.see-all')) {
 			prevRegion.one('.see-all').setHTML('see all');
-			subRegion = prevRegion.all('li');
+			var subRegion = prevRegion.all('li');
 			for (j = subRegionToShow; j < subRegion.size(); j++) {
 				subRegion.item(j).hide();
 			}
@@ -112,11 +111,11 @@
 
 	
 	surlineSubRegion = function(event) {
-		anchor = event.currentTarget;
+		var i,  anchor = event.currentTarget,
 		subRegion = anchor.ancestor();
 		resetSubRegion(subRegion);
 		subRegion.addClass('enabled');
-		var i = subRegion.one('i');
+		i = subRegion.one('i');
 		i.removeClass('fa-square-o');
 		i.addClass('fa-check-circle-o');
 	}
@@ -139,11 +138,11 @@
 		if (accordion) {
 			registerLinksContainer(accordion);
 			registerLinksContainer(Y.one('#bassettContent'));
-			seeAll = Y.all('.see-all');
+			var lis, seeAll = Y.all('.see-all');
 			for (i = 0; i < seeAll.size(); i++) {
 				seeAll.item(i).on('click', expandSubRegion);
 			}
-			var lis = Y.all('.region li:not(:first-child) a');
+			 lis = Y.all('.region li:not(:first-child) a');
 			for (i = 0; i < lis.size(); i++) {
 				lis.item(i).on('click', surlineSubRegion);
 			}
