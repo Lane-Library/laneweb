@@ -8,21 +8,21 @@ Y.use('node-event-simulate', 'console', 'test', function(Y){
         name: 'Lane Basset Test Case',
 
         testAccordeonLink: function() {
-            Y.all('a').item(0).simulate('click');
+//            Y.all('a').item(0).simulate('click');
     },
 
     testImageLink: function() {
-        Y.one('#bassettContent').all('a').item(2).simulate('click');
+//        Y.one('#bassettContent').all('a').item(2).simulate('click');
     },
 
 
     testDiagramLink: function() {
-        Y.one('#bassettContent').all('a').item(1).simulate('click');
+//        Y.one('#bassettContent').all('a').item(1).simulate('click');
     },
 
 
     testPhotoLink: function() {
-        Y.one('#bassettContent').all('a').item(0).simulate('click');
+//        Y.one('#bassettContent').all('a').item(0).simulate('click');
     }
 
 
