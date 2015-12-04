@@ -358,14 +358,14 @@
 
 	<xsl:template match="h:a[@id='first-page']/@href">
 		<xsl:attribute name="href">
-        <xsl:text>/biomed-resources/bassett/bassettsView.html?</xsl:text>
+        <xsl:text>/biomed-resources/bassett/solr-bassetts-view.html?</xsl:text>
         <xsl:value-of select="$query-string" />
     </xsl:attribute>
 	</xsl:template>
 
 	<xsl:template match="h:a[@id='previous-page']/@href">
 		<xsl:attribute name="href">
-        <xsl:text>/biomed-resources/bassett/bassettsView.html?</xsl:text>
+        <xsl:text>/biomed-resources/bassett/solr-bassetts-view.html?</xsl:text>
         <xsl:value-of select="$query-string" />
         <xsl:text>&amp;page=</xsl:text><xsl:value-of select="/doc/b:bassetts/b:previous-page/@b:value"></xsl:value-of>
     </xsl:attribute>
@@ -398,7 +398,7 @@
 
 	<xsl:template match="h:a[@id='next-page']/@href">
 		<xsl:attribute name="href">
-        <xsl:text>/biomed-resources/bassett/bassettsView.html?</xsl:text>
+        <xsl:text>/biomed-resources/bassett/solr-bassetts-view.html?</xsl:text>
         <xsl:value-of select="$query-string" />
        		<xsl:text>&amp;page=</xsl:text><xsl:value-of select="/doc/b:bassetts/b:next-page/@b:value"></xsl:value-of>
     </xsl:attribute>
@@ -406,7 +406,7 @@
 
 	<xsl:template match="h:a[@id='last-page']/@href">
 		<xsl:attribute name="href">
-        <xsl:text>/biomed-resources/bassett/bassettsView.html?</xsl:text>
+        <xsl:text>/biomed-resources/bassett/solr-bassetts-view.html?</xsl:text>
         <xsl:value-of select="$query-string" />
         <xsl:text>&amp;page=</xsl:text><xsl:value-of select="$total-pages" />
     </xsl:attribute>
