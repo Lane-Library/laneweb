@@ -7,7 +7,7 @@
         <version>7</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>solr-RC-1.6-SNAPSHOT</version>
+    <version>3.2.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -121,7 +121,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.8</version>
+            <version>3.0.9</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

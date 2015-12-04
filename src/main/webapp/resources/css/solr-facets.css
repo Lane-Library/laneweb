@@ -101,18 +101,7 @@
 }
 
 .facetLabel {
-    padding-left: 10px;
-}
-
-/* solr-specific mods for search suggestions ... move to search.css if keep */
-.solr.popInContent {
-    top: -45px;
-    left: 0;
-    min-width: 690px;
-}
-
-.solr #queryMapping span, .solr #spellCheckLink, .solr #findItLink {
-    font-weight: bold;
+    padding-left: 5px;
 }
 
 #solrLimits {

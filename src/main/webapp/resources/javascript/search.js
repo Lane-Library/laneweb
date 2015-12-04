@@ -111,9 +111,11 @@
         _reset : function() {
             this._input.reset();
             this._searchReset.removeClass("active");
-            if (Y.one(".search")) {
-                Y.one(".search").setStyle("visibility", "hidden");
-            }
+            this._form.all('input[type=hidden]').each(function(){
+                if(this.get("name").match(/sort|facets/)){
+                    this.remove();
+                }
+            });
             this._input.getInput().focus();
         },
 
@@ -135,15 +137,15 @@
         _setSearchTipsUrl : function() {
             var url = "lane", source = this._select.getSelected();
             if (source.match(/^(clinical|peds)/)) {
-            	url = "pico";
+                url = "pico";
             } else if (source.match(/^bioresearch/)) {
-            	url = "bioresearch";
+                url = "bioresearch";
             } else if (source.match(/^bassett/)) {
                 url = "bassett";
             } else if (source.match(/^images/)) {
-            	url = "bioimage";
+                url = "bioimage";
             } else if (source.match(/^textbook/)) {
-            	url = "textbook";
+                url = "textbook";
             }
             this._tips.set("href", basePath + "/" + url + "search.html");
         },

@@ -74,12 +74,3 @@
             });
         }
 })();
-
-// TODO: move this to search.js once solr is live
-Y.lane.on("search:reset",  function() {
-    Y.one("#search").all('input[type=hidden]').each(function(){
-        if(this.get("name").match(/sort|facets/)){
-            this.remove();
-        }
-    });
-});
