@@ -71,8 +71,6 @@ public abstract class Model {
 
     public static final String PAGE = "page";
 
-    public static final String PAGE_NUMBER = "pageNumber";
-
     public static final String PARAMETER_MAP = "parameter-map";
 
     public static final String PASSWORD = "password";

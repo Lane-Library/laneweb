@@ -40,8 +40,6 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("r", valid);
             this.parameterValidators.put("bn", valid);
             this.parameterValidators.put("t", valid);
-            this.parameterValidators.put("pageNumber", valid);
-            this.parameterValidators.put("page-number", valid);
             this.parameterValidators.put("q", valid);
             this.parameterValidators.put("laneNav", valid);
             this.parameterValidators.put("template", valid);

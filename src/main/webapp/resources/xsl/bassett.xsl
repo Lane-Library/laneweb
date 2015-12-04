@@ -7,8 +7,7 @@
 	<xsl:param name="type" />
 	<xsl:param name="region" />
 	<xsl:param name="images-url" />
-	<xsl:param name="pageNumber" />
-
+	
 
 	<xsl:variable name="thumbnail-directory"><xsl:value-of select="$images-url" />/small/</xsl:variable>
 	<xsl:variable name="large-image-directory"><xsl:value-of select="$images-url" />/large/</xsl:variable>
