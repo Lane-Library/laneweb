@@ -12,7 +12,6 @@
 }
 #queryMapping span, #spellCheckLink, #findItLink {
     padding-right:25px;
-    font-weight:bold;
 }
 .primaryLink {
     font-size:16px;
@@ -45,7 +44,7 @@
     box-sizing:border-box;
 }
 .popInContent .popInLabel {
-    color:#FF6600;
+    font-weight: bold;
     padding-right:25px;
 }
 #spellCheck .popInLabel {
@@ -69,6 +68,9 @@
     border-top: 1px solid #ccc;
     background-color: #fff;
     padding-left: 12px;
+}
+.solrLimits.popInContent {
+    top: 45px;
 }
 #searchResults {
     padding-top:10px;
