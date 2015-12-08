@@ -60,9 +60,15 @@
     width:auto;
 }
 .solr.popInContent {
-    top: -45px;
-    left: 0;
-    min-width: 690px;
+    top: -20px;
+    left: 253px;
+    width: 736px;
+    box-shadow: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+    padding-left: 12px;
 }
 #searchResults {
     padding-top:10px;
