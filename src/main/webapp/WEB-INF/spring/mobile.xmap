@@ -34,20 +34,6 @@
             </map:select>
             <map:serialize type="xml"/>
         </map:match>
-        <!--  remove next matcher after /m/search/lane.html points to cocoon://mobile/search/lane -->
-        <map:match pattern="search/lane/*" type="wildcard">
-            <map:generate type="er-search"/>
-            <map:transform type="description-labeling"/>
-            <map:transform type="query-highlighting"/>
-            <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
-            <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-            <map:select type="proxy-links">
-                <map:when test="true">
-                    <map:transform type="proxy-links"/>
-                </map:when>
-            </map:select>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="search/er/type/*" type="wildcard">
             <map:generate type="er-search">
                 <map:parameter name="type" value="{1}"/>
