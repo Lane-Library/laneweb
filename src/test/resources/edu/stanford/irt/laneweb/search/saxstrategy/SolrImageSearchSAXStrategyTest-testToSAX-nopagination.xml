@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div>
    <div class="result-summary">
-      <div class="result">1 to 1 of 1 results</div>
+      <div class="result">1 to 1 of 0 results</div>
       <div class="yui3-u-1-4">
          <div class="view-by" id="sourceFilter">Filter by source <div class="general-dropdown dropdown">
                <div class="general-dropdown-trigger">Bassett (2)<i class="fa fa-angle-double-down"/>
@@ -9,41 +9,85 @@
                <div class="general-dropdown-content dropdown-content">
                   <ul class="pagingLabels">
                      <li>
-                        <a href="null&amp;rid=Bassett">Bassett (2) </a>
+                        <a href="&amp;rid=Bassett">Bassett (2) </a>
                      </li>
                   </ul>
                </div>
             </div>
          </div>
       </div>
+      <div class="pagination">
+         <a class="actived no-bookmarking" href="&amp;page=1">
+            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
+         <a class="actived no-bookmarking" href="&amp;page=1">
+            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
+         <label>Page </label>
+         <form class="pagingForm" name="paginationForm">
+            <input type="hidden" value="source" name="source"/>
+            <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="2" name="totalPages"/>
+            <input type="text" size="4" value="2" name="page"/>
+         </form>
+         <label> of 2</label>
+      </div>
    </div>
    <ul id="imageList">
-      <li>
+      <li id="id/andSlash" row="0">
          <a href="pageUrl" class="noproxy">
-            <div id="image">
-               <image src="thumbnailSrc" id="id/andSlash" class="yui3-tooltip-trigger"/>
-            </div>
-            <div>title</div>
+            <image src="thumbnailSrc"/>
+            <div class="imagedecoHidden"> </div>
          </a>
-         <div id="website-id">Source: <a href="pageUrl" class="noproxy">id</a>
-         </div>
-         <div id="copyright">
-            <a rel="popup local 2109089882_copyright" class="no-bookmarking">Copyright Information <i class="fa fa-arrow-right"/>
-            </a>
+      </li>
+      <li class="imageDetailHidden"
+          style="width:935px; height:350px;"
+          id="imageDetail_0">
+         <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
+         <div class="yui3-g">
+            <div class="yui3-u-3-5">
+               <div class="image-location">
+                  <image class="image"/>
+               </div>
+            </div>
+            <div class="yui3-u-2-5">
+               <h3/>
+               <div class="desc">
+                  <label>Description: </label>
+                  <p/>
+               </div>
+               <div class="copyright">
+                  <label>Rights Statement: </label>
+                  <p/>
+               </div>
+               <div class="article-title">
+                  <label>Article Title: </label>
+                  <p/>
+               </div>
+               <div class="to-image">
+                  <a href="">
+                     <button class="button">
+                        <span class="button">Visit Source Page </span>
+                        <i class="fa fa-arrow-right"/>
+                     </button>
+                  </a>
+               </div>
+            </div>
          </div>
       </li>
    </ul>
-   <div class="result-summary"/>
-   <div style="display:none" class="tooltips">
-      <span id="id/andSlashTooltip">
-         <image src="src" style="max-width: 300px;max-height: 240px"/>
-      </span>
-   </div>
-   <div class="popups">
-      <span id="2109089882_copyright" style="width:450px">
-         <div>
-            <event_description>copyrightText</event_description>
-         </div>
-      </span>
+   <div class="result-summary">
+      <div class="pagination">
+         <a class="actived no-bookmarking" href="&amp;page=1">
+            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
+         <a class="actived no-bookmarking" href="&amp;page=1">
+            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
+         <label>Page </label>
+         <form class="pagingForm" name="paginationForm">
+            <input type="hidden" value="source" name="source"/>
+            <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="2" name="totalPages"/>
+            <input type="text" size="4" value="2" name="page"/>
+         </form>
+         <label> of 2</label>
+      </div>
    </div>
 </div>

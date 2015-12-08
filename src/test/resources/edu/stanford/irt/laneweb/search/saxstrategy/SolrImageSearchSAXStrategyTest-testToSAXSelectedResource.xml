@@ -4,13 +4,9 @@
       <div class="result">105 to 106 of 106 results</div>
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=1">
-            <span class="fa fa-fast-backward no-bookmarking"/>
-            <label>First</label>
-         </a>
+            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
          <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=2">
-            <span class="fa fa-step-backward no-bookmarking"/>
-            <label>Previous</label>
-         </a>
+            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -20,42 +16,61 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=4">
-            <label>Next</label>
-            <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=4">Next <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=15">
-            <label>Last</label>
-            <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=15">Last <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>
    <ul id="imageList">
-      <li>
+      <li id="id/andSlash" row="0">
          <a href="pageUrl" class="noproxy">
-            <div id="image">
-               <image src="thumbnailSrc" id="id/andSlash" class="yui3-tooltip-trigger"/>
-            </div>
-            <div>title</div>
+            <image src="thumbnailSrc"/>
+            <div class="imagedecoHidden"> </div>
          </a>
-         <div id="website-id">Source: <a href="pageUrl" class="noproxy">id</a>
-         </div>
-         <div id="copyright">
-            <a rel="popup local 2109089882_copyright" class="no-bookmarking">Copyright Information <i class="fa fa-arrow-right"/>
-            </a>
+      </li>
+      <li class="imageDetailHidden"
+          style="width:935px; height:350px;"
+          id="imageDetail_0">
+         <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
+         <div class="yui3-g">
+            <div class="yui3-u-3-5">
+               <div class="image-location">
+                  <image class="image"/>
+               </div>
+            </div>
+            <div class="yui3-u-2-5">
+               <h3/>
+               <div class="desc">
+                  <label>Description: </label>
+                  <p/>
+               </div>
+               <div class="copyright">
+                  <label>Rights Statement: </label>
+                  <p/>
+               </div>
+               <div class="article-title">
+                  <label>Article Title: </label>
+                  <p/>
+               </div>
+               <div class="to-image">
+                  <a href="">
+                     <button class="button">
+                        <span class="button">Visit Source Page </span>
+                        <i class="fa fa-arrow-right"/>
+                     </button>
+                  </a>
+               </div>
+            </div>
          </div>
       </li>
    </ul>
    <div class="result-summary">
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=1">
-            <span class="fa fa-fast-backward no-bookmarking"/>
-            <label>First</label>
-         </a>
+            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
          <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=2">
-            <span class="fa fa-step-backward no-bookmarking"/>
-            <label>Previous</label>
-         </a>
+            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -65,26 +80,10 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=4">
-            <label>Next</label>
-            <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=4">Next <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=15">
-            <label>Last</label>
-            <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;rid=foo&amp;page=15">Last <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
       </div>
-   </div>
-   <div style="display:none" class="tooltips">
-      <span id="id/andSlashTooltip">
-         <image src="src" style="max-width: 300px;max-height: 240px"/>
-      </span>
-   </div>
-   <div class="popups">
-      <span id="2109089882_copyright" style="width:450px">
-         <div>
-            <event_description>copyrightText</event_description>
-         </div>
-      </span>
    </div>
 </div>

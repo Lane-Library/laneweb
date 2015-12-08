@@ -54,8 +54,8 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         }
         this.resourceId = ModelUtil.getString(model, Model.RESOURCE_ID);
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
-        this.source = ModelUtil.getString(model, Model.SOURCE);
-        this.basePath = ModelUtil.getString(model, Model.BASE_PATH);
+        this.source = ModelUtil.getString(model, Model.SOURCE, "images-");
+        this.basePath = ModelUtil.getString(model, Model.BASE_PATH, "");
         this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
