@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-12-07" version="3.2.1" description="3.2.1 bug fix release">
+            <action date="2015-12-02" dev="ryanmax" issue="113382" type="fix">
+                reduce facetLabel padding
+            </action>
+            <action date="2015-12-01" dev="ryanmax" issue="113343" type="fix">
+                mobile book and journal searches not limited by format
+            </action>
+        </release>
         <release date="2015-11-30" version="3.2.0" description="3.2.0 solr release">
             <action date="2015-11-24" dev="ryanmax" issue="97975" type="fix">
             	IP maps are out of date (updates from SHC) 
