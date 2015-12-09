@@ -139,7 +139,7 @@
      submitPagination = function(e) {
          var page = e.target.get('page').get('value'),
          pages = e.target.get('pages');
-         if (page.match('[^0-9]') || page < 1 || page > pages.get('value')){
+         if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.get('value'))){
              e.preventDefault();
              Y.all('.bassett-error').setStyle('display', 'block');
              return;
