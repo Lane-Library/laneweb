@@ -89,7 +89,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.57.0</version>
+            <version>1.58.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -267,7 +267,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>1.5.0.RELEASE</version>
+            <version>1.5.1.RELEASE</version>
             <exclusions>
              <exclusion>
                 <groupId>org.apache.httpcomponents</groupId>
