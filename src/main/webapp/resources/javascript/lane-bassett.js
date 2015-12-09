@@ -34,7 +34,7 @@
 					.one('#bassettContent');
 			container.setContent(content);
 			registerLinksContainer(container);
-			Y.all('.s-pagination form[class=pagingForm]').on('submit', submitPagination);
+			Y.all('.s-pagination form[name=bassett-pagination]').on('submit', submitPagination);
 		}
 		Y.io(url, {
 			on : {
@@ -137,11 +137,9 @@
  
 	
      submitPagination = function(e) {
-         var error, form = e.target,
-         p =  form.get('page'),
-         page = Number(p.get('value').replace(/[^\d]/g,'')),
-         pages = form.get('pages');
-         if (page < 1 || page > Number(pages.get('value'))) {
+         var page = e.target.get('page').get('value'),
+         pages = e.target.get('pages');
+         if (page.match('[^0-9]') || page < 1 || page > pages.get('value')){
              e.preventDefault();
              Y.all('.bassett-error').setStyle('display', 'block');
              return;
@@ -163,7 +161,7 @@
 			for (i = 0; i < lis.size(); i++) {
 				lis.item(i).on('click', surlineSubRegion);
 			}
-			Y.all('.s-pagination form[class=pagingForm]').on('submit', submitPagination);
+			Y.all('.s-pagination form[name=bassett-pagination]').on('submit', submitPagination);
 			initializeHistory();
 		}
 	}
