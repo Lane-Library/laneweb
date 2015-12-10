@@ -260,7 +260,7 @@
 	</xsl:template>
 
 
-	<xsl:template match="h:form[@name='pagination']/h:input[@name='q']">
+	<xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='q']">
 		<xsl:if test="$query != ''">
 			<xsl:copy>
 				<xsl:copy-of select="@*" />
@@ -272,7 +272,7 @@
 	</xsl:template>
 
 
-	<xsl:template match="h:form[@name='pagination']/h:input[@name='r']">
+	<xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='r']">
 		<xsl:if test="$region != ''">
 			<xsl:copy>
 				<xsl:copy-of select="@*" />
@@ -283,7 +283,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="h:form[@name='pagination']/h:input[@name='pages']">
+	<xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='pages']">
 			<xsl:copy>
 				<xsl:copy-of select="@*" />
 				<xsl:attribute name="value">
@@ -292,7 +292,7 @@
 			</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="h:form[@name='pagination']/h:input[@name='t']">
+	<xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='t']">
 		<xsl:if test="$type != ''">
 			<xsl:copy>
 				<xsl:copy-of select="@*" />

@@ -1,9 +1,12 @@
 (function() {
 
-	var bassettContent = Y.one('#bassettContent'), model = Y.lane.Model, 
+	var bassettContent = Y.one('#bassettContent'), 
+	 Lane = Y.lane,
+	model = Lane.Model,
+	
 	basePath = model.get(model.BASE_PATH)|| "", 
 	diagramDisplay = false,
-	accordion, history, registerLinksContainer, 
+	accordion, history,  
 	subRegionToShow = 4, prevRegion, prevSubRegion, 
 	
 	formatAjaxUrl = function(href) {
@@ -31,6 +34,7 @@
 					.one('#bassettContent');
 			container.setContent(content);
 			registerLinksContainer(container);
+			Y.all('.s-pagination form[name=bassett-pagination]').on('submit', submitPagination);
 		}
 		Y.io(url, {
 			on : {
@@ -130,7 +134,18 @@
 		prevSubRegion = subRegion;
 	}
 
+ 
 	
+     submitPagination = function(e) {
+         var page = e.target.get('page').get('value'),
+         pages = e.target.get('pages');
+         if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.get('value'))){
+             e.preventDefault();
+             Y.all('.bassett-error').setStyle('display', 'block');
+             return;
+         }
+         pages.remove();
+    };
 
 	if (bassettContent) {
 		accordion = Y.one('#bassett-menu');
@@ -146,6 +161,7 @@
 			for (i = 0; i < lis.size(); i++) {
 				lis.item(i).on('click', surlineSubRegion);
 			}
+			Y.all('.s-pagination form[name=bassett-pagination]').on('submit', submitPagination);
 			initializeHistory();
 		}
 	}

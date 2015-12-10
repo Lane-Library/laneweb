@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
@@ -61,92 +62,93 @@ public class SolrImageSearchGeneratorTest {
         assertEquals("Broad Reuse Rights", result.get("tab"));
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
-//        verify(this.service, this.saxStrategy);
+        verify(this.service, this.saxStrategy);
     }
 
-//    @Test
-//    public void testDoSearchCategoryOther() {
-//        this.model.put(Model.QUERY, "query");
-//        this.model.put(Model.SOURCE, "foo");
-//        Capture<Pageable> pageable = newCapture();
-//        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-//                .andReturn(null);
-//        expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
-//        replay(this.service, this.saxStrategy);
-//        this.generator.setModel(this.model);
-//        Map<String, Object> result = this.generator.doSearch("query");
-//        assertEquals("/search.html?q=query&source=foo", result.get("path"));
-//        assertEquals("query", result.get(Model.QUERY));
-//        assertEquals("Maximum Reuse Rights", result.get("tab"));
-//        assertEquals(52, pageable.getValue().getPageSize());
-//        assertEquals(0, pageable.getValue().getPageNumber());
-//        verify(this.service, this.saxStrategy);
-//    }
-//
-//    @Test
-//    public void testDoSearchCategoryPMC() {
-//        this.model.put(Model.QUERY, "query");
-//        this.model.put(Model.SOURCE, "pmc-");
-//        Capture<Pageable> pageable = newCapture();
-//        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("15"), capture(pageable)))
-//                .andReturn(null);
-//        expect(this.service.facetOnWebsiteId(eq("query"), eq("15"))).andReturn(this.facetPage);
-//        replay(this.service, this.saxStrategy);
-//        this.generator.setModel(this.model);
-//        Map<String, Object> result = this.generator.doSearch("query");
-//        assertEquals("/search.html?q=query&source=pmc-", result.get("path"));
-//        assertEquals("query", result.get(Model.QUERY));
-//        assertEquals("Possible Reuse Rights", result.get("tab"));
-//        assertEquals(52, pageable.getValue().getPageSize());
-//        assertEquals(0, pageable.getValue().getPageNumber());
-//        verify(this.service, this.saxStrategy);
-//    }
-//
-//    @Test
-//    public void testDoSearchCategoryRL() {
-//        this.model.put(Model.QUERY, "query");
-//        this.model.put(Model.SOURCE, "rl-");
-//        Capture<Pageable> pageable = newCapture();
-//        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("20"), capture(pageable)))
-//                .andReturn(null);
-//        expect(this.service.facetOnWebsiteId(eq("query"), eq("20"))).andReturn(this.facetPage);
-//        replay(this.service, this.saxStrategy);
-//        this.generator.setModel(this.model);
-//        Map<String, Object> result = this.generator.doSearch("query");
-//        assertEquals("/search.html?q=query&source=rl-", result.get("path"));
-//        assertEquals("query", result.get(Model.QUERY));
-//        assertEquals("Restrictive Reuse Rights", result.get("tab"));
-//        assertEquals(52, pageable.getValue().getPageSize());
-//        assertEquals(0, pageable.getValue().getPageNumber());
-//        verify(this.service, this.saxStrategy);
-//    }
-//
-//    @Test
-//    public void testDoSearchDefault() {
-//        Capture<Pageable> pageable = newCapture();
-//        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-//                .andReturn(null);
-//        expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
-//        replay(this.service, this.saxStrategy);
-//        this.generator.setModel(this.model);
-//        this.generator.doSearch("query");
-//        assertEquals(52, pageable.getValue().getPageSize());
-//        assertEquals(0, pageable.getValue().getPageNumber());
-//        verify(this.service, this.saxStrategy);
-//    }
-//
-//    @Test
-//    public void testDoSearchPage() {
-//        this.model.put(Model.PAGE, "2");
-//        Capture<Pageable> pageable = newCapture();
-//        expect(this.service.findByTitleOrDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
-//                .andReturn(null);
-//        expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
-//        replay(this.service, this.saxStrategy);
-//        this.generator.setModel(this.model);
-//        this.generator.doSearch("query");
-//        assertEquals(52, pageable.getValue().getPageSize());
-//        assertEquals(1, pageable.getValue().getPageNumber());
-//        verify(this.service, this.saxStrategy);
-//    }
+    @Test
+    public void testDoSearchCategoryOther() {
+        this.model.put(Model.QUERY, "query");
+        this.model.put(Model.SOURCE, "images-");
+        Capture<Pageable> pageable = newCapture();
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
+                .andReturn(null);
+        expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=images-", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("Maximum Reuse Rights", result.get("tab"));
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchCategoryPMC() {
+        this.model.put(Model.QUERY, "query");
+        this.model.put(Model.SOURCE, "pmc-");
+        
+        Capture<Pageable> pageable = newCapture();
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("15"), capture(pageable)))
+                .andReturn(null);
+        expect(this.service.facetOnWebsiteId(eq("query"), eq("15"))).andReturn(this.facetPage);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=pmc-", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("Possible Reuse Rights", result.get("tab"));
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchCategoryRL() {
+        this.model.put(Model.QUERY, "query");
+        this.model.put(Model.SOURCE, "rl-");
+        Capture<Pageable> pageable = newCapture();
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("20"), capture(pageable)))
+                .andReturn(null);
+        expect(this.service.facetOnWebsiteId(eq("query"), eq("20"))).andReturn(this.facetPage);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        Map<String, Object> result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=rl-", result.get("path"));
+        assertEquals("query", result.get(Model.QUERY));
+        assertEquals("Restrictive Reuse Rights", result.get("tab"));
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchDefault() {
+        Capture<Pageable> pageable = newCapture();
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
+                .andReturn(null);
+        expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        this.generator.doSearch("query");
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(0, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
+
+    @Test
+    public void testDoSearchPage() {
+        this.model.put(Model.PAGE, "2");
+        Capture<Pageable> pageable = newCapture();
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("0"), capture(pageable)))
+                .andReturn(null);
+        expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
+        replay(this.service, this.saxStrategy);
+        this.generator.setModel(this.model);
+        this.generator.doSearch("query");
+        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(1, pageable.getValue().getPageNumber());
+        verify(this.service, this.saxStrategy);
+    }
 }

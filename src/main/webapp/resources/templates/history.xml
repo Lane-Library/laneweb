@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css"
             href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,200italic,300italic,400italic|Fjord+One" />
         <link rel="stylesheet" type="text/css"
-            href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css"
             href="/resources/css/history/yui.css?${project.version}" />
         <link rel="stylesheet" type="text/css"
