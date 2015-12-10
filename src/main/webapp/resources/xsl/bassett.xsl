@@ -130,7 +130,7 @@
 							<xsl:attribute name="class">hr</xsl:attribute>
 							<a>
 								<xsl:attribute name="href">
-                                    <xsl:text>/biomed-resources/bassett/solr-bassett-view.html?bn=</xsl:text><xsl:value-of
+                                    <xsl:text>/biomed-resources/bassett/bassettView.html?bn=</xsl:text><xsl:value-of
 									select="./@b:bassett_number" />
                                 </xsl:attribute>
 								<img>
@@ -161,7 +161,7 @@
                                 <xsl:value-of select="./b:title" />
                             </xsl:attribute>
 								<xsl:attribute name="href">
-                                <xsl:text>/biomed-resources/bassett/solr-bassett-view.html?bn=</xsl:text><xsl:value-of
+                                <xsl:text>/biomed-resources/bassett/bassettView.html?bn=</xsl:text><xsl:value-of
 									select="./@b:bassett_number" />
                             </xsl:attribute>
 								<xsl:text>#</xsl:text>
@@ -174,7 +174,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	<!-- To get the Image source for solr-bassett-view.html and bassettLagerView.html -->
+	<!-- To get the Image source for bassettView.html and bassettLagerView.html -->
 
 	<xsl:template match="h:td[@id='image']/h:a/h:img/@src | h:td[@id='image']/h:img/@src">
 		<xsl:attribute name="src">

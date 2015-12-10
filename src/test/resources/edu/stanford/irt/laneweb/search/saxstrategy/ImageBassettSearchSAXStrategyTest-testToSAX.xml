@@ -7,7 +7,7 @@
       </div>
       <ul id="imageList">
          <li id="110-3" class="yui3-tooltip-trigger">
-            <a href="/biomed-resources/bassett/solr-bassett-view.html?bn=110-3">
+            <a href="/biomed-resources/bassett/bassettView.html?bn=110-3">
                <div id="image">
                   <image src="http://elane.stanford.edu/public/L254573/small/bassettSrc"/>
                </div>
