@@ -252,7 +252,7 @@
 
 
 	<xsl:template match="h:div[@class='s-pagination']">
-		<xsl:if test="$total-pages != '1'">
+		<xsl:if test="$total-pages != '1' and $total-pages != '0'">
 			<xsl:copy>
 				<xsl:apply-templates select="attribute::node()|child::node()" />
 			</xsl:copy>
