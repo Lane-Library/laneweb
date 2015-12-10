@@ -19,6 +19,7 @@ import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
 import org.springframework.data.solr.core.query.FacetOptions.FieldWithFacetParameters;
 import org.springframework.data.solr.core.query.FacetQuery;
 import org.springframework.data.solr.core.query.SimpleFacetQuery;
+import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
@@ -78,7 +79,7 @@ public class SolrSearchService implements CollectionManager {
                         .setFacetLimit(pageRequest.getPageSize()).setFacetSort(facetSort));
         fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {
-            fquery.addCriteria(new SimpleStringCriteria(facetFilters));
+            fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
         return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
@@ -90,7 +91,7 @@ public class SolrSearchService implements CollectionManager {
                 .setFacetOptions(FACET_OPTIONS.setFacetLimit(facetLimit));
         fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {
-            fquery.addCriteria(new SimpleStringCriteria(facetFilters));
+            fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
         return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
