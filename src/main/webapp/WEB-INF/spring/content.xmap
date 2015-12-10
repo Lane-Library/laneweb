@@ -32,7 +32,7 @@
             </map:match>
             <map:match pattern="biomed-resources/bassett/**.html" type="wildcard">
                 <map:aggregate type="default" element="doc">
-                    <map:generate type="file" src="{content-base}/biomed-resources/bassett/solr-bassett-template.html"/>
+                    <map:generate type="file" src="{content-base}/biomed-resources/bassett/template.html"/>
                     <map:generate type="file" src="cocoon://content/biomed-resources/bassett/raw/{1}.html"/>
                     <map:generate type="file" src="cocoon://content/biomed-resources/bassett/accordionMenu"/>
                 </map:aggregate>
