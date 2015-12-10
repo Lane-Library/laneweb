@@ -63,7 +63,7 @@
             <!-- bassett search pages -->
             <map:match type="regex-parameter" pattern="bassett">
                 <map:parameter name="parameter-name" value="source"/>
-                <map:generate src="cocoon://content/biomed-resources/bassett/solr-bassetts-view.html" type="file"/>
+                <map:generate src="cocoon://content/biomed-resources/bassett/bassettsView.html" type="file"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="regex-parameter" pattern="^all-all$">

@@ -12,7 +12,7 @@
 	formatAjaxUrl = function(href) {
 		var url;
 		href = href.replace("search.html",
-				"/biomed-resources/bassett/solr-bassetts-view.html");
+				"/biomed-resources/bassett/bassettsView.html");
 		href = href.substr(href.indexOf("/bassett/") + 8);
 		href = href.split("?");
 		if (href.length === 1) {
