@@ -120,16 +120,16 @@
 		resetSubRegion(subRegion);
 		subRegion.addClass('enabled');
 		i = subRegion.one('i');
-		i.removeClass('fa-square-o');
-		i.addClass('fa-check-circle-o');
+		i.removeClass('fa-circle-o');
+		i.addClass('fa-check-circle');
 	}
 
 	resetSubRegion = function(subRegion) {
 		if (prevSubRegion && prevSubRegion.one('i')) {
 			prevSubRegion.removeClass('enabled');
 			var iElement = prevSubRegion.one('i');
-			iElement.addClass('fa-square-o');
-			iElement.removeClass('fa-check-circle-o');
+			iElement.addClass('fa-circle-o');
+			iElement.removeClass('fa-check-circle');
 		}
 		prevSubRegion = subRegion;
 	}

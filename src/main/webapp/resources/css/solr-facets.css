@@ -82,21 +82,21 @@
     padding-right: 5px;
 }
 
-.solrFacets .fa-check-square, .facetBrowse .fa-check-square {
+.solrFacets .fa-check-square, .solrFacets .fa-check-circle, .facetBrowse .fa-check-square {
     color: #fff;
 }
 
-.solrFacets .fa-square-o, .facetBrowse .fa-square-o {
+.solrFacets .fa-square-o, .facetBrowse .fa-square-o, .solrFacets .fa-circle-o{
     color: #ccc;
 }
 
-.solrFacets .fa-square-o::after, .facetBrowse .fa-square-o::after {
+.solrFacets .fa-square-o::after, .facetBrowse .fa-square-o::after, .solrFacets .fa-circle-o::after {
     content: " ";
     position: absolute;
     background-color: #fff;
     height: 12px;
-    left: 18px;
-    width: 11px;
+    left: 19px;
+    width: 10px;
     z-index: -1;
 }
 
