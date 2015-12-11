@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2015-12-14" version="3.2.2" description="3.2.2 bug fix release">
+            <action date="2015-12-09" dev="ryanmax" issue="113642" type="fix">
+                facet counts incorrect when search terms contain boolean OR and facet(s) selected
+            </action>
+            <action date="2015-12-08" dev="ryanmax" issue="113568" type="update">
+                did you mean and other suggestion positioning
+            </action>
+            <action date="2015-12-11" dev="ceyates" issue="111181" type="add">
+                Create a page for equipment available at Lane
+            </action>
+        </release>
         <release date="2015-12-07" version="3.2.1" description="3.2.1 bug fix release">
             <action date="2015-12-02" dev="ryanmax" issue="113382" type="fix">
                 reduce facetLabel padding
