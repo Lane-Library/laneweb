@@ -6,7 +6,10 @@
 	<xsl:variable name="currentYear">
 		<xsl:value-of select="year-from-date(current-date())"></xsl:value-of>
 	</xsl:variable>
-
+	
+		<xsl:variable name="previousYear">
+		<xsl:value-of select="number($currentYear -1)"/>
+	</xsl:variable>
 
 	<xsl:template match="/lc:classes">
 		<html>
@@ -19,9 +22,10 @@
 						<xsl:for-each-group select="lc:event_data"
 							group-by="lc:event_name">
 							<xsl:sort select="./lc:event_name/text()" />
-	<xsl:for-each select="current-group()[last()]">
+							<xsl:for-each select="current-group()[last()]">
 								<xsl:if
-									test="contains( ./lc:event_dates/lc:start_date[1]/text(), $currentYear )">
+									test="contains( ./lc:event_dates/lc:start_date[1]/text(), $currentYear ) and 
+										 ./lc:event_status/text() != 'X'">
 									<xsl:call-template name="event_data" />
 								</xsl:if>
 							</xsl:for-each>
@@ -31,7 +35,7 @@
 				<div class="bd">
 					<div>
 						<h4>
-							<xsl:value-of select="$currentYear - 1" />
+							<xsl:value-of select="$previousYear" />
 						</h4>
 						<ul>
 							<xsl:for-each-group select="lc:event_data"
@@ -39,7 +43,8 @@
 								<xsl:sort select="./lc:event_name/text()" />
 								<xsl:for-each select="current-group()[last()]">
 									<xsl:if
-										test="not(contains( ./lc:event_dates/lc:start_date[1]/text(), $currentYear))">
+										test="contains( ./lc:event_dates/lc:start_date[1]/text(), $previousYear) and 
+										 ./lc:event_status/text() != 'X'">
 										<xsl:call-template name="event_data" />
 									</xsl:if>
 								</xsl:for-each>
@@ -50,6 +55,7 @@
 			</body>
 		</html>
 	</xsl:template>
+	
 	<xsl:template name="event_data">
 		<li>
 			<a>

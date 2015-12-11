@@ -14,6 +14,10 @@
         <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:internal_id/text()"/>
     </xsl:variable>
 
+   <xsl:variable name="class-status">
+        <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:event_status/text()"/>
+    </xsl:variable>
+
     <xsl:variable name="hasOpenClass" select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/../lc:event_status/text() = 'O'"/>
 
     <xsl:template match="doc">
@@ -53,18 +57,40 @@
     </xsl:template>
 
     <xsl:template match="h:p[@id='registration']">
-        <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..[lc:event_status/text() = 'O']">
-            <xsl:variable name="classId" select="./lc:module_id/text()"/>
+		
+		<xsl:choose >
+			<xsl:when test="$class-status = 'X'">
+				<xsl:call-template name="registration">
+                  <xsl:with-param name="class" select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/.."/>
+              </xsl:call-template>			
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[text() = $internal-id]/..[lc:event_status/text() = 'O']">
+				<xsl:call-template name="registration">
+                  <xsl:with-param name="class" select="."/>
+              	</xsl:call-template>
+				</xsl:for-each>	
+			</xsl:otherwise>
+		</xsl:choose>
+	    </xsl:template> 
+    	
+    	
+	<xsl:template name="registration"> 
+        	 <xsl:param name="class"/>
+        	 
+            <xsl:variable name="classId" select="$class/lc:module_id/text()"/>
+            
             <!--  only include microdata on first open class -->
             <xsl:variable name="needsMicrodata" select="position() = 1"/>
             <div style="margin-top:12px;position:relative">
             <div>
-                <xsl:apply-templates select="lc:event_dates/lc:start_date[1]"/>
+            	<xsl:apply-templates select="$class/lc:event_dates/lc:start_date[1]"/>
+                <xsl:if test="$class-status != 'X'">
                 <time>
                     <xsl:if test="$needsMicrodata">
                         <xsl:attribute name="itemprop">startDate</xsl:attribute>
                         <xsl:attribute name="datetime">
-                            <xsl:value-of select="./lc:event_dates/lc:start_date[1]/text()"/>
+                            <xsl:value-of select="$class/lc:event_dates/lc:start_date[1]/text()"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:call-template name="start-time"/>
@@ -74,12 +100,14 @@
                     <xsl:if test="$needsMicrodata">
                         <xsl:attribute name="itemprop">endDate</xsl:attribute>
                         <xsl:attribute name="datetime">
-                            <xsl:value-of select="./lc:event_dates/lc:end_date[1]/text()"/>
+                            <xsl:value-of select="$class/lc:event_dates/lc:end_date[1]/text()"/>
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:call-template name="end-time"/>
                 </time>
+                </xsl:if>
             </div>
+            <xsl:if test="$class-status != 'X'">
             <div>
                 <xsl:if test="/doc/noncached-classes/eventlist/event/eventid[text() = $classId]/../seats/text() != '---'">
                     <xsl:text>Seats left: </xsl:text>
@@ -91,28 +119,28 @@
             <div>
                 <xsl:text>With </xsl:text>
                 <xsl:choose>
-                    <xsl:when test="./lc:more_info_url/text() != ''">
+                    <xsl:when test="$class/lc:more_info_url/text() != ''">
                         <a>
                             <xsl:attribute name="href">
-                                <xsl:value-of select="./lc:more_info_url/text()"/>
+                                <xsl:value-of select="$class/lc:more_info_url/text()"/>
                             </xsl:attribute>
                             <xsl:choose>
-                                <xsl:when test="./lc:speaker/text() != ''">
-                                    <xsl:value-of select="./lc:speaker/text()"/>
+                                <xsl:when test="$class/lc:speaker/text() != ''">
+                                    <xsl:value-of select="$class//lc:speaker/text()"/>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                	<xsl:apply-templates select="lc:event_instructors/lc:instructor"/>
+                                	<xsl:apply-templates select="$class/lc:event_instructors/lc:instructor"/>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </a>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:choose>
-                            <xsl:when test="./lc:speaker/text() != ''">
-                                <xsl:value-of select="./lc:speaker/text()"/>
+                            <xsl:when test="$class/lc:speaker/text() != ''">
+                                <xsl:value-of select="$class/lc:speaker/text()"/>
                             </xsl:when>
                             <xsl:otherwise>
-                              	<xsl:apply-templates select="lc:event_instructors/lc:instructor"/>
+                              	<xsl:apply-templates select="$class/lc:event_instructors/lc:instructor"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:otherwise>
@@ -121,21 +149,21 @@
             <div>
                 <xsl:text>At </xsl:text>
                 <xsl:variable name="link">
-                    <xsl:value-of select="./lc:venue/lc:venue_website"/>
+                    <xsl:value-of select="$class/lc:venue/lc:venue_website"/>
                 </xsl:variable>
                 <xsl:variable name="name">
                     <span>
                         <xsl:if test="$needsMicrodata">
                             <xsl:attribute name="itemprop">location</xsl:attribute>
                         </xsl:if>
-                        <xsl:value-of select="./lc:venue/lc:venue_name"/>
+                        <xsl:value-of select="$class/lc:venue/lc:venue_name"/>
                     </span>
                 </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$link != ''">
                         <a>
                             <xsl:attribute name="href">
-                                <xsl:value-of select="./lc:venue/lc:venue_website/text()"/>
+                                <xsl:value-of select="$class/lc:venue/lc:venue_website/text()"/>
                             </xsl:attribute>
                             <xsl:copy-of select="$name"/>
                         </a>
@@ -147,6 +175,7 @@
                         <xsl:copy-of select="$name"/>
                     </xsl:otherwise>
                 </xsl:choose>
+                
             </div>
             <a class="button alt1" href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}">
                 <xsl:choose>
@@ -159,8 +188,8 @@
                 </xsl:choose>
                 <i class="icon fa fa-arrow-right"></i>
             </a>
+            </xsl:if>
             </div>
-        </xsl:for-each>
     </xsl:template>
 
 	<xsl:template match="lc:instructor">
