@@ -8,6 +8,7 @@
     <import resource="bookmarks.xml"/>
     <import resource="cme.xml"/>
     <import resource="datasources.xml"/>
+    <import resource="equipment.xml"/>
     <import resource="eresources.xml"/>
     <import resource="grandrounds.xml"/>
     <import resource="mapping.xml"/>

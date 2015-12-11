@@ -437,6 +437,7 @@
                                 <includes>gutters-min.css</includes>
                                 <include>back-to-top-min.css</include>
                                 <includes>solr-facets-min.css</includes>
+                                <includes>equipment-min.css</includes>
                             </includes>
                         </aggregation>
                         <aggregation>
