@@ -225,5 +225,16 @@
             </map:generate>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match type="wildcard" pattern="equipment.xml">
+            <map:generate type="equipment"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="equipment.html">
+            <map:generate type="equipment"/>
+            <map:transform type="saxon" src="resources/xsl/equipment.xsl"/>
+            <map:transform type="equipment-status"/>
+            <map:transform type="saxon" src="resources/xsl/equipment-status.xsl"/>
+            <map:serialize type="html5"/>
+        </map:match>
     </map:pipeline>
 </map:sitemap>
