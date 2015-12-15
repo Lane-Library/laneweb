@@ -68,6 +68,7 @@
     border-top: 1px solid #ccc;
     background-color: #fff;
     padding-left: 12px;
+    box-sizing: border-box;
 }
 .solrLimits.popInContent {
     top: 45px;
