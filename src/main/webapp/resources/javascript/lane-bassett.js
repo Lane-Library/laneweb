@@ -115,11 +115,10 @@
 
 	
 	surlineSubRegion = function(event) {
-		var i,  anchor = event.currentTarget,
-		subRegion = anchor.ancestor();
-		resetSubRegion(subRegion);
-		subRegion.addClass('enabled');
-		i = subRegion.one('i');
+		var i,  li = event.currentTarget;
+		resetSubRegion(li);
+		li.addClass('enabled');
+		i = li.one('i');
 		i.removeClass('fa-circle-o');
 		i.addClass('fa-check-circle');
 	}
@@ -157,7 +156,7 @@
 			for (i = 0; i < seeAll.size(); i++) {
 				seeAll.item(i).on('click', expandSubRegion);
 			}
-			 lis = Y.all('.region li:not(:first-child) a');
+			 lis = Y.all('.region li:not(:first-child)');
 			for (i = 0; i < lis.size(); i++) {
 				lis.item(i).on('click', surlineSubRegion);
 			}

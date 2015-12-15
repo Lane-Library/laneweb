@@ -25,6 +25,13 @@
 	display:none;
 }
 
+#bassett-menu li:nth-child(n + 2){
+	cursor: pointer;
+}
+#bassett-menu li:nth-child(n + 2) a{
+	display: block;
+}
+
 
 .region .enabled a, .region .enabled span{
 	color: white !important;	
