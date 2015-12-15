@@ -105,7 +105,17 @@
         <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.3.2</version>
+            <version>1.4.0</version>
+            <exclusions>
+             <exclusion>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+             </exclusion>
+             <exclusion>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+             </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>Saxon-HE</artifactId>

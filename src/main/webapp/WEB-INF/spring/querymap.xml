@@ -6,12 +6,17 @@
     <bean class="edu.stanford.irt.querymap.QueryMapper">
         <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
         <property name="queryToDescriptor">
-            <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
-                <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
+            <bean class="edu.stanford.irt.querymap.SolrQueryToDescriptor">
+                <constructor-arg name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
+                <constructor-arg>
+                    <bean class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+                        <constructor-arg value="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
+                    </bean>
+                </constructor-arg>
             </bean>
         </property>
     </bean>
-    
+
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
         class="edu.stanford.irt.querymap.DescriptorManager"/>
     
