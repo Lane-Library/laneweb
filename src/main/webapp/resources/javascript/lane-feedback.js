@@ -17,9 +17,6 @@
         activeItem : {
             value : 0
         },
-        drag: {
-            value: null
-        },
         items : {
             value : null,
             writeOnce : true
@@ -43,7 +40,6 @@
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
-            this.set("drag", new Y.DD.Drag({node: ".yui3-lightbox"}));
         },
         bindUI : function() {
             var self = this, eventHandle1, eventHandle2;
@@ -59,10 +55,6 @@
                     eventHandle1.detach();
                     eventHandle2.detach();
                     self.destroy();
-                    var drag = this.get("drag");
-                    if (drag) {
-                        drag.destroy();
-                    }
                 }
             }, this);
             Y.one("#feedback .close").on("click", function(event) {
