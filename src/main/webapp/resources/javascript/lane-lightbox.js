@@ -11,6 +11,7 @@
             doc.on("key", this.hide, "esc", this);
             doc.on("click", this._lightboxLinkClick, this);
             this.get("background").on("click", this.hide, this);
+            this.set("drag", new Y.DD.Drag({node: ".yui3-lightbox"}));
         },
         setContent : function(content) {
             this.get("contentBox").set("innerHTML", content);
