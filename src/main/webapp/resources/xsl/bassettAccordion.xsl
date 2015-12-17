@@ -36,7 +36,7 @@
 	</xsl:template>
 
     <xsl:template match="h:a">
-        <xsl:variable name="sub-region-id" select="./../h:span[1]/@id"/>
+        <xsl:variable name="sub-region-id" select="./h:span[1]/@id"/>
         <xsl:variable name="region-id" select="ancestor::h:ul/@id"/>
         <xsl:variable name="class" select="@class"/>
         <xsl:choose>
@@ -76,14 +76,14 @@
    </xsl:template>
    
  	<xsl:template match="h:li">
- 		 <xsl:variable name="sub-region-id" select="./h:span/@id"/>
+ 		 <xsl:variable name="sub-region-id" select="./h:a/h:span/@id"/>
         <xsl:variable name="region-id" select="ancestor::h:ul/@id"/>
         	<xsl:choose>
             <xsl:when test="count(/doc/b:bassett_count/b:region[@b:name=$region-id]/b:sub_region[@b:name=$sub-region-id]) != 0 ">
                  <xsl:copy>
                     <xsl:apply-templates select="attribute::node()|child::node()"/> 
                 </xsl:copy>
-             </xsl:when>
+             </xsl:when> 
              <xsl:when test="./@class != ''">
               <xsl:copy>
              	 <xsl:apply-templates select="attribute::node()|child::node()"/>
