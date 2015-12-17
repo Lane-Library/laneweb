@@ -15,7 +15,8 @@
 				<title>seminars</title>
 			</head>
 			<body>
-				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= $number-of-items]" />
+				<!-- pull twice the number of seminars requested so seminars.js can hide today's past events and display upcoming ones  -->
+				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= ($number-of-items * 2)]" />
                 <div class="more classes">
                     <a href="{/s:seminars/@s:url}"><xsl:value-of select="replace($link-label,'(\+|%20)',' ')"/><xsl:text> </xsl:text><i class="icon fa fa-arrow-right"></i></a>
                 </div>
@@ -69,12 +70,16 @@
 		</xsl:variable>
 
 		<div>
+			<!--  hide events beyond the desired # to display so seminars.js can unhide them if needed -->
+			<xsl:if test="position() > $number-of-items">
+				<xsl:attribute name="style">display:none;</xsl:attribute>
+			</xsl:if>
 			<xsl:attribute name="class">
+				<xsl:text>seminar</xsl:text>
 				<xsl:choose>
 					<!-- see case 98500 align the color blocks for classes -->
-					<xsl:when test="$type='cme' and position() = 1">same-height-8</xsl:when>
-					<xsl:when test="$type='cme' and position() = 2">same-height-9</xsl:when>
-					<xsl:otherwise>seminar</xsl:otherwise>
+					<xsl:when test="$type='cme' and position() = 1"> same-height-8</xsl:when>
+					<xsl:when test="$type='cme' and position() = 2"> same-height-9</xsl:when>
 				</xsl:choose>
 			</xsl:attribute>
 			<div class="yui3-g">
@@ -82,7 +87,7 @@
 					<xsl:attribute name="class">
 						<xsl:choose>
 							<xsl:when test="$type='gran'">yui3-u-1-6</xsl:when>
-							<xsl:when test="$type='cme'">yui3-u-1-4</xsl:when>
+							<xsl:otherwise>yui3-u-1-4</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 					<div>
@@ -90,23 +95,22 @@
 							<xsl:text>date </xsl:text>
 							<xsl:choose>
 								<xsl:when test="$type='gran'">grandrounds-date</xsl:when>
-								<xsl:when test="$type='cme'">cme-date</xsl:when>
-								<xsl:otherwise><xsl:value-of select="$type"/></xsl:otherwise>
+								<xsl:otherwise>cme-date</xsl:otherwise>
 							</xsl:choose>
 						</xsl:attribute>
-					<div class="month">
-						<xsl:value-of select="$month" />
-					</div>
-					<div class="day">
-						<xsl:value-of select="$day" />
-					</div>
+						<div class="month">
+							<xsl:value-of select="$month" />
+						</div>
+						<div class="day">
+							<xsl:value-of select="$day" />
+						</div>
 					</div>
 				</div>
 				<div>
 					<xsl:attribute name="class">
 						<xsl:choose>
 							<xsl:when test="$type='gran'">yui3-u-5-6</xsl:when>
-							<xsl:when test="$type='cme'">yui3-u-3-4</xsl:when>
+							<xsl:otherwise>yui3-u-3-4</xsl:otherwise>
 						</xsl:choose>
 					</xsl:attribute>
 					<p>
