@@ -2,20 +2,12 @@
     var seminars = Y.all('.seminar');
     if (seminars) {
         var currentYear = new Date().getFullYear(),
-        parents = [];
-        seminars.each(
-                function() {
-                    if (parents.indexOf(this.ancestor()) < 0) {
-                        parents.push(this.ancestor());
-                    }
-                }
-        );
-        for (var i = 0; parents.length > i; i++) {
-            var mySeminars = parents[i].all('.seminar'),
+        processSeminars = function(parent) {
+            var mySeminars = parent.all('.seminar'),
             myHiddenSeminars = [];
             mySeminars.each(
                     function() {
-                        if (this.getStyle('display') == 'none') {
+                        if (this.getStyle('display') === 'none') {
                             myHiddenSeminars.push(this);
                         }
                     }
@@ -39,6 +31,14 @@
                         }
                     }
             );
-        }
+            parent.setData('processed',true);
+        };
+        seminars.each(
+                function() {
+                    if (this.ancestor().getData('processed') === undefined) {
+                        processSeminars(this.ancestor());
+                    }
+                }
+        );
     }
 })();
