@@ -32,6 +32,11 @@
     width: 232px;
 }
 
+#imageList li li{
+	height: auto;
+
+	}
+
 #imageList li.admin{
     margin-top: 30px;
     }
