@@ -4,11 +4,14 @@
         var currentYear = new Date().getFullYear(),
         processSeminars = function(parent) {
             var mySeminars = parent.all('.seminar'),
-            myHiddenSeminars = [];
+            hiddenSeminarArray = [],
+            visibleSeminarCount = 0;
             mySeminars.each(
                     function() {
                         if (this.getStyle('display') === 'none') {
-                            myHiddenSeminars.push(this);
+                            hiddenSeminarArray.push(this);
+                        } else {
+                            visibleSeminarCount++;
                         }
                     }
             );
@@ -20,12 +23,12 @@
                         if (month && day && endTime) {
                             endTime = endTime.toString().replace(/.* - (\d{1,2}:\d{2} .m)$/, "$1");
                             date = month + " " + day + ", " + currentYear;
-                            if (Date.parse(date + " " + endTime) < Date.now()) {
+                            if (visibleSeminarCount-- > 0 && Date.parse(date + " " + endTime) < Date.now()) {
                                 this.setStyles({
                                     display : "none"
                                 });
-                                if (myHiddenSeminars.length > 0) {
-                                    myHiddenSeminars.shift().setStyles({display : "block"});
+                                if (hiddenSeminarArray.length > 0) {
+                                    hiddenSeminarArray.shift().setStyles({display : "block"});
                                 }
                             }
                         }
