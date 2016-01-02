@@ -1,7 +1,9 @@
 (function() {
     var seminars = Y.all('.seminar');
     if (seminars) {
-        var currentYear = new Date().getFullYear(),
+        var now = new Date(),
+        currentYear = now.getFullYear(),
+        currentMonth = now.getMonth(),
         processSeminars = function(parent) {
             var mySeminars = parent.all('.seminar'),
             hiddenSeminarArray = [],
@@ -17,12 +19,19 @@
             );
             mySeminars.each(
                     function() {
-                        var month = this.one('.month').get('text'),
-                        day = this.one('.day').get('text'),
-                        endTime = this.one('.time').get('text'), date;
+                        var month = this.one('.month'),
+                        day = this.one('.day'),
+                        endTime = this.one('.time'),
+                        date,
+                        eventMonth;
                         if (month && day && endTime) {
-                            endTime = endTime.toString().replace(/.* - (\d{1,2}:\d{2} .m)$/, "$1");
-                            date = month + " " + day + ", " + currentYear;
+                            endTime = endTime.get('text').toString().replace(/.* - (\d{1,2}:\d{2} .m)$/, "$1");
+                            date = month.get('text') + " " + day.get('text') + ", " + currentYear;
+                            eventMonth = new Date(date).getMonth();
+                            // add one to currentYear when event month is less than current month (like in December when upcoming event is in January)
+                            if (eventMonth < currentMonth) {
+                                date = month.get('text') + " " + day.get('text') + ", " + (currentYear + 1);
+                            }
                             if (visibleSeminarCount-- > 0 && Date.parse(date + " " + endTime) < Date.now()) {
                                 this.setStyles({
                                     display : "none"
