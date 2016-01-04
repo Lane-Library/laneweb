@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-01-04" version="3.2.3" description="3.2.3 bug fix release">
+            <action date="2016-01-049" dev="olgary" issue="113927" type="add">
+                add a link to 'Blog' to the main nav on Lane website
+            </action>
+            <action date="2015-12-15" dev="ryanmax" issue="113859" type="update">
+                use Solr instead of PubMed for QueryMap suggestions
+            </action>
+            <action date="2015-12-15" dev="ryanmax" issue="113858" type="update">
+                make the popup 'Filter results' draggable as other popups
+            </action>
+            <action date="2015-12-15" dev="ryanmax" issue="99709" type="update">
+                Feedback-suggestion: don't show grand round events after event has occurred
+            </action>
+        </release>
         <release date="2015-12-14" version="3.2.2" description="3.2.2 bug fix release">
             <action date="2015-12-09" dev="ryanmax" issue="113642" type="fix">
                 facet counts incorrect when search terms contain boolean OR and facet(s) selected
