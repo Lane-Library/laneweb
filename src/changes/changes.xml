@@ -8,7 +8,7 @@
     </properties>
     <body>
         <release date="2016-01-04" version="3.2.3" description="3.2.3 bug fix release">
-            <action date="2016-01-049" dev="olgary" issue="113927" type="add">
+            <action date="2016-01-04" dev="olgary" issue="113927" type="add">
                 add a link to 'Blog' to the main nav on Lane website
             </action>
             <action date="2015-12-15" dev="ryanmax" issue="113859" type="update">
