@@ -92,7 +92,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-selections.js",
         "lane-popin.js",
         "form-validator.js",
-        "hover-controller.js",
+        "description-toggle.js",
         "telinput.js",
         "lane-feedback.js",
         "banner.js",

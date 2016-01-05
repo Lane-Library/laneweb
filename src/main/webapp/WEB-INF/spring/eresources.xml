@@ -24,9 +24,7 @@
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"
         class="edu.stanford.irt.laneweb.eresources.PagingEresourceListXHTMLSAXStrategy">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
-        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.eresources.EresourceListPagingDataSAXStrategy"/>
         </constructor-arg>

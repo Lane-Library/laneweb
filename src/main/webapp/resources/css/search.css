@@ -105,38 +105,6 @@ li.active .descriptionTrigger {
 li.active .description {
     display:block
 }
-/*.hoverTrigger class added by javascript (also removes .hvrTrig)*/
-.lwSearchResults .showAbstract {
-    margin-left:20px;
-}
-.hvrTrig:hover .showAbstract, .active .showAbstract {
-    display:none
-}
-.hvrTarg {
-    display:none;
-    margin-top:5px;
-    padding:2px;
-    border-top:1px dotted #CCCCCC;
-}
-.hoverTrigger, .hoverTrigger a {
-    cursor:help;
-}
-.hvrTrig:hover, .hoverTrigger.active {
-    background-color: #F2F3ED;
-    padding:4px;
-    border:1px solid
-}
-
-.hvrTrig:hover .hvrTarg, .hoverTrigger.active .hvrTarg {
-    display:block
-}
-
-.hoverTrigger.active {
-    cursor:default
-}
-.hoverTrigger.active a {
-    cursor:pointer
-}
 
 .citation{
     font-size:11px;

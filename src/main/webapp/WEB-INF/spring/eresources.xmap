@@ -29,22 +29,31 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
-        <map:match type="wildcard" pattern="browse/*/*.*">
-            <map:generate type="er-browse-{3}">
+        <map:match type="wildcard" pattern="browse/*/*.html">
+            <map:generate type="er-browse-html">
                 <map:parameter name="{1}" value="{2}"/>
             </map:generate>
+            <map:transform type="saxon" src="resources/xsl/eresource2html.xsl">
+                <map:parameter name="{1}" value="{2}"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="mesh/type/*.*" type="wildcard">
-            <map:generate type="er-mesh-{2}">
+        <map:match pattern="mesh/type/*.html" type="wildcard">
+            <map:generate type="er-mesh-html">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
+            <map:transform type="saxon" src="resources/xsl/eresource2html.xsl">
+                <map:parameter name="type" value="{1}"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="core/type/*.*" type="wildcard">
-            <map:generate type="er-core-{2}">
+        <map:match pattern="core/type/*.html" type="wildcard">
+            <map:generate type="er-core-html">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
+            <map:transform type="saxon" src="resources/xsl/eresource2html.xsl">
+                <map:parameter name="type" value="{1}"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

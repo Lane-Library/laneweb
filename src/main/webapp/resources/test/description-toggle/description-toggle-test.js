@@ -1,8 +1,8 @@
 Y.applyConfig({fetchCSS:true});
 Y.use("node-event-simulate", "console", "test", function(Y){
 
-    var searchHoverTextTestCase = new Y.Test.Case({
-        name: "Lane Search Hover Text Test Case",
+    var descriptionToggleTestCase = new Y.Test.Case({
+        name: "description toggle Test Case",
         testTriggerContentPresent: function() {
             var triggers = Y.all(".descriptionTrigger");
             Y.Assert.areEqual("Preview Abstract ", triggers.item(0).get("text"));
@@ -47,7 +47,7 @@ Y.use("node-event-simulate", "console", "test", function(Y){
     }).render("#log");
 
 
-    Y.Test.Runner.add(searchHoverTextTestCase);
-    Y.Test.Runner.masterSuite.name = "hover-controller-test.js";
+    Y.Test.Runner.add(descriptionToggleTestCase);
+    Y.Test.Runner.masterSuite.name = "description-toggle-test.js";
     Y.Test.Runner.run();
 });

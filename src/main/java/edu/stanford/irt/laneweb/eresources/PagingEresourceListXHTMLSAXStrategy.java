@@ -44,15 +44,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             startUlWithClass(xmlConsumer, "lwSearchResults");
             int i = 0;
             for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
-                Eresource eresource = it.next();
-                String description = eresource.getDescription();
-                if (description != null && description.length() > 0) {
-                    startLiWithClass(xmlConsumer, "hvrTrig");
-                } else {
-                    startLi(xmlConsumer);
-                }
-                this.saxStrategy.toSAX(eresource, xmlConsumer);
-                endLi(xmlConsumer);
+                this.saxStrategy.toSAX(it.next(), xmlConsumer);
             }
             endUl(xmlConsumer);
             if (size > DEFAULT_PAGE_SIZE) {
