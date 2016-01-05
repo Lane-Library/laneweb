@@ -162,6 +162,9 @@
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
                         </li>
+                        <li class="nav-menu">
+                            <a href="http://laneblog.stanford.edu/">Blog</a>
+                        </li>
                     </ul>
                 </div>
             </div>
