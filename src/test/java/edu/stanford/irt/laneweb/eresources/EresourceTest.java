@@ -7,32 +7,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.eresources.Eresource.EresourceBuilder;
-
 public class EresourceTest {
-
-    private EresourceBuilder builder;
-
-    @Before
-    public void setUp() {
-        this.builder = Eresource.builder();
-    }
-
-    // TODO: this is a temporary fix for fogbugz case 110705 Feedback-bug:  Impact factors links not working
-    //@Test
-    public void testIsValidOnlyImpactFactory() {
-        assertFalse(this.builder.addLink(new Link(null, LinkType.IMPACTFACTOR, null, null, null, null)).build()
-                .isValid());
-    }
-
-    @Test
-    public void testIsValidOnlyNormal() {
-        assertTrue(this.builder.addLink(new Link(null, LinkType.NORMAL, null, null, null, null)).build().isValid());
-    }
 
     @Test
     public void testSetLinks1() {
-        Eresource eresource = new Eresource(this.builder);
+        Eresource eresource = new Eresource();
         eresource.setVersionsJson(
                 "[{\"dates\":null,\"additionalText\":null,\"hasGetPasswordLink\":false,\"links\":[{\"label\":null,\"url\":\"foo\",\"additionalText\":null,\"linkText\":\"null\"}],\"publisher\":null,\"subsets\":[],\"summaryHoldings\":null,\"proxy\":true,\"holdingsAndDates\":null}]");
         assertEquals(1, eresource.getLinks().size());

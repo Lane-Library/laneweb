@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 
@@ -15,9 +16,9 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 
     private String type;
 
-    public MeSHEresourcesGenerator(final String componentType, final CollectionManager collectionManager,
+    public MeSHEresourcesGenerator(final String componentType, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
-        super(componentType, collectionManager, saxStrategy);
+        super(componentType, solrService, saxStrategy);
     }
 
     @Override
@@ -42,11 +43,11 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
-    protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
+    protected List<Eresource> getEresourceList(final SolrService solrService) {
         if (this.mesh == null || this.type == null) {
             return Collections.emptyList();
         }
-        return collectionManager.getMesh(this.type, this.mesh);
+        return solrService.getMesh(this.type, this.mesh);
     }
 
     @Override

@@ -7,14 +7,15 @@ import java.util.Map;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class CoreEresourcesGenerator extends AbstractEresourcesGenerator {
 
     private String type;
 
-    public CoreEresourcesGenerator(final String componentType, final CollectionManager collectionManager,
+    public CoreEresourcesGenerator(final String componentType, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
-        super(componentType, collectionManager, saxStrategy);
+        super(componentType, solrService, saxStrategy);
     }
 
     @Override
@@ -37,11 +38,11 @@ public class CoreEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
-    protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
+    protected List<Eresource> getEresourceList(final SolrService solrService) {
         if (this.type == null) {
             return Collections.emptyList();
         }
-        return collectionManager.getCore(this.type);
+        return solrService.getCore(this.type);
     }
 
     @Override

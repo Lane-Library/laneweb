@@ -91,7 +91,7 @@
      <bean name="edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets"
         class="edu.stanford.irt.laneweb.search.SolrSearchFacetsGenerator"
          parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <property name="facetsToShowBrowse" value="20"/>
         <property name="facetsToShowSearch" value="4"/>
         <property name="meshToIgnoreInSearch">
@@ -136,14 +136,14 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search"
         class="edu.stanford.irt.laneweb.search.SolrSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search-html"
         class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"/>
     </bean>
 
@@ -174,7 +174,7 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/merged-search"
         class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
-        <constructor-arg index="1" ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg index="1" ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
         <constructor-arg index="3" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
     </bean>

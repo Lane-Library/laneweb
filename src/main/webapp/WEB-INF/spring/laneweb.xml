@@ -20,6 +20,7 @@
     <import resource="search-image.xml"/>
     <import resource="sitemap.xml"/>
     <import resource="source.xml"/>
+    <import resource="solr.xml"/>
     <import resource="suggest.xml"/>
     <import resource="trends.xml"/>
     <import resource="voyager-login.xml"/>

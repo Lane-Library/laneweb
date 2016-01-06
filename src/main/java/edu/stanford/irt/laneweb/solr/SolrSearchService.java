@@ -26,10 +26,9 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
-import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 
-public class SolrSearchService implements CollectionManager {
+public class SolrSearchService implements SolrService {
 
     public static final String FACETS_SEPARATOR = "::";
 

@@ -2,22 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
-    
-    <bean name="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"
-        class="edu.stanford.irt.laneweb.solr.SolrSearchService"/>
-    
-     <bean name="edu.stanford.irt.laneweb.solr.SolrQueryParser"
-        class="edu.stanford.irt.laneweb.solr.SolrQueryParser">
-        <constructor-arg>
-            <list>
-                <bean class="edu.stanford.irt.laneweb.solr.AdvancedQueryInspector"/>
-                <bean class="edu.stanford.irt.laneweb.solr.DoiQueryInspector"/>
-                <bean class="edu.stanford.irt.laneweb.solr.PmidQueryInspector"/>
-                <bean class="edu.stanford.irt.laneweb.solr.NumberQueryInspector"/>
-                <bean class="edu.stanford.irt.laneweb.solr.EscapingQueryInspector"/>
-            </list>
-        </constructor-arg>
-     </bean>
      
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"
         class="edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy"/>
@@ -57,14 +41,14 @@
                 <value>website</value>
             </set>
         </constructor-arg>
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-browse-html"
         class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-browse-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
     </bean>
     
@@ -72,7 +56,7 @@
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-core-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
     </bean>
     
@@ -80,7 +64,7 @@
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-mesh-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.CollectionManager/laneconnex"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
     </bean>
 

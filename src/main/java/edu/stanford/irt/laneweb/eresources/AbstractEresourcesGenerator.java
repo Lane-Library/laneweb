@@ -15,6 +15,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements CacheablePipelineComponent,
         ParametersAware, ModelAware {
@@ -22,7 +23,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
     /** the default cache expiration time, 20 minutes */
     private static final long DEFAULT_EXPIRES = 1000L * 60L * 20L;
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private String componentType;
 
@@ -38,10 +39,10 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     private Validity validity;
 
-    public AbstractEresourcesGenerator(final String componentType, final CollectionManager collectionManager,
+    public AbstractEresourcesGenerator(final String componentType, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
         this.componentType = componentType;
-        this.collectionManager = collectionManager;
+        this.solrService = solrService;
         this.saxStrategy = saxStrategy;
     }
 
@@ -94,7 +95,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Eresource> eresources = getEresourceList(this.collectionManager);
+        List<Eresource> eresources = getEresourceList(this.solrService);
         String baseQuery = this.queryString;
         if (baseQuery.indexOf("&page=") > 0) {
             baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
@@ -105,7 +106,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
         this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData, getHeading()), xmlConsumer);
     }
 
-    protected abstract List<Eresource> getEresourceList(CollectionManager collectionManager);
+    protected abstract List<Eresource> getEresourceList(SolrService solrService);
 
     protected abstract String getHeading();
 

@@ -11,6 +11,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
@@ -22,9 +23,9 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     private String type;
 
-    public BrowseEresourcesGenerator(final String type, final CollectionManager collectionManager,
+    public BrowseEresourcesGenerator(final String type, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
-        super(type, collectionManager, saxStrategy);
+        super(type, solrService, saxStrategy);
     }
 
     @Override
@@ -60,16 +61,16 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
-    protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
+    protected List<Eresource> getEresourceList(final SolrService solrService) {
         List<Eresource> list = null;
         if (this.subset == null && this.type == null) {
             list = Collections.emptyList();
         } else if (this.subset == null && ALL.equals(this.alpha)) {
-            list = collectionManager.getType(this.type);
+            list = solrService.getType(this.type);
         } else if (this.subset == null) {
-            list = collectionManager.getType(this.type, this.alpha.charAt(0));
+            list = solrService.getType(this.type, this.alpha.charAt(0));
         } else {
-            list = collectionManager.getSubset(this.subset);
+            list = solrService.getSubset(this.subset);
         }
         return list;
     }

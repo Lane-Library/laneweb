@@ -1,10 +1,12 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.solr;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface CollectionManager {
+import edu.stanford.irt.laneweb.eresources.Eresource;
+
+public interface SolrService {
 
     List<Eresource> getCore(String type);
 

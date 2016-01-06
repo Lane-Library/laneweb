@@ -21,10 +21,11 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class EresourcesCountGeneratorTest {
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private EresourcesCountGenerator generator;
 
@@ -35,14 +36,14 @@ public class EresourcesCountGeneratorTest {
     @Before
     public void setUp() throws Exception {
         this.types = Collections.singleton("type");
-        this.collectionManager = createMock(CollectionManager.class);
-        this.generator = new EresourcesCountGenerator(this.types, this.collectionManager);
+        this.solrService = createMock(SolrService.class);
+        this.generator = new EresourcesCountGenerator(this.types, this.solrService);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
 
     @Test
     public void testDoGenerate() throws SAXException {
-        expect(this.collectionManager.searchCount(this.types, "query"))
+        expect(this.solrService.searchCount(this.types, "query"))
                 .andReturn(Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://apache.org/cocoon/SQL/2.0");
@@ -62,10 +63,10 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.collectionManager, this.xmlConsumer);
+        replay(this.solrService, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer);
+        verify(this.solrService, this.xmlConsumer);
     }
 
     @Test
@@ -88,10 +89,10 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.collectionManager, this.xmlConsumer);
+        replay(this.solrService, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, ""));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer);
+        verify(this.solrService, this.xmlConsumer);
     }
 
     @Test
@@ -114,14 +115,14 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.collectionManager, this.xmlConsumer);
+        replay(this.solrService, this.xmlConsumer);
         StringBuilder sb = new StringBuilder();
         while (sb.length() <= 300) {
             sb.append(" foo");
         }
         this.generator.setModel(Collections.singletonMap(Model.QUERY, sb.toString()));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer);
+        verify(this.solrService, this.xmlConsumer);
     }
 
     @Test
@@ -144,25 +145,25 @@ public class EresourcesCountGeneratorTest {
         this.xmlConsumer.endElement(eq("http://apache.org/cocoon/SQL/2.0"), eq("rowset"), eq("rowset"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.collectionManager, this.xmlConsumer);
+        replay(this.solrService, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, null));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.xmlConsumer);
+        verify(this.solrService, this.xmlConsumer);
     }
 
     @Test
     public void testDoGenerateThrowException() throws SAXException {
-        expect(this.collectionManager.searchCount(this.types, "query"))
+        expect(this.solrService.searchCount(this.types, "query"))
                 .andReturn(Collections.singletonMap("type", Integer.valueOf(1)));
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
-        replay(this.collectionManager, this.xmlConsumer);
+        replay(this.solrService, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         try {
             this.generator.doGenerate(this.xmlConsumer);
             fail();
         } catch (LanewebException e) {
         }
-        verify(this.collectionManager, this.xmlConsumer);
+        verify(this.solrService, this.xmlConsumer);
     }
 }

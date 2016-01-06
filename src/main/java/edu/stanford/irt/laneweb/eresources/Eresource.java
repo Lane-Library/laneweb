@@ -16,83 +16,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class Eresource {
 
-    public static class EresourceBuilder {
-
-        private int available;
-
-        private String description;
-
-        private String id;
-
-        private List<Link> links = new ArrayList<Link>();
-
-        private String primaryType;
-
-        private int recordId;
-
-        private String recordType;
-
-        private int score;
-
-        private String title;
-
-        private int total;
-
-        public EresourceBuilder addLink(final Link link) {
-            this.links.add(link);
-            return this;
-        }
-
-        public EresourceBuilder available(final int available) {
-            this.available = available;
-            return this;
-        }
-
-        public Eresource build() {
-            return new Eresource(this);
-        }
-
-        public EresourceBuilder description(final String description) {
-            this.description = description;
-            return this;
-        }
-
-        public EresourceBuilder id(final String id) {
-            this.id = id;
-            return this;
-        }
-
-        public EresourceBuilder primaryType(final String primaryType) {
-            this.primaryType = primaryType;
-            return this;
-        }
-
-        public EresourceBuilder recordId(final int recordId) {
-            this.recordId = recordId;
-            return this;
-        }
-
-        public EresourceBuilder recordType(final String description) {
-            this.recordType = description;
-            return this;
-        }
-
-        public EresourceBuilder score(final int score) {
-            this.score = score;
-            return this;
-        }
-
-        public EresourceBuilder title(final String title) {
-            this.title = title;
-            return this;
-        }
-
-        public EresourceBuilder total(final int total) {
-            this.total = total;
-            return this;
-        }
-    }
-
     @Field("availableItems")
     private int available;
 
@@ -137,25 +60,8 @@ public class Eresource {
     @Field
     private int year;
 
-    public Eresource(final EresourceBuilder builder) {
-        this.description = builder.description;
-        this.id = builder.id;
-        this.linksList = builder.links;
-        this.recordId = builder.recordId;
-        this.recordType = builder.recordType;
-        this.score = builder.score;
-        this.title = builder.title;
-        this.primaryType = builder.primaryType;
-        this.total = builder.total;
-        this.available = builder.available;
-    }
-
     protected Eresource() {
         // spring-data-solr mapping needs this constructor
-    }
-
-    public static EresourceBuilder builder() {
-        return new EresourceBuilder();
     }
 
     public int getAvailable() {
@@ -215,17 +121,6 @@ public class Eresource {
 
     public int getYear() {
         return this.year;
-    }
-
-    public boolean isValid() {
-        boolean valid = true;
-        // TODO: this is a temporary fix for fogbugz case 110705 Feedback-bug:  Impact factors links not working
-        /*
-        if (getLinks().size() == 1 && LinkType.IMPACTFACTOR.equals(getLinks().iterator().next().getType())) {
-            valid = false;
-        }
-        */
-        return valid;
     }
 
     public void setDescription(final String description) {

@@ -14,10 +14,11 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class MeSHEresourcesGeneratorTest {
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private MeSHEresourcesGenerator generator;
 
@@ -50,9 +51,9 @@ public class MeSHEresourcesGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.collectionManager = createMock(CollectionManager.class);
+        this.solrService = createMock(SolrService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new MeSHEresourcesGenerator("type", this.collectionManager, this.saxStrategy);
+        this.generator = new MeSHEresourcesGenerator("type", this.solrService, this.saxStrategy);
     }
 
     @Test
@@ -71,26 +72,26 @@ public class MeSHEresourcesGeneratorTest {
     public void testGetEresourceList() {
         this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.collectionManager.getMesh("type", "mesh")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getEresourceList(this.collectionManager);
-        verify(this.collectionManager);
+        expect(this.solrService.getMesh("type", "mesh")).andReturn(null);
+        replay(this.solrService);
+        this.generator.getEresourceList(this.solrService);
+        verify(this.solrService);
     }
 
     @Test
     public void testGetEresourceListNullMesh() {
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        replay(this.collectionManager);
-        assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
-        verify(this.collectionManager);
+        replay(this.solrService);
+        assertEquals(0, this.generator.getEresourceList(this.solrService).size());
+        verify(this.solrService);
     }
 
     @Test
     public void testGetEresourceListNullType() {
         this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
-        replay(this.collectionManager);
-        assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
-        verify(this.collectionManager);
+        replay(this.solrService);
+        assertEquals(0, this.generator.getEresourceList(this.solrService).size());
+        verify(this.solrService);
     }
 
     @Test

@@ -13,6 +13,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.SolrService;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourcesCountGenerator extends AbstractGenerator implements ModelAware {
@@ -21,14 +22,14 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private String query;
 
     private Set<String> types;
 
-    public EresourcesCountGenerator(final Set<String> types, final CollectionManager collectionManager) {
-        this.collectionManager = collectionManager;
+    public EresourcesCountGenerator(final Set<String> types, final SolrService solrService) {
+        this.solrService = solrService;
         this.types = types;
     }
 
@@ -47,7 +48,7 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
                 results.put(type, zero);
             }
         } else {
-            results = this.collectionManager.searchCount(this.types, this.query);
+            results = this.solrService.searchCount(this.types, this.query);
         }
         try {
             xmlConsumer.startDocument();

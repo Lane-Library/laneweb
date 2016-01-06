@@ -10,21 +10,21 @@ import java.util.Map;
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerator implements ParametersAware {
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private String type;
 
-    public EresourcesSearchGenerator(final CollectionManager collectionManager,
+    public EresourcesSearchGenerator(final SolrService solrService,
             final SAXStrategy<PagingSearchResultList> saxStrategy) {
         super(saxStrategy);
-        this.collectionManager = collectionManager;
+        this.solrService = solrService;
     }
 
     @Override
@@ -48,9 +48,9 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
     protected List<SearchResult> getSearchResults(final String query) {
         Collection<Eresource> eresources = null;
         if (this.type == null) {
-            eresources = this.collectionManager.search(query);
+            eresources = this.solrService.search(query);
         } else {
-            eresources = this.collectionManager.searchType(this.type, query);
+            eresources = this.solrService.searchType(this.type, query);
         }
         List<SearchResult> results = new LinkedList<SearchResult>();
         for (Eresource eresource : eresources) {

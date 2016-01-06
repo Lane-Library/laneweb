@@ -21,6 +21,7 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class AbstractEresourcesGeneratorTest {
 
@@ -28,14 +29,14 @@ public class AbstractEresourcesGeneratorTest {
 
         private List<Eresource> eresourceList;
 
-        public TestAbstractEresourcesGenerator(final CollectionManager collectionManager,
+        public TestAbstractEresourcesGenerator(final SolrService solrService,
                 final SAXStrategy<PagingEresourceList> saxStrategy, final List<Eresource> eresourceList) {
-            super("type", collectionManager, saxStrategy);
+            super("type", solrService, saxStrategy);
             this.eresourceList = eresourceList;
         }
 
         @Override
-        protected List<Eresource> getEresourceList(final CollectionManager collectionManager) {
+        protected List<Eresource> getEresourceList(final SolrService solrService) {
             return this.eresourceList;
         }
 
@@ -45,7 +46,7 @@ public class AbstractEresourcesGeneratorTest {
         }
     }
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private Eresource eresource;
 
@@ -60,12 +61,12 @@ public class AbstractEresourcesGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.collectionManager = createMock(CollectionManager.class);
+        this.solrService = createMock(SolrService.class);
         this.eresource = createMock(Eresource.class);
         this.eresourceList = Collections.singletonList(this.eresource);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.generator = new TestAbstractEresourcesGenerator(this.collectionManager, this.saxStrategy,
+        this.generator = new TestAbstractEresourcesGenerator(this.solrService, this.saxStrategy,
                 this.eresourceList);
     }
 
@@ -74,9 +75,9 @@ public class AbstractEresourcesGeneratorTest {
         expect(this.eresource.getTitle()).andReturn("title").times(2);
         this.generator.setModel(Collections.emptyMap());
         this.saxStrategy.toSAX(isA(PagingEresourceList.class), eq(this.xmlConsumer));
-        replay(this.collectionManager, this.eresource, this.saxStrategy, this.xmlConsumer);
+        replay(this.solrService, this.eresource, this.saxStrategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.collectionManager, this.eresource, this.saxStrategy, this.xmlConsumer);
+        verify(this.solrService, this.eresource, this.saxStrategy, this.xmlConsumer);
     }
 
     @Test

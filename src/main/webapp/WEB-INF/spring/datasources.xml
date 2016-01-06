@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:solr="http://www.springframework.org/schema/data/solr"
-      xmlns:context="http://www.springframework.org/schema/context"
-      xsi:schemaLocation="http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-    
-    <solr:solr-server id="laneSearchSolrServer" url="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
-
-    <solr:repositories base-package="edu.stanford.irt.laneweb.solr" multicore-support="true" solr-server-ref="laneSearchSolrServer"/>
-
-    <context:component-scan base-package="edu.stanford.irt.laneweb.solr" />
-
-    <bean id="laneSearchSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
-        <constructor-arg index="0" ref="laneSearchSolrServer"/>
-    </bean>
+      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
     <bean name="javax.sql.DataSource/eresources"
         class="org.springframework.jndi.JndiObjectFactoryBean">

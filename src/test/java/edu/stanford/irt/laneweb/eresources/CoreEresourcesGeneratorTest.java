@@ -13,10 +13,11 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class CoreEresourcesGeneratorTest {
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
     private CoreEresourcesGenerator generator;
 
@@ -25,23 +26,23 @@ public class CoreEresourcesGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.collectionManager = createMock(CollectionManager.class);
+        this.solrService = createMock(SolrService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new CoreEresourcesGenerator("type", this.collectionManager, this.saxStrategy);
+        this.generator = new CoreEresourcesGenerator("type", this.solrService, this.saxStrategy);
     }
 
     @Test
     public void testGetEresourceList() {
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.collectionManager.getCore("type")).andReturn(null);
-        replay(this.collectionManager);
-        this.generator.getEresourceList(this.collectionManager);
-        verify(this.collectionManager);
+        expect(this.solrService.getCore("type")).andReturn(null);
+        replay(this.solrService);
+        this.generator.getEresourceList(this.solrService);
+        verify(this.solrService);
     }
 
     @Test
     public void testGetEresourceListNullType() {
-        assertEquals(0, this.generator.getEresourceList(this.collectionManager).size());
+        assertEquals(0, this.generator.getEresourceList(this.solrService).size());
     }
 
     @Test

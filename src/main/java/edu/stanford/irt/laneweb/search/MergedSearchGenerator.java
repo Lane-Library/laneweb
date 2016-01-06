@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.solr.SolrService;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 
 /**
@@ -14,12 +14,12 @@ import edu.stanford.irt.search.impl.MetaSearchManager;
  */
 public class MergedSearchGenerator extends ContentSearchGenerator {
 
-    private CollectionManager collectionManager;
+    private SolrService solrService;
 
-    public MergedSearchGenerator(final MetaSearchManager metaSearchManager, final CollectionManager collectionManager,
+    public MergedSearchGenerator(final MetaSearchManager metaSearchManager, final SolrService solrService,
             final SAXStrategy<PagingSearchResultList> saxStrategy, final ContentResultConversionStrategy scoreStrategy) {
         super(metaSearchManager, saxStrategy, scoreStrategy);
-        this.collectionManager = collectionManager;
+        this.solrService = solrService;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
         } else {
             searchResults = super.getSearchResults(query);
             List<SearchResult> eresourceResults = new LinkedList<SearchResult>();
-            for (Eresource eresource : this.collectionManager.search(query)) {
+            for (Eresource eresource : this.solrService.search(query)) {
                 eresourceResults.add(new EresourceSearchResult(eresource));
             }
             searchResults.addAll(eresourceResults);
