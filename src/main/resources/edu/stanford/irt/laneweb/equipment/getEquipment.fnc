@@ -7,6 +7,7 @@ DECLARE
         AND B.NORMAL_HEADING = 'SUBSET CIRCBIB'
         AND A.INDEX_CODE = '655H'
         AND B.INDEX_CODE = '655H'
+        AND A.BIB_ID <> 296277
         AND A.BIB_ID = B.BIB_ID;
   bibid NUMBER(38,0); 
   bibblob CLOB; 
