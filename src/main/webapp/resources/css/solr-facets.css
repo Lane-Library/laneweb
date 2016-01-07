@@ -14,6 +14,14 @@
     clear: right;
 }
 
+.solrFacets li a  {
+    display: block;
+}
+
+.solrFacets .enabled a, .solrFacets .enabled a span {
+    color: #fff;
+}
+
 .solrFacets .enabled, .facetBrowse .enabled {
     padding: 1px 5px;
     background-color: #333;
@@ -81,6 +89,7 @@
 .facetCount {
     float: right;
     padding-right: 5px;
+    color: black;
 }
 
 .solrFacets .fa-check-square, .solrFacets .fa-check-circle, .facetBrowse .fa-check-square {

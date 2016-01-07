@@ -45,10 +45,10 @@
         </xsl:variable>
 		<xsl:choose>
 		    <xsl:when test="enabled = 'true'">
-		         <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-check-square fa-lg"></i></a> <span class="facetLabel"><xsl:value-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></li>
+		         <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-check-square fa-lg"></i> <span class="facetLabel"><xsl:value-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
 		    </xsl:when>
 		    <xsl:otherwise>
-		         <li><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i></a> <a href="{$facet-search-base-path}{$furl}"><span class="facetLabel"><xsl:value-of select="$label"/></span></a> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></li>
+		         <li><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i><span class="facetLabel"><xsl:value-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
 		    </xsl:otherwise>
 		</xsl:choose>
     </xsl:template>
