@@ -22,6 +22,7 @@
     <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr/facet-browse.html?',$pageless-query-string)"/>
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="4"/>
+    <xsl:variable name="current-year" select="number(format-dateTime(current-dateTime(),'[Y,4]'))"/>
     
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
@@ -33,8 +34,8 @@
                 <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'laneblog'">Lane Blog</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and value = '[2010 TO *]'">Last 5 Years</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and value = '[2005 TO *]'">Last 10 Years</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and value = concat('[',$current-year - 5,' TO *]')">Last 5 Years</xsl:when>
+                <xsl:when test="../../string[. = 'year'] and value = concat('[',$current-year - 10,' TO *]')">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>
                 <xsl:otherwise><xsl:value-of select="value"/></xsl:otherwise>
             </xsl:choose>
