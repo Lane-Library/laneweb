@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-01-11" version="3.2.4" description="3.2.4 bug fix release">
+            <action date="2016-01-06" dev="ryanmax" issue="114559" type="fix">
+                year search facet shows incorrect labels for last 5 and 10 years
+            </action>
+            <action date="2016-01-06" dev="ceyates" issue="114524" type="remove">
+                remove eresource jdbc code
+            </action>
+            <action date="2016-01-06" dev="ceyates" issue="113970" type="update">
+                exclude the ipads from the equipment page
+            </action>
+            <action date="2016-01-04" dev="ceyates" issue="113927" type="add">
+                add a link to 'Blog' to the main nav on Lane website
+            </action>
+            <action date="2016-01-05" dev="ceyates" issue="112951" type="update">
+                Modify browse pages to match the display of search results page
+            </action>
+        </release>
         <release date="2016-01-04" version="3.2.3" description="3.2.3 bug fix release">
             <action date="2015-12-15" dev="ryanmax" issue="113859" type="update">
                 use Solr instead of PubMed for QueryMap suggestions
