@@ -61,7 +61,7 @@
 	            <xsl:when test="$search-mode">
 		            <li class="solrFacet facetHeader">
 						<xsl:copy-of select="$label"/>
-						<xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[fieldName = 'publicationType' or count > 0]) > $values-per-facet">
+						<xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[count > 0]) > $values-per-facet">
 						          <span class="seeAll"><a rel="lightbox disableBackground" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
 						</xsl:if>
 		            </li>
