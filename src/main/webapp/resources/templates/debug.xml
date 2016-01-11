@@ -96,7 +96,7 @@
                         <fieldset id="searchFields">
                             <div id="selectAndInput">
                                 <select name="source" id="searchSource">
-                                    <option value="all-all" title="Enter Subject, Title, Author, PMID, ISSN, DOI">Lane Search</option>
+                                    <option value="all-all" title="Enter Subject, Title, Author, PMID, ISSN, DOI, Call Number">Lane Search</option>
                                     <option value="clinical-all" title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed">Clinical/PICO</option>
                                     <option value="peds-all" title="Pediatric evidence: UpToDate, PubMed">Pediatrics</option>
                                     <option value="bioresearch-all" title="60 Bioresearch Resources">Bioresearch</option>
