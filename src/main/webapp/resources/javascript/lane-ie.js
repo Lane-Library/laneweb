@@ -17,6 +17,11 @@
                 node.setStyles({"filter": "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)","width":"90px","top":"8px","left":"7px"});
             }
         }
+        if (!Date.now) {
+            Date.now = function() {
+                return new Date().valueOf();
+            }
+        }
     }
 
 })();
