@@ -19,6 +19,10 @@
             <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match pattern="search.xml" type="wildcard">
+            <map:generate type="er-search"/>
+        <map:serialize type="xml"/>
+        </map:match>
         <map:match pattern="count.xml" type="wildcard">
             <map:generate type="eresources-count"/>
             <map:serialize type="xml"/>
