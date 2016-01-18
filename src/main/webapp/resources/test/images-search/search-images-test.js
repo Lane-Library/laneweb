@@ -2,7 +2,7 @@ Y.applyConfig({fetchCSS:true});
 Y.use('console','test', function(Y) {
 
     var mobileAdTestCase = new Y.Test.Case({
-        name: 'mobile-ad Test Case'
+        name: 'lane-search-images Test Case'
     });
 
 
@@ -13,7 +13,7 @@ Y.use('console','test', function(Y) {
 
 
     Y.Test.Runner.add(mobileAdTestCase);
-    Y.Test.Runner.masterSuite.name = "mobile-ad-test.js";
+    Y.Test.Runner.masterSuite.name = "lane-search-images-test.js";
     Y.Test.Runner.run();
 
 });
