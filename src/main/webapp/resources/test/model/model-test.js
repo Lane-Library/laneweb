@@ -1,6 +1,3 @@
-/**
- * @author ceyates
- */
 Y.applyConfig({fetchCSS:true});
 Y.use('console','test', function(Y) {
 

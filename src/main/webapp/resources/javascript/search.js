@@ -45,7 +45,7 @@
                 var limit = "";
                 if (source.match(/^(all|articles|catalog)/)) {
                     limit = "er-mesh";
-                } else if (source.match(/^bioresearch/)) {
+                } else if (source.match(/^(bioresearch|images)/)) {
                     limit = "mesh";
                 } else if (source.match(/^bassett/)) {
                     limit = "bassett";

@@ -1,7 +1,6 @@
 (function() {
     var model = Y.lane.Model,
         doc = Y.one("doc"),
-        ie = Y.UA.ie,
         query = model.get(model.URL_ENCODED_QUERY),
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
@@ -43,14 +42,11 @@
                     success:function(id, o) {
                         facetsContainer.append(o.responseText);
                         // fade in facets container
-                        // text blurry in IE 8 so skip animation
-                        if (!ie || ie > 8) {
-                            new Y.Anim({
-                                node: facetsContainer,
-                                to:{opacity:1},
-                                duration: 0.5
-                            }).run();
-                        }
+                        new Y.Anim({
+                            node: facetsContainer,
+                            to:{opacity:1},
+                            duration: 0.5
+                        }).run();
                         processEnabledFacets(facetsContainer);
                         Y.lane.fire("lane:new-content");
                     }
