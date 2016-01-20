@@ -85,7 +85,15 @@ ORGANIZER:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:
 				<xsl:if test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor">
 					<xsl:text>
 ORGANIZER;CN=</xsl:text><xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
-					<xsl:text>:MAILTO:</xsl:text><xsl:value-of select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text()"/>
+					<xsl:text>:MAILTO:</xsl:text>
+					<xsl:choose>
+						<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text() != ''">
+							<xsl:value-of select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text()"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:text>LaneAskUs@stanford.edu</xsl:text>
+						</xsl:otherwise>
+					</xsl:choose>
 				</xsl:if>
 				<xsl:text>
 LOCATION:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:venue/lc:venue_name/text(), ',' , '\\,' )" />
