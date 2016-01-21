@@ -12,11 +12,11 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     //create the lane object
     Y.lane = {
 
-        activate: function(node, clazz) {
+        activate: function(node) {
             node.classList.add("active");
         },
 
-        deactivate: function(node, clazz) {
+        deactivate: function(node) {
             node.classList.remove("active");
         },
 
@@ -31,7 +31,7 @@ YUI({fetchCSS:false}).use("*", function(Y) {
         if (!document.body.dataset) {
             Y.lane.getData = function(node, name) {
                 return node.getAttribute("data-" + name);
-            }
+            };
         };
 
         // rewrite lane.activate and lane.deactivate to use className
@@ -41,7 +41,7 @@ YUI({fetchCSS:false}).use("*", function(Y) {
             }
             Y.lane.deactivate = function(node) {
                 node.className = node.className.replace(/ active/, "");
-            }
+            };
         };
     };
 

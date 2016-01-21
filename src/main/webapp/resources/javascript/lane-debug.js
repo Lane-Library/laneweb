@@ -46,11 +46,11 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     //create the lane object
     Y.lane = {
 
-        activate: function(node, clazz) {
+        activate: function(node) {
             node.classList.add("active");
         },
 
-        deactivate: function(node, clazz) {
+        deactivate: function(node) {
             node.classList.remove("active");
         },
 
@@ -65,17 +65,17 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         if (!document.body.dataset) {
             Y.lane.getData = function(node, name) {
                 return node.getAttribute("data-" + name);
-            }
+            };
         };
 
         // rewrite lane.activate and lane.deactivate to use className
         if (!document.body.classList) {
             Y.lane.activate = function(node) {
                 node.className += " active";
-            }
+            };
             Y.lane.deactivate = function(node) {
                 node.className = node.className.replace(/ active/, "");
-            }
+            };
         };
     };
 
