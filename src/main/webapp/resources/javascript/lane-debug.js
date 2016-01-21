@@ -63,17 +63,17 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
 
         // rewrite lane.getData to use getAttribute()
         if (!document.body.dataset) {
-            lane.getData = function(node, name) {
+            Y.lane.getData = function(node, name) {
                 return node.getAttribute("data-" + name);
             }
         };
 
         // rewrite lane.activate and lane.deactivate to use className
         if (!document.body.classList) {
-            lane.activate = function(node) {
+            Y.lane.activate = function(node) {
                 node.className += " active";
             }
-            lane.deactivate = function(node) {
+            Y.lane.deactivate = function(node) {
                 node.className = node.className.replace(/ active/, "");
             }
         };
