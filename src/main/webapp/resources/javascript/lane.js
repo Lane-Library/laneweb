@@ -9,10 +9,23 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     //keep a global reference of this YUI object
     window.Y = Y;
 
-    //create the lane namespace
-    var lane = Y.namespace("lane");
+    //create the lane object
+    Y.lane = {
 
-    Y.augment(lane, Y.EventTarget, null, null, {
+        activate: function(node, clazz) {
+            node.classList.add("active");
+        },
+
+        deactivate: function(node, clazz) {
+            node.classList.remove("active");
+        },
+
+        getData: function(node, name) {
+            return node.dataset[name];
+        }
+    };
+
+    Y.augment(Y.lane, Y.EventTarget, null, null, {
         prefix : "lane",
         emitFacade : true,
         broadcast : 1

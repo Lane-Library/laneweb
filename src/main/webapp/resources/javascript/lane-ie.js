@@ -1,6 +1,9 @@
 (function() {
-    var node, ie = Y.UA.ie;
+    var node,
+        ie = Y.UA.ie,
+        lane = Y.lane;
     if (ie) {
+
         //toggle bookmarklet instructions for IE on favorites page
         node = Y.one("#bookmarkletNotIE");
         if (node) {
@@ -10,16 +13,20 @@
         if (node) {
             node.setStyle("display", "block");
         }
-        if (ie < 9) {
-            //this rotates the feedback link text
-            node = Y.one(".feedback-link span");
-            if (node) {
-                node.setStyles({"filter": "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)","width":"90px","top":"8px","left":"7px"});
+
+        // rewrite lane.getData to use getAttribute()
+        if (!document.body.dataset) {
+            lane.getData = function(node, name) {
+                return node.getAttribute("data-" + name);
             }
-        }
-        if (!Date.now) {
-            Date.now = function() {
-                return new Date().valueOf();
+        };
+
+        if (!document.body.classList) {
+            lane.activate = function(node) {
+                node.className += " active";
+            }
+            lane.deactivate = function(node) {
+                node.className = node.className.replace(/ active/, "");
             }
         }
     }

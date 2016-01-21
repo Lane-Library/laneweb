@@ -43,21 +43,34 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     //keep a global reference of this YUI object
     window.Y = Y;
 
-    //create the lane namespace
-    var lane = Y.namespace("lane");
+    //create the lane object
+    Y.lane = {
 
-    Y.augment(lane, Y.EventTarget, null, null, {
+        activate: function(node, clazz) {
+            node.classList.add("active");
+        },
+
+        deactivate: function(node, clazz) {
+            node.classList.remove("active");
+        },
+
+        getData: function(node, name) {
+            return node.dataset[name];
+        }
+    };
+
+    Y.augment(Y.lane, Y.EventTarget, null, null, {
         prefix : "lane",
         emitFacade : true,
         broadcast : 1
     });
 
     var i, laneJavascript = [
+        "lane-ie.js",
         "location.js",
         "golfclub-headings.js",
         "model.js",
         "link-plugin.js",
-        "lane-ie.js",
         "lane-mobile-ad.js",
         "lane-persistent-login.js",
         "search-indicator.js",
