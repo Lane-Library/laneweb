@@ -71,7 +71,7 @@
 		history.on("bassettRemove", function() {
 			loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
 		});
-	};
+	},
 
 	registerLinksContainer = function(container) {
 		if (container) {
@@ -84,7 +84,7 @@
 				}
 			}
 		}
-	};
+	},
 
 	// For the bassett menu
 
@@ -100,7 +100,7 @@
 				subRegion.item(i).setStyle('display', 'block');
 			}
 		}
-	}
+	},
 
 	hideSubRegions = function(region) {
 		if (prevRegion && prevRegion.one('.see-all')) {
@@ -111,7 +111,7 @@
 			}
 		}
 		prevRegion = region;
-	}
+	},
 
 	
 	surlineSubRegion = function(event) {
@@ -121,7 +121,7 @@
 		i = li.one('i');
 		i.removeClass('fa-circle-o');
 		i.addClass('fa-check-circle');
-	}
+	},
 
 	resetSubRegion = function(subRegion) {
 		if (prevSubRegion && prevSubRegion.one('i')) {
@@ -131,7 +131,7 @@
 			iElement.removeClass('fa-check-circle');
 		}
 		prevSubRegion = subRegion;
-	}
+	},
 
  
 	
