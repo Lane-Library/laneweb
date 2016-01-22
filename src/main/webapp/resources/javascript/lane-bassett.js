@@ -7,7 +7,7 @@
 	basePath = model.get(model.BASE_PATH)|| "", 
 	diagramDisplay = false,
 	accordion, history,  
-	subRegionToShow = 4, prevRegion, prevSubRegion, 
+	subRegionToShow = 4, prevRegion, prevSubRegion, i,
 	
 	formatAjaxUrl = function(href) {
 		var url;
