@@ -89,7 +89,7 @@
 	// For the bassett menu
 
 	expandSubRegion = function(event) {
-		var subRegion, region = event.currentTarget.ancestor('ul'),
+		var i, subRegion, region = event.currentTarget.ancestor('ul'),
 		display = region.all('li').item(subRegionToShow+1).getStyle('display');
 		hideSubRegions(region);
 		resetSubRegion();
