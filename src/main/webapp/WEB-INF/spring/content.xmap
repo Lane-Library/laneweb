@@ -6,7 +6,6 @@
         <map:match pattern="biomed-resources/**" type="wildcard">
             <map:match pattern="biomed-resources/(ej|eb|cc|db|video|images|statistics|software).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
-                <map:transform type="joost" src="resources/xsl/eresources-index-browse.stx"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
                 <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
