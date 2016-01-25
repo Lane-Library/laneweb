@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-01-25" version="3.2.5" description="3.2.5 bug fix release">
+            <action date="2016-01-19" dev="ceyates" issue="114993" type="fix">
+                image search suggestions only show diseases/conditions
+            </action>
+            <action date="2016-01-12" dev="ceyates" issue="114746" type="add">
+                History Center Analytics
+            </action>
+        </release>
         <release date="2016-01-11" version="3.2.4" description="3.2.4 bug fix release">
             <action date="2016-01-11" dev="ryanmax" issue="114594" type="fix">
                 Feedback-suggestion: add "Call number" to the LaneSearch box
