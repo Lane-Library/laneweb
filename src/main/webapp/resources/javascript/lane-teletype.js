@@ -26,7 +26,7 @@
             teletyperForm.on("submit",function(event){
                 event.halt();
                 try {
-                    Y.lane.Search.submitSearch();
+                    Y.lane.search.submit();
                 } catch (error) {
                     alert(error);
                 }

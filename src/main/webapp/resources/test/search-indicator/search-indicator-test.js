@@ -1,6 +1,7 @@
 "use strict";
 
 var searchIndicatorTestCase = new Y.Test.Case({
+
     name: "Lane Search Indicator Test Case",
 
     indicator : Y.lane.searchIndicator,

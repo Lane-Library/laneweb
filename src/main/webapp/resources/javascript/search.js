@@ -23,7 +23,7 @@
             this.addTarget(Lane);
 
             this._form = form;
-            form.on("submit", this.submitSearch, this);
+            form.on("submit", this.submit, this);
             this.publish("submit",{defaultFn : this._doSubmit});
 
             //create the SearchSelectWidget and set up the Select model
@@ -53,7 +53,7 @@
                 this.setLimit(limit);
             };
             this._suggest.setLimitForSource(this._select.getSelected());
-            this._suggest.on("select", this.submitSearch, this);
+            this._suggest.on("select", this.submit, this);
 
             //set up search reset
             this._searchReset = Y.one(".searchReset");
@@ -164,19 +164,19 @@
 
         /**
          * Accessor for the Select object's selected value.
-         * @method getSearchSource
+         * @method getSource
          * @returns {String} the Select object's selected value
          */
-        getSearchSource : function() {
+        getSource : function() {
             return this._select.getSelected();
         },
 
         /**
          * Accessor for the search input's text.
-         * @method getSearchTerms
+         * @method getQuery
          * @returns {String} the search input's text.
          */
-        getSearchTerms : function() {
+        getQuery : function() {
             return this._input.getValue();
         },
 
@@ -200,9 +200,9 @@
 
         /**
          * Submit the form by firing a submit event.
-         * @method submitSearch
+         * @method submit
          */
-        submitSearch : function(event) {
+        submit : function(event) {
             if (event) {
                 event.preventDefault();
             }
@@ -217,6 +217,6 @@
     });
 
     // create an instance and make it globally accessible
-    Lane.Search = new Search(Y.one("#search"));
+    Lane.search = new Search(Y.one("#search"));
 
 })();

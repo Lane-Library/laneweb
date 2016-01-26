@@ -151,7 +151,7 @@
                 SearchFacets.setActiveFacet(e.newVal);
             });
             history.on("facetRemove",function() {
-                SearchFacets.setActiveFacet(Lane.Search.getSearchSource());
+                SearchFacets.setActiveFacet(Lane.search.getSource());
             });
         }
         return history;

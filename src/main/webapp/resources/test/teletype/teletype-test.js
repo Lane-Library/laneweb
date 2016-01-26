@@ -1,6 +1,6 @@
 "use strict";
 
-Y.lane.Search = {};
+Y.lane.search = {};
 
 var teletypeTestCase = new Y.Test.Case({
     name: 'Lane Teletype Test Case',
@@ -22,7 +22,7 @@ var teletypeTestCase = new Y.Test.Case({
         this.clinicalP.set("value","");
         this.picoTeletypeInput.set("value","");
         this.submitted = false;
-        Y.lane.Search.submitSearch = this.submit;
+        Y.lane.search.submit = this.submit;
     },
 
     testTeletypeSearchTerms: function() {
@@ -72,7 +72,7 @@ var teletypeTestCase = new Y.Test.Case({
         window.alert = function(string) {
             message = string;
         };
-        Y.lane.Search.submitSearch = function() {
+        Y.lane.search.submit = function() {
             throw("error");
         };
         Y.one("form").simulate("submit");

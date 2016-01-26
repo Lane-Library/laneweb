@@ -375,7 +375,7 @@
             var action = "";
             //determine whether or not to include search source value.
             if (event.input.get("id") === "searchTerms") {
-                action = Lane.Search.getSearchSource();
+                action = Lane.search.getSource();
             }
             Tracker.fire("trackableEvent", {
                 //keep category same as previous event.type:

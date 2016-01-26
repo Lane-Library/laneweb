@@ -3,7 +3,7 @@
 var searchTestCase = new Y.Test.Case({
 
     name: 'Lane Search Test Case',
-    search: Y.lane.Search,
+    search: Y.lane.search,
 
     searchTermsInput: Y.one('#searchTerms'),
     searchIndicator: Y.one('.search-indicator'),
@@ -22,7 +22,7 @@ var searchTestCase = new Y.Test.Case({
     },
     testSubmitSearchNoQuery: function() {
         var location = Y.lane.Location.get("href");
-        this.search.submitSearch();
+        this.search.submit();
         Y.Assert.areEqual(location, Y.lane.Location.get("href"));
     },
     testSourceChange: function() {
@@ -44,7 +44,7 @@ var searchTestCase = new Y.Test.Case({
         Y.Assert.areEqual(value, this.searchSource.get('value'));
     },
     testGetSearchTerms: function() {
-        Y.Assert.areEqual('', this.search.getSearchTerms());
+        Y.Assert.areEqual('', this.search.getQuery());
     },
     testSetSearchTerms: function() {
         this.search.setSearchTerms('foo');
@@ -60,7 +60,7 @@ var searchTestCase = new Y.Test.Case({
             submitted = true;
             event.preventDefault();
         });
-        this.search.submitSearch();
+        this.search.submit();
         Y.Assert.isTrue(submitted);
     },
     testBubbleOnSubmit : function() {
@@ -69,7 +69,7 @@ var searchTestCase = new Y.Test.Case({
             submitted = true;
             event.preventDefault();
         });
-        this.search.submitSearch();
+        this.search.submit();
         Y.Assert.isTrue(submitted);
     },
     testSearchTipLinkChange : function() {
@@ -89,9 +89,7 @@ var searchTestCase = new Y.Test.Case({
     testResetClickClearsInput : function() {
         Y.one("#searchTerms").set("value","foo");
         Y.one(".searchReset").simulate("click");
-        this.wait(function() {
-            Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
-        },1000);
+        Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
     },
     testResetClickClearsFacetsAndSortParams : function() {
         Y.one("#searchFields").append('<input type="hidden" name="facets" value="foo">');
@@ -100,10 +98,8 @@ var searchTestCase = new Y.Test.Case({
         Y.one("#searchTerms").set("value","foo");
         Y.Assert.areEqual(3, Y.all("#searchFields input[type=hidden]").size());
         Y.one(".searchReset").simulate("click");
-        this.wait(function() {
-            Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
-            Y.Assert.areEqual(1, Y.all("#searchFields input[type=hidden]").size());
-        },1000);
+        Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
+        Y.Assert.areEqual(1, Y.all("#searchFields input[type=hidden]").size());
     },
     testResetVisbleOnInputText : function() {
         Y.one("#searchTerms").set("value","foo");
