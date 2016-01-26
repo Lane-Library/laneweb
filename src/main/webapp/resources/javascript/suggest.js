@@ -124,7 +124,7 @@
     if (hybridInput) {
         laneSuggest = new Y.lane.Suggest(hybridInput);
         laneSuggest.on("select",function(){
-            Y.lane.SearchIndicator.show();
+            Y.lane.searchIndicator.show();
             hybridInput.ancestor("form").submit();
         });
     }

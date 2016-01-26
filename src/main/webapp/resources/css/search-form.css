@@ -105,13 +105,13 @@
     color:white
 }
 
-.searchIndicator {
+.search-indicator {
     visibility : hidden;
     position: absolute;
     right: 250px;
     bottom: 30px;
 }
-.searchIndicator.show {
+.search-indicator.active {
     visibility:visible
 }
 #searchTips {

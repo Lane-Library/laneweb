@@ -1,30 +1,31 @@
 (function() {
 
+    "use strict";
+
+    var indicator = document.querySelector(".search-indicator");
+
     /**
      * Provides static show and hide methods to (surprise!) show
      * and hide the search indicator animated gif.
      */
-    var SearchIndicator = Y.namespace("lane.SearchIndicator"),
-        node = Y.one(".searchIndicator");
+    Y.lane.searchIndicator = {
 
-    /**
-     * Adds class "on" to .searchIndicator
-     * @method show
-     * @static
-     */
-    SearchIndicator.show = function() {
-        if (node) {
-            node.addClass("show");
-        }
-    };
-    /**
-     * Removes class "on" from .searchIndicator
-     * @method hide
-     * @static
-     */
-    SearchIndicator.hide = function() {
-        if (node) {
-            node.removeClass("show");
+        /**
+         * activates the .search-indicator, deactivates the .search-button
+         * @method show
+         * @static
+         */
+        show: function() {
+            Y.lane.activate(indicator);
+        },
+
+        /**
+         * deactivates the .search-indicator, activate the .search-button
+         * @method hide
+         * @static
+         */
+        hide: function() {
+            Y.lane.deactivate(indicator);
         }
     };
 

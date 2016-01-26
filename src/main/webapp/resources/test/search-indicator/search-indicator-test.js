@@ -3,14 +3,14 @@
 var searchIndicatorTestCase = new Y.Test.Case({
     name: "Lane Search Indicator Test Case",
 
-    indicator : Y.lane.SearchIndicator,
+    indicator : Y.lane.searchIndicator,
 
     testShowAndHide: function() {
-        var node = Y.one(".searchIndicator");
+        var node = Y.one(".search-indicator");
         this.indicator.show();
-        Y.Assert.isTrue(node.hasClass("show"));
+        Y.Assert.isTrue(node.hasClass("active"));
         this.indicator.hide();
-        Y.Assert.isFalse(node.hasClass("show"));
+        Y.Assert.isFalse(node.hasClass("active"));
     }
 });
 

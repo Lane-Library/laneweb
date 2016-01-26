@@ -1,7 +1,7 @@
 (function() {
     var elt = Y.one('#searchFacets'),
         Lane = Y.lane,
-        searchIndicator = Lane.SearchIndicator,
+        searchIndicator = Lane.searchIndicator,
         Model = Lane.Model,
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),

@@ -4,7 +4,7 @@
     Model = Y.lane.Model,
     basePath = Model.get(Model.BASE_PATH) || "",
 
-    SearchIndicator = Lane.SearchIndicator,
+    searchIndicator = Lane.searchIndicator,
 
     /**
      * A Class that encapsulates the search form behavior.
@@ -75,7 +75,7 @@
         _doSubmit : function() {
             this._searchReset.removeClass("active");
             if (this._input.getValue()) {
-                SearchIndicator.show();
+                searchIndicator.show();
                 this._form.submit();
             }
         },

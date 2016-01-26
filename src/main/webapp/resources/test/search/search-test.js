@@ -6,7 +6,7 @@ var searchTestCase = new Y.Test.Case({
     search: Y.lane.Search,
 
     searchTermsInput: Y.one('#searchTerms'),
-    searchIndicator: Y.one('.searchIndicator'),
+    searchIndicator: Y.one('.search-indicator'),
     searchSource: Y.one('#searchSource'),
     handle : null,
 
