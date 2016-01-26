@@ -100,7 +100,7 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testQLinkClick: function() {
-        var link = Y.one("#qlinks a");
+        var link = Y.one(".qlinks a");
         link.simulate("click");
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:quickLinkClick", this.event.category);

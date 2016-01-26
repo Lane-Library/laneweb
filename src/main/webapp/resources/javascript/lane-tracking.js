@@ -33,7 +33,7 @@
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
                             {selector:".lane-nav", category:"lane:laneNav-top"},
-                            {selector:"#qlinks", category:"lane:quickLinkClick"},
+                            {selector:".qlinks", category:"lane:quickLinkClick"},
                             {selector:".banner-content", category:"lane:bannerClick"},
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
@@ -406,5 +406,5 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, #qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();
