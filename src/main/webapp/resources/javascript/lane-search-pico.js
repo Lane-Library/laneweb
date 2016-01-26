@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var Lane = Y.lane,
         form = Y.one('#search'),
         searchTerms,

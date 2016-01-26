@@ -2,6 +2,9 @@
 // typing in .teletypeInput sends keystrokes to #search #searchTerms
 // if .teletypeInput has name p, i, c, o, keystrokes go to respective pico input
 (function() {
+
+    "use strict";
+
     var i, targetInput,
     teletypeInputs = Y.all('.teletypeInput'),
     teletype = function(inputElm,targetElm){

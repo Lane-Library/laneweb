@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var elt = Y.one('#searchFacets'),
         Lane = Y.lane,
         searchIndicator = Lane.searchIndicator,
