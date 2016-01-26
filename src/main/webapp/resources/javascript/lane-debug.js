@@ -43,56 +43,22 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
     //keep a global reference of this YUI object
     window.Y = Y;
 
-    //create the lane object
-    Y.lane = {
+    //create the lane namespace
+    var lane = Y.namespace("lane");
 
-        activate: function(node) {
-            node.classList.add("active");
-        },
-
-        deactivate: function(node) {
-            node.classList.remove("active");
-        },
-
-        getData: function(node, name) {
-            return node.dataset[name];
-        }
-    };
-
-    if (Y.UA.ie) {
-
-        // rewrite lane.getData to use getAttribute()
-        if (!document.body.dataset) {
-            Y.lane.getData = function(node, name) {
-                return node.getAttribute("data-" + name);
-            };
-        };
-
-        // rewrite lane.activate and lane.deactivate to use className
-        if (!document.body.classList) {
-            Y.lane.activate = function(node) {
-                if (node.className.indexOf(" active") === -1) {
-                    node.className += " active";
-                }
-            };
-            Y.lane.deactivate = function(node) {
-                node.className = node.className.replace(/ active/, "");
-            };
-        };
-    };
-
-    Y.augment(Y.lane, Y.EventTarget, null, null, {
+    Y.augment(lane, Y.EventTarget, null, null, {
         prefix : "lane",
         emitFacade : true,
         broadcast : 1
     });
 
     var i, laneJavascript = [
-        "lane-ie.js",
+        "util.js",
         "location.js",
         "golfclub-headings.js",
         "model.js",
         "link-plugin.js",
+        "lane-ie.js",
         "lane-mobile-ad.js",
         "lane-persistent-login.js",
         "search-indicator.js",
