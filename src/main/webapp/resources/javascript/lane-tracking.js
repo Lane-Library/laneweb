@@ -76,7 +76,7 @@
                 return trackingData;
             },
             isProxyHost = function(node) {
-                return node.get('host').match('^(?:login\\.)?laneproxy.stanford.edu$');
+                return node.get('hostname').match('^(?:login\\.)?laneproxy.stanford.edu$');
             },
             isProxyOrCMELogin = function(link) {
                 var search = link.get("search"),

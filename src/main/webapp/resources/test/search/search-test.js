@@ -98,7 +98,11 @@ var searchTestCase = new Y.Test.Case({
         Y.one("#searchTerms").set("value","foo");
         Y.Assert.areEqual(3, Y.all("#searchFields input[type=hidden]").size());
         Y.one(".searchReset").simulate("click");
-        Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
+        if (Y.one("#searchTerms")._node.placeholder) {
+            Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
+        } else {
+            Y.Assert.areEqual("title1", Y.one("#searchTerms").get("value"));
+        }
         Y.Assert.areEqual(1, Y.all("#searchFields input[type=hidden]").size());
     },
     testResetVisbleOnInputText : function() {
