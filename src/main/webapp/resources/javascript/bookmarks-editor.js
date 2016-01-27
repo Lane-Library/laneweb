@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var BookmarksEditor,
         Lane = Y.lane,
         BookmarkEditor = Lane.BookmarkEditor;

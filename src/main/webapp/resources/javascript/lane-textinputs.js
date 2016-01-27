@@ -4,6 +4,8 @@
  */
 (function() {
 
+    "use strict"
+
     Y.lane.TextInput = function(input, hintText) {
         var hintStyle = "inputHint",
             _hintText = hintText || '',

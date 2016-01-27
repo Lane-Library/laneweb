@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var Model = Y.lane.Model,
         BASE_PATH = Model.get(Model.BASE_PATH),
         source = Model.get(Model.URL_ENCODED_SOURCE),

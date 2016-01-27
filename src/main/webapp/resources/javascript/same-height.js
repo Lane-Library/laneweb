@@ -3,6 +3,8 @@
     /* javascript to set the height of a group of boxes to the that of the tallest one.
      * The boxes are grouped using the same-height-n class where n is a number 0-9 */
 
+    "use strict";
+
     var maxHeight,
         // get all the nodes with same-height-n
         nodes = Y.all("*[class^='same-height-'], *[class*=' same-height-']"),

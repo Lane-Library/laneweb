@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     // create the backToTop node
     var backToTop = Y.Node.create("<a class=\"back-to-top\" title=\"scroll back to top\"><i class=\"fa fa-chevron-up\"></i></a>"),
 

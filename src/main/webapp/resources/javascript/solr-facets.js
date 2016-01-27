@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var model = Y.lane.Model,
         doc = Y.one("doc"),
         query = model.get(model.URL_ENCODED_QUERY),

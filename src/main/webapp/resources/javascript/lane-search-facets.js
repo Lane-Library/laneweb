@@ -140,6 +140,9 @@
 })();
 
 (function() {
+
+    "use strict";
+
     var history,
         searchFacets = Y.one('#searchFacets'),
         Lane = Y.lane,

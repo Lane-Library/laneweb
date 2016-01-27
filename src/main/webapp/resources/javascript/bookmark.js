@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     /**
      * A class for representing a bookmark with attributes for the label and url.
      *

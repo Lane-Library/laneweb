@@ -6,6 +6,8 @@
 
 YUI({fetchCSS:false}).use("*", function(Y) {
 
+    "use strict";
+
     //keep a global reference of this YUI object
     window.Y = Y;
 

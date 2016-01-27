@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var Lane = Y.lane,
     Model = Y.lane.Model,
     basePath = Model.get(Model.BASE_PATH) || "",

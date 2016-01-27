@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var LightboxBg = Y.Base.create("lightboxbg", Y.Widget, [], {});
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {

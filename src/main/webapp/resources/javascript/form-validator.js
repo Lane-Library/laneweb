@@ -1,6 +1,7 @@
 
 (function() {
-    //All that is left of lane-forms.js after switching to the gallery version of formvalidator
+
+    "use strict";
 
     var forms = Y.all('.formvalidator'), i;
     for (i = 0; i < forms.size(); i++) {

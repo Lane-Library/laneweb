@@ -1,6 +1,8 @@
 (function() {
 
-	var bassettContent = Y.one('#bassettContent'), 
+    "use strict";
+
+    var bassettContent = Y.one('#bassettContent'), 
 	 Lane = Y.lane,
 	model = Lane.Model,
 	

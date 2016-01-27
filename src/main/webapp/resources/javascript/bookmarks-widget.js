@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var BookmarksWidget,
         Lane = Y.lane,
         Bookmark = Lane.Bookmark,

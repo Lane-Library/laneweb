@@ -1,5 +1,8 @@
 //advertise existence of mobile interface to iPad, iPhone, iPod and Android clients
 (function() {
+
+    "use strict";
+
     var advert, link,
         model = Y.lane.Model,
         basePath = model.get(model.BASE_PATH) || "",

@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var selections = Y.all('#selections > li'),
         select = Y.one('#selections-select'),
         i,

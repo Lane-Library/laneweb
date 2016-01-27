@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var node;
     if (Y.UA.ie) {
 

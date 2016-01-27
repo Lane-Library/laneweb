@@ -1,5 +1,8 @@
 //should this stop polling when all facets are complete? currently polls until search app done or timeout
 (function() {
+
+    "use strict";
+
     var model = Y.lane.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",

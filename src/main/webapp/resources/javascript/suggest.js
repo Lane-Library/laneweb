@@ -121,6 +121,8 @@
 
 (function() {
 
+    "use strict";
+
     // hybrid search page inputs
     var laneSuggest, hybridInput = Y.one('.laneSuggest');
     if (hybridInput) {

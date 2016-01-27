@@ -5,6 +5,8 @@
  */
 (function() {
 
+    "use strict";
+
     var lane = Y.lane;
 
     lane.activate = function(node) {
