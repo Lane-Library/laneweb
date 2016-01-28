@@ -34,15 +34,16 @@
             this.publish("sourceChange", {defaultFn : this._sourceChange});
 
             //create the input and set up event handler
-            this._input = new Lane.TextInput(form.one("#searchTerms"), this._select.getSelectedTitle());
-            this._input.getInput().on("valueChange", this._handleValueChange, this);
+            this._input = form.one("#searchTerms");
+            this._textInput = new Lane.TextInput(this._input, this._select.getSelectedTitle());
+            this._input.on("valueChange", this._handleValueChange, this);
 
             //set up the search tips link
             this._tips = Y.one('#searchTips');
             this._setSearchTipsUrl();
 
             //set up the auto-complete suggestions
-            this._suggest = new Lane.Suggest(this._input.getInput());
+            this._suggest = new Lane.Suggest(this._input);
             this._suggest.setLimitForSource = function(source) {
                 var limit = "";
                 if (source.match(/^(all|articles|catalog)/)) {
@@ -59,7 +60,7 @@
 
             //set up search reset
             this._searchReset = Y.one(".searchReset");
-            if (this._input.getValue()) {
+            if (this._textInput.getValue()) {
                 this._searchReset.addClass("active");
             }
             this._searchReset.on("click", this._handleResetClick, this);
@@ -76,7 +77,7 @@
          */
         _doSubmit : function() {
             this._searchReset.removeClass("active");
-            if (this._input.getValue()) {
+            if (this._textInput.getValue()) {
                 searchIndicator.show();
                 this._form.submit();
             }
@@ -98,7 +99,7 @@
          * @private
          */
         _handleValueChange : function() {
-            if (this._input.getValue()) {
+            if (this._textInput.getValue()) {
                 this._searchReset.addClass("active");
             } else {
                 this._searchReset.removeClass("active");
@@ -111,14 +112,14 @@
          * @private
          */
         _reset : function() {
-            this._input.reset();
+            this._textInput.reset();
             this._searchReset.removeClass("active");
             this._form.all('input[type=hidden]').each(function(){
                 if(this.get("name").match(/sort|facets/)){
                     this.remove();
                 }
             });
-            this._input.getInput().focus();
+            this._input.focus();
         },
 
         /**
@@ -159,7 +160,7 @@
          * @private
          */
         _sourceChange : function(event) {
-            this._input.setHintText(this._select.getSelectedTitle());
+            this._textInput.setHintText(this._select.getSelectedTitle());
             this._setSearchTipsUrl();
             this._suggest.setLimitForSource(event.newVal);
         },
@@ -179,7 +180,7 @@
          * @returns {String} the search input's text.
          */
         getQuery : function() {
-            return this._input.getValue();
+            return this._textInput.getValue();
         },
 
         /**
@@ -188,7 +189,7 @@
          * @returns {boolean} whether or not the search input has value
          */
         searchTermsPresent : function() {
-            return this._input.getValue() ? true : false;
+            return this._textInput.getValue() ? true : false;
         },
 
         /**
@@ -197,7 +198,7 @@
          * @param terms {String} the text to put in the search input
          */
         setSearchTerms : function(terms) {
-            this._input.setValue(terms);
+            this._textInput.setValue(terms);
         },
 
         /**

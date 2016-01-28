@@ -49,9 +49,9 @@
          */
         syncUI : function() {
             var srcNode = this.get("srcNode");
-            this._labelInput = new Lane.TextInput(srcNode.one("input[name='label']"));
-            this._urlInput = new Lane.TextInput(srcNode.one("input[name='url']"));
-            this._urlInput.getInput().after("focus", this._setDefaultUrlInputText, this);
+            this._labelInput = new Lane.TextInput(srcNode.one("input[name='label']"), null, true);
+            this._urlInput = new Lane.TextInput(srcNode.one("input[name='url']"), null, true);
+            srcNode.one("input[name='url']").after("focus", this._setDefaultUrlInputText, this);
             this._truncateLabel();
         },
 
