@@ -1,144 +1,138 @@
-/**
- * @author ceyates
- */
-//Y.applyConfig({fetchCSS:true});
-Y.use('node-event-simulate','console','test', function(T) {
+"use strict";
 
+var searchTestCase = new Y.Test.Case({
 
-    var searchTestCase = new T.Test.Case({
+    name: 'Lane Search Test Case',
+    search: Y.lane.search,
 
-        name: 'Lane Search Test Case',
-        search: Y.lane.Search,
+    searchTermsInput: Y.one('#searchTerms'),
+    searchIndicator: Y.one('.search-indicator'),
+    searchSource: Y.one('#searchSource'),
+    handle : null,
 
-        searchTermsInput: T.one('#searchTerms'),
-        searchIndicator: T.one('.searchIndicator'),
-        searchSource: T.one('#searchSource'),
-        handle : null,
-
-        setUp: function() {
-            this.searchTermsInput.set('value', '');
-            this.searchTermsInput.set('title', '');
-            this.searchSource.set('selectedIndex',0);
-            if (this.handle) {
-                this.handle.detach();
-                this.handle = null;
-            }
-            this.searchSource.simulate("change");
-        },
-        testSubmitSearchNoQuery: function() {
-            var location = Y.lane.Location.get("href");
-            this.search.submitSearch();
-            T.Assert.areEqual(location, Y.lane.Location.get("href"));
-        },
-        testSourceChange: function() {
-            var value = null;
-            this.handle = this.search.on('sourceChange', function(event) {
-                value = event.newVal;
-            });
-            this.searchSource.set('selectedIndex',1);
-            this.searchSource.simulate("change");
-            T.Assert.areEqual(this.searchSource.get('value'), value);
-        },
-        testSourceChangeBubble: function() {
-            var value = null;
-            this.handle = Y.lane.on('search:sourceChange', function(event) {
-                value = event.newVal;
-            });
-            this.searchSource.set('selectedIndex',1);
-            this.searchSource.simulate("change");
-            T.Assert.areEqual(value, this.searchSource.get('value'));
-        },
-        testGetSearchTerms: function() {
-            T.Assert.areEqual('', this.search.getSearchTerms());
-        },
-        testSetSearchTerms: function() {
-            this.search.setSearchTerms('foo');
-            T.Assert.areEqual('foo', this.searchTermsInput.get('value'));
-        },
-        testSuggestSelect: function() {
-            T.publish("lane:suggestSelect",{broadcast:2});
-            T.fire("lane:suggestSelect");
-        },
-        testOnSubmit : function() {
-            var submitted = false;
-            this.handle = this.search.on("submit", function(event) {
-                submitted = true;
-                event.preventDefault();
-            });
-            this.search.submitSearch();
-            T.Assert.isTrue(submitted);
-        },
-        testBubbleOnSubmit : function() {
-            var submitted = false;
-            this.handle = Y.lane.on("search:submit", function(event) {
-                submitted = true;
-                event.preventDefault();
-            });
-            this.search.submitSearch();
-            T.Assert.isTrue(submitted);
-        },
-        testSearchTipLinkChange : function() {
-            T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("lanesearch.html") > 0 );
-            this.searchSource.set('selectedIndex',3);
-            this.searchSource.simulate("change");
-            T.Assert.isTrue(T.one("#searchTips").get("href").indexOf("bassettsearch.html") > 0 );
-        },
-        testSearchTermsHintChange : function() {
-            var placeholderCapable = 'placeholder' in Y.Node.getDOMNode(Y.one("#searchTerms"));
-            var att = (placeholderCapable) ? "placeholder" : "value";
-            T.Assert.areEqual("title1", Y.one("#searchTerms").get(att));
-            this.searchSource.set('selectedIndex',1);
-            this.searchSource.simulate("change");
-            T.Assert.areEqual("title2", Y.one("#searchTerms").get(att));
-        },
-        testResetClickClearsInput : function() {
-            T.one("#searchTerms").set("value","foo");
-            T.one(".searchReset").simulate("click");
-            this.wait(function() {
-                T.Assert.areEqual("", T.one("#searchTerms").get("value"));
-            },1000);
-        },
-        testResetClickClearsFacetsAndSortParams : function() {
-            T.one("#searchFields").append('<input type="hidden" name="facets" value="foo">');
-            T.one("#searchFields").append('<input type="hidden" name="sort" value="foo">');
-            T.one("#searchFields").append('<input type="hidden" name="other" value="foo">');
-            T.one("#searchTerms").set("value","foo");
-            T.Assert.areEqual(3, T.all("#searchFields input[type=hidden]").size());
-            T.one(".searchReset").simulate("click");
-            this.wait(function() {
-                T.Assert.areEqual("", T.one("#searchTerms").get("value"));
-                T.Assert.areEqual(1, T.all("#searchFields input[type=hidden]").size());
-            },1000);
-        },
-        testResetVisbleOnInputText : function() {
-            Y.one("#searchTerms").set("value","foo");
-            //TODO: fix this, the valueChange event doesn't happen before checking the changed style
-//            T.Assert.areEqual("block", Y.one(".searchReset").getStyle("display"));
-        },
-        testReset : function() {
-            var reset = false;
-            this.handle = this.search.on("reset", function(event) {
-                reset = true;
-            });
-            T.one(".searchReset").simulate("click");
-            T.Assert.isTrue(reset);
-        },
-        testBubbleReset : function() {
-            var reset = false;
-            this.handle = Y.lane.on("search:reset", function(event) {
-                reset = true;
-            });
-            T.one(".searchReset").simulate("click");
-            T.Assert.isTrue(reset);
+    setUp: function() {
+        this.searchTermsInput.set('value', '');
+        this.searchTermsInput.set('title', '');
+        this.searchSource.set('selectedIndex',0);
+        if (this.handle) {
+            this.handle.detach();
+            this.handle = null;
         }
-    });
-
-    T.one('body').addClass('yui3-skin-sam');
-    new T.Console({
-        newestOnTop: false
-    }).render('#log');
-
-    T.Test.Runner.add(searchTestCase);
-    T.Test.Runner.masterSuite.name = "search-test.js";
-    T.Test.Runner.run();
+        this.searchSource.simulate("change");
+    },
+    testSubmitSearchNoQuery: function() {
+        var location = Y.lane.Location.get("href");
+        this.search.submit();
+        Y.Assert.areEqual(location, Y.lane.Location.get("href"));
+    },
+    testSourceChange: function() {
+        var value = null;
+        this.handle = this.search.on('sourceChange', function(event) {
+            value = event.newVal;
+        });
+        this.searchSource.set('selectedIndex',1);
+        this.searchSource.simulate("change");
+        Y.Assert.areEqual(this.searchSource.get('value'), value);
+    },
+    testSourceChangeBubble: function() {
+        var value = null;
+        this.handle = Y.lane.on('search:sourceChange', function(event) {
+            value = event.newVal;
+        });
+        this.searchSource.set('selectedIndex',1);
+        this.searchSource.simulate("change");
+        Y.Assert.areEqual(value, this.searchSource.get('value'));
+    },
+    testGetSearchTerms: function() {
+        Y.Assert.areEqual('', this.search.getQuery());
+    },
+    testSetSearchTerms: function() {
+        this.search.setSearchTerms('foo');
+        Y.Assert.areEqual('foo', this.searchTermsInput.get('value'));
+    },
+    testSuggestSelect: function() {
+        Y.publish("lane:suggestSelect",{broadcast:2});
+        Y.fire("lane:suggestSelect");
+    },
+    testOnSubmit : function() {
+        var submitted = false;
+        this.handle = this.search.on("submit", function(event) {
+            submitted = true;
+            event.preventDefault();
+        });
+        this.search.submit();
+        Y.Assert.isTrue(submitted);
+    },
+    testBubbleOnSubmit : function() {
+        var submitted = false;
+        this.handle = Y.lane.on("search:submit", function(event) {
+            submitted = true;
+            event.preventDefault();
+        });
+        this.search.submit();
+        Y.Assert.isTrue(submitted);
+    },
+    testSearchTipLinkChange : function() {
+        Y.Assert.isTrue(Y.one("#searchTips").get("href").indexOf("lanesearch.html") > 0 );
+        this.searchSource.set('selectedIndex',3);
+        this.searchSource.simulate("change");
+        Y.Assert.isTrue(Y.one("#searchTips").get("href").indexOf("bassettsearch.html") > 0 );
+    },
+    testSearchTermsHintChange : function() {
+        var placeholderCapable = 'placeholder' in Y.Node.getDOMNode(Y.one("#searchTerms"));
+        var att = (placeholderCapable) ? "placeholder" : "value";
+        Y.Assert.areEqual("title1", Y.one("#searchTerms").get(att));
+        this.searchSource.set('selectedIndex',1);
+        this.searchSource.simulate("change");
+        Y.Assert.areEqual("title2", Y.one("#searchTerms").get(att));
+    },
+    testResetClickClearsInput : function() {
+        Y.one("#searchTerms").set("value","foo");
+        Y.one(".searchReset").simulate("click");
+        Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
+    },
+    testResetClickClearsFacetsAndSortParams : function() {
+        Y.one("#searchFields").append('<input type="hidden" name="facets" value="foo">');
+        Y.one("#searchFields").append('<input type="hidden" name="sort" value="foo">');
+        Y.one("#searchFields").append('<input type="hidden" name="other" value="foo">');
+        Y.one("#searchTerms").set("value","foo");
+        Y.Assert.areEqual(3, Y.all("#searchFields input[type=hidden]").size());
+        Y.one(".searchReset").simulate("click");
+        if (Y.one("#searchTerms")._node.placeholder) {
+            Y.Assert.areEqual("", Y.one("#searchTerms").get("value"));
+        } else {
+            Y.Assert.areEqual("title1", Y.one("#searchTerms").get("value"));
+        }
+        Y.Assert.areEqual(1, Y.all("#searchFields input[type=hidden]").size());
+    },
+    testResetVisbleOnInputText : function() {
+        Y.one("#searchTerms").set("value","foo");
+        //TODO: fix this, the valueChange event doesn't happen before checking the changed style
+//      Y.Assert.areEqual("block", Y.one(".searchReset").getStyle("display"));
+    },
+    testReset : function() {
+        var reset = false;
+        this.handle = this.search.on("reset", function(event) {
+            reset = true;
+        });
+        Y.one(".searchReset").simulate("click");
+        Y.Assert.isTrue(reset);
+    },
+    testBubbleReset : function() {
+        var reset = false;
+        this.handle = Y.lane.on("search:reset", function(event) {
+            reset = true;
+        });
+        Y.one(".searchReset").simulate("click");
+        Y.Assert.isTrue(reset);
+    }
 });
+
+Y.one('body').addClass('yui3-skin-sam');
+new Y.Console({
+    newestOnTop: false
+}).render('#log');
+
+Y.Test.Runner.add(searchTestCase);
+Y.Test.Runner.masterSuite.name = "search-test.js";
+Y.Test.Runner.run();

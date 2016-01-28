@@ -4,99 +4,113 @@
  */
 (function() {
 
-    Y.lane.TextInput = function(input, hintText) {
-        var hintStyle = "inputHint",
-            _hintText = hintText || '',
-            placeholderCapable = 'placeholder' in Y.Node.getDOMNode(input),
-            _destroy =function() {
-                input.set('placeholder','');
-            },
-            _getValue = function() {
-                return input.get('value');
-            },
-            _reset = function(input) {
-                input.set('value', '');
-            },
-            _setHintText = function(hintText) {
-                input.set('placeholder',hintText);
-            },
-            _setValue = function(value) {
-                input.set('value', value);
-            };
-            input.set('placeholder',_hintText);
-            if (!placeholderCapable) {
-                _destroy =function() {
-                    input.detach(focusHandle);
-                    input.detach(blurHandle);
-                    input.removeClass('inputHint');
-                    if (input.get('value') === _hintText) {
-                        input.set('value', '');
-                    }
-                };
-                _getValue = function() {
-                    var value = input.get('value');
-                    return value === _hintText ? '' : value;
-                };
-                _reset = function(input) {
-                    input.addClass(hintStyle);
-                    input.set('value', _hintText);
-                };
-                _setHintText = function(hintText) {
-                    var oldHintText = _hintText;
-                    _hintText = hintText;
-                    if (input.get('value') === '' || input.get('value') === oldHintText) {
-                        _reset(input);
-                    }
-                };
-                _setValue = function(value) {
-                    input.set('value', value);
-                    input.removeClass("inputHint");
-                };
-                focusHandle = input.on('focus', function(event) {
-                    if (event.target.get('value') === _hintText) {
-                        event.target.set('value', '');
-                        event.target.removeClass(hintStyle);
-                    }
-                });
-                blurHandle = input.on('blur', function(event) {
-                    if (event.target.get('value') === '') {
-                        _reset(event.target);
-                    }
-                });
-                if (input.get('value') === '' || input.get('value') === _hintText) {
-                    _reset(input);
-                }
+    "use strict";
+
+    var EMPTY = "",
+        HINT_CLASS = "inputHint",
+        PLACEHOLDER = "placeholder",
+        VALUE = "value",
+
+        hasNoPlaceholder = document.createElement("input").placeholder === undefined,
+
+        PlaceholderTextInput = function(input, hintText) {
+            this._input = input;
+            input.set(PLACEHOLDER, hintText);
+        },
+
+        NoPlaceholderTextInput = function(input, hintText) {
+            this._input = input;
+            this._hintText = hintText || EMPTY;
+            this._focusHandle = this._input.on('focus', this._focusHandler, this);
+            this._blurHandle = this._input.on('blur', this._blurHandler, this);
+            if (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === this._hintText) {
+                this.reset();
             }
-        return {
-            destroy: function() {
-                _destroy();
-            },
-            getValue: function() {
-                return _getValue();
-            },
-            getInput: function() {
-                return input;
-            },
-            //added reset function so BookmarkEditor can reset
-            reset : function() {
-                _reset(input);
-            },
-            setHintText: function(hintText) {
-                _setHintText(hintText);
-            },
-            setValue: function(value) {
-                _setValue(value);
+        },
+
+        TextInput = function(input, hintText, noPlaceholder) {
+            if (hasNoPlaceholder || noPlaceholder) {
+                return new NoPlaceholderTextInput(input, hintText);
+            } else {
+                return new PlaceholderTextInput(input, hintText);
             }
         };
+
+    NoPlaceholderTextInput.prototype = {
+
+        _focusHandler: function(event) {
+            if (event.target.get(VALUE) === this._hintText) {
+                event.target.set(VALUE, EMPTY);
+                event.target.removeClass(HINT_CLASS);
+            }
+        },
+
+        _blurHandler: function(event) {
+            if (event.target.get(VALUE) === EMPTY) {
+                this.reset();
+            }
+        },
+
+        destroy: function() {
+            this._input.detach(this._focusHandle);
+            this._input.detach(this._blurHandle);
+            this._input.removeClass(HINT_CLASS);
+            if (this._input.get(VALUE) === this._hintText) {
+                this._input.set(VALUE, EMPTY);
+            }
+        },
+
+        getValue: function() {
+            var value = this._input.get(VALUE);
+            return value === this._hintText ? EMPTY : value;
+        },
+
+        reset: function() {
+            this._input.addClass(HINT_CLASS);
+            this._input.set(VALUE, this._hintText);
+        },
+
+        setHintText: function(hintText) {
+            var oldHintText = this._hintText;
+            this._hintText = hintText;
+            if (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === oldHintText) {
+                this.reset();
+            }
+        },
+
+        setValue: function(value) {
+            this._input.set(VALUE, value);
+            this._input.removeClass(HINT_CLASS);
+        }
     };
 
-    var i, title, textInputs = new Y.all('input[type="text"]');
+    PlaceholderTextInput.prototype = {
 
-    for (i = 0; i < textInputs.size(); i++) {
-        title = textInputs.item(i).get('title');
-        if (title) {
-            (new Y.lane.TextInput(textInputs.item(i), title));
+        destroy: function() {
+            this._input.set(PLACEHOLDER,EMPTY);
+        },
+
+        getValue: function() {
+            return this._input.get(VALUE);
+        },
+
+        reset: function() {
+            this._input.set(VALUE, EMPTY);
+        },
+
+        setHintText: function(hintText) {
+            this._input.set(PLACEHOLDER, hintText);
+        },
+
+        setValue: function(value) {
+            this._input.set(VALUE, value);
         }
-    }
+    };
+
+    Y.all('input[type=text][title]').each(function(input) {
+        (new TextInput(input, input.get("title")));
+    });
+
+    Y.lane.TextInput = TextInput;
 
 })();

@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var BookmarkLink,
         Lane = Y.lane,
         Model = Lane.Model;

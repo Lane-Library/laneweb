@@ -1,5 +1,6 @@
-YUI().applyConfig({fetchCSS:true});
-YUI().use('console','test',"event-simulate", function(Y) {
+"use strict";
+
+YUI().use("*", function(Y) {
     
     var pushed;
     

@@ -1,6 +1,8 @@
 
 (function() {
 
+    "use strict";
+
     var Lane = Y.lane,
         model = Lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
@@ -119,12 +121,14 @@
 
 (function() {
 
+    "use strict";
+
     // hybrid search page inputs
     var laneSuggest, hybridInput = Y.one('.laneSuggest');
     if (hybridInput) {
         laneSuggest = new Y.lane.Suggest(hybridInput);
         laneSuggest.on("select",function(){
-            Y.lane.SearchIndicator.show();
+            Y.lane.searchIndicator.show();
             hybridInput.ancestor("form").submit();
         });
     }

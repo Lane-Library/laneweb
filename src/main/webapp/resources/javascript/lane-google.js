@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var gaPageTracker,
         lane = Y.lane,
         location = lane.Location,

@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var Model = Y.lane.Model,
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),

@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var Location = function() {
         this._stateProxy = window.location;
     };

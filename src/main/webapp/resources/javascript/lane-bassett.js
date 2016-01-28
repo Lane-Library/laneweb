@@ -1,13 +1,15 @@
 (function() {
 
-	var bassettContent = Y.one('#bassettContent'), 
+    "use strict";
+
+    var bassettContent = Y.one('#bassettContent'), 
 	 Lane = Y.lane,
 	model = Lane.Model,
 	
 	basePath = model.get(model.BASE_PATH)|| "", 
 	diagramDisplay = false,
 	accordion, history,  
-	subRegionToShow = 4, prevRegion, prevSubRegion, 
+	subRegionToShow = 4, prevRegion, prevSubRegion, i,
 	
 	formatAjaxUrl = function(href) {
 		var url;
@@ -71,7 +73,7 @@
 		history.on("bassettRemove", function() {
 			loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
 		});
-	};
+	},
 
 	registerLinksContainer = function(container) {
 		if (container) {
@@ -84,12 +86,12 @@
 				}
 			}
 		}
-	};
+	},
 
 	// For the bassett menu
 
 	expandSubRegion = function(event) {
-		var subRegion, region = event.currentTarget.ancestor('ul'),
+		var i, subRegion, region = event.currentTarget.ancestor('ul'),
 		display = region.all('li').item(subRegionToShow+1).getStyle('display');
 		hideSubRegions(region);
 		resetSubRegion();
@@ -100,7 +102,7 @@
 				subRegion.item(i).setStyle('display', 'block');
 			}
 		}
-	}
+	},
 
 	hideSubRegions = function(region) {
 		if (prevRegion && prevRegion.one('.see-all')) {
@@ -111,7 +113,7 @@
 			}
 		}
 		prevRegion = region;
-	}
+	},
 
 	
 	surlineSubRegion = function(event) {
@@ -121,7 +123,7 @@
 		i = li.one('i');
 		i.removeClass('fa-circle-o');
 		i.addClass('fa-check-circle');
-	}
+	},
 
 	resetSubRegion = function(subRegion) {
 		if (prevSubRegion && prevSubRegion.one('i')) {
@@ -131,7 +133,7 @@
 			iElement.removeClass('fa-check-circle');
 		}
 		prevSubRegion = subRegion;
-	}
+	},
 
  
 	

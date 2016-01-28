@@ -1,8 +1,11 @@
 (function() {
+
+    "use strict";
+
     var model = Y.lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
-        searchIndicator = Y.lane.SearchIndicator,
+        searchIndicator = Y.lane.searchIndicator,
     metasearch = function() {
         var resourceIds = [],
             searchRequests = [],

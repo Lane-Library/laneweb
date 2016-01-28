@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var initializeDescriptionToggles = function() {
         var triggers = Y.all(".descriptionTrigger");
         triggers.each(function(node) {

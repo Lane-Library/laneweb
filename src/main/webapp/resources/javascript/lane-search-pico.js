@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var Lane = Y.lane,
         form = Y.one('#search'),
         searchTerms,
@@ -92,7 +95,7 @@
                     picoTextInputs[0].setValue(picoTextInputs[0].getValue());
                 }
                 else{
-                    picoTextInputs[0].setValue(Lane.Search.getSearchTerms());
+                    picoTextInputs[0].setValue(Lane.search.getQuery());
                 }
             } else {
                 picoOff();

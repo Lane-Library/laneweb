@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var Select = function(values, titles, index) {
         this._values = values ? values : [];
         this._titles = titles ? titles : [];

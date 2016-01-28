@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var model = Y.lane.Model, redirectUrl,
     persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
     basePath = model.get(model.BASE_PATH)|| "",

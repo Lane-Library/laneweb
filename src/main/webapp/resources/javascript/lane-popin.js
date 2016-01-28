@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     // custom popin event
     var onPopinHandler;
     Y.publish('lane:popin',{broadcast:1});

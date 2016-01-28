@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var i, expandies = Y.all(".expandy");
 
     //only do this if there are expandies

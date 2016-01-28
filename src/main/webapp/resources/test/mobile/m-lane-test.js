@@ -1,5 +1,6 @@
-YUI().applyConfig({fetchCSS:true});
-YUI().use('console','test', function(Y) {
+"use strict";
+
+YUI().use("*", function(Y) {
 
     var laneMobileTestCase = new Y.Test.Case({
         name: "Lane Mobile TestCase",

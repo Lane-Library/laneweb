@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,

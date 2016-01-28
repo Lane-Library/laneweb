@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var lane = Y.lane,
         model = lane.Model,
         lightbox = lane.Lightbox,

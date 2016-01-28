@@ -1,30 +1,26 @@
-/**
- * @author ceyates
- */
-Y.applyConfig({fetchCSS:true});
-Y.use("node-event-simulate", "console", "test", function(Y){
+"use strict";
 
-    var searchIndicatorTestCase = new Y.Test.Case({
-        name: "Lane Search Indicator Test Case",
+var searchIndicatorTestCase = new Y.Test.Case({
 
-        indicator : Y.lane.SearchIndicator,
+    name: "Lane Search Indicator Test Case",
 
-        testShowAndHide: function() {
-            var node = Y.one(".searchIndicator");
-            this.indicator.show();
-            Y.Assert.isTrue(node.hasClass("show"));
-            this.indicator.hide();
-            Y.Assert.isFalse(node.hasClass("show"));
-        }
-    });
+    indicator : Y.lane.searchIndicator,
 
-    Y.one("body").addClass("yui3-skin-sam");
-    new Y.Console({
-        newestOnTop: false
-    }).render("#log");
-
-
-    Y.Test.Runner.add(searchIndicatorTestCase);
-    Y.Test.Runner.masterSuite.name = "search-indicator-test.js";
-    Y.Test.Runner.run();
+    testShowAndHide: function() {
+        var node = Y.one(".search-indicator");
+        this.indicator.show();
+        Y.Assert.isTrue(node.hasClass("active"));
+        this.indicator.hide();
+        Y.Assert.isFalse(node.hasClass("active"));
+    }
 });
+
+Y.one("body").addClass("yui3-skin-sam");
+new Y.Console({
+    newestOnTop: false
+}).render("#log");
+
+
+Y.Test.Runner.add(searchIndicatorTestCase);
+Y.Test.Runner.masterSuite.name = "search-indicator-test.js";
+Y.Test.Runner.run();

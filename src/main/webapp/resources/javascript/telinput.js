@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     // a regular expression that matches everything that gets a dash
     var DASHABLE = /^(1|\d\d\d|1–\d\d\d|1–\d\d\d–\d\d\d|\d\d\d–\d\d\d)$/,
 

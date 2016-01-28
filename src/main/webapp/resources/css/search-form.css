@@ -105,13 +105,13 @@
     color:white
 }
 
-.searchIndicator {
+.search-indicator {
     visibility : hidden;
     position: absolute;
     right: 250px;
     bottom: 30px;
 }
-.searchIndicator.show {
+.search-indicator.active {
     visibility:visible
 }
 #searchTips {
@@ -127,19 +127,19 @@
 
 /* pubmed, uptodate, dynamed links inside the form: */
 
-#qlinks {
+.qlinks {
     position:absolute;
     right:0;
     bottom:7px;
 }
 
-#qlinks li {
+.qlinks li {
     padding : 0 5px;
     display: inline-block;
     border-right : 1px dotted #C1C1C1;
 }
 
-#qlinks li:last-child {
+.qlinks li:last-child {
     border-right : none;
 }
 

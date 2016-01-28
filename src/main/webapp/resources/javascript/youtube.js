@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var nodelist, iframes = [], iframe, i,
 
     /**

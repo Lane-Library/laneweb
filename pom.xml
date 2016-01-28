@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>8</version>
+        <version>9-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.2.5-SNAPSHOT</version>
+    <version>3.2.6-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -131,7 +131,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.12</version>
+            <version>3.0.13</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -456,6 +456,7 @@
                             <includes>
                                 <include>${basedir}/src/main/webapp/resources/javascript/yui-3.18.1.js</include>
                                 <include>lane-min.js</include>
+                                <include>util-min.js</include>
                                 <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>

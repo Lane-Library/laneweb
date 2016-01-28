@@ -1,3 +1,5 @@
+"use strict";
+
 Y.Get.script = function(url, config) {
 
     window._gat = {

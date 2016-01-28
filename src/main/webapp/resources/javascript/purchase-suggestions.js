@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var PurchaseSuggestions = function(config) {
         PurchaseSuggestions.superclass.constructor.apply(this, arguments);
     };

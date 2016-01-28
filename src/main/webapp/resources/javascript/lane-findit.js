@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var findItNode = Y.one('#findIt'),
         model = Y.lane.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),

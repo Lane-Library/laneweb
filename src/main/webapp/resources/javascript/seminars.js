@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var seminars = Y.all('.seminar');
     if (seminars) {
         var now = new Date(),

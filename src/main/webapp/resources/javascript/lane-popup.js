@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
 
     var popup, maybeCreatePopup, popupWindow, showWindow;

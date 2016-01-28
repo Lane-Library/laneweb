@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var DEFAULT_THANKS = "Thank you for your feedback.",
 
     Feedback = function(config) {

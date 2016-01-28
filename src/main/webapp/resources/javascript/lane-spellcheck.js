@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     var spellCheck = Y.one('#spellCheck'),
         model = Y.lane.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
