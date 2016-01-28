@@ -21,17 +21,8 @@
         NoPlaceholderTextInput = function(input, hintText) {
             this._input = input;
             this._hintText = hintText || EMPTY;
-            this._focusHandle = this._input.on('focus', function(event) {
-                if (event.target.get(VALUE) === this._hintText) {
-                    event.target.set(VALUE, EMPTY);
-                    event.target.removeClass(HINT_CLASS);
-                }
-            }, this);
-            this._blurHandle = this._input.on('blur', function(event) {
-                if (event.target.get(VALUE) === EMPTY) {
-                    this.reset();
-                }
-            }, this);
+            this._focusHandle = this._input.on('focus', this._focusHandler, this);
+            this._blurHandle = this._input.on('blur', this._blurHandler, this);
             if (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === this._hintText) {
                 this.reset();
             }
@@ -46,6 +37,19 @@
         };
 
     NoPlaceholderTextInput.prototype = {
+
+        _focusHandler: function(event) {
+            if (event.target.get(VALUE) === this._hintText) {
+                event.target.set(VALUE, EMPTY);
+                event.target.removeClass(HINT_CLASS);
+            }
+        },
+
+        _blurHandler: function(event) {
+            if (event.target.get(VALUE) === EMPTY) {
+                this.reset();
+            }
+        },
 
         destroy: function() {
             this._input.detach(this._focusHandle);
