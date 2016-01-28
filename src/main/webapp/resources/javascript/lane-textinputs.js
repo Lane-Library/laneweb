@@ -6,30 +6,33 @@
 
     "use strict";
 
-    var HINT_CLASS = "inputHint",
+    var EMPTY = "",
+        HINT_CLASS = "inputHint",
+        PLACEHOLDER = "placeholder",
+        VALUE = "value",
 
         hasNoPlaceholder = document.createElement("input").placeholder === undefined,
 
         PlaceholderTextInput = function(input, hintText) {
             this._input = input;
-            input.set('placeholder', hintText);
+            input.set(PLACEHOLDER, hintText);
         },
 
         NoPlaceholderTextInput = function(input, hintText) {
             this._input = input;
-            this._hintText = hintText || "";
+            this._hintText = hintText || EMPTY;
             this._focusHandle = this._input.on('focus', function(event) {
-                if (event.target.get('value') === this._hintText) {
-                    event.target.set('value', '');
+                if (event.target.get(VALUE) === this._hintText) {
+                    event.target.set(VALUE, EMPTY);
                     event.target.removeClass(HINT_CLASS);
                 }
             }, this);
             this._blurHandle = this._input.on('blur', function(event) {
-                if (event.target.get('value') === '') {
-                    this.reset(event.target);
+                if (event.target.get(VALUE) === EMPTY) {
+                    this.reset();
                 }
             }, this);
-            if (this._input.get('value') === '' || this._input.get('value') === this._hintText) {
+            if (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === this._hintText) {
                 this.reset();
             }
         },
@@ -48,31 +51,31 @@
             this._input.detach(this._focusHandle);
             this._input.detach(this._blurHandle);
             this._input.removeClass(HINT_CLASS);
-            if (this._input.get('value') === this._hintText) {
-                this._input.set('value', '');
+            if (this._input.get(VALUE) === this._hintText) {
+                this._input.set(VALUE, EMPTY);
             }
         },
 
         getValue: function() {
-            var value = this._input.get('value');
-            return value === this._hintText ? '' : value;
+            var value = this._input.get(VALUE);
+            return value === this._hintText ? EMPTY : value;
         },
 
         reset: function() {
             this._input.addClass(HINT_CLASS);
-            this._input.set('value', this._hintText);
+            this._input.set(VALUE, this._hintText);
         },
 
         setHintText: function(hintText) {
             var oldHintText = this._hintText;
             this._hintText = hintText;
-            if (this._input.get('value') === '' || this._input.get('value') === oldHintText) {
-                this.reset(this._input);
+            if (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === oldHintText) {
+                this.reset();
             }
         },
 
         setValue: function(value) {
-            this._input.set('value', value);
+            this._input.set(VALUE, value);
             this._input.removeClass(HINT_CLASS);
         }
     };
@@ -80,23 +83,23 @@
     PlaceholderTextInput.prototype = {
 
         destroy: function() {
-            this._input.set('placeholder','');
+            this._input.set(PLACEHOLDER,EMPTY);
         },
 
         getValue: function() {
-            return this._input.get('value');
+            return this._input.get(VALUE);
         },
 
         reset: function() {
-            this._input.set("value", "");
+            this._input.set(VALUE, EMPTY);
         },
 
         setHintText: function(hintText) {
-            this._input.set('placeholder', hintText);
+            this._input.set(PLACEHOLDER, hintText);
         },
 
         setValue: function(value) {
-            this._input.set('value', value);
+            this._input.set(VALUE, value);
         }
     };
 
