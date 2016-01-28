@@ -13,6 +13,13 @@
         <xsl:text>T040000Z</xsl:text>
     </xsl:variable>
     
+<xsl:variable name="currentYear">
+		<xsl:value-of select="year-from-date(current-date())"></xsl:value-of>
+	</xsl:variable>
+	
+		<xsl:variable name="previousYear">
+		<xsl:value-of select="number($currentYear -1)"/>
+	</xsl:variable>
 
 
 	<xsl:template match="/lc:classes">
@@ -54,7 +61,10 @@ END:VCALENDAR</xsl:text>
 	
 
 	<xsl:template name="VEVENT">
-		<xsl:param name="classId" /><xsl:text>
+	<xsl:param name="classId" />
+	<xsl:param name="date"  select="./lc:event_dates/lc:start_date[1]/text()"/>
+	<xsl:if test="contains($date, $currentYear) or contains($date, $previousYear) ">
+	<xsl:text>
 BEGIN:VEVENT
 UID:LANE_CLASS_</xsl:text><xsl:value-of select="$classId"/><xsl:text>@lane.stanford.edu
 URL:http://lane.stanford.edu/classes-consult/laneclass.html?class-id=</xsl:text><xsl:value-of select="$classId"/><xsl:text>
@@ -99,6 +109,7 @@ ORGANIZER;CN=</xsl:text><xsl:apply-templates select="/lc:classes/lc:event_data/l
 LOCATION:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:venue/lc:venue_name/text(), ',' , '\\,' )" />
 		<xsl:text>
 END:VEVENT</xsl:text>
+	</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="lc:instructor">
