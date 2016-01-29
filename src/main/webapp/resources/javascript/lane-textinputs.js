@@ -73,14 +73,18 @@
         setHintText: function(hintText) {
             var oldHintText = this._hintText;
             this._hintText = hintText;
-            if (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === oldHintText) {
+            if (this._input._node !== document.activeElement && (this._input.get(VALUE) === EMPTY || this._input.get(VALUE) === oldHintText)) {
                 this.reset();
             }
         },
 
         setValue: function(value) {
-            this._input.set(VALUE, value);
-            this._input.removeClass(HINT_CLASS);
+            if (!value && this._input._node !== document.activeElement) {
+                this.reset();
+            } else {
+                this._input.set(VALUE, value);
+                this._input.removeClass(HINT_CLASS);
+            }
         }
     };
 

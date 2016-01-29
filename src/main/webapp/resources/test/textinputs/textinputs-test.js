@@ -40,17 +40,21 @@ Y.Test.Runner.add(new Y.Test.Case({
         this.textInput = new Y.lane.TextInput(this.input, "hint text", true);
         Y.Assert.isTrue(this.input.hasClass("inputHint"), "doesn't have class this.inputHint");
         //have to do this.input.after("focus") safari value is not set on return from simulate.
+        this.input.onceAfter("focus", function() {
+            Y.Assert.areEqual("", this.input.get("value"), "value = " + this.input.get("value"));
+            Y.Assert.isFalse(this.input.hasClass("inputHint"), "has class this.inputHint");
+        }, this);
         this.input.simulate("focus");
-        Y.Assert.areEqual("", this.input.get("value"), "value = " + this.input.get("value"));
-        Y.Assert.isFalse(this.input.hasClass("inputHint"), "has class this.inputHint");
     },
     testBlur: function() {
         this.textInput = new Y.lane.TextInput(this.input, "hint text", true);
         Y.Assert.isTrue(this.input.hasClass("inputHint"), "doesn't have class this.inputHint");
         //have to do this.input.after("focus") safari value is not set on return from simulate.
+        this.input.onceAfter("blur", function() {
+            Y.Assert.areEqual("hint text", this.input.get("value"));
+            Y.Assert.isTrue(this.input.hasClass("inputHint"));
+        }, this);
         this.input.simulate("blur");
-        Y.Assert.areEqual("hint text", this.input.get("value"));
-        Y.Assert.isTrue(this.input.hasClass("inputHint"));
     },
     testNoHintText: function() {
         this.textInput = new Y.lane.TextInput(this.input, null, true);
@@ -67,17 +71,21 @@ Y.Test.Runner.add(new Y.Test.Case({
     testFocusWithValue: function() {
         this.textInput = new Y.lane.TextInput(this.input, "input hint", true);
         this.textInput.setValue("value");
+        this.input.onceAfter("focus", function() {
+            Y.Assert.areEqual("value", this.input.get("value"));
+            Y.Assert.isFalse(this.input.hasClass("inputHint"));
+        }, this);
         this.input.simulate("focus");
-        Y.Assert.areEqual("value", this.input.get("value"));
-        Y.Assert.isFalse(this.input.hasClass("inputHint"));
     },
 
     testBlurWithoutValue: function() {
         this.textInput = new Y.lane.TextInput(this.input, "input hint", true);
         this.input.set("value", "");
+        this.input.onceAfter("blur", function() {
+            Y.Assert.areEqual("input hint", this.input.get("value"));
+            Y.Assert.isTrue(this.input.hasClass("inputHint"));
+        }, this);
         this.input.simulate("blur");
-        Y.Assert.areEqual("input hint", this.input.get("value"));
-        Y.Assert.isTrue(this.input.hasClass("inputHint"));
     },
 
     testDestroyWithoutValue: function() {
