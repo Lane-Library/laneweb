@@ -17,7 +17,7 @@
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
     	<map:match pattern="calendar.ics" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/data.xml"/>
+            <map:generate type="classes" src="cocoon://classes/all-data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/calendar-ics.xsl"/>
             <map:serialize type="text"/>
         </map:match>
