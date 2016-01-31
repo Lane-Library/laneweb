@@ -120,6 +120,10 @@
                 }
             });
             this._input.focus();
+            Y.lane.tracker.fire("trackableEvent", {
+                category: "lane:searchFormReset",
+                action: Y.lane.Location.get("pathname")
+            });
         },
 
         /**
@@ -163,6 +167,11 @@
             this._textInput.setHintText(this._select.getSelectedTitle());
             this._setSearchTipsUrl();
             this._suggest.setLimitForSource(event.newVal);
+            Y.lane.tracker.fire("trackableEvent", {
+                category: "lane:searchDropdownSelection",
+                action: event.newVal,
+                label: "from " + event.prevVal + " to " + event.newVal
+            });
         },
 
         /**
