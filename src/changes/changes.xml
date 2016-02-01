@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-02-01" version="3.2.6" description="3.2.6 bug fix release">
+            <action date="2016-01-31" dev="ryanmax" issue="115366" type="fix">
+                Publication Type "see all" missing under some conditions
+            </action>
+            <action date="2016-01-27" dev="ceyates" issue="115248" type="update">
+                use strict mode for local javascript
+            </action>
+            <action date="2016-01-25" dev="ryanmax" issue="115179" type="fix">
+                eresources browse pages show no content when missing arguments
+            </action>
+        </release>
         <release date="2016-01-25" version="3.2.5" description="3.2.5 bug fix release">
             <action date="2016-01-19" dev="ceyates" issue="114993" type="fix">
                 image search suggestions only show diseases/conditions
