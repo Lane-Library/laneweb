@@ -23,6 +23,9 @@
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="4"/>
     <xsl:variable name="current-year" select="number(format-dateTime(current-dateTime(),'[Y,4]'))"/>
+    <xsl:variable name="requiredPubTypes">
+        <xsl:value-of select="/linked-hash-map/entry[1]/sorted-set/comparator/requiredPublicationTypes/string"/>
+    </xsl:variable>
     
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
@@ -56,20 +59,21 @@
     <xsl:template name="field">
         <xsl:param name="id"/>
         <xsl:param name="label"/>
-        <xsl:if test="/linked-hash-map/entry/string[. = $id]">
+        <xsl:variable name="entry" select="/linked-hash-map/entry/string[. = $id]/.."/>
+        <xsl:if test="$entry">
 	        <xsl:choose>
 	            <xsl:when test="$search-mode">
 		            <li class="solrFacet facetHeader">
 						<xsl:copy-of select="$label"/>
-						<xsl:if test="count(/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[count > 0]) > $values-per-facet">
+						<xsl:if test="count($entry/sorted-set/facet[count > 0 or (fieldName = 'publicationType' and contains($requiredPubTypes,value))]) > $values-per-facet">
 						          <span class="seeAll"><a rel="lightbox disableBackground" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
 						</xsl:if>
 		            </li>
-		            <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>
+		            <xsl:apply-templates select="$entry/sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>
 	            </xsl:when>
 	            <xsl:otherwise>
                     <li class="solrFacet facetHeader"><h5><xsl:copy-of select="$label"/></h5></li>
-                    <xsl:apply-templates select="/linked-hash-map/entry/string[. = $id]/../list/facet[position() &lt;= $facets-per-browse-page]"/>
+                    <xsl:apply-templates select="$entry/list/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
                         <div class="yui3-g s-pagination no-bookmarking">
 	                        <div class="yui3-u-1-2">
@@ -82,7 +86,7 @@
 						            </xsl:otherwise>
 						        </xsl:choose>
 		                        <xsl:choose>
-		                            <xsl:when test="count(/linked-hash-map/entry/string[. = $id]/../list/facet) > $facets-per-browse-page">
+		                            <xsl:when test="count($entry/list/facet) > $facets-per-browse-page">
 		                                <a class="pagingButton next" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
 		                            </xsl:when>
 		                            <xsl:otherwise>
