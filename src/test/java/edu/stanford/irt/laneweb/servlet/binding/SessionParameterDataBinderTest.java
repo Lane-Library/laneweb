@@ -46,13 +46,14 @@ public class SessionParameterDataBinderTest {
 
     private HttpSession session;
 
+    @SuppressWarnings("serial")
     @Before
     public void setUp() throws Exception {
         this.binder = new TestSessionParameterDataBinder("key", "name");
         this.request = createMock(HttpServletRequest.class);
         this.model = new HashMap<String, Object>();
         this.session = createMock(HttpSession.class);
-        this.object = new Object();
+        this.object = new java.io.Serializable() {};
     }
 
     @Test
