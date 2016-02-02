@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.IOException;
-
 import org.apache.http.client.HttpClient;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -43,14 +41,5 @@ public class MetaSearchManagerSource {
 
     public SearchCacheManager getSearchCacheManager() {
         return this.searchCacheManager;
-    }
-
-    public void reload(final String url) throws IOException {
-        AbstractXmlApplicationContext newContext = new HttpApplicationContext(url);
-        this.manager = newContext.getBean("manager", MetaSearchManager.class);
-        this.httpClient = newContext.getBean("httpClient", HttpClient.class);
-        this.searchCacheManager = newContext.getBean("searchCacheManager", SearchCacheManager.class);
-        this.context.destroy();
-        this.context = newContext;
     }
 }

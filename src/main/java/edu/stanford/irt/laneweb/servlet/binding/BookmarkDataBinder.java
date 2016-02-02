@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class BookmarkDataBinder implements DataBinder {
                     if (bookmarks == null) {
                         bookmarks = new ArrayList<Object>();
                     }
-                    session.setAttribute(Model.BOOKMARKS, bookmarks);
+                    session.setAttribute(Model.BOOKMARKS, (Serializable) bookmarks);
                 }
             }
             model.put(Model.BOOKMARKS, bookmarks);

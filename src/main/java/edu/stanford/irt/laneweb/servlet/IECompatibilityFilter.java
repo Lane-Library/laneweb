@@ -17,7 +17,7 @@ public class IECompatibilityFilter extends AbstractLanewebFilter {
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) throws IOException, ServletException {
         String userAgent = request.getHeader("user-agent");
-        if (userAgent != null && userAgent.indexOf("MSIE") > 0) {
+        if (userAgent != null && userAgent.indexOf("MSIE") > -1) {
             response.setHeader("X-UA-Compatible", "IE=edge");
         }
         chain.doFilter(request, response);

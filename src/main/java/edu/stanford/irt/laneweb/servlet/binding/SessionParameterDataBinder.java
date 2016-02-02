@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public abstract class SessionParameterDataBinder<T> implements DataBinder {
             if (value == null) {
                 value = (T) session.getAttribute(this.modelKey);
             } else {
-                session.setAttribute(this.modelKey, value);
+                session.setAttribute(this.modelKey, (Serializable) value);
             }
         }
         if (value != null) {

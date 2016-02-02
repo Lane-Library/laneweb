@@ -1,34 +1,35 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * sends Disallow: / if not production server. NOTE: CAB group has asked to be notified of any robots.txt changes. Send
  * description of changes to irt-change@lists.stanford.edu
- *
- * @author ceyates
  */
 public class RobotsDotTextServlet extends HttpServlet {
 
+    private static final Logger LOG = LoggerFactory.getLogger(RobotsDotTextServlet.class);
+
     private static final byte[] NONPRODUCTION = "User-agent: *\nDisallow: /".getBytes(StandardCharsets.UTF_8);
 
-    private static final byte[] PRODUCTION = ("User-agent: *\nCrawl-delay: 7\n"
-        + "Disallow: /m/\n"
-        + "Disallow: /search.html\nDisallow: /secure/\n"
-        + "Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml").getBytes(StandardCharsets.UTF_8);
+    private static final byte[] PRODUCTION = ("User-agent: *\nCrawl-delay: 7\n" + "Disallow: /m/\n"
+            + "Disallow: /search.html\nDisallow: /secure/\n"
+            + "Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml")
+                    .getBytes(StandardCharsets.UTF_8);
 
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-            throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) {
         // Proxy servers add this header, may be comma separated list
         String hostHeader = req.getHeader("X-Forwarded-Host");
         if (hostHeader == null) {
@@ -36,12 +37,16 @@ public class RobotsDotTextServlet extends HttpServlet {
         } else if (hostHeader.indexOf(',') > -1) {
             hostHeader = hostHeader.substring(0, hostHeader.indexOf(','));
         }
-        ServletOutputStream outputStream = resp.getOutputStream();
-        if ("lane.stanford.edu".equals(hostHeader)) {
-            outputStream.write(PRODUCTION);
-        } else {
-            outputStream.write(NONPRODUCTION);
+        try {
+            OutputStream outputStream = resp.getOutputStream();
+            if ("lane.stanford.edu".equals(hostHeader)) {
+                outputStream.write(PRODUCTION);
+            } else {
+                outputStream.write(NONPRODUCTION);
+            }
+            outputStream.close();
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
         }
-        outputStream.close();
     }
 }

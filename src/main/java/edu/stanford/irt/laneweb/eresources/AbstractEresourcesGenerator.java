@@ -97,7 +97,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         List<Eresource> eresources = getEresourceList(this.solrService);
         String baseQuery = this.queryString;
-        if (baseQuery.indexOf("&page=") > 0) {
+        if (baseQuery.indexOf("&page=") > -1) {
             baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
         } else if (baseQuery.indexOf("page=") == 0) {
             baseQuery = "";

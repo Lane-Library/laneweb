@@ -102,13 +102,11 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     public void saveLinks(final String userid, final List<Object> links) {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
-        Connection conn = null;
+        Connection conn = getConnection();
         CallableStatement cstmt = null;
         PreparedStatement pstmt = null;
         ObjectOutputStream oop = null;
         try {
-            conn = this.dataSource.getConnection();
-            conn.setAutoCommit(false);
             pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
             pstmt.setString(1, userid);
             pstmt.execute();
@@ -124,12 +122,10 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             }
             conn.commit();
         } catch (IOException | SQLException e) {
-            if (conn != null) {
-                try {
-                    conn.rollback();
-                } catch (SQLException e1) {
-                    LOG.error(e1.getMessage(), e1);
-                }
+            try {
+                conn.rollback();
+            } catch (SQLException e1) {
+                LOG.error(e1.getMessage(), e1);
             }
             throw new LanewebException(e);
         } finally {
@@ -137,6 +133,16 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             JdbcUtils.closeStatement(cstmt);
             JdbcUtils.closeStatement(pstmt);
             JdbcUtils.closeConnection(conn);
+        }
+    }
+    
+    private Connection getConnection() {
+        try {
+            Connection conn = this.dataSource.getConnection();
+            conn.setAutoCommit(false);
+            return conn;
+        } catch (SQLException e) {
+            throw new LanewebException(e);
         }
     }
 }
