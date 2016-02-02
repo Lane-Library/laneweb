@@ -49,8 +49,8 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void createElementNS(final XMLConsumer xmlConsumer, final String namespaceURI,
-            final String localName, final String stringValue) throws SAXException {
+    public static void createElementNS(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
+            final String stringValue) throws SAXException {
         startElement(xmlConsumer, namespaceURI, localName);
         data(xmlConsumer, stringValue);
         endElement(xmlConsumer, namespaceURI, localName);
@@ -90,6 +90,13 @@ public final class XMLUtils {
         xmlConsumer.endElement(namespaceURI, localName, localName);
     }
 
+    public static void maybeCreateElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String name,
+            final Object value) throws SAXException {
+        if (value != null && !"".equals(value)) {
+            XMLUtils.createElementNS(xmlConsumer, namespaceURI, name, value.toString());
+        }
+    }
+
     /**
      * Create a startElement without Attributes Prefix must be mapped to empty String
      *
@@ -125,12 +132,5 @@ public final class XMLUtils {
     public static void startElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
             final Attributes atts) throws SAXException {
         xmlConsumer.startElement(namespaceURI, localName, localName, atts);
-    }
-
-    public static void maybeCreateElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String name, final Object value)
-            throws SAXException {
-        if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(xmlConsumer, namespaceURI, name, value.toString());
-        }
     }
 }

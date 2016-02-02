@@ -20,12 +20,12 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator implements ModelAware {
 
+    private NumberFormat nf = NumberFormat.getInstance();
+
     private String query;
 
     private SolrImageService service;
 
-    private  NumberFormat nf = NumberFormat.getInstance(); 
-    
     public SolrImageSearchTabGenerator(final SolrImageService service, final Marshaller marshaller) {
         super(marshaller);
         this.service = service;
@@ -43,10 +43,8 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator im
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         List<FacetFieldEntry> facet = page.getContent();
         for (FacetFieldEntry entry : facet) {
-            copyrights.put(entry.getValue(), nf.format(entry.getValueCount()));
+            copyrights.put(entry.getValue(), this.nf.format(entry.getValueCount()));
         }
         marshal(copyrights, xmlConsumer);
     }
-    
-    
 }

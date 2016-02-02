@@ -142,9 +142,8 @@ public class GoogleTracker {
      * Additionally, this cookie is provided with a unique ID that Google Analytics uses to ensure both the validity and
      * accessibility of the cookie as an extra security measure. The __utma cookie is a persistent cookie keeping track
      * of the number of times a visitor has been to the site pertaining to the cookie, when their first visit was, and
-     * when their last visit occurred. Values are hashed:
-     * __utma=<domainHash>.<sessionId>.<firstTime>.<lastTime>.<currentTime>.<sessionCount>. Here we give dummy values
-     * for all but domain and visitorId
+     * when their last visit occurred. Values are hashed: __utma=<domainHash>.<sessionId>.<firstTime>.<lastTime>.
+     * <currentTime>.<sessionCount>. Here we give dummy values for all but domain and visitorId
      *
      * @throws IOException
      * @throws NoSuchAlgorithmException

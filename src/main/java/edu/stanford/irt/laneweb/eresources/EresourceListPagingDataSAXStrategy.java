@@ -122,8 +122,8 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         }
         sb.append("page=all");
         startAnchor(xmlConsumer, sb.toString());
-        XMLUtils.data(xmlConsumer, new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ")
-                .toString());
+        XMLUtils.data(xmlConsumer,
+                new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ").toString());
         createElementWithClass(xmlConsumer, "i", "fa fa-arrow-right", "");
         endAnchor(xmlConsumer);
     }

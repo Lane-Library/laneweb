@@ -17,13 +17,11 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.solr.SolrService;
 
-public abstract class AbstractEresourcesGenerator extends AbstractGenerator implements CacheablePipelineComponent,
-        ParametersAware, ModelAware {
+public abstract class AbstractEresourcesGenerator extends AbstractGenerator
+        implements CacheablePipelineComponent, ParametersAware, ModelAware {
 
     /** the default cache expiration time, 20 minutes */
     private static final long DEFAULT_EXPIRES = 1000L * 60L * 20L;
-
-    private SolrService solrService;
 
     private String componentType;
 
@@ -36,6 +34,8 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator impl
     private String queryString;
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
+
+    private SolrService solrService;
 
     private Validity validity;
 

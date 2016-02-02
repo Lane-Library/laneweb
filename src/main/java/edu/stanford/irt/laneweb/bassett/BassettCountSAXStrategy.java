@@ -34,8 +34,8 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT_COUNT);
-            Page<FacetFieldEntry> regions =  facetPage.getFacetResultPage(REGION);
-            Page<FacetFieldEntry> subRegions =  facetPage.getFacetResultPage(SUB_REGION);
+            Page<FacetFieldEntry> regions = facetPage.getFacetResultPage(REGION);
+            Page<FacetFieldEntry> subRegions = facetPage.getFacetResultPage(SUB_REGION);
             for (FacetFieldEntry entry : regions) {
                 AttributesImpl attributes = new AttributesImpl();
                 attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, entry.getValue().replace("_", " "));
@@ -52,17 +52,16 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
         }
     }
 
-
-    private void handleSubRegion(final XMLConsumer xmlConsumer, final String region, final Page<FacetFieldEntry> subRegions) throws SAXException 
-    {
+    private void handleSubRegion(final XMLConsumer xmlConsumer, final String region,
+            final Page<FacetFieldEntry> subRegions) throws SAXException {
         for (FacetFieldEntry entry : subRegions) {
             String subRegion = entry.getValue();
-             if(subRegion.startsWith(region+"_"+SUB_REGION+"_")){
+            if (subRegion.startsWith(region + "_" + SUB_REGION + "_")) {
                 AttributesImpl attributes = new AttributesImpl();
-                subRegion = subRegion.substring(subRegion.indexOf(SUB_REGION)+ 11);
+                subRegion = subRegion.substring(subRegion.indexOf(SUB_REGION) + 11);
                 attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subRegion.replace("_", " "));
                 XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
-                XMLUtils.data(xmlConsumer, String.valueOf( entry.getValueCount()));
+                XMLUtils.data(xmlConsumer, String.valueOf(entry.getValueCount()));
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);
             }
         }

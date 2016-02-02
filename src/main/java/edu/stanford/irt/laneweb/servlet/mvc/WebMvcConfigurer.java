@@ -163,7 +163,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public HttpRequestHandler getStaticRequestHandler(final ServletContext servletContext,
             @Value(value = "%{edu.stanford.irt.laneweb.live-base}/") final UrlResource liveBase) {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase}));
+        handler.setLocations(
+                Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase }));
         handler.setCacheSeconds(31536000);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

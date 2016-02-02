@@ -34,8 +34,8 @@ public class EresourceListPagingData extends PagingData {
             }
             pageLabelEnd = pageLabelEnd >= size ? size - 1 : pageLabelEnd;
             numResults = (pageLabelEnd - pageLabelStart) + 1;
-            this.pagingLabels.add(new PagingLabel(list.get(pageLabelStart).getTitle(), list.get(pageLabelEnd)
-                    .getTitle(), numResults));
+            this.pagingLabels.add(new PagingLabel(list.get(pageLabelStart).getTitle(),
+                    list.get(pageLabelEnd).getTitle(), numResults));
         }
     }
 

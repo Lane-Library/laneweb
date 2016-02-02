@@ -37,10 +37,10 @@ public class BassettAccordionGenerator extends AbstractGenerator implements Mode
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        if (null == this.query || "".equals(query)) {
+        if (null == this.query || "".equals(this.query)) {
             this.query = "*";
         }
-        FacetPage<BassettImage> facet = service.facetBassettOnRegionAndSubRegion(this.query);
+        FacetPage<BassettImage> facet = this.service.facetBassettOnRegionAndSubRegion(this.query);
         this.saxStrategy.toSAX(facet, xmlConsumer);
     }
 }

@@ -16,8 +16,8 @@ public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-            IOException {
+    protected void service(final HttpServletRequest req, final HttpServletResponse resp)
+            throws ServletException, IOException {
         Cookie userCookie = new Cookie(CookieName.USER.toString(), null);
         userCookie.setPath("/");
         userCookie.setMaxAge(0);

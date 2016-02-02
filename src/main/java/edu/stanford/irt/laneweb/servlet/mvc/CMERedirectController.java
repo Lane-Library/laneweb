@@ -84,7 +84,8 @@ public class CMERedirectController {
         }
     }
 
-    private String createCMELink(final String url, final String emrid, final String userHash, final boolean proxyLinks) {
+    private String createCMELink(final String url, final String emrid, final String userHash,
+            final boolean proxyLinks) {
         StringBuilder sb = new StringBuilder();
         if (proxyLinks) {
             sb.append(PROXY_LINK);

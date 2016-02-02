@@ -11,6 +11,7 @@ public class SolrTypeManager {
     private static final Map<String, String> NEW_TO_OLD_TYPES_MAP = new HashMap<String, String>();
 
     private static final Map<String, String> OLD_TO_NEW_TYPES_MAP = new HashMap<String, String>();
+
     static {
         OLD_TO_NEW_TYPES_MAP.put("bookdigital", "Book Digital");
         OLD_TO_NEW_TYPES_MAP.put("bookprint", "Book Print");

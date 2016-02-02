@@ -73,8 +73,8 @@ public class Facet {
         if (this.activeFacets.isEmpty()) {
             return false;
         }
-        return this.activeFacets.matches(DOT_STAR + this.fieldName + COLON + getMaybeQuote()
-                + Pattern.quote(this.value) + getMaybeQuote() + DOT_STAR);
+        return this.activeFacets.matches(DOT_STAR + this.fieldName + COLON + getMaybeQuote() + Pattern.quote(this.value)
+                + getMaybeQuote() + DOT_STAR);
     }
 
     @Override

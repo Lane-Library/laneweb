@@ -29,8 +29,7 @@ public class StatusController {
     private String version;
 
     @Autowired
-    public StatusController(
-            final SitemapController sitemapController,
+    public StatusController(final SitemapController sitemapController,
             @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager,
             final ServletContext servletContext) {
         this.sitemapController = sitemapController;

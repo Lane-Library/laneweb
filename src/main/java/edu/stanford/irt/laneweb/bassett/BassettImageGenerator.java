@@ -20,19 +20,19 @@ import edu.stanford.irt.solr.service.SolrImageService;
  */
 public class BassettImageGenerator extends AbstractGenerator implements ModelAware {
 
-    private SolrImageService service;
-
     private String bassettNumber;
-
-    private String query;
-
-    private String region;
 
     private int currentPage;
 
     private int IMAGES_BY_PAGE = 30;
 
+    private String query;
+
+    private String region;
+
     private SAXStrategy<Page<BassettImage>> saxStrategy;
+
+    private SolrImageService service;
 
     public BassettImageGenerator(final SolrImageService service, final SAXStrategy<Page<BassettImage>> saxStrategy) {
         this.service = service;
@@ -42,24 +42,26 @@ public class BassettImageGenerator extends AbstractGenerator implements ModelAwa
     @Override
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY, "*");
-        if(this.query.equals(""))
+        if (this.query.equals("")) {
             this.query = "*";
+        }
         this.region = ModelUtil.getString(model, Model.REGION);
-        if(null != this.region)
+        if (null != this.region) {
             this.region = this.region.replace(" ", "_");
+        }
         this.bassettNumber = ModelUtil.getString(model, Model.BASSETT_NUMBER);
         this.currentPage = Integer.valueOf(ModelUtil.getString(model, Model.PAGE, "1"));
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Pageable page = new PageRequest(this.currentPage -1, this.IMAGES_BY_PAGE);
+        Pageable page = new PageRequest(this.currentPage - 1, this.IMAGES_BY_PAGE);
         Page<BassettImage> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.service.findBassettByNumber(this.bassettNumber);
         } else if (this.region != null) {
-            if (region.contains("--")) {
-                region = region.replace("--", "_sub_region_");
+            if (this.region.contains("--")) {
+                this.region = this.region.replace("--", "_sub_region_");
                 eresources = this.service.findBassettByQueryFilterByRegionAndSubRegion(this.query, this.region, page);
             } else {
                 eresources = this.service.findBassettByQueryFilterByRegion(this.query, this.region, page);

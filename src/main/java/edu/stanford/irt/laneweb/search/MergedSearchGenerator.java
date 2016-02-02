@@ -17,7 +17,8 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
     private SolrService solrService;
 
     public MergedSearchGenerator(final MetaSearchManager metaSearchManager, final SolrService solrService,
-            final SAXStrategy<PagingSearchResultList> saxStrategy, final ContentResultConversionStrategy scoreStrategy) {
+            final SAXStrategy<PagingSearchResultList> saxStrategy,
+            final ContentResultConversionStrategy scoreStrategy) {
         super(metaSearchManager, saxStrategy, scoreStrategy);
         this.solrService = solrService;
     }

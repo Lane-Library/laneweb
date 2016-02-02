@@ -20,16 +20,16 @@ public class RequestParameterDataBinder implements DataBinder {
             { "i", Model.ITEMS } };
 
     private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE },
-        { "s", Model.SUBSET }, { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
-        { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
-        { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
-        { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
+            { "s", Model.SUBSET }, { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
+            { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
+            { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
+            { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
     private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.BANNER, Model.CATEGORY,
-            Model.CLASS_ID, Model.EMAIL, Model.FACET, Model.FACETS, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE, Model.TITLE,
-            Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE,
-            Model.HOST, Model.SORT, Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN, Model.LIMIT,
-            Model.FACET_SORT };
+            Model.CLASS_ID, Model.EMAIL, Model.FACET, Model.FACETS, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE,
+            Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD,
+            Model.RELEASE, Model.HOST, Model.SORT, Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN,
+            Model.LIMIT, Model.FACET_SORT };
 
     /**
      * parameterArrayModelMap contains the mapping of parameter names to model name of model attributes that are Lists
@@ -42,7 +42,7 @@ public class RequestParameterDataBinder implements DataBinder {
     private Map<String, String> parameterModelMap;
 
     private Set<String> parameterSameAsModel;
-    
+
     private Map<String, String> urlEncodedParameters;
 
     public RequestParameterDataBinder() {

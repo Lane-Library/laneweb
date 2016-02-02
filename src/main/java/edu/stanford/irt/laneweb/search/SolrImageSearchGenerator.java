@@ -17,10 +17,12 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String, Object>> {
 
-    private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights",
-            "Possible Reuse Rights", "Restrictive Reuse Rights" };
+    private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights", "Possible Reuse Rights",
+            "Restrictive Reuse Rights" };
 
     private static final int TOTAL_ELEMENT_BY_PAGE = 52;
+
+    protected String basePath;
 
     protected String copyright = "0";
 
@@ -28,19 +30,18 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     protected String resourceId;
 
-    private String searchTerm;
-
     protected SolrImageService service;
+
+    protected String url;
+
+    private String searchTerm;
 
     private String source;
 
     private String tab = TAB_CONTENT[0];
 
-    protected String url;
-    
-    protected String basePath;
-
-    public SolrImageSearchGenerator(final SolrImageService service, final SAXStrategy<Map<String, Object>> saxStrategy) {
+    public SolrImageSearchGenerator(final SolrImageService service,
+            final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
         this.service = service;
     }
@@ -86,17 +87,16 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
         result.put(Model.SOURCE, this.source);
         return result;
     }
-    
-    
-    protected Page<Image> getPage(final String query){
+
+    protected Page<Image> getPage(final String query) {
         Page<Image> pageResult = null;
         Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
         if (this.resourceId == null) {
             pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
         } else {
-            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright, this.resourceId, page);
+            pageResult = this.service.findByTitleAndDescriptionFilterOnCopyrightAndWebsiteId(query, this.copyright,
+                    this.resourceId, page);
         }
         return pageResult;
     }
-    
 }

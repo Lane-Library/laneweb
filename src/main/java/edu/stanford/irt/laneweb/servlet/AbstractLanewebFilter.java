@@ -31,6 +31,6 @@ public abstract class AbstractLanewebFilter implements Filter {
     public void init(final FilterConfig filterConfig) {
     }
 
-    protected abstract void internalDoFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws IOException, ServletException;
+    protected abstract void internalDoFilter(HttpServletRequest request, HttpServletResponse response,
+            FilterChain chain) throws IOException, ServletException;
 }

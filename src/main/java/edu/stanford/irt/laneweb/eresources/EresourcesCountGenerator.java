@@ -22,9 +22,9 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
-    private SolrService solrService;
-
     private String query;
+
+    private SolrService solrService;
 
     private Set<String> types;
 

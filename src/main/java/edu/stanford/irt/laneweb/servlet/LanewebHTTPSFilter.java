@@ -23,8 +23,8 @@ public class LanewebHTTPSFilter extends AbstractLanewebFilter {
     protected void internalDoFilter(final HttpServletRequest req, final HttpServletResponse resp,
             final FilterChain chain) throws IOException, ServletException {
         String queryString = req.getQueryString();
-        String url = queryString == null ? req.getRequestURL().toString() : req.getRequestURL().append('?')
-                .append(queryString).toString();
+        String url = queryString == null ? req.getRequestURL().toString()
+                : req.getRequestURL().append('?').append(queryString).toString();
         int colonIndex = url.indexOf(':');
         if ((req.getHeader("gohttps") != null) || "https".equals(req.getScheme())) {
             chain.doFilter(req, resp);

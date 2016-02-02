@@ -11,7 +11,8 @@ public class PagingEresourceList extends PagingList<Eresource> {
 
     private String heading;
 
-    public PagingEresourceList(final Collection<Eresource> eresources, final PagingData pagingData, final String heading) {
+    public PagingEresourceList(final Collection<Eresource> eresources, final PagingData pagingData,
+            final String heading) {
         super(eresources, pagingData);
         this.heading = heading;
     }

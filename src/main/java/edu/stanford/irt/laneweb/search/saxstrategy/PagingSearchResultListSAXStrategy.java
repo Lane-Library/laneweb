@@ -80,8 +80,8 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
                     AttributesImpl atts = new AttributesImpl();
                     atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_ID, Resource.RESOURCE_ID, Resource.CDATA,
                             resourceResult.getId());
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS,
-                            Resource.CDATA, resourceResult.getHits());
+                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS, Resource.CDATA,
+                            resourceResult.getHits());
                     atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_URL, Resource.RESOURCE_URL, Resource.CDATA,
                             resourceResult.getURL());
                     XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE, atts);

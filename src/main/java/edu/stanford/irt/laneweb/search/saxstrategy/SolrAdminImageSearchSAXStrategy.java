@@ -17,9 +17,9 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        if(!image.isEnable()){
+        if (!image.isEnable()) {
             atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "admin admin-disable");
-        }else{
+        } else {
             atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "admin");
         }
         atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId());
@@ -34,11 +34,12 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
         endAnchor(xmlConsumer);
-        startDivWithClass(xmlConsumer,"imagedecoHidden");
+        startDivWithClass(xmlConsumer, "imagedecoHidden");
         String imageId = image.getId();
         try {
             atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, "/secure/image/update?id=" + URLEncoder.encode(imageId, "UTF-8"));
+            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA,
+                    "/secure/image/update?id=" + URLEncoder.encode(imageId, "UTF-8"));
             atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedeco-admin");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
             XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf("/") + 1));

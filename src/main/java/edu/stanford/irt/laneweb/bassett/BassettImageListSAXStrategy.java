@@ -22,9 +22,15 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
 
     private static final String BASSETTS = "bassetts";
 
+    private static final String CURRENT_PAGE = "current-page";
+
     private static final String DESCRIPTION = "description";
 
     private static final String DIAGRAM = "diagram_image";
+
+    private static final String IMAGE_NUMBER_LOW = "image-number-low";
+
+    private static final String IMAGE_NUMBER_UP = "image-number-up";
 
     private static final String LEGEND = "legend";
 
@@ -32,23 +38,17 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
 
     private static final String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
 
+    private static final String NEXT_PAGE = "next-page";
+
+    private static final String PREVIOUS_PAGE = "previous-page";
+
     private static final String REGIONS = "regions";
 
     private static final String TITLE = "title";
 
     private static final String TOTAL_IMAGES = "total-images";
 
-    private static final String CURRENT_PAGE = "current-page";
-
     private static final String TOTAL_PAGES = "total-pages";
-
-    private static final String PREVIOUS_PAGE = "previous-page";
-
-    private static final String NEXT_PAGE = "next-page";
-
-    private static final String IMAGE_NUMBER_LOW = "image-number-low";
-
-    private static final String IMAGE_NUMBER_UP = "image-number-up";
 
     private static final String VALUE = "value";
 
@@ -101,26 +101,6 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
         XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT);
     }
 
-    private void handleRegion(final XMLConsumer xmlConsumer, final String regions) throws SAXException {
-        String[] regionAndSubRegion = regions.split("\\|");
-        boolean alreadyIn = false;
-        StringBuilder sb = new StringBuilder();
-        for (String region : regionAndSubRegion) {
-            String[] splittedRegion = region.split("_sub_region_");
-            if (alreadyIn && splittedRegion.length > 1) {
-                sb.append(", ");
-            }
-            if (splittedRegion.length > 1) {
-                sb.append(splittedRegion[1].replace("_", " "));
-            }
-            alreadyIn = true;
-        }
-        sb.append(".");
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
-        XMLUtils.data(xmlConsumer, sb.toString());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);
-    }
-
     private void handlePaging(final XMLConsumer xmlConsumer, final Page<BassettImage> page) throws SAXException {
         handlePagingElement(xmlConsumer, TOTAL_IMAGES, page.getTotalElements());
         handlePagingElement(xmlConsumer, TOTAL_PAGES, page.getTotalPages());
@@ -148,5 +128,25 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
         attributes.addAttribute(NAMESPACE, VALUE, VALUE, "CDATA", String.valueOf(value));
         XMLUtils.startElement(xmlConsumer, NAMESPACE, name, attributes);
         XMLUtils.endElement(xmlConsumer, NAMESPACE, name);
+    }
+
+    private void handleRegion(final XMLConsumer xmlConsumer, final String regions) throws SAXException {
+        String[] regionAndSubRegion = regions.split("\\|");
+        boolean alreadyIn = false;
+        StringBuilder sb = new StringBuilder();
+        for (String region : regionAndSubRegion) {
+            String[] splittedRegion = region.split("_sub_region_");
+            if (alreadyIn && splittedRegion.length > 1) {
+                sb.append(", ");
+            }
+            if (splittedRegion.length > 1) {
+                sb.append(splittedRegion[1].replace("_", " "));
+            }
+            alreadyIn = true;
+        }
+        sb.append(".");
+        XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
+        XMLUtils.data(xmlConsumer, sb.toString());
+        XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);
     }
 }

@@ -16,7 +16,8 @@ public class CacheableSelector implements Selector {
      * is /error.html or contains /bassett/, and if it does return false.
      */
     @Override
-    public boolean select(final String expression, final Map<String, Object> model, final Map<String, String> parameters) {
+    public boolean select(final String expression, final Map<String, Object> model,
+            final Map<String, String> parameters) {
         boolean result = true;
         String sitemapURI = ModelUtil.getString(model, Model.SITEMAP_URI, "");
         if (model.containsKey(Model.USER_ID)) {
