@@ -10,8 +10,14 @@ if (today.getDate() == 1 && today.getMonth() == 0) {
 }
 
 var seminarsTestCase = new Y.Test.Case({
-/*
     name: "Seminars TestCase",
+
+    _should: {
+        ignore: {
+            testSeminars1: true,
+            testSeminars2: true
+        }
+    },
     testSeminars1: function() {
         if (skipTest) {
             return true;
@@ -33,7 +39,6 @@ var seminarsTestCase = new Y.Test.Case({
         Y.Assert.areEqual("block", Y.one('#i-should-be-visible-1').getStyle('display'));
         Y.Assert.areEqual("block", Y.one('#i-should-be-visible-2').getStyle('display'));
     }
-*/
 });
 
 Y.one('body').addClass('yui3-skin-sam');
