@@ -13,6 +13,8 @@
 
         hasNoPlaceholder = document.createElement("input").placeholder === undefined,
 
+        inputs = {},
+
         PlaceholderTextInput = function(input, hintText) {
             this._input = input;
             input.set(PLACEHOLDER, hintText);
@@ -29,11 +31,16 @@
         },
 
         TextInput = function(input, hintText, noPlaceholder) {
-            if (hasNoPlaceholder || noPlaceholder) {
-                return new NoPlaceholderTextInput(input, hintText);
-            } else {
-                return new PlaceholderTextInput(input, hintText);
+            var textInput = inputs[input._yuid];
+            if (!textInput) {
+                if (hasNoPlaceholder || noPlaceholder) {
+                    textInput = new NoPlaceholderTextInput(input, hintText);
+                } else {
+                    textInput = new PlaceholderTextInput(input, hintText);
+                }
             }
+            inputs[input._yuid] = textInput;
+            return textInput;
         };
 
     NoPlaceholderTextInput.prototype = {
@@ -58,6 +65,7 @@
             if (this._input.get(VALUE) === this._hintText) {
                 this._input.set(VALUE, EMPTY);
             }
+            delete inputs[this._input._yuid];
         },
 
         getValue: function() {
@@ -92,6 +100,7 @@
 
         destroy: function() {
             this._input.set(PLACEHOLDER,EMPTY);
+            delete inputs[this._input._yuid];
         },
 
         getValue: function() {
