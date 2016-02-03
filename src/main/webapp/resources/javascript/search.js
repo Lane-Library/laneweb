@@ -56,7 +56,7 @@
                 this.setLimit(limit);
             };
             this._suggest.setLimitForSource(this._select.getSelected());
-            this._suggest.on("select", this.submit, this);
+            this._suggest.on("select", this._handleSuggestSelect, this);
 
             //set up search reset
             this._searchReset = Y.one(".searchReset");

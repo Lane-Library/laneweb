@@ -373,19 +373,6 @@
                 });
             });
         }
-        Y.on("suggest:select",  function(event) {
-            var action = "";
-            //determine whether or not to include search source value.
-            if (event.input.get("id") === "searchTerms") {
-                action = Lane.search.getSource();
-            }
-            Tracker.fire("trackableEvent", {
-                //keep category same as previous event.type:
-                category: "lane:suggestSelect",
-                action: action,
-                label: event.suggestion
-            });
-        });
 
         Y.augment(Tracker, Y.EventTarget, null, null, {
             prefix : "tracker",
