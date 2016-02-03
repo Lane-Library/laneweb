@@ -93,6 +93,20 @@
         },
 
         /**
+         * Handles suggestion selections, fires a tracking event.
+         * @method _handleSuggestSelect
+         * @private
+         */
+        _handleSuggestSelect : function(event) {
+            Y.lane.fire("tracker:trackableEvent", {
+                category: "lane:suggestSelect",
+                action: this.getSource(),
+                label: event.suggestion
+            });
+            this.submit()
+        },
+
+        /**
          * Handles search input value changes and toggles the active class
          * of the reset button appropriately.
          * @method _handleValueChange
