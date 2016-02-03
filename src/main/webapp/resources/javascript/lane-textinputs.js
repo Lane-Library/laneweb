@@ -38,10 +38,10 @@
                 } else {
                     textInput = new PlaceholderTextInput(input, hintText);
                 }
+                inputs[input._yuid] = textInput;
             } else {
                 textInput.setHintText(hintText);
             }
-            inputs[input._yuid] = textInput;
             return textInput;
         };
 
