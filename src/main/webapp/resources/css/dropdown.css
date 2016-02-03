@@ -1,36 +1,36 @@
 .dropdown {
-    position:relative;
+    position: relative;
 }
 .dropdown-content {
-    display:none;
-    position:absolute;
-    border:1px solid #dadad9;
-    background:white;
-    background:linear-gradient(white,rgb(232,232,232));
-    border-radius:0 0 3px 3px;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+    display: none;
+    position: absolute;
+    border: 1px solid #dadad9;
+    background: white;
+    background: linear-gradient(white,rgb(232,232,232));
+    border-radius: 0 0 3px 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 .dropdown:hover .dropdown-content{
-    display:block
+    display: block
 }
 .general-dropdown{
-    display:inline-block;
+    display: inline-block;
 }
 .general-dropdown-trigger{
-    cursor:pointer;
-    position:relative;
-    padding:4px 8px;
-    border:1px solid #dadad9;
-    border-radius:3px 3px 0 0;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
-    margin-left:6px;
-    white-space:nowrap;
+    cursor: pointer;
+    position: relative;
+    padding: 4px 8px;
+    border: 1px solid #dadad9;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    margin-left: 6px;
+    white-space: nowrap;
 }
 
 .general-dropdown-trigger .fa{
-    margin-left:8px;
+    margin-left: 8px;
 }
 .general-dropdown-content {
-    right:0;
-    z-index:1;
+    right: 0;
+    z-index: 1;
 }

@@ -1,22 +1,22 @@
 .class{
-    margin:12px 0 60px;
+    margin: 12px 0 60px;
 }
 .class .date{
-    background-color:#009abb;
-    width:auto;
-    padding:0 12px;
-    box-sizing:border-box;
+    background-color: #009abb;
+    width: auto;
+    padding: 0 12px;
+    box-sizing: border-box;
 }
 .class .month-day{
-    padding-top:24px;
+    padding-top: 24px;
 }
 .class .year{
-    font-size:24px;
-    font-weight:700;
+    font-size: 24px;
+    font-weight: 700;
 }
 .class h3 a{
-    color:#8c1515;
+    color: #8c1515;
 }
 .class .time{
-    margin:12px 0;
+    margin: 12px 0;
 }

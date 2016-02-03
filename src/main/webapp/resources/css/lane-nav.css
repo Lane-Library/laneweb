@@ -1,74 +1,74 @@
 .lane-nav{
-    position:absolute;
-    top:80px;
-    width:100%;
-    background-color:rgb(197, 207, 209);
-    box-shadow:inset 0 5px 5px -5px #000;
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    background-color: rgb(197, 207, 209);
+    box-shadow: inset 0 5px 5px -5px #000;
 }
 .nav-menu{
-    height:46px;
-    display:inline-block;
-    width:auto;
-    box-sizing:border-box;
+    height: 46px;
+    display: inline-block;
+    width: auto;
+    box-sizing: border-box;
 }
 
 .nav-menu > a{
-    color:#3C3623;
-    padding:0 21px;
-    line-height:46px;
-    display:block;
-    font-size:15px;
-    border:none;
-    font-family:'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
+    color: #3C3623;
+    padding: 0 21px;
+    line-height: 46px;
+    display: block;
+    font-size: 15px;
+    border: none;
+    font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
 
 .nav-menu > a:visited{
-    color:#3C3623;
+    color: #3C3623;
 }
 
 .nav-menu:hover > a,
 .nav-menu.active > a{
-    color:#3C3623;
-    background-color:white;
-    box-shadow:inset 0 5px 5px -5px #000;
-    border:none;
+    color: #3C3623;
+    background-color: white;
+    box-shadow: inset 0 5px 5px -5px #000;
+    border: none;
 }
 
 .nav-menu .nav-menu-content{
-    border-top:none;
-    padding:6px 0;
-    z-index:1;
+    border-top: none;
+    padding: 6px 0;
+    z-index: 1;
 }
 
 .nav-menu-content li{
-    width:205px;
-    padding:5px 0 3px 15px;
-    box-sizing:border-box;
+    width: 205px;
+    padding: 5px 0 3px 15px;
+    box-sizing: border-box;
 }
 
 .nav-menu-content a{
-    display:inline;
-    font-weight:normal;
-    color:#1C4B70;
-    border-bottom:1px dotted #81785A;
-    text-shadow:none;
-    font-size:13px;
+    display: inline;
+    font-weight: normal;
+    color: #1C4B70;
+    border-bottom: 1px dotted #81785A;
+    text-shadow: none;
+    font-size: 13px;
 }
 
 .nav-menu-content a:visited{
-    color:#1C4B70;
+    color: #1C4B70;
 }
 .nav-menu-content a:hover{
-    color:#820000;
-    border-color:#820000;
-    border-bottom-style:solid;
+    color: #820000;
+    border-color: #820000;
+    border-bottom-style: solid;
 }
 
 .nav-menu-content.portals{
-    width:400px;
+    width: 400px;
 }
 
 .nav-menu-content.portals li{
-    float:left;
-    width:200px;
+    float: left;
+    width: 200px;
 }

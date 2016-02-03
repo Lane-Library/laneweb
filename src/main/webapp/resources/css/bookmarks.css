@@ -1,11 +1,11 @@
 .favorites .dropdown-content {
-    z-index:2;
-    padding:0 18px;
+    z-index: 2;
+    padding: 0 18px;
     border-top: 1px solid #dadad9;
-    white-space:nowrap;
+    white-space: nowrap;
 }
 .favorites li {
-    margin:1em 0;
+    margin: 1em 0;
 }
 
 .bookmark-link {
@@ -16,44 +16,44 @@
     box-sizing: content-box;
     position: absolute;
     margin-left: 5px;
-    border:1px solid #ccc;
-    border-radius:3px;
-    text-align:center;
-    line-height:17px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 17px;
     background-color: white;
     background: linear-gradient(to right, white , #ccc);
 }
 .bookmark-link .fa {
-    color:gray;
+    color: gray;
 }
 
 .bookmark-link.active .fa,
 .bookmark-link.bookmarking .fa {
-    color:rgb(180,13,26);
+    color: rgb(180,13,26);
 }
 
 .bookmark-link.successful {
-    background-color:rgb(180,13,26);
+    background-color: rgb(180,13,26);
 }
 
 .yui3-bookmark-editor {
-    cursor:move
+    cursor: move
 }
 .yui3-bookmark-editor label,
 .yui3-bookmark-editor input[type='text'],
 .yui3-bookmark-editor button {
-    display:none;
+    display: none;
 }
 
 .yui3-bookmark-editor-active label,
 .yui3-bookmark-editor-active input[type='text'],
 .yui3-bookmark-editor-active button {
-    display:inline;
+    display: inline;
 }
 
 .yui3-bookmark-editor-active a,
 .yui3-bookmark-editor-active input[type='checkbox'] {
-    display:none;
+    display: none;
 }
 
 #bookmarks-editor fieldset {
@@ -62,11 +62,11 @@
     padding: 14px 12px 5px;
 }
 #bookmarks-editor ul{
-    padding-left:0;
+    padding-left: 0;
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
-    border-top:none;
+    border-top: none;
 }
 #bookmarks-editor li {
     border-bottom: 1px #DADAD8 solid;
@@ -86,27 +86,27 @@
     padding: 5px;
     border: solid 2px #C9C9C9;
     width: 266px;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 .bookmark-search{
-    visibility:hidden;
-    display:inline-block;
+    visibility: hidden;
+    display: inline-block;
     margin-top: 12px;
     text-align: center;
 }
 .bookmark-search.active{
-    visibility:visible;
+    visibility: visible;
 }
 .bookmark-search.bookmarking {
-    cursor:wait;
+    cursor: wait;
 }
 /* next two are for the login required lightbox popup */
 .bookmark-login {
-    text-align:center;
+    text-align: center;
     padding: 30px;
     width: 460px;
-    box-sizing:border-box;
-    background-color:white
+    box-sizing: border-box;
+    background-color: white
 }
 .bookmark-login-heading {
     color: #414042;

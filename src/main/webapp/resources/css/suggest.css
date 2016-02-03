@@ -1,26 +1,26 @@
 .yui3-aclist{
-    z-index:2;
-    position:absolute
+    z-index: 2;
+    position: absolute
 }
 .yui3-aclist-hidden{
-    visibility:hidden
+    visibility: hidden
 }
 .yui3-aclist-aria{
-    display:none
+    display: none
 }
 .yui3-aclist-content{
-    background-color:white
+    background-color: white
 }
 .yui3-aclist-list{
-    padding:0;
-    border:1px solid #ccc;
+    padding: 0;
+    border: 1px solid #ccc;
 }
 .yui3-aclist-item {
-    cursor:pointer;
-    padding:2px 5px;
-    border-bottom:1px solid #ccc;
+    cursor: pointer;
+    padding: 2px 5px;
+    border-bottom: 1px solid #ccc;
 }
 .yui3-aclist-item-active{
-    background-color:#426FD9;
-    color:white
+    background-color: #426FD9;
+    color: white
 }

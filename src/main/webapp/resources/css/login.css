@@ -1,21 +1,21 @@
 #persistent {
-    width:991px;
-    box-sizing:border-box;
+    width: 991px;
+    box-sizing: border-box;
     margin: 50px 0 20px;
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
     position: relative;
     padding: 0;
 }
 
 #persistent .header{
-    background-color:  #aabec6;
+    background-color: #aabec6;
     height: 90px;
 }
 
 #persistent .header span{
-    display:inline-block;
+    display: inline-block;
     width: 250px;
     height: 70px;
     background-position: -355px -18px;
@@ -36,8 +36,8 @@
 }
 
 #persistent h4{
-    margin:0 30px 0 30px;
-    }
+    margin: 0 30px 0 30px;
+}
 
 #shibboleth-links {
     margin-top: 41px;
@@ -45,7 +45,7 @@
 }
 
 #shibboleth-links .organization{  
-    padding:18px;
+    padding: 18px;
     margin-bottom: 24px; 
 }
 
@@ -53,13 +53,13 @@
     display: inline-block;
     border-bottom: none;
     padding: 3px 6px;
-    margin-bottom:20px;
-    }
+    margin-bottom: 20px;
+}
 
 #shibboleth-links .organization a{
     display: block;
     border: 1px solid #ddd;
-    padding:12px 3px 12px 3px;
+    padding: 12px 3px 12px 3px;
     background-color: white;
 }
 
@@ -68,27 +68,29 @@
     display: inline-block;
     width: 170px;
     height: 50px;
-    background-color:  white;
+    background-color: white;
     background-repeat: no-repeat;
     background-image: url('../images/organizations-logos-large.png');
 }
 
 #Stanford span{
-background-position: -22px -272px;
+    background-position: -22px -272px;
 }
+
 #SHC span{
-background-position: -218px -272px;
+    background-position: -218px -272px;
 }
+
 #UHA span{
-background-position: -407px -272px;
+    background-position: -407px -272px;
 }
 
 #LPCH span{
-background-position: -598px -272px;
+    background-position: -598px -272px;
 }
 
 #PCHA span{
-background-position: -784px -272px;
+    background-position: -784px -272px;
 }
 
 #persistent .help{
@@ -97,7 +99,6 @@ background-position: -784px -272px;
     right: 24px;
     top: 129px;
 }
-
 
 #persistent #login {
     position: inherit;

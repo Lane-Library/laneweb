@@ -3,24 +3,24 @@
     background-color: #8C1515;
 }
 #search{
-    padding:30px 0
+    padding: 30px 0
 }
 #searchFields {
-    position:relative
+    position: relative
 }
 #selectAndInput {
-    background-color:white;
-    float:left;
+    background-color: white;
+    float: left;
 }
 #searchSource {
-    width:124px;
+    width: 124px;
 }
 #searchTerms {
-    width:458px;
-    border:0 none;
-    height:34px;
-    box-sizing:border-box;
-    line-height:34px;
+    width: 458px;
+    border: 0 none;
+    height: 34px;
+    box-sizing: border-box;
+    line-height: 34px;
     margin-left: 8px;
 }
 #searchSubmit {
@@ -29,13 +29,13 @@
     background: #fafbf8; /* Old browsers */
     background: linear-gradient(to bottom,  #fafbf8 0%,#dadad4 100%); /* W3C */
     border: 1px solid #dadad9;
-    font-weight:bold;
-    height:34px;
-    width:90px;
-    cursor:pointer;
-    vertical-align:bottom;
-    margin:0 8px;
-    box-sizing:border-box;
+    font-weight: bold;
+    height: 34px;
+    width: 90px;
+    cursor: pointer;
+    vertical-align: bottom;
+    margin: 0 8px;
+    box-sizing: border-box;
 }
 #searchSubmit:hover {
     background: #dadad4; /* Old browsers */
@@ -63,22 +63,22 @@
     display: block;
 }
 .picoFields input {
-    border-width:0;
+    border-width: 0;
     /* Mobile Safari: remove rounded corners and input shadow */
-    -webkit-appearance : none;
-    -moz-appearance:none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     margin: 10px 0;
-    width:172px;
-    text-align:center;
-    border-right:1px rgb(220,220,220) solid;
-    border-radius:0;
-    box-sizing:border-box;
+    width: 172px;
+    text-align: center;
+    border-right: 1px rgb(220,220,220) solid;
+    border-radius: 0;
+    box-sizing: border-box;
 }
 .picoFields #clinicalO {
-    border-right:none
+    border-right: none
 }
 #search input:focus {
-    outline-style : none;
+    outline-style: none;
 }
 .searchReset .fa-times-circle {
     color: #8c1515;
@@ -88,58 +88,58 @@
     color: #428bca;
 }
 .searchReset {
-    cursor : pointer;
-    display : none;
-    position:absolute;
-    left:570px;
-    top:0;
-    width:22px;
-    line-height:34px;
-    text-align:center;
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    left: 570px;
+    top: 0;
+    width: 22px;
+    line-height: 34px;
+    text-align: center;
     background-color: #fff;
 }
 .searchReset.active {
-    display:block;
+    display: block;
 }
 #searchFormContainer a{
-    color:white
+    color: white
 }
 
 .search-indicator {
-    visibility : hidden;
+    visibility: hidden;
     position: absolute;
     right: 250px;
     bottom: 30px;
 }
 .search-indicator.active {
-    visibility:visible
+    visibility: visible
 }
 #searchTips {
-    position:absolute;
-    bottom:7px;
-    font-size:12px;
-    font-weight:600
+    position: absolute;
+    bottom: 7px;
+    font-size: 12px;
+    font-weight: 600
 }
 #searchTips i{
-    color:white;
-    font-size:9px
+    color: white;
+    font-size: 9px
 }
 
 /* pubmed, uptodate, dynamed links inside the form: */
 
 .qlinks {
-    position:absolute;
-    right:0;
-    bottom:7px;
+    position: absolute;
+    right: 0;
+    bottom: 7px;
 }
 
 .qlinks li {
-    padding : 0 5px;
+    padding: 0 5px;
     display: inline-block;
-    border-right : 1px dotted #C1C1C1;
+    border-right: 1px dotted #C1C1C1;
 }
 
 .qlinks li:last-child {
-    border-right : none;
+    border-right: none;
 }
 

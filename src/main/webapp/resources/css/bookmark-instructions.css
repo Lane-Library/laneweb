@@ -4,7 +4,7 @@
 
 .bookmark-instructions .hd {
     font-weight: bold;
-    border-top:11px solid #e8e8e8;
+    border-top: 11px solid #e8e8e8;
 }
 
 .bookmark-instructions .hd div {
@@ -12,20 +12,19 @@
     width: 202px;
     text-align: center;
     padding: 4px;
-    box-sizing:border-box;
-    margin:-11px auto -16px auto;
-    background-color:#e8e8e8;
-    border-radius:16px
+    box-sizing: border-box;
+    margin: -11px auto -16px auto;
+    background-color: #e8e8e8;
+    border-radius: 16px
 }
 
 .bookmark-instructions .hd .bookmark-instructions-hide {
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
-
 .bookmark-instructions .fa {
-    color:black;
-    margin:0 10px
+    color: black;
+    margin: 0 10px
 }
 
 .bookmark-instructions-hide,.yui3-accordion-item.yui3-accordion-item-active .bookmark-instructions-show {
@@ -37,7 +36,7 @@
 }
 
 .bookmark-instructions .nomodule {
-    padding:12px;
+    padding: 12px;
 }
 
 /*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/

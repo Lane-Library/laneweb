@@ -1,50 +1,50 @@
 /* COMMON TO THE TWO IMAGE VIEWS  */
  #bassettContent td {
-	border: none;
+    border: none;
 }
 .choice {
-	float: left;
-	padding: 10px ;
+    float: left;
+    padding: 10px ;
 }
 
 #paging span{
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 #bassett-title-header{
-	margin-left: 10px; 
-	margin-top: 12px;
+    margin-left: 10px; 
+    margin-top: 12px;
 }
 
 #bassett-menu span{
-	float:right;
-	color: black;
+    float: right;
+    color: black;
 }
 
 #bassett-menu li:nth-child(n + 6){
-	display:none;
+    display: none;
 }
 
 #bassett-menu li:nth-child(n + 2){
-	cursor: pointer;
+    cursor: pointer;
 }
 #bassett-menu li:nth-child(n + 2) a{
-	display: block;
+    display: block;
 }
 
 
 .region .enabled a, .region .enabled span{
-	color: white !important;	
+    color: white !important;
 }
 
 
 /* Multi IMAGES VIEW */
 .bassett-images, .paging, .bassett-image {
-	clear: both;
+    clear: both;
 }
 
 .see-all{
-	float: right ;
+    float: right ;
 }
 
 .bassett-images div {
@@ -57,62 +57,62 @@
 }
 
 #bassettContent .image-text {
-	padding: 3px 0 0 0;
+    padding: 3px 0 0 0;
 }
 
 .bassett-error{
-	color:red;
-	padding-bottom: 10px;
-	display: none;
+    color: red;
+    padding-bottom: 10px;
+    display: none;
 }
 
 /* IMAGE VIEW */
 .legend-title {
-	padding-top: 7px;
-	color: #820000;
-	font-size: 1.8em;
+    padding-top: 7px;
+    color: #820000;
+    font-size: 1.8em;
 }
 #bassett-number {
-	font-weight: bold;
-	margin-top:1em;
-	margin-left:12px;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-left: 12px;
 }
  #second-region {
-	color: #999999;
+    color: #999999;
     font-size: 10px;
     padding-left: 12px;
 }
 .bassett-image table{
-    margin-bottom :30px;
+    margin-bottom: 30px;
     text-align: center;
     vertical-align: middle;
     padding: 2em;
 }
 .bassett-image td#image {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 .bassett-image td#diagram-image {
-	vertical-align: top;
+    vertical-align: top;
 }
 
 #legend td {
-	padding: 3px 0 0 2px;
-	text-align: left;
-	vertical-align: top;
+    padding: 3px 0 0 2px;
+    text-align: left;
+    vertical-align: top;
 }
 #legend .legend-title, #legend .legend-sub-title {
-	text-align: center;
+    text-align: center;
 }
 #legend .legend-title {
-	font-weight: bold;
-	text-transform: uppercase;
-	font-size: 1em;
-	color: #3F3C30;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #3F3C30;
 }
 #legend .legend-sub-title {
-	padding-bottom: 5px;
-	font-style: italic;
+    padding-bottom: 5px;
+    font-style: italic;
 }
 #legend .legend-description {
-	padding-bottom: 15px;
+    padding-bottom: 15px;
 }

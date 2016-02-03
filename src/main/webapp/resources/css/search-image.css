@@ -33,9 +33,9 @@
 }
 
 #imageList li li{
-	height: auto;
+    height: auto;
 
-	}
+    }
 
 #imageList li.admin{
     margin-top: 30px;
@@ -106,7 +106,7 @@
 }
 
 .image-detail-close {
-    position:relative;
+    position: relative;
     margin-left: 910px;
     cursor: pointer;
     

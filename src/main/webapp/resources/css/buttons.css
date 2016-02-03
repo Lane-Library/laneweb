@@ -32,7 +32,7 @@ http://lane.stanford.edu/samples/button-css.html
     height: 24px;
     width: 24px;
     padding: 4px;
-    box-sizing:border-box;
+    box-sizing: border-box;
     margin-right: 6px;
     line-height: 15px;
 }
