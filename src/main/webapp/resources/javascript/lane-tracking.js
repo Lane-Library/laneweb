@@ -363,17 +363,6 @@
             Tracker.trackEvent(e);
         });
 
-        //TODO: Tracking bookmarks:addSync here. I'm not sure if this is the best place for it.
-        if (Lane.BookmarksWidget) {
-            Lane.BookmarksWidget.get("bookmarks").after("addSync", function(event) {
-                Tracker.fire("trackableEvent", {
-                    category: "lane:bookmarkAdd",
-                    action: model.get(model.AUTH),
-                    label: event.bookmark.getLabel()
-                });
-            });
-        }
-
         Y.augment(Tracker, Y.EventTarget, null, null, {
             prefix : "tracker",
             emitFacade : true
