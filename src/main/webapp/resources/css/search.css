@@ -105,7 +105,7 @@ li.active .descriptionTrigger {
     z-index: 1;
 }
 li.active .description {
-    display: block
+    display: block;
 }
 
 .citation{
@@ -141,5 +141,5 @@ li.active .description {
 }
 .content .rightSearchTips li {
     padding: 3px 0 2px;
-    border-bottom: none
+    border-bottom: none;
 }

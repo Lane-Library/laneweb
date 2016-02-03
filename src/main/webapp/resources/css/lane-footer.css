@@ -20,7 +20,7 @@
     border-bottom: 1px solid #902827;
 }
 #laneFooter a{
-    color: white
+    color: white;
 }
 #laneFooter li{
     font-size: 12px;
@@ -48,7 +48,7 @@
 }
 
 #lane-subfooter span{
-    display: none
+    display: none;
 }
 
 #lane-subfooter i{

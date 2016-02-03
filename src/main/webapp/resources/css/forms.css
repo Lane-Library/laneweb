@@ -118,7 +118,7 @@
 }
 
 #purchaseMenu li {
-    float: left
+    float: left;
 }
 
 #purchaseMenu a {
@@ -189,5 +189,5 @@
 }
 
 .breadcrumbForm {
-    margin-top: 12px
+    margin-top: 12px;
 }

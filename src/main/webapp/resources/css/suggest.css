@@ -1,15 +1,15 @@
 .yui3-aclist{
     z-index: 2;
-    position: absolute
+    position: absolute;
 }
 .yui3-aclist-hidden{
-    visibility: hidden
+    visibility: hidden;
 }
 .yui3-aclist-aria{
-    display: none
+    display: none;
 }
 .yui3-aclist-content{
-    background-color: white
+    background-color: white;
 }
 .yui3-aclist-list{
     padding: 0;
@@ -22,5 +22,5 @@
 }
 .yui3-aclist-item-active{
     background-color: #426FD9;
-    color: white
+    color: white;
 }

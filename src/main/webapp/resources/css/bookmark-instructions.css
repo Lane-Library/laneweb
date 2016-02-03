@@ -15,7 +15,7 @@
     box-sizing: border-box;
     margin: -11px auto -16px auto;
     background-color: #e8e8e8;
-    border-radius: 16px
+    border-radius: 16px;
 }
 
 .bookmark-instructions .hd .bookmark-instructions-hide {
@@ -24,7 +24,7 @@
 
 .bookmark-instructions .fa {
     color: black;
-    margin: 0 10px
+    margin: 0 10px;
 }
 
 .bookmark-instructions-hide,.yui3-accordion-item.yui3-accordion-item-active .bookmark-instructions-show {
@@ -41,5 +41,5 @@
 
 /*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 #bookmarkletIE {
-    display: none
+    display: none;
 }

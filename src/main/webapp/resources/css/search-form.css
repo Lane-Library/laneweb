@@ -3,10 +3,10 @@
     background-color: #8C1515;
 }
 #search{
-    padding: 30px 0
+    padding: 30px 0;
 }
 #searchFields {
-    position: relative
+    position: relative;
 }
 #selectAndInput {
     background-color: white;
@@ -75,7 +75,7 @@
     box-sizing: border-box;
 }
 .picoFields #clinicalO {
-    border-right: none
+    border-right: none;
 }
 #search input:focus {
     outline-style: none;
@@ -102,7 +102,7 @@
     display: block;
 }
 #searchFormContainer a{
-    color: white
+    color: white;
 }
 
 .search-indicator {
@@ -112,17 +112,17 @@
     bottom: 30px;
 }
 .search-indicator.active {
-    visibility: visible
+    visibility: visible;
 }
 #searchTips {
     position: absolute;
     bottom: 7px;
     font-size: 12px;
-    font-weight: 600
+    font-weight: 600;
 }
 #searchTips i{
     color: white;
-    font-size: 9px
+    font-size: 9px;
 }
 
 /* pubmed, uptodate, dynamed links inside the form: */

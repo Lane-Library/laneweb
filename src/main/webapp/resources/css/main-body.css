@@ -1,5 +1,5 @@
 html{
-    background-color: #ecf1f2
+    background-color: #ecf1f2;
 }
 
 body{
@@ -9,7 +9,7 @@ body{
 #main{
     text-align: left;
     position: relative;
-    margin-top: 50px
+    margin-top: 50px;
 }
 
 .centered{

@@ -159,7 +159,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 #lane-footer {
-    margin-top: 10px
+    margin-top: 10px;
 }
 
 #lane-footer h2 {
@@ -183,7 +183,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
     line-height: 24px;
     text-decoration: none;
     font-weight: 300;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 #lane-footer ul a,#lane-subfooter {
@@ -207,11 +207,11 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 
 #lane-subfooter li {
     float: left;
-    padding: 3px 5px 5px 0
+    padding: 3px 5px 5px 0;
 }
 
 #lane-subfooter span {
-    display: none
+    display: none;
 }
 
 #lane-subfooter i {
@@ -241,7 +241,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 
 #sm-footer li {
     display: inline-block;
-    list-style-type: none
+    list-style-type: none;
 }
 
 #sm-footer a {
@@ -261,7 +261,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 #footer-shc {
-    width: 180px
+    width: 180px;
 }
 
 #footer-sch {
@@ -297,8 +297,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
     font-weight: 300;
     display: block;
     padding: 9px 20px 9px 13px;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%,
-        rgba(0, 0, 0, 0) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .menu a:hover {
@@ -430,7 +429,7 @@ h4 {
     -moz-transform: scaleX(-1);
     -ms-transform: scaleX(-1);
     -o-transform: scaleX(-1);
-    transform: scaleX(-1)
+    transform: scaleX(-1);
 }
 
 .header-border {
@@ -691,14 +690,14 @@ http://lane.stanford.edu/samples/button-css.html
 .event {
     background-color: #09425A;
     font-size: 13px;
-    margin-bottom: 15px
+    margin-bottom: 15px;
 }
 
 .event-date {
     color: white;
     text-align: right;
     text-transform: uppercase;
-    padding: 4px
+    padding: 4px;
 }
 
 .event-info {
@@ -709,15 +708,15 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .event-time {
-    font-weight: bold
+    font-weight: bold;
 }
 
 .landing{
-    padding: 0
+    padding: 0;
 }
 .landing img{
     display: block;
-    width: 100%
+    width: 100%;
 }
 .landing h3{
     color: white;
@@ -750,5 +749,5 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .flickr-thumbs a {
-    margin-right: 5px
+    margin-right: 5px;
 }

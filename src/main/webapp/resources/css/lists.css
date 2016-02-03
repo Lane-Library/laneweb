@@ -16,10 +16,10 @@ ol li{
 .bulleted-list{
     font-size: 14px;
     list-style-type: disc;
-    padding-left: 20px
+    padding-left: 20px;
 }
 
 .bulleted-list li{
     border-bottom: none;
-    padding: 0
+    padding: 0;
 }

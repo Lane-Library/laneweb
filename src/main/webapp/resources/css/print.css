@@ -1,5 +1,5 @@
 #main{
-    margin-top: 0
+    margin-top: 0;
 }
 form,
 input,
@@ -14,10 +14,10 @@ input,
 #sm-footer,
 #searchFormContainer{
     height: 0;
-    display: none
+    display: none;
 }
 .popInContent.active{
-    border: 0
+    border: 0;
 }
 
 

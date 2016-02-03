@@ -36,12 +36,12 @@
 }
 
 .landing {
-    padding: 0
+    padding: 0;
 }
 
 .landing img, .landing iframe {
     vertical-align: bottom;
-    width: 100%
+    width: 100%;
 }
 
 .landing h3 {
@@ -61,5 +61,5 @@
 }
 
 .landing-content {
-    padding: 12px
+    padding: 12px;
 }
