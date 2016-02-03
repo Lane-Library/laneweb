@@ -9,9 +9,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +49,7 @@ public class SuggestionControllerTest {
 
     @Test
     public void testGetSuggestionsReturnLimit() throws IOException {
-        Collection<Suggestion> collection = new LinkedList<Suggestion>();
+        Collection<Suggestion> collection = new ArrayList<Suggestion>();
         for (int i = 0; i < 20; i++) {
             collection.add(new Suggestion(Integer.toString(i), Integer.toString(i)));
         }
@@ -75,7 +75,7 @@ public class SuggestionControllerTest {
     @Test
     public void testInternalGetSuggestionsBassett() {
         Suggestion suggestion = new Suggestion("1", "1");
-        Collection<Suggestion> collection = new LinkedList<Suggestion>();
+        Collection<Suggestion> collection = new ArrayList<Suggestion>();
         collection.add(suggestion);
         expect(this.eresource.getSuggestionsForTerm("bassett", "venous thrombosis")).andReturn(
                 Collections.singleton(suggestion));
@@ -97,7 +97,7 @@ public class SuggestionControllerTest {
     public void testInternalGetSuggestionsEjMesh() {
         Suggestion suggestion1 = new Suggestion("1", "1");
         Suggestion suggestion2 = new Suggestion("2", "2");
-        Collection<Suggestion> collection = new LinkedList<Suggestion>();
+        Collection<Suggestion> collection = new ArrayList<Suggestion>();
         collection.add(suggestion1);
         expect(this.eresource.getSuggestionsForTerm("ej", "venous thrombosis")).andReturn(collection);
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion2));
@@ -112,7 +112,7 @@ public class SuggestionControllerTest {
     public void testInternalGetSuggestionsErMesh() {
         Suggestion suggestion1 = new Suggestion("1", "1");
         Suggestion suggestion2 = new Suggestion("2", "2");
-        Collection<Suggestion> collection = new LinkedList<Suggestion>();
+        Collection<Suggestion> collection = new ArrayList<Suggestion>();
         collection.add(suggestion1);
         expect(this.eresource.getSuggestionsForTerm("venous thrombosis")).andReturn(collection);
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion2));
@@ -126,7 +126,7 @@ public class SuggestionControllerTest {
     @Test
     public void testInternalGetSuggestionsMeshI() {
         Suggestion suggestion = new Suggestion("1", "1");
-        Collection<Suggestion> collection = new LinkedList<Suggestion>();
+        Collection<Suggestion> collection = new ArrayList<Suggestion>();
         collection.add(suggestion);
         expect(this.mesh.getSuggestionsForTerm("i", "venous thrombosis")).andReturn(Collections.singleton(suggestion));
         replay(this.eresource, this.mesh);

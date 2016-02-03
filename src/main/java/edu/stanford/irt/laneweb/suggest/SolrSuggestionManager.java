@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.suggest;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
@@ -37,7 +37,7 @@ public class SolrSuggestionManager implements SuggestionManager {
     }
 
     private List<Suggestion> suggestionsFromEresources(final List<Eresource> eresources) {
-        List<Suggestion> suggestions = new LinkedList<Suggestion>();
+        List<Suggestion> suggestions = new ArrayList<>();
         for (Eresource eresource : eresources) {
             String title = eresource.getTitle();
             if (title.endsWith(".") || title.endsWith("/")) {

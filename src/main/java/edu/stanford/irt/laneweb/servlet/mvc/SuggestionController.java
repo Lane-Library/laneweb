@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -58,9 +58,9 @@ public class SuggestionController {
     @ResponseBody
     public List<String> getSuggestionList(@RequestParam final String q, @RequestParam(required = false) final String l) {
         String query = q.trim();
-        Set<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(query));
+        Set<Suggestion> suggestions = new TreeSet<>(new SuggestionComparator(query));
         suggestions.addAll(internalGetSuggestions(query, l));
-        List<String> strings = new LinkedList<String>();
+        List<String> strings = new ArrayList<>();
         for (Suggestion suggestion : suggestions) {
             strings.add(suggestion.getSuggestionTitle());
             if (strings.size() >= RETURN_LIMIT) {

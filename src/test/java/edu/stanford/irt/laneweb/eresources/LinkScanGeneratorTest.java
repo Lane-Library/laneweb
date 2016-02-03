@@ -11,7 +11,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.easymock.Capture;
@@ -47,9 +47,9 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.eresource = createMock(Eresource.class);
         this.link = createMock(Link.class);
-        this.eresourceList = new LinkedList<Eresource>();
+        this.eresourceList = new ArrayList<Eresource>();
         this.eresourceList.add(this.eresource);
-        this.linkList = new LinkedList<Link>();
+        this.linkList = new ArrayList<Link>();
         this.linkList.add(this.link);
     }
 

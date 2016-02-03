@@ -33,7 +33,7 @@ public class LoginBookmarkController extends BookmarkController {
             @RequestParam final String url,
             @RequestParam final String redirect) {
         Bookmark bookmark = new Bookmark(label, url);
-        List<Object> clone = new ArrayList<Object>(bookmarks);
+        List<Object> clone = new ArrayList<>(bookmarks);
         clone.add(0, bookmark);
         saveLinks(userid, clone);
         bookmarks.add(0, bookmark);

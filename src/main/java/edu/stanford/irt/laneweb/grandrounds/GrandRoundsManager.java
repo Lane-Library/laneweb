@@ -35,7 +35,7 @@ public class GrandRoundsManager {
     public GrandRoundsManager(final DataSource dataSource, final InputStream presentationsSQL) throws IOException {
         this.dataSource = dataSource;
         this.presentationsSQL = IOUtils.toString(presentationsSQL);
-        this.departmentMap = new HashMap<String, String>();
+        this.departmentMap = new HashMap<>();
         this.departmentMap.put("medicine", "MEDICINE");
         this.departmentMap.put("emergency", "EMERGENCY MEDICINE");
         this.departmentMap.put("pediatric", "PEDIATRIC");
@@ -43,7 +43,7 @@ public class GrandRoundsManager {
     }
 
     public List<Presentation> getGrandRounds(final String department, final String year) {
-        List<Presentation> presentations = new ArrayList<Presentation>();
+        List<Presentation> presentations = new ArrayList<>();
         try (InputStream input = new VoyagerInputStream2(this.dataSource, this.presentationsSQL, 3,
                 this.departmentMap.get(department), year)) {
             RecordCollection collection = new RecordCollection(input);

@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -55,7 +55,7 @@ public class ContentSearchGenerator extends AbstractPagingSearchResultGenerator 
         if (this.engines.isEmpty()) {
             String engineList = parameters.get(Model.ENGINES);
             if (engineList != null) {
-                this.engines = new LinkedList<String>();
+                this.engines = new ArrayList<>();
                 for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
                     this.engines.add(st.nextToken());
                 }

@@ -41,7 +41,7 @@ public class EMailSender {
     public EMailSender(final JavaMailSender mailSender, final SpamFilter spamFilter) {
         this.mailSender = mailSender;
         this.spamFilter = spamFilter;
-        this.excludedFields = new HashSet<String>();
+        this.excludedFields = new HashSet<>();
         for (String element : XCLUDED_FIELDS) {
             this.excludedFields.add(element);
         }

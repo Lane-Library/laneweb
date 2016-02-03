@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -30,7 +30,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
             searchResults = Collections.emptyList();
         } else {
             searchResults = super.getSearchResults(query);
-            List<SearchResult> eresourceResults = new LinkedList<SearchResult>();
+            List<SearchResult> eresourceResults = new ArrayList<>();
             for (Eresource eresource : this.solrService.search(query)) {
                 eresourceResults.add(new EresourceSearchResult(eresource));
             }

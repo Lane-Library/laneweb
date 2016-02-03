@@ -68,7 +68,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
 
     @Override
     protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         Sort sorts = parseSortParam();
         Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
         if (null != this.type) {
@@ -82,7 +82,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
     }
 
     private Sort parseSortParam() {
-        List<Order> orders = new ArrayList<Sort.Order>();
+        List<Order> orders = new ArrayList<>();
         for (String string : this.sort.split(",")) {
             String[] s = string.split(" ");
             if (s.length == 2 && !s[0].isEmpty()) {

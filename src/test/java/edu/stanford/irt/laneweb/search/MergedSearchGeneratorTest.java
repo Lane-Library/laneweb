@@ -9,9 +9,9 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class MergedSearchGeneratorTest {
     @Test
     public void testGetSearchResults() {
         expect(this.MetaSearchManager.search(isA(Query.class), isNull(Collection.class), eq(20000L))).andReturn(null);
-        List<SearchResult> list = new LinkedList<SearchResult>();
+        List<SearchResult> list = new ArrayList<SearchResult>();
         list.add(this.result);
         expect(this.conversionStrategy.convertResult(null)).andReturn(list);
         expect(this.solrService.search("query")).andReturn(Collections.singletonList(this.eresource));

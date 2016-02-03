@@ -14,7 +14,7 @@ import java.util.List;
  */
 public final class EscapingQueryInspector implements QueryInspector {
 
-    private static final List<Character> ESCAPEABLE_CHARS = new ArrayList<Character>();
+    private static final List<Character> ESCAPEABLE_CHARS = new ArrayList<>();
 
     static {
         // these seem harmless | &

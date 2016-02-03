@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -27,7 +27,7 @@ public class ContentResultConversionStrategy {
     }
 
     public List<SearchResult> convertResult(final Result result) {
-        Map<ContentResultSearchResult, ContentResultSearchResult> resultMap = new HashMap<ContentResultSearchResult, ContentResultSearchResult>();
+        Map<ContentResultSearchResult, ContentResultSearchResult> resultMap = new HashMap<>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().getSearchText());
         Collection<Result> engines;
         synchronized (result) {
@@ -37,7 +37,7 @@ public class ContentResultConversionStrategy {
             processEngine(engine, resultMap, queryTermPattern);
         }
         this.scopusDeduplicator.removeDuplicates(resultMap.values());
-        return new LinkedList<SearchResult>(resultMap.values());
+        return new ArrayList<>(resultMap.values());
     }
 
     private void processEngine(final Result engine,

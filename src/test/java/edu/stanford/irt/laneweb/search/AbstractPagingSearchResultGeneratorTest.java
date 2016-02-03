@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.search;
 import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class AbstractPagingSearchResultGeneratorTest {
 
         @Override
         protected List<SearchResult> getSearchResults(final String query) {
-            return new LinkedList<SearchResult>();
+            return new ArrayList<SearchResult>();
         }
     }
 

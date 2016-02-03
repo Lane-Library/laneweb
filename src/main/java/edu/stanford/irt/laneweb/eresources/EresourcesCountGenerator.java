@@ -42,7 +42,7 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         Map<String, Integer> results = null;
         if (this.query == null || this.query.isEmpty() || this.query.length() > MAX_QUERY_LENGTH) {
-            results = new HashMap<String, Integer>();
+            results = new HashMap<>();
             Integer zero = Integer.valueOf(0);
             for (String type : this.types) {
                 results.put(type, zero);

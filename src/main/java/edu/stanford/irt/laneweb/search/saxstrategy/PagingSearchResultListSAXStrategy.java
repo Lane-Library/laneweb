@@ -71,7 +71,7 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
 
     private void hitCountsToSAX(final XMLConsumer xmlConsumer, final PagingSearchResultList list) throws SAXException {
         XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
-        Set<Result> countedResources = new HashSet<Result>();
+        Set<Result> countedResources = new HashSet<>();
         for (SearchResult resource : list) {
             if (resource instanceof ContentResultSearchResult) {
                 Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();

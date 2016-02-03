@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +31,8 @@ public class ExtensionsSuggestController {
     @ResponseBody
     public List<Object> getSuggestions(@RequestParam final String q) {
         String query = q;
-        Collection<String> suggestions = new LinkedList<String>();
-        List<Object> objectList = new ArrayList<Object>();
+        Collection<String> suggestions = new ArrayList<>();
+        List<Object> objectList = new ArrayList<>();
         for (Suggestion suggestion : this.suggestionManager.getSuggestionsForTerm(query)) {
             suggestions.add(suggestion.getSuggestionTitle());
             if (suggestions.size() >= RETURN_LIMIT) {

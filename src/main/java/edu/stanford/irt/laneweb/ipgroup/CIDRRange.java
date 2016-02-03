@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -30,7 +29,7 @@ public class CIDRRange {
      */
     public CIDRRange(final String cidr) {
         this.cidr = cidr;
-        this.subranges = new ArrayList<CIDRRange>();
+        this.subranges = new ArrayList<>();
         String ip = cidr.substring(0, cidr.indexOf('/'));
         int addr = ipToInt(ip);
         int mask = (-1) << (32 - Integer.parseInt(cidr.substring(ip.length() + 1)));
@@ -167,7 +166,7 @@ public class CIDRRange {
     }
 
     private List<CIDRRange> getSubrangesContainedBy(final CIDRRange other) {
-        List<CIDRRange> containedBy = new LinkedList<CIDRRange>();
+        List<CIDRRange> containedBy = new ArrayList<>();
         for (CIDRRange subrange : this.subranges) {
             if (other.isSubrange(subrange)) {
                 containedBy.add(subrange);

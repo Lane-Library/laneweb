@@ -89,7 +89,7 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
     }
 
     private Set<String> getLinks(final Eresource eresource) {
-        HashSet<String> urls = new HashSet<String>();
+        Set<String> urls = new HashSet<>();
         for (Link link : eresource.getLinks()) {
             String linkUrl = link.getUrl();
             if (null != linkUrl && linkUrl.startsWith("http")) {

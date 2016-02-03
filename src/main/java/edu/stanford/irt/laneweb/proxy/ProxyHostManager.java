@@ -89,7 +89,7 @@ public class ProxyHostManager {
 
     public ProxyHostManager(final DataSource dataSource) {
         this.dataSource = dataSource;
-        this.proxyHosts = new HashSet<String>();
+        this.proxyHosts = new HashSet<>();
         String proxyHost = null;
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"), StandardCharsets.UTF_8))) {

@@ -131,7 +131,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             String facetValue = token[1].replaceAll("^?\"$?", EMPTY);
             Collection<Facet> facetList = facetsMap.get(fieldName);
             if (null == facetList) {
-                facetList = new ArrayList<Facet>();
+                facetList = new ArrayList<>();
             }
             long present = facetList.stream().filter(s -> facetValue.equals(s.getValue())).count();
             if (present < 1) {
@@ -152,7 +152,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             final Map<String, Collection<Facet>> facetsMap) {
         Collection<Facet> facetList = facetsMap.get(PUBLICATION_TYPE);
         if (null == facetList) {
-            facetList = new ArrayList<Facet>();
+            facetList = new ArrayList<>();
         }
         long required = facetList.stream().filter(s -> this.requiredPublicationTypes.contains(s.getValue())).count();
         if (required < this.requiredPublicationTypes.size()) {
@@ -179,7 +179,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     private Map<String, Collection<Facet>> maybeRequestMoreMesh(final Map<String, Collection<Facet>> facetsMap) {
         Collection<Facet> facetList = facetsMap.get(MESH);
         if (null == facetList) {
-            facetList = new ArrayList<Facet>();
+            facetList = new ArrayList<>();
         }
         Collection<Facet> reduced = facetList.stream()
                 .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
@@ -208,10 +208,10 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     }
 
     private Map<String, Collection<Facet>> processFacets(final FacetPage<Eresource> facetpage) {
-        Map<String, Collection<Facet>> facetsMap = new LinkedHashMap<String, Collection<Facet>>();
+        Map<String, Collection<Facet>> facetsMap = new LinkedHashMap<>();
         // extract from facet queries
         for (FacetQueryEntry page : facetpage.getFacetQueryResult()) {
-            Collection<Facet> facetList = new ArrayList<Facet>();
+            Collection<Facet> facetList = new ArrayList<>();
             String[] value = page.getValue().split(COLON);
             String fieldName = value[0];
             String facetValue = value[1];
@@ -229,7 +229,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             if (!page.hasContent()) {
                 continue;
             }
-            Collection<Facet> facetList = new ArrayList<Facet>();
+            Collection<Facet> facetList = new ArrayList<>();
             String fieldName = null;
             for (FacetFieldEntry entry : page) {
                 if (fieldName == null) {
@@ -247,9 +247,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     }
 
     private Map<String, Set<Facet>> sortFacets(final Map<String, Collection<Facet>> facetsMap) {
-        Map<String, Set<Facet>> sortedFacetsMap = new LinkedHashMap<String, Set<Facet>>();
+        Map<String, Set<Facet>> sortedFacetsMap = new LinkedHashMap<>();
         for (Map.Entry<String, Collection<Facet>> entry : facetsMap.entrySet()) {
-            Set<Facet> facetSet = new TreeSet<Facet>(this.comparator);
+            Set<Facet> facetSet = new TreeSet<>(this.comparator);
             Collection<Facet> facetList = entry.getValue();
             if (null != facetList) {
                 facetSet.addAll(facetList);

@@ -33,7 +33,7 @@ public class ControlCenter {
     public ControlCenter(final ApplicationContext context, final UserDataBinder userBinder) {
         this.userBinder = userBinder;
         this.context = context;
-        this.admins = new HashSet<String>();
+        this.admins = new HashSet<>();
         this.admins.add("alainb@stanford.edu");
         this.admins.add("ceyates@stanford.edu");
         this.admins.add("ryanmax@stanford.edu");

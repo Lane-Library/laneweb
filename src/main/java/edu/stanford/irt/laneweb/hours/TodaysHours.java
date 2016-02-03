@@ -15,7 +15,7 @@ public class TodaysHours {
 
     public static final String UNKNOWN = "??";
 
-    private Map<String, String> daysMap = new HashMap<String, String>();
+    private Map<String, String> daysMap = new HashMap<>();
 
     private File hoursFile = null;
 

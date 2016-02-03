@@ -38,7 +38,7 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator im
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Map<String, String> copyrights = new HashMap<String, String>();
+        Map<String, String> copyrights = new HashMap<>();
         FacetPage<Image> facetPage = this.service.facetOnCopyright(this.query);
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         List<FacetFieldEntry> facet = page.getContent();

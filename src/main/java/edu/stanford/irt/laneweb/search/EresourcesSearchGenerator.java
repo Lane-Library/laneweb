@@ -2,8 +2,8 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class EresourcesSearchGenerator extends AbstractPagingSearchResultGenerat
         } else {
             eresources = this.solrService.searchType(this.type, query);
         }
-        List<SearchResult> results = new LinkedList<SearchResult>();
+        List<SearchResult> results = new ArrayList<>();
         for (Eresource eresource : eresources) {
             results.add(new EresourceSearchResult(eresource));
         }

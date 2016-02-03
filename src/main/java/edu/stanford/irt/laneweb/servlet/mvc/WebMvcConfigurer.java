@@ -145,7 +145,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(
             @Qualifier(value = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static") final HttpRequestHandler staticHandler) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
-        Map<String, Object> urlMap = new HashMap<String, Object>();
+        Map<String, Object> urlMap = new HashMap<>();
         urlMap.put("/**/*.*", staticHandler);
         handlerMapping.setUrlMap(urlMap);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
@@ -182,7 +182,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Bean
     public MobileSiteInterceptor mobileSiteInterceptor() {
-        Map<String, String> redirectMap = new HashMap<String, String>();
+        Map<String, String> redirectMap = new HashMap<>();
         redirectMap.put("/index.html", "/m/index.html");
         redirectMap.put("/biomed-resources/eb.html", "/m/book.html");
         redirectMap.put("/biomed-resources/ej.html", "/m/ej.html");

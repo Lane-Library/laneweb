@@ -34,7 +34,7 @@ public class CompositeSuggestionManager implements SuggestionManager {
         if (term.length() < MINIMUM_TERM_LENGTH) {
             return NO_SUGGESTIONS;
         }
-        Collection<Suggestion> suggestions = new TreeSet<Suggestion>(new SuggestionComparator(term));
+        Collection<Suggestion> suggestions = new TreeSet<>(new SuggestionComparator(term));
         for (SuggestionManager suggestionManager : this.suggestionManagers) {
             if (type == null) {
                 suggestions.addAll(suggestionManager.getSuggestionsForTerm(term));

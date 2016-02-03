@@ -28,7 +28,7 @@ public class BookmarkDataBinder implements DataBinder {
                 if (bookmarks == null) {
                     bookmarks = this.bookmarkDAO.getLinks(userid);
                     if (bookmarks == null) {
-                        bookmarks = new ArrayList<Object>();
+                        bookmarks = new ArrayList<>();
                     }
                     session.setAttribute(Model.BOOKMARKS, (Serializable) bookmarks);
                 }

@@ -155,7 +155,7 @@ public class SolrSearchService implements SolrService {
 
     @Override
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
-        Map<String, Integer> result = new HashMap<String, Integer>();
+        Map<String, Integer> result = new HashMap<>();
         SolrResultPage<?> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
         int total = (int) facets.getTotalElements();
         result.put("all", Integer.valueOf(total));

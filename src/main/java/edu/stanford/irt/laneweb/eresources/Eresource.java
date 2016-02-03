@@ -29,7 +29,7 @@ public class Eresource {
     private Boolean isCore;
 
     @Transient
-    private Collection<Link> linksList = new ArrayList<Link>();
+    private Collection<Link> linksList = new ArrayList<>();
 
     @Field
     private String primaryType;
