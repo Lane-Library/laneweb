@@ -394,8 +394,6 @@
 
         Tracker.addTarget(Lane);
 
-        Y.lane.tracker = Tracker;
-
         Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
         Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();
