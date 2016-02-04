@@ -20,11 +20,11 @@ import edu.stanford.irt.solr.service.SolrImageService;
  */
 public class BassettImageGenerator extends AbstractGenerator implements ModelAware {
 
+    private static final int IMAGES_BY_PAGE = 30;
+
     private String bassettNumber;
 
     private int currentPage;
-
-    private int IMAGES_BY_PAGE = 30;
 
     private String query;
 
@@ -42,7 +42,7 @@ public class BassettImageGenerator extends AbstractGenerator implements ModelAwa
     @Override
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY, "*");
-        if (this.query.equals("")) {
+        if ("".equals(this.query)) {
             this.query = "*";
         }
         this.region = ModelUtil.getString(model, Model.REGION);
@@ -55,7 +55,7 @@ public class BassettImageGenerator extends AbstractGenerator implements ModelAwa
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Pageable page = new PageRequest(this.currentPage - 1, this.IMAGES_BY_PAGE);
+        Pageable page = new PageRequest(this.currentPage - 1, IMAGES_BY_PAGE);
         Page<BassettImage> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.service.findBassettByNumber(this.bassettNumber);

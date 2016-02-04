@@ -22,6 +22,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     protected static final String ANCHOR = "a";
 
+    protected static final String BUTTON = "button";
+
     protected static final String CDATA = "CDATA";
 
     protected static final String CLASS = "class";
@@ -60,9 +62,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     protected static final String VALUE = "value";
 
-    protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
-
-    private static final String INPUT = "input";
+    protected static final String INPUT = "input";
 
     private NumberFormat nf = NumberFormat.getInstance();
 
@@ -175,9 +175,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "copyright");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, "label");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Rights Statement: ");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, "label");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
         endDiv(xmlConsumer);
@@ -191,8 +191,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         startDivWithClass(xmlConsumer, "to-image");
         startAnchor(xmlConsumer, "");
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "button");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, "button", atts);
+        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, BUTTON);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, BUTTON, atts);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
         XMLUtils.data(xmlConsumer, "Visit Source Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
@@ -200,7 +200,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-arrow-right");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, "button");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
         endAnchor(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
@@ -374,9 +374,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
     }
 
-    private String getDisplayedResourceName(String resourceName) {
-        if (this.websiteIdMapping.get(resourceName) != null) {
-            resourceName = this.websiteIdMapping.get(resourceName);
+    private String getDisplayedResourceName(final String resourceName) {
+        if (this.websiteIdMapping.containsKey(resourceName)) {
+            return this.websiteIdMapping.get(resourceName);
         }
         return resourceName;
     }

@@ -103,7 +103,7 @@
                 action: this.getSource(),
                 label: event.suggestion
             });
-            this.submit()
+            this.submit();
         },
 
         /**

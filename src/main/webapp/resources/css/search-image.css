@@ -30,16 +30,16 @@
     border-width: 0;
     height: 120px;
     width: 232px;
+    box-sizing: content-box;
 }
 
 #imageList li li{
     height: auto;
-
-    }
+}
 
 #imageList li.admin{
     margin-top: 30px;
-    }
+}
 
 .imageDetail tbody tr:nth-child(odd) {
     background: inherit;
@@ -66,7 +66,6 @@
 .imageDetail .gl div{
     overflow: hidden;
     margin: 10px 10px 10px 0;
-    overflow: hidden;
 }
 
 .imageDetail .yui3-g{
@@ -248,7 +247,6 @@
     border-bottom: none;
     margin-right: 6px;
     list-style: none outside none;
-    float: left;
 }
 
 .content .search-image-selected-tab {
