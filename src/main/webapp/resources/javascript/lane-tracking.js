@@ -31,7 +31,6 @@
             getEventTrackingDataByAncestor = function(link) {
                 var i, trackingData = {},
                 handlers = [
-                            {selector:".favorites", category:"lane:bookmarkClick"},
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
                             {selector:".lane-nav", category:"lane:laneNav-top"},
@@ -39,7 +38,6 @@
                             {selector:".banner-content", category:"lane:bannerClick"},
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
-                //TODO: this counts My Bookmarks clicks as well: check if href=/favorites.html and skip?
                 for (i = 0; i < handlers.length; i++) {
                     if (link.ancestor(handlers[i].selector)) {
                         trackingData.category = handlers[i].category;
@@ -50,6 +48,7 @@
                             trackingData.action = link.get('href');
                             trackingData.label = link.get('text');
                         }
+                        break;
                     }
                 }
                 return trackingData;
@@ -93,9 +92,7 @@
             },
             getTrackedHost = function(node) {
                 var host, pathname = node.get("pathname");
-                if (node.hasClass('yui3-accordion-item-trigger')) {
-                    host = location.get("host");
-                } else if (pathname.indexOf("cookiesFetch") > -1) {
+                if (pathname.indexOf("cookiesFetch") > -1) {
                     host = decodeURIComponent(node.get('search'));
                     host = host.substring(host.indexOf("path=") + 6);
                     if (host.indexOf("&") > -1) {
@@ -117,7 +114,7 @@
             },
             getTrackedPath = function(node) {
                 var path, host, pathname = node.get("pathname");
-                if (isLocalPopup(node) || node.hasClass('yui3-accordion-item-trigger')) {
+                if (isLocalPopup(node)) {
                     path = location.get("pathname");
                 } else if (pathname.indexOf('cookiesFetch') > -1) {
                     host = decodeURIComponent(node.get('search'));
@@ -147,9 +144,7 @@
             },
             getTrackedQuery = function(node) {
                 var query, host, path;
-                if (node.hasClass('yui3-accordion-item-trigger')) {
-                    query = location.get("search");
-                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
+                if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         path = host.substring(host.indexOf('/'));
@@ -168,7 +163,7 @@
             },
             getTrackedExternal = function(node) {
                 var external = false;
-                if (node.hasClass('yui3-accordion-item-trigger')) {
+                if (!node.get("hostname")) {
                     external = false;
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     external = true;
@@ -256,9 +251,7 @@
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (node.hasClass('yui3-accordion-item-trigger')) {
-                        title = 'Expandy:' + title;
-                    } else if (node.ancestor(".lane-nav")) {
+                    if (node.ancestor(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -292,7 +285,7 @@
                         if (link.get("nodeName") !== "A") {
                             link = link.ancestor("a");
                         }
-                        if (link) {
+                        if (link && link.get("href")) {
                             if (link.get('hostname') === location.get("hostname")) {
                                 isTrackable =  isTrackableLocalClick(link);
                             } else {
@@ -370,6 +363,6 @@
 
         Tracker.addTarget(Lane);
 
-        Y.all(".searchFacet, .yui3-accordion-item-trigger, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all(".favorites a, #bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all(".searchFacet a, *[rel^='popup local']").setData("isTrackableAsPageView", true);
+        Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

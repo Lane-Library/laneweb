@@ -46,25 +46,6 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.isNull(this.event);
     },
 
-    testExpandyTriggerClick: function() {
-        var link = Y.one('.yui3-accordion-item-trigger');
-        link.simulate('click');
-        Y.Assert.areEqual("Expandy:head", this.pageView.title);
-        Y.Assert.isNull(this.event);
-    },
-
-    testFavoritesClick: function() {
-        Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
-        var link = Y.one(".favorites a");
-        link.simulate("click");
-        Y.lane.Model.set(Y.lane.Model.AUTH, null);
-        Y.Assert.areEqual(link.get("text"), this.event.label);
-        Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
-        Y.Assert.areEqual("auth", this.event.action);
-        Y.Assert.areEqual("/" , this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
-    },
-
     testBookmarksClick: function() {
         Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
         var link = Y.one("#bookmarks a");
@@ -73,8 +54,9 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("auth", this.event.action);
         Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
-        Y.Assert.areEqual("/" , this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
+        Y.Assert.isUndefined(this.event.path);
+        Y.Assert.areEqual(link.get("text"), this.event.label);
+        Y.Assert.isNull(this.pageView);
     },
 
     testBookmarksEditorClick: function() {
@@ -85,8 +67,9 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
         Y.Assert.areEqual("auth", this.event.action);
-        Y.Assert.areEqual("/" , this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
+        Y.Assert.isUndefined(this.event.path);
+        Y.Assert.areEqual(link.get("text"), this.event.label);
+        Y.Assert.isNull(this.pageView);
     },
 
     testLaneNavClick: function() {
@@ -95,13 +78,18 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:laneNav-top", this.event.category);
         Y.Assert.areEqual(link.get("href"), this.event.action);
-        Y.Assert.areEqual("/" , this.pageView.path);
-        Y.Assert.areEqual("laneNav: " + link.get("text"), this.pageView.title);
+        Y.Assert.isUndefined(this.event.path);
+        Y.Assert.areEqual(link.get("text"), this.event.label);
+        Y.Assert.isNull(this.pageView);
     },
 
     testQLinkClick: function() {
         var link = Y.one(".qlinks a");
         link.simulate("click");
+        Y.Assert.isTrue(this.pageView.external);
+        Y.Assert.areEqual(link.get("hostname"), this.pageView.host);
+        Y.Assert.areEqual(this.fixPath(link.get("pathname")), this.pageView.path);
+        Y.Assert.areEqual(link.get("text"), this.pageView.title);
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:quickLinkClick", this.event.category);
         Y.Assert.areEqual(link.get("href"), this.event.action);
@@ -115,8 +103,7 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(link.get("title"), this.event.label);
         Y.Assert.areEqual("lane:bannerClick", this.event.category);
         Y.Assert.areEqual(link.get("href"), this.event.action);
-        Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
+        Y.Assert.isNull(this.pageView);
     },
 
     testLaneFooterClick: function() {
@@ -125,8 +112,7 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:laneNav-footer", this.event.category);
         Y.Assert.areEqual(link.get("href"), this.event.action);
-        Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
+        Y.Assert.isNull(this.pageView);
     },
 
     testBrowseResultClick: function() {
@@ -175,6 +161,7 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(Y.lane.Location.get("host"), this.pageView.host);
         Y.Assert.areEqual(Y.lane.Location.get("pathname") , this.pageView.path);
         Y.Assert.areEqual("YUI Pop-up [local]: " + link.get("text"), this.pageView.title);
+        Y.Assert.isFalse(this.pageView.external);
         Y.Assert.isNull(this.event);
     },
 
