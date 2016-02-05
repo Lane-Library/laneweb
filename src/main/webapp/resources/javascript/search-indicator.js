@@ -2,7 +2,8 @@
 
     "use strict";
 
-    var indicator = document.querySelector(".search-indicator");
+    var SEARCH_INDICATOR = "search-indicator",
+        indicator = document.querySelector("." + SEARCH_INDICATOR);
 
     /**
      * Provides static show and hide methods to (surprise!) show
@@ -16,7 +17,7 @@
          * @static
          */
         show: function() {
-            Y.lane.activate(indicator);
+            Y.lane.activate(indicator, SEARCH_INDICATOR);
         },
 
         /**
@@ -25,7 +26,7 @@
          * @static
          */
         hide: function() {
-            Y.lane.deactivate(indicator);
+            Y.lane.deactivate(indicator, SEARCH_INDICATOR);
         }
     };
 

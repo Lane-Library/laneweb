@@ -111,7 +111,7 @@
     right: 250px;
     bottom: 30px;
 }
-.search-indicator.active {
+.search-indicator-active {
     visibility: visible;
 }
 #searchTips {

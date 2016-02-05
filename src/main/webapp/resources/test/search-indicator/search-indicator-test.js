@@ -9,9 +9,9 @@ var searchIndicatorTestCase = new Y.Test.Case({
     testShowAndHide: function() {
         var node = Y.one(".search-indicator");
         this.indicator.show();
-        Y.Assert.isTrue(node.hasClass("active"));
+        Y.Assert.isTrue(node.hasClass("search-indicator-active"));
         this.indicator.hide();
-        Y.Assert.isFalse(node.hasClass("active"));
+        Y.Assert.isFalse(node.hasClass("search-indicator-active"));
     }
 });
 
