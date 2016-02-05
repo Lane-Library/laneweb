@@ -3,31 +3,34 @@
     "use strict";
 
     var SEARCH_INDICATOR = "search-indicator",
-        indicator = document.querySelector("." + SEARCH_INDICATOR);
+        lane = Y.lane,
+        indicatorNode = document.querySelector("." + SEARCH_INDICATOR),
 
     /**
      * Provides static show and hide methods to (surprise!) show
      * and hide the search indicator animated gif.
      */
-    Y.lane.searchIndicator = {
+    searchIndicator = {
 
         /**
-         * activates the .search-indicator, deactivates the .search-button
+         * activates the .search-indicator
          * @method show
          * @static
          */
         show: function() {
-            Y.lane.activate(indicator, SEARCH_INDICATOR);
+            lane.activate(indicatorNode, SEARCH_INDICATOR);
         },
 
         /**
-         * deactivates the .search-indicator, activate the .search-button
+         * deactivates the .search-indicator
          * @method hide
          * @static
          */
         hide: function() {
-            Y.lane.deactivate(indicator, SEARCH_INDICATOR);
+            lane.deactivate(indicatorNode, SEARCH_INDICATOR);
         }
     };
+
+    lane.searchIndicator = searchIndicator;
 
 })();
