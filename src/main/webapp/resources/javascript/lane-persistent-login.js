@@ -72,8 +72,7 @@
             } else {
                 Y.Cookie.remove("isPersistent");
             }
-        }
-        , '#is-persistent-login');
+        }, '#is-persistent-login');
     }
 
     // for the static page myaccounts.html Click on YES this way the user
