@@ -55,7 +55,7 @@ public class LinkScanGeneratorTest {
 
     @Test
     public void testDoGenerate() throws Exception {
-        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
+        expect(this.searchService.getLinkscanLinks()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.eresource.getId()).andReturn("type-id");
@@ -83,7 +83,7 @@ public class LinkScanGeneratorTest {
 
     @Test
     public void testDoGenerateNullTitleUrl() throws Exception {
-        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
+        expect(this.searchService.getLinkscanLinks()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.eresource.getId()).andReturn("type-id");
@@ -99,7 +99,7 @@ public class LinkScanGeneratorTest {
 
     @Test(expected = LanewebException.class)
     public void testDoGenerateThrowSAXException() throws SAXException {
-        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
+        expect(this.searchService.getLinkscanLinks()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.searchService, this.xmlConsumer);

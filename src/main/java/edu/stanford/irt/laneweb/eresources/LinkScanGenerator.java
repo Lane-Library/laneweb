@@ -52,7 +52,7 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Eresource> results = this.searchService.searchFindAllNotRecordTypePubmed();
+        List<Eresource> results = this.searchService.getLinkscanLinks();
         int p = 1;
         String position, id, title;
         try {

@@ -104,6 +104,10 @@ public class SolrSearchService implements SolrService {
         return this.repository.browseAllCoreByType(newType, new PageRequest(0, Integer.MAX_VALUE));
     }
 
+    public List<Eresource> getLinkscanLinks() {
+        return this.repository.browseLinkscanLinks(new PageRequest(0, Integer.MAX_VALUE));
+    }
+
     @Override
     public List<Eresource> getMesh(final String type, final String mesh) {
         if (null == type) {
@@ -172,10 +176,6 @@ public class SolrSearchService implements SolrService {
             }
         }
         return result;
-    }
-
-    public List<Eresource> searchFindAllNotRecordTypePubmed() {
-        return this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override

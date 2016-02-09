@@ -213,10 +213,10 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testSearchFindAllNotRecordTypePubmed() {
-        expect(this.repository.searchFindAllNotRecordTypePubmed(isA(PageRequest.class)))
+        expect(this.repository.browseLinkscanLinks(isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.searchFindAllNotRecordTypePubmed();
+        this.searchService.getLinkscanLinks();
         verify(this.repository);
     }
 
