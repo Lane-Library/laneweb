@@ -18,31 +18,9 @@
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListSAXStrategy">
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.MergedSearchSAXStrategy">
-                <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ContentResultSAXStrategy"/>
-                </constructor-arg>
-                <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
-            </bean>
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ContentResultSAXStrategy"/>
         </constructor-arg>
     </bean>
-    
-    <!--<bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"
-        class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListXHTMLSAXStrategy">
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.MergedSearchSAXStrategy">
-                <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ContentResultXHTMLSAXStrategy"/>
-                </constructor-arg>
-                <constructor-arg>
-                    <bean class="edu.stanford.irt.laneweb.eresources.EresourceXHTMLSAXStrategy"/>
-                </constructor-arg>
-            </bean>
-        </constructor-arg>
-        <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.SearchListPagingDataSAXStrategy"/>
-        </constructor-arg>
-    </bean>-->
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"
         class="edu.stanford.irt.laneweb.search.saxstrategy.SolrPagingEresourceSAXStrategy">
@@ -139,13 +117,6 @@
         <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"/>
     </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search-html"
-        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"/>
-    </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content"
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
@@ -170,14 +141,6 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-resource"
         class="edu.stanford.irt.laneweb.search.ResourceSearchGenerator"
         parent="edu.stanford.irt.cocoon.pipeline.Generator/search"/>
-    
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/merged-search"
-        class="edu.stanford.irt.laneweb.search.MergedSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
-        <constructor-arg index="1" ref="edu.stanford.irt.laneweb.solr.SolrService"/>
-        <constructor-arg index="2" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
-        <constructor-arg index="3" ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
-    </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/query-highlighting"
         class="edu.stanford.irt.laneweb.search.QueryHighlightingTransformer"

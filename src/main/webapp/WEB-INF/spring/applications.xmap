@@ -67,18 +67,6 @@
                 <map:transform type="query-highlighting"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
-            <!-- this is used in content search/all/all-all.html -->
-            <map:match pattern="search/merged/html/*" type="wildcard">
-                <map:generate type="merged-search">
-                    <map:parameter name="timeout" value="5000"/>
-                    <map:parameter name="engines" value="{1}"/>
-                </map:generate>
-                <map:transform type="description-labeling"/>
-                <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- search2json.xsl converts the result xml to json -->
             <!-- it is used in lane-metasearch.js and lane-querymap.js -->
             <map:match pattern="search/json" type="wildcard">
