@@ -12,8 +12,6 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultConversionStrategy {
 
-    private ScopusDeduplicator scopusDeduplicator = new ScopusDeduplicator();
-
     private ScoreStrategy scoreStrategy = new ScoreStrategy();
 
     public ContentResultConversionStrategy() {
@@ -21,9 +19,8 @@ public class ContentResultConversionStrategy {
     }
 
     // constructor for unit tests
-    ContentResultConversionStrategy(final ScoreStrategy scoreStrategy, final ScopusDeduplicator deduplicator) {
+    ContentResultConversionStrategy(final ScoreStrategy scoreStrategy) {
         this.scoreStrategy = scoreStrategy;
-        this.scopusDeduplicator = deduplicator;
     }
 
     public List<SearchResult> convertResult(final Result result) {
@@ -36,7 +33,6 @@ public class ContentResultConversionStrategy {
         for (Result engine : engines) {
             processEngine(engine, resultMap, queryTermPattern);
         }
-        this.scopusDeduplicator.removeDuplicates(resultMap.values());
         return new ArrayList<>(resultMap.values());
     }
 
