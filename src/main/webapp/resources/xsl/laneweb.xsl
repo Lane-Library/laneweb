@@ -209,26 +209,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- setup flash object, using swfobject -->
-    <xsl:template match="h:object[@type='application/x-shockwave-flash']">
-        <xsl:copy>
-            <xsl:attribute name="classid">clsid:D27CDB6E-AE6D-11cf-96B8-444553540000</xsl:attribute>
-            <xsl:apply-templates select="@*[not(name()='type' or name() = 'data')]"/>
-            <param name="movie" value="{@data}"/>
-            <param name="wmode" value="transparent"/>
-            <xsl:apply-templates select="h:param"/>
-            <xsl:comment>[if !IE]></xsl:comment>
-            <xsl:copy>
-                <xsl:apply-templates select="@*[not(name()='id')]"/>
-                <xsl:apply-templates select="h:param"/>
-                <xsl:comment>&lt;![endif]</xsl:comment>
-                <xsl:apply-templates select="*[not(self::h:param)]"/>
-                <xsl:comment>[if !IE]></xsl:comment>
-            </xsl:copy>
-            <xsl:comment>&lt;![endif]</xsl:comment>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- add 'current' class to li with a child a with current href -->
     <!-- TODO: reexamine this priority, should this be more specific?  -->
     <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::class='lane-nav'])]" priority="-1">
@@ -248,28 +228,10 @@
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
 
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
-    <!-- and add the swfobject.js stuff if necessary -->
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="child::node()"/>
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
-            <xsl:if test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
-                <script type="text/javascript" src="{$base-path}/resources/javascript/swfobject.js?{$version}"><xsl:text> </xsl:text></script>
-                <script type="text/javascript">
-                    <xsl:for-each select="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
-                        <xsl:text>swfobject.registerObject('</xsl:text>
-                        <xsl:value-of select="@id"/>
-                        <xsl:if test="h:param[@name='flash-version']">
-                            <xsl:text>','</xsl:text>
-                            <xsl:value-of select="h:param[@name='flash-version']/@value"/>
-                            <xsl:if test="h:param[@name='flash-for-upgrade']/@value = 'true'">
-                                <xsl:value-of select="concat(&quot;','&quot;,$base-path,'/flash/playerProductInstall.swf')"/>
-                            </xsl:if>
-                        </xsl:if>
-                        <xsl:text>');</xsl:text>
-                    </xsl:for-each>
-                </script>
-            </xsl:if>
         </xsl:copy>
     </xsl:template>
 

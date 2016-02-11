@@ -48,7 +48,7 @@
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
-        <sonar.exclusions>**/yui*,**/jquery*,**/swfobject.js,**/*-test.js</sonar.exclusions>
+        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js</sonar.exclusions>
         <sonar.javascript.lcov.reportPath>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
     </properties>
     <dependencies>
@@ -391,7 +391,6 @@
                     <encoding>UTF-8</encoding>
                     <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
                     <excludes>
-                        <exclude>**/swfobject.js</exclude>
                         <exclude>**/lane-all.css</exclude>
                         <exclude>**/lane-all.js</exclude>
                         <exclude>**/lane-mobile.css</exclude>
@@ -618,7 +617,7 @@
                 <version>0.7</version>
                 <configuration>
                     <jsDir>src/main/webapp/resources/javascript/</jsDir>
-                    <excludes>mobile/jquery*.js swfobject.js yui-*.js</excludes>
+                    <excludes>mobile/jquery*.js yui-*.js</excludes>
                 </configuration>
                 <reportSets>
                     <reportSet>
