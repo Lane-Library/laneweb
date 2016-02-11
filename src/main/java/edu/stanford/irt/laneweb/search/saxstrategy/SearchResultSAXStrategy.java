@@ -7,15 +7,15 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
-import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
+import edu.stanford.irt.laneweb.search.SearchResult;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 
-public class ContentResultSAXStrategy implements SAXStrategy<ContentResultSearchResult> {
+public class SearchResultSAXStrategy implements SAXStrategy<SearchResult> {
 
     @Override
-    public void toSAX(final ContentResultSearchResult result, final XMLConsumer xmlConsumer) {
+    public void toSAX(final SearchResult result, final XMLConsumer xmlConsumer) {
         ContentResult contentResult = result.getContentResult();
         Result resourceResult = result.getResourceResult();
         AttributesImpl atts = new AttributesImpl();

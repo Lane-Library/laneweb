@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
-import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
+import edu.stanford.irt.laneweb.search.SearchResult;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 
@@ -32,16 +32,16 @@ public class ContentResultSAXStrategyTest {
 
     private Result resourceResult;
 
-    private ContentResultSearchResult searchResult;
+    private SearchResult searchResult;
 
-    private ContentResultSAXStrategy strategy;
+    private SearchResultSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.strategy = new ContentResultSAXStrategy();
-        this.searchResult = createMock(ContentResultSearchResult.class);
+        this.strategy = new SearchResultSAXStrategy();
+        this.searchResult = createMock(SearchResult.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.contentResult = createMock(ContentResult.class);
         this.resourceResult = createMock(Result.class);

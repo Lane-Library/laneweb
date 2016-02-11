@@ -18,7 +18,7 @@
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListSAXStrategy">
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ContentResultSAXStrategy"/>
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.SearchResultSAXStrategy"/>
         </constructor-arg>
     </bean>
     
