@@ -173,6 +173,7 @@ public class Eresource {
 
     private void parseLink(final Object linkObj, final LinkedHashMap<String, Object> versionMap,
             final boolean isFirstLink) {
+        @SuppressWarnings("unchecked")
         LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
         String linkLabel = (String) jsonLink.get("label");
         String linkUrl = (String) jsonLink.get("url");
@@ -191,6 +192,7 @@ public class Eresource {
         this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
     }
 
+    @SuppressWarnings("unchecked")
     private void setLinks() {
         List<LinkedHashMap<String, Object>> versionData = null;
         try {
