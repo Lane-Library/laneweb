@@ -16,6 +16,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class Eresource {
 
+    private static final ObjectMapper mapper = new ObjectMapper();
+
     @Field("availableItems")
     private int available;
 
@@ -190,7 +192,6 @@ public class Eresource {
     }
 
     private void setLinks() {
-        ObjectMapper mapper = new ObjectMapper();
         List<LinkedHashMap<String, Object>> versionData = null;
         try {
             versionData = mapper.readValue(this.versionsJson, List.class);
