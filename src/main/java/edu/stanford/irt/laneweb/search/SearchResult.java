@@ -39,11 +39,11 @@ public class SearchResult implements Comparable<SearchResult> {
 
     @Override
     public int compareTo(final SearchResult o) {
-        int value = o.getScore() - getScore();
+        int value = o.score - this.score;
         if (value == 0) {
             value = getSortTitle().compareTo(o.getSortTitle());
-            if (value == 0 && o instanceof SearchResult) {
-                value = this.contentResult.compareTo(o.getContentResult());
+            if (value == 0) {
+                value = this.contentResult.compareTo(o.contentResult);
             }
         }
         return value;
@@ -97,7 +97,7 @@ public class SearchResult implements Comparable<SearchResult> {
     private int compareToIgnoreScore(final SearchResult other) {
         int value = getSortTitle().compareTo(other.getSortTitle());
         if (value == 0) {
-            value = this.contentResult.compareTo(other.getContentResult());
+            value = this.contentResult.compareTo(other.contentResult);
         }
         return value;
     }
