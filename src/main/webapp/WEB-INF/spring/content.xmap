@@ -74,20 +74,6 @@
                 <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- all search pages (parameter is all-all, all-pubmed, articles-all, articles-pubmed, catalog-all, catalog-ej, etc)-->
-            <map:match type="regex-parameter" pattern="^(articles|catalog)-.*$">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:aggregate type="default" element="doc">
-                    <map:generate type="eresources-count"/>
-                    <map:generate type="file" src="cocoon://content/cached/search/{1}.html"/>
-                    <map:generate type="file" src="cocoon://content/cached/search/{1}/{source}.html"/>
-                </map:aggregate>
-                <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
-                <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- clinical and peds search pages (parameter is clinical-all, clinical-pubmed, clinical-uptodate, peds-all, peds-pubmed, peds-uptodate, pedschild-all, pedschild-pubmed,etc)-->
             <map:match type="regex-parameter" pattern="^(clinical|peds.*)-.*$">
                 <map:parameter name="parameter-name" value="source"/>
