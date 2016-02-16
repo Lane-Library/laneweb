@@ -1,10 +1,10 @@
 /* gutter classes dynamically added inside yui3-g child divs */
 .gr {
-    margin-right:6px
+    margin-right: 6px;
 }
 .gl {
-    margin-left:6px
+    margin-left: 6px;
 }
 .gb {
-    margin:0 6px
+    margin: 0 6px;
 }

@@ -2,31 +2,35 @@
 
     "use strict";
 
-    var indicator = document.querySelector(".search-indicator");
+    var SEARCH_INDICATOR = "search-indicator",
+        lane = Y.lane,
+        indicatorNode = document.querySelector("." + SEARCH_INDICATOR),
 
     /**
      * Provides static show and hide methods to (surprise!) show
      * and hide the search indicator animated gif.
      */
-    Y.lane.searchIndicator = {
+    searchIndicator = {
 
         /**
-         * activates the .search-indicator, deactivates the .search-button
+         * activates the .search-indicator
          * @method show
          * @static
          */
         show: function() {
-            Y.lane.activate(indicator);
+            lane.activate(indicatorNode, SEARCH_INDICATOR);
         },
 
         /**
-         * deactivates the .search-indicator, activate the .search-button
+         * deactivates the .search-indicator
          * @method hide
          * @static
          */
         hide: function() {
-            Y.lane.deactivate(indicator);
+            lane.deactivate(indicatorNode, SEARCH_INDICATOR);
         }
     };
+
+    lane.searchIndicator = searchIndicator;
 
 })();

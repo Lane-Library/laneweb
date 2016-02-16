@@ -7,6 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-02-15" version="3.2.8" description="3.2.8 bug fix release">
+            <action date="2016-02-11" dev="ceyates" issue="115667" type="remove">
+                remove components made obsolete by solr search
+            </action>
+            <action date="2016-02-11" dev="ceyates" issue="115736" type="remove">
+                remove swfobject.js
+            </action>
+        </release>
+        <release date="2016-02-08" version="3.2.7" description="3.2.7 bug fix release"/>
         <release date="2016-02-01" version="3.2.6" description="3.2.6 bug fix release">
             <action date="2016-01-31" dev="ryanmax" issue="115366" type="fix">
                 Publication Type "see all" missing under some conditions

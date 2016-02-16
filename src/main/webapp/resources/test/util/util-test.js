@@ -11,14 +11,14 @@ var laneTestCase = new Y.Test.Case({
     },
 
     "test activate": function() {
-        Y.lane.activate(document.querySelector(".test"));
-        Y.Assert.isTrue(Y.one(".test").hasClass("active"));
+        Y.lane.activate(document.querySelector(".test", "test"));
+        Y.Assert.isTrue(Y.one(".test").hasClass("test-active"));
     },
 
     "test deactivate": function() {
-        Y.one(".test").addClass("active");
-        Y.lane.deactivate(document.querySelector(".test"));
-        Y.Assert.isFalse(Y.one(".test").hasClass("active"));
+        Y.one(".test").addClass("test-active");
+        Y.lane.deactivate(document.querySelector(".test"), "test");
+        Y.Assert.isFalse(Y.one(".test").hasClass("test-active"));
     },
 
     "test getData": function() {

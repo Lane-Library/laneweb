@@ -15,13 +15,13 @@ import org.junit.Test;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
 
-public class ContentResultSearchResultTest {
+public class SearchResultTest {
 
     private ContentResult contentResult;
 
     private Result resourceResult;
 
-    private ContentResultSearchResult searchResult;
+    private SearchResult searchResult;
 
     @Before
     public void setUp() {
@@ -29,7 +29,7 @@ public class ContentResultSearchResultTest {
         this.resourceResult = createMock(Result.class);
         expect(this.contentResult.getTitle()).andReturn("title");
         replay(this.contentResult);
-        this.searchResult = new ContentResultSearchResult(this.contentResult, this.resourceResult, 100);
+        this.searchResult = new SearchResult(this.contentResult, this.resourceResult, 100);
         reset(this.contentResult);
     }
 
@@ -39,8 +39,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").contentId("99999").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
-        ContentResultSearchResult first = new ContentResultSearchResult(result1, this.resourceResult, 900);
-        ContentResultSearchResult second = new ContentResultSearchResult(result2, this.resourceResult, 900);
+        SearchResult first = new SearchResult(result1, this.resourceResult, 900);
+        SearchResult second = new SearchResult(result2, this.resourceResult, 900);
         assertTrue(second.compareTo(first) > 0);
     }
 
@@ -50,8 +50,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").date("2012").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").date("2010").build();
-        ContentResultSearchResult first = new ContentResultSearchResult(result1, this.resourceResult, 900);
-        ContentResultSearchResult second = new ContentResultSearchResult(result2, this.resourceResult, 900);
+        SearchResult first = new SearchResult(result1, this.resourceResult, 900);
+        SearchResult second = new SearchResult(result2, this.resourceResult, 900);
         assertTrue(second.compareTo(first) > 0);
     }
 
@@ -59,8 +59,8 @@ public class ContentResultSearchResultTest {
     public void testCompareToSameTitleDifferentScore() {
         expect(this.contentResult.getTitle()).andReturn("title").times(2);
         replay(this.contentResult);
-        ContentResultSearchResult first = new ContentResultSearchResult(this.contentResult, this.resourceResult, 900);
-        ContentResultSearchResult second = new ContentResultSearchResult(this.contentResult, this.resourceResult, 0);
+        SearchResult first = new SearchResult(this.contentResult, this.resourceResult, 900);
+        SearchResult second = new SearchResult(this.contentResult, this.resourceResult, 0);
         assertTrue(second.compareTo(first) > 0);
         verify(this.contentResult);
     }
@@ -71,8 +71,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").contentId("999").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
-        ContentResultSearchResult first = new ContentResultSearchResult(result1, this.resourceResult, 900);
-        ContentResultSearchResult second = new ContentResultSearchResult(result2, this.resourceResult, 900);
+        SearchResult first = new SearchResult(result1, this.resourceResult, 900);
+        SearchResult second = new SearchResult(result2, this.resourceResult, 900);
         assertEquals(0, second.compareTo(first));
     }
 
@@ -81,7 +81,7 @@ public class ContentResultSearchResultTest {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("first title");
         replay(result, this.contentResult);
-        ContentResultSearchResult first = new ContentResultSearchResult(result, this.resourceResult, 100);
+        SearchResult first = new SearchResult(result, this.resourceResult, 100);
         assertTrue(this.searchResult.compareTo(first) > 0);
         verify(result, this.contentResult);
     }
@@ -92,8 +92,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").build();
-        ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
-        ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
+        SearchResult one = new SearchResult(result1, this.resourceResult, 100);
+        SearchResult two = new SearchResult(result2, this.resourceResult, 100);
         assertTrue(one.equals(two));
     }
 
@@ -108,8 +108,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").build();
-        ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
-        ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
+        SearchResult one = new SearchResult(result1, this.resourceResult, 100);
+        SearchResult two = new SearchResult(result2, this.resourceResult, 100);
         assertTrue(one.equals(two));
     }
 
@@ -133,7 +133,7 @@ public class ContentResultSearchResultTest {
         ContentResult r = createMock(ContentResult.class);
         expect(r.getTitle()).andReturn("the title");
         replay(r);
-        ContentResultSearchResult c = new ContentResultSearchResult(r, this.resourceResult, 0);
+        SearchResult c = new SearchResult(r, this.resourceResult, 0);
         assertEquals("title", c.getSortTitle());
         verify(r);
     }
@@ -167,19 +167,9 @@ public class ContentResultSearchResultTest {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("the title");
         replay(result, this.contentResult);
-        ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
+        SearchResult other = new SearchResult(result, this.resourceResult, 0);
         assertEquals(this.searchResult.hashCode(), other.hashCode());
         verify(result, this.contentResult);
-    }
-
-    @Test
-    public void testNotContentResultSearchResult() {
-        SearchResult result = createMock(SearchResult.class);
-        expect(result.getScore()).andReturn(100);
-        expect(result.getSortTitle()).andReturn("title");
-        replay(this.contentResult, result);
-        assertTrue(this.searchResult.compareTo(result) > 0);
-        verify(this.contentResult, result);
     }
 
     @Test
@@ -187,7 +177,7 @@ public class ContentResultSearchResultTest {
         ContentResult result = createMock(ContentResult.class);
         expect(result.getTitle()).andReturn("not the title");
         replay(this.contentResult, result);
-        ContentResultSearchResult other = new ContentResultSearchResult(result, this.resourceResult, 0);
+        SearchResult other = new SearchResult(result, this.resourceResult, 0);
         assertFalse(this.searchResult.equals(other));
         verify(result, this.contentResult);
     }
@@ -198,8 +188,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").contentId("99999").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
-        ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
-        ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
+        SearchResult one = new SearchResult(result1, this.resourceResult, 100);
+        SearchResult two = new SearchResult(result2, this.resourceResult, 100);
         assertFalse(one.equals(two));
     }
 
@@ -209,8 +199,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").contentId("cid").author("authors").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").author("different authors").build();
-        ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
-        ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
+        SearchResult one = new SearchResult(result1, this.resourceResult, 100);
+        SearchResult two = new SearchResult(result2, this.resourceResult, 100);
         assertFalse(one.equals(two));
     }
 
@@ -220,8 +210,8 @@ public class ContentResultSearchResultTest {
                 .title("same title").contentId("cid").build();
         ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("different cid").build();
-        ContentResultSearchResult one = new ContentResultSearchResult(result1, this.resourceResult, 100);
-        ContentResultSearchResult two = new ContentResultSearchResult(result2, this.resourceResult, 100);
+        SearchResult one = new SearchResult(result1, this.resourceResult, 100);
+        SearchResult two = new SearchResult(result2, this.resourceResult, 100);
         assertFalse(one.equals(two));
     }
 }

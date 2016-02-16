@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.voyager;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Map;
 
 import org.xml.sax.SAXException;
@@ -43,7 +43,7 @@ public class BibStatusGenerator extends AbstractGenerator implements ParametersA
     public void setParameters(final Map<String, String> parameters) {
         this.bibList = parameters.get("bids");
         if (this.bibList != null) {
-            this.bibIds = new LinkedList<String>();
+            this.bibIds = new ArrayList<>();
             for (String b : this.bibList.split(",")) {
                 this.bibIds.add(b);
             }

@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.bassett;
 
 import static org.easymock.EasyMock.createMock;
-
-import java.util.Collections;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 

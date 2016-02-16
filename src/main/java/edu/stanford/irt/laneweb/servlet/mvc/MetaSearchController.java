@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +113,7 @@ public class MetaSearchController {
      * @return a list of engines
      */
     private Collection<String> getEnginesForResources(final List<String> resources) {
-        Collection<String> engines = new LinkedList<String>();
+        Collection<String> engines = new ArrayList<>();
         Result describeResult = this.manager.describe(new SimpleQuery(""), null);
         for (Result engine : describeResult.getChildren()) {
             for (Result resource : engine.getChildren()) {
@@ -136,7 +136,7 @@ public class MetaSearchController {
      * @return a Map representation of the Result with only the requested resources
      */
     private Map<String, Object> getMapForResult(final Result result, final List<String> resources) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         SearchStatus status;
         Collection<Result> children;
         synchronized (result) {
@@ -156,7 +156,7 @@ public class MetaSearchController {
      * @return a Map
      */
     private Map<String, Object> getResourceMap(final Result resource) {
-        Map<String, Object> resourceMap = new HashMap<String, Object>();
+        Map<String, Object> resourceMap = new HashMap<>();
         resourceMap.put("status", resource.getStatus());
         resourceMap.put("url", resource.getURL());
         String hitsString = resource.getHits();
@@ -178,7 +178,7 @@ public class MetaSearchController {
      */
     private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> engines,
             final List<String> resources) {
-        Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
+        Map<String, Map<String, Object>> map = new HashMap<>();
         Collection<Result> children;
         for (Result engine : engines) {
             synchronized (engine) {

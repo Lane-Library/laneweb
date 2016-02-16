@@ -1,16 +1,16 @@
 #laneHeader{
-    background-color:white;
+    background-color: white;
 }
 #laneHeader .centered{
-    position:relative;
+    position: relative;
 }
 h1 {
     font-size: 26px;
     padding: 24px 0 24px 0;
     color: #820000;
-    background-image:url(../images/lane-logo.png);
-    background-repeat:no-repeat;
-    background-position:0 20px;
+    background-image: url(../images/lane-logo.png);
+    background-repeat: no-repeat;
+    background-position: 0 20px;
 }
 
 h1 span {
@@ -19,7 +19,7 @@ h1 span {
 
 h1 a {
     color: #820000;
-    padding-left:68px;
+    padding-left: 68px;
 }
 
 h1 a:visited {

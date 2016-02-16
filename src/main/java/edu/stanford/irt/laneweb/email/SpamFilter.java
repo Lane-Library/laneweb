@@ -23,7 +23,7 @@ public class SpamFilter {
 
     private Set<String> recipients;
 
-    private Map<String, Integer> sentMailCounter = new HashMap<String, Integer>();
+    private Map<String, Integer> sentMailCounter = new HashMap<>();
 
     private Set<String> spamIps;
 
@@ -82,7 +82,7 @@ public class SpamFilter {
     private synchronized void updateSentCountsIfNecessary() {
         long now = System.currentTimeMillis();
         if (now > this.lastUpdate + COUNT_CHECK_INTERVAL) {
-            List<String> entriesToRemove = new ArrayList<String>();
+            List<String> entriesToRemove = new ArrayList<>();
             for (Entry<String, Integer> entry : this.sentMailCounter.entrySet()) {
                 int newCount = entry.getValue().intValue() - MAX_MAILS_PER_IP;
                 if (newCount <= 0) {

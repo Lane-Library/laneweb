@@ -1,26 +1,26 @@
 .resourceListPagination{
-    font-size:13px;
+    font-size: 13px;
 }
 .view-by{
-    position:relative;
-    white-space:nowrap;
+    position: relative;
+    white-space: nowrap;
 }
 .view-by .dropdown {
-    position:absolute;
-    right:0;
-    top:-4px;
+    position: absolute;
+    right: 0;
+    top: -4px;
 }
 .pagingLabels {
-    padding:0 12px;
+    padding: 0 12px;
 }
 .labelTitle{
-    display:inline-block;
-    width:156px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    vertical-align:bottom;
-    padding-left:4px;
-    box-sizing:border-box;
+    display: inline-block;
+    width: 156px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    padding-left: 4px;
+    box-sizing: border-box;
 }
 
 .pagingButton {

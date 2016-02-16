@@ -301,7 +301,7 @@
 
             /**
              * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
-             * backing Array
+             * backing Array, also fires a tracking event
              * @method _handleAddSync
              * @private
              * @param event {CustomEvent}
@@ -309,6 +309,11 @@
             _handleAddSync : function(event) {
                 event.bookmark.after("valueChange", this._handleValueChange, this);
                 this._bookmarks.unshift(event.bookmark);
+                Lane.fire("tracker:trackableEvent", {
+                    category: "lane:bookmarkAdd",
+                    action: Model.get(Model.AUTH),
+                    label: event.bookmark.getLabel()
+                });
             },
 
             /**

@@ -26,9 +26,9 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @Override
     public Result doSearch(final String query) {
         String q = query == null ? "" : query;
-        Collection<String> enginesToRun = new HashSet<String>();
+        Collection<String> enginesToRun = new HashSet<>();
         Result describeResult = describe(new SimpleQuery(q), null);
-        Map<String, String> enginesMap = new HashMap<String, String>();
+        Map<String, String> enginesMap = new HashMap<>();
         for (Result engine : describeResult.getChildren()) {
             String engineId = engine.getId();
             for (Result resource : engine.getChildren()) {

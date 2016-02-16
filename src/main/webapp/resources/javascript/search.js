@@ -56,7 +56,7 @@
                 this.setLimit(limit);
             };
             this._suggest.setLimitForSource(this._select.getSelected());
-            this._suggest.on("select", this.submit, this);
+            this._suggest.on("select", this._handleSuggestSelect, this);
 
             //set up search reset
             this._searchReset = Y.one(".searchReset");
@@ -93,6 +93,20 @@
         },
 
         /**
+         * Handles suggestion selections, fires a tracking event.
+         * @method _handleSuggestSelect
+         * @private
+         */
+        _handleSuggestSelect : function(event) {
+            Y.lane.fire("tracker:trackableEvent", {
+                category: "lane:suggestSelect",
+                action: this.getSource(),
+                label: event.suggestion
+            });
+            this.submit();
+        },
+
+        /**
          * Handles search input value changes and toggles the active class
          * of the reset button appropriately.
          * @method _handleValueChange
@@ -120,7 +134,7 @@
                 }
             });
             this._input.focus();
-            Y.lane.tracker.fire("trackableEvent", {
+            Y.lane.fire("tracker:trackableEvent", {
                 category: "lane:searchFormReset",
                 action: Y.lane.Location.get("pathname")
             });
@@ -167,7 +181,7 @@
             this._textInput.setHintText(this._select.getSelectedTitle());
             this._setSearchTipsUrl();
             this._suggest.setLimitForSource(event.newVal);
-            Y.lane.tracker.fire("trackableEvent", {
+            Y.lane.fire("tracker:trackableEvent", {
                 category: "lane:searchDropdownSelection",
                 action: event.newVal,
                 label: "from " + event.prevVal + " to " + event.newVal

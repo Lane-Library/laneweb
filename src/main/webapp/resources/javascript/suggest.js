@@ -30,7 +30,6 @@
          * @description fired when a suggestion is selected
          */
         this.publish(SELECT,{
-            broadcast : 1,
             emitFacade : true
         });
 

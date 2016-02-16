@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -12,8 +12,6 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ContentResultConversionStrategy {
 
-    private ScopusDeduplicator scopusDeduplicator = new ScopusDeduplicator();
-
     private ScoreStrategy scoreStrategy = new ScoreStrategy();
 
     public ContentResultConversionStrategy() {
@@ -21,13 +19,12 @@ public class ContentResultConversionStrategy {
     }
 
     // constructor for unit tests
-    ContentResultConversionStrategy(final ScoreStrategy scoreStrategy, final ScopusDeduplicator deduplicator) {
+    ContentResultConversionStrategy(final ScoreStrategy scoreStrategy) {
         this.scoreStrategy = scoreStrategy;
-        this.scopusDeduplicator = deduplicator;
     }
 
     public List<SearchResult> convertResult(final Result result) {
-        Map<ContentResultSearchResult, ContentResultSearchResult> resultMap = new HashMap<ContentResultSearchResult, ContentResultSearchResult>();
+        Map<SearchResult, SearchResult> resultMap = new HashMap<>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().getSearchText());
         Collection<Result> engines;
         synchronized (result) {
@@ -36,12 +33,11 @@ public class ContentResultConversionStrategy {
         for (Result engine : engines) {
             processEngine(engine, resultMap, queryTermPattern);
         }
-        this.scopusDeduplicator.removeDuplicates(resultMap.values());
-        return new LinkedList<SearchResult>(resultMap.values());
+        return new ArrayList<>(resultMap.values());
     }
 
     private void processEngine(final Result engine,
-            final Map<ContentResultSearchResult, ContentResultSearchResult> resultMap, final Pattern queryTermPattern) {
+            final Map<SearchResult, SearchResult> resultMap, final Pattern queryTermPattern) {
         Collection<Result> children;
         synchronized (engine) {
             children = engine.getChildren();
@@ -52,14 +48,14 @@ public class ContentResultConversionStrategy {
     }
 
     private void processResource(final Result resource,
-            final Map<ContentResultSearchResult, ContentResultSearchResult> resultMap, final Pattern queryTermPattern) {
+            final Map<SearchResult, SearchResult> resultMap, final Pattern queryTermPattern) {
         for (Result content : resource.getChildren()) {
             ContentResult contentResult = (ContentResult) content;
-            // create a ContentResultSearchResult from each ContentResult, retain the highest scoring one if more
+            // create a SearchResult from each ContentResult, retain the highest scoring one if more
             // than one the same
             int score = this.scoreStrategy.computeScore(contentResult, queryTermPattern);
-            ContentResultSearchResult current = new ContentResultSearchResult(contentResult, resource, score);
-            ContentResultSearchResult previous = resultMap.get(current);
+            SearchResult current = new SearchResult(contentResult, resource, score);
+            SearchResult previous = resultMap.get(current);
             if (previous == null || current.getScore() > previous.getScore()) {
                 resultMap.put(current, current);
             }

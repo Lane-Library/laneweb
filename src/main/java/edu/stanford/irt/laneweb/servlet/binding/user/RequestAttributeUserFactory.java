@@ -31,7 +31,7 @@ public class RequestAttributeUserFactory implements UserFactory {
 
     public RequestAttributeUserFactory(final String userIdHashKey) {
         this.userIdHashKey = userIdHashKey;
-        this.domainMap = new HashMap<String, String>();
+        this.domainMap = new HashMap<>();
     }
 
     @Override

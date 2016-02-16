@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Transient;
@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class Eresource {
+
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     @Field("availableItems")
     private int available;
@@ -29,7 +31,7 @@ public class Eresource {
     private Boolean isCore;
 
     @Transient
-    private Collection<Link> linksList = new ArrayList<Link>();
+    private Collection<Link> linksList = new ArrayList<>();
 
     @Field
     private String primaryType;
@@ -169,9 +171,10 @@ public class Eresource {
                 .append(" versions:").append(this.linksList).toString();
     }
 
-    private void parseLink(final Object linkObj, final LinkedHashMap<String, Object> versionMap,
+    private void parseLink(final Object linkObj, final Map<String, Object> versionMap,
             final boolean isFirstLink) {
-        LinkedHashMap<String, Object> jsonLink = (LinkedHashMap<String, Object>) linkObj;
+        @SuppressWarnings("unchecked")
+        Map<String, Object> jsonLink = (Map<String, Object>) linkObj;
         String linkLabel = (String) jsonLink.get("label");
         String linkUrl = (String) jsonLink.get("url");
         String linkText = (String) jsonLink.get("linkText");
@@ -189,18 +192,18 @@ public class Eresource {
         this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
     }
 
+    @SuppressWarnings("unchecked")
     private void setLinks() {
-        ObjectMapper mapper = new ObjectMapper();
-        List<LinkedHashMap<String, Object>> versionData = null;
+        List<Map<String, Object>> versionData = null;
         try {
             versionData = mapper.readValue(this.versionsJson, List.class);
         } catch (IOException e) {
             throw new LanewebException(e);
         }
         int isFirstLink = 0;
-        for (LinkedHashMap<String, Object> versionMap : versionData) {
+        for (Map<String, Object> versionMap : versionData) {
             if (versionMap.containsKey("links")) {
-                for (Object linkObj : (ArrayList<Object>) versionMap.get("links")) {
+                for (Object linkObj : (List<Object>) versionMap.get("links")) {
                     parseLink(linkObj, versionMap, isFirstLink++ == 0);
                 }
             }

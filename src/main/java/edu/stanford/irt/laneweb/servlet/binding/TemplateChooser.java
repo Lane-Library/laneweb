@@ -36,7 +36,7 @@ public class TemplateChooser {
         }
         if (null != templateMap) {
             this.templateMap = templateMap;
-            this.patternMap = new LinkedHashMap<String, Pattern>(templateMap.size());
+            this.patternMap = new LinkedHashMap<>(templateMap.size());
             for (String pattern : templateMap.keySet()) {
                 this.patternMap.put(pattern, Pattern.compile(pattern));
             }

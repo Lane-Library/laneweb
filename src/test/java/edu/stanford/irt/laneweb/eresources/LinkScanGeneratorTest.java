@@ -11,7 +11,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.easymock.Capture;
@@ -47,15 +47,15 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.eresource = createMock(Eresource.class);
         this.link = createMock(Link.class);
-        this.eresourceList = new LinkedList<Eresource>();
+        this.eresourceList = new ArrayList<Eresource>();
         this.eresourceList.add(this.eresource);
-        this.linkList = new LinkedList<Link>();
+        this.linkList = new ArrayList<Link>();
         this.linkList.add(this.link);
     }
 
     @Test
     public void testDoGenerate() throws Exception {
-        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
+        expect(this.searchService.getLinkscanLinks()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.eresource.getId()).andReturn("type-id");
@@ -83,7 +83,7 @@ public class LinkScanGeneratorTest {
 
     @Test
     public void testDoGenerateNullTitleUrl() throws Exception {
-        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
+        expect(this.searchService.getLinkscanLinks()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         expect(this.eresource.getId()).andReturn("type-id");
@@ -99,7 +99,7 @@ public class LinkScanGeneratorTest {
 
     @Test(expected = LanewebException.class)
     public void testDoGenerateThrowSAXException() throws SAXException {
-        expect(this.searchService.searchFindAllNotRecordTypePubmed()).andReturn(this.eresourceList);
+        expect(this.searchService.getLinkscanLinks()).andReturn(this.eresourceList);
         this.xmlConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.searchService, this.xmlConsumer);

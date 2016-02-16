@@ -46,19 +46,19 @@ public class RequestParameterDataBinder implements DataBinder {
     private Map<String, String> urlEncodedParameters;
 
     public RequestParameterDataBinder() {
-        this.parameterModelMap = new HashMap<String, String>();
+        this.parameterModelMap = new HashMap<>();
         for (String[] element : PARAMETER_MODEL) {
             this.parameterModelMap.put(element[0], element[1]);
         }
-        this.parameterArrayModelMap = new HashMap<String, String>();
+        this.parameterArrayModelMap = new HashMap<>();
         for (String[] element : PARAMETER_ARRAY_MODEL) {
             this.parameterArrayModelMap.put(element[0], element[1]);
         }
-        this.parameterSameAsModel = new HashSet<String>();
+        this.parameterSameAsModel = new HashSet<>();
         for (String name : PARAMETER_SAME_AS_MODEL) {
             this.parameterSameAsModel.add(name);
         }
-        this.urlEncodedParameters = new HashMap<String, String>();
+        this.urlEncodedParameters = new HashMap<>();
         this.urlEncodedParameters.put("q", Model.URL_ENCODED_QUERY);
         this.urlEncodedParameters.put(Model.SOURCE, Model.URL_ENCODED_SOURCE);
     }

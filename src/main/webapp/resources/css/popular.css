@@ -1,17 +1,17 @@
 .popular {
     margin-top: 12px;
-    padding:12px;
+    padding: 12px;
     line-height: 1.6em;
     background-color: #333333;
-    color:#ffffff;
+    color: #ffffff;
     border: 1px solid #333333;
 }
 .popular h3 {
-    text-transform:uppercase;
+    text-transform: uppercase;
     color: #ffffff;
 }
 .popular li {
-    border-bottom:none;
+    border-bottom: none;
 }
 
 .popular:after{

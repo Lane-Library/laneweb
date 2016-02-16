@@ -16,7 +16,7 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
 
-    private Collection<String> requiredPublicationTypes = new ArrayList<String>();
+    private Collection<String> requiredPublicationTypes = new ArrayList<>();
 
     public FacetComparator(final Collection<String> reqPublicationTypes) {
         for (String pt : reqPublicationTypes) {

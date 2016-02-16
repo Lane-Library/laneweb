@@ -74,7 +74,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
 
     @Override
     protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<String, Object>();
+        Map<String, Object> result = new HashMap<>();
         Page<Image> pageResult = getPage(query);
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");

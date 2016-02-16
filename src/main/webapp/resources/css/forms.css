@@ -1,25 +1,33 @@
 
 /*--------------ALL forms within lightbox-----------------------------------------------------*/
 #feedback {
-    cursor:move;
+    cursor: move;
 }
 
-#feedback form,#subscribe form {
+#feedback form, #subscribe form {
     padding: 20px;
     text-align: left;
 }
+
 #feedback label, #subscribe label {
     display: block;
     margin-top: .5em;
 }
-#subscribe input,#subscribe textarea,#subscribe select,#feedback input,#feedback textarea,#feedback select
-    {
+
+#subscribe input,
+#subscribe textarea,
+#subscribe select,
+#feedback input,
+#feedback textarea,
+#feedback select {
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
 }
+
 #feedback textarea {
     height: 150px;
     line-height: 150%;
 }
+
 .feedbackText {
     padding: 9px;
     margin-bottom: .5em;
@@ -30,16 +38,24 @@
     width: 100%;
     box-sizing: border-box;
 }
+
 #feedback select,#subscribe select {
     border: 2px solid #C9C9C9;
     width: 100%;
     height: 37px;
     padding: 6px;
     margin-top: 24px;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
-#subscribe input:hover,#subscribe textarea:hover,#subscribe input:focus,#subscribe textarea:focus,#feedback input:hover,#feedback textarea:hover,#feedback input:focus,#feedback textarea:focus
-    {
+
+#subscribe input:hover,
+#subscribe textarea:hover,
+#subscribe input:focus,
+#subscribe textarea:focus,
+#feedback input:hover,
+#feedback textarea:hover,
+#feedback input:focus,
+#feedback textarea:focus {
     border-color: #9D9B94;
 }
 
@@ -62,24 +78,29 @@
     text-align: left;
     margin-top: 40px;
 }
+
 #feedbackMenu li {
     padding: 10px 15px;
 }
+
 .yui3-lightbox #feedbackItems {
     background-color: white;
     border: 2px solid #fff;
     box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
 }
+
 .yui3-feedback-item,.yui3-purchase-item {
     display: none;
 }
+
 .yui3-feedback-item-active,.yui3-purchase-item-active {
     display: block;
 }
+
 .yui3-feedback-menu-active {
     background-color: white;
     width: 250px;
-    box-sizing:border-box;
+    box-sizing: border-box;
     border-top: 2px solid #fff;
     border-left: 2px solid #fff;
     border-bottom: 2px solid #fff;
@@ -88,74 +109,85 @@
 }
 
 .feedback-item-thanks {
-    display:none;
+    display: none;
 }
+
 /*--------------suggestion for purchase styles--------------------------------------------*/
 #purchaseMenu {
     margin: 9px 0 40px;
 }
+
 #purchaseMenu li {
-    float: left
+    float: left;
 }
+
 #purchaseMenu a {
     display: block;
     border: 2px solid #C9C9C9;
     padding: 4px 50px;
     margin-right: 12px;
 }
+
 #purchaseMenu a:hover {
     background: #F4F5EF;
     border-color: #9D9B94;
     color: #585347;
 }
+
 /*-------------------  .incorrect is for the invalid for text inputs-------------------------*/
 #feedback .incorrect {
     background-color: #F4F5EF;
     color: #8C1515;
     border: 2px solid #820000;
-    display : block;
+    display: block;
     font-weight: bold;
 }
 
-
 /*------contentForm is due for cleanup - remove once the new css and widget is implemented----------*/
 .contentForm legend {
-    border : 1px solid #C1C1C1;
-    color : #444444;
-    font-size : 95%;
-    font-weight : bold;
-    padding : 0.3em 1em;
-    text-align : left;
+    border: 1px solid #C1C1C1;
+    color: #444444;
+    font-size: 95%;
+    font-weight: bold;
+    padding: 0.3em 1em;
+    text-align: left;
 }
+
 .contentForm fieldset {
-    margin-bottom : 1.2em;
-    padding : 1em;
-    border : 1px solid #C1C1C1;
+    margin-bottom: 1.2em;
+    padding: 1em;
+    border: 1px solid #C1C1C1;
 }
+
 .fieldLabel {
-    background-color : #F2F3ED;
-    border : 1px dotted #C1C1C1;
-    float : left;
-    margin-right : 10px;
-    padding : 5px;
-    text-align : right;
-    width : 32%;
-    box-sizing:border-box;
+    background-color: #F2F3ED;
+    border: 1px dotted #C1C1C1;
+    float: left;
+    margin-right: 10px;
+    padding: 5px;
+    text-align: right;
+    width: 32%;
+    box-sizing: border-box;
 }
+
 .requiredField,
 .validatedField {
-    padding : 5px;
-    font-size : 1.5em;
+    padding: 5px;
+    font-size: 1.5em;
 }
+
 .requiredField {
-    color : #990000;
+    color: #990000;
 }
+
 .validatedField {
-    color : green;
+    color: green;
 }
+
 .fieldRow {
-    clear : both;
+    clear: both;
 }
+
 .breadcrumbForm {
-    margin-top:12px
+    margin-top: 12px;
 }

@@ -28,7 +28,7 @@ public class ModelDataBinder implements DataBinder {
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        Map<String, Object> jsonModel = new HashMap<String, Object>();
+        Map<String, Object> jsonModel = new HashMap<>();
         for (Entry<String, Object> entry : model.entrySet()) {
             String key = entry.getKey();
             if (this.keys.contains(key)) {

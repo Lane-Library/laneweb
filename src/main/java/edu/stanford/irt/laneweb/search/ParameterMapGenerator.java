@@ -23,7 +23,7 @@ public class ParameterMapGenerator extends AbstractMarshallingGenerator implemen
     @Override
     @SuppressWarnings("unchecked")
     public void setModel(final Map<String, Object> model) {
-        this.parameters = new HashMap<String, String[]>();
+        this.parameters = new HashMap<>();
         Map<String, String[]> map = ModelUtil.getObject(model, Model.PARAMETER_MAP, Map.class);
         for (Entry<String, String[]> entry : map.entrySet()) {
             this.parameters.put(entry.getKey(), entry.getValue());

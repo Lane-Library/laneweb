@@ -66,7 +66,7 @@
     }
 
 
-    function confirmAdminAction(id, o){
+    function confirmAdminAction(unused, o){
         var image = Y.JSON.parse(o.responseText),
         id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
         div = Y.one( id);
@@ -129,8 +129,7 @@
     if (Y.one("#sourceFilter")) {
         Y.on("change", function() {
             var selectedValue = Y.one("#sourceFilter select option:checked")
-                    .get("value"), url = "/search.html?q=" + query + "&source="
-                    + source;
+                    .get("value"), url = "/search.html?q=" + query + "&source=" + source;
             if (selectedValue !== "") {
                 url = url + "&rid=" + selectedValue;
             }

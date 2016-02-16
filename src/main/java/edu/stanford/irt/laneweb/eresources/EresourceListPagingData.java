@@ -17,7 +17,7 @@ public class EresourceListPagingData extends PagingData {
             final String alpha) {
         super(list, page, baseQuery);
         this.alpha = alpha;
-        this.pagingLabels = new ArrayList<PagingLabel>();
+        this.pagingLabels = new ArrayList<>();
         int pages = getPages();
         int pageSize = getPageSize();
         int size = getSize();

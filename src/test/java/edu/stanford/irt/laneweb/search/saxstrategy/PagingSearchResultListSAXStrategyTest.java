@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
-import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
 import edu.stanford.irt.laneweb.search.PagingSearchResultList;
 import edu.stanford.irt.laneweb.search.SearchResult;
 import edu.stanford.irt.search.impl.Result;
@@ -33,7 +32,7 @@ public class PagingSearchResultListSAXStrategyTest {
 
     private Result resourceResult;
 
-    private ContentResultSearchResult result;
+    private SearchResult result;
 
     private List<SearchResult> results;
 
@@ -48,7 +47,7 @@ public class PagingSearchResultListSAXStrategyTest {
     public void setUp() throws Exception {
         this.results = createMock(List.class);
         this.xmlConsumer = new TestXMLConsumer();
-        this.result = createMock(ContentResultSearchResult.class);
+        this.result = createMock(SearchResult.class);
         this.iterator = createMock(ListIterator.class);
         this.resultStrategy = createMock(SAXStrategy.class);
         this.strategy = new PagingSearchResultListSAXStrategy(this.resultStrategy);

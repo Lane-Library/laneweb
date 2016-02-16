@@ -46,7 +46,7 @@ public class SearchImageFilter extends AbstractLanewebFilter {
         WebApplicationContext webApplicationContext = WebApplicationContextUtils
                 .getWebApplicationContext(servletContext);
         this.service = webApplicationContext.getBean("edu.stanford.irt.solr.service", SolrImageService.class);
-        this.copyrightMapping = new HashMap<String, String>();
+        this.copyrightMapping = new HashMap<>();
         this.copyrightMapping.put(ALL_IMAGES, "0");
         this.copyrightMapping.put(CC_IMAGES, "10");
         this.copyrightMapping.put(PMC_IMAGES, "15");
@@ -88,7 +88,7 @@ public class SearchImageFilter extends AbstractLanewebFilter {
     }
 
     private Map<String, Long> getTabValuesFromSolr(final String queryTerm) {
-        Map<String, Long> result = new HashMap<String, Long>();
+        Map<String, Long> result = new HashMap<>();
         FacetPage<Image> facetPage = this.service.facetOnCopyright(queryTerm);
         Page<FacetFieldEntry> page = facetPage.getFacetResultPage("copyright");
         List<FacetFieldEntry> list = page.getContent();

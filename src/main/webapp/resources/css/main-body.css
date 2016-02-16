@@ -1,23 +1,25 @@
 html{
-    background-color:#ecf1f2
+    background-color: #ecf1f2;
 }
+
 body{
     min-width: 989px;
 }
+
 #main{
-    text-align:left;
-    position:relative;
-    margin-top:50px
+    text-align: left;
+    position: relative;
+    margin-top: 50px;
 }
 
 .centered{
-    position:relative;
-    width:989px;
-    margin:auto;
+    position: relative;
+    width: 989px;
+    margin: auto;
 }
 
 .content {
     color: #333333;
-    position:relative;
-    margin-top:12px;
+    position: relative;
+    margin-top: 12px;
 }

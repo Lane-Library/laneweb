@@ -12,7 +12,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.Resource;
-import edu.stanford.irt.laneweb.search.ContentResultSearchResult;
 import edu.stanford.irt.laneweb.search.PagingSearchResultList;
 import edu.stanford.irt.laneweb.search.SearchResult;
 import edu.stanford.irt.laneweb.util.XMLUtils;
@@ -71,10 +70,9 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
 
     private void hitCountsToSAX(final XMLConsumer xmlConsumer, final PagingSearchResultList list) throws SAXException {
         XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
-        Set<Result> countedResources = new HashSet<Result>();
+        Set<Result> countedResources = new HashSet<>();
         for (SearchResult resource : list) {
-            if (resource instanceof ContentResultSearchResult) {
-                Result resourceResult = ((ContentResultSearchResult) resource).getResourceResult();
+                Result resourceResult = resource.getResourceResult();
                 if (!countedResources.contains(resourceResult)) {
                     countedResources.add(resourceResult);
                     AttributesImpl atts = new AttributesImpl();
@@ -87,7 +85,6 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
                     XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE, atts);
                     XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE);
                 }
-            }
         }
         XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
     }

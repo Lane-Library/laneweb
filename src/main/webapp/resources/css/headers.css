@@ -1,46 +1,46 @@
 h2 {
-    margin-top:5px;
+    margin-top: 5px;
     font-weight: 400;
     font-size: 28px;
     font-family: 'Fjord One', serif;
     color: #666666;
-    text-align:center;
+    text-align: center;
 }
 .golfclub span span {
-    display:table-cell;
-    white-space:nowrap;
-    padding:0 12px;
+    display: table-cell;
+    white-space: nowrap;
+    padding: 0 12px;
 }
 .golfclub span{
-    display:table-row;
+    display: table-row;
 }
 .golfclub > span:after,
 .golfclub > span:before{
-    content:"";
-    display:table-cell;
-    background:url(../images/header-border.png) no-repeat 0 50%;
-    width:50%;
+    content: "";
+    display: table-cell;
+    background: url(../images/header-border.png) no-repeat 0 50%;
+    width: 50%;
 }
 .golfclub > span:before{
-    -webkit-transform:scaleX(-1);
-    -moz-transform:scaleX(-1);
-    -ms-transform:scaleX(-1);
-    -o-transform:scaleX(-1);
-    transform:scaleX(-1)
+    -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
 }
 h3, h4 {
     color: #8c1515;
     font-size: 22px;
     line-height: 1.2em;
     margin-bottom: .2em;
-    background-image:url(../images/header-border.png);
-    background-repeat:no-repeat;
-    background-position:bottom left;
-    padding-bottom:12px;
+    background-image: url(../images/header-border.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    padding-bottom: 12px;
 }
 h5 {
     color: #666666;
     font-size: 16px;
-    margin:18px 0 .4em;
+    margin: 18px 0 .4em;
     text-transform: uppercase;
 }

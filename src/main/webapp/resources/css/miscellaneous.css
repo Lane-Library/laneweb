@@ -9,7 +9,7 @@ body, select, input, button, textarea {
 
 .scaled-image {
     width: 100%;
-    height: auto
+    height: auto;
 }
 
 /*.close is the X close box on popups and feedback*/
@@ -32,11 +32,11 @@ p {
 }
 
 strong {
-    font-weight: bold
+    font-weight: bold;
 }
 
 em {
-    font-style: italic
+    font-style: italic;
 }
 
 .inputHint {

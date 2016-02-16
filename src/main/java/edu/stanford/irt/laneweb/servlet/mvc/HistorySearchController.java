@@ -56,7 +56,7 @@ public class HistorySearchController {
     public Map<String, Object> search(@ModelAttribute(Model.QUERY) final String query) {
         Query simpleQuery = new SimpleQuery(query);
         Result result = this.manager.search(simpleQuery, this.engines, ONE_MINUTE);
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<>();
         SearchStatus status;
         Collection<Result> children;
         synchronized (result) {
@@ -90,7 +90,7 @@ public class HistorySearchController {
      * @return a map of resource results
      */
     private Map<String, Map<String, Object>> getResourceResultMap(final Collection<Result> children) {
-        Map<String, Map<String, Object>> map = new HashMap<String, Map<String, Object>>();
+        Map<String, Map<String, Object>> map = new HashMap<>();
         Collection<Result> resources;
         for (Result engine : children) {
             synchronized (engine) {
@@ -98,7 +98,7 @@ public class HistorySearchController {
             }
             for (Result resource : resources) {
                 String id = resource.getId();
-                Map<String, Object> resourceMap = new HashMap<String, Object>();
+                Map<String, Object> resourceMap = new HashMap<>();
                 map.put(id, resourceMap);
                 resourceMap.put("status", resource.getStatus());
                 resourceMap.put("url", resource.getURL());

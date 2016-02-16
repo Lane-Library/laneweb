@@ -15,9 +15,9 @@ public class QueryTranslator {
 
     private static final Pattern WILDCARD = Pattern.compile("[\\W&&[^%]]");
 
-    private List<String> notWords = new ArrayList<String>();
+    private List<String> notWords = new ArrayList<>();
 
-    private List<String> reqWords = new ArrayList<String>();
+    private List<String> reqWords = new ArrayList<>();
 
     public String translate(final String theInput) {
         if (theInput == null) {
@@ -82,8 +82,8 @@ public class QueryTranslator {
     }
 
     protected void processString(final String input) {
-        this.reqWords = new ArrayList<String>();
-        this.notWords = new ArrayList<String>();
+        this.reqWords = new ArrayList<>();
+        this.notWords = new ArrayList<>();
         // Loop over all words
         String[] words = QUOTES.split(input);
         for (String word : words) {

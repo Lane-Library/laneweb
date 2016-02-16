@@ -104,6 +104,10 @@ public class SolrSearchService implements SolrService {
         return this.repository.browseAllCoreByType(newType, new PageRequest(0, Integer.MAX_VALUE));
     }
 
+    public List<Eresource> getLinkscanLinks() {
+        return this.repository.browseLinkscanLinks(new PageRequest(0, Integer.MAX_VALUE));
+    }
+
     @Override
     public List<Eresource> getMesh(final String type, final String mesh) {
         if (null == type) {
@@ -155,7 +159,7 @@ public class SolrSearchService implements SolrService {
 
     @Override
     public Map<String, Integer> searchCount(final Set<String> types, final String query) {
-        Map<String, Integer> result = new HashMap<String, Integer>();
+        Map<String, Integer> result = new HashMap<>();
         SolrResultPage<?> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
         int total = (int) facets.getTotalElements();
         result.put("all", Integer.valueOf(total));
@@ -172,10 +176,6 @@ public class SolrSearchService implements SolrService {
             }
         }
         return result;
-    }
-
-    public List<Eresource> searchFindAllNotRecordTypePubmed() {
-        return this.repository.searchFindAllNotRecordTypePubmed(new PageRequest(0, Integer.MAX_VALUE));
     }
 
     @Override

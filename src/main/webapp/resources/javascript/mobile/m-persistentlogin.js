@@ -14,7 +14,7 @@ $.LANE.popupWindow = function(url){
 $(document).on("click", 'a[href*="laneproxy"]', function(event) {
     var link = event.currentTarget, threeDays = 3600 *3 ,
     now = new Date(), cookieValue = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (!model['disaster-mode'] &&  model["isActiveSunetID"] && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
+    if (!model['disaster-mode'] &&  model.isActiveSunetID && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
         redirectUrl = encodeURIComponent(link.href);
         $.LANE.popupWindow(model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
         event.preventDefault();
@@ -48,7 +48,7 @@ $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
 });
 
 $.LANE.toggleLogin = function() {
-    if (model['auth']) {
+    if (model.auth) {
         $('.webauthLogin').each(function() {
             $(this).text('Logout');
             $(this).attr('href', model['base-path'] + '/logout');

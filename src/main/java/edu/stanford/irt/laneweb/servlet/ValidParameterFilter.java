@@ -29,7 +29,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
 
         private ParameterMapEntryValidator() {
             Validator<String> valid = value -> Validity.VALID;
-            this.parameterValidators = new HashMap<String, Validator<String>>();
+            this.parameterValidators = new HashMap<>();
             this.parameterValidators.put("a", new ParameterValueValidator("a", Pattern.compile("^([a-z#]|all)$")));
             this.parameterValidators.put("page", new ParameterValueValidator("page", Pattern.compile("^(\\d+|all)$")));
             this.parameterValidators.put("m", new ParameterValueValidator("m", Pattern.compile("^[\\w -/,]*$")));

@@ -1,15 +1,15 @@
 .yui3-tooltip-content {
-    padding:.7em;
-    max-width:300px;
+    padding: .7em;
+    max-width: 300px;
 }
 .yui3-tooltip {
-    position:absolute;
+    position: absolute;
     border: 1px solid #9e9d98;
-    background-color:#F2F3ED;
-    text-align:left;
+    background-color: #F2F3ED;
+    text-align: left;
 }
 .yui3-tooltip-hidden {
-    visibility:hidden;
+    visibility: hidden;
 }
 .yui3-tooltip-trigger {
     cursor: pointer;

@@ -1,32 +1,32 @@
 .yui3-js-enabled #searchSource{
-    visibility:hidden;
+    visibility: hidden;
 }
 .yui3-js-enabled .yui3-searchselect #searchSource{
-    visibility:visible;
+    visibility: visible;
 }
 .yui3-searchselect{
-    position:relative;
-    float:left;
+    position: relative;
+    float: left;
 }
 .yui3-searchselect-content{
-    filter:alpha(opacity=0);
-    opacity:0;
-    border:none;
-    background:none;
-    height:34px;
-    position:absolute;
-    cursor:pointer;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    border: none;
+    background: none;
+    height: 34px;
+    position: absolute;
+    cursor: pointer;
 }
 #search .yui3-searchselect-selected{
-    display:inline-block;
-    margin:2px;
-    padding:6px;
-    width:122px;
-    border:1px solid #dadad9;
-    box-sizing:border-box;
-    border-radius:3px 3px 0 0;
-    box-shadow:1px 1px 1px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    margin: 2px;
+    padding: 6px;
+    width: 122px;
+    border: 1px solid #dadad9;
+    box-sizing: border-box;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 .yui3-searchselect-selected i{
-    float:right;
+    float: right;
 }

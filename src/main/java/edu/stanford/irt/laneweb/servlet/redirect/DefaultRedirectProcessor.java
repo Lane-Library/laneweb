@@ -32,7 +32,7 @@ public class DefaultRedirectProcessor implements RedirectProcessor {
         if (null == redirectMap) {
             throw new IllegalArgumentException("null redirectMap");
         }
-        Map<Pattern, String> newRedirectMap = new LinkedHashMap<Pattern, String>();
+        Map<Pattern, String> newRedirectMap = new LinkedHashMap<>();
         for (Entry<String, String> entry : redirectMap.entrySet()) {
             newRedirectMap.put(Pattern.compile(entry.getKey()), entry.getValue());
         }

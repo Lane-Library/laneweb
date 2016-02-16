@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.resource;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
-public class PagingList<E extends Object> extends LinkedList<E> {
+public class PagingList<E extends Object> extends ArrayList<E> {
 
     private static final long serialVersionUID = 1L;
 
