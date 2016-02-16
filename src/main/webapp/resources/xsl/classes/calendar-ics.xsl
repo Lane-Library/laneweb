@@ -86,26 +86,33 @@ SUMMARY:</xsl:text>
 			select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_name/text(), ',','\\,')" />
 		<xsl:text>
 DESCRIPTION:</xsl:text>
-		<xsl:value-of select="replace(concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....'), ',','\\,')" />			
-		
-			<xsl:if test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text() != ''">
-				<xsl:text>
-ORGANIZER:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
-			</xsl:if>
-				<xsl:if test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor">
-					<xsl:text>
-ORGANIZER;CN=</xsl:text><xsl:apply-templates select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor"/>
-					<xsl:text>:MAILTO:</xsl:text>
-					<xsl:choose>
-						<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text() != ''">
-							<xsl:value-of select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text()"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:text>LaneAskUs@stanford.edu</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:if>
-				<xsl:text>
+		<xsl:value-of select="replace(concat(substring(normalize-space(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_description), 1, 150), '....'), ',','\\,')" />
+	<xsl:choose>
+		<xsl:when test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text() != ''">
+			<xsl:text>
+ORGANIZER:</xsl:text>
+			<xsl:value-of
+				select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:speaker/text(), ',' , '\\,' )" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:text>
+ORGANIZER;CN=</xsl:text>
+			<xsl:apply-templates
+				select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor" />
+			<xsl:text>:MAILTO:</xsl:text>
+			<xsl:choose>
+				<xsl:when
+					test="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text() != ''">
+					<xsl:value-of
+						select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:event_instructors/lc:instructor/lc:email/text()" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>LaneAskUs@stanford.edu</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:otherwise>
+	</xsl:choose>
+	<xsl:text>
 LOCATION:</xsl:text><xsl:value-of select="replace(/lc:classes/lc:event_data/lc:module_id[ ./text() = $classId]/../lc:venue/lc:venue_name/text(), ',' , '\\,' )" />
 		<xsl:text>
 END:VEVENT</xsl:text>
