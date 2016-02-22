@@ -11,6 +11,8 @@ import static org.easymock.EasyMock.verify;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,8 +53,10 @@ public class EngineSearchGeneratorTest {
     public void testDoSearchStringEngines() {
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
         replay(this.manager, this.saxStrategy);
-        this.generator.setModel(Collections.singletonMap(Model.ENGINES,
-                Arrays.asList(new String[] { "a", "b", "c" })));
+        Map<String, Object> model = new HashMap<>();
+        model.put(Model.QUERY, "query");
+        model.put(Model.ENGINES, Arrays.asList(new String[] { "a", "b", "c" }));
+        this.generator.setModel(model);
         this.generator.setParameters(Collections.singletonMap(Model.ENGINES, "a,b,c,d"));
         this.generator.doSearch("query");
         verify(this.manager, this.saxStrategy);
@@ -71,7 +75,7 @@ public class EngineSearchGeneratorTest {
     @Test
     public void testSetParametersEnginesNull() {
         replay(this.manager, this.saxStrategy);
-        this.generator.setModel(Collections.emptyMap());
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         try {
             this.generator.setParameters(Collections.emptyMap());
         } catch (NullPointerException e) {

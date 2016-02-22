@@ -79,6 +79,7 @@ public class ResourceSearchGeneratorTest {
         replay(this.manager, this.saxStrategy, this.result);
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("resources", Collections.singleton("resource-2-1"));
+        model.put(Model.QUERY, "query");
         this.generator.setModel(model);
         this.generator.doSearch("query");
         verify(this.manager, this.saxStrategy, this.result);

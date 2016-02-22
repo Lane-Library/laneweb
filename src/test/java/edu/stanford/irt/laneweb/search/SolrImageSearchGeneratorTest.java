@@ -43,6 +43,7 @@ public class SolrImageSearchGeneratorTest {
         this.facetPage = createMock(FacetPage.class);
         this.generator = new SolrImageSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<String, Object>();
+        this.model.put(Model.QUERY, "query");
     }
 
     @Test
@@ -50,9 +51,9 @@ public class SolrImageSearchGeneratorTest {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "cc-");
         this.model.put(Model.BASE_PATH, "");
-        
         Capture<Pageable> pageable = newCapture();
-        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("10"), capture(pageable))).andReturn(null);
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("10"), capture(pageable)))
+                .andReturn(null);
         expect(this.service.facetOnWebsiteId(eq("query"), eq("10"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
@@ -88,7 +89,6 @@ public class SolrImageSearchGeneratorTest {
     public void testDoSearchCategoryPMC() {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.SOURCE, "pmc-");
-        
         Capture<Pageable> pageable = newCapture();
         expect(this.service.findByTitleAndDescriptionFilterOnCopyright(eq("query"), eq("15"), capture(pageable)))
                 .andReturn(null);

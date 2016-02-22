@@ -77,8 +77,8 @@ public class SolrSearchGeneratorTest {
         this.model.put(Model.FACETS, "recordType:\"pubmed\"");
         this.model.put(Model.SORT, "authors_sort asc,title_sort asc");
         Capture<Pageable> pageable = newCapture();
-        expect(this.service.searchWithFilters(eq("query"), eq("recordType:\"pubmed\""), capture(pageable))).andReturn(
-                null);
+        expect(this.service.searchWithFilters(eq("query"), eq("recordType:\"pubmed\""), capture(pageable)))
+                .andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         Map<String, Object> result = this.generator.doSearch("query");

@@ -156,6 +156,7 @@ public class SolrSearchFacetsGeneratorTest {
                 mapCapture.toString());
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearch() throws Exception {
         Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
@@ -223,6 +224,84 @@ public class SolrSearchFacetsGeneratorTest {
                 mapCapture.toString());
     }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    public final void testDoGenerateXMLConsumerSearchWithAddRequiredPublicationTypes() throws Exception {
+        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
+        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
+        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
+        Page<FacetFieldEntry> page1 = createMock(Page.class);
+        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
+        Field field = createMock(Field.class);
+        Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
+        Capture<SAXResult> saxResultCapture = newCapture();
+        this.model.put(Model.QUERY, "query");
+        expect(this.service.facetByManyFields("query", "", 3)).andReturn(this.facetpage);
+        expect(this.facetpage.getFacetQueryResult()).andReturn(this.pageFacetQueries);
+        expect(this.pageFacetQueries.iterator()).andReturn(it0);
+        expect(it0.hasNext()).andReturn(false);
+        //
+        expect(this.facetpage.getFacetResultPages()).andReturn(this.facetResultPages);
+        expect(this.facetResultPages.iterator()).andReturn(it1);
+        expect(it1.hasNext()).andReturn(true);
+        expect(it1.next()).andReturn(page1);
+        expect(page1.hasContent()).andReturn(true);
+        expect(page1.iterator()).andReturn(it2);
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(ffe);
+        expect(ffe.getField()).andReturn(field);
+        expect(field.getName()).andReturn("mesh");
+        expect(ffe.getValue()).andReturn("bar1");
+        expect(ffe.getValueCount()).andReturn(new Long(10));
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(ffe);
+        expect(ffe.getValue()).andReturn("bar2");
+        expect(ffe.getValueCount()).andReturn(new Long(10));
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(ffe);
+        expect(ffe.getValue()).andReturn("bar3");
+        expect(ffe.getValueCount()).andReturn(new Long(10));
+        expect(it2.hasNext()).andReturn(false);
+        expect(it1.hasNext()).andReturn(false);
+        //
+        expect(this.service.facetByField("query", "", "publicationType", 0, 1000, 0, FacetSort.COUNT))
+                .andReturn(this.facetpage);
+        expect(this.facetpage.getFacetQueryResult()).andReturn(this.pageFacetQueries);
+        expect(this.pageFacetQueries.iterator()).andReturn(it0);
+        expect(it0.hasNext()).andReturn(false);
+        //
+        expect(this.facetpage.getFacetResultPages()).andReturn(this.facetResultPages);
+        expect(this.facetResultPages.iterator()).andReturn(it1);
+        expect(it1.hasNext()).andReturn(true);
+        expect(it1.next()).andReturn(page1);
+        expect(page1.hasContent()).andReturn(true);
+        expect(page1.iterator()).andReturn(it2);
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(ffe);
+        expect(ffe.getField()).andReturn(field);
+        expect(field.getName()).andReturn("publicationType");
+        expect(ffe.getValue()).andReturn("Required1");
+        expect(ffe.getValueCount()).andReturn(new Long(10));
+        expect(it2.hasNext()).andReturn(true);
+        expect(it2.next()).andReturn(ffe);
+        expect(ffe.getValue()).andReturn("Required2");
+        expect(ffe.getValueCount()).andReturn(new Long(10));
+        expect(it2.hasNext()).andReturn(false);
+        expect(it1.hasNext()).andReturn(false);
+        //
+        this.marshaller.marshal(capture(mapCapture), capture(saxResultCapture));
+        replay(this.marshaller, this.service, this.xmlConsumer, this.facetpage, this.pageFacetQueries, it0,
+                this.facetResultPages, it1, page1, it2, ffe, field);
+        this.generator.setModel(this.model);
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.marshaller, this.service, this.xmlConsumer, this.facetpage, this.pageFacetQueries, it0,
+                this.facetResultPages, it1, page1, it2, ffe, field);
+        assertEquals(
+                "{mesh=[bar1 = 10; enabled=false; url=mesh%3A%22bar1%22, bar2 = 10; enabled=false; url=mesh%3A%22bar2%22, bar3 = 10; enabled=false; url=mesh%3A%22bar3%22], publicationType=[Required1 = 10; enabled=false; url=publicationType%3A%22Required1%22, Required2 = 10; enabled=false; url=publicationType%3A%22Required2%22]}",
+                mapCapture.toString());
+    }
+
+    @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithRequestMoreMesh() throws Exception {
         Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
@@ -291,82 +370,6 @@ public class SolrSearchFacetsGeneratorTest {
                 this.facetResultPages, it1, page1, it2, ffe, field);
         assertEquals(
                 "{publicationType=[Required1 = 10; enabled=false; url=publicationType%3A%22Required1%22, Required2 = 10; enabled=false; url=publicationType%3A%22Required2%22], mesh=[Mesh1 = 10; enabled=false; url=mesh%3A%22Mesh1%22, Mesh2 = 10; enabled=false; url=mesh%3A%22Mesh2%22]}",
-                mapCapture.toString());
-    }
-
-    @Test
-    public final void testDoGenerateXMLConsumerSearchWithAddRequiredPublicationTypes() throws Exception {
-        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
-        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
-        Field field = createMock(Field.class);
-        Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
-        Capture<SAXResult> saxResultCapture = newCapture();
-        this.model.put(Model.QUERY, "query");
-        expect(this.service.facetByManyFields("query", "", 3)).andReturn(this.facetpage);
-        expect(this.facetpage.getFacetQueryResult()).andReturn(this.pageFacetQueries);
-        expect(this.pageFacetQueries.iterator()).andReturn(it0);
-        expect(it0.hasNext()).andReturn(false);
-        //
-        expect(this.facetpage.getFacetResultPages()).andReturn(this.facetResultPages);
-        expect(this.facetResultPages.iterator()).andReturn(it1);
-        expect(it1.hasNext()).andReturn(true);
-        expect(it1.next()).andReturn(page1);
-        expect(page1.hasContent()).andReturn(true);
-        expect(page1.iterator()).andReturn(it2);
-        expect(it2.hasNext()).andReturn(true);
-        expect(it2.next()).andReturn(ffe);
-        expect(ffe.getField()).andReturn(field);
-        expect(field.getName()).andReturn("mesh");
-        expect(ffe.getValue()).andReturn("bar1");
-        expect(ffe.getValueCount()).andReturn(new Long(10));
-        expect(it2.hasNext()).andReturn(true);
-        expect(it2.next()).andReturn(ffe);
-        expect(ffe.getValue()).andReturn("bar2");
-        expect(ffe.getValueCount()).andReturn(new Long(10));
-        expect(it2.hasNext()).andReturn(true);
-        expect(it2.next()).andReturn(ffe);
-        expect(ffe.getValue()).andReturn("bar3");
-        expect(ffe.getValueCount()).andReturn(new Long(10));
-        expect(it2.hasNext()).andReturn(false);
-        expect(it1.hasNext()).andReturn(false);
-        //
-        expect(this.service.facetByField("query", "", "publicationType", 0, 1000, 0, FacetSort.COUNT)).andReturn(
-                this.facetpage);
-        expect(this.facetpage.getFacetQueryResult()).andReturn(this.pageFacetQueries);
-        expect(this.pageFacetQueries.iterator()).andReturn(it0);
-        expect(it0.hasNext()).andReturn(false);
-        //
-        expect(this.facetpage.getFacetResultPages()).andReturn(this.facetResultPages);
-        expect(this.facetResultPages.iterator()).andReturn(it1);
-        expect(it1.hasNext()).andReturn(true);
-        expect(it1.next()).andReturn(page1);
-        expect(page1.hasContent()).andReturn(true);
-        expect(page1.iterator()).andReturn(it2);
-        expect(it2.hasNext()).andReturn(true);
-        expect(it2.next()).andReturn(ffe);
-        expect(ffe.getField()).andReturn(field);
-        expect(field.getName()).andReturn("publicationType");
-        expect(ffe.getValue()).andReturn("Required1");
-        expect(ffe.getValueCount()).andReturn(new Long(10));
-        expect(it2.hasNext()).andReturn(true);
-        expect(it2.next()).andReturn(ffe);
-        expect(ffe.getValue()).andReturn("Required2");
-        expect(ffe.getValueCount()).andReturn(new Long(10));
-        expect(it2.hasNext()).andReturn(false);
-        expect(it1.hasNext()).andReturn(false);
-        //
-        this.marshaller.marshal(capture(mapCapture), capture(saxResultCapture));
-        replay(this.marshaller, this.service, this.xmlConsumer, this.facetpage, this.pageFacetQueries, it0,
-                this.facetResultPages, it1, page1, it2, ffe, field);
-        this.generator.setModel(this.model);
-        this.generator.doGenerate(this.xmlConsumer);
-        verify(this.marshaller, this.service, this.xmlConsumer, this.facetpage, this.pageFacetQueries, it0,
-                this.facetResultPages, it1, page1, it2, ffe, field);
-        assertEquals(
-                "{mesh=[bar1 = 10; enabled=false; url=mesh%3A%22bar1%22, bar2 = 10; enabled=false; url=mesh%3A%22bar2%22, bar3 = 10; enabled=false; url=mesh%3A%22bar3%22], publicationType=[Required1 = 10; enabled=false; url=publicationType%3A%22Required1%22, Required2 = 10; enabled=false; url=publicationType%3A%22Required2%22]}",
                 mapCapture.toString());
     }
 }

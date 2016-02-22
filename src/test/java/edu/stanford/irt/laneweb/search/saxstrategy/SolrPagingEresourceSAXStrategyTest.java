@@ -31,6 +31,7 @@ public class SolrPagingEresourceSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.eresourceStrategy = createMock(SAXStrategy.class);

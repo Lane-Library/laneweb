@@ -50,7 +50,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearch() {
         expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
-        .andReturn(this.result);
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
@@ -75,7 +75,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchNumberFormatException() {
         expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
-        .andReturn(this.result);
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.setParameters(Collections.singletonMap("timeout", "foo"));
@@ -98,7 +98,7 @@ public class SearchGeneratorTest {
     @Test
     public void testDoSearchWaitNumberFormatException() {
         expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
-        .andReturn(this.result);
+                .andReturn(this.result);
         replay(this.saxStrategy, this.manager, this.result);
         this.model.put("wait", "foo");
         this.generator.setModel(this.model);
