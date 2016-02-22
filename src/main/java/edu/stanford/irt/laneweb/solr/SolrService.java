@@ -19,6 +19,4 @@ public interface SolrService {
     List<Eresource> search(String query);
 
     Map<String, Integer> searchCount(Set<String> types, String query);
-
-    List<Eresource> searchType(String type, String query);
 }

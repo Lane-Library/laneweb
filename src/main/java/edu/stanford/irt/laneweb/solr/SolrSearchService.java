@@ -176,16 +176,6 @@ public class SolrSearchService implements SolrService {
         return result;
     }
 
-    @Override
-    public List<Eresource> searchType(final String type, final String query) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        String cleanQuery = this.parser.parse(query);
-        String newType = SolrTypeManager.convertToNewType(type);
-        return this.repository.searchFindByType(cleanQuery, newType, new PageRequest(0, 50)).getContent();
-    }
-
     public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);

@@ -211,27 +211,10 @@ public class SolrSearchServiceTest {
 
     @Test
     public final void testSearchFindAllNotRecordTypePubmed() {
-        expect(this.repository.browseLinkscanLinks(isA(PageRequest.class)))
-                .andReturn(Collections.emptyList());
+        expect(this.repository.browseLinkscanLinks(isA(PageRequest.class))).andReturn(Collections.emptyList());
         replay(this.repository);
         this.searchService.getLinkscanLinks();
         verify(this.repository);
-    }
-
-    @Test
-    public final void testSearchTypeStringString() {
-        Page<Eresource> page = createMock(Page.class);
-        expect(this.repository.searchFindByType(isA(String.class), isA(String.class), isA(PageRequest.class)))
-                .andReturn(page);
-        expect(page.getContent()).andReturn(Collections.emptyList());
-        replay(this.repository, page);
-        this.searchService.searchType("type", "query");
-        verify(this.repository, page);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testSearchTypeStringStringException() {
-        this.searchService.searchType(null, "query");
     }
 
     @Test
