@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.solr.Eresource;
 
 public class PagingEresourceListTest {
 

@@ -15,7 +15,7 @@ import org.springframework.data.domain.Page;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.solr.Eresource;
 
 public class SolrPagingEresourceSAXStrategyTest {
 

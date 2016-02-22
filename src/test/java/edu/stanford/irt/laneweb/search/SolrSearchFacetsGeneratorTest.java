@@ -29,8 +29,8 @@ import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.Facet;
 import edu.stanford.irt.laneweb.solr.SolrSearchService;
 

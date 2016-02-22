@@ -14,6 +14,8 @@ import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.solr.Eresource;
+import edu.stanford.irt.laneweb.solr.Link;
 import edu.stanford.irt.laneweb.solr.SolrSearchService;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 

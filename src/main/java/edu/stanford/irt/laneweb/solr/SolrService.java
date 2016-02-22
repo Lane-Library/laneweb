@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-
 public interface SolrService {
 
     List<Eresource> getCore(String type);

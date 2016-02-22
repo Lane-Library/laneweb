@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.solr;
 
 import java.io.IOException;
 import java.util.ArrayList;

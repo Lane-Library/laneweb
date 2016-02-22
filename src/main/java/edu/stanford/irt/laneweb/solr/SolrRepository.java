@@ -9,8 +9,6 @@ import org.springframework.data.solr.repository.Facet;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-
 public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     public final class Handlers {

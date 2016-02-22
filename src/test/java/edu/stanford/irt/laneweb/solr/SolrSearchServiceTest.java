@@ -26,8 +26,6 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-
 @SuppressWarnings({ "boxing", "rawtypes", "unchecked" })
 public class SolrSearchServiceTest {
 
