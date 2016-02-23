@@ -27,9 +27,9 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 @SuppressWarnings({ "boxing", "rawtypes", "unchecked" })
-public class SolrSearchServiceTest {
+public class SolrServiceTest {
 
-    private static final class TestSolrSearchService extends SolrSearchService {
+    private static final class TestSolrSearchService extends SolrService {
 
         public TestSolrSearchService(final SolrTemplate solrTemplate, final SolrRepository solrRepository) {
             super.solrTemplate = solrTemplate;
@@ -40,7 +40,7 @@ public class SolrSearchServiceTest {
 
     private SolrRepository repository;
 
-    private SolrSearchService searchService;
+    private SolrService solrService;
 
     private SolrTemplate template;
 
@@ -48,7 +48,7 @@ public class SolrSearchServiceTest {
     public void setUp() throws Exception {
         this.repository = createMock(SolrRepository.class);
         this.template = createMock(SolrTemplate.class);
-        this.searchService = new TestSolrSearchService(this.template, this.repository);
+        this.solrService = new TestSolrSearchService(this.template, this.repository);
     }
 
     @Test
@@ -56,12 +56,12 @@ public class SolrSearchServiceTest {
         FacetPage<Object> fpage = createMock(FacetPage.class);
         expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
-        this.searchService.facetByField("query", "filters", "field", 0, 10, 1, FacetSort.COUNT);
+        this.solrService.facetByField("query", "filters", "field", 0, 10, 1, FacetSort.COUNT);
         verify(this.template, fpage);
         reset(this.template, fpage);
         expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
-        this.searchService.facetByField("query", "", "field", 0, 10, 1, FacetSort.COUNT);
+        this.solrService.facetByField("query", "", "field", 0, 10, 1, FacetSort.COUNT);
         verify(this.template, fpage);
     }
 
@@ -70,12 +70,12 @@ public class SolrSearchServiceTest {
         FacetPage<Object> fpage = createMock(FacetPage.class);
         expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
-        this.searchService.facetByManyFields("query", "filters", 1);
+        this.solrService.facetByManyFields("query", "filters", 1);
         verify(this.template, fpage);
         reset(this.template, fpage);
         expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
-        this.searchService.facetByManyFields("query", "", 1);
+        this.solrService.facetByManyFields("query", "", 1);
         verify(this.template, fpage);
     }
 
@@ -84,13 +84,13 @@ public class SolrSearchServiceTest {
         expect(this.repository.browseAllCoreByType(isA(String.class), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getCore("type");
+        this.solrService.getCore("type");
         verify(this.repository);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testGetCoreException() {
-        this.searchService.getCore(null);
+        this.solrService.getCore(null);
     }
 
     @Test
@@ -98,18 +98,18 @@ public class SolrSearchServiceTest {
         expect(this.repository.browseAllByMeshAndType(isA(String.class), isA(String.class), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getMesh("type", "mesh");
+        this.solrService.getMesh("type", "mesh");
         verify(this.repository);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testGetMeshException1() {
-        this.searchService.getMesh("type", null);
+        this.solrService.getMesh("type", null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testGetMeshException2() {
-        this.searchService.getMesh(null, "mesh");
+        this.solrService.getMesh(null, "mesh");
     }
 
     @Test
@@ -117,13 +117,13 @@ public class SolrSearchServiceTest {
         expect(this.repository.browseAllBySubset(isA(String.class), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getSubset("subset");
+        this.solrService.getSubset("subset");
         verify(this.repository);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testGetSubsetException() {
-        this.searchService.getSubset(null);
+        this.solrService.getSubset(null);
     }
 
     @Test
@@ -131,7 +131,7 @@ public class SolrSearchServiceTest {
         expect(this.repository.browseAllByType(isA(String.class), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getType("type");
+        this.solrService.getType("type");
         verify(this.repository);
     }
 
@@ -140,13 +140,13 @@ public class SolrSearchServiceTest {
         expect(this.repository.browseByTypeTitleStartingWith(isA(String.class), isA(String.class),
                 isA(PageRequest.class))).andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getType("type", 'a');
+        this.solrService.getType("type", 'a');
         verify(this.repository);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testGetTypeStringCharException() {
-        this.searchService.getType(null, 'a');
+        this.solrService.getType(null, 'a');
     }
 
     @Test
@@ -155,24 +155,13 @@ public class SolrSearchServiceTest {
         expect(this.repository.browseByTypeTitleStartingWith("Type", "1", pageRequest))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getType("type", '#');
+        this.solrService.getType("type", '#');
         verify(this.repository);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public final void testGetTypeStringException() {
-        this.searchService.getType(null);
-    }
-
-    @Test
-    public final void testSearch() {
-        Page<Eresource> page = createMock(Page.class);
-        expect(this.repository.searchFindAllWithFilter(isA(String.class), isA(String.class), isA(PageRequest.class)))
-                .andReturn(page);
-        expect(page.getContent()).andReturn(Collections.emptyList());
-        replay(this.repository, page);
-        this.searchService.search("query");
-        verify(this.repository, page);
+        this.solrService.getType(null);
     }
 
     @Test
@@ -203,7 +192,7 @@ public class SolrSearchServiceTest {
         expect(it2.hasNext()).andReturn(false);
         expect(it1.hasNext()).andReturn(false);
         replay(this.repository, facetResultPages, page, it1, it2, facetFieldEntry, page1);
-        Map<String, Integer> map = this.searchService.searchCount(types, "query");
+        Map<String, Integer> map = this.solrService.searchCount(types, "query");
         verify(this.repository, facetResultPages, page, it1, it2, facetFieldEntry, page1);
         assertEquals(20, (int) map.get("all"));
         assertEquals(10, (int) map.get("type1"));
@@ -213,23 +202,8 @@ public class SolrSearchServiceTest {
     public final void testSearchFindAllNotRecordTypePubmed() {
         expect(this.repository.browseLinkscanLinks(isA(PageRequest.class))).andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.getLinkscanLinks();
+        this.solrService.getLinkscanLinks();
         verify(this.repository);
-    }
-
-    @Test
-    public final void testSearchTypeStringStringPageable() {
-        Page<Eresource> page = createMock(Page.class);
-        expect(this.repository.searchFindByType(isA(String.class), isA(String.class), isA(PageRequest.class)))
-                .andReturn(page);
-        replay(this.repository, page);
-        this.searchService.searchType("type", "query", new PageRequest(0, 1));
-        verify(this.repository, page);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testSearchTypeStringStringPageableException() {
-        this.searchService.searchType(null, "query", new PageRequest(0, 1));
     }
 
     @Test
@@ -238,7 +212,7 @@ public class SolrSearchServiceTest {
         expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value",
                 new PageRequest(0, 1, null))).andReturn(page);
         replay(this.repository, page);
-        this.searchService.searchWithFilters("query", "field1:value::field2:value", new PageRequest(0, 1));
+        this.solrService.searchWithFilters("query", "field1:value::field2:value", new PageRequest(0, 1));
         verify(this.repository, page);
     }
 
@@ -247,7 +221,7 @@ public class SolrSearchServiceTest {
         Page<Eresource> page = createMock(Page.class);
         expect(this.repository.searchFindAllWithFilter("query", "", new PageRequest(0, 1, null))).andReturn(page);
         replay(this.repository, page);
-        this.searchService.searchWithFilters("query", null, new PageRequest(0, 1));
+        this.solrService.searchWithFilters("query", null, new PageRequest(0, 1));
         verify(this.repository, page);
     }
 
@@ -256,7 +230,7 @@ public class SolrSearchServiceTest {
         expect(this.repository.suggestFindAll("query terms", "query +terms", new PageRequest(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.suggestFindAll("query terms");
+        this.solrService.suggestFindAll("query terms");
         verify(this.repository);
     }
 
@@ -265,7 +239,7 @@ public class SolrSearchServiceTest {
         expect(this.repository.suggestFindByType("term", "Type", new PageRequest(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.searchService.suggestFindByType("term", "type");
+        this.solrService.suggestFindByType("term", "type");
         verify(this.repository);
     }
 }

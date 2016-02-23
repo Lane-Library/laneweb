@@ -16,7 +16,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.Link;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class LinkScanGeneratorTest {
 
@@ -30,13 +30,13 @@ public class LinkScanGeneratorTest {
 
     private List<Link> linkList;
 
-    private SolrSearchService searchService;
+    private SolrService searchService;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.searchService = createMock(SolrSearchService.class);
+        this.searchService = createMock(SolrService.class);
         this.generator = new LinkScanGenerator(this.searchService);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.eresource = createMock(Eresource.class);

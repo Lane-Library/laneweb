@@ -16,7 +16,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.Link;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.SolrService;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class LinkScanGenerator extends AbstractGenerator implements CacheablePipelineComponent {
@@ -27,12 +27,12 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
-    private SolrSearchService searchService;
+    private SolrService searchService;
 
     private Validity validity;
 
     @Autowired
-    public LinkScanGenerator(final SolrSearchService searchService) {
+    public LinkScanGenerator(final SolrService searchService) {
         this.searchService = searchService;
         this.validity = new LinkScanValidity();
     }

@@ -32,7 +32,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.Facet;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class SolrSearchFacetsGeneratorTest {
 
@@ -50,14 +50,14 @@ public class SolrSearchFacetsGeneratorTest {
 
     private Page<FacetQueryEntry> pageFacetQueries;
 
-    private SolrSearchService service;
+    private SolrService service;
 
     private XMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(SolrSearchService.class);
+        this.service = createMock(SolrService.class);
         this.marshaller = createMock(Marshaller.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.generator = new SolrSearchFacetsGenerator(this.service, this.marshaller);

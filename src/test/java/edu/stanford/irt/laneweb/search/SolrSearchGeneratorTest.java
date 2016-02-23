@@ -19,7 +19,7 @@ import org.springframework.data.domain.Pageable;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class SolrSearchGeneratorTest {
 
@@ -29,12 +29,12 @@ public class SolrSearchGeneratorTest {
 
     private SAXStrategy<Map<String, Object>> saxStrategy;
 
-    private SolrSearchService service;
+    private SolrService service;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(SolrSearchService.class);
+        this.service = createMock(SolrService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new SolrSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<String, Object>();
@@ -86,23 +86,6 @@ public class SolrSearchGeneratorTest {
         assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         assertEquals("authors_sort: ASC,title_sort: ASC", pageable.getValue().getSort().toString());
-        verify(this.service, this.saxStrategy);
-    }
-
-    @Test
-    public void testDoSearchWithType() {
-        this.model.put(Model.QUERY, "query");
-        this.model.put(Model.TYPE, "type");
-        this.model.put(Model.SORT, "unparsable");
-        Capture<Pageable> pageable = newCapture();
-        expect(this.service.searchType(eq("type"), eq("query"), capture(pageable))).andReturn(null);
-        replay(this.service, this.saxStrategy);
-        this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("query", result.get("searchTerm"));
-        assertEquals(50, pageable.getValue().getPageSize());
-        assertEquals(0, pageable.getValue().getPageNumber());
-        assertEquals(null, pageable.getValue().getSort());
         verify(this.service, this.saxStrategy);
     }
 }

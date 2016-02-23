@@ -5,15 +5,15 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.stanford.irt.laneweb.solr.Eresource;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.SolrService;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SolrSuggestionManager implements SuggestionManager {
 
-    private SolrSearchService searchService;
+    private SolrService searchService;
 
-    public SolrSuggestionManager(final SolrSearchService searchService) {
+    public SolrSuggestionManager(final SolrService searchService) {
         this.searchService = searchService;
     }
 
