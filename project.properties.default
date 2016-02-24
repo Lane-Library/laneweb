@@ -10,6 +10,7 @@ edu.stanford.irt.laneweb.useridhashkey=
 edu.stanford.irt.laneweb.useridcookiecodec.key=
 edu.stanford.irt.laneweb.disaster-mode=
 edu.stanford.irt.laneweb.solr-url-laneSearch=value_required_for_integration_tests
+edu.stanford.irt.laneweb.bookcovers.google-api-key=
 
 #this property name is hard coded in the solr-image-repository project:
 laneweb.solr-url-imageSearch=http://irt-lane-stage.stanford.edu/solr/laneImage

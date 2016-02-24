@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+    
+    <bean id="edu.stanford.irt.laneweb.bookcovers.Cache"
+        class="java.util.concurrent.ConcurrentHashMap"/>
+    
+    <bean id="edu.stanford.irt.laneweb.bookcovers.GoogleBookCoverService"
+        class="edu.stanford.irt.laneweb.bookcovers.GoogleBookCoverService">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.bookcovers.ISBNService">
+                <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.google.api.client.http.javanet.NetHttpTransport"/>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.google.api.client.json.JsonObjectParser">
+                <constructor-arg>
+                    <bean class="com.google.api.client.json.jackson2.JacksonFactory"/>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+        <constructor-arg value="%{edu.stanford.irt.laneweb.bookcovers.google-api-key}"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.bookcovers.Cache"/>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.bookcovers.CacheBookCoverService"
+        class="edu.stanford.irt.laneweb.bookcovers.CacheBookCoverService">
+        <constructor-arg ref="edu.stanford.irt.laneweb.bookcovers.Cache"/>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.bookcovers.CompositeBookCoverService"
+        class="edu.stanford.irt.laneweb.bookcovers.CompositeBookCoverService">
+        <constructor-arg ref="edu.stanford.irt.laneweb.bookcovers.CacheBookCoverService"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.bookcovers.GoogleBookCoverService"/>
+    </bean>
+    
+</beans>

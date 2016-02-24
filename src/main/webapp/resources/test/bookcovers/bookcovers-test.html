@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>bookcovers javascript unit tests</title>
+        <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
+    </head>
+    <body>
+        <img data-bibid="1"/>
+        <img data-bibid="2"/>
+        <script type="text/javascript">
+var XMLHttpRequest = function() {
+    return {
+        status: 200,
+        open: function(a, b, c) {
+            this.bibid = /\/apps\/bookcovers\?bibid=(\d)/.exec(b)[1];
+        },
+        send: function () {
+            var result = {};
+            result[this.bibid] = "http://www.example.com/src" + this.bibid;
+            this.responseText = JSON.stringify(result);
+            this.onload();
+        }
+    }
+}
+            
+            window.model = {"base-path":""};
+        </script>
+        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+        <script src="../../javascript/lane.js" type="text/javascript"></script>
+        <script src="../../javascript/util.js" type="text/javascript"></script>
+        <script src="../../javascript/model.js" type="text/javascript"></script>
+        <script src="../../javascript/bookcovers.js" type="text/javascript"></script>
+        <script src="bookcovers-test.js" type="text/javascript"></script>
+    </body>
+</html>

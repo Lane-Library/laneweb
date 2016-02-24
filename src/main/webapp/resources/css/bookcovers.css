@@ -1,0 +1,9 @@
+.bookcover {
+    float: right;
+    height: 75px;
+    visibility: hidden;
+}
+
+.bookcover-active {
+    visibility: visible;
+}
