@@ -357,7 +357,7 @@
         <dependency>
         	<groupId>com.google.apis</groupId>
         	<artifactId>google-api-services-books</artifactId>
-        	<version>v1-rev77-1.21.0</version>
+        	<version>v1-rev80-1.21.0</version>
         </dependency>
     </dependencies>
     <build>
