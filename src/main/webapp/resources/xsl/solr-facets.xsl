@@ -37,6 +37,13 @@
                 <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'laneblog'">Lane Blog</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'accessmedicine'">Access Medicine</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'clinicalkey'">ClinicalKey</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'hstalks'">HSTalks</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'medlineplus'">MedlinePlus</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'nejm'">N.E.J.M</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'sages'">Sages</xsl:when>
+                 <xsl:when test="../../string[. = 'recordType'] and value = 'jove'">Jove</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = concat('[',$current-year - 5,' TO *]')">Last 5 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = concat('[',$current-year - 10,' TO *]')">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>

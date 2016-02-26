@@ -204,6 +204,28 @@
                 <xsl:when test=". = 'class'">
                 <a href="/classes-consult/laneclasses.html">Lane Classes</a>
                 </xsl:when>
+                <xsl:when test=". = 'accessmedicine'">
+                <a href="http://mhmedical.com/">Access Medicine</a>
+                </xsl:when>
+                <xsl:when test=". = 'clinicalkey'">
+                <a href="https://www.clinicalkey.com/#!/">ClinicalKey</a>
+                </xsl:when>
+                <xsl:when test=". = 'hstalks'">
+                <a href="https://hstalks.com/">HSTalks</a>
+                </xsl:when>
+                <xsl:when test=". = 'medlineplus'">
+                <a href="https://www.nlm.nih.gov/medlineplus/">MedlinePlus</a>
+                </xsl:when>
+                <xsl:when test=". = 'nejm'">
+                <a href="http://www.nejm.org/">New England Journal of Medicine</a>
+                </xsl:when>
+                <xsl:when test=". = 'sages'">
+                <a href="http://www.sages.org/">Sages</a>
+                </xsl:when>
+                <xsl:when test=". = 'jove'">
+                <a href="http://www.jove.com">Jove</a>
+                </xsl:when>
+                
                 <xsl:when test=". = 'web' or . = 'laneblog'">
                 <a href="/index.html">Lane Website</a>
                 </xsl:when>
