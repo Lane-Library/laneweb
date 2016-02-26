@@ -7,6 +7,7 @@ import java.util.Map;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class CoreEresourcesGenerator extends AbstractEresourcesGenerator {

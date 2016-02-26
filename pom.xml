@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>10-SNAPSHOT</version>
+        <version>10</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.2.9-SNAPSHOT</version>
+    <version>3.2.10-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -131,7 +131,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.16-SNAPSHOT</version>
+            <version>3.0.16</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -234,7 +234,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.16</version>
+            <version>1.0.17</version>
             <exclusions>
                 <exclusion>
                     <artifactId>eresources-api</artifactId>
@@ -354,6 +354,11 @@
             <artifactId>grandrounds</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <dependency>
+        	<groupId>com.google.apis</groupId>
+        	<artifactId>google-api-services-books</artifactId>
+        	<version>v1-rev80-1.21.0</version>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -447,6 +452,7 @@
                                 <include>back-to-top-min.css</include>
                                 <includes>solr-facets-min.css</includes>
                                 <includes>equipment-min.css</includes>
+                                <includes>bookcovers-min.css</includes>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -508,6 +514,8 @@
                                 <include>solr-facets-min.js</include>
                                 <include>solr-pagination-min.js</include>
                                 <include>seminars-min.js</include>
+                                <include>bookcovers-min.js</include>
+                                <include>viewport-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -578,6 +586,23 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.cj.jshintmojo</groupId>
+                <artifactId>jshint-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <directories>
+                        <directory>src/main/webapp/resources/javascript</directory>
+                    </directories>
+                    <excludes>
+                        <exclude>src/main/webapp/resources/javascript/mobile/jquery-1.9.1.js</exclude>
+                        <exclude>src/main/webapp/resources/javascript/mobile/jquery-ui-1.10.4.custom.js</exclude>
+                        <exclude>src/main/webapp/resources/javascript/mobile/jquery.mobile-1.4.0.custom.js</exclude>
+                        <exclude>src/main/webapp/resources/javascript/swfobject.js</exclude>
+                        <exclude>src/main/webapp/resources/javascript/yui-3.18.1.js</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>

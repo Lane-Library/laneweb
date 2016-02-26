@@ -1,14 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -22,7 +14,9 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.Eresource;
+import edu.stanford.irt.laneweb.solr.Link;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class LinkScanGeneratorTest {
 
@@ -36,13 +30,13 @@ public class LinkScanGeneratorTest {
 
     private List<Link> linkList;
 
-    private SolrSearchService searchService;
+    private SolrService searchService;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.searchService = createMock(SolrSearchService.class);
+        this.searchService = createMock(SolrService.class);
         this.generator = new LinkScanGenerator(this.searchService);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.eresource = createMock(Eresource.class);
@@ -66,7 +60,7 @@ public class LinkScanGeneratorTest {
         this.xmlConsumer.characters(aryEq(" #1 ".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("ul"), eq("ul"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
-        Capture<Attributes> attributes = new Capture<Attributes>();
+        Capture<Attributes> attributes = newCapture();
         this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), capture(attributes));
         this.xmlConsumer.characters(aryEq(" id: type-id title: title".toCharArray()), eq(0), eq(25));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");

@@ -11,8 +11,8 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.Eresource;
+import edu.stanford.irt.laneweb.solr.SolrService;
 import edu.stanford.irt.suggest.Suggestion;
 
 public class SolrSuggestionManagerTest {
@@ -21,12 +21,12 @@ public class SolrSuggestionManagerTest {
 
     private SolrSuggestionManager manager;
 
-    private SolrSearchService solrSearchService;
+    private SolrService solrService;
 
     @Before
     public void setUp() {
-        this.solrSearchService = createMock(SolrSearchService.class);
-        this.manager = new SolrSuggestionManager(this.solrSearchService);
+        this.solrService = createMock(SolrService.class);
+        this.manager = new SolrSuggestionManager(this.solrService);
         this.eresource = createMock(Eresource.class);
     }
 
@@ -37,35 +37,35 @@ public class SolrSuggestionManagerTest {
 
     @Test
     public void testGetSuggestionsForTerm() {
-        expect(this.solrSearchService.suggestFindAll("term")).andReturn(Collections.singletonList(this.eresource));
+        expect(this.solrService.suggestFindAll("term")).andReturn(Collections.singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.eresource.getId()).andReturn("id");
-        replay(this.solrSearchService, this.eresource);
+        replay(this.solrService, this.eresource);
         Suggestion suggestion = this.manager.getSuggestionsForTerm("term").iterator().next();
         assertEquals("title", suggestion.getSuggestionTitle());
-        verify(this.solrSearchService, this.eresource);
+        verify(this.solrService, this.eresource);
     }
 
     @Test
     public void testGetSuggestionsForTermType() {
-        expect(this.solrSearchService.suggestFindByType("term", "type")).andReturn(
+        expect(this.solrService.suggestFindByType("term", "type")).andReturn(
                 Collections.singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.eresource.getId()).andReturn("id");
-        replay(this.solrSearchService, this.eresource);
+        replay(this.solrService, this.eresource);
         Suggestion suggestion = this.manager.getSuggestionsForTerm("type", "term").iterator().next();
         assertEquals("title", suggestion.getSuggestionTitle());
-        verify(this.solrSearchService, this.eresource);
+        verify(this.solrService, this.eresource);
     }
 
     @Test
     public void testGetSuggestionsForTermWithPeriod() {
-        expect(this.solrSearchService.suggestFindAll("term")).andReturn(Collections.singletonList(this.eresource));
+        expect(this.solrService.suggestFindAll("term")).andReturn(Collections.singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title.");
         expect(this.eresource.getId()).andReturn("id");
-        replay(this.solrSearchService, this.eresource);
+        replay(this.solrService, this.eresource);
         Suggestion suggestion = this.manager.getSuggestionsForTerm("term").iterator().next();
         assertEquals("title", suggestion.getSuggestionTitle());
-        verify(this.solrSearchService, this.eresource);
+        verify(this.solrService, this.eresource);
     }
 }

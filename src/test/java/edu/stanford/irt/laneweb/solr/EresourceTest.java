@@ -1,8 +1,10 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.solr;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.solr.Eresource;
 
 public class EresourceTest {
 

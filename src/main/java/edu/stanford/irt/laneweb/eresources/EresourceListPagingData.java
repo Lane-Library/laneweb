@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.stanford.irt.laneweb.resource.PagingData;
+import edu.stanford.irt.laneweb.solr.Eresource;
 
 public class EresourceListPagingData extends PagingData {
 

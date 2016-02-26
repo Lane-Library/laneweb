@@ -18,12 +18,12 @@ import org.springframework.oxm.Marshaller;
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator;
-import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.Facet;
 import edu.stanford.irt.laneweb.solr.FacetComparator;
-import edu.stanford.irt.laneweb.solr.SolrSearchService;
+import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator implements ModelAware {
 
@@ -55,9 +55,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private Collection<String> requiredPublicationTypes;
 
-    private SolrSearchService service;
+    private SolrService service;
 
-    public SolrSearchFacetsGenerator(final SolrSearchService service, final Marshaller marshaller) {
+    public SolrSearchFacetsGenerator(final SolrService service, final Marshaller marshaller) {
         super(marshaller);
         this.service = service;
     }
@@ -124,7 +124,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (this.facets.isEmpty()) {
             return facetsMap;
         }
-        String[] tokens = this.facets.split(SolrSearchService.FACETS_SEPARATOR);
+        String[] tokens = this.facets.split(SolrService.FACETS_SEPARATOR);
         for (String token2 : tokens) {
             String[] token = token2.split(COLON);
             String fieldName = token[0];

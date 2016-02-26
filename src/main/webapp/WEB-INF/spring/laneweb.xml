@@ -5,6 +5,7 @@
     
     <import resource="bassett.xml"/>
     <import resource="binding.xml"/>
+    <import resource="bookcovers.xml"/>
     <import resource="bookmarks.xml"/>
     <import resource="cme.xml"/>
     <import resource="datasources.xml"/>

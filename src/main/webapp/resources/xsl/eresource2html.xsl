@@ -21,6 +21,9 @@
     <xsl:template match="s:result[@type='eresource']">
         <xsl:variable name="available" select="number(s:available)"/>
         <li>
+            <xsl:if test="contains(s:primaryType, 'Book')">
+                <img class="bookcover" data-bibid="{s:recordId}"/>
+            </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')) or position() = 1]"/>
             <xsl:apply-templates select="s:pub-author"/>
             <xsl:apply-templates select="s:pub-text"/>

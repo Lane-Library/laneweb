@@ -11,6 +11,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.solr.Eresource;
+
 public class EresourceListPagingDataTest {
 
     private Eresource eresource;

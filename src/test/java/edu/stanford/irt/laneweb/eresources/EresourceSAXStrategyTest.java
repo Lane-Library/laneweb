@@ -22,6 +22,9 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.laneweb.solr.Eresource;
+import edu.stanford.irt.laneweb.solr.Link;
+import edu.stanford.irt.laneweb.solr.LinkType;
 
 public class EresourceSAXStrategyTest {
 

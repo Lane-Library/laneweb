@@ -52,7 +52,7 @@ public class Facet {
             return this.url;
         }
         String facetUrl = this.url;
-        String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrSearchService.FACETS_SEPARATOR;
+        String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrService.FACETS_SEPARATOR;
         if (this.enabled) {
             facetUrl = this.activeFacets.replaceFirst(
                     "(^|::)" + this.fieldName + COLON + getMaybeQuote() + Pattern.quote(this.value) + getMaybeQuote(),
