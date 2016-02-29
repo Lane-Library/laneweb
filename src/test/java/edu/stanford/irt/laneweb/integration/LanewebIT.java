@@ -105,7 +105,7 @@ public class LanewebIT {
             this.mockMvc
                     .perform(get("/apps/search/content/html/pubmed?q=test")
                             .servletPath("/apps/search/content/html/pubmed"))
-                    .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists());
+                    .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']", ns).exists());
         }
     }
 
