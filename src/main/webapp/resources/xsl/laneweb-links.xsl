@@ -22,6 +22,14 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
+            <!-- LPCH/SCH has a different IdP/ADFS instance for lane and lane-beta and lane-prototype -->
+            <xsl:when test="starts-with(.,'/Shibboleth.sso/Login') and contains(.,'sch-sts.lpch.org')">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="replace(.,'sch-sts.lpch.org','sch-sts-test.stanfordchildrens.org')"/>
+                    <xsl:text>&amp;target=</xsl:text>
+                     <xsl:value-of select="substring-after($return,'target=')"/>
+                </xsl:attribute>
+            </xsl:when>
             <xsl:when test="starts-with(.,'/Shibboleth.sso/Login')">
                 <xsl:attribute name="href">
                     <xsl:value-of select="."/>
