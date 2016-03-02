@@ -151,7 +151,7 @@ END:VEVENT</xsl:text>
 		</xsl:variable>
 		<xsl:variable name="hour">
 			<xsl:choose>
-				<xsl:when test=" substring-after($time,' ') = 'PM'">
+				<xsl:when test="substring-after($time,' ') = 'PM' and substring-before($time,':') != '12'">
 					<xsl:value-of select="number(substring-before($time,':'))+12" />
 				</xsl:when>
 				<xsl:otherwise>
