@@ -26,7 +26,7 @@ public class VolumesCallback extends JsonBatchCallback<Volumes> {
 
     @Override
     public void onFailure(final GoogleJsonError e, final HttpHeaders responseHeaders) {
-        log.error(e.getMessage(), e);
+        log.warn(e.getMessage(), e);
     }
 
     @Override
