@@ -26,10 +26,10 @@
                            <a href="?&amp;sort=title_sort+asc,year+desc">title</a>
                         </li>
                         <li>
-                           <a href="?&amp;sort=year+desc,title_sort+asc">year (new to old)</a>
+                           <a href="?&amp;sort=date+desc,title_sort+asc">year (new to old)</a>
                         </li>
                         <li>
-                           <a href="?&amp;sort=year+asc,title_sort+asc">year (old to new)</a>
+                           <a href="?&amp;sort=date+asc,title_sort+asc">year (old to new)</a>
                         </li>
                      </ul>
                   </div>
