@@ -22,10 +22,12 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
-            <!-- LPCH/SCH has a different IdP/ADFS instance for lane and lane-beta and lane-prototype -->
-            <xsl:when test="starts-with(.,'/Shibboleth.sso/Login') and contains(.,'sch-sts.lpch.org')">
+            <!-- LPCH/SCH has different IdP/ADFS instances for lane (prod) and lane-beta and lane-prototype (dev):
+                prod: https://sch-sts.lpch.org/adfs/services/trust
+                dev : http://sch-sts-test.stanfordchildrens.org/adfs/services/trust -->
+            <xsl:when test="starts-with(.,'/Shibboleth.sso/Login') and contains(.,'entityID=https%3A%2F%2Fsch-sts.lpch.org')">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'sch-sts.lpch.org','sch-sts-test.stanfordchildrens.org')"/>
+                    <xsl:value-of select="replace(.,'https%3A%2F%2Fsch-sts.lpch.org','https%3A%2F%2Fsch-sts-test.stanfordchildrens.org')"/>
                     <xsl:text>&amp;target=</xsl:text>
                      <xsl:value-of select="substring-after($return,'target=')"/>
                 </xsl:attribute>
