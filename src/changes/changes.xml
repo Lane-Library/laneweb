@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-03-??" version="3.2.11" description="3.2.11 bug fix release">
+            <action date="2016-03-02" dev="ceyates" issue="116957" type="update">
+                log 'Daily Limit Exceeded' from google books at warn level
+            </action>
+            <action date="2016-03-02" dev="ceyates" issue="113611" type="add">
+                Create a page for audio materials
+            </action>
+        </release>
         <release date="2016-02-29" version="3.2.10" description="3.2.10 bug fix release">
             <action date="2016-02-24" dev="ceyates" issue="113306" type="add">
                 show book covers for books

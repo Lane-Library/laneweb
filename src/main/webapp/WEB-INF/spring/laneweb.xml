@@ -3,6 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
     
+    <import resource="audio.xml"/>
     <import resource="bassett.xml"/>
     <import resource="binding.xml"/>
     <import resource="bookcovers.xml"/>

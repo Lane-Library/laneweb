@@ -7,7 +7,6 @@ import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
@@ -15,6 +14,8 @@ import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
@@ -23,24 +24,32 @@ public class DescribeGeneratorTest {
 
     private DescribeGenerator generator;
 
-    private MetaSearchManager MetaSearchManager;
+    private MetaSearchManager metaSearchManager;
 
     private Result result;
 
+    private SAXStrategy<Result> saxStrategy;
+
+    private XMLConsumer xmlConsumer;
+
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.MetaSearchManager = createMock(MetaSearchManager.class);
-        this.generator = new DescribeGenerator(this.MetaSearchManager, null);
+        this.metaSearchManager = createMock(MetaSearchManager.class);
+        this.saxStrategy = createMock(SAXStrategy.class);
+        this.generator = new DescribeGenerator(this.metaSearchManager, this.saxStrategy);
         this.result = createMock(Result.class);
+        this.xmlConsumer = createMock(XMLConsumer.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testDoSearch() {
-        expect(this.MetaSearchManager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
-        replay(this.MetaSearchManager);
-        assertSame(this.result, this.generator.doSearch("query"));
-        verify(this.MetaSearchManager);
+    public void testDoGenerate() {
+        expect(this.metaSearchManager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
+        this.saxStrategy.toSAX(this.result, this.xmlConsumer);
+        replay(this.metaSearchManager, this.xmlConsumer, this.saxStrategy);
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.metaSearchManager, this.xmlConsumer, this.saxStrategy);
     }
 
     @Test

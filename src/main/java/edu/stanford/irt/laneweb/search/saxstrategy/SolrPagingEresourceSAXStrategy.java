@@ -32,6 +32,7 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, O
 
     @Override
     public void toSAX(final Map<String, Object> object, final XMLConsumer xmlConsumer) {
+        @SuppressWarnings("unchecked")
         Page<Eresource> page = (Page<Eresource>) object.get("resultPage");
         List<Eresource> eresources = page.getContent();
         String query = (String) object.get("searchTerm");
