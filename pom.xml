@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>11-SNAPSHOT</version>
+        <version>11</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.2.11-SNAPSHOT</version>
@@ -89,7 +89,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.58.0</version>
+            <version>1.59.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
