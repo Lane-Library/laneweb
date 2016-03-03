@@ -47,7 +47,7 @@ public class ISBNServiceTest {
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setInt(1, 906);
         this.statement.setInt(2, 766);
-        for (int i = 3; i <= 10; i++) {
+        for (int i = 3; i <= 20; i++) {
             this.statement.setInt(i, 766);
         }
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
@@ -69,7 +69,7 @@ public class ISBNServiceTest {
 
     @Test(expected = LanewebException.class)
     public void testGetISBNs6Ids() throws SQLException {
-        this.service.getISBNs(Arrays.asList(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }));
+        this.service.getISBNs(Arrays.asList(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 }));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class ISBNServiceTest {
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setInt(1, 906);
         this.statement.setInt(2, 766);
-        for (int i = 3; i <= 10; i++) {
+        for (int i = 3; i <= 20; i++) {
             this.statement.setInt(i, 766);
         }
         expect(this.statement.executeQuery()).andReturn(this.resultSet);
@@ -125,7 +125,7 @@ public class ISBNServiceTest {
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         this.statement.setInt(1, 906);
         this.statement.setInt(2, 766);
-        for (int i = 3; i <= 10; i++) {
+        for (int i = 3; i <= 20; i++) {
             this.statement.setInt(i, 766);
         }
         expect(this.statement.executeQuery()).andThrow(new SQLException());

@@ -7,7 +7,10 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2016-03-??" version="3.2.11" description="3.2.11 bug fix release">
+        <release date="2016-03-07" version="3.2.11" description="3.2.11 bug fix release">
+            <action date="2016-03-03" dev="ceyates" issue="117013" type="update">
+                increase number of bookcovers to fetch from 10 to 20
+            </action>
             <action date="2016-03-02" dev="ceyates" issue="116957" type="update">
                 log 'Daily Limit Exceeded' from google books at warn level
             </action>

@@ -62,7 +62,6 @@
     //To display the persistent checkbox in the discoverypage
     if(Y.one('#persistent')){
         var div = Y.one('#persistent div.header'),
-        host = location.get("host"),
         isPersistent = Y.Node.create("<div class='is-persistent'><input type='checkbox' id='is-persistent-login' /> <label>Log me in for 2 weeks (DON’T check if on a shared computer)</label></div>");
         div.insert(isPersistent, 'after');
 
@@ -74,18 +73,6 @@
                 Y.Cookie.remove("isPersistent");
             }
         }, '#is-persistent-login');
-        // LPCH/SCH has different IdP/ADFS instances for lane (prod) and lane-beta and lane-prototype (dev):
-        // prod: https://sch-sts.lpch.org/adfs/services/trust
-        // dev : http://sch-sts-test.stanfordchildrens.org/adfs/services/trust -->
-        if (!host.match("lane.stanford.edu")) {
-            Y.all("#shibboleth-links a").each(function(node) {
-                var href = node.get("href");
-                if (href.indexOf("entityID=https%3A%2F%2Fsch-sts.lpch.org")) {
-                    href = href.replace("https%3A%2F%2Fsch-sts.lpch.org","http%3A%2F%2Fsch-sts-test.stanfordchildrens.org")
-                    node.set("href",href);
-                }
-            });
-        }
     }
 
     // for the static page myaccounts.html Click on YES this way the user
