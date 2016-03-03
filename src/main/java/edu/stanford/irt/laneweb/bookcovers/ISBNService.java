@@ -25,6 +25,12 @@ public class ISBNService {
 
     private static final String SQL = "SELECT BIB_ID, NORMAL_HEADING FROM LMLDB.BIB_INDEX WHERE BIB_ID IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) AND INDEX_CODE = '020N' ORDER BY BIB_ID";
 
+    private DataSource dataSource;
+
+    public ISBNService(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     private static Map<Integer, List<String>> createISBNMap(final List<Integer> bibids, final PreparedStatement stmt)
             throws SQLException {
         Map<Integer, List<String>> isbnMap = new HashMap<>();
@@ -42,12 +48,6 @@ public class ISBNService {
             }
         }
         return isbnMap;
-    }
-
-    private DataSource dataSource;
-
-    public ISBNService(final DataSource dataSource) {
-        this.dataSource = dataSource;
     }
 
     /**
