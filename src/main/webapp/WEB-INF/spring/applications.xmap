@@ -224,5 +224,14 @@
             <map:transform type="saxon" src="resources/xsl/equipment-status.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
+        <map:match type="wildcard" pattern="audio.xml">
+            <map:generate type="audio"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="audio.html">
+            <map:generate type="audio"/>
+            <map:transform type="saxon" src="resources/xsl/audio.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
     </map:pipeline>
 </map:sitemap>

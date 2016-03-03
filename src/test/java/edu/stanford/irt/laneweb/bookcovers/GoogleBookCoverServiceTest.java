@@ -70,6 +70,7 @@ public class GoogleBookCoverServiceTest {
                 .setVolumeInfo(new VolumeInfo().setImageLinks(new ImageLinks().setSmallThumbnail("thumbnail")))));
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetThumbnailURLs() throws IOException {
         expect(this.isbnService.getISBNs(isA(List.class))).andReturn(Collections.singletonMap(Integer.valueOf(1),
@@ -94,6 +95,7 @@ public class GoogleBookCoverServiceTest {
         verify(this.isbnService, this.request, this.objectParser, this.response);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetThumbnailURLsEmptyBatch() throws IOException {
         expect(this.isbnService.getISBNs(isA(List.class)))
@@ -112,6 +114,7 @@ public class GoogleBookCoverServiceTest {
         verify(this.isbnService, this.request, this.objectParser, this.response);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetThumbnailURLsThrows() throws IOException {
         expect(this.isbnService.getISBNs(isA(List.class))).andReturn(Collections.singletonMap(Integer.valueOf(1),
