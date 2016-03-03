@@ -21,13 +21,9 @@ import edu.stanford.irt.laneweb.LanewebException;
  */
 public class ISBNService {
 
-    private static final String SQL = "SELECT BIB_ID, NORMAL_HEADING FROM LMLDB.BIB_INDEX WHERE BIB_ID IN (?,?,?,?,?,?,?,?,?,?) AND INDEX_CODE = '020N' ORDER BY BIB_ID";
+    private static final int MAX_IDS = 20;
 
-    private DataSource dataSource;
-
-    public ISBNService(final DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
+    private static final String SQL = "SELECT BIB_ID, NORMAL_HEADING FROM LMLDB.BIB_INDEX WHERE BIB_ID IN (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) AND INDEX_CODE = '020N' ORDER BY BIB_ID";
 
     private static Map<Integer, List<String>> createISBNMap(final List<Integer> bibids, final PreparedStatement stmt)
             throws SQLException {
@@ -37,7 +33,7 @@ public class ISBNService {
             isbnMap.put(Integer.valueOf(id), new ArrayList<>());
             stmt.setInt(i++, id);
         }
-        while (i <= 10) {
+        while (i <= MAX_IDS) {
             stmt.setInt(i++, bibids.get(bibids.size() - 1));
         }
         try (ResultSet rs = stmt.executeQuery()) {
@@ -48,13 +44,19 @@ public class ISBNService {
         return isbnMap;
     }
 
+    private DataSource dataSource;
+
+    public ISBNService(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     /**
      * @param bibids
      *            a list of bibids
      * @return a Map with bibids as key and a list of isbn Strings as values
      */
     public Map<Integer, List<String>> getISBNs(final List<Integer> bibids) {
-        if (bibids.size() > 10) {
+        if (bibids.size() > MAX_IDS) {
             throw new LanewebException(String.format("too many ids: %d", bibids.size()));
         }
         Map<Integer, List<String>> isbnMap;

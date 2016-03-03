@@ -61,7 +61,8 @@
                         if (working) {
                             throw new Error("still working on " + working);
                         }
-                        for (i = 0; i < bibids.length; i++) {
+                        // don't get more than 20
+                        for (i = 0; i < bibids.length && i < 20; i++) {
                             url = url += "bibid=" + bibids[i] + "&";
                             working += bibids[i] + ",";
                         }
@@ -83,28 +84,28 @@
             return service;
         }(),
 
-            // controls the communication between the viewport, service and view.
-            controller = {
+        // controls the communication between the viewport, service and view.
+        controller = {
 
-                // handler for the service covers event, sends the covers to the view
-                covers: function(event) {
-                    view.update(event.covers);
-                },
+            // handler for the service covers event, sends the covers to the view
+            covers: function(event) {
+                view.update(event.covers);
+            },
 
-                // handler for the viewport update event, gets bibids from the view
-                // and asks the service of bookcover urls for them.
-                update: function(viewport) {
-                    var bibids = view.getImgsForUpdate(viewport);
-                    if (bibids.length > 0) {
-                        bookcoverService.getBookCoverURLs(bibids);
-                    }
+            // handler for the viewport update event, gets bibids from the view
+            // and asks the service of bookcover urls for them.
+            update: function(viewport) {
+                var bibids = view.getImgsForUpdate(viewport);
+                if (bibids.length > 0) {
+                    bookcoverService.getBookCoverURLs(bibids);
                 }
-            };
+            }
+        };
 
-        bookcoverService.on("covers", controller.covers);
+    bookcoverService.on("covers", controller.covers);
 
-        lane.on(["viewport:init","viewport:scrolled"], function(event){
-            controller.update(event.viewport);
-        });
+    lane.on(["viewport:init","viewport:scrolled"], function(event){
+        controller.update(event.viewport);
+    });
 
 })();
