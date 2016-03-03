@@ -27,8 +27,8 @@
                     for (bibid in imageMap) {
                         if (!imageMap[bibid].src && viewport.inView(imageMap[bibid])) {
                             imagesForUpdate.push(bibid);
-                        };
-                    };
+                        }
+                    }
                     return imagesForUpdate;
                 },
 
