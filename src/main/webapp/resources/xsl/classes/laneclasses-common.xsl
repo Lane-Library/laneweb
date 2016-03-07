@@ -46,5 +46,43 @@
         <xsl:value-of select="concat($hour, ' ', lower-case(substring-after(./lc:event_dates/lc:end_date[1]/text(),':00 ')))"/>
     </xsl:template>
 
+    <xsl:template name="firstWords">
+		<xsl:param name="value"/>
+		<xsl:param name="count"/>
+
+		<xsl:if test="number($count) >= 1">
+			<xsl:value-of select="concat(substring-before($value,' '),' ')"/>
+		</xsl:if>
+		<xsl:if test="number($count) > 1">
+			<xsl:variable name="remaining" select="substring-after($value,' ')"/>
+			<xsl:if test="string-length($remaining) > 0">
+				<xsl:call-template name="firstWords">
+					<xsl:with-param name="value" select="$remaining"/>
+					<xsl:with-param name="count" select="number($count)-1"/>
+				</xsl:call-template>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+    
+    
+    
+	<xsl:template match="lc:event_description">
+		<xsl:choose>
+			<xsl:when test="count(tokenize(., '\W+')[. != ''])  &gt; 50">
+				<xsl:call-template name="firstWords">
+					<xsl:with-param name="value" select="."/>
+					<xsl:with-param name="count" select="50"/>
+				</xsl:call-template>
+				<xsl:text>...</xsl:text>
+				<div>
+					<a href="/classes-consult/laneclass.html?class-id={../lc:module_id}">More <i class="fa fa-arrow-right"/></a>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="."/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+    
     
 </xsl:stylesheet>

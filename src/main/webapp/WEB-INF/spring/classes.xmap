@@ -5,12 +5,17 @@
     <map:pipeline type="noncaching">
         <!-- I did a benchmark first using the pipeline below and I got a average of 358.382 [ms] (mean)  -->
         <!-- and I tried the get the data on the fly every and do all the transformations the response was very disappointing  Time per request: 2191.253 [ms] (mean) -->
-        <map:match pattern="all.xml" type="wildcard">
-            <map:aggregate type="default" element="doc">
-                <map:generate type="file" src="cocoon://classes/data.xml"/>
-                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
+        <map:match pattern="all-open-by-category.xml" type="wildcard">
+        	 <map:aggregate type="default" element="doc">
+                <map:generate type="file" src="cocoon://classes/category.xml"/>
+                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
             </map:aggregate>
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="archive-category.xml" type="wildcard">
+            <map:generate type="file" src="cocoon://classes/archive.xml"/>
+            <map:transform type="saxon" src="resources/xsl/classes/archive.xsl"/>
             <map:serialize type="xml"/>
         </map:match>    
     </map:pipeline>
@@ -26,18 +31,33 @@
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="classescategory.xml" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/data.xml"/>
-            <map:transform type="saxon" src="resources/xsl/classes/laneclasses-by-category.xsl"/>
+        <map:match pattern="archive.xml" type="wildcard">
+            <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;cat=8"/>
+           <map:transform type="joost" src="resources/xsl/classes/event-urls.stx"/>
+            <map:transform type="eventlist"/>
+            <map:transform type="joost" src="resources/xsl/classes/prune-add-namespace.stx"/>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="event_description"/>
+            </map:transform>
             <map:serialize type="xml"/>
-        </map:match>
+         </map:match>
+        <map:match pattern="category.xml" type="wildcard">
+            <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
+            <map:transform type="joost" src="resources/xsl/classes/event-urls.stx"/>
+            <map:transform type="eventlist"/>
+            <map:transform type="joost" src="resources/xsl/classes/prune-add-namespace.stx"/>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="event_description"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>     
         <map:match pattern="thisweek.xml" type="wildcard">
             <map:generate type="classes" src="cocoon://classes/data.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/thisweek.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="history.xml" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/data.xml"/>
+            <map:generate type="classes" src="cocoon://classes/category.xml?id=14"/>
             <map:transform type="saxon" src="resources/xsl/classes/history.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
@@ -61,13 +81,6 @@
             </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="onlineregistrationcenter.xml" type="wildcard">
-            <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="all-onlineregistrationcenter.xml" type="wildcard">
-            <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1"/>
-            <map:serialize type="xml"/>
-        </map:match>
     </map:pipeline>
+    
 </map:sitemap>
