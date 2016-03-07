@@ -9,7 +9,7 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
 
     private static final String COLON = ":";
 
-    private static final String LAST_X_YEARS_PREFIX = "year:[20";
+    private static final String LAST_X_YEARS_PREFIX = "date:[20";
 
     private static final String PUBLICATION_TYPE = "publicationType:";
 
