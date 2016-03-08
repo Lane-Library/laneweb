@@ -164,6 +164,14 @@ public class SolrService {
         return result;
     }
 
+    public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
+        if (null == type) {
+            throw new IllegalArgumentException(NULL_TYPE);
+        }
+        String cleanQuery = this.parser.parse(query);
+        return this.repository.searchFindByType(cleanQuery, SolrTypeManager.convertToNewType(type), pageRequest);
+    }
+
     public Page<Eresource> searchWithFilters(final String query, final String facets, final Pageable pageRequest) {
         String cleanQuery = this.parser.parse(query);
         return this.repository.searchFindAllWithFilter(cleanQuery, facetStringToFilters(facets), pageRequest);
