@@ -142,6 +142,7 @@
             <xsl:apply-templates select="s:link[1]"/>
             <xsl:apply-templates select="s:recordType"/>
             <xsl:value-of select="s:pub-text"/>
+            <xsl:apply-templates select="s:primaryType"/>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:link[1],'pubmed')">
                     <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">abstract &#xBB;</a>
@@ -159,6 +160,11 @@
             <xsl:apply-templates select="s:recordType">
                 <xsl:with-param name="mode">full</xsl:with-param>
             </xsl:apply-templates>
+            <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
+            <xsl:if test="s:pub-text">
+                <div><xsl:value-of select="s:pub-text"/></div>
+            </xsl:if>
+            <xsl:apply-templates select="s:primaryType"/>
             <xsl:apply-templates select="s:description"/>
         </div>  
     </xsl:template>
@@ -229,7 +235,7 @@
             <!-- add catalog link to all bibs except those that already have one (history) -->
             <xsl:when test="$mode = 'full' and . = 'bib' and not(../s:link/s:label[.='catalog record'])">
                 <div class="moreResults">
-                    <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog record</a>
+                    <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog Record</a>
                 </div>
             </xsl:when>
             <xsl:when test=". = 'web'">
@@ -254,7 +260,22 @@
         </strong>
         <xsl:text>: </xsl:text>
     </xsl:template>
-    
+
+    <xsl:template match="s:primaryType">
+        <div>
+            <xsl:choose>
+                <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
+                    <strong><xsl:value-of select="substring-before(., ' ')"/></strong>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="substring-after(., ' ')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <strong><xsl:value-of select="."/></strong>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
+    </xsl:template>
+
     <!-- add Next toggle to search results -->
     <xsl:template name="paginationLinks">
         <xsl:if test="number(/s:resources/@pages) &gt; number(/s:resources/@page) + 1">
