@@ -145,10 +145,10 @@
             <xsl:apply-templates select="s:primaryType"/>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:link[1],'pubmed')">
-                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">abstract &#xBB;</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">abstract &#xBB;</a>
                 </xsl:when>
                 <xsl:when test="s:description or count(s:link) > 1">
-                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)-1)}" class="more">more info &#xBB;</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info &#xBB;</a>
                 </xsl:when>
             </xsl:choose>
         </li>
