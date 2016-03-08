@@ -257,9 +257,9 @@
     
     <!-- add Next toggle to search results -->
     <xsl:template name="paginationLinks">
-        <xsl:if test="number(/s:resources/@pages) &gt; 1 and number(/s:resources/@page) &lt; number(/s:resources/@pages) - 1">
+        <xsl:if test="number(/s:resources/@pages) &gt; number(/s:resources/@page) + 1">
             <li class="more resultsNav">
-                <a href="{concat($base-link,'&amp;page=',/s:resources/@page)}">next &#xBB;</a>
+                <a href="{concat($base-link,'&amp;page=',number(/s:resources/@page) + 2)}">next &#xBB;</a>
             </li>
         </xsl:if>
     </xsl:template>
