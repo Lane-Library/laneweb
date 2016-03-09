@@ -20,14 +20,14 @@
 					</xsl:when>
 					<xsl:when test="$id = ''">
 						<xsl:apply-templates select="lc:event_data">
-							<xsl:sort select="./lc:module_id" data-type="number" order="descending" />
+							<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text" order="descending" />
 						</xsl:apply-templates>
 
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:apply-templates
 							select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]">
-							<xsl:sort select="./lc:module_id" data-type="number" order="descending" />
+							<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="number" order="descending" />
 						</xsl:apply-templates>
 					</xsl:otherwise>
 
