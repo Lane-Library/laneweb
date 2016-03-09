@@ -14,15 +14,21 @@
 		<html>
 			<body>
 				<xsl:choose>
-					<xsl:when test="count(//lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]) = 0">
+					<xsl:when
+						test="count(//lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]) = 0">
 						<xsl:call-template name="no-class"></xsl:call-template>
 					</xsl:when>
 					<xsl:when test="$id = ''">
-						<xsl:apply-templates select="lc:event_data" />
+						<xsl:apply-templates select="lc:event_data">
+							<xsl:sort select="./lc:module_id" data-type="number" order="descending" />
+						</xsl:apply-templates>
+
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:apply-templates
-							select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]" />
+							select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]">
+							<xsl:sort select="./lc:module_id" data-type="number" order="descending" />
+						</xsl:apply-templates>
 					</xsl:otherwise>
 
 				</xsl:choose>
@@ -57,18 +63,18 @@
 				</div>
 
 			</div>
-			<div  class="yui3-u-1-12">
+			<div class="yui3-u-1-12">
 				<xsl:if test="./lc:more_info_url/text() != ''">
 					<div class="youtube-class">
-					<iframe>
-						<xsl:attribute name="src" select="./lc:more_info_url/text()" />
-						<xsl:attribute name="rameborder">0</xsl:attribute>
-						<xsl:attribute name="allowfullscreen"> </xsl:attribute>
-						<xsl:attribute name="frameborder">0</xsl:attribute>
-						<xsl:attribute name="allowfullscreen"> </xsl:attribute>
-						<xsl:attribute name="width">225</xsl:attribute>
-						<xsl:attribute name="height">120</xsl:attribute>
-					</iframe>
+						<iframe>
+							<xsl:attribute name="src" select="./lc:more_info_url/text()" />
+							<xsl:attribute name="rameborder">0</xsl:attribute>
+							<xsl:attribute name="allowfullscreen"> </xsl:attribute>
+							<xsl:attribute name="frameborder">0</xsl:attribute>
+							<xsl:attribute name="allowfullscreen"> </xsl:attribute>
+							<xsl:attribute name="width">225</xsl:attribute>
+							<xsl:attribute name="height">120</xsl:attribute>
+						</iframe>
 					</div>
 				</xsl:if>
 			</div>
@@ -80,10 +86,12 @@
 	<xsl:template name="year">
 		<xsl:value-of select="replace(./lc:event_dates/lc:start_date/text(),'.*(\d{4}).*','$1')" />
 	</xsl:template>
-	
+
 	<xsl:template name="no-class">
-		<div><b> No Class</b></div>
+		<div>
+			<b> No Class</b>
+		</div>
 	</xsl:template>
-	
+
 
 </xsl:stylesheet>
