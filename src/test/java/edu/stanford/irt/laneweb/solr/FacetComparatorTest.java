@@ -33,11 +33,11 @@ public class FacetComparatorTest {
         assertEquals("value2", i.next().getValue());
         set.clear();
         // case 110630: Move 5 years to be higher then last 10 years within Year filter
-        set.add(new Facet("year", "[2010 TO *]", 1, null));
-        set.add(new Facet("year", "[2005 TO *]", 10, null));
+        set.add(new Facet("date", "[20100101 TO *]", 1, null));
+        set.add(new Facet("date", "[20050101 TO *]", 10, null));
         i = set.iterator();
-        assertEquals("[2010 TO *]", i.next().getValue());
-        assertEquals("[2005 TO *]", i.next().getValue());
+        assertEquals("[20100101 TO *]", i.next().getValue());
+        assertEquals("[20050101 TO *]", i.next().getValue());
         set.clear();
         // case 110125: Have article type display 3 items at all times (even if results are 0)
         set.add(new Facet("publicationType", "foo", 10, null));

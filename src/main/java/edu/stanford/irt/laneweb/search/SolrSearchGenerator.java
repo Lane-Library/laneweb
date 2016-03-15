@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,25 +13,30 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.solr.core.query.SolrPageRequest;
 
+import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.solr.SolrService;
 
-public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Object>> {
+public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Object>> implements ParametersAware {
 
     private static final int DEFAULT_RESULTS = 50;
-
-    private SolrService solrService;
 
     private String facets;
 
     private Integer pageNumber = Integer.valueOf(0);
 
+    private String searchTerm;
+
+    private SolrService solrService;
+
     private String sort;
 
-    public SolrSearchGenerator(final SolrService solrService,
-            final SAXStrategy<Map<String, Object>> saxStrategy) {
+    private String type;
+
+    public SolrSearchGenerator(final SolrService solrService, final SAXStrategy<Map<String, Object>> saxStrategy) {
         super(saxStrategy);
         this.solrService = solrService;
     }
@@ -42,7 +49,20 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
         if (page != null) {
             this.pageNumber = Integer.valueOf(page) - 1;
         }
+        this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.sort = ModelUtil.getString(model, Model.SORT, "");
+        this.type = ModelUtil.getString(model, Model.TYPE);
+    }
+
+    @Override
+    public void setParameters(final Map<String, String> parameters) {
+        if (parameters.containsKey(Model.TYPE)) {
+            try {
+                this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new LanewebException("won't happen", e);
+            }
+        }
     }
 
     @Override
@@ -50,7 +70,11 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
         Map<String, Object> result = new HashMap<>();
         Sort sorts = parseSortParam();
         Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
-        result.put("resultPage", this.solrService.searchWithFilters(query, this.facets, pageRequest));
+        if (null != this.type) {
+            result.put("resultPage", this.solrService.searchType(this.type, this.searchTerm, pageRequest));
+        } else {
+            result.put("resultPage", this.solrService.searchWithFilters(query, this.facets, pageRequest));
+        }
         result.put("searchTerm", query);
         return result;
     }

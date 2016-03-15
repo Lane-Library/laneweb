@@ -1,8 +1,10 @@
 package edu.stanford.irt.laneweb.solr;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,20 +37,11 @@ public class SolrService {
     private static final String EMPTY = "";
 
     private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
-            "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year");
-
-    private static final FacetOptions FACET_OPTIONS = new FacetOptions();
+            "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year", "date");
 
     private static final String NULL_TYPE = "null type";
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-
-    static {
-        FACET_OPTIONS.setFacetMinCount(1);
-        FACET_OPTIONS.addFacetOnFlieldnames(FACET_FIELDS);
-        FACET_OPTIONS.addFacetQuery(new SimpleQuery("year:[" + (THIS_YEAR - 5) + " TO *]"));
-        FACET_OPTIONS.addFacetQuery(new SimpleQuery("year:[" + (THIS_YEAR - 10) + " TO *]"));
-    }
 
     @Autowired
     // protected for unit test ... better way to do this?
@@ -84,8 +77,15 @@ public class SolrService {
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
         String facetFilters = facetStringToFilters(filters);
         String cleanQuery = this.parser.parse(query);
-        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery))
-                .setFacetOptions(FACET_OPTIONS.setFacetLimit(facetLimit));
+        String monthDay = (new SimpleDateFormat("MMdd")).format(new Date());
+        FacetOptions facetOptions = new FacetOptions();
+        facetOptions.addFacetOnFlieldnames(FACET_FIELDS);
+        facetOptions.setFacetMinCount(1);
+        facetOptions.setFacetLimit(facetLimit);
+        facetOptions.addFacetQuery(new SimpleQuery("date:[" + (THIS_YEAR - 1) + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery("date:[" + (THIS_YEAR - 5) + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery("date:[" + (THIS_YEAR - 10) + monthDay + " TO *]"));
+        FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(facetOptions);
         fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
@@ -162,6 +162,14 @@ public class SolrService {
             }
         }
         return result;
+    }
+
+    public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
+        if (null == type) {
+            throw new IllegalArgumentException(NULL_TYPE);
+        }
+        String cleanQuery = this.parser.parse(query);
+        return this.repository.searchFindByType(cleanQuery, SolrTypeManager.convertToNewType(type), pageRequest);
     }
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final Pageable pageRequest) {

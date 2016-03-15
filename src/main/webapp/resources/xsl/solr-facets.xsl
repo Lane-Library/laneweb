@@ -22,7 +22,7 @@
     <xsl:variable name="facet-browse-base-path" select="concat($base-path,'/search/solr/facet-browse.html?',$pageless-query-string)"/>
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="4"/>
-    <xsl:variable name="current-year" select="number(format-dateTime(current-dateTime(),'[Y,4]'))"/>
+    <xsl:variable name="today" select="number(format-dateTime(current-dateTime(),'[Y,4][M,2][D,2]'))"/>
     <xsl:variable name="requiredPubTypes">
         <xsl:value-of select="/linked-hash-map/entry[1]/sorted-set/comparator/requiredPublicationTypes/string"/>
     </xsl:variable>
@@ -44,8 +44,9 @@
                  <xsl:when test="../../string[. = 'recordType'] and value = 'nejm'">N.E.J.M</xsl:when>
                  <xsl:when test="../../string[. = 'recordType'] and value = 'sages'">Sages</xsl:when>
                  <xsl:when test="../../string[. = 'recordType'] and value = 'jove'">Jove</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and value = concat('[',$current-year - 5,' TO *]')">Last 5 Years</xsl:when>
-                <xsl:when test="../../string[. = 'year'] and value = concat('[',$current-year - 10,' TO *]')">Last 10 Years</xsl:when>
+                <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 10000,'0'),' TO *]')">Last 12 Months</xsl:when>
+                <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 50000,'0'),' TO *]')">Last 5 Years</xsl:when>
+                <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 100000,'0'),' TO *]')">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>
                 <xsl:otherwise><xsl:value-of select="value"/></xsl:otherwise>
             </xsl:choose>
@@ -76,7 +77,15 @@
 						          <span class="seeAll"><a rel="lightbox disableBackground" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
 						</xsl:if>
 		            </li>
-		            <xsl:apply-templates select="$entry/sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>
+		            <xsl:choose>
+		              <xsl:when test="$id = 'year'">
+						<xsl:apply-templates select="/linked-hash-map/entry/string[. = 'date']/../sorted-set/facet[contains(value,'TO *') and count > 0]"/>
+                        <xsl:apply-templates select="$entry/sorted-set/facet[enabled = 'true']"/>
+		              </xsl:when>
+		              <xsl:otherwise>
+			            <xsl:apply-templates select="$entry/sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>
+		              </xsl:otherwise>
+		            </xsl:choose>
 	            </xsl:when>
 	            <xsl:otherwise>
                     <li class="solrFacet facetHeader"><h5><xsl:copy-of select="$label"/></h5></li>
