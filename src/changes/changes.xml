@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-03-14" version="3.2.12" description="3.2.12 bug fix release">
+            <action date="2016-03-08" dev="ryanmax" issue="111997" type="update">
+                use new date field instead of year: change to 'last 12 months',  not last year... 
+            </action>
+            <action date="2016-03-08" dev="ryanmax" issue="117279" type="update">
+                mobile search result pagination 
+            </action>
+            <action date="2016-03-08" dev="ryanmax" issue="117280" type="update">
+                search on mobile Book and Journal pages not limited by format 
+            </action>
+            <action date="2016-03-08" dev="ryanmax" issue="117291" type="update">
+                improve mobile search display 
+            </action>
+        </release>
         <release date="2016-03-07" version="3.2.11" description="3.2.11 bug fix release">
             <action date="2016-03-03" dev="ceyates" issue="117013" type="update">
                 increase number of bookcovers to fetch from 10 to 20
