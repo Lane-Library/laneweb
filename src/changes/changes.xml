@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-03-21" version="3.2.13" description="3.2.13 bug fix release">
+            <action date="2016-03-21" dev="ceyates" issue="117457" type="add">
+                add 'back to top' button for med history center site
+            </action>
+        </release>
         <release date="2016-03-14" version="3.2.12" description="3.2.12 bug fix release">
             <action date="2016-03-08" dev="ryanmax" issue="111997" type="update">
                 use new date field instead of year: change to 'last 12 months',  not last year... 
@@ -121,23 +126,23 @@
         </release>
         <release date="2015-11-30" version="3.2.0" description="3.2.0 solr release">
             <action date="2015-11-24" dev="ryanmax" issue="97975" type="fix">
-            	IP maps are out of date (updates from SHC) 
-			</action>
+                IP maps are out of date (updates from SHC) 
+            </action>
             <action date="2015-11-24" dev="ryanmax" issue="113113" type="fix">
-            	link "need help?" links to separate landing pages  
-			</action>
+                link "need help?" links to separate landing pages  
+            </action>
             <action date="2015-11-24" dev="ryanmax" issue="113126" type="update">
-            	remove link to beta Solr in the header, remove animation "NEW"
-			</action>
+                remove link to beta Solr in the header, remove animation "NEW"
+            </action>
             <action date="2015-11-24" dev="ryanmax" issue="113127" type="fix">
-            	improve doi searching 
-			</action>
+                improve doi searching 
+            </action>
             <action date="2015-11-10" dev="ryanmax" issue="112734" type="fix">
-            	improve pubmed id searching 
-			</action>
+                improve pubmed id searching 
+            </action>
             <action date="2015-11-02" dev="ryanmax" issue="112523" type="fix">
-            	browse pages missing "Also available: Print" links and "Print Material" labels
-			</action>
+                browse pages missing "Also available: Print" links and "Print Material" labels
+            </action>
             <action date="2015-10-19" dev="ryanmax" issue="112112" type="add">js for Lane Beta Survey on search results</action>
             <action date="2015-10-19" dev="ryanmax" issue="111741" type="add">update overlay text</action>
             <action date="2015-10-15" dev="ryanmax" issue="111996" type="add">change "Lane Class" to plural</action>
