@@ -507,13 +507,13 @@
                                 <include>banner-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
                                 <include>menu-delay-min.js</include>
+                                <include>seminars-min.js</include>
                                 <include>same-height-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>
                                 <include>back-to-top-min.js</include>
                                 <include>solr-facets-min.js</include>
                                 <include>solr-pagination-min.js</include>
-                                <include>seminars-min.js</include>
                                 <include>bookcovers-min.js</include>
                                 <include>viewport-min.js</include>
                             </includes>
