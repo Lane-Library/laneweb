@@ -7,7 +7,10 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2016-03-" version="3.2.14" description="3.2.14 bug fix release">
+        <release date="2016-03-28" version="3.2.14" description="3.2.14 bug fix release">
+            <action date="2016-03-22" dev="ceyates" issue="114716" type="update">
+                create highlight of the current page for the history center
+            </action>
             <action date="2016-03-21" dev="ceyates" issue="117829" type="fix">
                 Spacing on index page is off
             </action>
