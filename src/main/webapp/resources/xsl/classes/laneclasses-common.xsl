@@ -85,4 +85,11 @@
 	</xsl:template>
     
     
+	<xsl:template name="no-class">
+		<div>
+			<b>No Class</b>
+		</div>
+	</xsl:template>
+    
+    
 </xsl:stylesheet>

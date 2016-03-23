@@ -9,7 +9,7 @@
 		<html><head><title>classes</title></head><body>
 		<xsl:choose>
 			<xsl:when test="count(//lc:event_data) = 0">
-				<div>No class</div>
+				<xsl:call-template name="no-class"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:apply-templates/>	

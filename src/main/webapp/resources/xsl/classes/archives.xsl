@@ -7,6 +7,7 @@
 	<xsl:import href="laneclasses-common.xsl" />
 
 	<xsl:param name="id" />
+	<xsl:param name="sort" />
 
 
 
@@ -14,20 +15,26 @@
 		<html>
 			<body>
 				<xsl:choose>
-					<xsl:when
-						test="count(//lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]) = 0">
-						<xsl:call-template name="no-class"></xsl:call-template>
+					<xsl:when test="count(//lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]) = 0">
+						<xsl:call-template name="no-class"/>
 					</xsl:when>
 					<xsl:when test="$id = ''">
-						<xsl:apply-templates select="lc:event_data">
-							<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text" order="descending" />
-						</xsl:apply-templates>
-
+							<xsl:choose>
+								<xsl:when test="$sort = 'date'">
+										<xsl:apply-templates select="lc:event_data">
+										<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text" order="descending" />
+										</xsl:apply-templates>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:apply-templates select="lc:event_data">
+									<xsl:sort select="./lc:event_name" />
+									</xsl:apply-templates>
+								</xsl:otherwise>
+							</xsl:choose>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:apply-templates
-							select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]">
-							<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text" order="descending" />
+						<xsl:apply-templates select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]">
+							<xsl:sort select="./lc:event_name" />
 						</xsl:apply-templates>
 					</xsl:otherwise>
 				</xsl:choose>
@@ -58,9 +65,7 @@
 					<div>
 						<xsl:apply-templates select="./lc:event_description" />
 					</div>
-
 				</div>
-
 			</div>
 			<div class="yui3-u-1-12">
 				<xsl:if test="./lc:more_info_url/text() != ''">
@@ -86,11 +91,6 @@
 		<xsl:value-of select="replace(./lc:event_dates/lc:start_date/text(),'.*(\d{4}).*','$1')" />
 	</xsl:template>
 
-	<xsl:template name="no-class">
-		<div>
-			<b> No Class</b>
-		</div>
-	</xsl:template>
 
 
 </xsl:stylesheet>
