@@ -207,28 +207,23 @@
                 <xsl:when test=". = 'class'">
                 <a href="/classes-consult/laneclasses.html">Lane Classes</a>
                 </xsl:when>
-                <xsl:when test=". = 'accessmedicine'">
-                <a href="http://mhmedical.com/">Access Medicine</a>
+                <xsl:when test=". = 'instructional_videos'">
+               		 <xsl:if test="starts-with( ../s:id, 'hstalks-')">
+               			 <a href="http://hstalks.com">Hstalks</a>
+                	</xsl:if>
+                	<xsl:if test="starts-with( ../s:id, 'bates-')">
+               			 <a href="http://med.stanford.edu/irt/edtech/video/bates/">Bates</a>
+                	</xsl:if>
+                	<xsl:if test="starts-with( ../s:id, 'clinicalkey-')">
+               			 <a href="http://clinicalkey.com">ClinicalKey</a>
+                	</xsl:if>
+                	<xsl:if test="starts-with( ../s:id, 'kanopy-')">
+               			 <a href="https://www.kanopystreaming.com">Kanopy</a>
+                	</xsl:if>
+                		<xsl:if test="starts-with( ../s:id, 'accessmedicine-')">
+               			 <a href="http://accessmedicine.mhmedical.com/">AccessMedicine</a>
+                	</xsl:if>
                 </xsl:when>
-                <xsl:when test=". = 'clinicalkey'">
-                <a href="https://www.clinicalkey.com/#!/">ClinicalKey</a>
-                </xsl:when>
-                <xsl:when test=". = 'hstalks'">
-                <a href="https://hstalks.com/">HSTalks</a>
-                </xsl:when>
-                <xsl:when test=". = 'medlineplus'">
-                <a href="https://www.nlm.nih.gov/medlineplus/">MedlinePlus</a>
-                </xsl:when>
-                <xsl:when test=". = 'nejm'">
-                <a href="http://www.nejm.org/">New England Journal of Medicine</a>
-                </xsl:when>
-                <xsl:when test=". = 'sages'">
-                <a href="http://www.sages.org/">Sages</a>
-                </xsl:when>
-                <xsl:when test=". = 'jove'">
-                <a href="http://www.jove.com">Jove</a>
-                </xsl:when>
-                
                 <xsl:when test=". = 'web' or . = 'laneblog'">
                 <a href="/index.html">Lane Website</a>
                 </xsl:when>
