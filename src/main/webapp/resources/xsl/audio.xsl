@@ -23,14 +23,7 @@
     <xsl:variable name="title" select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
     <li>
       <div><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$bibid}"><xsl:value-of select="$title"/></a></div>
-      <xsl:apply-templates select="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']"/>
     </li>
-  </xsl:template>
-
-  <xsl:template match="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']">
-    <div>
-      <xsl:value-of select="."/>
-    </div>
   </xsl:template>
 
 </xsl:stylesheet>
