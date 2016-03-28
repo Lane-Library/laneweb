@@ -12,7 +12,7 @@ DECLARE
         )
         AND BIB_ID NOT IN (
             SELECT BIB_ID FROM LMLDB.BIB_INDEX
-            WHERE NORMAL_HEADING = 'AUDIOCASETTES'
+            WHERE NORMAL_HEADING = 'AUDIOCASSETTES'
             AND INDEX_CODE = '655H'
         );
   bibid NUMBER(38,0); 
