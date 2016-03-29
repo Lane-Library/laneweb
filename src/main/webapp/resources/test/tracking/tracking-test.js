@@ -192,6 +192,15 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.isNull(this.event);
     },
 
+    testClickSecureVideo: function() {
+        var link = Y.one("#secureVideo");
+        link.simulate("click");
+        Y.Assert.areEqual("lane.stanford.edu", this.pageView.host);
+        Y.Assert.areEqual("/secure/edtech/" , this.pageView.path);
+        Y.Assert.areEqual(link.get("text"), this.pageView.title);
+        Y.Assert.isNull(this.event);
+    },
+
     testClickLaneproxy: function() {
         var link1 = Y.one("#laneproxy1"), link2 = Y.one("#laneproxy2");
         link1.simulate("click");
