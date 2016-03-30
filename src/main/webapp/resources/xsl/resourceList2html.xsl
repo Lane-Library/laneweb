@@ -242,7 +242,7 @@
 	                        <a href="http://www.jove.com/">Jove</a>
 	                </xsl:if>
                     <xsl:if test="starts-with( ../s:id, 'jomi-')">
-                     	<a href="https://www.jove.com/">Jomi</a>
+                     	<a href="https://www.jomi.com/">Jomi</a>
 	                </xsl:if>
                 </xsl:when>
                 <xsl:when test=". = 'web' or . = 'laneblog'">
