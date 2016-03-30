@@ -15,9 +15,6 @@
 		<html>
 			<body>
 				<xsl:choose>
-					<xsl:when test="count(//lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]) = 0">
-						<xsl:call-template name="no-class"/>
-					</xsl:when>
 					<xsl:when test="$id = ''">
 							<xsl:choose>
 								<xsl:when test="$sort = 'date'">

@@ -31,48 +31,33 @@
         </map:match>
         <map:match pattern="menu/categories.html" type="wildcard">
     		<map:aggregate type="default" element="doc">
-				<map:generate type="classes" src="cocoon://classes/data.xml"/>
+				<map:generate type="classes" src="cocoon://classes/categories.xml"/>
 				<map:generate type="html" src="{content-base}/includes/leftmenu-classes-category.html"/>
 			</map:aggregate>
 			<map:transform type="saxon" src="resources/xsl/classes/menu.xsl"/>
         	<map:serialize type="xml"/>
         </map:match>
     	<map:match pattern="calendar.ics" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/all-data.xml"/>
+            <map:generate type="classes" src="cocoon://classes/all-classes.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/calendar-ics.xsl"/>
             <map:serialize type="text"/>
         </map:match>
-        <map:match pattern="classeslist.xml" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/all-data.xml"/>
-            <map:transform type="saxon" src="resources/xsl/classes/laneclasses-list.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="thisweek.xml" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/data.xml"/>
+            <map:generate type="classes" src="cocoon://classes/categories.xml"/>
             <map:transform type="saxon" src="resources/xsl/classes/thisweek.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="history.xml" type="wildcard">
-            <map:generate type="classes" src="cocoon://classes/data.xml?id=14"/>
+            <map:generate type="classes" src="cocoon://classes/categories.xml?id=14"/>
             <map:transform type="saxon" src="resources/xsl/classes/history.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="all-data.xml" type="wildcard">
+        <map:match pattern="all-classes.xml" type="wildcard">
         	 <map:aggregate type="default" element="doc">
-            	<map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
+            	<map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;year_from=2015"/>
             	<map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;cat=8"/>
            	</map:aggregate>
            	<map:transform type="saxon" src="resources/xsl/classes/join-classes.xsl"/>
-           	<map:transform type="joost" src="resources/xsl/classes/event-urls.stx"/>
-        	 <map:transform type="eventlist"/>
-            <map:transform type="joost" src="resources/xsl/classes/prune-add-namespace.stx"/>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="event_description"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="data.xml" type="wildcard">
-            <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
             <map:transform type="joost" src="resources/xsl/classes/event-urls.stx"/>
             <map:transform type="eventlist"/>
             <map:transform type="joost" src="resources/xsl/classes/prune-add-namespace.stx"/>
@@ -80,7 +65,7 @@
                 <map:parameter name="elementName" value="event_description"/>
             </map:transform>
             <map:serialize type="xml"/>
-        </map:match> 
+        </map:match>
         <map:match pattern="archives.xml" type="wildcard">
             <map:generate type="classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;cat=8"/>
             <map:transform type="joost" src="resources/xsl/classes/event-urls.stx"/>

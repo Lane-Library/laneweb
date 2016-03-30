@@ -7,16 +7,7 @@
 	
 	<xsl:template match="/">
 		<html><head><title>classes</title></head><body>
-		<xsl:choose>
-			<xsl:when test="count(//lc:event_data) = 0">
-				<xsl:call-template name="no-class"/>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:apply-templates/>	
-			</xsl:otherwise>
-		</xsl:choose>
-		
-		
+					<xsl:apply-templates/>	
 		</body></html>
 	</xsl:template>
 
