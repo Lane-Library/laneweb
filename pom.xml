@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>11</version>
+        <version>12-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.2.16-SNAPSHOT</version>
@@ -121,7 +121,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.5.1-6</version>
+            <version>9.7.0-4</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>

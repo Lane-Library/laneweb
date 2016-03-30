@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<search status="successful">
+<search xmlns="http://irt.stanford.edu/search/2.0" status="successful">
    <query>query</query>
 </search>
