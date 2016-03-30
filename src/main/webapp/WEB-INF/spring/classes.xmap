@@ -90,5 +90,4 @@
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
-    
 </map:sitemap>

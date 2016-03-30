@@ -90,8 +90,6 @@
     		</xsl:otherwise>
     	</xsl:choose>
     </xsl:variable>
-    
-    
 
     <!-- here is the information associating urls with what is the laneNav active tab -->
     <xsl:variable name="laneNav-tabs">
