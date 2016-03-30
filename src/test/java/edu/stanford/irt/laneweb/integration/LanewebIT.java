@@ -18,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.ContextHierarchy;
@@ -96,6 +97,48 @@ public class LanewebIT {
                 .andExpect(content().contentType(new MediaType("application", "javascript")));
     }
 
+    /**
+     * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in
+     * project.properties.default points to active Solr instance.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testLaneSearch() throws Exception {
+        if (solrLaneSearchIsReachable()) {
+            Map<String, String> ns = new HashMap<String, String>();
+            ns.put("h", "http://www.w3.org/1999/xhtml");
+            // science
+            this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Science']", ns)
+                            .exists());
+            // nejm
+            this.mockMvc.perform(get("/eresources/search.html?q=nejm").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='New England journal of medicine']",
+                                    ns).exists());
+            // PubMed
+            this.mockMvc.perform(get("/eresources/search.html?q=PubMed").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", ns)
+                            .exists());
+            // known PMID
+            this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']//h:a", ns)
+                            .string("PMID: 20428285 "))
+                    .andExpect(xpath("//h:li", ns).nodeCount(1));
+            // usmle OR nbme OR "examination questions"; limited to Lane Catalog and Book Digital
+            this.mockMvc
+                    .perform(
+                            get("/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
+                                    .servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']", ns)
+                            .string("Book DigitalLane Catalog Record"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", ns)
+                                    .exists());
+        }
+    }
+
     @Test
     public void testPubmedSearch() throws Exception {
         if (pubmedIsReachable()) {
@@ -123,6 +166,16 @@ public class LanewebIT {
             }
         } catch (UnknownHostException e) {
             //
+        }
+        return reachable;
+    }
+
+    private boolean solrLaneSearchIsReachable() throws Exception {
+        boolean reachable = false;
+        MockHttpServletResponse response = this.mockMvc.perform(get("/status.txt").servletPath("/status.txt"))
+                .andReturn().getResponse();
+        if (200 == response.getStatus()) {
+            reachable = !response.getContentAsString().contains("[ERROR] suggestions failed");
         }
         return reachable;
     }

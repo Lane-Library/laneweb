@@ -30,6 +30,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     protected static final String DIV = "div";
 
+    protected static final String EMPTY = "";
+
     protected static final String HIDDEN = "hidden";
 
     protected static final String HREF = "href";
@@ -39,6 +41,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     protected static final String IMAGE = "image";
 
     protected static final int IMAGE_BY_ROW = 4;
+
+    protected static final String INPUT = "input";
 
     protected static final String LABEL = "label";
 
@@ -61,8 +65,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     protected static final String UL = "ul";
 
     protected static final String VALUE = "value";
-
-    protected static final String INPUT = "input";
 
     private NumberFormat nf = NumberFormat.getInstance();
 
@@ -92,19 +94,19 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, ID, ID, CDATA, image.getId());
-        atts.addAttribute(XHTML_NS, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
+        atts.addAttribute(EMPTY, ID, ID, CDATA, image.getId());
+        atts.addAttribute(EMPTY, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, image.getPageUrl());
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "noproxy");
+        atts.addAttribute(EMPTY, HREF, HREF, CDATA, image.getPageUrl());
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "noproxy");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, SRC, SRC, CDATA, image.getThumbnailSrc());
+        atts.addAttribute(EMPTY, SRC, SRC, CDATA, image.getThumbnailSrc());
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imagedecoHidden");
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imagedecoHidden");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         XMLUtils.data(xmlConsumer, " ");
         endAnchor(xmlConsumer);
@@ -115,13 +117,13 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private void createBackwardLink(final XMLConsumer xmlConsumer, final String faClass, final String text,
             final String clazz, final String href) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz + " " + NO_BOOKMARKING);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz + " " + NO_BOOKMARKING);
         if (href != null) {
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
+            atts.addAttribute(EMPTY, HREF, HREF, CDATA, href);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         XMLUtils.data(xmlConsumer, " " + text);
@@ -131,14 +133,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private void createForwardLink(final XMLConsumer xmlConsumer, final String faClass, final String text,
             final String clazz, final String href) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, clazz + " " + NO_BOOKMARKING);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, clazz + " " + NO_BOOKMARKING);
         if (href != null) {
-            atts.addAttribute(XHTML_NS, HREF, HREF, CDATA, href);
+            atts.addAttribute(EMPTY, HREF, HREF, CDATA, href);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         XMLUtils.data(xmlConsumer, text + " ");
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
@@ -146,20 +148,20 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private void generateDetailImage(final XMLConsumer xmlConsumer, final int rowNumber) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "imageDetailHidden");
-        atts.addAttribute(XHTML_NS, STYLE, STYLE, CDATA, "width:935px; height:350px;");
-        atts.addAttribute(XHTML_NS, ID, ID, CDATA, "imageDetail_" + rowNumber);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imageDetailHidden");
+        atts.addAttribute(EMPTY, STYLE, STYLE, CDATA, "width:935px; height:350px;");
+        atts.addAttribute(EMPTY, ID, ID, CDATA, "imageDetail_" + rowNumber);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, ID, ID, CDATA, "image-detail-close");
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "image-detail-close close fa fa-close");
+        atts.addAttribute(EMPTY, ID, ID, CDATA, "image-detail-close");
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "image-detail-close close fa fa-close");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "yui3-g");
         startDivWithClass(xmlConsumer, "yui3-u-3-5");
         startDivWithClass(xmlConsumer, "image-location");
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "image");
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "image");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
         endDiv(xmlConsumer);
@@ -191,13 +193,13 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         startDivWithClass(xmlConsumer, "to-image");
         startAnchor(xmlConsumer, "");
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, BUTTON);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, BUTTON);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, BUTTON, atts);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
         XMLUtils.data(xmlConsumer, "Visit Source Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "fa fa-arrow-right");
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "fa fa-arrow-right");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
@@ -211,40 +213,40 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private void generateDirectAccessPageForm(final XMLConsumer xmlConsumer, final Page<Image> page,
             final Map<String, Object> result) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "pagingForm");
-        atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "paginationForm");
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "pagingForm");
+        atts.addAttribute(EMPTY, NAME, NAME, CDATA, "paginationForm");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "form", atts);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
-        atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, (String) result.get(Model.SOURCE));
-        atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "source");
+        atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, (String) result.get(Model.SOURCE));
+        atts.addAttribute(EMPTY, NAME, NAME, CDATA, "source");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
-        atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, (String) result.get(Model.QUERY));
-        atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "q");
+        atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, (String) result.get(Model.QUERY));
+        atts.addAttribute(EMPTY, NAME, NAME, CDATA, "q");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
-        atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, String.valueOf(page.getTotalPages()));
-        atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "totalPages");
+        atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, String.valueOf(page.getTotalPages()));
+        atts.addAttribute(EMPTY, NAME, NAME, CDATA, "totalPages");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
             atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, HIDDEN);
-            atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, (String) result.get(SELECTED_RESOURCE));
-            atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "rid");
+            atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
+            atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, (String) result.get(SELECTED_RESOURCE));
+            atts.addAttribute(EMPTY, NAME, NAME, CDATA, "rid");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         }
         atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, TYPE, TYPE, CDATA, "text");
-        atts.addAttribute(XHTML_NS, "size", "size", CDATA, "4");
-        atts.addAttribute(XHTML_NS, VALUE, VALUE, CDATA, String.valueOf(page.getNumber() + 1));
-        atts.addAttribute(XHTML_NS, NAME, NAME, CDATA, "page");
+        atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, "text");
+        atts.addAttribute(EMPTY, "size", "size", CDATA, "4");
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, String.valueOf(page.getNumber() + 1));
+        atts.addAttribute(EMPTY, NAME, NAME, CDATA, "page");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "form");
@@ -259,16 +261,16 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             String path = (String) result.get("path");
             startDivWithClass(xmlConsumer, "yui3-u-1-4");
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "view-by");
-            atts.addAttribute(XHTML_NS, ID, ID, CDATA, "sourceFilter");
+            atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "view-by");
+            atts.addAttribute(EMPTY, ID, ID, CDATA, "sourceFilter");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             List<FacetFieldEntry> facetList = facet.getContent();
             XMLUtils.data(xmlConsumer, "Filter by source ");
             atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "general-dropdown dropdown");
+            atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "general-dropdown dropdown");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             atts = new AttributesImpl();
-            atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "general-dropdown-trigger");
+            atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "general-dropdown-trigger");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
             String selectedResource = "All";
             if (totalFacet == 1) {
@@ -384,7 +386,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     private void startElementWithId(final XMLConsumer xmlConsumer, final String name, final String id)
             throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(XHTML_NS, ID, ID, CDATA, id == null ? "" : id);
+        atts.addAttribute(EMPTY, ID, ID, CDATA, id == null ? "" : id);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, name, atts);
     }
 

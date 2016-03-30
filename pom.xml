@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>11</version>
+        <version>12-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.2.15-SNAPSHOT</version>
+    <version>3.2.16-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -121,7 +121,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.5.1-6</version>
+            <version>9.7.0-4</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -245,7 +245,7 @@
         <dependency>
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
-            <version>1.4.8</version>
+            <version>1.4.9</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -357,7 +357,7 @@
         <dependency>
         	<groupId>com.google.apis</groupId>
         	<artifactId>google-api-services-books</artifactId>
-        	<version>v1-rev80-1.21.0</version>
+        	<version>v1-rev81-1.21.0</version>
         </dependency>
     </dependencies>
     <build>

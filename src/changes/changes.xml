@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2016-03-24" version="3.2.14" description="emergency fix release">
+        <release date="2016-03-28" version="3.2.15" description="3.2.15 bug fix release">
+            <action date="2016-03-28" dev="ceyates" issue="118166" type="update">
+                don't include records with 655 17 |a Audiocassettes in the audio materials list
+            </action>
+        </release>
+        <release date="2016-03-24" version="3.2.14" description="3.2.14 emergency release">
             <action date="2016-03-24" dev="alainb" issue="118086" type="add">
                to limit the class using the year_from parameter
             </action>

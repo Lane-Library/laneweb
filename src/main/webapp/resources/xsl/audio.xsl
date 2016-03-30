@@ -11,7 +11,7 @@
       <body>
         <ul>
           <xsl:apply-templates select="slim:record">
-            <xsl:sort select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
+            <xsl:sort select="concat(slim:datafield[@tag = '245']/slim:subfield[@code = 'a'],slim:datafield[@tag = '245']/slim:subfield[@code = 'p'])"/>
           </xsl:apply-templates>
         </ul>
       </body>
@@ -20,17 +20,16 @@
 
   <xsl:template match="slim:record">
     <xsl:variable name="bibid" select="slim:controlfield[@tag = '001']"/>
-    <xsl:variable name="title" select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
+    <xsl:variable name="title">
+      <xsl:value-of select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
+      <xsl:if test="slim:datafield[@tag = '245']/slim:subfield[@code = 'p']">
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="slim:datafield[@tag = '245']/slim:subfield[@code = 'p']"/>
+      </xsl:if>
+    </xsl:variable>
     <li>
       <div><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$bibid}"><xsl:value-of select="$title"/></a></div>
-      <xsl:apply-templates select="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']"/>
     </li>
-  </xsl:template>
-
-  <xsl:template match="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']">
-    <div>
-      <xsl:value-of select="."/>
-    </div>
   </xsl:template>
 
 </xsl:stylesheet>

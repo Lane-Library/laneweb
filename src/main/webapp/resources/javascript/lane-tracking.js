@@ -86,6 +86,10 @@
                 }
                 return isProxyOrCMELogin;
             },
+            isSecureVideo = function(link) {
+                var pathname = link.get("pathname");
+                return (pathname && (/\/secure\/edtech\//).test(pathname));
+            },
             isLocalPopup = function(node) {
                 var rel = node.getAttribute("rel");
                 return rel && rel.indexOf("popup local") === 0;
@@ -165,7 +169,7 @@
                 var external = false;
                 if (!node.get("hostname")) {
                     external = false;
-                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
+                } else if (isProxyOrCMELogin(node) || isProxyHost(node) || isSecureVideo(node)) {
                     external = true;
                 } else {
                     external = node.get("hostname") !== location.get("host");
@@ -364,5 +368,6 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet a, *[rel^='popup local']").setData("isTrackableAsPageView", true);
+        Y.all("a[href*=secure/edtech]").setData("isTrackableAsPageView", true);
         Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();
