@@ -16,21 +16,23 @@
 			<body>
 				<xsl:choose>
 					<xsl:when test="$id = ''">
-							<xsl:choose>
-								<xsl:when test="$sort = 'date'">
-										<xsl:apply-templates select="lc:event_data">
-										<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text" order="descending" />
-										</xsl:apply-templates>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:apply-templates select="lc:event_data">
+						<xsl:choose>
+							<xsl:when test="$sort = 'date'">
+								<xsl:apply-templates select="lc:event_data">
+									<xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text"
+										order="descending" />
+								</xsl:apply-templates>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:apply-templates select="lc:event_data">
 									<xsl:sort select="./lc:event_name" />
-									</xsl:apply-templates>
-								</xsl:otherwise>
-							</xsl:choose>
+								</xsl:apply-templates>
+							</xsl:otherwise>
+						</xsl:choose>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:apply-templates select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]">
+						<xsl:apply-templates
+							select="lc:event_data[ contains(string-join(./lc:module_categories/lc:category/lc:cat_name/text(), '' ), $id)]">
 							<xsl:sort select="./lc:event_name" />
 						</xsl:apply-templates>
 					</xsl:otherwise>
@@ -40,18 +42,14 @@
 	</xsl:template>
 
 	<xsl:template match="lc:event_data">
-		<div class="yui3-g class">
-			<div class="yui3-u-1-12">
-				<div>
-					<div>
-						<xsl:call-template name="month" />
-						<xsl:text>/</xsl:text>
-						<xsl:call-template name="year" />
-					</div>
-				</div>
+		<div class="archive">
+			<div class="date same-height-1">
+				<xsl:call-template name="month" />
+				<xsl:text>/</xsl:text>
+				<xsl:call-template name="year" />
 			</div>
-			<div class="yui3-u-7-12">
-				<div>
+			<div class="details same-height-1">
+				<h3>
 					<a>
 						<xsl:attribute name="href">
                                 <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
@@ -59,28 +57,30 @@
                             </xsl:attribute>
 						<xsl:value-of select="./lc:event_name" />
 					</a>
-					<div>
-						<xsl:apply-templates select="./lc:event_description" />
-					</div>
+				</h3>
+				<div>
+					<xsl:apply-templates select="./lc:event_description" />
 				</div>
+				<div>
+					<a href="">Download Handouts <i class="fa fa-arrow-right"/>	</a>
+				</div>
+				
 			</div>
-			<div class="yui3-u-1-12">
+			<div class="youtube-class">
 				<xsl:if test="./lc:more_info_url/text() != ''">
-					<div class="youtube-class">
-						<iframe>
-							<xsl:attribute name="src" select="./lc:more_info_url/text()" />
-							<xsl:attribute name="rameborder">0</xsl:attribute>
-							<xsl:attribute name="allowfullscreen"> </xsl:attribute>
-							<xsl:attribute name="frameborder">0</xsl:attribute>
-							<xsl:attribute name="allowfullscreen"> </xsl:attribute>
-							<xsl:attribute name="width">225</xsl:attribute>
-							<xsl:attribute name="height">120</xsl:attribute>
-						</iframe>
-					</div>
+					<iframe>
+						<xsl:attribute name="src" select="./lc:more_info_url/text()" />
+						<xsl:attribute name="rameborder">0</xsl:attribute>
+						<xsl:attribute name="allowfullscreen"> </xsl:attribute>
+						<xsl:attribute name="frameborder">0</xsl:attribute>
+						<xsl:attribute name="allowfullscreen"> </xsl:attribute>
+						<xsl:attribute name="width">200</xsl:attribute>
+						<xsl:attribute name="height">120</xsl:attribute>
+					</iframe>
 				</xsl:if>
 			</div>
-
 		</div>
+
 	</xsl:template>
 
 

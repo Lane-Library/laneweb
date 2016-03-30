@@ -7,6 +7,7 @@
     padding: 0 12px;
     box-sizing: border-box;
 }
+
 .class .month-day{
     padding-top: 24px;
 }
@@ -14,19 +15,50 @@
     font-size: 24px;
     font-weight: 700;
 }
-.class h3 a{
+
+.class h3 a, .archive h3 a {
     color: #8c1515;
 }
+
+
 .class .time{
     margin: 12px 0;
+}
+
+.class-detail{
+	padding-top: 10px;
+}
+
+.class .seats{
+	padding-top: 6px;
+}
+
+.youtube-class, .youtube-class .youtube-thumbnail img{
+	width: 200px;
 }
 
 .youtube-class{
 	padding-top: 20px;
 	padding-left: 12px;
+} 
+
+.archive div{
+	display:inline-block;
+	vertical-align: top;
+	margin-bottom: 12px;
+	}
+
+.archive .date{
+    background-color: #dddddd;
+    padding: 6px 12px;
+    margin-right :9px;
+  
+    box-sizing: border-box;
+    width:80px; 
+    /* height: 200px;	 */
 }
 
-.youtube-class .youtube-thumbnail img{
-	width: 223px;
+.archive .details{
+    width: 407px;
 }
  
