@@ -43,18 +43,19 @@ public class SolrService {
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
-    @Autowired
-    // protected for unit test ... better way to do this?
-    protected SolrQueryParser parser;
+    private SolrQueryParser parser;
+
+    private SolrRepository repository;
+
+    private SolrTemplate solrTemplate;
 
     @Autowired
-    // protected for unit test ... better way to do this?
-    protected SolrRepository repository;
-
-    @Autowired
-    @Qualifier(value = "laneSearchSolrTemplate")
-    // protected for unit test ... better way to do this?
-    protected SolrTemplate solrTemplate;
+    public SolrService(final SolrQueryParser parser, final SolrRepository repository,
+            @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
+        this.parser = parser;
+        this.repository = repository;
+        this.solrTemplate = solrTemplate;
+    }
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
             final int pageNumber, final int facetLimit, final int facetMinCount, final FacetSort facetSort) {

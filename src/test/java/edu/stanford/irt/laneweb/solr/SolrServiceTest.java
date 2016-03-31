@@ -26,17 +26,8 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
-@SuppressWarnings({ "boxing", "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class SolrServiceTest {
-
-    private static final class TestSolrSearchService extends SolrService {
-
-        public TestSolrSearchService(final SolrTemplate solrTemplate, final SolrRepository solrRepository) {
-            super.solrTemplate = solrTemplate;
-            super.repository = solrRepository;
-            super.parser = new SolrQueryParser(Collections.emptyList());
-        }
-    }
 
     private SolrRepository repository;
 
@@ -48,7 +39,8 @@ public class SolrServiceTest {
     public void setUp() throws Exception {
         this.repository = createMock(SolrRepository.class);
         this.template = createMock(SolrTemplate.class);
-        this.solrService = new TestSolrSearchService(this.template, this.repository);
+        this.solrService = new SolrService(new SolrQueryParser(Collections.emptyList()), this.repository,
+                this.template);
     }
 
     @Test
