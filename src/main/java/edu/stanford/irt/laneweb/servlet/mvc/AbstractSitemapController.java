@@ -64,7 +64,7 @@ public abstract class AbstractSitemapController {
     private String getContentType(final String value, final String prefix) {
         String contentType = this.servletContext.getMimeType(value);
         if (contentType == null) {
-            if (value.indexOf("xml") > -1 || "/rss".equals(prefix) || value.indexOf("classes/") > -1) {
+            if (value.indexOf("xml") > -1) {
                 contentType = "text/xml";
             } else if (value.indexOf("html") > -1) {
                 contentType = "text/html";
