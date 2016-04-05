@@ -1,11 +1,10 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
@@ -18,19 +17,14 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class EresourcesCountGenerator extends AbstractGenerator implements ModelAware {
 
-    private static final int MAX_QUERY_LENGTH = 300;
-
-    private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
+    private static final String FACETS_NS = "http://lane.stanford.edu/hitcounts/1.0";
 
     private String query;
 
     private SolrService solrService;
 
-    private Set<String> types;
-
-    public EresourcesCountGenerator(final Set<String> types, final SolrService solrService) {
+    public EresourcesCountGenerator(final SolrService solrService) {
         this.solrService = solrService;
-        this.types = types;
     }
 
     @Override
@@ -40,32 +34,20 @@ public class EresourcesCountGenerator extends AbstractGenerator implements Model
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Map<String, Integer> results = null;
-        if (this.query == null || this.query.isEmpty() || this.query.length() > MAX_QUERY_LENGTH) {
-            results = new HashMap<>();
-            Integer zero = Integer.valueOf(0);
-            for (String type : this.types) {
-                results.put(type, zero);
-            }
-        } else {
-            results = this.solrService.searchCount(this.types, this.query);
-        }
+        String q = this.query == null ? "" : this.query;
+        Map<String, Long> results = this.solrService.searchCount(q);
         try {
             xmlConsumer.startDocument();
-            xmlConsumer.startPrefixMapping("", SQL_NS);
-            XMLUtils.startElement(xmlConsumer, SQL_NS, "rowset");
-            for (Entry<String, Integer> entry : results.entrySet()) {
-                String hits = entry.getValue().toString();
-                XMLUtils.startElement(xmlConsumer, SQL_NS, "row");
-                XMLUtils.startElement(xmlConsumer, SQL_NS, "genre");
-                XMLUtils.data(xmlConsumer, entry.getKey());
-                XMLUtils.endElement(xmlConsumer, SQL_NS, "genre");
-                XMLUtils.startElement(xmlConsumer, SQL_NS, "hits");
-                XMLUtils.data(xmlConsumer, hits);
-                XMLUtils.endElement(xmlConsumer, SQL_NS, "hits");
-                XMLUtils.endElement(xmlConsumer, SQL_NS, "row");
+            xmlConsumer.startPrefixMapping("", FACETS_NS);
+            XMLUtils.startElement(xmlConsumer, FACETS_NS, "hitcounts");
+            for (Entry<String, Long> entry : results.entrySet()) {
+                AttributesImpl atts = new AttributesImpl();
+                atts.addAttribute("", "name", "name", "CDATA", entry.getKey());
+                atts.addAttribute("", "hits", "hits", "CDATA", entry.getValue().toString());
+                XMLUtils.startElement(xmlConsumer, FACETS_NS, "facet", atts);
+                XMLUtils.endElement(xmlConsumer, FACETS_NS, "facet");
             }
-            XMLUtils.endElement(xmlConsumer, SQL_NS, "rowset");
+            XMLUtils.endElement(xmlConsumer, FACETS_NS, "hitcounts");
             xmlConsumer.endPrefixMapping("");
             xmlConsumer.endDocument();
         } catch (SAXException e) {

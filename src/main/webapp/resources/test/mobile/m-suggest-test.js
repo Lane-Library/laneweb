@@ -49,8 +49,8 @@ YUI().use("*", function(Y) {
             Y.Assert.areSame("mesh-di", acLimit($("<input id='comparison'/>")));
             Y.Assert.areSame("mesh-di", acLimit($("<input id='clinical'/>")));
             Y.Assert.areSame("mesh-di", acLimit($("<input id='ped'/>")));
-            Y.Assert.areSame("book", acLimit($("<input id='book'/>")));
-            Y.Assert.areSame("ej", acLimit($("<input id='journal'/>")));
+            Y.Assert.areSame("Book", acLimit($("<input id='book'/>")));
+            Y.Assert.areSame("Journal", acLimit($("<input id='journal'/>")));
             Y.Assert.areSame("er-mesh", acLimit($("<input id='foo'/>")));
         }
     });

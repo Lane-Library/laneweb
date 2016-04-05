@@ -51,7 +51,7 @@
                 } else if (source.match(/^(bioresearch|images)/)) {
                     limit = "mesh";
                 } else if (source.match(/^bassett/)) {
-                    limit = "bassett";
+                    limit = "Bassett";
                 }
                 this.setLimit(limit);
             };

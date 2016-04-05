@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -98,8 +97,7 @@ public class SolrService {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        String newType = SolrTypeManager.convertToNewType(type);
-        return this.repository.browseAllCoreByType(newType, new PageRequest(0, Integer.MAX_VALUE));
+        return this.repository.browseAllCoreByType(type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     public List<Eresource> getLinkscanLinks() {
@@ -113,8 +111,7 @@ public class SolrService {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        String newType = SolrTypeManager.convertToNewType(type);
-        return this.repository.browseAllByMeshAndType(mesh, newType, new PageRequest(0, Integer.MAX_VALUE));
+        return this.repository.browseAllByMeshAndType(mesh, type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     public List<Eresource> getSubset(final String subset) {
@@ -128,8 +125,7 @@ public class SolrService {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        String newType = SolrTypeManager.convertToNewType(type);
-        return this.repository.browseAllByType(newType, new PageRequest(0, Integer.MAX_VALUE));
+        return this.repository.browseAllByType(type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
     public List<Eresource> getType(final String type, final char alpha) {
@@ -141,25 +137,17 @@ public class SolrService {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        return this.repository.browseByTypeTitleStartingWith(SolrTypeManager.convertToNewType(type),
+        return this.repository.browseByTypeTitleStartingWith(type,
                 Character.toString(sAlpha), new PageRequest(0, Integer.MAX_VALUE));
     }
 
-    public Map<String, Integer> searchCount(final Set<String> types, final String query) {
-        Map<String, Integer> result = new HashMap<>();
+    public Map<String, Long> searchCount(final String query) {
+        Map<String, Long> result = new HashMap<>();
         SolrResultPage<?> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
-        int total = (int) facets.getTotalElements();
-        result.put("all", Integer.valueOf(total));
+        result.put("all", Long.valueOf(facets.getTotalElements()));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
             for (FacetFieldEntry entry : page) {
-                Integer value = Integer.valueOf((int) entry.getValueCount());
-                String fieldName = entry.getValue();
-                String bwCompatibleFieldName = SolrTypeManager.convertToOldType(fieldName);
-                if (types.contains(fieldName)) {
-                    result.put(fieldName, value);
-                } else if (types.contains(bwCompatibleFieldName)) {
-                    result.put(bwCompatibleFieldName, value);
-                }
+                result.put(entry.getValue(), Long.valueOf(entry.getValueCount()));
             }
         }
         return result;
@@ -170,7 +158,7 @@ public class SolrService {
             throw new IllegalArgumentException(NULL_TYPE);
         }
         String cleanQuery = this.parser.parse(query);
-        return this.repository.searchFindByType(cleanQuery, SolrTypeManager.convertToNewType(type), pageRequest);
+        return this.repository.searchFindByType(cleanQuery, type, pageRequest);
     }
 
     public Page<Eresource> searchWithFilters(final String query, final String facets, final Pageable pageRequest) {
@@ -186,7 +174,7 @@ public class SolrService {
 
     public List<Eresource> suggestFindByType(final String query, final String type) {
         String cleanQuery = this.parser.parse(query);
-        return this.repository.suggestFindByType(cleanQuery, SolrTypeManager.convertToNewType(type),
+        return this.repository.suggestFindByType(cleanQuery, type,
                 new PageRequest(0, 10));
     }
 

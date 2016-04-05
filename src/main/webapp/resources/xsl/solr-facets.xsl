@@ -2,8 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://apache.org/cocoon/SQL/2.0"
-    exclude-result-prefixes="h s"
+    xmlns:hc="http://lane.stanford.edu/hitcounts/1.0"
+    exclude-result-prefixes="h hc"
     version="2.0">
     
     <xsl:param name="base-path"/>
@@ -130,7 +130,7 @@
             <body>
 				<!-- hidden element that gets moved into place by solr-facets.js -->
                 <xsl:if test="$search-mode and string-length($facets) > 0">
-                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')//s:row[s:genre[ . = 'all']]/s:hits"/>
+                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name='all']/@hits"/>
                          <span id="solrAllCount"><xsl:value-of select="format-number($counts,'###,##0')"/></span>
                 </xsl:if>
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
