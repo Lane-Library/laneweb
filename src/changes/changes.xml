@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-04-11" version="3.2.17" description="3.2.17 bug fix release">
+            <action date="2016-04-06" dev="ceyates" issue="118645" type="update">
+                exclude records with Location: retired from the audio list
+            </action>
+            <action date="2016-04-05" dev="ceyates" issue="118603" type="add">
+                host font-awesome and google fonts locally
+            </action>
+            <action date="2016-04-05" dev="ceyates" issue="118452" type="update">
+                replace oracle type values with solr facet values
+            </action>
+        </release>
         <release date="2016-04-04" version="3.2.16" description="3.2.16 bug fix release">
             <action date="2016-03-31" dev="ceyates" issue="118392" type="remove">
                 remove /rss links from search and browse pages
