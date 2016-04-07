@@ -201,6 +201,15 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.isNull(this.event);
     },
 
+    testClickSeeAll: function() {
+        var link = Y.one("#seeAll");
+        link.simulate("click");
+        Y.Assert.areEqual("/search/solr/facet-browse.html" , this.pageView.path);
+        Y.Assert.areEqual("see all", this.pageView.title);
+        Y.Assert.isFalse(this.pageView.external);
+        Y.Assert.isNull(this.event);
+    },
+    
     testClickLaneproxy: function() {
         var link1 = Y.one("#laneproxy1"), link2 = Y.one("#laneproxy2");
         link1.simulate("click");
