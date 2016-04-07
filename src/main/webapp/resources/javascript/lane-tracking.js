@@ -206,6 +206,9 @@
                     //track cookieFetch.html
                 } else if ((/cookiesFetch/).test(pathname)) {
                     isTrackable =  true;
+                    //track search see all clicks
+                } else if (link.ancestor(".seeAll")) {
+                    isTrackable =  true;
                     //otherwise rely on normal tracking for .html
                 } else if ((/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
