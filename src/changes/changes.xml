@@ -7,6 +7,31 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-04-11" version="3.2.17" description="3.2.17 bug fix release">
+            <action date="2016-04-07" dev="ryanmax" issue="118721" type="update">
+                track "see-all" facet clicks
+            </action>
+            <action date="2016-04-06" dev="ceyates" issue="118645" type="update">
+                exclude records with Location: retired from the audio list
+            </action>
+            <action date="2016-04-05" dev="ceyates" issue="118603" type="add">
+                host font-awesome and google fonts locally
+            </action>
+            <action date="2016-04-05" dev="ceyates" issue="118452" type="update">
+                replace oracle type values with solr facet values
+            </action>
+        </release>
+        <release date="2016-04-04" version="3.2.16" description="3.2.16 bug fix release">
+            <action date="2016-03-31" dev="ceyates" issue="118392" type="remove">
+                remove /rss links from search and browse pages
+            </action>
+            <action date="2016-03-29" dev="ceyates" issue="118245" type="update">
+                add 245 subfield p to audio materials list if present
+            </action>
+            <action date="2016-03-29" dev="ryanmax" issue="118237" type="add">
+                Tracking Individual Video Clicks/Downloads for Pediatric Grand Rounds
+            </action>
+        </release>
         <release date="2016-03-28" version="3.2.15" description="3.2.15 bug fix release">
             <action date="2016-03-28" dev="ceyates" issue="118166" type="update">
                 don't include records with 655 17 |a Audiocassettes in the audio materials list

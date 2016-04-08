@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.solr;
 
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
@@ -26,17 +27,8 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
-@SuppressWarnings({ "boxing", "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class SolrServiceTest {
-
-    private static final class TestSolrSearchService extends SolrService {
-
-        public TestSolrSearchService(final SolrTemplate solrTemplate, final SolrRepository solrRepository) {
-            super.solrTemplate = solrTemplate;
-            super.repository = solrRepository;
-            super.parser = new SolrQueryParser(Collections.emptyList());
-        }
-    }
 
     private SolrRepository repository;
 
@@ -48,7 +40,8 @@ public class SolrServiceTest {
     public void setUp() throws Exception {
         this.repository = createMock(SolrRepository.class);
         this.template = createMock(SolrTemplate.class);
-        this.solrService = new TestSolrSearchService(this.template, this.repository);
+        this.solrService = new SolrService(new SolrQueryParser(Collections.emptyList()), this.repository,
+                this.template);
     }
 
     @Test
@@ -81,7 +74,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetCore() {
-        expect(this.repository.browseAllCoreByType(isA(String.class), isA(PageRequest.class)))
+        expect(this.repository.browseAllCoreByType(eq("type"), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.getCore("type");
@@ -95,7 +88,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetMesh() {
-        expect(this.repository.browseAllByMeshAndType(isA(String.class), isA(String.class), isA(PageRequest.class)))
+        expect(this.repository.browseAllByMeshAndType(eq("mesh"), eq("type"), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.getMesh("type", "mesh");
@@ -114,7 +107,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetSubset() {
-        expect(this.repository.browseAllBySubset(isA(String.class), isA(PageRequest.class)))
+        expect(this.repository.browseAllBySubset(eq("subset"), isA(PageRequest.class)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.getSubset("subset");
@@ -128,8 +121,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeString() {
-        expect(this.repository.browseAllByType(isA(String.class), isA(PageRequest.class)))
-                .andReturn(Collections.emptyList());
+        expect(this.repository.browseAllByType(eq("type"), isA(PageRequest.class))).andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.getType("type");
         verify(this.repository);
@@ -137,8 +129,8 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeStringChar() {
-        expect(this.repository.browseByTypeTitleStartingWith(isA(String.class), isA(String.class),
-                isA(PageRequest.class))).andReturn(Collections.emptyList());
+        expect(this.repository.browseByTypeTitleStartingWith(eq("type"), eq("a"), isA(PageRequest.class)))
+                .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.getType("type", 'a');
         verify(this.repository);
@@ -155,7 +147,7 @@ public class SolrServiceTest {
         expect(this.repository.browseByTypeTitleStartingWith("Type", "1", pageRequest))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.solrService.getType("type", '#');
+        this.solrService.getType("Type", '#');
         verify(this.repository);
     }
 
@@ -174,7 +166,7 @@ public class SolrServiceTest {
         Collection<Page<FacetFieldEntry>> facetResultPages = createMock(Collection.class);
         Iterator it1 = createMock(Iterator.class);
         Iterator it2 = createMock(Iterator.class);
-        expect(this.repository.facetByType(isA(String.class), isA(PageRequest.class))).andReturn(page);
+        expect(this.repository.facetByType(eq("query"), isA(PageRequest.class))).andReturn(page);
         expect(page.getTotalElements()).andReturn((long) 20);
         expect(page.getFacetResultPages()).andReturn(facetResultPages);
         expect(facetResultPages.iterator()).andReturn(it1);
@@ -192,10 +184,10 @@ public class SolrServiceTest {
         expect(it2.hasNext()).andReturn(false);
         expect(it1.hasNext()).andReturn(false);
         replay(this.repository, facetResultPages, page, it1, it2, facetFieldEntry, page1);
-        Map<String, Integer> map = this.solrService.searchCount(types, "query");
+        Map<String, Long> map = this.solrService.searchCount("query");
         verify(this.repository, facetResultPages, page, it1, it2, facetFieldEntry, page1);
-        assertEquals(20, (int) map.get("all"));
-        assertEquals(10, (int) map.get("type1"));
+        assertEquals(20, map.get("all").longValue());
+        assertEquals(10, map.get("type1").longValue());
     }
 
     @Test
@@ -239,7 +231,7 @@ public class SolrServiceTest {
         expect(this.repository.suggestFindByType("term", "Type", new PageRequest(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
-        this.solrService.suggestFindByType("term", "type");
+        this.solrService.suggestFindByType("term", "Type");
         verify(this.repository);
     }
 }

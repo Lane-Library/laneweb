@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>12-SNAPSHOT</version>
+        <version>12</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.2.16-SNAPSHOT</version>
+    <version>3.2.17-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -48,7 +48,7 @@
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
-        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js</sonar.exclusions>
+        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPath>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
     </properties>
     <dependencies>
@@ -224,12 +224,6 @@
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
             <version>1.0.15</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -372,6 +366,8 @@
                     <nonFilteredFileExtensions>
                         <nonFilteredFileExtension>ico</nonFilteredFileExtension>
                         <nonFilteredFileExtension>xmap</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                     <webResources>
                         <resource>
@@ -409,6 +405,8 @@
                             <output>${project.build.directory}/laneweb/resources/css/lane-all.css</output>
                             <includes>
                                 <include>${basedir}/src/main/webapp/resources/css/yui.css</include>
+                                <include>googlefonts-min.css</include>
+                                <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
                                 <include>font-awesome-min.css</include>
