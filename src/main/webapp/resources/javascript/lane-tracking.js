@@ -278,6 +278,8 @@
                         // bookmarklet drag or right-click
                         if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             isTrackable = true;
+                        } else if (link.ancestor('.seeAll')) {
+                            isTrackable = true;
                         } else {
                             isTrackable = link.getData().isTrackableAsEvent;
                         }
@@ -373,5 +375,5 @@
 
         Y.all(".searchFacet a, *[rel^='popup local']").setData("isTrackableAsPageView", true);
         Y.all("a[href*=secure/edtech]").setData("isTrackableAsPageView", true);
-        Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a, .seeAll a").setData("isTrackableAsEvent", true);
+        Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();
