@@ -69,6 +69,10 @@
                     }
                     trackingData.action = link.get('href');
                     trackingData.label = link.get('title');
+                } else if (link.ancestor(".seeAll")) {
+                    trackingData.category = "lane:searchSeeAllClick";
+                    trackingData.action = link.get('search');
+                    trackingData.label = link.ancestor('li').get('text').replace(/\s+/g,' ').trim();
                 } else {
                     trackingData = getEventTrackingDataByAncestor(link);
                 }
@@ -273,6 +277,8 @@
                     if (link) {
                         // bookmarklet drag or right-click
                         if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
+                            isTrackable = true;
+                        } else if (link.ancestor('.seeAll')) {
                             isTrackable = true;
                         } else {
                             isTrackable = link.getData().isTrackableAsEvent;

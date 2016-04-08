@@ -77,10 +77,10 @@ public class SuggestionControllerTest {
         Suggestion suggestion = new Suggestion("1", "1");
         Collection<Suggestion> collection = new ArrayList<Suggestion>();
         collection.add(suggestion);
-        expect(this.eresource.getSuggestionsForTerm("bassett", "venous thrombosis")).andReturn(
+        expect(this.eresource.getSuggestionsForTerm("Bassett", "venous thrombosis")).andReturn(
                 Collections.singleton(suggestion));
         replay(this.eresource, this.mesh);
-        Map<String, List<String>> suggestions = this.controller.getSuggestions("venous thrombosis", "bassett");
+        Map<String, List<String>> suggestions = this.controller.getSuggestions("venous thrombosis", "Bassett");
         assertTrue(suggestions.get("suggest").contains(suggestion.getSuggestionTitle()));
         verify(this.eresource, this.mesh);
     }

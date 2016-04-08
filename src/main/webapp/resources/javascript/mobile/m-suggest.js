@@ -61,8 +61,8 @@ $.LANE.getACLimit = function(input){
                {regex : /intervention/, limit : "mesh-i"},
                {regex : /comparison/, limit : "mesh-di"},
                {regex : /(clinical|ped)/, limit : "mesh-di"},
-               {regex : /book/, limit : "book"},
-               {regex : /journal/, limit : "ej"}
+               {regex : /book/, limit : "Book"},
+               {regex : /journal/, limit : "Journal"}
                ];
     for (i = 0; i < limits.length; i++) {
         if (id.match(limits[i].regex)) {

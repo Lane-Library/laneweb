@@ -30,7 +30,7 @@ public class SuggestionController {
             Collections.emptyList());
 
     private static final Pattern ER_PATTERN = Pattern
-            .compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
+            .compile("^(Book|Journal|Bassett)$");
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionController.class);
 
