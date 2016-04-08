@@ -71,7 +71,7 @@
                     trackingData.label = link.get('title');
                 } else if (link.ancestor(".seeAll")) {
                     trackingData.category = "lane:searchSeeAllClick";
-                    trackingData.action = link.get('href');
+                    trackingData.action = link.get('search');
                     trackingData.label = link.ancestor('li').get('text').replace(/\s+/g,' ').trim();
                 } else {
                     trackingData = getEventTrackingDataByAncestor(link);

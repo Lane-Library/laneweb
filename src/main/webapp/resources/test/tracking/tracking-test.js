@@ -206,7 +206,7 @@ var trackingTestCase = new Y.Test.Case({
         link.simulate("click");
         Y.Assert.areEqual("lane:searchSeeAllClick", this.event.category);
         Y.Assert.areEqual("Resource Type see all", this.event.label);
-        Y.Assert.isTrue(this.event.action.indexOf('/search/solr/facet-browse.html?source=all-all&q=test&facet=type&page=1') > -1);
+        Y.Assert.areEqual("?source=all-all&q=test&facet=type&page=1", this.event.action);
         Y.Assert.isUndefined(this.event.value);
         Y.Assert.isNull(this.pageView);
     },
