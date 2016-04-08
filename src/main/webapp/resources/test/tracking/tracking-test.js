@@ -204,12 +204,13 @@ var trackingTestCase = new Y.Test.Case({
     testClickSeeAll: function() {
         var link = Y.one("#seeAll");
         link.simulate("click");
-        Y.Assert.areEqual("/search/solr/facet-browse.html" , this.pageView.path);
-        Y.Assert.areEqual("see all", this.pageView.title);
-        Y.Assert.isFalse(this.pageView.external);
-        Y.Assert.isNull(this.event);
+        Y.Assert.areEqual("lane:searchSeeAllClick", this.event.category);
+        Y.Assert.areEqual("Resource Type see all", this.event.label);
+        Y.Assert.isTrue(this.event.action.indexOf('/search/solr/facet-browse.html?source=all-all&q=test&facet=type&page=1') > -1);
+        Y.Assert.isUndefined(this.event.value);
+        Y.Assert.isNull(this.pageView);
     },
-    
+
     testClickLaneproxy: function() {
         var link1 = Y.one("#laneproxy1"), link2 = Y.one("#laneproxy2");
         link1.simulate("click");

@@ -69,6 +69,10 @@
                     }
                     trackingData.action = link.get('href');
                     trackingData.label = link.get('title');
+                } else if (link.ancestor(".seeAll")) {
+                    trackingData.category = "lane:searchSeeAllClick";
+                    trackingData.action = link.get('href');
+                    trackingData.label = link.ancestor('li').get('text').replace(/\s+/g,' ').trim();
                 } else {
                     trackingData = getEventTrackingDataByAncestor(link);
                 }
@@ -205,9 +209,6 @@
                     isTrackable = true;
                     //track cookieFetch.html
                 } else if ((/cookiesFetch/).test(pathname)) {
-                    isTrackable =  true;
-                    //track search see all clicks
-                } else if (link.ancestor(".seeAll")) {
                     isTrackable =  true;
                     //otherwise rely on normal tracking for .html
                 } else if ((/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
@@ -372,5 +373,5 @@
 
         Y.all(".searchFacet a, *[rel^='popup local']").setData("isTrackableAsPageView", true);
         Y.all("a[href*=secure/edtech]").setData("isTrackableAsPageView", true);
-        Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
+        Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a, .seeAll a").setData("isTrackableAsEvent", true);
 })();
