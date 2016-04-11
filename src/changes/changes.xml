@@ -14,7 +14,19 @@
             <action date="2016-04-06" dev="ceyates" issue="118645" type="update">
                 exclude records with Location: retired from the audio list
             </action>
-            <action date="2016-04-05" dev="ceyates" issue="118603" type="add">
+            <action date="2016-04-08" dev="alainb" issue="118630" type="add">
+                create 3 new engines for Clinical Pediatrics search
+            </action>
+            <action date="2016-04-08" dev="alainb" issue="118625" type="update">
+                update the Clinical Pediatrics hedges
+            </action>
+            <action date="2016-04-08" dev="alainb" issue="118621" type="add">
+                create 3 NEW Clinical All Ages engines
+            </action>
+            <action date="2016-04-08" dev="alainb" issue="118620" type="update">
+                update the Clinical All ages hedges
+            </action>
+            <action date="2016-04-05" dev="ceyates" issue="" type="add">
                 host font-awesome and google fonts locally
             </action>
             <action date="2016-04-05" dev="ceyates" issue="118452" type="update">
