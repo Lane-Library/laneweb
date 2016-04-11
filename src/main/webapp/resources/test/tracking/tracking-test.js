@@ -130,7 +130,7 @@ var trackingTestCase = new Y.Test.Case({
         Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
         var link = Y.one(".lwSearchResults a");
         link.simulate("click");
-        Y.Assert.areEqual(link.get("text"), this.event.label);
+        Y.Assert.areEqual("Primary Type -> " + link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:searchResultClick", this.event.category);
         Y.Assert.areEqual("foo bar", this.event.action);
         Y.Assert.areEqual(101, this.event.value);

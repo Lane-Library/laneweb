@@ -22,6 +22,7 @@
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
                     trackingData.action = decodeURIComponent(searchTerms);
+                    trackingData.label = link.ancestor("li").one(".primaryType").get('text') + " -> " + trackingData.label;
                 } else {
                     trackingData.category = "lane:browseResultClick";
                     trackingData.action = location.get("pathname");
