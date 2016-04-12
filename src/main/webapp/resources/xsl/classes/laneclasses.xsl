@@ -101,7 +101,7 @@
 					</div>
 				</div>
 				<div class="yui3-u-3-4">
-					<div class="details same-height-1">
+					<div class="same-height-1">
 						<xsl:apply-templates select="lc:event_name"/>
 						<div class="yui3-g">
 							<div class="yui3-u-1-4">

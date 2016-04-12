@@ -42,12 +42,6 @@
 		          </div>
 		        </div>
                 <h3 class="eresources">&#160;</h3>
-                <!-- don't show beta advertisement in solr beta
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                    href="cocoon://content/search/lane-beta-link.html">
-                    <xi:fallback></xi:fallback>
-                </xi:include>
-                 -->
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
