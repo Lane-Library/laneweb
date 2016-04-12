@@ -62,27 +62,54 @@
 					<xsl:apply-templates select="./lc:event_description" />
 				</div>
 				<div>
-					<a href="">Download Handouts <i class="fa fa-arrow-right"/>	</a>
+					<a href="">	Download Handouts<i class="fa fa-arrow-right" /></a>
 				</div>
-				
+
 			</div>
 			<div class="youtube-class">
 				<xsl:if test="./lc:more_info_url/text() != ''">
-					<iframe>
-						<xsl:attribute name="src" select="./lc:more_info_url/text()" />
-						<xsl:attribute name="rameborder">0</xsl:attribute>
-						<xsl:attribute name="allowfullscreen"> </xsl:attribute>
-						<xsl:attribute name="frameborder">0</xsl:attribute>
-						<xsl:attribute name="allowfullscreen"> </xsl:attribute>
-						<xsl:attribute name="width">200</xsl:attribute>
-						<xsl:attribute name="height">120</xsl:attribute>
-					</iframe>
+					<xsl:if test="contains( ./lc:more_info_url/text() ,  'youtube')">
+						<xsl:call-template name="youtube" />
+					</xsl:if>
+					<xsl:if test="not( contains( ./lc:more_info_url/text() ,  'youtube'))">
+						<xsl:call-template name="not_youtube" />
+					</xsl:if>
 				</xsl:if>
 			</div>
 		</div>
-
 	</xsl:template>
 
+	<xsl:template name="not_youtube">
+		<a>
+			<xsl:attribute name="class">
+			 		<xsl:text>button</xsl:text>			 		
+			 </xsl:attribute>
+			<xsl:attribute name="href">
+			 		<xsl:value-of select="./lc:more_info_url/text()" />
+			 </xsl:attribute>
+			<span>
+				<i class="icon fa fa-video-camera" />
+				Watch the Recorded class
+			</span>
+			<i class="icon fa fa-arrow-right" />
+		</a>
+		<span>
+		SUNet ID required</span>
+	</xsl:template>
+
+
+
+	<xsl:template name="youtube">
+		<iframe>
+			<xsl:attribute name="src" select="./lc:more_info_url/text()" />
+			<xsl:attribute name="rameborder">0</xsl:attribute>
+			<xsl:attribute name="allowfullscreen"> </xsl:attribute>
+			<xsl:attribute name="frameborder">0</xsl:attribute>
+			<xsl:attribute name="allowfullscreen"> </xsl:attribute>
+			<xsl:attribute name="width">200</xsl:attribute>
+			<xsl:attribute name="height">120</xsl:attribute>
+		</iframe> 
+	</xsl:template>
 
 	<xsl:template name="year">
 		<xsl:value-of select="replace(./lc:event_dates/lc:start_date/text(),'.*(\d{4}).*','$1')" />
