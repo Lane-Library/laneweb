@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-04-18" version="3.2.18" description="3.2.18 bug fix release">
+            <action date="2016-04-11" dev="ryanmax" issue="118801" type="add">
+                tracking: add primaryType to searchResultClick event
+            </action>
+            <action date="2016-04-12" dev="ceyates" issue="118786" type="update">
+                restrict audio list to records with 710 |aAudio-Digest Foundation
+            </action>
+            <action date="2016-04-11" dev="ryanmax" issue="115460" type="fix">
+                querymap queries should be escaped before going to Solr
+            </action>
+        </release>
         <release date="2016-04-11" version="3.2.17" description="3.2.17 bug fix release">
             <action date="2016-04-07" dev="ryanmax" issue="118721" type="update">
                 track "see-all" facet clicks
