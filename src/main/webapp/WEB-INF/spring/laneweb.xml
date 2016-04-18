@@ -9,6 +9,7 @@
     <import resource="bookcovers.xml"/>
     <import resource="bookmarks.xml"/>
     <import resource="cme.xml"/>
+    <import resource="course-reserves.xml"/>
     <import resource="datasources.xml"/>
     <import resource="equipment.xml"/>
     <import resource="eresources.xml"/>
@@ -25,7 +26,7 @@
     <import resource="solr.xml"/>
     <import resource="suggest.xml"/>
     <import resource="trends.xml"/>
-    <import resource="voyager-login.xml"/>
+    <import resource="voyager.xml"/>
     <import resource="applications.xmap"/>
     <import resource="bookmarks.xmap"/>
     <import resource="classes.xmap"/>

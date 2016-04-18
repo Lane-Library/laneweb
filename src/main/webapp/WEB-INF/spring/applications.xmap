@@ -224,6 +224,14 @@
             <map:transform type="saxon" src="resources/xsl/equipment-status.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
+        <map:match type="wildcard" pattern="course-reserves.html">
+            <map:generate type="course-reserves"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="departments.html">
+            <map:generate type="departments"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match type="wildcard" pattern="audio.xml">
             <map:generate type="audio"/>
             <map:serialize type="xml"/>

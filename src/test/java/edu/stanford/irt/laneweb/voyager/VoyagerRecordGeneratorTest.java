@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.equipment;
+package edu.stanford.irt.laneweb.voyager;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -21,11 +21,14 @@ import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class EquipmentGeneratorTest {
+public class VoyagerRecordGeneratorTest {
 
     private CallableStatement callable;
 
@@ -35,15 +38,18 @@ public class EquipmentGeneratorTest {
 
     private DataSource dataSource;
 
-    private EquipmentGenerator generator;
+    private VoyagerRecordGenerator generator;
 
     private XMLConsumer xmlConsumer;
 
+    private XMLReader xmlReader;
+
     @Before
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, SAXException {
         this.dataSource = createMock(DataSource.class);
-        InputStream sql = getClass().getResourceAsStream("getEquipment.fnc");
-        this.generator = new EquipmentGenerator(this.dataSource, sql);
+        this.xmlReader = XMLReaderFactory.createXMLReader();
+        InputStream sql = new ByteArrayInputStream("".getBytes());
+        this.generator = new VoyagerRecordGenerator(this.dataSource, sql, 1, this.xmlReader);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.connection = createMock(Connection.class);
         this.callable = createMock(CallableStatement.class);
@@ -51,13 +57,13 @@ public class EquipmentGeneratorTest {
     }
 
     @Test
-    public void testDoGenerate() throws SQLException {
+    public void testDoGenerate() throws SQLException, IOException, SAXException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callable);
         this.callable.registerOutParameter(1, Types.CLOB);
         expect(this.callable.execute()).andReturn(true);
         expect(this.callable.getClob(1)).andReturn(this.clob);
-        expect(this.clob.getAsciiStream()).andReturn(new ByteArrayInputStream(new byte[0]));
+        expect(this.clob.getAsciiStream()).andReturn(new ByteArrayInputStream("<foo/>".getBytes()));
         this.clob.free();
         expectLastCall().times(2);
         this.callable.close();
