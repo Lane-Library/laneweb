@@ -17,6 +17,9 @@
             <action date="2016-04-11" dev="ryanmax" issue="115460" type="fix">
                 querymap queries should be escaped before going to Solr
             </action>
+            <action date="2016-04-18" dev="ceyates" issue="112730" type="add">
+                Create a page for course reserves at Lane
+            </action>
         </release>
         <release date="2016-04-11" version="3.2.17" description="3.2.17 bug fix release">
             <action date="2016-04-07" dev="ryanmax" issue="118721" type="update">
