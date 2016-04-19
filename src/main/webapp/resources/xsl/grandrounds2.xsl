@@ -39,9 +39,7 @@
                     </div>
                 </div>
                 <div class="yui3-u-4-5">
-                    <div class="details">
-                        <xsl:apply-templates select="*[not(self::date)]"/>
-                    </div>
+                    <xsl:apply-templates select="*[not(self::date)]"/>
                 </div>
             </div>
         </div>

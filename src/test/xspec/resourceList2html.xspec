@@ -35,7 +35,7 @@
                         href="" />
                 </div>
                 <div class="resultInfo">
-                    <span>
+                    <span class="primaryType">
                         <strong>Article</strong> Digital</span>
                 </div>
                 <div class="sourceInfo">Source: <a href="">: NaN <i class="fa fa-external-link" />
@@ -52,7 +52,7 @@
         <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
             <li>
             <div class="resultInfo">
-                <span />
+                <span class="primaryType"/>
             </div>
             <div class="sourceInfo" />
         </li>

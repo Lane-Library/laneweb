@@ -120,7 +120,7 @@
                     border-bottom: solid 1px rgb(144,144,144);
                     margin-bottom:4px;">PubMed Searches</div>
                 <ul>
-                    <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
+                    <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_cochrane_reviews'))]">
                         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
                         <xsl:if test="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]">
                             <xsl:apply-templates select="self::node()">

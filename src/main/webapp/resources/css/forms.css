@@ -59,8 +59,6 @@
     border-color: #9D9B94;
 }
 
-/*-------------------------submit button is the same for all forms in the lightbox-----------------------------------*/
-
 .submit-btn {
     text-align: center;
 }
@@ -143,7 +141,6 @@
     font-weight: bold;
 }
 
-/*------contentForm is due for cleanup - remove once the new css and widget is implemented----------*/
 .contentForm legend {
     border: 1px solid #C1C1C1;
     color: #444444;

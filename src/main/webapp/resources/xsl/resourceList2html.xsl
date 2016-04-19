@@ -42,12 +42,6 @@
 		          </div>
 		        </div>
                 <h3 class="eresources">&#160;</h3>
-                <!-- don't show beta advertisement in solr beta
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                    href="cocoon://content/search/lane-beta-link.html">
-                    <xi:fallback></xi:fallback>
-                </xi:include>
-                 -->
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
@@ -121,7 +115,7 @@
             </xsl:if>
             
             <div class="resultInfo">
-                <span><strong>Article</strong> Digital</span>
+                <span class="primaryType"><strong>Article</strong> Digital</span>
                 <xsl:if test="s:description">
                     <span class="descriptionTrigger searchContent"/>
                         </xsl:if>
@@ -152,7 +146,7 @@
             <xsl:apply-templates select="s:pub-author"/>
             <xsl:apply-templates select="s:pub-text"/>
             <div class="resultInfo">
-                <span>
+                <span class="primaryType">
                     <xsl:apply-templates select="s:primaryType"/>
                 </span>
                 <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">

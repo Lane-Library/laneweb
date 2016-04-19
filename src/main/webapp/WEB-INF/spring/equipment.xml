@@ -4,16 +4,18 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/equipment"
-        class="edu.stanford.irt.laneweb.equipment.EquipmentGenerator"
+        class="edu.stanford.irt.laneweb.voyager.VoyagerRecordGenerator"
         scope="prototype">
         <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
         <constructor-arg value="classpath:/edu/stanford/irt/laneweb/equipment/getEquipment.fnc"/>
+        <constructor-arg value="1"/>
+        <constructor-arg ref="org.xml.sax.XMLReader/marc"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/equipment-status"
         class="edu.stanford.irt.laneweb.equipment.EquipmentStatusTransformer"
         scope="prototype">
-        <constructor-arg ref="javax.sql.DataSource/grandrounds"></constructor-arg>
+        <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
     </bean>
     
 </beans>

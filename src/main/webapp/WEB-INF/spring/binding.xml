@@ -31,6 +31,22 @@
         </constructor-arg>
     </bean>
     
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/userdata"
+        class="edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder">
+        <constructor-arg>
+            <list>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/model"
         class="edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder">
         <constructor-arg>

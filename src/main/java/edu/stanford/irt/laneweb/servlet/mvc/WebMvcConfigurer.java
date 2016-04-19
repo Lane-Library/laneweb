@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -21,6 +22,8 @@ import org.springframework.context.support.DefaultLifecycleProcessor;
 import org.springframework.context.support.DelegatingMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.ui.context.ThemeSource;
 import org.springframework.ui.context.support.DelegatingThemeSource;
@@ -45,6 +48,7 @@ import org.springframework.web.servlet.support.SessionFlashMapManager;
 import org.springframework.web.servlet.theme.FixedThemeResolver;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 
+import edu.stanford.irt.laneweb.mapping.LanewebObjectMapper;
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 @Configuration
@@ -57,6 +61,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Autowired
     private MobileSiteInterceptor mobileSiteInterceptor;
+
+    @Autowired
+    private LanewebObjectMapper objectMapper;
 
     @Autowired
     private PersistentLoginHandlerInterceptor persistentLoginHandlerInterceptor;
@@ -79,9 +86,14 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         registry.addInterceptor(this.deviceResolverHandlerInterceptor)
             .addPathPatterns("/**/*.html");
         registry.addInterceptor(this.mobileSiteInterceptor)
-            .addPathPatterns("/**/*.html");
+             .addPathPatterns("/**/*.html");
         registry.addInterceptor(this.redirectHandlerInterceptor)
             .addPathPatterns("/**");
+    }
+
+    @Override
+    public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
+        converters.add(mappingJackson2HttpMessageConverter());
     }
 
     @Bean
@@ -178,6 +190,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean(name = "themeSource")
     public ThemeSource getThemeSource() {
         return new DelegatingThemeSource();
+    }
+
+    @Bean
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        return new MappingJackson2HttpMessageConverter(this.objectMapper);
     }
 
     @Bean

@@ -7,5 +7,9 @@
         class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
         <constructor-arg ref="javax.sql.DataSource/voyager"/>
     </bean>
+    
+    <bean name="org.xml.sax.XMLReader/marc"
+        class="edu.stanford.lane.catalog.impl.xml.DefaultMarcReader"
+        scope="prototype"/>
 
 </beans>
