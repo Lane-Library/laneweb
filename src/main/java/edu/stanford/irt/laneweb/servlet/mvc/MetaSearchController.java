@@ -9,13 +9,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.MetaSearchManager;
@@ -30,12 +31,13 @@ public class MetaSearchController {
 
     private static final int ONE_MINUTE = 60000;
 
-    private CompositeDataBinder dataBinder;
+    private DataBinder dataBinder;
 
     private MetaSearchManager manager;
 
     @Autowired
-    public MetaSearchController(final MetaSearchManager manager, final CompositeDataBinder dataBinder) {
+    public MetaSearchController(final MetaSearchManager manager,
+            @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder) {
         this.manager = manager;
         this.dataBinder = dataBinder;
     }

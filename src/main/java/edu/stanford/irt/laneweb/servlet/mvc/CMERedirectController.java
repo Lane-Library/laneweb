@@ -7,13 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 @Controller
 public class CMERedirectController {
@@ -30,10 +31,11 @@ public class CMERedirectController {
 
     private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
 
-    private CompositeDataBinder dataBinder;
+    private DataBinder dataBinder;
 
     @Autowired
-    public CMERedirectController(final CompositeDataBinder dataBinder) {
+    public CMERedirectController(
+            @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder) {
         this.dataBinder = dataBinder;
     }
 
