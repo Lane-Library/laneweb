@@ -94,7 +94,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        converters.add(new StringHttpMessageConverter());
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        stringConverter.setWriteAcceptCharset(false);
+        converters.add(stringConverter);
         converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));
     }
 
