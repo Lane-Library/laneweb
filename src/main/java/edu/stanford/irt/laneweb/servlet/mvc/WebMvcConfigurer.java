@@ -23,6 +23,7 @@ import org.springframework.context.support.DelegatingMessageSource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.ui.context.ThemeSource;
@@ -93,7 +94,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        converters.add(mappingJackson2HttpMessageConverter());
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        stringConverter.setWriteAcceptCharset(false);
+        converters.add(stringConverter);
+        converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));
     }
 
     @Bean
@@ -190,11 +194,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean(name = "themeSource")
     public ThemeSource getThemeSource() {
         return new DelegatingThemeSource();
-    }
-
-    @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-        return new MappingJackson2HttpMessageConverter(this.objectMapper);
     }
 
     @Bean

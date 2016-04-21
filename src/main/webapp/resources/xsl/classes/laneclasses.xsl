@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:lc="http://lane.stanford.edu/laneclasses" exclude-result-prefixes="lc h" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
 
+	<xsl:import href="laneclasses-common.xsl" />
+	
 	<xsl:template match="/doc/noncached-classes"/>
 	
 	<xsl:template match="/">
@@ -36,9 +38,6 @@
 
 	<xsl:template match="lc:event_name">
 		<h3>
-			<xsl:if test="/doc/noncached-classes/eventlist/event[eventid = current()/../lc:module_id]/seats = '-\-\-'">
-				<xsl:text>WAITLIST! </xsl:text>
-			</xsl:if>
 			<a href="/classes-consult/laneclass.html?class-id={../lc:module_id}">
 				<xsl:value-of select="."/>
 			</a>
@@ -60,44 +59,30 @@
 	</xsl:template>
 
 	<xsl:template match="lc:instructor">
-		<xsl:variable name="position" select="position()"/>
-		<xsl:variable name="last" select="last()"/>
-		<div>
-		<xsl:for-each select=".">
-			<xsl:value-of select="lc:fname"/>
-			<xsl:text>&#160;</xsl:text>
-			<xsl:value-of select="lc:lname"/>
-			<xsl:if test="$position != $last" >
-				<xsl:text>&#160; &amp; &#160;</xsl:text>
-			</xsl:if>
-		</xsl:for-each>
-		</div>
-	</xsl:template>
-
-	<xsl:template match="lc:event_description">
-		<xsl:choose>
-			<xsl:when test="count(tokenize(., '\W+')[. != ''])  &gt; 50">
-				<xsl:call-template name="firstWords">
-					<xsl:with-param name="value" select="."/>
-					<xsl:with-param name="count" select="50"/>
-				</xsl:call-template>
-				<xsl:text>...</xsl:text>
-				<div>
-					<a href="/classes-consult/laneclass.html?class-id={../lc:module_id}">More <i class="fa fa-arrow-right"/></a>
-				</div>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="."/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-
+	<div class="instructor">
+		With
+		<b>
+			<xsl:variable name="position" select="position()" />
+			<xsl:variable name="last" select="last()" />
+			<xsl:for-each select=".">
+				<xsl:value-of select="lc:fname" />
+				<xsl:text>&#160;</xsl:text>
+				<xsl:value-of select="lc:lname" />
+				<xsl:if test="$position != $last">
+					<xsl:text>&#160; &amp; &#160;</xsl:text>
+				</xsl:if>
+			</xsl:for-each>
+		</b>
+	</div>
+</xsl:template>
+	
 	<xsl:template match="lc:event_data">
 		<div class="class">
 			<div class="yui3-g">
 				<div class="yui3-u-1-4">
 					<div class="date same-height-1">
-						<xsl:apply-templates select="lc:event_dates/lc:start_date[1]"/>
+						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
+						<xsl:apply-templates select="./lc:event_dates" />
 					</div>
 				</div>
 				<div class="yui3-u-3-4">
@@ -105,18 +90,7 @@
 						<xsl:apply-templates select="lc:event_name"/>
 						<div class="yui3-g">
 							<div class="yui3-u-1-4">
-								<xsl:apply-templates select="lc:event_dates"/>
-								<xsl:choose>
-									<xsl:when test="lc:speaker/text()">
-										<xsl:value-of select="lc:speaker"/>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:apply-templates select="lc:event_instructors/lc:instructor"/>
-									</xsl:otherwise>
-								</xsl:choose>
-								<xsl:if test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats != '-\-\-'">
-									<div>Seats left: <xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats"/></div>
-								</xsl:if>
+								<xsl:apply-templates select="lc:event_instructors/lc:instructor"/>
 								<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}" class="button alt1">
 									<span>
 										<xsl:choose>
@@ -126,6 +100,9 @@
 									</span>
 									<i class="icon fa fa-arrow-right"/>
 								</a>
+								<xsl:if test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats != '-\-\-'">
+									<div>Seats left: <xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats"/></div>
+								</xsl:if>
 							</div>
 							<div class="yui3-u-3-4">
 								<xsl:apply-templates select="lc:event_description"/>
@@ -137,22 +114,55 @@
 		</div>
 	</xsl:template>
 
-	<xsl:template name="firstWords">
-		<xsl:param name="value"/>
-		<xsl:param name="count"/>
-
-		<xsl:if test="number($count) >= 1">
-			<xsl:value-of select="concat(substring-before($value,' '),' ')"/>
-		</xsl:if>
-		<xsl:if test="number($count) > 1">
-			<xsl:variable name="remaining" select="substring-after($value,' ')"/>
-			<xsl:if test="string-length($remaining) > 0">
-				<xsl:call-template name="firstWords">
-					<xsl:with-param name="value" select="$remaining"/>
-					<xsl:with-param name="count" select="number($count)-1"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:if>
+	
+	<xsl:template match="lc:venue">
+		<div>
+		  <xsl:text>At </xsl:text>
+                <xsl:variable name="link">
+                    <xsl:value-of select="./lc:venue_website"/>
+                </xsl:variable>
+                <xsl:variable name="name">
+                    <span>
+                            <xsl:attribute name="itemprop">location</xsl:attribute>
+                        	<xsl:value-of select="./lc:venue_name"/>
+                    </span>
+                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$link != ''">
+                        <a>
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="./lc:venue_website/text()"/>
+                            </xsl:attribute>
+                            <xsl:copy-of select="$name"/>
+                        </a>
+                        <xsl:if test="ends-with($link, '.pdf')">
+                            <xsl:text> (.pdf)</xsl:text>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy-of select="$name"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+             </div>
 	</xsl:template>
 
+  
+	<xsl:template match="lc:event_description">
+		<xsl:choose>
+			<xsl:when test="count(tokenize(., '\W+')[. != ''])  &gt; $description-length">
+				<xsl:call-template name="firstWords">
+					<xsl:with-param name="value" select="."/>
+					<xsl:with-param name="count" select="$description-length"/>
+				</xsl:call-template>
+				<xsl:text>...</xsl:text>
+					<a href="/classes-consult/laneclass.html?class-id={../lc:module_id}"> More <i class="fa fa-arrow-right"/></a>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="."/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+
 </xsl:stylesheet>
+

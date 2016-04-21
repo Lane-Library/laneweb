@@ -164,16 +164,6 @@
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="classes-consult/laneclass.html">
-            <map:aggregate type="default" element="doc">
-                <map:generate type="file" src="{content-base}/classes-consult/laneclass.html"/>
-                <map:generate type="file" src="cocoon://classes/all-data.xml"/>
-                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257"/>
-            </map:aggregate>
-            <map:transform type="saxon" src="resources/xsl/classes/laneclass.xsl"/>
-            <map:transform type="xinclude"/>
-            <map:serialize type="xhtml"/>
-        </map:match>
         <map:match type="wildcard" pattern="**/banners.html">
             <map:generate type="html" src="{content-base}/{1}/banners.html"/>
             <map:transform type="saxon" src="resources/xsl/banners.xsl"/>

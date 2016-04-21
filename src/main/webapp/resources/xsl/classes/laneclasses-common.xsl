@@ -5,6 +5,7 @@
     exclude-result-prefixes="lc"
     version="2.0">
 
+	<xsl:variable name="description-length" select="number(50)"></xsl:variable>
 
     <xsl:template name="month">
         <xsl:variable name="month">
@@ -46,5 +47,27 @@
         <xsl:value-of select="concat($hour, ' ', lower-case(substring-after(./lc:event_dates/lc:end_date[1]/text(),':00 ')))"/>
     </xsl:template>
 
+	
+    <xsl:template name="firstWords">
+		<xsl:param name="value"/>
+		<xsl:param name="count"/>
+		<xsl:if test="number($count) = 1">
+			<xsl:value-of select="substring-before($value,' ')"/>
+		</xsl:if>
+		<xsl:if test="number($count) > 1 and  number($count) != $description-length">
+			<xsl:value-of select="concat(substring-before($value,' '),' ')"/>
+		</xsl:if>
+		<xsl:if test="number($count) > 1">
+			<xsl:variable name="remaining" select="substring-after($value,' ')"/>
+			<xsl:if test="string-length($remaining) > 0">
+				<xsl:call-template name="firstWords">
+					<xsl:with-param name="value" select="$remaining"/>
+					<xsl:with-param name="count" select="number($count)-1"/>
+				</xsl:call-template>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+    
+    
     
 </xsl:stylesheet>
