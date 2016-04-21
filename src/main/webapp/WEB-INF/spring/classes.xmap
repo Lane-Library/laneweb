@@ -84,6 +84,12 @@
             <map:transform type="textNodeParser">
                 <map:parameter name="elementName" value="event_description"/>
             </map:transform>
+             <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="download_description"/>
+            </map:transform>
+               <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="bio"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match> 
         </map:pipeline>
@@ -97,6 +103,12 @@
             <map:transform type="joost" src="resources/xsl/classes/prune-add-namespace.stx"/>
             <map:transform type="textNodeParser">
                 <map:parameter name="elementName" value="event_description"/>
+            </map:transform>
+             <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="download_description"/>
+            </map:transform>
+               <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="bio"/>
             </map:transform>
             <map:serialize type="xml"/>
         </map:match>

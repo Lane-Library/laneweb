@@ -10,7 +10,7 @@
 	<xsl:param name="sort" />
 
 
-
+ 
 	<xsl:template match="/lc:classes">
 		<html>
 			<body>
@@ -41,18 +41,33 @@
 		</html>
 	</xsl:template>
 
+	  
+	<xsl:template match="lc:event_description">
+		<xsl:choose>
+			<xsl:when test="count(tokenize(., '\W+')[. != ''])  &gt; $description-length">
+				<xsl:call-template name="firstWords">
+					<xsl:with-param name="value" select="."/>
+					<xsl:with-param name="count" select="$description-length"/>
+				</xsl:call-template>
+				<xsl:text>...</xsl:text>
+					<a href="/classes-consult/archive.html?class-id={../lc:module_id}"> More <i class="fa fa-arrow-right"/></a>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="."/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template match="lc:event_data">
 		<div class="archive">
 			<div class="date same-height-1">
-				<xsl:call-template name="month" />
-				<xsl:text>/</xsl:text>
-				<xsl:call-template name="year" />
+				<xsl:apply-templates select="lc:event_dates/lc:start_date[1]"/>
 			</div>
 			<div class="details same-height-1">
 				<h3>
 					<a>
 						<xsl:attribute name="href">
-                                <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+                                <xsl:text>/classes-consult/archive.html?class-id=</xsl:text>
                        	     <b>  <xsl:value-of select="lc:module_id/text()" /></b>
                             </xsl:attribute>
 						<xsl:value-of select="./lc:event_name" />
@@ -61,21 +76,21 @@
 				<div>
 					<xsl:apply-templates select="./lc:event_description" />
 				</div>
-				<div>
-					<a href="">	Download Handouts<i class="fa fa-arrow-right" /></a>
-				</div>
+			</div>
+			<xsl:call-template name="video"/>
+		</div>
+	</xsl:template>
 
-			</div>
-			<div class="youtube-class">
-				<xsl:if test="./lc:more_info_url/text() != ''">
-					<xsl:if test="contains( ./lc:more_info_url/text() ,  'youtube')">
-						<xsl:call-template name="youtube" />
-					</xsl:if>
-					<xsl:if test="not( contains( ./lc:more_info_url/text() ,  'youtube'))">
-						<xsl:call-template name="not_youtube" />
-					</xsl:if>
+	<xsl:template name="video">
+		<div class="youtube-class">
+			<xsl:if test="./lc:more_info_url/text() != ''">
+				<xsl:if test="contains( ./lc:more_info_url/text() ,  'youtube')">
+					<xsl:call-template name="youtube" />
 				</xsl:if>
-			</div>
+				<xsl:if test="not( contains( ./lc:more_info_url/text() ,  'youtube'))">
+					<xsl:call-template name="not_youtube" />
+				</xsl:if>
+			</xsl:if>
 		</div>
 	</xsl:template>
 
@@ -89,17 +104,17 @@
 			 </xsl:attribute>
 			<span>
 				<i class="icon fa fa-video-camera" />
-				Watch the Recorded class
+				Watch Video
 			</span>
 			<i class="icon fa fa-arrow-right" />
 		</a>
-		<span>
-		SUNet ID required</span>
+		<div>SUNet ID required</div>
 	</xsl:template>
 
 
 
 	<xsl:template name="youtube">
+		<div style="margin-left:12px;">
 		<iframe>
 			<xsl:attribute name="src" select="./lc:more_info_url/text()" />
 			<xsl:attribute name="rameborder">0</xsl:attribute>
@@ -108,13 +123,42 @@
 			<xsl:attribute name="allowfullscreen"> </xsl:attribute>
 			<xsl:attribute name="width">200</xsl:attribute>
 			<xsl:attribute name="height">120</xsl:attribute>
-		</iframe> 
+		</iframe>
+		</div>
 	</xsl:template>
 
 	<xsl:template name="year">
 		<xsl:value-of select="replace(./lc:event_dates/lc:start_date/text(),'.*(\d{4}).*','$1')" />
 	</xsl:template>
 
+	
 
+
+	<xsl:template match="lc:start_date">
+		<xsl:variable name="date-tokens" select="tokenize(.,'(/| )')"/>
+		<xsl:variable name="month">
+			<xsl:value-of select="number($date-tokens[1])"/>
+		</xsl:variable>
+		<div class="month-day">
+			<xsl:choose>
+				<xsl:when test="$month = 1">January </xsl:when>
+				<xsl:when test="$month = 2">February </xsl:when>
+				<xsl:when test="$month = 3">March </xsl:when>
+				<xsl:when test="$month = 4">April </xsl:when>
+				<xsl:when test="$month = 5">May </xsl:when>
+				<xsl:when test="$month = 6">June </xsl:when>
+				<xsl:when test="$month = 7">July </xsl:when>
+				<xsl:when test="$month = 8">August </xsl:when>
+				<xsl:when test="$month = 9">September </xsl:when>
+				<xsl:when test="$month = 10">October </xsl:when>
+				<xsl:when test="$month = 11">November </xsl:when>
+				<xsl:when test="$month = 12">December </xsl:when>
+			</xsl:choose>			
+		</div>
+		<div class="year">
+			<xsl:value-of select="$date-tokens[3]"/>
+		</div>
+	</xsl:template>	
+	
 
 </xsl:stylesheet>

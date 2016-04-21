@@ -1,62 +1,82 @@
-.class{
-    margin: 12px 0 60px;
-}
-.class .date{
-    background-color: #009abb;
-    width: auto;
-    padding: 0 12px;
-    box-sizing: border-box;
+.class {
+	margin: 12px 0 60px;
 }
 
-.class .month-day{
-    padding-top: 24px;
+.class .date {
+	background-color: #009abb;
+	width: auto;
+	padding: 0 12px;
+	box-sizing: border-box;
 }
-.class .year{
-    font-size: 24px;
-    font-weight: 700;
+
+.class .month-day, .archive .month-day {
+	padding-top: 6px;
+	margin-bottom: 0px;
+}
+
+.class .year, .archive .year {
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .class h3 a, .archive h3 a {
-    color: #8c1515;
+	color: #8c1515;
 }
 
-
-.class .time{
-    margin: 12px 0;
+.class .time {
+	margin: 12px 0;
 }
 
-.class-detail{
+.class-detail {
 	padding-top: 10px;
 }
 
-.class .seats{
+.class .seats {
 	padding-top: 6px;
 }
 
-.youtube-class, .youtube-class .youtube-thumbnail img{
+.class-description h3, .class-description h4 {
+	all: inherit;
+}
+
+.class-description ul {
+	padding-left: 20px;
+}
+
+.class-description li {
+	list-style-type: disc;
+	list-style-position: outside;
+	border-bottom: none;
+	padding: 0px;
+}
+
+.instructor {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.youtube-class, .youtube-class .youtube-thumbnail img {
 	width: 200px;
 }
 
-.youtube-class{
-	padding-top: 20px;
-	padding-left: 12px;
-} 
+.youtube-class {
+	text-align: center;
+}
 
-.archive div{
-	display:inline-block;
-	vertical-align: top;
+.archive div {
+	display: inline-block;
+	vertical-align: middle;
 	margin-bottom: 12px;
-	}
-
-.archive .date{
-    background-color: #dddddd;
-    padding: 6px 12px;
-    margin-right :9px;
-    box-sizing: border-box;
-    width:80px;
 }
 
-.archive .details{
-    width: 407px;
+.archive .date {
+	background-color: #ccc;
+	padding: 6px 12px;
+	margin-right: 9px;
+	box-sizing: border-box;
+	width: 80px;
 }
- 
+
+.archive .details {
+	width: 407px;
+}
