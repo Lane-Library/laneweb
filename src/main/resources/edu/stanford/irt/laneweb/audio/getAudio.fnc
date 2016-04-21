@@ -2,9 +2,12 @@ DECLARE
   CURSOR bibid_cursor 
     IS 
         SELECT BIB_INDEX.BIB_ID
-        FROM LMLDB.BIB_INDEX
+        FROM LMLDB.BIB_INDEX,
+            LMLDB.BIB_MASTER
         WHERE NORMAL_HEADING = 'AUDIO DIGEST FOUNDATION'
-        AND INDEX_CODE = '710H';
+        AND INDEX_CODE = '710H'
+        AND BIB_INDEX.BIB_ID = BIB_MASTER.BIB_ID
+        AND SUPPRESS_IN_OPAC != 'Y';
   bibid NUMBER(38,0); 
   bibblob CLOB; 
   audio CLOB; 
