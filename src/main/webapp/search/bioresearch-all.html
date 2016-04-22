@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" id="bioresearch-all">
+<head>
+<title>Bioresearch Search</title>
+<style type="text/css">
+.popInContent {
+display:block;
+visibility:hidden;
+background-color: inherit;
+position:static;
+width:100%;
+padding:0;
+height:16px;
+}
+.popInContent.active {
+visibility:visible;
+}
+</style>
+</head>
+<body class="search-result">
+  <div class="popInContent">
+  <div id="spellCheck"> <span class="popInLabel">Did You Mean? </span> <a id="spellCheckLink"
+				href="/index.html">?</a> </div>
+  <div id="queryMapping"> <span id="qmInfo" class="popInLabel">Recommended <i class="fa fa-info-circle fa-lg"></i></span> </div>
+  <div id="findIt"> <span class="popInLabel">FindIt@Stanford eJournal </span> <a
+				id="findItLink" href="/index.html">?</a> </div>
+</div>
+<div class="yui3-g">
+  <div class="yui3-u-1-3">
+    <div class="module">
+      <h4>PubMed</h4>
+      <ul>
+        <li><a class="metasearch" id="pubmed">PubMed</a> </li>
+        <li><a class="metasearch" id="all_pubmedbook">NCBI Bookshelf</a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Fulltext Literature Search</h4>
+      <ul>
+        <li><a class="metasearch" id="scopus">Scopus</a></li>
+        <li><a class="metasearch" id="highwire">HighWire</a> <a
+							title="What is this?" rel="popup local helphighwire1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="ieeexplore">IEEE
+          Xplore</a> <a title="What is this?"
+							rel="popup local helpIEEEXplore1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="engineering_village1">Engineering Village</a> <a
+							title="What is this?" rel="popup local helpEngVillage1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="biomedcentral">BioMed Central</a></li>
+        <li><a class="metasearch" id="pubmedcentral">PMC</a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Literature Search</h4>
+      <ul>
+        <li><a class="metasearch" id="sciencecitation">Web of Science</a> <a
+							title="What is this?" rel="popup local helpSCI1"><i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="crosssearch1">ISI CrossSearch</a> <a
+							title="What is this?" rel="popup local helpcrosssearch1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="isi_biosis">BIOSIS</a> <a
+							title="What is this?" rel="popup local helpBiosis1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="portal_acm_digitallibrary">ACM</a></li>
+        <li><a class="metasearch" id="f1000">Faculty
+          of 1000</a> <a title="What is this?"
+							rel="popup local helpf1000"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Lane Search</h4>
+      <ul>
+        <li><a class="metasearch" id="lane_journal">eJournals</a> </li>
+        <li><a class="metasearch" id="lanebook">eBooks</a> </li>
+        <li><a class="metasearch" id="lanedatabase">Databases</a></li>
+        <li><a class="metasearch" id="lanesite">FAQs</a> </li>
+      </ul>
+    </div>
+  </div>
+  <div class="yui3-u-1-3">
+    <div class="module">
+      <h4>Protocols &amp; Reagents</h4>
+      <ul>
+        <li><a class="metasearch" id="cshprotocols">Cold Spring Harbor Protocols</a></li>
+        <li><a class="metasearch" id="enzymology">Methods
+          in Enzymology</a></li>
+          <li><a class="metasearch" id="jove" >JoVE</a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Active Clinical Trials</h4>
+      <ul>
+        <li><a class="metasearch" id="stanford_clinicaltrials">ClinicalTrials.gov -
+          ongoing@SU</a></li>
+        <li><a class="metasearch" id="clinicaltrials">ClinicalTrials.gov - ongoing</a></li>
+        <li><a class="metasearch" id="clinicaltrials_all">ClinicalTrials.gov - all</a></li>
+        <li><a class="metasearch" id="centerwatch">CenterWatch</a> </li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4> Genes, Proteins &amp; Phenotypes</h4>
+      <ul>
+        <li><a class="metasearch" id="proteome">BIOBASE
+          Knowledge Library (Proteome) </a> <a
+							title="What is this?"  rel="popup local helpProteome1"> <i
+							class="fa fa-info-circle fa-lg"></i></a> <br/>
+          Login required</li>
+        <li><a class="metasearch" id="abminer">AbMiner</a> <a
+							title="What is this?" rel="popup local helpAbMiner1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="ihop">iHOP
+          Protein</a> <a title="What is this?"
+							rel="popup local helpihop1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="pharmgkb">PharmGKB</a> </li>
+        <li><a class="metasearch" id="unitprot">UniProt</a> </li>
+        <li><a class="metasearch" id="crossdb_gene">NCBI Gene</a></li>
+        <li><a class="metasearch" id="crossdb_genome">NCBI Genome</a></li>
+        <li><a class="metasearch" id="crossdb_homologene">NCBI HomoloGene</a></li>
+        <li><a class="metasearch" id="crossdb_nucleotide">NCBI Nucleotide/Genbank</a></li>
+        <li><a class="metasearch" id="crossdb_protein">NCBI Protein</a></li>
+        <li><a class="metasearch" id="crossdb_snp">NCBI
+          SNP</a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Biotools</h4>
+      <ul>
+        <li><a class="metasearch" id="rseek">Rseek</a> <a
+							title="What is this?" rel="popup local helpRSEEK1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="obrc">U
+          Pittsburgh OBRC</a> <a title="What is this?"
+							rel="popup local helpOBRC1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="ubcbioinfolinks">UBC biotools</a> <a
+							title="What is this?" rel="popup local helpubc1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="bioware">BioWareDB</a> <a
+							title="What is this?" rel="popup local helpbiowaredb1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="metadb">MetaDB</a> </li>
+      </ul>
+    </div>
+  </div>
+  <div class="yui3-u-1-3">
+    <div class="module">
+      <h4>Drugs, Compounds &amp; Structures</h4>
+      <ul>
+        <li><a class="metasearch" id="drugbank">DrugBank</a> <a
+							title="What is this?" rel="popup local helpDrugBank1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="crossdb_structure">NCBI Structure</a></li>
+        <li><a class="metasearch" id="pubchemcompound">PubChem Compound</a></li>
+        <li><a class="metasearch" id="pubchemsubstance">PubChem Substance</a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Stanford-specific</h4>
+      <ul>
+        <li><a class="metasearch" id="cap">CAP faculty
+          profiles</a> <a title="What is this?"
+							rel="popup local helpcap1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="stanfordcorefacilities">Core facilities</a></li>
+        <li><a class="metasearch" id="cosexpertisestanford">COS Expertise@Stanford</a> <a
+							title="What is this?" rel="popup local helpcosexp1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="su_engineering_faculty">Engineering faculty</a></li>
+        <li><a class="metasearch" id="su_engineering_labs">Engineering laboratories</a> <a
+							title="What is this?" rel="popup local helpsuEng1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="slac">SLAC
+          Library</a></li>
+        <li><a class="metasearch" id="biomedseminars">Biomedical seminars</a></li>
+        <li><a class="metasearch" id="stanford_somgoogle">All SoM</a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Funding</h4>
+      <ul>
+        <li><a class="metasearch" id="cosfundingopportunities">COS Grant Opportunities</a> <a
+							title="What is this?" rel="popup local helpcosfunding1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+      </ul>
+    </div>
+    <div class="module">
+      <h4>Patents &amp; Technologies</h4>
+      <ul>
+        <li><a class="metasearch" id="uspto">US
+          Patent Office</a></li>
+        <li><a class="metasearch" id="isi_derwent">Derwent
+          Patents</a> <a title="What is this?"
+							rel="popup local helpDerwent1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+        <li><a class="metasearch" id="dtic_all">US
+          DOD</a> <a title="What is this?" rel="popup local helpdtic1"> <i
+							class="fa fa-info-circle fa-lg"></i> </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="popups">
+
+<span id="helpProteome1">Proteome is a proprietary database of highly curated proteomic data based on
+  the literature. You will need to login and re-run the
+  search within Proteome to see actual results.<br/>
+  <a href="/portals/bioresearch-faqs.html#biobase">See FAQ</a> for obtaining a
+  free account from Proteome (SUNet ID required).</span>
+  
+  <span id="helpDerwent1">Derwent
+  Innovations Index is a search engine for worldwide patents.</span>
+  
+  <span id="helpGoPubMed1">GoPubMed is
+  a search engine for querying literature in PubMed and visualizing the
+  results according to terms from the GO ontologies.</span>
+  
+  <span id="helphighwire1"><a
+			href="http://highwire.stanford.edu/">HighWire is
+  a comprehensive full-text science-specific search engine</a>
+  that searches about half of the scientific literature.</span>
+  
+  <span id="helpBiosis1">BIOSIS is a
+  literature database especially helpful for finding document types not
+  indexed in PubMed, including published abstracts of papers presented
+  at meetings, United States patents, books and book chapters.</span>
+  
+  <span id="helpIEEEXplore1">IEEE Xplore is the foremost literature database for electrical engineering,
+  computer science, and electronics.</span>
+  
+  <span id="helpbiowaredb1">BioWareDB Specialized search
+  engine with good coverage of the universe of bioinformatics softwares
+  and databases.</span>
+  
+  <span id="helpAbMiner1">AbMiner is a curated database of commercially available, highly
+  characterized antibodies for research purposes.</span>
+  
+  <span id="helpihop1">iHOP is the fastest way to
+  rapidly understand gene function based on statements made in the
+  literature.</span>
+  
+  <span id="helpDrugBank1">DrugBank is a curated database of highly summarized yet detailed
+  drug data (e.g., chemical, pharmacological and pharmaceutical
+  properties), combined with comprehensive drug target data.</span>
+  
+  <span id="helpf1000">F1000 provides
+  reviews and ranks papers published in the sciences based on the
+  recommendations of a faculty of over 1000 selected leading
+  researchers.</span>
+  
+  <span id="helpcap1" >Community
+  Academic Profiles is a directory of Stanford School of Medicine
+  researchers, clinicians and affiliates.</span>
+  
+  <span id="helpcosexp1" >Community Of Science Expertise is
+  a wide-reaching scientific expertise database focused on Stanford
+  researchers.</span>
+  
+  <span id="helpcosfunding1" ><a href="http://fundingopps.cos.com/">Community
+  Of Science Funding Database</a> is a comprehensive, well-structured
+  source of funding information, complete with profile-based
+  notificatin.</span>
+  
+  <span id="helpcrosssearch1">Searches last 5
+  years of MEDLINE, WCI, Web of Science, Zoological Record, BIOSIS
+  Previews and Derwent Innovations Index.</span>
+  
+  <span id="helpubc1" >UBC'sBioinformatics Links
+  Directory (NAR Web server compilation) is a curated collection of
+  bioinformatics tools.</span>
+  
+  <span id="helpSCI1">SCI is a
+  proprietary database that provides citation frequency.</span>
+  
+  <span id="helpdtic1">DTIC is the US
+  military's principal database for its unclassified/declassified
+  research.</span>
+  
+<span id="helpEngVillage1">Engineering
+  Village is the foremost literature database for all aspects of the
+  engineering literature.</span>
+  
+  <span id="helpScienceAccelerator">Science Accelerator is the US
+  Department of Energy's database for its unclassified/declassified
+  research.</span>
+  
+  <span id="helpsuEng1">This search
+  engine returns hits from laboratories in Stanford's Department of
+  Engineering.</span>
+  
+  <span id="helpOBRC1">The
+  University of Pittsburgh's <a
+			href="http://www.hsls.pitt.edu/guides/genetics/obrc/">OBRCOnline
+  Bioinformatics Resources Collection</a> (OBRC) is a curated collection
+  of bioinformatics tools.</span>
+  
+  <span id="helpRSEEK1">Search specialized
+  in finding information about the R statistical analysis language</span>
+  
+  <span id="helpNextBio1">NextBio is a search
+  engine specialized in finding and characterizing biological
+  information, especially microarray data</span>
+  </div>
+    <!-- tooltips -->
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+            xmlns:h="http://www.w3.org/1999/xhtml"
+            href="cocoon:/includes/tooltips.html"
+            xpointer="xpointer(//h:div[@id='queryMappingTooltips' or @id='databaseTooltips' or  @id='generalTooltips'])">
+      <xi:fallback />
+    </xi:include>
+</body>
+</html>
