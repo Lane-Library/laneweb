@@ -14,6 +14,9 @@
             <action date="2016-04-21" dev="ceyates" issue="119271" type="fix">
                 suppressed record appearing in audio list
             </action>
+            <action date="2016-04-25" dev="alainb" issue="119102" type="update">
+                Peds clinical hedge - National Guideline Clearinghouse
+            </action>
             <action date="2016-04-21" dev="ceyates" issue="119068" type="update">
                 change popin styles for textbook and bioresearch search result pages
             </action>
