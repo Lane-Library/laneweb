@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-04-25" version="3.2.19" description="3.2.19 bug fix release">
+            <action date="2016-04-21" dev="ceyates" issue="119271" type="fix">
+                suppressed record appearing in audio list
+            </action>
+            <action date="2016-04-21" dev="ceyates" issue="119068" type="update">
+                change popin styles for textbook and bioresearch search result pages
+            </action>
+            <action date="2016-04-19" dev="ceyates" issue="94798" type="add">
+                provide all user specific data in an asynchronous request
+            </action>
+        </release>
         <release date="2016-04-18" version="3.2.18" description="3.2.18 bug fix release">
             <action date="2016-04-11" dev="ryanmax" issue="118801" type="add">
                 tracking: add primaryType to searchResultClick event
