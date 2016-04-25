@@ -17,8 +17,17 @@
             <action date="2016-04-21" dev="ceyates" issue="119068" type="update">
                 change popin styles for textbook and bioresearch search result pages
             </action>
+            <action date="2016-04-25" dev="alainb" issue="118298" type="add">
+                Classes - upcoming classes mockup
+            </action>
+            <action date="2016-04-25" dev="alainb" issue="118291" type="add">
+                Classes archives mockup
+            </action>
             <action date="2016-04-19" dev="ceyates" issue="94798" type="add">
                 provide all user specific data in an asynchronous request
+            </action>
+            <action date="2016-04-25" dev="alainb" issue="73635" type="add">
+                Classes feed into correspondent "How to" pages
             </action>
         </release>
         <release date="2016-04-18" version="3.2.18" description="3.2.18 bug fix release">
