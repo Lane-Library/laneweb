@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2016-04-25" version="3.2.19" description="3.2.19 bug fix release">
+            <action date="2016-04-25" dev="ceyates" issue="119452" type="fix">
+                bookmark link can have styles that make it look bad
+            </action>
             <action date="2016-04-21" dev="ceyates" issue="119271" type="fix">
                 suppressed record appearing in audio list
             </action>
