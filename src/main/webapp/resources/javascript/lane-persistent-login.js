@@ -19,10 +19,10 @@
     // have the possibility to extend his persistent login
     Y.on("click", function(event) {
         extensionPersistentLoginPopup(event);
-    }, "a[href*=/redirect/cme]");
+    }, "a[href*='/redirect/cme']");
     Y.on("click", function(event) {
         extensionPersistentLoginPopup(event);
-    }, "a[href*=laneproxy.stanford.edu/login]");
+    }, "a[href*='laneproxy.stanford.edu/login']");
 
     extensionPersistentLoginPopup = function(event){
         var link = event.target;
