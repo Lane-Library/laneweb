@@ -22,6 +22,7 @@
     line-height: 17px;
     background-color: white;
     background: linear-gradient(to right, white , #ccc);
+    font-size: 13px;
 }
 .bookmark-link .fa {
     color: gray;

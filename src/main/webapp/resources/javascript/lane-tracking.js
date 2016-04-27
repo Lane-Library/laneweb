@@ -358,12 +358,12 @@
         }, document);
 
         // limit dragend listener to bookmarklet links
-        Y.all('a[href*=bookmarklet]').on('dragend', function(e) {
+        Y.all('a[href*="bookmarklet"]').on('dragend', function(e) {
             Tracker.trackEvent(e);
         });
 
         // limit right-click listener to bookmarklet links
-        Y.all('a[href*=bookmarklet]').on('contextmenu', function(e) {
+        Y.all('a[href*="bookmarklet"]').on('contextmenu', function(e) {
             Tracker.trackEvent(e);
         });
 
@@ -375,6 +375,6 @@
         Tracker.addTarget(Lane);
 
         Y.all(".searchFacet a, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all("a[href*=secure/edtech]").setData("isTrackableAsPageView", true);
+        Y.all("a[href*='secure/edtech']").setData("isTrackableAsPageView", true);
         Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a, .qlinks a, .banner-content a").setData("isTrackableAsEvent", true);
 })();

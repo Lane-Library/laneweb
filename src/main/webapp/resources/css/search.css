@@ -15,6 +15,9 @@
 #queryMapping span, #spellCheckLink, #findItLink {
     padding-right: 25px;
 }
+#queryMapping .bookmark-link {
+    padding: 0;
+}
 .primaryLink {
     font-size: 16px;
 }
