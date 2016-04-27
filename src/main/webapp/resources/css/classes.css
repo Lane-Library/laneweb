@@ -35,15 +35,15 @@
 	padding-top: 6px;
 }
 
-.class-description h3, .class-description h4 {
+.class-description h3, .class-description h4, .handout-description h3, .handout-description h4 {
 	all: inherit;
 }
 
-.class-description ul {
+.class-description ul, .handout-description ul{
 	padding-left: 20px;
 }
 
-.class-description li {
+.class-description li, .handout-description li{
 	list-style-type: disc;
 	list-style-position: outside;
 	border-bottom: none;

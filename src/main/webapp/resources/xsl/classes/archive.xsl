@@ -21,6 +21,7 @@
 	 	<div class="class-description">
 	 		<xsl:copy-of select="node()"/>
 	 	</div>
+	 	<xsl:apply-templates select="../lc:downloads/lc:download_description"/>
 	</xsl:template>
 
 	<xsl:template match="lc:download_description">
