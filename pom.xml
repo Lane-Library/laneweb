@@ -260,7 +260,7 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
-            <version>1.4.7</version>
+            <version>1.5.0-b01</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat</groupId>
@@ -351,7 +351,7 @@
         <dependency>
         	<groupId>com.google.apis</groupId>
         	<artifactId>google-api-services-books</artifactId>
-        	<version>v1-rev81-1.21.0</version>
+        	<version>v1-rev83-1.21.0</version>
         </dependency>
     </dependencies>
     <build>
