@@ -47,14 +47,13 @@
         <xsl:value-of select="concat($hour, ' ', lower-case(substring-after(./lc:event_dates/lc:end_date[1]/text(),':00 ')))"/>
     </xsl:template>
 
-	
     <xsl:template name="firstWords">
 		<xsl:param name="value"/>
 		<xsl:param name="count"/>
 		<xsl:if test="number($count) = 1">
 			<xsl:value-of select="substring-before($value,' ')"/>
 		</xsl:if>
-		<xsl:if test="number($count) > 1 and  number($count) != $description-length">
+		<xsl:if test="number($count) > 1 and  number($count+1) != $description-length">
 			<xsl:value-of select="concat(substring-before($value,' '),' ')"/>
 		</xsl:if>
 		<xsl:if test="number($count) > 1">
@@ -68,6 +67,6 @@
 		</xsl:if>
 	</xsl:template>
     
-    
+
     
 </xsl:stylesheet>
