@@ -11,12 +11,12 @@
         handleArrowKey = function(event, direction) {
             var browseFacetNavContainer = Y.one(".facetBrowse .s-pagination"),
                 selectorString = ".pagingButton." + direction,
-                pagingContainer;
-            if (undefined !== browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') === 'visible') {
-                pagingContainer = browseFacetNavContainer;
+                pagingNode;
+            if (browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') === 'visible') {
+                pagingNode = browseFacetNavContainer.one(selectorString);
             }
-            if (pagingContainer) {
-                pagingContainer.one(selectorString)._node.click();
+            if (pagingNode) {
+                pagingNode._node.click();
             }
         },
         processEnabledFacets = function(facetsContainer) {
