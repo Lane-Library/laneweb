@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-05-02" version="3.2.20" description="3.2.20 bug fix release">
+            <action date="2016-05-02" dev="alainb" issue="119644" type="fix">
+                first word missing from class descriptions
+            </action>
+            <action date="2016-05-02" dev="alainb" issue="119572" type="update">
+                updates for the Quality improvement hedges
+            </action>
+        </release>
         <release date="2016-04-25" version="3.2.19" description="3.2.19 bug fix release">
             <action date="2016-04-25" dev="ceyates" issue="119452" type="fix">
                 bookmark link can have styles that make it look bad
