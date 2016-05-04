@@ -221,6 +221,7 @@
                 <value>template</value>
                 <value>bassettLargerView</value>
                 <value>none</value>
+                <value>history</value>
             </list>
         </constructor-arg>
         <constructor-arg>
