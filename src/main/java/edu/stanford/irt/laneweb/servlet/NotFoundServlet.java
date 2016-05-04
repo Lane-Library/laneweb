@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * A servlet that sends an empty 404 response. To be used for .php requests, which will always be attempts to spam or
- * vulnerability probes.
+ * vulnerability probes. And also used for /rss/browse and /rss/mesh requests that crawlers persist in requesting.
  */
-public class PHPServlet extends HttpServlet {
+public class NotFoundServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 

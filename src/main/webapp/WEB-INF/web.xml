@@ -177,13 +177,15 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>PHPServlet</servlet-name>
-        <servlet-class>edu.stanford.irt.laneweb.servlet.PHPServlet</servlet-class>
+        <servlet-name>NotFoundServlet</servlet-name>
+        <servlet-class>edu.stanford.irt.laneweb.servlet.NotFoundServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>PHPServlet</servlet-name>
+        <servlet-name>NotFoundServlet</servlet-name>
         <url-pattern>*.php</url-pattern>
+        <url-pattern>/rss/mesh/*</url-pattern>
+        <url-pattern>/rss/browse/*</url-pattern>
     </servlet-mapping>
     
     <servlet>

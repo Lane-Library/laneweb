@@ -140,6 +140,13 @@ public class LanewebIT {
     }
 
     @Test
+    public void testNotFoundServlet() throws Exception {
+        this.mockMvc.perform(get("/rss/browse/type/video?a=z")).andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/rss/mesh/book?m=biology&page=all")).andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/wp-login.php")).andExpect(status().isNotFound());
+    }
+
+    @Test
     public void testPubmedSearch() throws Exception {
         if (pubmedIsReachable()) {
             Map<String, String> ns = new HashMap<String, String>();

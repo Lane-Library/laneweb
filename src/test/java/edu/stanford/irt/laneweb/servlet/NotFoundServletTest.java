@@ -12,15 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PHPServletTest {
+public class NotFoundServletTest {
 
-    private PHPServlet filter;
+    private NotFoundServlet filter;
 
     private HttpServletResponse response;
 
     @Before
     public void setUp() throws Exception {
-        this.filter = new PHPServlet();
+        this.filter = new NotFoundServlet();
         this.response = createMock(HttpServletResponse.class);
     }
 
