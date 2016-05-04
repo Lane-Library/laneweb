@@ -13,6 +13,7 @@
     <import resource="datasources.xml"/>
     <import resource="equipment.xml"/>
     <import resource="eresources.xml"/>
+    <import resource="flickr-photos.xml"/>
     <import resource="grandrounds.xml"/>
     <import resource="mapping.xml"/>
     <import resource="pipeline.xml"/>

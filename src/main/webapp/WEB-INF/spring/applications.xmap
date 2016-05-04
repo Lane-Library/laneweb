@@ -241,5 +241,9 @@
             <map:transform type="saxon" src="resources/xsl/audio.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match type="wildcard" pattern="flickr-photos.xml">
+            <map:generate type="flickr-photo"/>
+            <map:serialize type="xml"/>
+        </map:match>
     </map:pipeline>
 </map:sitemap>

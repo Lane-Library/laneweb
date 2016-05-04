@@ -779,3 +779,27 @@ http://lane.stanford.edu/samples/button-css.html
 .back-to-top .fa {
     color: rgb(238, 238, 238);
 }
+
+.flickr-photos {
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: 12px;
+    height: 200px;
+    opacity: 0;
+}
+.flickr-photos, .flickr-photos img {
+    transition: opacity 1s;
+}
+.flickr-photos a {
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+}
+.flickr-photos a:before {
+    content: "";
+    margin-left: -100%;
+}
+.flickr-photos a:after {
+    content: "";
+    margin-right: -100%;
+}
