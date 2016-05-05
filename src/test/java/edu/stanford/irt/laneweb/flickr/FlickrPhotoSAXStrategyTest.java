@@ -27,6 +27,5 @@ public class FlickrPhotoSAXStrategyTest {
         this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail")), this.xmlConsumer);
         assertEquals(this.xmlConsumer.getExpectedResult(this, "FlickrPhotoSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
-        System.out.println(this.xmlConsumer.getStringValue());
     }
 }

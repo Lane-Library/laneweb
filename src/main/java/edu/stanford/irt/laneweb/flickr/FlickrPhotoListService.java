@@ -25,6 +25,6 @@ public class FlickrPhotoListService {
                 generated.add(next);
             }
         }
-        return generated.stream().map(i -> this.photos.get(i)).collect(Collectors.toList());
+        return generated.stream().map(this.photos::get).collect(Collectors.toList());
     }
 }

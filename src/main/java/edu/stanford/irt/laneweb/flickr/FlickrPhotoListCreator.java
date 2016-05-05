@@ -42,7 +42,7 @@ public class FlickrPhotoListCreator {
         Collection<Map<String, String>> photos = new ArrayList<>();
         photos.addAll(getPhotoMapsForPage(1));
         photos.addAll(getPhotoMapsForPage(2));
-        this.photoList = photos.stream().map(m -> buildString(m)).collect(Collectors.toList());
+        this.photoList = photos.stream().map(this::buildString).collect(Collectors.toList());
         this.photoList.stream().forEach(out::println);
     }
 

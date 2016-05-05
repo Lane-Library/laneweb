@@ -22,6 +22,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class FlickrPhotoListCreatorTest {
 
     private FlickrPhotoListCreator creator;
@@ -58,5 +60,14 @@ public class FlickrPhotoListCreatorTest {
         this.creator.printList(pw);
         assertEquals(this.expected, baos.toString("UTF-8"));
         verify(this.objectMapper, this.photo);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test(expected = LanewebException.class)
+    public void testPrintListError() throws JsonParseException, JsonMappingException, IOException {
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class)))
+                .andReturn(Collections.singletonMap("message", "oopsie"));
+        replay(this.objectMapper);
+        this.creator.printList(null);
     }
 }
