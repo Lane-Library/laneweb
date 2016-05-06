@@ -37,9 +37,6 @@ public class DepartmentsResultSetSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, SQLException {
         this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html", "html", XMLUtils.EMPTY_ATTRIBUTES);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body", "body", XMLUtils.EMPTY_ATTRIBUTES);
         expect(this.resultSet.next()).andReturn(true);
         this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "li", "li", XMLUtils.EMPTY_ATTRIBUTES);
         expect(this.resultSet.getString(1)).andReturn("1");
@@ -49,9 +46,6 @@ public class DepartmentsResultSetSAXStrategyTest {
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
         expect(this.resultSet.next()).andReturn(false);
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body", "body");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html", "html");
-        this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         replay(this.resultSet, this.xmlConsumer);
         this.saxStrategy.toSAX(this.resultSet, this.xmlConsumer);

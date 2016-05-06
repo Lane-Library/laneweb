@@ -14,15 +14,13 @@ public class DepartmentsResultSetSAXStrategy extends AbstractXHTMLSAXStrategy<Re
     @Override
     public void toSAX(final ResultSet rs, final XMLConsumer xmlConsumer) {
         try {
-            startHTMLDocument(xmlConsumer);
-            startBody(xmlConsumer);
+            xmlConsumer.startDocument();
             while (rs.next()) {
                 startLi(xmlConsumer);
-                createAnchor(xmlConsumer, "?id=" + rs.getString(1), rs.getString(2));
+                createAnchor(xmlConsumer, "/samples/course-reserves.html?id=" + rs.getString(1), rs.getString(2));
                 endLi(xmlConsumer);
             }
-            endBody(xmlConsumer);
-            endHTMLDocument(xmlConsumer);
+            xmlConsumer.endDocument();
         } catch (SAXException | SQLException e) {
             throw new LanewebException(e);
         }
