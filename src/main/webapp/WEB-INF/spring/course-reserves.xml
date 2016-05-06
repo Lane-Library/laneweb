@@ -16,7 +16,7 @@
         scope="prototype">
         <constructor-arg value="classpath:/edu/stanford/irt/laneweb/coursereserves/by-title.sql"/>
         <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/departments-resultset"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-resultset"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-departments"
