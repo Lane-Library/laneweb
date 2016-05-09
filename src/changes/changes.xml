@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-05-09" version="3.2.21" description="3.2.21 bug fix release">
+            <action date="2016-05-04" dev="ceyates" issue="120063" type="update">
+                don't log missing /rss/mesh|browse SitemapExceptions
+            </action>
+            <action date="2016-05-03" dev="ryanmax" issue="119979" type="fix">
+                javascript errors in solr-facets.js
+            </action>
+            <action date="2016-05-06" dev="ceyates" issue="119187" type="add">
+                highlight selected department of course reserves list page
+            </action>
+            <action date="2016-05-06" dev="ceyates" issue="119186" type="add">
+                add A-Z list and menu item to course reserves list
+            </action>
+            <action date="2016-05-06" dev="alainb" issue="119101" type="add">
+                Peds clinical hedge for Cochrane sys reviews
+            </action>
+            <action date="2016-05-04" dev="ceyates" issue="115033" type="add">
+                create an flickr image carousel for the history site
+            </action>
+        </release>
         <release date="2016-05-02" version="3.2.20" description="3.2.20 bug fix release">
             <action date="2016-05-02" dev="alainb" issue="119644" type="fix">
                 first word missing from class descriptions
