@@ -1,17 +1,21 @@
-SELECT DISTINCT(bib_item.bib_id),
+SELECT bib_item.bib_id,
   title_brief,
-  course_number
+  course_number,
+  first_name,
+  last_name
 FROM lmldb.reserve_list_items,
   lmldb.reserve_list,
   lmldb.reserve_list_courses,
   lmldb.department,
   lmldb.course,
   lmldb.bib_item,
-  lmldb.bib_text
+  lmldb.bib_text,
+  lmldb.instructor
 WHERE reserve_list.reserve_list_id = reserve_list_items.reserve_list_id
 AND reserve_list.reserve_list_id   = reserve_list_courses.reserve_list_id
 AND department.department_id       = reserve_list_courses.department_id
 AND course.course_id               = reserve_list_courses.course_id
+AND instructor.instructor_id       = reserve_list_courses.instructor_id
 AND bib_item.item_id               = reserve_list_items.item_id
 AND bib_text.bib_id                = bib_item.bib_id
 AND bib_item.bib_id NOT           IN
@@ -22,4 +26,9 @@ AND bib_item.bib_id NOT           IN
   )
 AND expire_date              > SYSDATE
 AND department.department_id = ?
+GROUP BY bib_item.bib_id,
+  course_number,
+  last_name,
+  first_name,
+  title_brief
 ORDER BY title_brief

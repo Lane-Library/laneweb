@@ -232,6 +232,10 @@
             <map:generate type="course-reserves-by-title"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match type="wildcard" pattern="course-reserves-instructors.xml">
+            <map:generate type="course-reserves-by-instructor"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match type="wildcard" pattern="course-reserves-departments.xml">
             <map:generate type="course-reserves-departments"/>
             <map:serialize type="xml"/>

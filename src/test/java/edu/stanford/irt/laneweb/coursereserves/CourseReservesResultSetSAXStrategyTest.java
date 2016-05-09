@@ -48,8 +48,10 @@ public class CourseReservesResultSetSAXStrategyTest {
         this.xmlConsumer.startElement(isA(String.class), eq("a"), eq("a"), isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("2".toCharArray()), eq(0), eq(1));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "a", "a");
+        expect(this.resultSet.getString(4)).andReturn("4");
+        expect(this.resultSet.getString(5)).andReturn("5");
         expect(this.resultSet.getString(3)).andReturn("3");
-        this.xmlConsumer.characters(aryEq("3".toCharArray()), eq(0), eq(1));
+        this.xmlConsumer.characters(aryEq("4 5, 3".toCharArray()), eq(0), eq(6));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "li", "li");
         expect(this.resultSet.next()).andReturn(false);
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "ul", "ul");

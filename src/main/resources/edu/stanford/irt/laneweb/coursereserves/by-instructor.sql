@@ -29,4 +29,4 @@ GROUP BY bib_item.bib_id,
   last_name,
   first_name,
   title_brief
-ORDER BY title_brief
+ORDER BY last_name, first_name, title_brief
