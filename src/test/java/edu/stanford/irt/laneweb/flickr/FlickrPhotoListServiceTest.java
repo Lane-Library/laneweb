@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.flickr;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,8 +12,9 @@ public class FlickrPhotoListServiceTest {
     private FlickrPhotoListService service;
 
     @Before
-    public void setUp() {
-        this.service = new FlickrPhotoListService(new FlickrPhotoList());
+    public void setUp() throws IOException {
+        this.service = new FlickrPhotoListService(
+                new FlickrPhotoList(getClass().getResourceAsStream("flickr-photos.txt")));
     }
 
     @Test

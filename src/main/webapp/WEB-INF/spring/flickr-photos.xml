@@ -15,7 +15,9 @@
     <bean id="edu.stanford.irt.laneweb.flickr.FlickrPhotoListService"
         class="edu.stanford.irt.laneweb.flickr.FlickrPhotoListService">
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.flickr.FlickrPhotoList"/>
+            <bean class="edu.stanford.irt.laneweb.flickr.FlickrPhotoList">
+                <constructor-arg value="classpath:/edu/stanford/irt/laneweb/flickr/flickr-photos.txt"/>
+            </bean>
         </constructor-arg>
     </bean>
     
