@@ -14,6 +14,9 @@
             <action date="2016-05-03" dev="ryanmax" issue="119979" type="fix">
                 javascript errors in solr-facets.js
             </action>
+            <action date="2016-05-09" dev="ceyates" issue="119188" type="add">
+                list course reserves by instructor
+            </action>
             <action date="2016-05-06" dev="ceyates" issue="119187" type="add">
                 highlight selected department of course reserves list page
             </action>
