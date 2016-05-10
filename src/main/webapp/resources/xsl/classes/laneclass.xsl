@@ -52,12 +52,12 @@
 		<div class="class">
 			<div class="yui3-g">
 				<div class="yui3-u-1-4">
-					<div class="date same-height-1">
+					<div class="date">
 						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
 						<xsl:apply-templates select="./lc:event_dates" />
 					</div>
 				</div>
-				<div class="yui3-u-3-4  same-height-1" style="height:200px">
+				<div class="yui3-u-3-4">
 					<div class="details">
 						<xsl:apply-templates select="lc:event_instructors/lc:instructor" />
 						<div>

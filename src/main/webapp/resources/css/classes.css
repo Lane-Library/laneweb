@@ -1,12 +1,33 @@
 .class {
 	margin: 12px 0 60px;
+	position: relative;
+	/* this z-index and the .class .date:before rules related to case 119823 involved with getting
+	   the date box the same height as the class information*/
+	z-index: 1;
 }
 
 .class .date {
-	background-color: #009abb;
 	width: auto;
 	padding: 0 12px;
 	box-sizing: border-box;
+}
+
+.class .date:before {
+    content: " ";
+    background-color: #009abb;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.yui3-u-1-4 .date:before {
+    width: 24.2%;
+}
+
+.yui3-u-1-5 .date:before {
+    width: 19.2%;
 }
 
 .class .month-day, .archive .month-day {

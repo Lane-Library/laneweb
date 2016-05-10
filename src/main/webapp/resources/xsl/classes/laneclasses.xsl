@@ -80,13 +80,12 @@
 		<div class="class">
 			<div class="yui3-g">
 				<div class="yui3-u-1-4">
-					<div class="date same-height-1">
+					<div class="date">
 						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
 						<xsl:apply-templates select="./lc:event_dates" />
 					</div>
 				</div>
 				<div class="yui3-u-3-4">
-					<div class="same-height-1">
 						<xsl:apply-templates select="lc:event_name"/>
 						<div class="yui3-g">
 							<div class="yui3-u-1-4">
@@ -108,7 +107,6 @@
 								<xsl:apply-templates select="lc:event_description"/>
 							</div>
 						</div>
-					</div>
 				</div>
 			</div>
 		</div>
