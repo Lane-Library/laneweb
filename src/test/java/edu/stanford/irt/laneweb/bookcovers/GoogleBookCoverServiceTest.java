@@ -76,7 +76,7 @@ public class GoogleBookCoverServiceTest {
         expect(this.isbnService.getISBNs(isA(List.class))).andReturn(Collections.singletonMap(Integer.valueOf(1),
                 Arrays.asList(new String[] { "9780679732761", "0738531367" })));
         this.request.addHeader("Accept-Encoding", "gzip");
-        this.request.addHeader("User-Agent", "Google-HTTP-Java-Client/1.21.0 (gzip)");
+        this.request.addHeader("User-Agent", "Google-HTTP-Java-Client/1.22.0 (gzip)");
         this.request.setTimeout(20000, 20000);
         expect(this.request.execute()).andReturn(this.response);
         expect(this.response.getContentEncoding()).andReturn("foo");
@@ -120,7 +120,7 @@ public class GoogleBookCoverServiceTest {
         expect(this.isbnService.getISBNs(isA(List.class))).andReturn(Collections.singletonMap(Integer.valueOf(1),
                 Arrays.asList(new String[] { "9780679732761", "0738531367" })));
         this.request.addHeader("Accept-Encoding", "gzip");
-        this.request.addHeader("User-Agent", "Google-HTTP-Java-Client/1.21.0 (gzip)");
+        this.request.addHeader("User-Agent", "Google-HTTP-Java-Client/1.22.0 (gzip)");
         this.request.setTimeout(20000, 20000);
         expect(this.request.execute()).andThrow(new IOException());
         replay(this.isbnService, this.request, this.objectParser, this.response);

@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>12</version>
+        <version>13</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.2.22-SNAPSHOT</version>
@@ -317,13 +317,13 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.6.4</version>
+            <version>1.6.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-easymock</artifactId>
-            <version>1.6.4</version>
+            <version>1.6.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -351,7 +351,7 @@
         <dependency>
         	<groupId>com.google.apis</groupId>
         	<artifactId>google-api-services-books</artifactId>
-        	<version>v1-rev83-1.21.0</version>
+        	<version>v1-rev83-1.22.0</version>
         </dependency>
     </dependencies>
     <build>
