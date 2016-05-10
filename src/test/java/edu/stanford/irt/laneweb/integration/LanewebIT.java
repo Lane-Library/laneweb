@@ -136,6 +136,44 @@ public class LanewebIT {
                     .andExpect(
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", ns)
                                     .exists());
+            // anatomy images
+            this.mockMvc.perform(get("/eresources/search.html?q=anatomy images").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title='E-anatomy']", ns)
+                            .exists());
+            // UpToDate and variants
+            this.mockMvc.perform(get("/eresources/search.html?q=UpToDate").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", ns)
+                            .exists());
+            this.mockMvc.perform(get("/eresources/search.html?q=Up To Date").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", ns)
+                            .exists());
+            this.mockMvc.perform(get("/eresources/search.html?q=Up-To-Date").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", ns)
+                            .exists());
+            // Harrison's
+            this.mockMvc.perform(get("/eresources/search.html?q=Harrison's").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and starts-with(@title,\"Harrison's\")]",
+                                    ns).exists());
+            // Classes
+            this.mockMvc.perform(get("/eresources/search.html?q=classes").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'laneclasses.html')]",
+                                    ns).exists());
+            // EndNote
+            this.mockMvc.perform(get("/eresources/search.html?q=EndNote").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@href,'help/references.html')]", ns)
+                            .exists());
+            // Bates Guide
+            this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title=\"Bates' Guide to the Physical Examination Videos\"]",
+                                    ns).exists());
+            // directions
+            this.mockMvc.perform(get("/eresources/search.html?q=directions").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'hours-directions.html')]",
+                                    ns).exists());
         }
     }
 
