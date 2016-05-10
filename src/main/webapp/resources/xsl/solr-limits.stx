@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- process #solrLimits if facets parameter present to prevent interface 
-	bounce when #solrLimits and popInContent populated via JS -->
+	bounce when #solrLimits populated via JS -->
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
 	xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
 	version="1.0" pass-through="all">
@@ -15,21 +15,5 @@
 			</stx:copy>
 		</stx:if>
 	</stx:template>
-
-    <stx:template match="h:*[contains(@class,'solr popInContent')]">
-        <stx:if test="string-length($facets) > 0">
-            <stx:start-element name="{name(.)}"/>
-                <stx:process-attributes />
-                <stx:attribute name="class" select="concat('solrLimits ', @class)"/>
-                <stx:process-children />
-            <stx:end-element name="{name(.)}"/>
-        </stx:if>
-        <stx:else>
-            <stx:copy>
-                <stx:process-attributes />
-                <stx:process-children />
-            </stx:copy>
-        </stx:else>
-    </stx:template>
 
 </stx:transform>

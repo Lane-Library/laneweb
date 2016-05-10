@@ -18,7 +18,6 @@
                 if (elms.item(i) !== null) {
                     if (el.get('id') === elms.item(i).get('id') && i <= activeEl) {
                         activeEl = i;
-                        elms.item(i).get('parentNode').addClass('active');
                         elms.item(i).addClass('active');
                     } else if (i > activeEl) {
                         elms.item(i).removeClass('active');

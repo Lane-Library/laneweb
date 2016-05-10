@@ -35,48 +35,15 @@
 .inactiveFacet, .inactiveFacet a {
     display: none;
 }
-.popInContent {
-    display: none;
-    position: absolute;
-    top: 55px;
-    left: 216px;
-    width: 762px;
-    overflow: hidden;
-    background-color: #F4F5EF;
-    border: none;
-    padding: 7px 0 7px 10px;
-    white-space: nowrap;
-    box-sizing: border-box;
+.popin {
+    height: 16px;
 }
-.popInContent .popInLabel {
+.popInLabel {
     font-weight: bold;
     padding-right: 25px;
 }
 #spellCheck .popInLabel {
     padding-right: 5px;
-}
-.popInContent.active {
-    display: block;
-}
-.popInContent.hitCountPopIn {
-    border: 1px solid #E6E4DC;
-    top: 55px;
-    width: auto;
-}
-.solr.popInContent {
-    top: -20px;
-    left: 253px;
-    width: 736px;
-    box-shadow: none;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    background-color: #fff;
-    padding-left: 12px;
-    box-sizing: border-box;
-}
-.solrLimits.popInContent {
-    top: 45px;
 }
 #searchResults {
     padding-top: 10px;

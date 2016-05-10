@@ -16,9 +16,6 @@ input,
     height: 0;
     display: none;
 }
-.popInContent.active{
-    border: 0;
-}
 
 
 /* case 92684: hack for firefox printing bug */
