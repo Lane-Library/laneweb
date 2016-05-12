@@ -160,7 +160,7 @@
         <map:match pattern="search-templates.xml" type="wildcard">
             <map:generate type="search-describe"/>
             <map:transform type="search-directory">
-                <map:parameter name="directories" value="{content-base}/search,{content-base}/portals"/>
+                <map:parameter name="directories" value="{content-base}/search,{content-base}/portals,{content-base}/med-history"/>
             </map:transform>
             <map:transform type="file-path"/>
             <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
