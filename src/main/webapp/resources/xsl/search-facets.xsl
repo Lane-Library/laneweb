@@ -25,13 +25,13 @@
     </xsl:template>
     
     <xsl:template match="doc">
-        <xsl:apply-templates select="h:html[not(attribute::id)]"/>
+        <xsl:apply-templates select="h:html[1]"/>
     </xsl:template>
     
     <xsl:template match="processing-instruction()">
         <xsl:choose>
             <xsl:when test=".='searchResults'">
-                <xsl:apply-templates select="/doc/h:html[attribute::id]/h:body/child::node()"/>
+                <xsl:apply-templates select="/doc/h:html[2]/h:body/child::node()"/>
             </xsl:when>
             <xsl:when test=".='search-terms'">
                 <xsl:value-of select="$search-terms"/>

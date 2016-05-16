@@ -3,9 +3,7 @@
     "use strict";
 
     var Model = Y.lane.Model,
-        BASE_PATH = Model.get(Model.BASE_PATH),
-        source = Model.get(Model.URL_ENCODED_SOURCE),
-        query = Model.get(Model.URL_ENCODED_QUERY);
+        BASE_PATH = Model.get(Model.BASE_PATH);
 
     if (Y.one("#tabs-image-search")) {
 
@@ -124,17 +122,6 @@
                 node.addClass('imagedecoHidden');
         });
 
-    }
-
-    if (Y.one("#sourceFilter")) {
-        Y.on("change", function() {
-            var selectedValue = Y.one("#sourceFilter select option:checked")
-                    .get("value"), url = "/search.html?q=" + query + "&source=" + source;
-            if (selectedValue !== "") {
-                url = url + "&rid=" + selectedValue;
-            }
-            document.location.href = url;
-        }, "#sourceFilter select");
     }
 
 })();

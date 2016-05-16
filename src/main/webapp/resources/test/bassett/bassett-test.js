@@ -3,20 +3,90 @@
 var bassettTestCase = new Y.Test.Case({
     name : 'Lane Basset Test Case',
 
-    testAccordeonLink : function() {
-        // Y.all('a').item(0).simulate('click');
+    testSeeAllClick : function() {
+         Y.one('.see-all').simulate('click');
+         Y.Assert.areEqual("/plain/biomed-resources/bassett/raw/bassettsView.html?r=Abdomen", Y.one("#bassettContent span").get("text"));
+         Y.Assert.areEqual("block", Y.one("#anotherItem").getStyle("display"));
     },
 
-    testImageLink : function() {
-        // Y.one('#bassettContent').all('a').item(2).simulate('click');
+    testHideClick : function() {
+         Y.one('.see-all').simulate('click');
+         var another = Y.one("#anotherItem");
+         Y.Assert.areEqual("none", another.getStyle("display"));
+    },
+
+    testSurlineSubRegion : function() {
+        var li = Y.all('#bassett-menu li').item(1);
+        var i = li.one("i");
+        Y.Assert.isFalse(li.hasClass("enabled"));
+        Y.Assert.isTrue(i.hasClass("fa-circle-o"));
+        Y.Assert.isFalse(i.hasClass("fa-check-circle"));
+        li.simulate('click');
+        Y.Assert.isTrue(li.hasClass("enabled"));
+        Y.Assert.isTrue(i.hasClass("fa-check-circle"));
+        Y.Assert.isFalse(i.hasClass("fa-circle-o"));
+    },
+    
+    testFoo: function() {
+        Y.all('#bassett-menu a').item(2).simulate("click");
+        Y.Assert.areEqual("/plain/biomed-resources/bassett/raw/bassettsView.html?r=Abdomen--Adrenal+Gland", Y.one("#bassettContent span").get("text"));
     },
 
     testDiagramLink : function() {
-        // Y.one('#bassettContent').all('a').item(1).simulate('click');
+        Y.one('#diagram-choice').simulate('click');
+        Y.Assert.areEqual("/plain/biomed-resources/bassett/raw/bassettsView.html?r=Abdomen--Central%20Nervous%20System&t=diagram&page=1&t=diagram", Y.one("#bassettContent span").get("text"));
     },
 
     testPhotoLink : function() {
-        // Y.one('#bassettContent').all('a').item(0).simulate('click');
+        Y.one('#photo-choice').simulate('click');
+        Y.Assert.areEqual("/plain/biomed-resources/bassett/raw/bassettsView.html?r=Abdomen--Central%20Nervous%20System&page=1", Y.one("#bassettContent span").get("text"));
+    },
+    
+    testSubmitRemovesPages: function() {
+        Y.one("form").simulate("submit");
+        Y.Assert.isNull(Y.one("input[name=pages]"));
+    },
+    
+    testPageValueNotNumber: function() {
+        Y.one('.see-all').simulate('click');
+        var form = Y.one("form"), prevented;
+        Y.one('.bassett-error').setStyle('display', 'none');
+        form.one("input[name=page]").set("value", "foo");
+        form.on("submit", function(event) {
+            prevented = event.prevented;
+        });
+        Y.one("form").simulate("submit");
+        Y.Assert.isFalse(!prevented);
+        Y.Assert.areEqual("block", Y.one(".bassett-error").getStyle("display"));
+        Y.Assert.isNotNull(Y.one("input[name=pages]"));
+    },
+    
+    testPageLessThanOne: function() {
+        Y.one('.see-all').simulate('click');
+        var form = Y.one("form"), prevented;
+        Y.one('.bassett-error').setStyle('display', 'none');
+        form.one("input[name=page]").set("value", "0");
+        form.on("submit", function(event) {
+            prevented = event.prevented;
+        });
+        Y.one("form").simulate("submit");
+        Y.Assert.isFalse(!prevented);
+        Y.Assert.areEqual("block", Y.one(".bassett-error").getStyle("display"));
+        Y.Assert.isNotNull(Y.one("input[name=pages]"));
+    },
+    
+    testPageMoreThanPages: function() {
+        Y.one('.see-all').simulate('click');
+        var form = Y.one("form"), prevented;
+        Y.one('.bassett-error').setStyle('display', 'none');
+        form.one("input[name=page]").set("value", "10");
+        form.on("submit", function(event) {
+            prevented = event.prevented;
+        });
+        Y.one("form").simulate("submit");
+        Y.Assert.isFalse(!prevented);
+        Y.Assert.areEqual("block", Y.one(".bassett-error").getStyle("display"));
+        Y.Assert.isNotNull(Y.one("input[name=pages]"));
     }
 
 });
