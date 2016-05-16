@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-05-16" version="3.2.22" description="3.2.22 bug fix release">
+            <action date="2016-05-10" dev="ceyates" issue="119823" type="update">
+                increase height for the blue boxes..
+            </action>
+            <action date="2016-05-09" dev="ceyates" issue="119333" type="update">
+                refactor popin code so it works the same everywhere
+            </action>
+        </release>
         <release date="2016-05-09" version="3.2.21" description="3.2.21 bug fix release">
             <action date="2016-05-04" dev="ceyates" issue="120063" type="update">
                 don't log missing /rss/mesh|browse SitemapExceptions
