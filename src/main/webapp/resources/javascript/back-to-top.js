@@ -1,4 +1,4 @@
-(function() {
+YUI().use("anim", function(Y) {
 
     "use strict";
 
@@ -64,4 +64,4 @@
     // append the backToTop node
     Y.one("body").append(backToTop);
 
-})();
+});
