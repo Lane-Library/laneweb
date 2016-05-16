@@ -126,15 +126,4 @@
 
     }
 
-    if (Y.one("#sourceFilter")) {
-        Y.on("change", function() {
-            var selectedValue = Y.one("#sourceFilter select option:checked")
-                    .get("value"), url = "/search.html?q=" + query + "&source=" + source;
-            if (selectedValue !== "") {
-                url = url + "&rid=" + selectedValue;
-            }
-            document.location.href = url;
-        }, "#sourceFilter select");
-    }
-
 })();
