@@ -27,10 +27,8 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
             inputSource.setSystemId(source.getURI());
             inputSource.setByteStream(source.getInputStream());
             parse(inputSource);
-        } catch (IOException e) {
-            throw new LanewebException(e);
-        } catch (SAXException e) {
-            throw new LanewebException(e);
+        } catch (IOException | SAXException e) {
+            throw new LanewebException(source.getURI(), e);
         }
     }
 }
