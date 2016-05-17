@@ -126,7 +126,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.1</version>
+            <version>3.0.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>search-lane</artifactId>
@@ -137,7 +137,7 @@
         <dependency>
             <artifactId>search-spring</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.4</version>
+            <version>3.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
