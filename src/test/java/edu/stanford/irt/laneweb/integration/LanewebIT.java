@@ -174,6 +174,21 @@ public class LanewebIT {
                     .andExpect(
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'hours-directions.html')]",
                                     ns).exists());
+            // Access Medicine
+            this.mockMvc.perform(get("/eresources/search.html?q=Access Medicine").servletPath("/eresources/search.html"))
+            .andExpect(
+                    xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                            ns).exists());
+            // AccessMedicine
+            this.mockMvc.perform(get("/eresources/search.html?q=AccessMedicine").servletPath("/eresources/search.html"))
+            .andExpect(
+                    xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                            ns).exists());
+            // accessmedicine
+            this.mockMvc.perform(get("/eresources/search.html?q=accessmedicine").servletPath("/eresources/search.html"))
+            .andExpect(
+                    xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                            ns).exists());
         }
     }
 

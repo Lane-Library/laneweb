@@ -102,7 +102,7 @@
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
                         <map:parameter name="timeout" value="0"/>
-                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,su_engineering_faculty,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,su_engineering_labs,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,highwire,clinicaltrials_all,proteome,cap,wiley_0,pubmed,stanford_clinicaltrials,lane,metadb,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,bioware,ubcbioinfolinks,crosssearch1"/>
+                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,su_engineering_faculty,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,su_engineering_labs,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,highwire,clinicaltrials_all,proteome,cap,wiley_0,pubmed,stanford_clinicaltrials,lane,metadb,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,ubcbioinfolinks,crosssearch1"/>
                     </map:generate>
                     <map:generate type="file" src="cocoon://content/cached/search/bioresearch-all.html"/>
                 </map:aggregate>

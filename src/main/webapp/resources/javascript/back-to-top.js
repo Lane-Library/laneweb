@@ -1,4 +1,5 @@
-YUI().use("anim", function(Y) {
+// using YUI().use here so this can be used with the history template
+YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen", function(Y) {
 
     "use strict";
 
