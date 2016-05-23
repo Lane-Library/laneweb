@@ -199,11 +199,6 @@
             <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
             <map:serialize type="xml"/>
         </map:match>
-		<map:match pattern="classes-consult/laneclasses.html" type="wildcard">
-            <map:generate type="html" src="{content-base}/classes-consult/laneclasses.html"/>
-            <map:transform type="xinclude"/>
-            <map:serialize type="xml"/>
-        </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
         <!-- secure/login.html if the user doesn't have a javascript -->
