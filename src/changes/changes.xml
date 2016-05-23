@@ -7,6 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-05-23" version="3.2.23" description="3.2.23 bug fix release"/>
         <release date="2016-05-16" version="3.2.22" description="3.2.22 bug fix release">
             <action date="2016-05-10" dev="ceyates" issue="119823" type="update">
                 increase height for the blue boxes..
