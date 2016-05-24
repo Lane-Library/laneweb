@@ -26,7 +26,7 @@
                     <xsl:value-of select="$userid"/>
                 </xsl:when>
                 <xsl:otherwise>
-                		<xsl:apply-templates select="child::node()"/>
+                        <xsl:apply-templates select="child::node()"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>

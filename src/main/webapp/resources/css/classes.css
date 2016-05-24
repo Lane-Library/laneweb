@@ -1,15 +1,15 @@
 .class {
-	margin: 12px 0 60px;
-	position: relative;
-	/* this z-index and the .class .date:before rules related to case 119823 involved with getting
-	   the date box the same height as the class information*/
-	z-index: 1;
+    margin: 12px 0 60px;
+    position: relative;
+    /* this z-index and the .class .date:before rules related to case 119823 involved with getting
+       the date box the same height as the class information*/
+    z-index: 1;
 }
 
 .class .date {
-	width: auto;
-	padding: 0 12px;
-	box-sizing: border-box;
+    width: auto;
+    padding: 0 12px;
+    box-sizing: border-box;
 }
 
 .class .date:before {
@@ -31,73 +31,73 @@
 }
 
 .class .month-day, .archive .month-day {
-	padding-top: 6px;
-	margin-bottom: 0px;
+    padding-top: 6px;
+    margin-bottom: 0px;
 }
 
 .class .year, .archive .year {
-	font-size: 24px;
-	font-weight: 700;
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .class h3 a, .archive h3 a {
-	color: #8c1515;
+    color: #8c1515;
 }
 
 .class .time {
-	margin: 12px 0;
+    margin: 12px 0;
 }
 
 .class-detail {
-	padding-top: 10px;
+    padding-top: 10px;
 }
 
 .class .seats {
-	padding-top: 6px;
+    padding-top: 6px;
 }
 
 .class-description h3, .class-description h4, .handout-description h3, .handout-description h4 {
-	all: inherit;
+    all: inherit;
 }
 
 .class-description ul, .handout-description ul{
-	padding-left: 20px;
+    padding-left: 20px;
 }
 
 .class-description li, .handout-description li{
-	list-style-type: disc;
-	list-style-position: outside;
-	border-bottom: none;
-	padding: 0px;
+    list-style-type: disc;
+    list-style-position: outside;
+    border-bottom: none;
+    padding: 0px;
 }
 
 .instructor {
-	margin-top: 10px;
-	margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .youtube-class, .youtube-class .youtube-thumbnail img {
-	width: 200px;
+    width: 200px;
 }
 
 .youtube-class {
-	text-align: center;
+    text-align: center;
 }
 
 .archive div {
-	display: inline-block;
-	vertical-align: middle;
-	margin-bottom: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 12px;
 }
 
 .archive .date {
-	background-color: #ccc;
-	padding: 6px 12px;
-	margin-right: 9px;
-	box-sizing: border-box;
-	width: 80px;
+    background-color: #ccc;
+    padding: 6px 12px;
+    margin-right: 9px;
+    box-sizing: border-box;
+    width: 80px;
 }
 
 .archive .details {
-	width: 407px;
+    width: 407px;
 }
