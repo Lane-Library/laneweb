@@ -29,8 +29,7 @@ public class SuggestionController {
     private static final Map<String, List<String>> EMPTY_SUGGESTIONS = Collections.singletonMap("suggest",
             Collections.emptyList());
 
-    private static final Pattern ER_PATTERN = Pattern
-            .compile("^(Book|Journal|Bassett)$");
+    private static final Pattern ER_PATTERN = Pattern.compile("^(Book|Journal|Bassett)$");
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionController.class);
 
@@ -56,7 +55,8 @@ public class SuggestionController {
 
     @RequestMapping(value = "/apps/suggest/getSuggestionList")
     @ResponseBody
-    public List<String> getSuggestionList(@RequestParam final String q, @RequestParam(required = false) final String l) {
+    public List<String> getSuggestionList(@RequestParam final String q,
+            @RequestParam(required = false) final String l) {
         String query = q.trim();
         Set<Suggestion> suggestions = new TreeSet<>(new SuggestionComparator(query));
         suggestions.addAll(internalGetSuggestions(query, l));
