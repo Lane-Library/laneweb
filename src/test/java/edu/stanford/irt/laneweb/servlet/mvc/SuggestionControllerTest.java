@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -16,12 +17,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestionControllerTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private SuggestionController controller;
 
@@ -77,8 +83,8 @@ public class SuggestionControllerTest {
         Suggestion suggestion = new Suggestion("1", "1");
         Collection<Suggestion> collection = new ArrayList<Suggestion>();
         collection.add(suggestion);
-        expect(this.eresource.getSuggestionsForTerm("Bassett", "venous thrombosis")).andReturn(
-                Collections.singleton(suggestion));
+        expect(this.eresource.getSuggestionsForTerm("Bassett", "venous thrombosis"))
+                .andReturn(Collections.singleton(suggestion));
         replay(this.eresource, this.mesh);
         Map<String, List<String>> suggestions = this.controller.getSuggestions("venous thrombosis", "Bassett");
         assertTrue(suggestions.get("suggest").contains(suggestion.getSuggestionTitle()));
@@ -137,7 +143,19 @@ public class SuggestionControllerTest {
 
     @Test
     public void testMaxQuerySize() {
-        assertEquals(0, this.controller.getSuggestions("123456789012345678901234567890123", "").get("suggest").size());
+        String ninetyNineChars = "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789";
+        expect(this.eresource.getSuggestionsForTerm(ninetyNineChars)).andReturn(Collections.emptyList());
+        replay(this.eresource);
+        this.controller.getSuggestions(ninetyNineChars, null);
+        verify(this.eresource);
+        reset(this.eresource);
+        String oneOone = ninetyNineChars + "01";
+        expect(this.eresource.getSuggestionsForTerm(oneOone)).andReturn(Collections.emptyList());
+        replay(this.eresource);
+        this.thrown.expect(AssertionError.class);
+        this.thrown.expectMessage("expected: 1, actual: 0");
+        this.controller.getSuggestions(oneOone, null);
+        verify(this.eresource);
     }
 
     @Test

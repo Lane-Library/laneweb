@@ -33,7 +33,7 @@ public class SuggestionController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionController.class);
 
-    private static final int MAX_QUERY_LENGTH = 32;
+    private static final int MAX_QUERY_LENGTH = 100;
 
     private static final int MIN_QUERY_LENGTH = 3;
 
@@ -98,7 +98,7 @@ public class SuggestionController {
         Collection<Suggestion> suggestions = null;
         int length = query.length();
         if (length >= MIN_QUERY_LENGTH && length <= MAX_QUERY_LENGTH) {
-            // queries > 32 characters are liable to cause SQLExceptions.
+            // queries > 100 characters are likely to produce zero results
             // queries < 3 characters, will throw IllegalArgumentException
             if (limit == null) {
                 suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
