@@ -50,6 +50,7 @@
 }
 .picoFields {
     background-color: white;
+    height: 46px;
     margin-bottom: 12px;
     width: 712px;
     display: none;
