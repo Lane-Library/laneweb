@@ -107,8 +107,8 @@
                                 </select>
                                 <input name="q" id="searchTerms" type="text" />
                                 <span class="searchReset" title="Clear Search"><i class="fa fa-times-circle fa-lg"/></span>
+                                <button class="search-button"><i class="fa fa-search"></i></button>
                             </div>
-                            <input id="searchSubmit" type="submit" value="Search" />
                         </fieldset>
                     </form>
                     <img class="search-indicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
