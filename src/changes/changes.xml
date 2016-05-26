@@ -7,12 +7,18 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2016-05-2X" version="3.2.24" description="3.2.24 bug fix release">
+        <release date="2016-05-30" version="3.2.24" description="3.2.24 bug fix release">
+            <action date="2016-05-26" dev="ceyates" issue="121570" type="update">
+                upgrade to search-spring-3.0.6 and search-core-3.1.1
+            </action>
             <action date="2016-05-24" dev="ryanmax" issue="121446" type="update">
                 increase max suggestion query length
             </action>
             <action date="2016-05-25" dev="ceyates" issue="121372" type="update">
                 change the search button to the new mag glass from prototype
+            </action>
+            <action date="2016-05-26" dev="ceyates" issue="121034" type="add">
+                create a permanent cache for google book images
             </action>
         </release>
         <release date="2016-05-23" version="3.2.23" description="3.2.23 bug fix release"/>
