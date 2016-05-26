@@ -21,7 +21,6 @@
     border: 0 none;
     height: 46px;
     box-sizing: border-box;
-    line-height: 46px;
     margin-left: 8px;
     font-size: 14px;
 }
@@ -63,14 +62,13 @@
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance: none;
     -moz-appearance: none;
-    margin: 10px 0;
+    margin: 13px 0;
     width: 178px;
     text-align: center;
     border-right: 1px rgb(220,220,220) solid;
     border-radius: 0;
     box-sizing: border-box;
     font-size: 14px;
-    line-height: 26px;
 }
 .picoFields #clinicalO {
     border-right: none;
