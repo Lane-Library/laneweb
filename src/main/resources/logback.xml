@@ -16,7 +16,6 @@
         </triggeringPolicy>
     </appender>
     
-    
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%-5p %c{1} - %m%n</pattern>
@@ -57,10 +56,6 @@
     
     <logger name="querymap" level="info" additivity="false">
         <appender-ref ref="querymap"/>
-    </logger>
-    
-    <logger name="edu.stanford.irt.bookcovers" level="debug" additivity="false">
-        <appender-ref ref="${edu.stanford.irt.laneweb.log.appender}"/>
     </logger>
     
     <root level="${edu.stanford.irt.laneweb.log.level}">
