@@ -16,11 +16,11 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
 
-    private Collection<String> requiredPublicationTypes = new ArrayList<>();
+    private Collection<String> prioritizedPublicationTypes = new ArrayList<>();
 
-    public FacetComparator(final Collection<String> reqPublicationTypes) {
-        for (String pt : reqPublicationTypes) {
-            this.requiredPublicationTypes.add(PUBLICATION_TYPE + pt);
+    public FacetComparator(final Collection<String> priorityPublicationTypes) {
+        for (String pt : priorityPublicationTypes) {
+            this.prioritizedPublicationTypes.add(PUBLICATION_TYPE + pt);
         }
     }
 
@@ -35,11 +35,13 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
         if (facet1Name.startsWith(LAST_X_YEARS_PREFIX) && facet2Name.startsWith(LAST_X_YEARS_PREFIX)) {
             return facet2Name.compareTo(facet1Name);
         }
-        // case 110125: Have article type display 3 items at all times (even if results are 0)
-        if (this.requiredPublicationTypes.contains(facet1Name) && !this.requiredPublicationTypes.contains(facet2Name)) {
+        // cases 110125 and 121834: give some Article Types display priority
+        if (this.prioritizedPublicationTypes.contains(facet1Name)
+                && !this.prioritizedPublicationTypes.contains(facet2Name)) {
             return -1;
         }
-        if (this.requiredPublicationTypes.contains(facet2Name) && !this.requiredPublicationTypes.contains(facet1Name)) {
+        if (this.prioritizedPublicationTypes.contains(facet2Name)
+                && !this.prioritizedPublicationTypes.contains(facet1Name)) {
             return 1;
         }
         int countDiff = (int) (facet2.getCount() - facet1.getCount());

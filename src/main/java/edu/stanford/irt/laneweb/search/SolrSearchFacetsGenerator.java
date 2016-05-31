@@ -51,9 +51,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private int pageNumber = 0;
 
-    private String query;
+    private Collection<String> prioritizedPublicationTypes;
 
-    private Collection<String> requiredPublicationTypes;
+    private String query;
 
     private SolrService service;
 
@@ -88,9 +88,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, EMPTY);
     }
 
-    public void setRequiredPublicationTypes(final Collection<String> requiredPublicationTypes) {
-        this.requiredPublicationTypes = requiredPublicationTypes;
-        this.comparator = new FacetComparator(this.requiredPublicationTypes);
+    public void setPrioritizedPublicationTypes(final Collection<String> publicationTypes) {
+        this.prioritizedPublicationTypes = publicationTypes;
+        this.comparator = new FacetComparator(this.prioritizedPublicationTypes);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             // search mode
             fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
             facetsMap = processFacets(fps);
-            maybeAddRequiredPublicationTypes(facetsMap);
+            maybeRequestMorePublicationTypes(facetsMap);
             maybeAddActiveFacets(facetsMap);
             maybeRequestMoreMesh(facetsMap);
             marshal(sortFacets(facetsMap), xmlConsumer);
@@ -143,34 +143,6 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     }
 
     /**
-     * case 110125: Have article type display 3 items at all times (even if results are 0)
-     *
-     * @param facetsMap
-     * @return augmented facetsMap
-     */
-    private Map<String, Collection<Facet>> maybeAddRequiredPublicationTypes(
-            final Map<String, Collection<Facet>> facetsMap) {
-        Collection<Facet> facetList = facetsMap.get(PUBLICATION_TYPE);
-        if (null == facetList) {
-            facetList = new ArrayList<>();
-        }
-        long required = facetList.stream().filter(s -> this.requiredPublicationTypes.contains(s.getValue())).count();
-        if (required < this.requiredPublicationTypes.size()) {
-            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 0,
-                    parseSort());
-            Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
-            facetList = publicationTypeFacetMap.get(PUBLICATION_TYPE);
-            if (null != facetList) {
-                Collection<Facet> moreTypes = facetList.stream()
-                        .filter(s -> this.requiredPublicationTypes.contains(s.getValue())).collect(Collectors.toList());
-                facetList.addAll(moreTypes);
-            }
-            facetsMap.put(PUBLICATION_TYPE, facetList);
-        }
-        return facetsMap;
-    }
-
-    /**
      * case 110340 don't show MeSH checktags in search (unless they are active)
      *
      * @param facetsMap
@@ -196,6 +168,35 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
                         .collect(Collectors.toList());
                 facetsMap.put(MESH, moreMesh);
             }
+        }
+        return facetsMap;
+    }
+
+    /**
+     * cases 110125 and 121834: give some Article Types display priority
+     *
+     * @param facetsMap
+     * @return augmented facetsMap
+     */
+    private Map<String, Collection<Facet>> maybeRequestMorePublicationTypes(
+            final Map<String, Collection<Facet>> facetsMap) {
+        Collection<Facet> facetList = facetsMap.get(PUBLICATION_TYPE);
+        if (null == facetList) {
+            facetList = new ArrayList<>();
+        }
+        long count = facetList.stream().filter(s -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
+        if (count < this.prioritizedPublicationTypes.size()) {
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 1,
+                    parseSort());
+            Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
+            facetList = publicationTypeFacetMap.get(PUBLICATION_TYPE);
+            if (null != facetList) {
+                Collection<Facet> moreTypes = facetList.stream()
+                        .filter(s -> this.prioritizedPublicationTypes.contains(s.getValue()))
+                        .collect(Collectors.toList());
+                facetList.addAll(moreTypes);
+            }
+            facetsMap.put(PUBLICATION_TYPE, facetList);
         }
         return facetsMap;
     }

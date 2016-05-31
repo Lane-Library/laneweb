@@ -65,7 +65,7 @@ public class SolrSearchFacetsGeneratorTest {
         this.generator.setFacetsToShowBrowse(10);
         this.generator.setFacetsToShowSearch(2);
         this.generator.setMeshToIgnoreInSearch(Arrays.asList("MeshSkip1", "MeshSkip2"));
-        this.generator.setRequiredPublicationTypes(Arrays.asList("Required1", "Required2"));
+        this.generator.setPrioritizedPublicationTypes(Arrays.asList("Required1", "Required2"));
         this.facetpage = createMock(FacetPage.class);
         this.pageFacetQueries = createMock(Page.class);
         this.facetQueryEntry = createMock(FacetQueryEntry.class);
@@ -226,7 +226,7 @@ public class SolrSearchFacetsGeneratorTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public final void testDoGenerateXMLConsumerSearchWithAddRequiredPublicationTypes() throws Exception {
+    public final void testDoGenerateXMLConsumerSearchWithAddPrioritizedPublicationTypes() throws Exception {
         Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
         Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
         Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
@@ -264,7 +264,7 @@ public class SolrSearchFacetsGeneratorTest {
         expect(it2.hasNext()).andReturn(false);
         expect(it1.hasNext()).andReturn(false);
         //
-        expect(this.service.facetByField("query", "", "publicationType", 0, 1000, 0, FacetSort.COUNT))
+        expect(this.service.facetByField("query", "", "publicationType", 0, 1000, 1, FacetSort.COUNT))
                 .andReturn(this.facetpage);
         expect(this.facetpage.getFacetQueryResult()).andReturn(this.pageFacetQueries);
         expect(this.pageFacetQueries.iterator()).andReturn(it0);

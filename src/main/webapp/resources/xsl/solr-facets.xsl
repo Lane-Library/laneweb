@@ -23,9 +23,6 @@
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="4"/>
     <xsl:variable name="today" select="number(format-dateTime(current-dateTime(),'[Y,4][M,2][D,2]'))"/>
-    <xsl:variable name="requiredPubTypes">
-        <xsl:value-of select="/linked-hash-map/entry[1]/sorted-set/comparator/requiredPublicationTypes/string"/>
-    </xsl:variable>
     
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
@@ -64,12 +61,12 @@
         <xsl:param name="id"/>
         <xsl:param name="label"/>
         <xsl:variable name="entry" select="/linked-hash-map/entry/string[. = $id]/.."/>
-        <xsl:if test="$entry">
+        <xsl:if test="$entry//facet">
 	        <xsl:choose>
 	            <xsl:when test="$search-mode">
 		            <li class="solrFacet facetHeader">
 						<xsl:copy-of select="$label"/>
-						<xsl:if test="count($entry/sorted-set/facet[count > 0 or (fieldName = 'publicationType' and contains($requiredPubTypes,value))]) > $values-per-facet">
+						<xsl:if test="count($entry/sorted-set/facet[count > 0]) > $values-per-facet">
 						          <span class="seeAll"><a rel="lightbox disableBackground" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
 						</xsl:if>
 		            </li>

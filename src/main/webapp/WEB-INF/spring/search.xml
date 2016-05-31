@@ -101,7 +101,7 @@
 		        <value>Young Adult</value>
             </list>
         </property>
-        <property name="requiredPublicationTypes">
+        <property name="prioritizedPublicationTypes">
             <list>
                 <value>Clinical Trial</value>
                 <value>Randomized Controlled Trial</value>
