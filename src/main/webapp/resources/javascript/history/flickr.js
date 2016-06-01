@@ -60,29 +60,44 @@
                 };
                 request.send();
             }
+        },
+
+        imagesComplete = function() {
+            var complete = true;
+            if (links.length != images.length) {
+                complete = false;
+            } else {
+                images.forEach(function(image) {
+                    if (!image.complete) {
+                        complete = false;
+                    }
+                });
+            }
+            return complete;
+        },
+
+        handleImagesComplete = function() {
+            factor = photoService.getFactor(images);
+            for (i = 0; i < 6; i++) {
+                images[i].parentNode.style.width = Math.round(images[i].width * factor) + "px";
+            }
+            flickrPhotos.style.opacity = 1;
+            photoService.getPhotos();
         };
 
     [].forEach.call(flickrPhotos.querySelectorAll("img"), function(image) {
         images.push(image);
         if (image.complete) {
             photoService.resize(image);
+            if (imagesComplete()) {
+                handleImagesComplete();
+            }
         } else {
             image.onload = function() {
-                var i, factor, complete = true;
+                var i, factor;
                 photoService.resize(this);
-                for (i = 0; i < images.length; i++) {
-                    if (!images[i].complete) {
-                        complete = false;
-                        break;
-                    }
-                }
-                if (complete) {
-                    factor = photoService.getFactor(images);
-                    for (i = 0; i < 6; i++) {
-                        images[i].parentNode.style.width = Math.round(images[i].width * factor) + "px";
-                    }
-                    flickrPhotos.style.opacity = 1;
-                    photoService.getPhotos();
+                if (imagesComplete()) {
+                    handleImagesComplete();
                 }
             };
         }
