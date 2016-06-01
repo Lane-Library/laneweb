@@ -100,7 +100,7 @@
         <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.11</version>
+            <version>1.9.22</version>
         </dependency>
         <dependency>
             <artifactId>querymap</artifactId>
