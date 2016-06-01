@@ -779,7 +779,9 @@ http://lane.stanford.edu/samples/button-css.html
 .back-to-top .fa {
     color: rgb(238, 238, 238);
 }
-
+.flickr-carousel {
+    position: relative;
+}
 .flickr-photos {
     white-space: nowrap;
     overflow: hidden;
@@ -802,4 +804,9 @@ http://lane.stanford.edu/samples/button-css.html
 .flickr-photos a:after {
     content: "";
     margin-right: -100%;
+}
+.flickr-carousel-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
