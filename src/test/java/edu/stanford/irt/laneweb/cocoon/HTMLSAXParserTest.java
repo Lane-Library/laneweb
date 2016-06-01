@@ -54,8 +54,8 @@ public class HTMLSAXParserTest {
         expect(this.source.getInputStream()).andReturn(this.inputStream);
         this.xmlConsumer.setDocumentLocator(isA(Locator.class));
         this.xmlConsumer.startDocument();
-        this.xmlConsumer.startElement(eq(""), eq("HTML"), eq("HTML"), isA(Attributes.class));
-        this.xmlConsumer.endElement("", "HTML", "HTML");
+        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("HTML"), eq("HTML"), isA(Attributes.class));
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "HTML", "HTML");
         this.xmlConsumer.endDocument();
         replay(this.xmlConsumer, this.source, this.lexicalHandler);
         this.parser.parse(this.source, this.xmlConsumer);
