@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-06-06" version="3.2.25" description="3.2.25 bug fix release">
+            <action date="2016-06-01" dev="ceyates" issue="121937" type="update">
+                update to nekohtml-1.9.22 and work around its empty namespace problem
+            </action>
+            <action date="2016-06-01" dev="ceyates" issue="121913" type="add">
+                add button link to flickr carousel to go to the collection home page
+            </action>
+            <action date="2016-06-01" dev="ceyates" issue="121912" type="fix">
+                flickr carousel images sometimes fail to load when using browser back button
+            </action>
+            <action date="2016-05-31" dev="ryanmax" issue="121834" type="update">
+                hide required publicationTypes when they have zero results
+            </action>
+            <action date="2016-06-01" dev="ryanmax" issue="121687" type="add">
+                add toggle to show more authors when lots of authors present
+            </action>
+        </release>
         <release date="2016-05-30" version="3.2.24" description="3.2.24 bug fix release">
             <action date="2016-05-26" dev="ceyates" issue="121570" type="update">
                 upgrade to search-spring-3.0.6 and search-core-3.1.1
