@@ -316,7 +316,14 @@
 
     <xsl:template match="s:pub-author">
         <div>
-            <xsl:value-of select="."/>
+            <xsl:choose>
+                <xsl:when test="string-length(.) > 100">
+                    <xsl:value-of select="substring(.,1,100)"/>
+                    <a class="authorsTrigger no-bookmarking" href="#"> ... show all authors</a>
+                    <span class="authors-hide"><xsl:value-of select="substring(.,101)"/></span>
+                </xsl:when>
+                <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+            </xsl:choose>
         </div>
     </xsl:template>
 

@@ -519,6 +519,7 @@
                                 <include>solr-pagination-min.js</include>
                                 <include>bookcovers-min.js</include>
                                 <include>viewport-min.js</include>
+                                <include>authors-toggle-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
