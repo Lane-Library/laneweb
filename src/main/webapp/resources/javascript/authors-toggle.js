@@ -9,7 +9,7 @@
 
             event.preventDefault();
             node.set('text','');
-            parent.set('text',parent.get('text') + parent.one('.authors-hide').get('text'));
+            parent.set('text',parent.get('text'));
         }, "#searchResults", ".authorsTrigger");
     };
 
