@@ -64,7 +64,7 @@
 
         imagesComplete = function() {
             var complete = true;
-            if (links.length != images.length) {
+            if (links.length !== images.length) {
                 complete = false;
             } else {
                 images.forEach(function(image) {
@@ -77,7 +77,7 @@
         },
 
         handleImagesComplete = function() {
-            factor = photoService.getFactor(images);
+            var factor = photoService.getFactor(images);
             for (i = 0; i < 6; i++) {
                 images[i].parentNode.style.width = Math.round(images[i].width * factor) + "px";
             }
@@ -94,7 +94,6 @@
             }
         } else {
             image.onload = function() {
-                var i, factor;
                 photoService.resize(this);
                 if (imagesComplete()) {
                     handleImagesComplete();

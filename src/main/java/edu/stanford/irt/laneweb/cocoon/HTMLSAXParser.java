@@ -25,7 +25,7 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
         @Override
         public void endElement(final String uri, final String localName, final String qName) throws SAXException {
             String ns = uri;
-            if (uri == null || "".equals(uri)) {
+            if ("".equals(uri)) {
                 ns = "http://www.w3.org/1999/xhtml";
             }
             super.endElement(ns, localName, qName);
@@ -35,7 +35,7 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
         public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
                 throws SAXException {
             String ns = uri;
-            if (uri == null || "".equals(uri)) {
+            if ("".equals(uri)) {
                 ns = "http://www.w3.org/1999/xhtml";
             }
             super.startElement(ns, localName, qName, atts);

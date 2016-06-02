@@ -358,6 +358,12 @@
             <artifactId>bookcovers</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>

@@ -1,26 +1,26 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
-import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 import edu.stanford.irt.cocoon.source.Source;
-import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.TestXMLConsumer;
 
 public class HTMLSAXParserTest {
 
@@ -34,17 +34,20 @@ public class HTMLSAXParserTest {
 
     private Source source;
 
-    private XMLConsumer xmlConsumer;
+    private TestXMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        // TODO: set up with the features/properties we actually use
-        this.configuration = new NekoHTMLConfiguration(Collections.emptyMap(),
-                Collections.emptyMap());
+        Map<String, String> props = new HashMap<>();
+        props.put("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
+        props.put("http://cyberneko.org/html/properties/names/elems", "lower");
+        props.put("http://cyberneko.org/html/properties/namespaces-uri", "http://www.w3.org/1999/xhtml");
+        this.configuration = new NekoHTMLConfiguration(props,
+                Collections.singletonMap("http://cyberneko.org/html/features/insert-namespaces", Boolean.TRUE));
         this.parser = new HTMLSAXParser(this.configuration);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = new TestXMLConsumer();
         this.source = createMock(Source.class);
-        this.inputStream = new ByteArrayInputStream("<html/>".getBytes());
+        this.inputStream = new ByteArrayInputStream("<html><title>foo<table><td>bar".getBytes());
         this.lexicalHandler = createMock(LexicalHandler.class);
     }
 
@@ -52,13 +55,11 @@ public class HTMLSAXParserTest {
     public void testParseSourceXMLConsumer() throws SAXException, IOException {
         expect(this.source.getURI()).andReturn("uri");
         expect(this.source.getInputStream()).andReturn(this.inputStream);
-        this.xmlConsumer.setDocumentLocator(isA(Locator.class));
-        this.xmlConsumer.startDocument();
-        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("HTML"), eq("HTML"), isA(Attributes.class));
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "HTML", "HTML");
-        this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.source, this.lexicalHandler);
+        replay(this.source, this.lexicalHandler);
         this.parser.parse(this.source, this.xmlConsumer);
-        verify(this.xmlConsumer, this.source, this.lexicalHandler);
+        assertTrue(equalToIgnoringWhiteSpace(this.xmlConsumer.getExpectedResult(this, "html.xml"))
+                .matches(this.xmlConsumer.getStringValue()));
+        System.out.println(this.xmlConsumer.getStringValue());
+        verify(this.source, this.lexicalHandler);
     }
 }
