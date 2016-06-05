@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,9 @@ public class ContentResultConversionStrategy {
         for (Result engine : engines) {
             processEngine(engine, resultMap, queryTermPattern);
         }
-        return new ArrayList<>(resultMap.values());
+        List<SearchResult> results = new ArrayList<>(resultMap.values());
+        Collections.sort(results);
+        return results;
     }
 
     private void processEngine(final Result engine,

@@ -9,7 +9,6 @@ import java.util.StringTokenizer;
 
 import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
@@ -76,17 +75,12 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
     protected PagingSearchResultList doSearch(final String query) {
         List<SearchResult> results = null;
         if (query != null && !query.isEmpty()) {
-            results = getSearchResults(query);
-            Collections.sort(results);
+            results = this.conversionStrategy.convertResult(doMetaSearch(query));
         } else {
             results = Collections.emptyList();
         }
         PagingData pagingData = new PagingData(results, this.page, "q=" + this.urlEncodedQuery);
         return new PagingSearchResultList(results, pagingData, query);
-    }
-
-    protected List<SearchResult> getSearchResults(final String query) {
-        return this.conversionStrategy.convertResult(doMetaSearch(query));
     }
 
     private Result doMetaSearch(final String query) {
@@ -98,12 +92,6 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
                 time = DEFAULT_TIMEOUT;
             }
         }
-        Result result = null;
-        if (query == null || query.isEmpty()) {
-            throw new LanewebException("no query");
-        } else {
-            result = search(new SimpleQuery(query), this.engines, time);
-        }
-        return result;
+        return search(new SimpleQuery(query), this.engines, time);
     }
 }
