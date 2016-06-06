@@ -59,7 +59,6 @@ public class HTMLSAXParserTest {
         this.parser.parse(this.source, this.xmlConsumer);
         assertTrue(equalToIgnoringWhiteSpace(this.xmlConsumer.getExpectedResult(this, "html.xml"))
                 .matches(this.xmlConsumer.getStringValue()));
-        System.out.println(this.xmlConsumer.getStringValue());
         verify(this.source, this.lexicalHandler);
     }
 }
