@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2016-06-06" version="3.2.25" description="3.2.25 bug fix release">
+            <action date="2016-06-06" dev="ceyates" issue="122218" type="update">
+                log spellcheck timeouts at warn level and return 502 bad gateway response
+            </action>
             <action date="2016-06-01" dev="ceyates" issue="121937" type="update">
                 update to nekohtml-1.9.22 and work around its empty namespace problem
             </action>
