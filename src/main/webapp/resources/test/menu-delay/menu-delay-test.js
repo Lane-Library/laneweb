@@ -6,7 +6,8 @@ var menuDelayTestCase = new Y.Test.Case({
     testMouseOver: function() {
         var menu = document.querySelector(".nav-menu");
         var content = document.querySelector(".nav-menu-content")
-        var event = new UIEvent("mouseenter");
+        var event = document.createEvent("UIEvent");//new UIEvent("mouseenter");
+        event.initEvent("mouseenter", false, false);
         menu.dispatchEvent(event);
         Y.Assert.areSame("hidden", content.style.visibility);
         this.wait(function() {
