@@ -1,10 +1,10 @@
 "use strict";
 
 var bookmarkInstructionsTestCase = new Y.Test.Case({
-    name : 'bookmark-instructions Test Case',
+    name : 'bookmark-instructions-expanded Test Case',
         
     test: function() {
-        Y.Assert.isFalse(document.querySelector(".bookmark-instructions div").className === "expanded")
+        Y.Assert.isTrue(document.querySelector(".bookmark-instructions div").className === "expanded")
     }
 });
 
@@ -14,7 +14,5 @@ new Y.Console({
 }).render('#log');
 
 Y.Test.Runner.add(bookmarkInstructionsTestCase);
-Y.Test.Runner.masterSuite.name = "bookmark-instructions.js";
+Y.Test.Runner.masterSuite.name = "bookmark-instructions-expanded.js";
 Y.Test.Runner.run();
-
-alert(navigator.appName);

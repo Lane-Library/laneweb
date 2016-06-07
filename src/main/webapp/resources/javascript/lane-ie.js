@@ -6,13 +6,13 @@
     if (Y.UA.ie) {
 
         //toggle bookmarklet instructions for IE on favorites page
-        node = Y.one("#bookmarkletNotIE");
+        node = document.querySelector("#bookmarkletNotIE");
         if (node) {
-            node.setStyle("display", "none");
+            node.style.display = "none";
         }
-        node = Y.one("#bookmarkletIE");
+        node = document.querySelector("#bookmarkletIE");
         if (node) {
-            node.setStyle("display", "block");
+            node.style.display = "block";
         }
     }
 

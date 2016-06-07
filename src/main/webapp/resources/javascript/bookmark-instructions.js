@@ -3,9 +3,9 @@
     "use strict";
 
     //case 70132, bookmark instructions expanded when no bookmarks.
-    var bookmarks = Y.all("#bookmarks li"),
-        instructions = Y.one(".bookmark-instructions");
-    if (instructions && bookmarks.size() === 0) {
-        instructions.one("div").addClass("expanded");
+    var bookmarks = document.querySelectorAll("#bookmarks li"),
+        instructions = document.querySelector(".bookmark-instructions");
+    if (instructions && bookmarks.length === 0) {
+        instructions.querySelector("div").className = "expanded";
     }
 })();
