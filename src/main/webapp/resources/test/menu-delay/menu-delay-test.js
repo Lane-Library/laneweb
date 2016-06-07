@@ -4,17 +4,19 @@ var menuDelayTestCase = new Y.Test.Case({
     name: 'menu-delay Test Case',
 
     testMouseOver: function() {
-        var menu = Y.one("ul ul");
-        menu.simulate("mouseover");
-        Y.Assert.areSame("hidden", menu.getStyle("visibility"));
+        var menu = document.querySelector(".nav-menu");
+        var content = document.querySelector(".nav-menu-content")
+        var event = new UIEvent("mouseenter");
+        menu.dispatchEvent(event);
+        Y.Assert.areSame("hidden", content.style.visibility);
         this.wait(function() {
-            Y.Assert.areSame("visible", menu.getStyle("visibility"));
+            Y.Assert.areSame("visible", content.style.visibility);
         }, 600);
     }
 });
 
 
-Y.one('body').addClass('yui3-skin-sam');
+document.querySelector("body").className = "yui3-skin-sam";
 new Y.Console({
     newestOnTop: false
 }).render('#log');
