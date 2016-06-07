@@ -131,13 +131,13 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.24</version>
+            <version>3.0.25-SNAPSHOT</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>search-spring</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.6</version>
+            <version>3.0.7</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
