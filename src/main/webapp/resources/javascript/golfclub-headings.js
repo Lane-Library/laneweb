@@ -2,8 +2,8 @@
 
     "use strict";
 
-    Y.all(".golfclub").each(function() {
-        this.set("innerHTML", "<span><span>" + this.get("innerHTML") + "</span></span>");
-    });
+     Array.prototype.forEach.call(document.querySelectorAll(".golfclub"), function(node) {
+        node.innerHTML = "<span><span>" + node.innerHTML + "</span></span>";
+    });;
 
 })();

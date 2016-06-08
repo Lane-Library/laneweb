@@ -5,14 +5,16 @@
 
     "use strict";
 
-    Y.all(".nav-menu").on("mouseenter", function(event) {
-        var list = event.currentTarget.one(".nav-menu-content");
-        if (list) {
-            list.setStyle("visibility", "hidden");
-            setTimeout(function() {
-                list.setStyle("visibility", "visible");
-            }, 500);
-        }
+    Array.prototype.forEach.call(document.querySelectorAll(".nav-menu"), function(node) {
+        node.addEventListener("mouseenter", function(event) {
+            var list = event.currentTarget.querySelector(".nav-menu-content");
+            if (list) {
+                list.style.visibility = "hidden";
+                setTimeout(function() {
+                    list.style.visibility = "visible";
+                }, 500);
+            }
+        });
     });
 
 })();
