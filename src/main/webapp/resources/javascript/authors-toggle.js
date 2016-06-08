@@ -23,11 +23,6 @@
                 });
             }
         });
-
-        // hide authorsTrigger labels when text is copied
-        Y.all('#searchResults').on('copy', function(event) {
-            Y.all('.authorsTrigger').setStyles({visibility : 'hidden'});
-        });
     };
 
     //add trigger markup and delegate click events on class "authorsTrigger"
