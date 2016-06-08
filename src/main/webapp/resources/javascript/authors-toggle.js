@@ -3,23 +3,40 @@
     "use strict";
 
     var initializeAuthorToggles = function() {
-        Y.delegate("click", function(event) {
-            var node = event.currentTarget,
-            parent = node.get('parentNode');
+        Y.all('.authorsTrigger').each(function(node) {
+            if (!node.getData().authorsTriggerSubscribed) {
+                node.setData('authorsTriggerSubscribed',true);
+                node.on('click', function(event) {
+                    var node = event.currentTarget,
+                    parent = node.get('parentNode'),
+                    container = parent.ancestor('div');
+                    
+                    event.preventDefault();
+                    node.toggleClass('active');
+                    if (!node.hasClass('active')) {
+                        parent.one('.authors-hide').setStyles({display : 'block'});
+                        node.set('text',' - show less ')
+                    } else {
+                        node.set('text',' ... show more ')
+                        parent.one('.authors-hide').setStyles({display : 'none'});
+                    }
+                });
+            }
+        });
 
-            event.preventDefault();
-            node.set('text','');
-            parent.set('text',parent.get('text'));
-        }, "#searchResults", ".authorsTrigger");
+        // hide authorsTrigger labels when text is copied
+        Y.all('#searchResults').on('copy', function(event) {
+            Y.all('.authorsTrigger').setStyles({visibility : 'hidden'});
+        });
     };
 
     //add trigger markup and delegate click events on class "authorsTrigger"
-    if (Y.one("#searchResults")) {
+    if (Y.one('#searchResults')) {
         initializeAuthorToggles();
     }
 
     //reinitialize when content has changed
-    Y.lane.on("lane:new-content", function() {
+    Y.lane.on('lane:new-content', function() {
         initializeAuthorToggles();
     });
 

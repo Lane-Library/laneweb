@@ -317,10 +317,19 @@
     <xsl:template match="s:pub-author">
         <div>
             <xsl:choose>
-                <xsl:when test="string-length(.) > 125">
-                    <xsl:value-of select="substring(.,1,105)"/>
-                    <a class="authorsTrigger no-bookmarking" href="#"> ... show all authors</a>
-                    <span class="authors-hide"><xsl:value-of select="substring(.,106)"/></span>
+                <!--  when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (115 chars)-->
+                <xsl:when test="string-length(.) > 250">
+                    <xsl:variable name="authorTokens" select="tokenize(.,', ')"/>
+                    <xsl:variable name="authorString">
+                        <xsl:call-template name="split-authors">
+                            <xsl:with-param name="tokens" select="$authorTokens"/>
+                            <xsl:with-param name="max-string-length" select="115"/>
+                            <xsl:with-param name="index" select="12"/>
+                        </xsl:call-template>
+                    </xsl:variable>
+                    <xsl:value-of select="$authorString"/>
+                    <a class="authorsTrigger no-bookmarking active" href="#"> ... show more </a>
+                    <span class="authors-hide"><xsl:value-of select="substring-after(.,$authorString)"/></span>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
             </xsl:choose>
@@ -350,6 +359,26 @@
             <xsl:value-of select="."/>
         </strong>
         <xsl:text>: </xsl:text>
+    </xsl:template>
+
+    <!--  assume authors are a comma-separated string; break the string at a separator before max-string-length -->
+    <xsl:template name="split-authors">
+        <xsl:param name="max-string-length"/>
+        <xsl:param name="tokens"/>
+        <xsl:param name="index"/>
+
+        <xsl:choose>
+            <xsl:when test="string-length(string-join($tokens[position() &lt; $index], ', ')) &gt; $max-string-length">
+                <xsl:call-template name="split-authors">
+                  <xsl:with-param name="tokens" select="$tokens"/>
+                  <xsl:with-param name="max-string-length" select="$max-string-length"/>
+                  <xsl:with-param name="index" select="$index - 1"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat(string-join($tokens[position() &lt; $index], ', '), ', ')"/>
+            </xsl:otherwise>
+        </xsl:choose>    
     </xsl:template>
 
 </xsl:stylesheet>

@@ -4,11 +4,16 @@ var authorsToggleTestCase = new Y.Test.Case({
     name: "authors toggle Test Case",
     testToggleAuthors: function() {
         var trigger = Y.one(".authorsTrigger"), 
-        parent = trigger.get('parentNode');
-        Y.Assert.areEqual("some authors ... show all authors, more authors", parent.get("text"));
+        parent = trigger.get('parentNode'),
+        hiddenAuthors = parent.one('.authors-hide');
+
+        Y.Assert.areEqual(hiddenAuthors.getStyle('display'), 'none');
         trigger.simulate('click');
-        Y.Assert.areEqual("some authors, more authors", parent.get("text"));
-        Y.Assert.areEqual('', trigger.get("text"));
+        Y.Assert.areNotEqual(hiddenAuthors.getStyle('display'), 'none');
+        Y.Assert.areEqual(' - show less ', trigger.get("text"));
+        trigger.simulate('click');
+        Y.Assert.areEqual(hiddenAuthors.getStyle('display'), 'none');
+        Y.Assert.areEqual(' ... show more ', trigger.get("text"));
     }
 });
 
