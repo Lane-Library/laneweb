@@ -8,9 +8,9 @@
                 node.setData('authorsTriggerSubscribed',true);
                 node.on('click', function(event) {
                     var node = event.currentTarget,
-                    parent = node.get('parentNode'),
-                    container = parent.ancestor('div');
-                    
+                    parent = node.get('parentNode');
+
+                    event.stopPropagation();
                     event.preventDefault();
                     node.toggleClass('active');
                     if (!node.hasClass('active')) {
