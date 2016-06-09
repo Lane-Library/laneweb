@@ -2,21 +2,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:sql="http://apache.org/cocoon/SQL/2.0"
-    xmlns:s="http://irt.stanford.edu/search/2.0"
-    exclude-result-prefixes="h sql s"
+    exclude-result-prefixes="h"
     version="2.0">
     
     <xsl:param name="source"/>
-    <xsl:param name="query"/>
-    
-    <xsl:variable name="search-terms">
-        <xsl:choose>
-            <xsl:when test="$query">
-                <xsl:value-of select="$query"/>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:variable>
     
     <xsl:template match="*">
         <xsl:copy>
@@ -33,9 +22,6 @@
             <xsl:when test=".='searchResults'">
                 <xsl:apply-templates select="/doc/h:html[2]/h:body/child::node()"/>
             </xsl:when>
-            <xsl:when test=".='search-terms'">
-                <xsl:value-of select="$search-terms"/>
-            </xsl:when>
         </xsl:choose>
     </xsl:template>
     
@@ -49,29 +35,24 @@
         
         <!-- facetId: "article-all" from "article-allFacet"-->
         <xsl:variable name="facetId" select="substring-before(attribute::id,'Facet')"/>
+        <xsl:message select="concat('facetId=',$facetId)"/>
         
         <!-- countFacetId: "all" from "article-allFacet"-->
         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
+        <xsl:message select="concat('countFacetId=',$countFacetId)"/>
+        
+        <xsl:message select="concat('//h:div[attribute::id=&quot;search-content-counts&quot;]/h:span[attribute::id=$countFacetId]=',//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId])"/>
         
         <!-- get hit count from search app (s:search OR search-content-counts) or eresources sql -->
         <xsl:variable name="hit-count">
             <xsl:choose>
-                <xsl:when test="//s:search//s:resource[attribute::s:id=$countFacetId]/s:hits">
-                    <xsl:value-of select="number(//s:search//s:resource[attribute::s:id=$countFacetId]/s:hits)"/>
-                </xsl:when>
                 <xsl:when test="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]">
                     <xsl:value-of select="number(//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId])"/>
-                </xsl:when>
-                <xsl:when test="/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits and ($countFacetId !='all' or $facetId = 'catalog-all')">
-                    <xsl:value-of select="number(/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits)"/>
-                </xsl:when>
-                <!-- kludge: findingaid as ID, "finding aid" as type -->
-                <xsl:when test="$countFacetId = 'findingaid' and /doc/sql:rowset/sql:row[sql:genre='finding aid']/sql:hits">
-                    <xsl:value-of select="number(/doc/sql:rowset/sql:row[sql:genre='finding aid']/sql:hits)"/>
                 </xsl:when>
                 <xsl:otherwise>NaN</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:message select="concat('hit-count=',$hit-count)"/>
         
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()" />
