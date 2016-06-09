@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:st="http://lane.stanford.edu/search-templates/ns"
     xmlns="http://lane.stanford.edu/search-facet-result/ns"
+    xmlns:s="http://irt.stanford.edu/search/2.0"
     exclude-result-prefixes="st"
     version="2.0">
     
@@ -42,7 +43,7 @@
     
     <xsl:template match="st:search-templates">
         {"results":{
-        "status": "<xsl:value-of select="$search-node/search/@status"/>",
+        "status": "<xsl:value-of select="$search-node/s:search/@status"/>",
         "facets": 
         {
             <xsl:apply-templates select="//st:template[contains($tokenized-facets,@id)]"/>
@@ -53,14 +54,13 @@
     
     <xsl:template match="st:template">
         <xsl:variable name="my-engine-ids" select="st:engine/@idref"/>
-        <xsl:variable name="my-resource-ids" select="st:resource/@idref"/>
-        <xsl:variable name="hits" select="count($search-node//engine[@status='successful' and @id=$my-engine-ids]/resource/content) + count($search-node//resource[@status='successful' and @id=$my-resource-ids]/content)"/>
-        <xsl:variable name="totalEngineResourceCount" select="count($my-engine-ids) + count($my-resource-ids)"/>
+        <xsl:variable name="hits" select="count($search-node//s:engine[@status='successful' and @id=$my-engine-ids]/s:resource/s:content)"/>
+        <xsl:variable name="totalEngineResourceCount" select="count($my-engine-ids)"/>
         <xsl:variable name="status">
             <xsl:choose>
-                <xsl:when test="$totalEngineResourceCount = count($search-node//engine[@status='successful' and @id=$my-engine-ids]) + count($search-node//resource[@status='successful' and @id=$my-resource-ids])">successful</xsl:when>
-                <xsl:when test="$totalEngineResourceCount = count($search-node//engine[@status='failed' and @id=$my-engine-ids]) + count($search-node//resource[@status='failed' and @id=$my-resource-ids])">failed</xsl:when>
-                <xsl:when test="$totalEngineResourceCount = count($search-node//engine[@status='canceled' and @id=$my-engine-ids]) + count($search-node//resource[@status='canceled' and @id=$my-resource-ids])">canceled</xsl:when>
+                <xsl:when test="$totalEngineResourceCount = count($search-node//s:engine[@status='successful' and @id=$my-engine-ids])">successful</xsl:when>
+                <xsl:when test="$totalEngineResourceCount = count($search-node//s:engine[@status='failed' and @id=$my-engine-ids])">failed</xsl:when>
+                <xsl:when test="$totalEngineResourceCount = count($search-node//s:engine[@status='canceled' and @id=$my-engine-ids])">canceled</xsl:when>
             </xsl:choose>
         </xsl:variable>
             "<xsl:value-of  select="@id"/>":
