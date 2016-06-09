@@ -35,13 +35,9 @@
         
         <!-- facetId: "article-all" from "article-allFacet"-->
         <xsl:variable name="facetId" select="substring-before(attribute::id,'Facet')"/>
-        <xsl:message select="concat('facetId=',$facetId)"/>
         
         <!-- countFacetId: "all" from "article-allFacet"-->
         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
-        <xsl:message select="concat('countFacetId=',$countFacetId)"/>
-        
-        <xsl:message select="concat('//h:div[attribute::id=&quot;search-content-counts&quot;]/h:span[attribute::id=$countFacetId]=',//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId])"/>
         
         <!-- get hit count from search app (s:search OR search-content-counts) or eresources sql -->
         <xsl:variable name="hit-count">
@@ -52,7 +48,6 @@
                 <xsl:otherwise>NaN</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:message select="concat('hit-count=',$hit-count)"/>
         
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()" />
