@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-06-??" version="3.2.26" description="3.2.26 bug fix release">
+            <action date="2016-06-08" dev="ceyates" issue="122428" type="fix">
+                search facet counts are broken
+            </action>
+            <action date="2016-06-08" dev="ryanmax" issue="122392" type="add">
+                add close all authors toggle
+            </action>
+        </release>
         <release date="2016-06-06" version="3.2.25" description="3.2.25 bug fix release">
             <action date="2016-06-06" dev="ceyates" issue="122218" type="update">
                 log spellcheck timeouts at warn level and return 502 bad gateway response
