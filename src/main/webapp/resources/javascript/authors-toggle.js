@@ -8,17 +8,25 @@
                 node.setData('authorsTriggerSubscribed',true);
                 node.on('click', function(event) {
                     var node = event.currentTarget,
-                    parent = node.get('parentNode');
+                    anchorNode = node.one('a'),
+                    parent = node.get('parentNode'),
+                    iconNode = node.one('i');
 
                     event.stopPropagation();
                     event.preventDefault();
                     node.toggleClass('active');
                     if (!node.hasClass('active')) {
+                        node.previous().set('text', ' - ');
                         parent.one('.authors-hide').setStyles({display : 'block'});
-                        node.set('text',' - show less ')
+                        anchorNode.set('text',' Show Less ');
+                        iconNode.removeClass('fa-angle-double-down')
+                        iconNode.addClass('fa-angle-double-up')
                     } else {
-                        node.set('text',' ... show more ')
+                        node.previous().set('text', ' ... ');
                         parent.one('.authors-hide').setStyles({display : 'none'});
+                        anchorNode.set('text',' Show More ');
+                        iconNode.removeClass('fa-angle-double-up')
+                        iconNode.addClass('fa-angle-double-down')
                     }
                 });
             }

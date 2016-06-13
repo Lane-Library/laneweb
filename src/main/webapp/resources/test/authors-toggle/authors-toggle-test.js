@@ -10,10 +10,10 @@ var authorsToggleTestCase = new Y.Test.Case({
         Y.Assert.areEqual(hiddenAuthors.getStyle('display'), 'none');
         trigger.simulate('click');
         Y.Assert.areNotEqual(hiddenAuthors.getStyle('display'), 'none');
-        Y.Assert.areEqual(' - show less ', trigger.get("text"));
+        Y.Assert.areEqual('Show Less', trigger.get("text").trim());
         trigger.simulate('click');
         Y.Assert.areEqual(hiddenAuthors.getStyle('display'), 'none');
-        Y.Assert.areEqual(' ... show more ', trigger.get("text"));
+        Y.Assert.areEqual('Show More', trigger.get("text").trim());
     }
 });
 

@@ -323,12 +323,16 @@
                     <xsl:variable name="authorString">
                         <xsl:call-template name="split-authors">
                             <xsl:with-param name="tokens" select="$authorTokens"/>
-                            <xsl:with-param name="max-string-length" select="115"/>
+                            <xsl:with-param name="max-string-length" select="105"/>
                             <xsl:with-param name="index" select="12"/>
                         </xsl:call-template>
                     </xsl:variable>
                     <xsl:value-of select="$authorString"/>
-                    <a class="authorsTrigger no-bookmarking active" href="#"> ... show more </a>
+                    <span> ... </span>
+                    <span class="authorsTrigger no-bookmarking active">
+                        <a href="#"> Show More </a>
+                        <i class="fa fa-angle-double-down"></i>
+                    </span>
                     <span class="authors-hide"><xsl:value-of select="substring-after(.,$authorString)"/></span>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>

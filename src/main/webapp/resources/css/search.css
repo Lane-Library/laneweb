@@ -116,3 +116,8 @@ li.active .description {
 .authors-hide {
     display: none;
 }
+.authorsTrigger {
+    cursor: pointer;
+    padding:1px 5px; 
+    border: 1px solid #ccc;
+}
