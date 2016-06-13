@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2016-06-??" version="3.2.26" description="3.2.26 bug fix release">
+        <release date="2016-06-13" version="3.2.26" description="3.2.26 bug fix release">
             <action date="2016-06-12" dev="ryanmax" issue="120790" type="update">
                 change appearance of View Abstract button
             </action>
