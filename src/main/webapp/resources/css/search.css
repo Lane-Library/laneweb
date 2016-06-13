@@ -64,6 +64,11 @@
 }
 .descriptionTrigger {
     cursor: pointer;
+    padding: 1px 5px;
+    border: 1px solid #ccc;
+}
+.descriptionTrigger .fa-eye {
+    color: #428bca;
 }
 li.active .descriptionTrigger {
     background-color: #F2F3ED;

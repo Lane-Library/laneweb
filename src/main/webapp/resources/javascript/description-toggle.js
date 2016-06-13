@@ -6,9 +6,9 @@
         var triggers = Y.all(".descriptionTrigger");
         triggers.each(function(node) {
             if (node.hasClass("eresource")) {
-                node.set("innerHTML", "<a href=\"#\">View Description <i class=\"fa fa-angle-double-down\"></i></a>");
+                node.set("innerHTML", "<a href=\"#\"><i class=\"fa fa-eye\"></i> View Description <i class=\"fa fa-angle-double-down\"></i></a>");
             } else if (node.hasClass("searchContent")) {
-                node.set("innerHTML", "<a href=\"#\">Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
+                node.set("innerHTML", "<a href=\"#\"><i class=\"fa fa-eye\"></i> Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
             }
         });
 
@@ -22,9 +22,9 @@
             event.preventDefault();
             ancestor.toggleClass("active");
             if (active && eresource) {
-                node.set("innerHTML", "<a href=\"#\">View Description <i class=\"fa fa-angle-double-down\"></i></a>");
+                node.set("innerHTML", "<a href=\"#\"><i class=\"fa fa-eye\"></i> View Description <i class=\"fa fa-angle-double-down\"></i></a>");
             } else if (active && searchContent) {
-                node.set("innerHTML", "<a href=\"#\">Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
+                node.set("innerHTML", "<a href=\"#\"><i class=\"fa fa-eye\"></i> Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>");
             } else if (!active) {
                 node.set("innerHTML", "<a href=\"#\">close... <i class=\"fa fa-angle-double-up\"></i></a>");
             }

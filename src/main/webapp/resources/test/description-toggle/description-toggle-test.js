@@ -4,8 +4,8 @@ var descriptionToggleTestCase = new Y.Test.Case({
     name: "description toggle Test Case",
     testTriggerContentPresent: function() {
         var triggers = Y.all(".descriptionTrigger");
-        Y.Assert.areEqual("Preview Abstract ", triggers.item(0).get("text"));
-        Y.Assert.areEqual("View Description ", triggers.item(1).get("text"));
+        Y.Assert.areEqual(" Preview Abstract ", triggers.item(0).get("text"));
+        Y.Assert.areEqual(" View Description ", triggers.item(1).get("text"));
         Y.Assert.areEqual(2, Y.all(".descriptionTrigger").size());
     },
     testToggleDescriptionOn: function() {
@@ -32,9 +32,9 @@ var descriptionToggleTestCase = new Y.Test.Case({
         });
         triggers.each(function(node, index) {
             if (index === 0) {
-                Y.Assert.areEqual("Preview Abstract ", node.get("text"));
+                Y.Assert.areEqual(" Preview Abstract ", node.get("text"));
             } else {
-                Y.Assert.areEqual("View Description ", node.get("text"));
+                Y.Assert.areEqual(" View Description ", node.get("text"));
             }
         });
     }
