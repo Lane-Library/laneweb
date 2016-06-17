@@ -167,7 +167,7 @@ public class LanewebIT {
             // Bates Guide
             this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
                     .andExpect(
-                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title=\"Bates' Guide to the Physical Examination Videos\"]",
+                            xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title=\"Bates' Guide to the physical examination videos\"]",
                                     ns).exists());
             // directions
             this.mockMvc.perform(get("/eresources/search.html?q=directions").servletPath("/eresources/search.html"))
@@ -189,6 +189,10 @@ public class LanewebIT {
             .andExpect(
                     xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
                             ns).exists());
+            // journal of the american medical association (older JAMA title)
+            this.mockMvc.perform(get("/eresources/search.html?q=journal of the american medical association").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of the American Medical Association']", ns)
+                            .exists());
         }
     }
 
