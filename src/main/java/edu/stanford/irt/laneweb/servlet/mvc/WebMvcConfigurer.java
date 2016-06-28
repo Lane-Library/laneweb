@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -94,7 +95,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
-        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
         stringConverter.setWriteAcceptCharset(false);
         converters.add(stringConverter);
         converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -94,7 +95,7 @@ public class LanewebIT {
     @Test
     public void testIpGroupFetch() throws Exception {
         this.mockMvc.perform(get("/apps/ipGroupFetch?callback=foo")).andExpect(status().isOk())
-                .andExpect(content().contentType(new MediaType("application", "javascript")));
+                .andExpect(content().contentType(new MediaType("application", "javascript", StandardCharsets.UTF_8)));
     }
 
     /**
