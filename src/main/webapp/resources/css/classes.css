@@ -32,7 +32,7 @@
 
 .class .month-day, .archive .month-day {
     padding-top: 6px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .class .year, .archive .year {
@@ -68,7 +68,7 @@
     list-style-type: disc;
     list-style-position: outside;
     border-bottom: none;
-    padding: 0px;
+    padding: 0;
 }
 
 .instructor {

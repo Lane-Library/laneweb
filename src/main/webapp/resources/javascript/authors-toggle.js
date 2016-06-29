@@ -19,14 +19,14 @@
                         node.previous().set('text', ' - ');
                         parent.one('.authors-hide').setStyles({display : 'block'});
                         anchorNode.set('text',' Show Less ');
-                        iconNode.removeClass('fa-angle-double-down')
-                        iconNode.addClass('fa-angle-double-up')
+                        iconNode.removeClass('fa-angle-double-down');
+                        iconNode.addClass('fa-angle-double-up');
                     } else {
                         node.previous().set('text', ' ... ');
                         parent.one('.authors-hide').setStyles({display : 'none'});
                         anchorNode.set('text',' Show More ');
-                        iconNode.removeClass('fa-angle-double-up')
-                        iconNode.addClass('fa-angle-double-down')
+                        iconNode.removeClass('fa-angle-double-up');
+                        iconNode.addClass('fa-angle-double-down');
                     }
                 });
             }
