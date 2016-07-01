@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-07-01" version="3.2.28" description="3.2.28 bug fix release">
+            <action date="2016-06-28" dev="ceyates" issue="122542" type="update">
+                Exclude 2 categories from the course reserves 
+            </action>
+        </release>
         <release date="2016-06-20" version="3.2.27" description="3.2.27 bug fix release"/>
         <release date="2016-06-13" version="3.2.26" description="3.2.26 bug fix release">
             <action date="2016-06-12" dev="ryanmax" issue="120790" type="update">
