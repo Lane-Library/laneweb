@@ -108,6 +108,7 @@
     <xsl:variable name="search-form-select">
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/ethics')">all-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/careercenter')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
