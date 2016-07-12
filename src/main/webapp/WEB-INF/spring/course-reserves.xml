@@ -3,45 +3,42 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-by-department"
-        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesDepartmentGenerator"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list"
+        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesItemListGenerator"
         scope="prototype">
-        <constructor-arg value="classpath:/edu/stanford/irt/laneweb/coursereserves/by-department.sql"/>
-        <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-resultset"/>
+        <constructor-arg ref="edu.stanford.irt.coursereserves.CourseReservesDAO"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-item-list"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-by-title"
-        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesGenerator"
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/courses"
+        class="edu.stanford.irt.laneweb.coursereserves.CourseListGenerator"
         scope="prototype">
-        <constructor-arg value="classpath:/edu/stanford/irt/laneweb/coursereserves/by-title.sql"/>
-        <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-resultset"/>
+        <constructor-arg ref="edu.stanford.irt.coursereserves.CourseReservesDAO"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/courses"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-by-instructor"
-        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesGenerator"
-        scope="prototype">
-        <constructor-arg value="classpath:/edu/stanford/irt/laneweb/coursereserves/by-instructor.sql"/>
+    <bean name="edu.stanford.irt.coursereserves.CourseReservesDAO"
+        class="edu.stanford.irt.coursereserves.CourseReservesDAO">
         <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-instructor-resultset"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItem.fnc"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/itemStatus.sql"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/course.sql"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courses.sql"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItemListCourse.sql"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItemListAll.sql"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-departments"
-        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesGenerator"
-        scope="prototype">
-        <constructor-arg value="classpath:/edu/stanford/irt/laneweb/coursereserves/departments.sql"/>
-        <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/departments-resultset"/>
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/courses"
+        class="edu.stanford.irt.laneweb.coursereserves.CoursesSAXStrategy"/>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-item-list"
+        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesItemListSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.coursereserves.CourseHeadingSAXStrategy"/>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.coursereserves.CourseReservesItemSAXStrategy"/>
+        </constructor-arg>
     </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-resultset"
-        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesResultSetSAXStrategy"/>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/course-reserves-instructor-resultset"
-        class="edu.stanford.irt.laneweb.coursereserves.CourseReservesInstructorResultSetSAXStrategy"/>
-    
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/departments-resultset"
-        class="edu.stanford.irt.laneweb.coursereserves.DepartmentsResultSetSAXStrategy"/>
     
 </beans>

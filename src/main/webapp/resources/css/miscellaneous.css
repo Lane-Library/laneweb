@@ -202,3 +202,9 @@ hr {
     text-transform: uppercase;
     font-family: 'Source Sans Pro', sans-serif;
 }
+
+.course-reserves-instructor {
+	float: right;
+	font-size: 13px;
+	color: #333;
+}
