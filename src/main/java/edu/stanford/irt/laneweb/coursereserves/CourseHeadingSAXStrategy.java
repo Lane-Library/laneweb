@@ -19,7 +19,7 @@ public class CourseHeadingSAXStrategy extends AbstractXHTMLSAXStrategy<Course> {
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
             XMLUtils.data(xmlConsumer, course.getName());
             startElementWithClass(xmlConsumer, "span", "course-reserves-instructor");
-            XMLUtils.data(xmlConsumer, "instructor: ");
+            XMLUtils.data(xmlConsumer, "Instructor: ");
             createElement(xmlConsumer, "strong", course.getInstructor());
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
