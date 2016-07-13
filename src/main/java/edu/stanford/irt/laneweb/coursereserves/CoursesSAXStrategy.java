@@ -8,6 +8,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
+import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
 
@@ -17,7 +18,12 @@ public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
             xmlConsumer.startDocument();
             for (Course course : list) {
                 startLi(xmlConsumer);
-                createAnchor(xmlConsumer, "/samples/course-reserves.html?id=" + course.getId(), course.getName() + " (" + course.getNumber() + ')');
+                startAnchor(xmlConsumer, "/samples/course-reserves.html?id=" + course.getId());
+                XMLUtils.data(xmlConsumer, course.getName());
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "br");
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "br");
+                XMLUtils.data(xmlConsumer, '(' + course.getNumber() + ')');
+                endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
             }
             xmlConsumer.endDocument();
