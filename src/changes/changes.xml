@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-07-18" version="3.2.30" description="3.2.30 bug fix release">
+            <action date="2016-07-13" dev="ceyates" issue="124576" type="update">
+                course reserves - minor tweaks
+            </action>
+            <action date="2016-07-12" dev="ryanmax" issue="124500" type="fix">
+                abstract labels not rendering correctly
+            </action>
+            <action date="2016-07-12" dev="ceyates" issue="124462" type="fix">
+                Feedback-bug: broken download links for printers
+            </action>
+            <action date="2016-07-13" dev="ceyates" issue="122543" type="update">
+                course reserves final edits
+            </action>
+        </release>
         <release date="2016-07-11" version="3.2.29" description="3.2.29 bug fix release">
             <action date="2016-07-08" dev="alainb" issue="124223" type="add">
                 add 2 more searches to the bioresearch search
