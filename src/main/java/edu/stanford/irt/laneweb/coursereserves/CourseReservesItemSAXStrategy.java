@@ -22,8 +22,9 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
             createAnchor(xmlConsumer, "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=" + id, item.getTitle());
-            if (item.getAuthor() != null) {
-                createElement(xmlConsumer, "div", item.getAuthor());
+            String author = item.getAuthor();
+            if (author != null) {
+                createElement(xmlConsumer, "div", author);
             }
             createElement(xmlConsumer, "div", "Status: " + item.getStatus());
             startDiv(xmlConsumer);
