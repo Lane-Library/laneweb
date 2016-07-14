@@ -68,7 +68,6 @@ public class LinkScanGenerator extends AbstractGenerator implements CacheablePip
                 }
                 for (String url : getLinks(eresource)) {
                     position = " #" + p++ + ' ';
-                    url = url.toString();
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, "li");
                     XMLUtils.data(xmlConsumer, position);
                     XMLUtils.startElement(xmlConsumer, XHTML_NS, "ul");
