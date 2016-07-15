@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.coursereserves;
 
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -24,7 +27,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             createAnchor(xmlConsumer, "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=" + id, item.getTitle());
             String author = item.getAuthor();
             if (author != null) {
-                createElement(xmlConsumer, "div", author);
+                createElement(xmlConsumer, "div", Normalizer.normalize(author, Form.NFKC));
             }
             String status = item.getStatus();
             if ("Not Charged".equals(status)) {
