@@ -18,7 +18,7 @@ public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
             xmlConsumer.startDocument();
             for (Course course : list) {
                 startLi(xmlConsumer);
-                startAnchor(xmlConsumer, "/samples/course-reserves.html?id=" + course.getId());
+                startAnchor(xmlConsumer, "?id=" + course.getId());
                 XMLUtils.data(xmlConsumer, course.getName());
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, "br");
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, "br");
