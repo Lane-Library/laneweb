@@ -55,7 +55,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getId()).andReturn(1);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn(null);
-        expect(this.item.getStatus()).andReturn("status");
+        expect(this.item.getStatus()).andReturn("Not Charged");
         expect(this.item.getCallNumber()).andReturn("call number");
         replay(this.item);
         this.xmlConsumer.startDocument();

@@ -26,7 +26,11 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             if (author != null) {
                 createElement(xmlConsumer, "div", author);
             }
-            createElement(xmlConsumer, "div", "Status: " + item.getStatus());
+            String status = item.getStatus();
+            if ("Not Charged".equals(status)) {
+                status = "Not Checked Out";
+            }
+            createElement(xmlConsumer, "div", "Item Status: " + status);
             startDiv(xmlConsumer);
             createElement(xmlConsumer, "strong", "Call #: " + item.getCallNumber());
             endDiv(xmlConsumer);
