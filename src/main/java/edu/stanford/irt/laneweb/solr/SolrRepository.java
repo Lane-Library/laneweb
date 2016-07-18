@@ -41,9 +41,6 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "ertlsw?1", filters = { "isRecent:1 OR isLaneConnex:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
-    @Query(value = "*:*", filters = { "recordType:bib AND (isRecent:1 OR isLaneConnex:1)" }, requestHandler = Handlers.BROWSE)
-    public List<Eresource> browseLinkscanLinks(Pageable page);
-
     @Query(value = "?0", requestHandler = Handlers.FACET)
     @Facet(fields = { "type" }, minCount = 0, limit = 100)
     public SolrResultPage<?> facetByType(String term, Pageable page);

@@ -18,10 +18,6 @@
             <map:generate type="eresources-count"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="linkscan.html" type="wildcard">
-            <map:generate type="link-scan"/>
-            <map:serialize type="xhtml"/>
-        </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
         <map:match type="wildcard" pattern="browse/*/*.html">

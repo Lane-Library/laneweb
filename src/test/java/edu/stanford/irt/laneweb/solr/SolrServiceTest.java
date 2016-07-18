@@ -191,14 +191,6 @@ public class SolrServiceTest {
     }
 
     @Test
-    public final void testSearchFindAllNotRecordTypePubmed() {
-        expect(this.repository.browseLinkscanLinks(isA(PageRequest.class))).andReturn(Collections.emptyList());
-        replay(this.repository);
-        this.solrService.getLinkscanLinks();
-        verify(this.repository);
-    }
-
-    @Test
     public final void testSearchWithFilters() {
         Page<Eresource> page = createMock(Page.class);
         expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value",

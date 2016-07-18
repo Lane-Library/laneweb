@@ -40,10 +40,6 @@
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
     </bean>
     
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/link-scan"
-        class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
-        scope="prototype"/>
-    
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/parameter-map"
         class="edu.stanford.irt.laneweb.search.ParameterMapGenerator"
         parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator"/>
