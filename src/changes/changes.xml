@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2016-07-18" version="3.2.30" description="3.2.30 bug fix release">
+            <action date="2016-07-18" dev="ryanmax" issue="124821" type="remove">
+                remove linkscan generator
+            </action>
             <action date="2016-07-13" dev="ceyates" issue="124576" type="update">
                 course reserves - minor tweaks
             </action>
