@@ -30,7 +30,7 @@ public class QueryHighlightingTransformerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer = new QueryHighlightingTransformer();
         this.transformer.setXMLConsumer(this.xmlConsumer);

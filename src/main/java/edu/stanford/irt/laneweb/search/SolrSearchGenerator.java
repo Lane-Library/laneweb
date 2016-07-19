@@ -3,10 +3,10 @@ package edu.stanford.irt.laneweb.search;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -18,9 +18,10 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.solr.SolrService;
 
-public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Object>> implements ParametersAware {
+public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> implements ParametersAware {
 
     private static final int DEFAULT_RESULTS = 50;
 
@@ -36,7 +37,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
 
     private String type;
 
-    public SolrSearchGenerator(final SolrService solrService, final SAXStrategy<Map<String, Object>> saxStrategy) {
+    public SolrSearchGenerator(final SolrService solrService, final SAXStrategy<SolrSearchResult> saxStrategy) {
         super(saxStrategy);
         this.solrService = solrService;
     }
@@ -66,17 +67,21 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<Map<String, Obj
     }
 
     @Override
-    protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<>();
+    protected SolrSearchResult doSearch(final String query) {
         Sort sorts = parseSortParam();
         Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
-        if (null != this.type) {
-            result.put("resultPage", this.solrService.searchType(this.type, this.searchTerm, pageRequest));
+        Page<Eresource> page = null;
+        if (this.type == null) {
+            page = this.solrService.searchWithFilters(query, this.facets, pageRequest);
         } else {
-            result.put("resultPage", this.solrService.searchWithFilters(query, this.facets, pageRequest));
+            page = this.solrService.searchType(this.type, this.searchTerm, pageRequest);
         }
-        result.put("searchTerm", query);
-        return result;
+        return new SolrSearchResult(query, page);
+    }
+
+    @Override
+    protected SolrSearchResult getEmptyResult() {
+        return SolrSearchResult.EMPTY_RESULT;
     }
 
     private Sort parseSortParam() {

@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -15,7 +14,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
-public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String, Object>> {
+public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageSearchResult> {
 
     private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights", "Possible Reuse Rights",
             "Restrictive Reuse Rights" };
@@ -41,7 +40,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
     private String tab = TAB_CONTENT[0];
 
     public SolrImageSearchGenerator(final SolrImageService service,
-            final SAXStrategy<Map<String, Object>> saxStrategy) {
+            final SAXStrategy<SolrImageSearchResult> saxStrategy) {
         super(saxStrategy);
         this.service = service;
     }
@@ -73,19 +72,21 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<Map<String
     }
 
     @Override
-    protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = new HashMap<>();
+    protected SolrImageSearchResult doSearch(final String query) {
+        return doSearch(query, this.basePath.concat(this.url.toString()));
+    }
+
+    protected SolrImageSearchResult doSearch(final String query, final String path) {
         Page<Image> pageResult = getPage(query);
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
-        result.put("page", pageResult);
-        result.put("selectedResource", this.resourceId);
-        result.put("websiteIdFacet", facet);
-        result.put("path", this.basePath.concat(this.url.toString()));
-        result.put(Model.QUERY, this.searchTerm);
-        result.put("tab", this.tab);
-        result.put(Model.SOURCE, this.source);
-        return result;
+        return new SolrImageSearchResult(query, pageResult, this.resourceId, facet,
+                this.basePath.concat(this.url.toString()), this.tab, this.source);
+    }
+
+    @Override
+    protected SolrImageSearchResult getEmptyResult() {
+        return SolrImageSearchResult.EMPTY_RESULT;
     }
 
     protected Page<Image> getPage(final String query) {

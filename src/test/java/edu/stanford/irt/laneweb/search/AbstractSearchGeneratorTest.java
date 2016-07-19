@@ -24,6 +24,11 @@ public class AbstractSearchGeneratorTest {
         protected Object doSearch(final String query) {
             return null;
         }
+
+        @Override
+        protected Object getEmptyResult() {
+            return null;
+        }
     };
 
     private AbstractSearchGenerator<Object> generator;

@@ -41,7 +41,7 @@ public class SearchGeneratorTest {
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new SearchGenerator(this.manager, this.saxStrategy);
         this.result = createMock(Result.class);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.model.put(Model.QUERY, "query");
     }
 
@@ -53,20 +53,6 @@ public class SearchGeneratorTest {
         replay(this.saxStrategy, this.manager);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager);
-    }
-
-    @Test
-    public void testDoSearchEmptyQuery() {
-        replay(this.saxStrategy, this.manager);
-        this.generator.doSearch("");
-        verify(this.saxStrategy, this.manager);
-    }
-
-    @Test
-    public void testDoSearchNullQuery() {
-        replay(this.saxStrategy, this.manager);
-        this.generator.doSearch(null);
         verify(this.saxStrategy, this.manager);
     }
 

@@ -11,12 +11,12 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
+import edu.stanford.irt.laneweb.search.SolrImageSearchResult;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.solr.Image;
 
-public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<String, Object>> {
+public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrImageSearchResult> {
 
     protected static final String ACTIVED = "actived";
 
@@ -70,16 +70,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
 
     private Map<String, String> websiteIdMapping;
 
-    public Map<String, String> getWebsiteIdMapping() {
-        return this.websiteIdMapping;
-    }
-
     public void setWebsiteIdMapping(final Map<String, String> websiteIdMapping) {
         this.websiteIdMapping = websiteIdMapping;
     }
 
     @Override
-    public void toSAX(final Map<String, Object> result, final XMLConsumer xmlConsumer) {
+    public void toSAX(final SolrImageSearchResult result, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
             startDiv(xmlConsumer);
@@ -211,20 +207,20 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     }
 
     private void generateDirectAccessPageForm(final XMLConsumer xmlConsumer, final Page<Image> page,
-            final Map<String, Object> result) throws SAXException {
+            final SolrImageSearchResult result) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "pagingForm");
         atts.addAttribute(EMPTY, NAME, NAME, CDATA, "paginationForm");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "form", atts);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
-        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, (String) result.get(Model.SOURCE));
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA,  result.getSource());
         atts.addAttribute(EMPTY, NAME, NAME, CDATA, "source");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
-        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, (String) result.get(Model.QUERY));
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, result.getQuery());
         atts.addAttribute(EMPTY, NAME, NAME, CDATA, "q");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
@@ -234,10 +230,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         atts.addAttribute(EMPTY, NAME, NAME, CDATA, "totalPages");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
-        if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
+        if (result.getSelectedResource() != null && !"".equals(result.getSelectedResource())) {
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
-            atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, (String) result.get(SELECTED_RESOURCE));
+            atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, result.getSelectedResource());
             atts.addAttribute(EMPTY, NAME, NAME, CDATA, "rid");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
@@ -252,13 +248,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "form");
     }
 
-    private void generateFilterWebsiteIdOptions(final XMLConsumer xmlConsumer, final Map<String, Object> result)
+    private void generateFilterWebsiteIdOptions(final XMLConsumer xmlConsumer, final SolrImageSearchResult result)
             throws SAXException {
-        @SuppressWarnings("unchecked")
-        Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.get("websiteIdFacet");
+        Page<FacetFieldEntry> facet = (Page<FacetFieldEntry>) result.getFacet();
         int totalFacet = facet.getNumberOfElements();
         if (totalFacet > 0) {
-            String path = (String) result.get("path");
+            String path = result.getPath();
             startDivWithClass(xmlConsumer, "yui3-u-1-4");
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "view-by");
@@ -278,8 +273,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             }
             int totalElement = 0;
             int totalSelectedFacet = 0;
-            if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
-                selectedResource = (String) result.get(SELECTED_RESOURCE);
+            if (result.getSelectedResource() != null && !"".equals(result.getSelectedResource())) {
+                selectedResource = result.getSelectedResource();
             }
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
@@ -322,10 +317,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
     }
 
     private void generatePagination(final XMLConsumer xmlConsumer, final Page<Image> page,
-            final Map<String, Object> result) throws SAXException {
-        String path = (String) result.get("path");
-        if (result.get(SELECTED_RESOURCE) != null && !"".equals(result.get(SELECTED_RESOURCE))) {
-            path = path + "&rid=" + (String) result.get(SELECTED_RESOURCE);
+            final SolrImageSearchResult result) throws SAXException {
+        String path = result.getPath();
+        if (result.getSelectedResource() != null && !"".equals(result.getSelectedResource())) {
+            path = path + "&rid=" + result.getSelectedResource();
         }
         path = path.concat("&page=");
         startDivWithClass(xmlConsumer, "pagination");
@@ -349,7 +344,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         endDiv(xmlConsumer);
     }
 
-    private void generateResult(final XMLConsumer xmlConsumer, final Page<Image> page, final Map<String, Object> result)
+    private void generateResult(final XMLConsumer xmlConsumer, final Page<Image> page, final SolrImageSearchResult result)
             throws SAXException {
         String numberResult = String.valueOf(page.getSize() * page.getNumber() + 1);
         String number = String.valueOf(page.getSize() * page.getNumber() + page.getNumberOfElements());
@@ -358,13 +353,13 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
             XMLUtils.data(xmlConsumer, numberResult + " to " + number + " of " + page.getTotalElements() + " results");
         } else {
             XMLUtils.data(xmlConsumer,
-                    "No " + result.get("tab") + " images are available with search term: " + result.get(Model.QUERY));
+                    "No " + result.getTab() + " images are available with search term: " + result.getQuery());
         }
         endDiv(xmlConsumer);
     }
 
     private void generateSumaryResult(final XMLConsumer xmlConsumer, final Page<Image> page,
-            final Map<String, Object> result, final boolean isTopScreen) throws SAXException {
+            final SolrImageSearchResult result, final boolean isTopScreen) throws SAXException {
         startDivWithClass(xmlConsumer, "result-summary");
         if (isTopScreen) {
             generateResult(xmlConsumer, page, result);
@@ -390,9 +385,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<Map<Str
         XMLUtils.startElement(xmlConsumer, XHTML_NS, name, atts);
     }
 
-    private void toSAXResult(final Map<String, Object> result, final XMLConsumer xmlConsumer) throws SAXException {
-        @SuppressWarnings("unchecked")
-        Page<Image> page = (Page<Image>) result.get("page");
+    private void toSAXResult(final SolrImageSearchResult result, final XMLConsumer xmlConsumer) throws SAXException {
+        Page<Image> page = result.getPage();
         List<Image> images = page.getContent();
         generateSumaryResult(xmlConsumer, page, result, true);
         startElementWithId(xmlConsumer, UL, "imageList");

@@ -19,7 +19,8 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 /**
  * @author ryanmax
  */
-public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSearchResultList> implements ParametersAware {
+public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSearchResultList>
+        implements ParametersAware {
 
     private static final long DEFAULT_TIMEOUT = 20000;
 
@@ -73,14 +74,15 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
 
     @Override
     protected PagingSearchResultList doSearch(final String query) {
-        List<SearchResult> results = null;
-        if (query != null && !query.isEmpty()) {
-            results = this.conversionStrategy.convertResult(doMetaSearch(query));
-        } else {
-            results = Collections.emptyList();
-        }
+        List<SearchResult> results = this.conversionStrategy.convertResult(doMetaSearch(query));
         PagingData pagingData = new PagingData(results, this.page, "q=" + this.urlEncodedQuery);
         return new PagingSearchResultList(results, pagingData, query);
+    }
+
+    @Override
+    protected PagingSearchResultList getEmptyResult() {
+        PagingData pagingData = new PagingData(Collections.emptyList(), this.page, "q=");
+        return new PagingSearchResultList(Collections.emptyList(), pagingData, null);
     }
 
     private Result doMetaSearch(final String query) {

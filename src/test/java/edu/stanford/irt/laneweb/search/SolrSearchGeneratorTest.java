@@ -27,7 +27,7 @@ public class SolrSearchGeneratorTest {
 
     private Map<String, Object> model;
 
-    private SAXStrategy<Map<String, Object>> saxStrategy;
+    private SAXStrategy<SolrSearchResult> saxStrategy;
 
     private SolrService service;
 
@@ -37,7 +37,7 @@ public class SolrSearchGeneratorTest {
         this.service = createMock(SolrService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new SolrSearchGenerator(this.service, this.saxStrategy);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test
@@ -48,8 +48,8 @@ public class SolrSearchGeneratorTest {
         expect(this.service.searchWithFilters(eq("query"), eq("facets"), capture(pageable))).andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("query", result.get("searchTerm"));
+        SolrSearchResult result = this.generator.doSearch("query");
+        assertEquals("query", result.getQuery());
         assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         assertEquals(null, pageable.getValue().getSort());
@@ -64,8 +64,8 @@ public class SolrSearchGeneratorTest {
         expect(this.service.searchWithFilters(eq("query"), eq(null), capture(pageable))).andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("query", result.get("searchTerm"));
+        SolrSearchResult result = this.generator.doSearch("query");
+        assertEquals("query", result.getQuery());
         assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(4, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -81,8 +81,8 @@ public class SolrSearchGeneratorTest {
                 .andReturn(null);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("query", result.get("searchTerm"));
+        SolrSearchResult result = this.generator.doSearch("query");
+        assertEquals("query", result.getQuery());
         assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         assertEquals("authors_sort: ASC,title_sort: ASC", pageable.getValue().getSort().toString());

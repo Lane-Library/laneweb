@@ -61,7 +61,7 @@ public class SolrSearchFacetsGeneratorTest {
         this.marshaller = createMock(Marshaller.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.generator = new SolrSearchFacetsGenerator(this.service, this.marshaller);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.generator.setFacetsToShowBrowse(10);
         this.generator.setFacetsToShowSearch(2);
         this.generator.setMeshToIgnoreInSearch(Arrays.asList("MeshSkip1", "MeshSkip2"));

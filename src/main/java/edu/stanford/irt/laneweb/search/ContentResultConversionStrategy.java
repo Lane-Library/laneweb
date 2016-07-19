@@ -39,8 +39,8 @@ public class ContentResultConversionStrategy {
         return results;
     }
 
-    private void processEngine(final Result engine,
-            final Map<SearchResult, SearchResult> resultMap, final Pattern queryTermPattern) {
+    private void processEngine(final Result engine, final Map<SearchResult, SearchResult> resultMap,
+            final Pattern queryTermPattern) {
         Collection<Result> children;
         synchronized (engine) {
             children = engine.getChildren();
@@ -50,8 +50,8 @@ public class ContentResultConversionStrategy {
         }
     }
 
-    private void processResource(final Result resource,
-            final Map<SearchResult, SearchResult> resultMap, final Pattern queryTermPattern) {
+    private void processResource(final Result resource, final Map<SearchResult, SearchResult> resultMap,
+            final Pattern queryTermPattern) {
         for (Result content : resource.getChildren()) {
             ContentResult contentResult = (ContentResult) content;
             // create a SearchResult from each ContentResult, retain the highest scoring one if more

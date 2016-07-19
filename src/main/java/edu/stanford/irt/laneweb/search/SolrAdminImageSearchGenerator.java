@@ -23,7 +23,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
     public SolrAdminImageSearchGenerator(final SolrImageService service,
-            final SAXStrategy<Map<String, Object>> saxStrategy) {
+            final SAXStrategy<SolrImageSearchResult> saxStrategy) {
         super(service, saxStrategy);
     }
 
@@ -34,10 +34,8 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator {
     }
 
     @Override
-    protected Map<String, Object> doSearch(final String query) {
-        Map<String, Object> result = super.doSearch(query);
-        result.put("path", this.basePath.concat("/secure/admin").concat(this.url.toString()));
-        return result;
+    protected SolrImageSearchResult doSearch(final String query) {
+        return doSearch(query, this.basePath.concat("/secure/admin").concat(this.url.toString()));
     }
 
     @Override
