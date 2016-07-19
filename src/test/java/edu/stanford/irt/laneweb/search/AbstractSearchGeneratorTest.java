@@ -27,9 +27,11 @@ public class AbstractSearchGeneratorTest {
 
         @Override
         protected Object getEmptyResult() {
-            return null;
+            return EMPTY_RESULT;
         }
-    };
+    }
+
+    static final Object EMPTY_RESULT = new Object();;
 
     private AbstractSearchGenerator<Object> generator;
 
@@ -43,8 +45,17 @@ public class AbstractSearchGeneratorTest {
     }
 
     @Test
-    public void testDoGenerate() {
-        this.saxStrategy.toSAX(null, null);
+    public void testDoGenerateEmptyQuery() {
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, ""));
+        this.saxStrategy.toSAX(EMPTY_RESULT, null);
+        replay(this.saxStrategy);
+        this.generator.doGenerate(null);
+        verify(this.saxStrategy);
+    }
+
+    @Test
+    public void testDoGenerateNullQuery() {
+        this.saxStrategy.toSAX(EMPTY_RESULT, null);
         replay(this.saxStrategy);
         this.generator.doGenerate(null);
         verify(this.saxStrategy);
@@ -53,5 +64,9 @@ public class AbstractSearchGeneratorTest {
     @Test
     public void testSetModel() {
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
+        this.saxStrategy.toSAX(null, null);
+        replay(this.saxStrategy);
+        this.generator.doGenerate(null);
+        verify(this.saxStrategy);
     }
 }
