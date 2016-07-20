@@ -8,6 +8,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getId()).andReturn(1);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
-        expect(this.item.getStatus()).andReturn("status");
+        expect(this.item.getStatusList()).andReturn(Collections.singletonList("status"));
         expect(this.item.getCallNumber()).andReturn("call number");
         replay(this.item);
         this.xmlConsumer.startDocument();
@@ -55,7 +56,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getId()).andReturn(1);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn(null);
-        expect(this.item.getStatus()).andReturn("Not Charged");
+        expect(this.item.getStatusList()).andReturn(Collections.singletonList("Not Charged"));
         expect(this.item.getCallNumber()).andReturn("call number");
         replay(this.item);
         this.xmlConsumer.startDocument();

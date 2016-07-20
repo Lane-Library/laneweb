@@ -43,7 +43,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             String callNumber = item.getCallNumber();
             if (callNumber != null) {
                 startDiv(xmlConsumer);
-                createElement(xmlConsumer, "strong", "Call #: " + item.getCallNumber());
+                createElement(xmlConsumer, "strong", "Call #: " + callNumber);
                 endDiv(xmlConsumer);
             }
             endLi(xmlConsumer);
