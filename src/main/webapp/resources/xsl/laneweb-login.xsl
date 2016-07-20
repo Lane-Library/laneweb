@@ -6,7 +6,7 @@
     exclude-result-prefixes="h xs">
     
     <!-- when web server returns a 403:authorization error, user will not be populated but request will contain /secure/ -->
-    <xsl:variable name="unauthorized" as="xs:boolean" select="string-length($userid) &gt; 0 or contains($request-uri,'/secure/')"/>
+    <xsl:variable name="unauthorized" as="xs:boolean" select="string-length($userid) &gt; 0 or ends-with($request-uri,'/error_authz.html')"/>
     
     <!-- the next 6 template matches handle the login state and show links depending on that state -->
     <!-- process the list only if off campus -->

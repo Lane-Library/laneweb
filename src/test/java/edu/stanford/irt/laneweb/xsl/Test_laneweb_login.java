@@ -26,8 +26,8 @@ public class Test_laneweb_login extends AbstractXSLTest {
 
     @Before
     public void setUp() throws Exception {
-        this.transformer = TransformerFactory.newInstance().newTransformer(
-                new StreamSource("src/main/webapp/resources/xsl/laneweb.xsl"));
+        this.transformer = TransformerFactory.newInstance()
+                .newTransformer(new StreamSource("src/main/webapp/resources/xsl/laneweb.xsl"));
         this.source = new StreamSource(getClass().getResourceAsStream("login.xml"));
         this.transformer.setOutputProperty("indent", "yes");
     }
@@ -180,6 +180,15 @@ public class Test_laneweb_login extends AbstractXSLTest {
         this.transformer.setParameter(Model.IPGROUP, "SOM");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueZeroSOM.xml"), sw.toString());
+    }
+
+    @Test
+    public void testUnauthorized() throws TransformerException, IOException {
+        StringWriter sw = new StringWriter();
+        Result result = new StreamResult(sw);
+        this.transformer.setParameter(Model.REQUEST_URI, "/base/error_authz.html");
+        this.transformer.transform(this.source, result);
+        assertEquals(getExpectedResult("Unauthorized.xml"), sw.toString());
     }
 
     @Test
