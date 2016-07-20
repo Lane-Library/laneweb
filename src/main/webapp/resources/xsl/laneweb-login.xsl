@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="h">
+    exclude-result-prefixes="h xs">
     
     <!-- when web server returns a 403:authorization error, user will not be populated but request will contain /secure/ -->
     <xsl:variable name="unauthorized" as="xs:boolean" select="string-length($userid) &gt; 0 or contains($request-uri,'/secure/')"/>
