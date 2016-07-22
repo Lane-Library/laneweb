@@ -24,28 +24,42 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             atts.addAttribute("", "data-bibid", "data-bibid", "CDATA", id);
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
-            createAnchor(xmlConsumer, "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=" + id, item.getTitle());
+            boolean isDigital = item.isDigital();
+            String url = item.getURL();
+            String href;
+            if (isDigital && url != null) {
+                href = url;
+            } else {
+                href = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=" + id;
+            }
+            createAnchor(xmlConsumer, href, item.getTitle());
             String author = item.getAuthor();
             if (author != null) {
                 createElement(xmlConsumer, "div", Normalizer.normalize(author, Form.NFKC));
             }
-            Integer availableCount = item.getAvailableCount();
-            if (availableCount != null) {
-                startDiv(xmlConsumer);
-                createElement(xmlConsumer, "strong", "Status: ");
-                if (availableCount.intValue() == 0) {
-                    XMLUtils.data(xmlConsumer, "Checked Out");
-                } else {
-                    XMLUtils.data(xmlConsumer, "Available ");
-                    createElement(xmlConsumer, "strong", availableCount.toString());
+            startDiv(xmlConsumer);
+            createElement(xmlConsumer, "strong", "Book ");
+            XMLUtils.data(xmlConsumer, isDigital ? "Digital" : "Print");
+            endDiv(xmlConsumer);
+            if (!isDigital) {
+                Integer availableCount = item.getAvailableCount();
+                if (availableCount != null) {
+                    startDiv(xmlConsumer);
+                    createElement(xmlConsumer, "strong", "Status: ");
+                    if (availableCount.intValue() == 0) {
+                        XMLUtils.data(xmlConsumer, "Checked Out");
+                    } else {
+                        XMLUtils.data(xmlConsumer, "Available ");
+                        createElement(xmlConsumer, "strong", availableCount.toString());
+                    }
+                    endDiv(xmlConsumer);
                 }
-                endDiv(xmlConsumer);
-            }
-            String callNumber = item.getCallNumber();
-            if (callNumber != null) {
-                startDiv(xmlConsumer);
-                createElement(xmlConsumer, "strong", "Call #: " + callNumber);
-                endDiv(xmlConsumer);
+                String callNumber = item.getCallNumber();
+                if (callNumber != null) {
+                    startDiv(xmlConsumer);
+                    createElement(xmlConsumer, "strong", "Call #: " + callNumber);
+                    endDiv(xmlConsumer);
+                }
             }
             endLi(xmlConsumer);
         } catch (SAXException e) {

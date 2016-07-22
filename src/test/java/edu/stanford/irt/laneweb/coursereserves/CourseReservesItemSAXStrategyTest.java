@@ -37,6 +37,8 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
+        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
         expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(1));
@@ -53,10 +55,10 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAXNullAuthor() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
+        expect(this.item.isDigital()).andReturn(true);
+        expect(this.item.getURL()).andReturn("url");
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn(null);
-        expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(2));
-        expect(this.item.getCallNumber()).andReturn("call number");
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
