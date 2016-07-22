@@ -40,7 +40,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getId()).andReturn(1);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
-        expect(this.item.getStatusList()).andReturn(Collections.singletonList("status"));
+        expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(1));
         expect(this.item.getCallNumber()).andReturn("call number");
         replay(this.item);
         this.xmlConsumer.startDocument();
@@ -56,7 +56,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getId()).andReturn(1);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn(null);
-        expect(this.item.getStatusList()).andReturn(Collections.singletonList("Not Charged"));
+        expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(2));
         expect(this.item.getCallNumber()).andReturn("call number");
         replay(this.item);
         this.xmlConsumer.startDocument();

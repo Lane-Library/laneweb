@@ -20,12 +20,11 @@
     <bean name="edu.stanford.irt.coursereserves.CourseReservesDAO"
         class="edu.stanford.irt.coursereserves.CourseReservesDAO">
         <constructor-arg ref="javax.sql.DataSource/grandrounds"/>
-        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItem.fnc"/>
         <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/itemStatus.sql"/>
         <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/course.sql"/>
         <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courses.sql"/>
-        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItemListCourse.sql"/>
-        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItemListAll.sql"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItemListAll.fnc"/>
+        <constructor-arg value="classpath:/edu/stanford/irt/coursereserves/courseReservesItemListCourse.fnc"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/courses"

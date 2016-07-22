@@ -2,7 +2,9 @@
 <li>
    <img class="bookcover" data-bibid="1"/>
    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=1">title</a>
-   <div>Item Status: Not Checked Out</div>
+   <div>
+      <strong>Status: </strong>Available <strong>2</strong>
+   </div>
    <div>
       <strong>Call #: call number</strong>
    </div>

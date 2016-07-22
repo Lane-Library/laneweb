@@ -3,7 +3,9 @@
    <img class="bookcover" data-bibid="1"/>
    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=1">title</a>
    <div>author</div>
-   <div>Item Status: status</div>
+   <div>
+      <strong>Status: </strong>Available <strong>1</strong>
+   </div>
    <div>
       <strong>Call #: call number</strong>
    </div>
