@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-07-25" version="3.2.31" description="3.2.31 bug fix release">
+            <action date="2016-07-21" dev="olgary" issue="125038" type="update">
+                added a link to career center portal into template drop down
+            </action>
+            <action date="2016-07-21" dev="ryanmax" issue="124981" type="fix">
+                persistent login option makes login screen bounce
+            </action>
+            <action date="2016-07-20" dev="ryanmax" issue="124976" type="fix">
+                logout option missing from 403 unauthorized error page
+            </action>
+            <action date="2016-07-19" dev="ryanmax" issue="124881" type="fix">
+                long spelling suggestions overlap content
+            </action>
+            <action date="2016-07-22" dev="ceyates" issue="124698" type="fix">
+                digital course reserves are missing
+            </action>
+        </release>
         <release date="2016-07-18" version="3.2.30" description="3.2.30 bug fix release">
             <action date="2016-07-18" dev="ryanmax" issue="124821" type="remove">
                 remove linkscan generator
