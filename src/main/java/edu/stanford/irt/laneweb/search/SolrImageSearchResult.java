@@ -12,7 +12,7 @@ public class SolrImageSearchResult extends AbstractSolrSearchResult<Image> {
 
     public static final SolrImageSearchResult EMPTY_RESULT = new SolrImageSearchResult(null,
             new SolrResultPage<Image>(Collections.emptyList()), null,
-            new SolrResultPage<FacetFieldEntry>(Collections.emptyList()), null, null, null);;
+            new SolrResultPage<FacetFieldEntry>(Collections.emptyList()), null, null, null);
 
     private Page<FacetFieldEntry> facet;
 
