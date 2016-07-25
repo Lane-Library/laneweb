@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2016-07-25" version="3.2.31" description="3.2.31 bug fix release">
+            <action date="2016-07-22" dev="ceyates" issue="125086" type="update">
+                permit id parameter in /biomed-resources
+            </action>
             <action date="2016-07-21" dev="olgary" issue="125038" type="update">
                 added a link to career center portal into template drop down
             </action>
