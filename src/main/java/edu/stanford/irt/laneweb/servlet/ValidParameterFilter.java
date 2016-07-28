@@ -45,6 +45,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("template", valid);
             this.parameterValidators.put("site_preference", valid);
             this.parameterValidators.put("source", valid);
+            this.parameterValidators.put("id", new ParameterValueValidator("id", Pattern.compile("^\\d+$")));
             // next three get put into google search results
             this.parameterValidators.put("ved", valid);
             this.parameterValidators.put("sa", valid);

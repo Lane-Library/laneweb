@@ -31,7 +31,7 @@ public class SolrImageSearchGeneratorTest {
 
     private Map<String, Object> model;
 
-    private SAXStrategy<Map<String, Object>> saxStrategy;
+    private SAXStrategy<SolrImageSearchResult> saxStrategy;
 
     private SolrImageService service;
 
@@ -42,7 +42,7 @@ public class SolrImageSearchGeneratorTest {
         this.saxStrategy = createMock(SAXStrategy.class);
         this.facetPage = createMock(FacetPage.class);
         this.generator = new SolrImageSearchGenerator(this.service, this.saxStrategy);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.model.put(Model.QUERY, "query");
     }
 
@@ -57,10 +57,10 @@ public class SolrImageSearchGeneratorTest {
         expect(this.service.facetOnWebsiteId(eq("query"), eq("10"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=cc-", result.get("path"));
-        assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Broad Reuse Rights", result.get("tab"));
+        SolrImageSearchResult result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=cc-", result.getPath());
+        assertEquals("query", result.getQuery());
+        assertEquals("Broad Reuse Rights", result.getTab());
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -76,10 +76,10 @@ public class SolrImageSearchGeneratorTest {
         expect(this.service.facetOnWebsiteId(eq("query"), eq("0"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=images-", result.get("path"));
-        assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Maximum Reuse Rights", result.get("tab"));
+        SolrImageSearchResult result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=images-", result.getPath());
+        assertEquals("query", result.getQuery());
+        assertEquals("Maximum Reuse Rights", result.getTab());
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -95,10 +95,10 @@ public class SolrImageSearchGeneratorTest {
         expect(this.service.facetOnWebsiteId(eq("query"), eq("15"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=pmc-", result.get("path"));
-        assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Possible Reuse Rights", result.get("tab"));
+        SolrImageSearchResult result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=pmc-", result.getPath());
+        assertEquals("query", result.getQuery());
+        assertEquals("Possible Reuse Rights", result.getTab());
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
@@ -114,10 +114,10 @@ public class SolrImageSearchGeneratorTest {
         expect(this.service.facetOnWebsiteId(eq("query"), eq("20"))).andReturn(this.facetPage);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
-        Map<String, Object> result = this.generator.doSearch("query");
-        assertEquals("/search.html?q=query&source=rl-", result.get("path"));
-        assertEquals("query", result.get(Model.QUERY));
-        assertEquals("Restrictive Reuse Rights", result.get("tab"));
+        SolrImageSearchResult result = this.generator.doSearch("query");
+        assertEquals("/search.html?q=query&source=rl-", result.getPath());
+        assertEquals("query", result.getQuery());
+        assertEquals("Restrictive Reuse Rights", result.getTab());
         assertEquals(52, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);

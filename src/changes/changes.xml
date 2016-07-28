@@ -7,6 +7,56 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-07-25" version="3.2.31" description="3.2.31 bug fix release">
+            <action date="2016-07-22" dev="ceyates" issue="125086" type="update">
+                permit id parameter in /biomed-resources
+            </action>
+            <action date="2016-07-21" dev="olgary" issue="125038" type="update">
+                added a link to career center portal into template drop down
+            </action>
+            <action date="2016-07-21" dev="ryanmax" issue="124981" type="fix">
+                persistent login option makes login screen bounce
+            </action>
+            <action date="2016-07-20" dev="ryanmax" issue="124976" type="fix">
+                logout option missing from 403 unauthorized error page
+            </action>
+            <action date="2016-07-19" dev="ryanmax" issue="124881" type="fix">
+                long spelling suggestions overlap content
+            </action>
+            <action date="2016-07-22" dev="ceyates" issue="124698" type="fix">
+                digital course reserves are missing
+            </action>
+        </release>
+        <release date="2016-07-18" version="3.2.30" description="3.2.30 bug fix release">
+            <action date="2016-07-18" dev="ryanmax" issue="124821" type="remove">
+                remove linkscan generator
+            </action>
+            <action date="2016-07-13" dev="ceyates" issue="124576" type="update">
+                course reserves - minor tweaks
+            </action>
+            <action date="2016-07-12" dev="ryanmax" issue="124500" type="fix">
+                abstract labels not rendering correctly
+            </action>
+            <action date="2016-07-12" dev="ceyates" issue="124462" type="fix">
+                Feedback-bug: broken download links for printers
+            </action>
+            <action date="2016-07-13" dev="ceyates" issue="122543" type="update">
+                course reserves final edits
+            </action>
+        </release>
+        <release date="2016-07-11" version="3.2.29" description="3.2.29 bug fix release">
+            <action date="2016-07-08" dev="alainb" issue="124223" type="add">
+                add 2 more searches to the bioresearch search
+            </action>
+            <action date="2016-07-06" dev="ceyates" issue="124143" type="update">
+                make lane search the default for the career center portal
+            </action>
+        </release>
+        <release date="2016-07-01" version="3.2.28" description="3.2.28 bug fix release">
+            <action date="2016-06-28" dev="ceyates" issue="122542" type="update">
+                Exclude 2 categories from the course reserves 
+            </action>
+        </release>
         <release date="2016-06-20" version="3.2.27" description="3.2.27 bug fix release"/>
         <release date="2016-06-13" version="3.2.26" description="3.2.26 bug fix release">
             <action date="2016-06-12" dev="ryanmax" issue="120790" type="update">

@@ -224,20 +224,13 @@
             <map:transform type="saxon" src="resources/xsl/equipment-status.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
-        <map:match type="wildcard" pattern="course-reserves-department.xml">
-            <map:generate type="course-reserves-by-department"/>
+        <map:match type="wildcard" pattern="course-reserves/courses.xml">
+            <map:generate type="courses"/>
+            <map:transform type="joost" src="resources/xsl/add-menuitem-active.stx"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="course-reserves-titles.xml">
-            <map:generate type="course-reserves-by-title"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match type="wildcard" pattern="course-reserves-instructors.xml">
-            <map:generate type="course-reserves-by-instructor"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match type="wildcard" pattern="course-reserves-departments.xml">
-            <map:generate type="course-reserves-departments"/>
+        <map:match type="wildcard" pattern="course-reserves/item-list.xml">
+            <map:generate type="course-reserves-item-list"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match type="wildcard" pattern="audio.xml">

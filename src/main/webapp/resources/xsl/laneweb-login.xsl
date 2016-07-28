@@ -2,7 +2,11 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="h">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="h xs">
+    
+    <!-- when web server returns a 403:authorization error, user will not be populated and request will be /error_authz.html (configured in web server) -->
+    <xsl:variable name="unauthorized" as="xs:boolean" select="string-length($userid) &gt; 0 or ends-with($request-uri,'/error_authz.html')"/>
     
     <!-- the next 6 template matches handle the login state and show links depending on that state -->
     <!-- process the list only if off campus -->
@@ -25,6 +29,7 @@
                 <xsl:when test="string-length($userid) &gt; 0">
                     <xsl:value-of select="$userid"/>
                 </xsl:when>
+                <xsl:when test="$unauthorized"/>
                 <xsl:otherwise>
                         <xsl:apply-templates select="child::node()"/>
                 </xsl:otherwise>
@@ -50,7 +55,7 @@
     </xsl:template>
     <!-- the 4th #login li is the logout link -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
-        <xsl:if test="string-length($userid) &gt; 0">
+        <xsl:if test="string-length($userid) &gt; 0 or $unauthorized">
             <xsl:copy>
                 <xsl:apply-templates select="child::node()"/>
             </xsl:copy>

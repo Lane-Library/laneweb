@@ -61,10 +61,10 @@
 
     //To display the persistent checkbox in the discoverypage
     if(Y.one('#persistent')){
-        var div = Y.one('#persistent div.header'),
-        isPersistent = Y.Node.create("<div class='is-persistent'><input type='checkbox' id='is-persistent-login' /> <label>Log me in for 2 weeks (DON’T check if on a shared computer)</label></div>");
-        div.insert(isPersistent, 'after');
-
+        var isPersistent = Y.one('.is-persistent');
+        if (isPersistent) {
+            isPersistent.setStyle('visibility','visible');
+        }
         Y.on('change',     function(event) {
             var checkbox = event.target;
             if(checkbox.get('checked')) {

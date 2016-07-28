@@ -55,7 +55,7 @@ public class ResourceSearchGeneratorTest {
         expect(this.result.getId()).andReturn("resource-2-2");
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         replay(this.manager, this.saxStrategy, this.result);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         model.put(Model.QUERY, "query");
         model.put("resources", Collections.singleton("resource-2-1"));
         this.generator.setParameters(Collections.emptyMap());
@@ -77,7 +77,7 @@ public class ResourceSearchGeneratorTest {
         expect(this.result.getId()).andReturn("resource-2-2");
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         replay(this.manager, this.saxStrategy, this.result);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         model.put("resources", Collections.singleton("resource-2-1"));
         model.put(Model.QUERY, "query");
         this.generator.setModel(model);
@@ -99,7 +99,7 @@ public class ResourceSearchGeneratorTest {
         expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         replay(this.manager, this.saxStrategy, this.result);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
         parameters.put("resource-list", "resource-1-2,resource-2-1,foo");
         this.generator.setParameters(parameters);
         this.generator.doSearch("query");

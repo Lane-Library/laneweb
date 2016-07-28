@@ -18,6 +18,11 @@
                         correctedUrl = Y.lane.Location.get("href").replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
                         //strip #facet stuff from URL
                         correctedUrl = correctedUrl.replace(/#.*/,'');
+                        // if the suggestion is long, set parent container height;
+                        // this creates UI bounce, so only do it as needed
+                        if (sc.suggestion.length > 110) {
+                            spellCheck.ancestor(".popin").setStyle("height","100%");
+                        }
                         a = spellCheck.one('a');
                         a.set('href', correctedUrl);
                         a.set('innerHTML', sc.suggestion);

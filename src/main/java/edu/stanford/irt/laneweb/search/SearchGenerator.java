@@ -41,22 +41,20 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
         return searchWithEngines(query, null);
     }
 
+    @Override
+    protected Result getEmptyResult() {
+        return EMPTY_RESULT;
+    }
+
     protected Result searchWithEngines(final String query, final Collection<String> engines) {
-        Result result = null;
-        if (query == null || query.isEmpty()) {
-            result = EMPTY_RESULT;
-        } else {
-            long wait = DEFAULT_TIMEOUT;
-            if (null != this.timeout) {
-                try {
-                    wait = Long.parseLong(this.timeout);
-                } catch (NumberFormatException nfe) {
-                    wait = DEFAULT_TIMEOUT;
-                }
+        long wait = DEFAULT_TIMEOUT;
+        if (null != this.timeout) {
+            try {
+                wait = Long.parseLong(this.timeout);
+            } catch (NumberFormatException nfe) {
+                wait = DEFAULT_TIMEOUT;
             }
-            final SimpleQuery q = new SimpleQuery(query);
-            result = search(q, engines, wait);
         }
-        return result;
+        return search(new SimpleQuery(query), engines, wait);
     }
 }

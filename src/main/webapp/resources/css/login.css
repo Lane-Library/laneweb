@@ -29,6 +29,7 @@
     font-weight: bold;
     margin-left: 20px;
     margin-right: 10px;
+    visibility: hidden;
 }
 
 #persistent .is-persistent input{

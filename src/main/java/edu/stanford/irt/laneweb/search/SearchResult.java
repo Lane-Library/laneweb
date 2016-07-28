@@ -22,19 +22,15 @@ public class SearchResult implements Comparable<SearchResult> {
 
     private int score;
 
-    private String title;
-
     private String sortTitle;
+
+    private String title;
 
     public SearchResult(final ContentResult contentResult, final Result resourceResult, final int score) {
         this.score = score < 0 ? 0 : score;
         this.title = contentResult.getTitle();
         this.contentResult = contentResult;
         this.resourceResult = resourceResult;
-    }
-
-    public int getScore() {
-        return this.score;
     }
 
     @Override
@@ -47,18 +43,6 @@ public class SearchResult implements Comparable<SearchResult> {
             }
         }
         return value;
-    }
-
-    public String getSortTitle() {
-        if (this.sortTitle == null) {
-            if (this.title == null) {
-                this.sortTitle = "";
-            } else {
-                String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
-                this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
-            }
-        }
-        return this.sortTitle;
     }
 
     @Override
@@ -79,6 +63,22 @@ public class SearchResult implements Comparable<SearchResult> {
 
     public Result getResourceResult() {
         return this.resourceResult;
+    }
+
+    public int getScore() {
+        return this.score;
+    }
+
+    public String getSortTitle() {
+        if (this.sortTitle == null) {
+            if (this.title == null) {
+                this.sortTitle = "";
+            } else {
+                String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
+                this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
+            }
+        }
+        return this.sortTitle;
     }
 
     public boolean hasAdditionalText() {

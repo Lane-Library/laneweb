@@ -54,13 +54,6 @@ public class ContentSearchGeneratorTest {
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
 
-    @Test
-    public void testdoSearchEmptyQuery() {
-        replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-        this.generator.doSearch("");
-        verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-    }
-
     @SuppressWarnings("unchecked")
     @Test
     public void testdoSearchEngines() {
@@ -71,13 +64,6 @@ public class ContentSearchGeneratorTest {
         replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
         this.generator.setParameters(Collections.singletonMap(Model.ENGINES, "a,b,c"));
         this.generator.doSearch("query");
-        verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-    }
-
-    @Test
-    public void testdoSearchNullQuery() {
-        replay(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
-        this.generator.doSearch(null);
         verify(this.metasearchManager, this.conversionStrategy, this.saxStrategy);
     }
 

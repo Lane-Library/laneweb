@@ -100,10 +100,6 @@ public class SolrService {
         return this.repository.browseAllCoreByType(type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
-    public List<Eresource> getLinkscanLinks() {
-        return this.repository.browseLinkscanLinks(new PageRequest(0, Integer.MAX_VALUE));
-    }
-
     public List<Eresource> getMesh(final String type, final String mesh) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);

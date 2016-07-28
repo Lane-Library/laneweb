@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
-import java.util.Objects;
 
 import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
@@ -23,13 +22,18 @@ public abstract class AbstractSearchGenerator<T> extends AbstractGenerator imple
     @Override
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
-        Objects.requireNonNull(this.query, "null query");
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        this.saxStrategy.toSAX(doSearch(this.query), xmlConsumer);
+        if (this.query == null || this.query.isEmpty()) {
+            this.saxStrategy.toSAX(getEmptyResult(), xmlConsumer);
+        } else {
+            this.saxStrategy.toSAX(doSearch(this.query), xmlConsumer);
+        }
     }
 
     protected abstract T doSearch(String query);
+
+    protected abstract T getEmptyResult();
 }

@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.xml.sax.SAXException;
@@ -11,10 +10,11 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
+import edu.stanford.irt.laneweb.search.SolrSearchResult;
 import edu.stanford.irt.laneweb.solr.Eresource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, Object>> {
+public class SolrPagingEresourceSAXStrategy implements SAXStrategy<SolrSearchResult> {
 
     private static final String LENGTH = "length";
 
@@ -31,11 +31,10 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<Map<String, O
     }
 
     @Override
-    public void toSAX(final Map<String, Object> object, final XMLConsumer xmlConsumer) {
-        @SuppressWarnings("unchecked")
-        Page<Eresource> page = (Page<Eresource>) object.get("resultPage");
+    public void toSAX(final SolrSearchResult object, final XMLConsumer xmlConsumer) {
+        Page<Eresource> page = object.getPage();
         List<Eresource> eresources = page.getContent();
-        String query = (String) object.get("searchTerm");
+        String query = object.getQuery();
         int pageSize = page.getSize();
         int pageNumber = page.getNumber();
         long start = pageSize * pageNumber;

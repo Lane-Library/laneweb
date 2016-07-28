@@ -42,7 +42,7 @@ public class ParameterMapGeneratorTest {
     public void testDoGenerateXMLConsumer() throws IOException {
         Capture<Map<String, String[]>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
-        Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+        Map<String, String[]> parameterMap = new HashMap<>();
         parameterMap.put("foo", new String[] { "bar", "baz" });
         this.generator.setModel(Collections.singletonMap(Model.PARAMETER_MAP, parameterMap));
         this.marshaller.marshal(capture(mapCapture), capture(saxResultCapture));

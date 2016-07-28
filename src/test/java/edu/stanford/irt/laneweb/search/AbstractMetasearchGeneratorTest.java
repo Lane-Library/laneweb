@@ -26,6 +26,11 @@ public class AbstractMetasearchGeneratorTest {
         protected Result doSearch(final String query) {
             return null;
         }
+
+        @Override
+        protected Result getEmptyResult() {
+            return null;
+        }
     }
 
     private AbstractMetasearchGenerator<Result> generator;

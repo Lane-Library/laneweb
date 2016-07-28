@@ -16,7 +16,7 @@ import edu.stanford.irt.laneweb.resource.Resource;
 
 public class DescriptionLabelTransformerTest {
 
-    private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL-DASH/SLASH## inside of it"
+    private static final char[] CHARS = "some characters with ::DESCRIPTION LABEL-DASH/SLASH & lowercase text (-12)## inside of it"
             .toCharArray();
 
     private DescriptionLabelTransformer transformer;
@@ -36,10 +36,10 @@ public class DescriptionLabelTransformerTest {
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.DESCRIPTION_LABEL),
                 eq(Resource.DESCRIPTION_LABEL), isA(Attributes.class));
-        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(28));
+        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(51));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.DESCRIPTION_LABEL),
                 eq(Resource.DESCRIPTION_LABEL));
-        this.xmlConsumer.characters(isA(char[].class), eq(53), eq(13));
+        this.xmlConsumer.characters(isA(char[].class), eq(76), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION);
         replay(this.xmlConsumer);
         this.transformer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION, null);
