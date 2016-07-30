@@ -20,7 +20,6 @@ $ cd $HOME/projects/lane
 $ git clone git@gitlab.med.stanford.edu:irt-lane/laneweb.git
 $ cd laneweb
 
-$ source env.sh
 $ make build
 ```
 
@@ -33,14 +32,12 @@ $ make build_docker
 ## Push to repo
 
 ```
-source env.sh
 $ make push
 ```
 
 ## Pull the latest image from repo
 
 ```
-source env.sh
 $ make pull
 ```
 
@@ -51,6 +48,5 @@ This repo support [DroneCI](https://drone.med.stanford.edu/irt-lane/laneweb).
 To setup the deployment key before git commit and push for ci:
 
 ```
-source env.sh
 $ make sec
 ```

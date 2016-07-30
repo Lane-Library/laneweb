@@ -1,3 +1,7 @@
+include env.sh
+
+export VERSION=$(shell git rev-parse --verify HEAD)
+
 all: build
 
 build:
