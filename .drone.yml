@@ -2,8 +2,8 @@ build:
   bundle:
     image: maven:latest
     commands:
-      - mvn -s settings.xml
-      - mvn -s settings.xml org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate
+      - mvn -s settings.xml -Dmaven.wagon.http.ssl.insecure=true package
+      - mvn -s settings.xml -Dmaven.wagon.http.ssl.insecure=true org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate
         -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)' 2> /dev/null > build/project-version
     when:
       branches:
