@@ -16,7 +16,7 @@ publish:
     password: >
       $$REGISTRY_KEY
     email: $$REGISTRY_EMAIL
-    repo: clever-circlet-125504/nodeapp
+    repo: som-lane-dev/laneweb
     tag:
       - latest
       - $$COMMIT
@@ -27,9 +27,9 @@ notify:
     channel: $$CHANNEL
     username: irt-lane/laneweb
     template: >
-      xuwang/docker-nodeapp build #{{ build.number }} finished with a {{ build.status }} status
-      Build log: https://drone.med.stanford.edu/xuwang/docker-nodeapp/{{ build.number }}
-      Changes: https://gitlab.med.stanford.edu/xuwang/docker-nodeapp/commit/$$COMMIT
+      irt-lane/laneweb build #{{ build.number }} finished with a {{ build.status }} status
+      Build log: https://drone.med.stanford.edu/irt-lane/laneweb/{{ build.number }}
+      Changes: https://gitlab.med.stanford.edu/irt-lane/laneweb/commit/$$COMMIT
 
   # downstream:
   #   repositories:
