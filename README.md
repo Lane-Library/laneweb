@@ -13,7 +13,7 @@ $ git clone git@gitlab.med.stanford.edu:irt-lane/accounts.git
 $ cd accounts
 $ git-crypt unlock
 ```
-### Clone the laneweb repo and build
+### Clone the laneweb repo and build war
     
 ```
 $ cd $HOME/projects/lane
@@ -21,7 +21,13 @@ $ git clone git@gitlab.med.stanford.edu:irt-lane/laneweb.git
 $ cd laneweb
 
 $ source env.sh
-$ make
+$ make build
+```
+
+### build docker image
+    
+```
+$ make build_docker
 ```
 
 ## Push to repo

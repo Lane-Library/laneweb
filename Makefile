@@ -1,4 +1,4 @@
-all: build_docker
+all: build
 
 build:
 	mvn -s settings.xml clean package
@@ -6,11 +6,11 @@ build:
 		-Dexpression=project.version \
 		| grep -Ev '(^\[|Download\w+:)' 2> /dev/null > build/project-version
 
-build_docker: #build
+build_docker:
 	docker build --build-arg PROJECT_VERSION=$(shell cat target/project-version) -t ${IMAGE}:${VERSION} .
 
-build_nc: build
-	docker build --no-cache=true -t ${IMAGE}:${VERSION} .
+build_nc:
+	docker build --no-cache=true --build-arg PROJECT_VERSION=$(shell cat target/project-version) -t ${IMAGE}:${VERSION} .
 
 prune:
 	docker rm `docker ps -q -a --filter status=exited`
