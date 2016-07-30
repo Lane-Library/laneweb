@@ -24,7 +24,7 @@ $ source env.sh
 $ make build
 ```
 
-### build docker image
+### Build docker image
     
 ```
 $ make build_docker
