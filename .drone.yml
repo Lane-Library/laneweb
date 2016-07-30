@@ -1,0 +1,40 @@
+build:
+  bundle:
+    image: maven:latest
+    commands:
+      - mvn -s settings.xml
+      - mvn -s settings.xml org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate
+        -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)' 2> /dev/null > build/project-version
+    when:
+      branches:
+        - dev
+
+publish:
+  docker:
+    registry: $$REGISTRY
+    username: $$REGISTRY_USER
+    password: >
+      $$REGISTRY_KEY
+    email: $$REGISTRY_EMAIL
+    repo: clever-circlet-125504/nodeapp
+    tag:
+      - latest
+      - $$COMMIT
+
+notify:
+  slack:
+    webhook_url: $$SLACK_URL
+    channel: $$CHANNEL
+    username: irt-lane/laneweb
+    template: >
+      xuwang/docker-nodeapp build #{{ build.number }} finished with a {{ build.status }} status
+      Build log: https://drone.med.stanford.edu/xuwang/docker-nodeapp/{{ build.number }}
+      Changes: https://gitlab.med.stanford.edu/xuwang/docker-nodeapp/commit/$$COMMIT
+
+  # downstream:
+  #   repositories:
+  #     - irt-lane/kube-laneweb
+  #   token: $$DRONE_TOKEN
+  #   fork: true
+  #   when:
+  #     success: true
