@@ -1,4 +1,4 @@
-[![Build Status](https://drone.med.stanford.edu/api/badges/irt-lane/laneweb/status.svg)](https://drone.med.stanford.edu/xuwang/docker-nodeapp)
+[![Build Status](https://drone.med.stanford.edu/api/badges/irt-lane/laneweb/status.svg)](https://drone.med.stanford.edu/irt-lane/laneweb)
 
 # Laneweb WAR in Docker
 
