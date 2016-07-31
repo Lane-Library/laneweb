@@ -8,13 +8,13 @@ build:
 	mvn -s settings.xml clean package
 	mvn -s settings.xml org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \
 		-Dexpression=project.version \
-		| grep -Ev '(^\[|Download\w+:)' 2> /dev/null > build/project-version
+		| grep -Ev '(^\[|Download\w+:)' 2> /dev/null > project-version
 
 build_docker:
-	docker build --build-arg PROJECT_VERSION=$(shell cat target/project-version) -t ${IMAGE}:${VERSION} .
+	docker build --build-arg PROJECT_VERSION=$(shell cat project-version) -t ${IMAGE}:${VERSION} .
 
 build_nc:
-	docker build --no-cache=true --build-arg PROJECT_VERSION=$(shell cat target/project-version) -t ${IMAGE}:${VERSION} .
+	docker build --no-cache=true --build-arg PROJECT_VERSION=$(shell cat project-version) -t ${IMAGE}:${VERSION} .
 
 prune:
 	docker rm `docker ps -q -a --filter status=exited`
