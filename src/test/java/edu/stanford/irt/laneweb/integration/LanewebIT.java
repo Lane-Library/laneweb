@@ -194,6 +194,14 @@ public class LanewebIT {
             this.mockMvc.perform(get("/eresources/search.html?q=journal of the american medical association").servletPath("/eresources/search.html"))
                     .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of the American Medical Association']", ns)
                             .exists());
+            // jama
+            this.mockMvc.perform(get("/eresources/search.html?q=jama").servletPath("/eresources/search.html"))
+            .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='JAMA']", ns)
+                    .exists());
+            // jaad
+            this.mockMvc.perform(get("/eresources/search.html?q=jaad").servletPath("/eresources/search.html"))
+            .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']", ns)
+                    .exists());
         }
     }
 
