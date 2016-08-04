@@ -168,7 +168,7 @@ public class LanewebIT {
             // Bates Guide
             this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
                     .andExpect(
-                            xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title=\"Bates' Guide to the physical examination videos\"]",
+                            xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title=\"Bates' Guide to the physical examination videos\"]",
                                     ns).exists());
             // directions
             this.mockMvc.perform(get("/eresources/search.html?q=directions").servletPath("/eresources/search.html"))
