@@ -10,23 +10,12 @@
         var resourceIds = [],
             searchRequests = [],
             startTime,
-            containsUberId = function(url, resourceId) {
-                var containsUberId = false,
-                    cro = "cro_";
-                if (resourceId.match(/cro_/)) {
-                    containsUberId = url.indexOf(cro) > 0;
-                }
-                return containsUberId;
-            },
             getSearchUrl = function() {
-                var i, resourceId,
+                var i,
                     appsSearch = "/apps/search/json?q=",
                     searchUrl = basePath + appsSearch + encodedQuery;
                 for (i = 0; i < resourceIds.length; i++) {
-                    resourceId = resourceIds[i];
-                    if (!containsUberId(searchUrl, resourceId)) {
-                        searchUrl += '&r=' + resourceId;
-                    }
+                    searchUrl += '&r=' + resourceIds[i];
                 }
                 searchUrl += '&rd=' + Math.random();
                 return searchUrl;
