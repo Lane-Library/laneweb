@@ -11,9 +11,6 @@
             <action date="2016-08-03" dev="ryanmax" issue="125635" type="update">
                 prep for Solr 5.5 upgrade: boolean OR searching
             </action>
-            <action date="2016-08-05" dev="olgary" issue="125038" type="update">
-                another CC name change - template and debug xml
-            </action>
         </release>
         <release date="2016-08-01" version="3.2.32" description="3.2.32 bug fix release">
             <action date="2016-07-29" dev="olgary" issue="125453" type="update">
