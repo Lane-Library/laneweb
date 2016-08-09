@@ -7,6 +7,19 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-08-08" version="3.2.33" description="3.2.33 bug fix release">
+            <action date="2016-08-03" dev="ryanmax" issue="125635" type="update">
+                prep for Solr 5.5 upgrade: boolean OR searching
+            </action>
+        </release>
+        <release date="2016-08-01" version="3.2.32" description="3.2.32 bug fix release">
+            <action date="2016-07-29" dev="olgary" issue="125453" type="update">
+                template.xml, debug.xml
+            </action>
+            <action date="2016-07-26" dev="ryanmax" issue="125259" type="fix">
+                overlapping X in search box 
+            </action>
+        </release>
         <release date="2016-07-25" version="3.2.31" description="3.2.31 bug fix release">
             <action date="2016-07-22" dev="ceyates" issue="125086" type="update">
                 permit id parameter in /biomed-resources

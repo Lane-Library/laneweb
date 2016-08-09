@@ -17,11 +17,12 @@
     width: 124px;
 }
 #searchTerms {
-    width: 566px;
+    width: 506px;
     border: 0 none;
     height: 46px;
     box-sizing: border-box;
     margin-left: 8px;
+    margin-right: 60px;
     font-size: 14px;
 }
 #searchTerms::-ms-clear {

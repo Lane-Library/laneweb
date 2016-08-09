@@ -13,6 +13,6 @@ public final class NumberQueryInspector implements QueryInspector {
 
     @Override
     public String inspect(final String query) {
-        return NUMBER_PATTERN.matcher(query).replaceFirst("id:pubmed-$1 OR id:bib-$1");
+        return NUMBER_PATTERN.matcher(query).replaceFirst("recordId:$1");
     }
 }

@@ -21,6 +21,7 @@ public class SolrQueryParserTest {
         this.inspectors.add(new DoiQueryInspector());
         this.inspectors.add(new PmidQueryInspector());
         this.inspectors.add(new NumberQueryInspector());
+        this.inspectors.add(new ORQueryInspector());
         this.inspectors.add(new EscapingQueryInspector());
         this.parser = new SolrQueryParser(this.inspectors);
     }
@@ -45,8 +46,8 @@ public class SolrQueryParserTest {
         assertEquals("pmid\\:12345", this.parser.parse("pmid12345"));
         assertEquals("pmid\\:12345678", this.parser.parse("pubmed id 12345678"));
         assertEquals("pubmed id 12345678", this.parser.parse("advanced:true pubmed id 12345678"));
-        assertEquals("id:pubmed-12345678 OR id:bib-12345678", this.parser.parse("12345678"));
-        assertEquals("id:pubmed-12345 OR id:bib-12345", this.parser.parse("12345"));
+        assertEquals("recordId:12345678", this.parser.parse("12345678"));
+        assertEquals("recordId:12345", this.parser.parse("12345"));
         assertEquals("12345 54321", this.parser.parse("12345 54321"));
         assertEquals("12345\\-54321", this.parser.parse("12345-54321"));
         assertEquals("10.1016/j.it.2015.02.003", this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
@@ -56,5 +57,6 @@ public class SolrQueryParserTest {
                 this.parser.parse("BMJ 2015; 351 doi: http://dx.doi.org/10.1136/bmj.h5942"));
         assertEquals("10.1016/j.it.2015.02.003 10.1136/bmj.h5942",
                 this.parser.parse("doi.org/10.1016/j.it.2015.02.003 http://dx.doi.org/10.1136/bmj.h5942"));
+        assertEquals("(id:12345 OR id:123456) OR (id:12345 OR id:123456)", this.parser.parse("id:12345 OR id:123456"));
     }
 }
