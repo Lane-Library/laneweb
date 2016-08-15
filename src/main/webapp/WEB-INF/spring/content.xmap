@@ -102,7 +102,7 @@
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
                         <map:parameter name="timeout" value="0"/>
-                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,highwire,clinicaltrials_all,proteome,cap,wiley_0,pubmed,stanford_clinicaltrials,lane,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,ubcbioinfolinks,crosssearch1"/>
+                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,highwire,clinicaltrials_all,proteome,cap,pubmed,stanford_clinicaltrials,lane,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,ubcbioinfolinks,crosssearch1"/>
                     </map:generate>
                     <map:generate type="file" src="cocoon://content/cached/search/bioresearch-all.html"/>
                 </map:aggregate>
