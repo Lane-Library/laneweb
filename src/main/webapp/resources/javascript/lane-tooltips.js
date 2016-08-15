@@ -434,7 +434,7 @@
     }),
 
     createTooltips = function() {
-            var tooltipTriggerIds = '',
+            var tooltipTriggerIds = '.search-tab',
                 tooltipContainer, tooltipId, i, j, tt, content = {},
                 tooltipContainerNodeList = Y.all('.tooltips');
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
@@ -456,7 +456,7 @@
                 autoHideDelay: 60000,
                 constrain:true,
                 render : true,
-                delegate : ".content"
+                delegate : "#main"
             });
             tt.after('visibleChange', function(e) {
                 if (!e.newVal) {

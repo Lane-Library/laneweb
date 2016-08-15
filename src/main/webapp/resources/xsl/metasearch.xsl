@@ -31,6 +31,7 @@
     
     <xsl:template match="h:body">
         <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
             <!-- IE browsers cannot import NOSCRIPT elements (LANE.core.importNode) so only display on non-ajax requests -->
             <xsl:if test="not(contains($request-uri,'/plain/')) and /doc/s:search/@s:status != 'successful'">
                 <noscript>

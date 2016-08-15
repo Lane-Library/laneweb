@@ -276,7 +276,7 @@
                 <artifactId>httpcore</artifactId>
              </exclusion>
             </exclusions>
-        </dependency>       
+        </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
@@ -449,7 +449,6 @@
                                 <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
-                                <include>search-select-min.css</include>
                                 <include>search-image-min.css</include>
                                 <include>som-header-min.css</include>
                                 <include>classes-min.css</include>
@@ -460,6 +459,7 @@
                                 <include>back-to-top-min.css</include>
                                 <includes>solr-facets-min.css</includes>
                                 <includes>equipment-min.css</includes>
+                                <includes>clinical-search-min.css</includes>
                                 <includes>bookcovers-min.css</includes>
                             </includes>
                         </aggregation>
@@ -481,9 +481,15 @@
                                 <include>lane-bassett-min.js</include>
                                 <include>lane-textinputs-min.js</include>
                                 <include>suggest-min.js</include>
-                                <include>search-select-min.js</include>
-                                <include>lane-search-pico-min.js</include>
                                 <include>search-min.js</include>
+                                <include>search-reset-min.js</include>
+                                <include>search-tabs-min.js</include>
+                                <include>search-placeholder-min.js</include>
+                                <include>search-help-min.js</include>
+                                <include>search-suggest-min.js</include>
+                                <include>search-pico-toggle-min.js</include>
+                                <include>search-pico-fields-min.js</include>
+                                <include>search-pico-min.js</include>
                                 <include>bookmark-min.js</include>
                                 <include>bookmarks-min.js</include>
                                 <include>bookmarks-widget-min.js</include>
@@ -498,9 +504,7 @@
                                 <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
-                                <include>lane-search-facets-min.js</include>
                                 <include>lane-search-images-min.js</include>
-                                <include>lane-search-facet-counts-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>lane-findit-min.js</include>
@@ -525,6 +529,7 @@
                                 <include>bookcovers-min.js</include>
                                 <include>viewport-min.js</include>
                                 <include>authors-toggle-min.js</include>
+                                <include>clinical-toggle-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>

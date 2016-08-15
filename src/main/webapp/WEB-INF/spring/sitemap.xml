@@ -29,6 +29,11 @@
         <property name="attributeName" value="userid"/>
     </bean>
     
+    <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/facets"
+        class="edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector">
+        <property name="attributeName" value="facets"/>
+    </bean>
+    
     <bean name="edu.stanford.irt.cocoon.sitemap.select.Selector/cacheable"
         class="edu.stanford.irt.laneweb.cocoon.CacheableSelector"/>
     

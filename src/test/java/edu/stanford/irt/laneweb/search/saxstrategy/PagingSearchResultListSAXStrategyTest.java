@@ -8,6 +8,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -121,6 +122,7 @@ public class PagingSearchResultListSAXStrategyTest {
         expect(this.resourceResult.getId()).andReturn("id");
         expect(this.resourceResult.getHits()).andReturn("hits");
         expect(this.resourceResult.getURL()).andReturn("url");
+        expect(this.resourceResult.getChildren()).andReturn(Collections.emptySet());
         expect(this.iterator.hasNext()).andReturn(false);
         expect(this.list.listIterator(0)).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(true).times(100);

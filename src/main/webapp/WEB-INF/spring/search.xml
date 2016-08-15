@@ -57,6 +57,73 @@
         <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
         <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/result"/>
     </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/clinical-all"
+        class="edu.stanford.irt.laneweb.search.ClinicalSearchResultsGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ClinicalSearchResultsSAXStrategy"/>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>aafp_patients</value>
+                <value>acpjc</value>
+                <value>bmj_clinical_evidence</value>
+                <value>dynamed</value>
+                <value>guideline_clearinghouse</value>
+                <value>medlineplus</value>
+                <value>pubmed</value>
+                <value>pubmed_clinicaltrial</value>
+                <value>pubmed_cochrane_reviews</value>
+                <value>pubmed_cost</value>
+                <value>pubmed_diagnosis_focused</value>
+                <value>pubmed_epidemiology_focused</value>
+                <value>pubmed_etiology_focused</value>
+                <value>pubmed_harm_focused</value>
+                <value>pubmed_prevention</value>
+                <value>pubmed_prognosis_focused</value>
+                <value>pubmed_qualityimprovement</value>
+                <value>pubmed_rct</value>
+                <value>pubmed_systematicreviews</value>
+                <value>pubmed_treatment_focused</value>
+                <value>uptodate</value>
+            </list>
+        </constructor-arg>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/peds-all"
+        class="edu.stanford.irt.laneweb.search.ClinicalSearchResultsGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ClinicalSearchResultsSAXStrategy"/>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>aafp_patients</value>
+                <value>aappatient</value>
+                <value>aapwebsite</value>
+                <value>dynamed</value>
+                <value>guideline_clearinghouse</value>
+                <value>pubmed_allchild</value>
+                <value>pubmed_clinicaltrial_allchild</value>
+                <value>pubmed_cost_allchild</value>
+                <value>pubmed_diagnosis_focused_allchild</value>
+                <value>pubmed_epidemiology_focused_allchild</value>
+                <value>pubmed_etiology_focused_allchild</value>
+                <value>pubmed_harm_focused_allchild</value>
+                <value>pubmed_peds_journals</value>
+                <value>pubmed_prevention_allchild</value>
+                <value>pubmed_prognosis_focused_allchild</value>
+                <value>pubmed_qualityimprovement_allchild</value>
+                <value>pubmed_rct_allchild</value>
+                <value>pubmed_systematicreviews_allchild</value>
+                <value>pubmed_treatment_focused_allchild</value>
+                <value>uptodate</value>
+            </list>
+        </constructor-arg>
+    </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-describe"
         class="edu.stanford.irt.laneweb.search.DescribeGenerator"

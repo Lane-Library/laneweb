@@ -21,7 +21,7 @@
         targetElm.set('value', qString);
     },
     Teletype = function(sourceInput, targetInput) {
-        var targetElm = targetInput || Y.one('#searchTerms'),
+        var targetElm = targetInput || Y.one('.search-form input[name=q]'),
         teletyperForm = sourceInput.ancestor('form');
         // send #teletyperForm submit events to #search; no need to send more than one
         if (teletyperForm && teletyperForm.hasHandler === undefined) {
