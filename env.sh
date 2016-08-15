@@ -10,8 +10,7 @@ export PROJECT_VERSION=3.2.34-SNAPSHOT
 export IMAGE=laneweb
 export REGISTRY=gcr.io
 export REGISTRY_USER=_json_key
-export REGISTRY_EMAIL=$(whoami)@stanford.edu
-
+export REGISTRY_EMAIL=laneweb@med.stanford.edu
 export REGISTRY_KEY_FILE="../accounts/som-lane-dev/gcr.json"
 export SLACK_URL_FILE="../accounts/som-lane-dev/slack.key"
 export SLACK_CHANNEL="irt-dcs-cicd"
