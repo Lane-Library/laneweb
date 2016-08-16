@@ -29,7 +29,7 @@ public class ClinicalSearchResults {
                 .collect(Collectors.toList());
         List<SearchResult> results = this.conversionStrategy.convertResult(result);
         this.total = results.size();
-        if (facets.size() > 0) {
+        if (!facets.isEmpty()) {
             List<Result> facetResult = result.getChildren()
                     .stream()
                     .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))

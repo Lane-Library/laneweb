@@ -50,9 +50,9 @@
             prefix: "picoFields",
             emitFacade: true
         });
-        
+
         controller.addTarget(lane);
-        
+
         lane.on("search:activeChange", controller.activeChange);
         lane.on("searchTabs:change", controller.tabChange);
         lane.on("picoToggle:change", controller.toggleChange);

@@ -3,7 +3,7 @@
     "use strict";
 
     var PLACEHOLDER = "placeholder",
-    
+
         lane = Y.lane,
 
         inputNode = document.querySelector(".search-form input[name=q]"),
