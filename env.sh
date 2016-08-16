@@ -5,7 +5,7 @@ export SCRIPTS_DIR=scripts
 export SCRIPTS_REPO=https://code.stanford.edu/irt-dcs/kube-scripts.git
 
 # The PROJECT_VERSION must match the version defined in pox.ml
-export PROJECT_VERSION=3.2.34-SNAPSHOT
+export PROJECT_VERSION=3.3.0-SNAPSHOT
 
 export IMAGE=laneweb
 export REGISTRY=gcr.io
