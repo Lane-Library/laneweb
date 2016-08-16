@@ -61,7 +61,12 @@
         <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
         <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/result"/>
     </bean>
-    
+
+    <bean id="edu.stanford.irt.laneweb.search.ClinicalSearchResultsFactory"
+        class="edu.stanford.irt.laneweb.search.ClinicalSearchResultsFactory">
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+    </bean>    
+
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/clinical-all"
         class="edu.stanford.irt.laneweb.search.ClinicalSearchResultsGenerator"
         scope="prototype">
@@ -94,6 +99,7 @@
                 <value>uptodate</value>
             </list>
         </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.ClinicalSearchResultsFactory"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/peds-all"
@@ -127,6 +133,7 @@
                 <value>uptodate</value>
             </list>
         </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.ClinicalSearchResultsFactory"/>
     </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-describe"
