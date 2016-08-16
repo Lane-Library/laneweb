@@ -43,7 +43,11 @@
     </bean>
    
     <bean id="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"
-        class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy"/>
+        class="edu.stanford.irt.laneweb.search.ContentResultConversionStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.search.ScoreStrategy"/>
+        </constructor-arg>
+    </bean>
     
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"

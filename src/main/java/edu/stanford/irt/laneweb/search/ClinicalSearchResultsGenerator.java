@@ -20,12 +20,16 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     private List<String> facets;
 
+    private ClinicalSearchResultsFactory factory;
+
     private int page;
 
     public ClinicalSearchResultsGenerator(final MetaSearchManager metaSearchManager,
-            final SAXStrategy<ClinicalSearchResults> saxStrategy, final List<String> engines) {
+            final SAXStrategy<ClinicalSearchResults> saxStrategy, final List<String> engines,
+            final ClinicalSearchResultsFactory factory) {
         super(metaSearchManager, saxStrategy);
         this.engines = engines;
+        this.factory = factory;
     }
 
     @Override
@@ -43,11 +47,12 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     @Override
     protected ClinicalSearchResults doSearch(final String query) {
-        return new ClinicalSearchResults(search(new SimpleQuery(query), this.engines, 20000L), this.facets, this.page);
+        return this.factory.createResults(search(new SimpleQuery(query), this.engines, 20000L), query, this.facets,
+                this.page);
     }
 
     @Override
     protected ClinicalSearchResults getEmptyResult() {
-        return new ClinicalSearchResults(EMPTY_RESULT, this.facets, this.page);
+        return this.factory.createResults(EMPTY_RESULT, "", this.facets, this.page);
     }
 }
