@@ -530,6 +530,7 @@
                                 <include>viewport-min.js</include>
                                 <include>authors-toggle-min.js</include>
                                 <include>clinical-toggle-min.js</include>
+                                <include>search-form-scroll-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
