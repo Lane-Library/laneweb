@@ -1,0 +1,183 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:r="http://lane.stanford.edu/results/1.0">
+    <head>
+        <title>clinical search</title>
+    </head>
+    <body>
+        <div class="yui3-g">
+            <div class="yui3-u-1-4">
+                <div class="clinical-heading" style="margin-top:8px">Clinical Resources by Age</div>
+                <div class="clinical-toggle">
+                    <a href="?q={search-terms}&amp;source=peds-all">
+                        <span class="clinical-toggle-label clinical-toggle-label-active">All ages</span>
+                        <span class="clinical-toggle-oval"><span class="clinical-toggle-circle">&#160;</span></span>
+                        <span class="clinical-toggle-label yui3-tooltip-trigger" title="Use all ages to broaden your search">Children</span>
+                     </a>
+                </div>
+                <a href="?q={search-terms}&amp;source=clinical-all" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> All Results<span r:ref="@total">?</span></a>
+                <div class="clinical-facets">
+                <h3 class="yui3-tooltip-trigger" title="Reduce results displayed to only the selected resource or Pubmed article type">Filter Results</h3>
+                <div class="clinical-facets-section">
+                    <div class="clinical-heading" style="margin-bottom:4px">
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=acpjc,bmj_clinical_evidence,pubmed_cochrane_reviews,dynamed,guideline_clearinghouse,uptodate" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Evidence Summaries</a>
+                    </div>
+                    <div class="clinical-facets-subsection">
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=acpjc" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> ACP Journal Club<span r:ref="resource@acpjc/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=bmj_clinical_evidence" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> BMJ Clinical Evidence<span r:ref="resource@bmj_clinical_evidence/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_cochrane_reviews" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Cochrane Systematic Reviews<span r:ref="resource@pubmed_cochrane_reviews/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=dynamed" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> DynaMed<span r:ref="resource@dynamed/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=guideline_clearinghouse" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> National Guideline Clearinghouse<span r:ref="resource@guideline_clearinghouse/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=uptodate" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> UpToDate<span r:ref="resource@uptodate/@count">?</span></a>
+                    </div>
+                </div>
+                <div class="clinical-facets-section">
+                    <div class="clinical-heading" style="margin-bottom:8px">
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_clinicaltrial,pubmed_rct,pubmed_systemacticreviews,pubmed_cost,pubmed_diagnosis_focused,pubmed_epidemiology_focused,pubmed_etiology_focused,pubmed_harm_focused,pubmed_prevention,pubmed_prognosis_focused,pubmed_treatment_focused,pubmed_qualityimprovement" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> PubMed (All Ages)</a>
+                    </div>
+                    <div class="clinical-facets-subsection">
+                        <div class="clinical-heading" style="margin-left:18px;padding: 3px">Article Type</div>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_clinicaltrial" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Clinical Trials<span r:ref="resource@pubmed_clinicaltrial/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_rct" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Randomized Controlled Trials<span r:ref="resource@pubmed_rct/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_systematicreviews" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Systematic Reviews<span r:ref="resource@pubmed_systematicreviews/@count">?</span></a>
+                    </div>
+                </div>
+                <div class="clinical-facets-section">
+                    <div class="clinical-facets-subsection">
+                        <div class="clinical-heading" style="margin-left:18px;padding: 3px">Question Type <i class="fa fa-info-circle fa-lg yui3-tooltip-trigger"  title="Articles on clinical research conducted with specific methodologies that result in findings addressing one or several categories of questions below e.g. diagnosis, etiology, etc."></i></div>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_cost" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Cost <i class="fa fa-info-circle fa-lg yui3-tooltip-trigger" title="Articles related to economic factors of healthcare"></i><span r:ref="resource@pubmed_cost/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_diagnosis_focused" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Diagnosis<span r:ref="resource@pubmed_diagnosis_focused/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_epidemiology_focused" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Epidemiology<span r:ref="resource@pubmed_epidemiology_focused/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_etiology_focused" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Etiology<span r:ref="resource@pubmed_etiology_focused/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_harm_focused" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Harm<span r:ref="resource@pubmed_harm_focused/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_prevention" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Prevention<span r:ref="resource@pubmed_prevention/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_prognosis_focused" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Prognosis<span r:ref="resource@pubmed_prognosis_focused/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_treatment_focused" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Therapy<span r:ref="resource@pubmed_treatment_focused/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=pubmed_qualityimprovement" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Quality Improvement <i class="fa fa-info-circle fa-lg yui3-tooltip-trigger" title="Articles related to healthcare quality"></i><span r:ref="resource@pubmed_qualityimprovement/@count">?</span></a>
+                    </div>
+                </div>
+                <div class="clinical-facets-section">
+                    <div class="clinical-heading" style="margin-bottom:3px">
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=aafp_patients,medlineplus_0" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Patient Info</a>
+                    </div>
+                    <div class="clinical-facets-subsection">
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=aafp_patients" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> AAFP Family Doctor<span r:ref="resource@aafp_patients/@count">?</span></a>
+                        <a href="?q={search-terms}&amp;source=clinical-all&amp;facet=medlineplus_0" class="clinical-facet"><i class="fa fa-circle-o fa-lg"></i> Medline Plus<span r:ref="resource@medlineplus_0/@count">?</span></a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="yui3-u-3-4">
+                <div class="module search-results" style="position:relative">
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                        href="cocoon://content/search/popin-include.html"><xi:fallback/></xi:include>
+                    <div id="searchResults">
+                      <div class="yui3-g">
+                          <div class="yui3-u-1-3">
+                              <span class="search-summary" style="font-weight:bold">
+                                  <span class="search-summary-none">no results</span>
+                                  <span class="search-summary-one">one result</span>
+                                  <span class="search-summary-more">all <span r:ref="@size">?</span> results</span>
+                                  <span class="search-summary-multipage"><span r:ref="@start">?</span> to <span r:ref="@end">?</span> of <span r:ref="@size">?</span> results</span>
+                              </span>
+                          </div>
+                          <div class="yui3-u-1-3">
+                              <div class="general-dropdown dropdown">
+                                  <div class="general-dropdown-trigger">Full PubMed results <i class="fa fa-angle-double-down"></i></div>
+                                  <div class="general-dropdown-content dropdown-content">
+                                      <div class="rightSearchTips">
+                                          <ul>
+                                              <li>
+                                                  <a r:ref="resource@pubmed/@url" title="Pubmed Searches: PubMed">PubMed </a>
+                                                  <span r:ref="resource@pubmed/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_systematicreviews/@url" title="Pubmed Searches: Systematic Reviews">Systematic
+                                                      Reviews </a>
+                                                  <span r:ref="resource@pubmed_systematicreviews/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_clinicaltrial/@url" title="Pubmed Searches: Clinical Trials">Clinical
+                                                      Trials </a>
+                                                  <span r:ref="resource@pubmed_clinicaltrial/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_treatment_focused/@url" title="Pubmed Searches: Therapy">Therapy </a>
+                                                  <span r:ref="resource@pubmed_treatment_focused/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_diagnosis_focused/@url" title="Pubmed Searches: Diagnosis">Diagnosis </a>
+                                                  <span r:ref="resource@pubmed_diagnosis_focused/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_prognosis_focused/@url" title="Pubmed Searches: Prognosis">Prognosis </a>
+                                                  <span r:ref="resource@pubmed_prognosis_focused/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_harm_focused/@url" title="Pubmed Searches: Harm">Harm </a>
+                                                  <span r:ref="resource@pubmed_harm_focused/@hits">?</span>
+                                              </li>
+                                              <li>
+                                                  <a r:ref="resource@pubmed_etiology_focused/@url" title="Pubmed Searches: Etiology">Etiology </a>
+                                                  <span r:ref="resource@pubmed_etiology_focused/@hits">?</span>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        <div class="yui3-u-1-3">
+                          <div class="s-pagination no-bookmarking">
+                            <span class="pagingButton paging-button-backfast">
+                              <i class="fa fa-fast-backward"></i>
+                            </span>
+                            <span class="pagingButton paging-button-back">
+                              <i class="fa fa-backward"></i>
+                            </span>
+                            <form class="pagingForm" name="pagination">
+                              <input type="hidden" name="source" value=""/>
+                              <input type="hidden" name="q" value=""/>
+                              <label for="page"> Page </label>
+                                <input type="text" name="page" value=""/>
+                                <span> of <span r:ref="@pages">?</span></span>
+                            </form>
+                            <span class="pagingButton paging-button-forward">
+                              <i class="fa fa-forward"></i>
+                            </span>
+                            <span class="pagingButton paging-button-forwardfast">
+                              <i class="fa fa-fast-forward"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                  <h3 class="eresources" style="margin-top:-9px">&#160;</h3>
+                  <ul class="lwSearchResults"></ul>
+                  
+                  <div class="s-pagination no-bookmarking">
+                      <span class="pagingButton paging-button-backfast">
+                          <i class="fa fa-fast-backward"></i>
+                      </span>
+                      <span class="pagingButton paging-button-back">
+                          <i class="fa fa-backward"></i>
+                      </span>
+                      <form class="pagingForm" name="pagination">
+                          <input type="hidden" name="source" value=""/>
+                          <input type="hidden" name="q" value=""/>
+                          <label for="page"> Page </label>
+                          <input type="text" name="page" value=""/>
+                          <span> of <span r:ref="@pages">?</span></span>
+                      </form>
+                      <span class="pagingButton paging-button-forward">
+                          <i class="fa fa-forward"></i>
+                      </span>
+                      <span class="pagingButton paging-button-forwardfast">
+                          <i class="fa fa-fast-forward"></i>
+                      </span>
+                  </div>
+              </div>
+            
+          
+        </div>  
+            </div>
+        </div>
+    </body>
+</html>

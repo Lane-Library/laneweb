@@ -22,7 +22,8 @@
     Suggest = function(input, limit) {
         input.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
-            source: SOURCE_BASE + (limit || DEFAULT_LIMIT)
+            source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
+            width: "100%"
         });
 
         /**
@@ -45,13 +46,8 @@
         //select is fired on clicks or return pressed in suggestion list
         this._ac.after(SELECT, this._handleSelect, this);
 
-        //pico inputs don't have width when the Suggest is constructed
-        if (!this._ac.get("width")) {
-            this._visibleHandle = this._ac.on("visibleChange", this._handleVisibleChange, this);
-        }
-
         // disable suggestion list after lane search submitted
-        Lane.on("search:submit", function(){
+        Lane.on("search:search", function(){
             input.ac.destroy();
         });
     };
@@ -81,21 +77,6 @@
                 suggestion : event.result.text,
                 input : this._input
             });
-        },
-
-        /**
-         * Set the autocomplete width if necessary. Pico inputs don't have width
-         * when the Suggest is constructed.
-         * @method _handleVisibleChange
-         * @param event {CustomEvent} the visibleChange event
-         * @private
-         */
-        _handleVisibleChange : function(event) {
-            if (event.newVal) {
-                this._ac.set("width", this._ac.get("inputNode").get("offsetWidth"));
-                this._visibleHandle.detach();
-                this._visibleHandle = null;
-            }
         },
 
         /**

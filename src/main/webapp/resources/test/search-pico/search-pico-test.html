@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>lane-search-pico javascript unit tests</title>
+        <title>search pico javascript unit tests</title>
         <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
     </head>
     <body>
-        <div id="searchFormContainer">
-        <form id="search" method="get" action="">
-            <fieldset id="searchFields">
-                <select name="source" id="searchSource">
-                    <option value="option1" title="title1">Option 1</option>
-                    <option value="option2" title="title2">Option 2</option>
-                    <option value="option3" title="title3">Option 3</option>
-                </select>
-                <input name="q" id="searchTerms" type="text"/>
-                <span class="searchReset" title="Clear Search">×</span>
-                <button class="search-button"><i class="fa fa-search"></i></button>
-            </fieldset>
-            <span id="searchTips"><a href="/help/choose-search.html">choose your search</a> » </span>
-        </form>
+        <div class="search-form">
+            <input name="q"/>
+            <input name="source"/>
+            <div class="search-close"/>
         </div>
-        <div class="lane-nav"></div>
+        <fieldset class="pico-fields">
+            <input name="p"/>
+            <input name="i"/>
+        </fieldset>
         <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script src="../../javascript/lane.js" type="text/javascript"></script>
-        <script src="../../javascript/model.js" type="text/javascript"></script>
-        <script src="../../javascript/lane-textinputs.js" type="text/javascript"></script>
-        <script src="../../javascript/suggest.js" type="text/javascript"></script>
-        <script src="../../javascript/search-select.js" type="text/javascript"></script>
-        <script src="../../javascript/search-indicator.js" type="text/javascript"></script>
-        <script src="../../javascript/search.js" type="text/javascript"></script>
-        <script src="../../javascript/lane-search-pico.js" type="text/javascript"></script>
+        <script src="../../javascript/lane.js"></script>
+        <script src="../../javascript/util.js"></script>
+        <script src="../../javascript/lane-textinputs.js"></script>
+        <script src="../../javascript/model.js"></script>
+        <script src="../../javascript/suggest.js"></script>
+        <script src="../../javascript/search.js"></script>
+        <script src="../../javascript/search-pico.js"></script>
         <script src="search-pico-test.js" type="text/javascript"></script>
     </body>
 </html>

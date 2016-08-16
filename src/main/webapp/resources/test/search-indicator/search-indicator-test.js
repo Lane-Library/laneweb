@@ -6,12 +6,18 @@ var searchIndicatorTestCase = new Y.Test.Case({
 
     indicator : Y.lane.searchIndicator,
 
+    node: document.querySelector(".search-indicator"),
+
     testShowAndHide: function() {
-        var node = Y.one(".search-indicator");
         this.indicator.show();
-        Y.Assert.isTrue(node.hasClass("search-indicator-active"));
+        Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
         this.indicator.hide();
-        Y.Assert.isFalse(node.hasClass("search-indicator-active"));
+        Y.Assert.areEqual("search-indicator", this.node.className);
+    },
+
+    "test search:search event shows": function() {
+        Y.lane.fire("search:search");
+        Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
     }
 });
 

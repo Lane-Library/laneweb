@@ -74,7 +74,7 @@
             <div class="description">description</div>
         </x:expect>
     </x:scenario>
-    
+    <!--
     <x:scenario label="Scenario for testing template with match 's:link[1]">
         <x:context>
             <s:result>
@@ -85,7 +85,7 @@
         <x:expect label="first link should get class primaryLink and the parent title, etc">title<div>
             <a class="primaryLink" href="url" title="title">title</a></div> additional-text</x:expect>
     </x:scenario>
-    
+    -->
     <x:scenario label="Scenario for testing template with match 's:link">
         <x:context>
             <s:link/>

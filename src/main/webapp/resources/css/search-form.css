@@ -1,37 +1,87 @@
-#searchFormContainer {
+.search-form {
     margin-top: 46px;
+    padding: 24px 0;
     background-color: #8C1515;
-}
-#search{
-    padding: 30px 0;
-}
-#searchFields {
+    color: white;
+    max-height: 46px;
+    overflow: hidden;
     position: relative;
 }
-#selectAndInput {
-    background-color: white;
-    float: left;
-    position: relative;
+.search-form .fa, .search-form a, .search-form a:hover, .search-form a:visited, .search-form a:active {
+    color: white;
+    font-size: 12px;
 }
-#searchSource {
-    width: 124px;
+.search-heading, .search-close, .search-info {
+    cursor: default;
+    position: absolute;
+    opacity: 0;
 }
-#searchTerms {
-    width: 506px;
-    border: 0 none;
-    height: 46px;
-    box-sizing: border-box;
-    margin-left: 8px;
-    margin-right: 60px;
+.search-close {
+    top: -55px;
+    right: 0;
     font-size: 14px;
 }
-#searchTerms::-ms-clear {
+.search-info {
+    font-size: 12px;
+    text-align: right;
+    top: -41px;
+    width: 100%;
+}
+.search-info a {
+    padding-left: 45px;
+}
+.pico-toggle, .pico-on, .pico-off {
     display: none;
 }
-.search-button {
-    background-color: transparent;
-    border: 0 none;
+.pico-toggle-active, .pico-on-active, .pico-off-active {
+    display: inline;
     cursor: pointer;
+}
+.search-form fieldset {
+    position: relative;
+    width: 72%;
+    color: black;
+}
+.search-form input {
+    font-size: 14px;
+    width: 100%;
+    height: 46px;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+/* see case 125259 */
+.search-form input[name='q']::-ms-clear {
+    display: none;
+}
+.pico-fields {
+    margin-bottom: -46px;
+}
+.pico-fields-active {
+    margin-bottom: 12px;
+}
+.search-reset {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 40px;
+    top: 15px;
+    display: none;
+}
+.search-reset .fa {
+    color: #8c1515;
+    font-size: 18px;
+}
+.search-reset .fa:hover {
+    color: #428bca;
+}
+.search-reset-active {
+    display: block;
+}
+.search-button {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
     position: absolute;
     right: 6px;
     top: 10px;
@@ -40,104 +90,82 @@
     color: #007c92;
     font-size: 24px;
 }
-#searchTools {
-    position: absolute;
-    right: 278px;
-    bottom: 7px;
-    font-size: 12px;
-    font-weight: 600;
-}
-#searchTools i {
-    color: white;
-    font-size: 9px;
-}
-.picoFields {
-    background-color: white;
-    height: 46px;
-    margin-bottom: 12px;
-    width: 712px;
-    display: none;
-}
-.picoFields.active {
-    display: block;
-}
-.picoFields input {
-    border-width: 0;
-    /* Mobile Safari: remove rounded corners and input shadow */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    margin: 13px 0;
-    width: 178px;
-    text-align: center;
-    border-right: 1px rgb(220,220,220) solid;
-    border-radius: 0;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-.picoFields #clinicalO {
-    border-right: none;
-}
-#search input:focus {
-    outline-style: none;
-}
-.searchReset .fa-times-circle {
-    color: #8c1515;
-}
-
-.searchReset .fa-times-circle:hover {
-    color: #428bca;
-}
-.searchReset {
-    background-color: transparent;
-    border: 0 none;
-    cursor: pointer;
-    display: none;
-    position: absolute;
-    right: 40px;
-    top: 15px;
-}
-.searchReset.active {
-    display: block;
-}
-#searchFormContainer a{
-    color: white;
-}
-
 .search-indicator {
-    visibility: hidden;
-    position: absolute;
-    right: 216px;
-    bottom: 36px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    display: none;
+}
+.search-indicator .fa {
+    color:black;
+    font-size: 100px;
 }
 .search-indicator-active {
-    visibility: visible;
+    display: block;
 }
-#searchTips {
-    position: absolute;
-    bottom: 7px;
-    font-size: 12px;
-    font-weight: 600;
+.search-tab {
+    margin-top: 24px;
+    line-height: 41px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    height: 41px;
+    box-sizing: border-box;
 }
-#searchTips i{
-    color: white;
-    font-size: 9px;
+.search-tab-active, .search-tab:hover {
+    background-color: #ecf1f2;
+    color: #8c1515;
+    border-top-color: rgb(191,209,209);
+    box-shadow: inset 0 5px 5px -5px #000;
 }
-
-/* pubmed, uptodate, dynamed links inside the form: */
-
+.search-tab-active .fa, .search-tab:hover .fa {
+    color: #8c1515;
+}
 .qlinks {
     position: absolute;
     right: 0;
-    bottom: 7px;
+    top: 46px;
 }
-
 .qlinks li {
     padding: 0 5px;
     display: inline-block;
-    border-right: 1px dotted #C1C1C1;
+    border-right: 1px dotted #c1c1c1;
 }
-
 .qlinks li:last-child {
-    border-right: none;
+    border: none;
 }
-
+#main, .search-form, .search-close, .search-form fieldset, .search-tab, .qlinks {
+    transition-property: all;
+    transition-duration: .3s;
+}
+.search-form-active {
+    padding: 65px 0 35px;
+    max-height: 200px;
+    overflow: visible;
+}
+.search-form-active.search-form-results {
+    padding-bottom: 0;
+}
+.search-form-active .search-heading, .search-form-active .search-close, .search-form-active .search-info {
+    opacity: 1;
+}
+.search-form-active .search-close {
+    cursor: pointer;
+}
+.search-form-active .search-info {
+    top: -21px;
+}
+.search-form-active fieldset {
+    width: 100%;
+}
+.search-form-active .search-tab {
+    margin-top: 0;
+    opacity: 1;
+}
+.search-form-active .qlinks {
+    top: 300px;
+    opacity: 0;
+}

@@ -21,20 +21,6 @@
 .primaryLink {
     font-size: 16px;
 }
-#searchFacets .facetHeader {
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 1em;
-}
-#searchFacets .facetIndent {
-    padding-left: 30px;
-}
-.current-facet a {
-    color: #9a0003;
-}
-.inactiveFacet, .inactiveFacet a {
-    display: none;
-}
 .popin {
     height: 16px;
 }

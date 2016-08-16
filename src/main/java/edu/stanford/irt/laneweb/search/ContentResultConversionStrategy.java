@@ -39,6 +39,15 @@ public class ContentResultConversionStrategy {
         return results;
     }
 
+    public List<SearchResult> convertResults(final Collection<Result> results, final String query) {
+        Map<SearchResult, SearchResult> resultMap = new HashMap<>();
+        Pattern queryTermPattern = QueryTermPattern.getPattern(query);
+        for (Result result : results) {
+            processResource(result, resultMap, queryTermPattern);
+        }
+        return new ArrayList<>(resultMap.values());
+    }
+
     private void processEngine(final Result engine, final Map<SearchResult, SearchResult> resultMap,
             final Pattern queryTermPattern) {
         Collection<Result> children;

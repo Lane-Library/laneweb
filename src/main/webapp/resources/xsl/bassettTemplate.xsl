@@ -5,6 +5,7 @@
                 exclude-result-prefixes="h"
                 version="2.0">
 
+    <xsl:param name="query"/>
  
     <xsl:template match="*">
          <xsl:copy>
@@ -28,9 +29,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
-    </xsl:template>     
-    
-
+    </xsl:template>
     
     <xsl:template match="processing-instruction()">
         <xsl:choose>
