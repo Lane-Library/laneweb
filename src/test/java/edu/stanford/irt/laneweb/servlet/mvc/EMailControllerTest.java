@@ -78,17 +78,6 @@ public class EMailControllerTest {
     }
 
     @Test
-    public void testFormSubmitLanelibacqs() {
-        expect(this.model.asMap()).andReturn(this.map);
-        expect(this.map.put("recipient", "lanelibacqs@lists.stanford.edu")).andReturn(null);
-        this.sender.sendEmail(this.map);
-        expect(this.map.get("redirect")).andReturn("redirect");
-        replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-        this.controller.formSubmitLanelibacqs(this.model, this.atts);
-        verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-    }
-
-    @Test
     public void testGetParameters() {
         expect(this.model.asMap()).andReturn(this.map);
         this.remoteIPBinder.bind(this.map, this.request);
@@ -135,17 +124,6 @@ public class EMailControllerTest {
         this.sender.sendEmail(this.map);
         replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
         this.controller.jsonSubmitLaneissue(this.map, this.model);
-        verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-    }
-
-    @Test
-    public void testJsonSubmitLanelibacqs() {
-        expect(this.model.asMap()).andReturn(this.map);
-        this.map.putAll(this.map);
-        expect(this.map.put("recipient", "lanelibacqs@lists.stanford.edu")).andReturn(null);
-        this.sender.sendEmail(this.map);
-        replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-        this.controller.jsonSubmitLanelibacqs(this.map, this.model);
         verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
     }
 

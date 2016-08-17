@@ -26,10 +26,6 @@ import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 @RequestMapping(value = "/apps/mail", method = RequestMethod.POST)
 public class EMailController {
 
-    private static final String ACQUISITIONS_ADDRESS = "lanelibacqs@lists.stanford.edu";
-
-    private static final String AQUISITIONS_PATH = "/lanelibacqs";
-
     private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
 
     private static final String ASKUS_PATH = "/askus";
@@ -90,13 +86,6 @@ public class EMailController {
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = AQUISITIONS_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) {
-        Map<String, Object> map = model.asMap();
-        sendEmail(ACQUISITIONS_ADDRESS, map);
-        return getRedirectTo(map);
-    }
-
     @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
@@ -117,13 +106,6 @@ public class EMailController {
     public void jsonSubmitLaneissue(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
         sendEmail(ISSUE_ADDRESS, feedback);
-    }
-
-    @RequestMapping(value = AQUISITIONS_PATH, consumes = JSON_MIME_TYPE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, final Model model) {
-        feedback.putAll(model.asMap());
-        sendEmail(ACQUISITIONS_ADDRESS, feedback);
     }
 
     @ModelAttribute
