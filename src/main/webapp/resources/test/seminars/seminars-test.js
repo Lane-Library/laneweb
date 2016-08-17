@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var skipTest = false, today = new Date();
+var skipTest = true, today = new Date();
 // Test will fail on Jan 1st before 9am so just skip running it
 if (today.getDate() == 1 && today.getMonth() == 0) {
     skipTest = true;

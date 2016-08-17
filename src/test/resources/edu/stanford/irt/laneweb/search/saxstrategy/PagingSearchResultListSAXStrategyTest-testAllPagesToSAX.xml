@@ -4,7 +4,8 @@
            start="0"
            length="256"
            page="-1"
-           pages="3">
+           pages="3"
+           facetCount="256">
    <query>query</query>
    <contentHitCounts/>
 </resources>

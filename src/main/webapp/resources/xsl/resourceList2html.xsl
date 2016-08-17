@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://lane.stanford.edu/resources/1.0"
+    xmlns:r="http://lane.stanford.edu/results/1.0"
+    xmlns:a="aggregate"
+    exclude-result-prefixes="h s a r" version="2.0">
 
     <xsl:param name="source"/>
 
@@ -23,8 +29,25 @@
     <xsl:include href="resourceListPagination.xsl"/>
 
     <xsl:include href="resourceListSortBy.xsl"/>
+    
+    <xsl:template match="attribute::node() | child::node()">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node() | child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+   <xsl:template match="a:doc">
+        <xsl:apply-templates select="h:html"/>
+    </xsl:template>
+    
+    <xsl:template match="h:ul[@class='lwSearchResults']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:apply-templates select="/a:doc/r:results/s:result"/>
+        </xsl:copy>
+    </xsl:template>
 
-    <xsl:template match="/s:resources">
+    <xsl:template match="s:resources">
         <html>
             <head>
                 <title>search results</title>
@@ -363,6 +386,10 @@
             <xsl:value-of select="."/>
         </strong>
         <xsl:text>: </xsl:text>
+    </xsl:template>
+
+    <xsl:template match="s:title">
+        <xsl:apply-templates/>
     </xsl:template>
 
     <!--  assume authors are a comma-separated string; break the string at a separator before max-string-length -->

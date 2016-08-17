@@ -38,7 +38,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmark-instructions.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/search-select.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-image.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/som-header.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/classes.css" />
@@ -49,6 +48,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/back-to-top.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/solr-facets.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/equipment.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/clinical-search.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bookcovers.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
@@ -91,29 +91,78 @@
                     </ul>
                 </div>
             </div>
-            <div id="searchFormContainer">
+            <form action="/search.html" class="search-form" id="search">
                 <div class="centered">
-                    <form id="search" method="get" action="/search.html">
-                        <fieldset id="searchFields">
-                            <div id="selectAndInput">
-                                <select name="source" id="searchSource">
-                                    <option value="all-all" title="Enter Subject, Title, Author, PMID, ISSN, DOI, Call Number">Lane Search</option>
-                                    <option value="clinical-all" title="Clinical evidence: Cochrane, DARE, ACP Journal Club, UpToDate, PubMed">Clinical/PICO</option>
-                                    <option value="peds-all" title="Pediatric evidence: UpToDate, PubMed">Pediatrics</option>
-                                    <option value="bioresearch-all" title="60 Bioresearch Resources">Bioresearch</option>
-                                    <option value="images-all" title="Find Biomedical Images with Reuse Rights">Bio-Image Search</option>
-                                    <option value="bassett" title="Anatomical images from Lane's Bassett collection">Bassett Anatomy</option>
-                                    <option value="textbooks-all" title="Selected clinical textbooks">Textbooks</option>
-                                </select>
-                                <input name="q" id="searchTerms" type="text" />
-                                <span class="searchReset" title="Clear Search"><i class="fa fa-times-circle fa-lg"/></span>
-                                <button class="search-button"><i class="fa fa-search"></i></button>
-                            </div>
-                        </fieldset>
-                    </form>
-                    <img class="search-indicator" src="/resources/images/searchIndicator.gif" alt="search indicator" />
-                    <a id="searchTips" href="/lanesearch.html">Need Help? <i class="fa fa-arrow-right"></i></a>
-                    <a id="searchTools" href="/help/searchtools.html" title="Search Tools">Search Tools <i class="fa fa-arrow-right"></i></a>
+                    <div class="search-close">Close <i class="fa fa-close"></i></div>
+                    <div class="search-info">
+                        <span class="pico-toggle">
+                            <span class="pico-on">Advanced (PICO) Search </span>
+                            <span class="pico-off">Close advanced search </span>
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+                        <a class="search-help" href="/lanesearch.html">Search Help <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                    <fieldset class="pico-fields">
+                        <div class="yui3-g">
+                            <div class="yui3-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled"/></div>
+                            <div class="yui3-u-1-4"><input name="i" placeholder="intervention" disabled="disabled"/></div>
+                            <div class="yui3-u-1-4"><input name="c" placeholder="comparison" disabled="disabled"/></div>
+                            <div class="yui3-u-1-4"><input name="o" placeholder="outcome" disabled="disabled"/></div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <input name="q" data-placeholder="Find articles, books, journals, databases, and more" placeholder="" value=""/>
+                        <input name="source" type="hidden" value="all-all"/>
+                        <input name="sourceid" type="hidden" value="" disabled="disabled"/>
+                        <input name="facets" type="hidden" value="" disabled="disabled"/>
+                        <input name="sort" type="hidden" value="" disabled="disabled"/>
+                        <div class="search-reset" title="Clear Search"><i class="fa fa-times-circle fa-lg"></i></div>
+                        <button class="search-button"><i class="fa fa-search"></i></button>
+                    </fieldset>
+                    <div class="yui3-g">
+                        <div class="yui3-u-1-6"><div
+                            class="search-tab"
+                            data-help="/lanesearch.html"
+                            data-source="all-all"
+                            data-placeholder="Enter title words of article, journal, book, etc., or author, subject, PMID, ISSN, DOI, or Call Number"
+                            title="Searches Pubmed, Lane Catalog (titles and descriptions of books, journals, etc. from Lane) and website"
+                            >Lane <i class="fa fa-plus"></i></div></div>
+                        <div class="yui3-u-1-6"><div
+                            class="search-tab"
+                            data-help="/picosearch.html"
+                            data-source="clinical-all"
+                            data-placeholder="Enter patient condition, treatment alternatives, or use PICO (advanced search)"
+                            title="Searches evidence-based resources: BMJ, Cochrane, Dare, Dynamed, National Guidelines, Pubmed, UptoDate"
+                            >Clinical</div></div>
+                        <div class="yui3-u-1-6"><div
+                            class="search-tab"
+                            data-help="/bioimagesearch.html"
+                            data-source="images-all"
+                            data-placeholder="Enter keywords for subject or images desired"
+                            title="Find images related to medicine and biology and their reuse rights"
+                            >Images</div></div>
+                        <div class="yui3-u-1-6"><div
+                            class="search-tab"
+                            data-help="/textbooksearch.html"
+                            data-source="textbooks-all"
+                            data-placeholder="Enter topic, condition, diagnosis or disease keywords"
+                            title="Search the full text of major clinical textbooks in 25 medical specialites"
+                            >Clinical Textbooks</div></div>
+                        <div class="yui3-u-1-6"><div
+                            class="search-tab"
+                            data-help="/bioresearchsearch.html"
+                            data-source="bioresearch-all"
+                            data-placeholder="Enter molecular biology or bench research keywords"
+                            title="Find protocols, reagents, genomic, proteomic and patent databases, programming, funding and Stanford lab resources, and more"
+                            >Bioresearch</div></div>
+                        <div class="yui3-u-1-6"><div
+                            class="search-tab"
+                            data-help="/bassettsearch.html"
+                            data-source="bassett"
+                            data-placeholder="Enter anatomical terms"
+                            title="Find anatomical images from the historic Atlas of Human Anatomy"
+                            >Bassett Anatomy</div></div>
+                    </div>
                     <ul class="qlinks">
                         <li>
                             <a href="http://search.ebscohost.com/login.aspx?authtype=ip,uid&amp;custid=s4394488&amp;profile=dynamed">Dynamed</a>
@@ -126,7 +175,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </form>
             <div class="content centered">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/announcement.html">
                     <xi:fallback></xi:fallback>
@@ -146,29 +195,29 @@
                             <a href="/portals/index.html">Specialty Portals</a>
                             <ul class="dropdown-content nav-menu-content portals">
                                 <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
-                                <li><a href="/portals/nursing.html">Nursing</a></li>  
+                                <li><a href="/portals/nursing.html">Nursing</a></li>
                                 <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
-                                <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li> 
+                                <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
                                 <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
-                                <li><a href="/portals/oncology.html">Oncology</a></li>  
+                                <li><a href="/portals/oncology.html">Oncology</a></li>
                                 <li><a href="/portals/cardiology.html">Cardiology</a></li>
                                 <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
                                 <li><a href="/portals/clinical.html">Clinical</a></li>
-                                <li><a href="http://trachea.stanford.edu/">Otolaryngology <i class="fa fa-external-link"></i></a></li>   
+                                <li><a href="http://trachea.stanford.edu/">Otolaryngology <i class="fa fa-external-link"></i></a></li>
                                 <li><a href="/portals/comp-med.html">Comparative Medicine</a></li>
-                                <li><a href="/portals/palliative-care.html">Palliative Care</a></li>    
+                                <li><a href="/portals/palliative-care.html">Palliative Care</a></li>
                                 <li><a href="/portals/patient.html">Consumer Health</a></li>
-                                <li><a href="/portals/pathology.html">Pathology</a></li>   
+                                <li><a href="/portals/pathology.html">Pathology</a></li>
                                 <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
-                                <li><a href="/portals/pcap.html">PCAP</a></li>   
-                                <li><a href="/portals/ihealth.html">Global Health</a></li> 
-                                <li><a href="/portals/peds.html">Pediatrics</a></li>      
+                                <li><a href="/portals/pcap.html">PCAP</a></li>
+                                <li><a href="/portals/ihealth.html">Global Health</a></li>
+                                <li><a href="/portals/peds.html">Pediatrics</a></li>
                                 <li><a href="/portals/careercenter.html">Graduate Career Collection</a></li>
-                                <li><a href="/portals/pharmacy.html">Pharmacy</a></li>    
+                                <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
                                 <li><a href="/portals/hematology.html">Hematology</a></li>
-                                <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>    
+                                <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>
                                 <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a></li>
-                                <li><a href="/portals/picu.html">PICU</a></li>   
+                                <li><a href="/portals/picu.html">PICU</a></li>
                                 <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a></li>
                                 <li><a href="/portals/psychiatry.html">Psychiatry</a></li>
                                 <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
@@ -176,10 +225,10 @@
                                 <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
                                 <li><a href="/portals/reference.html">Reference Desk</a></li>
                                 <li><a href="/portals/medicalEd.html">Medical Education</a></li>
-                                <li><a href="/portals/spiritual.html">Spiritual Care</a></li>    
-                                <li><a href="/portals/cultural.html">Multicultural Health</a></li> 
-                                <li><a href="/portals/gen-surgery.html">Surgery</a></li>                             
-                                <li><a href="/portals/neurology.html">Neurology</a></li>            
+                                <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
+                                <li><a href="/portals/cultural.html">Multicultural Health</a></li>
+                                <li><a href="/portals/gen-surgery.html">Surgery</a></li>
+                                <li><a href="/portals/neurology.html">Neurology</a></li>
                             </ul>
                         </li>
                         <li class="dropdown nav-menu">
@@ -349,6 +398,7 @@
             </ul>
         </div>
         <div><a class="feedback-link" rel="lightbox disableBackground" href="/help/feedback.html"><span>CONTACT US</span></a></div>
+        <div class="search-indicator"><i class="fa fa-spinner fa-spin"></i></div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="http://yui.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
         <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>

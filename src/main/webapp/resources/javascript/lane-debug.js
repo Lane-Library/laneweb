@@ -67,7 +67,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-bassett.js",
         "lane-textinputs.js",
         "suggest.js",
-        "search-select.js",
         "lane-search-pico.js",
         "search.js",
         "bookmark.js",
@@ -84,9 +83,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-google.js",
         "lane-popup.js",
         "lane-metasearch.js",
-        "lane-search-facets.js",
         "lane-search-images.js",
-        "lane-search-facet-counts.js",
         "lane-tooltips.js",
         "lane-spellcheck.js",
         "lane-findit.js",
@@ -106,7 +103,12 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "youtube.js",
         "back-to-top.js",
         "solr-facets.js",
-        "solr-pagination.js"
+        "solr-pagination.js",
+        "bookcovers.js",
+        "viewport.js",
+        "authors-toggle.js",
+        "clinical-toggle.js",
+        "search-form-scroll.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:

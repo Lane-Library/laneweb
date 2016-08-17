@@ -91,21 +91,11 @@
         </xsl:choose>
     </xsl:variable>
 
-    <!-- here is the information associating urls with what is the laneNav active tab -->
-    <xsl:variable name="laneNav-tabs">
-        <div><span>All Resources</span><span>/biomed-resources</span></div>
-        <div><span>Specialty Portals</span><span>/portals</span></div>
-        <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
-        <div><span>Using the Library</span><span>/using-lib</span></div>
-        <div><span>About Lane</span><span>/about</span></div>
-        <div><span>How To</span><span>/help</span></div>
-    </xsl:variable>
-
     <xsl:variable name="source-prefix">
         <xsl:value-of select="substring-before($source,'-')"/>
     </xsl:variable>
 
-    <xsl:variable name="search-form-select">
+    <xsl:variable name="search-source">
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/ethics')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/careercenter')">all-all</xsl:when>
@@ -119,6 +109,7 @@
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="$source">
                 <xsl:choose>
+                    <xsl:when test="$source='peds-all'">clinical-all</xsl:when>
                     <!-- various -images-all source parameters get images-all -->
                     <xsl:when test="ends-with($source, 'images-all')">images-all</xsl:when>
                     <xsl:when test="string-length($source-prefix) &gt; 0">
@@ -221,22 +212,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add 'current' class to li with a child a with current href -->
-    <!-- TODO: reexamine this priority, should this be more specific?  -->
-    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::class='lane-nav'])]" priority="-1">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:attribute name="class">
-                <xsl:if test="@class">
-                    <xsl:value-of select="@class"/>
-                    <xsl:text> </xsl:text>
-                </xsl:if>
-                <xsl:text>current</xsl:text>
-            </xsl:attribute>
-            <xsl:apply-templates select="node()"/>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
 
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
@@ -267,37 +242,39 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add clinical class to search form when clinical or peds is active -->
-    <xsl:template match="node()[@id='search']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
-                <xsl:attribute name="class">clinical</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
+    <!-- add active to class to search form query present -->
+    <xsl:template match="h:form[@class='search-form' and $query]/@class">
+        <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
+    </xsl:template>
+    
+    <!-- add active to the pico-toggle link if $search-source=clinical-all -->
+    <xsl:template match="h:span[@class='pico-toggle' and $search-source='clinical-all']/@class">
+        <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
+    </xsl:template>
+    
+    <!-- add active to the pico-on link if $search-source=clinical-all -->
+    <xsl:template match="h:span[@class='pico-on' and $search-source='clinical-all']/@class">
+        <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
+    </xsl:template>
+    
+    <!-- make the .search-reset active if there is a query -->
+    <xsl:template match="h:div[@class='search-reset' and $query]/@class">
+        <xsl:attribute name="class" select="'search-reset search-reset-active'"/>
+    </xsl:template>
+    
+    <!-- add active to the appropriate search-tab -->
+    <xsl:template match="h:div[@class='search-tab' and @data-source = $search-source]/@class">
+        <xsl:attribute name="class" select="'search-tab search-tab-active'"/>
+    </xsl:template>
+    
+    <!-- add active to the clinical search-tab if search-source is peds-all-->
+    <xsl:template match="h:div[@class='search-tab' and $search-source = 'peds-all' and @data-source = 'clinical-all']/@class">
+        <xsl:attribute name="class" select="'search-tab search-tab-active'"/>
     </xsl:template>
 
-    <!-- add class="active" to lane-nav li when the path matches -->
-    <xsl:template match="h:ul[attribute::class='lane-nav']/h:li">
-        <xsl:variable name="link-content" select="child::h:a/text()"/>
-        <xsl:variable name="active-tab" select="$laneNav-tabs/h:div[h:span[1]=$link-content]"/>
-        <xsl:variable name="active" select="starts-with($path, $active-tab/h:span[2])"/>
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="$active">
-                <xsl:attribute name="class">active</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- add class="active" to online resource alpha browse links if link is for current page -->
-    <xsl:template match="h:ul[attribute::id='browseTabs']/h:li/h:a[(matches(@href, concat('a=',$alpha,'$')) or (matches(@href, 'a=%23') and $alpha = '#') or @href = $path)]">
-        <xsl:copy>
-            <xsl:attribute name="class">active</xsl:attribute>
-            <xsl:apply-templates select="attribute::node() | child::node()"/>
-        </xsl:copy>
+    <!-- put the @data-help value of the active tab into the href of .search-help -->
+    <xsl:template match="h:a[@class='search-help']/@href">
+        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $search-source]/@data-help)"/>
     </xsl:template>
 
     
