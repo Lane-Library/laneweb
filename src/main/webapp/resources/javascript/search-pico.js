@@ -39,7 +39,7 @@
                 reset: function() {
                     textInput.reset();
                 }
-            }
+            };
         };
 
     Y.augment(PicoField, Y.EventTarget);
