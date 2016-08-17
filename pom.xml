@@ -259,7 +259,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-            <version>7.0.59</version>
+            <version>8.5.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
