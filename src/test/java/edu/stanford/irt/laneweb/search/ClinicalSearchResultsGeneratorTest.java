@@ -34,10 +34,20 @@ public class ClinicalSearchResultsGeneratorTest {
     }
 
     @Test
-    public void testDoSearchString() {
+    public void testDoSearch() {
         expect(this.manager.search(isA(Query.class), eq(null), eq(20000L))).andReturn(null);
         expect(this.factory.createResults(null, "query", Collections.singletonList("facet"), 0)).andReturn(null);
         replay(this.manager, this.factory);
+        this.generator.doSearch("query");
+        verify(this.manager, this.factory);
+    }
+
+    @Test
+    public void testDoSearchNoFacetsBadPage() {
+        expect(this.manager.search(isA(Query.class), eq(null), eq(20000L))).andReturn(null);
+        expect(this.factory.createResults(null, "query", Collections.emptyList(), 0)).andReturn(null);
+        replay(this.manager, this.factory);
+        this.generator.setModel(Collections.singletonMap(Model.PAGE, Model.PAGE));
         this.generator.doSearch("query");
         verify(this.manager, this.factory);
     }
