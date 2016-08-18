@@ -6,12 +6,6 @@
 
         helpNode = document.querySelector(".search-help"),
 
-        model = function(href) {
-            return {
-                href: href
-            };
-        }(helpNode.href),
-
         view = function(helpNode) {
 
             return {
@@ -22,18 +16,17 @@
 
         }(helpNode),
 
-        controller = function(model, view) {
+        controller = function(view) {
 
             return {
                 change: function(event) {
                     var newVal = event.newVal;
-                    model.href = newVal[newVal.source].help;
-                    view.update(model.href);
+                    view.update(newVal[newVal.source].help);
                 }
             };
 
-        }(model, view);
+        }(view);
 
-        lane.on("searchTabs:change", controller.change);
+    lane.on("searchTabs:change", controller.change);
 
 })();
