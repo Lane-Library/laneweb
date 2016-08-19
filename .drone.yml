@@ -15,8 +15,6 @@ publish:
       $$REGISTRY_KEY
     email: $$REGISTRY_EMAIL
     repo: som-lane-dev/laneweb
-    build_args: 
-      - PROJECT_VERSION=$$PROJECT_VERSION
     tag:
       - latest
       - $$COMMIT
