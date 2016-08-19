@@ -12,10 +12,10 @@ app:
 		maven bash -c "cd /build; mvn -s settings.xml clean package"
 
 docker:
-	docker build --build-arg PROJECT_VERSION=${PROJECT_VERSION} -t ${IMAGE}:${VERSION} .
+	docker build -t ${IMAGE}:${VERSION} .
 
 docker_nc:
-	docker build --no-cache=true --build-arg PROJECT_VERSION=${PROJECT_VERSION} -t ${IMAGE}:${VERSION} .
+	docker build --no-cache=true -t ${IMAGE}:${VERSION} .
 
 prune:
 	docker rm `docker ps -q -a --filter status=exited`
