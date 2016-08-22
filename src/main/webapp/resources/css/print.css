@@ -24,7 +24,7 @@ input,
         display: block;
         float: left;
     }
-    #searchFacets/*, .rightSearchTips*/ {
+    #searchFacets {
         display: none;
     }
 }

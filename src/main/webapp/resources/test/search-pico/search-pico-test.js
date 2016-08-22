@@ -1,46 +1,43 @@
 "use strict";
 
-var searchpicoTestCase = new Y.Test.Case({
-    name: "Lane Search PICO Testcase",
+var searchPicoTestCase = new Y.Test.Case({
 
-    testSourceChangeClinical : function() {
-        Y.lane.fire('search:sourceChange', {
-            newVal:'clinical-all',
-            oldVal:'all-all'
-        });
-        var nav = Y.one('.lane-nav');
-        var search = Y.one('#search');
-        Y.Assert.isTrue(Y.Lang.isObject(Y.one('.picoFields')), 'no pico fields');
-    },
-    testSourceChangeNotClinical : function() {
-        Y.lane.fire('search:sourceChange', {
-            newVal:'all-all',
-            oldVal:'clinical-all'
-        });
-        var nav = Y.one('.lane-nav');
-        var search = Y.one('#search');
-        var picoFields = Y.one(".picoFields");
-        Y.Assert.isFalse(picoFields.hasClass("active"));
-    },
-    testSetPatientCondition: function() {
-        //simulate blur broken in IE http://yuilibrary.com/projects/yui3/ticket/2531702
-        if (!Y.UA.ie) {
-            Y.lane.fire('search:sourceChange', {
-                newVal:'clinical-all',
-                oldVal:'all-all'
-            });
-            var clinicalP = Y.one("#clinicalP");
-            var clinicalI = Y.one("#clinicalI");
-            var searchTerms = Y.one("#searchTerms");
-            clinicalP.set("value", "foo");
-            clinicalP.simulate("blur");
-            Y.Assert.areEqual("foo", searchTerms.get("value"));
-            clinicalI.set("value","bar");
-            clinicalI.simulate("blur");
-            Y.Assert.areEqual("(foo) AND (bar)", searchTerms.get("value"));
+    name: "Search Pico TestCase",
+    
+    p: document.querySelector("input[name=p]"),
+    
+    i: document.querySelector("input[name=i]"),
+    
+    q: document.querySelector("input[name=q]"),
+    
+    "test p to q": function() {
+        this.p.value = "p";
+        var e = document.createEvent("UIEvents");
+        if (Y.UA.ie === 9) {
+            e.initEvent("keyup", true, false);
+        } else {
+            e.initEvent("input", true, false); 
         }
+        this.p.dispatchEvent(e);
+        Y.Assert.areEqual("p", this.q.value);
+    },
+    
+    "test p and i to q": function() {
+        this.p.value = "P";
+        this.i.value = "I"
+        var e = document.createEvent("UIEvents");
+        if (Y.UA.ie === 9) {
+            e.initEvent("keyup", true, false);
+        } else {
+            e.initEvent("input", true, false); 
+        }
+        this.p.dispatchEvent(e);
+        this.i.dispatchEvent(e);
+        Y.Assert.areEqual("(P) AND (I)", this.q.value);
     }
+
 });
+
 
 Y.one('body').addClass('yui3-skin-sam');
 new Y.Console({
@@ -48,6 +45,6 @@ new Y.Console({
 }).render('#log');
 
 
-Y.Test.Runner.add(searchpicoTestCase);
+Y.Test.Runner.add(searchPicoTestCase);
 Y.Test.Runner.masterSuite.name = "search-pico-test.js";
 Y.Test.Runner.run();

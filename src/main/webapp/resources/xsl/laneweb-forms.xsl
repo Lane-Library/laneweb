@@ -4,47 +4,48 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
     
-    <!-- set the selected option of the search form -->
-    <xsl:template match="h:option[parent::h:select[@id='searchSource']]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="@value = $search-form-select">
-                <xsl:attribute name="selected">selected</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
+    <xsl:template match="h:input[@name='q' and $query]/@value">
+        <xsl:attribute name="value" select="$query"/>
     </xsl:template>
-
-
-    <!-- TODO did the id of the input change? -->
-    <xsl:template match="h:input[@name='q']">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="$query != ''">
-                <xsl:attribute name="value">
-                    <xsl:value-of select="$query"/>
-                </xsl:attribute>
-            </xsl:if>
-        </xsl:copy>
+    
+    <xsl:template match="h:input[@name='source']/@value">
+        <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>
-
-    <!-- add sourceid input to search form if sourceid param present -->
-    <!-- add facets, sort to search form if param present -->
-    <xsl:template match="h:fieldset[@id='searchFields' or parent::h:form[@class='breadcrumbForm']]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-            <xsl:if test="$sourceid">
-                <input type="hidden" name="sourceid" value="{$sourceid}"/>
-            </xsl:if>
-            <xsl:if test="$facets">
-                <input type="hidden" name="facets" value="{$facets}"/>
-            </xsl:if>
-            <xsl:if test="$sort">
-                <input type="hidden" name="sort" value="{$sort}"/>
-            </xsl:if>
-        </xsl:copy>
+    
+    <xsl:template match="h:input[@name='q']/@placeholder">
+        <xsl:attribute name="placeholder">
+            <xsl:choose>
+                <!-- if there is a query the placeholder for the q input is the data-placeholder from the active tab -->
+                <xsl:when test="$query">
+                    <xsl:value-of  select="ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $search-source]/@data-placeholder"/>
+                </xsl:when>
+                <!-- if there is not a query the placeholder for the q input is the data-placeholder -->
+                <xsl:otherwise>
+                    <xsl:value-of  select="parent::h:input/@data-placeholder"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:attribute>
     </xsl:template>
-
+    
+    <!-- enable sourceid, facets and sort hidden inputs if corresponding param is present -->
+    <xsl:template match="h:input[@name='sourceid' and $sourceid]/@value">
+        <xsl:attribute name="value" select="$sourceid"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='sourceid' and $sourceid]/@disabled"/>
+    
+    <xsl:template match="h:input[@name='facets' and $facets]/@value">
+        <xsl:attribute name="value" select="$facets"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='facets' and $facets]/@disabled"/>
+    
+    <xsl:template match="h:input[@name='sort' and $sort]/@value">
+        <xsl:attribute name="value" select="$sort"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='sort' and $sort]/@disabled"/>
+    
     <!-- case 73361 Autofill all the forms (ask us, feedback, etc) while logged into MyLane -->
     <xsl:template match="h:input[@name='email']/@value">
         <xsl:choose>

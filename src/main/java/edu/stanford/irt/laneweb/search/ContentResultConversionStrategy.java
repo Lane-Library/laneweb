@@ -15,12 +15,7 @@ public class ContentResultConversionStrategy {
 
     private ScoreStrategy scoreStrategy = new ScoreStrategy();
 
-    public ContentResultConversionStrategy() {
-        // default empty constructor
-    }
-
-    // constructor for unit tests
-    ContentResultConversionStrategy(final ScoreStrategy scoreStrategy) {
+    public ContentResultConversionStrategy(final ScoreStrategy scoreStrategy) {
         this.scoreStrategy = scoreStrategy;
     }
 
@@ -37,6 +32,15 @@ public class ContentResultConversionStrategy {
         List<SearchResult> results = new ArrayList<>(resultMap.values());
         Collections.sort(results);
         return results;
+    }
+
+    public List<SearchResult> convertResults(final Collection<Result> results, final String query) {
+        Map<SearchResult, SearchResult> resultMap = new HashMap<>();
+        Pattern queryTermPattern = QueryTermPattern.getPattern(query);
+        for (Result result : results) {
+            processResource(result, resultMap, queryTermPattern);
+        }
+        return new ArrayList<>(resultMap.values());
     }
 
     private void processEngine(final Result engine, final Map<SearchResult, SearchResult> resultMap,

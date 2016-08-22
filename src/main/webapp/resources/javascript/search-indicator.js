@@ -31,6 +31,8 @@
         }
     };
 
+    lane.on("search:search", searchIndicator.show);
+
     lane.searchIndicator = searchIndicator;
 
 })();

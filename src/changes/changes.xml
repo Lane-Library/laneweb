@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-08-22" version="3.3.0" description="3.3.0 redesign release">
+            <action date="2016-08-15" dev="ceyates" issue="114810" type="update">
+                replace search select with tabs
+            </action>
+        </release>
         <release date="2016-08-15" version="3.2.34" description="3.2.34 bug fix release">
             <action date="2016-08-09" dev="ryanmax" issue="125890" type="fix">
                 long queries overlap search controls

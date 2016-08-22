@@ -92,7 +92,6 @@
 .bookmark-search{
     visibility: hidden;
     display: inline-block;
-    margin-top: 12px;
     text-align: center;
 }
 .bookmark-search.active{

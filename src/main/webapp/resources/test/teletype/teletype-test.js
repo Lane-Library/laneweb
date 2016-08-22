@@ -5,7 +5,7 @@ Y.lane.search = {};
 var teletypeTestCase = new Y.Test.Case({
     name: 'Lane Teletype Test Case',
 
-    searchTerms: Y.one("#searchTerms"),
+    searchTerms: Y.one("input[name=q]"),
     teletypeInput: Y.one("#teletypeInput"),
     clinicalP: Y.one("#clinicalP"),
     picoTeletypeInput: Y.one("#picoTeletypeInput"),
