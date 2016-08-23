@@ -29,7 +29,7 @@
         <xsl:variable name="label">
             <xsl:choose>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'pubmed'">PubMed</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and value = 'bib'">Lane Catalog</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'bib'"><span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span></xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'web'">Lane Web Site</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
@@ -49,10 +49,10 @@
         </xsl:variable>
 		<xsl:choose>
 		    <xsl:when test="enabled = 'true'">
-		         <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-check-square fa-lg"></i> <span class="facetLabel"><xsl:value-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
+		         <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-check-square fa-lg"></i> <span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
 		    </xsl:when>
 		    <xsl:otherwise>
-		         <li><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i><span class="facetLabel"><xsl:value-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
+		         <li><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i><span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
 		    </xsl:otherwise>
 		</xsl:choose>
     </xsl:template>
@@ -132,19 +132,19 @@
                 </xsl:if>
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
 	                <div class="bd">
-		                <h3>Filter Results</h3>
+		                <h3 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h3>
 		                <xsl:if test="not($search-mode)">
                             <a class="close fa fa-close"></a>
 		                </xsl:if>
 		                <ul>
 							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'recordType'"/>
-		                        <xsl:with-param name="label">Results from <span id="sources"><i class="fa fa-info-circle fa-lg"></i></span></xsl:with-param>					   
+		                        <xsl:with-param name="label">Results From <span id="sources"></span></xsl:with-param>					   
 							</xsl:call-template>
 		
 							<xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'type'"/>					   
-		                        <xsl:with-param name="label" select="'Resource Type'"/>
+		                        <xsl:with-param name="label">Resource Type <i class="fa fa-info-circle fa-lg yui3-tooltip-trigger" title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;"></i></xsl:with-param>
 							</xsl:call-template>
 		
 		                    <xsl:call-template name="field">
@@ -154,7 +154,7 @@
 		
 		                    <xsl:call-template name="field">
 		                        <xsl:with-param name="id" select="'publicationTitle'"/>                    
-		                        <xsl:with-param name="label" select="'Journal'"/>                    
+		                        <xsl:with-param name="label" select="'Journal Title'"/>                    
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
@@ -163,8 +163,8 @@
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">
-		                        <xsl:with-param name="id" select="'mesh'"/>                    
-		                        <xsl:with-param name="label" select="'Subject (MeSH)'"/>                    
+		                        <xsl:with-param name="id" select="'mesh'"/>               
+		                    	<xsl:with-param name="label"><span class="yui3-tooltip-trigger" title="Filter down search results to only articles pertaining to these medical subjects">Medical Subject</span></xsl:with-param>     
 		                    </xsl:call-template>
 		                    
 		                    <xsl:call-template name="field">

@@ -60,6 +60,16 @@ public class ContentResultConversionStrategyTest {
     }
 
     @Test
+    public void testConvertResultCollection() {
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.contentResult));
+        expect(this.scoreStrategy.computeScore(eq(this.contentResult), isA(Pattern.class))).andReturn(1);
+        expect(this.contentResult.getTitle()).andReturn("title");
+        replay(this.contentResult, this.query, this.hitCountResult, this.result, this.scoreStrategy, this.uberResult);
+        assertEquals(1, this.conversionStrategy.convertResults(Collections.singletonList(this.result), "query").size());
+        verify(this.contentResult, this.query, this.hitCountResult, this.result, this.scoreStrategy, this.uberResult);
+    }
+
+    @Test
     public void testConvertResultNoContent() {
         expect(this.uberResult.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.hitCountResult));

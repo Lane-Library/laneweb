@@ -15,18 +15,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- this is used in search-facet-counts.xsl -->
-            <map:match pattern="search/engine/xml/*" type="wildcard">
-                <map:generate type="search-engine">
-                    <map:parameter name="engines" value="{1}"/>
-                </map:generate>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="search-proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- this is used by the search-monitor -->
             <map:match pattern="search/engine/xml" type="wildcard">
                 <map:generate type="search-engine">
@@ -85,13 +73,6 @@
                 <map:generate type="solr-search-facets"/>
                 <map:transform type="saxon" src="resources/xsl/solr-facets.xsl"/>
                 <map:serialize type="xhtml"/>
-            </map:match>
-            <!-- search facet counts -->
-            <!-- used in lane-search-facet-counts.js -->
-            <map:match pattern="search/facets/json" type="wildcard">
-                <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
-                <map:transform type="saxon" src="resources/xsl/search-facet-counts.xsl"/>
-                <map:serialize type="text"/>
             </map:match>
             <!-- TODO: find permanent home for this -->
             <map:match pattern="search/flickr.xml" type="wildcard">

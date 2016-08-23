@@ -12,14 +12,11 @@ Y.Test.Runner.add(new Y.Test.Case({
 
     setUp: function() {
         this.input = Y.one("#input");
-    },
-
-    tearDown: function() {
+        this.input.set("value","");
         if (this.textInput !== null) {
             this.textInput.destroy();
             this.textInput = null;
         }
-        this.input.set("value","");
     },
 
     testConstructorHintText : function() {

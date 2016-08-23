@@ -109,16 +109,16 @@ public class PersistentLoginHandlerInterceptorTest {
         verify(this.request, this.response, this.cookie);
     }
 
-    @Test(expected = NullPointerException.class)
-    // FIXME: this should not be expected . . .
+    @Test
     public void testPreHandleSecureLoginNullURL() throws IOException {
         expect(this.request.getRequestURI()).andReturn("/secure/login.html").times(2);
         expect(this.request.getParameter("url")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn("name");
         expect(this.request.getContextPath()).andReturn("/stage");
+        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=false&url=%2Findex.html");
         replay(this.request, this.response, this.cookie);
-        assertTrue(this.interceptor.preHandle(this.request, this.response, this.handler));
+        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
         verify(this.request, this.response, this.cookie);
     }
 }

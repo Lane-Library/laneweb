@@ -18,6 +18,7 @@
                 <bean class="edu.stanford.irt.laneweb.solr.DoiQueryInspector"/>
                 <bean class="edu.stanford.irt.laneweb.solr.PmidQueryInspector"/>
                 <bean class="edu.stanford.irt.laneweb.solr.NumberQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.solr.ORQueryInspector"/>
                 <bean class="edu.stanford.irt.laneweb.solr.EscapingQueryInspector"/>
             </list>
         </constructor-arg>

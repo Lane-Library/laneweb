@@ -71,16 +71,17 @@
                 <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- clinical and peds search pages (parameter is clinical-all, clinical-pubmed, clinical-uptodate, peds-all, peds-pubmed, peds-uptodate, pedschild-all, pedschild-pubmed,etc)-->
-            <map:match type="regex-parameter" pattern="^(clinical|peds.*)-.*$">
+            <map:match type="regex-parameter" pattern="^(clinical-all|peds-all)$">
                 <map:parameter name="parameter-name" value="source"/>
-                <map:aggregate type="default" element="doc">
-                    <map:generate type="file" src="cocoon://content/cached/search/{1}.html"/>
-                    <map:generate type="file" src="cocoon://content/cached/search/{1}/{source}.html"/>
+                <map:aggregate type="default" element="doc" ns="aggregate">
+                    <map:generate type="{0}"/>
+                    <map:generate type="html" src="{0}.html"/>
                 </map:aggregate>
+                <map:transform type="saxon" src="resources/xsl/clinical-search.xsl"/>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="description-labeling"/>
+                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- bioresearch and textbooks -->
@@ -102,7 +103,7 @@
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
                         <map:parameter name="timeout" value="0"/>
-                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,highwire,clinicaltrials_all,proteome,cap,wiley_0,pubmed,stanford_clinicaltrials,lane,metadb,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,ubcbioinfolinks,crosssearch1"/>
+                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,highwire,clinicaltrials_all,proteome,cap,pubmed,stanford_clinicaltrials,lane,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,ubcbioinfolinks,crosssearch1"/>
                     </map:generate>
                     <map:generate type="file" src="cocoon://content/cached/search/bioresearch-all.html"/>
                 </map:aggregate>
@@ -138,14 +139,6 @@
               <map:serialize type="xml"/>
             </map:match>
          </map:match>
-        <!-- ajax requests for the tab results uses this, so does the aggregate in the articles, catalog and clinical matchers -->
-        <map:match pattern="search/*/*.html" type="wildcard">
-            <map:generate src="cocoon://content/cached/search/{1}/{2}.html" type="file"/>
-            <map:transform type="xinclude"/>
-            <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-            <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <!-- TODO: temporarily moving this out of caching pipeline because of intermittent NullPointerExceptioins -->
         <map:match pattern="portals/cvicu.html" type="wildcard">
             <map:generate type="html" src="{content-base}/portals/cvicu.html"/>

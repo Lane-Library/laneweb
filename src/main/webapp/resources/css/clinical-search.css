@@ -1,0 +1,86 @@
+.clinical-heading {
+    font-size: 14px;
+    font-weight: bold;
+}
+.clinical-heading a ,.clinical-heading a:active, .clinical-heading a:hover, .clinical-heading a:visited {
+    color: black;
+}
+.clinical-toggle {
+    background-color: rgb(221,222,223);
+    margin: 9px 0 37px;
+    line-height: 26px;
+    border-radius: 24px;
+    font-size: 14px;
+    padding: 5px 14px;
+}
+.clinical-toggle a {
+    display: block;
+}
+.clinical-toggle-label {
+    color: rgb(126, 127, 128);
+}
+.clinical-toggle-label-active {
+    color: black;
+}
+.clinical-toggle-oval {
+    box-sizing: border-box;
+    border-radius: 26px;
+    display: inline-block;
+    background-color: rgb(62, 63, 64);
+    margin: 0 11px;
+    width: 91px;
+    border: 4px black solid;
+}
+.clinical-toggle-circle {
+    border-radius: 19px;
+    width: 28px;
+    display: inline-block;
+    background-color: rgb(182,186,187);
+}
+.clinical-toggle-circle-peds {
+    margin-left: 54px;
+}
+.clinical-facets {
+    margin-top: 12px;
+}
+.clinical-facets-section {
+    margin: 10px 0 20px;
+}
+.clinical-facets-subsection {
+    margin-left: 10px;
+    position: relative;
+}
+.clinical-facet {
+    padding: 3px;
+    display:block;
+    border-bottom:1px rgb(231,231,224) solid;
+}
+
+.clinical-facet .fa-circle-o {
+    color:rgb(225,225,225);
+}
+
+.clinical-facet .fa-circle-o::after {
+    content: " ";
+    position: absolute;
+    background-color: #fff;
+    height: 12px;
+    left: 4px;
+    width: 12px;
+    z-index: -1;
+    border-radius: 6px;
+}
+
+.clinical-facet span {
+    float:right;
+}
+
+.clinical-facet-active {
+    font-weight:bold;
+    color:white;
+    background-color:black;
+}
+
+.clinical-facet-active .fa {
+    color:white
+}
