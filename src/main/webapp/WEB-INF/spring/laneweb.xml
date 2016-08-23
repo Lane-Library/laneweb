@@ -25,6 +25,7 @@
     <import resource="sitemap.xml"/>
     <import resource="source.xml"/>
     <import resource="solr.xml"/>
+    <import resource="spring-session.xml"/>
     <import resource="suggest.xml"/>
     <import resource="trends.xml"/>
     <import resource="voyager.xml"/>
