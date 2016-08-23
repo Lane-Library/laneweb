@@ -259,7 +259,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-            <version>7.0.59</version>
+            <version>8.5.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -300,6 +300,7 @@
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -323,11 +324,13 @@
             <groupId>com.oracle</groupId>
             <artifactId>ons</artifactId>
             <version>12.1.0.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ucp</artifactId>
             <version>12.1.0.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -363,6 +366,7 @@
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>
+        <finalName>laneweb</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

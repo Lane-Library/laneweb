@@ -24,7 +24,7 @@
         </constructor-arg>
      </bean>
     
-    <solr:solr-server id="laneSearchSolrServer" url="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
+    <solr:solr-server timeout="5000" id="laneSearchSolrServer" url="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
     
     <solr:repositories base-package="edu.stanford.irt.laneweb.solr" multicore-support="true" solr-server-ref="laneSearchSolrServer"/>
     
