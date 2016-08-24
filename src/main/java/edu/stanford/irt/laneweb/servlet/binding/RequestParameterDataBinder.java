@@ -79,7 +79,7 @@ public class RequestParameterDataBinder implements DataBinder {
             }
             if (this.urlEncodedParameters.containsKey(name)) {
                 try {
-                    model.put(this.urlEncodedParameters.get(name), URLEncoder.encode(value, "UTF-8"));
+                    model.put(this.urlEncodedParameters.get(name), URLEncoder.encode(value.trim(), "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     throw new LanewebException(e);
                 }
