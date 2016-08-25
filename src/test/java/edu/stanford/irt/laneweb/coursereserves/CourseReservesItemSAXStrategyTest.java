@@ -53,6 +53,25 @@ public class CourseReservesItemSAXStrategyTest {
     }
 
     @Test
+    public void testToSAX0AvailableCount() throws SAXException, IOException {
+        expect(this.item.getId()).andReturn(1);
+        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getURL()).andReturn(null);
+        expect(this.item.getTitle()).andReturn("title");
+        expect(this.item.getAuthor()).andReturn("author");
+        expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(0));
+        expect(this.item.getCallNumber()).andReturn("call number");
+        replay(this.item);
+        this.xmlConsumer.startDocument();
+        this.saxStrategy.toSAX(this.item, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        verify(this.item);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "CourseReservesItemSAXStrategyTest-toSAX0AvailableCount.xml"),
+                this.xmlConsumer.getStringValue());
+    }
+
+    @Test
     public void testToSAXNullAuthor() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
         expect(this.item.isDigital()).andReturn(true);
@@ -65,6 +84,61 @@ public class CourseReservesItemSAXStrategyTest {
         this.xmlConsumer.endDocument();
         verify(this.item);
         assertEquals(this.xmlConsumer.getExpectedResult(this, "CourseReservesItemSAXStrategyTest-toSAXNullAuthor.xml"),
+                this.xmlConsumer.getStringValue());
+    }
+
+    @Test
+    public void testToSAXNullAvailableCount() throws SAXException, IOException {
+        expect(this.item.getId()).andReturn(1);
+        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getURL()).andReturn(null);
+        expect(this.item.getTitle()).andReturn("title");
+        expect(this.item.getAuthor()).andReturn("author");
+        expect(this.item.getAvailableCount()).andReturn(null);
+        expect(this.item.getCallNumber()).andReturn("call number");
+        replay(this.item);
+        this.xmlConsumer.startDocument();
+        this.saxStrategy.toSAX(this.item, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        verify(this.item);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "CourseReservesItemSAXStrategyTest-toSAXNullAvailableCount.xml"),
+                this.xmlConsumer.getStringValue());
+    }
+
+    @Test
+    public void testToSAXNullCallNumber() throws SAXException, IOException {
+        expect(this.item.getId()).andReturn(1);
+        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getURL()).andReturn(null);
+        expect(this.item.getTitle()).andReturn("title");
+        expect(this.item.getAuthor()).andReturn("author");
+        expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(1));
+        expect(this.item.getCallNumber()).andReturn(null);
+        replay(this.item);
+        this.xmlConsumer.startDocument();
+        this.saxStrategy.toSAX(this.item, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        verify(this.item);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "CourseReservesItemSAXStrategyTest-toSAXNullCallNumber.xml"),
+                this.xmlConsumer.getStringValue());
+    }
+
+    @Test
+    public void testToSAXNullURL() throws SAXException, IOException {
+        expect(this.item.getId()).andReturn(1);
+        expect(this.item.isDigital()).andReturn(true);
+        expect(this.item.getURL()).andReturn(null);
+        expect(this.item.getTitle()).andReturn("title");
+        expect(this.item.getAuthor()).andReturn("author");
+        replay(this.item);
+        this.xmlConsumer.startDocument();
+        this.saxStrategy.toSAX(this.item, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        verify(this.item);
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "CourseReservesItemSAXStrategyTest-toSAXNullURL.xml"),
                 this.xmlConsumer.getStringValue());
     }
 
