@@ -38,32 +38,38 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
                 createElement(xmlConsumer, "div", Normalizer.normalize(author, Form.NFKC));
             }
             startDiv(xmlConsumer);
-            createElement(xmlConsumer, "strong", "Book ");
+            createStrong(xmlConsumer, "Book ");
             XMLUtils.data(xmlConsumer, isDigital ? "Digital" : "Print");
             endDiv(xmlConsumer);
             if (!isDigital) {
-                Integer availableCount = item.getAvailableCount();
-                if (availableCount != null) {
-                    startDiv(xmlConsumer);
-                    createElement(xmlConsumer, "strong", "Status: ");
-                    if (availableCount.intValue() == 0) {
-                        XMLUtils.data(xmlConsumer, "Checked Out");
-                    } else {
-                        XMLUtils.data(xmlConsumer, "Available ");
-                        createElement(xmlConsumer, "strong", availableCount.toString());
-                    }
-                    endDiv(xmlConsumer);
-                }
-                String callNumber = item.getCallNumber();
-                if (callNumber != null) {
-                    startDiv(xmlConsumer);
-                    createElement(xmlConsumer, "strong", "Call #: " + callNumber);
-                    endDiv(xmlConsumer);
-                }
+                availableCount(xmlConsumer, item.getAvailableCount());
+                callNumber(xmlConsumer, item.getCallNumber());
             }
             endLi(xmlConsumer);
         } catch (SAXException e) {
             throw new LanewebException(e);
+        }
+    }
+
+    private void availableCount(final XMLConsumer xmlConsumer, final Integer availableCount) throws SAXException {
+        if (availableCount != null) {
+            startDiv(xmlConsumer);
+            createStrong(xmlConsumer, "Status: ");
+            if (availableCount.intValue() == 0) {
+                XMLUtils.data(xmlConsumer, "Checked Out");
+            } else {
+                XMLUtils.data(xmlConsumer, "Available ");
+                createStrong(xmlConsumer, availableCount.toString());
+            }
+            endDiv(xmlConsumer);
+        }
+    }
+
+    private void callNumber(final XMLConsumer xmlConsumer, final String callNumber) throws SAXException {
+        if (callNumber != null) {
+            startDiv(xmlConsumer);
+            createStrong(xmlConsumer, "Call #: " + callNumber);
+            endDiv(xmlConsumer);
         }
     }
 }

@@ -33,6 +33,8 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     private static final String SPAN = "span";
 
+    private static final String STRONG = "strong";
+
     private static final String TITLE = "title";
 
     private static final String UL = "ul";
@@ -101,6 +103,10 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
     protected void createSpanWithId(final XMLConsumer xmlConsumer, final String id, final String text)
             throws SAXException {
         createElementWithId(xmlConsumer, SPAN, id, text);
+    }
+
+    protected void createStrong(final XMLConsumer xmlConsumer, final String text) throws SAXException {
+        createElement(xmlConsumer, STRONG, text);
     }
 
     protected void createTitle(final XMLConsumer xmlConsumer, final String title) throws SAXException {

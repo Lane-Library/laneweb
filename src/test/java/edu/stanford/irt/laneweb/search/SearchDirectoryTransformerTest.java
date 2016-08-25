@@ -36,9 +36,9 @@ public class SearchDirectoryTransformerTest {
     @Test
     public void testEndDocument() throws SAXException {
         this.xmlConsumer.startElement(eq(""), eq("file"), eq("file"), isA(Attributes.class));
-        expectLastCall().atLeastOnce();
+        expectLastCall().anyTimes();
         this.xmlConsumer.endElement("", "file", "file");
-        expectLastCall().atLeastOnce();
+        expectLastCall().anyTimes();
         this.xmlConsumer.endElement("http://lane.stanford.edu/search-templates/ns", "search-templates",
                 "search-templates");
         this.xmlConsumer.endDocument();
