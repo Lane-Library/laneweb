@@ -3,12 +3,10 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:st="http://lane.stanford.edu/search-templates/ns"
     xmlns="http://lane.stanford.edu/search-templates/ns"
-    xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:s="http://irt.stanford.edu/search/2.0"
-    exclude-result-prefixes="h s st xi"
+    xmlns:r="http://lane.stanford.edu/results/1.0"
+    exclude-result-prefixes="h r s st"
     version="2.0">
-    
-    <xsl:variable name="all-engines" select="/st:search-templates/s:search/s:engine"/>
     
     <xsl:template match="st:search-templates">
         <xsl:copy>
@@ -31,6 +29,10 @@
         </xsl:if>
     </xsl:template>
     
+    <xsl:template match="@r:ref[starts-with(.,'resource@')][ends-with(.,'/@count')]">
+        <engine idref="{substring-before(substring-after(.,'@'),'/')}"/>
+    </xsl:template>
+    
     <xsl:template match="h:html"/>
     
     <xsl:template match="h:a[@id and contains(@class,'metasearch')]">
@@ -40,35 +42,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="xi:include/@href">
-        <xsl:variable name="engines">
-            <xsl:call-template name="engines">
-                <xsl:with-param name="string" select="."/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:for-each select="tokenize($engines,',')">
-            <xsl:variable name="eng-id" select="."/>
-            <xsl:if test="count($all-engines[@s:id = $eng-id]) > 0">
-                <engine idref="{.}"/>
-            </xsl:if>
-        </xsl:for-each>
-    </xsl:template>
-    
     <xsl:template match="text()|@*"/>
-    
-    <xsl:template name="engines">
-        <xsl:param name="string"/>
-        <xsl:choose>
-            <xsl:when test="contains($string,'/')">
-                <xsl:call-template name="engines">
-                    <xsl:with-param name="string" select="substring-after($string,'/')"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$string"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
     
     
 </xsl:stylesheet>

@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.Map;
 
 import org.xml.sax.SAXException;
@@ -12,6 +13,14 @@ import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 public class SearchDirectoryTransformer extends AbstractCacheableTransformer implements ParametersAware {
 
     private static final String FILE = "file";
+
+    private static final FileFilter FILE_FILTER = new FileFilter() {
+
+        @Override
+        public boolean accept(final File file) {
+            return file.isFile() && file.canRead() && file.getName().endsWith(".html");
+        }
+    };
 
     private static final String NAMESPACE = "http://lane.stanford.edu/search-templates/ns";
 
@@ -46,17 +55,13 @@ public class SearchDirectoryTransformer extends AbstractCacheableTransformer imp
     }
 
     private void parseDirectory(final File directory) throws SAXException {
-        File[] files = directory.listFiles();
+        File[] files = directory.listFiles(FILE_FILTER);
         if (files != null) {
             for (File file : files) {
-                if (file.isDirectory() && !".svn".equals(file.getName())) {
-                    parseDirectory(file);
-                } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
-                    AttributesImpl attributes = new AttributesImpl();
-                    attributes.addAttribute("", "path", "path", "CDATA", file.getAbsolutePath());
-                    startElement("", FILE, FILE, attributes);
-                    endElement("", FILE, FILE);
-                }
+                AttributesImpl attributes = new AttributesImpl();
+                attributes.addAttribute("", "path", "path", "CDATA", file.getAbsolutePath());
+                startElement("", FILE, FILE, attributes);
+                endElement("", FILE, FILE);
             }
         }
     }
