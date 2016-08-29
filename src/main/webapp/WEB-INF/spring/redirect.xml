@@ -16,6 +16,7 @@
                             <entry key="/classes" value="/classes-consult/laneclasses.html"/>
                             <entry key="/m" value="/m/index\.html"/>
                             <entry key="/imagesearch.html" value="/bioimagesearch.html"/>
+                            <entry key="/beemap" value="/beemap.html"/>
                         </map>
                     </property>
                 </bean>
