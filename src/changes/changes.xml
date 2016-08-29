@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-08-229" version="3.3.1" description="3.3.1 bug fix release">
+            <action date="2016-08-28" dev="ceyates" issue="126405" type="add">
+                redirect /beemap to /beemap.html
+            </action>
+            <action date="2016-08-25" dev="ceyates" issue="126348" type="update">
+                make clincal and peds search engine ids discoverable in /apps/search-templates.xml
+            </action>
+        </release>
         <release date="2016-08-22" version="3.3.0" description="3.3.0 redesign release">
             <action date="2016-08-15" dev="ceyates" issue="114810" type="update">
                 replace search select with tabs
