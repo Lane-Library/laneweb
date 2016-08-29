@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -10,42 +9,39 @@ import static org.powermock.api.easymock.PowerMock.createMock;
 import static org.powermock.api.easymock.PowerMock.replay;
 import static org.powermock.api.easymock.PowerMock.verify;
 
+import java.io.Serializable;
+
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import edu.stanford.irt.cocoon.cache.CachedResponse;
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(Cache.class)
-public class EHCacheTest {
+public class JCacheTest {
 
-    private EHCache ehcache;
+    private CachedResponse cachedResponse;
 
-    private Element element;
+    private JCache jcache;
 
-    private Cache mockCache;
+    private Cache<Serializable, CachedResponse> mockCache;
 
     @Before
     public void setUp() throws Exception {
         this.mockCache = createMock(Cache.class);
         CacheManager manager = createMock(CacheManager.class);
-        expect(manager.getCache("cocoon-ehcache")).andReturn(this.mockCache);
+        expect(manager.getCache("cocoon-cache", Serializable.class, CachedResponse.class)).andReturn(this.mockCache);
         replay(manager);
-        this.ehcache = new EHCache(manager);
-        this.element = new Element("key", new CachedResponse(null, null));
+        this.jcache = new JCache(manager);
+        this.cachedResponse = createMock(CachedResponse.class);
     }
 
     @Test
     public void testClear() {
         this.mockCache.removeAll();
         replay(this.mockCache);
-        this.ehcache.clear();
+        this.jcache.clear();
         verify(this.mockCache);
     }
 
@@ -53,23 +49,23 @@ public class EHCacheTest {
     public void testContainsKeyFalse() {
         expect(this.mockCache.get("key")).andReturn(null);
         replay(this.mockCache);
-        assertFalse(this.ehcache.containsKey("key"));
+        assertFalse(this.jcache.containsKey("key"));
         verify(this.mockCache);
     }
 
     @Test
     public void testContainsKeyTrue() {
-        expect(this.mockCache.get("key")).andReturn(this.element);
+        expect(this.mockCache.get("key")).andReturn(this.cachedResponse);
         replay(this.mockCache);
-        assertTrue(this.ehcache.containsKey("key"));
+        assertTrue(this.jcache.containsKey("key"));
         verify(this.mockCache);
     }
 
     @Test
     public void testGetElement() {
-        expect(this.mockCache.get("key")).andReturn(this.element);
+        expect(this.mockCache.get("key")).andReturn(this.cachedResponse);
         replay(this.mockCache);
-        assertNotNull(this.ehcache.get("key"));
+        assertNotNull(this.jcache.get("key"));
         verify(this.mockCache);
     }
 
@@ -77,7 +73,7 @@ public class EHCacheTest {
     public void testGetNull() {
         expect(this.mockCache.get("key")).andReturn(null);
         replay(this.mockCache);
-        assertNull(this.ehcache.get("key"));
+        assertNull(this.jcache.get("key"));
         verify(this.mockCache);
     }
 
@@ -85,15 +81,15 @@ public class EHCacheTest {
     public void testRemove() {
         expect(this.mockCache.remove("key")).andReturn(true);
         replay(this.mockCache);
-        this.ehcache.remove("key");
+        this.jcache.remove("key");
         verify(this.mockCache);
     }
 
     @Test
     public void testStore() {
-        this.mockCache.put(isA(Element.class));
+        this.mockCache.put("key", this.cachedResponse);
         replay(this.mockCache);
-        this.ehcache.store("key", new CachedResponse(null, null));
+        this.jcache.store("key", this.cachedResponse);
         verify(this.mockCache);
     }
 }

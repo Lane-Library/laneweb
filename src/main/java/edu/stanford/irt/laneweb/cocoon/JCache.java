@@ -2,17 +2,17 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.Serializable;
 
-import edu.stanford.irt.cocoon.cache.Cache;
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+
 import edu.stanford.irt.cocoon.cache.CachedResponse;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 
-public class EHCache implements Cache {
+public class JCache implements edu.stanford.irt.cocoon.cache.Cache {
 
-    private net.sf.ehcache.Cache cache;
+    private Cache<Serializable, CachedResponse> cache;
 
-    public EHCache(final CacheManager manager) {
-        this.cache = manager.getCache("cocoon-ehcache");
+    public JCache(final CacheManager manager) {
+        this.cache = manager.getCache("cocoon-cache", Serializable.class, CachedResponse.class);
     }
 
     @Override
@@ -27,8 +27,7 @@ public class EHCache implements Cache {
 
     @Override
     public CachedResponse get(final Serializable key) {
-        Element element = this.cache.get(key);
-        return (CachedResponse) (element == null ? null : element.getObjectValue());
+        return this.cache.get(key);
     }
 
     @Override
@@ -38,7 +37,6 @@ public class EHCache implements Cache {
 
     @Override
     public void store(final Serializable key, final CachedResponse response) {
-        final Element element = new Element(key, response);
-        this.cache.put(element);
+        this.cache.put(key, response);
     }
 }

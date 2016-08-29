@@ -1,15 +1,14 @@
-<ehcache name="laneweb">
-    
-    <cache
-        name="cocoon-ehcache"
-        maxElementsInMemory="1000"
-        eternal="false"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
-        overflowToDisk="false"
-        diskPersistent="false"
-        statistics="true"
-    />
-    
-    
-</ehcache>
+<config xmlns='http://www.ehcache.org/v3'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:jsr107='http://www.ehcache.org/v3/jsr107'
+    xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.1.xsd
+    http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.1.xsd">
+
+  <cache alias="cocoon-cache">
+    <key-type>java.io.Serializable</key-type>
+    <value-type>edu.stanford.irt.cocoon.cache.CachedResponse</value-type>
+    <heap>1000</heap>
+    <jsr107:mbeans enable-management="true" enable-statistics="true"/>
+  </cache>
+
+</config>
