@@ -110,10 +110,6 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpcore</artifactId>
              </exclusion>
-             <exclusion>
-             	<groupId>commons-logging</groupId>
-             	<artifactId>commons-logging</artifactId>
-             </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -123,10 +119,20 @@
             <version>9.7.0-7</version>
         </dependency>
         <dependency>
+            <artifactId>search-core</artifactId>
+            <groupId>edu.stanford.irt.search</groupId>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
             <version>3.0.34</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <artifactId>search-spring</artifactId>
+            <groupId>edu.stanford.irt.search</groupId>
+            <version>3.0.7</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
