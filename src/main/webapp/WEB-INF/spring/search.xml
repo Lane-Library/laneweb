@@ -114,8 +114,8 @@
                 <value>aafp_patients</value>
                 <value>aappatient</value>
                 <value>aapwebsite</value>
-                <value>dynamed</value>
-                <value>guideline_clearinghouse</value>
+                <value>dynamed_allchild</value>
+                <value>guideline_clearinghouse_allchild</value>
                 <value>pubmed_allchild</value>
                 <value>pubmed_clinicaltrial_allchild</value>
                 <value>pubmed_cost_allchild</value>
@@ -130,7 +130,7 @@
                 <value>pubmed_rct_allchild</value>
                 <value>pubmed_systematicreviews_allchild</value>
                 <value>pubmed_treatment_focused_allchild</value>
-                <value>uptodate</value>
+                <value>uptodate_allchild</value>
             </list>
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.laneweb.search.ClinicalSearchResultsFactory"/>
