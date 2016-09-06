@@ -116,7 +116,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.7.0-7</version>
+            <version>9.7.0-8</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -340,7 +340,7 @@
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-books</artifactId>
-            <version>v1-rev86-1.22.0</version>
+            <version>v1-rev87-1.22.0</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
