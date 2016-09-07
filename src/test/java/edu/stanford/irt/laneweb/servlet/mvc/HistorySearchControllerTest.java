@@ -17,10 +17,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
+import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.Result.ResultBuilder;
 
@@ -32,15 +32,15 @@ public class HistorySearchControllerTest {
 
     private CompositeDataBinder dataBinder;
 
-    private MetaSearchManager metasearchManager;
+    private MetaSearchService metaSearchService;
 
     private Model model;
 
     @Before
     public void setUp() {
         this.dataBinder = createMock(CompositeDataBinder.class);
-        this.metasearchManager = createMock(MetaSearchManager.class);
-        this.controller = new HistorySearchController(this.metasearchManager, this.dataBinder);
+        this.metaSearchService = createMock(MetaSearchService.class);
+        this.controller = new HistorySearchController(this.metaSearchService, this.dataBinder);
         this.model = createMock(Model.class);
         this.builder = Result.newResultBuilder().id("id").description("description").url("url");
     }
@@ -67,9 +67,9 @@ public class HistorySearchControllerTest {
                                 .id("id").description("description").url("url").build())).build();
         this.builder.status(SearchStatus.SUCCESSFUL);
         this.builder.children(Collections.singleton(child));
-        expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(
+        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(
                 this.builder.build());
-        replay(this.metasearchManager);
+        replay(this.metaSearchService);
         Map<String, Object> resultMap = this.controller.search("query");
         assertEquals(SearchStatus.SUCCESSFUL, resultMap.get("status"));
         Map<String, Object> resourceMap = (Map<String, Object>) resultMap.get("resources");
@@ -78,7 +78,7 @@ public class HistorySearchControllerTest {
         assertEquals(SearchStatus.SUCCESSFUL, resource.get("status"));
         assertEquals("description", resource.get("description"));
         assertEquals("url", resource.get("url"));
-        verify(this.metasearchManager);
+        verify(this.metaSearchService);
     }
 
     @SuppressWarnings("unchecked")
@@ -94,9 +94,9 @@ public class HistorySearchControllerTest {
                                 .build())).build();
         this.builder.status(SearchStatus.FAILED);
         this.builder.children(Collections.singleton(child));
-        expect(this.metasearchManager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(
+        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(
                 this.builder.build());
-        replay(this.metasearchManager);
+        replay(this.metaSearchService);
         Map<String, Object> resultMap = this.controller.search("query");
         assertEquals(SearchStatus.FAILED, resultMap.get("status"));
         Map<String, Object> resourceMap = (Map<String, Object>) resultMap.get("resources");
@@ -104,6 +104,6 @@ public class HistorySearchControllerTest {
         assertNull(resource.get("hits"));
         assertEquals("description", resource.get("description"));
         assertEquals("url", resource.get("url"));
-        verify(this.metasearchManager);
+        verify(this.metaSearchService);
     }
 }

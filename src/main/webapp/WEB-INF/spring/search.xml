@@ -3,18 +3,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
-        class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
-        destroy-method="dispose">
-        <constructor-arg value="search-lane.xml"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.laneweb.search.MetaSearchManager"
-        class="edu.stanford.irt.laneweb.search.MetaSearchManagerFactoryBean"
-        scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-    </bean>
-    
+    <bean name="edu.stanford.irt.laneweb.search.MetaSearchService"
+        class="edu.stanford.irt.laneweb.search.MetaSearchService">
+        <constructor-arg value="http://localhost:9090"/>
+        <constructor-arg ref="com.fasterxml.jackson.databind.ObjectMapper"/>
+    </bean>    
+
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.PagingSearchResultListSAXStrategy">
         <constructor-arg>
@@ -58,7 +52,7 @@
         class="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         abstract="true">
-        <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchService"/>
         <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/result"/>
     </bean>
 
@@ -70,7 +64,7 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/clinical-all"
         class="edu.stanford.irt.laneweb.search.ClinicalSearchResultsGenerator"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchService"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ClinicalSearchResultsSAXStrategy"/>
         </constructor-arg>
@@ -105,7 +99,7 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/peds-all"
         class="edu.stanford.irt.laneweb.search.ClinicalSearchResultsGenerator"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchService"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.search.saxstrategy.ClinicalSearchResultsSAXStrategy"/>
         </constructor-arg>

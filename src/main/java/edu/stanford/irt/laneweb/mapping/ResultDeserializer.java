@@ -1,0 +1,86 @@
+package edu.stanford.irt.laneweb.mapping;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import edu.stanford.irt.search.Query;
+import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.ContentResult;
+import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.search.impl.Result.ResultBuilder;
+import edu.stanford.irt.search.impl.SimpleQuery;
+
+public class ResultDeserializer extends JsonDeserializer<Result> {
+
+    private static Collection<Result> getChildren(final JsonNode jsonNode) {
+        Collection<Result> children = new ArrayList<>();
+        jsonNode.forEach(n -> children.add(getResultFromNode(n)));
+        return children;
+    }
+
+    private static Result getContentResultFromNode(final JsonNode node) {
+        return ContentResult.newContentResultBuilder()
+                .author(node.get("author").asText())
+                .contentId(node.get("contentId").asText())
+                .date(node.get("publicationDate").asText())
+                .description(node.get("description").asText())
+                .id(node.get("id").asText())
+                .issue(node.get("publicationIssue").asText())
+                .pubTitle(node.get("publicationTitle").asText())
+                .title(node.get("title").asText())
+                .url(node.get("url").asText())
+                .volume(node.get("publicationVolume").asText())
+                .build();
+    }
+
+    private static Result getPlainResultFromNode(final JsonNode node) {
+        ResultBuilder builder = Result.newResultBuilder()
+                .children(getChildren(node.get("children")))
+                .description(node.get("description").textValue())
+                .id(node.get("id").textValue())
+                .query(getQuery(node.get("query")))
+                .status(getStatus(node.get("status")))
+                .time(node.get("time").asText())
+                .url(node.get("url").textValue());
+        String hits = node.get("hits").textValue();
+        if (hits != null) {
+            builder.hits(hits);
+        }
+        return builder.build();
+    }
+
+    private static Query getQuery(final JsonNode node) {
+        Query query = null;
+        if (!node.isNull()) {
+            query = new SimpleQuery(node.get("searchText").textValue());
+        }
+        return query;
+    }
+
+    private static Result getResultFromNode(final JsonNode node) {
+        if (node.has("contentId")) {
+            return getContentResultFromNode(node);
+        } else {
+            return getPlainResultFromNode(node);
+        }
+    }
+
+    private static SearchStatus getStatus(final JsonNode node) {
+        SearchStatus status = null;
+        if (!node.isNull()) {
+            status = SearchStatus.valueOf(node.asText());
+        }
+        return status;
+    }
+
+    @Override
+    public Result deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
+        return getResultFromNode(p.getCodec().readTree(p));
+    }
+}

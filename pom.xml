@@ -124,17 +124,6 @@
             <version>3.1.1</version>
         </dependency>
         <dependency>
-            <artifactId>search-lane</artifactId>
-            <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.34</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <artifactId>search-spring</artifactId>
-            <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.7</version>
-        </dependency>
-        <dependency>
             <artifactId>javax.servlet-api</artifactId>
             <groupId>javax.servlet</groupId>
             <scope>provided</scope>
