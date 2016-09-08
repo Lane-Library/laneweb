@@ -60,7 +60,7 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
     private static Query getQuery(final JsonNode node) {
         Query query = null;
         if (!node.isNull()) {
-            query = new SimpleQuery(node.get("searchText").textValue());
+            query = new SimpleQuery(node.textValue());
         }
         return query;
     }
