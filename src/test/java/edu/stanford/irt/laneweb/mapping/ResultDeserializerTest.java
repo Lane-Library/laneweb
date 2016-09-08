@@ -69,6 +69,55 @@ public class ResultDeserializerTest {
     }
 
     @Test
+    public void testSearchAAFPSuccessfulDeserialize() throws JsonParseException, JsonMappingException, IOException {
+        Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-aafp_patients.json"),
+                Result.class);
+        assertNotNull(result);
+        assertEquals("223000346", result.getId());
+        assertEquals("metasearch", result.getDescription());
+        assertEquals("none", result.getURL());
+        assertEquals(1, result.getChildren().size());
+        assertNull(result.getException());
+        assertNull(result.getHits());
+        assertEquals("elephant", result.getQuery().getSearchText());
+        assertEquals(SearchStatus.SUCCESSFUL, result.getStatus());
+        assertEquals("null", result.getTime());
+        for (Result child : result.getChildren()) {
+            assertEquals("aafp_patients", child.getId());
+            assertEquals("AAFP familydoctor.org", child.getDescription());
+            assertEquals("http://s.aafp.org/?q=elephant&q1=&x1=", child.getURL());
+            assertEquals(1, child.getChildren().size());
+            assertNull(child.getException());
+            assertEquals("29", child.getHits());
+            assertEquals("elephant", child.getQuery().getSearchText());
+            assertEquals(SearchStatus.SUCCESSFUL, child.getStatus());
+            assertEquals("1039", child.getTime());
+            for (Result grandchild : child.getChildren()) {
+                assertEquals("aafp_patients", grandchild.getId());
+                assertEquals("AAFP familydoctor.org", grandchild.getDescription());
+                assertEquals("http://s.aafp.org/?q=elephant&q1=&x1=", grandchild.getURL());
+                assertEquals(25, grandchild.getChildren().size());
+                assertNull(grandchild.getException());
+                assertEquals("29", grandchild.getHits());
+                assertNull(grandchild.getQuery());
+                assertEquals(SearchStatus.SUCCESSFUL, grandchild.getStatus());
+                assertEquals(result.getTime(), grandchild.getTime());
+                ContentResult content = (ContentResult) grandchild.getChildren().stream().reduce((a, b) -> b)
+                        .orElse(null);
+                assertNull(content.getAuthor());
+                assertNull(content.getContentId());
+                assertEquals(13, content.getDescription().length());
+                assertEquals("aafp_patients_content_25", content.getId());
+                assertNull(content.getPublicationDate());
+                assertNull(content.getPublicationIssue());
+                assertNull(content.getPublicationTitle());
+                assertEquals("", content.getPublicationText());
+                assertNull(content.getPublicationVolume());
+            }
+        }
+    }
+
+    @Test
     public void testSearchMMBIDDeserialize() throws JsonParseException, JsonMappingException, IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-mmbid.json"), Result.class);
         assertNotNull(result);

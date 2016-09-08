@@ -18,30 +18,32 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResultDeserializer extends JsonDeserializer<Result> {
 
-    private static Collection<Result> getChildren(final JsonNode jsonNode) {
+    private static final int CONTENT_DEPTH = 3;
+
+    private static Collection<Result> getChildren(final JsonNode jsonNode, int depth) {
         Collection<Result> children = new ArrayList<>();
-        jsonNode.forEach(n -> children.add(getResultFromNode(n)));
+        jsonNode.forEach(n -> children.add(getResultFromNode(n, depth + 1)));
         return children;
     }
 
     private static Result getContentResultFromNode(final JsonNode node) {
         return ContentResult.newContentResultBuilder()
-                .author(node.get("author").asText())
-                .contentId(node.get("contentId").asText())
-                .date(node.get("publicationDate").asText())
+                .author(node.has("author") ? node.get("author").asText() : null)
+                .contentId(node.has("contentId") ? node.get("contentId").asText() : null)
+                .date(node.has("publicationDate") ? node.get("publicationDate").asText() : null)
                 .description(node.get("description").asText())
                 .id(node.get("id").asText())
-                .issue(node.get("publicationIssue").asText())
-                .pubTitle(node.get("publicationTitle").asText())
-                .title(node.get("title").asText())
+                .issue(node.has("publicationIssue") ? node.get("publicationIssue").asText() : null)
+                .pubTitle(node.has("publicationTitle") ? node.get("publicationTitle").asText() : null)
+                .title(node.has("title") ? node.get("title").asText() : null)
                 .url(node.get("url").asText())
-                .volume(node.get("publicationVolume").asText())
+                .volume(node.has("publicationVolume") ? node.get("publicationVolume").asText() : null)
                 .build();
     }
 
-    private static Result getPlainResultFromNode(final JsonNode node) {
+    private static Result getPlainResultFromNode(final JsonNode node, int depth) {
         ResultBuilder builder = Result.newResultBuilder()
-                .children(getChildren(node.get("children")))
+                .children(getChildren(node.get("children"), depth))
                 .description(node.get("description").textValue())
                 .id(node.get("id").textValue())
                 .query(getQuery(node.get("query")))
@@ -63,11 +65,11 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
         return query;
     }
 
-    private static Result getResultFromNode(final JsonNode node) {
-        if (node.has("contentId")) {
+    private static Result getResultFromNode(final JsonNode node, int depth) {
+        if (depth == CONTENT_DEPTH) {
             return getContentResultFromNode(node);
         } else {
-            return getPlainResultFromNode(node);
+            return getPlainResultFromNode(node, depth);
         }
     }
 
@@ -81,6 +83,6 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
 
     @Override
     public Result deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
-        return getResultFromNode(p.getCodec().readTree(p));
+        return getResultFromNode(p.getCodec().readTree(p), 0);
     }
 }
