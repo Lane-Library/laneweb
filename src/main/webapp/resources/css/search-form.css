@@ -47,6 +47,7 @@
     width: 100%;
     height: 46px;
     padding-left: 10px;
+    padding-right: 60px;
     box-sizing: border-box;
 }
 /* see case 125259 */
@@ -58,6 +59,9 @@
 }
 .pico-fields-active {
     margin-bottom: 12px;
+}
+.pico-fields input {
+    padding-right: 0;
 }
 .search-reset {
     cursor: pointer;
