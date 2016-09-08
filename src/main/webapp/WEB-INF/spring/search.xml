@@ -5,7 +5,7 @@
 
     <bean name="edu.stanford.irt.laneweb.search.MetaSearchService"
         class="edu.stanford.irt.laneweb.search.MetaSearchService">
-        <constructor-arg value="http://localhost:9090"/>
+        <constructor-arg value="%{edu.stanford.irt.laneweb.metasearch-url}"/>
         <constructor-arg ref="com.fasterxml.jackson.databind.ObjectMapper"/>
     </bean>    
 
