@@ -28,16 +28,16 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
 
     private static Result getContentResultFromNode(final JsonNode node) {
         return ContentResult.newContentResultBuilder()
-                .author(node.has("author") ? node.get("author").asText() : null)
-                .contentId(node.has("contentId") ? node.get("contentId").asText() : null)
-                .date(node.has("publicationDate") ? node.get("publicationDate").asText() : null)
-                .description(node.get("description").asText())
-                .id(node.get("id").asText())
-                .issue(node.has("publicationIssue") ? node.get("publicationIssue").asText() : null)
-                .pubTitle(node.has("publicationTitle") ? node.get("publicationTitle").asText() : null)
-                .title(node.has("title") ? node.get("title").asText() : null)
-                .url(node.get("url").asText())
-                .volume(node.has("publicationVolume") ? node.get("publicationVolume").asText() : null)
+                .author(node.get("author").asText(null))
+                .contentId(node.get("contentId").asText(null))
+                .date(node.get("publicationDate").asText(null))
+                .description(node.get("description").asText(null))
+                .id(node.get("id").asText(null))
+                .issue(node.get("publicationIssue").asText(null))
+                .pubTitle(node.get("publicationTitle").asText(null))
+                .title(node.get("title").asText(null))
+                .url(node.get("url").asText(null))
+                .volume(node.get("publicationVolume").asText(null))
                 .build();
     }
 

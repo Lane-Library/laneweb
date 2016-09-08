@@ -73,7 +73,7 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-aafp_patients.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("223000346", result.getId());
+        assertEquals("2069082541", result.getId());
         assertEquals("metasearch", result.getDescription());
         assertEquals("none", result.getURL());
         assertEquals(1, result.getChildren().size());
@@ -91,7 +91,7 @@ public class ResultDeserializerTest {
             assertEquals("29", child.getHits());
             assertEquals("elephant", child.getQuery().getSearchText());
             assertEquals(SearchStatus.SUCCESSFUL, child.getStatus());
-            assertEquals("1039", child.getTime());
+            assertEquals("960", child.getTime());
             for (Result grandchild : child.getChildren()) {
                 assertEquals("aafp_patients", grandchild.getId());
                 assertEquals("AAFP familydoctor.org", grandchild.getDescription());
@@ -108,7 +108,7 @@ public class ResultDeserializerTest {
                 assertNull(content.getContentId());
                 assertEquals(13, content.getDescription().length());
                 assertEquals("aafp_patients_content_25", content.getId());
-                assertNull(content.getPublicationDate());
+                assertEquals("", content.getPublicationDate());
                 assertNull(content.getPublicationIssue());
                 assertNull(content.getPublicationTitle());
                 assertEquals("", content.getPublicationText());
@@ -121,7 +121,7 @@ public class ResultDeserializerTest {
     public void testSearchMMBIDDeserialize() throws JsonParseException, JsonMappingException, IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-mmbid.json"), Result.class);
         assertNotNull(result);
-        assertEquals("223000346", result.getId());
+        assertEquals("2069082541", result.getId());
         assertEquals("metasearch", result.getDescription());
         assertEquals("none", result.getURL());
         assertEquals(1, result.getChildren().size());
@@ -139,7 +139,7 @@ public class ResultDeserializerTest {
             assertEquals("12", child.getHits());
             assertEquals("rubella", child.getQuery().getSearchText());
             assertEquals(SearchStatus.SUCCESSFUL, child.getStatus());
-            assertEquals("1009", child.getTime());
+            assertEquals("886", child.getTime());
             for (Result grandchild : child.getChildren()) {
                 assertEquals("mmbid", grandchild.getId());
                 assertEquals("Metabolic & Molecular Bases of Inherited Disease", grandchild.getDescription());
@@ -159,7 +159,7 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-running.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("223000346", result.getId());
+        assertEquals("2069082541", result.getId());
         assertEquals("metasearch", result.getDescription());
         assertEquals("none", result.getURL());
         assertEquals(1, result.getChildren().size());
@@ -188,7 +188,7 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-successful.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("223000346", result.getId());
+        assertEquals("2069082541", result.getId());
         assertEquals("metasearch", result.getDescription());
         assertEquals("none", result.getURL());
         assertEquals(1, result.getChildren().size());
@@ -205,10 +205,10 @@ public class ResultDeserializerTest {
                     child.getURL());
             assertEquals(1, child.getChildren().size());
             assertNull(child.getException());
-            assertEquals("14461", child.getHits());
+            assertEquals("14462", child.getHits());
             assertEquals("rubella", child.getQuery().getSearchText());
             assertEquals(SearchStatus.SUCCESSFUL, child.getStatus());
-            assertEquals("1660", child.getTime());
+            assertEquals("1521", child.getTime());
             for (Result grandchild : child.getChildren()) {
                 assertEquals("pubmed", grandchild.getId());
                 assertEquals("PubMed", grandchild.getDescription());
@@ -217,21 +217,21 @@ public class ResultDeserializerTest {
                         grandchild.getURL());
                 assertEquals(50, grandchild.getChildren().size());
                 assertNull(grandchild.getException());
-                assertEquals("14461", grandchild.getHits());
+                assertEquals("14462", grandchild.getHits());
                 assertNull(grandchild.getQuery());
                 assertEquals(SearchStatus.SUCCESSFUL, grandchild.getStatus());
                 assertEquals(result.getTime(), grandchild.getTime());
-                ContentResult content = (ContentResult) grandchild.getChildren().stream().reduce((a, b) -> b)
+                ContentResult content = (ContentResult) grandchild.getChildren().stream().findFirst()
                         .orElse(null);
-                assertEquals("Madrid L, Varo R, Sitoe A, Bassat Q.", content.getAuthor());
-                assertEquals("PMID:27442227", content.getContentId());
-                assertEquals(1044, content.getDescription().length());
-                assertEquals("pubmed_content_50", content.getId());
-                assertEquals("2016 Sep", content.getPublicationDate());
-                assertEquals("9", content.getPublicationIssue());
-                assertEquals("Expert Rev Anti Infect Ther", content.getPublicationTitle());
-                assertEquals("Expert Rev Anti Infect Ther. 2016 Sep;14(9)", content.getPublicationText());
-                assertEquals("14", content.getPublicationVolume());
+                assertEquals("Nelly A, Marion LM, Lisa F, Pierre V, Céline P.", content.getAuthor());
+                assertEquals("PMID:27599689", content.getContentId());
+                assertEquals(1663, content.getDescription().length());
+                assertEquals("pubmed_content_1", content.getId());
+                assertEquals("2016 Sep 3", content.getPublicationDate());
+                assertNull(content.getPublicationIssue());
+                assertEquals("Clin Microbiol Infect", content.getPublicationTitle());
+                assertEquals("Clin Microbiol Infect. 2016 Sep 3", content.getPublicationText());
+                assertNull(content.getPublicationVolume());
             }
         }
     }
