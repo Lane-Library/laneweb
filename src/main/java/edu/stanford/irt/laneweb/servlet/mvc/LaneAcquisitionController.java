@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class LaneAcquisitionController {
 
-    private static final String ACQUISITION_URL = "https://lane-local-02.stanford.edu/sfp/api/new";
+    private static final String ACQUISITION_URL = "https://lane-local-02.stanford.edu/crm/sfp/api/new";
 
     @RequestMapping(value = "/apps/lanelibacqs", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
