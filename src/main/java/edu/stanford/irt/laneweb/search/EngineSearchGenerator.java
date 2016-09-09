@@ -8,15 +8,14 @@ import java.util.Objects;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 
 public class EngineSearchGenerator extends SearchGenerator {
 
     private Collection<String> engines;
 
-    public EngineSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
-        super(metaSearchManager, saxStrategy);
+    public EngineSearchGenerator(final MetaSearchService metaSearchService, final SAXStrategy<Result> saxStrategy) {
+        super(metaSearchService, saxStrategy);
     }
 
     @SuppressWarnings("unchecked")

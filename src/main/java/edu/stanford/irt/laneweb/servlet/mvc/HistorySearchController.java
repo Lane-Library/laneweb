@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -36,12 +36,12 @@ public class HistorySearchController {
 
     private Collection<String> engines;
 
-    private MetaSearchManager manager;
+    private MetaSearchService metaSearchService;
 
     @Autowired
-    public HistorySearchController(final MetaSearchManager manager,
+    public HistorySearchController(final MetaSearchService metaSearchService,
             @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder) {
-        this.manager = manager;
+        this.metaSearchService = metaSearchService;
         this.dataBinder = dataBinder;
         this.engines = Arrays.asList(ENGINES.split(","));
     }
@@ -57,7 +57,7 @@ public class HistorySearchController {
     @ResponseBody
     public Map<String, Object> search(@ModelAttribute(Model.QUERY) final String query) {
         Query simpleQuery = new SimpleQuery(query);
-        Result result = this.manager.search(simpleQuery, this.engines, ONE_MINUTE);
+        Result result = this.metaSearchService.search(simpleQuery, this.engines, ONE_MINUTE);
         Map<String, Object> resultMap = new HashMap<>();
         SearchStatus status;
         Collection<Result> children;

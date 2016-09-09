@@ -6,25 +6,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
+import edu.stanford.irt.laneweb.search.MetaSearchService;
 
 @Controller
 public class ClearSearchCacheController {
 
-    private MetaSearchManagerSource msms;
+    private MetaSearchService metaSearchService;
 
     @Autowired
-    public ClearSearchCacheController(final MetaSearchManagerSource msms) {
-        this.msms = msms;
+    public ClearSearchCacheController(final MetaSearchService msms) {
+        this.metaSearchService = msms;
     }
 
     @RequestMapping(value = "/apps/search/clearcache")
     @ResponseBody
     public String clearCache(@RequestParam(required = false) final String q) {
         if (q != null) {
-            this.msms.getSearchCacheManager().clearCache(q);
+            this.metaSearchService.clearCache(q);
         } else {
-            this.msms.getSearchCacheManager().clearAllCaches();
+            this.metaSearchService.clearAllCaches();
         }
         return "OK";
     }

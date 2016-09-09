@@ -22,10 +22,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 
 public class MetaSearchControllerTest {
@@ -34,7 +34,7 @@ public class MetaSearchControllerTest {
 
     private CompositeDataBinder dataBinder;
 
-    private MetaSearchManager manager;
+    private MetaSearchService metaSearchService;
 
     private Map<String, Object> map;
 
@@ -46,9 +46,9 @@ public class MetaSearchControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.manager = createMock(MetaSearchManager.class);
+        this.metaSearchService = createMock(MetaSearchService.class);
         this.dataBinder = createMock(CompositeDataBinder.class);
-        this.controller = new MetaSearchController(this.manager, this.dataBinder);
+        this.controller = new MetaSearchController(this.metaSearchService, this.dataBinder);
         this.model = createMock(org.springframework.ui.Model.class);
         this.request = createMock(HttpServletRequest.class);
         this.map = new HashMap<String, Object>();
@@ -63,9 +63,9 @@ public class MetaSearchControllerTest {
         expect(this.model.containsAttribute(Model.BASE_PROXY_URL)).andReturn(false);
         expect(this.model.addAttribute(Model.BASE_PROXY_URL, null)).andReturn(this.model);
         this.dataBinder.bind(this.map, this.request);
-        replay(this.manager, this.dataBinder, this.model);
+        replay(this.metaSearchService, this.dataBinder, this.model);
         this.controller.bind(this.request, this.model);
-        verify(this.manager, this.dataBinder, this.model);
+        verify(this.metaSearchService, this.dataBinder, this.model);
     }
 
     @Test
@@ -76,21 +76,21 @@ public class MetaSearchControllerTest {
         expect(this.model.containsAttribute(Model.PROXY_LINKS)).andReturn(true);
         expect(this.model.containsAttribute(Model.BASE_PROXY_URL)).andReturn(true);
         this.dataBinder.bind(this.map, this.request);
-        replay(this.manager, this.dataBinder, this.model);
+        replay(this.metaSearchService, this.dataBinder, this.model);
         this.controller.bind(this.request, this.model);
-        verify(this.manager, this.dataBinder, this.model);
+        verify(this.metaSearchService, this.dataBinder, this.model);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testSearch() {
-        expect(this.manager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
+        expect(this.metaSearchService.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(2);
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
         expect(this.result.getChildren()).andReturn(Collections.emptySet());
-        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
+        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result }));
@@ -99,7 +99,7 @@ public class MetaSearchControllerTest {
         expect(this.result.getURL()).andReturn("url");
         expect(this.result.getHits()).andReturn("2");
         expect(this.result.getId()).andReturn("id");
-        replay(this.manager, this.dataBinder, this.model, this.result);
+        replay(this.metaSearchService, this.dataBinder, this.model, this.result);
         Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false,
                 "baseProxyURL");
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
@@ -108,19 +108,19 @@ public class MetaSearchControllerTest {
         assertEquals(2, map.get("hits"));
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
         assertEquals("url", map.get("url"));
-        verify(this.manager, this.dataBinder, this.model, this.result);
+        verify(this.metaSearchService, this.dataBinder, this.model, this.result);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testSearchNullHits() {
-        expect(this.manager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
+        expect(this.metaSearchService.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result })).times(2);
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
         expect(this.result.getChildren()).andReturn(Collections.emptySet());
-        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
+        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
         expect(this.result.getChildren()).andReturn(Arrays.asList(new Result[] { this.result, this.result }));
@@ -129,7 +129,7 @@ public class MetaSearchControllerTest {
         expect(this.result.getURL()).andReturn("url");
         expect(this.result.getHits()).andReturn(null);
         expect(this.result.getId()).andReturn("id");
-        replay(this.manager, this.dataBinder, this.model, this.result);
+        replay(this.metaSearchService, this.dataBinder, this.model, this.result);
         Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), false,
                 "baseProxyURL");
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
@@ -138,22 +138,22 @@ public class MetaSearchControllerTest {
         assertNull(map.get("hits"));
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
         assertEquals("url", map.get("url"));
-        verify(this.manager, this.dataBinder, this.model, this.result);
+        verify(this.metaSearchService, this.dataBinder, this.model, this.result);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testSearchProxyLinks() {
-        expect(this.manager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
+        expect(this.metaSearchService.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         expect(this.result.getChildren()).andReturn(Collections.singletonList(this.result)).times(4);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getId()).andReturn("engine");
-        expect(this.manager.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
+        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(this.result);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL).times(2);
         expect(this.result.getId()).andReturn("resource");
         expect(this.result.getURL()).andReturn("url");
         expect(this.result.getHits()).andReturn("2");
-        replay(this.manager, this.dataBinder, this.model, this.result);
+        replay(this.metaSearchService, this.dataBinder, this.model, this.result);
         Map<String, Object> map = this.controller.search("query", Collections.singletonList("resource"), true,
                 "baseProxyURL");
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
@@ -162,6 +162,6 @@ public class MetaSearchControllerTest {
         assertEquals(Integer.valueOf("2"), map.get("hits"));
         assertEquals(SearchStatus.SUCCESSFUL, map.get("status"));
         assertEquals("baseProxyURLurl", map.get("url"));
-        verify(this.manager, this.dataBinder, this.model, this.result);
+        verify(this.metaSearchService, this.dataBinder, this.model, this.result);
     }
 }

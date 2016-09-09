@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -9,39 +8,33 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
-import edu.stanford.irt.search.spring.SearchCacheManager;
+import edu.stanford.irt.laneweb.search.MetaSearchService;
 
 public class ClearSearchCacheControllerTest {
 
     private ClearSearchCacheController controller;
 
-    private MetaSearchManagerSource msms;
-
-    private SearchCacheManager searchCacheManger;
+    private MetaSearchService metaSearchService;
 
     @Before
     public void setUp() throws Exception {
-        this.msms = createMock(MetaSearchManagerSource.class);
-        this.controller = new ClearSearchCacheController(this.msms);
-        this.searchCacheManger = createMock(SearchCacheManager.class);
+        this.metaSearchService = createMock(MetaSearchService.class);
+        this.controller = new ClearSearchCacheController(this.metaSearchService);
     }
 
     @Test
     public void testClearCache() {
-        expect(this.msms.getSearchCacheManager()).andReturn(this.searchCacheManger);
-        this.searchCacheManger.clearAllCaches();
-        replay(this.msms, this.searchCacheManger);
+        this.metaSearchService.clearAllCaches();;
+        replay(this.metaSearchService);
         assertEquals("OK", this.controller.clearCache(null));
-        verify(this.msms, this.searchCacheManger);
+        verify(this.metaSearchService);
     }
 
     @Test
     public void testClearCacheQuery() {
-        expect(this.msms.getSearchCacheManager()).andReturn(this.searchCacheManger);
-        this.searchCacheManger.clearCache("query");
-        replay(this.msms, this.searchCacheManger);
+        this.metaSearchService.clearCache("query");
+        replay(this.metaSearchService);
         assertEquals("OK", this.controller.clearCache("query"));
-        verify(this.msms, this.searchCacheManger);
+        verify(this.metaSearchService);
     }
 }

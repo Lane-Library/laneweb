@@ -17,14 +17,13 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 
 public class DescribeGeneratorTest {
 
     private DescribeGenerator generator;
 
-    private MetaSearchManager metaSearchManager;
+    private MetaSearchService metaSearchService;
 
     private Result result;
 
@@ -35,9 +34,9 @@ public class DescribeGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metaSearchManager = createMock(MetaSearchManager.class);
+        this.metaSearchService = createMock(MetaSearchService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new DescribeGenerator(this.metaSearchManager, this.saxStrategy);
+        this.generator = new DescribeGenerator(this.metaSearchService, this.saxStrategy);
         this.result = createMock(Result.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
     }
@@ -45,11 +44,11 @@ public class DescribeGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoGenerate() {
-        expect(this.metaSearchManager.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
+        expect(this.metaSearchService.describe(isA(Query.class), isNull(Collection.class))).andReturn(this.result);
         this.saxStrategy.toSAX(this.result, this.xmlConsumer);
-        replay(this.metaSearchManager, this.xmlConsumer, this.saxStrategy);
+        replay(this.metaSearchService, this.xmlConsumer, this.saxStrategy);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.metaSearchManager, this.xmlConsumer, this.saxStrategy);
+        verify(this.metaSearchService, this.xmlConsumer, this.saxStrategy);
     }
 
     @Test
