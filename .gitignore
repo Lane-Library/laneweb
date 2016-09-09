@@ -4,3 +4,8 @@ project.properties
 
 
 
+/.settings/
+/.classpath
+/.project
+/.springBeans
+/.gitignore
