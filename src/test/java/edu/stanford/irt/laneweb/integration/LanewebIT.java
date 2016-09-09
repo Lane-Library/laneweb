@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
@@ -51,6 +52,7 @@ public class LanewebIT {
     }
 
     @Test
+    @Ignore // ignore until can find a way to mock remote search
     public void testBioresearchSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk());
@@ -213,6 +215,7 @@ public class LanewebIT {
     }
 
     @Test
+    @Ignore // ignore until can find a way to mock remote search
     public void testTextbookSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk());
