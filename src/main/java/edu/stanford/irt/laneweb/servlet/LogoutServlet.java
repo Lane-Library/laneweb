@@ -28,7 +28,7 @@ public class LogoutServlet extends HttpServlet {
         resp.addCookie(cookie);
         Cookie ezproxyCookie = new Cookie(CookieName.EZPROXY.toString(), null);
         ezproxyCookie.setPath("/");
-        ezproxyCookie.setDomain(".stanford.edu");
+        ezproxyCookie.setDomain("stanford.edu");
         ezproxyCookie.setMaxAge(0);
         resp.addCookie(ezproxyCookie);
         HttpSession session = req.getSession(false);
