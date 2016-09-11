@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -39,6 +40,7 @@ public class LogoutServlet extends HttpServlet {
         if (referer == null || referer.indexOf("/secure/") > -1) {
             referer = "/index.html";
         }
+        referer = URLEncoder.encode(referer, "UTF-8");
         resp.sendRedirect("https://" + req.getLocalName() + LOGOUT_URL + referer);
     }
 }
