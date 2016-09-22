@@ -9,8 +9,8 @@
             <bean class="edu.stanford.irt.querymap.SolrQueryToDescriptor">
                 <constructor-arg name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
                 <constructor-arg>
-                    <bean class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-                        <constructor-arg value="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
+                    <bean id="laneSearchSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+                        <constructor-arg index="0" ref="laneSearchSolrServer"/>
                     </bean>
                 </constructor-arg>
             </bean>

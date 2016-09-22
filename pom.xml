@@ -100,17 +100,7 @@
         <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.4.1</version>
-            <exclusions>
-             <exclusion>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-             </exclusion>
-             <exclusion>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-             </exclusion>
-            </exclusions>
+            <version>1.4.2</version>
         </dependency>
         <dependency>
             <artifactId>Saxon-HE</artifactId>
@@ -260,7 +250,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>1.5.2.RELEASE</version>
+            <version>1.5.4.RELEASE</version>
             <exclusions>
              <exclusion>
                 <groupId>org.apache.httpcomponents</groupId>
