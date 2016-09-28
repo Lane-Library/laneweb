@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -28,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
         resp.addCookie(cookie);
         Cookie ezproxyCookie = new Cookie(CookieName.EZPROXY.toString(), null);
         ezproxyCookie.setPath("/");
-        ezproxyCookie.setDomain(".stanford.edu");
+        ezproxyCookie.setDomain("stanford.edu");
         ezproxyCookie.setMaxAge(0);
         resp.addCookie(ezproxyCookie);
         HttpSession session = req.getSession(false);
@@ -39,6 +40,7 @@ public class LogoutServlet extends HttpServlet {
         if (referer == null || referer.indexOf("/secure/") > -1) {
             referer = "/index.html";
         }
+        referer = URLEncoder.encode(referer, "UTF-8");
         resp.sendRedirect("https://" + req.getLocalName() + LOGOUT_URL + referer);
     }
 }

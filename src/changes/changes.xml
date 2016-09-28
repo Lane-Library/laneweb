@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-09-12" version="3.3.3" description="3.3.3 bug fix release">
+            <action date="2016-09-11" dev="ryanmax" issue="126756" type="fix">
+                logout error in tomcat 8
+            </action>
+            <action date="2016-09-11" dev="ryanmax" issue="126542" type="fix">
+                shibboleth logout strips return url parameters
+            </action>
+            <action date="2016-09-08" dev="ryanmax" issue="125890" type="fix">
+                long queries overlap search controls (reintroduced in laneweb-3.3.x)
+            </action>
+        </release>
         <release date="2016-09-02" version="3.3.2" description="3.3.2 bug fix release">
             <action date="2016-08-30" dev="ceyates" issue="126504" type="fix">
                 clinical pediatrics search not configured with correct metasearch engines

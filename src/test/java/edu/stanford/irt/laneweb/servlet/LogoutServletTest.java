@@ -45,7 +45,7 @@ public class LogoutServletTest {
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(3);
         this.session.invalidate();
-        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/index.html");
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=%2Findex.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
         verify(this.request, this.response, this.session);
@@ -62,7 +62,7 @@ public class LogoutServletTest {
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(3);
         this.session.invalidate();
-        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=%2Flogout.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
         verify(this.request, this.response, this.session);
@@ -78,7 +78,7 @@ public class LogoutServletTest {
         expect(this.request.getSession(false)).andReturn(null);
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(3);
-        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=%2Flogout.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
         verify(this.request, this.response, this.session);
@@ -95,7 +95,7 @@ public class LogoutServletTest {
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(3);
         this.session.invalidate();
-        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/logout.html");
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=%2Flogout.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
         verify(this.request, this.response, this.session);
@@ -112,7 +112,7 @@ public class LogoutServletTest {
         this.response.addCookie(isA(Cookie.class));
         expectLastCall().times(3);
         this.session.invalidate();
-        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=/index.html");
+        this.response.sendRedirect("https://localhost/Shibboleth.sso/Logout?return=%2Findex.html");
         replay(this.request, this.response, this.session);
         this.servlet.service(this.request, this.response);
         verify(this.request, this.response, this.session);

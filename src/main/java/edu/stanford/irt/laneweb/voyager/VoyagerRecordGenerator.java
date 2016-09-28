@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.voyager;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 import javax.sql.DataSource;
 
@@ -31,7 +32,7 @@ public class VoyagerRecordGenerator extends AbstractGenerator {
     public VoyagerRecordGenerator(final DataSource dataSource, final InputStream sql, final int outputIndex,
             final XMLReader xmlReader) throws IOException {
         this.dataSource = dataSource;
-        this.sql = IOUtils.toString(sql);
+        this.sql = IOUtils.toString(sql, StandardCharsets.UTF_8);
         this.outputIndex = outputIndex;
         this.xmlReader = xmlReader;
     }
