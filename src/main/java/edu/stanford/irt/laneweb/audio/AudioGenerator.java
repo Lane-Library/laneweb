@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.audio;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class AudioGenerator extends AbstractGenerator {
 
     public AudioGenerator(final DataSource dataSource, final InputStream audioSQL, final SAXStrategy<Record> recordSAXStrategy) throws IOException {
         this.dataSource = dataSource;
-        this.audioSQL = IOUtils.toString(audioSQL);
+        this.audioSQL = IOUtils.toString(audioSQL, StandardCharsets.UTF_8);
         this.recordSAXStrategy = recordSAXStrategy;
     }
 

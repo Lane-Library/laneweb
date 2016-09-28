@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.grandrounds;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +35,7 @@ public class GrandRoundsManager {
 
     public GrandRoundsManager(final DataSource dataSource, final InputStream presentationsSQL) throws IOException {
         this.dataSource = dataSource;
-        this.presentationsSQL = IOUtils.toString(presentationsSQL);
+        this.presentationsSQL = IOUtils.toString(presentationsSQL, StandardCharsets.UTF_8);
         this.departmentMap = new HashMap<>();
         this.departmentMap.put("medicine", "MEDICINE");
         this.departmentMap.put("emergency", "EMERGENCY MEDICINE");
