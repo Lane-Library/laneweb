@@ -7,6 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-09-30" version="3.3.4" description="3.3.4 bug fix release"/>
         <release date="2016-09-12" version="3.3.3" description="3.3.3 bug fix release">
             <action date="2016-09-11" dev="ryanmax" issue="126756" type="fix">
                 logout error in tomcat 8
