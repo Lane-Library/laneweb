@@ -290,18 +290,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ons</artifactId>
-            <version>12.1.0.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ucp</artifactId>
-            <version>12.1.0.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
             <version>3.8.0</version>
