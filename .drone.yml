@@ -5,7 +5,7 @@ build:
       - mvn -s settings.xml package
     when:
       branches:
-        - dev
+        - master
 
 publish:
   docker:
