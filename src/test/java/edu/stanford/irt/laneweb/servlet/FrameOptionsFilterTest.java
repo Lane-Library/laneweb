@@ -60,4 +60,13 @@ public class FrameOptionsFilterTest {
         this.filter.doFilter(this.request, this.response, this.chain);
         verify(this.chain, this.request, this.response);
     }
+
+    @Test
+    public void testInternalDoFilterReferrerTelemtryTV() throws IOException, ServletException {
+        expect(this.request.getHeader("referer")).andReturn("https://render.telemetrytv.com/foo");
+        this.chain.doFilter(this.request, this.response);
+        replay(this.chain, this.request, this.response);
+        this.filter.doFilter(this.request, this.response, this.chain);
+        verify(this.chain, this.request, this.response);
+    }
 }
