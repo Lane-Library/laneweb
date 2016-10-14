@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.sql.Blob;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,20 +25,15 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class SQLBookmarkDAO implements BookmarkDAO {
 
-    private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
+    private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE ID = ?";
+
+    private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (ID, BOOKMARKS) VALUES (?, ?)";
 
     private static final Logger LOG = LoggerFactory.getLogger(SQLBookmarkDAO.class);
 
-    private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
+    private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE ID = ?";
 
     private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
-
-    private static final String WRITE_BOOKMARKS_SQL =
-            "BEGIN " +
-            "  INSERT INTO bookmarks(sunetid, bookmarks) " +
-            "  VALUES (?, empty_blob()) " +
-            "  RETURN bookmarks INTO ?; " +
-            "END;";
 
     private DataSource dataSource;
 
@@ -61,7 +56,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             pstmt.setString(1, userid);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
+                oip = new ObjectInputStream(new ByteArrayInputStream(rs.getBytes(1)));
                 links = (List<Object>) oip.readObject();
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
@@ -103,22 +98,22 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
         Connection conn = getConnection();
-        CallableStatement cstmt = null;
-        PreparedStatement pstmt = null;
+        PreparedStatement insertStatement = null;
+        PreparedStatement deleteStatement = null;
         ObjectOutputStream oop = null;
         try {
-            pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
-            pstmt.setString(1, userid);
-            pstmt.execute();
+            deleteStatement = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
+            deleteStatement.setString(1, userid);
+            deleteStatement.execute();
             if (!links.isEmpty()) {
-                cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
-                cstmt.setString(1, userid);
-                cstmt.registerOutParameter(2, java.sql.Types.BLOB);
-                cstmt.executeUpdate();
-                Blob blob = cstmt.getBlob(2);
-                oop = new ObjectOutputStream(blob.setBinaryStream(1));
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                oop = new ObjectOutputStream(baos);
                 oop.writeObject(Serializable.class.cast(links));
                 oop.flush();
+                insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
+                insertStatement.setString(1, userid);
+                insertStatement.setBytes(2, baos.toByteArray());
+                insertStatement.executeUpdate();
             }
             conn.commit();
         } catch (IOException | SQLException e) {
@@ -130,12 +125,12 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             throw new LanewebException(e);
         } finally {
             IOUtils.closeStream(oop);
-            JdbcUtils.closeStatement(cstmt);
-            JdbcUtils.closeStatement(pstmt);
+            JdbcUtils.closeStatement(insertStatement);
+            JdbcUtils.closeStatement(deleteStatement);
             JdbcUtils.closeConnection(conn);
         }
     }
-    
+
     private Connection getConnection() {
         try {
             Connection conn = this.dataSource.getConnection();
