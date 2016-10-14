@@ -29,10 +29,10 @@ notify:
       Build log: https://drone.med.stanford.edu/irt-lane/laneweb/{{ build.number }}
       Changes: https://gitlab.med.stanford.edu/irt-lane/laneweb/commit/$$COMMIT
 
-downstream:
-  repositories:
-    - irt-lane/kube-laneweb
-  token: $$DRONE_TOKEN
-  fork: true
-  when:
-    success: true
+  downstream:
+    repositories:
+      - irt-lane/kube-laneweb
+    token: $$DRONE_TOKEN
+    fork: true
+    when:
+      success: true
