@@ -119,11 +119,6 @@
             <groupId>org.slf4j</groupId>
         </dependency>
         <dependency>
-            <artifactId>slf4j-simple</artifactId>
-            <groupId>org.slf4j</groupId>
-            <version>1.7.21</version>
-        </dependency>
-        <dependency>
             <artifactId>spellcheck-core</artifactId>
             <groupId>edu.stanford.irt</groupId>
             <version>2.0.3</version>
