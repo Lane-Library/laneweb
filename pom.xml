@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>17</version>
+        <version>18</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.3.7-SNAPSHOT</version>
@@ -95,7 +95,7 @@
         <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.4.2</version>
+            <version>1.4.3</version>
         </dependency>
         <dependency>
             <artifactId>Saxon-HE</artifactId>
@@ -203,7 +203,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.15</version>
+            <version>1.0.16</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -241,21 +241,6 @@
             <artifactId>tomcat-catalina</artifactId>
             <version>7.0.59</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-solr</artifactId>
-            <version>1.5.4.RELEASE</version>
-            <exclusions>
-             <exclusion>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-             </exclusion>
-             <exclusion>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-             </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
