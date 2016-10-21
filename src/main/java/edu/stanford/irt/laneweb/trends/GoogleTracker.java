@@ -10,6 +10,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -184,7 +185,7 @@ public class GoogleTracker {
      * @return a random number string.
      */
     private String getRandomNumber() {
-        return Integer.toString((new java.util.Random()).nextInt(Integer.MAX_VALUE));
+        return Integer.toString((new Random()).nextInt(Integer.MAX_VALUE));
     }
 
     private String getUtmaCookie() throws NoSuchAlgorithmException, IOException {
