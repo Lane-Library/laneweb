@@ -243,6 +243,21 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+            <version>2.0.4.RELEASE</version>
+            <exclusions>
+             <exclusion>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+             </exclusion>
+             <exclusion>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+             </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
             <version>1.0.2</version>
