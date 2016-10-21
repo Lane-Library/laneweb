@@ -34,8 +34,13 @@ public class FlickrPhotoListCreator {
         this.objectMapper = objectMapper;
     }
 
-    public static void main(final String[] args) throws IOException {
-        new FlickrPhotoListCreator(args[0], URL_FORMAT, new ObjectMapper()).printList(System.out);
+    public static void main(final String[] args) {
+        try {
+            new FlickrPhotoListCreator(args[0], URL_FORMAT, new ObjectMapper()).printList(System.out);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
     }
 
     public void printList(final PrintStream out) throws IOException {
