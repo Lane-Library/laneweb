@@ -12,7 +12,7 @@ public class ClassesValidity implements Validity {
 
     private static final long serialVersionUID = 1L;
 
-    int hour;
+    private int hour;
 
     private long expires;
 
