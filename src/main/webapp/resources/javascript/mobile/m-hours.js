@@ -4,7 +4,7 @@
  */
 $.LANE.getHours = function(){
     var hours = $(".hours");
-    if(hours){
+    if(hours.length > 0){
         $.ajax({
             url: "plain/hours.html?site_preference=mobile",
             dataType: "html",
