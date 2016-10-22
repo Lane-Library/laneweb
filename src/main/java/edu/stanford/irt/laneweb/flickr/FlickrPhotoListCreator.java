@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -37,8 +39,8 @@ public class FlickrPhotoListCreator {
     public static void main(final String[] args) {
         try {
             new FlickrPhotoListCreator(args[0], URL_FORMAT, new ObjectMapper()).printList(System.out);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (IOException | NullPointerException e) {
+            LoggerFactory.getLogger(FlickrPhotoListCreator.class).error(e.getMessage(), e);
             System.exit(1);
         }
     }
