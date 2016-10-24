@@ -22,7 +22,8 @@ public class MetaSearchService {
         this.objectMapper = objectMapper;
     }
 
-    private static void addQueryString(final StringBuilder requestURI, final Query query, final Collection<String> engines) {
+    private static void addQueryString(final StringBuilder requestURI, final Query query,
+            final Collection<String> engines) {
         requestURI.append("?query=").append(query.getURLEncodedText());
         if (engines != null && !engines.isEmpty()) {
             requestURI.append("&engines=");
@@ -31,30 +32,31 @@ public class MetaSearchService {
         }
     }
 
-    public void clearAllCaches() {
-        throw new UnsupportedOperationException();
+    public String clearAllCaches() {
+        return getResponse("/clearCache", String.class);
     }
 
-    public void clearCache(final String q) {
-        throw new UnsupportedOperationException();
+    public String clearCache(final String q) {
+        String requestURI = new StringBuilder("/describe?query=").append(q).toString();
+        return getResponse(requestURI, String.class);
     }
 
     public Result describe(final Query query, final Collection<String> engines) {
         StringBuilder requestURI = new StringBuilder("/describe");
         addQueryString(requestURI, query, engines);
-        return getResult(requestURI.toString());
+        return getResponse(requestURI.toString(), Result.class);
     }
 
     public Result search(final Query query, final Collection<String> engines, final long wait) {
         StringBuilder requestURI = new StringBuilder("/search");
         addQueryString(requestURI, query, engines);
         requestURI.append("&timeout=").append(wait);
-        return getResult(requestURI.toString());
+        return getResponse(requestURI.toString(), Result.class);
     }
 
-    private Result getResult(final String requestURI) {
+    private <T> T getResponse(final String requestURI, final Class<T> clazz) {
         try (InputStream input = new URL(this.metaSearchURL, requestURI).openStream()) {
-            return this.objectMapper.readValue(input, Result.class);
+            return this.objectMapper.readValue(input, clazz);
         } catch (IOException e) {
             throw new LanewebException(e);
         }
