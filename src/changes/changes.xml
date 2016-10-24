@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-10-17" version="3.3.6" description="3.3.6 bug fix release">
+            <action date="2016-10-13" dev="ryanmax" issue="128000" type="update">
+                lane pages cannot be iframed in new plasma screen app 
+            </action>
+        </release>
         <release date="2016-10-10" version="3.3.5" description="3.3.5 bug fix release"/>
         <release date="2016-09-30" version="3.3.4" description="3.3.4 bug fix release"/>
         <release date="2016-09-12" version="3.3.3" description="3.3.3 bug fix release">

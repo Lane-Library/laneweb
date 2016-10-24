@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,8 +18,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class StreamDaysMapping extends HashMap<String, String> {
-
-    private static final DocumentBuilderFactory FACTORY = DocumentBuilderFactory.newInstance();
 
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +36,9 @@ public class StreamDaysMapping extends HashMap<String, String> {
     public StreamDaysMapping(final InputStream inputStream) {
         Document doc = null;
         try {
-            DocumentBuilder builder = FACTORY.newDocumentBuilder();
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            DocumentBuilder builder = dbf.newDocumentBuilder();
             doc = builder.parse(inputStream);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new LanewebException(e);
