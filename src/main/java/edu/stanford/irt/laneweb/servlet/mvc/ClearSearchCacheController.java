@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.search.MetaSearchService;
+import edu.stanford.irt.search.impl.SimpleQuery;
 
 @Controller
 public class ClearSearchCacheController {
@@ -22,7 +23,7 @@ public class ClearSearchCacheController {
     @ResponseBody
     public String clearCache(@RequestParam(required = false) final String q) {
         if (q != null) {
-            this.metaSearchService.clearCache(q);
+            this.metaSearchService.clearCache(new SimpleQuery(q));
         } else {
             this.metaSearchService.clearAllCaches();
         }

@@ -36,8 +36,8 @@ public class MetaSearchService {
         return getResponse("/clearCache", String.class);
     }
 
-    public String clearCache(final String q) {
-        String requestURI = new StringBuilder("/describe?query=").append(q).toString();
+    public String clearCache(final Query query) {
+        String requestURI = new StringBuilder("/clearCache?query=").append(query.getURLEncodedText()).toString();
         return getResponse(requestURI, String.class);
     }
 
