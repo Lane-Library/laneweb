@@ -86,7 +86,7 @@
                             data-help="/picosearch.html"
                             data-source="clinical-all"
                             data-placeholder="Enter patient condition, treatment alternatives, or use PICO (advanced search)"
-                            title="Searches evidence-based resources: BMJ, Cochrane, Dare, Dynamed, National Guidelines, Pubmed, UptoDate"
+                            title="Searches evidence-based resources: BMJ, Cochrane, Dare, DynaMed Plus, National Guidelines, Pubmed, UptoDate"
                             >Clinical</div></div>
                         <div class="yui3-u-1-6"><div
                             class="search-tab"
