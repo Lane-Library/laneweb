@@ -29,6 +29,7 @@ body, select, input, button, textarea {
 
 p {
     margin-bottom: 12px;
+    font-size: 14px;
 }
 
 strong {
