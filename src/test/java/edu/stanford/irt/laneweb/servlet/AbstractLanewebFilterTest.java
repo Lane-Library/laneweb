@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.EasyMock.createMock;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -16,15 +17,18 @@ public class AbstractLanewebFilterTest {
 
     private static class TestAbstractLanewebFilter extends AbstractLanewebFilter {
 
+        private boolean internalDoFilterCalled;
+
         @Override
         protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
-                final FilterChain chain) throws IOException, ServletException {
+                final FilterChain chain) {
+            this.internalDoFilterCalled = true;
         }
     }
 
     private FilterChain chain;
 
-    private AbstractLanewebFilter filter;
+    private TestAbstractLanewebFilter filter;
 
     private HttpServletRequest request;
 
@@ -43,5 +47,6 @@ public class AbstractLanewebFilterTest {
         this.filter.init(null);
         this.filter.doFilter(this.request, this.response, this.chain);
         this.filter.destroy();
+        assertTrue(this.filter.internalDoFilterCalled);
     }
 }

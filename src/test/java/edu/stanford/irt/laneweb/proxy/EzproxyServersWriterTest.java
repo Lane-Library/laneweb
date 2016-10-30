@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class EzproxyServersWriterTest {
     public void testNullOutputStream() throws IOException {
         try {
             this.writer.write(null);
+            fail("Should throw NullPointerException");
         } catch (NullPointerException e) {
         }
     }
