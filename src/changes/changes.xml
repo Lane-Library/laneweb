@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-10-31" version="3.3.7" description="3.3.7 bug fix release">
+            <action date="2016-10-28" dev="olgary" issue="128621" type="update">
+                classes page- horizontal align the instructor box with the description on the top
+            </action>
+            <action date="2016-10-28" dev="olgary" issue="128567" type="update">
+                resource-list-pagination.css  - removed shadows and corners from the buttons
+            </action>
+            <action date="2016-10-27" dev="olgary" issue="128552" type="update">
+                template.xml, debug.xml
+            </action>
+        </release>
         <release date="2016-10-17" version="3.3.6" description="3.3.6 bug fix release">
             <action date="2016-10-13" dev="ryanmax" issue="128000" type="update">
                 lane pages cannot be iframed in new plasma screen app 
