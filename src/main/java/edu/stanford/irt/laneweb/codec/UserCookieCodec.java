@@ -19,7 +19,9 @@ import edu.stanford.irt.laneweb.user.User;
 
 public class UserCookieCodec {
 
-    private static final String COOKIE_VALUE_SEPARATOR = "%";
+    private static final char COOKIE_VALUE_SEPARATOR = '%';
+
+    private static final String COOKIE_VALUE_SEPARATOR_STRING = Character.toString(COOKIE_VALUE_SEPARATOR);
 
     private Cipher cipher;
 
@@ -59,7 +61,7 @@ public class UserCookieCodec {
     public PersistentLoginToken restoreLoginToken(final String encryptedValue, final String userIdHashKey) {
         Objects.requireNonNull(encryptedValue, "null encryptedValue");
         String decrypted = decrypt(encryptedValue);
-        String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
+        String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR_STRING);
         if (values.length != 5) {
             throw new LanewebException("invalid encryptedValue");
         }

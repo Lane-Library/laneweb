@@ -102,7 +102,7 @@ public class CMERedirectController {
                 args = QUESTION_MARK_PATTERN.matcher(SU_USERID_ARGS).replaceFirst(removeDomainFromUserHash(userHash));
             }
             if (url.contains("?")) {
-                sb.append(url).append("&").append(args);
+                sb.append(url).append('&').append(args);
             } else if (url.endsWith("/") || url.endsWith("online") || url.endsWith("search")) {
                 sb.append(UTD_CME_URL).append(args);
             } else {

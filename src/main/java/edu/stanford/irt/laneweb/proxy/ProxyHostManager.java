@@ -86,14 +86,19 @@ public class ProxyHostManager {
 
     private DataSource dataSource;
 
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private ExecutorService executor;
 
     private long lastUpdate = 0;
 
     private Set<String> proxyHosts;
 
     public ProxyHostManager(final DataSource dataSource) {
+        this(dataSource, Executors.newSingleThreadExecutor());
+    }
+
+    public ProxyHostManager(final DataSource dataSource, final ExecutorService executor) {
         this.dataSource = dataSource;
+        this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;
         try (BufferedReader reader = new BufferedReader(
