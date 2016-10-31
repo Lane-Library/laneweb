@@ -29,6 +29,7 @@ body, select, input, button, textarea {
 
 p {
     margin-bottom: 12px;
+    font-size: 14px;
 }
 
 strong {
@@ -45,6 +46,7 @@ em {
 
 .more a {
     margin-right: 6px;
+    font-size: 14px;
 }
 
 .rss-link {
