@@ -126,7 +126,7 @@ public class EMailController {
 
     private void appendNameToSubject(final Map<String, Object> feedback) {
         StringBuilder subject = new StringBuilder((String) feedback.get(SUBJECT));
-        subject.append(" (").append(feedback.get("name")).append(")");
+        subject.append(" (").append(feedback.get("name")).append(')');
         feedback.put(SUBJECT, subject.toString());
     }
 

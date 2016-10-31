@@ -12,11 +12,11 @@ public final class ORQueryInspector implements QueryInspector {
     public String inspect(final String query) {
         if (query.contains(" OR ")) {
             StringBuilder sb = new StringBuilder();
-            sb.append("(");
+            sb.append('(');
             sb.append(query);
             sb.append(") OR (");
             sb.append(query);
-            sb.append(")");
+            sb.append(')');
             return sb.toString();
         }
         return query;

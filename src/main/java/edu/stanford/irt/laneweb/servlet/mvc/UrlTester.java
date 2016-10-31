@@ -56,7 +56,7 @@ public class UrlTester {
             result.append(header.getName());
             result.append(" ==> ");
             result.append(header.getValue());
-            result.append("\n");
+            result.append('\n');
         }
         return result.toString();
     }

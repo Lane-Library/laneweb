@@ -65,9 +65,9 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
         XMLUtils.data(xmlConsumer, sb.toString());
         atts = new AttributesImpl();
         sb.setLength(0);
-        sb.append("?");
+        sb.append('?');
         if (hrefBase.length() > 0) {
-            sb.append(hrefBase).append("&");
+            sb.append(hrefBase).append('&');
         }
         sb.append("page=all");
         atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
@@ -94,9 +94,9 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
                 // select="number($page) + 1"/></a>
                 atts = new AttributesImpl();
                 sb.setLength(0);
-                sb.append("?");
+                sb.append('?');
                 if (hrefBase.length() > 0) {
-                    sb.append(hrefBase).append("&");
+                    sb.append(hrefBase).append('&');
                 }
                 sb.append("page=").append(i + 1);
                 atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());
@@ -117,7 +117,7 @@ public class SearchListPagingDataSAXStrategy implements SAXStrategy<PagingData> 
         atts.addAttribute(EMPTY_NS, ID, ID, CDATA, "seeAll");
         StringBuilder sb = new StringBuilder("?");
         if (hrefBase.length() > 0) {
-            sb.append(hrefBase).append("&");
+            sb.append(hrefBase).append('&');
         }
         sb.append("page=all");
         atts.addAttribute(EMPTY_NS, HREF, HREF, CDATA, sb.toString());

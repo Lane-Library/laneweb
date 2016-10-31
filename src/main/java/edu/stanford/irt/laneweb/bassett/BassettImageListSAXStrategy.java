@@ -140,11 +140,11 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
                 sb.append(", ");
             }
             if (splittedRegion.length > 1) {
-                sb.append(splittedRegion[1].replace("_", " "));
+                sb.append(splittedRegion[1].replace('_', ' '));
             }
             alreadyIn = true;
         }
-        sb.append(".");
+        sb.append('.');
         XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
         XMLUtils.data(xmlConsumer, sb.toString());
         XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);

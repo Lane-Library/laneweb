@@ -38,7 +38,7 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
             Page<FacetFieldEntry> subRegions = facetPage.getFacetResultPage(SUB_REGION);
             for (FacetFieldEntry entry : regions) {
                 AttributesImpl attributes = new AttributesImpl();
-                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, entry.getValue().replace("_", " "));
+                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, entry.getValue().replace('_', ' '));
                 attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, CDATA, String.valueOf(entry.getValueCount()));
                 XMLUtils.startElement(xmlConsumer, NAMESPACE, REGION, attributes);
                 handleSubRegion(xmlConsumer, entry.getValue(), subRegions);
@@ -59,7 +59,7 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
             if (subRegion.startsWith(region + "_" + SUB_REGION + "_")) {
                 AttributesImpl attributes = new AttributesImpl();
                 subRegion = subRegion.substring(subRegion.indexOf(SUB_REGION) + 11);
-                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subRegion.replace("_", " "));
+                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subRegion.replace('_', ' '));
                 XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
                 XMLUtils.data(xmlConsumer, String.valueOf(entry.getValueCount()));
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);

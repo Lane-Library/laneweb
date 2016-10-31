@@ -28,25 +28,25 @@ public class ShibTester {
         while (headers.hasMoreElements()) {
             String headerName = headers.nextElement();
             result.append(headerName).append("-->").append(request.getHeader(headerName));
-            result.append("\n");
+            result.append('\n');
         }
         result.append("\n\n\n<!--\n\nRequest Attributes:\n\n");
         result.append("request.getRemoteUser() --> ");
         result.append(request.getRemoteUser());
-        result.append("\n");
+        result.append('\n');
         for (String att : SHIB_ATTS) {
             result.append(att);
             result.append(" --> ");
             result.append(request.getAttribute(att));
-            result.append("\n");
+            result.append('\n');
         }
-        result.append("\n");
+        result.append('\n');
         Enumeration<String> attributes = request.getAttributeNames();
         while (attributes.hasMoreElements()) {
             String attributeName = attributes.nextElement();
             if (attributeName.indexOf("org.spring") != 0) {
                 result.append(attributeName).append("-->").append(request.getAttribute(attributeName));
-                result.append("\n");
+                result.append('\n');
             }
         }
         response.setContentType("text/plain");
