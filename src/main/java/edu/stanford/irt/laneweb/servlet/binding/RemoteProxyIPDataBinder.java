@@ -63,10 +63,8 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         String header = request.getHeader(X_FORWARDED_FOR);
         if (header == null) {
             return request.getRemoteAddr();
-        } else if (header.indexOf(',') > -1) {
-            return header.substring(header.lastIndexOf(',') + 1, header.length()).trim();
         } else {
-            return header;
+            return header.split(",")[0];
         }
     }
 }
