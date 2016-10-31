@@ -56,9 +56,9 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(start + length).append(" of ");
             XMLUtils.data(xmlConsumer, sb.toString());
             sb.setLength(0);
-            sb.append("?");
+            sb.append('?');
             if (hrefBase.length() > 0) {
-                sb.append(hrefBase).append("&");
+                sb.append(hrefBase).append('&');
             }
             sb.append("page=all");
             createAnchor(xmlConsumer, sb.toString(), size + quotedAlpha + " titles");
@@ -100,7 +100,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         startLi(xmlConsumer);
         StringBuilder sb = new StringBuilder("?");
         if (hrefBase.length() > 0) {
-            sb.append(hrefBase).append("&");
+            sb.append(hrefBase).append('&');
         }
         sb.append("page=").append(i);
         startAnchor(xmlConsumer, sb.toString());
@@ -118,7 +118,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             throws SAXException {
         StringBuilder sb = new StringBuilder("?");
         if (hrefBase.length() > 0) {
-            sb.append(hrefBase).append("&");
+            sb.append(hrefBase).append('&');
         }
         sb.append("page=all");
         startAnchor(xmlConsumer, sb.toString());

@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.ExecutorService;
 
 import javax.sql.DataSource;
 
@@ -41,7 +42,12 @@ public class ProxyHostManagerTest {
 
     @Test
     public void testDestroy() throws InterruptedException, SQLException {
-        this.manager.destroy();
+        ExecutorService executor = createMock(ExecutorService.class);
+        ProxyHostManager m = new ProxyHostManager(this.dataSource, executor);
+        expect(executor.shutdownNow()).andReturn(null);
+        replay(this.dataSource, executor);
+        m.destroy();
+        verify(this.dataSource, executor);
     }
 
     @Test

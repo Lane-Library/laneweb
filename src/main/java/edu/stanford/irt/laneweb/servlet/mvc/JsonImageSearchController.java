@@ -39,7 +39,7 @@ public class JsonImageSearchController {
     @ResponseBody
     public Image updateImage(final String id) {
         Image image = this.service.adminFindById(id);
-        String websiteId = id.substring(0, id.indexOf("/"));
+        String websiteId = id.substring(0, id.indexOf('/'));
         image.setWebsiteId(websiteId);
         boolean isEnable = image.isEnable();
         if (isEnable) {

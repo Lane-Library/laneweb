@@ -38,7 +38,7 @@ public class PagingLabel implements Serializable {
         sb.append(this.end);
         sb.append(" (");
         sb.append(this.results);
-        sb.append(")");
+        sb.append(')');
         return sb.toString();
     }
 }

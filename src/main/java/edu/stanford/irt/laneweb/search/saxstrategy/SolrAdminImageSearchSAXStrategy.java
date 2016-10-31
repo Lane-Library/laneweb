@@ -42,7 +42,7 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
                     "/secure/image/update?id=" + URLEncoder.encode(imageId, "UTF-8"));
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imagedeco-admin");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
-            XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf("/") + 1));
+            XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf('/') + 1));
             endAnchor(xmlConsumer);
         } catch (UnsupportedEncodingException e) {
             throw new LanewebException(e);
