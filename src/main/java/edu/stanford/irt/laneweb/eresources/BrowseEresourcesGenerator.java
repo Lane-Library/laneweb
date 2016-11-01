@@ -66,8 +66,6 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         List<Eresource> list = null;
         if (this.subset == null && this.type == null) {
             list = Collections.emptyList();
-//        } else if (this.subset == null && DEFAULT_ALPHA.equals(this.alpha)) {
-//            list = solrService.getType(this.type);
         } else if (this.subset == null) {
             list = solrService.getType(this.type, this.alpha.charAt(0));
         } else {
