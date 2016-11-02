@@ -147,7 +147,6 @@ hr {
 .youtube-thumbnail {
     cursor: pointer;
     position: relative;
-    display: inline-block;
 }
 
 .youtube-thumbnail .fa {
