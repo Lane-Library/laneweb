@@ -8,7 +8,7 @@
 
 #sm-footer ul {
     margin-top: 16px;
-    background-image: url(../images/smFooter1.png);
+    background-image: url(../images/footer-logos.png);
     background-repeat: no-repeat;
 }
 
@@ -40,6 +40,9 @@
     width: 180px;
 }
 
-#footer-sul {
+#footer-schos {
+    width: 180px;
+}
+#footer-uha {
     width: 308px;
 }

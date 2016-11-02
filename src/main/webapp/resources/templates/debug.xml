@@ -348,11 +348,12 @@
         </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li id="footer-su"><a href="http://www.stanford.edu/">Stanford University</a></li>
-                <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
-                <li id="footer-shc"><a href="https://stanfordhealthcare.org/">Stanford Hospitals and Clinics</a></li>
-                <li id="footer-sch"><a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
-                <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
+                <li id="footer-su"><a href="http://www.stanford.edu/" title="Stanford University logo">Stanford University</a></li>
+                <li id="footer-sm"><a href="http://med.stanford.edu/" title="Stanford School of Medicine logo">Stanford School of Medicine</a></li>
+                <li id="footer-shc"><a href="https://stanfordhealthcare.org/" title="Stanford Health Care">Stanford Health Care</a></li>
+                <li id="footer-sch"><a href="http://www.stanfordchildrens.org/" title="Stanford Children's Health logo">Stanford Children's Health</a></li>
+                <li id="footer-schos"><a href="http://www.stanfordchildrens.org/" title="Lucile Packard Children's Hospital Stanford logo">Stanford Children's Hospital</a></li>
+                <li id="footer-uha"><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
             </ul>
         </div>
         <div><a class="feedback-link" rel="lightbox disableBackground" href="/help/feedback.html"><span>CONTACT US</span></a></div>
