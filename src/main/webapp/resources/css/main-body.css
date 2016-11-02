@@ -2,10 +2,6 @@ html{
     background-color: #ecf1f2;
 }
 
-body{
-    min-width: 989px;
-}
-
 #main{
     text-align: left;
     position: relative;
@@ -15,7 +11,7 @@ body{
 .centered{
     position: relative;
     margin: 0 5%;
-    min-width: 926px;
+    min-width: 989px;
 }
 
 .content {
