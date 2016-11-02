@@ -2,7 +2,7 @@
 export PROJECT=${IMAGE}
 export PROJECT_ID=som-lane-dev
 export SCRIPTS_DIR=scripts
-export SCRIPTS_REPO=https://code.stanford.edu/irt-dcs/kube-scripts.git
+export SCRIPTS_REPO=https://gitlab.med.stanford.edu/irt-public/gcloud-scripts.git
 
 export IMAGE=laneweb
 export REGISTRY=gcr.io
