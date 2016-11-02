@@ -6,6 +6,17 @@
     margin-top: 12px;
     padding-top: 17px;
 }
+#laneFooter h2{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 24px;
+    font-weight: 300;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    line-height: 24px;
+    text-transform: none;
+    text-align:left;
+    background-image: none;
+}
 #laneFooter h3{
     font-size: 16px;
     font-weight: 300;
@@ -15,7 +26,7 @@
     text-transform: none;
     background-image: none;
 }
-#laneFooter li,
+#laneFooter li,#laneFooter h2,
 #laneFooter h3{
     border-bottom: 1px solid #902827;
 }
@@ -26,11 +37,15 @@
     font-size: 12px;
     line-height: 24px;
 }
+
+#laneFooter li:last-child {
+    border-bottom: none;
+}
 #lane-subfooter{
     font-size: 12px;
     font-weight: 400;
     line-height: 22px;
-    padding: 22px 0 24px;
+    padding: 6px 0 6px;
 }
 
 #lane-subfooter,
