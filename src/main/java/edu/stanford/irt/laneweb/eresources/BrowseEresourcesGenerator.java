@@ -16,7 +16,7 @@ import edu.stanford.irt.laneweb.solr.SolrService;
 
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
-    private static final String ALL = "all";
+    private static final String DEFAULT_ALPHA = "a";
 
     private String alpha;
 
@@ -34,11 +34,11 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         super.setModel(model);
         this.type = ModelUtil.getString(model, Model.TYPE);
         this.subset = ModelUtil.getString(model, Model.SUBSET);
-        this.alpha = ModelUtil.getString(model, Model.ALPHA, ALL);
+        this.alpha = ModelUtil.getString(model, Model.ALPHA, DEFAULT_ALPHA);
         if (this.alpha.length() == 0) {
-            this.alpha = ALL;
+            this.alpha = DEFAULT_ALPHA;
         }
-        if (!ALL.equals(this.alpha) && this.alpha.length() > 1) {
+        if (this.alpha.length() > 1) {
             this.alpha = this.alpha.substring(0, 1);
         }
     }
@@ -66,8 +66,6 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         List<Eresource> list = null;
         if (this.subset == null && this.type == null) {
             list = Collections.emptyList();
-        } else if (this.subset == null && ALL.equals(this.alpha)) {
-            list = solrService.getType(this.type);
         } else if (this.subset == null) {
             list = solrService.getType(this.type, this.alpha.charAt(0));
         } else {

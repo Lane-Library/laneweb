@@ -35,7 +35,7 @@ public class RemoteProxyIPDataBinderTest {
     @Before
     public void setUp() {
         this.dataBinder = new RemoteProxyIPDataBinder();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
         this.proxyLinks = createMock(ProxyLinks.class);
@@ -116,6 +116,24 @@ public class RemoteProxyIPDataBinderTest {
         assertTrue((Boolean) this.model.get(Model.PROXY_LINKS));
         assertEquals(IPGroup.OTHER, this.model.get(Model.IPGROUP));
         assertEquals("97.126.62.121", this.model.get(Model.REMOTE_ADDR));
+        verify(this.request, this.session, this.proxyLinks);
+    }
+
+    @Test
+    public void testXForwardedFor() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn("client, proxy1, proxy2");
+        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("97.126.62.121");
+        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
+        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(Boolean.TRUE);
+        this.session.setAttribute(Model.REMOTE_ADDR, "client");
+        this.session.setAttribute(Model.PROXY_LINKS, Boolean.TRUE);
+        this.session.setAttribute(Model.IPGROUP, IPGroup.ERR);
+        expect(this.proxyLinks.getProxyLinks(IPGroup.ERR, "client")).andReturn(Boolean.TRUE);
+        replay(this.request, this.session, this.proxyLinks);
+        this.dataBinder.bind(this.model, this.request);
+        assertEquals("client", this.model.get(Model.REMOTE_ADDR));
         verify(this.request, this.session, this.proxyLinks);
     }
 }
