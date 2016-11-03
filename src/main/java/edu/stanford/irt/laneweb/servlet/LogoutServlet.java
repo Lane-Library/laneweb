@@ -37,7 +37,7 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         String referer = req.getHeader("referer");
-        if (referer == null || referer.indexOf("/secure/") > -1) {
+        if (referer == null || !referer.startsWith("/") || referer.indexOf("/secure/") > -1) {
             referer = "/index.html";
         }
         referer = URLEncoder.encode(referer, "UTF-8");
