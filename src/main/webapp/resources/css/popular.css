@@ -1,6 +1,6 @@
 .popular {
     margin-top: 12px;
-    padding: 12px;
+    padding: 60px;
     line-height: 1.6em;
     background-color: #333333;
     color: #ffffff;
@@ -8,8 +8,12 @@
 }
 .popular h3 {
     text-transform: uppercase;
+    font-family: 'Fjord One', serif;
     color: #ffffff;
+    text-align:center;
+    background-image: none;
 }
+
 .popular li {
     border-bottom: none;
 }
