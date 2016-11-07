@@ -83,20 +83,6 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.isNull(this.pageView);
     },
 
-    testQLinkClick: function() {
-        var link = Y.one(".qlinks a");
-        link.simulate("click");
-        Y.Assert.isTrue(this.pageView.external);
-        Y.Assert.areEqual(link.get("hostname"), this.pageView.host);
-        Y.Assert.areEqual(this.fixPath(link.get("pathname")), this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        Y.Assert.areEqual(link.get("text"), this.event.label);
-        Y.Assert.areEqual("lane:quickLinkClick", this.event.category);
-        Y.Assert.areEqual(link.get("href"), this.event.action);
-        Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-        Y.Assert.areEqual(link.get("text"), this.pageView.title);
-    },
-
     testBannerContentClick: function() {
         var link = Y.one(".banner-content a");
         link.simulate("click");

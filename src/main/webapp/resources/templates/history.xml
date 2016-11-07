@@ -396,49 +396,49 @@ ga('send', 'pageview');
             <a id="sm" href="http://med.stanford.edu/">Stanford Medicine</a>
         </div>
         <div id="lane-footer">
-            <div class="centered">
-                <h2>
-                    <a href="/med-history/index.html">Stanford Medical History Center</a>
-                </h2>
-                <div class="yui3-g">
-                    <div class="yui3-u-1-6">
-                        <h3>
-                            <a href="/med-history/explore.html">Explore</a>
-                        </h3>
+        <div class="centered">
+                <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
+                <h3><a href="/index.html">Stanford Medical History Center</a></h3>
+                <div class="yui3-g" style="border-bottom: 1px solid #902827; padding-bottom:12px;">
+                    <div class="yui3-u-1-5">
+                        <ul>
+                           <li><a href="/med-history/explore.html">Explore</a></li>
+                           <li><a href="/med-history/research.html">Research</a></li>
+                        </ul>
                     </div>
-                    <div class="yui3-u-1-6">
-                        <h3>
-                            <a href="/med-history/research.html">Research</a>
-                        </h3>
+                    <div class="yui3-u-1-5">
+                        <ul>
+                            <li><a href="/med-history/events.html">Upcoming Events</a></li>
+                            <li><a href="/med-history/contact.html">Contact Us</a></li> 
+                        </ul>
                     </div>
-                    <div class="yui3-u-1-6">
-                        <h3>
-                            <a href="https://www.flickr.com/photos/40390680@N08/">Historic Images</a>
-                        </h3>
+                    <div class="yui3-u-1-5">
+                        <ul>
+                            <li><a href="https://www.flickr.com/photos/40390680@N08/">Historic Images</a></li>
+                            <li><a href="/med-history/exhibits/current.html">Exhibits</a></li> 
+                        </ul>
                     </div>
-                    <div class="yui3-u-1-6">
-                        <h3>
-                            <a href="/med-history/neurology.html">Current Exhibit</a>
-                        </h3>
+                    <div class="yui3-u-1-5">
                     </div>
-                    <div class="yui3-u-1-6">
-                        
-                    </div>
-                    <div class="yui3-u-1-6">
-                        <h3 style="float:right;">
-                            <a href="http://lane.stanford.edu">Lane Medical Library</a>
-                        </h3>
+                    <div class="yui3-u-1-5">
+                        <ul>
+                            <li><a href="http://lane.stanford.edu">Lane Medical Library</a></li> 
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div id="lane-subfooter">
             <div class="centered">
-                <div class="yui3-g">
+               <div class="yui3-g">
                     <div class="yui3-u-1-2">
-                        <div style="height:26px;padding-top:4px">©2014 Stanford Medicine</div>
+                        <ul>
+                            <li>©<?laneweb current-year?> Stanford Medicine</li>
+                        </ul>
                     </div>
-                    <div class="yui3-u-1-2">
+                    <div class="yui3-u-1-4">     
+                    </div>
+                    <div class="yui3-u-1-4">
                         <ul>
                             <li>
                                 <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
@@ -454,23 +454,14 @@ ga('send', 'pageview');
                 </div>
             </div>
         </div>
-        <div id="sm-footer">
+         <div id="sm-footer">
             <ul class="centered">
-                <li id="footer-su">
-                    <a href="http://www.stanford.edu/">Stanford University</a>
-                </li>
-                <li id="footer-sm">
-                    <a href="http://med.stanford.edu/">Stanford School of Medicine</a>
-                </li>
-                <li id="footer-shc">
-                    <a href="https://stanfordhealthcare.org/">Stanford Hospitals and Clinics</a>
-                </li>
-                <li id="footer-sch">
-                    <a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a>
-                </li>
-                <li id="footer-sul">
-                    <a href="http://library.stanford.edu/">Stanford University Libraries</a>
-                </li>
+                <li id="footer-su"><a href="http://www.stanford.edu/" title="Stanford University logo">Stanford University</a></li>
+                <li id="footer-sm"><a href="http://med.stanford.edu/" title="Stanford School of Medicine logo">Stanford School of Medicine</a></li>
+                <li id="footer-shc"><a href="https://stanfordhealthcare.org/" title="Stanford Health Care">Stanford Health Care</a></li>
+                <li id="footer-sch"><a href="http://www.stanfordchildrens.org/" title="Stanford Children's Health logo">Stanford Children's Health</a></li>
+                <li id="footer-schos"><a href="http://www.stanfordchildrens.org/" title="Lucile Packard Children's Hospital Stanford logo">Stanford Children's Hospital</a></li>
+                <li id="footer-uha"><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
             </ul>
         </div>
         <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
