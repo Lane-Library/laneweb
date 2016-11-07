@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-11-07" version="3.3.8" description="3.3.8 bug fix release">
+            <action date="2016-11-03" dev="olgary" issue="128935" type="add">
+                added extra sizes for fa - fontawesome.css
+            </action>
+            <action date="2016-11-03" dev="olgary" issue="128912" type="update">
+                increased margins for top resources and changed h3
+            </action>
+            <action date="2016-11-03" dev="olgary" issue="128911" type="update">
+                move .laneContact a few pixels higher
+            </action>
+            <action date="2016-11-02" dev="olgary" issue="128867" type="update">
+                history.xml footer update
+            </action>
+            <action date="2016-11-02" dev="olgary" issue="128817" type="update">
+                template.xml, debug.xml
+            </action>
+            <action date="2016-11-02" dev="ceyates" issue="128816" type="update">
+                site width compared to med.stanford.edu
+            </action>
+            <action date="2016-11-01" dev="ceyates" issue="128781" type="update">
+                respond to /biomed-resources/*.html?a=all requests with ?a=a pages
+            </action>
+            <action date="2016-10-31" dev="ceyates" issue="128720" type="fix">
+                wrong ip address used when x-forwarded-for header has multiple ips
+            </action>
+        </release>
         <release date="2016-10-31" version="3.3.7" description="3.3.7 bug fix release">
             <action date="2016-10-28" dev="olgary" issue="128621" type="update">
                 classes page- horizontal align the instructor box with the description on the top
