@@ -17,9 +17,6 @@
 			<body>
 				<!-- pull twice the number of seminars requested so seminars.js can hide today's past events and display upcoming ones  -->
 				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= ($number-of-items * 2)]" />
-                <div class="more classes">
-                    <a href="{/s:seminars/@s:url}"><xsl:value-of select="replace($link-label,'(\+|%20)',' ')"/><xsl:text> </xsl:text><i class="icon fa fa-arrow-right"></i></a>
-                </div>
 			</body>
 		</html>
 	</xsl:template>
