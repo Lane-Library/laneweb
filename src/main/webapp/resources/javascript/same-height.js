@@ -36,7 +36,7 @@
             maxHeight = Math.max.apply(null, heights);
             // set all of the group to the tallest's height
             for (i = 0; i < size; i++) {
-                nodes.item(i).setStyle("height", maxHeight + "px");
+                nodes.item(i).setStyle("min-height", maxHeight + "px");
             }
         }
     }
