@@ -20,7 +20,7 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
-        <map:match type="regexp" pattern="browse/type/((.+)?Software(.+)?).html">
+        <map:match type="regexp" pattern="browse/type/((.+)?Software, Installed(.+)?).html">
             <map:generate type="er-browse-all-html">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
