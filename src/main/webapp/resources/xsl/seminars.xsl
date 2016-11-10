@@ -72,7 +72,7 @@
 				<xsl:attribute name="style">display:none;</xsl:attribute>
 			</xsl:if>
 			<xsl:attribute name="class">
-				<xsl:text>seminar</xsl:text>
+				<xsl:text>event seminar</xsl:text>
 				<xsl:choose>
 					<!-- see case 98500 align the color blocks for classes -->
 					<xsl:when test="$type='cme' and position() = 1"> same-height-8</xsl:when>
