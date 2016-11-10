@@ -7,9 +7,12 @@
 }
 
 #sm-footer ul {
-    margin-top: 16px;
     background-image: url(../images/footer-logos.png);
+    background-position: center;
     background-repeat: no-repeat;
+    margin: 16px auto;
+    text-align: center;
+    width: 989px;
 }
 
 #sm-footer li {
