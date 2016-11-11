@@ -70,7 +70,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
     protected SolrSearchResult doSearch(final String query) {
         Sort sorts = parseSortParam();
         Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
-        Page<Eresource> page = null;
+        Page<Eresource> page;
         if (this.type == null) {
             page = this.solrService.searchWithFilters(query, this.facets, pageRequest);
         } else {

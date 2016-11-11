@@ -29,7 +29,7 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
 
     @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
-        List<Eresource> list = null;
+        List<Eresource> list;
         if (this.type == null) {
             list = Collections.emptyList();
         } else {

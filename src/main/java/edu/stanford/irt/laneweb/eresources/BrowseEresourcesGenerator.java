@@ -78,7 +78,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
-        List<Eresource> list = null;
+        List<Eresource> list;
         if (this.subset == null && this.type == null) {
             list = Collections.emptyList();
         } else if (this.subset == null) {

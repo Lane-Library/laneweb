@@ -23,8 +23,8 @@ public class RemoteProxyIPDataBinder implements DataBinder {
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
-        IPGroup ipGroup = null;
-        Boolean proxy = null;
+        IPGroup ipGroup;
+        Boolean proxy;
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         HttpSession session = request.getSession();
         synchronized (session) {

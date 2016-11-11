@@ -21,7 +21,7 @@ public class BookmarkDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String userid = ModelUtil.getString(model, Model.USER_ID);
         if (userid != null) {
-            List<Object> bookmarks = null;
+            List<Object> bookmarks;
             HttpSession session = request.getSession();
             synchronized (session) {
                 bookmarks = (List<Object>) session.getAttribute(Model.BOOKMARKS);

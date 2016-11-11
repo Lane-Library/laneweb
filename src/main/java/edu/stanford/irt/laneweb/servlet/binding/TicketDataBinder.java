@@ -27,7 +27,7 @@ public class TicketDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String userid = ModelUtil.getString(model, Model.USER_ID);
         if (userid != null) {
-            Ticket ticket = null;
+            Ticket ticket;
             HttpSession session = request.getSession();
             synchronized (session) {
                 // create a new Ticket if it is not in the session or it is not

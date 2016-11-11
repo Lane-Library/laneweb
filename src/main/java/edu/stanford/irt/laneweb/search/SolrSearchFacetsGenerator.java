@@ -95,7 +95,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        FacetPage<Eresource> fps = null;
+        FacetPage<Eresource> fps;
         Map<String, Collection<Facet>> facetsMap;
         if (null == this.facet) {
             // search mode
