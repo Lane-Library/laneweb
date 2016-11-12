@@ -22,9 +22,11 @@ public class LDAPDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String userid = (String) model.get(Model.USER_ID);
         if (userid != null) {
-            String sunetid = userid.substring(0, userid.indexOf('@'));
-            String name, univid, email;
+            String name;
+            String univid;
+            String email;
             Boolean isActive;
+            String sunetid = userid.substring(0, userid.indexOf('@'));
             HttpSession session = request.getSession();
             synchronized (session) {
                 name = (String) session.getAttribute(Model.NAME);
