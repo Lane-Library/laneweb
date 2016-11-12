@@ -51,7 +51,7 @@ public class Facet {
         if (null != this.url) {
             return this.url;
         }
-        String facetUrl = this.url;
+        String facetUrl;
         String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrService.FACETS_SEPARATOR;
         if (this.enabled) {
             facetUrl = this.activeFacets.replaceFirst(

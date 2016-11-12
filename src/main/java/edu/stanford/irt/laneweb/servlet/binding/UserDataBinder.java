@@ -20,7 +20,7 @@ public class UserDataBinder implements DataBinder {
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        User user = null;
+        User user;
         HttpSession session = request.getSession();
         synchronized (session) {
             user = (User) session.getAttribute(Model.USER);

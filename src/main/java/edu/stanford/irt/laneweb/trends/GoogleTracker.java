@@ -212,7 +212,7 @@ public class GoogleTracker {
         // hash buffer
         int hash = 1;
         // left-most 7 bits
-        int leftMost7 = 0;
+        int leftMost7;
         // character position in string
         int pos;
         // current character in string

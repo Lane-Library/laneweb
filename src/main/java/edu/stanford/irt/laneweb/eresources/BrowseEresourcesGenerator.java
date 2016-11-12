@@ -61,9 +61,24 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
                 .append(null == this.subset ? "" : this.subset);
     }
 
+    /**
+     * A convenience method to URLDecode a string.
+     *
+     * @param string
+     *            a string to decode
+     * @return the decoded string
+     */
+    protected String decode(final String string) {
+        try {
+            return URLDecoder.decode(string, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new LanewebException("won't happen", e);
+        }
+    }
+
     @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
-        List<Eresource> list = null;
+        List<Eresource> list;
         if (this.subset == null && this.type == null) {
             list = Collections.emptyList();
         } else if (this.subset == null) {
@@ -86,20 +101,5 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     protected PagingData getPagingData(final List<Eresource> eresources, final int page, final String baseQuery) {
         return new EresourceListPagingData(eresources, page, baseQuery, this.alpha);
-    }
-
-    /**
-     * A convenience method to URLDecode a string.
-     *
-     * @param string
-     *            a string to decode
-     * @return the decoded string
-     */
-    private String decode(final String string) {
-        try {
-            return URLDecoder.decode(string, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new LanewebException("won't happen", e);
-        }
     }
 }

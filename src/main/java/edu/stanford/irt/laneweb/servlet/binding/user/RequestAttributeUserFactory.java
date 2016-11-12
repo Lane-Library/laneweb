@@ -45,7 +45,7 @@ public class RequestAttributeUserFactory implements UserFactory {
     }
 
     private String getDomain(final HttpServletRequest request) {
-        String domain = null;
+        String domain;
         String provider = (String) request.getAttribute(SHIBBOLETH_PROVIDER);
         if (provider == null) {
             domain = "unknown";
@@ -90,7 +90,7 @@ public class RequestAttributeUserFactory implements UserFactory {
     }
 
     private String getId(final String remoteUser, final HttpServletRequest request) {
-        String id = null;
+        String id;
         if (remoteUser.contains(AT)) {
             id = remoteUser;
         } else {

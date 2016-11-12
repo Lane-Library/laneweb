@@ -95,7 +95,7 @@ public class CMERedirectController {
         if (emrid == null && userHash == null) {
             sb.append(url);
         } else {
-            String args = null;
+            String args;
             if (emrid != null) {
                 args = QUESTION_MARK_PATTERN.matcher(SHC_EMRID_ARGS).replaceFirst(emrid);
             } else {
