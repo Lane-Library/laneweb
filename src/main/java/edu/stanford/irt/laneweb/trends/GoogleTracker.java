@@ -158,9 +158,8 @@ public class GoogleTracker {
     /**
      * @return a random visitorId
      * @throws NoSuchAlgorithmException
-     * @throws IOException
      */
-    private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
+    private String generateVisitorId() throws NoSuchAlgorithmException {
         String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
         MessageDigest m = MessageDigest.getInstance("MD5");
         m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());
