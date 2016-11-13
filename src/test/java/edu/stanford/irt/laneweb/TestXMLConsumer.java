@@ -14,11 +14,12 @@ import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
 
 public class TestXMLConsumer extends TransformerSerializer {
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
     private static Properties PROPS;
     static {
         PROPS = new Properties();
         PROPS.setProperty("method", "xml");
-        PROPS.setProperty("encoding", "UTF-8");
+        PROPS.setProperty("encoding", UTF_8);
         PROPS.setProperty("indent", "yes");
     }
 

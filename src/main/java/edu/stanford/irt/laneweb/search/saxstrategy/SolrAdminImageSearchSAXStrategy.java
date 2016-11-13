@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search.saxstrategy;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -12,6 +13,8 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.solr.Image;
 
 public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy {
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     @Override
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
@@ -39,7 +42,7 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
         try {
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY, HREF, HREF, CDATA,
-                    "/secure/image/update?id=" + URLEncoder.encode(imageId, "UTF-8"));
+                    "/secure/image/update?id=" + URLEncoder.encode(imageId, UTF_8));
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imagedeco-admin");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
             XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf('/') + 1));

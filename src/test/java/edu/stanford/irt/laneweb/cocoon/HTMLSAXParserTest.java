@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,8 @@ import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
 public class HTMLSAXParserTest {
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private NekoHTMLConfiguration configuration;
 
@@ -39,7 +42,7 @@ public class HTMLSAXParserTest {
     @Before
     public void setUp() throws Exception {
         Map<String, String> props = new HashMap<>();
-        props.put("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
+        props.put("http://cyberneko.org/html/properties/default-encoding", UTF_8);
         props.put("http://cyberneko.org/html/properties/names/elems", "lower");
         props.put("http://cyberneko.org/html/properties/namespaces-uri", "http://www.w3.org/1999/xhtml");
         this.configuration = new NekoHTMLConfiguration(props,

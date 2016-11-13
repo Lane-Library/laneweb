@@ -45,6 +45,8 @@ public class GoogleTracker {
 
     private static final Pattern PLUS_PATTERN = Pattern.compile("\\+");
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     private URLConnectionFactory connectionFactory;
 
     private String domainName;
@@ -132,7 +134,7 @@ public class GoogleTracker {
         if (isEmpty(encodedString)) {
             encodedString = "";
         } else {
-            encodedString = URLEncoder.encode(encodedString, "UTF-8");
+            encodedString = URLEncoder.encode(encodedString, UTF_8);
             encodedString = PLUS_PATTERN.matcher(encodedString).replaceAll("%20");
         }
         return encodedString;

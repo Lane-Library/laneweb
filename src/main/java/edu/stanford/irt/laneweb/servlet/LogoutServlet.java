@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -15,6 +16,8 @@ public class LogoutServlet extends HttpServlet {
     private static final String LOGOUT_URL = "/Shibboleth.sso/Logout?return=";
 
     private static final long serialVersionUID = 1L;
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     @Override
     protected void service(final HttpServletRequest req, final HttpServletResponse resp)
@@ -40,7 +43,7 @@ public class LogoutServlet extends HttpServlet {
         if (referer == null || !referer.startsWith("/") || referer.indexOf("/secure/") > -1) {
             referer = "/index.html";
         }
-        referer = URLEncoder.encode(referer, "UTF-8");
+        referer = URLEncoder.encode(referer, UTF_8);
         resp.sendRedirect("https://" + req.getLocalName() + LOGOUT_URL + referer);
     }
 }
