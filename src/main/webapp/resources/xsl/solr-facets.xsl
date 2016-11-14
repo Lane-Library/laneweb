@@ -90,28 +90,20 @@
 						            <xsl:when test="number($page) &gt; 1">
 										<a class="pagingButton previous" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
 						            </xsl:when>
-						            <xsl:otherwise>
-		                                <span class="pagingButton disabled"> <i class="fa fa-backward"></i> Previous</span>
-						            </xsl:otherwise>
 						        </xsl:choose>
 		                        <xsl:choose>
 		                            <xsl:when test="count($entry/list/facet) > $facets-per-browse-page">
 		                                <a class="pagingButton next" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
 		                            </xsl:when>
-		                            <xsl:otherwise>
-		                                <span class="pagingButton disabled">Next <i class="fa fa-forward"></i> </span>
-		                            </xsl:otherwise>
 		                        </xsl:choose>
 	                        </div>
 	                        <div class="yui3-u-1-2">
                                 <xsl:choose>
                                     <xsl:when test="$facet.sort = 'index'">
-										<span class="pagingButton disabled">A-Z Sort</span>
                                         <a class="pagingButton" rel="lightbox disableAnimation disableBackground" href="{replace($facet-browse-base-path,'&amp;facet.sort=index','')}&amp;page=1" title="Numerical Sort"> Numerical Sort</a>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <a class="pagingButton" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;facet.sort=index&amp;page=1" title="A-Z Sort"> A-Z Sort</a>
-										<span class="pagingButton disabled">Numerical Sort</span>
                                     </xsl:otherwise>
                                 </xsl:choose>
 	                        </div>
