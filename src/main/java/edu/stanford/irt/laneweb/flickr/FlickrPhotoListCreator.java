@@ -30,8 +30,7 @@ public class FlickrPhotoListCreator {
 
     private String urlFormat;
 
-    public FlickrPhotoListCreator(final String apiKey, final String urlFormat, final ObjectMapper objectMapper)
-            throws IOException {
+    public FlickrPhotoListCreator(final String apiKey, final String urlFormat, final ObjectMapper objectMapper) {
         this.urlFormat = String.format(urlFormat, apiKey);
         this.objectMapper = objectMapper;
     }

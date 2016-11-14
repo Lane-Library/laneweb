@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,8 @@ public class SHCLoginController {
 
     private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     private SHCCodec codec;
 
     private LDAPDataAccess ldapDataAccess;
@@ -57,7 +60,7 @@ public class SHCLoginController {
                     throws IOException {
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
-        url.append(URLEncoder.encode(emrid, "UTF-8"));
+        url.append(URLEncoder.encode(emrid, UTF_8));
         String userid = null;
         String decryptedUnivid = null;
         if (!validateTimestamp(ts)) {
@@ -81,7 +84,7 @@ public class SHCLoginController {
         }
         if (errorMsg.length() > 0) {
             LOG.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
-            url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
+            url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), UTF_8));
         }
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
     }

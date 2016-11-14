@@ -7,6 +7,35 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-11-14" version="3.3.9" description="3.3.9 bug fix release">
+            <action date="2016-11-10" dev="ryanmax" issue="129225" type="fix">
+                search: sort links broken
+            </action>
+            <action date="2016-11-09" dev="ceyates" issue="129202" type="fix">
+                software eresource lists show only A titles, some are empty
+            </action>
+            <action date="2016-11-09" dev="ceyates" issue="129199" type="fix">
+                remove 'All' headers
+            </action>
+            <action date="2016-11-09" dev="ceyates" issue="129148" type="fix">
+                search form disappears when clicking on the input
+            </action>
+            <action date="2016-11-08" dev="olgary" issue="129145" type="update">
+                added SHC portal into drop down
+            </action>
+            <action date="2016-11-10" dev="ceyates" issue="129094" type="update">
+                increase the size of the date boxes for GR and classes on the homepage
+            </action>
+            <action date="2016-11-10" dev="ceyates" issue="129092" type="update">
+                center align
+            </action>
+            <action date="2016-11-08" dev="olgary" issue="128936" type="update">
+                change .detailinfo font size to 12px
+            </action>
+            <action date="2016-11-07" dev="ryanmax" issue="128879" type="update">
+                GR calendar display on homepage
+            </action>
+        </release>
         <release date="2016-11-07" version="3.3.8" description="3.3.8 bug fix release">
             <action date="2016-11-03" dev="olgary" issue="128935" type="add">
                 added extra sizes for fa - fontawesome.css

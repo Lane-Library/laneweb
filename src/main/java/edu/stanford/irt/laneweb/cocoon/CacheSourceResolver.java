@@ -42,7 +42,7 @@ public class CacheSourceResolver implements SourceResolver {
         }
 
         @Override
-        public InputStream getInputStream() throws IOException {
+        public InputStream getInputStream() {
             return new ByteArrayInputStream(this.byteArray);
         }
 

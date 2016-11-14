@@ -45,6 +45,8 @@ public class GoogleTracker {
 
     private static final Pattern PLUS_PATTERN = Pattern.compile("\\+");
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     private URLConnectionFactory connectionFactory;
 
     private String domainName;
@@ -132,7 +134,7 @@ public class GoogleTracker {
         if (isEmpty(encodedString)) {
             encodedString = "";
         } else {
-            encodedString = URLEncoder.encode(encodedString, "UTF-8");
+            encodedString = URLEncoder.encode(encodedString, UTF_8);
             encodedString = PLUS_PATTERN.matcher(encodedString).replaceAll("%20");
         }
         return encodedString;
@@ -156,9 +158,8 @@ public class GoogleTracker {
     /**
      * @return a random visitorId
      * @throws NoSuchAlgorithmException
-     * @throws IOException
      */
-    private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
+    private String generateVisitorId() throws NoSuchAlgorithmException {
         String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
         MessageDigest m = MessageDigest.getInstance("MD5");
         m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());

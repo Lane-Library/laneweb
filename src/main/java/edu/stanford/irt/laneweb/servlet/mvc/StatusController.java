@@ -62,11 +62,11 @@ public class StatusController {
             HttpServletResponse resp = new HttpServletResponseWrapper(response) {
 
                 @Override
-                public ServletOutputStream getOutputStream() throws IOException {
+                public ServletOutputStream getOutputStream() {
                     return new ServletOutputStream() {
 
                         @Override
-                        public void write(final int b) throws IOException {
+                        public void write(final int b) {
                             // do nothing
                         }
                     };

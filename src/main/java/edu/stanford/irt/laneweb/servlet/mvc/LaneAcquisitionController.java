@@ -4,6 +4,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -20,6 +21,8 @@ public class LaneAcquisitionController {
 
     private static final String ACQUISITION_URL = "https://lane-local-02.stanford.edu/crm/sfp/api/new";
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     @RequestMapping(value = "/apps/lanelibacqs", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback) throws IOException {
@@ -27,7 +30,7 @@ public class LaneAcquisitionController {
         for (Entry<String, Object> entry: feedback.entrySet()) {
             queryString.append(entry.getKey())
                 .append('=')
-                .append(URLEncoder.encode(entry.getValue().toString(), "UTF-8"))
+                .append(URLEncoder.encode(entry.getValue().toString(), UTF_8))
                 .append('&');
         }
         queryString.append("id=");

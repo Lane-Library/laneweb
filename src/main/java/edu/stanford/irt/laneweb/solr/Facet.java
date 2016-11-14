@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.solr;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -15,6 +16,8 @@ public class Facet {
     private static final String EMPTY = "";
 
     private static final String QUOTE = "\"";
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private String activeFacets;
 
@@ -85,7 +88,7 @@ public class Facet {
     private String encodeString(final String string) {
         String encoded = null;
         try {
-            encoded = URLEncoder.encode(string, "UTF-8");
+            encoded = URLEncoder.encode(string, UTF_8);
         } catch (UnsupportedEncodingException e) {
             throw new LanewebException(e);
         }

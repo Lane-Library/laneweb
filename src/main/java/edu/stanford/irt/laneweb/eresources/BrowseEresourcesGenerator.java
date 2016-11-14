@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ import edu.stanford.irt.laneweb.solr.SolrService;
 public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     private static final String DEFAULT_ALPHA = "a";
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private String alpha;
 
@@ -70,7 +73,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
      */
     protected String decode(final String string) {
         try {
-            return URLDecoder.decode(string, "UTF-8");
+            return URLDecoder.decode(string, UTF_8);
         } catch (UnsupportedEncodingException e) {
             throw new LanewebException("won't happen", e);
         }

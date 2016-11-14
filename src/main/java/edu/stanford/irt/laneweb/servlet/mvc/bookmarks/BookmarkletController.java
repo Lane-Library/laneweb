@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 @Controller
 public class BookmarkletController extends BookmarkController {
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     @Autowired
     public BookmarkletController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder) {
@@ -36,8 +39,8 @@ public class BookmarkletController extends BookmarkController {
             @RequestParam final String label) throws UnsupportedEncodingException {
         if (userid == null) {
             // not logged in, redirect through webauth:
-            return "redirect:/secure/bookmarklet?url=" + URLEncoder.encode(url, "UTF-8") + "&label="
-                    + URLEncoder.encode(label, "UTF-8");
+            return "redirect:/secure/bookmarklet?url=" + URLEncoder.encode(url, UTF_8) + "&label="
+                    + URLEncoder.encode(label, UTF_8);
         }
         Bookmark bookmark = new Bookmark(label, url);
         bookmarks.add(0, bookmark);

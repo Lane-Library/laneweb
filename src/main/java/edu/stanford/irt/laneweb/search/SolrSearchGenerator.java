@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ import edu.stanford.irt.laneweb.solr.SolrService;
 public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> implements ParametersAware {
 
     private static final int DEFAULT_RESULTS = 50;
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private String facets;
 
@@ -59,7 +62,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.TYPE)) {
             try {
-                this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
+                this.type = URLDecoder.decode(parameters.get(Model.TYPE), UTF_8);
             } catch (UnsupportedEncodingException e) {
                 throw new LanewebException("won't happen", e);
             }
