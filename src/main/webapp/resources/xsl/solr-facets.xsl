@@ -81,7 +81,11 @@
 		            </xsl:choose>
 	            </xsl:when>
 	            <xsl:otherwise>
-                    <li class="solrFacet facetHeader"><h5><xsl:copy-of select="$label"/></h5></li>
+                    <li class="solrFacet facetHeader">
+                        <h5>
+                            <xsl:value-of select="$label"/>
+                        </h5>
+                    </li>
                     <xsl:apply-templates select="$entry/list/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
                         <div class="yui3-g s-pagination no-bookmarking">
