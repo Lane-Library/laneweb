@@ -23,6 +23,20 @@ public class UserCookieCodec {
 
     private static final String COOKIE_VALUE_SEPARATOR_STRING = Character.toString(COOKIE_VALUE_SEPARATOR);
 
+    private static final int DATE = 3;
+
+    private static final int EMAIL = 2;
+
+    private static final int EXPECTED_VALUE_COUNT = 5;
+
+    private static final int ID = 0;
+
+    private static final int KEY_ARRAY_LENGTH = 16;
+
+    private static final int NAME = 1;
+
+    private static final int USER_AGENT_HASH = 4;
+
     private Cipher cipher;
 
     private SecretKey desKey;
@@ -32,7 +46,7 @@ public class UserCookieCodec {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:
             byte[] src = Base64.decodeBase64(key.getBytes(StandardCharsets.UTF_8));
-            byte[] dst = new byte[16];
+            byte[] dst = new byte[KEY_ARRAY_LENGTH];
             System.arraycopy(src, 0, dst, 0, src.length);
             this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -62,16 +76,16 @@ public class UserCookieCodec {
         Objects.requireNonNull(encryptedValue, "null encryptedValue");
         String decrypted = decrypt(encryptedValue);
         String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR_STRING);
-        if (values.length != 5) {
+        if (values.length != EXPECTED_VALUE_COUNT) {
             throw new LanewebException("invalid encryptedValue");
         }
         try {
-            return new PersistentLoginToken(new User(values[0], values[1], values[2], userIdHashKey),
-                    Long.parseLong(values[3]), Integer.parseInt(values[4]), encryptedValue);
+            return new PersistentLoginToken(new User(values[ID], values[NAME], values[EMAIL], userIdHashKey),
+                    Long.parseLong(values[DATE]), Integer.parseInt(values[USER_AGENT_HASH]), encryptedValue);
         } catch (NumberFormatException e) {
             throw new LanewebException("invalid encryptedValue", e);
         }
-    }
+    };
 
     private synchronized String decrypt(final String codedInput) {
         try {

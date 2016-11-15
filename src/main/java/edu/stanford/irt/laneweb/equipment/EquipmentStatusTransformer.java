@@ -27,6 +27,10 @@ public class EquipmentStatusTransformer implements Transformer {
             + "AND bi.bib_id in (select regexp_substr(?,'[^,]+', 1, level) from dual connect by regexp_substr(?, '[^,]+', 1, level) is not null) "
             + "GROUP BY bi.bib_id";
 
+    private static final int BIB_ID = 1;
+
+    private static final int COUNT = 2;
+
     private static final String DIV = "div";
 
     private static final String SPAN = "span";
@@ -156,8 +160,8 @@ public class EquipmentStatusTransformer implements Transformer {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     XMLUtils.startElement(this.xmlConsumer, XHTML_NAMESPACE, DIV);
-                    XMLUtils.createElementNS(this.xmlConsumer, XHTML_NAMESPACE, SPAN, rs.getString(1));
-                    XMLUtils.createElementNS(this.xmlConsumer, XHTML_NAMESPACE, SPAN, rs.getString(2));
+                    XMLUtils.createElementNS(this.xmlConsumer, XHTML_NAMESPACE, SPAN, rs.getString(BIB_ID));
+                    XMLUtils.createElementNS(this.xmlConsumer, XHTML_NAMESPACE, SPAN, rs.getString(COUNT));
                     XMLUtils.endElement(this.xmlConsumer, XHTML_NAMESPACE, DIV);
                 }
             }

@@ -25,6 +25,8 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class SQLBookmarkDAO implements BookmarkDAO {
 
+    private static final int BLOB = 2;
+
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final Logger LOG = LoggerFactory.getLogger(SQLBookmarkDAO.class);
@@ -32,6 +34,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
+
+    private static final int USER_ID = 1;
 
     private static final String WRITE_BOOKMARKS_SQL =
             "BEGIN " +
@@ -58,7 +62,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         try {
             conn = this.dataSource.getConnection();
             pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL);
-            pstmt.setString(1, userid);
+            pstmt.setString(USER_ID, userid);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
@@ -108,14 +112,14 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         ObjectOutputStream oop = null;
         try {
             pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
-            pstmt.setString(1, userid);
+            pstmt.setString(USER_ID, userid);
             pstmt.execute();
             if (!links.isEmpty()) {
                 cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
-                cstmt.setString(1, userid);
-                cstmt.registerOutParameter(2, java.sql.Types.BLOB);
+                cstmt.setString(USER_ID, userid);
+                cstmt.registerOutParameter(BLOB, java.sql.Types.BLOB);
                 cstmt.executeUpdate();
-                Blob blob = cstmt.getBlob(2);
+                Blob blob = cstmt.getBlob(BLOB);
                 oop = new ObjectOutputStream(blob.setBinaryStream(1));
                 oop.writeObject(Serializable.class.cast(links));
                 oop.flush();
@@ -135,7 +139,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             JdbcUtils.closeConnection(conn);
         }
     }
-    
+
     private Connection getConnection() {
         try {
             Connection conn = this.dataSource.getConnection();

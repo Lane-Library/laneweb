@@ -27,7 +27,11 @@ public class VoyagerLogin {
 
     private static final Logger LOG = LoggerFactory.getLogger(VoyagerLogin.class);
 
+    private static final int PID = 2;
+
     private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
+
+    private static final int UNIV_ID = 1;
 
     private DataSource dataSource;
 
@@ -52,18 +56,18 @@ public class VoyagerLogin {
             try {
                 conn = this.dataSource.getConnection();
                 checkStmt = conn.prepareStatement(CHECK_ID_SQL);
-                checkStmt.setString(1, voyagerUnivId);
+                checkStmt.setString(UNIV_ID, voyagerUnivId);
                 rs = checkStmt.executeQuery();
                 rs.next();
                 if (rs.getInt(1) > 0) {
                     // univid found so write to voyager tables
                     clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-                    clearStmt.setString(1, voyagerUnivId);
-                    clearStmt.setString(2, pid);
+                    clearStmt.setString(UNIV_ID, voyagerUnivId);
+                    clearStmt.setString(PID, pid);
                     clearStmt.executeUpdate();
                     createStmt = conn.prepareStatement(CREATE_SESSION_SQL);
-                    createStmt.setString(1, voyagerUnivId);
-                    createStmt.setString(2, pid);
+                    createStmt.setString(UNIV_ID, voyagerUnivId);
+                    createStmt.setString(PID, pid);
                     createStmt.executeUpdate();
                     voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
                 } else {

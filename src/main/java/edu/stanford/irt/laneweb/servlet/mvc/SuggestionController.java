@@ -35,6 +35,10 @@ public class SuggestionController {
 
     private static final int MAX_QUERY_LENGTH = 100;
 
+    private static final String MESH_PREFIX = "mesh-";
+
+    private static final int MESH_PREFIX_LENGTH = MESH_PREFIX.length();
+
     private static final int MIN_QUERY_LENGTH = 3;
 
     private static final Collection<Suggestion> NO_SUGGESTIONS = Collections.emptyList();
@@ -105,8 +109,9 @@ public class SuggestionController {
             } else if ("er-mesh".equals(limit)) {
                 suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
                 suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
-            } else if (limit.indexOf("mesh-") == 0) {
-                suggestions = this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(5), query);
+            } else if (limit.indexOf(MESH_PREFIX) == 0) {
+                suggestions = this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(MESH_PREFIX_LENGTH),
+                        query);
             } else if (ER_PATTERN.matcher(limit).matches()) {
                 suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
             } else if ("mesh".equals(limit)) {

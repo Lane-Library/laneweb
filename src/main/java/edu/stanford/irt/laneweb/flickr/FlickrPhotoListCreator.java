@@ -20,6 +20,8 @@ public class FlickrPhotoListCreator {
 
     private static final String PAGE = "https://www.flickr.com/photos/%s/%s";
 
+    private static final int PAGE_COUNT = 2;
+
     private static final String THUMBNAIL = "https://farm%s.staticflickr.com/%s/%s_%s_m.jpg";
 
     private static final String URL_FORMAT = "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&user_id=40390680@N08&api_key=%s&per_page=500&format=json&nojsoncallback=1&page=%%d";
@@ -46,8 +48,9 @@ public class FlickrPhotoListCreator {
 
     public void printList(final PrintStream out) throws IOException {
         Collection<Map<String, String>> photos = new ArrayList<>();
-        photos.addAll(getPhotoMapsForPage(1));
-        photos.addAll(getPhotoMapsForPage(2));
+        for (int page = 1; page <= PAGE_COUNT; page++) {
+            photos.addAll(getPhotoMapsForPage(page));
+        }
         this.photoList = photos.stream().map(this::buildString).collect(Collectors.toList());
         this.photoList.stream().forEach(out::println);
     }

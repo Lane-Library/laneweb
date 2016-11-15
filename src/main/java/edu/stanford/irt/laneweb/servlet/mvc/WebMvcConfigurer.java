@@ -58,6 +58,8 @@ import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 @ComponentScan(basePackages = { "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks" })
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
+    private static final int ONE_YEAR_IN_SECONDS = 31536000;
+
     @Autowired
     private DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor;
 
@@ -182,7 +184,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
         handler.setLocations(
                 Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase }));
-        handler.setCacheSeconds(31536000);
+        handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
     }

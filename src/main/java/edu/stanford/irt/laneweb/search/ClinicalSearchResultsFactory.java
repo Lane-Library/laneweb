@@ -11,6 +11,8 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ClinicalSearchResultsFactory {
 
+    private static final int RESULTS_PER_PAGE = 50;
+
     private ContentResultConversionStrategy conversionStrategy;
 
     public ClinicalSearchResultsFactory(final ContentResultConversionStrategy conversionStrategy) {
@@ -40,7 +42,7 @@ public class ClinicalSearchResultsFactory {
         }
         Collections.sort(results);
         PagingList<SearchResult> searchResults = new PagingList<>(results,
-                new PagingData(results, page, "", 50, Integer.MAX_VALUE));
+                new PagingData(results, page, "", RESULTS_PER_PAGE, Integer.MAX_VALUE));
         return new ClinicalSearchResults(resourceResults, searchResults, total);
     }
 }
