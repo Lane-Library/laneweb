@@ -144,6 +144,7 @@ hr {
 /*.youtube-thumbnail divs are created in youtube.js */
 .youtube-thumbnail {
     cursor: pointer;
+    display: inline-block;
     position: relative;
 }
 
