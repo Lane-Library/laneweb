@@ -67,7 +67,7 @@
                     <li class="solrFacet facetHeader">
                         <xsl:copy-of select="$label"/>
                         <xsl:if test="count($entry/sorted-set/facet[count > 0]) > $values-per-facet">
-                                  <span class="seeAll"><a rel="lightbox disableBackground" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
+                            <span class="seeAll"><a rel="lightbox disableBackground" href="{$facet-browse-base-path}&amp;facet={$id}&amp;page=1"> see all </a></span>
                         </xsl:if>
                     </li>
                     <xsl:choose>
@@ -89,20 +89,20 @@
                     <xsl:apply-templates select="$entry/list/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
                         <div class="s-pagination no-bookmarking">
-                               <xsl:if test="number($page) &gt; 1">
-                                   <a class="pagingButton previous" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
-                                </xsl:if>
-                                <xsl:if test="count($entry/list/facet) > $facets-per-browse-page">
-                                    <a class="pagingButton next" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
-                                </xsl:if>
-                                <xsl:choose>
-                                    <xsl:when test="$facet.sort = 'index'">
-                                        <a class="pagingButton" rel="lightbox disableAnimation disableBackground" href="{replace($facet-browse-base-path,'&amp;facet.sort=index','')}&amp;page=1" title="Numerical Sort"> Numerical Sort</a>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <a class="pagingButton" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;facet.sort=index&amp;page=1" title="A-Z Sort"> A-Z Sort</a>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                            <xsl:if test="number($page) &gt; 1">
+                                <a class="pagingButton previous" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
+                            </xsl:if>
+                            <xsl:if test="count($entry/list/facet) > $facets-per-browse-page">
+                                <a class="pagingButton next" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
+                            </xsl:if>
+                            <xsl:choose>
+                                <xsl:when test="$facet.sort = 'index'">
+                                    <a class="pagingButton" rel="lightbox disableAnimation disableBackground" href="{replace($facet-browse-base-path,'&amp;facet.sort=index','')}&amp;page=1" title="Numerical Sort"> Numerical Sort</a>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <a class="pagingButton" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;facet.sort=index&amp;page=1" title="A-Z Sort"> A-Z Sort</a>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </div>
                     </li>
                 </xsl:otherwise>
@@ -115,8 +115,8 @@
             <body>
                 <!-- hidden element that gets moved into place by solr-facets.js -->
                 <xsl:if test="$search-mode and string-length($facets) > 0">
-                  <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name='all']/@hits"/>
-                         <span id="solrAllCount"><xsl:value-of select="format-number($counts,'###,##0')"/></span>
+                    <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name='all']/@hits"/>
+                    <span id="solrAllCount"><xsl:value-of select="format-number($counts,'###,##0')"/></span>
                 </xsl:if>
                 <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
                     <div class="bd">
