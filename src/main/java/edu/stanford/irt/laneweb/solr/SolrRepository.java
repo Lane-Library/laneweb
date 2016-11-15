@@ -29,9 +29,6 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "*:*", filters = { "isRecent:1 OR isLaneConnex:1", "mesh:\"?0\"", "type:\"?1\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllByMeshAndType(String mesh, String type, Pageable page);
 
-    @Query(value = "*:*", filters = { "isRecent:1 OR isLaneConnex:1", "subset:\"?0\"" }, requestHandler = Handlers.BROWSE)
-    public List<Eresource> browseAllBySubset(String subset, Pageable page);
-
     @Query(value = "*:*", filters = { "isRecent:1 OR isLaneConnex:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     public List<Eresource> browseAllByType(String type, Pageable page);
 

@@ -118,13 +118,6 @@ public class SolrService {
         return this.repository.browseAllByMeshAndType(mesh, type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
-    public List<Eresource> getSubset(final String subset) {
-        if (null == subset) {
-            throw new IllegalArgumentException("null subset");
-        }
-        return this.repository.browseAllBySubset(subset, new PageRequest(0, Integer.MAX_VALUE));
-    }
-
     public List<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);

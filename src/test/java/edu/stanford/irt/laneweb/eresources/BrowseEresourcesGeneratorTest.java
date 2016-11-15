@@ -32,23 +32,13 @@ public class BrowseEresourcesGeneratorTest {
     }
 
     @Test
-    public void testEncodedSubset() {
-        this.generator.setParameters(Collections.singletonMap(Model.SUBSET, "subset%20space"));
-        expect(this.solrService.getSubset("subset space")).andReturn(null);
-        replay(this.solrService);
-        this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=;t=;s=subset space", this.generator.createKey().toString());
-        verify(this.solrService);
-    }
-
-    @Test
     public void testEncodedType() {
         this.generator.setModel(Collections.emptyMap());
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type%20space"));
         expect(this.solrService.getType("type space", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type space;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type space", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
@@ -74,7 +64,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.solrService.getType("type", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
@@ -85,7 +75,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.solrService.getType("type", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
@@ -96,7 +86,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.solrService.getType("type", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type;s=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
@@ -106,17 +96,7 @@ public class BrowseEresourcesGeneratorTest {
         expect(this.solrService.getType("type", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type;s=", this.generator.createKey().toString());
-        verify(this.solrService);
-    }
-
-    @Test
-    public void testGetEresourceSubset() {
-        this.generator.setParameters(Collections.singletonMap(Model.SUBSET, "subset"));
-        expect(this.solrService.getSubset("subset")).andReturn(null);
-        replay(this.solrService);
-        this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=;t=;s=subset", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
         verify(this.solrService);
     }
 }

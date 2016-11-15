@@ -119,8 +119,6 @@ public abstract class Model {
 
     public static final String SOURCEID = "sourceid";
 
-    public static final String SUBSET = "subset";
-
     public static final String TEMPLATE = "template";
 
     public static final String TEXT = "text";
