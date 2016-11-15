@@ -66,19 +66,11 @@
 			</xsl:call-template>
 		</xsl:variable>
 
-		<div>
+		<div class="event seminar">
 			<!--  hide events beyond the desired # to display so seminars.js can unhide them if needed -->
 			<xsl:if test="position() > $number-of-items">
 				<xsl:attribute name="style">display:none;</xsl:attribute>
 			</xsl:if>
-			<xsl:attribute name="class">
-				<xsl:text>event seminar</xsl:text>
-				<xsl:choose>
-					<!-- see case 98500 align the color blocks for classes -->
-					<xsl:when test="$type='cme' and position() = 1"> same-height-8</xsl:when>
-					<xsl:when test="$type='cme' and position() = 2"> same-height-9</xsl:when>
-				</xsl:choose>
-			</xsl:attribute>
 			<div class="yui3-g">
 				<div>
 					<xsl:attribute name="class">
