@@ -231,7 +231,7 @@
             <div class="centered">
                 <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
                 <h3><a href="/index.html">Lane Medical Library</a></h3>
-                <div class="yui3-g" style="border-bottom: 1px solid #902827; padding-bottom:12px;">
+                <div class="yui3-g">
                     <div class="yui3-u-1-5">
                         <ul>
                             <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
@@ -282,16 +282,10 @@
         <div id="lane-subfooter">
             <div class="centered">
                 <div class="yui3-g">
+                    <div class="yui3-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
                     <div class="yui3-u-1-2">
-                        <ul>
-                            <li>©<?laneweb current-year?> Stanford Medicine</li>
-                        </ul>
-                    </div>
-                    <div class="yui3-u-1-4">     
-                    </div>
-                    <div class="yui3-u-1-4">
                          <ul>
-                            <li style="margin-left:100px"><a href="http://www.stanford.edu/site/terms.html">Terms of Use</a></li>
+                            <li><a href="http://www.stanford.edu/site/terms.html">Terms of Use</a></li>
                             <li><a title="See us on Facebook" href="https://www.facebook.com/LaneLibrary.Stanford"><span>See us on Facebook</span><i class="fa fa-facebook"></i></a></li>           
                             <li><a title="See us on Twitter" href="https://twitter.com/LaneLibStanford"><span>See us on Twitter</span><i class="fa fa-twitter"></i></a></li>
                         </ul>

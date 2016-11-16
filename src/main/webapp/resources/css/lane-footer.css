@@ -6,6 +6,10 @@
     margin-top: 12px;
     padding-top: 17px;
 }
+#laneFooter .centered {
+	 border-bottom: 1px solid #902827;
+	 padding-bottom: 12px;
+}
 #laneFooter h2{
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 24px;
@@ -54,11 +58,11 @@
 }
 
 #lane-subfooter ul{
-    clear: left;
+    float: right;
 }
 
 #lane-subfooter li{
-    float: left;
+	display: inline-block;
     padding: 3px 5px 5px 0;
 }
 
