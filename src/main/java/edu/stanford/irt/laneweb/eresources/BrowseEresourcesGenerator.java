@@ -53,7 +53,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @Override
     protected StringBuilder createKey() {
-        return super.createKey().append(";a=").append(null == this.alpha ? "" : this.alpha).append(";t=")
+        return super.createKey().append(";a=").append(this.alpha).append(";t=")
                 .append(null == this.type ? "" : this.type);
     }
 

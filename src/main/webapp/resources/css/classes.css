@@ -7,7 +7,7 @@
 }
 
 .class:last-child, .archive:last-child {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .class .date, .archive .date {
@@ -91,8 +91,8 @@
 }
 
 .youtube-class {
-	text-align: center;
-	margin-top: 70px;
+    text-align: center;
+    margin-top: 70px;
 }
 
 .youtube-class .youtube-thumbnail img {

@@ -1,16 +1,18 @@
 #laneFooter,
-#lane-subfooter{
+#lane-subfooter {
     background-color: #8C1515;
 }
-#laneFooter{
+
+#laneFooter {
     margin-top: 12px;
     padding-top: 17px;
 }
+
 #laneFooter .centered {
-	 border-bottom: 1px solid #902827;
-	 padding-bottom: 12px;
+    border-bottom: 1px solid #902827;
+    padding-bottom: 12px;
 }
-#laneFooter h2{
+#laneFooter h2 {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 24px;
     font-weight: 300;
@@ -21,7 +23,8 @@
     text-align: left;
     background-image: none;
 }
-#laneFooter h3{
+
+#laneFooter h3 {
     font-size: 16px;
     font-weight: 300;
     padding: 0;
@@ -30,14 +33,17 @@
     text-transform: none;
     background-image: none;
 }
+
 #laneFooter li,#laneFooter h2,
-#laneFooter h3{
+#laneFooter h3 {
     border-bottom: 1px solid #902827;
 }
-#laneFooter a{
+
+#laneFooter a {
     color: white;
 }
-#laneFooter li{
+
+#laneFooter li {
     font-size: 12px;
     line-height: 24px;
 }
@@ -45,7 +51,8 @@
 #laneFooter li:last-child {
     border-bottom: none;
 }
-#lane-subfooter{
+
+#lane-subfooter {
     font-size: 12px;
     font-weight: 400;
     line-height: 22px;
@@ -53,24 +60,24 @@
 }
 
 #lane-subfooter,
-#lane-subfooter a{
+#lane-subfooter a {
     color: #999999;
 }
 
-#lane-subfooter ul{
+#lane-subfooter ul {
     float: right;
 }
 
-#lane-subfooter li{
-	display: inline-block;
+#lane-subfooter li {
+    display: inline-block;
     padding: 3px 5px 5px 0;
 }
 
-#lane-subfooter span{
+#lane-subfooter span {
     display: none;
 }
 
-#lane-subfooter i{
+#lane-subfooter i {
     background-color: #999999;
     border-radius: 11px;
     color: #8C1515;
@@ -78,18 +85,4 @@
     line-height: 20px;
     text-align: center;
     width: 22px;
-}
-#gift{
-    display: block;
-    float: right;
-    width: 216px;
-    padding: 10px 10px 10px 68px;
-    box-sizing: border-box;
-    background-color: rgb(235, 240, 241);
-    background-image: url(../images/gift-transp.png);
-    background-position: 9px 7px;
-    background-repeat: no-repeat;
-    line-height: 18px;
-    border: 1px rgb(203, 192, 193) solid;
-    box-shadow: 0 0 2px rgb(203, 192, 193);
 }

@@ -33,6 +33,8 @@ public class SolrService {
 
     private static final String AND = " AND ";
 
+    private static final String DATE_QUERY_PREFIX = "date:[";
+
     private static final String EMPTY = "";
 
     private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
@@ -90,9 +92,9 @@ public class SolrService {
         facetOptions.addFacetOnFlieldnames(FACET_FIELDS);
         facetOptions.setFacetMinCount(1);
         facetOptions.setFacetLimit(facetLimit);
-        facetOptions.addFacetQuery(new SimpleQuery("date:[" + PAST_YEAR + monthDay + " TO *]"));
-        facetOptions.addFacetQuery(new SimpleQuery("date:[" + PAST_FIVE_YEARS + monthDay + " TO *]"));
-        facetOptions.addFacetQuery(new SimpleQuery("date:[" + PAST_TEN_YEARS + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_YEAR + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_FIVE_YEARS + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_TEN_YEARS + monthDay + " TO *]"));
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(facetOptions);
         fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {

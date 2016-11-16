@@ -85,7 +85,7 @@ public class UserCookieCodec {
         } catch (NumberFormatException e) {
             throw new LanewebException("invalid encryptedValue", e);
         }
-    };
+    }
 
     private synchronized String decrypt(final String codedInput) {
         try {

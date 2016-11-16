@@ -33,6 +33,12 @@ public class BrowseAllEresourcesGeneratorTest {
     }
 
     @Test
+    public void testCreateKey() {
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
+        assertEquals("p=;a=;t=type", this.generator.createKey().toString());
+    }
+
+    @Test
     public void testGetEresourceList() {
         expect(this.solrService.getType("type")).andReturn(Collections.singletonList(null));
         replay(this.solrService);
@@ -43,9 +49,8 @@ public class BrowseAllEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNoType() {
-        replay(this.solrService);
+        this.generator.setParameters(Collections.emptyMap());
         assertEquals(0, this.generator.getEresourceList(this.solrService).size());
-        verify(this.solrService);
     }
 
     @Test
