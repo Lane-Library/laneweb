@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,10 +44,11 @@ public class JSONBookmarkController extends BookmarkController {
     public void addBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
-            @RequestBody final Bookmark bookmark) {
+            @RequestBody final Bookmark bookmark,
+            final HttpSession session) {
         List<Object> clone = new ArrayList<>(bookmarks);
         clone.add(0, bookmark);
-        saveLinks(userid, clone);
+        saveLinks(userid, clone, session);
         bookmarks.add(0, bookmark);
     }
 
@@ -54,7 +56,8 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
-            @RequestParam final String indexes) {
+            @RequestParam final String indexes,
+            final HttpSession session) {
         // convert json array to an int[]
         String[] split = indexes.substring(1, indexes.length() - 1).split(",");
         int[] ints = new int[split.length];
@@ -67,7 +70,7 @@ public class JSONBookmarkController extends BookmarkController {
         for (int j = ints.length - 1; j >= 0; --j) {
             clone.remove(ints[j]);
         }
-        saveLinks(userid, clone);
+        saveLinks(userid, clone, session);
         for (int j = ints.length - 1; j >= 0; --j) {
             bookmarks.remove(ints[j]);
         }
@@ -76,7 +79,8 @@ public class JSONBookmarkController extends BookmarkController {
     @RequestMapping(method = RequestMethod.GET)
     public Bookmark getBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.PROXY_LINKS) final Boolean proxyLinks,
-            @RequestParam final int i) {
+            @RequestParam final int i,
+            final HttpSession session) {
         // TODO: extend Bookmark or create a map to add the proxylink url
         return (Bookmark) bookmarks.get(i);
     }
@@ -85,12 +89,13 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void moveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
-            @RequestBody final Map<String, Integer> json) {
+            @RequestBody final Map<String, Integer> json,
+            final HttpSession session) {
         int to = json.get("to").intValue();
         int from = json.get("from").intValue();
         List<Object> clone = new ArrayList<>(bookmarks);
         clone.add(to, clone.remove(from));
-        saveLinks(userid, clone);
+        saveLinks(userid, clone, session);
         bookmarks.add(to, bookmarks.remove(from));
     }
 
@@ -98,12 +103,13 @@ public class JSONBookmarkController extends BookmarkController {
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
-            @RequestBody final Map<String, Object> json) {
+            @RequestBody final Map<String, Object> json,
+            final HttpSession session) {
         Bookmark bookmark = new Bookmark((String) json.get("label"), (String) json.get("url"));
         int position = ((Integer) json.get("position")).intValue();
         List<Object> clone = new ArrayList<>(bookmarks);
         clone.set(position, bookmark);
-        saveLinks(userid, clone);
+        saveLinks(userid, clone, session);
         bookmarks.set(position, bookmark);
     }
 
