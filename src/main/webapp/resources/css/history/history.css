@@ -178,7 +178,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
     border-bottom: 1px solid #902827;
 }
 
-#laneFooter li:last-child {
+#lane-footer li:last-child {
     border-bottom: none;
 }
 #lane-footer a {
@@ -260,22 +260,22 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 #footer-sm {
-    width: 210px;
+    width: 156px;
 }
 
 #footer-shc {
-    width: 180px;
+    width: 142px;
 }
 
 #footer-sch {
-    width: 180px;
+    width: 176px;
 }
 
 #footer-schos {
-    width: 180px;
+    width: 176px;
 }
 #footer-uha {
-    width: 308px;
+    width: 228px;
 }
 
 #gift {
