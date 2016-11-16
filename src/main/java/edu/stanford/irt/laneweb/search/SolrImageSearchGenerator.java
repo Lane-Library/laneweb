@@ -16,6 +16,14 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageSearchResult> {
 
+    private static final int BROAD_REUSE_RIGHTS = 1;
+
+    private static final int MAX_REUSE_RIGHTS = 0;
+
+    private static final int POSSIBLE_REUSE_RIGHTS = 2;
+
+    private static final int RESTRICTIVE_REUSE_RIGHTS = 3;
+
     private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights", "Possible Reuse Rights",
             "Restrictive Reuse Rights" };
 
@@ -37,7 +45,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
 
     private String source;
 
-    private String tab = TAB_CONTENT[0];
+    private String tab = TAB_CONTENT[MAX_REUSE_RIGHTS];
 
     public SolrImageSearchGenerator(final SolrImageService service,
             final SAXStrategy<SolrImageSearchResult> saxStrategy) {
@@ -60,13 +68,13 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
                 this.copyright = "10";
-                this.tab = TAB_CONTENT[1];
+                this.tab = TAB_CONTENT[BROAD_REUSE_RIGHTS];
             } else if (this.source.startsWith("pmc-")) {
                 this.copyright = "15";
-                this.tab = TAB_CONTENT[2];
+                this.tab = TAB_CONTENT[POSSIBLE_REUSE_RIGHTS];
             } else if (this.source.startsWith("rl-")) {
                 this.copyright = "20";
-                this.tab = TAB_CONTENT[3];
+                this.tab = TAB_CONTENT[RESTRICTIVE_REUSE_RIGHTS];
             }
         }
     }

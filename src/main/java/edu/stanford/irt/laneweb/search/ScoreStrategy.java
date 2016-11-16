@@ -8,9 +8,13 @@ import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategy {
 
+    private static final int DESC_ONLY = 10;
+
     private static final Pattern DOUBLE_WEIGHT_PATTERN = Pattern.compile("pubmed_cochrane_reviews|dare|acpjc");
 
     private static final Pattern ENGINEID_PATTERN = Pattern.compile("_content_\\d+");
+
+    private static final int EXACT_TITLE = 100;
 
     private static final Pattern HALF_WEIGHT_PATTERN = Pattern.compile(
             "^bmj_clinical_evidence|pubmed_(clinicaltrial|recent_reviews|treatment_focused|diagnosis_focused|prognosis_focused|harm_focused|etiology_focused|epidemiology_focused)");
@@ -19,9 +23,29 @@ public class ScoreStrategy {
 
     private static final int MIN_SCORE = -10;
 
+    private static final int NO_MATCH = 1;
+
     private static final Pattern QUARTER_WEIGHT_PATTERN = Pattern.compile("aafp_patients|medlineplus_0");
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+
+    private static final int TITLE_AND_DESC = 30;
+
+    private static final int TITLE_AND_MULTI_DESC = 40;
+
+    private static final int TITLE_BEGINS = 65;
+
+    private static final int TITLE_BEGINS_AND_MULTI_TITLE = 70;
+
+    private static final int TITLE_BEGINS_AND_MULTI_TITLE_AND_DESC = 80;
+
+    private static final int TITLE_BEGINS_AND_MULTI_TITLE_AND_MULTI_DESC = 90;
+
+    private static final int TITLE_CONTAINS_AND_MULTI_TITLE = 50;
+
+    private static final int TITLE_CONTAINS_AND_MULTI_TITLE_AND_MULTI_DESC = 60;
+
+    private static final int TITLE_ONLY = 20;
 
     /**
      * <pre>
@@ -53,9 +77,9 @@ public class ScoreStrategy {
         if (titleHits > 0) {
             score = getScoreWhenTitleHits(queryTermPattern, title, titleHits, descriptionHits);
         } else if (descriptionHits > 0) {
-            score = 10;
+            score = DESC_ONLY;
         } else {
-            score = 1;
+            score = NO_MATCH;
         }
         double weight = computeWeight(ENGINEID_PATTERN.matcher(searchResult.getId()).replaceFirst(""));
         score = (int) ((score + computeDateAdjustment(searchResult.getYear())) * weight);
@@ -93,9 +117,9 @@ public class ScoreStrategy {
     private int getScoreWhenMultipleTitleHits(final int descriptionHits) {
         int score;
         if (descriptionHits > 1) {
-            score = 60;
+            score = TITLE_CONTAINS_AND_MULTI_TITLE_AND_MULTI_DESC;
         } else {
-            score = 50;
+            score = TITLE_CONTAINS_AND_MULTI_TITLE;
         }
         return score;
     }
@@ -105,16 +129,16 @@ public class ScoreStrategy {
         int score;
         if (titleHits > 1) {
             if (descriptionHits > 1) {
-                score = 90;
+                score = TITLE_BEGINS_AND_MULTI_TITLE_AND_MULTI_DESC;
             } else if (descriptionHits == 1) {
-                score = 80;
+                score = TITLE_BEGINS_AND_MULTI_TITLE_AND_DESC;
             } else {
-                score = 70;
+                score = TITLE_BEGINS_AND_MULTI_TITLE;
             }
         } else if (isExactTitle(queryTermPattern, title)) {
-            score = 100;
+            score = EXACT_TITLE;
         } else {
-            score = 65;
+            score = TITLE_BEGINS;
         }
         return score;
     }
@@ -127,11 +151,11 @@ public class ScoreStrategy {
         } else if (titleHits > 1) {
             score = getScoreWhenMultipleTitleHits(descriptionHits);
         } else if (descriptionHits > 1) {
-            score = 40;
+            score = TITLE_AND_MULTI_DESC;
         } else if (descriptionHits == 1) {
-            score = 30;
+            score = TITLE_AND_DESC;
         } else {
-            score = 20;
+            score = TITLE_ONLY;
         }
         return score;
     }

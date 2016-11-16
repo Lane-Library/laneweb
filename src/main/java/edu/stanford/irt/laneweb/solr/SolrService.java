@@ -33,6 +33,8 @@ public class SolrService {
 
     private static final String AND = " AND ";
 
+    private static final String DATE_QUERY_PREFIX = "date:[";
+
     private static final String EMPTY = "";
 
     private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
@@ -40,7 +42,15 @@ public class SolrService {
 
     private static final String NULL_TYPE = "null type";
 
+    private static final int PAGE_SIZE = 10;
+
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+
+    private static final int PAST_FIVE_YEARS = THIS_YEAR - 5;
+
+    private static final int PAST_TEN_YEARS = THIS_YEAR - 10;
+
+    private static final int PAST_YEAR = THIS_YEAR - 1;
 
     private SolrQueryParser parser;
 
@@ -82,9 +92,9 @@ public class SolrService {
         facetOptions.addFacetOnFlieldnames(FACET_FIELDS);
         facetOptions.setFacetMinCount(1);
         facetOptions.setFacetLimit(facetLimit);
-        facetOptions.addFacetQuery(new SimpleQuery("date:[" + (THIS_YEAR - 1) + monthDay + " TO *]"));
-        facetOptions.addFacetQuery(new SimpleQuery("date:[" + (THIS_YEAR - 5) + monthDay + " TO *]"));
-        facetOptions.addFacetQuery(new SimpleQuery("date:[" + (THIS_YEAR - 10) + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_YEAR + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_FIVE_YEARS + monthDay + " TO *]"));
+        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_TEN_YEARS + monthDay + " TO *]"));
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(facetOptions);
         fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {
@@ -110,13 +120,6 @@ public class SolrService {
         return this.repository.browseAllByMeshAndType(mesh, type, new PageRequest(0, Integer.MAX_VALUE));
     }
 
-    public List<Eresource> getSubset(final String subset) {
-        if (null == subset) {
-            throw new IllegalArgumentException("null subset");
-        }
-        return this.repository.browseAllBySubset(subset, new PageRequest(0, Integer.MAX_VALUE));
-    }
-
     public List<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
@@ -133,8 +136,8 @@ public class SolrService {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        return this.repository.browseByTypeTitleStartingWith(type,
-                Character.toString(sAlpha), new PageRequest(0, Integer.MAX_VALUE));
+        return this.repository.browseByTypeTitleStartingWith(type, Character.toString(sAlpha),
+                new PageRequest(0, Integer.MAX_VALUE));
     }
 
     public Map<String, Long> searchCount(final String query) {
@@ -165,13 +168,12 @@ public class SolrService {
     public List<Eresource> suggestFindAll(final String query) {
         String cleanQuery = this.parser.parse(query);
         return this.repository.suggestFindAll(cleanQuery.toLowerCase(), cleanQuery.replaceAll(" ", " +"),
-                new PageRequest(0, 10));
+                new PageRequest(0, PAGE_SIZE));
     }
 
     public List<Eresource> suggestFindByType(final String query, final String type) {
         String cleanQuery = this.parser.parse(query);
-        return this.repository.suggestFindByType(cleanQuery, type,
-                new PageRequest(0, 10));
+        return this.repository.suggestFindByType(cleanQuery, type, new PageRequest(0, PAGE_SIZE));
     }
 
     private String facetStringToFilters(final String facets) {

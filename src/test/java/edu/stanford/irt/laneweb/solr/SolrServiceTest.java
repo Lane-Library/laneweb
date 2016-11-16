@@ -106,20 +106,6 @@ public class SolrServiceTest {
     }
 
     @Test
-    public final void testGetSubset() {
-        expect(this.repository.browseAllBySubset(eq("subset"), isA(PageRequest.class)))
-                .andReturn(Collections.emptyList());
-        replay(this.repository);
-        this.solrService.getSubset("subset");
-        verify(this.repository);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetSubsetException() {
-        this.solrService.getSubset(null);
-    }
-
-    @Test
     public final void testGetTypeString() {
         expect(this.repository.browseAllByType(eq("type"), isA(PageRequest.class))).andReturn(Collections.emptyList());
         replay(this.repository);

@@ -8,6 +8,8 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class FlickrPhotoGenerator extends AbstractGenerator {
 
+    private static final int RANDOM_PHOTO_COUNT = 6;
+
     private FlickrPhotoListService service;
 
     private SAXStrategy<List<FlickrPhoto>> strategy;
@@ -19,6 +21,6 @@ public class FlickrPhotoGenerator extends AbstractGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        this.strategy.toSAX(this.service.getRandomPhotos(6), xmlConsumer);
+        this.strategy.toSAX(this.service.getRandomPhotos(RANDOM_PHOTO_COUNT), xmlConsumer);
     }
 }

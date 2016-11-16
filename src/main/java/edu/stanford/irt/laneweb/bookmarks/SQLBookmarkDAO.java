@@ -25,6 +25,8 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class SQLBookmarkDAO implements BookmarkDAO {
 
+    private static final int BYTES = 2;
+
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE ID = ?";
 
     private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (ID, BOOKMARKS) VALUES (?, ?)";
@@ -34,6 +36,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE ID = ?";
 
     private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
+
+    private static final int USER_ID = 1;
 
     private DataSource dataSource;
 
@@ -111,8 +115,8 @@ public class SQLBookmarkDAO implements BookmarkDAO {
                 oop.writeObject(Serializable.class.cast(links));
                 oop.flush();
                 insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
-                insertStatement.setString(1, userid);
-                insertStatement.setBytes(2, baos.toByteArray());
+                insertStatement.setString(USER_ID, userid);
+                insertStatement.setBytes(BYTES, baos.toByteArray());
                 insertStatement.executeUpdate();
             }
             conn.commit();

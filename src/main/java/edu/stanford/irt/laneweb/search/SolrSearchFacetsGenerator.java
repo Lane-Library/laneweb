@@ -33,6 +33,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private static final String MESH = "mesh";
 
+    private static final int PAGE_SIZE = 1000;
+
     private static final String PUBLICATION_TYPE = "publicationType";
 
     private FacetComparator comparator;
@@ -186,8 +188,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         }
         long count = facetList.stream().filter(s -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
         if (count < this.prioritizedPublicationTypes.size()) {
-            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0, 1000, 1,
-                    parseSort());
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0,
+                    PAGE_SIZE, 1, parseSort());
             Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
             facetList = publicationTypeFacetMap.get(PUBLICATION_TYPE);
             if (null != facetList) {

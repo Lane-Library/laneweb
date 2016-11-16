@@ -28,6 +28,11 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
     }
 
     @Override
+    protected StringBuilder createKey() {
+        return new StringBuilder("p=;a=;t=").append(this.type);
+    }
+
+    @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
         List<Eresource> list;
         if (this.type == null) {

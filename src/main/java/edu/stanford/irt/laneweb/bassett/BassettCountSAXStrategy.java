@@ -26,6 +26,8 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
 
     private static final String SUB_REGION = "sub_region";
 
+    private static final int SUBREGION_AND_UNDERSCORE_LENGTH = (SUB_REGION + "_").length();
+
     private static final String TOTAL = "total";
 
     @Override
@@ -58,7 +60,7 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
             String subRegion = entry.getValue();
             if (subRegion.startsWith(region + "_" + SUB_REGION + "_")) {
                 AttributesImpl attributes = new AttributesImpl();
-                subRegion = subRegion.substring(subRegion.indexOf(SUB_REGION) + 11);
+                subRegion = subRegion.substring(subRegion.indexOf(SUB_REGION) + SUBREGION_AND_UNDERSCORE_LENGTH);
                 attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subRegion.replace('_', ' '));
                 XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
                 XMLUtils.data(xmlConsumer, String.valueOf(entry.getValueCount()));

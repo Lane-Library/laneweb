@@ -15,6 +15,8 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     private static final Result EMPTY_RESULT = Result.newResultBuilder().id("").query(new SimpleQuery("")).build();
 
+    private static final long MAX_WAIT_TIME = 20_000L;
+
     private List<String> engines;
 
     private List<String> facets;
@@ -46,7 +48,7 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     @Override
     protected ClinicalSearchResults doSearch(final String query) {
-        return this.factory.createResults(search(new SimpleQuery(query), this.engines, 20000L), query, this.facets,
+        return this.factory.createResults(search(new SimpleQuery(query), this.engines, MAX_WAIT_TIME), query, this.facets,
                 this.page);
     }
 
