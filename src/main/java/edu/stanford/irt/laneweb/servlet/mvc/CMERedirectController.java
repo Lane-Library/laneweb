@@ -21,6 +21,8 @@ public class CMERedirectController {
 
     private static final String ERROR_URL = "/cmeRedirectError.html";
 
+    private static final String LPCH_EMRID_ARGS = "unid=?&srcsys=EPICLPCH90710&eiv=2.1.0";
+
     private static final String PROXY_LINK = "https://login.laneproxy.stanford.edu/login?url=";
 
     private static final Pattern QUESTION_MARK_PATTERN = Pattern.compile("\\?");
@@ -97,7 +99,11 @@ public class CMERedirectController {
         } else {
             String args;
             if (emrid != null) {
-                args = QUESTION_MARK_PATTERN.matcher(SHC_EMRID_ARGS).replaceFirst(emrid);
+                if (emrid.toLowerCase().startsWith("lpch-")) {
+                    args = QUESTION_MARK_PATTERN.matcher(LPCH_EMRID_ARGS).replaceFirst(emrid);
+                } else {
+                    args = QUESTION_MARK_PATTERN.matcher(SHC_EMRID_ARGS).replaceFirst(emrid);
+                }
             } else {
                 args = QUESTION_MARK_PATTERN.matcher(SU_USERID_ARGS).replaceFirst(removeDomainFromUserHash(userHash));
             }
