@@ -25,11 +25,11 @@ public class LogoutServlet extends HttpServlet {
         Cookie userCookie = new Cookie(CookieName.USER.toString(), null);
         userCookie.setPath("/");
         userCookie.setMaxAge(0);
+        userCookie.setHttpOnly(true);
         resp.addCookie(userCookie);
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
-        cookie.setHttpOnly(true);
         resp.addCookie(cookie);
         Cookie ezproxyCookie = new Cookie(CookieName.EZPROXY.toString(), null);
         ezproxyCookie.setPath("/");
