@@ -39,7 +39,7 @@
     border-bottom: 1px solid #902827;
 }
 
-#laneFooter a {
+#laneFooter a, #laneFooter a .fa {
     color: white;
 }
 
