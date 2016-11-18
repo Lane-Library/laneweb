@@ -104,8 +104,7 @@ public class CMERedirectController {
             orgid = ORGID_EZP;
         }
         args = QUESTION_MARK_PATTERN.matcher(UTD_CME_ARGS).replaceFirst(userid);
-        args = QUESTION_MARK_PATTERN.matcher(args).replaceFirst(orgid);
-        return args;
+        return QUESTION_MARK_PATTERN.matcher(args).replaceFirst(orgid);
     }
 
     private String createCMELink(final String url, final String emrid, final String userHash,
