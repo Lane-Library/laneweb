@@ -316,9 +316,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>coursereserves</artifactId>
-        	<version>2.1.1</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>coursereserves</artifactId>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
@@ -339,9 +339,9 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-        	<groupId>commons-io</groupId>
-        	<artifactId>commons-io</artifactId>
-        	<version>2.5</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
         </dependency>
     </dependencies>
     <build>

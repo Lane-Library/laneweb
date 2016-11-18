@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public abstract class IOUtils {
+public class IOUtils {
 
     private IOUtils() {
         // empty private default constructor
