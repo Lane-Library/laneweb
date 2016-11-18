@@ -134,6 +134,7 @@ public class PersistentLoginController {
         cookie = new Cookie(CookieName.USER.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
+        cookie.setHttpOnly(true);
         response.addCookie(cookie);
     }
 
@@ -151,6 +152,7 @@ public class PersistentLoginController {
             Cookie cookie = new Cookie(CookieName.USER.toString(), token.getEncryptedValue());
             cookie.setPath("/");
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
+            cookie.setHttpOnly(true);
             response.addCookie(cookie);
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.SECOND, PERSISTENT_LOGIN_DURATION);
