@@ -145,7 +145,7 @@ public class SolrService {
 
     public Map<String, Long> searchCount(final String query) {
         Map<String, Long> result = new HashMap<>();
-        SolrResultPage<?> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
+        SolrResultPage<Eresource> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
         result.put("all", Long.valueOf(facets.getTotalElements()));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
             for (FacetFieldEntry entry : page) {

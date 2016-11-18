@@ -40,7 +40,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     @Query(value = "?0", requestHandler = Handlers.FACET)
     @Facet(fields = { "type" }, minCount = 0, limit = 100)
-    public SolrResultPage<?> facetByType(String term, Pageable page);
+    public SolrResultPage<Eresource> facetByType(String term, Pageable page);
 
     @Query(value = "?0", filters = { "?1" }, requestHandler = Handlers.SEARCH)
     public Page<Eresource> searchFindAllWithFilter(String query, String filter, Pageable page);
