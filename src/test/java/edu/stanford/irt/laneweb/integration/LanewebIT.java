@@ -80,6 +80,11 @@ public class LanewebIT {
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
                 .header("X-FORWARDED-FOR", "171.65.1.202")).andExpect(status().isFound())
                 .andExpect(redirectedUrl(redirect3));
+        attributes.put(Model.EMRID, "lpch-emrid");
+        String redirect4 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
+        this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
+                .header("X-FORWARDED-FOR", "10.250.217.148")).andExpect(status().isFound())
+        .andExpect(redirectedUrl(redirect4));
     }
 
     @Test
