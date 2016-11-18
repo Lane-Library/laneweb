@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 import edu.stanford.irt.solr.Image;
 
@@ -48,7 +47,7 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
             XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf('/') + 1));
             endAnchor(xmlConsumer);
         } catch (UnsupportedEncodingException e) {
-            throw new LanewebException(e);
+            throw new SAXException(e);
         }
         endDiv(xmlConsumer);
         endLi(xmlConsumer);

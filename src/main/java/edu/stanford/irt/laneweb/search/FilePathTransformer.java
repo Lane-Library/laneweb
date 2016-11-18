@@ -15,7 +15,6 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class FilePathTransformer extends AbstractCacheableTransformer {
 
@@ -62,7 +61,7 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
             try {
                 source = this.sourceResolver.resolveURI(new URI("file:" + atts.getValue("path")));
             } catch (URISyntaxException e) {
-                throw new LanewebException(e);
+                throw new SAXException(e);
             }
             if (source instanceof Cacheable) {
                 this.validity.add(((Cacheable) source).getValidity());
