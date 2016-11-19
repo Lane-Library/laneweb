@@ -1,6 +1,6 @@
 
 edu.stanford.irt.laneweb.ezproxy-key=
-edu.stanford.irt.laneweb.live-base=file:/afs/ir/group/lane/beta2/live
+edu.stanford.irt.laneweb.live-base=file:/home/tomcat/laneweb-content
 edu.stanford.irt.laneweb.metasearch-failed=
 edu.stanford.irt.laneweb.log.level=
 edu.stanford.irt.laneweb.log.appender=
