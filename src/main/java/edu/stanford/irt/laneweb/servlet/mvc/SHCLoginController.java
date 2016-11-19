@@ -64,15 +64,15 @@ public class SHCLoginController {
         String userid = null;
         String decryptedUnivid = null;
         if (!validateTimestamp(ts)) {
-            errorMsg.append(ERROR_TIMESTAMP + ts);
+            errorMsg.append(ERROR_TIMESTAMP).append(ts);
         } else {
             HttpSession session = request.getSession();
             synchronized (session) {
                 if (!validateAndPopulateEmrid(emrid, session)) {
-                    errorMsg.append(ERROR_EMRID + emrid);
+                    errorMsg.append(ERROR_EMRID).append(emrid);
                 }
                 if (!validateAndPopulateUnivid(univid, session)) {
-                    errorMsg.append(ERROR_UNIVID + univid);
+                    errorMsg.append(ERROR_UNIVID).append(univid);
                 } else {
                     decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
                     userid = getUserId(session, decryptedUnivid);
@@ -80,7 +80,7 @@ public class SHCLoginController {
             }
         }
         if (userid == null && decryptedUnivid != null) {
-            errorMsg.append(ERROR_MISSING_USER_ID + decryptedUnivid);
+            errorMsg.append(ERROR_MISSING_USER_ID).append(decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
             LOG.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
