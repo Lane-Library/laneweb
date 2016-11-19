@@ -160,7 +160,7 @@ public class GoogleTracker {
      * @throws NoSuchAlgorithmException
      */
     private String generateVisitorId() throws NoSuchAlgorithmException {
-        String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
+        String message = this.userAgent + getRandomNumber() + UUID.randomUUID();
         MessageDigest m = MessageDigest.getInstance("MD5");
         m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());
         byte[] sum = m.digest();
@@ -196,7 +196,7 @@ public class GoogleTracker {
         return this.utmaCookie;
     }
 
-    private String getVisitorId() throws NoSuchAlgorithmException, IOException {
+    private String getVisitorId() throws NoSuchAlgorithmException {
         if (null == this.visitorId) {
             this.visitorId = generateVisitorId();
         }
