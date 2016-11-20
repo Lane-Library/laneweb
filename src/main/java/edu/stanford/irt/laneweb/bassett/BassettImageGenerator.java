@@ -50,7 +50,7 @@ public class BassettImageGenerator extends AbstractGenerator implements ModelAwa
             this.region = this.region.replace(' ', '_');
         }
         this.bassettNumber = ModelUtil.getString(model, Model.BASSETT_NUMBER);
-        this.currentPage = Integer.valueOf(ModelUtil.getString(model, Model.PAGE, "1"));
+        this.currentPage = Integer.parseInt(ModelUtil.getString(model, Model.PAGE, "1"));
     }
 
     @Override
