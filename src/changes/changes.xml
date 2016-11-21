@@ -7,6 +7,47 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-11-21" version="3.3.10" description="3.3.10 bug fix release">
+            <action date="2016-11-17" dev="olgary" issue="129526" type="update">
+                fa icons color for links, #laneFooter a .fa {color: white; }
+            </action>
+            <action date="2016-11-14" dev="ryanmax" issue="129414" type="remove">
+                remove i icon from Resource Type in facet browse
+            </action>
+            <action date="2016-11-16" dev="ryanmax" issue="129413" type="update">
+                don't display facet pagination when disabled
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129217" type="update">
+                update fontawesome to version 4.7.0
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129212" type="remove">
+                remove code related to eresources subsets
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129208" type="add">
+                font awesome icon - needs to be added
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129157" type="fix">
+                arrow icon on youtube thumbnails badly positioned
+            </action>
+            <action date="2016-11-17" dev="ceyates" issue="129143" type="remove">
+                remove uses of class="same-height-*" that are no longer used
+            </action>
+            <action date="2016-11-17" dev="olgary" issue="128936" type="remove">
+                remove .detailinfo font color
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="128868" type="update">
+                history.xml footer updates
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="128862" type="update">
+                small edits in the footer css
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="128860" type="remove">
+                remove delay on drop down menus
+            </action>
+            <action date="2016-11-17" dev="ryanmax" issue="109453" type="update">
+                pass IDs from LPCH/Epic for UTD CME
+            </action>
+        </release>
         <release date="2016-11-14" version="3.3.9" description="3.3.9 bug fix release">
             <action date="2016-11-10" dev="ryanmax" issue="129225" type="fix">
                 search: sort links broken
