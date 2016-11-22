@@ -51,7 +51,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         this.facets = ModelUtil.getString(model, Model.FACETS);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
-            this.pageNumber = Integer.valueOf(page) - 1;
+            this.pageNumber = Integer.parseInt(page) - 1;
         }
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.sort = ModelUtil.getString(model, Model.SORT, "");

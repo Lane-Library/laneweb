@@ -170,7 +170,7 @@
                 return query;
             },
             getTrackedExternal = function(node) {
-                var external = false;
+                var external;
                 if (!node.get("hostname")) {
                     external = false;
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node) || isSecureVideo(node)) {
@@ -204,14 +204,8 @@
             },
             isTrackableLocalClick = function(link) {
                 var isTrackable, pathname = link.get("pathname");
-                //track proxy logins
-                if (isProxyOrCMELogin(link)) {
-                    isTrackable = true;
-                    //track cookieFetch.html
-                } else if ((/cookiesFetch/).test(pathname)) {
-                    isTrackable =  true;
-                    //otherwise rely on normal tracking for .html
-                } else if ((/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
+                // rely on page tracking for \.html$ and \/$pages except for cookiesFetch
+                if (!(/cookiesFetch/).test(pathname) && (/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
                     //all others fall through to trackable
                 } else {
@@ -275,10 +269,8 @@
                         link = link.get('parentNode');
                     }
                     if (link) {
-                        // bookmarklet drag or right-click
-                        if (link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
-                            isTrackable = true;
-                        } else if (link.ancestor('.seeAll')) {
+                        // bookmarklet drag or right-click or child of .seeAll
+                        if (link.ancestor('.seeAll') || link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             isTrackable = true;
                         } else {
                             isTrackable = link.getData().isTrackableAsEvent;

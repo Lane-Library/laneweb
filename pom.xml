@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>18</version>
+        <version>19</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.10-SNAPSHOT</version>
+    <version>3.3.11-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -159,17 +159,7 @@
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
             <groupId>org.springframework.ldap</groupId>
-            <version>2.1.0.RELEASE</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-data-commons</artifactId>
-                    <groupId>org.springframework.data</groupId>
-                </exclusion>
-            </exclusions>
+            <version>2.2.0.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-mobile-device</artifactId>
@@ -234,17 +224,6 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>2.0.4.RELEASE</version>
-            <exclusions>
-             <exclusion>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-             </exclusion>
-             <exclusion>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpcore</artifactId>
-             </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>

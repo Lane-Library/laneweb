@@ -41,8 +41,6 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
 
     protected String url;
 
-    private String searchTerm;
-
     private String source;
 
     private String tab = TAB_CONTENT[MAX_REUSE_RIGHTS];
@@ -58,13 +56,13 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
         super.setModel(model);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
-            this.pageNumber = Integer.valueOf(page) - 1;
+            this.pageNumber = Integer.parseInt(page) - 1;
         }
         this.resourceId = ModelUtil.getString(model, Model.RESOURCE_ID);
-        this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.source = ModelUtil.getString(model, Model.SOURCE, "images-");
         this.basePath = ModelUtil.getString(model, Model.BASE_PATH, "");
-        this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
+        String query = ModelUtil.getString(model, Model.QUERY);
+        this.url = "/search.html?q=" + query + "&source=" + this.source;
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
                 this.copyright = "10";
@@ -81,7 +79,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
 
     @Override
     protected SolrImageSearchResult doSearch(final String query) {
-        return doSearch(query, this.basePath.concat(this.url.toString()));
+        return doSearch(query, this.basePath + this.url);
     }
 
     protected SolrImageSearchResult doSearch(final String query, final String path) {
@@ -89,7 +87,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
         return new SolrImageSearchResult(query, pageResult, this.resourceId, facet,
-                this.basePath.concat(this.url.toString()), this.tab, this.source);
+                this.basePath + this.url, this.tab, this.source);
     }
 
     @Override

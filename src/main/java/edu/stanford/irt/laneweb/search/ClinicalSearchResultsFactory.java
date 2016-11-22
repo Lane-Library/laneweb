@@ -24,18 +24,18 @@ public class ClinicalSearchResultsFactory {
         List<Result> resourceResults = result
                 .getChildren()
                 .stream()
-                .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                 .flatMap(r -> r.getChildren().stream())
-                .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                 .collect(Collectors.toList());
         List<SearchResult> results = this.conversionStrategy.convertResult(result);
         int total = results.size();
         if (!facets.isEmpty()) {
             List<Result> facetResult = result.getChildren()
                     .stream()
-                    .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                    .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                     .flatMap(r -> r.getChildren().stream())
-                    .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                    .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                     .filter(r -> facets.contains(r.getId()))
                     .collect(Collectors.toList());
             results = conversionStrategy.convertResults(facetResult, query);

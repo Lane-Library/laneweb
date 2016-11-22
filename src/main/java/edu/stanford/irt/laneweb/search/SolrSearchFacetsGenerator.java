@@ -84,7 +84,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         this.facets = ModelUtil.getString(model, Model.FACETS, EMPTY);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
-            this.pageNumber = Integer.valueOf(page) - 1;
+            this.pageNumber = Integer.parseInt(page) - 1;
         }
         this.query = ModelUtil.getString(model, Model.QUERY);
         this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, EMPTY);
