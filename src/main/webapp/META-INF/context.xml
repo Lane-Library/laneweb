@@ -44,7 +44,4 @@
         minPoolSize = "${edu.stanford.irt.laneweb.db.grandrounds.minPoolSize}"
         maxPoolSize = "${edu.stanford.irt.laneweb.db.grandrounds.maxPoolSize}"
     />
-    <Environment name="metasearch-failed"
-        type="java.lang.String"
-        value="${edu.stanford.irt.laneweb.metasearch-failed}"/>
 </Context>
