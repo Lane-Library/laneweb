@@ -38,11 +38,8 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
                 reportableCause = cause;
                 cause = cause.getCause();
             }
-            if (reportableCause instanceof FileNotFoundException) {
+            if (reportableCause instanceof FileNotFoundException || reportableCause instanceof ClientAbortException) {
                 LOG.warn(reportableCause.toString());
-            } else if (reportableCause instanceof ClientAbortException) {
-                LOG.warn(reportableCause.toString() + " ip=" + request.getRemoteAddr() + " url="
-                        + request.getRequestURL().toString());
             } else {
                 LOG.error(ex.toString(), reportableCause);
             }

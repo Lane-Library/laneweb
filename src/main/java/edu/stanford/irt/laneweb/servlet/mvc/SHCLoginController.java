@@ -83,8 +83,10 @@ public class SHCLoginController {
             errorMsg.append(ERROR_MISSING_USER_ID).append(decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
-            LOG.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
             url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), UTF_8));
+            if (LOG.isInfoEnabled()) {
+                LOG.info(errorMsg.append(" -- emrid:{}, univid:{}, ts:{}").toString(), emrid, univid, ts);
+            }
         }
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
     }
@@ -131,7 +133,7 @@ public class SHCLoginController {
         if (Math.abs(now.getTime() - decryptedTimestamp) < ONE_MINUTE) {
             return true;
         }
-        LOG.error("invalid timestamp -- now: " + now.getTime() + ", timestamp: " + decryptedTimestamp);
+        LOG.error("invalid timestamp -- now: {}, timestamp: {}", now.getTime(), decryptedTimestamp);
         return false;
     }
 }

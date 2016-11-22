@@ -69,7 +69,7 @@ public class LDAPDataAccess {
     public LDAPData getLdapDataForUnivid(final String univid) {
         LDAPData ldapData = doGet("suunivid=" + univid);
         if (ldapData == null) {
-            LDAPDataAccess.LOG.warn("can't find sunetid for univid: " + univid);
+            LDAPDataAccess.LOG.warn("can't find sunetid for univid: {}", univid);
             ldapData = new LDAPData(null, null, univid, false, null);
         }
         return ldapData;

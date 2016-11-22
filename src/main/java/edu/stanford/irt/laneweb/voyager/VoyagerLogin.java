@@ -42,9 +42,9 @@ public class VoyagerLogin {
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         String voyagerURL = ERROR_URL;
         if (pid == null || !PID_PATTERN.matcher(pid).matches()) {
-            LOG.error("bad pid: " + pid);
+            LOG.error("bad pid: {}", pid);
         } else if (univId == null || univId.length() == 0) {
-            LOG.error("bad univId: " + univId);
+            LOG.error("bad univId: {}", univId);
         } else {
             // voyager data prepends 0
             String voyagerUnivId = "0" + univId;
@@ -71,7 +71,7 @@ public class VoyagerLogin {
                     createStmt.executeUpdate();
                     voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
                 } else {
-                    LOG.error("unable to find univId in voyager: " + univId);
+                    LOG.error("unable to find univId in voyager: {}", univId);
                 }
             } catch (SQLException e) {
                 LOG.error(e.getMessage(), e);
