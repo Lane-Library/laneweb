@@ -57,7 +57,7 @@ public class SHCLoginController {
     @RequestMapping(value = "/shclogin")
     public void login(@RequestParam final String emrid, @RequestParam final String univid,
             @RequestParam final String ts, final HttpServletRequest request, final HttpServletResponse response)
-                    throws IOException {
+            throws IOException {
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
         url.append(URLEncoder.encode(emrid, UTF_8));
@@ -67,16 +67,14 @@ public class SHCLoginController {
             errorMsg.append(ERROR_TIMESTAMP).append(ts);
         } else {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                if (!validateAndPopulateEmrid(emrid, session)) {
-                    errorMsg.append(ERROR_EMRID).append(emrid);
-                }
-                if (!validateAndPopulateUnivid(univid, session)) {
-                    errorMsg.append(ERROR_UNIVID).append(univid);
-                } else {
-                    decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
-                    userid = getUserId(session, decryptedUnivid);
-                }
+            if (!validateAndPopulateEmrid(emrid, session)) {
+                errorMsg.append(ERROR_EMRID).append(emrid);
+            }
+            if (!validateAndPopulateUnivid(univid, session)) {
+                errorMsg.append(ERROR_UNIVID).append(univid);
+            } else {
+                decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
+                userid = getUserId(session, decryptedUnivid);
             }
         }
         if (userid == null && decryptedUnivid != null) {

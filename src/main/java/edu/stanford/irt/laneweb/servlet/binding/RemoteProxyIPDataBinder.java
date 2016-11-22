@@ -27,25 +27,23 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         Boolean proxy;
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         HttpSession session = request.getSession();
-        synchronized (session) {
-            boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
-            if (!isSameIP) {
-                session.setAttribute(Model.REMOTE_ADDR, currentIP);
+        boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
+        if (!isSameIP) {
+            session.setAttribute(Model.REMOTE_ADDR, currentIP);
+        }
+        ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+        if (ipGroup == null || !isSameIP) {
+            ipGroup = IPGroup.getGroupForIP(currentIP);
+            session.setAttribute(Model.IPGROUP, ipGroup);
+        }
+        proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+        if (requestParameter != null || proxy == null || !isSameIP) {
+            if (requestParameter == null) {
+                proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
+            } else {
+                proxy = Boolean.valueOf(requestParameter);
             }
-            ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
-            if (ipGroup == null || !isSameIP) {
-                ipGroup = IPGroup.getGroupForIP(currentIP);
-                session.setAttribute(Model.IPGROUP, ipGroup);
-            }
-            proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
-            if (requestParameter != null || proxy == null || !isSameIP) {
-                if (requestParameter == null) {
-                    proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
-                } else {
-                    proxy = Boolean.valueOf(requestParameter);
-                }
-                session.setAttribute(Model.PROXY_LINKS, proxy);
-            }
+            session.setAttribute(Model.PROXY_LINKS, proxy);
         }
         model.put(Model.REMOTE_ADDR, currentIP);
         model.put(Model.IPGROUP, ipGroup);

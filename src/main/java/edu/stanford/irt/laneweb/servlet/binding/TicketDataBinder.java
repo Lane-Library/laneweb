@@ -29,14 +29,12 @@ public class TicketDataBinder implements DataBinder {
         if (userid != null) {
             Ticket ticket;
             HttpSession session = request.getSession();
-            synchronized (session) {
-                // create a new Ticket if it is not in the session or it is not
-                // valid.
-                ticket = (Ticket) session.getAttribute(Model.TICKET);
-                if (ticket == null || !ticket.isValid()) {
-                    ticket = new Ticket(userid, this.ezproxyKey);
-                    session.setAttribute(Model.TICKET, ticket);
-                }
+            // create a new Ticket if it is not in the session or it is not
+            // valid.
+            ticket = (Ticket) session.getAttribute(Model.TICKET);
+            if (ticket == null || !ticket.isValid()) {
+                ticket = new Ticket(userid, this.ezproxyKey);
+                session.setAttribute(Model.TICKET, ticket);
             }
             model.put(Model.TICKET, ticket);
         }

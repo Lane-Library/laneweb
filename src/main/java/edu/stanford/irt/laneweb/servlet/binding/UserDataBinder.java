@@ -22,19 +22,14 @@ public class UserDataBinder implements DataBinder {
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         User user;
         HttpSession session = request.getSession();
-        synchronized (session) {
-            user = (User) session.getAttribute(Model.USER);
-            if (user == null) {
-                user = this.userFactories.stream()
-                        .map(f -> f.createUser(request))
-                        .filter(u -> u != null)
-                        .findFirst()
-                        .orElse(null);
-                if (user != null) {
-                    session.setAttribute(Model.USER, user);
-                    // case 100633: clear Model.PROXY_LINKS if user is logged in
-                    session.removeAttribute(Model.PROXY_LINKS);
-                }
+        user = (User) session.getAttribute(Model.USER);
+        if (user == null) {
+            user = this.userFactories.stream().map(f -> f.createUser(request)).filter(u -> u != null).findFirst()
+                    .orElse(null);
+            if (user != null) {
+                session.setAttribute(Model.USER, user);
+                // case 100633: clear Model.PROXY_LINKS if user is logged in
+                session.removeAttribute(Model.PROXY_LINKS);
             }
         }
         putUserInModel(user, model);
