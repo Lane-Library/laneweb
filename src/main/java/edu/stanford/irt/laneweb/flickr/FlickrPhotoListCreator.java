@@ -28,8 +28,6 @@ public class FlickrPhotoListCreator {
 
     private ObjectMapper objectMapper;
 
-    private List<String> photoList;
-
     private String urlFormat;
 
     public FlickrPhotoListCreator(final String apiKey, final String urlFormat, final ObjectMapper objectMapper) {
@@ -51,8 +49,8 @@ public class FlickrPhotoListCreator {
         for (int page = 1; page <= PAGE_COUNT; page++) {
             photos.addAll(getPhotoMapsForPage(page));
         }
-        this.photoList = photos.stream().map(this::buildString).collect(Collectors.toList());
-        this.photoList.stream().forEach(out::println);
+        List<String> photoList = photos.stream().map(this::buildString).collect(Collectors.toList());
+        photoList.stream().forEach(out::println);
     }
 
     private String buildString(final Map<String, String> m) {
