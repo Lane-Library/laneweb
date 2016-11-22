@@ -42,7 +42,7 @@ public class RemoteProxyIPDataBinder implements DataBinder {
                 if (requestParameter == null) {
                     proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
                 } else {
-                    proxy = Boolean.parseBoolean(requestParameter);
+                    proxy = Boolean.valueOf(requestParameter);
                 }
                 session.setAttribute(Model.PROXY_LINKS, proxy);
             }
