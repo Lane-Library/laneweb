@@ -10,9 +10,9 @@
                 <property name="maximumPoolSize" value="%{edu.stanford.irt.laneweb.db.eresources.maxPoolSize}"/>
                 <property name="dataSourceProperties">
                     <props>
-                        <prop key="url">%{edu.stanford.irt.laneweb.db.eresources.url}</prop>
-                        <prop key="user">%{edu.stanford.irt.laneweb.db.eresources.user}</prop>
-                        <prop key="password">%{edu.stanford.irt.laneweb.db.eresources.password}</prop>
+                        <prop key="url">%{edu.stanford.irt.laneweb.db.eresources.datasource.url}</prop>
+                        <prop key="user">%{edu.stanford.irt.laneweb.db.eresources.datasource.user}</prop>
+                        <prop key="password">%{edu.stanford.irt.laneweb.db.eresources.datasource.password}</prop>
                     </props>
                 </property>
             </bean>
@@ -26,9 +26,9 @@
                 <property name="maximumPoolSize" value="%{edu.stanford.irt.laneweb.db.voyager.maxPoolSize}"/>
                 <property name="dataSourceProperties">
                     <props>
-                        <prop key="url">%{edu.stanford.irt.laneweb.db.voyager.url}</prop>
-                        <prop key="user">%{edu.stanford.irt.laneweb.db.voyager.user}</prop>
-                        <prop key="password">%{edu.stanford.irt.laneweb.db.voyager.password}</prop>
+                        <prop key="url">%{edu.stanford.irt.laneweb.db.voyager.datasource.url}</prop>
+                        <prop key="user">%{edu.stanford.irt.laneweb.db.voyager.datasource.user}</prop>
+                        <prop key="password">%{edu.stanford.irt.laneweb.db.voyager.datasource.password}</prop>
                     </props>
                 </property>
             </bean>
@@ -42,9 +42,9 @@
                 <property name="maximumPoolSize" value="%{edu.stanford.irt.laneweb.db.grandrounds.maxPoolSize}"/>
                 <property name="dataSourceProperties">
                     <props>
-                        <prop key="url">%{edu.stanford.irt.laneweb.db.grandrounds.url}</prop>
-                        <prop key="user">%{edu.stanford.irt.laneweb.db.grandrounds.user}</prop>
-                        <prop key="password">%{edu.stanford.irt.laneweb.db.grandrounds.password}</prop>
+                        <prop key="url">%{edu.stanford.irt.laneweb.db.grandrounds.datasource.url}</prop>
+                        <prop key="user">%{edu.stanford.irt.laneweb.db.grandrounds.datasource.user}</prop>
+                        <prop key="password">%{edu.stanford.irt.laneweb.db.grandrounds.datasource.password}</prop>
                     </props>
                 </property>
             </bean>
