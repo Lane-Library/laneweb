@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
@@ -35,7 +36,7 @@ public abstract class BookmarkController {
         }
     }
 
-    protected void saveLinks(final String userid, final List<Object> links) {
+    protected void saveLinks(final String userid, final List<Bookmark> links) {
         this.bookmarkDAO.saveLinks(userid, links);
     }
 }

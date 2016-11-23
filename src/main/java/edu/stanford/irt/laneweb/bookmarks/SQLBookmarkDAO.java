@@ -52,12 +52,12 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Object> getLinks(final String userid) {
+    public List<Bookmark> getLinks(final String userid) {
         Objects.requireNonNull(userid, "null userid");
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<Object> links = null;
+        List<Bookmark> links = null;
         ObjectInputStream oip = null;
         try {
             conn = this.dataSource.getConnection();
@@ -66,7 +66,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
-                links = (List<Object>) oip.readObject();
+                links = (List<Bookmark>) oip.readObject();
             }
         } catch (SQLException | IOException | ClassNotFoundException e) {
             LOG.error(e.getMessage(), e);
@@ -103,7 +103,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
     }
 
     @Override
-    public void saveLinks(final String userid, final List<Object> links) {
+    public void saveLinks(final String userid, final List<Bookmark> links) {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
         Connection conn = getConnection();
