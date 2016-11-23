@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,6 +37,8 @@ public class BookmarkletControllerTest {
 
     private HttpServletRequest request;
 
+    private HttpSession session;
+
     private UserDataBinder userBinder;
 
     @Before
@@ -46,29 +49,31 @@ public class BookmarkletControllerTest {
         this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.userBinder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
-        this.bookmarks = new ArrayList<Object>();
+        this.session = createMock(HttpSession.class);
+        this.bookmarks = new ArrayList<>();
     }
 
     @Test
     public void testAddBookmark() throws UnsupportedEncodingException {
         this.dao.saveLinks(edu.stanford.irt.laneweb.model.Model.USER_ID, this.bookmarks);
-        replay(this.dao, this.userBinder, this.bookmarkBinder);
+        this.session.setAttribute("bookmarks", this.bookmarks);
+        replay(this.dao, this.userBinder, this.bookmarkBinder, this.session);
         assertEquals("redirect:url", this.controller.addBookmark(null, this.bookmarks,
-                edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label"));
-        verify(this.dao, this.userBinder, this.bookmarkBinder);
+                edu.stanford.irt.laneweb.model.Model.USER_ID, "url", "label", this.session));
+        verify(this.dao, this.userBinder, this.bookmarkBinder, this.session);
     }
 
     @Test
     public void testAddBookmarkNullUserId() throws UnsupportedEncodingException {
-        replay(this.dao, this.userBinder, this.bookmarkBinder);
+        replay(this.dao, this.userBinder, this.bookmarkBinder, this.session);
         assertEquals("redirect:/secure/bookmarklet?url=url&label=label",
-                this.controller.addBookmark(null, this.bookmarks, null, "url", "label"));
-        verify(this.dao, this.userBinder, this.bookmarkBinder);
+                this.controller.addBookmark(null, this.bookmarks, null, "url", "label", this.session));
+        verify(this.dao, this.userBinder, this.bookmarkBinder, this.session);
     }
 
     @Test
     public void testBind() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         expect(this.model.asMap()).andReturn(map).times(2);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)).andReturn(true);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(true);
@@ -79,7 +84,7 @@ public class BookmarkletControllerTest {
 
     @Test
     public void testBindNoUserId() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         expect(this.model.asMap()).andReturn(map).times(2);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)).andReturn(true);
         expect(this.model.containsAttribute(edu.stanford.irt.laneweb.model.Model.USER_ID)).andReturn(false);

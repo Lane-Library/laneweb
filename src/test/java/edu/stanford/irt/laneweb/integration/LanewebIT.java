@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
@@ -51,6 +52,7 @@ public class LanewebIT {
     }
 
     @Test
+    @Ignore // ignore until can find a way to mock remote search
     public void testBioresearchSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk());
@@ -218,34 +220,10 @@ public class LanewebIT {
     }
 
     @Test
-    public void testPubmedSearch() throws Exception {
-        if (pubmedIsReachable()) {
-            Map<String, String> ns = new HashMap<String, String>();
-            ns.put("h", "http://www.w3.org/1999/xhtml");
-            // query term must appear within <strong> in first three results
-            this.mockMvc
-                    .perform(get("/apps/search/content/html/pubmed?q=skin")
-                            .servletPath("/apps/search/content/html/pubmed"))
-                    .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists());
-        }
-    }
-
-    @Test
+    @Ignore // ignore until can find a way to mock remote search
     public void testTextbookSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk());
-    }
-
-    private boolean pubmedIsReachable() {
-        boolean reachable = false;
-        try {
-            if (InetAddress.getByName("www.ncbi.nlm.nih.gov") != null) {
-                reachable = true;
-            }
-        } catch (UnknownHostException e) {
-            //
-        }
-        return reachable;
     }
 
     private boolean solrLaneSearchIsReachable() throws Exception {

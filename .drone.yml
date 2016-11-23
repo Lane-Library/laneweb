@@ -1,0 +1,38 @@
+build:
+  bundle:
+    image: maven:latest
+    commands:
+      - mvn -s settings.xml package
+    when:
+      branches:
+        - master
+
+publish:
+  docker:
+    registry: $$REGISTRY
+    username: $$REGISTRY_USER
+    password: >
+      $$REGISTRY_KEY
+    email: $$REGISTRY_EMAIL
+    repo: som-lane-dev/laneweb
+    tag:
+      - latest
+      - $$COMMIT
+
+notify:
+  slack:
+    webhook_url: $$SLACK_URL
+    channel: $$CHANNEL
+    username: irt-lane/laneweb
+    template: >
+      irt-lane/laneweb build #{{ build.number }} finished with a {{ build.status }} status
+      Build log: https://drone.med.stanford.edu/irt-lane/laneweb/{{ build.number }}
+      Changes: https://gitlab.med.stanford.edu/irt-lane/laneweb/commit/$$COMMIT
+
+  downstream:
+    repositories:
+      - irt-lane/kube-laneweb
+    token: $$DRONE_TOKEN
+    fork: true
+    when:
+      success: true

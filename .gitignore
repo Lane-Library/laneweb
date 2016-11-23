@@ -1,0 +1,11 @@
+target/
+scripts/
+project.properties
+
+
+
+/.settings/
+/.classpath
+/.project
+/.springBeans
+/.gitignore

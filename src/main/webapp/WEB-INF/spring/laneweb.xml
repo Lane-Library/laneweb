@@ -25,6 +25,7 @@
     <import resource="sitemap.xml"/>
     <import resource="source.xml"/>
     <import resource="solr.xml"/>
+    <import resource="spring-session.xml"/>
     <import resource="suggest.xml"/>
     <import resource="trends.xml"/>
     <import resource="voyager.xml"/>
@@ -92,7 +93,8 @@
     <bean class="edu.stanford.irt.laneweb.email.EMailSender">
         <constructor-arg>
             <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-                <property name="host" value="medmail.stanford.edu"/>
+                <property name="host" value="mail.dcs.stanford.edu"/>
+                <property name="port" value="2525"/>
             </bean>
         </constructor-arg>
         <constructor-arg>

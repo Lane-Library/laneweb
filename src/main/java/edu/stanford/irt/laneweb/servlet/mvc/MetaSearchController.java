@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -33,12 +33,12 @@ public class MetaSearchController {
 
     private DataBinder dataBinder;
 
-    private MetaSearchManager manager;
+    private MetaSearchService metaSearchService;
 
     @Autowired
-    public MetaSearchController(final MetaSearchManager manager,
+    public MetaSearchController(final MetaSearchService metaSearchService,
             @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder) {
-        this.manager = manager;
+        this.metaSearchService = metaSearchService;
         this.dataBinder = dataBinder;
     }
 
@@ -63,7 +63,7 @@ public class MetaSearchController {
             @ModelAttribute(Model.BASE_PROXY_URL) final String baseProxyURL) {
         Collection<String> engines = getEnginesForResources(resources);
         Query simpleQuery = new SimpleQuery(query);
-        Result result = this.manager.search(simpleQuery, engines, ONE_MINUTE);
+        Result result = this.metaSearchService.search(simpleQuery, engines, ONE_MINUTE);
         Map<String, Object> resultMap = getMapForResult(result, resources);
         if (proxyLinks) {
             createProxyLinks(resultMap, baseProxyURL);
@@ -116,7 +116,7 @@ public class MetaSearchController {
      */
     private Collection<String> getEnginesForResources(final List<String> resources) {
         Collection<String> engines = new ArrayList<>();
-        Result describeResult = this.manager.describe(new SimpleQuery(""), null);
+        Result describeResult = this.metaSearchService.describe(new SimpleQuery(""), null);
         for (Result engine : describeResult.getChildren()) {
             for (Result resource : engine.getChildren()) {
                 if (resources.contains(resource.getId())) {

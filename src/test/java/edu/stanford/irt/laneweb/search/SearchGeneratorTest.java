@@ -18,7 +18,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -26,7 +25,7 @@ public class SearchGeneratorTest {
 
     private SearchGenerator generator;
 
-    private MetaSearchManager manager;
+    private MetaSearchService metaSearchService;
 
     private Map<String, Object> model;
 
@@ -37,9 +36,9 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.manager = createMock(MetaSearchManager.class);
+        this.metaSearchService = createMock(MetaSearchService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new SearchGenerator(this.manager, this.saxStrategy);
+        this.generator = new SearchGenerator(this.metaSearchService, this.saxStrategy);
         this.result = createMock(Result.class);
         this.model = new HashMap<>();
         this.model.put(Model.QUERY, "query");
@@ -48,46 +47,46 @@ public class SearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearch() {
-        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+        expect(this.metaSearchService.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
                 .andReturn(this.result);
-        replay(this.saxStrategy, this.manager);
+        replay(this.saxStrategy, this.metaSearchService);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager);
+        verify(this.saxStrategy, this.metaSearchService);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+        expect(this.metaSearchService.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
                 .andReturn(this.result);
-        replay(this.saxStrategy, this.manager);
+        replay(this.saxStrategy, this.metaSearchService);
         this.generator.setModel(this.model);
         this.generator.setParameters(Collections.singletonMap("timeout", "foo"));
         this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager);
+        verify(this.saxStrategy, this.metaSearchService);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchTimeout() {
-        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(10L))).andReturn(this.result);
-        replay(this.saxStrategy, this.manager);
+        expect(this.metaSearchService.search(isA(SimpleQuery.class), isNull(Collection.class), eq(10L))).andReturn(this.result);
+        replay(this.saxStrategy, this.metaSearchService);
         this.model.put("timeout", "10");
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager);
+        verify(this.saxStrategy, this.metaSearchService);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchWaitNumberFormatException() {
-        expect(this.manager.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
+        expect(this.metaSearchService.search(isA(SimpleQuery.class), isNull(Collection.class), eq(60000L)))
                 .andReturn(this.result);
-        replay(this.saxStrategy, this.manager, this.result);
+        replay(this.saxStrategy, this.metaSearchService, this.result);
         this.model.put("wait", "foo");
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
-        verify(this.saxStrategy, this.manager, this.result);
+        verify(this.saxStrategy, this.metaSearchService, this.result);
     }
 }
