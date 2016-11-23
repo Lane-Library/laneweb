@@ -11,12 +11,12 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.LifecycleProcessor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.context.support.DefaultLifecycleProcessor;
@@ -55,7 +55,14 @@ import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks" })
+@ComponentScan(basePackages = {
+        "edu.stanford.irt.laneweb.servlet.mvc",
+        "edu.stanford.irt.laneweb.bookmarks"})
+@PropertySource(value={
+    "classpath:/config/application.properties",
+    "file:${user.dir}/application.properties",
+    "file:${spring.config.location}/application.properties"},
+     ignoreResourceNotFound=true)
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private static final int ONE_YEAR_IN_SECONDS = 31536000;
@@ -74,14 +81,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Autowired
     private RedirectHandlerInterceptor redirectHandlerInterceptor;
-
-    @Bean(name = "propertyPlaceholderConfigurer")
-    public static PropertyPlaceholderConfigurer getPropertyPlaceholderConfigurer() {
-        PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
-        // change from default because of maven filter properties seen as properties in dev environment
-        configurer.setPlaceholderPrefix("%{");
-        return configurer;
-    }
 
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
@@ -180,7 +179,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Bean(name = "org.springframework.web.servlet.resource.ResourceHttpRequestHandler/static")
     public HttpRequestHandler getStaticRequestHandler(final ServletContext servletContext,
-            @Value(value = "%{edu.stanford.irt.laneweb.live-base}/") final UrlResource liveBase) {
+            @Value(value = "${edu.stanford.irt.laneweb.live-base}/") final UrlResource liveBase) {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
         handler.setLocations(
                 Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), liveBase }));

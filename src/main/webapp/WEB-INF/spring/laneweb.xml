@@ -313,7 +313,16 @@
     
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <!-- change from default because of maven filter properties seen as properties in dev environment -->
-        <property name="placeholderPrefix" value="%{"></property>
+        <property name="placeholderPrefix" value="%{"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="locations" >
+            <list>
+                <value>classpath:/config/application.properties</value>
+                <value>file:${user.dir}/application.properties</value>
+                <value>file:${spring.config.location}/application.properties</value>
+            </list>
+         </property>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.codec.SHCCodec"

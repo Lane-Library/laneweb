@@ -105,7 +105,7 @@ public class LanewebIT {
 
     /**
      * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in
-     * project.properties.default points to active Solr instance.
+     * a Solr instance is accessible.
      *
      * @throws Exception
      */
