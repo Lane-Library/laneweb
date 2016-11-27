@@ -40,7 +40,7 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(final Object other) {
-        if (other instanceof User) {
+        if (getClass() == other.getClass()) {
             return this.id.equals(((User) other).id);
         }
         return false;
@@ -86,7 +86,8 @@ public class User implements Serializable {
             MessageDigest digest = MessageDigest.getInstance("MD5");
             byte[] bytes = digest.digest(buffer.getBytes(StandardCharsets.UTF_8));
             for (byte element : bytes) {
-                sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
+                sb.append(Integer.toHexString((element & 0xf0) >> 4))
+                .append(Integer.toHexString(element & 0x0f));
             }
         } catch (NoSuchAlgorithmException e) {
             throw new LanewebException(e);

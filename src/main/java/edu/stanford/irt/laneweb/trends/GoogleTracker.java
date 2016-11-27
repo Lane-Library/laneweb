@@ -151,7 +151,7 @@ public class GoogleTracker {
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */
-    private String generateUtmaCookie() throws NoSuchAlgorithmException, IOException {
+    private String generateUtmaCookie() throws NoSuchAlgorithmException {
         return "%3D" + hash(this.domainName) + '.' + hash(getVisitorId()) + ".999.999.999.1%3B";
     }
 
