@@ -137,9 +137,7 @@
             trackable : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get(HOST_NODE).getAttribute("trackable")) {
-                        return true;
-                    } else if (this.get(LOCAL) && (/\.html$/).test(this.get(PATH))) {
+                    if (this.get(LOCAL) && (/\.html$/).test(this.get(PATH))) {
                         return false;
                     } else {
                         return true;
