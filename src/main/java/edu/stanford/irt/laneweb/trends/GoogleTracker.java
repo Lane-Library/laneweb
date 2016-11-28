@@ -189,7 +189,7 @@ public class GoogleTracker {
         return Integer.toString((new Random()).nextInt(Integer.MAX_VALUE));
     }
 
-    private String getUtmaCookie() throws NoSuchAlgorithmException, IOException {
+    private String getUtmaCookie() throws NoSuchAlgorithmException {
         if (null == this.utmaCookie) {
             this.utmaCookie = generateUtmaCookie();
         }
