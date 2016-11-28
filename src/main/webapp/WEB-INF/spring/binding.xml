@@ -217,12 +217,12 @@
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser">
         <constructor-arg value="template"/>
         <constructor-arg>
-            <list>
+            <set>
                 <value>template</value>
                 <value>bassettLargerView</value>
                 <value>none</value>
                 <value>history</value>
-            </list>
+            </set>
         </constructor-arg>
         <constructor-arg>
             <map>

@@ -2,9 +2,9 @@ package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ public class TemplateChooser {
     /** the name of the default template */
     private String defaultTemplate;
 
-    private List<String> existingTemplates;
+    private Set<String> existingTemplates;
 
     /** a Map used internally that contains the compiled regular expressions */
     private Map<String, Pattern> patternMap;
@@ -29,7 +29,7 @@ public class TemplateChooser {
     /** a Map of regular expressions associated with templates */
     private Map<String, String> templateMap = Collections.emptyMap();
 
-    public TemplateChooser(final String defaultTemplate, final List<String> existingTemplates,
+    public TemplateChooser(final String defaultTemplate, final Set<String> existingTemplates,
             final Map<String, String> templateMap) {
         if (null == defaultTemplate) {
             throw new IllegalArgumentException("null defaultTemplate");
