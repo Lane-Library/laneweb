@@ -202,8 +202,8 @@
 
             /**
              * Determine if a link is bookmarkable.  For now true if its display property is inline
-             * or inline-block and it does not contain an img element.  Added #topResources links,
-             * case 71323.  Added logic for if link was already bookmarked case 75199
+             * or inline-block and it does not contain an img element.
+             * Added logic for if link was already bookmarked case 75199
              * added logic for using class="no-bookmarking" for individual nodes and descendants for
              * case 101724
              * 2/4/15 added bookmarkable = false if no href
@@ -217,8 +217,6 @@
                 if (!target.get("href")) {
                     bookmarkable = false;
                 } else if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img") && !target.ancestor(".no-bookmarking", true)) {
-                    bookmarkable = true;
-                } else if (target.ancestor("#topResources")) {
                     bookmarkable = true;
                 }
                 if (bookmarkable) {
