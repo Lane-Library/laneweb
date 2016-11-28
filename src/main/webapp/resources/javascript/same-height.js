@@ -11,7 +11,7 @@
         size = nodes.size(),
         heights,
         i,
-        clazz = "",
+        clazz,
         classes = {},
         regex = /.*(same-height-\d).*/,
         matches;
