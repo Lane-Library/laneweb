@@ -55,7 +55,7 @@ public class Ticket implements Serializable {
         MessageDigest digest = MessageDigest.getInstance("MD5");
         byte[] bytes = digest.digest(buffer.getBytes(StandardCharsets.UTF_8));
         for (byte element : bytes) {
-            sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
+            sb.append(Integer.toHexString((element & 0xf0) >> 4)).append(Integer.toHexString(element & 0x0f));
         }
         return sb.toString();
     }

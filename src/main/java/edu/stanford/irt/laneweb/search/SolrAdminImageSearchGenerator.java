@@ -35,7 +35,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator {
 
     @Override
     protected SolrImageSearchResult doSearch(final String query) {
-        return doSearch(query, this.basePath.concat("/secure/admin").concat(this.url.toString()));
+        return doSearch(query, this.basePath.concat("/secure/admin").concat(this.url));
     }
 
     @Override
