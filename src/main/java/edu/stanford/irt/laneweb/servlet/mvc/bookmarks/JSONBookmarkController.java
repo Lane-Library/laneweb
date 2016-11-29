@@ -78,7 +78,7 @@ public class JSONBookmarkController extends BookmarkController {
             @ModelAttribute(Model.PROXY_LINKS) final Boolean proxyLinks,
             @RequestParam final int i) {
         // TODO: extend Bookmark or create a map to add the proxylink url
-        return (Bookmark) bookmarks.get(i);
+        return bookmarks.get(i);
     }
 
     @RequestMapping(value = "/move", method = RequestMethod.POST, consumes = "application/json")

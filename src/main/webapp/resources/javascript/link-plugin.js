@@ -137,11 +137,7 @@
             trackable : {
                 readOnly : true,
                 valueFn : function() {
-                    if (this.get(LOCAL) && (/\.html$/).test(this.get(PATH))) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    return !(this.get(LOCAL) && (/\.html$/).test(this.get(PATH)));
                 }
             },
             trackingData : {
