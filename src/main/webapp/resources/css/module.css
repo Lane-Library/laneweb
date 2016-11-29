@@ -8,7 +8,7 @@
     box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
 }
 
-.module:after,.module .after{
+.module:after, .module .after {
     content: ".";
     display: block;
     height: 0;
@@ -62,4 +62,37 @@
 
 .landing-content {
     padding: 12px;
+}
+
+.grand-rounds {
+    margin-top: 12px;
+    padding: 60px;
+}
+
+.new-resource {
+    background-color: none;
+}
+
+.new-resource h3 {
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #8c1515;
+    text-align: left;
+    margin-top: 72px;
+    margin-left: 180px;
+    background-image: none;
+}
+
+.new-resource h3:before {
+    font-family: 'FontAwesome';
+    content: "\f024";
+    display: block;
+    height: 48px;
+    position: relative;
+    width: 48px;
+    margin: 36px auto 0 -50px;
+    margin-top: -84px;
+    text-align: center;
+    font-size: 2em;
+    line-height: 108px;
 }

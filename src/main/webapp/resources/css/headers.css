@@ -1,5 +1,6 @@
 h2 {
-    margin-top: 5px;
+    margin-top: 24px;
+    margin-bottom: 24px;
     font-weight: 400;
     font-size: 28px;
     font-family: 'Fjord One', serif;
@@ -37,6 +38,15 @@ h3, h4 {
     background-repeat: no-repeat;
     background-position: bottom left;
     padding-bottom: 12px;
+}
+
+.grand-rounds h3 {
+	text-transform: uppercase;
+    font-family: 'Fjord One', serif;
+    color: #333333;
+    text-align:center;
+    background-image: none;
+    padding-top:  60px;
 }
 h5 {
     color: #666666;

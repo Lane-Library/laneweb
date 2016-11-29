@@ -1,6 +1,23 @@
+.popular:before {
+    background-color: #8c1515;
+    border-radius: 50px;
+    font-family: 'FontAwesome';
+    content: "\f005";
+    display: block;
+    height: 48px;
+    position: relative;
+    width: 48px;
+    margin: -26px auto 20px auto;
+    margin-top: -84px;
+    color: #fff;
+    text-align:center;
+    font-size:2.5em;
+    line-height: 48px;
+  }
+
 .popular {
     margin-top: 12px;
-    padding: 12px;
+    padding: 60px;
     line-height: 1.6em;
     background-color: #333333;
     color: #ffffff;
@@ -8,13 +25,17 @@
 }
 .popular h3 {
     text-transform: uppercase;
+    font-family: 'Fjord One', serif;
     color: #ffffff;
+    text-align:center;
+    background-image: none;
 }
+
 .popular li {
     border-bottom: none;
 }
 
-.popular:after{
+.popular:after {
     content: ".";
     display: block;
     height: 0;
@@ -23,6 +44,6 @@
     visibility: hidden;
 }
 
-.popular a {
+.popular a, .popular a .fa {
     color: #FFF;
 }
