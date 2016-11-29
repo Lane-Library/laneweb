@@ -4,7 +4,6 @@
  	xmlns:h="http://www.w3.org/1999/xhtml"
 	version="2.0">
 
-
 	<xsl:template match="node()">
 		<xsl:copy>
 			<xsl:apply-templates select="node()|@*" />
@@ -16,10 +15,18 @@
 		<xsl:copy-of select="." />
 	</xsl:template>
 
-
 	<xsl:template match="h:content">
-		<xsl:copy-of select="h:p[position() &lt;= 2]" />
+		<xsl:apply-templates select="h:p[position() &lt; 3]" />
 	</xsl:template>
 
+	
+ 
+	<xsl:template match="h:img">
+		<xsl:copy>
+			 <xsl:attribute name="src" select="@src" />
+			 <xsl:attribute name="height">153</xsl:attribute>
+			 <xsl:attribute name="width">272</xsl:attribute>
+		</xsl:copy>
+	</xsl:template> 
 	
 </xsl:stylesheet>
