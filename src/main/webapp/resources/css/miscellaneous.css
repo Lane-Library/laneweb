@@ -218,3 +218,24 @@ hr {
 	font-size: 13px;
 	color: #333;
 }
+
+/*news feed from the blog on homepage*/
+.newsfeed-item h3 {
+    color: #8c1515;
+    font-size: 18px;
+}
+
+.newsfeed-item time {
+    font-size: 12px;
+    color: #999999;
+    font-family: 'FontAwesome';
+    content: "\f017";
+    display: block;
+}
+
+.newsfeed-item-footer {
+    background-color: #8c1515;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    
+}  
