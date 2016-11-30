@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -26,7 +27,7 @@ public class BookmarkDataBinderTest {
 
     private BookmarkDataBinder binder;
 
-    private List<Object> bookmarks;
+    private List<Bookmark> bookmarks;
 
     private BookmarkDAO dao;
 

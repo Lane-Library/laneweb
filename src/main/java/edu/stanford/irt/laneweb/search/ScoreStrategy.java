@@ -172,13 +172,13 @@ public class ScoreStrategy {
     }
 
     private boolean isExactTitle(final Pattern queryTermPattern, final String title) {
-        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern.toString() + "\\W?)$",
+        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern + "\\W?)$",
                 Pattern.CASE_INSENSITIVE);
         return exactTitlePattern.matcher(title).matches();
     }
 
     private boolean titleBeginsWithTerm(final Pattern queryTermPattern, final String title) {
-        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern.toString() + ").*",
+        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern + ").*",
                 Pattern.CASE_INSENSITIVE);
         return titleBeginsWithPattern.matcher(title).matches();
     }

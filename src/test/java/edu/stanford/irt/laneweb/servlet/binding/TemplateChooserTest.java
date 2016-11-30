@@ -8,8 +8,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +23,7 @@ public class TemplateChooserTest {
 
     private String defaultTemplate = "default";
 
-    private List<String> existingTemplates = Arrays.asList(new String[] { "default", "foo" });
+    private Set<String> existingTemplates = new HashSet<>(Arrays.asList(new String[] { "default", "foo" }));
 
     private HttpServletRequest request;
 

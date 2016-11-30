@@ -32,7 +32,7 @@ public class HTMLBookmarkController extends BookmarkController {
 
     @RequestMapping(params = "action=add")
     public String addBookmark(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             final HttpSession session) {
         bookmarks.add(0, new Bookmark("", ""));
@@ -47,7 +47,7 @@ public class HTMLBookmarkController extends BookmarkController {
 
     @RequestMapping(params = "action=delete")
     public String deleteBookmark(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final int i,
             final HttpSession session) {
@@ -65,7 +65,7 @@ public class HTMLBookmarkController extends BookmarkController {
 
     @RequestMapping(params = "action=save")
     public String saveBookmark(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.BOOKMARKS) final List<Object> bookmarks,
+            @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final int i,
             @RequestParam final String label,

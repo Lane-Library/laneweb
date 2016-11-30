@@ -48,7 +48,7 @@ public class SearchResult implements Comparable<SearchResult> {
     @Override
     public boolean equals(final Object object) {
         boolean equals = false;
-        if (object instanceof SearchResult) {
+        if (object != null && getClass() == object.getClass()) {
             SearchResult other = (SearchResult) object;
             if (other.hashCode() == hashCode()) {
                 equals = compareToIgnoreScore(other) == 0;

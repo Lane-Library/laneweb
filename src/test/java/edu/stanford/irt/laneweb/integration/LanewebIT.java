@@ -146,7 +146,7 @@ public class LanewebIT {
                                     .exists());
             // anatomy images
             this.mockMvc.perform(get("/eresources/search.html?q=anatomy images").servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title='E-anatomy']", ns)
+                    .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title='e-Anatomy']", ns)
                             .exists());
             // UpToDate and variants
             this.mockMvc.perform(get("/eresources/search.html?q=UpToDate").servletPath("/eresources/search.html"))

@@ -1,11 +1,12 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public abstract class SessionParameterDataBinder<T> implements DataBinder {
+public abstract class SessionParameterDataBinder<T extends Serializable> implements DataBinder {
 
     private String modelKey;
 

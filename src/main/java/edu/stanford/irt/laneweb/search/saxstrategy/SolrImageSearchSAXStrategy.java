@@ -292,7 +292,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
             startUlWithClass(xmlConsumer, "pagingLabels");
-            if (!"All".equals(selectedResource) && totalFacet > 1) {
+            if (totalFacet > 1 && !"All".equals(selectedResource)) {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path);
                 XMLUtils.data(xmlConsumer, "All (" + nf.format(totalElement) + ")");

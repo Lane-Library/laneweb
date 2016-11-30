@@ -34,7 +34,7 @@ public class JSONBookmarkControllerTest {
 
     private BookmarkDAO bookmarkDAO;
 
-    private List<Object> bookmarks;
+    private List<Bookmark> bookmarks;
 
     private JSONBookmarkController controller;
 
@@ -67,7 +67,7 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
+        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark })));
         this.session.setAttribute(eq(Model.BOOKMARKS),
                 eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
         replay(this.bookmarkDAO, this.session);
@@ -130,7 +130,7 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<>();
         json.put("to", 1);
         json.put("from", 8);
-        Capture<List<Object>> capture = newCapture();
+        Capture<List<Bookmark>> capture = newCapture();
         this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         this.session.setAttribute(eq(Model.BOOKMARKS), isA(List.class));
         replay(this.bookmarkDAO, this.session);
@@ -159,7 +159,7 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<>();
         json.put("to", 8);
         json.put("from", 1);
-        Capture<List<Object>> capture = newCapture();
+        Capture<List<Bookmark>> capture = newCapture();
         this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         this.session.setAttribute(eq(Model.BOOKMARKS), isA(List.class));
         replay(this.bookmarkDAO, this.session);

@@ -51,7 +51,7 @@ public class Bookmark implements Serializable {
     @Override
     public boolean equals(final Object other) {
         boolean equals = false;
-        if (other instanceof Bookmark && other.hashCode() == hashCode()) {
+        if (other != null && other.getClass() == getClass() && other.hashCode() == hashCode()) {
             Bookmark that = (Bookmark) other;
             equals = this.label.equals(that.label) && this.url.equals(that.url);
         }

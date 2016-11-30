@@ -18,14 +18,13 @@
     display: block;
 }
 
-.solrFacets .enabled a, .solrFacets .enabled a span {
+.enabled .facetCount, .enabled .facetLabel {
     color: #fff;
 }
 
 .solrFacets .enabled, .facetBrowse .enabled {
     padding: 1px 5px;
     background-color: #333;
-    color: #fff;
 }
 
 .facetBrowse .enabled {

@@ -56,8 +56,9 @@ public class TodaysHours {
     }
 
     private void updateHoursMap() {
-        if (this.hoursFile.lastModified() > this.hoursLastModified) {
-            this.hoursLastModified = this.hoursFile.lastModified();
+        long fileLastModified = this.hoursFile.lastModified();
+        if (fileLastModified > this.hoursLastModified) {
+            this.hoursLastModified = fileLastModified;
             try (InputStream input = new FileInputStream(this.hoursFile)) {
                 this.daysMap = new StreamDaysMapping(input);
             } catch (IOException e) {

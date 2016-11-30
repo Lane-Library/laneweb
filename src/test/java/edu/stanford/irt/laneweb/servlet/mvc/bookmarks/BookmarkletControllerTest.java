@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
+import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
@@ -27,7 +28,7 @@ public class BookmarkletControllerTest {
 
     private BookmarkDataBinder bookmarkBinder;
 
-    private List<Object> bookmarks;
+    private List<Bookmark> bookmarks;
 
     private BookmarkletController controller;
 
