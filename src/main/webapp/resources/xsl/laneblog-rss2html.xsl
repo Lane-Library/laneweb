@@ -18,14 +18,7 @@
 
 
 	<xsl:template match="rss">
-		<hr/>
-		<div class="yui3-g">
-			<xsl:apply-templates select="channel/item[not(category[ . = 'New Resources'])][position() &lt; 3]" />
-		</div>
-		<div>
-			<a href="" >MORE NEWS</a>
-		</div>
-		
+		<xsl:apply-templates select="channel/item[not(category[ . = 'New Resources'])][position() &lt; 3]" />
 	</xsl:template>
 	
 
@@ -42,13 +35,15 @@
 					<xsl:value-of select="content:encoded"></xsl:value-of>
 				</content>
 			</div>
-			<hr/>
-			 <xsl:variable name="date" select="tokenize(pubDate, '\s+')"/>
-			<xsl:value-of select="$date[3]"/>
-			<xsl:text> </xsl:text>
-			<xsl:value-of select="$date[2]"/>
-			<xsl:text> </xsl:text>
-			<xsl:value-of select="$date[4]"/> 
+			 <hr> </hr>
+			 <div>
+				<xsl:variable name="date" select="tokenize(pubDate, '\s+')"/>
+				<xsl:value-of select="$date[3]"/>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="$date[2]"/>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="$date[4]"/>
+			</div>  
 		</div>
 	</xsl:template>
 

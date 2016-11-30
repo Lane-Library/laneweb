@@ -25,7 +25,6 @@
 		<xsl:copy>
 			 <xsl:attribute name="src" select="@src" />
 			 <xsl:attribute name="height">153</xsl:attribute>
-			 <xsl:attribute name="width">272</xsl:attribute>
 		</xsl:copy>
 	</xsl:template> 
 	
