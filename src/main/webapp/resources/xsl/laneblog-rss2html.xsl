@@ -24,7 +24,7 @@
 
 	<xsl:template match="item">
 		<div class="yui3-u-1-2">
-			<div> 
+			<div class="newsfeed-item-title"> 
 				<a href="{link}"
 					title="feed link---{../../channel/title}">
 					<xsl:value-of select="title" />
@@ -36,7 +36,7 @@
 				</content>
 			</div>
 			 <hr> </hr>
-			 <div>
+			 <div class="newsfeed-item-time">
 				<xsl:variable name="date" select="tokenize(pubDate, '\s+')"/>
 				<xsl:value-of select="$date[3]"/>
 				<xsl:text> </xsl:text>

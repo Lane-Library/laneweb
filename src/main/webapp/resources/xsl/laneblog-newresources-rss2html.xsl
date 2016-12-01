@@ -23,19 +23,9 @@
 
 	<xsl:template match="item">
 		<div>
-			<div>
-				<a href="{link}" title="feed link---{../../channel/title}">
-					<xsl:value-of select="title" />
-				</a>
-			</div>
-			<div>
-				<content>
-					<xsl:value-of select="content:encoded"></xsl:value-of>
-				</content>
-			</div>
+			<content>
+				<xsl:value-of select="content:encoded"></xsl:value-of>
+			</content>
 		</div>
 	</xsl:template>
-
-
-
 </xsl:stylesheet>
