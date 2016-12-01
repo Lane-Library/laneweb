@@ -18,14 +18,10 @@
 	<xsl:template match="h:content">
 		<xsl:apply-templates select="h:p[position() &lt; 3]" />
 	</xsl:template>
-
-	
- 
 	<xsl:template match="h:img">
 		<xsl:copy>
 			 <xsl:attribute name="src" select="@src" />
-			 <xsl:attribute name="height">153</xsl:attribute>
+			 <xsl:attribute name="class">scaled-image-85</xsl:attribute>
 		</xsl:copy>
-	</xsl:template> 
-	
+	</xsl:template> 	
 </xsl:stylesheet>
