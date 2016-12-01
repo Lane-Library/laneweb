@@ -8,6 +8,6 @@ public class BooleanSessionParameterDataBinder extends SessionParameterDataBinde
 
     @Override
     protected Boolean getParameterAsObject(final String parameterValue) {
-        return Boolean.parseBoolean(parameterValue);
+        return Boolean.valueOf(parameterValue);
     }
 }

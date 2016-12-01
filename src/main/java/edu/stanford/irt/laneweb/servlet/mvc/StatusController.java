@@ -22,6 +22,8 @@ import edu.stanford.irt.suggest.SuggestionManager;
 @Controller
 public class StatusController {
 
+    private static final int NOT_OK_TIME = 250;
+
     private AbstractSitemapController sitemapController;
 
     private SuggestionManager suggestionManager;
@@ -62,11 +64,11 @@ public class StatusController {
             HttpServletResponse resp = new HttpServletResponseWrapper(response) {
 
                 @Override
-                public ServletOutputStream getOutputStream() throws IOException {
+                public ServletOutputStream getOutputStream() {
                     return new ServletOutputStream() {
 
                         @Override
-                        public void write(final int b) throws IOException {
+                        public void write(final int b) {
                             // do nothing
                         }
                     };
@@ -79,7 +81,7 @@ public class StatusController {
             };
             this.sitemapController.handleRequest(req, resp);
             time = System.currentTimeMillis() - time;
-            sb.append('[').append(time < 250 ? "OK" : "WARN").append("] index.html took ").append(time).append("ms.");
+            sb.append('[').append(time < NOT_OK_TIME ? "OK" : "WARN").append("] index.html took ").append(time).append("ms.");
         } catch (IOException | SitemapException e) {
             sb.append("[ERROR] index.html failed: ").append(e);
         }
@@ -90,7 +92,7 @@ public class StatusController {
         try {
             this.suggestionManager.getSuggestionsForTerm("cardio");
             time = System.currentTimeMillis() - time;
-            sb.append('[').append(time < 250 ? "OK" : "WARN").append("] suggestions took ").append(time).append("ms.");
+            sb.append('[').append(time < NOT_OK_TIME ? "OK" : "WARN").append("] suggestions took ").append(time).append("ms.");
         } catch (LanewebException e) {
             sb.append("[ERROR] suggestions failed: ").append(e);
         }

@@ -131,13 +131,6 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         .areSame('{"label":"Search for: foo bar","url":"/search.html?source=bar%20foo&q=foo%20bar"}', data);
     },
 
-    testTopResourceBookmarkable : function() {
-        var bookmarkable = Y.one("#topResource");
-        bookmarkable.simulate("mouseover");
-        Y.Assert.areSame(1, this.link.get("status"));
-        Y.Assert.areSame(bookmarkable, this.link.get("target"));
-    },
-
     testTimer : function() {
         this.link.set("status", 5);
         this.wait(function() {

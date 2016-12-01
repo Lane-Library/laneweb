@@ -26,7 +26,7 @@ public class Schedule {
      * @return whether or not live chat is available at a particular time.
      */
     public boolean isAvailableAt(final Date date) {
-        boolean available = false;
+        boolean available;
         Calendar calendar = Calendar.getInstance();
         if (date != null) {
             calendar.setTime(date);

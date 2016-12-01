@@ -12,7 +12,7 @@
 		select="replace($query-string,'&amp;page=\d+','')" />
 
 	<xsl:variable name="base-query"
-		select="replace($query-string-no-page,'&amp;sort=(\w| |,|_|%2C)+','')" />
+		select="replace($query-string-no-page,'&amp;sort=(\w| |%20|,|_|%2C)+','')" />
 
 	<xsl:variable name="sorts">
 		<s:sorts>

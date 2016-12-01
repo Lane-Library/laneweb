@@ -7,6 +7,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
  */
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 
 import javax.servlet.http.Cookie;
@@ -34,7 +35,7 @@ public class PersistentLoginController {
     // login duration is two weeks:
     private static final int PERSISTENT_LOGIN_DURATION = 3600 * 24 * 7 * 2;
 
-    private static final String UTF8 = "UTF-8";
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private UserCookieCodec codec;
 
@@ -107,7 +108,7 @@ public class PersistentLoginController {
             sb.append("/myaccounts.html");
         } else {
             try {
-                sb.append(URLDecoder.decode(url, UTF8));
+                sb.append(URLDecoder.decode(url, UTF_8));
             } catch (UnsupportedEncodingException e) {
                 throw new LanewebException("won't happen", e);
             }
@@ -133,6 +134,7 @@ public class PersistentLoginController {
         cookie = new Cookie(CookieName.USER.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
+        cookie.setHttpOnly(true);
         response.addCookie(cookie);
     }
 
@@ -150,6 +152,7 @@ public class PersistentLoginController {
             Cookie cookie = new Cookie(CookieName.USER.toString(), token.getEncryptedValue());
             cookie.setPath("/");
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
+            cookie.setHttpOnly(true);
             response.addCookie(cookie);
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.SECOND, PERSISTENT_LOGIN_DURATION);

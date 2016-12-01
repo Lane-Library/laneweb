@@ -22,6 +22,8 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class SHCCodec {
 
+    private static final int KEY_ARRAY_LENGTH = 16;
+
     private static final Logger LOG = LoggerFactory.getLogger(SHCCodec.class);
 
     private Cipher cipher;
@@ -33,7 +35,7 @@ public class SHCCodec {
     public SHCCodec(final String key, final String vector) {
         // pad with 0 bytes to 16:
         byte[] src = Base64.decodeBase64(key);
-        byte[] dst = new byte[16];
+        byte[] dst = new byte[KEY_ARRAY_LENGTH];
         System.arraycopy(src, 0, dst, 0, src.length);
         this.secretKey = new SecretKeySpec(dst, "AES");
         this.initialVector = new IvParameterSpec(vector.getBytes(StandardCharsets.US_ASCII));
@@ -46,7 +48,7 @@ public class SHCCodec {
 
     public String decrypt(final String ciphertext) {
         byte[] ciphertextBytes = Base64.decodeBase64(ciphertext);
-        byte[] plaintext = null;
+        byte[] plaintext;
         synchronized (this.cipher) {
             initializeCipher(Cipher.DECRYPT_MODE);
             plaintext = doFinal(ciphertextBytes);
@@ -56,7 +58,7 @@ public class SHCCodec {
 
     public synchronized String encrypt(final String plaintext) {
         byte[] plainTextBytes = plaintext.getBytes(StandardCharsets.UTF_8);
-        byte[] ciphertext = null;
+        byte[] ciphertext;
         synchronized (this.cipher) {
             initializeCipher(Cipher.ENCRYPT_MODE);
             ciphertext = doFinal(plainTextBytes);

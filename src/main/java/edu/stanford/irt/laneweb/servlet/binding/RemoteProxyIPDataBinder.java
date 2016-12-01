@@ -23,29 +23,27 @@ public class RemoteProxyIPDataBinder implements DataBinder {
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
-        IPGroup ipGroup = null;
-        Boolean proxy = null;
+        IPGroup ipGroup;
+        Boolean proxy;
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         HttpSession session = request.getSession();
-        synchronized (session) {
-            boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
-            if (!isSameIP) {
-                session.setAttribute(Model.REMOTE_ADDR, currentIP);
+        boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
+        if (!isSameIP) {
+            session.setAttribute(Model.REMOTE_ADDR, currentIP);
+        }
+        ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+        if (ipGroup == null || !isSameIP) {
+            ipGroup = IPGroup.getGroupForIP(currentIP);
+            session.setAttribute(Model.IPGROUP, ipGroup);
+        }
+        proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+        if (requestParameter != null || proxy == null || !isSameIP) {
+            if (requestParameter == null) {
+                proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
+            } else {
+                proxy = Boolean.valueOf(requestParameter);
             }
-            ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
-            if (ipGroup == null || !isSameIP) {
-                ipGroup = IPGroup.getGroupForIP(currentIP);
-                session.setAttribute(Model.IPGROUP, ipGroup);
-            }
-            proxy = (Boolean) session.getAttribute(Model.PROXY_LINKS);
-            if (requestParameter != null || proxy == null || !isSameIP) {
-                if (requestParameter == null) {
-                    proxy = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
-                } else {
-                    proxy = Boolean.parseBoolean(requestParameter);
-                }
-                session.setAttribute(Model.PROXY_LINKS, proxy);
-            }
+            session.setAttribute(Model.PROXY_LINKS, proxy);
         }
         model.put(Model.REMOTE_ADDR, currentIP);
         model.put(Model.IPGROUP, ipGroup);
@@ -63,10 +61,8 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         String header = request.getHeader(X_FORWARDED_FOR);
         if (header == null) {
             return request.getRemoteAddr();
-        } else if (header.indexOf(',') > -1) {
-            return header.substring(header.lastIndexOf(',') + 1, header.length()).trim();
         } else {
-            return header;
+            return header.split(",")[0];
         }
     }
 }

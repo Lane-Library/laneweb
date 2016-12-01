@@ -10,7 +10,6 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class HTML5Serializer extends TransformerSerializer {
 
@@ -33,7 +32,7 @@ public class HTML5Serializer extends TransformerSerializer {
         try {
             this.outputStream.write(HTML5_DOCTYPE_DECLARATION);
         } catch (IOException e) {
-            throw new LanewebException(e);
+            throw new SAXException(e);
         }
         super.startDocument();
     }

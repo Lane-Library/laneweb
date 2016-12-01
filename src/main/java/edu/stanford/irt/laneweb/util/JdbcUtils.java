@@ -10,9 +10,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 /**
  * shamelessly stolen from org.springframework.jdbc.support.JdbcUtils
  */
-public abstract class JdbcUtils {
+public class JdbcUtils {
 
     private JdbcUtils() {
+        // default empty constructor
     }
 
     /**

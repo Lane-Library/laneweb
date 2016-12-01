@@ -11,6 +11,8 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ClinicalSearchResultsFactory {
 
+    private static final int RESULTS_PER_PAGE = 50;
+
     private ContentResultConversionStrategy conversionStrategy;
 
     public ClinicalSearchResultsFactory(final ContentResultConversionStrategy conversionStrategy) {
@@ -22,25 +24,25 @@ public class ClinicalSearchResultsFactory {
         List<Result> resourceResults = result
                 .getChildren()
                 .stream()
-                .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                 .flatMap(r -> r.getChildren().stream())
-                .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                 .collect(Collectors.toList());
         List<SearchResult> results = this.conversionStrategy.convertResult(result);
         int total = results.size();
         if (!facets.isEmpty()) {
             List<Result> facetResult = result.getChildren()
                     .stream()
-                    .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                    .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                     .flatMap(r -> r.getChildren().stream())
-                    .filter(r -> SearchStatus.SUCCESSFUL.equals(r.getStatus()))
+                    .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                     .filter(r -> facets.contains(r.getId()))
                     .collect(Collectors.toList());
             results = conversionStrategy.convertResults(facetResult, query);
         }
         Collections.sort(results);
         PagingList<SearchResult> searchResults = new PagingList<>(results,
-                new PagingData(results, page, "", 50, Integer.MAX_VALUE));
+                new PagingData(results, page, "", RESULTS_PER_PAGE, Integer.MAX_VALUE));
         return new ClinicalSearchResults(resourceResults, searchResults, total);
     }
 }

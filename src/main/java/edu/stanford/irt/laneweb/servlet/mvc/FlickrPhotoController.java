@@ -15,6 +15,8 @@ import edu.stanford.irt.laneweb.flickr.FlickrPhotoListService;
 @Controller
 public class FlickrPhotoController {
 
+    private static final int RANDOM_PHOTO_COUNT = 6;
+
     private FlickrPhotoListService service;
 
     @Autowired
@@ -26,6 +28,6 @@ public class FlickrPhotoController {
     @ResponseBody
     public List<FlickrPhoto> getFlickrPhotoList(HttpServletResponse response) {
         response.setHeader("Cache-Control", "no-cache");
-        return this.service.getRandomPhotos(6);
+        return this.service.getRandomPhotos(RANDOM_PHOTO_COUNT);
     }
 }

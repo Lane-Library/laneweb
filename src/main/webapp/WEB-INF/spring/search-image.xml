@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:solr="http://www.springframework.org/schema/data/solr"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-2.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/facet-copyright"
         class="edu.stanford.irt.laneweb.search.SolrImageSearchTabGenerator"
@@ -17,26 +21,22 @@
             ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search" />
     </bean> 
 
-
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.SolrImageSearchSAXStrategy">
         <property name="websiteIdMapping" ref="edu.stanford.irt.laneweb.search.websiteIdMaping"/>
     </bean>
-    
-        
+
      <bean name="edu.stanford.irt.cocoon.pipeline.Generator/admin-search-image"
         class="edu.stanford.irt.laneweb.search.SolrAdminImageSearchGenerator">
           <constructor-arg  index="0"  ref="edu.stanford.irt.solr.service"/>
           <constructor-arg  index="1"  ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-admin-image-search"/>
     </bean>
-    
 
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-admin-image-search"
         class="edu.stanford.irt.laneweb.search.saxstrategy.SolrAdminImageSearchSAXStrategy">
         <property name="websiteIdMapping" ref="edu.stanford.irt.laneweb.search.websiteIdMaping"/>
     </bean>
-    
-    
+
     <bean id="edu.stanford.irt.laneweb.search.websiteIdMaping" class="org.springframework.beans.factory.config.MapFactoryBean">
         <property name="sourceMap">
             <map>
@@ -55,6 +55,14 @@
         </property>
     </bean>
 
-    <import resource="classpath:solr-image-search.xml" />
+    <context:component-scan base-package="edu.stanford.irt.solr.service" />
+
+    <solr:solr-client id="solrSearcherServer" url="%{laneweb.solr-url-imageSearch}"/> 
+    <solr:solr-client id="solrIndexerServer" url="%{laneweb.solr-url-indexer-imageSearch}"/> 
+
+    <solr:repositories base-package="edu.stanford.irt.solr.repository.search"   multicore-support="true" solr-client-ref="solrSearcherServer"></solr:repositories>
+    <solr:repositories base-package="edu.stanford.irt.solr.repository.index"   multicore-support="true" solr-client-ref="solrIndexerServer"></solr:repositories>
+
+    <bean id="edu.stanford.irt.solr.service" class="edu.stanford.irt.solr.service.SolrImageService"/>
 
 </beans>

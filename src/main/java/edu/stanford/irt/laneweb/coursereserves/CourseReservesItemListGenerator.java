@@ -28,7 +28,7 @@ public class CourseReservesItemListGenerator extends AbstractGenerator implement
     @Override
     public void setModel(final Map<String, Object> model) {
         if (model.containsKey(Model.ID)) {
-            this.id = Integer.valueOf(ModelUtil.getString(model, Model.ID));
+            this.id = Integer.parseInt(ModelUtil.getString(model, Model.ID));
         }
     }
 

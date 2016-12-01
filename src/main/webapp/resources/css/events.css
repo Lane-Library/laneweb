@@ -1,26 +1,32 @@
-
 /*styles for classes on homepage*/
-
+.event {
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
 .date{
     text-transform: uppercase;
     text-align: right;
     color: white;
     padding: 4px 4px 20px;
-    width: 48px;
     box-sizing: border-box;
+}
+/* :before rules are about getting colored date box the same height as the .event box */
+.event .date:before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 16.6667%;
+    z-index: -1;
+}
+.grandrounds-date:before {
+    background-color: #09425a;
+}
+.lane-date:before {
+    background-color: #009abb;
 }
 .time{
     font-weight: bold;
-}
-.date.grandrounds-date{
-    background-color: #09425a;
-}
-.date.lane-date{
-    background-color: #009abb;
-}
-.date.healthlibrary-date{
-    background-color: #80982a;
-}
-.date.cme-date{
-    background-color: #b96d12;
 }

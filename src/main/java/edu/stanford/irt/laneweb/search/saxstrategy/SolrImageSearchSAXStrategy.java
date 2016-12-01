@@ -66,8 +66,6 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 
     protected static final String VALUE = "value";
 
-    private NumberFormat nf = NumberFormat.getInstance();
-
     private Map<String, String> websiteIdMapping;
 
     public void setWebsiteIdMapping(final Map<String, String> websiteIdMapping) {
@@ -282,21 +280,22 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
                     totalSelectedFacet = (int) facetFieldEntry.getValueCount();
                 }
             }
+            NumberFormat nf = NumberFormat.getInstance();
             if (!"All".equals(selectedResource)) {
                 XMLUtils.data(xmlConsumer,
-                        getDisplayedResourceName(selectedResource) + " (" + this.nf.format(totalSelectedFacet) + ")");
+                        getDisplayedResourceName(selectedResource) + " (" + nf.format(totalSelectedFacet) + ")");
             } else {
                 XMLUtils.data(xmlConsumer,
-                        getDisplayedResourceName(selectedResource) + " (" + this.nf.format(totalElement) + ")");
+                        getDisplayedResourceName(selectedResource) + " (" + nf.format(totalElement) + ")");
             }
             createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
             startUlWithClass(xmlConsumer, "pagingLabels");
-            if (!"All".equals(selectedResource) && totalFacet > 1) {
+            if (totalFacet > 1 && !"All".equals(selectedResource)) {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path);
-                XMLUtils.data(xmlConsumer, "All (" + this.nf.format(totalElement) + ")");
+                XMLUtils.data(xmlConsumer, "All (" + nf.format(totalElement) + ")");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
             }
@@ -304,7 +303,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
                 XMLUtils.data(xmlConsumer, getDisplayedResourceName(facetFieldEntry.getValue()) + " ("
-                        + this.nf.format(facetFieldEntry.getValueCount()) + ") ");
+                        + nf.format(facetFieldEntry.getValueCount()) + ") ");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
             }

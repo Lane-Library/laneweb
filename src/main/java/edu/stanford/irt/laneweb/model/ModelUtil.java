@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Provides type casting and default values when accessing map values
  */
-public abstract class ModelUtil {
+public class ModelUtil {
 
     private ModelUtil() {
         // empty private default constructor

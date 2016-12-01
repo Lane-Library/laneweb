@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class FlickrPhotoListCreatorTest {
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private FlickrPhotoListCreator creator;
 
@@ -58,7 +61,7 @@ public class FlickrPhotoListCreatorTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream pw = new PrintStream(baos);
         this.creator.printList(pw);
-        assertEquals(this.expected, baos.toString("UTF-8"));
+        assertEquals(this.expected, baos.toString(UTF_8));
         verify(this.objectMapper, this.photo);
     }
 

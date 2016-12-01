@@ -16,6 +16,8 @@ public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     private long creationTime;
 
     private String stringValue;
@@ -30,7 +32,7 @@ public class Ticket implements Serializable {
         Date now = new Date();
         String packet = "$u" + ((int) (now.getTime() / ONE_SECOND)) + "$e";
         try {
-            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + userid + packet) + packet, "UTF-8");
+            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + userid + packet) + packet, UTF_8);
             this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
@@ -53,7 +55,7 @@ public class Ticket implements Serializable {
         MessageDigest digest = MessageDigest.getInstance("MD5");
         byte[] bytes = digest.digest(buffer.getBytes(StandardCharsets.UTF_8));
         for (byte element : bytes) {
-            sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
+            sb.append(Integer.toHexString((element & 0xf0) >> 4)).append(Integer.toHexString(element & 0x0f));
         }
         return sb.toString();
     }

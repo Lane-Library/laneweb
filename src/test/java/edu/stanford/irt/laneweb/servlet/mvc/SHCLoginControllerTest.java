@@ -69,15 +69,96 @@ public class SHCLoginControllerTest {
     }
 
     @Test
+    public void testLoginBadTime() throws IOException {
+        expect(this.codec.decrypt(this.validTimestamp)).andReturn("badtime");
+        expect(this.request.getServerName()).andReturn("server");
+        expect(this.request.getContextPath()).andReturn("");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+timestamp%3A+"
+                        + this.validTimestamp);
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+        this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+    }
+
+    @Test
+    public void testLoginEmptyDecryptedEMRID() throws IOException {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.codec.decrypt(this.validTimestamp)).andReturn(this.validTimestamp);
+        expect(this.codec.decrypt("emrid")).andReturn("");
+        expect(this.codec.decrypt("univid")).andReturn("univid");
+        this.session.setAttribute(Model.UNIVID, "univid");
+        expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn("ditenus");
+        expect(this.request.getServerName()).andReturn("server");
+        expect(this.request.getContextPath()).andReturn("");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+emrid%3A+emrid");
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+        this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+    }
+
+    @Test
+    public void testLoginEmptyDecryptedUNIVID() throws IOException {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.codec.decrypt(this.validTimestamp)).andReturn(this.validTimestamp);
+        expect(this.codec.decrypt("emrid")).andReturn("emrid");
+        expect(this.codec.decrypt("univid")).andReturn("");
+        this.session.setAttribute(Model.EMRID, "epic-emrid");
+        expect(this.request.getServerName()).andReturn("server");
+        expect(this.request.getContextPath()).andReturn("");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+univid%3A+univid");
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+        this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+    }
+
+    @Test
     public void testLoginExpiredTimestamp() throws IOException {
         expect(this.codec.decrypt("123456789")).andReturn("123456789");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
-        this.response
-        .sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+timestamp%3A+123456789");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+timestamp%3A+123456789");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", "123456789", this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+    }
+
+    @Test
+    public void testLoginNullDecryptedEMRID() throws IOException {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.codec.decrypt(this.validTimestamp)).andReturn(this.validTimestamp);
+        expect(this.codec.decrypt("emrid")).andReturn(null);
+        expect(this.codec.decrypt("univid")).andReturn("univid");
+        this.session.setAttribute(Model.UNIVID, "univid");
+        expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
+        expect(this.session.getAttribute(Model.USER_ID)).andReturn("ditenus");
+        expect(this.request.getServerName()).andReturn("server");
+        expect(this.request.getContextPath()).andReturn("");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+emrid%3A+emrid");
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+        this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+    }
+
+    @Test
+    public void testLoginNullDecryptedUNIVID() throws IOException {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.codec.decrypt(this.validTimestamp)).andReturn(this.validTimestamp);
+        expect(this.codec.decrypt("emrid")).andReturn("emrid");
+        expect(this.codec.decrypt("univid")).andReturn(null);
+        this.session.setAttribute(Model.EMRID, "epic-emrid");
+        expect(this.request.getServerName()).andReturn("server");
+        expect(this.request.getContextPath()).andReturn("");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+univid%3A+univid");
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
+        this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
     }
 
     @Test
@@ -132,8 +213,8 @@ public class SHCLoginControllerTest {
         expect(this.ldapData.isActive()).andReturn(Boolean.FALSE);
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
-        this.response
-        .sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+userid+for+univid%3A+univid");
+        this.response.sendRedirect(
+                "https://server/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+userid+for+univid%3A+univid");
         replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
         verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);

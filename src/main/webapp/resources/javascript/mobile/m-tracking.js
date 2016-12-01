@@ -46,7 +46,7 @@ $.LANE.tracking.isExternal = function(node) {
 
 $.LANE.tracking.getTrackingTitle = function(node) {
     // if there is a title attribute, use that.
-    var title = node.title, img, i = 0;
+    var title = node.title, img, i;
     // next try alt attribute.
     if (!title) {
         title = node.alt;

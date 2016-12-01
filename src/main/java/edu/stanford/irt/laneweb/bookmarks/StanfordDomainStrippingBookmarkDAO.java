@@ -17,7 +17,7 @@ public class StanfordDomainStrippingBookmarkDAO implements BookmarkDAO {
     }
 
     @Override
-    public List<Object> getLinks(final String userid) {
+    public List<Bookmark> getLinks(final String userid) {
         return this.bookmarkDAO.getLinks(stripStanfordDomain(userid));
     }
 
@@ -27,7 +27,7 @@ public class StanfordDomainStrippingBookmarkDAO implements BookmarkDAO {
     }
 
     @Override
-    public void saveLinks(final String userid, final List<Object> links) {
+    public void saveLinks(final String userid, final List<Bookmark> links) {
         this.bookmarkDAO.saveLinks(stripStanfordDomain(userid), links);
     }
 

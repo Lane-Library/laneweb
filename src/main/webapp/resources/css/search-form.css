@@ -128,20 +128,7 @@
 .search-tab-active .fa, .search-tab:hover .fa {
     color: #8c1515;
 }
-.qlinks {
-    position: absolute;
-    right: 0;
-    top: 46px;
-}
-.qlinks li {
-    padding: 0 5px;
-    display: inline-block;
-    border-right: 1px dotted #c1c1c1;
-}
-.qlinks li:last-child {
-    border: none;
-}
-#main, .search-form, .search-close, .search-form fieldset, .search-tab, .qlinks {
+#main, .search-form, .search-close, .search-form fieldset, .search-tab {
     transition-property: all;
     transition-duration: .3s;
 }
@@ -168,8 +155,4 @@
 .search-form-active .search-tab {
     margin-top: 0;
     opacity: 1;
-}
-.search-form-active .qlinks {
-    top: 300px;
-    opacity: 0;
 }

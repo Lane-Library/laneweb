@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class RequestParameterDataBinder implements DataBinder {
             { "i", Model.ITEMS } };
 
     private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE },
-            { "s", Model.SUBSET }, { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
+            { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
             { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
             { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
             { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
@@ -30,6 +31,8 @@ public class RequestParameterDataBinder implements DataBinder {
             Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD,
             Model.RELEASE, Model.HOST, Model.SORT, Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN,
             Model.LIMIT, Model.FACET_SORT };
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     /**
      * parameterArrayModelMap contains the mapping of parameter names to model name of model attributes that are Lists
@@ -79,7 +82,7 @@ public class RequestParameterDataBinder implements DataBinder {
             }
             if (this.urlEncodedParameters.containsKey(name)) {
                 try {
-                    model.put(this.urlEncodedParameters.get(name), URLEncoder.encode(value.trim(), "UTF-8"));
+                    model.put(this.urlEncodedParameters.get(name), URLEncoder.encode(value.trim(), UTF_8));
                 } catch (UnsupportedEncodingException e) {
                     throw new LanewebException(e);
                 }

@@ -17,9 +17,6 @@
 			<body>
 				<!-- pull twice the number of seminars requested so seminars.js can hide today's past events and display upcoming ones  -->
 				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= ($number-of-items * 2)]" />
-                <div class="more classes">
-                    <a href="{/s:seminars/@s:url}"><xsl:value-of select="replace($link-label,'(\+|%20)',' ')"/><xsl:text> </xsl:text><i class="icon fa fa-arrow-right"></i></a>
-                </div>
 			</body>
 		</html>
 	</xsl:template>
@@ -69,19 +66,11 @@
 			</xsl:call-template>
 		</xsl:variable>
 
-		<div>
+		<div class="event seminar">
 			<!--  hide events beyond the desired # to display so seminars.js can unhide them if needed -->
 			<xsl:if test="position() > $number-of-items">
 				<xsl:attribute name="style">display:none;</xsl:attribute>
 			</xsl:if>
-			<xsl:attribute name="class">
-				<xsl:text>seminar</xsl:text>
-				<xsl:choose>
-					<!-- see case 98500 align the color blocks for classes -->
-					<xsl:when test="$type='cme' and position() = 1"> same-height-8</xsl:when>
-					<xsl:when test="$type='cme' and position() = 2"> same-height-9</xsl:when>
-				</xsl:choose>
-			</xsl:attribute>
 			<div class="yui3-g">
 				<div>
 					<xsl:attribute name="class">

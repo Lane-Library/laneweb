@@ -1,16 +1,3 @@
-/*
-*
-*  Styles for Lane Mobile site
-*
-*
-*/
-
-/*
-*
-*  General
-*
-*
-*/
 body {
     visibility: hidden;
 }
@@ -26,7 +13,6 @@ body {
     text-shadow: 0 0 0 transparent;
     visibility: visible;
 }
-
 
 .button-close a{
         text-decoration: none;
@@ -54,17 +40,16 @@ body {
     margin: 10px;
 }
 
- .ui-header, 
- .ui-content, 
- .ui-footer { 
+ .ui-header,
+ .ui-content,
+ .ui-footer {
     max-width: 225px;
     background-color: #ffffff;
  }
 
-.ui-content{ 
-      margin: 0 auto 20px auto; 
+.ui-content{
+      margin: 0 auto 20px auto;
 }
-
 
 .ui-mobile .ui-page-active {
     overflow: hidden;
@@ -92,7 +77,7 @@ body {
     box-sizing: border-box;
     border-bottom: solid 1px #651006;
     background: #bdbdbb;
-    background: linear-gradient(to bottom, #ffffff 0%,#bdbdbb 100%);
+    background: linear-gradient(to bottom, #ffffff 0,#bdbdbb 100%);
     position: relative;
     z-index: 202;
 }
@@ -121,12 +106,12 @@ body {
     font-size: 1.3em;
     letter-spacing: 1px;
     text-shadow: 0 1px #ffffff;
-    line-height: 0.8em;
+    line-height: .8em;
     font-weight: bold;
 }
 
 .brandedSiteName .subTitle {
-    font-size: 0.5em;
+    font-size: .5em;
     color: #5c5b5a;
     left: 2px;
     position: relative;
@@ -153,7 +138,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     background: #eeedeb;
-    background: linear-gradient(to bottom, #eeedeb 0%,#ccc8c5 50%,#bbb7b2 51%,#f2ede8 100%);
+    background: linear-gradient(to bottom, #eeedeb 0,#ccc8c5 50%,#bbb7b2 51%,#f2ede8 100%);
 }
 
 .homeBtn.ui-link {
@@ -164,7 +149,7 @@ body {
 
 .webauthLogin.ui-link:active,.homeBtn.ui-link:active {
     background: #f2ede8;
-    background: linear-gradient(to bottom, #f2ede8 0%,#bbb7b2 50%,#ccc8c5 51%,#eeedeb 100%);
+    background: linear-gradient(to bottom, #f2ede8 0,#bbb7b2 50%,#ccc8c5 51%,#eeedeb 100%);
     box-shadow: 0 0 8px #fff;
 }
 
@@ -186,7 +171,7 @@ body {
 }
 
 .search form {
-    background: linear-gradient(to bottom, #de2a29 0%,#762625 50%,#620b09 51%,#620b09 100%);
+    background: linear-gradient(to bottom, #de2a29 0,#762625 50%,#620b09 51%,#620b09 100%);
     margin: 0;
     position: relative;
     text-align: center;
@@ -197,11 +182,11 @@ body {
 
 .search form:nth-child(2),.search form:nth-child(3) {
     background: #620B09;
-    background: linear-gradient(to bottom, #de2a29 0%,#762625 13%,#620b09 14%,#620b09 100%);
+    background: linear-gradient(to bottom, #de2a29 0,#762625 13%,#620b09 14%,#620b09 100%);
 }
 
 .search form.selected {
-    transition: opacity 0.3s ease-in;
+    transition: opacity .3s ease-in;
     height: auto;
     opacity: 1;
 }
@@ -233,8 +218,7 @@ input[type="text"] {
     font-size: 1.3em;
     margin: 10px 0;
     padding: 6px 0 4px 25px;
-    background: url(../../images/mobile/search_bg.png) no-repeat
-        5px 6px #ffffff;
+    background: url('../../images/mobile/search_bg.png') no-repeat 5px 6px #ffffff;
     line-height: 1.5em;
     background-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
@@ -273,8 +257,7 @@ input[type="text"] {
 }
 
 .ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear {
-    background: url(../../images/mobile/clear_search.png) no-repeat
-        right top transparent;
+    background: url('../../images/mobile/clear_search.png') no-repeat right top transparent;
     background-size: 100%;
     margin-top: -9px;
     right: 5px;
@@ -348,7 +331,7 @@ input[type="text"] {
 */
 .searchTabs {
     background: #e7d79f;
-    background: linear-gradient(to bottom, #e7d79f 0%,#9f9065 100%);
+    background: linear-gradient(to bottom, #e7d79f 0,#9f9065 100%);
     display: block;
     width: 100%;
     position: relative;
@@ -372,8 +355,7 @@ input[type="text"] {
     color: #084676;
     margin: 0;
     text-align: center;
-    background: url(../../images/mobile/icon_sprite.png) no-repeat
-        center 11px transparent;
+    background: url('../../images/mobile/icon_sprite.png') no-repeat center 11px transparent;
     background-size: 70px;
     position: relative;
 }
@@ -386,7 +368,7 @@ input[type="text"] {
 .searchTabs li:after,.searchTabs li:before {
     content: " ";
     background: #e7d79f;
-    background: linear-gradient(to bottom, #e7d79f 0%,#9f9065 100%);
+    background: linear-gradient(to bottom, #e7d79f 0,#9f9065 100%);
     width: 4%;
     height: 105px;
     position: absolute;
@@ -490,7 +472,7 @@ input[type="text"] {
 
 .resourceList li:first-child {
     background: #fff;
-    background: linear-gradient(to bottom, #fefffa 0%,#f5f5f5 15%,#f5f5f5 16%,#ffffff 60%);
+    background: linear-gradient(to bottom, #fefffa 0,#f5f5f5 15%,#f5f5f5 16%,#ffffff 60%);
     border-radius: 8px 8px 0 0;
 }
 
@@ -525,12 +507,14 @@ input[type="text"] {
 .resourceList li:last-child a:active {
     border-radius: 0 0 8px 8px;
 }
+
 .resourceList .newWindow, .resourceList .sameWindow {
-    background-image: url(../../images/mobile/link_bg_sprite.png);
+    background-image: url('../../images/mobile/link_bg_sprite.png');
     background-size: 36px;
     background-repeat: no-repeat;
     background-color: transparent;
 }
+
 .newWindow {
     background-position: right -39px;
 }
@@ -541,7 +525,7 @@ input[type="text"] {
 
 .resourceList li:last-child {
     background: #ffffff;
-    background: linear-gradient(to bottom, #ffffff 0%,#ffffff 15%,#ffffff 16%,#f5f3f4 90%,#f5f3f4 91%,#fffefa 100%);
+    background: linear-gradient(to bottom, #ffffff 0,#ffffff 15%,#ffffff 16%,#f5f3f4 90%,#f5f3f4 91%,#fffefa 100%);
     border-bottom: medium none;
     border-radius: 0 0 8px 8px;
 }
@@ -569,7 +553,7 @@ input[type="text"] {
     content: "+";
     font-weight: bold;
     padding: 1px;
-    line-height: 0.6em;
+    line-height: .6em;
     font-size: 1.4em;
     box-sizing: border-box;
     width: 16px;
@@ -579,7 +563,7 @@ input[type="text"] {
     border: 1px solid #9e9d98;
     color: #620b09;
     background: #fdfcf9;
-    background: linear-gradient(to bottom, #fdfcf9 0%,#f1ede2 2%,#ede9dd 3%,#f2ede8 98%,#b4b0a3 99%,#a7a395 100%);
+    background: linear-gradient(to bottom, #fdfcf9 0,#f1ede2 2%,#ede9dd 3%,#f2ede8 98%,#b4b0a3 99%,#a7a395 100%);
     text-shadow: 0 1px #f4f3ef;
     margin: 0 8px 0 0;
 }
@@ -588,7 +572,7 @@ input[type="text"] {
     content: "-";
     font-weight: normal;
     padding: 1px 1px 5px 3px;
-    line-height: 0.3em;
+    line-height: .3em;
     font-size: 1.8em;
 }
 
@@ -623,7 +607,7 @@ input[type="text"] {
 
 /*
 *
-*  Row of buttons below the hours of operation: Phone, Directions, Ask Us 
+*  Row of buttons below the hours of operation: Phone, Directions, Ask Us
 *
 *
 */
@@ -659,7 +643,7 @@ input[type="text"] {
     font-weight: bold;
     font-size: 1.2em;
     background: #fdfcf9;
-    background: linear-gradient(to bottom, #fdfcf9 0%,#f1ede2 2%,#ede9dd 50%,#c4c0b2 98%,#b4b0a3 99%,#a7a395 100%);
+    background: linear-gradient(to bottom, #fdfcf9 0,#f1ede2 2%,#ede9dd 50%,#c4c0b2 98%,#b4b0a3 99%,#a7a395 100%);
     text-shadow: 0 1px #f4f3ef;
     position: relative;
 }
@@ -667,7 +651,7 @@ input[type="text"] {
 .contactButtons li a:active,
 .askUsBtn.ui-link:active {
     background: #a7a395;
-    background: linear-gradient(to bottom, #a7a395 0%,#b4b0a3 2%,#c4c0b2 3%,#ede9dd 98%,#f1ede2 99%,#fdfcf9 100%);
+    background: linear-gradient(to bottom, #a7a395 0,#b4b0a3 2%,#c4c0b2 3%,#ede9dd 98%,#f1ede2 99%,#fdfcf9 100%);
     box-shadow: 0 0 8px #fff;
 }
 
@@ -686,7 +670,7 @@ input[type="text"] {
 
 /*
 *
-*  Row of buttons below the hours of operation: Phone, Directions, Ask Us 
+*  Row of buttons below the hours of operation: Phone, Directions, Ask Us
 *
 *
 */
@@ -700,9 +684,10 @@ input[type="text"] {
     position: absolute;
     bottom: 0;
 }
+
 .footer .ui-link {
     color: #ffffff;
-    font-size: 0.9em;
+    font-size: .9em;
     text-decoration: none;
 }
 
@@ -743,7 +728,7 @@ input[type="text"] {
     color: #920000;
     font-family: 'Arial Narrow', Arial, Tahoma, 'Trebuchet MS', sans-serif;
     font-size: 1.6em;
-    line-height: 0.8em;
+    line-height: .8em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -766,7 +751,7 @@ input[type="text"] {
 .overlayMask {
     background-color: #000000;
     left: 0;
-    opacity: 0.4;
+    opacity: .4;
     position: absolute;
     top: 0;
     z-index: 50;
@@ -775,7 +760,7 @@ input[type="text"] {
 
 /*
 *
-*  Search results page 
+*  Search results page
 *
 *
 */
@@ -802,8 +787,7 @@ input[type="text"] {
 
 .results li a:first-child {
     padding-right: 46px;
-    background: url(../../images/mobile/link_bg_sprite.png)
-        no-repeat right -42px transparent;
+    background: url('../../images/mobile/link_bg_sprite.png') no-repeat right -42px transparent;
     background-size: 32px;
     overflow: visible;
 }
@@ -838,12 +822,12 @@ input[type="text"] {
 
 .results .spell a {
     display: inline;
-    font-weight: bold;    
+    font-weight: bold;
 }
 
 /*
 *
-*  Abstract/info page 
+*  Abstract/info page
 *
 *
 */
@@ -873,10 +857,11 @@ input[type="text"] {
 */
 /* loading icon */
 .ui-loader .ui-icon-loading {
-    background-image: url(../../images/mobile/ajax-loader.gif);
+    background-image: url('../../images/mobile/ajax-loader.gif');
     width: 46px;
     height: 46px;
 }
+
 .ui-loader {
     opacity: .7;
 }

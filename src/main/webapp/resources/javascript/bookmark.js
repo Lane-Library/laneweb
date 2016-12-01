@@ -95,12 +95,7 @@
             if (!newUrl) {
                 throw ("null or empty newUrl");
             }
-            var changed = false;
-            if (newLabel !== this._label) {
-                changed = true;
-            } else if (newUrl !== this._url) {
-                changed = true;
-            }
+            var changed = newLabel !== this._label || newUrl !== this._url;
             if (changed) {
                 this.fire("valueChange", {
                     prevLabel : this._label,

@@ -61,10 +61,10 @@ public class LanewebIT {
         this.mockMvc.perform(get("/redirect/cme")).andExpect(status().isBadRequest());
         this.mockMvc.perform(get("/redirect/cme?url=url")).andExpect(status().isFound())
                 .andExpect(redirectedUrl("/secure/redirect/cme?url=url"));
-        this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com")).andExpect(status().isFound())
-                .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
         Map<String, Object> attributes = new HashMap<String, Object>();
         attributes.put(Model.USER, new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
+        this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes)).andExpect(status().isFound())
+                .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
         String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
         String redirect1 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
@@ -80,6 +80,11 @@ public class LanewebIT {
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
                 .header("X-FORWARDED-FOR", "171.65.1.202")).andExpect(status().isFound())
                 .andExpect(redirectedUrl(redirect3));
+        attributes.put(Model.EMRID, "lpch-emrid");
+        String redirect4 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
+        this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
+                .header("X-FORWARDED-FOR", "10.250.217.148")).andExpect(status().isFound())
+        .andExpect(redirectedUrl(redirect4));
     }
 
     @Test
@@ -100,7 +105,7 @@ public class LanewebIT {
 
     /**
      * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in
-     * project.properties.default points to active Solr instance.
+     * a Solr instance is accessible.
      *
      * @throws Exception
      */
@@ -139,7 +144,7 @@ public class LanewebIT {
                                     .exists());
             // anatomy images
             this.mockMvc.perform(get("/eresources/search.html?q=anatomy images").servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title='E-anatomy']", ns)
+                    .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title='e-Anatomy']", ns)
                             .exists());
             // UpToDate and variants
             this.mockMvc.perform(get("/eresources/search.html?q=UpToDate").servletPath("/eresources/search.html"))

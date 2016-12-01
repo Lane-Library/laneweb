@@ -30,7 +30,7 @@ public class JSONBookmarkControllerTest {
 
     private BookmarkDAO bookmarkDAO;
 
-    private List<Object> bookmarks;
+    private List<Bookmark> bookmarks;
 
     private JSONBookmarkController controller;
 
@@ -41,7 +41,7 @@ public class JSONBookmarkControllerTest {
         this.bookmarkDAO = createMock(BookmarkDAO.class);
         this.controller = new JSONBookmarkController(this.bookmarkDAO, null, null, null);
         this.userid = "ditenus";
-        this.bookmarks = new ArrayList<Object>();
+        this.bookmarks = new ArrayList<Bookmark>();
         this.bookmark = new Bookmark("label", "url");
     }
 
@@ -59,7 +59,7 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
-        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
+        this.bookmarkDAO.saveLinks(eq(this.userid), eq(Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark })));
         replay(this.bookmarkDAO);
         this.controller.deleteBookmark(this.bookmarks, this.userid, "[0,3]");
         verify(this.bookmarkDAO);
@@ -120,7 +120,7 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<String, Integer>();
         json.put("to", 1);
         json.put("from", 8);
-        Capture<List<Object>> capture = newCapture();
+        Capture<List<Bookmark>> capture = newCapture();
         this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         replay(this.bookmarkDAO);
         this.controller.moveBookmark(this.bookmarks, this.userid, json);
@@ -148,7 +148,7 @@ public class JSONBookmarkControllerTest {
         Map<String, Integer> json = new HashMap<String, Integer>();
         json.put("to", 8);
         json.put("from", 1);
-        Capture<List<Object>> capture = newCapture();
+        Capture<List<Bookmark>> capture = newCapture();
         this.bookmarkDAO.saveLinks(eq(this.userid), capture(capture));
         replay(this.bookmarkDAO);
         this.controller.moveBookmark(this.bookmarks, this.userid, json);

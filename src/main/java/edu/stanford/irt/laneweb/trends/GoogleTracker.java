@@ -45,6 +45,8 @@ public class GoogleTracker {
 
     private static final Pattern PLUS_PATTERN = Pattern.compile("\\+");
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     private URLConnectionFactory connectionFactory;
 
     private String domainName;
@@ -132,7 +134,7 @@ public class GoogleTracker {
         if (isEmpty(encodedString)) {
             encodedString = "";
         } else {
-            encodedString = URLEncoder.encode(encodedString, "UTF-8");
+            encodedString = URLEncoder.encode(encodedString, UTF_8);
             encodedString = PLUS_PATTERN.matcher(encodedString).replaceAll("%20");
         }
         return encodedString;
@@ -149,17 +151,16 @@ public class GoogleTracker {
      * @throws IOException
      * @throws NoSuchAlgorithmException
      */
-    private String generateUtmaCookie() throws NoSuchAlgorithmException, IOException {
+    private String generateUtmaCookie() throws NoSuchAlgorithmException {
         return "%3D" + hash(this.domainName) + '.' + hash(getVisitorId()) + ".999.999.999.1%3B";
     }
 
     /**
      * @return a random visitorId
      * @throws NoSuchAlgorithmException
-     * @throws IOException
      */
-    private String generateVisitorId() throws NoSuchAlgorithmException, IOException {
-        String message = this.userAgent + getRandomNumber() + UUID.randomUUID().toString();
+    private String generateVisitorId() throws NoSuchAlgorithmException {
+        String message = this.userAgent + getRandomNumber() + UUID.randomUUID();
         MessageDigest m = MessageDigest.getInstance("MD5");
         m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());
         byte[] sum = m.digest();
@@ -188,14 +189,14 @@ public class GoogleTracker {
         return Integer.toString((new Random()).nextInt(Integer.MAX_VALUE));
     }
 
-    private String getUtmaCookie() throws NoSuchAlgorithmException, IOException {
+    private String getUtmaCookie() throws NoSuchAlgorithmException {
         if (null == this.utmaCookie) {
             this.utmaCookie = generateUtmaCookie();
         }
         return this.utmaCookie;
     }
 
-    private String getVisitorId() throws NoSuchAlgorithmException, IOException {
+    private String getVisitorId() throws NoSuchAlgorithmException {
         if (null == this.visitorId) {
             this.visitorId = generateVisitorId();
         }
@@ -212,7 +213,7 @@ public class GoogleTracker {
         // hash buffer
         int hash = 1;
         // left-most 7 bits
-        int leftMost7 = 0;
+        int leftMost7;
         // character position in string
         int pos;
         // current character in string
