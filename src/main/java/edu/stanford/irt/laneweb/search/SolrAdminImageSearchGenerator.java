@@ -35,13 +35,13 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator {
 
     @Override
     protected SolrImageSearchResult doSearch(final String query) {
-        return doSearch(query, this.basePath.concat("/secure/admin").concat(this.url.toString()));
+        return doSearch(query, this.basePath.concat("/secure/admin").concat(this.url));
     }
 
     @Override
     protected Page<Image> getPage(final String query) {
         PageRequest page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
-        Page<Image> result = null;
+        Page<Image> result;
         if (this.limit == null || "".equals(this.limit)) {
             result = this.service.adminFindByTitleAndDescription(query, this.copyright, this.resourceId, page);
         } else {

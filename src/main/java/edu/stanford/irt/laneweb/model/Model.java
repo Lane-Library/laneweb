@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.model;
 /**
  * Model for sitemap components.
  */
-public abstract class Model {
+public class Model {
 
     public static final String ACTION = "action";
 
@@ -118,8 +118,6 @@ public abstract class Model {
     public static final String SOURCE = "source";
 
     public static final String SOURCEID = "sourceid";
-
-    public static final String SUBSET = "subset";
 
     public static final String TEMPLATE = "template";
 

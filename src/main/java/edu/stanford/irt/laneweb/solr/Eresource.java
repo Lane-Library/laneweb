@@ -171,10 +171,8 @@ public class Eresource {
                 .append(" versions:").append(this.linksList).toString();
     }
 
-    private void parseLink(final Object linkObj, final Map<String, Object> versionMap,
+    private void parseLink(final Map<String, Object> jsonLink, final Map<String, Object> versionMap,
             final boolean isFirstLink) {
-        @SuppressWarnings("unchecked")
-        Map<String, Object> jsonLink = (Map<String, Object>) linkObj;
         String linkLabel = (String) jsonLink.get("label");
         String linkUrl = (String) jsonLink.get("url");
         String linkText = (String) jsonLink.get("linkText");
@@ -203,7 +201,7 @@ public class Eresource {
         int isFirstLink = 0;
         for (Map<String, Object> versionMap : versionData) {
             if (versionMap.containsKey("links")) {
-                for (Object linkObj : (List<Object>) versionMap.get("links")) {
+                for (Map<String, Object> linkObj : (List<Map<String, Object>>) versionMap.get("links")) {
                     parseLink(linkObj, versionMap, isFirstLink++ == 0);
                 }
             }

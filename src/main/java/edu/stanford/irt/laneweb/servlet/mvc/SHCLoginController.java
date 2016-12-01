@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +42,8 @@ public class SHCLoginController {
 
     private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
 
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
     private SHCCodec codec;
 
     private LDAPDataAccess ldapDataAccess;
@@ -54,34 +57,34 @@ public class SHCLoginController {
     @RequestMapping(value = "/shclogin")
     public void login(@RequestParam final String emrid, @RequestParam final String univid,
             @RequestParam final String ts, final HttpServletRequest request, final HttpServletResponse response)
-                    throws IOException {
+            throws IOException {
         StringBuilder errorMsg = new StringBuilder();
         StringBuilder url = new StringBuilder(TARGET_URL);
-        url.append(URLEncoder.encode(emrid, "UTF-8"));
+        url.append(URLEncoder.encode(emrid, UTF_8));
         String userid = null;
         String decryptedUnivid = null;
         if (!validateTimestamp(ts)) {
-            errorMsg.append(ERROR_TIMESTAMP + ts);
+            errorMsg.append(ERROR_TIMESTAMP).append(ts);
         } else {
             HttpSession session = request.getSession();
-            synchronized (session) {
-                if (!validateAndPopulateEmrid(emrid, session)) {
-                    errorMsg.append(ERROR_EMRID + emrid);
-                }
-                if (!validateAndPopulateUnivid(univid, session)) {
-                    errorMsg.append(ERROR_UNIVID + univid);
-                } else {
-                    decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
-                    userid = getUserId(session, decryptedUnivid);
-                }
+            if (!validateAndPopulateEmrid(emrid, session)) {
+                errorMsg.append(ERROR_EMRID).append(emrid);
+            }
+            if (!validateAndPopulateUnivid(univid, session)) {
+                errorMsg.append(ERROR_UNIVID).append(univid);
+            } else {
+                decryptedUnivid = (String) session.getAttribute(Model.UNIVID);
+                userid = getUserId(session, decryptedUnivid);
             }
         }
         if (userid == null && decryptedUnivid != null) {
-            errorMsg.append(ERROR_MISSING_USER_ID + decryptedUnivid);
+            errorMsg.append(ERROR_MISSING_USER_ID).append(decryptedUnivid);
         }
         if (errorMsg.length() > 0) {
-            LOG.info(errorMsg.toString() + " -- emrid:" + emrid + ", univid:" + univid + ", ts:" + ts);
-            url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), "UTF-8"));
+            url.append(AND_ERROR_EQUALS).append(URLEncoder.encode(errorMsg.toString(), UTF_8));
+            if (LOG.isInfoEnabled()) {
+                LOG.info(errorMsg.append(" -- emrid:{}, univid:{}, ts:{}").toString(), emrid, univid, ts);
+            }
         }
         response.sendRedirect("https://" + request.getServerName() + request.getContextPath() + url.toString());
     }
@@ -128,7 +131,7 @@ public class SHCLoginController {
         if (Math.abs(now.getTime() - decryptedTimestamp) < ONE_MINUTE) {
             return true;
         }
-        LOG.error("invalid timestamp -- now: " + now.getTime() + ", timestamp: " + decryptedTimestamp);
+        LOG.error("invalid timestamp -- now: {}, timestamp: {}", now.getTime(), decryptedTimestamp);
         return false;
     }
 }

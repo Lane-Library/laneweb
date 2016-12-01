@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,8 @@ import edu.stanford.irt.laneweb.solr.SolrService;
 public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> implements ParametersAware {
 
     private static final int DEFAULT_RESULTS = 50;
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private String facets;
 
@@ -48,7 +51,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         this.facets = ModelUtil.getString(model, Model.FACETS);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
-            this.pageNumber = Integer.valueOf(page) - 1;
+            this.pageNumber = Integer.parseInt(page) - 1;
         }
         this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.sort = ModelUtil.getString(model, Model.SORT, "");
@@ -59,7 +62,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.TYPE)) {
             try {
-                this.type = URLDecoder.decode(parameters.get(Model.TYPE), "UTF-8");
+                this.type = URLDecoder.decode(parameters.get(Model.TYPE), UTF_8);
             } catch (UnsupportedEncodingException e) {
                 throw new LanewebException("won't happen", e);
             }
@@ -70,7 +73,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
     protected SolrSearchResult doSearch(final String query) {
         Sort sorts = parseSortParam();
         Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
-        Page<Eresource> page = null;
+        Page<Eresource> page;
         if (this.type == null) {
             page = this.solrService.searchWithFilters(query, this.facets, pageRequest);
         } else {

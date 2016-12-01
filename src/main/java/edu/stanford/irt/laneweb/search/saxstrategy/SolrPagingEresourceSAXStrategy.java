@@ -37,7 +37,7 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<SolrSearchRes
         String query = object.getQuery();
         int pageSize = page.getSize();
         int pageNumber = page.getNumber();
-        long start = pageSize * pageNumber;
+        long start = pageSize * (long) pageNumber;
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);

@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,20 +19,20 @@ import org.junit.Test;
 
 public class SessionParameterDataBinderTest {
 
-    private static class TestSessionParameterDataBinder extends SessionParameterDataBinder<Object> {
+    private static class TestSessionParameterDataBinder extends SessionParameterDataBinder<Serializable> {
 
-        private Object object;
+        private Serializable object;
 
         public TestSessionParameterDataBinder(final String modelKey, final String parameterName) {
             super(modelKey, parameterName);
         }
 
-        public void setObject(final Object object) {
+        public void setObject(final Serializable object) {
             this.object = object;
         }
 
         @Override
-        protected Object getParameterAsObject(final String parameterValue) {
+        protected Serializable getParameterAsObject(final String parameterValue) {
             return this.object;
         }
     }
@@ -40,7 +41,7 @@ public class SessionParameterDataBinderTest {
 
     private Map<String, Object> model;
 
-    private Object object;
+    private Serializable object;
 
     private HttpServletRequest request;
 

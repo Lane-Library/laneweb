@@ -21,13 +21,17 @@ public class CMERedirectController {
 
     private static final String ERROR_URL = "/cmeRedirectError.html";
 
+    private static final String ORGID_EZP = "EZPX90710";
+
+    private static final String ORGID_LPCH = "EPICLPCH90710";
+
+    private static final String ORGID_SHC = "epic90710";
+
     private static final String PROXY_LINK = "https://login.laneproxy.stanford.edu/login?url=";
 
     private static final Pattern QUESTION_MARK_PATTERN = Pattern.compile("\\?");
 
-    private static final String SHC_EMRID_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
-
-    private static final String SU_USERID_ARGS = "unid=?&srcsys=EZPX90710&eiv=2.1.0";
+    private static final String UTD_CME_ARGS = "unid=?&srcsys=?&eiv=2.1.0";
 
     private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
 
@@ -54,10 +58,8 @@ public class CMERedirectController {
     @RequestMapping(value = "secure/redirect/cme")
     public void cmeSecureRedirect(@ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.EMRID) final String emrid,
-            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks,
-            @RequestParam final String url,
-            final HttpServletRequest request,
-            final HttpServletResponse response) throws IOException {
+            @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
+            final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         doRedirect(userHash, emrid, proxyLinks, url, request, response);
     }
 
@@ -86,28 +88,38 @@ public class CMERedirectController {
         }
     }
 
+    private String buildArgsFromUserids(final String emrid, final String userHash) {
+        String args;
+        String userid;
+        String orgid;
+        if (emrid != null) {
+            userid = emrid;
+            if (emrid.toLowerCase().startsWith("lpch-")) {
+                orgid = ORGID_LPCH;
+            } else {
+                orgid = ORGID_SHC;
+            }
+        } else {
+            userid = removeDomainFromUserHash(userHash);
+            orgid = ORGID_EZP;
+        }
+        args = QUESTION_MARK_PATTERN.matcher(UTD_CME_ARGS).replaceFirst(userid);
+        return QUESTION_MARK_PATTERN.matcher(args).replaceFirst(orgid);
+    }
+
     private String createCMELink(final String url, final String emrid, final String userHash,
             final boolean proxyLinks) {
         StringBuilder sb = new StringBuilder();
         if (proxyLinks) {
             sb.append(PROXY_LINK);
         }
-        if (emrid == null && userHash == null) {
-            sb.append(url);
+        String args = buildArgsFromUserids(emrid, userHash);
+        if (url.contains("?")) {
+            sb.append(url).append('&').append(args);
+        } else if (url.endsWith("/") || url.endsWith("online") || url.endsWith("search")) {
+            sb.append(UTD_CME_URL).append(args);
         } else {
-            String args = null;
-            if (emrid != null) {
-                args = QUESTION_MARK_PATTERN.matcher(SHC_EMRID_ARGS).replaceFirst(emrid);
-            } else {
-                args = QUESTION_MARK_PATTERN.matcher(SU_USERID_ARGS).replaceFirst(removeDomainFromUserHash(userHash));
-            }
-            if (url.contains("?")) {
-                sb.append(url).append('&').append(args);
-            } else if (url.endsWith("/") || url.endsWith("online") || url.endsWith("search")) {
-                sb.append(UTD_CME_URL).append(args);
-            } else {
-                sb.append(url);
-            }
+            sb.append(url);
         }
         return sb.toString();
     }

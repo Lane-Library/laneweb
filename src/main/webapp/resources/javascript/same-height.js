@@ -1,6 +1,6 @@
 (function() {
 
-    /* javascript to set the height of a group of boxes to the that of the tallest one.
+    /* javascript to set the min-height of a group of boxes to the that of the tallest one.
      * The boxes are grouped using the same-height-n class where n is a number 0-9 */
 
     "use strict";
@@ -11,7 +11,7 @@
         size = nodes.size(),
         heights,
         i,
-        clazz = "",
+        clazz,
         classes = {},
         regex = /.*(same-height-\d).*/,
         matches;
@@ -36,7 +36,7 @@
             maxHeight = Math.max.apply(null, heights);
             // set all of the group to the tallest's height
             for (i = 0; i < size; i++) {
-                nodes.item(i).setStyle("height", maxHeight + "px");
+                nodes.item(i).setStyle("min-height", maxHeight + "px");
             }
         }
     }

@@ -7,6 +7,102 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2016-11-21" version="3.3.10" description="3.3.10 bug fix release">
+            <action date="2016-11-17" dev="olgary" issue="129526" type="update">
+                fa icons color for links, #laneFooter a .fa {color: white; }
+            </action>
+            <action date="2016-11-14" dev="ryanmax" issue="129414" type="remove">
+                remove i icon from Resource Type in facet browse
+            </action>
+            <action date="2016-11-16" dev="ryanmax" issue="129413" type="update">
+                don't display facet pagination when disabled
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129217" type="update">
+                update fontawesome to version 4.7.0
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129212" type="remove">
+                remove code related to eresources subsets
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129208" type="add">
+                font awesome icon - needs to be added
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="129157" type="fix">
+                arrow icon on youtube thumbnails badly positioned
+            </action>
+            <action date="2016-11-17" dev="ceyates" issue="129143" type="remove">
+                remove uses of class="same-height-*" that are no longer used
+            </action>
+            <action date="2016-11-17" dev="olgary" issue="128936" type="remove">
+                remove .detailinfo font color
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="128868" type="update">
+                history.xml footer updates
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="128862" type="update">
+                small edits in the footer css
+            </action>
+            <action date="2016-11-15" dev="ceyates" issue="128860" type="remove">
+                remove delay on drop down menus
+            </action>
+            <action date="2016-11-17" dev="ryanmax" issue="109453" type="update">
+                pass IDs from LPCH/Epic for UTD CME
+            </action>
+        </release>
+        <release date="2016-11-14" version="3.3.9" description="3.3.9 bug fix release">
+            <action date="2016-11-10" dev="ryanmax" issue="129225" type="fix">
+                search: sort links broken
+            </action>
+            <action date="2016-11-09" dev="ceyates" issue="129202" type="fix">
+                software eresource lists show only A titles, some are empty
+            </action>
+            <action date="2016-11-09" dev="ceyates" issue="129199" type="fix">
+                remove 'All' headers
+            </action>
+            <action date="2016-11-09" dev="ceyates" issue="129148" type="fix">
+                search form disappears when clicking on the input
+            </action>
+            <action date="2016-11-08" dev="olgary" issue="129145" type="update">
+                added SHC portal into drop down
+            </action>
+            <action date="2016-11-10" dev="ceyates" issue="129094" type="update">
+                increase the size of the date boxes for GR and classes on the homepage
+            </action>
+            <action date="2016-11-10" dev="ceyates" issue="129092" type="update">
+                center align
+            </action>
+            <action date="2016-11-08" dev="olgary" issue="128936" type="update">
+                change .detailinfo font size to 12px
+            </action>
+            <action date="2016-11-07" dev="ryanmax" issue="128879" type="update">
+                GR calendar display on homepage
+            </action>
+        </release>
+        <release date="2016-11-07" version="3.3.8" description="3.3.8 bug fix release">
+            <action date="2016-11-03" dev="olgary" issue="128935" type="add">
+                added extra sizes for fa - fontawesome.css
+            </action>
+            <action date="2016-11-03" dev="olgary" issue="128912" type="update">
+                increased margins for top resources and changed h3
+            </action>
+            <action date="2016-11-03" dev="olgary" issue="128911" type="update">
+                move .laneContact a few pixels higher
+            </action>
+            <action date="2016-11-02" dev="olgary" issue="128867" type="update">
+                history.xml footer update
+            </action>
+            <action date="2016-11-02" dev="olgary" issue="128817" type="update">
+                template.xml, debug.xml
+            </action>
+            <action date="2016-11-02" dev="ceyates" issue="128816" type="update">
+                site width compared to med.stanford.edu
+            </action>
+            <action date="2016-11-01" dev="ceyates" issue="128781" type="update">
+                respond to /biomed-resources/*.html?a=all requests with ?a=a pages
+            </action>
+            <action date="2016-10-31" dev="ceyates" issue="128720" type="fix">
+                wrong ip address used when x-forwarded-for header has multiple ips
+            </action>
+        </release>
         <release date="2016-10-31" version="3.3.7" description="3.3.7 bug fix release">
             <action date="2016-10-28" dev="olgary" issue="128621" type="update">
                 classes page- horizontal align the instructor box with the description on the top

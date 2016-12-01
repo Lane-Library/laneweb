@@ -28,8 +28,6 @@ public class BibStatusGenerator extends AbstractGenerator implements ParametersA
 
     private Collection<String> bibIds = Collections.emptySet();
 
-    private String bibList;
-
     private SAXParser saxParser;
 
     private SourceResolver sourceResolver;
@@ -41,10 +39,10 @@ public class BibStatusGenerator extends AbstractGenerator implements ParametersA
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
-        this.bibList = parameters.get("bids");
-        if (this.bibList != null) {
+        String bibList = parameters.get("bids");
+        if (bibList != null) {
             this.bibIds = new ArrayList<>();
-            for (String b : this.bibList.split(",")) {
+            for (String b : bibList.split(",")) {
                 this.bibIds.add(b);
             }
         }

@@ -163,7 +163,7 @@ public class MetaSearchController {
         resourceMap.put("url", resource.getURL());
         String hitsString = resource.getHits();
         if (hitsString != null) {
-            resourceMap.put("hits", Integer.parseInt(hitsString));
+            resourceMap.put("hits", Integer.valueOf(hitsString));
         }
         return resourceMap;
     }

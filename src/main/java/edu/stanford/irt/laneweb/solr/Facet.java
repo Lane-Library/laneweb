@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.solr;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -15,6 +16,8 @@ public class Facet {
     private static final String EMPTY = "";
 
     private static final String QUOTE = "\"";
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private String activeFacets;
 
@@ -36,7 +39,7 @@ public class Facet {
         this.value = value;
         this.count = count;
         this.enabled = isEnabled();
-        this.url = getUrl();
+        this.url = createUrl();
     }
 
     public long getCount() {
@@ -48,21 +51,7 @@ public class Facet {
     }
 
     public String getUrl() {
-        if (null != this.url) {
-            return this.url;
-        }
-        String facetUrl = this.url;
-        String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrService.FACETS_SEPARATOR;
-        if (this.enabled) {
-            facetUrl = this.activeFacets.replaceFirst(
-                    "(^|::)" + this.fieldName + COLON + getMaybeQuote() + Pattern.quote(this.value) + getMaybeQuote(),
-                    EMPTY);
-        } else {
-            facetUrl = this.activeFacets + joiner + this.fieldName + COLON + getMaybeQuote() + this.value
-                    + getMaybeQuote();
-        }
-        facetUrl = facetUrl.replaceAll("(^::|::$)", EMPTY);
-        return encodeString(facetUrl);
+        return this.url;
     }
 
     public String getValue() {
@@ -82,10 +71,25 @@ public class Facet {
         return this.value + " = " + this.count + "; enabled=" + this.enabled + "; url=" + this.url;
     }
 
+    private String createUrl() {
+        String facetUrl;
+        String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrService.FACETS_SEPARATOR;
+        if (this.enabled) {
+            facetUrl = this.activeFacets.replaceFirst(
+                    "(^|::)" + this.fieldName + COLON + getMaybeQuote() + Pattern.quote(this.value) + getMaybeQuote(),
+                    EMPTY);
+        } else {
+            facetUrl = this.activeFacets + joiner + this.fieldName + COLON + getMaybeQuote() + this.value
+                    + getMaybeQuote();
+        }
+        facetUrl = facetUrl.replaceAll("(^::|::$)", EMPTY);
+        return encodeString(facetUrl);
+    }
+
     private String encodeString(final String string) {
         String encoded = null;
         try {
-            encoded = URLEncoder.encode(string, "UTF-8");
+            encoded = URLEncoder.encode(string, UTF_8);
         } catch (UnsupportedEncodingException e) {
             throw new LanewebException(e);
         }

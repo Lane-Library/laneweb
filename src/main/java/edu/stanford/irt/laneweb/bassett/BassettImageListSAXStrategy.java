@@ -106,7 +106,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
         handlePagingElement(xmlConsumer, TOTAL_PAGES, page.getTotalPages());
         int currentPage = page.getNumber() + 1;
         int currentImageNumber = page.getNumber() * page.getSize();
-        long upCurrentImageNumber = currentImageNumber + page.getNumberOfElements();
+        long upCurrentImageNumber = currentImageNumber + (long) page.getNumberOfElements();
         handlePagingElement(xmlConsumer, CURRENT_PAGE, currentPage);
         if (page.isFirst()) {
             handlePagingElement(xmlConsumer, PREVIOUS_PAGE, 1);

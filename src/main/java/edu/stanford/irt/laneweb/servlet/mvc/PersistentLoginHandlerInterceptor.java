@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import edu.stanford.irt.laneweb.servlet.CookieName;
 
 public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter {
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
@@ -43,7 +46,7 @@ public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter
         if (url == null) {
             url = "/index.html";
         }
-        return URLEncoder.encode(url, "UTF-8");
+        return URLEncoder.encode(url, UTF_8);
     }
 
     private boolean hasPersistentCookieSet(final HttpServletRequest request) {

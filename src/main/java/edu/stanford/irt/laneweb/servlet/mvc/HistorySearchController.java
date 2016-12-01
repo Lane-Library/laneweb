@@ -107,7 +107,7 @@ public class HistorySearchController {
                 resourceMap.put("description", resource.getDescription());
                 String hitsString = resource.getHits();
                 if (hitsString != null) {
-                    resourceMap.put("hits", Integer.parseInt(hitsString));
+                    resourceMap.put("hits", Integer.valueOf(hitsString));
                 }
             }
         }

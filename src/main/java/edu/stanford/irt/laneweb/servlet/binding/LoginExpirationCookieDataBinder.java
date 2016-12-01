@@ -36,7 +36,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
     private String getExpirationValue(final String cookieValue) {
         String result = null;
         try {
-            long expiry = Long.valueOf(cookieValue) - System.currentTimeMillis();
+            long expiry = Long.parseLong(cookieValue) - System.currentTimeMillis();
             if (expiry > 0) {
                 result = Long.toString(expiry / ONE_DAY);
             }

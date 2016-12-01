@@ -33,7 +33,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
         }
 
         @Override
-        public void processingInstruction(final String target, final String data) throws SAXException {
+        public void processingInstruction(final String target, final String data) {
             // do nothing
         }
     }

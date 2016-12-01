@@ -178,6 +178,9 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
     border-bottom: 1px solid #902827;
 }
 
+#lane-footer li:last-child {
+    border-bottom: none;
+}
 #lane-footer a {
     color: white;
     line-height: 24px;
@@ -235,7 +238,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 
 #sm-footer ul {
     margin-top: 16px;
-    background-image: url(../../images/smFooter1.png);
+    background-image: url(../../images/footer-logos.png);
     background-repeat: no-repeat;
 }
 
@@ -257,19 +260,22 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 #footer-sm {
-    width: 210px;
+    width: 156px;
 }
 
 #footer-shc {
-    width: 180px;
+    width: 142px;
 }
 
 #footer-sch {
-    width: 180px;
+    width: 176px;
 }
 
-#footer-sul {
-    width: 308px;
+#footer-schos {
+    width: 176px;
+}
+#footer-uha {
+    width: 228px;
 }
 
 #gift {

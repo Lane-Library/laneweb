@@ -16,6 +16,14 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageSearchResult> {
 
+    private static final int BROAD_REUSE_RIGHTS = 1;
+
+    private static final int MAX_REUSE_RIGHTS = 0;
+
+    private static final int POSSIBLE_REUSE_RIGHTS = 2;
+
+    private static final int RESTRICTIVE_REUSE_RIGHTS = 3;
+
     private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights", "Possible Reuse Rights",
             "Restrictive Reuse Rights" };
 
@@ -33,11 +41,9 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
 
     protected String url;
 
-    private String searchTerm;
-
     private String source;
 
-    private String tab = TAB_CONTENT[0];
+    private String tab = TAB_CONTENT[MAX_REUSE_RIGHTS];
 
     public SolrImageSearchGenerator(final SolrImageService service,
             final SAXStrategy<SolrImageSearchResult> saxStrategy) {
@@ -50,30 +56,30 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
         super.setModel(model);
         String page = ModelUtil.getString(model, Model.PAGE);
         if (page != null) {
-            this.pageNumber = Integer.valueOf(page) - 1;
+            this.pageNumber = Integer.parseInt(page) - 1;
         }
         this.resourceId = ModelUtil.getString(model, Model.RESOURCE_ID);
-        this.searchTerm = ModelUtil.getString(model, Model.QUERY);
         this.source = ModelUtil.getString(model, Model.SOURCE, "images-");
         this.basePath = ModelUtil.getString(model, Model.BASE_PATH, "");
-        this.url = "/search.html?q=" + this.searchTerm + "&source=" + this.source;
+        String query = ModelUtil.getString(model, Model.QUERY);
+        this.url = "/search.html?q=" + query + "&source=" + this.source;
         if (this.source != null) {
             if (this.source.startsWith("cc-")) {
                 this.copyright = "10";
-                this.tab = TAB_CONTENT[1];
+                this.tab = TAB_CONTENT[BROAD_REUSE_RIGHTS];
             } else if (this.source.startsWith("pmc-")) {
                 this.copyright = "15";
-                this.tab = TAB_CONTENT[2];
+                this.tab = TAB_CONTENT[POSSIBLE_REUSE_RIGHTS];
             } else if (this.source.startsWith("rl-")) {
                 this.copyright = "20";
-                this.tab = TAB_CONTENT[3];
+                this.tab = TAB_CONTENT[RESTRICTIVE_REUSE_RIGHTS];
             }
         }
     }
 
     @Override
     protected SolrImageSearchResult doSearch(final String query) {
-        return doSearch(query, this.basePath.concat(this.url.toString()));
+        return doSearch(query, this.basePath + this.url);
     }
 
     protected SolrImageSearchResult doSearch(final String query, final String path) {
@@ -81,7 +87,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
         return new SolrImageSearchResult(query, pageResult, this.resourceId, facet,
-                this.basePath.concat(this.url.toString()), this.tab, this.source);
+                this.basePath + this.url, this.tab, this.source);
     }
 
     @Override
@@ -90,7 +96,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
     }
 
     protected Page<Image> getPage(final String query) {
-        Page<Image> pageResult = null;
+        Page<Image> pageResult;
         Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
         if (this.resourceId == null) {
             pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);

@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -20,6 +21,8 @@ public class ShibTester {
     // or JkEnvVar directives in apache config (mod_jk) for each attribute
     private static final Collection<String> SHIB_ATTS = Arrays.asList("Shib-Identity-Provider", "displayName", "uid",
             "mail", "group");
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     @RequestMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
     public void testUrl(final HttpServletRequest request, final HttpServletResponse response) {
@@ -51,7 +54,7 @@ public class ShibTester {
         }
         response.setContentType("text/plain");
         try {
-            response.getOutputStream().write(result.toString().getBytes("UTF-8"));
+            response.getOutputStream().write(result.toString().getBytes(UTF_8));
         } catch (IOException e) {
             throw new LanewebException(e);
         }

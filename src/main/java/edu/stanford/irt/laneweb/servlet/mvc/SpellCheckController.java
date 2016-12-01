@@ -40,7 +40,7 @@ public class SpellCheckController {
     @ResponseBody
     public String spellCheckException(final SpellCheckException e) {
         Throwable t = e.getCause();
-        if (t != null && t instanceof SocketTimeoutException) {
+        if (t instanceof SocketTimeoutException) {
             log.warn(e.toString(), e);
         } else {
             log.error(e.toString(), e);

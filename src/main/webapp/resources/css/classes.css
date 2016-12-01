@@ -1,4 +1,4 @@
-.class {
+.class, .archive {
     margin: 12px 0 60px;
     position: relative;
     /* this z-index and the .class .date:before rules related to case 119823 involved with getting
@@ -6,20 +6,31 @@
     z-index: 1;
 }
 
-.class .date {
+.class:last-child, .archive:last-child {
+    margin-bottom: 0;
+}
+
+.class .date, .archive .date {
     width: auto;
     padding: 0 12px;
     box-sizing: border-box;
 }
 
-.class .date:before {
+.class .date:before, .archive .date:before {
     content: " ";
-    background-color: #009abb;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     z-index: -1;
+}
+
+.class .date:before {
+    background-color: #009abb;
+}
+
+.archive .date:before {
+    background-color: #ccc;
 }
 
 .yui3-u-1-4 .date:before {
@@ -28,6 +39,10 @@
 
 .yui3-u-1-5 .date:before {
     width: 19.2%;
+}
+
+.yui3-u-1-8 .date:before {
+    width: 12.5%;
 }
 
 .class .month-day, .archive .month-day {
@@ -75,28 +90,11 @@
     margin-bottom: 20px;
 }
 
-.youtube-class, .youtube-class .youtube-thumbnail img {
-    width: 200px;
-}
-
 .youtube-class {
     text-align: center;
+    margin-top: 70px;
 }
 
-.archive div {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 12px;
-}
-
-.archive .date {
-    background-color: #ccc;
-    padding: 6px 12px;
-    margin-right: 9px;
-    box-sizing: border-box;
-    width: 80px;
-}
-
-.archive .details {
-    width: 407px;
+.youtube-class .youtube-thumbnail img {
+    width: 200px;
 }

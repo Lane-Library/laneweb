@@ -117,14 +117,6 @@
                             title="Find anatomical images from the historic Atlas of Human Anatomy"
                             >Bassett Anatomy</div></div>
                     </div>
-                    <ul class="qlinks">
-                        <li>
-                            <a href="http://www.ncbi.nlm.nih.gov/pubmed?otool=stanford&amp;holding=F1000%2CF1000M">PubMed</a>
-                        </li>
-                        <li>
-                            <a href="http://www.uptodate.com/contents/search">UpToDate</a>
-                        </li>
-                    </ul>
                 </div>
             </form>
             <div class="content centered">
@@ -134,83 +126,82 @@
                 <?laneweb content?>
             </div>
             <div class="lane-nav">
-                <div class="centered">
-                    <ul>
-                        <li class="dropdown nav-menu">
-                            <a href="/biomed-resources/index.html">All Biomedical Resources</a>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu">
-                            <a href="/portals/index.html">Specialty Portals</a>
-                            <ul class="dropdown-content nav-menu-content portals">
-                                <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
-                                <li><a href="/portals/nursing.html">Nursing</a></li>
-                                <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
-                                <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
-                                <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
-                                <li><a href="/portals/oncology.html">Oncology</a></li>
-                                <li><a href="/portals/cardiology.html">Cardiology</a></li>
-                                <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
-                                <li><a href="/portals/clinical.html">Clinical</a></li>
-                                <li><a href="http://trachea.stanford.edu/">Otolaryngology <i class="fa fa-external-link"></i></a></li>
-                                <li><a href="/portals/comp-med.html">Comparative Medicine</a></li>
-                                <li><a href="/portals/palliative-care.html">Palliative Care</a></li>
-                                <li><a href="/portals/patient.html">Consumer Health</a></li>
-                                <li><a href="/portals/pathology.html">Pathology</a></li>
-                                <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
-                                <li><a href="/portals/pcap.html">PCAP</a></li>
-                                <li><a href="/portals/ihealth.html">Global Health</a></li>
-                                <li><a href="/portals/peds.html">Pediatrics</a></li>
-                                <li><a href="/portals/careercenter.html">Graduate Career Collection</a></li>
-                                <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
-                                <li><a href="/portals/hematology.html">Hematology</a></li>
-                                <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>
-                                <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a></li>
-                                <li><a href="/portals/picu.html">PICU</a></li>
-                                <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a></li>
-                                <li><a href="/portals/psychiatry.html">Psychiatry</a></li>
-                                <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
-                                <li><a href="/portals/pulmonary.html">Pulmonary</a></li>
-                                <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
-                                <li><a href="/portals/reference.html">Reference Desk</a></li>
-                                <li><a href="/portals/medicalEd.html">Medical Education</a></li>
-                                <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
-                                <li><a href="/portals/cultural.html">Multicultural Health</a></li>
-                                <li><a href="/portals/gen-surgery.html">Surgery</a></li>
-                                <li><a href="/portals/neurology.html">Neurology</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown nav-menu">
-                            <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu">
-                            <a href="/using-lib/index.html">Using the Library</a>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu">
-                            <a href="/about/index.html">About Lane</a>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu">
-                            <a href="/help/index.html">How To</a>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="nav-menu">
-                            <a href="http://laneblog.stanford.edu/">Blog</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="centered">
+                    <li class="dropdown nav-menu">
+                        <a href="/biomed-resources/index.html">All Biomedical Resources</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
+                    </li>
+                    <li class="dropdown nav-menu">
+                        <a href="/portals/index.html">Specialty Portals</a>
+                        <ul class="dropdown-content nav-menu-content portals">
+                            <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
+                            <li><a href="/portals/nursing.html">Nursing</a></li>
+                            <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
+                            <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
+                            <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
+                            <li><a href="/portals/oncology.html">Oncology</a></li>
+                            <li><a href="/portals/cardiology.html">Cardiology</a></li>
+                            <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
+                            <li><a href="/portals/clinical.html">Clinical</a></li>
+                            <li><a href="http://trachea.stanford.edu/">Otolaryngology <i class="fa fa-external-link"></i></a></li>
+                            <li><a href="/portals/comp-med.html">Comparative Medicine</a></li>
+                            <li><a href="/portals/palliative-care.html">Palliative Care</a></li>
+                            <li><a href="/portals/patient.html">Consumer Health</a></li>
+                            <li><a href="/portals/pathology.html">Pathology</a></li>
+                            <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
+                            <li><a href="/portals/pcap.html">PCAP</a></li>
+                            <li><a href="/portals/ihealth.html">Global Health</a></li>
+                            <li><a href="/portals/peds.html">Pediatrics</a></li>
+                            <li><a href="/portals/careercenter.html">Graduate Career Collection</a></li>
+                            <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                            <li><a href="/portals/hematology.html">Hematology</a></li>
+                            <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>
+                            <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a></li>
+                            <li><a href="/portals/picu.html">PICU</a></li>
+                            <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a></li>
+                            <li><a href="/portals/psychiatry.html">Psychiatry</a></li>
+                            <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
+                            <li><a href="/portals/pulmonary.html">Pulmonary</a></li>
+                            <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
+                            <li><a href="/portals/reference.html">Reference Desk</a></li>
+                            <li><a href="/portals/medicalEd.html">Medical Education</a></li>
+                            <li><a href="/portals/shc.html">SHC</a></li>
+                            <li><a href="/portals/cultural.html">Multicultural Health</a></li>
+                            <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
+                            <li><a href="/portals/neurology.html">Neurology</a></li>
+                            <li><a href="/portals/gen-surgery.html">Surgery</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown nav-menu">
+                        <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
+                    </li>
+                    <li class="dropdown nav-menu">
+                        <a href="/using-lib/index.html">Using the Library</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
+                    </li>
+                    <li class="dropdown nav-menu">
+                        <a href="/about/index.html">About Lane</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
+                    </li>
+                    <li class="dropdown nav-menu">
+                        <a href="/help/index.html">How To</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
+                    </li>
+                    <li class="nav-menu">
+                        <a href="http://laneblog.stanford.edu/">Blog</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div id="somHeader">
@@ -238,9 +229,10 @@
         </div>
         <div id="laneFooter">
             <div class="centered">
+                <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
+                <h3><a href="/index.html">Lane Medical Library</a></h3>
                 <div class="yui3-g">
                     <div class="yui3-u-1-5">
-                        <h3><a href="/biomed-resources/index.html">All Resources</a></h3>
                         <ul>
                             <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
                             <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
@@ -250,7 +242,6 @@
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
-                        <h3><a href="/classes-consult/index.html">Classes</a></h3>
                         <ul>
                             <li><a href="/classes-consult/laneclasses.html">Upcoming Classes</a></li>
 	                        <li><a href="/classes-consult/archives.html">Classes Archive</a></li>
@@ -259,17 +250,15 @@
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
-                        <h3><a href="/using-lib/index.html">Using the Library</a></h3>
                         <ul>
                              <li><a href="/using-lib/affiliates.html">Check your eligibility</a></li>
                             <li><a href="/using-lib/sunetid.html">Manage Your Lane Login</a></li>
-                            <li><a href="https://docxpress.stanford.edu/">DocXpress</a></li>
+                            <li><a href="https://docxpress.stanford.edu/">DocXpress <i class="fa fa-external-link"></i></a></li>
                             <li><a href="/using-lib/computing.html">Computing Spaces</a></li>
                             <li><a href="/using-lib/studyspaces.html">Places to Study</a></li>
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
-                        <h3><a href="/about/index.html">About Lane</a></h3>
                         <ul>
                             <li><a href="/about/index.html">Hours</a></li>
                             <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
@@ -279,7 +268,6 @@
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
-                        <h3><a href="http://www.stanford.edu/">How To</a></h3>
                         <ul>
                             <li><a href="/help/choose-search.html">Choose Your Search</a></li>
                             <li><a href="/help/lit-search.html">Search the Literature</a></li>
@@ -294,52 +282,25 @@
         <div id="lane-subfooter">
             <div class="centered">
                 <div class="yui3-g">
-                    <div class="yui3-u-1-3">
-                        <ul>
-                            <li>©<?laneweb current-year?> Stanford Medicine</li>
-                            <li style="margin-left:20px">
-                                <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
-                            </li>
+                    <div class="yui3-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
+                    <div class="yui3-u-1-2">
+                         <ul>
+                            <li><a href="http://www.stanford.edu/site/terms.html">Terms of Use</a></li>
+                            <li><a title="See us on Facebook" href="https://www.facebook.com/LaneLibrary.Stanford"><span>See us on Facebook</span><i class="fa fa-facebook"></i></a></li>           
+                            <li><a title="See us on Twitter" href="https://twitter.com/LaneLibStanford"><span>See us on Twitter</span><i class="fa fa-twitter"></i></a></li>
                         </ul>
-                        <ul>
-                            <li>
-                                <a title="See us on Facebook" href="https://www.facebook.com/LaneLibrary.Stanford">
-                                    <span>See us on Facebook</span><i class="fa fa-facebook"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a title="Historic Images" href="https://www.flickr.com/photos/40390680@N08/">
-                                    <span>Historic Images</span><i class="fa fa-flickr"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a title="See us on Twitter" href="https://twitter.com/LaneLibStanford">
-                                    <span>See us on Twitter</span><i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="yui3-u-1-6">
-                        <div><a href="http://scopeblog.stanford.edu/">Scope Blog</a></div>
-                    </div>
-                    <div class="yui3-u-1-6">
-                        <div><a href="/biomed-resources/recent-su-pubmed.html">Stanford Authors in PubMed</a></div>
-                        <div><a href="/biomed-resources/highly-accessed.html">Highly Accessed Articles</a></div>
-                    </div>
-                    <div class="yui3-u-1-3">
-                        <a id="gift" href="https://makeagift.stanford.edu/goto/lanelibrarygift/" rel="popup standard"><strong>Make a difference.</strong>
-                            <br />Help us by making a contribution.</a>
                     </div>
                 </div>
             </div>
         </div>
         <div id="sm-footer">
             <ul class="centered">
-                <li id="footer-su"><a href="http://www.stanford.edu/">Stanford University</a></li>
-                <li id="footer-sm"><a href="http://med.stanford.edu/">Stanford School of Medicine</a></li>
-                <li id="footer-shc"><a href="https://stanfordhealthcare.org/">Stanford Hospitals and Clinics</a></li>
-                <li id="footer-sch"><a href="http://www.stanfordchildrens.org/">Stanford Children's Hospital</a></li>
-                <li id="footer-sul"><a href="http://library.stanford.edu/">Stanford University Libraries</a></li>
+                <li id="footer-su"><a href="http://www.stanford.edu/" title="Stanford University logo">Stanford University</a></li>
+                <li id="footer-sm"><a href="http://med.stanford.edu/" title="Stanford School of Medicine logo">Stanford School of Medicine</a></li>
+                <li id="footer-shc"><a href="https://stanfordhealthcare.org/" title="Stanford Health Care">Stanford Health Care</a></li>
+                <li id="footer-sch"><a href="http://www.stanfordchildrens.org/" title="Stanford Children's Health logo">Stanford Children's Health</a></li>
+                <li id="footer-schos"><a href="http://www.stanfordchildrens.org/" title="Lucile Packard Children's Hospital Stanford logo">Stanford Children's Hospital</a></li>
+                <li id="footer-uha"><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
             </ul>
         </div>
         <div><a class="feedback-link" rel="lightbox disableBackground" href="/help/feedback.html"><span>CONTACT US</span></a></div>

@@ -41,8 +41,6 @@ public class SitemapHandlerExceptionResolverTest {
     public void testResolveClientAbortException() {
         Exception nested = new Exception();
         Exception ex = new ClientAbortException(nested);
-        expect(this.request.getRemoteAddr()).andReturn("remoteAddr");
-        expect(this.request.getRequestURL()).andReturn(new StringBuffer("requestURL"));
         expect(this.response.isCommitted()).andReturn(true);
         replay(this.request, this.response);
         this.resolver.resolveException(this.request, this.response, null, ex);

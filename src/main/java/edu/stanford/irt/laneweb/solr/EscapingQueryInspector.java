@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.solr;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Clean query strings before sending to Solr
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public final class EscapingQueryInspector implements QueryInspector {
 
-    private static final List<Character> ESCAPEABLE_CHARS = new ArrayList<>();
+    private static final Set<Character> ESCAPEABLE_CHARS = new HashSet<>();
 
     static {
         // these seem harmless | &

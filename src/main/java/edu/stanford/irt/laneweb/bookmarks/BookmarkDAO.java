@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface BookmarkDAO {
 
-    List<Object> getLinks(String userid);
+    List<Bookmark> getLinks(String userid);
 
     int getRowCount();
 
-    void saveLinks(String userid, List<Object> links);
+    void saveLinks(String userid, List<Bookmark> links);
 }
