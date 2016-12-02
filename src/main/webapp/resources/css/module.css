@@ -64,23 +64,71 @@
     padding: 12px;
 }
 
-.grand-rounds {
+.grand-rounds, .upcoming-classes {
     margin-top: 12px;
     padding: 60px;
 }
 
-.new-resource {
-    background-color: none;
+.grand-rounds h3, .upcoming-classes h3 {
+    text-transform: uppercase;
+    font-family: 'Fjord One', serif;
+    color: #333333;
+    text-align: center;
+    background-image: none;
 }
 
-.new-resource h3 {
-    text-transform: uppercase;
+.grand-rounds:before {
+    background-color: #aabec6;
+    border-radius: 50px;
+    font-family: 'FontAwesome';
+    content: "\f0f1";
+    display: block;
+    height: 48px;
+    position: relative;
+    width: 48px;
+    margin: -26px auto 20px auto;
+    margin-top: -84px;
+    color: #fff;
+    text-align: center;
+    font-size: 2.5em;
+    line-height: 48px;
+}
+
+.upcoming-classes:before {
+    background-color: #aabec6;
+    border-radius: 50px;
+    font-family: 'FontAwesome';
+    content: "\f19d";
+    display: block;
+    height: 48px;
+    position: relative;
+    width: 48px;
+    margin: -26px auto 20px auto;
+    margin-top: -84px;
+    color: #fff;
+    text-align: center;
+    font-size: 2em;
+    line-height: 48px;
+}
+
+.new-resource {
+    background-color: none;
+    text-align: center;
+}
+
+.new-resource img {
+    width: 65%;
+    height: auto;
+    margin-bottom: 12px;
+}
+    
+. new-resource h3 { text-transform : uppercase;
     font-size: 18px;
     color: #8c1515;
-    text-align: left;
-    margin-top: 72px;
-    margin-left: 180px;
+    margin-top: 120px;
     background-image: none;
+    text-align: left;
+    margin-left: 180px;
 }
 
 .new-resource h3:before {

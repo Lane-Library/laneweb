@@ -1,241 +1,252 @@
 /* This file has rules that don't seem to fit anywhere else */
 body, select, input, button, textarea {
-	font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
+    font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
 }
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*="yui3-u"] {
-	font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .scaled-image {
-	width: 100%;
-	height: auto;
+    width: 100%;
+    height: auto;
 }
 
 .scaled-image-85 {
-	width: 85%;
-	height: auto;
-	margin-bottom: 12px;
+    width: 85%;
+    height: auto;
+    margin-bottom: 12px;
 }
 /*.close is the X close box on popups and feedback*/
 .close {
-	width: 24px;
-	height: 24px;
-	position: absolute;
-	right: 3px;
-	top: 3px;
-	cursor: pointer;
-	font-size: 22px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    cursor: pointer;
+    font-size: 22px;
 }
 
 .close.fa:hover {
-	color: #79455C;
+    color: #79455C;
 }
 
 p {
-	margin-bottom: 12px;
-	font-size: 14px;
+    margin-bottom: 12px;
+    font-size: 14px;
 }
 
 strong {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 em {
-	font-style: italic;
+    font-style: italic;
 }
 
 .inputHint {
-	color: #808080;
+    color: #808080;
 }
 
 .more a {
-	margin-right: 6px;
-	font-size: 14px;
+    margin-right: 6px;
+    font-size: 14px;
 }
 
 .center {
-	text-align: center;
-	margin-top: 24px;
-	margin-bottom: 24px;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 .rss-link {
-	float: right;
+    float: right;
 }
 
 .rss-link .fa {
-	color: black;
+    color: black;
 }
 
 .announce {
-	text-align: center;
-	background-color: #80982a;
-	border: none;
-	padding: 12px;
-	font-family: 'Fjord One', serif;
-	color: #fff;
-	font-size: 20px;
-	text-shadow: 0.07em #000;
-	margin-bottom: 12px;
+    text-align: center;
+    background-color: #80982a;
+    border: none;
+    padding: 12px;
+    font-family: 'Fjord One', serif;
+    color: #fff;
+    font-size: 20px;
+    text-shadow: 0.07em #000;
+    margin-bottom: 12px;
 }
 
 /*table on ejpw_list.html*/
 .password-table table {
-	border-collapse: collapse;
-	background-color: #fff;
+    border-collapse: collapse;
+    background-color: #fff;
 }
 
 .password-table th {
-	padding: .7em;
-	vertical-align: top;
-	border: 1px solid #ccc;
+    padding: .7em;
+    vertical-align: top;
+    border: 1px solid #ccc;
 }
 
 .password-table td {
-	padding: .7em;
-	vertical-align: top;
-	border: 1px solid #ccc;
+    padding: .7em;
+    vertical-align: top;
+    border: 1px solid #ccc;
 }
 
 .password-table table th {
-	background-color: #e6e8d5;
-	font-weight: bold;
-	font-size: 1.1em;
+    background-color: #e6e8d5;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 /*scroll window on portals to display article feed, such as rheumatology*/
 .scroll-window {
-	height: 400px;
-	width: 100%;
-	overflow-x: hidden;
-	overflow-y: scroll;
+    height: 400px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 /*styles for redesigned main elements on the landing pages*/
 .detailInfo {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 .calendar ul {
-	float: left;
-	margin-bottom: 12px;
+    float: left;
+    margin-bottom: 12px;
 }
 
 .calendar li {
-	width: 138px;
-	height: 88px;
-	float: left;
-	margin-right: 2.6px;
-	padding: 6.5px;
-	box-sizing: border-box;
-	background-color: #09425a;
-	color: #fff;
+    width: 138px;
+    height: 88px;
+    float: left;
+    margin-right: 2.6px;
+    padding: 6.5px;
+    box-sizing: border-box;
+    background-color: #09425a;
+    color: #fff;
 }
 
 .calendar li p {
-	line-height: normal;
-	font-weight: normal;
-	margin-top: .5em;
+    line-height: normal;
+    font-weight: normal;
+    margin-top: .5em;
 }
 
 hr {
-	color: #dddddd;
-	border-top: 1px solid;
-	margin-bottom: 12px;
+    color: #dddddd;
+    border-top: 1px solid;
+    margin-bottom: 12px;
 }
 
 .nomodule {
-	margin: 12px 0 24px;
-	line-height: normal;
-	font-size: 14px;
+    margin: 12px 0 24px;
+    line-height: normal;
+    font-size: 14px;
 }
 
 /*.youtube-thumbnail divs are created in youtube.js */
 .youtube-thumbnail {
-	cursor: pointer;
-	display: inline-block;
-	position: relative;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
 }
 
 .youtube-thumbnail .fa {
-	text-align: center;
-	font-size: 14px;
-	position: absolute;
-	right: 43%;
-	top: 41%;
-	color: white;
-	background-color: rgb(56, 56, 56);
-	border-radius: 9px;
-	width: 42px;
-	line-height: 30px;
-	opacity: .9;
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    right: 43%;
+    top: 41%;
+    color: white;
+    background-color: rgb(56, 56, 56);
+    border-radius: 9px;
+    width: 42px;
+    line-height: 30px;
+    opacity: .9;
 }
 
 .youtube-thumbnail:hover .fa {
-	background-color: rgb(195, 22, 35);
+    background-color: rgb(195, 22, 35);
 }
 
 /*to make a highlighted note on the right of the module, similar to history site*/
 .feature {
-	padding-left: 12px;
+    padding-left: 12px;
 }
 
 .feature .block-heading {
-	width: 100%;
-	height: auto;
-	min-height: 1%;
-	padding-top: 0;
-	padding-bottom: 12px;
-	margin: 0 12px 12px 0;
-	text-align: left;
-	overflow: hidden;
-	background-color: #556222; /*#8c1515;*/
-	box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    min-height: 1%;
+    padding-top: 0;
+    padding-bottom: 12px;
+    margin: 0 12px 12px 0;
+    text-align: left;
+    overflow: hidden;
+    background-color: #556222; /*#8c1515;*/
+    box-sizing: border-box;
 }
 
 .block-content {
-	float: left;
-	margin-bottom: 36px;
+    float: left;
+    margin-bottom: 36px;
 }
 
 .block-heading h3 {
-	display: block;
-	background-image: none;
-	font-size: 20px;
-	padding: 6px 6px 6px 6px;
-	line-height: 1.2em;
-	margin-bottom: .2em;
-	color: #ffffff;
-	text-transform: uppercase;
-	font-family: 'Source Sans Pro', sans-serif;
+    display: block;
+    background-image: none;
+    font-size: 20px;
+    padding: 6px 6px 6px 6px;
+    line-height: 1.2em;
+    margin-bottom: .2em;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .course-reserves-instructor {
-	float: right;
-	margin-top: 13px;
-	line-height: 13px;
-	font-size: 13px;
-	color: #333;
+    float: right;
+    margin-top: 13px;
+    line-height: 13px;
+    font-size: 13px;
+    color: #333;
 }
 
 /*news feed from the blog on homepage*/
-.newsfeed-item h3 {
+.newsfeed-item-title {
     color: #8c1515;
     font-size: 18px;
+    margin: 12px auto 12px 0;
+    height: 36px;
 }
 
-.newsfeed-item time {
+.newsfeed-item-time {
     font-size: 12px;
     color: #999999;
-    font-family: 'FontAwesome';
+}
+
+.newsfeed-item-time:before {
+    color: #999999;
     content: "\f017";
-    display: block;
+    font-family: FontAwesome;
+    text-decoration: none;
+    margin-right: 6px;
 }
 
 .newsfeed-item-footer {
     background-color: #8c1515;
     text-transform: uppercase;
     color: #FFFFFF;
-    
-}  
+    padding: 12px;
+}
+
+.newsfeed-item-footer  a {
+    color: #FFFFFF;
+}
