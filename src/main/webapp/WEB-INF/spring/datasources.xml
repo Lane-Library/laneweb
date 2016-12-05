@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean name="javax.sql.DataSource/eresources" class="oracle.ucp.jdbc.PoolDataSourceImpl">
+    <bean name="javax.sql.DataSource/eresources" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource">
         <property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>
         <property name="URL" value="%{edu.stanford.irt.laneweb.db.eresources.url}"/>
         <property name="user" value="%{edu.stanford.irt.laneweb.db.eresources.user}"/>
@@ -15,7 +15,7 @@
         <property name="fastConnectionFailoverEnabled" value="%{edu.stanford.irt.laneweb.db.eresources.fastConnectionFailoverEnabled}"/>
     </bean>
     
-    <bean name="javax.sql.DataSource/voyager" class="oracle.ucp.jdbc.PoolDataSourceImpl">
+    <bean name="javax.sql.DataSource/voyager" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource">
         <property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>
         <property name="URL" value="%{edu.stanford.irt.laneweb.db.voyager.url}"/>
         <property name="user" value="%{edu.stanford.irt.laneweb.db.voyager.user}"/>
@@ -25,7 +25,7 @@
         <property name="minPoolSize" value="%{edu.stanford.irt.laneweb.db.voyager.minPoolSize}"/>
     </bean>
     
-    <bean name="javax.sql.DataSource/grandrounds" class="oracle.ucp.jdbc.PoolDataSourceImpl">
+    <bean name="javax.sql.DataSource/grandrounds" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource">
         <property name="connectionFactoryClassName" value="oracle.jdbc.pool.OracleDataSource"/>
         <property name="URL" value="%{edu.stanford.irt.laneweb.db.grandrounds.url}"/>
         <property name="user" value="%{edu.stanford.irt.laneweb.db.grandrounds.user}"/>
