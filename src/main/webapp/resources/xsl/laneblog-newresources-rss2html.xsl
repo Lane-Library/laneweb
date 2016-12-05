@@ -27,5 +27,10 @@
 				<xsl:value-of select="content:encoded"></xsl:value-of>
 			</content>
 		</div>
+		<div>
+			<a href="{link}" title="feed link---{../../channel/title}">
+				<xsl:text>Read More</xsl:text>
+			</a>
+		</div>
 	</xsl:template>
 </xsl:stylesheet>
