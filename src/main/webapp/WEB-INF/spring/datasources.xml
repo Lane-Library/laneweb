@@ -13,9 +13,6 @@
         <property name="minPoolSize" value="%{edu.stanford.irt.laneweb.db.eresources.minPoolSize}"/>
         <property name="oNSConfiguration" value="%{edu.stanford.irt.laneweb.db.eresources.onsConfiguration}"/>
         <property name="fastConnectionFailoverEnabled" value="%{edu.stanford.irt.laneweb.db.eresources.fastConnectionFailoverEnabled}"/>
-        <property name="connectionCachingEnabled" value="%{edu.stanford.irt.laneweb.db.eresources.connectionCachingEnabled}"/>
-        <property name="connectionCacheName" value="%{edu.stanford.irt.laneweb.db.eresources.connectionCacheName}"/>
-        <property name="connectionCacheProperties=" value="%{edu.stanford.irt.laneweb.db.eresources.connectionCacheProperties}"/>
     </bean>
     
     <bean name="javax.sql.DataSource/voyager" class="oracle.ucp.jdbc.PoolDataSourceImpl">
