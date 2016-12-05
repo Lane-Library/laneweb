@@ -95,7 +95,7 @@
             <map:serialize type="text"/>
         </map:match>
     </map:pipeline>
-    <map:pipeline type="noncaching">
+    <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-rss.xml" type="wildcard">
             <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
