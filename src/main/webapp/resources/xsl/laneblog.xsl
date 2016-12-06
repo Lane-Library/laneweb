@@ -21,7 +21,6 @@
 	<xsl:template match="h:img">
 		<xsl:copy>
 			 <xsl:attribute name="src" select="@src" />
-			 <xsl:attribute name="class">scaled-image-85</xsl:attribute>
 		</xsl:copy>
 	</xsl:template> 	
 </xsl:stylesheet>
