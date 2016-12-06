@@ -44,7 +44,7 @@
 
   <xsl:template name="fa">
     <xsl:param name="title"/>
-    <div class="equipment-icon"><i>
+    <div class="equipment-icon"><i aria-hidden="true">
       <xsl:attribute name="class">
         <xsl:text>fa fa-6x fa-</xsl:text>
         <xsl:choose>
