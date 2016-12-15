@@ -14,7 +14,7 @@
             <action date="2016-11-28" dev="ryanmax" issue="129898" type="fix">
                 incorrect color for selected facet in facet browse screen
             </action>
-            <action date="2016-11-22" dev="ceyates" issue="update" type="129698">
+            <action date="2016-11-22" dev="ceyates" issue="129698" type="update">
                 change from container managed datasources to application managed 
             </action>
             <action date="2016-11-22" dev="ceyates" issue="129596" type="add">
