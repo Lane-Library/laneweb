@@ -131,7 +131,6 @@
             </map:generate>
             <map:transform type="saxon" src="resources/xsl/seminars.xsl">
                 <map:parameter name="number-of-items" value="{2}"/>
-                <map:parameter name="link-label" value="{3}"/>
             </map:transform>
             <map:serialize type="xml"/>
         </map:match>
