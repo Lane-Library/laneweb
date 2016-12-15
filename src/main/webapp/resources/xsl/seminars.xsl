@@ -4,8 +4,6 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:s="http://lane.stanford.edu/seminars/ns"
 	version="2.0">
-
-    <xsl:param name="number-of-items"/>
 	
 	<xsl:template match="/s:seminars">
 		<html>
@@ -14,7 +12,7 @@
 			</head>
 			<body>
 				<!-- pull twice the number of seminars requested so seminars.js can hide today's past events and display upcoming ones  -->
-				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= ($number-of-items * 2)]" />
+				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= 6]" />
 			</body>
 		</html>
 	</xsl:template>
@@ -66,7 +64,7 @@
 
 		<div class="event seminar">
 			<!--  hide events beyond the desired # to display so seminars.js can unhide them if needed -->
-			<xsl:if test="position() > $number-of-items">
+			<xsl:if test="position() > 3">
 				<xsl:attribute name="style">display:none;</xsl:attribute>
 			</xsl:if>
 			<div class="yui3-g">
