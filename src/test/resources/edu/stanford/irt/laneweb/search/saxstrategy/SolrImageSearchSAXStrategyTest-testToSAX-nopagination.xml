@@ -34,7 +34,7 @@
    <div id="imageList" class="yui3-g">
       <div id="id/andSlash" class="yui3-u-1-5" row="0">
          <a href="pageUrl" class="noproxy">
-            <image src="thumbnailSrc" class="scaled-image"/>
+            <img src="thumbnailSrc"/>
          </a>
          <div id="imagedecorator" class="imagedecoHidden"> </div>
       </div>
@@ -46,7 +46,7 @@
       <div class="yui3-g">
          <div class="yui3-u-3-5">
             <div class="image-location">
-               <image class="image"/>
+               <img class="image"/>
             </div>
          </div>
          <div class="yui3-u-2-5">
