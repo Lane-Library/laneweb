@@ -38,7 +38,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 
     protected static final String ID = "id";
 
-    protected static final String IMAGE = "image";
+    protected static final String IMAGE = "img";
 
     protected static final int IMAGE_BY_ROW = 5;
 
@@ -98,7 +98,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, SRC, SRC, CDATA, image.getThumbnailSrc());
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "scaled-image");
+//        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "scaled-image");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, IMAGE, atts);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
         endAnchor(xmlConsumer);
