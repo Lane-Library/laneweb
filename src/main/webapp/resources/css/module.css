@@ -66,7 +66,7 @@
 
 .grand-rounds, .upcoming-classes {
     margin-top: 12px;
-    padding: 60px;
+    padding: 12%;
 }
 
 .grand-rounds h3, .upcoming-classes h3 {
@@ -114,6 +114,7 @@
 .new-resource {
     background-color: none;
     text-align: center;
+    margin: 120px 12px 12px auto;
 }
 
 .new-resource img {
@@ -121,26 +122,12 @@
     height: auto;
     margin-bottom: 12px;
 }
-    
-. new-resource h3 { text-transform : uppercase;
+
+.new-resource h3 {
+    text-transform: uppercase;
     font-size: 18px;
     color: #8c1515;
-    margin-top: 120px;
     background-image: none;
     text-align: left;
-    margin-left: 180px;
-}
-
-.new-resource h3:before {
-    font-family: 'FontAwesome';
-    content: "\f024";
-    display: block;
-    height: 48px;
-    position: relative;
-    width: 48px;
-    margin: 36px auto 0 -50px;
-    margin-top: -84px;
-    text-align: center;
-    font-size: 2em;
-    line-height: 108px;
+    margin: 0 auto 24px -30px;
 }
