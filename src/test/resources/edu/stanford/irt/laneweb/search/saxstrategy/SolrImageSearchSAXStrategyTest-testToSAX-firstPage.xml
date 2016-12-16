@@ -31,49 +31,49 @@
          </a>
       </div>
    </div>
-   <ul id="imageList">
-      <li id="id/andSlash" row="0">
+   <div id="imageList" class="yui3-g">
+      <div id="id/andSlash" class="yui3-u-1-5" row="0">
          <a href="pageUrl" class="noproxy">
-            <image src="thumbnailSrc"/>
-            <div class="imagedecoHidden"> </div>
+            <image src="thumbnailSrc" class="scaled-image"/>
          </a>
-      </li>
-      <li class="imageDetailHidden"
-          style="width:935px; height:350px;"
-          id="imageDetail_0">
-         <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
-         <div class="yui3-g">
-            <div class="yui3-u-3-5">
-               <div class="image-location">
-                  <image class="image"/>
-               </div>
-            </div>
-            <div class="yui3-u-2-5">
-               <h3/>
-               <div class="desc">
-                  <label>Description: </label>
-                  <p/>
-               </div>
-               <div class="copyright">
-                  <label>Rights Statement: </label>
-                  <p/>
-               </div>
-               <div class="article-title">
-                  <label>Article Title: </label>
-                  <p/>
-               </div>
-               <div class="to-image">
-                  <a href="">
-                     <button class="button">
-                        <span class="button">Visit Source Page </span>
-                        <i class="fa fa-arrow-right"/>
-                     </button>
-                  </a>
-               </div>
+         <div id="imagedecorator" class="imagedecoHidden"> </div>
+      </div>
+   </div>
+   <div class="imageDetailHidden"
+        style="width:auto; height:auto; min-height:350px;"
+        id="imageDetail_0">
+      <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
+      <div class="yui3-g">
+         <div class="yui3-u-3-5">
+            <div class="image-location">
+               <image class="image"/>
             </div>
          </div>
-      </li>
-   </ul>
+         <div class="yui3-u-2-5">
+            <h3/>
+            <div class="desc">
+               <label>Description: </label>
+               <p/>
+            </div>
+            <div class="copyright">
+               <label>Rights Statement: </label>
+               <p/>
+            </div>
+            <div class="article-title">
+               <label>Article Title: </label>
+               <p/>
+            </div>
+            <div class="to-image">
+               <a href="">
+                  <button class="button">
+                     <span class="button">Visit Source Page </span>
+                     <i class="fa fa-arrow-right"/>
+                  </button>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
    <div class="result-summary">
       <div class="pagination">
          <label>Page </label>
