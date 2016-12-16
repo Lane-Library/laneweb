@@ -11,7 +11,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.net.URI;
-import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,7 +57,6 @@ public class SeminarsGeneratorTest {
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/seminars/ns"), eq("seminars"), eq("seminars"));
         this.xmlConsumer.endDocument();
         replay(this.saxParser, this.sourceResolver, this.xmlConsumer);
-        this.generator.setParameters(Collections.singletonMap("type", "cme"));
         this.generator.doGenerate(this.xmlConsumer);
         verify(this.saxParser, this.sourceResolver, this.xmlConsumer);
     }

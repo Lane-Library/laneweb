@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/seminars/ns"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://lane.stanford.edu/seminars/ns"
 	version="2.0">
-
-    <xsl:param name="link-label"/>
-
-    <xsl:param name="number-of-items"/>
-
-	<xsl:variable name="type" select="/s:seminars/@s:type" />
 	
 	<xsl:template match="/s:seminars">
 		<html>
@@ -16,7 +12,7 @@
 			</head>
 			<body>
 				<!-- pull twice the number of seminars requested so seminars.js can hide today's past events and display upcoming ones  -->
-				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= ($number-of-items * 2)]" />
+				<xsl:apply-templates select="h:html/h:body//h:div[@class='eventInfo'][position() &lt;= 6]" />
 			</body>
 		</html>
 	</xsl:template>
@@ -26,12 +22,12 @@
 		<xsl:param name="title" />
 		<xsl:choose>
 			<xsl:when test="contains($url,'do?semid=')">
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{concat('http://med.stanford.edu/seminars/',$url)}">
+				<a title="{concat($title,' [', 'gran-seminar]')}" href="{concat('http://med.stanford.edu/seminars/',$url)}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:when>
 			<xsl:otherwise>
-				<a title="{concat($title,' [',$type, '-seminar]')}" href="{/s:seminars/@s:url}">
+				<a title="{concat($title,' [', 'gran-seminar]')}" href="{/s:seminars/@s:url}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:otherwise>
@@ -68,25 +64,12 @@
 
 		<div class="event seminar">
 			<!--  hide events beyond the desired # to display so seminars.js can unhide them if needed -->
-			<xsl:if test="position() > $number-of-items">
+			<xsl:if test="position() > 3">
 				<xsl:attribute name="style">display:none;</xsl:attribute>
 			</xsl:if>
 			<div class="yui3-g">
-				<div>
-					<xsl:attribute name="class">
-						<xsl:choose>
-							<xsl:when test="$type='gran'">yui3-u-1-6</xsl:when>
-							<xsl:otherwise>yui3-u-1-4</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
-					<div>
-						<xsl:attribute name="class">
-							<xsl:text>date </xsl:text>
-							<xsl:choose>
-								<xsl:when test="$type='gran'">grandrounds-date</xsl:when>
-								<xsl:otherwise>cme-date</xsl:otherwise>
-							</xsl:choose>
-						</xsl:attribute>
+				<div class="yui3-u-1-6">
+					<div class="date grandrounds-date">
 						<div class="month">
 							<xsl:value-of select="$month" />
 						</div>
@@ -95,13 +78,7 @@
 						</div>
 					</div>
 				</div>
-				<div>
-					<xsl:attribute name="class">
-						<xsl:choose>
-							<xsl:when test="$type='gran'">yui3-u-5-6</xsl:when>
-							<xsl:otherwise>yui3-u-3-4</xsl:otherwise>
-						</xsl:choose>
-					</xsl:attribute>
+				<div class="yui3-u-5-6">
 					<p>
 						<xsl:copy-of select="$anchor" />
 						<xsl:if test="$time != ''">
