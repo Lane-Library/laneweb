@@ -24,18 +24,20 @@
 
 
         //On click on Image to open the imageDetail
-        Y.all('#imageList li:not(.imageDetailHidden)').on('click',
+        Y.all('#imageList  div[class=yui3-u-1-5]').on('click',
             function(e)
             {
-                var li = e.currentTarget, row = li
-                        .getAttribute("row"), id = li.get("id");
+                var div = e.currentTarget, row = div
+                        .getAttribute("row"), id = div.get("id");
+                
+                
                 Y.io(BASE_PATH + "/image?id=" + id, {
                     on : {
                         success : successHandler
                     },
                     "arguments" : {
                         row : row,
-                        li : li
+                        div : div
                     }
                 });
                 e.stopPropagation();
@@ -81,12 +83,12 @@
     function successHandler(id, o, args) {
         var image = Y.JSON.parse(o.responseText),
         row = args.row,
-        li = args.li,
+        div = args.div,
         imageDetail = Y.one("#imageDetail_" + row);
         cleanDetailImageWindow();
 
         imageDetail.one(".image").setAttribute("src", image.src);
-        imageDetail.one("h3").setContent(image.shortTitle);
+        imageDetail.one("h3").setContent(image.shortTitle + "&nbsp;");
         if (undefined !== image.description) {
             imageDetail.one(".desc p").setContent(image.shortDescription);
         }
@@ -101,14 +103,13 @@
         imageDetail.one(".copyright p").setContent(image.shortCopyrightText);
         imageDetail.one(".to-image a").setAttribute("href", image.pageUrl);
 
-        li.one("div").removeClass('imagedecoHidden');
-        li.one("div").addClass('imagedeco');
+        div.one("#imagedecorator").removeClass('imagedecoHidden');
+        div.one("#imagedecorator").addClass('imagedeco');
         imageDetail.removeClass('imageDetailHidden');
         imageDetail.addClass('imageDetail');
-
         if(row > 1){
-            li = Y.one('li[row = "'+(row-1)+'"]');
-            window.location.hash = "#"+encodeURIComponent(li.get('id'));
+            div = Y.one('div[row = "'+(row-1)+'"]');
+            window.location.hash = "#"+encodeURIComponent(div.get('id'));
         }
     }
 
