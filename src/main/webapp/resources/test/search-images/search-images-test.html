@@ -10,9 +10,37 @@
             <input name="totalPages" value="5"/>
             <input name="page" value="1"/>
         </form>
-        <ul id="imageList">
-            <li id="li0" row="0"><a><div class="imagedecoHidden">item</div></a></li>
-            <li class="imageDetailHidden" id="imageDetail_0">
+        
+        
+        
+        <div id="imageList">
+            <div id="div0" >
+            	<a>
+            		<div class="yui3-u-1-5" row="0">
+            			<div id="imagedecorator" class="imagedecoHidden">
+            				item
+            			</div>
+					</div>
+				</a>
+			</div>
+            <div class="imageDetailHidden" id="imageDetail_0">
+                <div id="image-detail-close" class="image-detail-close close fa fa-close"></div>
+                <div class="image-location"><span class="image" /></div>
+                <h3>h3</h3>
+                <div class="desc">
+                    <p>p</p>
+                </div>
+                <div class="copyright">
+                    <p>p</p></div>
+                <div class="article-title">
+                    <p>p</p>
+                </div>
+                <div class="to-image">
+                    <a href="">a</a>
+                </div>
+            </div>
+            <div id="div1" row="1"><a><div class="imagedecoHidden">item</div></a></div>
+            <div class="imageDetailHidden" id="imageDetail_1">
                 <div id="image-detail-close" class="image-detail-close close fa fa-close"></div>
                 <div class="image-location"><span class="image"/></div>
                 <h3>h3</h3>
@@ -27,9 +55,9 @@
                 <div class="to-image">
                     <a href="">a</a>
                 </div>
-            </li>
-            <li id="li1" row="1"><a><div class="imagedecoHidden">item</div></a></li>
-            <li class="imageDetailHidden" id="imageDetail_1">
+            </div>
+            <div id="div2" ><a><div class="yui3-u-1-5" row="2"><div id="imagedecorator" class="imagedecoHidden">item</div></div></a></div>
+            <div class="imageDetailHidden" id="imageDetail_2">
                 <div id="image-detail-close" class="image-detail-close close fa fa-close"></div>
                 <div class="image-location"><span class="image"/></div>
                 <h3>h3</h3>
@@ -44,9 +72,9 @@
                 <div class="to-image">
                     <a href="">a</a>
                 </div>
-            </li>
-            <li id="li2" row="2"><a><div class="imagedecoHidden">item</div></a></li>
-            <li class="imageDetailHidden" id="imageDetail_2">
+            </div>
+            <div id="div3" row="3"><a><div class="imagedecoHidden">item</div></a></div>
+            <div class="imageDetailHidden" id="imageDetail_3">
                 <div id="image-detail-close" class="image-detail-close close fa fa-close"></div>
                 <div class="image-location"><span class="image"/></div>
                 <h3>h3</h3>
@@ -61,24 +89,7 @@
                 <div class="to-image">
                     <a href="">a</a>
                 </div>
-            </li>
-            <li id="li3" row="3"><a><div class="imagedecoHidden">item</div></a></li>
-            <li class="imageDetailHidden" id="imageDetail_3">
-                <div id="image-detail-close" class="image-detail-close close fa fa-close"></div>
-                <div class="image-location"><span class="image"/></div>
-                <h3>h3</h3>
-                <div class="desc">
-                    <p>p</p>
-                </div>
-                <div class="copyright">
-                    <p>p</p></div>
-                <div class="article-title">
-                    <p>p</p>
-                </div>
-                <div class="to-image">
-                    <a href="">a</a>
-                </div>
-            </li>
+            </div>
         </ul>
         <a class="imagedeco-admin"></a>
         <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
@@ -94,7 +105,7 @@ Y.io = function(url, config, args) {
             shortArticleTitle: "shortArticleTitle",
             shortCopyrightText: "shortCopyrightText",
             pageUrl: "pageUrl",
-            id: "li0"
+            id: "div0"
         });
         config.on.success.apply(config.context, [0, {responseText:responseText}, config.arguments]);
 };
