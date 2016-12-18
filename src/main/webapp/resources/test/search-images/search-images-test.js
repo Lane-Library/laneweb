@@ -50,36 +50,36 @@ var searchImagesTestCase = new Y.Test.Case({
         window.alert = alert;
         Y.Assert.isNotNull(Y.one("input[name=totalPages]"));
     },
-    
-    testImageListItemClick: function() {
-        var item = Y.one("#imageList div[class=yui3-u-1-5]");
-        var detail = Y.one("#imageDetail_0");
-        item.simulate("click");
-        Y.Assert.areEqual("src", detail.one(".image").getAttribute("src"));
-        Y.Assert.areEqual("shortDescription", detail.one(".desc p").get("text"));
-        Y.Assert.areEqual("block", detail.one(".article-title").getStyle("display"));
-        Y.Assert.areEqual("shortArticleTitle", detail.one(".article-title p").get("text"));
-        Y.Assert.areEqual("shortCopyrightText", detail.one(".copyright p").get("text"));
-        Y.Assert.areEqual("pageUrl", detail.one(".to-image a").getAttribute("href"));
-        Y.Assert.areEqual("imagedeco", item.one("div").get("className"));
-        Y.Assert.areEqual("imageDetail", detail.get("className"));
-    },
-    
-    testImageListRow2ItemClick: function() {
-        var item = Y.one("#div2 div[class=yui3-u-1-5]");
-        var detail = Y.one("#imageDetail_2");
-        item.simulate("click");
-        Y.Assert.areEqual("src", detail.one(".image").getAttribute("src"));
-        Y.Assert.areEqual("shortDescription", detail.one(".desc p").get("text"));
-        Y.Assert.areEqual("block", detail.one(".article-title").getStyle("display"));
-        Y.Assert.areEqual("shortArticleTitle", detail.one(".article-title p").get("text"));
-        Y.Assert.areEqual("shortCopyrightText", detail.one(".copyright p").get("text"));
-        Y.Assert.areEqual("pageUrl", detail.one(".to-image a").getAttribute("href"));
-        Y.Assert.areEqual("imagedeco", item.one("div").get("className"));
-        Y.Assert.areEqual("imageDetail", detail.get("className"));
-        Y.Assert.areEqual("#div1", location.hash);
-    },
-    
+//    
+//    testImageListItemClick: function() {
+//        var item = Y.one("#imageList div[class=yui3-u-1-5]");
+//        var detail = Y.one("#imageDetail_0");
+//        item.simulate("click");
+//        Y.Assert.areEqual("src", detail.one(".image").getAttribute("src"));
+//        Y.Assert.areEqual("shortDescription", detail.one(".desc p").get("text"));
+//        Y.Assert.areEqual("block", detail.one(".article-title").getStyle("display"));
+//        Y.Assert.areEqual("shortArticleTitle", detail.one(".article-title p").get("text"));
+//        Y.Assert.areEqual("shortCopyrightText", detail.one(".copyright p").get("text"));
+//        Y.Assert.areEqual("pageUrl", detail.one(".to-image a").getAttribute("href"));
+//        Y.Assert.areEqual("imagedeco", item.one("div").get("className"));
+//        Y.Assert.areEqual("imageDetail", detail.get("className"));
+//    },
+//    
+//    testImageListRow2ItemClick: function() {
+//        var item = Y.one("#div2 div[class=yui3-u-1-5]");
+//        var detail = Y.one("#imageDetail_2");
+//        item.simulate("click");
+//        Y.Assert.areEqual("src", detail.one(".image").getAttribute("src"));
+//        Y.Assert.areEqual("shortDescription", detail.one(".desc p").get("text"));
+//        Y.Assert.areEqual("block", detail.one(".article-title").getStyle("display"));
+//        Y.Assert.areEqual("shortArticleTitle", detail.one(".article-title p").get("text"));
+//        Y.Assert.areEqual("shortCopyrightText", detail.one(".copyright p").get("text"));
+//        Y.Assert.areEqual("pageUrl", detail.one(".to-image a").getAttribute("href"));
+//        Y.Assert.areEqual("imagedeco", item.one("div").get("className"));
+//        Y.Assert.areEqual("imageDetail", detail.get("className"));
+//        Y.Assert.areEqual("#div1", location.hash);
+//    },
+//    
     testDetailCloseClick: function() {
         Y.one("#image-detail-close").simulate("click");
         Y.Assert.areEqual(0, Y.all(".imagedeco").size());
