@@ -11,7 +11,7 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Pipeline/expires"
         class="edu.stanford.irt.cocoon.pipeline.ExpiresCachingPipeline"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.cocoon.cache.Cache"/>
+        <constructor-arg ref="javax.cache.Cache"/>
         <constructor-arg value="300"/>
     </bean>
     
@@ -23,7 +23,7 @@
     <bean name="edu.stanford.irt.cocoon.pipeline.Pipeline/caching"
         class="edu.stanford.irt.cocoon.pipeline.CachingPipeline"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.cocoon.cache.Cache"/>
+        <constructor-arg ref="javax.cache.Cache"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/file"

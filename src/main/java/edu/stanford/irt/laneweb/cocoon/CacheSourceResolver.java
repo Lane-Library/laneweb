@@ -4,10 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import edu.stanford.irt.cocoon.cache.Cache;
+import javax.cache.Cache;
+
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
@@ -56,7 +58,7 @@ public class CacheSourceResolver implements SourceResolver {
 
     private static final long MILLISECONDS_PER_MINUTE = 1000L * 60L;
 
-    private Cache cache;
+    private Cache<Serializable, CachedResponse> cache;
 
     private SourceResolver sourceResolver;
 
@@ -68,7 +70,7 @@ public class CacheSourceResolver implements SourceResolver {
      * @param sourceResolver
      *            the resolver for the cached sources.
      */
-    public CacheSourceResolver(final Cache cache, final SourceResolver sourceResolver) {
+    public CacheSourceResolver(final Cache<Serializable, CachedResponse> cache, final SourceResolver sourceResolver) {
         this.cache = cache;
         this.sourceResolver = sourceResolver;
     }
@@ -89,7 +91,7 @@ public class CacheSourceResolver implements SourceResolver {
                 long minutes = Long.parseLong(schemeSpecificPart.substring(0, colon));
                 Validity validity = new ExpiresValidity(minutes * MILLISECONDS_PER_MINUTE);
                 cachedResponse = new CachedResponse(validity, bytes);
-                this.cache.store(cacheURI, cachedResponse);
+                this.cache.put(cacheURI, cachedResponse);
             } catch (URISyntaxException | IOException e) {
                 throw new LanewebException(e);
             }
