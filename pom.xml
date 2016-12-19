@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>19</version>
+        <version>20</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.3.12-SNAPSHOT</version>
@@ -63,7 +63,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon</artifactId>
-            <version>1.9.6</version>
+            <version>1.10.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
@@ -101,7 +101,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.7.0-12</version>
+            <version>9.7.0-14</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -240,7 +240,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
-            <version>1.0.2</version>
+            <version>1.1.0-SNAPSHOT</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -331,7 +331,7 @@
         <dependency>
             <groupId>org.ehcache.modules</groupId>
             <artifactId>ehcache-107</artifactId>
-            <version>3.1.3</version>
+            <version>3.2.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

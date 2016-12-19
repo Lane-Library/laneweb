@@ -12,13 +12,15 @@ import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import javax.cache.Cache;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.cocoon.cache.Cache;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.source.Source;
@@ -27,7 +29,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class CacheSourceResolverTest {
 
-    private Cache cache;
+    private Cache<Serializable, CachedResponse> cache;
 
     private CachedResponse cachedResponse;
 
@@ -39,6 +41,7 @@ public class CacheSourceResolverTest {
 
     private Validity validity;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.cache = createMock(Cache.class);
@@ -85,7 +88,7 @@ public class CacheSourceResolverTest {
         expect(this.cache.get(new URI("cache:20:http://www.example.com/"))).andReturn(null);
         expect(this.sourceResolver.resolveURI(new URI("http://www.example.com/"))).andReturn(this.source);
         expect(this.source.getInputStream()).andReturn(new ByteArrayInputStream("foo".getBytes()));
-        this.cache.store(eq(new URI("cache:20:http://www.example.com/")), isA(CachedResponse.class));
+        this.cache.put(eq(new URI("cache:20:http://www.example.com/")), isA(CachedResponse.class));
         replay(this.cache, this.sourceResolver, this.cachedResponse, this.validity, this.source);
         Source source = this.cacheSourceResolver.resolveURI(new URI("cache:20:http://www.example.com/"));
         assertEquals("cache:20:http://www.example.com/", source.getURI());
@@ -103,7 +106,7 @@ public class CacheSourceResolverTest {
         expect(this.validity.isValid()).andReturn(false);
         expect(this.sourceResolver.resolveURI(new URI("http://www.example.com/"))).andReturn(this.source);
         expect(this.source.getInputStream()).andReturn(new ByteArrayInputStream("foo".getBytes()));
-        this.cache.store(eq(new URI("cache:20:http://www.example.com/")), isA(CachedResponse.class));
+        this.cache.put(eq(new URI("cache:20:http://www.example.com/")), isA(CachedResponse.class));
         replay(this.cache, this.sourceResolver, this.cachedResponse, this.validity, this.source);
         Source source = this.cacheSourceResolver.resolveURI(new URI("cache:20:http://www.example.com/"));
         assertEquals("cache:20:http://www.example.com/", source.getURI());
