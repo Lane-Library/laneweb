@@ -24,11 +24,6 @@
         </param-value>
     </context-param>
     
-    <context-param>
-        <param-name>laneweb.context.version</param-name>
-        <param-value>${project.version}</param-value>
-    </context-param>
-
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
