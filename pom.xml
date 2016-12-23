@@ -365,16 +365,17 @@
                 <version>2.6</version>
                 <configuration>
                     <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>xmap</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
                     <webResources>
                         <resource>
-                            <directory>src/main/webapp</directory>
+                            <directory>src/main/webapp/resources/templates</directory>
                             <filtering>true</filtering>
+                            <targetPath>resources/templates</targetPath>
+                        </resource>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <excludes>
+                                <exclude>resources/templates/*</exclude>
+                            </excludes>
                         </resource>
                     </webResources>
                 </configuration>
