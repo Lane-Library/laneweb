@@ -11,9 +11,8 @@
         Y.all('form[name=paginationForm]').on(
                 'submit',
                 function(e) {
-                    var totalPages = Number(e.target.get('totalPages').get(
-                            'value')), page = Number(e.target.get('page').get(
-                            'value'));
+                    var totalPages = Number(e.target.get('totalPages').get('value')),
+                        page = Number(e.target.get('page').get('value'));
                     if (page < 1 || page > totalPages) {
                         alert("Page out of range");
                         e.preventDefault();
@@ -22,15 +21,14 @@
                     }
                 });
 
-
         //On click on Image to open the imageDetail
         Y.all('#imageList  div[class=yui3-u-1-5]').on('click',
             function(e)
             {
-                var div = e.currentTarget, row = div
-                        .getAttribute("row"), id = div.get("id");
-                
-                
+                var div = e.currentTarget,
+                    row = div.getAttribute("row"),
+                    id = div.get("id");
+
                 Y.io(BASE_PATH + "/image?id=" + id, {
                     on : {
                         success : successHandler
@@ -49,7 +47,6 @@
             cleanDetailImageWindow();
         }, "#image-detail-close");
 
-
         //Admin on click on the id
         Y.on("click", function(e) {
             var href = e.target.get('href');
@@ -61,10 +58,7 @@
             e.stopPropagation();
             e.preventDefault();
         }, ".imagedeco-admin");
-
-
     }
-
 
     function confirmAdminAction(unused, o){
         var image = Y.JSON.parse(o.responseText),
@@ -119,10 +113,9 @@
             node.addClass('imageDetailHidden');
         });
         Y.all(".imagedeco").each(function(node) {
-                node.removeClass('imagedeco');
-                node.addClass('imagedecoHidden');
+            node.removeClass('imagedeco');
+            node.addClass('imagedecoHidden');
         });
-
     }
 
 })();
