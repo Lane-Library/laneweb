@@ -138,7 +138,7 @@
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/version"
         class="edu.stanford.irt.laneweb.servlet.binding.VersionDataBinder">
-        <constructor-arg ref="servletContext"/>
+        <constructor-arg value="%{edu.stanford.irt.laneweb.version}"/>
     </bean>
     
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode"

@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,11 +33,10 @@ public class StatusController {
     @Autowired
     public StatusController(final SitemapController sitemapController,
             @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager,
-            final ServletContext servletContext) {
+            @Value("${edu.stanford.irt.laneweb.version}") final String version) {
         this.sitemapController = sitemapController;
         this.suggestionManager = suggestionManager;
-        this.version = new StringBuilder("laneweb-").append(servletContext.getInitParameter("laneweb.context.version"))
-                .append('\n').toString();
+        this.version = new StringBuilder("laneweb-").append(version).append('\n').toString();
     }
 
     @RequestMapping(value = "/status.txt", produces = "text/plain; charset=utf-8")
