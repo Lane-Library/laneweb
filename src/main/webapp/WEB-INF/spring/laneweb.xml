@@ -3,7 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
     
-    <import resource="audio.xml"/>
     <import resource="bassett.xml"/>
     <import resource="binding.xml"/>
     <import resource="bookcovers.xml"/>
@@ -185,8 +184,8 @@
         </constructor-arg>
     </bean>
     
-    <bean id="edu.stanford.irt.cocoon.cache.Cache"
-        class="edu.stanford.irt.laneweb.cocoon.JCache">
+    <bean id="javax.cache.Cache"
+        class="edu.stanford.irt.laneweb.cocoon.CacheFactoryBean">
         <constructor-arg>
             <bean class="org.springframework.cache.jcache.JCacheManagerFactoryBean">
                 <property name="cacheManagerUri" value="classpath:ehcache.xml"/>

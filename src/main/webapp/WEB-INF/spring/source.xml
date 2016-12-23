@@ -27,7 +27,7 @@
                 </entry>
                 <entry key="cache">
                     <bean class="edu.stanford.irt.laneweb.cocoon.CacheSourceResolver">
-                        <constructor-arg ref="edu.stanford.irt.cocoon.cache.Cache"/>
+                        <constructor-arg ref="javax.cache.Cache"/>
                         <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
                     </bean>
                 </entry>
