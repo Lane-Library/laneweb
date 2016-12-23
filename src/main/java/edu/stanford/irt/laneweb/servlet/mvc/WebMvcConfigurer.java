@@ -64,12 +64,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        super.addResourceHandlers(registry);
-        if (!registry.hasMappingForPattern("/**")) {
-            registry.addResourceHandler("/**")
-                .addResourceLocations(new String[] {this.liveBase, "/" })
-                .setCachePeriod(ONE_YEAR_IN_SECONDS);
-        }
+        registry.addResourceHandler("/**")
+            .addResourceLocations(new String[] {this.liveBase, "/" })
+            .setCachePeriod(ONE_YEAR_IN_SECONDS);
     }
 
     @Override
