@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
  * This filter allow to switch the tab in the image search if the result was equals to 0 to go to a tab that have some
@@ -10,23 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
-public class SearchImageFilter extends AbstractLanewebFilter {
+public class SearchImageInterceptor extends HandlerInterceptorAdapter {
 
     private static final String ALL_IMAGES = "images-all";
 
@@ -40,12 +36,9 @@ public class SearchImageFilter extends AbstractLanewebFilter {
 
     private SolrImageService service;
 
-    @Override
-    public void init(final FilterConfig filterConfig) {
-        ServletContext servletContext = filterConfig.getServletContext();
-        WebApplicationContext webApplicationContext = WebApplicationContextUtils
-                .getWebApplicationContext(servletContext);
-        this.service = webApplicationContext.getBean("edu.stanford.irt.solr.service", SolrImageService.class);
+    @Autowired
+    public SearchImageInterceptor(final SolrImageService service) {
+        this.service = service;
         this.copyrightMapping = new HashMap<>();
         this.copyrightMapping.put(ALL_IMAGES, "0");
         this.copyrightMapping.put(CC_IMAGES, "10");
@@ -54,8 +47,8 @@ public class SearchImageFilter extends AbstractLanewebFilter {
     }
 
     @Override
-    protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
-            final FilterChain chain) throws IOException, ServletException {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
+            throws IOException {
         String sourceOri = request.getParameter("source");
         String auto = request.getParameter("auto");
         if (sourceOri != null && sourceOri.indexOf(ALL_IMAGES) > -1 && !"no".equals(auto)) {
@@ -67,10 +60,10 @@ public class SearchImageFilter extends AbstractLanewebFilter {
                 String source = getNewSource(keys);
                 String url = request.getRequestURL() + "?" + request.getQueryString();
                 response.sendRedirect(url.replace(sourceOri, source));
-                return;
+                return false;
             }
         }
-        chain.doFilter(request, response);
+        return true;
     }
 
     private String getNewSource(final Object[] keys) {

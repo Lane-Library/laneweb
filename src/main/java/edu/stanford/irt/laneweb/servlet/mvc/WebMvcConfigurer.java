@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
+import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
 @EnableWebMvc
@@ -38,13 +39,16 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
+    private String liveBase;
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Autowired
     private RedirectProcessor redirectProcessor;
 
-    private String liveBase;
+    @Autowired
+    private SolrImageService solrImageService;
 
     public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}") final String liveBase) {
         this.liveBase = liveBase + "/";
@@ -60,6 +64,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
              .addPathPatterns("/**/*.html");
         registry.addInterceptor(redirectHandlerInterceptor())
             .addPathPatterns("/**");
+        registry.addInterceptor(searchImageInterceptor())
+            .addPathPatterns("/search.html");
     }
 
     @Override
@@ -105,5 +111,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public RedirectHandlerInterceptor redirectHandlerInterceptor() {
         return new RedirectHandlerInterceptor(this.redirectProcessor);
+    }
+
+    @Bean
+    public SearchImageInterceptor searchImageInterceptor() {
+        return new SearchImageInterceptor(this.solrImageService);
     }
 }

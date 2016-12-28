@@ -41,6 +41,8 @@ public class WebMvcConfigurerTest {
         expect(registration.addPathPatterns("/**/*.html")).andReturn(registration);
         expect(registry.addInterceptor(isA(RedirectHandlerInterceptor.class))).andReturn(registration);
         expect(registration.addPathPatterns("/**")).andReturn(registration);
+        expect(registry.addInterceptor(isA(SearchImageInterceptor.class))).andReturn(registration);
+        expect(registration.addPathPatterns("/search.html")).andReturn(registration);
         replay(registry, registration);
         this.configuration.addInterceptors(registry);
         verify(registry, registration);
