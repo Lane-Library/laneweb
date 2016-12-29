@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource;
 
 public class UrlTesterTest {
 

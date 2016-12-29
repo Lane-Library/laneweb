@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+    <bean id="edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource"
+        class="edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource"
+        destroy-method="dispose">
+        <constructor-arg value="search-lane.xml"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.laneweb.search.MetaSearchManager"
+        class="edu.stanford.irt.laneweb.metasearch.MetaSearchManagerFactoryBean"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"
+        class="edu.stanford.irt.laneweb.metasearch.PagingSearchResultListSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.metasearch.SearchResultSAXStrategy"/>
+        </constructor-arg>
+    </bean>
+
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/result"
+        class="edu.stanford.irt.laneweb.metasearch.MetasearchResultSAXStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.metasearch.EngineResultSAXStrategy">
+                <constructor-arg>
+                    <bean class="edu.stanford.irt.laneweb.metasearch.ResourceResultSAXStrategy">
+                        <constructor-arg>
+                            <bean class="edu.stanford.irt.laneweb.metasearch.AlternateContentResultSAXStrategy"/>
+                        </constructor-arg>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+    </bean>
+   
+    <bean id="edu.stanford.irt.laneweb.metasearch.ContentResultConversionStrategy"
+        class="edu.stanford.irt.laneweb.metasearch.ContentResultConversionStrategy">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.metasearch.ScoreStrategy"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.metasearch.AbstractMetasearchGenerator"
+        class="edu.stanford.irt.laneweb.metasearch.AbstractMetasearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
+        abstract="true">
+        <constructor-arg index="0" ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/result"/>
+    </bean>
+
+    <bean id="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsFactory"
+        class="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsFactory">
+        <constructor-arg ref="edu.stanford.irt.laneweb.metasearch.ContentResultConversionStrategy"/>
+    </bean>    
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/clinical-all"
+        class="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsSAXStrategy"/>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>aafp_patients</value>
+                <value>acpjc</value>
+                <value>bmj_clinical_evidence</value>
+                <value>dynamed</value>
+                <value>guideline_clearinghouse</value>
+                <value>medlineplus</value>
+                <value>pubmed</value>
+                <value>pubmed_clinicaltrial</value>
+                <value>pubmed_cochrane_reviews</value>
+                <value>pubmed_cost</value>
+                <value>pubmed_diagnosis_focused</value>
+                <value>pubmed_epidemiology_focused</value>
+                <value>pubmed_etiology_focused</value>
+                <value>pubmed_harm_focused</value>
+                <value>pubmed_prevention</value>
+                <value>pubmed_prognosis_focused</value>
+                <value>pubmed_qualityimprovement</value>
+                <value>pubmed_rct</value>
+                <value>pubmed_systematicreviews</value>
+                <value>pubmed_treatment_focused</value>
+                <value>uptodate</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsFactory"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/peds-all"
+        class="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsGenerator"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.laneweb.search.MetaSearchManager"/>
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsSAXStrategy"/>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>aafp_patients</value>
+                <value>aappatient</value>
+                <value>aapwebsite</value>
+                <value>dynamed_allchild</value>
+                <value>guideline_clearinghouse_allchild</value>
+                <value>pubmed_allchild</value>
+                <value>pubmed_clinicaltrial_allchild</value>
+                <value>pubmed_cost_allchild</value>
+                <value>pubmed_diagnosis_focused_allchild</value>
+                <value>pubmed_epidemiology_focused_allchild</value>
+                <value>pubmed_etiology_focused_allchild</value>
+                <value>pubmed_harm_focused_allchild</value>
+                <value>pubmed_peds_journals</value>
+                <value>pubmed_prevention_allchild</value>
+                <value>pubmed_prognosis_focused_allchild</value>
+                <value>pubmed_qualityimprovement_allchild</value>
+                <value>pubmed_rct_allchild</value>
+                <value>pubmed_systematicreviews_allchild</value>
+                <value>pubmed_treatment_focused_allchild</value>
+                <value>uptodate_allchild</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg ref="edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsFactory"/>
+    </bean>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-describe"
+        class="edu.stanford.irt.laneweb.metasearch.DescribeGenerator"
+        parent="edu.stanford.irt.laneweb.metasearch.AbstractMetasearchGenerator"/>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search"
+        class="edu.stanford.irt.laneweb.metasearch.SearchGenerator"
+        parent="edu.stanford.irt.laneweb.metasearch.AbstractMetasearchGenerator"/>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content"
+        class="edu.stanford.irt.laneweb.metasearch.ContentSearchGenerator"
+        parent="edu.stanford.irt.laneweb.metasearch.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.laneweb.metasearch.ContentResultConversionStrategy"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-content-html"
+        class="edu.stanford.irt.laneweb.metasearch.ContentSearchGenerator"
+        parent="edu.stanford.irt.laneweb.metasearch.AbstractMetasearchGenerator">
+        <constructor-arg index="1" ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-search-html"/>
+        <constructor-arg index="2" ref="edu.stanford.irt.laneweb.metasearch.ContentResultConversionStrategy"/>
+    </bean>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-engine"
+        class="edu.stanford.irt.laneweb.metasearch.EngineSearchGenerator"
+        parent="edu.stanford.irt.cocoon.pipeline.Generator/search"/>
+
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/search-resource"
+        class="edu.stanford.irt.laneweb.metasearch.ResourceSearchGenerator"
+        parent="edu.stanford.irt.cocoon.pipeline.Generator/search"/>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/search-directory"
+        class="edu.stanford.irt.laneweb.metasearch.SearchDirectoryTransformer"
+        scope="prototype"/>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/file-path"
+        class="edu.stanford.irt.laneweb.metasearch.FilePathTransformer"
+        scope="prototype">
+        <constructor-arg ref="edu.stanford.irt.cocoon.source.SourceResolver"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXParser/html"/>
+    </bean>
+</beans>

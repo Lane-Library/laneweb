@@ -22,7 +22,7 @@
     </bean> 
 
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-image-search"
-        class="edu.stanford.irt.laneweb.search.saxstrategy.SolrImageSearchSAXStrategy">
+        class="edu.stanford.irt.laneweb.search.SolrImageSearchSAXStrategy">
         <property name="websiteIdMapping" ref="edu.stanford.irt.laneweb.search.websiteIdMaping"/>
     </bean>
 
@@ -33,7 +33,7 @@
     </bean>
 
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-admin-image-search"
-        class="edu.stanford.irt.laneweb.search.saxstrategy.SolrAdminImageSearchSAXStrategy">
+        class="edu.stanford.irt.laneweb.search.SolrAdminImageSearchSAXStrategy">
         <property name="websiteIdMapping" ref="edu.stanford.irt.laneweb.search.websiteIdMaping"/>
     </bean>
 

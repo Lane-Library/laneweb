@@ -1,0 +1,103 @@
+package edu.stanford.irt.laneweb.metasearch;
+
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.util.Collections;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.TestXMLConsumer;
+import edu.stanford.irt.laneweb.metasearch.EngineResultSAXStrategy;
+import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.Result;
+
+public class EngineResultSAXStrategyTest {
+
+    private SAXStrategy<Result> resourceSAXStrategy;
+
+    private Result result;
+
+    private EngineResultSAXStrategy strategy;
+
+    private TestXMLConsumer xmlConsumer;
+
+    @SuppressWarnings("unchecked")
+    @Before
+    public void setUp() {
+        this.resourceSAXStrategy = createMock(SAXStrategy.class);
+        this.strategy = new EngineResultSAXStrategy(this.resourceSAXStrategy);
+        this.xmlConsumer = new TestXMLConsumer();
+        this.result = createMock(Result.class);
+    }
+
+    @Test
+    public void testToSAX() throws SAXException, IOException {
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getDescription()).andReturn("description");
+        expect(this.result.getException()).andReturn(null);
+        expect(this.result.getHits()).andReturn("hits");
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
+        expect(this.result.getTime()).andReturn("time");
+        expect(this.result.getURL()).andReturn("url");
+        this.resourceSAXStrategy.toSAX(this.result, this.xmlConsumer);
+        replay(this.result, this.resourceSAXStrategy);
+        this.xmlConsumer.startDocument();
+        this.strategy.toSAX(this.result, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "EngineResultSAXStrategyTest-toSAX.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.result, this.resourceSAXStrategy);
+    }
+
+    @Test
+    public void testToSAXNullStatus() throws SAXException, IOException {
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getDescription()).andReturn("description");
+        expect(this.result.getException()).andReturn(null);
+        expect(this.result.getHits()).andReturn("hits");
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getStatus()).andReturn(null);
+        expect(this.result.getTime()).andReturn("time");
+        expect(this.result.getURL()).andReturn("url");
+        this.resourceSAXStrategy.toSAX(this.result, this.xmlConsumer);
+        replay(this.result, this.resourceSAXStrategy);
+        this.xmlConsumer.startDocument();
+        this.strategy.toSAX(this.result, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "EngineResultSAXStrategyTest-toSAXNullStatus.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.result, this.resourceSAXStrategy);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testToSAXThrowsException() throws SAXException, IOException {
+        XMLConsumer c = createMock(XMLConsumer.class);
+        expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
+        expect(this.result.getDescription()).andReturn("description");
+        expect(this.result.getException()).andReturn(null);
+        expect(this.result.getHits()).andReturn("hits");
+        expect(this.result.getId()).andReturn("id");
+        expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
+        expect(this.result.getTime()).andReturn("time");
+        expect(this.result.getURL()).andReturn("url");
+        c.startElement(eq("http://irt.stanford.edu/search/2.0"), eq("engine"), eq("engine"), isA(Attributes.class));
+        expectLastCall().andThrow(new SAXException());
+        replay(this.result, this.resourceSAXStrategy, c);
+        this.strategy.toSAX(this.result, c);
+    }
+}

@@ -15,6 +15,7 @@
     <import resource="flickr-photos.xml"/>
     <import resource="grandrounds.xml"/>
     <import resource="mapping.xml"/>
+    <import resource="metasearch.xml"/>
     <import resource="pipeline.xml"/>
     <import resource="proxy.xml"/>
     <import resource="querymap.xml"/>
