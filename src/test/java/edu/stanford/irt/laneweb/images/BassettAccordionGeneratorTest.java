@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bassett;
+package edu.stanford.irt.laneweb.images;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -15,6 +15,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.images.BassettAccordionGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.solr.BassettImage;
 import edu.stanford.irt.solr.service.SolrImageService;

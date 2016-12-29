@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.images;
 
 import java.util.Map;
 
@@ -11,6 +11,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 

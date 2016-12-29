@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.images;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

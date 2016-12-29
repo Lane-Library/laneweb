@@ -3,7 +3,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
     
-    <import resource="bassett.xml"/>
     <import resource="binding.xml"/>
     <import resource="bookcovers.xml"/>
     <import resource="bookmarks.xml"/>
@@ -14,6 +13,7 @@
     <import resource="eresources.xml"/>
     <import resource="flickr-photos.xml"/>
     <import resource="grandrounds.xml"/>
+    <import resource="images.xml"/>
     <import resource="mapping.xml"/>
     <import resource="metasearch.xml"/>
     <import resource="pipeline.xml"/>
@@ -21,7 +21,6 @@
     <import resource="querymap.xml"/>
     <import resource="redirect.xml"/>
     <import resource="search.xml"/>
-    <import resource="search-image.xml"/>
     <import resource="sitemap.xml"/>
     <import resource="source.xml"/>
     <import resource="solr.xml"/>
@@ -277,8 +276,8 @@
                 <entry key="seresource" value="edu.stanford.irt.eresources.impl.SearchEresourceImpl"/>
                 <entry key="link" value="edu.stanford.irt.eresources.LinkImpl"/>
                 <entry key="paging" value="edu.stanford.irt.laneweb.eresources.PagingData"/>
-                <entry key="region" value="edu.stanford.irt.laneweb.bassett.RegionCount"/>
-                <entry key="bassett" value="edu.stanford.irt.laneweb.bassett.BassettImage"/>
+                <entry key="region" value="edu.stanford.irt.laneweb.images.RegionCount"/>
+                <entry key="bassett" value="edu.stanford.irt.laneweb.images.BassettImage"/>
                 <entry key="mresource" value="edu.stanford.irt.search.impl.ContentResult"/>
                 <entry key="result" value="edu.stanford.irt.search.impl.Result"/>-->
                 <entry key="bookmark" value="edu.stanford.irt.laneweb.bookmarks.Bookmark"/>

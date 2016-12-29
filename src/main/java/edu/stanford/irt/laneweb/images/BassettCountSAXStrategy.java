@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bassett;
+package edu.stanford.irt.laneweb.images;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;

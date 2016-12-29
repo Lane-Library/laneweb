@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.images;
 
 import java.text.NumberFormat;
 import java.util.List;

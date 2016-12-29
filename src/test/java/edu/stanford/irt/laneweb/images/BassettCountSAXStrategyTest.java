@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bassett;
+package edu.stanford.irt.laneweb.images;
 
 
 import static org.easymock.EasyMock.aryEq;
@@ -27,6 +27,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.images.BassettCountSAXStrategy;
 import edu.stanford.irt.solr.BassettImage;
 
 public class BassettCountSAXStrategyTest {

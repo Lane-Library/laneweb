@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.images;
 
 import java.util.Collections;
 
@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
+import edu.stanford.irt.laneweb.search.AbstractSolrSearchResult;
 import edu.stanford.irt.solr.Image;
 
 public class SolrImageSearchResult extends AbstractSolrSearchResult<Image> {

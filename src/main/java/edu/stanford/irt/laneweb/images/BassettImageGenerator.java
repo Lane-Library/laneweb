@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.bassett;
+package edu.stanford.irt.laneweb.images;
 
 import java.util.Map;
 

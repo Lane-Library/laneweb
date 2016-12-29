@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.images;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -20,6 +20,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.images.SolrImageSearchTabGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
