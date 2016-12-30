@@ -21,7 +21,7 @@ public class SitemapConfigurationTest {
 
     @Test
     public void testCustomEditorConfigurer() {
-        assertNotNull(this.configuration.customEditorConfigurer());
+        assertNotNull(SitemapConfiguration.customEditorConfigurer());
     }
 
     @Test

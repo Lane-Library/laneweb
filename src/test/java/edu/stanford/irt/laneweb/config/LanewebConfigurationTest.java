@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import java.net.URISyntaxException;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class LanewebConfigurationTest {
@@ -15,12 +14,6 @@ public class LanewebConfigurationTest {
     @Before
     public void setUp() {
         this.configuration = new LanewebConfiguration();
-    }
-
-    @Test
-    @Ignore // throws NullPointerException
-    public void testCache() throws URISyntaxException {
-        assertNotNull(this.configuration.cache());
     }
 
     @Test
