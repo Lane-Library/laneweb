@@ -16,7 +16,7 @@ public class PipelineConfigurationTest {
     @Before
     public void setUp() {
         this.beanFactory = createMock(BeanFactory.class);
-        this.configuration = new PipelineConfiguration(this.beanFactory);
+        this.configuration = new PipelineConfiguration();
     }
 
     @Test
@@ -26,17 +26,17 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testBibStatusGenerator() {
-        assertNotNull(this.configuration.bibStatusGenerator());
+        assertNotNull(this.configuration.bibStatusGenerator(null, null));
     }
 
     @Test
     public void testCachingPipeline() {
-        assertNotNull(this.configuration.cachingPipeline());
+        assertNotNull(this.configuration.cachingPipeline(null));
     }
 
     @Test
     public void testClassesGenerator() {
-        assertNotNull(this.configuration.classesGenerator());
+        assertNotNull(this.configuration.classesGenerator(null));
     }
 
     @Test
@@ -46,37 +46,32 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testEventListTransformer() {
-        assertNotNull(this.configuration.eventListTransformer());
+        assertNotNull(this.configuration.eventListTransformer(null, null));
     }
 
     @Test
     public void testExpiresCachingPipeline() {
-        assertNotNull(this.configuration.expiresCachingPipeline());
+        assertNotNull(this.configuration.expiresCachingPipeline(null));
     }
 
     @Test
     public void testFileGenerator() {
-        assertNotNull(this.configuration.fileGenerator());
+        assertNotNull(this.configuration.fileGenerator(null));
     }
 
     @Test
     public void testHtml5IndentSerializer() {
-        assertNotNull(this.configuration.html5IndentSerializer());
+        assertNotNull(this.configuration.html5IndentSerializer(null));
     }
 
     @Test
     public void testHtml5Serializer() {
-        assertNotNull(this.configuration.html5Serializer());
+        assertNotNull(this.configuration.html5Serializer(null));
     }
-
-//    @Test
-//    public void testHtmlGenerator() {
-//        assertNotNull(this.configuration.htmlGenerator());
-//    }
 
     @Test
     public void testJoostTransformer() {
-        assertNotNull(this.configuration.joostTransformer());
+        assertNotNull(this.configuration.joostTransformer(null));
     }
 
     @Test
@@ -86,7 +81,7 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testNonCachedClassesGenerator() {
-        assertNotNull(this.configuration.nonCachedClassesGenerator());
+        assertNotNull(this.configuration.nonCachedClassesGenerator(null));
     }
 
     @Test
@@ -96,27 +91,27 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testParameterMapGenerator() {
-        assertNotNull(this.configuration.parameterMapGenerator());
+        assertNotNull(this.configuration.parameterMapGenerator(null));
     }
 
     @Test
     public void testSaxonTransformer() {
-        assertNotNull(this.configuration.saxonTransformer());
+        assertNotNull(this.configuration.saxonTransformer(null));
     }
 
     @Test
     public void testSeminarsGenerator() {
-        assertNotNull(this.configuration.seminarsGenerator());
+        assertNotNull(this.configuration.seminarsGenerator(this.beanFactory, null));
     }
 
     @Test
     public void testTextNodeParserTransformer() {
-        assertNotNull(this.configuration.textNodeParsingTransformer());
+        assertNotNull(this.configuration.textNodeParsingTransformer(this.beanFactory));
     }
 
     @Test
     public void testTextSerializer() {
-        assertNotNull(this.configuration.textSerializer());
+        assertNotNull(this.configuration.textSerializer(null));
     }
 
     @Test
@@ -126,16 +121,16 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testXhtmlSerializer() {
-        assertNotNull(this.configuration.xhtmlSerializer());
+        assertNotNull(this.configuration.xhtmlSerializer(null));
     }
 
     @Test
     public void testXIncludeTransformer() {
-        assertNotNull(this.configuration.xIncludeTransformer());
+        assertNotNull(this.configuration.xIncludeTransformer(this.beanFactory));
     }
 
     @Test
     public void testXmlSerializer() {
-        assertNotNull(this.configuration.xmlSerializer());
+        assertNotNull(this.configuration.xmlSerializer(null));
     }
 }

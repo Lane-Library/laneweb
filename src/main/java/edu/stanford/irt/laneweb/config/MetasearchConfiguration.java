@@ -56,7 +56,7 @@ public class MetasearchConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
     public ClinicalSearchResultsGenerator allClinicalSearchResultsGenerator() {
-        List<String> engines = new ArrayList<>();
+        List<String> engines = new ArrayList<>(21);
         engines.add("aafp_patients");
         engines.add("acpjc");
         engines.add("bmj_clinical_evidence");
@@ -147,7 +147,7 @@ public class MetasearchConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/peds-all")
     @Scope("prototype")
     public ClinicalSearchResultsGenerator pedsClinicalSearchResultsGenerator() {
-        List<String> engines = new ArrayList<>();
+        List<String> engines = new ArrayList<>(20);
         engines.add("aafp_patients");
         engines.add("aappatient");
         engines.add("aapwebsite");

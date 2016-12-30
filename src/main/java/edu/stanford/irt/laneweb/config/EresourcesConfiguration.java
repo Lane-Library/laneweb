@@ -125,7 +125,7 @@ public class EresourcesConfiguration {
         SolrSearchFacetsGenerator generator = new SolrSearchFacetsGenerator(this.solrService(), this.marshaller);
         generator.setFacetsToShowBrowse(20);
         generator.setFacetsToShowSearch(4);
-        List<String> meshToIgnoreInSearch = new ArrayList<>();
+        List<String> meshToIgnoreInSearch = new ArrayList<>(25);
         meshToIgnoreInSearch.add("nomesh");
         meshToIgnoreInSearch.add("Adolescent");
         meshToIgnoreInSearch.add("Adult");
@@ -152,7 +152,7 @@ public class EresourcesConfiguration {
         meshToIgnoreInSearch.add("Rats");
         meshToIgnoreInSearch.add("Young Adult");
         generator.setMeshToIgnoreInSearch(meshToIgnoreInSearch);
-        List<String> publicationTypes = new ArrayList<>();
+        List<String> publicationTypes = new ArrayList<>(4);
         publicationTypes.add("Clinical Trial");
         publicationTypes.add("Randomized Controlled Trial");
         publicationTypes.add("Review");

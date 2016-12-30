@@ -29,7 +29,7 @@ public class UserConfiguration {
 
     @Bean
     public LDAPDataAccess ldapDataAccess() {
-        Set<String> activeAffiliations = new HashSet<>();
+        Set<String> activeAffiliations = new HashSet<>(24);
         activeAffiliations.add("stanford:affiliate:sponsored");
         activeAffiliations.add("stanford:faculty*");
         activeAffiliations.add("stanford:faculty:onleave");

@@ -108,7 +108,7 @@ public class BindingConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public CompositeDataBinder dataBinder() {
-        List<DataBinder> dataBinders = new ArrayList<>();
+        List<DataBinder> dataBinders = new ArrayList<>(20);
         dataBinders.add(userDataBinder());
         dataBinders.add(ticketDataBinder());
         dataBinders.add(debugDataBinder());

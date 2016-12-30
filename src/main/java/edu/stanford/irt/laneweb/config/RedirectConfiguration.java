@@ -19,7 +19,7 @@ public class RedirectConfiguration {
 
     @Bean
     public CompositeRedirectProcessor redirectProcessor() {
-        List<RedirectProcessor> redirectProcessors = new ArrayList<>();
+        List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
         redirectProcessors.add(new TrailingSlashRedirectProcessor());
         Map<String, String> redirectMap = new HashMap<>();
         redirectMap.put("/classes/index\\.html", "/classes-consult/laneclasses.html");

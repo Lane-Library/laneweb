@@ -53,8 +53,8 @@ public class XMLConfiguration {
         factoryBean.setNamespaceAware(true);
         factoryBean.setValidating(false);
         factoryBean.setXIncludeAware(false);
-        factoryBean.setFeatures(
-                Collections.singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", false));
+        factoryBean.setFeatures(Collections
+                .singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", Boolean.FALSE));
         return factoryBean;
     }
 
@@ -119,8 +119,8 @@ public class XMLConfiguration {
         factoryBean.setNamespaceAware(true);
         factoryBean.setValidating(false);
         factoryBean.setXIncludeAware(false);
-        factoryBean.setFeatures(
-                Collections.singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", false));
+        factoryBean.setFeatures(Collections
+                .singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", Boolean.FALSE));
         return factoryBean;
     }
 
