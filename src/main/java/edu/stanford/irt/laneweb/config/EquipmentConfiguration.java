@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,7 +31,7 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public VoyagerRecordGenerator equipmentGenerator() throws BeansException, IOException {
+    public VoyagerRecordGenerator equipmentGenerator() throws IOException {
         return new VoyagerRecordGenerator(this.dataSource,
                 getClass().getResourceAsStream("/edu/stanford/irt/laneweb/equipment/getEquipment.fnc"), 1,
                 this.beanFactory.getBean("org.xml.sax.XMLReader/marc", XMLReader.class));
