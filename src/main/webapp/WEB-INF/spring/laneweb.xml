@@ -23,7 +23,6 @@
     <import resource="search.xml"/>
     <import resource="sitemap.xml"/>
     <import resource="source.xml"/>
-    <import resource="solr.xml"/>
     <import resource="suggest.xml"/>
     <import resource="trends.xml"/>
     <import resource="voyager.xml"/>
@@ -281,7 +280,7 @@
                 <entry key="mresource" value="edu.stanford.irt.search.impl.ContentResult"/>
                 <entry key="result" value="edu.stanford.irt.search.impl.Result"/>-->
                 <entry key="bookmark" value="edu.stanford.irt.laneweb.bookmarks.Bookmark"/>
-                <entry key="facet" value="edu.stanford.irt.laneweb.solr.Facet"/>
+                <entry key="facet" value="edu.stanford.irt.laneweb.eresources.search.Facet"/>
             </map>
         </property>
         <!-- setMode(XStream.NO_REFERENCES) -->

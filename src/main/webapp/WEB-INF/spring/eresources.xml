@@ -1,55 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+    xmlns:solr="http://www.springframework.org/schema/data/solr"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-2.0.xsd">
      
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"
         class="edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy"/>
     
     <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"
-        class="edu.stanford.irt.laneweb.eresources.PagingEresourceListXHTMLSAXStrategy">
+        class="edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy">
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.eresources.EresourceListPagingDataSAXStrategy"/>
+            <bean class="edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy"/>
         </constructor-arg>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"
+        class="edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy">
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
     </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/eresources-count"
-        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
+        class="edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator"
         scope="prototype">
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-browse-html"
-        class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator"
+        class="edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-browse-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-browse-all-html"
-        class="edu.stanford.irt.laneweb.eresources.BrowseAllEresourcesGenerator"
+        class="edu.stanford.irt.laneweb.eresources.browse.BrowseAllEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-browse-all-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-core-html"
-        class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator"
+        class="edu.stanford.irt.laneweb.eresources.browse.CoreEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-core-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
     </bean>
     
     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-mesh-html"
-        class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
+        class="edu.stanford.irt.laneweb.eresources.browse.MeSHEresourcesGenerator"
         scope="prototype">
         <constructor-arg value="er-mesh-html"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
         <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/paging-eresource-html"/>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets"
+        class="edu.stanford.irt.laneweb.eresources.search.SolrSearchFacetsGenerator"
+        parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
+        <property name="facetsToShowBrowse" value="20"/>
+        <property name="facetsToShowSearch" value="4"/>
+        <property name="meshToIgnoreInSearch">
+            <list>
+                <value>nomesh</value>
+                <value>Adolescent</value>
+                <value>Adult</value>
+                <value>Aged</value>
+                <value>Aged, 80 and over</value>
+                <value>Animals</value>
+                <value>Cats</value>
+                <value>Cattle</value>
+                <value>Chick Embryo</value>
+                <value>Child</value>
+                <value>Child, Preschool</value>
+                <value>Cricetinae</value>
+                <value>Dogs</value>
+                <value>Female</value>
+                <value>Guinea Pigs</value>
+                <value>Humans</value>
+                <value>Infant</value>
+                <value>Infant, Newborn</value>
+                <value>Male</value>
+                <value>Mice</value>
+                <value>Middle Aged</value>
+                <value>Pregnancy</value>
+                <value>Rabbits</value>
+                <value>Rats</value>
+                <value>Young Adult</value>
+            </list>
+        </property>
+        <property name="prioritizedPublicationTypes">
+            <list>
+                <value>Clinical Trial</value>
+                <value>Randomized Controlled Trial</value>
+                <value>Review</value>
+                <value>Systematic Review</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search"
+        class="edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        <constructor-arg ref="edu.stanford.irt.laneweb.eresources.SolrService"/>
+        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"/>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.eresources.SolrService"
+        class="edu.stanford.irt.laneweb.eresources.SolrService"/>
+    
+    <bean name="edu.stanford.irt.laneweb.eresources.SolrQueryParser"
+        class="edu.stanford.irt.laneweb.eresources.SolrQueryParser">
+        <constructor-arg>
+            <list>
+                <bean class="edu.stanford.irt.laneweb.eresources.AdvancedQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.eresources.DoiQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.eresources.PmidQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.eresources.NumberQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.eresources.ORQueryInspector"/>
+                <bean class="edu.stanford.irt.laneweb.eresources.EscapingQueryInspector"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    
+    <solr:solr-client id="laneSearchSolrServer" url="%{edu.stanford.irt.laneweb.solr-url-laneSearch}"/>
+    
+    <solr:repositories base-package="edu.stanford.irt.laneweb.eresources" multicore-support="true" solr-client-ref="laneSearchSolrServer"/>
+    
+    <bean id="laneSearchSolrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+        <constructor-arg index="0" ref="laneSearchSolrServer"/>
     </bean>
 
 </beans>

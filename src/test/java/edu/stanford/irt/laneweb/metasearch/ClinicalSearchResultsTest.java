@@ -9,8 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.metasearch.ClinicalSearchResults;
-import edu.stanford.irt.laneweb.metasearch.SearchResult;
 import edu.stanford.irt.laneweb.resource.PagingList;
 import edu.stanford.irt.search.impl.Result;
 

@@ -10,9 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.metasearch.ClinicalSearchResults;
-import edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsSAXStrategy;
-import edu.stanford.irt.laneweb.metasearch.SearchResult;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.PagingList;
 import edu.stanford.irt.search.impl.ContentResult;

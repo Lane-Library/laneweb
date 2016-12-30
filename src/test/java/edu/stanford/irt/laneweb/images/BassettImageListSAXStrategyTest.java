@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.images.BassettImageListSAXStrategy;
 import edu.stanford.irt.solr.BassettImage;
 
 public class BassettImageListSAXStrategyTest {

@@ -21,8 +21,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.images.SolrImageSearchResult;
-import edu.stanford.irt.laneweb.images.SolrImageSearchSAXStrategy;
 import edu.stanford.irt.solr.Image;
 
 public class SolrImageSearchSAXStrategyTest {

@@ -3,67 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
-    <bean name="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"
-        class="edu.stanford.irt.laneweb.search.SolrPagingEresourceSAXStrategy">
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml"/>
-    </bean>
-
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         scope="prototype"
         abstract="true"/>
-
-     <bean name="edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets"
-        class="edu.stanford.irt.laneweb.search.SolrSearchFacetsGenerator"
-         parent="edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator">
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
-        <property name="facetsToShowBrowse" value="20"/>
-        <property name="facetsToShowSearch" value="4"/>
-        <property name="meshToIgnoreInSearch">
-            <list>
-		        <value>nomesh</value>
-		        <value>Adolescent</value>
-		        <value>Adult</value>
-		        <value>Aged</value>
-		        <value>Aged, 80 and over</value>
-		        <value>Animals</value>
-		        <value>Cats</value>
-		        <value>Cattle</value>
-		        <value>Chick Embryo</value>
-		        <value>Child</value>
-		        <value>Child, Preschool</value>
-		        <value>Cricetinae</value>
-		        <value>Dogs</value>
-		        <value>Female</value>
-		        <value>Guinea Pigs</value>
-		        <value>Humans</value>
-		        <value>Infant</value>
-		        <value>Infant, Newborn</value>
-		        <value>Male</value>
-		        <value>Mice</value>
-		        <value>Middle Aged</value>
-		        <value>Pregnancy</value>
-		        <value>Rabbits</value>
-		        <value>Rats</value>
-		        <value>Young Adult</value>
-            </list>
-        </property>
-        <property name="prioritizedPublicationTypes">
-            <list>
-                <value>Clinical Trial</value>
-                <value>Randomized Controlled Trial</value>
-                <value>Review</value>
-                <value>Systematic Review</value>
-            </list>
-        </property>
-    </bean>
-    
-    <bean name="edu.stanford.irt.cocoon.pipeline.Generator/er-search"
-        class="edu.stanford.irt.laneweb.search.SolrSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
-        <constructor-arg ref="edu.stanford.irt.laneweb.solr.SolrService"/>
-        <constructor-arg ref="edu.stanford.irt.cocoon.xml.SAXStrategy/solr-paging-eresource-xml"/>
-    </bean>
 
     <bean name="edu.stanford.irt.cocoon.pipeline.Transformer/query-highlighting"
         class="edu.stanford.irt.laneweb.search.QueryHighlightingTransformer"

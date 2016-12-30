@@ -19,8 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.images.SolrImageSearchGenerator;
-import edu.stanford.irt.laneweb.images.SolrImageSearchResult;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;

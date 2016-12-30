@@ -12,7 +12,6 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.metasearch.ScoreStrategy;
 import edu.stanford.irt.laneweb.search.QueryTermPattern;
 import edu.stanford.irt.search.impl.ContentResult;
 

@@ -61,9 +61,11 @@ public class LanewebIT {
         this.mockMvc.perform(get("/redirect/cme")).andExpect(status().isBadRequest());
         this.mockMvc.perform(get("/redirect/cme?url=url")).andExpect(status().isFound())
                 .andExpect(redirectedUrl("/secure/redirect/cme?url=url"));
-        Map<String, Object> attributes = new HashMap<String, Object>();
-        attributes.put(Model.USER, new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
-        this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes)).andExpect(status().isFound())
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put(Model.USER,
+                new User("ceyates@stanford.edu", "Charles Eresource Yates", "ceyates@stanford.edu", "foo"));
+        this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
+                .andExpect(status().isFound())
                 .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
         String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
         String redirect1 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
@@ -84,7 +86,7 @@ public class LanewebIT {
         String redirect4 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
                 .header("X-FORWARDED-FOR", "10.250.217.148")).andExpect(status().isFound())
-        .andExpect(redirectedUrl(redirect4));
+                .andExpect(redirectedUrl(redirect4));
     }
 
     @Test
@@ -104,15 +106,15 @@ public class LanewebIT {
     }
 
     /**
-     * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in
-     * a Solr instance is accessible.
+     * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in a Solr instance is
+     * accessible.
      *
      * @throws Exception
      */
     @Test
     public void testLaneSearch() throws Exception {
         if (solrLaneSearchIsReachable()) {
-            Map<String, String> ns = new HashMap<String, String>();
+            Map<String, String> ns = new HashMap<>();
             ns.put("h", "http://www.w3.org/1999/xhtml");
             // science
             this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html"))
@@ -181,46 +183,51 @@ public class LanewebIT {
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'hours-directions.html')]",
                                     ns).exists());
             // Access Medicine
-            this.mockMvc.perform(get("/eresources/search.html?q=Access Medicine").servletPath("/eresources/search.html"))
-            .andExpect(
-                    xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
-                            ns).exists());
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=Access Medicine").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                                    ns).exists());
             // AccessMedicine
             this.mockMvc.perform(get("/eresources/search.html?q=AccessMedicine").servletPath("/eresources/search.html"))
-            .andExpect(
-                    xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
-                            ns).exists());
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                                    ns).exists());
             // accessmedicine
             this.mockMvc.perform(get("/eresources/search.html?q=accessmedicine").servletPath("/eresources/search.html"))
-            .andExpect(
-                    xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
-                            ns).exists());
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                                    ns).exists());
             // journal of the american medical association (older JAMA title)
-            this.mockMvc.perform(get("/eresources/search.html?q=journal of the american medical association").servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of the American Medical Association']", ns)
-                            .exists());
+            this.mockMvc.perform(get("/eresources/search.html?q=journal of the american medical association")
+                    .servletPath("/eresources/search.html")).andExpect(
+                            xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of the American Medical Association']",
+                                    ns).exists());
             // jama
             this.mockMvc.perform(get("/eresources/search.html?q=jama").servletPath("/eresources/search.html"))
-            .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='JAMA']", ns)
-                    .exists());
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='JAMA']", ns).exists());
             // jaad
             this.mockMvc.perform(get("/eresources/search.html?q=jaad").servletPath("/eresources/search.html"))
-            .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']", ns)
-                    .exists());
+                    .andExpect(
+                            xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']",
+                                    ns).exists());
         }
     }
 
     @Test
     public void testNotFoundServlet() throws Exception {
-        this.mockMvc.perform(get("/rss/browse/type/video?a=z")).andExpect(status().isNotFound());
-        this.mockMvc.perform(get("/rss/mesh/book?m=biology&page=all")).andExpect(status().isNotFound());
-        this.mockMvc.perform(get("/wp-login.php")).andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/rss/browse/type/video?a=z").servletPath("/rss/browse/type/video"))
+                .andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/rss/mesh/book?m=biology&page=all").servletPath("/rss/mesh/book"))
+                .andExpect(status().isNotFound());
+        this.mockMvc.perform(get("/wp-login.php").servletPath("/wp-login.php")).andExpect(status().isNotFound());
     }
 
     @Test
     public void testPubmedSearch() throws Exception {
         if (pubmedIsReachable()) {
-            Map<String, String> ns = new HashMap<String, String>();
+            Map<String, String> ns = new HashMap<>();
             ns.put("h", "http://www.w3.org/1999/xhtml");
             // query term must appear within <strong> in first three results
             this.mockMvc

@@ -12,8 +12,6 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsFactory;
-import edu.stanford.irt.laneweb.metasearch.ClinicalSearchResultsGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.MetaSearchManager;
