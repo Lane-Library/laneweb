@@ -137,7 +137,6 @@
         <dependency>
             <artifactId>spellcheck-pubmed-espell</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <scope>runtime</scope>
             <version>2.0.4</version>
         </dependency>
         <dependency>
@@ -204,7 +203,6 @@
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
             <version>1.4.9</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -241,7 +239,6 @@
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
             <version>1.1.0-SNAPSHOT</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>

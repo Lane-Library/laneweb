@@ -43,7 +43,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
 
     private ListIterator<PagingLabel> pagingLabelsIterator;
 
-    private SAXStrategy<PagingData> pagingSaxStrategy;
+    private SAXStrategy<EresourceListPagingData> pagingSaxStrategy;
 
     private PagingEresourceListXHTMLSAXStrategy strategy;
 

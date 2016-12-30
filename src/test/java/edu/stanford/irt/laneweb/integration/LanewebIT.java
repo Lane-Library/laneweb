@@ -36,7 +36,7 @@ import edu.stanford.irt.laneweb.user.User;
 @WebAppConfiguration
 @ActiveProfiles("test")
 @ContextHierarchy({
-        @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/laneweb.xml", initializers = LanewebContextInitializer.class),
+        @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class, initializers = LanewebContextInitializer.class),
         @ContextConfiguration(classes = WebMvcConfigurer.class, initializers = LanewebContextInitializer.class) })
 public class LanewebIT {
 

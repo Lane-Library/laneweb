@@ -17,10 +17,14 @@
     </context-param>
 
     <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:net/bull/javamelody/monitoring-spring.xml
-            /WEB-INF/spring/laneweb.xml
+            edu.stanford.irt.laneweb.config.LanewebConfiguration
         </param-value>
     </context-param>
     

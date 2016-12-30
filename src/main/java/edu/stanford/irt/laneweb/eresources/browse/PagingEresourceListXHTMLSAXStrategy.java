@@ -9,25 +9,24 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
-import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrategy<PagingEresourceList> {
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 
-    private SAXStrategy<PagingData> pagingSaxStrategy;
+    private SAXStrategy<EresourceListPagingData> pagingSaxStrategy;
 
     private SAXStrategy<Eresource> saxStrategy;
 
     public PagingEresourceListXHTMLSAXStrategy(final SAXStrategy<Eresource> saxStrategy,
-            final SAXStrategy<PagingData> pagingSaxStrategy) {
+            final SAXStrategy<EresourceListPagingData> pagingSaxStrategy) {
         this.saxStrategy = saxStrategy;
         this.pagingSaxStrategy = pagingSaxStrategy;
     }
 
     @Override
     public void toSAX(final PagingEresourceList list, final XMLConsumer xmlConsumer) {
-        PagingData pagingData = list.getPagingData();
+        EresourceListPagingData pagingData = (EresourceListPagingData) list.getPagingData();
         int start = pagingData.getStart();
         int length = pagingData.getLength();
         int size = list.size();
