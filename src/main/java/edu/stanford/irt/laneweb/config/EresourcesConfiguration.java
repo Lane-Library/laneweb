@@ -109,7 +109,7 @@ public class EresourcesConfiguration {
 
     @Bean
     public SolrQueryParser solrQueryParser() {
-        List<QueryInspector> queryInspectors = new ArrayList<>();
+        List<QueryInspector> queryInspectors = new ArrayList<>(6);
         queryInspectors.add(new AdvancedQueryInspector());
         queryInspectors.add(new DoiQueryInspector());
         queryInspectors.add(new PmidQueryInspector());

@@ -3,14 +3,10 @@ package edu.stanford.irt.laneweb.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
@@ -36,22 +32,7 @@ import edu.stanford.irt.laneweb.metasearch.SearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.SearchResultSAXStrategy;
 
 @Configuration
-@EnableSolrRepositories(basePackages = {
-        "edu.stanford.irt.solr.repository.search" }, multicoreSupport = true, solrClientRef = "solrSearcherServer")
 public class MetasearchConfiguration {
-
-    private String imageSearchURL;
-
-    @Autowired
-    @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/html")
-    private SAXParser saxParser;
-
-    @Autowired
-    private SourceResolver sourceResolver;
-
-    public MetasearchConfiguration(@Value("%{laneweb.solr-url-imageSearch}") final String imageSearchURL) {
-        this.imageSearchURL = imageSearchURL;
-    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
@@ -118,8 +99,9 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/file-path")
     @Scope("prototype")
-    public FilePathTransformer filePathTransformer() {
-        return new FilePathTransformer(this.sourceResolver, this.saxParser);
+    public FilePathTransformer filePathTransformer(final SourceResolver sourceResolver,
+            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/html") final SAXParser saxParser) {
+        return new FilePathTransformer(sourceResolver, saxParser);
     }
 
     @Bean
@@ -188,10 +170,5 @@ public class MetasearchConfiguration {
     @Scope("prototype")
     public SearchGenerator searchGenerator() {
         return new SearchGenerator(metaSearchManager().getObject(), metasearchResultSAXStrategy());
-    }
-
-    @Bean(name = "solrSearcherServer")
-    public HttpSolrClient solrClient() {
-        return new HttpSolrClient(this.imageSearchURL);
     }
 }

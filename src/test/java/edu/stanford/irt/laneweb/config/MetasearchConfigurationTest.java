@@ -11,7 +11,7 @@ public class MetasearchConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new MetasearchConfiguration("url");
+        this.configuration = new MetasearchConfiguration();
     }
 
     @Test
@@ -51,7 +51,7 @@ public class MetasearchConfigurationTest {
 
     @Test
     public void testFilePathTransformer() {
-        assertNotNull(this.configuration.filePathTransformer());
+        assertNotNull(this.configuration.filePathTransformer(null, null));
     }
 
     @Test
