@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>21-SNAPSHOT</version>
+        <version>21</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.3.12-SNAPSHOT</version>
@@ -111,13 +111,13 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.41</version>
+            <version>3.0.42-SNAPSHOT</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>search-spring</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.7</version>
+            <version>3.0.8</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
