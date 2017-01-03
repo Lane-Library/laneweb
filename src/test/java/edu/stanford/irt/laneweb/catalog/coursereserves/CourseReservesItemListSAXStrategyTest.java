@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.coursereserves;
+package edu.stanford.irt.laneweb.catalog.coursereserves;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;

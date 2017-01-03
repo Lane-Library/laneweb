@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.coursereserves.CourseReservesDAO;
-import edu.stanford.irt.laneweb.coursereserves.CourseHeadingSAXStrategy;
-import edu.stanford.irt.laneweb.coursereserves.CourseListGenerator;
-import edu.stanford.irt.laneweb.coursereserves.CourseReservesItemListGenerator;
-import edu.stanford.irt.laneweb.coursereserves.CourseReservesItemListSAXStrategy;
-import edu.stanford.irt.laneweb.coursereserves.CourseReservesItemSAXStrategy;
-import edu.stanford.irt.laneweb.coursereserves.CoursesSAXStrategy;
+import edu.stanford.irt.laneweb.catalog.coursereserves.CourseHeadingSAXStrategy;
+import edu.stanford.irt.laneweb.catalog.coursereserves.CourseListGenerator;
+import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemListGenerator;
+import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemListSAXStrategy;
+import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemSAXStrategy;
+import edu.stanford.irt.laneweb.catalog.coursereserves.CoursesSAXStrategy;
 
 @Configuration
 public class CourseReservesConfiguration {

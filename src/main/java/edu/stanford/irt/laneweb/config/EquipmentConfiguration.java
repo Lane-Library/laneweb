@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
-import edu.stanford.irt.laneweb.equipment.EquipmentStatusTransformer;
-import edu.stanford.irt.laneweb.voyager.VoyagerRecordGenerator;
+import edu.stanford.irt.laneweb.catalog.VoyagerRecordGenerator;
+import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
 
 @Configuration
 public class EquipmentConfiguration {
@@ -33,7 +33,7 @@ public class EquipmentConfiguration {
     @Scope("prototype")
     public VoyagerRecordGenerator equipmentGenerator() throws IOException {
         return new VoyagerRecordGenerator(this.dataSource,
-                getClass().getResourceAsStream("/edu/stanford/irt/laneweb/equipment/getEquipment.fnc"), 1,
+                getClass().getResourceAsStream("/edu/stanford/irt/laneweb/catalog/equipment/getEquipment.fnc"), 1,
                 this.beanFactory.getBean("org.xml.sax.XMLReader/marc", XMLReader.class));
     }
 

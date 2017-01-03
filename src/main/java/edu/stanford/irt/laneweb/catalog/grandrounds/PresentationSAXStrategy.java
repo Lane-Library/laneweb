@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.grandrounds;
+package edu.stanford.irt.laneweb.catalog.grandrounds;
 
 import java.time.format.DateTimeFormatter;
 

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.coursereserves;
+package edu.stanford.irt.laneweb.catalog.coursereserves;
 
 import java.util.List;
 

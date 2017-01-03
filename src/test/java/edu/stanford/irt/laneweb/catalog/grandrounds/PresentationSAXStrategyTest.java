@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.grandrounds;
+package edu.stanford.irt.laneweb.catalog.grandrounds;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;

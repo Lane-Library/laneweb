@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.voyager;
+package edu.stanford.irt.laneweb.catalog;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;

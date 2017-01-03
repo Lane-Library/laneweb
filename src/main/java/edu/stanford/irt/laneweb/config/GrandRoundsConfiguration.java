@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import edu.stanford.irt.laneweb.grandrounds.GrandRoundsGenerator;
-import edu.stanford.irt.laneweb.grandrounds.GrandRoundsManager;
-import edu.stanford.irt.laneweb.grandrounds.PresentationSAXStrategy;
+import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
+import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsManager;
+import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
 
 @Configuration
 public class GrandRoundsConfiguration {

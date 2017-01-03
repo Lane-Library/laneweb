@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.equipment;
+package edu.stanford.irt.laneweb.catalog.equipment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

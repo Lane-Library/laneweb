@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.grandrounds;
+package edu.stanford.irt.laneweb.catalog.grandrounds;
 
 import java.util.List;
 import java.util.Map;

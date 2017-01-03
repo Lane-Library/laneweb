@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.coursereserves;
+package edu.stanford.irt.laneweb.catalog.coursereserves;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -8,6 +8,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,51 +18,39 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class CourseHeadingSAXStrategyTest {
+public class CoursesSAXStrategyTest {
 
-    private Course course;
+    private Course course = createMock(Course.class);
 
-    private CourseHeadingSAXStrategy saxStrategy;
+    private CoursesSAXStrategy saxStrategy;
 
     private TestXMLConsumer xmlConsumer;
 
     @Before
     public void setUp() {
-        this.saxStrategy = new CourseHeadingSAXStrategy();
+        this.saxStrategy = new CoursesSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
-        this.course = createMock(Course.class);
     }
 
     @Test
-    public void testToSAX() throws SAXException, IOException {
+    public void testToSAX() throws IOException {
+        expect(this.course.getId()).andReturn(1);
         expect(this.course.getName()).andReturn("name");
-        expect(this.course.getInstructor()).andReturn("instructor");
+        expect(this.course.getNumber()).andReturn("number");
         replay(this.course);
-        this.xmlConsumer.startDocument();
-        this.saxStrategy.toSAX(this.course, this.xmlConsumer);
-        this.xmlConsumer.endDocument();
+        this.saxStrategy.toSAX(Collections.singletonList(this.course), this.xmlConsumer);
         verify(this.course);
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "CourseHeadingSAXStrategyTest-toSAX.xml"),
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "CoursesSAXStrategyTest-toSAX.xml"),
                 this.xmlConsumer.getStringValue());
-    }
-
-    @Test
-    public void testToSAXNullCourse() {
-        XMLConsumer mock = createMock(XMLConsumer.class);
-        replay(mock);
-        this.saxStrategy.toSAX(null, mock);
-        verify(mock);
     }
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException {
         XMLConsumer mock = createMock(XMLConsumer.class);
-        mock.startElement("http://www.w3.org/1999/xhtml", "h3", "h3", XMLUtils.EMPTY_ATTRIBUTES);
+        mock.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(mock);
-        this.saxStrategy.toSAX(this.course, mock);
-        verify(mock);
+        this.saxStrategy.toSAX(Collections.singletonList(this.course), mock);
     }
 }

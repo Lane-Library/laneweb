@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.voyager;
+package edu.stanford.irt.laneweb.catalog;
 
 import java.io.IOException;
 import java.io.InputStream;
