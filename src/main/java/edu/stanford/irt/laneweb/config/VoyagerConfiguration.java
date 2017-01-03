@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.xml.sax.XMLReader;
 
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 import edu.stanford.lane.catalog.impl.xml.DefaultMarcReader;
@@ -23,7 +24,7 @@ public class VoyagerConfiguration {
 
     @Bean(name = "org.xml.sax.XMLReader/marc")
     @Scope("prototype")
-    public DefaultMarcReader marcXMLReader() {
+    public XMLReader marcXMLReader() {
         return new DefaultMarcReader();
     }
 

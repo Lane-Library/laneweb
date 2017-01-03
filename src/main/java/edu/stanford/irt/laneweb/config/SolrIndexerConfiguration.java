@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ public class SolrIndexerConfiguration {
     }
 
     @Bean(name = "solrIndexerServer")
-    public HttpSolrClient solrClient() {
+    public SolrClient solrClient() {
         return new HttpSolrClient(this.imageIndexerURL);
     }
 }

@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,8 +14,11 @@ import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 import org.springframework.oxm.Marshaller;
 
+import edu.stanford.irt.cocoon.pipeline.Generator;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.AdvancedQueryInspector;
 import edu.stanford.irt.laneweb.eresources.DoiQueryInspector;
+import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EscapingQueryInspector;
 import edu.stanford.irt.laneweb.eresources.NumberQueryInspector;
@@ -29,11 +33,13 @@ import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.CoreEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.MeSHEresourcesGenerator;
+import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchFacetsGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
+import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
 
 @Configuration
 @EnableSolrRepositories(basePackages = {
@@ -55,55 +61,55 @@ public class EresourcesConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
-    public EresourceSAXStrategy eresourceSAXStrategy() {
+    public SAXStrategy<Eresource> eresourceSAXStrategy() {
         return new EresourceSAXStrategy();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-all-html")
     @Scope("prototype")
-    public BrowseAllEresourcesGenerator eresourcesBrowseAllGenerator() {
+    public Generator eresourcesBrowseAllGenerator() {
         return new BrowseAllEresourcesGenerator("er-browse-all-html", this.solrService(),
                 pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-html")
     @Scope("prototype")
-    public BrowseEresourcesGenerator eresourcesBrowseGenerator() {
+    public Generator eresourcesBrowseGenerator() {
         return new BrowseEresourcesGenerator("er-browse-html", this.solrService(),
                 pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-core-html")
     @Scope("prototype")
-    public CoreEresourcesGenerator eresourcesCoreGenerator() {
+    public Generator eresourcesCoreGenerator() {
         return new CoreEresourcesGenerator("er-core-html", this.solrService(), pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/eresources-count")
     @Scope("prototype")
-    public EresourcesCountGenerator eresourcesCountGenerator() {
+    public Generator eresourcesCountGenerator() {
         return new EresourcesCountGenerator(this.solrService());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-mesh-html")
     @Scope("prototype")
-    public MeSHEresourcesGenerator eresourcesMeshGenerator() {
+    public Generator eresourcesMeshGenerator() {
         return new MeSHEresourcesGenerator("er-mesh-html", this.solrService(), pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean
-    public PagingEresourceListXHTMLSAXStrategy pagingEresourceListHTMLSAXStrategy() {
+    public SAXStrategy<PagingEresourceList> pagingEresourceListHTMLSAXStrategy() {
         return new PagingEresourceListXHTMLSAXStrategy(eresourceSAXStrategy(),
                 new EresourceListPagingDataSAXStrategy());
     }
 
     @Bean(name = "laneSearchSolrServer")
-    public HttpSolrClient solrClient() {
+    public SolrClient solrClient() {
         return new HttpSolrClient(this.solrServerUrl);
     }
 
     @Bean
-    public SolrPagingEresourceSAXStrategy solrPagingEresourceSAXStrategy() {
+    public SAXStrategy<SolrSearchResult> solrPagingEresourceSAXStrategy() {
         return new SolrPagingEresourceSAXStrategy(eresourceSAXStrategy());
     }
 
@@ -121,7 +127,7 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets")
     @Scope("prototype")
-    public SolrSearchFacetsGenerator solrSearchFacetsGenerator() {
+    public Generator solrSearchFacetsGenerator() {
         SolrSearchFacetsGenerator generator = new SolrSearchFacetsGenerator(this.solrService(), this.marshaller);
         generator.setFacetsToShowBrowse(20);
         generator.setFacetsToShowSearch(4);
@@ -163,7 +169,7 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-search")
     @Scope("prototype")
-    public SolrSearchGenerator solrSearchGenerator() {
+    public Generator solrSearchGenerator() {
         return new SolrSearchGenerator(this.solrService(), solrPagingEresourceSAXStrategy());
     }
 

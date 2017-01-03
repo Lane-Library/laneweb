@@ -14,10 +14,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 
 import com.thoughtworks.xstream.XStream;
 
+import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.spring.SpringComponentFactory;
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
@@ -59,7 +61,7 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public SpringComponentFactory componentFactory() {
+    public ComponentFactory componentFactory() {
         return new SpringComponentFactory();
     }
 
@@ -71,7 +73,7 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public XStreamMarshaller marshaller() {
+    public Marshaller marshaller() {
         XStreamMarshaller marshaller = new XStreamMarshaller();
         Map<String, Class<?>> aliases = new HashMap<>();
         aliases.put("bookmark", Bookmark.class);

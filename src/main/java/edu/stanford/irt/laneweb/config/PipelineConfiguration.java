@@ -14,10 +14,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.cache.CachedResponse;
+import edu.stanford.irt.cocoon.pipeline.Aggregator;
 import edu.stanford.irt.cocoon.pipeline.CachingPipeline;
 import edu.stanford.irt.cocoon.pipeline.ExpiresCachingPipeline;
+import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.pipeline.NonCachingPipeline;
+import edu.stanford.irt.cocoon.pipeline.Pipeline;
+import edu.stanford.irt.cocoon.pipeline.Serializer;
 import edu.stanford.irt.cocoon.pipeline.ThrottlingPipeline;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl;
 import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
 import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
@@ -43,13 +48,13 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Aggregator/<aggregator>")
     @Scope("prototype")
-    public AggregatorImpl aggregator() {
+    public Aggregator aggregator() {
         return new AggregatorImpl("<aggregator>");
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bib-status")
     @Scope("prototype")
-    public BibStatusGenerator bibStatusGenerator(
+    public Generator bibStatusGenerator(
             @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
             final SourceResolver sourceResolver) {
         return new BibStatusGenerator(xmlSAXParser, sourceResolver);
@@ -57,46 +62,46 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/caching")
     @Scope("prototype")
-    public CachingPipeline cachingPipeline(final Cache<Serializable, CachedResponse> cache) {
+    public Pipeline cachingPipeline(final Cache<Serializable, CachedResponse> cache) {
         return new CachingPipeline(cache);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/classes")
     @Scope("prototype")
-    public ClassesGenerator classesGenerator(
+    public Generator classesGenerator(
             @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
         return new ClassesGenerator("classes", xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/debug")
     @Scope("prototype")
-    public DebugTransformer debugTransformer() {
+    public Transformer debugTransformer() {
         return new DebugTransformer();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/eventlist")
     @Scope("prototype")
-    public EventListTransformer eventListTransformer(final SourceResolver sourceResolver,
+    public Transformer eventListTransformer(final SourceResolver sourceResolver,
             @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
         return new EventListTransformer(sourceResolver, xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/expires")
     @Scope("prototype")
-    public ExpiresCachingPipeline expiresCachingPipeline(final Cache<Serializable, CachedResponse> cache) {
+    public Pipeline expiresCachingPipeline(final Cache<Serializable, CachedResponse> cache) {
         return new ExpiresCachingPipeline(cache, 300);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/file")
     @Scope("prototype")
-    public URLGenerator fileGenerator(
+    public Generator fileGenerator(
             @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
         return new URLGenerator("file", xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/html5-indent")
     @Scope("prototype")
-    public HTML5Serializer html5IndentSerializer(
+    public Serializer html5IndentSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
         props.setProperty("method", "xhtml");
@@ -108,7 +113,7 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/html5")
     @Scope("prototype")
-    public HTML5Serializer html5Serializer(
+    public Serializer html5Serializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
         props.setProperty("method", "xhtml");
@@ -120,67 +125,67 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/html")
     @Scope("prototype")
-    public URLGenerator htmlGenerator(final BeanFactory beanFactory) {
+    public Generator htmlGenerator(final BeanFactory beanFactory) {
         return new URLGenerator("html",
                 beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/html", SAXParser.class));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/joost")
     @Scope("prototype")
-    public TraxTransformer joostTransformer(
+    public Transformer joostTransformer(
             @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost") final TransformerHandlerFactory joostTransformerHandlerFactory) {
         return new TraxTransformer("joost", joostTransformerHandlerFactory);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/namespace-filter")
     @Scope("prototype")
-    public NamespaceFilter namespaceFilterTransformer() {
+    public Transformer namespaceFilterTransformer() {
         return new NamespaceFilter();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/noncached-classes")
     @Scope("prototype")
-    public RootElementProvidingGenerator nonCachedClassesGenerator(
+    public Generator nonCachedClassesGenerator(
             @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
         return new RootElementProvidingGenerator("noncached-classes", xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/noncaching")
     @Scope("prototype")
-    public NonCachingPipeline nonCachingPipeline() {
+    public Pipeline nonCachingPipeline() {
         return new NonCachingPipeline();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/parameter-map")
     @Scope("prototype")
-    public ParameterMapGenerator parameterMapGenerator(final Marshaller marshaller) {
+    public Generator parameterMapGenerator(final Marshaller marshaller) {
         return new ParameterMapGenerator(marshaller);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/saxon")
     @Scope("prototype")
-    public TraxTransformer saxonTransformer(
+    public Transformer saxonTransformer(
             @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon") final TransformerHandlerFactory saxonTransformerHandlerFactory) {
         return new TraxTransformer("saxon", saxonTransformerHandlerFactory);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/seminars")
     @Scope("prototype")
-    public SeminarsGenerator seminarsGenerator(final BeanFactory beanFactory, final SourceResolver sourceResolver) {
+    public Generator seminarsGenerator(final BeanFactory beanFactory, final SourceResolver sourceResolver) {
         return new SeminarsGenerator(beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/html", SAXParser.class),
                 sourceResolver);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/textNodeParser")
     @Scope("prototype")
-    public TextNodeParsingTransformer textNodeParsingTransformer(final BeanFactory beanFactory) {
+    public Transformer textNodeParsingTransformer(final BeanFactory beanFactory) {
         return new TextNodeParsingTransformer("textNodeParser",
                 beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/html-fragment", SAXParser.class));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/text")
     @Scope("prototype")
-    public TransformerSerializer textSerializer(
+    public Serializer textSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
         props.setProperty("method", "text");
@@ -189,13 +194,13 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/throttling")
     @Scope("prototype")
-    public ThrottlingPipeline throttlingPipeline() {
+    public Pipeline throttlingPipeline() {
         return new ThrottlingPipeline();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/xhtml")
     @Scope("prototype")
-    public HTML5Serializer xhtmlSerializer(
+    public Serializer xhtmlSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
         props.setProperty("method", "xhtml");
@@ -209,14 +214,14 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/xinclude")
     @Scope("prototype")
-    public XIncludeTransformer xIncludeTransformer(final BeanFactory beanFactory) {
+    public Transformer xIncludeTransformer(final BeanFactory beanFactory) {
         return new XIncludeTransformer(
                 beanFactory.getBean("edu.stanford.irt.cocoon.xml.XIncludePipe", XIncludePipe.class));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/xml")
     @Scope("prototype")
-    public TransformerSerializer xmlSerializer(
+    public Serializer xmlSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
         props.setProperty("method", "xml");

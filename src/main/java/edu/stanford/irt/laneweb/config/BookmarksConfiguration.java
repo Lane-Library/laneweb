@@ -9,11 +9,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.oxm.Marshaller;
 
+import edu.stanford.irt.cocoon.pipeline.Generator;
+import edu.stanford.irt.cocoon.sitemap.select.Selector;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkGenerator;
 import edu.stanford.irt.laneweb.bookmarks.SQLBookmarkDAO;
 import edu.stanford.irt.laneweb.bookmarks.StanfordDomainStrippingBookmarkDAO;
 import edu.stanford.irt.laneweb.cocoon.ActionSelector;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 @Configuration
 public class BookmarksConfiguration {
@@ -30,17 +34,17 @@ public class BookmarksConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/action")
-    public ActionSelector actionSelector() {
+    public Selector actionSelector() {
         return new ActionSelector();
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.bookmarks.BookmarkDAO")
-    public StanfordDomainStrippingBookmarkDAO bookmarkDAO() {
+    public BookmarkDAO bookmarkDAO() {
         return new StanfordDomainStrippingBookmarkDAO(new SQLBookmarkDAO(this.dataSource));
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark")
-    public BookmarkDataBinder bookmarkDataBinder() {
+    public DataBinder bookmarkDataBinder() {
         BookmarkDataBinder dataBinder = new BookmarkDataBinder();
         dataBinder.setBookmarkDAO(bookmarkDAO());
         return dataBinder;
@@ -48,7 +52,7 @@ public class BookmarksConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bookmark")
     @Scope("prototype")
-    public BookmarkGenerator bookmarkGenerator() {
+    public Generator bookmarkGenerator() {
         return new BookmarkGenerator(this.marshaller);
     }
 }

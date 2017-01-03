@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import edu.stanford.irt.cocoon.pipeline.Generator;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsManager;
 import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
@@ -26,7 +29,7 @@ public class GrandRoundsConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
     @Scope("prototype")
-    public GrandRoundsGenerator grandRoundsGenerator() throws IOException {
+    public Generator grandRoundsGenerator() throws IOException {
         return new GrandRoundsGenerator(grandRoundsManager(), presentationSAXStrategy());
     }
 
@@ -37,7 +40,7 @@ public class GrandRoundsConfiguration {
     }
 
     @Bean
-    public PresentationSAXStrategy presentationSAXStrategy() {
+    public SAXStrategy<Presentation> presentationSAXStrategy() {
         return new PresentationSAXStrategy();
     }
 }

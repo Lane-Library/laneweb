@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -10,7 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import edu.stanford.irt.cocoon.pipeline.Generator;
+import edu.stanford.irt.cocoon.xml.SAXStrategy;
+import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesDAO;
+import edu.stanford.irt.coursereserves.CourseReservesItemList;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseHeadingSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseListGenerator;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemListGenerator;
@@ -39,24 +44,24 @@ public class CourseReservesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
     @Scope("prototype")
-    public CourseReservesItemListGenerator courseReservesItemListGenerator() throws IOException {
+    public Generator courseReservesItemListGenerator() throws IOException {
         return new CourseReservesItemListGenerator(courseReservesDAO(), coursesReservesItemListSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
     @Scope("prototype")
-    public CourseListGenerator coursesGenerator() throws IOException {
+    public Generator coursesGenerator() throws IOException {
         return new CourseListGenerator(courseReservesDAO(), coursesSAXStrategy());
     }
 
     @Bean
-    public CourseReservesItemListSAXStrategy coursesReservesItemListSAXStrategy() {
+    public SAXStrategy<CourseReservesItemList> coursesReservesItemListSAXStrategy() {
         return new CourseReservesItemListSAXStrategy(new CourseHeadingSAXStrategy(),
                 new CourseReservesItemSAXStrategy());
     }
 
     @Bean
-    public CoursesSAXStrategy coursesSAXStrategy() {
+    public SAXStrategy<List<Course>> coursesSAXStrategy() {
         return new CoursesSAXStrategy();
     }
 }

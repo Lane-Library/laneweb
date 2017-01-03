@@ -48,7 +48,7 @@ public class SourceConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.source.SourceResolver")
-    public SourceResolverImpl sourceResolver() {
+    public SourceResolver sourceResolver() {
         SourceResolverImpl sourceResolver = new SourceResolverImpl();
         SitemapSourceResolver sitemapSourceResolver = new SitemapSourceResolver(this.componentFactory, sourceResolver) {
 

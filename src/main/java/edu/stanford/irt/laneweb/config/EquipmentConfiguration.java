@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
+import edu.stanford.irt.cocoon.pipeline.Generator;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.laneweb.catalog.VoyagerRecordGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
 
@@ -31,7 +33,7 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public VoyagerRecordGenerator equipmentGenerator() throws IOException {
+    public Generator equipmentGenerator() throws IOException {
         return new VoyagerRecordGenerator(this.dataSource,
                 getClass().getResourceAsStream("/edu/stanford/irt/laneweb/catalog/equipment/getEquipment.fnc"), 1,
                 this.beanFactory.getBean("org.xml.sax.XMLReader/marc", XMLReader.class));
@@ -39,7 +41,7 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/equipment-status")
     @Scope("prototype")
-    public EquipmentStatusTransformer equipmentStatusTransformer() {
+    public Transformer equipmentStatusTransformer() {
         return new EquipmentStatusTransformer(this.dataSource);
     }
 }

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.ErrorListener;
+import javax.xml.transform.URIResolver;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,10 @@ import edu.stanford.irt.cocoon.spring.SAXTransformerFactoryBean;
 import edu.stanford.irt.cocoon.spring.TransformerFactoryBean;
 import edu.stanford.irt.cocoon.spring.XPathFactoryBean;
 import edu.stanford.irt.cocoon.xml.JaxpSAXParser;
+import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.URIResolverImpl;
+import edu.stanford.irt.cocoon.xml.XIncludeExceptionListener;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
 import edu.stanford.irt.cocoon.xml.XPointerProcessor;
 import edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl;
@@ -59,13 +63,13 @@ public class XMLConfiguration {
     }
 
     @Bean
-    public TransformerErrorListener errorListener() {
+    public ErrorListener errorListener() {
         return new TransformerErrorListener();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXParser/html-fragment")
     @Scope("prototype")
-    public HTMLSAXParser htmlFragmentSAXParser() {
+    public SAXParser htmlFragmentSAXParser() {
         Map<String, String> properties = new HashMap<>();
         properties.put("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         properties.put("http://cyberneko.org/html/properties/names/elems", "lower");
@@ -79,7 +83,7 @@ public class XMLConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXParser/html")
     @Scope("prototype")
-    public HTMLSAXParser htmlSAXParser() {
+    public SAXParser htmlSAXParser() {
         Map<String, String> properties = new HashMap<>();
         properties.put("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         properties.put("http://cyberneko.org/html/properties/names/elems", "lower");
@@ -113,7 +117,7 @@ public class XMLConfiguration {
     }
 
     @Bean
-    public SAXParserFactoryBean sAXParserFactoryBean()
+    public SAXParserFactoryBean saxParserFactoryBean()
             throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
         SAXParserFactoryBean factoryBean = new SAXParserFactoryBean("org.apache.xerces.jaxp.SAXParserFactoryImpl");
         factoryBean.setNamespaceAware(true);
@@ -130,12 +134,12 @@ public class XMLConfiguration {
     }
 
     @Bean
-    public URIResolverImpl uriResolver() {
+    public URIResolver uriResolver() {
         return new URIResolverImpl(this.sourceResolver);
     }
 
     @Bean
-    public XIncludeExceptionListenerImpl xIncludeExceptionListener() {
+    public XIncludeExceptionListener xIncludeExceptionListener() {
         return new XIncludeExceptionListenerImpl();
     }
 
@@ -147,9 +151,9 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXParser/xml")
-    public JaxpSAXParser xmlSAXParser()
+    public SAXParser xmlSAXParser()
             throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
-        return new JaxpSAXParser(sAXParserFactoryBean().getObject());
+        return new JaxpSAXParser(saxParserFactoryBean().getObject());
     }
 
     @Bean

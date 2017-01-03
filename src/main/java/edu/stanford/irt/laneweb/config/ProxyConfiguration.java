@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import edu.stanford.irt.cocoon.pipeline.Transformer;
+import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.EzproxyServersWriter;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
@@ -30,7 +32,7 @@ public class ProxyConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/search-proxy-links")
     @Scope("prototype")
-    public ElementProxyLinkTransformer elementProxyLinkTransformer() {
+    public Transformer elementProxyLinkTransformer() {
         return new ElementProxyLinkTransformer("url");
     }
 
@@ -41,7 +43,7 @@ public class ProxyConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/proxy-links")
     @Scope("prototype")
-    public HtmlProxyLinkTransformer htmlProxyLinkTransformer() {
+    public Transformer htmlProxyLinkTransformer() {
         return new HtmlProxyLinkTransformer(proxyHostManager());
     }
 
@@ -50,7 +52,7 @@ public class ProxyConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links")
-    public ProxyLinkSelector proxyLinkSelector() {
+    public Selector proxyLinkSelector() {
         return new ProxyLinkSelector();
     }
 

@@ -39,7 +39,7 @@ public class BookCoversConfiguration {
     }
 
     @Bean
-    public CompositeBookCoverService bookCoverService() {
+    public BookCoverService bookCoverService() {
         List<BookCoverService> services = new ArrayList<>();
         services.add(new CacheBookCoverService(new ConcurrentHashMap<Integer, Optional<String>>()));
         services.add(new DatabaseBookCoverService(this.dataSource));

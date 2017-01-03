@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import edu.stanford.irt.cocoon.sitemap.expression.Variable;
+import edu.stanford.irt.cocoon.sitemap.match.Matcher;
 import edu.stanford.irt.cocoon.sitemap.match.ParameterRegexpMatcher;
 import edu.stanford.irt.cocoon.sitemap.match.RegexpMatcher;
 import edu.stanford.irt.cocoon.sitemap.match.URLDecodingMatcher;
 import edu.stanford.irt.cocoon.sitemap.match.WildcardMatcher;
 import edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector;
+import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.cocoon.spring.VariablePropertyEditor;
 import edu.stanford.irt.laneweb.cocoon.CacheableSelector;
 import edu.stanford.irt.laneweb.ipgroup.IPGroupSelector;
@@ -31,46 +33,46 @@ public class SitemapConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/cacheable")
-    public CacheableSelector cacheableSelector() {
+    public Selector cacheableSelector() {
         return new CacheableSelector();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/facets")
-    public ModelAttributeSelector facetsSelector() {
+    public Selector facetsSelector() {
         ModelAttributeSelector selector = new ModelAttributeSelector();
         selector.setAttributeName("facets");
         return selector;
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/ipgroup")
-    public IPGroupSelector ipGroupSelector() {
+    public Selector ipGroupSelector() {
         return new IPGroupSelector();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/logged-in")
-    public ModelAttributeSelector loggedInSelector() {
+    public Selector loggedInSelector() {
         ModelAttributeSelector selector = new ModelAttributeSelector();
         selector.setAttributeName("userid");
         return selector;
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/regex-parameter")
-    public ParameterRegexpMatcher parameterRegexpMatcher() {
+    public Matcher parameterRegexpMatcher() {
         return new ParameterRegexpMatcher();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/regexp")
-    public RegexpMatcher regexpMatcher() {
+    public Matcher regexpMatcher() {
         return new RegexpMatcher("sitemap-uri");
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/url-decoding-wildcard")
-    public URLDecodingMatcher urlDecodingMatcher() {
+    public Matcher urlDecodingMatcher() {
         return new URLDecodingMatcher("sitemap-uri");
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/wildcard")
-    public WildcardMatcher wildcardMatcher() {
+    public Matcher wildcardMatcher() {
         return new WildcardMatcher("sitemap-uri");
     }
 }

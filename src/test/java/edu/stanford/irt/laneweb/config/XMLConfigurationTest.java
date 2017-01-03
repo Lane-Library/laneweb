@@ -63,7 +63,7 @@ public class XMLConfigurationTest {
     @Test
     public void testSAXParserFactoryBean()
             throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
-        assertNotNull(this.configuration.sAXParserFactoryBean());
+        assertNotNull(this.configuration.saxParserFactoryBean());
     }
 
     @Test

@@ -18,7 +18,7 @@ import edu.stanford.irt.laneweb.servlet.redirect.TrailingSlashRedirectProcessor;
 public class RedirectConfiguration {
 
     @Bean
-    public CompositeRedirectProcessor redirectProcessor() {
+    public RedirectProcessor redirectProcessor() {
         List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
         redirectProcessors.add(new TrailingSlashRedirectProcessor());
         Map<String, String> redirectMap = new HashMap<>();

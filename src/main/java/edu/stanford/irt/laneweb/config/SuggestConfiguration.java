@@ -23,18 +23,18 @@ public class SuggestConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/eresource")
-    public SolrSuggestionManager eresourceSuggestionManager() {
+    public SuggestionManager eresourceSuggestionManager() {
         return new SolrSuggestionManager(this.solrService);
     }
 
     @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/extensions-suggest")
-    public CompositeSuggestionManager extensionsSuggestionManager() {
+    public SuggestionManager extensionsSuggestionManager() {
         return new CompositeSuggestionManager(
                 Arrays.asList(new SuggestionManager[] { eresourceSuggestionManager(), meshSuggestionManager() }));
     }
 
     @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
-    public MeshSuggestionManager meshSuggestionManager() {
+    public SuggestionManager meshSuggestionManager() {
         return new MeshSuggestionManager();
     }
 }

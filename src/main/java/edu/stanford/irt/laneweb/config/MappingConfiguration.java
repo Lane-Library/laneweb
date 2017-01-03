@@ -17,7 +17,7 @@ public class MappingConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.mapping.LanewebObjectMapper")
-    public LanewebObjectMapper lanewebObjectMapper() {
+    public ObjectMapper lanewebObjectMapper() {
         return new LanewebObjectMapper();
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.laneweb.search.DescriptionLabelTransformer;
 import edu.stanford.irt.laneweb.search.QueryHighlightingTransformer;
 
@@ -12,13 +13,13 @@ public class SearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/description-labeling")
     @Scope("prototype")
-    public DescriptionLabelTransformer descriptionLabelTransformer() {
+    public Transformer descriptionLabelTransformer() {
         return new DescriptionLabelTransformer();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/query-highlighting")
     @Scope("prototype")
-    public QueryHighlightingTransformer queryHighlightingTransformer() {
+    public Transformer queryHighlightingTransformer() {
         return new QueryHighlightingTransformer();
     }
 }
