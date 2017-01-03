@@ -36,6 +36,7 @@ Y.io = function(url, config) {
                     "hits":24
                 },
                 "cro_fudd":{
+                    "status": "running",
                     "url": "http://cro.com/fudd"
                 }
         }})}]);

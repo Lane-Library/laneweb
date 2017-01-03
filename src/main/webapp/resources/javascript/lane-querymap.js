@@ -24,8 +24,8 @@
             if (result !== undefined && result.url) {
                 resource.anchor.href = result.url;
             }
-            if (result === undefined || !result.status) {
-                needMore = (results.status !== 'successful');
+            if (result === undefined || result.status === 'running') {
+                needMore = true;
             } else{
                 resource.status = result.status;
                 if (result.status === 'successful') {
