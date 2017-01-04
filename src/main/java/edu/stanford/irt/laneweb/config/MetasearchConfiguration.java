@@ -1,12 +1,17 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
@@ -39,6 +44,12 @@ import edu.stanford.irt.search.impl.Result;
 @Configuration
 public class MetasearchConfiguration {
 
+    @Autowired
+    private ObjectMapper objectMapper;
+    
+    @Value("http://%{edu.stanford.irt.laneweb.metasearch.host}:%{edu.stanford.irt.laneweb.metasearch.port}/")
+    private URL metaSearchURL;
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
     public Generator allClinicalSearchResultsGenerator() {
@@ -70,7 +81,7 @@ public class MetasearchConfiguration {
     
     @Bean
     public MetaSearchService metaSearchService() {
-        return null;
+        return new MetaSearchService(this.metaSearchURL, this.objectMapper, 70000);
     }
 
     @Bean

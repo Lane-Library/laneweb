@@ -17,17 +17,20 @@ public class DataSourcesConfigurationTest {
     }
 
     @Test
-    public void testEresourcesDataSource() throws SQLException {
-        assertNotNull(this.configuration.eresourcesDataSource(null, null, null));
+    public void testEresourcesDataSource() throws SQLException, ClassNotFoundException {
+        assertNotNull(
+                this.configuration.eresourcesDataSource("jdbc:postgresql://localhost/default", "user", "password"));
     }
 
     @Test
-    public void testGrandroundsDataSource() throws SQLException {
-        assertNotNull(this.configuration.grandroundsDataSource(null, null, null));
+    public void testGrandroundsDataSource() throws SQLException, ClassNotFoundException {
+        assertNotNull(this.configuration.grandroundsDataSource("jdbc:oracle:thin:@lane-voy-p01.stanford.edu:1521:vger",
+                "user", "password"));
     }
 
     @Test
-    public void testVoyagerDataSource() throws SQLException {
-        assertNotNull(this.configuration.voyagerDataSource(null, null, null));
+    public void testVoyagerDataSource() throws SQLException, ClassNotFoundException {
+        assertNotNull(this.configuration.voyagerDataSource("jdbc:oracle:thin:@lane-voy-p01.stanford.edu:1521:vger",
+                "user", "password"));
     }
 }
