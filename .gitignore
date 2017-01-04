@@ -9,3 +9,4 @@ project.properties
 /.project
 /.springBeans
 /.gitignore
+/application.properties

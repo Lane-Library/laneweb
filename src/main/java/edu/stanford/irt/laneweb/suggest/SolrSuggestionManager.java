@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import edu.stanford.irt.laneweb.solr.Eresource;
-import edu.stanford.irt.laneweb.solr.SolrService;
+import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 

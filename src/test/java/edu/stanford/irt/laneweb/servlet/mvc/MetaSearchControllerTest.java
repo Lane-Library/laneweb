@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;

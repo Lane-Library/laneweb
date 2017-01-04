@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>21-SNAPSHOT</version>
+        <version>21</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.3.12-SNAPSHOT</version>
@@ -106,7 +106,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.1.1</version>
+            <version>3.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -126,7 +126,6 @@
         <dependency>
             <artifactId>spellcheck-pubmed-espell</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <scope>runtime</scope>
             <version>2.0.4</version>
         </dependency>
         <dependency>
@@ -193,7 +192,6 @@
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
             <version>1.4.9</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -230,7 +228,6 @@
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
             <version>1.1.0-SNAPSHOT</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>

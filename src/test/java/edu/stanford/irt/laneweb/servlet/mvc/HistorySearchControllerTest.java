@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-import edu.stanford.irt.laneweb.search.MetaSearchService;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;

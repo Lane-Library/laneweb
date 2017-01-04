@@ -17,10 +17,14 @@
     </context-param>
 
     <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:net/bull/javamelody/monitoring-spring.xml
-            /WEB-INF/spring/laneweb.xml
+            edu.stanford.irt.laneweb.config.LanewebConfiguration
         </param-value>
     </context-param>
     
@@ -80,21 +84,11 @@
         <filter-class>edu.stanford.irt.laneweb.servlet.FrameOptionsFilter</filter-class>
     </filter>
     
-    <filter>
-        <filter-name>searchImageFilter</filter-name>
-        <filter-class>edu.stanford.irt.laneweb.servlet.SearchImageFilter</filter-class>
-    </filter>
-    
     <filter-mapping>
         <filter-name>springSessionRepositoryFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>searchImageFilter</filter-name>
-        <url-pattern>/search.html</url-pattern>
-    </filter-mapping>
-    
+
     <filter-mapping>
         <filter-name>monitoring</filter-name>
         <url-pattern>/*</url-pattern>

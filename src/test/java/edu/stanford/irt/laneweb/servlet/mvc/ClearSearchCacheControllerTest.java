@@ -10,8 +10,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.search.Query;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 
 public class ClearSearchCacheControllerTest {
 

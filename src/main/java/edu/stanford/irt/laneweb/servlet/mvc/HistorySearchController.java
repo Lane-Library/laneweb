@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.search.MetaSearchService;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;

@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.mapping.LanewebObjectMapper;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 

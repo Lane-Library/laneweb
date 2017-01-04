@@ -47,7 +47,7 @@
                     // search content may have more than one element with same ID
                     updateableNodes = Y.all('#' + resourceIds[i]);
                     result = results[resourceIds[i]];
-                    if (result === undefined || !result.status) {
+                    if (result === undefined || result.status === 'running') {
                         needMore = true;
                     } else if (updateableNodes.size() > 0) {
                         for (j = 0; j < updateableNodes.size(); j++) {
