@@ -18,16 +18,16 @@ public class DataSourcesConfigurationTest {
 
     @Test
     public void testEresourcesDataSource() throws SQLException {
-        assertNotNull(this.configuration.eresourcesDataSource(null, null, null, 1));
+        assertNotNull(this.configuration.eresourcesDataSource(null, null, null));
     }
 
     @Test
     public void testGrandroundsDataSource() throws SQLException {
-        assertNotNull(this.configuration.grandroundsDataSource(null, null, null, 1));
+        assertNotNull(this.configuration.grandroundsDataSource(null, null, null));
     }
 
     @Test
     public void testVoyagerDataSource() throws SQLException {
-        assertNotNull(this.configuration.voyagerDataSource(null, null, null, 1));
+        assertNotNull(this.configuration.voyagerDataSource(null, null, null));
     }
 }

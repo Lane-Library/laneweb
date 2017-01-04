@@ -16,14 +16,12 @@ public class DataSourcesConfiguration {
 
 
     @Bean(name = "javax.sql.DataSource/eresources")
-    public DataSource eresourcesDataSource(@Value("%{edu.stanford.irt.laneweb.db.eresources.url}") final String url,
-            @Value("%{edu.stanford.irt.laneweb.db.eresources.user}") final String user,
-            @Value("%{edu.stanford.irt.laneweb.db.eresources.password}") final String password,
-            @Value("%{edu.stanford.irt.laneweb.db.eresources.maxPoolSize}") final int maxPoolSize)
+    public DataSource eresourcesDataSource(@Value("%{edu.stanford.irt.laneweb.db.eresources.dataSource.url}") final String url,
+            @Value("%{edu.stanford.irt.laneweb.db.eresources.dataSource.user}") final String user,
+            @Value("%{edu.stanford.irt.laneweb.db.eresources.dataSource.password}") final String password)
             throws SQLException {
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");
-        config.setMaximumPoolSize(maxPoolSize);
         config.setInitializationFailFast(false);
         config.setConnectionTimeout(5000L);
         config.setUsername(user);
@@ -33,14 +31,12 @@ public class DataSourcesConfiguration {
     }
 
     @Bean(name = "javax.sql.DataSource/grandrounds")
-    public DataSource grandroundsDataSource(@Value("%{edu.stanford.irt.laneweb.db.grandrounds.url}") final String url,
-            @Value("%{edu.stanford.irt.laneweb.db.grandrounds.user}") final String user,
-            @Value("%{edu.stanford.irt.laneweb.db.grandrounds.password}") final String password,
-            @Value("%{edu.stanford.irt.laneweb.db.grandrounds.maxPoolSize}") final int maxPoolSize)
+    public DataSource grandroundsDataSource(@Value("%{edu.stanford.irt.laneweb.db.grandrounds.dataSource.url}") final String url,
+            @Value("%{edu.stanford.irt.laneweb.db.grandrounds.dataSource.user}") final String user,
+            @Value("%{edu.stanford.irt.laneweb.db.grandrounds.dataSource.password}") final String password)
             throws SQLException {
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");
-        config.setMaximumPoolSize(maxPoolSize);
         config.setInitializationFailFast(false);
         config.setConnectionTimeout(5000L);
         config.setUsername(user);
@@ -50,13 +46,12 @@ public class DataSourcesConfiguration {
     }
 
     @Bean(name = "javax.sql.DataSource/voyager")
-    public DataSource voyagerDataSource(@Value("%{edu.stanford.irt.laneweb.db.voyager.url}") final String url,
-            @Value("%{edu.stanford.irt.laneweb.db.voyager.user}") final String user,
-            @Value("%{edu.stanford.irt.laneweb.db.voyager.password}") final String password,
-            @Value("%{edu.stanford.irt.laneweb.db.voyager.maxPoolSize}") final int maxPoolSize)throws SQLException {
+    public DataSource voyagerDataSource(@Value("%{edu.stanford.irt.laneweb.db.voyager.dataSource.url}") final String url,
+            @Value("%{edu.stanford.irt.laneweb.db.voyager.dataSource.user}") final String user,
+            @Value("%{edu.stanford.irt.laneweb.db.voyager.dataSource.password}") final String password)
+                    throws SQLException {
         HikariConfig config = new HikariConfig();
         config.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");
-        config.setMaximumPoolSize(maxPoolSize);
         config.setInitializationFailFast(false);
         config.setConnectionTimeout(5000L);
         config.setUsername(user);
