@@ -6,7 +6,7 @@
     <xsl:template match="/lc:classes">
         <html>
             <body>
-                <xsl:apply-templates select="lc:event_data[position() &lt; 3]"/>
+                <xsl:apply-templates select="lc:event_data[position() &lt; 4]"/>
             </body>
         </html>
     </xsl:template>
