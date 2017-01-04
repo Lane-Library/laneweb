@@ -25,7 +25,7 @@
                 resource.anchor.href = result.url;
             }
             if (result === undefined || result.status === 'running') {
-                needMore = true;
+                needMore = results.status !== 'successful';
             } else{
                 resource.status = result.status;
                 if (result.status === 'successful') {

@@ -5,7 +5,25 @@ Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
 Y.io = function(url, config) {
     Y.io = function(url,config) {
         Y.io = function(url, config) {
-            config.on.success.apply(this, [2, {"responseText":' { "id": "1849619284", "status": "successful", "query": "histrionic", "resources": { "ovid-kaplan": { "status": "successful", "url": "/secure/apps/proxy/credential?url=http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=titles&D=books&SEARCH=histrionic.mp%0701412563.sc.%071+and+2", "hits": "67" } , "am_ebert": { "status": "successful", "url": "/secure/apps/proxy/credential?url=http://www.accessmedicine.com/search/searchAMResult.aspx?searchStr=histrionic&searchType=2&fullTextStr=histrionic&resourceID=10", "hits": "15" } } }'}]);
+            config.on.success.apply(this, [2, {
+                                        responseText : Y.JSON.stringify({
+                                            "id" : "1849619284",
+                                            "status" : "successful",
+                                            "query" : "histrionic",
+                                            "resources" : {
+                                                "ovid-kaplan" : {
+                                                    "status" : "successful",
+                                                    "url" : "http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=titles&D=books&SEARCH=histrionic.mp%0701412563.sc.%071+and+2",
+                                                    "hits" : "67"
+                                                },
+                                                "am_ebert" : {
+                                                    "status" : "successful",
+                                                    "url" : "http://www.accessmedicine.com/search/searchAMResult.aspx?searchStr=histrionic&searchType=2&fullTextStr=histrionic&resourceID=10",
+                                                    "hits" : "15"
+                                                }
+                                            }
+                                        })
+            }]);
 
 
             var querymapTestCase = new Y.Test.Case({
@@ -28,7 +46,42 @@ Y.io = function(url, config) {
             Y.Test.Runner.run();
 
         };
-        config.on.success.apply(this, [1, {"responseText":' { "id": "267196285", "status": "running", "query": "histrionic", "resources": { "ovid-kaplan": { "status": "running", "url": "/secure/apps/proxy/credential?url=http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=titles&D=books&SEARCH=histrionic.mp%0701412563.sc.%071+and+2", "hits": "" } , "am_ebert": { "status": "running", "url": "/secure/apps/proxy/credential?url=http://www.accessmedicine.com/search/searchAMResult.aspx?searchStr=histrionic&searchType=2&fullTextStr=histrionic&resourceID=10", "hits": "" } } }'}]);
+        config.on.success.apply(this, [1, {"responseText":
+            Y.JSON.stringify({
+                                        "id" : "267196285",
+                                        "status" : "running",
+                                        "query" : "histrionic",
+                                        "resources" : {
+                                            "ovid-kaplan" : {
+                                                "status" : "running",
+                                                "url" : "http://ovidsp.ovid.com/ovidweb.cgi?T=JS&PAGE=titles&D=books&SEARCH=histrionic.mp%0701412563.sc.%071+and+2",
+                                                "hits" : ""
+                                            },
+                                            "am_ebert" : {
+                                                "status" : "running",
+                                                "url" : "http://www.accessmedicine.com/search/searchAMResult.aspx?searchStr=histrionic&searchType=2&fullTextStr=histrionic&resourceID=10",
+                                                "hits" : ""
+                                            }
+                                        }
+                                    })
+        }
+        ]);
     };
-    config.on.success.apply(this, [0, {"responseText":'{"descriptor":{"descriptorName":"Mental Disorders","descriptorUI":"D001523","treeNumbers":["F03"]},"resources":[{"id":"ovid-kaplan","label":"Kaplan\'s Comprehensive Psychiatry"},{"id":"am_ebert","label":"Current Dx & Tx: Psychiatry"}]}'}]);
+    config.on.success.apply(this, [0, {"responseText":
+        Y.JSON.stringify({
+            "descriptor" : {
+                "descriptorName" : "Mental Disorders",
+                "descriptorUI" : "D001523",
+                "treeNumbers" : [ "F03" ]
+            },
+            "resources" : [ {
+                "id" : "ovid-kaplan",
+                "label" : "Kaplan\'s Comprehensive Psychiatry"
+            }, {
+                "id" : "am_ebert",
+                "label" : "Current Dx & Tx: Psychiatry"
+            } ]
+        })
+    } ]);
+    
 };
