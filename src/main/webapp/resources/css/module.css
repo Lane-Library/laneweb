@@ -6,6 +6,7 @@
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .module:after, .module .after {
@@ -77,38 +78,32 @@
     background-image: none;
 }
 
-.grand-rounds:before {
-    background-color: #aabec6;
+.grand-rounds:before, .upcoming-classes:before, .popular:before {
     border-radius: 50px;
     font-family: 'FontAwesome';
-    content: "\f0f1";
     display: block;
-    height: 48px;
-    position: relative;
+    position: absolute;
     width: 48px;
-    margin: -26px auto 20px auto;
-    margin-top: -84px;
-    color: #fff;
-    text-align: center;
-    font-size: 2.5em;
-    line-height: 48px;
-}
-
-.upcoming-classes:before {
-    background-color: #aabec6;
-    border-radius: 50px;
-    font-family: 'FontAwesome';
-    content: "\f19d";
-    display: block;
-    height: 48px;
-    position: relative;
-    width: 48px;
-    margin: -26px auto 20px auto;
-    margin-top: -84px;
     color: #fff;
     text-align: center;
     font-size: 2em;
     line-height: 48px;
+    top: -24px;
+    left: 45%;
+    
+}
+.grand-rounds:before {
+    background-color: #aabec6;
+    content: "\f0f1";
+}
+
+.upcoming-classes:before {
+    background-color: #aabec6;
+    content: "\f19d";
+}
+.popular:before {
+    background-color: #8c1515;
+    content: "\f005";
 }
 
 .new-resource {
