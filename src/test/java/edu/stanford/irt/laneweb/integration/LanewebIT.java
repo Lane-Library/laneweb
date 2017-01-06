@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
@@ -235,6 +236,20 @@ public class LanewebIT {
                             .servletPath("/apps/search/content/html/pubmed"))
                     .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists());
         }
+    }
+
+    @Test
+    public void testRedirects() throws Exception {
+        this.mockMvc.perform(get("/beemap")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/beemap.html"));
+        this.mockMvc.perform(get("/help/")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/index.html"));
+        this.mockMvc.perform(get("/help")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/index.html"));
+        this.mockMvc.perform(get("/help/me/")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/me/index.html"));
+        this.mockMvc.perform(get("/help/me")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/me/index.html"));
     }
 
     @Test
