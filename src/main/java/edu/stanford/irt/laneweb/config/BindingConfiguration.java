@@ -253,7 +253,8 @@ public class BindingConfiguration {
 
     @Bean
     public TodaysHours todaysHours() {
-        return new TodaysHours(new File(this.contentBase.toString() + "/includes/hours.xml"));
+        File file = new File(this.contentBase.getFile() + "/includes/hours.xml");
+        return new TodaysHours(file);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours")
