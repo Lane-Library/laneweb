@@ -12,7 +12,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Collection;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,18 +33,13 @@ public class StatusControllerTest {
 
     private HttpServletResponse response;
 
-    private ServletContext servletContext;
-
     private SuggestionManager suggestionManager;
 
     @Before
     public void setUp() {
         this.suggestionManager = createMock(SuggestionManager.class);
         this.requestHandler = createMock(SitemapController.class);
-        this.servletContext = createMock(ServletContext.class);
-        expect(this.servletContext.getInitParameter("laneweb.context.version")).andReturn("version");
-        replay(this.servletContext);
-        this.controller = new StatusController(this.requestHandler, this.suggestionManager, this.servletContext);
+        this.controller = new StatusController(this.requestHandler, this.suggestionManager, "version");
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
     }

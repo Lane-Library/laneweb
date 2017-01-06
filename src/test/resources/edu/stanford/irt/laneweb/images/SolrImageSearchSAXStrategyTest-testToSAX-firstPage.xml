@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <div class="result-summary">
+      <div class="result">1 to 1 of 2 results</div>
+      <div class="yui3-u-1-4">
+         <div class="view-by" id="sourceFilter">Filter by source <div class="general-dropdown dropdown">
+               <div class="general-dropdown-trigger">Bassett (2)<i class="fa fa-angle-double-down"/>
+               </div>
+               <div class="general-dropdown-content dropdown-content">
+                  <ul class="pagingLabels">
+                     <li>
+                        <a href="/path&amp;rid=Bassett">Bassett (2) </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="pagination">
+         <label>Page </label>
+         <form class="pagingForm" name="paginationForm">
+            <input type="hidden" value="source" name="source"/>
+            <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="2" name="totalPages"/>
+            <input type="text" size="4" value="1" name="page"/>
+         </form>
+         <label> of 2</label>
+         <a class="actived no-bookmarking" href="/path&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
+         </a>
+         <a class="actived no-bookmarking" href="/path&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         </a>
+      </div>
+   </div>
+   <div id="imageList" class="yui3-g">
+      <div id="id/andSlash" class="yui3-u-1-5" row="0">
+         <a href="pageUrl" class="noproxy">
+            <img src="thumbnailSrc"/>
+         </a>
+         <div id="imagedecorator" class="imagedecoHidden"> </div>
+      </div>
+   </div>
+   <div class="imageDetailHidden"
+        style="width:auto; height:auto; min-height:350px;"
+        id="imageDetail_0">
+      <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
+      <div class="yui3-g">
+         <div class="yui3-u-3-5">
+            <div class="image-location">
+               <img class="image"/>
+            </div>
+         </div>
+         <div class="yui3-u-2-5">
+            <h3/>
+            <div class="desc">
+               <label>Description: </label>
+               <p/>
+            </div>
+            <div class="copyright">
+               <label>Rights Statement: </label>
+               <p/>
+            </div>
+            <div class="article-title">
+               <label>Article Title: </label>
+               <p/>
+            </div>
+            <div class="to-image">
+               <a href="">
+                  <button class="button">
+                     <span class="button">Visit Source Page </span>
+                     <i class="fa fa-arrow-right"/>
+                  </button>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="result-summary">
+      <div class="pagination">
+         <label>Page </label>
+         <form class="pagingForm" name="paginationForm">
+            <input type="hidden" value="source" name="source"/>
+            <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="2" name="totalPages"/>
+            <input type="text" size="4" value="1" name="page"/>
+         </form>
+         <label> of 2</label>
+         <a class="actived no-bookmarking" href="/path&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
+         </a>
+         <a class="actived no-bookmarking" href="/path&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         </a>
+      </div>
+   </div>
+</div>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource;
 
 @Controller
 public class ClearSearchCacheController {

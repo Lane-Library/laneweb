@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 public class ClearSearchCacheControllerTest {

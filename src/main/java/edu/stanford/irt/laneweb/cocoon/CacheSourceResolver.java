@@ -4,10 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import edu.stanford.irt.cocoon.cache.Cache;
+import javax.cache.Cache;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
@@ -54,9 +59,11 @@ public class CacheSourceResolver implements SourceResolver {
 
     private static final int BUFFER_SIZE = 1024;
 
+    private static final Logger log = LoggerFactory.getLogger(CacheSourceResolver.class);
+
     private static final long MILLISECONDS_PER_MINUTE = 1000L * 60L;
 
-    private Cache cache;
+    private Cache<Serializable, CachedResponse> cache;
 
     private SourceResolver sourceResolver;
 
@@ -68,7 +75,7 @@ public class CacheSourceResolver implements SourceResolver {
      * @param sourceResolver
      *            the resolver for the cached sources.
      */
-    public CacheSourceResolver(final Cache cache, final SourceResolver sourceResolver) {
+    public CacheSourceResolver(final Cache<Serializable, CachedResponse> cache, final SourceResolver sourceResolver) {
         this.cache = cache;
         this.sourceResolver = sourceResolver;
     }
@@ -79,22 +86,35 @@ public class CacheSourceResolver implements SourceResolver {
     @Override
     public Source resolveURI(final URI cacheURI) {
         CachedResponse cachedResponse = this.cache.get(cacheURI);
-        if (cachedResponse == null || !cachedResponse.getValidity().isValid()) {
-            String schemeSpecificPart = cacheURI.getRawSchemeSpecificPart();
-            int colon = schemeSpecificPart.indexOf(':');
+        if (cachedResponse == null) {
             try {
-                URI uri = new URI(schemeSpecificPart.substring(colon + 1));
-                Source source = this.sourceResolver.resolveURI(uri);
-                byte[] bytes = getBytesFromSource(source);
-                long minutes = Long.parseLong(schemeSpecificPart.substring(0, colon));
-                Validity validity = new ExpiresValidity(minutes * MILLISECONDS_PER_MINUTE);
-                cachedResponse = new CachedResponse(validity, bytes);
-                this.cache.store(cacheURI, cachedResponse);
+                cachedResponse = createCachedResponse(cacheURI);
             } catch (URISyntaxException | IOException e) {
                 throw new LanewebException(e);
             }
+            this.cache.put(cacheURI, cachedResponse);
+        } else if (!cachedResponse.getValidity().isValid()) {
+            try {
+                cachedResponse = createCachedResponse(cacheURI);
+                this.cache.put(cacheURI, cachedResponse);
+            } catch (URISyntaxException e) {
+                throw new LanewebException(e);
+            } catch (IOException e) {
+                log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getMessage());
+            }
         }
         return new ByteArraySource(cachedResponse.getBytes(), cacheURI.toString());
+    }
+
+    private CachedResponse createCachedResponse(final URI cacheURI) throws URISyntaxException, IOException {
+        String schemeSpecificPart = cacheURI.getRawSchemeSpecificPart();
+        int colon = schemeSpecificPart.indexOf(':');
+        URI uri = new URI(schemeSpecificPart.substring(colon + 1));
+        Source source = this.sourceResolver.resolveURI(uri);
+        byte[] bytes = getBytesFromSource(source);
+        long minutes = Long.parseLong(schemeSpecificPart.substring(0, colon));
+        Validity validity = new ExpiresValidity(minutes * MILLISECONDS_PER_MINUTE);
+        return new CachedResponse(validity, bytes);
     }
 
     /**

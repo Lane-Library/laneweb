@@ -23,12 +23,12 @@
     <xsl:variable name="title" select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
     <li data-bibid="{$bibid}">
       <div class="yui3-g">
-        <div class="yui3-u-1-8">
+        <div class="yui3-u-1-6">
           <xsl:call-template name="fa">
             <xsl:with-param name="title" select="$title"/>
           </xsl:call-template>
         </div>
-        <div class="yui3-u-7-8">
+        <div class="yui3-u-5-6">
           <div><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$bibid}"><xsl:value-of select="$title"/></a></div>
           <xsl:apply-templates select="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']"/>
         </div>
@@ -44,9 +44,9 @@
 
   <xsl:template name="fa">
     <xsl:param name="title"/>
-    <div class="equipment-icon"><i>
+    <div class="equipment-icon"><i aria-hidden="true">
       <xsl:attribute name="class">
-        <xsl:text>fa fa-</xsl:text>
+        <xsl:text>fa fa-6x fa-</xsl:text>
         <xsl:choose>
           <xsl:when test="contains($title, 'iPad')">tablet</xsl:when>
           <xsl:when test="contains($title, 'Apple')">apple</xsl:when>
@@ -58,6 +58,7 @@
           <xsl:when test="contains($title, 'Cable')">gg</xsl:when>
           <xsl:when test="contains($title, 'Recorder')">microphone</xsl:when>
           <xsl:when test="contains($title, 'Polling')">users</xsl:when>
+          <xsl:when test="contains($title, 'magnifying')">search</xsl:when>
         </xsl:choose>
       </xsl:attribute>
     </i></div>

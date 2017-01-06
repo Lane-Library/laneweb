@@ -10,6 +10,7 @@
     text-align: center;
     background-color: white;
     padding-left: 20px;
+    padding-right: 20px;
     margin-bottom: 15px;
     margin-top: 15px;
 }
@@ -91,12 +92,12 @@
     margin: auto;
     display: block;
     max-width: 540px !important;
-    min-height: 320px !important;
+    max-height: 320px !important;
 }
 
 .imageDetail {
     text-align: left;
-    margin: 12px 0 12px 0 !important;
+    margin: 0 12px  12px 12px !important;
     background-color: #eee;
 }
 
@@ -106,9 +107,8 @@
 
 .image-detail-close {
     position: relative;
-    margin-left: 910px;
+    float: right;
     cursor: pointer;
-    
 }
 
 .image-detail-close:hover {
@@ -117,7 +117,7 @@
 
 #imageList .imagedeco {
     margin-top: -4px;
-    height: 18px;
+    height: 35px;
     background-color: #eee;
 }
 
@@ -137,7 +137,7 @@
 
 #imageList img {
     height: 120px;
-    max-width: 230px;
+    max-width: 230px;  
 }
 
 #imageList a {

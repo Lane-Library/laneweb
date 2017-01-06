@@ -26,24 +26,24 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
         this.sitemapController = sitemapController;
     }
 
-    @Override
-    public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
-            final Object handler, final Exception ex) {
-        if (ex instanceof ResourceNotFoundException) {
+    private static void logException(final Throwable ex) {
+        if (ex instanceof ResourceNotFoundException || ex instanceof FileNotFoundException
+                || ex instanceof ClientAbortException) {
             LOG.warn(ex.toString());
         } else {
             Throwable cause = ex.getCause();
-            Throwable reportableCause = ex;
-            while (cause != null && !(reportableCause instanceof ClientAbortException)) {
-                reportableCause = cause;
-                cause = cause.getCause();
-            }
-            if (reportableCause instanceof FileNotFoundException || reportableCause instanceof ClientAbortException) {
-                LOG.warn(reportableCause.toString());
+            if (cause == null) {
+                LOG.error(ex.toString(), ex);
             } else {
-                LOG.error(ex.toString(), reportableCause);
+                logException(cause);
             }
         }
+    }
+
+    @Override
+    public ModelAndView resolveException(final HttpServletRequest request, final HttpServletResponse response,
+            final Object handler, final Exception ex) {
+        logException(ex);
         if (!response.isCommitted()) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             HttpServletRequest wrapped = new HttpServletRequestWrapper(request) {

@@ -7,8 +7,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
-import edu.stanford.irt.laneweb.solr.Eresource;
-import edu.stanford.irt.laneweb.solr.Link;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
 /**

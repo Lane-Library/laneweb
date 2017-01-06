@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.laneweb.solr.SolrQueryParser;
+import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.ResourceMap;
