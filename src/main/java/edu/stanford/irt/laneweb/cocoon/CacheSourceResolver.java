@@ -100,7 +100,7 @@ public class CacheSourceResolver implements SourceResolver {
             } catch (URISyntaxException e) {
                 throw new LanewebException(e);
             } catch (IOException e) {
-                log.warn("failed to get resource {}, using expired cache", cacheURI);
+                log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getMessage());
             }
         }
         return new ByteArraySource(cachedResponse.getBytes(), cacheURI.toString());

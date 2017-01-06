@@ -20,9 +20,10 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws IOException {
-        String servletPath = request.getServletPath();
+        String requestURI = request.getRequestURI();
         String basePath = request.getContextPath();
-        String redirectURL = this.redirectProcessor.getRedirectURL(servletPath, basePath, request.getQueryString());
+        String uri = requestURI.substring(basePath.length());
+        String redirectURL = this.redirectProcessor.getRedirectURL(uri, basePath, request.getQueryString());
         if (redirectURL != null) {
             response.sendRedirect(redirectURL);
             return false;

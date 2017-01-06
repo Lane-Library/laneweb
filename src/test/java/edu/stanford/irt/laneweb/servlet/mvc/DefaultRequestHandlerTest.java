@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TrailingSlashControllerTest {
+public class DefaultRequestHandlerTest {
 
-    private TrailingSlashController handler;
+    private DefaultRequestHandler handler;
 
     private HttpServletRequest request;
 
@@ -24,7 +24,7 @@ public class TrailingSlashControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.handler = new TrailingSlashController();
+        this.handler = new DefaultRequestHandler();
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
     }
