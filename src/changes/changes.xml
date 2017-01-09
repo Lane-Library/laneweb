@@ -7,6 +7,31 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-01-09" version="3.3.13" description="3.3.13 bug fix release">
+            <action date="2017-01-09" dev="ceyates" issue="131152" type="fix">
+                /index.html always takes longer than 3 seconds to load
+            </action>
+        </release>
+        <release date="2017-01-09" version="3.3.12" description="3.3.12 bug fix release [not deployed]">
+            <action date="2016-12-29" dev="ceyates" issue="131142" type="update">
+                organize java packages for greater cohesion
+            </action>
+            <action date="2016-12-30" dev="ceyates" issue="131141" type="update">
+                change from xml to java for spring framework configuration
+            </action>
+            <action date="2017-01-08" dev="ryanmax" issue="131135" type="update">
+                expand "intervention" MeSH suggestions in PICO search
+            </action>
+            <action date="2016-12-19" dev="ceyates" issue="130687" type="remove">
+                remove audio resource list related code
+            </action>
+            <action date="2016-12-06" dev="ceyates" issue="130135" type="update">
+                change the size of the icons to fa-6x and add a magnifying glass on the equipment page
+            </action>
+            <action date="2016-12-15" dev="ceyates" issue="129142" type="remove">
+                remove code related to cme seminars that is no longer used
+            </action>
+        </release>
         <release date="2016-12-05" version="3.3.11" description="3.3.11 bug fix release">
             <action date="2016-12-05" dev="ceyates" issue="130006" type="update">
                 change from subversion to git for content version control
