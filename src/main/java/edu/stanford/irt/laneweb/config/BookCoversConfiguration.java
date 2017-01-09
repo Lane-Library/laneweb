@@ -35,7 +35,7 @@ public class BookCoversConfiguration {
 
     @Autowired
     public BookCoversConfiguration(@Qualifier("javax.sql.DataSource/eresources") final DataSource bookCoverDataSource,
-            @Qualifier("javax.sql.DataSource/eresources") final DataSource voyagerDataSource,
+            @Qualifier("javax.sql.DataSource/grandrounds") final DataSource voyagerDataSource,
             @Value("%{edu.stanford.irt.laneweb.bookcovers.google-api-key}") final String apiKey) {
         this.bookCoverDataSource = bookCoverDataSource;
         this.voyagerDataSource = voyagerDataSource;
