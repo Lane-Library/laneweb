@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2017-01-09" version="3.3.12" description="3.3.12 bug fix release">
+        <release date="2017-01-09" version="3.3.13" description="3.3.13 bug fix release">
+            <action date="2017-01-09" dev="ceyates" issue="131152" type="fix">
+                /index.html always takes longer than 3 seconds to load
+            </action>
+        </release>
+        <release date="2017-01-09" version="3.3.12" description="3.3.12 bug fix release [not deployed]">
             <action date="2016-12-29" dev="ceyates" issue="131142" type="update">
                 organize java packages for greater cohesion
             </action>
@@ -23,7 +28,7 @@
             <action date="2016-12-06" dev="ceyates" issue="130135" type="update">
                 change the size of the icons to fa-6x and add a magnifying glass on the equipment page
             </action>
-            <action date="2016-12-15" dev="ceyates" issue="129142" type="remmove">
+            <action date="2016-12-15" dev="ceyates" issue="129142" type="remove">
                 remove code related to cme seminars that is no longer used
             </action>
         </release>
