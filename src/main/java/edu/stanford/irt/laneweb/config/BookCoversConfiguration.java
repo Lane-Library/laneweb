@@ -29,12 +29,16 @@ public class BookCoversConfiguration {
 
     private String apiKey;
 
-    private DataSource dataSource;
+    private DataSource bookCoverDataSource;
+
+    private DataSource voyagerDataSource;
 
     @Autowired
-    public BookCoversConfiguration(@Qualifier("javax.sql.DataSource/eresources") final DataSource dataSource,
+    public BookCoversConfiguration(@Qualifier("javax.sql.DataSource/eresources") final DataSource bookCoverDataSource,
+            @Qualifier("javax.sql.DataSource/grandrounds") final DataSource voyagerDataSource,
             @Value("%{edu.stanford.irt.laneweb.bookcovers.google-api-key}") final String apiKey) {
-        this.dataSource = dataSource;
+        this.bookCoverDataSource = bookCoverDataSource;
+        this.voyagerDataSource = voyagerDataSource;
         this.apiKey = apiKey;
     }
 
@@ -42,8 +46,8 @@ public class BookCoversConfiguration {
     public BookCoverService bookCoverService() {
         List<BookCoverService> services = new ArrayList<>();
         services.add(new CacheBookCoverService(new ConcurrentHashMap<Integer, Optional<String>>()));
-        services.add(new DatabaseBookCoverService(this.dataSource));
-        services.add(new GoogleBookCoverService(new ISBNService(this.dataSource), new NetHttpTransport(),
+        services.add(new DatabaseBookCoverService(this.bookCoverDataSource));
+        services.add(new GoogleBookCoverService(new ISBNService(this.voyagerDataSource), new NetHttpTransport(),
                 new JsonObjectParser(new JacksonFactory()), this.apiKey));
         return new CompositeBookCoverService(services);
     }
