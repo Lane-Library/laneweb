@@ -13,6 +13,7 @@ import javax.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
@@ -29,16 +30,19 @@ public class CacheSourceResolver implements SourceResolver {
     /**
      * A Source implementation that wraps a byte array.
      */
-    private static final class ByteArraySource implements Source {
+    private static final class ByteArraySource implements Source, Cacheable {
 
         private byte[] byteArray;
 
         private String uri;
 
-        private ByteArraySource(final byte[] byteArray, final String uri) {
+        private Validity validity;
+
+        private ByteArraySource(final byte[] byteArray, final String uri, final Validity validity) {
             this.byteArray = new byte[byteArray.length];
             System.arraycopy(byteArray, 0, this.byteArray, 0, byteArray.length);
             this.uri = uri;
+            this.validity = validity;
         }
 
         @Override
@@ -52,8 +56,18 @@ public class CacheSourceResolver implements SourceResolver {
         }
 
         @Override
+        public Serializable getKey() {
+            return this.uri;
+        }
+
+        @Override
         public String getURI() {
             return this.uri;
+        }
+
+        @Override
+        public Validity getValidity() {
+            return this.validity;
         }
     }
 
@@ -103,7 +117,7 @@ public class CacheSourceResolver implements SourceResolver {
                 log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getMessage());
             }
         }
-        return new ByteArraySource(cachedResponse.getBytes(), cacheURI.toString());
+        return new ByteArraySource(cachedResponse.getBytes(), cacheURI.toString(), cachedResponse.getValidity());
     }
 
     private CachedResponse createCachedResponse(final URI cacheURI) throws URISyntaxException, IOException {

@@ -56,7 +56,7 @@ public class CacheSourceResolverTest {
     @Test
     public void testResolveURI() throws URISyntaxException, IOException {
         expect(this.cache.get(new URI("cache:20:http://www.example.com/"))).andReturn(this.cachedResponse);
-        expect(this.cachedResponse.getValidity()).andReturn(this.validity);
+        expect(this.cachedResponse.getValidity()).andReturn(this.validity).times(2);
         expect(this.validity.isValid()).andReturn(true);
         expect(this.cachedResponse.getBytes()).andReturn("foo".getBytes());
         replay(this.cache, this.sourceResolver, this.cachedResponse, this.validity);
@@ -121,7 +121,7 @@ public class CacheSourceResolverTest {
     @Test
     public void testResolveURINotValidIOException() throws URISyntaxException, IOException {
         expect(this.cache.get(new URI("cache:20:http://www.example.com/"))).andReturn(this.cachedResponse);
-        expect(this.cachedResponse.getValidity()).andReturn(this.validity);
+        expect(this.cachedResponse.getValidity()).andReturn(this.validity).times(2);
         expect(this.validity.isValid()).andReturn(false);
         expect(this.sourceResolver.resolveURI(new URI("http://www.example.com/"))).andReturn(this.source);
         expect(this.source.getInputStream()).andThrow(new SocketTimeoutException());

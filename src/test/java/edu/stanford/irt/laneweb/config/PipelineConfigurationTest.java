@@ -35,11 +35,6 @@ public class PipelineConfigurationTest {
     }
 
     @Test
-    public void testClassesGenerator() {
-        assertNotNull(this.configuration.classesGenerator(null));
-    }
-
-    @Test
     public void testDebugTransformer() {
         assertNotNull(this.configuration.debugTransformer());
     }
