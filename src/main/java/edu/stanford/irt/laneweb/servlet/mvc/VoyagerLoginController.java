@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 
 @Controller

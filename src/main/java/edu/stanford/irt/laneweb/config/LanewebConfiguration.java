@@ -56,12 +56,12 @@ public class LanewebConfiguration {
             final Environment environment, final ResourceLoader resourceLoader) {
         List<Resource> locations = Arrays.stream(DEFAULT_LOCATIONS)
                 .map(s -> s + "application.properties")
-                .map(s -> resourceLoader.getResource(s))
+                .map(resourceLoader::getResource)
                 .collect(Collectors.toList());
         String springConfigProperty = environment.getProperty("spring.config.location");
         if (springConfigProperty != null) {
             locations.addAll(Arrays.stream(springConfigProperty.split(","))
-                    .map(s -> resourceLoader.getResource(s))
+                    .map(resourceLoader::getResource)
                     .collect(Collectors.toList()));
         }
         PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
