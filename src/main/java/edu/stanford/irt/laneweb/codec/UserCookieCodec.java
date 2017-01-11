@@ -47,7 +47,7 @@ public class UserCookieCodec {
             // to 16, so do that here:
             byte[] src = Base64.decodeBase64(key.getBytes(StandardCharsets.UTF_8));
             byte[] dst = new byte[KEY_ARRAY_LENGTH];
-            System.arraycopy(src, 0, dst, 0, dst.length);
+            System.arraycopy(src, 0, dst, 0, src.length > 16 ? 16 : src.length);
             this.desKey = new SecretKeySpec(dst, "AES");
             this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {

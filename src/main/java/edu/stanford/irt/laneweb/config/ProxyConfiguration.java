@@ -26,7 +26,7 @@ public class ProxyConfiguration {
     private DataSource dataSource;
 
     @Autowired
-    public ProxyConfiguration(@Qualifier("javax.sql.DataSource/voyager") final DataSource dataSource) {
+    public ProxyConfiguration(@Qualifier("javax.sql.DataSource/grandrounds") final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

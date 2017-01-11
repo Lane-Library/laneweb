@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-01-11" version="3.3.14" description="3.3.14 emergency release">
+            <action date="2017-01-11" dev="ceyates" issue="131196" type="fix">
+                ProxyHostManager configured with the wrong datasource
+            </action>
+            <action date="2017-01-10" dev="ceyates" issue="131176" type="fix">
+                bookcovers failing with 404 error
+            </action>
+        </release>
         <release date="2017-01-09" version="3.3.13" description="3.3.13 bug fix release">
             <action date="2017-01-09" dev="ceyates" issue="131152" type="fix">
                 /index.html always takes longer than 3 seconds to load
