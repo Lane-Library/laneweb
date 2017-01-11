@@ -16,22 +16,6 @@
         <param-value>${project.build.finalName}</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            edu.stanford.irt.laneweb.config.LanewebConfiguration
-        </param-value>
-    </context-param>
-    
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
@@ -139,7 +123,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>edu.stanford.irt.laneweb.servlet.mvc.WebMvcConfigurer</param-value>
+            <param-value>edu.stanford.irt.laneweb.config.LanewebConfiguration</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

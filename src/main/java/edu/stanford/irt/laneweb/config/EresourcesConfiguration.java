@@ -54,7 +54,7 @@ public class EresourcesConfiguration {
     private String solrServerUrl;
 
     @Autowired
-    public EresourcesConfiguration(@Value("%{edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl,
+    public EresourcesConfiguration(@Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl,
             final Marshaller marshaller) {
         this.solrServerUrl = solrServerUrl;
         this.marshaller = marshaller;

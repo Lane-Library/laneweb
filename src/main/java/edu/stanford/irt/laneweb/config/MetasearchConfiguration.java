@@ -47,7 +47,7 @@ public class MetasearchConfiguration {
     @Autowired
     private ObjectMapper objectMapper;
     
-    @Value("http://%{edu.stanford.irt.laneweb.metasearch.host}:%{edu.stanford.irt.laneweb.metasearch.port}/")
+    @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
     private URL metaSearchURL;
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")

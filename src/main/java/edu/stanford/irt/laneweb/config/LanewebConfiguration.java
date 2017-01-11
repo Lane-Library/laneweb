@@ -1,19 +1,22 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 
@@ -39,19 +42,31 @@ import edu.stanford.irt.laneweb.eresources.search.Facet;
 })
 @ComponentScan({
     "edu.stanford.irt.laneweb.config",
-    "edu.stanford.irt.solr.service"
+    "edu.stanford.irt.solr.service",
+    "edu.stanford.irt.laneweb.servlet.mvc",
+    "edu.stanford.irt.laneweb.bookmarks"
 })
 public class LanewebConfiguration {
 
+    private static final String[] DEFAULT_LOCATIONS = "classpath:/,classpath:/config/,file:./,file:./config/"
+            .split(",");
+
     @Bean
-    public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        PropertyPlaceholderConfigurer pspc = new PropertyPlaceholderConfigurer();
-        pspc.setPlaceholderPrefix("%{");
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
+            final Environment environment, final ResourceLoader resourceLoader) {
+        List<Resource> locations = Arrays.stream(DEFAULT_LOCATIONS)
+                .map(s -> s + "application.properties")
+                .map(resourceLoader::getResource)
+                .collect(Collectors.toList());
+        String springConfigProperty = environment.getProperty("spring.config.location");
+        if (springConfigProperty != null) {
+            locations.addAll(Arrays.stream(springConfigProperty.split(","))
+                    .map(resourceLoader::getResource)
+                    .collect(Collectors.toList()));
+        }
+        PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
         pspc.setIgnoreResourceNotFound(true);
-        pspc.setSystemPropertiesMode(PropertyPlaceholderConfigurer.SYSTEM_PROPERTIES_MODE_OVERRIDE);
-        pspc.setLocations(new Resource[] { new ClassPathResource("/config/application.properties"),
-                new FileSystemResource(System.getProperty("user.dir") + "/application.properties"),
-                new FileSystemResource(System.getProperty("spring.config.location") + "/application.properties") });
+        pspc.setLocations(locations.toArray(new Resource[locations.size()]));
         return pspc;
     }
 

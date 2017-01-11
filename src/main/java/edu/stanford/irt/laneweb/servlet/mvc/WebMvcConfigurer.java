@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,9 +13,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -36,19 +35,11 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {
-        "edu.stanford.irt.laneweb.servlet.mvc",
-        "edu.stanford.irt.laneweb.bookmarks"})
-@PropertySource(value={
-    "classpath:/config/application.properties",
-    "file:${user.dir}/application.properties",
-    "file:${spring.config.location}/application.properties"},
-     ignoreResourceNotFound=true)
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
-    private String liveBase;
+    private URL liveBase;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -59,8 +50,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Autowired
     private SolrImageService solrImageService;
 
-    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}") final String liveBase) {
-        this.liveBase = liveBase + "/";
+    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}/") final URL liveBase) {
+        this.liveBase = liveBase;
     }
 
     @Override

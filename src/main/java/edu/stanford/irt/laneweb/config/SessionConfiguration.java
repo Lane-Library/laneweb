@@ -11,7 +11,7 @@ public class SessionConfiguration extends RedisHttpSessionConfiguration {
 
     @Bean
     public JedisConnectionFactory connectionFactory(
-            @Value("%{edu.stanford.irt.laneweb.redis.host}") final String hostName) {
+            @Value("${edu.stanford.irt.laneweb.redis.host}") final String hostName) {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(hostName);
         return factory;
