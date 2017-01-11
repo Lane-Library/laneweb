@@ -60,10 +60,10 @@ public class BindingConfiguration {
 
     private URL contentBase;
 
-    @Value("%{edu.stanford.irt.laneweb.disaster-mode}")
+    @Value("${edu.stanford.irt.laneweb.disaster-mode}")
     private Boolean disasterMode;
 
-    @Value("%{edu.stanford.irt.laneweb.ezproxy-key}")
+    @Value("${edu.stanford.irt.laneweb.ezproxy-key}")
     private String ezproxyKey;
 
     @Autowired
@@ -76,15 +76,15 @@ public class BindingConfiguration {
 
     private String userCookieKey;
 
-    @Value("%{edu.stanford.irt.laneweb.useridhashkey}")
+    @Value("${edu.stanford.irt.laneweb.useridhashkey}")
     private String userIdHashKey;
 
     private String version;
 
     @Autowired
-    public BindingConfiguration(@Value("%{edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey,
-            @Value("%{edu.stanford.irt.laneweb.live-base}") final URL contentBase,
-            @Value("%{edu.stanford.irt.laneweb.version}") final String version, final ServletContext servletContext) {
+    public BindingConfiguration(@Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey,
+            @Value("${edu.stanford.irt.laneweb.live-base}") final URL contentBase,
+            @Value("${edu.stanford.irt.laneweb.version}") final String version, final ServletContext servletContext) {
         this.userCookieKey = userCookieKey;
         this.contentBase = contentBase;
         this.version = version;
@@ -147,7 +147,7 @@ public class BindingConfiguration {
         return new StringSessionParameterDataBinder("emrid", "emrid");
     }
 
-    @Bean
+    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap")
     public DataBinder ldapDataBinder() {
         return new LDAPDataBinder(this.ldapDataAccess);
     }

@@ -14,7 +14,7 @@ public class SolrIndexerConfiguration {
 
     private String imageIndexerURL;
 
-    public SolrIndexerConfiguration(@Value("%{laneweb.solr-url-indexer-imageSearch}") final String imageIndexerURL) {
+    public SolrIndexerConfiguration(@Value("${laneweb.solr-url-indexer-imageSearch}") final String imageIndexerURL) {
         this.imageIndexerURL = imageIndexerURL;
     }
 

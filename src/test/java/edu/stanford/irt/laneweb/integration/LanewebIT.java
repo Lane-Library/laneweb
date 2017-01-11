@@ -21,24 +21,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.mvc.WebMvcConfigurer;
 import edu.stanford.irt.laneweb.user.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ActiveProfiles("test")
-@ContextHierarchy({
-        @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class, initializers = LanewebContextInitializer.class),
-        @ContextConfiguration(classes = WebMvcConfigurer.class, initializers = LanewebContextInitializer.class) })
+@ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class LanewebIT {
 
     private MockMvc mockMvc;

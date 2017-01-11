@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
@@ -20,10 +22,12 @@ import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 public class VoyagerLoginController {
 
     @Autowired
-    private LDAPDataBinder ldapDataBinder;
+    @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap")
+    private DataBinder ldapDataBinder;
 
     @Autowired
-    private UserDataBinder userBinder;
+    @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder/user")
+    private DataBinder userBinder;
 
     @Autowired
     private VoyagerLogin voyagerLogin;

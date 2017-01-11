@@ -24,7 +24,7 @@ public class WebMvcConfigurerTest {
 
     @Before
     public void setUp() {
-        this.configuration = new WebMvcConfigurer("live-base");
+        this.configuration = new WebMvcConfigurer(null);
     }
 
     @Test
