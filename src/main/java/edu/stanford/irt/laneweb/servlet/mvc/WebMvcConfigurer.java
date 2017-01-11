@@ -13,9 +13,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -52,7 +50,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Autowired
     private SolrImageService solrImageService;
 
-    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}") final URL liveBase) {
+    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}/") final URL liveBase) {
         this.liveBase = liveBase;
     }
 
