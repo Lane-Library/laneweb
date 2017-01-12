@@ -10,13 +10,9 @@ body, select, input, button, textarea {
 .scaled-image {
     width: 100%;
     height: auto;
-}
-
-.scaled-image-85 {
-    width: 85%;
-    height: auto;
     margin-bottom: 12px;
 }
+
 /*.close is the X close box on popups and feedback*/
 .close {
     width: 24px;
