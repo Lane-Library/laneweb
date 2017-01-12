@@ -4,6 +4,7 @@
 package edu.stanford.irt.laneweb.codec;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,24 +26,23 @@ public class SHCCodecTest {
         this.codec = new SHCCodec("yfGIl68aDih3DamkzIJeYA==", "ABCDEFGHIJKLMNOP");
     }
 
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.codec.SHCCodec#decrypt(java.lang.String)} .
-     */
     @Test
-    public final void testDecrypt() {
+    public void testDecrypt() {
         assertEquals(this.plaintext, this.codec.decrypt(this.ciphertext));
     }
 
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.codec.SHCCodec#encrypt(java.lang.String)} .
-     */
     @Test
-    public final void testEncrypt() {
+    public void testEncrypt() {
         assertEquals(this.ciphertext, this.codec.encrypt(this.plaintext));
     }
 
     @Test
-    public final void testRoundtrip() {
+    public void testLongParameters() {
+        assertNotNull(new SHCCodec("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"));
+    }
+
+    @Test
+    public void testRoundtrip() {
         assertEquals(this.plaintext, this.codec.decrypt(this.codec.encrypt(this.plaintext)));
     }
 }

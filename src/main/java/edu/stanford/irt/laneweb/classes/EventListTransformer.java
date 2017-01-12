@@ -6,8 +6,6 @@ import java.net.URISyntaxException;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.cache.Validity;
-import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.EmbeddedXMLPipe;
@@ -36,12 +34,6 @@ public class EventListTransformer extends AbstractCacheableTransformer {
         if (!"event".equals(localName)) {
             super.endElement(uri, localName, qName);
         }
-    }
-
-    @Override
-    public Validity getValidity() {
-        // always valid, the generator will become invalid so this doesn't get stale
-        return AlwaysValid.SHARED_INSTANCE;
     }
 
     @Override

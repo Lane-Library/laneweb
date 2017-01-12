@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -22,6 +23,7 @@ import javax.cache.Cache;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.source.Source;
@@ -54,6 +56,10 @@ public class CacheSourceResolverTest {
     }
 
     @Test
+    public void testGetValidity() {
+    }
+
+    @Test
     public void testResolveURI() throws URISyntaxException, IOException {
         expect(this.cache.get(new URI("cache:20:http://www.example.com/"))).andReturn(this.cachedResponse);
         expect(this.cachedResponse.getValidity()).andReturn(this.validity).times(2);
@@ -63,6 +69,9 @@ public class CacheSourceResolverTest {
         Source source = this.cacheSourceResolver.resolveURI(new URI("cache:20:http://www.example.com/"));
         assertEquals("cache:20:http://www.example.com/", source.getURI());
         assertTrue(source.exists());
+        assertSame(this.validity, ((Cacheable) source).getValidity());
+        assertEquals("cache:20:http://www.example.com/", source.getURI());
+        assertEquals("cache:20:http://www.example.com/", ((Cacheable) source).getKey());
         byte[] bytes = new byte[3];
         source.getInputStream().read(bytes);
         assertEquals("foo", new String(bytes));
@@ -94,6 +103,8 @@ public class CacheSourceResolverTest {
         Source source = this.cacheSourceResolver.resolveURI(new URI("cache:20:http://www.example.com/"));
         assertEquals("cache:20:http://www.example.com/", source.getURI());
         assertTrue(source.exists());
+        Validity v = ((Cacheable) source).getValidity();
+        assertTrue(v.isValid());
         byte[] bytes = new byte[3];
         source.getInputStream().read(bytes);
         assertEquals("foo", new String(bytes));

@@ -111,9 +111,7 @@ public class CacheSourceResolver implements SourceResolver {
             try {
                 cachedResponse = createCachedResponse(cacheURI);
                 this.cache.put(cacheURI, cachedResponse);
-            } catch (URISyntaxException e) {
-                throw new LanewebException(e);
-            } catch (IOException e) {
+            } catch (URISyntaxException | IOException e) {
                 log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getMessage());
             }
         }
