@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
@@ -47,8 +48,9 @@ public class ProxyConfiguration {
         return new HtmlProxyLinkTransformer(proxyHostManager());
     }
 
+    @Bean
     public ProxyHostManager proxyHostManager() {
-        return new ProxyHostManager(this.dataSource);
+        return new ProxyHostManager(this.dataSource, Executors.newScheduledThreadPool(1));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links")
