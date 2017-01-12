@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class ProxyHostManager {
 
-    private static final long DEFAULT_DELAY = 2L;
+    private static final long DEFAULT_DELAY = 120L;
 
     private static final long FAILURE_DELAY = 10L;
 
