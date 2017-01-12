@@ -33,7 +33,6 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
-import edu.stanford.irt.laneweb.classes.ClassesGenerator;
 import edu.stanford.irt.laneweb.classes.EventListTransformer;
 import edu.stanford.irt.laneweb.classes.RootElementProvidingGenerator;
 import edu.stanford.irt.laneweb.cocoon.DebugTransformer;
@@ -64,13 +63,6 @@ public class PipelineConfiguration {
     @Scope("prototype")
     public Pipeline cachingPipeline(final Cache<Serializable, CachedResponse> cache) {
         return new CachingPipeline(cache);
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/classes")
-    @Scope("prototype")
-    public Generator classesGenerator(
-            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
-        return new ClassesGenerator("classes", xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/debug")

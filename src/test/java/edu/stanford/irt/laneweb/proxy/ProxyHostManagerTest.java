@@ -1,115 +1,142 @@
 package edu.stanford.irt.laneweb.proxy;
 
 import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.concurrent.ExecutorService;
+import java.util.Collections;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProxyHostManagerTest {
+import edu.stanford.irt.laneweb.LanewebException;
 
-    private Connection connection;
+public class ProxyHostManagerTest {
 
     private DataSource dataSource;
 
+    private ScheduledExecutorService executor;
+
+    private Future future;
+
     private ProxyHostManager manager;
-
-    private ResultSet resultSet;
-
-    private Statement statement;
 
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.manager = new ProxyHostManager(this.dataSource);
-        this.connection = createMock(Connection.class);
-        this.statement = createMock(Statement.class);
-        this.resultSet = createMock(ResultSet.class);
+        this.executor = createMock(ScheduledExecutorService.class);
+        this.future = createMock(Future.class);
+        expect(this.executor.submit(isA(Callable.class))).andReturn(this.future);
+        replay(this.future, this.executor);
+        this.manager = new ProxyHostManager(this.dataSource, this.executor);
+        verify(this.future, this.executor);
+        reset(this.future, this.executor);
     }
 
     @Test
-    public void testDestroy() throws InterruptedException, SQLException {
-        ExecutorService executor = createMock(ExecutorService.class);
-        ProxyHostManager m = new ProxyHostManager(this.dataSource, executor);
-        expect(executor.shutdownNow()).andReturn(null);
-        replay(this.dataSource, executor);
-        m.destroy();
-        verify(this.dataSource, executor);
+    public void testDestroy() {
+        expect(this.executor.shutdownNow()).andReturn(null);
+        replay(this.future, this.executor);
+        this.manager.destroy();
+        verify(this.future, this.executor);
     }
 
     @Test
-    public void testIsProxyableHost() throws SQLException, InterruptedException {
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
-        expect(this.resultSet.next()).andReturn(false);
-        this.connection.close();
-        this.statement.close();
-        this.resultSet.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertTrue(this.manager.isProxyableHost("library.stanford.edu"));
-        Thread.sleep(100);
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+    public void testIsProxyableExecutionException() throws InterruptedException, ExecutionException {
+        expect(this.future.isDone()).andReturn(true);
+        expect(this.future.get()).andThrow(new ExecutionException() {
+
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+        });
+        expect(this.executor.schedule(isA(Callable.class), eq(10L), eq(TimeUnit.MINUTES))).andReturn(null);
+        replay(this.future, this.executor);
+        assertTrue(this.manager.isProxyableLink("http://www.uptodate.com/index.html"));
+        verify(this.future, this.executor);
+    }
+
+    @Test
+    public void testIsProxyableHost() {
+        expect(this.future.isDone()).andReturn(false);
+        replay(this.future, this.executor);
+        assertTrue(this.manager.isProxyableHost("www.uptodate.com"));
+        verify(this.future, this.executor);
+    }
+
+    @Test
+    public void testIsProxyableHostFutureDone() throws InterruptedException, ExecutionException {
+        expect(this.future.isDone()).andReturn(true);
+        expect(this.future.get()).andReturn(Collections.singleton("www.uptodate.com"));
+        expect(this.executor.schedule(isA(Callable.class), eq(120L), eq(TimeUnit.MINUTES))).andReturn(null);
+        replay(this.future, this.executor);
+        assertTrue(this.manager.isProxyableHost("www.uptodate.com"));
+        verify(this.future, this.executor);
     }
 
     @Test
     public void testIsProxyableHostNull() {
+        replay(this.future, this.executor);
         assertFalse(this.manager.isProxyableHost(null));
+        verify(this.future, this.executor);
     }
 
     @Test
-    public void testIsProxyableLink() throws SQLException, InterruptedException {
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
-        expect(this.resultSet.next()).andReturn(false);
-        this.connection.close();
-        this.statement.close();
-        this.resultSet.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertTrue(this.manager.isProxyableLink("http://library.stanford.edu/foo"));
-        Thread.sleep(100);
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+    public void testIsProxyableLinkHost() {
+        expect(this.future.isDone()).andReturn(false);
+        replay(this.future, this.executor);
+        assertTrue(this.manager.isProxyableLink("http://www.uptodate.com/index.html"));
+        verify(this.future, this.executor);
     }
 
     @Test
-    public void testIsProxyableLinkMalformedURL() {
-        assertFalse(this.manager.isProxyableLink("://library.stanford.edu/foo"));
+    public void testIsProxyableLinkHostFutureDone() throws InterruptedException, ExecutionException {
+        expect(this.future.isDone()).andReturn(true);
+        expect(this.future.get()).andReturn(Collections.singleton("www.uptodate.com"));
+        expect(this.executor.schedule(isA(Callable.class), eq(120L), eq(TimeUnit.MINUTES))).andReturn(null);
+        replay(this.future, this.executor);
+        assertTrue(this.manager.isProxyableLink("http://www.uptodate.com/index.html"));
+        verify(this.future, this.executor);
+    }
+
+    @Test
+    public void testIsProxyableLinkInterrupted() throws ExecutionException, InterruptedException {
+        expect(this.future.isDone()).andReturn(true);
+        expect(this.future.get()).andThrow(new InterruptedException());
+        replay(this.future, this.executor);
+        try {
+            this.manager.isProxyableLink("http://www.uptodate.com/index.html");
+        } catch (LanewebException e) {
+            assertTrue(Thread.interrupted());
+        }
+        verify(this.future, this.executor);
+    }
+
+    @Test
+    public void testIsProxyableLinkMalformed() {
+        replay(this.future, this.executor);
+        assertFalse(this.manager.isProxyableLink("foo:~"));
+        verify(this.future, this.executor);
     }
 
     @Test
     public void testIsProxyableLinkNull() {
+        replay(this.future, this.executor);
         assertFalse(this.manager.isProxyableLink(null));
-    }
-
-    @Test
-    public void testUpdate() throws InterruptedException, SQLException {
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
-        expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
-        expect(this.resultSet.next()).andReturn(true);
-        expect(this.resultSet.getString(1)).andReturn("foo.bar");
-        expect(this.resultSet.next()).andReturn(false);
-        this.resultSet.close();
-        this.statement.close();
-        this.connection.close();
-        replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.manager.isProxyableHost("foo.bar");
-        Thread.sleep(200L);
-        assertTrue(this.manager.isProxyableHost("foo.bar"));
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        verify(this.future, this.executor);
     }
 }
