@@ -18,12 +18,12 @@
 
 
 	<xsl:template match="rss">
-		<xsl:apply-templates select="channel/item[not(category[ . = 'New Resources'])][position() &lt; 3]" />
+		<xsl:apply-templates select="channel/item[not(category[ . = 'New Resources'])][position() &lt; 4]" />
 	</xsl:template>
 	
 
 	<xsl:template match="item">
-		<div class="yui3-u-1-2">
+		<div class="yui3-u-1-3">
 			<div class="newsfeed-item-title"> 
 				<a href="{link}"
 					title="feed link---{../../channel/title}">
