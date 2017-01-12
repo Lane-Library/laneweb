@@ -30,7 +30,7 @@
 }
 
 .nav-menu:hover > a,
-.nav-menu.active > a{
+.nav-menu-active > a{
     color: #3C3623;
     background-color: white;
     box-shadow: inset 0 5px 5px -5px #000;

@@ -242,6 +242,20 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- add class="nav-menu-active" to .nav-menu li when the path matches -->
+    <xsl:template match="h:li[attribute::class='dropdown nav-menu']/@class">
+        <xsl:attribute name="class">
+            <xsl:choose>
+                <xsl:when test="starts-with($path, substring-before(parent::h:li/h:a/@href, 'index.html'))">
+                    <xsl:value-of select="concat(., ' nav-menu-active')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:attribute>
+    </xsl:template>
+
     <!-- add active to class to search form query present -->
     <xsl:template match="h:form[@class='search-form' and $query]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
