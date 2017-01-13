@@ -5,20 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class DatabaseProxyHostSet  extends HashSet<String> {
-
-    private static final Logger log = LoggerFactory.getLogger(DatabaseProxyHostSet.class);
-
-    private static final long serialVersionUID = 1L;
+public class ProxyHostSource {
 
     private static final String SQL =
             "SELECT DISTINCT URL_HOST AS HOST " +
@@ -46,29 +39,32 @@ public class DatabaseProxyHostSet  extends HashSet<String> {
             "AND MFHD_MASTER.SUPPRESS_IN_OPAC != 'Y' " +
             "AND BIB_MASTER.SUPPRESS_IN_OPAC != 'Y'";
 
-    public DatabaseProxyHostSet(final DataSource dataSource) {
+    private DataSource dataSource;
+
+    public ProxyHostSource(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public Set<String> getHosts() throws SQLException {
+        Set<String> hosts = new HashSet<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        if (log.isInfoEnabled()) {
-            log.info("retrieving new proxy host set from the voyager catalog");
-        }
         try {
             conn = dataSource.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(SQL);
             while (rs.next()) {
-                add(rs.getString(1));
+                hosts.add(rs.getString(1));
             }
-            add("bodoni.stanford.edu");
-            add("library.stanford.edu");
-            add("searchworks.stanford.edu");
-        } catch (SQLException e) {
-            throw new LanewebException(e);
+            hosts.add("bodoni.stanford.edu");
+            hosts.add("library.stanford.edu");
+            hosts.add("searchworks.stanford.edu");
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
         }
+        return hosts;
     }
 }

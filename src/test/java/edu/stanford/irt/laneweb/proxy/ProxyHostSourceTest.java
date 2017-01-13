@@ -18,13 +18,13 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
-
-public class DatabaseProxyHostSetTest {
+public class ProxyHostSourceTest {
 
     private Connection connection;
 
     private DataSource dataSource;
+
+    private ProxyHostSource hostSource;
 
     private ResultSet resultSet;
 
@@ -33,6 +33,7 @@ public class DatabaseProxyHostSetTest {
     @Before
     public void setUp() {
         this.dataSource = createMock(DataSource.class);
+        this.hostSource = new ProxyHostSource(this.dataSource);
         this.connection = createMock(Connection.class);
         this.statement = createMock(Statement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -50,7 +51,7 @@ public class DatabaseProxyHostSetTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        Set<String> proxyHosts = new DatabaseProxyHostSet(this.dataSource);
+        Set<String> proxyHosts = this.hostSource.getHosts();
         assertTrue(proxyHosts.contains("host"));
         assertTrue(proxyHosts.contains("bodoni.stanford.edu"));
         assertTrue(proxyHosts.contains("library.stanford.edu"));
@@ -58,10 +59,10 @@ public class DatabaseProxyHostSetTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = SQLException.class)
     public void testDatabaseProxyHostSetThrowsException() throws SQLException {
         expect(this.dataSource.getConnection()).andThrow(new SQLException());
         replay(this.dataSource);
-        new DatabaseProxyHostSet(this.dataSource);
+        this.hostSource.getHosts();
     }
 }
