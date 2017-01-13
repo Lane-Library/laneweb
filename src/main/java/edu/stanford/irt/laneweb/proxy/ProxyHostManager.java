@@ -19,7 +19,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class ProxyHostManager {
 
-    private static final long DEFAULT_DELAY = 1L;
+    private static final long DEFAULT_DELAY = 120L;
 
     private static final Logger log = LoggerFactory.getLogger(ProxyHostManager.class);
 
