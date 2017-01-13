@@ -56,10 +56,6 @@ public class CacheSourceResolverTest {
     }
 
     @Test
-    public void testGetValidity() {
-    }
-
-    @Test
     public void testResolveURI() throws URISyntaxException, IOException {
         expect(this.cache.get(new URI("cache:20:http://www.example.com/"))).andReturn(this.cachedResponse);
         expect(this.cachedResponse.getValidity()).andReturn(this.validity).times(2);

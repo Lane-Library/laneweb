@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
+import edu.stanford.irt.laneweb.proxy.ProxyHostSource;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.EzproxyServersWriter;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
@@ -27,7 +28,7 @@ public class ProxyConfiguration {
     private DataSource dataSource;
 
     @Autowired
-    public ProxyConfiguration(@Qualifier("javax.sql.DataSource/grandrounds") final DataSource dataSource) {
+    public ProxyConfiguration(@Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -48,9 +49,9 @@ public class ProxyConfiguration {
         return new HtmlProxyLinkTransformer(proxyHostManager());
     }
 
-    @Bean
+    @Bean(destroyMethod = "destroy")
     public ProxyHostManager proxyHostManager() {
-        return new ProxyHostManager(this.dataSource, Executors.newScheduledThreadPool(1));
+        return new ProxyHostManager(new ProxyHostSource(this.dataSource), Executors.newScheduledThreadPool(1));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links")

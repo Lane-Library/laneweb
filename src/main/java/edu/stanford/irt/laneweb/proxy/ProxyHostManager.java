@@ -6,14 +6,11 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,22 +21,13 @@ public class ProxyHostManager {
 
     private static final long DEFAULT_DELAY = 120L;
 
-    private static final long FAILURE_DELAY = 10L;
-
     private static final Logger log = LoggerFactory.getLogger(ProxyHostManager.class);
-
-    private DataSource dataSource;
 
     private ScheduledExecutorService executor;
 
-    private Future<Set<String>> futureProxyHosts;
-
-    private Object lock = new Object();
-
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final DataSource dataSource, final ScheduledExecutorService executor) {
-        this.dataSource = dataSource;
+    public ProxyHostManager(final ProxyHostSource hostSource, final ScheduledExecutorService executor) {
         this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;
@@ -51,7 +39,14 @@ public class ProxyHostManager {
         } catch (IOException e) {
             throw new LanewebException(e);
         }
-        this.futureProxyHosts = executor.submit(() -> new DatabaseProxyHostSet(dataSource));
+        executor.scheduleAtFixedRate(() -> {
+            try {
+                this.proxyHosts = hostSource.getHosts();
+                log.info("successfully retrieved proxy hosts from the voyager catalog");
+            } catch (SQLException e) {
+                log.error("failed to retrieve proxy host hosts from the voyager catalog: {}", e.getMessage());
+            }
+        }, 0L, DEFAULT_DELAY, TimeUnit.MINUTES);
     }
 
     public void destroy() {
@@ -62,7 +57,6 @@ public class ProxyHostManager {
         if (host == null) {
             return false;
         }
-        checkForUpdate();
         return this.proxyHosts.contains(host);
     }
 
@@ -76,27 +70,5 @@ public class ProxyHostManager {
         } catch (MalformedURLException e) {
             return false;
         }
-    }
-
-    private void checkForUpdate() {
-        synchronized (this.lock) {
-            if (this.futureProxyHosts.isDone()) {
-                try {
-                    this.proxyHosts = this.futureProxyHosts.get();
-                    scheduleUpdate(DEFAULT_DELAY);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new LanewebException(e);
-                } catch (ExecutionException e) {
-                    log.error("failed to retrieve proxy hosts: {}", e.getMessage());
-                    scheduleUpdate(FAILURE_DELAY);
-                }
-            }
-        }
-    }
-
-    private void scheduleUpdate(final long delay) {
-        this.futureProxyHosts = this.executor.schedule(() -> new DatabaseProxyHostSet(this.dataSource), delay,
-                TimeUnit.MINUTES);
     }
 }

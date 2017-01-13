@@ -26,7 +26,7 @@ public class BookmarksConfiguration {
     private Marshaller marshaller;
 
     @Autowired
-    public BookmarksConfiguration(@Qualifier("javax.sql.DataSource/eresources") final DataSource dataSource,
+    public BookmarksConfiguration(@Qualifier("javax.sql.DataSource/bookmarks") final DataSource dataSource,
             final Marshaller marshaller) {
         this.dataSource = dataSource;
         this.marshaller = marshaller;

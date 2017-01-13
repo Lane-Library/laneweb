@@ -23,7 +23,7 @@ public class GrandRoundsConfiguration {
     private DataSource dataSource;
 
     @Autowired
-    public GrandRoundsConfiguration(@Qualifier("javax.sql.DataSource/grandrounds") final DataSource dataSource) {
+    public GrandRoundsConfiguration(@Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
