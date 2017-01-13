@@ -4,7 +4,7 @@
     <appender name="LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${catalina.base}/logs/laneweb.log</File>
         <encoder>
-            <pattern>%d %p [%t][%c] - %m%n</pattern>
+            <pattern>%d %p [%t]%c{1}] - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <minIndex>1</minIndex>
@@ -25,7 +25,7 @@
     <appender name="search" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${catalina.base}/logs/search.log</File>
         <encoder>
-            <pattern>%d %p [%t][%c] - %m%n</pattern>
+            <pattern>%d %p [%t][%c{1}] - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <maxIndex>10</maxIndex>
