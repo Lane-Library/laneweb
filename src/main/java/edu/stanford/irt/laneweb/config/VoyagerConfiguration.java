@@ -18,7 +18,7 @@ public class VoyagerConfiguration {
     private DataSource dataSource;
 
     @Autowired
-    public VoyagerConfiguration(@Qualifier("javax.sql.DataSource/voyager") final DataSource dataSource) {
+    public VoyagerConfiguration(@Qualifier("javax.sql.DataSource/voyager-login") final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

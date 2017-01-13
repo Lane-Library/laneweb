@@ -29,7 +29,7 @@ public class CourseReservesConfiguration {
     private DataSource dataSource;
 
     @Autowired
-    public CourseReservesConfiguration(@Qualifier("javax.sql.DataSource/grandrounds") final DataSource dataSource) {
+    public CourseReservesConfiguration(@Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

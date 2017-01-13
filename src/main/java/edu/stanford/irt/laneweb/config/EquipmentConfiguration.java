@@ -25,7 +25,7 @@ public class EquipmentConfiguration {
     private DataSource dataSource;
 
     @Autowired
-    public EquipmentConfiguration(@Qualifier("javax.sql.DataSource/grandrounds") final DataSource dataSource,
+    public EquipmentConfiguration(@Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource,
             final BeanFactory beanFactory) {
         this.dataSource = dataSource;
         this.beanFactory = beanFactory;
