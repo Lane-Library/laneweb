@@ -31,7 +31,6 @@ public class ProxyHostManager {
         this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;
-        new Thread();
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"), StandardCharsets.UTF_8))) {
             while ((proxyHost = reader.readLine()) != null) {
