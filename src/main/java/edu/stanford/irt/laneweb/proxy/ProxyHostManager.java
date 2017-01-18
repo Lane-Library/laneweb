@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -31,6 +31,7 @@ public class ProxyHostManager {
         this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;
+        new Thread();
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt"), StandardCharsets.UTF_8))) {
             while ((proxyHost = reader.readLine()) != null) {
@@ -65,9 +66,10 @@ public class ProxyHostManager {
             return false;
         }
         try {
-            URL url = new URL(link);
+            URI url = new URI(link);
             return isProxyableHost(url.getHost());
-        } catch (MalformedURLException e) {
+        } catch (URISyntaxException e) {
+            log.error("unable to determine host from link: {}, error: {}", link, e.getMessage());
             return false;
         }
     }
