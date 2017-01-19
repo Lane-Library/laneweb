@@ -226,10 +226,17 @@
          * position.
          */
         _showTooltip : function() {
-            var x = this._currTrigger.mouseX,
+            var height = document.querySelector(".yui3-tooltip").clientHeight,
+                x = this._currTrigger.mouseX,
                 y = this._currTrigger.mouseY;
 
-            this.move(x + Tooltip.OFFSET_X, y + Tooltip.OFFSET_Y);
+            if (y >= document.documentElement.clientHeight - height) {
+                y = y - height - Tooltip.OFFSET_Y;
+            } else {
+                y = y + Tooltip.OFFSET_Y;
+            }
+
+            this.move(x + Tooltip.OFFSET_X, y);
 
             this.show();
             this._clearTimers();
