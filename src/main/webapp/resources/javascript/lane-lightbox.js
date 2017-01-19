@@ -131,14 +131,16 @@
 
     // anchor with class=autoLightbox will automatically render on page load
     var initializeAutoLightbox = function() {
-        var href, autoLightboxAnchor = Y.one("a.autoLightbox");
+        var href, hash, autoLightboxAnchor = Y.one("a.autoLightbox");
         if (autoLightboxAnchor) {
-            href = autoLightboxAnchor.get("href");
+            href = autoLightboxAnchor.get("href"),
+            hash = autoLightboxAnchor.get("hash");
             Y.io(href, {
                 on : {
                     success : function(id, o) {
                         var lightbox = Y.lane.Lightbox;
                         lightbox.set("url", href);
+                        lightbox.set("hash", hash);
                         lightbox.setContent(o.responseText);
                         lightbox.show();
                     }
