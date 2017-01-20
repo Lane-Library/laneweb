@@ -40,7 +40,6 @@ import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
 import edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer;
 import edu.stanford.irt.laneweb.search.ParameterMapGenerator;
 import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
-import edu.stanford.irt.laneweb.voyager.BibStatusGenerator;
 
 @Configuration
 public class PipelineConfiguration {
@@ -49,14 +48,6 @@ public class PipelineConfiguration {
     @Scope("prototype")
     public Aggregator aggregator() {
         return new AggregatorImpl("<aggregator>");
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bib-status")
-    @Scope("prototype")
-    public Generator bibStatusGenerator(
-            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
-            final SourceResolver sourceResolver) {
-        return new BibStatusGenerator(xmlSAXParser, sourceResolver);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/caching")
