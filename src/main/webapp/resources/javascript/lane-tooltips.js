@@ -24,7 +24,8 @@
                 node: null,
                 title: null,
                 mouseX: Tooltip.OFFSCREEN_X,
-                mouseY: Tooltip.OFFSCREEN_Y
+                mouseY: Tooltip.OFFSCREEN_Y,
+                mouseClientY: Tooltip.OFFSCREEN_Y
             };
 
             // Event handles - mouse over is set on the delegate
@@ -151,7 +152,7 @@
         _onNodeMouseEnter : function(e) {
             var node = e.currentTarget;
             if (node && (!this._currTrigger.node || !node.compareTo(this._currTrigger.node))) {
-                this._enterTrigger(node, e.pageX, e.pageY);
+                this._enterTrigger(node, e.pageX, e.pageY, e.clientY);
             }
         },
 
@@ -169,7 +170,7 @@
          * Default mouse move DOM event listener
          */
         _onNodeMouseMove : function(e) {
-            this._overTrigger(e.pageX, e.pageY);
+            this._overTrigger(e.pageX, e.pageY, e.clientY);
         },
 
         /*
@@ -178,9 +179,9 @@
          * event which can be prevented by listeners to
          * show the tooltip from being displayed.
          */
-        _enterTrigger : function(node, x, y) {
-            this._setCurrentTrigger(node, x, y);
-            this.fire("triggerEnter", {node:node, pageX:x, pageY:y});
+        _enterTrigger : function(node, x, y, mouseClientY) {
+            this._setCurrentTrigger(node, x, y, mouseClientY);
+            this.fire("triggerEnter", {node:node, pageX:x, pageY:y, mouseClientY:mouseClientY});
         },
 
         /*
@@ -216,9 +217,10 @@
          * on the trigger node. Stores the current mouse
          * x, y positions
          */
-        _overTrigger : function(x, y) {
+        _overTrigger : function(x, y, mouseClientY) {
             this._currTrigger.mouseX = x;
             this._currTrigger.mouseY = y;
+            this._currTrigger.mouseClientY = mouseClientY
         },
 
         /*
@@ -228,9 +230,10 @@
         _showTooltip : function() {
             var height = document.querySelector(".yui3-tooltip").clientHeight,
                 x = this._currTrigger.mouseX,
-                y = this._currTrigger.mouseY;
+                y = this._currTrigger.mouseY,
+                mouseClientY = this._currTrigger.mouseClientY;
 
-            if (y >= document.documentElement.clientHeight - height) {
+            if (mouseClientY >= document.documentElement.clientHeight - height) {
                 y = y - height - Tooltip.OFFSET_Y;
             } else {
                 y = y + Tooltip.OFFSET_Y;
@@ -273,7 +276,7 @@
          * out the title attribute if set and setting up mousemove/out
          * listeners.
          */
-        _setCurrentTrigger : function(node, x, y) {
+        _setCurrentTrigger : function(node, x, y, mouseClientY) {
 
             var currTrigger = this._currTrigger,
                 triggerHandles = this._eventHandles.trigger,
@@ -289,6 +292,7 @@
 
             currTrigger.mouseX = x;
             currTrigger.mouseY = y;
+            currTrigger.mouseClientY = mouseClientY;
             currTrigger.node = node;
             currTrigger.title = title;
         },
