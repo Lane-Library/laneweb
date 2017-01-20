@@ -1,5 +1,9 @@
 package edu.stanford.irt.laneweb.user;
 
+/**
+ * @deprecated we use login attributes for most of this now
+ */
+@Deprecated
 public class LDAPData {
 
     private String emailAddress;
