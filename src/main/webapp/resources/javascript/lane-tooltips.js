@@ -220,7 +220,7 @@
         _overTrigger : function(x, y, mouseClientY) {
             this._currTrigger.mouseX = x;
             this._currTrigger.mouseY = y;
-            this._currTrigger.mouseClientY = mouseClientY
+            this._currTrigger.mouseClientY = mouseClientY;
         },
 
         /*

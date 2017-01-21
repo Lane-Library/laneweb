@@ -133,7 +133,7 @@
     var initializeAutoLightbox = function() {
         var href, hash, autoLightboxAnchor = Y.one("a.autoLightbox");
         if (autoLightboxAnchor) {
-            href = autoLightboxAnchor.get("href"),
+            href = autoLightboxAnchor.get("href");
             hash = autoLightboxAnchor.get("hash");
             Y.io(href, {
                 on : {
