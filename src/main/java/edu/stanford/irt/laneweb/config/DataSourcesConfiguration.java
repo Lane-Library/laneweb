@@ -30,6 +30,7 @@ public class DataSourcesConfiguration {
         dataSource.setMaxPoolSize(maxPoolSize);
         dataSource.setONSConfiguration(onsConfiguration);
         dataSource.setFastConnectionFailoverEnabled(failoverEnabled);
+        dataSource.setLoginTimeout(3);
         return dataSource;
     }
 
@@ -45,6 +46,7 @@ public class DataSourcesConfiguration {
         dataSource.setUser(user);
         dataSource.setPassword(password);
         dataSource.setMaxPoolSize(maxPoolSize);
+        dataSource.setLoginTimeout(3);
         return dataSource;
     }
 
@@ -59,6 +61,7 @@ public class DataSourcesConfiguration {
         dataSource.setUser(user);
         dataSource.setPassword(password);
         dataSource.setMaxPoolSize(maxPoolSize);
+        dataSource.setLoginTimeout(3);
         return dataSource;
     }
 }
