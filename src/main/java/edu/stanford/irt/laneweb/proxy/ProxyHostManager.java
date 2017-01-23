@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -64,10 +64,17 @@ public class ProxyHostManager {
         if (link == null) {
             return false;
         }
+        // parsing links as URIs to easily get host, but need to clean them up by trimming and removing query string:
+        String linkToCheck = link.trim();
+        int qmark = linkToCheck.indexOf('?');
+        if (qmark > 0) {
+            linkToCheck = linkToCheck.substring(0, qmark);
+        }
         try {
-            URL url = new URL(link);
-            return isProxyableHost(url.getHost());
-        } catch (MalformedURLException e) {
+            URI uri = new URI(linkToCheck);
+            return isProxyableHost(uri.getHost());
+        } catch (URISyntaxException e) {
+            log.error("unable to determine host from link: {}, error: {}", link, e.getMessage());
             return false;
         }
     }

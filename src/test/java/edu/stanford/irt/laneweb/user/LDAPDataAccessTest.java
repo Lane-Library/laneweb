@@ -7,7 +7,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
@@ -37,6 +39,11 @@ public class LDAPDataAccessTest {
         this.subjectSource = createMock(SubjectSource.class);
         this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource, Collections.emptySet());
         this.ldapData = createMock(LDAPData.class);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testGetActiveSunetId() {
+        assertNotNull(this.lDAPDataAccess.getActiveSunetId("univid"));
     }
 
     @SuppressWarnings("unchecked")
@@ -71,6 +78,11 @@ public class LDAPDataAccessTest {
         replay(this.subjectSource, this.ldapTemplate);
         this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
         verify(this.subjectSource, this.ldapTemplate);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testIsActive() {
+        assertTrue(this.lDAPDataAccess.isActive("sunetid"));
     }
 
     @SuppressWarnings("unchecked")

@@ -6,7 +6,7 @@
         <map:match pattern="all-open-by-category.xml" type="wildcard">
             <map:aggregate type="default" element="doc">
                 <map:generate type="file" src="cocoon://classes/open-classes.xml"/>
-                <map:generate type="noncached-classes" src="cache:60:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
+                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
             </map:aggregate>
             <map:transform type="saxon" src="resources/xsl/classes/laneclasses.xsl"/>
             <map:serialize type="xml"/>
@@ -19,7 +19,7 @@
         <map:match pattern="class.xml" type="wildcard">
             <map:aggregate type="default" element="doc">
                 <map:generate type="file" src="cocoon://classes/open-classes.xml"/>
-                <map:generate type="noncached-classes" src="cache:60:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
+                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
             </map:aggregate>
             <map:transform type="saxon" src="resources/xsl/classes/laneclass.xsl"/>
             <map:serialize type="xml"/>

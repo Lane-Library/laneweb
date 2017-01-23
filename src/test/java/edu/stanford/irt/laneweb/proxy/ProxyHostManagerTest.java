@@ -103,7 +103,7 @@ public class ProxyHostManagerTest {
 
     @Test
     public void testIsProxyableLinkMalformed() {
-        assertFalse(this.manager.isProxyableLink("foo:~"));
+        assertFalse(this.manager.isProxyableLink("\u0000:foo"));
     }
 
     @Test
