@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release">
+            <action date="2017-01-19" dev="ryanmax" issue="131387" type="fix">
+                direct feedback pages not loading the proper feedback form
+            </action>
             <action date="2017-01-19" dev="ryanmax" issue="131383" type="update">
                 remove "Filter Results" heading when no search results found
             </action>
