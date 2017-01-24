@@ -36,7 +36,7 @@ public class SHCCodec {
         // pad with 0 bytes to 16:
         byte[] src = Base64.decodeBase64(key);
         byte[] dst = new byte[KEY_ARRAY_LENGTH];
-        System.arraycopy(src, 0, dst, 0, src.length);
+        System.arraycopy(src, 0, dst, 0, src.length > KEY_ARRAY_LENGTH ? KEY_ARRAY_LENGTH : src.length);
         this.secretKey = new SecretKeySpec(dst, "AES");
         this.initialVector = new IvParameterSpec(vector.getBytes(StandardCharsets.US_ASCII));
         try {

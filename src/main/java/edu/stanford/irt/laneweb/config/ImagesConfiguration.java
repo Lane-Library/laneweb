@@ -40,7 +40,7 @@ public class ImagesConfiguration {
     private Marshaller marshaller;
 
     @Autowired
-    public ImagesConfiguration(@Value("%{laneweb.solr-url-imageSearch}") final String imageSearchURL,
+    public ImagesConfiguration(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL,
             final Marshaller marshaller) {
         this.imageSearchURL = imageSearchURL;
         this.marshaller = marshaller;

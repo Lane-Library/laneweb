@@ -7,6 +7,62 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release">
+            <action date="2017-01-19" dev="ryanmax" issue="131383" type="update">
+                remove "Filter Results" heading when no search results found
+            </action>
+            <action date="2017-01-18" dev="ceyates" issue="131334" type="fix">
+                javascript error on discovery login page
+            </action>
+            <action date="2017-01-" dev="ceyates" issue="131207" type="add">
+                cache www.onlineregistrationcenter.com resources
+            </action>
+            <action date="2017-01-12" dev="ceyates" issue="131206" type="update">
+                use a scheduler to retrieve proxy hosts
+            </action>
+            <action date="2017-01-11" dev="ceyates" issue="131184" type="update">
+                put default properties appropriate for production in the application
+            </action>
+            <action date="2017-01-12" dev="ceyates" issue="131107" type="update">
+                keep the main nav section selection on
+            </action>
+            <action date="2017-01-20" dev="ceyates" issue="126617" type="fix">
+                Hover gets in the way (Web of Science)
+            </action>
+        </release>
+        <release date="2017-01-11" version="3.3.14" description="3.3.14 emergency release">
+            <action date="2017-01-11" dev="ceyates" issue="131196" type="fix">
+                ProxyHostManager configured with the wrong datasource
+            </action>
+            <action date="2017-01-10" dev="ceyates" issue="131176" type="fix">
+                bookcovers failing with 404 error
+            </action>
+        </release>
+        <release date="2017-01-09" version="3.3.13" description="3.3.13 bug fix release">
+            <action date="2017-01-09" dev="ceyates" issue="131152" type="fix">
+                /index.html always takes longer than 3 seconds to load
+            </action>
+        </release>
+        <release date="2017-01-09" version="3.3.12" description="3.3.12 bug fix release [not deployed]">
+            <action date="2016-12-29" dev="ceyates" issue="131142" type="update">
+                organize java packages for greater cohesion
+            </action>
+            <action date="2016-12-30" dev="ceyates" issue="131141" type="update">
+                change from xml to java for spring framework configuration
+            </action>
+            <action date="2017-01-08" dev="ryanmax" issue="131135" type="update">
+                expand "intervention" MeSH suggestions in PICO search
+            </action>
+            <action date="2016-12-19" dev="ceyates" issue="130687" type="remove">
+                remove audio resource list related code
+            </action>
+            <action date="2016-12-06" dev="ceyates" issue="130135" type="update">
+                change the size of the icons to fa-6x and add a magnifying glass on the equipment page
+            </action>
+            <action date="2016-12-15" dev="ceyates" issue="129142" type="remove">
+                remove code related to cme seminars that is no longer used
+            </action>
+        </release>
         <release date="2016-12-05" version="3.3.11" description="3.3.11 bug fix release">
             <action date="2016-12-05" dev="ceyates" issue="130006" type="update">
                 change from subversion to git for content version control

@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.integration;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
@@ -20,24 +21,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.mvc.WebMvcConfigurer;
 import edu.stanford.irt.laneweb.user.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ActiveProfiles("test")
-@ContextHierarchy({
-        @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class, initializers = LanewebContextInitializer.class),
-        @ContextConfiguration(classes = WebMvcConfigurer.class, initializers = LanewebContextInitializer.class) })
+@ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class LanewebIT {
 
     private MockMvc mockMvc;
@@ -235,6 +230,20 @@ public class LanewebIT {
                             .servletPath("/apps/search/content/html/pubmed"))
                     .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists());
         }
+    }
+
+    @Test
+    public void testRedirects() throws Exception {
+        this.mockMvc.perform(get("/beemap")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/beemap.html"));
+        this.mockMvc.perform(get("/help/")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/index.html"));
+        this.mockMvc.perform(get("/help")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/index.html"));
+        this.mockMvc.perform(get("/help/me/")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/me/index.html"));
+        this.mockMvc.perform(get("/help/me")).andExpect(status().isFound())
+                .andExpect(header().string("location", "/help/me/index.html"));
     }
 
     @Test

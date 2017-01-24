@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
 import java.net.URI;
@@ -16,10 +17,12 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class EventListTransformerTest {
 
@@ -62,6 +65,11 @@ public class EventListTransformerTest {
     }
 
     @Test
+    public void testGetValidity() {
+        assertSame(AlwaysValid.SHARED_INSTANCE, this.transformer.getValidity());
+    }
+
+    @Test
     public void testStartElement() throws SAXException, IOException, URISyntaxException {
         expect(this.attributes.getValue("href")).andReturn("value");
         expect(this.sourceResolver.resolveURI(new URI("value"))).andReturn(this.source);
@@ -76,6 +84,14 @@ public class EventListTransformerTest {
         this.xmlConsumer.startElement("", "notevent", "notevent", this.attributes);
         replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, this.source);
         this.transformer.startElement("", "notevent", "notevent", this.attributes);
+        verify(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, this.source);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testStartElementURISyntaxException() throws SAXException, IOException, URISyntaxException {
+        expect(this.attributes.getValue("href")).andReturn("/{}");
+        replay(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, this.source);
+        this.transformer.startElement("", "event", "event", this.attributes);
         verify(this.saxParser, this.sourceResolver, this.xmlConsumer, this.attributes, this.source);
     }
 }

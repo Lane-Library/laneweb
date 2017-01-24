@@ -5,16 +5,15 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.HttpRequestHandler;
 
 /**
- * A Controller that handlers requests with trailing slashes and redirects to request.getRequestURI()/index.html.
+ * A request handler that is designed to catch any requests that aren't handled by others, It redirects to
+ * request.getRequestURI()/index.html, mimicking the way we had the last match in cocoon do a redirect.
  */
-@Controller
-public class TrailingSlashController {
+public class DefaultRequestHandler implements HttpRequestHandler {
 
-    @RequestMapping({ "/", "*/", "*/*/" })
+    @Override
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         String uri = request.getRequestURI();
         String queryString = request.getQueryString();

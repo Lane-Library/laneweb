@@ -37,10 +37,10 @@ public class RedirectHandlerInterceptorTest {
 
     @Test
     public void testNoRedirect() throws IOException {
-        expect(this.request.getServletPath()).andReturn("index.html");
-        expect(this.request.getContextPath()).andReturn("/");
+        expect(this.request.getRequestURI()).andReturn("index.html");
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
-        expect(this.redirectProcessor.getRedirectURL("index.html", "/", null)).andReturn(null);
+        expect(this.redirectProcessor.getRedirectURL("index.html", "", null)).andReturn(null);
         replay(this.request, this.response, this.redirectProcessor);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         verify(this.request, this.response, this.redirectProcessor);
@@ -48,7 +48,7 @@ public class RedirectHandlerInterceptorTest {
 
     @Test
     public void testSlashClasses() throws IOException {
-        expect(this.request.getServletPath()).andReturn("/classes");
+        expect(this.request.getRequestURI()).andReturn("/classes");
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/classes", "", null)).andReturn("/classes/");
@@ -60,7 +60,7 @@ public class RedirectHandlerInterceptorTest {
 
     @Test
     public void testSlashClinician() throws IOException {
-        expect(this.request.getServletPath()).andReturn("/clinician");
+        expect(this.request.getRequestURI()).andReturn("/clinician");
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/clinician", "", null)).andReturn("/clinician/");
@@ -72,7 +72,7 @@ public class RedirectHandlerInterceptorTest {
 
     @Test
     public void testSlashLKSCPrint() throws IOException {
-        expect(this.request.getServletPath()).andReturn("/lksc-print.html");
+        expect(this.request.getRequestURI()).andReturn("/lksc-print.html");
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/lksc-print.html", "", null)).andReturn("/help/lksc-print.html");
@@ -84,7 +84,7 @@ public class RedirectHandlerInterceptorTest {
 
     @Test
     public void testSlashM() throws IOException {
-        expect(this.request.getServletPath()).andReturn("/m");
+        expect(this.request.getRequestURI()).andReturn("/laneweb/m");
         expect(this.request.getContextPath()).andReturn("/laneweb");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/m", "/laneweb", null)).andReturn("/laneweb/m/");

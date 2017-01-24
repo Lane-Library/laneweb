@@ -32,13 +32,12 @@ public class LDAPDataAccess {
         }
 
         @Override
-        @SuppressWarnings("rawtypes")
         public LDAPData run() {
-            List list = this.ldapTemplate.search("", this.lookupFilter, this.attributesMapper);
+            List<LDAPData> list = this.ldapTemplate.search("", this.lookupFilter, this.attributesMapper);
             if (list == null || list.isEmpty()) {
                 return null;
             }
-            return (LDAPData) list.get(0);
+            return list.get(0);
         }
     }
 
@@ -57,6 +56,16 @@ public class LDAPDataAccess {
         this.attributesMapper = new LDAPAttributesMapper(Collections.unmodifiableSet(activeAffiliations));
     }
 
+    public String getActiveSunetId(final String univid) {
+        throw new UnsupportedOperationException("not implemented");
+    }
+
+    /**
+     * @deprecated will be replaced by isActive(String sunetid)
+     * @param sunetid
+     * @return LDAPData
+     */
+    @Deprecated
     public LDAPData getLdapDataForSunetid(final String sunetid) {
         LDAPData ldapData = doGet("susunetid=" + sunetid);
         if (ldapData == null) {
@@ -66,6 +75,12 @@ public class LDAPDataAccess {
         return ldapData;
     }
 
+    /**
+     * @deprecated will be replaced by getActiveSunetId(String univid)
+     * @param univid
+     * @return LDAPData
+     */
+    @Deprecated
     public LDAPData getLdapDataForUnivid(final String univid) {
         LDAPData ldapData = doGet("suunivid=" + univid);
         if (ldapData == null) {
@@ -73,6 +88,10 @@ public class LDAPDataAccess {
             ldapData = new LDAPData(null, null, univid, false, null);
         }
         return ldapData;
+    }
+
+    public boolean isActive(final String sunetid) {
+        throw new UnsupportedOperationException("not implemented");
     }
 
     private LDAPData doGet(final String lookupFilter) {

@@ -10,8 +10,8 @@ import edu.stanford.irt.laneweb.codec.SHCCodec;
 public class CodecConfiguration {
 
     @Bean
-    public SHCCodec shcCodec(@Value("%{edu.stanford.irt.laneweb.shccodec.key}") final String key,
-            @Value("%{edu.stanford.irt.laneweb.shccodec.vector}") final String vector) {
+    public SHCCodec shcCodec(@Value("${edu.stanford.irt.laneweb.shccodec.key}") final String key,
+            @Value("${edu.stanford.irt.laneweb.shccodec.vector}") final String vector) {
         return new SHCCodec(key, vector);
     }
 }

@@ -33,7 +33,6 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
-import edu.stanford.irt.laneweb.classes.ClassesGenerator;
 import edu.stanford.irt.laneweb.classes.EventListTransformer;
 import edu.stanford.irt.laneweb.classes.RootElementProvidingGenerator;
 import edu.stanford.irt.laneweb.cocoon.DebugTransformer;
@@ -41,7 +40,6 @@ import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
 import edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer;
 import edu.stanford.irt.laneweb.search.ParameterMapGenerator;
 import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
-import edu.stanford.irt.laneweb.voyager.BibStatusGenerator;
 
 @Configuration
 public class PipelineConfiguration {
@@ -52,25 +50,10 @@ public class PipelineConfiguration {
         return new AggregatorImpl("<aggregator>");
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bib-status")
-    @Scope("prototype")
-    public Generator bibStatusGenerator(
-            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
-            final SourceResolver sourceResolver) {
-        return new BibStatusGenerator(xmlSAXParser, sourceResolver);
-    }
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/caching")
     @Scope("prototype")
     public Pipeline cachingPipeline(final Cache<Serializable, CachedResponse> cache) {
         return new CachingPipeline(cache);
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/classes")
-    @Scope("prototype")
-    public Generator classesGenerator(
-            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
-        return new ClassesGenerator("classes", xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/debug")

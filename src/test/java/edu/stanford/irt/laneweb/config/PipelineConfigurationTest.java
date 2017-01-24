@@ -25,18 +25,8 @@ public class PipelineConfigurationTest {
     }
 
     @Test
-    public void testBibStatusGenerator() {
-        assertNotNull(this.configuration.bibStatusGenerator(null, null));
-    }
-
-    @Test
     public void testCachingPipeline() {
         assertNotNull(this.configuration.cachingPipeline(null));
-    }
-
-    @Test
-    public void testClassesGenerator() {
-        assertNotNull(this.configuration.classesGenerator(null));
     }
 
     @Test

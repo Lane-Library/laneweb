@@ -17,8 +17,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 public class WebMvcConfigurerTest {
 
@@ -26,7 +24,7 @@ public class WebMvcConfigurerTest {
 
     @Before
     public void setUp() {
-        this.configuration = new WebMvcConfigurer("live-base");
+        this.configuration = new WebMvcConfigurer(null);
     }
 
     @Test
@@ -45,18 +43,6 @@ public class WebMvcConfigurerTest {
         expect(registration.addPathPatterns("/search.html")).andReturn(registration);
         replay(registry, registration);
         this.configuration.addInterceptors(registry);
-        verify(registry, registration);
-    }
-
-    @Test
-    public void testAddResourceHandlers() {
-        ResourceHandlerRegistry registry = createMock(ResourceHandlerRegistry.class);
-        ResourceHandlerRegistration registration = createMock(ResourceHandlerRegistration.class);
-        expect(registry.addResourceHandler("/**")).andReturn(registration);
-        expect(registration.addResourceLocations("live-base/", "/")).andReturn(registration);
-        expect(registration.setCachePeriod(Integer.valueOf(31536000))).andReturn(registration);
-        replay(registry, registration);
-        this.configuration.addResourceHandlers(registry);
         verify(registry, registration);
     }
 

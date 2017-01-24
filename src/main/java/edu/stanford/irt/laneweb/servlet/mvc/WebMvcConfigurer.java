@@ -1,24 +1,32 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
+import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
+import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,19 +35,11 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {
-        "edu.stanford.irt.laneweb.servlet.mvc",
-        "edu.stanford.irt.laneweb.bookmarks"})
-@PropertySource(value={
-    "classpath:/config/application.properties",
-    "file:${user.dir}/application.properties",
-    "file:${spring.config.location}/application.properties"},
-     ignoreResourceNotFound=true)
 public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
-    private String liveBase;
+    private URL liveBase;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -50,8 +50,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Autowired
     private SolrImageService solrImageService;
 
-    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}") final String liveBase) {
-        this.liveBase = liveBase + "/";
+    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}/") final URL liveBase) {
+        this.liveBase = liveBase;
     }
 
     @Override
@@ -69,13 +69,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-            .addResourceLocations(new String[] {this.liveBase, "/" })
-            .setCachePeriod(ONE_YEAR_IN_SECONDS);
-    }
-
-    @Override
     public void configureMessageConverters(final List<HttpMessageConverter<?>> converters) {
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
         stringConverter.setWriteAcceptCharset(false);
@@ -86,6 +79,17 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {
         return new DeviceResolverHandlerInterceptor();
+    }
+
+    @Bean
+    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ServletContext servletContext) throws MalformedURLException {
+        SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
+        Map<String, Object> urlMap = new HashMap<>();
+        urlMap.put("/**/*.*", staticRequestHandler(servletContext));
+        handlerMapping.setUrlMap(urlMap);
+        handlerMapping.setDefaultHandler(new DefaultRequestHandler());
+        handlerMapping.setInterceptors(new Object[] { redirectHandlerInterceptor() });
+        return handlerMapping;
     }
 
     @Bean
@@ -116,5 +120,15 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public SearchImageInterceptor searchImageInterceptor() {
         return new SearchImageInterceptor(this.solrImageService);
+    }
+
+    @Bean
+    public HttpRequestHandler staticRequestHandler(final ServletContext servletContext) throws MalformedURLException {
+        ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
+        handler.setLocations(
+                Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), new UrlResource(this.liveBase) }));
+        handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
+        handler.setSupportedMethods("HEAD", "GET");
+        return handler;
     }
 }
