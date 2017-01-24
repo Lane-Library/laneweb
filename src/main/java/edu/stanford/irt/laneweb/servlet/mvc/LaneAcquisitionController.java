@@ -12,9 +12,11 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LaneAcquisitionController {
@@ -23,9 +25,26 @@ public class LaneAcquisitionController {
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
-    @RequestMapping(value = "/apps/lanelibacqs", consumes = "application/json")
+    private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
+
+    private static final String JSON_MIME_TYPE = "application/json";
+    
+    private static final String LANELIBACQ_PATH = "/apps/lanelibacqs";
+    
+    @RequestMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
+    public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) throws IOException {
+    	Map<String, Object> map = model.asMap();
+        submitRequestToCrmServer(map);
+    	return getRedirectTo(map);
+    }
+    
+    @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback) throws IOException {
+    	submitRequestToCrmServer(feedback);
+    }
+    	
+    private void submitRequestToCrmServer(Map<String, Object> feedback) throws IOException{	
         StringBuilder queryString = new StringBuilder();
         for (Entry<String, Object> entry: feedback.entrySet()) {
             queryString.append(entry.getKey())
@@ -41,5 +60,16 @@ public class LaneAcquisitionController {
         wr.writeBytes(queryString.toString());
         wr.close();
         con.getResponseCode();
+    }
+    
+    private String getRedirectTo(final Map<String, Object> map) {
+        String redirectTo = (String) map.get("redirect");
+        if (redirectTo == null) {
+            redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
+        }
+        if (redirectTo == null) {
+            redirectTo = "/index.html";
+        }
+        return "redirect:" + redirectTo;
     }
 }
