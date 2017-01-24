@@ -1,3 +1,4 @@
+if (document.querySelector(".search-form"))  {
 
 (function() {
 
@@ -181,3 +182,5 @@
     lane.search = model;
 
 })();
+
+}

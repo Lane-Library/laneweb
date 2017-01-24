@@ -14,6 +14,8 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 @Configuration
 public class DataSourcesConfiguration {
 
+    private static final int THREE_SECONDS = 3;
+
     @Bean(name = {"javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks", "javax.sql.DataSource/bookcovers"})
     public DataSource eresourcesDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,
@@ -30,6 +32,7 @@ public class DataSourcesConfiguration {
         dataSource.setMaxPoolSize(maxPoolSize);
         dataSource.setONSConfiguration(onsConfiguration);
         dataSource.setFastConnectionFailoverEnabled(failoverEnabled);
+        dataSource.setLoginTimeout(THREE_SECONDS);
         return dataSource;
     }
 
@@ -45,6 +48,7 @@ public class DataSourcesConfiguration {
         dataSource.setUser(user);
         dataSource.setPassword(password);
         dataSource.setMaxPoolSize(maxPoolSize);
+        dataSource.setLoginTimeout(THREE_SECONDS);
         return dataSource;
     }
 
@@ -59,6 +63,7 @@ public class DataSourcesConfiguration {
         dataSource.setUser(user);
         dataSource.setPassword(password);
         dataSource.setMaxPoolSize(maxPoolSize);
+        dataSource.setLoginTimeout(THREE_SECONDS);
         return dataSource;
     }
 }

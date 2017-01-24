@@ -111,14 +111,14 @@
     </xsl:template>
 
     <xsl:template match="/">
+        <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name='all']/@hits"/>
         <html>
             <body>
                 <!-- hidden element that gets moved into place by solr-facets.js -->
                 <xsl:if test="$search-mode and string-length($facets) > 0">
-                    <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name='all']/@hits"/>
                     <span id="solrAllCount"><xsl:value-of select="format-number($counts,'###,##0')"/></span>
                 </xsl:if>
-                <xsl:if test="/linked-hash-map/entry or string-length($facets) > 0">
+                <xsl:if test="$counts > 0 and (/linked-hash-map/entry or string-length($facets) > 0)">
                     <div class="bd">
                         <h3 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h3>
                         <xsl:if test="not($search-mode)">

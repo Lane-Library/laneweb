@@ -16,11 +16,16 @@ public class QueryMapConfigurationTest {
     @Before
     public void setUp() {
         this.solrClient = createMock(SolrClient.class);
-        this.configuration = new QueryMapConfiguration();
+        this.configuration = new QueryMapConfiguration(this.solrClient);
     }
 
     @Test
     public void testQueryMapper() {
-        assertNotNull(this.configuration.queryMapper(this.solrClient));
+        assertNotNull(this.configuration.queryMapper());
+    }
+
+    @Test
+    public void testQueryMapperSolrTemplate() {
+        assertNotNull(this.configuration.queryMapperSolrTemplate());
     }
 }

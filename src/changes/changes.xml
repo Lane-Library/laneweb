@@ -7,6 +7,37 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-01-24" version="3.3.16" description="3.3.16 bug fix release">
+            <action date="2017-01-24" dev="ceyates" issue="131485" type="fix">
+                /apps/querymap/json returning 404 error due to NullPointerException
+            </action>
+        </release>
+        <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release">
+            <action date="2017-01-19" dev="ryanmax" issue="131387" type="fix">
+                direct feedback pages not loading the proper feedback form
+            </action>
+            <action date="2017-01-19" dev="ryanmax" issue="131383" type="update">
+                remove "Filter Results" heading when no search results found
+            </action>
+            <action date="2017-01-18" dev="ceyates" issue="131334" type="fix">
+                javascript error on discovery login page
+            </action>
+            <action date="2017-01-" dev="ceyates" issue="131207" type="add">
+                cache www.onlineregistrationcenter.com resources
+            </action>
+            <action date="2017-01-12" dev="ceyates" issue="131206" type="update">
+                use a scheduler to retrieve proxy hosts
+            </action>
+            <action date="2017-01-11" dev="ceyates" issue="131184" type="update">
+                put default properties appropriate for production in the application
+            </action>
+            <action date="2017-01-12" dev="ceyates" issue="131107" type="update">
+                keep the main nav section selection on
+            </action>
+            <action date="2017-01-20" dev="ceyates" issue="126617" type="fix">
+                Hover gets in the way (Web of Science)
+            </action>
+        </release>
         <release date="2017-01-11" version="3.3.14" description="3.3.14 emergency release">
             <action date="2017-01-11" dev="ceyates" issue="131196" type="fix">
                 ProxyHostManager configured with the wrong datasource
