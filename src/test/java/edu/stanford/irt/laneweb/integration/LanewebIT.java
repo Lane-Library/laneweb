@@ -99,6 +99,11 @@ public class LanewebIT {
         this.mockMvc.perform(get("/apps/ipGroupFetch?callback=foo")).andExpect(status().isOk())
                 .andExpect(content().contentType(new MediaType("application", "javascript", StandardCharsets.UTF_8)));
     }
+    
+    @Test
+    public void testQueryMap() throws Exception {
+        this.mockMvc.perform(get("/apps/querymap/json?q=ganz+slipped+capital+femoral+epiphysis")).andExpect(status().isOk());
+    }
 
     /**
      * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in a Solr instance is
