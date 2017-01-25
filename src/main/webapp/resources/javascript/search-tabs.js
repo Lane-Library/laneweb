@@ -1,3 +1,5 @@
+if (document.querySelector(".search-form"))  {
+
 (function() {
 
     "use strict";
@@ -87,3 +89,5 @@
     view.on(CLICK, controller.update, controller);
 
 })();
+
+}

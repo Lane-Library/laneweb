@@ -1,3 +1,5 @@
+if (document.querySelector(".search-form"))  {
+
 (function() {
 
     "use strict";
@@ -47,3 +49,5 @@
 
 
 })();
+
+}
