@@ -24,7 +24,9 @@
 
             Y.augment(v, Y.EventTarget);
 
-            reset.addEventListener(CLICK, v.click);
+            if (reset) {
+                reset.addEventListener(CLICK, v.click);
+            }
 
             return v;
 
