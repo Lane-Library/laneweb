@@ -1,3 +1,5 @@
+if (document.querySelector(".search-form"))  {
+
 (function() {
 
     "use strict";
@@ -62,3 +64,5 @@
 
         lane.on("search:sourceChange", controller.sourceChange);
 })();
+
+}

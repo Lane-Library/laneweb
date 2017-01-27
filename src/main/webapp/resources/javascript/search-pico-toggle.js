@@ -1,3 +1,5 @@
+if (document.querySelector(".pico-toggle"))  {
+
 (function() {
 
     "use strict";
@@ -86,3 +88,5 @@
         })(view);
 
 })();
+
+}
