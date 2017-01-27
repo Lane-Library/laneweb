@@ -1,6 +1,7 @@
 /target/
+/scripts/
+/.settings/
 /.classpath
 /.project
-/.settings/
 /.springBeans
 /application.properties
