@@ -1,12 +1,7 @@
-target/
-scripts/
-project.properties
-
-
-
+/target/
+/scripts/
 /.settings/
 /.classpath
 /.project
 /.springBeans
-/.gitignore
 /application.properties
