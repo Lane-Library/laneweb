@@ -41,18 +41,23 @@
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 50000,'0'),' TO *]')">Last 5 Years</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 100000,'0'),' TO *]')">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>
+                <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Digital')">Digital</xsl:when>
+                <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Print')">Print</xsl:when>
                 <xsl:otherwise><xsl:value-of select="value"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="furl">
             <xsl:if test="string-length(url) > 0"><xsl:value-of select="concat('&amp;facets=',url)"/></xsl:if>
         </xsl:variable>
+        <xsl:variable name="indented">
+            <xsl:if test="$search-mode and ../../string[. = 'type'] and (contains(value,' Digital') or contains(value,' Print'))">indented</xsl:if>
+        </xsl:variable>
         <xsl:choose>
             <xsl:when test="enabled = 'true'">
-                 <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="fa fa-check-square fa-lg"></i> <span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
+                 <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="{$indented} fa fa-check-square fa-lg"></i> <span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
             </xsl:when>
             <xsl:otherwise>
-                 <li><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i><span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
+                 <li class="{$indented}"><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i><span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -74,6 +79,9 @@
                       <xsl:when test="$id = 'year'">
                         <xsl:apply-templates select="/linked-hash-map/entry/string[. = 'date']/../sorted-set/facet[contains(value,'TO *') and count > 0]"/>
                         <xsl:apply-templates select="$entry/sorted-set/facet[enabled = 'true']"/>
+                      </xsl:when>
+                      <xsl:when test="$id = 'type'">
+                        <xsl:apply-templates select="$entry/sorted-set/facet"/>
                       </xsl:when>
                       <xsl:otherwise>
                         <xsl:apply-templates select="$entry/sorted-set/facet[position() &lt;= $values-per-facet or enabled = 'true']"/>

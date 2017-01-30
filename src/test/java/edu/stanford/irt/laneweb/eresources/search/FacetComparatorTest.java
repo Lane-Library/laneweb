@@ -59,6 +59,15 @@ public class FacetComparatorTest {
         assertEquals("Req Pub 1", i.next().getValue());
         assertEquals("Req Pub 2", i.next().getValue());
         assertEquals("foo", i.next().getValue());
+        set.clear();
+        // case 131450: indent Digital and Print for Book and Journal types
+        set.add(new Facet("type", "Book Print", 100, null));
+        set.add(new Facet("type", "Book", 10, null));
+        set.add(new Facet("type", "Book Digital", 1000, null));
+        i = set.iterator();
+        assertEquals("Book", i.next().getValue());
+        assertEquals("Book Digital", i.next().getValue());
+        assertEquals("Book Print", i.next().getValue());
     }
 
     @Test(expected = IllegalArgumentException.class)

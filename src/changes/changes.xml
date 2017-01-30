@@ -7,12 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-01-30" version="3.3.17" description="3.3.17 bug fix release">
+            <action date="2017-01-25" dev="olgary" issue="131546" type="update">
+                template, debug.xml - updated suggestion text per Michelle's suggestion
+            </action>
+            <action date="2017-01-24" dev="alainb" issue="131464" type="fix">
+                Feedback-bug - 415 error when make a suggestion for purchase
+            </action>
+            <action date="2017-01-25" dev="ceyates" issue="131334" type="fix">
+                javascript error on discovery login page
+            </action>
+        </release>
         <release date="2017-01-24" version="3.3.16" description="3.3.16 bug fix release">
             <action date="2017-01-24" dev="ceyates" issue="131485" type="fix">
                 /apps/querymap/json returning 404 error due to NullPointerException
             </action>
         </release>
-        <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release">
+        <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release [not deployed]">
             <action date="2017-01-19" dev="ryanmax" issue="131387" type="fix">
                 direct feedback pages not loading the proper feedback form
             </action>
