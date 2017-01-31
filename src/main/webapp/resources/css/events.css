@@ -13,7 +13,7 @@
 }
 /* :before rules are about getting colored date box the same height as the .event box */
 .event .date:before {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 0;
     bottom: 0;
