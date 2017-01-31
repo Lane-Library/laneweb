@@ -34,9 +34,6 @@
                 <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'laneblog'">Lane Blog</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and value = 'instructional_videos'">Instructional Videos</xsl:when>
-                <xsl:when test="../../string[. = 'type'] and value = 'Video'">Video: All</xsl:when>
-                <xsl:when test="../../string[. = 'type'] and value = 'Instructional Video'">Video: Instructional</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 10000,'0'),' TO *]')">Last 12 Months</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 50000,'0'),' TO *]')">Last 5 Years</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 100000,'0'),' TO *]')">Last 10 Years</xsl:when>
