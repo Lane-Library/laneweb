@@ -16,7 +16,7 @@ a:visited,a:active,a:hover {
 }
 
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
-.yui3-g [class*="yui3-u"] {
+.yui3-g [class*='yui3-u'] {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -429,7 +429,7 @@ h4 {
 }
 .golfclub > span:after,
 .golfclub > span:before{
-    content: "";
+    content: '';
     display: table-cell;
     background: url(../../images/header-border.png) no-repeat 0 50%;
     width: 50%;
@@ -643,7 +643,7 @@ blockquote {
 }
 
 .clearfix {
-    content: " ";
+    content: ' ';
     display: table;
 }
 
@@ -804,11 +804,11 @@ http://lane.stanford.edu/samples/button-css.html
     overflow: hidden;
 }
 .flickr-photos a:before {
-    content: "";
+    content: '';
     margin-left: -100%;
 }
 .flickr-photos a:after {
-    content: "";
+    content: '';
     margin-right: -100%;
 }
 .flickr-carousel-button {
