@@ -16,7 +16,7 @@ import edu.stanford.irt.querymap.ResourceMap;
 @Controller
 public class QueryMapController {
 
-    private static final Logger LOG = LoggerFactory.getLogger("querymap");
+    private static final Logger log = LoggerFactory.getLogger("querymap");
 
     @Autowired
     private SolrQueryParser parser;
@@ -28,7 +28,9 @@ public class QueryMapController {
     @ResponseBody
     public ResourceMap getJSONResourceMap(@RequestParam final String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(this.parser.parse(q));
-        LOG.info(queryMap.toString());
+        if (log.isInfoEnabled()) {
+            log.info(queryMap.toString());
+        }
         return queryMap.getResourceMap();
     }
 }
