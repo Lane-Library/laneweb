@@ -41,7 +41,9 @@ public class SpellCheckController {
     public String spellCheckException(final SpellCheckException e) {
         Throwable t = e.getCause();
         if (t instanceof SocketTimeoutException) {
-            log.warn(e.toString(), e);
+            if (log.isWarnEnabled()) {
+                log.warn(e.toString(), e);
+            }
         } else {
             log.error(e.toString(), e);
         }

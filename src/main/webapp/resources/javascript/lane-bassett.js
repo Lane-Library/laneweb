@@ -14,9 +14,9 @@
         prevSubRegion,
         i,
 
-        formatAjaxUrl = function(href) {
-            var url;
-            href = href.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
+        formatAjaxUrl = function(string) {
+            var url, href;
+            href = string.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
             href = href.split("?");
             if (href.length === 1) {
@@ -42,8 +42,8 @@
             pages.remove();
         },
 
-        loadContent = function(url) {
-            url = basePath + "/plain/biomed-resources/bassett/raw".concat(url);
+        loadContent = function(string) {
+            var url = basePath + "/plain/biomed-resources/bassett/raw".concat(string);
             function successHandler(id, o) {
                 var content = Y.Node.create(o.responseText),
                     container = Y.one('#bassettContent');

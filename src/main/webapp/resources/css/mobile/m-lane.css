@@ -209,7 +209,7 @@ body {
     width: 35.5%;
 }
 
-input[type="text"] {
+input[type='text'] {
     -moz-appearance: none;
     -webkit-appearance: none;
     border: 1px solid #FFFFFF;
@@ -366,7 +366,7 @@ input[type="text"] {
 }
 
 .searchTabs li:after,.searchTabs li:before {
-    content: " ";
+    content: ' ';
     background: #e7d79f;
     background: linear-gradient(to bottom, #e7d79f 0,#9f9065 100%);
     width: 4%;
@@ -388,7 +388,7 @@ input[type="text"] {
 
 .searchTabs li:nth-child(2):active:after,
 .searchTabs li:nth-child(3):active:before {
-    content: " ";
+    content: ' ';
     background: none repeat scroll 0 0 #620b09;
     width: 5%;
     height: 105px;
@@ -550,7 +550,7 @@ input[type="text"] {
 }
 
 .todays-hours:before {
-    content: "+";
+    content: '+';
     font-weight: bold;
     padding: 1px;
     line-height: .6em;

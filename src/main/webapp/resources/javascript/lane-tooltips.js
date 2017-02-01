@@ -396,7 +396,7 @@
                 value: null,
                 setter: function(val) {
                     if (val && Lang.isString(val)) {
-                        val = Node.all(val);
+                        return Node.all(val);
                     }
                     return val;
                 }

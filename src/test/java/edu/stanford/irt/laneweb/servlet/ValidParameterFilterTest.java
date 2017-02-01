@@ -51,8 +51,6 @@ public class ValidParameterFilterTest {
     public void testInternalDoFilterInvalidParameter() throws IOException, ServletException {
         expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("invalid", new String[] { "value" }));
         this.response.setStatus(400);
-        expect(this.request.getServletPath()).andReturn("servletPath");
-        expect(this.request.getQueryString()).andReturn("queryString");
         this.chain.doFilter(isA(HttpServletRequestWrapper.class), eq(this.response));
         replay(this.request, this.response, this.chain);
         this.filter.internalDoFilter(this.request, this.response, this.chain);
