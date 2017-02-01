@@ -17,7 +17,7 @@
 
 	<xsl:template match="rss">
 		<xsl:apply-templates
-			select="channel/item[category[ . = 'New Resources']][position() &lt; 2]" />
+			select="channel/item[category[ . = 'New Resource']][position() &lt; 2]" />
 	</xsl:template>
 
 
