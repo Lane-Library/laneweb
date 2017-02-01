@@ -278,8 +278,9 @@
                     }
                     return isTrackable;
                 },
-                isTrackableAsPageview: function(link) {
-                    var isTrackable = false;
+                isTrackableAsPageview: function(theLink) {
+                    var isTrackable = false,
+                        link = theLink;
                     if (link.getData().isTrackableAsPageView) {
                         isTrackable = true;
                     } else {
