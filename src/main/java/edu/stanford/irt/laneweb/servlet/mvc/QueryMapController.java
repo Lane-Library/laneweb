@@ -18,11 +18,15 @@ public class QueryMapController {
 
     private static final Logger log = LoggerFactory.getLogger("querymap");
 
-    @Autowired
     private SolrQueryParser parser;
 
-    @Autowired
     private QueryMapper queryMapper;
+
+    @Autowired
+    public QueryMapController(final SolrQueryParser parser, final QueryMapper queryMapper) {
+        this.parser = parser;
+        this.queryMapper = queryMapper;
+    }
 
     @RequestMapping(value = "/apps/querymap/json")
     @ResponseBody
