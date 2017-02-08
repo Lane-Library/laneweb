@@ -5,8 +5,11 @@ if (document.querySelector(".search-form"))  {
     "use strict";
 
     var lane = Y.lane,
-        model = function(query, source) {
-            var m = {
+        model = function(q, s) {
+
+            var query = q,
+                source = s,
+                m = {
                     getQuery: function() {
                         return query;
                     },
@@ -18,22 +21,22 @@ if (document.querySelector(".search-form"))  {
                             this.fire("search");
                         }
                     },
-                    setQuery: function(q) {
-                        var oldVal = query;
-                        if (typeof q === "string") {
-                            query = q;
+                    setQuery: function(newQuery) {
+                        var oldQuery = query;
+                        if (typeof newQuery === "string") {
+                            query = newQuery;
                             this.fire("queryChange", {
-                                newVal: q,
-                                oldVal: oldVal
+                                newVal: newQuery,
+                                oldVal: oldQuery
                             });
                         }
                     },
-                    setSource: function(s) {
-                        var oldVal = source;
-                        if (typeof s === "string") {
+                    setSource: function(newSource) {
+                        var oldSource = source;
+                        if (typeof newSource === "string") {
                             this.fire("sourceChange", {
-                                newVal: s,
-                                oldVal: oldVal
+                                newVal: newSource,
+                                oldVal: oldSource
                             });
                         }
                     }

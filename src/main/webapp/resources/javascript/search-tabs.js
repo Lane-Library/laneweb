@@ -57,7 +57,9 @@ if (document.querySelector(".search-form"))  {
         }(tabNodes),
 
 
-        controller = function(model, view) {
+        controller = function(m, view) {
+
+            var model = m;
 
             return {
                 update: function(source) {

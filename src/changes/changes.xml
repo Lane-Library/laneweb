@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-02-06" version="3.3.18" description="3.3.18 bug fix release">
+            <action date="2017-01-31" dev="ceyates" issue="131579" type="fix">
+                toolip collapsed view
+            </action>
+            <action date="2017-01-31" dev="ryanmax" issue="131562" type="remove">
+                remove software by room search facets 
+            </action>
+            <action date="2017-01-30" dev="ryanmax" issue="131450" type="add">
+                indent Print and Digital types in facet list
+            </action>
+        </release>
         <release date="2017-01-30" version="3.3.17" description="3.3.17 bug fix release">
             <action date="2017-01-25" dev="olgary" issue="131546" type="update">
                 template, debug.xml - updated suggestion text per Michelle's suggestion

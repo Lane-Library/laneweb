@@ -117,6 +117,28 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         }
     }
 
+    private void extractFromFacetFields(final Collection<Page<FacetFieldEntry>> facetResultPages,
+            final Map<String, Collection<Facet>> facetsMap) {
+        for (Page<FacetFieldEntry> page : facetResultPages) {
+            if (!page.hasContent()) {
+                continue;
+            }
+            Collection<Facet> facetList = new ArrayList<>();
+            String fieldName = null;
+            for (FacetFieldEntry entry : page) {
+                if (fieldName == null) {
+                    fieldName = entry.getField().getName();
+                }
+                String facetValue = entry.getValue();
+                if (facetsMap.containsKey(fieldName)) {
+                    facetList = facetsMap.get(fieldName);
+                }
+                facetList.add(new Facet(fieldName, facetValue, entry.getValueCount(), this.facets));
+            }
+            facetsMap.put(fieldName, facetList);
+        }
+    }
+
     /**
      * need to include active/enabled facets, even if they have zero results
      *
@@ -251,24 +273,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             }
         }
         // extract from facet fields
-        for (Page<FacetFieldEntry> page : facetpage.getFacetResultPages()) {
-            if (!page.hasContent()) {
-                continue;
-            }
-            Collection<Facet> facetList = new ArrayList<>();
-            String fieldName = null;
-            for (FacetFieldEntry entry : page) {
-                if (fieldName == null) {
-                    fieldName = entry.getField().getName();
-                }
-                String facetValue = entry.getValue();
-                if (facetsMap.containsKey(fieldName)) {
-                    facetList = facetsMap.get(fieldName);
-                }
-                facetList.add(new Facet(fieldName, facetValue, entry.getValueCount(), this.facets));
-            }
-            facetsMap.put(fieldName, facetList);
-        }
+        extractFromFacetFields(facetpage.getFacetResultPages(), facetsMap);
         return facetsMap;
     }
 

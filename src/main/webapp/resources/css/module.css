@@ -9,7 +9,7 @@
 }
 
 .module:after,.module .after{
-    content: ".";
+    content: '.';
     display: block;
     height: 0;
     font-size: 0;
