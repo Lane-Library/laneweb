@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
+import edu.stanford.irt.cocoon.xml.SAXParser;
 
 public class SourceConfigurationTest {
 
@@ -29,7 +30,9 @@ public class SourceConfigurationTest {
     @Test
     public void testSourceResolver() {
         expect(this.beanFactory.getBean(isA(String.class), eq(Sitemap.class))).andReturn(null).times(7);
+        expect(this.beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/xml", SAXParser.class)).andReturn(null);
         replay(this.beanFactory);
+        this.configuration.afterPropertiesSet();
         assertNotNull(this.configuration.sourceResolver());
         verify(this.beanFactory);
     }

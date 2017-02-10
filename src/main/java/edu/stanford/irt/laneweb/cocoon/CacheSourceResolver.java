@@ -30,7 +30,7 @@ public class CacheSourceResolver implements SourceResolver {
     /**
      * A Source implementation that wraps a byte array.
      */
-    private static final class ByteArraySource implements Source, Cacheable {
+    static class ByteArraySource implements Source, Cacheable {
 
         private byte[] byteArray;
 
@@ -38,7 +38,7 @@ public class CacheSourceResolver implements SourceResolver {
 
         private Validity validity;
 
-        private ByteArraySource(final byte[] byteArray, final String uri, final Validity validity) {
+        ByteArraySource(final byte[] byteArray, final String uri, final Validity validity) {
             this.byteArray = new byte[byteArray.length];
             System.arraycopy(byteArray, 0, this.byteArray, 0, byteArray.length);
             this.uri = uri;
@@ -68,6 +68,15 @@ public class CacheSourceResolver implements SourceResolver {
         @Override
         public Validity getValidity() {
             return this.validity;
+        }
+    }
+
+    static final class CacheSourceException extends LanewebException {
+
+        private static final long serialVersionUID = 1L;
+
+        public CacheSourceException(final String message, final Throwable cause) {
+            super(message, cause);
         }
     }
 
@@ -101,32 +110,24 @@ public class CacheSourceResolver implements SourceResolver {
     public Source resolveURI(final URI cacheURI) {
         CachedResponse cachedResponse = this.cache.get(cacheURI);
         if (cachedResponse == null) {
-            try {
-                cachedResponse = createCachedResponse(cacheURI);
-            } catch (URISyntaxException | IOException e) {
-                throw new LanewebException(e);
-            }
+            cachedResponse = createCachedResponse(cacheURI);
             this.cache.put(cacheURI, cachedResponse);
         } else if (!cachedResponse.getValidity().isValid()) {
             try {
                 cachedResponse = createCachedResponse(cacheURI);
                 this.cache.put(cacheURI, cachedResponse);
-            } catch (URISyntaxException | IOException e) {
-                log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getMessage());
+            } catch (CacheSourceException e) {
+                log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getCause().getMessage());
             }
         }
-        return new ByteArraySource(cachedResponse.getBytes(), cacheURI.toString(), cachedResponse.getValidity());
+        return createSource(cachedResponse.getBytes(), cacheURI.toString(), cachedResponse.getValidity());// new
+                                                                                                          // ByteArraySource(cachedResponse.getBytes(),
+                                                                                                          // cacheURI.toString(),
+                                                                                                          // cachedResponse.getValidity());
     }
 
-    private CachedResponse createCachedResponse(final URI cacheURI) throws URISyntaxException, IOException {
-        String schemeSpecificPart = cacheURI.getRawSchemeSpecificPart();
-        int colon = schemeSpecificPart.indexOf(':');
-        URI uri = new URI(schemeSpecificPart.substring(colon + 1));
-        Source source = this.sourceResolver.resolveURI(uri);
-        byte[] bytes = getBytesFromSource(source);
-        long minutes = Long.parseLong(schemeSpecificPart.substring(0, colon));
-        Validity validity = new ExpiresValidity(minutes * MILLISECONDS_PER_MINUTE);
-        return new CachedResponse(validity, bytes);
+    protected Source createSource(final byte[] bytes, final String uri, final Validity validity) {
+        return new ByteArraySource(bytes, uri, validity);
     }
 
     /**
@@ -134,21 +135,42 @@ public class CacheSourceResolver implements SourceResolver {
      *
      * @param source
      *            the Source
-     * @return a byte array creted from the InputStream of the Source.
+     * @return a byte array created from the InputStream of the Source.
      * @throws IOException
      *             if getting the InputStream from the Source fails
      */
-    private byte[] getBytesFromSource(final Source source) throws IOException {
+    protected byte[] getBytesFromSource(final Source source) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        InputStream input = source.getInputStream();
-        byte[] buffer = new byte[BUFFER_SIZE];
-        while (true) {
-            int i = input.read(buffer);
-            if (i == -1) {
-                break;
+        InputStream input;
+        try {
+            input = source.getInputStream();
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while (true) {
+                int i = input.read(buffer);
+                if (i == -1) {
+                    break;
+                }
+                baos.write(buffer, 0, i);
             }
-            baos.write(buffer, 0, i);
+        } catch (IOException e) {
+            throw new CacheSourceException("failed to get bytes", e);
         }
         return baos.toByteArray();
+    }
+
+    private CachedResponse createCachedResponse(final URI cacheURI) {
+        String schemeSpecificPart = cacheURI.getRawSchemeSpecificPart();
+        int colon = schemeSpecificPart.indexOf(':');
+        URI uri;
+        try {
+            uri = new URI(schemeSpecificPart.substring(colon + 1));
+        } catch (URISyntaxException e) {
+            throw new CacheSourceException("failed to create CachedResponse", e);
+        }
+        Source source = this.sourceResolver.resolveURI(uri);
+        byte[] bytes = getBytesFromSource(source);
+        long minutes = Long.parseLong(schemeSpecificPart.substring(0, colon));
+        Validity validity = new ExpiresValidity(minutes * MILLISECONDS_PER_MINUTE);
+        return new CachedResponse(validity, bytes);
     }
 }
