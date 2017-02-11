@@ -13,7 +13,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.core.io.ResourceLoader;
 
 import edu.stanford.irt.cocoon.cache.CachedResponse;
@@ -23,13 +22,11 @@ import edu.stanford.irt.cocoon.sitemap.source.SitemapSourceResolver;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.source.SourceResolverImpl;
 import edu.stanford.irt.cocoon.spring.SpringResourceSourceResolver;
-import edu.stanford.irt.cocoon.xml.JaxpSAXParser;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.laneweb.cocoon.CacheSourceResolver;
 import edu.stanford.irt.laneweb.cocoon.CachedXMLSourceResolver;
 
 @Configuration
-//@Lazy
 public class SourceConfiguration implements InitializingBean {
 
     private static final List<String> SITEMAPS = Arrays

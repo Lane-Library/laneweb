@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.cache.Cache;
 
-import org.xml.sax.SAXException;
-
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.source.Source;
@@ -29,7 +27,7 @@ public class CachedXMLSourceResolver extends CacheSourceResolver {
         }
 
         @Override
-        public void toSAX(final XMLConsumer handler) throws SAXException {
+        public void toSAX(final XMLConsumer handler) {
             XMLByteStreamInterpreter interpreter = new XMLByteStreamInterpreter();
             interpreter.setXMLConsumer(handler);
             interpreter.deserialize(this.bytesArray);

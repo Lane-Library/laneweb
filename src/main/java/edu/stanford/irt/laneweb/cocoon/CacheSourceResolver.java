@@ -120,10 +120,7 @@ public class CacheSourceResolver implements SourceResolver {
                 log.warn("failed to get resource {}, using expired cache ({})", cacheURI, e.getCause().getMessage());
             }
         }
-        return createSource(cachedResponse.getBytes(), cacheURI.toString(), cachedResponse.getValidity());// new
-                                                                                                          // ByteArraySource(cachedResponse.getBytes(),
-                                                                                                          // cacheURI.toString(),
-                                                                                                          // cachedResponse.getValidity());
+        return createSource(cachedResponse.getBytes(), cacheURI.toString(), cachedResponse.getValidity());
     }
 
     protected Source createSource(final byte[] bytes, final String uri, final Validity validity) {
