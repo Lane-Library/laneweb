@@ -12,7 +12,7 @@
     <stx:template match="event">
         <stx:assign name="classid" select="''"/>
         <stx:process-children/>
-        <event href="cache:60:http://www.onlineregistrationcenter.com/registerxml.asp?m=257&amp;c={$classid}"/>
+        <event href="cachedxml:60:http://www.onlineregistrationcenter.com/registerxml.asp?m=257&amp;c={$classid}"/>
     </stx:template>
 
     <stx:template match="eventid">

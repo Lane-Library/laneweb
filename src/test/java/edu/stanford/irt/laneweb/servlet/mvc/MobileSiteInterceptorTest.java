@@ -43,15 +43,27 @@ public class MobileSiteInterceptorTest {
 
     private SitePreferenceHandler sitePreferenceHandler;
 
+    @Before
+    public void setUp() {
+        this.desktopRedirects = new HashMap<>();
+        this.desktopRedirects.put("/index.html", "/m/index.html");
+        this.desktopRedirects.put("/biomed-resources/eb.html", "/m/book.html");
+        this.desktopRedirects.put("/biomed-resources/ej.html", "/m/ej.html");
+        this.device = createMock(Device.class);
+        this.response = new MockHttpServletResponse();
+        this.sitePreferenceHandler = createMock(StandardSitePreferenceHandler.class);
+        this.interceptor = new MobileSiteInterceptor(this.sitePreferenceHandler, this.desktopRedirects);
+    }
+
     @Test
-    public void desktopDeviceDesktopSiteMobilePreference() throws Exception {
+    public void testDesktopDeviceDesktopSiteMobilePreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/index.html");
         this.request.setServletPath("/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.FALSE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.MOBILE);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.MOBILE);
         replay(this.sitePreferenceHandler);
         assertFalse(this.interceptor.preHandle(this.request, this.response, null));
         assertEquals("/m/index.html", this.response.getRedirectedUrl());
@@ -59,7 +71,7 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void desktopDeviceDesktopSiteNoPreference() throws Exception {
+    public void testDesktopDeviceDesktopSiteNoPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/index.html");
         this.request.setServletPath("/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.FALSE);
@@ -74,14 +86,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void desktopDeviceDesktopSiteNormalPreference() throws Exception {
+    public void testDesktopDeviceDesktopSiteNormalPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/index.html");
         this.request.setServletPath("/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.FALSE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.NORMAL);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.NORMAL);
         replay(this.sitePreferenceHandler);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         assertNull(this.response.getRedirectedUrl());
@@ -90,14 +102,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void desktopDeviceMobileSiteMobilePreference() throws Exception {
+    public void testDesktopDeviceMobileSiteMobilePreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/m/index.html");
         this.request.setServletPath("/m/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.FALSE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.MOBILE);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.MOBILE);
         replay(this.sitePreferenceHandler);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         assertNull(this.response.getRedirectedUrl());
@@ -105,14 +117,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void desktopDeviceMobileSiteNormalPreference() throws Exception {
+    public void testDesktopDeviceMobileSiteNormalPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/m/index.html");
         this.request.setServletPath("/m/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.FALSE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.NORMAL);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.NORMAL);
         replay(this.sitePreferenceHandler);
         assertFalse(this.interceptor.preHandle(this.request, this.response, null));
         assertEquals("/help/m.html", this.response.getRedirectedUrl());
@@ -120,7 +132,7 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceDesktopSiteEbooksNoPreference() throws Exception {
+    public void testMobileDeviceDesktopSiteEbooksNoPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/biomed-resources/eb.html");
         this.request.setServletPath("/biomed-resources/eb.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
@@ -135,7 +147,7 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceDesktopSiteEjournalsNoPreference() throws Exception {
+    public void testMobileDeviceDesktopSiteEjournalsNoPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/biomed-resources/ej.html");
         this.request.setServletPath("/biomed-resources/ej.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
@@ -150,14 +162,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceDesktopSiteMobilePreference() throws Exception {
+    public void testMobileDeviceDesktopSiteMobilePreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/index.html");
         this.request.setServletPath("/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.MOBILE);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.MOBILE);
         replay(this.sitePreferenceHandler);
         assertFalse(this.interceptor.preHandle(this.request, this.response, null));
         assertEquals("/m/index.html", this.response.getRedirectedUrl());
@@ -165,7 +177,7 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceDesktopSiteNoPreference() throws Exception {
+    public void testMobileDeviceDesktopSiteNoPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/index.html");
         this.request.setServletPath("/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
@@ -180,14 +192,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceDesktopSiteNormalPreference() throws Exception {
+    public void testMobileDeviceDesktopSiteNormalPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/index.html");
         this.request.setServletPath("/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.NORMAL);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.NORMAL);
         replay(this.sitePreferenceHandler);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         assertNull(this.response.getRedirectedUrl());
@@ -196,14 +208,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceMobileSiteMobilePreference() throws Exception {
+    public void testMobileDeviceMobileSiteMobilePreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/m/index.html");
         this.request.setServletPath("/m/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.MOBILE);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.MOBILE);
         replay(this.sitePreferenceHandler);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         assertNull(this.response.getRedirectedUrl());
@@ -211,14 +223,14 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void mobileDeviceMobileSiteNormalPreference() throws Exception {
+    public void testMobileDeviceMobileSiteNormalPreference() throws Exception {
         this.request = new MockHttpServletRequest("GET", "/m/index.html");
         this.request.setServletPath("/m/index.html");
         expect(this.device.isMobile()).andReturn(Boolean.TRUE);
         replay(this.device);
         this.request.setAttribute(DeviceUtils.CURRENT_DEVICE_ATTRIBUTE, this.device);
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.NORMAL);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.NORMAL);
         replay(this.sitePreferenceHandler);
         assertFalse(this.interceptor.preHandle(this.request, this.response, null));
         assertEquals("/help/m.html", this.response.getRedirectedUrl());
@@ -226,12 +238,12 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void nonHtmlRequest() throws Exception {
+    public void testNonHtmlRequest() throws Exception {
         this.device = null;
         this.request = new MockHttpServletRequest("GET", "/path/foo.gif");
         this.request.setServletPath("/path/foo.gif");
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.MOBILE);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.MOBILE);
         replay(this.sitePreferenceHandler);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         assertNull(this.response.getRedirectedUrl());
@@ -239,27 +251,15 @@ public class MobileSiteInterceptorTest {
     }
 
     @Test
-    public void secureRequest() throws Exception {
+    public void testSecureRequest() throws Exception {
         this.device = null;
         this.request = new MockHttpServletRequest("GET", "/secure/foo.html");
         this.request.setServletPath("/secure/foo.html");
-        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response)).andReturn(
-                SitePreference.MOBILE);
+        expect(this.sitePreferenceHandler.handleSitePreference(this.request, this.response))
+                .andReturn(SitePreference.MOBILE);
         replay(this.sitePreferenceHandler);
         assertTrue(this.interceptor.preHandle(this.request, this.response, null));
         assertNull(this.response.getRedirectedUrl());
         verify(this.sitePreferenceHandler);
-    }
-
-    @Before
-    public void setUp() {
-        this.desktopRedirects = new HashMap<String, String>();
-        this.desktopRedirects.put("/index.html", "/m/index.html");
-        this.desktopRedirects.put("/biomed-resources/eb.html", "/m/book.html");
-        this.desktopRedirects.put("/biomed-resources/ej.html", "/m/ej.html");
-        this.device = createMock(Device.class);
-        this.response = new MockHttpServletResponse();
-        this.sitePreferenceHandler = createMock(StandardSitePreferenceHandler.class);
-        this.interceptor = new MobileSiteInterceptor(this.sitePreferenceHandler, this.desktopRedirects);
     }
 }

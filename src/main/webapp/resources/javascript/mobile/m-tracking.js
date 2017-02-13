@@ -1,7 +1,7 @@
 // Google Analytics tracking
 var _gaq = _gaq || [];
 $.ajax({
-    url: model['base-path'] + "/apps/ipGroupFetch",
+    url: window.model['base-path'] + "/apps/ipGroupFetch",
     dataType: "text",
     success: function(ipGroup) {
         if(ipGroup) {

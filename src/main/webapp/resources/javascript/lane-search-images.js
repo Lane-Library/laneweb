@@ -23,8 +23,7 @@
 
         //On click on Image to open the imageDetail
         Y.all('#imageList  div[class=yui3-u-1-5]').on('click',
-            function(e)
-            {
+            function(e) {
                 var div = e.currentTarget,
                     row = div.getAttribute("row"),
                     id = div.get("id");
