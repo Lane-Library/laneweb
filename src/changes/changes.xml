@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-02-13" version="3.3.19" description="3.3.19 bug fix release">
+            <action date="2017-02-10" dev="ceyates" issue="131875" type="fix">
+                cached classes data can be bad xml
+            </action>
+        </release>
         <release date="2017-02-06" version="3.3.18" description="3.3.18 bug fix release">
             <action date="2017-01-31" dev="ceyates" issue="131579" type="fix">
                 toolip collapsed view
