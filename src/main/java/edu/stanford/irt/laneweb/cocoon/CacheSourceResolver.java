@@ -133,8 +133,6 @@ public class CacheSourceResolver implements SourceResolver {
      * @param source
      *            the Source
      * @return a byte array created from the InputStream of the Source.
-     * @throws IOException
-     *             if getting the InputStream from the Source fails
      */
     protected byte[] getBytesFromSource(final Source source) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
