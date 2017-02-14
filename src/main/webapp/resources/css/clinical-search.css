@@ -61,7 +61,7 @@
 }
 
 .clinical-facet .fa-circle-o::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     background-color: #fff;
     height: 12px;

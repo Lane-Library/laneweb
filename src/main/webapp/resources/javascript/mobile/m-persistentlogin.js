@@ -1,6 +1,3 @@
-var redirectUrl,
-    PERSISTENT_PREFERENCE_COOKIE_NAME = 'lane-login-expiration-date';
-
 
 $.LANE.popupWindow = function(url){
     $.mobile.changePage(url, {
@@ -10,33 +7,34 @@ $.LANE.popupWindow = function(url){
     });
 };
 
+(function() {
 
-$(document).on("click", 'a[href*="laneproxy"]', function(event) {
-    var link = event.currentTarget, threeDays = 3600 *3 ,
-    now = new Date(), cookieValue = $.LANE.getCookie(PERSISTENT_PREFERENCE_COOKIE_NAME);
-    if (!model['disaster-mode'] &&  model.isActiveSunetID && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
-        redirectUrl = encodeURIComponent(link.href);
-        $.LANE.popupWindow(model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
+    var redirectUrl;
+
+    $(document).on("click", 'a[href*="laneproxy"]', function(event) {
+        var link = event.currentTarget, threeDays = 3600 *3 ,
+        now = new Date(), cookieValue = $.LANE.getCookie('lane-login-expiration-date');
+        if (!window.model['disaster-mode'] &&  window.model.isActiveSunetID && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
+            redirectUrl = encodeURIComponent(link.href);
+            $.LANE.popupWindow(window.model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
+            event.preventDefault();
+        }
+    });
+
+    $(document).on("click", '#shibboleth-links a', function(event) {
+        var persistentUrl = window.model['base-path']+ '/persistentLogin.html?pl=';
+        if (!redirectUrl) {
+            redirectUrl = "/index.html";
+        }
         event.preventDefault();
-    }
-});
+        document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
+    });
 
-
-
-
-$(document).on("click", '#shibboleth-links a', function(event) {
-    var persistentUrl = model['base-path']+ '/persistentLogin.html?pl=';
-    if (!redirectUrl) {
-        redirectUrl = "/index.html";
-    }
-    event.preventDefault();
-    document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
-
-});
+})();
 
 
 $(document).on("click", "#close", function() {
-    document.location = model['base-path'] + '/';
+    document.location = window.model['base-path'] + '/';
 });
 
 // click on login link
@@ -48,10 +46,10 @@ $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {
 });
 
 $.LANE.toggleLogin = function() {
-    if (model.auth) {
+    if (window.model.auth) {
         $('.webauthLogin').each(function() {
             $(this).text('Logout');
-            $(this).attr('href', model['base-path'] + '/logout');
+            $(this).attr('href', window.model['base-path'] + '/logout');
             $(this).attr('data-ajax', 'false');
         });
     } else {
@@ -59,7 +57,7 @@ $.LANE.toggleLogin = function() {
                 function() {
                     $(this).text('Login');
                     $(this).attr('href',
-                            model['base-path'] + '/secure/login.html?url='+encodeURIComponent(document.location.href));
+                            window.model['base-path'] + '/secure/login.html?url='+encodeURIComponent(document.location.href));
                     $(this).attr('data-ajax', 'false');
                 });
     }

@@ -1,3 +1,5 @@
+if (document.querySelector(".search-form"))  {
+
 (function() {
 
     "use strict";
@@ -55,7 +57,9 @@
         }(tabNodes),
 
 
-        controller = function(model, view) {
+        controller = function(m, view) {
+
+            var model = m;
 
             return {
                 update: function(source) {
@@ -87,3 +91,5 @@
     view.on(CLICK, controller.update, controller);
 
 })();
+
+}

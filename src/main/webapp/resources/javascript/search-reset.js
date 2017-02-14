@@ -24,7 +24,10 @@
 
             Y.augment(v, Y.EventTarget);
 
-            reset.addEventListener(CLICK, v.click);
+            // case 131334 javascript error on discovery login page
+            if (reset) {
+                reset.addEventListener(CLICK, v.click);
+            }
 
             return v;
 

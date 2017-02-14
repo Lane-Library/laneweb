@@ -1,11 +1,10 @@
 // Google Analytics tracking
-var _gaq = _gaq || [], ipGroup;
+var _gaq = _gaq || [];
 $.ajax({
-    url: model['base-path'] + "/apps/ipGroupFetch",
+    url: window.model['base-path'] + "/apps/ipGroupFetch",
     dataType: "text",
-    success: function(data) {
-        if(data) {
-            ipGroup = data;
+    success: function(ipGroup) {
+        if(ipGroup) {
             if(document.location.host.match("lane.stanford.edu")){
                 _gaq.push(['_setAccount', 'UA-3202241-10']);
             }

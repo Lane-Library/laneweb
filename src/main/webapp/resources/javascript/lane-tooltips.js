@@ -25,6 +25,7 @@
                 title: null,
                 mouseX: Tooltip.OFFSCREEN_X,
                 mouseY: Tooltip.OFFSCREEN_Y,
+                mouseClientX: Tooltip.OFFSCREEN_X,
                 mouseClientY: Tooltip.OFFSCREEN_Y
             };
 
@@ -152,7 +153,7 @@
         _onNodeMouseEnter : function(e) {
             var node = e.currentTarget;
             if (node && (!this._currTrigger.node || !node.compareTo(this._currTrigger.node))) {
-                this._enterTrigger(node, e.pageX, e.pageY, e.clientY);
+                this._enterTrigger(node, e.pageX, e.pageY, e.clientX, e.clientY);
             }
         },
 
@@ -170,7 +171,7 @@
          * Default mouse move DOM event listener
          */
         _onNodeMouseMove : function(e) {
-            this._overTrigger(e.pageX, e.pageY, e.clientY);
+            this._overTrigger(e.pageX, e.pageY, e.clientX, e.clientY);
         },
 
         /*
@@ -179,9 +180,9 @@
          * event which can be prevented by listeners to
          * show the tooltip from being displayed.
          */
-        _enterTrigger : function(node, x, y, mouseClientY) {
-            this._setCurrentTrigger(node, x, y, mouseClientY);
-            this.fire("triggerEnter", {node:node, pageX:x, pageY:y, mouseClientY:mouseClientY});
+        _enterTrigger : function(node, x, y, mouseClientX, mouseClientY) {
+            this._setCurrentTrigger(node, x, y, mouseClientX, mouseClientY);
+            this.fire("triggerEnter", {node:node, pageX:x, pageY:y, mouseClientX:mouseClientX, mouseClientY:mouseClientY});
         },
 
         /*
@@ -217,9 +218,10 @@
          * on the trigger node. Stores the current mouse
          * x, y positions
          */
-        _overTrigger : function(x, y, mouseClientY) {
+        _overTrigger : function(x, y, mouseClientX, mouseClientY) {
             this._currTrigger.mouseX = x;
             this._currTrigger.mouseY = y;
+            this._currTrigger.mouseClientX = mouseClientX;
             this._currTrigger.mouseClientY = mouseClientY;
         },
 
@@ -228,10 +230,19 @@
          * position.
          */
         _showTooltip : function() {
-            var height = document.querySelector(".yui3-tooltip").clientHeight,
+            var tt = document.querySelector(".yui3-tooltip"),
+                height = tt.clientHeight,
+                width = tt.clientWidth,
                 x = this._currTrigger.mouseX,
                 y = this._currTrigger.mouseY,
+                mouseClientX = this._currTrigger.mouseClientX,
                 mouseClientY = this._currTrigger.mouseClientY;
+
+            if (mouseClientX >= document.documentElement.clientWidth - width) {
+                x = x - width - Tooltip.OFFSET_X;
+            } else {
+                x = x + Tooltip.OFFSET_X;
+            }
 
             if (mouseClientY >= document.documentElement.clientHeight - height) {
                 y = y - height - Tooltip.OFFSET_Y;
@@ -239,7 +250,7 @@
                 y = y + Tooltip.OFFSET_Y;
             }
 
-            this.move(x + Tooltip.OFFSET_X, y);
+            this.move(x, y);
 
             this.show();
             this._clearTimers();
@@ -276,7 +287,7 @@
          * out the title attribute if set and setting up mousemove/out
          * listeners.
          */
-        _setCurrentTrigger : function(node, x, y, mouseClientY) {
+        _setCurrentTrigger : function(node, x, y, mouseClientX, mouseClientY) {
 
             var currTrigger = this._currTrigger,
                 triggerHandles = this._eventHandles.trigger,
@@ -292,6 +303,7 @@
 
             currTrigger.mouseX = x;
             currTrigger.mouseY = y;
+            currTrigger.mouseClientX = mouseClientX;
             currTrigger.mouseClientY = mouseClientY;
             currTrigger.node = node;
             currTrigger.title = title;
@@ -384,7 +396,7 @@
                 value: null,
                 setter: function(val) {
                     if (val && Lang.isString(val)) {
-                        val = Node.all(val);
+                        return Node.all(val);
                     }
                     return val;
                 }
@@ -465,7 +477,7 @@
                 shim: false,
                 zIndex: 2,
                 autoHideDelay: 60000,
-                constrain:true,
+                constrain: false,
                 render : true,
                 delegate : "#main"
             });

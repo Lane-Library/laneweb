@@ -7,20 +7,44 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-02-13" version="3.3.19" description="3.3.19 bug fix release">
+            <action date="2017-02-10" dev="ceyates" issue="131875" type="fix">
+                cached classes data can be bad xml
+            </action>
+        </release>
+        <release date="2017-02-06" version="3.3.18" description="3.3.18 bug fix release">
+            <action date="2017-01-31" dev="ceyates" issue="131579" type="fix">
+                toolip collapsed view
+            </action>
+            <action date="2017-01-31" dev="ryanmax" issue="131562" type="remove">
+                remove software by room search facets 
+            </action>
+            <action date="2017-01-30" dev="ryanmax" issue="131450" type="add">
+                indent Print and Digital types in facet list
+            </action>
+        </release>
+        <release date="2017-01-30" version="3.3.17" description="3.3.17 bug fix release">
+            <action date="2017-01-25" dev="olgary" issue="131546" type="update">
+                template, debug.xml - updated suggestion text per Michelle's suggestion
+            </action>
+            <action date="2017-01-24" dev="alainb" issue="131464" type="fix">
+                Feedback-bug - 415 error when make a suggestion for purchase
+            </action>
+            <action date="2017-01-25" dev="ceyates" issue="131334" type="fix">
+                javascript error on discovery login page
+            </action>
+        </release>
         <release date="2017-01-24" version="3.3.16" description="3.3.16 bug fix release">
             <action date="2017-01-24" dev="ceyates" issue="131485" type="fix">
                 /apps/querymap/json returning 404 error due to NullPointerException
             </action>
         </release>
-        <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release">
+        <release date="2017-01-23" version="3.3.15" description="3.3.15 bug fix release [not deployed]">
             <action date="2017-01-19" dev="ryanmax" issue="131387" type="fix">
                 direct feedback pages not loading the proper feedback form
             </action>
             <action date="2017-01-19" dev="ryanmax" issue="131383" type="update">
                 remove "Filter Results" heading when no search results found
-            </action>
-            <action date="2017-01-18" dev="ceyates" issue="131334" type="fix">
-                javascript error on discovery login page
             </action>
             <action date="2017-01-" dev="ceyates" issue="131207" type="add">
                 cache www.onlineregistrationcenter.com resources

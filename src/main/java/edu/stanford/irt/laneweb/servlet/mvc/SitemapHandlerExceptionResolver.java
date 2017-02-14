@@ -18,7 +18,7 @@ import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
 public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver {
 
-    private static final Logger LOG = LoggerFactory.getLogger("error handler");
+    private static final Logger log = LoggerFactory.getLogger("error handler");
 
     private SitemapController sitemapController;
 
@@ -29,11 +29,13 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
     private static void logException(final Throwable ex) {
         if (ex instanceof ResourceNotFoundException || ex instanceof FileNotFoundException
                 || ex instanceof ClientAbortException) {
-            LOG.warn(ex.toString());
+            if (log.isWarnEnabled()) {
+                log.warn(ex.toString());
+            }
         } else {
             Throwable cause = ex.getCause();
             if (cause == null) {
-                LOG.error(ex.toString(), ex);
+                log.error(ex.toString(), ex);
             } else {
                 logException(cause);
             }
@@ -56,7 +58,7 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
             try {
                 this.sitemapController.handleRequest(wrapped, response);
             } catch (IOException | LanewebException e) {
-                LOG.error("Exception while handling exception", e);
+                log.error("Exception while handling exception", e);
             }
         }
         return new ModelAndView();

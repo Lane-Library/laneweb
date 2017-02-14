@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>21</version>
+        <version>22</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.17-SNAPSHOT</version>
+    <version>3.3.20-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -111,7 +111,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.43</version>
+            <version>3.0.46</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -169,7 +169,7 @@
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
             <groupId>org.springframework.ldap</groupId>
-            <version>2.3.0.RELEASE</version>
+            <version>2.3.1.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-mobile-device</artifactId>

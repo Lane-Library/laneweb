@@ -17,7 +17,7 @@ h2 {
 }
 .golfclub > span:after,
 .golfclub > span:before{
-    content: "";
+    content: '';
     display: table-cell;
     background: url(../images/header-border.png) no-repeat 0 50%;
     width: 50%;
@@ -45,4 +45,4 @@ h5 {
     font-size: 16px;
     margin: 18px 0 .4em;
     text-transform: uppercase;
-} 
+}

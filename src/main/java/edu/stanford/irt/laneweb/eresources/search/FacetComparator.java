@@ -35,6 +35,10 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
         if (facet1Name.startsWith(LAST_X_YEARS_PREFIX) && facet2Name.startsWith(LAST_X_YEARS_PREFIX)) {
             return facet2Name.compareTo(facet1Name);
         }
+        // case 131450: indent Digital and Print subtypes of Book and Journal
+        if ((facet1Name + facet2Name).matches("(type:.*){2}")) {
+            return facet1Name.compareTo(facet2Name);
+        }
         // cases 110125 and 121834: give some Article Types display priority
         if (this.prioritizedPublicationTypes.contains(facet1Name)
                 && !this.prioritizedPublicationTypes.contains(facet2Name)) {

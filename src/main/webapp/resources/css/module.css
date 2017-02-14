@@ -9,8 +9,8 @@
     position: relative;
 }
 
-.module:after, .module .after {
-    content: ".";
+.module:after,.module .after{
+    content: '.';
     display: block;
     height: 0;
     font-size: 0;

@@ -16,19 +16,25 @@ import edu.stanford.irt.querymap.ResourceMap;
 @Controller
 public class QueryMapController {
 
-    private static final Logger LOG = LoggerFactory.getLogger("querymap");
+    private static final Logger log = LoggerFactory.getLogger("querymap");
 
-    @Autowired
     private SolrQueryParser parser;
 
-    @Autowired
     private QueryMapper queryMapper;
+
+    @Autowired
+    public QueryMapController(final SolrQueryParser parser, final QueryMapper queryMapper) {
+        this.parser = parser;
+        this.queryMapper = queryMapper;
+    }
 
     @RequestMapping(value = "/apps/querymap/json")
     @ResponseBody
     public ResourceMap getJSONResourceMap(@RequestParam final String q) {
         QueryMap queryMap = this.queryMapper.getQueryMap(this.parser.parse(q));
-        LOG.info(queryMap.toString());
+        if (log.isInfoEnabled()) {
+            log.info(queryMap.toString());
+        }
         return queryMap.getResourceMap();
     }
 }

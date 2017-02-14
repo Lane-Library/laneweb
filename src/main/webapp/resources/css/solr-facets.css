@@ -100,8 +100,12 @@
     color: #ccc;
 }
 
+.indented.fa-check-square, .indented .fa-square-o::before, .indented .fa-square-o::after {
+    margin-left:20px;
+}
+
 .solrFacets .fa-square-o::after, .facetBrowse .fa-square-o::after, .solrFacets .fa-circle-o::after {
-    content: " ";
+    content: ' ';
     position: absolute;
     background-color: #fff;
     height: 12px;

@@ -6,8 +6,9 @@
 
     var popup, maybeCreatePopup, popupWindow, showWindow;
 
-    maybeCreatePopup = function(title, body, width, xy) {
-        var boundingBox;
+    maybeCreatePopup = function(title, body, w, xy) {
+        var boundingBox,
+            width = w;
         if (width === "0px" || width === "auto") {
             width = 350;
         }
@@ -29,7 +30,9 @@
         popup.set("width", width);
         popup.set("xy", xy);
     };
-    showWindow = function(url, type, strWidth, strHeight) {
+    showWindow = function(url, type, width, height) {
+        var strWidth = width,
+            strHeight = height;
         if (popupWindow !== undefined && !popupWindow.closed) {
             popupWindow.close();
         }

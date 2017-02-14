@@ -266,15 +266,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
             atts = new AttributesImpl();
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "general-dropdown-trigger");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-            String selectedResource = "All";
-            if (totalFacet == 1) {
-                selectedResource = facetList.get(0).getValue();
-            }
+            String selectedResource = getSelectedResource(result);
             int totalElement = 0;
             int totalSelectedFacet = 0;
-            if (result.getSelectedResource() != null && !"".equals(result.getSelectedResource())) {
-                selectedResource = result.getSelectedResource();
-            }
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 totalElement = totalElement + (int) facetFieldEntry.getValueCount();
                 if (selectedResource.equals(facetFieldEntry.getValue())) {
@@ -376,6 +370,19 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
             return this.websiteIdMapping.get(resourceName);
         }
         return resourceName;
+    }
+
+    private String getSelectedResource(final SolrImageSearchResult result) {
+        String selectedResource = result.getSelectedResource();
+        if (selectedResource == null || selectedResource.isEmpty()) {
+            Page<FacetFieldEntry> facet = result.getFacet();
+            if (facet.getNumberOfElements() == 1) {
+                selectedResource = facet.getContent().get(0).getValue();
+            } else {
+                selectedResource = "All";
+            }
+        }
+        return selectedResource;
     }
 
     private void toSAXResult(final SolrImageSearchResult result, final XMLConsumer xmlConsumer) throws SAXException {

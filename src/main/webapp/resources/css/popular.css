@@ -21,8 +21,8 @@
     border-bottom: none;
 }
 
-.popular:after {
-    content: ".";
+.popular:after{
+    content: '.';
     display: block;
     height: 0;
     font-size: 0;

@@ -132,7 +132,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
         }
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(ValidParameterFilter.class);
+    private static final Logger log = LoggerFactory.getLogger(ValidParameterFilter.class);
 
     private Validator<Map<String, String[]>> validator;
 
@@ -149,9 +149,11 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             chain.doFilter(request, response);
         } else {
             response.setStatus(HttpURLConnection.HTTP_BAD_REQUEST);
-            StringBuilder sb = new StringBuilder(request.getServletPath()).append('?').append(request.getQueryString())
-                    .append(' ').append(validity.getReason());
-            LOG.warn(sb.toString());
+            if (log.isWarnEnabled()) {
+                StringBuilder sb = new StringBuilder(request.getServletPath()).append('?').append(request.getQueryString())
+                        .append(' ').append(validity.getReason());
+                log.warn(sb.toString());
+            }
             chain.doFilter(new HttpServletRequestWrapper(request) {
 
                 @Override

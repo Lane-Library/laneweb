@@ -13,7 +13,7 @@ $.LANE.createAutocompleteObject = function(input) {
                 self.xhr.abort();
             }
             self.xhr = $.ajax({
-                url: model['base-path'] + "/apps/suggest/json",
+                url: window.model['base-path'] + "/apps/suggest/json",
                 dataType: "json",
                 data : {
                   l : $.LANE.getACLimit(input),

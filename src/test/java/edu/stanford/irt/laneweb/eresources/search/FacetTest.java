@@ -27,6 +27,8 @@ public class FacetTest {
     public final void testGetUrl() {
         Facet facet = new Facet("fieldName", "value", 0, "activeFacets");
         assertEquals("activeFacets%3A%3AfieldName%3A%22value%22", facet.getUrl());
+        Facet facet2 = new Facet("type", "Book", 1, "foo:\"bar\"::type:\"Book Print\"");
+        assertEquals("foo%3A%22bar%22", facet2.getUrl());
     }
 
     @Test
@@ -34,6 +36,7 @@ public class FacetTest {
         assertTrue(new Facet("fieldName", "value", 0, "fieldName:\"value\"").isEnabled());
         assertFalse(new Facet("fieldName", "value", 0, "").isEnabled());
         assertFalse(new Facet("fieldName", "value", 0, null).isEnabled());
+        assertTrue(new Facet("type", "Book", 0, "type:\"Book Digital\"").isEnabled());
     }
 
     @Test
