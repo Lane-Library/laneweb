@@ -64,7 +64,9 @@
 	                <xsl:call-template name="paginationLinks"/>
 		          </div>
 		        </div>
-                <h3 class="eresources">&#160;</h3>
+                <xsl:if test="count(s:result) &gt; 0">
+                    <h3 class="eresources">&#160;</h3>
+                </xsl:if>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>

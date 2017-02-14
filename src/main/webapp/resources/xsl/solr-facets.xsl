@@ -124,7 +124,8 @@
                 <xsl:if test="$search-mode and string-length($facets) > 0">
                     <span id="solrAllCount"><xsl:value-of select="format-number($counts,'###,##0')"/></span>
                 </xsl:if>
-                <xsl:if test="$counts > 0 and (/linked-hash-map/entry or string-length($facets) > 0)">
+                <xsl:choose>
+	                <xsl:when test="$counts > 0 and (/linked-hash-map/entry or string-length($facets) > 0)">
                     <div class="bd">
                         <h3 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h3>
                         <xsl:if test="not($search-mode)">
@@ -172,7 +173,15 @@
                             </xsl:call-template>
                         </ul>
                     </div>
-                </xsl:if>
+	                </xsl:when>
+                    <xsl:otherwise>
+                        <h2 class="eresources">&#160;</h2>
+                        <h4>Can we help?</h4>
+                        <a class="button" rel="lightbox disableBackground" href="{$base-path}/help/feedback.html#askus">
+                            <span><i class="icon fa fa-comments"></i>Ask Us</span>
+                        </a>
+                    </xsl:otherwise>
+                </xsl:choose>
             </body>
         </html>
     </xsl:template>
