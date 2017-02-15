@@ -451,6 +451,10 @@
                                 <includes>equipment-min.css</includes>
                                 <includes>clinical-search-min.css</includes>
                                 <includes>bookcovers-min.css</includes>
+                                <includes>newsfeed-item-min.css</includes>
+                                <includes>youtube-thumbnail-min.css</includes>
+                                <includes>calendar-min.css</includes>
+                                <includes>password-table-min.css</includes>
                             </includes>
                         </aggregation>
                         <aggregation>

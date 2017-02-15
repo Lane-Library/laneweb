@@ -76,30 +76,6 @@ em {
     margin-bottom: 12px;
 }
 
-/*table on ejpw_list.html*/
-.password-table table {
-    border-collapse: collapse;
-    background-color: #fff;
-}
-
-.password-table th {
-    padding: .7em;
-    vertical-align: top;
-    border: 1px solid #ccc;
-}
-
-.password-table td {
-    padding: .7em;
-    vertical-align: top;
-    border: 1px solid #ccc;
-}
-
-.password-table table th {
-    background-color: #e6e8d5;
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
 /*scroll window on portals to display article feed, such as rheumatology*/
 .scroll-window {
     height: 400px;
@@ -111,28 +87,6 @@ em {
 /*styles for redesigned main elements on the landing pages*/
 .detailInfo {
     font-size: 12px;
-}
-
-.calendar ul {
-    float: left;
-    margin-bottom: 12px;
-}
-
-.calendar li {
-    width: 138px;
-    height: 88px;
-    float: left;
-    margin-right: 2.6px;
-    padding: 6.5px;
-    box-sizing: border-box;
-    background-color: #09425a;
-    color: #fff;
-}
-
-.calendar li p {
-    line-height: normal;
-    font-weight: normal;
-    margin-top: .5em;
 }
 
 hr {
@@ -147,64 +101,19 @@ hr {
     font-size: 14px;
 }
 
-/*.youtube-thumbnail divs are created in youtube.js */
-.youtube-thumbnail {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-}
-
-.youtube-thumbnail .fa {
-    text-align: center;
-    font-size: 14px;
-    position: absolute;
-    right: 43%;
-    top: 41%;
-    color: white;
-    background-color: rgb(56, 56, 56);
-    border-radius: 9px;
-    width: 42px;
-    line-height: 30px;
-    opacity: .9;
-}
-
-.youtube-thumbnail:hover .fa {
-    background-color: rgb(195, 22, 35);
-}
-
 /*to make a highlighted note on the right of the module, similar to history site*/
 .feature {
     padding-left: 12px;
 }
 
-.feature .block-heading {
-    width: 100%;
-    height: auto;
-    min-height: 1%;
-    padding-top: 0;
-    padding-bottom: 12px;
-    margin: 0 12px 12px 0;
-    text-align: left;
-    overflow: hidden;
-    background-color: #556222; /*#8c1515;*/
-    box-sizing: border-box;
-}
-
-.block-content {
-    float: left;
-    margin-bottom: 36px;
-}
-
-.block-heading h3 {
-    display: block;
+.feature h3 {
+    background-color: #556222;
     background-image: none;
-    font-size: 20px;
-    padding: 6px 6px 6px 6px;
-    line-height: 1.2em;
-    margin-bottom: .2em;
     color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 12px;
+    padding: 6px 6px 22px 6px;
     text-transform: uppercase;
-    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .course-reserves-instructor {
@@ -213,35 +122,4 @@ hr {
     line-height: 13px;
     font-size: 13px;
     color: #333;
-}
-
-/*news feed from the blog on homepage*/
-.newsfeed-item-title {
-    color: #8c1515;
-    font-size: 18px;
-    margin: 12px auto 12px 0;
-    height: 36px;
-}
-
-.newsfeed-item-time {
-    font-size: 12px;
-    color: #999999;
-}
-
-.newsfeed-item-time:before {
-    color: #999999;
-    content: '\f017';
-    font-family: FontAwesome;
-    margin-right: 6px;
-}
-
-.newsfeed-item-footer {
-    background-color: #8c1515;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    padding: 12px;
-}
-
-.newsfeed-item-footer  a {
-    color: #FFFFFF;
 }

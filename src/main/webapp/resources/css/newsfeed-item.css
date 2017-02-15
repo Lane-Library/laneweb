@@ -1,0 +1,30 @@
+/*news feed from the blog on homepage*/
+.newsfeed-item-title {
+    color: #8c1515;
+    font-size: 18px;
+    margin: 12px auto 12px 0;
+    height: 36px;
+}
+
+.newsfeed-item-time {
+    font-size: 12px;
+    color: #999999;
+}
+
+.newsfeed-item-time:before {
+    color: #999999;
+    content: '\f017';
+    font-family: FontAwesome;
+    margin-right: 6px;
+}
+
+.newsfeed-item-footer {
+    background-color: #8c1515;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 12px;
+}
+
+.newsfeed-item-footer  a {
+    color: #FFFFFF;
+}

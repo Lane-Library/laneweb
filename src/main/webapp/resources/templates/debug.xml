@@ -50,6 +50,10 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/equipment.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/clinical-search.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bookcovers.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/newsfeed-item.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/youtube-thumbnail.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/calendar.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/password-table.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
