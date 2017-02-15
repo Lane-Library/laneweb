@@ -230,9 +230,8 @@ hr {
 
 .newsfeed-item-time:before {
     color: #999999;
-    content: "\f017";
+    content: '\f017';
     font-family: FontAwesome;
-    text-decoration: none;
     margin-right: 6px;
 }
 

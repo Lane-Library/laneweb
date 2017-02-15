@@ -90,24 +90,23 @@
     line-height: 48px;
     top: -24px;
     left: 45%;
-    
 }
 .grand-rounds:before {
     background-color: #aabec6;
-    content: "\f0f1";
+    content: '\f0f1';
 }
 
 .upcoming-classes:before {
     background-color: #aabec6;
-    content: "\f19d";
+    content: '\f19d';
 }
 .popular:before {
     background-color: #8c1515;
-    content: "\f005";
+    content: '\f005';
 }
 
 .new-resource {
-    background-color: none;
+    background-color: transparent;
     text-align: center;
     margin: 50px 12px 12px auto;
 }
