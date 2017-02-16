@@ -13,7 +13,7 @@
 .newsfeed-item-time:before {
     color: #999999;
     content: '\f017';
-    font-family: FontAwesome;
+    font-family: 'FontAwesome';
     margin-right: 6px;
 }
 

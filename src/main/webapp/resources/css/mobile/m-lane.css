@@ -100,7 +100,7 @@ body {
     border-left: solid 1px #9c9a90;
     padding: 0 0 0 7px;
     margin: 10px 0 0 8px;
-    font-family: 'Arial Narrow', Arial, Tahoma, 'Trebuchet MS', sans-serif;
+    font-family: 'Arial Narrow', sans-serif;
     text-transform: uppercase;
     color: #920000;
     font-size: 1.3em;
@@ -726,7 +726,7 @@ input[type='text'] {
 
 .pageName {
     color: #920000;
-    font-family: 'Arial Narrow', Arial, Tahoma, 'Trebuchet MS', sans-serif;
+    font-family: 'Arial Narrow', sans-serif;
     font-size: 1.6em;
     line-height: .8em;
     overflow: hidden;

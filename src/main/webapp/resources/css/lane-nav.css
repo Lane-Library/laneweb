@@ -22,7 +22,7 @@
     display: block;
     font-size: 15px;
     border: none;
-    font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .nav-menu > a:visited{

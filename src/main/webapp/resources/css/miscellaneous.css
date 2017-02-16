@@ -1,6 +1,6 @@
 /* This file has rules that don't seem to fit anywhere else */
 body, select, input, button, textarea {
-    font-family: 'Source Sans Pro', Arial, Helvetica, clean, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*='yui3-u'] {
