@@ -10,7 +10,6 @@
   
   <xsl:template match="h:li[@id=$liaison]">
     <xsl:variable name="liaison-profile-link" select=".//h:a[@class='liaison-profile-link']/@href"/>
-    <div class="popular">
       <div class="business-card">
         <h3>Your Liaison</h3>
         <div class="yui3-g">
@@ -24,7 +23,6 @@
           </xsl:choose>
         </div>
       </div>
-    </div>
     <p class="nomodule"
       style="text-align: center; font-style: italic">
       We provide in-person or <a
