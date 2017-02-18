@@ -16,7 +16,7 @@
 }
 
 .nav-menu > a{
-    color: #3C3623;
+    color: #3c3623;
     padding: 0 21px;
     line-height: 46px;
     display: block;
@@ -26,12 +26,12 @@
 }
 
 .nav-menu > a:visited{
-    color: #3C3623;
+    color: #3c3623;
 }
 
 .nav-menu:hover > a,
 .nav-menu-active > a{
-    color: #3C3623;
+    color: #3c3623;
     background-color: white;
     box-shadow: inset 0 5px 5px -5px #000;
     border: none;

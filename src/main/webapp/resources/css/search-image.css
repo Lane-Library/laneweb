@@ -123,15 +123,15 @@
 
 
 #imageList .admin-enable {
-    background-color: #4DB84D;
+    background-color: #4db84d;
 }
 
 #imageList .admin-disable {
-    background-color: #FF4747;
+    background-color: #ff4747;
 }
 
 #imageList .imagedecoHidden {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
 }
 
 
@@ -258,7 +258,7 @@
 }
 
 .images-all {
-    background-color: #80982A;
+    background-color: #80982a;
     color: white;
 }
 
@@ -278,7 +278,7 @@
 }
 
 .search-image-content.images-all-border {
-    border-color: #80982A;
+    border-color: #80982a;
 }
 
 .search-image-content.cc-images-all-border {

@@ -61,11 +61,11 @@
 }
 
 .pagingButton i {
-    color: #007C92;
+    color: #007c92;
 }
 
 .pagingButton i:hover {
-    color: #428BCA;
+    color: #428bca;
 }
 
 .pagingButton.disabled i {
