@@ -34,7 +34,7 @@
     border: solid 2px #c9c9c9;
     outline: 0;
     font: normal 13px/100% 'Source Sans Pro', sans-serif;
-    background: #FFFFFF;
+    background: #ffffff;
     width: 100%;
     box-sizing: border-box;
 }
@@ -56,7 +56,7 @@
 #feedback textarea:hover,
 #feedback input:focus,
 #feedback textarea:focus {
-    border-color: #9D9B94;
+    border-color: #9d9b94;
 }
 
 .submit-btn {
@@ -127,22 +127,22 @@
 }
 
 #purchaseMenu a:hover {
-    background: #F4F5EF;
-    border-color: #9D9B94;
+    background: #f4f5ef;
+    border-color: #9d9b94;
     color: #585347;
 }
 
 /*-------------------  .incorrect is for the invalid for text inputs-------------------------*/
 #feedback .incorrect {
-    background-color: #F4F5EF;
-    color: #8C1515;
+    background-color: #f4f5ef;
+    color: #8c1515;
     border: 2px solid #820000;
     display: block;
     font-weight: bold;
 }
 
 .contentForm legend {
-    border: 1px solid #C1C1C1;
+    border: 1px solid #c1c1c1;
     color: #444444;
     font-size: 95%;
     font-weight: bold;
@@ -153,12 +153,12 @@
 .contentForm fieldset {
     margin-bottom: 1.2em;
     padding: 1em;
-    border: 1px solid #C1C1C1;
+    border: 1px solid #c1c1c1;
 }
 
 .fieldLabel {
     background-color: #F2F3ED;
-    border: 1px dotted #C1C1C1;
+    border: 1px dotted #c1c1c1;
     float: left;
     margin-right: 10px;
     padding: 5px;
