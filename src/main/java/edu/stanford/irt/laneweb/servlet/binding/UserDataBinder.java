@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ public class UserDataBinder implements DataBinder {
         HttpSession session = request.getSession();
         user = (User) session.getAttribute(Model.USER);
         if (user == null) {
-            user = this.userFactories.stream().map(f -> f.createUser(request)).filter(u -> u != null).findFirst()
+            user = this.userFactories.stream().map(f -> f.createUser(request)).filter(Objects::nonNull).findFirst()
                     .orElse(null);
             if (user != null) {
                 session.setAttribute(Model.USER, user);
