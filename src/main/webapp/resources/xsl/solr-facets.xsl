@@ -175,7 +175,6 @@
                     </div>
 	                </xsl:when>
                     <xsl:otherwise>
-                        <h2 class="eresources">&#160;</h2>
                         <h4>Can we help?</h4>
                         <a class="button" rel="lightbox disableBackground" href="{$base-path}/help/feedback.html#askus">
                             <span><i class="icon fa fa-comments"></i>Ask Us</span>
