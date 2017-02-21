@@ -80,9 +80,9 @@ $.LANE.tracking.getTrackingTitle = function(node) {
     return title;
 };
 
-$.LANE.tracking.track = function(e) {
+$.LANE.tracking.track = function(event) {
 
-    var handle, node, getNode = function(e) {
+    var handle, anchorNode, getAnchorNode = function(e) {
         var node = e.srcElement || e.target;
         // find parent A for IMG and STRONG nodes if possible
         if(node.nodeName === 'IMG'||node.nodeName === 'STRONG'){
@@ -123,12 +123,12 @@ $.LANE.tracking.track = function(e) {
                 _gaq.push(['_trackEvent', "suggestSelect", node.id, decodeURIComponent(node.textContent)]);
             }
     };
-    node = getNode(e);
+    anchorNode = getAnchorNode(event);
     // ignore clicks on autocomplete Anchors
-    if (!$(node).parent().parent().hasClass('ui-autocomplete')) {
-        handle = eventHandlers[e.type];
+    if (!$(anchorNode).parent().parent().hasClass('ui-autocomplete')) {
+        handle = eventHandlers[event.type];
         if (handle) {
-            handle(node);
+            handle(anchorNode);
         }
     }
 };

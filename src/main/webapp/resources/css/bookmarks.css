@@ -58,8 +58,8 @@
 }
 
 #bookmarks-editor fieldset {
-    border: 1px #DADAD8 solid;
-    background-color: #F4F5EF;
+    border: 1px #dadad8 solid;
+    background-color: #f4f5ef;
     padding: 14px 12px 5px;
 }
 #bookmarks-editor ul{
@@ -70,7 +70,7 @@
     border-top: none;
 }
 #bookmarks-editor li {
-    border-bottom: 1px #DADAD8 solid;
+    border-bottom: 1px #dadad8 solid;
     padding: 12px;
 }
 
@@ -85,7 +85,7 @@
 #bookmarks-editor input[type='text'] {
     box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
     padding: 5px;
-    border: solid 2px #C9C9C9;
+    border: solid 2px #c9c9c9;
     width: 266px;
     box-sizing: border-box;
 }

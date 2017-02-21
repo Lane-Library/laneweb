@@ -99,7 +99,20 @@
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-rss.xml" type="wildcard">
             <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
-            <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
+            <map:transform type="saxon" src="resources/xsl/laneblog-rss2html.xsl"/>
+             <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="content"/>
+            </map:transform>
+            <map:transform type="saxon" src="resources/xsl/laneblog.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="laneblog-newresources-rss.xml" type="wildcard">
+            <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
+            <map:transform type="saxon" src="resources/xsl/laneblog-newresources-rss2html.xsl"/>
+             <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="content"/>
+            </map:transform>
+            <map:transform type="saxon" src="resources/xsl/laneblog.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

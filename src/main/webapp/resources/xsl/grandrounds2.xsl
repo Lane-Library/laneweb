@@ -70,7 +70,7 @@
     
     <xsl:template match="sunet">
         <xsl:if test=".='false'">
-            <em>No SUNet required</em>
+            <em>No SUNet ID required</em>
         </xsl:if>
     </xsl:template>
     

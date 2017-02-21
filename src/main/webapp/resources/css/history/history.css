@@ -100,7 +100,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 .nav-item a {
-    color: #DDDDDD;
+    color: #dddddd;
     text-decoration: none;
     font-weight: 600;
     display: block;
@@ -155,7 +155,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 #lane-footer,#lane-subfooter {
-    background-color: #8C1515;
+    background-color: #8c1515;
 }
 
 #lane-footer {
@@ -220,7 +220,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 #lane-subfooter i {
     background-color: #999999;
     border-radius: 11px;
-    color: #8C1515;
+    color: #8c1515;
     height: 22px;
     line-height: 20px;
     margin-left: 0;
@@ -292,7 +292,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 .menu {
-    border-top: 12px solid #8C1515;
+    border-top: 12px solid #8c1515;
     margin-bottom: 24px;
 }
 
@@ -325,7 +325,7 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 
 #search {
-    background-color: #8C1515;
+    background-color: #8c1515;
     padding: 12px;
     font-weight: 300;
     color: #fff;
@@ -652,20 +652,20 @@ http://lane.stanford.edu/samples/button-css.html
     font-weight: 400;
     margin: 3px;
     padding: 5.25px 10.5px;
-    border: 1px #CCCCCC solid;
+    border: 1px #cccccc solid;
     border-radius: 3.5px;
     cursor: pointer;
-    background-color: #F1F1F1;
+    background-color: #f1f1f1;
     display: inline-block;
 }
 
 .button:hover {
-    border-color: #ADADAD;
+    border-color: #adadad;
 }
 
 .button span {
-    background-color: #007C92;
-    color: #FFFFFF;
+    background-color: #007c92;
+    color: #ffffff;
     padding: 7px 12px 7px 7px;
     border-radius: 4px;
     margin-right: 6px;
@@ -673,7 +673,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .inner-icon {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-radius: 12px;
     font-size: 13px;
     height: 24px;
@@ -690,12 +690,12 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .icon {
-    color: #007C92;
+    color: #007c92;
 }
 
 /*styles for events on homepage*/
 .event {
-    background-color: #09425A;
+    background-color: #09425a;
     font-size: 13px;
     margin-bottom: 15px;
 }

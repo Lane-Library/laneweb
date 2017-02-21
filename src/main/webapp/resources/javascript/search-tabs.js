@@ -12,14 +12,14 @@ if (document.querySelector(".search-form"))  {
         lane = Y.lane,
         tabNodes = form.querySelectorAll("." + SEARCH_TAB),
 
-        model = function(tabNodes, source) {
+        model = function(source) {
 
-            var model = {
+            var m = {
                 source: source
             };
 
             forEach.call(tabNodes, function(tab) {
-                model[lane.getData(tab, SOURCE)] = {
+                m[lane.getData(tab, SOURCE)] = {
                     placeholder: lane.getData(tab, "placeholder"),
                     source: lane.getData(tab, SOURCE),
                     help: lane.getData(tab, "help"),
@@ -27,11 +27,11 @@ if (document.querySelector(".search-form"))  {
                 };
             });
 
-            return model;
+            return m;
 
-        }(tabNodes, lane.getData(form.querySelector("." + SEARCH_TAB + "-active"), SOURCE)),
+        }(lane.getData(form.querySelector("." + SEARCH_TAB + "-active"), SOURCE)),
 
-        view = function(tabNodes) {
+        view = function() {
 
             var tabs = {},
 
@@ -54,12 +54,10 @@ if (document.querySelector(".search-form"))  {
 
             return view;
 
-        }(tabNodes),
+        }(),
 
 
-        controller = function(m, view) {
-
-            var model = m;
+        controller = function() {
 
             return {
                 update: function(source) {
@@ -79,7 +77,7 @@ if (document.querySelector(".search-form"))  {
                 }
             };
 
-        }(model, view);
+        }();
 
     Y.augment(controller, Y.EventTarget, false, null, {
         prefix: "searchTabs",

@@ -7,7 +7,7 @@
         <version>22</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.20-SNAPSHOT</version>
+    <version>3.3.21-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -446,6 +446,10 @@
                                 <includes>equipment-min.css</includes>
                                 <includes>clinical-search-min.css</includes>
                                 <includes>bookcovers-min.css</includes>
+                                <includes>newsfeed-item-min.css</includes>
+                                <includes>youtube-thumbnail-min.css</includes>
+                                <includes>calendar-min.css</includes>
+                                <includes>password-table-min.css</includes>
                             </includes>
                         </aggregation>
                         <aggregation>

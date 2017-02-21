@@ -22,6 +22,7 @@
     font-size: 16px;
 }
 .popin {
+    font-size: 16px;
     height: 16px;
 }
 .popInLabel {
@@ -44,7 +45,7 @@
     display: none;
     position: relative;
     top: -1px;
-    background-color: #F2F3ED;
+    background-color: #f2f3ed;
     border: 1px solid;
     padding: 12px;
 }
@@ -57,10 +58,10 @@
     color: #428bca;
 }
 li.active .descriptionTrigger {
-    background-color: #F2F3ED;
+    background-color: #f2f3ed;
     border: 1px solid;
     padding: 0 12px;
-    border-bottom-color: #F2F3ED;
+    border-bottom-color: #f2f3ed;
     display: inline-block;
     position: relative;
     z-index: 1;
@@ -76,7 +77,7 @@ li.active .description {
     margin-right: 24px;
 }
 .results-nav {
-    background-color: #F7F3E5;
+    background-color: #f7f3e5;
     padding: 10px 5px 24px;
     font-size: 11px;
 }
