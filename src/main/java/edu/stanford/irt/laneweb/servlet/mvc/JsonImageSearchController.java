@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -17,9 +16,12 @@ import edu.stanford.irt.solr.service.SolrImageService;
 @Controller
 public class JsonImageSearchController {
 
-    @Autowired
-    @Qualifier("edu.stanford.irt.solr.service")
     private SolrImageService service;
+
+    @Autowired
+    public JsonImageSearchController(final SolrImageService service) {
+        this.service = service;
+    }
 
     @RequestMapping(value = "/image", produces = "application/json")
     @ResponseBody
