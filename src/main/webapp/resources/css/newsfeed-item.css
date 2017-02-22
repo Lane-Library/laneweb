@@ -5,6 +5,10 @@
     margin: 12px auto 12px 0;
 }
 
+.newsfeed-item-content img {
+    max-width: 100%;
+}
+
 .newsfeed-item-time {
     font-size: 12px;
     color: #999999;
