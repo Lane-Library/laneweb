@@ -18,7 +18,7 @@ if (document.querySelector(".search-form"))  {
         }(new lane.Suggest(new Y.Node(queryInput)),
                 form.querySelector("input[name=source]").value),
 
-        view = function(form, queryInput) {
+        view = function() {
 
             return {
                 search: function(query) {
@@ -27,9 +27,9 @@ if (document.querySelector(".search-form"))  {
                 }
             };
 
-        }(document.querySelector(".search-form"), queryInput),
+        }(),
 
-        controller = function(model, view) {
+        controller = function() {
 
             return {
                 sourceChange: function(event) {
@@ -56,7 +56,7 @@ if (document.querySelector(".search-form"))  {
                 }
             };
 
-        }(model, view);
+        }();
 
         controller.sourceChange({newVal: model.source});
 

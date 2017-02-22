@@ -12,7 +12,9 @@
         subRegionToShow = 4,
         prevRegion,
         prevSubRegion,
-        i,
+        j,
+        lis,
+        seeAll,
 
         formatAjaxUrl = function(string) {
             var url, href;
@@ -150,13 +152,13 @@
         if (accordion) {
             registerLinksContainer(accordion);
             registerLinksContainer(Y.one('#bassettContent'));
-            var lis, seeAll = Y.all('.see-all');
-            for (i = 0; i < seeAll.size(); i++) {
-                seeAll.item(i).on('click', expandSubRegion);
+            seeAll = Y.all('.see-all');
+            for (j = 0; j < seeAll.size(); j++) {
+                seeAll.item(j).on('click', expandSubRegion);
             }
             lis = Y.all('.region li:not(:first-child)');
-            for (i = 0; i < lis.size(); i++) {
-                lis.item(i).on('click', surlineSubRegion);
+            for (j = 0; j < lis.size(); j++) {
+                lis.item(j).on('click', surlineSubRegion);
             }
             Y.all('.s-pagination form[name=bassett-pagination]').on('submit', submitPagination);
             initializeHistory();

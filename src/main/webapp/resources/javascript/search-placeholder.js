@@ -18,7 +18,7 @@ if (document.querySelector(".search-form"))  {
         }(lane.getData(inputNode, PLACEHOLDER),
                 lane.getData(document.querySelector(".search-tab-active"), PLACEHOLDER)),
 
-        view = function(inputNode) {
+        view = function() {
 
             var queryInput = new lane.TextInput(new Y.Node(inputNode), inputNode.getAttribute(PLACEHOLDER));
             return {
@@ -27,9 +27,9 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-        }(inputNode),
+        }(),
 
-        controller = function(model, view) {
+        controller = function() {
 
             return {
                 activeChange: function(event) {
@@ -42,7 +42,7 @@ if (document.querySelector(".search-form"))  {
                     view.setPlaceholder(model.current);
                 }
             };
-        }(model, view);
+        }();
 
     lane.on("searchTabs:change", controller.tabChange);
     lane.on("search:activeChange", controller.activeChange);

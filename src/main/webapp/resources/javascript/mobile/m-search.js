@@ -70,8 +70,8 @@ $("#_home").on("pageinit", function() {
     // User can select Lane, Clinical, Pediatric search by clicking/tapping on the appropriate icon.
     $(".searchTabs li").bind(eHandler,function(e) {
         e.preventDefault();
-        $(this).bind('click', function(e){
-            e.preventDefault();
+        $(this).bind('click', function(clickEvent){
+            clickEvent.preventDefault();
         });
         $(".searchTabs li").removeClass("selected");
         $(this).addClass("selected");
@@ -82,8 +82,8 @@ $("#_home").on("pageinit", function() {
                 var maskHeight = $('.ui-mobile .ui-page-active').height();
                 $("#_home").append("<div class='overlayMask'></div>");
                 $(".overlayMask").css("height", maskHeight + 100 + "px");
-                $(".overlayMask").bind('click',function(e) {
-                    e.preventDefault();
+                $(".overlayMask").bind('click',function(clickEvent) {
+                    clickEvent.preventDefault();
                     $($(".searchTabs li").get(0)).trigger(eHandler);
                 });
             }

@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var nodelist, iframes = [], iframe, i,
+    var nodelist, iframes = [], iframeNode, i,
 
     /**
      * A class for representing an embeded youtube iframe that replaces the iframe
@@ -54,9 +54,9 @@
     // find youtube iframes and create YouTubeNodes using them.
     nodelist = document.getElementsByTagName("iframe");
     for (i = 0; i < nodelist.length; i++) {
-        iframe = nodelist.item(i);
-        if (iframe.src && /youtube/.test(iframe.src)) {
-            iframes.push(iframe);
+        iframeNode = nodelist.item(i);
+        if (iframeNode.src && /youtube/.test(iframeNode.src)) {
+            iframes.push(iframeNode);
         }
     }
     for (i = 0; i < iframes.length; i++) {
