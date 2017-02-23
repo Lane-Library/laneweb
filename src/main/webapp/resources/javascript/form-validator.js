@@ -3,17 +3,7 @@
 
     "use strict";
 
-    var forms = Y.all('.formvalidator'), j;
-    for (j = 0; j < forms.size(); j++) {
-        (new Y.Validator( {
-            form : forms.item(j).get('id'),
-            defaultIndicatorDomType : 'DIV',
-            defaultIncorrectIndicatorCss : 'validator',
-            defaultCorrectIndicatorCss : 'indicator'
-        }));
-    }
-
-//FormValidator class
+    //FormValidator class
     var FormValidator = function(form) {
         var i, node, validator, inputFields,
             nodes = form.all("input[title='required']"),
@@ -53,11 +43,11 @@
         }
         return {
             destroy : function() {
-                var i, requiredNodes = form.all("input[title='required']");
+                var j, requiredNodes = form.all("input[title='required']");
                 Y.Event.detach("submit", validator._onFormSubmit, form);
                 Y.Event.detach("reset", validator._onFormReset, form);
-                for (i = 0; i < requiredNodes.size(); i++) {
-                    Y.Event.detach("focus", focusHandler, requiredNodes.item(i));
+                for (j = 0; j < requiredNodes.size(); j++) {
+                    Y.Event.detach("focus", focusHandler, requiredNodes.item(j));
                 }
                 validator.destroy();
             },

@@ -2,6 +2,8 @@
 
 var form = Y.one("form"),
 
+validator = new Y.lane.FormValidator(form),
+
 formsTestCase = new Y.Test.Case({
     name: 'Lane Forms Test Case',
 
@@ -9,17 +11,21 @@ formsTestCase = new Y.Test.Case({
 
     testForClassIncorrect: function() {
         form.simulate("submit");
+        Y.Assert.isFalse(validator.isValid());
         Y.Assert.isTrue(form.one("input").hasClass("incorrect"));
     },
 
     testForClassCorrect: function() {
         form.one("input").set("value", "foo");
         form.simulate("submit");
+        Y.Assert.isTrue(validator.isValid());
         Y.Assert.isTrue(form.one("input").hasClass("correct"));
+    },
+
+    testDestroy: function() {
+        validator.destroy();
     }
 });
-
-(new Y.lane.FormValidator(form));
 
 form.on("submit", function(event) {
     event.preventDefault();
