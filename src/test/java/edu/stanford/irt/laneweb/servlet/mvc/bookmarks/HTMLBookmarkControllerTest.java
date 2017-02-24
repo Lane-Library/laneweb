@@ -9,12 +9,15 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
@@ -32,6 +35,8 @@ public class HTMLBookmarkControllerTest {
 
     private UserDataBinder userDataBinder;
 
+    private HttpSession session;
+
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
@@ -41,6 +46,7 @@ public class HTMLBookmarkControllerTest {
         this.controller = new HTMLBookmarkController(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder);
         this.redirectAttributes = createMock(RedirectAttributes.class);
         this.bookmarks = createMock(List.class);
+        this.session = createMock(HttpSession.class);
     }
 
     @Test
@@ -48,9 +54,10 @@ public class HTMLBookmarkControllerTest {
         this.bookmarks.add(eq(0), isA(Bookmark.class));
         expect(this.redirectAttributes.addAttribute("action", "edit")).andReturn(this.redirectAttributes);
         expect(this.redirectAttributes.addAttribute("i", 0)).andReturn(this.redirectAttributes);
-        replay(this.redirectAttributes, this.bookmarks);
-        this.controller.addBookmark(this.redirectAttributes, this.bookmarks, "userid");
-        verify(this.redirectAttributes, this.bookmarks);
+        this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
+        replay(this.redirectAttributes, this.bookmarks, this.session);
+        this.controller.addBookmark(this.redirectAttributes, this.bookmarks, "userid", this.session);
+        verify(this.redirectAttributes, this.bookmarks, this.session);
     }
 
     @Test
@@ -63,9 +70,10 @@ public class HTMLBookmarkControllerTest {
     @Test
     public void testDeleteBookmark() {
         expect(this.bookmarks.remove(0)).andReturn(null);
-        replay(this.redirectAttributes, this.bookmarks);
-        this.controller.deleteBookmark(this.redirectAttributes, this.bookmarks, "userid", 0);
-        verify(this.redirectAttributes, this.bookmarks);
+        this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
+        replay(this.redirectAttributes, this.bookmarks, this.session);
+        this.controller.deleteBookmark(this.redirectAttributes, this.bookmarks, "userid", 0, this.session);
+        verify(this.redirectAttributes, this.bookmarks, this.session);
     }
 
     @Test
@@ -80,8 +88,9 @@ public class HTMLBookmarkControllerTest {
     @Test
     public void testSaveBookmark() {
         expect(this.bookmarks.set(eq(0), isA(Bookmark.class))).andReturn(null);
-        replay(this.redirectAttributes, this.bookmarks);
-        this.controller.saveBookmark(this.redirectAttributes, this.bookmarks, "userid", 0, "label", "url");
-        verify(this.redirectAttributes, this.bookmarks);
+        this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
+        replay(this.redirectAttributes, this.bookmarks, this.session);
+        this.controller.saveBookmark(this.redirectAttributes, this.bookmarks, "userid", 0, "label", "url", this.session);
+        verify(this.redirectAttributes, this.bookmarks, this.session);
     }
 }
