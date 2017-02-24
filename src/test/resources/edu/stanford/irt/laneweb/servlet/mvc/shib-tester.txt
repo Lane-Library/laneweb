@@ -1,0 +1,38 @@
+
+request.getRemoteUser() -> user
+
+Request Headers:
+
+name --> value
+
+Request Attributes:
+
+Shibboleth Attributes:
+Shib-Identity-Provider --> value (java.lang.String)
+affiliation --> value (java.lang.String)
+cn --> value (java.lang.String)
+displayName --> value (java.lang.String)
+eduPersonEntitlement --> value (java.lang.String)
+eppn --> value (java.lang.String)
+givenName --> value (java.lang.String)
+group --> value (java.lang.String)
+mail --> value (java.lang.String)
+ou --> value (java.lang.String)
+persistent-id --> value (java.lang.String)
+postalAddress --> value (java.lang.String)
+sn --> value (java.lang.String)
+street --> value (java.lang.String)
+suAffiliation --> value (java.lang.String)
+suDisplayNameLF --> value (java.lang.String)
+suUnivID --> value (java.lang.String)
+targeted-id --> value (java.lang.String)
+telephoneNumber --> value (java.lang.String)
+title --> value (java.lang.String)
+uid --> value (java.lang.String)
+uid-alt --> value (java.lang.String)
+unscoped-affiliation --> value (java.lang.String)
+upn --> value (java.lang.String)
+
+Other Attributes:
+name --> value (java.lang.String)
+org.spring.foo --> value (java.lang.String)
