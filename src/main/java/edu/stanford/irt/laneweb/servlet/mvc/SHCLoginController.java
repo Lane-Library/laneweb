@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.codec.SHCCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.user.LDAPData;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 @Controller
@@ -92,9 +91,9 @@ public class SHCLoginController {
     private String getUserId(final HttpSession session, final String univid) {
         String userid = (String) session.getAttribute(Model.USER_ID);
         if (userid == null) {
-            LDAPData ldapData = this.ldapDataAccess.getLdapDataForUnivid(univid);
-            userid = ldapData.isActive() ? ldapData.getSunetId() + "@stanford.edu" : null;
+            userid = this.ldapDataAccess.getActiveSunetId(univid);
             if (userid != null) {
+                userid = userid + "@stanford.edu";
                 session.setAttribute(Model.USER_ID, userid);
             }
         }

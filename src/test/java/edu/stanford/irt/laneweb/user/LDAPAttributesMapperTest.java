@@ -41,39 +41,24 @@ public class LDAPAttributesMapperTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testMapFromAttributes() throws NamingException {
-        expect(this.attributes.get("displayName")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("name");
         expect(this.attributes.get("uid")).andReturn(this.attribute);
         expect(this.attribute.get()).andReturn("uid");
-        expect(this.attributes.get("suunivid")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("suunivid");
         expect(this.attributes.get("suAffiliation")).andReturn(this.attribute);
         expect(this.attribute.getAll()).andReturn(this.enumeration);
         expect(this.enumeration.hasMore()).andReturn(true);
         expect(this.enumeration.next()).andReturn("");
         expect(this.enumeration.hasMore()).andReturn(true);
         expect(this.enumeration.next()).andReturn("stanford:staff");
-        expect(this.attributes.get("mail")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("mail");
         replay(this.attributes, this.attribute, this.enumeration);
         LDAPData data = this.mapper.mapFromAttributes(this.attributes);
-        assertEquals("name", data.getName());
         assertEquals("uid", data.getSunetId());
-        assertEquals("suunivid", data.getUnivId());
         assertTrue(data.isActive());
-        assertEquals("mail", data.getEmailAddress());
         verify(this.attributes, this.attribute, this.enumeration);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testMapFromAttributesNotActive() throws NamingException {
-        expect(this.attributes.get("displayName")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("name");
-        expect(this.attributes.get("uid")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("uid");
-        expect(this.attributes.get("suunivid")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("suunivid");
         expect(this.attributes.get("suAffiliation")).andReturn(this.attribute);
         expect(this.attribute.getAll()).andReturn(this.enumeration);
         expect(this.enumeration.hasMore()).andReturn(true);
@@ -81,32 +66,20 @@ public class LDAPAttributesMapperTest {
         expect(this.enumeration.hasMore()).andReturn(true);
         expect(this.enumeration.next()).andReturn("foo");
         expect(this.enumeration.hasMore()).andReturn(false);
-        expect(this.attributes.get("mail")).andReturn(this.attribute);
-        expect(this.attribute.get()).andReturn("mail");
         replay(this.attributes, this.attribute, this.enumeration);
         LDAPData data = this.mapper.mapFromAttributes(this.attributes);
-        assertEquals("name", data.getName());
-        assertEquals("uid", data.getSunetId());
-        assertEquals("suunivid", data.getUnivId());
+        assertNull(data.getSunetId());
         assertFalse(data.isActive());
-        assertEquals("mail", data.getEmailAddress());
         verify(this.attributes, this.attribute, this.enumeration);
     }
 
     @Test
     public void testMapFromAttributesNullAttributes() throws NamingException {
-        expect(this.attributes.get("displayName")).andReturn(null);
-        expect(this.attributes.get("uid")).andReturn(null);
-        expect(this.attributes.get("suunivid")).andReturn(null);
         expect(this.attributes.get("suAffiliation")).andReturn(null);
-        expect(this.attributes.get("mail")).andReturn(null);
         replay(this.attributes, this.attribute, this.enumeration);
         LDAPData data = this.mapper.mapFromAttributes(this.attributes);
-        assertNull(data.getName());
         assertNull(data.getSunetId());
-        assertNull(data.getUnivId());
         assertFalse(data.isActive());
-        assertNull(data.getEmailAddress());
         verify(this.attributes, this.attribute, this.enumeration);
     }
 }

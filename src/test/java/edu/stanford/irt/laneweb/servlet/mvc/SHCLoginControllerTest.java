@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.codec.SHCCodec;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.user.LDAPData;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 public class SHCLoginControllerTest {
@@ -25,8 +24,6 @@ public class SHCLoginControllerTest {
     private SHCCodec codec;
 
     private SHCLoginController controller;
-
-    private LDAPData ldapData;
 
     private LDAPDataAccess ldapDataAccess;
 
@@ -47,7 +44,6 @@ public class SHCLoginControllerTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.session = createMock(HttpSession.class);
-        this.ldapData = createMock(LDAPData.class);
     }
 
     @Test
@@ -122,9 +118,9 @@ public class SHCLoginControllerTest {
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect(
                 "https://server/portals/shc.html?sourceid=shc&u=emrid&error=invalid+or+missing+timestamp%3A+123456789");
-        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
         this.controller.login("emrid", "univid", "123456789", this.request, this.response);
-        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
     }
 
     @Test
@@ -209,15 +205,14 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
         expect(this.session.getAttribute(Model.USER_ID)).andReturn(null);
-        expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
-        expect(this.ldapData.isActive()).andReturn(Boolean.FALSE);
+        expect(this.ldapDataAccess.getActiveSunetId("univid")).andReturn(null);
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect(
                 "https://server/portals/shc.html?sourceid=shc&u=emrid&error=missing+active+userid+for+univid%3A+univid");
-        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
-        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
     }
 
     @Test
@@ -230,15 +225,13 @@ public class SHCLoginControllerTest {
         this.session.setAttribute(Model.UNIVID, "univid");
         expect(this.session.getAttribute(Model.UNIVID)).andReturn("univid");
         expect(this.session.getAttribute(Model.USER_ID)).andReturn(null);
-        expect(this.ldapDataAccess.getLdapDataForUnivid("univid")).andReturn(this.ldapData);
-        expect(this.ldapData.getSunetId()).andReturn("ditenus");
-        expect(this.ldapData.isActive()).andReturn(Boolean.TRUE);
+        expect(this.ldapDataAccess.getActiveSunetId("univid")).andReturn("ditenus");
         this.session.setAttribute(Model.USER_ID, "ditenus@stanford.edu");
         expect(this.request.getServerName()).andReturn("server");
         expect(this.request.getContextPath()).andReturn("");
         this.response.sendRedirect("https://server/portals/shc.html?sourceid=shc&u=emrid");
-        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        replay(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
         this.controller.login("emrid", "univid", this.validTimestamp, this.request, this.response);
-        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session, this.ldapData);
+        verify(this.codec, this.ldapDataAccess, this.request, this.response, this.session);
     }
 }

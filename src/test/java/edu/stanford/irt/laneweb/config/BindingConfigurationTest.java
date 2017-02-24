@@ -65,11 +65,6 @@ public class BindingConfigurationTest {
     }
 
     @Test
-    public void testLdapDataBinder() {
-        assertNotNull(this.configuration.ldapDataBinder());
-    }
-
-    @Test
     public void testLiveChatScheduleDataBinder() {
         assertNotNull(this.configuration.liveChatScheduleDataBinder());
     }

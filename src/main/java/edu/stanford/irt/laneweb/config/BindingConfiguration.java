@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
+import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder;
@@ -29,7 +30,6 @@ import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.ContentBaseDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.DisasterModeDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LoginExpirationCookieDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder;
@@ -44,6 +44,7 @@ import edu.stanford.irt.laneweb.servlet.binding.TemplateChooser;
 import edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UnividDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.VersionDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory;
@@ -91,6 +92,11 @@ public class BindingConfiguration {
         this.servletContext = servletContext;
     }
 
+    @Bean
+    public DataBinder activeSunetidDataBinder() {
+        return new ActiveSunetidDataBinder(this.ldapDataAccess);
+    }
+
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path")
     public DataBinder basePathDataBinder() {
         return new BasePathDataBinder(this.servletContext);
@@ -108,8 +114,10 @@ public class BindingConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public DataBinder dataBinder() {
-        List<DataBinder> dataBinders = new ArrayList<>(20);
+        List<DataBinder> dataBinders = new ArrayList<>(22);
         dataBinders.add(userDataBinder());
+        dataBinders.add(unividDataBinder());
+        dataBinders.add(activeSunetidDataBinder());
         dataBinders.add(ticketDataBinder());
         dataBinders.add(debugDataBinder());
         dataBinders.add(remoteProxyIPDataBinder());
@@ -145,11 +153,6 @@ public class BindingConfiguration {
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid")
     public DataBinder emridDataBinder() {
         return new StringSessionParameterDataBinder("emrid", "emrid");
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap")
-    public DataBinder ldapDataBinder() {
-        return new LDAPDataBinder(this.ldapDataAccess);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule")
@@ -260,6 +263,11 @@ public class BindingConfiguration {
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours")
     public DataBinder todaysHoursDataBinder() {
         return new TodaysHoursBinder(todaysHours());
+    }
+
+    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/univid")
+    public DataBinder unividDataBinder() {
+        return new UnividDataBinder();
     }
 
     @Bean

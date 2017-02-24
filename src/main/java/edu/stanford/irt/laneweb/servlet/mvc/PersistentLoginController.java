@@ -121,7 +121,7 @@ public class PersistentLoginController {
         if (user != null && user.isStanfordUser()) {
             String userid = user.getId();
             String sunetid = userid.substring(0, userid.indexOf('@'));
-            renewable = this.ldap.getLdapDataForSunetid(sunetid).isActive();
+            renewable = this.ldap.isActive(sunetid);
         }
         return renewable;
     }
