@@ -19,8 +19,10 @@ public class ShibTester {
 
     // shibboleth attributes passed to tomcat : requires AJP_ prefix in shibboleth2.xml (mod_proxy_ajp)
     // or JkEnvVar directives in apache config (mod_jk) for each attribute
-    private static final Collection<String> SHIB_ATTS = Arrays.asList("Shib-Identity-Provider", "displayName", "uid",
-            "mail", "group");
+    private static final Collection<String> SHIB_ATTS = Arrays.asList("Shib-Identity-Provider", "affiliation", "cn",
+            "displayName", "eduPersonEntitlement", "eppn", "givenName", "group", "mail", "ou", "persistent-id",
+            "postalAddress", "sn", "street", "suAffiliation", "suDisplayNameLF", "suUnivID", "targeted-id",
+            "telephoneNumber", "title", "uid", "uid-alt", "unscoped-affiliation", "upn");
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
