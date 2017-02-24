@@ -43,14 +43,9 @@ public class ShibTesterTest {
         expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
         expect(this.request.getHeader("name")).andReturn("value");
         expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
-        expect(this.request.getAttribute("displayName")).andReturn("name");
-        expect(this.request.getAttribute("uid")).andReturn("uid");
-        expect(this.request.getAttribute("mail")).andReturn("mail");
-        expect(this.request.getAttribute("group")).andReturn("group");
+        expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
         expect(this.request.getAttributeNames()).andReturn(
                 Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
-        expect(this.request.getAttribute("name")).andReturn("value");
         this.response.setContentType("text/plain");
         expect(this.response.getOutputStream()).andReturn(this.output);
         this.output.write(isA(byte[].class));
@@ -64,14 +59,9 @@ public class ShibTesterTest {
         expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
         expect(this.request.getHeader("name")).andReturn("value");
         expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
-        expect(this.request.getAttribute("displayName")).andReturn("name");
-        expect(this.request.getAttribute("uid")).andReturn("uid");
-        expect(this.request.getAttribute("mail")).andReturn("mail");
-        expect(this.request.getAttribute("group")).andReturn("group");
+        expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
         expect(this.request.getAttributeNames()).andReturn(
                 Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
-        expect(this.request.getAttribute("name")).andReturn("value");
         this.response.setContentType("text/plain");
         expect(this.response.getOutputStream()).andReturn(this.output);
         this.output.write(isA(byte[].class));
