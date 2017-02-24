@@ -8,13 +8,13 @@
 
         photoService = {
 
-            getFactor: function(images) {
+            getFactor: function(imagesToFactor) {
                 var width = 0,
                     factor = 1000,
                     i = 0;
 
                 while (i < 6 && factor > 1) {
-                    width += images[i++].width;
+                    width += imagesToFactor[i++].width;
                     factor = 989 / width;
                 }
 
@@ -40,17 +40,17 @@
                         setTimeout(function() {
                             flickrPhotos.style.opacity = 0;
                             setTimeout(function() {
-                                var factor, i;
+                                var factor, j;
                                 images = [];
-                                for (i = 0; i < 6; i++) {
-                                    photoService.resize(photos[i].image);
-                                    images.push(photos[i].image);
+                                for (j = 0; j < 6; j++) {
+                                    photoService.resize(photos[j].image);
+                                    images.push(photos[j].image);
                                 }
                                 factor = photoService.getFactor(images);
-                                for (i = 0; i < 6; i++) {
-                                    links.item(i).style.width = Math.round(photos[i].image.width * factor) + "px";
-                                    links.item(i).href = photos[i].page;
-                                    links.item(i).replaceChild(photos[i].image, links.item(i).firstChild);
+                                for (j = 0; j < 6; j++) {
+                                    links.item(j).style.width = Math.round(photos[j].image.width * factor) + "px";
+                                    links.item(j).href = photos[j].page;
+                                    links.item(j).replaceChild(photos[j].image, links.item(j).firstChild);
                                 }
                                 flickrPhotos.style.opacity = 1;
                             }, 1000);
@@ -77,7 +77,7 @@
         },
 
         handleImagesComplete = function() {
-            var factor = photoService.getFactor(images);
+            var i, factor = photoService.getFactor(images);
             for (i = 0; i < 6; i++) {
                 images[i].parentNode.style.width = Math.round(images[i].width * factor) + "px";
             }

@@ -35,7 +35,7 @@ if (document.querySelector(".search-form"))  {
 
             var tabs = {},
 
-                view = {
+                v = {
                     change: function(newVal, oldVal) {
                         lane.deactivate(tabs[oldVal.source], SEARCH_TAB);
                         lane.activate(tabs[newVal.source], SEARCH_TAB);
@@ -45,14 +45,14 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-            Y.augment(view, Y.EventTarget);
+            Y.augment(v, Y.EventTarget);
 
             forEach.call(tabNodes, function(tab){
-                tab.addEventListener(CLICK, view.click);
+                tab.addEventListener(CLICK, v.click);
                 tabs[lane.getData(tab, SOURCE)] = tab;
             });
 
-            return view;
+            return v;
 
         }(),
 

@@ -3,17 +3,7 @@
 
     "use strict";
 
-    var forms = Y.all('.formvalidator'), i;
-    for (i = 0; i < forms.size(); i++) {
-        (new Y.Validator( {
-            form : forms.item(i).get('id'),
-            defaultIndicatorDomType : 'DIV',
-            defaultIncorrectIndicatorCss : 'validator',
-            defaultCorrectIndicatorCss : 'indicator'
-        }));
-    }
-
-//FormValidator class
+    //FormValidator class
     var FormValidator = function(form) {
         var i, node, validator, inputFields,
             nodes = form.all("input[title='required']"),
@@ -22,8 +12,8 @@
                 event.target.removeClass("incorrect");
             },
             emptyHandler = function() {
-                var node = this.get("inputDOM");
-                return node.value === '' || node.value === node.title;
+                var inputDOM = this.get("inputDOM");
+                return inputDOM.value === '' || inputDOM.value === inputDOM.title;
             };
         for (i = 0; i < nodes.size(); i++) {
             node = nodes.item(i);
@@ -53,11 +43,11 @@
         }
         return {
             destroy : function() {
-                var i, nodes = form.all("input[title='required']");
+                var j, requiredNodes = form.all("input[title='required']");
                 Y.Event.detach("submit", validator._onFormSubmit, form);
                 Y.Event.detach("reset", validator._onFormReset, form);
-                for (i = 0; i < nodes.size(); i++) {
-                    Y.Event.detach("focus", focusHandler, nodes.item(i));
+                for (j = 0; j < requiredNodes.size(); j++) {
+                    Y.Event.detach("focus", focusHandler, requiredNodes.item(j));
                 }
                 validator.destroy();
             },

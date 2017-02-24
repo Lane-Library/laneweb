@@ -53,10 +53,10 @@
     if (resourceMap) {
         queryMapResources = resourceMap.resources;
         getResultCounts = function() {
-            var url = basePath + '/apps/search/json?q=' + encodedQuery, i;
-            for (i = 0; i < queryMapResources.length; i++) {
-                if (!queryMapResources[i].status) {
-                    url += '&r=' + queryMapResources[i].id;
+            var url = basePath + '/apps/search/json?q=' + encodedQuery, j;
+            for (j = 0; j < queryMapResources.length; j++) {
+                if (!queryMapResources[j].status) {
+                    url += '&r=' + queryMapResources[j].id;
                 }
             }
             url += '&rd=' + Math.random();

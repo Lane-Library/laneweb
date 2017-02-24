@@ -3,10 +3,10 @@
     "use strict";
 
     var initializeAuthorToggles = function() {
-        Y.all('.authorsTrigger').each(function(node) {
-            if (!node.getData().authorsTriggerSubscribed) {
-                node.setData('authorsTriggerSubscribed',true);
-                node.on('click', function(event) {
+        Y.all('.authorsTrigger').each(function(triggerNode) {
+            if (!triggerNode.getData().authorsTriggerSubscribed) {
+                triggerNode.setData('authorsTriggerSubscribed',true);
+                triggerNode.on('click', function(event) {
                     var node = event.currentTarget,
                     anchorNode = node.one('a'),
                     parent = node.get('parentNode'),

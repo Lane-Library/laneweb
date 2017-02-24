@@ -33,7 +33,7 @@
 
         }(document.querySelector("." + SEARCH_RESET)),
 
-        controller = function(view) {
+        controller = function() {
 
             return {
                 change: function(event) {
@@ -51,7 +51,7 @@
                     });
                 }
             };
-        }(view);
+        }();
 
     Y.augment(controller, Y.EventTarget, false, null, {
         prefix: "searchReset",

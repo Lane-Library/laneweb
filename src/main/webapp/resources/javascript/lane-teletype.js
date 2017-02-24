@@ -5,7 +5,7 @@
 
     "use strict";
 
-    var i, targetInput,
+    var i, inputNode,
     teletypeInputs = Y.all('.teletypeInput'),
     teletype = function(inputElm,targetElm){
         var qString;
@@ -46,11 +46,11 @@
     for (i = 0; i < teletypeInputs.size(); i++) {
         // target elements can either be PICO or main search box
         if(teletypeInputs.item(i).get('name').match(/(p|i|c|o)/)){
-            targetInput = Y.one("#clinical"+teletypeInputs.item(i).get('name').toUpperCase());
+            inputNode = Y.one("#clinical"+teletypeInputs.item(i).get('name').toUpperCase());
         }
         else{
-            targetInput = Y.one("#searchTerms");
+            inputNode = Y.one("#searchTerms");
         }
-        (new Teletype(teletypeInputs.item(i), targetInput));
+        (new Teletype(teletypeInputs.item(i), inputNode));
     }
 })();

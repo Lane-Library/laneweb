@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<li class="admin" id="id" row="0">
+   <a href="url" class="noproxy">
+      <img src="src"/>
+   </a>
+   <div class="imagedecoHidden">
+      <a href="/secure/image/update?id=id" class="imagedeco-admin">id</a>
+   </div>
+</li>

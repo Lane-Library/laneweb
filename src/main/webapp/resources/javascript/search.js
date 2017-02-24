@@ -67,7 +67,7 @@ if (document.querySelector(".search-form"))  {
                 queryNode = new Y.Node(queryInput),
                 queryTextInput = new lane.TextInput(queryNode, queryInput.getAttribute("placeholder")),
 
-                view = {
+                v = {
                     close: function() {
                         lane.deactivate(form, "search-form");
                         new Y.Anim({
@@ -117,25 +117,25 @@ if (document.querySelector(".search-form"))  {
                 });
             }
 
-            form.querySelector(".search-close").addEventListener("click", view.close);
-            form.addEventListener("submit", view.submit);
+            form.querySelector(".search-close").addEventListener("click", v.close);
+            form.addEventListener("submit", v.submit);
 
-            queryInput.addEventListener("focus", view.open);
+            queryInput.addEventListener("focus", v.open);
             if (Y.UA.ie === 9) {
-                queryInput.addEventListener("change", view.inputChange);
-                queryInput.addEventListener("keyup", view.inputChange);
-                queryInput.addEventListener("paste", view.inputChange);
+                queryInput.addEventListener("change", v.inputChange);
+                queryInput.addEventListener("keyup", v.inputChange);
+                queryInput.addEventListener("paste", v.inputChange);
             } else {
-                queryInput.addEventListener("input", view.inputChange);
+                queryInput.addEventListener("input", v.inputChange);
             }
 
-            Y.augment(view, Y.EventTarget);
+            Y.augment(v, Y.EventTarget);
 
-            return view;
+            return v;
 
         }(document.querySelector(".search-form"));
 
-        (function(model, view) {
+        (function() {
             var controller = {
                     open: function() {
                         model.fire("activeChange", {active:true});
@@ -180,7 +180,7 @@ if (document.querySelector(".search-form"))  {
 
             lane.on("searchTabs:change", controller.searchTabsChange);
             lane.on("searchReset:reset", controller.reset);
-        })(model, view);
+        })();
 
     lane.search = model;
 

@@ -6,7 +6,7 @@
 
         helpNode = document.querySelector(".search-help"),
 
-        view = function(helpNode) {
+        view = function() {
 
             return {
                     update: function(href) {
@@ -14,9 +14,9 @@
                     }
                 };
 
-        }(helpNode),
+        }(),
 
-        controller = function(view) {
+        controller = function() {
 
             return {
                 change: function(event) {
@@ -25,7 +25,7 @@
                 }
             };
 
-        }(view);
+        }();
 
     lane.on("searchTabs:change", controller.change);
 

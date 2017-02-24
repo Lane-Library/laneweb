@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var i, expandies = Y.all(".expandy");
+    var j, expandies = Y.all(".expandy");
 
     //only do this if there are expandies
     if (expandies.size() > 0) {
@@ -153,8 +153,8 @@
         Y.lane.ExpandyLists = [];
 
         // instantiate them
-        for (i = 0; i < expandies.size(); i++) {
-            Y.lane.ExpandyLists.push(new ExpandyList({node : expandies.item(i)}));
+        for (j = 0; j < expandies.size(); j++) {
+            Y.lane.ExpandyLists.push(new ExpandyList({node : expandies.item(j)}));
         }
 
     }

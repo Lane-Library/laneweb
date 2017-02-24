@@ -83,12 +83,12 @@
             },
             isProxyOrCMELogin = function(link) {
                 var search = link.get("search"),
-                pathname = link.get("pathname"),
-                isProxyOrCMELogin = false;
+                    pathname = link.get("pathname"),
+                    returnValue = false;
                 if (search && search.indexOf("url=") > -1 && /(secure\/apps\/proxy\/credential|redirect\/cme)/.test(pathname)) {
-                    isProxyOrCMELogin = true;
+                    returnValue = true;
                 }
-                return isProxyOrCMELogin;
+                return returnValue;
             },
             isSecureVideo = function(link) {
                 var pathname = link.get("pathname");

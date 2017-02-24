@@ -17,9 +17,12 @@ import edu.stanford.irt.solr.service.SolrImageService;
 @Controller
 public class JsonImageSearchController {
 
-    @Autowired
-    @Qualifier("edu.stanford.irt.solr.service")
     private SolrImageService service;
+
+    @Autowired
+    public JsonImageSearchController(@Qualifier("edu.stanford.irt.solr.service") final SolrImageService service) {
+        this.service = service;
+    }
 
     @RequestMapping(value = "/image", produces = "application/json")
     @ResponseBody
