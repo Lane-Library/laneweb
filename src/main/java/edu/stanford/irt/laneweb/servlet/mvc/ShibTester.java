@@ -37,14 +37,18 @@ public class ShibTester {
         result.println("Shibboleth Attributes:");
         for (String name : SHIB_ATTS) {
             Object attribute = request.getAttribute(name);
-            result.printf("%s --> %s (%s)\n", name, attribute, attribute == null ? "null" : attribute.getClass().getName());
+            result.printf("%s --> %s (%s)\n", name, attribute,
+                    attribute == null ? "null" : attribute.getClass().getName());
         }
         Enumeration<String> names = request.getAttributeNames();
         result.println("\nOther Attributes:");
         while (names.hasMoreElements()) {
             String name = names.nextElement();
-            Object attribute = request.getAttribute(name);
-            result.printf("%s --> %s (%s)\n", name, attribute, attribute == null ? "null" : attribute.getClass().getName());
+            if (!name.startsWith("org.springframework")) {
+                Object attribute = request.getAttribute(name);
+                result.printf("%s --> %s (%s)\n", name, attribute,
+                        attribute == null ? "null" : attribute.getClass().getName());
+            }
         }
     }
 }

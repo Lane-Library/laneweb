@@ -10,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -41,8 +40,7 @@ public class ShibTesterTest {
     @Test
     public void testTestUrl() throws IOException {
         List<String> lines = Files.readAllLines(
-                FileSystems.getDefault().getPath(getClass().getResource("shib-tester.txt").getPath()),
-                StandardCharsets.UTF_8);
+                FileSystems.getDefault().getPath(getClass().getResource("shib-tester.txt").getPath()));
         StringBuilder sb = new StringBuilder();
         lines.stream().forEach(s -> sb.append(s).append('\n'));
         StringWriter sw = new StringWriter();
@@ -50,9 +48,9 @@ public class ShibTesterTest {
         expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
         expect(this.request.getHeader("name")).andReturn("value");
         expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(26);
+        expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
         expect(this.request.getAttributeNames())
-                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
+                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.springframework.foo" })));
         this.response.setContentType("text/plain");
         replay(this.request, this.response);
         this.tester.testUrl(this.request, this.response);

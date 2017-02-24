@@ -35,4 +35,3 @@ upn --> value (java.lang.String)
 
 Other Attributes:
 name --> value (java.lang.String)
-org.spring.foo --> value (java.lang.String)
