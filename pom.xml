@@ -432,7 +432,6 @@
                                 <include>login-min.css</include>
                                 <include>tables-min.css</include>
                                 <include>lightbox-min.css</include>
-                                <include>banner-min.css</include>
                                 <include>popular-min.css</include>
                                 <include>business-card-min.css</include>
                                 <include>bookmarks-min.css</include>
@@ -510,7 +509,6 @@
                                 <include>description-toggle-min.js</include>
                                 <include>telinput-min.js</include>
                                 <include>lane-feedback-min.js</include>
-                                <include>banner-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
                                 <include>seminars-min.js</include>
                                 <include>same-height-min.js</include>
