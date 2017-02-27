@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-02-13" version="3.3.21" description="3.3.21 bug fix release">
+            <action date="2017-02-22" dev="ceyates" issue="132214" type="fix">
+                images in news feed can overflow their box
+            </action>
+        </release>
         <release date="2017-02-21" version="3.3.20" description="3.3.20 bug fix release">
             <action date="2017-02-15" dev="olgary" issue="132032" type="update">
                 new home page to send  live - all css, templates, content
