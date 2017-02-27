@@ -83,15 +83,6 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.isNull(this.pageView);
     },
 
-    testBannerContentClick: function() {
-        var link = Y.one(".banner-content a");
-        link.simulate("click");
-        Y.Assert.areEqual(link.get("title"), this.event.label);
-        Y.Assert.areEqual("lane:bannerClick", this.event.category);
-        Y.Assert.areEqual(link.get("href"), this.event.action);
-        Y.Assert.isNull(this.pageView);
-    },
-
     testLaneFooterClick: function() {
         var link = Y.one("#laneFooter a");
         link.simulate("click");

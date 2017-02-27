@@ -94,7 +94,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "description-toggle.js",
         "telinput.js",
         "lane-feedback.js",
-        "banner.js",
         "purchase-suggestions.js",
         "same-height.js",
         "shibboleth-sfx.js",
