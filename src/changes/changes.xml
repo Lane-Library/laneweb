@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2017-02-13" version="3.3.21" description="3.3.21 bug fix release">
+        <release date="2017-02-27" version="3.3.22" description="3.3.22 bug fix release">
+            <action date="2017-02-27" dev="ceyates" issue="132289" type="update">
+                update to search-lane-3.0.47
+            </action>
+        </release>
+        <release date="2017-02-27" version="3.3.21" description="3.3.21 bug fix release">
             <action date="2017-02-22" dev="ceyates" issue="132214" type="fix">
                 images in news feed can overflow their box
             </action>
