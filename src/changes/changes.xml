@@ -258,7 +258,7 @@
                 clinical pediatrics search not configured with correct metasearch engines
             </action>
         </release>
-        <release date="2016-08-229" version="3.3.1" description="3.3.1 bug fix release">
+        <release date="2016-08-29" version="3.3.1" description="3.3.1 bug fix release">
             <action date="2016-08-28" dev="ceyates" issue="126405" type="add">
                 redirect /beemap to /beemap.html
             </action>
