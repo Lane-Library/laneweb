@@ -46,7 +46,7 @@ public class LaneCrmControllerTest {
     }
 
     @Test
-    public void testJxsonSubmitLanelibacqs() throws IOException {
+    public void testJsonSubmitLaneLaneaskus() throws IOException {
         this.controller.jsonSubmitLaneaskus(Collections.singletonMap("foo", "bar"));
     }
 }
