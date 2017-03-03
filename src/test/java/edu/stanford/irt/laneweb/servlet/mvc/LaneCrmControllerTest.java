@@ -12,13 +12,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-public class LaneAcquisitionControllerTest {
+public class LaneCrmControllerTest {
 
-    private LaneAcquisitionController controller;
+    private LaneCrmController controller;
 
     @Before
     public void setUp() {
-        this.controller = new LaneAcquisitionController();
+        this.controller = new LaneCrmController();
     }
 
     @Test
