@@ -31,24 +31,14 @@ public class EngineResultSAXStrategy extends AbstractResultSAXStrategy<Result> {
     @Override
     public void toSAX(final Result result, final XMLConsumer xmlConsumer) {
         AttributesImpl atts = new AttributesImpl();
-        Collection<Result> children;
-        String description;
-        Exception exception;
-        String hits;
-        String id;
-        SearchStatus status;
-        String time;
-        String url;
-        synchronized (result) {
-            children = result.getChildren();
-            description = result.getDescription();
-            exception = result.getException();
-            hits = result.getHits();
-            id = result.getId();
-            status = result.getStatus();
-            time = result.getTime();
-            url = result.getURL();
-        }
+        Collection<Result> children = result.getChildren();
+        String description = result.getDescription();
+        Exception exception = result.getException();
+        String hits = result.getHits();
+        String id = result.getId();
+        SearchStatus status = result.getStatus();
+        String time = result.getTime();
+        String url = result.getURL();
         atts.addAttribute(NAMESPACE, ID, ID, CDATA, id);
         if (status != null) {
             atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());

@@ -23,10 +23,7 @@ public class ContentResultConversionStrategy {
     public List<SearchResult> convertResult(final Result result) {
         Map<SearchResult, SearchResult> resultMap = new HashMap<>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(result.getQuery().getSearchText());
-        Collection<Result> engines;
-        synchronized (result) {
-            engines = result.getChildren();
-        }
+        Collection<Result> engines = result.getChildren();
         for (Result engine : engines) {
             processEngine(engine, resultMap, queryTermPattern);
         }
@@ -46,10 +43,7 @@ public class ContentResultConversionStrategy {
 
     private void processEngine(final Result engine, final Map<SearchResult, SearchResult> resultMap,
             final Pattern queryTermPattern) {
-        Collection<Result> children;
-        synchronized (engine) {
-            children = engine.getChildren();
-        }
+        Collection<Result> children = engine.getChildren();
         for (Result resource : children) {
             processResource(resource, resultMap, queryTermPattern);
         }

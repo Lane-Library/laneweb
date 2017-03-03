@@ -35,14 +35,9 @@ public class MetasearchResultSAXStrategy extends AbstractResultSAXStrategy<Resul
     @Override
     public void toSAX(final Result result, final XMLConsumer xmlConsumer) {
         AttributesImpl atts = new AttributesImpl();
-        Collection<Result> children;
-        Query query;
-        SearchStatus status;
-        synchronized (result) {
-            children = result.getChildren();
-            query = result.getQuery();
-            status = result.getStatus();
-        }
+        Collection<Result> children = result.getChildren();
+        Query query = result.getQuery();
+        SearchStatus status = result.getStatus();
         if (status != null) {
             atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
         }
