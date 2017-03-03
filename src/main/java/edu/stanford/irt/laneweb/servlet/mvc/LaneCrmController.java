@@ -21,10 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class LaneCrmController {
 
-	private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
+    private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
     private static final String JSON_MIME_TYPE = "application/json";
-	
+
     private static final String ACQUISITION_URL = "https://lane-local-02.stanford.edu/crm/sfp/api/new";
     
     private static final String LANEASKUS_URL = "https://lane-local-02.stanford.edu/crm/laneaskus/api/new";
