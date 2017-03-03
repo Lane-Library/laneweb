@@ -11,8 +11,6 @@ public class Model {
 
     public static final String AUTH = "auth";
 
-    public static final String BANNER = "banner";
-
     public static final String BASE_PATH = "base-path";
 
     public static final String BASE_PROXY_URL = "base-proxy-url";

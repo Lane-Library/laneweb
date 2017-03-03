@@ -157,11 +157,6 @@
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="**/banners.html">
-            <map:generate type="html" src="{content-base}/{1}/banners.html"/>
-            <map:transform type="saxon" src="resources/xsl/banners.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <!-- med-history/search-form.html is to be used in an xinclude. If there is a q parameter, the
             first pipeline in this match is invoked, xincluding the form and the metasearch results, otherwise
             the second pipeline is invoked xincluding just the form -->

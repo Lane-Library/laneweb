@@ -7,6 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-02-27" version="3.3.22" description="3.3.22 bug fix release">
+            <action date="2017-02-27" dev="ceyates" issue="132289" type="update">
+                update to search-lane-3.0.47
+            </action>
+        </release>
+        <release date="2017-02-27" version="3.3.21" description="3.3.21 bug fix release [not deployed]">
+            <action date="2017-02-22" dev="ceyates" issue="132214" type="fix">
+                images in news feed can overflow their box
+            </action>
+        </release>
         <release date="2017-02-21" version="3.3.20" description="3.3.20 bug fix release">
             <action date="2017-02-15" dev="olgary" issue="132032" type="update">
                 new home page to send  live - all css, templates, content
@@ -253,7 +263,7 @@
                 clinical pediatrics search not configured with correct metasearch engines
             </action>
         </release>
-        <release date="2016-08-229" version="3.3.1" description="3.3.1 bug fix release">
+        <release date="2016-08-29" version="3.3.1" description="3.3.1 bug fix release">
             <action date="2016-08-28" dev="ceyates" issue="126405" type="add">
                 redirect /beemap to /beemap.html
             </action>
