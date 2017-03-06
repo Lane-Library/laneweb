@@ -58,7 +58,6 @@ public class UserDataBinderTest {
         expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@stanford.edu");
         expect(this.user.getEmail()).andReturn("mail");
         expect(this.user.getName()).andReturn("name");
-        expect(this.user.isStanfordUser()).andReturn(true);
         replay(this.request, this.session, this.user, this.userFactory);
         this.binder.bind(model, this.request);
         assertNotNull(model.get(Model.USER));
@@ -66,7 +65,6 @@ public class UserDataBinderTest {
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
         assertEquals("911531548a5ea68cf13f5e0506367956@stanford.edu", model.get(Model.AUTH));
-        assertEquals(Boolean.TRUE, model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.userFactory);
     }
 
@@ -80,7 +78,6 @@ public class UserDataBinderTest {
         expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@domain");
         expect(this.user.getEmail()).andReturn(null);
         expect(this.user.getName()).andReturn(null);
-        expect(this.user.isStanfordUser()).andReturn(false);
         this.session.setAttribute(eq(Model.USER), isA(User.class));
         this.session.removeAttribute(Model.PROXY_LINKS);
         replay(this.request, this.session, this.user, this.userFactory);
@@ -90,7 +87,6 @@ public class UserDataBinderTest {
         assertNull(model.get(Model.EMAIL));
         assertNull(model.get(Model.NAME));
         assertEquals("911531548a5ea68cf13f5e0506367956@domain", model.get(Model.AUTH));
-        assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.userFactory);
     }
 
@@ -106,7 +102,6 @@ public class UserDataBinderTest {
         expect(this.user.getHashedId()).andReturn("911531548a5ea68cf13f5e0506367956@domain");
         expect(this.user.getEmail()).andReturn("mail");
         expect(this.user.getName()).andReturn("name");
-        expect(this.user.isStanfordUser()).andReturn(false);
         replay(this.request, this.session, this.user, this.userFactory);
         this.binder.bind(model, this.request);
         assertNotNull(model.get(Model.USER));
@@ -114,7 +109,6 @@ public class UserDataBinderTest {
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
         assertEquals("911531548a5ea68cf13f5e0506367956@domain", model.get(Model.AUTH));
-        assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.userFactory);
     }
 
@@ -139,7 +133,6 @@ public class UserDataBinderTest {
         expect(this.user.getEmail()).andReturn("mail");
         expect(this.user.getName()).andReturn("name");
         expect(this.user.getHashedId()).andReturn("hash");
-        expect(this.user.isStanfordUser()).andReturn(false);
         replay(this.request, this.session, this.user, this.userFactory);
         this.binder.bind(model, this.request);
         assertSame(this.user, model.get(Model.USER));
@@ -147,7 +140,6 @@ public class UserDataBinderTest {
         assertEquals("mail", model.get(Model.EMAIL));
         assertEquals("name", model.get(Model.NAME));
         assertEquals("hash", model.get(Model.AUTH));
-        assertNull(model.get(Model.IS_ACTIVE_SUNETID));
         verify(this.request, this.session, this.user, this.userFactory);
     }
 }

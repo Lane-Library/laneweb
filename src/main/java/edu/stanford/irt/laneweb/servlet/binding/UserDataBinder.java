@@ -21,11 +21,14 @@ public class UserDataBinder implements DataBinder {
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        User user;
         HttpSession session = request.getSession();
-        user = (User) session.getAttribute(Model.USER);
+        User user = (User) session.getAttribute(Model.USER);
         if (user == null) {
-            user = this.userFactories.stream().map(f -> f.createUser(request)).filter(Objects::nonNull).findFirst()
+            user = this.userFactories
+                    .stream()
+                    .map(f -> f.createUser(request))
+                    .filter(Objects::nonNull)
+                    .findFirst()
                     .orElse(null);
             if (user != null) {
                 session.setAttribute(Model.USER, user);
@@ -48,9 +51,6 @@ public class UserDataBinder implements DataBinder {
             String name = user.getName();
             if (name != null) {
                 model.put(Model.NAME, name);
-            }
-            if (user.isStanfordUser()) {
-                model.put(Model.IS_ACTIVE_SUNETID, Boolean.TRUE);
             }
         }
     }

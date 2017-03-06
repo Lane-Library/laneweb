@@ -12,17 +12,7 @@ public class LDAPDataTest {
 
     @Before
     public void setUp() throws Exception {
-        this.data = new LDAPData("sunetid", "name", "univid", true, "email");
-    }
-
-    @Test
-    public void testGetEmailAddress() {
-        assertEquals("email", this.data.getEmailAddress());
-    }
-
-    @Test
-    public void testGetName() {
-        assertEquals("name", this.data.getName());
+        this.data = new LDAPData("sunetid", true);
     }
 
     @Test
@@ -31,17 +21,7 @@ public class LDAPDataTest {
     }
 
     @Test
-    public void testGetUnivId() {
-        assertEquals("univid", this.data.getUnivId());
-    }
-
-    @Test
     public void testIsActive() {
         assertTrue(this.data.isActive());
-    }
-
-    @Test
-    public void testToString() {
-        assertEquals("sunetid=sunetid,univid=univid,name=name,isActive=trueemail=email", this.data.toString());
     }
 }
