@@ -4,11 +4,15 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{request-uri}"/>
+        <map:parameter name="cache-expires" value="86400"/>
         <map:match pattern="highly-accessed-articles.xml" type="wildcard">
-            <map:generate type="file" src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"/>
+            <map:generate type="file" src="http://sfx.stanford.edu/local/cgi/public/highly-accessed.cgi?limit=10&amp;days=14"/>
             <map:transform src="resources/xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
             <map:serialize type="xml"/>
         </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{request-uri}"/>
         <map:match pattern="ncbi-rss/*" type="wildcard">
             <map:generate type="file" src="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
             <map:serialize type="xml"/>

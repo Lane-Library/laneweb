@@ -292,6 +292,7 @@ public class BindingConfiguration {
     public DataBinder userDataDataBinder() {
         List<DataBinder> dataBinders = new ArrayList<>();
         dataBinders.add(userDataBinder());
+        dataBinders.add(activeSunetidDataBinder());
         dataBinders.add(ticketDataBinder());
         dataBinders.add(remoteProxyIPDataBinder());
         dataBinders.add(emridDataBinder());

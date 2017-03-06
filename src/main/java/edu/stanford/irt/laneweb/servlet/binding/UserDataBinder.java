@@ -52,9 +52,6 @@ public class UserDataBinder implements DataBinder {
             if (name != null) {
                 model.put(Model.NAME, name);
             }
-            if (user.isStanfordUser()) {
-                model.put(Model.IS_ACTIVE_SUNETID, Boolean.TRUE);
-            }
         }
     }
 }

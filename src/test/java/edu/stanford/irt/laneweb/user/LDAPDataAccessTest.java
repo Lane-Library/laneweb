@@ -40,19 +40,20 @@ public class LDAPDataAccessTest {
         this.ldapData = createMock(LDAPData.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetActiveSunetId() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
         expect(this.ldapTemplate.search(eq(""), eq("suunivid=univid"),
                 (AttributesMapper<LDAPData>) isA(AttributesMapper.class)))
                         .andReturn(Collections.singletonList(this.ldapData));
-        // expect(this.ldapData.isActive()).andReturn(true);
         expect(this.ldapData.getSunetId()).andReturn("sunetid");
         replay(this.subjectSource, this.ldapTemplate, this.ldapData);
         assertEquals("sunetid", this.lDAPDataAccess.getActiveSunetId("univid"));
         verify(this.subjectSource, this.ldapTemplate, this.ldapData);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testGetActiveSunetIdNotActive() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -64,38 +65,8 @@ public class LDAPDataAccessTest {
         assertNull(this.lDAPDataAccess.getActiveSunetId("univid"));
         verify(this.subjectSource, this.ldapTemplate, this.ldapData);
     }
-    // @SuppressWarnings("unchecked")
-    // @Test
-    // public void testGetUserInfo() {
-    // expect(this.subjectSource.getSubject()).andReturn(this.subject);
-    // expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-    // (AttributesMapper<LDAPData>) isA(AttributesMapper.class)))
-    // .andReturn(Collections.singletonList(this.ldapData));
-    // replay(this.subjectSource, this.ldapTemplate);
-    // assertSame(this.ldapData, this.lDAPDataAccess.getLdapDataForSunetid("ditenus"));
-    // verify(this.subjectSource, this.ldapTemplate);
-    // }
-    // @SuppressWarnings("unchecked")
-    // @Test
-    // public void testGetUserInfoEmpty() {
-    // expect(this.subjectSource.getSubject()).andReturn(this.subject);
-    // expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-    // (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(Collections.emptyList());
-    // replay(this.subjectSource, this.ldapTemplate);
-    // this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
-    // verify(this.subjectSource, this.ldapTemplate);
-    // }
 
-    // @SuppressWarnings("unchecked")
-    // @Test
-    // public void testGetUserInfoNull() {
-    // expect(this.subjectSource.getSubject()).andReturn(this.subject);
-    // expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-    // (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(null);
-    // replay(this.subjectSource, this.ldapTemplate);
-    // this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
-    // verify(this.subjectSource, this.ldapTemplate);
-    // }
+    @SuppressWarnings("unchecked")
     @Test
     public void testIsActive() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -108,17 +79,6 @@ public class LDAPDataAccessTest {
         verify(this.subjectSource, this.ldapTemplate, this.ldapData);
     }
 
-    // @SuppressWarnings("unchecked")
-    // @Test
-    // public void testThrowCommunicationException() {
-    // expect(this.subjectSource.getSubject()).andReturn(this.subject);
-    // expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"),
-    // (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andThrow(new CommunicationException(null));
-    // replay(this.subjectSource, this.ldapTemplate);
-    // LDAPData data = this.lDAPDataAccess.getLdapDataForSunetid("ditenus");
-    // assertEquals("ditenus", data.getName());
-    // verify(this.subjectSource, this.ldapTemplate);
-    // }
     @SuppressWarnings("unchecked")
     @Test
     public void testThrowCommunicationExceptionNounivid() {

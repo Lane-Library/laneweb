@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.laneweb.user.User;
 
 public class ActiveSunetidDataBinderTest {
 
@@ -28,44 +29,67 @@ public class ActiveSunetidDataBinderTest {
 
     private HttpSession session;
 
+    private User user;
+
     @Before
     public void setUp() {
         this.ldapDataAccess = createMock(LDAPDataAccess.class);
         this.dataBinder = new ActiveSunetidDataBinder(this.ldapDataAccess);
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
+        this.user = createMock(User.class);
     }
 
     @Test
     public void testBind() {
         Map<String, Object> model = new HashMap<>();
-        model.put(Model.USER_ID, "sunetid@stanford.edu");
+        model.put(Model.USER, this.user);
+        expect(this.user.isStanfordUser()).andReturn(true);
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.IS_ACTIVE_SUNETID)).andReturn(null);
+        expect(this.user.getId()).andReturn("sunetid@stanford.edu");
         expect(this.ldapDataAccess.isActive("sunetid")).andReturn(true);
         this.session.setAttribute(Model.IS_ACTIVE_SUNETID, Boolean.TRUE);
-        replay(this.ldapDataAccess, this.request, this.session);
+        replay(this.ldapDataAccess, this.request, this.session, this.user);
         this.dataBinder.bind(model, this.request);
         assertSame(Boolean.TRUE, model.get(Model.IS_ACTIVE_SUNETID));
-        verify(this.ldapDataAccess, this.request, this.session);
+        verify(this.ldapDataAccess, this.request, this.session, this.user);
     }
 
     @Test
     public void testBindInSession() {
         Map<String, Object> model = new HashMap<>();
-        model.put(Model.USER_ID, "sunetid@stanford.edu");
+        model.put(Model.USER, this.user);
+        expect(this.user.isStanfordUser()).andReturn(true);
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.IS_ACTIVE_SUNETID)).andReturn(Boolean.TRUE);
-        replay(this.ldapDataAccess, this.request, this.session);
+        replay(this.ldapDataAccess, this.request, this.session, this.user);
         this.dataBinder.bind(model, this.request);
         assertSame(Boolean.TRUE, model.get(Model.IS_ACTIVE_SUNETID));
-        verify(this.ldapDataAccess, this.request, this.session);
+        verify(this.ldapDataAccess, this.request, this.session, this.user);
+    }
+
+    @Test
+    public void testBindNotActive() {
+        Map<String, Object> model = new HashMap<>();
+        model.put(Model.USER, this.user);
+        expect(this.user.isStanfordUser()).andReturn(true);
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.IS_ACTIVE_SUNETID)).andReturn(null);
+        expect(this.user.getId()).andReturn("sunetid@stanford.edu");
+        expect(this.ldapDataAccess.isActive("sunetid")).andReturn(false);
+        this.session.setAttribute(Model.IS_ACTIVE_SUNETID, Boolean.FALSE);
+        replay(this.ldapDataAccess, this.request, this.session, this.user);
+        this.dataBinder.bind(model, this.request);
+        assertSame(Boolean.FALSE, model.get(Model.IS_ACTIVE_SUNETID));
+        verify(this.ldapDataAccess, this.request, this.session, this.user);
     }
 
     @Test
     public void testBindNotStanford() {
         Map<String, Object> model = new HashMap<>();
-        model.put(Model.USER_ID, "sunetid@notstanford.edu");
+        model.put(Model.USER, this.user);
+        expect(this.user.isStanfordUser()).andReturn(false);
         replay(this.ldapDataAccess, this.request, this.session);
         this.dataBinder.bind(model, this.request);
         assertSame(Boolean.FALSE, model.get(Model.IS_ACTIVE_SUNETID));
