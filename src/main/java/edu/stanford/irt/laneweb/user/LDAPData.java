@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.user;
 
 class LDAPData {
 
-    static final LDAPData NULL = new LDAPData(null, false);
+    public static final LDAPData NULL = new LDAPData(null, false);
 
     private boolean isActive;
 

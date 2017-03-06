@@ -55,6 +55,17 @@ public class LDAPDataAccessTest {
 
     @SuppressWarnings("unchecked")
     @Test
+    public void testGetActiveSunetIdNoResults() {
+        expect(this.subjectSource.getSubject()).andReturn(this.subject);
+        expect(this.ldapTemplate.search(eq(""), eq("suunivid=univid"),
+                (AttributesMapper<LDAPData>) isA(AttributesMapper.class))).andReturn(Collections.emptyList());
+        replay(this.subjectSource, this.ldapTemplate, this.ldapData);
+        assertNull(this.lDAPDataAccess.getActiveSunetId("univid"));
+        verify(this.subjectSource, this.ldapTemplate, this.ldapData);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
     public void testGetActiveSunetIdNotActive() {
         expect(this.subjectSource.getSubject()).andReturn(this.subject);
         expect(this.ldapTemplate.search(eq(""), eq("suunivid=univid"),

@@ -39,17 +39,13 @@ public class LDAPDataAccess {
     }
 
     private LDAPData doGet(final String lookupFilter) {
-        LDAPData ldapData = null;
+        LDAPData ldapData;
         try {
             Subject subject = this.subjectSource.getSubject();
-            List<LDAPData> data = Subject.doAs(subject, new PrivilegedAction<List<LDAPData>>() {
-
-                @Override
-                public List<LDAPData> run() {
-                    return LDAPDataAccess.this.ldapTemplate.search("", lookupFilter,
-                            LDAPDataAccess.this.attributesMapper);
-                }
-            });
+            PrivilegedAction<List<LDAPData>> action = () -> {
+                return LDAPDataAccess.this.ldapTemplate.search("", lookupFilter, LDAPDataAccess.this.attributesMapper);
+            };
+            List<LDAPData> data = Subject.doAs(subject, action);
             if (data.isEmpty()) {
                 ldapData = LDAPData.NULL;
             } else {
