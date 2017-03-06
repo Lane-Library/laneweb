@@ -114,9 +114,8 @@ public class BindingConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public DataBinder dataBinder() {
-        List<DataBinder> dataBinders = new ArrayList<>(22);
+        List<DataBinder> dataBinders = new ArrayList<>(21);
         dataBinders.add(userDataBinder());
-        dataBinders.add(unividDataBinder());
         dataBinders.add(activeSunetidDataBinder());
         dataBinders.add(ticketDataBinder());
         dataBinders.add(debugDataBinder());
