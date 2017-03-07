@@ -28,7 +28,7 @@ $ cd $HOME/projects/lane
 $ git clone git@gitlab.med.stanford.edu:irt-lane/laneweb.git
 $ cd laneweb
 
-$ make
+$ make app
 ```
 
 ### Build docker image
