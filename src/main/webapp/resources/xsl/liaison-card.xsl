@@ -11,7 +11,7 @@
   <xsl:template match="h:li[@id=$liaison]">
     <xsl:variable name="liaison-profile-link" select=".//h:a[@class='liaison-profile-link']/@href"/>
       <div class="business-card">
-        <h3>Your Liaison</h3>
+        <h3>Your Librarian</h3>
         <div class="yui3-g">
           <xsl:choose>
             <xsl:when test="$liaison = 'tbd'">
