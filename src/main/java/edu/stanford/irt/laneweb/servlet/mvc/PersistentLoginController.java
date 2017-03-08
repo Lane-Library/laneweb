@@ -55,9 +55,8 @@ public class PersistentLoginController {
     public String disablePersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.USER) final User user,
             final String url,
-            final HttpServletRequest request,
             final HttpServletResponse response) {
-        resetCookies(request, response);
+        resetCookies(response);
         return getRedirectURL(url);
     }
 
@@ -81,7 +80,7 @@ public class PersistentLoginController {
         if (isActiveSunetId) {
             checkUserAndSetCookies(user, request, response);
         } else {
-            resetCookies(request, response);
+            resetCookies(response);
         }
         return getRedirectURL(url);
     }
@@ -100,7 +99,7 @@ public class PersistentLoginController {
         if (null != user) {
             setCookies(request, response, user);
         } else {
-            resetCookies(request, response);
+            resetCookies(response);
         }
     }
 
@@ -118,7 +117,7 @@ public class PersistentLoginController {
         return sb.toString();
     }
 
-    private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
+    private void resetCookies(final HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
