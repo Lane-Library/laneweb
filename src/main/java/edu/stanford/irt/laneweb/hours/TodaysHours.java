@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +23,9 @@ public class TodaysHours {
 
     private long hoursLastModified = 0;
 
-    private final SimpleDateFormat todaysDateFormat = new SimpleDateFormat("MMM d");
+    private DateTimeFormatter todaysDateFormatter = DateTimeFormatter.ofPattern("MMM d");
 
-    private final SimpleDateFormat todaysDayFormat = new SimpleDateFormat("EEEE");
+    private DateTimeFormatter todaysDayFormatter = DateTimeFormatter.ofPattern("EEEE");
 
     public TodaysHours(final File hoursFile) {
         this.hoursFile = hoursFile;
@@ -34,47 +34,43 @@ public class TodaysHours {
     public String getHours() {
         return toString(LocalDate.now());
     }
-    
-    public String toString(LocalDate localDate) {
-        return toString(Date.from(localDate.atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant()));
-    }
 
     /**
      * @deprecated, use toString(LocalDate localDate)
+     * 
      * @param date
      * @return a String representation of the library hours on the given date;
      */
     @Deprecated
     public String toString(final Date date) {
-        Date today;
-        String todaysDate;
-        String todaysDay;
-        if (null == date) {
-            today = new Date();
+        return toString(date.toInstant().atZone(ZoneId.of("America/Los_Angeles")).toLocalDate());
+    }
+
+    public String toString(final LocalDate localDate) {
+        String todaysDate = this.todaysDateFormatter.format(localDate);
+        String todaysDay = this.todaysDayFormatter.format(localDate);
+        updateHoursMap();
+        String hours;
+        if (this.daysMap.containsKey(todaysDate)) {
+            hours = this.daysMap.get(todaysDate);
+        } else if (this.daysMap.containsKey(todaysDay)) {
+            hours = this.daysMap.get(todaysDay);
         } else {
-            today = date;
+            hours = UNKNOWN;
         }
-        synchronized (this) {
-            todaysDate = this.todaysDateFormat.format(today);
-            todaysDay = this.todaysDayFormat.format(today);
-            updateHoursMap();
-            if (this.daysMap.containsKey(todaysDate)) {
-                return this.daysMap.get(todaysDate);
-            } else if (this.daysMap.containsKey(todaysDay)) {
-                return this.daysMap.get(todaysDay);
-            }
-        }
-        return UNKNOWN;
+        return hours;
     }
 
     private void updateHoursMap() {
-        long fileLastModified = this.hoursFile.lastModified();
-        if (fileLastModified > this.hoursLastModified) {
-            this.hoursLastModified = fileLastModified;
-            try (InputStream input = new FileInputStream(this.hoursFile)) {
-                this.daysMap = new StreamDaysMapping(input);
-            } catch (IOException e) {
-                throw new LanewebException(e);
+        synchronized (this.hoursFile) {
+            long fileLastModified = this.hoursFile.lastModified();
+            if (fileLastModified > this.hoursLastModified) {
+                this.hoursLastModified = fileLastModified;
+                try (InputStream input = new FileInputStream(this.hoursFile)) {
+                    this.daysMap = new StreamDaysMapping(input);
+                } catch (IOException e) {
+                    throw new LanewebException(e);
+                }
             }
         }
     }
