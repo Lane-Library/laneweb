@@ -50,11 +50,13 @@ public class TodaysHours {
         String todaysDate = this.todaysDateFormatter.format(localDate);
         String todaysDay = this.todaysDayFormatter.format(localDate);
         updateHoursMap();
+        // copy this.daysMap in case it changes while the following is working with it
+        Map<String, String> daysMapCopy = this.daysMap;
         String hours;
-        if (this.daysMap.containsKey(todaysDate)) {
-            hours = this.daysMap.get(todaysDate);
-        } else if (this.daysMap.containsKey(todaysDay)) {
-            hours = this.daysMap.get(todaysDay);
+        if (daysMapCopy.containsKey(todaysDate)) {
+            hours = daysMapCopy.get(todaysDate);
+        } else if (daysMapCopy.containsKey(todaysDay)) {
+            hours = daysMapCopy.get(todaysDay);
         } else {
             hours = UNKNOWN;
         }
