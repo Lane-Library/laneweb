@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.livechat;
 
+import java.time.DayOfWeek;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -32,24 +32,24 @@ public class Schedule {
      */
     @Deprecated
     public boolean isAvailableAt(final Date date) {
-        boolean available;
-        Calendar calendar = Calendar.getInstance();
-        if (date != null) {
-            calendar.setTime(date);
+        if (date == null) {
+            return isAvailable();
+        } else {
+            return isAvailableAt(ZonedDateTime.ofInstant(date.toInstant(), AMERICA_LA));
         }
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-        if (dayOfWeek == Calendar.SUNDAY || dayOfWeek == Calendar.SATURDAY) {
+    }
+
+    public boolean isAvailableAt(final ZonedDateTime dateTime) {
+        DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
+        int hourOfDay = dateTime.getHour();
+        boolean available;
+        if (dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.SATURDAY) {
             available = hourOfDay >= NOON && hourOfDay < FIVE_PM;
-        } else if (dayOfWeek == Calendar.FRIDAY) {
+        } else if (dayOfWeek == DayOfWeek.FRIDAY) {
             available = hourOfDay >= NINE_AM && hourOfDay < FIVE_PM;
         } else {
             available = hourOfDay >= NINE_AM && hourOfDay < SEVEN_PM;
         }
         return available;
-    }
-
-    public boolean isAvailableAt(final ZonedDateTime dateTime) {
-        return isAvailableAt(Date.from(dateTime.toInstant()));
     }
 }
