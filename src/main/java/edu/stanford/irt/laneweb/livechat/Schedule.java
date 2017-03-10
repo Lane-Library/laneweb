@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.livechat;
 
-import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -21,7 +21,7 @@ public class Schedule {
     private static final int SEVEN_PM = 19;
 
     public boolean isAvailable() {
-        return isAvailableAt(LocalDate.now(AMERICA_LA));
+        return isAvailableAt(ZonedDateTime.now(AMERICA_LA));
     }
 
     /**
@@ -49,7 +49,7 @@ public class Schedule {
         return available;
     }
 
-    public boolean isAvailableAt(final LocalDate localDate) {
-        return isAvailableAt(Date.from(localDate.atStartOfDay(AMERICA_LA).toInstant()));
+    public boolean isAvailableAt(final ZonedDateTime dateTime) {
+        return isAvailableAt(Date.from(dateTime.toInstant()));
     }
 }
