@@ -6,7 +6,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 public class Ticket implements Serializable {
 
@@ -29,8 +28,7 @@ public class Ticket implements Serializable {
         if (null == ezyproxyKey) {
             throw new IllegalArgumentException("null ezproxyKey");
         }
-        Date now = new Date();
-        String packet = "$u" + ((int) (now.getTime() / ONE_SECOND)) + "$e";
+        String packet = "$u" + System.currentTimeMillis() / ONE_SECOND + "$e";
         try {
             this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + userid + packet) + packet, UTF_8);
             this.creationTime = System.currentTimeMillis();

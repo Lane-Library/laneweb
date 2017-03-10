@@ -6,7 +6,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +36,7 @@ public class SHCLoginControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.validTimestamp = Long.toString(new Date().getTime());
+        this.validTimestamp = Long.toString(System.currentTimeMillis());
         this.codec = createMock(SHCCodec.class);
         this.ldapDataAccess = createMock(LDAPDataAccess.class);
         this.controller = new SHCLoginController(this.codec, this.ldapDataAccess);

@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.livechat;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,6 +9,8 @@ import java.util.Date;
  * <code>Schedule</code> contains the logic for the live chat schedule.
  */
 public class Schedule {
+
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private static final int FIVE_PM = 17;
 
@@ -17,14 +21,16 @@ public class Schedule {
     private static final int SEVEN_PM = 19;
 
     public boolean isAvailable() {
-        return isAvailableAt(null);
+        return isAvailableAt(LocalDate.now(AMERICA_LA));
     }
 
     /**
+     * @deprecated use isAvailableAt(LocalDate localDate)
      * @param date
      *            can be null in which case the current time is used
      * @return whether or not live chat is available at a particular time.
      */
+    @Deprecated
     public boolean isAvailableAt(final Date date) {
         boolean available;
         Calendar calendar = Calendar.getInstance();
@@ -41,5 +47,9 @@ public class Schedule {
             available = hourOfDay >= NINE_AM && hourOfDay < SEVEN_PM;
         }
         return available;
+    }
+
+    public boolean isAvailableAt(final LocalDate localDate) {
+        return isAvailableAt(Date.from(localDate.atStartOfDay(AMERICA_LA).toInstant()));
     }
 }
