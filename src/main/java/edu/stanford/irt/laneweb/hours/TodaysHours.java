@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,18 +33,7 @@ public class TodaysHours {
         return toString(LocalDate.now());
     }
 
-    /**
-     * @deprecated, use toString(LocalDate localDate)
-     * 
-     * @param date
-     * @return a String representation of the library hours on the given date;
-     */
-    @Deprecated
-    public String toString(final Date date) {
-        return toString(date.toInstant().atZone(ZoneId.of("America/Los_Angeles")).toLocalDate());
-    }
-
-    public String toString(final LocalDate localDate) {
+    String toString(final LocalDate localDate) {
         String todaysDate = this.todaysDateFormatter.format(localDate);
         String todaysDay = this.todaysDayFormatter.format(localDate);
         updateHoursMap();

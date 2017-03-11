@@ -3,13 +3,17 @@ package edu.stanford.irt.laneweb.livechat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class ScheduleTest {
+
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private Schedule schedule;
 
@@ -26,84 +30,55 @@ public class ScheduleTest {
 
     @Test
     public void testIsAvaliableAt10Saturday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 10);
-        Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvailableAt(date));
+        assertFalse(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.SATURDAY).with(LocalTime.of(10, 0))));
     }
 
     @Test
     public void testIsAvaliableAt18Friday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvailableAt(date));
+        assertFalse(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.FRIDAY).with(LocalTime.of(18, 0))));
     }
 
     @Test
     public void testIsAvaliableAt18Saturday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvailableAt(date));
+        assertFalse(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.SATURDAY).with(LocalTime.of(18, 0))));
     }
 
     @Test
     public void testIsAvaliableAt4Friday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 4);
-        Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvailableAt(date));
+        assertFalse(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.FRIDAY).with(LocalTime.of(4, 0))));
     }
 
     @Test
     public void testIsAvaliableAtNoonFriday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        Date date = calendar.getTime();
-        assertTrue(this.schedule.isAvailableAt(date));
+        assertTrue(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.FRIDAY).with(LocalTime.of(12, 0))));
     }
 
     @Test
     public void testIsAvaliableAtNoonSunday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        Date date = calendar.getTime();
-        assertTrue(this.schedule.isAvailableAt(date));
+        assertTrue(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.SUNDAY).with(LocalTime.of(12, 0))));
     }
 
     @Test
     public void testIsNotAvaliable4Monday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 4);
-        calendar.set(Calendar.MINUTE, 30);
-        Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvailableAt(date));
+        assertFalse(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.MONDAY).with(LocalTime.of(4, 30))));
     }
 
     @Test
     public void testIsNotAvaliable730PMMonday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 19);
-        calendar.set(Calendar.MINUTE, 30);
-        Date date = calendar.getTime();
-        assertFalse(this.schedule.isAvailableAt(date));
+        assertFalse(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.MONDAY).with(LocalTime.of(19, 30))));
     }
 
     @Test
     public void testIsNotAvaliableNoonMonday() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 12);
-        Date date = calendar.getTime();
-        assertTrue(this.schedule.isAvailableAt(date));
+        assertTrue(this.schedule
+                .isAvailableAt(ZonedDateTime.now(AMERICA_LA).with(DayOfWeek.MONDAY).with(LocalTime.of(12, 0))));
     }
 }

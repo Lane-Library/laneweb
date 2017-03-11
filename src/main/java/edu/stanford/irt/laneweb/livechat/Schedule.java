@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.livechat;
 import java.time.DayOfWeek;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Date;
 
 /**
  * <code>Schedule</code> contains the logic for the live chat schedule.
@@ -24,22 +23,7 @@ public class Schedule {
         return isAvailableAt(ZonedDateTime.now(AMERICA_LA));
     }
 
-    /**
-     * @deprecated use isAvailableAt(LocalDate localDate)
-     * @param date
-     *            can be null in which case the current time is used
-     * @return whether or not live chat is available at a particular time.
-     */
-    @Deprecated
-    public boolean isAvailableAt(final Date date) {
-        if (date == null) {
-            return isAvailable();
-        } else {
-            return isAvailableAt(ZonedDateTime.ofInstant(date.toInstant(), AMERICA_LA));
-        }
-    }
-
-    public boolean isAvailableAt(final ZonedDateTime dateTime) {
+    boolean isAvailableAt(final ZonedDateTime dateTime) {
         DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
         int hourOfDay = dateTime.getHour();
         boolean available;
