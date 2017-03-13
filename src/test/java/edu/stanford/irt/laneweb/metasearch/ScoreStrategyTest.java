@@ -7,7 +7,8 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Calendar;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategyTest {
 
-    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    private static final int THIS_YEAR = ZonedDateTime.now(ZoneId.of("America/Los_Angeles")).getYear();
 
     private ContentResult result;
 

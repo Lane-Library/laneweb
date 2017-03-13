@@ -1,12 +1,15 @@
 package edu.stanford.irt.laneweb.livechat;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
  * <code>Schedule</code> contains the logic for the live chat schedule.
  */
 public class Schedule {
+
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private static final int FIVE_PM = 17;
 
@@ -17,25 +20,16 @@ public class Schedule {
     private static final int SEVEN_PM = 19;
 
     public boolean isAvailable() {
-        return isAvailableAt(null);
+        return isAvailableAt(ZonedDateTime.now(AMERICA_LA));
     }
 
-    /**
-     * @param date
-     *            can be null in which case the current time is used
-     * @return whether or not live chat is available at a particular time.
-     */
-    public boolean isAvailableAt(final Date date) {
+    boolean isAvailableAt(final ZonedDateTime dateTime) {
+        DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
+        int hourOfDay = dateTime.getHour();
         boolean available;
-        Calendar calendar = Calendar.getInstance();
-        if (date != null) {
-            calendar.setTime(date);
-        }
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-        if (dayOfWeek == Calendar.SUNDAY || dayOfWeek == Calendar.SATURDAY) {
+        if (dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.SATURDAY) {
             available = hourOfDay >= NOON && hourOfDay < FIVE_PM;
-        } else if (dayOfWeek == Calendar.FRIDAY) {
+        } else if (dayOfWeek == DayOfWeek.FRIDAY) {
             available = hourOfDay >= NINE_AM && hourOfDay < FIVE_PM;
         } else {
             available = hourOfDay >= NINE_AM && hourOfDay < SEVEN_PM;

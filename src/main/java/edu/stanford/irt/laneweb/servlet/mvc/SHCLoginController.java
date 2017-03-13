@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -126,11 +125,11 @@ public class SHCLoginController {
             LOG.error("error parsing " + timestamp, e);
             return false;
         }
-        Date now = new Date();
-        if (Math.abs(now.getTime() - decryptedTimestamp) < ONE_MINUTE) {
+        long now = System.currentTimeMillis();
+        if (Math.abs(now - decryptedTimestamp) < ONE_MINUTE) {
             return true;
         }
-        LOG.error("invalid timestamp -- now: {}, timestamp: {}", now.getTime(), decryptedTimestamp);
+        LOG.error("invalid timestamp -- now: {}, timestamp: {}", now, decryptedTimestamp);
         return false;
     }
 }

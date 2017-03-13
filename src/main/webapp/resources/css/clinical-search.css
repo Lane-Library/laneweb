@@ -52,12 +52,12 @@
 }
 .clinical-facet {
     padding: 3px;
-    display:block;
-    border-bottom:1px rgb(231,231,224) solid;
+    display: block;
+    border-bottom: 1px rgb(231,231,224) solid;
 }
 
 .clinical-facet .fa-circle-o {
-    color:rgb(225,225,225);
+    color: rgb(225,225,225);
 }
 
 .clinical-facet .fa-circle-o::after {
@@ -72,15 +72,15 @@
 }
 
 .clinical-facet span {
-    float:right;
+    float: right;
 }
 
 .clinical-facet-active {
-    font-weight:bold;
-    color:white;
-    background-color:black;
+    font-weight: bold;
+    color: white;
+    background-color: black;
 }
 
 .clinical-facet-active .fa {
-    color:white
+    color: white;
 }

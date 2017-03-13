@@ -3,8 +3,9 @@ package edu.stanford.irt.laneweb.seminars;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -25,15 +26,17 @@ public class SeminarsGenerator extends AbstractGenerator {
     private static final MessageFormat URL_FORMAT = new MessageFormat(
             "http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&selMonth={0}&selDay={1}&selYear={2}&futureNumberDays=60&departmentId=0&seminarLocation=0&keyword=&courseType=gran");
 
-    private final SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
-    private final SimpleDateFormat monthFormat = new SimpleDateFormat("MMM");
+    private final DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("dd");
+
+    private final DateTimeFormatter monthFormat = DateTimeFormatter.ofPattern("MMM");
 
     private SAXParser saxParser;
 
     private SourceResolver sourceResolver;
 
-    private final SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+    private final DateTimeFormatter yearFormat = DateTimeFormatter.ofPattern("yyyy");
 
     public SeminarsGenerator(final SAXParser saxParser, final SourceResolver sourceResolver) {
         this.saxParser = saxParser;
@@ -42,7 +45,7 @@ public class SeminarsGenerator extends AbstractGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Date today = new Date();
+        LocalDate today = LocalDate.now(AMERICA_LA);
         String day = this.dayFormat.format(today);
         String month = this.monthFormat.format(today);
         String year = this.yearFormat.format(today);

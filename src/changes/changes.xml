@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-03-13" version="3.3.23" description="3.3.23 bug fix release">
+            <action date="2017-03-10" dev="ceyates" issue="132554" type="update">
+                deprecate then remove uses of java.util.Date
+            </action>
+            <action date="2017-03-09" dev="ceyates" issue="132496" type="update">
+                portals drop down - 3 columns
+            </action>
+            <action date="2017-03-08" dev="olgary" issue="132495" type="add">
+                template.xml, debug.xml - added Radiology portal
+            </action>
+            <action date="2017-03-07" dev="olgary" issue="132481" type="update">
+                liaison-card.xsl 
+            </action>
+            <action date="2017-03-06" dev="ceyates" issue="132438" type="remove">
+                remove unnecessary ldap data fetching
+            </action>
+            <action date="2017-02-27" dev="ceyates" issue="132294" type="remove">
+                remove banner related code
+            </action>
+        </release>
         <release date="2017-02-27" version="3.3.22" description="3.3.22 bug fix release">
             <action date="2017-02-27" dev="ceyates" issue="132289" type="update">
                 update to search-lane-3.0.47

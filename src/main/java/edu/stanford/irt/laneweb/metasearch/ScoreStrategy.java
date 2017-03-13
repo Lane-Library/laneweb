@@ -1,12 +1,15 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import java.util.Calendar;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.search.impl.ContentResult;
 
 public class ScoreStrategy {
+
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private static final int DESC_ONLY = 10;
 
@@ -27,7 +30,7 @@ public class ScoreStrategy {
 
     private static final Pattern QUARTER_WEIGHT_PATTERN = Pattern.compile("aafp_patients|medlineplus_0");
 
-    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    private static final int THIS_YEAR = ZonedDateTime.now(AMERICA_LA).getYear();
 
     private static final int TITLE_AND_DESC = 30;
 
@@ -172,14 +175,12 @@ public class ScoreStrategy {
     }
 
     private boolean isExactTitle(final Pattern queryTermPattern, final String title) {
-        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern + "\\W?)$",
-                Pattern.CASE_INSENSITIVE);
+        Pattern exactTitlePattern = Pattern.compile("^(" + queryTermPattern + "\\W?)$", Pattern.CASE_INSENSITIVE);
         return exactTitlePattern.matcher(title).matches();
     }
 
     private boolean titleBeginsWithTerm(final Pattern queryTermPattern, final String title) {
-        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern + ").*",
-                Pattern.CASE_INSENSITIVE);
+        Pattern titleBeginsWithPattern = Pattern.compile("^(" + queryTermPattern + ").*", Pattern.CASE_INSENSITIVE);
         return titleBeginsWithPattern.matcher(title).matches();
     }
 }

@@ -20,7 +20,7 @@ public class ActiveSunetidDataBinder implements DataBinder {
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        Boolean isActive = null;
+        Boolean isActive;
         User user = ModelUtil.getObject(model, Model.USER, User.class);
         if (user != null && user.isStanfordUser()) {
             HttpSession session = request.getSession();

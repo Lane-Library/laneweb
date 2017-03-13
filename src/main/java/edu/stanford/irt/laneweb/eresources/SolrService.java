@@ -1,10 +1,11 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ public class SolrService {
 
     public static final String FACETS_SEPARATOR = "::";
 
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
+
     private static final String AND = " AND ";
 
     private static final String DATE_QUERY_PREFIX = "date:[";
@@ -46,13 +49,15 @@ public class SolrService {
 
     private static final int PAGE_SIZE = 10;
 
-    private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    private static final int THIS_YEAR = ZonedDateTime.now(AMERICA_LA).getYear();
 
     private static final int PAST_FIVE_YEARS = THIS_YEAR - 5;
 
     private static final int PAST_TEN_YEARS = THIS_YEAR - 10;
 
     private static final int PAST_YEAR = THIS_YEAR - 1;
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMdd");
 
     private SolrQueryParser parser;
 
@@ -89,7 +94,7 @@ public class SolrService {
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
         String facetFilters = facetStringToFilters(filters);
         String cleanQuery = this.parser.parse(query);
-        String monthDay = (new SimpleDateFormat("MMdd")).format(new Date());
+        String monthDay = LocalDate.now(AMERICA_LA).format(this.formatter);
         FacetOptions facetOptions = new FacetOptions();
         facetOptions.addFacetOnFlieldnames(FACET_FIELDS);
         facetOptions.setFacetMinCount(1);

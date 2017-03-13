@@ -8,7 +8,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -55,9 +54,8 @@ public class PersistentLoginController {
     public String disablePersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.USER) final User user,
             final String url,
-            final HttpServletRequest request,
             final HttpServletResponse response) {
-        resetCookies(request, response);
+        resetCookies(response);
         return getRedirectURL(url);
     }
 
@@ -81,7 +79,7 @@ public class PersistentLoginController {
         if (isActiveSunetId) {
             checkUserAndSetCookies(user, request, response);
         } else {
-            resetCookies(request, response);
+            resetCookies(response);
         }
         return getRedirectURL(url);
     }
@@ -100,7 +98,7 @@ public class PersistentLoginController {
         if (null != user) {
             setCookies(request, response, user);
         } else {
-            resetCookies(request, response);
+            resetCookies(response);
         }
     }
 
@@ -118,7 +116,7 @@ public class PersistentLoginController {
         return sb.toString();
     }
 
-    private void resetCookies(final HttpServletRequest request, final HttpServletResponse response) {
+    private void resetCookies(final HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
         cookie.setMaxAge(0);
@@ -146,9 +144,8 @@ public class PersistentLoginController {
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.SECOND, PERSISTENT_LOGIN_DURATION);
-            cookie = new Cookie(CookieName.EXPIRATION.toString(), String.valueOf(calendar.getTime().getTime()));
+            long expires = System.currentTimeMillis() + PERSISTENT_LOGIN_DURATION * 1000;
+            cookie = new Cookie(CookieName.EXPIRATION.toString(), Long.toString(expires));
             cookie.setPath("/");
             cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
             response.addCookie(cookie);
