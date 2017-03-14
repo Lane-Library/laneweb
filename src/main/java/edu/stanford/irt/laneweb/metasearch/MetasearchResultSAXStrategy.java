@@ -39,10 +39,11 @@ public class MetasearchResultSAXStrategy extends AbstractResultSAXStrategy<Resul
         Query query = result.getQuery();
         SearchStatus status = result.getStatus();
         if (status != null) {
-            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
+            atts.addAttribute("", STATUS, STATUS, CDATA, status.toString().toLowerCase());
         }
         try {
             xmlConsumer.startDocument();
+            xmlConsumer.startPrefixMapping("", NAMESPACE);
             xmlConsumer.startElement(NAMESPACE, SEARCH, SEARCH, atts);
             handleElement(xmlConsumer, QUERY, query.getSearchText());
             for (Result child : children) {
