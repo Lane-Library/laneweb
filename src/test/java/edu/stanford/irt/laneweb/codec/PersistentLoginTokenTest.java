@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
+import java.time.Duration;
+
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.user.User;
@@ -30,14 +32,14 @@ public class PersistentLoginTokenTest {
 
     @Test
     public void testIsValidForOneDay() {
-        long oneDay = 1000 * 60 * 60 * 24;
+        long oneDay =  Duration.ofDays(1).toMillis();
         assertTrue(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(oneDay, 0));
     }
 
     @Test
     public void testIsValidForTwoWeeksAndADay() {
-        long woWeeksAndADay = 1000 * 60 * 60 * 24 * 7 * 2 + (1000 * 60 * 60 * 24);
-        assertFalse(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(woWeeksAndADay, 0));
+        long twoWeeksAndADay = Duration.ofDays(14).plus(Duration.ofDays(1)).toMillis();
+        assertFalse(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(twoWeeksAndADay, 0));
     }
 
     @Test(expected = NullPointerException.class)

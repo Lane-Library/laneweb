@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.time.Duration;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -15,7 +16,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
 
     private static final Logger LOG = LoggerFactory.getLogger("error handler");
 
-    private static final int ONE_DAY = 1000 * 60 * 60 * 24;
+    private static final long ONE_DAY = Duration.ofDays(1).toMillis();
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {

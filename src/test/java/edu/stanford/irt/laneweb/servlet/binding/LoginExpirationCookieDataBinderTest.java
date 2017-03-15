@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue())
-                .andReturn(Long.toString(System.currentTimeMillis() + (1000 * 60 * 60 * 24) + 100));
+                .andReturn(Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
         assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
@@ -65,7 +66,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
         expect(this.cookie.getValue())
-                .andReturn(Long.toString(System.currentTimeMillis() + (1000 * 60 * 60 * 24) + 100));
+                .andReturn(Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
         assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));

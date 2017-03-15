@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Duration;
 
 import javax.cache.Cache;
 
@@ -83,8 +84,6 @@ public class CacheSourceResolver implements SourceResolver {
     private static final int BUFFER_SIZE = 1024;
 
     private static final Logger log = LoggerFactory.getLogger(CacheSourceResolver.class);
-
-    private static final long MILLISECONDS_PER_MINUTE = 1000L * 60L;
 
     private Cache<Serializable, CachedResponse> cache;
 
@@ -165,7 +164,7 @@ public class CacheSourceResolver implements SourceResolver {
         Source source = this.sourceResolver.resolveURI(uri);
         byte[] bytes = getBytesFromSource(source);
         long minutes = Long.parseLong(schemeSpecificPart.substring(0, colon));
-        Validity validity = new ExpiresValidity(minutes * MILLISECONDS_PER_MINUTE);
+        Validity validity = new ExpiresValidity(Duration.ofMinutes(minutes).toMillis());
         return new CachedResponse(validity, bytes);
     }
 }

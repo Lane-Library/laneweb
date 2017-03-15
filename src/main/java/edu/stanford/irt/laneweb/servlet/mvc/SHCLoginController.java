@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +37,7 @@ public class SHCLoginController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SHCLoginController.class);
 
-    private static final int ONE_MINUTE = 1000 * 60;
+    private static final long ONE_MINUTE = Duration.ofDays(1).toMillis();
 
     private static final String TARGET_URL = "/portals/shc.html?sourceid=shc&u=";
 

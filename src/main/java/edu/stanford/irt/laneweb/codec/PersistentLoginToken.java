@@ -1,12 +1,13 @@
 package edu.stanford.irt.laneweb.codec;
 
+import java.time.Duration;
 import java.util.Objects;
 
 import edu.stanford.irt.laneweb.user.User;
 
 public class PersistentLoginToken {
 
-    private static final int TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
+    private static final long TWO_WEEKS = Duration.ofDays(14).toMillis();
 
     private long dateValue;
 

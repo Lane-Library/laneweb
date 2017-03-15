@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.email;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import edu.stanford.irt.laneweb.model.Model;
 public class SpamFilter {
 
     // one hour
-    private static final long COUNT_CHECK_INTERVAL = 1000L * 60L * 60L;
+    private static final long COUNT_CHECK_INTERVAL = Duration.ofHours(1).toMillis();
 
     private static final int MAX_MAILS_PER_IP = 10;
 
