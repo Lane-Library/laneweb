@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator
         implements CacheablePipelineComponent, ParametersAware, ModelAware {
 
     /** the default cache expiration time, 20 minutes */
-    private static final long DEFAULT_EXPIRES = 1000L * 60L * 20L;
+    private static final long DEFAULT_EXPIRES = Duration.ofMinutes(20).toMillis();
 
     private String componentType;
 

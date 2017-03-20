@@ -8,6 +8,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +32,10 @@ import edu.stanford.irt.laneweb.user.User;
 @Controller
 public class PersistentLoginController {
 
+    private static final long DURATION_MILLIS = Duration.ofDays(14).toMillis();
+
     // login duration is two weeks:
-    private static final int PERSISTENT_LOGIN_DURATION = 3600 * 24 * 7 * 2;
+    private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
@@ -141,13 +144,13 @@ public class PersistentLoginController {
             PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
             Cookie cookie = new Cookie(CookieName.USER.toString(), token.getEncryptedValue());
             cookie.setPath("/");
-            cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
+            cookie.setMaxAge(DURATION_SECONDS);
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
-            long expires = System.currentTimeMillis() + PERSISTENT_LOGIN_DURATION * 1000;
+            long expires = System.currentTimeMillis() + DURATION_MILLIS;
             cookie = new Cookie(CookieName.EXPIRATION.toString(), Long.toString(expires));
             cookie.setPath("/");
-            cookie.setMaxAge(PERSISTENT_LOGIN_DURATION);
+            cookie.setMaxAge(DURATION_SECONDS);
             response.addCookie(cookie);
         }
     }

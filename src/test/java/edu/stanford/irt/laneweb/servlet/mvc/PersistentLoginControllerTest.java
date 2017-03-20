@@ -10,6 +10,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.Duration;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -110,7 +112,7 @@ public class PersistentLoginControllerTest {
         assertEquals(redirect, "redirect:/test.html");
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
-        assertTrue(System.currentTimeMillis() + (3600 * 24 * 7 * 2 * 1000) - 100 < Long
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(14).minus(Duration.ofMillis(100)).toMillis() < Long
                 .valueOf(cookie2.getValue().getValue()));
         assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
@@ -133,7 +135,7 @@ public class PersistentLoginControllerTest {
         assertEquals(redirect, "redirect:/myaccounts.html");
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
-        assertTrue(System.currentTimeMillis() + (3600 * 24 * 7 * 2 * 1000) - 100 < Long
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(14).minus(Duration.ofMillis(100)).toMillis() < Long
                 .valueOf(cookie2.getValue().getValue()));
         assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
@@ -170,7 +172,7 @@ public class PersistentLoginControllerTest {
                 this.user, this.url, this.request, this.response));
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
-        assertTrue(System.currentTimeMillis() + (3600 * 24 * 7 * 2 * 1000) - 100 < Long
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(14).minus(Duration.ofMillis(100)).toMillis() < Long
                 .valueOf(cookie2.getValue().getValue()));
         assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,

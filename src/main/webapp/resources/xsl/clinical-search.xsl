@@ -39,7 +39,7 @@
         </div>
     </xsl:template>
     
-    <xsl:template match="h:a[@class='clinical-facet'][$facet][substring-after(@href,'facet=') = $facet]/h:i">
+    <xsl:template match="h:a[@class='clinical-facet'][$facet][substring-after(@href,'facet=') = $facet]/h:i[1]">
         <i class="fa fa-check-circle fa-lg"></i>
     </xsl:template>
     

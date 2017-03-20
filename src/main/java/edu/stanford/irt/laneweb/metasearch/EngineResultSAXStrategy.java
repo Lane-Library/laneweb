@@ -39,9 +39,9 @@ public class EngineResultSAXStrategy extends AbstractResultSAXStrategy<Result> {
         SearchStatus status = result.getStatus();
         String time = result.getTime();
         String url = result.getURL();
-        atts.addAttribute(NAMESPACE, ID, ID, CDATA, id);
+        atts.addAttribute("", ID, ID, CDATA, id);
         if (status != null) {
-            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
+            atts.addAttribute("", STATUS, STATUS, CDATA, status.toString().toLowerCase());
         }
         try {
             xmlConsumer.startElement(NAMESPACE, ENGINE, ENGINE, atts);
@@ -53,7 +53,7 @@ public class EngineResultSAXStrategy extends AbstractResultSAXStrategy<Result> {
             for (Result child : children) {
                 this.resourceSAXStrategy.toSAX(child, xmlConsumer);
             }
-            xmlConsumer.endElement(NAMESPACE, ENGINE, ENGINE);
+            xmlConsumer.endElement("", ENGINE, ENGINE);
         } catch (SAXException e) {
             throw new LanewebException(e);
         }

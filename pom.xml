@@ -7,7 +7,7 @@
         <version>23</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.24-SNAPSHOT</version>
+    <version>3.3.25-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -79,7 +79,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.63.0</version>
+            <version>1.65.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -101,7 +101,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.7.0-14</version>
+            <version>9.7.0-15</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>

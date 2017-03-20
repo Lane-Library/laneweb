@@ -6,12 +6,13 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
 
 public class Ticket implements Serializable {
 
-    private static final int ONE_SECOND = 1000;
+    private static final long ONE_SECOND = Duration.ofSeconds(1).toMillis();
 
-    private static final int ONE_MINUTE = ONE_SECOND * 60;
+    private static final long ONE_MINUTE = Duration.ofMinutes(1).toMillis();
 
     private static final long serialVersionUID = 1L;
 
