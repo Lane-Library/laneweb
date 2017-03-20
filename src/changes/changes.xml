@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-03-20" version="3.3.24" description="3.3.24 bug fix release">
+            <action date="2017-03-15" dev="ceyates" issue="132667" type="update">
+                refactor time calculations to use java.time.Duration 
+            </action>
+            <action date="2017-03-13" dev="ryanmax" issue="132608" type="fix">
+                clinical search: cost, prevention and clinical trials facets often produces the same results
+            </action>
+            <action date="2017-03-13" dev="ryanmax" issue="132607" type="fix">
+                clinical search: selected facet gets incorrect icon
+            </action>
+        </release>
         <release date="2017-03-13" version="3.3.23" description="3.3.23 bug fix release">
             <action date="2017-03-10" dev="ceyates" issue="132554" type="update">
                 deprecate then remove uses of java.util.Date
