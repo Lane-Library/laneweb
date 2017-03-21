@@ -36,7 +36,9 @@
                 update: function(updates) {
                     for (var bibid in updates) {
                         if (updates[bibid]) {
-                            imageMap[bibid].src = updates[bibid];
+                            // case 132771 use protocol relative urls for images
+                            // from the bookcover database (substring(5))
+                            imageMap[bibid].src = updates[bibid].substring(5);
                             lane.activate(imageMap[bibid], "bookcover");
                         }
                         delete imageMap[bibid];
