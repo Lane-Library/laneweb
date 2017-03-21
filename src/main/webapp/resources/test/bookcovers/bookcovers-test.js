@@ -13,7 +13,7 @@ var bookcoversTestCase = new Y.Test.Case({
             }
             }
         });
-        Y.Assert.areEqual("http://www.example.com/src1", document.querySelector("img[data-bibid='1']").src)
+        Y.Assert.areEqual("//www.example.com/src1", document.querySelector("img[data-bibid='1']").getAttribute("src"))
     },
 
     "test viewport:scrolled": function() {
@@ -24,7 +24,7 @@ var bookcoversTestCase = new Y.Test.Case({
             }
             }
         });
-        Y.Assert.areEqual("http://www.example.com/src2", document.querySelector("img[data-bibid='2']").src)
+        Y.Assert.areEqual("//www.example.com/src2", document.querySelector("img[data-bibid='2']").getAttribute("src"))
     }
 });
 
