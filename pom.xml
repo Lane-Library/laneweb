@@ -267,21 +267,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-<<<<<<< HEAD
-=======
-            <groupId>com.oracle</groupId>
-            <artifactId>ons</artifactId>
-            <version>12.2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ucp</artifactId>
-            <version>12.2.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
->>>>>>> master
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
             <version>3.8.0</version>
