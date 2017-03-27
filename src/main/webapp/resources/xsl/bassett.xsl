@@ -20,8 +20,8 @@
 			<xsl:value-of select="$large-image-directory" />
 		</xsl:if>
 	</xsl:variable>
-	<xsl:variable name="current-page"><xsl:value-of select="number(/doc/b:bassetts/b:current-page/@b:value)" /></xsl:variable>
-	<xsl:variable name="total-pages"><xsl:value-of select="/doc/b:bassetts/b:total-pages/@b:value" /></xsl:variable>
+	<xsl:variable name="current-page"><xsl:value-of select="number(/doc/b:bassetts/b:current-page/@value)" /></xsl:variable>
+	<xsl:variable name="total-pages"><xsl:value-of select="/doc/b:bassetts/b:total-pages/@value" /></xsl:variable>
 
 	<xsl:variable name="query-string">
 		<xsl:if test="$query != ''">q=<xsl:value-of select="$query" />
@@ -72,7 +72,7 @@
 	<xsl:template match="h:h6[@id='bassett-number']">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()|child::node()" />
-			<xsl:value-of select="/doc/b:bassetts/b:bassett/@b:bassett_number" />
+			<xsl:value-of select="/doc/b:bassetts/b:bassett/@bassett_number" />
 		</xsl:copy>
 	</xsl:template>
 
@@ -131,7 +131,7 @@
 							<a>
 								<xsl:attribute name="href">
                                     <xsl:text>/biomed-resources/bassett/bassettView.html?bn=</xsl:text><xsl:value-of
-									select="./@b:bassett_number" />
+									select="./@bassett_number" />
                                 </xsl:attribute>
 								<img>
 									<xsl:attribute name="title">
@@ -149,7 +149,7 @@
                                         </xsl:choose>
                                     </xsl:attribute>
 									<xsl:attribute name="alt">
-                                        <xsl:text>bassett Number </xsl:text><xsl:value-of select="./@b:bassett_number" />
+                                        <xsl:text>bassett Number </xsl:text><xsl:value-of select="./@bassett_number" />
                                     </xsl:attribute>
 								</img>
 							</a>
@@ -162,10 +162,10 @@
                             </xsl:attribute>
 								<xsl:attribute name="href">
                                 <xsl:text>/biomed-resources/bassett/bassettView.html?bn=</xsl:text><xsl:value-of
-									select="./@b:bassett_number" />
+									select="./@bassett_number" />
                             </xsl:attribute>
 								<xsl:text>#</xsl:text>
-								<xsl:value-of select="./@b:bassett_number" />
+								<xsl:value-of select="./@bassett_number" />
 							</a>
 						</div>
 					</div>
@@ -243,7 +243,7 @@
 	<xsl:template match="h:a[starts-with(@rel,'popup')]/@href">
 		<xsl:attribute name="href">
         <xsl:text>/biomed-resources/bassett/raw/bassettLargerView.html?t=largerView&amp;bn=</xsl:text>
-        <xsl:value-of select="/doc/b:bassetts/b:bassett/@b:bassett_number" />
+        <xsl:value-of select="/doc/b:bassetts/b:bassett/@bassett_number" />
     </xsl:attribute>
 	</xsl:template>
 
@@ -305,7 +305,7 @@
 
 	<xsl:template match="h:input[@name='page']/@value">
 		<xsl:attribute name="value">
-    	<xsl:value-of select="/doc/b:bassetts/b:current-page/@b:value" />
+    	<xsl:value-of select="/doc/b:bassetts/b:current-page/@value" />
     </xsl:attribute>
 	</xsl:template>
 
@@ -315,17 +315,17 @@
 	<xsl:template match="h:label[@for='pages']">
 		<xsl:copy>
 			<xsl:text> for </xsl:text>
-			<xsl:value-of select="/doc/b:bassetts/b:total-pages/@b:value" />
+			<xsl:value-of select="/doc/b:bassetts/b:total-pages/@value" />
 		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="h:span[@id='searchResults']">
 		<xsl:copy>
-			<xsl:value-of select="/doc/b:bassetts/b:image-number-low/@b:value" />
+			<xsl:value-of select="/doc/b:bassetts/b:image-number-low/@value" />
 			<xsl:text> to </xsl:text>
-			<xsl:value-of select="/doc/b:bassetts/b:image-number-up/@b:value" />
+			<xsl:value-of select="/doc/b:bassetts/b:image-number-up/@value" />
 			<xsl:text> of </xsl:text>
-			<xsl:value-of select="/doc/b:bassetts/b:total-images/@b:value" />
+			<xsl:value-of select="/doc/b:bassetts/b:total-images/@value" />
 			<xsl:text> images</xsl:text>
 		</xsl:copy>
 	</xsl:template>
@@ -366,13 +366,13 @@
 		<xsl:attribute name="href">
         <xsl:text>/biomed-resources/bassett/bassettsView.html?</xsl:text>
         <xsl:value-of select="$query-string" />
-        <xsl:text>&amp;page=</xsl:text><xsl:value-of select="/doc/b:bassetts/b:previous-page/@b:value"></xsl:value-of>
+        <xsl:text>&amp;page=</xsl:text><xsl:value-of select="/doc/b:bassetts/b:previous-page/@value"></xsl:value-of>
     </xsl:attribute>
 	</xsl:template>
 
 	<xsl:variable name="upper-page-class">
 		<xsl:choose>
-			<xsl:when test="/doc/b:bassetts/b:total-pages/@b:value = $current-page">
+			<xsl:when test="/doc/b:bassetts/b:total-pages/@value = $current-page">
 				<xsl:text>pagingButton disabled no-bookmarking</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
@@ -399,7 +399,7 @@
 		<xsl:attribute name="href">
         <xsl:text>/biomed-resources/bassett/bassettsView.html?</xsl:text>
         <xsl:value-of select="$query-string" />
-       		<xsl:text>&amp;page=</xsl:text><xsl:value-of select="/doc/b:bassetts/b:next-page/@b:value"></xsl:value-of>
+       		<xsl:text>&amp;page=</xsl:text><xsl:value-of select="/doc/b:bassetts/b:next-page/@value"></xsl:value-of>
     </xsl:attribute>
 	</xsl:template>
 
