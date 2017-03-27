@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-03-27" version="3.3.25" description="3.3.25 bug fix release">
+       	    <action date="2017-03-27" dev="alainb" issue="132852" type="fix">
+                replace @b:bassett-number by @bassett-number 
+            </action>
+ 		</release>
         <release date="2017-03-20" version="3.3.24" description="3.3.24 bug fix release">
             <action date="2017-03-15" dev="ceyates" issue="132667" type="update">
                 refactor time calculations to use java.time.Duration 
