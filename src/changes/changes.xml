@@ -8,8 +8,11 @@
     </properties>
     <body>
         <release date="2017-03-27" version="3.3.25" description="3.3.25 bug fix release">
-       	    <action date="2017-03-27" dev="alainb" issue="132852" type="fix">
-                replace @b:bassett-number by @bassett-number 
+            <action date="2017-03-27" dev="alainb" issue="132852" type="fix">
+                Problem viewing Bassett images
+            </action>
+            <action date="2017-03-21" dev="ceyates" issue="132771" type="update">
+                use protocol relative urls for images from the bookcover database
             </action>
  		</release>
         <release date="2017-03-20" version="3.3.24" description="3.3.24 bug fix release">
