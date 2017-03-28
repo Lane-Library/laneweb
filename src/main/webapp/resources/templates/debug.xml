@@ -184,45 +184,9 @@
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/portals/index.html">Specialty Portals</a>
-                        <ul class="dropdown-content nav-menu-content portals">
-                            <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
-                            <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
-                            <li><a href="/portals/peds.html">Pediatrics</a></li>
-                            <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
-                            <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
-                            <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
-                            <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
-                            <li><a href="/portals/medicalEd.html">Medical Education</a></li>
-                            <li><a href="/portals/pmr.html">Physical &amp; Rehabilitation Med</a></li>
-                            <li><a href="/portals/cardiology.html">Cardiology</a></li>
-                            <li><a href="/portals/cultural.html">Multicultural Health</a></li>
-                            <li><a href="/portals/picu.html">PICU</a></li>
-                            <li><a href="/portals/clinical.html">Clinical</a></li>
-                            <li><a href="/portals/neurology.html">Neurology</a></li>
-                            <li><a href="/portals/psychiatry.html">Psychiatry</a></li>
-                            <li><a href="/portals/comp-med.html">Comparative Medicine</a></li>
-                            <li><a href="/portals/nursing.html">Nursing</a></li>
-                            <li><a href="/portals/pulmonary.html">Pulmonary</a></li>
-                            <li><a href="/portals/patient.html">Consumer Health</a></li>
-                            <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
-                            <li><a href="/portals/radiology.html">Radiology</a></li>
-                            <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
-                            <li><a href="/portals/oncology.html">Oncology</a></li>
-                            <li><a href="/portals/reference.html">Reference Desk</a></li>
-                            <li><a href="/portals/ihealth.html">Global Health</a></li>
-                            <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
-                            <li><a href="/portals/shc.html">SHC</a></li>
-                            <li><a href="/portals/careercenter.html">Graduate Career Collection</a></li>
-                            <li><a href="http://trachea.stanford.edu/">Otolaryngology <i class="fa fa-external-link"></i></a></li>
-                            <li><a href="/portals/spiritual.html">Spiritual Care</a></li>
-                            <li><a href="/portals/hematology.html">Hematology</a></li>
-                            <li><a href="/portals/palliative-care.html">Palliative Care</a></li>
-                            <li><a href="/portals/gen-surgery.html">Surgery</a></li>
-                            <li><a href="/portals/rheumatology.html">Immunology/Rheumatology</a></li>
-                            <li><a href="/portals/pathology.html">Pathology</a></li>
-                            <li><a href="/portals/pcap.html">PCAP</a></li>
-                            <li><a href="/portals/infectious-diseases.html">Infectious Diseases</a></li>
-                        </ul>
+                        <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-portals.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
