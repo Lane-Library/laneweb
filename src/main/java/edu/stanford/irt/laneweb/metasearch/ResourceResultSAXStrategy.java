@@ -31,9 +31,9 @@ public class ResourceResultSAXStrategy extends AbstractResultSAXStrategy<Result>
     public void toSAX(final Result result, final XMLConsumer xmlConsumer) {
         AttributesImpl atts = new AttributesImpl();
         SearchStatus status = result.getStatus();
-        atts.addAttribute("", ID, ID, CDATA, result.getId());
+        atts.addAttribute(NAMESPACE, ID, ID, CDATA, result.getId());
         if (status != null) {
-            atts.addAttribute("", STATUS, STATUS, CDATA, status.toString().toLowerCase());
+            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
         }
         try {
             xmlConsumer.startElement(NAMESPACE, RESOURCE, RESOURCE, atts);
