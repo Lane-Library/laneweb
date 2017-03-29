@@ -56,7 +56,9 @@ public class EngineResultSAXStrategyTest {
         this.resourceSAXStrategy.toSAX(this.result, this.xmlConsumer);
         replay(this.result, this.resourceSAXStrategy);
         this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", AbstractResultSAXStrategy.NAMESPACE);
         this.strategy.toSAX(this.result, this.xmlConsumer);
+        this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "EngineResultSAXStrategyTest-toSAX.xml"),
                 this.xmlConsumer.getStringValue());
@@ -76,7 +78,9 @@ public class EngineResultSAXStrategyTest {
         this.resourceSAXStrategy.toSAX(this.result, this.xmlConsumer);
         replay(this.result, this.resourceSAXStrategy);
         this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", AbstractResultSAXStrategy.NAMESPACE);
         this.strategy.toSAX(this.result, this.xmlConsumer);
+        this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "EngineResultSAXStrategyTest-toSAXNullStatus.xml"),
                 this.xmlConsumer.getStringValue());

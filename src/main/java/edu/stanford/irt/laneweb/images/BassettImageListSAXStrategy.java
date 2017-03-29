@@ -73,7 +73,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
 
     private void handleEresource(final XMLConsumer xmlConsumer, final BassettImage bassett) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
-        attributes.addAttribute("", BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
+        attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
         XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT, attributes);
         XMLUtils.startElement(xmlConsumer, NAMESPACE, TITLE);
         XMLUtils.data(xmlConsumer, bassett.getTitle());
@@ -125,7 +125,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
     private void handlePagingElement(final XMLConsumer xmlConsumer, final String name, final Number value)
             throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
-        attributes.addAttribute("", VALUE, VALUE, "CDATA", String.valueOf(value));
+        attributes.addAttribute(NAMESPACE, VALUE, VALUE, "CDATA", String.valueOf(value));
         XMLUtils.startElement(xmlConsumer, NAMESPACE, name, attributes);
         XMLUtils.endElement(xmlConsumer, NAMESPACE, name);
     }

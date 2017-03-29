@@ -22,15 +22,14 @@ import edu.stanford.irt.solr.BassettImage;
 
 public class BassettImageListSAXStrategyTest {
 
-  
+    private FacetPage<BassettImage> facetPage;
+
     private BassettImage image;
 
     private BassettImageListSAXStrategy strategy;
 
     private TestXMLConsumer xmlConsumer;
 
-    FacetPage<BassettImage> facetPage;
-    
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
@@ -52,7 +51,7 @@ public class BassettImageListSAXStrategyTest {
         expect(this.image.getDescription()).andReturn("description").times(2);
         expect(this.facetPage.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.facetPage.getTotalElements()).andReturn(1L);
-        expect(this.facetPage.getTotalPages()).andReturn(1).times(2);  
+        expect(this.facetPage.getTotalPages()).andReturn(1).times(2);
         expect(this.facetPage.getNumber()).andReturn(1).times(2);
         expect(this.facetPage.getSize()).andReturn(1);
         expect(this.facetPage.getNumberOfElements()).andReturn(1);
@@ -77,7 +76,7 @@ public class BassettImageListSAXStrategyTest {
         expect(this.image.getEnglishLegend()).andReturn("legend").times(2);
         expect(this.facetPage.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.facetPage.getTotalElements()).andReturn(1L);
-        expect(this.facetPage.getTotalPages()).andReturn(1).times(2);  
+        expect(this.facetPage.getTotalPages()).andReturn(1).times(2);
         expect(this.facetPage.getNumber()).andReturn(1).times(2);
         expect(this.facetPage.getSize()).andReturn(1);
         expect(this.facetPage.getNumberOfElements()).andReturn(1);
@@ -85,8 +84,10 @@ public class BassettImageListSAXStrategyTest {
         expect(this.facetPage.isLast()).andReturn(true);
         replay(this.image, this.facetPage);
         this.strategy.toSAX(this.facetPage, this.xmlConsumer);
-        assertEquals(this.xmlConsumer.getExpectedResult(this,
-                "BassettImageListSAXStrategyTest-testToSAXNullDescription.xml"), this.xmlConsumer.getStringValue());
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "BassettImageListSAXStrategyTest-testToSAXNullDescription.xml"),
+                this.xmlConsumer.getStringValue());
         verify(this.image);
     }
 
@@ -102,14 +103,13 @@ public class BassettImageListSAXStrategyTest {
         expect(this.image.getDescription()).andReturn("description").times(2);
         expect(this.facetPage.getContent()).andReturn(Collections.singletonList(this.image));
         expect(this.facetPage.getTotalElements()).andReturn(1L);
-        expect(this.facetPage.getTotalPages()).andReturn(1).times(2);  
+        expect(this.facetPage.getTotalPages()).andReturn(1).times(2);
         expect(this.facetPage.getNumber()).andReturn(1).times(2);
         expect(this.facetPage.getSize()).andReturn(1);
         expect(this.facetPage.getNumberOfElements()).andReturn(1);
         expect(this.facetPage.isFirst()).andReturn(true);
         expect(this.facetPage.isLast()).andReturn(true);
         replay(this.image, this.facetPage);
-       
         this.strategy.toSAX(this.facetPage, this.xmlConsumer);
         assertEquals(
                 this.xmlConsumer.getExpectedResult(this, "BassettImageListSAXStrategyTest-testToSAXNullLegend.xml"),

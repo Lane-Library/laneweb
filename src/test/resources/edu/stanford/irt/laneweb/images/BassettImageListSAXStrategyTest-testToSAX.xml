@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bassetts xmlns="http://lane.stanford.edu/bassett/ns">
-   <total-images value="1"/>
-   <total-pages value="1"/>
-   <current-page value="2"/>
-   <previous-page value="1"/>
-   <next-page value="1"/>
-   <image-number-low value="2"/>
-   <image-number-up value="2"/>
-   <bassett bassett_number="bn">
+   <total-images xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="1"/>
+   <total-pages xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="1"/>
+   <current-page xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="2"/>
+   <previous-page xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="1"/>
+   <next-page xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="1"/>
+   <image-number-low xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="2"/>
+   <image-number-up xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:value="2"/>
+   <bassett xmlns:_1="http://lane.stanford.edu/bassett/ns" _1:bassett_number="bn">
       <title>title</title>
       <bassett_image>image</bassett_image>
       <diagram_image>diagram</diagram_image>

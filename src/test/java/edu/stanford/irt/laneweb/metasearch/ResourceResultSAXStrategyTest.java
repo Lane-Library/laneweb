@@ -60,7 +60,9 @@ public class ResourceResultSAXStrategyTest {
         this.contentSAXStrategy.toSAX(this.contentResult, this.xmlConsumer);
         replay(this.result, this.contentSAXStrategy);
         this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", AbstractResultSAXStrategy.NAMESPACE);
         this.strategy.toSAX(this.result, this.xmlConsumer);
+        this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAX.xml"),
                 this.xmlConsumer.getStringValue());
@@ -80,7 +82,9 @@ public class ResourceResultSAXStrategyTest {
         this.contentSAXStrategy.toSAX(this.contentResult, this.xmlConsumer);
         replay(this.result, this.contentSAXStrategy);
         this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", AbstractResultSAXStrategy.NAMESPACE);
         this.strategy.toSAX(this.result, this.xmlConsumer);
+        this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAXNullStatus.xml"),
                 this.xmlConsumer.getStringValue());

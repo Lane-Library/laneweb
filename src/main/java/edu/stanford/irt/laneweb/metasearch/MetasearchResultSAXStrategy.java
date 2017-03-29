@@ -39,17 +39,18 @@ public class MetasearchResultSAXStrategy extends AbstractResultSAXStrategy<Resul
         Query query = result.getQuery();
         SearchStatus status = result.getStatus();
         if (status != null) {
-            atts.addAttribute("", STATUS, STATUS, CDATA, status.toString().toLowerCase());
+            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
         }
         try {
             xmlConsumer.startDocument();
-            xmlConsumer.startPrefixMapping("", NAMESPACE);
+            xmlConsumer.startPrefixMapping("", MetasearchResultSAXStrategy.NAMESPACE);
             xmlConsumer.startElement(NAMESPACE, SEARCH, SEARCH, atts);
             handleElement(xmlConsumer, QUERY, query.getSearchText());
             for (Result child : children) {
                 this.engineSAXStrategy.toSAX(child, xmlConsumer);
             }
             xmlConsumer.endElement(NAMESPACE, SEARCH, SEARCH);
+            xmlConsumer.endPrefixMapping("");
             xmlConsumer.endDocument();
         } catch (SAXException e) {
             throw new LanewebException(e);
