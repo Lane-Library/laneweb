@@ -154,7 +154,7 @@
                     <xsl:text>: </xsl:text>
                     <xsl:value-of select="format-number(number(s:resourceHits),'###,###,##0')"/>
                     <xsl:text> </xsl:text>
-                    <i class="fa fa-external-link"></i></a>
+                </a>
             </div>
         </li>
     </xsl:template>
@@ -187,7 +187,7 @@
                 </xsl:choose>
 
                 <xsl:if test="s:recordType = 'pubmed'">
-                    <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
+	                <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/></a></span>
                 </xsl:if>
 
                 <xsl:if test="s:recordType = 'bib'">
@@ -212,24 +212,21 @@
     </xsl:template>
 
     <xsl:template match="s:recordType">
-        <xsl:text>Source: </xsl:text>
-            <xsl:choose>
-                <xsl:when test=". = 'pubmed'">
-                <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'auth'">
-                <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'bib'">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'class'">
-                <a href="/classes-consult/laneclasses.html">Lane Classes</a>
-                </xsl:when>
-                <xsl:when test=". = 'web' or . = 'laneblog'">
-                <a href="/index.html">Lane Website</a>
-                </xsl:when>
-            </xsl:choose>
+        <xsl:variable name="label"><xsl:text>Source: </xsl:text></xsl:variable>
+        <xsl:choose>
+            <xsl:when test=". = 'pubmed'">
+                <xsl:copy-of select="$label"/><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed</a>
+            </xsl:when>
+            <xsl:when test=". = 'auth'">
+                <xsl:copy-of select="$label"/><a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Community Info</a>
+            </xsl:when>
+            <xsl:when test=". = 'class'">
+                <xsl:copy-of select="$label"/><a href="/classes-consult/laneclasses.html">Lane Classes</a>
+            </xsl:when>
+            <xsl:when test=". = 'web' or . = 'laneblog'">
+                <xsl:copy-of select="$label"/><a href="/index.html">Lane Website</a>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="s:description">
@@ -331,7 +328,7 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
+        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/></a></span>
     </xsl:template>
 
     <xsl:template match="s:contentId"/>
