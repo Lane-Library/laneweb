@@ -10,18 +10,25 @@ public class Link {
 
     private String linkText;
 
+    private String publisher;
+
     private LinkType type;
 
     private String url;
 
+    private String versionText;
+
     public Link(final String label, final LinkType type, final String url, final String linkText,
-            final String additionalText, final String holdingsAndDates) {
+            final String additionalText, final String holdingsAndDates, final String publisher,
+            final String versionText) {
         this.label = label;
         this.type = type;
         this.url = url;
         this.linkText = linkText;
         this.additionalText = additionalText;
+        this.versionText = versionText;
         this.holdingsAndDates = holdingsAndDates;
+        this.publisher = publisher;
     }
 
     public String getAdditionalText() {
@@ -40,6 +47,10 @@ public class Link {
         return this.linkText;
     }
 
+    public String getPublisher() {
+        return this.publisher;
+    }
+
     /**
      * get the LinkType of this Link
      *
@@ -51,6 +62,10 @@ public class Link {
 
     public String getUrl() {
         return this.url;
+    }
+
+    public String getVersionText() {
+        return this.versionText;
     }
 
     @Override
