@@ -139,7 +139,7 @@
                 </div>
             </xsl:if>
 
-            <div class="resultInfo">
+            <div class="resultInfo2">
                 <span class="primaryType"><strong>Article</strong> Digital</span>
                 <xsl:if test="s:description">
                     <span class="descriptionTrigger searchContent"/>
@@ -170,7 +170,7 @@
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')) or position() = 1]"/>
             <xsl:apply-templates select="s:pub-author"/>
             <xsl:apply-templates select="s:pub-text"/>
-            <div class="resultInfo">
+            <div class="resultInfo2">
                 <span class="primaryType">
                     <xsl:apply-templates select="s:primaryType"/>
                 </span>
@@ -204,10 +204,10 @@
 
             </div>
             <xsl:apply-templates select="s:description"/>
+            <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
             </div>
-            <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
         </li>
     </xsl:template>
 
@@ -241,18 +241,33 @@
                 <xsl:apply-templates select="../s:title" />
             </a>
         </div>
-        <xsl:if test="s:holdings-dates">
-            <a href="{s:url}" title="{../s:title}">
-                <xsl:value-of select="s:holdings-dates" />
-            </a>
-        </xsl:if>
-        <xsl:if test="@type = 'getPassword'">
-            <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
-        </xsl:if>
-        <xsl:if test="s:additional-text">
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="s:additional-text" />
-        </xsl:if>
+        <div class="resultInfo2">
+            <xsl:if test="s:holdings-dates">
+                <span>
+                    <a href="{s:url}" title="{../s:title}">
+                        <xsl:value-of select="s:holdings-dates" />
+                    </a>
+                </span>
+            </xsl:if>
+            <xsl:if test="@type = 'getPassword'">
+                <span>
+                    <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
+                </span>
+            </xsl:if>
+            <xsl:if test="s:version-text">
+                <span class="versionText">
+                    <xsl:value-of select="s:version-text" />
+                </span>
+            </xsl:if>
+            <xsl:if test="s:publisher">
+                <span>
+                    <xsl:text>From: </xsl:text>
+                    <i>
+                        <xsl:value-of select="s:publisher" />
+                    </i>
+                </span>
+            </xsl:if>
+        </div>
         <xsl:if test="../s:author">
             <div>
                 <xsl:value-of select="../s:author" />
@@ -262,19 +277,31 @@
 
     <xsl:template match="s:link">
         <xsl:variable name="print" select="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')"/>
-        <div>
-            <xsl:if test="$print">Also available: </xsl:if>
-            <a href="{s:url}" title="{s:label}">
-                <xsl:if test="$print">Print &#8211; </xsl:if>
-                <xsl:value-of select="s:link-text"/>
-            </a>
-            <xsl:if test="s:additional-text">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="s:additional-text"/>
-            </xsl:if>
+        <div class="resultInfo2">
+            <xsl:if test="$print"><span>Also available: </span></xsl:if>
+            <span>
+                <a href="{s:url}" title="{s:label}">
+                    <xsl:if test="$print">Print &#8211; </xsl:if>
+                    <xsl:value-of select="s:link-text"/>
+                </a>
+            </span>
             <xsl:if test="@type = 'getPassword'">
-                <xsl:text> </xsl:text>
-                <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+                <span>
+                    <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
+                </span>
+            </xsl:if>
+            <xsl:if test="s:version-text">
+                <span class="versionText">
+                    <xsl:value-of select="s:version-text" />
+                </span>
+            </xsl:if>
+            <xsl:if test="s:publisher">
+                <span>
+                    <xsl:text>From: </xsl:text>
+                    <i>
+                        <xsl:value-of select="s:publisher" />
+                    </i>
+                </span>
             </xsl:if>
         </div>
     </xsl:template>
