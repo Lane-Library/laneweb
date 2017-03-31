@@ -103,6 +103,7 @@ public class ResourceResultSAXStrategyTest {
         expect(this.result.getException()).andReturn(null);
         expect(this.result.getChildren()).andReturn(Collections.singleton((Result) this.contentResult));
         this.contentSAXStrategy.toSAX(this.contentResult, this.xmlConsumer);
+        c.startPrefixMapping("", "http://irt.stanford.edu/search/2.0");
         c.startElement(eq("http://irt.stanford.edu/search/2.0"), eq("resource"), eq("resource"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.result, this.contentSAXStrategy, c);

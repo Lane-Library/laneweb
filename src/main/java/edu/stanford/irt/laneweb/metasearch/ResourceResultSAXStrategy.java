@@ -36,6 +36,7 @@ public class ResourceResultSAXStrategy extends AbstractResultSAXStrategy<Result>
             atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
         }
         try {
+            xmlConsumer.startPrefixMapping("", NAMESPACE);
             xmlConsumer.startElement(NAMESPACE, RESOURCE, RESOURCE, atts);
             handleElement(xmlConsumer, URL, result.getURL());
             handleElement(xmlConsumer, HITS, result.getHits());
@@ -46,6 +47,7 @@ public class ResourceResultSAXStrategy extends AbstractResultSAXStrategy<Result>
                 this.contentSAXStrategy.toSAX((ContentResult) child, xmlConsumer);
             }
             xmlConsumer.endElement(NAMESPACE, RESOURCE, RESOURCE);
+            xmlConsumer.endPrefixMapping("");
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
