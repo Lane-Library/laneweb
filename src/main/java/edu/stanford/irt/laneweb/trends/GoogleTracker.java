@@ -45,6 +45,10 @@ public class GoogleTracker {
 
     private static final Pattern PLUS_PATTERN = Pattern.compile("\\+");
 
+    private static final int SIXTEEN = 16;
+
+    private static final int THIRTY_TWO = 32;
+
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private URLConnectionFactory connectionFactory;
@@ -53,15 +57,15 @@ public class GoogleTracker {
 
     private String googleAccount;
 
-    private String localHostIp = null;
+    private String localHostIp;
 
     private String referer;
 
     private String userAgent;
 
-    private String utmaCookie = null;
+    private String utmaCookie;
 
-    private String visitorId = null;
+    private String visitorId;
 
     public GoogleTracker() {
         this(new URLConnectionFactory());
@@ -165,12 +169,13 @@ public class GoogleTracker {
         m.update(message.getBytes(StandardCharsets.UTF_8), 0, message.length());
         byte[] sum = m.digest();
         BigInteger messageAsNumber = new BigInteger(1, sum);
-        String md5String = messageAsNumber.toString(16);
+        StringBuilder md5String = new StringBuilder(messageAsNumber.toString(SIXTEEN));
         // Pad to make sure id is 32 characters long.
-        while (md5String.length() < 32) {
-            md5String = "0" + md5String;
+        while (md5String.length() < THIRTY_TWO) {
+            md5String.insert(0, "0");
         }
-        return "0x" + md5String.substring(0, 16);
+        md5String.setLength(SIXTEEN);
+        return md5String.insert(0, "0x").toString();
     }
 
     private String getLocalHostIP() throws IOException {
