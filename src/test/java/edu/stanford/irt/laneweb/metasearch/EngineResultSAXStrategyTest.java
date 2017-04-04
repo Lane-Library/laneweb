@@ -98,6 +98,7 @@ public class EngineResultSAXStrategyTest {
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getTime()).andReturn("time");
         expect(this.result.getURL()).andReturn("url");
+        c.startPrefixMapping("", "http://irt.stanford.edu/search/2.0");
         c.startElement(eq("http://irt.stanford.edu/search/2.0"), eq("engine"), eq("engine"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.result, this.resourceSAXStrategy, c);
