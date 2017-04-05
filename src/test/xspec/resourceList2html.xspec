@@ -37,8 +37,7 @@
                     <span class="primaryType">
                         <strong>Article</strong> Digital</span>
                 </div>
-                <div class="sourceInfo">Source: <a href="">: NaN <i class="fa fa-external-link" />
-                </a>
+                <div class="sourceInfo">Source: <a href="">: NaN </a>
                 </div>
             </li>
         </x:expect>
@@ -60,9 +59,10 @@
     
     <x:scenario label="Scenario for testing template with match 's:recordType">
         <x:context>
-            <s:recordType>recordType</s:recordType>
+            <s:recordType>web</s:recordType>
         </x:context>
-        <x:expect label="TODO: need to test actual types">Source: </x:expect>
+        <x:expect label="TODO: need to more actual types">Source: <a
+         href="/index.html">Lane Website</a></x:expect>
     </x:scenario>
     
     <x:scenario label="Scenario for testing template with match 's:description">
@@ -88,16 +88,21 @@
     <x:scenario label="Scenario for testing template with match 's:link">
         <x:context>
             <s:link/>
-            <s:link><s:label>label</s:label><s:url>url</s:url><s:link-text>link-text</s:link-text><s:additional-text>additional-text</s:additional-text></s:link>
+            <s:link><s:label>label</s:label><s:url>url</s:url><s:link-text>link-text</s:link-text><s:publisher>publisher</s:publisher></s:link>
         </x:context>
         <x:expect label="secondary links should go in a div without Also available: ">
             <div>
-                <a class="primaryLink"
-                    href=""
-                    title="" />
-            </div><div>
-            <a href="url"
-                title="label">link-text</a> additional-text</div>
+               <a class="primaryLink"
+                   href=""
+                   title="" />
+            </div><div class="resultInfo">
+               <span>
+                  <a href="url"
+                       title="label">link-text</a>
+               </span>
+               <span>From: <i>publisher</i>
+               </span>
+            </div>
         </x:expect>
     </x:scenario>
     
@@ -142,8 +147,7 @@
         </x:context>
         <x:expect label="s:contentId starting with PMID: should get a link to pubmed in a span">
             <span>
-            <a href="http://www.ncbi.nlm.nih.gov/pubmed/1234567?otool=stanford">PMID: 1234567 <i class="fa fa-external-link" />
-            </a>
+            <a href="http://www.ncbi.nlm.nih.gov/pubmed/1234567?otool=stanford">PMID: 1234567</a>
         </span>
         </x:expect>
     </x:scenario>

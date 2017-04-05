@@ -73,20 +73,17 @@ li.active .description {
     font-size: 11px;
 }
 .resultInfo span {
-    margin-right: 24px;
-}
-.resultInfo2 span {
     clear: left;
     margin-right: 24px;
 }
-.resultInfo2 span:first-child {
+.resultInfo span:first-child {
     min-width: 103px;
     float:left;
     padding-left: 0;
     padding-right: 10px;
     margin-right: 0;
 }
-.resultInfo2 + div {
+.resultInfo + div {
     clear: left;
 }
 .results-nav {
