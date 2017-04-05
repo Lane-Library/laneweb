@@ -2,11 +2,13 @@ h2 {
     margin-top: 24px;
     margin-bottom: 12px;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 30px;
     font-family: 'Fjord One', serif;
     color: #666666;
     text-align: center;
 }
+
+
 .golfclub span span {
     display: table-cell;
     white-space: nowrap;
@@ -29,16 +31,27 @@ h2 {
     -o-transform: scaleX(-1);
     transform: scaleX(-1);
 }
+
+
 h3, h4 {
     color: #333;
     font-size: 22px;
     line-height: 1.2em;
     margin-bottom: .2em;
-    background-image: url(../images/header-border.png);
-    background-repeat: no-repeat;
-    background-position: bottom left;
     padding-bottom: 12px;
 }
+
+h4:after {
+    content: " ";
+    border-top: 1px solid #d8dbdc;
+    border-top-width: 1px;
+    border-left: 26px solid #d8dbdc;
+    border-left-width: 26px;
+    display: block;
+    height: 4px;
+    margin-top: 10px;
+}
+
 
 h5 {
     color: #8c1515;
