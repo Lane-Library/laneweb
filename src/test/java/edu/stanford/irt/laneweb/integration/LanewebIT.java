@@ -137,15 +137,15 @@ public class LanewebIT {
             // known PMID
             this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
                     .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']//h:a", ns)
-                            .string("PMID: 20428285 "))
+                            .string("PMID: 20428285"))
                     .andExpect(xpath("//h:li", ns).nodeCount(1));
             // usmle OR nbme OR "examination questions"; limited to Lane Catalog and Book Digital
             this.mockMvc
                     .perform(
                             get("/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
                                     .servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']", ns)
-                            .string("Book DigitalLane Catalog Record"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", ns)
+                            .string("Book Digital"))
                     .andExpect(
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", ns)
                                     .exists());
