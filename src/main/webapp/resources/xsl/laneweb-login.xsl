@@ -5,8 +5,8 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="h xs">
     
-    <!-- when web server returns a 403:authorization error, user will not be populated and request will be /error_authz.html (configured in web server) -->
-    <xsl:variable name="unauthorized" as="xs:boolean" select="string-length($userid) &gt; 0 or ends-with($request-uri,'/error_authz.html')"/>
+    <!-- when web server returns 401/403 errors, user will not be populated and request will be /error_authz.html or /error_authn.html (configured in web server) -->
+    <xsl:variable name="unauthorized" as="xs:boolean" select="string-length($userid) &gt; 0 or matches($request-uri,'/error_auth[n|z].html$')"/>
     
     <!-- the next 6 template matches handle the login state and show links depending on that state -->
     <!-- process the list only if off campus -->
