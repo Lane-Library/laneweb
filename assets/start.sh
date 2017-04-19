@@ -30,7 +30,8 @@ mkdir -p $HOME/.ssh/
 cp $DEPLOY_KEY $HOME/.ssh/id_rsa
 chmod 400 $HOME/.ssh/id_rsa
 # git ssh cmd
-export GIT_SSH_COMMAND="ssh -o 'StrictHostKeyChecking no'"
+# why options, see https://www.joedog.org/2012/07/13/ssh-disable-known_hosts-prompt
+export GIT_SSH_COMMAND="ssh -o 'StrictHostKeyChecking=no' -o 'UserKnownHostsFile=/dev/null'"
 
 if [ ! -d "${DEST}" ]; then mkdir -p ${DEST}; fi
 cd $DEST
