@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-04-17" version="3.3.27" description="3.3.27 bug fix release">
+            <action date="2017-04-05" dev="olgary" issue="133044" type="update">
+                headers.css
+            </action>
+        </release>
         <release date="2017-04-03" version="3.3.26" description="3.3.26 bug fix release">
             <action date="2017-03-29" dev="ceyates" issue="132909" type="fix">
                 textbook and bioresearch pages fail to get result counts or urls
