@@ -23,9 +23,9 @@
 	</xsl:template>
  
 	<xsl:template match="lc:event_data">
-	 	<h3>
+	 	<h4>
 			<xsl:value-of select="./lc:event_name/text()" />
-		</h3>
+		</h4>
 		<xsl:apply-templates select="./lc:event_description" /> 
 		<xsl:apply-templates select="./lc:downloads/lc:download_description" /> 
 		 <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[ ./text() = $internal-id]/..">

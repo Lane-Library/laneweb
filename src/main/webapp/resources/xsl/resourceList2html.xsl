@@ -65,7 +65,7 @@
 		          </div>
 		        </div>
                 <xsl:if test="count(s:result) &gt; 0">
-                    <h3 class="eresources">&#160;</h3>
+                    <h4 class="eresources">&#160;</h4>
                 </xsl:if>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
