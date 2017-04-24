@@ -59,7 +59,7 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
 
     private void createHeading(final XMLConsumer xmlConsumer, final String heading) throws SAXException {
         if (heading != null) {
-            createElementWithClass(xmlConsumer, "h3", "eresources", heading);
+            createElementWithClass(xmlConsumer, "h4", "eresources", heading);
         }
     }
 }
