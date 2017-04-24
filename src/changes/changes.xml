@@ -7,6 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-04-24" version="3.3.28" description="3.3.28 bug fix release"/>
         <release date="2017-04-17" version="3.3.27" description="3.3.27 bug fix release">
             <action date="2017-04-05" dev="olgary" issue="133044" type="update">
                 headers.css
