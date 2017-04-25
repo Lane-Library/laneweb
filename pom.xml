@@ -12,9 +12,6 @@
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
     <inceptionYear>2002</inceptionYear>
-    <prerequisites>
-        <maven>3.0.4</maven>
-    </prerequisites>
     <developers>
         <developer>
             <id>ceyates</id>
