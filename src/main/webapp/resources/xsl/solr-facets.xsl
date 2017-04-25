@@ -127,7 +127,7 @@
                 <xsl:choose>
 	                <xsl:when test="$counts > 0 and (/linked-hash-map/entry or string-length($facets) > 0)">
                     <div class="bd">
-                        <h3 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h3>
+                        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h4>
                         <xsl:if test="not($search-mode)">
                             <a class="close fa fa-close"></a>
                         </xsl:if>
