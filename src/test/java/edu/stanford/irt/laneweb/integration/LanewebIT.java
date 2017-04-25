@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
@@ -17,7 +18,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
@@ -59,18 +59,18 @@ public class LanewebIT {
                 .andExpect(redirectedUrl("/secure/redirect/cme?url=url"));
         Map<String, Object> attributes = new HashMap<>();
         attributes.put(Model.USER,
-                new User("ceyates@stanford.edu", "Charles Eresource Yates", "ceyates@stanford.edu", "foo"));
+                new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
         this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
         String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
         String redirect1 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
-                .andExpect(redirectedUrl(redirect1));
+                .andExpect(redirectedUrlPattern(redirect1));
         attributes.put(Model.EMRID, "emrid");
         String redirect2 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=emrid&srcsys=epic90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
-                .andExpect(redirectedUrl(redirect2));
+                .andExpect(redirectedUrlPattern(redirect2));
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
@@ -82,7 +82,7 @@ public class LanewebIT {
         String redirect4 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
                 .header("X-FORWARDED-FOR", "10.250.217.148")).andExpect(status().isFound())
-                .andExpect(redirectedUrl(redirect4));
+                .andExpect(redirectedUrlPattern(redirect4));
     }
 
     @Test
