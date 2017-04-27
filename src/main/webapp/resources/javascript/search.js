@@ -119,13 +119,7 @@ if (document.querySelector(".search-form"))  {
             form.addEventListener("submit", v.submit);
 
             queryInput.addEventListener("focus", v.open);
-            if (Y.UA.ie === 9) {
-                queryInput.addEventListener("change", v.inputChange);
-                queryInput.addEventListener("keyup", v.inputChange);
-                queryInput.addEventListener("paste", v.inputChange);
-            } else {
-                queryInput.addEventListener("input", v.inputChange);
-            }
+            queryInput.addEventListener("input", v.inputChange);
 
             Y.augment(v, Y.EventTarget);
 
