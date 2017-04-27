@@ -10,7 +10,6 @@
      * An editor widget for an individual bookmark.
      * @class BookmarkEditor
      * @uses Widget
-     * @uses TextInput
      * @constructor
      */
     BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {
@@ -49,8 +48,8 @@
          */
         syncUI : function() {
             var srcNode = this.get("srcNode");
-            this._labelInput = new Lane.TextInput(srcNode.one("input[name='label']"), null, true);
-            this._urlInput = new Lane.TextInput(srcNode.one("input[name='url']"), null, true);
+            this._labelInput = srcNode.one("input[name='label']");
+            this._urlInput = srcNode.one("input[name='url']");
             srcNode.one("input[name='url']").after("focus", this._setDefaultUrlInputText, this);
             this._truncateLabel();
         },
@@ -96,15 +95,17 @@
          * @method save
          */
         save : function() {
-            var newlabel = this._labelInput.getValue(),
-            newurl = this._urlInput.getValue(),
+            var newlabel = this._labelInput.get("value"),
+            newurl = this._urlInput.get("value"),
             bookmark = this.get("bookmark");
             if (!newlabel || !newurl) {
                 if (!newlabel) {
-                    this._labelInput.setHintText("required");
+                    this._labelInput.set("placeholder", "required");
+                    this._labelInput.set("required", "required");
                 }
                 if (!newurl) {
-                    this._urlInput.setHintText("required");
+                    this._urlInput.set("placeholder", "required");
+                    this._labelInput.set("required", "required");
                 }
                 return;
             }
@@ -127,14 +128,14 @@
          */
         reset : function() {
             var bookmark = this.get("bookmark");
-            this._labelInput.setHintText("Name");
-            this._urlInput.setHintText("Location");
+            this._labelInput.set("placeholder", "Name");
+            this._urlInput.set("placeholder", "Location");
             if (bookmark) {
-                this._labelInput.setValue(bookmark.getLabel());
-                this._urlInput.setValue(bookmark.getUrl());
+                this._labelInput.set("value", bookmark.getLabel());
+                this._urlInput.set("value", bookmark.getUrl());
             } else {
-                this._labelInput.reset();
-                this._urlInput.reset();
+                this._labelInput.set("value", "");
+                this._urlInput.set("value", "");
             }
         },
 
@@ -197,8 +198,8 @@
          * @private
          */
         _setDefaultUrlInputText : function() {
-            if (this._urlInput.getValue() === "") {
-                this._urlInput.setValue("http://");
+            if (this._urlInput.get("value") === "") {
+                this._urlInput.set("value", "http://");
             }
         }
     }, {
