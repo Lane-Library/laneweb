@@ -123,7 +123,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public HttpRequestHandler staticRequestHandler(final ServletContext servletContext) throws MalformedURLException {
+    public HttpRequestHandler staticRequestHandler(final ServletContext servletContext) {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
         handler.setLocations(
                 Arrays.asList(new Resource[] { new ServletContextResource(servletContext, "/"), new UrlResource(this.liveBase) }));
