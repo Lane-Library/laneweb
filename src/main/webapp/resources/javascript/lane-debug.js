@@ -64,7 +64,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-persistent-login.js",
         "search-indicator.js",
         "lane-bassett.js",
-        "lane-textinputs.js",
         "suggest.js",
         "search.js",
         "bookmark.js",

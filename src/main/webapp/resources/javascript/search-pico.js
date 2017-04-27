@@ -14,7 +14,6 @@
 
         PicoField = function(input, limit) {
             var ynode = new Y.Node(input),
-                textInput = new lane.TextInput(ynode, input.getAttribute("placeholder")),
                 suggest,
                 self = this;
             if (limit) {
@@ -34,10 +33,10 @@
                     input.disabled = !enable;
                 },
                 getValue: function() {
-                    return textInput.getValue();
+                    return input.value;
                 },
                 reset: function() {
-                    textInput.reset();
+                    input.value = "";
                 }
             };
         };

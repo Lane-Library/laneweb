@@ -469,7 +469,6 @@
                                 <include>lane-persistent-login-min.js</include>
                                 <include>search-indicator-min.js</include>
                                 <include>lane-bassett-min.js</include>
-                                <include>lane-textinputs-min.js</include>
                                 <include>suggest-min.js</include>
                                 <include>search-min.js</include>
                                 <include>search-reset-min.js</include>

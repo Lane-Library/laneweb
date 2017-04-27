@@ -64,8 +64,6 @@ if (document.querySelector(".search-form"))  {
                 sourceInput = form.querySelector("input[name=source]"),
                 facetsInput = form.querySelector("input[name=facets]"),
                 sortInput = form.querySelector("input[name=sort]"),
-                queryNode = new Y.Node(queryInput),
-                queryTextInput = new lane.TextInput(queryNode, queryInput.getAttribute("placeholder")),
 
                 v = {
                     close: function() {
@@ -79,7 +77,7 @@ if (document.querySelector(".search-form"))  {
                         view.fire("close");
                     },
                     inputChange: function() {
-                        view.fire("inputChange", queryTextInput.getValue());
+                        view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
                         lane.activate(form, "search-form");
@@ -96,8 +94,8 @@ if (document.querySelector(".search-form"))  {
                         view.fire("submit", event);
                     },
                     updateQuery: function(query) {
-                        if (query !== queryTextInput.getValue()) {
-                            queryTextInput.setValue(query);
+                        if (query !== queryInput.value) {
+                            queryInput.value = query;
                         }
                     },
                     updateSource: function(source) {
@@ -106,7 +104,7 @@ if (document.querySelector(".search-form"))  {
                 };
 
             // scroll to form if there is an initial query and not already at /search.html
-            if (/\/search\.html/.test(location.pathname) && queryTextInput.getValue() && !/\/search\.html/.test(document.referrer)) {
+            if (/\/search\.html/.test(location.pathname) && queryInput.value && !/\/search\.html/.test(document.referrer)) {
                 Y.once("domready", function() {
                     new Y.Anim({
                         node: "win",

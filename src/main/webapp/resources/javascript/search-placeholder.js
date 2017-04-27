@@ -20,10 +20,9 @@ if (document.querySelector(".search-form"))  {
 
         view = function() {
 
-            var queryInput = new lane.TextInput(new Y.Node(inputNode), inputNode.getAttribute(PLACEHOLDER));
             return {
                     setPlaceholder: function(placeholder) {
-                        queryInput.setHintText(placeholder);
+                        inputNode.placeholder = placeholder;
                     }
                 };
 

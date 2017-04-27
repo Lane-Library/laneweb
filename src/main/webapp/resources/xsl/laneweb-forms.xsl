@@ -12,7 +12,7 @@
         <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>
     
-    <xsl:template match="h:input[@name='q']/@placeholder">
+    <xsl:template match="h:input[@name='q'][@data-placeholder]/@placeholder">
         <xsl:attribute name="placeholder">
             <xsl:choose>
                 <!-- if there is a query the placeholder for the q input is the data-placeholder from the active tab -->
