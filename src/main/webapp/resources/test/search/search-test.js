@@ -180,11 +180,7 @@ var submitted = false,
     testInputChange: function() {
         this.queryInput.set("value", "query");
         var e = document.createEvent("UIEvents");
-        if (Y.UA.ie === 9) {
-            e.initEvent("keyup", true, false);
-        } else {
-            e.initEvent("input", true, false); 
-        }
+        e.initEvent("input", true, false);
         this.queryInput._node.dispatchEvent(e);
         Y.Assert.areEqual("query", this.search.getQuery());
     },

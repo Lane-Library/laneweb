@@ -4,8 +4,7 @@ var expandiesTestCase = new Y.Test.Case({
     name: 'Lane Expandies TestCase',
     testIsClosed: function() {
         var panel = Y.one('#panel1');
-        //height is 1 in IE6
-        Y.Assert.isTrue(panel.get('clientHeight') <= 1, 'height is ' + panel.get('clientHeight'));
+        Y.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
     },
     testExpanded: function() {
         var panel = Y.one('#panel2');
@@ -13,7 +12,7 @@ var expandiesTestCase = new Y.Test.Case({
     },
     testExpand: function() {
         var panel = Y.one('#panel1');
-        Y.Assert.isTrue(panel.get('clientHeight') <= 1, 'height is ' + panel.get('clientHeight'));
+        Y.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
         Y.Assert.isFalse(panel.get('parentNode').hasClass('expanded'), 'parent class is expanded');
         panel.previous().simulate('click');
         this.wait(function() {
@@ -27,7 +26,7 @@ var expandiesTestCase = new Y.Test.Case({
         panel.previous().simulate('click');
         //delay this 500ms to allow expandy to close
         this.wait(function() {
-            Y.Assert.isTrue(panel.get('clientHeight') <= 1, 'height is ' + panel.get('clientHeight'));
+            Y.Assert.isTrue(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
         }, 500);
     },
     testAnchor: function() {

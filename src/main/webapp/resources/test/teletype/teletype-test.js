@@ -40,19 +40,13 @@ var teletypeTestCase = new Y.Test.Case({
     testBlurTeletypeSearchTerms: function() {
         this.teletypeInput.set("value","value");
         this.teletypeInput.simulate("blur");
-        //TODO: IE doesn't seem to want to simulate blur
-        if (!Y.UA.ie) {
-            Y.Assert.areEqual("value", this.searchTerms.get("value"));
-        }
+        Y.Assert.areEqual("value", this.searchTerms.get("value"));
     },
 
     testBlurTeletypePico: function() {
         this.picoTeletypeInput.set("value", "value");
         this.picoTeletypeInput.simulate("blur");
-        //TODO: IE doesn't seem to want to simulate blur
-        if (!Y.UA.ie) {
-            Y.Assert.areEqual("value", this.clinicalP.get("value"));
-        }
+        Y.Assert.areEqual("value", this.clinicalP.get("value"));
     },
 
     testSubmit: function() {
