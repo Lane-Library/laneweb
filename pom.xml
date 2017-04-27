@@ -502,7 +502,6 @@
                                 <include>lane-teletype-min.js</include>
                                 <include>lane-selections-min.js</include>
                                 <include>lane-popin-min.js</include>
-                                <include>form-validator-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>telinput-min.js</include>
                                 <include>lane-feedback-min.js</include>

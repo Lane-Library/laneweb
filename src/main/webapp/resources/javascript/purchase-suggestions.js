@@ -49,7 +49,6 @@
             item = items.item(event.newVal);
             item.addClass(this.getClassName("item", "active"));
             itemsList.append(item);
-            Y.Widget.getByNode("#feedback").resetValidator();
             focusElement = itemsList.one("textarea, input[type='text']");
             if (focusElement) {
                 focusElement.focus();
