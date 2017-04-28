@@ -83,6 +83,11 @@ li.active .description {
     padding-right: 10px;
     margin-right: 0;
 }
+@media only screen and (max-width: 768px) {
+    div.resultInfo span:first-child {
+        float:none;
+    }
+}
 .resultInfo + div {
     clear: left;
 }

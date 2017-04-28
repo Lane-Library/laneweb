@@ -6,6 +6,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
+        <meta name="viewport" content="width=device-width"/>
     </head>
     <body>
         <div id="main">
