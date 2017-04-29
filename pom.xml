@@ -560,7 +560,7 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.2-SNAPSHOT</version>
                 <configuration>
                     <testDir>src/main/webapp/resources/test</testDir>
                 </configuration>
