@@ -78,9 +78,7 @@ li.active .description {
 }
 .resultInfo span:first-child {
     min-width: 103px;
-    padding-left: 0;
-    padding-right: 10px;
-    margin-right: 0;
+    margin-right: 10px;
 }
 .results-nav {
     background-color: #f7f3e5;
