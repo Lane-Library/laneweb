@@ -8,10 +8,10 @@
     </properties>
     <body>
         <release date="2017-05-01" version="3.3.29" description="3.3.29 bug fix release">
-            <action date="2017-04-27" dev="update" issue="133553" type="remove">
+            <action date="2017-04-27" dev="ceyates" issue="133553" type="remove">
                 remove miscellaneous references to IE in css and js files
             </action>
-            <action date="2017-04-27" dev="update" issue="133520" type="remove">
+            <action date="2017-04-27" dev="ceyates" issue="133520" type="remove">
                 replace use of javascript FormValidator with html5 constructs
             </action>
             <action date="2017-04-27" dev="ceyates" issue="133518" type="remove">
