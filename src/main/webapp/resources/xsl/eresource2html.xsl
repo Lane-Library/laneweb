@@ -24,13 +24,11 @@
             <xsl:if test="contains(s:primaryType, 'Book')">
                 <img class="bookcover" data-bibid="{s:recordId}"/>
             </xsl:if>
-            <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')) or position() = 1]"/>
+            <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
             <xsl:apply-templates select="s:pub-author"/>
             <xsl:apply-templates select="s:pub-text"/>
             <div class="resultInfo">
-                <span class="primaryType">
-                    <xsl:apply-templates select="s:primaryType"/>
-                </span>
+                <xsl:apply-templates select="s:primaryType"/>
                 <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
@@ -54,6 +52,7 @@
             </div>
             <xsl:apply-templates select="s:description"/>
             <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
+            <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
         </li>
     </xsl:template>
     
@@ -137,19 +136,23 @@
     </xsl:template>
 
     <xsl:template match="s:link[@type = 'impactFactor']">
-        <div>
-            <a href="{s:url}">Impact Factor</a>
+        <div class="resultInfo">
+            <span>
+                <a href="{s:url}">Impact Factor</a>
+            </span>
         </div>
     </xsl:template>
 
     <xsl:template match="s:primaryType">
         <xsl:if test="contains('ejbook',$type)">
-            <span><strong>
-                <xsl:choose>
-                    <xsl:when test="contains(., 'Print')">Print</xsl:when>
-                    <xsl:otherwise>Digital</xsl:otherwise>
-                </xsl:choose>
-            </strong></span>
+            <span class="primaryType">
+                <span><strong>
+                    <xsl:choose>
+                        <xsl:when test="contains(., 'Print')">Print</xsl:when>
+                        <xsl:otherwise>Digital</xsl:otherwise>
+                    </xsl:choose>
+                </strong></span>
+            </span>
         </xsl:if>
     </xsl:template>
 
