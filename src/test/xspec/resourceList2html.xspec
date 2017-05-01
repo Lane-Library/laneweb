@@ -117,8 +117,10 @@
                     href="url"
                     title="" />
             </div>
-            <div>
-                <a href="url">Impact Factor</a>
+            <div class="resultInfo">
+                <span>
+                    <a href="url">Impact Factor</a>
+                </span>
             </div>
         </x:expect>
     </x:scenario>

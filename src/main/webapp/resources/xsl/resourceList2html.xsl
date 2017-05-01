@@ -310,8 +310,8 @@
     </xsl:template>
 
     <xsl:template match="s:link[@type = 'impactFactor']">
-        <div>
-            <a href="{s:url}">Impact Factor</a>
+        <div class="resultInfo">
+            <span><a href="{s:url}">Impact Factor</a></span>
         </div>
     </xsl:template>
 
