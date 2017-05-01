@@ -43,7 +43,7 @@
         },
 
         /**
-         * Sets up the TextInput objects for the inputs and truncates long labels.
+         * Sets up the inputs and truncates long labels.
          * @method syncUI
          */
         syncUI : function() {
@@ -89,7 +89,7 @@
         },
 
         /**
-         * Responds to the save button.  If the inputs lack value, puts 'required' in to the value
+         * Responds to the save button.  If the inputs lack value, puts 'required' in to the placeholder
          * and does nothing else.  If there is no associated bookmark, creates a new one, otherwise
          * changes the bookmark label and url based on what is in the inputs.
          * @method save
@@ -101,11 +101,9 @@
             if (!newlabel || !newurl) {
                 if (!newlabel) {
                     this._labelInput.set("placeholder", "required");
-                    this._labelInput.set("required", "required");
                 }
                 if (!newurl) {
                     this._urlInput.set("placeholder", "required");
-                    this._labelInput.set("required", "required");
                 }
                 return;
             }
@@ -123,7 +121,7 @@
 
         /**
          * Responds to the reset button.  Resets the text inputs to the bookmark's values.
-         * If there is no bookmark, resets the TextInput object.
+         * If there is no bookmark, sets the inputs to empty strings.
          * @method reset
          */
         reset : function() {
