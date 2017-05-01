@@ -73,23 +73,14 @@ li.active .description {
     font-size: 11px;
 }
 .resultInfo span {
-    clear: left;
+    display: inline-block;
     margin-right: 24px;
 }
 .resultInfo span:first-child {
     min-width: 103px;
-    float:left;
     padding-left: 0;
     padding-right: 10px;
     margin-right: 0;
-}
-@media only screen and (max-width: 768px) {
-    div.resultInfo span:first-child {
-        float:none;
-    }
-}
-.resultInfo + div {
-    clear: left;
 }
 .results-nav {
     background-color: #f7f3e5;
