@@ -32,9 +32,6 @@
         },
         thanks : {
             value : DEFAULT_THANKS
-        },
-        validator : {
-            value : null
         }
     };
 
@@ -47,7 +44,6 @@
             var self = this, eventHandle1, eventHandle2;
             this.get("menu").on("click", this._handleMenuClick, this);
             this.after("activeItemChange", this._handleActiveItemChange);
-            this.on("validatorChange", this._handleValidatorChange);
             this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
             eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
@@ -75,16 +71,10 @@
                 sending = srcNode.one("#sending");
             this.get("menu").item(activeItem).addClass(this.getClassName("menu", "active"));
             items.item(activeItem).addClass(this.getClassName("item", "active"));
-            this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
             if (sending) {
                 this.set("sending", sending.get("innerHTML"));
             }
             this._resetThanks();
-        },
-        resetValidator : function() {
-            var activeItem = this.get("activeItem"),
-                items = this.get("items");
-            this.set("validator", new Y.lane.FormValidator(items.item(activeItem).one("form")));
         },
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
@@ -136,7 +126,6 @@
             } else {
                 this._resetThanks();
             }
-            this.resetValidator();
             focusElement = items.item(event.newVal).one("textarea, input[type='text']");
             if (focusElement) {
                 focusElement.focus();
@@ -148,14 +137,7 @@
         },
         _handleSubmit : function(event) {
             event.preventDefault();
-            if (this.get("validator").isValid()) {
-                this.sendFeedback(event.currentTarget);
-            }
-        },
-        _handleValidatorChange : function(event) {
-            if (event.prevVal) {
-                event.prevVal.destroy();
-            }
+            this.sendFeedback(event.currentTarget);
         },
         _resetThanks: function() {
             var srcNode = this.get("srcNode"),

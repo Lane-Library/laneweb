@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-05-01" version="3.3.29" description="3.3.29 bug fix release">
+            <action date="2017-04-27" dev="ceyates" issue="133553" type="remove">
+                remove miscellaneous references to IE in css and js files
+            </action>
+            <action date="2017-04-27" dev="ceyates" issue="133520" type="remove">
+                replace use of javascript FormValidator with html5 constructs
+            </action>
+            <action date="2017-04-27" dev="ceyates" issue="133518" type="remove">
+                replace use of javascript TextInput with placeholder attribute
+            </action>
+            <action date="2017-04-25" dev="olgary" issue="133486" type="remove">
+                removed blue jeans button from bus cards  - liaison-card.xsl
+            </action>
+            <action date="2017-04-24" dev="alainb" issue="133448" type="update">
+                change headings to h4 and fix the underline 'golf club' for classes
+            </action>
+            <action date="2017-04-24" dev="ryanmax" issue="133443" type="update">
+                change h3 to h4 for e resources
+            </action>
+        </release>
+        <release date="2017-04-24" version="3.3.28" description="3.3.28 bug fix release"/>
+        <release date="2017-04-17" version="3.3.27" description="3.3.27 bug fix release">
+            <action date="2017-04-05" dev="olgary" issue="133044" type="update">
+                headers.css
+            </action>
+        </release>
         <release date="2017-04-03" version="3.3.26" description="3.3.26 bug fix release">
             <action date="2017-03-29" dev="ceyates" issue="132909" type="fix">
                 textbook and bioresearch pages fail to get result counts or urls

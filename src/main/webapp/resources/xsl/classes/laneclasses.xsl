@@ -37,11 +37,11 @@
 	</xsl:template>
 
 	<xsl:template match="lc:event_name">
-		<h3>
+		<h4>
 			<a href="/classes-consult/laneclass.html?class-id={../lc:module_id}">
 				<xsl:value-of select="."/>
 			</a>
-		</h3>
+		</h4>
 	</xsl:template>
 
 	<xsl:template match="lc:event_dates">

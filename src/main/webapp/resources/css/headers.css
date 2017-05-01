@@ -7,8 +7,6 @@ h2 {
     color: #666666;
     text-align: center;
 }
-
-
 .golfclub span span {
     display: table-cell;
     white-space: nowrap;
@@ -21,7 +19,7 @@ h2 {
 .golfclub > span:before{
     content: '';
     display: table-cell;
-    background: url(../images/header-border.png) no-repeat 0 50%;
+    background: url('../images/header-border.png') no-repeat 0 50%;
     width: 50%;
 }
 .golfclub > span:before{
@@ -31,8 +29,6 @@ h2 {
     -o-transform: scaleX(-1);
     transform: scaleX(-1);
 }
-
-
 h3, h4 {
     color: #333;
     font-size: 22px;
@@ -40,9 +36,8 @@ h3, h4 {
     margin-bottom: .2em;
     padding-bottom: 12px;
 }
-
 h4:after {
-    content: " ";
+    content: ' ';
     border-top: 1px solid #d8dbdc;
     border-top-width: 1px;
     border-left: 26px solid #d8dbdc;
@@ -50,12 +45,11 @@ h4:after {
     display: block;
     height: 4px;
     margin-top: 10px;
+    box-sizing: content-box;
 }
-
-
 h5 {
     color: #8c1515;
     font-size: 18px;
-    margin: 24px 0px 12px 0px;
-    padding: 0px 12px 0px 0px;
+    margin: 24px 0 12px 0;
+    padding: 0 12px 0 0;
 }

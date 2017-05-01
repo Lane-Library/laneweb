@@ -67,7 +67,7 @@
                 </div>
                 <div class="yui3-u-7-12">
                     <div class="details">
-                        <h3>
+                        <h4>
                             <a>
                                 <xsl:attribute name="href">
                                 <xsl:text>/classes-consult/archive.html?class-id=</xsl:text>
@@ -76,7 +76,7 @@
                             </xsl:attribute>
                                 <xsl:value-of select="./lc:event_name" />
                             </a>
-                        </h3>
+                        </h4>
                         <div>
                             <xsl:apply-templates select="./lc:event_description" />
                         </div>

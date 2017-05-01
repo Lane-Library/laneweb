@@ -45,25 +45,11 @@ var telinputTestCase = new Y.Test.Case({
     }
 });
 
-var ie7TestCase = new Y.Test.Case({
-    name: "Doesn't work in IE7",
-
-    input: Y.one("input[type='tel']"),
-
-    testNoInput: function() {
-        Y.Assert.isNull(this.input);
-    }
-});
-
 Y.one('body').addClass('yui3-skin-sam');
 new Y.Console({
     newestOnTop: false
 }).render('#log');
 
-if (Y.UA.ie && Y.UA.ie < 8) {
-    Y.Test.Runner.add(ie7TestCase);
-} else {
-    Y.Test.Runner.add(telinputTestCase);
-}
+Y.Test.Runner.add(telinputTestCase);
 Y.Test.Runner.masterSuite.name = "telinput-test.js";
 Y.Test.Runner.run();
