@@ -39,14 +39,4 @@ public class LaneCrmControllerTest {
         assertEquals("redirect:/index.html", this.controller.formSubmitLanelibacqs(model, null));
         verify(model);
     }
-
-    @Test
-    public void testJsonSubmitLanelibacqs() throws IOException {
-        this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("foo", "bar"));
-    }
-
-    @Test
-    public void testJsonSubmitLaneLaneaskus() throws IOException {
-        this.controller.jsonSubmitLaneaskus(Collections.singletonMap("foo", "bar"));
-    }
 }
