@@ -275,6 +275,11 @@ public class LanewebIT {
     }
 
     @Test
+    public void testSearchImage() throws Exception {
+        this.mockMvc.perform(get("/apps/search/image?q=elephant&source=cc-images-all").servletPath("/apps/search/image")).andExpect(status().isOk());
+    }
+
+    @Test
     public void testTextbookSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk());
