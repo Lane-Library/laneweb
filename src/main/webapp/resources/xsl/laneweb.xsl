@@ -261,13 +261,13 @@
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
     
-    <!-- add active to the pico-toggle link if $search-source=clinical-all -->
-    <xsl:template match="h:span[@class='pico-toggle' and $search-source='clinical-all']/@class">
+    <!-- add active to the pico-toggle link if $search-source=clinical|peds-all -->
+    <xsl:template match="h:span[@class='pico-toggle' and ($search-source='clinical-all' or $search-source='peds-all')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
     </xsl:template>
     
-    <!-- add active to the pico-on link if $search-source=clinical-all -->
-    <xsl:template match="h:span[@class='pico-on' and $search-source='clinical-all']/@class">
+    <!-- add active to the pico-on link if $search-source=clinical|peds-all -->
+    <xsl:template match="h:span[@class='pico-on' and ($search-source='clinical-all' or $search-source='peds-all')]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
     
