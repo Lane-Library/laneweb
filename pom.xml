@@ -194,7 +194,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.20</version>
+            <version>1.0.21</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
