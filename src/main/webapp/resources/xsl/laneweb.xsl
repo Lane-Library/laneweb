@@ -268,15 +268,25 @@
     </xsl:template>
     
     <!-- add active to the pico-toggle link if $search-source=clinical|peds-all -->
-    <xsl:template match="h:span[@class='pico-toggle' and ($search-source='clinical-all' or $search-source='peds-all')]/@class">
+    <xsl:template match="h:span[@class='pico-toggle' and matches($search-source,'(clinical|peds)-all')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
     </xsl:template>
     
-    <!-- add active to the pico-on link if $search-source=clinical|peds-all -->
-    <xsl:template match="h:span[@class='pico-on' and ($search-source='clinical-all' or $search-source='peds-all')]/@class">
+    <!-- add active to the pico-on link if $search-source=clinical|peds-all and no PICO values present -->
+    <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o)]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
 
+    <!-- add active to the pico-off link if PICO values present -->
+    <xsl:template match="h:span[@class='pico-off' and ($p or $i or $c or $o)]/@class">
+        <xsl:attribute name="class" select="'pico-off pico-off-active'"/>
+    </xsl:template>
+    
+    <!-- add active to the pico-fields fieldset if $search-source=clinical|peds-all and PICO values present -->
+    <xsl:template match="h:fieldset[@class='pico-fields' and matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) ]/@class">
+        <xsl:attribute name="class" select="'pico-fields pico-fields-active'"/>
+    </xsl:template>
+    
     <!-- make the .search-reset active if there is a query -->
     <xsl:template match="h:div[@class='search-reset' and $query]/@class">
         <xsl:attribute name="class" select="'search-reset search-reset-active'"/>
