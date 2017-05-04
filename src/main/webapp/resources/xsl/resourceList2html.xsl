@@ -29,17 +29,17 @@
     <xsl:include href="resourceListPagination.xsl"/>
 
     <xsl:include href="resourceListSortBy.xsl"/>
-    
+
     <xsl:template match="attribute::node() | child::node()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node() | child::node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
    <xsl:template match="a:doc">
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
-    
+
     <xsl:template match="h:ul[@class='lwSearchResults']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
@@ -53,17 +53,17 @@
                 <title>search results</title>
             </head>
             <body>
-		        <div class="yui3-g no-bookmarking">
-		          <div class="yui3-u-1-3">
-	                <xsl:call-template name="resultsText"/>
-		          </div>
-		          <div class="yui3-u-1-3">
+                <div class="yui3-g no-bookmarking">
+                  <div class="yui3-u-1-3">
+                    <xsl:call-template name="resultsText"/>
+                  </div>
+                  <div class="yui3-u-1-3">
                     <xsl:call-template name="sortBy"/>
-		          </div>
-		          <div class="yui3-u-1-3">
-	                <xsl:call-template name="paginationLinks"/>
-		          </div>
-		        </div>
+                  </div>
+                  <div class="yui3-u-1-3">
+                    <xsl:call-template name="paginationLinks"/>
+                  </div>
+                </div>
                 <xsl:if test="count(s:result) &gt; 0">
                     <h4 class="eresources">&#160;</h4>
                 </xsl:if>
@@ -71,15 +71,15 @@
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
-	                <div class="yui3-g no-bookmarking">
-	                  <div class="yui3-u-1-3"/>
-	                  <div class="yui3-u-1-3">
-	                    <xsl:call-template name="sortBy"/>
-	                  </div>
-	                  <div class="yui3-u-1-3">
-	                    <xsl:call-template name="paginationLinks"/>
-	                  </div>
-	                </div>
+                    <div class="yui3-g no-bookmarking">
+                      <div class="yui3-u-1-3"/>
+                      <div class="yui3-u-1-3">
+                        <xsl:call-template name="sortBy"/>
+                      </div>
+                      <div class="yui3-u-1-3">
+                        <xsl:call-template name="paginationLinks"/>
+                      </div>
+                    </div>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->
@@ -138,7 +138,7 @@
                         <xsl:value-of select="s:pub-text"/>
                 </div>
             </xsl:if>
-            
+
             <div class="resultInfo">
                 <span class="primaryType"><strong>Article</strong> Digital</span>
                 <xsl:if test="s:description">
@@ -154,7 +154,7 @@
                     <xsl:text>: </xsl:text>
                     <xsl:value-of select="format-number(number(s:resourceHits),'###,###,##0')"/>
                     <xsl:text> </xsl:text>
-                    <i class="fa fa-external-link"></i></a>
+                </a>
             </div>
         </li>
     </xsl:template>
@@ -167,7 +167,7 @@
             <xsl:if test="contains(s:primaryType, 'Book')">
                 <img class="bookcover" data-bibid="{s:recordId}"/>
             </xsl:if>
-            <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')) or position() = 1]"/>
+            <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
             <xsl:apply-templates select="s:pub-author"/>
             <xsl:apply-templates select="s:pub-text"/>
             <div class="resultInfo">
@@ -178,151 +178,140 @@
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
                 <xsl:choose>
-	                <xsl:when test="s:description and s:recordType = 'pubmed'">
+                    <xsl:when test="s:description and s:recordType = 'pubmed'">
                         <span class="descriptionTrigger searchContent"/>
-	                </xsl:when>
-	                <xsl:when test="s:description">
+                    </xsl:when>
+                    <xsl:when test="s:description">
                         <span class="descriptionTrigger eresource"/>
-	                </xsl:when>
+                    </xsl:when>
                 </xsl:choose>
-                
+
                 <xsl:if test="s:recordType = 'pubmed'">
-	                <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
+	                <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/></a></span>
                 </xsl:if>
-                
+
                 <xsl:if test="s:recordType = 'bib'">
-					<span>
-					    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
-					</span>
+                    <span>
+                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                    </span>
                 </xsl:if>
-                
+
                 <xsl:if test="s:recordType = 'auth'">
-					<span>
-					    <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Community Info Record</a>
-					</span>
+                    <span>
+                        <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Community Info Record</a>
+                    </span>
                 </xsl:if>
-                
+
             </div>
             <xsl:apply-templates select="s:description"/>
+            <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
             </div>
-            <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
+            <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
         </li>
     </xsl:template>
 
     <xsl:template match="s:recordType">
-        <xsl:text>Source: </xsl:text>
-            <xsl:choose>
-                <xsl:when test=". = 'pubmed'">
-                <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'auth'">
-                <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Community Info Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'bib'">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg={$url-encoded-query}&amp;SL=None&amp;Search_Code=FT*&amp;CNT=50">Lane Catalog Results <i class="fa fa-external-link"></i></a>
-                </xsl:when>
-                <xsl:when test=". = 'class'">
-                <a href="/classes-consult/laneclasses.html">Lane Classes</a>
-                </xsl:when>
-                <xsl:when test=". = 'instructional_videos'">
-	                <xsl:if test="starts-with( ../s:id, 'hstalks-')">
-	                        <a href="http://hstalks.com">Hstalks</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'bates-')">
-	                        <a href="http://med.stanford.edu/irt/edtech/video/bates/">Bates</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'medlineplus-')">
-	                        <a href="https://www.nlm.nih.gov/medlineplus/medlineplus.html">MedlinePlus</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'clinicalkey-')">
-	                        <a href="http://clinicalkey.com">ClinicalKey</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'kanopy-')">
-	                        <a href="https://www.kanopystreaming.com">Kanopy</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'accessmedicine-')">
-	                        <a href="http://accessmedicine.mhmedical.com/">AccessMedicine</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'accesssurgery-')">
-	                        <a href="http://accesssurgery.mhmedical.com/">AccessSurgery</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'nejm-')">
-	                        <a href="http://www.nejm.org/">New England Journal of Medicine</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'stanfordmedicine25-')">
-	                        <a href="http://stanfordmedicine25.stanford.edu">Stanford Medicine 25</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'kanopy-')">
-	                        <a href="https://www.kanopystreaming.com/">Kanopy</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'jove-')">
-	                        <a href="http://www.jove.com/">Jove</a>
-	                </xsl:if>
-	                <xsl:if test="starts-with( ../s:id, 'jomi-')">
-						<a href="https://www.jomi.com/">Jomi</a>
-	                </xsl:if>
-                </xsl:when>
-                <xsl:when test=". = 'web' or . = 'laneblog'">
-                <a href="/index.html">Lane Website</a>
-                </xsl:when>
-            </xsl:choose>
+        <xsl:variable name="label"><xsl:text>Source: </xsl:text></xsl:variable>
+        <xsl:choose>
+            <xsl:when test=". = 'pubmed'">
+                <xsl:copy-of select="$label"/><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed</a>
+            </xsl:when>
+            <xsl:when test=". = 'auth'">
+                <xsl:copy-of select="$label"/><a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Community Info</a>
+            </xsl:when>
+            <xsl:when test=". = 'class'">
+                <xsl:copy-of select="$label"/><a href="/classes-consult/laneclasses.html">Lane Classes</a>
+            </xsl:when>
+            <xsl:when test=". = 'web' or . = 'laneblog'">
+                <xsl:copy-of select="$label"/><a href="/index.html">Lane Website</a>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="s:description">
         <div class="description">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-	<xsl:template match="s:link[1]">
-		<div>
-			<a class="primaryLink" href="{s:url}" title="{../s:title}">
-				<xsl:apply-templates select="../s:title" />
-			</a>
-		</div>
-		<xsl:if test="s:holdings-dates">
-			<a href="{s:url}" title="{../s:title}">
-				<xsl:value-of select="s:holdings-dates" />
-			</a>
-		</xsl:if>
-		<xsl:if test="@type = 'getPassword'">
-			<a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
-		</xsl:if>
-		<xsl:if test="s:additional-text">
-			<xsl:text> </xsl:text>
-			<xsl:value-of select="s:additional-text" />
-		</xsl:if>
-		<xsl:if test="../s:author">
-			<div>
-				<xsl:value-of select="../s:author" />
-			</div>
-		</xsl:if>
-	</xsl:template>
+    <xsl:template match="s:link[1]">
+        <div>
+            <a class="primaryLink" href="{s:url}" title="{../s:title}">
+                <xsl:apply-templates select="../s:title" />
+            </a>
+        </div>
+        <xsl:if test="s:holdings-dates or @type = 'getPassword' or s:version-text or s:publisher">
+            <div class="resultInfo">
+                <xsl:if test="s:holdings-dates">
+                    <span>
+                        <a href="{s:url}" title="{../s:title}">
+                            <xsl:value-of select="s:holdings-dates" />
+                        </a>
+                    </span>
+                </xsl:if>
+                <xsl:if test="@type = 'getPassword'">
+                    <span>
+                        <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
+                    </span>
+                </xsl:if>
+                <xsl:if test="s:version-text">
+                    <span class="versionText">
+                        <xsl:value-of select="s:version-text" />
+                    </span>
+                </xsl:if>
+                <xsl:if test="s:publisher">
+                    <span>
+                        <xsl:text>From: </xsl:text>
+                        <i>
+                            <xsl:value-of select="s:publisher" />
+                        </i>
+                    </span>
+                </xsl:if>
+            </div>
+        </xsl:if>
+        <xsl:if test="../s:author">
+            <div>
+                <xsl:value-of select="../s:author" />
+            </div>
+        </xsl:if>
+    </xsl:template>
 
     <xsl:template match="s:link">
         <xsl:variable name="print" select="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')"/>
-        <div>
-            <xsl:if test="$print">Also available: </xsl:if>
-            <a href="{s:url}" title="{s:label}">
-                <xsl:if test="$print">Print &#8211; </xsl:if>
-                <xsl:value-of select="s:link-text"/>
-            </a>
-            <xsl:if test="s:additional-text">
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="s:additional-text"/>
-            </xsl:if>
+        <div class="resultInfo">
+            <xsl:if test="$print"><span>Also available: </span></xsl:if>
+            <span>
+                <a href="{s:url}" title="{s:label}">
+                    <xsl:if test="$print">Print &#8211; </xsl:if>
+                    <xsl:value-of select="s:link-text"/>
+                </a>
+            </span>
             <xsl:if test="@type = 'getPassword'">
-                <xsl:text> </xsl:text>
-                <a href="/secure/ejpw.html" title="Get Password">Get Password</a>
+                <span>
+                    <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
+                </span>
+            </xsl:if>
+            <xsl:if test="s:version-text">
+                <span class="versionText">
+                    <xsl:value-of select="s:version-text" />
+                </span>
+            </xsl:if>
+            <xsl:if test="s:publisher">
+                <span>
+                    <xsl:text>From: </xsl:text>
+                    <i>
+                        <xsl:value-of select="s:publisher" />
+                    </i>
+                </span>
             </xsl:if>
         </div>
     </xsl:template>
 
     <xsl:template match="s:link[@type = 'impactFactor']">
-        <div>
-            <a href="{s:url}">Impact Factor</a>
+        <div class="resultInfo">
+            <span><a href="{s:url}">Impact Factor</a></span>
         </div>
     </xsl:template>
 
@@ -369,7 +358,7 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/><xsl:text> </xsl:text><i class="fa fa-external-link"/></a></span>
+        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/></a></span>
     </xsl:template>
 
     <xsl:template match="s:contentId"/>
@@ -411,7 +400,7 @@
             <xsl:otherwise>
                 <xsl:value-of select="concat(string-join($tokens[position() &lt; $index], ', '), ', ')"/>
             </xsl:otherwise>
-        </xsl:choose>    
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

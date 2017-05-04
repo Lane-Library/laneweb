@@ -73,7 +73,12 @@ li.active .description {
     font-size: 11px;
 }
 .resultInfo span {
+    display: inline-block;
     margin-right: 24px;
+}
+.resultInfo span:first-child {
+    min-width: 103px;
+    margin-right: 10px;
 }
 .results-nav {
     background-color: #f7f3e5;

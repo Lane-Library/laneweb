@@ -183,7 +183,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.20</version>
+            <version>1.0.21</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
@@ -351,7 +351,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.0</version>
                 <configuration>
                     <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
                     <webResources>

@@ -107,10 +107,10 @@
                     </div>
                     <fieldset class="pico-fields">
                         <div class="yui3-g">
-                            <div class="yui3-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled"/></div>
-                            <div class="yui3-u-1-4"><input name="i" placeholder="intervention" disabled="disabled"/></div>
-                            <div class="yui3-u-1-4"><input name="c" placeholder="comparison" disabled="disabled"/></div>
-                            <div class="yui3-u-1-4"><input name="o" placeholder="outcome" disabled="disabled"/></div>
+                            <div class="yui3-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled" value=""/></div>
+                            <div class="yui3-u-1-4"><input name="i" placeholder="intervention" disabled="disabled" value=""/></div>
+                            <div class="yui3-u-1-4"><input name="c" placeholder="comparison" disabled="disabled" value=""/></div>
+                            <div class="yui3-u-1-4"><input name="o" placeholder="outcome" disabled="disabled" value=""/></div>
                         </div>
                     </fieldset>
                     <fieldset>

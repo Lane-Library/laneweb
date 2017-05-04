@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.config;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,11 +13,11 @@ import edu.stanford.irt.querymap.SolrQueryToDescriptor;
 @Configuration
 public class QueryMapConfiguration {
 
-    private SolrClient solrClient;
+    private SolrTemplate solrTemplate;
 
     @Autowired
-    public QueryMapConfiguration(@Qualifier("laneSearchSolrServer") final SolrClient solrClient) {
-        this.solrClient = solrClient;
+    public QueryMapConfiguration(@Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
+        this.solrTemplate = solrTemplate;
     }
 
     @Bean
@@ -26,12 +25,7 @@ public class QueryMapConfiguration {
         QueryMapper queryMapper = new QueryMapper();
         DescriptorManager descriptorManager = new DescriptorManager();
         queryMapper.setDescriptorManager(descriptorManager);
-        queryMapper.setQueryToDescriptor(new SolrQueryToDescriptor(descriptorManager, queryMapperSolrTemplate()));
+        queryMapper.setQueryToDescriptor(new SolrQueryToDescriptor(descriptorManager, this.solrTemplate));
         return queryMapper;
-    }
-
-    @Bean
-    public SolrTemplate queryMapperSolrTemplate() {
-        return new SolrTemplate(this.solrClient);
     }
 }

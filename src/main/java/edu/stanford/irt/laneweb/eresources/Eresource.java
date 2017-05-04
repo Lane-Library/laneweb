@@ -177,7 +177,9 @@ public class Eresource {
         String linkUrl = (String) jsonLink.get("url");
         String linkText = (String) jsonLink.get("linkText");
         String additionalText = (String) jsonLink.get("additionalText");
+        String versionText = (String) versionMap.get("additionalText");
         String holdingsAndDates = (String) versionMap.get("holdingsAndDates");
+        String publisher = (String) versionMap.get("publisher");
         LinkType linkType = LinkType.NORMAL;
         if (isFirstLink) {
             linkText = this.title;
@@ -187,7 +189,8 @@ public class Eresource {
         } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
             linkType = LinkType.IMPACTFACTOR;
         }
-        this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates));
+        this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates, publisher,
+                versionText));
     }
 
     @SuppressWarnings("unchecked")
