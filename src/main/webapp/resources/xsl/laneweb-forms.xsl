@@ -8,6 +8,22 @@
         <xsl:attribute name="value" select="$query"/>
     </xsl:template>
     
+    <xsl:template match="h:input[@name='p' and $p]/@value">
+        <xsl:attribute name="value" select="$p"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='i' and $i]/@value">
+        <xsl:attribute name="value" select="$i"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='c' and $c]/@value">
+        <xsl:attribute name="value" select="$c"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='o' and $o]/@value">
+        <xsl:attribute name="value" select="$o"/>
+    </xsl:template>
+    
     <xsl:template match="h:input[@name='source']/@value">
         <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>

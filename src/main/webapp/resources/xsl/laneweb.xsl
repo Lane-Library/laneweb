@@ -20,6 +20,12 @@
     <!-- the search query -->
     <xsl:param name="query"/>
 
+    <!-- PICO -->
+    <xsl:param name="p"/>
+    <xsl:param name="i"/>
+    <xsl:param name="c"/>
+    <xsl:param name="o"/>
+
     <xsl:param name="source"/>
 
     <xsl:param name="proxy-links"/>
@@ -270,7 +276,7 @@
     <xsl:template match="h:span[@class='pico-on' and ($search-source='clinical-all' or $search-source='peds-all')]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
-    
+
     <!-- make the .search-reset active if there is a query -->
     <xsl:template match="h:div[@class='search-reset' and $query]/@class">
         <xsl:attribute name="class" select="'search-reset search-reset-active'"/>
