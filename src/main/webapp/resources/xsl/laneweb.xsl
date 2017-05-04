@@ -115,7 +115,6 @@
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="$source">
                 <xsl:choose>
-                    <xsl:when test="$source='peds-all'">clinical-all</xsl:when>
                     <!-- various -images-all source parameters get images-all -->
                     <xsl:when test="ends-with($source, 'images-all')">images-all</xsl:when>
                     <xsl:when test="string-length($source-prefix) &gt; 0">
