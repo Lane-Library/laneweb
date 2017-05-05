@@ -46,9 +46,6 @@
 
     [].forEach.call(document.querySelectorAll(".pico-fields input"), function(input) {
         fields.push(new PicoField(input, limits[input.name]));
-        if (input.value != input.placeholder) {
-            input.disabled = false;
-        }
     });
 
     lane.on("picoFields:change", function(event) {
