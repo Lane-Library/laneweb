@@ -25,7 +25,7 @@
                     if (!event.active) {
                         view.hide();
                         controller.fire("change", {active: false});
-                    } else if (document.location.pathname.indexOf('/portals/peds.html') > 0) {
+                    } else if (document.location.pathname.indexOf('portals/peds.html') > 0) {
                         view.show();
                         controller.fire('change', {active: true});
                     }
