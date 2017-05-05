@@ -60,6 +60,8 @@ if (document.querySelector(".pico-toggle"))  {
                 activeChange: function(event) {
                     if (!event.active) {
                         view.reset();
+                    } else if (document.location.pathname.indexOf('/portals/peds.html') > 0) {
+                        view.picoOn();
                     }
                 },
                 tabChange: function(event) {
