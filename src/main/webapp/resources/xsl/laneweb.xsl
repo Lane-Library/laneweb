@@ -303,7 +303,17 @@
 
     <!-- put the @data-help value of the active tab into the href of .search-help -->
     <xsl:template match="h:a[@class='search-help']/@href">
-        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $search-source]/@data-help)"/>
+        <xsl:variable name="related-tab">
+            <xsl:choose>
+                <xsl:when test="$search-source='peds-all'">
+                    <xsl:value-of select="'clinical-all'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$search-source"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $related-tab]/@data-help)"/>
     </xsl:template>
 
     

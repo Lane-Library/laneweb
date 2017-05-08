@@ -7,6 +7,38 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-05-08" version="3.3.30" description="3.3.30 bug fix release">
+            <action date="2017-05-05" dev="ceyates" issue="133737" type="fix">
+                search help href on peds portal is empty
+            </action>
+            <action date="2017-05-04" dev="ryanmax" issue="133708" type="fix">
+                clinical search age toggle changes unpredictably
+            </action>
+            <action date="2017-05-04" dev="ryanmax" issue="133685" type="update">
+                PICO form should stay open after a PICO search
+            </action>
+            <action date="2017-05-04" dev="ryanmax" issue="133684" type="fix">
+                PICO form does not retain values after search
+            </action>
+            <action date="2017-05-05" dev="ceyates" issue="133677" type="update">
+                PICO search hard to find
+            </action>
+            <action date="2017-05-03" dev="ryanmax" issue="133675" type="fix">
+                Feedback-bug: PICO option not initially present on peds portal
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="133192" type="update">
+                move impact factor to bottom in search/browse result display
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="133045" type="add">
+                add red X to "clear all"
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="131696" type="update">
+                Comments Suggestions: search results - move embargo information field
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="131580" type="update">
+                Feedback-suggestion: search result formatting
+            </action>
+        </release>
         <release date="2017-05-01" version="3.3.29" description="3.3.29 bug fix release">
             <action date="2017-04-27" dev="ceyates" issue="133553" type="remove">
                 remove miscellaneous references to IE in css and js files
