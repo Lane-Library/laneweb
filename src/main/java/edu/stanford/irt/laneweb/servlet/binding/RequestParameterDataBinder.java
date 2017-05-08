@@ -20,17 +20,16 @@ public class RequestParameterDataBinder implements DataBinder {
     private static final String[][] PARAMETER_ARRAY_MODEL = { { "r", Model.RESOURCES }, { "e", Model.ENGINES },
             { "i", Model.ITEMS } };
 
-    private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE },
-            { "a", Model.ALPHA }, { "m", Model.MESH }, { "f", Model.FACETS },
-            { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER }, { "r", Model.REGION }, { "PID", Model.PID },
-            { "entryUrl", Model.ENTRY_URL }, { "pl", Model.PERSISTENT_LOGIN },
-            { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
+    private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE }, { "a", Model.ALPHA },
+            { "m", Model.MESH }, { "f", Model.FACETS }, { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER },
+            { "r", Model.REGION }, { "PID", Model.PID }, { "entryUrl", Model.ENTRY_URL },
+            { "pl", Model.PERSISTENT_LOGIN }, { "p", Model.PICO_P }, { "i", Model.PICO_I }, { "c", Model.PICO_C },
+            { "o", Model.PICO_O }, { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };
 
-    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.CATEGORY,
-            Model.CLASS_ID, Model.EMAIL, Model.FACET, Model.FACETS, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE,
-            Model.TITLE, Model.SELECTION, Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD,
-            Model.RELEASE, Model.HOST, Model.SORT, Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN,
-            Model.LIMIT, Model.FACET_SORT };
+    private static final String[] PARAMETER_SAME_AS_MODEL = { Model.ACTION, Model.CATEGORY, Model.CLASS_ID, Model.EMAIL,
+            Model.FACET, Model.FACETS, Model.TIMEOUT, Model.RESOURCE_ID, Model.PAGE, Model.TITLE, Model.SELECTION,
+            Model.BASSETT_NUMBER, Model.URL, Model.CALLBACK, Model.PASSWORD, Model.RELEASE, Model.HOST, Model.SORT,
+            Model.SOURCEID, Model.SOURCE, Model.ID, Model.TEXT, Model.RETURN, Model.LIMIT, Model.FACET_SORT };
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 

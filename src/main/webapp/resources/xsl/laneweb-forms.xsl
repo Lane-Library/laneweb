@@ -8,6 +8,25 @@
         <xsl:attribute name="value" select="$query"/>
     </xsl:template>
     
+    <xsl:template match="h:input[@name='p' and $p]/@value">
+        <xsl:attribute name="value" select="$p"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='i' and $i]/@value">
+        <xsl:attribute name="value" select="$i"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='c' and $c]/@value">
+        <xsl:attribute name="value" select="$c"/>
+    </xsl:template>
+    
+    <xsl:template match="h:input[@name='o' and $o]/@value">
+        <xsl:attribute name="value" select="$o"/>
+    </xsl:template>
+
+    <!-- enable pico fields if one or more pico input values present -->
+    <xsl:template match="h:input[($p or $i or $c or $o) and (@name='p' or @name='i' or @name = 'c' or @name = 'o')]/@disabled"/>
+
     <xsl:template match="h:input[@name='source']/@value">
         <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>

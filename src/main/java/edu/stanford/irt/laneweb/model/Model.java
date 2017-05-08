@@ -77,6 +77,14 @@ public class Model {
 
     public static final String PERSISTENT_LOGIN_EXPIRATION_DATE = "lane-login-expiration-date";
 
+    public static final String PICO_C = "c";
+
+    public static final String PICO_I = "i";
+
+    public static final String PICO_O = "o";
+
+    public static final String PICO_P = "p";
+
     public static final String PID = "pid";
 
     public static final String PROXY_LINKS = "proxy-links";
