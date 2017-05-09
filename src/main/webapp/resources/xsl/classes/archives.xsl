@@ -97,7 +97,7 @@
             <div class="youtube-class">
                 <xsl:choose>
                     <xsl:when test="contains($schemeless-url, 'youtube')">
-                        <iframe src="{$schemeless-url}" width="200" height="120"/>
+                        <iframe src="{$schemeless-url}" width="200" height="120" frameborder="0" allowfullscreen="true"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <a class="button" href="{$schemeless-url}">
