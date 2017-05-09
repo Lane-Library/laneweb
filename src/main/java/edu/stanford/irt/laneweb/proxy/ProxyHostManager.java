@@ -17,6 +17,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class ProxyHostManager {
 
+    private static final String COLON_DOUBLE_SLASH = "://";
+
+    private static final int COLON_DOUBLE_SLASH_LENGTH = COLON_DOUBLE_SLASH.length();
+
     private static final long DEFAULT_DELAY = 120L;
 
     private static final Logger log = LoggerFactory.getLogger(ProxyHostManager.class);
@@ -61,9 +65,9 @@ public class ProxyHostManager {
     public boolean isProxyableLink(final String link) {
         boolean proxyable = false;
         if (link != null) {
-            int doubleSlashIndex = link.indexOf("://");
+            int doubleSlashIndex = link.indexOf(COLON_DOUBLE_SLASH);
             if (doubleSlashIndex > -1) {
-                String hostAndPath = link.substring(doubleSlashIndex + 3);
+                String hostAndPath = link.substring(doubleSlashIndex + COLON_DOUBLE_SLASH_LENGTH);
                 int slashIndex = hostAndPath.indexOf('/');
                 if (slashIndex == -1) {
                     slashIndex = hostAndPath.length();
