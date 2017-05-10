@@ -17,6 +17,10 @@ import edu.stanford.irt.laneweb.servlet.redirect.TrailingSlashRedirectProcessor;
 @Configuration
 public class RedirectConfiguration {
 
+    private static final String SEARCH_CLINICAL = "/search.html?sourceid=shc&source=clinical-all&$1";
+
+    private static final String SEARCH_INTERNAL_MEDICINE = "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1";
+
     @Bean
     public RedirectProcessor redirectProcessor() {
         List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
@@ -37,34 +41,27 @@ public class RedirectConfiguration {
                 "/portals/anesthesia.html?sourceid=shc&source=/portals/anesthesia.html&$1");
         shcRedirectMap.put("/shc/cardiology.html(?:\\??)(.*)",
                 "/portals/cardiology.html?sourceid=shc&source=/portals/cardiology.html&$1");
-        shcRedirectMap.put("/shc/clinical.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/ear-nose-throat.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/emergency.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/gastroenterology.html(?:\\??)(.*)",
-                "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1");
+        shcRedirectMap.put("/shc/clinical.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/ear-nose-throat.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/emergency.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/gastroenterology.html(?:\\??)(.*)", SEARCH_INTERNAL_MEDICINE);
         shcRedirectMap.put("/shc/hematology.html(?:\\??)(.*)", "/portals/hematology.html?sourceid=shc&$1");
-        shcRedirectMap.put("/shc/hepatology.html(?:\\??)(.*)",
-                "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1");
-        shcRedirectMap.put("/shc/icu.html(?:\\??)(.*)",
-                "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1");
-        shcRedirectMap.put("/shc/infectious-disease.html(?:\\??)(.*)",
-                "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1");
-        shcRedirectMap.put("/shc/internal-medicine.html(?:\\??)(.*)",
-                "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1");
-        shcRedirectMap.put("/shc/neurology.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/ob-gyn.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/oncology.html(?:\\??)(.*)",
-                "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1");
-        shcRedirectMap.put("/shc/ophthalmology.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/orthopedics.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/psychiatry.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
+        shcRedirectMap.put("/shc/hepatology.html(?:\\??)(.*)", SEARCH_INTERNAL_MEDICINE);
+        shcRedirectMap.put("/shc/icu.html(?:\\??)(.*)", SEARCH_INTERNAL_MEDICINE);
+        shcRedirectMap.put("/shc/infectious-disease.html(?:\\??)(.*)", SEARCH_INTERNAL_MEDICINE);
+        shcRedirectMap.put("/shc/internal-medicine.html(?:\\??)(.*)", SEARCH_INTERNAL_MEDICINE);
+        shcRedirectMap.put("/shc/neurology.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/ob-gyn.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/oncology.html(?:\\??)(.*)", SEARCH_INTERNAL_MEDICINE);
+        shcRedirectMap.put("/shc/ophthalmology.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/orthopedics.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/psychiatry.html(?:\\??)(.*)", SEARCH_CLINICAL);
         shcRedirectMap.put("/shc/pulmonary.html(?:\\??)(.*)",
                 "/portals/pulmonary.html?sourceid=shc&source=/portals/pulmonary.html&$1");
         shcRedirectMap.put("/shc/radiology.html(?:\\?q=?)(.*)",
                 "http://www.guideline.gov/search/results.aspx?113=666&term=$1");
-        shcRedirectMap.put("/shc/surgery-cardiothoracic.html(?:\\??)(.*)",
-                "/search.html?sourceid=shc&source=clinical-all&$1");
-        shcRedirectMap.put("/shc/surgery-general.html(?:\\??)(.*)", "/search.html?sourceid=shc&source=clinical-all&$1");
+        shcRedirectMap.put("/shc/surgery-cardiothoracic.html(?:\\??)(.*)", SEARCH_CLINICAL);
+        shcRedirectMap.put("/shc/surgery-general.html(?:\\??)(.*)", SEARCH_CLINICAL);
         shcRedirectMap.put("/shc/portals/shc.html(?:\\??)(.*)", "/portals/shc.html?sourceid=shc&$1");
         shcRedirectProcessor.setRedirectMap(shcRedirectMap);
         redirectProcessors.add(shcRedirectProcessor);
