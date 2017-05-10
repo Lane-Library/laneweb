@@ -9,8 +9,6 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.laneweb.util.JdbcUtils;
-
 public class ProxyHostSource {
 
     private static final String SQL =
@@ -47,23 +45,15 @@ public class ProxyHostSource {
 
     public Set<String> getHosts() throws SQLException {
         Set<String> hosts = new HashSet<>();
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = dataSource.getConnection();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(SQL);
+        try (Connection conn = this.dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(SQL)) {
             while (rs.next()) {
                 hosts.add(rs.getString(1));
             }
             hosts.add("bodoni.stanford.edu");
             hosts.add("library.stanford.edu");
             hosts.add("searchworks.stanford.edu");
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(stmt);
-            JdbcUtils.closeConnection(conn);
         }
         return hosts;
     }
