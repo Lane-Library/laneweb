@@ -8,12 +8,8 @@
         window.addEventListener("DOMContentLoaded", function() {
             var i = 0,
                 offset = document.forms[0].offsetTop + 50,
-                doScroll = function() {
-                    scroll(0, offset);
-                    console.log("scroll from search-form-scroll.js");
-                },
-                // Edge has scrollY 0 initially regardless of previous position
-                // poll value every 100ms for 1s
+                // Edge has scrollY initially set to 0 regardless of previous position
+                // this polls value every 100ms for 1s
                 edgeDelay = function() {
                     if (window.scrollY === 0 && i < 10) {
                         i++;
@@ -25,7 +21,7 @@
             if (/Edge/.test(window.navigator.userAgent)) {
                 edgeDelay();
             } else if (window.scrollY < offset) {
-                doScroll();
+                window.scroll(0, offset);
             }
         });
     }
