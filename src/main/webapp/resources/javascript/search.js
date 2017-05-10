@@ -103,18 +103,6 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-            // scroll to form if there is an initial query and not already at /search.html
-            if (/\/search\.html/.test(location.pathname) && queryInput.value && !/\/search\.html/.test(document.referrer)) {
-                Y.once("domready", function() {
-                    new Y.Anim({
-                        node: "win",
-                        to: { scroll: [0, form.offsetTop + 50] },
-                        duration: 0.3,
-                        easing: Y.Easing.easeBoth
-                    }).run();
-                });
-            }
-
             form.querySelector(".search-close").addEventListener("click", v.close);
             form.addEventListener("submit", v.submit);
 
