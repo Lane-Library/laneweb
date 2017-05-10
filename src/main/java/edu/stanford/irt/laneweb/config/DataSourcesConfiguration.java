@@ -14,6 +14,8 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 @Configuration
 public class DataSourcesConfiguration {
 
+    private static final String ORACLE_DATASOURCE = "oracle.jdbc.pool.OracleDataSource";
+
     private static final int THREE_SECONDS = 3;
 
     @Bean(name = {"javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks", "javax.sql.DataSource/bookcovers"})
@@ -25,7 +27,7 @@ public class DataSourcesConfiguration {
             @Value("${edu.stanford.irt.laneweb.db.eresources.fastConnectionFailoverEnabled}") final boolean failoverEnabled)
             throws SQLException {
         PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
-        dataSource.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
+        dataSource.setConnectionFactoryClassName(ORACLE_DATASOURCE);
         dataSource.setURL(url);
         dataSource.setUser(user);
         dataSource.setPassword(password);
@@ -43,7 +45,7 @@ public class DataSourcesConfiguration {
             @Value("${edu.stanford.irt.laneweb.db.grandrounds.maxPoolSize}") final int maxPoolSize)
             throws SQLException {
         PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
-        dataSource.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
+        dataSource.setConnectionFactoryClassName(ORACLE_DATASOURCE);
         dataSource.setURL(url);
         dataSource.setUser(user);
         dataSource.setPassword(password);
@@ -58,7 +60,7 @@ public class DataSourcesConfiguration {
             @Value("${edu.stanford.irt.laneweb.db.voyager.password}") final String password,
             @Value("${edu.stanford.irt.laneweb.db.voyager.maxPoolSize}") final int maxPoolSize) throws SQLException {
         PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
-        dataSource.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
+        dataSource.setConnectionFactoryClassName(ORACLE_DATASOURCE);
         dataSource.setURL(url);
         dataSource.setUser(user);
         dataSource.setPassword(password);
