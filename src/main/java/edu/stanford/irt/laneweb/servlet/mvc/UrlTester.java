@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
@@ -33,16 +32,13 @@ public class UrlTester {
     @RequestMapping(value = "/apps/url-tester")
     public void testUrl(@RequestParam final String url, final HttpServletResponse response) {
         HttpGet httpGet = new HttpGet(url);
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             HttpResponse httpResponse = this.httpClient.execute(httpGet);
             baos.write(EntityUtils.toByteArray(httpResponse.getEntity()));
             byte[] headers = getHeaderString(httpGet, httpResponse);
             baos.write(headers);
             response.setHeader("Content-Type", "text/plain");
             response.getOutputStream().write(baos.toByteArray());
-        } catch (ClientProtocolException e) {
-            throw new LanewebException(e);
         } catch (IOException e) {
             throw new LanewebException(e);
         } finally {

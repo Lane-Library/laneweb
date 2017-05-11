@@ -11,8 +11,6 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.laneweb.util.JdbcUtils;
-
 public class VoyagerLogin {
 
     private static final String BASE_URL = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?";
@@ -48,40 +46,30 @@ public class VoyagerLogin {
         } else {
             // voyager data prepends 0
             String voyagerUnivId = "0" + univId;
-            Connection conn = null;
-            PreparedStatement checkStmt = null;
-            PreparedStatement clearStmt = null;
-            PreparedStatement createStmt = null;
-            ResultSet rs = null;
-            try {
-                conn = this.dataSource.getConnection();
-                checkStmt = conn.prepareStatement(CHECK_ID_SQL);
+            try (Connection conn = this.dataSource.getConnection();
+                    PreparedStatement checkStmt = conn.prepareStatement(CHECK_ID_SQL)) {
                 checkStmt.setString(UNIV_ID, voyagerUnivId);
-                rs = checkStmt.executeQuery();
-                rs.next();
-                if (rs.getInt(1) > 0) {
-                    // univid found so write to voyager tables
-                    clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-                    clearStmt.setString(UNIV_ID, voyagerUnivId);
-                    clearStmt.setString(PID, pid);
-                    clearStmt.executeUpdate();
-                    createStmt = conn.prepareStatement(CREATE_SESSION_SQL);
-                    createStmt.setString(UNIV_ID, voyagerUnivId);
-                    createStmt.setString(PID, pid);
-                    createStmt.executeUpdate();
-                    voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
-                } else {
-                    LOG.error("unable to find univId in voyager: {}", univId);
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    rs.next();
+                    if (rs.getInt(1) > 0) {
+                        // univid found so write to voyager tables
+                        try (PreparedStatement clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
+                                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL);) {
+                            clearStmt.setString(UNIV_ID, voyagerUnivId);
+                            clearStmt.setString(PID, pid);
+                            clearStmt.executeUpdate();
+                            createStmt.setString(UNIV_ID, voyagerUnivId);
+                            createStmt.setString(PID, pid);
+                            createStmt.executeUpdate();
+                            voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
+                        }
+                    } else {
+                        LOG.error("unable to find univId in voyager: {}", univId);
+                    }
                 }
             } catch (SQLException e) {
                 LOG.error(e.getMessage(), e);
                 voyagerURL = ERROR_URL;
-            } finally {
-                JdbcUtils.closeResultSet(rs);
-                JdbcUtils.closeStatement(checkStmt);
-                JdbcUtils.closeStatement(clearStmt);
-                JdbcUtils.closeStatement(createStmt);
-                JdbcUtils.closeConnection(conn);
             }
         }
         return voyagerURL;

@@ -203,6 +203,7 @@ public class SQLBookmarkDAOTest {
         this.connection.commit();
         this.callableStatement.close();
         this.statement.close();
+        this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         this.dao.saveLinks("userid", Collections.singletonList(this.bookmark));
@@ -239,6 +240,7 @@ public class SQLBookmarkDAOTest {
         this.connection.rollback();
         expectLastCall().andThrow(new SQLException());
         this.statement.close();
+        this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
@@ -257,6 +259,7 @@ public class SQLBookmarkDAOTest {
         expect(this.statement.execute()).andReturn(true);
         this.connection.commit();
         this.statement.close();
+        this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         this.dao.saveLinks("userid", Collections.emptyList());
@@ -272,6 +275,7 @@ public class SQLBookmarkDAOTest {
         expect(this.statement.execute()).andThrow(new SQLException());
         this.connection.rollback();
         this.statement.close();
+        this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement);
         try {
@@ -300,6 +304,7 @@ public class SQLBookmarkDAOTest {
         this.connection.rollback();
         this.callableStatement.close();
         this.statement.close();
+        this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
                 output);
@@ -331,6 +336,7 @@ public class SQLBookmarkDAOTest {
         expectLastCall().andThrow(new SQLException());
         this.callableStatement.close();
         this.statement.close();
+        this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet, this.blob, this.callableStatement,
                 output);
