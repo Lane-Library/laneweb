@@ -87,6 +87,12 @@ public class ProxyHostManagerTest {
     }
 
     @Test
+    public void testIsProxyableBadURI() {
+        assertTrue(this.manager.isProxyableLink(
+                "https://www.aap.org/en-us/kb/Documents/Red Book Online/Access Red Book Online From Anywhere.pdf"));
+    }
+
+    @Test
     public void testIsProxyableHost() {
         assertTrue(this.manager.isProxyableHost("www.uptodate.com"));
     }
@@ -109,5 +115,10 @@ public class ProxyHostManagerTest {
     @Test
     public void testIsProxyableLinkNull() {
         assertFalse(this.manager.isProxyableLink(null));
+    }
+
+    @Test
+    public void testIsProxyableNoTrailingSlash() {
+        assertTrue(this.manager.isProxyableLink("http://www.uptodate.com"));
     }
 }

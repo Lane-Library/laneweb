@@ -13,7 +13,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class EzproxyServersWriter {
 
@@ -41,34 +40,26 @@ public class EzproxyServersWriter {
 
     public void write(final OutputStream outputStream) throws IOException {
         Objects.requireNonNull(outputStream, "null outputStream");
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = this.dataSource.getConnection();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(this.sql);
+        try (Connection conn = this.dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(this.sql);
+                OutputStream out = outputStream) {
             while (rs.next()) {
                 String host = rs.getString(1);
-                outputStream.write(T);
-                outputStream.write(host.getBytes(StandardCharsets.UTF_8));
-                outputStream.write('\n');
-                outputStream.write(U);
-                outputStream.write(host.getBytes(StandardCharsets.UTF_8));
-                outputStream.write('\n');
-                outputStream.write(HJ);
-                outputStream.write(host.getBytes(StandardCharsets.UTF_8));
-                outputStream.write('\n');
-                outputStream.write('\n');
+                out.write(T);
+                out.write(host.getBytes(StandardCharsets.UTF_8));
+                out.write('\n');
+                out.write(U);
+                out.write(host.getBytes(StandardCharsets.UTF_8));
+                out.write('\n');
+                out.write(HJ);
+                out.write(host.getBytes(StandardCharsets.UTF_8));
+                out.write('\n');
+                out.write('\n');
             }
-            outputStream.write(SUL);
+            out.write(SUL);
         } catch (SQLException e) {
             throw new LanewebException(e);
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(stmt);
-            JdbcUtils.closeConnection(conn);
-            outputStream.close();
         }
     }
 }

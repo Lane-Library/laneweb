@@ -33,7 +33,7 @@
                 action: event.target.get('textContent'),
                 label: ancestor.one('.primaryLink').get('textContent')
             });
-        }, "#searchResults", ".descriptionTrigger");
+        }, ".content", ".descriptionTrigger");
     };
 
     //add trigger markup and delegate click events on class "descriptionTrigger"

@@ -192,4 +192,8 @@ public class SolrService {
         }
         return filters;
     }
+    
+    public Eresource getByBibID(String bibID) {
+        return this.repository.getByBibID(bibID);
+    }
 }

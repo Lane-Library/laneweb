@@ -53,4 +53,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SUGGEST)
     List<Eresource> suggestFindByType(String term, String type, Pageable page);
+    
+    @Query(value = "*:*", filters = {"id:bib-?0"}, requestHandler = Handlers.BROWSE)
+    Eresource getByBibID(String bibID);
 }

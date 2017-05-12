@@ -44,6 +44,22 @@ import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
 @Configuration
 public class PipelineConfiguration {
 
+    private static final String ENCODING = "encoding";
+
+    private static final String INDENT = "indent";
+
+    private static final String METHOD = "method";
+
+    private static final String NO = "no";
+
+    private static final String OMIT_XML_DECLARATION = "omit-xml-declaration";
+
+    private static final String UTF_8 = "UTF-8";
+
+    private static final String XHTML = "xhtml";
+
+    private static final String YES = "yes";
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Aggregator/<aggregator>")
     @Scope("prototype")
     public Aggregator aggregator() {
@@ -87,10 +103,10 @@ public class PipelineConfiguration {
     public Serializer html5IndentSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
-        props.setProperty("method", "xhtml");
-        props.setProperty("encoding", "UTF-8");
-        props.setProperty("indent", "yes");
-        props.setProperty("omit-xml-declaration", "yes");
+        props.setProperty(METHOD, XHTML);
+        props.setProperty(ENCODING, UTF_8);
+        props.setProperty(INDENT, YES);
+        props.setProperty(OMIT_XML_DECLARATION, YES);
         return new HTML5Serializer("html5-indent", saxonSAXTranformerFactory, props);
     }
 
@@ -99,10 +115,10 @@ public class PipelineConfiguration {
     public Serializer html5Serializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
-        props.setProperty("method", "xhtml");
-        props.setProperty("encoding", "UTF-8");
-        props.setProperty("indent", "no");
-        props.setProperty("omit-xml-declaration", "yes");
+        props.setProperty(METHOD, XHTML);
+        props.setProperty(ENCODING, UTF_8);
+        props.setProperty(INDENT, NO);
+        props.setProperty(OMIT_XML_DECLARATION, YES);
         return new HTML5Serializer("html5", saxonSAXTranformerFactory, props);
     }
 
@@ -171,7 +187,7 @@ public class PipelineConfiguration {
     public Serializer textSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
-        props.setProperty("method", "text");
+        props.setProperty(METHOD, "text");
         return new TransformerSerializer("text", saxonSAXTranformerFactory, props);
     }
 
@@ -186,13 +202,13 @@ public class PipelineConfiguration {
     public Serializer xhtmlSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
-        props.setProperty("method", "xhtml");
-        props.setProperty("encoding", "UTF-8");
-        props.setProperty("indent", "no");
+        props.setProperty(METHOD, XHTML);
+        props.setProperty(ENCODING, UTF_8);
+        props.setProperty(INDENT, NO);
         props.setProperty("doctype-public", "-//W3C//DTD XHTML 1.0 Strict//EN");
         props.setProperty("doctype-system", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd");
-        props.setProperty("omit-xml-declaration", "yes");
-        return new HTML5Serializer("xhtml", saxonSAXTranformerFactory, props);
+        props.setProperty(OMIT_XML_DECLARATION, YES);
+        return new HTML5Serializer(XHTML, saxonSAXTranformerFactory, props);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/xinclude")
@@ -207,7 +223,7 @@ public class PipelineConfiguration {
     public Serializer xmlSerializer(
             @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
         Properties props = new Properties();
-        props.setProperty("method", "xml");
+        props.setProperty(METHOD, "xml");
         return new TransformerSerializer("xml", saxonSAXTranformerFactory, props);
     }
 }

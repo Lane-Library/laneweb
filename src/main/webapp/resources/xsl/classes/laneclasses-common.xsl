@@ -48,25 +48,13 @@
     </xsl:template>
 
     <xsl:template name="firstWords">
-		<xsl:param name="value"/>
-		<xsl:param name="count"/>
-		<xsl:if test="number($count) = 1">
-			<xsl:value-of select="substring-before($value,' ')"/>
-		</xsl:if>
-		<xsl:if test="number($count) > 1 and  number($count+1) != $description-length">
-			<xsl:value-of select="concat(substring-before($value,' '),' ')"/>
-		</xsl:if>
-		<xsl:if test="number($count) > 1">
-			<xsl:variable name="remaining" select="substring-after($value,' ')"/>
-			<xsl:if test="string-length($remaining) > 0">
-				<xsl:call-template name="firstWords">
-					<xsl:with-param name="value" select="$remaining"/>
-					<xsl:with-param name="count" select="number($count)-1"/>
-				</xsl:call-template>
-			</xsl:if>
-		</xsl:if>
-	</xsl:template>
-    
+        <xsl:param name="value"/>
+        <xsl:param name="count"/>
+        <xsl:variable name="words" select="tokenize($value, ' ')"/>
+        <xsl:for-each select="$words[position() &lt;= $count]">
+            <xsl:value-of select="."/>
+            <xsl:text> </xsl:text>
+        </xsl:for-each>
+    </xsl:template>
 
-    
 </xsl:stylesheet>

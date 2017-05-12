@@ -15,6 +15,7 @@ import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.pipeline.Generator;
+import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.AdvancedQueryInspector;
 import edu.stanford.irt.laneweb.eresources.DoiQueryInspector;
@@ -28,10 +29,12 @@ import edu.stanford.irt.laneweb.eresources.QueryInspector;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
 import edu.stanford.irt.laneweb.eresources.SolrRepository;
 import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.browse.BibIDToEresourceTransformer;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseAllEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.CoreEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
+import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.MeSHEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
@@ -95,6 +98,17 @@ public class EresourcesConfiguration {
     @Scope("prototype")
     public Generator eresourcesMeshGenerator() {
         return new MeSHEresourcesGenerator("er-mesh-html", this.solrService(), pagingEresourceListHTMLSAXStrategy());
+    }
+
+    @Bean
+    public SAXStrategy<Eresource> linkWithCoverSAXStrategy() {
+        return new LinkWithCoverEresourceSAXStrategy();
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-with-cover")
+    @Scope("prototype")
+    public Transformer linkWithCoverTransformer() {
+        return new BibIDToEresourceTransformer(solrService(), linkWithCoverSAXStrategy());
     }
 
     @Bean

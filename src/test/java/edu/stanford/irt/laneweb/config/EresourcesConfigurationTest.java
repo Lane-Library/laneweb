@@ -45,6 +45,16 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
+    public void testLinkWithCoverSAXStrategy() {
+        assertNotNull(this.configuration.linkWithCoverSAXStrategy());
+    }
+
+    @Test
+    public void testLinkWithCoverTransformer() {
+        assertNotNull(this.configuration.linkWithCoverTransformer());
+    }
+
+    @Test
     public void testPagingEresourceListHTMLSAXStrategy() {
         assertNotNull(this.configuration.pagingEresourceListHTMLSAXStrategy());
     }

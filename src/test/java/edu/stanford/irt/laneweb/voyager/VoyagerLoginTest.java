@@ -50,7 +50,7 @@ public class VoyagerLoginTest {
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));
         this.statement.close();
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(2);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource, this.connection, this.statement, this.resultSet);

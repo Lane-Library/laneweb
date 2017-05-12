@@ -68,12 +68,7 @@
                 <div class="yui3-u-7-12">
                     <div class="details">
                         <h4>
-                            <a>
-                                <xsl:attribute name="href">
-                                <xsl:text>/classes-consult/archive.html?class-id=</xsl:text>
-                                <b>  <xsl:value-of
-                                    select="lc:module_id/text()" /></b>
-                            </xsl:attribute>
+                            <a href="/classes-consult/archive.html?class-id={lc:module_id}">
                                 <xsl:value-of select="./lc:event_name" />
                             </a>
                         </h4>
@@ -82,54 +77,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="yui3-u-7-24">
-                    <xsl:call-template name="video" />
-                </div>
+                <xsl:apply-templates select="lc:more_info_url[string-length() &gt; 0]"/>
             </div>
         </div>
     </xsl:template>
-
-    <xsl:template name="video">
-        <div class="youtube-class">
-            <xsl:if test="./lc:more_info_url/text() != ''">
-                <xsl:if test="contains( ./lc:more_info_url/text() ,  'youtube')">
-                    <xsl:call-template name="youtube" />
-                </xsl:if>
-                <xsl:if test="not( contains( ./lc:more_info_url/text() ,  'youtube'))">
-                    <xsl:call-template name="not_youtube" />
-                </xsl:if>
-            </xsl:if>
-        </div>
-    </xsl:template>
-
-    <xsl:template name="not_youtube">
-        <a>
-            <xsl:attribute name="class">
-                     <xsl:text>button</xsl:text>                     
-             </xsl:attribute>
-            <xsl:attribute name="href">
-                     <xsl:value-of select="./lc:more_info_url/text()" />
-             </xsl:attribute>
-            <span>
-                <i class="icon fa fa-video-camera" />
-                Watch Video
-            </span>
-            <i class="icon fa fa-arrow-right" />
-        </a>
-        <div>SUNet ID required</div>
-    </xsl:template>
-
-    <xsl:template name="youtube">
-        <div>
-        <iframe>
-            <xsl:attribute name="src" select="./lc:more_info_url/text()" />
-            <xsl:attribute name="rameborder">0</xsl:attribute>
-            <xsl:attribute name="allowfullscreen"> </xsl:attribute>
-            <xsl:attribute name="frameborder">0</xsl:attribute>
-            <xsl:attribute name="allowfullscreen"> </xsl:attribute>
-            <xsl:attribute name="width">200</xsl:attribute>
-            <xsl:attribute name="height">120</xsl:attribute>
-        </iframe>
+    
+    <xsl:template match="lc:more_info_url">
+        <xsl:variable name="schemeless-url">
+            <xsl:choose>
+                <xsl:when test="contains(.,'://')">
+                    <xsl:value-of select="substring-after(., ':')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <div class="yui3-u-7-24">
+            <div class="youtube-class">
+                <xsl:choose>
+                    <xsl:when test="contains($schemeless-url, 'youtube')">
+                        <iframe src="{$schemeless-url}" width="200" height="120" frameborder="0" allowfullscreen="true"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <a class="button" href="{$schemeless-url}">
+                            <span><i class="icon fa fa-video-camera"/> Watch Video</span>
+                            <i class="icon fa fa-arrow-right"/>
+                        </a>
+                        <div>SUNet ID required</div>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </div>
         </div>
     </xsl:template>
 

@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -18,6 +16,10 @@ import org.slf4j.LoggerFactory;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class ProxyHostManager {
+
+    private static final String COLON_DOUBLE_SLASH = "://";
+
+    private static final int COLON_DOUBLE_SLASH_LENGTH = COLON_DOUBLE_SLASH.length();
 
     private static final long DEFAULT_DELAY = 120L;
 
@@ -61,21 +63,19 @@ public class ProxyHostManager {
     }
 
     public boolean isProxyableLink(final String link) {
-        if (link == null) {
-            return false;
+        boolean proxyable = false;
+        if (link != null) {
+            int doubleSlashIndex = link.indexOf(COLON_DOUBLE_SLASH);
+            if (doubleSlashIndex > -1) {
+                String hostAndPath = link.substring(doubleSlashIndex + COLON_DOUBLE_SLASH_LENGTH);
+                int slashIndex = hostAndPath.indexOf('/');
+                if (slashIndex == -1) {
+                    slashIndex = hostAndPath.length();
+                }
+                String host = hostAndPath.substring(0, slashIndex);
+                proxyable = isProxyableHost(host);
+            }
         }
-        // parsing links as URIs to easily get host, but need to clean them up by trimming and removing query string:
-        String linkToCheck = link.trim();
-        int qmark = linkToCheck.indexOf('?');
-        if (qmark > 0) {
-            linkToCheck = linkToCheck.substring(0, qmark);
-        }
-        try {
-            URI uri = new URI(linkToCheck);
-            return isProxyableHost(uri.getHost());
-        } catch (URISyntaxException e) {
-            log.error("unable to determine host from link: {}, error: {}", link, e.getMessage());
-            return false;
-        }
+        return proxyable;
     }
 }
