@@ -62,15 +62,15 @@ public class PagingData implements Serializable {
         return this.page;
     }
 
-    public int getPages() {
+    public final int getPages() {
         return this.pages;
     }
 
-    public int getPageSize() {
+    public final int getPageSize() {
         return this.pageSize;
     }
 
-    public int getSize() {
+    public final int getSize() {
         return this.size;
     }
 

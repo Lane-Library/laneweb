@@ -37,6 +37,20 @@ public class VoyagerLogin {
         this.dataSource = dataSource;
     }
 
+    private static void updateDatabase(final Connection conn, final String voyagerUnivId, final String pid)
+            throws SQLException {
+        // univid found so write to voyager tables
+        try (PreparedStatement clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
+                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL);) {
+            clearStmt.setString(UNIV_ID, voyagerUnivId);
+            clearStmt.setString(PID, pid);
+            clearStmt.executeUpdate();
+            createStmt.setString(UNIV_ID, voyagerUnivId);
+            createStmt.setString(PID, pid);
+            createStmt.executeUpdate();
+        }
+    }
+
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         String voyagerURL = ERROR_URL;
         if (pid == null || !PID_PATTERN.matcher(pid).matches()) {
@@ -52,17 +66,8 @@ public class VoyagerLogin {
                 try (ResultSet rs = checkStmt.executeQuery()) {
                     rs.next();
                     if (rs.getInt(1) > 0) {
-                        // univid found so write to voyager tables
-                        try (PreparedStatement clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-                                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL);) {
-                            clearStmt.setString(UNIV_ID, voyagerUnivId);
-                            clearStmt.setString(PID, pid);
-                            clearStmt.executeUpdate();
-                            createStmt.setString(UNIV_ID, voyagerUnivId);
-                            createStmt.setString(PID, pid);
-                            createStmt.executeUpdate();
-                            voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
-                        }
+                        updateDatabase(conn, voyagerUnivId, pid);
+                        voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
                     } else {
                         LOG.error("unable to find univId in voyager: {}", univId);
                     }

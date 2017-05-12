@@ -64,16 +64,7 @@ public final class Facet {
         String facetUrl;
         String joiner = this.activeFacets.isEmpty() ? EMPTY : SolrService.FACETS_SEPARATOR;
         if (this.enabled) {
-            facetUrl = this.activeFacets.replaceFirst(BEGINS_WITH_OR_TWO_COLONS + this.fieldName + COLON
-                    + getMaybeQuote() + Pattern.quote(this.value) + getMaybeQuote(), EMPTY);
-            if (TYPE_FACET.equals(this.fieldName)) {
-                for (String typeValue : TYPE_FACET_EXCEPTIONS) {
-                    if (typeValue.equals(this.value)) {
-                        facetUrl = this.activeFacets.replaceAll(BEGINS_WITH_OR_TWO_COLONS + TYPE_FACET + COLON + QUOTE
-                                + typeValue + " ?(Digital|Print)?\"", EMPTY);
-                    }
-                }
-            }
+            facetUrl = getEnabledFacetUrl();
         } else {
             facetUrl = this.activeFacets + joiner + this.fieldName + COLON + getMaybeQuote() + this.value
                     + getMaybeQuote();
@@ -115,6 +106,21 @@ public final class Facet {
             throw new LanewebException(e);
         }
         return encoded;
+    }
+
+    private String getEnabledFacetUrl() {
+        String facetUrl = this.activeFacets.replaceFirst(BEGINS_WITH_OR_TWO_COLONS + this.fieldName + COLON
+                + getMaybeQuote() + Pattern.quote(this.value) + getMaybeQuote(), EMPTY);
+        if (TYPE_FACET.equals(this.fieldName)) {
+            for (String typeValue : TYPE_FACET_EXCEPTIONS) {
+                if (typeValue.equals(this.value)) {
+                    facetUrl = this.activeFacets.replaceAll(
+                            BEGINS_WITH_OR_TWO_COLONS + TYPE_FACET + COLON + QUOTE + typeValue + " ?(Digital|Print)?\"",
+                            EMPTY);
+                }
+            }
+        }
+        return facetUrl;
     }
 
     private String getMaybeQuote() {
