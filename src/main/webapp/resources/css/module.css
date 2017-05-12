@@ -18,11 +18,13 @@
     visibility: hidden;
 }
 
-.module-img {
+.module-img, .bookcover.module-img {
     float: left;
     margin-right: 1em;
 }
-
+.bookcover.module-img {
+    height: 81px;
+}
 /* book covers in 2 columns*/
 .core-covers {
     float: left;
