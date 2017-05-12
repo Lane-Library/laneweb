@@ -76,7 +76,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.65.0</version>
+            <version>1.66.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
