@@ -1,6 +1,9 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrClient;
@@ -39,6 +42,7 @@ import edu.stanford.irt.laneweb.eresources.browse.MeSHEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator;
+import edu.stanford.irt.laneweb.eresources.search.FacetComparator;
 import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchFacetsGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
@@ -49,7 +53,17 @@ import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
         "edu.stanford.irt.laneweb.eresources" }, multicoreSupport = true, solrClientRef = "laneSearchSolrServer")
 public class EresourcesConfiguration {
 
+    private static final int FACETS_TO_SHOW_BROWSE = 20;
+
+    private static final int FACETS_TO_SHOW_SEARCH = 4;
+
+    private FacetComparator facetComparator;
+
     private Marshaller marshaller;
+
+    private Collection<String> meshToIgnoreInSearch;
+
+    private Collection<String> publicationTypes;
 
     @Autowired
     private SolrRepository solrRepository;
@@ -61,6 +75,40 @@ public class EresourcesConfiguration {
             final Marshaller marshaller) {
         this.solrServerUrl = solrServerUrl;
         this.marshaller = marshaller;
+        this.meshToIgnoreInSearch = new HashSet<>(25);
+        this.meshToIgnoreInSearch.add("nomesh");
+        this.meshToIgnoreInSearch.add("Adolescent");
+        this.meshToIgnoreInSearch.add("Adult");
+        this.meshToIgnoreInSearch.add("Aged");
+        this.meshToIgnoreInSearch.add("Aged, 80 and over");
+        this.meshToIgnoreInSearch.add("Animals");
+        this.meshToIgnoreInSearch.add("Cats");
+        this.meshToIgnoreInSearch.add("Cattle");
+        this.meshToIgnoreInSearch.add("Chick Embryo");
+        this.meshToIgnoreInSearch.add("Child");
+        this.meshToIgnoreInSearch.add("Child, Preschool");
+        this.meshToIgnoreInSearch.add("Cricetinae");
+        this.meshToIgnoreInSearch.add("Dogs");
+        this.meshToIgnoreInSearch.add("Female");
+        this.meshToIgnoreInSearch.add("Guinea Pigs");
+        this.meshToIgnoreInSearch.add("Humans");
+        this.meshToIgnoreInSearch.add("Infant");
+        this.meshToIgnoreInSearch.add("Infant, Newborn");
+        this.meshToIgnoreInSearch.add("Male");
+        this.meshToIgnoreInSearch.add("Mice");
+        this.meshToIgnoreInSearch.add("Middle Aged");
+        this.meshToIgnoreInSearch.add("Pregnancy");
+        this.meshToIgnoreInSearch.add("Rabbits");
+        this.meshToIgnoreInSearch.add("Rats");
+        this.meshToIgnoreInSearch.add("Young Adult");
+        this.meshToIgnoreInSearch = Collections.unmodifiableCollection(this.meshToIgnoreInSearch);
+        this.publicationTypes = new HashSet<>(4);
+        this.publicationTypes.add("Clinical Trial");
+        this.publicationTypes.add("Randomized Controlled Trial");
+        this.publicationTypes.add("Review");
+        this.publicationTypes.add("Systematic Review");
+        this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
+        this.facetComparator = new FacetComparator(this.publicationTypes);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
@@ -71,33 +119,32 @@ public class EresourcesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-all-html")
     @Scope("prototype")
     public Generator eresourcesBrowseAllGenerator() {
-        return new BrowseAllEresourcesGenerator("er-browse-all-html", this.solrService(),
+        return new BrowseAllEresourcesGenerator("er-browse-all-html", solrService(),
                 pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-html")
     @Scope("prototype")
     public Generator eresourcesBrowseGenerator() {
-        return new BrowseEresourcesGenerator("er-browse-html", this.solrService(),
-                pagingEresourceListHTMLSAXStrategy());
+        return new BrowseEresourcesGenerator("er-browse-html", solrService(), pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-core-html")
     @Scope("prototype")
     public Generator eresourcesCoreGenerator() {
-        return new CoreEresourcesGenerator("er-core-html", this.solrService(), pagingEresourceListHTMLSAXStrategy());
+        return new CoreEresourcesGenerator("er-core-html", solrService(), pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/eresources-count")
     @Scope("prototype")
     public Generator eresourcesCountGenerator() {
-        return new EresourcesCountGenerator(this.solrService());
+        return new EresourcesCountGenerator(solrService());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-mesh-html")
     @Scope("prototype")
     public Generator eresourcesMeshGenerator() {
-        return new MeSHEresourcesGenerator("er-mesh-html", this.solrService(), pagingEresourceListHTMLSAXStrategy());
+        return new MeSHEresourcesGenerator("er-mesh-html", solrService(), pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean
@@ -142,49 +189,14 @@ public class EresourcesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets")
     @Scope("prototype")
     public Generator solrSearchFacetsGenerator() {
-        SolrSearchFacetsGenerator generator = new SolrSearchFacetsGenerator(this.solrService(), this.marshaller);
-        generator.setFacetsToShowBrowse(20);
-        generator.setFacetsToShowSearch(4);
-        List<String> meshToIgnoreInSearch = new ArrayList<>(25);
-        meshToIgnoreInSearch.add("nomesh");
-        meshToIgnoreInSearch.add("Adolescent");
-        meshToIgnoreInSearch.add("Adult");
-        meshToIgnoreInSearch.add("Aged");
-        meshToIgnoreInSearch.add("Aged, 80 and over");
-        meshToIgnoreInSearch.add("Animals");
-        meshToIgnoreInSearch.add("Cats");
-        meshToIgnoreInSearch.add("Cattle");
-        meshToIgnoreInSearch.add("Chick Embryo");
-        meshToIgnoreInSearch.add("Child");
-        meshToIgnoreInSearch.add("Child, Preschool");
-        meshToIgnoreInSearch.add("Cricetinae");
-        meshToIgnoreInSearch.add("Dogs");
-        meshToIgnoreInSearch.add("Female");
-        meshToIgnoreInSearch.add("Guinea Pigs");
-        meshToIgnoreInSearch.add("Humans");
-        meshToIgnoreInSearch.add("Infant");
-        meshToIgnoreInSearch.add("Infant, Newborn");
-        meshToIgnoreInSearch.add("Male");
-        meshToIgnoreInSearch.add("Mice");
-        meshToIgnoreInSearch.add("Middle Aged");
-        meshToIgnoreInSearch.add("Pregnancy");
-        meshToIgnoreInSearch.add("Rabbits");
-        meshToIgnoreInSearch.add("Rats");
-        meshToIgnoreInSearch.add("Young Adult");
-        generator.setMeshToIgnoreInSearch(meshToIgnoreInSearch);
-        List<String> publicationTypes = new ArrayList<>(4);
-        publicationTypes.add("Clinical Trial");
-        publicationTypes.add("Randomized Controlled Trial");
-        publicationTypes.add("Review");
-        publicationTypes.add("Systematic Review");
-        generator.setPrioritizedPublicationTypes(publicationTypes);
-        return generator;
+        return new SolrSearchFacetsGenerator(solrService(), this.marshaller, FACETS_TO_SHOW_BROWSE,
+                FACETS_TO_SHOW_SEARCH, this.meshToIgnoreInSearch, this.publicationTypes, this.facetComparator);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-search")
     @Scope("prototype")
     public Generator solrSearchGenerator() {
-        return new SolrSearchGenerator(this.solrService(), solrPagingEresourceSAXStrategy());
+        return new SolrSearchGenerator(solrService(), solrPagingEresourceSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.solr.SolrService")

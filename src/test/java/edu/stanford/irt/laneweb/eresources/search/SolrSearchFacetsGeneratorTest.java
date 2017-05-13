@@ -59,12 +59,11 @@ public class SolrSearchFacetsGeneratorTest {
         this.service = createMock(SolrService.class);
         this.marshaller = createMock(Marshaller.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.generator = new SolrSearchFacetsGenerator(this.service, this.marshaller);
+        Collection<String> publicationTypes = Arrays.asList("Required1", "Required2");
+        FacetComparator facetComparator = new FacetComparator(publicationTypes);
+        this.generator = new SolrSearchFacetsGenerator(this.service, this.marshaller, 10, 2,
+                Arrays.asList("MeshSkip1", "MeshSkip2"), publicationTypes, facetComparator);
         this.model = new HashMap<>();
-        this.generator.setFacetsToShowBrowse(10);
-        this.generator.setFacetsToShowSearch(2);
-        this.generator.setMeshToIgnoreInSearch(Arrays.asList("MeshSkip1", "MeshSkip2"));
-        this.generator.setPrioritizedPublicationTypes(Arrays.asList("Required1", "Required2"));
         this.facetpage = createMock(FacetPage.class);
         this.pageFacetQueries = createMock(Page.class);
         this.facetQueryEntry = createMock(FacetQueryEntry.class);
