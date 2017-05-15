@@ -46,26 +46,12 @@ public class VoyagerLogin {
         } else {
             // voyager data prepends 0
             String voyagerUnivId = "0" + univId;
-            try (Connection conn = this.dataSource.getConnection();
-                    PreparedStatement checkStmt = conn.prepareStatement(CHECK_ID_SQL)) {
-                checkStmt.setString(UNIV_ID, voyagerUnivId);
-                try (ResultSet rs = checkStmt.executeQuery()) {
-                    rs.next();
-                    if (rs.getInt(1) > 0) {
-                        // univid found so write to voyager tables
-                        try (PreparedStatement clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-                                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL);) {
-                            clearStmt.setString(UNIV_ID, voyagerUnivId);
-                            clearStmt.setString(PID, pid);
-                            clearStmt.executeUpdate();
-                            createStmt.setString(UNIV_ID, voyagerUnivId);
-                            createStmt.setString(PID, pid);
-                            createStmt.executeUpdate();
-                            voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
-                        }
-                    } else {
-                        LOG.error("unable to find univId in voyager: {}", univId);
-                    }
+            try {
+                if (userInDatabase(voyagerUnivId)) {
+                    updateDatabase(voyagerUnivId, pid);
+                    voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
+                } else {
+                    LOG.error("unable to find univId in voyager: {}", univId);
                 }
             } catch (SQLException e) {
                 LOG.error(e.getMessage(), e);
@@ -73,5 +59,29 @@ public class VoyagerLogin {
             }
         }
         return voyagerURL;
+    }
+
+    private void updateDatabase(final String voyagerUnivId, final String pid) throws SQLException {
+        // univid found so write to voyager tables
+        try (Connection conn = this.dataSource.getConnection();
+                PreparedStatement clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
+                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL);) {
+            clearStmt.setString(UNIV_ID, voyagerUnivId);
+            clearStmt.setString(PID, pid);
+            clearStmt.executeUpdate();
+            createStmt.setString(UNIV_ID, voyagerUnivId);
+            createStmt.setString(PID, pid);
+            createStmt.executeUpdate();
+        }
+    }
+
+    private boolean userInDatabase(final String voyagerUnivId) throws SQLException {
+        try (Connection conn = this.dataSource.getConnection();
+                PreparedStatement checkStmt = conn.prepareStatement(CHECK_ID_SQL)) {
+            checkStmt.setString(UNIV_ID, voyagerUnivId);
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                return rs.next() && rs.getInt(1) > 0;
+            }
+        }
     }
 }

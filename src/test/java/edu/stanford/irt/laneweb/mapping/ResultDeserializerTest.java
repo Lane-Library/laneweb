@@ -10,8 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.ContentResult;
@@ -23,7 +25,10 @@ public class ResultDeserializerTest {
 
     @Before
     public void setUp() {
-        this.objectMapper = new LanewebObjectMapper();
+        this.objectMapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
+        module.addDeserializer(Result.class, new ResultDeserializer());
+        this.objectMapper.registerModule(module);
     }
 
     @Test

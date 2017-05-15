@@ -41,11 +41,19 @@ public class LinkWithCoverEresourceSAXStrategyTest {
         this.link = createMock(Link.class);
     }
 
+    @Test(expected = LanewebException.class)
+    public void testNoLink() throws IOException, SAXException {
+        expect(this.eresource.getId()).andReturn("bib-12");
+        expect(this.eresource.getLinks()).andReturn(Collections.emptySet());
+        replay(this.eresource, this.link);
+        this.saxStrategy.toSAX(this.eresource, this.xmlConsumer);
+    }
+
     @Test
     public void testToSAX() throws IOException, SAXException {
+        expect(this.eresource.getId()).andReturn("bib-12");
         expect(this.eresource.getLinks()).andReturn(Collections.singleton(this.link));
         expect(this.link.getUrl()).andReturn("url");
-        expect(this.eresource.getId()).andReturn("bib-12");
         expect(this.eresource.getTitle()).andReturn("Lancet");
         replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
@@ -61,6 +69,7 @@ public class LinkWithCoverEresourceSAXStrategyTest {
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws IOException, SAXException {
         XMLConsumer x = createMock(XMLConsumer.class);
+        expect(this.eresource.getId()).andReturn("bib-12");
         expect(this.eresource.getLinks()).andReturn(Collections.singleton(this.link));
         expect(this.link.getUrl()).andReturn("url");
         x.startElement(same("http://www.w3.org/1999/xhtml"), same("a"), same("a"), isA(AttributesImpl.class));

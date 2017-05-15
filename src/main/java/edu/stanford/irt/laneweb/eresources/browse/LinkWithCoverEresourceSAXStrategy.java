@@ -11,6 +11,8 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<Eresource> {
 
+    private static final int BIB_ID_PREFIX_LENGTH = 4;
+
     private static final String CDATA = "CDATA";
 
     private static final String EMPTY_NS = "";
@@ -18,9 +20,13 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
     @Override
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
-            String href = eresource.getLinks().stream().findFirst().get().getUrl();
+            String bibID = eresource.getId().substring(BIB_ID_PREFIX_LENGTH);
+            String href = eresource.getLinks()
+                    .stream()
+                    .findFirst()
+                    .orElseThrow(() -> new LanewebException("no link for eresource " + bibID))
+                    .getUrl();
             startAnchor(xmlConsumer, href);
-            String bibID = eresource.getId().substring(4);
             String title = eresource.getTitle();
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
