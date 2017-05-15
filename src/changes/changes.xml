@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-05-15" version="3.3.31" description="3.3.31 bug fix release">
+            <action date="2017-05-11" dev="ceyates" issue="133899" type="fix">
+                code to truncate class text drops a word
+            </action>
+            <action date="2017-05-11" dev="ceyates" issue="133888" type="fix">
+                bookcovers: multiple isbns not getting checked for thumbnails if the first one doesn't have one
+            </action>
+            <action date="2017-05-11" dev="ryanmax" issue="133879" type="fix">
+                can't toggle Description on browse page
+            </action>
+            <action date="2017-05-09" dev="ceyates" issue="133816" type="fix">
+                youtube video links disappear on click
+            </action>
+            <action date="2017-05-08" dev="ceyates" issue="133788" type="update">
+                don't log an error when eresource browse page is empty
+            </action>
+            <action date="2017-05-08" dev="ceyates" issue="133785" type="fix">
+                some proxyable links not being proxied
+            </action>
+            <action date="2017-05-10" dev="ceyates" issue="131724" type="fix">
+                using back button to return to search result page scrolls to top
+            </action>
+        </release>
         <release date="2017-05-08" version="3.3.30" description="3.3.30 bug fix release">
             <action date="2017-05-05" dev="ceyates" issue="133737" type="fix">
                 search help href on peds portal is empty
