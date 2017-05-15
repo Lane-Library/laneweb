@@ -65,7 +65,7 @@ public class VoyagerLogin {
         // univid found so write to voyager tables
         try (Connection conn = this.dataSource.getConnection();
                 PreparedStatement clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL);) {
+                PreparedStatement createStmt = conn.prepareStatement(CREATE_SESSION_SQL)) {
             clearStmt.setString(UNIV_ID, voyagerUnivId);
             clearStmt.setString(PID, pid);
             clearStmt.executeUpdate();
