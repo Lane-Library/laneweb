@@ -391,6 +391,7 @@
                     <excludes>
                         <exclude>**/lane-all.css</exclude>
                         <exclude>**/lane-all.js</exclude>
+                        <exclude>**/lane-history.js</exclude>
                         <exclude>**/lane-mobile.css</exclude>
                         <exclude>**/lane-mobile.js</exclude>
                         <exclude>**/test/*/*.js</exclude>
@@ -552,6 +553,15 @@
                             <includes>
                                 <include>${basedir}/src/main/webapp/resources/css/history/yui.css</include>
                                 <include>history-min.css</include>
+                            </includes>
+                        </aggregation>
+                        <aggregation>
+                            <removeIncluded>false</removeIncluded>
+                            <output>${project.build.directory}/laneweb/resources/javascript/history/lane-history.js</output>
+                            <includes>
+                                <include>../golfclub-headings-min.js</include>
+                                <include>flickr-min.js</include>
+                                <include>../back-to-top-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>
