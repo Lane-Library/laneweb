@@ -417,6 +417,7 @@
                                 <include>som-footer-min.css</include>
                                 <include>lane-footer-min.css</include>
                                 <include>headers-min.css</include>
+                                <include>golfclub-min.css</include>
                                 <include>module-min.css</include>
                                 <include>search-min.css</include>
                                 <include>popups-min.css</include>
@@ -553,6 +554,7 @@
                             <includes>
                                 <include>${basedir}/src/main/webapp/resources/css/history/yui.css</include>
                                 <include>history-min.css</include>
+                                <include>../golfclub-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

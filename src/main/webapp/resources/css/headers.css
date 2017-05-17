@@ -7,28 +7,6 @@ h2 {
     color: #666666;
     text-align: center;
 }
-.golfclub span span {
-    display: table-cell;
-    padding: 0 12px;
-    vertical-align: middle;
-    width: 50%;
-}
-.golfclub span {
-    display: table-row;
-    white-space: nowrap;
-}
-.golfclub-left:before, .golfclub-right:before {
-    content: ' ';
-    display: block;
-    border-top: 1px #d8dbdc solid;
-    height: 4px;
-}
-.golfclub-left:before {
-    border-right: 26px #d8dbdc solid;
-}
-.golfclub-right:before {
-    border-left: 26px #d8dbdc solid;
-}
 h3, h4 {
     color: #333;
     font-size: 22px;
