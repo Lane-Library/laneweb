@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div>
+   <a href="url">
+      <img data-bibid="12"
+           class="bookcover module-img"
+           title="Book Cover: Lancet"/>
+   </a>
+   <a href="url">Lancet</a>
+</div>

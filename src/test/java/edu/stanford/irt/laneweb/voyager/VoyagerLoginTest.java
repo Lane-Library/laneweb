@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.voyager;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -52,7 +53,7 @@ public class VoyagerLoginTest {
         this.statement.close();
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.dataSource.getConnection()).andReturn(this.connection).times(2);
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
         verify(this.dataSource, this.connection, this.statement);
@@ -83,7 +84,8 @@ public class VoyagerLoginTest {
         this.statement.close();
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expectLastCall().times(2);
+        expect(this.dataSource.getConnection()).andReturn(this.connection).times(2);
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y",
                 this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
@@ -124,7 +126,7 @@ public class VoyagerLoginTest {
         this.statement.close();
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement).times(3);
         this.connection.close();
-        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.dataSource.getConnection()).andReturn(this.connection).times(2);
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
         verify(this.dataSource, this.connection, this.statement);

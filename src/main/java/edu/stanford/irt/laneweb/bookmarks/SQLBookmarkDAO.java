@@ -48,22 +48,46 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         this.dataSource = dataSource;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt) throws SQLException {
+        List<Bookmark> links = null;
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                try (ObjectInputStream oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream())) {
+                    links = (List<Bookmark>) oip.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    LOG.error(e.getMessage(), e);
+                }
+            }
+        }
+        return links;
+    }
+
+    private static void saveLinksToDatabase(final List<Bookmark> links, final Connection conn, final String userid)
+            throws SQLException, IOException {
+        if (!links.isEmpty()) {
+            try (CallableStatement cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL)) {
+                cstmt.setString(USER_ID, userid);
+                cstmt.registerOutParameter(BLOB, java.sql.Types.BLOB);
+                cstmt.executeUpdate();
+                Blob blob = cstmt.getBlob(BLOB);
+                try (ObjectOutputStream oop = new ObjectOutputStream(blob.setBinaryStream(1))) {
+                    oop.writeObject(Serializable.class.cast(links));
+                    oop.flush();
+                }
+            }
+        }
+    }
+
+    @Override
     public List<Bookmark> getLinks(final String userid) {
         Objects.requireNonNull(userid, "null userid");
         List<Bookmark> links = null;
         try (Connection conn = this.dataSource.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    try (ObjectInputStream oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream())) {
-                        links = (List<Bookmark>) oip.readObject();
-                    }
-                }
-            }
-        } catch (SQLException | IOException | ClassNotFoundException e) {
+            links = getLinksFromStatement(pstmt);
+        } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
         }
         return links;
@@ -92,18 +116,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
             pstmt.execute();
-            if (!links.isEmpty()) {
-                try (CallableStatement cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL)) {
-                    cstmt.setString(USER_ID, userid);
-                    cstmt.registerOutParameter(BLOB, java.sql.Types.BLOB);
-                    cstmt.executeUpdate();
-                    Blob blob = cstmt.getBlob(BLOB);
-                    try (ObjectOutputStream oop = new ObjectOutputStream(blob.setBinaryStream(1))) {
-                        oop.writeObject(Serializable.class.cast(links));
-                        oop.flush();
-                    }
-                }
-            }
+            saveLinksToDatabase(links, conn, userid);
             conn.commit();
         } catch (IOException | SQLException e) {
             try {

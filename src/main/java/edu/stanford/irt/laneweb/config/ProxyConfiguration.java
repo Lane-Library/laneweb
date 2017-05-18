@@ -15,11 +15,11 @@ import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
-import edu.stanford.irt.laneweb.proxy.ProxyHostSource;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.EzproxyServersWriter;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
+import edu.stanford.irt.laneweb.proxy.ProxyHostSource;
 import edu.stanford.irt.laneweb.proxy.ProxyLinkSelector;
 
 @Configuration

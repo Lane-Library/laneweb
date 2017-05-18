@@ -7,7 +7,7 @@
         <version>25</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.31-SNAPSHOT</version>
+    <version>3.3.32-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -76,7 +76,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.65.0</version>
+            <version>1.67.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -108,7 +108,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.55</version>
+            <version>3.0.56</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -304,7 +304,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>bookcovers</artifactId>
-            <version>1.0.0</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -391,6 +391,7 @@
                     <excludes>
                         <exclude>**/lane-all.css</exclude>
                         <exclude>**/lane-all.js</exclude>
+                        <exclude>**/lane-history.js</exclude>
                         <exclude>**/lane-mobile.css</exclude>
                         <exclude>**/lane-mobile.js</exclude>
                         <exclude>**/test/*/*.js</exclude>
@@ -416,6 +417,7 @@
                                 <include>som-footer-min.css</include>
                                 <include>lane-footer-min.css</include>
                                 <include>headers-min.css</include>
+                                <include>golfclub-min.css</include>
                                 <include>module-min.css</include>
                                 <include>search-min.css</include>
                                 <include>popups-min.css</include>
@@ -552,6 +554,16 @@
                             <includes>
                                 <include>${basedir}/src/main/webapp/resources/css/history/yui.css</include>
                                 <include>history-min.css</include>
+                                <include>../golfclub-min.css</include>
+                            </includes>
+                        </aggregation>
+                        <aggregation>
+                            <removeIncluded>false</removeIncluded>
+                            <output>${project.build.directory}/laneweb/resources/javascript/history/lane-history.js</output>
+                            <includes>
+                                <include>../golfclub-headings-min.js</include>
+                                <include>flickr-min.js</include>
+                                <include>../back-to-top-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>

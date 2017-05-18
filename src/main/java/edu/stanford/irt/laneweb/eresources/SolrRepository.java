@@ -38,6 +38,10 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "ertlsw?1", filters = { "isRecent:1 OR isLaneConnex:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
     List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
 
+    @Query(value = "*:*", requestHandler = Handlers.FACET)
+    @Facet(fields = { "recordType" }, minCount = 0, limit = 100)
+    SolrResultPage<Eresource> facetByRecordType(Pageable page);
+
     @Query(value = "?0", requestHandler = Handlers.FACET)
     @Facet(fields = { "type" }, minCount = 0, limit = 100)
     SolrResultPage<Eresource> facetByType(String term, Pageable page);
@@ -53,4 +57,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SUGGEST)
     List<Eresource> suggestFindByType(String term, String type, Pageable page);
+    
+    @Query(value = "*:*", filters = {"id:bib-?0"}, requestHandler = Handlers.BROWSE)
+    Eresource getByBibID(String bibID);
 }

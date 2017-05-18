@@ -14,6 +14,10 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.easymock.PowerMock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -21,6 +25,8 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(EresourceListPagingData.class )
 public class EresourceListPagingDataSAXStrategyTest {
 
     private PagingEresourceList list;
@@ -37,7 +43,7 @@ public class EresourceListPagingDataSAXStrategyTest {
     public void setUp() throws Exception {
         this.xmlConsumer = new TestXMLConsumer();
         this.strategy = new EresourceListPagingDataSAXStrategy();
-        this.pagingData = createMock(EresourceListPagingData.class);
+        this.pagingData = PowerMock.createMock(EresourceListPagingData.class);
         this.list = createMock(PagingEresourceList.class);
         this.pagingLabel = createMock(PagingLabel.class);
     }

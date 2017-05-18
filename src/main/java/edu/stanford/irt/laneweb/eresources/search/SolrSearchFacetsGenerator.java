@@ -59,23 +59,17 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private SolrService service;
 
-    public SolrSearchFacetsGenerator(final SolrService service, final Marshaller marshaller) {
+    public SolrSearchFacetsGenerator(final SolrService service, final Marshaller marshaller,
+            final int facetsToShowBrowse, final int facetsToShowSearch, final Collection<String> meshToIgnoreInSearch,
+            final Collection<String> publicationTypes, final FacetComparator comparator) {
         super(marshaller);
         this.service = service;
-    }
-
-    public void setFacetsToShowBrowse(final int facetsToShowBrowse) {
         // increment by one so we know if "next" link is needed
         this.facetsToShowBrowse = facetsToShowBrowse + 1;
-    }
-
-    public void setFacetsToShowSearch(final int facetsToShowSearch) {
-        // increment by one so we know if "more" link is needed
         this.facetsToShowSearch = facetsToShowSearch + 1;
-    }
-
-    public void setMeshToIgnoreInSearch(final Collection<String> meshToIgnoreInSearch) {
         this.meshToIgnoreInSearch = meshToIgnoreInSearch;
+        this.prioritizedPublicationTypes = publicationTypes;
+        this.comparator = comparator;
     }
 
     @Override
@@ -88,11 +82,6 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         }
         this.query = ModelUtil.getString(model, Model.QUERY);
         this.facetSort = ModelUtil.getString(model, Model.FACET_SORT, EMPTY);
-    }
-
-    public void setPrioritizedPublicationTypes(final Collection<String> publicationTypes) {
-        this.prioritizedPublicationTypes = publicationTypes;
-        this.comparator = new FacetComparator(this.prioritizedPublicationTypes);
     }
 
     @Override

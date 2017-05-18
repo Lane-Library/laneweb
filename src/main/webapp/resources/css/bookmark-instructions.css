@@ -39,7 +39,7 @@
     padding: 12px;
 }
 
-/*hide IE bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-#bookmarkletIE {
+/*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
+.bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE {
     display: none;
 }
