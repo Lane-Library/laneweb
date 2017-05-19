@@ -15,7 +15,6 @@ import java.util.Set;
 public final class EscapingQueryInspector implements QueryInspector {
 
     private static final Set<Character> ESCAPEABLE_CHARS = new HashSet<>();
-
     static {
         // these seem harmless | &
         // these seem useful and harmless " * ( )

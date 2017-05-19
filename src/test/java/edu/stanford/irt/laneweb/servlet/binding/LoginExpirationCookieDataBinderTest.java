@@ -33,7 +33,7 @@ public class LoginExpirationCookieDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.binder = new LoginExpirationCookieDataBinder();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
         this.cookie = createMock(Cookie.class);
     }
@@ -42,8 +42,8 @@ public class LoginExpirationCookieDataBinderTest {
     public void testBindBothCookies() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
-        expect(this.cookie.getValue())
-                .andReturn(Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
+        expect(this.cookie.getValue()).andReturn(
+                Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
         assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
@@ -65,8 +65,8 @@ public class LoginExpirationCookieDataBinderTest {
     public void testBindExpirationCookieOneDay() {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
-        expect(this.cookie.getValue())
-                .andReturn(Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
+        expect(this.cookie.getValue()).andReturn(
+                Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
         assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));

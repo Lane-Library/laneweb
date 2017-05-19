@@ -12,13 +12,14 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.coursereserves.CourseReservesDAO;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.coursereserves.CourseReservesService;
+import edu.stanford.irt.coursereserves.JDBCCourseReservesService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class CourseReservesItemListGeneratorTest {
 
-    private CourseReservesDAO dao;
+    private CourseReservesService dao;
 
     private CourseReservesItemListGenerator generator;
 
@@ -31,7 +32,7 @@ public class CourseReservesItemListGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.dao = createMock(CourseReservesDAO.class);
+        this.dao = createMock(JDBCCourseReservesService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new CourseReservesItemListGenerator(this.dao, this.saxStrategy);
         this.items = createMock(CourseReservesItemList.class);

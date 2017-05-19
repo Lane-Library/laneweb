@@ -24,7 +24,7 @@ public class CourseReservesConfigurationTest {
 
     @Test
     public void testCourseReservesDAO() throws IOException {
-        assertNotNull(this.configuration.courseReservesDAO());
+        assertNotNull(this.configuration.courseReservesService());
     }
 
     @Test

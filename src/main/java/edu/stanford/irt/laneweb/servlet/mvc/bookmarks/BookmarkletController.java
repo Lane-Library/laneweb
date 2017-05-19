@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
@@ -27,9 +27,9 @@ public class BookmarkletController extends BookmarkController {
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     @Autowired
-    public BookmarkletController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+    public BookmarkletController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
+        super(bookmarkService, bookmarkDataBinder, userDataBinder);
     }
 
     @RequestMapping(value = { "/bookmarklet", "/secure/bookmarklet" })

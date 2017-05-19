@@ -48,7 +48,7 @@ public class UserDataBinderTest {
 
     @Test
     public void testBind() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(this.user);
@@ -70,7 +70,7 @@ public class UserDataBinderTest {
 
     @Test
     public void testBindNoEmailOrName() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(this.user);
@@ -92,7 +92,7 @@ public class UserDataBinderTest {
 
     @Test
     public void testBindNotStanford() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(this.user);
@@ -114,7 +114,7 @@ public class UserDataBinderTest {
 
     @Test
     public void testBindNoUser() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(null);
         expect(this.userFactory.createUser(this.request)).andReturn(null).times(2);
@@ -126,7 +126,7 @@ public class UserDataBinderTest {
 
     @Test
     public void testBindUserInSession() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.USER)).andReturn(this.user);
         expect(this.user.getId()).andReturn("id");

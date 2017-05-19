@@ -23,14 +23,14 @@ public class BassettAccordionGeneratorTest {
 
     protected SolrImageService service;
 
+    FacetPage<BassettImage> facetPage;
+
     private BassettAccordionGenerator generator;
 
     private SAXStrategy<FacetPage<BassettImage>> saxStrategy;
 
     private XMLConsumer xmlConsumer;
 
-    FacetPage<BassettImage> facetPage;
-    
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
@@ -54,7 +54,7 @@ public class BassettAccordionGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testDoGenerateEmptyQuery() {
-       expect(this.service.facetBassettOnRegionAndSubRegion("*")).andReturn(this.facetPage);
+        expect(this.service.facetBassettOnRegionAndSubRegion("*")).andReturn(this.facetPage);
         this.saxStrategy.toSAX(isA(FacetPage.class), eq(this.xmlConsumer));
         replay(this.saxStrategy, this.xmlConsumer, this.service);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, ""));

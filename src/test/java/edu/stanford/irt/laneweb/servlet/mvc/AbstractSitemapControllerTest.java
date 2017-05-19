@@ -71,7 +71,7 @@ public class AbstractSitemapControllerTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.pipeline = createMock(Pipeline.class);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

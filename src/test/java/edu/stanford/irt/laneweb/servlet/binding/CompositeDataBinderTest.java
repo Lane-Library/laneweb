@@ -28,7 +28,7 @@ public class CompositeDataBinderTest {
         this.child = createMock(DataBinder.class);
         this.binder = new CompositeDataBinder(Collections.singletonList(this.child));
         this.request = createMock(HttpServletRequest.class);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

@@ -17,9 +17,11 @@ import edu.stanford.irt.laneweb.servlet.redirect.TrailingSlashRedirectProcessor;
 @Configuration
 public class RedirectConfiguration {
 
-    private static final String SEARCH_CLINICAL = "/search.html?sourceid=shc&source=clinical-all&$1";
+    private static final String SEARCH_CLINICAL =
+            "/search.html?sourceid=shc&source=clinical-all&$1";
 
-    private static final String SEARCH_INTERNAL_MEDICINE = "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1";
+    private static final String SEARCH_INTERNAL_MEDICINE =
+            "/portals/internal-medicine.html?sourceid=shc&source=/portals/internal-medicine.html&$1";
 
     @Bean
     public RedirectProcessor redirectProcessor() {

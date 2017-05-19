@@ -22,7 +22,7 @@ public class BaseProxyURLDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.binder = new BaseProxyURLDataBinder();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.model.put(Model.PROXY_LINKS, Boolean.TRUE);
     }
 

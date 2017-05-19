@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
@@ -33,9 +33,9 @@ public class JSONBookmarkController extends BookmarkController {
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
     @Autowired
-    public JSONBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+    public JSONBookmarkController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder, final RemoteProxyIPDataBinder proxyLinksDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
+        super(bookmarkService, bookmarkDataBinder, userDataBinder);
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
 

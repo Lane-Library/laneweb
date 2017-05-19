@@ -20,9 +20,9 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import edu.stanford.irt.bookcovers.BookCoverService;
 import edu.stanford.irt.bookcovers.CacheBookCoverService;
 import edu.stanford.irt.bookcovers.CompositeBookCoverService;
-import edu.stanford.irt.bookcovers.DatabaseBookCoverService;
 import edu.stanford.irt.bookcovers.GoogleBookCoverService;
-import edu.stanford.irt.bookcovers.ISBNService;
+import edu.stanford.irt.bookcovers.JDBCBookCoverService;
+import edu.stanford.irt.bookcovers.JDBCISBNService;
 
 @Configuration
 public class BookCoversConfiguration {
@@ -46,8 +46,8 @@ public class BookCoversConfiguration {
     public BookCoverService bookCoverService() {
         List<BookCoverService> services = new ArrayList<>();
         services.add(new CacheBookCoverService(new ConcurrentHashMap<Integer, Optional<String>>()));
-        services.add(new DatabaseBookCoverService(this.bookCoverDataSource));
-        services.add(new GoogleBookCoverService(new ISBNService(this.voyagerDataSource), new NetHttpTransport(),
+        services.add(new JDBCBookCoverService(this.bookCoverDataSource));
+        services.add(new GoogleBookCoverService(new JDBCISBNService(this.voyagerDataSource), new NetHttpTransport(),
                 new JsonObjectParser(new JacksonFactory()), this.apiKey));
         return new CompositeBookCoverService(services);
     }

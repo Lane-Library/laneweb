@@ -21,12 +21,12 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class SeminarsGenerator extends AbstractGenerator {
 
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
+
     private static final String SEMINARS_NS = "http://lane.stanford.edu/seminars/ns";
 
     private static final MessageFormat URL_FORMAT = new MessageFormat(
             "http://med.stanford.edu/seminars/validatecmecalendar.do?filter=true&selMonth={0}&selDay={1}&selYear={2}&futureNumberDays=60&departmentId=0&seminarLocation=0&keyword=&courseType=gran");
-
-    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private final DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("dd");
 

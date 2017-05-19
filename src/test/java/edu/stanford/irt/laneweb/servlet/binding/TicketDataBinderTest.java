@@ -38,7 +38,7 @@ public class TicketDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.dataBinder = new TicketDataBinder("key");
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
         this.ticket = createMock(Ticket.class);

@@ -23,7 +23,8 @@ public class BindingConfigurationTest {
     @Before
     public void setUp() throws MalformedURLException {
         this.servletContext = createMock(ServletContext.class);
-        this.configuration = new BindingConfiguration("userCookieKey", new URL("file:/"), "version", this.servletContext);
+        this.configuration = new BindingConfiguration("userCookieKey", new URL("file:/"), "version",
+                this.servletContext);
     }
 
     @Test

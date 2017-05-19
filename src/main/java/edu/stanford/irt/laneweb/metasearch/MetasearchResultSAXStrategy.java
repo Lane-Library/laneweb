@@ -43,7 +43,7 @@ public class MetasearchResultSAXStrategy extends AbstractResultSAXStrategy<Resul
         }
         try {
             xmlConsumer.startDocument();
-            xmlConsumer.startPrefixMapping("", MetasearchResultSAXStrategy.NAMESPACE);
+            xmlConsumer.startPrefixMapping("", AbstractResultSAXStrategy.NAMESPACE);
             xmlConsumer.startElement(NAMESPACE, SEARCH, SEARCH, atts);
             handleElement(xmlConsumer, QUERY, query.getSearchText());
             for (Result child : children) {

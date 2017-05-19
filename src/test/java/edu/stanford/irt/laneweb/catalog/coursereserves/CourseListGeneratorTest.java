@@ -14,11 +14,12 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
-import edu.stanford.irt.coursereserves.CourseReservesDAO;
+import edu.stanford.irt.coursereserves.CourseReservesService;
+import edu.stanford.irt.coursereserves.JDBCCourseReservesService;
 
 public class CourseListGeneratorTest {
 
-    private CourseReservesDAO dao;
+    private CourseReservesService dao;
 
     private CourseListGenerator generator;
 
@@ -29,7 +30,7 @@ public class CourseListGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.dao = createMock(CourseReservesDAO.class);
+        this.dao = createMock(JDBCCourseReservesService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.generator = new CourseListGenerator(this.dao, this.saxStrategy);
         this.xmlConsumer = createMock(XMLConsumer.class);

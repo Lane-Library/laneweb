@@ -20,7 +20,7 @@ public class CacheableSelectorTest {
     @Before
     public void setUp() throws Exception {
         this.selector = new CacheableSelector();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

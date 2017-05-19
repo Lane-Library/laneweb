@@ -31,8 +31,6 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
             atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover module-img");
-            atts.addAttribute(EMPTY_NS, "width", "width", CDATA, "59");
-            atts.addAttribute(EMPTY_NS, "height", "height", CDATA, "81");
             atts.addAttribute(EMPTY_NS, "title", "title", CDATA, "Book Cover: " + title);
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");

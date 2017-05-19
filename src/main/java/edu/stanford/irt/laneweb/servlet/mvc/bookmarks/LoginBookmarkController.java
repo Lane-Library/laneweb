@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
@@ -22,9 +22,9 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 public class LoginBookmarkController extends BookmarkController {
 
     @Autowired
-    public LoginBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+    public LoginBookmarkController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
+        super(bookmarkService, bookmarkDataBinder, userDataBinder);
     }
 
     @RequestMapping(value = "/secure/addBookmark")

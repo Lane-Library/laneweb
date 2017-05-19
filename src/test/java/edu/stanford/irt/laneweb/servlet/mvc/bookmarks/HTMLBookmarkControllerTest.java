@@ -16,18 +16,18 @@ import org.junit.Test;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public class HTMLBookmarkControllerTest {
 
-    private BookmarkDAO bookmarkDAO;
-
     private BookmarkDataBinder bookmarkDataBinder;
 
     private List<Bookmark> bookmarks;
+
+    private BookmarkService bookmarkService;
 
     private HTMLBookmarkController controller;
 
@@ -40,10 +40,11 @@ public class HTMLBookmarkControllerTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.bookmarkDAO = createMock(BookmarkDAO.class);
+        this.bookmarkService = createMock(BookmarkService.class);
         this.bookmarkDataBinder = createMock(BookmarkDataBinder.class);
         this.userDataBinder = createMock(UserDataBinder.class);
-        this.controller = new HTMLBookmarkController(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder);
+        this.controller = new HTMLBookmarkController(this.bookmarkService, this.bookmarkDataBinder,
+                this.userDataBinder);
         this.redirectAttributes = createMock(RedirectAttributes.class);
         this.bookmarks = createMock(List.class);
         this.session = createMock(HttpSession.class);

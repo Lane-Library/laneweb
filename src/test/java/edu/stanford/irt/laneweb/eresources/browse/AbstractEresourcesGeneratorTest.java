@@ -47,8 +47,6 @@ public class AbstractEresourcesGeneratorTest {
         }
     }
 
-    private SolrService solrService;
-
     private Eresource eresource;
 
     private List<Eresource> eresourceList;
@@ -56,6 +54,8 @@ public class AbstractEresourcesGeneratorTest {
     private AbstractEresourcesGenerator generator;
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
+
+    private SolrService solrService;
 
     private XMLConsumer xmlConsumer;
 
@@ -67,8 +67,7 @@ public class AbstractEresourcesGeneratorTest {
         this.eresourceList = Collections.singletonList(this.eresource);
         this.saxStrategy = createMock(SAXStrategy.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.generator = new TestAbstractEresourcesGenerator(this.solrService, this.saxStrategy,
-                this.eresourceList);
+        this.generator = new TestAbstractEresourcesGenerator(this.solrService, this.saxStrategy, this.eresourceList);
     }
 
     @Test

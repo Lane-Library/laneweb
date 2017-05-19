@@ -16,11 +16,11 @@ import org.springframework.context.annotation.Scope;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
-import edu.stanford.irt.laneweb.proxy.EzproxyServersWriter;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
+import edu.stanford.irt.laneweb.proxy.JDBCProxyServersService;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
-import edu.stanford.irt.laneweb.proxy.ProxyHostSource;
 import edu.stanford.irt.laneweb.proxy.ProxyLinkSelector;
+import edu.stanford.irt.laneweb.proxy.ProxyServersService;
 
 @Configuration
 public class ProxyConfiguration {
@@ -38,25 +38,25 @@ public class ProxyConfiguration {
         return new ElementProxyLinkTransformer("url");
     }
 
-    @Bean
-    public EzproxyServersWriter ezproxyServersWriter() throws IOException {
-        return new EzproxyServersWriter(this.dataSource, proxySQLProperties());
-    }
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/proxy-links")
     @Scope("prototype")
-    public Transformer htmlProxyLinkTransformer() {
+    public Transformer htmlProxyLinkTransformer() throws IOException {
         return new HtmlProxyLinkTransformer(proxyHostManager());
     }
 
     @Bean(destroyMethod = "destroy")
-    public ProxyHostManager proxyHostManager() {
-        return new ProxyHostManager(new ProxyHostSource(this.dataSource), Executors.newScheduledThreadPool(1));
+    public ProxyHostManager proxyHostManager() throws IOException {
+        return new ProxyHostManager(proxyServersService(), Executors.newScheduledThreadPool(1));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links")
     public Selector proxyLinkSelector() {
         return new ProxyLinkSelector();
+    }
+
+    @Bean
+    public ProxyServersService proxyServersService() throws IOException {
+        return new JDBCProxyServersService(this.dataSource, proxySQLProperties());
     }
 
     @Bean

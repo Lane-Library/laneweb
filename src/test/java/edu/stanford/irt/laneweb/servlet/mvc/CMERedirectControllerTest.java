@@ -38,7 +38,7 @@ public class CMERedirectControllerTest {
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.model = createMock(org.springframework.ui.Model.class);
-        this.map = new HashMap<String, Object>();
+        this.map = new HashMap<>();
     }
 
     @SuppressWarnings("boxing")

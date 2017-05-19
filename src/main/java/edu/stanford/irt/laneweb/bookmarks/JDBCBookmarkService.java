@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class SQLBookmarkDAO implements BookmarkDAO {
+public class JDBCBookmarkService implements BookmarkService {
 
     private static final int BYTES = 2;
 
@@ -29,7 +29,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (ID, BOOKMARKS) VALUES (?, ?)";
 
-    private static final Logger LOG = LoggerFactory.getLogger(SQLBookmarkDAO.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JDBCBookmarkService.class);
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE ID = ?";
 
@@ -39,7 +39,7 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     private DataSource dataSource;
 
-    public SQLBookmarkDAO(final DataSource dataSource) {
+    public JDBCBookmarkService(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

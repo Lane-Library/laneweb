@@ -26,7 +26,7 @@ public class ContentBaseDataBinderTest {
 
     @Test
     public void testBind() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         this.dataBinder.bind(model, null);
         assertSame(this.contentBase, model.get(Model.CONTENT_BASE));
     }

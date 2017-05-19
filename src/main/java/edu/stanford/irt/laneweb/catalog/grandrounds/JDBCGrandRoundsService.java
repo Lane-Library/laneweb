@@ -23,9 +23,9 @@ import edu.stanford.lane.catalog.Record;
 import edu.stanford.lane.catalog.RecordCollection;
 import edu.stanford.lane.catalog.VoyagerInputStream2;
 
-public class GrandRoundsManager {
+public class JDBCGrandRoundsService implements GrandRoundsService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GrandRoundsManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JDBCGrandRoundsService.class);
 
     private DataSource dataSource;
 
@@ -33,7 +33,7 @@ public class GrandRoundsManager {
 
     private String presentationsSQL;
 
-    public GrandRoundsManager(final DataSource dataSource, final InputStream presentationsSQL) throws IOException {
+    public JDBCGrandRoundsService(final DataSource dataSource, final InputStream presentationsSQL) throws IOException {
         this.dataSource = dataSource;
         this.presentationsSQL = IOUtils.toString(presentationsSQL, StandardCharsets.UTF_8);
         this.departmentMap = new HashMap<>();
@@ -43,6 +43,7 @@ public class GrandRoundsManager {
         this.departmentMap.put("otolaryngology", "OTOLARYNGOLOGY");
     }
 
+    @Override
     public List<Presentation> getGrandRounds(final String department, final String year) {
         List<Presentation> presentations = new ArrayList<>();
         try (InputStream input = new VoyagerInputStream2(this.dataSource, this.presentationsSQL, 3,

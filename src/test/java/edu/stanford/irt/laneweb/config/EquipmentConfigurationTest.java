@@ -33,7 +33,7 @@ public class EquipmentConfigurationTest {
     }
 
     @Test
-    public void testEquipmentStatusTransformer() {
+    public void testEquipmentStatusTransformer() throws IOException {
         assertNotNull(this.configuration.equipmentStatusTransformer());
     }
 }
