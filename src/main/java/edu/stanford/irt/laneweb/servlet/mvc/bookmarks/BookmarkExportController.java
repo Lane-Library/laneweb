@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
@@ -36,9 +36,9 @@ public class BookmarkExportController extends BookmarkController {
     private static final String ITEM_SUFFIX = "</A>\n";
 
     @Autowired
-    public BookmarkExportController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+    public BookmarkExportController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder) {
-        super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
+        super(bookmarkService, bookmarkDataBinder, userDataBinder);
     }
 
     /**

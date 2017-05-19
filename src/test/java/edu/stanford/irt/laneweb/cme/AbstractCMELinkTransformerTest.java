@@ -26,7 +26,7 @@ public class AbstractCMELinkTransformerTest {
         this.transformer = new AbstractCMELinkTransformer() {
             //
         };
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

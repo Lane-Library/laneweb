@@ -29,16 +29,16 @@ public class ProxyConfigurationTest {
 
     @Test
     public void testEzproxyServersWriter() throws IOException {
-        assertNotNull(this.configuration.ezproxyServersWriter());
+        assertNotNull(this.configuration.proxyServersService());
     }
 
     @Test
-    public void testHtmlProxyLinkTransformer() {
+    public void testHtmlProxyLinkTransformer() throws IOException {
         assertNotNull(this.configuration.htmlProxyLinkTransformer());
     }
 
     @Test
-    public void testProxyHostManager() {
+    public void testProxyHostManager() throws IOException {
         assertNotNull(this.configuration.proxyHostManager());
     }
 

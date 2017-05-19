@@ -17,11 +17,11 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class CoreEresourcesGeneratorTest {
 
-    private SolrService solrService;
-
     private CoreEresourcesGenerator generator;
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
+
+    private SolrService solrService;
 
     @SuppressWarnings("unchecked")
     @Before

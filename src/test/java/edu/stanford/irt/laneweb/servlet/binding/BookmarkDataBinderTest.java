@@ -20,7 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class BookmarkDataBinderTest {
@@ -29,7 +29,7 @@ public class BookmarkDataBinderTest {
 
     private List<Bookmark> bookmarks;
 
-    private BookmarkDAO dao;
+    private BookmarkService dao;
 
     private Map<String, Object> model;
 
@@ -40,10 +40,10 @@ public class BookmarkDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.binder = new BookmarkDataBinder();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.model.put(Model.USER_ID, "ditenus");
         this.bookmarks = Collections.emptyList();
-        this.dao = createMock(BookmarkDAO.class);
+        this.dao = createMock(BookmarkService.class);
         this.binder.setBookmarkDAO(this.dao);
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
@@ -86,7 +86,7 @@ public class BookmarkDataBinderTest {
 
     @Test
     public void testNoUserid() {
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.binder.bind(this.model, this.request);
         assertFalse(this.model.containsKey(Model.BOOKMARKS));
     }

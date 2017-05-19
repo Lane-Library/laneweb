@@ -48,8 +48,7 @@ public class SolrSuggestionManagerTest {
 
     @Test
     public void testGetSuggestionsForTermType() {
-        expect(this.solrService.suggestFindByType("term", "type")).andReturn(
-                Collections.singletonList(this.eresource));
+        expect(this.solrService.suggestFindByType("term", "type")).andReturn(Collections.singletonList(this.eresource));
         expect(this.eresource.getTitle()).andReturn("title");
         expect(this.eresource.getId()).andReturn("id");
         replay(this.solrService, this.eresource);

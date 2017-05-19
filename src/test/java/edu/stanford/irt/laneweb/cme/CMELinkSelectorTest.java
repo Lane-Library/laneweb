@@ -22,7 +22,7 @@ public class CMELinkSelectorTest {
     @Before
     public void setUp() throws Exception {
         this.selector = new CMELinkSelector();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

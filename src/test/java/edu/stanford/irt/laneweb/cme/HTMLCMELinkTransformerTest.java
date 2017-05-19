@@ -32,7 +32,7 @@ public class HTMLCMELinkTransformerTest {
     @Before
     public void setUp() throws Exception {
         this.attributes = createMock(Attributes.class);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer = new HTMLCMELinkTransformer();
         this.transformer.setXMLConsumer(this.xmlConsumer);

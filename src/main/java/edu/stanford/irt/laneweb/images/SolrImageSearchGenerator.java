@@ -87,8 +87,8 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
         Page<Image> pageResult = getPage(query);
         FacetPage<Image> facetPage = this.service.facetOnWebsiteId(query, this.copyright);
         Page<FacetFieldEntry> facet = facetPage.getFacetResultPage("websiteId");
-        return new SolrImageSearchResult(query, pageResult, this.resourceId, facet,
-                this.basePath + this.url, this.tab, this.source);
+        return new SolrImageSearchResult(query, pageResult, this.resourceId, facet, this.basePath + this.url, this.tab,
+                this.source);
     }
 
     @Override

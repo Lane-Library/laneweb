@@ -32,7 +32,7 @@ public class RequestParameterDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.binder = new RequestParameterDataBinder();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
         this.names = createMock(Enumeration.class);
     }

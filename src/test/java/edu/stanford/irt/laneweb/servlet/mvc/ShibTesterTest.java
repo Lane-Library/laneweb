@@ -48,8 +48,8 @@ public class ShibTesterTest {
         expect(this.request.getAttribute("uid")).andReturn("uid");
         expect(this.request.getAttribute("mail")).andReturn("mail");
         expect(this.request.getAttribute("group")).andReturn("group");
-        expect(this.request.getAttributeNames()).andReturn(
-                Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
+        expect(this.request.getAttributeNames())
+                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
         expect(this.request.getAttribute("name")).andReturn("value");
         this.response.setContentType("text/plain");
         expect(this.response.getOutputStream()).andReturn(this.output);
@@ -69,8 +69,8 @@ public class ShibTesterTest {
         expect(this.request.getAttribute("uid")).andReturn("uid");
         expect(this.request.getAttribute("mail")).andReturn("mail");
         expect(this.request.getAttribute("group")).andReturn("group");
-        expect(this.request.getAttributeNames()).andReturn(
-                Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
+        expect(this.request.getAttributeNames())
+                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
         expect(this.request.getAttribute("name")).andReturn("value");
         this.response.setContentType("text/plain");
         expect(this.response.getOutputStream()).andReturn(this.output);

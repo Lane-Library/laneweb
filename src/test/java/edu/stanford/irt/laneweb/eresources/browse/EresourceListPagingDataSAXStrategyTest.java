@@ -26,7 +26,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(EresourceListPagingData.class )
+@PrepareForTest(EresourceListPagingData.class)
 public class EresourceListPagingDataSAXStrategyTest {
 
     private PagingEresourceList list;
@@ -55,9 +55,8 @@ public class EresourceListPagingDataSAXStrategyTest {
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("a=a").times(2);
         expect(this.pagingData.getAlpha()).andReturn("a");
-        expect(this.pagingData.getPagingLabels()).andReturn(
-                Arrays.asList(new PagingLabel[] { this.pagingLabel, this.pagingLabel, this.pagingLabel,
-                        this.pagingLabel }));
+        expect(this.pagingData.getPagingLabels()).andReturn(Arrays
+                .asList(new PagingLabel[] { this.pagingLabel, this.pagingLabel, this.pagingLabel, this.pagingLabel }));
         expect(this.pagingLabel.getStart()).andReturn("A.M.A. American journal of diseases of children");
         expect(this.pagingLabel.getEnd()).andReturn("Advances in immunology");
         expect(this.pagingLabel.getResults()).andReturn(260);
@@ -86,15 +85,14 @@ public class EresourceListPagingDataSAXStrategyTest {
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("").times(2);
         expect(this.pagingData.getAlpha()).andReturn(null);
-        expect(this.pagingData.getPagingLabels()).andReturn(
-                Arrays.asList(new PagingLabel[] { this.pagingLabel, this.pagingLabel, this.pagingLabel,
-                        this.pagingLabel }));
+        expect(this.pagingData.getPagingLabels()).andReturn(Arrays
+                .asList(new PagingLabel[] { this.pagingLabel, this.pagingLabel, this.pagingLabel, this.pagingLabel }));
         expect(this.pagingLabel.getStart()).andReturn("A.M.A. American journal of diseases of children");
         expect(this.pagingLabel.getEnd()).andReturn("Advances in immunology");
         expect(this.pagingLabel.getResults()).andReturn(260);
         expect(this.pagingLabel.getStart()).andReturn("Advances in insect physiology");
-        expect(this.pagingLabel.getEnd()).andReturn(
-                "American journal of tropical medicine with text added to make it very long indeed");
+        expect(this.pagingLabel.getEnd())
+                .andReturn("American journal of tropical medicine with text added to make it very long indeed");
         expect(this.pagingLabel.getResults()).andReturn(260);
         expect(this.pagingLabel.getStart()).andReturn("American journal of tropical medicine and hygiene");
         expect(this.pagingLabel.getEnd()).andReturn("Applied optics");
@@ -106,8 +104,9 @@ public class EresourceListPagingDataSAXStrategyTest {
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.pagingData, this.xmlConsumer);
         this.xmlConsumer.endDocument();
-        assertEquals(this.xmlConsumer.getExpectedResult(this,
-                "EresourceListPagingDataSAXStrategyTest-testToSAXEmptyBaseQuery.xml"),
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "EresourceListPagingDataSAXStrategyTest-testToSAXEmptyBaseQuery.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.pagingLabel, this.pagingData, this.list);
     }
@@ -123,8 +122,9 @@ public class EresourceListPagingDataSAXStrategyTest {
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.pagingData, this.xmlConsumer);
         this.xmlConsumer.endDocument();
-        assertEquals(this.xmlConsumer.getExpectedResult(this,
-                "EresourceListPagingDataSAXStrategyTest-testToSAXSizeEqualsLength.xml"),
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "EresourceListPagingDataSAXStrategyTest-testToSAXSizeEqualsLength.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.pagingLabel, this.pagingData, this.list);
     }

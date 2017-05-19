@@ -32,7 +32,7 @@ public class TodaysHoursBinderTest {
     public void setUp() throws Exception {
         this.hours = createMock(TodaysHours.class);
         this.binder = new TodaysHoursBinder(this.hours);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
     }
 

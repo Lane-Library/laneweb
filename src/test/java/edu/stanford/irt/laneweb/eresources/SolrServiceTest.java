@@ -144,7 +144,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testSearchCount() {
-        Set<String> types = new TreeSet<String>();
+        Set<String> types = new TreeSet<>();
         types.add("type1");
         SolrResultPage page = createMock(SolrResultPage.class);
         Page<FacetFieldEntry> page1 = createMock(Page.class);

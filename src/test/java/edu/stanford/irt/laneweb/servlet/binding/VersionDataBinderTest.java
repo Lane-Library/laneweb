@@ -21,7 +21,7 @@ public class VersionDataBinderTest {
 
     @Test
     public void testBind() {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         this.binder.bind(model, null);
         assertEquals("version", model.get(Model.VERSION));
     }

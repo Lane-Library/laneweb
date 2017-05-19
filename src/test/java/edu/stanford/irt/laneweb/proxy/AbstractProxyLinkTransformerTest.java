@@ -20,7 +20,7 @@ public class AbstractProxyLinkTransformerTest {
     public void setUp() throws Exception {
         this.transformer = new AbstractProxyLinkTransformer() {
         };
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

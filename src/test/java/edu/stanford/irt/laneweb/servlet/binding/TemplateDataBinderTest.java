@@ -30,7 +30,7 @@ public class TemplateDataBinderTest {
     public void setUp() throws Exception {
         this.chooser = createMock(TemplateChooser.class);
         this.binder = new TemplateDataBinder(this.chooser);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
     }
 

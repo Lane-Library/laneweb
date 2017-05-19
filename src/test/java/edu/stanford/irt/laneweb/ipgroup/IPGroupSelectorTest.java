@@ -20,7 +20,7 @@ public class IPGroupSelectorTest {
     @Before
     public void setUp() throws Exception {
         this.selector = new IPGroupSelector();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test

@@ -34,16 +34,16 @@ public class DefaultRedirectProcessorTest {
 
     @Test
     public void testHandleRequestRedirectClasses() throws ServletException, IOException {
-        this.redirectProcessor.setRedirectMap(Collections.singletonMap("(.*)/classes/index.html",
-                "$1/services/workshops/laneclasses.html"));
+        this.redirectProcessor.setRedirectMap(
+                Collections.singletonMap("(.*)/classes/index.html", "$1/services/workshops/laneclasses.html"));
         assertEquals("/services/workshops/laneclasses.html",
                 this.redirectProcessor.getRedirectURL("/classes/index.html", "", null));
     }
 
     @Test
     public void testHandleRequestRedirectClinician() throws ServletException, IOException {
-        this.redirectProcessor.setRedirectMap(Collections.singletonMap("(.*)/clinician/index.html",
-                "$1/portals/clinical.html"));
+        this.redirectProcessor
+                .setRedirectMap(Collections.singletonMap("(.*)/clinician/index.html", "$1/portals/clinical.html"));
         assertEquals("/foo/bar/portals/clinical.html",
                 this.redirectProcessor.getRedirectURL("/foo/bar/clinician/index.html", "", null));
     }

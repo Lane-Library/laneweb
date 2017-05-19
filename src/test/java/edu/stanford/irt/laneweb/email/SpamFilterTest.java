@@ -34,12 +34,12 @@ public class SpamFilterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.spamIPs = new HashSet<String>();
+        this.spamIPs = new HashSet<>();
         this.spamIPs.add("127.0.0.1");
-        this.spamReferrers = new HashSet<String>();
+        this.spamReferrers = new HashSet<>();
         this.spamReferrers.add("http://spam/ref.html");
         this.spamFilter = new SpamFilter(Collections.singleton("recipient"), this.spamIPs, this.spamReferrers);
-        this.map = new HashMap<String, Object>();
+        this.map = new HashMap<>();
     }
 
     @Test

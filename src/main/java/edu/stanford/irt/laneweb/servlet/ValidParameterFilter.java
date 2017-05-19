@@ -150,8 +150,8 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
         } else {
             response.setStatus(HttpURLConnection.HTTP_BAD_REQUEST);
             if (log.isWarnEnabled()) {
-                StringBuilder sb = new StringBuilder(request.getServletPath()).append('?').append(request.getQueryString())
-                        .append(' ').append(validity.getReason());
+                StringBuilder sb = new StringBuilder(request.getServletPath()).append('?')
+                        .append(request.getQueryString()).append(' ').append(validity.getReason());
                 log.warn(sb.toString());
             }
             chain.doFilter(new HttpServletRequestWrapper(request) {

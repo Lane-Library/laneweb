@@ -27,24 +27,24 @@ public class GrandRoundsGeneratorTest {
 
     private GrandRoundsGenerator generator;
 
-    private GrandRoundsManager manager;
-
     private Map<String, String> parameters;
 
     private Presentation presentation;
 
     private SAXStrategy<Presentation> presentationSAXStrategy;
 
+    private GrandRoundsService service;
+
     private TestXMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.manager = createMock(GrandRoundsManager.class);
+        this.service = createMock(GrandRoundsService.class);
         this.presentationSAXStrategy = createMock(SAXStrategy.class);
-        this.generator = new GrandRoundsGenerator(this.manager, this.presentationSAXStrategy);
+        this.generator = new GrandRoundsGenerator(this.service, this.presentationSAXStrategy);
         this.xmlConsumer = new TestXMLConsumer();
-        this.parameters = new HashMap<String, String>();
+        this.parameters = new HashMap<>();
         this.presentation = createMock(Presentation.class);
     }
 
@@ -53,14 +53,14 @@ public class GrandRoundsGeneratorTest {
         this.parameters.put("department", "department");
         this.parameters.put("year", "year");
         this.generator.setParameters(this.parameters);
-        expect(this.manager.getGrandRounds("department", "year"))
+        expect(this.service.getGrandRounds("department", "year"))
                 .andReturn(Collections.singletonList(this.presentation));
         this.presentationSAXStrategy.toSAX(this.presentation, this.xmlConsumer);
-        replay(this.manager, this.presentation, this.presentationSAXStrategy);
+        replay(this.service, this.presentation, this.presentationSAXStrategy);
         this.generator.doGenerate(this.xmlConsumer);
         assertEquals(this.xmlConsumer.getExpectedResult(this, "GrandRoundsGeneratorTest-testDoGenerate.xml"),
                 this.xmlConsumer.getStringValue());
-        verify(this.manager, this.presentation, this.presentationSAXStrategy);
+        verify(this.service, this.presentation, this.presentationSAXStrategy);
     }
 
     @Test(expected = LanewebException.class)
@@ -69,13 +69,13 @@ public class GrandRoundsGeneratorTest {
         this.parameters.put("department", "department");
         this.parameters.put("year", "year");
         this.generator.setParameters(this.parameters);
-        expect(this.manager.getGrandRounds("department", "year"))
+        expect(this.service.getGrandRounds("department", "year"))
                 .andReturn(Collections.singletonList(this.presentation));
         expect(this.presentation.getPresenterList())
                 .andReturn(Arrays.asList(new String[] { "presenter1", "presenter2" }));
         mockXMLConsumer.startDocument();
         expectLastCall().andThrow(new SAXException());
-        replay(this.manager, this.presentation, this.presentationSAXStrategy, mockXMLConsumer);
+        replay(this.service, this.presentation, this.presentationSAXStrategy, mockXMLConsumer);
         this.generator.doGenerate(mockXMLConsumer);
     }
 }

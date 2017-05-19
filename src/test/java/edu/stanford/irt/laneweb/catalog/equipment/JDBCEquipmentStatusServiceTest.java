@@ -1,34 +1,35 @@
-package edu.stanford.irt.laneweb.catalog;
+package edu.stanford.irt.laneweb.catalog.equipment;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Collections;
 
 import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
-import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class VoyagerRecordGeneratorTest {
+public class JDBCEquipmentStatusServiceTest {
 
     private CallableStatement callable;
 
@@ -38,26 +39,25 @@ public class VoyagerRecordGeneratorTest {
 
     private DataSource dataSource;
 
-    private VoyagerRecordGenerator generator;
+    private ResultSet resultSet;
 
-    private XMLConsumer xmlConsumer;
+    private JDBCEquipmentStatusService service;
 
-    private XMLReader xmlReader;
+    private PreparedStatement statement;
 
     @Before
-    public void setUp() throws IOException, SAXException {
+    public void setUp() throws IOException {
         this.dataSource = createMock(DataSource.class);
-        this.xmlReader = XMLReaderFactory.createXMLReader();
-        InputStream sql = new ByteArrayInputStream("".getBytes());
-        this.generator = new VoyagerRecordGenerator(this.dataSource, sql, 1, this.xmlReader);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.service = new JDBCEquipmentStatusService(this.dataSource, "sql");
         this.connection = createMock(Connection.class);
+        this.statement = createMock(PreparedStatement.class);
+        this.resultSet = createMock(ResultSet.class);
         this.callable = createMock(CallableStatement.class);
         this.clob = createMock(Clob.class);
     }
 
     @Test
-    public void testDoGenerate() throws SQLException, IOException, SAXException {
+    public void testGetRecords() throws SQLException, IOException, SAXException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareCall(isA(String.class))).andReturn(this.callable);
         this.callable.registerOutParameter(1, Types.CLOB);
@@ -65,18 +65,22 @@ public class VoyagerRecordGeneratorTest {
         expect(this.callable.getClob(1)).andReturn(this.clob);
         expect(this.clob.getAsciiStream()).andReturn(new ByteArrayInputStream("<foo/>".getBytes()));
         this.clob.free();
-        expectLastCall().times(2);
         this.callable.close();
-        expectLastCall().times(2);
         this.connection.close();
-        expectLastCall().times(2);
         replay(this.dataSource, this.connection, this.callable, this.clob);
-        this.generator.doGenerate(this.xmlConsumer);
+        InputStream input = this.service.getRecords(Collections.emptyList());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int i;
+        while ((i = input.read()) != -1) {
+            baos.write(i);
+        }
+        input.close();
+        assertEquals("<foo/>", new String(baos.toByteArray()));
         verify(this.dataSource, this.connection, this.callable, this.clob);
     }
 
     @Test
-    public void testDoGenerateIOException() throws SQLException, IOException {
+    public void testGetRecordsIOException() throws SQLException, IOException {
         InputStream input = createMock(InputStream.class);
         IOException exception = new IOException();
         expect(this.dataSource.getConnection()).andReturn(this.connection);
@@ -91,20 +95,41 @@ public class VoyagerRecordGeneratorTest {
         this.callable.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.callable, this.clob, input);
-        try {
-            this.generator.doGenerate(this.xmlConsumer);
-        } catch (LanewebException e) {
-            assertSame(exception, e.getCause());
+        try (InputStream stream = this.service.getRecords(Collections.emptyList())) {
+            stream.read();
+        } catch (IOException e) {
+            assertSame(exception, e);
         }
         verify(this.dataSource, this.connection, this.callable, this.clob, input);
     }
 
     @Test(expected = LanewebException.class)
-    public void testDoGenerateSQLException() throws SQLException {
+    public void testGetRecordsSQLException() throws SQLException, IOException {
         SQLException exception = new SQLException();
         expect(this.dataSource.getConnection()).andThrow(exception);
         replay(this.dataSource, this.connection, this.callable, this.clob);
-        this.generator.doGenerate(this.xmlConsumer);
+        this.service.getRecords(Collections.emptyList()).read();
         verify(this.dataSource, this.connection, this.callable, this.clob);
+    }
+
+    @Test
+    public void testGetStatus() throws IOException, SAXException, SQLException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        this.statement.setString(1, "304254,296290");
+        this.statement.setString(2, "304254,296290");
+        expect(this.statement.executeQuery()).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true).times(2);
+        expect(this.resultSet.getString(1)).andReturn("304254");
+        expect(this.resultSet.getString(2)).andReturn("1");
+        expect(this.resultSet.getString(1)).andReturn("296290");
+        expect(this.resultSet.getString(2)).andReturn("10");
+        expect(this.resultSet.next()).andReturn(false);
+        this.resultSet.close();
+        this.statement.close();
+        this.connection.close();
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.service.getStatus("304254,296290");
+        verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 }

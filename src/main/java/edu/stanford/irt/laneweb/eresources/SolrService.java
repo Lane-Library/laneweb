@@ -111,6 +111,10 @@ public class SolrService {
         return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
     }
 
+    public Eresource getByBibID(final String bibID) {
+        return this.repository.getByBibID(bibID);
+    }
+
     public List<Eresource> getCore(final String type) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
@@ -148,6 +152,17 @@ public class SolrService {
                 new PageRequest(0, Integer.MAX_VALUE));
     }
 
+    public Map<String, Long> recordCount() {
+        Map<String, Long> result = new HashMap<>();
+        SolrResultPage<Eresource> facets = this.repository.facetByRecordType(new PageRequest(0, 1));
+        for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
+            for (FacetFieldEntry entry : page) {
+                result.put(entry.getValue(), Long.valueOf(entry.getValueCount()));
+            }
+        }
+        return result;
+    }
+
     public Map<String, Long> searchCount(final String query) {
         Map<String, Long> result = new HashMap<>();
         SolrResultPage<Eresource> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
@@ -160,17 +175,6 @@ public class SolrService {
         return result;
     }
 
-    public Map<String, Long> recordCount() {
-        Map<String, Long> result = new HashMap<>();
-        SolrResultPage<Eresource> facets = this.repository.facetByRecordType(new PageRequest(0, 1));
-        for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
-            for (FacetFieldEntry entry : page) {
-                result.put(entry.getValue(), Long.valueOf(entry.getValueCount()));
-            }
-        }
-        return result;
-    }
-    
     public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
@@ -202,9 +206,5 @@ public class SolrService {
             filters = filters.replaceAll(FACETS_SEPARATOR, AND);
         }
         return filters;
-    }
-    
-    public Eresource getByBibID(String bibID) {
-        return this.repository.getByBibID(bibID);
     }
 }

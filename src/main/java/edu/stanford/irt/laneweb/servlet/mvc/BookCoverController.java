@@ -25,6 +25,6 @@ public class BookCoverController {
     @RequestMapping(value = "/apps/bookcovers")
     @ResponseBody
     public Map<Integer, String> getBookCovers(@RequestParam final Integer[] bibid) {
-        return this.service.apply(new ArrayList<>(Arrays.asList(bibid)));
+        return this.service.getBookCoverURLs(new ArrayList<>(Arrays.asList(bibid)));
     }
 }

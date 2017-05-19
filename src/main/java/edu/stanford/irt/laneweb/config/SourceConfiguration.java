@@ -50,15 +50,11 @@ public class SourceConfiguration implements InitializingBean {
         this.beanFactory = beanFactory;
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.source.SourceResolver")
-    public SourceResolver sourceResolver() {
-        return this.sourceResolver;
-    }
-
     @Override
     public void afterPropertiesSet() {
         this.sourceResolver = new SourceResolverImpl();
-        SitemapSourceResolver sitemapSourceResolver = new SitemapSourceResolver(this.componentFactory, sourceResolver) {
+        SitemapSourceResolver sitemapSourceResolver = new SitemapSourceResolver(this.componentFactory,
+                this.sourceResolver) {
 
             @SuppressWarnings("unchecked")
             @Override
@@ -76,14 +72,22 @@ public class SourceConfiguration implements InitializingBean {
             }
         }
         sitemapSourceResolver.setSitemaps(sitemaps);
-        SourceResolver cacheSourceResolver = new CacheSourceResolver(this.cache, sourceResolver);
+        SourceResolver cacheSourceResolver = new CacheSourceResolver(this.cache, this.sourceResolver);
         Map<String, SourceResolver> sourceResolvers = new HashMap<>();
         sourceResolvers.put("cocoon", sitemapSourceResolver);
         sourceResolvers.put("cache", cacheSourceResolver);
-        sourceResolvers.put("cachedxml", new CachedXMLSourceResolver(this.beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/xml", SAXParser.class), this.cache, this.sourceResolver));
-        sourceResolver.setSourceResolvers(sourceResolvers);
+        sourceResolvers.put("cachedxml",
+                new CachedXMLSourceResolver(
+                        this.beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/xml", SAXParser.class),
+                        this.cache, this.sourceResolver));
+        this.sourceResolver.setSourceResolvers(sourceResolvers);
         SpringResourceSourceResolver springResourceSourceResolver = new SpringResourceSourceResolver();
         springResourceSourceResolver.setResourceLoader(this.resourceLoader);
-        sourceResolver.setDefaultResolver(springResourceSourceResolver);
+        this.sourceResolver.setDefaultResolver(springResourceSourceResolver);
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.source.SourceResolver")
+    public SourceResolver sourceResolver() {
+        return this.sourceResolver;
     }
 }
