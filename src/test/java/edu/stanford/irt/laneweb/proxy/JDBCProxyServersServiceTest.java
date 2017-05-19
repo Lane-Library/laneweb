@@ -2,9 +2,11 @@ package edu.stanford.irt.laneweb.proxy;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
@@ -14,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -22,7 +25,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class EzproxyServersWriterTest {
+public class JDBCProxyServersServiceTest {
 
     private Connection connection;
 
@@ -32,25 +35,52 @@ public class EzproxyServersWriterTest {
 
     private ResultSet resultSet;
 
-    private Statement statement;
+    private ProxyServersService service;
 
-    private EzproxyServersWriter writer;
+    private Statement statement;
 
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
         Properties props = new Properties();
         props.setProperty("ezproxy-servers.query", "sql query");
-        this.writer = new EzproxyServersWriter(this.dataSource, props);
+        this.service = new JDBCProxyServersService(this.dataSource, props);
         this.connection = createMock(Connection.class);
         this.statement = createMock(Statement.class);
         this.resultSet = createMock(ResultSet.class);
     }
 
     @Test
+    public void testDatabaseProxyHostSet() throws SQLException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.createStatement()).andReturn(this.statement);
+        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getString(1)).andReturn("host");
+        expect(this.resultSet.next()).andReturn(false);
+        this.resultSet.close();
+        this.statement.close();
+        this.connection.close();
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        Set<String> proxyHosts = this.service.getHosts();
+        assertTrue(proxyHosts.contains("host"));
+        assertTrue(proxyHosts.contains("bodoni.stanford.edu"));
+        assertTrue(proxyHosts.contains("library.stanford.edu"));
+        assertTrue(proxyHosts.contains("searchworks.stanford.edu"));
+        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testDatabaseProxyHostSetThrowsException() throws SQLException {
+        expect(this.dataSource.getConnection()).andThrow(new SQLException());
+        replay(this.dataSource);
+        this.service.getHosts();
+    }
+
+    @Test
     public void testNullOutputStream() throws IOException {
         try {
-            this.writer.write(null);
+            this.service.write(null);
             fail("Should throw NullPointerException");
         } catch (NullPointerException e) {
         }
@@ -69,7 +99,7 @@ public class EzproxyServersWriterTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        this.writer.write(baos);
+        this.service.write(baos);
         assertEquals(this.expected, new String(baos.toByteArray()));
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
@@ -87,7 +117,7 @@ public class EzproxyServersWriterTest {
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
         try {
-            this.writer.write(new ByteArrayOutputStream());
+            this.service.write(new ByteArrayOutputStream());
         } catch (LanewebException e) {
         }
         verify(this.dataSource, this.connection, this.statement, this.resultSet);

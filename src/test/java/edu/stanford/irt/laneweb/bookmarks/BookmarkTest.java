@@ -57,6 +57,11 @@ public class BookmarkTest {
     public void testEqualsSameHashDifferentLabel() {
         assertFalse(this.bookmark.equals(new Bookmark("newlabel", this.url) {
 
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+
             @Override
             public int hashCode() {
                 return BookmarkTest.this.bookmark.hashCode();
@@ -68,6 +73,11 @@ public class BookmarkTest {
     @Test
     public void testEqualsSameHashDifferentUrl() {
         assertFalse(this.bookmark.equals(new Bookmark(this.label, "newurl") {
+
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
 
             @Override
             public int hashCode() {

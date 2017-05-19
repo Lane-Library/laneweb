@@ -52,9 +52,15 @@ public class SessionParameterDataBinderTest {
     public void setUp() throws Exception {
         this.binder = new TestSessionParameterDataBinder("key", "name");
         this.request = createMock(HttpServletRequest.class);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.session = createMock(HttpSession.class);
-        this.object = new java.io.Serializable() {};
+        this.object = new java.io.Serializable() {
+
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
+        };
     }
 
     @Test

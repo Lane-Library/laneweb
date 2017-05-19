@@ -66,8 +66,8 @@ public class UrlTesterTest {
         expect(this.msms.getHttpClient()).andReturn(this.httpClient);
         expect(this.httpClient.execute(isA(HttpGet.class))).andReturn(this.httpResponse);
         expect(this.httpResponse.getEntity()).andReturn(this.entity);
-        expect(this.entity.getContent()).andReturn(
-                new ByteArrayInputStream(this.responseText.getBytes(StandardCharsets.UTF_8)));
+        expect(this.entity.getContent())
+                .andReturn(new ByteArrayInputStream(this.responseText.getBytes(StandardCharsets.UTF_8)));
         expect(this.entity.getContentLength()).andReturn((long) this.responseText.length()).times(2);
         this.response.setHeader("Content-Type", "text/plain");
         expect(this.response.getOutputStream()).andReturn(this.outputStream);

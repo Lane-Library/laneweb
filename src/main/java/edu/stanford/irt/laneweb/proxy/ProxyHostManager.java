@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
@@ -29,7 +28,7 @@ public class ProxyHostManager {
 
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final ProxyHostSource hostSource, final ScheduledExecutorService executor) {
+    public ProxyHostManager(final ProxyServersService service, final ScheduledExecutorService executor) {
         this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;
@@ -43,9 +42,9 @@ public class ProxyHostManager {
         }
         executor.scheduleAtFixedRate(() -> {
             try {
-                this.proxyHosts = hostSource.getHosts();
+                this.proxyHosts = service.getHosts();
                 log.info("successfully retrieved proxy hosts from the voyager catalog");
-            } catch (SQLException e) {
+            } catch (LanewebException e) {
                 log.error("failed to retrieve proxy host hosts from the voyager catalog: {}", e.getMessage());
             }
         }, 0L, DEFAULT_DELAY, TimeUnit.MINUTES);

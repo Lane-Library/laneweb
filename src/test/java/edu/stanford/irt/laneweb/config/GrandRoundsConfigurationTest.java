@@ -29,7 +29,7 @@ public class GrandRoundsConfigurationTest {
 
     @Test
     public void testGrandRoundsManager() throws IOException {
-        assertNotNull(this.configuration.grandRoundsManager());
+        assertNotNull(this.configuration.grandRoundsService());
     }
 
     @Test

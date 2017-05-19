@@ -58,8 +58,7 @@ public class LanewebIT {
         this.mockMvc.perform(get("/redirect/cme?url=url")).andExpect(status().isFound())
                 .andExpect(redirectedUrl("/secure/redirect/cme?url=url"));
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put(Model.USER,
-                new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
+        attributes.put(Model.USER, new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo"));
         this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
@@ -100,11 +99,6 @@ public class LanewebIT {
         this.mockMvc.perform(get("/apps/ipGroupFetch?callback=foo")).andExpect(status().isOk())
                 .andExpect(content().contentType(new MediaType("application", "javascript", StandardCharsets.UTF_8)));
     }
-    
-    @Test
-    public void testQueryMap() throws Exception {
-        this.mockMvc.perform(get("/apps/querymap/json?q=ganz+slipped+capital+femoral+epiphysis")).andExpect(status().isOk());
-    }
 
     /**
      * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in a Solr instance is
@@ -132,8 +126,8 @@ public class LanewebIT {
                             .exists());
             // pubmed
             this.mockMvc.perform(get("/eresources/search.html?q=pubmed").servletPath("/eresources/search.html"))
-            .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", ns)
-                    .exists());
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", ns)
+                            .exists());
             // known PMID
             this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
                     .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']//h:a", ns)
@@ -144,8 +138,7 @@ public class LanewebIT {
                     .perform(
                             get("/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
                                     .servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", ns)
-                            .string("Book Digital"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", ns).string("Book Digital"))
                     .andExpect(
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", ns)
                                     .exists());
@@ -155,8 +148,8 @@ public class LanewebIT {
                             .exists());
             // UpToDate and variants
             this.mockMvc.perform(get("/eresources/search.html?q=uptodate").servletPath("/eresources/search.html"))
-            .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", ns)
-                    .exists());
+                    .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", ns)
+                            .exists());
             this.mockMvc.perform(get("/eresources/search.html?q=UpToDate").servletPath("/eresources/search.html"))
                     .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", ns)
                             .exists());
@@ -178,20 +171,22 @@ public class LanewebIT {
                                     ns).exists());
             // EndNote
             this.mockMvc.perform(get("/eresources/search.html?q=EndNote").servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@href,'help/references.html')]", ns)
-                            .exists());
+                    .andExpect(
+                            xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@href,'help/references.html')]",
+                                    ns).exists());
             // reference manager
-            this.mockMvc.perform(get("/eresources/search.html?q=reference manager").servletPath("/eresources/search.html"))
-            .andExpect(
-                    xpath("//h:li//h:a[@class='primaryLink' and contains(@href,'help/references.html')]",
-                            ns).exists());
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=reference manager").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@href,'help/references.html')]", ns)
+                            .exists());
             // Bates Guide
             this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
                     .andExpect(
                             xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title=\"Bates' Guide to the physical examination videos\"]",
                                     ns).exists());
             // directions
-            this.mockMvc.perform(get("/eresources/search.html?q=directions to lane").servletPath("/eresources/search.html"))
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=directions to lane").servletPath("/eresources/search.html"))
                     .andExpect(
                             xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'hours-directions.html')]",
                                     ns).exists());
@@ -226,15 +221,16 @@ public class LanewebIT {
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']",
                                     ns).exists());
             // Guide to the evaluation of permanent impairment
-            this.mockMvc.perform(get("/eresources/search.html?q=Guide to the evaluation of permanent impairment").servletPath("/eresources/search.html"))
-            .andExpect(
-                    xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@title,'Guides to the evaluation of permanent impairment')]",
-                            ns).exists());
+            this.mockMvc.perform(get("/eresources/search.html?q=Guide to the evaluation of permanent impairment")
+                    .servletPath("/eresources/search.html")).andExpect(
+                            xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@title,'Guides to the evaluation of permanent impairment')]",
+                                    ns).exists());
             // movement disorder
-            this.mockMvc.perform(get("/eresources/search.html?q=movement disorder").servletPath("/eresources/search.html"))
-            .andExpect(
-                    xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@title,'Movement disorders')]",
-                            ns).exists());
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=movement disorder").servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@title,'Movement disorders')]",
+                                    ns).exists());
         }
     }
 
@@ -261,6 +257,12 @@ public class LanewebIT {
     }
 
     @Test
+    public void testQueryMap() throws Exception {
+        this.mockMvc.perform(get("/apps/querymap/json?q=ganz+slipped+capital+femoral+epiphysis"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void testRedirects() throws Exception {
         this.mockMvc.perform(get("/beemap")).andExpect(status().isFound())
                 .andExpect(header().string("location", "/beemap.html"));
@@ -276,7 +278,9 @@ public class LanewebIT {
 
     @Test
     public void testSearchImage() throws Exception {
-        this.mockMvc.perform(get("/apps/search/image?q=elephant&source=cc-images-all").servletPath("/apps/search/image")).andExpect(status().isOk());
+        this.mockMvc
+                .perform(get("/apps/search/image?q=elephant&source=cc-images-all").servletPath("/apps/search/image"))
+                .andExpect(status().isOk());
     }
 
     @Test

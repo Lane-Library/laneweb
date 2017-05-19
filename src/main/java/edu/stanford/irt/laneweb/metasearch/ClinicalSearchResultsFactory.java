@@ -38,7 +38,7 @@ public class ClinicalSearchResultsFactory {
                     .filter(r -> r.getStatus() == SearchStatus.SUCCESSFUL)
                     .filter(r -> facets.contains(r.getId()))
                     .collect(Collectors.toList());
-            results = conversionStrategy.convertResults(facetResult, query);
+            results = this.conversionStrategy.convertResults(facetResult, query);
         }
         Collections.sort(results);
         PagingList<SearchResult> searchResults = new PagingList<>(results,

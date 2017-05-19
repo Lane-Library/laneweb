@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.bookmarks;
 
 import java.util.List;
 
-public interface BookmarkDAO {
+public interface BookmarkService {
 
     List<Bookmark> getLinks(String userid);
 

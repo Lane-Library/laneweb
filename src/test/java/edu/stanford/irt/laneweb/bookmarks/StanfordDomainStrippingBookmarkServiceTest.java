@@ -10,16 +10,16 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StanfordDomainStrippingBookmarkDAOTest {
+public class StanfordDomainStrippingBookmarkServiceTest {
 
-    private StanfordDomainStrippingBookmarkDAO bookmarkDAO;
+    private StanfordDomainStrippingBookmarkService bookmarkDAO;
 
-    private BookmarkDAO wrappedDAO;
+    private BookmarkService wrappedDAO;
 
     @Before
     public void setUp() throws Exception {
-        this.wrappedDAO = createMock(BookmarkDAO.class);
-        this.bookmarkDAO = new StanfordDomainStrippingBookmarkDAO(this.wrappedDAO);
+        this.wrappedDAO = createMock(BookmarkService.class);
+        this.bookmarkDAO = new StanfordDomainStrippingBookmarkService(this.wrappedDAO);
     }
 
     @Test

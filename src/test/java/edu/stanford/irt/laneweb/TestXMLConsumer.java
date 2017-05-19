@@ -14,8 +14,9 @@ import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
 
 public class TestXMLConsumer extends TransformerSerializer {
 
-    private static final String UTF_8 = StandardCharsets.UTF_8.name();
     private static Properties PROPS;
+
+    private static final String UTF_8 = StandardCharsets.UTF_8.name();
     static {
         PROPS = new Properties();
         PROPS.setProperty("method", "xml");
@@ -26,8 +27,9 @@ public class TestXMLConsumer extends TransformerSerializer {
     private ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
     public TestXMLConsumer() {
-        super("test", (SAXTransformerFactory) TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl",
-                null), PROPS);
+        super("test",
+                (SAXTransformerFactory) TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null),
+                PROPS);
         setOutputStream(this.baos);
     }
 

@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
@@ -23,15 +23,15 @@ public class BookmarkControllerTest {
 
     private static final class TestBookmarkController extends BookmarkController {
 
-        public TestBookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
-                final UserDataBinder userDataBinder) {
-            super(bookmarkDAO, bookmarkDataBinder, userDataBinder);
+        public TestBookmarkController(final BookmarkService bookmarkService,
+                final BookmarkDataBinder bookmarkDataBinder, final UserDataBinder userDataBinder) {
+            super(bookmarkService, bookmarkDataBinder, userDataBinder);
         }
     }
 
-    private BookmarkDAO bookmarkDAO;
-
     private BookmarkDataBinder bookmarkDataBinder;
+
+    private BookmarkService bookmarkService;
 
     private BookmarkController controller;
 
@@ -43,44 +43,45 @@ public class BookmarkControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.bookmarkDAO = createMock(BookmarkDAO.class);
+        this.bookmarkService = createMock(BookmarkService.class);
         this.bookmarkDataBinder = createMock(BookmarkDataBinder.class);
         this.userDataBinder = createMock(UserDataBinder.class);
-        this.controller = new TestBookmarkController(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder);
+        this.controller = new TestBookmarkController(this.bookmarkService, this.bookmarkDataBinder,
+                this.userDataBinder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
     }
 
     @Test
     public void testBindFalse() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         expect(this.model.asMap()).andReturn(map).times(2);
         this.userDataBinder.bind(map, this.request);
         this.bookmarkDataBinder.bind(map, this.request);
         expect(this.model.containsAttribute("bookmarks")).andReturn(false);
         expect(this.model.addAttribute("bookmarks", null)).andReturn(this.model);
-        replay(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
         this.controller.bind(this.request, this.model);
-        verify(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
     }
 
     @Test
     public void testBindTrue() {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         expect(this.model.asMap()).andReturn(map).times(2);
         this.userDataBinder.bind(map, this.request);
         this.bookmarkDataBinder.bind(map, this.request);
         expect(this.model.containsAttribute("bookmarks")).andReturn(true);
-        replay(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
         this.controller.bind(this.request, this.model);
-        verify(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
     }
 
     @Test
     public void testSaveLinks() {
-        this.bookmarkDAO.saveLinks("userid", Collections.emptyList());
-        replay(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        this.bookmarkService.saveLinks("userid", Collections.emptyList());
+        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
         this.controller.saveLinks("userid", Collections.emptyList());
-        verify(this.bookmarkDAO, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
     }
 }

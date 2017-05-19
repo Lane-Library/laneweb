@@ -42,7 +42,7 @@ public class ModelDataBinderTest {
     public void setUp() {
         this.mapper = createMock(ObjectMapper.class);
         this.binder = new ModelDataBinder(Collections.singleton("foo"), this.mapper);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
         this.factory = createMock(JsonFactory.class);
         this.generator = createMock(JsonGenerator.class);

@@ -21,15 +21,15 @@ public class GrandRoundsGenerator extends AbstractGenerator implements Parameter
 
     private String department;
 
-    private GrandRoundsManager manager;
-
     private SAXStrategy<Presentation> presentationSAXStrategy;
+
+    private GrandRoundsService service;
 
     private String year;
 
-    public GrandRoundsGenerator(final GrandRoundsManager manager,
+    public GrandRoundsGenerator(final GrandRoundsService service,
             final SAXStrategy<Presentation> presentationSAXStrategy) {
-        this.manager = manager;
+        this.service = service;
         this.presentationSAXStrategy = presentationSAXStrategy;
     }
 
@@ -41,7 +41,7 @@ public class GrandRoundsGenerator extends AbstractGenerator implements Parameter
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Presentation> presentations = this.manager.getGrandRounds(this.department, this.year);
+        List<Presentation> presentations = this.service.getGrandRounds(this.department, this.year);
         try {
             xmlConsumer.startDocument();
             XMLUtils.startElement(xmlConsumer, "", "grandrounds");

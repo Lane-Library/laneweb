@@ -28,7 +28,7 @@ public class RequestHeaderDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.binder = new RequestHeaderDataBinder();
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
     }
 

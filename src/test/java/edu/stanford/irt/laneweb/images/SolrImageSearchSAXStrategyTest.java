@@ -99,7 +99,8 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.image.getPageUrl()).andReturn("pageUrl");
         expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
         expect(this.facetFieldEntryPage.getNumberOfElements()).andReturn(1).times(2);
-        expect(this.facetFieldEntryPage.getContent()).andReturn(Collections.singletonList(this.facetFieldEntry)).times(2);
+        expect(this.facetFieldEntryPage.getContent()).andReturn(Collections.singletonList(this.facetFieldEntry))
+                .times(2);
         expect(this.facetFieldEntry.getValue()).andReturn("Bassett").times(4);
         expect(this.facetFieldEntry.getValueCount()).andReturn((long) 2).times(3);
         replay(this.result, this.imagePage, this.image, this.facetFieldEntryPage, this.facetFieldEntry);
@@ -177,7 +178,8 @@ public class SolrImageSearchSAXStrategyTest {
         expect(this.imagePage.getTotalPages()).andReturn(2).times(6);
         expect(this.image.getThumbnailSrc()).andReturn("thumbnailSrc");
         expect(this.facetFieldEntryPage.getNumberOfElements()).andReturn(1).times(2);
-        expect(this.facetFieldEntryPage.getContent()).andReturn(Collections.singletonList(this.facetFieldEntry)).times(2);
+        expect(this.facetFieldEntryPage.getContent()).andReturn(Collections.singletonList(this.facetFieldEntry))
+                .times(2);
         expect(this.facetFieldEntry.getValue()).andReturn("Bassett").times(4);
         expect(this.facetFieldEntry.getValueCount()).andReturn((long) 2).times(3);
         replay(this.result, this.imagePage, this.image, this.facetFieldEntryPage, this.facetFieldEntry);

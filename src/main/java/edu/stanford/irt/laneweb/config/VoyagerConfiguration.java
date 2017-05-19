@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
+import edu.stanford.irt.laneweb.voyager.JDBCLoginService;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 import edu.stanford.lane.catalog.impl.xml.DefaultMarcReader;
 
@@ -30,6 +31,6 @@ public class VoyagerConfiguration {
 
     @Bean
     public VoyagerLogin voyagerLogin() {
-        return new VoyagerLogin(this.dataSource);
+        return new VoyagerLogin(new JDBCLoginService(this.dataSource));
     }
 }

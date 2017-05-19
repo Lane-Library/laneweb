@@ -32,7 +32,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class SQLBookmarkDAOTest {
+public class JDBCBookmarkServiceTest {
 
     private Blob blob;
 
@@ -44,7 +44,7 @@ public class SQLBookmarkDAOTest {
 
     private Connection connection;
 
-    private SQLBookmarkDAO dao;
+    private JDBCBookmarkService dao;
 
     private DataSource dataSource;
 
@@ -55,7 +55,7 @@ public class SQLBookmarkDAOTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.dao = new SQLBookmarkDAO(this.dataSource);
+        this.dao = new JDBCBookmarkService(this.dataSource);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);

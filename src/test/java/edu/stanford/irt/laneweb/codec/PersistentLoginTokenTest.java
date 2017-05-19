@@ -17,7 +17,8 @@ public class PersistentLoginTokenTest {
 
     @Test
     public void testGetEncryptedValue() {
-        assertEquals("encryptedValue", new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").getEncryptedValue());
+        assertEquals("encryptedValue",
+                new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").getEncryptedValue());
     }
 
     @Test
@@ -32,7 +33,7 @@ public class PersistentLoginTokenTest {
 
     @Test
     public void testIsValidForOneDay() {
-        long oneDay =  Duration.ofDays(1).toMillis();
+        long oneDay = Duration.ofDays(1).toMillis();
         assertTrue(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(oneDay, 0));
     }
 

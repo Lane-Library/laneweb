@@ -54,8 +54,8 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getPrimaryType()).andReturn("primaryType");
         expect(this.eresource.getTotal()).andReturn(10);
         expect(this.eresource.getAvailable()).andReturn(5);
-        expect(this.eresource.getLinks()).andReturn(
-                Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
+        expect(this.eresource.getLinks())
+                .andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(Resource.LABEL);
         expect(this.link.getUrl()).andReturn(Resource.URL);
