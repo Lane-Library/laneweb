@@ -134,8 +134,9 @@ public class EquipmentStatusTransformer implements Transformer {
     private void generateStatus() {
         // remove leading comma
         this.ids.deleteCharAt(0);
-        List<EquipmentStatus> status = this.service.getStatus(this.ids.toString());
-        status.stream().forEach(s -> statusToSAX(s));
+        this.service.getStatus(this.ids.toString())
+            .stream()
+            .forEach(this::statusToSAX);
     }
 
     private void statusToSAX(final EquipmentStatus status) {
