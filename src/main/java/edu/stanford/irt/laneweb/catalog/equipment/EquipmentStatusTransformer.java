@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.catalog.equipment;
 
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
