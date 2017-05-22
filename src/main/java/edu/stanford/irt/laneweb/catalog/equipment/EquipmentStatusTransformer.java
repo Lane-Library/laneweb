@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.catalog.equipment;
 
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -134,8 +132,9 @@ public class EquipmentStatusTransformer implements Transformer {
     private void generateStatus() {
         // remove leading comma
         this.ids.deleteCharAt(0);
-        List<EquipmentStatus> status = this.service.getStatus(this.ids.toString());
-        status.stream().forEach(s -> statusToSAX(s));
+        this.service.getStatus(this.ids.toString())
+            .stream()
+            .forEach(this::statusToSAX);
     }
 
     private void statusToSAX(final EquipmentStatus status) {

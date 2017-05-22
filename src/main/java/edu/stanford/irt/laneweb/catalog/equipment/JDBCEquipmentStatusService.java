@@ -36,7 +36,7 @@ public class JDBCEquipmentStatusService implements EquipmentService {
 
     private String sql;
 
-    public JDBCEquipmentStatusService(final DataSource dataSource, final String sql) throws IOException {
+    public JDBCEquipmentStatusService(final DataSource dataSource, final String sql) {
         this.dataSource = dataSource;
         this.sql = sql;
     }

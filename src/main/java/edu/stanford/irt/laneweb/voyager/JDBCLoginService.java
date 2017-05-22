@@ -11,11 +11,14 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class JDBCLoginService implements LoginService {
 
-    private static final String CHECK_ID_SQL = "SELECT COUNT(*) FROM LMLDB.PATRON WHERE INSTITUTION_ID = ?";
+    private static final String CHECK_ID_SQL =
+            "SELECT COUNT(*) FROM LMLDB.PATRON WHERE INSTITUTION_ID = ?";
 
-    private static final String CLEAR_SESSION_SQL = "DELETE FROM LMLDB.WOPAC_PID_PATRON_KEYS WHERE PATRON_KEY = ? OR PID = ?";
+    private static final String CLEAR_SESSION_SQL =
+            "DELETE FROM LMLDB.WOPAC_PID_PATRON_KEYS WHERE PATRON_KEY = ? OR PID = ?";
 
-    private static final String CREATE_SESSION_SQL = "INSERT INTO LMLDB.WOPAC_PID_PATRON_KEYS (PATRON_KEY, PID) VALUES (?,?)";
+    private static final String CREATE_SESSION_SQL =
+            "INSERT INTO LMLDB.WOPAC_PID_PATRON_KEYS (PATRON_KEY, PID) VALUES (?,?)";
 
     private static final int PID = 2;
 
