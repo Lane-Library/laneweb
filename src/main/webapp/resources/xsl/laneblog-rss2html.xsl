@@ -33,6 +33,10 @@
                     <xsl:value-of select="content:encoded"/>
                 </content>
         	</div>
+        		<a href="{link}" title="feed link---{../../channel/title}">
+				<xsl:text>Read More </xsl:text>
+				<i class="fa fa-arrow-right"></i> 
+			</a>
              <hr/>
              <div class="newsfeed-item-time">
                 <xsl:variable name="date" select="tokenize(pubDate, '\s+')"/>
