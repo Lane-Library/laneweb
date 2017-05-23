@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+     	<release date="2017-05-29" version="3.3.32" description="3.3.32 bug fix release">
+            <action date="2017-05-23" dev="alainb" issue="134137" type="update">
+                to add read more to the laneblog
+            </action>
+        </release>
         <release date="2017-05-15" version="3.3.31" description="3.3.31 bug fix release">
             <action date="2017-05-11" dev="ceyates" issue="133899" type="fix">
                 code to truncate class text drops a word
