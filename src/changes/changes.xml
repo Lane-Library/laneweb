@@ -7,6 +7,81 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-05-15" version="3.3.31" description="3.3.31 bug fix release">
+            <action date="2017-05-11" dev="ceyates" issue="133899" type="fix">
+                code to truncate class text drops a word
+            </action>
+            <action date="2017-05-11" dev="ceyates" issue="133888" type="fix">
+                bookcovers: multiple isbns not getting checked for thumbnails if the first one doesn't have one
+            </action>
+            <action date="2017-05-11" dev="ryanmax" issue="133879" type="fix">
+                can't toggle Description on browse page
+            </action>
+            <action date="2017-05-09" dev="ceyates" issue="133816" type="fix">
+                youtube video links disappear on click
+            </action>
+            <action date="2017-05-08" dev="ceyates" issue="133788" type="update">
+                don't log an error when eresource browse page is empty
+            </action>
+            <action date="2017-05-08" dev="ceyates" issue="133785" type="fix">
+                some proxyable links not being proxied
+            </action>
+            <action date="2017-05-10" dev="ceyates" issue="131724" type="fix">
+                using back button to return to search result page scrolls to top
+            </action>
+        </release>
+        <release date="2017-05-08" version="3.3.30" description="3.3.30 bug fix release">
+            <action date="2017-05-05" dev="ceyates" issue="133737" type="fix">
+                search help href on peds portal is empty
+            </action>
+            <action date="2017-05-04" dev="ryanmax" issue="133708" type="fix">
+                clinical search age toggle changes unpredictably
+            </action>
+            <action date="2017-05-04" dev="ryanmax" issue="133685" type="update">
+                PICO form should stay open after a PICO search
+            </action>
+            <action date="2017-05-04" dev="ryanmax" issue="133684" type="fix">
+                PICO form does not retain values after search
+            </action>
+            <action date="2017-05-05" dev="ceyates" issue="133677" type="update">
+                PICO search hard to find
+            </action>
+            <action date="2017-05-03" dev="ryanmax" issue="133675" type="fix">
+                Feedback-bug: PICO option not initially present on peds portal
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="133192" type="update">
+                move impact factor to bottom in search/browse result display
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="133045" type="add">
+                add red X to "clear all"
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="131696" type="update">
+                Comments Suggestions: search results - move embargo information field
+            </action>
+            <action date="2017-05-01" dev="ryanmax" issue="131580" type="update">
+                Feedback-suggestion: search result formatting
+            </action>
+        </release>
+        <release date="2017-05-01" version="3.3.29" description="3.3.29 bug fix release">
+            <action date="2017-04-27" dev="ceyates" issue="133553" type="remove">
+                remove miscellaneous references to IE in css and js files
+            </action>
+            <action date="2017-04-27" dev="ceyates" issue="133520" type="remove">
+                replace use of javascript FormValidator with html5 constructs
+            </action>
+            <action date="2017-04-27" dev="ceyates" issue="133518" type="remove">
+                replace use of javascript TextInput with placeholder attribute
+            </action>
+            <action date="2017-04-25" dev="olgary" issue="133486" type="remove">
+                removed blue jeans button from bus cards  - liaison-card.xsl
+            </action>
+            <action date="2017-04-24" dev="alainb" issue="133448" type="update">
+                change headings to h4 and fix the underline 'golf club' for classes
+            </action>
+            <action date="2017-04-24" dev="ryanmax" issue="133443" type="update">
+                change h3 to h4 for e resources
+            </action>
+        </release>
         <release date="2017-04-24" version="3.3.28" description="3.3.28 bug fix release"/>
         <release date="2017-04-17" version="3.3.27" description="3.3.27 bug fix release">
             <action date="2017-04-05" dev="olgary" issue="133044" type="update">

@@ -20,6 +20,12 @@
     <!-- the search query -->
     <xsl:param name="query"/>
 
+    <!-- PICO -->
+    <xsl:param name="p"/>
+    <xsl:param name="i"/>
+    <xsl:param name="c"/>
+    <xsl:param name="o"/>
+
     <xsl:param name="source"/>
 
     <xsl:param name="proxy-links"/>
@@ -109,7 +115,6 @@
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="$source">
                 <xsl:choose>
-                    <xsl:when test="$source='peds-all'">clinical-all</xsl:when>
                     <!-- various -images-all source parameters get images-all -->
                     <xsl:when test="ends-with($source, 'images-all')">images-all</xsl:when>
                     <xsl:when test="string-length($source-prefix) &gt; 0">
@@ -261,14 +266,24 @@
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
     
-    <!-- add active to the pico-toggle link if $search-source=clinical-all -->
-    <xsl:template match="h:span[@class='pico-toggle' and $search-source='clinical-all']/@class">
+    <!-- add active to the pico-toggle link if $search-source=clinical|peds-all -->
+    <xsl:template match="h:span[@class='pico-toggle' and matches($search-source,'(clinical|peds)-all')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
     </xsl:template>
     
-    <!-- add active to the pico-on link if $search-source=clinical-all -->
-    <xsl:template match="h:span[@class='pico-on' and $search-source='clinical-all']/@class">
+    <!-- add active to the pico-on link if $search-source=clinical|peds-all and no PICO values present -->
+    <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o)]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
+    </xsl:template>
+
+    <!-- add active to the pico-off link if PICO values present -->
+    <xsl:template match="h:span[@class='pico-off' and ($p or $i or $c or $o)]/@class">
+        <xsl:attribute name="class" select="'pico-off pico-off-active'"/>
+    </xsl:template>
+    
+    <!-- add active to the pico-fields fieldset if $search-source=clinical|peds-all and PICO values present -->
+    <xsl:template match="h:fieldset[@class='pico-fields' and matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) ]/@class">
+        <xsl:attribute name="class" select="'pico-fields pico-fields-active'"/>
     </xsl:template>
     
     <!-- make the .search-reset active if there is a query -->
@@ -288,7 +303,17 @@
 
     <!-- put the @data-help value of the active tab into the href of .search-help -->
     <xsl:template match="h:a[@class='search-help']/@href">
-        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $search-source]/@data-help)"/>
+        <xsl:variable name="related-tab">
+            <xsl:choose>
+                <xsl:when test="$search-source='peds-all'">
+                    <xsl:value-of select="'clinical-all'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$search-source"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $related-tab]/@data-help)"/>
     </xsl:template>
 
     

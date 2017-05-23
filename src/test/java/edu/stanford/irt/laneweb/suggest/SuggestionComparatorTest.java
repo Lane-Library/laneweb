@@ -22,8 +22,8 @@ public class SuggestionComparatorTest {
         assertTrue(comparator.compare(new Suggestion("", "bbb"), new Suggestion("", "aaa")) > 0);
         assertTrue(comparator.compare(new Suggestion("", "aaa"), new Suggestion("", "aaa")) == 0);
         assertTrue(comparator.compare(new Suggestion("", "foo TestString"), new Suggestion("", "foo TestString")) == 0);
-        assertTrue(comparator.compare(new Suggestion("", "Zeitschrift für allgemeine Mikrobiologie"), new Suggestion(
-                "", "zeitschrift fur allgemeine Mikrobiologie")) == 0);
+        assertTrue(comparator.compare(new Suggestion("", "Zeitschrift für allgemeine Mikrobiologie"),
+                new Suggestion("", "zeitschrift fur allgemeine Mikrobiologie")) == 0);
     }
 
     @Test

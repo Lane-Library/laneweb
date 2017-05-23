@@ -5,22 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 
 @Controller
 @RequestMapping(value = "/secure/metrics/bookmarks")
 public class BookmarkMetricsController {
 
-    private BookmarkDAO bookmarkDAO;
+    private BookmarkService bookmarkService;
 
     @Autowired
-    public BookmarkMetricsController(final BookmarkDAO bookmarkDAO) {
-        this.bookmarkDAO = bookmarkDAO;
+    public BookmarkMetricsController(final BookmarkService bookmarkService) {
+        this.bookmarkService = bookmarkService;
     }
 
     @RequestMapping(value = "/rowcount")
     @ResponseBody
     public int getRowCount() {
-        return this.bookmarkDAO.getRowCount();
+        return this.bookmarkService.getRowCount();
     }
 }

@@ -40,8 +40,7 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
         String imageId = image.getId();
         try {
             atts = new AttributesImpl();
-            atts.addAttribute(EMPTY, HREF, HREF, CDATA,
-                    "/secure/image/update?id=" + URLEncoder.encode(imageId, UTF_8));
+            atts.addAttribute(EMPTY, HREF, HREF, CDATA, "/secure/image/update?id=" + URLEncoder.encode(imageId, UTF_8));
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imagedeco-admin");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
             XMLUtils.data(xmlConsumer, imageId.substring(imageId.lastIndexOf('/') + 1));

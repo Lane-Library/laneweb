@@ -14,7 +14,8 @@ import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
-import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsManager;
+import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService;
+import edu.stanford.irt.laneweb.catalog.grandrounds.JDBCGrandRoundsService;
 import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
 
 @Configuration
@@ -30,12 +31,12 @@ public class GrandRoundsConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
     @Scope("prototype")
     public Generator grandRoundsGenerator() throws IOException {
-        return new GrandRoundsGenerator(grandRoundsManager(), presentationSAXStrategy());
+        return new GrandRoundsGenerator(grandRoundsService(), presentationSAXStrategy());
     }
 
     @Bean
-    public GrandRoundsManager grandRoundsManager() throws IOException {
-        return new GrandRoundsManager(this.dataSource,
+    public GrandRoundsService grandRoundsService() throws IOException {
+        return new JDBCGrandRoundsService(this.dataSource,
                 getClass().getResourceAsStream("/edu/stanford/irt/grandrounds/getGrandRounds.fnc"));
     }
 

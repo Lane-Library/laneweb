@@ -94,8 +94,8 @@ public class EMailControllerTest {
         expect(this.model.asMap()).andReturn(this.map);
         this.remoteIPBinder.bind(this.map, this.request);
         this.headerBinder.bind(this.map, this.request);
-        expect(this.request.getParameterMap()).andReturn(
-                Collections.singletonMap("key", new String[] { "value", "anothervalue" }));
+        expect(this.request.getParameterMap())
+                .andReturn(Collections.singletonMap("key", new String[] { "value", "anothervalue" }));
         expect(this.model.addAttribute("key", "value")).andReturn(this.model);
         replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.request);
         this.controller.getParameters(this.request, this.model);

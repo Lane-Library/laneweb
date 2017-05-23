@@ -1,10 +1,12 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.junit.Assert.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-
-import static org.easymock.EasyMock.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,16 +15,17 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.solr.Image;
 
-
 public class SolrAdminImageSearchSAXStrategyTest {
-    
-    private  SolrAdminImageSearchSAXStrategy strategy;
-    private TestXMLConsumer xmlConsumer;
+
     private Image image;
+
+    private SolrAdminImageSearchSAXStrategy strategy;
+
+    private TestXMLConsumer xmlConsumer;
 
     @Before
     public void setUp() {
-        this.strategy = new  SolrAdminImageSearchSAXStrategy();
+        this.strategy = new SolrAdminImageSearchSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
         this.image = createMock(Image.class);
     }
@@ -53,7 +56,9 @@ public class SolrAdminImageSearchSAXStrategyTest {
         this.strategy.generateImages(this.xmlConsumer, this.image, 1);
         this.xmlConsumer.endDocument();
         verify(this.image);
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "SolrAdminImageSearchSAXStrategyTest-generateImagesDisabled.xml"),
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "SolrAdminImageSearchSAXStrategyTest-generateImagesDisabled.xml"),
                 this.xmlConsumer.getStringValue());
     }
 }

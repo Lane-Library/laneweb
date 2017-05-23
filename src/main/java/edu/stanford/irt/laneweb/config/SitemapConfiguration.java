@@ -23,6 +23,8 @@ import edu.stanford.irt.laneweb.ipgroup.IPGroupSelector;
 @Configuration
 public class SitemapConfiguration {
 
+    private static final String SITEMAP_URI = "sitemap-uri";
+
     @Bean
     public static CustomEditorConfigurer customEditorConfigurer() {
         CustomEditorConfigurer configurer = new CustomEditorConfigurer();
@@ -63,16 +65,16 @@ public class SitemapConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/regexp")
     public Matcher regexpMatcher() {
-        return new RegexpMatcher("sitemap-uri");
+        return new RegexpMatcher(SITEMAP_URI);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/url-decoding-wildcard")
     public Matcher urlDecodingMatcher() {
-        return new URLDecodingMatcher("sitemap-uri");
+        return new URLDecodingMatcher(SITEMAP_URI);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/wildcard")
     public Matcher wildcardMatcher() {
-        return new WildcardMatcher("sitemap-uri");
+        return new WildcardMatcher(SITEMAP_URI);
     }
 }

@@ -16,7 +16,7 @@ public class FacetComparatorTest {
 
     @Test
     public final void test() {
-        Set<Facet> set = new TreeSet<Facet>(new FacetComparator(PUB_TYPES));
+        Set<Facet> set = new TreeSet<>(new FacetComparator(PUB_TYPES));
         Iterator<Facet> i;
         // basic order by count
         set.add(new Facet("fieldName", "value", 1, null));
@@ -72,7 +72,7 @@ public class FacetComparatorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public final void testException() {
-        Set<Facet> set = new TreeSet<Facet>(new FacetComparator(PUB_TYPES));
+        Set<Facet> set = new TreeSet<>(new FacetComparator(PUB_TYPES));
         set.add(new Facet("fieldName", "value", 1, null));
         set.add(null);
     }

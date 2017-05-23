@@ -25,19 +25,16 @@ public class BassettImageGeneratorTest {
 
     protected SolrImageService service;
 
-    
     private BassettImageGenerator generator;
+
+    private Pageable page = new PageRequest(0, 30);
+
+    private Page<BassettImage> resultPage;
 
     private SAXStrategy<Page<BassettImage>> saxStrategy;
 
     private XMLConsumer xmlConsumer;
 
-    private Pageable page = new PageRequest(0, 30);
-    
-    private Page<BassettImage> resultPage;
-    
-  
-    
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
@@ -46,25 +43,22 @@ public class BassettImageGeneratorTest {
         this.generator = new BassettImageGenerator(this.service, this.saxStrategy);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.resultPage = createMock(Page.class);
-       
     }
 
     @Test
     public void testDoGenerateBassettNumber() {
-        expect( this.service.findBassettByNumber("bn")).andReturn(null);
+        expect(this.service.findBassettByNumber("bn")).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
-        replay(this.resultPage, this.service,this.xmlConsumer, this.saxStrategy);
+        replay(this.resultPage, this.service, this.xmlConsumer, this.saxStrategy);
         this.generator.setModel(Collections.singletonMap(Model.BASSETT_NUMBER, "bn"));
         this.generator.doGenerate(this.xmlConsumer);
-        
         verify(this.service, this.xmlConsumer, this.saxStrategy);
     }
-
 
     @Test
     public void testDoGenerateQuery() {
         this.saxStrategy.toSAX(null, this.xmlConsumer);
-        expect( this.service.findBassettByQuery("query", page)).andReturn(null);
+        expect(this.service.findBassettByQuery("query", this.page)).andReturn(null);
         replay(this.service, this.xmlConsumer, this.saxStrategy, this.resultPage);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
@@ -73,10 +67,10 @@ public class BassettImageGeneratorTest {
 
     @Test
     public void testDoGenerateQueryRegion() {
-        expect( this.service.findBassettByQueryFilterByRegion("term", "region",page)).andReturn(null);
+        expect(this.service.findBassettByQueryFilterByRegion("term", "region", this.page)).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.service, this.xmlConsumer, this.saxStrategy);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         model.put(Model.QUERY, "term");
         model.put(Model.REGION, "region");
         this.generator.setModel(model);
@@ -90,9 +84,9 @@ public class BassettImageGeneratorTest {
         expect(this.service.findBassettByQueryFilterByRegion("query", "region", testPage)).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.service, this.xmlConsumer, this.saxStrategy, this.resultPage);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         model.put(Model.QUERY, "query");
-        model.put(Model.PAGE, "4"); 
+        model.put(Model.PAGE, "4");
         model.put(Model.REGION, "region");
         this.generator.setModel(model);
         this.generator.doGenerate(this.xmlConsumer);

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.trends.BookmarkTrendsReporter;
 import edu.stanford.irt.laneweb.trends.GoogleTracker;
 
@@ -13,17 +13,17 @@ import edu.stanford.irt.laneweb.trends.GoogleTracker;
 @EnableScheduling
 public class TrendsConfiguration {
 
-    private BookmarkDAO bookmarkDAO;
+    private BookmarkService bookmarkService;
 
     @Autowired
-    public TrendsConfiguration(final BookmarkDAO bookmarkDAO) {
-        this.bookmarkDAO = bookmarkDAO;
+    public TrendsConfiguration(final BookmarkService bookmarkService) {
+        this.bookmarkService = bookmarkService;
     }
 
     @Bean
     public BookmarkTrendsReporter bookmarkTrendsReporter() {
         BookmarkTrendsReporter reporter = new BookmarkTrendsReporter();
-        reporter.setBookmarkDAO(this.bookmarkDAO);
+        reporter.setBookmarkDAO(this.bookmarkService);
         reporter.setGoogleTracker(googleTracker());
         return reporter;
     }

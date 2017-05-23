@@ -17,6 +17,13 @@
     background-image: none;
 }
 
+.popular h4 {
+    text-transform: uppercase;
+    font-family: 'Fjord One', serif;
+    color: #ffffff;
+    text-align: center;
+    background-image: none;
+}
 .popular li {
     border-bottom: none;
 }

@@ -18,6 +18,8 @@ import edu.stanford.irt.search.impl.Result;
 
 public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSearchResultList> {
 
+    private static final String FACET_COUNT = "facetCount";
+
     private static final String LENGTH = "length";
 
     private static final String PAGE = "page";
@@ -25,8 +27,6 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
     private static final String PAGES = "pages";
 
     private static final String START = "start";
-    
-    private static final String FACET_COUNT = "facetCount";
 
     private SAXStrategy<SearchResult> saxStrategy;
 
@@ -44,13 +44,11 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA,
-                    Integer.toString(size));
+            atts.addAttribute(Resource.EMPTY_NS, Resource.SIZE, Resource.SIZE, Resource.CDATA, Integer.toString(size));
             atts.addAttribute(Resource.EMPTY_NS, START, START, Resource.CDATA, Integer.toString(start));
             atts.addAttribute(Resource.EMPTY_NS, LENGTH, LENGTH, Resource.CDATA, Integer.toString(length));
             atts.addAttribute(Resource.EMPTY_NS, PAGE, PAGE, Resource.CDATA, Integer.toString(pagingData.getPage()));
             atts.addAttribute(Resource.EMPTY_NS, PAGES, PAGES, Resource.CDATA, Integer.toString(pagingData.getPages()));
-
             atts.addAttribute(Resource.EMPTY_NS, FACET_COUNT, FACET_COUNT, Resource.CDATA, Integer.toString(size));
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCES, atts);
             String query = list.getQuery();
@@ -76,20 +74,21 @@ public class PagingSearchResultListSAXStrategy implements SAXStrategy<PagingSear
         XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
         Set<Result> countedResources = new HashSet<>();
         for (SearchResult resource : list) {
-                Result resourceResult = resource.getResourceResult();
-                if (!countedResources.contains(resourceResult)) {
-                    countedResources.add(resourceResult);
-                    AttributesImpl atts = new AttributesImpl();
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_ID, Resource.RESOURCE_ID, Resource.CDATA,
-                            resourceResult.getId());
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS, Resource.CDATA,
-                            resourceResult.getHits());
-                    atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_URL, Resource.RESOURCE_URL, Resource.CDATA,
-                            resourceResult.getURL());
-                    atts.addAttribute(Resource.EMPTY_NS, "contentCount", "contentCount", Resource.CDATA, Integer.toString(resourceResult.getChildren().size()));
-                    XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE, atts);
-                    XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE);
-                }
+            Result resourceResult = resource.getResourceResult();
+            if (!countedResources.contains(resourceResult)) {
+                countedResources.add(resourceResult);
+                AttributesImpl atts = new AttributesImpl();
+                atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_ID, Resource.RESOURCE_ID, Resource.CDATA,
+                        resourceResult.getId());
+                atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_HITS, Resource.RESOURCE_HITS, Resource.CDATA,
+                        resourceResult.getHits());
+                atts.addAttribute(Resource.EMPTY_NS, Resource.RESOURCE_URL, Resource.RESOURCE_URL, Resource.CDATA,
+                        resourceResult.getURL());
+                atts.addAttribute(Resource.EMPTY_NS, "contentCount", "contentCount", Resource.CDATA,
+                        Integer.toString(resourceResult.getChildren().size()));
+                XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE, atts);
+                XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.RESOURCE);
+            }
         }
         XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.CONTENT_HIT_COUNTS);
     }

@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 
 public class BookmarkTrendsReporter {
 
     private static final Logger LOG = LoggerFactory.getLogger(BookmarkTrendsReporter.class);
 
-    private BookmarkDAO bookmarkDAO;
+    private BookmarkService bookmarkService;
 
     private GoogleTracker googleTracker;
 
@@ -25,18 +25,18 @@ public class BookmarkTrendsReporter {
     public void reportCount() {
         try {
             this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", getLocalHostname(), "dailyUserCount",
-                    this.bookmarkDAO.getRowCount());
+                    this.bookmarkService.getRowCount());
         } catch (UnknownHostException | LanewebException e) {
             LOG.error(e.getMessage(), e);
         }
     }
 
     /**
-     * @param bookmarkDAO
-     *            the bookmarkDAO to set
+     * @param bookmarkService
+     *            the bookmarkService to set
      */
-    public void setBookmarkDAO(final BookmarkDAO bookmarkDAO) {
-        this.bookmarkDAO = bookmarkDAO;
+    public void setBookmarkDAO(final BookmarkService bookmarkService) {
+        this.bookmarkService = bookmarkService;
     }
 
     /**

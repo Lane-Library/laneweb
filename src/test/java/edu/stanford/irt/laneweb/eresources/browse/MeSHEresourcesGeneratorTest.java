@@ -18,11 +18,11 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class MeSHEresourcesGeneratorTest {
 
-    private SolrService solrService;
-
     private MeSHEresourcesGenerator generator;
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
+
+    private SolrService solrService;
 
     @Test
     public void setModelMesh() {

@@ -115,8 +115,8 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testCreateSpan() throws SAXException {
-        this.xmlConsumer
-                .startElement(eq("http://www.w3.org/1999/xhtml"), eq("span"), eq("span"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("span"), eq("span"),
+                isA(Attributes.class));
         this.xmlConsumer.characters(aryEq("text".toCharArray()), eq(0), eq(4));
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "span", "span");
         replay(this.xmlConsumer);
@@ -319,8 +319,8 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartBody() throws SAXException {
-        this.xmlConsumer
-        .startElement(eq("http://www.w3.org/1999/xhtml"), eq("body"), eq("body"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("body"), eq("body"),
+                isA(Attributes.class));
         replay(this.xmlConsumer);
         this.strategy.startBody(this.xmlConsumer);
         verify(this.xmlConsumer);
@@ -356,8 +356,8 @@ public class AbstractXHTMLSAXStrategyTest {
 
     @Test
     public void testStartHead() throws SAXException {
-        this.xmlConsumer
-        .startElement(eq("http://www.w3.org/1999/xhtml"), eq("head"), eq("head"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("head"), eq("head"),
+                isA(Attributes.class));
         replay(this.xmlConsumer);
         this.strategy.startHead(this.xmlConsumer);
         verify(this.xmlConsumer);
@@ -367,8 +367,8 @@ public class AbstractXHTMLSAXStrategyTest {
     public void testStartHTMLDocument() throws SAXException {
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-        this.xmlConsumer
-                .startElement(eq("http://www.w3.org/1999/xhtml"), eq("html"), eq("html"), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("html"), eq("html"),
+                isA(Attributes.class));
         replay(this.xmlConsumer);
         this.strategy.startHTMLDocument(this.xmlConsumer);
         verify(this.xmlConsumer);

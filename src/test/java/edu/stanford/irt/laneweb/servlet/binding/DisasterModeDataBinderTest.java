@@ -18,7 +18,7 @@ public class DisasterModeDataBinderTest {
     @Test
     public void testFalse() {
         this.binder = new DisasterModeDataBinder(Boolean.FALSE);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         this.binder.bind(model, null);
         assertFalse(ModelUtil.getObject(model, Model.DISASTER_MODE, Boolean.class));
     }
@@ -26,7 +26,7 @@ public class DisasterModeDataBinderTest {
     @Test
     public void testNull() {
         this.binder = new DisasterModeDataBinder(null);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         this.binder.bind(model, null);
         assertFalse(ModelUtil.getObject(model, Model.DISASTER_MODE, Boolean.class));
     }
@@ -34,7 +34,7 @@ public class DisasterModeDataBinderTest {
     @Test
     public void testTrue() {
         this.binder = new DisasterModeDataBinder(Boolean.TRUE);
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = new HashMap<>();
         this.binder.bind(model, null);
         assertTrue(ModelUtil.getObject(model, Model.DISASTER_MODE, Boolean.class));
     }

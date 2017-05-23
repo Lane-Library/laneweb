@@ -13,11 +13,7 @@ var searchPicoTestCase = new Y.Test.Case({
     "test p to q": function() {
         this.p.value = "p";
         var e = document.createEvent("UIEvents");
-        if (Y.UA.ie === 9) {
-            e.initEvent("keyup", true, false);
-        } else {
-            e.initEvent("input", true, false); 
-        }
+        e.initEvent("input", true, false);
         this.p.dispatchEvent(e);
         Y.Assert.areEqual("p", this.q.value);
     },
@@ -26,11 +22,7 @@ var searchPicoTestCase = new Y.Test.Case({
         this.p.value = "P";
         this.i.value = "I"
         var e = document.createEvent("UIEvents");
-        if (Y.UA.ie === 9) {
-            e.initEvent("keyup", true, false);
-        } else {
-            e.initEvent("input", true, false); 
-        }
+        e.initEvent("input", true, false);
         this.p.dispatchEvent(e);
         this.i.dispatchEvent(e);
         Y.Assert.areEqual("(P) AND (I)", this.q.value);

@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import edu.stanford.irt.laneweb.proxy.EzproxyServersWriter;
+import edu.stanford.irt.laneweb.proxy.ProxyServersService;
 
 @Controller
 public class EzproxyServersController {
 
     @Autowired
-    private EzproxyServersWriter writer;
+    private ProxyServersService writer;
 
     @RequestMapping(value = "/eresources/ezproxy-servers.txt")
     public void getEzproxyServers(final HttpServletResponse response) throws IOException {

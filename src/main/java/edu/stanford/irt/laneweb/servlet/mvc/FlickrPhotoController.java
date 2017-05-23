@@ -26,7 +26,7 @@ public class FlickrPhotoController {
 
     @RequestMapping("/apps/getFlickrPhotoList")
     @ResponseBody
-    public List<FlickrPhoto> getFlickrPhotoList(HttpServletResponse response) {
+    public List<FlickrPhoto> getFlickrPhotoList(final HttpServletResponse response) {
         response.setHeader("Cache-Control", "no-cache");
         return this.service.getRandomPhotos(RANDOM_PHOTO_COUNT);
     }

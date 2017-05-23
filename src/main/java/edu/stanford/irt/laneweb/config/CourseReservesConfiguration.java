@@ -14,8 +14,9 @@ import org.springframework.context.annotation.Scope;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.coursereserves.Course;
-import edu.stanford.irt.coursereserves.CourseReservesDAO;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.coursereserves.CourseReservesService;
+import edu.stanford.irt.coursereserves.JDBCCourseReservesService;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseHeadingSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseListGenerator;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemListGenerator;
@@ -33,25 +34,25 @@ public class CourseReservesConfiguration {
         this.dataSource = dataSource;
     }
 
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
+    @Scope("prototype")
+    public Generator courseReservesItemListGenerator() throws IOException {
+        return new CourseReservesItemListGenerator(courseReservesService(), coursesReservesItemListSAXStrategy());
+    }
+
     @Bean
-    public CourseReservesDAO courseReservesDAO() throws IOException {
-        Class<?> c = CourseReservesDAO.class;
-        return new CourseReservesDAO(this.dataSource, c.getResourceAsStream("itemStatus.sql"),
+    public CourseReservesService courseReservesService() throws IOException {
+        Class<?> c = JDBCCourseReservesService.class;
+        return new JDBCCourseReservesService(this.dataSource, c.getResourceAsStream("itemStatus.sql"),
                 c.getResourceAsStream("course.sql"), c.getResourceAsStream("courses.sql"),
                 c.getResourceAsStream("courseReservesItemListAll.fnc"),
                 c.getResourceAsStream("courseReservesItemListCourse.fnc"));
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
-    @Scope("prototype")
-    public Generator courseReservesItemListGenerator() throws IOException {
-        return new CourseReservesItemListGenerator(courseReservesDAO(), coursesReservesItemListSAXStrategy());
-    }
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
     @Scope("prototype")
     public Generator coursesGenerator() throws IOException {
-        return new CourseListGenerator(courseReservesDAO(), coursesSAXStrategy());
+        return new CourseListGenerator(courseReservesService(), coursesSAXStrategy());
     }
 
     @Bean

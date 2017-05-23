@@ -14,6 +14,10 @@ import java.util.ListIterator;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.api.easymock.PowerMock;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -22,6 +26,8 @@ import edu.stanford.irt.laneweb.mapping.PagingSearchResultList;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.search.impl.Result;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(PagingData.class)
 public class PagingSearchResultListSAXStrategyTest {
 
     private ListIterator<SearchResult> iterator;
@@ -52,7 +58,7 @@ public class PagingSearchResultListSAXStrategyTest {
         this.resultStrategy = createMock(SAXStrategy.class);
         this.strategy = new PagingSearchResultListSAXStrategy(this.resultStrategy);
         this.list = createMock(PagingSearchResultList.class);
-        this.pagingData = createMock(PagingData.class);
+        this.pagingData = PowerMock.createMock(PagingData.class);
         this.resourceResult = createMock(Result.class);
     }
 
@@ -75,8 +81,10 @@ public class PagingSearchResultListSAXStrategyTest {
         expect(this.iterator.hasNext()).andReturn(false);
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
-        assertEquals(this.xmlConsumer.getExpectedResult(this,
-                "PagingSearchResultListSAXStrategyTest-testAllPages539ToSAX.xml"), this.xmlConsumer.getStringValue());
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testAllPages539ToSAX.xml"),
+                this.xmlConsumer.getStringValue());
         verify(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
     }
 
@@ -132,8 +140,10 @@ public class PagingSearchResultListSAXStrategyTest {
         replay(this.resourceResult, this.results, this.result, this.iterator, this.list, this.pagingData,
                 this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
-        assertEquals(this.xmlConsumer.getExpectedResult(this,
-                "PagingSearchResultListSAXStrategyTest-testContentHitCounts.xml"), this.xmlConsumer.getStringValue());
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testContentHitCounts.xml"),
+                this.xmlConsumer.getStringValue());
         verify(this.resourceResult, this.results, this.result, this.iterator, this.list, this.pagingData,
                 this.resultStrategy);
     }

@@ -4,7 +4,7 @@ var golfclubHeadingsTestCase = new Y.Test.Case({
     name: "Lane Selections TestCase",
     test: function() {
         var heading = document.querySelector("h2");
-        Y.Assert.areEqual("<span><span>heading</span></span>", heading.innerHTML);
+        Y.Assert.areEqual('<span><span class="golfclub-left"></span>heading<span class="golfclub-right"></span></span>', heading.innerHTML);
     }
 });
 

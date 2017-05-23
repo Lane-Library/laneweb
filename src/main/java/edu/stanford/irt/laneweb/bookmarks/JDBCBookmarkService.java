@@ -20,16 +20,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.util.IOUtils;
-import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class SQLBookmarkDAO implements BookmarkDAO {
+public class JDBCBookmarkService implements BookmarkService {
 
     private static final int BLOB = 2;
 
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
 
-    private static final Logger LOG = LoggerFactory.getLogger(SQLBookmarkDAO.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JDBCBookmarkService.class);
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
@@ -46,58 +44,66 @@ public class SQLBookmarkDAO implements BookmarkDAO {
 
     private DataSource dataSource;
 
-    public SQLBookmarkDAO(final DataSource dataSource) {
+    public JDBCBookmarkService(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt) throws SQLException {
+        List<Bookmark> links = null;
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                try (ObjectInputStream oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream())) {
+                    links = (List<Bookmark>) oip.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    LOG.error(e.getMessage(), e);
+                }
+            }
+        }
+        return links;
+    }
+
+    private static void saveLinksToDatabase(final List<Bookmark> links, final Connection conn, final String userid)
+            throws SQLException, IOException {
+        if (!links.isEmpty()) {
+            try (CallableStatement cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL)) {
+                cstmt.setString(USER_ID, userid);
+                cstmt.registerOutParameter(BLOB, java.sql.Types.BLOB);
+                cstmt.executeUpdate();
+                Blob blob = cstmt.getBlob(BLOB);
+                try (ObjectOutputStream oop = new ObjectOutputStream(blob.setBinaryStream(1))) {
+                    oop.writeObject(Serializable.class.cast(links));
+                    oop.flush();
+                }
+            }
+        }
+    }
+
+    @Override
     public List<Bookmark> getLinks(final String userid) {
         Objects.requireNonNull(userid, "null userid");
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
         List<Bookmark> links = null;
-        ObjectInputStream oip = null;
-        try {
-            conn = this.dataSource.getConnection();
-            pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL);
+        try (Connection conn = this.dataSource.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream());
-                links = (List<Bookmark>) oip.readObject();
-            }
-        } catch (SQLException | IOException | ClassNotFoundException e) {
+            links = getLinksFromStatement(pstmt);
+        } catch (SQLException e) {
             LOG.error(e.getMessage(), e);
-        } finally {
-            IOUtils.closeStream(oip);
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(pstmt);
-            JdbcUtils.closeConnection(conn);
         }
         return links;
     }
 
     @Override
     public int getRowCount() {
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
         int count = 0;
-        try {
-            conn = this.dataSource.getConnection();
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(ROW_COUNT);
+        try (Connection conn = this.dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(ROW_COUNT)) {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
         } catch (SQLException e) {
             throw new LanewebException(e);
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-            JdbcUtils.closeStatement(stmt);
-            JdbcUtils.closeConnection(conn);
         }
         return count;
     }
@@ -107,36 +113,20 @@ public class SQLBookmarkDAO implements BookmarkDAO {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
         Connection conn = getConnection();
-        CallableStatement cstmt = null;
-        PreparedStatement pstmt = null;
-        ObjectOutputStream oop = null;
-        try {
-            pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
+        try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
             pstmt.execute();
-            if (!links.isEmpty()) {
-                cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
-                cstmt.setString(USER_ID, userid);
-                cstmt.registerOutParameter(BLOB, java.sql.Types.BLOB);
-                cstmt.executeUpdate();
-                Blob blob = cstmt.getBlob(BLOB);
-                oop = new ObjectOutputStream(blob.setBinaryStream(1));
-                oop.writeObject(Serializable.class.cast(links));
-                oop.flush();
-            }
+            saveLinksToDatabase(links, conn, userid);
             conn.commit();
         } catch (IOException | SQLException e) {
             try {
                 conn.rollback();
             } catch (SQLException e1) {
-                LOG.error(e1.getMessage(), e1);
+                throw new LanewebException(e1);
             }
             throw new LanewebException(e);
         } finally {
-            IOUtils.closeStream(oop);
-            JdbcUtils.closeStatement(cstmt);
-            JdbcUtils.closeStatement(pstmt);
-            JdbcUtils.closeConnection(conn);
+            releaseConnection(conn);
         }
     }
 
@@ -145,6 +135,15 @@ public class SQLBookmarkDAO implements BookmarkDAO {
             Connection conn = this.dataSource.getConnection();
             conn.setAutoCommit(false);
             return conn;
+        } catch (SQLException e) {
+            throw new LanewebException(e);
+        }
+    }
+
+    private void releaseConnection(final Connection conn) {
+        try {
+            conn.setAutoCommit(true);
+            conn.close();
         } catch (SQLException e) {
             throw new LanewebException(e);
         }

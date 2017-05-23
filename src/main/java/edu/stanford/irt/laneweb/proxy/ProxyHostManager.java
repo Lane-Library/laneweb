@@ -3,10 +3,7 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,6 +16,10 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class ProxyHostManager {
 
+    private static final String COLON_DOUBLE_SLASH = "://";
+
+    private static final int COLON_DOUBLE_SLASH_LENGTH = COLON_DOUBLE_SLASH.length();
+
     private static final long DEFAULT_DELAY = 120L;
 
     private static final Logger log = LoggerFactory.getLogger(ProxyHostManager.class);
@@ -27,7 +28,7 @@ public class ProxyHostManager {
 
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final ProxyHostSource hostSource, final ScheduledExecutorService executor) {
+    public ProxyHostManager(final ProxyServersService service, final ScheduledExecutorService executor) {
         this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;
@@ -41,9 +42,9 @@ public class ProxyHostManager {
         }
         executor.scheduleAtFixedRate(() -> {
             try {
-                this.proxyHosts = hostSource.getHosts();
+                this.proxyHosts = service.getHosts();
                 log.info("successfully retrieved proxy hosts from the voyager catalog");
-            } catch (SQLException e) {
+            } catch (LanewebException e) {
                 log.error("failed to retrieve proxy host hosts from the voyager catalog: {}", e.getMessage());
             }
         }, 0L, DEFAULT_DELAY, TimeUnit.MINUTES);
@@ -61,21 +62,19 @@ public class ProxyHostManager {
     }
 
     public boolean isProxyableLink(final String link) {
-        if (link == null) {
-            return false;
+        boolean proxyable = false;
+        if (link != null) {
+            int doubleSlashIndex = link.indexOf(COLON_DOUBLE_SLASH);
+            if (doubleSlashIndex > -1) {
+                String hostAndPath = link.substring(doubleSlashIndex + COLON_DOUBLE_SLASH_LENGTH);
+                int slashIndex = hostAndPath.indexOf('/');
+                if (slashIndex == -1) {
+                    slashIndex = hostAndPath.length();
+                }
+                String host = hostAndPath.substring(0, slashIndex);
+                proxyable = isProxyableHost(host);
+            }
         }
-        // parsing links as URIs to easily get host, but need to clean them up by trimming and removing query string:
-        String linkToCheck = link.trim();
-        int qmark = linkToCheck.indexOf('?');
-        if (qmark > 0) {
-            linkToCheck = linkToCheck.substring(0, qmark);
-        }
-        try {
-            URI uri = new URI(linkToCheck);
-            return isProxyableHost(uri.getHost());
-        } catch (URISyntaxException e) {
-            log.error("unable to determine host from link: {}, error: {}", link, e.getMessage());
-            return false;
-        }
+        return proxyable;
     }
 }

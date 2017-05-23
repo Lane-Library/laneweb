@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.images;
 
-
 import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -31,40 +30,37 @@ import edu.stanford.irt.solr.BassettImage;
 
 public class BassettCountSAXStrategyTest {
 
+    private FacetPage<BassettImage> facetPage;
+
+    private Page<FacetFieldEntry> page;
 
     private BassettCountSAXStrategy strategy;
 
     private XMLConsumer xmlConsumer;
-    
-    private FacetPage<BassettImage> facetPage;
 
-    private Page<FacetFieldEntry> page; 
-    
-    
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.strategy = new BassettCountSAXStrategy();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.facetPage = createMock(FacetPage.class);
-        this.page = createMock(Page.class); 
-           
+        this.page = createMock(Page.class);
     }
 
     @Test
     public void testToSAX() throws SAXException {
-        List<FacetFieldEntry> list = new ArrayList<FacetFieldEntry>();
-        list.add( new SimpleFacetFieldEntry(new SimpleField("region"), "Region1", 10));
-        list.add( new SimpleFacetFieldEntry(new SimpleField("region"), "Region2", 5));
-        expect(facetPage.getFacetResultPage("region")).andReturn(this.page);
+        List<FacetFieldEntry> list = new ArrayList<>();
+        list.add(new SimpleFacetFieldEntry(new SimpleField("region"), "Region1", 10));
+        list.add(new SimpleFacetFieldEntry(new SimpleField("region"), "Region2", 5));
+        expect(this.facetPage.getFacetResultPage("region")).andReturn(this.page);
         expect(this.page.iterator()).andReturn(list.iterator());
-        List<FacetFieldEntry> list2 = new ArrayList<FacetFieldEntry>();
-        list2.add( new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region1_sub_region_Subregion1", 5));
-        list2.add( new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region1_sub_region_Subregion2", 5));
-        list2.add( new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region2_sub_region_Subregion1", 5));
-        expect(facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
+        List<FacetFieldEntry> list2 = new ArrayList<>();
+        list2.add(new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region1_sub_region_Subregion1", 5));
+        list2.add(new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region1_sub_region_Subregion2", 5));
+        list2.add(new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region2_sub_region_Subregion1", 5));
+        expect(this.facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
         expect(this.page.iterator()).andReturn(list2.iterator());
-        expect(facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
+        expect(this.facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
         expect(this.page.iterator()).andReturn(list2.iterator());
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
@@ -88,14 +84,15 @@ public class BassettCountSAXStrategyTest {
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
         this.xmlConsumer.characters(aryEq(new char[] { '5' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"));
-        this.xmlConsumer
-                .endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
+                eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.facetPage,  this.page, this.xmlConsumer);
+        replay(this.facetPage, this.page, this.xmlConsumer);
         this.strategy.toSAX(this.facetPage, this.xmlConsumer);
         verify(this.xmlConsumer);
     }
+
     @SuppressWarnings("unchecked")
     @Test
     public void testToSAXEmptyMap() throws SAXException {
@@ -103,8 +100,8 @@ public class BassettCountSAXStrategyTest {
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
                 eq("bassett_count"), isA(Attributes.class));
-        this.xmlConsumer
-                .endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"), eq("bassett_count"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
+                eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
         expect(this.facetPage.getFacetResultPage("region")).andReturn(this.page);

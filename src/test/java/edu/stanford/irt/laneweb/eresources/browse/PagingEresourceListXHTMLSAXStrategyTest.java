@@ -134,6 +134,23 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
     }
 
     @Test
+    public void testPage13ToSAXWithOnly120() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(200);
+        expect(this.pagingData.getLength()).andReturn(-80);
+        expect(this.list.getHeading()).andReturn("A");
+        expect(this.list.size()).andReturn(120);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "PagingEresourceListXHTMLSAXStrategyTest-testPage1ToSAX.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+
+    @Test
     public void testPage1ToSAX() throws SAXException, IOException {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(100);

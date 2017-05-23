@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class GrandRoundsManagerTest {
+public class JDBCGrandRoundsServiceTest {
 
     private CallableStatement callable;
 
@@ -32,14 +32,14 @@ public class GrandRoundsManagerTest {
 
     private DataSource dataSource;
 
-    private GrandRoundsManager manager;
+    private GrandRoundsService manager;
 
     @Before
     public void setUp() throws IOException {
         this.dataSource = createMock(DataSource.class);
         InputStream presentationsSQL = getClass()
                 .getResourceAsStream("/edu/stanford/irt/grandrounds/getGrandRounds.fnc");
-        this.manager = new GrandRoundsManager(this.dataSource, presentationsSQL);
+        this.manager = new JDBCGrandRoundsService(this.dataSource, presentationsSQL);
         this.connection = createMock(Connection.class);
         this.callable = createMock(CallableStatement.class);
         this.clob = createMock(Clob.class);

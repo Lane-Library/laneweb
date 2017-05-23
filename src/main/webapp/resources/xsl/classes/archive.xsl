@@ -30,17 +30,4 @@
         </div>
     </xsl:template>
 
-    <xsl:template name="video">
-        <div class="youtube-class">
-            <xsl:if test="./lc:more_info_url/text() != ''">
-                <xsl:if test="contains( ./lc:more_info_url/text() ,  'youtube')">
-                    <xsl:call-template name="youtube" />
-                </xsl:if>
-                <xsl:if test="not( contains( ./lc:more_info_url/text() ,  'youtube'))">
-                    <xsl:call-template name="not_youtube" />
-                </xsl:if>
-            </xsl:if>
-        </div>
-    </xsl:template>
-
 </xsl:stylesheet>

@@ -45,7 +45,7 @@ public class EMailSenderTest {
         this.javaMailSender = createMock(JavaMailSender.class);
         this.spamFilter = createMock(SpamFilter.class);
         this.eMailSender = new EMailSender(this.javaMailSender, this.spamFilter);
-        this.map = new HashMap<String, Object>();
+        this.map = new HashMap<>();
         this.message = createMock(MimeMessage.class);
     }
 

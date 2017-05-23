@@ -42,12 +42,14 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             }
             createHeading(xmlConsumer, heading);
             startUlWithClass(xmlConsumer, "lwSearchResults");
-            int i = 0;
-            for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
-                this.saxStrategy.toSAX(it.next(), xmlConsumer);
+            if (length > 0) {
+                int i = 0;
+                for (ListIterator<Eresource> it = list.listIterator(start); it.hasNext() && i < length; i++) {
+                    this.saxStrategy.toSAX(it.next(), xmlConsumer);
+                }
             }
             endUl(xmlConsumer);
-            if (size > DEFAULT_PAGE_SIZE) {
+            if (size > DEFAULT_PAGE_SIZE && length > 0) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
             endBody(xmlConsumer);

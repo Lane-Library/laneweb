@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.bookmarks.BookmarkDAO;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public abstract class BookmarkController {
 
-    private BookmarkDAO bookmarkDAO;
-
     private BookmarkDataBinder bookmarkDataBinder;
+
+    private BookmarkService bookmarkService;
 
     private UserDataBinder userDataBinder;
 
-    public BookmarkController(final BookmarkDAO bookmarkDAO, final BookmarkDataBinder bookmarkDataBinder,
+    public BookmarkController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder) {
-        this.bookmarkDAO = bookmarkDAO;
+        this.bookmarkService = bookmarkService;
         this.bookmarkDataBinder = bookmarkDataBinder;
         this.userDataBinder = userDataBinder;
     }
@@ -37,6 +37,6 @@ public abstract class BookmarkController {
     }
 
     protected void saveLinks(final String userid, final List<Bookmark> links) {
-        this.bookmarkDAO.saveLinks(userid, links);
+        this.bookmarkService.saveLinks(userid, links);
     }
 }

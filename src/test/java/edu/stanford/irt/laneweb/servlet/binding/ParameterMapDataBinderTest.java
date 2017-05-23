@@ -30,7 +30,7 @@ public class ParameterMapDataBinderTest {
     public void setUp() {
         this.binder = new ParameterMapDataBinder();
         this.request = createMock(HttpServletRequest.class);
-        this.model = new HashMap<String, Object>();
+        this.model = new HashMap<>();
     }
 
     @Test
