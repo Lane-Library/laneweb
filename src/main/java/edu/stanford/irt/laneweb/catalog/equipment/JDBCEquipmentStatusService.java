@@ -17,15 +17,6 @@ import edu.stanford.lane.catalog.VoyagerInputStream2;
 
 public class JDBCEquipmentStatusService implements EquipmentService {
 
-    private static final String AVAILABLE_QUERY = "SELECT bi.bib_id, COUNT(*) FROM lmldb.bib_item bi, "
-            + "  lmldb.item_status item_status_1 LEFT OUTER JOIN lmldb.item_status item_status_2 "
-            + "ON (item_status_1.item_id          = item_status_2.item_id "
-            + "AND item_status_1.item_status_date < item_status_2.item_status_date) "
-            + "WHERE item_status_2.item_id       IS NULL "
-            + "AND bi.item_id                     = item_status_1.item_id " + "AND item_status_1.item_status      = 1 "
-            + "AND bi.bib_id in (select regexp_substr(?,'[^,]+', 1, level) from dual connect by regexp_substr(?, '[^,]+', 1, level) is not null) "
-            + "GROUP BY bi.bib_id";
-
     private static final int BIB_ID = 1;
 
     private static final int COUNT = 2;
@@ -34,16 +25,20 @@ public class JDBCEquipmentStatusService implements EquipmentService {
 
     private DataSource dataSource;
 
-    private String sql;
+    private String getRecordsSQL;
 
-    public JDBCEquipmentStatusService(final DataSource dataSource, final String sql) {
+    private String getStatusSQL;
+
+    public JDBCEquipmentStatusService(final DataSource dataSource, final String getRecordsSQL,
+            final String getStatusSQL) {
         this.dataSource = dataSource;
-        this.sql = sql;
+        this.getRecordsSQL = getRecordsSQL;
+        this.getStatusSQL = getStatusSQL;
     }
 
     @Override
     public InputStream getRecords(final List<String> params) {
-        return new VoyagerInputStream2(this.dataSource, this.sql, 1, NO_PARAMS) {
+        return new VoyagerInputStream2(this.dataSource, this.getRecordsSQL, 1, NO_PARAMS) {
 
             @Override
             public int read() throws IOException {
@@ -60,7 +55,7 @@ public class JDBCEquipmentStatusService implements EquipmentService {
     public List<EquipmentStatus> getStatus(final String idList) {
         List<EquipmentStatus> status = new ArrayList<>();
         try (Connection conn = this.dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(AVAILABLE_QUERY)) {
+                PreparedStatement stmt = conn.prepareStatement(this.getStatusSQL)) {
             stmt.setString(1, idList);
             stmt.setString(2, idList);
             try (ResultSet rs = stmt.executeQuery()) {

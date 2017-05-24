@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
+import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
+
 import java.io.IOException;
 
 import javax.sql.DataSource;
@@ -37,7 +39,7 @@ public class GrandRoundsConfiguration {
     @Bean
     public GrandRoundsService grandRoundsService() throws IOException {
         return new JDBCGrandRoundsService(this.dataSource,
-                getClass().getResourceAsStream("/edu/stanford/irt/grandrounds/getGrandRounds.fnc"));
+                getResourceAsString(Presentation.class, "getGrandRounds.fnc"));
     }
 
     @Bean

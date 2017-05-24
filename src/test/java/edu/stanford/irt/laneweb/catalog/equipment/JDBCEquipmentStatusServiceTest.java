@@ -48,7 +48,7 @@ public class JDBCEquipmentStatusServiceTest {
     @Before
     public void setUp() throws IOException {
         this.dataSource = createMock(DataSource.class);
-        this.service = new JDBCEquipmentStatusService(this.dataSource, "sql");
+        this.service = new JDBCEquipmentStatusService(this.dataSource, "sql", "sql");
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);

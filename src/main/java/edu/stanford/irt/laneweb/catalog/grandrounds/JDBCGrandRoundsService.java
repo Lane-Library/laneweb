@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.catalog.grandrounds;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,9 +31,9 @@ public class JDBCGrandRoundsService implements GrandRoundsService {
 
     private String presentationsSQL;
 
-    public JDBCGrandRoundsService(final DataSource dataSource, final InputStream presentationsSQL) throws IOException {
+    public JDBCGrandRoundsService(final DataSource dataSource, final String presentationsSQL) throws IOException {
         this.dataSource = dataSource;
-        this.presentationsSQL = IOUtils.toString(presentationsSQL, StandardCharsets.UTF_8);
+        this.presentationsSQL = presentationsSQL;
         this.departmentMap = new HashMap<>();
         this.departmentMap.put("medicine", "MEDICINE");
         this.departmentMap.put("emergency", "EMERGENCY MEDICINE");

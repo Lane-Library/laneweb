@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
+import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -41,12 +43,13 @@ public class CourseReservesConfiguration {
     }
 
     @Bean
-    public CourseReservesService courseReservesService() throws IOException {
-        Class<?> c = JDBCCourseReservesService.class;
-        return new JDBCCourseReservesService(this.dataSource, c.getResourceAsStream("itemStatus.sql"),
-                c.getResourceAsStream("course.sql"), c.getResourceAsStream("courses.sql"),
-                c.getResourceAsStream("courseReservesItemListAll.fnc"),
-                c.getResourceAsStream("courseReservesItemListCourse.fnc"));
+    public CourseReservesService courseReservesService() {
+        return new JDBCCourseReservesService(this.dataSource,
+                getResourceAsString(JDBCCourseReservesService.class, "itemStatus.sql"),
+                getResourceAsString(JDBCCourseReservesService.class, "course.sql"),
+                getResourceAsString(JDBCCourseReservesService.class, "courses.sql"),
+                getResourceAsString(JDBCCourseReservesService.class, "courseReservesItemListAll.fnc"),
+                getResourceAsString(JDBCCourseReservesService.class, "courseReservesItemListCourse.fnc"));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")

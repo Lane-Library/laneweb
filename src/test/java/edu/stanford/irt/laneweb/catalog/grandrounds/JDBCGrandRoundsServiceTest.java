@@ -8,7 +8,6 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Clob;
 import java.sql.Connection;
@@ -37,9 +36,7 @@ public class JDBCGrandRoundsServiceTest {
     @Before
     public void setUp() throws IOException {
         this.dataSource = createMock(DataSource.class);
-        InputStream presentationsSQL = getClass()
-                .getResourceAsStream("/edu/stanford/irt/grandrounds/getGrandRounds.fnc");
-        this.manager = new JDBCGrandRoundsService(this.dataSource, presentationsSQL);
+        this.manager = new JDBCGrandRoundsService(this.dataSource, "presentationsSQL");
         this.connection = createMock(Connection.class);
         this.callable = createMock(CallableStatement.class);
         this.clob = createMock(Clob.class);

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Objects;
-import java.util.Properties;
 import java.util.Set;
 
 import javax.sql.DataSource;
@@ -19,32 +18,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 public class JDBCProxyServersService implements ProxyServersService {
 
     private static final byte[] HJ = { 'H', 'J', ' ' };
-
-    private static final String SQL =
-            "SELECT DISTINCT URL_HOST AS HOST "
-            + "FROM LMLDB.ELINK_INDEX "
-            + "WHERE LINK_SUBTYPE         IN ('HTTP','HTTPS') "
-            + "AND ELINK_INDEX.RECORD_TYPE = 'A' "
-            + "AND URL_HOST NOT LIKE '%.stanford.edu' "
-            + "UNION "
-            + "SELECT DISTINCT URL_HOST AS HOST "
-            + "FROM LMLDB.ELINK_INDEX, "
-            + "  LMLDB.MFHD_MASTER, "
-            + "  LMLDB.BIB_MFHD, "
-            + "  LMLDB.BIB_MASTER "
-            + "WHERE ELINK_INDEX.RECORD_ID    = MFHD_MASTER.MFHD_ID "
-            + "AND MFHD_MASTER.MFHD_ID = BIB_MFHD.MFHD_ID "
-            + "AND BIB_MFHD.BIB_ID = BIB_MASTER.BIB_ID "
-            + "AND LINK_SUBTYPE              IN ('HTTP','HTTPS') "
-            + "AND ELINK_INDEX.RECORD_TYPE    = 'M' "
-            + "AND ELINK_INDEX.RECORD_ID NOT IN "
-            + "  (SELECT MFHD_ID "
-            + "  FROM LMLDB.MFHD_DATA "
-            + "  WHERE LOWER(RECORD_SEGMENT) LIKE '%, noproxy%' "
-            + "  ) "
-            + "AND URL_HOST NOT LIKE '%.stanford.edu' "
-            + "AND MFHD_MASTER.SUPPRESS_IN_OPAC != 'Y' "
-            + "AND BIB_MASTER.SUPPRESS_IN_OPAC != 'Y'";
 
     private static final byte[] SUL;
 
@@ -58,11 +31,15 @@ public class JDBCProxyServersService implements ProxyServersService {
 
     private DataSource dataSource;
 
-    private String sql;
+    private String ezproxyServersSQL;
 
-    public JDBCProxyServersService(final DataSource dataSource, final Properties sql) {
+    private String proxyHostsSQL;
+
+    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL,
+            final String ezproxyServersSQL) {
         this.dataSource = dataSource;
-        this.sql = sql.getProperty("ezproxy-servers.query");
+        this.proxyHostsSQL = proxyHostsSQL;
+        this.ezproxyServersSQL = ezproxyServersSQL;
     }
 
     @Override
@@ -70,7 +47,7 @@ public class JDBCProxyServersService implements ProxyServersService {
         Set<String> hosts = new HashSet<>();
         try (Connection conn = this.dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(SQL)) {
+                ResultSet rs = stmt.executeQuery(this.proxyHostsSQL)) {
             while (rs.next()) {
                 hosts.add(rs.getString(1));
             }
@@ -88,7 +65,7 @@ public class JDBCProxyServersService implements ProxyServersService {
         Objects.requireNonNull(outputStream, "null outputStream");
         try (Connection conn = this.dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(this.sql);
+                ResultSet rs = stmt.executeQuery(this.ezproxyServersSQL);
                 OutputStream out = outputStream) {
             while (rs.next()) {
                 String host = rs.getString(1);
