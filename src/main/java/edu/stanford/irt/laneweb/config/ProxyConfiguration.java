@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.config;
 import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
@@ -61,15 +59,5 @@ public class ProxyConfiguration {
         return new JDBCProxyServersService(this.dataSource,
                 getResourceAsString(ProxyServersService.class, "getProxyHosts.sql"),
                 getResourceAsString(ProxyServersService.class, "ezproxyServers.sql"));
-    }
-
-    @Bean
-    public Properties proxySQLProperties() throws IOException {
-        Properties properties = new Properties();
-        try (InputStream input = getClass()
-                .getResourceAsStream("/edu/stanford/irt/laneweb/proxy/ezproxy-servers-sql.properties")) {
-            properties.load(input);
-        }
-        return properties;
     }
 }

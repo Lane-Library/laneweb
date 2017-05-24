@@ -15,7 +15,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.lane.catalog.CatalogSQLException;
 import edu.stanford.lane.catalog.VoyagerInputStream2;
 
-public class JDBCEquipmentStatusService implements EquipmentService {
+public class JDBCEquipmentService implements EquipmentService {
 
     private static final int BIB_ID = 1;
 
@@ -29,7 +29,7 @@ public class JDBCEquipmentStatusService implements EquipmentService {
 
     private String getStatusSQL;
 
-    public JDBCEquipmentStatusService(final DataSource dataSource, final String getRecordsSQL,
+    public JDBCEquipmentService(final DataSource dataSource, final String getRecordsSQL,
             final String getStatusSQL) {
         this.dataSource = dataSource;
         this.getRecordsSQL = getRecordsSQL;

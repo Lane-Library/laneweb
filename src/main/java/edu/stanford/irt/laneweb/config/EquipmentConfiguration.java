@@ -19,7 +19,7 @@ import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.laneweb.catalog.CatalogRecordGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
-import edu.stanford.irt.laneweb.catalog.equipment.JDBCEquipmentStatusService;
+import edu.stanford.irt.laneweb.catalog.equipment.JDBCEquipmentService;
 
 @Configuration
 public class EquipmentConfiguration {
@@ -44,7 +44,7 @@ public class EquipmentConfiguration {
 
     @Bean
     public EquipmentService equipmentService() {
-        return new JDBCEquipmentStatusService(this.dataSource,
+        return new JDBCEquipmentService(this.dataSource,
                 getResourceAsString(EquipmentService.class, "getEquipment.fnc"),
                 getResourceAsString(EquipmentService.class, "getStatus.sql"));
     }

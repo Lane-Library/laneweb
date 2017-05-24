@@ -29,7 +29,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class JDBCEquipmentStatusServiceTest {
+public class JDBCEquipmentServiceTest {
 
     private CallableStatement callable;
 
@@ -41,14 +41,14 @@ public class JDBCEquipmentStatusServiceTest {
 
     private ResultSet resultSet;
 
-    private JDBCEquipmentStatusService service;
+    private JDBCEquipmentService service;
 
     private PreparedStatement statement;
 
     @Before
     public void setUp() throws IOException {
         this.dataSource = createMock(DataSource.class);
-        this.service = new JDBCEquipmentStatusService(this.dataSource, "sql", "sql");
+        this.service = new JDBCEquipmentService(this.dataSource, "sql", "sql");
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
         this.resultSet = createMock(ResultSet.class);
