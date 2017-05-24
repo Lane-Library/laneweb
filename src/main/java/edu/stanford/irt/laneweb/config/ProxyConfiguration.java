@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
-import java.io.IOException;
 import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
@@ -40,12 +39,12 @@ public class ProxyConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/proxy-links")
     @Scope("prototype")
-    public Transformer htmlProxyLinkTransformer() throws IOException {
+    public Transformer htmlProxyLinkTransformer() {
         return new HtmlProxyLinkTransformer(proxyHostManager());
     }
 
     @Bean(destroyMethod = "destroy")
-    public ProxyHostManager proxyHostManager() throws IOException {
+    public ProxyHostManager proxyHostManager() {
         return new ProxyHostManager(proxyServersService(), Executors.newScheduledThreadPool(1));
     }
 
@@ -55,7 +54,7 @@ public class ProxyConfiguration {
     }
 
     @Bean
-    public ProxyServersService proxyServersService() throws IOException {
+    public ProxyServersService proxyServersService() {
         return new JDBCProxyServersService(this.dataSource,
                 getResourceAsString(ProxyServersService.class, "getProxyHosts.sql"),
                 getResourceAsString(ProxyServersService.class, "ezproxyServers.sql"));

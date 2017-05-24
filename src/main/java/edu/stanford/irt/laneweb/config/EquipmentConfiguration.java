@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
-import java.io.IOException;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.BeanFactory;
@@ -37,7 +35,7 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public Generator equipmentGenerator() throws IOException {
+    public Generator equipmentGenerator() {
         return new CatalogRecordGenerator(equipmentService(),
                 this.beanFactory.getBean("org.xml.sax.XMLReader/marc", XMLReader.class));
     }
@@ -51,7 +49,7 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/equipment-status")
     @Scope("prototype")
-    public Transformer equipmentStatusTransformer() throws IOException {
+    public Transformer equipmentStatusTransformer() {
         return new EquipmentStatusTransformer(equipmentService());
     }
 }

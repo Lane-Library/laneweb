@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -38,7 +37,7 @@ public class CourseReservesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
     @Scope("prototype")
-    public Generator courseReservesItemListGenerator() throws IOException {
+    public Generator courseReservesItemListGenerator() {
         return new CourseReservesItemListGenerator(courseReservesService(), coursesReservesItemListSAXStrategy());
     }
 
@@ -54,7 +53,7 @@ public class CourseReservesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
     @Scope("prototype")
-    public Generator coursesGenerator() throws IOException {
+    public Generator coursesGenerator() {
         return new CourseListGenerator(courseReservesService(), coursesSAXStrategy());
     }
 

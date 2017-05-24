@@ -31,7 +31,7 @@ public class JDBCGrandRoundsService implements GrandRoundsService {
 
     private String presentationsSQL;
 
-    public JDBCGrandRoundsService(final DataSource dataSource, final String presentationsSQL) throws IOException {
+    public JDBCGrandRoundsService(final DataSource dataSource, final String presentationsSQL) {
         this.dataSource = dataSource;
         this.presentationsSQL = presentationsSQL;
         this.departmentMap = new HashMap<>();

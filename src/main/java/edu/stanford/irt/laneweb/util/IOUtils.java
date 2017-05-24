@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class IOUtils {
+public final class IOUtils {
 
     private IOUtils() {
         // private empty constructor
