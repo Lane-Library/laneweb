@@ -151,12 +151,6 @@
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
-                      <li class="dropdown nav-menu">
-                        <a href="/about/index.html">Contact Us</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-contact.html">
-                            <xi:fallback></xi:fallback>
-                        </xi:include></div>
-                    </li>
                     <li class="dropdown nav-menu">
                         <a href="/about/index.html">About Lane</a>
                         <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
@@ -214,15 +208,15 @@
                     </div>
                     <div class="yui3-u-1-5">
                         <ul>
-	                    	<li><a href="/classes-consult/laneclasses.html">Upcoming Classes</a></li>
-		                    <li><a href="/classes-consult/archives.html">Classes Archive</a></li>
-	                    	<li><a href="/beemap.html">EBP Infographic</a></li>
-		                    <li><a href="/classes-consult/med-students.html">Medical Students Curriculum</a></li>
-	                    </ul>
+                            <li><a href="/classes-consult/laneclasses.html">Upcoming Classes</a></li>
+                            <li><a href="/classes-consult/archives.html">Classes Archive</a></li>
+                            <li><a href="/beemap.html">EBP Infographic</a></li>
+                            <li><a href="/classes-consult/med-students.html">Medical Students Curriculum</a></li>
+                        </ul>
                     </div>
                     <div class="yui3-u-1-5">
                         <ul>
-                             <li><a href="/using-lib/affiliates.html">Check your eligibility</a></li>
+                            <li><a href="/using-lib/affiliates.html">Check your eligibility</a></li>
                             <li><a href="/using-lib/sunetid.html">Manage Your Lane Login</a></li>
                             <li><a href="https://docxpress.stanford.edu/">DocXpress <i class="fa fa-external-link"></i></a></li>
                             <li><a href="/using-lib/computing.html">Study &amp; Computing Spaces</a></li>
