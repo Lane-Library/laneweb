@@ -7,7 +7,7 @@
         <version>25</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.32-SNAPSHOT</version>
+    <version>3.3.33-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -281,7 +281,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>bookcovers</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -292,7 +292,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>coursereserves</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
@@ -312,9 +312,9 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+        	<groupId>edu.stanford.irt</groupId>
+        	<artifactId>lanehours</artifactId>
+        	<version>1.0.0</version>
         </dependency>
         <dependency>
         	<groupId>com.zaxxer</groupId>

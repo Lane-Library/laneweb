@@ -1,11 +1,9 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +17,7 @@ import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.laneweb.catalog.CatalogRecordGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
-import edu.stanford.irt.laneweb.catalog.equipment.JDBCEquipmentStatusService;
+import edu.stanford.irt.laneweb.catalog.equipment.JDBCEquipmentService;
 
 @Configuration
 public class EquipmentConfiguration {
@@ -37,22 +35,21 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public Generator equipmentGenerator() throws IOException {
+    public Generator equipmentGenerator() {
         return new CatalogRecordGenerator(equipmentService(),
                 this.beanFactory.getBean("org.xml.sax.XMLReader/marc", XMLReader.class));
     }
 
     @Bean
-    public EquipmentService equipmentService() throws IOException {
-        return new JDBCEquipmentStatusService(this.dataSource,
-                IOUtils.toString(
-                        getClass().getResourceAsStream("/edu/stanford/irt/laneweb/catalog/equipment/getEquipment.fnc"),
-                        StandardCharsets.UTF_8));
+    public EquipmentService equipmentService() {
+        return new JDBCEquipmentService(this.dataSource,
+                getResourceAsString(EquipmentService.class, "getEquipment.fnc"),
+                getResourceAsString(EquipmentService.class, "getStatus.sql"));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/equipment-status")
     @Scope("prototype")
-    public Transformer equipmentStatusTransformer() throws IOException {
+    public Transformer equipmentStatusTransformer() {
         return new EquipmentStatusTransformer(equipmentService());
     }
 }

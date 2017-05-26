@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
+
 import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
@@ -40,12 +39,12 @@ public class ProxyConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/proxy-links")
     @Scope("prototype")
-    public Transformer htmlProxyLinkTransformer() throws IOException {
+    public Transformer htmlProxyLinkTransformer() {
         return new HtmlProxyLinkTransformer(proxyHostManager());
     }
 
     @Bean(destroyMethod = "destroy")
-    public ProxyHostManager proxyHostManager() throws IOException {
+    public ProxyHostManager proxyHostManager() {
         return new ProxyHostManager(proxyServersService(), Executors.newScheduledThreadPool(1));
     }
 
@@ -55,17 +54,9 @@ public class ProxyConfiguration {
     }
 
     @Bean
-    public ProxyServersService proxyServersService() throws IOException {
-        return new JDBCProxyServersService(this.dataSource, proxySQLProperties());
-    }
-
-    @Bean
-    public Properties proxySQLProperties() throws IOException {
-        Properties properties = new Properties();
-        try (InputStream input = getClass()
-                .getResourceAsStream("/edu/stanford/irt/laneweb/proxy/ezproxy-servers-sql.properties")) {
-            properties.load(input);
-        }
-        return properties;
+    public ProxyServersService proxyServersService() {
+        return new JDBCProxyServersService(this.dataSource,
+                getResourceAsString(ProxyServersService.class, "getProxyHosts.sql"),
+                getResourceAsString(ProxyServersService.class, "ezproxyServers.sql"));
     }
 }

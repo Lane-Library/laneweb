@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.io.IOException;
+import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
+
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -36,22 +37,23 @@ public class CourseReservesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
     @Scope("prototype")
-    public Generator courseReservesItemListGenerator() throws IOException {
+    public Generator courseReservesItemListGenerator() {
         return new CourseReservesItemListGenerator(courseReservesService(), coursesReservesItemListSAXStrategy());
     }
 
     @Bean
-    public CourseReservesService courseReservesService() throws IOException {
-        Class<?> c = JDBCCourseReservesService.class;
-        return new JDBCCourseReservesService(this.dataSource, c.getResourceAsStream("itemStatus.sql"),
-                c.getResourceAsStream("course.sql"), c.getResourceAsStream("courses.sql"),
-                c.getResourceAsStream("courseReservesItemListAll.fnc"),
-                c.getResourceAsStream("courseReservesItemListCourse.fnc"));
+    public CourseReservesService courseReservesService() {
+        return new JDBCCourseReservesService(this.dataSource,
+                getResourceAsString(JDBCCourseReservesService.class, "itemStatus.sql"),
+                getResourceAsString(JDBCCourseReservesService.class, "course.sql"),
+                getResourceAsString(JDBCCourseReservesService.class, "courses.sql"),
+                getResourceAsString(JDBCCourseReservesService.class, "courseReservesItemListAll.fnc"),
+                getResourceAsString(JDBCCourseReservesService.class, "courseReservesItemListCourse.fnc"));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
     @Scope("prototype")
-    public Generator coursesGenerator() throws IOException {
+    public Generator coursesGenerator() {
         return new CourseListGenerator(courseReservesService(), coursesSAXStrategy());
     }
 

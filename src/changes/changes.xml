@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-05-29" version="3.3.32" description="3.3.32 bug fix release">
+            <action date="2017-05-22" dev="olgary" issue="134138" type="add">
+                links in footer
+            </action>
+            <action date="2017-05-23" dev="alainb" issue="134137" type="update">
+                add Read more... link into Lane blog excerpts on the homepage
+            </action>
+            <action date="2017-05-19" dev="ceyates" issue="134087" type="update">
+                refactor database related classes to implement service interfaces
+            </action>
+            <action date="2017-05-17" dev="ryanmax" issue="134020" type="add">
+                add solr record counts to standard /status.txt monitoring
+            </action>
+            <action date="2017-05-17" dev="ceyates" issue="133525" type="fix">
+                Feedback-bug: Bookmark page has a bug
+            </action>
+            <action date="2017-05-16" dev="ceyates" issue="133077" type="update">
+                golf clubs as before and after pseudo elements
+            </action>
+        </release>
         <release date="2017-05-15" version="3.3.31" description="3.3.31 bug fix release">
             <action date="2017-05-11" dev="ceyates" issue="133899" type="fix">
                 code to truncate class text drops a word

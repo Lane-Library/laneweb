@@ -155,6 +155,8 @@ public class Model {
 
     public static final String VERSION = "version";
 
+    public static final String TODAY = "today";
+
     private Model() {
         // private constructior
     }

@@ -46,9 +46,4 @@ public class ProxyConfigurationTest {
     public void testProxyLinkSelector() {
         assertNotNull(this.configuration.proxyLinkSelector());
     }
-
-    @Test
-    public void testProxySQLProperties() throws IOException {
-        assertNotNull(this.configuration.proxySQLProperties());
-    }
 }

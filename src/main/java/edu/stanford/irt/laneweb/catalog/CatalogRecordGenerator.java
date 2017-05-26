@@ -20,7 +20,7 @@ public class CatalogRecordGenerator extends AbstractGenerator {
 
     private XMLReader xmlReader;
 
-    public CatalogRecordGenerator(final CatalogRecordService service, final XMLReader xmlReader) throws IOException {
+    public CatalogRecordGenerator(final CatalogRecordService service, final XMLReader xmlReader) {
         this.service = service;
         this.xmlReader = xmlReader;
     }

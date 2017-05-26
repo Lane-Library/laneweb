@@ -1,66 +1,82 @@
 package edu.stanford.irt.laneweb.hours;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
 
-import edu.stanford.irt.laneweb.LanewebException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import edu.stanford.irt.libraryhours.Hours;
+import edu.stanford.irt.libraryhours.LibraryHoursException;
+import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 public class TodaysHours {
 
+    public static final long ONE_HOUR = Duration.ofHours(1).toMillis();
+
     public static final String UNKNOWN = "??";
 
-    private Map<String, String> daysMap = new HashMap<>();
+    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
-    private File hoursFile = null;
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("h a");
 
-    private long hoursLastModified = 0;
+    private static final Logger log = LoggerFactory.getLogger(TodaysHours.class);
 
-    private DateTimeFormatter todaysDateFormatter = DateTimeFormatter.ofPattern("MMM d");
+    private long expires;
 
-    private DateTimeFormatter todaysDayFormatter = DateTimeFormatter.ofPattern("EEEE");
+    private String hours;
 
-    public TodaysHours(final File hoursFile) {
-        this.hoursFile = hoursFile;
+    private long lastUpdate;
+
+    private Object lock;
+
+    private LibraryHoursService service;
+
+    public TodaysHours(final LibraryHoursService service) {
+        this(service, ONE_HOUR);
+    }
+
+    TodaysHours(final LibraryHoursService service, final long expires) {
+        this.service = service;
+        this.hours = getLatestHours(LocalDate.now(AMERICA_LA));
+        this.lastUpdate = System.currentTimeMillis();
+        this.lock = new Object();
+        this.expires = expires;
     }
 
     public String getHours() {
-        return toString(LocalDate.now());
+        return toString(LocalDate.now(AMERICA_LA));
     }
 
     String toString(final LocalDate localDate) {
-        String todaysDate = this.todaysDateFormatter.format(localDate);
-        String todaysDay = this.todaysDayFormatter.format(localDate);
-        updateHoursMap();
-        // copy this.daysMap in case it changes while the following is working with it
-        Map<String, String> daysMapCopy = this.daysMap;
-        String hours;
-        if (daysMapCopy.containsKey(todaysDate)) {
-            hours = daysMapCopy.get(todaysDate);
-        } else if (daysMapCopy.containsKey(todaysDay)) {
-            hours = daysMapCopy.get(todaysDay);
-        } else {
-            hours = UNKNOWN;
-        }
-        return hours;
-    }
-
-    private void updateHoursMap() {
-        synchronized (this.hoursFile) {
-            long fileLastModified = this.hoursFile.lastModified();
-            if (fileLastModified > this.hoursLastModified) {
-                this.hoursLastModified = fileLastModified;
-                try (InputStream input = new FileInputStream(this.hoursFile)) {
-                    this.daysMap = new StreamDaysMapping(input);
-                } catch (IOException e) {
-                    throw new LanewebException(e);
-                }
+        synchronized (this.lock) {
+            if (this.lastUpdate >= this.lastUpdate + this.expires) {
+                this.hours = getLatestHours(localDate);
+                this.lastUpdate = System.currentTimeMillis();
             }
         }
+        return this.hours;
+    }
+
+    private final String getLatestHours(final LocalDate localDate) {
+        String latestHours;
+        try {
+            Hours hours = this.service.getHours(localDate);
+            if (hours == null) {
+                log.error("failed to get hours for {} from service", localDate);
+                latestHours = UNKNOWN;
+            } else if (hours.isClosed()) {
+                latestHours = "CLOSED";
+            } else {
+                latestHours = String.format("%s – %s", hours.getOpen().format(FORMAT).toLowerCase(),
+                        hours.getClose().format(FORMAT).toLowerCase());
+            }
+        } catch (LibraryHoursException e) {
+            log.error("failed to get hours from service", e);
+            latestHours = UNKNOWN;
+        }
+        return latestHours;
     }
 }

@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.proxy;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -15,7 +14,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 import java.util.Set;
 
 import javax.sql.DataSource;
@@ -42,9 +40,7 @@ public class JDBCProxyServersServiceTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        Properties props = new Properties();
-        props.setProperty("ezproxy-servers.query", "sql query");
-        this.service = new JDBCProxyServersService(this.dataSource, props);
+        this.service = new JDBCProxyServersService(this.dataSource, "proxyHostsSQL", "ezproxyServersSQL");
         this.connection = createMock(Connection.class);
         this.statement = createMock(Statement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -54,7 +50,7 @@ public class JDBCProxyServersServiceTest {
     public void testDatabaseProxyHostSet() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery(isA(String.class))).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("proxyHostsSQL")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("host");
         expect(this.resultSet.next()).andReturn(false);
@@ -90,7 +86,7 @@ public class JDBCProxyServersServiceTest {
     public void testWrite() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery("sql query")).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("ezproxyServersSQL")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("value");
         expect(this.resultSet.next()).andReturn(false);
@@ -108,7 +104,7 @@ public class JDBCProxyServersServiceTest {
     public void testWriteThrowsSQLException() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery("sql query")).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("ezproxyServersSQL")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("value");
         expect(this.resultSet.next()).andThrow(new SQLException());
