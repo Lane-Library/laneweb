@@ -32,12 +32,12 @@ public class GrandRoundsConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
     @Scope("prototype")
-    public Generator grandRoundsGenerator() throws IOException {
+    public Generator grandRoundsGenerator() {
         return new GrandRoundsGenerator(grandRoundsService(), presentationSAXStrategy());
     }
 
     @Bean
-    public GrandRoundsService grandRoundsService() throws IOException {
+    public GrandRoundsService grandRoundsService() {
         return new JDBCGrandRoundsService(this.dataSource,
                 getResourceAsString(Presentation.class, "getGrandRounds.fnc"));
     }
