@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<calendars xmlns="http://lane.stanford.edu/hours/1.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://lane.stanford.edu/hours/1.0 hours.xsd">
+   <calendar>
+      <day>
+         <label>Monday</label>
+         <date>Feb 27</date>
+         <description>8 am - 10 pm</description>
+      </day>
+      <day>
+         <label>Tuesday</label>
+         <date>Feb 28</date>
+         <description>8 am - 10 pm</description>
+      </day>
+      <day>
+         <label>Wednesday</label>
+         <date>Mar 1</date>
+         <description>8 am - 10 pm</description>
+      </day>
+      <day>
+         <label>Thursday</label>
+         <date>Mar 2</date>
+         <description>8 am - 10 pm</description>
+      </day>
+      <day>
+         <label>Friday</label>
+         <date>Mar 3</date>
+         <description>8 am - 8 pm</description>
+      </day>
+      <day>
+         <label>Saturday</label>
+         <date>Mar 4</date>
+         <description>10 am - 8 pm</description>
+      </day>
+      <day>
+         <label>Sunday</label>
+         <date>Mar 5</date>
+         <description>12 pm - 10 pm</description>
+      </day>
+   </calendar>
+</calendars>
