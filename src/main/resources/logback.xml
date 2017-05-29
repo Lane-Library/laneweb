@@ -18,7 +18,7 @@
     
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%-5p %c{1} - %m%n</pattern>
+            <pattern>%d %p [%t][%c{1}] - %m%n</pattern>
         </encoder>
     </appender>
     
