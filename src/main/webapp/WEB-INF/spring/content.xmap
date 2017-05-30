@@ -264,7 +264,7 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="hours/*.xml" type="wildcard">
-            <map:generate type="file" src="{content-base}/includes/hours.xml"/>
+            <map:generate type="hours"/>
             <map:transform type="saxon" src="resources/xsl/hours.xsl">
                 <map:parameter name="cache-key" value=";{1}"/>
                 <map:parameter name="mode" value="{1}"/>

@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
-import java.io.IOException;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +30,12 @@ public class GrandRoundsConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
     @Scope("prototype")
-    public Generator grandRoundsGenerator() throws IOException {
+    public Generator grandRoundsGenerator() {
         return new GrandRoundsGenerator(grandRoundsService(), presentationSAXStrategy());
     }
 
     @Bean
-    public GrandRoundsService grandRoundsService() throws IOException {
+    public GrandRoundsService grandRoundsService() {
         return new JDBCGrandRoundsService(this.dataSource,
                 getResourceAsString(Presentation.class, "getGrandRounds.fnc"));
     }

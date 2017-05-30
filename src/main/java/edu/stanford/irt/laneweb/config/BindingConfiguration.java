@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +42,7 @@ import edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder
 import edu.stanford.irt.laneweb.servlet.binding.TemplateChooser;
 import edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.TodayDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UnividDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
@@ -51,6 +51,7 @@ import edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory;
 import edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory;
 import edu.stanford.irt.laneweb.servlet.binding.user.UserFactory;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 @Configuration
 public class BindingConfiguration {
@@ -70,6 +71,8 @@ public class BindingConfiguration {
     @Autowired
     private LDAPDataAccess ldapDataAccess;
 
+    private LibraryHoursService libraryHoursService;
+
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -85,11 +88,13 @@ public class BindingConfiguration {
     @Autowired
     public BindingConfiguration(@Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URL contentBase,
-            @Value("${edu.stanford.irt.laneweb.version}") final String version, final ServletContext servletContext) {
+            @Value("${edu.stanford.irt.laneweb.version}") final String version, final ServletContext servletContext,
+            final LibraryHoursService libraryHoursService) {
         this.userCookieKey = userCookieKey;
         this.contentBase = contentBase;
         this.version = version;
         this.servletContext = servletContext;
+        this.libraryHoursService = libraryHoursService;
     }
 
     @Bean
@@ -107,6 +112,16 @@ public class BindingConfiguration {
         return new BaseProxyURLDataBinder();
     }
 
+    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/cme")
+    public DataBinder cmeDataBinder() {
+        List<DataBinder> dataBinders = new ArrayList<>(4);
+        dataBinders.add(userDataBinder());
+        dataBinders.add(basePathDataBinder());
+        dataBinders.add(emridDataBinder());
+        dataBinders.add(remoteProxyIPDataBinder());
+        return new CompositeDataBinder(dataBinders);
+    }
+
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base")
     public DataBinder contentBaseDataBinder() {
         return new ContentBaseDataBinder(this.contentBase);
@@ -114,7 +129,7 @@ public class BindingConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public DataBinder dataBinder() {
-        List<DataBinder> dataBinders = new ArrayList<>(21);
+        List<DataBinder> dataBinders = new ArrayList<>(22);
         dataBinders.add(userDataBinder());
         dataBinders.add(activeSunetidDataBinder());
         dataBinders.add(ticketDataBinder());
@@ -136,6 +151,7 @@ public class BindingConfiguration {
         dataBinders.add(parameterMapDataBinder());
         dataBinders.add(baseProxyUrlDataBinder());
         dataBinders.add(modelDataBinder());
+        dataBinders.add(todayDataBinder());
         return new CompositeDataBinder(dataBinders);
     }
 
@@ -254,9 +270,13 @@ public class BindingConfiguration {
     }
 
     @Bean
+    public TodayDataBinder todayDataBinder() {
+        return new TodayDataBinder();
+    }
+
+    @Bean
     public TodaysHours todaysHours() {
-        File file = new File(this.contentBase.getFile() + "/includes/hours.xml");
-        return new TodaysHours(file);
+        return new TodaysHours(this.libraryHoursService);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours")

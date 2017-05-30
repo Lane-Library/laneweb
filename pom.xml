@@ -7,7 +7,7 @@
         <version>25</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.32-SNAPSHOT</version>
+    <version>3.3.33-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -108,7 +108,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.56</version>
+            <version>3.0.57</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -327,6 +327,11 @@
             <artifactId>ehcache-107</artifactId>
             <version>3.3.1</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+        	<groupId>edu.stanford.irt</groupId>
+        	<artifactId>lanehours</artifactId>
+        	<version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>

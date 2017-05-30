@@ -14,17 +14,22 @@ import javax.servlet.ServletContext;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.libraryhours.LibraryHoursService;
+
 public class BindingConfigurationTest {
 
     private BindingConfiguration configuration;
+
+    private LibraryHoursService libraryHoursService;
 
     private ServletContext servletContext;
 
     @Before
     public void setUp() throws MalformedURLException {
         this.servletContext = createMock(ServletContext.class);
+        this.libraryHoursService = createMock(LibraryHoursService.class);
         this.configuration = new BindingConfiguration("userCookieKey", new URL("file:/"), "version",
-                this.servletContext);
+                this.servletContext, this.libraryHoursService);
     }
 
     @Test
@@ -118,6 +123,11 @@ public class BindingConfigurationTest {
     @Test
     public void testTicketDataBinder() {
         assertNotNull(this.configuration.ticketDataBinder());
+    }
+
+    @Test
+    public void testTodayDataBinder() {
+        assertNotNull(this.configuration.todayDataBinder());
     }
 
     @Test
