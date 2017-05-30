@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Scope;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.googleapis.testing.auth.oauth2.MockGoogleCredential;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -24,10 +27,13 @@ import edu.stanford.irt.laneweb.hours.HoursListSAXStrategy;
 import edu.stanford.irt.libraryhours.CalendarFactory;
 import edu.stanford.irt.libraryhours.CredentialFactory;
 import edu.stanford.irt.libraryhours.Hours;
+import edu.stanford.irt.libraryhours.LibraryHoursException;
 import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 @Configuration
 public class LibraryHoursConfiguration {
+
+    private static final Logger log = LoggerFactory.getLogger(LibraryHoursConfiguration.class);
 
     private String accountId;
 
@@ -51,8 +57,13 @@ public class LibraryHoursConfiguration {
 
     @Bean
     public Credential credential() {
-        return new CredentialFactory(httpTransport(), jsonFactory(), this.accountId, new File(this.privateKeyFile))
-                .createCredential();
+        try {
+            return new CredentialFactory(httpTransport(), jsonFactory(), this.accountId, new File(this.privateKeyFile))
+                    .createCredential();
+        } catch (LibraryHoursException e) {
+            log.error("failed to create google calendar credential: {}", e.getMessage());
+            return new MockGoogleCredential(new MockGoogleCredential.Builder());
+        }
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/hours")

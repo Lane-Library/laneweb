@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
 
-import java.io.IOException;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
