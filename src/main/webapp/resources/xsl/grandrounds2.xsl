@@ -57,7 +57,7 @@
 
     <xsl:template match="presentation/title">
        <!-- <xsl:variable name="id" select="parent::presentation/@id"/>-->
-        <h3>
+        <h4>
             <a href="{parent::presentation/link[1]/uri}">
                 <xsl:apply-templates/>
             </a>
@@ -65,7 +65,7 @@
                 href="http://lane-preprod.stanford.edu/catalog/marc.html?db=lmldb&amp;type=bib&amp;id={$id}">
                 <xsl:value-of select="$id"/>
             </a>-->
-        </h3>
+        </h4>
     </xsl:template>
     
     <xsl:template match="sunet">

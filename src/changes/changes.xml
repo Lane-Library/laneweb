@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	 <release date="2017-06-06" version="3.3.33" description="3.3.33 bug fix release">
+            <action date="2017-05-30" dev="alainb" issue="134341" type="update">
+                To use h4 instead of h3 for grandrounds title
+            </action>
+         </release>   
         <release date="2017-05-29" version="3.3.32" description="3.3.32 bug fix release">
             <action date="2017-05-22" dev="olgary" issue="134138" type="add">
                 links in footer
