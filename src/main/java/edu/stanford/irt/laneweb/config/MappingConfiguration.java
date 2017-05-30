@@ -15,7 +15,9 @@ import edu.stanford.irt.laneweb.mapping.CourseDeserializer;
 import edu.stanford.irt.laneweb.mapping.CourseReservesItemListDeserializer;
 import edu.stanford.irt.laneweb.mapping.EquipmentStatusDeserializer;
 import edu.stanford.irt.laneweb.mapping.IPGroupSerializer;
+import edu.stanford.irt.laneweb.mapping.ResultDeserializer;
 import edu.stanford.irt.laneweb.mapping.TicketSerializer;
+import edu.stanford.irt.search.impl.Result;
 
 @Configuration
 public class MappingConfiguration {
@@ -31,6 +33,7 @@ public class MappingConfiguration {
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
         module.addSerializer(new IPGroupSerializer());
         module.addSerializer(new TicketSerializer());
+        module.addDeserializer(Result.class, new ResultDeserializer());
         module.addDeserializer(CourseReservesItemList.class, new CourseReservesItemListDeserializer());
         module.addDeserializer(Course.class, new CourseDeserializer());
         module.addDeserializer(EquipmentStatus.class, new EquipmentStatusDeserializer());
