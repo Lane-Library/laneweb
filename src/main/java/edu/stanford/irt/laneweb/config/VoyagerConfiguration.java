@@ -1,26 +1,30 @@
 package edu.stanford.irt.laneweb.config;
 
-import javax.sql.DataSource;
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
-import edu.stanford.irt.laneweb.voyager.JDBCLoginService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.stanford.irt.laneweb.voyager.HTTPLoginService;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
 import edu.stanford.lane.catalog.impl.xml.DefaultMarcReader;
 
 @Configuration
 public class VoyagerConfiguration {
 
-    private DataSource dataSource;
+    private URI catalogServiceURI;
+
+    private ObjectMapper objectMapper;
 
     @Autowired
-    public VoyagerConfiguration(@Qualifier("javax.sql.DataSource/voyager-login") final DataSource dataSource) {
-        this.dataSource = dataSource;
+    public VoyagerConfiguration(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+        this.objectMapper = objectMapper;
+        this.catalogServiceURI = catalogServiceURI;
     }
 
     @Bean(name = "org.xml.sax.XMLReader/marc")
@@ -31,6 +35,6 @@ public class VoyagerConfiguration {
 
     @Bean
     public VoyagerLogin voyagerLogin() {
-        return new VoyagerLogin(new JDBCLoginService(this.dataSource));
+        return new VoyagerLogin(new HTTPLoginService(this.objectMapper, this.catalogServiceURI));
     }
 }

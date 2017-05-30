@@ -28,32 +28,4 @@ public class DataSourcesConfiguration {
         config.setJdbcUrl(url);
         return new HikariDataSource(config);
     }
-
-    @Bean(name = { "javax.sql.DataSource/grandrounds", "javax.sql.DataSource/catalog" })
-    public DataSource grandroundsDataSource(@Value("${edu.stanford.irt.laneweb.db.grandrounds.url}") final String url,
-            @Value("${edu.stanford.irt.laneweb.db.grandrounds.user}") final String user,
-            @Value("${edu.stanford.irt.laneweb.db.grandrounds.password}") final String password)
-            throws SQLException, ClassNotFoundException {
-        HikariConfig config = new HikariConfig();
-        config.setInitializationFailFast(false);
-        config.setConnectionTimeout(5000L);
-        config.setUsername(user);
-        config.setPassword(password);
-        config.setJdbcUrl(url);
-        return new HikariDataSource(config);
-    }
-
-    @Bean(name = { "javax.sql.DataSource/voyager", "javax.sql.DataSource/voyager-login" })
-    public DataSource voyagerDataSource(@Value("${edu.stanford.irt.laneweb.db.voyager.url}") final String url,
-            @Value("${edu.stanford.irt.laneweb.db.voyager.user}") final String user,
-            @Value("${edu.stanford.irt.laneweb.db.voyager.password}") final String password)
-            throws SQLException, ClassNotFoundException {
-        HikariConfig config = new HikariConfig();
-        config.setInitializationFailFast(false);
-        config.setConnectionTimeout(5000L);
-        config.setUsername(user);
-        config.setPassword(password);
-        config.setJdbcUrl(url);
-        return new HikariDataSource(config);
-    }
 }

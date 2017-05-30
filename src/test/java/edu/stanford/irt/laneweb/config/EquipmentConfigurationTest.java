@@ -5,8 +5,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 
-import javax.sql.DataSource;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
@@ -18,13 +16,10 @@ public class EquipmentConfigurationTest {
 
     private EquipmentConfiguration configuration;
 
-    private DataSource dataSource;
-
     @Before
     public void setUp() {
-        this.dataSource = createMock(DataSource.class);
         this.beanFactory = createMock(BeanFactory.class);
-        this.configuration = new EquipmentConfiguration(this.dataSource, this.beanFactory);
+        this.configuration = new EquipmentConfiguration(null, this.beanFactory, null);
     }
 
     @Test

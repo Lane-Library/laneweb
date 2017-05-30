@@ -21,16 +21,4 @@ public class DataSourcesConfigurationTest {
         assertNotNull(
                 this.configuration.eresourcesDataSource("jdbc:postgresql://localhost/default", "user", "password"));
     }
-
-    @Test
-    public void testGrandroundsDataSource() throws SQLException, ClassNotFoundException {
-        assertNotNull(this.configuration.grandroundsDataSource("jdbc:oracle:thin:@lane-voy-p01.stanford.edu:1521:vger",
-                "user", "password"));
-    }
-
-    @Test
-    public void testVoyagerDataSource() throws SQLException, ClassNotFoundException {
-        assertNotNull(this.configuration.voyagerDataSource("jdbc:oracle:thin:@lane-voy-p01.stanford.edu:1521:vger",
-                "user", "password"));
-    }
 }

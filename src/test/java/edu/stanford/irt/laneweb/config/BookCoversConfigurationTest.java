@@ -20,7 +20,7 @@ public class BookCoversConfigurationTest {
     public void setUp() {
         this.dataSource = createMock(DataSource.class);
         this.apiKey = "apiKey";
-        this.configuration = new BookCoversConfiguration(this.dataSource, this.dataSource, this.apiKey);
+        this.configuration = new BookCoversConfiguration(this.dataSource, this.apiKey, null, null);
     }
 
     @Test

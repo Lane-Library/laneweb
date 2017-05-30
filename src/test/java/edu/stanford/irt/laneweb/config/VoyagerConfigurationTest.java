@@ -11,7 +11,7 @@ public class VoyagerConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new VoyagerConfiguration(null);
+        this.configuration = new VoyagerConfiguration(null, null);
     }
 
     @Test

@@ -1,11 +1,8 @@
 package edu.stanford.irt.laneweb.config;
 
-import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
-
-import javax.sql.DataSource;
+import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -15,17 +12,17 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService;
-import edu.stanford.irt.laneweb.catalog.grandrounds.JDBCGrandRoundsService;
+import edu.stanford.irt.laneweb.catalog.grandrounds.HTTPGrandRoundsService;
 import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
 
 @Configuration
 public class GrandRoundsConfiguration {
 
-    private DataSource dataSource;
+    private URI catalogServiceURI;
 
     @Autowired
-    public GrandRoundsConfiguration(@Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource) {
-        this.dataSource = dataSource;
+    public GrandRoundsConfiguration(final URI catalogServiceURI) {
+        this.catalogServiceURI = catalogServiceURI;
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
@@ -36,8 +33,7 @@ public class GrandRoundsConfiguration {
 
     @Bean
     public GrandRoundsService grandRoundsService() {
-        return new JDBCGrandRoundsService(this.dataSource,
-                getResourceAsString(Presentation.class, "getGrandRounds.fnc"));
+        return new HTTPGrandRoundsService(this.catalogServiceURI);
     }
 
     @Bean
