@@ -88,8 +88,7 @@ public class BindingConfiguration {
     @Autowired
     public BindingConfiguration(@Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URL contentBase,
-            @Value("${edu.stanford.irt.laneweb.version}") final String version,
-            final ServletContext servletContext,
+            @Value("${edu.stanford.irt.laneweb.version}") final String version, final ServletContext servletContext,
             final LibraryHoursService libraryHoursService) {
         this.userCookieKey = userCookieKey;
         this.contentBase = contentBase;
@@ -111,6 +110,16 @@ public class BindingConfiguration {
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url")
     public DataBinder baseProxyUrlDataBinder() {
         return new BaseProxyURLDataBinder();
+    }
+
+    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/cme")
+    public DataBinder cmeDataBinder() {
+        List<DataBinder> dataBinders = new ArrayList<>(4);
+        dataBinders.add(userDataBinder());
+        dataBinders.add(basePathDataBinder());
+        dataBinders.add(emridDataBinder());
+        dataBinders.add(remoteProxyIPDataBinder());
+        return new CompositeDataBinder(dataBinders);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base")

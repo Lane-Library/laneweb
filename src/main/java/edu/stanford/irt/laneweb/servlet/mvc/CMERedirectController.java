@@ -39,7 +39,7 @@ public class CMERedirectController {
 
     @Autowired
     public CMERedirectController(
-            @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder) {
+            @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder/cme") final DataBinder dataBinder) {
         this.dataBinder = dataBinder;
     }
 
