@@ -14,6 +14,8 @@ import edu.stanford.irt.laneweb.util.IOUtils;
 
 public class HTTPProxyServersService implements ProxyServersService {
 
+    private static final int BYTE_BUFFER_SIZE = 4096;
+
     private static final String HOSTS_ENDPOINT = "proxy/hosts";
 
     private static final String WRITE_ENDPOINT = "proxy/write";
@@ -39,7 +41,7 @@ public class HTTPProxyServersService implements ProxyServersService {
     @Override
     public void write(final OutputStream outputStream) throws IOException {
         try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), WRITE_ENDPOINT))) {
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[BYTE_BUFFER_SIZE];
             int i = 0;
             while (true) {
                 i = input.read(buffer);
