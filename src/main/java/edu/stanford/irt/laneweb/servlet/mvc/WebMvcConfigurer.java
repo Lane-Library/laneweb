@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -124,10 +125,10 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public HttpRequestHandler staticRequestHandler(final ServletContext servletContext) {
+    public HttpRequestHandler staticRequestHandler(final ServletContext servletContext) throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(
-                new Resource[] { new ServletContextResource(servletContext, "/"), new UrlResource(this.liveBase) }));
+        handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"),
+                new ServletContextResource(servletContext, "/"), new UrlResource(this.liveBase) }));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
