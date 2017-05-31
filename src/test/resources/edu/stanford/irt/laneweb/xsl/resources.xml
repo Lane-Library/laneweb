@@ -55,6 +55,36 @@
                </span>
             </div>
          </li>
+         <li>
+            <img class="bookcover" data-bibid="123"/>
+            <div>
+               <a class="primaryLink"
+                  href="http://impactfactor.org/"
+                  title="Music that works">
+                  <strong>Music</strong> that works</a>
+            </div>
+            <div class="resultInfo">
+               <span>
+                  <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">Music that works</a>
+               </span>
+            </div>
+            <div class="resultInfo">
+               <span class="primaryType">
+                  <strong>Book</strong> Digital</span>
+               <span class="descriptionTrigger eresource"/>
+               <span>
+                  <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=123">Lane Catalog Record</a>
+               </span>
+            </div>
+            <div class="description">Introduction : <strong>music</strong> that works</div>
+            <div class="sourceInfo"/>
+            <div>
+               <a class="primaryLink"
+                  href="http://impactfactor.org/"
+                  title="Music that works">
+                  <strong>Music</strong> that works</a>
+            </div>
+         </li>
       </ul>
       <div id="search-content-counts"> <span id="pubmed">
             <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford">16847</a>

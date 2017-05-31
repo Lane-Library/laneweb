@@ -135,7 +135,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="s:link[@type = 'impactFactor']">
+    <xsl:template match="s:link[@type = 'impactFactor' and position() > 1]">
         <div class="resultInfo">
             <span>
                 <a href="{s:url}">Impact Factor</a>
