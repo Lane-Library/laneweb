@@ -6,7 +6,7 @@ COPY assets/start.sh /start.sh
 COPY target/laneweb.war ROOT.war
 
 # volume to be shared with tomcat
-VOLUME /tomcat/webapps
+VOLUME /base/webapps
 VOLUME /content
 
 # volume for git deploy keys
