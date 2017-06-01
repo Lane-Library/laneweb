@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -18,7 +17,7 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
 
     @Override
     public CourseReservesItemList deserialize(final JsonParser p, final DeserializationContext ctxt)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         JsonNode node = p.getCodec().readTree(p);
         JsonNode itemsNode = node.get("items");
         List<CourseReservesItem> itemList = new ArrayList<>();

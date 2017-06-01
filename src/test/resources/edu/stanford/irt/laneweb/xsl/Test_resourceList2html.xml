@@ -39,4 +39,24 @@
       <url>http://impactfactor.org/</url>
     </link>
   </result>
+  <!-- impact factor links should never be first, but test just in case -->
+  <result score="1" type="eresource">
+    <id>123</id>
+    <recordId>123</recordId>
+    <recordType>bib</recordType>
+    <title><keyword>Music</keyword> that works</title>
+    <description>Introduction : <keyword>music</keyword> that works</description>
+    <primaryType>Book Digital</primaryType>
+    <link type="impactFactor">
+      <label>Impact Factor</label>
+      <link-text>Impact Factor</link-text>
+      <url>http://impactfactor.org/</url>
+    </link>
+    <link type="normal">
+      <label>Fulltext</label>
+      <link-text>Music that works</link-text>
+      <url>http://link.springer.com/978-3-211-75120-6</url>
+      <additional-text>Springer, additional text, instruction</additional-text>
+    </link>
+  </result>
 </resources>
