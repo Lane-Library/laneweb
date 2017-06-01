@@ -1,11 +1,11 @@
 #!/bin/bash -e 
 
 # Tomcat sidecar jobs
-# 1. Copy laneweb.war to the shared /tomcat/webapps
+# 1. Copy laneweb.war to the shared /base/webapps
 # 2. Sync content from git repo to /content on given time interval
 
 # webapps dir
-WEBAPP_DIR=${WEBAPP_DIR-/tomcat/webapps}
+WEBAPP_DIR=${WEBAPP_DIR-/base/webapps}
 # content git repo 
 REPO=${REPO:-"git@gitlab.med.stanford.edu:irt-lane/laneweb-content.git"}
 # destination dir
@@ -15,7 +15,7 @@ DEPLOY_KEY=${DEPLOY_KEY:-/keys/id_rsa}
 # pull interval in seconds
 INTERVAL=${INTERVAL:-300}
 
-# 1. Copy laneweb.war to the shared /tomcat/webapps
+# 1. Copy laneweb.war to the shared /base/webapps
 mkdir -p ${WEBAPP_DIR}
 cp /ROOT.war ${WEBAPP_DIR}
 
