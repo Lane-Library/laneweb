@@ -21,13 +21,10 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(Resource.EMPTY_NS, Resource.SCORE, Resource.SCORE, Resource.CDATA,
-                    Float.toString(eresource.getScore()));
             atts.addAttribute(Resource.EMPTY_NS, Resource.TYPE, Resource.TYPE, Resource.CDATA, "eresource");
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, Resource.RESULT, atts);
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.ID, eresource.getId());
-            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID,
-                    Integer.toString(eresource.getRecordId()));
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID, eresource.getRecordId());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.TITLE, eresource.getTitle());
             maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
