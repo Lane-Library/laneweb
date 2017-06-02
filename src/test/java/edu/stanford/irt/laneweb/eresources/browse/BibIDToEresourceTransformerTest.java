@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.eresources.Eresource;
@@ -32,7 +33,7 @@ public class BibIDToEresourceTransformerTest {
     public void setUp() {
         this.solrService = createMock(SolrService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.transformer = new BibIDToEresourceTransformer(this.solrService, this.saxStrategy);
+        this.transformer = new BibIDToEresourceTransformer(this.solrService, this.saxStrategy, "type", AlwaysValid.SHARED_INSTANCE);
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
         this.attributes = createMock(Attributes.class);
