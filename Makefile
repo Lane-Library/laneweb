@@ -61,9 +61,10 @@ help: ## show this help page
 gen-phony: ## automatically generate .PHONY targets
 	@echo 'Execute the following line:'
 	@echo 'bash replace_phony.sh && rm replace_phony.sh'
-	@cat ${THIS_MAKEFILE} | perl -ne 'print if s/^([a-zA-Z_-]+):.*/\1/' | fmt -w 120 | (echo; while IFS=$$'\n' read -r line; do echo ".PHONY: $$line"; done) > PHONY.tmp && \
+	@cat ${THIS_MAKEFILE} | perl -ne 'print if s/^([a-zA-Z_-]+):.*/\1/' | fmt -w 80 | (echo; while IFS=$$'\n' read -r line; do echo ".PHONY: $$line"; done) > PHONY.tmp && \
 		echo "sed -i '' '/^.PHONY:.*/d' ${THIS_MAKEFILE} && sed -i '' -e :a -e '/^\n*$$/{$$d;N;};/\n$$/ba' ${THIS_MAKEFILE} && cat PHONY.tmp >> ${THIS_MAKEFILE} && rm PHONY.tmp && echo Changes: && git diff ${THIS_MAKEFILE}" > replace_phony.sh && \
 		chmod +x replace_phony.sh
 # END SHARED MAKEFILE TARGETS
 
-.PHONY: all build docker docker_nc prune push pull help sec update-scripts clean_docker
+.PHONY: all app docker docker_nc prune clean_docker push pull sec update-scripts help
+.PHONY: gen-phony
