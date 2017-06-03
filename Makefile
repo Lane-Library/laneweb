@@ -1,4 +1,5 @@
 THIS_MAKEFILE := $(realpath $(lastword $(MAKEFILE_LIST)))
+SHELL := /bin/bash
 include env.sh
 
 export VERSION=$(shell git rev-parse --verify HEAD)
