@@ -50,11 +50,20 @@ ${SCRIPTS_DIR}: ## --
 update-scripts: ${SCRIPTS_DIR} ## --
 	cd ${SCRIPTS_DIR}; git pull ${SCRIPTS_REPO}
 
-help: ## --
+# SHARED MAKEFILE TARGETS
+help: ## show this help page
 	@# adapted from https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 	@echo '_________________'
 	@echo '| Make targets: |'
 	@echo '-----------------'
 	@cat ${THIS_MAKEFILE} | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+gen-phony: ## automatically generate .PHONY targets
+	@echo 'Execute the following line:'
+	@echo 'bash replace_phony.sh && rm replace_phony.sh'
+	@cat ${THIS_MAKEFILE} | perl -ne 'print if s/^([a-zA-Z_-]+):.*/\1/' | fmt -w 120 | (echo; while IFS=$$'\n' read -r line; do echo ".PHONY: $$line"; done) > PHONY.tmp && \
+		echo "sed -i '' '/^.PHONY:.*/d' ${THIS_MAKEFILE} && sed -i '' -e :a -e '/^\n*$$/{$$d;N;};/\n$$/ba' ${THIS_MAKEFILE} && cat PHONY.tmp >> ${THIS_MAKEFILE} && rm PHONY.tmp && echo Changes: && git diff ${THIS_MAKEFILE}" > replace_phony.sh && \
+		chmod +x replace_phony.sh
+# END SHARED MAKEFILE TARGETS
 
 .PHONY: all build docker docker_nc prune push pull help sec update-scripts clean_docker
