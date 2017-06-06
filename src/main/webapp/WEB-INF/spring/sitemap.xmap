@@ -6,28 +6,28 @@
         <map:match pattern="search/*" type="wildcard">
             <!-- TODO: set error http codes where necessary -->
             <map:generate type="html" src="{content-base}/error.html"/>
-            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="cookiesFetch.html" type="wildcard">
             <map:generate type="file" src="resources/cookiesFetch.html"/>
-            <map:transform type="saxon" src="resources/xsl/cookiesFetch.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/cookiesFetch.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="postMethodHelper.html" type="wildcard">
             <map:generate type="parameter-map"/>
-            <map:transform type="saxon" src="resources/xsl/postMethodHelper.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/postMethodHelper.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="plain/secure/.*\.html" type="regexp">
             <map:generate type="html" src="{content-base}/error.html"/>
-            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
         <!-- javascript unit tests: -->
         <map:match pattern="resources/test/**.html" type="wildcard">
             <map:generate type="html" src="resources/test/{1}.html"/>
-            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
     <!-- holding of on caching for now . . .
@@ -45,7 +45,7 @@
                             <map:transform type="html-cme-links"/>
                         </map:when>
                     </map:select>
-                    <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                    <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
                     <map:select type="proxy-links">
                         <map:when test="true">
                             <map:transform type="proxy-links"/>
@@ -64,7 +64,7 @@
                             <map:transform type="html-cme-links"/>
                         </map:when>
                     </map:select>
-                    <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                    <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
                     <map:select type="logged-in">
                         <map:when test="true">
                             <map:transform type="xinclude"/>
@@ -91,7 +91,7 @@
                     <map:transform type="html-cme-links"/>
                 </map:when>
             </map:select>
-            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:select type="proxy-links">
                 <map:when test="true">
                     <map:transform type="proxy-links"/>
@@ -105,7 +105,7 @@
                 <map:generate type="file" src="cocoon://content/med-history/{1}.html"/>
                 <map:generate type="file" src="cocoon://content/templates/history.xml"/>
             </map:aggregate>
-            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:transform type="namespace-filter"/>
             <map:serialize type="html5"/>
         </map:match>
@@ -119,7 +119,7 @@
                     <map:transform type="html-cme-links"/>
                 </map:when>
             </map:select>
-            <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:select type="logged-in">
                 <map:when test="true">
                     <map:transform type="xinclude"/>

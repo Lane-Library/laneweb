@@ -359,6 +359,10 @@
                 <targetPath>resources/css</targetPath>
                 <directory>src/main/css</directory>
             </resource>
+            <resource>
+                <targetPath>xsl</targetPath>
+                <directory>src/main/xsl</directory>
+            </resource>
         </resources>
         <plugins>
             <plugin>

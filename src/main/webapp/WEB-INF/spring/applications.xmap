@@ -42,7 +42,7 @@
                 </map:generate>
                 <map:transform type="description-labeling"/>
                 <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- return raw xml metasearch content results -->
@@ -66,12 +66,12 @@
                         <map:transform type="search-proxy-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="resources/xsl/search2json.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/search2json.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
             <map:match pattern="search/facets/html" type="wildcard">
                 <map:generate type="solr-search-facets"/>
-                <map:transform type="saxon" src="resources/xsl/solr-facets.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- TODO: find permanent home for this -->
@@ -89,7 +89,7 @@
         <map:parameter name="cache-key" value="{request-uri};q={query}"/>
         <map:match pattern="sfx/json" type="wildcard">
             <map:generate type="html" src="http://sfx.stanford.edu/local?sid=stanford:laneweb-auto&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
-            <map:transform src="resources/xsl/sfx2json.xsl" type="saxon">
+            <map:transform src="classpath:/xsl/sfx2json.xsl" type="saxon">
                 <map:parameter name="sfx-request" value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact"/>
             </map:transform>
             <map:serialize type="text"/>
@@ -99,20 +99,20 @@
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-rss.xml" type="wildcard">
             <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
-            <map:transform type="saxon" src="resources/xsl/laneblog-rss2html.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog-rss2html.xsl"/>
              <map:transform type="textNodeParser">
                 <map:parameter name="elementName" value="content"/>
             </map:transform>
-            <map:transform type="saxon" src="resources/xsl/laneblog.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="laneblog-newresources-rss.xml" type="wildcard">
             <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
-            <map:transform type="saxon" src="resources/xsl/laneblog-newresources-rss2html.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog-newresources-rss2html.xsl"/>
              <map:transform type="textNodeParser">
                 <map:parameter name="elementName" value="content"/>
             </map:transform>
-            <map:transform type="saxon" src="resources/xsl/laneblog.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
@@ -122,12 +122,12 @@
         <map:parameter name="cache-expires" value="21600"/>
         <map:match pattern="seminars/type/*/number-of-items/*/link-label/*.xml" type="wildcard">
             <map:generate type="seminars"/>
-            <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="seminars/grandrounds.xml" type="wildcard">
             <map:generate type="seminars"/>
-            <map:transform type="saxon" src="resources/xsl/seminars.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
@@ -139,7 +139,7 @@
                 <map:parameter name="directories" value="{content-base}/search,{content-base}/portals,{content-base}/med-history"/>
             </map:transform>
             <map:transform type="file-path"/>
-            <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/search-templates.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <!-- search describe xml output -->
@@ -158,7 +158,7 @@
                 <map:generate type="file" src="cocoon://apps/search-describe.xml"/>
                 <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
             </map:aggregate>
-            <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/describe.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="search-describe.html" type="wildcard">
@@ -166,7 +166,7 @@
                 <map:generate type="file" src="cocoon://apps/search-describe.xml"/>
                 <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
             </map:aggregate>
-            <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/describe.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
     </map:pipeline>
@@ -176,7 +176,7 @@
                 <map:parameter name="department" value="{1}"/>
                 <map:parameter name="year" value="{2}"/>
             </map:generate>
-            <map:transform type="saxon" src="resources/xsl/grandrounds2.xsl">
+            <map:transform type="saxon" src="classpath:/xsl/grandrounds2.xsl">
                 <map:parameter name="department" value="{1}"/>
                 <map:parameter name="year" value="{2}"/>
             </map:transform>
@@ -195,14 +195,14 @@
         </map:match>
         <map:match type="wildcard" pattern="equipment.html">
             <map:generate type="equipment"/>
-            <map:transform type="saxon" src="resources/xsl/equipment.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/equipment.xsl"/>
             <map:transform type="equipment-status"/>
-            <map:transform type="saxon" src="resources/xsl/equipment-status.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/equipment-status.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match type="wildcard" pattern="course-reserves/courses.xml">
             <map:generate type="courses"/>
-            <map:transform type="joost" src="resources/xsl/add-menuitem-active.stx"/>
+            <map:transform type="joost" src="classpath:/xsl/add-menuitem-active.stx"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match type="wildcard" pattern="course-reserves/item-list.xml">

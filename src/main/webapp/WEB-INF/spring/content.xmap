@@ -7,13 +7,13 @@
             <map:match pattern="biomed-resources/(ej|eb|cc|db|video|images|statistics|software).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="biomed-resources/((.+)?(browse|core|mobile|pda|software-)(.+)?).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="biomed-resources/bassett/raw/**.html" type="wildcard">
@@ -22,7 +22,7 @@
                     <map:generate type="file" src="cocoon://content/biomed-resources/bassett/solr.xml"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/bassett.xsl">
+                <map:transform type="saxon" src="classpath:/xsl/bassett.xsl">
                     <map:parameter name="images-url" value="http://elane.stanford.edu/public/L254573"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
@@ -34,7 +34,7 @@
                     <map:generate type="file" src="cocoon://content/biomed-resources/bassett/accordionMenu"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/bassettTemplate.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/bassettTemplate.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="biomed-resources/bassett/accordionMenu" type="wildcard">
@@ -43,7 +43,7 @@
                     <map:generate type="file" src="cocoon://content/biomed-resources/bassett/bassett-accordion"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/bassettAccordion.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/bassettAccordion.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="biomed-resources/bassett/solr.xml" type="wildcard">
@@ -67,8 +67,8 @@
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="resources/xsl/solr-limits.stx"/>
-                <map:transform type="joost" src="resources/xsl/eresources-count.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/solr-limits.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="regex-parameter" pattern="^(clinical-all|peds-all)$">
@@ -77,10 +77,10 @@
                     <map:generate type="{0}"/>
                     <map:generate type="html" src="{content-base}/search/{0}.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="resources/xsl/clinical-search.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/clinical-search.xsl"/>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="description-labeling"/>
-                <map:transform type="saxon" src="resources/xsl/resourceList2html.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -94,7 +94,7 @@
                     </map:generate>
                     <map:generate type="file" src="cocoon://content/cached/search/textbooks-all.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="resources/xsl/metasearch.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/metasearch.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -107,7 +107,7 @@
                     </map:generate>
                     <map:generate type="file" src="cocoon://content/cached/search/bioresearch-all.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="resources/xsl/metasearch.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/metasearch.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -118,7 +118,7 @@
                        <map:generate type="html" src="cocoon://content/cached/search/search-images.html"/>
                    </map:aggregate>
                    <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/search-images.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/search-images.xsl"/>
                    <map:serialize type="xml"/>
             </map:match>
             <!-- TODO is this error handling ever invoked? -->
@@ -140,7 +140,7 @@
                        <map:generate type="html" src="cocoon://content/cached/search/admin-search-images.html"/>
                    </map:aggregate>
                    <map:transform type="xinclude"/>
-                 <map:transform type="saxon" src="resources/xsl/search-images.xsl"/>
+                 <map:transform type="saxon" src="classpath:/xsl/search-images.xsl"/>
               <map:serialize type="xml"/>
             </map:match>
          </map:match>
@@ -152,13 +152,13 @@
         </map:match>
         <map:match pattern="random/**" type="wildcard">
             <map:generate type="file" src="{1}"/>
-            <map:transform type="saxon" src="resources/xsl/random.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/random.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <!-- To replace persistent.html login later -->
         <map:match pattern="myaccounts.html" type="wildcard">
             <map:generate type="html" src="{content-base}/myaccounts.html"/>
-            <map:transform src="resources/xsl/persistentlogin.xsl" type="saxon"/>
+            <map:transform src="classpath:/xsl/persistentlogin.xsl" type="saxon"/>
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
@@ -177,7 +177,7 @@
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
-                <map:transform type="saxon" src="resources/xsl/history-search.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO: maybe this following can be removed and the match of ** below will provide cached content -->
@@ -220,12 +220,12 @@
             <map:transform type="textNodeParser">
                 <map:parameter name="elementName" value="description"/>
             </map:transform>
-            <map:transform src="resources/xsl/ncbi-rss2html.xsl" type="saxon"/>
+            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
             <map:generate type="file" src="{1}"/>
-            <map:transform src="resources/xsl/ncbi-rss2html.xsl" type="saxon">
+            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon">
                 <map:parameter name="format" value="brief"/>
             </map:transform>
             <map:serialize type="xml"/>
@@ -236,7 +236,7 @@
         <map:parameter name="cache-key" value="{request-uri}?{query-string}"/>
         <map:match type="wildcard" pattern="about/liaisons.html">
             <map:generate type="html" src="{content-base}/about/liaisons.html"/>
-            <map:transform type="saxon" src="resources/xsl/selections.xsl">
+            <map:transform type="saxon" src="classpath:/xsl/selections.xsl">
                 <map:parameter name="cache-key" value=";selection={selection}"/>
             </map:transform>
             <map:transform type="xinclude"/>
@@ -247,7 +247,7 @@
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match type="wildcard" pattern="liaison-card/*.html">
             <map:generate type="html" src="{content-base}/about/liaisons.html"/>
-            <map:transform type="saxon" src="resources/xsl/liaison-card.xsl">
+            <map:transform type="saxon" src="classpath:/xsl/liaison-card.xsl">
                 <map:parameter name="liaison" value="{1}"/>
             </map:transform>
             <map:serialize type="xml"/>
@@ -265,7 +265,7 @@
         </map:match>
         <map:match pattern="hours/*.xml" type="wildcard">
             <map:generate type="hours"/>
-            <map:transform type="saxon" src="resources/xsl/hours.xsl">
+            <map:transform type="saxon" src="classpath:/xsl/hours.xsl">
                 <map:parameter name="cache-key" value=";{1}"/>
                 <map:parameter name="mode" value="{1}"/>
             </map:transform>
@@ -288,15 +288,15 @@
                 <map:generate type="html" src="{content-base}/portals/palliative-care.html"/>
                 <map:transform type="link-with-cover"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
-                <map:transform type="saxon" src="resources/xsl/youtubeAtom2Html-list.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/youtubeAtom2Html-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="regexp" pattern="portals/(reference|rheumatology)\.html$">
                 <map:generate type="html" src="{content-base}/portals/{1}.html"/>
                 <map:transform type="link-with-cover"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="resources/xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:generate type="html" src="{content-base}/portals/{1}"/>

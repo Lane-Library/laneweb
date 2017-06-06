@@ -7,7 +7,7 @@
         <map:parameter name="cache-expires" value="86400"/>
         <map:match pattern="highly-accessed-articles.xml" type="wildcard">
             <map:generate type="file" src="http://sfx.stanford.edu/local/cgi/public/highly-accessed.cgi?limit=10&amp;days=14"/>
-            <map:transform src="resources/xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
+            <map:transform src="classpath:/xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
