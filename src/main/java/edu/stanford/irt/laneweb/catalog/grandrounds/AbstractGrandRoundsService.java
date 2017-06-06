@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.grandrounds.GrandRoundsException;
+import edu.stanford.irt.grandrounds.Link;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.lane.catalog.CatalogSQLException;
@@ -41,7 +42,7 @@ public abstract class AbstractGrandRoundsService implements GrandRoundsService {
         int recordId = presentation.getId();
         try {
             presentation.getDate();
-            presentation.getLinks().stream().forEach(l -> l.getURI());
+            presentation.getLinks().stream().forEach(Link::getURI);
             presentations.add(presentation);
         } catch (GrandRoundsException e) {
             LOG.error(recordId + " not valid", e);

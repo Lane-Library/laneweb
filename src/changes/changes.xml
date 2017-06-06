@@ -7,11 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	 <release date="2017-06-06" version="3.3.33" description="3.3.33 bug fix release">
-            <action date="2017-05-30" dev="alainb" issue="134341" type="update">
+        <release date="2017-06-05" version="3.3.33" description="3.3.33 bug fix release">
+            <action date="2017-05-31" dev="ryanmax" issue="134426" type="fix">
+                eresources markup can cause pages to break
+            </action>
+            <action date="2017-05-31" dev="alainb" issue="134341" type="update">
                 To use h4 instead of h3 for grandrounds title
             </action>
-         </release>   
+            <action date="2017-06-02" dev="ceyates" issue="132096" type="add">
+                create method of creating html content by specifing an id of a resource
+            </action>
+            <action date="2017-05-24" dev="ceyates" issue="131541" type="update">
+                use google calendar and api for library hours
+            </action>
+        </release>   
         <release date="2017-05-29" version="3.3.32" description="3.3.32 bug fix release">
             <action date="2017-05-22" dev="olgary" issue="134138" type="add">
                 links in footer
