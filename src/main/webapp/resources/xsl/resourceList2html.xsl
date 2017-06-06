@@ -329,15 +329,16 @@
     </xsl:template>
 
     <xsl:template match="s:pub-author">
+        <xsl:variable name="max-first-line-length" select="105"/>
         <div>
             <xsl:choose>
-                <!--  when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (115 chars)-->
-                <xsl:when test="string-length(.) > 250">
+                <!--  when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (105 chars)-->
+                <xsl:when test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
                     <xsl:variable name="authorTokens" select="tokenize(.,', ')"/>
                     <xsl:variable name="authorString">
                         <xsl:call-template name="split-authors">
                             <xsl:with-param name="tokens" select="$authorTokens"/>
-                            <xsl:with-param name="max-string-length" select="105"/>
+                            <xsl:with-param name="max-string-length" select="$max-first-line-length"/>
                             <xsl:with-param name="index" select="12"/>
                         </xsl:call-template>
                     </xsl:variable>
