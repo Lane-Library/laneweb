@@ -25,7 +25,7 @@ public class Test_resourceList2html extends AbstractXSLTest {
     @Before
     public void setUp() throws Exception {
         this.transformer = TransformerFactory.newInstance()
-                .newTransformer(new StreamSource("src/main/webapp/resources/xsl/resourceList2html.xsl"));
+                .newTransformer(new StreamSource("src/main/xsl/resourceList2html.xsl"));
         this.source = new StreamSource(getClass().getResourceAsStream("Test_resourceList2html.xml"));
         this.transformer.setOutputProperty("indent", "yes");
         this.transformer.setOutputProperty("method", "xml");

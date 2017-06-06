@@ -27,7 +27,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
     @Before
     public void setUp() throws Exception {
         this.transformer = TransformerFactory.newInstance()
-                .newTransformer(new StreamSource("src/main/webapp/resources/xsl/laneweb.xsl"));
+                .newTransformer(new StreamSource("src/main/xsl/laneweb.xsl"));
         this.source = new StreamSource(getClass().getResourceAsStream("login.xml"));
         this.transformer.setOutputProperty("indent", "yes");
     }
