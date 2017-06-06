@@ -586,7 +586,7 @@
                 <artifactId>grover-maven-plugin</artifactId>
                 <version>1.0.1</version>
                 <configuration>
-                    <testDir>src/main/webapp/resources/test</testDir>
+                    <testDir>src/test/javascript</testDir>
                 </configuration>
                 <executions>
                     <execution>

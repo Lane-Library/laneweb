@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>persistent-login javascript unit tests</title>
+        <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
+    </head>
+    <body>
+        <div class="is-persistent">
+            <input type="checkbox" id="is-persistent-login" /> 
+            <label>Log me in for 2 weeks (DON’T check if on a shared computer)</label>
+        </div>
+        <a id="login" href="/secure/login.html">login</a>
+        <a id="proxylogin" href="https://login.laneproxy.stanford.edu/login?url=foo">proxylogin</a>
+        <a id="proxylogin2" href="http://laneproxy.stanford.edu/login?url=foo">proxylogin</a>
+        <a id="cmeredirect" href="/redirect/cme?url=http://www.uptodate.com/online">cme redirect</a>
+        <div id="persistent" class="module">
+            <div class="header">
+                <span></span>
+            </div>
+        </div>
+        <a class="button alt1" href="/secure/persistentLogin.html?pl=true"
+            id="persistent-login"> <span><i
+                class="icon fa  fa-sign-in"></i>Keep me logged in</span><i
+                    class="icon fa fa-arrow-right"></i>
+        </a>
+        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+        <script type="text/javascript">
+    Y.Cookie.get = function() {
+        return "0";
+    };
+        </script>
+        <script src="../../../main/javascript/location.js" type="text/javascript"></script>
+        <script src="../../../main/javascript/model.js" type="text/javascript"></script>
+        <script src="../../../main/javascript/lane-lightbox.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            Y.lane.Model.set(Y.lane.Model.IS_ACTIVE_SUNETID, true);
+        </script>
+        <script src="../../../main/javascript/lane-persistent-login.js" type="text/javascript"></script>
+        <script src="persistent-login-test.js" type="text/javascript"></script>
+    </body>
+
+</html>
