@@ -55,13 +55,8 @@ public class MetasearchConfigurationTest {
     }
 
     @Test
-    public void testMetaSearchManager() {
-        assertNotNull(this.configuration.metaSearchManager());
-    }
-
-    @Test
     public void testMetaSearchManagerSource() {
-        assertNotNull(this.configuration.metaSearchManagerSource());
+        assertNotNull(this.configuration.metaSearchService());
     }
 
     @Test

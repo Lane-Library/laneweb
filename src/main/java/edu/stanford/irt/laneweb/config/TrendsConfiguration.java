@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +24,9 @@ public class TrendsConfiguration {
     }
 
     @Bean
-    public BookmarkTrendsReporter bookmarkTrendsReporter() {
-        BookmarkTrendsReporter reporter = new BookmarkTrendsReporter();
-        reporter.setBookmarkDAO(this.bookmarkService);
-        reporter.setGoogleTracker(googleTracker());
-        return reporter;
+    public BookmarkTrendsReporter bookmarkTrendsReporter() throws UnknownHostException {
+        return new BookmarkTrendsReporter(this.bookmarkService, googleTracker(),
+                InetAddress.getLocalHost().getHostName());
     }
 
     @Bean
