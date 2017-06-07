@@ -169,7 +169,10 @@ public class EresourcesConfiguration {
 
     @Bean(name = "laneSearchSolrServer")
     public SolrClient solrClient() {
-        return new HttpSolrClient(this.solrServerUrl);
+        HttpSolrClient solrClient = new HttpSolrClient(this.solrServerUrl);
+        solrClient.setConnectionTimeout(5000);
+        solrClient.setSoTimeout(15000);
+        return solrClient;
     }
 
     @Bean
