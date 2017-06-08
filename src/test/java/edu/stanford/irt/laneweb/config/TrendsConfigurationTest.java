@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.config;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.net.UnknownHostException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +17,7 @@ public class TrendsConfigurationTest {
     }
 
     @Test
-    public void testBookmarkTrendsReporter() {
+    public void testBookmarkTrendsReporter() throws UnknownHostException {
         assertNotNull(this.configuration.bookmarkTrendsReporter());
     }
 

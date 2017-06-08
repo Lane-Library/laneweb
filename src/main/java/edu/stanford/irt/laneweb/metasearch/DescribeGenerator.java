@@ -8,23 +8,20 @@ import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.search.Query;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class DescribeGenerator extends AbstractGenerator implements CacheablePipelineComponent {
 
-    private static final Query EMPTY_QUERY = new SimpleQuery("");
+    private static final String EMPTY_QUERY = "";
 
     private static final String TYPE = "describe";
 
-    private MetaSearchManager metaSearchManager;
+    private MetaSearchService metaSearchService;
 
     private SAXStrategy<Result> saxStrategy;
 
-    public DescribeGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
-        this.metaSearchManager = metaSearchManager;
+    public DescribeGenerator(final MetaSearchService metaSearchService, final SAXStrategy<Result> saxStrategy) {
+        this.metaSearchService = metaSearchService;
         this.saxStrategy = saxStrategy;
     }
 
@@ -45,6 +42,6 @@ public class DescribeGenerator extends AbstractGenerator implements CacheablePip
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        this.saxStrategy.toSAX(this.metaSearchManager.describe(EMPTY_QUERY, null), xmlConsumer);
+        this.saxStrategy.toSAX(this.metaSearchService.describe(EMPTY_QUERY, null), xmlConsumer);
     }
 }

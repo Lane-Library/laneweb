@@ -8,7 +8,6 @@ import java.util.Map;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -26,10 +25,10 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     private int page;
 
-    public ClinicalSearchResultsGenerator(final MetaSearchManager metaSearchManager,
+    public ClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
             final SAXStrategy<ClinicalSearchResults> saxStrategy, final List<String> engines,
             final ClinicalSearchResultsFactory factory) {
-        super(metaSearchManager, saxStrategy);
+        super(metaSearchService, saxStrategy);
         this.engines = engines;
         this.factory = factory;
     }
@@ -49,8 +48,7 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     @Override
     protected ClinicalSearchResults doSearch(final String query) {
-        return this.factory.createResults(search(new SimpleQuery(query), this.engines, MAX_WAIT_TIME), query,
-                this.facets, this.page);
+        return this.factory.createResults(search(query, this.engines, MAX_WAIT_TIME), query, this.facets, this.page);
     }
 
     @Override

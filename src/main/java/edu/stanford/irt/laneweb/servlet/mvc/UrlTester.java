@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.metasearch.MetaSearchManagerSource;
+import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 
 @Controller
 public class UrlTester {
 
-    private HttpClient httpClient;
+    private MetaSearchService metaSearchService;
 
     @Autowired
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.httpClient = msms.getHttpClient();
+    public void setMetaSearchManagerSource(final MetaSearchService metaSearchService) {
+        this.metaSearchService = metaSearchService;
     }
 
     @RequestMapping(value = "/apps/url-tester")
     public void testUrl(@RequestParam final String url, final HttpServletResponse response) {
         HttpGet httpGet = new HttpGet(url);
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-            HttpResponse httpResponse = this.httpClient.execute(httpGet);
+            HttpResponse httpResponse = this.metaSearchService.execute(httpGet);
             baos.write(EntityUtils.toByteArray(httpResponse.getEntity()));
             byte[] headers = getHeaderString(httpGet, httpResponse);
             baos.write(headers);
