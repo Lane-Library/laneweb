@@ -30,14 +30,14 @@ import edu.stanford.irt.laneweb.eresources.search.Facet;
 
 @Configuration
 @ImportResource({
-    "/WEB-INF/spring/applications.xmap",
-    "/WEB-INF/spring/bookmarks.xmap",
-    "/WEB-INF/spring/classes.xmap",
-    "/WEB-INF/spring/content.xmap",
-    "/WEB-INF/spring/eresources.xmap",
-    "/WEB-INF/spring/mobile.xmap",
-    "/WEB-INF/spring/rss.xmap",
-    "/WEB-INF/spring/sitemap.xmap",
+    "classpath:/spring/applications.xmap",
+    "classpath:/spring/bookmarks.xmap",
+    "classpath:/spring/classes.xmap",
+    "classpath:/spring/content.xmap",
+    "classpath:/spring/eresources.xmap",
+    "classpath:/spring/mobile.xmap",
+    "classpath:/spring/rss.xmap",
+    "classpath:/spring/sitemap.xmap",
     "classpath:/net/bull/javamelody/monitoring-spring.xml"
 })
 @ComponentScan({

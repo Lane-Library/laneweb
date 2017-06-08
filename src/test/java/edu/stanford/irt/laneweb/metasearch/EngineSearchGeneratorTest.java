@@ -1,15 +1,11 @@
 package edu.stanford.irt.laneweb.metasearch;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.isNull;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +15,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.Result;
 
 public class EngineSearchGeneratorTest {
@@ -38,19 +33,18 @@ public class EngineSearchGeneratorTest {
         this.generator = new EngineSearchGenerator(this.metaSearchService, this.saxStrategy);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchString() {
-        expect(this.metaSearchService.search(isA(Query.class), isNull(Collection.class), eq(60000L))).andReturn(null);
+        expect(this.metaSearchService.search("query", null, 60000L)).andReturn(null);
         replay(this.metaSearchService, this.saxStrategy);
         this.generator.doSearch("query");
         verify(this.metaSearchService, this.saxStrategy);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchStringEngines() {
-        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
+        expect(this.metaSearchService.search("query", Arrays.asList(new String[] { "a", "b", "c" }), 60000L))
+                .andReturn(null);
         replay(this.metaSearchService, this.saxStrategy);
         Map<String, Object> model = new HashMap<>();
         model.put(Model.QUERY, "query");
@@ -61,10 +55,10 @@ public class EngineSearchGeneratorTest {
         verify(this.metaSearchService, this.saxStrategy);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testDoSearchStringParameterEngines() {
-        expect(this.metaSearchService.search(isA(Query.class), isA(Collection.class), eq(60000L))).andReturn(null);
+        expect(this.metaSearchService.search("query", Arrays.asList(new String[] { "a", "b", "c" }), 60000L))
+                .andReturn(null);
         replay(this.metaSearchService, this.saxStrategy);
         this.generator.setParameters(Collections.singletonMap(Model.ENGINES, "a,b,c"));
         this.generator.doSearch("query");

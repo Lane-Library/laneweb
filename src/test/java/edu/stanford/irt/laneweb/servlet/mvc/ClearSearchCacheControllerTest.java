@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -10,7 +8,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.search.Query;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 
 public class ClearSearchCacheControllerTest {
@@ -27,7 +24,7 @@ public class ClearSearchCacheControllerTest {
 
     @Test
     public void testClearCache() {
-        expect(this.metaSearchService.clearAllCaches()).andReturn("OK");
+        this.metaSearchService.clearAllCaches();
         replay(this.metaSearchService);
         assertEquals("OK", this.controller.clearCache(null));
         verify(this.metaSearchService);
@@ -35,7 +32,7 @@ public class ClearSearchCacheControllerTest {
 
     @Test
     public void testClearCacheQuery() {
-        expect(this.metaSearchService.clearCache(isA(Query.class))).andReturn("OK");
+        this.metaSearchService.clearCache("query");
         replay(this.metaSearchService);
         assertEquals("OK", this.controller.clearCache("query"));
         verify(this.metaSearchService);

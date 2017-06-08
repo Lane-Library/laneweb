@@ -48,8 +48,7 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     @Override
     protected ClinicalSearchResults doSearch(final String query) {
-        return this.factory.createResults(search(new SimpleQuery(query), this.engines, MAX_WAIT_TIME), query,
-                this.facets, this.page);
+        return this.factory.createResults(search(query, this.engines, MAX_WAIT_TIME), query, this.facets, this.page);
     }
 
     @Override

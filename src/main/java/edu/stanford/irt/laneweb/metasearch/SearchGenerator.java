@@ -54,6 +54,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
                 wait = DEFAULT_TIMEOUT;
             }
         }
-        return search(new SimpleQuery(query), engines, wait);
+        return search(query, engines, wait);
     }
 }

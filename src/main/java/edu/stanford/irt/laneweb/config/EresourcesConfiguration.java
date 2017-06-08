@@ -59,6 +59,10 @@ public class EresourcesConfiguration {
 
     private static final int FACETS_TO_SHOW_SEARCH = 4;
 
+    private static final int SOLR_CONNECT_TIMEOUT = 5_000;
+
+    private static final int SOLR_READ_TIMEOUT = 15_000;
+
     private FacetComparator facetComparator;
 
     private Marshaller marshaller;
@@ -170,8 +174,8 @@ public class EresourcesConfiguration {
     @Bean(name = "laneSearchSolrServer")
     public SolrClient solrClient() {
         HttpSolrClient solrClient = new HttpSolrClient(this.solrServerUrl);
-        solrClient.setConnectionTimeout(5000);
-        solrClient.setSoTimeout(15000);
+        solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
+        solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
         return solrClient;
     }
 

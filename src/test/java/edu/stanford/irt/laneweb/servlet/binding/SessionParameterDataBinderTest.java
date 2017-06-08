@@ -47,7 +47,6 @@ public class SessionParameterDataBinderTest {
 
     private HttpSession session;
 
-    @SuppressWarnings("serial")
     @Before
     public void setUp() throws Exception {
         this.binder = new TestSessionParameterDataBinder("key", "name");
@@ -56,9 +55,6 @@ public class SessionParameterDataBinderTest {
         this.session = createMock(HttpSession.class);
         this.object = new java.io.Serializable() {
 
-            /**
-             *
-             */
             private static final long serialVersionUID = 1L;
         };
     }

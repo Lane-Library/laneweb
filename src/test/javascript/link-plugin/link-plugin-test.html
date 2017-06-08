@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>link-plugin javascript unit tests</title>
+        <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
+    </head>
+    <body>
+        <ul>
+            <li><a id="local" href="../index.html">local link</a></li>
+            <li><a id="proxylogin" href="/secure/apps/proxy/credential?url=http://www.nejm.org/"
+                    >proxy login</a></li>
+            <li><a id="proxyurl1"
+                    href="http://laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=http://www.nejm.org/"
+                    >proxy link</a></li>
+            <li><a id="proxyurl2"
+                    href="https://login.laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=http://www.nejm.org/"
+                    >proxy link</a></li>
+            <li><a id="example" href="http://www.example.com/example">example</a></li>
+            <li><a id="cookiesFetch"
+                    href="/cookiesFetch.html?url=http%3A%2F%2Fwww.thomsonhc.com%2Fcarenotes%2Flibrarian%2F&amp;entryUrl=http%3A%2F%2Fhealthcare.thomsonhc.com/hcs/librarian"
+                    >cookie fetch</a></li>
+        </ul>
+
+        <ul id="testGetTitle">
+            <li>
+                <a href="http://www.google.com/" rel="Google">Google</a>
+            </li>
+            <li>
+                <a href="http://www.google.com:80/" rel="Google">
+                    <img src="/favicon.ico" alt="Google" />
+                </a>
+            </li>
+            <li>
+                <a href="http://www.google.com/" title="Google" rel="Google">
+                    <img src="/favicon.ico"
+                        alt="trackable external" />
+                </a>
+            </li>
+            <li>
+                <a href="http://www.google.com/" rel="Google with nested markup">Google <span>with
+                        nested markup</span></a>
+            </li>
+            <li>
+                <a href="http://www.google.com/"
+                    rel="http://www.google.com/intl/en_ALL/images/logo.gif">
+                    <img alt="" src="http://www.google.com/intl/en_ALL/images/logo.gif" />
+                </a>
+            </li>
+            <li>
+                <a href="/cookiesFetch.html?entryURL=foo&amp;path=bar" rel="cookie fetch">cookie
+                    fetch</a>
+            </li>
+            <li class="lane-nav">
+                <a href="http://www.google.com/" rel="laneNav: Google">Google</a>
+            </li>
+        </ul>
+        
+        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+        <script src="../../../main/javascript/location.js" type="text/javascript"></script>
+        <script src="../../../main/javascript/model.js" type="text/javascript"></script>
+        <script src="../../../main/javascript/link-plugin.js" type="text/javascript"></script>
+        <script src="link-plugin-test.js" type="text/javascript"></script>
+    </body>
+</html>

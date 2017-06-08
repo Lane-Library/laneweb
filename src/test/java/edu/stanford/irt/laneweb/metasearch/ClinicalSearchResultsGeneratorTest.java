@@ -13,7 +13,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.Result;
 
 public class ClinicalSearchResultsGeneratorTest {
@@ -34,7 +33,7 @@ public class ClinicalSearchResultsGeneratorTest {
 
     @Test
     public void testDoSearch() {
-        expect(this.metaSearchService.search(isA(Query.class), eq(null), eq(20000L))).andReturn(null);
+        expect(this.metaSearchService.search("query", null, 20000L)).andReturn(null);
         expect(this.factory.createResults(null, "query", Collections.singletonList("facet"), 0)).andReturn(null);
         replay(this.metaSearchService, this.factory);
         this.generator.doSearch("query");
@@ -43,7 +42,7 @@ public class ClinicalSearchResultsGeneratorTest {
 
     @Test
     public void testDoSearchNoFacetsBadPage() {
-        expect(this.metaSearchService.search(isA(Query.class), eq(null), eq(20000L))).andReturn(null);
+        expect(this.metaSearchService.search("query", null, 20000L)).andReturn(null);
         expect(this.factory.createResults(null, "query", Collections.emptyList(), 0)).andReturn(null);
         replay(this.metaSearchService, this.factory);
         this.generator.setModel(Collections.singletonMap(Model.PAGE, Model.PAGE));

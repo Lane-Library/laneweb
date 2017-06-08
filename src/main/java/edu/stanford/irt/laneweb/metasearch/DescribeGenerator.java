@@ -8,13 +8,11 @@ import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class DescribeGenerator extends AbstractGenerator implements CacheablePipelineComponent {
 
-    private static final Query EMPTY_QUERY = new SimpleQuery("");
+    private static final String EMPTY_QUERY = "";
 
     private static final String TYPE = "describe";
 

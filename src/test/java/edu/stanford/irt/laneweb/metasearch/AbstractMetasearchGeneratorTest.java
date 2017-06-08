@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.Result;
 
 public class AbstractMetasearchGeneratorTest {
@@ -34,34 +33,34 @@ public class AbstractMetasearchGeneratorTest {
 
     private AbstractMetasearchGenerator<Result> generator;
 
-    private MetaSearchService manager;
+    private MetaSearchService metaSearchService;
 
-    private Query query;
+    private String query;
 
     private SAXStrategy<Result> saxStrategy;;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.manager = createMock(MetaSearchService.class);
+        this.metaSearchService = createMock(MetaSearchService.class);
         this.saxStrategy = createMock(SAXStrategy.class);
-        this.generator = new TestAbstractMetasearchGenerator(this.manager, this.saxStrategy);
-        this.query = createMock(Query.class);
+        this.generator = new TestAbstractMetasearchGenerator(this.metaSearchService, this.saxStrategy);
+        this.query = "query";
     }
 
     @Test
     public void testDescribe() {
-        expect(this.manager.describe(this.query, null)).andReturn(null);
-        replay(this.manager);
+        expect(this.metaSearchService.describe(this.query, null)).andReturn(null);
+        replay(this.metaSearchService);
         this.generator.describe(this.query, null);
-        verify(this.manager);
+        verify(this.metaSearchService);
     }
 
     @Test
     public void testSearch() {
-        expect(this.manager.search(this.query, null, 10)).andReturn(null);
-        replay(this.manager);
+        expect(this.metaSearchService.search(this.query, null, 10)).andReturn(null);
+        replay(this.metaSearchService);
         this.generator.search(this.query, null, 10);
-        verify(this.manager);
+        verify(this.metaSearchService);
     }
 }

@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import edu.stanford.irt.laneweb.mapping.ResultDeserializer;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class MetaSearchServiceTest {
 
@@ -47,13 +46,13 @@ public class MetaSearchServiceTest {
     @Test
     public void testClearCache() throws JsonParseException, JsonMappingException, IOException {
         MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
-        assertEquals("OK", service.clearCache(new SimpleQuery("the query")));
+        assertEquals("OK", service.clearCache("the query"));
     }
 
     @Test
     public void testDescribe() {
         MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
-        Result result = service.describe(new SimpleQuery("the query"), Collections.singleton("pubmed"));
+        Result result = service.describe("the query", Collections.singleton("pubmed"));
         assertNotNull(result);
         assertEquals("description", result.getDescription());
         assertEquals("description", result.getId());
@@ -64,7 +63,7 @@ public class MetaSearchServiceTest {
     @Test
     public void testSearch() {
         MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
-        Result result = service.search(new SimpleQuery("the query"), Collections.singleton("pubmed"), 0);
+        Result result = service.search("the query", Collections.singleton("pubmed"), 0);
         assertNotNull(result);
         assertEquals("metasearch", result.getDescription());
         assertNotNull(result.getId());

@@ -14,7 +14,6 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
  * @author ryanmax
@@ -94,6 +93,6 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
                 time = DEFAULT_TIMEOUT;
             }
         }
-        return search(new SimpleQuery(query), this.engines, time);
+        return search(query, this.engines, time);
     }
 }
