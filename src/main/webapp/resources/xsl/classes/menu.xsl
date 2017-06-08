@@ -11,7 +11,7 @@
 
 	<xsl:template match="h:li">
 		<xsl:if
-			test="contains(string-join(/doc/lc:classes/lc:event_data/lc:module_categories/lc:category//lc:cat_name/text(), '' ), ./h:a/@id)">
+			test="contains(string-join(/doc/classes/class/categories//category/text(), ',' ), ./h:a/@id)">
 			<xsl:copy>
 				<xsl:apply-templates select="attribute::node()|child::node()" />
 			</xsl:copy>
