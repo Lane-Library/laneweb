@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    <map:pipeline type="noncaching">
+        <!-- matches /apps/search/ requests -->
+        <map:match pattern="search/**" type="wildcard">
+            <!-- /apps/search/xml returns the xmlized search result -->
+            <map:match type="wildcard" pattern="search/xml">
+                <map:generate type="search"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="search-proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- this is used by the search-monitor -->
+            <map:match pattern="search/engine/xml" type="wildcard">
+                <map:generate type="search-engine">
+                    <map:parameter name="engines" value="{$engines}"/>
+                </map:generate>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="search-proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="search/image" type="wildcard">
+                <map:generate type="search-image"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="search/admin/image" type="wildcard">
+                <map:generate type="admin-search-image"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- search/content/html returns xhtmlized metasearch content results -->
+            <map:match pattern="search/content/html/*" type="wildcard">
+                <map:generate type="search-content">
+                    <map:parameter name="engines" value="{1}"/>
+                </map:generate>
+                <map:transform type="description-labeling"/>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- return raw xml metasearch content results -->
+            <!-- this was used in mobile.xmap -->
+            <map:match pattern="search/content/xml/*" type="wildcard">
+                <map:generate type="search-content">
+                    <map:parameter name="engines" value="{1}"/>
+                </map:generate>
+                <map:transform type="description-labeling"/>
+                <map:transform type="query-highlighting"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- search2json.xsl converts the result xml to json -->
+            <!-- it is used in lane-metasearch.js and lane-querymap.js -->
+            <map:match pattern="search/json" type="wildcard">
+                <map:generate type="search-resource">
+                    <map:parameter name="timeout" value="0"/>
+                </map:generate>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="search-proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="saxon" src="classpath:/xsl/search2json.xsl"/>
+                <map:serialize type="text"/>
+            </map:match>
+            <map:match pattern="search/facets/html" type="wildcard">
+                <map:generate type="solr-search-facets"/>
+                <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <!-- TODO: find permanent home for this -->
+            <map:match pattern="search/flickr.xml" type="wildcard">
+                <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key=06d7c09fef338652778c8589fc52d5bb&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:match>
+        <map:match pattern="search.xml" type="wildcard">
+            <map:generate type="search-engine"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{request-uri};q={query}"/>
+        <map:match pattern="sfx/json" type="wildcard">
+            <map:generate type="html" src="http://sfx.stanford.edu/local?sid=stanford:laneweb-auto&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
+            <map:transform src="classpath:/xsl/sfx2json.xsl" type="saxon">
+                <map:parameter name="sfx-request" value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact"/>
+            </map:transform>
+            <map:serialize type="text"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{sitemap-uri}"/>
+        <map:match pattern="laneblog-rss.xml" type="wildcard">
+            <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog-rss2html.xsl"/>
+             <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="content"/>
+            </map:transform>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="laneblog-newresources-rss.xml" type="wildcard">
+            <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog-newresources-rss2html.xsl"/>
+             <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="content"/>
+            </map:transform>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{sitemap-uri}"/>
+        <!-- cache expires in 21600 seconds = 6 hours -->
+        <map:parameter name="cache-expires" value="21600"/>
+        <map:match pattern="seminars/type/*/number-of-items/*/link-label/*.xml" type="wildcard">
+            <map:generate type="seminars"/>
+            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="seminars/grandrounds.xml" type="wildcard">
+            <map:generate type="seminars"/>
+            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <!-- caching pipeline for static documents -->
+    <map:pipeline type="caching">
+        <map:match pattern="search-templates.xml" type="wildcard">
+            <map:generate type="search-describe"/>
+            <map:transform type="search-directory">
+                <map:parameter name="directories" value="{content-base}/search,{content-base}/portals,{content-base}/med-history"/>
+            </map:transform>
+            <map:transform type="file-path"/>
+            <map:transform type="saxon" src="classpath:/xsl/search-templates.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- search describe xml output -->
+        <!-- TODO: remove next match after changing search-monitor -->
+        <map:match pattern="search/describe/xml" type="wildcard">
+            <map:generate type="search-describe"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="search-describe.xml" type="wildcard">
+            <map:generate type="search-describe"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- search describe html output -->
+        <map:match pattern="search/describe/html" type="wildcard">
+            <map:aggregate type="default" element="portals" ns="http://lane.stanford.edu/describe/ns">
+                <map:generate type="file" src="cocoon://apps/search-describe.xml"/>
+                <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
+            </map:aggregate>
+            <map:transform type="saxon" src="classpath:/xsl/describe.xsl"/>
+            <map:serialize type="html5"/>
+        </map:match>
+        <map:match pattern="search-describe.html" type="wildcard">
+            <map:aggregate type="default" element="portals" ns="http://lane.stanford.edu/describe/ns">
+                <map:generate type="file" src="cocoon://apps/search-describe.xml"/>
+                <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
+            </map:aggregate>
+            <map:transform type="saxon" src="classpath:/xsl/describe.xsl"/>
+            <map:serialize type="html5"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="noncaching">
+        <map:match pattern="grandrounds/*/*.html" type="wildcard">
+            <map:generate type="grandrounds">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:generate>
+            <map:transform type="saxon" src="classpath:/xsl/grandrounds2.xsl">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="grandrounds/*/*.xml" type="wildcard">
+            <map:generate type="grandrounds">
+                <map:parameter name="department" value="{1}"/>
+                <map:parameter name="year" value="{2}"/>
+            </map:generate>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="equipment.xml">
+            <map:generate type="equipment"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="equipment.html">
+            <map:generate type="equipment"/>
+            <map:transform type="saxon" src="classpath:/xsl/equipment.xsl"/>
+            <map:transform type="equipment-status"/>
+            <map:transform type="saxon" src="classpath:/xsl/equipment-status.xsl"/>
+            <map:serialize type="html5"/>
+        </map:match>
+        <map:match type="wildcard" pattern="course-reserves/courses.xml">
+            <map:generate type="courses"/>
+            <map:transform type="joost" src="classpath:/xsl/add-menuitem-active.stx"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="course-reserves/item-list.xml">
+            <map:generate type="course-reserves-item-list"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match type="wildcard" pattern="flickr-photos.xml">
+            <map:generate type="flickr-photo"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+</map:sitemap>

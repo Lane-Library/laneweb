@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    <map:pipeline type="noncaching">
+        <map:match pattern="biomed-resources/**" type="wildcard">
+            <map:match pattern="biomed-resources/(ej|eb|cc|db|video|images|statistics|software).html" type="regexp">
+                <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/((.+)?(browse|core|mobile|pda|software-)(.+)?).html" type="regexp">
+                <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/bassett/raw/**.html" type="wildcard">
+                <map:aggregate type="default" element="doc">
+                    <map:generate type="file" src="{content-base}/biomed-resources/bassett/{1}.html"/>
+                    <map:generate type="file" src="cocoon://content/biomed-resources/bassett/solr.xml"/>
+                </map:aggregate>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="classpath:/xsl/bassett.xsl">
+                    <map:parameter name="images-url" value="http://elane.stanford.edu/public/L254573"/>
+                </map:transform>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/bassett/**.html" type="wildcard">
+                <map:aggregate type="default" element="doc">
+                    <map:generate type="file" src="{content-base}/biomed-resources/bassett/template.html"/>
+                    <map:generate type="file" src="cocoon://content/biomed-resources/bassett/raw/{1}.html"/>
+                    <map:generate type="file" src="cocoon://content/biomed-resources/bassett/accordionMenu"/>
+                </map:aggregate>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="classpath:/xsl/bassettTemplate.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/bassett/accordionMenu" type="wildcard">
+                <map:aggregate type="default" element="doc">
+                    <map:generate type="file" src="{content-base}/biomed-resources/bassett/menu.html"/>
+                    <map:generate type="file" src="cocoon://content/biomed-resources/bassett/bassett-accordion"/>
+                </map:aggregate>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="classpath:/xsl/bassettAccordion.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/bassett/solr.xml" type="wildcard">
+                <map:generate type="bassett"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="biomed-resources/bassett/bassett-accordion" type="wildcard">
+                <map:generate type="bassett-accordion"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:match>
+        <!-- search.html -->
+        <map:match pattern="search.html" type="wildcard">
+            <!-- bassett search pages -->
+            <map:match type="regex-parameter" pattern="bassett">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:generate src="cocoon://content/biomed-resources/bassett/bassettsView.html" type="file"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match type="regex-parameter" pattern="^all-all$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="classpath:/xsl/solr-limits.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="regex-parameter" pattern="^(clinical-all|peds-all)$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:aggregate type="default" element="doc" ns="aggregate">
+                    <map:generate type="{0}"/>
+                    <map:generate type="html" src="{content-base}/search/{0}.html"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="classpath:/xsl/clinical-search.xsl"/>
+                <map:transform type="query-highlighting"/>
+                <map:transform type="description-labeling"/>
+                <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- bioresearch and textbooks -->
+            <map:match type="regex-parameter" pattern="^textbooks-all$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:aggregate type="default" element="doc">
+                    <map:generate type="search-engine">
+                        <map:parameter name="timeout" value="0"/>
+                        <map:parameter name="engines" value="ck_abeloff,ck_adkinson,ck_auerbach,ck_behrman,ck_braunwald,ck_brenner,ck_browner,ck_canale,ck_cct,ck_cummings,ck_delee,ck_duthie,ck_feldman,ck_frontera,ck_gabbe,ck_goldberger,ck_goldman,ck_grainger,ck_green,ck_habif,ck_harris,ck_hlh,ck_hoffman,ck_keane,ck_khatri,ck_kumar,ck_larsen,ck_long,ck_mandell,ck_marx,ck_mettler,ck_miller,ck_murray,ck_rakel_ig,ck_rakel_tfp,ck_roberts,ck_stern,ck_townsend,ck_walsh,ck_yanoff,ovid-a2529gal,ovid-frad,am_way,ovid-kaplan,ovid-yamada,ovid-mfpr,ovid-modt,am_tintinalli,ovid-lambrou,am_orthopedic,ovid-chsb,ovid-inds,ovid-cllm,am_ophthalmology,am_endocrinology,ovid-chos,ovid-danforth,ovid-wintrobe,ovid-a2514rhe,ovid-caap,ovid-drpl,am_otolaryngology,am_imboden,ovid-cppo,ovid-pppo,ovid-cpem,ovid-adhc,ovid-nettina,dsm-iv,ovid-merritt,ovid-mpre,ovid-lcap,ovid-dlvr,ovid-a2528irw,ovid-a2524sir,am_williams_hematology,oxfordmedicine,am_goodman,ovid-nogy,am_hurst,ovid-carpen,ovid-dambro,am_decherney,ovid-greenfield,ovid-bmap,am_hay,genereviews,ovid-topol,am_morgan,ovid-becker,ovid-clan,ovid-hmsn,ovid-goroll,am_ebert,am_williams,ovid-hnso,am_pulmonary,ovid-togy,ovid-fischbk,am_harrison,ovid-hosm,ovid-cgei,ovid-prgo,ovid-lndg,ovid-diki,ovid-topd,ovid-stbg,aapredbook,ovid-wallach,am_smith,am_hall_principles,naturalmedicines,am_lange,am_fca,ovid-oski,am_crawford,ovid-a2525pat,ovid-cimg,am_goldfrank"/>
+                    </map:generate>
+                    <map:generate type="file" src="cocoon://content/cached/search/textbooks-all.html"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="classpath:/xsl/metasearch.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="regex-parameter" pattern="^bioresearch-all$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:aggregate type="default" element="doc">
+                    <map:generate type="search-engine">
+                        <map:parameter name="timeout" value="0"/>
+                        <map:parameter name="engines" value="bioproconline,all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,ihop,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,protocolonline,clinicaltrials_all,proteome,cap,pubmed,stanford_clinicaltrials,lane,stanfordcorefacilities,biocompare,isi_biosis,crossdb,engineering_village1,sciencecitation,nature_protocols,uspto,centerwatch,ubcbioinfolinks,crosssearch1"/>
+                    </map:generate>
+                    <map:generate type="file" src="cocoon://content/cached/search/bioresearch-all.html"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="classpath:/xsl/metasearch.xsl"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="regex-parameter" pattern=".*images-all$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:aggregate type="default" element="doc"  ns="doc">
+                    <map:generate type="facet-copyright"/>
+                       <map:generate type="html" src="cocoon://content/cached/search/search-images.html"/>
+                   </map:aggregate>
+                   <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="classpath:/xsl/search-images.xsl"/>
+                   <map:serialize type="xml"/>
+            </map:match>
+            <!-- TODO is this error handling ever invoked? -->
+            <map:match pattern="search.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/error.html"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:match>
+        <map:match pattern="search/solr/facet-browse.html" type="wildcard">
+            <map:generate type="html" src="{content-base}/{0}"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="secure/admin/search.html" type="wildcard">
+             <map:match type="regex-parameter" pattern=".*images-all$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:aggregate type="default" element="doc"  ns="doc">
+                    <map:generate type="facet-copyright"/>
+                       <map:generate type="html" src="cocoon://content/cached/search/admin-search-images.html"/>
+                   </map:aggregate>
+                   <map:transform type="xinclude"/>
+                 <map:transform type="saxon" src="classpath:/xsl/search-images.xsl"/>
+              <map:serialize type="xml"/>
+            </map:match>
+         </map:match>
+        <!-- TODO: temporarily moving this out of caching pipeline because of intermittent NullPointerExceptioins -->
+        <map:match pattern="portals/cvicu.html" type="wildcard">
+            <map:generate type="html" src="{content-base}/portals/cvicu.html"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="random/**" type="wildcard">
+            <map:generate type="file" src="{1}"/>
+            <map:transform type="saxon" src="classpath:/xsl/random.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- To replace persistent.html login later -->
+        <map:match pattern="myaccounts.html" type="wildcard">
+            <map:generate type="html" src="{content-base}/myaccounts.html"/>
+            <map:transform src="classpath:/xsl/persistentlogin.xsl" type="saxon"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- med-history/search-form.html is to be used in an xinclude. If there is a q parameter, the
+            first pipeline in this match is invoked, xincluding the form and the metasearch results, otherwise
+            the second pipeline is invoked xincluding just the form -->
+        <map:match pattern="med-history/search-form.html" type="wildcard">
+            <map:match type="regex-parameter" pattern=".+">
+                <map:parameter name="parameter-name" value="query"/>
+                <map:aggregate type="default" element="doc">
+                    <map:generate type="search-engine">
+                        <map:parameter name="timeout" value="20000"/>
+                        <map:parameter name="engines" value="stanford-daily,pubmed_history,lmldb-history,cifdb-names,wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
+                    </map:generate>
+                    <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
+                </map:aggregate>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
+                <map:transform type="saxon" src="classpath:/xsl/history-search.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- TODO: maybe this following can be removed and the match of ** below will provide cached content -->
+            <map:generate type="html" src="{content-base}/{0}"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- TODO: find permanent home for this -->
+        <map:match type="wildcard" pattern="samples/flickr/results.html">
+            <map:generate type="file" src="{content-base}/{0}"/>
+            <map:transform type="xinclude"/>
+            <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="samples/spiritual.html" type="wildcard">
+            <map:generate type="html" src="{content-base}/{0}"/>
+            <map:transform type="link-with-cover"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="caching">
+        <!-- secure/login.html if the user doesn't have a javascript -->
+        <map:match pattern="secure/login.html" type="wildcard">
+            <map:generate type="html" src="{content-base}/index.html"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- secure/** generates an error unless used from a pipeline -->
+        <!-- FIXME: this no longer generates an error -->
+        <map:match pattern="secure/**" type="wildcard">
+            <map:generate type="html" src="{content-base}/secure/{1}"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{request-uri}"/>
+        <map:match pattern="ncbi-rss2html/**" type="wildcard">
+            <map:generate type="file" src="{1}"/>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="description"/>
+            </map:transform>
+            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
+            <map:generate type="file" src="{1}"/>
+            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon">
+                <map:parameter name="format" value="brief"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="caching">
+        <!-- this is so the liaisons selection by department works without javascript enabled -->
+        <map:parameter name="cache-key" value="{request-uri}?{query-string}"/>
+        <map:match type="wildcard" pattern="about/liaisons.html">
+            <map:generate type="html" src="{content-base}/about/liaisons.html"/>
+            <map:transform type="saxon" src="classpath:/xsl/selections.xsl">
+                <map:parameter name="cache-key" value=";selection={selection}"/>
+            </map:transform>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="caching">
+        <map:parameter name="cache-key" value="{sitemap-uri}"/>
+        <map:match type="wildcard" pattern="liaison-card/*.html">
+            <map:generate type="html" src="{content-base}/about/liaisons.html"/>
+            <map:transform type="saxon" src="classpath:/xsl/liaison-card.xsl">
+                <map:parameter name="liaison" value="{1}"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="caching">
+        <map:match type="regexp" pattern="^(announcement|error)\.html$">
+            <map:generate type="html" src="{content-base}/{1}.html"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- static documents cached and accessed via html generator -->
+        <map:match type="wildcard" pattern="cached/**">
+            <map:generate src="{content-base}/{1}" type="html"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="hours/*.xml" type="wildcard">
+            <map:generate type="hours"/>
+            <map:transform type="saxon" src="classpath:/xsl/hours.xsl">
+                <map:parameter name="cache-key" value=";{1}"/>
+                <map:parameter name="mode" value="{1}"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="templates/**.xml" type="wildcard">
+            <map:generate type="file" src="classpath:/templates/{1}.xml"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <!-- secure/** generates an error unless used from a pipeline -->
+        <!-- FIXME: this no longer generates an error -->
+        <map:match pattern="secure/**" type="wildcard">
+            <map:generate type="html" src="{content-base}/error.html"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="portals/*" type="wildcard">
+            <map:match pattern="portals/palliative-care.html" type="wildcard">
+                <map:generate type="html" src="{content-base}/portals/palliative-care.html"/>
+                <map:transform type="link-with-cover"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="classpath:/xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/youtubeAtom2Html-list.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="regexp" pattern="portals/(reference|rheumatology)\.html$">
+                <map:generate type="html" src="{content-base}/portals/{1}.html"/>
+                <map:transform type="link-with-cover"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="classpath:/xsl/rss2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:generate type="html" src="{content-base}/portals/{1}"/>
+            <map:transform type="link-with-cover"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="**" type="wildcard">
+            <map:generate type="html" src="{content-base}/{1}"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
+</map:sitemap>

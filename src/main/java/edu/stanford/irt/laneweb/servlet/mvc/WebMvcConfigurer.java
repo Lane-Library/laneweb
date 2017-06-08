@@ -8,12 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -21,7 +20,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -82,11 +80,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ServletContext servletContext)
+    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping()
             throws MalformedURLException {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         Map<String, Object> urlMap = new HashMap<>();
-        urlMap.put("/**/*.*", staticRequestHandler(servletContext));
+        urlMap.put("/**/*.*", staticRequestHandler());
         handlerMapping.setUrlMap(urlMap);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
         handlerMapping.setInterceptors(new Object[] { redirectHandlerInterceptor() });
@@ -124,10 +122,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public HttpRequestHandler staticRequestHandler(final ServletContext servletContext) {
+    public HttpRequestHandler staticRequestHandler() throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(
-                new Resource[] { new ServletContextResource(servletContext, "/"), new UrlResource(this.liveBase) }));
+        handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"), new ClassPathResource("/static/"), new UrlResource(this.liveBase) }));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

@@ -341,15 +341,33 @@
                 <directory>src/main/resources/config</directory>
                 <targetPath>config</targetPath>
                 <filtering>true</filtering>
-                <includes>
-                    <include>*.properties</include>
-                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/templates</directory>
+                <targetPath>templates</targetPath>
+                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
                     <exclude>config/*.properties</exclude>
+                    <exclude>templates/**</exclude>
                 </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/css</directory>
+                <targetPath>resources/css</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/javascript</directory>
+                <targetPath>resources/javascript</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/xsl</directory>
+                <targetPath>xsl</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -359,19 +377,6 @@
                 <version>3.1.0</version>
                 <configuration>
                     <webappDirectory>${project.build.directory}/laneweb</webappDirectory>
-                    <webResources>
-                        <resource>
-                            <directory>src/main/webapp/resources/templates</directory>
-                            <filtering>true</filtering>
-                            <targetPath>resources/templates</targetPath>
-                        </resource>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                            <excludes>
-                                <exclude>resources/templates/*</exclude>
-                            </excludes>
-                        </resource>
-                    </webResources>
                 </configuration>
             </plugin>
             <plugin>
@@ -400,9 +405,9 @@
                     <aggregations>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/laneweb/resources/css/lane-all.css</output>
+                            <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
                             <includes>
-                                <include>${basedir}/src/main/webapp/resources/css/yui.css</include>
+                                <include>${basedir}/src/main/css/yui.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
@@ -457,9 +462,9 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/laneweb/resources/javascript/lane-all.js</output>
+                            <output>${project.build.directory}/classes/resources/javascript/lane-all.js</output>
                             <includes>
-                                <include>${basedir}/src/main/webapp/resources/javascript/yui-3.18.1.js</include>
+                                <include>${basedir}/src/main/javascript/yui-3.18.1.js</include>
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
                                 <include>location-min.js</include>
@@ -523,7 +528,7 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/laneweb/resources/css/mobile/lane-mobile.css</output>
+                            <output>${project.build.directory}/classes/resources/css/mobile/lane-mobile.css</output>
                             <includes>
                                 <include>jquery.mobile.structure-1.4.0-min.css</include>
                                 <include>jquery-ui-1.10.4.custom-min.css</include>
@@ -533,7 +538,7 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/laneweb/resources/javascript/mobile/lane-mobile.js</output>
+                            <output>${project.build.directory}/classes/resources/javascript/mobile/lane-mobile.js</output>
                             <includes>
                                 <include>jquery-1.9.1-min.js</include>
                                 <include>jquery.mobile-1.4.0.custom-min.js</include>
@@ -550,16 +555,16 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/laneweb/resources/css/history/lane-history.css</output>
+                            <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>${basedir}/src/main/webapp/resources/css/history/yui.css</include>
+                                <include>${basedir}/src/main/css/history/yui.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/laneweb/resources/javascript/history/lane-history.js</output>
+                            <output>${project.build.directory}/classes/resources/javascript/history/lane-history.js</output>
                             <includes>
                                 <include>../golfclub-headings-min.js</include>
                                 <include>flickr-min.js</include>
@@ -574,7 +579,7 @@
                 <artifactId>grover-maven-plugin</artifactId>
                 <version>1.0.1</version>
                 <configuration>
-                    <testDir>src/main/webapp/resources/test</testDir>
+                    <testDir>src/test/javascript</testDir>
                 </configuration>
                 <executions>
                     <execution>
@@ -606,14 +611,14 @@
                 <version>1.6.0</version>
                 <configuration>
                     <directories>
-                        <directory>src/main/webapp/resources/javascript</directory>
+                        <directory>src/main/javascript</directory>
                     </directories>
                     <excludes>
-                        <exclude>src/main/webapp/resources/javascript/mobile/jquery-1.9.1.js</exclude>
-                        <exclude>src/main/webapp/resources/javascript/mobile/jquery-ui-1.10.4.custom.js</exclude>
-                        <exclude>src/main/webapp/resources/javascript/mobile/jquery.mobile-1.4.0.custom.js</exclude>
-                        <exclude>src/main/webapp/resources/javascript/swfobject.js</exclude>
-                        <exclude>src/main/webapp/resources/javascript/yui-3.18.1.js</exclude>
+                        <exclude>src/main/javascript/mobile/jquery-1.9.1.js</exclude>
+                        <exclude>src/main/javascript/mobile/jquery-ui-1.10.4.custom.js</exclude>
+                        <exclude>src/main/javascript/mobile/jquery.mobile-1.4.0.custom.js</exclude>
+                        <exclude>src/main/javascript/swfobject.js</exclude>
+                        <exclude>src/main/javascript/yui-3.18.1.js</exclude>
                     </excludes>
                 </configuration>
             </plugin>
