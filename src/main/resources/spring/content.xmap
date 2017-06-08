@@ -272,7 +272,7 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="templates/**.xml" type="wildcard">
-            <map:generate type="file" src="resources/templates/{1}.xml"/>
+            <map:generate type="file" src="classpath:/templates/{1}.xml"/>
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>

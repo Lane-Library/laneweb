@@ -77,7 +77,7 @@
         <map:match pattern="**.html" type="wildcard">
             <map:aggregate type="default" element="doc">
                 <map:generate type="file" src="{content-base}/m/{1}.html"/>
-                <map:generate type="file" src="resources/mobile/{template}.xml"/>
+                <map:generate type="file" src="classpath:/templates/mobile/{template}.xml"/>
             </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/mobile-content.xsl"/>
             <map:transform type="xinclude"/>
