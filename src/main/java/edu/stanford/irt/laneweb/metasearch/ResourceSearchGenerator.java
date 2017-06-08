@@ -11,23 +11,21 @@ import java.util.Objects;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources = Collections.emptySet();
 
-    public ResourceSearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
-        super(metaSearchManager, saxStrategy);
+    public ResourceSearchGenerator(final MetaSearchService metaSearchService, final SAXStrategy<Result> saxStrategy) {
+        super(metaSearchService, saxStrategy);
     }
 
     @Override
     public Result doSearch(final String query) {
         String q = query == null ? "" : query;
         Collection<String> enginesToRun = new HashSet<>();
-        Result describeResult = describe(new SimpleQuery(q), null);
+        Result describeResult = describe(q, null);
         Map<String, String> enginesMap = new HashMap<>();
         for (Result engine : describeResult.getChildren()) {
             String engineId = engine.getId();

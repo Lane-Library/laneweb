@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.trends;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -20,39 +17,27 @@ public class BookmarkTrendsReporter {
 
     private String localHostname;
 
+    /**
+     * @param bookmarkService
+     *            the bookmarkService to set
+     * @param googleTracker
+     *            the googleTracker to set
+     */
+    public BookmarkTrendsReporter(final BookmarkService bookmarkService, final GoogleTracker googleTracker,
+            final String localHostName) {
+        this.bookmarkService = bookmarkService;
+        this.googleTracker = googleTracker;
+        this.localHostname = localHostName;
+    }
+
     // daily at 1:16AM
     @Scheduled(cron = "0 16 01 * * *")
     public void reportCount() {
         try {
-            this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", getLocalHostname(), "dailyUserCount",
+            this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", this.localHostname, "dailyUserCount",
                     this.bookmarkService.getRowCount());
-        } catch (UnknownHostException | LanewebException e) {
+        } catch (LanewebException e) {
             LOG.error(e.getMessage(), e);
         }
-    }
-
-    /**
-     * @param bookmarkService
-     *            the bookmarkService to set
-     */
-    public void setBookmarkDAO(final BookmarkService bookmarkService) {
-        this.bookmarkService = bookmarkService;
-    }
-
-    /**
-     * @param googleTracker
-     *            the googleTracker to set
-     */
-    public void setGoogleTracker(final GoogleTracker googleTracker) {
-        this.googleTracker = googleTracker;
-    }
-
-    private String getLocalHostname() throws UnknownHostException {
-        if (null != this.localHostname) {
-            return this.localHostname;
-        }
-        InetAddress inetAddress = InetAddress.getLocalHost();
-        this.localHostname = inetAddress.getHostName();
-        return this.localHostname;
     }
 }
