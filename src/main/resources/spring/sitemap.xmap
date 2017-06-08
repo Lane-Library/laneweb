@@ -10,7 +10,7 @@
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="cookiesFetch.html" type="wildcard">
-            <map:generate type="file" src="classpath:/resources/cookiesFetch.html"/>
+            <map:generate type="file" src="classpath:/static/cookiesFetch.html"/>
             <map:transform type="saxon" src="classpath:/xsl/cookiesFetch.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
