@@ -1,0 +1,21 @@
+.calendar ul {
+    float: left;
+    margin-bottom: 12px;
+}
+
+.calendar li {
+    width: 138px;
+    height: 88px;
+    float: left;
+    margin-right: 2.6px;
+    padding: 6.5px;
+    box-sizing: border-box;
+    background-color: #09425a;
+    color: #fff;
+}
+
+.calendar li p {
+    line-height: normal;
+    font-weight: normal;
+    margin-top: .5em;
+}

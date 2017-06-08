@@ -1,0 +1,15 @@
+.yui3-accordion {
+    position: relative;
+    zoom: 1;
+}
+.yui3-accordion .yui3-accordion-item .yui3-accordion-item-bd {
+    height: 0;
+    overflow: hidden;
+    zoom: 1;
+}
+.yui3-accordion .yui3-accordion-item-active .yui3-accordion-item-bd {
+    height: auto;
+}
+.yui3-accordion-item-trigger {
+    cursor: pointer;
+}

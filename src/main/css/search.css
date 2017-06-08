@@ -1,0 +1,119 @@
+#yui-history-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+}
+.tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping, #showPubMedStrategies {
+    display: none;
+}
+#findIt.active, #spellCheck.active, #queryMapping.active {
+    display: inline;
+}
+#queryMapping span, #spellCheckLink, #findItLink {
+    padding-right: 25px;
+}
+#queryMapping .bookmark-link {
+    padding: 0;
+}
+.primaryLink {
+    font-size: 16px;
+}
+.popin {
+    height: 16px;
+}
+.popInLabel {
+    font-weight: bold;
+    padding-right: 25px;
+}
+#spellCheck .popInLabel {
+    padding-right: 5px;
+}
+#searchResults {
+    padding-top: 10px;
+}
+.lwSearchResults li {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+/* abstract and description related styles*/
+.description {
+    display: none;
+    position: relative;
+    top: -1px;
+    background-color: #f2f3ed;
+    border: 1px solid;
+    padding: 12px;
+}
+.descriptionTrigger {
+    cursor: pointer;
+    padding: 1px 5px;
+    border: 1px solid #ccc;
+}
+.descriptionTrigger .fa-eye {
+    color: #428bca;
+}
+li.active .descriptionTrigger {
+    background-color: #f2f3ed;
+    border: 1px solid;
+    padding: 0 12px;
+    border-bottom-color: #f2f3ed;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+li.active .description {
+    display: block;
+}
+
+.citation{
+    font-size: 11px;
+}
+.resultInfo span {
+    display: inline-block;
+    margin-right: 24px;
+}
+.resultInfo span:first-child {
+    min-width: 103px;
+    margin-right: 10px;
+}
+.results-nav {
+    background-color: #f7f3e5;
+    padding: 10px 5px 24px;
+    font-size: 11px;
+}
+.searchTerms {
+    text-transform: none;
+    font-weight: bold;
+    font-style: italic;
+}
+.rightSearchTips {
+    padding: 0 12px;
+    white-space: nowrap;
+}
+
+.rightSearchTips .heading {
+    font-weight: bold;
+    padding: 10px 0 5px;
+    border-bottom: solid 1px rgb(144,144,144);
+    margin-bottom: 4px;
+}
+
+.rightSearchTips ul {
+    padding-left: 0;
+}
+.content .rightSearchTips li {
+    padding: 3px 0 2px;
+    border-bottom: none;
+}
+.authors-hide {
+    display: none;
+}
+.authorsTrigger {
+    cursor: pointer;
+    padding:1px 5px; 
+    border: 1px solid #ccc;
+}

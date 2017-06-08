@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
-    stylesheet="../../main/webapp/resources/xsl/clinical-search.xsl">
+    stylesheet="../../main/xsl/clinical-search.xsl">
 
     <x:scenario label="test count and total">
         <x:context>

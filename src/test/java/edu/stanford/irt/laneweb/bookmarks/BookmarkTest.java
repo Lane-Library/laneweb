@@ -52,14 +52,10 @@ public class BookmarkTest {
         assertTrue(this.bookmark.equals(this.bookmark));
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testEqualsSameHashDifferentLabel() {
         assertFalse(this.bookmark.equals(new Bookmark("newlabel", this.url) {
 
-            /**
-             *
-             */
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -69,14 +65,10 @@ public class BookmarkTest {
         }));
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testEqualsSameHashDifferentUrl() {
         assertFalse(this.bookmark.equals(new Bookmark(this.label, "newurl") {
 
-            /**
-             *
-             */
             private static final long serialVersionUID = 1L;
 
             @Override

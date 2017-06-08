@@ -1,0 +1,75 @@
+/*---------------lightbox positioning-------------------------------------------------------*/
+.yui3-lightbox {
+    position: absolute;
+    z-index: 4;
+    margin-top: 13px;
+}
+
+.yui3-lightbox-hidden,.yui3-lightboxbg-hidden, .autoLightbox {
+    visibility: hidden;
+}
+
+.yui3-lightbox-content {
+    position: relative;
+}
+
+.yui3-lightboxbg {
+    position: fixed;
+    background-color: black;
+    opacity: .75;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    top: 0;
+}
+
+/*---------------feedback button graphic at the edge of a browser window----------------------*/
+.feedback-link {
+    position: fixed;
+    top: 45%;
+    right: 0;
+    z-index: 1;
+    border: 1px white solid;
+    border-radius: 3px 0 0 3px;
+    border-right: none;
+    box-sizing: content-box;
+    display: block;
+    background-color: #8c1515;
+    height: 115px;
+    width: 30px;
+}
+
+.feedback-link:hover {
+    background-color: rgb(38, 38, 38);
+}
+.feedback-link span{
+    color: white;
+    display: block;
+    position: relative;
+    top: 75px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+/*---------------the lightbox overall look (the same box for all lightboxes)------------------*/
+.yui3-lightbox #feedback,.yui3-lightbox #subscribe {
+    border-radius: 3px;
+    background-color: white;
+    padding: 36px;
+    text-align: left;
+    border: 1px solid #9e9d98;
+    box-sizing: border-box;
+}
+
+.yui3-lightbox #subscribe {
+    width: 540px;
+}
+
+.yui3-lightbox #feedback {
+    width: 824px;
+}

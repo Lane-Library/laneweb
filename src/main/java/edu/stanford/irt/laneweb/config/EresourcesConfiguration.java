@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +18,7 @@ import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 import org.springframework.oxm.Marshaller;
 
+import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -56,6 +58,10 @@ public class EresourcesConfiguration {
     private static final int FACETS_TO_SHOW_BROWSE = 20;
 
     private static final int FACETS_TO_SHOW_SEARCH = 4;
+
+    private static final int SOLR_CONNECT_TIMEOUT = 5_000;
+
+    private static final int SOLR_READ_TIMEOUT = 15_000;
 
     private FacetComparator facetComparator;
 
@@ -155,7 +161,8 @@ public class EresourcesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-with-cover")
     @Scope("prototype")
     public Transformer linkWithCoverTransformer() {
-        return new BibIDToEresourceTransformer(solrService(), linkWithCoverSAXStrategy());
+        return new BibIDToEresourceTransformer(solrService(), linkWithCoverSAXStrategy(), "link-with-cover",
+                new ExpiresValidity(Duration.ofHours(1).toMillis()));
     }
 
     @Bean
@@ -166,7 +173,10 @@ public class EresourcesConfiguration {
 
     @Bean(name = "laneSearchSolrServer")
     public SolrClient solrClient() {
-        return new HttpSolrClient(this.solrServerUrl);
+        HttpSolrClient solrClient = new HttpSolrClient(this.solrServerUrl);
+        solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
+        solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
+        return solrClient;
     }
 
     @Bean

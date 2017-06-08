@@ -1,0 +1,8 @@
+/* these are the default anchor styles*/
+a, a .fa {
+    color: #007c92;
+    text-decoration: none;
+}
+a:visited, a:active, a:hover {
+    color: #428bca;
+}

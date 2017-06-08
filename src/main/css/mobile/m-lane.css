@@ -1,0 +1,867 @@
+body {
+    visibility: hidden;
+}
+
+.ui-mobile-viewport{
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+    background: none repeat scroll 0 0 #ebebde;
+    text-align: center;
+    color: #333333;
+    text-shadow: 0 0 0 transparent;
+    visibility: visible;
+}
+
+.button-close a{
+        text-decoration: none;
+}
+
+.button-close span{
+    background: linear-gradient(#e82c2e, #940506) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #ffffff;
+    padding: 7px 12px 7px 7px;
+    z-index: 2;
+    padding-left: .4em;
+    padding-right: .4em;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    top: 12px;
+    left: -127px;
+    margin: 0;
+    border: 1px #cccccc solid;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.persistent{
+    margin: 10px;
+}
+
+ .ui-header,
+ .ui-content,
+ .ui-footer {
+    max-width: 225px;
+    background-color: #ffffff;
+ }
+
+.ui-content{
+      margin: 0 auto 20px auto;
+}
+
+.ui-mobile .ui-page-active {
+    overflow: hidden;
+    display: block;
+    padding-bottom: 80px;
+}
+
+.ui-link {
+    font-weight: normal;
+}
+
+.ui-link:hover, .ui-link:visited, .ui-link:active {
+    color: #000;
+}
+
+/*
+*
+*  Branding area at top of pages
+*
+*
+*/
+.brand {
+    width: 100%;
+    height: 45px;
+    box-sizing: border-box;
+    border-bottom: solid 1px #651006;
+    background: #bdbdbb;
+    background: linear-gradient(to bottom, #ffffff 0,#bdbdbb 100%);
+    position: relative;
+    z-index: 202;
+}
+
+.smLogo {
+    width: 105px;
+    height: auto;
+    margin: 10px 0 0 8px;
+    float: left;
+}
+
+.brand .subTitle {
+    display: block;
+    font-family: 'Arial', sans-serif;
+    font-size: 1em;
+}
+
+.brandedSiteName {
+    float: left;
+    border-left: solid 1px #9c9a90;
+    padding: 0 0 0 7px;
+    margin: 10px 0 0 8px;
+    font-family: 'Arial Narrow', sans-serif;
+    text-transform: uppercase;
+    color: #920000;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-shadow: 0 1px #ffffff;
+    line-height: .8em;
+    font-weight: bold;
+}
+
+.brandedSiteName .subTitle {
+    font-size: .5em;
+    color: #5c5b5a;
+    left: 2px;
+    position: relative;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.webauthLogin, .homeBtn.ui-link {
+    display: block;
+    float: right;
+    margin: 8px 8px 0 0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    height: 27px;
+    border: 1px solid #cbcbc3;
+    padding: 4px 12px;
+    background-color: #e8e7e3;
+    box-shadow: -1px 1px 1px #a9a59c;
+    text-align: center;
+    text-decoration: none;
+    color: #454442;
+    text-shadow: 1px 1px #ffffff;
+    font-size: 1.1em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    background: #eeedeb;
+    background: linear-gradient(to bottom, #eeedeb 0,#ccc8c5 50%,#bbb7b2 51%,#f2ede8 100%);
+}
+
+.homeBtn.ui-link {
+    float: left;
+    margin-left: 8px;
+    padding: 4px 8px 4px 6px;
+}
+
+.webauthLogin.ui-link:active,.homeBtn.ui-link:active {
+    background: #f2ede8;
+    background: linear-gradient(to bottom, #f2ede8 0,#bbb7b2 50%,#ccc8c5 51%,#eeedeb 100%);
+    box-shadow: 0 0 8px #fff;
+}
+
+/*
+*
+*  Search area
+*
+*
+*/
+.search {
+    position: absolute;
+    z-index: 51;
+    background-color: #620b09;
+    clear: right;
+    top: 45px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 0 6px #b5b5ab;
+}
+
+.search form {
+    background: linear-gradient(to bottom, #de2a29 0,#762625 50%,#620b09 51%,#620b09 100%);
+    margin: 0;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+}
+
+.search form:nth-child(2),.search form:nth-child(3) {
+    background: #620b09;
+    background: linear-gradient(to bottom, #de2a29 0,#762625 13%,#620b09 14%,#620b09 100%);
+}
+
+.search form.selected {
+    transition: opacity .3s ease-in;
+    height: auto;
+    opacity: 1;
+}
+
+.search legend {
+    display: none;
+}
+
+.search fieldset {
+    border: medium none;
+    margin: 0;
+}
+
+.search form:nth-child(2) legend {
+    margin-left: 33%;
+}
+
+.search form:nth-child(3) legend {
+    margin-left: 65%;
+    width: 35.5%;
+}
+
+input[type='text'] {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #ffffff;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0 3px 5px #a3a1a1 inset;
+    font-size: 1.3em;
+    margin: 10px 0;
+    padding: 6px 0 4px 25px;
+    background: url('../../images/mobile/search_bg.png') no-repeat 5px 6px #ffffff;
+    line-height: 1.5em;
+    background-size: 18px;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    position: relative;
+    left: -1px;
+    display: none;
+    box-sizing: border-box;
+}
+
+.search form.selected input {
+    display: block;
+}
+
+.search .ui-input-search {
+    width: 97%;
+    background: none repeat scroll 0 0 transparent;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+    border: none;
+}
+
+.search .ui-btn-corner-all {
+    border-radius: 0;
+    border: medium none;
+    box-shadow: 0 0 0 transparent;
+}
+
+.search input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.search .ui-input-has-clear {
+    padding: 0;
+}
+
+.ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear {
+    background: url('../../images/mobile/clear_search.png') no-repeat right top transparent;
+    background-size: 100%;
+    margin-top: -9px;
+    right: 5px;
+    width: 19px;
+    height: 19px;
+    text-decoration: none;
+}
+
+.ui-icon-delete {
+    background: none repeat scroll 0 0 transparent;
+    border-radius: 0;
+    box-shadow: 0 0 0 transparent;
+}
+
+.search label {
+    display: none;
+}
+
+.searchSubmit {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.ui-icon-searchfield::after {
+    background: none;
+}
+
+/*
+*
+*  Autocomplete for search boxes
+*
+*
+*/
+.ui-autocomplete {
+    width: 100%;
+    padding: 9px 0 0;
+    box-sizing: border-box;
+    text-align: left;
+    border-bottom: 1px solid #ababab;
+}
+
+.ui-menu-item:first-child {
+    border-top: medium none;
+}
+
+.ui-menu-item:last-child {
+    border-bottom: 2px solid #b5b5ab;
+}
+
+.ui-menu-item {
+    box-sizing: border-box;
+    background-color: #ebebde;
+    border-left: 1px solid #ababab;
+    border-right: 2px solid #b5b5ab;
+    border-top: 1px solid #ababab;
+    font-size: 1.2em;
+}
+
+.ui-menu .ui-menu-item a:active {
+    color: #fff;
+    background-color: #b7b8b0;
+    border-radius: 0;
+}
+
+/*
+*
+*  Tabs below the search box on the homepage, which allow for switching between Lane, Clinical, and Pediatric searches
+*
+*
+*/
+.searchTabs {
+    background: #e7d79f;
+    background: linear-gradient(to bottom, #e7d79f 0,#9f9065 100%);
+    display: block;
+    width: 100%;
+    position: relative;
+    list-style: none;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ffffff;
+    float: left;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.searchTabs li {
+    display: block;
+    float: left;
+    width: 33.5%;
+    height: 105px;
+    padding: 86px 0 0;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #084676;
+    margin: 0;
+    text-align: center;
+    background: url('../../images/mobile/icon_sprite.png') no-repeat center 11px transparent;
+    background-size: 70px;
+    position: relative;
+}
+
+.searchTabs li.selected,.searchTabs li:active {
+    background-color: #620b09;
+    color: #ffffff;
+}
+
+.searchTabs li:after,.searchTabs li:before {
+    content: ' ';
+    background: #e7d79f;
+    background: linear-gradient(to bottom, #e7d79f 0,#9f9065 100%);
+    width: 4%;
+    height: 105px;
+    position: absolute;
+    top: 0;
+}
+
+.searchTabs li:nth-child(2):before {
+    left: -3px;
+}
+
+.searchTabs li.selected:after,
+.searchTabs li.selected:before,
+.searchTabs li:active:after,
+.searchTabs li:active:before {
+    display: none;
+}
+
+.searchTabs li:nth-child(2):active:after,
+.searchTabs li:nth-child(3):active:before {
+    content: ' ';
+    background: none repeat scroll 0 0 #620b09;
+    width: 5%;
+    height: 105px;
+    position: absolute;
+    top: 0;
+    right: -3px;
+    color: #fff;
+    display: block;
+    border-radius: 0;
+}
+
+.searchTabs li:nth-child(3):active:before {
+    left: -2px;
+    width: 2%;
+}
+
+.searchTabs li:after {
+    border-radius: 0 8px 0 0;
+    right: -4%;
+    z-index: 7;
+}
+
+.searchTabs li:before {
+    border-radius: 8px 0 0 0;
+    left: -4%;
+}
+
+.searchTabs li:nth-child(1) {
+    background-position: center -128px;
+}
+
+.searchTabs li.selected:nth-child(1) {
+    background-position: center 11px;
+}
+
+.searchTabs li:nth-child(2) {
+    background-position: center -408px;
+}
+
+.searchTabs li.selected:nth-child(2) {
+    background-position: center -268px;
+}
+
+.searchTabs li:nth-child(3) {
+    background-position: center -688px;
+    position: relative;
+    width: 33%;
+    right: -2px;
+}
+
+.searchTabs li.selected:nth-child(3) {
+    background-position: center -548px;
+}
+
+/*
+*
+*  List of links on homepage and on secondary pages
+*
+*
+*/
+.resourceList {
+    position: relative;
+    margin: 175px auto 0 auto;
+    padding: 0;
+    list-style: none;
+    width: 90%;
+    box-sizing: border-box;
+}
+
+.resourceList li {
+    box-shadow: 0 4px 6px #b5b5ab;
+    background-color: #ffffff;
+    display: block;
+    font-weight: bold;
+    padding: 0;
+    text-align: left;
+    font-size: 1.4em;
+    border-bottom: 1px solid #ababab;
+    color: #000000;
+}
+
+.resourceList li:first-child {
+    background: #fff;
+    background: linear-gradient(to bottom, #fefffa 0,#f5f5f5 15%,#f5f5f5 16%,#ffffff 60%);
+    border-radius: 8px 8px 0 0;
+}
+
+.resourceList .rlLabel {
+    border-bottom: medium none;
+    color: #464646;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 11px;
+    text-align: center;
+    width: 48%;
+    box-sizing: border-box;
+}
+
+.resourceList a,.resourceList a:link,.resourceList a:visited {
+    color: #000000;
+    text-decoration: none;
+    display: block;
+    padding: 8px 51px 8px 24px;
+    font-weight: bold;
+}
+
+.resourceList a:active {
+    color: #fff;
+    background-color: #b7b8b0;
+}
+
+.resourceList li:first-child a:active {
+    border-radius: 8px 8px 0 0;
+}
+
+.resourceList li:last-child a:active {
+    border-radius: 0 0 8px 8px;
+}
+
+.resourceList .newWindow, .resourceList .sameWindow {
+    background-image: url('../../images/mobile/link_bg_sprite.png');
+    background-size: 36px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+.newWindow {
+    background-position: right -39px;
+}
+
+.sameWindow {
+    background-position: right 11px;
+}
+
+.resourceList li:last-child {
+    background: #ffffff;
+    background: linear-gradient(to bottom, #ffffff 0,#ffffff 15%,#ffffff 16%,#f5f3f4 90%,#f5f3f4 91%,#fffefa 100%);
+    border-bottom: medium none;
+    border-radius: 0 0 8px 8px;
+}
+
+/*
+*
+*  Expandable section for hours of operation
+*
+*
+*/
+.hours {
+    margin: 20px auto;
+    width: 265px;
+    text-align: left;
+    height: 20px;
+}
+
+.todays-hours {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0 0 5px 20px;
+}
+
+.todays-hours:before {
+    content: '+';
+    font-weight: bold;
+    padding: 1px;
+    line-height: .6em;
+    font-size: 1.4em;
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    display: block;
+    float: left;
+    border: 1px solid #9e9d98;
+    color: #620b09;
+    background: #fdfcf9;
+    background: linear-gradient(to bottom, #fdfcf9 0,#f1ede2 2%,#ede9dd 3%,#f2ede8 98%,#b4b0a3 99%,#a7a395 100%);
+    text-shadow: 0 1px #f4f3ef;
+    margin: 0 8px 0 0;
+}
+
+.expanded .todays-hours:before {
+    content: '-';
+    font-weight: normal;
+    padding: 1px 1px 5px 3px;
+    line-height: .3em;
+    font-size: 1.8em;
+}
+
+.hours dl {
+    font-size: 1em;
+    width: 100%;
+}
+
+.hours-container {
+    height: 0;
+    opacity: 0;
+    margin-left: 42px;
+}
+
+.hours dt {
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+    vertical-align: top;
+}
+
+.hours dd {
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+}
+
+.hours .calTitle {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/*
+*
+*  Row of buttons below the hours of operation: Phone, Directions, Ask Us
+*
+*
+*/
+.contactButtons {
+    margin: 20px auto;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.contactButtons li {
+    display: inline;
+    margin-right: 4px;
+}
+
+.contactButtons li:last-child {
+    margin: 0;
+}
+
+.contactButtons li a,
+.contactButtons li a:link,
+.contactButtons li a:visited,
+.contactButtons li a:hover,
+.askUsBtn.ui-link,
+.askUsBtn.ui-link:link,
+.askUsBtn.ui-link:visited,
+.askUsBtn.ui-link:hover {
+    border: 1px solid #9e9d98;
+    border-radius: 6px;
+    padding: 8px;
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    background: #fdfcf9;
+    background: linear-gradient(to bottom, #fdfcf9 0,#f1ede2 2%,#ede9dd 50%,#c4c0b2 98%,#b4b0a3 99%,#a7a395 100%);
+    text-shadow: 0 1px #f4f3ef;
+    position: relative;
+}
+
+.contactButtons li a:active,
+.askUsBtn.ui-link:active {
+    background: #a7a395;
+    background: linear-gradient(to bottom, #a7a395 0,#b4b0a3 2%,#c4c0b2 3%,#ede9dd 98%,#f1ede2 99%,#fdfcf9 100%);
+    box-shadow: 0 0 8px #fff;
+}
+
+ .askUsBtn.ui-link,
+ .askUsBtn.ui-link:link,
+ .askUsBtn.ui-link:visited,
+ .askUsBtn.ui-link:active,
+ .askUsBtn.ui-link:hover {
+    float: right;
+    margin: 67px 6% 0 0;
+    padding: 7px;
+    width: 42%;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+/*
+*
+*  Row of buttons below the hours of operation: Phone, Directions, Ask Us
+*
+*
+*/
+.footer {
+    margin-top: 60px;
+    background-color: #6e6a60;
+    padding: 19px 5px 16px 5px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer .ui-link {
+    color: #ffffff;
+    font-size: .9em;
+    text-decoration: none;
+}
+
+.footer a:active {
+    text-decoration: underline;
+}
+
+.footer a:first-child {
+    float: left;
+    margin-left: 3%;
+}
+
+.footer a:last-child {
+    text-transform: uppercase;
+    float: right;
+    margin-right: 5%;
+}
+
+/*
+*
+*  Secondary pages
+*
+*
+*/
+.secondary {
+    position: relative;
+}
+
+.secondary .resourceList {
+    margin-top: 67px;
+}
+
+.secondary .footer {
+    margin-top: 20px;
+}
+
+.pageName {
+    color: #920000;
+    font-family: 'Arial Narrow', sans-serif;
+    font-size: 1.6em;
+    line-height: .8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    left: 50%;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    margin-left: -115px;
+    position: absolute;
+    width: 205px;
+    text-shadow: 1px 1px #ffffff;
+    font-weight: bold;
+}
+
+/*
+*
+*  Overlay mask that appears when clinical search and pediatrics search are displayed
+*
+*
+*/
+.overlayMask {
+    background-color: #000000;
+    left: 0;
+    opacity: .4;
+    position: absolute;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+}
+
+/*
+*
+*  Search results page
+*
+*
+*/
+.results {
+    list-style: none;
+    margin: 0;
+    background-color: #fff;
+    padding: 51px 0 0;
+}
+
+.results li:first-child {
+    background: none repeat scroll 0 0 #ebebde;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 8px;
+    padding: 13px 46px 10px 10px;
+}
+
+.results li {
+    padding: 5px 5px 18px 10px;
+    text-align: left;
+    font-size: 1.2em;
+    color: #656565;
+}
+
+.results li a:first-child {
+    padding-right: 46px;
+    background: url('../../images/mobile/link_bg_sprite.png') no-repeat right -42px transparent;
+    background-size: 32px;
+    overflow: visible;
+}
+
+.results .resultsNav {
+    text-align: right;
+}
+
+.resultsNav a {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.results a,.results .ui-link {
+    display: block;
+    color: #184b73;
+}
+
+.more {
+    text-decoration: none;
+}
+
+.results {
+    min-height: 415px;
+}
+
+.results .spell {
+    color: #ff6600;
+    padding-bottom: 10px;
+}
+
+.results .spell a {
+    display: inline;
+    font-weight: bold;
+}
+
+/*
+*
+*  Abstract/info page
+*
+*
+*/
+.absInfo {
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 50px;
+    text-align: left;
+    font-size: 1.25em;
+    min-height: 415px;
+}
+
+.absInfo a {
+    color: #2489ce;
+}
+
+.pubInfo {
+    font-weight: bold;
+}
+
+.rDesc {
+    padding-top: 10px;
+}
+
+/*
+* override jquery image location
+*/
+/* loading icon */
+.ui-loader .ui-icon-loading {
+    background-image: url('../../images/mobile/ajax-loader.gif');
+    width: 46px;
+    height: 46px;
+}
+
+.ui-loader {
+    opacity: .7;
+}

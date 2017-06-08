@@ -7,7 +7,6 @@ import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
-import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -19,8 +18,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
 
     private String timeout;
 
-    public SearchGenerator(final MetaSearchManager metaSearchManager, final SAXStrategy<Result> saxStrategy) {
-        super(metaSearchManager, saxStrategy);
+    public SearchGenerator(final MetaSearchService metaSearchService, final SAXStrategy<Result> saxStrategy) {
+        super(metaSearchService, saxStrategy);
     }
 
     @Override
@@ -55,6 +54,6 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> impleme
                 wait = DEFAULT_TIMEOUT;
             }
         }
-        return search(new SimpleQuery(query), engines, wait);
+        return search(query, engines, wait);
     }
 }

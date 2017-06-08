@@ -1,0 +1,45 @@
+.bookmark-instructions {
+    border: 1px solid #dadad8;
+}
+
+.bookmark-instructions .hd {
+    font-weight: bold;
+    border-top: 11px solid #e8e8e8;
+}
+
+.bookmark-instructions .hd div {
+    height: 25px;
+    width: 202px;
+    text-align: center;
+    padding: 4px;
+    box-sizing: border-box;
+    margin: -11px auto -16px auto;
+    background-color: #e8e8e8;
+    border-radius: 16px;
+}
+
+.bookmark-instructions .hd .bookmark-instructions-hide {
+    margin-bottom: 0;
+}
+
+.bookmark-instructions .fa {
+    color: black;
+    margin: 0 10px;
+}
+
+.bookmark-instructions-hide,.yui3-accordion-item.yui3-accordion-item-active .bookmark-instructions-show {
+    display: none;
+}
+
+.bookmark-instructions-show,.yui3-accordion-item.yui3-accordion-item-active .bookmark-instructions-hide {
+    display: block;
+}
+
+.bookmark-instructions .nomodule {
+    padding: 12px;
+}
+
+/*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
+.bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE {
+    display: none;
+}

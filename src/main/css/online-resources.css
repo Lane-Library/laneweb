@@ -1,0 +1,47 @@
+#resources-header{
+    text-align: center;
+    margin-top: 12px;
+}
+#resources-header a{
+    font-size: 16px;
+}
+#browseTabs{
+    background-color: #c1c1c1;
+    padding: 12px 22px;
+    position: relative;
+    margin-bottom: 12px;
+}
+#browseTabs li{
+    border-bottom: 0;
+    display: inline-block;
+    padding: 0;
+}
+#browseTabs li:before{
+    content: '\2022';
+    position: absolute;
+    margin-left: -1px;
+    top: 13px;
+}
+#browseTabs li:first-child:before{
+    content: '';
+}
+#browseTabs:after{
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+#browseTabs a{
+    display: inline-block;
+    width: 35px;
+}
+
+.eresources{
+    margin: 12px 0 0;
+    padding-bottom: 4px;
+}
+
+.solrSearch .eresources{
+    margin-top: 0;
+}

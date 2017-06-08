@@ -43,9 +43,8 @@ public class EresourceSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException, IOException {
-        expect(this.eresource.getScore()).andReturn(1f);
         expect(this.eresource.getId()).andReturn("2");
-        expect(this.eresource.getRecordId()).andReturn(3);
+        expect(this.eresource.getRecordId()).andReturn("3");
         expect(this.eresource.getRecordType()).andReturn(Resource.RECORD_TYPE);
         expect(this.eresource.getTitle()).andReturn(Resource.TITLE);
         expect(this.eresource.getDescription()).andReturn("");
@@ -100,7 +99,6 @@ public class EresourceSAXStrategyTest {
     @Test
     public void testToSAXThrowsException() throws SAXException {
         XMLConsumer consumer = createMock(XMLConsumer.class);
-        expect(this.eresource.getScore()).andReturn(1f);
         consumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(consumer, this.eresource);

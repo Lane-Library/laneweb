@@ -1,0 +1,55 @@
+#laneHeader{
+    background-color: white;
+    font-size: 14px;
+}
+#laneHeader .centered{
+    position: relative;
+}
+h1 {
+    font-size: 26px;
+    padding: 24px 0 24px 0;
+    color: #820000;
+    background-image: url(../images/lane-logo.png);
+    background-repeat: no-repeat;
+    background-position: 0 20px;
+}
+
+h1 span {
+    color: black;
+}
+
+h1 a {
+    color: #820000;
+    padding-left: 68px;
+}
+
+h1 a:visited {
+    color: #820000;
+}
+
+h1 a:hover {
+    text-decoration: underline;
+}
+
+#login {
+    position: absolute;
+    right: 0;
+    top: 0.8em;
+    vertical-align: text-bottom;
+}
+
+#libraryContact {
+    top: 54px;
+    white-space: nowrap;
+    position: absolute;
+    right: 0;
+}
+
+#libraryContact > li,#login > li {
+    float: left;
+    padding: 0 12px;
+}
+
+#libraryContact .live-chat {
+    padding-left: 50px;
+}

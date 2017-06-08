@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Cookies Fetch</title>
+</head>
+<body>
+<script type="text/javascript">
+<!--
+
+var userAgent = navigator.userAgent;
+  if(userAgent.indexOf("Firefox")>-1 || userAgent.indexOf("Chrome")>-1 || userAgent.indexOf("Opera")>-1)
+  {
+        document.write("<IFRAME SRC='"+entryUrl.replace(/&amp;/g,"&")+"' onload='redirect()' name='session' frameborder='0' height='0' width='0'><\/IFRAME>");  
+  }
+  else
+  {
+        var popupWindows=window.open(entryUrl.replace(/&amp;/g,"&"),'sessionWindows','directories=no,menubar=no,toolbar=no,scrollbars=no,height=1,width=1,location=yes,left=85,top=120');
+        if (popupWindows){
+                        window.focus() ;
+                        setTimeout("redirect()",4000);
+                        setTimeout("popupWindows.close()",4000);}
+        else {
+                        document.write("<p>In order for this automated script to work you must enable pop-ups<\/p>");
+                }
+  }
+
+  function redirect(){
+        document.location.href= url.replace(/&amp;/g,"&"); 
+  }
+-->
+</script>
+<p>Please wait while this page redirects you. If the redirect fails, please let us know: <a href="/help/feedback.html#askus" rel="lightbox">Contact us</a>.</p>
+</body>
+</html>

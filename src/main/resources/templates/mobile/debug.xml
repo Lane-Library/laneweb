@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Lane Medical Library</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width,maximum-scale=1.0,minimum-scale=1.0" />
+        <link rel="icon" type="image/png" href="/favicon.ico" />
+        <link rel="apple-touch-icon-precomposed" href="http://lane.stanford.edu/apple-touch-icon.png" />
+        
+        <link rel="stylesheet" type="text/css" href="/resources/css/mobile/jquery.mobile.structure-1.4.0.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/mobile/jquery-ui-1.10.4.custom.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/mobile/m-lane.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/mobile/m-buttons.css" />
+         
+    </head>
+    <body>
+        
+        <?laneweb content?>
+               
+        <div class="footer2copy">
+            <a href="http://stanfordmedicine.stanford.edu/">&#169; <?laneweb current-year?> Stanford Medicine</a>
+            <a id="desktop-url" rel="external" href="/index.html?site_preference=normal">Full Version</a>
+        </div>
+
+        <script type="text/javascript" id="model">//</script>
+        <script type="text/javascript" src="/resources/javascript/mobile/jquery-1.9.1.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/jquery.mobile-1.4.0.custom.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/jquery-ui-1.10.4.custom.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-lane.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-cookie.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-hours.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-persistentlogin.js"></script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-search.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-spellcheck.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-suggest.js"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/m-tracking.js"> </script>
+    </body>
+</html>

@@ -27,9 +27,6 @@ public class Eresource {
     @Field
     private String id;
 
-    @Field
-    private Boolean isCore;
-
     @Transient
     private Collection<Link> linksList = new ArrayList<>();
 
@@ -43,12 +40,10 @@ public class Eresource {
     private String publicationText;
 
     @Field
-    private int recordId;
+    private String recordId;
 
     @Field
     private String recordType;
-
-    private float score;
 
     @Field
     private String title;
@@ -58,9 +53,6 @@ public class Eresource {
 
     @Field
     private String versionsJson;
-
-    @Field
-    private int year;
 
     protected Eresource() {
         // spring-data-solr mapping needs this constructor
@@ -97,16 +89,12 @@ public class Eresource {
         return this.publicationText;
     }
 
-    public int getRecordId() {
+    public String getRecordId() {
         return this.recordId;
     }
 
     public String getRecordType() {
         return this.recordType;
-    }
-
-    public float getScore() {
-        return this.score;
     }
 
     public String getTitle() {
@@ -119,10 +107,6 @@ public class Eresource {
 
     public String getVersionsJson() {
         return this.versionsJson;
-    }
-
-    public int getYear() {
-        return this.year;
     }
 
     public void setDescription(final String description) {
@@ -141,16 +125,12 @@ public class Eresource {
         this.publicationText = publicationText;
     }
 
-    public void setRecordId(final int recordId) {
+    public void setRecordId(final String recordId) {
         this.recordId = recordId;
     }
 
     public void setRecordType(final String recordType) {
         this.recordType = recordType;
-    }
-
-    public void setScore(final float score) {
-        this.score = score;
     }
 
     public void setTitle(final String title) {
@@ -161,14 +141,9 @@ public class Eresource {
         this.versionsJson = versionsJson;
     }
 
-    public void setYear(final Integer year) {
-        this.year = year;
-    }
-
     @Override
     public String toString() {
-        return new StringBuilder("title:").append(this.title).append(" score:").append(this.score).append(" updated:")
-                .append(" versions:").append(this.linksList).toString();
+        return new StringBuilder("title:").append(this.title).append(" versions:").append(this.linksList).toString();
     }
 
     private void parseLink(final Map<String, Object> jsonLink, final Map<String, Object> versionMap,
