@@ -617,7 +617,6 @@
                         <exclude>src/main/javascript/mobile/jquery-1.9.1.js</exclude>
                         <exclude>src/main/javascript/mobile/jquery-ui-1.10.4.custom.js</exclude>
                         <exclude>src/main/javascript/mobile/jquery.mobile-1.4.0.custom.js</exclude>
-                        <exclude>src/main/javascript/swfobject.js</exclude>
                         <exclude>src/main/javascript/yui-3.18.1.js</exclude>
                     </excludes>
                 </configuration>
