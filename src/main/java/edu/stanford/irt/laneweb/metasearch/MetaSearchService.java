@@ -13,9 +13,6 @@ import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
-/**
- * @author ceyates
- */
 public class MetaSearchService {
 
     private ConfigurableApplicationContext context;

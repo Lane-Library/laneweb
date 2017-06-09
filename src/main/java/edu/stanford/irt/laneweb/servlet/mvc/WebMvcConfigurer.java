@@ -80,8 +80,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping()
-            throws MalformedURLException {
+    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping() throws MalformedURLException {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         Map<String, Object> urlMap = new HashMap<>();
         urlMap.put("/**/*.*", staticRequestHandler());
@@ -124,7 +123,8 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public HttpRequestHandler staticRequestHandler() throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"), new ClassPathResource("/static/"), new UrlResource(this.liveBase) }));
+        handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"),
+                new ClassPathResource("/static/"), new UrlResource(this.liveBase) }));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
