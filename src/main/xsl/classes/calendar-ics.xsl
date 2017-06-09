@@ -36,9 +36,9 @@ X-WR-CALDESC:Lane Medical Library offers an array of courses and presentations, 
 			 <xsl:when test="$class-id">
 				<xsl:apply-templates select="class[ id/text() = $class-id]"/>
 			</xsl:when> 
-			 <!-- <xsl:when test="$email">
-				<xsl:call-templates select="class[./instructors//instructor/email = $email]"/>
-			</xsl:when> -->
+			<xsl:when test="$email">
+				<xsl:apply-templates select="class[./instructors//instructor/email = $email]"/>
+			</xsl:when>
 		 	<xsl:otherwise> 
 				<xsl:apply-templates select="class"/>
 			 </xsl:otherwise> 

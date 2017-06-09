@@ -5,14 +5,8 @@
     <map:pipeline type="noncaching">
         <map:match pattern="all-open-by-category.xml" type="wildcard">
             <map:generate type="file" src="http://localhost:9090/find/allOpen/{id}"/>
-           <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description"/>
-            </map:transform>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="handout"/>
-            </map:transform>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="bio"/>
+           	<map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="description,handout,bio"/>
             </map:transform>
             <map:transform type="saxon" src="classpath:/xsl//classes/laneclasses.xsl"/>
             <map:serialize type="xml"/>
@@ -20,30 +14,18 @@
         
         <map:match pattern="class.xml" type="wildcard">
             <map:generate type="file" src="http://localhost:9090/find/{class-id}"/>
-             <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description"/>
-            </map:transform>
             <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="handout"/>
-            </map:transform>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="bio"/>
+                <map:parameter name="elementName" value="description,handout,bio"/>
             </map:transform>
             <map:transform type="saxon" src="classpath:/xsl//classes/laneclass.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         	<map:match pattern="archive-category.xml" type="wildcard">
             <map:generate type="file" src="http://localhost:9090/find/archive/{id}?sort={sort}"/>
-           		<map:transform type="textNodeParser">
-	                <map:parameter name="elementName" value="description"/>
-	            </map:transform>
-	            <map:transform type="textNodeParser">
-	                <map:parameter name="elementName" value="handout"/>
-	            </map:transform>
-	            <map:transform type="textNodeParser">
-	                <map:parameter name="elementName" value="bio"/>
-	            </map:transform>
-	            <map:transform type="saxon" src="classpath:/xsl//classes/archives.xsl"/>
+           	<map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="description,handout,bio"/>
+            </map:transform>
+            <map:transform type="saxon" src="classpath:/xsl//classes/archives.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
        
@@ -52,7 +34,7 @@
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
         <!-- Classes Menu  to display only -->
-        <map:parameter name="cache-key" value="{0}:{class-id}"/>
+        <map:parameter name="cache-key" value="{0}:class={class-id};email={email};id={id}"/>
         <map:match pattern="menu/archives.html" type="wildcard">
             <map:aggregate type="default" element="doc">
                 <map:generate type="file" src="cachedxml:60:http://localhost:9090/find/archive/all"/>
@@ -69,9 +51,9 @@
             <map:transform type="saxon" src="classpath:/xsl//classes/menu.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="calendar.xml" type="wildcard">
+        <map:match pattern="calendar.ics" type="wildcard">
             <map:generate type="file" src="cachedxml:60:http://localhost:9090/find/all"/>
-             <map:transform type="textNodeParser">
+            <map:transform type="textNodeParser">
                 <map:parameter name="elementName" value="description"/>
             </map:transform>
             <map:transform type="saxon" src="classpath:/xsl//classes/calendar-ics.xsl"/>
@@ -90,13 +72,7 @@
         <map:match pattern="archive.xml" type="wildcard">
             <map:generate type="file" src="cachedxml:60:http://localhost:9090/find/{class-id}"/>
             <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description"/>
-            </map:transform>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="handout"/>
-            </map:transform>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="bio"/>
+                <map:parameter name="elementName" value="description,handout,bio"/>
             </map:transform>
             <map:transform type="saxon" src="classpath:/xsl//classes/archive.xsl"/>
             <map:serialize type="xml"/>
