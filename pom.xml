@@ -45,8 +45,9 @@
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
+        <sonar.sources>src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css</sonar.exclusions>
-        <sonar.javascript.lcov.reportPath>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
+        <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
         <dependency>
