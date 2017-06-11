@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,9 +33,10 @@ public class HTMLBookmarkController extends BookmarkController {
     @RequestMapping(params = "action=add")
     public String addBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
-            @ModelAttribute(Model.USER_ID) final String userid) {
+            @ModelAttribute(Model.USER_ID) final String userid,
+            final HttpSession session) {
         bookmarks.add(0, new Bookmark("", ""));
-        saveLinks(userid, bookmarks);
+        saveLinks(userid, bookmarks, session);
         return editBookmark(redirectAttrs, 0);
     }
 
@@ -46,9 +49,10 @@ public class HTMLBookmarkController extends BookmarkController {
     public String deleteBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
-            @RequestParam final int i) {
+            @RequestParam final int i,
+            final HttpSession session) {
         bookmarks.remove(i);
-        saveLinks(userid, bookmarks);
+        saveLinks(userid, bookmarks, session);
         return this.redirectURI;
     }
 
@@ -62,10 +66,13 @@ public class HTMLBookmarkController extends BookmarkController {
     @RequestMapping(params = "action=save")
     public String saveBookmark(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
-            @ModelAttribute(Model.USER_ID) final String userid, @RequestParam final int i,
-            @RequestParam final String label, @RequestParam final String url) {
+            @ModelAttribute(Model.USER_ID) final String userid,
+            @RequestParam final int i,
+            @RequestParam final String label,
+            @RequestParam final String url,
+            final HttpSession session) {
         bookmarks.set(i, new Bookmark(label, url));
-        saveLinks(userid, bookmarks);
+        saveLinks(userid, bookmarks, session);
         return this.redirectURI;
     }
 }
