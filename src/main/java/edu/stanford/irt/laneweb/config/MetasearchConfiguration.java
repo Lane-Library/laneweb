@@ -32,6 +32,7 @@ import edu.stanford.irt.laneweb.metasearch.EngineSearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.FilePathTransformer;
 import edu.stanford.irt.laneweb.metasearch.HTTPMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
+import edu.stanford.irt.laneweb.metasearch.SpringContextMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetasearchResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.PagingSearchResultListSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.ResourceResultSAXStrategy;
