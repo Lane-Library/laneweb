@@ -25,13 +25,13 @@ public class JDBCBookmarkService implements BookmarkService {
 
     private static final int BYTES = 2;
 
-    private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE ID = ?";
+    private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
 
-    private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (ID, BOOKMARKS) VALUES (?, ?)";
+    private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (SUNETID, BOOKMARKS) VALUES (?, ?)";
 
     private static final Logger log = LoggerFactory.getLogger(JDBCBookmarkService.class);
 
-    private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE ID = ?";
+    private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
 
