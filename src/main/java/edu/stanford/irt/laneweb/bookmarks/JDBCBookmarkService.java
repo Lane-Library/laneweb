@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.sql.Blob;
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,24 +23,19 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class JDBCBookmarkService implements BookmarkService {
 
-    private static final int BLOB = 2;
+    private static final int BYTES = 2;
 
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
 
-    private static final Logger LOG = LoggerFactory.getLogger(JDBCBookmarkService.class);
+    private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (SUNETID, BOOKMARKS) VALUES (?, ?)";
+
+    private static final Logger log = LoggerFactory.getLogger(JDBCBookmarkService.class);
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
 
     private static final int USER_ID = 1;
-
-    private static final String WRITE_BOOKMARKS_SQL =
-            "BEGIN " +
-            "  INSERT INTO bookmarks(sunetid, bookmarks) " +
-            "  VALUES (?, empty_blob()) " +
-            "  RETURN bookmarks INTO ?; " +
-            "END;";
 
     private DataSource dataSource;
 
@@ -53,10 +48,10 @@ public class JDBCBookmarkService implements BookmarkService {
         List<Bookmark> links = null;
         try (ResultSet rs = pstmt.executeQuery()) {
             if (rs.next()) {
-                try (ObjectInputStream oip = new ObjectInputStream(rs.getBlob(1).getBinaryStream())) {
+                try (ObjectInputStream oip = new ObjectInputStream(new ByteArrayInputStream(rs.getBytes(1)))) {
                     links = (List<Bookmark>) oip.readObject();
                 } catch (IOException | ClassNotFoundException e) {
-                    LOG.error(e.getMessage(), e);
+                    log.error(e.getMessage(), e);
                 }
             }
         }
@@ -66,15 +61,14 @@ public class JDBCBookmarkService implements BookmarkService {
     private static void saveLinksToDatabase(final List<Bookmark> links, final Connection conn, final String userid)
             throws SQLException, IOException {
         if (!links.isEmpty()) {
-            try (CallableStatement cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL)) {
-                cstmt.setString(USER_ID, userid);
-                cstmt.registerOutParameter(BLOB, java.sql.Types.BLOB);
-                cstmt.executeUpdate();
-                Blob blob = cstmt.getBlob(BLOB);
-                try (ObjectOutputStream oop = new ObjectOutputStream(blob.setBinaryStream(1))) {
-                    oop.writeObject(Serializable.class.cast(links));
-                    oop.flush();
-                }
+            try (PreparedStatement insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ObjectOutputStream oop = new ObjectOutputStream(baos)) {
+                oop.writeObject(Serializable.class.cast(links));
+                oop.flush();
+                insertStatement.setString(USER_ID, userid);
+                insertStatement.setBytes(BYTES, baos.toByteArray());
+                insertStatement.executeUpdate();
             }
         }
     }
@@ -88,7 +82,7 @@ public class JDBCBookmarkService implements BookmarkService {
             pstmt.setString(USER_ID, userid);
             links = getLinksFromStatement(pstmt);
         } catch (SQLException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
         return links;
     }
