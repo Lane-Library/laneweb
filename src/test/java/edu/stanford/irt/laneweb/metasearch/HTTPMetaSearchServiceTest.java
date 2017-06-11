@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.search;
+package edu.stanford.irt.laneweb.metasearch;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -17,10 +17,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import edu.stanford.irt.laneweb.mapping.ResultDeserializer;
+import edu.stanford.irt.laneweb.metasearch.HTTPMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.search.impl.Result;
 
-public class MetaSearchServiceTest {
+public class HTTPMetaSearchServiceTest {
 
     private ObjectMapper mapper;
 
@@ -38,20 +39,8 @@ public class MetaSearchServiceTest {
     }
 
     @Test
-    public void testClearAllCaches() throws JsonParseException, JsonMappingException, IOException {
-        MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
-        assertEquals("OK", service.clearAllCaches());
-    }
-
-    @Test
-    public void testClearCache() throws JsonParseException, JsonMappingException, IOException {
-        MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
-        assertEquals("OK", service.clearCache("the query"));
-    }
-
-    @Test
     public void testDescribe() {
-        MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
+        MetaSearchService service = new HTTPMetaSearchService(this.url, this.mapper, this.timeout);
         Result result = service.describe("the query", Collections.singleton("pubmed"));
         assertNotNull(result);
         assertEquals("description", result.getDescription());
@@ -62,7 +51,7 @@ public class MetaSearchServiceTest {
 
     @Test
     public void testSearch() {
-        MetaSearchService service = new MetaSearchService(this.url, this.mapper, this.timeout);
+        MetaSearchService service = new HTTPMetaSearchService(this.url, this.mapper, this.timeout);
         Result result = service.search("the query", Collections.singleton("pubmed"), 0);
         assertNotNull(result);
         assertEquals("metasearch", result.getDescription());

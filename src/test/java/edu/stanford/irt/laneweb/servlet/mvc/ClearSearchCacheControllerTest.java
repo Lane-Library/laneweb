@@ -25,7 +25,7 @@ public class ClearSearchCacheControllerTest {
 
     @Test
     public void testClearCache() {
-        expect(this.metaSearchService.clearAllCaches()).andReturn("OK");
+        this.metaSearchService.clearAllCaches();
         replay(this.metaSearchService);
         assertEquals("OK", this.controller.clearCache(null));
         verify(this.metaSearchService);
@@ -33,7 +33,7 @@ public class ClearSearchCacheControllerTest {
 
     @Test
     public void testClearCacheQuery() {
-        expect(this.metaSearchService.clearCache("query")).andReturn("OK");
+        this.metaSearchService.clearCache("query");
         replay(this.metaSearchService);
         assertEquals("OK", this.controller.clearCache("query"));
         verify(this.metaSearchService);

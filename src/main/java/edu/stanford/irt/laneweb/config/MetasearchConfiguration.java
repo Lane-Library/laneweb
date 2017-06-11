@@ -30,6 +30,7 @@ import edu.stanford.irt.laneweb.metasearch.DescribeGenerator;
 import edu.stanford.irt.laneweb.metasearch.EngineResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.EngineSearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.FilePathTransformer;
+import edu.stanford.irt.laneweb.metasearch.HTTPMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetasearchResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.PagingSearchResultListSAXStrategy;
@@ -128,7 +129,7 @@ public class MetasearchConfiguration {
 
     @Bean
     public MetaSearchService metaSearchService() {
-        return new MetaSearchService(this.metaSearchURL, this.objectMapper, 70000);
+        return new HTTPMetaSearchService(this.metaSearchURL, this.objectMapper, 70000);
     }
 
     @Bean
