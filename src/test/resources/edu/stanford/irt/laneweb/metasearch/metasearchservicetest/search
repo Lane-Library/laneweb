@@ -1,0 +1,17 @@
+{"children": [{
+ "children": [],
+ "description": "description",
+ "id": "id",
+ "query": null,
+ "status": "SUCCESSFUL",
+ "time": "1000",
+ "url": "url",
+ "hits": "10"
+}],
+ "description": "metasearch",
+ "id": "id",
+ "query": null,
+ "status": "SUCCESSFUL",
+ "time": null,
+ "url": "none",
+ "hits": null}
