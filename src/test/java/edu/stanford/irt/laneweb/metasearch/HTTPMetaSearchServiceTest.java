@@ -3,22 +3,17 @@ package edu.stanford.irt.laneweb.metasearch;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import edu.stanford.irt.laneweb.mapping.ResultDeserializer;
-import edu.stanford.irt.laneweb.metasearch.HTTPMetaSearchService;
-import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.search.impl.Result;
 
 public class HTTPMetaSearchServiceTest {
