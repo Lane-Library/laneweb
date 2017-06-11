@@ -27,6 +27,7 @@ import edu.stanford.irt.laneweb.metasearch.EngineResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.EngineSearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.FilePathTransformer;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
+import edu.stanford.irt.laneweb.metasearch.SpringContextMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetasearchResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.PagingSearchResultListSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.ResourceResultSAXStrategy;
@@ -118,7 +119,7 @@ public class MetasearchConfiguration {
 
     @Bean(destroyMethod = "dispose")
     public MetaSearchService metaSearchService() {
-        return new MetaSearchService(
+        return new SpringContextMetaSearchService(
                 new ClassPathXmlApplicationContext(new String[] { "search-lane.xml" }, false, null));
     }
 
