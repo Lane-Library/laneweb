@@ -107,6 +107,11 @@
             <version>3.2.0</version>
         </dependency>
         <dependency>
+            <artifactId>search-spring</artifactId>
+            <groupId>edu.stanford.irt.search</groupId>
+            <version>3.0.8</version>
+        </dependency>
+        <dependency>
             <artifactId>javax.servlet-api</artifactId>
             <groupId>javax.servlet</groupId>
             <scope>provided</scope>
@@ -214,7 +219,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina</artifactId>
-            <version>8.5.4</version>
+            <version>8.5.15</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

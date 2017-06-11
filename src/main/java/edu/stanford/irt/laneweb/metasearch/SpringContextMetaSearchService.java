@@ -11,6 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import edu.stanford.irt.search.impl.MetaSearchManager;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
+import edu.stanford.irt.search.spring.SearchCacheManager;
 
 public class SpringContextMetaSearchService implements MetaSearchService {
 
@@ -23,11 +24,13 @@ public class SpringContextMetaSearchService implements MetaSearchService {
     }
 
     public void clearAllCaches() {
-        throw new UnsupportedOperationException();
+        checkContext();
+        this.context.getBean("searchCacheManager", SearchCacheManager.class).clearAllCaches();
     }
 
     public void clearCache(final String q) {
-        throw new UnsupportedOperationException();
+        checkContext();
+        this.context.getBean("searchCacheManager", SearchCacheManager.class).clearCache(q);
     }
 
     public Result describe(final String query, final Collection<String> engines) {
