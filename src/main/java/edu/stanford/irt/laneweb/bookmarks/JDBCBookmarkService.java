@@ -29,7 +29,7 @@ public class JDBCBookmarkService implements BookmarkService {
 
     private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (ID, BOOKMARKS) VALUES (?, ?)";
 
-    private static final Logger LOG = LoggerFactory.getLogger(JDBCBookmarkService.class);
+    private static final Logger log = LoggerFactory.getLogger(JDBCBookmarkService.class);
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE ID = ?";
 
@@ -43,23 +43,46 @@ public class JDBCBookmarkService implements BookmarkService {
         this.dataSource = dataSource;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
+    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt) throws SQLException {
+        List<Bookmark> links = null;
+        try (ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                try (ObjectInputStream oip = new ObjectInputStream(new ByteArrayInputStream(rs.getBytes(1)))) {
+                    links = (List<Bookmark>) oip.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
+        return links;
+    }
+
+    private static void saveLinksToDatabase(final List<Bookmark> links, final Connection conn, final String userid)
+            throws SQLException, IOException {
+        if (!links.isEmpty()) {
+            try (PreparedStatement insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ObjectOutputStream oop = new ObjectOutputStream(baos)) {
+                oop.writeObject(Serializable.class.cast(links));
+                oop.flush();
+                insertStatement.setString(USER_ID, userid);
+                insertStatement.setBytes(BYTES, baos.toByteArray());
+                insertStatement.executeUpdate();
+            }
+        }
+    }
+
+    @Override
     public List<Bookmark> getLinks(final String userid) {
         Objects.requireNonNull(userid, "null userid");
         List<Bookmark> links = null;
         try (Connection conn = this.dataSource.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    try (ObjectInputStream oip = new ObjectInputStream(new ByteArrayInputStream(rs.getBytes(1)))) {
-                        links = (List<Bookmark>) oip.readObject();
-                    }
-                }
-            }
-        } catch (SQLException | IOException | ClassNotFoundException e) {
-            LOG.error(e.getMessage(), e);
+            links = getLinksFromStatement(pstmt);
+        } catch (SQLException e) {
+            log.error(e.getMessage(), e);
         }
         return links;
     }
@@ -84,20 +107,10 @@ public class JDBCBookmarkService implements BookmarkService {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
         Connection conn = getConnection();
-        try (PreparedStatement deleteStatement = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
-            deleteStatement.setString(USER_ID, userid);
-            deleteStatement.execute();
-            if (!links.isEmpty()) {
-                try (PreparedStatement insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        ObjectOutputStream oop = new ObjectOutputStream(baos)) {
-                    oop.writeObject(Serializable.class.cast(links));
-                    oop.flush();
-                    insertStatement.setString(USER_ID, userid);
-                    insertStatement.setBytes(BYTES, baos.toByteArray());
-                    insertStatement.executeUpdate();
-                }
-            }
+        try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
+            pstmt.setString(USER_ID, userid);
+            pstmt.execute();
+            saveLinksToDatabase(links, conn, userid);
             conn.commit();
         } catch (IOException | SQLException e) {
             try {
