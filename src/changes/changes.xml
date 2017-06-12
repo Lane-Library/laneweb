@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-06-12" version="3.3.34" description="3.3.34 bug fix release">
+            <action date="2017-06-11" dev="ceyates" issue="134754" type="remove">
+                remove spam filter
+            </action>
+            <action date="2017-06-08" dev="ceyates" issue="134640" type="update">
+                refactor web application to use classpath for resources
+            </action>
+            <action date="2017-06-07" dev="ryanmax" issue="134588" type="update">
+                new IPs for LPCH Verona Epic data center
+            </action>
+            <action date="2017-06-05" dev="ryanmax" issue="134546" type="fix">
+                display problem with long author lists in Lane Catalog records
+            </action>
+        </release>
         <release date="2017-06-05" version="3.3.33" description="3.3.33 bug fix release">
             <action date="2017-05-31" dev="ryanmax" issue="134426" type="fix">
                 eresources markup can cause pages to break
