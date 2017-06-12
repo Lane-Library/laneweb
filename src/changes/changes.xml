@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2017-06-12" version="3.3.34" description="3.3.34 bug fix release">
+            <action date="2017-06-12" dev="ceyates" issue="134699" type="fix">
+                book alignment
+            </action>
             <action date="2017-06-11" dev="ceyates" issue="134754" type="remove">
                 remove spam filter
             </action>
