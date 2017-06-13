@@ -19,22 +19,22 @@ public class CourseReservesConfigurationTest {
     @Before
     public void setUp() {
         this.dataSource = createMock(DataSource.class);
-        this.configuration = new CourseReservesConfiguration(this.dataSource);
+        this.configuration = new CourseReservesConfiguration();
     }
 
     @Test
     public void testCourseReservesDAO() throws IOException {
-        assertNotNull(this.configuration.courseReservesService());
+        assertNotNull(this.configuration.jdbcCourseReservesService(this.dataSource));
     }
 
     @Test
     public void testCourseReservesItemListGenerator() throws IOException {
-        assertNotNull(this.configuration.courseReservesItemListGenerator());
+        assertNotNull(this.configuration.courseReservesItemListGenerator(null));
     }
 
     @Test
     public void testCoursesGenerator() throws IOException {
-        assertNotNull(this.configuration.coursesGenerator());
+        assertNotNull(this.configuration.coursesGenerator(null));
     }
 
     @Test
