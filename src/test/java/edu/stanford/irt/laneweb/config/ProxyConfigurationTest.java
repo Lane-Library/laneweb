@@ -1,8 +1,11 @@
 package edu.stanford.irt.laneweb.config;
 
+import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
+
+import javax.sql.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,9 +14,12 @@ public class ProxyConfigurationTest {
 
     private ProxyConfiguration configuration;
 
+    private DataSource dataSource;
+
     @Before
     public void setUp() {
-        this.configuration = new ProxyConfiguration(null, null);
+        this.dataSource = createMock(DataSource.class);
+        this.configuration = new ProxyConfiguration();
     }
 
     @Test
@@ -23,17 +29,17 @@ public class ProxyConfigurationTest {
 
     @Test
     public void testEzproxyServersWriter() throws IOException {
-        assertNotNull(this.configuration.proxyServersService());
+        assertNotNull(this.configuration.jdbcProxyServersService(this.dataSource));
     }
 
     @Test
     public void testHtmlProxyLinkTransformer() throws IOException {
-        assertNotNull(this.configuration.htmlProxyLinkTransformer());
+        assertNotNull(this.configuration.htmlProxyLinkTransformer(null));
     }
 
     @Test
     public void testProxyHostManager() throws IOException {
-        assertNotNull(this.configuration.proxyHostManager());
+        assertNotNull(this.configuration.proxyHostManager(null));
     }
 
     @Test

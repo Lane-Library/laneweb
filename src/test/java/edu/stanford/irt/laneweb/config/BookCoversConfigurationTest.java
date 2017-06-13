@@ -10,8 +10,6 @@ import org.junit.Test;
 
 public class BookCoversConfigurationTest {
 
-    private String apiKey;
-
     private BookCoversConfiguration configuration;
 
     private DataSource dataSource;
@@ -19,12 +17,12 @@ public class BookCoversConfigurationTest {
     @Before
     public void setUp() {
         this.dataSource = createMock(DataSource.class);
-        this.apiKey = "apiKey";
-        this.configuration = new BookCoversConfiguration(this.dataSource, this.apiKey, null, null);
+        this.configuration = new BookCoversConfiguration();
     }
 
     @Test
     public void testBookCoverService() {
-        assertNotNull(this.configuration.bookCoverService());
+        this.configuration.jdbcISBNService(this.dataSource);
+        assertNotNull(this.configuration.jdbcISBNService(this.dataSource));
     }
 }

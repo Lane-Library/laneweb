@@ -8,11 +8,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -23,37 +23,36 @@ import edu.stanford.irt.bookcovers.BookCoverService;
 import edu.stanford.irt.bookcovers.CacheBookCoverService;
 import edu.stanford.irt.bookcovers.CompositeBookCoverService;
 import edu.stanford.irt.bookcovers.GoogleBookCoverService;
+import edu.stanford.irt.bookcovers.ISBNService;
 import edu.stanford.irt.bookcovers.JDBCBookCoverService;
+import edu.stanford.irt.bookcovers.JDBCISBNService;
 import edu.stanford.irt.laneweb.bookcovers.HTTPISBNService;
 
 @Configuration
 public class BookCoversConfiguration {
 
-    private String apiKey;
-
-    private DataSource bookCoverDataSource;
-
-    private URI catalogServiceURI;
-
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    public BookCoversConfiguration(@Qualifier("javax.sql.DataSource/bookcovers") final DataSource bookCoverDataSource,
-            @Value("${edu.stanford.irt.laneweb.bookcovers.google-api-key}") final String apiKey,
-            final ObjectMapper objectMapper, final URI catalogServiceURI) {
-        this.bookCoverDataSource = bookCoverDataSource;
-        this.apiKey = apiKey;
-        this.objectMapper = objectMapper;
-        this.catalogServiceURI = catalogServiceURI;
+    @Bean
+    public BookCoverService bookCoverService(
+            @Qualifier("javax.sql.DataSource/bookcovers") final DataSource bookCoverDataSource,
+            final ISBNService isbnService,
+            @Value("${edu.stanford.irt.laneweb.bookcovers.google-api-key}") final String apiKey) {
+        List<BookCoverService> services = new ArrayList<>();
+        services.add(new CacheBookCoverService(new ConcurrentHashMap<Integer, Optional<String>>()));
+        services.add(new JDBCBookCoverService(bookCoverDataSource));
+        services.add(new GoogleBookCoverService(isbnService, new NetHttpTransport(),
+                new JsonObjectParser(new JacksonFactory()), apiKey));
+        return new CompositeBookCoverService(services);
     }
 
     @Bean
-    public BookCoverService bookCoverService() {
-        List<BookCoverService> services = new ArrayList<>();
-        services.add(new CacheBookCoverService(new ConcurrentHashMap<Integer, Optional<String>>()));
-        services.add(new JDBCBookCoverService(this.bookCoverDataSource));
-        services.add(new GoogleBookCoverService(new HTTPISBNService(this.objectMapper, this.catalogServiceURI),
-                new NetHttpTransport(), new JsonObjectParser(new JacksonFactory()), this.apiKey));
-        return new CompositeBookCoverService(services);
+    @Profile("gce")
+    public ISBNService httpISBNService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+        return new HTTPISBNService(objectMapper, catalogServiceURI);
+    }
+
+    @Bean
+    @Profile("!gce")
+    public ISBNService jdbcISBNService(@Qualifier("javax.sql.DataSource/catalog") final DataSource voyagerDataSource) {
+        return new JDBCISBNService(voyagerDataSource);
     }
 }

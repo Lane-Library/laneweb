@@ -11,7 +11,7 @@ public class VoyagerConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new VoyagerConfiguration(null, null);
+        this.configuration = new VoyagerConfiguration();
     }
 
     @Test
@@ -21,6 +21,6 @@ public class VoyagerConfigurationTest {
 
     @Test
     public void testVoyagerLogin() {
-        assertNotNull(this.configuration.voyagerLogin());
+        assertNotNull(this.configuration.voyagerLogin(null));
     }
 }

@@ -27,7 +27,7 @@ public class MappingConfiguration {
         return new ObjectMapper().getSerializationConfig();
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.mapping.LanewebObjectMapper")
+    @Bean
     public ObjectMapper lanewebObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));

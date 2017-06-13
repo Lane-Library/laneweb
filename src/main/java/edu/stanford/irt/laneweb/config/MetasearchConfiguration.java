@@ -4,12 +4,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,15 +47,10 @@ import edu.stanford.irt.search.impl.Result;
 @Configuration
 public class MetasearchConfiguration {
 
-    @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
-    private URL metaSearchURL;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
-    public Generator allClinicalSearchResultsGenerator() {
+    public Generator allClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
+            final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
         List<String> engines = new ArrayList<>(21);
         engines.add("aafp_patients");
         engines.add("acpjc");
@@ -77,13 +73,14 @@ public class MetasearchConfiguration {
         engines.add("pubmed_systematicreviews");
         engines.add("pubmed_treatment_focused");
         engines.add("uptodate");
-        return new ClinicalSearchResultsGenerator(metaSearchService(), clinicalSearchResultsSAXStrategy(), engines,
-                clinicalSearchResultsFactory());
+        return new ClinicalSearchResultsGenerator(metaSearchService, clinicalSearchResultsSAXStrategy(), engines,
+                clinicalSearchResultsFactory);
     }
 
     @Bean
-    public ClinicalSearchResultsFactory clinicalSearchResultsFactory() {
-        return new ClinicalSearchResultsFactory(contentResultConversionStrategy());
+    public ClinicalSearchResultsFactory clinicalSearchResultsFactory(
+            final ContentResultConversionStrategy contentResultConversionStrategy) {
+        return new ClinicalSearchResultsFactory(contentResultConversionStrategy);
     }
 
     @Bean
@@ -98,21 +95,22 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-content")
     @Scope("prototype")
-    public Generator contentSearchGenerator() {
-        return new ContentSearchGenerator(metaSearchService(), pagingSearchResultListSAXStrategy(),
-                contentResultConversionStrategy());
+    public Generator contentSearchGenerator(final MetaSearchService metaSearchService,
+            final ContentResultConversionStrategy contentResultConversionStrategy) {
+        return new ContentSearchGenerator(metaSearchService, pagingSearchResultListSAXStrategy(),
+                contentResultConversionStrategy);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-describe")
     @Scope("prototype")
-    public Generator describeGenerator() {
-        return new DescribeGenerator(metaSearchService(), metasearchResultSAXStrategy());
+    public Generator describeGenerator(final MetaSearchService metaSearchService) {
+        return new DescribeGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-engine")
     @Scope("prototype")
-    public Generator engineSearchGenerator() {
-        return new EngineSearchGenerator(metaSearchService(), metasearchResultSAXStrategy());
+    public Generator engineSearchGenerator(final MetaSearchService metaSearchService) {
+        return new EngineSearchGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/file-path")
@@ -123,14 +121,16 @@ public class MetasearchConfiguration {
     }
 
     @Bean
-    public SAXStrategy<Result> metasearchResultSAXStrategy() {
-        return new MetasearchResultSAXStrategy(
-                new EngineResultSAXStrategy(new ResourceResultSAXStrategy(new AlternateContentResultSAXStrategy())));
+    @Profile("gce")
+    public MetaSearchService httpMetaSearchService(final ObjectMapper objectMapper,
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")final URL metaSearchURL) {
+        return new HTTPMetaSearchService(metaSearchURL, objectMapper, 70000);
     }
 
     @Bean
-    public MetaSearchService metaSearchService() {
-        return new HTTPMetaSearchService(this.metaSearchURL, this.objectMapper, 70000);
+    public SAXStrategy<Result> metasearchResultSAXStrategy() {
+        return new MetasearchResultSAXStrategy(
+                new EngineResultSAXStrategy(new ResourceResultSAXStrategy(new AlternateContentResultSAXStrategy())));
     }
 
     @Bean
@@ -140,7 +140,8 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/peds-all")
     @Scope("prototype")
-    public Generator pedsClinicalSearchResultsGenerator() {
+    public Generator pedsClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
+            final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
         List<String> engines = new ArrayList<>(20);
         engines.add("aafp_patients");
         engines.add("aappatient");
@@ -162,14 +163,14 @@ public class MetasearchConfiguration {
         engines.add("pubmed_systematicreviews_allchild");
         engines.add("pubmed_treatment_focused_allchild");
         engines.add("uptodate_allchild");
-        return new ClinicalSearchResultsGenerator(metaSearchService(), clinicalSearchResultsSAXStrategy(), engines,
-                clinicalSearchResultsFactory());
+        return new ClinicalSearchResultsGenerator(metaSearchService, clinicalSearchResultsSAXStrategy(), engines,
+                clinicalSearchResultsFactory);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-resource")
     @Scope("prototype")
-    public Generator resourceSearchGenerator() {
-        return new ResourceSearchGenerator(metaSearchService(), metasearchResultSAXStrategy());
+    public Generator resourceSearchGenerator(final MetaSearchService metaSearchService) {
+        return new ResourceSearchGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/search-directory")
@@ -180,7 +181,14 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search")
     @Scope("prototype")
-    public Generator searchGenerator() {
-        return new SearchGenerator(metaSearchService(), metasearchResultSAXStrategy());
+    public Generator searchGenerator(final MetaSearchService metaSearchService) {
+        return new SearchGenerator(metaSearchService, metasearchResultSAXStrategy());
+    }
+
+    @Bean(destroyMethod = "dispose")
+    @Profile("!gce")
+    public MetaSearchService springContextMetaSearchService() {
+        return new SpringContextMetaSearchService(
+                new ClassPathXmlApplicationContext(new String[] { "search-lane.xml" }, false, null));
     }
 }

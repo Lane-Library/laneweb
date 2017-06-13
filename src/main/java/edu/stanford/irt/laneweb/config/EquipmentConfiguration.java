@@ -1,11 +1,15 @@
 package edu.stanford.irt.laneweb.config;
 
+import static edu.stanford.irt.laneweb.util.IOUtils.getResourceAsString;
+
 import java.net.URI;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
@@ -17,39 +21,36 @@ import edu.stanford.irt.laneweb.catalog.CatalogRecordGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
 import edu.stanford.irt.laneweb.catalog.equipment.HTTPEquipmentService;
+import edu.stanford.irt.laneweb.catalog.equipment.JDBCEquipmentService;
 
 @Configuration
 public class EquipmentConfiguration {
 
-    private BeanFactory beanFactory;
-
-    private URI catalogServiceURI;
-
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    public EquipmentConfiguration(final ObjectMapper objectMapper, final BeanFactory beanFactory,
-            final URI catalogServiceURI) {
-        this.objectMapper = objectMapper;
-        this.beanFactory = beanFactory;
-        this.catalogServiceURI = catalogServiceURI;
-    }
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public Generator equipmentGenerator() {
-        return new CatalogRecordGenerator(equipmentService(),
-                this.beanFactory.getBean("org.xml.sax.XMLReader/marc", XMLReader.class));
-    }
-
-    @Bean
-    public EquipmentService equipmentService() {
-        return new HTTPEquipmentService(this.objectMapper, this.catalogServiceURI);
+    public Generator equipmentGenerator(final EquipmentService equipmentService,
+            @Qualifier("org.xml.sax.XMLReader/marc") final XMLReader marcXMLReader) {
+        return new CatalogRecordGenerator(equipmentService, marcXMLReader);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/equipment-status")
     @Scope("prototype")
-    public Transformer equipmentStatusTransformer() {
-        return new EquipmentStatusTransformer(equipmentService());
+    public Transformer equipmentStatusTransformer(final EquipmentService equipmentService) {
+        return new EquipmentStatusTransformer(equipmentService);
+    }
+
+    @Bean
+    @Profile("gce")
+    public EquipmentService httpEquipmentService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+        return new HTTPEquipmentService(objectMapper, catalogServiceURI);
+    }
+
+    @Bean
+    @Profile("!gce")
+    public EquipmentService jdbcEquipmentService(
+            @Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource) {
+        return new JDBCEquipmentService(dataSource,
+                getResourceAsString(EquipmentService.class, "getEquipment.fnc"),
+                getResourceAsString(EquipmentService.class, "getStatus.sql"));
     }
 }

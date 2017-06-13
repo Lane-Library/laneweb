@@ -16,12 +16,12 @@ public class MetasearchConfigurationTest {
 
     @Test
     public void testAllClinicalSearchResultsGenerator() {
-        assertNotNull(this.configuration.allClinicalSearchResultsGenerator());
+        assertNotNull(this.configuration.allClinicalSearchResultsGenerator(null, null));
     }
 
     @Test
     public void testClinicalSearchResultsFactory() {
-        assertNotNull(this.configuration.clinicalSearchResultsFactory());
+        assertNotNull(this.configuration.clinicalSearchResultsFactory(null));
     }
 
     @Test
@@ -36,22 +36,27 @@ public class MetasearchConfigurationTest {
 
     @Test
     public void testContentSearchGenerator() {
-        assertNotNull(this.configuration.contentSearchGenerator());
+        assertNotNull(this.configuration.contentSearchGenerator(null, null));
     }
 
     @Test
     public void testDescribeGenerator() {
-        assertNotNull(this.configuration.describeGenerator());
+        assertNotNull(this.configuration.describeGenerator(null));
     }
 
     @Test
     public void testEngineSearchGenerator() {
-        assertNotNull(this.configuration.engineSearchGenerator());
+        assertNotNull(this.configuration.engineSearchGenerator(null));
     }
 
     @Test
     public void testFilePathTransformer() {
         assertNotNull(this.configuration.filePathTransformer(null, null));
+    }
+
+    @Test
+    public void testMetaSearchManagerSource() {
+        assertNotNull(this.configuration.springContextMetaSearchService());
     }
 
     @Test
@@ -66,12 +71,12 @@ public class MetasearchConfigurationTest {
 
     @Test
     public void testPedsClinicalSearchResultsGenerator() {
-        assertNotNull(this.configuration.pedsClinicalSearchResultsGenerator());
+        assertNotNull(this.configuration.pedsClinicalSearchResultsGenerator(null, null));
     }
 
     @Test
     public void testResourceSearchGenerator() {
-        assertNotNull(this.configuration.resourceSearchGenerator());
+        assertNotNull(this.configuration.resourceSearchGenerator(null));
     }
 
     @Test
@@ -81,6 +86,6 @@ public class MetasearchConfigurationTest {
 
     @Test
     public void testSearchGenerator() {
-        assertNotNull(this.configuration.searchGenerator());
+        assertNotNull(this.configuration.searchGenerator(null));
     }
 }
