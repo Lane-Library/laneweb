@@ -18,6 +18,8 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 @Configuration
 public class DataSourcesConfiguration {
 
+    private static final long FIVE_SECONDS = 5_000L;
+
     private static final String ORACLE_DATASOURCE = "oracle.jdbc.pool.OracleDataSource";
 
     private static final int THREE_SECONDS = 3;
@@ -66,11 +68,10 @@ public class DataSourcesConfiguration {
     @Profile("gce")
     public DataSource gceDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,
-            @Value("${edu.stanford.irt.laneweb.db.eresources.password}") final String password)
-            throws SQLException, ClassNotFoundException {
+            @Value("${edu.stanford.irt.laneweb.db.eresources.password}") final String password) {
         HikariConfig config = new HikariConfig();
         config.setInitializationFailFast(false);
-        config.setConnectionTimeout(5000L);
+        config.setConnectionTimeout(FIVE_SECONDS);
         config.setUsername(user);
         config.setPassword(password);
         config.setJdbcUrl(url);
