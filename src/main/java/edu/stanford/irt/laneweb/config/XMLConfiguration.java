@@ -9,7 +9,6 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.URIResolver;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -37,13 +36,6 @@ import edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl;
 
 @Configuration
 public class XMLConfiguration {
-
-    private SourceResolver sourceResolver;
-
-    @Autowired
-    public XMLConfiguration(final SourceResolver sourceResolver) {
-        this.sourceResolver = sourceResolver;
-    }
 
     @Bean
     public DocumentBuilderFactoryBean documentBuilderFactoryBean()
@@ -100,8 +92,8 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost")
-    public TransformerHandlerFactory joostTransformerHandlerFactory() {
-        return new TransformerHandlerFactory(joostSAXTransformerFactoryBean().getObject(), uriResolver(),
+    public TransformerHandlerFactory joostTransformerHandlerFactory(final URIResolver uriResolver) {
+        return new TransformerHandlerFactory(joostSAXTransformerFactoryBean().getObject(), uriResolver,
                 errorListener());
     }
 
@@ -111,8 +103,8 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon")
-    public TransformerHandlerFactory saxonTransformerHandlerFactory() {
-        return new TransformerHandlerFactory(saxonSAXTransformerFactoryBean().getObject(), uriResolver(),
+    public TransformerHandlerFactory saxonTransformerHandlerFactory(final URIResolver uriResolver) {
+        return new TransformerHandlerFactory(saxonSAXTransformerFactoryBean().getObject(), uriResolver,
                 errorListener());
     }
 
@@ -134,8 +126,8 @@ public class XMLConfiguration {
     }
 
     @Bean
-    public URIResolver uriResolver() {
-        return new URIResolverImpl(this.sourceResolver);
+    public URIResolver uriResolver(final SourceResolver sourceResolver) {
+        return new URIResolverImpl(sourceResolver);
     }
 
     @Bean
@@ -145,9 +137,9 @@ public class XMLConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.XIncludePipe")
     @Scope("prototype")
-    public XIncludePipe xIncludePipe() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
-            SAXNotSupportedException, ParserConfigurationException {
-        return new XIncludePipe(this.sourceResolver, xmlSAXParser(), xIncludeExceptionListener(), xPointerProcessor());
+    public XIncludePipe xIncludePipe(final SourceResolver sourceResolver) throws XPathFactoryConfigurationException,
+            SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+        return new XIncludePipe(sourceResolver, xmlSAXParser(), xIncludeExceptionListener(), xPointerProcessor());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXParser/xml")

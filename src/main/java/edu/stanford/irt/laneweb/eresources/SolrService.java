@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -65,9 +63,7 @@ public class SolrService {
 
     private SolrTemplate solrTemplate;
 
-    @Autowired
-    public SolrService(final SolrQueryParser parser, final SolrRepository repository,
-            @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
+    public SolrService(final SolrQueryParser parser, final SolrRepository repository, final SolrTemplate solrTemplate) {
         this.parser = parser;
         this.repository = repository;
         this.solrTemplate = solrTemplate;

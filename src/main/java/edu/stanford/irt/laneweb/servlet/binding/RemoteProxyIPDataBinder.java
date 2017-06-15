@@ -20,6 +20,10 @@ public class RemoteProxyIPDataBinder implements DataBinder {
 
     private ProxyLinks proxyLinks;
 
+    public RemoteProxyIPDataBinder(final ProxyLinks proxyLinks) {
+        this.proxyLinks = proxyLinks;
+    }
+
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
@@ -48,10 +52,6 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         model.put(Model.REMOTE_ADDR, currentIP);
         model.put(Model.IPGROUP, ipGroup);
         model.put(Model.PROXY_LINKS, proxy);
-    }
-
-    public void setProxyLinks(final ProxyLinks proxyLinks) {
-        this.proxyLinks = proxyLinks;
     }
 
     protected String getRemoteAddress(final HttpServletRequest request) {

@@ -2,7 +2,8 @@ package edu.stanford.irt.laneweb.servlet.binding;
 
 import static org.junit.Assert.assertSame;
 
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +15,13 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class ContentBaseDataBinderTest {
 
-    private URL contentBase;
+    private URI contentBase;
 
     private ContentBaseDataBinder dataBinder;
 
     @Before
-    public void setUp() {
-        this.contentBase = getClass().getResource("/");
+    public void setUp() throws URISyntaxException {
+        this.contentBase = getClass().getResource("/").toURI();
         this.dataBinder = new ContentBaseDataBinder(this.contentBase);
     }
 

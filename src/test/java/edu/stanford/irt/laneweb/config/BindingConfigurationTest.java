@@ -1,13 +1,11 @@
 package edu.stanford.irt.laneweb.config;
 
 import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.servlet.ServletContext;
 
@@ -20,21 +18,17 @@ public class BindingConfigurationTest {
 
     private BindingConfiguration configuration;
 
-    private LibraryHoursService libraryHoursService;
-
     private ServletContext servletContext;
 
     @Before
     public void setUp() throws MalformedURLException {
         this.servletContext = createMock(ServletContext.class);
-        this.libraryHoursService = createMock(LibraryHoursService.class);
-        this.configuration = new BindingConfiguration("userCookieKey", new URL("file:/"), "version",
-                this.servletContext, this.libraryHoursService);
+        this.configuration = new BindingConfiguration();
     }
 
     @Test
     public void testBasePathDataBinder() {
-        assertNotNull(this.configuration.basePathDataBinder());
+        assertNotNull(this.configuration.basePathDataBinder(this.servletContext));
     }
 
     @Test
@@ -43,26 +37,18 @@ public class BindingConfigurationTest {
     }
 
     @Test
-    public void testContentBaseDataBinder() {
-        assertNotNull(this.configuration.contentBaseDataBinder());
+    public void testContentBaseDataBinder() throws URISyntaxException {
+        assertNotNull(this.configuration.contentBaseDataBinder(new URI("file:/")));
     }
 
     @Test
     public void testDataBinder() {
-        expect(this.servletContext.getContextPath()).andReturn("/path");
-        replay(this.servletContext);
-        assertNotNull(this.configuration.dataBinder());
-        verify(this.servletContext);
-    }
-
-    @Test
-    public void testDebugDataBinder() {
-        assertNotNull(this.configuration.debugDataBinder());
+        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null, null, null, null, null));
     }
 
     @Test
     public void testDisasterModeDataBinder() {
-        assertNotNull(this.configuration.disasterModeDataBinder());
+        assertNotNull(this.configuration.disasterModeDataBinder(null));
     }
 
     @Test
@@ -71,18 +57,8 @@ public class BindingConfigurationTest {
     }
 
     @Test
-    public void testLiveChatScheduleDataBinder() {
-        assertNotNull(this.configuration.liveChatScheduleDataBinder());
-    }
-
-    @Test
     public void testModelDataBinder() {
-        assertNotNull(this.configuration.modelDataBinder());
-    }
-
-    @Test
-    public void testParameterMapDataBinder() {
-        assertNotNull(this.configuration.parameterMapDataBinder());
+        assertNotNull(this.configuration.modelDataBinder(null));
     }
 
     @Test
@@ -93,21 +69,6 @@ public class BindingConfigurationTest {
     @Test
     public void testRemoteProxyIPDataBinder() {
         assertNotNull(this.configuration.remoteProxyIPDataBinder());
-    }
-
-    @Test
-    public void testRequestHeaderDataBinder() {
-        assertNotNull(this.configuration.requestHeaderDataBinder());
-    }
-
-    @Test
-    public void testRequestMethodDataBinder() {
-        assertNotNull(this.configuration.requestMethodDataBinder());
-    }
-
-    @Test
-    public void testRequestParameterDataBinder() {
-        assertNotNull(this.configuration.requestParameterDataBinder());
     }
 
     @Test
@@ -122,46 +83,37 @@ public class BindingConfigurationTest {
 
     @Test
     public void testTicketDataBinder() {
-        assertNotNull(this.configuration.ticketDataBinder());
-    }
-
-    @Test
-    public void testTodayDataBinder() {
-        assertNotNull(this.configuration.todayDataBinder());
+        assertNotNull(this.configuration.ticketDataBinder(null));
     }
 
     @Test
     public void testTodaysHours() {
-        assertNotNull(this.configuration.todaysHours());
+        LibraryHoursService hoursService = createMock(LibraryHoursService.class);
+        assertNotNull(this.configuration.todaysHours(hoursService));
     }
 
     @Test
     public void testTodaysHoursDataBinder() {
-        assertNotNull(this.configuration.todaysHoursDataBinder());
+        assertNotNull(this.configuration.todaysHoursDataBinder(null));
     }
 
     @Test
     public void testUserCookieCodec() {
-        assertNotNull(this.configuration.userCookieCodec());
-    }
-
-    @Test
-    public void testUserCookieDataBinder() {
-        assertNotNull(this.configuration.userCookieDataBinder());
+        assertNotNull(this.configuration.userCookieCodec(""));
     }
 
     @Test
     public void testUserDataBinder() {
-        assertNotNull(this.configuration.userDataBinder());
+        assertNotNull(this.configuration.userDataBinder(null, null));
     }
 
     @Test
     public void testUserDataDataBinder() {
-        assertNotNull(this.configuration.userDataDataBinder());
+        assertNotNull(this.configuration.userDataDataBinder(null, null, null, null, null, null));
     }
 
     @Test
     public void testVersionDataBinder() {
-        assertNotNull(this.configuration.versionDataBinder());
+        assertNotNull(this.configuration.versionDataBinder(null));
     }
 }

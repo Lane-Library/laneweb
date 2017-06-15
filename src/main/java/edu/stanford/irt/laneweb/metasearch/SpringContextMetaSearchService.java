@@ -25,17 +25,17 @@ public class SpringContextMetaSearchService implements MetaSearchService {
 
     public void clearAllCaches() {
         checkContext();
-        this.context.getBean("searchCacheManager", SearchCacheManager.class).clearAllCaches();
+        this.context.getBean(SearchCacheManager.class).clearAllCaches();
     }
 
     public void clearCache(final String q) {
         checkContext();
-        this.context.getBean("searchCacheManager", SearchCacheManager.class).clearCache(q);
+        this.context.getBean(SearchCacheManager.class).clearCache(q);
     }
 
     public Result describe(final String query, final Collection<String> engines) {
         checkContext();
-        return this.context.getBean("manager", MetaSearchManager.class).describe(new SimpleQuery(query), engines);
+        return this.context.getBean(MetaSearchManager.class).describe(new SimpleQuery(query), engines);
     }
 
     public void dispose() {
@@ -44,17 +44,16 @@ public class SpringContextMetaSearchService implements MetaSearchService {
                 this.context.close();
             }
         }
-        this.context.close();
     }
 
     public HttpResponse execute(final HttpGet httpGet) throws IOException {
         checkContext();
-        return this.context.getBean("httpClient", HttpClient.class).execute(httpGet);
+        return this.context.getBean(HttpClient.class).execute(httpGet);
     }
 
     public Result search(final String query, final Collection<String> engines, final long wait) {
         checkContext();
-        return this.context.getBean("manager", MetaSearchManager.class).search(new SimpleQuery(query), engines, wait);
+        return this.context.getBean(MetaSearchManager.class).search(new SimpleQuery(query), engines, wait);
     }
 
     private void checkContext() {

@@ -1,22 +1,17 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.oxm.Marshaller;
 
 public class ImagesConfigurationTest {
 
     private ImagesConfiguration configuration;
 
-    private Marshaller marshaller;
-
     @Before
     public void setUp() {
-        this.marshaller = createMock(Marshaller.class);
-        this.configuration = new ImagesConfiguration("url", this.marshaller);
+        this.configuration = new ImagesConfiguration();
     }
 
     @Test
@@ -61,7 +56,7 @@ public class ImagesConfigurationTest {
 
     @Test
     public void testSolrImageSearchTabGenerator() {
-        assertNotNull(this.configuration.solrImageSearchTabGenerator());
+        assertNotNull(this.configuration.solrImageSearchTabGenerator(null));
     }
 
     @Test

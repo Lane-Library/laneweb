@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,22 +65,11 @@ public class EresourcesConfiguration {
 
     private FacetComparator facetComparator;
 
-    private Marshaller marshaller;
-
     private Collection<String> meshToIgnoreInSearch;
 
     private Collection<String> publicationTypes;
 
-    @Autowired
-    private SolrRepository solrRepository;
-
-    private String solrServerUrl;
-
-    @Autowired
-    public EresourcesConfiguration(@Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl,
-            final Marshaller marshaller) {
-        this.solrServerUrl = solrServerUrl;
-        this.marshaller = marshaller;
+    public EresourcesConfiguration() {
         this.meshToIgnoreInSearch = new HashSet<>(25);
         this.meshToIgnoreInSearch.add("nomesh");
         this.meshToIgnoreInSearch.add("Adolescent");
@@ -124,33 +113,33 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-all-html")
     @Scope("prototype")
-    public Generator eresourcesBrowseAllGenerator() {
-        return new BrowseAllEresourcesGenerator("er-browse-all-html", solrService(),
+    public Generator eresourcesBrowseAllGenerator(final SolrService solrService) {
+        return new BrowseAllEresourcesGenerator("er-browse-all-html", solrService,
                 pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-html")
     @Scope("prototype")
-    public Generator eresourcesBrowseGenerator() {
-        return new BrowseEresourcesGenerator("er-browse-html", solrService(), pagingEresourceListHTMLSAXStrategy());
+    public Generator eresourcesBrowseGenerator(final SolrService solrService) {
+        return new BrowseEresourcesGenerator("er-browse-html", solrService, pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-core-html")
     @Scope("prototype")
-    public Generator eresourcesCoreGenerator() {
-        return new CoreEresourcesGenerator("er-core-html", solrService(), pagingEresourceListHTMLSAXStrategy());
+    public Generator eresourcesCoreGenerator(final SolrService solrService) {
+        return new CoreEresourcesGenerator("er-core-html", solrService, pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/eresources-count")
     @Scope("prototype")
-    public Generator eresourcesCountGenerator() {
-        return new EresourcesCountGenerator(solrService());
+    public Generator eresourcesCountGenerator(final SolrService solrService) {
+        return new EresourcesCountGenerator(solrService);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-mesh-html")
     @Scope("prototype")
-    public Generator eresourcesMeshGenerator() {
-        return new MeSHEresourcesGenerator("er-mesh-html", solrService(), pagingEresourceListHTMLSAXStrategy());
+    public Generator eresourcesMeshGenerator(final SolrService solrService) {
+        return new MeSHEresourcesGenerator("er-mesh-html", solrService, pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean
@@ -160,8 +149,8 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-with-cover")
     @Scope("prototype")
-    public Transformer linkWithCoverTransformer() {
-        return new BibIDToEresourceTransformer(solrService(), linkWithCoverSAXStrategy(), "link-with-cover",
+    public Transformer linkWithCoverTransformer(final SolrService solrService) {
+        return new BibIDToEresourceTransformer(solrService, linkWithCoverSAXStrategy(), "link-with-cover",
                 new ExpiresValidity(Duration.ofHours(1).toMillis()));
     }
 
@@ -172,8 +161,8 @@ public class EresourcesConfiguration {
     }
 
     @Bean(name = "laneSearchSolrServer")
-    public SolrClient solrClient() {
-        HttpSolrClient solrClient = new HttpSolrClient(this.solrServerUrl);
+    public SolrClient solrClient(@Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl) {
+        HttpSolrClient solrClient = new HttpSolrClient(solrServerUrl);
         solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
         solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
         return solrClient;
@@ -198,24 +187,24 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets")
     @Scope("prototype")
-    public Generator solrSearchFacetsGenerator() {
-        return new SolrSearchFacetsGenerator(solrService(), this.marshaller, FACETS_TO_SHOW_BROWSE,
-                FACETS_TO_SHOW_SEARCH, this.meshToIgnoreInSearch, this.publicationTypes, this.facetComparator);
+    public Generator solrSearchFacetsGenerator(final SolrService solrService, final Marshaller marshaller) {
+        return new SolrSearchFacetsGenerator(solrService, marshaller, FACETS_TO_SHOW_BROWSE, FACETS_TO_SHOW_SEARCH,
+                this.meshToIgnoreInSearch, this.publicationTypes, this.facetComparator);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-search")
     @Scope("prototype")
-    public Generator solrSearchGenerator() {
-        return new SolrSearchGenerator(solrService(), solrPagingEresourceSAXStrategy());
+    public Generator solrSearchGenerator(final SolrService solrService) {
+        return new SolrSearchGenerator(solrService, solrPagingEresourceSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.solr.SolrService")
-    public SolrService solrService() {
-        return new SolrService(solrQueryParser(), this.solrRepository, solrTemplate());
+    public SolrService solrService(final SolrRepository solrRepository, final SolrTemplate solrTemplate) {
+        return new SolrService(solrQueryParser(), solrRepository, solrTemplate);
     }
 
     @Bean(name = "laneSearchSolrTemplate")
-    public SolrTemplate solrTemplate() {
-        return new SolrTemplate(solrClient());
+    public SolrTemplate solrTemplate(@Qualifier("laneSearchSolrServer") final SolrClient solrClient) {
+        return new SolrTemplate(solrClient);
     }
 }

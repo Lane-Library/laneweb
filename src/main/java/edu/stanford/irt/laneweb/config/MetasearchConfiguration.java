@@ -47,6 +47,8 @@ import edu.stanford.irt.search.impl.Result;
 @Configuration
 public class MetasearchConfiguration {
 
+    private static final int SEVENTY_SECONDS = 70_000;
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
     public Generator allClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
@@ -123,8 +125,8 @@ public class MetasearchConfiguration {
     @Bean
     @Profile("gce")
     public MetaSearchService httpMetaSearchService(final ObjectMapper objectMapper,
-            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")final URL metaSearchURL) {
-        return new HTTPMetaSearchService(metaSearchURL, objectMapper, 70000);
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URL metaSearchURL) {
+        return new HTTPMetaSearchService(metaSearchURL, objectMapper, SEVENTY_SECONDS);
     }
 
     @Bean

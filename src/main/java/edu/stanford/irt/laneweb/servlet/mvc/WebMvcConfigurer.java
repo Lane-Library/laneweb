@@ -1,9 +1,10 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -37,32 +37,31 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
-    private URL liveBase;
-
-    @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
     private RedirectProcessor redirectProcessor;
 
-    @Autowired
     private SolrImageService solrImageService;
 
-    public WebMvcConfigurer(@Value("${edu.stanford.irt.laneweb.live-base}/") final URL liveBase) {
-        this.liveBase = liveBase;
+    @Autowired
+    public WebMvcConfigurer(final ObjectMapper objectMapper, final RedirectProcessor redirectProcessor,
+            final SolrImageService solrImageService) {
+        this.objectMapper = objectMapper;
+        this.redirectProcessor = redirectProcessor;
+        this.solrImageService = solrImageService;
     }
 
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
-        registry.addInterceptor(persistentLoginHandlerInterceptor())
+        registry.addInterceptor(new PersistentLoginHandlerInterceptor())
             .addPathPatterns("/**/secure/**", "/**/redirect/cme/**");
-        registry.addInterceptor(deviceResolverHandlerInterceptor())
+        registry.addInterceptor(new DeviceResolverHandlerInterceptor())
             .addPathPatterns("/**/*.html");
         registry.addInterceptor(mobileSiteInterceptor())
              .addPathPatterns("/**/*.html");
         registry.addInterceptor(redirectHandlerInterceptor())
             .addPathPatterns("/**");
-        registry.addInterceptor(searchImageInterceptor())
+        registry.addInterceptor(new SearchImageInterceptor(this.solrImageService))
             .addPathPatterns("/search.html");
     }
 
@@ -75,16 +74,9 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public DeviceResolverHandlerInterceptor deviceResolverHandlerInterceptor() {
-        return new DeviceResolverHandlerInterceptor();
-    }
-
-    @Bean
-    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping() throws MalformedURLException {
+    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ResourceHttpRequestHandler staticRequestHandler) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
-        Map<String, Object> urlMap = new HashMap<>();
-        urlMap.put("/**/*.*", staticRequestHandler());
-        handlerMapping.setUrlMap(urlMap);
+        handlerMapping.setUrlMap(Collections.singletonMap("/**/*.*", staticRequestHandler));
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
         handlerMapping.setInterceptors(new Object[] { redirectHandlerInterceptor() });
         return handlerMapping;
@@ -106,25 +98,16 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public PersistentLoginHandlerInterceptor persistentLoginHandlerInterceptor() {
-        return new PersistentLoginHandlerInterceptor();
-    }
-
-    @Bean
     public RedirectHandlerInterceptor redirectHandlerInterceptor() {
         return new RedirectHandlerInterceptor(this.redirectProcessor);
     }
 
     @Bean
-    public SearchImageInterceptor searchImageInterceptor() {
-        return new SearchImageInterceptor(this.solrImageService);
-    }
-
-    @Bean
-    public HttpRequestHandler staticRequestHandler() throws MalformedURLException {
+    public ResourceHttpRequestHandler staticRequestHandler(
+            @Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase) throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
         handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"),
-                new ClassPathResource("/static/"), new UrlResource(this.liveBase) }));
+                new ClassPathResource("/static/"), new UrlResource(liveBase.toURL()) }));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

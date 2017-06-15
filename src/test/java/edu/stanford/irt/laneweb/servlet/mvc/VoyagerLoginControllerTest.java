@@ -25,9 +25,8 @@ public class VoyagerLoginControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.voyagerLoginController = new VoyagerLoginController();
         this.voyagerLogin = createMock(VoyagerLogin.class);
-        this.voyagerLoginController.setVoyagerLogin(this.voyagerLogin);
+        this.voyagerLoginController = new VoyagerLoginController(this.voyagerLogin, null, null);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
     }

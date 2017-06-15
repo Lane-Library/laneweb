@@ -34,10 +34,8 @@ public class RedirectConfiguration {
         redirectMap.put("/m", "/m/index.html");
         redirectMap.put("/imagesearch.html", "/bioimagesearch.html");
         redirectMap.put("/beemap", "/beemap.html");
-        DefaultRedirectProcessor redirectProcessor = new DefaultRedirectProcessor();
-        redirectProcessor.setRedirectMap(redirectMap);
+        DefaultRedirectProcessor redirectProcessor = new DefaultRedirectProcessor(redirectMap);
         redirectProcessors.add(redirectProcessor);
-        SHCRedirectProcessor shcRedirectProcessor = new SHCRedirectProcessor();
         Map<String, String> shcRedirectMap = new HashMap<>(23);
         shcRedirectMap.put("/shc/anesthesia.html(?:\\??)(.*)",
                 "/portals/anesthesia.html?sourceid=shc&source=/portals/anesthesia.html&$1");
@@ -65,7 +63,7 @@ public class RedirectConfiguration {
         shcRedirectMap.put("/shc/surgery-cardiothoracic.html(?:\\??)(.*)", SEARCH_CLINICAL);
         shcRedirectMap.put("/shc/surgery-general.html(?:\\??)(.*)", SEARCH_CLINICAL);
         shcRedirectMap.put("/shc/portals/shc.html(?:\\??)(.*)", "/portals/shc.html?sourceid=shc&$1");
-        shcRedirectProcessor.setRedirectMap(shcRedirectMap);
+        SHCRedirectProcessor shcRedirectProcessor = new SHCRedirectProcessor(shcRedirectMap);
         redirectProcessors.add(shcRedirectProcessor);
         return new CompositeRedirectProcessor(redirectProcessors);
     }

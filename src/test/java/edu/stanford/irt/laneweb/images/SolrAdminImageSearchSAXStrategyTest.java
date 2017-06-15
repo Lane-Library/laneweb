@@ -25,7 +25,7 @@ public class SolrAdminImageSearchSAXStrategyTest {
 
     @Before
     public void setUp() {
-        this.strategy = new SolrAdminImageSearchSAXStrategy();
+        this.strategy = new SolrAdminImageSearchSAXStrategy(null);
         this.xmlConsumer = new TestXMLConsumer();
         this.image = createMock(Image.class);
     }

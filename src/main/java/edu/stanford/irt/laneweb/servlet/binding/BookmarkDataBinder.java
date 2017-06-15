@@ -16,6 +16,10 @@ public class BookmarkDataBinder implements DataBinder {
 
     private BookmarkService bookmarkService;
 
+    public BookmarkDataBinder(BookmarkService bookmarkService) {
+        this.bookmarkService = bookmarkService;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -33,9 +37,5 @@ public class BookmarkDataBinder implements DataBinder {
             }
             model.put(Model.BOOKMARKS, bookmarks);
         }
-    }
-
-    public void setBookmarkDAO(final BookmarkService bookmarkService) {
-        this.bookmarkService = bookmarkService;
     }
 }

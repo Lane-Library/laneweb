@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,17 +33,6 @@ import edu.stanford.irt.solr.service.SolrImageService;
 @EnableSolrRepositories(basePackages = {
         "edu.stanford.irt.solr.repository.search" }, multicoreSupport = true, solrClientRef = "solrSearcherServer")
 public class ImagesConfiguration {
-
-    private String imageSearchURL;
-
-    private Marshaller marshaller;
-
-    @Autowired
-    public ImagesConfiguration(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL,
-            final Marshaller marshaller) {
-        this.imageSearchURL = imageSearchURL;
-        this.marshaller = marshaller;
-    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")
@@ -76,14 +64,12 @@ public class ImagesConfiguration {
 
     @Bean
     public SAXStrategy<SolrImageSearchResult> solrAdminImageSearchSAXStrategy() {
-        SolrAdminImageSearchSAXStrategy saxStrategy = new SolrAdminImageSearchSAXStrategy();
-        saxStrategy.setWebsiteIdMapping(websiteIdMapping());
-        return saxStrategy;
+        return new SolrAdminImageSearchSAXStrategy(websiteIdMapping());
     }
 
     @Bean(name = "solrSearcherServer")
-    public SolrClient solrClient() {
-        return new HttpSolrClient(this.imageSearchURL);
+    public SolrClient solrClient(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL) {
+        return new HttpSolrClient(imageSearchURL);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image")
@@ -94,15 +80,13 @@ public class ImagesConfiguration {
 
     @Bean
     public SAXStrategy<SolrImageSearchResult> solrImageSearchSAXStrategy() {
-        SolrImageSearchSAXStrategy saxStrategy = new SolrImageSearchSAXStrategy();
-        saxStrategy.setWebsiteIdMapping(websiteIdMapping());
-        return saxStrategy;
+        return new SolrImageSearchSAXStrategy(websiteIdMapping());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/facet-copyright")
     @Scope("prototype")
-    public Generator solrImageSearchTabGenerator() {
-        return new SolrImageSearchTabGenerator(solrImageService(), this.marshaller);
+    public Generator solrImageSearchTabGenerator(final Marshaller marshaller) {
+        return new SolrImageSearchTabGenerator(solrImageService(), marshaller);
     }
 
     @Bean(name = "edu.stanford.irt.solr.service")

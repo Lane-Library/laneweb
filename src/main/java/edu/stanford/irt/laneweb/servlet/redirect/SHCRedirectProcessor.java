@@ -1,6 +1,12 @@
 package edu.stanford.irt.laneweb.servlet.redirect;
 
+import java.util.Map;
+
 public class SHCRedirectProcessor extends DefaultRedirectProcessor {
+
+    public SHCRedirectProcessor(Map<String, String> redirectMap) {
+        super(redirectMap);
+    }
 
     @Override
     public String getRedirectURL(final String uri, final String basePath, final String queryString) {
