@@ -25,6 +25,8 @@ public class Model {
 
     public static final String CLASS_ID = "class-id";
 
+    public static final String CLASSES_SERVICE_URI = "classes-service-uri";
+
     public static final String CONTENT_BASE = "content-base";
 
     public static final String DEBUG = "debug";
@@ -135,6 +137,8 @@ public class Model {
 
     public static final String TITLE = "title";
 
+    public static final String TODAY = "today";
+
     public static final String TODAYS_HOURS = "todays-hours";
 
     public static final String TYPE = "type";
@@ -154,8 +158,6 @@ public class Model {
     public static final String USER_ID = "userid";
 
     public static final String VERSION = "version";
-
-    public static final String TODAY = "today";
 
     private Model() {
         // private constructior
