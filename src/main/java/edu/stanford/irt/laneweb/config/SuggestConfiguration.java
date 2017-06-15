@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,26 +14,20 @@ import edu.stanford.irt.suggest.SuggestionManager;
 @Configuration
 public class SuggestConfiguration {
 
-    private SolrService solrService;
-
-    @Autowired
-    public SuggestConfiguration(final SolrService solrService) {
-        this.solrService = solrService;
-    }
-
     @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/eresource")
-    public SuggestionManager eresourceSuggestionManager() {
-        return new SolrSuggestionManager(this.solrService);
+    public SolrSuggestionManager eresourceSuggestionManager(final SolrService solrService) {
+        return new SolrSuggestionManager(solrService);
     }
 
     @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/extensions-suggest")
-    public SuggestionManager extensionsSuggestionManager() {
+    public SuggestionManager extensionsSuggestionManager(final SolrSuggestionManager eresourceSuggestionManager,
+            final MeshSuggestionManager meshSuggestionManager) {
         return new CompositeSuggestionManager(
-                Arrays.asList(new SuggestionManager[] { eresourceSuggestionManager(), meshSuggestionManager() }));
+                Arrays.asList(new SuggestionManager[] { eresourceSuggestionManager, meshSuggestionManager }));
     }
 
     @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
-    public SuggestionManager meshSuggestionManager() {
+    public MeshSuggestionManager meshSuggestionManager() {
         return new MeshSuggestionManager();
     }
 }

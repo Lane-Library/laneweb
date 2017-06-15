@@ -44,19 +44,13 @@ public class EMailController {
 
     private static final String SUBJECT = "subject";
 
-    @Autowired
     private RequestHeaderDataBinder headerBinder;
 
-    @Autowired
     private RemoteProxyIPDataBinder remoteIPBinder;
 
-    @Autowired
     private EMailSender sender;
 
-    public EMailController() {
-        // empty default constructor
-    }
-
+    @Autowired
     public EMailController(final RequestHeaderDataBinder headerBinder, final RemoteProxyIPDataBinder remoteIPBinder,
             final EMailSender sender) {
         this.headerBinder = headerBinder;

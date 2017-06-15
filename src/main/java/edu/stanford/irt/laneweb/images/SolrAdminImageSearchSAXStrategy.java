@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.images;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -14,6 +15,10 @@ import edu.stanford.irt.solr.Image;
 public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy {
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
+
+    public SolrAdminImageSearchSAXStrategy(Map<String, String> websiteIdMapping) {
+        super(websiteIdMapping);
+    }
 
     @Override
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)

@@ -11,17 +11,17 @@ public class SuggestConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new SuggestConfiguration(null);
+        this.configuration = new SuggestConfiguration();
     }
 
     @Test
     public void testEresourceSuggestionManager() {
-        assertNotNull(this.configuration.eresourceSuggestionManager());
+        assertNotNull(this.configuration.eresourceSuggestionManager(null));
     }
 
     @Test
     public void testExtensionsSuggestionManager() {
-        assertNotNull(this.configuration.extensionsSuggestionManager());
+        assertNotNull(this.configuration.extensionsSuggestionManager(null, null));
     }
 
     @Test

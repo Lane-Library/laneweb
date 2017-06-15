@@ -13,12 +13,12 @@ public class TrendsConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new TrendsConfiguration(null);
+        this.configuration = new TrendsConfiguration();
     }
 
     @Test
     public void testBookmarkTrendsReporter() throws UnknownHostException {
-        assertNotNull(this.configuration.bookmarkTrendsReporter());
+        assertNotNull(this.configuration.bookmarkTrendsReporter(null));
     }
 
     @Test

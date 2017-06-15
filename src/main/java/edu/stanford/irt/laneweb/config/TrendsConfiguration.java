@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.config;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -16,17 +15,10 @@ import edu.stanford.irt.laneweb.trends.GoogleTracker;
 @EnableScheduling
 public class TrendsConfiguration {
 
-    private BookmarkService bookmarkService;
-
-    @Autowired
-    public TrendsConfiguration(final BookmarkService bookmarkService) {
-        this.bookmarkService = bookmarkService;
-    }
-
     @Bean
-    public BookmarkTrendsReporter bookmarkTrendsReporter() throws UnknownHostException {
-        return new BookmarkTrendsReporter(this.bookmarkService, googleTracker(),
-                InetAddress.getLocalHost().getHostName());
+    public BookmarkTrendsReporter bookmarkTrendsReporter(final BookmarkService bookmarkService)
+            throws UnknownHostException {
+        return new BookmarkTrendsReporter(bookmarkService, googleTracker(), InetAddress.getLocalHost().getHostName());
     }
 
     @Bean

@@ -34,20 +34,20 @@ public class SourceConfiguration implements InitializingBean {
 
     private BeanFactory beanFactory;
 
-    @Autowired
     private Cache<Serializable, CachedResponse> cache;
 
-    @Autowired
     private ComponentFactory componentFactory;
 
-    @Autowired
     private ResourceLoader resourceLoader;
 
     private SourceResolverImpl sourceResolver;
 
     @Autowired
-    public SourceConfiguration(final BeanFactory beanFactory) {
+    public SourceConfiguration(final BeanFactory beanFactory, Cache<Serializable, CachedResponse> cache, ComponentFactory componentFactory, ResourceLoader resourceLoader) {
         this.beanFactory = beanFactory;
+        this.cache = cache;
+        this.componentFactory = componentFactory;
+        this.resourceLoader = resourceLoader;
     }
 
     @Override

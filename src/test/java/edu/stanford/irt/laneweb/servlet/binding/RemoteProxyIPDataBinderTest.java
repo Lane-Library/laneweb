@@ -34,12 +34,11 @@ public class RemoteProxyIPDataBinderTest {
 
     @Before
     public void setUp() {
-        this.dataBinder = new RemoteProxyIPDataBinder();
+        this.proxyLinks = createMock(ProxyLinks.class);
+        this.dataBinder = new RemoteProxyIPDataBinder(this.proxyLinks);
         this.model = new HashMap<>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
-        this.proxyLinks = createMock(ProxyLinks.class);
-        this.dataBinder.setProxyLinks(this.proxyLinks);
     }
 
     @Test

@@ -14,8 +14,12 @@ import edu.stanford.irt.cocoon.cache.CachedResponse;
 @Controller
 public class ClearCacheController {
 
-    @Autowired
     private Cache<Serializable, CachedResponse> cache;
+
+    @Autowired
+    public ClearCacheController(final Cache<Serializable, CachedResponse> cache) {
+        this.cache = cache;
+    }
 
     @RequestMapping(value = "/secure/admin/clearcache")
     @ResponseBody

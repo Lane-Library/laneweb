@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,8 +10,6 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +22,7 @@ import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
 import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.ContentBaseDataBinder;
@@ -56,127 +55,83 @@ import edu.stanford.irt.libraryhours.LibraryHoursService;
 @Configuration
 public class BindingConfiguration {
 
-    @Autowired
-    @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmark")
-    private DataBinder bookmarkDataBinder;
-
-    private URL contentBase;
-
-    @Value("${edu.stanford.irt.laneweb.disaster-mode}")
-    private Boolean disasterMode;
-
-    @Value("${edu.stanford.irt.laneweb.ezproxy-key}")
-    private String ezproxyKey;
-
-    @Autowired
-    private LDAPDataAccess ldapDataAccess;
-
-    private LibraryHoursService libraryHoursService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    private ServletContext servletContext;
-
-    private String userCookieKey;
-
-    @Value("${edu.stanford.irt.laneweb.useridhashkey}")
-    private String userIdHashKey;
-
-    private String version;
-
-    @Autowired
-    public BindingConfiguration(@Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey,
-            @Value("${edu.stanford.irt.laneweb.live-base}") final URL contentBase,
-            @Value("${edu.stanford.irt.laneweb.version}") final String version, final ServletContext servletContext,
-            final LibraryHoursService libraryHoursService) {
-        this.userCookieKey = userCookieKey;
-        this.contentBase = contentBase;
-        this.version = version;
-        this.servletContext = servletContext;
-        this.libraryHoursService = libraryHoursService;
+    @Bean
+    public ActiveSunetidDataBinder activeSunetidDataBinder(final LDAPDataAccess ldapDataAccess) {
+        return new ActiveSunetidDataBinder(ldapDataAccess);
     }
 
     @Bean
-    public DataBinder activeSunetidDataBinder() {
-        return new ActiveSunetidDataBinder(this.ldapDataAccess);
+    public BasePathDataBinder basePathDataBinder(final ServletContext servletContext) {
+        return new BasePathDataBinder(servletContext);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path")
-    public DataBinder basePathDataBinder() {
-        return new BasePathDataBinder(this.servletContext);
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-proxy-url")
-    public DataBinder baseProxyUrlDataBinder() {
+    @Bean
+    public BaseProxyURLDataBinder baseProxyUrlDataBinder() {
         return new BaseProxyURLDataBinder();
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/cme")
-    public DataBinder cmeDataBinder() {
+    public DataBinder cmeDataBinder(final UserDataBinder userDataBinder, final BasePathDataBinder basePathDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(4);
-        dataBinders.add(userDataBinder());
-        dataBinders.add(basePathDataBinder());
+        dataBinders.add(userDataBinder);
+        dataBinders.add(basePathDataBinder);
         dataBinders.add(emridDataBinder());
         dataBinders.add(remoteProxyIPDataBinder());
         return new CompositeDataBinder(dataBinders);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/content-base")
-    public DataBinder contentBaseDataBinder() {
-        return new ContentBaseDataBinder(this.contentBase);
+    @Bean
+    public ContentBaseDataBinder contentBaseDataBinder(
+            @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase) {
+        return new ContentBaseDataBinder(contentBase);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
-    public DataBinder dataBinder() {
+    public DataBinder dataBinder(final UserDataBinder userDataBinder,
+            final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
+            final BookmarkDataBinder bookmarkDataBinder, final BasePathDataBinder basePathDataBinder,
+            final ContentBaseDataBinder contentBaseDataBinder, final VersionDataBinder versionDataBinder,
+            final DisasterModeDataBinder disasterModeDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
+            final ModelDataBinder modelDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(22);
-        dataBinders.add(userDataBinder());
-        dataBinders.add(activeSunetidDataBinder());
-        dataBinders.add(ticketDataBinder());
-        dataBinders.add(debugDataBinder());
+        dataBinders.add(userDataBinder);
+        dataBinders.add(activeSunetidDataBinder);
+        dataBinders.add(ticketDataBinder);
+        dataBinders.add(new BooleanSessionParameterDataBinder("debug", "debug"));
         dataBinders.add(remoteProxyIPDataBinder());
         dataBinders.add(templateDataBinder());
         dataBinders.add(emridDataBinder());
-        dataBinders.add(requestParameterDataBinder());
-        dataBinders.add(requestMethodDataBinder());
+        dataBinders.add(new RequestParameterDataBinder());
+        dataBinders.add(new RequestMethodDataBinder());
         dataBinders.add(requestHeaderDataBinder());
-        dataBinders.add(userCookieDataBinder());
-        dataBinders.add(basePathDataBinder());
-        dataBinders.add(contentBaseDataBinder());
-        dataBinders.add(versionDataBinder());
-        dataBinders.add(disasterModeDataBinder());
-        dataBinders.add(liveChatScheduleDataBinder());
-        dataBinders.add(this.bookmarkDataBinder);
-        dataBinders.add(todaysHoursDataBinder());
-        dataBinders.add(parameterMapDataBinder());
+        dataBinders.add(new LoginExpirationCookieDataBinder());
+        dataBinders.add(basePathDataBinder);
+        dataBinders.add(contentBaseDataBinder);
+        dataBinders.add(versionDataBinder);
+        dataBinders.add(disasterModeDataBinder);
+        dataBinders.add(new LiveChatScheduleBinder());
+        dataBinders.add(bookmarkDataBinder);
+        dataBinders.add(todaysHoursDataBinder);
+        dataBinders.add(new ParameterMapDataBinder());
         dataBinders.add(baseProxyUrlDataBinder());
-        dataBinders.add(modelDataBinder());
-        dataBinders.add(todayDataBinder());
+        dataBinders.add(modelDataBinder);
+        dataBinders.add(new TodayDataBinder());
         return new CompositeDataBinder(dataBinders);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug")
-    public DataBinder debugDataBinder() {
-        return new BooleanSessionParameterDataBinder("debug", "debug");
+    @Bean
+    public DisasterModeDataBinder disasterModeDataBinder(
+            @Value("${edu.stanford.irt.laneweb.disaster-mode}") final Boolean disasterMode) {
+        return new DisasterModeDataBinder(disasterMode);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/disaster-mode")
-    public DataBinder disasterModeDataBinder() {
-        return new DisasterModeDataBinder(this.disasterMode);
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid")
+    @Bean
     public DataBinder emridDataBinder() {
         return new StringSessionParameterDataBinder("emrid", "emrid");
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/live-chat-schedule")
-    public DataBinder liveChatScheduleDataBinder() {
-        return new LiveChatScheduleBinder();
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/model")
-    public DataBinder modelDataBinder() {
+    @Bean
+    public ModelDataBinder modelDataBinder(final ObjectMapper objectMapper) {
         Set<String> keys = new HashSet<>();
         keys.add("auth");
         keys.add("base-path");
@@ -186,12 +141,7 @@ public class BindingConfiguration {
         keys.add("proxy-links");
         keys.add("url-encoded-query");
         keys.add("url-encoded-source");
-        return new ModelDataBinder(keys, this.objectMapper);
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/parameter-map")
-    public DataBinder parameterMapDataBinder() {
-        return new ParameterMapDataBinder();
+        return new ModelDataBinder(keys, objectMapper);
     }
 
     @Bean
@@ -222,26 +172,14 @@ public class BindingConfiguration {
         return new ProxyLinks(proxyCIDRRange, noProxyCIDRRange);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip")
-    public DataBinder remoteProxyIPDataBinder() {
-        RemoteProxyIPDataBinder dataBinder = new RemoteProxyIPDataBinder();
-        dataBinder.setProxyLinks(proxyLinks());
-        return dataBinder;
+    @Bean
+    public RemoteProxyIPDataBinder remoteProxyIPDataBinder() {
+        return new RemoteProxyIPDataBinder(proxyLinks());
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-header")
-    public DataBinder requestHeaderDataBinder() {
+    @Bean
+    public RequestHeaderDataBinder requestHeaderDataBinder() {
         return new RequestHeaderDataBinder();
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method")
-    public DataBinder requestMethodDataBinder() {
-        return new RequestMethodDataBinder();
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter")
-    public DataBinder requestParameterDataBinder() {
-        return new RequestParameterDataBinder();
     }
 
     @Bean
@@ -259,71 +197,67 @@ public class BindingConfiguration {
         return new TemplateChooser("template", templateNames, templateMap);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/template")
-    public DataBinder templateDataBinder() {
+    @Bean
+    public TemplateDataBinder templateDataBinder() {
         return new TemplateDataBinder(templateChooser());
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket")
-    public DataBinder ticketDataBinder() {
-        return new TicketDataBinder(this.ezproxyKey);
+    @Bean
+    public TicketDataBinder ticketDataBinder(
+            @Value("${edu.stanford.irt.laneweb.ezproxy-key}") final String ezproxyKey) {
+        return new TicketDataBinder(ezproxyKey);
     }
 
     @Bean
-    public TodayDataBinder todayDataBinder() {
-        return new TodayDataBinder();
+    public TodaysHours todaysHours(final LibraryHoursService libraryHoursService) {
+        return new TodaysHours(libraryHoursService);
     }
 
     @Bean
-    public TodaysHours todaysHours() {
-        return new TodaysHours(this.libraryHoursService);
+    public TodaysHoursBinder todaysHoursDataBinder(final TodaysHours todaysHours) {
+        return new TodaysHoursBinder(todaysHours);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/todays-hours")
-    public DataBinder todaysHoursDataBinder() {
-        return new TodaysHoursBinder(todaysHours());
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/univid")
-    public DataBinder unividDataBinder() {
+    @Bean
+    public UnividDataBinder unividDataBinder() {
         return new UnividDataBinder();
     }
 
     @Bean
-    public UserCookieCodec userCookieCodec() {
-        return new UserCookieCodec(this.userCookieKey);
+    public UserCookieCodec userCookieCodec(
+            @Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey) {
+        return new UserCookieCodec(userCookieKey);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie")
-    public DataBinder userCookieDataBinder() {
-        return new LoginExpirationCookieDataBinder();
-    }
-
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/user")
-    public DataBinder userDataBinder() {
+    @Bean
+    public UserDataBinder userDataBinder(@Value("${edu.stanford.irt.laneweb.useridhashkey}") final String userIdHashKey,
+            final UserCookieCodec userCookieCodec) {
         List<UserFactory> userFactories = new ArrayList<>();
-        userFactories.add(new RequestAttributeUserFactory(this.userIdHashKey));
-        userFactories.add(new CookieUserFactory(userCookieCodec(), this.userIdHashKey));
+        userFactories.add(new RequestAttributeUserFactory(userIdHashKey));
+        userFactories.add(new CookieUserFactory(userCookieCodec, userIdHashKey));
         return new UserDataBinder(userFactories);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/userdata")
-    public DataBinder userDataDataBinder() {
+    public DataBinder userDataDataBinder(final UserDataBinder userDataBinder,
+            final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
+            final BasePathDataBinder basePathDataBinder, final DisasterModeDataBinder disasterModeDataBinder,
+            final BookmarkDataBinder bookmarkDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>();
-        dataBinders.add(userDataBinder());
-        dataBinders.add(activeSunetidDataBinder());
-        dataBinders.add(ticketDataBinder());
+        dataBinders.add(userDataBinder);
+        dataBinders.add(activeSunetidDataBinder);
+        dataBinders.add(ticketDataBinder);
         dataBinders.add(remoteProxyIPDataBinder());
         dataBinders.add(emridDataBinder());
-        dataBinders.add(basePathDataBinder());
-        dataBinders.add(disasterModeDataBinder());
-        dataBinders.add(this.bookmarkDataBinder);
+        dataBinders.add(basePathDataBinder);
+        dataBinders.add(disasterModeDataBinder);
+        dataBinders.add(bookmarkDataBinder);
         dataBinders.add(baseProxyUrlDataBinder());
         return new CompositeDataBinder(dataBinders);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/version")
-    public DataBinder versionDataBinder() {
-        return new VersionDataBinder(this.version);
+    @Bean
+    public VersionDataBinder versionDataBinder(@Value("${edu.stanford.irt.laneweb.version}") final String version) {
+        return new VersionDataBinder(version);
     }
 }

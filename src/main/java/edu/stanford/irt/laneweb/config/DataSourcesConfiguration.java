@@ -70,7 +70,7 @@ public class DataSourcesConfiguration {
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,
             @Value("${edu.stanford.irt.laneweb.db.eresources.password}") final String password) {
         HikariConfig config = new HikariConfig();
-        config.setInitializationFailFast(false);
+        config.setInitializationFailTimeout(-1);
         config.setConnectionTimeout(FIVE_SECONDS);
         config.setUsername(user);
         config.setPassword(password);
