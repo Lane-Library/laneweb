@@ -24,7 +24,7 @@ public class WebMvcConfigurerTest {
 
     @Before
     public void setUp() {
-        this.configuration = new WebMvcConfigurer(null);
+        this.configuration = new WebMvcConfigurer(null, null, null);
     }
 
     @Test
@@ -54,11 +54,6 @@ public class WebMvcConfigurerTest {
     }
 
     @Test
-    public void testDeviceResolverHandlerInterceptor() {
-        assertNotNull(this.configuration.deviceResolverHandlerInterceptor());
-    }
-
-    @Test
     public void testGetSitemapHandlerExceptionResolver() {
         assertNotNull(this.configuration.getSitemapHandlerExceptionResolver(null));
     }
@@ -66,11 +61,6 @@ public class WebMvcConfigurerTest {
     @Test
     public void testMobileSiteInterceptor() {
         assertNotNull(this.configuration.mobileSiteInterceptor());
-    }
-
-    @Test
-    public void testPersistentLoginHandlerInterceptor() {
-        assertNotNull(this.configuration.persistentLoginHandlerInterceptor());
     }
 
     @Test

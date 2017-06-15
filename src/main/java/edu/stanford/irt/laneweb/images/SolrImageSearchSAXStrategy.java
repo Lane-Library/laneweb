@@ -67,7 +67,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 
     private Map<String, String> websiteIdMapping;
 
-    public void setWebsiteIdMapping(final Map<String, String> websiteIdMapping) {
+    public SolrImageSearchSAXStrategy(Map<String, String> websiteIdMapping) {
         this.websiteIdMapping = websiteIdMapping;
     }
 

@@ -13,11 +13,15 @@ import edu.stanford.irt.laneweb.proxy.ProxyServersService;
 @Controller
 public class EzproxyServersController {
 
+    private ProxyServersService service;
+
     @Autowired
-    private ProxyServersService writer;
+    public EzproxyServersController(final ProxyServersService service) {
+        this.service = service;
+    }
 
     @RequestMapping(value = "/eresources/ezproxy-servers.txt")
     public void getEzproxyServers(final HttpServletResponse response) throws IOException {
-        this.writer.write(response.getOutputStream());
+        this.service.write(response.getOutputStream());
     }
 }

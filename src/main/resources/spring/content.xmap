@@ -176,7 +176,7 @@
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
                 <map:transform type="saxon" src="classpath:/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -189,7 +189,7 @@
         <map:match type="wildcard" pattern="samples/flickr/results.html">
             <map:generate type="file" src="{content-base}/{0}"/>
             <map:transform type="xinclude"/>
-            <map:transform type="joost" src="/resources/xsl/flickr.stx"/>
+            <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="samples/spiritual.html" type="wildcard">

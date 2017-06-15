@@ -24,15 +24,17 @@
 }
 /* book covers in 2 columns*/
 .core-covers {
+    box-sizing: border-box;
     float: left;
-    width: 47%;
-    margin: 0 1em 13px 0;
+    padding: 0 1em 13px 0;
+    width: 50%;
 }
 /* book covers in 3 columns*/
 .core-covers-3 {
+    box-sizing: border-box;
     float: left;
-    width: 31%;
-    margin: 0 1em 13px 0;
+    padding: 0 1em 13px 0;
+    width: 33%;
 }
 
 .landing {

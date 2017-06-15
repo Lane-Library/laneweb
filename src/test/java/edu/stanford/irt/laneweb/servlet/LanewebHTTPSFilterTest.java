@@ -37,7 +37,6 @@ public class LanewebHTTPSFilterTest {
     public void testInternalDoFilter() throws IOException, ServletException {
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("https://lane.stanford.edu/secure/index.html"));
-        expect(this.request.getHeader("gohttps")).andReturn(null);
         expect(this.request.getScheme()).andReturn("https");
         this.chain.doFilter(this.request, this.response);
         replay(this.chain, this.response, this.request);
@@ -49,6 +48,7 @@ public class LanewebHTTPSFilterTest {
     public void testInternalDoFilterGoHttps() throws IOException, ServletException {
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("https://lane.stanford.edu/secure/index.html"));
+        expect(this.request.getScheme()).andReturn("http");
         expect(this.request.getHeader("gohttps")).andReturn("1");
         this.chain.doFilter(this.request, this.response);
         replay(this.chain, this.response, this.request);
@@ -60,8 +60,9 @@ public class LanewebHTTPSFilterTest {
     public void testInternalDoFilterHttp() throws IOException, ServletException {
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("http://lane.stanford.edu/secure/index.html"));
-        expect(this.request.getHeader("gohttps")).andReturn(null);
         expect(this.request.getScheme()).andReturn("http");
+        expect(this.request.getHeader("gohttps")).andReturn(null);
+        expect(this.request.getHeader("x-forwarded-proto")).andReturn(null);
         this.response.sendRedirect("https://lane.stanford.edu/secure/index.html");
         replay(this.chain, this.response, this.request);
         this.filter.internalDoFilter(this.request, this.response, this.chain);
@@ -72,9 +73,23 @@ public class LanewebHTTPSFilterTest {
     public void testInternalDoFilterHttpQuery() throws IOException, ServletException {
         expect(this.request.getQueryString()).andReturn("query");
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("http://lane.stanford.edu/secure/index.html"));
-        expect(this.request.getHeader("gohttps")).andReturn(null);
         expect(this.request.getScheme()).andReturn("http");
+        expect(this.request.getHeader("gohttps")).andReturn(null);
+        expect(this.request.getHeader("x-forwarded-proto")).andReturn(null);
         this.response.sendRedirect("https://lane.stanford.edu/secure/index.html?query");
+        replay(this.chain, this.response, this.request);
+        this.filter.internalDoFilter(this.request, this.response, this.chain);
+        verify(this.chain, this.response, this.request);
+    }
+
+    @Test
+    public void testInternalDoFilterXForwardedProto() throws IOException, ServletException {
+        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.request.getRequestURL()).andReturn(new StringBuffer("https://lane.stanford.edu/secure/index.html"));
+        expect(this.request.getScheme()).andReturn("http");
+        expect(this.request.getHeader("gohttps")).andReturn(null);
+        expect(this.request.getHeader("x-forwarded-proto")).andReturn("https");
+        this.chain.doFilter(this.request, this.response);
         replay(this.chain, this.response, this.request);
         this.filter.internalDoFilter(this.request, this.response, this.chain);
         verify(this.chain, this.response, this.request);

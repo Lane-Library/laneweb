@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +10,9 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class ContentBaseDataBinder implements DataBinder {
 
-    private URL contentBase;
+    private URI contentBase;
 
-    public ContentBaseDataBinder(final URL contentBase) {
+    public ContentBaseDataBinder(final URI contentBase) {
         if (contentBase == null) {
             throw new LanewebException("null contentBase");
         }

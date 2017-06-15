@@ -29,7 +29,7 @@ public class BookmarkDataBinderTest {
 
     private List<Bookmark> bookmarks;
 
-    private BookmarkService dao;
+    private BookmarkService bookmarkService;
 
     private Map<String, Object> model;
 
@@ -39,12 +39,11 @@ public class BookmarkDataBinderTest {
 
     @Before
     public void setUp() throws Exception {
-        this.binder = new BookmarkDataBinder();
+        this.bookmarkService = createMock(BookmarkService.class);
+        this.binder = new BookmarkDataBinder(this.bookmarkService);
         this.model = new HashMap<>();
         this.model.put(Model.USER_ID, "ditenus");
         this.bookmarks = Collections.emptyList();
-        this.dao = createMock(BookmarkService.class);
-        this.binder.setBookmarkDAO(this.dao);
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
     }
@@ -53,35 +52,35 @@ public class BookmarkDataBinderTest {
     public void testInSession() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(this.bookmarks);
-        replay(this.dao, this.request, this.session);
+        replay(this.bookmarkService, this.request, this.session);
         this.binder.bind(this.model, this.request);
         assertEquals(this.bookmarks, this.model.get(Model.BOOKMARKS));
-        verify(this.dao, this.request, this.session);
+        verify(this.bookmarkService, this.request, this.session);
     }
 
     @Test
     public void testNotInDAO() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
-        expect(this.dao.getLinks("ditenus")).andReturn(null);
+        expect(this.bookmarkService.getLinks("ditenus")).andReturn(null);
         this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
-        replay(this.dao, this.request, this.session);
+        replay(this.bookmarkService, this.request, this.session);
         this.binder.bind(this.model, this.request);
         assertEquals(this.bookmarks, this.model.get(Model.BOOKMARKS));
         assertNotSame(this.bookmarks, this.model.get(Model.BOOKMARKS));
-        verify(this.dao, this.request, this.session);
+        verify(this.bookmarkService, this.request, this.session);
     }
 
     @Test
     public void testNotInSession() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
-        expect(this.dao.getLinks("ditenus")).andReturn(this.bookmarks);
+        expect(this.bookmarkService.getLinks("ditenus")).andReturn(this.bookmarks);
         this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
-        replay(this.dao, this.request, this.session);
+        replay(this.bookmarkService, this.request, this.session);
         this.binder.bind(this.model, this.request);
         assertEquals(this.bookmarks, this.model.get(Model.BOOKMARKS));
-        verify(this.dao, this.request, this.session);
+        verify(this.bookmarkService, this.request, this.session);
     }
 
     @Test

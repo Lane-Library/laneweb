@@ -19,17 +19,17 @@ public class GrandRoundsConfigurationTest {
     @Before
     public void setUp() {
         this.dataSource = createMock(DataSource.class);
-        this.configuration = new GrandRoundsConfiguration(this.dataSource);
+        this.configuration = new GrandRoundsConfiguration();
     }
 
     @Test
     public void testGrandRoundsGenerator() throws IOException {
-        assertNotNull(this.configuration.grandRoundsGenerator());
+        assertNotNull(this.configuration.grandRoundsGenerator(null));
     }
 
     @Test
     public void testGrandRoundsManager() throws IOException {
-        assertNotNull(this.configuration.grandRoundsService());
+        assertNotNull(this.configuration.jdbcGrandRoundsService(this.dataSource));
     }
 
     @Test

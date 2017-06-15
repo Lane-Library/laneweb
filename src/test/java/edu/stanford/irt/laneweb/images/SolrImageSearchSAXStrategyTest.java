@@ -43,14 +43,13 @@ public class SolrImageSearchSAXStrategyTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.strategy = new SolrImageSearchSAXStrategy();
+        this.idMapping = Collections.singletonMap("id", "mappedId");
+        this.strategy = new SolrImageSearchSAXStrategy(this.idMapping);
         this.xmlConsumer = new TestXMLConsumer();
         this.imagePage = createMock(Page.class);
         this.image = createMock(Image.class);
         this.facetFieldEntryPage = createMock(Page.class);
         this.facetFieldEntry = createMock(FacetFieldEntry.class);
-        this.idMapping = Collections.singletonMap("id", "mappedId");
-        this.strategy.setWebsiteIdMapping(this.idMapping);
         this.result = createMock(SolrImageSearchResult.class);
     }
 

@@ -3,45 +3,42 @@ package edu.stanford.irt.laneweb.config;
 import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertNotNull;
 
+import org.apache.solr.client.solrj.SolrClient;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.oxm.Marshaller;
 
 public class EresourcesConfigurationTest {
 
     private EresourcesConfiguration configuration;
 
-    private Marshaller marshaller;
-
     @Before
     public void setUp() {
-        this.marshaller = createMock(Marshaller.class);
-        this.configuration = new EresourcesConfiguration("url", this.marshaller);
+        this.configuration = new EresourcesConfiguration();
     }
 
     @Test
     public void testEresourcesBrowseAllGenerator() {
-        assertNotNull(this.configuration.eresourcesBrowseAllGenerator());
+        assertNotNull(this.configuration.eresourcesBrowseAllGenerator(null));
     }
 
     @Test
     public void testEresourcesBrowseGenerator() {
-        assertNotNull(this.configuration.eresourcesBrowseGenerator());
+        assertNotNull(this.configuration.eresourcesBrowseGenerator(null));
     }
 
     @Test
     public void testEresourcesCoreGenerator() {
-        assertNotNull(this.configuration.eresourcesCoreGenerator());
+        assertNotNull(this.configuration.eresourcesCoreGenerator(null));
     }
 
     @Test
     public void testEresourcesCountGenerator() {
-        assertNotNull(this.configuration.eresourcesCountGenerator());
+        assertNotNull(this.configuration.eresourcesCountGenerator(null));
     }
 
     @Test
     public void testEresourcesMeshGenerator() {
-        assertNotNull(this.configuration.eresourcesMeshGenerator());
+        assertNotNull(this.configuration.eresourcesMeshGenerator(null));
     }
 
     @Test
@@ -51,7 +48,7 @@ public class EresourcesConfigurationTest {
 
     @Test
     public void testLinkWithCoverTransformer() {
-        assertNotNull(this.configuration.linkWithCoverTransformer());
+        assertNotNull(this.configuration.linkWithCoverTransformer(null));
     }
 
     @Test
@@ -61,7 +58,7 @@ public class EresourcesConfigurationTest {
 
     @Test
     public void testSolrClient() {
-        assertNotNull(this.configuration.solrClient());
+        assertNotNull(this.configuration.solrClient("/"));
     }
 
     @Test
@@ -76,21 +73,21 @@ public class EresourcesConfigurationTest {
 
     @Test
     public void testSolrSearchFacetsGenerator() {
-        assertNotNull(this.configuration.solrSearchFacetsGenerator());
+        assertNotNull(this.configuration.solrSearchFacetsGenerator(null, null));
     }
 
     @Test
     public void testSolrSearchGenerator() {
-        assertNotNull(this.configuration.solrSearchGenerator());
+        assertNotNull(this.configuration.solrSearchGenerator(null));
     }
 
     @Test
     public void testSolrService() {
-        assertNotNull(this.configuration.solrService());
+        assertNotNull(this.configuration.solrService(null, null));
     }
 
     @Test
     public void testSolrTemplate() {
-        assertNotNull(this.configuration.solrTemplate());
+        assertNotNull(this.configuration.solrTemplate(createMock(SolrClient.class)));
     }
 }

@@ -7,7 +7,7 @@
         <version>25</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.34-SNAPSHOT</version>
+    <version>3.3.35-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -45,8 +45,9 @@
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
+        <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css</sonar.exclusions>
-        <sonar.javascript.lcov.reportPath>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPath>
+        <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
         <dependency>
@@ -333,6 +334,17 @@
         	<artifactId>lanehours</artifactId>
         	<version>1.0.0</version>
         </dependency>
+        <dependency>
+        	<groupId>com.zaxxer</groupId>
+        	<artifactId>HikariCP</artifactId>
+        	<version>2.6.3</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.postgresql</groupId>
+        	<artifactId>postgresql</artifactId>
+        	<version>9.4.1212</version>
+        	<scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -577,7 +589,7 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>2.0.0</version>
                 <configuration>
                     <testDir>src/test/javascript</testDir>
                 </configuration>
@@ -617,7 +629,6 @@
                         <exclude>src/main/javascript/mobile/jquery-1.9.1.js</exclude>
                         <exclude>src/main/javascript/mobile/jquery-ui-1.10.4.custom.js</exclude>
                         <exclude>src/main/javascript/mobile/jquery.mobile-1.4.0.custom.js</exclude>
-                        <exclude>src/main/javascript/swfobject.js</exclude>
                         <exclude>src/main/javascript/yui-3.18.1.js</exclude>
                     </excludes>
                 </configuration>

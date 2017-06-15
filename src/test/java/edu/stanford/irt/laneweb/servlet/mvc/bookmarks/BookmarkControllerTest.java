@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,8 @@ public class BookmarkControllerTest {
 
     private HttpServletRequest request;
 
+    private HttpSession session;
+
     private UserDataBinder userDataBinder;
 
     @Before
@@ -50,6 +53,7 @@ public class BookmarkControllerTest {
                 this.userDataBinder);
         this.request = createMock(HttpServletRequest.class);
         this.model = createMock(Model.class);
+        this.session = createMock(HttpSession.class);
     }
 
     @Test
@@ -80,8 +84,9 @@ public class BookmarkControllerTest {
     @Test
     public void testSaveLinks() {
         this.bookmarkService.saveLinks("userid", Collections.emptyList());
-        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
-        this.controller.saveLinks("userid", Collections.emptyList());
-        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model);
+        this.session.setAttribute("bookmarks", Collections.emptyList());
+        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model, this.session);
+        this.controller.saveLinks("userid", Collections.emptyList(), this.session);
+        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model, this.session);
     }
 }

@@ -2,27 +2,27 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
-
 public class ShibTesterTest {
-
-    private ServletOutputStream output;
 
     private HttpServletRequest request;
 
@@ -35,49 +35,26 @@ public class ShibTesterTest {
         this.tester = new ShibTester();
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
-        this.output = createMock(ServletOutputStream.class);
     }
 
     @Test
     public void testTestUrl() throws IOException {
+        List<String> lines = Files.readAllLines(
+                FileSystems.getDefault().getPath(getClass().getResource("shib-tester.txt").getPath()));
+        StringBuilder sb = new StringBuilder();
+        lines.stream().forEach(s -> sb.append(s).append('\n'));
+        StringWriter sw = new StringWriter();
+        expect(this.response.getWriter()).andReturn(new PrintWriter(sw));
         expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
         expect(this.request.getHeader("name")).andReturn("value");
         expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
-        expect(this.request.getAttribute("displayName")).andReturn("name");
-        expect(this.request.getAttribute("uid")).andReturn("uid");
-        expect(this.request.getAttribute("mail")).andReturn("mail");
-        expect(this.request.getAttribute("group")).andReturn("group");
+        expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
         expect(this.request.getAttributeNames())
-                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
-        expect(this.request.getAttribute("name")).andReturn("value");
+                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.springframework.foo" })));
         this.response.setContentType("text/plain");
-        expect(this.response.getOutputStream()).andReturn(this.output);
-        this.output.write(isA(byte[].class));
-        replay(this.request, this.response, this.output);
+        replay(this.request, this.response);
         this.tester.testUrl(this.request, this.response);
-        verify(this.request, this.response, this.output);
-    }
-
-    @Test(expected = LanewebException.class)
-    public void testTestUrlThrowsException() throws IOException {
-        expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
-        expect(this.request.getHeader("name")).andReturn("value");
-        expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute("Shib-Identity-Provider")).andReturn("provider");
-        expect(this.request.getAttribute("displayName")).andReturn("name");
-        expect(this.request.getAttribute("uid")).andReturn("uid");
-        expect(this.request.getAttribute("mail")).andReturn("mail");
-        expect(this.request.getAttribute("group")).andReturn("group");
-        expect(this.request.getAttributeNames())
-                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.spring.foo" })));
-        expect(this.request.getAttribute("name")).andReturn("value");
-        this.response.setContentType("text/plain");
-        expect(this.response.getOutputStream()).andReturn(this.output);
-        this.output.write(isA(byte[].class));
-        expectLastCall().andThrow(new IOException());
-        replay(this.request, this.response, this.output);
-        this.tester.testUrl(this.request, this.response);
-        verify(this.request, this.response, this.output);
+        assertEquals(sb.toString(), sw.toString());
+        verify(this.request, this.response);
     }
 }

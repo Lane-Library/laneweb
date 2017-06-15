@@ -18,9 +18,4 @@ public class EmailConfigurationTest {
     public void testEMailSender() {
         assertNotNull(this.configuration.eMailSender());
     }
-
-    @Test
-    public void testSpamFilter() {
-        assertNotNull(this.configuration.spamFilter());
-    }
 }

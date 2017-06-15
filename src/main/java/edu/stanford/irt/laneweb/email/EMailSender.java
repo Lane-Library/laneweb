@@ -36,11 +36,8 @@ public class EMailSender {
 
     private JavaMailSender mailSender;
 
-    private SpamFilter spamFilter;
-
-    public EMailSender(final JavaMailSender mailSender, final SpamFilter spamFilter) {
+    public EMailSender(final JavaMailSender mailSender) {
         this.mailSender = mailSender;
-        this.spamFilter = spamFilter;
         this.excludedFields = new HashSet<>();
         for (String element : XCLUDED_FIELDS) {
             this.excludedFields.add(element);
@@ -48,7 +45,6 @@ public class EMailSender {
     }
 
     public void sendEmail(final Map<String, Object> map) {
-        this.spamFilter.checkForSpam(map);
         final MimeMessage message = this.mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {

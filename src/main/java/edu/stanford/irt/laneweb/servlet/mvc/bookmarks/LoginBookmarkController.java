@@ -3,6 +3,8 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -31,11 +33,12 @@ public class LoginBookmarkController extends BookmarkController {
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final String label,
             @RequestParam final String url,
-            @RequestParam final String redirect) {
+            @RequestParam final String redirect,
+            final HttpSession session) {
         Bookmark bookmark = new Bookmark(label, url);
         List<Bookmark> clone = new ArrayList<>(bookmarks);
         clone.add(0, bookmark);
-        saveLinks(userid, clone);
+        saveLinks(userid, clone, session);
         bookmarks.add(0, bookmark);
         return "redirect:" + redirect;
     }

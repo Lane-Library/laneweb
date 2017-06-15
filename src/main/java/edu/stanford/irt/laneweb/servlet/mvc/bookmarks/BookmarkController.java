@@ -3,11 +3,13 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
@@ -36,7 +38,8 @@ public abstract class BookmarkController {
         }
     }
 
-    protected void saveLinks(final String userid, final List<Bookmark> links) {
+    protected void saveLinks(final String userid, final List<Bookmark> links, final HttpSession session) {
         this.bookmarkService.saveLinks(userid, links);
+        session.setAttribute(Model.BOOKMARKS, links);
     }
 }

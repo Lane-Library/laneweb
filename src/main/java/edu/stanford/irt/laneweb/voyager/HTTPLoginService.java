@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -20,7 +18,6 @@ public class HTTPLoginService implements LoginService {
 
     private ObjectMapper objectMapper;
 
-    @Autowired
     public HTTPLoginService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
         this.objectMapper = objectMapper;
         this.catalogServiceURI = catalogServiceURI;

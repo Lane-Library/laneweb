@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,8 @@ public class BookmarkletController extends BookmarkController {
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
             @RequestParam final String url,
-            @RequestParam final String label) throws UnsupportedEncodingException {
+            @RequestParam final String label,
+            final HttpSession session) throws UnsupportedEncodingException {
         if (userid == null) {
             // not logged in, redirect through webauth:
             return "redirect:/secure/bookmarklet?url=" + URLEncoder.encode(url, UTF_8) + "&label="
@@ -44,7 +46,7 @@ public class BookmarkletController extends BookmarkController {
         }
         Bookmark bookmark = new Bookmark(label, url);
         bookmarks.add(0, bookmark);
-        saveLinks(userid, bookmarks);
+        saveLinks(userid, bookmarks, session);
         return "redirect:" + url;
     }
 

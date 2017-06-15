@@ -16,7 +16,7 @@ public class XMLConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new XMLConfiguration(null);
+        this.configuration = new XMLConfiguration();
     }
 
     @Test
@@ -47,7 +47,7 @@ public class XMLConfigurationTest {
 
     @Test
     public void testJoostTransformerHandlerFactory() {
-        assertNotNull(this.configuration.joostTransformerHandlerFactory());
+        assertNotNull(this.configuration.joostTransformerHandlerFactory(null));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class XMLConfigurationTest {
 
     @Test
     public void testSaxonTransformerHandlerFactory() {
-        assertNotNull(this.configuration.saxonTransformerHandlerFactory());
+        assertNotNull(this.configuration.saxonTransformerHandlerFactory(null));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class XMLConfigurationTest {
 
     @Test
     public void testUriResolver() {
-        assertNotNull(this.configuration.uriResolver());
+        assertNotNull(this.configuration.uriResolver(null));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class XMLConfigurationTest {
     @Test
     public void testXIncludePipe() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
             SAXNotSupportedException, ParserConfigurationException {
-        assertNotNull(this.configuration.xIncludePipe());
+        assertNotNull(this.configuration.xIncludePipe(null));
     }
 
     @Test

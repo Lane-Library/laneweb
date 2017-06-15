@@ -38,13 +38,10 @@ public class EMailSenderTest {
 
     private MimeMessage message;
 
-    private SpamFilter spamFilter;
-
     @Before
     public void setUp() throws Exception {
         this.javaMailSender = createMock(JavaMailSender.class);
-        this.spamFilter = createMock(SpamFilter.class);
-        this.eMailSender = new EMailSender(this.javaMailSender, this.spamFilter);
+        this.eMailSender = new EMailSender(this.javaMailSender);
         this.map = new HashMap<>();
         this.message = createMock(MimeMessage.class);
     }
@@ -55,16 +52,15 @@ public class EMailSenderTest {
         this.map.put("subject", "subject");
         this.map.put("email", "email@foo.com");
         this.map.put("message", "message");
-        this.spamFilter.checkForSpam(this.map);
         expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
         this.message.setSubject("subject");
         this.message.setRecipient(eq(RecipientType.TO), isA(Address.class));
         this.message.setFrom(isA(Address.class));
         this.message.setText("message: message\n\n");
         this.javaMailSender.send(this.message);
-        replay(this.javaMailSender, this.spamFilter, this.message);
+        replay(this.javaMailSender, this.message);
         this.eMailSender.sendEmail(this.map);
-        verify(this.javaMailSender, this.spamFilter, this.message);
+        verify(this.javaMailSender, this.message);
     }
 
     @Test
@@ -73,16 +69,15 @@ public class EMailSenderTest {
         this.map.put("subject", "subject");
         this.map.put("email", "email");
         this.map.put("message", "message");
-        this.spamFilter.checkForSpam(this.map);
         expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
         this.message.setSubject("subject");
         this.message.setRecipient(eq(RecipientType.TO), isA(Address.class));
         this.message.setFrom(isA(Address.class));
         this.message.setText("message: message\n\n");
         this.javaMailSender.send(this.message);
-        replay(this.javaMailSender, this.spamFilter, this.message);
+        replay(this.javaMailSender, this.message);
         this.eMailSender.sendEmail(this.map);
-        verify(this.javaMailSender, this.spamFilter, this.message);
+        verify(this.javaMailSender, this.message);
     }
 
     @Test
@@ -90,16 +85,15 @@ public class EMailSenderTest {
         this.map.put("recipient", "recipient");
         this.map.put("subject", "subject");
         this.map.put("message", "message");
-        this.spamFilter.checkForSpam(this.map);
         expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
         this.message.setSubject("subject");
         this.message.setRecipient(eq(RecipientType.TO), isA(Address.class));
         this.message.setFrom(isA(Address.class));
         this.message.setText("message: message\n\n");
         this.javaMailSender.send(this.message);
-        replay(this.javaMailSender, this.spamFilter, this.message);
+        replay(this.javaMailSender, this.message);
         this.eMailSender.sendEmail(this.map);
-        verify(this.javaMailSender, this.spamFilter, this.message);
+        verify(this.javaMailSender, this.message);
     }
 
     @Test
@@ -108,7 +102,6 @@ public class EMailSenderTest {
         this.map.put("subject", "subject");
         this.map.put("email", "email@foo.com");
         this.map.put("message", "message");
-        this.spamFilter.checkForSpam(this.map);
         expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
         this.message.setSubject("subject");
         this.message.setRecipient(eq(RecipientType.TO), isA(Address.class));
@@ -116,12 +109,12 @@ public class EMailSenderTest {
         this.message.setText("message: message\n\n");
         this.javaMailSender.send(this.message);
         expectLastCall().andThrow(new MailSendException("oops"));
-        replay(this.javaMailSender, this.spamFilter, this.message);
+        replay(this.javaMailSender, this.message);
         try {
             this.eMailSender.sendEmail(this.map);
         } catch (LanewebException e) {
         }
-        verify(this.javaMailSender, this.spamFilter, this.message);
+        verify(this.javaMailSender, this.message);
     }
 
     @Test
@@ -130,15 +123,14 @@ public class EMailSenderTest {
         this.map.put("subject", "subject");
         this.map.put("email", "email@foo.com");
         this.map.put("message", "message");
-        this.spamFilter.checkForSpam(this.map);
         expect(this.javaMailSender.createMimeMessage()).andReturn(this.message);
         this.message.setSubject("subject");
         expectLastCall().andThrow(new MessagingException());
-        replay(this.javaMailSender, this.spamFilter, this.message);
+        replay(this.javaMailSender, this.message);
         try {
             this.eMailSender.sendEmail(this.map);
         } catch (LanewebException e) {
         }
-        verify(this.javaMailSender, this.spamFilter, this.message);
+        verify(this.javaMailSender, this.message);
     }
 }
