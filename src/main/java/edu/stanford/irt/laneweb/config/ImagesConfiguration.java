@@ -34,6 +34,10 @@ import edu.stanford.irt.solr.service.SolrImageService;
         "edu.stanford.irt.solr.repository.search" }, multicoreSupport = true, solrClientRef = "solrSearcherServer")
 public class ImagesConfiguration {
 
+    private static final int SOLR_CONNECT_TIMEOUT = 5_000;
+
+    private static final int SOLR_READ_TIMEOUT = 15_000;
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")
     public Generator bassettAccordionGenerator() {
@@ -69,7 +73,10 @@ public class ImagesConfiguration {
 
     @Bean(name = "solrSearcherServer")
     public SolrClient solrClient(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL) {
-        return new HttpSolrClient(imageSearchURL);
+        HttpSolrClient solrClient = new HttpSolrClient(imageSearchURL);
+        solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
+        solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
+        return solrClient;
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image")
