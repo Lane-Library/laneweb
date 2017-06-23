@@ -60,7 +60,7 @@
             <map:serialize type="text"/>
         </map:match>
         <map:match pattern="thisweek.xml" type="wildcard">
-            <map:generate type="file" src="cachedxml:1:{classes-service-uri}find/allOpen"/>
+            <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/allOpen"/>
             <map:transform type="saxon" src="classpath:/xsl/classes/thisweek.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
