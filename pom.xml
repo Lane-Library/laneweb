@@ -7,7 +7,7 @@
         <version>25</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.35-SNAPSHOT</version>
+    <version>3.3.36-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -109,7 +109,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.57</version>
+            <version>3.0.58</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -677,7 +677,7 @@
                 <artifactId>maven-jstools-plugin</artifactId>
                 <version>0.7</version>
                 <configuration>
-                    <jsDir>src/main/webapp/resources/javascript/</jsDir>
+                    <jsDir>src/main/javascript/</jsDir>
                     <excludes>mobile/jquery*.js yui-*.js</excludes>
                 </configuration>
                 <reportSets>

@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-06-26" version="3.3.35" description="3.3.35 bug fix release">
+            <action date="2017-06-20" dev="alainb" issue="135036" type="fix">
+                liaisons cards not showing up
+            </action>
+            <action date="2017-06-20" dev="olgary" issue="135028" type="update">
+                template, debug xml - changed a title of the link in the footer
+            </action>
+            <action date="2017-06-13" dev="ceyates" issue="134804" type="update">
+                use spring profiles to toggle between components used in gce
+            </action>
+            <action date="2017-06-13" dev="ceyates" issue="134796" type="fix">
+                med-history search is failing
+            </action>
+        </release>
         <release date="2017-06-12" version="3.3.34" description="3.3.34 bug fix release">
             <action date="2017-06-12" dev="ceyates" issue="134699" type="fix">
                 book alignment

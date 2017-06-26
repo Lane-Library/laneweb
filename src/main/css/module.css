@@ -25,15 +25,17 @@
 /* book covers in 2 columns*/
 .core-covers {
     box-sizing: border-box;
-    float: left;
+    display: inline-block;
     padding: 0 1em 13px 0;
+    vertical-align: top;
     width: 50%;
 }
 /* book covers in 3 columns*/
 .core-covers-3 {
     box-sizing: border-box;
-    float: left;
+    display: inline-block;
     padding: 0 1em 13px 0;
+    vertical-align: top;
     width: 33%;
 }
 
