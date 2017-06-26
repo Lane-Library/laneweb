@@ -670,7 +670,7 @@
                 <artifactId>maven-jstools-plugin</artifactId>
                 <version>0.7</version>
                 <configuration>
-                    <jsDir>src/main/webapp/resources/javascript/</jsDir>
+                    <jsDir>src/main/javascript/</jsDir>
                     <excludes>mobile/jquery*.js yui-*.js</excludes>
                 </configuration>
                 <reportSets>
