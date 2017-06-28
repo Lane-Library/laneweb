@@ -8,19 +8,20 @@ import edu.stanford.irt.cocoon.xml.XIncludeExceptionListener;
 
 public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(XIncludeExceptionListener.class);
+    private static final Logger log = LoggerFactory.getLogger(XIncludeExceptionListener.class);
 
     @Override
     public void exception(final Locator locator, final Exception e) {
-        if (locator == null) {
-            LOG.error(e.getMessage(), e);
-        } else {
-            LOG.error(createMessage(locator), e);
+        StringBuilder message = new StringBuilder("XInclude failed: ");
+        if (locator != null) {
+            message.append(locator.getSystemId())
+            .append(" line:")
+            .append(locator.getLineNumber())
+            .append(" column:")
+            .append(locator.getColumnNumber())
+            .append(": ");
         }
-    }
-
-    private String createMessage(final Locator locator) {
-        return new StringBuilder("XInclude failed: ").append(locator.getSystemId()).append(" line:")
-                .append(locator.getLineNumber()).append(" column:").append(locator.getColumnNumber()).toString();
+        message.append(e.toString());
+        log.error(message.toString());
     }
 }
