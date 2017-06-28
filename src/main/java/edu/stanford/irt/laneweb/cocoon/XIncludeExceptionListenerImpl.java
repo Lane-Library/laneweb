@@ -21,7 +21,7 @@ public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener 
             .append(locator.getColumnNumber())
             .append(": ");
         }
-        message.append(e.toString());
+        message.append(e);
         log.error(message.toString());
     }
 }
