@@ -48,7 +48,7 @@ public class SpringContextMetaSearchService implements MetaSearchService {
 
     public HttpResponse execute(final HttpGet httpGet) throws IOException {
         checkContext();
-        return this.context.getBean(HttpClient.class).execute(httpGet);
+        return this.context.getBean("httpClient", HttpClient.class).execute(httpGet);
     }
 
     public Result search(final String query, final Collection<String> engines, final long wait) {
