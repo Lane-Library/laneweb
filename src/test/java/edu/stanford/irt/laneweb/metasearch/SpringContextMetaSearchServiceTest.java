@@ -93,7 +93,7 @@ public class SpringContextMetaSearchServiceTest {
         HttpGet httpGet = createMock(HttpGet.class);
         HttpResponse httpResponse = createMock(HttpResponse.class);
         expect(this.context.isActive()).andReturn(true);
-        expect(this.context.getBean(HttpClient.class)).andReturn(httpClient);
+        expect(this.context.getBean("httpClient", HttpClient.class)).andReturn(httpClient);
         expect(httpClient.execute(httpGet)).andReturn(httpResponse);
         replay(this.context, httpClient);
         assertSame(httpResponse, this.service.execute(httpGet));

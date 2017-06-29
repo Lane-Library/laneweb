@@ -23,6 +23,11 @@
 
 	<xsl:template match="item">
 		<div>
+			<div class="newsfeed-item-title">
+                <a href="{link}" title="feed link---{../../channel/title}">
+                    <xsl:value-of select="title" />
+                </a>
+            </div>
 			<content>
 				<xsl:value-of select="content:encoded"></xsl:value-of>
 			</content>
