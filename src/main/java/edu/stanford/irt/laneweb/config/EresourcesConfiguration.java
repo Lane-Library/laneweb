@@ -52,7 +52,7 @@ import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
 
 @Configuration
 @EnableSolrRepositories(basePackages = {
-        "edu.stanford.irt.laneweb.eresources" }, multicoreSupport = true, solrClientRef = "laneSearchSolrServer")
+        "edu.stanford.irt.laneweb.eresources" }, solrClientRef = "laneSearchSolrClient", solrTemplateRef = "laneSearchSolrTemplate")
 public class EresourcesConfiguration {
 
     private static final int FACETS_TO_SHOW_BROWSE = 20;
@@ -160,7 +160,7 @@ public class EresourcesConfiguration {
                 new EresourceListPagingDataSAXStrategy());
     }
 
-    @Bean(name = "laneSearchSolrServer")
+    @Bean(name = "laneSearchSolrClient")
     public SolrClient solrClient(@Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl) {
         HttpSolrClient solrClient = new HttpSolrClient(solrServerUrl);
         solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
@@ -199,12 +199,12 @@ public class EresourcesConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.solr.SolrService")
-    public SolrService solrService(final SolrRepository solrRepository, final SolrTemplate solrTemplate) {
+    public SolrService solrService(final SolrRepository solrRepository,@Qualifier("laneSearchSolrTemplate")  final SolrTemplate solrTemplate) {
         return new SolrService(solrQueryParser(), solrRepository, solrTemplate);
     }
 
     @Bean(name = "laneSearchSolrTemplate")
-    public SolrTemplate solrTemplate(@Qualifier("laneSearchSolrServer") final SolrClient solrClient) {
+    public SolrTemplate solrTemplate(@Qualifier("laneSearchSolrClient") final SolrClient solrClient) {
         return new SolrTemplate(solrClient);
     }
 }
