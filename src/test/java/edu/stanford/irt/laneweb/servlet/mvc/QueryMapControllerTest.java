@@ -40,10 +40,9 @@ public class QueryMapControllerTest {
     }
 
     @Test
-    public void testGetJSONResourceMap() {
+    public void testGetResourceMap() {
         expect(this.parser.parse(null)).andReturn(null);
-        expect(this.queryMapper.getQueryMap(null)).andReturn(this.queryMap);
-        expect(this.queryMap.getResourceMap()).andReturn(this.resourceMap);
+        expect(this.queryMapper.getResourceMap(null)).andReturn(this.resourceMap);
         PowerMock.replay(this.queryMapper, this.parser, this.queryMap, this.resourceMap);
         assertSame(this.resourceMap, this.controller.getJSONResourceMap(null));
         PowerMock.verify(this.queryMapper, this.parser, this.queryMap, this.resourceMap);
