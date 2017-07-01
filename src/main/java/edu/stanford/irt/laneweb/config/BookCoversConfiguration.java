@@ -46,7 +46,8 @@ public class BookCoversConfiguration {
 
     @Bean
     @Profile("gce")
-    public ISBNService httpISBNService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+    public ISBNService httpISBNService(final ObjectMapper objectMapper,
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
         return new HTTPISBNService(objectMapper, catalogServiceURI);
     }
 

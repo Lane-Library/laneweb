@@ -32,7 +32,7 @@ public class GrandRoundsConfiguration {
 
     @Bean
     @Profile("gce")
-    public GrandRoundsService httpGrandRoundsService(final URI catalogServiceURI) {
+    public GrandRoundsService httpGrandRoundsService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
         return new HTTPGrandRoundsService(catalogServiceURI);
     }
 
