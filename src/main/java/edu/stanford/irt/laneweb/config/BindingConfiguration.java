@@ -19,13 +19,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.BaseURIDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.ContentBaseDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.DisasterModeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder;
@@ -81,16 +82,16 @@ public class BindingConfiguration {
     }
 
     @Bean
-    public ContentBaseDataBinder contentBaseDataBinder(
+    public BaseURIDataBinder contentBaseDataBinder(
             @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase) {
-        return new ContentBaseDataBinder(contentBase);
+        return new BaseURIDataBinder(Model.CONTENT_BASE, contentBase);
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public DataBinder dataBinder(final UserDataBinder userDataBinder,
             final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
             final BookmarkDataBinder bookmarkDataBinder, final BasePathDataBinder basePathDataBinder,
-            final ContentBaseDataBinder contentBaseDataBinder, final VersionDataBinder versionDataBinder,
+            final BaseURIDataBinder contentBaseDataBinder, final VersionDataBinder versionDataBinder,
             final DisasterModeDataBinder disasterModeDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
             final ModelDataBinder modelDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(22);

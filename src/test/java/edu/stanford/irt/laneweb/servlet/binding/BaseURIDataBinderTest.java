@@ -11,29 +11,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.model.Model;
 
-public class ContentBaseDataBinderTest {
+public class BaseURIDataBinderTest {
 
-    private URI contentBase;
+    private BaseURIDataBinder dataBinder;
 
-    private ContentBaseDataBinder dataBinder;
+    private URI uri;
 
     @Before
     public void setUp() throws URISyntaxException {
-        this.contentBase = getClass().getResource("/").toURI();
-        this.dataBinder = new ContentBaseDataBinder(this.contentBase);
+        this.uri = getClass().getResource("/").toURI();
+        this.dataBinder = new BaseURIDataBinder("key", this.uri);
     }
 
     @Test
     public void testBind() {
         Map<String, Object> model = new HashMap<>();
         this.dataBinder.bind(model, null);
-        assertSame(this.contentBase, model.get(Model.CONTENT_BASE));
+        assertSame(this.uri, model.get("key"));
     }
 
     @Test(expected = LanewebException.class)
     public void testNullURL() {
-        new ContentBaseDataBinder(null);
+        new BaseURIDataBinder(null, null);
     }
 }

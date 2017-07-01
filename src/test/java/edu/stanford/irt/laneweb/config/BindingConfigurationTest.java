@@ -42,7 +42,7 @@ public class BindingConfigurationTest {
     }
 
     @Test
-    public void testDataBinder() {
+    public void testDataBinder() throws URISyntaxException {
         assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null, null, null, null, null));
     }
 
