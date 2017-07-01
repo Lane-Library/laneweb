@@ -1,70 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://www.w3.org/1999/xhtml" xmlns:lc="http://lane.stanford.edu/laneclasses" exclude-result-prefixes="lc h"
-	version="2.0">
+	xmlns:h="http://www.w3.org/1999/xhtml"  exclude-result-prefixes="h"	version="2.0">
 
-	<xsl:import href="laneclasses.xsl" />
 	
-
-	<xsl:template match="/doc/noncached-classes"/>
-
-	<xsl:param name="class-id" />
-
-	<xsl:variable name="internal-id">
-		<xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:internal_id/text()" />
-	</xsl:variable>
-
- 	<xsl:template match="/doc/lc:classes">
+	
+	
+    <xsl:import href="laneclasses-common.xsl" />
+	
+	<xsl:template match="/classes">
 		<html>
 			<body>
-				<xsl:apply-templates select="./lc:event_data[./lc:module_id = $class-id]" />
+				<xsl:apply-templates select="./class" />
 			</body>
 		</html>
 	</xsl:template>
  
-	<xsl:template match="lc:event_data">
+	<xsl:template match="class">
+	<xsl:if test="position() = 1">
 	 	<h4>
-			<xsl:value-of select="./lc:event_name/text()" />
+			<xsl:value-of select="name" />
 		</h4>
-		<xsl:apply-templates select="./lc:event_description" /> 
-		<xsl:apply-templates select="./lc:downloads/lc:download_description" /> 
-		 <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[ ./text() = $internal-id]/..">
-			<xsl:call-template name="class-detail" />
-		</xsl:for-each> 
-	</xsl:template>
-
-
-	 
- 	<xsl:template match="lc:event_description">
-	 	<div class="class-description">
-	 		<xsl:copy-of select="node()"/>
+		<div class="class-description">
+	 		<xsl:copy-of select="description"/>
 	 	</div>
+	 	<div class="handout-description" >
+			<xsl:copy-of select="handout"/>
+		</div>
+		</xsl:if>
+		<xsl:call-template name="class-detail"/>
 	</xsl:template>
 
-	<xsl:template match="lc:download_description">
-		<div class="handout-description" >
-			<xsl:copy-of select="node()"/>
-		</div>
-	</xsl:template>
+
+ 
   
 
 	<xsl:template name="class-detail">
 		<div class="class">
 			<div class="yui3-g">
 				<div class="yui3-u-1-4">
-					<div class="date">
-						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
-						<xsl:apply-templates select="./lc:event_dates" />
-					</div>
+					<xsl:apply-templates select="dates" />
 				</div>
 				<div class="yui3-u-3-4">
 					<div class="details">
-						<xsl:apply-templates select="lc:event_instructors/lc:instructor" />
+						<xsl:apply-templates select="instructors" />
 						<div>
-							<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}" class="button alt1">
+							<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={id}" class="button alt1">
 								<span>
 									<xsl:choose>
-										<xsl:when test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats = '-\-\-'">
+										<xsl:when test="remainingSeats = '0'">
 											Wait List
 										</xsl:when>
 										<xsl:otherwise>
@@ -74,17 +57,16 @@
 								</span>
 								<i class="icon fa fa-arrow-right" />
 							</a>
-							<xsl:if test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats != '-\-\-'">
+							<xsl:if test="remainingSeats != '0'">
 								<div class="seats">
 									Seats left:
-									<xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats" />
+									<xsl:value-of select="remainingSeats" />
 								</div>
 							</xsl:if>
 						</div>
 						<div style="margin-top:30px">
-							<xsl:apply-templates select="lc:venue" />
+							<xsl:apply-templates select="location" /> 
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -93,40 +75,36 @@
 
 
 
-	<xsl:template match="lc:venue">
+	<xsl:template  match="location">
 		<div>
-			<xsl:variable name="link">
-				<xsl:value-of select="./lc:venue_website" />
-			</xsl:variable>
-			<xsl:variable name="name">
-				<span>
-					<xsl:attribute name="itemprop">location</xsl:attribute>
-					<xsl:value-of select="./lc:venue_name" />
-				</span>
-			</xsl:variable>
 			<xsl:choose>
-				<xsl:when test="$link != ''">
+				<xsl:when test="url[string-length() &gt; 0]">
 					<div>
-						<xsl:copy-of select="$name" />
+						<span>
+							<xsl:attribute name="itemprop">location</xsl:attribute>
+							<xsl:value-of select="name" />
+						</span>
 					</div>
 					<div>
 						<a>
 							<xsl:attribute name="href">
-                                <xsl:value-of select="./lc:venue_website/text()" />
+                                <xsl:value-of select="url" />
                             </xsl:attribute>
 							<xsl:text>Location Map </xsl:text>
-							<xsl:if test="ends-with($link, '.pdf')">
+							<xsl:if test="ends-with(url, '.pdf')">
 								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
 							</xsl:if>
 						</a>
 					</div>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:copy-of select="$name" />
+					<span>
+						<xsl:attribute name="itemprop">location</xsl:attribute>
+						<xsl:value-of select="name" />
+					</span>
 				</xsl:otherwise>
 			</xsl:choose>
 		</div>
 	</xsl:template>
-
 
 </xsl:stylesheet>
