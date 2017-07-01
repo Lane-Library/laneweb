@@ -88,13 +88,6 @@ public class LanewebIT {
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk());
     }
-    
-    @Test
-    public void testEresourceBrowse() throws Exception {
-        this.mockMvc.perform(get("/eresources/browse/type/Journal.html")
-                .servletPath("/eresources/browse/type/Journal.html"))
-            .andExpect(status().isOk());
-    }
 
     @Test
     public void testIndex() throws Exception {
