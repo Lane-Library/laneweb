@@ -4,7 +4,7 @@
   in the form of a div with pairs of spans, the first the bib id and the second number
   of available items.
 -->
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="2.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:h="http://www.w3.org/1999/xhtml"
   xmlns="http://www.w3.org/1999/xhtml"

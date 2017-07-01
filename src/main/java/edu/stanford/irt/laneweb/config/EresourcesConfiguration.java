@@ -63,7 +63,7 @@ public class EresourcesConfiguration {
 
     private static final int SOLR_CONNECT_TIMEOUT = 5_000;
 
-    private static final int SOLR_READ_TIMEOUT = 15_000;
+    private static final int SOLR_READ_TIMEOUT = 30_000;
 
     private FacetComparator facetComparator;
 
