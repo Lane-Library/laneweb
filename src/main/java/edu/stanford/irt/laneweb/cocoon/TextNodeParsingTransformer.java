@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -40,7 +42,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     private StringBuilder content = new StringBuilder();
 
-    private String elementName;
+    private Collection<String> elementNames;
 
     private boolean inElement = false;
 
@@ -66,7 +68,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-        if (this.elementName.equals(qName)) {
+        if (this.elementNames.contains(qName)) {
             this.inElement = false;
             final ByteArrayInputStream inputStream = new ByteArrayInputStream(
                     this.content.toString().getBytes(StandardCharsets.UTF_8));
@@ -111,10 +113,12 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
-        this.elementName = parameters.get("elementName");
-        if (this.elementName == null) {
+        String elementName = parameters.get("elementName");
+        if (elementName == null) {
             throw new LanewebException("elementName parameter is required");
         }
+        String[] elementNames = elementName.split(",");
+        this.elementNames = Arrays.asList(elementNames);
     }
 
     @Override
@@ -127,7 +131,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
         this.xmlConsumer.startElement(uri, localName, qName, atts);
-        if (this.elementName.equals(qName)) {
+        if (this.elementNames.contains(qName)) {
             this.inElement = true;
         }
     }
