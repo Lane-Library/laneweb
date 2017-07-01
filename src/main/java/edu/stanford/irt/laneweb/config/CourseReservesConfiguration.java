@@ -58,7 +58,7 @@ public class CourseReservesConfiguration {
     @Bean
     @Profile("gce")
     public CourseReservesService httpCourseReservesService(final ObjectMapper objectMapper,
-            final URI catalogServiceURI) {
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
         return new HTTPCourseReservesService(objectMapper, catalogServiceURI);
     }
 
