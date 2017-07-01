@@ -41,7 +41,8 @@ public class EquipmentConfiguration {
 
     @Bean
     @Profile("gce")
-    public EquipmentService httpEquipmentService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+    public EquipmentService httpEquipmentService(final ObjectMapper objectMapper,
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
         return new HTTPEquipmentService(objectMapper, catalogServiceURI);
     }
 
