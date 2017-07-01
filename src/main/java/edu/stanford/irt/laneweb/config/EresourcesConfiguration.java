@@ -201,7 +201,8 @@ public class EresourcesConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.solr.SolrService")
-    public SolrService solrService(final SolrRepository solrRepository,@Qualifier("laneSearchSolrTemplate")  final SolrTemplate solrTemplate) {
+    public SolrService solrService(final SolrRepository solrRepository,
+            @Qualifier("laneSearchSolrTemplate")  final SolrTemplate solrTemplate) {
         return new SolrService(solrQueryParser(), solrRepository, solrTemplate);
     }
 
