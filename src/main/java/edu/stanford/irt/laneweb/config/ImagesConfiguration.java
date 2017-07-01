@@ -32,8 +32,10 @@ import edu.stanford.irt.solr.BassettImage;
 import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
-@EnableSolrRepositories(basePackages = {
-        "edu.stanford.irt.solr.repository.search" }, solrClientRef = "imageSearchSolrClient", solrTemplateRef = "imageSearchSolrTemplate")
+@EnableSolrRepositories(
+        basePackages = { "edu.stanford.irt.solr.repository.search" },
+        solrClientRef = "imageSearchSolrClient",
+        solrTemplateRef = "imageSearchSolrTemplate")
 public class ImagesConfiguration {
 
     private static final int SOLR_CONNECT_TIMEOUT = 5_000;

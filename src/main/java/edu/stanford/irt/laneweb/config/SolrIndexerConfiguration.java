@@ -10,8 +10,10 @@ import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 
 @Configuration
-@EnableSolrRepositories(basePackages = {
-        "edu.stanford.irt.solr.repository.index" }, solrClientRef = "imageIndexerSolrClient", solrTemplateRef = "imageIndexerSolrTemplate")
+@EnableSolrRepositories(
+        basePackages = { "edu.stanford.irt.solr.repository.index" },
+        solrClientRef = "imageIndexerSolrClient",
+        solrTemplateRef = "imageIndexerSolrTemplate")
 public class SolrIndexerConfiguration {
 
     private static final int SOLR_CONNECT_TIMEOUT = 5_000;
