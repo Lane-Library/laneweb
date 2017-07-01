@@ -9,11 +9,13 @@ import java.util.Map;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
+@SolrDocument(solrCoreName = "laneSearch")
 public class Eresource {
 
     private static final ObjectMapper mapper = new ObjectMapper();
