@@ -16,18 +16,17 @@ import edu.stanford.irt.querymap.StreamResourceMapping;
 @Configuration
 public class QueryMapConfiguration {
 
-    private static final String ENDPOINT = "/lane-facet?q=%s&qt=%%2Flane-facet&facet=true&facet.mincount=1&facet.limit=10&facet.field=mesh&wt=json";
+    private static final String ENDPOINT =
+            "/lane-facet?q=%s&qt=%%2Flane-facet&facet=true&facet.mincount=1&facet.limit=10&facet.field=mesh&wt=json";
 
     @Bean
     public QueryMapper queryMapper(final ObjectMapper objectMapper,
             @Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl) {
         DescriptorManager descriptorManager = new DescriptorManager();
-        QueryMapper queryMapper = new QueryMapper(
-                new StreamResourceMapping(QueryMapper.class.getResourceAsStream("resource-maps.xml")),
+        return new QueryMapper(new StreamResourceMapping(QueryMapper.class.getResourceAsStream("resource-maps.xml")),
                 descriptorManager,
                 new QueryToDescriptor(descriptorManager,
                         new DescriptorWeightMap(QueryMapper.class.getResourceAsStream("descriptor-weights.xml")),
                         objectMapper, new JsonSource(solrServerUrl + ENDPOINT)));
-        return queryMapper;
     }
 }
