@@ -17,7 +17,8 @@ public class HTML5Serializer extends TransformerSerializer {
 
     private OutputStream outputStream;
 
-    public HTML5Serializer(final String type, final TransformerHandler transformerHandler, final Properties properties) {
+    public HTML5Serializer(final String type, final TransformerHandler transformerHandler,
+            final Properties properties) {
         super(type, transformerHandler, properties);
     }
 

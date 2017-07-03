@@ -221,8 +221,7 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/xml")
     @Scope("prototype")
-    public Serializer xmlSerializer(final TransformerHandler transformerHandler)
-            throws TransformerConfigurationException {
+    public Serializer xmlSerializer(final TransformerHandler transformerHandler) {
         Properties props = new Properties();
         props.setProperty(OutputKeys.METHOD, "xml");
         props.setProperty(OutputKeys.ENCODING, UTF_8);

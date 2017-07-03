@@ -113,12 +113,10 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
-        String elementName = parameters.get("elementName");
-        if (elementName == null) {
+        if (!parameters.containsKey("elementName")) {
             throw new LanewebException("elementName parameter is required");
         }
-        String[] elementNames = elementName.split(",");
-        this.elementNames = Arrays.asList(elementNames);
+        this.elementNames = Arrays.asList(parameters.get("elementName").split(","));
     }
 
     @Override
