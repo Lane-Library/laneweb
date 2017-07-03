@@ -41,9 +41,7 @@ public class SitemapConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/facets")
     public Selector facetsSelector() {
-        ModelAttributeSelector selector = new ModelAttributeSelector();
-        selector.setAttributeName("facets");
-        return selector;
+        return new ModelAttributeSelector("facets");
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/ipgroup")
@@ -53,9 +51,7 @@ public class SitemapConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/logged-in")
     public Selector loggedInSelector() {
-        ModelAttributeSelector selector = new ModelAttributeSelector();
-        selector.setAttributeName("userid");
-        return selector;
+        return new ModelAttributeSelector("userid");
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/regex-parameter")

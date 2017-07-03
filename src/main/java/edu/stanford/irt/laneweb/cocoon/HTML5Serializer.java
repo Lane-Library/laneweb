@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
+import java.util.Map;
 
 import javax.xml.transform.sax.TransformerHandler;
 
@@ -18,7 +18,7 @@ public class HTML5Serializer extends TransformerSerializer {
     private OutputStream outputStream;
 
     public HTML5Serializer(final String type, final TransformerHandler transformerHandler,
-            final Properties properties) {
+            final Map<String, String> properties) {
         super(type, transformerHandler, properties);
     }
 
