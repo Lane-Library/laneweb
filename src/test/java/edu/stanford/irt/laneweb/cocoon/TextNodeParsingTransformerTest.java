@@ -39,6 +39,7 @@ public class TextNodeParsingTransformerTest {
         this.saxParser = createMock(SAXParser.class);
         this.transformer = new TextNodeParsingTransformer("type", this.saxParser);
         this.parameters = createMock(Map.class);
+        expect(this.parameters.containsKey("elementName")).andReturn(true);
         expect(this.parameters.get("elementName")).andReturn("element");
         replay(this.parameters);
         this.transformer.setParameters(this.parameters);
