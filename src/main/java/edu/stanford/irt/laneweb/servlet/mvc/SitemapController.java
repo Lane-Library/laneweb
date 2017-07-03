@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,10 +22,9 @@ public class SitemapController extends AbstractSitemapController {
     @Autowired
     public SitemapController(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder,
-            final ServletContext servletContext,
             @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap") final Sitemap sitemap,
             final SourceResolver sourceResolver) {
-        super(componentFactory, dataBinder, servletContext, sitemap, sourceResolver);
+        super(componentFactory, dataBinder, sitemap, sourceResolver);
     }
 
     @Override

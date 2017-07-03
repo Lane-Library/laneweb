@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
-import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 
 import org.xml.sax.SAXException;
 
@@ -17,8 +17,8 @@ public class HTML5Serializer extends TransformerSerializer {
 
     private OutputStream outputStream;
 
-    public HTML5Serializer(final String type, final SAXTransformerFactory factory, final Properties properties) {
-        super(type, factory, properties);
+    public HTML5Serializer(final String type, final TransformerHandler transformerHandler, final Properties properties) {
+        super(type, transformerHandler, properties);
     }
 
     @Override

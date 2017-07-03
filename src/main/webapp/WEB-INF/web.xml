@@ -31,6 +31,10 @@
             <param-name>storage-directory</param-name>
             <param-value>${catalina.base}/logs/javamelody</param-value>
         </init-param>
+        <init-param>
+            <param-name>graphite-address</param-name>
+            <param-value>localhost:2003</param-value>
+        </init-param>
     </filter>
     
     <filter>
