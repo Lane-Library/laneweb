@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
 import edu.stanford.irt.querymap.QueryMap;
+import edu.stanford.irt.querymap.QueryMapException;
 import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.ResourceMap;
 
@@ -37,6 +39,12 @@ public class QueryMapControllerTest {
         this.controller = new QueryMapController(this.parser, this.queryMapper);
         this.queryMap = createMock(QueryMap.class);
         this.resourceMap = createMock(ResourceMap.class);
+    }
+
+    @Test
+    public void testExceptionHandler() {
+        assertEquals("QueryMapper failed to get resource map: edu.stanford.irt.querymap.QueryMapException: oopsie",
+                this.controller.handleException(new QueryMapException("oopsie")));
     }
 
     @Test

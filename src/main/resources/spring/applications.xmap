@@ -77,7 +77,7 @@
             <map:match pattern="search/facets/html" type="wildcard">
                 <map:generate type="solr-search-facets"/>
                 <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="html5"/>
             </map:match>
             <!-- TODO: find permanent home for this -->
             <map:match pattern="search/flickr.xml" type="wildcard">
