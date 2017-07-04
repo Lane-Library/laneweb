@@ -8,7 +8,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.solr.UncategorizedSolrException;
 import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -28,6 +31,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     private static final String COLON = ":";
 
     private static final String EMPTY = "";
+
+    private static final Logger log = LoggerFactory.getLogger(SolrSearchFacetsGenerator.class);
 
     private static final String MESH = "mesh";
 
@@ -88,21 +93,26 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         FacetPage<Eresource> fps;
         Map<String, Collection<Facet>> facetsMap;
-        if (null == this.facet) {
-            // search mode
-            fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
-            facetsMap = processFacets(fps);
-            maybeRequestMoreTypes(facetsMap);
-            maybeRequestMorePublicationTypes(facetsMap);
-            maybeAddActiveFacets(facetsMap);
-            maybeRequestMoreMesh(facetsMap);
-            marshal(sortFacets(facetsMap), xmlConsumer);
-        } else {
-            // browse mode
-            fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber,
-                    this.facetsToShowBrowse, 1, parseSort());
-            facetsMap = processFacets(fps);
-            marshal(facetsMap, xmlConsumer);
+        try {
+            if (null == this.facet) {
+                // search mode
+                fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
+                facetsMap = processFacets(fps);
+                maybeRequestMoreTypes(facetsMap);
+                maybeRequestMorePublicationTypes(facetsMap);
+                maybeAddActiveFacets(facetsMap);
+                maybeRequestMoreMesh(facetsMap);
+                marshal(sortFacets(facetsMap), xmlConsumer);
+            } else {
+                // browse mode
+                fps = this.service.facetByField(this.query, this.facets, this.facet, this.pageNumber,
+                        this.facetsToShowBrowse, 1, parseSort());
+                facetsMap = processFacets(fps);
+                marshal(facetsMap, xmlConsumer);
+            }
+        } catch (UncategorizedSolrException e) {
+            log.error(e.toString());
+            marshal("searching for facets failed", xmlConsumer);
         }
     }
 
