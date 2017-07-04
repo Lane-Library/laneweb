@@ -1,10 +1,14 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.io.Serializable;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.cache.Cache;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,15 +48,7 @@ import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
 @Configuration
 public class PipelineConfiguration {
 
-    private static final String ENCODING = "encoding";
-
-    private static final String INDENT = "indent";
-
-    private static final String METHOD = "method";
-
     private static final String NO = "no";
-
-    private static final String OMIT_XML_DECLARATION = "omit-xml-declaration";
 
     private static final String UTF_8 = "UTF-8";
 
@@ -100,26 +96,26 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/html5-indent")
     @Scope("prototype")
-    public Serializer html5IndentSerializer(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
-        Properties props = new Properties();
-        props.setProperty(METHOD, XHTML);
-        props.setProperty(ENCODING, UTF_8);
-        props.setProperty(INDENT, YES);
-        props.setProperty(OMIT_XML_DECLARATION, YES);
-        return new HTML5Serializer("html5-indent", saxonSAXTranformerFactory, props);
+    public Serializer html5IndentSerializer(final TransformerHandler transformerHandler) {
+        Map<String, String> outputKeys = new HashMap<>();
+        outputKeys.put(OutputKeys.METHOD, XHTML);
+        outputKeys.put(OutputKeys.MEDIA_TYPE, "text/html");
+        outputKeys.put(OutputKeys.ENCODING, UTF_8);
+        outputKeys.put(OutputKeys.INDENT, YES);
+        outputKeys.put(OutputKeys.OMIT_XML_DECLARATION, YES);
+        return new HTML5Serializer("html5-indent", transformerHandler, outputKeys);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/html5")
     @Scope("prototype")
-    public Serializer html5Serializer(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
-        Properties props = new Properties();
-        props.setProperty(METHOD, XHTML);
-        props.setProperty(ENCODING, UTF_8);
-        props.setProperty(INDENT, NO);
-        props.setProperty(OMIT_XML_DECLARATION, YES);
-        return new HTML5Serializer("html5", saxonSAXTranformerFactory, props);
+    public Serializer html5Serializer(final TransformerHandler transformerHandler) {
+        Map<String, String> outputKeys = new HashMap<>();
+        outputKeys.put(OutputKeys.METHOD, XHTML);
+        outputKeys.put(OutputKeys.MEDIA_TYPE, "text/html");
+        outputKeys.put(OutputKeys.ENCODING, UTF_8);
+        outputKeys.put(OutputKeys.INDENT, NO);
+        outputKeys.put(OutputKeys.OMIT_XML_DECLARATION, YES);
+        return new HTML5Serializer("html5", transformerHandler, outputKeys);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/html")
@@ -184,11 +180,10 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/text")
     @Scope("prototype")
-    public Serializer textSerializer(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
-        Properties props = new Properties();
-        props.setProperty(METHOD, "text");
-        return new TransformerSerializer("text", saxonSAXTranformerFactory, props);
+    public Serializer textSerializer(final TransformerHandler transformerHandler) {
+        Map<String, String> outputKeys = new HashMap<>();
+        outputKeys.put(OutputKeys.METHOD, "text");
+        return new TransformerSerializer("text", transformerHandler, outputKeys);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/throttling")
@@ -197,18 +192,25 @@ public class PipelineConfiguration {
         return new ThrottlingPipeline();
     }
 
+    @Bean
+    @Scope("prototype")
+    public TransformerHandler transformerHandler(
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory transformerFactory)
+            throws TransformerConfigurationException {
+        return transformerFactory.newTransformerHandler();
+    }
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/xhtml")
     @Scope("prototype")
-    public Serializer xhtmlSerializer(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
-        Properties props = new Properties();
-        props.setProperty(METHOD, XHTML);
-        props.setProperty(ENCODING, UTF_8);
-        props.setProperty(INDENT, NO);
-        props.setProperty("doctype-public", "-//W3C//DTD XHTML 1.0 Strict//EN");
-        props.setProperty("doctype-system", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd");
-        props.setProperty(OMIT_XML_DECLARATION, YES);
-        return new HTML5Serializer(XHTML, saxonSAXTranformerFactory, props);
+    public Serializer xhtmlSerializer(final TransformerHandler transformerHandler) {
+        Map<String, String> outputKeys = new HashMap<>();
+        outputKeys.put(OutputKeys.METHOD, XHTML);
+        outputKeys.put(OutputKeys.ENCODING, UTF_8);
+        outputKeys.put(OutputKeys.INDENT, NO);
+        outputKeys.put(OutputKeys.DOCTYPE_PUBLIC, "-//W3C//DTD XHTML 1.0 Strict//EN");
+        outputKeys.put(OutputKeys.DOCTYPE_SYSTEM, "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd");
+        outputKeys.put(OutputKeys.OMIT_XML_DECLARATION, YES);
+        return new HTML5Serializer(XHTML, transformerHandler, outputKeys);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/xinclude")
@@ -220,10 +222,10 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/xml")
     @Scope("prototype")
-    public Serializer xmlSerializer(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTranformerFactory) {
-        Properties props = new Properties();
-        props.setProperty(METHOD, "xml");
-        return new TransformerSerializer("xml", saxonSAXTranformerFactory, props);
+    public Serializer xmlSerializer(final TransformerHandler transformerHandler) {
+        Map<String, String> outputKeys = new HashMap<>();
+        outputKeys.put(OutputKeys.METHOD, "xml");
+        outputKeys.put(OutputKeys.ENCODING, UTF_8);
+        return new TransformerSerializer("xml", transformerHandler, outputKeys);
     }
 }

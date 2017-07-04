@@ -36,6 +36,17 @@ import edu.stanford.irt.laneweb.user.User;
 @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class LanewebIT {
 
+    private static final MediaType APPLICATION_JAVASCRIPT = new MediaType("application", "javascript",
+            StandardCharsets.UTF_8);
+
+    private static final MediaType APPLICATION_JSON = new MediaType("application", "json", StandardCharsets.UTF_8);
+
+    private static final MediaType IMAGE_PNG = new MediaType("image", "x-png");
+
+    private static final MediaType TEXT_HTML = new MediaType("text", "html", StandardCharsets.UTF_8);
+
+    private static final MediaType TEXT_XML = new MediaType("text", "xml", StandardCharsets.UTF_8);
+
     private MockMvc mockMvc;
 
     @Resource
@@ -49,7 +60,7 @@ public class LanewebIT {
     @Test
     public void testBioresearchSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test").servletPath("/search.html"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
     }
 
     @Test
@@ -86,25 +97,28 @@ public class LanewebIT {
 
     @Test
     public void testContentAwareRequestHandler() throws Exception {
-        this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
+                .andExpect(content().contentType(IMAGE_PNG));
     }
-    
+
     @Test
     public void testEresourceBrowse() throws Exception {
-        this.mockMvc.perform(get("/eresources/browse/type/Journal.html")
-                .servletPath("/eresources/browse/type/Journal.html"))
-            .andExpect(status().isOk());
+        this.mockMvc
+                .perform(
+                        get("/eresources/browse/type/Journal.html").servletPath("/eresources/browse/type/Journal.html"))
+                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
     }
 
     @Test
     public void testIndex() throws Exception {
-        this.mockMvc.perform(get("/index.html").servletPath("/index.html")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/index.html").servletPath("/index.html")).andExpect(status().isOk())
+                .andExpect(content().contentType(TEXT_HTML));
     }
 
     @Test
     public void testIpGroupFetch() throws Exception {
         this.mockMvc.perform(get("/apps/ipGroupFetch?callback=foo")).andExpect(status().isOk())
-                .andExpect(content().contentType(new MediaType("application", "javascript", StandardCharsets.UTF_8)));
+                .andExpect(content().contentType(APPLICATION_JAVASCRIPT));
     }
 
     /**
@@ -121,7 +135,8 @@ public class LanewebIT {
             // science
             this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html"))
                     .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Science']", ns)
-                            .exists());
+                            .exists())
+                    .andExpect(content().contentType(TEXT_HTML));
             // nejm
             this.mockMvc.perform(get("/eresources/search.html?q=nejm").servletPath("/eresources/search.html"))
                     .andExpect(
@@ -244,7 +259,7 @@ public class LanewebIT {
     @Test
     public void testNotFoundServlet() throws Exception {
         this.mockMvc.perform(get("/rss/browse/type/video?a=z").servletPath("/rss/browse/type/video"))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound()).andExpect(content().contentType(TEXT_HTML));
         this.mockMvc.perform(get("/rss/mesh/book?m=biology&page=all").servletPath("/rss/mesh/book"))
                 .andExpect(status().isNotFound());
         this.mockMvc.perform(get("/wp-login.php").servletPath("/wp-login.php")).andExpect(status().isNotFound());
@@ -259,14 +274,16 @@ public class LanewebIT {
             this.mockMvc
                     .perform(get("/apps/search/content/html/pubmed?q=skin")
                             .servletPath("/apps/search/content/html/pubmed"))
-                    .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists());
+                    .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists())
+                    .andExpect(content().contentType(TEXT_HTML));
         }
     }
 
     @Test
     public void testQueryMap() throws Exception {
-        this.mockMvc.perform(get("/apps/querymap/json?q=ganz+slipped+capital+femoral+epiphysis"))
-                .andExpect(status().isOk());
+        this.mockMvc
+                .perform(get("/apps/querymap/json?q=ganz slipped capital femoral epiphysis").accept(APPLICATION_JSON))
+                .andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON));
     }
 
     @Test
@@ -287,13 +304,13 @@ public class LanewebIT {
     public void testSearchImage() throws Exception {
         this.mockMvc
                 .perform(get("/apps/search/image?q=elephant&source=cc-images-all").servletPath("/apps/search/image"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_XML));
     }
 
     @Test
     public void testTextbookSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test").servletPath("/search.html"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
     }
 
     private boolean pubmedIsReachable() {

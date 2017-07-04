@@ -2,6 +2,9 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -20,26 +23,17 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
 
     private static final Logger log = LoggerFactory.getLogger("error handler");
 
+    private Set<Class<? extends Throwable>> noStackTraceThrowables;
+
     private SitemapController sitemapController;
 
     public SitemapHandlerExceptionResolver(final SitemapController sitemapController) {
         this.sitemapController = sitemapController;
-    }
-
-    private static void logException(final Throwable ex) {
-        if (ex instanceof ResourceNotFoundException || ex instanceof FileNotFoundException
-                || ex instanceof ClientAbortException) {
-            if (log.isWarnEnabled()) {
-                log.warn(ex.toString());
-            }
-        } else {
-            Throwable cause = ex.getCause();
-            if (cause == null) {
-                log.error(ex.toString(), ex);
-            } else {
-                logException(cause);
-            }
-        }
+        this.noStackTraceThrowables = new HashSet<>();
+        this.noStackTraceThrowables.add(ResourceNotFoundException.class);
+        this.noStackTraceThrowables.add(FileNotFoundException.class);
+        this.noStackTraceThrowables.add(ClientAbortException.class);
+        this.noStackTraceThrowables.add(URISyntaxException.class);
     }
 
     @Override
@@ -62,5 +56,20 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
             }
         }
         return new ModelAndView();
+    }
+
+    private void logException(final Throwable throwable) {
+        if (this.noStackTraceThrowables.contains(throwable.getClass())) {
+            if (log.isWarnEnabled()) {
+                log.warn(throwable.toString());
+            }
+        } else {
+            Throwable cause = throwable.getCause();
+            if (cause == null) {
+                log.error(throwable.toString(), throwable);
+            } else {
+                logException(cause);
+            }
+        }
     }
 }
