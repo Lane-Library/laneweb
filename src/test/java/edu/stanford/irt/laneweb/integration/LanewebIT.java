@@ -58,6 +58,12 @@ public class LanewebIT {
     }
 
     @Test
+    public void testBioresearchBrowse() throws Exception {
+        this.mockMvc.perform(get("/biomed-resources/ejsubjectbrowse.html?m=Ophthalmology").servletPath("/biomed-resources/ejsubjectbrowse.html"))
+                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
+    }
+
+    @Test
     public void testBioresearchSearch() throws Exception {
         this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
