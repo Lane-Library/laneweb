@@ -92,4 +92,18 @@ public class RequestParameterDataBinderTest {
         assertEquals("foo", this.model.get(Model.REGION));
         verify(this.request, this.names);
     }
+
+    @Test
+    public void testQWithMissingSourceProvidesAllAll() {
+        expect(this.request.getParameterNames()).andReturn(this.names);
+        expect(this.names.hasMoreElements()).andReturn(true);
+        expect(this.names.nextElement()).andReturn("q");
+        expect(this.request.getParameter("q")).andReturn("query");
+        expect(this.names.hasMoreElements()).andReturn(false);
+        replay(this.request, this.names);
+        this.binder.bind(this.model, this.request);
+        assertEquals("query", this.model.get(Model.QUERY));
+        assertEquals("all-all", this.model.get(Model.SOURCE));
+        verify(this.request, this.names);
+    }
 }
