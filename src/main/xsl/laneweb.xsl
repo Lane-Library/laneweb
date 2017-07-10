@@ -43,7 +43,6 @@
     <!-- whether or not live chat is scheduled to be available -->
     <xsl:param name="live-chat-available"/>
 
-    <!-- today's hours computed from includes/hours.xml -->
     <xsl:param name="todays-hours"/>
 
     <xsl:param name="version"/>
