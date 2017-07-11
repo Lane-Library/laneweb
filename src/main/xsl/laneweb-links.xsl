@@ -112,10 +112,6 @@
                 <xsl:when test="contains($link,'%7Bsearch-terms%7D')">
                     <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$regex-query)"/>
                 </xsl:when>
-                <!-- login disabled in disaster mode -->
-                <xsl:when test="$link = '/secure/login.html' and $disaster-mode = 'true'">
-                    <xsl:text>/login-disabled.html</xsl:text>
-                </xsl:when>
                 <!-- login link goes to myaccounts.html when logged in (case 97645)-->
                 <xsl:when test="$link = '/secure/login.html' and $userid">
                     <xsl:text>/myaccounts.html</xsl:text>
