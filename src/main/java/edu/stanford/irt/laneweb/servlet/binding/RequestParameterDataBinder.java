@@ -87,9 +87,6 @@ public class RequestParameterDataBinder implements DataBinder {
                 }
             }
         }
-        if (model.containsKey(Model.QUERY) && !model.containsKey(Model.SOURCE)) {
-            model.put(Model.SOURCE, "all-all");
-        }
     }
 
     private void getMappedParameterValue(final String name, final String value, final Map<String, Object> model) {
