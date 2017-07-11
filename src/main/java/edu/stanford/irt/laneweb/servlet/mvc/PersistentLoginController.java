@@ -55,18 +55,14 @@ public class PersistentLoginController {
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
     public String disablePersistentLogin(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.USER) final User user,
-            final String url,
-            final HttpServletResponse response) {
+            @ModelAttribute(Model.USER) final User user, final String url, final HttpServletResponse response) {
         resetCookies(response);
         return getRedirectURL(url);
     }
 
     @RequestMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.USER) final User user,
-            final String url,
-            final HttpServletRequest request,
+            @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
         checkUserAndSetCookies(user, request, response);
         return getRedirectURL(url);
@@ -75,9 +71,7 @@ public class PersistentLoginController {
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
     public String renewPersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.IS_ACTIVE_SUNETID) final Boolean isActiveSunetId,
-            @ModelAttribute(Model.USER) final User user,
-            final String url,
-            final HttpServletRequest request,
+            @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
         if (isActiveSunetId) {
             checkUserAndSetCookies(user, request, response);
