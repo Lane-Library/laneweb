@@ -5,9 +5,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
  * email , the userAgent and the expired date appended and encrypted. The persistent-expired-date cookie have the
  * expired date. So 3 days will be subtract from it to popup a extension window if the user is active and from stanford.
  */
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 import javax.servlet.http.Cookie;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
@@ -36,8 +32,6 @@ public class PersistentLoginController {
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
-
-    private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
@@ -104,11 +98,7 @@ public class PersistentLoginController {
         if (null == url) {
             sb.append("/myaccounts.html");
         } else {
-            try {
-                sb.append(URLDecoder.decode(url, UTF_8));
-            } catch (UnsupportedEncodingException e) {
-                throw new LanewebException("won't happen", e);
-            }
+            sb.append(url);
         }
         return sb.toString();
     }
