@@ -12,15 +12,6 @@
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
     <inceptionYear>2002</inceptionYear>
-
-<pluginRepositories>
-    <pluginRepository>
-      <id>hello2morrow.maven.repository</id>
-      <url>http://maven.hello2morrow.com/repository</url>
-    </pluginRepository>      
-</pluginRepositories>
-
-
     <developers>
         <developer>
             <id>ceyates</id>
