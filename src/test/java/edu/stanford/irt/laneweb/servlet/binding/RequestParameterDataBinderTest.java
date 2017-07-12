@@ -14,7 +14,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -91,21 +90,6 @@ public class RequestParameterDataBinderTest {
         this.binder.bind(this.model, this.request);
         assertEquals(this.model.get(Model.RESOURCES), Arrays.asList(new String[] { "foo", "bar" }));
         assertEquals("foo", this.model.get(Model.REGION));
-        verify(this.request, this.names);
-    }
-
-    @Test
-    @Ignore
-    public void testQWithMissingSourceProvidesAllAll() {
-        expect(this.request.getParameterNames()).andReturn(this.names);
-        expect(this.names.hasMoreElements()).andReturn(true);
-        expect(this.names.nextElement()).andReturn("q");
-        expect(this.request.getParameter("q")).andReturn("query");
-        expect(this.names.hasMoreElements()).andReturn(false);
-        replay(this.request, this.names);
-        this.binder.bind(this.model, this.request);
-        assertEquals("query", this.model.get(Model.QUERY));
-        assertEquals("all-all", this.model.get(Model.SOURCE));
         verify(this.request, this.names);
     }
 }
