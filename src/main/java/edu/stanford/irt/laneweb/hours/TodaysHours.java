@@ -28,9 +28,9 @@ public class TodaysHours {
 
     private String hours;
 
-    private long lastUpdate;
-
     private Object lock;
+
+    private long nextUpdate;
 
     private LibraryHoursService service;
 
@@ -40,10 +40,10 @@ public class TodaysHours {
 
     TodaysHours(final LibraryHoursService service, final long expires) {
         this.service = service;
-        this.hours = getLatestHours(LocalDate.now(AMERICA_LA));
-        this.lastUpdate = System.currentTimeMillis();
-        this.lock = new Object();
         this.expires = expires;
+        this.hours = getLatestHours(LocalDate.now(AMERICA_LA));
+        this.nextUpdate = System.currentTimeMillis() + expires;
+        this.lock = new Object();
     }
 
     public String getHours() {
@@ -52,9 +52,10 @@ public class TodaysHours {
 
     String toString(final LocalDate localDate) {
         synchronized (this.lock) {
-            if (this.lastUpdate >= this.lastUpdate + this.expires) {
+            long now = System.currentTimeMillis();
+            if (now >= this.nextUpdate) {
                 this.hours = getLatestHours(localDate);
-                this.lastUpdate = System.currentTimeMillis();
+                this.nextUpdate = now + this.expires;
             }
         }
         return this.hours;
