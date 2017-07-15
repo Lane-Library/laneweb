@@ -29,23 +29,8 @@ public class LaneCrmControllerTest {
     @Before
     public void setUp() {
         this.connectionFactory = createMock(URLConnectionFactory.class);
-        this.controller = new LaneCrmController("acquisitions", "askus", this.connectionFactory);
+        this.controller = new LaneCrmController("acquisitions", this.connectionFactory);
         this.connection = createMock(HttpsURLConnection.class);
-    }
-
-    @Test
-    public void testFormSubmitLaneaskus() throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Model model = createMock(Model.class);
-        expect(model.asMap()).andReturn(Collections.singletonMap("foo", "bar"));
-        expect(this.connectionFactory.getConnection("askus")).andReturn(this.connection);
-        this.connection.setDoOutput(true);
-        expect(this.connection.getOutputStream()).andReturn(baos);
-        expect(this.connection.getResponseCode()).andReturn(200);
-        replay(model, this.connectionFactory, this.connection);
-        assertEquals("redirect:/index.html", this.controller.formSubmitLaneaskus(model, null));
-        assertEquals("foo=bar&id=", new String(baos.toByteArray()));
-        verify(model, this.connectionFactory, this.connection);
     }
 
     @Test
