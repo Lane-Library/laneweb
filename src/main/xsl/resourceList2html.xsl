@@ -265,6 +265,11 @@
                         <xsl:value-of select="s:version-text" />
                     </span>
                 </xsl:if>
+                <xsl:if test="s:additional-text">
+                    <span>
+                        <xsl:value-of select="s:additional-text" />
+                    </span>
+                </xsl:if>
             </div>
         </xsl:if>
         <xsl:if test="../s:author">
@@ -296,6 +301,11 @@
             <xsl:if test="s:version-text">
                 <span class="versionText">
                     <xsl:value-of select="s:version-text" />
+                </span>
+            </xsl:if>
+            <xsl:if test="s:additional-text">
+                <span>
+                    <xsl:value-of select="s:additional-text" />
                 </span>
             </xsl:if>
         </div>
