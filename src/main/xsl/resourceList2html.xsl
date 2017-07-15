@@ -269,6 +269,11 @@
                         </i>
                     </span>
                 </xsl:if>
+                <xsl:if test="s:additional-text">
+                    <span>
+                        <xsl:value-of select="s:additional-text" />
+                    </span>
+                </xsl:if>
             </div>
         </xsl:if>
         <xsl:if test="../s:author">
@@ -304,6 +309,11 @@
                     <i>
                         <xsl:value-of select="s:publisher" />
                     </i>
+                </span>
+            </xsl:if>
+            <xsl:if test="s:additional-text">
+                <span>
+                    <xsl:value-of select="s:additional-text" />
                 </span>
             </xsl:if>
         </div>
