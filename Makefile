@@ -11,7 +11,7 @@ all: help
 
 app: ## --
 	docker run -v ${current_dir}:/build \
-		maven bash -c "cd /build; mvn -s settings.xml clean package"
+		maven bash -c "cd /build; mvn -B -q -s settings.xml clean package"
 
 docker: ## --
 	docker build -t ${IMAGE}:${VERSION} .
