@@ -31,7 +31,7 @@
       <label>Fulltext</label>
       <link-text>Music that works</link-text>
       <url>http://link.springer.com/978-3-211-75120-6</url>
-      <additional-text>Springer, additional text, instruction</additional-text>
+      <additional-text>instruction</additional-text>
     </link>
     <link type="impactFactor">
       <label>Impact Factor</label>
@@ -56,7 +56,7 @@
       <label>Fulltext</label>
       <link-text>Music that works</link-text>
       <url>http://link.springer.com/978-3-211-75120-6</url>
-      <additional-text>Springer, additional text, instruction</additional-text>
+      <additional-text>instruction</additional-text>
     </link>
   </result>
 </resources>
