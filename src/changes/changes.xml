@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2017-07-17" version="3.3.36" description="3.3.36 bug fix release">
+            <action date="2017-07-15" dev="ryanmax" issue="135270" type="fix">
+                search and browse results missing 856 ^i data
+            </action>
             <action date="2017-07-14" dev="ceyates" issue="135268" type="fix">
                 hours in header not being updated
             </action>
