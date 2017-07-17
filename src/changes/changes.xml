@@ -7,6 +7,35 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-07-17" version="3.3.36" description="3.3.36 bug fix release">
+            <action date="2017-07-14" dev="ceyates" issue="135268" type="fix">
+                hours in header not being updated
+            </action>
+            <action date="2017-07-14" dev="ceyates" issue="135262" type="fix">
+                onlineregistrationcenter.com connection failures lead to unacceptable slowness
+            </action>
+            <action date="2017-07-13" dev="olgary" issue="135253" type="add">
+                template, debug templates - added a link to Chinese page in toolbar menu
+            </action>
+            <action date="2017-07-12" dev="ceyates" issue="135239" type="update">
+                externalize CRM api urls to application properties
+            </action>
+            <action date="2017-07-11" dev="ryanmax" issue="135236" type="remove">
+                remove SHC login functionality
+            </action>
+            <action date="2017-07-11" dev="ryanmax" issue="135232" type="update">
+                Lane DR: enable My Lane login links when in DR mode
+            </action>
+            <action date="2017-07-11" dev="ryanmax" issue="135167" type="fix">
+                parameters dropped at bookmark add with persistent login
+            </action>
+            <action date="2017-07-02" dev="ceyates" issue="135157" type="add">
+                add methods Pipeline.getMimeType() and Serializer.getMimeType()
+            </action>
+            <action date="2017-06-30" dev="ceyates" issue="135125" type="update">
+                don't log stack traces for xinclude failures
+            </action>
+        </release>
         <release date="2017-06-26" version="3.3.35" description="3.3.35 bug fix release">
             <action date="2017-06-20" dev="alainb" issue="135036" type="fix">
                 liaisons cards not showing up
