@@ -435,7 +435,6 @@
                                 <include>tooltips-min.css</include>
                                 <include>miscellaneous-min.css</include>
                                 <include>events-min.css</include>
-                                <include>node-accordion-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
                                 <include>login-min.css</include>
@@ -444,7 +443,6 @@
                                 <include>popular-min.css</include>
                                 <include>business-card-min.css</include>
                                 <include>bookmarks-min.css</include>
-                                <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-image-min.css</include>
@@ -500,8 +498,6 @@
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
-                                <include>bookmark-instructions-min.js</include>
-                                <include>lane-expandies-min.js</include>
                                 <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>

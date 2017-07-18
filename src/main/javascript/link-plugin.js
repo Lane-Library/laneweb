@@ -120,9 +120,7 @@
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (node.hasClass('yui3-accordion-item-trigger')) {
-                        title = 'Expandy:' + title;
-                    } else if (node.ancestor(".lane-nav")) {
+                    if (node.ancestor(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
