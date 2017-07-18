@@ -207,13 +207,6 @@
             <artifactId>spring-oxm</artifactId>
         </dependency>
         <dependency>
-            <!-- required only for shccodec key generation -->
-            <groupId>bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>140</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
