@@ -83,7 +83,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-findit.js",
         "lane-querymap.js",
         "lane-teletype.js",
-        "lane-selections.js",
         "lane-popin.js",
         "description-toggle.js",
         "telinput.js",

@@ -194,7 +194,7 @@ public class BindingConfiguration {
         templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "bassettLargerView");
         templateMap.put("^/discoveryLoginPage.html", "none");
         templateMap.put("^/devDiscoveryLoginPage.html", "none");
-        templateMap.put("^/help/live-chat-only.html", "none");
+        templateMap.put("^/contacts/live-chat.html", "none");
         return new TemplateChooser("template", templateNames, templateMap);
     }
 
