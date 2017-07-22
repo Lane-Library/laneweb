@@ -324,7 +324,7 @@
                 <li id="footer-uha"><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
             </ul>
         </div>
-        <div><a class="feedback-link" rel="lightbox disableBackground" href="/howto/feedback.html"><span>CONTACT US</span></a></div>
+        <div><a class="feedback-link" rel="lightbox disableBackground" href="/help/feedback.html"><span>CONTACT US</span></a></div>
         <div class="search-indicator"><i class="fa fa-spinner fa-spin"></i></div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="https://yui-s.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
