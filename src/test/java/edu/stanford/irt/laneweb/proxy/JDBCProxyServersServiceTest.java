@@ -40,7 +40,7 @@ public class JDBCProxyServersServiceTest {
     @Before
     public void setUp() throws Exception {
         this.dataSource = createMock(DataSource.class);
-        this.service = new JDBCProxyServersService(this.dataSource, "proxyHostsSQL", "ezproxyServersSQL");
+        this.service = new JDBCProxyServersService(this.dataSource, "proxyHostsSQL");
         this.connection = createMock(Connection.class);
         this.statement = createMock(Statement.class);
         this.resultSet = createMock(ResultSet.class);
@@ -86,7 +86,7 @@ public class JDBCProxyServersServiceTest {
     public void testWrite() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery("ezproxyServersSQL")).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("proxyHostsSQL")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("value");
         expect(this.resultSet.next()).andReturn(false);
@@ -104,7 +104,7 @@ public class JDBCProxyServersServiceTest {
     public void testWriteThrowsSQLException() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
-        expect(this.statement.executeQuery("ezproxyServersSQL")).andReturn(this.resultSet);
+        expect(this.statement.executeQuery("proxyHostsSQL")).andReturn(this.resultSet);
         expect(this.resultSet.next()).andReturn(true);
         expect(this.resultSet.getString(1)).andReturn("value");
         expect(this.resultSet.next()).andThrow(new SQLException());

@@ -31,15 +31,11 @@ public class JDBCProxyServersService implements ProxyServersService {
 
     private DataSource dataSource;
 
-    private String ezproxyServersSQL;
-
     private String proxyHostsSQL;
 
-    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL,
-            final String ezproxyServersSQL) {
+    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL) {
         this.dataSource = dataSource;
         this.proxyHostsSQL = proxyHostsSQL;
-        this.ezproxyServersSQL = ezproxyServersSQL;
     }
 
     @Override
@@ -65,7 +61,7 @@ public class JDBCProxyServersService implements ProxyServersService {
         Objects.requireNonNull(outputStream, "null outputStream");
         try (Connection conn = this.dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(this.ezproxyServersSQL);
+                ResultSet rs = stmt.executeQuery(this.proxyHostsSQL);
                 OutputStream out = outputStream) {
             while (rs.next()) {
                 String host = rs.getString(1);
