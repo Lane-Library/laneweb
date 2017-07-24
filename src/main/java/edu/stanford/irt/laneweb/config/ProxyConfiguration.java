@@ -52,8 +52,7 @@ public class ProxyConfiguration {
     public ProxyServersService jdbcProxyServersService(
             @Qualifier("javax.sql.DataSource/catalog") final DataSource dataSource) {
         return new JDBCProxyServersService(dataSource,
-                getResourceAsString(ProxyServersService.class, "getProxyHosts.sql"),
-                getResourceAsString(ProxyServersService.class, "ezproxyServers.sql"));
+                getResourceAsString(ProxyServersService.class, "getProxyHosts.sql"));
     }
 
     @Bean(destroyMethod = "destroy")

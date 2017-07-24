@@ -23,23 +23,19 @@ public class JDBCProxyServersService implements ProxyServersService {
 
     private static final byte[] T = { 'T', ' ' };
 
-    private static final byte[] U = { 'U', ' ' };
+    private static final byte[] U_HTTPS = { 'U', ' ', 'h', 't', 't', 'p', 's', ':', '/', '/' };
     static {
-        SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
+        SUL = "T bodoni.stanford.edu\nU https://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU https://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU https://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
                 .getBytes(StandardCharsets.UTF_8);
     }
 
     private DataSource dataSource;
 
-    private String ezproxyServersSQL;
-
     private String proxyHostsSQL;
 
-    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL,
-            final String ezproxyServersSQL) {
+    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL) {
         this.dataSource = dataSource;
         this.proxyHostsSQL = proxyHostsSQL;
-        this.ezproxyServersSQL = ezproxyServersSQL;
     }
 
     @Override
@@ -65,14 +61,14 @@ public class JDBCProxyServersService implements ProxyServersService {
         Objects.requireNonNull(outputStream, "null outputStream");
         try (Connection conn = this.dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(this.ezproxyServersSQL);
+                ResultSet rs = stmt.executeQuery(this.proxyHostsSQL);
                 OutputStream out = outputStream) {
             while (rs.next()) {
                 String host = rs.getString(1);
                 out.write(T);
                 out.write(host.getBytes(StandardCharsets.UTF_8));
                 out.write('\n');
-                out.write(U);
+                out.write(U_HTTPS);
                 out.write(host.getBytes(StandardCharsets.UTF_8));
                 out.write('\n');
                 out.write(HJ);

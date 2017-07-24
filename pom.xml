@@ -7,7 +7,7 @@
         <version>25</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.36-SNAPSHOT</version>
+    <version>3.3.38-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -130,7 +130,7 @@
         <dependency>
             <artifactId>spellcheck-core</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>2.0.4</version>
+            <version>2.0.5</version>
         </dependency>
         <dependency>
             <artifactId>spellcheck-pubmed-espell</artifactId>
@@ -205,13 +205,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-        </dependency>
-        <dependency>
-            <!-- required only for shccodec key generation -->
-            <groupId>bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>140</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -442,7 +435,6 @@
                                 <include>tooltips-min.css</include>
                                 <include>miscellaneous-min.css</include>
                                 <include>events-min.css</include>
-                                <include>node-accordion-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
                                 <include>login-min.css</include>
@@ -451,7 +443,6 @@
                                 <include>popular-min.css</include>
                                 <include>business-card-min.css</include>
                                 <include>bookmarks-min.css</include>
-                                <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-image-min.css</include>
@@ -507,8 +498,6 @@
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
-                                <include>bookmark-instructions-min.js</include>
-                                <include>lane-expandies-min.js</include>
                                 <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
@@ -518,7 +507,6 @@
                                 <include>lane-findit-min.js</include>
                                 <include>lane-querymap-min.js</include>
                                 <include>lane-teletype-min.js</include>
-                                <include>lane-selections-min.js</include>
                                 <include>lane-popin-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>telinput-min.js</include>
