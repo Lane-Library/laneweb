@@ -23,9 +23,9 @@ public class JDBCProxyServersService implements ProxyServersService {
 
     private static final byte[] T = { 'T', ' ' };
 
-    private static final byte[] U = { 'U', ' ' };
+    private static final byte[] U_HTTPS = { 'U', ' ', 'h', 't', 't', 'p', 's', ':', '/', '/' };
     static {
-        SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
+        SUL = "T bodoni.stanford.edu\nU https://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU https://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU https://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
                 .getBytes(StandardCharsets.UTF_8);
     }
 
@@ -72,7 +72,7 @@ public class JDBCProxyServersService implements ProxyServersService {
                 out.write(T);
                 out.write(host.getBytes(StandardCharsets.UTF_8));
                 out.write('\n');
-                out.write(U);
+                out.write(U_HTTPS);
                 out.write(host.getBytes(StandardCharsets.UTF_8));
                 out.write('\n');
                 out.write(HJ);

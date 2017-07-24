@@ -29,7 +29,7 @@ public class JDBCProxyServersServiceTest {
 
     private DataSource dataSource;
 
-    private String expected = "T value\nU value\nHJ value\n\nT bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu";
+    private String expected = "T value\nU https://value\nHJ value\n\nT bodoni.stanford.edu\nU https://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU https://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU https://searchworks.stanford.edu\nHJ searchworks.stanford.edu";
 
     private ResultSet resultSet;
 
