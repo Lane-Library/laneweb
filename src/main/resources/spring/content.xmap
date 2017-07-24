@@ -232,21 +232,9 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
-        <!-- this is so the liaisons selection by department works without javascript enabled -->
-        <map:parameter name="cache-key" value="{request-uri}?{query-string}"/>
-        <map:match type="wildcard" pattern="about/liaisons.html">
-            <map:generate type="html" src="{content-base}/about/liaisons.html"/>
-            <map:transform type="saxon" src="classpath:/xsl/selections.xsl">
-                <map:parameter name="cache-key" value=";selection={selection}"/>
-            </map:transform>
-            <map:transform type="xinclude"/>
-            <map:serialize type="xml"/>
-        </map:match>
-    </map:pipeline>
-    <map:pipeline type="caching">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match type="wildcard" pattern="liaison-card/*.html">
-            <map:generate type="html" src="{content-base}/about/liaisons.html"/>
+            <map:generate type="html" src="{content-base}/contacts/staff-dir.html"/>
             <map:transform type="saxon" src="classpath:/xsl/liaison-card.xsl">
                 <map:parameter name="liaison" value="{1}"/>
             </map:transform>

@@ -25,7 +25,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/events.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/node-accordion.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/login.css" />
@@ -34,7 +33,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/popular.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/business-card.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/bookmark-instructions.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-image.css" />
@@ -66,8 +64,8 @@
                     <ul id="libraryContact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/index.html">Hours</a>: <?laneweb todays-hours?></li>
                         <li><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</li>
-                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/help/live-chat-only.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
-                        <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
+                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/howto/live-chat-only.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                        <li><i class="fa fa-envelope fa-fw"></i><a href="/howto/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                     </ul>
                     <ul id="login">
                         <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
@@ -203,6 +201,12 @@
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
+                     <li class="dropdown nav-menu">
+                        <a href="/contacts/index.html">Contact Us</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-contacts.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
+                    </li>
                     <li class="dropdown nav-menu">
                         <a href="/about/index.html">About Lane</a>
                         <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
@@ -210,8 +214,8 @@
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
-                        <a href="/help/index.html">How To</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                        <a href="/howto/index.html">How To</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-howto.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
@@ -279,18 +283,18 @@
                         <ul>
                             <li><a href="/about/index.html">Hours</a></li>
                             <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
-                            <li><a href="/about/contact.html">Contact Us</a></li>
-                            <li><a href="/about/liaisons.html">Library Liaisons</a></li>
+                            <li><a href="/contacts/index.html">Contact Us</a></li>
+                            <li><a href="/contacts/liaisons.html">Library Liaisons</a></li>
                             <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
                         </ul>
                     </div>
                     <div class="yui3-u-1-5">
                         <ul>
-                            <li><a href="/help/choose-search.html">Choose Your Search</a></li>
-                            <li><a href="/help/lit-search.html">Search the Literature</a></li>
-                            <li><a href="/help/references.html">Manage References</a></li>
-                            <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
-                            <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
+                            <li><a href="/howto/choose-search.html">Choose Your Search</a></li>
+                            <li><a href="/howto/lit-search.html">Search the Literature</a></li>
+                            <li><a href="/howto/references.html">Manage References</a></li>
+                            <li><a href="/howto/statistics.html">Use Statistics &amp; Data</a></li>
+                            <li><a href="/howto/support-for-authors.html">Support for Authors</a></li>
                         </ul>
                     </div>
                 </div>
