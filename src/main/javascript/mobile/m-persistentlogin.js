@@ -14,7 +14,7 @@ $.LANE.popupWindow = function(url){
     $(document).on("click", 'a[href*="laneproxy"]', function(event) {
         var link = event.currentTarget, threeDays = 3600 *3 ,
         now = new Date(), cookieValue = $.LANE.getCookie('lane-login-expiration-date');
-        if (!window.model['disaster-mode'] &&  window.model.isActiveSunetID && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
+        if (window.model.isActiveSunetID && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
             redirectUrl = encodeURIComponent(link.href);
             $.LANE.popupWindow(window.model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
             event.preventDefault();
