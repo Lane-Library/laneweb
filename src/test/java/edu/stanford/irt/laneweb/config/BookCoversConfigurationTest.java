@@ -22,6 +22,16 @@ public class BookCoversConfigurationTest {
 
     @Test
     public void testBookCoverService() {
+        assertNotNull(this.configuration.bookCoverService(null, null, null));
+    }
+
+    @Test
+    public void testHttpISBNService() {
+        assertNotNull(this.configuration.httpISBNService(null, null));
+    }
+
+    @Test
+    public void testJdbcISBNService() {
         this.configuration.jdbcISBNService(this.dataSource);
         assertNotNull(this.configuration.jdbcISBNService(this.dataSource));
     }
