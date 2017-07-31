@@ -214,8 +214,8 @@
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
-                        <a href="/howto/index.html">How To</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-howto.html">
+                        <a href="/help/index.html">How To</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
@@ -290,11 +290,11 @@
                     </div>
                     <div class="yui3-u-1-5">
                         <ul>
-                            <li><a href="/howto/choose-search.html">Choose Your Search</a></li>
-                            <li><a href="/howto/lit-search.html">Search the Literature</a></li>
-                            <li><a href="/howto/references.html">Manage References</a></li>
-                            <li><a href="/howto/statistics.html">Use Statistics &amp; Data</a></li>
-                            <li><a href="/howto/support-for-authors.html">Support for Authors</a></li>
+                            <li><a href="/help/choose-search.html">Choose Your Search</a></li>
+                            <li><a href="/help/lit-search.html">Search the Literature</a></li>
+                            <li><a href="/help/references.html">Manage References</a></li>
+                            <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
+                            <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
                         </ul>
                     </div>
                 </div>
