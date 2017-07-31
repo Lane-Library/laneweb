@@ -17,8 +17,8 @@
                     <ul id="libraryContact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/index.html">Hours</a>: <?laneweb todays-hours?></li>
                         <li><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</li>
-                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/howto/live-chat-only.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
-                        <li><i class="fa fa-envelope fa-fw"></i><a href="/howto/feedback.html#askus" rel="lightbox">Ask Us</a></li>
+                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/contacts/live-chat.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                        <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                     </ul>
                     <ul id="login">
                         <li><i class="fa fa-sign-in fa-lg fa-fw"></i>

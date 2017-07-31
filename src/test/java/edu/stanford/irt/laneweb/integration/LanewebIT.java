@@ -41,7 +41,7 @@ public class LanewebIT {
 
     private static final MediaType APPLICATION_JSON = new MediaType("application", "json", StandardCharsets.UTF_8);
 
-    private static final MediaType IMAGE_PNG = new MediaType("image", "x-png");
+    private static final MediaType IMAGE_PNG = new MediaType("image", "png");
 
     private static final MediaType TEXT_HTML = new MediaType("text", "html", StandardCharsets.UTF_8);
 
