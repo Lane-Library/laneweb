@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-07-31" version="3.3.39" description="3.3.39 bug fix release">
+            <action date="2017-07-31" dev="ceyates" issue="135474" type="fix">
+                support for authors link on very bottom of home page is broken 
+            </action>
+        </release>
         <release date="2017-07-31" version="3.3.38" description="3.3.38 bug fix release">
             <action date="2017-07-28" dev="ceyates" issue="135457" type="fix">
                 the live chat link does not appear to be working
