@@ -5,19 +5,23 @@
 
 	<xsl:template match="instructors">
 	<div class="instructor">
-		With
-		<b>
-			<xsl:variable name="position" select="position()" />
-			<xsl:variable name="last" select="last()" />
+		<xsl:variable name="last" select="last()" />
 			<xsl:for-each select="./instructor">
+				<xsl:variable name="position" select="position()" />
+			    <xsl:if test="$position != $last">
+					<div><xsl:text> &amp;</xsl:text></div>
+				</xsl:if>
+			    <div>
+				With 
+				<b>
 				<xsl:value-of select="fristName" />
 				<xsl:text>&#160;</xsl:text>
 				<xsl:value-of select="lastName" />
-				<xsl:if test="$position != $last">
-					<xsl:text>&#160; &amp; &#160;</xsl:text>
-				</xsl:if>
+				</b>
+				
+				</div>
 			</xsl:for-each>
-		</b>
+		
 	</div>
 	</xsl:template>
 	
