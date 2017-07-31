@@ -42,7 +42,8 @@ public class ProxyConfiguration {
 
     @Bean
     @Profile("gce")
-    public ProxyServersService httpProxyServersService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+    public ProxyServersService httpProxyServersService(final ObjectMapper objectMapper,
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
         return new HTTPProxyServersService(objectMapper, catalogServiceURI);
     }
 

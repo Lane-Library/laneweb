@@ -96,7 +96,7 @@ public class BindingConfiguration {
             final DisasterModeDataBinder disasterModeDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
             final ModelDataBinder modelDataBinder,
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI) {
-        List<DataBinder> dataBinders = new ArrayList<>(22);
+        List<DataBinder> dataBinders = new ArrayList<>(23);
         dataBinders.add(userDataBinder);
         dataBinders.add(activeSunetidDataBinder);
         dataBinders.add(ticketDataBinder);
