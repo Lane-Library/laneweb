@@ -12,7 +12,7 @@
 			<xsl:variable name="position" select="position()" />
 				<div>
 				<b>
-				<xsl:value-of select="fristName" />
+				<xsl:value-of select="firstName" />
 				<xsl:text>&#160;</xsl:text>
 				<xsl:value-of select="lastName" />
 				  <xsl:if test="$nodesCount != $position and $nodesCount != 1">
