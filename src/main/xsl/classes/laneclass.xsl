@@ -59,28 +59,8 @@
 				</div>
 				<div class="yui3-u-3-4">
 					<div class="details">
-						<xsl:apply-templates select="lc:event_instructors/lc:instructor" />
-						<div>
-							<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}" class="button alt1">
-								<span>
-									<xsl:choose>
-										<xsl:when test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats = '-\-\-'">
-											Wait List
-										</xsl:when>
-										<xsl:otherwise>
-											Register
-										</xsl:otherwise>
-									</xsl:choose>
-								</span>
-								<i class="icon fa fa-arrow-right" />
-							</a>
-							<xsl:if test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats != '-\-\-'">
-								<div class="seats">
-									Seats left:
-									<xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats" />
-								</div>
-							</xsl:if>
-						</div>
+						<xsl:apply-templates select="lc:event_instructors" />
+						<xsl:call-template name="remainingSeats"/>
 						<div style="margin-top:30px">
 							<xsl:apply-templates select="lc:venue" />
 						</div>
