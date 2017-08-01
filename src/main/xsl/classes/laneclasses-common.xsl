@@ -4,25 +4,40 @@
     version="2.0">
 
 	<xsl:template match="instructors">
+		<xsl:variable name="nodesCount" select="count(./instructor)" />
+		
 	<div class="instructor">
-		<xsl:variable name="last" select="last()" />
-			<xsl:for-each select="./instructor">
-				<xsl:variable name="position" select="position()" />
-			    <xsl:if test="$position != $last">
-					<div><xsl:text> &amp;</xsl:text></div>
-				</xsl:if>
-			    <div>
-				With 
+		Instructor(s): 
+		<xsl:for-each select="./instructor">
+			<xsl:variable name="position" select="position()" />
+				<div>
 				<b>
 				<xsl:value-of select="fristName" />
 				<xsl:text>&#160;</xsl:text>
 				<xsl:value-of select="lastName" />
+				  <xsl:if test="$nodesCount != $position and $nodesCount != 1">
+					<xsl:text>,</xsl:text>
+				</xsl:if> 
 				</b>
-				
 				</div>
-			</xsl:for-each>
-		
+		</xsl:for-each>
 	</div>
+	</xsl:template>
+	
+	<xsl:template match="remainingSeats">
+			<xsl:if test=" text() != '0'">
+				<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={id}" class="button alt1">
+					<span>Register</span>
+					<i class="icon fa fa-arrow-right"/>
+				</a>
+				<div>Seats left: <xsl:value-of select="text()"/></div>
+			</xsl:if>
+			<xsl:if test=" text()  = '0'">
+				<a href="https://www.onlineregistrationcenter.com/register/222/waitinglistform.asp?m=257&amp;c={id}" class="button alt1 waitingList">
+					<span>Wait List	</span>
+					<i class="icon fa fa-arrow-right"/>
+				</a>
+			</xsl:if>
 	</xsl:template>
 	
 	<xsl:template match="dates">
