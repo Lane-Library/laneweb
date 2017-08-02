@@ -33,7 +33,7 @@
 				<div>Seats left: <xsl:value-of select="text()"/></div>
 			</xsl:if>
 			<xsl:if test=" text()  = '0'">
-				<a href="https://www.onlineregistrationcenter.com/register/222/waitinglistform.asp?m=257&amp;c={id}" class="button alt1 waitingList">
+				<a href="https://www.onlineregistrationcenter.com/register/222/waitinglistform.asp?m=257&amp;c={id}" class="button alt1 waitList">
 					<span>Wait List	</span>
 					<i class="icon fa fa-arrow-right"/>
 				</a>
