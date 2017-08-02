@@ -65,7 +65,7 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="all-classes.xml" type="wildcard">
-            <map:generate type="file" src="cachedxml:60:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;year_from=2015"/>
+            <map:generate type="file" src="cachedxml:60:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;year_from=2017"/>
             <map:transform type="joost" src="classpath:/xsl/classes/event-urls.stx"/>
             <map:transform type="eventlist"/>
             <map:transform type="joost" src="classpath:/xsl/classes/prune-add-namespace.stx"/>

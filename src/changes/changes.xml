@@ -7,6 +7,25 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-07-31" version="3.3.39" description="3.3.39 bug fix release">
+            <action date="2017-07-31" dev="ceyates" issue="135474" type="fix">
+                support for authors link on very bottom of home page is broken 
+            </action>
+        </release>
+        <release date="2017-07-31" version="3.3.38" description="3.3.38 bug fix release">
+            <action date="2017-07-28" dev="ceyates" issue="135457" type="fix">
+                the live chat link does not appear to be working
+            </action>
+            <action date="2017-07-28" dev="ceyates" issue="135432" type="fix">
+                classes-consult/laneclasses.html showed xinclude fallback
+            </action>
+            <action date="2017-07-26" dev="ryanmax" issue="135232" type="update">
+                Lane DR: enable My Lane login links when in DR mode
+            </action>
+            <action date="2017-07-24" dev="ryanmax" issue="125932" type="update">
+                automatic HTTPS proxy configurations
+            </action>
+        </release>
         <release date="2017-07-24" version="3.3.37" description="3.3.37 bug fix release">
             <action date="2017-07-18" dev="ceyates" issue="135307" type="remove">
                 remove expandies and bookmarks-instruction code
@@ -36,9 +55,6 @@
             </action>
             <action date="2017-07-11" dev="ryanmax" issue="135236" type="remove">
                 remove SHC login functionality
-            </action>
-            <action date="2017-07-11" dev="ryanmax" issue="135232" type="update">
-                Lane DR: enable My Lane login links when in DR mode
             </action>
             <action date="2017-07-11" dev="ryanmax" issue="135167" type="fix">
                 parameters dropped at bookmark add with persistent login

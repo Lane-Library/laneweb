@@ -64,8 +64,8 @@
                     <ul id="libraryContact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/index.html">Hours</a>: <?laneweb todays-hours?></li>
                         <li><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</li>
-                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/howto/live-chat-only.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
-                        <li><i class="fa fa-envelope fa-fw"></i><a href="/howto/feedback.html#askus" rel="lightbox">Ask Us</a></li>
+                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/contacts/live-chat.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                        <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                     </ul>
                     <ul id="login">
                         <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
@@ -214,8 +214,8 @@
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
-                        <a href="/howto/index.html">How To</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-howto.html">
+                        <a href="/help/index.html">How To</a>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
@@ -290,11 +290,11 @@
                     </div>
                     <div class="yui3-u-1-5">
                         <ul>
-                            <li><a href="/howto/choose-search.html">Choose Your Search</a></li>
-                            <li><a href="/howto/lit-search.html">Search the Literature</a></li>
-                            <li><a href="/howto/references.html">Manage References</a></li>
-                            <li><a href="/howto/statistics.html">Use Statistics &amp; Data</a></li>
-                            <li><a href="/howto/support-for-authors.html">Support for Authors</a></li>
+                            <li><a href="/help/choose-search.html">Choose Your Search</a></li>
+                            <li><a href="/help/lit-search.html">Search the Literature</a></li>
+                            <li><a href="/help/references.html">Manage References</a></li>
+                            <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
+                            <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
                         </ul>
                     </div>
                 </div>
