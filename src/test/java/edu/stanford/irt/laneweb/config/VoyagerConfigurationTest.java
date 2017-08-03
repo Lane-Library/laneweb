@@ -15,6 +15,16 @@ public class VoyagerConfigurationTest {
     }
 
     @Test
+    public void testHttpLoginService() {
+        assertNotNull(this.configuration.httpLoginService(null, null));
+    }
+
+    @Test
+    public void testJdbcLoginService() {
+        assertNotNull(this.configuration.jdbcVoyagerLoginService(null));
+    }
+
+    @Test
     public void testMarcXMLReader() {
         assertNotNull(this.configuration.marcXMLReader());
     }
