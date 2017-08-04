@@ -60,9 +60,9 @@ public class MetasearchConfiguration {
         engines.add("dynamed");
         engines.add("guideline_clearinghouse");
         engines.add("medlineplus");
-        engines.add("pubmed");
-        engines.add("pubmed_clinicaltrial");
-        engines.add("pubmed_cochrane_reviews");
+        engines.add("solr-pubmed");
+        engines.add("solr-pubmed_clinicaltrial");
+        engines.add("solr-pubmed_cochrane_reviews");
         engines.add("pubmed_cost");
         engines.add("pubmed_diagnosis_focused");
         engines.add("pubmed_epidemiology_focused");
