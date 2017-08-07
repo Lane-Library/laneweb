@@ -26,6 +26,16 @@ public class LibraryHoursConfigurationTest {
     }
 
     @Test
+    public void testHoursGenearator() {
+        assertNotNull(this.configuration.hoursGenerator());
+    }
+
+    @Test
+    public void testHoursSAXStrategy() {
+        assertNotNull(this.configuration.hoursSAXStrategy());
+    }
+
+    @Test
     public void testHttpTransport() {
         assertNotNull(this.configuration.httpTransport());
     }

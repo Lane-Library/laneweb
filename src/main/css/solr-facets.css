@@ -4,7 +4,7 @@
     box-shadow: none;
 }
 
-.solrFacets h3 {
+.solrFacets h4 {
     margin-bottom: 20px;
 }
 
@@ -52,7 +52,7 @@
     padding-right: 20px;
 }
 
-.facetBrowse h3 {
+.facetBrowse h4 {
     margin: 0 20px;
 }
 

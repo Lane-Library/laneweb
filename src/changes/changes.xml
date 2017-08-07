@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-08-07" version="3.3.40" description="3.3.40 bug fix release">
+            <action date="2017-08-03" dev="ryanmax" issue="135605" type="update">
+                laneweb: add hospital external IP addresses (for DR and GCP)
+            </action>
+            <action date="2017-08-03" dev="ceyates" issue="135596" type="fix">
+                Feedback-suggestion: problem browsing "I" page of journals
+            </action>
+            <action date="2017-08-02" dev="alainb" issue="135545" type="fix">
+                classes menu display change with the category
+            </action>
+        </release>
         <release date="2017-07-31" version="3.3.39" description="3.3.39 bug fix release">
             <action date="2017-07-31" dev="ceyates" issue="135474" type="fix">
                 support for authors link on very bottom of home page is broken 

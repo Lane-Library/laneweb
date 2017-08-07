@@ -77,9 +77,6 @@
             <map:transform type="saxon" src="classpath:/xsl/classes/archive.xsl"/>
             <map:serialize type="xml"/>
         </map:match> 
-       
-       
     </map:pipeline>
 
-    
 </map:sitemap>

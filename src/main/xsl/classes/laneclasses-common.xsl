@@ -45,4 +45,43 @@
         </xsl:for-each>
     </xsl:template>
 
+	<xsl:template match="lc:event_instructors">
+		<xsl:variable name="nodesCount" select="count(./lc:instructor)" />
+		<div class="instructor">
+		Instructor(s): 
+		<xsl:for-each select="./lc:instructor">
+			<xsl:variable name="position" select="position()" />
+				<div>
+				<b>
+				<xsl:value-of select="lc:fname" />
+				<xsl:text>&#160;</xsl:text>
+				<xsl:value-of select="lc:lname" />
+				  <xsl:if test="$nodesCount != $position and $nodesCount != 1">
+					<xsl:text> &amp; </xsl:text>
+				</xsl:if> 
+				</b>
+				</div>
+		</xsl:for-each>
+	</div>
+	</xsl:template>
+	
+	
+	<xsl:template name="remainingSeats">
+		<xsl:choose>
+			<xsl:when test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats = '0'">
+			<a href="https://www.onlineregistrationcenter.com/waitinglistform.asp?m=257&amp;c={lc:module_id}" class="button alt1 waitlist">
+				<span>Wait List</span>
+				<i class="icon fa fa-arrow-right"/>
+			</a>
+			</xsl:when>
+			<xsl:otherwise>
+			<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}" class="button alt1">
+				<span>Register</span>
+				<i class="icon fa fa-arrow-right"/>
+			</a>
+			<div>Seats left: <xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats"/></div>
+			</xsl:otherwise>			
+		</xsl:choose>
+	</xsl:template>
+
 </xsl:stylesheet>
