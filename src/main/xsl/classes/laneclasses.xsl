@@ -27,18 +27,7 @@
 						<div class="yui3-g">
 							<div class="yui3-u-1-4">
 								<xsl:apply-templates select="instructors"/>
-								<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={id}" class="button alt1">
-									<span>
-										<xsl:choose>
-											<xsl:when test="remainingSeats[ text()  = '0']">Wait List</xsl:when>
-											<xsl:otherwise>Register</xsl:otherwise>
-										</xsl:choose>
-									</span>
-									<i class="icon fa fa-arrow-right"/>
-								</a>
-								<xsl:if test="remainingSeats[ text()  != '0']">
-									<div>Seats left: <xsl:value-of select="remainingSeats"/></div>
-								</xsl:if>
+								<xsl:apply-templates select="remainingSeats"/>						
 							</div>
 							<div class="yui3-u-3-4">
 								<xsl:apply-templates select="description"/>
