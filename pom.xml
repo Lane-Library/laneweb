@@ -7,7 +7,7 @@
         <version>26</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.40-SNAPSHOT</version>
+    <version>3.3.40</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -40,7 +40,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:git@gitlab.med.stanford.edu:lane/laneweb.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>laneweb-3.3.40</tag>
     </scm>
     <properties>
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
