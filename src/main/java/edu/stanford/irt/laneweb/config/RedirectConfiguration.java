@@ -39,6 +39,7 @@ public class RedirectConfiguration {
         redirectMap.put("/about/liaisons.html", "/contacts/liaisons.html");
         redirectMap.put("/about/libadmin.html", "/contacts/mgm-team.html");
         redirectMap.put("/help/live-chat-only.html", "/contacts/live-chat.html");
+        redirectMap.put("/portals/lpch-cerner.html\\?(sourceid=cerner&q=.*)", "/search.html?source=peds-all&$1");
         DefaultRedirectProcessor redirectProcessor = new DefaultRedirectProcessor(redirectMap);
         redirectProcessors.add(redirectProcessor);
         Map<String, String> shcRedirectMap = new HashMap<>(23);
