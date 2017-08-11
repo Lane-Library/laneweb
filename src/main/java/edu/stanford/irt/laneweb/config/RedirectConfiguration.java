@@ -27,7 +27,7 @@ public class RedirectConfiguration {
     public RedirectProcessor redirectProcessor() {
         List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
         redirectProcessors.add(new TrailingSlashRedirectProcessor());
-        Map<String, String> redirectMap = new HashMap<>(11);
+        Map<String, String> redirectMap = new HashMap<>(12);
         redirectMap.put("/classes/index\\.html", "/classes-consult/laneclasses.html");
         redirectMap.put("/lksc-print(?:.*)", "/help/lksc-print.html");
         redirectMap.put("/classes", "/classes-consult/laneclasses.html");
