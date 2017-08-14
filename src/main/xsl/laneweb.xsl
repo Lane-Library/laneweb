@@ -317,7 +317,7 @@
 
     
     <!-- att class menuitem-active to the menu item link for the current page -->
-    <xsl:template match="h:ul[contains(@class,'menu')]/h:li/h:a[@href=$path-and-query]">
+    <xsl:template match="h:ul[contains(@class,'menu')]//h:li/h:a[@href=$path-and-query]">
       <a class="menuitem-active">
           <xsl:apply-templates select="attribute::node()|child::node()"/>
       </a>

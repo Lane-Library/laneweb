@@ -179,48 +179,48 @@
                 <ul class="centered">
                     <li class="dropdown nav-menu">
                         <a href="/biomed-resources/index.html">All Biomedical Resources</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/portals/index.html">Specialty Portals</a>
-                        <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-portals.html">
+                        <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-portals.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-classes.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/using-lib/index.html">Services</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
-                            <xi:fallback></xi:fallback>
-                        </xi:include></div>
-                    </li>
-                     <li class="dropdown nav-menu">
-                        <a href="/contacts/index.html">Contact Us</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-contacts.html">
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-services.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/about/index.html">About Lane</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-about.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="dropdown nav-menu">
                         <a href="/help/index.html">How To</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-howto.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="nav-menu">
                         <a href="http://laneblog.stanford.edu/">Blog</a>
+                    </li>
+                    <li class="dropdown nav-menu">
+                        <a href="/contacts/index.html">Contact</a>
+                        <div class="dropdown-content nav-menu-content" style="right:0"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
                     </li>
                 </ul>
             </div>
