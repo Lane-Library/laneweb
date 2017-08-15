@@ -18,9 +18,8 @@
                     <xsl:when test="$id = ''">
                         <xsl:choose>
                             <xsl:when test="$sort = 'date'">
-                                <xsl:apply-templates select="lc:event_data">
-                                    <xsl:sort select="replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1')" data-type="text"
-                                        order="descending" />
+                            	<xsl:apply-templates select="lc:event_data">
+                                	<xsl:sort select="concat(replace(./lc:event_dates/lc:start_date[1]/text(),'.*/(\d{4}) .*','$1'),replace(./lc:event_dates/lc:start_date[1]/text(),'^(\d{1,2})/.*','$1'))" data-type="text"   order="descending" />
                                 </xsl:apply-templates>
                             </xsl:when>
                             <xsl:otherwise>
@@ -50,6 +49,7 @@
                 </xsl:call-template>
                 <xsl:text>...</xsl:text>
                     <a href="/classes-consult/archive.html?class-id={../lc:module_id}"> More <i class="fa fa-arrow-right"/></a>
+                     
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
@@ -62,8 +62,8 @@
             <div class="yui3-g">
                 <div class="yui3-u-1-8">
                     <div class="date">
-                        <xsl:apply-templates select="lc:event_dates/lc:start_date[1]" />
-                    </div>
+                        <xsl:apply-templates select="lc:event_dates/lc:start_date[1]" /> 
+                   </div>
                 </div>
                 <div class="yui3-u-7-12">
                     <div class="details">
