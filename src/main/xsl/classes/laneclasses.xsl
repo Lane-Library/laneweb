@@ -14,7 +14,6 @@
 			</a>
 		</h4>
 	</xsl:template>
-
 	
 	<xsl:template match="class">
 		<div class="class">
@@ -86,7 +85,6 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
 
 </xsl:stylesheet>
 
