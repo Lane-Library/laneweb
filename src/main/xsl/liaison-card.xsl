@@ -5,7 +5,7 @@
 
 	<xsl:param name="liaison" />
 
-	<xsl:template match="h:li[@id=$liaison]">
+	<xsl:template match="h:div[@id=$liaison]">
 		<xsl:variable name="liaison-profile-link"
 			select=".//h:a[@class='liaison-profile-link']/@href" />
 		<div class="business-card">
@@ -27,7 +27,7 @@
 		<div class="yui3-u-1-4">
 		</div>
 		<div class="yui3-u-3-4">
-			<a href="/about/liaisons.html#tbd">
+			<a href="/contacts/liaisons.html#tbd">
 				<xsl:value-of select=".//h:span[@class='liaison-name']" />
 			</a>
 		</div>

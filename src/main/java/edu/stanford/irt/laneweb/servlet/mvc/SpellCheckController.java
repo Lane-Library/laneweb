@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.net.SocketTimeoutException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +37,7 @@ public class SpellCheckController {
     @ExceptionHandler(SpellCheckException.class)
     @ResponseBody
     public String spellCheckException(final SpellCheckException e) {
-        Throwable t = e.getCause();
-        if (t instanceof SocketTimeoutException) {
-            if (log.isWarnEnabled()) {
-                log.warn(e.toString(), e);
-            }
-        } else {
-            log.error(e.toString(), e);
-        }
+        log.error("spell check failed: {}", e.getMessage());
         return "spell check failed";
     }
 }

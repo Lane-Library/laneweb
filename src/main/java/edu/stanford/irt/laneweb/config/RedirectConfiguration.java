@@ -27,13 +27,19 @@ public class RedirectConfiguration {
     public RedirectProcessor redirectProcessor() {
         List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
         redirectProcessors.add(new TrailingSlashRedirectProcessor());
-        Map<String, String> redirectMap = new HashMap<>(6);
+        Map<String, String> redirectMap = new HashMap<>(12);
         redirectMap.put("/classes/index\\.html", "/classes-consult/laneclasses.html");
         redirectMap.put("/lksc-print(?:.*)", "/help/lksc-print.html");
         redirectMap.put("/classes", "/classes-consult/laneclasses.html");
         redirectMap.put("/m", "/m/index.html");
         redirectMap.put("/imagesearch.html", "/bioimagesearch.html");
         redirectMap.put("/beemap", "/beemap.html");
+        redirectMap.put("/about/contact.html", "/contacts/index.html");
+        redirectMap.put("/about/staff-dir.html", "/contacts/staff-dir.html");
+        redirectMap.put("/about/liaisons.html", "/contacts/liaisons.html");
+        redirectMap.put("/about/libadmin.html", "/contacts/mgm-team.html");
+        redirectMap.put("/help/live-chat-only.html", "/contacts/live-chat.html");
+        redirectMap.put("/portals/lpch-cerner.html\\?(sourceid=cerner&q=.*)", "/search.html?source=peds-all&$1");
         DefaultRedirectProcessor redirectProcessor = new DefaultRedirectProcessor(redirectMap);
         redirectProcessors.add(redirectProcessor);
         Map<String, String> shcRedirectMap = new HashMap<>(23);

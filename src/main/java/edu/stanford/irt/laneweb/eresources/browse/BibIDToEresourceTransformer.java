@@ -73,7 +73,10 @@ public class BibIDToEresourceTransformer extends AbstractXMLPipe
         super.startElement(uri, loc, raw, atts);
         String bibID = atts.getValue("data-bibid");
         if (bibID != null) {
-            this.saxStrategy.toSAX(this.solrService.getByBibID(bibID), this.xmlConsumer);
+            Eresource eresource = this.solrService.getByBibID(bibID);
+            if (eresource != null) {
+                this.saxStrategy.toSAX(eresource, this.xmlConsumer);
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}" />
@@ -17,7 +17,7 @@
                     <ul id="libraryContact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/index.html">Hours</a>: <?laneweb todays-hours?></li>
                         <li><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</li>
-                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/help/live-chat-only.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
+                        <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/contacts/live-chat.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
                         <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                     </ul>
                     <ul id="login">
@@ -41,6 +41,9 @@
                         </li>
                         <li>
                             <a href="?proxy-links=true">Stanford Access</a>
+                        </li>
+                        <li>
+                            <a href="/translated/chinese.html">查詢</a>
                         </li>
                     </ul>
                 </div>
@@ -127,44 +130,50 @@
             </div>
             <div class="lane-nav">
                 <ul class="centered">
-                    <li class="dropdown nav-menu">
-                        <a href="/biomed-resources/index.html">All Biomedical Resources</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-resources.html">
+                    <li class="dropdown nav-menu" data-path="/biomed-resources/">
+                        <span>All Biomedical Resources</span>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
-                    <li class="dropdown nav-menu">
-                        <a href="/portals/index.html">Specialty Portals</a>
-                        <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-portals.html">
+                    <li class="dropdown nav-menu" data-path="/portals/">
+                        <span>Specialty Portals</span>
+                        <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-portals.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
-                    <li class="dropdown nav-menu">
-                        <a href="/classes-consult/index.html">Classes &amp; Tutorials</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-classes.html">
+                    <li class="dropdown nav-menu" data-path="/classes-consult/">
+                        <span>Classes &amp; Tutorials</span>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-classes.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
-                    <li class="dropdown nav-menu">
-                        <a href="/using-lib/index.html">Services</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-using.html">
+                    <li class="dropdown nav-menu" data-path="/using-lib/">
+                        <span>Services</span>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-services.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
-                    <li class="dropdown nav-menu">
-                        <a href="/about/index.html">About Lane</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-aboutlane.html">
+                    <li class="dropdown nav-menu" data-path="/about/">
+                        <span>About Lane</span>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-about.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
-                    <li class="dropdown nav-menu">
-                        <a href="/help/index.html">How To</a>
-                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                    <li class="dropdown nav-menu" data-path="/help/">
+                        <span>How To</span>
+                        <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-howto.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>
                     <li class="nav-menu">
-                        <a href="http://laneblog.stanford.edu/">Blog</a>
+                        <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
+                    </li>
+                    <li class="dropdown nav-menu" data-path="/contacts/">
+                        <span>Contact</span>
+                        <div class="dropdown-content nav-menu-content" style="right:0"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
+                            <xi:fallback></xi:fallback>
+                        </xi:include></div>
                     </li>
                 </ul>
             </div>
@@ -227,8 +236,8 @@
                         <ul>
                             <li><a href="/about/index.html">Hours</a></li>
                             <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
-                            <li><a href="/about/contact.html">Contact Us</a></li>
-                            <li><a href="/about/liaisons.html">Library Liaisons</a></li>
+                            <li><a href="/contacts/index.html">Contact Us</a></li>
+                            <li><a href="/contacts/liaisons.html">Library Liaisons</a></li>
                             <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
                         </ul>
                     </div>

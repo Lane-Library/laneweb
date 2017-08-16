@@ -1,8 +1,7 @@
-package edu.stanford.irt.laneweb.mapping;
+package edu.stanford.irt.laneweb.metasearch;
 
 import java.util.Collection;
 
-import edu.stanford.irt.laneweb.metasearch.SearchResult;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.PagingList;
 

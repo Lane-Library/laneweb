@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
+import java.util.Map;
 
-import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 
 import org.xml.sax.SAXException;
 
@@ -17,8 +17,9 @@ public class HTML5Serializer extends TransformerSerializer {
 
     private OutputStream outputStream;
 
-    public HTML5Serializer(final String type, final SAXTransformerFactory factory, final Properties properties) {
-        super(type, factory, properties);
+    public HTML5Serializer(final String type, final TransformerHandler transformerHandler,
+            final Map<String, String> properties) {
+        super(type, transformerHandler, properties);
     }
 
     @Override

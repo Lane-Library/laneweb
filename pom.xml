@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>25</version>
+        <version>26</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.36-SNAPSHOT</version>
+    <version>3.3.42-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon</artifactId>
-            <version>1.10.2</version>
+            <version>1.11.0</version>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
@@ -71,13 +71,13 @@
         <dependency>
             <artifactId>jackson-databind</artifactId>
             <groupId>com.fasterxml.jackson.core</groupId>
-            <version>2.8.8.1</version>
+            <version>2.8.9</version>
         </dependency>
         <dependency>
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.67.0</version>
+            <version>1.68.1</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -93,13 +93,13 @@
         <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>2.0.0-SNAPSHOT</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-2</version>
+            <version>9.8.0-3</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -109,7 +109,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.59</version>
+            <version>3.0.60</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -130,7 +130,7 @@
         <dependency>
             <artifactId>spellcheck-core</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>2.0.4</version>
+            <version>2.0.5</version>
         </dependency>
         <dependency>
             <artifactId>spellcheck-pubmed-espell</artifactId>
@@ -207,13 +207,6 @@
             <artifactId>spring-oxm</artifactId>
         </dependency>
         <dependency>
-            <!-- required only for shccodec key generation -->
-            <groupId>bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>140</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
@@ -231,7 +224,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>2.0.10.RELEASE</version>
+            <version>2.0.11.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -330,20 +323,20 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>lanehours</artifactId>
-        	<version>1.0.0</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>lanehours</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-        	<groupId>com.zaxxer</groupId>
-        	<artifactId>HikariCP</artifactId>
-        	<version>2.6.3</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.6.3</version>
         </dependency>
         <dependency>
-        	<groupId>org.postgresql</groupId>
-        	<artifactId>postgresql</artifactId>
-        	<version>9.4.1212</version>
-        	<scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.1.4</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
     <build>
@@ -442,7 +435,6 @@
                                 <include>tooltips-min.css</include>
                                 <include>miscellaneous-min.css</include>
                                 <include>events-min.css</include>
-                                <include>node-accordion-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
                                 <include>login-min.css</include>
@@ -451,7 +443,6 @@
                                 <include>popular-min.css</include>
                                 <include>business-card-min.css</include>
                                 <include>bookmarks-min.css</include>
-                                <include>bookmark-instructions-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-image-min.css</include>
@@ -479,6 +470,7 @@
                                 <include>${basedir}/src/main/javascript/yui-3.18.1.js</include>
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
+                                <include>menu-min.js</include>
                                 <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
@@ -507,8 +499,6 @@
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
-                                <include>bookmark-instructions-min.js</include>
-                                <include>lane-expandies-min.js</include>
                                 <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
@@ -518,7 +508,6 @@
                                 <include>lane-findit-min.js</include>
                                 <include>lane-querymap-min.js</include>
                                 <include>lane-teletype-min.js</include>
-                                <include>lane-selections-min.js</include>
                                 <include>lane-popin-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>telinput-min.js</include>

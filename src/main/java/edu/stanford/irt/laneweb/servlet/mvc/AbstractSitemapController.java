@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,17 +20,14 @@ public abstract class AbstractSitemapController {
 
     private DataBinder dataBinder;
 
-    private ServletContext servletContext;
-
     private Sitemap sitemap;
 
     private SourceResolver sourceResolver;
 
     public AbstractSitemapController(final ComponentFactory componentFactory, final DataBinder dataBinder,
-            final ServletContext servletContext, final Sitemap sitemap, final SourceResolver sourceResolver) {
+            final Sitemap sitemap, final SourceResolver sourceResolver) {
         this.componentFactory = componentFactory;
         this.dataBinder = dataBinder;
-        this.servletContext = servletContext;
         this.sitemap = sitemap;
         this.sourceResolver = sourceResolver;
     }
@@ -48,9 +44,9 @@ public abstract class AbstractSitemapController {
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);
         model.put(Sitemap.class.getName(), this.sitemap);
-        response.setContentType(getContentType(sitemapURI, prefix));
         Pipeline pipeline = this.sitemap
                 .buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
+        response.setContentType(pipeline.getMimeType());
         if ("GET".equals(method)) {
             // only process GET requests
             pipeline.process(response.getOutputStream());
@@ -59,21 +55,5 @@ public abstract class AbstractSitemapController {
 
     protected String getSitemapURI(final HttpServletRequest request, final String prefix) {
         return request.getServletPath().substring(prefix.length());
-    }
-
-    private String getContentType(final String value, final String prefix) {
-        String contentType = this.servletContext.getMimeType(value);
-        if (contentType == null) {
-            if (value.indexOf("xml") > -1) {
-                contentType = "text/xml";
-            } else if (value.indexOf("html") > -1) {
-                contentType = "text/html";
-            } else if (value.indexOf("json") > -1) {
-                contentType = "application/json";
-            } else {
-                contentType = "text/plain";
-            }
-        }
-        return contentType;
     }
 }

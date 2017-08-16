@@ -71,7 +71,6 @@
     <filter-mapping>
         <filter-name>LanewebHTTPSFilter</filter-name>
         <url-pattern>/secure/*</url-pattern>
-        <url-pattern>/shclogin</url-pattern>
     </filter-mapping>
     
     <filter-mapping>
@@ -146,12 +145,12 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>NotFoundServlet</servlet-name>
-        <servlet-class>edu.stanford.irt.laneweb.servlet.NotFoundServlet</servlet-class>
+        <servlet-name>NoContentServlet</servlet-name>
+        <servlet-class>edu.stanford.irt.laneweb.servlet.NoContentServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>NotFoundServlet</servlet-name>
+        <servlet-name>NoContentServlet</servlet-name>
         <url-pattern>*.php</url-pattern>
         <url-pattern>/rss/mesh/*</url-pattern>
         <url-pattern>/rss/browse/*</url-pattern>

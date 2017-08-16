@@ -95,6 +95,11 @@
                         </i>
                     </span>
                 </xsl:if>
+                <xsl:if test="s:additional-text">
+                    <span>
+                        <xsl:value-of select="s:additional-text" />
+                    </span>
+                </xsl:if>
             </div>
         </xsl:if>
         <xsl:if test="../s:author">
@@ -132,6 +137,11 @@
                     </i>
                 </span>
             </xsl:if>
+            <xsl:if test="s:additional-text">
+                <span>
+                    <xsl:value-of select="s:additional-text" />
+                </span>
+            </xsl:if>
         </div>
     </xsl:template>
 
@@ -144,14 +154,14 @@
     </xsl:template>
 
     <xsl:template match="s:primaryType">
-        <xsl:if test="contains('ejbook',$type)">
+        <xsl:if test="$type and contains('JournalBook',$type)">
             <span class="primaryType">
-                <span><strong>
+                <strong>
                     <xsl:choose>
                         <xsl:when test="contains(., 'Print')">Print</xsl:when>
                         <xsl:otherwise>Digital</xsl:otherwise>
                     </xsl:choose>
-                </strong></span>
+                </strong>
             </span>
         </xsl:if>
     </xsl:template>

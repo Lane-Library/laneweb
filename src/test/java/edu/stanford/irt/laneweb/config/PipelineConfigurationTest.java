@@ -3,6 +3,8 @@ package edu.stanford.irt.laneweb.config;
 import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertNotNull;
 
+import javax.xml.transform.TransformerConfigurationException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -120,7 +122,7 @@ public class PipelineConfigurationTest {
     }
 
     @Test
-    public void testXmlSerializer() {
+    public void testXmlSerializer() throws TransformerConfigurationException {
         assertNotNull(this.configuration.xmlSerializer(null));
     }
 }

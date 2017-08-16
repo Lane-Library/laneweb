@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,34 +17,26 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class JDBCProxyServersService implements ProxyServersService {
 
-    private static final byte[] HJ = { 'H', 'J', ' ' };
+    private static final byte[] COLON_443 = { ':', '4', '4', '3' };
 
-    private static final byte[] SUL;
+    private static final byte[] HJ = { 'H', 'J', ' ' };
 
     private static final byte[] T = { 'T', ' ' };
 
-    private static final byte[] U = { 'U', ' ' };
-    static {
-        SUL = "T bodoni.stanford.edu\nU http://bodoni.stanford.edu\nHJ bodoni.stanford.edu\n\nT library.stanford.edu\nU http://library.stanford.edu\nHJ library.stanford.edu\n\nT searchworks.stanford.edu\nU http://searchworks.stanford.edu\nHJ searchworks.stanford.edu"
-                .getBytes(StandardCharsets.UTF_8);
-    }
+    private static final byte[] U_HTTPS = { 'U', ' ', 'h', 't', 't', 'p', 's', ':', '/', '/' };
 
     private DataSource dataSource;
 
-    private String ezproxyServersSQL;
-
     private String proxyHostsSQL;
 
-    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL,
-            final String ezproxyServersSQL) {
+    public JDBCProxyServersService(final DataSource dataSource, final String proxyHostsSQL) {
         this.dataSource = dataSource;
         this.proxyHostsSQL = proxyHostsSQL;
-        this.ezproxyServersSQL = ezproxyServersSQL;
     }
 
     @Override
     public Set<String> getHosts() {
-        Set<String> hosts = new HashSet<>();
+        Set<String> hosts = new LinkedHashSet<>();
         try (Connection conn = this.dataSource.getConnection();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(this.proxyHostsSQL)) {
@@ -62,26 +54,27 @@ public class JDBCProxyServersService implements ProxyServersService {
 
     @Override
     public void write(final OutputStream outputStream) {
+        Set<String> hosts = getHosts();
         Objects.requireNonNull(outputStream, "null outputStream");
-        try (Connection conn = this.dataSource.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(this.ezproxyServersSQL);
-                OutputStream out = outputStream) {
-            while (rs.next()) {
-                String host = rs.getString(1);
+        try (OutputStream out = outputStream) {
+            for (String host : hosts) {
+                byte[] hostBytes = host.getBytes(StandardCharsets.UTF_8);
                 out.write(T);
-                out.write(host.getBytes(StandardCharsets.UTF_8));
+                out.write(hostBytes);
                 out.write('\n');
-                out.write(U);
-                out.write(host.getBytes(StandardCharsets.UTF_8));
+                out.write(U_HTTPS);
+                out.write(hostBytes);
                 out.write('\n');
                 out.write(HJ);
-                out.write(host.getBytes(StandardCharsets.UTF_8));
+                out.write(hostBytes);
+                out.write('\n');
+                out.write(HJ);
+                out.write(hostBytes);
+                out.write(COLON_443);
                 out.write('\n');
                 out.write('\n');
             }
-            out.write(SUL);
-        } catch (SQLException | IOException e) {
+        } catch (IOException e) {
             throw new LanewebException(e);
         }
     }

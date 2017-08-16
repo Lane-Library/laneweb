@@ -9,7 +9,11 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class LiveChatScheduleBinder implements DataBinder {
 
-    private Schedule schedule = new Schedule();
+    private Schedule schedule;
+
+    public LiveChatScheduleBinder(final Schedule schedule) {
+        this.schedule = schedule;
+    }
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {

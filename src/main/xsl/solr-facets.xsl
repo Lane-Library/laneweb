@@ -23,6 +23,12 @@
     <xsl:variable name="facets-per-browse-page" select="20"/>
     <xsl:variable name="values-per-facet" select="4"/>
     <xsl:variable name="today" select="number(format-dateTime(current-dateTime(),'[Y,4][M,2][D,2]'))"/>
+    <xsl:variable name="header">
+        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h4>
+        <xsl:if test="not($search-mode)">
+            <a class="close fa fa-close"></a>
+        </xsl:if>
+    </xsl:variable>
 
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
@@ -117,72 +123,92 @@
     </xsl:template>
 
     <xsl:template match="/">
-        <xsl:variable name="counts" select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name='all']/@hits"/>
         <html>
             <body>
-                <!-- hidden element that gets moved into place by solr-facets.js -->
-                <xsl:if test="$search-mode and string-length($facets) > 0">
-                    <span id="solrAllCount"><xsl:value-of select="format-number($counts,'###,##0')"/></span>
-                </xsl:if>
-                <xsl:choose>
-	                <xsl:when test="$counts > 0 and (/linked-hash-map/entry or string-length($facets) > 0)">
-                    <div class="bd">
-                        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h4>
-                        <xsl:if test="not($search-mode)">
-                            <a class="close fa fa-close"></a>
-                        </xsl:if>
-                        <ul>
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'recordType'"/>
-                                <xsl:with-param name="label">Results From <span id="sources"></span></xsl:with-param>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'type'"/>
-                                <xsl:with-param name="label">Resource Type <i class="fa fa-info-circle fa-lg yui3-tooltip-trigger" title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;"></i></xsl:with-param>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'publicationType'"/>
-                                <xsl:with-param name="label" select="'Article Type'"/>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'publicationTitle'"/>
-                                <xsl:with-param name="label" select="'Journal Title'"/>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'year'"/>
-                                <xsl:with-param name="label" select="'Year'"/>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'mesh'"/>
-                                <xsl:with-param name="label"><span class="yui3-tooltip-trigger" title="Filter down search results to only articles pertaining to these medical subjects">Medical Subject</span></xsl:with-param>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'publicationAuthor'"/>
-                                <xsl:with-param name="label" select="'Author'"/>
-                            </xsl:call-template>
-
-                            <xsl:call-template name="field">
-                                <xsl:with-param name="id" select="'publicationLanguage'"/>
-                                <xsl:with-param name="label" select="'Language'"/>
-                            </xsl:call-template>
-                        </ul>
-                    </div>
-	                </xsl:when>
-                    <xsl:otherwise>
-                        <h4>Can we help?</h4>
-                        <a class="button" rel="lightbox disableBackground" href="{$base-path}/help/feedback.html#askus">
-                            <span><i class="icon fa fa-comments"></i>Ask Us</span>
-                        </a>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:apply-templates/>
             </body>
         </html>
+    </xsl:template>
+
+    <xsl:template match="/string">
+        <div class="bd">
+            <xsl:copy-of select="$header"/>
+        </div>
+        <p><xsl:value-of select="."/></p>
+    </xsl:template>
+
+    <xsl:template match="/linked-hash-map">
+        <xsl:variable name="counts"
+            select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name = 'all']/@hits"/>
+        <!-- hidden element that gets moved into place by solr-facets.js -->
+        <xsl:if test="$search-mode and string-length($facets) > 0">
+            <span id="solrAllCount">
+                <xsl:value-of select="format-number($counts, '###,##0')"/>
+            </span>
+        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="$counts > 0 and (entry or string-length($facets) > 0)">
+                <div class="bd">
+                    <xsl:copy-of select="$header"/>
+                    <ul>
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'recordType'"/>
+                            <xsl:with-param name="label">Results From <span id="sources"
+                                /></xsl:with-param>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'type'"/>
+                            <xsl:with-param name="label">Resource Type <i
+                                    class="fa fa-info-circle fa-lg yui3-tooltip-trigger"
+                                    title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;"
+                                /></xsl:with-param>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'publicationType'"/>
+                            <xsl:with-param name="label" select="'Article Type'"/>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'publicationTitle'"/>
+                            <xsl:with-param name="label" select="'Journal Title'"/>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'year'"/>
+                            <xsl:with-param name="label" select="'Year'"/>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'mesh'"/>
+                            <xsl:with-param name="label">
+                                <span class="yui3-tooltip-trigger"
+                                    title="Filter down search results to only articles pertaining to these medical subjects"
+                                    >Medical Subject</span>
+                            </xsl:with-param>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'publicationAuthor'"/>
+                            <xsl:with-param name="label" select="'Author'"/>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'publicationLanguage'"/>
+                            <xsl:with-param name="label" select="'Language'"/>
+                        </xsl:call-template>
+                    </ul>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <h4>Can we help?</h4>
+                <a class="button" rel="lightbox disableBackground"
+                    href="{$base-path}/help/feedback.html#askus">
+                    <span><i class="icon fa fa-comments"/>Ask Us</span>
+                </a>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>

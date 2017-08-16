@@ -86,5 +86,4 @@
 			</xsl:choose>
 		</div>
 	</xsl:template>
-
 </xsl:stylesheet>

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
+import edu.stanford.irt.laneweb.livechat.Schedule;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
@@ -112,7 +113,7 @@ public class BindingConfiguration {
         dataBinders.add(contentBaseDataBinder);
         dataBinders.add(versionDataBinder);
         dataBinders.add(disasterModeDataBinder);
-        dataBinders.add(new LiveChatScheduleBinder());
+        dataBinders.add(new LiveChatScheduleBinder(new Schedule()));
         dataBinders.add(bookmarkDataBinder);
         dataBinders.add(todaysHoursDataBinder);
         dataBinders.add(new ParameterMapDataBinder());
@@ -197,7 +198,7 @@ public class BindingConfiguration {
         templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "bassettLargerView");
         templateMap.put("^/discoveryLoginPage.html", "none");
         templateMap.put("^/devDiscoveryLoginPage.html", "none");
-        templateMap.put("^/help/live-chat-only.html", "none");
+        templateMap.put("^/contacts/live-chat.html", "none");
         return new TemplateChooser("template", templateNames, templateMap);
     }
 

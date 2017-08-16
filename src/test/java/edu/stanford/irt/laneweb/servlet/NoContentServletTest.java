@@ -12,21 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-public class NotFoundServletTest {
+public class NoContentServletTest {
 
-    private NotFoundServlet filter;
+    private NoContentServlet filter;
 
     private HttpServletResponse response;
 
     @Before
     public void setUp() throws Exception {
-        this.filter = new NotFoundServlet();
+        this.filter = new NoContentServlet();
         this.response = createMock(HttpServletResponse.class);
     }
 
     @Test
     public void testService() throws IOException, ServletException {
-        this.response.sendError(404);
+        this.response.sendError(204);
         replay(this.response);
         this.filter.service(null, this.response);
         verify(this.response);

@@ -28,7 +28,6 @@
             <map:transform type="saxon" src="classpath:/xsl/classes/archives.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-       
     </map:pipeline>
     
     <!-- caching pipeline for static documents -->

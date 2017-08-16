@@ -26,4 +26,14 @@ public class EquipmentConfigurationTest {
     public void testEquipmentStatusTransformer() throws IOException {
         assertNotNull(this.configuration.equipmentStatusTransformer(null));
     }
+
+    @Test
+    public void testHttpEquipmentService() {
+        assertNotNull(this.configuration.httpEquipmentService(null, null));
+    }
+
+    @Test
+    public void testJdbcEquipmentService() {
+        assertNotNull(this.configuration.jdbcEquipmentService(null));
+    }
 }

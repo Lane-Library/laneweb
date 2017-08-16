@@ -10,7 +10,6 @@
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
     // See UserDataBinder.java
     isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
-    drMode = model.get(model.DISASTER_MODE),
     extensionPersistentLoginPopup,
     popupWindow,
     getPopup;
@@ -26,7 +25,7 @@
 
     extensionPersistentLoginPopup = function(event){
         var link = event.target;
-        if (isStanfordActive && !drMode && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
+        if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
             link.set('rel', 'persistentLogin');
             redirectUrl = encodeURIComponent(event.target.get('href'));

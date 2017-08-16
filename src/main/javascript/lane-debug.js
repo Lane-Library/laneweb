@@ -4,7 +4,7 @@
  * the Y.lane object that is our local namespace.
  */
 
-YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-2010.05.21-18-16'}).use(
+YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "anim-base",
         "anim-easing",
         "anim-scroll",
@@ -20,7 +20,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "dd-drop",
         "dd-proxy",
         "event-custom-base",
-        "gallery-node-accordion",
         "history-base",
         "history-hash",
         "io-base",
@@ -55,6 +54,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
 
     var i, laneJavascript = [
         "util.js",
+        "menu.js",
         "location.js",
         "golfclub-headings.js",
         "model.js",
@@ -75,8 +75,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-lightbox.js",
         "bookmark-login.js",
         "lane-tracking.js",
-        "bookmark-instructions.js",
-        "lane-expandies.js",
         "lane-google.js",
         "lane-popup.js",
         "lane-metasearch.js",
@@ -86,7 +84,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false,gallery: 'gallery-20
         "lane-findit.js",
         "lane-querymap.js",
         "lane-teletype.js",
-        "lane-selections.js",
         "lane-popin.js",
         "description-toggle.js",
         "telinput.js",

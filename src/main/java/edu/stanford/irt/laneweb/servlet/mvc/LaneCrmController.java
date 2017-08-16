@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -10,6 +11,8 @@ import java.util.Map.Entry;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class LaneCrmController {
 
-    private static final String ACQUISITION_URL = "https://lane-local-02.stanford.edu/crm/sfp/api/new";
+    /**
+     * A factory for URLConnections that can be mocked in tests.
+     */
+    static class URLConnectionFactory {
+
+        public URLConnection getConnection(final String url) throws IOException {
+            return new URL(url).openConnection();
+        }
+    }
 
     private static final String ASKUS_PATH = "/apps/laneaskus";
 
@@ -29,36 +40,53 @@ public class LaneCrmController {
 
     private static final String JSON_MIME_TYPE = "application/json";
 
-    private static final String LANEASKUS_URL = "https://lane-local-02.stanford.edu/crm/laneaskus/api/new";
-
     private static final String LANELIBACQ_PATH = "/apps/lanelibacqs";
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
+    private String acquisitionURL;
+
+    private String askUsURL;
+
+    private URLConnectionFactory connectionFactory;
+
+    @Autowired
+    public LaneCrmController(@Value("${edu.stanford.irt.laneweb.acquisition-api.url}") final String acquisitionURL,
+            @Value("${edu.stanford.irt.laneweb.askus-api.url}") final String askUsURL) {
+        this(acquisitionURL, askUsURL, new URLConnectionFactory());
+    }
+
+    LaneCrmController(final String acquisitionURL, final String askUsURL,
+            final URLConnectionFactory connectionFactory) {
+        this.acquisitionURL = acquisitionURL;
+        this.askUsURL = askUsURL;
+        this.connectionFactory = connectionFactory;
+    }
+
     @RequestMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLaneaskus(final Model model, final RedirectAttributes atts) throws IOException {
         Map<String, Object> map = model.asMap();
-        submitRequestToCrmServer(map, LANEASKUS_URL);
+        submitRequestToCrmServer(map, this.askUsURL);
         return getRedirectTo(map);
     }
 
     @RequestMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) throws IOException {
         Map<String, Object> map = model.asMap();
-        submitRequestToCrmServer(map, ACQUISITION_URL);
+        submitRequestToCrmServer(map, this.acquisitionURL);
         return getRedirectTo(map);
     }
 
     @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLaneaskus(@RequestBody final Map<String, Object> feedback) throws IOException {
-        submitRequestToCrmServer(feedback, LANEASKUS_URL);
+        submitRequestToCrmServer(feedback, this.askUsURL);
     }
 
     @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback) throws IOException {
-        submitRequestToCrmServer(feedback, ACQUISITION_URL);
+        submitRequestToCrmServer(feedback, this.acquisitionURL);
     }
 
     private String getRedirectTo(final Map<String, Object> map) {
@@ -79,8 +107,7 @@ public class LaneCrmController {
                     .append('&');
         }
         queryString.append("id=");
-        URL url = new URL(crmUrl);
-        HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+        HttpsURLConnection con = (HttpsURLConnection) this.connectionFactory.getConnection(crmUrl);
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(queryString.toString());
