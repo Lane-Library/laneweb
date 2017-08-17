@@ -28,6 +28,8 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator implements ModelAware {
 
+    private static final int ALL_BOOK_OR_JOURNAL_TYPES = 3;
+
     private static final String COLON = ":";
 
     private static final String EMPTY = "";
@@ -56,7 +58,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private Collection<String> meshToIgnoreInSearch;
 
-    private int pageNumber = 0;
+    private int pageNumber;
 
     private Collection<String> prioritizedPublicationTypes;
 
@@ -232,7 +234,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         }
         long books = facetList.stream().filter(s -> s.getValue().startsWith("Book")).count();
         long journals = facetList.stream().filter(s -> s.getValue().startsWith("Journal")).count();
-        if ((books > 0 && books < 3) || (journals > 0 && journals < 3)) {
+        if ((books > 0 && books < ALL_BOOK_OR_JOURNAL_TYPES)
+                || (journals > 0 && journals < ALL_BOOK_OR_JOURNAL_TYPES)) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, TYPE, 0, PAGE_SIZE, 1,
                     parseSort());
             Map<String, Collection<Facet>> typeFacetMap = processFacets(fps);
