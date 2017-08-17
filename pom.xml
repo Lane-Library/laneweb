@@ -99,7 +99,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-3</version>
+            <version>9.8.0-4</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -259,13 +259,13 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-easymock</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
