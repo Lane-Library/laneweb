@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.user.User;
 
 public class CookieUserFactory implements UserFactory {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CookieUserFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(CookieUserFactory.class);
 
     private UserCookieCodec codec;
 
@@ -55,7 +55,7 @@ public class CookieUserFactory implements UserFactory {
                     user = token.getUser();
                 }
             } catch (LanewebException e) {
-                LOG.error("failed to decode userid from: " + cookie.getValue(), e);
+                log.error("failed to decode userid from cookie: value='{}'", cookie.getValue());
             }
         }
         return user;
