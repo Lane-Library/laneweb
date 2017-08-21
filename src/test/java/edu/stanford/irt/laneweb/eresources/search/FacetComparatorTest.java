@@ -15,7 +15,7 @@ public class FacetComparatorTest {
     private static final Collection<String> PUB_TYPES = Arrays.asList("Req Pub 1", "Req Pub 2", "Req Pub 3");
 
     @Test
-    public final void test() {
+    public final void testComparator() {
         Set<Facet> set = new TreeSet<>(new FacetComparator(PUB_TYPES));
         Iterator<Facet> i;
         // basic order by count
