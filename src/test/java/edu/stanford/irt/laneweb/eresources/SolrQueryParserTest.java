@@ -27,7 +27,7 @@ public class SolrQueryParserTest {
     }
 
     @Test
-    public final void test() {
+    public final void testParser() {
         assertEquals("The biology of cancer \\[electronic resource\\]",
                 this.parser.parse("The biology of cancer [electronic resource]"));
         assertEquals("Prostate cancer principles and practice. \\[1st ed.\\]",

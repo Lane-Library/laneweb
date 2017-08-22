@@ -40,6 +40,15 @@
 .yui3-bookmark-editor {
     cursor: move;
 }
+
+.yui3-bookmark-editor:nth-child(even) {
+    background: #fff;
+}
+
+.yui3-bookmark-editor:nth-child(odd) {
+    background: #ddd;
+}
+
 .yui3-bookmark-editor label,
 .yui3-bookmark-editor input[type='text'],
 .yui3-bookmark-editor button {
