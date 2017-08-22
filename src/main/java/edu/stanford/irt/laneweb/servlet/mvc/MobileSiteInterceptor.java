@@ -69,7 +69,7 @@ public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
         } else {
             if (this.desktopRedirectMap.containsKey(servletPath)) {
                 Device device = DeviceUtils.getRequiredCurrentDevice(request);
-                if (sitePreference == SitePreference.MOBILE || device.isMobile() && sitePreference == null) {
+                if (sitePreference == SitePreference.MOBILE || (device.isMobile() && sitePreference == null)) {
                     response.sendRedirect(basePath + this.desktopRedirectMap.get(servletPath));
                     return false;
                 }

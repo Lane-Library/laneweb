@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.servlet.CookieName;
 
 public class LoginExpirationCookieDataBinder implements DataBinder {
 
-    private static final Logger LOG = LoggerFactory.getLogger("error handler");
+    private static final Logger log = LoggerFactory.getLogger(LoginExpirationCookieDataBinder.class);
 
     private static final long ONE_DAY = Duration.ofDays(1).toMillis();
 
@@ -42,7 +42,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
                 result = Long.toString(expiry / ONE_DAY);
             }
         } catch (NumberFormatException e) {
-            LOG.error(e.getMessage(), e);
+            log.error("failed to decode expiration date from cookie: value='{}'", cookieValue);
             result = "ERROR";
         }
         return result;

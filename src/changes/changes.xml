@@ -7,6 +7,45 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-08-21" version="3.3.42" description="3.3.42 bug fix release">
+            <action date="2017-08-15" dev="alainb" issue="135700" type="update">
+                Classes Archive - fix a chronological order
+            </action>
+            <action date="2017-08-15" dev="ceyates" issue="135649" type="update">
+                unlinking the top nav - rollover state on
+            </action>
+            <action date="2017-08-17" dev="ceyates" issue="134496" type="update">
+                Apply table styles to bookmarks?
+            </action>
+        </release>
+        <release date="2017-08-14" version="3.3.41" description="3.3.41 bug fix release">
+            <action date="2017-08-10" dev="ryanmax" issue="135688" type="fix">
+                print/digital label not appearing on book and journal browse pages
+            </action>
+            <action date="2017-08-10" dev="ryanmax" issue="135671" type="update">
+                redirect LPCH order set links to peds search
+            </action>
+            <action date="2017-08-08" dev="olgary" issue="135647" type="update">
+                fb 135409
+            </action>
+            <action date="2017-08-08" dev="olgary" issue="135645" type="update">
+                templates to change the dropdowns to dropdown-filename.html 
+            </action>
+            <action date="2017-08-07" dev="ceyates" issue="134458" type="add">
+                submenu for the left section nav 
+            </action>
+        </release>
+        <release date="2017-08-07" version="3.3.40" description="3.3.40 bug fix release">
+            <action date="2017-08-03" dev="ryanmax" issue="135605" type="update">
+                laneweb: add hospital external IP addresses (for DR and GCP)
+            </action>
+            <action date="2017-08-03" dev="ceyates" issue="135596" type="fix">
+                Feedback-suggestion: problem browsing "I" page of journals
+            </action>
+            <action date="2017-08-02" dev="alainb" issue="135545" type="fix">
+                classes menu display change with the category
+            </action>
+        </release>
         <release date="2017-07-31" version="3.3.39" description="3.3.39 bug fix release">
             <action date="2017-07-31" dev="ceyates" issue="135474" type="fix">
                 support for authors link on very bottom of home page is broken 

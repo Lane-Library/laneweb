@@ -54,6 +54,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
 
     var i, laneJavascript = [
         "util.js",
+        "menu.js",
         "location.js",
         "golfclub-headings.js",
         "model.js",

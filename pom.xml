@@ -7,7 +7,7 @@
         <version>26</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.40-SNAPSHOT</version>
+    <version>3.3.43-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -99,7 +99,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-3</version>
+            <version>9.8.0-4</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -259,13 +259,13 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-easymock</artifactId>
-            <version>1.7.0</version>
+            <version>1.7.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -323,20 +323,20 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>lanehours</artifactId>
-        	<version>1.0.0</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>lanehours</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
-        	<groupId>com.zaxxer</groupId>
-        	<artifactId>HikariCP</artifactId>
-        	<version>2.6.3</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.6.3</version>
         </dependency>
         <dependency>
-        	<groupId>org.postgresql</groupId>
-        	<artifactId>postgresql</artifactId>
-        	<version>42.1.3</version>
-        	<scope>runtime</scope>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.1.4</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
     <build>
@@ -470,6 +470,7 @@
                                 <include>${basedir}/src/main/javascript/yui-3.18.1.js</include>
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
+                                <include>menu-min.js</include>
                                 <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
