@@ -114,6 +114,10 @@
     margin: 50px 12px 12px auto;
 }
 
+.new-resource p, .new-resource ul {
+    text-align: left;
+}
+
 .new-resource img {
     margin-bottom: 12px;
 }
