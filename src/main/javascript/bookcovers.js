@@ -27,10 +27,12 @@
                     var imagesForUpdate = [],
                         bibid, i;
                     for (bibid in imageMap) {
-                        for (i = 0; i < imageMap[bibid].length; i++) {
-                            if (!imageMap[bibid][i].src && viewport.inView(imageMap[bibid][i])) {
-                                imagesForUpdate.push(bibid);
-                                break;
+                        if (imageMap.hasOwnProperty(bibid)) {
+                            for (i = 0; i < imageMap[bibid].length; i++) {
+                                if (!imageMap[bibid][i].src && viewport.inView(imageMap[bibid][i])) {
+                                    imagesForUpdate.push(bibid);
+                                    break;
+                                }
                             }
                         }
                     }
