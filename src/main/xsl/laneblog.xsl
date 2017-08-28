@@ -14,11 +14,11 @@
         <xsl:copy-of select="." />
     </xsl:template>
 
-    <xsl:template match="h:content">
-        <xsl:apply-templates select="h:p[position() &lt; 3] | h:ul[position() &lt; 3]" />       
+	<xsl:template match="h:content">
+        <xsl:apply-templates select="h:article" />       
     </xsl:template>
-
-     <xsl:template match="h:img">
+  
+    <xsl:template match="h:img">
         <xsl:copy>
              <xsl:attribute name="src" select="@src" />
         </xsl:copy>

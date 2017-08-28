@@ -13,7 +13,9 @@
 
             // initialize the imageMap
             [].forEach.call(bookImageNodes, function(imageNode) {
-                imageMap[lane.getData(imageNode, "bibid")] = imageNode;
+                var bibid = lane.getData(imageNode, "bibid");
+                imageMap[bibid] = imageMap[bibid] || [];
+                imageMap[bibid].push(imageNode);
             });
 
             // make a couple of view functions available
@@ -23,10 +25,15 @@
                 // img nodes that are in the viewport and requiring src attributes.
                 getImgsForUpdate: function(viewport) {
                     var imagesForUpdate = [],
-                        bibid;
+                        bibid, i;
                     for (bibid in imageMap) {
-                        if (!imageMap[bibid].src && viewport.inView(imageMap[bibid])) {
-                            imagesForUpdate.push(bibid);
+                        if (imageMap.hasOwnProperty(bibid)) {
+                            for (i = 0; i < imageMap[bibid].length; i++) {
+                                if (!imageMap[bibid][i].src && viewport.inView(imageMap[bibid][i])) {
+                                    imagesForUpdate.push(bibid);
+                                    break;
+                                }
+                            }
                         }
                     }
                     return imagesForUpdate;
@@ -34,12 +41,15 @@
 
                 // add src attributes to imag nodes
                 update: function(updates) {
-                    for (var bibid in updates) {
+                    var bibid, i;
+                    for (bibid in updates) {
                         if (updates[bibid]) {
-                            // case 132771 use protocol relative urls for images
-                            // from the bookcover database (substring(5))
-                            imageMap[bibid].src = updates[bibid].substring(5);
-                            lane.activate(imageMap[bibid], "bookcover");
+                            for (i = 0; i < imageMap[bibid].length; i++) {
+                                // case 132771 use protocol relative urls for images
+                                // from the bookcover database (substring(5))
+                                imageMap[bibid][i].src = updates[bibid].substring(5);
+                                lane.activate(imageMap[bibid][i], "bookcover");
+                            }
                         }
                         delete imageMap[bibid];
                     }
