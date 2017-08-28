@@ -77,7 +77,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.68.1</version>
+            <version>1.69.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -319,7 +319,7 @@
         <dependency>
             <groupId>org.ehcache.modules</groupId>
             <artifactId>ehcache-107</artifactId>
-            <version>3.3.1</version>
+            <version>3.4.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
