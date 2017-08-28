@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-08-28" version="3.3.43" description="3.3.43 bug fix release">
+            <action date="2017-08-22" dev="olgary" issue="135786" type="update">
+                templates - change links to /about/hours.html
+            </action>
+            <action date="2017-08-21" dev="ceyates" issue="135765" type="update">
+                book cover is only appearing for one instance
+            </action>
+        </release>
         <release date="2017-08-21" version="3.3.42" description="3.3.42 bug fix release">
             <action date="2017-08-15" dev="alainb" issue="135700" type="update">
                 Classes Archive - fix a chronological order
