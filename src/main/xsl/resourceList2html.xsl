@@ -164,6 +164,9 @@
         <xsl:variable name="total" select="number(s:total)"/>
         <xsl:variable name="available" select="number(s:available)"/>
         <li>
+            <span class="primaryType">
+                <xsl:apply-templates select="s:primaryType"/>
+            </span>
             <xsl:if test="contains(s:primaryType, 'Book')">
                 <img class="bookcover" data-bibid="{s:recordId}"/>
             </xsl:if>
@@ -171,9 +174,6 @@
             <xsl:apply-templates select="s:pub-text"/>
             <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
             <div class="resultInfo">
-                <span class="primaryType">
-                    <xsl:apply-templates select="s:primaryType"/>
-                </span>
                 <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
@@ -318,10 +318,10 @@
     <xsl:template match="s:primaryType">
             <xsl:choose>
                 <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
-                    <strong><xsl:value-of select="substring-before(., ' ')"/></strong>
+                    <xsl:value-of select="substring-before(., ' ')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <strong><xsl:value-of select="."/></strong>
+                    <xsl:value-of select="."/>
                 </xsl:otherwise>
             </xsl:choose>
     </xsl:template>

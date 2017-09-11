@@ -21,6 +21,10 @@
 .primaryLink {
     font-size: 16px;
 }
+.primaryType {
+    text-transform: uppercase;
+    color: #999;
+}
 .popin {
     height: 16px;
 }
