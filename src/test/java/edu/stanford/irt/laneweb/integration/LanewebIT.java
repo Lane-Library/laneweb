@@ -166,7 +166,7 @@ public class LanewebIT {
                     .perform(
                             get("/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
                                     .servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", ns).string("Book Digital"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", ns).string("Book"))
                     .andExpect(
                             xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", ns)
                                     .exists());
