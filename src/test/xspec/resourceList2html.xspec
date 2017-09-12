@@ -29,13 +29,12 @@
         </x:context>
         <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
             <li>
+                <span class="primaryType">Article</span>
                 <div>
                     <a class="primaryLink"
                         href="" />
                 </div>
                 <div class="resultInfo">
-                    <span class="primaryType">
-                        <strong>Article</strong> Digital</span>
                 </div>
                 <div class="sourceInfo">Source: <a href="">: NaN </a>
                 </div>
