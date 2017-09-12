@@ -272,11 +272,6 @@
                 </xsl:if>
             </div>
         </xsl:if>
-        <xsl:if test="../s:author">
-            <div>
-                <xsl:value-of select="../s:author" />
-            </div>
-        </xsl:if>
     </xsl:template>
 
     <xsl:template match="s:link">
