@@ -12,6 +12,7 @@
       <h4 class="eresources"> </h4>
       <ul class="lwSearchResults">
          <li>
+            <span class="primaryType">Article</span>
             <div>
                <a class="primaryLink"
                   href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623">
@@ -20,8 +21,6 @@
             <div>Gordon RL, Shivers CM, Wieland EA, Kotz SA, Yoder PJ, Devin McAuley J.</div>
             <div class="citation">Dev Sci. 2014 Sep 7</div>
             <div class="resultInfo">
-               <span class="primaryType">
-                  <strong>Article</strong> Digital</span>
                <span class="descriptionTrigger searchContent"/>
                <span>
                   <a href="http://www.ncbi.nlm.nih.gov/pubmed/25195623?otool=stanford">PMID: 25195623</a>

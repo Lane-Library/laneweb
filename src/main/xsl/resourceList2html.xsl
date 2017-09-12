@@ -122,6 +122,7 @@
         </xsl:variable>
 
         <li>
+            <span class="primaryType">Article</span>
             <div>
                 <a class="primaryLink" href="{$primaryLink}">
                     <xsl:apply-templates select="s:title"/>
@@ -140,7 +141,6 @@
             </xsl:if>
 
             <div class="resultInfo">
-                <span class="primaryType"><strong>Article</strong> Digital</span>
                 <xsl:if test="s:description">
                     <span class="descriptionTrigger searchContent"/>
                         </xsl:if>
