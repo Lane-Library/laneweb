@@ -49,8 +49,8 @@
         </x:context>
         <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
             <li>
+            <span class="primaryType"/>
             <div class="resultInfo">
-                <span class="primaryType"/>
             </div>
             <div class="sourceInfo" />
         </li>
@@ -96,11 +96,11 @@
                    href=""
                    title="" />
             </div><div class="resultInfo">
+               <span> : <i>publisher</i>
+               </span>
                <span>
                   <a href="url"
                        title="label">link-text</a>
-               </span>
-               <span>From: <i>publisher</i>
                </span>
             </div>
         </x:expect>
@@ -117,11 +117,9 @@
                     href="url"
                     title="" />
             </div>
-            <div class="resultInfo">
-                <span>
-                    <a href="url">Impact Factor</a>
-                </span>
-            </div>
+            <span>
+                <a href="url">Impact Factor</a>
+            </span>
         </x:expect>
     </x:scenario>
     
@@ -129,9 +127,7 @@
         <x:context>
             <s:primaryType>primaryType</s:primaryType>
         </x:context>
-        <x:expect label="s:primaryType should be in a strong element">
-            <strong>primaryType</strong>
-        </x:expect>
+        <x:expect label="s:primaryType should not be in a strong element">primaryType</x:expect>
     </x:scenario>
     
     <x:scenario label="Scenario for testing template with match 's:pub-author">
