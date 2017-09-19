@@ -7,6 +7,19 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2017-09-18" version="3.3.45" description="3.3.45 bug fix release">
+            <action date="2017-09-13" dev="ryanmax" issue="134403" type="update">
+                Lane+ display change requests
+            </action>
+        </release>
+        <release date="2017-09-11" version="3.3.44" description="3.3.44 bug fix release">
+            <action date="2017-09-08" dev="olgary" issue="135938" type="update">
+                template, debug - changed link to pom-ebp from med-students, removed link to lit-search.html
+            </action>
+            <action date="2017-08-28" dev="olgary" issue="135842" type="update">
+                changed link to index.html to main-contacts.html -debug and template
+            </action>
+        </release>
         <release date="2017-08-28" version="3.3.43" description="3.3.43 bug fix release">
             <action date="2017-08-22" dev="olgary" issue="135786" type="update">
                 templates - change links to /about/hours.html

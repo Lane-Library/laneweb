@@ -100,7 +100,6 @@ public class IPGroupTest {
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.112.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.255"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("209.11.191.1"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("209.11.188.0"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("209.11.191.255"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("0.0.0.0"));

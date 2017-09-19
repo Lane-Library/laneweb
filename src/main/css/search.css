@@ -21,6 +21,10 @@
 .primaryLink {
     font-size: 16px;
 }
+.primaryType {
+    text-transform: uppercase;
+    color: #999;
+}
 .popin {
     height: 16px;
 }
@@ -69,9 +73,6 @@ li.active .description {
     display: block;
 }
 
-.citation{
-    font-size: 11px;
-}
 .resultInfo span {
     display: inline-block;
     margin-right: 24px;
