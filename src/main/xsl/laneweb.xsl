@@ -375,7 +375,7 @@
     </xsl:template>
 
     <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
-    <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
+    <xsl:template match="h:h2[not(@class)][ancestor::h:html = $source-doc]">
         <h2 class="golfclub">
             <xsl:apply-templates/>
         </h2>
