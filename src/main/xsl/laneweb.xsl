@@ -255,29 +255,34 @@
 
     <!-- don't copy data-path attribute referenced above -->
     <xsl:template match="h:li/@data-path"/>
-
+    
     <!-- add active to class to search form query present -->
     <xsl:template match="h:form[@class='search-form' and $query]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
     
-    <!-- add active to the pico-toggle link if $search-source=clinical|peds-all -->
-    <xsl:template match="h:span[@class='pico-toggle' and matches($search-source,'(clinical|peds)-all')]/@class">
+    <!-- add active to class to search form for /portals/peds.html and /picosearch.html -->
+    <xsl:template match="h:form[@class='search-form' and ($path='/portals/peds.html' or $path='/picosearch.html')]/@class">
+        <xsl:attribute name="class" select="'search-form search-form-active'"/>
+    </xsl:template>
+    
+    <!-- add active to the pico-toggle link if $search-source=clinical|peds-all or path is /portals/peds.html or /picosearch.html -->
+    <xsl:template match="h:span[@class='pico-toggle' and (matches($search-source,'(clinical|peds)-all') or $path='/portals/peds.html' or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
     </xsl:template>
     
-    <!-- add active to the pico-on link if $search-source=clinical|peds-all and no PICO values present -->
-    <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o)]/@class">
+    <!-- add active to the pico-on link if $search-source=clinical-all and no PICO values present -->
+    <xsl:template match="h:span[@class='pico-on' and $search-source='clinical-all' and not($p or $i or $c or $o)]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
-
-    <!-- add active to the pico-off link if PICO values present -->
-    <xsl:template match="h:span[@class='pico-off' and ($p or $i or $c or $o)]/@class">
+    
+    <!-- add active to the pico-off link if PICO values present or path is /portals/peds.html or /picosearch.html -->
+    <xsl:template match="h:span[@class='pico-off' and ($p or $i or $c or $o or $path='/portals/peds.html' or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-off pico-off-active'"/>
     </xsl:template>
     
-    <!-- add active to the pico-fields fieldset if $search-source=clinical|peds-all and PICO values present -->
-    <xsl:template match="h:fieldset[@class='pico-fields' and matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) ]/@class">
+    <!-- add active to the pico-fields fieldset if $search-source=clinical|peds-all and PICO values present or path is /portals/peds.html or /picosearch.html -->
+    <xsl:template match="h:fieldset[@class='pico-fields' and (matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) or $path='/portals/peds.html' or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-fields pico-fields-active'"/>
     </xsl:template>
     
@@ -375,7 +380,7 @@
     </xsl:template>
 
     <!-- add class="golfclub" to h2 so that the golf club images can be positioned correctly-->
-    <xsl:template match="h:h2[not(@class='golfclub')][ancestor::h:html = $source-doc]">
+    <xsl:template match="h:h2[not(@class)][ancestor::h:html = $source-doc]">
         <h2 class="golfclub">
             <xsl:apply-templates/>
         </h2>
