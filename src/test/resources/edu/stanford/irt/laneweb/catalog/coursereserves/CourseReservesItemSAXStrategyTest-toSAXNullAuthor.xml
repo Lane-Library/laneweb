@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <li>
-   <img class="bookcover" data-bibid="1"/>
-   <a href="url">title</a>
-   <div>
-      <strong>Book </strong>Digital</div>
+   <div class="yui3-g">
+      <div class="yui3-u-1-12">
+         <img class="bookcover" data-bibid="1"/>
+      </div>
+      <div class="yui3-u-11-12">
+         <a href="url">title</a>
+         <div>
+            <strong>Book </strong>Digital</div>
+      </div>
+   </div>
 </li>
