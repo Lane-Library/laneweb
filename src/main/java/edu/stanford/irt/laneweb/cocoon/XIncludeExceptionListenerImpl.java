@@ -12,16 +12,27 @@ public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener 
 
     @Override
     public void exception(final Locator locator, final Exception e) {
+        exception(null, null, null, locator, e);
+    }
+
+    @Override
+    public void exception(String href, String parse, String xpointer, Locator locator, Exception e) {
         StringBuilder message = new StringBuilder("XInclude failed: ");
+        message.append("href=")
+        .append(href)
+        .append(" parse=")
+        .append(parse)
+        .append(" xpointer=")
+        .append(xpointer);
         if (locator != null) {
-            message.append(locator.getSystemId())
+            message.append(" ")
+            .append(locator.getSystemId())
             .append(" line:")
             .append(locator.getLineNumber())
             .append(" column:")
-            .append(locator.getColumnNumber())
-            .append(": ");
+            .append(locator.getColumnNumber());
         }
-        message.append(e);
+        message.append(": ").append(e);
         log.error(message.toString());
     }
 }
