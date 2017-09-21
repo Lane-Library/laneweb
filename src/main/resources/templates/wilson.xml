@@ -459,7 +459,7 @@ ga('send', 'pageview');
                 <li id="footer-uha"><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
             </ul>
         </div>
-        <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+        <script src="https://yui-s.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
         <script src="/resources/javascript/history/lane-history.js"></script>
     </body>
 </html>
