@@ -146,8 +146,7 @@ public class Eresource {
         return new StringBuilder("title:").append(this.title).append(" versions:").append(this.linksList).toString();
     }
 
-    private void parseLink(final Map<String, Object> jsonLink, final Map<String, Object> versionMap,
-            final boolean isFirstLink) {
+    private void parseLink(final Map<String, Object> jsonLink, final Map<String, Object> versionMap) {
         String linkLabel = (String) jsonLink.get("label");
         String linkUrl = (String) jsonLink.get("url");
         String linkText = (String) jsonLink.get("linkText");
@@ -156,9 +155,6 @@ public class Eresource {
         String holdingsAndDates = (String) versionMap.get("holdingsAndDates");
         String publisher = (String) versionMap.get("publisher");
         LinkType linkType = LinkType.NORMAL;
-        if (isFirstLink) {
-            linkText = this.title;
-        }
         if (versionMap.get("hasGetPasswordLink") != null && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
             linkType = LinkType.GETPASSWORD;
         } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
@@ -176,11 +172,10 @@ public class Eresource {
         } catch (IOException e) {
             throw new LanewebException(e);
         }
-        int isFirstLink = 0;
         for (Map<String, Object> versionMap : versionData) {
             if (versionMap.containsKey("links")) {
                 for (Map<String, Object> linkObj : (List<Map<String, Object>>) versionMap.get("links")) {
-                    parseLink(linkObj, versionMap, isFirstLink++ == 0);
+                    parseLink(linkObj, versionMap);
                 }
             }
         }
