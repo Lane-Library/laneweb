@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>26</version>
+        <version>27-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.3.46-SNAPSHOT</version>
@@ -259,13 +259,13 @@
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-junit4</artifactId>
-            <version>1.7.1</version>
+            <version>1.7.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-easymock</artifactId>
-            <version>1.7.1</version>
+            <version>1.7.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -330,7 +330,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>2.7.0</version>
+            <version>2.7.1</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
