@@ -29,9 +29,11 @@
     <primaryType>Book Digital</primaryType>
     <link type="normal">
       <label>Fulltext</label>
-      <link-text>Music that works</link-text>
+      <link-text>2009</link-text>
       <url>http://link.springer.com/978-3-211-75120-6</url>
       <additional-text>instruction</additional-text>
+      <holdings-dates>2009</holdings-dates>
+      <publisher>Springer</publisher>
     </link>
     <link type="impactFactor">
       <label>Impact Factor</label>
@@ -54,9 +56,11 @@
     </link>
     <link type="normal">
       <label>Fulltext</label>
-      <link-text>Music that works</link-text>
+      <link-text>2009</link-text>
       <url>http://link.springer.com/978-3-211-75120-6</url>
       <additional-text>instruction</additional-text>
+      <holdings-dates>2009</holdings-dates>
+      <publisher>Springer</publisher>
     </link>
   </result>
 </resources>
