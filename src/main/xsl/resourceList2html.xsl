@@ -171,7 +171,7 @@
                 <img class="bookcover" data-bibid="{s:recordId}"/>
             </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
-            <xsl:value-of select="s:pub-text"/>
+            <xsl:apply-templates select="s:pub-text"/>
             <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
             <div class="resultInfo">
                 <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
@@ -374,6 +374,10 @@
     </xsl:template>
 
     <xsl:template match="s:title">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="s:pub-text">
         <xsl:apply-templates/>
     </xsl:template>
 
