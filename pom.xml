@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>27-SNAPSHOT</version>
+        <version>27</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.3.46-SNAPSHOT</version>
@@ -61,7 +61,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon</artifactId>
-            <version>1.12.0-SNAPSHOT</version>
+            <version>1.12.0</version>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
