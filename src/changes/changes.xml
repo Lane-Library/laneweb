@@ -14,6 +14,9 @@
             <action date="2017-09-19" dev="ceyates" issue="136085" type="update">
                 laneblog feed is slow and has frequent errors
             </action>
+            <action date="2017-09-21" dev="ryanmax" issue="136084" type="update">
+                display of 866^y on first link is confusing
+            </action>
             <action date="2017-09-18" dev="ryanmax" issue="136060" type="update">
                 update LPCH IP ranges: decommission STC data center
             </action>
