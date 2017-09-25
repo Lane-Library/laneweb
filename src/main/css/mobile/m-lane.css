@@ -798,8 +798,9 @@ input[type='text'] {
 }
 
 .resultInfo span:first-child {
-    min-width: 110px;
+    min-width: 103px;
     margin-right: 10px;
+    font-size: .9em;
 }
 
 .results .resultInfo a {
