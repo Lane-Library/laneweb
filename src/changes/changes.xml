@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-09-25" version="3.3.46" description="3.3.46 bug fix release">
+            <action date="2017-09-21" dev="ceyates" issue="136110" type="update">
+                include xinclude parameters in log entries
+            </action>
+            <action date="2017-09-19" dev="ceyates" issue="136085" type="update">
+                laneblog feed is slow and has frequent errors
+            </action>
+            <action date="2017-09-21" dev="ryanmax" issue="136084" type="update">
+                display of 866^y on first link is confusing
+            </action>
+            <action date="2017-09-18" dev="ryanmax" issue="136060" type="update">
+                update LPCH IP ranges: decommission STC data center
+            </action>
+            <action date="2017-09-19" dev="ceyates" issue="135994" type="update">
+                activate search form on page load for peds portal and picosearch.html
+            </action>
+            <action date="2017-09-19" dev="ceyates" issue="135977" type="fix">
+                First line of header on this page does not wrap
+            </action>
+            <action date="2017-09-20" dev="ceyates" issue="134583" type="update">
+                Course reserves - flip book covers and titles positions
+            </action>
+            <action date="2017-09-20" dev="ceyates" issue="117458" type="add">
+                add search box to the Dr Wilson's book
+            </action>
+        </release>
     	<release date="2017-09-18" version="3.3.45" description="3.3.45 bug fix release">
             <action date="2017-09-13" dev="ryanmax" issue="134403" type="update">
                 Lane+ display change requests

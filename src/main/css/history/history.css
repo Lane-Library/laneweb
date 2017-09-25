@@ -33,6 +33,7 @@ a:visited,a:active,a:hover {
 }
 
 h1 {
+    display: inline-block;
     font-size: 20px;
     font-weight: 400;
     padding: 52px 0 0 190px;
@@ -400,6 +401,16 @@ h2 {
 
 .wilson-title {
     text-align: center;
+}
+
+.wilson-search {
+    float: right;
+    margin-top: 35px;
+}
+
+.wilson-search button {
+    cursor: pointer;
+    font-size: 16px;
 }
 
 h3 {

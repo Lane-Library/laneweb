@@ -4,7 +4,7 @@
 
         flickrPhotos = document.querySelector(".flickr-photos"),
 
-        links = flickrPhotos.querySelectorAll("a"),
+        links = flickrPhotos ? flickrPhotos.querySelectorAll("a") : {},
 
         photoService = {
 
@@ -85,7 +85,7 @@
             photoService.getPhotos();
         };
 
-    [].forEach.call(flickrPhotos.querySelectorAll("img"), function(image) {
+    [].forEach.call(flickrPhotos ? flickrPhotos.querySelectorAll("img") : [], function(image) {
         images.push(image);
         if (image.complete) {
             photoService.resize(image);

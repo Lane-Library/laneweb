@@ -40,6 +40,15 @@
                   <strong>Music</strong> that works</a>
             </div>
             <div class="resultInfo">
+               <span>Digital : <i>Springer</i>
+               </span>
+               <span>
+                  <a href="http://link.springer.com/978-3-211-75120-6"
+                     title="Music that works">2009</a>
+               </span>
+               <span>instruction</span>
+            </div>
+            <div class="resultInfo">
                <span class="descriptionTrigger eresource"/>
                <span>
                   <a href="http://impactfactor.org/">Impact Factor</a>
@@ -63,7 +72,14 @@
             <div class="resultInfo">
                <span>Digital</span>
                <span>
-                  <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">Music that works</a>
+                  <a href="http://impactfactor.org/" title="Music that works">Impact Factor</a>
+               </span>
+            </div>
+            <div class="resultInfo">
+               <span>Digital : <i>Springer</i>
+               </span>
+               <span>
+                  <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">2009</a>
                </span>
                <span>instruction</span>
             </div>
@@ -74,6 +90,12 @@
                      href="http://impactfactor.org/"
                      title="Music that works">
                      <strong>Music</strong> that works</a>
+               </div>
+               <div class="resultInfo">
+                  <span>Digital</span>
+                  <span>
+                     <a href="http://impactfactor.org/" title="Music that works">Impact Factor</a>
+                  </span>
                </div>
                <span>
                   <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=123">Lane Catalog Record</a>
