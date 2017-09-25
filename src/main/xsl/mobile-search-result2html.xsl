@@ -139,10 +139,9 @@
 
     <xsl:template match="s:result[@type='eresource']" mode="brief">
         <li rank="{position()}">
-            <xsl:apply-templates select="s:link[1]"/>
-            <xsl:apply-templates select="s:recordType"/>
-            <xsl:value-of select="s:pub-text"/>
             <xsl:apply-templates select="s:primaryType"/>
+            <xsl:apply-templates select="s:link[1]"/>
+            <xsl:value-of select="s:pub-text"/>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:link[1],'pubmed')">
                     <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">abstract &#xBB;</a>
@@ -156,16 +155,14 @@
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
         <div class="absInfo">
+            <xsl:apply-templates select="s:primaryType"/>
             <xsl:apply-templates select="s:link"/>
-            <xsl:apply-templates select="s:recordType">
-                <xsl:with-param name="mode">full</xsl:with-param>
-            </xsl:apply-templates>
             <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
             <xsl:if test="s:pub-text">
                 <div><xsl:value-of select="s:pub-text"/></div>
             </xsl:if>
-            <xsl:apply-templates select="s:primaryType"/>
             <xsl:apply-templates select="s:description"/>
+            <xsl:apply-templates select="s:recordType" mode="full"/>
         </div>  
     </xsl:template>
     
@@ -214,7 +211,7 @@
         <xsl:text> - </xsl:text>
         <span class="pmid">
             <xsl:text> PMID: </xsl:text>
-            <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/{substring-after(.,'PMID:')}?otool=stanford"><xsl:value-of select="substring-after(.,'PMID:')"/></a>
+            <a target="_blank" href="https://www.ncbi.nlm.nih.gov/pubmed/{substring-after(.,'PMID:')}?otool=stanford"><xsl:value-of select="substring-after(.,'PMID:')"/></a>
         </span>
     </xsl:template>
     
@@ -224,31 +221,20 @@
         </strong>
     </xsl:template>
 
-    <xsl:template match="s:recordType">
-        <xsl:param name="mode"/>
-        <xsl:choose>
-            <xsl:when test=". = 'auth'">
-                <div class="moreResults">
-                    <span class="sourceLink">Lane Community Info File</span>
-                </div>
-            </xsl:when>
-            <!-- add catalog link to all bibs except those that already have one (history) -->
-            <xsl:when test="$mode = 'full' and . = 'bib' and not(../s:link/s:label[.='catalog record'])">
-                <div class="moreResults">
-                    <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog Record</a>
-                </div>
-            </xsl:when>
-            <xsl:when test=". = 'web'">
-                <div class="moreResults">
-                    <span class="sourceLink">Lane Web Page</span>
-                </div>
-            </xsl:when>
-            <xsl:when test=". = 'print'">
-                <div class="moreResults">
-                    <span class="sourceLink">Print Material</span>
-                </div>
-            </xsl:when>
-        </xsl:choose>
+    <xsl:template match="s:recordType" mode="full">
+        <div class="moreResults">
+            <xsl:choose>
+                <xsl:when test=". = 'auth'">
+                    <span class="sourceLink">Source: <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Community Info</a></span>
+                </xsl:when>
+                <xsl:when test=". = 'bib'">
+                    <span class="sourceLink">Source: <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog Record</a></span>
+                </xsl:when>
+                <xsl:when test=". = 'pubmed'">
+                    <span class="sourceLink">Source: <a href="https://www.ncbi.nlm.nih.gov/pubmed/{../s:recordId}?otool=stanford">PubMed</a></span>
+                </xsl:when>
+            </xsl:choose>
+        </div>
     </xsl:template>
 
     <xsl:template match="s:desc-label">
@@ -263,16 +249,16 @@
 
     <xsl:template match="s:primaryType">
         <div>
-            <xsl:choose>
-                <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
-                    <strong><xsl:value-of select="substring-before(., ' ')"/></strong>
-                    <xsl:text> </xsl:text>
-                    <xsl:value-of select="substring-after(., ' ')"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <strong><xsl:value-of select="."/></strong>
-                </xsl:otherwise>
-            </xsl:choose>
+            <span class="primaryType">
+                <xsl:choose>
+                    <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
+                        <xsl:value-of select="substring-before(., ' ')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
         </div>
     </xsl:template>
 

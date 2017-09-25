@@ -825,6 +825,11 @@ input[type='text'] {
     font-weight: bold;
 }
 
+.primaryType {
+    text-transform: uppercase;
+    color: #999;
+}
+
 /*
 *
 *  Abstract/info page
@@ -848,7 +853,7 @@ input[type='text'] {
     font-weight: bold;
 }
 
-.rDesc {
+.rDesc, .moreResults {
     padding-top: 10px;
 }
 
