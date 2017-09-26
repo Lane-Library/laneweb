@@ -203,6 +203,7 @@
                 <xsl:call-template name="build-link-label">
                     <xsl:with-param name="link" select="."/>
                     <xsl:with-param name="primaryType" select="../s:primaryType"/>
+                    <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
                 </xsl:call-template>
                 <xsl:if test="$simple-primary-type != s:label">
                     <span>
@@ -236,7 +237,8 @@
             <xsl:call-template name="build-link-label">
                 <xsl:with-param name="link" select="."/>
                 <xsl:with-param name="primaryType" select="../s:primaryType"/>
-            </xsl:call-template>
+                <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
+             </xsl:call-template>
             <xsl:if test="$simple-primary-type != s:label">
                 <span>
                     <a target="_blank" href="{s:url}" title="{s:label}">
@@ -338,7 +340,7 @@
     <xsl:template name="build-link-label">
         <xsl:param name="link" />
         <xsl:param name="primaryType" />
-        <xsl:variable name="simple-primary-type" select="replace($primaryType,'(Journal|Book) ','')"/>
+        <xsl:param name="simplePrimaryType" />
         <span>
             <xsl:choose>
                 <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print</xsl:when>
@@ -346,7 +348,7 @@
                     <a target="_blank" href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="replace($primaryType,'(Journal|Book) ','')"/>
+                    <xsl:value-of select="$simplePrimaryType"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="s:publisher">
