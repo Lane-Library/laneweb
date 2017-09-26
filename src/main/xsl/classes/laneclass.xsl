@@ -56,15 +56,19 @@
 						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
 						<xsl:apply-templates select="./lc:event_dates" />
 					</div>
+					<div class="yui3-g location">
+						<div class="yui3-u-5-6">
+							<xsl:apply-templates select="lc:venue"/>
+						</div>
+						<div class="yui3-u-1-6">
+							<i class="fa fa-map-marker fa-2x"></i>
+						</div>
+					</div>
 				</div>
 				<div class="yui3-u-3-4">
 					<div class="details">
 						<xsl:apply-templates select="lc:event_instructors" />
 						<xsl:call-template name="remainingSeats"/>
-						<div style="margin-top:30px">
-							<xsl:apply-templates select="lc:venue" />
-						</div>
-
 					</div>
 				</div>
 			</div>
@@ -73,40 +77,6 @@
 
 
 
-	<xsl:template match="lc:venue">
-		<div>
-			<xsl:variable name="link">
-				<xsl:value-of select="./lc:venue_website" />
-			</xsl:variable>
-			<xsl:variable name="name">
-				<span>
-					<xsl:attribute name="itemprop">location</xsl:attribute>
-					<xsl:value-of select="./lc:venue_name" />
-				</span>
-			</xsl:variable>
-			<xsl:choose>
-				<xsl:when test="$link != ''">
-					<div>
-						<xsl:copy-of select="$name" />
-					</div>
-					<div>
-						<a>
-							<xsl:attribute name="href">
-                                <xsl:value-of select="./lc:venue_website/text()" />
-                            </xsl:attribute>
-							<xsl:text>Location Map </xsl:text>
-							<xsl:if test="ends-with($link, '.pdf')">
-								<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-							</xsl:if>
-						</a>
-					</div>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:copy-of select="$name" />
-				</xsl:otherwise>
-			</xsl:choose>
-		</div>
-	</xsl:template>
 
 
 </xsl:stylesheet>

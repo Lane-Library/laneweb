@@ -63,9 +63,17 @@
 		<div class="class">
 			<div class="yui3-g">
 				<div class="yui3-u-1-4">
-					<div class="date">
+					 <div class="date">
 						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
 						<xsl:apply-templates select="./lc:event_dates" />
+					</div>
+					<div class="yui3-g location">
+						<div class="yui3-u-5-6">
+							<xsl:apply-templates select="lc:venue"/>
+						</div>
+						<div class="yui3-u-1-6">
+							<i class="fa fa-map-marker fa-2x"></i>
+						</div>
 					</div>
 				</div>
 				<div class="yui3-u-3-4">
@@ -84,38 +92,24 @@
 		</div>
 	</xsl:template>
 
-	
+ 	
 	<xsl:template match="lc:venue">
-		<div>
-		  <xsl:text>At </xsl:text>
-                <xsl:variable name="link">
-                    <xsl:value-of select="./lc:venue_website"/>
-                </xsl:variable>
-                <xsl:variable name="name">
-                    <span>
-                            <xsl:attribute name="itemprop">location</xsl:attribute>
-                        	<xsl:value-of select="./lc:venue_name"/>
-                    </span>
-                </xsl:variable>
-                <xsl:choose>
-                    <xsl:when test="$link != ''">
-                        <a>
-                            <xsl:attribute name="href">
-                                <xsl:value-of select="./lc:venue_website/text()"/>
-                            </xsl:attribute>
-                            <xsl:copy-of select="$name"/>
-                        </a>
-                        <xsl:if test="ends-with($link, '.pdf')">
-                            <xsl:text> (.pdf)</xsl:text>
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy-of select="$name"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-             </div>
+			<div class="venue-link">
+	        <xsl:choose>
+               <xsl:when test="./lc:venue_website != ''">
+                   <a>
+                       <xsl:attribute name="href">
+                           <xsl:value-of select="./lc:venue_website/text()"/>
+                       </xsl:attribute><xsl:value-of select="./lc:venue_name"/>
+                   </a>
+               </xsl:when>
+               <xsl:otherwise>
+                   <xsl:value-of select="./lc:venue_name"/>
+             </xsl:otherwise>
+           </xsl:choose>
+           </div> 
 	</xsl:template>
-
+ 
   
 	<xsl:template match="lc:event_description">
 		<xsl:choose>
