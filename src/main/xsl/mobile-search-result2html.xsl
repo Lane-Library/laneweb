@@ -139,15 +139,14 @@
 
     <xsl:template match="s:result[@type='eresource']" mode="brief">
         <li rank="{position()}">
-            <xsl:apply-templates select="s:link[1]"/>
-            <xsl:apply-templates select="s:recordType"/>
-            <xsl:value-of select="s:pub-text"/>
             <xsl:apply-templates select="s:primaryType"/>
+            <xsl:apply-templates select="s:link[1]" mode="brief"/>
+            <xsl:value-of select="s:pub-text"/>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:link[1],'pubmed')">
                     <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">abstract &#xBB;</a>
                 </xsl:when>
-                <xsl:when test="s:description or count(s:link) > 1">
+                <xsl:when test="s:recordType = 'bib'">
                     <a href="{concat($base-link,'&amp;rid=',s:id,'&amp;page=',number(/s:resources/@page)+1)}" class="more">more info &#xBB;</a>
                 </xsl:when>
             </xsl:choose>
@@ -156,30 +155,31 @@
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
         <div class="absInfo">
-            <xsl:apply-templates select="s:link"/>
-            <xsl:apply-templates select="s:recordType">
-                <xsl:with-param name="mode">full</xsl:with-param>
-            </xsl:apply-templates>
-            <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
+            <xsl:apply-templates select="s:primaryType"/>
+            <xsl:apply-templates select="s:link[not(@type='impactFactor')]" mode="full"/>
+            <xsl:apply-templates select="s:link[@type='impactFactor']" />
             <xsl:if test="s:pub-text">
                 <div><xsl:value-of select="s:pub-text"/></div>
             </xsl:if>
-            <xsl:apply-templates select="s:primaryType"/>
             <xsl:apply-templates select="s:description"/>
+            <xsl:apply-templates select="s:recordType" mode="full"/>
         </div>  
     </xsl:template>
     
-    <xsl:template match="s:link[1]">
-        <a target="_blank" class="newWindow" href="{s:url}">
+    <xsl:template match="s:link[1]" mode="brief">
+        <a target="_blank" class="newWindow primaryLink" href="{s:url}">
             <xsl:apply-templates select="../s:title"/>
         </a>
+        <xsl:if test="contains(../s:primaryType,'Book')">
+            <xsl:apply-templates select="../s:pub-author[string-length(.) > 1]"/>
+        </xsl:if>        
         <xsl:value-of select="s:additional-text"/>
         <xsl:if test="@type = 'getPassword'">
             <a target="_blank" href="/secure/ejpw.html" title="Get Password" data-ajax="false">Get Password</a>
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="s:link">
+    <xsl:template match="s:link" mode="brief">
         <div>
             <a target="_blank" href="{s:url}" title="{s:label}">
                 <xsl:value-of select="s:link-text"/>
@@ -192,7 +192,79 @@
         </div>
     </xsl:template>
     
-    <xsl:template match="s:link[not(1)][@type='impactFactor']">
+    <xsl:template match="s:link[1]" mode="full">
+        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
+        <a target="_blank" class="newWindow primaryLink" href="{s:url}">
+            <xsl:apply-templates select="../s:title"/>
+        </a>
+        <xsl:apply-templates select="../s:pub-author[string-length(.) > 1]"/>
+        <xsl:if test="(s:link-text and 'null' != s:link-text) or @type = 'getPassword' or s:version-text or s:publisher">
+            <div class="resultInfo">
+                <xsl:call-template name="build-link-label">
+                    <xsl:with-param name="link" select="."/>
+                    <xsl:with-param name="primaryType" select="../s:primaryType"/>
+                    <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
+                </xsl:call-template>
+                <xsl:if test="$simple-primary-type != s:label">
+                    <span>
+                        <a href="{s:url}" title="{../s:title}">
+                            <xsl:value-of select="s:link-text" />
+                        </a>
+                    </span>
+                </xsl:if>
+                <xsl:if test="@type = 'getPassword'">
+                    <span>
+                        <a target="_blank" href="/secure/ejpw.html" title="Get Password" data-ajax="false">Get Password</a>
+                    </span>
+                </xsl:if>
+                <xsl:if test="s:version-text">
+                    <span class="versionText">
+                        <xsl:value-of select="s:version-text" />
+                    </span>
+                </xsl:if>
+                <xsl:if test="s:additional-text">
+                    <span>
+                        <xsl:value-of select="s:additional-text" />
+                    </span>
+                </xsl:if>
+            </div>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="s:link" mode="full">
+        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
+        <div class="resultInfo">
+            <xsl:call-template name="build-link-label">
+                <xsl:with-param name="link" select="."/>
+                <xsl:with-param name="primaryType" select="../s:primaryType"/>
+                <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
+             </xsl:call-template>
+            <xsl:if test="$simple-primary-type != s:label">
+                <span>
+                    <a target="_blank" href="{s:url}" title="{s:label}">
+                        <xsl:value-of select="s:link-text"/>
+                    </a>
+                </span>
+            </xsl:if>
+            <xsl:if test="@type = 'getPassword'">
+                <span>
+                    <a target="_blank" href="/secure/ejpw.html" title="Get Password" data-ajax="false">Get Password</a>
+                </span>
+            </xsl:if>
+            <xsl:if test="s:version-text">
+                <span class="versionText">
+                    <xsl:value-of select="s:version-text" />
+                </span>
+            </xsl:if>
+            <xsl:if test="s:additional-text">
+                <span>
+                    <xsl:value-of select="s:additional-text" />
+                </span>
+            </xsl:if>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="s:link[@type = 'impactFactor' and position() > 1]">
         <div>
             <a target="_blank" href="{s:url}">Impact Factor</a>
         </div>
@@ -214,7 +286,7 @@
         <xsl:text> - </xsl:text>
         <span class="pmid">
             <xsl:text> PMID: </xsl:text>
-            <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/{substring-after(.,'PMID:')}?otool=stanford"><xsl:value-of select="substring-after(.,'PMID:')"/></a>
+            <a target="_blank" href="https://www.ncbi.nlm.nih.gov/pubmed/{substring-after(.,'PMID:')}?otool=stanford"><xsl:value-of select="substring-after(.,'PMID:')"/></a>
         </span>
     </xsl:template>
     
@@ -224,31 +296,20 @@
         </strong>
     </xsl:template>
 
-    <xsl:template match="s:recordType">
-        <xsl:param name="mode"/>
-        <xsl:choose>
-            <xsl:when test=". = 'auth'">
-                <div class="moreResults">
-                    <span class="sourceLink">Lane Community Info File</span>
-                </div>
-            </xsl:when>
-            <!-- add catalog link to all bibs except those that already have one (history) -->
-            <xsl:when test="$mode = 'full' and . = 'bib' and not(../s:link/s:label[.='catalog record'])">
-                <div class="moreResults">
-                    <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog Record</a>
-                </div>
-            </xsl:when>
-            <xsl:when test=". = 'web'">
-                <div class="moreResults">
-                    <span class="sourceLink">Lane Web Page</span>
-                </div>
-            </xsl:when>
-            <xsl:when test=". = 'print'">
-                <div class="moreResults">
-                    <span class="sourceLink">Print Material</span>
-                </div>
-            </xsl:when>
-        </xsl:choose>
+    <xsl:template match="s:recordType" mode="full">
+        <div class="moreResults">
+            <xsl:choose>
+                <xsl:when test=". = 'auth'">
+                    <span class="sourceLink">Source: <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Community Info</a></span>
+                </xsl:when>
+                <xsl:when test=". = 'bib'">
+                    <span class="sourceLink">Source: <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Catalog Record</a></span>
+                </xsl:when>
+                <xsl:when test=". = 'pubmed'">
+                    <span class="sourceLink">Source: <a href="https://www.ncbi.nlm.nih.gov/pubmed/{../s:recordId}?otool=stanford">PubMed</a></span>
+                </xsl:when>
+            </xsl:choose>
+        </div>
     </xsl:template>
 
     <xsl:template match="s:desc-label">
@@ -263,17 +324,40 @@
 
     <xsl:template match="s:primaryType">
         <div>
+            <span class="primaryType">
+                <xsl:choose>
+                    <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
+                        <xsl:value-of select="substring-before(., ' ')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="build-link-label">
+        <xsl:param name="link" />
+        <xsl:param name="primaryType" />
+        <xsl:param name="simplePrimaryType" />
+        <span>
             <xsl:choose>
-                <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
-                    <strong><xsl:value-of select="substring-before(., ' ')"/></strong>
-                    <xsl:text> </xsl:text>
-                    <xsl:value-of select="substring-after(., ' ')"/>
+                <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print</xsl:when>
+                <xsl:when test="$primaryType = s:label">
+                    <a target="_blank" href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
                 </xsl:when>
                 <xsl:otherwise>
-                    <strong><xsl:value-of select="."/></strong>
+                    <xsl:value-of select="$simplePrimaryType"/>
                 </xsl:otherwise>
             </xsl:choose>
-        </div>
+            <xsl:if test="s:publisher">
+                <xsl:text> : </xsl:text>
+                <i>
+                    <xsl:value-of select="s:publisher" />
+                </i>
+            </xsl:if>
+        </span>
     </xsl:template>
 
     <!-- add Next toggle to search results -->
