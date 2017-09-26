@@ -193,6 +193,7 @@
     </xsl:template>
     
     <xsl:template match="s:link[1]" mode="full">
+        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
         <a target="_blank" class="newWindow primaryLink" href="{s:url}">
             <xsl:apply-templates select="../s:title"/>
         </a>
@@ -203,7 +204,7 @@
                     <xsl:with-param name="link" select="."/>
                     <xsl:with-param name="primaryType" select="../s:primaryType"/>
                 </xsl:call-template>
-                <xsl:if test="s:link-text">
+                <xsl:if test="$simple-primary-type != s:label">
                     <span>
                         <a href="{s:url}" title="{../s:title}">
                             <xsl:value-of select="s:link-text" />
