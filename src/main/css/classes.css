@@ -4,6 +4,7 @@
     /* this z-index and the .class .date:before rules related to case 119823 involved with getting
        the date box the same height as the class information*/
     z-index: 1;
+    min-height: 187px;
 }
 
 .class:last-child, .archive:last-child {
@@ -32,6 +33,7 @@
 .archive .date:before {
     background-color: #ccc;
 }
+
 
 .yui3-u-1-4 .date:before {
     width: 24.2%;
@@ -98,3 +100,35 @@
 .youtube-class .youtube-thumbnail img {
     width: 200px;
 }
+
+.location{
+	text-align: right;
+    position: absolute;
+	bottom: 14px;
+    width: 210px;
+}
+
+.location, .location a, .location .fa{
+	color: white;
+}
+
+.register{
+	min-height:68px;
+}
+
+.register div:first-child {
+	position: absolute;
+    bottom: 0;
+}
+
+.register a{
+	margin-bottom: 6px;
+}
+
+.venue-link{
+	position: absolute;
+	bottom: 0px;
+	width: inherit;
+	padding-left: 9px;
+}
+

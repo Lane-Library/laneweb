@@ -79,21 +79,25 @@
 	
 	
 	<xsl:template name="remainingSeats">
-		<xsl:choose>
-			<xsl:when test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats = '0'">
-			<a href="https://www.onlineregistrationcenter.com/waitinglistform.asp?m=257&amp;c={lc:module_id}" class="button alt1 waitlist">
-				<span>Wait List</span>
-				<i class="icon fa fa-arrow-right"/>
-			</a>
-			</xsl:when>
-			<xsl:otherwise>
-			<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}" class="button alt1">
-				<span>Register</span>
-				<i class="icon fa fa-arrow-right"/>
-			</a>
-			<div>Seats left: <xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats"/></div>
-			</xsl:otherwise>			
-		</xsl:choose>
+		<div class="register">
+			<div>
+			<xsl:choose>
+				<xsl:when test="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats = '0'">
+				<a href="https://www.onlineregistrationcenter.com/waitinglistform.asp?m=257&amp;c={lc:module_id}" class="button alt1 waitlist">
+					<span>Wait List</span>
+					<i class="icon fa fa-arrow-right"/>
+				</a>
+				</xsl:when>
+				<xsl:otherwise>
+				<a href="https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c={lc:module_id}" class="button alt1">
+					<span>Register</span>
+					<i class="icon fa fa-arrow-right"/>
+				</a>
+				<div>Seats left: <xsl:value-of select="/doc/noncached-classes/eventlist/event[eventid = current()/lc:module_id]/seats"/></div>
+				</xsl:otherwise>			
+			</xsl:choose>
+			</div>
+		</div>
 	</xsl:template>
 
 </xsl:stylesheet>
