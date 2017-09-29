@@ -1,38 +1,44 @@
-build:
-  bundle:
+pipeline:
+
+  build:
     image: maven:latest
     commands:
-      - mvn -s settings.xml package
+      - mvn -B -q -s settings.xml package
     when:
-      branches:
-        - master
+      branch: laneweb
 
-publish:
-  docker:
-    registry: $$REGISTRY
-    username: $$REGISTRY_USER
-    password: >
-      $$REGISTRY_KEY
-    email: $$REGISTRY_EMAIL
-    repo: som-lane-dev/laneweb
+  publish:
+    image: plugins/docker
+    registry: gcr.io
+    repo: gcr.io/som-laneweb/laneweb
     tag:
       - latest
-      - $$COMMIT
-
-notify:
-  slack:
-    webhook_url: $$SLACK_URL
-    channel: $$CHANNEL
-    username: irt-lane/laneweb
-    template: >
-      irt-lane/laneweb build #{{ build.number }} finished with a {{ build.status }} status
-      Build log: https://drone.med.stanford.edu/irt-lane/laneweb/{{ build.number }}
-      Changes: https://gitlab.med.stanford.edu/irt-lane/laneweb/commit/$$COMMIT
-
-  downstream:
-    repositories:
-      - irt-lane/kube-laneweb
-    token: $$DRONE_TOKEN
-    fork: true
+      - "${DRONE_COMMIT_SHA}"
+    secrets: [ docker_username, docker_password ]
     when:
-      success: true
+      status: success
+      branch: laneweb
+
+  # downstream:
+  #   image: plugins/downstream
+  #   server: https://ci.med.stanford.edu
+  #   repositories:
+  #     - irt-lane/kube-laneweb@laneweb
+  #   fork: true
+  #   secrets: [ downstream_token ]
+  #   when:
+  #     status: success
+  #     branch: laneweb
+
+  slack:
+    image: plugins/slack
+    channel: irt-dcs-cicd
+    username: irt-lane/docker-laneweb
+    template: >
+      irt-lane/docker-laneweb build #{{ build.number }} finished with a {{ build.status }} status
+      Build log: https://ci.med.stanford.edu/irt-lane/docker-laneweb/{{ build.number }}
+      Changes: https://gitlab.med.stanford.edu/irt-lane/docker-laneweb/commit/{{ build.commit }}
+    secrets: [ slack_webhook ]
+    when:
+      status: [ success, failure ]
+      branch: laneweb

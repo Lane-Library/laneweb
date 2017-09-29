@@ -48,13 +48,20 @@ $ make push
 ```
 $ make pull
 ```
-
 ## CI/CD Support
 
-This repo support [DroneCI](https://drone.med.stanford.edu/irt-lane/laneweb).
+This repo supports [DroneCI](https://ci.med.stanford.edu/irt-lane/laneweb).
 
-To setup the deployment key before git commit and push for ci:
+#### Get and setup personal drone token
+Drone CLI requires access token to talk to drone server.
+
+Please get your personal token from https://ci.med.stanford.edu/account/token, 
+and save the the token to ${HOME}/.drone-token file. 
+
+_NOTE_: Do not add newline at the end of the token.
+
+#### To turn on the ci job defined in .drone.yml
 
 ```
-$ make sec
+$ make drone-setup
 ```
