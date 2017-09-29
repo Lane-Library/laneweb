@@ -6,8 +6,6 @@
 
 1. **[Install Docker](https://www.docker.com/products/docker)**
 
-1. **[Install git-crypt](https://github.com/AGWA/git-crypt)**
-
 1. **[Install Drone command line tools](http://readme.drone.io/devs/cli/)**
 
 ## Build Laneweb image
