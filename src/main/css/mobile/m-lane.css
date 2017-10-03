@@ -785,7 +785,7 @@ input[type='text'] {
     color: #656565;
 }
 
-.results li a.primaryLink {
+.results li .primaryLink {
     padding-right: 46px;
     background: url('../../images/mobile/link_bg_sprite.png') no-repeat right -42px transparent;
     background-size: 32px;

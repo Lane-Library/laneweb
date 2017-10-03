@@ -101,34 +101,34 @@
     width: 200px;
 }
 
-.location{
-	text-align: right;
+.location {
+    text-align: right;
     position: absolute;
-	bottom: 14px;
+    bottom: 14px;
     width: 210px;
 }
 
-.location, .location a, .location .fa{
-	color: white;
+.location, .location a, .location .fa {
+    color: white;
 }
 
-.register{
-	min-height:68px;
+.register {
+    min-height: 68px;
 }
 
 .register div:first-child {
-	position: absolute;
+    position: absolute;
     bottom: 0;
 }
 
-.register a{
-	margin-bottom: 6px;
+.register a {
+    margin-bottom: 6px;
 }
 
-.venue-link{
-	position: absolute;
-	bottom: 0px;
-	width: inherit;
-	padding-left: 9px;
+.venue-link {
+    position: absolute;
+    bottom: 0;
+    box-sizing: content-box;
+    width: inherit;
+    padding-left: 9px;
 }
-
