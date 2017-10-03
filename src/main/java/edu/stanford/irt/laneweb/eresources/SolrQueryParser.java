@@ -11,13 +11,20 @@ public final class SolrQueryParser {
     }
 
     public String parse(final String query) {
-        String parsedQuery;
+        String parsedQuery = query;
         for (QueryInspector parser : this.inspectors) {
-            parsedQuery = parser.inspect(query);
-            if (!query.equals(parsedQuery)) {
-                return parsedQuery;
+            if (!parser.combinable()) {
+                parsedQuery = parser.inspect(query);
+                if (!query.equals(parsedQuery)) {
+                    return parsedQuery;
+                }
             }
         }
-        return query;
+        for (QueryInspector parser : this.inspectors) {
+            if (parser.combinable()) {
+                parsedQuery = parser.inspect(parsedQuery);
+            }
+        }
+        return parsedQuery;
     }
 }

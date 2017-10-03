@@ -1,7 +1,8 @@
 package edu.stanford.irt.laneweb.eresources;
 
-@FunctionalInterface
 public interface QueryInspector {
+
+    boolean combinable();
 
     String inspect(String query);
 }

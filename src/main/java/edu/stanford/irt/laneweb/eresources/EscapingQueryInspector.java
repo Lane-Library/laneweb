@@ -15,6 +15,8 @@ import java.util.Set;
 public final class EscapingQueryInspector implements QueryInspector {
 
     private static final Set<Character> ESCAPEABLE_CHARS = new HashSet<>();
+
+    private static final Set<String> FIELDS = new HashSet<>();
     static {
         // these seem harmless | &
         // these seem useful and harmless " * ( )
@@ -28,24 +30,45 @@ public final class EscapingQueryInspector implements QueryInspector {
         ESCAPEABLE_CHARS.add(Character.valueOf('^'));
         ESCAPEABLE_CHARS.add(Character.valueOf('~'));
         ESCAPEABLE_CHARS.add(Character.valueOf('?'));
-        ESCAPEABLE_CHARS.add(Character.valueOf(':'));
         ESCAPEABLE_CHARS.add(Character.valueOf('\\'));
+    }
+    static {
+        // experiment ... not a comprehensive list of Solr fields
+        FIELDS.add("author");
+        FIELDS.add("id");
+        FIELDS.add("mesh");
+        FIELDS.add("primaryType");
+        FIELDS.add("recordId");
+        FIELDS.add("recordType");
+        FIELDS.add("title");
+        FIELDS.add("type");
     }
 
     private static boolean isEscapableCharacter(final char c) {
         return ESCAPEABLE_CHARS.contains(Character.valueOf(c));
     }
 
+    private static boolean isField(final String s) {
+        int index = s.lastIndexOf(' ') + 1;
+        String maybeField = s.substring(index).replaceAll("\\W", "");
+        return FIELDS.contains(s) || FIELDS.contains(maybeField);
+    }
+
     private static String maybeEscape(final String query) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < query.length(); i++) {
             char c = query.charAt(i);
-            if (isEscapableCharacter(c)) {
+            if (isEscapableCharacter(c) || (':' == c && !isField(sb.toString()))) {
                 sb.append('\\');
             }
             sb.append(c);
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean combinable() {
+        return true;
     }
 
     @Override

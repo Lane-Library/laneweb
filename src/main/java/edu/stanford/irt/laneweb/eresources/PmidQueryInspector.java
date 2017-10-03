@@ -13,7 +13,12 @@ public final class PmidQueryInspector implements QueryInspector {
             Pattern.CASE_INSENSITIVE);
 
     @Override
+    public boolean combinable() {
+        return true;
+    }
+
+    @Override
     public String inspect(final String query) {
-        return PMID_PATTERN.matcher(query).replaceAll("pmid\\\\:$1");
+        return PMID_PATTERN.matcher(query).replaceAll("pmid:$1");
     }
 }
