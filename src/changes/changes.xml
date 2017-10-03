@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-10-02" version="3.3.47" description="3.3.47 bug fix release">
+            <action date="2017-09-25" dev="ryanmax" issue="136149" type="fix">
+                duplicate labels in search and browse results
+            </action>
+            <action date="2017-09-25" dev="ryanmax" issue="136147" type="update">
+                resource type labels are not consistent between mobile and desktop
+            </action>
+            <action date="2017-09-26" dev="alainb" issue="136118" type="update">
+                Useful to have locations on Upcoming Classes Page
+            </action>
+        </release>
         <release date="2017-09-25" version="3.3.46" description="3.3.46 bug fix release">
             <action date="2017-09-21" dev="ceyates" issue="136110" type="update">
                 include xinclude parameters in log entries
