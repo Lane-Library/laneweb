@@ -101,12 +101,15 @@
     width: 200px;
 }
 
+.venue{
+	position: relative;
+	margin-top: 78px;
+}
 
-.location {
-    text-align: right;
+.location{
+	text-align: right;
     position: absolute;
-    bottom: 14px;
-    width: 210px;
+	width: 94%;
 }
 
 .location, .location a, .location .fa {
