@@ -67,12 +67,14 @@
 						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
 						<xsl:apply-templates select="./lc:event_dates" />
 					</div>
-					<div class="yui3-g location">
-						<div class="yui3-u-5-6">
-							<xsl:apply-templates select="lc:venue"/>
-						</div>
-						<div class="yui3-u-1-6">
-							<i class="fa fa-map-marker fa-2x"></i>
+					<div class="venue">
+						<div class="yui3-g location">
+							<div class="yui3-u-5-6">
+								<xsl:apply-templates select="lc:venue"/>
+							</div>
+							<div class="yui3-u-1-6">
+								<i class="fa fa-map-marker fa-2x"></i>
+							</div>
 						</div>
 					</div>
 				</div>
