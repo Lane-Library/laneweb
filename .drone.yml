@@ -17,18 +17,18 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     when:
       status: success
-      branch: laneweb
+      branch: master
 
-  # downstream:
-  #   image: plugins/downstream
-  #   server: https://ci.med.stanford.edu
-  #   repositories:
-  #     - irt-lane/kube-laneweb@laneweb
-  #   fork: true
-  #   secrets: [ downstream_token ]
-  #   when:
-  #     status: success
-  #     branch: laneweb
+  downstream:
+    image: plugins/downstream
+    server: https://ci.med.stanford.edu
+    repositories:
+      - irt-lane/kube-laneweb@master
+    fork: true
+    secrets: [ downstream_token ]
+    when:
+      status: success
+      branch: master
 
   slack:
     image: plugins/slack
@@ -41,4 +41,4 @@ pipeline:
     secrets: [ slack_webhook ]
     when:
       status: [ success, failure ]
-      branch: laneweb
+      branch: master
