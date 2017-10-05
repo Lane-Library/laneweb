@@ -5,7 +5,7 @@ pipeline:
     commands:
       - mvn -B -q -s settings.xml package
     when:
-      branch: laneweb
+      branch: master
 
   publish:
     image: plugins/docker
