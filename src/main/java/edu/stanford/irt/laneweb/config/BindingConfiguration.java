@@ -10,7 +10,6 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -95,9 +94,8 @@ public class BindingConfiguration {
             final BookmarkDataBinder bookmarkDataBinder, final BasePathDataBinder basePathDataBinder,
             final BaseURIDataBinder contentBaseDataBinder, final VersionDataBinder versionDataBinder,
             final DisasterModeDataBinder disasterModeDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
-            final ModelDataBinder modelDataBinder,
-            @Qualifier("java.net.URI/classes-service") final URI classesServiceURI) {
-        List<DataBinder> dataBinders = new ArrayList<>(23);
+            final ModelDataBinder modelDataBinder) {
+        List<DataBinder> dataBinders = new ArrayList<>(22);
         dataBinders.add(userDataBinder);
         dataBinders.add(activeSunetidDataBinder);
         dataBinders.add(ticketDataBinder);
@@ -120,7 +118,6 @@ public class BindingConfiguration {
         dataBinders.add(baseProxyUrlDataBinder());
         dataBinders.add(modelDataBinder);
         dataBinders.add(new TodayDataBinder());
-        dataBinders.add(new BaseURIDataBinder(Model.CLASSES_SERVICE_URI, classesServiceURI));
         return new CompositeDataBinder(dataBinders);
     }
 

@@ -12,6 +12,11 @@ public final class NumberQueryInspector implements QueryInspector {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d{1,8})$");
 
     @Override
+    public boolean combinable() {
+        return false;
+    }
+
+    @Override
     public String inspect(final String query) {
         return NUMBER_PATTERN.matcher(query).replaceFirst("recordId:$1");
     }

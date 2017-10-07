@@ -4,39 +4,38 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
         <map:match pattern="all-open-by-category.xml" type="wildcard">
-            <map:generate type="file" src="{classes-service-uri}find/allOpen/{id}"/>
-           	<map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description,handout,bio"/>
-            </map:transform>
+            <map:aggregate type="default" element="doc">
+                <map:generate type="file" src="cocoon://classes/open-classes.xml"/>
+                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
+            </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/classes/laneclasses.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        
-        <map:match pattern="class.xml" type="wildcard">
-            <map:generate type="file" src="{classes-service-uri}find/{class-id}"/>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description,handout,bio"/>
-            </map:transform>
-            <map:transform type="saxon" src="classpath:/xsl/classes/laneclass.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        	<map:match pattern="archive-category.xml" type="wildcard">
-            <map:generate type="file" src="{classes-service-uri}find/archive/{id}?sort={sort}"/>
-           	<map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description,handout,bio"/>
-            </map:transform>
+        <map:match pattern="archive-category.xml" type="wildcard">
+            <map:generate type="file" src="cocoon://classes/archives.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/classes/archives.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match pattern="class.xml" type="wildcard">
+            <map:aggregate type="default" element="doc">
+                <map:generate type="file" src="cocoon://classes/open-classes.xml"/>
+                <map:generate type="noncached-classes" src="http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
+            </map:aggregate>
+            <map:transform type="saxon" src="classpath:/xsl/classes/laneclass.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="archive.xml" type="wildcard">
+            <map:generate type="file" src="cocoon://classes/archives.xml"/>
+            <map:transform type="saxon" src="classpath:/xsl/classes/archive.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
     </map:pipeline>
-    
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
         <!-- Classes Menu  to display only -->
-        <map:parameter name="cache-key" value="{0}:class={class-id};email={email};id={id}"/>
         <map:match pattern="menu/archives.html" type="wildcard">
             <map:aggregate type="default" element="doc">
-                <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/archive/all"/>
+                <map:generate type="file" src="cocoon://classes/archives.xml"/>
                 <map:generate type="html" src="{content-base}/includes/leftmenu-archives-category.html"/>
             </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/classes/menu.xsl"/>
@@ -44,41 +43,72 @@
         </map:match>
         <map:match pattern="menu/categories.html" type="wildcard">
             <map:aggregate type="default" element="doc">
-                <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/allOpen"/>
+                <map:generate type="file" src="cocoon://classes/open-classes.xml?id=null"/>
                 <map:generate type="html" src="{content-base}/includes/leftmenu-classes-category.html"/>
             </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/classes/menu.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="calendar.ics" type="wildcard">
-            <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/all"/>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description"/>
-            </map:transform>
+            <map:generate type="file" src="cocoon://classes/all-classes.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/classes/calendar-ics.xsl"/>
             <map:serialize type="text"/>
         </map:match>
         <map:match pattern="thisweek.xml" type="wildcard">
-            <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/allOpen"/>
+            <map:generate type="file" src="cocoon://classes/open-classes.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/classes/thisweek.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="history.xml" type="wildcard">
-            <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/allOpen/14"/>
+            <map:generate type="file" src="cocoon://classes/open-classes.xml?id=14"/>
             <map:transform type="saxon" src="classpath:/xsl/classes/history.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="archive.xml" type="wildcard">
-            <map:generate type="file" src="cachedxml:60:{classes-service-uri}find/{class-id}"/>
+        <map:match pattern="all-classes.xml" type="wildcard">
+            <map:generate type="file" src="cachedxml:720:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;year_from=2017"/>
+            <map:transform type="joost" src="classpath:/xsl/classes/event-urls.stx"/>
+            <map:transform type="eventlist"/>
+            <map:transform type="joost" src="classpath:/xsl/classes/prune-add-namespace.stx"/>
             <map:transform type="textNodeParser">
-                <map:parameter name="elementName" value="description,handout,bio"/>
+                <map:parameter name="elementName" value="event_description"/>
             </map:transform>
-            <map:transform type="saxon" src="classpath:/xsl/classes/archive.xsl"/>
             <map:serialize type="xml"/>
-        </map:match> 
-       
-       
+        </map:match>
+        <map:match pattern="archives.xml" type="wildcard">
+            <map:generate type="file" src="cachedxml:1440:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;dall=1&amp;cat=8"/>
+            <map:transform type="joost" src="classpath:/xsl/classes/event-urls.stx"/>
+            <map:transform type="eventlist"/>
+            <map:transform type="joost" src="classpath:/xsl/classes/prune-add-namespace.stx"/>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="event_description"/>
+            </map:transform>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="download_description"/>
+            </map:transform>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="bio"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
     </map:pipeline>
 
-    
+    <map:pipeline type="caching">
+        <map:parameter name="cache-key" value="{request-uri}?{query-string}"/>
+        <map:match pattern="open-classes.xml" type="wildcard">
+            <map:generate type="file" src="cachedxml:720:http://onlineregistrationcenter.com/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
+            <map:transform type="joost" src="classpath:/xsl/classes/event-urls.stx"/>
+            <map:transform type="eventlist"/>
+            <map:transform type="joost" src="classpath:/xsl/classes/prune-add-namespace.stx"/>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="event_description"/>
+            </map:transform>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="download_description"/>
+            </map:transform>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementName" value="bio"/>
+            </map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+    </map:pipeline>
 </map:sitemap>

@@ -785,11 +785,26 @@ input[type='text'] {
     color: #656565;
 }
 
-.results li a:first-child {
+.results li .primaryLink {
     padding-right: 46px;
     background: url('../../images/mobile/link_bg_sprite.png') no-repeat right -42px transparent;
     background-size: 32px;
     overflow: visible;
+}
+
+.resultInfo span {
+    display: inline-block;
+    margin-right: 24px;
+}
+
+.resultInfo span:first-child {
+    min-width: 103px;
+    margin-right: 10px;
+    font-size: .9em;
+}
+
+.results .resultInfo a {
+    display: inline-block;
 }
 
 .results .resultsNav {
@@ -825,6 +840,11 @@ input[type='text'] {
     font-weight: bold;
 }
 
+.primaryType {
+    text-transform: uppercase;
+    color: #999;
+}
+
 /*
 *
 *  Abstract/info page
@@ -848,7 +868,7 @@ input[type='text'] {
     font-weight: bold;
 }
 
-.rDesc {
+.rDesc, .moreResults {
     padding-top: 10px;
 }
 

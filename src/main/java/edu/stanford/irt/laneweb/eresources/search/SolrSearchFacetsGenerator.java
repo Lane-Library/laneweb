@@ -182,7 +182,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         Collection<Facet> reduced = facetList.stream()
                 .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
                 .collect(Collectors.toList());
-        long enabled = facetList.stream().filter(s -> s.isEnabled()).count();
+        long enabled = facetList.stream().filter(Facet::isEnabled).count();
         if (reduced.size() < this.facetsToShowSearch || enabled >= this.facetsToShowSearch) {
             int limit = this.meshToIgnoreInSearch.size() + this.facetsToShowSearch + 1;
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MESH, 0, limit, 1,

@@ -64,6 +64,7 @@
     </xsl:template>
 
     <xsl:template match="s:link[1]">
+        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
         <div>
             <a class="primaryLink" href="{s:url}" title="{../s:title}">
                 <xsl:value-of select="../s:title" />
@@ -75,8 +76,9 @@
                 <xsl:call-template name="build-link-label">
                     <xsl:with-param name="link" select="."/>
                     <xsl:with-param name="primaryType" select="../s:primaryType"/>
+                    <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
                 </xsl:call-template>
-                <xsl:if test="s:link-text">
+                <xsl:if test="$simple-primary-type != s:label">
                     <span>
                         <a href="{s:url}" title="{../s:title}">
                             <xsl:value-of select="s:link-text" />
@@ -108,6 +110,7 @@
             <xsl:call-template name="build-link-label">
                 <xsl:with-param name="link" select="."/>
                 <xsl:with-param name="primaryType" select="../s:primaryType"/>
+                    <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
             </xsl:call-template>
             <xsl:if test="$simple-primary-type != s:label">
                 <span>
@@ -160,7 +163,7 @@
     <xsl:template name="build-link-label">
         <xsl:param name="link" />
         <xsl:param name="primaryType" />
-        <xsl:variable name="simple-primary-type" select="replace($primaryType,'(Journal|Book) ','')"/>
+        <xsl:param name="simplePrimaryType" />
         <span>
             <xsl:choose>
                 <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print</xsl:when>
@@ -168,7 +171,7 @@
                     <a href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="replace($primaryType,'(Journal|Book) ','')"/>
+                    <xsl:value-of select="$simplePrimaryType"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="s:publisher">

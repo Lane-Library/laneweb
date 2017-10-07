@@ -9,11 +9,23 @@ import java.util.regex.Pattern;
  */
 public final class DoiQueryInspector implements QueryInspector {
 
-    private static final Pattern DOI_PATTERN = Pattern.compile("(?:http:\\/\\/)?(?:dx\\.)?doi\\.org/(10\\.\\w+)\\b",
+    private static final Pattern DOI_PATTERN = Pattern.compile("\\b10\\.\\d+\\b");
+
+    private static final Pattern PREFIX_PATTERN = Pattern.compile("(?:http:\\/\\/)?(?:dx\\.)?doi\\.org/(10\\.\\w+)\\b",
             Pattern.CASE_INSENSITIVE);
 
     @Override
+    public boolean combinable() {
+        return true;
+    }
+
+    @Override
     public String inspect(final String query) {
-        return DOI_PATTERN.matcher(query).replaceAll("$1");
+        String parsed = PREFIX_PATTERN.matcher(query).replaceAll("$1");
+        // remove slashes in DOIs because they give edismax parser trouble
+        if (DOI_PATTERN.matcher(parsed).find()) {
+            parsed = parsed.replace('/', ' ');
+        }
+        return parsed;
     }
 }

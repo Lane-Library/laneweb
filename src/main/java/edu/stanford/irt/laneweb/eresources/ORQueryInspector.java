@@ -9,6 +9,11 @@ package edu.stanford.irt.laneweb.eresources;
 public final class ORQueryInspector implements QueryInspector {
 
     @Override
+    public boolean combinable() {
+        return true;
+    }
+
+    @Override
     public String inspect(final String query) {
         if (query.contains(" OR ")) {
             StringBuilder sb = new StringBuilder();

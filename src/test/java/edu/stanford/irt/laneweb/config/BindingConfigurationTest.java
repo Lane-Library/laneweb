@@ -43,8 +43,7 @@ public class BindingConfigurationTest {
 
     @Test
     public void testDataBinder() throws URISyntaxException {
-        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null, null, null, null, null,
-                new URI("file:/")));
+        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null, null, null, null, null));
     }
 
     @Test

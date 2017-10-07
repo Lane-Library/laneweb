@@ -1,23 +1,30 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class SolrQueryParser {
 
-    private List<QueryInspector> inspectors;
+    private List<QueryInspector> combinables;
+
+    private List<QueryInspector> nonCombinables;
 
     public SolrQueryParser(final List<QueryInspector> parsers) {
-        this.inspectors = parsers;
+        this.combinables = parsers.stream().filter(QueryInspector::combinable).collect(Collectors.toList());
+        this.nonCombinables = parsers.stream().filter(qi -> !qi.combinable()).collect(Collectors.toList());
     }
 
     public String parse(final String query) {
-        String parsedQuery;
-        for (QueryInspector parser : this.inspectors) {
+        String parsedQuery = query;
+        for (QueryInspector parser : this.nonCombinables) {
             parsedQuery = parser.inspect(query);
             if (!query.equals(parsedQuery)) {
                 return parsedQuery;
             }
         }
-        return query;
+        for (QueryInspector parser : this.combinables) {
+            parsedQuery = parser.inspect(parsedQuery);
+        }
+        return parsedQuery;
     }
 }
