@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-10-09" version="3.3.48" description="3.3.48 bug fix release">
+            <action date="2017-10-03" dev="ryanmax" issue="136218" type="fix">
+                some DOI searches not returning expected results
+            </action>
+        </release>
         <release date="2017-10-02" version="3.3.47" description="3.3.47 bug fix release">
             <action date="2017-09-25" dev="ryanmax" issue="136149" type="fix">
                 duplicate labels in search and browse results

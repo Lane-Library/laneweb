@@ -73,7 +73,12 @@
     width: 600px;
 }
 
+.nav-menu-content.portals ul {
+    column-count: 3;
+    column-gap: 0;
+}
+
 .nav-menu-content.portals li{
-    float: left;
+    display: inline-block;
     width: 200px;
 }
