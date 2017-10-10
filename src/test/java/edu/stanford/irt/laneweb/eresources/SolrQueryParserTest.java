@@ -43,6 +43,9 @@ public class SolrQueryParserTest {
         assertEquals("pmid\\:12345", this.parser.parse("pmid 12345"));
         assertEquals("pmid\\:12345", this.parser.parse("pmid:12345"));
         assertEquals("pmid\\:12345", this.parser.parse("pmid : 12345"));
+        assertEquals("pmid\\:12345", this.parser.parse("pubmed:12345"));
+        assertEquals("pmid\\:12345", this.parser.parse("pubmed: 12345"));
+        assertEquals("pmid\\:12345", this.parser.parse("pubmed : 12345"));
         assertEquals("pmid\\:12345", this.parser.parse("pmid12345"));
         assertEquals("pmid\\:12345678", this.parser.parse("pubmed id 12345678"));
         assertEquals("pubmed id 12345678", this.parser.parse("advanced:true pubmed id 12345678"));
