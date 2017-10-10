@@ -13,6 +13,9 @@
 .pagingLabels {
     padding: 0 12px;
 }
+.pagingLabels.disabled {
+    color: #999;
+}
 .labelTitle{
     display: inline-block;
     width: 175px;

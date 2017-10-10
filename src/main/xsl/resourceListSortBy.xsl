@@ -45,13 +45,15 @@
                         <i class="fa fa-angle-double-down"></i>
                     </div>
                     <div class="general-dropdown-content dropdown-content">
-                        <ul class="pagingLabels">
-                            <xsl:choose>
-                                <xsl:when test="number(/s:resources/@size) &gt; 500000">
+                        <xsl:choose>
+                            <xsl:when test="number(/s:resources/@size) &gt; 500000">
+                                <ul class="pagingLabels disabled">
                                     <li>large result set</li>
                                     <li>sort options disabled</li>
-                                </xsl:when>
-                                <xsl:otherwise>
+                                </ul>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <ul class="pagingLabels">
                                     <xsl:for-each select="$sorts//s:sort">
                                         <xsl:variable name="anchor">
                                             <xsl:choose>
@@ -74,9 +76,9 @@
                                             </xsl:if>
                                         </li>
                                     </xsl:for-each>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </ul>
+                                </ul>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </div>
                 </div>
             </div>
