@@ -129,3 +129,16 @@
     background-image: none;
     text-align: left;
 }
+
+/* modules on contacts/staff-dir.html */
+.staff-list .module {
+    display: inline-block;
+    height: 176px;
+    margin: 12px 6px 0;
+    vertical-align: top;
+    width: 31%;
+}
+
+.staff-list h4 {
+    font-size: 14px;
+}
