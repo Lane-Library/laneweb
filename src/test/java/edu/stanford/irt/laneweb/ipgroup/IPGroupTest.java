@@ -281,6 +281,6 @@ public class IPGroupTest {
 
     @Test
     public void testToString() {
-        assertEquals(IPGroup.LPCH.toString(), "LPCH");
+        assertEquals("LPCH", IPGroup.LPCH.toString());
     }
 }
