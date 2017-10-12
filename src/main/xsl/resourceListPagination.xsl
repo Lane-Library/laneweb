@@ -65,14 +65,14 @@
             </xsl:otherwise>
         </xsl:choose>
         <form class="pagingForm" name="pagination">
-          <xsl:if test="string-length($facets) > 0">
-              <input type="hidden" name="facets" value="{$facets}"/>
-          </xsl:if>
+          <input type="hidden" name="q" value="{$query}"/>
+          <input type="hidden" name="source" value="{$source}"/>
           <xsl:if test="string-length($sort) > 0">
               <input type="hidden" name="sort" value="{$sort}"/>
           </xsl:if>
-          <input type="hidden" name="source" value="{$source}"/>
-          <input type="hidden" name="q" value="{$query}"/>
+          <xsl:if test="string-length($facets) > 0">
+              <input type="hidden" name="facets" value="{$facets}"/>
+          </xsl:if>
           <label for="page"> Page </label>
           <input type="text" name="page" value="{number(/s:resources/@page + 1)}"/>
           <label for="pages"> of <xsl:value-of select="format-number(/s:resources/@pages,'###,##0')" /></label>

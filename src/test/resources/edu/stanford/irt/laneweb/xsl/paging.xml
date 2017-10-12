@@ -45,8 +45,8 @@
                   <i class="fa fa-backward"/>
                </span>
                <form class="pagingForm" name="pagination">
-                  <input type="hidden" name="source" value="all-all"/>
                   <input type="hidden" name="q" value=""/>
+                  <input type="hidden" name="source" value="all-all"/>
                   <label for="page"> Page </label>
                   <input type="text" name="page" value="1"/>
                   <label for="pages"> of 2</label>
