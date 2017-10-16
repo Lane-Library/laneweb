@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-10-16" version="3.3.49" description="3.3.49 bug fix release">
+            <action date="2017-10-16" dev="olgary" issue="136430" type="update">
+                added .red and .black to font-awesome.css
+            </action>
+            <action date="2017-10-12" dev="ryanmax" issue="136387" type="fix">
+                UI issue with sorting options
+            </action>
+            <action date="2017-10-11" dev="ryanmax" issue="136370" type="update">
+                throttle Solr search and facet requests
+            </action>
+            <action date="2017-10-10" dev="ryanmax" issue="136339" type="update">
+                remove sort and paging links for large result sets
+            </action>
+            <action date="2017-10-09" dev="ceyates" issue="136309" type="update">
+                dynamic order for Portals drop down
+            </action>
+            <action date="2017-10-10" dev="ceyates" issue="136308" type="update">
+                Please make 'business cards' on this page dynamic
+            </action>
+        </release>
         <release date="2017-10-09" version="3.3.48" description="3.3.48 bug fix release">
             <action date="2017-10-03" dev="ryanmax" issue="136218" type="fix">
                 some DOI searches not returning expected results

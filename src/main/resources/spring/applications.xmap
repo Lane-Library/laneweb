@@ -2,6 +2,14 @@
 <map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    <map:pipeline type="throttling">
+        <map:parameter name="request-key" value="remote-addr={remote-addr};request-uri={request-uri};source={source};q={query};facets={facets}"/>
+        <map:match pattern="search/facets/html" type="wildcard">
+            <map:generate type="solr-search-facets"/>
+            <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
+            <map:serialize type="html5"/>
+        </map:match>
+    </map:pipeline>
     <map:pipeline type="noncaching">
         <map:parameter name="mime-type" value="text/xml; charset=utf8"/>
         <!-- matches /apps/search/ requests -->
@@ -73,11 +81,6 @@
                 <map:serialize type="text">
                     <map:parameter name="media-type" value="application/json"/>
                 </map:serialize>
-            </map:match>
-            <map:match pattern="search/facets/html" type="wildcard">
-                <map:generate type="solr-search-facets"/>
-                <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
-                <map:serialize type="html5"/>
             </map:match>
             <!-- TODO: find permanent home for this -->
             <map:match pattern="search/flickr.xml" type="wildcard">

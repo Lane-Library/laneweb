@@ -46,7 +46,7 @@ public class RequestParameterDataBinderTest {
         expect(this.names.hasMoreElements()).andReturn(false);
         replay(this.request, this.names);
         this.binder.bind(this.model, this.request);
-        assertEquals(this.model.get(Model.SOURCE), "foo");
+        assertEquals("foo", this.model.get(Model.SOURCE));
         verify(this.request, this.names);
     }
 
