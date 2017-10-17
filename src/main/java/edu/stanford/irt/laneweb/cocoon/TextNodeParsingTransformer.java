@@ -98,7 +98,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     @Override
     public Serializable getKey() {
-        return "textNodeParsing";
+        return this.type;
     }
 
     @Override
@@ -113,10 +113,10 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
-        if (!parameters.containsKey("elementName")) {
-            throw new LanewebException("elementName parameter is required");
+        if (!parameters.containsKey("elementNames")) {
+            throw new LanewebException("elementNames parameter is required");
         }
-        this.elementNames = Arrays.asList(parameters.get("elementName").split(","));
+        this.elementNames = Arrays.asList(parameters.get("elementNames").split(","));
     }
 
     @Override
