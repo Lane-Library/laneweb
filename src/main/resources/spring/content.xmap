@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
         <map:match pattern="biomed-resources/**" type="wildcard">
-            <map:match pattern="biomed-resources/(ej|eb|cc|db|video|images|statistics|software).html" type="regexp">
+            <map:match pattern="biomed-resources/(ej|eb|cc|db|exam|video|images|statistics|software).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
