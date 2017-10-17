@@ -25,6 +25,8 @@ public class Model {
 
     public static final String CLASS_ID = "class-id";
 
+    public static final String CLASSES_SERVICE_URI = "classes-service-uri";
+
     public static final String CONTENT_BASE = "content-base";
 
     public static final String DEBUG = "debug";

@@ -2,6 +2,8 @@
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns" version="1.0" pass-through="none">
 
     <stx:variable name="classid"/>
+    
+    <stx:param name="classes-service-uri"/>
 
     <stx:template match="eventlist">
         <classes>
@@ -12,7 +14,7 @@
     <stx:template match="event">
         <stx:assign name="classid" select="''"/>
         <stx:process-children/>
-        <event href="cache:60:http://www.onlineregistrationcenter.com/registerxml.asp?m=257&amp;c={$classid}"/>
+        <event href="cache:60:{$classes-service-uri}/registerxml.asp?m=257&amp;c={$classid}"/>
     </stx:template>
 
     <stx:template match="eventid">
