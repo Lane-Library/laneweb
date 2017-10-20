@@ -128,3 +128,18 @@ hr {
 .bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE {
     display: none;
 }
+
+/*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
+.quote, .quote-sig {
+    font-size: 170%;
+    line-height: 180%;
+}
+
+.quote-medium {
+    font-size: 130%;
+    line-height: 150%;
+}
+
+.quote-sig {
+    text-align: right;
+}
