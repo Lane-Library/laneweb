@@ -106,38 +106,23 @@ public class JDBCBookmarkService implements BookmarkService {
     public void saveLinks(final String userid, final List<Bookmark> links) {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
-        Connection conn = getConnection();
-        try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
-            pstmt.setString(USER_ID, userid);
-            pstmt.execute();
-            saveLinksToDatabase(links, conn, userid);
-            conn.commit();
-        } catch (IOException | SQLException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                throw new LanewebException(e1);
-            }
-            throw new LanewebException(e);
-        } finally {
-            releaseConnection(conn);
-        }
-    }
-
-    private Connection getConnection() {
-        try {
-            Connection conn = this.dataSource.getConnection();
+        try (Connection conn = this.dataSource.getConnection()) {
             conn.setAutoCommit(false);
-            return conn;
-        } catch (SQLException e) {
-            throw new LanewebException(e);
-        }
-    }
-
-    private void releaseConnection(final Connection conn) {
-        try {
-            conn.setAutoCommit(true);
-            conn.close();
+            try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
+                pstmt.setString(USER_ID, userid);
+                pstmt.execute();
+                saveLinksToDatabase(links, conn, userid);
+                conn.commit();
+            } catch (IOException | SQLException e) {
+                try {
+                    conn.rollback();
+                } catch (SQLException e1) {
+                    throw new LanewebException(e1);
+                }
+                throw new LanewebException(e);
+            } finally {
+                conn.setAutoCommit(true);
+            }
         } catch (SQLException e) {
             throw new LanewebException(e);
         }
