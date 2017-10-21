@@ -58,7 +58,22 @@ public class JDBCBookmarkService implements BookmarkService {
         return links;
     }
 
-    private static void saveLinksToDatabase(final List<Bookmark> links, final Connection conn, final String userid)
+    private static void saveLinksAndResetAutocommit(final String userid, final List<Bookmark> links,
+            final Connection conn) throws SQLException {
+        try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
+            pstmt.setString(USER_ID, userid);
+            pstmt.execute();
+            writeLinksBlob(userid, links, conn);
+            conn.commit();
+        } catch (IOException | SQLException e) {
+            conn.rollback();
+            throw new LanewebException(e);
+        } finally {
+            conn.setAutoCommit(true);
+        }
+    }
+
+    private static void writeLinksBlob(final String userid, final List<Bookmark> links, final Connection conn)
             throws SQLException, IOException {
         if (!links.isEmpty()) {
             try (PreparedStatement insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
@@ -108,21 +123,7 @@ public class JDBCBookmarkService implements BookmarkService {
         Objects.requireNonNull(links, "null links");
         try (Connection conn = this.dataSource.getConnection()) {
             conn.setAutoCommit(false);
-            try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
-                pstmt.setString(USER_ID, userid);
-                pstmt.execute();
-                saveLinksToDatabase(links, conn, userid);
-                conn.commit();
-            } catch (IOException | SQLException e) {
-                try {
-                    conn.rollback();
-                } catch (SQLException e1) {
-                    throw new LanewebException(e1);
-                }
-                throw new LanewebException(e);
-            } finally {
-                conn.setAutoCommit(true);
-            }
+            saveLinksAndResetAutocommit(userid, links, conn);
         } catch (SQLException e) {
             throw new LanewebException(e);
         }
