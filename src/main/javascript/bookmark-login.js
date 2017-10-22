@@ -44,7 +44,7 @@
              * @private
              */
             _handleFailure: function() {
-                alert("You must log in in order to create bookmarks.");
+                lane.showMessage("You must log in in order to create bookmarks.");
             },
 
             /**

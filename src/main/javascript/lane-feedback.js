@@ -92,7 +92,7 @@
                         this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
-                        alert("Sorry, sending feedback failed.");
+                        Y.lane.showMessage("Sorry, sending feedback failed.");
                     }
                 },
                 context : this

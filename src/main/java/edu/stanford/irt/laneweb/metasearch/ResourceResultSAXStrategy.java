@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
+import java.util.Locale;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -33,7 +35,7 @@ public class ResourceResultSAXStrategy extends AbstractResultSAXStrategy<Result>
         SearchStatus status = result.getStatus();
         atts.addAttribute(NAMESPACE, ID, ID, CDATA, result.getId());
         if (status != null) {
-            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
+            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase(Locale.US));
         }
         try {
             xmlConsumer.startPrefixMapping("", NAMESPACE);

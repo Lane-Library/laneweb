@@ -31,7 +31,7 @@
                 try {
                     Y.lane.search.submit();
                 } catch (error) {
-                    alert(error);
+                    Y.lane.showMessage(error);
                 }
             });
         }

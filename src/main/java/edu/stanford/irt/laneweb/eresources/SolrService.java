@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
@@ -186,7 +187,7 @@ public class SolrService {
 
     public List<Eresource> suggestFindAll(final String query) {
         String cleanQuery = this.parser.parse(query);
-        return this.repository.suggestFindAll(cleanQuery.toLowerCase(), cleanQuery.replaceAll(" ", " +"),
+        return this.repository.suggestFindAll(cleanQuery.toLowerCase(Locale.US), cleanQuery.replaceAll(" ", " +"),
                 new PageRequest(0, PAGE_SIZE));
     }
 

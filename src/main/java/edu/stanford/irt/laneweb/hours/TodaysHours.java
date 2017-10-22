@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,8 +72,8 @@ public class TodaysHours {
             } else if (hours.isClosed()) {
                 latestHours = "CLOSED";
             } else {
-                latestHours = String.format("%s – %s", hours.getOpen().format(FORMAT).toLowerCase(),
-                        hours.getClose().format(FORMAT).toLowerCase());
+                latestHours = String.format("%s – %s", hours.getOpen().format(FORMAT).toLowerCase(Locale.US),
+                        hours.getClose().format(FORMAT).toLowerCase(Locale.US));
             }
         } catch (LibraryHoursException e) {
             log.error("failed to get hours from service", e);
