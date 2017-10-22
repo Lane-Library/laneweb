@@ -6,6 +6,6 @@
     Y.lane = Y.lane || {};
     Y.lane.showMessage = function(message) {
         alert(message);
-    }
+    };
 
 })();

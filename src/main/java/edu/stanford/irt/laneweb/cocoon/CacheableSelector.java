@@ -22,7 +22,7 @@ public class CacheableSelector implements Selector {
         return !model.containsKey(Model.USER_ID)
                 && !model.containsKey(Model.QUERY)
                 && !sitemapURI.contains("/bassett/")
-                && !sitemapURI.equals("/error.html")
+                && !"/error.html".equals(sitemapURI)
                 && !model.containsKey(Model.EMRID)
                 && !model.containsKey(Model.DEBUG);
     }
