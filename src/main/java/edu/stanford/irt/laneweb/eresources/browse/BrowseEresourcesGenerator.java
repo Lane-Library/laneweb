@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -87,7 +88,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     protected String getHeading() {
         String heading = null;
         if (this.type.indexOf("software, installed") == -1) {
-            heading = this.alpha.toUpperCase();
+            heading = this.alpha.toUpperCase(Locale.US);
         }
         return heading;
     }

@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.suggest;
 import java.io.Serializable;
 import java.text.Normalizer;
 import java.util.Comparator;
+import java.util.Locale;
 
 import edu.stanford.irt.suggest.Suggestion;
 
@@ -54,6 +55,6 @@ public class SuggestionComparator implements Comparator<Suggestion>, Serializabl
                 sb.append(theChar);
             }
         }
-        return sb.toString().toUpperCase();
+        return sb.toString().toUpperCase(Locale.US);
     }
 }
