@@ -32,7 +32,6 @@ public class ValidParameterFilterTest {
     @Before
     public void setUp() throws Exception {
         this.filter = new ValidParameterFilter();
-        this.filter.init(null);
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.chain = createMock(FilterChain.class);

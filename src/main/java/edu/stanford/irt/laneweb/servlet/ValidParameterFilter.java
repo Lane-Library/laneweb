@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -136,8 +135,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
 
     private Validator<Map<String, String[]>> validator;
 
-    @Override
-    public void init(final FilterConfig filterConfig) {
+    public ValidParameterFilter() {
         this.validator = new ParameterNameValidator();
     }
 

@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.laneweb.cocoon.NOOPXMLConsumer;
 
 /**
  * Transformer to rewrite data when a Model.EMRID or Model.AUTH (hashed userid) value is present. Elements to rewrite
@@ -26,6 +27,10 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
     private static final String VALUE = "value";
 
     private XMLConsumer xmlConsumer;
+
+    public HTMLCMELinkTransformer() {
+        this.xmlConsumer = NOOPXMLConsumer.INSTANCE;
+    }
 
     @Override
     public void setXMLConsumer(final XMLConsumer xmlConsumer) {

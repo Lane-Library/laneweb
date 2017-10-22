@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.xml.sax.SAXException;
 
@@ -17,22 +17,23 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
  */
 public class DebugTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
 
-    private boolean debug;
+    private Map<String, Object> model;
 
-    private Set<Entry<String, Object>> modelEntries;
+    public DebugTransformer() {
+        this.model = Collections.emptyMap();
+    }
 
     @Override
     public void setModel(final Map<String, Object> model) {
-        this.debug = ModelUtil.getObject(model, Model.DEBUG, Boolean.class, Boolean.FALSE);
-        this.modelEntries = model.entrySet();
+        this.model = model;
     }
 
     @Override
     public void startDocument() throws SAXException {
         super.startDocument();
-        if (this.debug) {
+        if (ModelUtil.getObject(this.model, Model.DEBUG, Boolean.class, Boolean.FALSE).booleanValue()) {
             StringBuilder sb = new StringBuilder();
-            for (Entry<String, Object> entry : this.modelEntries) {
+            for (Entry<String, Object> entry : this.model.entrySet()) {
                 sb.append('\n').append(entry.getKey()).append(": ").append(entry.getValue());
             }
             sb.append('\n');

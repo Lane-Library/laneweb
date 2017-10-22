@@ -18,7 +18,13 @@ public class QueryHighlightingTransformer extends AbstractTextProcessingTransfor
 
     private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
+    private static final Pattern UNMATCHABLE = Pattern.compile("$a");
+
     private Pattern queryPattern;
+
+    public QueryHighlightingTransformer() {
+        this.queryPattern = UNMATCHABLE;
+    }
 
     @Override
     public void setModel(final Map<String, Object> model) {
