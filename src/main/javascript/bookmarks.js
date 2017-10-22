@@ -344,7 +344,7 @@
              * @param message {String}
              */
             _handleSyncFailure : function(message) {
-                lane.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
+                Lane.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
             }
     };
 
