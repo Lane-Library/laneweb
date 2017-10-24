@@ -18,21 +18,12 @@ public class CacheableSelector implements Selector {
     @Override
     public boolean select(final String expression, final Map<String, Object> model,
             final Map<String, String> parameters) {
-        boolean result = true;
         String sitemapURI = ModelUtil.getString(model, Model.SITEMAP_URI, "");
-        if (model.containsKey(Model.USER_ID)) {
-            result = false;
-        } else if (model.containsKey(Model.QUERY)) {
-            result = false;
-        } else if (sitemapURI.indexOf("/bassett/") > -1) {
-            result = false;
-        } else if ("/error.html".equals(sitemapURI)) {
-            result = false;
-        } else if (model.containsKey(Model.EMRID)) {
-            result = false;
-        } else if (model.containsKey(Model.DEBUG)) {
-            result = false;
-        }
-        return result;
+        return !model.containsKey(Model.USER_ID)
+                && !model.containsKey(Model.QUERY)
+                && !sitemapURI.contains("/bassett/")
+                && !"/error.html".equals(sitemapURI)
+                && !model.containsKey(Model.EMRID)
+                && !model.containsKey(Model.DEBUG);
     }
 }

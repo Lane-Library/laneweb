@@ -204,9 +204,13 @@
         <div id="laneFooter">
             <div class="centered">
                 <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
-                <h3><a href="/index.html">Lane Medical Library</a></h3>
                 <div class="yui3-g">
-                    <div class="yui3-u-1-5">
+                    <div class="yui3-u-1-6"><h3><a href="/index.html">Lane Medical Library</a></h3></div>
+                    <div class="yui3-u-2-3"></div>
+                    <div class="yui3-u-1-6"><h3>Other</h3></div>
+                </div>
+                <div class="yui3-g">
+                    <div class="yui3-u-1-6">
                         <ul>
                             <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
                             <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
@@ -215,7 +219,7 @@
                             <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="yui3-u-1-6">
                         <ul>
                             <li><a href="/classes-consult/laneclasses.html">Upcoming Classes</a></li>
                             <li><a href="/classes-consult/archives.html">Classes Archive</a></li>
@@ -223,7 +227,7 @@
                             <li><a href="/classes-consult/pom-ebp.html">Practice of Medicine &amp; EBP Curriculum</a></li>
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="yui3-u-1-6">
                         <ul>
                             <li><a href="/using-lib/affiliates.html">Check your eligibility</a></li>
                             <li><a href="/using-lib/sunetid.html">Manage Your Lane Login</a></li>
@@ -232,7 +236,7 @@
                             <li><a href="/using-lib/borrow.html">Borrow, Renew &amp; Return</a></li>
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="yui3-u-1-6">
                         <ul>
                             <li><a href="/about/hours.html">Hours</a></li>
                             <li><a href="/about/hours-directions.html">Directions &amp; Maps</a></li>
@@ -241,12 +245,21 @@
                             <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="yui3-u-1-6">
                         <ul>
                             <li><a href="/help/choose-search.html">Choose Your Search</a></li>
                             <li><a href="/help/references.html">Manage References</a></li>
                             <li><a href="/help/statistics.html">Use Statistics &amp; Data</a></li>
-                            <li><a href="/help/support-for-authors.html">Support for Authors</a></li>
+                            <li><a href="/help/making-informed-publish-decisions.html">Making Informed Publishing Decisions</a></li>
+                        </ul>
+                    </div>
+                    <div class="yui3-u-1-6">
+                        <ul>
+                            <li><a href="http://healthlibrary.stanford.edu/lectures/index.html">Stanford Hospital Health Library</a></li>
+                            <li><a href="https://med.stanford.edu/cme/learning-opportunities/live.html">CME Conferences and Workshops</a></li>
+                            <li><a href="https://med.stanford.edu/cme/learning-opportunities/online.html">CME  Online Courses</a></li>
+                            <li><a href="http://med.stanford.edu/irt/edtech/classrooms.html">SoM Classroom Scheduling </a></li>
+                            <li><a href="http://med.stanford.edu/seminars/">Biomed Seminars Calendar </a></li>
                         </ul>
                     </div>
                 </div>

@@ -2,9 +2,10 @@
 body, select, input, button, textarea {
     font-family: 'Source Sans Pro', sans-serif;
 }
+
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .yui3-g [class*='yui3-u'] {
-	font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .scaled-image {
@@ -127,4 +128,19 @@ hr {
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 .bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE {
     display: none;
+}
+
+/*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
+.quote, .quote-sig {
+    font-size: 170%;
+    line-height: 180%;
+}
+
+.quote-medium {
+    font-size: 130%;
+    line-height: 150%;
+}
+
+.quote-sig {
+    text-align: right;
 }

@@ -48,8 +48,8 @@ public class UrlTesterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.tester = new UrlTester();
         this.metaSearchService = createMock(MetaSearchService.class);
+        this.tester = new UrlTester(this.metaSearchService);
         this.response = createMock(HttpServletResponse.class);
         this.httpResponse = createMock(HttpResponse.class);
         this.entity = createMock(HttpEntity.class);
@@ -71,7 +71,6 @@ public class UrlTesterTest {
         expect(this.header.getValue()).andReturn("value");
         this.outputStream.write(aryEq(this.expectedResult));
         replay(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
-        this.tester.setMetaSearchManagerSource(this.metaSearchService);
         this.tester.testUrl("url", this.response);
         verify(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
     }
@@ -80,7 +79,6 @@ public class UrlTesterTest {
     public void testTestUrlException() throws IOException {
         expect(this.metaSearchService.execute(isA(HttpGet.class))).andThrow(new IOException());
         replay(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
-        this.tester.setMetaSearchManagerSource(this.metaSearchService);
         try {
             this.tester.testUrl("url", this.response);
             fail();

@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-10-23" version="3.3.50" description="3.3.50 bug fix release">
+            <action date="2017-10-20" dev="olgary" issue="136562" type="update">
+                misc.css
+            </action>
+            <action date="2017-10-20" dev="ceyates" issue="136560" type="update">
+                templates to add a header
+            </action>
+            <action date="2017-10-20" dev="olgary" issue="136558" type="update">
+                templates - link changed from support for authors to making informed decisions page in footer
+            </action>
+            <action date="2017-10-18" dev="ryanmax" issue="136449" type="add">
+                create browse pages for examination question resources
+            </action>
+        </release>
         <release date="2017-10-16" version="3.3.49" description="3.3.49 bug fix release">
             <action date="2017-10-16" dev="olgary" issue="136430" type="update">
                 added .red and .black to font-awesome.css

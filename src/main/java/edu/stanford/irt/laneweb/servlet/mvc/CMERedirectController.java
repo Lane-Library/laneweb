@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,7 +95,7 @@ public class CMERedirectController {
         String orgid;
         if (emrid != null) {
             userid = emrid;
-            if (emrid.toLowerCase().startsWith("lpch-")) {
+            if (emrid.toLowerCase(Locale.US).startsWith("lpch-")) {
                 orgid = ORGID_LPCH;
             } else {
                 orgid = ORGID_SHC;

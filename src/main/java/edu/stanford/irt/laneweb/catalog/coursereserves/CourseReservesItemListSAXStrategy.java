@@ -12,7 +12,7 @@ import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 
 public class CourseReservesItemListSAXStrategy extends AbstractXHTMLSAXStrategy<CourseReservesItemList> {
 
-    public SAXStrategy<CourseReservesItem> itemStrategy;
+    private SAXStrategy<CourseReservesItem> itemStrategy;
 
     private SAXStrategy<Course> courseStrategy;
 

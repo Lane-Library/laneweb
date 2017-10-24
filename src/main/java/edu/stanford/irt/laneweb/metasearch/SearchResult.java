@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.metasearch;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import edu.stanford.irt.search.impl.ContentResult;
@@ -75,7 +76,7 @@ public class SearchResult implements Comparable<SearchResult> {
                 this.sortTitle = "";
             } else {
                 String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
-                this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase();
+                this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase(Locale.US);
             }
         }
         return this.sortTitle;

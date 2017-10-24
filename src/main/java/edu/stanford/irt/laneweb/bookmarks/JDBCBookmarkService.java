@@ -58,7 +58,22 @@ public class JDBCBookmarkService implements BookmarkService {
         return links;
     }
 
-    private static void saveLinksToDatabase(final List<Bookmark> links, final Connection conn, final String userid)
+    private static void saveLinksAndResetAutocommit(final String userid, final List<Bookmark> links,
+            final Connection conn) throws SQLException {
+        try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
+            pstmt.setString(USER_ID, userid);
+            pstmt.execute();
+            writeLinksBlob(userid, links, conn);
+            conn.commit();
+        } catch (IOException | SQLException e) {
+            conn.rollback();
+            throw new LanewebException(e);
+        } finally {
+            conn.setAutoCommit(true);
+        }
+    }
+
+    private static void writeLinksBlob(final String userid, final List<Bookmark> links, final Connection conn)
             throws SQLException, IOException {
         if (!links.isEmpty()) {
             try (PreparedStatement insertStatement = conn.prepareStatement(INSERT_BOOKMARKS_SQL);
@@ -106,38 +121,9 @@ public class JDBCBookmarkService implements BookmarkService {
     public void saveLinks(final String userid, final List<Bookmark> links) {
         Objects.requireNonNull(userid, "null userid");
         Objects.requireNonNull(links, "null links");
-        Connection conn = getConnection();
-        try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
-            pstmt.setString(USER_ID, userid);
-            pstmt.execute();
-            saveLinksToDatabase(links, conn, userid);
-            conn.commit();
-        } catch (IOException | SQLException e) {
-            try {
-                conn.rollback();
-            } catch (SQLException e1) {
-                throw new LanewebException(e1);
-            }
-            throw new LanewebException(e);
-        } finally {
-            releaseConnection(conn);
-        }
-    }
-
-    private Connection getConnection() {
-        try {
-            Connection conn = this.dataSource.getConnection();
+        try (Connection conn = this.dataSource.getConnection()) {
             conn.setAutoCommit(false);
-            return conn;
-        } catch (SQLException e) {
-            throw new LanewebException(e);
-        }
-    }
-
-    private void releaseConnection(final Connection conn) {
-        try {
-            conn.setAutoCommit(true);
-            conn.close();
+            saveLinksAndResetAutocommit(userid, links, conn);
         } catch (SQLException e) {
             throw new LanewebException(e);
         }

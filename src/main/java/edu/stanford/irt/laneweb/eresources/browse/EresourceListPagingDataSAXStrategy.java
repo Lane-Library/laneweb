@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
+import java.util.Locale;
+
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -17,7 +19,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             if (alpha == null || "all".equals(alpha)) {
                 alpha = "";
             } else {
-                alpha = alpha.toUpperCase();
+                alpha = alpha.toUpperCase(Locale.US);
             }
             if (pagingData.getSize() > pagingData.getLength()) {
                 startDivWithClass(xmlConsumer, "yui3-g");
@@ -77,7 +79,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         if (alpha.isEmpty()) {
             sb.append("A-Z");
         } else {
-            String upperAlpha = alpha.toUpperCase();
+            String upperAlpha = alpha.toUpperCase(Locale.US);
             sb.append(upperAlpha).append("a-").append(upperAlpha).append('z');
         }
         XMLUtils.data(xmlConsumer, sb.toString());

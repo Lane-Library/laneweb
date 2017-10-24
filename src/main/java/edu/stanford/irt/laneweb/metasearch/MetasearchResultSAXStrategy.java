@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -39,7 +40,7 @@ public class MetasearchResultSAXStrategy extends AbstractResultSAXStrategy<Resul
         Query query = result.getQuery();
         SearchStatus status = result.getStatus();
         if (status != null) {
-            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase());
+            atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase(Locale.US));
         }
         try {
             xmlConsumer.startDocument();

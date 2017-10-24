@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -63,7 +64,7 @@ public final class QueryTermPattern {
         if (query == null) {
             return NULL_QUERY_PATTERN;
         }
-        String normalQuery = query.trim().toLowerCase();
+        String normalQuery = query.trim().toLowerCase(Locale.US);
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
         normalQuery = PARENS_PATTERN.matcher(normalQuery).replaceAll(EMPTY);
         normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);

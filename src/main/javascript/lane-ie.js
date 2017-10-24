@@ -2,7 +2,6 @@
 
     "use strict";
 
-    var node;
     if (Y.UA.ie) {
 
         //toggle bookmarklet instructions for IE on favorites page

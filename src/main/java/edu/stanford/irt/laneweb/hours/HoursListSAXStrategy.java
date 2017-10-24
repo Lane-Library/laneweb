@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.hours;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -48,8 +49,8 @@ public class HoursListSAXStrategy implements SAXStrategy<List<List<Hours>>> {
             if (hours.isClosed()) {
                 sb.append("Closed");
             } else {
-            sb.append(hours.getOpen().toLocalTime().format(HOURS_FORMATTER).toLowerCase()).append(" - ")
-                    .append(hours.getClose().toLocalTime().format(HOURS_FORMATTER).toLowerCase());
+            sb.append(hours.getOpen().toLocalTime().format(HOURS_FORMATTER).toLowerCase(Locale.US)).append(" - ")
+                    .append(hours.getClose().toLocalTime().format(HOURS_FORMATTER).toLowerCase(Locale.US));
             }
             XMLUtils.data(xmlConsumer, sb.toString());
             XMLUtils.endElement(xmlConsumer, NS, "description");

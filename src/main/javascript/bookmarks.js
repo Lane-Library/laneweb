@@ -340,11 +340,11 @@
             },
 
             /**
-             * handler for sync failures, shows an alert message.
+             * handler for sync failures, shows a message.
              * @param message {String}
              */
             _handleSyncFailure : function(message) {
-                alert("Sorry, " + message + " bookmark failed. Please try again later.");
+                Lane.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
             }
     };
 

@@ -24,7 +24,7 @@ public class UrlTester {
     private MetaSearchService metaSearchService;
 
     @Autowired
-    public void setMetaSearchManagerSource(final MetaSearchService metaSearchService) {
+    public UrlTester(final MetaSearchService metaSearchService) {
         this.metaSearchService = metaSearchService;
     }
 
