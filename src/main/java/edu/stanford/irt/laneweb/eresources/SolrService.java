@@ -35,6 +35,8 @@ public class SolrService {
 
     private static final String AND = " AND ";
 
+    private static final int CURRENT_YEAR = ZonedDateTime.now(AMERICA_LA).getYear();
+
     private static final String DATE_QUERY_PREFIX = "date:[";
 
     private static final String DATE_QUERY_SUFFIX = " TO *]";
@@ -48,13 +50,11 @@ public class SolrService {
 
     private static final int PAGE_SIZE = 10;
 
-    private static final int THIS_YEAR = ZonedDateTime.now(AMERICA_LA).getYear();
+    private static final int PAST_FIVE_YEARS = CURRENT_YEAR - 5;
 
-    private static final int PAST_FIVE_YEARS = THIS_YEAR - 5;
+    private static final int PAST_TEN_YEARS = CURRENT_YEAR - 10;
 
-    private static final int PAST_TEN_YEARS = THIS_YEAR - 10;
-
-    private static final int PAST_YEAR = THIS_YEAR - 1;
+    private static final int PAST_YEAR = CURRENT_YEAR - 1;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMdd");
 
