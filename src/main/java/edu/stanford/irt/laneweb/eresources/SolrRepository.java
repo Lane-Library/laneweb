@@ -26,21 +26,6 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
         }
     }
 
-    @Query(value = "*:*", filters = { "isRecent:1 OR isLaneConnex:1", "mesh:\"?0\"",
-            "type:\"?1\"" }, requestHandler = Handlers.BROWSE)
-    List<Eresource> browseAllByMeshAndType(String mesh, String type, Pageable page);
-
-    @Query(value = "*:*", filters = { "isRecent:1 OR isLaneConnex:1", "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
-    List<Eresource> browseAllByType(String type, Pageable page);
-
-    @Query(value = "*:*", filters = { "isRecent:1 OR isLaneConnex:1", "isCore:1",
-            "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
-    List<Eresource> browseAllCoreByType(String type, Pageable page);
-
-    @Query(value = "ertlsw?1", filters = { "isRecent:1 OR isLaneConnex:1",
-            "type:\"?0\"" }, requestHandler = Handlers.BROWSE)
-    List<Eresource> browseByTypeTitleStartingWith(String type, String titleStart, Pageable page);
-
     @Query(value = "*:*", requestHandler = Handlers.FACET)
     @Facet(fields = { "recordType" }, minCount = 0, limit = 100)
     SolrResultPage<Eresource> facetByRecordType(Pageable page);

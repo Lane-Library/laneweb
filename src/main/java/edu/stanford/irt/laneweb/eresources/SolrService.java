@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.FacetOptions;
 import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
@@ -23,6 +25,7 @@ import org.springframework.data.solr.core.query.SimpleFacetQuery;
 import org.springframework.data.solr.core.query.SimpleFilterQuery;
 import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.data.solr.core.query.SimpleStringCriteria;
+import org.springframework.data.solr.core.query.result.Cursor;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
@@ -31,9 +34,16 @@ public class SolrService {
 
     public static final String FACETS_SEPARATOR = "::";
 
+    private static final String ALL_QUERY = "*:*";
+
     private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private static final String AND = " AND ";
+
+    private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
+            new SimpleStringCriteria("isRecent:1 OR isLaneConnex:1"));
+
+    private static final SimpleFilterQuery CORE_FQ = new SimpleFilterQuery(new SimpleStringCriteria("isCore:1"));
 
     private static final int CURRENT_YEAR = ZonedDateTime.now(AMERICA_LA).getYear();
 
@@ -56,6 +66,8 @@ public class SolrService {
 
     private static final int PAST_YEAR = CURRENT_YEAR - 1;
 
+    private static final String TYPE = "type:";
+
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMdd");
 
     private SolrQueryParser parser;
@@ -68,6 +80,14 @@ public class SolrService {
         this.parser = parser;
         this.repository = repository;
         this.solrTemplate = solrTemplate;
+    }
+
+    private static final SimpleQuery baseBrowseQuery(final String query) {
+        SimpleQuery q = new SimpleQuery(query);
+        q.setRequestHandler(SolrRepository.Handlers.BROWSE);
+        q.addSort(new Sort("title_sort", "id"));
+        q.addFilterQuery(BASE_FQ);
+        return q;
     }
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
@@ -116,7 +136,7 @@ public class SolrService {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        return this.repository.browseAllCoreByType(type, new PageRequest(0, Integer.MAX_VALUE));
+        return browseAllCoreByType(type);
     }
 
     public List<Eresource> getMesh(final String type, final String mesh) {
@@ -126,14 +146,14 @@ public class SolrService {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        return this.repository.browseAllByMeshAndType(mesh, type, new PageRequest(0, Integer.MAX_VALUE));
+        return browseAllByMeshAndType(mesh, type);
     }
 
     public List<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        return this.repository.browseAllByType(type, new PageRequest(0, Integer.MAX_VALUE));
+        return browseAllByType(type);
     }
 
     public List<Eresource> getType(final String type, final char alpha) {
@@ -145,8 +165,7 @@ public class SolrService {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        return this.repository.browseByTypeTitleStartingWith(type, Character.toString(sAlpha),
-                new PageRequest(0, Integer.MAX_VALUE));
+        return browseByTypeTitleStartingWith(type, Character.toString(sAlpha));
     }
 
     public Map<String, Long> recordCount() {
@@ -194,6 +213,44 @@ public class SolrService {
     public List<Eresource> suggestFindByType(final String query, final String type) {
         String cleanQuery = this.parser.parse(query);
         return this.repository.suggestFindByType(cleanQuery, type, new PageRequest(0, PAGE_SIZE));
+    }
+
+    private List<Eresource> browseAllByMeshAndType(final String mesh, final String type) {
+        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria("mesh:" + mesh)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
+    }
+
+    private List<Eresource> browseAllByType(final String type) {
+        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
+    }
+
+    private List<Eresource> browseAllCoreByType(final String type) {
+        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(CORE_FQ);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
+    }
+
+    private List<Eresource> browseByTypeTitleStartingWith(final String type, final String titleStart) {
+        SimpleQuery q = baseBrowseQuery("ertlsw" + titleStart);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
+    }
+
+    private List<Eresource> cursorToList(final Cursor<Eresource> cursor) {
+        List<Eresource> ers = new ArrayList<>();
+        while (cursor.hasNext()) {
+            ers.add(cursor.next());
+        }
+        return ers;
     }
 
     private String facetStringToFilters(final String facets) {
