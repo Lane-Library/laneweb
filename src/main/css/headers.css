@@ -7,6 +7,10 @@ h2 {
     color: #666666;
     text-align: center;
 }
+/*bigger margin-top for h2 on homepage*/
+.homepage {
+	    margin-top: 42px;
+	 }
 h3, h4 {
     color: #333;
     font-size: 22px;
