@@ -137,7 +137,11 @@ public class SolrService {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        return browseAllCoreByType(type);
+        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(CORE_FQ);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
     }
 
     public List<Eresource> getMesh(final String type, final String mesh) {
@@ -147,14 +151,21 @@ public class SolrService {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        return browseAllByMeshAndType(mesh, type);
+        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria("mesh:" + mesh)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
     }
 
     public List<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        return browseAllByType(type);
+        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
     }
 
     public List<Eresource> getType(final String type, final char alpha) {
@@ -166,7 +177,10 @@ public class SolrService {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        return browseByTypeTitleStartingWith(type, Character.toString(sAlpha));
+        SimpleQuery q = baseBrowseQuery("ertlsw" + sAlpha);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        return cursorToList(cursor);
     }
 
     public Map<String, Long> recordCount() {
@@ -214,36 +228,6 @@ public class SolrService {
     public List<Eresource> suggestFindByType(final String query, final String type) {
         String cleanQuery = this.parser.parse(query);
         return this.repository.suggestFindByType(cleanQuery, type, new PageRequest(0, PAGE_SIZE));
-    }
-
-    private List<Eresource> browseAllByMeshAndType(final String mesh, final String type) {
-        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria("mesh:" + mesh)));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    private List<Eresource> browseAllByType(final String type) {
-        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    private List<Eresource> browseAllCoreByType(final String type) {
-        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(CORE_FQ);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    private List<Eresource> browseByTypeTitleStartingWith(final String type, final String titleStart) {
-        SimpleQuery q = baseBrowseQuery("ertlsw" + titleStart);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
-        return cursorToList(cursor);
     }
 
     private List<Eresource> cursorToList(final Cursor<Eresource> cursor) {
