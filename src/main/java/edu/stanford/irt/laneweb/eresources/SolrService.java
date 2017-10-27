@@ -66,7 +66,7 @@ public class SolrService {
 
     private static final int PAST_YEAR = CURRENT_YEAR - 1;
 
-    private static final String TYPE = "type:";
+    private static final String TYPE = "type";
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMdd");
 
@@ -80,15 +80,6 @@ public class SolrService {
         this.parser = parser;
         this.repository = repository;
         this.solrTemplate = solrTemplate;
-    }
-
-    private static final SimpleQuery baseBrowseQuery(final String query) {
-        SimpleQuery q = new SimpleQuery(query);
-        q.setRequestHandler(SolrRepository.Handlers.BROWSE);
-        q.addSort(new Sort("title_sort", "id"));
-        q.addFilterQuery(BASE_FQ);
-        q.setTimeAllowed(Integer.MIN_VALUE);
-        return q;
     }
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
@@ -137,9 +128,9 @@ public class SolrService {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
+        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(CORE_FQ);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        q.addFilterQuery(buildFilterQuery(TYPE, type));
         Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
         return cursorToList(cursor);
     }
@@ -151,9 +142,9 @@ public class SolrService {
         if (null == mesh) {
             throw new IllegalArgumentException("null mesh");
         }
-        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria("mesh:" + mesh)));
+        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(buildFilterQuery(TYPE, type));
+        q.addFilterQuery(buildFilterQuery("mesh", mesh));
         Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
         return cursorToList(cursor);
     }
@@ -162,8 +153,8 @@ public class SolrService {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
         }
-        SimpleQuery q = baseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(buildFilterQuery(TYPE, type));
         Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
         return cursorToList(cursor);
     }
@@ -177,8 +168,8 @@ public class SolrService {
         if ('#' == sAlpha) {
             sAlpha = '1';
         }
-        SimpleQuery q = baseBrowseQuery("ertlsw" + sAlpha);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(TYPE + type)));
+        SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
+        q.addFilterQuery(buildFilterQuery(TYPE, type));
         Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
         return cursorToList(cursor);
     }
@@ -228,6 +219,21 @@ public class SolrService {
     public List<Eresource> suggestFindByType(final String query, final String type) {
         String cleanQuery = this.parser.parse(query);
         return this.repository.suggestFindByType(cleanQuery, type, new PageRequest(0, PAGE_SIZE));
+    }
+
+    private SimpleQuery buildBaseBrowseQuery(final String query) {
+        SimpleQuery q = new SimpleQuery(query);
+        q.setRequestHandler(SolrRepository.Handlers.BROWSE);
+        q.addSort(new Sort("title_sort", "id"));
+        q.addFilterQuery(BASE_FQ);
+        q.setTimeAllowed(Integer.MIN_VALUE);
+        return q;
+    }
+
+    private SimpleFilterQuery buildFilterQuery(final String field, final String value) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(field).append(":\"").append(value).append('"');
+        return new SimpleFilterQuery(new SimpleStringCriteria(sb.toString()));
     }
 
     private List<Eresource> cursorToList(final Cursor<Eresource> cursor) {
