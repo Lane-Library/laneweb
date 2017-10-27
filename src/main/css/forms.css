@@ -4,12 +4,12 @@
     cursor: move;
 }
 
-#feedback form, #subscribe form {
+#feedback form, #subscribe form, .contentForm {
     padding: 20px;
     text-align: left;
 }
 
-#feedback label, #subscribe label {
+#feedback label, #subscribe label, .contentForm label {
     display: block;
     margin-top: .5em;
 }
@@ -132,31 +132,6 @@
     color: #585347;
 }
 
-.contentForm legend {
-    border: 1px solid #c1c1c1;
-    color: #444444;
-    font-size: 95%;
-    font-weight: bold;
-    padding: 0.3em 1em;
-    text-align: left;
-}
-
-.contentForm fieldset {
-    margin-bottom: 1.2em;
-    padding: 1em;
-    border: 1px solid #c1c1c1;
-}
-
-.fieldLabel {
-    background-color: #f2f3ed;
-    border: 1px dotted #c1c1c1;
-    float: left;
-    margin-right: 10px;
-    padding: 5px;
-    text-align: right;
-    width: 32%;
-    box-sizing: border-box;
-}
 
 .requiredField,
 .validatedField {
@@ -172,9 +147,6 @@
     color: green;
 }
 
-.fieldRow {
-    clear: both;
-}
 
 .breadcrumbForm {
     margin-top: 12px;
