@@ -100,4 +100,25 @@
 		</div>
 	</xsl:template>
 
+	<xsl:template match="lc:venue">
+			<xsl:choose>
+               <xsl:when test="./lc:venue_website != ''">
+                   <div class="location">
+							<a>
+								<xsl:attribute name="href" select="./lc:venue_website" />
+								<xsl:value-of select="./lc:venue_name" ></xsl:value-of>
+								<xsl:text>&#160;&#160;&#160;</xsl:text>
+								<i class="fa fa-map-marker fa-2x"></i>
+							</a>
+						</div>
+               </xsl:when>
+               <xsl:otherwise>
+                   <xsl:value-of select="./lc:venue_name"/>
+                   <xsl:text>&#160;&#160;&#160;</xsl:text>
+					<i class="fa fa-map-marker fa-2x"></i>
+             </xsl:otherwise>
+           </xsl:choose>           
+	</xsl:template>
+ 
+
 </xsl:stylesheet>
