@@ -87,6 +87,7 @@ public class SolrService {
         q.setRequestHandler(SolrRepository.Handlers.BROWSE);
         q.addSort(new Sort("title_sort", "id"));
         q.addFilterQuery(BASE_FQ);
+        q.setTimeAllowed(Integer.MIN_VALUE);
         return q;
     }
 
