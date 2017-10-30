@@ -7,10 +7,12 @@ h2 {
     color: #666666;
     text-align: center;
 }
+
 /*bigger margin-top for h2 on homepage*/
 .homepage {
-	    margin-top: 42px;
-	 }
+    margin-top: 42px;
+}
+
 h3, h4 {
     color: #333;
     font-size: 22px;
@@ -18,6 +20,7 @@ h3, h4 {
     margin-bottom: .2em;
     padding-bottom: 12px;
 }
+
 h4:after {
     content: ' ';
     border-top: 1px solid #d8dbdc;
@@ -27,6 +30,7 @@ h4:after {
     margin-top: 10px;
     box-sizing: content-box;
 }
+
 h5 {
     color: #8c1515;
     font-size: 18px;
