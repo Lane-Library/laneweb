@@ -23,12 +23,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
+import org.springframework.data.solr.core.query.Query;
+import org.springframework.data.solr.core.query.result.Cursor;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class SolrServiceTest {
+
+    private Cursor cursor;
 
     private SolrRepository repository;
 
@@ -42,6 +46,7 @@ public class SolrServiceTest {
         this.template = createMock(SolrTemplate.class);
         this.solrService = new SolrService(new SolrQueryParser(Collections.emptyList()), this.repository,
                 this.template);
+        this.cursor = createMock(Cursor.class);
     }
 
     @Test
@@ -74,11 +79,11 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetCore() {
-        expect(this.repository.browseAllCoreByType(eq("type"), isA(PageRequest.class)))
-                .andReturn(Collections.emptyList());
-        replay(this.repository);
+        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
         this.solrService.getCore("type");
-        verify(this.repository);
+        verify(this.template, this.cursor);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -88,11 +93,11 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetMesh() {
-        expect(this.repository.browseAllByMeshAndType(eq("mesh"), eq("type"), isA(PageRequest.class)))
-                .andReturn(Collections.emptyList());
-        replay(this.repository);
+        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
         this.solrService.getMesh("type", "mesh");
-        verify(this.repository);
+        verify(this.template, this.cursor);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -107,19 +112,20 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeString() {
-        expect(this.repository.browseAllByType(eq("type"), isA(PageRequest.class))).andReturn(Collections.emptyList());
-        replay(this.repository);
+        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
         this.solrService.getType("type");
-        verify(this.repository);
+        verify(this.template, this.cursor);
     }
 
     @Test
     public final void testGetTypeStringChar() {
-        expect(this.repository.browseByTypeTitleStartingWith(eq("type"), eq("a"), isA(PageRequest.class)))
-                .andReturn(Collections.emptyList());
-        replay(this.repository);
+        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
         this.solrService.getType("type", 'a');
-        verify(this.repository);
+        verify(this.template, this.cursor);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -129,12 +135,11 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeStringCharHash() {
-        PageRequest pageRequest = new PageRequest(0, Integer.MAX_VALUE);
-        expect(this.repository.browseByTypeTitleStartingWith("Type", "1", pageRequest))
-                .andReturn(Collections.emptyList());
-        replay(this.repository);
-        this.solrService.getType("Type", '#');
-        verify(this.repository);
+        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.getType("type", '#');
+        verify(this.template, this.cursor);
     }
 
     @Test(expected = IllegalArgumentException.class)

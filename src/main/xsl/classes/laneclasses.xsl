@@ -68,14 +68,7 @@
 						<xsl:apply-templates select="./lc:event_dates" />
 					</div>
 					<div class="venue">
-						<div class="yui3-g location">
-							<div class="yui3-u-5-6">
-								<xsl:apply-templates select="lc:venue"/>
-							</div>
-							<div class="yui3-u-1-6">
-								<i class="fa fa-map-marker fa-2x"></i>
-							</div>
-						</div>
+						<xsl:apply-templates select="lc:venue"/>
 					</div>
 				</div>
 				<div class="yui3-u-3-4">
@@ -95,23 +88,27 @@
 	</xsl:template>
 
  	
+ 	
 	<xsl:template match="lc:venue">
-			<div class="venue-link">
-	        <xsl:choose>
-               <xsl:when test="./lc:venue_website != ''">
-                   <a>
-                       <xsl:attribute name="href">
-                           <xsl:value-of select="./lc:venue_website/text()"/>
-                       </xsl:attribute><xsl:value-of select="./lc:venue_name"/>
-                   </a>
-               </xsl:when>
-               <xsl:otherwise>
-                   <xsl:value-of select="./lc:venue_name"/>
-             </xsl:otherwise>
-           </xsl:choose>
-           </div> 
-	</xsl:template>
- 
+	<xsl:choose>
+		<xsl:when test="./lc:venue_website != ''">
+			<div class="location">
+				<a>
+					<xsl:attribute name="href" select="./lc:venue_website" />
+					<xsl:value-of select="./lc:venue_name"></xsl:value-of>
+					<xsl:text>&#160;&#160;&#160;</xsl:text>
+					<i class="fa fa-map-marker fa-2x"></i>
+				</a>
+			</div>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="./lc:venue_name" />
+			<xsl:text>&#160;&#160;&#160;</xsl:text>
+			<i class="fa fa-map-marker fa-2x"></i>
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:template>
+	
   
 	<xsl:template match="lc:event_description">
 		<xsl:choose>
