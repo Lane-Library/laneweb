@@ -117,6 +117,22 @@ hr {
     text-transform: uppercase;
 }
 
+.feature-flex {
+    margin: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+    line-height: 1.6em;
+    background-image: none;
+    text-transform: uppercase;
+}
+
+.feature-flex h3 {
+    margin-top: 24px;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+}
 .course-reserves-instructor {
     float: right;
     margin-top: 13px;
@@ -143,4 +159,62 @@ hr {
 
 .quote-sig {
     text-align: right;
+}
+/*the official SoM color palette */
+.backgr-white {
+    background-color: #ffffff;
+}
+.backgr-grey-ddd {
+    background-color: #dddddd;
+}
+.backgr-grey-ccc {
+    background-color: #cccccc;
+}
+.backgr-grey-999 {
+    background-color: #999999;
+}
+.backgr-grey-666 {
+    background-color: #666666;
+}
+.backgr-grey-333 {
+    background-color: #333;
+}
+.backgr-black {
+    background-color: #000000;
+}
+.backgr-blue-f0f {
+    background-color: #f0f4f5;
+}
+.backgr-blue-aab {
+    background-color: #aabec6;
+}
+.backgr-blue-009 {
+    background-color: #009abb;
+}
+.backgr-blue-007 {
+    background-color: #007c92;
+}
+.backgr-blue-094 {
+    background-color: #09425a;
+}
+.backgr-green-c7d {
+    background-color: #c7d1c6;
+}
+.backgr-green-809 {
+    background-color: #80982a;
+}
+.backgr-green-556 {
+    background-color: #556222;
+}
+.backgr-orange-b96 {
+    background-color: #b96d12;
+}
+.backgr-purple-532 {
+    background-color: #53284f;
+}
+.backgr-brown-5e3 {
+    background-color: #5e3032;
+}
+.backgr-red {
+    background-color: #8c1515;
 }
