@@ -22,7 +22,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
@@ -33,7 +33,7 @@ import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
 @EnableWebMvc
-public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
+public class LanewebMvcConfigurer implements WebMvcConfigurer {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
@@ -44,7 +44,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     private SolrImageService solrImageService;
 
     @Autowired
-    public WebMvcConfigurer(final ObjectMapper objectMapper, final RedirectProcessor redirectProcessor,
+    public LanewebMvcConfigurer(final ObjectMapper objectMapper, final RedirectProcessor redirectProcessor,
             final SolrImageService solrImageService) {
         this.objectMapper = objectMapper;
         this.redirectProcessor = redirectProcessor;
