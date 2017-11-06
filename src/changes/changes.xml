@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-11-06" version="3.3.52" description="3.3.52 bug fix release">
+            <action date="2017-11-02" dev="olgary" issue="136829" type="update">
+                misc.css and font-awesome.css - added SoM palette
+            </action>
+        </release>
         <release date="2017-10-30" version="3.3.51" description="3.3.51 bug fix release">
             <action date="2017-10-27" dev="olgary" issue="136722" type="update">
                 forms.css - merged contactForm with feedback form
