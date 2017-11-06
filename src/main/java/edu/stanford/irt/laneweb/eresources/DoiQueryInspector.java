@@ -11,7 +11,7 @@ public final class DoiQueryInspector implements QueryInspector {
 
     private static final Pattern DOI_PATTERN = Pattern.compile("\\b10\\.\\d+\\b");
 
-    private static final Pattern PREFIX_PATTERN = Pattern.compile("(?:http:\\/\\/)?(?:dx\\.)?doi\\.org/(10\\.\\w+)\\b",
+    private static final Pattern PREFIX_PATTERN = Pattern.compile("(?:https?:\\/\\/)?(?:dx\\.)?doi\\.org/(10\\.\\w+)\\b",
             Pattern.CASE_INSENSITIVE);
 
     @Override
