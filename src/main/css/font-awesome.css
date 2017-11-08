@@ -6,18 +6,68 @@
     padding-right: 2px;
 }
 
-.fa-6x {
-  font-size: 6em;
-}
-
 .fa-25x {
-  font-size: 2.5em;
+    font-size: 2.5em;
 }
 
-.red {
-    color: #8c1515;
+.fa-6x {
+    font-size: 6em;
 }
-
+/*the official SoM color palette */
+.white {
+    color: #ffffff;
+}
+.grey-ddd {
+    color: #dddddd;
+}
+.grey-ccc {
+    color: #cccccc;
+}
+.grey-999 {
+    color: #999999;
+}
+.grey-666 {
+    color: #666666;
+}
+.grey-333 {
+    color: #333;
+}
 .black {
     color: #000000;
+}
+.blue-f0f {
+    color: #f0f4f5;
+}
+.blue-aab {
+    color: #aabec6;
+}
+.blue-009 {
+    color: #009abb;
+}
+.blue-007 {
+    color: #007c92;
+}
+.blue-094 {
+    color: #09425a;
+}
+.green-c7d {
+    color: #c7d1c6;
+}
+.green-809 {
+    color: #80982a;
+}
+.green-556 {
+    color: #556222;
+}
+.orange-b96 {
+    color: #b96d12;
+}
+.purple-532 {
+    color: #53284f;
+}
+.brown-5e3 {
+    color: #5e3032;
+}
+.red {
+    color: #8c1515;
 }

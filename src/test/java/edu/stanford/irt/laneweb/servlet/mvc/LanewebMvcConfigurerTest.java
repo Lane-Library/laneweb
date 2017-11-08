@@ -18,13 +18,13 @@ import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
-public class WebMvcConfigurerTest {
+public class LanewebMvcConfigurerTest {
 
-    private WebMvcConfigurer configuration;
+    private LanewebMvcConfigurer configuration;
 
     @Before
     public void setUp() {
-        this.configuration = new WebMvcConfigurer(null, null, null);
+        this.configuration = new LanewebMvcConfigurer(null, null, null);
     }
 
     @Test

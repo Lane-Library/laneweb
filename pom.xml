@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>28</version>
+        <version>29</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.3.52-SNAPSHOT</version>
+    <version>3.3.53-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -77,7 +77,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.69.0</version>
+            <version>1.70.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -99,7 +99,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-5</version>
+            <version>9.8.0-6</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -195,7 +195,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.0.22</version>
+            <version>1.0.23</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
