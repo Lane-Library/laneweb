@@ -199,13 +199,12 @@ public class LanewebIT {
                                     ns).exists());
             // EndNote
             this.mockMvc.perform(get("/eresources/search.html?q=EndNote").servletPath("/eresources/search.html"))
-                    .andExpect(
-                            xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@href,'help/references.html')]",
-                                    ns).exists());
+                    .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", ns)
+                            .exists());
             // reference manager
             this.mockMvc
                     .perform(get("/eresources/search.html?q=reference manager").servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@href,'help/references.html')]", ns)
+                    .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", ns)
                             .exists());
             // Bates Guide
             this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
