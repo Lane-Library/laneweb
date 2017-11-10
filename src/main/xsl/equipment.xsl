@@ -46,7 +46,7 @@
     <xsl:param name="title"/>
     <div class="equipment-icon"><i aria-hidden="true">
       <xsl:attribute name="class">
-        <xsl:text>fa fa-6x fa-</xsl:text>
+        <xsl:text>fa fa-4x fa-</xsl:text>
         <xsl:choose>
           <xsl:when test="contains($title, 'iPad')">tablet</xsl:when>
           <xsl:when test="contains($title, 'Apple')">apple</xsl:when>
