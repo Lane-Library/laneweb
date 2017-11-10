@@ -11,7 +11,6 @@
 .calendars li {
     width: 14.285714%;
     display: table-cell;
-    border-bottom: none;
     padding: 6.5px;
     border-right: 2px solid #ecf1f2;
     border-bottom: 10px solid #ecf1f2;
@@ -19,7 +18,7 @@
 
 .calendars li:last-child {
     border-right: none;
-    border-bottom: 10px solid #ecf1f2
+    border-bottom: 10px solid #ecf1f2;
 }
 
 .calendars p {
