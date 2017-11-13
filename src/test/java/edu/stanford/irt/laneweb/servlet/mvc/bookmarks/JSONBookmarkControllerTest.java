@@ -32,9 +32,9 @@ public class JSONBookmarkControllerTest {
 
     private Bookmark bookmark;
 
-    private BookmarkService bookmarkService;
-
     private List<Bookmark> bookmarks;
+
+    private BookmarkService bookmarkService;
 
     private JSONBookmarkController controller;
 
@@ -67,7 +67,8 @@ public class JSONBookmarkControllerTest {
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
         this.bookmarks.add(this.bookmark);
-        this.bookmarkService.saveLinks(eq(this.userid), eq(Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark })));
+        this.bookmarkService.saveLinks(eq(this.userid),
+                eq(Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark })));
         this.session.setAttribute(eq(Model.BOOKMARKS),
                 eq(Arrays.asList(new Object[] { this.bookmark, this.bookmark })));
         replay(this.bookmarkService, this.session);
@@ -135,9 +136,9 @@ public class JSONBookmarkControllerTest {
         this.session.setAttribute(eq(Model.BOOKMARKS), isA(List.class));
         replay(this.bookmarkService, this.session);
         this.controller.moveBookmark(this.bookmarks, this.userid, json, this.session);
-        assertEquals("bookmark8", ((Bookmark) this.bookmarks.get(1)).getLabel());
-        assertEquals("bookmark1", ((Bookmark) this.bookmarks.get(2)).getLabel());
-        assertEquals("bookmark7", ((Bookmark) this.bookmarks.get(8)).getLabel());
+        assertEquals("bookmark8", this.bookmarks.get(1).getLabel());
+        assertEquals("bookmark1", this.bookmarks.get(2).getLabel());
+        assertEquals("bookmark7", this.bookmarks.get(8).getLabel());
         assertEquals(this.bookmarks, capture.getValue());
         verify(this.bookmarkService, this.session);
     }
@@ -164,9 +165,9 @@ public class JSONBookmarkControllerTest {
         this.session.setAttribute(eq(Model.BOOKMARKS), isA(List.class));
         replay(this.bookmarkService, this.session);
         this.controller.moveBookmark(this.bookmarks, this.userid, json, this.session);
-        assertEquals("bookmark1", ((Bookmark) this.bookmarks.get(8)).getLabel());
-        assertEquals("bookmark2", ((Bookmark) this.bookmarks.get(1)).getLabel());
-        assertEquals("bookmark8", ((Bookmark) this.bookmarks.get(7)).getLabel());
+        assertEquals("bookmark1", this.bookmarks.get(8).getLabel());
+        assertEquals("bookmark2", this.bookmarks.get(1).getLabel());
+        assertEquals("bookmark8", this.bookmarks.get(7).getLabel());
         assertEquals(this.bookmarks, capture.getValue());
         verify(this.bookmarkService, this.session);
     }
@@ -178,7 +179,8 @@ public class JSONBookmarkControllerTest {
         json.put("label", "newlabel");
         json.put("url", "newurl");
         this.bookmarks.add(this.bookmark);
-        this.bookmarkService.saveLinks(eq(this.userid), eq(Collections.singletonList(new Bookmark("newlabel", "newurl"))));
+        this.bookmarkService.saveLinks(eq(this.userid),
+                eq(Collections.singletonList(new Bookmark("newlabel", "newurl"))));
         this.session.setAttribute(eq(Model.BOOKMARKS),
                 eq(Collections.singletonList(new Bookmark("newlabel", "newurl"))));
         replay(this.bookmarkService, this.session);

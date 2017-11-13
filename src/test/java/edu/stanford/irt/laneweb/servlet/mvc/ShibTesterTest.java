@@ -39,8 +39,8 @@ public class ShibTesterTest {
 
     @Test
     public void testTestUrl() throws IOException {
-        List<String> lines = Files.readAllLines(
-                FileSystems.getDefault().getPath(getClass().getResource("shib-tester.txt").getPath()));
+        List<String> lines = Files
+                .readAllLines(FileSystems.getDefault().getPath(getClass().getResource("shib-tester.txt").getPath()));
         StringBuilder sb = new StringBuilder();
         lines.stream().forEach(s -> sb.append(s).append('\n'));
         StringWriter sw = new StringWriter();

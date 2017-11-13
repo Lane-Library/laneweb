@@ -14,8 +14,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.status.Status;
-import edu.stanford.irt.laneweb.status.StatusItem;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
 
 public class EresourceStatusProviderTest {
 
@@ -30,36 +30,10 @@ public class EresourceStatusProviderTest {
     }
 
     @Test
-    public void testGetStatus() {
-        Map<String, Long> recordCount = new HashMap<>();
-        recordCount.put("bib", Long.valueOf(200));
-        recordCount.put("pubmed", Long.valueOf(2000));
-        expect(this.solrService.recordCount()).andReturn(recordCount);
-        replay(this.solrService);
-        StatusItem item = this.statusProvider.getStatus();
-        assertEquals("solr record counts successful", item.getMessage());
-        assertSame(Status.OK, item.getStatus());
-        verify(this.solrService);
-    }
-
-    @Test
-    public void testGetStatusError() {
-        Map<String, Long> recordCount = new HashMap<>();
-        recordCount.put("bib", Long.valueOf(0));
-        recordCount.put("pubmed", Long.valueOf(2000));
-        expect(this.solrService.recordCount()).andReturn(recordCount);
-        replay(this.solrService);
-        StatusItem item = this.statusProvider.getStatus();
-        assertEquals("solr record counts failed", item.getMessage());
-        assertSame(Status.ERROR, item.getStatus());
-        verify(this.solrService);
-    }
-
-    @Test
     public void testGetStatusesException() {
         expect(this.solrService.recordCount()).andThrow(new RuntimeException("oopsie"));
         replay(this.solrService);
-        StatusItem item = this.statusProvider.getStatuses().get(0);
+        StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertEquals("solr record counts failed: java.lang.RuntimeException: oopsie", item.getMessage());
         assertSame(Status.ERROR, item.getStatus());
         verify(this.solrService);
@@ -71,7 +45,7 @@ public class EresourceStatusProviderTest {
         recordCount.put("bib", Long.valueOf(200));
         expect(this.solrService.recordCount()).andReturn(recordCount);
         replay(this.solrService);
-        List<StatusItem> items = this.statusProvider.getStatuses();
+        List<StatusItem> items = this.statusProvider.getStatusItems();
         StatusItem item1 = items.get(0);
         StatusItem item2 = items.get(1);
         assertEquals("bib record count: 200", item1.getMessage());
@@ -86,7 +60,7 @@ public class EresourceStatusProviderTest {
         Map<String, Long> recordCount = new HashMap<>();
         expect(this.solrService.recordCount()).andReturn(recordCount);
         replay(this.solrService);
-        List<StatusItem> items = this.statusProvider.getStatuses();
+        List<StatusItem> items = this.statusProvider.getStatusItems();
         StatusItem item1 = items.get(0);
         StatusItem item2 = items.get(1);
         assertEquals("bib record count: 0", item1.getMessage());

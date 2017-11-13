@@ -23,8 +23,8 @@ import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.sitemap.SitemapContext;
 import edu.stanford.irt.cocoon.source.SourceResolver;
-import edu.stanford.irt.laneweb.status.Status;
-import edu.stanford.irt.laneweb.status.StatusItem;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
 
 public class IndexDotHtmlStatusProviderTest {
 
@@ -55,7 +55,7 @@ public class IndexDotHtmlStatusProviderTest {
         expect(this.sitemap.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
         this.pipeline.process(isA(OutputStream.class));
         replay(this.componentFactory, this.sitemap, this.sourceResolver, this.pipeline);
-        StatusItem item = this.statusProvider.getStatus();
+        StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertEquals(Status.OK, item.getStatus());
         assertTrue(Pattern.compile("index.html took \\dms").matcher(item.getMessage()).matches());
     }
@@ -68,7 +68,7 @@ public class IndexDotHtmlStatusProviderTest {
         this.pipeline.process(isA(OutputStream.class));
         expectLastCall().andThrow(new RuntimeException("oopsie"));
         replay(this.componentFactory, this.sitemap, this.sourceResolver, this.pipeline);
-        StatusItem item = this.statusProvider.getStatus();
+        StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertEquals(Status.ERROR, item.getStatus());
         assertTrue(Pattern.compile("index.html status failed in \\dms: java.lang.RuntimeException: oopsie")
                 .matcher(item.getMessage()).matches());
@@ -83,7 +83,7 @@ public class IndexDotHtmlStatusProviderTest {
         replay(this.componentFactory, this.sitemap, this.sourceResolver, this.pipeline);
         IndexDotHtmlStatusProvider provider = new IndexDotHtmlStatusProvider(this.sitemap, this.componentFactory,
                 this.sourceResolver, -1, new URI("file:/"), new URI("file:/"));
-        StatusItem item = provider.getStatus();
+        StatusItem item = provider.getStatusItems().get(0);
         assertEquals(Status.WARN, item.getStatus());
         assertTrue(Pattern.compile("index.html took \\dms").matcher(item.getMessage()).matches());
     }

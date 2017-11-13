@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.status.Status;
-import edu.stanford.irt.laneweb.status.StatusItem;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestStatusProviderTest {
@@ -33,7 +33,7 @@ public class SuggestStatusProviderTest {
     public void testGetStatuExceptions() {
         expect(this.suggestionManager.getSuggestionsForTerm("term")).andThrow(new RuntimeException("oopsie"));
         replay(this.suggestionManager);
-        StatusItem item = this.statusProvider.getStatus();
+        StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertSame(Status.ERROR, item.getStatus());
         assertTrue(Pattern.compile("suggestion status failed in \\dms: java.lang.RuntimeException: oopsie")
                 .matcher(item.getMessage()).matches());
@@ -44,7 +44,7 @@ public class SuggestStatusProviderTest {
     public void testGetStatus() {
         expect(this.suggestionManager.getSuggestionsForTerm("term")).andReturn(Collections.emptySet());
         replay(this.suggestionManager);
-        StatusItem item = this.statusProvider.getStatus();
+        StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertSame(Status.OK, item.getStatus());
         assertTrue(Pattern.compile("suggestions took \\dms.").matcher(item.getMessage()).matches());
         verify(this.suggestionManager);
@@ -55,7 +55,7 @@ public class SuggestStatusProviderTest {
         expect(this.suggestionManager.getSuggestionsForTerm("term")).andReturn(Collections.emptySet());
         replay(this.suggestionManager);
         SuggestStatusProvider provider = new SuggestStatusProvider(this.suggestionManager, -1, "term");
-        StatusItem item = provider.getStatus();
+        StatusItem item = provider.getStatusItems().get(0);
         assertSame(Status.WARN, item.getStatus());
         assertTrue(Pattern.compile("suggestions took \\dms.").matcher(item.getMessage()).matches());
         verify(this.suggestionManager);

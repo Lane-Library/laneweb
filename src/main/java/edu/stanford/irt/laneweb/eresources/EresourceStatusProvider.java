@@ -7,9 +7,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.laneweb.status.Status;
-import edu.stanford.irt.laneweb.status.StatusItem;
-import edu.stanford.irt.laneweb.status.StatusProvider;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
+import edu.stanford.irt.status.StatusProvider;
 
 public class EresourceStatusProvider implements StatusProvider {
 
@@ -34,17 +34,7 @@ public class EresourceStatusProvider implements StatusProvider {
     }
 
     @Override
-    public StatusItem getStatus() {
-        boolean error = getStatuses().stream().anyMatch((final StatusItem item) -> item.getStatus() == Status.ERROR);
-        if (error) {
-            return new StatusItem(Status.ERROR, "solr record counts failed");
-        } else {
-            return new StatusItem(Status.OK, "solr record counts successful");
-        }
-    }
-
-    @Override
-    public List<StatusItem> getStatuses() {
+    public List<StatusItem> getStatusItems() {
         List<StatusItem> items = new ArrayList<>();
         try {
             Map<String, Long> results = this.solrService.recordCount();

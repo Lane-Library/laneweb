@@ -5,6 +5,8 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -16,9 +18,9 @@ import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.sitemap.SitemapContextImpl;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.status.Status;
-import edu.stanford.irt.laneweb.status.StatusItem;
-import edu.stanford.irt.laneweb.status.StatusProvider;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
+import edu.stanford.irt.status.StatusProvider;
 
 public class IndexDotHtmlStatusProvider implements StatusProvider {
 
@@ -59,7 +61,7 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
     }
 
     @Override
-    public StatusItem getStatus() {
+    public List<StatusItem> getStatusItems() {
         Status status;
         String message;
         long time;
@@ -84,6 +86,6 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
             message = String.format(FAIL_FORMAT, time, e);
             log.error(message, e);
         }
-        return new StatusItem(status, message);
+        return Collections.singletonList(new StatusItem(status, message));
     }
 }

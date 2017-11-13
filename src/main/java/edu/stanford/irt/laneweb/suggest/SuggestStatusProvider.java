@@ -2,13 +2,15 @@ package edu.stanford.irt.laneweb.suggest;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Collections;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.laneweb.status.Status;
-import edu.stanford.irt.laneweb.status.StatusItem;
-import edu.stanford.irt.laneweb.status.StatusProvider;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
+import edu.stanford.irt.status.StatusProvider;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestStatusProvider implements StatusProvider {
@@ -32,7 +34,7 @@ public class SuggestStatusProvider implements StatusProvider {
     }
 
     @Override
-    public StatusItem getStatus() {
+    public List<StatusItem> getStatusItems() {
         Status status;
         String message;
         long time;
@@ -48,6 +50,6 @@ public class SuggestStatusProvider implements StatusProvider {
             message = String.format(FAIL_FORMAT, time, e);
             log.error(message);
         }
-        return new StatusItem(status, message);
+        return Collections.singletonList(new StatusItem(status, message));
     }
 }

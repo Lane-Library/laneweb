@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.laneweb.status.ApplicationStatus;
-import edu.stanford.irt.laneweb.status.StatusService;
+import edu.stanford.irt.status.ApplicationStatus;
+import edu.stanford.irt.status.StatusService;
 
 @Controller
 public class StatusController {

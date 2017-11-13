@@ -20,9 +20,9 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.eresources.EresourceStatusProvider;
 import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.servlet.mvc.IndexDotHtmlStatusProvider;
-import edu.stanford.irt.laneweb.status.StatusProvider;
-import edu.stanford.irt.laneweb.status.StatusService;
 import edu.stanford.irt.laneweb.suggest.SuggestStatusProvider;
+import edu.stanford.irt.status.StatusProvider;
+import edu.stanford.irt.status.StatusService;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 @Configuration
@@ -66,15 +66,5 @@ public class StatusConfiguration {
     public SuggestStatusProvider suggestStatusProvider(
             @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager) {
         return new SuggestStatusProvider(suggestionManager, 250, "cardio");
-    }
-    
-    public static void main(String[] args) {
-
-        String name = ManagementFactory.getRuntimeMXBean().getName();
-       System.out.println(name);
-        Matcher matcher = Pattern.compile("(\\d+)@(.+)").matcher(name);
-        System.out.println(matcher.matches());
-        System.out.println(matcher.group(1));
-        System.out.println(matcher.group(2));
     }
 }

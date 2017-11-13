@@ -10,8 +10,8 @@ import static org.junit.Assert.assertSame;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.status.ApplicationStatus;
-import edu.stanford.irt.laneweb.status.StatusService;
+import edu.stanford.irt.status.ApplicationStatus;
+import edu.stanford.irt.status.StatusService;
 
 public class StatusControllerTest {
 
