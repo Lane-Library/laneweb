@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-11-13" version="3.3.53" description="3.3.53 bug fix release">
+            <action date="2017-11-10" dev="olgary" issue="137047" type="update">
+                equipment.css - change the icon size to 4x to match others
+            </action>
+            <action date="2017-11-10" dev="olgary" issue="137046" type="update">
+                templates - renamed, relinked to study-computing-spaces.html
+            </action>
+            <action date="2017-11-09" dev="olgary" issue="137034" type="update">
+                templates- footer links relinked to eligibility.html - Your eligibility and lane-login.html- Your Login
+            </action>
+            <action date="2017-11-09" dev="ceyates" issue="137018" type="update">
+                allow calendar to resize
+            </action>
+            <action date="2017-11-08" dev="olgary" issue="137006" type="update">
+                template, debug- changed footer link to directions-maps
+            </action>
+            <action date="2017-11-06" dev="ryanmax" issue="136940" type="update">
+                don't proxy links from stanfordhealthcare.org and www.stanfordchildrens.org
+            </action>
+        </release>
         <release date="2017-11-06" version="3.3.52" description="3.3.52 bug fix release">
             <action date="2017-11-02" dev="olgary" issue="136829" type="update">
                 misc.css and font-awesome.css - added SoM palette
