@@ -32,8 +32,10 @@ import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 public class SolrService {
 
-    public static final String FACETS_SEPARATOR = "::";
+    public static final String COLLECTION = "laneSearch";
 
+    public static final String FACETS_SEPARATOR = "::";
+    
     private static final String ALL_QUERY = "*:*";
 
     private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
@@ -97,7 +99,7 @@ public class SolrService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
     }
 
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
@@ -117,7 +119,7 @@ public class SolrService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
     }
 
     public Eresource getByBibID(final String bibID) {
@@ -131,7 +133,7 @@ public class SolrService {
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(CORE_FQ);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -145,7 +147,7 @@ public class SolrService {
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
         q.addFilterQuery(buildFilterQuery("mesh", mesh));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -155,7 +157,7 @@ public class SolrService {
         }
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -170,7 +172,7 @@ public class SolrService {
         }
         SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
