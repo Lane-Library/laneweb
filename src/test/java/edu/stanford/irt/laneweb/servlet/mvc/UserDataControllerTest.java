@@ -39,7 +39,7 @@ public class UserDataControllerTest {
         expect(this.model.asMap()).andReturn(Collections.singletonMap("key", "value")).times(2);
         this.dataBinder.bind(Collections.singletonMap("key", "value"), this.request);
         replay(this.dataBinder, this.model, this.request);
-        assertEquals( "value", this.controller.getUserData(this.request, this.model).get("key"));
+        assertEquals("value", this.controller.getUserData(this.request, this.model).get("key"));
         verify(this.dataBinder, this.model, this.request);
     }
 }

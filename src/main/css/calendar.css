@@ -1,21 +1,26 @@
-.calendar ul {
-    float: left;
-    margin-bottom: 12px;
-}
-
-.calendar li {
-    width: 138px;
-    height: 88px;
-    float: left;
-    margin-right: 2.6px;
-    padding: 6.5px;
-    box-sizing: border-box;
+.calendars {
+    display: table;
+    width: 100%;
+    color: white;
     background-color: #09425a;
-    color: #fff;
+}
+.calendars ul {
+    display: table-row;
 }
 
-.calendar li p {
-    line-height: normal;
-    font-weight: normal;
+.calendars li {
+    width: 14.285714%;
+    display: table-cell;
+    padding: 6.5px;
+    border-right: 2px solid #ecf1f2;
+    border-bottom: 10px solid #ecf1f2;
+}
+
+.calendars li:last-child {
+    border-right: none;
+    border-bottom: 10px solid #ecf1f2;
+}
+
+.calendars p {
     margin-top: .5em;
 }

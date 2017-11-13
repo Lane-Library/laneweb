@@ -33,9 +33,9 @@ public class HTMLBookmarkControllerTest {
 
     private RedirectAttributes redirectAttributes;
 
-    private UserDataBinder userDataBinder;
-
     private HttpSession session;
+
+    private UserDataBinder userDataBinder;
 
     @SuppressWarnings("unchecked")
     @Before
@@ -91,7 +91,8 @@ public class HTMLBookmarkControllerTest {
         expect(this.bookmarks.set(eq(0), isA(Bookmark.class))).andReturn(null);
         this.session.setAttribute(Model.BOOKMARKS, this.bookmarks);
         replay(this.redirectAttributes, this.bookmarks, this.session);
-        this.controller.saveBookmark(this.redirectAttributes, this.bookmarks, "userid", 0, "label", "url", this.session);
+        this.controller.saveBookmark(this.redirectAttributes, this.bookmarks, "userid", 0, "label", "url",
+                this.session);
         verify(this.redirectAttributes, this.bookmarks, this.session);
     }
 }
