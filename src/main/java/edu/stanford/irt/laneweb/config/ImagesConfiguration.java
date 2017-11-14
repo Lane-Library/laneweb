@@ -3,17 +3,14 @@ package edu.stanford.irt.laneweb.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.solr.client.solrj.SolrClient;
-import org.apache.solr.client.solrj.impl.HttpSolrClient;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.pipeline.Generator;
@@ -29,29 +26,29 @@ import edu.stanford.irt.laneweb.images.SolrImageSearchResult;
 import edu.stanford.irt.laneweb.images.SolrImageSearchSAXStrategy;
 import edu.stanford.irt.laneweb.images.SolrImageSearchTabGenerator;
 import edu.stanford.irt.solr.BassettImage;
+import edu.stanford.irt.solr.configuration.SolrLaneImageConfiguration;
 import edu.stanford.irt.solr.service.SolrImageService;
 
-@Configuration
-@EnableSolrRepositories(
-        basePackages = { "edu.stanford.irt.solr.repository.search" },
-        solrClientRef = "solrClient",
-        solrTemplateRef = "imageSearchSolrTemplate")
+@Configuration 
+@Import({SolrLaneImageConfiguration.class})
 public class ImagesConfiguration {
 
-    private static final int SOLR_CONNECT_TIMEOUT = 5_000;
-
-    private static final int SOLR_READ_TIMEOUT = 15_000;
-
+    
+    @Autowired
+    public SolrImageService solrImageService;
+    
+    
+    
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")
     public Generator bassettAccordionGenerator() {
-        return new BassettAccordionGenerator(solrImageService(), countSAXStrategy());
+        return new BassettAccordionGenerator(solrImageService, countSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett")
     @Scope("prototype")
     public Generator bassettGenerator() {
-        return new BassettImageGenerator(solrImageService(), pageSAXStrategy());
+        return new BassettImageGenerator(solrImageService, pageSAXStrategy());
     }
 
     @Bean
@@ -67,7 +64,7 @@ public class ImagesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/admin-search-image")
     @Scope("prototype")
     public Generator solrAdminImageSearchGenerator() {
-        return new SolrAdminImageSearchGenerator(solrImageService(), solrAdminImageSearchSAXStrategy());
+        return new SolrAdminImageSearchGenerator(solrImageService, solrAdminImageSearchSAXStrategy());
     }
 
     @Bean
@@ -75,18 +72,11 @@ public class ImagesConfiguration {
         return new SolrAdminImageSearchSAXStrategy(websiteIdMapping());
     }
 
-    @Bean(name = "solrClient")
-    public SolrClient solrClient(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL) {
-        HttpSolrClient solrClient = new HttpSolrClient.Builder(imageSearchURL).build();
-        solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
-        solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
-        return solrClient;
-    }
-
+    
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image")
     @Scope("prototype")
     public Generator solrImageSearchGenerator() {
-        return new SolrImageSearchGenerator(solrImageService(), solrImageSearchSAXStrategy());
+        return new SolrImageSearchGenerator(solrImageService, solrImageSearchSAXStrategy());
     }
 
     @Bean
@@ -97,18 +87,11 @@ public class ImagesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/facet-copyright")
     @Scope("prototype")
     public Generator solrImageSearchTabGenerator(final Marshaller marshaller) {
-        return new SolrImageSearchTabGenerator(solrImageService(), marshaller);
+        return new SolrImageSearchTabGenerator(solrImageService, marshaller);
     }
 
-    @Bean(name = "edu.stanford.irt.solr.service")
-    public SolrImageService solrImageService() {
-        return new SolrImageService();
-    }
+     
 
-    @Bean(name = "imageSearchSolrTemplate")
-    public SolrTemplate solrTemplate(@Qualifier("solrClient") final SolrClient solrClient) {
-        return new SolrTemplate(solrClient);
-    }
 
     @Bean
     public Map<String, String> websiteIdMapping() {
