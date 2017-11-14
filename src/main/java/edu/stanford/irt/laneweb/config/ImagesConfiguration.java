@@ -77,7 +77,7 @@ public class ImagesConfiguration {
 
     @Bean(name = "solrClient")
     public SolrClient solrClient(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL) {
-        HttpSolrClient solrClient = new HttpSolrClient(imageSearchURL);
+        HttpSolrClient solrClient = new HttpSolrClient.Builder(imageSearchURL).build();
         solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
         solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
         return solrClient;
