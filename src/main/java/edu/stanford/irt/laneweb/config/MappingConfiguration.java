@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
@@ -38,6 +40,8 @@ public class MappingConfiguration {
         module.addDeserializer(Course.class, new CourseDeserializer());
         module.addDeserializer(EquipmentStatus.class, new EquipmentStatusDeserializer());
         objectMapper.registerModule(module);
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         return objectMapper;
     }
 }
