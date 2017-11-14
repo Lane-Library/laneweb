@@ -34,7 +34,7 @@ import edu.stanford.irt.solr.service.SolrImageService;
 @Configuration
 @EnableSolrRepositories(
         basePackages = { "edu.stanford.irt.solr.repository.search" },
-        solrClientRef = "imageSearchSolrClient",
+        solrClientRef = "solrClient",
         solrTemplateRef = "imageSearchSolrTemplate")
 public class ImagesConfiguration {
 
@@ -75,7 +75,7 @@ public class ImagesConfiguration {
         return new SolrAdminImageSearchSAXStrategy(websiteIdMapping());
     }
 
-    @Bean(name = "imageSearchSolrClient")
+    @Bean(name = "solrClient")
     public SolrClient solrClient(@Value("${laneweb.solr-url-imageSearch}") final String imageSearchURL) {
         HttpSolrClient solrClient = new HttpSolrClient(imageSearchURL);
         solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
@@ -106,7 +106,7 @@ public class ImagesConfiguration {
     }
 
     @Bean(name = "imageSearchSolrTemplate")
-    public SolrTemplate solrTemplate(@Qualifier("imageSearchSolrClient") final SolrClient solrClient) {
+    public SolrTemplate solrTemplate(@Qualifier("solrClient") final SolrClient solrClient) {
         return new SolrTemplate(solrClient);
     }
 
