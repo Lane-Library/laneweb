@@ -66,7 +66,6 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
         String message;
         long time;
         Instant start = Instant.now();
-        @SuppressWarnings("unchecked")
         Map<String, Object> model = this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class);
         model.put(Model.SITEMAP_URI, "/index.html");
         model.put(Model.CONTENT_BASE, this.contentBase);
@@ -80,7 +79,7 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
             time = Duration.between(start, Instant.now()).toMillis();
             status = time < this.maxOKTime ? Status.OK : Status.WARN;
             message = String.format(SUCCESS_FORMAT, time);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             status = Status.ERROR;
             time = Duration.between(start, Instant.now()).toMillis();
             message = String.format(FAIL_FORMAT, time, e);
