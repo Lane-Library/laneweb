@@ -55,7 +55,7 @@ public class BassettImageGenerator extends AbstractGenerator implements ModelAwa
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Pageable page = new PageRequest(this.currentPage - 1, IMAGES_BY_PAGE);
+        Pageable page =  PageRequest.of(this.currentPage - 1, IMAGES_BY_PAGE);
         Page<BassettImage> eresources = null;
         if (this.bassettNumber != null) {
             eresources = this.service.findBassettByNumber(this.bassettNumber);
