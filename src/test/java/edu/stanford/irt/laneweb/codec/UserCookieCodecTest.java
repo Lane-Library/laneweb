@@ -4,6 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.time.Clock;
+
+import static org.easymock.EasyMock.*;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,48 +18,41 @@ import edu.stanford.irt.laneweb.user.User;
 public class UserCookieCodecTest {
 
     private UserCookieCodec codec;
+    private Clock clock;
 
     @Before
     public void setUp() {
-        this.codec = new UserCookieCodec("key");
+        this.clock = createMock(Clock.class);
+        this.codec = new UserCookieCodec("key", this.clock);
     }
 
     @Test
     public void testCreateAndRestore() {
+        expect(this.clock.millis()).andReturn(System.currentTimeMillis());
+        replay(this.clock);
         User user = new User("id@domain", "", "", "");
         PersistentLoginToken token = this.codec.createLoginToken(user, 12345);
         assertEquals(this.codec.restoreLoginToken(token.getEncryptedValue(), "").getUser(), user);
+        verify(this.clock);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testCreateLoginTokenNullUserId() {
-        try {
             this.codec.createLoginToken(null, 0);
-            fail();
-        } catch (NullPointerException e) {
-        }
     }
 
     @Test
     public void testLongKey() {
-        assertNotNull(new UserCookieCodec("keykeykeykeykeykeykeykeykeykeykeykeykeykeykey"));
+        assertNotNull(new UserCookieCodec("keykeykeykeykeykeykeykeykeykeykeykeykeykeykey", this.clock));
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testRestoreLoginTokenBadValue() {
-        try {
             this.codec.restoreLoginToken("abc", "def");
-            fail();
-        } catch (LanewebException e) {
-        }
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testRestoreLoginTokenNullValue() {
-        try {
             this.codec.restoreLoginToken(null, null);
-            fail();
-        } catch (NullPointerException e) {
-        }
     }
 }

@@ -6,42 +6,49 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Clock;
 import java.time.Duration;
 
 public class Ticket implements Serializable {
 
-    private static final long ONE_SECOND = Duration.ofSeconds(1).toMillis();
-
     private static final long ONE_MINUTE = Duration.ofMinutes(1).toMillis();
+
+    private static final long ONE_SECOND = Duration.ofSeconds(1).toMillis();
 
     private static final long serialVersionUID = 1L;
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
+    private Clock clock;
+
     private long creationTime;
 
     private String stringValue;
 
-    public Ticket(final String userid, final String ezyproxyKey) {
+    public Ticket(final String userid, final String ezproxy) {
+        this(userid, ezproxy, Clock.systemDefaultZone());
+    }
+
+    public Ticket(final String userid, final String ezproxy, final Clock clock) {
         if (null == userid) {
             throw new IllegalArgumentException("null userid");
         }
-        if (null == ezyproxyKey) {
+        if (null == ezproxy) {
             throw new IllegalArgumentException("null ezproxyKey");
         }
-        String packet = "$u" + System.currentTimeMillis() / ONE_SECOND + "$e";
+        long now = clock.millis();
+        String packet = "$u" + now / ONE_SECOND + "$e";
         try {
-            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + userid + packet) + packet, UTF_8);
-            this.creationTime = System.currentTimeMillis();
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
-        } catch (NoSuchAlgorithmException e) {
+            this.stringValue = URLEncoder.encode(getKeyedDigest(ezproxy + userid + packet) + packet, UTF_8);
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             throw new IllegalStateException(e);
         }
+        this.creationTime = now;
+        this.clock = clock;
     }
 
     public boolean isValid() {
-        return System.currentTimeMillis() - this.creationTime < ONE_MINUTE;
+        return this.clock.millis() - this.creationTime < ONE_MINUTE;
     }
 
     @Override

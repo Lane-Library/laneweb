@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.hours;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -25,6 +26,8 @@ public class TodaysHours {
 
     private static final Logger log = LoggerFactory.getLogger(TodaysHours.class);
 
+    private Clock clock;
+
     private long expires;
 
     private String hours;
@@ -36,14 +39,19 @@ public class TodaysHours {
     private LibraryHoursService service;
 
     public TodaysHours(final LibraryHoursService service) {
-        this(service, ONE_HOUR);
+        this(service, Clock.systemDefaultZone(), ONE_HOUR);
     }
 
-    TodaysHours(final LibraryHoursService service, final long expires) {
+    public TodaysHours(final LibraryHoursService service, final Clock clock) {
+        this(service, clock, ONE_HOUR);
+    }
+
+    TodaysHours(final LibraryHoursService service, final Clock clock, final long expires) {
         this.service = service;
+        this.clock = clock;
         this.expires = expires;
         this.hours = getLatestHours(LocalDate.now(AMERICA_LA));
-        this.nextUpdate = System.currentTimeMillis() + expires;
+        this.nextUpdate = clock.millis() + expires;
         this.lock = new Object();
     }
 
@@ -53,7 +61,7 @@ public class TodaysHours {
 
     String toString(final LocalDate localDate) {
         synchronized (this.lock) {
-            long now = System.currentTimeMillis();
+            long now = this.clock.millis();
             if (now >= this.nextUpdate) {
                 this.hours = getLatestHours(localDate);
                 this.nextUpdate = now + this.expires;
