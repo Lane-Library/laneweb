@@ -97,7 +97,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
             }
         }
         if (!orders.isEmpty()) {
-            return new Sort(orders);
+            return Sort.by(orders);
         }
         return null;
     }
