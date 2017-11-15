@@ -203,7 +203,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testSuggestFindAll() {
-        expect(this.repository.suggestFindAll("query terms", "query +terms", new PageRequest(0, 10)))
+        expect(this.repository.suggestFindAll("query terms", "query +terms",  PageRequest.of(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.suggestFindAll("query terms");
@@ -212,7 +212,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testSuggestFindByType() {
-        expect(this.repository.suggestFindByType("term", "Type", new PageRequest(0, 10)))
+        expect(this.repository.suggestFindByType("term", "Type",  PageRequest.of(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.suggestFindByType("term", "Type");
