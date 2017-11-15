@@ -226,7 +226,7 @@ public class SolrService {
     private SimpleQuery buildBaseBrowseQuery(final String query) {
         SimpleQuery q = new SimpleQuery(query);
         q.setRequestHandler(SolrRepository.Handlers.BROWSE);
-        q.addSort( Sort.by("title_sort", "id"));
+        q.addSort(Sort.by("title_sort", "id"));
         q.addFilterQuery(BASE_FQ);
         q.setTimeAllowed(Integer.MIN_VALUE);
         return q;
