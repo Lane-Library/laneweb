@@ -53,7 +53,6 @@ import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
 @Configuration
 @EnableSolrRepositories(
         basePackages = { "edu.stanford.irt.laneweb.eresources" },
-        solrClientRef = "solrClient",
         solrTemplateRef = "laneSearchSolrTemplate")
 public class EresourcesConfiguration {
 
