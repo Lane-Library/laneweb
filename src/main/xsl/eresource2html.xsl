@@ -20,7 +20,7 @@
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <xsl:variable name="available" select="number(s:available)"/>
-        <li>
+        <li class="resource">
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
             </span>

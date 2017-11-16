@@ -184,7 +184,6 @@
         <servlet-name>default</servlet-name>
         <url-pattern>/BingSiteAuth.xml</url-pattern>
         <url-pattern>/google708f1eef3c6d1e52.html</url-pattern>
-        <url-pattern>/y_key_01fe447429961ab5.html</url-pattern>
     </servlet-mapping>
     
     <error-page>

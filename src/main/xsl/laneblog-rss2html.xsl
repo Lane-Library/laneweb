@@ -18,7 +18,7 @@
     </xsl:template>
 
 	<xsl:template match="rss">
-		<xsl:apply-templates select="channel/item[not(category[ . = 'New Resource'])][position() &lt; 3]" />
+		<xsl:apply-templates select="channel/item[not(category[ . = 'New Resource']) and contains(./content:encoded, '&lt;article&gt;')][position() &lt; 3]" />
     </xsl:template>
 
     <xsl:template match="item">

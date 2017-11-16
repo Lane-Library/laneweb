@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.time.Clock;
 /**
  * This class will add three cookies the persistent-expired-date and user. The user cookie will have the userid, name,
  * email , the userAgent and the expired date appended and encrypted. The persistent-expired-date cookie have the
@@ -39,12 +40,19 @@ public class PersistentLoginController {
 
     private UserDataBinder userBinder;
 
-    @Autowired
+    private Clock clock;
     public PersistentLoginController(final UserDataBinder userBinder,
-            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec) {
+            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec, final Clock clock) {
         this.userBinder = userBinder;
         this.activeSunetidDataBinder = activeSunetidDataBinder;
         this.codec = codec;
+        this.clock = clock;
+    }
+
+    @Autowired
+    public PersistentLoginController(final UserDataBinder userBinder,
+            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec) {
+        this(userBinder, activeSunetidDataBinder, codec, Clock.systemDefaultZone());
     }
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
@@ -131,7 +139,7 @@ public class PersistentLoginController {
             cookie.setMaxAge(DURATION_SECONDS);
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
-            long expires = System.currentTimeMillis() + DURATION_MILLIS;
+            long expires = this.clock.millis() + DURATION_MILLIS;
             cookie = new Cookie(CookieName.EXPIRATION.toString(), Long.toString(expires));
             cookie.setPath("/");
             cookie.setMaxAge(DURATION_SECONDS);

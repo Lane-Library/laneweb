@@ -21,7 +21,7 @@
   <xsl:template match="slim:record">
     <xsl:variable name="bibid" select="slim:controlfield[@tag = '001']"/>
     <xsl:variable name="title" select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
-    <li data-bibid="{$bibid}">
+    <li class="resource" data-bibid="{$bibid}">
       <div class="yui3-g">
         <div class="yui3-u-1-6">
           <xsl:call-template name="fa">
