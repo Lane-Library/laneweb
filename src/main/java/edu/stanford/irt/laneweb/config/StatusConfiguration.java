@@ -28,10 +28,18 @@ import edu.stanford.irt.suggest.SuggestionManager;
 @Configuration
 public class StatusConfiguration {
 
+    private static final int MIN_BIB_COUNT = 310_000;
+
+    private static final int MIN_PUBMED_COUNT = 27_000_000;
+
+    private static final int SLOW_INDEX_HTML_TIME = 250;
+
+    private static final int SLOW_SUGGESTION_TIME = 250;
+
     @Bean
     @Order(3)
     public EresourceStatusProvider eresourceStatusProvider(final SolrService solrService) {
-        return new EresourceStatusProvider(solrService, 310_000, 27_000_000);
+        return new EresourceStatusProvider(solrService, MIN_BIB_COUNT, MIN_PUBMED_COUNT);
     }
 
     @Bean
@@ -40,8 +48,8 @@ public class StatusConfiguration {
             @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap") final Sitemap sitemap,
             final SourceResolver sourceResolver, @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI) {
-        return new IndexDotHtmlStatusProvider(sitemap, componentFactory, sourceResolver, 250, contentBase,
-                classesServiceURI);
+        return new IndexDotHtmlStatusProvider(sitemap, componentFactory, sourceResolver, SLOW_INDEX_HTML_TIME,
+                contentBase, classesServiceURI);
     }
 
     @Bean
@@ -64,7 +72,8 @@ public class StatusConfiguration {
     @Bean
     @Order(1)
     public SuggestStatusProvider suggestStatusProvider(
-            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource") final SuggestionManager suggestionManager) {
-        return new SuggestStatusProvider(suggestionManager, 250, "cardio");
+            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource")
+            final SuggestionManager suggestionManager) {
+        return new SuggestStatusProvider(suggestionManager, SLOW_SUGGESTION_TIME, "cardio");
     }
 }

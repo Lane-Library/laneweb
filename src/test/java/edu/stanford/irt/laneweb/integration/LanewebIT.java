@@ -214,7 +214,7 @@ public class LanewebIT {
             this.mockMvc
                     .perform(get("/eresources/search.html?q=directions to lane").servletPath("/eresources/search.html"))
                     .andExpect(xpath(
-                            "//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'hours-directions.html')]",
+                            "//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'directions-maps.html')]",
                             ns).exists());
             // Access Medicine
             this.mockMvc

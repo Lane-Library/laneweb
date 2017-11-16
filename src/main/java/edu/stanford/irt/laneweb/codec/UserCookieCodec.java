@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.codec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.Clock;
 import java.util.Objects;
 
 import javax.crypto.BadPaddingException;
@@ -39,9 +40,15 @@ public class UserCookieCodec {
 
     private Cipher cipher;
 
+    private Clock clock;
+
     private SecretKey desKey;
 
     public UserCookieCodec(final String key) {
+        this(key, Clock.systemDefaultZone());
+    }
+
+    public UserCookieCodec(final String key, final Clock clock) {
         try {
             // latest version of commons-codec (1.6) does not pad with 0 bytes
             // to 16, so do that here:
@@ -53,11 +60,12 @@ public class UserCookieCodec {
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             throw new LanewebException(e);
         }
+        this.clock = clock;
     }
 
     public PersistentLoginToken createLoginToken(final User user, final int userAgentHash) {
         Objects.requireNonNull(user, "null user");
-        long now = System.currentTimeMillis();
+        long now = this.clock.millis();
         StringBuilder builder = new StringBuilder();
         builder.append(user.getId());
         builder.append(COOKIE_VALUE_SEPARATOR);

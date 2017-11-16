@@ -44,7 +44,7 @@ public class SuggestStatusProvider implements StatusProvider {
             time = Duration.between(start, Instant.now()).toMillis();
             status = time < this.maxOKTime ? Status.OK : Status.WARN;
             message = String.format(SUCCESS_FORMAT, time);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             status = Status.ERROR;
             time = Duration.between(start, Instant.now()).toMillis();
             message = String.format(FAIL_FORMAT, time, e);

@@ -44,7 +44,7 @@ public class EresourceStatusProvider implements StatusProvider {
             long pubmedCount = results.containsKey("pubmed") ? results.get("pubmed").longValue() : 0;
             Status pubmedStatus = pubmedCount > this.minPubmedCount ? Status.OK : Status.ERROR;
             items.add(new StatusItem(pubmedStatus, String.format(PUBMED_SUCCESS_FORMAT, pubmedCount)));
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             String message = String.format(FAIL_FORMAT, e);
             items.add(new StatusItem(Status.ERROR, message));
             log.error(message);

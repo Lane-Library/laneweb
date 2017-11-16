@@ -38,10 +38,6 @@
 #searchResults {
     padding-top: 10px;
 }
-.lwSearchResults li {
-    margin-bottom: 10px;
-    padding: 5px;
-}
 
 /* abstract and description related styles*/
 .description {
