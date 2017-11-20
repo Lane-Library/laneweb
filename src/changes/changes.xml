@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-11-20" version="3.3.54" description="3.3.54 bug fix release">
+            <action date="2017-11-16" dev="olgary" issue="137166" type="update">
+                removed light blue border bottom from calendars li
+            </action>
+            <action date="2017-11-16" dev="olgary" issue="137163" type="update">
+                templates - removed link to search help page, add how to use links in footer
+            </action>
+            <action date="2017-11-15" dev="ryanmax" issue="137146" type="fix">
+                search engine verification requests are failing
+            </action>
+            <action date="2017-11-14" dev="olgary" issue="137111" type="update">
+                fixed the background color to match SoM - main-body.css
+            </action>
+            <action date="2017-11-15" dev="ceyates" issue="136672" type="update">
+                layout fixes 
+            </action>
+        </release>
         <release date="2017-11-13" version="3.3.53" description="3.3.53 bug fix release">
             <action date="2017-11-10" dev="olgary" issue="137047" type="update">
                 equipment.css - change the icon size to 4x to match others
