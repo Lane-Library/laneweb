@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2017-11-20" version="3.3.54" description="3.3.54 bug fix release">
+            <action date="2017-11-20" dev="ceyates" issue="137173" type="update">
+                virtual reality icon for equipment page
+            </action>
             <action date="2017-11-16" dev="olgary" issue="137166" type="update">
                 removed light blue border bottom from calendars li
             </action>
