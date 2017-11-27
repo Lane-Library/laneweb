@@ -45,3 +45,13 @@
 .solrSearch .eresources{
     margin-top: 0;
 }
+
+.content .resource {
+    padding: 12px 0;
+}
+
+.resource:after {
+  content: '';
+  display: table;
+  clear: both;
+}

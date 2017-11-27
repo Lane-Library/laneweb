@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding.user;
 
+import java.time.Clock;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,13 +18,20 @@ public class CookieUserFactory implements UserFactory {
 
     private static final Logger log = LoggerFactory.getLogger(CookieUserFactory.class);
 
+    private Clock clock;
+
     private UserCookieCodec codec;
 
     private String userIdHashKey;
 
-    public CookieUserFactory(final UserCookieCodec codec, final String userIdHashKey) {
+    public CookieUserFactory(final UserCookieCodec userCookieCodec, final String userIdHashKey) {
+        this(userCookieCodec, userIdHashKey, Clock.systemDefaultZone());
+    }
+
+    public CookieUserFactory(final UserCookieCodec codec, final String userIdHashKey, final Clock clock) {
         this.codec = codec;
         this.userIdHashKey = userIdHashKey;
+        this.clock = clock;
     }
 
     @Override
@@ -51,7 +60,7 @@ public class CookieUserFactory implements UserFactory {
         if (userAgent != null) {
             try {
                 PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue(), this.userIdHashKey);
-                if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
+                if (token.isValidFor(this.clock.millis(), userAgent.hashCode())) {
                     user = token.getUser();
                 }
             } catch (LanewebException e) {

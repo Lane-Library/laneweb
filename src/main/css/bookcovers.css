@@ -1,7 +1,8 @@
 .bookcover {
     float: right;
-    height: 75px;
+    height: 112px;
     visibility: hidden;
+    width: 80px;
 }
 
 .bookcover-active {

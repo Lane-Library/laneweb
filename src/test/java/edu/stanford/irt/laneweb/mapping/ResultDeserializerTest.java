@@ -226,8 +226,7 @@ public class ResultDeserializerTest {
                 assertNull(grandchild.getQuery());
                 assertEquals(SearchStatus.SUCCESSFUL, grandchild.getStatus());
                 assertEquals(result.getTime(), grandchild.getTime());
-                ContentResult content = (ContentResult) grandchild.getChildren().stream().findFirst()
-                        .orElse(null);
+                ContentResult content = (ContentResult) grandchild.getChildren().stream().findFirst().orElse(null);
                 assertEquals("Nelly A, Marion LM, Lisa F, Pierre V, Céline P.", content.getAuthor());
                 assertEquals("PMID:27599689", content.getContentId());
                 assertEquals(1663, content.getDescription().length());

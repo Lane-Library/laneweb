@@ -85,8 +85,10 @@ public class BookmarkControllerTest {
     public void testSaveLinks() {
         this.bookmarkService.saveLinks("userid", Collections.emptyList());
         this.session.setAttribute("bookmarks", Collections.emptyList());
-        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model, this.session);
+        replay(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model,
+                this.session);
         this.controller.saveLinks("userid", Collections.emptyList(), this.session);
-        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model, this.session);
+        verify(this.bookmarkService, this.bookmarkDataBinder, this.userDataBinder, this.request, this.model,
+                this.session);
     }
 }

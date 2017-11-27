@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.util.Map;
 
@@ -17,6 +18,16 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
     private static final Logger log = LoggerFactory.getLogger(LoginExpirationCookieDataBinder.class);
 
     private static final long ONE_DAY = Duration.ofDays(1).toMillis();
+
+    private Clock clock;
+
+    public LoginExpirationCookieDataBinder() {
+        this(Clock.systemDefaultZone());
+    }
+
+    public LoginExpirationCookieDataBinder(final Clock clock) {
+        this.clock = clock;
+    }
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -37,7 +48,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
     private String getExpirationValue(final String cookieValue) {
         String result = null;
         try {
-            long expiry = Long.parseLong(cookieValue) - System.currentTimeMillis();
+            long expiry = Long.parseLong(cookieValue) - this.clock.millis();
             if (expiry > 0) {
                 result = Long.toString(expiry / ONE_DAY);
             }
