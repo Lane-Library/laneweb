@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
  * This is a Filter that responds with a 400 response if there is an invalid parameter present. It was created to stop
  * robots from making multiple requests for expensive resources with various bogus parameters.
  */
+@WebFilter("/biomed-resources/*")
 public class ValidParameterFilter extends AbstractLanewebFilter {
 
     private static class ParameterMapEntryValidator implements Validator<Entry<String, String[]>> {
