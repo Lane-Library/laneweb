@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import edu.stanford.irt.status.Status;
 import edu.stanford.irt.status.StatusItem;
 import edu.stanford.irt.status.StatusProvider;
-import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestStatusProvider implements StatusProvider {
 
@@ -23,11 +22,11 @@ public class SuggestStatusProvider implements StatusProvider {
 
     private int maxOKTime;
 
-    private SuggestionManager suggestionManager;
+    private SuggestionService suggestionManager;
 
     private String term;
 
-    public SuggestStatusProvider(final SuggestionManager suggestionManager, final int maxOKTime, final String term) {
+    public SuggestStatusProvider(final SuggestionService suggestionManager, final int maxOKTime, final String term) {
         this.suggestionManager = suggestionManager;
         this.maxOKTime = maxOKTime;
         this.term = term;
@@ -40,7 +39,7 @@ public class SuggestStatusProvider implements StatusProvider {
         long time;
         Instant start = Instant.now();
         try {
-            this.suggestionManager.getSuggestionsForTerm(this.term);
+            this.suggestionManager.getSuggestions(this.term);
             time = Duration.between(start, Instant.now()).toMillis();
             status = time < this.maxOKTime ? Status.OK : Status.WARN;
             message = String.format(SUCCESS_FORMAT, time);

@@ -118,6 +118,18 @@ public class LanewebIT {
     }
 
     @Test
+    public void testGetSuggestionList() throws Exception {
+        this.mockMvc.perform(get("/apps/suggest/getSuggestionList?q=cardio")).andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON));
+    }
+
+    @Test
+    public void testGetSuggestions() throws Exception {
+        this.mockMvc.perform(get("/apps/suggest/json?q=cardio")).andExpect(status().isOk())
+                .andExpect(content().contentType(APPLICATION_JSON));
+    }
+
+    @Test
     public void testIndex() throws Exception {
         this.mockMvc.perform(get("/index.html").servletPath("/index.html")).andExpect(status().isOk())
                 .andExpect(content().contentType(TEXT_HTML));

@@ -15,49 +15,48 @@ import org.junit.Test;
 
 import edu.stanford.irt.status.Status;
 import edu.stanford.irt.status.StatusItem;
-import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestStatusProviderTest {
 
     private SuggestStatusProvider statusProvider;
 
-    private SuggestionManager suggestionManager;
+    private SuggestionService suggestionService;
 
     @Before
     public void setUp() {
-        this.suggestionManager = strictMock(SuggestionManager.class);
-        this.statusProvider = new SuggestStatusProvider(this.suggestionManager, 250, "term");
+        this.suggestionService = strictMock(SuggestionService.class);
+        this.statusProvider = new SuggestStatusProvider(this.suggestionService, 250, "term");
     }
 
     @Test
     public void testGetStatuExceptions() {
-        expect(this.suggestionManager.getSuggestionsForTerm("term")).andThrow(new RuntimeException("oopsie"));
-        replay(this.suggestionManager);
+        expect(this.suggestionService.getSuggestions("term")).andThrow(new RuntimeException("oopsie"));
+        replay(this.suggestionService);
         StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertSame(Status.ERROR, item.getStatus());
         assertTrue(Pattern.compile("suggestion status failed in \\dms: java.lang.RuntimeException: oopsie")
                 .matcher(item.getMessage()).matches());
-        verify(this.suggestionManager);
+        verify(this.suggestionService);
     }
 
     @Test
     public void testGetStatus() {
-        expect(this.suggestionManager.getSuggestionsForTerm("term")).andReturn(Collections.emptySet());
-        replay(this.suggestionManager);
+        expect(this.suggestionService.getSuggestions("term")).andReturn(Collections.emptySet());
+        replay(this.suggestionService);
         StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertSame(Status.OK, item.getStatus());
         assertTrue(Pattern.compile("suggestions took \\dms.").matcher(item.getMessage()).matches());
-        verify(this.suggestionManager);
+        verify(this.suggestionService);
     }
 
     @Test
     public void testGetStatusWarn() {
-        expect(this.suggestionManager.getSuggestionsForTerm("term")).andReturn(Collections.emptySet());
-        replay(this.suggestionManager);
-        SuggestStatusProvider provider = new SuggestStatusProvider(this.suggestionManager, -1, "term");
+        expect(this.suggestionService.getSuggestions("term")).andReturn(Collections.emptySet());
+        replay(this.suggestionService);
+        SuggestStatusProvider provider = new SuggestStatusProvider(this.suggestionService, -1, "term");
         StatusItem item = provider.getStatusItems().get(0);
         assertSame(Status.WARN, item.getStatus());
         assertTrue(Pattern.compile("suggestions took \\dms.").matcher(item.getMessage()).matches());
-        verify(this.suggestionManager);
+        verify(this.suggestionService);
     }
 }
