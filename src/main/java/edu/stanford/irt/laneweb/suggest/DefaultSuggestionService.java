@@ -38,11 +38,6 @@ public class DefaultSuggestionService implements SuggestionService {
     }
 
     @Override
-    public Collection<String> getSuggestions(final String term) {
-        return getSuggestions(term, null);
-    }
-
-    @Override
     public Collection<String> getSuggestions(final String term, final String type) {
         String query = term.trim();
         Set<Suggestion> suggestions = new TreeSet<>(new SuggestionComparator(query));
@@ -77,9 +72,6 @@ public class DefaultSuggestionService implements SuggestionService {
                 suggestions = this.meshSuggestionManager.getSuggestionsForTerm(query);
             } else if ("ej-mesh".equals(limit)) {
                 suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query);
-                suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
-            } else if ("ext".equals(limit)) {
-                suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
                 suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
             }
         }

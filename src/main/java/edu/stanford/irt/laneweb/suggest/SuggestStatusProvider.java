@@ -39,7 +39,7 @@ public class SuggestStatusProvider implements StatusProvider {
         long time;
         Instant start = Instant.now();
         try {
-            this.suggestionManager.getSuggestions(this.term);
+            this.suggestionManager.getSuggestions(this.term, null);
             time = Duration.between(start, Instant.now()).toMillis();
             status = time < this.maxOKTime ? Status.OK : Status.WARN;
             message = String.format(SUCCESS_FORMAT, time);

@@ -26,7 +26,7 @@ public class ExtensionsSuggestController {
     public List<Object> getSuggestions(@RequestParam final String q) {
         List<Object> result = new ArrayList<>();
         result.add(q);
-        result.add(this.suggestionService.getSuggestions(q, "ext"));
+        result.add(this.suggestionService.getSuggestions(q, "er-mesh"));
         return result;
     }
 }

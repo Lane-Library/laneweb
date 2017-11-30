@@ -30,7 +30,7 @@ public class ExtensionsSuggestControllerTest {
     public void testGetFewerSuggestions() {
         String[] suggestions = new String[5];
         Arrays.fill(suggestions, "suggestion");
-        expect(this.suggestionService.getSuggestions("query", "ext")).andReturn(Arrays.asList(suggestions));
+        expect(this.suggestionService.getSuggestions("query", "er-mesh")).andReturn(Arrays.asList(suggestions));
         replay(this.suggestionService);
         List<Object> result = this.controller.getSuggestions("query");
         assertEquals("query", result.get(0));

@@ -30,7 +30,7 @@ public class SuggestStatusProviderTest {
 
     @Test
     public void testGetStatuExceptions() {
-        expect(this.suggestionService.getSuggestions("term")).andThrow(new RuntimeException("oopsie"));
+        expect(this.suggestionService.getSuggestions("term", null)).andThrow(new RuntimeException("oopsie"));
         replay(this.suggestionService);
         StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertSame(Status.ERROR, item.getStatus());
@@ -41,7 +41,7 @@ public class SuggestStatusProviderTest {
 
     @Test
     public void testGetStatus() {
-        expect(this.suggestionService.getSuggestions("term")).andReturn(Collections.emptySet());
+        expect(this.suggestionService.getSuggestions("term", null)).andReturn(Collections.emptySet());
         replay(this.suggestionService);
         StatusItem item = this.statusProvider.getStatusItems().get(0);
         assertSame(Status.OK, item.getStatus());
@@ -51,7 +51,7 @@ public class SuggestStatusProviderTest {
 
     @Test
     public void testGetStatusWarn() {
-        expect(this.suggestionService.getSuggestions("term")).andReturn(Collections.emptySet());
+        expect(this.suggestionService.getSuggestions("term", null)).andReturn(Collections.emptySet());
         replay(this.suggestionService);
         SuggestStatusProvider provider = new SuggestStatusProvider(this.suggestionService, -1, "term");
         StatusItem item = provider.getStatusItems().get(0);
