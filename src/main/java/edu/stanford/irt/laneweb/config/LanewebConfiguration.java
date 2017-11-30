@@ -48,8 +48,8 @@ import edu.stanford.irt.laneweb.eresources.search.Facet;
 })
 public class LanewebConfiguration {
     
-    private static final List<String> DEFAULT_LOCATIONS = Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/"
-            .split(","));
+    private static final List<String> DEFAULT_LOCATIONS =
+            Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
