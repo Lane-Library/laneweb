@@ -99,9 +99,7 @@
     background-color: white;
     width: 250px;
     box-sizing: border-box;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
+    border: 2px solid #fff;
     border-right: none;
     box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 }
