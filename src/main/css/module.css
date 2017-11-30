@@ -5,7 +5,7 @@
     line-height: 1.6em;
     background-color: white;
     border: 1px solid #ccc;
-    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, 01);
     position: relative;
 }
 
@@ -22,6 +22,7 @@
     float: left;
     margin-right: 1em;
 }
+
 /* book covers in 2 columns*/
 .core-covers {
     box-sizing: border-box;
@@ -30,6 +31,7 @@
     vertical-align: top;
     width: 50%;
 }
+
 /* book covers in 3 columns*/
 .core-covers-3 {
     box-sizing: border-box;
