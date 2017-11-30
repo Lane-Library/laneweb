@@ -29,7 +29,8 @@ public class CourseReservesItemListSAXStrategy extends AbstractXHTMLSAXStrategy<
             startBody(xmlConsumer);
             this.courseStrategy.toSAX(itemList.getCourse(), xmlConsumer);
             startUl(xmlConsumer);
-            itemList.getItems().stream().forEach(i -> this.itemStrategy.toSAX(i, xmlConsumer));
+            itemList.getItems().stream()
+                .forEach((final CourseReservesItem i) -> this.itemStrategy.toSAX(i, xmlConsumer));
             endUl(xmlConsumer);
             endBody(xmlConsumer);
             endHTMLDocument(xmlConsumer);

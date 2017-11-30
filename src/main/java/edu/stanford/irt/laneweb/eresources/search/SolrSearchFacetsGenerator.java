@@ -159,7 +159,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             if (null == facetList) {
                 facetList = new ArrayList<>();
             }
-            long present = facetList.stream().filter(s -> facetValue.equals(s.getValue())).count();
+            long present = facetList.stream()
+                    .filter((final Facet s) -> facetValue.equals(s.getValue()))
+                    .count();
             if (present < 1) {
                 facetList.add(new Facet(fieldName, facetValue, 0, this.facets));
                 facetsMap.put(fieldName, facetList);
@@ -180,7 +182,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             facetList = new ArrayList<>();
         }
         Collection<Facet> reduced = facetList.stream()
-                .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
+                .filter((final Facet s) -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
                 .collect(Collectors.toList());
         long enabled = facetList.stream().filter(Facet::isEnabled).count();
         if (reduced.size() < this.facetsToShowSearch || enabled >= this.facetsToShowSearch) {
@@ -190,7 +192,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             facetList = processFacets(fps).get(MESH);
             if (null != facetList) {
                 Collection<Facet> moreMesh = facetList.stream()
-                        .filter(s -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
+                        .filter((final Facet s) -> !this.meshToIgnoreInSearch.contains(s.getValue()) || s.isEnabled())
                         .collect(Collectors.toList());
                 facetsMap.put(MESH, moreMesh);
             }
@@ -210,7 +212,9 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (null == facetList) {
             facetList = new ArrayList<>();
         }
-        long count = facetList.stream().filter(s -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
+        long count = facetList.stream()
+                .filter((final Facet s) -> this.prioritizedPublicationTypes.contains(s.getValue()))
+                .count();
         if (count < this.prioritizedPublicationTypes.size()) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0,
                     PAGE_SIZE, 1, parseSort());
@@ -218,7 +222,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             facetList = publicationTypeFacetMap.get(PUBLICATION_TYPE);
             if (null != facetList) {
                 Collection<Facet> moreTypes = facetList.stream()
-                        .filter(s -> this.prioritizedPublicationTypes.contains(s.getValue()))
+                        .filter((final Facet s) -> this.prioritizedPublicationTypes.contains(s.getValue()))
                         .collect(Collectors.toList());
                 facetList.addAll(moreTypes);
             }
@@ -232,8 +236,12 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (null == facetList) {
             facetList = new ArrayList<>();
         }
-        long books = facetList.stream().filter(s -> s.getValue().startsWith("Book")).count();
-        long journals = facetList.stream().filter(s -> s.getValue().startsWith("Journal")).count();
+        long books = facetList.stream()
+                .filter((final Facet s) -> s.getValue().startsWith("Book"))
+                .count();
+        long journals = facetList.stream()
+                .filter((final Facet s) -> s.getValue().startsWith("Journal"))
+                .count();
         if ((books > 0 && books < ALL_BOOK_OR_JOURNAL_TYPES)
                 || (journals > 0 && journals < ALL_BOOK_OR_JOURNAL_TYPES)) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, TYPE, 0, PAGE_SIZE, 1,
@@ -241,7 +249,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             Map<String, Collection<Facet>> typeFacetMap = processFacets(fps);
             Collection<Facet> allTypes = typeFacetMap.get(TYPE);
             if (null != allTypes) {
-                Collection<Facet> moreTypes = allTypes.stream().filter(s -> s.getValue().matches("^(Book|Journal).*"))
+                Collection<Facet> moreTypes = allTypes.stream()
+                        .filter((final Facet s) -> s.getValue().matches("^(Book|Journal).*"))
                         .collect(Collectors.toList());
                 facetList.addAll(moreTypes);
             }

@@ -27,7 +27,7 @@ public class HoursListSAXStrategy implements SAXStrategy<List<List<Hours>>> {
     private static void hoursListToSAX(final List<Hours> hours, final XMLConsumer xmlConsumer) {
         try {
             XMLUtils.startElement(xmlConsumer, NS, "calendar");
-            hours.stream().forEach(h -> hoursToSAX(h, xmlConsumer));
+            hours.stream().forEach((final Hours h) -> hoursToSAX(h, xmlConsumer));
             XMLUtils.endElement(xmlConsumer, NS, "calendar");
         } catch (SAXException e) {
             throw new LanewebException(e);
@@ -70,7 +70,7 @@ public class HoursListSAXStrategy implements SAXStrategy<List<List<Hours>>> {
             atts.addAttribute("http://www.w3.org/2001/XMLSchema-instance", "schemaLocation", "xsi:schemaLocation",
                     "CDATA", "http://lane.stanford.edu/hours/1.0 hours.xsd");
             XMLUtils.startElement(xmlConsumer, NS, "calendars", atts);
-            hours.stream().forEach(hl -> hoursListToSAX(hl, xmlConsumer));
+            hours.stream().forEach((final List<Hours> hl) -> hoursListToSAX(hl, xmlConsumer));
             XMLUtils.endElement(xmlConsumer, NS, "calendars");
             xmlConsumer.endPrefixMapping("");
             xmlConsumer.endDocument();

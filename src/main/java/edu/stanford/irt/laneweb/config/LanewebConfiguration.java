@@ -47,15 +47,15 @@ import edu.stanford.irt.laneweb.eresources.search.Facet;
     "edu.stanford.irt.laneweb.bookmarks"
 })
 public class LanewebConfiguration {
-
-    private static final String[] DEFAULT_LOCATIONS = "classpath:/,classpath:/config/,file:./,file:./config/"
-            .split(",");
+    
+    private static final List<String> DEFAULT_LOCATIONS = Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/"
+            .split(","));
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
             final Environment environment, final ResourceLoader resourceLoader) {
-        List<Resource> locations = Arrays.stream(DEFAULT_LOCATIONS)
-                .map(s -> s + "application.properties")
+        List<Resource> locations = DEFAULT_LOCATIONS.stream()
+                .map((final String s) -> s + "application.properties")
                 .map(resourceLoader::getResource)
                 .collect(Collectors.toList());
         String springConfigProperty = environment.getProperty("spring.config.location");

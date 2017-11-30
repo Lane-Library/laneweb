@@ -26,7 +26,7 @@ public class UserDataBinder implements DataBinder {
         if (user == null) {
             user = this.userFactories
                     .stream()
-                    .map(f -> f.createUser(request))
+                    .map((final UserFactory f) -> f.createUser(request))
                     .filter(Objects::nonNull)
                     .findFirst()
                     .orElse(null);
