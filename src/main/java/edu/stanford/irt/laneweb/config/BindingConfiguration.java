@@ -154,6 +154,8 @@ public class BindingConfiguration {
         List<CIDRRange> proxyCIDRRange = new ArrayList<>();
         // VPN 171.66.16.0 - 171.66.31.255
         proxyCIDRRange.add(new CIDRRange("171.66.16.0/20"));
+        // VPN 171.66.176.0 - 171.66.191.255
+        proxyCIDRRange.add(new CIDRRange("171.66.176.0/20"));
         // hospital 171.65.44.0 - 171.65.44.255
         proxyCIDRRange.add(new CIDRRange("171.65.44.0/24"));
         // hospital 171.65.125.0 - 171.65.125.255
