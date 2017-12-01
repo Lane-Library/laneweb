@@ -170,11 +170,6 @@ public class LanewebIT {
             this.mockMvc.perform(get("/eresources/search.html?q=pubmed").servletPath("/eresources/search.html"))
                     .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", ns)
                             .exists());
-            // known PMID
-            this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
-                    .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']//h:a", ns)
-                            .string("PMID: 20428285"))
-                    .andExpect(xpath("//h:li", ns).nodeCount(1));
             // usmle OR nbme OR "examination questions"; limited to Lane Catalog and Book Digital
             this.mockMvc.perform(get(
                     "/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
@@ -273,6 +268,32 @@ public class LanewebIT {
                     .andExpect(xpath(
                             "//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@title,'Movement disorders')]",
                             ns).exists());
+            // known PMID
+            this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
+                    .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']//h:a", ns)
+                            .string("PMID: 20428285"))
+                    .andExpect(xpath("//h:li", ns).nodeCount(1));
+            // citation search variant 1: long form month
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=J Med Libr Assoc. 2010 April 98(2):171-5.")
+                            .servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                                    ns).exists());
+            // citation search variant 2: numeric month
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-5.")
+                            .servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                                    ns).exists());
+            // citation search variant 3: end pages
+            this.mockMvc
+                    .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-175.")
+                            .servletPath("/eresources/search.html"))
+                    .andExpect(
+                            xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                                    ns).exists());
         }
     }
 
