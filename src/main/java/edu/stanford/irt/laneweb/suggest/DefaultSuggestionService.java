@@ -13,7 +13,7 @@ import edu.stanford.irt.suggest.Suggestion;
 
 public class DefaultSuggestionService implements SuggestionService {
 
-    private static final Pattern ER_PATTERN = Pattern.compile("^(Book|Journal|Bassett)$");
+    private static final Pattern ER_PATTERN = Pattern.compile("^(Book|Journal|bassett)$");
 
     private static final int MAX_QUERY_LENGTH = 100;
 

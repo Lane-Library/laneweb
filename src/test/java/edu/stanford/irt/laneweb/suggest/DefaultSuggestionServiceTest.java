@@ -69,10 +69,10 @@ public class DefaultSuggestionServiceTest {
         Suggestion suggestion = new Suggestion("1", "1");
         Collection<Suggestion> collection = new ArrayList<>();
         collection.add(suggestion);
-        expect(this.eresource.getSuggestionsForTerm("Bassett", "venous thrombosis"))
+        expect(this.eresource.getSuggestionsForTerm("bassett", "venous thrombosis"))
                 .andReturn(Collections.singleton(suggestion));
         replay(this.eresource, this.mesh);
-        Collection<String> suggestions = this.service.getSuggestions("venous thrombosis", "Bassett");
+        Collection<String> suggestions = this.service.getSuggestions("venous thrombosis", "bassett");
         assertTrue(suggestions.contains(suggestion.getSuggestionTitle()));
         verify(this.eresource, this.mesh);
     }
