@@ -1,25 +1,35 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
+import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
+
 public class LanewebConfigurationTest {
 
     private LanewebConfiguration configuration;
 
     @Before
-    public void setUp() {
-        this.configuration = new LanewebConfiguration();
+    public void setUp() throws URISyntaxException {
+        this.configuration = new LanewebConfiguration(new URI("classes"), new URI("content"), Boolean.TRUE,
+                mock(ServletContext.class), "version");
     }
 
     @Test
@@ -39,13 +49,17 @@ public class LanewebConfigurationTest {
 
     @Test
     public void testModel() {
-        assertNotNull(this.configuration.model());
+        Map<String, Object> model = this.configuration.model();
+        assertEquals("version", model.get(Model.VERSION));
+        assertSame(Boolean.TRUE, model.get(Model.DISASTER_MODE));
+        assertEquals("content", ModelUtil.getObject(model, Model.CONTENT_BASE, URI.class).toString());
+        assertEquals("classes", ModelUtil.getObject(model, Model.CLASSES_SERVICE_URI, URI.class).toString());
     }
 
     @Test
     public void testPropertySourcesPlaceholderConfigurer() {
-        ResourceLoader resourceLoader = createMock(ResourceLoader.class);
-        Environment environment = createMock(Environment.class);
+        ResourceLoader resourceLoader = mock(ResourceLoader.class);
+        Environment environment = mock(Environment.class);
         expect(resourceLoader.getResource("classpath:/application.properties")).andReturn(null);
         expect(resourceLoader.getResource("classpath:/config/application.properties")).andReturn(null);
         expect(resourceLoader.getResource("file:./application.properties")).andReturn(null);
