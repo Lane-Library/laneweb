@@ -2,13 +2,8 @@ package edu.stanford.irt.laneweb.config;
 
 import static org.junit.Assert.assertNotNull;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathFactoryConfigurationException;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
 public class XMLConfigurationTest {
 
@@ -20,8 +15,7 @@ public class XMLConfigurationTest {
     }
 
     @Test
-    public void testDocumentBuilderFactoryBean()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public void testDocumentBuilderFactoryBean() {
         assertNotNull(this.configuration.documentBuilderFactoryBean());
     }
 
@@ -61,8 +55,7 @@ public class XMLConfigurationTest {
     }
 
     @Test
-    public void testSAXParserFactoryBean()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public void testSAXParserFactoryBean() {
         assertNotNull(this.configuration.saxParserFactoryBean());
     }
 
@@ -82,25 +75,22 @@ public class XMLConfigurationTest {
     }
 
     @Test
-    public void testXIncludePipe() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
-            SAXNotSupportedException, ParserConfigurationException {
+    public void testXIncludePipe() {
         assertNotNull(this.configuration.xIncludePipe(null));
     }
 
     @Test
-    public void testXmlSAXParser()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public void testXmlSAXParser() {
         assertNotNull(this.configuration.xmlSAXParser());
     }
 
     @Test
-    public void testXPathFactoryBean() throws XPathFactoryConfigurationException {
+    public void testXPathFactoryBean() {
         assertNotNull(this.configuration.xPathFactoryBean());
     }
 
     @Test
-    public void testXPointerProcessor() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
-            SAXNotSupportedException, ParserConfigurationException {
+    public void testXPointerProcessor() {
         assertNotNull(this.configuration.xPointerProcessor());
     }
 }
