@@ -22,7 +22,7 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
 
     private static Collection<Result> getChildren(final JsonNode jsonNode, int depth) {
         Collection<Result> children = new ArrayList<>();
-        jsonNode.forEach(n -> children.add(getResultFromNode(n, depth + 1)));
+        jsonNode.forEach((final JsonNode n) -> children.add(getResultFromNode(n, depth + 1)));
         return children;
     }
 

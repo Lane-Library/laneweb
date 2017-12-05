@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * This filter redirects to https if the scheme is not https or there is not a gohttps header or a
  * x-forwarded-proto=https header
  */
+@WebFilter("/secure/*")
 public class LanewebHTTPSFilter extends AbstractLanewebFilter {
 
     private static final String HTTPS = "https";

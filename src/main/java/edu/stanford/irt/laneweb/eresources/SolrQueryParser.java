@@ -10,8 +10,12 @@ public final class SolrQueryParser {
     private List<QueryInspector> nonCombinables;
 
     public SolrQueryParser(final List<QueryInspector> parsers) {
-        this.combinables = parsers.stream().filter(QueryInspector::combinable).collect(Collectors.toList());
-        this.nonCombinables = parsers.stream().filter(qi -> !qi.combinable()).collect(Collectors.toList());
+        this.combinables = parsers.stream()
+                .filter(QueryInspector::combinable)
+                .collect(Collectors.toList());
+        this.nonCombinables = parsers.stream()
+                .filter((final QueryInspector qi) -> !qi.combinable())
+                .collect(Collectors.toList());
     }
 
     public String parse(final String query) {

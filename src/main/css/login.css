@@ -9,12 +9,12 @@
     padding: 0;
 }
 
-#persistent .header{
+#persistent .header {
     background-color: #aabec6;
     height: 90px;
 }
 
-#persistent .header span{
+#persistent .header span {
     display: inline-block;
     width: 250px;
     height: 70px;
@@ -23,7 +23,7 @@
     background-repeat: no-repeat;
 }
 
-#persistent .is-persistent{
+#persistent .is-persistent {
     text-align: left;
     margin-top: 35px;
     font-weight: bold;
@@ -32,11 +32,11 @@
     visibility: hidden;
 }
 
-#persistent .is-persistent input{
+#persistent .is-persistent input {
     margin-right: 3px;
 }
 
-#persistent h4{
+#persistent h4 {
     margin: 0 30px 0 30px;
 }
 
@@ -45,19 +45,19 @@
     color: grey;
 }
 
-#shibboleth-links .organization{  
+#shibboleth-links .organization {
     padding: 18px;
-    margin-bottom: 24px; 
+    margin-bottom: 24px;
 }
 
-#shibboleth-links .organization li{
+#shibboleth-links .organization li {
     display: inline-block;
     border-bottom: none;
     padding: 3px 6px;
     margin-bottom: 20px;
 }
 
-#shibboleth-links .organization a{
+#shibboleth-links .organization a {
     display: block;
     border: 1px solid #ddd;
     padding: 12px 3px 12px 3px;
@@ -65,7 +65,7 @@
 }
 
 
-#shibboleth-links .organization span{
+#shibboleth-links .organization span {
     display: inline-block;
     width: 170px;
     height: 50px;
@@ -74,27 +74,27 @@
     background-image: url('../images/organizations-logos-large.png');
 }
 
-#Stanford span{
+#Stanford span {
     background-position: -22px -272px;
 }
 
-#SHC span{
+#SHC span {
     background-position: -218px -272px;
 }
 
-#UHA span{
+#UHA span {
     background-position: -407px -272px;
 }
 
-#LPCH span{
+#LPCH span {
     background-position: -598px -272px;
 }
 
-#PCHA span{
+#PCHA span {
     background-position: -784px -272px;
 }
 
-#persistent .help{
+#persistent .help {
     font-size: 13px;
     position: absolute;
     right: 24px;

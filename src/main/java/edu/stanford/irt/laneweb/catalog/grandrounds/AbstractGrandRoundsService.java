@@ -29,7 +29,9 @@ public abstract class AbstractGrandRoundsService implements GrandRoundsService {
             for (Record record : collection) {
                 addPresentationIfValid(new Presentation(record), presentations);
             }
-            return presentations.stream().sorted((p1, p2) -> p2.getDate().compareTo(p1.getDate()))
+            return presentations.stream()
+                    .sorted((final Presentation p1, final Presentation p2)
+                            -> p2.getDate().compareTo(p1.getDate()))
                     .collect(Collectors.toList());
         } catch (CatalogSQLException | IOException e) {
             throw new LanewebException(e);

@@ -4,8 +4,6 @@ import static org.easymock.EasyMock.createMock;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.servlet.ServletContext;
 
@@ -37,14 +35,8 @@ public class BindingConfigurationTest {
     }
 
     @Test
-    public void testContentBaseDataBinder() throws URISyntaxException {
-        assertNotNull(this.configuration.contentBaseDataBinder(new URI("file:/")));
-    }
-
-    @Test
-    public void testDataBinder() throws URISyntaxException {
-        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null, null, null, null, null,
-                new URI("file:/")));
+    public void testDataBinder() {
+        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null));
     }
 
     @Test
@@ -111,10 +103,5 @@ public class BindingConfigurationTest {
     @Test
     public void testUserDataDataBinder() {
         assertNotNull(this.configuration.userDataDataBinder(null, null, null, null, null, null));
-    }
-
-    @Test
-    public void testVersionDataBinder() {
-        assertNotNull(this.configuration.versionDataBinder(null));
     }
 }

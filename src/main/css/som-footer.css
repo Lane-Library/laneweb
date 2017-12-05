@@ -7,7 +7,7 @@
 }
 
 #sm-footer ul {
-    background-image: url(../images/footer-logos.png);
+    background-image: url('../images/footer-logos.png');
     background-position: center;
     background-repeat: no-repeat;
     margin: 16px auto;
@@ -46,6 +46,7 @@
 #footer-schos {
     width: 18%;
 }
+
 #footer-uha {
     width: 18%;
 }

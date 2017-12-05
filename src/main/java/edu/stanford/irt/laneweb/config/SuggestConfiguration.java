@@ -7,27 +7,35 @@ import org.springframework.context.annotation.Configuration;
 
 import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.suggest.CompositeSuggestionManager;
+import edu.stanford.irt.laneweb.suggest.DefaultSuggestionService;
 import edu.stanford.irt.laneweb.suggest.SolrSuggestionManager;
+import edu.stanford.irt.laneweb.suggest.SuggestionService;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 @Configuration
 public class SuggestConfiguration {
 
-    @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/eresource")
+    @Bean
     public SolrSuggestionManager eresourceSuggestionManager(final SolrService solrService) {
         return new SolrSuggestionManager(solrService);
     }
 
-    @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/extensions-suggest")
-    public SuggestionManager extensionsSuggestionManager(final SolrSuggestionManager eresourceSuggestionManager,
-            final MeshSuggestionManager meshSuggestionManager) {
+    @Bean
+    public CompositeSuggestionManager extensionsSuggestionManager(
+            final SolrSuggestionManager eresourceSuggestionManager, final MeshSuggestionManager meshSuggestionManager) {
         return new CompositeSuggestionManager(
                 Arrays.asList(new SuggestionManager[] { eresourceSuggestionManager, meshSuggestionManager }));
     }
 
-    @Bean(name = "edu.stanford.irt.suggest.SuggestionManager/mesh")
+    @Bean
     public MeshSuggestionManager meshSuggestionManager() {
         return new MeshSuggestionManager();
+    }
+
+    @Bean
+    public SuggestionService suggestionService(final SolrSuggestionManager eresourceSuggestionManager,
+            final MeshSuggestionManager meshSuggestionManager) {
+        return new DefaultSuggestionService(eresourceSuggestionManager, meshSuggestionManager);
     }
 }
