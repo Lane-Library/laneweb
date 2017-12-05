@@ -1,6 +1,9 @@
 package edu.stanford.irt.laneweb.config;
 
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
+
+import javax.xml.transform.sax.SAXTransformerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +44,7 @@ public class XMLConfigurationTest {
 
     @Test
     public void testJoostTransformerHandlerFactory() {
-        assertNotNull(this.configuration.joostTransformerHandlerFactory(null));
+        assertNotNull(this.configuration.joostTransformerHandlerFactory(mock(SAXTransformerFactory.class), null, null));
     }
 
     @Test
@@ -51,7 +54,7 @@ public class XMLConfigurationTest {
 
     @Test
     public void testSaxonTransformerHandlerFactory() {
-        assertNotNull(this.configuration.saxonTransformerHandlerFactory(null));
+        assertNotNull(this.configuration.saxonTransformerHandlerFactory(mock(SAXTransformerFactory.class), null, null));
     }
 
     @Test
@@ -76,12 +79,12 @@ public class XMLConfigurationTest {
 
     @Test
     public void testXIncludePipe() {
-        assertNotNull(this.configuration.xIncludePipe(null));
+        assertNotNull(this.configuration.xIncludePipe(null, null, null, null));
     }
 
     @Test
     public void testXmlSAXParser() {
-        assertNotNull(this.configuration.xmlSAXParser());
+        assertNotNull(this.configuration.xmlSAXParser(null));
     }
 
     @Test
@@ -91,6 +94,6 @@ public class XMLConfigurationTest {
 
     @Test
     public void testXPointerProcessor() {
-        assertNotNull(this.configuration.xPointerProcessor());
+        assertNotNull(this.configuration.xPointerProcessor(null, null, null, null));
     }
 }

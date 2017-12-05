@@ -4,11 +4,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.ErrorListener;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -96,9 +102,10 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost")
-    public TransformerHandlerFactory joostTransformerHandlerFactory(final URIResolver uriResolver) {
-        return new TransformerHandlerFactory(joostSAXTransformerFactoryBean().getObject(), uriResolver,
-                errorListener());
+    public TransformerHandlerFactory joostTransformerHandlerFactory(
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/joost") final SAXTransformerFactory joostSAXTransformerFactory,
+            final URIResolver uriResolver, final ErrorListener errorListener) {
+        return new TransformerHandlerFactory(joostSAXTransformerFactory, uriResolver, errorListener);
     }
 
     @Bean(name = "javax.xml.transform.sax.SAXTransformerFactory/saxon")
@@ -107,9 +114,10 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon")
-    public TransformerHandlerFactory saxonTransformerHandlerFactory(final URIResolver uriResolver) {
-        return new TransformerHandlerFactory(saxonSAXTransformerFactoryBean().getObject(), uriResolver,
-                errorListener());
+    public TransformerHandlerFactory saxonTransformerHandlerFactory(
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTransformerFactory,
+            final URIResolver uriResolver, final ErrorListener errorListener) {
+        return new TransformerHandlerFactory(saxonSAXTransformerFactory, uriResolver, errorListener);
     }
 
     @Bean
@@ -127,7 +135,7 @@ public class XMLConfiguration {
         return factoryBean;
     }
 
-    @Bean
+    @Bean(name = "javax.xml.transform.TransformerFactory")
     public TransformerFactoryBean transformerFactoryBean() {
         return new TransformerFactoryBean("net.sf.saxon.TransformerFactoryImpl");
     }
@@ -144,13 +152,15 @@ public class XMLConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.XIncludePipe")
     @Scope("prototype")
-    public XIncludePipe xIncludePipe(final SourceResolver sourceResolver) {
-        return new XIncludePipe(sourceResolver, xmlSAXParser(), xIncludeExceptionListener(), xPointerProcessor());
+    public XIncludePipe xIncludePipe(final SourceResolver sourceResolver,
+            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
+            final XIncludeExceptionListener xIncludeExceptionListener, final XPointerProcessor xPointerProcessor) {
+        return new XIncludePipe(sourceResolver, xmlSAXParser, xIncludeExceptionListener, xPointerProcessor);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXParser/xml")
-    public SAXParser xmlSAXParser() {
-        return new JaxpSAXParser(saxParserFactoryBean().getObject());
+    public SAXParser xmlSAXParser(final SAXParserFactory saxParserFactory) {
+        return new JaxpSAXParser(saxParserFactory);
     }
 
     @Bean
@@ -163,8 +173,10 @@ public class XMLConfiguration {
     }
 
     @Bean
-    public XPointerProcessor xPointerProcessor() {
-        return new XPointerProcessorImpl(xmlSAXParser(), xPathFactoryBean().getObject(),
-                documentBuilderFactoryBean().getObject(), transformerFactoryBean().getObject());
+    public XPointerProcessor xPointerProcessor(
+            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
+            final XPathFactory xPathFactory, final DocumentBuilderFactory documentBuilderFactory,
+            @Qualifier("javax.xml.transform.TransformerFactory") final TransformerFactory transformerFactory) {
+        return new XPointerProcessorImpl(xmlSAXParser, xPathFactory, documentBuilderFactory, transformerFactory);
     }
 }
