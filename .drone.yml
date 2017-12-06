@@ -33,12 +33,11 @@ pipeline:
   slack:
     image: plugins/slack
     channel: irt-dcs-cicd
-    username: irt-lane/docker-laneweb
+    username: irt-lane/laneweb
     template: >
-      irt-lane/docker-laneweb build #{{ build.number }} finished with a {{ build.status }} status
-      Build log: https://ci.med.stanford.edu/irt-lane/docker-laneweb/{{ build.number }}
-      Changes: https://gitlab.med.stanford.edu/irt-lane/docker-laneweb/commit/{{ build.commit }}
+      irt-lane/laneweb build #{{ build.number }} finished with a {{ build.status }} status
+      Build log: https://ci.med.stanford.edu/irt-lane/laneweb/{{ build.number }}
+      Changes: https://gitlab.med.stanford.edu/irt-lane/laneweb/commit/{{ build.commit }}
     secrets: [ slack_webhook ]
     when:
       status: [ success, failure ]
-      branch: master
