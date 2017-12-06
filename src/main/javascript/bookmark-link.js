@@ -213,16 +213,11 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                var bookmarkable = false;
-                if (!target.get("href")) {
-                    bookmarkable = false;
-                } else if (target.getStyle("display").indexOf("inline") === 0 && !target.one("img") && !target.ancestor(".no-bookmarking", true)) {
-                    bookmarkable = true;
-                }
-                if (bookmarkable) {
-                    bookmarkable = !this._isAlreadyBookmarked(target);
-                }
-                return bookmarkable;
+                return target.get("href")
+                    && target.getStyle("display").indexOf("inline") === 0
+                    && !target.one("img")
+                    && !target.ancestor(".no-bookmarking", true)
+                    && !this._isAlreadyBookmarked(target);
             },
 
             /**

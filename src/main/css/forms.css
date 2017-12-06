@@ -20,7 +20,7 @@
 #feedback input,
 #feedback textarea,
 #feedback select {
-    box-shadow: rgba(0, 0, 0, 0.1) 0 0 8px;
+    box-shadow: rgba(0, 0, 0, .1) 0 0 8px;
 }
 
 #feedback textarea {
@@ -66,7 +66,7 @@
 /*-------------------------feedback widget--------------------------------------------------------------------------*/
 #feedback .mainFeedback /*looks the same as h4*/ {
     font-size: 1.8em;
-    letter-spacing: 0.05em;
+    letter-spacing: 005em;
     line-height: 1.2em;
     margin-bottom: .2em;
     color: #820000;
@@ -99,9 +99,7 @@
     background-color: white;
     width: 250px;
     box-sizing: border-box;
-    border-top: 2px solid #fff;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
+    border: 2px solid #fff;
     border-right: none;
     box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
 }
@@ -146,7 +144,6 @@
 .validatedField {
     color: green;
 }
-
 
 .breadcrumbForm {
     margin-top: 12px;

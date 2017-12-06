@@ -81,7 +81,7 @@ public class ClinicalSearchResultsSAXStrategy implements SAXStrategy<ClinicalSea
             atts.addAttribute(EMPTY_NS, END, END, CDATA, Integer.toString(start + length));
             atts.addAttribute(EMPTY_NS, TOTAL, TOTAL, CDATA, Integer.toString(results.getTotal()));
             XMLUtils.startElement(xmlConsumer, NAMESPACE, RESULTS, atts);
-            results.getResourceResults().stream().forEach(r -> resourceToSAX(xmlConsumer, r));
+            results.getResourceResults().stream().forEach((final Result r) -> resourceToSAX(xmlConsumer, r));
             searchResultsToSAX(xmlConsumer, searchResults.subList(start, start + length));
             XMLUtils.endElement(xmlConsumer, NAMESPACE, RESULTS);
             xmlConsumer.endPrefixMapping("");
@@ -92,6 +92,6 @@ public class ClinicalSearchResultsSAXStrategy implements SAXStrategy<ClinicalSea
     }
 
     private void searchResultsToSAX(final XMLConsumer xmlConsumer, final List<SearchResult> searchResults) {
-        searchResults.stream().forEach(s -> this.saxStrategy.toSAX(s, xmlConsumer));
+        searchResults.stream().forEach((final SearchResult s) -> this.saxStrategy.toSAX(s, xmlConsumer));
     }
 }

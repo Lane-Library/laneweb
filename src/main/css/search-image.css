@@ -34,11 +34,11 @@
     box-sizing: content-box;
 }
 
-#imageList li li{
+#imageList li li {
     height: auto;
 }
 
-#imageList li.admin{
+#imageList li.admin {
     margin-top: 30px;
 }
 
@@ -64,12 +64,12 @@
       padding-bottom: 12px;
 }
 
-.imageDetail .gl div{
+.imageDetail .gl div {
     overflow: hidden;
     margin: 10px 10px 10px 0;
 }
 
-.imageDetail .yui3-g{
+.imageDetail .yui3-g {
   margin-top: -24px;
 }
 
@@ -101,7 +101,7 @@
     background-color: #eee;
 }
 
-.imageDetailHidden{
+.imageDetailHidden {
     display: none;
 }
 
@@ -137,7 +137,7 @@
 
 #imageList img {
     height: 120px;
-    max-width: 230px;  
+    max-width: 230px;
 }
 
 #imageList a {
@@ -151,7 +151,7 @@
     padding: 10px 20px 16px 23px;
     height: 20px;
     box-sizing: content-box;
-}    
+}
 
 .result-summary .result {
     display: inline-block;

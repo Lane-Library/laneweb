@@ -21,7 +21,7 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
         JsonNode node = p.getCodec().readTree(p);
         JsonNode itemsNode = node.get("items");
         List<CourseReservesItem> itemList = new ArrayList<>();
-        itemsNode.forEach(n -> itemList.add(new CourseReservesItem(
+        itemsNode.forEach((final JsonNode n) -> itemList.add(new CourseReservesItem(
                 getTextFromNode(n.get("author")),
                 getTextFromNode(n.get("callNumber")),
                 n.get("id").asInt(),

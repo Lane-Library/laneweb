@@ -17,7 +17,7 @@ public class FlickrPhotoSAXStrategy extends AbstractXHTMLSAXStrategy<List<Flickr
         try {
             startHTMLDocument(xmlConsumer);
             startBody(xmlConsumer);
-            photos.stream().forEach(p -> toSAX(p, xmlConsumer));
+            photos.stream().forEach((final FlickrPhoto p) -> toSAX(p, xmlConsumer));
             endBody(xmlConsumer);
             endHTMLDocument(xmlConsumer);
         } catch (SAXException e) {

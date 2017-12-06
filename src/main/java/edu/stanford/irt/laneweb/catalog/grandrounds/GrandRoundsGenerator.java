@@ -45,7 +45,8 @@ public class GrandRoundsGenerator extends AbstractGenerator implements Parameter
         try {
             xmlConsumer.startDocument();
             XMLUtils.startElement(xmlConsumer, "", "grandrounds");
-            presentations.stream().forEach(p -> this.presentationSAXStrategy.toSAX(p, xmlConsumer));
+            presentations.stream().forEach((final Presentation p)
+                    -> this.presentationSAXStrategy.toSAX(p, xmlConsumer));
             XMLUtils.endElement(xmlConsumer, "", "grandrounds");
             xmlConsumer.endDocument();
         } catch (SAXException e) {
