@@ -6,6 +6,7 @@ import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Bots probing for vulnerabilities are sending requests with parameter value of -1%27. This filter sends them a simple
  * error message.
  */
+@WebFilter({ "/search.html", "/biomed-resources/*", "/apps/*" })
 public class NegativeOneAposFilter extends AbstractLanewebFilter {
 
     private static final String NEGATIVE_ONE_APOS = "-1'";

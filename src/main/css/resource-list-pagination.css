@@ -1,21 +1,26 @@
 .resourceListPagination{
     font-size: 13px;
 }
+
 .view-by{
     position: relative;
     white-space: nowrap;
 }
+
 .view-by .dropdown {
     position: absolute;
     right: 0;
     top: -4px;
 }
+
 .pagingLabels {
     padding: 0 12px;
 }
+
 .pagingLabels.disabled {
     color: #999;
 }
+
 .labelTitle{
     display: inline-block;
     width: 175px;
@@ -34,7 +39,7 @@
     padding: 4px 8px;
     border: 1px solid #dadad9;
     border-radius: 3px 3px 0 0;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     margin-left: 3px;
 }
 

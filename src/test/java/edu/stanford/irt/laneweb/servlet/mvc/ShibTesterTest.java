@@ -7,14 +7,13 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,22 +38,26 @@ public class ShibTesterTest {
 
     @Test
     public void testTestUrl() throws IOException {
-        List<String> lines = Files
-                .readAllLines(FileSystems.getDefault().getPath(getClass().getResource("shib-tester.txt").getPath()));
-        StringBuilder sb = new StringBuilder();
-        lines.stream().forEach(s -> sb.append(s).append('\n'));
-        StringWriter sw = new StringWriter();
-        expect(this.response.getWriter()).andReturn(new PrintWriter(sw));
-        expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
-        expect(this.request.getHeader("name")).andReturn("value");
-        expect(this.request.getRemoteUser()).andReturn("user");
-        expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
-        expect(this.request.getAttributeNames())
-                .andReturn(Collections.enumeration(Arrays.asList(new String[] { "name", "org.springframework.foo" })));
-        this.response.setContentType("text/plain");
-        replay(this.request, this.response);
-        this.tester.testUrl(this.request, this.response);
-        assertEquals(sb.toString(), sw.toString());
-        verify(this.request, this.response);
+        try (BufferedReader r = new BufferedReader(
+                new InputStreamReader(getClass().getResourceAsStream("shib-tester.txt")))) {
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = r.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+            StringWriter sw = new StringWriter();
+            expect(this.response.getWriter()).andReturn(new PrintWriter(sw));
+            expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
+            expect(this.request.getHeader("name")).andReturn("value");
+            expect(this.request.getRemoteUser()).andReturn("user");
+            expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
+            expect(this.request.getAttributeNames()).andReturn(
+                    Collections.enumeration(Arrays.asList(new String[] { "name", "org.springframework.foo" })));
+            this.response.setContentType("text/plain");
+            replay(this.request, this.response);
+            this.tester.testUrl(this.request, this.response);
+            assertEquals(sb.toString(), sw.toString());
+            verify(this.request, this.response);
+        }
     }
 }

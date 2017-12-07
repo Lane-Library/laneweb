@@ -19,7 +19,7 @@ Y.Test.Runner.add(new Y.Test.Case({
         Y.lane.fire("search:sourceChange", {newVal: "images-all"});
         Y.Assert.areEqual("mesh", this.suggest.limit);
         Y.lane.fire("search:sourceChange", {newVal: "bassett"});
-        Y.Assert.areEqual("bassett", this.suggest.limit);
+        Y.Assert.areEqual("Bassett", this.suggest.limit);
         Y.lane.fire("search:sourceChange", {newVal: "all-all"});
         Y.Assert.areEqual("er-mesh", this.suggest.limit);
         Y.lane.fire("search:sourceChange", {newVal: "bioresearch-all"});

@@ -21,9 +21,9 @@ import edu.stanford.irt.laneweb.eresources.EresourceStatusProvider;
 import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.servlet.mvc.IndexDotHtmlStatusProvider;
 import edu.stanford.irt.laneweb.suggest.SuggestStatusProvider;
+import edu.stanford.irt.laneweb.suggest.SuggestionService;
 import edu.stanford.irt.status.StatusProvider;
 import edu.stanford.irt.status.StatusService;
-import edu.stanford.irt.suggest.SuggestionManager;
 
 @Configuration
 public class StatusConfiguration {
@@ -71,9 +71,7 @@ public class StatusConfiguration {
 
     @Bean
     @Order(1)
-    public SuggestStatusProvider suggestStatusProvider(
-            @Qualifier("edu.stanford.irt.suggest.SuggestionManager/eresource")
-            final SuggestionManager suggestionManager) {
-        return new SuggestStatusProvider(suggestionManager, SLOW_SUGGESTION_TIME, "cardio");
+    public SuggestStatusProvider suggestStatusProvider(final SuggestionService suggestionService) {
+        return new SuggestStatusProvider(suggestionService, SLOW_SUGGESTION_TIME, "cardio");
     }
 }

@@ -1,9 +1,11 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import javax.servlet.FilterChain;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebFilter({ "/tobacco", "/tobacco/*" })
 public class TobaccoRedirectFilter extends AbstractLanewebFilter {
 
     @Override

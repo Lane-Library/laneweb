@@ -7,6 +7,40 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-12-04" version="3.3.55" description="3.3.55 bug fix release">
+            <action date="2017-12-02" dev="ceyates" issue="137456" type="fix">
+                no suggestions when bassett tab selected
+            </action>
+            <action date="2017-11-30" dev="ceyates" issue="137430" type="update">
+                Stanford VPN IP Address Changes
+            </action>
+            <action date="2017-11-29" dev="ceyates" issue="137395" type="update">
+                use j2ee servlet annotations in place of web.xml where possible
+            </action>
+            <action date="2017-11-28" dev="ceyates" issue="137371" type="fix">
+                /classes/calendar.ics has content-type application/xml;charset=utf-8
+            </action>
+        </release>
+        <release date="2017-11-27" version="3.3.54" description="3.3.54 bug fix release">
+            <action date="2017-11-20" dev="ceyates" issue="137173" type="update">
+                virtual reality icon for equipment page
+            </action>
+            <action date="2017-11-16" dev="olgary" issue="137166" type="update">
+                removed light blue border bottom from calendars li
+            </action>
+            <action date="2017-11-16" dev="olgary" issue="137163" type="update">
+                templates - removed link to search help page, add how to use links in footer
+            </action>
+            <action date="2017-11-15" dev="ryanmax" issue="137146" type="fix">
+                search engine verification requests are failing
+            </action>
+            <action date="2017-11-14" dev="olgary" issue="137111" type="update">
+                fixed the background color to match SoM - main-body.css
+            </action>
+            <action date="2017-11-15" dev="ceyates" issue="136672" type="update">
+                layout fixes 
+            </action>
+        </release>
         <release date="2017-11-13" version="3.3.53" description="3.3.53 bug fix release">
             <action date="2017-11-10" dev="olgary" issue="137047" type="update">
                 equipment.css - change the icon size to 4x to match others

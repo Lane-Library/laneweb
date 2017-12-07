@@ -1,14 +1,12 @@
 package edu.stanford.irt.laneweb.config;
 
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathFactoryConfigurationException;
+import javax.xml.transform.sax.SAXTransformerFactory;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXNotRecognizedException;
-import org.xml.sax.SAXNotSupportedException;
 
 public class XMLConfigurationTest {
 
@@ -20,8 +18,7 @@ public class XMLConfigurationTest {
     }
 
     @Test
-    public void testDocumentBuilderFactoryBean()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public void testDocumentBuilderFactoryBean() {
         assertNotNull(this.configuration.documentBuilderFactoryBean());
     }
 
@@ -47,7 +44,7 @@ public class XMLConfigurationTest {
 
     @Test
     public void testJoostTransformerHandlerFactory() {
-        assertNotNull(this.configuration.joostTransformerHandlerFactory(null));
+        assertNotNull(this.configuration.joostTransformerHandlerFactory(mock(SAXTransformerFactory.class), null, null));
     }
 
     @Test
@@ -57,12 +54,11 @@ public class XMLConfigurationTest {
 
     @Test
     public void testSaxonTransformerHandlerFactory() {
-        assertNotNull(this.configuration.saxonTransformerHandlerFactory(null));
+        assertNotNull(this.configuration.saxonTransformerHandlerFactory(mock(SAXTransformerFactory.class), null, null));
     }
 
     @Test
-    public void testSAXParserFactoryBean()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public void testSAXParserFactoryBean() {
         assertNotNull(this.configuration.saxParserFactoryBean());
     }
 
@@ -82,25 +78,22 @@ public class XMLConfigurationTest {
     }
 
     @Test
-    public void testXIncludePipe() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
-            SAXNotSupportedException, ParserConfigurationException {
-        assertNotNull(this.configuration.xIncludePipe(null));
+    public void testXIncludePipe() {
+        assertNotNull(this.configuration.xIncludePipe(null, null, null, null));
     }
 
     @Test
-    public void testXmlSAXParser()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
-        assertNotNull(this.configuration.xmlSAXParser());
+    public void testXmlSAXParser() {
+        assertNotNull(this.configuration.xmlSAXParser(null));
     }
 
     @Test
-    public void testXPathFactoryBean() throws XPathFactoryConfigurationException {
+    public void testXPathFactoryBean() {
         assertNotNull(this.configuration.xPathFactoryBean());
     }
 
     @Test
-    public void testXPointerProcessor() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
-            SAXNotSupportedException, ParserConfigurationException {
-        assertNotNull(this.configuration.xPointerProcessor());
+    public void testXPointerProcessor() {
+        assertNotNull(this.configuration.xPointerProcessor(null, null, null, null));
     }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * A servlet that responds to Apache errordocs requests. It sends the code found in the url or 404 if none.
  */
+@WebServlet("/errordocs/*")
 public class ErrordocsServlet extends HttpServlet {
 
     private static final Pattern ERROR_PATH_PATTERN = Pattern.compile(".*/errordocs/(\\d\\d\\d)err.html");

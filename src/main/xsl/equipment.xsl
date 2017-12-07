@@ -59,6 +59,7 @@
           <xsl:when test="contains($title, 'Recorder')">microphone</xsl:when>
           <xsl:when test="contains($title, 'Polling')">users</xsl:when>
           <xsl:when test="contains($title, 'magnifying')">search</xsl:when>
+          <xsl:when test="contains($title, 'Virtual Reality')">ge</xsl:when>
         </xsl:choose>
       </xsl:attribute>
     </i></div>

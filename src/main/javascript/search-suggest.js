@@ -41,7 +41,7 @@ if (document.querySelector(".search-form"))  {
                     } else if (source.match(/^(bioresearch|images)/)) {
                         limit = "mesh";
                     } else if (source.match(/^bassett/)) {
-                        limit = "bassett";
+                        limit = "Bassett";
                     }
                     model.suggest.setLimit(limit);
                     model.source = source;

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * Filter to add an X-Frame-Options header with value SAMEORIGIN when a referrer is present and not .stanford.edu. This
  * filter will not apply to requests lacking a referrer, including HTTPS requests. See case 112758 for more details.
  */
+@WebFilter("*.html")
 public class FrameOptionsFilter extends AbstractLanewebFilter {
 
     @Override

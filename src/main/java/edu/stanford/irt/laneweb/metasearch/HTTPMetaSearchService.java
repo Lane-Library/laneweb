@@ -42,7 +42,7 @@ public class HTTPMetaSearchService implements MetaSearchService {
         }
         if (engines != null && !engines.isEmpty()) {
             requestURI.append("&engines=");
-            engines.stream().forEach(e -> requestURI.append(e).append(','));
+            engines.stream().forEach((final String e) -> requestURI.append(e).append(','));
             requestURI.setLength(requestURI.length() - 1);
         }
     }

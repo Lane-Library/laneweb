@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
  * sends Disallow: / if not production server. NOTE: CAB group has asked to be notified of any robots.txt changes. Send
  * description of changes to irt-change@lists.stanford.edu
  */
+@WebServlet("/robots.txt")
 public class RobotsDotTextServlet extends HttpServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(RobotsDotTextServlet.class);
