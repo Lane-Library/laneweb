@@ -218,7 +218,7 @@
                     </li>
                     <li class="dropdown nav-menu" data-path="/contacts/">
                         <span>Contact</span>
-                        <div class="dropdown-content nav-menu-content" style="right:0"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
+                        <div class="dropdown-content nav-menu-content" style="right:0;left:auto"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
                     </li>

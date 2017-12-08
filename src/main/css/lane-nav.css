@@ -1,75 +1,72 @@
-.lane-nav{
+.lane-nav {
+    background-color: rgb(197, 207, 209);
+    box-shadow: inset 0 5px 5px -5px #000;
     position: absolute;
     top: 80px;
     width: 100%;
-    background-color: rgb(197, 207, 209);
-    box-shadow: inset 0 5px 5px -5px #000;
-}
-.lane-nav > ul {
-    text-align: center;
-}
-.nav-menu{
-    height: 46px;
-    display: inline-block;
-    text-align: left;
-    box-sizing: border-box;
 }
 
-.nav-menu > span{
+.lane-nav > ul {
+    display: flex;
+}
+
+.nav-menu {
+    display: inline-block;
+    flex: 1 1 auto;
+}
+
+.nav-menu > span {
     color: #3c3623;
     cursor: default;
-    padding: 0 21px;
-    line-height: 46px;
     display: block;
     font-size: 15px;
-    border: none;
-    font-family: 'Source Sans Pro', sans-serif;
+    line-height: 46px;
+    text-align: center;
+    white-space: nowrap;
 }
 
-.nav-menu span a:visited{
-    color: #3c3623;
-}
-
-.nav-menu:hover > span,
-.nav-menu-active > span{
+.nav-menu:hover,
+.nav-menu-active {
     color: #3c3623;
     background-color: white;
     box-shadow: inset 0 5px 5px -5px #000;
     border: none;
 }
 
-.nav-menu .nav-menu-content{
+.nav-menu .nav-menu-content {
     border-top: none;
+    left: 0;
     padding: 6px 0;
     z-index: 1;
 }
 
-.nav-menu-content li{
+.nav-menu-content li {
     width: 205px;
     padding: 6px 6px 6px 18px;
     box-sizing: border-box;
     border-bottom: solid 1px #f0f4f5;
 }
 
-.nav-menu-content li:last-child{
+.nav-menu-content li:last-child {
     border-bottom: none;
 }
 
-.nav-menu-content a{
+.nav-menu-content a {
     display: inline;
     font-weight: normal;
     color: #007c92;
     font-size: 14px;
 }
 
-.nav-menu-content a:visited{
+.nav-menu-content a:visited {
     color: #428bca;
 }
-.nav-menu-content a:hover{
+
+.nav-menu-content a:hover {
     color: #820000;
 }
 
-.nav-menu-content.portals{
+.nav-menu-content.portals {
     width: 600px;
 }
 
@@ -78,7 +75,7 @@
     column-gap: 0;
 }
 
-.nav-menu-content.portals li{
+.nav-menu-content.portals li {
     display: inline-block;
     width: 200px;
 }
