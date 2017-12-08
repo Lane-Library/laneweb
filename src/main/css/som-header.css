@@ -1,5 +1,8 @@
 .som-header {
+    box-sizing: border-box;
     height: 50px;
+    min-width: 1089px;
+    padding: 0 5%;
     position: absolute;
     top: 0;
     width: 100%;
@@ -7,7 +10,6 @@
 
 .som-header div {
     display: inline-block;
-    margin: 0 5%;
     background-image: url('../images/logo-sprite-globalheader-off.png');
     background-repeat: no-repeat;
     height: 50px;
@@ -41,7 +43,6 @@
     border: none;
     padding: 8px;
     top: 50px;
-    z-index: 1;
 }
 
 .som-header div:nth-child(1) ul {
