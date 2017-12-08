@@ -178,6 +178,7 @@ public class BindingConfiguration {
         templateNames.add("none");
         templateNames.add("history");
         templateNames.add("wilson");
+        templateNames.add("responsive");
         Map<String, String> templateMap = new HashMap<>();
         templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "bassettLargerView");
         templateMap.put("^/discoveryLoginPage.html", "none");
