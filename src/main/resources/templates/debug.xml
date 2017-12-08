@@ -225,27 +225,23 @@
                 </ul>
             </div>
         </div>
-        <div id="somHeader">
-            <div class="centered">
-                <div id="som2">
-                    <h2>Stanford Medicine</h2>
-                    <ul>
-                        <li><a href="http://med.stanford.edu/">Home</a></li>
-                        <li><a href="http://med.stanford.edu/health-care.html">Health Care</a></li>
-                        <li><a href="http://med.stanford.edu/research.html">Research</a></li>
-                        <li><a href="http://med.stanford.edu/education.html">Education</a></li>
-                        <li><a href="http://medicalgiving.stanford.edu/">Give</a></li>
-                        <li><a href="http://med.stanford.edu/about.html">About</a></li>
-                    </ul>
-                </div>
-                <div id="su">
-                    <h2>Stanford University</h2>
-                    <ul>
-                        <li><a href="http://www.stanford.edu/">Home</a></li>
-                        <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
-                        <li><a href="http://searchworks.stanford.edu/">SearchWorks</a></li>
-                    </ul>
-                </div>
+        <div class="som-header">
+            <div class="dropdown">
+                <ul class="dropdown-content">
+                    <li><a href="http://med.stanford.edu/">Home</a></li>
+                    <li><a href="http://med.stanford.edu/health-care.html">Health Care</a></li>
+                    <li><a href="http://med.stanford.edu/research.html">Research</a></li>
+                    <li><a href="http://med.stanford.edu/education.html">Education</a></li>
+                    <li><a href="http://medicalgiving.stanford.edu/">Give</a></li>
+                    <li><a href="http://med.stanford.edu/about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <ul class="dropdown-content">
+                    <li><a href="http://www.stanford.edu/">Home</a></li>
+                    <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
+                    <li><a href="http://searchworks.stanford.edu/">SearchWorks</a></li>
+                </ul>
             </div>
         </div>
         <div id="laneFooter">
@@ -276,7 +272,7 @@
                     </div>
                     <div class="yui3-u-1-6">
                         <ul>
-                             <li><a href="/using-lib/eligibility.html">Your Eligibility</a></li>
+                            <li><a href="/using-lib/eligibility.html">Your Eligibility</a></li>
                             <li><a href="/using-lib/lane-login.html">Your Login</a></li>
                             <li><a href="https://docxpress.stanford.edu/">DocXpress <i class="fa fa-external-link"></i></a></li>
                             <li><a href="/using-lib/study-computing-spaces.html">Study &amp; Computing Spaces</a></li>
