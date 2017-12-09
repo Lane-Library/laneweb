@@ -6,8 +6,17 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style type="text/css">
             html, .som-header, .centered { min-width:0 }
+            @media (max-width: 991px) {
+                .som-header, .lane-nav, #libraryContact, #login, #sm-footer {
+                    display: none;
+                 }
+                 #main, .search-form {
+                     margin-top: 0;
+                 }
+            }
         </style>
     </head>
     <body>
