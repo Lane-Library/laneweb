@@ -428,6 +428,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
                             <includes>
+                                <include>pure-overrides-min.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
