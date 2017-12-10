@@ -19,8 +19,8 @@
                  }
             }
             /* hack to remove white line above search form */
-            .search-form {
-                margin-top: 45px;
+            .lane-nav {
+                height: 47px;
             }
         </style>
     </head>
