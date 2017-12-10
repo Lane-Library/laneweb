@@ -139,6 +139,11 @@
                     <map:transform type="proxy-links"/>
                 </map:when>
             </map:select>
+            <map:select type="responsive">
+                <map:when test="true">
+                    <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
+                </map:when>
+            </map:select>
             <map:transform type="namespace-filter"/>
             <map:transform type="debug"/>
             <map:serialize type="html5"/>

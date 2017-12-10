@@ -18,6 +18,7 @@ import edu.stanford.irt.cocoon.sitemap.select.ModelAttributeSelector;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.cocoon.spring.VariablePropertyEditor;
 import edu.stanford.irt.laneweb.cocoon.CacheableSelector;
+import edu.stanford.irt.laneweb.cocoon.ResponsiveToggleSelector;
 import edu.stanford.irt.laneweb.ipgroup.IPGroupSelector;
 
 @Configuration
@@ -62,6 +63,11 @@ public class SitemapConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/regexp")
     public Matcher regexpMatcher() {
         return new RegexpMatcher(SITEMAP_URI);
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/responsive")
+    public Selector responsiveSelector() {
+        return new ResponsiveToggleSelector();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.match.Matcher/url-decoding-wildcard")

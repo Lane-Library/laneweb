@@ -1,4 +1,6 @@
-.business-card .yui3-g [class *= 'yui3-u']{
+.business-card .yui3-g [class^='yui3-u'],
+.business-card .pure-g [class^='pure-u'],
+{
     font-family: 'Fjord One', serif;
 }
 
