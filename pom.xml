@@ -433,7 +433,8 @@
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
-                                <include>font-awesome-min.css</include>
+                                <include>fontawesome-local-min.css</include>
+                                <include>som-colors-min.css</include>
                                 <include>header-min.css</include>
                                 <include>search-form-min.css</include>
                                 <include>dropdown-min.css</include>

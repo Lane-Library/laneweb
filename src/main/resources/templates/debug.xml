@@ -8,7 +8,8 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-local.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
