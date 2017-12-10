@@ -18,6 +18,10 @@
                      margin-top: 0;
                  }
             }
+            /* hack to remove white line above search form */
+            .search-form {
+                margin-top: 45px;
+            }
         </style>
     </head>
     <body>
