@@ -428,7 +428,6 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
                             <includes>
-                                <include>${basedir}/src/main/css/yui.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
@@ -576,7 +575,6 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>${basedir}/src/main/css/history/yui.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
                             </includes>
