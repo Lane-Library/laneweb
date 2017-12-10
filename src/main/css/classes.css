@@ -28,23 +28,17 @@
 
 .class .date:before {
     background-color: #009abb;
+    width: 24.2%;
 }
 
 .archive .date:before {
     background-color: #ccc;
-}
-
-
-.yui3-u-1-4 .date:before {
-    width: 24.2%;
-}
-
-.yui3-u-1-5 .date:before {
-    width: 19.2%;
-}
-
-.yui3-u-1-8 .date:before {
     width: 12.5%;
+}
+
+/*.class.presentation is on the grandrounds pages*/
+.class.presentation .date:before {
+    width: 19.2%;
 }
 
 .class .month-day, .archive .month-day {

@@ -31,7 +31,7 @@
     </xsl:template>
 
     <xsl:template match="presentation">
-        <div class="class">
+        <div class="class presentation">
             <div class="yui3-g">
                 <div class="yui3-u-1-5">
                     <div class="date">
