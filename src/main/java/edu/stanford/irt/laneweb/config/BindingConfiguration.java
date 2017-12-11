@@ -19,6 +19,7 @@ import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
 import edu.stanford.irt.laneweb.livechat.Schedule;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
@@ -83,12 +84,13 @@ public class BindingConfiguration {
             final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
             final BookmarkDataBinder bookmarkDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
             final ModelDataBinder modelDataBinder) {
-        List<DataBinder> dataBinders = new ArrayList<>(18);
+        List<DataBinder> dataBinders = new ArrayList<>(19);
         dataBinders.add(userDataBinder);
         dataBinders.add(activeSunetidDataBinder);
         dataBinders.add(ticketDataBinder);
-        dataBinders.add(new BooleanSessionParameterDataBinder("debug", "debug"));
+        dataBinders.add(new BooleanSessionParameterDataBinder(Model.DEBUG, Model.DEBUG));
         dataBinders.add(remoteProxyIPDataBinder());
+        dataBinders.add(new BooleanSessionParameterDataBinder(Model.RESPONSIVE, Model.RESPONSIVE));
         dataBinders.add(templateDataBinder());
         dataBinders.add(emridDataBinder());
         dataBinders.add(new RequestParameterDataBinder());

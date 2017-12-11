@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2017-12-11" version="3.3.56" description="3.3.56 bug fix release">
+            <action date="2017-12-10" dev="ceyates" issue="137547" type="add">
+                create a feature toggle that provides a template for responsive work
+            </action>
+            <action date="2017-12-08" dev="ryanmax" issue="137544" type="update">
+                upgrade to spring-data-solr-3.0x
+            </action>
+        </release>
         <release date="2017-12-04" version="3.3.55" description="3.3.55 bug fix release">
             <action date="2017-12-02" dev="ceyates" issue="137456" type="fix">
                 no suggestions when bassett tab selected

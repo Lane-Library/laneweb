@@ -3,10 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/pure.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style type="text/css">
+            html, .som-header, .centered { min-width:0 }
+            @media (max-width: 991px) {
+                .som-header, .lane-nav, #libraryContact, #login, #laneFooter, #sm-footer {
+                    display: none;
+                 }
+                 #main, .search-form {
+                     margin-top: 0;
+                 }
+            }
+            /* hack to remove white line above search form */
+            .lane-nav {
+                height: 47px;
+            }
+        </style>
     </head>
     <body>
         <div id="main">

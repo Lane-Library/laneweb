@@ -50,6 +50,11 @@ public class SitemapConfigurationTest {
     }
 
     @Test
+    public void testResponsiveSelector() {
+        assertNotNull(this.configuration.responsiveSelector());
+    }
+
+    @Test
     public void testUrlDecodingMatcher() {
         assertNotNull(this.configuration.urlDecodingMatcher());
     }

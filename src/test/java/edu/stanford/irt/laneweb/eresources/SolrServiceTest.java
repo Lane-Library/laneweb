@@ -52,12 +52,12 @@ public class SolrServiceTest {
     @Test
     public final void testFacetByField() {
         FacetPage<Object> fpage = createMock(FacetPage.class);
-        expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
+        expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
         this.solrService.facetByField("query", "filters", "field", 0, 10, 1, FacetSort.COUNT);
         verify(this.template, fpage);
         reset(this.template, fpage);
-        expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
+        expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
         this.solrService.facetByField("query", "", "field", 0, 10, 1, FacetSort.COUNT);
         verify(this.template, fpage);
@@ -66,12 +66,12 @@ public class SolrServiceTest {
     @Test
     public final void testFacetByManyFields() {
         FacetPage<Object> fpage = createMock(FacetPage.class);
-        expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
+        expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
         this.solrService.facetByManyFields("query", "filters", 1);
         verify(this.template, fpage);
         reset(this.template, fpage);
-        expect(this.template.queryForFacetPage(anyObject(), anyObject())).andReturn(fpage);
+        expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
         this.solrService.facetByManyFields("query", "", 1);
         verify(this.template, fpage);
@@ -79,7 +79,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetCore() {
-        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);
         replay(this.template, this.cursor);
         this.solrService.getCore("type");
@@ -93,7 +93,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetMesh() {
-        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);
         replay(this.template, this.cursor);
         this.solrService.getMesh("type", "mesh");
@@ -112,7 +112,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeString() {
-        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);
         replay(this.template, this.cursor);
         this.solrService.getType("type");
@@ -121,7 +121,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeStringChar() {
-        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);
         replay(this.template, this.cursor);
         this.solrService.getType("type", 'a');
@@ -135,7 +135,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testGetTypeStringCharHash() {
-        expect(this.template.queryForCursor(isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);
         replay(this.template, this.cursor);
         this.solrService.getType("type", '#');
@@ -184,25 +184,26 @@ public class SolrServiceTest {
     @Test
     public final void testSearchWithFilters() {
         Page<Eresource> page = createMock(Page.class);
-        expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value",
-                new PageRequest(0, 1, null))).andReturn(page);
+        PageRequest pr = createMock(PageRequest.class);
+        expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value", pr)).andReturn(page);
         replay(this.repository, page);
-        this.solrService.searchWithFilters("query", "field1:value::field2:value", new PageRequest(0, 1));
+        this.solrService.searchWithFilters("query", "field1:value::field2:value", pr);
         verify(this.repository, page);
     }
 
     @Test
     public final void testSearchWithFiltersFacetsNull() {
         Page<Eresource> page = createMock(Page.class);
-        expect(this.repository.searchFindAllWithFilter("query", "", new PageRequest(0, 1, null))).andReturn(page);
+        PageRequest pr = createMock(PageRequest.class);
+        expect(this.repository.searchFindAllWithFilter("query", "", pr)).andReturn(page);
         replay(this.repository, page);
-        this.solrService.searchWithFilters("query", null, new PageRequest(0, 1));
+        this.solrService.searchWithFilters("query", null, pr);
         verify(this.repository, page);
     }
 
     @Test
     public final void testSuggestFindAll() {
-        expect(this.repository.suggestFindAll("query terms", "query +terms", new PageRequest(0, 10)))
+        expect(this.repository.suggestFindAll("query terms", "query +terms",  PageRequest.of(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.suggestFindAll("query terms");
@@ -211,7 +212,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testSuggestFindByType() {
-        expect(this.repository.suggestFindByType("term", "Type", new PageRequest(0, 10)))
+        expect(this.repository.suggestFindByType("term", "Type",  PageRequest.of(0, 10)))
                 .andReturn(Collections.emptyList());
         replay(this.repository);
         this.solrService.suggestFindByType("term", "Type");

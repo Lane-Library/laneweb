@@ -46,7 +46,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
-        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css</sonar.exclusions>
+        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
@@ -109,7 +109,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.67</version>
+            <version>3.0.68</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -190,7 +190,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.16</version>
+            <version>1.0.18</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -224,7 +224,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>2.0.11.RELEASE</version>
+            <version>3.0.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -435,12 +435,13 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
                             <includes>
-                                <include>${basedir}/src/main/css/yui.css</include>
+                                <include>pure-overrides-min.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
-                                <include>font-awesome-min.css</include>
+                                <include>fontawesome-local-min.css</include>
+                                <include>som-colors-min.css</include>
                                 <include>header-min.css</include>
                                 <include>search-form-min.css</include>
                                 <include>dropdown-min.css</include>
@@ -582,7 +583,6 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>${basedir}/src/main/css/history/yui.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
                             </includes>

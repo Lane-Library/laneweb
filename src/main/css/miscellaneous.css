@@ -4,7 +4,8 @@ body, select, input, button, textarea {
 }
 
 /*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
-.yui3-g [class*='yui3-u'] {
+.yui3-g [class^='yui3-u'],
+.pure-g [class^='pure-u'] {
     font-family: 'Source Sans Pro', sans-serif;
 }
 

@@ -111,6 +111,8 @@ public class Model {
 
     public static final String RESOURCES = "resources";
 
+    public static final String RESPONSIVE = "responsive";
+
     public static final String RETURN = "return";
 
     public static final String SELECTION = "selection";
@@ -137,6 +139,8 @@ public class Model {
 
     public static final String TITLE = "title";
 
+    public static final String TODAY = "today";
+
     public static final String TODAYS_HOURS = "todays-hours";
 
     public static final String TYPE = "type";
@@ -156,8 +160,6 @@ public class Model {
     public static final String USER_ID = "userid";
 
     public static final String VERSION = "version";
-
-    public static final String TODAY = "today";
 
     private Model() {
         // private constructior

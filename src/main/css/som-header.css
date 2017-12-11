@@ -1,74 +1,70 @@
-#somHeader{
+.som-header {
+    box-sizing: border-box;
+    height: 50px;
+    min-width: 1089px;
+    padding: 0 5%;
     position: absolute;
     top: 0;
     width: 100%;
-    height: 50px;
-    background-color: rgb(236, 241, 242);
 }
-#som2{
-    float: left;
-}
-#su{
-    float: right;
-}
-#somHeader div:hover{
-    background-image: url('../images/diag.png');
-    background-color: #666666;
-}
-#somHeader h2{
-    text-indent: -9999px;
+
+.som-header div {
+    display: inline-block;
     background-image: url('../images/logo-sprite-globalheader-off.png');
     background-repeat: no-repeat;
-    margin: 0 10px;
     height: 50px;
-    padding-top: 0;
-    box-sizing: border-box;
 }
-#som2 h2{
+
+.som-header div:nth-child(2) {
+    float: right;
+}
+
+.som-header div:hover {
+    background-color: #454545;
+}
+
+.som-header div:nth-child(1) {
     background-position: 0 50%;
     width: 150px;
 }
-#su h2{
+
+.som-header div:nth-child(2) {
     background-position: 100% 50%;
     width: 130px;
 }
-#su:hover h2,
-#som2:hover h2{
+
+.som-header div:hover {
     background-image: url('../images/logo-sprite-globalheader-on.png');
 }
-#somHeader ul{
-    display: none;
-    position: absolute;
-    top: 50px;
+
+.som-header ul {
     background-image: url('../images/diag.png');
     background-color: #666666;
-    color: white;
-    z-index: 1;
+    border: none;
     padding: 8px;
+    top: 50px;
 }
-#su{
-    position: relative;
-}
-#som2 ul{
+
+.som-header div:nth-child(1) ul {
     width: 154px;
 }
-#su ul{
+
+.som-header div:nth-child(2) ul {
     right: 0;
     width: 134px;
 }
-#su:hover ul,
-#som2:hover ul{
-    display: block;
-}
-#somHeader li{
+
+.som-header li {
     border-bottom: 1px solid #777777;
 }
-#somHeader a{
+
+.som-header a {
     color: white;
     display: block;
     padding: 2px 0;
     text-shadow: rgb(51, 51, 51) 1px 1px 2px;
 }
-#somHeader a:hover{
+
+.som-header a:hover {
     background-color: rgba(204, 204, 204, .2);
 }

@@ -4,11 +4,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.ErrorListener;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -29,6 +35,7 @@ import edu.stanford.irt.cocoon.xml.XIncludeExceptionListener;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
 import edu.stanford.irt.cocoon.xml.XPointerProcessor;
 import edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.cocoon.HTMLSAXParser;
 import edu.stanford.irt.laneweb.cocoon.NekoHTMLConfiguration;
 import edu.stanford.irt.laneweb.cocoon.TransformerErrorListener;
@@ -38,8 +45,7 @@ import edu.stanford.irt.laneweb.cocoon.XIncludeExceptionListenerImpl;
 public class XMLConfiguration {
 
     @Bean
-    public DocumentBuilderFactoryBean documentBuilderFactoryBean()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public DocumentBuilderFactoryBean documentBuilderFactoryBean() {
         DocumentBuilderFactoryBean factoryBean = new DocumentBuilderFactoryBean(
                 "org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
         factoryBean.setCoalescing(false);
@@ -49,8 +55,12 @@ public class XMLConfiguration {
         factoryBean.setNamespaceAware(true);
         factoryBean.setValidating(false);
         factoryBean.setXIncludeAware(false);
-        factoryBean.setFeatures(Collections
-                .singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", Boolean.FALSE));
+        try {
+            factoryBean.setFeatures(Collections
+                    .singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", Boolean.FALSE));
+        } catch (SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
+            throw new LanewebException(e);
+        }
         return factoryBean;
     }
 
@@ -92,9 +102,11 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost")
-    public TransformerHandlerFactory joostTransformerHandlerFactory(final URIResolver uriResolver) {
-        return new TransformerHandlerFactory(joostSAXTransformerFactoryBean().getObject(), uriResolver,
-                errorListener());
+    public TransformerHandlerFactory joostTransformerHandlerFactory(
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/joost")
+                final SAXTransformerFactory joostSAXTransformerFactory,
+            final URIResolver uriResolver, final ErrorListener errorListener) {
+        return new TransformerHandlerFactory(joostSAXTransformerFactory, uriResolver, errorListener);
     }
 
     @Bean(name = "javax.xml.transform.sax.SAXTransformerFactory/saxon")
@@ -103,24 +115,29 @@ public class XMLConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon")
-    public TransformerHandlerFactory saxonTransformerHandlerFactory(final URIResolver uriResolver) {
-        return new TransformerHandlerFactory(saxonSAXTransformerFactoryBean().getObject(), uriResolver,
-                errorListener());
+    public TransformerHandlerFactory saxonTransformerHandlerFactory(
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon")
+                final SAXTransformerFactory saxonSAXTransformerFactory,
+            final URIResolver uriResolver, final ErrorListener errorListener) {
+        return new TransformerHandlerFactory(saxonSAXTransformerFactory, uriResolver, errorListener);
     }
 
     @Bean
-    public SAXParserFactoryBean saxParserFactoryBean()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
+    public SAXParserFactoryBean saxParserFactoryBean() {
         SAXParserFactoryBean factoryBean = new SAXParserFactoryBean("org.apache.xerces.jaxp.SAXParserFactoryImpl");
         factoryBean.setNamespaceAware(true);
         factoryBean.setValidating(false);
         factoryBean.setXIncludeAware(false);
-        factoryBean.setFeatures(Collections
-                .singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", Boolean.FALSE));
+        try {
+            factoryBean.setFeatures(Collections
+                    .singletonMap("http://apache.org/xml/features/nonvalidating/load-external-dtd", Boolean.FALSE));
+        } catch (SAXNotRecognizedException | SAXNotSupportedException | ParserConfigurationException e) {
+            throw new LanewebException(e);
+        }
         return factoryBean;
     }
 
-    @Bean
+    @Bean(name = "javax.xml.transform.TransformerFactory")
     public TransformerFactoryBean transformerFactoryBean() {
         return new TransformerFactoryBean("net.sf.saxon.TransformerFactoryImpl");
     }
@@ -137,26 +154,31 @@ public class XMLConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.XIncludePipe")
     @Scope("prototype")
-    public XIncludePipe xIncludePipe(final SourceResolver sourceResolver) throws XPathFactoryConfigurationException,
-            SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
-        return new XIncludePipe(sourceResolver, xmlSAXParser(), xIncludeExceptionListener(), xPointerProcessor());
+    public XIncludePipe xIncludePipe(final SourceResolver sourceResolver,
+            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
+            final XIncludeExceptionListener xIncludeExceptionListener, final XPointerProcessor xPointerProcessor) {
+        return new XIncludePipe(sourceResolver, xmlSAXParser, xIncludeExceptionListener, xPointerProcessor);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXParser/xml")
-    public SAXParser xmlSAXParser()
-            throws SAXNotRecognizedException, SAXNotSupportedException, ParserConfigurationException {
-        return new JaxpSAXParser(saxParserFactoryBean().getObject());
+    public SAXParser xmlSAXParser(final SAXParserFactory saxParserFactory) {
+        return new JaxpSAXParser(saxParserFactory);
     }
 
     @Bean
-    public XPathFactoryBean xPathFactoryBean() throws XPathFactoryConfigurationException {
-        return new XPathFactoryBean("com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl");
+    public XPathFactoryBean xPathFactoryBean() {
+        try {
+            return new XPathFactoryBean("com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl");
+        } catch (XPathFactoryConfigurationException e) {
+            throw new LanewebException(e);
+        }
     }
 
     @Bean
-    public XPointerProcessor xPointerProcessor() throws XPathFactoryConfigurationException, SAXNotRecognizedException,
-            SAXNotSupportedException, ParserConfigurationException {
-        return new XPointerProcessorImpl(xmlSAXParser(), xPathFactoryBean().getObject(),
-                documentBuilderFactoryBean().getObject(), transformerFactoryBean().getObject());
+    public XPointerProcessor xPointerProcessor(
+            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser,
+            final XPathFactory xPathFactory, final DocumentBuilderFactory documentBuilderFactory,
+            @Qualifier("javax.xml.transform.TransformerFactory") final TransformerFactory transformerFactory) {
+        return new XPointerProcessorImpl(xmlSAXParser, xPathFactory, documentBuilderFactory, transformerFactory);
     }
 }

@@ -93,11 +93,11 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         for (String string : this.sort.split(",")) {
             String[] s = string.split(" ");
             if (s.length == 2 && !s[0].isEmpty()) {
-                orders.add(new Order(Direction.fromStringOrNull(s[1]), s[0]));
+                orders.add(new Order(Direction.fromString(s[1]), s[0]));
             }
         }
         if (!orders.isEmpty()) {
-            return new Sort(orders);
+            return Sort.by(orders);
         }
         return null;
     }

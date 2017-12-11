@@ -16,6 +16,7 @@ import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.SolrService;
@@ -52,7 +53,7 @@ public class SolrSearchGeneratorTest {
         assertEquals("query", result.getQuery());
         assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
-        assertEquals(null, pageable.getValue().getSort());
+        assertEquals(Sort.unsorted(), pageable.getValue().getSort());
         verify(this.service, this.saxStrategy);
     }
 

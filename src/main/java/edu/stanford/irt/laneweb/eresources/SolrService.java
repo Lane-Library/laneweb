@@ -32,8 +32,10 @@ import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 public class SolrService {
 
-    public static final String FACETS_SEPARATOR = "::";
+    public static final String COLLECTION = "laneSearch";
 
+    public static final String FACETS_SEPARATOR = "::";
+    
     private static final String ALL_QUERY = "*:*";
 
     private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
@@ -84,7 +86,7 @@ public class SolrService {
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
             final int pageNumber, final int facetLimit, final int facetMinCount, final FacetSort facetSort) {
-        PageRequest pageRequest = new PageRequest(pageNumber, facetLimit);
+        PageRequest pageRequest = PageRequest.of(pageNumber, facetLimit);
         String facetFilters = facetStringToFilters(filters);
         int modifiedOffset = (facetLimit - 1) * pageNumber;
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
@@ -97,7 +99,7 @@ public class SolrService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
     }
 
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
@@ -117,7 +119,7 @@ public class SolrService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
     }
 
     public Eresource getByBibID(final String bibID) {
@@ -131,7 +133,7 @@ public class SolrService {
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(CORE_FQ);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -145,7 +147,7 @@ public class SolrService {
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
         q.addFilterQuery(buildFilterQuery("mesh", mesh));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -155,7 +157,7 @@ public class SolrService {
         }
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -170,13 +172,13 @@ public class SolrService {
         }
         SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
         q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
         return cursorToList(cursor);
     }
 
     public Map<String, Long> recordCount() {
         Map<String, Long> result = new HashMap<>();
-        SolrResultPage<Eresource> facets = this.repository.facetByRecordType(new PageRequest(0, 1));
+        SolrResultPage<Eresource> facets = this.repository.facetByRecordType(PageRequest.of(0, 1));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
             for (FacetFieldEntry entry : page) {
                 result.put(entry.getValue(), Long.valueOf(entry.getValueCount()));
@@ -187,7 +189,7 @@ public class SolrService {
 
     public Map<String, Long> searchCount(final String query) {
         Map<String, Long> result = new HashMap<>();
-        SolrResultPage<Eresource> facets = this.repository.facetByType(this.parser.parse(query), new PageRequest(0, 1));
+        SolrResultPage<Eresource> facets = this.repository.facetByType(this.parser.parse(query), PageRequest.of(0, 1));
         result.put("all", Long.valueOf(facets.getTotalElements()));
         for (Page<FacetFieldEntry> page : facets.getFacetResultPages()) {
             for (FacetFieldEntry entry : page) {
@@ -213,18 +215,18 @@ public class SolrService {
     public List<Eresource> suggestFindAll(final String query) {
         String cleanQuery = this.parser.parse(query);
         return this.repository.suggestFindAll(cleanQuery.toLowerCase(Locale.US), cleanQuery.replaceAll(" ", " +"),
-                new PageRequest(0, PAGE_SIZE));
+                PageRequest.of(0, PAGE_SIZE));
     }
 
     public List<Eresource> suggestFindByType(final String query, final String type) {
         String cleanQuery = this.parser.parse(query);
-        return this.repository.suggestFindByType(cleanQuery, type, new PageRequest(0, PAGE_SIZE));
+        return this.repository.suggestFindByType(cleanQuery, type, PageRequest.of(0, PAGE_SIZE));
     }
 
     private SimpleQuery buildBaseBrowseQuery(final String query) {
         SimpleQuery q = new SimpleQuery(query);
         q.setRequestHandler(SolrRepository.Handlers.BROWSE);
-        q.addSort(new Sort("title_sort", "id"));
+        q.addSort(Sort.by("title_sort", "id"));
         q.addFilterQuery(BASE_FQ);
         q.setTimeAllowed(Integer.MIN_VALUE);
         return q;

@@ -53,7 +53,6 @@ import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
 @Configuration
 @EnableSolrRepositories(
         basePackages = { "edu.stanford.irt.laneweb.eresources" },
-        solrClientRef = "laneSearchSolrClient",
         solrTemplateRef = "laneSearchSolrTemplate")
 public class EresourcesConfiguration {
 
@@ -162,9 +161,9 @@ public class EresourcesConfiguration {
                 new EresourceListPagingDataSAXStrategy());
     }
 
-    @Bean(name = "laneSearchSolrClient")
+    @Bean(name = "solrLaneSearchClient")
     public SolrClient solrClient(@Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl) {
-        HttpSolrClient solrClient = new HttpSolrClient(solrServerUrl);
+        HttpSolrClient solrClient = new HttpSolrClient.Builder(solrServerUrl).build();
         solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
         solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
         return solrClient;
@@ -207,7 +206,7 @@ public class EresourcesConfiguration {
     }
 
     @Bean(name = "laneSearchSolrTemplate")
-    public SolrTemplate solrTemplate(@Qualifier("laneSearchSolrClient") final SolrClient solrClient) {
+    public SolrTemplate solrTemplate(@Qualifier("solrLaneSearchClient") final SolrClient solrClient) {
         return new SolrTemplate(solrClient);
     }
 }

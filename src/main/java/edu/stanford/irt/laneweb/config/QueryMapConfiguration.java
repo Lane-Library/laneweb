@@ -16,8 +16,8 @@ import edu.stanford.irt.querymap.StreamResourceMapping;
 @Configuration
 public class QueryMapConfiguration {
 
-    private static final String ENDPOINT =
-            "/lane-facet?q=%s&qt=%%2Flane-facet&facet=true&facet.mincount=1&facet.limit=10&facet.field=mesh&wt=json";
+    private static final String ENDPOINT = "/laneSearch/lane-facet"
+            + "?q=%s&qt=%%2Flane-facet&facet=true&facet.mincount=1&facet.limit=10&facet.field=mesh&wt=json";
 
     @Bean
     public QueryMapper queryMapper(final ObjectMapper objectMapper,

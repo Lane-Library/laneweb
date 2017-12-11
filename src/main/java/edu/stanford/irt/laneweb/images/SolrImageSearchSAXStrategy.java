@@ -152,6 +152,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "image-detail-close close fa fa-close");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         endDiv(xmlConsumer);
+        atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, STYLE, STYLE, CDATA, "margin-top:-29px");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         startDivWithClass(xmlConsumer, "yui3-g");
         startDivWithClass(xmlConsumer, "yui3-u-3-5");
         startDivWithClass(xmlConsumer, "image-location");
@@ -199,6 +202,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
         endAnchor(xmlConsumer);
+        endDiv(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);

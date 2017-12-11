@@ -98,7 +98,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
 
     protected Page<Image> getPage(final String query) {
         Page<Image> pageResult;
-        Pageable page = new PageRequest(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
+        Pageable page = PageRequest.of(this.pageNumber, TOTAL_ELEMENT_BY_PAGE);
         if (this.resourceId == null) {
             pageResult = this.service.findByTitleAndDescriptionFilterOnCopyright(query, this.copyright, page);
         } else {
