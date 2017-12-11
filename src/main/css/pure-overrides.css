@@ -1,5 +1,6 @@
 body {
     font-size: 13px;
+    line-height: 1.231;
 }
 
 ol, ul {
@@ -10,7 +11,8 @@ fieldset {
     border: none;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
     font-weight: normal;
 }
 
@@ -18,4 +20,9 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
 form, fieldset, legend, input, textarea, p, blockquote, th, td {
     margin: 0;
     padding: 0;
+}
+
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal
 }
