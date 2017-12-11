@@ -103,7 +103,8 @@ public class XMLConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost")
     public TransformerHandlerFactory joostTransformerHandlerFactory(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/joost") final SAXTransformerFactory joostSAXTransformerFactory,
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/joost")
+                final SAXTransformerFactory joostSAXTransformerFactory,
             final URIResolver uriResolver, final ErrorListener errorListener) {
         return new TransformerHandlerFactory(joostSAXTransformerFactory, uriResolver, errorListener);
     }
@@ -115,7 +116,8 @@ public class XMLConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon")
     public TransformerHandlerFactory saxonTransformerHandlerFactory(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory saxonSAXTransformerFactory,
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon")
+                final SAXTransformerFactory saxonSAXTransformerFactory,
             final URIResolver uriResolver, final ErrorListener errorListener) {
         return new TransformerHandlerFactory(saxonSAXTransformerFactory, uriResolver, errorListener);
     }
