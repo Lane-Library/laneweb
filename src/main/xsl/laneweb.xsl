@@ -336,38 +336,6 @@
             <xsl:apply-templates select="attribute::node()[not(name() = 'class')] | child::node()"/>
         </xsl:copy>
     </xsl:template>
-    
-    <!-- add a div with class to grids so they can be separated by a gutter -->
-
-    <!-- left most grid has class gr, priority in case only one grid -->
-    <xsl:template match="h:div[@class='yui3-g']/h:div[1]" priority="1">
-            <xsl:copy>
-                <xsl:apply-templates select="@*"/>
-                <div class="gr">
-                    <xsl:apply-templates select="child::node()"/>
-                </div>
-            </xsl:copy>
-    </xsl:template>
-
-    <!-- right most grid has class gl -->
-    <xsl:template match="h:div[@class='yui3-g']/h:div[last()]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <div class="gl">
-                <xsl:apply-templates select="child::node()"/>
-            </div>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- middle grids have class gb -->
-    <xsl:template match="h:div[@class='yui3-g']/h:div[position() &gt; 1 and position() &lt; last()]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <div class="gb">
-                <xsl:apply-templates select="child::node()"/>
-            </div>
-        </xsl:copy>
-    </xsl:template>
 
     <!-- add a div with class landing-content inside .module.landing so it can be given padding -->
     <xsl:template match="h:div[@class='module landing']">

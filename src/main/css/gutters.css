@@ -1,10 +1,18 @@
-/* gutter classes dynamically added inside yui3-g child divs */
-.gr {
-    margin-right: 6px;
+/* gutter between grid divs */
+.yui3-g > div,
+.pure-g > div {
+    box-sizing: border-box;
 }
-.gl {
-    margin-left: 6px;
+
+.yui3-g > div:first-child,
+.pure-g > div:first-child {
+    padding-right: 6px;
 }
-.gb {
-    margin: 0 6px;
+.yui3-g > div:last-child,
+.pure-g > div:last-child {
+    padding-left: 6px;
+}
+.yui3-g > div :not(:first-child):not(:last-child),
+.pure-g > div :not(:first-child):not(:last-child) {
+    padding: 0 6px;
 }
