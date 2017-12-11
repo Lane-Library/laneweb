@@ -12,7 +12,7 @@
 .pure-g > div:last-child {
     padding-left: 6px;
 }
-.yui3-g > div :not(:first-child):not(:last-child),
-.pure-g > div :not(:first-child):not(:last-child) {
+.yui3-g > div:not(:first-child):not(:last-child),
+.pure-g > div:not(:first-child):not(:last-child) {
     padding: 0 6px;
 }
