@@ -3,8 +3,7 @@ body, select, input, button, textarea {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-/*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
-.yui3-g [class^='yui3-u'],
+/*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .pure-g [class^='pure-u'] {
     font-family: 'Source Sans Pro', sans-serif;
 }

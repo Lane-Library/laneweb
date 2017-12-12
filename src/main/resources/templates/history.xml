@@ -35,8 +35,8 @@ ga('send', 'pageview');
                 <ul id="nav">
                     <li class="nav-item">
                         <a href="#">HEALTH CARE</a>
-                        <div class="yui3-g">
-                            <div class="yui3-u-1-2">
+                        <div class="pure-g">
+                            <div class="pure-u-1-2">
                                 <ul style="border-right:1px #777777 solid;">
                                     <li>FIND A DOCTOR</li>
                                     <li>
@@ -66,7 +66,7 @@ ga('send', 'pageview');
                                     </li>
                                 </ul>
                             </div>
-                            <div class="yui3-u-1-2">
+                            <div class="pure-u-1-2">
                                 <ul style="padding-left:8px">
                                     <li>LOCATIONS</li>
                                     <li>
@@ -96,8 +96,8 @@ ga('send', 'pageview');
                     </li>
                     <li class="nav-item">
                         <a href="#">RESEARCH</a>
-                        <div class="yui3-g">
-                            <div class="yui3-u-1-2">
+                        <div class="pure-g">
+                            <div class="pure-u-1-2">
                                 <ul style="border-right:1px #777777 solid;">
                                     <li>
                                         <a
@@ -145,7 +145,7 @@ ga('send', 'pageview');
                                     </li>
                                 </ul>
                             </div>
-                            <div class="yui3-u-1-2">
+                            <div class="pure-u-1-2">
                                 <a href="http://med.stanford.edu/research.html" class="explore">
                                     <span>EXPLORE RESEARCH</span>
                                     <p>
@@ -158,8 +158,8 @@ ga('send', 'pageview');
                     </li>
                     <li class="nav-item">
                         <a href="#">EDUCATION</a>
-                        <div style="right:0"><div class="yui3-g">
-                            <div class="yui3-u-1-2">
+                        <div style="right:0"><div class="pure-g">
+                            <div class="pure-u-1-2">
                                 <ul style="border-right:1px #777777 solid;">
                                     <li>
                                         <a href="http://med.stanford.edu/md-admissions.html">MD program</a>
@@ -213,7 +213,7 @@ ga('send', 'pageview');
                                     </li>
                                 </ul>
                             </div>
-                            <div class="yui3-u-1-2">
+                            <div class="pure-u-1-2">
                                 <a href="http://med.stanford.edu/education.html" class="explore">
                                     <span>Explore Education</span>
                                     <p>
@@ -226,8 +226,8 @@ ga('send', 'pageview');
                     </li>
                     <li class="nav-item">
                         <a href="#">GIVE</a>
-                        <div style="right:0"><div class="yui3-g">
-                            <div class="yui3-u-1-2">
+                        <div style="right:0"><div class="pure-g">
+                            <div class="pure-u-1-2">
                                 <a class="explore" style="position:static;margin-right:8px;width:auto"
                                     href="//medicalgiving.stanford.edu">
                                     <span style="border-bottom:none">CAMPAIGN FOR STANFORD MEDICINE</span>
@@ -253,7 +253,7 @@ ga('send', 'pageview');
                                     </li>
                                 </ul>
                             </div>
-                            <div class="yui3-u-1-2">
+                            <div class="pure-u-1-2">
                                 <a class="explore" style="position:static;margin-left:8px;width:auto"
                                     href="http://supportlpch.org/">
                                     <span style="border-bottom:none">STANFORD CHILDREN'S HEALTH</span>
@@ -284,8 +284,8 @@ ga('send', 'pageview');
                     </li>
                     <li class="nav-item">
                         <a href="#">ABOUT</a>
-                        <div style="right:0"><div class="yui3-g">
-                            <div class="yui3-u-1-2">
+                        <div style="right:0"><div class="pure-g">
+                            <div class="pure-u-1-2">
                                 <ul style="border-right:1px #777777 solid;">
                                     <li>
                                         <a href="http://med.stanford.edu/about.html">About us</a>
@@ -323,7 +323,7 @@ ga('send', 'pageview');
                                     </li>
                                 </ul>
                             </div>
-                            <div class="yui3-u-1-2">
+                            <div class="pure-u-1-2">
                                 <p
                                     style="margin:30px 0 0 8px;line-height:normal;text-indent:-9000px;background-image:url(../resources/images/history/logos-about-sprite.png)">
                                     <a href="http://med.stanford.edu/school.html" class="logo-stanford-school-of-medicine">Stanford
@@ -399,28 +399,28 @@ ga('send', 'pageview');
         <div class="centered">
                 <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
                 <h3><a href="/index.html">Stanford Medical History Center</a></h3>
-            <div style="border-bottom: 1px solid #902827; padding-bottom:12px;"><div class="yui3-g">
-                    <div class="yui3-u-1-5">
+            <div style="border-bottom: 1px solid #902827; padding-bottom:12px;"><div class="pure-g">
+                    <div class="pure-u-1-5">
                         <ul>
                            <li><a href="/med-history/explore.html">Explore</a></li>
                            <li><a href="/med-history/research.html">Research</a></li>
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="pure-u-1-5">
                         <ul>
                             <li><a href="/med-history/events.html">Upcoming Events</a></li>
                             <li><a href="/med-history/contact.html">Contact Us</a></li> 
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="pure-u-1-5">
                         <ul>
                             <li><a href="https://www.flickr.com/photos/40390680@N08/">Historic Images</a></li>
                             <li><a href="/med-history/exhibits/current.html">Exhibits</a></li> 
                         </ul>
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="pure-u-1-5">
                     </div>
-                    <div class="yui3-u-1-5">
+                    <div class="pure-u-1-5">
                         <ul>
                             <li><a href="http://lane.stanford.edu">Lane Medical Library</a></li> 
                         </ul>
@@ -430,12 +430,12 @@ ga('send', 'pageview');
         </div>
         <div id="lane-subfooter">
             <div class="centered">
-               <div class="yui3-g">
-                    <div class="yui3-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
-                    <div class="yui3-u-1-4">
+               <div class="pure-g">
+                    <div class="pure-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
+                    <div class="pure-u-1-4">
                         <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>    
                     </div>
-                    <div class="yui3-u-1-4">
+                    <div class="pure-u-1-4">
                         <a href="https://flic.kr/ps/BG8qu">
                             <span>See us on Flickr</span>
                             <i class="fa fa-flickr"></i>

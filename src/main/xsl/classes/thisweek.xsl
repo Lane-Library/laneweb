@@ -13,8 +13,8 @@
 
     <xsl:template match="lc:event_data">
         <div class="event">
-            <div class="yui3-g">
-                <div class="yui3-u-1-6">
+            <div class="pure-g">
+                <div class="pure-u-1-6">
                     <div class="date lane-date">
                         <div class="month">
                             <xsl:call-template name="month"/>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="yui3-u-5-6">
+                <div class="pure-u-5-6">
                     <p>
                         <a>
                             <xsl:attribute name="href">

@@ -86,9 +86,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 
     protected void generateImages(final XMLConsumer xmlConsumer, final Image image, final int imageNumber)
             throws SAXException {
+        startDivWithClass(xmlConsumer, "pure-u-1-5");
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY, ID, ID, CDATA, image.getId());
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "yui3-u-1-5");
         atts.addAttribute(EMPTY, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         atts = new AttributesImpl();
@@ -105,6 +105,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imagedecoHidden");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         XMLUtils.data(xmlConsumer, " ");
+        endDiv(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
     }
@@ -155,8 +156,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, STYLE, STYLE, CDATA, "margin-top:-29px");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
-        startDivWithClass(xmlConsumer, "yui3-g");
-        startDivWithClass(xmlConsumer, "yui3-u-3-5");
+        startDivWithClass(xmlConsumer, "pure-g");
+        startDivWithClass(xmlConsumer, "pure-u-3-5");
+        startDivWithClass(xmlConsumer, "gr");
         startDivWithClass(xmlConsumer, "image-location");
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "image");
@@ -164,7 +166,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.endElement(xmlConsumer, XHTML_NS, IMAGE);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
-        startDivWithClass(xmlConsumer, "yui3-u-2-5");
+        endDiv(xmlConsumer);
+        startDivWithClass(xmlConsumer, "pure-u-2-5");
+        startDivWithClass(xmlConsumer, "gl");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
         startDivWithClass(xmlConsumer, "desc");
@@ -202,6 +206,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
         endAnchor(xmlConsumer);
+        endDiv(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);
@@ -257,7 +262,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         int totalFacet = facet.getNumberOfElements();
         if (totalFacet > 0) {
             String path = result.getPath();
-            startDivWithClass(xmlConsumer, "yui3-u-1-4");
+            startDivWithClass(xmlConsumer, "pure-u-1-4");
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "view-by");
             atts.addAttribute(EMPTY, ID, ID, CDATA, "sourceFilter");
@@ -398,11 +403,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
             if (index % IMAGE_BY_ROW == 0) {
                 AttributesImpl atts = new AttributesImpl();
                 atts.addAttribute(EMPTY, ID, ID, CDATA, "imageList");
-                atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "yui3-g");
                 XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
+                startDivWithClass(xmlConsumer, "pure-g");
             }
             generateImages(xmlConsumer, image, index);
             if (index % IMAGE_BY_ROW == IMAGE_BY_ROW - 1 || images.size() - 1 == index) {
+                endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
                 generateDetailImage(xmlConsumer, index / IMAGE_BY_ROW);
             }

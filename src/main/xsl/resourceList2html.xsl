@@ -53,17 +53,17 @@
                 <title>search results</title>
             </head>
             <body>
-                <div class="yui3-g no-bookmarking">
-                  <div class="yui3-u-1-3">
+                <div class="no-bookmarking"><div class="pure-g">
+                  <div class="pure-u-1-3">
                     <xsl:call-template name="resultsText"/>
                   </div>
-                  <div class="yui3-u-1-3">
+                  <div class="pure-u-1-3">
                     <xsl:call-template name="sortBy"/>
                   </div>
-                  <div class="yui3-u-1-3">
+                  <div class="pure-u-1-3">
                     <xsl:call-template name="paginationLinks"/>
                   </div>
-                </div>
+                </div></div>
                 <xsl:if test="count(s:result) &gt; 0">
                     <h4 class="eresources">&#160;</h4>
                 </xsl:if>
@@ -71,15 +71,15 @@
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
-                    <div class="yui3-g no-bookmarking">
-                      <div class="yui3-u-1-3"/>
-                      <div class="yui3-u-1-3">
+                    <div class="no-bookmarking"><div class="pure-g">
+                      <div class="pure-u-1-3"/>
+                      <div class="pure-u-1-3">
                         <xsl:call-template name="sortBy"/>
                       </div>
-                      <div class="yui3-u-1-3">
+                      <div class="pure-u-1-3">
                         <xsl:call-template name="paginationLinks"/>
                       </div>
-                    </div>
+                    </div></div>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->

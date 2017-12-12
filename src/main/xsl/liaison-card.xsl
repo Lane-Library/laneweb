@@ -10,7 +10,7 @@
 			select=".//h:a[@class='liaison-profile-link']/@href" />
 		<div class="business-card">
 			<h3>Your Librarian</h3>
-			<div class="yui3-g">
+			<div class="pure-g">
 				<xsl:choose>
 					<xsl:when test="$liaison = 'tbd'">
 						<xsl:call-template name="tbd" />
@@ -24,9 +24,9 @@
 	</xsl:template>
 
 	<xsl:template name="tbd">
-		<div class="yui3-u-1-4">
+		<div class="pure-u-1-4">
 		</div>
-		<div class="yui3-u-3-4">
+		<div class="pure-u-3-4">
 			<a href="/contacts/liaisons.html#tbd">
 				<xsl:value-of select=".//h:span[@class='liaison-name']" />
 			</a>
@@ -36,12 +36,12 @@
 	<xsl:template name="liaison">
 		<xsl:variable name="liaison-profile-link"
 			select=".//h:a[@class='liaison-profile-link']/@href" />
-		<div class="yui3-u-1-4">
+		<div class="pure-u-1-4">
 			<a href="{$liaison-profile-link}">
 				<xsl:copy-of select=".//h:img[contains(@class,'liaison-image')]" />
 			</a>
 		</div>
-		<div class="yui3-u-3-4">
+		<div class="pure-u-3-4">
 			<a href="{$liaison-profile-link}">
 				<xsl:value-of select=".//h:span[@class='liaison-name']" />
 			</a>

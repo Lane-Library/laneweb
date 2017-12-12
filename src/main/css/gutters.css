@@ -1,18 +1,17 @@
 /* gutter between grid divs */
-.yui3-g > div,
+
 .pure-g > div {
     box-sizing: border-box;
 }
 
-.yui3-g > div:first-child,
 .pure-g > div:first-child {
     padding-right: 6px;
 }
-.yui3-g > div:last-child,
+
 .pure-g > div:last-child {
     padding-left: 6px;
 }
-.yui3-g > div:not(:first-child):not(:last-child),
+
 .pure-g > div:not(:first-child):not(:last-child) {
     padding: 0 6px;
 }

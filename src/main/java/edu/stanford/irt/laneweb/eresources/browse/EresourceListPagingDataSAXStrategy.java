@@ -22,15 +22,15 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 alpha = alpha.toUpperCase(Locale.US);
             }
             if (pagingData.getSize() > pagingData.getLength()) {
-                startDivWithClass(xmlConsumer, "yui3-g");
-                startDivWithClass(xmlConsumer, "yui3-u-5-12");
+                startDivWithClass(xmlConsumer, "pure-g");
+                startDivWithClass(xmlConsumer, "pure-u-5-12");
                 createDisplayingMarkup(xmlConsumer, pagingData, alpha);
                 endDiv(xmlConsumer);
                 String hrefBase = pagingData.getBaseQuery();
-                startDivWithClass(xmlConsumer, "yui3-u-1-3");
+                startDivWithClass(xmlConsumer, "pure-u-1-3");
                 createSeeAllMarkup(xmlConsumer, hrefBase, alpha);
                 endDiv(xmlConsumer);
-                startDivWithClass(xmlConsumer, "yui3-u-1-4");
+                startDivWithClass(xmlConsumer, "pure-u-1-4");
                 startDivWithClass(xmlConsumer, "view-by");
                 createPagingDropdown(xmlConsumer, hrefBase, pagingData, alpha);
                 endDiv(xmlConsumer);

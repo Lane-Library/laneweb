@@ -12,7 +12,7 @@
     
     <xsl:template match="atom:feed">
         <xsl:for-each select="atom:entry[position() &lt; 5 and position() mod 2 = 1]">
-            <div class="yui3-g">
+            <div class="pure-g">
                 <xsl:call-template name="entry">
                     <xsl:with-param name="entry" select="self::node()"/>
                 </xsl:call-template>
@@ -35,7 +35,7 @@
     
     <xsl:template name="entry">
         <xsl:param name="entry"/>
-        <div class="yui3-u-1-2">
+        <div class="pure-u-1-2">
             <div class="module landing">
             <iframe type="text/html" src="//www.youtube.com/embed/{$entry/yt:videoId}" frameborder="0"/>
             <h3><xsl:value-of select="$entry/atom:title"/></h3>

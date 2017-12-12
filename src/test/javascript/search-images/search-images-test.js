@@ -52,7 +52,7 @@ var searchImagesTestCase = new Y.Test.Case({
     },
     
     testImageListItemClick: function() {
-        var item = Y.one("#imageList div[class=yui3-u-1-5]");
+        var item = Y.one("#imageList div[class=pure-u-1-5]");
         var detail = Y.one("#imageDetail_0");
         item.simulate("click");
         Y.Assert.areEqual("src", detail.one(".image").getAttribute("src"));
@@ -66,7 +66,7 @@ var searchImagesTestCase = new Y.Test.Case({
     },
     
     testImageListRow2ItemClick: function() {
-        var item = Y.one("#div2 div[class=yui3-u-1-5]");
+        var item = Y.one("#div2 div[class=pure-u-1-5]");
         var detail = Y.one("#imageDetail_2");
         item.simulate("click");
         Y.Assert.areEqual("src", detail.one(".image").getAttribute("src"));
@@ -93,7 +93,7 @@ var searchImagesTestCase = new Y.Test.Case({
 });
 
 
-Y.one('body').addClass('yui3-skin-sam');
+Y.one('body').addClass('pure-skin-sam');
 new Y.Console({
     newestOnTop: false
 }).render('#log');

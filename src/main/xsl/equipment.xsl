@@ -22,13 +22,13 @@
     <xsl:variable name="bibid" select="slim:controlfield[@tag = '001']"/>
     <xsl:variable name="title" select="slim:datafield[@tag = '245']/slim:subfield[@code = 'a']"/>
     <li class="resource" data-bibid="{$bibid}">
-      <div class="yui3-g">
-        <div class="yui3-u-1-6">
+      <div class="pure-g">
+        <div class="pure-u-1-6">
           <xsl:call-template name="fa">
             <xsl:with-param name="title" select="$title"/>
           </xsl:call-template>
         </div>
-        <div class="yui3-u-5-6">
+        <div class="pure-u-5-6">
           <div><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$bibid}"><xsl:value-of select="$title"/></a></div>
           <xsl:apply-templates select="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']"/>
         </div>

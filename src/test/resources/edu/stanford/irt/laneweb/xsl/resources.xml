@@ -4,10 +4,12 @@
       <title>search results</title>
    </head>
    <body>
-      <div class="yui3-g no-bookmarking">
-         <div class="yui3-u-1-3"> all 2 results</div>
-         <div class="yui3-u-1-3"/>
-         <div class="yui3-u-1-3"/>
+      <div class="no-bookmarking">
+         <div class="pure-g">
+            <div class="pure-u-1-3"> all 2 results</div>
+            <div class="pure-u-1-3"/>
+            <div class="pure-u-1-3"/>
+         </div>
       </div>
       <h4 class="eresources"> </h4>
       <ul class="lwSearchResults">

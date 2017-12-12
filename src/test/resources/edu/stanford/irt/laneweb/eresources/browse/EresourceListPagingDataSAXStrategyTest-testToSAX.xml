@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div class="resourceListPagination">
-   <div class="yui3-g">
-      <div class="yui3-u-5-12">
+   <div class="pure-g">
+      <div class="pure-u-5-12">
          <span id="pageStart">1</span> to 260 of <a href="?a=a&amp;page=all">1039 "A" titles</a>
       </div>
-      <div class="yui3-u-1-3">
+      <div class="pure-u-1-3">
          <a href="?a=a&amp;page=all">All "A" titles <i class="fa fa-arrow-right"/>
          </a>
       </div>
-      <div class="yui3-u-1-4">
+      <div class="pure-u-1-4">
          <div class="view-by">View by page <div class="general-dropdown dropdown">
                <div class="general-dropdown-trigger">Aa-Az<i class="fa fa-angle-double-down"/>
                </div>

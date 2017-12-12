@@ -18,8 +18,8 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
     public void toSAX(final CourseReservesItem item, final XMLConsumer xmlConsumer) {
         try {
             startLiWithClass(xmlConsumer, "resource");
-            startDivWithClass(xmlConsumer, "yui3-g");
-            startDivWithClass(xmlConsumer, "yui3-u-1-8");
+            startDivWithClass(xmlConsumer, "pure-g");
+            startDivWithClass(xmlConsumer, "pure-u-1-8");
             String id = Integer.toString(item.getId());
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute("", "class", "class", "CDATA", "bookcover");
@@ -27,7 +27,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
             endDiv(xmlConsumer);
-            startDivWithClass(xmlConsumer, "yui3-u-7-8");
+            startDivWithClass(xmlConsumer, "pure-u-7-8");
             boolean isDigital = item.isDigital();
             String url = item.getURL();
             String href;

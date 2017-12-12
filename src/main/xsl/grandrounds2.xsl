@@ -32,13 +32,13 @@
 
     <xsl:template match="presentation">
         <div class="class presentation">
-            <div class="yui3-g">
-                <div class="yui3-u-1-5">
+            <div class="pure-g">
+                <div class="pure-u-1-5">
                     <div class="date">
                         <xsl:apply-templates select="date"/>
                     </div>
                 </div>
-                <div class="yui3-u-4-5">
+                <div class="pure-u-4-5">
                     <xsl:apply-templates select="*[not(self::date)]"/>
                 </div>
             </div>
