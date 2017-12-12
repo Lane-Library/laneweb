@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />

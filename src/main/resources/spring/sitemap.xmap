@@ -7,6 +7,7 @@
             <!-- TODO: set error http codes where necessary -->
             <map:generate type="html" src="{content-base}/error.html"/>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match pattern="cookiesFetch.html" type="wildcard">
@@ -22,12 +23,14 @@
         <map:match pattern="plain/secure/.*\.html" type="regexp">
             <map:generate type="html" src="{content-base}/error.html"/>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:serialize type="html5"/>
         </map:match>
         <!-- javascript unit tests: -->
         <map:match pattern="resources/test/**.html" type="wildcard">
             <map:generate type="html" src="classpath:/test/javascript/{1}.html"/>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:serialize type="html5"/>
         </map:match>
     <!-- holding of on caching for now . . .
@@ -97,11 +100,7 @@
                     <map:transform type="proxy-links"/>
                 </map:when>
             </map:select>
-           <map:select type="responsive">
-               <map:when test="true">
-                   <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
-               </map:when>
-           </map:select>
+           <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:transform type="namespace-filter"/>
             <map:serialize type="html5"/>
        </map:match>
@@ -111,6 +110,7 @@
                 <map:generate type="file" src="cocoon://content/templates/wilson.xml"/>
             </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:transform type="namespace-filter"/>
             <map:serialize type="html5"/>
         </map:match>
@@ -120,6 +120,7 @@
                 <map:generate type="file" src="cocoon://content/templates/history.xml"/>
             </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:transform type="namespace-filter"/>
             <map:serialize type="html5"/>
         </map:match>
@@ -144,11 +145,7 @@
                     <map:transform type="proxy-links"/>
                 </map:when>
             </map:select>
-            <map:select type="responsive">
-                <map:when test="true">
-                    <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
-                </map:when>
-            </map:select>
+            <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:transform type="namespace-filter"/>
             <map:transform type="debug"/>
             <map:serialize type="html5"/>

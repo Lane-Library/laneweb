@@ -46,7 +46,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd:HH:mm</maven.build.timestamp.format>
         <timestamp>${maven.build.timestamp}</timestamp>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
-        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure.css</sonar.exclusions>
+        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
@@ -428,7 +428,8 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
                             <includes>
-                                <include>pure-overrides-min.css</include>
+                                <include>lane-reset-min.css</include>
+                                <include>pure-grids-min.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
@@ -576,6 +577,8 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
+                                <include>../lane-reset-min.css</include>
+                                <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
                             </includes>

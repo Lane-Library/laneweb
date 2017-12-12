@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-reset.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/pure-grids.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
@@ -19,6 +20,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/som-footer.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-footer.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/headers.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/golfclub.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/module.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/popups.css" />
