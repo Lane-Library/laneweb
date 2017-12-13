@@ -283,7 +283,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
-            <version>3.9.0</version>
+            <version>3.9.1</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
