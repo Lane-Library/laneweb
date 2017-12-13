@@ -53,7 +53,7 @@
 }
 
 .imageDetail h3 {
-    margin-top: 10px !important;
+    margin-top: 10px;
 }
 
 .imageDetail label {
@@ -67,10 +67,6 @@
 .imageDetail .gl div {
     overflow: hidden;
     margin: 10px 10px 10px 0;
-}
-
-.imageDetail .copyright img {
-    height: auto !important;
 }
 
 .imageDetail .gr {
@@ -87,13 +83,13 @@
 .imageDetail .image {
     margin: auto;
     display: block;
-    max-width: 540px !important;
-    max-height: 320px !important;
+    max-width: 540px;
+    max-height: 320px;
 }
 
 .imageDetail {
     text-align: left;
-    margin: 0 12px  12px 12px !important;
+    margin: 0 12px  12px 12px;
     background-color: #eee;
 }
 
