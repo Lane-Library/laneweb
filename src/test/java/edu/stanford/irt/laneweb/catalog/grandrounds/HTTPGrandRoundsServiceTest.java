@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.catalog.grandrounds;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URI;
@@ -22,6 +23,6 @@ public class HTTPGrandRoundsServiceTest {
 
     @Test
     public void testGetGrandRounds() {
-        assertNotNull(this.service.getGrandRounds("department", "year"));
+        assertEquals(39, this.service.getGrandRounds("department", "year").size());
     }
 }
