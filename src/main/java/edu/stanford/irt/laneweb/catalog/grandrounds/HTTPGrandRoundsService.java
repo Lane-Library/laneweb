@@ -26,7 +26,7 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
 
     private static final String ENDPOINT_PATH_FORMAT = "grandrounds?department=%s&year=%s";
 
-    private static final Logger LOG = LoggerFactory.getLogger(GrandRoundsService.class);
+    private static final Logger log = LoggerFactory.getLogger(GrandRoundsService.class);
 
     private static final String UTF8 = StandardCharsets.UTF_8.name();
 
@@ -53,16 +53,6 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
         }
     }
 
-    protected InputStream getInputStream(final String department, final String year) {
-        try {
-            String endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
-                    URLEncoder.encode(year, UTF8));
-            return IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), endpointPath));
-        } catch (IOException e) {
-            throw new LanewebException(e);
-        }
-    }
-
     private void addPresentationIfValid(final Presentation presentation, final List<Presentation> presentations) {
         int recordId = presentation.getId();
         try {
@@ -70,7 +60,17 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
             presentation.getLinks().stream().forEach(Link::getURI);
             presentations.add(presentation);
         } catch (GrandRoundsException e) {
-            LOG.error(recordId + " not valid", e);
+            log.error(recordId + " not valid", e);
+        }
+    }
+
+    private InputStream getInputStream(final String department, final String year) {
+        try {
+            String endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
+                    URLEncoder.encode(year, UTF8));
+            return IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), endpointPath));
+        } catch (IOException e) {
+            throw new LanewebException(e);
         }
     }
 }
