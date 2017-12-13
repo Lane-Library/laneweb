@@ -24,23 +24,6 @@ public class DataSourcesConfiguration {
 
     private static final int THREE_SECONDS = 3;
 
-    @Bean(name = { "javax.sql.DataSource/grandrounds", "javax.sql.DataSource/catalog" })
-    @Profile("!gce")
-    public DataSource catalogDataSource(@Value("${edu.stanford.irt.laneweb.db.grandrounds.url}") final String url,
-            @Value("${edu.stanford.irt.laneweb.db.grandrounds.user}") final String user,
-            @Value("${edu.stanford.irt.laneweb.db.grandrounds.password}") final String password,
-            @Value("${edu.stanford.irt.laneweb.db.grandrounds.maxPoolSize}") final int maxPoolSize)
-            throws SQLException {
-        PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
-        dataSource.setConnectionFactoryClassName(ORACLE_DATASOURCE);
-        dataSource.setURL(url);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
-        dataSource.setMaxPoolSize(maxPoolSize);
-        dataSource.setLoginTimeout(THREE_SECONDS);
-        return dataSource;
-    }
-
     @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks",
             "javax.sql.DataSource/bookcovers" })
     @Profile("!gce")
@@ -76,21 +59,5 @@ public class DataSourcesConfiguration {
         config.setPassword(password);
         config.setJdbcUrl(url);
         return new HikariDataSource(config);
-    }
-
-    @Bean(name = { "javax.sql.DataSource/voyager", "javax.sql.DataSource/voyager-login" })
-    @Profile("!gce")
-    public DataSource voyagerLoginDataSource(@Value("${edu.stanford.irt.laneweb.db.voyager.url}") final String url,
-            @Value("${edu.stanford.irt.laneweb.db.voyager.user}") final String user,
-            @Value("${edu.stanford.irt.laneweb.db.voyager.password}") final String password,
-            @Value("${edu.stanford.irt.laneweb.db.voyager.maxPoolSize}") final int maxPoolSize) throws SQLException {
-        PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
-        dataSource.setConnectionFactoryClassName(ORACLE_DATASOURCE);
-        dataSource.setURL(url);
-        dataSource.setUser(user);
-        dataSource.setPassword(password);
-        dataSource.setMaxPoolSize(maxPoolSize);
-        dataSource.setLoginTimeout(THREE_SECONDS);
-        return dataSource;
     }
 }

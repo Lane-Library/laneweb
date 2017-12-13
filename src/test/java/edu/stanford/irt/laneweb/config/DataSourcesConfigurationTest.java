@@ -20,14 +20,4 @@ public class DataSourcesConfigurationTest {
     public void testEresourcesDataSource() throws SQLException {
         assertNotNull(this.configuration.eresourcesDataSource(null, null, null, 0, null, false));
     }
-
-    @Test
-    public void testGrandroundsDataSource() throws SQLException {
-        assertNotNull(this.configuration.catalogDataSource(null, null, null, 0));
-    }
-
-    @Test
-    public void testVoyagerDataSource() throws SQLException {
-        assertNotNull(this.configuration.voyagerLoginDataSource(null, null, null, 0));
-    }
 }
