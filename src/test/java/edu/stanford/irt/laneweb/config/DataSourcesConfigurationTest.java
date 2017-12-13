@@ -20,4 +20,9 @@ public class DataSourcesConfigurationTest {
     public void testEresourcesDataSource() throws SQLException {
         assertNotNull(this.configuration.eresourcesDataSource(null, null, null, 0, null, false));
     }
+
+    @Test
+    public void testDataSource() throws SQLException {
+        assertNotNull(this.configuration.gceDataSource("jdbc:postgresql://postgres-svc.default.svc.cluster.local/default", null, null));
+    }
 }
