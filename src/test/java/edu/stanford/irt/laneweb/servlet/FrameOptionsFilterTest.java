@@ -43,7 +43,7 @@ public class FrameOptionsFilterTest {
     }
 
     @Test
-    public void testInternalDoFilterReferrerNotStanford() throws IOException, ServletException {
+    public void testInternalDoFilterReferrerNotStanford1() throws IOException, ServletException {
         expect(this.request.getHeader("referer")).andReturn("http://foo.com/foo");
         this.response.setHeader("X-Frame-Options", "SAMEORIGIN");
         this.chain.doFilter(this.request, this.response);
@@ -53,8 +53,28 @@ public class FrameOptionsFilterTest {
     }
 
     @Test
-    public void testInternalDoFilterReferrerStanford() throws IOException, ServletException {
+    public void testInternalDoFilterReferrerNotStanford2() throws IOException, ServletException {
+        expect(this.request.getHeader("referer"))
+                .andReturn("http://weblisting.freetemplatespot.com/lane.stanford.edu/index.html");
+        this.response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        this.chain.doFilter(this.request, this.response);
+        replay(this.chain, this.request, this.response);
+        this.filter.doFilter(this.request, this.response, this.chain);
+        verify(this.chain, this.request, this.response);
+    }
+
+    @Test
+    public void testInternalDoFilterReferrerStanford1() throws IOException, ServletException {
         expect(this.request.getHeader("referer")).andReturn("http://sfx.stanford.edu/foo");
+        this.chain.doFilter(this.request, this.response);
+        replay(this.chain, this.request, this.response);
+        this.filter.doFilter(this.request, this.response, this.chain);
+        verify(this.chain, this.request, this.response);
+    }
+
+    @Test
+    public void testInternalDoFilterReferrerStanford2() throws IOException, ServletException {
+        expect(this.request.getHeader("referer")).andReturn("https://foo-1234-bar.stanford.edu/foo");
         this.chain.doFilter(this.request, this.response);
         replay(this.chain, this.request, this.response);
         this.filter.doFilter(this.request, this.response, this.chain);
