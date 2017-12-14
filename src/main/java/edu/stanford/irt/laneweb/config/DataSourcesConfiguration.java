@@ -27,7 +27,7 @@ public class DataSourcesConfiguration {
     @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks",
             "javax.sql.DataSource/bookcovers" })
     @Profile("!gce")
-    public DataSource eresourcesDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
+    public DataSource onPremiseDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,
             @Value("${edu.stanford.irt.laneweb.db.eresources.password}") final String password,
             @Value("${edu.stanford.irt.laneweb.db.eresources.maxPoolSize}") final int maxPoolSize,
@@ -49,7 +49,13 @@ public class DataSourcesConfiguration {
     @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks",
             "javax.sql.DataSource/bookcovers" })
     @Profile("gce")
-    public DataSource gceDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
+    public DataSource googleCloudDataSource(HikariConfig config) {
+        return new HikariDataSource(config);
+    }
+    
+    @Bean
+    @Profile("gce")
+    public HikariConfig hikariConfig(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,
             @Value("${edu.stanford.irt.laneweb.db.eresources.password}") final String password) {
         HikariConfig config = new HikariConfig();
@@ -58,6 +64,6 @@ public class DataSourcesConfiguration {
         config.setUsername(user);
         config.setPassword(password);
         config.setJdbcUrl(url);
-        return new HikariDataSource(config);
+        return config;
     }
 }

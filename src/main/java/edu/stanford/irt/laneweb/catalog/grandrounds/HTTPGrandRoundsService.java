@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.catalog.grandrounds;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -68,7 +67,7 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
         try {
             String endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
                     URLEncoder.encode(year, UTF8));
-            return IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), endpointPath));
+            return IOUtils.getStream(this.catalogServiceURI.resolve(endpointPath));
         } catch (IOException e) {
             throw new LanewebException(e);
         }

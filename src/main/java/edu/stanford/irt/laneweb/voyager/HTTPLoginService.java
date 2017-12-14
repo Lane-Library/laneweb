@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.voyager;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,7 +25,7 @@ public class HTTPLoginService implements LoginService {
     @Override
     public boolean login(final String voyagerUnivId, final String pid) {
         String endpointPath = String.format(ENDPOINT_PATH_FORMAT, voyagerUnivId, pid);
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), endpointPath))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(endpointPath))) {
             return this.objectMapper.readValue(input, Boolean.class).booleanValue();
         } catch (IOException e) {
             throw new LanewebException(e);

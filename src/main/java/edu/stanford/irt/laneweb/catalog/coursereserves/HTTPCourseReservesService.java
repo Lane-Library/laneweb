@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.catalog.coursereserves;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -34,7 +33,7 @@ public class HTTPCourseReservesService implements CourseReservesService {
 
     @Override
     public List<Course> getCourses() {
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), COURSES_ENPOINT_PATH))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(COURSES_ENPOINT_PATH))) {
             return this.objectMapper.readValue(input, new TypeReference<List<Course>>() {
             });
         } catch (IOException e) {
@@ -44,7 +43,7 @@ public class HTTPCourseReservesService implements CourseReservesService {
 
     @Override
     public CourseReservesItemList getItems() {
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), ITEMS_ENPOINT_PATH))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(ITEMS_ENPOINT_PATH))) {
             return this.objectMapper.readValue(input, CourseReservesItemList.class);
         } catch (IOException e) {
             throw new LanewebException(e);
@@ -54,7 +53,7 @@ public class HTTPCourseReservesService implements CourseReservesService {
     @Override
     public CourseReservesItemList getItems(final int id) {
         String pathWithIDParam = String.format(ITEMS_BY_ID_ENPOINT_PATH_FORMAT, id);
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), pathWithIDParam))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(pathWithIDParam))) {
             return this.objectMapper.readValue(input, CourseReservesItemList.class);
         } catch (IOException e) {
             throw new LanewebException(e);
