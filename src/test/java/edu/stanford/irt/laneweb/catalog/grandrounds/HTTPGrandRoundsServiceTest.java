@@ -13,7 +13,7 @@ public class HTTPGrandRoundsServiceTest {
 
     @Before
     public void setUp() throws URISyntaxException {
-        this.service = new HTTPGrandRoundsService(getClass().getResource("grandrounds").toURI());
+        this.service = new HTTPGrandRoundsService(getClass().getResource("").toURI());
     }
 
     @Test
