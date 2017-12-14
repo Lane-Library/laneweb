@@ -9,12 +9,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style type="text/css">
             html, .som-header, .centered { min-width:0 }
+            .fa-bars {
+                color: black;
+                display: none;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
             @media (max-width: 991px) {
                 .som-header, .lane-nav, #libraryContact, #login, #laneFooter, #sm-footer {
                     display: none;
                  }
+                 #lane-nav:target {
+                     display: block;
+                     background-color: white;
+                     box-shadow: none;
+                     top: 0;
+                     right: 0;
+                     width: auto;
+                 }
+                 #lane-nav ul {
+                     display: block;
+                 }
+                 .nav-menu {
+                     display: list-item;
+                 }
                  #main, .search-form {
                      margin-top: 0;
+                 }
+                 .fa-bars {
+                     display: inline-block;
                  }
             }
         </style>
@@ -59,6 +83,7 @@
                         </li>
                     </ul>
                 </div>
+                <a href="#lane-nav"><i class="fa fa-bars fa-3x"></i></a>
             </div>
             <form action="/search.html" class="search-form" id="search">
                 <div class="centered">
@@ -140,7 +165,7 @@
                 </xi:include>
                 <?laneweb content?>
             </div>
-            <div class="lane-nav">
+            <div class="lane-nav" id="lane-nav">
                 <ul class="centered">
                     <li class="dropdown nav-menu" data-path="/biomed-resources/">
                         <span>All Biomedical Resources</span>
@@ -257,7 +282,7 @@
                         <ul>
                             <li><a href="https://laneblog.stanford.edu/use-browzine/">Use BrowZine at Stanford</a></li>
                             <li><a href="https://laneblog.stanford.edu/use-endnote-x7-accessing-fulltext/">Use EndNote X8: Accessing Full Text</a></li>
-                        	<li><a href="https://laneblog.stanford.edu/using-uptodate/">Use UpToDate</a></li>         
+                            <li><a href="https://laneblog.stanford.edu/using-uptodate/">Use UpToDate</a></li>         
                             <li><a href="/help/making-informed-publish-decisions.html">Making Informed Publishing Decisions</a></li>
                         </ul>
                     </div>
