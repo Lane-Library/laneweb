@@ -50,8 +50,8 @@
 
 	<xsl:template name="class-detail">
 		<div class="class">
-			<div class="yui3-g">
-				<div class="yui3-u-1-4">
+			<div class="pure-g">
+				<div class="pure-u-1-4">
 					<div class="date">
 						<xsl:apply-templates select="./lc:event_dates/lc:start_date[1]" />
 						<xsl:apply-templates select="./lc:event_dates" />
@@ -60,7 +60,7 @@
 						<xsl:apply-templates select="lc:venue"/>
 					</div>
 				</div>
-				<div class="yui3-u-3-4">
+				<div class="pure-u-3-4">
 					<div class="details">
 						<xsl:apply-templates select="lc:event_instructors" />
 						<xsl:call-template name="remainingSeats"/>

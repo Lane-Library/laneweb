@@ -22,7 +22,7 @@
     </xsl:template>
 
     <xsl:template match="item">
-        <div class="yui3-u-1-2">
+        <div class="pure-u-1-2">
             <div class="newsfeed-item-title">
                 <a href="{link}" title="feed link---{../../channel/title}">
                     <xsl:value-of select="title" />

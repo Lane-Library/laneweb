@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.bookcovers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class HTTPISBNService implements ISBNService {
         bibids.stream()
             .forEach((final Integer bibid) -> queryStringBuilder.append("bibID=").append(bibid).append('&'));
         try (InputStream input = IOUtils
-                .getStream(new URL(this.catalogServiceURI.toURL(), queryStringBuilder.toString()))) {
+                .getStream(this.catalogServiceURI.resolve(queryStringBuilder.toString()))) {
             return this.objectMapper.readValue(input, new TypeReference<Map<Integer, List<String>>>() {
             });
         } catch (IOException e) {

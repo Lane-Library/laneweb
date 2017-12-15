@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.catalog.equipment;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,7 +29,7 @@ public class HTTPEquipmentService implements EquipmentService {
     @Override
     public InputStream getRecords(final List<String> params) {
         try {
-            return IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), RECORDS_ENDPOINT_PATH));
+            return IOUtils.getStream(this.catalogServiceURI.resolve(RECORDS_ENDPOINT_PATH));
         } catch (IOException e) {
             throw new LanewebException(e);
         }
@@ -39,7 +38,7 @@ public class HTTPEquipmentService implements EquipmentService {
     @Override
     public List<EquipmentStatus> getStatus(final String idList) {
         String pathWithIDListParam = String.format(STATUS_ENDPOINT_PATH_FORMAT, idList);
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), pathWithIDListParam))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve (pathWithIDListParam))) {
             return this.objectMapper.readValue(input, new TypeReference<List<EquipmentStatus>>() {
             });
         } catch (IOException e) {

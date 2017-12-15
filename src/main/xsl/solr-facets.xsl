@@ -131,9 +131,7 @@
     </xsl:template>
 
     <xsl:template match="/string">
-        <div class="bd">
             <xsl:copy-of select="$header"/>
-        </div>
         <p><xsl:value-of select="."/></p>
     </xsl:template>
 
@@ -148,7 +146,6 @@
         </xsl:if>
         <xsl:choose>
             <xsl:when test="$counts > 0 and (entry or string-length($facets) > 0)">
-                <div class="bd">
                     <xsl:copy-of select="$header"/>
                     <ul>
                         <xsl:call-template name="field">
@@ -199,7 +196,6 @@
                             <xsl:with-param name="label" select="'Language'"/>
                         </xsl:call-template>
                     </ul>
-                </div>
             </xsl:when>
             <xsl:otherwise>
                 <h4>Can we help?</h4>

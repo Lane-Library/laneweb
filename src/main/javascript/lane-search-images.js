@@ -22,7 +22,7 @@
                 });
 
         //On click on Image to open the imageDetail
-        Y.all('#imageList  div[class=yui3-u-1-5]').on('click',
+        Y.all('#imageList  div[row]').on('click',
             function(e) {
                 var div = e.currentTarget,
                     row = div.getAttribute("row"),

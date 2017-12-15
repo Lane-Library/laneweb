@@ -1,6 +1,9 @@
 body {
     background-color: rgb(236, 241, 242);
     font-family: 'Source Sans Pro', sans-serif;
+    /* override lane-reset.css for font-size and line-height */
+    font-size: initial;
+    line-height: initial;
 }
 
 a {
@@ -15,8 +18,8 @@ a:visited,a:active,a:hover {
     text-decoration: none;
 }
 
-/*yui-cssgrids sets this to sans-serif, needs to be 'Source Sans Pro'*/
-.yui3-g [class*='yui3-u'] {
+/*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
+.pure-g [class^='pure-u'] {
     font-family: 'Source Sans Pro', sans-serif;
 }
 

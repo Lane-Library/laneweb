@@ -59,13 +59,13 @@
 
     <xsl:template match="lc:event_data">
         <div class="archive">
-            <div class="yui3-g">
-                <div class="yui3-u-1-8">
+            <div class="pure-g">
+                <div class="pure-u-1-8">
                     <div class="date">
                         <xsl:apply-templates select="lc:event_dates/lc:start_date[1]" /> 
                    </div>
                 </div>
-                <div class="yui3-u-7-12">
+                <div class="pure-u-7-12">
                     <div class="details">
                         <h4>
                             <a href="/classes-consult/archive.html?class-id={lc:module_id}">
@@ -93,7 +93,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <div class="yui3-u-7-24">
+        <div class="pure-u-7-24">
             <div class="youtube-class">
                 <xsl:choose>
                     <xsl:when test="contains($schemeless-url, 'youtube')">

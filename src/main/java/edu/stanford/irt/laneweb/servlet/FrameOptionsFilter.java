@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -15,11 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter("*.html")
 public class FrameOptionsFilter extends AbstractLanewebFilter {
 
+    private static final Pattern STANFORD_PATTERN = Pattern
+            .compile("^https?:\\/\\/[a-zA-Z0-9\\-]+\\.stanford.edu\\/.*");
+
     @Override
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) throws IOException, ServletException {
         String referer = request.getHeader("referer");
-        if (referer != null && referer.indexOf(".stanford.edu") == -1 && referer.indexOf(".telemetrytv.com") == -1) {
+        if (referer != null && !STANFORD_PATTERN.matcher(referer).matches()
+                && referer.indexOf(".telemetrytv.com") == -1) {
             response.setHeader("X-Frame-Options", "SAMEORIGIN");
         }
         chain.doFilter(request, response);

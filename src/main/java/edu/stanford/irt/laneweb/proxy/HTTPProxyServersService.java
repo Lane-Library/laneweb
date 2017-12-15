@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.Set;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +30,7 @@ public class HTTPProxyServersService implements ProxyServersService {
 
     @Override
     public Set<String> getHosts() {
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), HOSTS_ENDPOINT))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(HOSTS_ENDPOINT))) {
             return this.objectMapper.readValue(input, Set.class);
         } catch (IOException e) {
             throw new LanewebException(e);
@@ -40,7 +39,7 @@ public class HTTPProxyServersService implements ProxyServersService {
 
     @Override
     public void write(final OutputStream outputStream) throws IOException {
-        try (InputStream input = IOUtils.getStream(new URL(this.catalogServiceURI.toURL(), WRITE_ENDPOINT))) {
+        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(WRITE_ENDPOINT))) {
             byte[] buffer = new byte[BYTE_BUFFER_SIZE];
             int i = 0;
             while (true) {

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -34,8 +35,9 @@ public final class IOUtils {
         return sb.toString();
     }
 
-    public static InputStream getStream(final URL url) throws IOException {
+    public static InputStream getStream(final URI uri) throws IOException {
         InputStream inputStream;
+        URL url = uri.toURL();
         URLConnection connection = url.openConnection();
         if (HttpURLConnection.class.isAssignableFrom(connection.getClass())) {
             HttpURLConnection httpConnection = HttpURLConnection.class.cast(connection);

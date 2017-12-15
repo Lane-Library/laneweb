@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -25,7 +24,6 @@ import edu.stanford.irt.bookcovers.CompositeBookCoverService;
 import edu.stanford.irt.bookcovers.GoogleBookCoverService;
 import edu.stanford.irt.bookcovers.ISBNService;
 import edu.stanford.irt.bookcovers.JDBCBookCoverService;
-import edu.stanford.irt.bookcovers.JDBCISBNService;
 import edu.stanford.irt.laneweb.bookcovers.HTTPISBNService;
 
 @Configuration
@@ -45,15 +43,8 @@ public class BookCoversConfiguration {
     }
 
     @Bean
-    @Profile("gce")
     public ISBNService httpISBNService(final ObjectMapper objectMapper,
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
         return new HTTPISBNService(objectMapper, catalogServiceURI);
-    }
-
-    @Bean
-    @Profile("!gce")
-    public ISBNService jdbcISBNService(@Qualifier("javax.sql.DataSource/catalog") final DataSource voyagerDataSource) {
-        return new JDBCISBNService(voyagerDataSource);
     }
 }
