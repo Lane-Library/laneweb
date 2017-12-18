@@ -455,7 +455,7 @@
                                 <include>events-min.css</include>
                                 <include>buttons-min.css</include>
                                 <include>forms-min.css</include>
-                                <include>login-min.css</include>
+                                <include>discovery-login-min.css</include>
                                 <include>tables-min.css</include>
                                 <include>lightbox-min.css</include>
                                 <include>popular-min.css</include>
