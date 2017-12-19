@@ -1,10 +1,7 @@
-#laneHeader{
+.lane-header {
     background-color: white;
     font-size: 14px;
-}
-
-#laneHeader .centered{
-    position: relative;
+    height: 80px;
 }
 
 h1 {

@@ -9,14 +9,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style type="text/css">
             html, .som-header, .centered { min-width:0 }
-            .fa-bars {
+            a .fa-bars {
                 color: black;
                 display: none;
                 position: absolute;
                 right: 20px;
                 top: 20px;
             }
-            @media (max-width: 991px) {
+            h1 {
+                background-image: url('./resources/images/sm-logo.svg');
+                box-sizing: border-box;
+                font-size: 18px;
+                height: 80px;
+                padding: 20px 0 0;
+            }
+            h1 a, h1 a:visited {
+                background-color: white;
+                border-left: 1px #333333 solid;
+                color: #333333;
+                display: inline-block;
+                margin-left: 168px;
+                padding-left: 6px;
+            }
+            @media (max-width: 921px) {
                 .som-header, .lane-nav, #libraryContact, #login, #laneFooter, #sm-footer {
                     display: none;
                  }
@@ -37,18 +52,23 @@
                  #main, .search-form {
                      margin-top: 0;
                  }
-                 .fa-bars {
+                 a .fa-bars {
                      display: inline-block;
                  }
+            }
+            @media (max-width: 426px) {
+                h1 a {
+                    border-left: none;
+                    margin-left: 44px;
             }
         </style>
     </head>
     <body>
         <div id="main">
-            <div id="laneHeader">
+            <div class="lane-header">
                 <div class="centered">
                     <h1>
-                        <a href="/index.html"><span>Lane</span> Medical Library</a>
+                        <a href="/index.html">Lane<br/>Medical Library</a>
                     </h1>
                     <ul id="libraryContact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/hours.html">Hours</a>: <?laneweb todays-hours?></li>

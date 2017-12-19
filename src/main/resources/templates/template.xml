@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="main">
-            <div id="laneHeader">
+            <div class="lane-header">
                 <div class="centered">
                     <h1>
                         <a href="/index.html"><span>Lane</span> Medical Library</a>
