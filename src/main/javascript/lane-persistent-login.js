@@ -12,7 +12,9 @@
     isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
     extensionPersistentLoginPopup,
     popupWindow,
-    getPopup;
+    getPopup,
+    // the check box for persistent login on the discovery login page
+    persistentLoginCheckbox = document.querySelector('#is-persistent-login');
 
     // if someone click on a proxied link and he is from stanford so he will
     // have the possibility to extend his persistent login
@@ -58,20 +60,15 @@
     };
     // END POPUP
 
-    //To display the persistent checkbox in the discoverypage
-    if(Y.one('#persistent')){
-        var isPersistent = Y.one('.is-persistent');
-        if (isPersistent) {
-            isPersistent.setStyle('visibility','visible');
-        }
-        Y.on('change',     function(event) {
-            var checkbox = event.target;
-            if(checkbox.get('checked')) {
+    //handle checking or unchecking the check box on the discovery login page
+    if (persistentLoginCheckbox) {
+        persistentLoginCheckbox.addEventListener("change", function(event) {
+            if (event.target.checked) {
                 Y.Cookie.set("isPersistent", "yes");
             } else {
                 Y.Cookie.remove("isPersistent");
             }
-        }, '#is-persistent-login');
+        });
     }
 
     // for the static page myaccounts.html Click on YES this way the user

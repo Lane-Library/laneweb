@@ -299,6 +299,11 @@
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
+        <!-- TODO: remove this match after 3.4.0 release and moving files to content tree -->
+        <map:match type="regexp" pattern="^(devD|d)iscoveryLoginPage.html">
+            <map:generate type="file" src="classpath:/static/{0}"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match pattern="**" type="wildcard">
             <map:generate type="html" src="{content-base}/{1}"/>
             <map:transform type="xinclude"/>

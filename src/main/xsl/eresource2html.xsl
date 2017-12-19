@@ -78,7 +78,7 @@
                     <xsl:with-param name="primaryType" select="../s:primaryType"/>
                     <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
                 </xsl:call-template>
-                <xsl:if test="$simple-primary-type != s:label">
+                <xsl:if test="$simple-primary-type != s:label and s:link-text != 'Lane Catalog Record'">
                     <span>
                         <a href="{s:url}" title="{../s:title}">
                             <xsl:value-of select="s:link-text" />
@@ -110,7 +110,7 @@
             <xsl:call-template name="build-link-label">
                 <xsl:with-param name="link" select="."/>
                 <xsl:with-param name="primaryType" select="../s:primaryType"/>
-                    <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
+                <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
             </xsl:call-template>
             <xsl:if test="$simple-primary-type != s:label">
                 <span>
@@ -144,6 +144,7 @@
     <xsl:template match="s:primaryType">
         <xsl:if test="$type and contains('JournalBook',$type)">
             <xsl:choose>
+                <xsl:when test="not(contains(., 'Print')) and ../s:link[s:label = 'Lane Catalog Record']">Digital/Print</xsl:when>
                 <xsl:when test="contains(., 'Print')">Print</xsl:when>
                 <xsl:otherwise>Digital</xsl:otherwise>
             </xsl:choose>
@@ -164,23 +165,40 @@
         <xsl:param name="link" />
         <xsl:param name="primaryType" />
         <xsl:param name="simplePrimaryType" />
-        <span>
+        <xsl:variable name="showLabel">
             <xsl:choose>
-                <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print</xsl:when>
-                <xsl:when test="$primaryType = s:label">
-                    <a href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$simplePrimaryType"/>
-                </xsl:otherwise>
+                <xsl:when test="not(contains('JournalBook',$type))">true</xsl:when>
+                <xsl:when test="not(contains($primaryType, 'Print')) and ../s:link[s:label = 'Lane Catalog Record']">true</xsl:when>
+                <xsl:when test="$primaryType = s:label">true</xsl:when>
+                <xsl:otherwise>false</xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="s:publisher">
-                <xsl:text> : </xsl:text>
+        </xsl:variable>
+        <xsl:if test="$showLabel = 'true'">
+            <span>
+                <xsl:choose>
+                    <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print</xsl:when>
+                    <xsl:when test="$primaryType = s:label">
+                        <a href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$simplePrimaryType"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="s:publisher">
+                    <xsl:text> : </xsl:text>
+                    <i>
+                        <xsl:value-of select="s:publisher" />
+                    </i>
+                </xsl:if>
+            </span>
+        </xsl:if>
+        <xsl:if test="$showLabel = 'false' and s:publisher">
+            <span>
                 <i>
                     <xsl:value-of select="s:publisher" />
                 </i>
-            </xsl:if>
-        </span>
+            </span>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>

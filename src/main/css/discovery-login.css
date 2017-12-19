@@ -1,0 +1,65 @@
+/*
+ * These rules are for the /discoveryLoginPage.html and /devDiscoveryLoginPage.html
+ * referenced by Shibboleth configurations.
+ */
+.discovery-login {
+    margin: 2rem auto 8rem;
+    text-align: center;
+}
+
+.discovery-login-help {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.discovery-login-help .fa {
+    color: rgb(0, 104, 129);
+    font-size: 1.5rem;
+}
+
+.discovery-login-help span {
+    font-weight: 600;
+}
+
+.discovery-login-persistent {
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.discovery-login-links a {
+    background-color: white;
+    background-position: 50% 60%;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    color: black;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    height: 17.8rem;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    width: 38.4rem;
+}
+
+.discovery-login-links :hover {
+    background-color: transparent;
+}
+
+.discovery-login-links :nth-child(1) {
+    background-image: url('../images/SU-discoverylogo.png');
+}
+
+.discovery-login-links :nth-child(2) {
+    background-image: url('../images/SHC-discoverylogo.png');
+}
+
+.discovery-login-links :nth-child(3) {
+    background-image: url('../images/LPCH-discoverylogo.png');
+}
+
+.discovery-login hr {
+    color: #ddd;
+    width: 19rem;
+}
