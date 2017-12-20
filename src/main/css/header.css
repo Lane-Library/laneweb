@@ -37,18 +37,18 @@ h1 a:hover {
     vertical-align: text-bottom;
 }
 
-#libraryContact {
+.library-contact {
     top: 54px;
     white-space: nowrap;
     position: absolute;
     right: 0;
 }
 
-#libraryContact > li,#login > li {
+.library-contact > li,#login > li {
     float: left;
     padding: 0 12px;
 }
 
-#libraryContact .live-chat {
+.library-contact .live-chat {
     padding-left: 50px;
 }
