@@ -78,7 +78,7 @@
         },
 
         initializeHistory = function() {
-            history = new Y.HistoryHash();
+            history = new Y.History();
             if (history.get('bassett')) {
                 loadContent(history.get('bassett'));
             }
