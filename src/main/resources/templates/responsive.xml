@@ -35,19 +35,34 @@
                 .som-header, .lane-nav, .library-contact, #login, #laneFooter, #sm-footer {
                     display: none;
                  }
-                 #lane-nav:target {
-                     display: block;
-                     background-color: white;
+                 .lane-nav:target {
+                     background-color: #666;
+                     background-image: url('./resources/images/diag.png');
                      box-shadow: none;
+                     display: block;
                      top: 0;
                      right: 0;
-                     width: auto;
+                     width: 304px;
+                     z-index: 2;
                  }
-                 #lane-nav ul {
+                 .lane-nav .centered {
+                     margin: 0;
+                 }
+                 .lane-nav:target ul {
                      display: block;
                  }
                  .nav-menu {
                      display: list-item;
+                 }
+                 .nav-menu:hover {
+                     background-color: #666;
+                     color: white;
+                 }
+                 .nav-menu span, nav-menu a {
+                     color: white;
+                     padding: 0 21px;
+                     text-align: left;
+                     text-transform: uppercase;
                  }
                  .main, .search-form {
                      margin-top: 0;
@@ -188,7 +203,7 @@
             <div class="lane-nav" id="lane-nav">
                 <ul class="centered">
                     <li class="dropdown nav-menu" data-path="/biomed-resources/">
-                        <span>All Biomedical Resources</span>
+                        <span>Biomedical Resources</span>
                         <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
