@@ -8,7 +8,7 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
-        <div id="main">
+        <div class="main">
             <div class="lane-header">
                 <div class="centered">
                     <h1>

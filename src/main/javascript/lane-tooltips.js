@@ -479,7 +479,7 @@
                 autoHideDelay: 60000,
                 constrain: false,
                 render : true,
-                delegate : "#main"
+                delegate : "body"
             });
             tt.after('visibleChange', function(e) {
                 if (!e.newVal) {
