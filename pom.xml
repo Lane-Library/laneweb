@@ -581,6 +581,7 @@
                                 <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
+                                <include>../back-to-top-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
