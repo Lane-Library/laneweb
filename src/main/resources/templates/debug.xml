@@ -87,10 +87,10 @@
                             <a id="logout" href="/logout">Logout</a>
                         </li>
                         <li>
-                            <a href="?proxy-links=false">Guest Access</a>
+                            Stanford <a href="?proxy-links=false"><i class="fa fa-toggle-on" style="transform:scale(-1, 1)"></i> Guest</a>
                         </li>
                         <li>
-                            <a href="?proxy-links=true">Stanford Access</a>
+                            <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"></i></a> Guest
                         </li>
                         <li>
                             <a href="/translated/chinese.html">查詢</a>
