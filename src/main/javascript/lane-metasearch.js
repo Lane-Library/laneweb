@@ -30,10 +30,7 @@
                 if (result.status === 'successful') {
                     // process display of each updateable node
                     // once all processed, remove id from resourceIds
-                    resultSpan.setContent('&#160;' +
-                    Y.DataType.Number.format(result.hits), {
-                        thousandsSeparator: ","
-                    });
+                    resultSpan.setContent('&#160;' + result.hits.toLocaleString());
                     node.setAttribute('target', '_blank');
                     node.removeClass('metasearch');
                 } else if (result.status === 'failed' || result.status === 'canceled') {
