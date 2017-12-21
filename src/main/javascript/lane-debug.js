@@ -14,7 +14,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "base-base",
         "base-build",
         "cookie",
-        "datatype-number-format",
         "dd-constrain",
         "dd-drag",
         "dd-drop",
