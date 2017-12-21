@@ -106,7 +106,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
 
     errorHandler = function(err) {
         if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
+            console.log('Error loading JS: ' + err[0].error, 'error');
             return;
         }
     };
