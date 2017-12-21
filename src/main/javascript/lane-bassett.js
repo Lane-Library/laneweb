@@ -79,9 +79,12 @@
         },
 
         initializeHistory = function() {
+            if (history.state && history.state.bassett) {
+                loadContent(history.state.bassett);
+            }
             window.addEventListener("popstate", function(event) {
                 if (event.state) {
-                    loadContent(event.state.bassett);
+                    loadContent(event.state && event.state.bassett);
                 } else {
                     loadContent(formatAjaxUrl(document.location.href));
                 }
