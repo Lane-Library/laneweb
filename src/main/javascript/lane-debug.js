@@ -20,8 +20,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "dd-drop",
         "dd-proxy",
         "event-custom-base",
-        "history-base",
-        "history-html5",
         "io-base",
         "json-parse",
         "json-stringify",

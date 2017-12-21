@@ -8,7 +8,7 @@
         basePath = model.get(model.BASE_PATH)|| "",
         diagramDisplay = false,
         accordion,
-        history,
+        history = window.history,
         subRegionToShow = 4,
         prevRegion,
         prevSubRegion,
@@ -70,7 +70,8 @@
             }
             url = formatAjaxUrl(this.get('href'));
             try {
-                history.addValue("bassett", url);
+                history.pushState({bassett: url}, "", "");
+                loadContent(url);
             } catch (e) {
                 loadContent(url);
             }
@@ -78,15 +79,12 @@
         },
 
         initializeHistory = function() {
-            history = new Y.History();
-            if (history.get('bassett')) {
-                loadContent(history.get('bassett'));
-            }
-            history.on("bassettChange", function(e) {
-                loadContent(e.newVal);
-            });
-            history.on("bassettRemove", function() {
-                loadContent(formatAjaxUrl(Y.lane.Location.get("href")));
+            window.addEventListener("popstate", function(event) {
+                if (event.state) {
+                    loadContent(event.state.bassett);
+                } else {
+                    history.back();
+                }
             });
         },
 
