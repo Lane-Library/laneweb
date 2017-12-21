@@ -13,7 +13,7 @@
         Y.io(url, {
             on: {
                 success: function(id, o) {
-                    var findIt = Y.JSON.parse(o.responseText),
+                    var findIt = JSON.parse(o.responseText),
                         findItLink;
                     if (findIt.result) {
                         findItLink = findItNode.one('a');

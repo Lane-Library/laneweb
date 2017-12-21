@@ -21,8 +21,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "dd-proxy",
         "event-custom-base",
         "io-base",
-        "json-parse",
-        "json-stringify",
         "node-core",
         "oop",
         "overlay",

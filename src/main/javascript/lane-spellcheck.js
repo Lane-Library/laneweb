@@ -11,7 +11,7 @@
         Y.io(basePath + '/apps/spellcheck/json?q=' + encodedQuery, {
             on: {
                 success:function(id, o) {
-                    var sc = Y.JSON.parse(o.responseText), a, correctedUrl;
+                    var sc = JSON.parse(o.responseText), a, correctedUrl;
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup
                         //and add the suggestion to the href

@@ -72,7 +72,7 @@
                 }
             },
             successful = function(id, o) {
-                var response = Y.JSON.parse(o.responseText),
+                var response = JSON.parse(o.responseText),
                     results = response.resources,
                     needMore;
 

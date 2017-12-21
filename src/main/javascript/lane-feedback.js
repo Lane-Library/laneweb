@@ -78,7 +78,7 @@
         },
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
-                data = Y.JSON.stringify(this._getFeedback(form));
+                data = JSON.stringify(this._getFeedback(form));
             contentBox.one(".feedback-contents").set("innerHTML", this.get("sending"));
             contentBox.scrollIntoView();
             Y.io(form.getAttribute("action"), {

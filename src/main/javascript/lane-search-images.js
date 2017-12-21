@@ -60,7 +60,7 @@
     }
 
     function confirmAdminAction(unused, o){
-        var image = Y.JSON.parse(o.responseText),
+        var image = JSON.parse(o.responseText),
         id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
         div = Y.one( id);
         if(image.enable){
@@ -74,7 +74,7 @@
     }
 
     function successHandler(id, o, args) {
-        var image = Y.JSON.parse(o.responseText),
+        var image = JSON.parse(o.responseText),
         row = args.row,
         div = args.div,
         imageDetail = Y.one("#imageDetail_" + row);

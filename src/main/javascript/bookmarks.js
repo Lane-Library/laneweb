@@ -183,7 +183,7 @@
              * @param event {CustomEvent}
              */
             _defAddFn : function(event) {
-                var data = Y.JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
+                var data = JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
                 Y.io(BASE_PATH + "/bookmarks", {
                     method : "post",
                     data : data,
@@ -213,7 +213,7 @@
              * @param event {CustomEvent}
              */
             _defMoveFn : function(event) {
-                var data = Y.JSON.stringify({to : event.to, from : event.from});
+                var data = JSON.stringify({to : event.to, from : event.from});
                 Y.io(BASE_PATH + "/bookmarks/move", {
                     method : "post",
                     data : data,
@@ -240,7 +240,7 @@
              * @param event {CustomEvent}
              */
             _defRemoveFn : function(event) {
-                var indexes = Y.JSON.stringify(event.positions);
+                var indexes = JSON.stringify(event.positions);
                 Y.io(BASE_PATH + "/bookmarks?indexes=" + indexes, {
                     method : "delete",
                     on : {
@@ -266,7 +266,7 @@
              * @param event {CustomEvent}
              */
             _defUpdateFn : function(event) {
-                var data = Y.JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
+                var data = JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
                 Y.io(BASE_PATH + "/bookmarks", {
                     method : "put",
                     data : data,

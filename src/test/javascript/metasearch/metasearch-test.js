@@ -4,7 +4,7 @@ Y.lane.Model.set('url-encoded-query','query');
 Y.lane.Model.set('query','query');
 Y.io = function(url, config) {
     Y.io = function(url, config) {
-        config.on.success.apply(this,[2,{responseText:Y.JSON.stringify({
+        config.on.success.apply(this,[2,{responseText:JSON.stringify({
             'id':'1477844556',
             'status': 'successful',
             "query" : "query",
@@ -16,7 +16,7 @@ Y.io = function(url, config) {
             }
         })}]);
     };
-    config.on.success.apply(this, [1,{responseText:Y.JSON.stringify({
+    config.on.success.apply(this, [1,{responseText:JSON.stringify({
         'id':'1477844556',
         'status': 'running',
         'query': 'query',

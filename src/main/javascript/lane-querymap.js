@@ -35,7 +35,7 @@
             return needMore;
         },
         resultSuccess = function(id, o) {
-            var results = Y.JSON.parse(o.responseText),
+            var results = JSON.parse(o.responseText),
             i, needMore = false;
         for (i = 0; i < queryMapResources.length; i++) {
             if (!queryMapResources[i].status) {
@@ -49,7 +49,7 @@
     },
         mapSuccess = function(id, o) {
         var anchor, span, i,
-        resourceMap = o.responseText ? Y.JSON.parse(o.responseText) : null;
+        resourceMap = o.responseText ? JSON.parse(o.responseText) : null;
     if (resourceMap) {
         queryMapResources = resourceMap.resources;
         getResultCounts = function() {
