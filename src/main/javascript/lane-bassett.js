@@ -83,7 +83,7 @@
                 if (event.state) {
                     loadContent(event.state.bassett);
                 } else {
-                    history.back();
+                    loadContent(formatAjaxUrl(document.location.href));
                 }
             });
         },
