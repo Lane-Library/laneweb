@@ -30,7 +30,7 @@
         if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
             link.set('rel', 'persistentLogin');
-            redirectUrl = encodeURIComponent(event.target.get('href'));
+            redirectUrl = event.target.get('href');
             getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
         }
     };

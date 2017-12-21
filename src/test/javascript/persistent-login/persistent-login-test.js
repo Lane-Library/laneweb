@@ -67,7 +67,7 @@ var persistentLoginTestCase = new Y.Test.Case({
         stanford.simulate("click");
         handle2.detach();
         var expected = stanford.get("pathname") + stanford.get("search");
-        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=https%253A%252F%252Flogin.laneproxy.stanford.edu%252Flogin%253Furl%253Dfoo", expected);
+        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=https%3A%2F%2Flogin.laneproxy.stanford.edu%2Flogin%3Furl%3Dfoo", expected);
     },
 
     "test stanford click 2" : function() {
@@ -84,7 +84,7 @@ var persistentLoginTestCase = new Y.Test.Case({
         stanford.simulate("click");
         handle2.detach();
         var expected = stanford.get("pathname") + stanford.get("search");
-        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=http%253A%252F%252Flaneproxy.stanford.edu%252Flogin%253Furl%253Dfoo", expected);
+        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=http%3A%2F%2Flaneproxy.stanford.edu%2Flogin%3Furl%3Dfoo", expected);
     },
 
     "test unchecked is persistent login" : function() {
