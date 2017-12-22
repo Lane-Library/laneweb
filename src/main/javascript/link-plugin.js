@@ -6,8 +6,6 @@
 
     "use strict";
 
-    Y.namespace("lane");
-
     var ALT = "alt",
         COOKIES_FETCH = "cookiesFetch",
         LINK_HOST = "linkHost",

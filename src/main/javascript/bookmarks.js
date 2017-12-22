@@ -19,7 +19,7 @@
     Bookmarks = function(bookmarks) {
         var i;
         this._bookmarks = [];
-        if (bookmarks && !Y.Lang.isArray(bookmarks)) {
+        if (bookmarks && !(bookmarks instanceof Array)) {
             throw("bad config");
         }
         if (bookmarks) {
@@ -90,10 +90,11 @@
              * @param bookmark {Bookmark}
              */
             addBookmark : function(bookmark) {
-                if (!Y.Lang.isObject(bookmark)) {
+                if (bookmark instanceof Y.lane.Bookmark) {
+                    this.fire("add", {bookmark : bookmark});
+                } else {
                     throw ("bad bookmark");
                 }
-                this.fire("add", {bookmark : bookmark});
             },
 
             /**

@@ -2,8 +2,6 @@
 
     "use strict";
 
-    Y.namespace("lane");
-
     var Lane = Y.lane,
 
     Model = function() {

@@ -38,10 +38,9 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
     //keep a global reference of this YUI object
     window.Y = Y;
 
-    //create the lane namespace
-    var lane = Y.namespace("lane");
+    Y.lane = {};
 
-    Y.augment(lane, Y.EventTarget, null, null, {
+    Y.augment(Y.lane, Y.EventTarget, null, null, {
         prefix : "lane",
         emitFacade : true,
         broadcast : 1
