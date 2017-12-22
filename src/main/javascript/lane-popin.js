@@ -2,28 +2,29 @@
 
     "use strict";
 
-    // custom popin event
-    var onPopinHandler;
-    Y.publish('lane:popin',{broadcast:1});
+    var lane = Y.lane;
 
-        onPopinHandler = function(el) {
-            //FIXME: are elms returned in the right order? probably not.
-            var i, activeEl = 99, elms = Y.all('#spellCheck, #queryMapping, #findIt');
-            for (i = 0; i < elms.size(); i++) {
-                if (elms.item(i) !== null && elms.item(i).getStyle('display') === 'inline') {
-                    activeEl = i;
-                }
+    lane.publish('lane:popin', {emitFacade: false});
+
+    lane.on("lane:popin", function(id) {
+        //FIXME: are elements returned in the right order? probably not.
+        var i, element,
+            activeElementIndex = 99,
+            elements = document.querySelectorAll('.popin > div');
+        for (i = 0; i < elements.length; i++) {
+            if (elements.item(i).style.display === 'inline') {
+                activeElementIndex = i;
             }
-            for (i = 0; i < elms.size(); i++) {
-                if (elms.item(i) !== null) {
-                    if (el.get('id') === elms.item(i).get('id') && i <= activeEl) {
-                        activeEl = i;
-                        elms.item(i).addClass('active');
-                    } else if (i > activeEl) {
-                        elms.item(i).removeClass('active');
-                    }
-                }
+        }
+        for (i = 0; i < elements.length; i++) {
+            element = elements.item(i);
+            if (id === element.id && i <= activeElementIndex) {
+                activeElementIndex = i;
+                lane.activate(element, "popin");
+            } else if (i > activeElementIndex) {
+                lane.deactivate(element, "popin");
             }
-        };
-    Y.on('lane:popin', onPopinHandler);
+        }
+    });
+
 })();

@@ -1,7 +1,11 @@
-.tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping, #showPubMedStrategies {
+.tooltips,
+.popin > div,
+#search-content-counts,
+#showPubMedStrategies {
     display: none;
 }
-#findIt.active, #spellCheck.active, #queryMapping.active {
+
+.popin > .popin-active {
     display: inline;
 }
 #queryMapping span, #spellCheckLink, #findItLink {

@@ -45,7 +45,7 @@
         if (needMore) {
             setTimeout(getResultCounts, 2000);
         }
-        Y.fire('lane:popin', queryMapping);
+        Y.lane.fire('lane:popin', "queryMapping");
     },
         mapSuccess = function(id, o) {
         var anchor, span, i,

@@ -19,7 +19,7 @@
                         findItLink = findItNode.one('a');
                         findItLink.set('href', findIt.openurl);
                         findItLink.set('innerHTML', findIt.result);
-                        Y.fire('lane:popin', findItNode);
+                        Y.lane.fire('lane:popin', "findIt");
                         // tracking
                         Y.lane.fire("tracker:trackableEvent", {
                             category: "lane:findit",

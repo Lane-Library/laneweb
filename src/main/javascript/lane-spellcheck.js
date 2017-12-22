@@ -26,7 +26,7 @@
                         a = spellCheck.one('a');
                         a.set('href', correctedUrl);
                         a.set('innerHTML', sc.suggestion);
-                        Y.fire('lane:popin', spellCheck);
+                        Y.lane.fire('lane:popin', "spellCheck");
                         // track suggestion and original query
                         Y.lane.fire("tracker:trackableEvent", {
                             category: "lane:spellSuggest",
