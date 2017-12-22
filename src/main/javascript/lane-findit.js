@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var findItNode = Y.one('#findIt'),
+    var findItNode = document.querySelector('#findIt'),
         model = Y.lane.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "",
@@ -16,9 +16,9 @@
                     var findIt = JSON.parse(o.responseText),
                         findItLink;
                     if (findIt.result) {
-                        findItLink = findItNode.one('a');
-                        findItLink.set('href', findIt.openurl);
-                        findItLink.set('innerHTML', findIt.result);
+                        findItLink = findItNode.querySelector('a');
+                        findItLink.href = findIt.openurl;
+                        findItLink.innerHTML = findIt.result;
                         Y.lane.fire('lane:popin', "findIt");
                         // tracking
                         Y.lane.fire("tracker:trackableEvent", {
