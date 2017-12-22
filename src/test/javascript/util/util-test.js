@@ -23,6 +23,10 @@ var laneTestCase = new Y.Test.Case({
 
     "test getData": function() {
         Y.Assert.areEqual("test", Y.lane.getData(document.querySelector(".test"), "test"));
+    },
+
+    "test NodeList.forEach": function() {
+        Y.Assert.areEqual(typeof document.querySelectorAll("*").forEach, "function");
     }
 });
 

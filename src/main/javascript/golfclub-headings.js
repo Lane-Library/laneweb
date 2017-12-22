@@ -2,7 +2,8 @@
 
     "use strict";
 
-    Array.prototype.forEach.call(document.querySelectorAll(".golfclub"), function(node) {
+    console.log(typeof document.querySelectorAll(".golfclub"));
+    document.querySelectorAll(".golfclub").forEach(function(node) {
         node.innerHTML = '<span><span class="golfclub-left"></span>' + node.innerHTML + '<span class="golfclub-right"></span></span>';
     });
 

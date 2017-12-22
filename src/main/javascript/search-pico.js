@@ -44,7 +44,7 @@
     Y.augment(PicoField, Y.EventTarget);
     Y.augment(fields, Y.EventTarget);
 
-    [].forEach.call(document.querySelectorAll(".pico-fields input"), function(input) {
+    document.querySelectorAll(".pico-fields input").forEach(function(input) {
         fields.push(new PicoField(input, limits[input.name]));
     });
 

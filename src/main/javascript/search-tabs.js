@@ -8,7 +8,6 @@ if (document.querySelector(".search-form"))  {
         SOURCE = "source",
         SEARCH_TAB = "search-tab",
         form = document.querySelector(".search-form"),
-        forEach = [].forEach,
         lane = Y.lane,
         tabNodes = form.querySelectorAll("." + SEARCH_TAB),
 
@@ -18,7 +17,7 @@ if (document.querySelector(".search-form"))  {
                 source: source
             };
 
-            forEach.call(tabNodes, function(tab) {
+            tabNodes.forEach(function(tab) {
                 m[lane.getData(tab, SOURCE)] = {
                     placeholder: lane.getData(tab, "placeholder"),
                     source: lane.getData(tab, SOURCE),
@@ -47,7 +46,7 @@ if (document.querySelector(".search-form"))  {
 
             Y.augment(v, Y.EventTarget);
 
-            forEach.call(tabNodes, function(tab){
+            tabNodes.forEach(function(tab){
                 tab.addEventListener(CLICK, v.click);
                 tabs[lane.getData(tab, SOURCE)] = tab;
             });

@@ -1,5 +1,5 @@
 (function() {
-    [].forEach.call(document.querySelectorAll('.menu ul'), function(submenu) {
+    document.querySelectorAll('.menu ul').forEach(function(submenu) {
         if (submenu.querySelector('.menuitem-active')) {
             submenu.className = 'submenu submenu-active';
             submenu.parentNode.querySelector('a').innerHTML += ' <i class="fa fa-chevron-up"></i>';

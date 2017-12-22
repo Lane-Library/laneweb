@@ -12,7 +12,7 @@
             var imageMap = {};
 
             // initialize the imageMap
-            [].forEach.call(bookImageNodes, function(imageNode) {
+            bookImageNodes.forEach(function(imageNode) {
                 var bibid = lane.getData(imageNode, "bibid");
                 imageMap[bibid] = imageMap[bibid] || [];
                 imageMap[bibid].push(imageNode);
