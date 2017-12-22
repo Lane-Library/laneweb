@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var spellCheck = Y.one('#spellCheck'),
+    var spellCheck = document.querySelector('#spellCheck'),
         model = Y.lane.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "";
@@ -21,11 +21,11 @@
                         // if the suggestion is long, set parent container height;
                         // this creates UI bounce, so only do it as needed
                         if (sc.suggestion.length > 110) {
-                            spellCheck.ancestor(".popin").setStyle("height","100%");
+                            spellCheck.parentNode.style.height = "auto";
                         }
-                        a = spellCheck.one('a');
-                        a.set('href', correctedUrl);
-                        a.set('innerHTML', sc.suggestion);
+                        a = spellCheck.querySelector('a');
+                        a.href = correctedUrl;
+                        a.innerHTML = sc.suggestion;
                         Y.lane.fire('lane:popin', "spellCheck");
                         // track suggestion and original query
                         Y.lane.fire("tracker:trackableEvent", {
