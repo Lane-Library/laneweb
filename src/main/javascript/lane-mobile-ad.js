@@ -3,14 +3,14 @@
 
     "use strict";
 
-    var advert, link,
+    var link,
         model = Y.lane.Model,
         basePath = model.get(model.BASE_PATH) || "",
         login = document.querySelector("#login"),
         template;
     if(login && navigator.userAgent.match(/(iPhone|iPod|Android)/)){
         link = basePath + '/index.html?site_preference=mobile';
-        template = document.createElement('div')
+        template = document.createElement('div');
         template.innerHTML = '<li><a href="'+link+'">Mobile Version</a></li>';
         login.insertBefore(template.firstChild, login.firstChild);
     }

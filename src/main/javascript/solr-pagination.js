@@ -13,7 +13,7 @@
             if (page < 1 || page > Number(pages.value)) {
                 event.preventDefault();
                 if (!parent.querySelector(".error")) {
-                    template = document.createElement('div')
+                    template = document.createElement('div');
                     template.innerHTML = '<div class="error">ERROR: page out of range</div>';
                     parent.insertBefore(template.firstChild, parent.firstChild);
                 }

@@ -15,11 +15,37 @@
 
     //add trigger markup and delegate click events on class "descriptionTrigger"
     if (document.querySelector("#searchResults")) {
-        initializeDescriptionToggles();
+        
+        var handleClick = function(node, event) {
+            var eresource = node.classList.contains("eresource"),
+                searchContent = node.classList.contains("searchContent"),
+                ancestor = node,
+                active;
+
+            event.preventDefault();
+
+            // walk up the tree to find a li
+            while (ancestor && ancestor.nodeName !== "LI") {
+                ancestor = ancestor.parentNode;
+            }
+            active = ancestor.classList.contains("active");
+            ancestor.classList.toggle("active");
+            if (active && eresource) {
+                node.innerHTML = "<a href=\"#\"><i class=\"fa fa-eye\"></i> View Description <i class=\"fa fa-angle-double-down\"></i></a>";
+            } else if (active && searchContent) {
+                node.innerHTML = "<a href=\"#\"><i class=\"fa fa-eye\"></i> Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>";
+            } else if (!active) {
+                node.innerHTML = "<a href=\"#\">close... <i class=\"fa fa-angle-double-up\"></i></a>";
+            }
+            Y.lane.fire("tracker:trackableEvent", {
+                category: "lane:descriptionTrigger",
+                action: event.target.textContent,
+                label: ancestor.querySelector('.primaryLink').textContent
+            });
+        }
 
         document.querySelector(".content").addEventListener("click", function(event) {
-            var node = event.target,
-                ancestor, active, eresource, searchContent;
+            var node = event.target;
             // walk up the tree to find a .descriptionTrigger
             while (node && !node.classList.contains("descriptionTrigger")) {
                 node = node.parentNode;
@@ -29,30 +55,11 @@
                 }
             }
             if (node) {
-                eresource = node.classList.contains("eresource");
-                searchContent = node.classList.contains("searchContent");
-                ancestor = node;
-                // walk up the tree to find a li
-                while (ancestor && ancestor.nodeName != "LI") {
-                    ancestor = ancestor.parentNode;
-                }
-                active = ancestor.classList.contains("active");
-                event.preventDefault();
-                ancestor.classList.toggle("active");
-                if (active && eresource) {
-                    node.innerHTML = "<a href=\"#\"><i class=\"fa fa-eye\"></i> View Description <i class=\"fa fa-angle-double-down\"></i></a>";
-                } else if (active && searchContent) {
-                    node.innerHTML = "<a href=\"#\"><i class=\"fa fa-eye\"></i> Preview Abstract <i class=\"fa fa-angle-double-down\"></i></a>";
-                } else if (!active) {
-                    node.innerHTML = "<a href=\"#\">close... <i class=\"fa fa-angle-double-up\"></i></a>";
-                }
-                Y.lane.fire("tracker:trackableEvent", {
-                    category: "lane:descriptionTrigger",
-                    action: event.target.textContent,
-                    label: ancestor.querySelector('.primaryLink').textContent
-                });
+                handleClick(node, event);
             }
         });
+
+        initializeDescriptionToggles();
 
     }
 
