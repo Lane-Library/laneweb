@@ -15,7 +15,7 @@
 
     //add trigger markup and delegate click events on class "descriptionTrigger"
     if (document.querySelector("#searchResults")) {
-        
+
         var handleClick = function(node, event) {
             var eresource = node.classList.contains("eresource"),
                 searchContent = node.classList.contains("searchContent"),
@@ -42,7 +42,7 @@
                 action: event.target.textContent,
                 label: ancestor.querySelector('.primaryLink').textContent
             });
-        }
+        };
 
         document.querySelector(".content").addEventListener("click", function(event) {
             var node = event.target;
