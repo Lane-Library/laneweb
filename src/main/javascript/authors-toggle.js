@@ -3,30 +3,30 @@
     "use strict";
 
     var initializeAuthorToggles = function() {
-        Y.all('.authorsTrigger').each(function(triggerNode) {
-            if (!triggerNode.getData().authorsTriggerSubscribed) {
-                triggerNode.setData('authorsTriggerSubscribed',true);
-                triggerNode.on('click', function(event) {
+        document.querySelectorAll(".authorsTrigger").forEach(function(triggerNode) {
+            if (!triggerNode.authorsTriggerSubscribed) {
+                triggerNode.authorsTriggerSubscribed = true;
+                triggerNode.addEventListener("click", function(e) {
                     var node = event.currentTarget,
-                    anchorNode = node.one('a'),
-                    parent = node.get('parentNode'),
-                    iconNode = node.one('i');
+                        anchorNode = node.querySelector('a'),
+                        iconNode = node.querySelector('i'),
+                        hideNode = node.parentNode.querySelector(".authors-hide");
 
-                    event.stopPropagation();
-                    event.preventDefault();
-                    node.toggleClass('active');
-                    if (!node.hasClass('active')) {
-                        node.previous().set('text', ' - ');
-                        parent.one('.authors-hide').setStyles({display : 'block'});
-                        anchorNode.set('text',' Show Less ');
-                        iconNode.removeClass('fa-angle-double-down');
-                        iconNode.addClass('fa-angle-double-up');
+                    e.stopPropagation();
+                    e.preventDefault();
+                    node.classList.toggle('active');
+                    if (!node.classList.contains('active')) {
+                        node.previousElementSibling.textContent = " - ";
+                        hideNode.style.display = "block";
+                        anchorNode.textContent = ' Show Less ';
+                        iconNode.classList.remove('fa-angle-double-down');
+                        iconNode.classList.add('fa-angle-double-up');
                     } else {
-                        node.previous().set('text', ' ... ');
-                        parent.one('.authors-hide').setStyles({display : 'none'});
-                        anchorNode.set('text',' Show More ');
-                        iconNode.removeClass('fa-angle-double-up');
-                        iconNode.addClass('fa-angle-double-down');
+                        node.previousElementSibling.textContent = " ... ";
+                        hideNode.style.display = "none";
+                        anchorNode.textContent = ' Show More ';
+                        iconNode.classList.remove('fa-angle-double-up');
+                        iconNode.classList.add('fa-angle-double-down');
                     }
                 });
             }
@@ -34,7 +34,7 @@
     };
 
     //add trigger markup and delegate click events on class "authorsTrigger"
-    if (Y.one('#searchResults')) {
+    if (document.querySelector('#searchResults')) {
         initializeAuthorToggles();
     }
 
