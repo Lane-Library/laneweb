@@ -56,13 +56,6 @@
                 this._timer = null;
                 Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
-                if (Model.get(Model.URL_ENCODED_QUERY)) {
-                    var bookmarkSearch = Y.one(".bookmark-search");
-                    if (bookmarkSearch) {
-                        bookmarkSearch.addClass("active");
-                        bookmarkSearch.on("click", this._handleBookmarkSearchClick, this);
-                    }
-                }
                 this.on("statusChange", this._handleStatusChange);
                 var bookmarks = this.get("bookmarks");
                 if (bookmarks) {

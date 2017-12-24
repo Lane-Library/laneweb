@@ -120,17 +120,6 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         .areSame('{"label":"local","url":"/foo?bar=baz"}', data);
     },
 
-    testBookmarkSearchClick : function() {
-        var data = "";
-        Y.io = function(url, config) {
-            data = config.data;
-            config.on.success.apply(config.context, [ 0, {} ]);
-        };
-        Y.one(".bookmark-search").simulate("click");
-        Y.Assert
-        .areSame('{"label":"Search for: foo bar","url":"/search.html?source=bar%20foo&q=foo%20bar"}', data);
-    },
-
     testTimer : function() {
         this.link.set("status", 5);
         this.wait(function() {
