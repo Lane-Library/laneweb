@@ -5,10 +5,6 @@ Y.on("click", function(event) {
     event._event.preventDefault();
 });
 
-Y.lane.Location.on("hrefChange", function(event) {
-    event.preventDefault();
-});
-
 var trackingTestCase = new Y.Test.Case({
 
     name: "Lane Tracking TestCase",
@@ -97,7 +93,7 @@ var trackingTestCase = new Y.Test.Case({
         link.simulate("click");
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:browseResultClick", this.event.category);
-        Y.Assert.areEqual(Y.lane.Location.get("pathname"), this.event.action);
+        Y.Assert.areEqual(location.pathname, this.event.action);
         Y.Assert.areEqual(101, this.event.value);
         Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
         Y.Assert.areEqual(link.get("text"), this.pageView.title);
@@ -135,8 +131,8 @@ var trackingTestCase = new Y.Test.Case({
     testClickPopup: function() {
         var link = Y.one("#popup");
         link.simulate("click");
-        Y.Assert.areEqual(Y.lane.Location.get("host"), this.pageView.host);
-        Y.Assert.areEqual(Y.lane.Location.get("pathname") , this.pageView.path);
+        Y.Assert.areEqual(location.host, this.pageView.host);
+        Y.Assert.areEqual(location.pathname , this.pageView.path);
         Y.Assert.areEqual("YUI Pop-up [local]: " + link.get("text"), this.pageView.title);
         Y.Assert.isFalse(this.pageView.external);
         Y.Assert.isNull(this.event);

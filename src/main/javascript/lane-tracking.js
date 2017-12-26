@@ -3,7 +3,6 @@
     "use strict";
 
     var Lane = Y.lane,
-        location = Lane.Location,
         model = Lane.Model,
         searchTerms = model.get(model.URL_ENCODED_QUERY),
         searchSource = model.get(model.URL_ENCODED_SOURCE),
@@ -25,7 +24,7 @@
                     trackingData.label = link.ancestor("li").one(".primaryType").get('text') + " -> " + trackingData.label;
                 } else {
                     trackingData.category = "lane:browseResultClick";
-                    trackingData.action = location.get("pathname");
+                    trackingData.action = location.pathname;
                 }
                 return trackingData;
             },
@@ -113,7 +112,7 @@
                         host = host.substring(0, host.indexOf('/'));
                     }
                 } else if (isLocalPopup(node)) {
-                    host = location.get("host");
+                    host = location.host;
                 } else {
                     host = node.get('hostname');
                 }
@@ -122,7 +121,7 @@
             getTrackedPath = function(node) {
                 var path, host, pathname = node.get("pathname");
                 if (isLocalPopup(node)) {
-                    path = location.get("pathname");
+                    path = location.pathname;
                 } else if (pathname.indexOf('cookiesFetch') > -1) {
                     host = decodeURIComponent(node.get('search'));
                     host = host.substring(host.indexOf("path=") + 6);
@@ -162,7 +161,7 @@
                         query = '';
                     }
                 } else if (isLocalPopup(node)) {
-                    query = location.get("search");
+                    query = location.search;
                 } else {
                     query = node.get('search');
                 }
@@ -175,7 +174,7 @@
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node) || isSecureVideo(node)) {
                     external = true;
                 } else {
-                    external = node.get("hostname") !== location.get("host");
+                    external = node.get("hostname") !== location.host;
                 }
                 return external;
             },
@@ -288,7 +287,7 @@
                             link = link.ancestor("a");
                         }
                         if (link && link.get("href")) {
-                            if (link.get('hostname') === location.get("hostname")) {
+                            if (link.get('hostname') === location.hostname) {
                                 isTrackable =  isTrackableLocalClick(link);
                             } else {
                                 //external reference is trackable
@@ -327,7 +326,7 @@
 
         Y.on('click', function(e) {
             var t = e.target, setLocation = function() {
-                Lane.Location.set("href", t.get('href'));
+                Lane.setHref(t.get('href'));
             };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:

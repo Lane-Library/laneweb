@@ -15,7 +15,7 @@
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup
                         //and add the suggestion to the href
-                        correctedUrl = Y.lane.Location.get("href").replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
+                        correctedUrl = location.href.replace('q=' + encodedQuery, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + encodedQuery);
                         //strip #facet stuff from URL
                         correctedUrl = correctedUrl.replace(/#.*/,'');
                         // if the suggestion is long, set parent container height;

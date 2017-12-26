@@ -5,7 +5,6 @@
     var model = Y.lane.Model, redirectUrl,
     persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
     basePath = model.get(model.BASE_PATH)|| "",
-    location = Y.lane.Location,
     now = new Date(),
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
     // See UserDataBinder.java
@@ -77,9 +76,9 @@
         Y.on('click',function(event) {
             event.preventDefault();
             if (isStanfordActive) {
-                location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
+                Y.lane.setHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
-                location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
+                Y.lane.setHref(basePath + '/secure/persistentLogin.html?pl=true');
             }
         }, '#persistent-login');
     }

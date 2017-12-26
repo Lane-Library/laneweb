@@ -5,7 +5,7 @@ var spellCheckTestCase = new Y.Test.Case({
     testSpellCheck: function() {
         var node = Y.one("#spellCheck").one("a");
         Y.Assert.areEqual("suggestion", node.get("text"));
-        Y.Assert.areEqual(Y.lane.Location.get("href"), node.get("href"));
+        Y.Assert.areEqual(location.href, node.get("href"));
     }
 });
 

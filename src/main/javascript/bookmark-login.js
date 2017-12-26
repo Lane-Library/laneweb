@@ -6,7 +6,6 @@
         model = lane.Model,
         lightbox = lane.Lightbox,
         basePath = model.get(model.BASE_PATH),
-        location = lane.Location,
 
         /**
          * An Object that controls interactions when bookmarking occurs without the
@@ -25,7 +24,7 @@
             addBookmark: function(label, url) {
                 var queryString = "&label=" + encodeURIComponent(label);
                 queryString += "&url=" + encodeURIComponent(url);
-                queryString += "&redirect=" + encodeURIComponent(location.get("href"));
+                queryString += "&redirect=" + encodeURIComponent(location.href);
                 Y.io(basePath + "/plain/bookmark-login.html", {
                     on: {
                         success: BookmarkLogin._handleSuccess,

@@ -28,4 +28,12 @@
             }
         };
     }
+
+    /*
+     * stubbable method for setting location.href 
+     */
+    lane.setHref = function(href) {
+        location.href = href;
+    }
+
 })();

@@ -489,7 +489,6 @@
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
                                 <include>menu-min.js</include>
-                                <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-plugin-min.js</include>

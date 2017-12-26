@@ -107,12 +107,10 @@ var persistentLoginTestCase = new Y.Test.Case({
     "test persistent-login click" : function() {
         var node = Y.one("#persistent-login");
         var href = null;
-        var handle = Y.lane.Location.on("hrefChange", function(event) {
-            event.preventDefault();
-            href = event.newVal;
-        });
+        Y.lane.setHref = function(h) {
+            href = h;
+        };
         node.simulate("click");
-        handle.detach();
         Y.Assert.areSame("/persistentLogin.html?pl=renew&url=/myaccounts.html", href);
     }
 

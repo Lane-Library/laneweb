@@ -20,10 +20,9 @@
         SRC = "src",
         TITLE = "title",
         lane = Y.lane,
-        location = lane.Location,
         basePath = lane.Model.get("base-path") || "",
         cookiesFetchPath = basePath + "/cookiesFetch.html",
-        documentHostName = location.get("hostname"),
+        documentHostName = location.hostname,
         loginPath = basePath + "/secure/apps/proxy/credential",
 
     LinkPlugin = function(config) {
@@ -63,7 +62,7 @@
                 readOnly : true,
                 valueFn : function() {
                     var path = this.get(HOST_NODE).get("pathname");
-                    path = path === undefined || path === "" ? location.get("pathname") : path;
+                    path = path === undefined || path === "" ? location.pathname : path;
                     return path.indexOf("/") === 0 ? path : "/" + path;
                 }
             },
@@ -153,7 +152,7 @@
                     }
                     title = this.get(TITLE);
                     external = !this.get(LOCAL);
-                    query = external ? "" : location.get("search");
+                    query = external ? "" : location.search;
                     return {
                         host: host,
                         path: path,

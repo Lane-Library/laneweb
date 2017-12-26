@@ -12,10 +12,10 @@ var bookmarkLoginTestCase = new Y.Test.Case({
 
     testAddBookmark: function() {
         this.login.addBookmark("label", "url");
-        var loc = encodeURIComponent(Y.lane.Location.get("href"));
+        var loc = encodeURIComponent(location.href);
         var yes = Y.one("#yes-bookmark-login");
         var no = Y.one("#no-bookmark-login");
-        var doc = Y.lane.Location.get("protocol") + "//" + Y.lane.Location.get("host");
+        var doc = location.protocol + "//" + location.host;
         Y.Assert.areSame(doc + "/foo?bar=baz&label=label&url=url&redirect=" + loc, yes.get("href"));
         no.simulate("click");
         Y.Assert.areSame(false, Y.lane.Lightbox.get("visible"));
