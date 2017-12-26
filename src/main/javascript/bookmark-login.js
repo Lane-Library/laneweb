@@ -57,13 +57,12 @@
              * @param args {object} the arguments passed to Y.io, in this case the query string
              */
             _handleSuccess: function(id, o, args) {
-                var queryString = args.queryString, yes, no, handler;
+                var queryString = args.queryString, yes, no;
                 lightbox.setContent(o.responseText);
-                yes = Y.one("#yes-bookmark-login");
-                no = Y.one("#no-bookmark-login");
-                yes.set("href", yes.get("href") + queryString);
-                handler = no.on("click", function() {
-                    handler.detach();
+                yes = document.querySelector("#yes-bookmark-login");
+                no = document.querySelector("#no-bookmark-login");
+                yes.href += queryString;
+                no.addEventListener("click", function() {
                     lightbox.hide();
                 });
                 lightbox.show();
