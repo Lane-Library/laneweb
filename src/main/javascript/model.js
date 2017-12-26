@@ -2,14 +2,16 @@
 
     "use strict";
 
-    var Lane = Y.lane,
+    window.model = window.model || {};
 
-    Model = function() {
-        Model.superclass.constructor.apply(this, arguments);
-    };
-
-    Y.extend(Model, Y.Base, {
-        //keep this in sync with edu.stanford.irt.laneweb.model.Model
+    Y.lane.Model = {
+        get: function(prop) {
+            return window.model[prop];
+        },
+        set: function(prop, value) {
+            window.model[prop] = value;
+        },
+        //keep these in sync with edu.stanford.irt.laneweb.model.Model
         AUTH : "auth",
         BASE_PATH : "base-path",
         DISASTER_MODE : "disaster-mode",
@@ -18,12 +20,6 @@
         PROXY_LINKS : "proxy-links",
         URL_ENCODED_SOURCE : "url-encoded-source",
         URL_ENCODED_QUERY : "url-encoded-query"
-    }, {
-        NAME : "model"
-    });
-
-    Lane.Model = new Model();
-
-    Lane.Model.setAttrs(window.model || {});
+    }
 
 })();

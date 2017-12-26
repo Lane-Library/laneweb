@@ -4,16 +4,13 @@
 
     var Lane = Y.lane,
         model = Lane.Model,
-        searchTerms = model.get(model.URL_ENCODED_QUERY),
         searchSource = model.get(model.URL_ENCODED_SOURCE),
         Tracker = function() {
-            model.on(model.URL_ENCODED_QUERY + "Change", function(event) {
-                searchTerms = event.newVal;
-            });
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
                 var trackingData = {}, list = link.ancestor(".lwSearchResults"),
-                    pageStart = Y.one("#pageStart");
+                    pageStart = Y.one("#pageStart"),
+                    searchTerms = model.get(model.URL_ENCODED_QUERY);
                     // pageStart is the value in the pageStart span or 1 if its not there.
                 pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
                 trackingData.value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
@@ -179,7 +176,9 @@
                 return external;
             },
             getPageviewTrackingData = function(event) {
-                var node = event.target, trackingData = {};
+                var node = event.target,
+                    trackingData = {},
+                    searchTerms = model.get(model.URL_ENCODED_QUERY);
                 if (node.get('nodeName') !== 'A' && node.one('a')) {
                     node = node.one('a');
                 }

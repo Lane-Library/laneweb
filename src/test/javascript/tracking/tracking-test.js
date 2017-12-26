@@ -5,6 +5,8 @@ Y.on("click", function(event) {
     event._event.preventDefault();
 });
 
+Y.lane.setHref = function() {};
+
 var trackingTestCase = new Y.Test.Case({
 
     name: "Lane Tracking TestCase",
