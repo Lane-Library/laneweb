@@ -21,34 +21,37 @@
                 return searchUrl;
             },
             updateNode = function(result, node) {
-                var resultSpan = node.get('parentNode').one('.searchCount');
+                var resultSpan = node.parentNode.querySelector('.searchCount'),
+                    template;
                 if (resultSpan === null) {
-                    resultSpan = Y.Node.create('<span class="searchCount"></span>');
-                    node.get('parentNode').insert(resultSpan);
+                    template = document.createElement("div");
+                    template.innerHTML = '<span class="searchCount"></span>';
+                    node.parentNode.appendChild(template.firstChild);
+                    resultSpan = node.parentNode.querySelector('.searchCount');
                 }
-                node.setAttribute('href', result.url);
+                node.href = result.url;
                 if (result.status === 'successful') {
                     // process display of each updateable node
                     // once all processed, remove id from resourceIds
-                    resultSpan.setContent('&#160;' + result.hits.toLocaleString());
-                    node.setAttribute('target', '_blank');
-                    node.removeClass('metasearch');
+                    resultSpan.innerHTML = '&#160;' + result.hits.toLocaleString();
+                    node.target = '_blank';
+                    node.classList.remove('metasearch');
                 } else if (result.status === 'failed' || result.status === 'canceled') {
-                    resultSpan.setContent('&#160;? ');
-                    node.removeClass('metasearch');
+                    resultSpan.innerHTML = '&#160;? ';
+                    node.classList.remove('metasearch');
                 }
             },
             updateNodes = function(results) {
                 var i, j, updateableNodes, result, needMore = false;
                 for (i = 0; i < resourceIds.length; i++) {
                     // search content may have more than one element with same ID
-                    updateableNodes = Y.all('#' + resourceIds[i]);
+                    updateableNodes = document.querySelectorAll('#' + resourceIds[i]);
                     result = results[resourceIds[i]];
                     if (result === undefined || result.status === 'running') {
                         needMore = true;
-                    } else if (updateableNodes.size() > 0) {
-                        for (j = 0; j < updateableNodes.size(); j++) {
-                            updateNode(result, updateableNodes.item(j));
+                    } else if (updateableNodes.length > 0) {
+                        for (j = 0; j < updateableNodes.length; j++) {
+                            updateNode(result, updateableNodes[j]);
                         }
                         resourceIds.splice(i--, 1);
                     }
@@ -78,10 +81,10 @@
             };
         return {
             initialize: function() {
-                var i, searchElms = Y.all(".metasearch");
-                for (i = 0; i < searchElms.size(); i++) {
-                    if (Y.Array.indexOf(resourceIds, searchElms.item(i).get('id')) === -1) {
-                        resourceIds.push(searchElms.item(i).get('id'));
+                var i, searchElms = document.querySelectorAll(".metasearch");
+                for (i = 0; i < searchElms.length; i++) {
+                    if (resourceIds.indexOf(searchElms[i].id) === -1) {
+                        resourceIds.push(searchElms[i].id);
                     }
                 }
                 for (i = 0; i < searchRequests.length; i++) {
@@ -101,7 +104,7 @@
     }();
 
     // check for presence of search term and metasearch classNames
-    if (Y.all('.metasearch').size() > 0 && encodedQuery) {
+    if (document.querySelectorAll('.metasearch').length > 0 && encodedQuery) {
         metasearch.initialize();
         metasearch.getResultCounts();
         searchIndicator.show();

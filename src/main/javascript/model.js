@@ -20,6 +20,6 @@
         PROXY_LINKS : "proxy-links",
         URL_ENCODED_SOURCE : "url-encoded-source",
         URL_ENCODED_QUERY : "url-encoded-query"
-    }
+    };
 
 })();
