@@ -12,9 +12,6 @@
         subRegionToShow = 4,
         prevRegion,
         prevSubRegion,
-        j,
-        lis,
-        seeAll,
 
         formatAjaxUrl = function(string) {
             var url, href;
@@ -130,7 +127,7 @@
         expandSubRegion = function(event) {
             var i, subRegion, display,
                 region = event.currentTarget;
-            while (region && region.nodeName != "UL") {
+            while (region && region.nodeName !== "UL") {
                 region = region.parentNode;
             }
             display = region.querySelectorAll('li')[subRegionToShow + 1].style.display;

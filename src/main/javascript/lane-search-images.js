@@ -44,7 +44,7 @@
 
         //To close the image detail
         document.querySelectorAll("#image-detail-close").forEach(function(node) {
-            node.addEventListener("click", cleanDetailImageWindow)
+            node.addEventListener("click", cleanDetailImageWindow);
         });
 
         //Admin on click on the id
