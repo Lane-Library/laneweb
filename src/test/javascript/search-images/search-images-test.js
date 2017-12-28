@@ -93,7 +93,7 @@ var searchImagesTestCase = new Y.Test.Case({
 });
 
 
-Y.one('body').addClass('pure-skin-sam');
+Y.one('body').addClass('yui3-skin-sam');
 new Y.Console({
     newestOnTop: false
 }).render('#log');

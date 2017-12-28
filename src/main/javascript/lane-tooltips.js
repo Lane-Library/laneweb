@@ -459,16 +459,15 @@
     createTooltips = function() {
             var tooltipTriggerIds = '.search-tab',
                 tooltipContainer, tooltipId, i, j, tt, content = {},
-                tooltipContainerNodeList = Y.all('.tooltips');
-            for (i = 0; i < tooltipContainerNodeList.size(); i++) {
-                tooltipContainer = tooltipContainerNodeList.item(i).all("> *");
-                for (j = 0; j < tooltipContainer.size(); j++) {
-                    tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
-                    if (tooltipTriggerIds) {
-                        tooltipTriggerIds += ', ';
+                tooltipContainerNodeList = document.querySelectorAll('.tooltips');
+            for (i = 0; i < tooltipContainerNodeList.length; i++) {
+                tooltipContainer = tooltipContainerNodeList[i].children;
+                for (j = 0; j < tooltipContainer.length; j++) {
+                    if (tooltipContainer[j].id) {
+                        tooltipId = tooltipContainer[j].id.replace(/Tooltip$/, '');
+                        tooltipTriggerIds += ', #' + tooltipId;
+                        content[tooltipId] = tooltipContainer[j].innerHTML;
                     }
-                    tooltipTriggerIds += '#' + tooltipId;
-                    content[tooltipId] = tooltipContainer.item(j).get("innerHTML");
                 }
             }
             tt = new Tooltip({
@@ -479,7 +478,7 @@
                 autoHideDelay: 60000,
                 constrain: false,
                 render : true,
-                delegate : "body"
+                delegate : ".main"
             });
             tt.after('visibleChange', function(e) {
                 if (!e.newVal) {
