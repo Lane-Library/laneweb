@@ -126,10 +126,7 @@
 
         expandSubRegion = function(event) {
             var i, subRegion, display,
-                region = event.currentTarget;
-            while (region && region.nodeName !== "UL") {
-                region = region.parentNode;
-            }
+                region = Lane.ancestor(event.currentTarget, "ul");
             display = region.querySelectorAll('li')[subRegionToShow + 1].style.display;
             hideSubRegions(region);
             resetSubRegion();

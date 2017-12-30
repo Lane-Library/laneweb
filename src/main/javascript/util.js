@@ -16,6 +16,19 @@
         return node.dataset[name];
     };
 
+    lane.ancestor = function(node, selector, self) {
+        var result;
+        if (self && node.matches(selector)) {
+            result = node;
+        } else {
+            result = node.parentNode;
+            while (result.nodeType === 1 && !result.matches(selector)) {
+                result = result.parentNode;
+            }
+        }
+        return result.nodeType === 1 ? result : null;
+    }
+
     /*
      * polyfill for NodeList.prototype.forEach() from
      * https://github.com/imagitama/nodelist-foreach-polyfill
@@ -36,4 +49,22 @@
         location.href = href;
     };
 
+    /*
+     * polyfill for Element.prototype.matches() from
+     * https://developer.mozilla.org/en-US/docs/Web/API/Element/matches
+     */
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = 
+            Element.prototype.matchesSelector || 
+            Element.prototype.mozMatchesSelector ||
+            Element.prototype.msMatchesSelector || 
+            Element.prototype.oMatchesSelector || 
+            Element.prototype.webkitMatchesSelector ||
+            function(s) {
+                var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                    i = matches.length;
+                while (--i >= 0 && matches.item(i) !== this) {}
+                return i > -1;            
+            };
+    }
 })();

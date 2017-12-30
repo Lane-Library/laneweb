@@ -19,16 +19,10 @@
         var handleClick = function(node, event) {
             var eresource = node.classList.contains("eresource"),
                 searchContent = node.classList.contains("searchContent"),
-                ancestor = node,
-                active;
+                ancestor = Y.lane.ancestor(node, "li"),
+                active = ancestor.classList.contains("active");
 
             event.preventDefault();
-
-            // walk up the tree to find a li
-            while (ancestor && ancestor.nodeName !== "LI") {
-                ancestor = ancestor.parentNode;
-            }
-            active = ancestor.classList.contains("active");
             ancestor.classList.toggle("active");
             if (active && eresource) {
                 node.innerHTML = "<a href=\"#\"><i class=\"fa fa-eye\"></i> View Description <i class=\"fa fa-angle-double-down\"></i></a>";
@@ -45,15 +39,7 @@
         };
 
         document.querySelector(".content").addEventListener("click", function(event) {
-            var node = event.target;
-            // walk up the tree to find a .descriptionTrigger
-            while (node && !node.classList.contains("descriptionTrigger")) {
-                node = node.parentNode;
-                // document doesn't have classList
-                if (node === document) {
-                    node = null;
-                }
-            }
+            var node = Y.lane.ancestor(event.target, ".descriptionTrigger", true);
             if (node) {
                 handleClick(node, event);
             }

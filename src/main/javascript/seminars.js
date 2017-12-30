@@ -40,12 +40,11 @@
                         }
                     }
                 });
-                parent.data.processed = true;
+                parent.dataset.processed = true;
             };
 
         seminars.forEach(function(node) {
-            node.parentNode.data = node.parentNode.data || {};
-            if (node.parentNode.data.processed === undefined) {
+            if (node.parentNode.dataset.processed === undefined) {
                 processSeminars(node.parentNode);
             }
         });
