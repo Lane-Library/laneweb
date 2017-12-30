@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.solr.UncategorizedSolrException;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -84,7 +85,7 @@ public class BibIDToEresourceTransformer extends AbstractXMLPipe
                 if (eresource != null) {
                     this.saxStrategy.toSAX(eresource, this.xmlConsumer);
                 }
-            } catch (RuntimeException e) {
+            } catch (UncategorizedSolrException e) {
                 log.error("failed to retrieve eresource for {}, ignoring additional attempts: {}", bibID,
                         e.getMessage());
                 this.connectionFailed = true;
