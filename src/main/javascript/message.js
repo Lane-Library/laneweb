@@ -3,7 +3,6 @@
 
     "use strict";
 
-    L = L || {};
     L.showMessage = function(message) {
         alert(message);
     };

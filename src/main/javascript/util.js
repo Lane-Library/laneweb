@@ -43,7 +43,7 @@
     /*
      * stubbable method for setting location.href
      */
-    L.setHref = function(href) {
+    L.setLocationHref = function(href) {
         location.href = href;
     };
 
@@ -65,4 +65,5 @@
                 return i > -1;
             };
     }
+
 })();

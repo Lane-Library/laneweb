@@ -76,9 +76,9 @@
         document.querySelector("#persistent-login").addEventListener('click',function(event) {
             event.preventDefault();
             if (isStanfordActive) {
-                L.setHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
+                L.setLocationHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
-                L.setHref(basePath + '/secure/persistentLogin.html?pl=true');
+                L.setLocationHref(basePath + '/secure/persistentLogin.html?pl=true');
             }
         });
     }

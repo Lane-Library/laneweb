@@ -107,7 +107,7 @@ var persistentLoginTestCase = new Y.Test.Case({
     "test persistent-login click" : function() {
         var node = Y.one("#persistent-login");
         var href = null;
-        L.setHref = function(h) {
+        L.setLocationHref = function(h) {
             href = h;
         };
         node.simulate("click");

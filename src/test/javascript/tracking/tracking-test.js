@@ -5,7 +5,7 @@ Y.on("click", function(event) {
     event._event.preventDefault();
 });
 
-L.setHref = function() {};
+L.setLocationHref = function() {};
 
 var trackingTestCase = new Y.Test.Case({
 

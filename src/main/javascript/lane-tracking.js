@@ -312,7 +312,7 @@
 
         document.addEventListener('click', function(e) {
             var t = e.target, setLocation = function() {
-                L.setHref(t.href);
+                L.setLocationHref(t.href);
             };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
