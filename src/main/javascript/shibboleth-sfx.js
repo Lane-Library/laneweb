@@ -4,7 +4,7 @@
 
     "use strict";
 
-    var shibbLinks = Y.one('#shibboleth-links'), inFrame = function() {
+    var shibbLinks = document.querySelector('#shibboleth-links'), inFrame = function() {
         try {
             return window.self !== window.top;
         } catch (e) {
@@ -12,11 +12,11 @@
         }
     };
     if (shibbLinks && inFrame()) {
-        shibbLinks.all('a').each(function(node) {
-            if (node.get('href').match(/stanfordmed|sch-sts/)) {
-                node.on("click", function() {
-                    top.location.href = this.get('href');
-                }, this);
+        shibbLinks.querySelectorAll('a').forEach(function(node) {
+            if (node.href.match(/stanfordmed|sch-sts/)) {
+                node.addEventListener("click", function() {
+                    top.location.href = this.href;
+                });
             }
         });
     }

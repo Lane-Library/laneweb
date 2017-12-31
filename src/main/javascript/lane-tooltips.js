@@ -410,7 +410,11 @@
             delegate : {
                 value: null,
                 setter: function(val) {
-                    return Y.one(val) || Y.one("document");
+                    if (val) {
+                        return new Y.Node(querySelector(val));
+                    } else {
+                        return new Y.Node(document);
+                    }
                 }
             },
 
