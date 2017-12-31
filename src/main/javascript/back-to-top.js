@@ -63,7 +63,7 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
 
     template.innerHTML = innerHTML;
     backToTop = template.firstChild;
-    
+
     // call the scrollToTop function when backToTop clicked
     backToTop.addEventListener("click", scrollToTop);
 

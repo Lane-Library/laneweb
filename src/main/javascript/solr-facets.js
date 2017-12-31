@@ -3,47 +3,45 @@
     "use strict";
 
     var model = Y.lane.Model,
-        doc = Y.one("doc"),
         query = model.get(model.URL_ENCODED_QUERY),
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
-        facetsContainer = Y.one('.solrFacets'),
-        handleArrowKey = function(event, direction) {
-            var browseFacetNavContainer = Y.one(".facetBrowse .s-pagination"),
+        facetsContainer = document.querySelector('.solrFacets'),
+        handleArrowKey = function(direction) {
+            var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
                 selectorString = ".pagingButton." + direction,
                 pagingNode;
-            if (browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') === 'visible') {
-                pagingNode = browseFacetNavContainer.one(selectorString);
+            if (browseFacetNavContainer && browseFacetNavContainer.style.visibility === 'visible') {
+                pagingNode = browseFacetNavContainer.querySelector(selectorString);
             }
             if (pagingNode) {
-                pagingNode._node.click();
+                pagingNode.click();
             }
         },
         processEnabledFacets = function(facetsContainer) {
-            var enabledFacets = facetsContainer.all('.enabled'),
-                limitsContainer = Y.one('#solrLimits'),
-                allCount = Y.one('#solrAllCount'),
+            var enabledFacets = facetsContainer.querySelectorAll('.enabled'),
+                limitsContainer = document.querySelector('#solrLimits'),
+                allCount = document.querySelector('#solrAllCount'),
                 count = 0,
-                html = '', i, facet, label, url;
+                html = '', label, url;
             if (allCount) {
-                count = allCount.get('textContent');
+                count = allCount.textContent;
             }
-            for (i = 0; i < enabledFacets.size(); i++) {
-                facet = enabledFacets.item(i);
-                label = facet.one('.facetLabel').get('textContent');
-                url = facet.one('a').get('href');
+            enabledFacets.forEach(function(facet) {
+                label = facet.querySelector('.facetLabel').textContent;
+                url = facet.querySelector('a').href;
                 html += '<span>' + label + '<a title="remove filter" href="' + url + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
-            }
-            if (enabledFacets.size() > 0) {
+            });
+            if (enabledFacets.length > 0) {
                 html += '<span class="clearLimits"><a href="' + basePath + '/search.html?source=all-all&q=' + query + '">Clear all <i class="fa fa-times-circle fa-lg"></i></a> to show ' + count + ' results</span>';
-                limitsContainer.append(html);
+                limitsContainer.insertAdjacentHTML("beforeEnd", html);
             }
         },
         makeRequest = function() {
             Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
                 on: {
                     success:function(id, o) {
-                        facetsContainer.append(o.responseText);
+                        facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
                         // fade in facets container
                         new Y.Anim({
                             node: facetsContainer,
@@ -56,16 +54,21 @@
                 }
             });
         };
-        if (query && facetsContainer && !Y.one("#bassettContent") ) {
+        if (query && facetsContainer && !document.querySelector("#bassettContent") ) {
             makeRequest();
-            // listeners for left/right arrows
-            doc.on("key", handleArrowKey, "up:37", this, "previous");
-            doc.on("key", handleArrowKey, "up:39", this, "next");
+            // listener for left/right arrows
+            document.addEventListener("keyup", function(event) {
+                if (event.key === "ArrowLeft") {
+                    handleArrowKey("previous");
+                } else if (event.key === "ArrowRight") {
+                    handleArrowKey("next");
+                }
+            });
             // close button on facet browse lightbox
             Y.lane.Lightbox.on("contentChanged", function() {
-                var browseFacetClose = Y.one(".facetBrowse .close");
+                var browseFacetClose = document.querySelector(".facetBrowse .close");
                 if (browseFacetClose) {
-                    browseFacetClose.on('click', function() {
+                    browseFacetClose.addEventListener('click', function() {
                         Y.lane.Lightbox.hide();
                     });
                 }
