@@ -56,22 +56,22 @@
         popupWindow = window.open(url, 'newWin', tools);
         popupWindow.focus();
     };
-    Y.on("click", function(event) {
+    document.addEventListener("click", function(event) {
         var args, popupElement, title, body,
-            anchor = event.target.get("nodeName") === "A" ? event.target : event.target.ancestor("a"),
-            rel = anchor !== null && anchor.get("rel");
+            anchor = Y.lane.ancestor(event.target, "a", true),
+            rel = anchor && anchor.rel;
         if (rel && rel.indexOf("popup") === 0) {
             event.preventDefault();
             args = rel.split(" ");
             if (args[1] === "local") {
-                popupElement = Y.one('#' + args[2]);
-                title = popupElement && popupElement.get('title') ? popupElement.get('title') : '';
-                body = popupElement ? popupElement.get('innerHTML') : '';
-                maybeCreatePopup(title, body, popupElement.getStyle("width"), [event.pageX, event.pageY]);
+                popupElement = document.querySelector('#' + args[2]);
+                title = popupElement && popupElement.title ? popupElement.title : '';
+                body = popupElement ? popupElement.innerHTML : '';
+                maybeCreatePopup(title, body, popupElement.style.width, [event.pageX, event.pageY]);
                 popup.show();
             } else {
-                showWindow(anchor.get("href"), args[1], args[2], args[3]);
+                showWindow(anchor.href, args[1], args[2], args[3]);
             }
         }
-    }, document);
+    });
 })();

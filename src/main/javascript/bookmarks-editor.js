@@ -356,9 +356,9 @@
     });
 
     //Create a new BookmarksEditor
-    if (Lane.BookmarksWidget && Y.one("#bookmarks-editor")) {
+    if (Lane.BookmarksWidget && document.querySelector("#bookmarks-editor")) {
         Lane.BookmarksEditor = new BookmarksEditor({
-            srcNode:Y.one("#bookmarks-editor"),
+            srcNode : "#bookmarks-editor",
             bookmarks : Lane.BookmarksWidget.get("bookmarks"),
             render : true});
     }

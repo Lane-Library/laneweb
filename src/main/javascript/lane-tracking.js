@@ -8,17 +8,18 @@
         Tracker = function() {
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
-                var trackingData = {}, list = link.ancestor(".lwSearchResults"),
-                    pageStart = Y.one("#pageStart"),
+                var trackingData = {},
+                    list = Y.lane.ancestor(link, ".lwSearchResults"),
+                    pageStart = document.querySelector("#pageStart"),
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
                     // pageStart is the value in the pageStart span or 1 if its not there.
-                pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
-                trackingData.value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
-                trackingData.label = link.get('text');
+                pageStart = pageStart ? parseInt(pageStart.textContent, 10) : 1;
+                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), Y.lane.ancestor(link, "li")) + pageStart;
+                trackingData.label = link.textContent;
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
                     trackingData.action = decodeURIComponent(searchTerms);
-                    trackingData.label = link.ancestor("li").one(".primaryType").get('text') + " -> " + trackingData.label;
+                    trackingData.label = Y.lane.ancestor(link, "li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
                 } else {
                     trackingData.category = "lane:browseResultClick";
                     trackingData.action = location.pathname;
@@ -52,7 +53,7 @@
                 var link = Y.lane.ancestor(event.target, "a", true),
                     trackingData = {};
                 if (Y.lane.ancestor(link, ".lwSearchResults")) {
-                    trackingData = getSearchResultsTrackingData(new Y.Node(link));
+                    trackingData = getSearchResultsTrackingData(link);
                 } else if (link.href.match('^javascript:.*bookmarklet.*')) {
                     if ("dragend" === event.type) {
                         trackingData.category = "lane:bookmarkletDrag";

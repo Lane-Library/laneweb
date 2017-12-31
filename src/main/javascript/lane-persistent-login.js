@@ -72,15 +72,15 @@
 
     // for the static page myaccounts.html Click on YES this way the user
     // will not have to go through webauth.
-    if(Y.one('#persistent-login')){
-        Y.on('click',function(event) {
+    if (document.querySelector('#persistent-login')) {
+        document.querySelector("#persistent-login").addEventListener('click',function(event) {
             event.preventDefault();
             if (isStanfordActive) {
                 Y.lane.setHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
                 Y.lane.setHref(basePath + '/secure/persistentLogin.html?pl=true');
             }
-        }, '#persistent-login');
+        });
     }
 
 })();

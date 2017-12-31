@@ -11,12 +11,6 @@ var lightboxTestCase = new Y.Test.Case({
         Y.Assert.areEqual("visible", Y.one(".yui3-lightbox").getStyle("visibility"));
     },
 
-    testLightboxEsc: function() {
-        Y.Assert.areEqual("visible", Y.one(".yui3-lightbox").getStyle("visibility"));
-        Y.one("doc").simulate("keydown", { keyCode: 27 });
-        Y.Assert.areEqual("hidden", Y.one(".yui3-lightbox").getStyle("visibility"));
-    },
-
     testLightbox: function() {
         Y.one("a[rel=lightbox]").simulate("click");
         Y.Assert.areEqual("responseText", Y.one(".yui3-lightbox").get("text"));

@@ -22,11 +22,11 @@
             result = node;
         } else {
             result = node.parentNode;
-            while (result.nodeType === 1 && !result.matches(selector)) {
+            while (result && result.nodeType === 1 && !result.matches(selector)) {
                 result = result.parentNode;
             }
         }
-        return result.nodeType === 1 ? result : null;
+        return (result && result.nodeType === 1) ? result : null;
     };
 
     /*

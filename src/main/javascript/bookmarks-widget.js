@@ -172,8 +172,8 @@
 
     //create a new widget and keep a global reference to it
     //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
-    if (Y.one("#bookmarks")) {
-        Lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:10});
+    if (document.querySelector("#bookmarks")) {
+        Lane.BookmarksWidget = new BookmarksWidget({srcNode:"#bookmarks", render:true, displayLimit:10});
     }
 
 })();

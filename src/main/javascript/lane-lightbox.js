@@ -6,12 +6,19 @@
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
         bindUI : function () {
-            var doc = Y.one("doc");
+            var self = this;
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
-            // close on escape
-            doc.on("key", this.hide, "esc", this);
-            doc.on("click", this._lightboxLinkClick, this);
+            document.querySelectorAll("a[rel^='lightbox']").forEach(function(node) {
+                node.addEventListener("click", function(event) {
+                    self._lightboxLinkClick.call(self, event);
+                });
+            });
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Escape") {
+                    self.hide();
+                }
+            });
             this.get("background").on("click", this.hide, this);
             this.set("drag", new Y.DD.Drag({node: ".yui3-lightbox"}));
         },
@@ -60,14 +67,14 @@
         },
         _lightboxLinkClick: function(event) {
             var lightbox, model, basePath,  hash, url, regex, disableBackground,
-                anchor = event.target.ancestor("a") || event.target,
+                anchor = event.currentTarget,
                 disableAnimation,
-                rel = anchor.get("rel");
+                rel = anchor.rel;
             if (rel && rel.indexOf("lightbox") === 0) {
                 lightbox = this;
                 model = Y.lane.Model;
                 basePath = model.get(model.BASE_PATH) || "";
-                hash = anchor.get("hash");
+                hash = anchor.hash;
                 event.preventDefault();
                 if (lightbox.get("visible")) {
                     lightbox.hide();
@@ -76,7 +83,7 @@
                 // of various base paths (eg /stage)
                 regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
                 // case 112216
-                url = anchor.get("pathname") + anchor.get('search');
+                url = anchor.pathname + anchor.search;
                 // first replace takes care of missing leading slash in IE < 10
                 url = url.replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
@@ -131,10 +138,11 @@
 
     // anchor with class=autoLightbox will automatically render on page load
     var initializeAutoLightbox = function() {
-        var href, hash, autoLightboxAnchor = Y.one("a.autoLightbox");
+        var href, hash,
+            autoLightboxAnchor = document.querySelector("a.autoLightbox");
         if (autoLightboxAnchor) {
-            href = autoLightboxAnchor.get("href");
-            hash = autoLightboxAnchor.get("hash");
+            href = autoLightboxAnchor.href;
+            hash = autoLightboxAnchor.hash;
             Y.io(href, {
                 on : {
                     success : function(id, o) {

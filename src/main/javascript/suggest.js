@@ -104,12 +104,13 @@
     "use strict";
 
     // hybrid search page inputs
-    var laneSuggest, hybridInput = Y.one('.laneSuggest');
+    var laneSuggest,
+        hybridInput = document.querySelector('.laneSuggest');
     if (hybridInput) {
-        laneSuggest = new Y.lane.Suggest(hybridInput);
+        laneSuggest = new Y.lane.Suggest(new Y.Node(hybridInput));
         laneSuggest.on("select",function(){
             Y.lane.searchIndicator.show();
-            hybridInput.ancestor("form").submit();
+            Y.lane.ancestor(hybridInput, "form").submit();
         });
     }
 })();

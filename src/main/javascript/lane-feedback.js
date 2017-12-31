@@ -55,10 +55,10 @@
                     self.destroy();
                 }
             }, this);
-            Y.one("#feedback .close").on("click", function(event) {
+            document.querySelector("#feedback .close").addEventListener("click", function(event) {
                 event.preventDefault();
                 Y.lane.Lightbox.hide();
-            }, this);
+            });
         },
         syncUI : function() {
             var activeItem = this.get("activeItem"),
@@ -145,7 +145,7 @@
     Y.lane.Feedback = Feedback;
 
     Y.lane.Lightbox.on("contentChanged", function() {
-        if (Y.one("#feedback")) {
+        if (document.querySelector("#feedback")) {
             var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
                 hash = Y.lane.Lightbox.get("hash"),
                 items, index;

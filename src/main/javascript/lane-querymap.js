@@ -5,8 +5,8 @@
     var Model = Y.lane.Model,
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-        queryMapping = Y.one('#queryMapping'),
-        queryMappingDescriptor = Y.one('#queryMappingDescriptor'),
+        queryMapping = document.querySelector('#queryMapping'),
+        queryMappingDescriptor = document.querySelector('#queryMappingDescriptor'),
         getResultCounts,
         queryMapResources,
         getResourcesString = function() {
@@ -73,7 +73,7 @@
                 anchor.title = 'QueryMapping: ' + queryMapResources[i].label;
                 span.appendChild(anchor);
                 anchor.appendChild(document.createTextNode(queryMapResources[i].label));
-                queryMapping.append(span);
+                queryMapping.appendChild(span);
                 queryMapResources[i].anchor = anchor;
             }
             if (queryMappingDescriptor) {
