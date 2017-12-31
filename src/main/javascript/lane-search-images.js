@@ -28,7 +28,7 @@
                     row = div.getAttribute("row"),
                     id = div.id;
 
-                Y.io(BASE_PATH + "/image?id=" + id, {
+                L.io(BASE_PATH + "/image?id=" + id, {
                     on : {
                         success : successHandler
                     },
@@ -51,7 +51,7 @@
         document.querySelectorAll(".imagedeco-admin").forEach(function(node) {
             node.addEventListener("click", function(e) {
                 var href = e.target.href;
-                Y.io(href, {
+                L.io(href, {
                     on : {
                         success : confirmAdminAction
                         }

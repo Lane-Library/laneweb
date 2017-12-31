@@ -10,7 +10,7 @@
     // SFX responds very slowly to numeric requests (PMIDs)
     if (findItNode && encodedQuery && isNaN(encodedQuery)) {
         url = basePath + '/apps/sfx/json?q=' + encodedQuery;
-        Y.io(url, {
+        L.io(url, {
             on: {
                 success: function(id, o) {
                     var findIt = JSON.parse(o.responseText),

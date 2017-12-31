@@ -8,7 +8,7 @@
         basePath = model.get(model.BASE_PATH) || "";
     if (spellCheck && encodedQuery) {
         //get the suggestion
-        Y.io(basePath + '/apps/spellcheck/json?q=' + encodedQuery, {
+        L.io(basePath + '/apps/spellcheck/json?q=' + encodedQuery, {
             on: {
                 success:function(id, o) {
                     var sc = JSON.parse(o.responseText), a, correctedUrl;

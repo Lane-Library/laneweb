@@ -77,7 +77,7 @@
                 data = JSON.stringify(this._getFeedback(form));
             contentBox.one(".feedback-contents").set("innerHTML", this.get("sending"));
             contentBox.scrollIntoView();
-            Y.io(form.getAttribute("action"), {
+            L.io(form.getAttribute("action"), {
                 method : "post",
                 data : data,
                 headers : {

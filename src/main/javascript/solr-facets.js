@@ -38,7 +38,7 @@
             }
         },
         makeRequest = function() {
-            Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
+            L.io(basePath + '/apps/search/facets/html' + locationSearch, {
                 on: {
                     success:function(id, o) {
                         facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);

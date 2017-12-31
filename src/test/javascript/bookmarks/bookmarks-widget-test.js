@@ -23,7 +23,7 @@ bookmarksWidgetTestCase = new Y.Test.Case({
         this.widget = L.BookmarksWidget;
         this.bookmarks = this.widget.get("bookmarks");
         this.items = this.widget.get("items");
-        Y.io = this.ioSuccess;
+        L.io = this.ioSuccess;
     },
 
     testExists : function() {

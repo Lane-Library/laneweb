@@ -2,8 +2,8 @@
 
 L.Model.set('url-encoded-query','query');
 L.Model.set('query','query');
-Y.io = function(url, config) {
-    Y.io = function(url, config) {
+L.io = function(url, config) {
+    L.io = function(url, config) {
         config.on.success.apply(this,[2,{responseText:JSON.stringify({
             'id':'1477844556',
             'status': 'successful',

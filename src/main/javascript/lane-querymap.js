@@ -60,7 +60,7 @@
                 }
             }
             url += '&rd=' + Math.random();
-            Y.io(url, {
+            L.io(url, {
                 on:{
                     success: resultSuccess
                     }
@@ -90,7 +90,7 @@
         }
     };
     if (encodedQuery && queryMapping) {
-        Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
+        L.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
             on:{
                 success: mapSuccess
             }

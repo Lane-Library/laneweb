@@ -51,7 +51,7 @@
                     node.addEventListener('submit', submitPagination);
                 });
             }
-            Y.io(url, {
+            L.io(url, {
                 on : {
                     success : successHandler
                 }

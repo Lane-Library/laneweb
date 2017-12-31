@@ -1,6 +1,6 @@
 "use strict";
 
-Y.io = function(url, config) {
+L.io = function(url, config) {
     persistentLoginTestCase.url = url;
     config.on.success.apply(this,[0, {
         responseText : '<input type="checkbox" id="is-persistent-login" /> <div id="shibboleth-links"><a href="shibbolethPath" id="Stanford">Stanford University</a><a id="SHC">shc</a><input type="checkbox" id="is-persistent-login"/></div>'

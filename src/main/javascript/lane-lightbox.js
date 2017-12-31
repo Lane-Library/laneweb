@@ -88,7 +88,7 @@
                 url = url.replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
                 disableAnimation = rel.indexOf("disableAnimation") === -1;
-                Y.io(url, {
+                L.io(url, {
                     on : {
                         success : function(id, o) {
                             lightbox.set("animate", disableAnimation);
@@ -143,7 +143,7 @@
         if (autoLightboxAnchor) {
             href = autoLightboxAnchor.href;
             hash = autoLightboxAnchor.hash;
-            Y.io(href, {
+            L.io(href, {
                 on : {
                     success : function(id, o) {
                         var lightbox = L.Lightbox;

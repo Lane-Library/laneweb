@@ -1,6 +1,6 @@
 "use strict";
 
-Y.io = function(url, config) {
+L.io = function(url, config) {
     config.on.success.apply(this, [0, {responseText:"responseText"}]);
 };
 

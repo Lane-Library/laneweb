@@ -94,7 +94,7 @@
                 startTime = new Date().getTime();
             },
             getResultCounts: function() {
-                Y.io(getSearchUrl(),{
+                L.io(getSearchUrl(),{
                     on: {
                         success: successful
                     }

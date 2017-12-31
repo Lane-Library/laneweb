@@ -2,9 +2,9 @@
 
 L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
 
-Y.io = function(url, config) {
-    Y.io = function(url,config) {
-        Y.io = function(url, config) {
+L.io = function(url, config) {
+    L.io = function(url,config) {
+        L.io = function(url, config) {
             config.on.success.apply(this, [2, {
                                         responseText : JSON.stringify({
                                             "id" : "1849619284",

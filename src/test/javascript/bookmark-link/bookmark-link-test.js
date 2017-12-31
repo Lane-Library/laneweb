@@ -87,7 +87,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         var self = this;
         var status = 0;
         var data = "";
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             status = self.link.get("status");
             data = config.data;
             config.on.success.apply(config.context, [ 0, {} ]);
@@ -108,7 +108,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         var self = this;
         var data = "";
         var status = 0;
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             status = self.link.get("status");
             data = config.data;
             config.on.success.apply(config.context, [ 0, {} ]);

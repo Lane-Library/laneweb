@@ -1,6 +1,6 @@
 "use strict";
 
-Y.io = function(url, config) {
+L.io = function(url, config) {
     config.on.success.apply(this, [0,{responseText:'<div><a href="/foo?bar=baz" id="yes-bookmark-login">yes</a><a id="no-bookmark-login">no</a></div>'}, config.arguments]);
 };
 

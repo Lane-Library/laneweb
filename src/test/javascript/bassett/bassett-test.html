@@ -69,7 +69,7 @@
         <script src="../../../main/javascript/util.js" type="text/javascript"></script>
         <script type="text/javascript">
 var content = Y.one("#bassettContent").get("innerHTML");
-Y.io = function(url, config) {
+L.io = function(url, config) {
         var responseText = "<span>" + url + "</span>" + content;
         config.on.success.apply(config.context, [0, {responseText:responseText}, {}]);
 };

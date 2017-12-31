@@ -35,7 +35,7 @@
     };
 
     getPopup = function(urlPage) {
-        Y.io(urlPage, {
+        L.io(urlPage, {
             on : {
                 success : popupWindow
             }

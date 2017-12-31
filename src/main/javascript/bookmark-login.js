@@ -24,7 +24,7 @@
                 var queryString = "&label=" + encodeURIComponent(label);
                 queryString += "&url=" + encodeURIComponent(url);
                 queryString += "&redirect=" + encodeURIComponent(location.href);
-                Y.io(basePath + "/plain/bookmark-login.html", {
+                L.io(basePath + "/plain/bookmark-login.html", {
                     on: {
                         success: BookmarkLogin._handleSuccess,
                         failure: BookmarkLogin._handleFailure
@@ -50,9 +50,9 @@
              * link in the popup then puts the popup into the lightbox.
              * @method _handleSuccess
              * @private
-             * @param id {number} the Y.io transaction id
+             * @param id {number} the L.io transaction id
              * @param o {object} the ajax response object
-             * @param args {object} the arguments passed to Y.io, in this case the query string
+             * @param args {object} the arguments passed to L.io, in this case the query string
              */
             _handleSuccess: function(id, o, args) {
                 var queryString = args.queryString, yes, no;
