@@ -8,7 +8,6 @@ if (document.querySelector(".search-form"))  {
         SOURCE = "source",
         SEARCH_TAB = "search-tab",
         form = document.querySelector(".search-form"),
-        lane = Y.lane,
         tabNodes = form.querySelectorAll("." + SEARCH_TAB),
 
         model = function(source) {
@@ -18,17 +17,17 @@ if (document.querySelector(".search-form"))  {
             };
 
             tabNodes.forEach(function(tab) {
-                m[lane.getData(tab, SOURCE)] = {
-                    placeholder: lane.getData(tab, "placeholder"),
-                    source: lane.getData(tab, SOURCE),
-                    help: lane.getData(tab, "help"),
+                m[L.getData(tab, SOURCE)] = {
+                    placeholder: L.getData(tab, "placeholder"),
+                    source: L.getData(tab, SOURCE),
+                    help: L.getData(tab, "help"),
                     tip: tab.title
                 };
             });
 
             return m;
 
-        }(lane.getData(form.querySelector("." + SEARCH_TAB + "-active"), SOURCE)),
+        }(L.getData(form.querySelector("." + SEARCH_TAB + "-active"), SOURCE)),
 
         view = function() {
 
@@ -36,11 +35,11 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     change: function(newVal, oldVal) {
-                        lane.deactivate(tabs[oldVal.source], SEARCH_TAB);
-                        lane.activate(tabs[newVal.source], SEARCH_TAB);
+                        L.deactivate(tabs[oldVal.source], SEARCH_TAB);
+                        L.activate(tabs[newVal.source], SEARCH_TAB);
                     },
                     click: function() {
-                        view.fire(CLICK, lane.getData(this, SOURCE));
+                        view.fire(CLICK, L.getData(this, SOURCE));
                     }
                 };
 
@@ -48,7 +47,7 @@ if (document.querySelector(".search-form"))  {
 
             tabNodes.forEach(function(tab){
                 tab.addEventListener(CLICK, v.click);
-                tabs[lane.getData(tab, SOURCE)] = tab;
+                tabs[L.getData(tab, SOURCE)] = tab;
             });
 
             return v;
@@ -66,7 +65,7 @@ if (document.querySelector(".search-form"))  {
                     }
                     newVal.source = source;
                     view.change(newVal, model);
-                    lane.fire("tracker:trackableEvent", {
+                    L.fire("tracker:trackableEvent", {
                         category: "lane:searchDropdownSelection",
                         action: source,
                         label: "from " + model.source + " to " + source
@@ -83,7 +82,7 @@ if (document.querySelector(".search-form"))  {
         emitFacade: true
     });
 
-    controller.addTarget(lane);
+    controller.addTarget(L);
 
     view.on(CLICK, controller.update, controller);
 

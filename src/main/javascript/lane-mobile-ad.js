@@ -4,7 +4,7 @@
     "use strict";
 
     var link,
-        model = Y.lane.Model,
+        model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
         login = document.querySelector("#login"),
         template;

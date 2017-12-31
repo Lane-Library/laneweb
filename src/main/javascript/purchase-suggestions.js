@@ -23,7 +23,7 @@
             form : "form"
     };
 
-    Y.extend(PurchaseSuggestions, Y.lane.Feedback, {
+    Y.extend(PurchaseSuggestions, L.Feedback, {
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
@@ -57,11 +57,11 @@
         }
     });
 
-    Y.lane.PurchaseSuggestions = PurchaseSuggestions;
+    L.PurchaseSuggestions = PurchaseSuggestions;
 
-    Y.lane.Lightbox.on("contentChanged", function() {
+    L.Lightbox.on("contentChanged", function() {
         if (document.querySelector("#purchase")) {
-            var purchase = new Y.lane.PurchaseSuggestions({srcNode : "#purchase"});
+            var purchase = new L.PurchaseSuggestions({srcNode : "#purchase"});
             purchase.render();
         }
     });

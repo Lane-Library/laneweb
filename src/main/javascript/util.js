@@ -2,21 +2,19 @@
 
     "use strict";
 
-    var lane = Y.lane;
-
-    lane.activate = function(node, clazz) {
+    L.activate = function(node, clazz) {
         node.classList.add(clazz +"-active");
     };
 
-    lane.deactivate = function(node, clazz) {
+    L.deactivate = function(node, clazz) {
         node.classList.remove(clazz + "-active");
     };
 
-    lane.getData = function(node, name) {
+    L.getData = function(node, name) {
         return node.dataset[name];
     };
 
-    lane.ancestor = function(node, selector, self) {
+    L.ancestor = function(node, selector, self) {
         var result;
         if (self && node.matches(selector)) {
             result = node;
@@ -45,7 +43,7 @@
     /*
      * stubbable method for setting location.href
      */
-    lane.setHref = function(href) {
+    L.setHref = function(href) {
         location.href = href;
     };
 

@@ -1,6 +1,6 @@
 "use strict";
 
-Y.lane.on("viewport:init", function(event) {
+L.on("viewport:init", function(event) {
 
     var viewportTestCase = new Y.Test.Case({
 
@@ -36,7 +36,7 @@ Y.lane.on("viewport:init", function(event) {
         "test scroll event": function() {
             var topInView = this.viewport.inView(document.querySelector("#top"));
             Y.Assert.isFalse(topInView);
-            Y.lane.once("viewport:scrolled", function(event) {
+            L.once("viewport:scrolled", function(event) {
                 topInView = event.viewport.inView(document.querySelector("#top"));
             });
             var a = new Y.Anim({

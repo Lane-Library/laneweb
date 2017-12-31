@@ -3,7 +3,7 @@
 var modelTestCase = new Y.Test.Case({
 
     name: 'Lane Model Test Case',
-    model: Y.lane.Model,
+    model: L.Model,
 
     testGetValue : function() {
         Y.Assert.areEqual(this.model.get("key"), "value");

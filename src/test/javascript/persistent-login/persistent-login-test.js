@@ -27,8 +27,8 @@ var persistentLoginTestCase = new Y.Test.Case({
     cookieArgs : null,
 
     tearDown : function() {
-        Y.lane.Lightbox.hide();
-        Y.lane.Lightbox.setContent("");
+        L.Lightbox.hide();
+        L.Lightbox.setContent("");
         this.url = null;
         this.cookieArgs = null;
     },
@@ -107,7 +107,7 @@ var persistentLoginTestCase = new Y.Test.Case({
     "test persistent-login click" : function() {
         var node = Y.one("#persistent-login");
         var href = null;
-        Y.lane.setHref = function(h) {
+        L.setHref = function(h) {
             href = h;
         };
         node.simulate("click");

@@ -3,7 +3,7 @@
     "use strict";
 
     var spellCheck = document.querySelector('#spellCheck'),
-        model = Y.lane.Model,
+        model = L.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "";
     if (spellCheck && encodedQuery) {
@@ -26,9 +26,9 @@
                         a = spellCheck.querySelector('a');
                         a.href = correctedUrl;
                         a.innerHTML = sc.suggestion;
-                        Y.lane.fire('lane:popin', "spellCheck");
+                        L.fire('lane:popin', "spellCheck");
                         // track suggestion and original query
-                        Y.lane.fire("tracker:trackableEvent", {
+                        L.fire("tracker:trackableEvent", {
                             category: "lane:spellSuggest",
                             action: "query=" + decodeURIComponent(encodedQuery),
                             label: "suggestion=" + sc.suggestion

@@ -17,25 +17,25 @@ Y.Test.Runner.add(new Y.Test.Case({
         var event = document.createEvent("UIEvent");
         event.initEvent("click", true, false);
         var activeTab = document.querySelector(".search-tab-active");
-        var lastSource = Y.lane.getData(activeTab, "source");
+        var lastSource = L.getData(activeTab, "source");
         Array.prototype.forEach.call(document.querySelectorAll(".search-tab"), function(tab) {
             var newSource, oldSource;
-            Y.lane.once("searchTabs:change", function(event) {
+            L.once("searchTabs:change", function(event) {
                 newSource = event.newVal.source;
                 oldSource = event.oldVal.source;
             });
             tab.dispatchEvent(event);
             Y.Assert.areEqual(oldSource, lastSource);
-            Y.Assert.areEqual(Y.lane.getData(tab, "source"), newSource);
+            Y.Assert.areEqual(L.getData(tab, "source"), newSource);
             lastSource = newSource;
         });
     },
 
     "test tracking": function() {
         var activeTab = document.querySelector(".search-tab-active");
-        var lastSource = Y.lane.getData(activeTab, "source");
+        var lastSource = L.getData(activeTab, "source");
         var trackEvent;
-        var handler = Y.lane.on("tracker:trackableEvent", function(e) {
+        var handler = L.on("tracker:trackableEvent", function(e) {
             trackEvent = e;
         });
         var event = document.createEvent("UIEvent");
@@ -44,9 +44,9 @@ Y.Test.Runner.add(new Y.Test.Case({
             tab.dispatchEvent(event);
             Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);
             Y.Assert.areEqual("lane:searchDropdownSelection", trackEvent.category);
-            Y.Assert.areEqual(Y.lane.getData(tab, "source"), trackEvent.action);
-            Y.Assert.areEqual("from " + lastSource + " to " + Y.lane.getData(tab, "source"), trackEvent.label);
-            lastSource = Y.lane.getData(tab, "source");
+            Y.Assert.areEqual(L.getData(tab, "source"), trackEvent.action);
+            Y.Assert.areEqual("from " + lastSource + " to " + L.getData(tab, "source"), trackEvent.label);
+            lastSource = L.getData(tab, "source");
         });
         handler.detach();
     }

@@ -8,7 +8,7 @@ var bookmarkLoginTestCase = new Y.Test.Case({
 
     name : "BookmarkLogin Test Case",
 
-    login : Y.lane.BookmarkLogin,
+    login : L.BookmarkLogin,
 
     testAddBookmark: function() {
         this.login.addBookmark("label", "url");
@@ -18,7 +18,7 @@ var bookmarkLoginTestCase = new Y.Test.Case({
         var doc = location.protocol + "//" + location.host;
         Y.Assert.areSame(doc + "/foo?bar=baz&label=label&url=url&redirect=" + loc, yes.get("href"));
         no.simulate("click");
-        Y.Assert.areSame(false, Y.lane.Lightbox.get("visible"));
+        Y.Assert.areSame(false, L.Lightbox.get("visible"));
     }
 
 });

@@ -30,7 +30,7 @@
         prefix : "viewport"
     });
 
-    viewport.addTarget(Y.lane);
+    viewport.addTarget(L);
 
     viewport.fire("init", {viewport:viewport});
 })();

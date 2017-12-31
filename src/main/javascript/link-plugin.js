@@ -19,8 +19,7 @@
         PROXY_LOGIN_PATH = "/login",
         SRC = "src",
         TITLE = "title",
-        lane = Y.lane,
-        basePath = lane.Model.get("base-path") || "",
+        basePath = L.Model.get("base-path") || "",
         cookiesFetchPath = basePath + "/cookiesFetch.html",
         documentHostName = location.hostname,
         loginPath = basePath + "/secure/apps/proxy/credential",
@@ -203,6 +202,6 @@
         }
     });
 
-    lane.LinkPlugin = LinkPlugin;
+    L.LinkPlugin = LinkPlugin;
 
 })();

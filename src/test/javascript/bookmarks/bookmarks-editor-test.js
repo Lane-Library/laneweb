@@ -4,7 +4,7 @@ var bookmarksTestCase = new Y.Test.Case({
 
     name : 'Bookmarks Editor Test Case',
 
-    editor : Y.lane.BookmarksEditor,
+    editor : L.BookmarksEditor,
 
     setUp : function() {
         this.editor._clearChecked();

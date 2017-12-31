@@ -3,8 +3,7 @@
     "use strict";
 
     var BookmarkLink,
-        Lane = Y.lane,
-        Model = Lane.Model;
+        Model = L.Model;
 
     //don't create BookmarkLink if in disaster mode
     if (!Model.get(Model.DISASTER_MODE)) {
@@ -32,7 +31,7 @@
                 },
                 bookmarks : {
                     valueFn : function() {
-                        return Lane.BookmarksWidget ? Lane.BookmarksWidget.get("bookmarks") : null;
+                        return L.BookmarksWidget ? L.BookmarksWidget.get("bookmarks") : null;
                     }
                 },
                 target : {
@@ -99,7 +98,7 @@
              */
             _handleClick : function() {
                 var target = this.get("target"), label, url, query, bookmarks;
-                target.plug(Lane.LinkPlugin);
+                target.plug(L.LinkPlugin);
                 label = target.link.get("title");
                 if (target.link.get("local")) {
                     url = target.link.get("path");
@@ -112,9 +111,9 @@
                 this.set("status", BookmarkLink.BOOKMARKING);
                 bookmarks = this.get("bookmarks");
                 if (bookmarks) {
-                    bookmarks.addBookmark(new Lane.Bookmark(label, url));
+                    bookmarks.addBookmark(new L.Bookmark(label, url));
                 } else {
-                    Y.lane.BookmarkLogin.addBookmark(label, url);
+                    L.BookmarkLogin.addBookmark(label, url);
                 }
             },
 
@@ -138,9 +137,9 @@
                         bookmarkSearch.removeClass("bookmarking");
                         eventHandle.detach();
                     }, this);
-                    bookmarks.addBookmark(new Lane.Bookmark(label, url));
+                    bookmarks.addBookmark(new L.Bookmark(label, url));
                 } else {
-                    Y.lane.BookmarkLogin.addBookmark(label, url);
+                    L.BookmarkLogin.addBookmark(label, url);
                 }
             },
 
@@ -178,7 +177,7 @@
              */
             _isAlreadyBookmarked : function(target) {
                 var url, bookmarks, query;
-                target.plug(Lane.LinkPlugin);
+                target.plug(L.LinkPlugin);
                 if (target.link.get("local")) {
                     url = target.link.get("path");
                     query = target.link.get("query");
@@ -296,6 +295,6 @@
         });
 
         //create a BookmarkLink and save reference
-        Lane.BookmarkLink = new BookmarkLink();
+        L.BookmarkLink = new BookmarkLink();
     }
 })();

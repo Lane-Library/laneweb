@@ -12,19 +12,19 @@ Y.Test.Runner.add(new Y.Test.Case({
     suggest: null,
     
     setUp: function() {
-        this.suggest = new Y.lane.Suggest();
+        this.suggest = new L.Suggest();
         window.submitted = false;
     },
     "test search:sourceChange event": function() {
-        Y.lane.fire("search:sourceChange", {newVal: "images-all"});
+        L.fire("search:sourceChange", {newVal: "images-all"});
         Y.Assert.areEqual("mesh", this.suggest.limit);
-        Y.lane.fire("search:sourceChange", {newVal: "bassett"});
+        L.fire("search:sourceChange", {newVal: "bassett"});
         Y.Assert.areEqual("Bassett", this.suggest.limit);
-        Y.lane.fire("search:sourceChange", {newVal: "all-all"});
+        L.fire("search:sourceChange", {newVal: "all-all"});
         Y.Assert.areEqual("er-mesh", this.suggest.limit);
-        Y.lane.fire("search:sourceChange", {newVal: "bioresearch-all"});
+        L.fire("search:sourceChange", {newVal: "bioresearch-all"});
         Y.Assert.areEqual("mesh", this.suggest.limit);
-        Y.lane.fire("search:sourceChange", {newVal: "textbooks-all"});
+        L.fire("search:sourceChange", {newVal: "textbooks-all"});
         Y.Assert.areEqual("", this.suggest.limit);
     },
 

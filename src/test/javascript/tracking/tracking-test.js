@@ -5,7 +5,7 @@ Y.on("click", function(event) {
     event._event.preventDefault();
 });
 
-Y.lane.setHref = function() {};
+L.setHref = function() {};
 
 var trackingTestCase = new Y.Test.Case({
 
@@ -45,10 +45,10 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testBookmarksClick: function() {
-        Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
+        L.Model.set(L.Model.AUTH, "auth");
         var link = Y.one("#bookmarks a");
         link.simulate("click");
-        Y.lane.Model.set(Y.lane.Model.AUTH, null);
+        L.Model.set(L.Model.AUTH, null);
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("auth", this.event.action);
         Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
@@ -58,10 +58,10 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testBookmarksEditorClick: function() {
-        Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
+        L.Model.set(L.Model.AUTH, "auth");
         var link = Y.one(".yui3-bookmark-editor-content a");
         link.simulate("click");
-        Y.lane.Model.set(Y.lane.Model.AUTH, null);
+        L.Model.set(L.Model.AUTH, null);
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
         Y.Assert.areEqual("auth", this.event.action);
@@ -102,7 +102,7 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testSearchResultClick: function() {
-        Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
+        L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
         var link = Y.one(".lwSearchResults a");
         link.simulate("click");
         Y.Assert.areEqual("Primary Type -> " + link.get("text"), this.event.label);
@@ -111,7 +111,7 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(101, this.event.value);
         Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
         Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, null);
+        L.Model.set(L.Model.URL_ENCODED_QUERY, null);
     },
 
     testClickOnImage: function() {
@@ -208,8 +208,8 @@ var trackingTestCase = new Y.Test.Case({
     }
 });
 
-Y.lane.on("tracker:trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
-Y.lane.on("tracker:trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
+L.on("tracker:trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
+L.on("tracker:trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
 
 Y.one('body').addClass('yui3-skin-sam');
 new Y.Console({

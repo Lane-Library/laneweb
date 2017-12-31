@@ -19,7 +19,7 @@
         var handleClick = function(node, event) {
             var eresource = node.classList.contains("eresource"),
                 searchContent = node.classList.contains("searchContent"),
-                ancestor = Y.lane.ancestor(node, "li"),
+                ancestor = L.ancestor(node, "li"),
                 active = ancestor.classList.contains("active");
 
             event.preventDefault();
@@ -31,7 +31,7 @@
             } else if (!active) {
                 node.innerHTML = "<a href=\"#\">close... <i class=\"fa fa-angle-double-up\"></i></a>";
             }
-            Y.lane.fire("tracker:trackableEvent", {
+            L.fire("tracker:trackableEvent", {
                 category: "lane:descriptionTrigger",
                 action: event.target.textContent,
                 label: ancestor.querySelector('.primaryLink').textContent
@@ -39,7 +39,7 @@
         };
 
         document.querySelector(".content").addEventListener("click", function(event) {
-            var node = Y.lane.ancestor(event.target, ".descriptionTrigger", true);
+            var node = L.ancestor(event.target, ".descriptionTrigger", true);
             if (node) {
                 handleClick(node, event);
             }
@@ -50,7 +50,7 @@
     }
 
     //reinitialize when content has changed
-    Y.lane.on("lane:new-content", function() {
+    L.on("lane:new-content", function() {
         initializeDescriptionToggles();
     });
 

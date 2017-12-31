@@ -2,7 +2,7 @@
 
     "use strict";
 
-    Y.lane.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
+    L.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
 
     var popup, maybeCreatePopup, popupWindow, showWindow;
 
@@ -13,7 +13,7 @@
             width = 350;
         }
         if (!popup) {
-            popup = new Y.lane.Popup({
+            popup = new L.Popup({
                 visible : false,
                 constrain : true,
                 render : true
@@ -58,7 +58,7 @@
     };
     document.addEventListener("click", function(event) {
         var args, popupElement, title, body,
-            anchor = Y.lane.ancestor(event.target, "a", true),
+            anchor = L.ancestor(event.target, "a", true),
             rel = anchor && anchor.rel;
         if (rel && rel.indexOf("popup") === 0) {
             event.preventDefault();

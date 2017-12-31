@@ -2,9 +2,8 @@
 
     "use strict";
 
-    var lane = Y.lane,
-        model = lane.Model,
-        lightbox = lane.Lightbox,
+    var model = L.Model,
+        lightbox = L.Lightbox,
         basePath = model.get(model.BASE_PATH),
 
         /**
@@ -43,7 +42,7 @@
              * @private
              */
             _handleFailure: function() {
-                lane.showMessage("You must log in in order to create bookmarks.");
+                L.showMessage("You must log in in order to create bookmarks.");
             },
 
             /**
@@ -69,5 +68,5 @@
     };
 
     //make BookmarkLogin globally available
-    Y.lane.BookmarkLogin = BookmarkLogin;
+    L.BookmarkLogin = BookmarkLogin;
 })();

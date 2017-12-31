@@ -3,8 +3,7 @@
     "use strict";
 
     var Bookmarks,
-        Lane = Y.lane,
-        Model = Lane.Model,
+        Model = L.Model,
         BASE_PATH = Model.get(Model.BASE_PATH) || "";
 
     /**
@@ -90,7 +89,7 @@
              * @param bookmark {Bookmark}
              */
             addBookmark : function(bookmark) {
-                if (bookmark instanceof Y.lane.Bookmark) {
+                if (bookmark instanceof L.Bookmark) {
                     this.fire("add", {bookmark : bookmark});
                 } else {
                     throw ("bad bookmark");
@@ -310,7 +309,7 @@
             _handleAddSync : function(event) {
                 event.bookmark.after("valueChange", this._handleValueChange, this);
                 this._bookmarks.unshift(event.bookmark);
-                Lane.fire("tracker:trackableEvent", {
+                L.fire("tracker:trackableEvent", {
                     category: "lane:bookmarkAdd",
                     action: Model.get(Model.AUTH),
                     label: event.bookmark.getLabel()
@@ -345,7 +344,7 @@
              * @param message {String}
              */
             _handleSyncFailure : function(message) {
-                Lane.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
+                L.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
             }
     };
 
@@ -357,5 +356,5 @@
     });
 
     //make the Bookmarks constructor globally accessible
-    Lane.Bookmarks = Bookmarks;
+    L.Bookmarks = Bookmarks;
 })();

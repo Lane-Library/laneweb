@@ -6,7 +6,7 @@ var popinTestCase = new Y.Test.Case({
     testPopinEvent: function() {
         var node = Y.one("#spellCheck");
         node.setStyle("display", "inline");
-        Y.lane.fire("lane:popin", "spellCheck");
+        L.fire("lane:popin", "spellCheck");
         Y.Assert.isTrue(node.hasClass("popin-active"));
     }
 });

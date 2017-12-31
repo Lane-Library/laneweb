@@ -4,9 +4,7 @@ if (document.querySelector(".search-form"))  {
 
     "use strict";
 
-    var lane = Y.lane,
-
-        form = document.querySelector(".search-form"),
+    var form = document.querySelector(".search-form"),
 
         queryInput = form.querySelector("input[name=q]"),
 
@@ -15,7 +13,7 @@ if (document.querySelector(".search-form"))  {
                 suggest: suggest,
                 source: source
             };
-        }(new lane.Suggest(new Y.Node(queryInput)),
+        }(new L.Suggest(new Y.Node(queryInput)),
                 form.querySelector("input[name=source]").value),
 
         view = function() {
@@ -47,7 +45,7 @@ if (document.querySelector(".search-form"))  {
                     model.source = source;
                 },
                 suggestion: function(event) {
-                    lane.fire("tracker:trackableEvent", {
+                    L.fire("tracker:trackableEvent", {
                         category: "lane:suggestSelect",
                         action: model.source,
                         label: event.suggestion
@@ -62,7 +60,7 @@ if (document.querySelector(".search-form"))  {
 
         model.suggest.on("suggest:select", controller.suggestion);
 
-        lane.on("search:sourceChange", controller.sourceChange);
+        L.on("search:sourceChange", controller.sourceChange);
 })();
 
 }

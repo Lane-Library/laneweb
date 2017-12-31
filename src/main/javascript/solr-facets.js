@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var model = Y.lane.Model,
+    var model = L.Model,
         query = model.get(model.URL_ENCODED_QUERY),
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
@@ -49,7 +49,7 @@
                             duration: 0.5
                         }).run();
                         processEnabledFacets(facetsContainer);
-                        Y.lane.fire("lane:new-content");
+                        L.fire("lane:new-content");
                     }
                 }
             });
@@ -65,11 +65,11 @@
                 }
             });
             // close button on facet browse lightbox
-            Y.lane.Lightbox.on("contentChanged", function() {
+            L.Lightbox.on("contentChanged", function() {
                 var browseFacetClose = document.querySelector(".facetBrowse .close");
                 if (browseFacetClose) {
                     browseFacetClose.addEventListener('click', function() {
-                        Y.lane.Lightbox.hide();
+                        L.Lightbox.hide();
                     });
                 }
             });

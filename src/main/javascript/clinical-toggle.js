@@ -2,7 +2,7 @@
     "use strict";
 
     var toggle = document.querySelector(".clinical-toggle"),
-        indicator = Y.lane.searchIndicator,
+        indicator = L.searchIndicator,
         circle = document.querySelector(".clinical-toggle-circle"),
 
         toggleClick = function() {

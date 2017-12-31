@@ -72,7 +72,7 @@
                 rel = anchor.rel;
             if (rel && rel.indexOf("lightbox") === 0) {
                 lightbox = this;
-                model = Y.lane.Model;
+                model = L.Model;
                 basePath = model.get(model.BASE_PATH) || "";
                 hash = anchor.hash;
                 event.preventDefault();
@@ -131,7 +131,7 @@
         }
     };
 
-    Y.lane.Lightbox = new Lightbox({
+    L.Lightbox = new Lightbox({
         visible : false,
         render : true
     });
@@ -146,7 +146,7 @@
             Y.io(href, {
                 on : {
                     success : function(id, o) {
-                        var lightbox = Y.lane.Lightbox;
+                        var lightbox = L.Lightbox;
                         lightbox.set("url", href);
                         lightbox.set("hash", hash);
                         lightbox.setContent(o.responseText);

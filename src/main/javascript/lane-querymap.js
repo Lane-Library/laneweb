@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var Model = Y.lane.Model,
+    var Model = L.Model,
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
         queryMapping = document.querySelector('#queryMapping'),
@@ -45,7 +45,7 @@
         if (needMore) {
             setTimeout(getResultCounts, 2000);
         }
-        Y.lane.fire('lane:popin', "queryMapping");
+        L.fire('lane:popin', "queryMapping");
     },
         mapSuccess = function(id, o) {
         var anchor, span, i,
@@ -78,11 +78,11 @@
             }
             if (queryMappingDescriptor) {
                 queryMappingDescriptor.append(resourceMap.descriptor.descriptorName);
-                Y.lane.fire("lane:new-content");
+                L.fire("lane:new-content");
             }
             getResultCounts();
             // track mapped term, descriptor, and resources
-            Y.lane.fire("tracker:trackableEvent", {
+            L.fire("tracker:trackableEvent", {
                 category: "lane:queryMapping",
                 action: "query=" + decodeURIComponent(encodedQuery) + "; descriptor=" + resourceMap.descriptor.descriptorName,
                 label: "resources=" + getResourcesString()

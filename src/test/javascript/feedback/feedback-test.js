@@ -8,8 +8,8 @@ var feedbackTestCase = new Y.Test.Case({
     name: 'Lane Feedback Test Case',
 
     resetContent: function() {
-        Y.lane.Lightbox.set("hash", "#feedback1");
-        Y.lane.Lightbox.setContent("<div id='feedback'>" + Y.one("#xfeedback").get("innerHTML") + "</div>");
+        L.Lightbox.set("hash", "#feedback1");
+        L.Lightbox.setContent("<div id='feedback'>" + Y.one("#xfeedback").get("innerHTML") + "</div>");
     },
 
     testSendFeedback: function() {

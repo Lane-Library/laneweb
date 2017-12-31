@@ -4,7 +4,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
 
     name : "BookmarkLink Test Case",
 
-    link : Y.lane.BookmarkLink,
+    link : L.BookmarkLink,
 
     setUp : function() {
         this.link.set("status", 0);

@@ -3,8 +3,7 @@
     "use strict";
 
     var BookmarksEditor,
-        Lane = Y.lane,
-        BookmarkEditor = Lane.BookmarkEditor;
+        BookmarkEditor = L.BookmarkEditor;
 
 
     /**
@@ -356,10 +355,10 @@
     });
 
     //Create a new BookmarksEditor
-    if (Lane.BookmarksWidget && document.querySelector("#bookmarks-editor")) {
-        Lane.BookmarksEditor = new BookmarksEditor({
+    if (L.BookmarksWidget && document.querySelector("#bookmarks-editor")) {
+        L.BookmarksEditor = new BookmarksEditor({
             srcNode : "#bookmarks-editor",
-            bookmarks : Lane.BookmarksWidget.get("bookmarks"),
+            bookmarks : L.BookmarksWidget.get("bookmarks"),
             render : true});
     }
 })();

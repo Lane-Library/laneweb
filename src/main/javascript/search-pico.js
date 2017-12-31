@@ -2,9 +2,7 @@
 
     "use strict";
 
-    var lane = Y.lane,
-
-        limits = {
+    var limits = {
             p: "mesh-d",
             i: "mesh-i",
             c: "mesh-di"
@@ -17,7 +15,7 @@
                 suggest,
                 self = this;
             if (limit) {
-                suggest = new lane.Suggest(ynode, limit);
+                suggest = new L.Suggest(ynode, limit);
                 suggest.on("select", function() {
                     self.fire("input");
                 });
@@ -48,13 +46,13 @@
         fields.push(new PicoField(input, limits[input.name]));
     });
 
-    lane.on("picoFields:change", function(event) {
+    L.on("picoFields:change", function(event) {
         fields.forEach(function(field) {
             field.enable(event.active);
         });
     });
 
-    lane.on("searchReset:reset", function() {
+    L.on("searchReset:reset", function() {
         fields.forEach(function(field) {
             field.reset();
         });
@@ -72,7 +70,7 @@
         if (query.indexOf('(') === 0 && query.indexOf(')') === query.length - 1) {
             query = query.replace(/(\(|\))/g, '');
         }
-        lane.search.setQuery(query);
+        L.search.setQuery(query);
     });
 
 })();

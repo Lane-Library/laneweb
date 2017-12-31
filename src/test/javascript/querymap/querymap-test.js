@@ -1,6 +1,6 @@
 "use strict";
 
-Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
+L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
 
 Y.io = function(url, config) {
     Y.io = function(url,config) {

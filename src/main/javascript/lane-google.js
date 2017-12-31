@@ -3,12 +3,11 @@
     "use strict";
 
     var gaPageTracker,
-        lane = Y.lane,
         gaJsHost = (("https:" === location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = location.host,
-                model = lane.Model,
+                model = L.Model,
                 ipgroup = model.get(model.IPGROUP),
                 auth = model.get(model.AUTH);
             if (window._gat !== undefined) {
@@ -27,7 +26,7 @@
                 }
                 if (auth) {
                     gaPageTracker._setCustomVar(2,'authenticatedSession',auth,2);
-                    if (lane.BookmarksWidget && lane.BookmarksWidget.get("bookmarks").size() > 0) {
+                    if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
                         gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',auth,2);
                     }
                 }
@@ -35,12 +34,12 @@
             }
         }
     });
-    lane.on("tracker:trackableEvent",  function(event) {
+    L.on("tracker:trackableEvent",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.category, event.action, event.label, event.value);
         }
     });
-    lane.on("tracker:trackablePageview",  function(event) {
+    L.on("tracker:trackablePageview",  function(event) {
         if (gaPageTracker !== undefined) {
             if (event.external) {
                 if(event.query !== undefined && event.query !== '' ){

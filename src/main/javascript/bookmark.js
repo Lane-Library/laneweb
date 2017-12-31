@@ -122,6 +122,6 @@
     });
 
     // make the Bookmark constructor globally accessible
-    Y.lane.Bookmark = Bookmark;
+    L.Bookmark = Bookmark;
 
 })();

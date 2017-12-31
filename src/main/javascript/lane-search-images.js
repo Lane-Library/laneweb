@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var Model = Y.lane.Model,
+    var Model = L.Model,
         BASE_PATH = Model.get(Model.BASE_PATH);
 
     if (document.querySelector("#tabs-image-search")) {
@@ -13,7 +13,7 @@
                 var totalPages = Number(e.target.totalPages.value),
                     page = Number(e.target.page.value);
                 if (page < 1 || page > totalPages) {
-                    Y.lane.showMessage("Page out of range");
+                    L.showMessage("Page out of range");
                     e.preventDefault();
                 } else {
                     e.target.totalPages.remove();

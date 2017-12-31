@@ -4,7 +4,7 @@ var searchIndicatorTestCase = new Y.Test.Case({
 
     name: "Lane Search Indicator Test Case",
 
-    indicator : Y.lane.searchIndicator,
+    indicator : L.searchIndicator,
 
     node: document.querySelector(".search-indicator"),
 
@@ -16,7 +16,7 @@ var searchIndicatorTestCase = new Y.Test.Case({
     },
 
     "test search:search event shows": function() {
-        Y.lane.fire("search:search");
+        L.fire("search:search");
         Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
     }
 });

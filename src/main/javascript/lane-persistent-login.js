@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var model = Y.lane.Model, redirectUrl,
+    var model = L.Model, redirectUrl,
     persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
     basePath = model.get(model.BASE_PATH)|| "",
     now = new Date(),
@@ -44,7 +44,7 @@
 
     // The popup window for expension
     popupWindow = function(id, o) {
-        var lightbox = Y.lane.Lightbox, shibbolethAnchors;
+        var lightbox = L.Lightbox, shibbolethAnchors;
         lightbox.setContent(o.responseText);
         lightbox.show();
         shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
@@ -76,9 +76,9 @@
         document.querySelector("#persistent-login").addEventListener('click',function(event) {
             event.preventDefault();
             if (isStanfordActive) {
-                Y.lane.setHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
+                L.setHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
-                Y.lane.setHref(basePath + '/secure/persistentLogin.html?pl=true');
+                L.setHref(basePath + '/secure/persistentLogin.html?pl=true');
             }
         });
     }

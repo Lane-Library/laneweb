@@ -3,8 +3,7 @@
     "use strict";
 
     var bassettContent = document.querySelector('#bassettContent'),
-        Lane = Y.lane,
-        model = Lane.Model,
+        model = L.Model,
         basePath = model.get(model.BASE_PATH)|| "",
         diagramDisplay = false,
         accordion,
@@ -126,7 +125,7 @@
 
         expandSubRegion = function(event) {
             var i, subRegion, display,
-                region = Lane.ancestor(event.currentTarget, "ul");
+                region = L.ancestor(event.currentTarget, "ul");
             display = region.querySelectorAll('li')[subRegionToShow + 1].style.display;
             hideSubRegions(region);
             resetSubRegion();

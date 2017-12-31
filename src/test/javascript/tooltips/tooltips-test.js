@@ -6,7 +6,7 @@ var tooltipTestCase = new Y.Test.Case({
         var b = Y.one("#b");
         var right = Y.DOM.viewportRegion().right;
         var inside = false;
-        var eventHandle = Y.lane.ToolTips.after("visibleChange", function(e) {
+        var eventHandle = L.ToolTips.after("visibleChange", function(e) {
             var boundingBox = this.get("boundingBox");
             inside = Y.DOM.inViewportRegion(Y.Node.getDOMNode(boundingBox));
             eventHandle.detach();

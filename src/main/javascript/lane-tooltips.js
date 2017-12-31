@@ -410,11 +410,7 @@
             delegate : {
                 value: null,
                 setter: function(val) {
-                    if (val) {
-                        return new Y.Node(querySelector(val));
-                    } else {
-                        return new Y.Node(document);
-                    }
+                    return Y.one(val) || Y.one("document");
                 }
             },
 
@@ -490,14 +486,14 @@
                 }
             });
 
-            Y.lane.ToolTips = tt;
+            L.ToolTips = tt;
         };
 
     createTooltips();
 
     //reinitialize when content has changed
-    Y.lane.on("lane:new-content", function() {
-        Y.lane.ToolTips.destructor();
+    L.on("lane:new-content", function() {
+        L.ToolTips.destructor();
         createTooltips();
     });
 

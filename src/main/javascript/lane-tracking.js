@@ -2,24 +2,23 @@
 
     "use strict";
 
-    var Lane = Y.lane,
-        model = Lane.Model,
+    var model = L.Model,
         searchSource = model.get(model.URL_ENCODED_SOURCE),
         Tracker = function() {
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
                 var trackingData = {},
-                    list = Y.lane.ancestor(link, ".lwSearchResults"),
+                    list = L.ancestor(link, ".lwSearchResults"),
                     pageStart = document.querySelector("#pageStart"),
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
                     // pageStart is the value in the pageStart span or 1 if its not there.
                 pageStart = pageStart ? parseInt(pageStart.textContent, 10) : 1;
-                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), Y.lane.ancestor(link, "li")) + pageStart;
+                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), L.ancestor(link, "li")) + pageStart;
                 trackingData.label = link.textContent;
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
                     trackingData.action = decodeURIComponent(searchTerms);
-                    trackingData.label = Y.lane.ancestor(link, "li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
+                    trackingData.label = L.ancestor(link, "li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
                 } else {
                     trackingData.category = "lane:browseResultClick";
                     trackingData.action = location.pathname;
@@ -35,7 +34,7 @@
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
-                    if (Y.lane.ancestor(link, handlers[i].selector)) {
+                    if (L.ancestor(link, handlers[i].selector)) {
                         trackingData.category = handlers[i].category;
                         if (trackingData.category === "lane:bookmarkClick") {
                             trackingData.action = model.get(model.AUTH);
@@ -50,9 +49,9 @@
                 return trackingData;
             },
             getEventTrackingData = function(event) {
-                var link = Y.lane.ancestor(event.target, "a", true),
+                var link = L.ancestor(event.target, "a", true),
                     trackingData = {};
-                if (Y.lane.ancestor(link, ".lwSearchResults")) {
+                if (L.ancestor(link, ".lwSearchResults")) {
                     trackingData = getSearchResultsTrackingData(link);
                 } else if (link.href.match('^javascript:.*bookmarklet.*')) {
                     if ("dragend" === event.type) {
@@ -63,10 +62,10 @@
                     }
                     trackingData.action = link.href;
                     trackingData.label = link.title;
-                } else if (Y.lane.ancestor(link, ".seeAll")) {
+                } else if (L.ancestor(link, ".seeAll")) {
                     trackingData.category = "lane:searchSeeAllClick";
                     trackingData.action = link.search;
-                    trackingData.label = Y.lane.ancestor(link, 'li').textContent.replace(/\s+/g,' ').trim();
+                    trackingData.label = L.ancestor(link, 'li').textContent.replace(/\s+/g,' ').trim();
                 } else {
                     trackingData = getEventTrackingDataByAncestor(link);
                 }
@@ -182,7 +181,7 @@
                     node = node.querySelector("a");
                 }
                 if (!node.dataset.isTrackableAsPageView) {
-                    node = Y.lane.ancestor(node, "a", true);
+                    node = L.ancestor(node, "a", true);
                     if (!node) {
                         throw 'not trackable';
                     }
@@ -242,7 +241,7 @@
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (Y.lane.ancestor(node, ".lane-nav")) {
+                    if (L.ancestor(node, ".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -253,11 +252,11 @@
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
-                    var link = Y.lane.ancestor(event.target, "a", true),
+                    var link = L.ancestor(event.target, "a", true),
                         isTrackable = false;
                     if (link) {
                         // bookmarklet drag or right-click or child of .seeAll
-                        if (Y.lane.ancestor(link, '.seeAll') || link.href.match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
+                        if (L.ancestor(link, '.seeAll') || link.href.match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             isTrackable = true;
                         } else {
                             isTrackable = link.dataset.isTrackableAsEvent;
@@ -272,7 +271,7 @@
                         isTrackable = true;
                     } else {
                         //find self ancestor that is <a>
-                        link = Y.lane.ancestor(link, "a", true);
+                        link = L.ancestor(link, "a", true);
                         if (link && link.href) {
                             if (link.hostname === location.hostname) {
                                 isTrackable =  isTrackableLocalClick(link);
@@ -313,7 +312,7 @@
 
         document.addEventListener('click', function(e) {
             var t = e.target, setLocation = function() {
-                Lane.setHref(t.href);
+                L.setHref(t.href);
             };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
@@ -349,7 +348,7 @@
             emitFacade : true
         });
 
-        Tracker.addTarget(Lane);
+        Tracker.addTarget(L);
 
         document.querySelectorAll(".searchFacet a, *[rel^='popup local']").forEach(function(node) {
             node.dataset.isTrackableAsPageView = true;

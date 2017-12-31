@@ -1,7 +1,7 @@
 "use strict";
 
-Y.lane.Model.set('url-encoded-query','query');
-Y.lane.Model.set('query','query');
+L.Model.set('url-encoded-query','query');
+L.Model.set('query','query');
 Y.io = function(url, config) {
     Y.io = function(url, config) {
         config.on.success.apply(this,[2,{responseText:JSON.stringify({

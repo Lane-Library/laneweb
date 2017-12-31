@@ -39,7 +39,7 @@
     }
 
     //reinitialize when content has changed
-    Y.lane.on('lane:new-content', function() {
+    L.on('lane:new-content', function() {
         initializeAuthorToggles();
     });
 

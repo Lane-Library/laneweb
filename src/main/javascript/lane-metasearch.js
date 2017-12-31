@@ -2,10 +2,10 @@
 
     "use strict";
 
-    var model = Y.lane.Model,
+    var model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
-        searchIndicator = Y.lane.searchIndicator,
+        searchIndicator = L.searchIndicator,
     metasearch = function() {
         var resourceIds = [],
             searchRequests = [],

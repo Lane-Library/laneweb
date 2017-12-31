@@ -5,7 +5,7 @@ var clinicalToggleTestCase = new Y.Test.Case({
     name : "Clinical Toggle TestCase",
     
     setUp: function() {
-        Y.lane.searchIndicator.hide();
+        L.searchIndicator.hide();
         Y.one(".clinical-toggle").set("className", "clinical-toggle");
         Y.one(".clinical-toggle-circle").set("className", "clinical-toggle-circle clinical-toggle-circle-all");
     },

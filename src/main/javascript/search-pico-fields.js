@@ -3,16 +3,15 @@
     "use strict";
 
     var PICO_FIELDS = "pico-fields",
-        lane = Y.lane,
 
         view = function(pico) {
 
             return {
                     hide: function() {
-                        lane.deactivate(pico, PICO_FIELDS);
+                        L.deactivate(pico, PICO_FIELDS);
                     },
                     show: function() {
-                        lane.activate(pico, PICO_FIELDS);
+                        L.activate(pico, PICO_FIELDS);
                     }
                 };
 
@@ -54,10 +53,10 @@
             emitFacade: true
         });
 
-        controller.addTarget(lane);
+        controller.addTarget(L);
 
-        lane.on("search:activeChange", controller.activeChange);
-        lane.on("searchTabs:change", controller.tabChange);
-        lane.on("picoToggle:change", controller.toggleChange);
+        L.on("search:activeChange", controller.activeChange);
+        L.on("searchTabs:change", controller.tabChange);
+        L.on("picoToggle:change", controller.toggleChange);
 
 })();

@@ -15,7 +15,7 @@
         };
     };
     var singleton = false;
-    Y.lane.Suggest = function() {
+    L.Suggest = function() {
         if (!singleton) {
             singleton = new mock();
         }

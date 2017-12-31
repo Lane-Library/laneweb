@@ -4,7 +4,7 @@
 
     window.model = window.model || {};
 
-    Y.lane.Model = {
+    L.Model = {
         get: function(prop) {
             return window.model[prop];
         },

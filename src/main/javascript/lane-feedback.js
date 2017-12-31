@@ -45,10 +45,10 @@
             this.get("menu").on("click", this._handleMenuClick, this);
             this.after("activeItemChange", this._handleActiveItemChange);
             this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
-            eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
+            eventHandle1 = L.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });
-            eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
+            eventHandle2 = L.Lightbox.on("visibleChange", function(event) {
                 if (!event.newVal) {
                     eventHandle1.detach();
                     eventHandle2.detach();
@@ -57,7 +57,7 @@
             }, this);
             document.querySelector("#feedback .close").addEventListener("click", function(event) {
                 event.preventDefault();
-                Y.lane.Lightbox.hide();
+                L.Lightbox.hide();
             });
         },
         syncUI : function() {
@@ -88,7 +88,7 @@
                         this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
-                        Y.lane.showMessage("Sorry, sending feedback failed.");
+                        L.showMessage("Sorry, sending feedback failed.");
                     }
                 },
                 context : this
@@ -142,12 +142,12 @@
         }
     });
 
-    Y.lane.Feedback = Feedback;
+    L.Feedback = Feedback;
 
-    Y.lane.Lightbox.on("contentChanged", function() {
+    L.Lightbox.on("contentChanged", function() {
         if (document.querySelector("#feedback")) {
-            var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
-                hash = Y.lane.Lightbox.get("hash"),
+            var feedback = new L.Feedback({srcNode : "#feedback"}),
+                hash = L.Lightbox.get("hash"),
                 items, index;
             feedback.render();
             //if lightbox has a hash, choose that as the active item

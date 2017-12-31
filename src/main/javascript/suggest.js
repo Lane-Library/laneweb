@@ -3,8 +3,7 @@
 
     "use strict";
 
-    var Lane = Y.lane,
-        model = Lane.Model,
+    var model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
     SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh-di",
@@ -47,7 +46,7 @@
         this._ac.after(SELECT, this._handleSelect, this);
 
         // disable suggestion list after lane search submitted
-        Lane.on("search:search", function(){
+        L.on("search:search", function(){
             input.ac.destroy();
         });
     };
@@ -96,7 +95,7 @@
     });
 
     //make the Suggest constructor globally accessible
-    Lane.Suggest = Suggest;
+    L.Suggest = Suggest;
 })();
 
 (function() {
@@ -107,10 +106,10 @@
     var laneSuggest,
         hybridInput = document.querySelector('.laneSuggest');
     if (hybridInput) {
-        laneSuggest = new Y.lane.Suggest(new Y.Node(hybridInput));
+        laneSuggest = new L.Suggest(new Y.Node(hybridInput));
         laneSuggest.on("select",function(){
-            Y.lane.searchIndicator.show();
-            Y.lane.ancestor(hybridInput, "form").submit();
+            L.searchIndicator.show();
+            L.ancestor(hybridInput, "form").submit();
         });
     }
 })();
