@@ -70,7 +70,7 @@
 
     L.addEventTarget = function(obj, args) {
         Y.augment(obj, Y.EventTarget, false, null, args);
-    }
+    };
 
     L.addEventTarget(L, {
         prefix : "lane",
