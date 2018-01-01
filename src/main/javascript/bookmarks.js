@@ -350,7 +350,7 @@
 
 
     //Add EventTarget attributes to the Bookmarks prototype
-    Y.augment(Bookmarks, Y.EventTarget, null, null, {
+    L.addEventTarget(Bookmarks, {
         emitFacade : true,
         prefix     : 'bookmarks'
     });

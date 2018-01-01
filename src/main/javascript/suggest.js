@@ -89,7 +89,7 @@
     };
 
     //Add EventTarget attributes to the Suggest prototype
-    Y.augment(Suggest, Y.EventTarget, null, null, {
+    L.addEventTarget(Suggest, {
         emitFacade : true,
         prefix     : 'suggest'
     });

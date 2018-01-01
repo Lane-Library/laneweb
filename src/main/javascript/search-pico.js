@@ -39,8 +39,8 @@
             };
         };
 
-    Y.augment(PicoField, Y.EventTarget);
-    Y.augment(fields, Y.EventTarget);
+    L.addEventTarget(PicoField);
+    L.addEventTarget(fields);
 
     document.querySelectorAll(".pico-fields input").forEach(function(input) {
         fields.push(new PicoField(input, limits[input.name]));

@@ -43,7 +43,7 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             tabNodes.forEach(function(tab){
                 tab.addEventListener(CLICK, v.click);
@@ -77,7 +77,7 @@ if (document.querySelector(".search-form"))  {
 
         }();
 
-    Y.augment(controller, Y.EventTarget, false, null, {
+    L.addEventTarget(controller, {
         prefix: "searchTabs",
         emitFacade: true
     });

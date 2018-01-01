@@ -41,7 +41,7 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-            Y.augment(m, Y.EventTarget, false, null, {
+            L.addEventTarget(m, {
                 prefix: "search",
                 emitFacade: true
             });
@@ -108,7 +108,7 @@ if (document.querySelector(".search-form"))  {
             queryInput.addEventListener("focus", v.open);
             queryInput.addEventListener("input", v.inputChange);
 
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             return v;
 

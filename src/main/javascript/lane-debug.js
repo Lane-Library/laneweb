@@ -39,12 +39,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
 
     window.L = {};
 
-    Y.augment(L, Y.EventTarget, null, null, {
-        prefix : "lane",
-        emitFacade : true,
-        broadcast : 1
-    });
-
     var i, laneJavascript = [
         "util.js",
         "menu.js",

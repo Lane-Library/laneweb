@@ -48,7 +48,7 @@
 
         }(view);
 
-        Y.augment(controller, Y.EventTarget, false, null, {
+        L.addEventTarget(controller, {
             prefix: "picoFields",
             emitFacade: true
         });

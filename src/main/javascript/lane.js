@@ -12,12 +12,6 @@ YUI({fetchCSS:false}).use("*", function(Y) {
 
     window.L = {};
 
-    Y.augment(L, Y.EventTarget, null, null, {
-        prefix : "lane",
-        emitFacade : true,
-        broadcast : 1
-    });
-
 });
 /*
  * uses these modules (no longer certain this is a complete list):

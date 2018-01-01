@@ -343,7 +343,7 @@
             });
         });
 
-        Y.augment(Tracker, Y.EventTarget, null, null, {
+        L.addEventTarget(Tracker, {
             prefix : "tracker",
             emitFacade : true
         });

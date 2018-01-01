@@ -41,7 +41,7 @@ if (document.querySelector(".pico-toggle"))  {
 
             on.addEventListener("click", v.picoOn);
             off.addEventListener("click", v.picoOff);
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             return v;
 
@@ -79,7 +79,7 @@ if (document.querySelector(".pico-toggle"))  {
 
             L.on("searchTabs:change", controller.tabChange);
 
-            Y.augment(controller, Y.EventTarget, false, null, {
+            L.addEventTarget(controller, {
                 prefix: "picoToggle",
                 emitFacade: true
             });

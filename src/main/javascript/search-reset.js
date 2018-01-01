@@ -20,7 +20,7 @@
                     }
                 };
 
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             // case 131334 javascript error on discovery login page
             if (reset) {
@@ -51,7 +51,7 @@
             };
         }();
 
-    Y.augment(controller, Y.EventTarget, false, null, {
+    L.addEventTarget(controller, {
         prefix: "searchReset",
         emitFacade: true
     });

@@ -25,7 +25,7 @@
 
         }();
 
-    Y.augment(viewport, Y.EventTarget, null, null, {
+    L.addEventTarget(viewport, {
         emitFacade : true,
         prefix : "viewport"
     });

@@ -67,4 +67,14 @@
     }
 
     L.io = Y.io;
+
+    L.addEventTarget = function(obj, args) {
+        Y.augment(obj, Y.EventTarget, false, null, args);
+    }
+
+    L.addEventTarget(L, {
+        prefix : "lane",
+        emitFacade : true,
+        broadcast : 1
+    });
 })();

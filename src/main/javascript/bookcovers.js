@@ -90,7 +90,7 @@
                 };
 
             // make the service an EventTarget
-            Y.augment(service, Y.EventTarget);
+            L.addEventTarget(service);
             return service;
         }(),
 
