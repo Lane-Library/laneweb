@@ -19,8 +19,8 @@
      * @param limit {String} the limit parameter for the request.
      */
     Suggest = function(input, limit) {
-        input = input._node ? input : new Y.Node(input);
-        input.plug(Y.Plugin.AutoComplete, {
+        var node = input._node ? input : new Y.Node(input);
+        node.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
             width: "100%"

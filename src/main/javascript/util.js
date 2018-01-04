@@ -67,9 +67,10 @@
           configurable: true,
           enumerable: true,
           writable: true,
-          value: function remove() {
-            if (this.parentNode !== null)
-              this.parentNode.removeChild(this);
+          value: function() {
+            if (this.parentNode !== null) {
+                this.parentNode.removeChild(this);
+            }
           }
         });
       });

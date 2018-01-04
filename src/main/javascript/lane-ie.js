@@ -12,7 +12,6 @@
         document.querySelectorAll('#bookmarkletIE, .bookmarklet-ie').forEach(function(node) {
             node.style.display = 'block';
         });
-
     }
 
     if (/Edge/.test(window.navigator.userAgent)) {
@@ -25,10 +24,6 @@
         document.querySelectorAll('.bookmarklet-edge').forEach(function(node) {
             node.style.display = 'block';
         });
-
-        Node.prototype.remove = function() {
-            
-        }
     }
 
 })();
