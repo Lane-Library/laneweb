@@ -13,7 +13,7 @@
                     visibleSeminarCount = 0;
                 mySeminars.forEach(function(node) {
                     if (node.style.display === 'none') {
-                        hiddenSeminarArray.push(this);
+                        hiddenSeminarArray.push(node);
                     } else {
                         visibleSeminarCount++;
                     }

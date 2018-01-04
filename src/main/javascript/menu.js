@@ -1,4 +1,7 @@
 (function() {
+
+    "use strict";
+
     document.querySelectorAll('.menu ul').forEach(function(submenu) {
         if (submenu.querySelector('.menuitem-active')) {
             submenu.className = 'submenu submenu-active';

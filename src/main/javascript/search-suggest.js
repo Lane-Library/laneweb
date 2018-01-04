@@ -13,7 +13,7 @@ if (document.querySelector(".search-form"))  {
                 suggest: suggest,
                 source: source
             };
-        }(new L.Suggest(new Y.Node(queryInput)),
+        }(new L.Suggest(queryInput),
                 form.querySelector("input[name=source]").value),
 
         view = function() {

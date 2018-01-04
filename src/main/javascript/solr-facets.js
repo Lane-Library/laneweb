@@ -43,11 +43,7 @@
                     success:function(id, o) {
                         facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
                         // fade in facets container
-                        new Y.Anim({
-                            node: facetsContainer,
-                            to:{opacity:1},
-                            duration: 0.5
-                        }).run();
+                        L.activate(facetsContainer, "solrFacets");
                         processEnabledFacets(facetsContainer);
                         L.fire("lane:new-content");
                     }

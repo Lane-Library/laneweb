@@ -67,6 +67,7 @@ if (document.querySelector(".search-form"))  {
                 v = {
                     close: function() {
                         L.deactivate(form, "search-form");
+                      //anim included for smooth scrolling of window
                         new Y.Anim({
                             node: "win",
                             to: { scroll: [0, 0] },

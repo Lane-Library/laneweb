@@ -129,7 +129,7 @@
              * @param bookmark {Bookmark}
              */
             updateBookmark : function(bookmark) {
-                var position = Y.Array.indexOf(this._bookmarks, bookmark);
+                var position = this._bookmarks.indexOf(bookmark);
                 this.fire("update", {bookmark : bookmark, position : position});
             },
 
@@ -156,7 +156,7 @@
              * @return {number} the index of the given bookmark
              */
             indexOf : function(bookmark) {
-                return Y.Array.indexOf(this._bookmarks, bookmark);
+                return this._bookmarks.indexOf(bookmark);
             },
 
             /**

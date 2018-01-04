@@ -116,8 +116,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         this.link.get("node").simulate("click");
         Y.Assert.areSame(3, status);
         Y.Assert.areSame(4, this.link.get("status"));
-        Y.Assert
-        .areSame('{"label":"local","url":"/foo?bar=baz"}', data);
+        Y.Assert.areSame('{"label":"local","url":"'+ L.Model.get(L.Model.BASE_PATH) + '/foo?bar=baz"}', data);
     },
 
     testTimer : function() {

@@ -44,7 +44,11 @@
             var self = this, eventHandle1, eventHandle2;
             this.get("menu").on("click", this._handleMenuClick, this);
             this.after("activeItemChange", this._handleActiveItemChange);
-            this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
+            this.get("srcNode")._node.querySelectorAll("form").forEach(function(form) {
+                form.addEventListener("submit", function(event) {
+                    self._handleSubmit.call(self, event);
+                });
+            });
             eventHandle1 = L.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });
@@ -133,7 +137,7 @@
         },
         _handleSubmit : function(event) {
             event.preventDefault();
-            this.sendFeedback(event.currentTarget);
+            this.sendFeedback(new Y.Node(event.currentTarget));
         },
         _resetThanks: function() {
             var srcNode = this.get("srcNode"),

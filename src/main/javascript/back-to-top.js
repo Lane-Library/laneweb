@@ -1,5 +1,10 @@
-// using YUI().use here so this can be used with the history template
-YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen", function(Y) {
+YUI({fetchCSS:false}).use(
+        "anim-base",
+        "anim-easing",
+        "anim-scroll",
+        "node-base",
+        "node-screen",
+        function(Y) {
 
     "use strict";
 
@@ -45,7 +50,7 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
         scrollToTop = function() {
             var a = new Y.Anim({
                 node: "win",
-                to: { scroll: [0, 0] },
+                to: { scroll: [0, -100] },
                 duration: 0.3,
                 easing: Y.Easing.easeBoth
             });
@@ -53,7 +58,7 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
         };
 
     // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
-    Y.on("scroll", function() {
+    document.addEventListener("scroll", function() {
         if (window.pageYOffset > 270 && !backToTop.classList.contains("active")) {
             fadeIn();
         } else if (window.pageYOffset <= 270 && backToTop.classList.contains("active")){

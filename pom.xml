@@ -390,6 +390,10 @@
                 <directory>src/main/xsl</directory>
                 <targetPath>xsl</targetPath>
             </resource>
+            <resource>
+                <directory>src/test/javascript</directory>
+                <targetPath>resources/test</targetPath>
+            </resource>
         </resources>
         <plugins>
             <plugin>

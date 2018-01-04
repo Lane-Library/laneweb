@@ -1,5 +1,7 @@
 (function() {
 
+    "use strict";
+
     var images = [],
 
         flickrPhotos = document.querySelector(".flickr-photos"),

@@ -24,20 +24,24 @@
     };
 
     Y.extend(PurchaseSuggestions, L.Feedback, {
+
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
         },
+
         bindUI : function() {
             this.get("menu").on("click", this._handleMenuClick, this);
             this.after("activeItemChange", this._handleActiveItemChange);
         },
+
         syncUI : function() {
             var items = this.get("items");
             for (var i = 0; i < items.size(); i++) {
                 items.item(i).remove(false);
             }
         },
+
         _handleActiveItemChange : function(event) {
             var items = this.get("items"),
                 itemsList = document.querySelector("#purchaseItems"),

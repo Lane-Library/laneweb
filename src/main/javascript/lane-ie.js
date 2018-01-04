@@ -26,6 +26,9 @@
             node.style.display = 'block';
         });
 
+        Node.prototype.remove = function() {
+            
+        }
     }
 
 })();

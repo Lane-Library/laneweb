@@ -11,11 +11,10 @@
         fields = [],
 
         PicoField = function(input, limit) {
-            var ynode = new Y.Node(input),
-                suggest,
+            var suggest,
                 self = this;
             if (limit) {
-                suggest = new L.Suggest(ynode, limit);
+                suggest = new L.Suggest(input, limit);
                 suggest.on("select", function() {
                     self.fire("input");
                 });

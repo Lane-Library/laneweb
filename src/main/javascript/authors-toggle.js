@@ -6,14 +6,14 @@
         document.querySelectorAll(".authorsTrigger").forEach(function(triggerNode) {
             if (!triggerNode.authorsTriggerSubscribed) {
                 triggerNode.authorsTriggerSubscribed = true;
-                triggerNode.addEventListener("click", function(e) {
+                triggerNode.addEventListener("click", function(event) {
                     var node = event.currentTarget,
                         anchorNode = node.querySelector('a'),
                         iconNode = node.querySelector('i'),
                         hideNode = node.parentNode.querySelector(".authors-hide");
 
-                    e.stopPropagation();
-                    e.preventDefault();
+                    event.stopPropagation();
+                    event.preventDefault();
                     node.classList.toggle('active');
                     if (!node.classList.contains('active')) {
                         node.previousElementSibling.textContent = " - ";
