@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter({ "/main/*", })
+@WebFilter("/main/*")
 public class JavascriptTestFilter extends AbstractLanewebFilter {
 
     private static final Pattern MAIN = Pattern.compile("(.*)main(.*)");
