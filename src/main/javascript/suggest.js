@@ -19,8 +19,8 @@
      * @param limit {String} the limit parameter for the request.
      */
     Suggest = function(input, limit) {
-        var node = input._node ? input : new Y.Node(input);
-        node.plug(Y.Plugin.AutoComplete, {
+        var yuiinput = input._node ? input : new Y.Node(input);
+        yuiinput.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
             width: "100%"
@@ -35,10 +35,10 @@
         });
 
         //save the input
-        this._input = input;
+        this._input = yuiinput;
 
         //save the autocomplete object
-        this._ac = input.ac;
+        this._ac = yuiinput.ac;
 
         //hoveredItemChange is fired on mouseover events in the suggestion list
         this._ac.after("hoveredItemChange", this._handleHoveredItemChange, this);
@@ -48,7 +48,7 @@
 
         // disable suggestion list after lane search submitted
         L.on("search:search", function(){
-            input.ac.destroy();
+            yuiinput.ac.destroy();
         });
     };
 
