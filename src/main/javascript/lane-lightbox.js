@@ -9,10 +9,12 @@
             var self = this;
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
-            document.querySelectorAll("a[rel^='lightbox']").forEach(function(node) {
-                node.addEventListener("click", function(event) {
-                    self._lightboxLinkClick.call(self, event);
-                });
+            document.addEventListener("click", function(event) {
+                var node = L.ancestor(event.target, "a[rel^='lightbox']", true);
+                if (node) {
+                    event.preventDefault();
+                    self._lightboxLinkClick.call(self, node);
+                }
             });
             document.addEventListener("keydown", function(event) {
                 if (event.key === "Escape") {
@@ -65,16 +67,15 @@
             anim1.run();
             anim2.run();
         },
-        _lightboxLinkClick: function(event) {
+        _lightboxLinkClick: function(node) {
             var lightbox, model, basePath,  hash, url, regex, disableBackground,
-                anchor = event.currentTarget,
                 disableAnimation,
-                rel = anchor.rel;
+                rel = node.rel;
             if (rel && rel.indexOf("lightbox") === 0) {
                 lightbox = this;
                 model = L.Model;
                 basePath = model.get(model.BASE_PATH) || "";
-                hash = anchor.hash;
+                hash = node.hash;
                 event.preventDefault();
                 if (lightbox.get("visible")) {
                     lightbox.hide();
@@ -83,7 +84,7 @@
                 // of various base paths (eg /stage)
                 regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
                 // case 112216
-                url = anchor.pathname + anchor.search;
+                url = node.pathname + node.search;
                 // first replace takes care of missing leading slash in IE < 10
                 url = url.replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
