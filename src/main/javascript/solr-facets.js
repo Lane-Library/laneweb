@@ -9,13 +9,12 @@
         facetsContainer = document.querySelector('.solrFacets'),
         handleArrowKey = function(direction) {
             var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
-                selectorString = ".pagingButton." + direction,
                 pagingNode;
-            if (browseFacetNavContainer && browseFacetNavContainer.style.visibility === 'visible') {
-                pagingNode = browseFacetNavContainer.querySelector(selectorString);
-            }
-            if (pagingNode) {
-                pagingNode.click();
+            if (browseFacetNavContainer) {
+                pagingNode = browseFacetNavContainer.querySelector(".pagingButton." + direction);
+                if (pagingNode) {
+                    pagingNode.click();
+                }
             }
         },
         processEnabledFacets = function(facetsContainer) {
