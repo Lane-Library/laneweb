@@ -18,19 +18,21 @@
                 } else {
                     gaPageTracker = window._gat._createTracker("UA-3203486-2","gaPageTracker");
                 }
-                //you can call _setLocalServerMode on gaPageTracker for testing/debugging
-                gaPageTracker._setDomainName(".stanford.edu");
-                if (ipgroup) {
-                    gaPageTracker._setVar(ipgroup);
-                    gaPageTracker._setCustomVar(1,'ipGroup',ipgroup ,2);
-                }
-                if (auth) {
-                    gaPageTracker._setCustomVar(2,'authenticatedSession',auth,2);
-                    if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
-                        gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',auth,2);
+                if (gaPageTracker) {
+                    //you can call _setLocalServerMode on gaPageTracker for testing/debugging
+                    gaPageTracker._setDomainName(".stanford.edu");
+                    if (ipgroup) {
+                        gaPageTracker._setVar(ipgroup);
+                        gaPageTracker._setCustomVar(1,'ipGroup',ipgroup ,2);
                     }
+                    if (auth) {
+                        gaPageTracker._setCustomVar(2,'authenticatedSession',auth,2);
+                        if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
+                            gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',auth,2);
+                        }
+                    }
+                    gaPageTracker._trackPageview();
                 }
-                gaPageTracker._trackPageview();
             }
         }
     });
