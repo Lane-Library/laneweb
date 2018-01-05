@@ -3,12 +3,13 @@
     "use strict";
 
     var gaJsHost = (("https:" === location.protocol) ? "https://ssl." : "http://www."),
+        noop = function() {/*do nothing*/},
         noopTracker = {
-            _setDomainName: function() {},
-            _setVar: function() {},
-            _setCustomVar: function() {},
-            _trackPageview: function() {},
-            _trackEvent: function() {}
+            _setDomainName: noop,
+            _setVar: noop,
+            _setCustomVar: noop,
+            _trackPageview: noop,
+            _trackEvent: noop
         },
         createPageTracker = function(gat) {
             var host = location.host,
