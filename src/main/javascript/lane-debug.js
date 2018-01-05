@@ -52,6 +52,14 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-bassett.js",
         "suggest.js",
         "search.js",
+        "search-reset.js",
+        "search-tabs.js",
+        "search-placeholder.js",
+        "search-help.js",
+        "search-suggest.js",
+        "search-pico-toggle.js",
+        "search-pico-fields.js",
+        "search-pico.js",
         "bookmark.js",
         "bookmarks.js",
         "bookmarks-widget.js",
@@ -73,6 +81,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "description-toggle.js",
         "lane-feedback.js",
         "purchase-suggestions.js",
+        "seminars.js",
         "same-height.js",
         "shibboleth-sfx.js",
         "youtube.js",
@@ -83,7 +92,8 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "viewport.js",
         "authors-toggle.js",
         "clinical-toggle.js",
-        "search-form-scroll.js"
+        "search-form-scroll.js",
+        "message.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:

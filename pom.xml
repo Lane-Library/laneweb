@@ -544,7 +544,7 @@
                                 <include>authors-toggle-min.js</include>
                                 <include>clinical-toggle-min.js</include>
                                 <include>search-form-scroll-min.js</include>
-                                <inlude>message-min.js</inlude>
+                                <include>message-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
