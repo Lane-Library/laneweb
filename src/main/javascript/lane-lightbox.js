@@ -17,7 +17,7 @@
                 }
             });
             document.addEventListener("keydown", function(event) {
-                if (event.key === "Escape") {
+                if (event.keyCode === 27 || event.key === "Escape") {
                     self.hide();
                 }
             });

@@ -7,12 +7,18 @@
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = document.querySelector('.solrFacets'),
-        handleArrowKey = function(direction) {
+        handleKeyDown = function(event) {
             var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
-                pagingNode;
+                pagingNode, direction;
             if (browseFacetNavContainer) {
+                if (event.keyCode === 37 || event.key === "ArrowLeft") {
+                    direction = "previous";
+                } else if (event.keyCode === 39 || event.key === "ArrowRight") {
+                    direction = "next";
+                }
                 pagingNode = browseFacetNavContainer.querySelector(".pagingButton." + direction);
                 if (pagingNode) {
+                    event.preventDefault();
                     pagingNode.click();
                 }
             }
@@ -52,13 +58,7 @@
         if (query && facetsContainer && !document.querySelector("#bassettContent") ) {
             makeRequest();
             // listener for left/right arrows
-            document.addEventListener("keyup", function(event) {
-                if (event.key === "ArrowLeft") {
-                    handleArrowKey("previous");
-                } else if (event.key === "ArrowRight") {
-                    handleArrowKey("next");
-                }
-            });
+            document.addEventListener("keydown", handleKeyDown);
             // close button on facet browse lightbox
             L.Lightbox.on("contentChanged", function() {
                 var browseFacetClose = document.querySelector(".facetBrowse .close");

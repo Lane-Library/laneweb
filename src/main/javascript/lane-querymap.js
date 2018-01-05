@@ -77,7 +77,7 @@
                 queryMapResources[i].anchor = anchor;
             }
             if (queryMappingDescriptor) {
-                queryMappingDescriptor.append(resourceMap.descriptor.descriptorName);
+                queryMappingDescriptor.innerHTML = resourceMap.descriptor.descriptorName;
                 L.fire("lane:new-content");
             }
             getResultCounts();
