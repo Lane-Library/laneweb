@@ -14,19 +14,6 @@
         return node.dataset[name];
     };
 
-    L.ancestor = function(node, selector, self) {
-        var result;
-        if (self && node.matches(selector)) {
-            result = node;
-        } else {
-            result = node.parentNode;
-            while (result && result.nodeType === 1 && !result.matches(selector)) {
-                result = result.parentNode;
-            }
-        }
-        return (result && result.nodeType === 1) ? result : null;
-    };
-
     /*
      * polyfill for NodeList.prototype.forEach() from
      * https://github.com/imagitama/nodelist-foreach-polyfill
@@ -56,6 +43,18 @@
             Element.prototype.msMatchesSelector ||
             Element.prototype.webkitMatchesSelector;
     }
+
+    /*
+     * polyfill for Element.prototype.closest() modified from
+     * https://plainjs.com/javascript/traversing/get-closest-element-by-selector-39/
+     */
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(selector) {
+            var el = this;
+            while (el.matches && !el.matches(selector)) el = el.parentNode;
+            return el.matches ? el : null;
+        }
+    };
 
  // from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
     (function (arr) {

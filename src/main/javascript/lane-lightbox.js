@@ -10,7 +10,7 @@
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
             document.addEventListener("click", function(event) {
-                var node = L.ancestor(event.target, "a[rel^='lightbox']", true);
+                var node = event.target.closest("a[rel^='lightbox']");
                 if (node) {
                     event.preventDefault();
                     self._lightboxLinkClick.call(self, node);

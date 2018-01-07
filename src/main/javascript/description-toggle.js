@@ -19,7 +19,7 @@
         var handleClick = function(node, event) {
             var eresource = node.classList.contains("eresource"),
                 searchContent = node.classList.contains("searchContent"),
-                ancestor = L.ancestor(node, "li"),
+                ancestor = node.closest("li"),
                 active = ancestor.classList.contains("active");
 
             event.preventDefault();
@@ -39,7 +39,7 @@
         };
 
         document.querySelector(".content").addEventListener("click", function(event) {
-            var node = L.ancestor(event.target, ".descriptionTrigger", true);
+            var node = event.target.closest(".descriptionTrigger");
             if (node) {
                 handleClick(node, event);
             }

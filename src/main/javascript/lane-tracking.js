@@ -8,17 +8,17 @@
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
                 var trackingData = {},
-                    list = L.ancestor(link, ".lwSearchResults"),
+                    list = link.closest(".lwSearchResults"),
                     pageStart = document.querySelector("#pageStart"),
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
                     // pageStart is the value in the pageStart span or 1 if its not there.
                 pageStart = pageStart ? parseInt(pageStart.textContent, 10) : 1;
-                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), L.ancestor(link, "li")) + pageStart;
+                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), link.closest("li")) + pageStart;
                 trackingData.label = link.textContent;
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
                     trackingData.action = decodeURIComponent(searchTerms);
-                    trackingData.label = L.ancestor(link, "li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
+                    trackingData.label = link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
                 } else {
                     trackingData.category = "lane:browseResultClick";
                     trackingData.action = location.pathname;
@@ -34,7 +34,7 @@
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
-                    if (L.ancestor(link, handlers[i].selector)) {
+                    if (link.closest(handlers[i].selector)) {
                         trackingData.category = handlers[i].category;
                         if (trackingData.category === "lane:bookmarkClick") {
                             trackingData.action = model.get(model.AUTH);
@@ -49,9 +49,9 @@
                 return trackingData;
             },
             getEventTrackingData = function(event) {
-                var link = L.ancestor(event.target, "a", true),
+                var link = event.target.closest("a"),
                     trackingData = {};
-                if (L.ancestor(link, ".lwSearchResults")) {
+                if (link.closest(".lwSearchResults")) {
                     trackingData = getSearchResultsTrackingData(link);
                 } else if (link.href.match('^javascript:.*bookmarklet.*')) {
                     if ("dragend" === event.type) {
@@ -62,10 +62,10 @@
                     }
                     trackingData.action = link.href;
                     trackingData.label = link.title;
-                } else if (L.ancestor(link, ".seeAll")) {
+                } else if (link.closest(".seeAll")) {
                     trackingData.category = "lane:searchSeeAllClick";
                     trackingData.action = link.search;
-                    trackingData.label = L.ancestor(link, 'li').textContent.replace(/\s+/g,' ').trim();
+                    trackingData.label = link.closest('li').textContent.replace(/\s+/g,' ').trim();
                 } else {
                     trackingData = getEventTrackingDataByAncestor(link);
                 }
@@ -181,7 +181,7 @@
                     node = node.querySelector("a");
                 }
                 if (!node.dataset.isTrackableAsPageView) {
-                    node = L.ancestor(node, "a", true);
+                    node = node.closest("a");
                     if (!node) {
                         throw 'not trackable';
                     }
@@ -241,7 +241,7 @@
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (L.ancestor(node, ".lane-nav")) {
+                    if (node.closest(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -252,11 +252,11 @@
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
-                    var link = L.ancestor(event.target, "a", true),
+                    var link = event.target.closest("a"),
                         isTrackable = false;
                     if (link) {
                         // bookmarklet drag or right-click or child of .seeAll
-                        if (L.ancestor(link, '.seeAll') || link.href.match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
+                        if (link.closest('.seeAll') || link.href.match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             isTrackable = true;
                         } else {
                             isTrackable = link.dataset.isTrackableAsEvent;
@@ -271,7 +271,7 @@
                         isTrackable = true;
                     } else {
                         //find self ancestor that is <a>
-                        link = L.ancestor(link, "a", true);
+                        link = link.closest("a");
                         if (link && link.href) {
                             if (link.hostname === location.hostname) {
                                 isTrackable =  isTrackableLocalClick(link);

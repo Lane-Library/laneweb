@@ -58,7 +58,7 @@
     };
     document.addEventListener("click", function(event) {
         var args, popupElement, title, body,
-            anchor = L.ancestor(event.target, "a", true),
+            anchor = event.target.closest("a"),
             rel = anchor && anchor.rel;
         if (rel && rel.indexOf("popup") === 0) {
             event.preventDefault();

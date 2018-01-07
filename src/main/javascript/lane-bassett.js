@@ -125,7 +125,7 @@
 
         expandSubRegion = function(event) {
             var i, subRegion, display,
-                region = L.ancestor(event.currentTarget, "ul");
+                region = event.currentTarget.closest("ul");
             display = region.querySelectorAll('li')[subRegionToShow + 1].style.display;
             hideSubRegions(region);
             resetSubRegion();
