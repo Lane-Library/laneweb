@@ -51,10 +51,12 @@
     if (!Element.prototype.closest) {
         Element.prototype.closest = function(selector) {
             var el = this;
-            while (el.matches && !el.matches(selector)) el = el.parentNode;
+            while (el.matches && !el.matches(selector)) {
+                el = el.parentNode;
+            }
             return el.matches ? el : null;
-        }
-    };
+        };
+    }
 
  // from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
     (function (arr) {
