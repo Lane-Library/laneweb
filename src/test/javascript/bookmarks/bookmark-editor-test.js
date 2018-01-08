@@ -4,9 +4,9 @@ var bookmarkTestCase = new Y.Test.Case({
 
     name : 'Bookmark Editor Test Case',
 
-    editor : new Y.lane.BookmarkEditor({
+    editor : new L.BookmarkEditor({
         srcNode:Y.one("#editor"),
-        bookmark:new Y.lane.Bookmark("url", "label"),
+        bookmark:new L.Bookmark("url", "label"),
         render:true
     }),
 
@@ -52,7 +52,7 @@ var bookmarkTestCase = new Y.Test.Case({
 
     testCancelNew : function() {
         Y.one("body").append("<div id='new'><input type='checkbox'/><a>a</a></div>");
-        var anew = new Y.lane.BookmarkEditor({srcNode:Y.one("#new"),render:true});
+        var anew = new L.BookmarkEditor({srcNode:Y.one("#new"),render:true});
         anew.set("editing", true);
         Y.one("#new button[value='cancel']").simulate("click");
         Y.Assert.areSame(null, Y.one("#new"));

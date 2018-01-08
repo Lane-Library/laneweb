@@ -2,10 +2,9 @@
 
     "use strict";
 
-    var model = Y.lane.Model, redirectUrl,
+    var model = L.Model, redirectUrl,
     persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
     basePath = model.get(model.BASE_PATH)|| "",
-    location = Y.lane.Location,
     now = new Date(),
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
     // See UserDataBinder.java
@@ -30,13 +29,13 @@
         if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
             link.set('rel', 'persistentLogin');
-            redirectUrl = encodeURIComponent(event.target.get('href'));
+            redirectUrl = event.target.get('href');
             getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
         }
     };
 
     getPopup = function(urlPage) {
-        Y.io(urlPage, {
+        L.io(urlPage, {
             on : {
                 success : popupWindow
             }
@@ -45,7 +44,7 @@
 
     // The popup window for expension
     popupWindow = function(id, o) {
-        var lightbox = Y.lane.Lightbox, shibbolethAnchors;
+        var lightbox = L.Lightbox, shibbolethAnchors;
         lightbox.setContent(o.responseText);
         lightbox.show();
         shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
@@ -73,15 +72,15 @@
 
     // for the static page myaccounts.html Click on YES this way the user
     // will not have to go through webauth.
-    if(Y.one('#persistent-login')){
-        Y.on('click',function(event) {
+    if (document.querySelector('#persistent-login')) {
+        document.querySelector("#persistent-login").addEventListener('click',function(event) {
             event.preventDefault();
             if (isStanfordActive) {
-                location.set("href", basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
+                L.setLocationHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
             } else {
-                location.set("href", basePath + '/secure/persistentLogin.html?pl=true');
+                L.setLocationHref(basePath + '/secure/persistentLogin.html?pl=true');
             }
-        }, '#persistent-login');
+        });
     }
 
 })();

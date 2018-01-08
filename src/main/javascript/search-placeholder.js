@@ -6,8 +6,6 @@ if (document.querySelector(".search-form"))  {
 
     var PLACEHOLDER = "placeholder",
 
-        lane = Y.lane,
-
         inputNode = document.querySelector(".search-form input[name=q]"),
 
         model = function(def, current) {
@@ -15,8 +13,8 @@ if (document.querySelector(".search-form"))  {
                 def: def,
                 current: current
             };
-        }(lane.getData(inputNode, PLACEHOLDER),
-                lane.getData(document.querySelector(".search-tab-active"), PLACEHOLDER)),
+        }(L.getData(inputNode, PLACEHOLDER),
+                L.getData(document.querySelector(".search-tab-active"), PLACEHOLDER)),
 
         view = function() {
 
@@ -43,8 +41,8 @@ if (document.querySelector(".search-form"))  {
             };
         }();
 
-    lane.on("searchTabs:change", controller.tabChange);
-    lane.on("search:activeChange", controller.activeChange);
+    L.on("searchTabs:change", controller.tabChange);
+    L.on("search:activeChange", controller.activeChange);
 
 
 })();

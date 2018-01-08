@@ -2,9 +2,7 @@
 
     "use strict";
 
-    var lane = Y.lane,
-
-        helpNode = document.querySelector(".search-help"),
+    var helpNode = document.querySelector(".search-help"),
 
         view = function() {
 
@@ -27,6 +25,6 @@
 
         }();
 
-    lane.on("searchTabs:change", controller.change);
+    L.on("searchTabs:change", controller.change);
 
 })();

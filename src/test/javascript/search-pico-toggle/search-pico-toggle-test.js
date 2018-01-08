@@ -15,26 +15,26 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
     
     "test clinical search tab activated": function() {
-        Y.lane.fire("searchTabs:change", {newVal: {source:"clinical-all"}});
+        L.fire("searchTabs:change", {newVal: {source:"clinical-all"}});
         Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
         Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
     },
     
     "test not clinical search tab activated": function() {
-        Y.lane.activate(this.on, "pico-on");
-        Y.lane.activate(this.toggle, "pico-toggle");
-        Y.lane.fire("searchTabs:change", {newVal: {source:"foo"}});
+        L.activate(this.on, "pico-on");
+        L.activate(this.toggle, "pico-toggle");
+        L.fire("searchTabs:change", {newVal: {source:"foo"}});
         Y.Assert.areEqual("pico-on", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
         Y.Assert.areEqual("pico-toggle", this.toggle.className);
     },
 
     "test on click": function() {
-        Y.lane.activate(this.on, "pico-on");
-        Y.lane.activate(this.toggle, "pico-toggle");
+        L.activate(this.on, "pico-on");
+        L.activate(this.toggle, "pico-toggle");
         var active;
-        Y.lane.once("picoToggle:change", function(event) {
+        L.once("picoToggle:change", function(event) {
             active = event.active;
         });
         var click = document.createEvent("MouseEvent");
@@ -47,10 +47,10 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
 
     "test off click": function() {
-        Y.lane.activate(this.off, "pico-off");
-        Y.lane.activate(this.toggle, "pico-toggle");
+        L.activate(this.off, "pico-off");
+        L.activate(this.toggle, "pico-toggle");
         var active;
-        Y.lane.once("picoToggle:change", function(event) {
+        L.once("picoToggle:change", function(event) {
             active = event.active;
         });
         var click = document.createEvent("MouseEvent");
@@ -63,10 +63,10 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
     
     "test active change resets": function() {
-        Y.lane.deactivate(this.on, "pico-on");
-        Y.lane.activate(this.off, "pico-off");
-        Y.lane.activate(this.toggle, "pico-toggle");
-        Y.lane.fire("search:activeChange", {active: false});
+        L.deactivate(this.on, "pico-on");
+        L.activate(this.off, "pico-off");
+        L.activate(this.toggle, "pico-toggle");
+        L.fire("search:activeChange", {active: false});
         Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
         Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);

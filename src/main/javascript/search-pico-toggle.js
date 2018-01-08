@@ -8,42 +8,40 @@ if (document.querySelector(".pico-toggle"))  {
         PICO_OFF = "pico-off",
         PICO_TOGGLE = "pico-toggle",
 
-        lane = Y.lane,
-
         view = function(toggle) {
 
             var on = toggle.querySelector("." + PICO_ON),
                 off = toggle.querySelector("." + PICO_OFF),
                 v = {
                     activate: function() {
-                        lane.activate(toggle, PICO_TOGGLE);
-                        lane.activate(on, PICO_ON);
-                        lane.deactivate(off, PICO_OFF);
+                        L.activate(toggle, PICO_TOGGLE);
+                        L.activate(on, PICO_ON);
+                        L.deactivate(off, PICO_OFF);
                     },
                     deactivate: function() {
-                        lane.deactivate(toggle, PICO_TOGGLE);
-                        lane.deactivate(on, PICO_ON);
-                        lane.deactivate(off, PICO_OFF);
+                        L.deactivate(toggle, PICO_TOGGLE);
+                        L.deactivate(on, PICO_ON);
+                        L.deactivate(off, PICO_OFF);
                     },
                     picoOn: function() {
-                        lane.deactivate(on, PICO_ON);
-                        lane.activate(off, PICO_OFF);
+                        L.deactivate(on, PICO_ON);
+                        L.activate(off, PICO_OFF);
                         v.fire("on");
                     },
                     picoOff: function() {
-                        lane.deactivate(off, PICO_OFF);
-                        lane.activate(on, PICO_ON);
+                        L.deactivate(off, PICO_OFF);
+                        L.activate(on, PICO_ON);
                         v.fire("off");
                     },
                     reset: function() {
-                        lane.activate(on, PICO_ON);
-                        lane.deactivate(off, PICO_OFF);
+                        L.activate(on, PICO_ON);
+                        L.deactivate(off, PICO_OFF);
                     }
                 };
 
             on.addEventListener("click", v.picoOn);
             off.addEventListener("click", v.picoOff);
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             return v;
 
@@ -77,15 +75,15 @@ if (document.querySelector(".pico-toggle"))  {
 
             view.on("off", controller.off);
 
-            lane.on("search:activeChange", controller.activeChange);
+            L.on("search:activeChange", controller.activeChange);
 
-            lane.on("searchTabs:change", controller.tabChange);
+            L.on("searchTabs:change", controller.tabChange);
 
-            Y.augment(controller, Y.EventTarget, false, null, {
+            L.addEventTarget(controller, {
                 prefix: "picoToggle",
                 emitFacade: true
             });
-            controller.addTarget(lane);
+            controller.addTarget(L);
 
         })(view);
 

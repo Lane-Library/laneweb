@@ -1,15 +1,11 @@
-#yui-history-iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    visibility: hidden;
-}
-.tooltips, #search-content-counts, #findIt, #spellCheck, #queryMapping, #showPubMedStrategies {
+.tooltips,
+.popin > div,
+#search-content-counts,
+#showPubMedStrategies {
     display: none;
 }
-#findIt.active, #spellCheck.active, #queryMapping.active {
+
+.popin > .popin-active {
     display: inline;
 }
 #queryMapping span, #spellCheckLink, #findItLink {

@@ -32,7 +32,6 @@ YUI().use("*", function(Y) {
             foo.source({term:"term"}, function(o) {
                 Y.Assert.areSame(o[0].label, "item1");
             });
-            Y.ajax = ajax;
 //        },
 //        
 //        "test autocompleteselect" : function() {

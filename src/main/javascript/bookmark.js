@@ -116,12 +116,12 @@
     };
 
     // Add EventTarget attributes to the Bookmark prototype
-    Y.augment(Bookmark, Y.EventTarget, null, null, {
+    L.addEventTarget(Bookmark, {
         emitFacade : true,
         prefix : 'bookmark'
     });
 
     // make the Bookmark constructor globally accessible
-    Y.lane.Bookmark = Bookmark;
+    L.Bookmark = Bookmark;
 
 })();

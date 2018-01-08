@@ -2,11 +2,9 @@
 
     "use strict";
 
-    var lane = Y.lane,
-        model = lane.Model,
-        lightbox = lane.Lightbox,
+    var model = L.Model,
+        lightbox = L.Lightbox,
         basePath = model.get(model.BASE_PATH),
-        location = lane.Location,
 
         /**
          * An Object that controls interactions when bookmarking occurs without the
@@ -25,8 +23,8 @@
             addBookmark: function(label, url) {
                 var queryString = "&label=" + encodeURIComponent(label);
                 queryString += "&url=" + encodeURIComponent(url);
-                queryString += "&redirect=" + encodeURIComponent(location.get("href"));
-                Y.io(basePath + "/plain/bookmark-login.html", {
+                queryString += "&redirect=" + encodeURIComponent(location.href);
+                L.io(basePath + "/plain/bookmark-login.html", {
                     on: {
                         success: BookmarkLogin._handleSuccess,
                         failure: BookmarkLogin._handleFailure
@@ -44,7 +42,7 @@
              * @private
              */
             _handleFailure: function() {
-                lane.showMessage("You must log in in order to create bookmarks.");
+                L.showMessage("You must log in in order to create bookmarks.");
             },
 
             /**
@@ -52,18 +50,17 @@
              * link in the popup then puts the popup into the lightbox.
              * @method _handleSuccess
              * @private
-             * @param id {number} the Y.io transaction id
+             * @param id {number} the L.io transaction id
              * @param o {object} the ajax response object
-             * @param args {object} the arguments passed to Y.io, in this case the query string
+             * @param args {object} the arguments passed to L.io, in this case the query string
              */
             _handleSuccess: function(id, o, args) {
-                var queryString = args.queryString, yes, no, handler;
+                var queryString = args.queryString, yes, no;
                 lightbox.setContent(o.responseText);
-                yes = Y.one("#yes-bookmark-login");
-                no = Y.one("#no-bookmark-login");
-                yes.set("href", yes.get("href") + queryString);
-                handler = no.on("click", function() {
-                    handler.detach();
+                yes = document.querySelector("#yes-bookmark-login");
+                no = document.querySelector("#no-bookmark-login");
+                yes.href += queryString;
+                no.addEventListener("click", function() {
                     lightbox.hide();
                 });
                 lightbox.show();
@@ -71,5 +68,5 @@
     };
 
     //make BookmarkLogin globally available
-    Y.lane.BookmarkLogin = BookmarkLogin;
+    L.BookmarkLogin = BookmarkLogin;
 })();

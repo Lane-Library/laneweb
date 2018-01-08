@@ -44,24 +44,24 @@
             var self = this, eventHandle1, eventHandle2;
             this.get("menu").on("click", this._handleMenuClick, this);
             this.after("activeItemChange", this._handleActiveItemChange);
-            this.get("srcNode").all("form").on("submit", this._handleSubmit, this);
-            eventHandle1 = Y.lane.Lightbox.on("animEnd", function() {
+            this.get("srcNode")._node.querySelectorAll("form").forEach(function(form) {
+                form.addEventListener("submit", function(event) {
+                    self._handleSubmit.call(self, event);
+                });
+            });
+            eventHandle1 = L.Lightbox.on("animEnd", function() {
                 self.get("items").item(self.get("activeItem")).one("textarea, input[type='text']").focus();
             });
-            eventHandle2 = Y.lane.Lightbox.on("visibleChange", function(event) {
+            eventHandle2 = L.Lightbox.on("visibleChange", function(event) {
                 if (!event.newVal) {
                     eventHandle1.detach();
                     eventHandle2.detach();
                     self.destroy();
                 }
             }, this);
-            Y.one("#feedback .close").on("click", function(event) {
+            document.querySelector("#feedback .close").addEventListener("click", function(event) {
                 event.preventDefault();
-                Y.lane.Lightbox.hide();
-            }, this);
-            //create a TelInput object for each input with type="tel" (see telinput.js)
-            this.get("srcNode").all("input[type='tel']").each(function(input) {
-                (new Y.lane.TelInput(input));
+                L.Lightbox.hide();
             });
         },
         syncUI : function() {
@@ -78,10 +78,10 @@
         },
         sendFeedback : function(form) {
             var contentBox = this.get("contentBox"),
-                data = Y.JSON.stringify(this._getFeedback(form));
+                data = JSON.stringify(this._getFeedback(form));
             contentBox.one(".feedback-contents").set("innerHTML", this.get("sending"));
             contentBox.scrollIntoView();
-            Y.io(form.getAttribute("action"), {
+            L.io(form.getAttribute("action"), {
                 method : "post",
                 data : data,
                 headers : {
@@ -92,7 +92,7 @@
                         this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
-                        Y.lane.showMessage("Sorry, sending feedback failed.");
+                        L.showMessage("Sorry, sending feedback failed.");
                     }
                 },
                 context : this
@@ -137,7 +137,7 @@
         },
         _handleSubmit : function(event) {
             event.preventDefault();
-            this.sendFeedback(event.currentTarget);
+            this.sendFeedback(new Y.Node(event.currentTarget));
         },
         _resetThanks: function() {
             var srcNode = this.get("srcNode"),
@@ -146,12 +146,12 @@
         }
     });
 
-    Y.lane.Feedback = Feedback;
+    L.Feedback = Feedback;
 
-    Y.lane.Lightbox.on("contentChanged", function() {
-        if (Y.one("#feedback")) {
-            var feedback = new Y.lane.Feedback({srcNode : "#feedback"}),
-                hash = Y.lane.Lightbox.get("hash"),
+    L.Lightbox.on("contentChanged", function() {
+        if (document.querySelector("#feedback")) {
+            var feedback = new L.Feedback({srcNode : "#feedback"}),
+                hash = L.Lightbox.get("hash"),
                 items, index;
             feedback.render();
             //if lightbox has a hash, choose that as the active item

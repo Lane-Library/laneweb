@@ -6,9 +6,9 @@ var purchaseSuggestionsTestCase = new Y.Test.Case({
     testThatItRenders: function() {
         var feedback = Y.one("#feedback");
         feedback.remove();
-        Y.lane.Lightbox.set("url", "url");
-        Y.lane.Lightbox.setContent(feedback.get("outerHTML"));
-        Y.lane.Lightbox.show();
+        L.Lightbox.set("url", "url");
+        L.Lightbox.setContent(feedback.get("outerHTML"));
+        L.Lightbox.show();
     },
 
     testClick: function() {

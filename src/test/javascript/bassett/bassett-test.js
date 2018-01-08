@@ -52,8 +52,8 @@ var bassettTestCase = new Y.Test.Case({
         var form = Y.one("form"), prevented;
         Y.one('.bassett-error').setStyle('display', 'none');
         form.one("input[name=page]").set("value", "foo");
-        form.on("submit", function(event) {
-            prevented = event.prevented;
+        form._node.addEventListener("submit", function(event) {
+            prevented = event.defaultPrevented;
         });
         Y.one("form").simulate("submit");
         Y.Assert.isFalse(!prevented);
@@ -66,8 +66,8 @@ var bassettTestCase = new Y.Test.Case({
         var form = Y.one("form"), prevented;
         Y.one('.bassett-error').setStyle('display', 'none');
         form.one("input[name=page]").set("value", "0");
-        form.on("submit", function(event) {
-            prevented = event.prevented;
+        form._node.addEventListener("submit", function(event) {
+            prevented = event.defaultPrevented;
         });
         Y.one("form").simulate("submit");
         Y.Assert.isFalse(!prevented);
@@ -80,8 +80,8 @@ var bassettTestCase = new Y.Test.Case({
         var form = Y.one("form"), prevented;
         Y.one('.bassett-error').setStyle('display', 'none');
         form.one("input[name=page]").set("value", "10");
-        form.on("submit", function(event) {
-            prevented = event.prevented;
+        form._node.addEventListener("submit", function(event) {
+            prevented = event.defaultPrevented;
         });
         Y.one("form").simulate("submit");
         Y.Assert.isFalse(!prevented);

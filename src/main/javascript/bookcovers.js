@@ -2,18 +2,16 @@
 
     "use strict";
 
-    var lane = Y.lane,
-
-        // view handles interactions with the DOM, created a with a NodeList
-        // img nodes that have data-bibid attributes.
-        view = function(bookImageNodes) {
+    // view handles interactions with the DOM, created a with a NodeList
+    // img nodes that have data-bibid attributes.
+    var view = function(bookImageNodes) {
 
             // an object that maps bibids to img nodes
             var imageMap = {};
 
             // initialize the imageMap
-            [].forEach.call(bookImageNodes, function(imageNode) {
-                var bibid = lane.getData(imageNode, "bibid");
+            bookImageNodes.forEach(function(imageNode) {
+                var bibid = L.getData(imageNode, "bibid");
                 imageMap[bibid] = imageMap[bibid] || [];
                 imageMap[bibid].push(imageNode);
             });
@@ -48,7 +46,7 @@
                                 // case 132771 use protocol relative urls for images
                                 // from the bookcover database (substring(5))
                                 imageMap[bibid][i].src = updates[bibid].substring(5);
-                                lane.activate(imageMap[bibid][i], "bookcover");
+                                L.activate(imageMap[bibid][i], "bookcover");
                             }
                         }
                         delete imageMap[bibid];
@@ -92,7 +90,7 @@
                 };
 
             // make the service an EventTarget
-            Y.augment(service, Y.EventTarget);
+            L.addEventTarget(service);
             return service;
         }(),
 
@@ -116,7 +114,7 @@
 
     bookcoverService.on("covers", controller.covers);
 
-    lane.on(["viewport:init","viewport:scrolled"], function(event){
+    L.on(["viewport:init","viewport:scrolled"], function(event){
         controller.update(event.viewport);
     });
 

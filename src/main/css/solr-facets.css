@@ -39,6 +39,11 @@
 
 .solrFacets {
     opacity: 0;
+    transition: opacity .5s;
+}
+
+.solrFacets-active {
+    opacity: 1;
 }
 
 .facetBrowse {

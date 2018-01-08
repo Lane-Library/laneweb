@@ -3,8 +3,7 @@
     "use strict";
 
     var BookmarkEditor,
-        Lane = Y.lane,
-        Bookmark = Lane.Bookmark;
+        Bookmark = L.Bookmark;
 
     /**
      * An editor widget for an individual bookmark.
@@ -114,7 +113,7 @@
             } else {
                 bookmark = new Bookmark(newlabel, newurl);
                 this.set("bookmark", bookmark);
-                Lane.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
+                L.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
             }
             this.set("editing", false);
         },
@@ -211,6 +210,6 @@
         }
     });
 
-    Lane.BookmarkEditor = BookmarkEditor;
+    L.BookmarkEditor = BookmarkEditor;
 
 })();

@@ -12,12 +12,6 @@ if (today.getDate() == 1 && today.getMonth() == 0) {
 var seminarsTestCase = new Y.Test.Case({
     name: "Seminars TestCase",
 
-    _should: {
-        ignore: {
-            testSeminars1: true,
-            testSeminars2: true
-        }
-    },
     testSeminars1: function() {
         if (skipTest) {
             return true;

@@ -4,25 +4,29 @@ var laneTestCase = new Y.Test.Case({
 
     name: "Util TestCase",
 
-    lane: Y.lane,
+    lane: L,
 
-    "test Y.lane exists" : function() {
-        Y.Assert.isObject(Y.lane);
+    "test L exists" : function() {
+        Y.Assert.isObject(L);
     },
 
     "test activate": function() {
-        Y.lane.activate(document.querySelector(".test", "test"));
+        L.activate(document.querySelector(".test", "test"));
         Y.Assert.isTrue(Y.one(".test").hasClass("test-active"));
     },
 
     "test deactivate": function() {
         Y.one(".test").addClass("test-active");
-        Y.lane.deactivate(document.querySelector(".test"), "test");
+        L.deactivate(document.querySelector(".test"), "test");
         Y.Assert.isFalse(Y.one(".test").hasClass("test-active"));
     },
 
     "test getData": function() {
-        Y.Assert.areEqual("test", Y.lane.getData(document.querySelector(".test"), "test"));
+        Y.Assert.areEqual("test", L.getData(document.querySelector(".test"), "test"));
+    },
+
+    "test NodeList.forEach": function() {
+        Y.Assert.areEqual(typeof document.querySelectorAll("*").forEach, "function");
     }
 });
 

@@ -2,8 +2,8 @@
 
 var laneTestCase = new Y.Test.Case({
     name: "Lane TestCase",
-    "test Y.lane exists" : function() {
-        Y.Assert.isObject(Y.lane);
+    "test L exists" : function() {
+        Y.Assert.isObject(L);
     }
 });
 

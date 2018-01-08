@@ -1,10 +1,17 @@
-// using YUI().use here so this can be used with the history template
-YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen", function(Y) {
+YUI({fetchCSS:false}).use(
+        "anim-base",
+        "anim-easing",
+        "anim-scroll",
+        "node-base",
+        "node-screen",
+        function(Y) {
 
     "use strict";
 
     // create the backToTop node
-    var backToTop = Y.Node.create("<a class=\"back-to-top\" title=\"scroll back to top\"><i class=\"fa fa-chevron-up\"></i></a>"),
+    var template = document.createElement("div"),
+        innerHTML = "<a class=\"back-to-top\" title=\"scroll back to top\"><i class=\"fa fa-chevron-up\"></i></a>",
+        backToTop,
 
         /**
          * @method fadeIn display the backToTop node
@@ -16,7 +23,7 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
                 to: {opacity: 1 },
                 duration: 0.45
             });
-            backToTop.addClass("active");
+            backToTop.classList.add("active");
             a.run();
         },
 
@@ -31,7 +38,7 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
                 duration: 0.45
             });
             a.on("end", function() {
-                backToTop.removeClass("active");
+                backToTop.classList.remove("active");
             });
             a.run();
         },
@@ -43,7 +50,7 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
         scrollToTop = function() {
             var a = new Y.Anim({
                 node: "win",
-                to: { scroll: [0, 0] },
+                to: { scroll: [0, -100] },
                 duration: 0.3,
                 easing: Y.Easing.easeBoth
             });
@@ -51,18 +58,21 @@ YUI().use("anim-base", "anim-easing", "anim-scroll", "node-base", "node-screen",
         };
 
     // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
-    Y.on("scroll", function() {
-        if (window.pageYOffset > 270 && !backToTop.hasClass("active")) {
+    document.addEventListener("scroll", function() {
+        if (window.pageYOffset > 270 && !backToTop.classList.contains("active")) {
             fadeIn();
-        } else if (window.pageYOffset <= 270 && backToTop.hasClass("active")){
+        } else if (window.pageYOffset <= 270 && backToTop.classList.contains("active")){
             fadeOut();
         }
     });
 
+    template.innerHTML = innerHTML;
+    backToTop = template.firstChild;
+
     // call the scrollToTop function when backToTop clicked
-    backToTop.on("click", scrollToTop);
+    backToTop.addEventListener("click", scrollToTop);
 
     // append the backToTop node
-    Y.one("body").append(backToTop);
+    document.body.appendChild(backToTop);
 
 });

@@ -25,12 +25,12 @@
 
         }();
 
-    Y.augment(viewport, Y.EventTarget, null, null, {
+    L.addEventTarget(viewport, {
         emitFacade : true,
         prefix : "viewport"
     });
 
-    viewport.addTarget(Y.lane);
+    viewport.addTarget(L);
 
     viewport.fire("init", {viewport:viewport});
 })();

@@ -1,6 +1,6 @@
 "use strict";
 
-Y.io = function(url, config) {
+L.io = function(url, config) {
     persistentLoginTestCase.url = url;
     config.on.success.apply(this,[0, {
         responseText : '<input type="checkbox" id="is-persistent-login" /> <div id="shibboleth-links"><a href="shibbolethPath" id="Stanford">Stanford University</a><a id="SHC">shc</a><input type="checkbox" id="is-persistent-login"/></div>'
@@ -27,8 +27,8 @@ var persistentLoginTestCase = new Y.Test.Case({
     cookieArgs : null,
 
     tearDown : function() {
-        Y.lane.Lightbox.hide();
-        Y.lane.Lightbox.setContent("");
+        L.Lightbox.hide();
+        L.Lightbox.setContent("");
         this.url = null;
         this.cookieArgs = null;
     },
@@ -67,7 +67,7 @@ var persistentLoginTestCase = new Y.Test.Case({
         stanford.simulate("click");
         handle2.detach();
         var expected = stanford.get("pathname") + stanford.get("search");
-        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=https%253A%252F%252Flogin.laneproxy.stanford.edu%252Flogin%253Furl%253Dfoo", expected);
+        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=https%3A%2F%2Flogin.laneproxy.stanford.edu%2Flogin%3Furl%3Dfoo", expected);
     },
 
     "test stanford click 2" : function() {
@@ -84,7 +84,7 @@ var persistentLoginTestCase = new Y.Test.Case({
         stanford.simulate("click");
         handle2.detach();
         var expected = stanford.get("pathname") + stanford.get("search");
-        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=http%253A%252F%252Flaneproxy.stanford.edu%252Flogin%253Furl%253Dfoo", expected);
+        Y.Assert.areSame("/persistentLogin.html?pl=renew&url=http%3A%2F%2Flaneproxy.stanford.edu%2Flogin%3Furl%3Dfoo", expected);
     },
 
     "test unchecked is persistent login" : function() {
@@ -107,12 +107,10 @@ var persistentLoginTestCase = new Y.Test.Case({
     "test persistent-login click" : function() {
         var node = Y.one("#persistent-login");
         var href = null;
-        var handle = Y.lane.Location.on("hrefChange", function(event) {
-            event.preventDefault();
-            href = event.newVal;
-        });
+        L.setLocationHref = function(h) {
+            href = h;
+        };
         node.simulate("click");
-        handle.detach();
         Y.Assert.areSame("/persistentLogin.html?pl=renew&url=/myaccounts.html", href);
     }
 

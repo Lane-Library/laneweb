@@ -3,10 +3,9 @@
     "use strict";
 
     var BookmarksWidget,
-        Lane = Y.lane,
-        Bookmark = Lane.Bookmark,
-        Bookmarks = Lane.Bookmarks,
-        Model = Lane.Model,
+        Bookmark = L.Bookmark,
+        Bookmarks = L.Bookmarks,
+        Model = L.Model,
         BASE_PATH = Model.get(Model.BASE_PATH) || "",
         PROXY_LINKS = Model.get(Model.PROXY_LINKS);
 
@@ -154,7 +153,7 @@
                 var i, anchor, label, url, query, bookmarks = [], anchors = srcNode.all("a");
                 for (i = 0; i < anchors.size(); i++) {
                     anchor = anchors.item(i);
-                    anchor.plug(Lane.LinkPlugin);
+                    anchor.plug(L.LinkPlugin);
                     label = anchor.link.get("title");
                     if (anchor.link.get("local")) {
                         url = anchor.link.get("path");
@@ -172,8 +171,8 @@
 
     //create a new widget and keep a global reference to it
     //may be able to use Widget.getByNode("#bookmarks") rather than the global reference . . . .
-    if (Y.one("#bookmarks")) {
-        Lane.BookmarksWidget = new BookmarksWidget({srcNode:Y.one("#bookmarks"), render:true, displayLimit:10});
+    if (document.querySelector("#bookmarks")) {
+        L.BookmarksWidget = new BookmarksWidget({srcNode:"#bookmarks", render:true, displayLimit:10});
     }
 
 })();

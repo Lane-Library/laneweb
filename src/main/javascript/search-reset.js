@@ -6,23 +6,21 @@
         CLICK = "click",
         EMPTY = "",
 
-        lane = Y.lane,
-
         view = function(reset) {
 
             var v = {
                     hide: function() {
-                        lane.deactivate(reset, SEARCH_RESET);
+                        L.deactivate(reset, SEARCH_RESET);
                     },
                     show: function() {
-                        lane.activate(reset, SEARCH_RESET);
+                        L.activate(reset, SEARCH_RESET);
                     },
                     click: function() {
                         v.fire(CLICK);
                     }
                 };
 
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             // case 131334 javascript error on discovery login page
             if (reset) {
@@ -45,7 +43,7 @@
                 },
                 reset: function() {
                     controller.fire("reset");
-                    lane.fire("tracker:trackableEvent", {
+                    L.fire("tracker:trackableEvent", {
                         category: "lane:searchFormReset",
                         action: location.pathname
                     });
@@ -53,14 +51,14 @@
             };
         }();
 
-    Y.augment(controller, Y.EventTarget, false, null, {
+    L.addEventTarget(controller, {
         prefix: "searchReset",
         emitFacade: true
     });
 
-    controller.addTarget(lane);
+    controller.addTarget(L);
 
-    lane.on("search:queryChange", controller.change);
+    L.on("search:queryChange", controller.change);
 
     view.on(CLICK, controller.reset);
 

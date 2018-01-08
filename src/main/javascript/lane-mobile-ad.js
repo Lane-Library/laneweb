@@ -3,13 +3,15 @@
 
     "use strict";
 
-    var advert, link,
-        model = Y.lane.Model,
+    var link,
+        model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
-        login = Y.one("#login");
+        login = document.querySelector("#login"),
+        template;
     if(login && navigator.userAgent.match(/(iPhone|iPod|Android)/)){
         link = basePath + '/index.html?site_preference=mobile';
-        advert = Y.Node.create('<li><a href="'+link+'">Mobile Version</a></li>');
-        login.prepend(advert);
+        template = document.createElement('div');
+        template.innerHTML = '<li><a href="'+link+'">Mobile Version</a></li>';
+        login.insertBefore(template.firstChild, login.firstChild);
     }
 })();

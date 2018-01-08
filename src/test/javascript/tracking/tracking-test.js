@@ -5,9 +5,7 @@ Y.on("click", function(event) {
     event._event.preventDefault();
 });
 
-Y.lane.Location.on("hrefChange", function(event) {
-    event.preventDefault();
-});
+L.setLocationHref = function() {};
 
 var trackingTestCase = new Y.Test.Case({
 
@@ -47,10 +45,10 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testBookmarksClick: function() {
-        Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
+        L.Model.set(L.Model.AUTH, "auth");
         var link = Y.one("#bookmarks a");
         link.simulate("click");
-        Y.lane.Model.set(Y.lane.Model.AUTH, null);
+        L.Model.set(L.Model.AUTH, null);
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("auth", this.event.action);
         Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
@@ -60,10 +58,10 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testBookmarksEditorClick: function() {
-        Y.lane.Model.set(Y.lane.Model.AUTH, "auth");
+        L.Model.set(L.Model.AUTH, "auth");
         var link = Y.one(".yui3-bookmark-editor-content a");
         link.simulate("click");
-        Y.lane.Model.set(Y.lane.Model.AUTH, null);
+        L.Model.set(L.Model.AUTH, null);
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:bookmarkClick", this.event.category);
         Y.Assert.areEqual("auth", this.event.action);
@@ -97,14 +95,14 @@ var trackingTestCase = new Y.Test.Case({
         link.simulate("click");
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:browseResultClick", this.event.category);
-        Y.Assert.areEqual(Y.lane.Location.get("pathname"), this.event.action);
+        Y.Assert.areEqual(location.pathname, this.event.action);
         Y.Assert.areEqual(101, this.event.value);
         Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
         Y.Assert.areEqual(link.get("text"), this.pageView.title);
     },
 
     testSearchResultClick: function() {
-        Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
+        L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
         var link = Y.one(".lwSearchResults a");
         link.simulate("click");
         Y.Assert.areEqual("Primary Type -> " + link.get("text"), this.event.label);
@@ -113,7 +111,7 @@ var trackingTestCase = new Y.Test.Case({
         Y.Assert.areEqual(101, this.event.value);
         Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
         Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, null);
+        L.Model.set(L.Model.URL_ENCODED_QUERY, null);
     },
 
     testClickOnImage: function() {
@@ -135,8 +133,8 @@ var trackingTestCase = new Y.Test.Case({
     testClickPopup: function() {
         var link = Y.one("#popup");
         link.simulate("click");
-        Y.Assert.areEqual(Y.lane.Location.get("host"), this.pageView.host);
-        Y.Assert.areEqual(Y.lane.Location.get("pathname") , this.pageView.path);
+        Y.Assert.areEqual(location.host, this.pageView.host);
+        Y.Assert.areEqual(location.pathname , this.pageView.path);
         Y.Assert.areEqual("YUI Pop-up [local]: " + link.get("text"), this.pageView.title);
         Y.Assert.isFalse(this.pageView.external);
         Y.Assert.isNull(this.event);
@@ -210,8 +208,8 @@ var trackingTestCase = new Y.Test.Case({
     }
 });
 
-Y.lane.on("tracker:trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
-Y.lane.on("tracker:trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
+L.on("tracker:trackableEvent", trackingTestCase.eventCallback, trackingTestCase);
+L.on("tracker:trackablePageview", trackingTestCase.pageViewCallback, trackingTestCase);
 
 Y.one('body').addClass('yui3-skin-sam');
 new Y.Console({

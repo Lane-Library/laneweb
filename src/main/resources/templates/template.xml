@@ -8,13 +8,13 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
-        <div id="main">
-            <div id="laneHeader">
+        <div class="main">
+            <div class="lane-header">
                 <div class="centered">
                     <h1>
                         <a href="/index.html"><span>Lane</span> Medical Library</a>
                     </h1>
-                    <ul id="libraryContact">
+                    <ul class="library-contact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/hours.html">Hours</a>: <?laneweb todays-hours?></li>
                         <li><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</li>
                         <li class="live-chat"><i class="fa fa-comments-o fa-lg fa-fw"></i><a href="/contacts/live-chat.html" rel="popup console 575 550"><span>Live Chat</span></a></li>
@@ -37,10 +37,10 @@
                             <a id="logout" href="/logout">Logout</a>
                         </li>
                         <li>
-                            <a href="?proxy-links=false">Guest Access</a>
+                            Stanford <a href="?proxy-links=false"><i class="fa fa-toggle-on" style="transform:scale(-1, 1)"></i> Guest</a>
                         </li>
                         <li>
-                            <a href="?proxy-links=true">Stanford Access</a>
+                            <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"></i></a> Guest
                         </li>
                         <li>
                             <a href="/translated/chinese.html">查詢</a>
@@ -131,7 +131,7 @@
             <div class="lane-nav">
                 <ul class="centered">
                     <li class="dropdown nav-menu" data-path="/biomed-resources/">
-                        <span>All Biomedical Resources</span>
+                        <span>Biomedical Resources</span>
                         <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                             <xi:fallback></xi:fallback>
                         </xi:include></div>
@@ -245,7 +245,7 @@
                         <ul>
                             <li><a href="https://laneblog.stanford.edu/use-browzine/">Use BrowZine at Stanford</a></li>
                             <li><a href="https://laneblog.stanford.edu/use-endnote-x7-accessing-fulltext/">Use EndNote X8: Accessing Full Text</a></li>
-                        	<li><a href="https://laneblog.stanford.edu/using-uptodate/">Use UpToDate</a></li>         
+                            <li><a href="https://laneblog.stanford.edu/using-uptodate/">Use UpToDate</a></li>         
                             <li><a href="/help/making-informed-publish-decisions.html">Making Informed Publishing Decisions</a></li>
                         </ul>
                     </div>

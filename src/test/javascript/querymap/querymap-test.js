@@ -1,12 +1,12 @@
 "use strict";
 
-Y.lane.Model.set(Y.lane.Model.URL_ENCODED_QUERY, "foo%20bar");
+L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
 
-Y.io = function(url, config) {
-    Y.io = function(url,config) {
-        Y.io = function(url, config) {
+L.io = function(url, config) {
+    L.io = function(url,config) {
+        L.io = function(url, config) {
             config.on.success.apply(this, [2, {
-                                        responseText : Y.JSON.stringify({
+                                        responseText : JSON.stringify({
                                             "id" : "1849619284",
                                             "status" : "successful",
                                             "query" : "histrionic",
@@ -47,7 +47,7 @@ Y.io = function(url, config) {
 
         };
         config.on.success.apply(this, [1, {"responseText":
-            Y.JSON.stringify({
+            JSON.stringify({
                                         "id" : "267196285",
                                         "status" : "running",
                                         "query" : "histrionic",
@@ -68,7 +68,7 @@ Y.io = function(url, config) {
         ]);
     };
     config.on.success.apply(this, [0, {"responseText":
-        Y.JSON.stringify({
+        JSON.stringify({
             "descriptor" : {
                 "descriptorName" : "Mental Disorders",
                 "descriptorUI" : "D001523",

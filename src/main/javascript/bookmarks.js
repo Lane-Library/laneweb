@@ -3,8 +3,7 @@
     "use strict";
 
     var Bookmarks,
-        Lane = Y.lane,
-        Model = Lane.Model,
+        Model = L.Model,
         BASE_PATH = Model.get(Model.BASE_PATH) || "";
 
     /**
@@ -19,7 +18,7 @@
     Bookmarks = function(bookmarks) {
         var i;
         this._bookmarks = [];
-        if (bookmarks && !Y.Lang.isArray(bookmarks)) {
+        if (bookmarks && !(bookmarks instanceof Array)) {
             throw("bad config");
         }
         if (bookmarks) {
@@ -90,10 +89,11 @@
              * @param bookmark {Bookmark}
              */
             addBookmark : function(bookmark) {
-                if (!Y.Lang.isObject(bookmark)) {
+                if (bookmark instanceof L.Bookmark) {
+                    this.fire("add", {bookmark : bookmark});
+                } else {
                     throw ("bad bookmark");
                 }
-                this.fire("add", {bookmark : bookmark});
             },
 
             /**
@@ -129,7 +129,7 @@
              * @param bookmark {Bookmark}
              */
             updateBookmark : function(bookmark) {
-                var position = Y.Array.indexOf(this._bookmarks, bookmark);
+                var position = this._bookmarks.indexOf(bookmark);
                 this.fire("update", {bookmark : bookmark, position : position});
             },
 
@@ -156,7 +156,7 @@
              * @return {number} the index of the given bookmark
              */
             indexOf : function(bookmark) {
-                return Y.Array.indexOf(this._bookmarks, bookmark);
+                return this._bookmarks.indexOf(bookmark);
             },
 
             /**
@@ -183,8 +183,8 @@
              * @param event {CustomEvent}
              */
             _defAddFn : function(event) {
-                var data = Y.JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                Y.io(BASE_PATH + "/bookmarks", {
+                var data = JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
+                L.io(BASE_PATH + "/bookmarks", {
                     method : "post",
                     data : data,
                     headers : {
@@ -213,8 +213,8 @@
              * @param event {CustomEvent}
              */
             _defMoveFn : function(event) {
-                var data = Y.JSON.stringify({to : event.to, from : event.from});
-                Y.io(BASE_PATH + "/bookmarks/move", {
+                var data = JSON.stringify({to : event.to, from : event.from});
+                L.io(BASE_PATH + "/bookmarks/move", {
                     method : "post",
                     data : data,
                     headers : {
@@ -240,8 +240,8 @@
              * @param event {CustomEvent}
              */
             _defRemoveFn : function(event) {
-                var indexes = Y.JSON.stringify(event.positions);
-                Y.io(BASE_PATH + "/bookmarks?indexes=" + indexes, {
+                var indexes = JSON.stringify(event.positions);
+                L.io(BASE_PATH + "/bookmarks?indexes=" + indexes, {
                     method : "delete",
                     on : {
                         success : function() {
@@ -266,8 +266,8 @@
              * @param event {CustomEvent}
              */
             _defUpdateFn : function(event) {
-                var data = Y.JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
-                Y.io(BASE_PATH + "/bookmarks", {
+                var data = JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
+                L.io(BASE_PATH + "/bookmarks", {
                     method : "put",
                     data : data,
                     headers : {
@@ -309,7 +309,7 @@
             _handleAddSync : function(event) {
                 event.bookmark.after("valueChange", this._handleValueChange, this);
                 this._bookmarks.unshift(event.bookmark);
-                Lane.fire("tracker:trackableEvent", {
+                L.fire("tracker:trackableEvent", {
                     category: "lane:bookmarkAdd",
                     action: Model.get(Model.AUTH),
                     label: event.bookmark.getLabel()
@@ -344,17 +344,17 @@
              * @param message {String}
              */
             _handleSyncFailure : function(message) {
-                Lane.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
+                L.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
             }
     };
 
 
     //Add EventTarget attributes to the Bookmarks prototype
-    Y.augment(Bookmarks, Y.EventTarget, null, null, {
+    L.addEventTarget(Bookmarks, {
         emitFacade : true,
         prefix     : 'bookmarks'
     });
 
     //make the Bookmarks constructor globally accessible
-    Lane.Bookmarks = Bookmarks;
+    L.Bookmarks = Bookmarks;
 })();

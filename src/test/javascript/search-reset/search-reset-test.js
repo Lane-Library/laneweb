@@ -1,6 +1,6 @@
 "use strict";
 
-Y.lane.tracker = {fire: function(){}};
+L.tracker = {fire: function(){}};
 
 Y.Test.Runner.add(new Y.Test.Case({
 
@@ -16,27 +16,27 @@ Y.Test.Runner.add(new Y.Test.Case({
         this.reset.className = "search-reset search-reset-active";
         var event = document.createEvent("UIEvent");
         event.initEvent("click", true, false);
-        Y.lane.once("searchReset:reset", function() {
-            Y.lane.fire("search:queryChange", {newVal:"", oldVal:"query"});
+        L.once("searchReset:reset", function() {
+            L.fire("search:queryChange", {newVal:"", oldVal:"query"});
         });
         this.reset.dispatchEvent(event);
         Y.Assert.areEqual("search-reset", this.reset.className);
     },
 
     "test Query Change Activates": function() {
-        Y.lane.fire("search:queryChange", {newVal:"q", oldVal:""});
+        L.fire("search:queryChange", {newVal:"q", oldVal:""});
         Y.Assert.areEqual("search-reset search-reset-active", this.reset.className);
     },
 
     "test Query Additional Change remains active": function() {
-        Y.lane.fire("search:queryChange", {newVal:"q", oldVal:""});
-        Y.lane.fire("search:queryChange", {newVal:"qu", oldVal:"q"});
+        L.fire("search:queryChange", {newVal:"q", oldVal:""});
+        L.fire("search:queryChange", {newVal:"qu", oldVal:"q"});
         Y.Assert.areEqual("search-reset search-reset-active", this.reset.className);
     },
 
     "test tracking": function() {
         var trackEvent;
-        Y.lane.once("tracker:trackableEvent", function(e) {
+        L.once("tracker:trackableEvent", function(e) {
             trackEvent = e;
         });
         this.reset.className = "search-reset search-reset-active";

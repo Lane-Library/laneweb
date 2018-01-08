@@ -6,12 +6,21 @@
 
     var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
         bindUI : function () {
-            var doc = Y.one("doc");
+            var self = this;
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
-            // close on escape
-            doc.on("key", this.hide, "esc", this);
-            doc.on("click", this._lightboxLinkClick, this);
+            document.addEventListener("click", function(event) {
+                var node = event.target.closest("a[rel^='lightbox']");
+                if (node) {
+                    event.preventDefault();
+                    self._lightboxLinkClick.call(self, node);
+                }
+            });
+            document.addEventListener("keydown", function(event) {
+                if (event.keyCode === 27 || event.key === "Escape") {
+                    self.hide();
+                }
+            });
             this.get("background").on("click", this.hide, this);
             this.set("drag", new Y.DD.Drag({node: ".yui3-lightbox"}));
         },
@@ -58,16 +67,15 @@
             anim1.run();
             anim2.run();
         },
-        _lightboxLinkClick: function(event) {
+        _lightboxLinkClick: function(node) {
             var lightbox, model, basePath,  hash, url, regex, disableBackground,
-                anchor = event.target.ancestor("a") || event.target,
                 disableAnimation,
-                rel = anchor.get("rel");
+                rel = node.rel;
             if (rel && rel.indexOf("lightbox") === 0) {
                 lightbox = this;
-                model = Y.lane.Model;
+                model = L.Model;
                 basePath = model.get(model.BASE_PATH) || "";
-                hash = anchor.get("hash");
+                hash = node.hash;
                 event.preventDefault();
                 if (lightbox.get("visible")) {
                     lightbox.hide();
@@ -76,12 +84,12 @@
                 // of various base paths (eg /stage)
                 regex = new RegExp("(" + basePath + ")(.+)".replace(/\//g, "\\\/"));
                 // case 112216
-                url = anchor.get("pathname") + anchor.get('search');
+                url = node.pathname + node.search;
                 // first replace takes care of missing leading slash in IE < 10
                 url = url.replace(/(^\/?)/,"/").replace(regex, "$1/plain$2");
                 disableBackground = rel.indexOf("disableBackground") > -1;
                 disableAnimation = rel.indexOf("disableAnimation") === -1;
-                Y.io(url, {
+                L.io(url, {
                     on : {
                         success : function(id, o) {
                             lightbox.set("animate", disableAnimation);
@@ -124,21 +132,22 @@
         }
     };
 
-    Y.lane.Lightbox = new Lightbox({
+    L.Lightbox = new Lightbox({
         visible : false,
         render : true
     });
 
     // anchor with class=autoLightbox will automatically render on page load
     var initializeAutoLightbox = function() {
-        var href, hash, autoLightboxAnchor = Y.one("a.autoLightbox");
+        var href, hash,
+            autoLightboxAnchor = document.querySelector("a.autoLightbox");
         if (autoLightboxAnchor) {
-            href = autoLightboxAnchor.get("href");
-            hash = autoLightboxAnchor.get("hash");
-            Y.io(href, {
+            href = autoLightboxAnchor.href;
+            hash = autoLightboxAnchor.hash;
+            L.io(href, {
                 on : {
                     success : function(id, o) {
-                        var lightbox = Y.lane.Lightbox;
+                        var lightbox = L.Lightbox;
                         lightbox.set("url", href);
                         lightbox.set("hash", hash);
                         lightbox.setContent(o.responseText);

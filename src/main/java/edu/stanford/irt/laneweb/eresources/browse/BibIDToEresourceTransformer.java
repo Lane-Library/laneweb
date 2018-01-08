@@ -3,6 +3,9 @@ package edu.stanford.irt.laneweb.eresources.browse;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.solr.UncategorizedSolrException;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -20,6 +23,10 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BibIDToEresourceTransformer extends AbstractXMLPipe
         implements Transformer, CacheablePipelineComponent, ModelAware {
+
+    private static final Logger log = LoggerFactory.getLogger(BibIDToEresourceTransformer.class);
+
+    private boolean connectionFailed;
 
     private String key;
 
@@ -72,10 +79,16 @@ public class BibIDToEresourceTransformer extends AbstractXMLPipe
             throws SAXException {
         super.startElement(uri, loc, raw, atts);
         String bibID = atts.getValue("data-bibid");
-        if (bibID != null) {
-            Eresource eresource = this.solrService.getByBibID(bibID);
-            if (eresource != null) {
-                this.saxStrategy.toSAX(eresource, this.xmlConsumer);
+        if (bibID != null && !this.connectionFailed) {
+            try {
+                Eresource eresource = this.solrService.getByBibID(bibID);
+                if (eresource != null) {
+                    this.saxStrategy.toSAX(eresource, this.xmlConsumer);
+                }
+            } catch (UncategorizedSolrException e) {
+                log.error("failed to retrieve eresource for {}, ignoring additional attempts: {}", bibID,
+                        e.getMessage());
+                this.connectionFailed = true;
             }
         }
     }

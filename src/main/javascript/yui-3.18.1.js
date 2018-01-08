@@ -518,14 +518,6 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("datatype-number-format",function(e,t){var n=e.Lang;e.mix(e.namespace("Number"),{format:function(e,t){if(n.isNumber(e)){t=t||{};var r=e<0,i=e+"",s=t.decimalPlaces,o=t.decimalSeparator||".",u=t.thousandsSeparator,a,f,l,c;n.isNumber(s)&&s>=0&&s<=20&&(i=e.toFixed(s)),o!=="."&&(i=i.replace(".",o));if(u){a=i.lastIndexOf(o),a=a>-1?a:i.length,f=i.substring(a);for(l=0,c=a;c>0;c--)l%3===0&&c!==a&&(!r||c>1)&&(f=u+f),f=i.charAt(c-1)+f,l++;i=f}return i=t.prefix?t.prefix+i:i,i=t.suffix?i+t.suffix:i,i}return n.isValue(e)&&e.toString?e.toString():""}}),e.namespace("DataType"),e.DataType.Number=e.Number},"3.18.1");
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add("yui-throttle",function(e,t){
 /*! Based on work by Simon Willison: http://gist.github.com/292562 */
 ;e.throttle=function(t,n){n=n?n:e.config.throttleTime||150;if(n===-1)return function(){t.apply(this,arguments)};var r=e.Lang.now();return function(){var i=e.Lang.now();i-r>n&&(r=i,t.apply(this,arguments))}}},"3.18.1",{requires:["yui-base"]});
@@ -593,22 +585,6 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add("history-base",function(e,t){function p(){this._init.apply(this,arguments)}function d(e){return n.type(e)==="object"}var n=e.Lang,r=e.Object,i=YUI.namespace("Env.History"),s=e.Array,o=e.config.doc,u=o.documentMode,a=e.config.win,f={merge:!0},l="change",c="add",h="replace";e.augment(p,e.EventTarget,null,null,{emitFacade:!0,prefix:"history",preventable:!1,queueable:!0}),i._state||(i._state={}),p.NAME="historyBase",p.SRC_ADD=c,p.SRC_REPLACE=h,p.html5=!!(a.history&&a.history.pushState&&a.history.replaceState&&("onpopstate"in a||e.UA.gecko>=2)&&(!e.UA.android||e.UA.android>=2.4)),p.nativeHashChange=("onhashchange"in a||"onhashchange"in o)&&(!u||u>7),e.mix(p.prototype,{_init:function(e){var t;e=this._config=e||{},this.force=!!e.force,t=this._initialState=this._initialState||e.initialState||null,this.publish(l,{broadcast:2,defaultFn:this._defChangeFn}),t&&this.replace(t)},add:function(){var e=s(arguments,0,!0);return e.unshift(c),this._change.apply(this,e)},addValue:function(e,t,n){var r={};return r[e]=t,this._change(c,r,n)},get:function(t){var n=i._state,s=d(n);return t?s&&r.owns(n,t)?n[t]:undefined:s?e.mix({},n,!0):n},replace:function(){var e=s(arguments,0,!0);return e.unshift(h),this._change.apply(this,e)},replaceValue:function(e,t,n){var r={};return r[e]=t,this._change(h,r,n)},_change:function(t,n,r){return r=r?e.merge(f,r):f,r.merge&&d(n)&&d(i._state)&&(n=e.merge(i._state,n)),this._resolveChanges(t,n,r),this},_fireEvents:function(e,t,n){this.fire(l,{_options:n,changed:t.changed,newVal:t.newState,prevVal:t.prevState,removed:t.removed,src:e}),r.each(t.changed,function(t,n){this._fireChangeEvent(e,n,t)},this),r.each(t.removed,function(t,n){this._fireRemoveEvent(e,n,t)},this)},_fireChangeEvent:function(e,t,n){this.fire(t+"Change",{newVal:n.newVal,prevVal:n.prevVal,src:e})},_fireRemoveEvent:function(e,t,n){this.fire(t+"Remove",{prevVal:n,src:e})},_resolveChanges:function(e,t,n){var s={},o,u=i._state,a={};t||(t={}),n||(n={}),d(t)&&d(u)?(r.each(t,function(e,t){var n=u[t];e!==n&&(s[t]={newVal:e,prevVal:n},o=!0)},this),r.each(u,function(e,n){if(!r.owns(t,n)||t[n]===null)delete t[n],a[n]=e,o=!0},this)):o=t!==u,(o||this.force)&&this._fireEvents(e,{changed:s,newState:t,prevState:u,removed:a},n)},_storeState:function(e,t){i._state=t||{}},_defChangeFn:function(e){this._storeState(e.src,e.newVal,e._options)}},!0),e.HistoryBase=p},"3.18.1",{requires:["event-custom-complex"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("history-hash",function(e,t){function p(){p.superclass.constructor.apply(this,arguments)}var n=e.HistoryBase,r=e.Lang,i=e.Array,s=e.Object,o=YUI.namespace("Env.HistoryHash"),u="hash",a,f,l,c=e.config.win,h=e.config.useHistoryHTML5;e.extend(p,n,{_init:function(t){var n=p.parseHash();t=t||{},this._initialState=t.initialState?e.merge(t.initialState,n):n,e.after("hashchange",e.bind(this._afterHashChange,this),c),p.superclass._init.apply(this,arguments)},_change:function(e,t,n){return s.each(t,function(e,n){r.isValue(e)&&(t[n]=e.toString())}),p.superclass._change.call(this,e,t,n)},_storeState:function(e,t){var r=p.decode,i=p.createHash(t);p.superclass._storeState.apply(this,arguments),e!==u&&r(p.getHash())!==r(i)&&p[e===n.SRC_REPLACE?"replaceHash":"setHash"](i)},_afterHashChange:function(e){this._resolveChanges(u,p.parseHash(e.newHash),{})}},{NAME:"historyHash",SRC_HASH:u,hashPrefix:"",_REGEX_HASH:/([^\?#&=]+)=?([^&=]*)/g,createHash:function(e){var t=p.encode,n=[];return s.each(e,function(e,i){r.isValue(e)&&n.push(t(i)+"="+t(e))}),n.join("&")},decode:function(e){return decodeURIComponent(e.replace(/\+/g," "))},encode:function(e){return encodeURIComponent(e).replace(/%20/g,"+")},getHash:e.UA.gecko?function(){var t=e.getLocation(),n=/#(.*)$/.exec(t.href),r=n&&n[1]||"",i=p.hashPrefix;return i&&r.indexOf(i)===0?r.replace(i,""):r}:function(){var t=e.getLocation(),n=t.hash.substring(1),r=p.hashPrefix;return r&&n.indexOf(r)===0?n.replace(r,""):n},getUrl:function(){return location.href},parseHash:function(e){var t=p.decode,n,i,s,o,u,a={},f=p.hashPrefix,l;e=r.isValue(e)?e:p.getHash();if(f){l=e.indexOf(f);if(l===0||l===1&&e.charAt(0)==="#")e=e.replace(f,"")}o=e.match(p._REGEX_HASH)||[];for(n=0,i=o.length;n<i;++n)s=o[n],u=s.split("="),u.length>1?a[t(u[0])]=t(u[1]):a[t(s)]="";return a},replaceHash:function(t){var n=e.getLocation(),r=n.href.replace(/#.*$/,"");t.charAt(0)==="#"&&(t=t.substring(1)),n.replace(r+"#"+(p.hashPrefix||"")+t)},setHash:function(t){var n=e.getLocation();t.charAt(0)==="#"&&(t=t.substring(1)),n.hash=(p.hashPrefix||"")+t}}),a=o._notifiers,a||(a=o._notifiers=[]),e.Event.define("hashchange",{on:function(t,n,r){(t.compareTo(c)||t.compareTo(e.config.doc.body))&&a.push(r)},detach:function(e,t,n){var r=i.indexOf(a,n);r!==-1&&a.splice(r,1)}}),f=p.getHash(),l=p.getUrl(),n.nativeHashChange?o._hashHandle||(o._hashHandle=e.Event.attach("hashchange",function(e){var t=p.getHash(),n=p.getUrl();i.each(a.concat(),function(r){r.fire({_event:e,oldHash:f,oldUrl:l,newHash:t,newUrl:n})}),f=t,l=n},c)):o._hashPoll||(o._hashPoll=e.later(50,null,function(){var e=p.getHash(),t,n;f!==e&&(n=p.getUrl(),t={oldHash:f,oldUrl:l,newHash:e,newUrl:n},f=e,l=n,i.each(a.concat(),function(e){e.fire(t)}))},null,!0)),e.HistoryHash=p;if(h===!1||!e.History&&h!==!0&&(!n.html5||!e.HistoryHTML5))e.History=p},"3.18.1",{requires:["event-synthetic","history-base","yui-later"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
 YUI.add("querystring-stringify-simple",function(e,t){var n=e.namespace("QueryString"),r=encodeURIComponent;n.stringify=function(t,n){var i=[],s=n&&n.arrayKey?!0:!1,o,u,a;for(o in t)if(t.hasOwnProperty(o))if(e.Lang.isArray(t[o]))for(u=0,a=t[o].length;u<a;u++)i.push(r(s?o+"[]":o)+"="+r(t[o][u]));else i.push(r(o)+"="+r(t[o]));return i.join("&")}},"3.18.1",{requires:["yui-base"]});
 /*
 YUI 3.18.1 (build f7e7bcb)
@@ -626,14 +602,6 @@ http://yuilibrary.com/license/
 */
 
 YUI.add("json-parse",function(e,t){var n=e.config.global.JSON;e.namespace("JSON").parse=function(e,t,r){return n.parse(typeof e=="string"?e:e+"",t,r)}},"3.18.1",{requires:["yui-base"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("json-stringify",function(e,t){var n=":",r=e.config.global.JSON;e.mix(e.namespace("JSON"),{dateToString:function(e){function t(e){return e<10?"0"+e:e}return e.getUTCFullYear()+"-"+t(e.getUTCMonth()+1)+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+n+t(e.getUTCMinutes())+n+t(e.getUTCSeconds())+"Z"},stringify:function(){return r.stringify.apply(r,arguments)},charCacheThreshold:100})},"3.18.1",{requires:["yui-base"]});
 /*
 YUI 3.18.1 (build f7e7bcb)
 Copyright 2014 Yahoo! Inc. All rights reserved.

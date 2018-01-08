@@ -6,7 +6,7 @@ var submitted = false,
 
     name: "Lane Search Test Case",
 
-    search: Y.lane.search,
+    search: L.search,
 
     form: Y.one(".search-form"),
 
@@ -44,7 +44,7 @@ var submitted = false,
 
     testQueryChangeEventBubble: function() {
         var newVal, oldVal;
-        Y.lane.once("search:queryChange", function(event) {
+        L.once("search:queryChange", function(event) {
             newVal = event.newVal;
             oldVal = event.oldVal;
         });
@@ -84,7 +84,7 @@ var submitted = false,
 
     testSourceChangeEventBubble: function() {
         var newVal, oldVal;
-        Y.lane.once("search:sourceChange", function(event) {
+        L.once("search:sourceChange", function(event) {
             newVal = event.newVal;
             oldVal = event.oldVal;
         });
@@ -94,7 +94,7 @@ var submitted = false,
     },
 
     "test searchTabs:change event": function() {
-        Y.lane.fire("searchTabs:change", {newVal: {source:"clinical-all"}});
+        L.fire("searchTabs:change", {newVal: {source:"clinical-all"}});
         Y.Assert.areEqual("clinical-all", this.search.getSource());
         Y.Assert.areEqual("clinical-all", this.sourceInput.get("value"));
     },
@@ -136,7 +136,7 @@ var submitted = false,
 
     testSearchEventBubble: function() {
         var searched = false;
-        Y.lane.once("search:search", function(event) {
+        L.once("search:search", function(event) {
             searched = true;
         });
         this.search.setQuery("query");
@@ -188,7 +188,7 @@ var submitted = false,
     "test reset clears query": function() {
         this.search.setQuery("query");
         Y.Assert.areEqual("query", this.queryInput.get("value"));
-        Y.lane.fire("searchReset:reset");
+        L.fire("searchReset:reset");
         Y.Assert.areEqual("", this.search.getQuery());
     },
 
@@ -199,7 +199,7 @@ var submitted = false,
             searched = true;
         });
         Y.Assert.areEqual("query", this.queryInput.get("value"));
-        Y.lane.fire("searchTabs:change", {newVal: {source:"foo"}});
+        L.fire("searchTabs:change", {newVal: {source:"foo"}});
         Y.Assert.isTrue(searched);
         Y.Assert.isTrue(submitted);
     },
@@ -211,7 +211,7 @@ var submitted = false,
             searched = true;
         });
         Y.Assert.areEqual("", this.queryInput.get("value"));
-        Y.lane.fire("searchTabs:change", {newVal: {source:"foo"}});
+        L.fire("searchTabs:change", {newVal: {source:"foo"}});
         Y.Assert.isFalse(searched);
         Y.Assert.isFalse(submitted);
 //    },
@@ -303,7 +303,7 @@ var submitted = false,
 //      },
 //      testBubbleReset: function() {
 //      var reset = false;
-//      this.handle = Y.lane.on("reset", function(event) {
+//      this.handle = L.on("reset", function(event) {
 //      reset = true;
 //      });
 //      Y.one(".searchReset").simulate("click");
@@ -313,7 +313,7 @@ var submitted = false,
 
 document.querySelector(".search-form").submit = function() {
     submitted = true;
-    console.log("/search.html?q=" + encodeURIComponent(Y.lane.search.getQuery()) + "&source=" + Y.lane.search.getSource());
+    console.log("/search.html?q=" + encodeURIComponent(L.search.getQuery()) + "&source=" + L.search.getSource());
 };
 
 Y.one("body").addClass("yui3-skin-sam");

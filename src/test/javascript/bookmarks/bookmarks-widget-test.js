@@ -1,6 +1,6 @@
 "use strict";
 
-var Bookmark = Y.lane.Bookmark,
+var Bookmark = L.Bookmark,
 
 bookmarksWidgetTestCase = new Y.Test.Case({
 
@@ -20,10 +20,10 @@ bookmarksWidgetTestCase = new Y.Test.Case({
     },
 
     setUp : function() {
-        this.widget = Y.lane.BookmarksWidget;
+        this.widget = L.BookmarksWidget;
         this.bookmarks = this.widget.get("bookmarks");
         this.items = this.widget.get("items");
-        Y.io = this.ioSuccess;
+        L.io = this.ioSuccess;
     },
 
     testExists : function() {

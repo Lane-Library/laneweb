@@ -3,8 +3,7 @@
 
     "use strict";
 
-    var Lane = Y.lane,
-        model = Lane.Model,
+    var model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
     SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh-di",
@@ -20,7 +19,8 @@
      * @param limit {String} the limit parameter for the request.
      */
     Suggest = function(input, limit) {
-        input.plug(Y.Plugin.AutoComplete, {
+        var yuiinput = input._node ? input : new Y.Node(input);
+        yuiinput.plug(Y.Plugin.AutoComplete, {
             minQueryLength: 3,
             source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
             width: "100%"
@@ -35,10 +35,10 @@
         });
 
         //save the input
-        this._input = input;
+        this._input = yuiinput;
 
         //save the autocomplete object
-        this._ac = input.ac;
+        this._ac = yuiinput.ac;
 
         //hoveredItemChange is fired on mouseover events in the suggestion list
         this._ac.after("hoveredItemChange", this._handleHoveredItemChange, this);
@@ -47,8 +47,8 @@
         this._ac.after(SELECT, this._handleSelect, this);
 
         // disable suggestion list after lane search submitted
-        Lane.on("search:search", function(){
-            input.ac.destroy();
+        L.on("search:search", function(){
+            yuiinput.ac.destroy();
         });
     };
 
@@ -90,13 +90,13 @@
     };
 
     //Add EventTarget attributes to the Suggest prototype
-    Y.augment(Suggest, Y.EventTarget, null, null, {
+    L.addEventTarget(Suggest, {
         emitFacade : true,
         prefix     : 'suggest'
     });
 
     //make the Suggest constructor globally accessible
-    Lane.Suggest = Suggest;
+    L.Suggest = Suggest;
 })();
 
 (function() {
@@ -104,12 +104,13 @@
     "use strict";
 
     // hybrid search page inputs
-    var laneSuggest, hybridInput = Y.one('.laneSuggest');
+    var laneSuggest,
+        hybridInput = document.querySelector('.laneSuggest');
     if (hybridInput) {
-        laneSuggest = new Y.lane.Suggest(hybridInput);
+        laneSuggest = new L.Suggest(new Y.Node(hybridInput));
         laneSuggest.on("select",function(){
-            Y.lane.searchIndicator.show();
-            hybridInput.ancestor("form").submit();
+            L.searchIndicator.show();
+            L.ancestor(hybridInput, "form").submit();
         });
     }
 })();

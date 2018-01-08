@@ -1,8 +1,8 @@
 "use strict";
 
-var Bookmark = Y.lane.Bookmark,
+var Bookmark = L.Bookmark,
 
-Bookmarks = Y.lane.Bookmarks,
+Bookmarks = L.Bookmarks,
 
 bookmarksTestCase = new Y.Test.Case({
 
@@ -33,7 +33,7 @@ bookmarksTestCase = new Y.Test.Case({
         bm.push(new Bookmark("3","3"));
         this.bookmarks =  new Bookmarks(bm);
         this.initialSize = this.bookmarks.size();
-        Y.io = this.ioSuccess;
+        L.io = this.ioSuccess;
         this.message = null;
         window.alert = this.alert;
     },
@@ -154,7 +154,7 @@ bookmarksTestCase = new Y.Test.Case({
     },
 
     testAddFail: function() {
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             config.on.failure.apply(config.context, [0]);
         };
         this.bookmarks.addBookmark(new Bookmark("label9", "url9"));
@@ -162,7 +162,7 @@ bookmarksTestCase = new Y.Test.Case({
     },
 
     testMoveFail: function() {
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             config.on.failure.apply(config.context, [0]);
         };
         this.bookmarks.moveBookmark(3, 0);
@@ -170,7 +170,7 @@ bookmarksTestCase = new Y.Test.Case({
     },
 
     testRemoveFail: function() {
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             config.on.failure.apply(config.context, [0]);
         };
         this.bookmarks.removeBookmarks([0]);
@@ -178,7 +178,7 @@ bookmarksTestCase = new Y.Test.Case({
     },
 
     testUpdateFail: function() {
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             config.on.failure.apply(config.context, [0]);
         };
         this.bookmarks.getBookmark(0).setLabel("foo");

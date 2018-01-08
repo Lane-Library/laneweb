@@ -28,7 +28,7 @@
         </map:match>
         <!-- javascript unit tests: -->
         <map:match pattern="resources/test/**.html" type="wildcard">
-            <map:generate type="html" src="classpath:/test/javascript/{1}.html"/>
+            <map:generate type="html" src="classpath:/resources/test/{1}.html"/>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:transform type="joost" src="classpath:/xsl/convert-to-pure.stx"/>
             <map:serialize type="html5"/>

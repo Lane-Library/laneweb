@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>30-SNAPSHOT</version>
+        <version>30</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.4.0-SNAPSHOT</version>
+    <version>3.4.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -109,7 +109,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.68</version>
+            <version>3.0.69</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -397,6 +397,10 @@
                 <directory>src/main/xsl</directory>
                 <targetPath>xsl</targetPath>
             </resource>
+            <resource>
+                <directory>src/test/javascript</directory>
+                <targetPath>resources/test</targetPath>
+            </resource>
         </resources>
         <plugins>
             <plugin>
@@ -496,7 +500,6 @@
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
                                 <include>menu-min.js</include>
-                                <include>location-min.js</include>
                                 <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-plugin-min.js</include>
@@ -529,13 +532,11 @@
                                 <include>lane-metasearch-min.js</include>
                                 <include>lane-search-images-min.js</include>
                                 <include>lane-tooltips-min.js</include>
+                                <include>lane-popin-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>lane-findit-min.js</include>
                                 <include>lane-querymap-min.js</include>
-                                <include>lane-teletype-min.js</include>
-                                <include>lane-popin-min.js</include>
                                 <include>description-toggle-min.js</include>
-                                <include>telinput-min.js</include>
                                 <include>lane-feedback-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
                                 <include>seminars-min.js</include>
@@ -550,7 +551,7 @@
                                 <include>authors-toggle-min.js</include>
                                 <include>clinical-toggle-min.js</include>
                                 <include>search-form-scroll-min.js</include>
-                                <inlude>message-min.js</inlude>
+                                <include>message-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -588,6 +589,7 @@
                                 <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
+                                <include>../back-to-top-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

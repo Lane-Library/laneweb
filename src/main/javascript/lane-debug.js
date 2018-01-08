@@ -1,7 +1,6 @@
 /*
  * This attaches the Y object with all dependencies to the window
- * so we can use it object globally.  It also creates
- * the Y.lane object that is our local namespace.
+ * so we can use it object globally.  It also creates the L object.
  */
 
 YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
@@ -14,17 +13,12 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "base-base",
         "base-build",
         "cookie",
-        "datatype-number-format",
         "dd-constrain",
         "dd-drag",
         "dd-drop",
         "dd-proxy",
         "event-custom-base",
-        "history-base",
-        "history-hash",
         "io-base",
-        "json-parse",
-        "json-stringify",
         "node-core",
         "oop",
         "overlay",
@@ -43,19 +37,11 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
     //keep a global reference of this YUI object
     window.Y = Y;
 
-    //create the lane namespace
-    var lane = Y.namespace("lane");
-
-    Y.augment(lane, Y.EventTarget, null, null, {
-        prefix : "lane",
-        emitFacade : true,
-        broadcast : 1
-    });
+    window.L = {};
 
     var i, laneJavascript = [
         "util.js",
         "menu.js",
-        "location.js",
         "golfclub-headings.js",
         "model.js",
         "link-plugin.js",
@@ -66,6 +52,14 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-bassett.js",
         "suggest.js",
         "search.js",
+        "search-reset.js",
+        "search-tabs.js",
+        "search-placeholder.js",
+        "search-help.js",
+        "search-suggest.js",
+        "search-pico-toggle.js",
+        "search-pico-fields.js",
+        "search-pico.js",
         "bookmark.js",
         "bookmarks.js",
         "bookmarks-widget.js",
@@ -80,15 +74,14 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-metasearch.js",
         "lane-search-images.js",
         "lane-tooltips.js",
+        "lane-popin.js",
         "lane-spellcheck.js",
         "lane-findit.js",
         "lane-querymap.js",
-        "lane-teletype.js",
-        "lane-popin.js",
         "description-toggle.js",
-        "telinput.js",
         "lane-feedback.js",
         "purchase-suggestions.js",
+        "seminars.js",
         "same-height.js",
         "shibboleth-sfx.js",
         "youtube.js",
@@ -99,7 +92,8 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "viewport.js",
         "authors-toggle.js",
         "clinical-toggle.js",
-        "search-form-scroll.js"
+        "search-form-scroll.js",
+        "message.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:
@@ -111,7 +105,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
 
     errorHandler = function(err) {
         if (err) {
-            Y.log('Error loading JS: ' + err[0].error, 'error');
+            console.log('Error loading JS: ' + err[0].error, 'error');
             return;
         }
     };

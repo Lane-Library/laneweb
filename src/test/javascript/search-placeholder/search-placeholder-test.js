@@ -18,7 +18,7 @@ Y.Test.Runner.add(new Y.Test.Case({
     },
 
     "test tab change": function() {
-        Y.lane.fire("searchTabs:change", {newVal:{source:"clinical-all", "clinical-all":{placeholder:"new placeholder"}}});
+        L.fire("searchTabs:change", {newVal:{source:"clinical-all", "clinical-all":{placeholder:"new placeholder"}}});
         if (placeholderEnabled) {
             Y.Assert.areEqual("new placeholder", this.input.placeholder);
         }  else {
@@ -28,7 +28,7 @@ Y.Test.Runner.add(new Y.Test.Case({
     },
 
     "test active change true": function() {
-        Y.lane.fire("search:activeChange", {active:true});
+        L.fire("search:activeChange", {active:true});
         if (placeholderEnabled) {
             Y.Assert.areEqual("new placeholder", this.input.placeholder);
         }  else {
@@ -38,7 +38,7 @@ Y.Test.Runner.add(new Y.Test.Case({
     },
 
     "test active change false": function() {
-        Y.lane.fire("search:activeChange", {active:false});
+        L.fire("search:activeChange", {active:false});
         if (placeholderEnabled) {
             Y.Assert.areEqual("default placeholder", this.input.placeholder);
         }  else {

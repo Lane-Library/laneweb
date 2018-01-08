@@ -7,8 +7,7 @@
 
     var maxHeight,
         // get all the nodes with same-height-n
-        nodes = Y.all("*[class^='same-height-'], *[class*=' same-height-']"),
-        size = nodes.size(),
+        nodes = document.querySelectorAll("*[class^='same-height-'], *[class*=' same-height-']"),
         heights,
         i,
         clazz,
@@ -17,8 +16,8 @@
         matches;
 
     // find the class for each group
-    for (i = 0; i < size; i++) {
-        matches = regex.exec(nodes.item(i).getAttribute("class"));
+    for (i = 0; i < nodes.length; i++) {
+        matches = regex.exec(nodes.item(i).className);
         if (matches.length === 2) {
             classes[matches[1]] = "." + matches[1];
         }
@@ -27,17 +26,16 @@
     for (clazz in classes) {
         if (classes.hasOwnProperty(clazz)) {
             // for each group find the tallest
-            nodes = Y.all(classes[clazz]);
-            size = nodes.size();
+            nodes = document.querySelectorAll(classes[clazz]);
             heights = [];
-            for (i = 0; i < size; i++) {
-                heights.push(nodes.item(i).get("clientHeight"));
-            }
+            nodes.forEach(function(node) {
+                heights.push(node.clientHeight);
+            });
             maxHeight = Math.max.apply(null, heights);
             // set all of the group to the tallest's height
-            for (i = 0; i < size; i++) {
-                nodes.item(i).setStyle("min-height", maxHeight + "px");
-            }
+            nodes.forEach(function(node) {
+                node.style.minHeight = maxHeight + "px";
+            });
         }
     }
 

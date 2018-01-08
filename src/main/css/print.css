@@ -1,4 +1,4 @@
-#main{
+.main{
     margin-top: 0;
 }
 
@@ -7,7 +7,7 @@ input,
 .som-header,
 .feedback-link,
 .lane-nav,
-#libraryContact,
+.library-contact,
 #login,
 #laneFooter,
 #lane-subfooter,

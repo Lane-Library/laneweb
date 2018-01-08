@@ -4,7 +4,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
 
     name : "BookmarkLink Test Case",
 
-    link : Y.lane.BookmarkLink,
+    link : L.BookmarkLink,
 
     setUp : function() {
         this.link.set("status", 0);
@@ -87,7 +87,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         var self = this;
         var status = 0;
         var data = "";
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             status = self.link.get("status");
             data = config.data;
             config.on.success.apply(config.context, [ 0, {} ]);
@@ -108,7 +108,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         var self = this;
         var data = "";
         var status = 0;
-        Y.io = function(url, config) {
+        L.io = function(url, config) {
             status = self.link.get("status");
             data = config.data;
             config.on.success.apply(config.context, [ 0, {} ]);
@@ -116,19 +116,7 @@ var bookmarkLinkTestCase = new Y.Test.Case({
         this.link.get("node").simulate("click");
         Y.Assert.areSame(3, status);
         Y.Assert.areSame(4, this.link.get("status"));
-        Y.Assert
-        .areSame('{"label":"local","url":"/foo?bar=baz"}', data);
-    },
-
-    testBookmarkSearchClick : function() {
-        var data = "";
-        Y.io = function(url, config) {
-            data = config.data;
-            config.on.success.apply(config.context, [ 0, {} ]);
-        };
-        Y.one(".bookmark-search").simulate("click");
-        Y.Assert
-        .areSame('{"label":"Search for: foo bar","url":"/search.html?source=bar%20foo&q=foo%20bar"}', data);
+        Y.Assert.areSame('{"label":"local","url":"'+ L.Model.get(L.Model.BASE_PATH) + '/foo?bar=baz"}', data);
     },
 
     testTimer : function() {

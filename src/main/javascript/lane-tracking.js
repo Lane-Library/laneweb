@@ -2,30 +2,26 @@
 
     "use strict";
 
-    var Lane = Y.lane,
-        location = Lane.Location,
-        model = Lane.Model,
-        searchTerms = model.get(model.URL_ENCODED_QUERY),
+    var model = L.Model,
         searchSource = model.get(model.URL_ENCODED_SOURCE),
         Tracker = function() {
-            model.on(model.URL_ENCODED_QUERY + "Change", function(event) {
-                searchTerms = event.newVal;
-            });
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
-                var trackingData = {}, list = link.ancestor(".lwSearchResults"),
-                    pageStart = Y.one("#pageStart");
+                var trackingData = {},
+                    list = link.closest(".lwSearchResults"),
+                    pageStart = document.querySelector("#pageStart"),
+                    searchTerms = model.get(model.URL_ENCODED_QUERY);
                     // pageStart is the value in the pageStart span or 1 if its not there.
-                pageStart = pageStart ? parseInt(pageStart.get("text"), 10) : 1;
-                trackingData.value = list.all("li").indexOf(link.ancestor("li")) + pageStart;
-                trackingData.label = link.get('text');
+                pageStart = pageStart ? parseInt(pageStart.textContent, 10) : 1;
+                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), link.closest("li")) + pageStart;
+                trackingData.label = link.textContent;
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
                     trackingData.action = decodeURIComponent(searchTerms);
-                    trackingData.label = link.ancestor("li").one(".primaryType").get('text') + " -> " + trackingData.label;
+                    trackingData.label = link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
                 } else {
                     trackingData.category = "lane:browseResultClick";
-                    trackingData.action = location.get("pathname");
+                    trackingData.action = location.pathname;
                 }
                 return trackingData;
             },
@@ -38,14 +34,14 @@
                             {selector:"#laneFooter", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
-                    if (link.ancestor(handlers[i].selector)) {
+                    if (link.closest(handlers[i].selector)) {
                         trackingData.category = handlers[i].category;
                         if (trackingData.category === "lane:bookmarkClick") {
                             trackingData.action = model.get(model.AUTH);
                             trackingData.label = Tracker.getTrackedTitle(link);
                         } else {
-                            trackingData.action = link.get('href');
-                            trackingData.label = link.get('text');
+                            trackingData.action = link.href;
+                            trackingData.label = link.textContent;
                         }
                         break;
                     }
@@ -53,36 +49,34 @@
                 return trackingData;
             },
             getEventTrackingData = function(event) {
-                var link = event.target, trackingData = {};
-                while (link && link.get('nodeName') !== 'A') {
-                    link = link.get('parentNode');
-                }
-                if (link.ancestor(".lwSearchResults")) {
+                var link = event.target.closest("a"),
+                    trackingData = {};
+                if (link.closest(".lwSearchResults")) {
                     trackingData = getSearchResultsTrackingData(link);
-                } else if (link.get('href').match('^javascript:.*bookmarklet.*')) {
+                } else if (link.href.match('^javascript:.*bookmarklet.*')) {
                     if ("dragend" === event.type) {
                         trackingData.category = "lane:bookmarkletDrag";
                     }
                     else if ("contextmenu" === event.type) {
                         trackingData.category = "lane:bookmarkletRightClick";
                     }
-                    trackingData.action = link.get('href');
-                    trackingData.label = link.get('title');
-                } else if (link.ancestor(".seeAll")) {
+                    trackingData.action = link.href;
+                    trackingData.label = link.title;
+                } else if (link.closest(".seeAll")) {
                     trackingData.category = "lane:searchSeeAllClick";
-                    trackingData.action = link.get('search');
-                    trackingData.label = link.ancestor('li').get('text').replace(/\s+/g,' ').trim();
+                    trackingData.action = link.search;
+                    trackingData.label = link.closest('li').textContent.replace(/\s+/g,' ').trim();
                 } else {
                     trackingData = getEventTrackingDataByAncestor(link);
                 }
                 return trackingData;
             },
             isProxyHost = function(node) {
-                return node.get('hostname').match('^(?:login\\.)?laneproxy.stanford.edu$');
+                return node.hostname.match('^(?:login\\.)?laneproxy.stanford.edu$');
             },
             isProxyOrCMELogin = function(link) {
-                var search = link.get("search"),
-                    pathname = link.get("pathname"),
+                var search = link.search,
+                    pathname = link.pathname,
                     returnValue = false;
                 if (search && search.indexOf("url=") > -1 && /(secure\/apps\/proxy\/credential|redirect\/cme)/.test(pathname)) {
                     returnValue = true;
@@ -90,7 +84,7 @@
                 return returnValue;
             },
             isSecureVideo = function(link) {
-                var pathname = link.get("pathname");
+                var pathname = link.pathname;
                 return (pathname && (/\/secure\/edtech\//).test(pathname));
             },
             isLocalPopup = function(node) {
@@ -98,9 +92,9 @@
                 return rel && rel.indexOf("popup local") === 0;
             },
             getTrackedHost = function(node) {
-                var host, pathname = node.get("pathname");
+                var host, pathname = node.pathname;
                 if (pathname.indexOf("cookiesFetch") > -1) {
-                    host = decodeURIComponent(node.get('search'));
+                    host = decodeURIComponent(node.search);
                     host = host.substring(host.indexOf("path=") + 6);
                     if (host.indexOf("&") > -1) {
                         host = host.substring(0, host.indexOf("&"));
@@ -108,23 +102,23 @@
                     host = host.substring(host.indexOf("//") + 2);
                     host = host.substring(0, host.indexOf("/"));
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
-                    host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
+                    host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         host = host.substring(0, host.indexOf('/'));
                     }
                 } else if (isLocalPopup(node)) {
-                    host = location.get("host");
+                    host = location.host;
                 } else {
-                    host = node.get('hostname');
+                    host = node.hostname;
                 }
                 return host;
             },
             getTrackedPath = function(node) {
-                var path, host, pathname = node.get("pathname");
+                var path, host, pathname = node.pathname;
                 if (isLocalPopup(node)) {
-                    path = location.get("pathname");
+                    path = location.pathname;
                 } else if (pathname.indexOf('cookiesFetch') > -1) {
-                    host = decodeURIComponent(node.get('search'));
+                    host = decodeURIComponent(node.search);
                     host = host.substring(host.indexOf("path=") + 6);
                     if (host.indexOf("&") > -1) {
                         host = host.substring(0, host.indexOf("&"));
@@ -132,7 +126,7 @@
                     host = host.substring(host.indexOf("//") + 2);
                     path = host.substring(host.indexOf("/"));
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
-                    host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
+                    host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         path = host.substring(host.indexOf('/'));
                         if (path.indexOf('?') > -1) {
@@ -152,7 +146,7 @@
             getTrackedQuery = function(node) {
                 var query, host, path;
                 if (isProxyOrCMELogin(node) || isProxyHost(node)) {
-                    host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
+                    host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         path = host.substring(host.indexOf('/'));
                         if (path.indexOf('?') > -1) {
@@ -162,34 +156,34 @@
                         query = '';
                     }
                 } else if (isLocalPopup(node)) {
-                    query = location.get("search");
+                    query = location.search;
                 } else {
-                    query = node.get('search');
+                    query = node.search;
                 }
                 return query;
             },
             getTrackedExternal = function(node) {
                 var external;
-                if (!node.get("hostname")) {
+                if (!node.hostname) {
                     external = false;
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node) || isSecureVideo(node)) {
                     external = true;
                 } else {
-                    external = node.get("hostname") !== location.get("host");
+                    external = node.hostname !== location.host;
                 }
                 return external;
             },
             getPageviewTrackingData = function(event) {
-                var node = event.target, trackingData = {};
-                if (node.get('nodeName') !== 'A' && node.one('a')) {
-                    node = node.one('a');
+                var node = event.target,
+                    trackingData = {},
+                    searchTerms = model.get(model.URL_ENCODED_QUERY);
+                if (node.nodeName !== "A" && node.querySelector("a")) {
+                    node = node.querySelector("a");
                 }
-                if (!node.getData().isTrackableAsPageView) {
-                    while (node && node.get('nodeName') !== 'A') {
-                        node = node.get('parentNode');
-                        if (node === null) {
-                            throw 'not trackable';
-                        }
+                if (!node.dataset.isTrackableAsPageView) {
+                    node = node.closest("a");
+                    if (!node) {
+                        throw 'not trackable';
                     }
                 }
                 trackingData.host = getTrackedHost(node);
@@ -202,7 +196,7 @@
                 return trackingData;
             },
             isTrackableLocalClick = function(link) {
-                var isTrackable, pathname = link.get("pathname");
+                var isTrackable, pathname = link.pathname;
                 // rely on page tracking for \.html$ and \/$pages except for cookiesFetch
                 if (!(/cookiesFetch/).test(pathname) && (/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
@@ -213,17 +207,15 @@
                 return isTrackable;
             },
             getTitleFromImg = function(node) {
-                var i, title, img = node.all('img');
-                if (img) {
-                    for (i = 0; i < img.size(); i++) {
-                        if (img.item(i).get('alt')) {
-                            title = img.item(i).get('alt');
-                        } else if (img.item(i).get('src')) {
-                            title = img.item(i).get('src');
-                        }
-                        if (title) {
-                            break;
-                        }
+                var i, title, img = node.querySelectorAll('img');
+                for (i = 0; i < img.length; i++) {
+                    if (img[i].alt) {
+                        title = img[i].alt;
+                    } else if (img[i].src) {
+                        title = img[i].src;
+                    }
+                    if (title) {
+                        break;
                     }
                 }
                 return title;
@@ -232,10 +224,10 @@
                 //figures out the title string for a node
                 getTrackedTitle: function(node) {
                     //if there is a title attribute, use that.
-                    var title = node.get('title');
+                    var title = node.title;
                     //next try alt attribute.
                     if (!title) {
-                        title = node.get('alt');
+                        title = node.alt;
                     }
                     //next look for alt or src attributes in any child img.
                     if (!title) {
@@ -243,16 +235,13 @@
                     }
                     //next get the text content before any nested markup
                     if (!title) {
-                        title = node.get('text');
-                    }
-                    if (!title) {
-                        title = node.get('innerText');
+                        title = node.textContent;
                     }
                     //finally:
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (node.ancestor(".lane-nav")) {
+                    if (node.closest(".lane-nav")) {
                         title = "laneNav: " + title;
                     }
                     //if there is rel="popup local" then add "pop-up" to the title
@@ -263,16 +252,14 @@
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
-                    var link = event.target, isTrackable = false;
-                    while (link !== null && link.get('nodeName') !== 'A') {
-                        link = link.get('parentNode');
-                    }
+                    var link = event.target.closest("a"),
+                        isTrackable = false;
                     if (link) {
                         // bookmarklet drag or right-click or child of .seeAll
-                        if (link.ancestor('.seeAll') || link.get('href').match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
+                        if (link.closest('.seeAll') || link.href.match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             isTrackable = true;
                         } else {
-                            isTrackable = link.getData().isTrackableAsEvent;
+                            isTrackable = link.dataset.isTrackableAsEvent;
                         }
                     }
                     return isTrackable;
@@ -280,15 +267,13 @@
                 isTrackableAsPageview: function(theLink) {
                     var isTrackable = false,
                         link = theLink;
-                    if (link.getData().isTrackableAsPageView) {
+                    if (link.dataset.isTrackableAsPageView) {
                         isTrackable = true;
                     } else {
                         //find self ancestor that is <a>
-                        if (link.get("nodeName") !== "A") {
-                            link = link.ancestor("a");
-                        }
-                        if (link && link.get("href")) {
-                            if (link.get('hostname') === location.get("hostname")) {
+                        link = link.closest("a");
+                        if (link && link.href) {
+                            if (link.hostname === location.hostname) {
                                 isTrackable =  isTrackableLocalClick(link);
                             } else {
                                 //external reference is trackable
@@ -325,9 +310,9 @@
             };
         }();
 
-        Y.on('click', function(e) {
+        document.addEventListener('click', function(e) {
             var t = e.target, setLocation = function() {
-                Lane.Location.set("href", t.get('href'));
+                L.setLocationHref(t.href);
             };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
@@ -336,36 +321,42 @@
                         // have safari follow link if it's not:
                         //  - popup or facet
                         //    (can't halt facet click propagation b/c they need to be tracked)
-                        if (t.get('href') &&
-                                (!t.get('rel') && !t.get('target')) &&
-                                !t.get('parentNode').hasClass('searchFacet') ) {
+                        if (t.href &&
+                                (!t.rel && !t.target) &&
+                                !t.parentNode.classList.contains('searchFacet') ) {
                             e.preventDefault();
                             setTimeout(setLocation, 200);
                             break;
                         }
-                        t = t.get('parentNode');
+                        t = t.parentNode;
                     }
             }
-        }, document);
-
-        // limit dragend listener to bookmarklet links
-        Y.all('a[href*="bookmarklet"]').on('dragend', function(e) {
-            Tracker.trackEvent(e);
         });
 
-        // limit right-click listener to bookmarklet links
-        Y.all('a[href*="bookmarklet"]').on('contextmenu', function(e) {
-            Tracker.trackEvent(e);
+        // limit right-click and dragend listener to bookmarklet links
+        document.querySelectorAll("a[href*='bookmarklet']").forEach(function(node) {
+            node.addEventListener("contextmenu", function(event) {
+                Tracker.trackEvent(event);
+            });
+            node.addEventListener("dragend", function(event) {
+                Tracker.trackEvent(event);
+            });
         });
 
-        Y.augment(Tracker, Y.EventTarget, null, null, {
+        L.addEventTarget(Tracker, {
             prefix : "tracker",
             emitFacade : true
         });
 
-        Tracker.addTarget(Lane);
+        Tracker.addTarget(L);
 
-        Y.all(".searchFacet a, *[rel^='popup local']").setData("isTrackableAsPageView", true);
-        Y.all("a[href*='secure/edtech']").setData("isTrackableAsPageView", true);
-        Y.all("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a").setData("isTrackableAsEvent", true);
+        document.querySelectorAll(".searchFacet a, *[rel^='popup local']").forEach(function(node) {
+            node.dataset.isTrackableAsPageView = true;
+        });
+        document.querySelectorAll("a[href*='secure/edtech']").forEach(function(node) {
+            node.dataset.isTrackableAsPageView = true;
+        });
+        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a").forEach(function(node) {
+            node.dataset.isTrackableAsEvent = true;
+        });
 })();

@@ -7,7 +7,7 @@ var messageTestCase = new Y.Test.Case({
         window.alert = function(m) {
             message = m;
         }
-        Y.lane.showMessage("message");
+        L.showMessage("message");
         Y.Test.Assert.areSame("message", message);
     }
 });

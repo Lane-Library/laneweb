@@ -1,7 +1,6 @@
 /*
  * This attaches the Y object with all dependencies to the window
- * so we can use it object globally.  It also creates
- * the Y.lane object that is our local namespace.
+ * so we can use it object globally.  It also creates the L object.
  */
 
 YUI({fetchCSS:false}).use("*", function(Y) {
@@ -11,14 +10,7 @@ YUI({fetchCSS:false}).use("*", function(Y) {
     //keep a global reference of this YUI object
     window.Y = Y;
 
-    //create the lane namespace
-    var lane = Y.namespace("lane");
-
-    Y.augment(lane, Y.EventTarget, null, null, {
-        prefix : "lane",
-        emitFacade : true,
-        broadcast : 1
-    });
+    window.L = {};
 
 });
 /*

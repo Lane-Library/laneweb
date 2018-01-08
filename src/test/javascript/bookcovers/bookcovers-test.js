@@ -6,7 +6,7 @@ var bookcoversTestCase = new Y.Test.Case({
 
     "test viewport:init": function() {
         var inview = 0;
-        Y.lane.fire("viewport:init", {
+        L.fire("viewport:init", {
             viewport: {
             inView: function() {
                 return inview++ === 0;
@@ -17,7 +17,7 @@ var bookcoversTestCase = new Y.Test.Case({
     },
 
     "test viewport:scrolled": function() {
-        Y.lane.fire("viewport:scrolled", {
+        L.fire("viewport:scrolled", {
             viewport: {
             inView: function() {
                 return true;

@@ -3,7 +3,7 @@ html {
     min-width: 1089px;
 }
 
-#main {
+.main {
     text-align: left;
     position: relative;
     margin-top: 50px;

@@ -3,8 +3,7 @@
 
     "use strict";
 
-    Y.lane = Y.lane || {};
-    Y.lane.showMessage = function(message) {
+    L.showMessage = function(message) {
         alert(message);
     };
 

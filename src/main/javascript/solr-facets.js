@@ -2,71 +2,69 @@
 
     "use strict";
 
-    var model = Y.lane.Model,
-        doc = Y.one("doc"),
+    var model = L.Model,
         query = model.get(model.URL_ENCODED_QUERY),
         locationSearch = location.search,
         basePath = model.get(model.BASE_PATH) || "",
-        facetsContainer = Y.one('.solrFacets'),
-        handleArrowKey = function(event, direction) {
-            var browseFacetNavContainer = Y.one(".facetBrowse .s-pagination"),
-                selectorString = ".pagingButton." + direction,
-                pagingNode;
-            if (browseFacetNavContainer && browseFacetNavContainer.getStyle('visibility') === 'visible') {
-                pagingNode = browseFacetNavContainer.one(selectorString);
-            }
-            if (pagingNode) {
-                pagingNode._node.click();
+        facetsContainer = document.querySelector('.solrFacets'),
+        handleKeyDown = function(event) {
+            var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
+                pagingNode, direction;
+            if (browseFacetNavContainer) {
+                if (event.keyCode === 37 || event.key === "ArrowLeft") {
+                    direction = "previous";
+                } else if (event.keyCode === 39 || event.key === "ArrowRight") {
+                    direction = "next";
+                }
+                pagingNode = browseFacetNavContainer.querySelector(".pagingButton." + direction);
+                if (pagingNode) {
+                    event.preventDefault();
+                    pagingNode.click();
+                }
             }
         },
         processEnabledFacets = function(facetsContainer) {
-            var enabledFacets = facetsContainer.all('.enabled'),
-                limitsContainer = Y.one('#solrLimits'),
-                allCount = Y.one('#solrAllCount'),
+            var enabledFacets = facetsContainer.querySelectorAll('.enabled'),
+                limitsContainer = document.querySelector('#solrLimits'),
+                allCount = document.querySelector('#solrAllCount'),
                 count = 0,
-                html = '', i, facet, label, url;
+                html = '', label, url;
             if (allCount) {
-                count = allCount.get('textContent');
+                count = allCount.textContent;
             }
-            for (i = 0; i < enabledFacets.size(); i++) {
-                facet = enabledFacets.item(i);
-                label = facet.one('.facetLabel').get('textContent');
-                url = facet.one('a').get('href');
+            enabledFacets.forEach(function(facet) {
+                label = facet.querySelector('.facetLabel').textContent;
+                url = facet.querySelector('a').href;
                 html += '<span>' + label + '<a title="remove filter" href="' + url + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
-            }
-            if (enabledFacets.size() > 0) {
+            });
+            if (enabledFacets.length > 0) {
                 html += '<span class="clearLimits"><a href="' + basePath + '/search.html?source=all-all&q=' + query + '">Clear all <i class="fa fa-times-circle fa-lg"></i></a> to show ' + count + ' results</span>';
-                limitsContainer.append(html);
+                limitsContainer.insertAdjacentHTML("beforeEnd", html);
             }
         },
         makeRequest = function() {
-            Y.io(basePath + '/apps/search/facets/html' + locationSearch, {
+            L.io(basePath + '/apps/search/facets/html' + locationSearch, {
                 on: {
                     success:function(id, o) {
-                        facetsContainer.append(o.responseText);
+                        facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
                         // fade in facets container
-                        new Y.Anim({
-                            node: facetsContainer,
-                            to:{opacity:1},
-                            duration: 0.5
-                        }).run();
+                        L.activate(facetsContainer, "solrFacets");
                         processEnabledFacets(facetsContainer);
-                        Y.lane.fire("lane:new-content");
+                        L.fire("lane:new-content");
                     }
                 }
             });
         };
-        if (query && facetsContainer && !Y.one("#bassettContent") ) {
+        if (query && facetsContainer && !document.querySelector("#bassettContent") ) {
             makeRequest();
-            // listeners for left/right arrows
-            doc.on("key", handleArrowKey, "up:37", this, "previous");
-            doc.on("key", handleArrowKey, "up:39", this, "next");
+            // listener for left/right arrows
+            document.addEventListener("keydown", handleKeyDown);
             // close button on facet browse lightbox
-            Y.lane.Lightbox.on("contentChanged", function() {
-                var browseFacetClose = Y.one(".facetBrowse .close");
+            L.Lightbox.on("contentChanged", function() {
+                var browseFacetClose = document.querySelector(".facetBrowse .close");
                 if (browseFacetClose) {
-                    browseFacetClose.on('click', function() {
-                        Y.lane.Lightbox.hide();
+                    browseFacetClose.addEventListener('click', function() {
+                        L.Lightbox.hide();
                     });
                 }
             });

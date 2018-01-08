@@ -103,20 +103,6 @@
     box-sizing: border-box;
 }
 
-.bookmark-search{
-    visibility: hidden;
-    display: inline-block;
-    text-align: center;
-}
-
-.bookmark-search.active{
-    visibility: visible;
-}
-
-.bookmark-search.bookmarking {
-    cursor: wait;
-}
-
 /* next two are for the login required lightbox popup */
 .bookmark-login {
     text-align: center;

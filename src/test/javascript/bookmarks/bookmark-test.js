@@ -1,6 +1,6 @@
 "use strict";
 
-var Bookmark = Y.lane.Bookmark,
+var Bookmark = L.Bookmark,
 
 bookmarkTestCase = new Y.Test.Case({
 

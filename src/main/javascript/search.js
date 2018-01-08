@@ -4,8 +4,7 @@ if (document.querySelector(".search-form"))  {
 
     "use strict";
 
-    var lane = Y.lane,
-        model = function(q, s) {
+    var model = function(q, s) {
 
             var query = q,
                 source = s,
@@ -42,7 +41,7 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-            Y.augment(m, Y.EventTarget, false, null, {
+            L.addEventTarget(m, {
                 prefix: "search",
                 emitFacade: true
             });
@@ -52,7 +51,7 @@ if (document.querySelector(".search-form"))  {
                     source = event.newVal;
                 }
             });
-            m.addTarget(lane);
+            m.addTarget(L);
 
             return m;
 
@@ -67,7 +66,8 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     close: function() {
-                        lane.deactivate(form, "search-form");
+                        L.deactivate(form, "search-form");
+                      //anim included for smooth scrolling of window
                         new Y.Anim({
                             node: "win",
                             to: { scroll: [0, 0] },
@@ -80,7 +80,7 @@ if (document.querySelector(".search-form"))  {
                         view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
-                        lane.activate(form, "search-form");
+                        L.activate(form, "search-form");
                         view.fire("open");
                     },
                     reset: function() {
@@ -109,7 +109,7 @@ if (document.querySelector(".search-form"))  {
             queryInput.addEventListener("focus", v.open);
             queryInput.addEventListener("input", v.inputChange);
 
-            Y.augment(v, Y.EventTarget);
+            L.addEventTarget(v);
 
             return v;
 
@@ -158,11 +158,11 @@ if (document.querySelector(".search-form"))  {
             view.on("open", controller.open);
             view.on("close", controller.close);
 
-            lane.on("searchTabs:change", controller.searchTabsChange);
-            lane.on("searchReset:reset", controller.reset);
+            L.on("searchTabs:change", controller.searchTabsChange);
+            L.on("searchReset:reset", controller.reset);
         })();
 
-    lane.search = model;
+    L.search = model;
 
 })();
 

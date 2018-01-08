@@ -37,7 +37,7 @@ var solrPaginationTestCase = new Y.Test.Case({
         pages = form.get('pages');
         form.one("input[name=page]").set('value','23');
         form.simulate("submit");
-        Y.Assert.areEqual(null, parentDiv.one(".error"));
+        Y.Assert.isNull(parentDiv.one(".error"));
         form.append(pages);
     }
 });

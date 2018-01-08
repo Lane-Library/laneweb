@@ -59,7 +59,7 @@ var linkTestCase = new Y.Test.Case({
     }
 });
 
-Y.all("a").plug(Y.lane.LinkPlugin);
+Y.all("a").plug(L.LinkPlugin);
 
 Y.one("body").addClass("yui3-skin-sam");
 new Y.Console({

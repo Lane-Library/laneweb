@@ -2,11 +2,11 @@
 
     "use strict";
 
-    var Model = Y.lane.Model,
+    var Model = L.Model,
         basePath = Model.get(Model.BASE_PATH) || "",
         encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-        queryMapping = Y.one('#queryMapping'),
-        queryMappingDescriptor = Y.one('#queryMappingDescriptor'),
+        queryMapping = document.querySelector('#queryMapping'),
+        queryMappingDescriptor = document.querySelector('#queryMappingDescriptor'),
         getResultCounts,
         queryMapResources,
         getResourcesString = function() {
@@ -35,7 +35,7 @@
             return needMore;
         },
         resultSuccess = function(id, o) {
-            var results = Y.JSON.parse(o.responseText),
+            var results = JSON.parse(o.responseText),
             i, needMore = false;
         for (i = 0; i < queryMapResources.length; i++) {
             if (!queryMapResources[i].status) {
@@ -45,11 +45,11 @@
         if (needMore) {
             setTimeout(getResultCounts, 2000);
         }
-        Y.fire('lane:popin', queryMapping);
+        L.fire('lane:popin', "queryMapping");
     },
         mapSuccess = function(id, o) {
         var anchor, span, i,
-        resourceMap = o.responseText ? Y.JSON.parse(o.responseText) : null;
+        resourceMap = o.responseText ? JSON.parse(o.responseText) : null;
     if (resourceMap) {
         queryMapResources = resourceMap.resources;
         getResultCounts = function() {
@@ -60,7 +60,7 @@
                 }
             }
             url += '&rd=' + Math.random();
-            Y.io(url, {
+            L.io(url, {
                 on:{
                     success: resultSuccess
                     }
@@ -73,16 +73,16 @@
                 anchor.title = 'QueryMapping: ' + queryMapResources[i].label;
                 span.appendChild(anchor);
                 anchor.appendChild(document.createTextNode(queryMapResources[i].label));
-                queryMapping.append(span);
+                queryMapping.appendChild(span);
                 queryMapResources[i].anchor = anchor;
             }
             if (queryMappingDescriptor) {
-                queryMappingDescriptor.append(resourceMap.descriptor.descriptorName);
-                Y.lane.fire("lane:new-content");
+                queryMappingDescriptor.innerHTML = resourceMap.descriptor.descriptorName;
+                L.fire("lane:new-content");
             }
             getResultCounts();
             // track mapped term, descriptor, and resources
-            Y.lane.fire("tracker:trackableEvent", {
+            L.fire("tracker:trackableEvent", {
                 category: "lane:queryMapping",
                 action: "query=" + decodeURIComponent(encodedQuery) + "; descriptor=" + resourceMap.descriptor.descriptorName,
                 label: "resources=" + getResourcesString()
@@ -90,7 +90,7 @@
         }
     };
     if (encodedQuery && queryMapping) {
-        Y.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
+        L.io(basePath + '/apps/querymap/json?q=' + encodedQuery, {
             on:{
                 success: mapSuccess
             }

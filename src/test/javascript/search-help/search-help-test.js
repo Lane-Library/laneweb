@@ -7,7 +7,7 @@ Y.Test.Runner.add(new Y.Test.Case({
     name: "Search Help TestCase",
     
     "test searchTabs:change": function() {
-        Y.lane.fire("searchTabs:change", {newVal:{source:"foo",foo:{help:"new href"}}});
+        L.fire("searchTabs:change", {newVal:{source:"foo",foo:{help:"new href"}}});
         Y.Assert.areEqual("new href", document.querySelector(".search-help").getAttribute("href"));
     }
 

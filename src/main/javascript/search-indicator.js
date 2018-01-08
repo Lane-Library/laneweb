@@ -3,7 +3,6 @@
     "use strict";
 
     var SEARCH_INDICATOR = "search-indicator",
-        lane = Y.lane,
         indicatorNode = document.querySelector("." + SEARCH_INDICATOR),
 
     /**
@@ -18,7 +17,7 @@
          * @static
          */
         show: function() {
-            lane.activate(indicatorNode, SEARCH_INDICATOR);
+            L.activate(indicatorNode, SEARCH_INDICATOR);
         },
 
         /**
@@ -27,12 +26,12 @@
          * @static
          */
         hide: function() {
-            lane.deactivate(indicatorNode, SEARCH_INDICATOR);
+            L.deactivate(indicatorNode, SEARCH_INDICATOR);
         }
     };
 
-    lane.on("search:search", searchIndicator.show);
+    L.on("search:search", searchIndicator.show);
 
-    lane.searchIndicator = searchIndicator;
+    L.searchIndicator = searchIndicator;
 
 })();
