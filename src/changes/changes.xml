@@ -7,7 +7,10 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2018-01-" version="3.4.0" description="3.4.0 minor version release">
+        <release date="2018-01-08" version="3.4.0" description="3.4.0 minor version release">
+            <action date="2018-01-07" dev="ceyates" issue="137812" type="update">
+                use native javascript objects and methods instead of yui
+            </action>
             <action date="2017-12-20" dev="olgary" issue="137790" type="remove">
                 template, debug - removed All from Biomed Resources nav label
             </action>
