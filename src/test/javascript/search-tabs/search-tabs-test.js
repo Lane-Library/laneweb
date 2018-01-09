@@ -17,7 +17,7 @@ Y.Test.Runner.add(new Y.Test.Case({
         var event = document.createEvent("UIEvent");
         event.initEvent("click", true, false);
         var activeTab = document.querySelector(".search-tab-active");
-        var lastSource = L.getData(activeTab, "source");
+        var lastSource = activeTab.dataset.source;
         Array.prototype.forEach.call(document.querySelectorAll(".search-tab"), function(tab) {
             var newSource, oldSource;
             L.once("searchTabs:change", function(event) {
@@ -26,14 +26,14 @@ Y.Test.Runner.add(new Y.Test.Case({
             });
             tab.dispatchEvent(event);
             Y.Assert.areEqual(oldSource, lastSource);
-            Y.Assert.areEqual(L.getData(tab, "source"), newSource);
+            Y.Assert.areEqual(tab.dataset.source, newSource);
             lastSource = newSource;
         });
     },
 
     "test tracking": function() {
         var activeTab = document.querySelector(".search-tab-active");
-        var lastSource = L.getData(activeTab, "source");
+        var lastSource = activeTab.dataset.source;
         var trackEvent;
         var handler = L.on("tracker:trackableEvent", function(e) {
             trackEvent = e;
@@ -44,9 +44,9 @@ Y.Test.Runner.add(new Y.Test.Case({
             tab.dispatchEvent(event);
             Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);
             Y.Assert.areEqual("lane:searchDropdownSelection", trackEvent.category);
-            Y.Assert.areEqual(L.getData(tab, "source"), trackEvent.action);
-            Y.Assert.areEqual("from " + lastSource + " to " + L.getData(tab, "source"), trackEvent.label);
-            lastSource = L.getData(tab, "source");
+            Y.Assert.areEqual(tab.dataset.source, trackEvent.action);
+            Y.Assert.areEqual("from " + lastSource + " to " + tab.dataset.source, trackEvent.label);
+            lastSource = tab.dataset.source;
         });
         handler.detach();
     }

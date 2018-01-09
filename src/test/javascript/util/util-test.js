@@ -21,10 +21,6 @@ var laneTestCase = new Y.Test.Case({
         Y.Assert.isFalse(Y.one(".test").hasClass("test-active"));
     },
 
-    "test getData": function() {
-        Y.Assert.areEqual("test", L.getData(document.querySelector(".test"), "test"));
-    },
-
     "test NodeList.forEach": function() {
         Y.Assert.areEqual(typeof document.querySelectorAll("*").forEach, "function");
     }

@@ -11,7 +11,7 @@
 
             // initialize the imageMap
             bookImageNodes.forEach(function(imageNode) {
-                var bibid = L.getData(imageNode, "bibid");
+                var bibid = imageNode.dataset.bibid;
                 imageMap[bibid] = imageMap[bibid] || [];
                 imageMap[bibid].push(imageNode);
             });

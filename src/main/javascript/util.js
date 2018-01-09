@@ -10,10 +10,6 @@
         node.classList.remove(clazz + "-active");
     };
 
-    L.getData = function(node, name) {
-        return node.dataset[name];
-    };
-
     /*
      * polyfill for NodeList.prototype.forEach() from
      * https://github.com/imagitama/nodelist-foreach-polyfill

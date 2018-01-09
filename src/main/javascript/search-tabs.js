@@ -17,17 +17,17 @@ if (document.querySelector(".search-form"))  {
             };
 
             tabNodes.forEach(function(tab) {
-                m[L.getData(tab, SOURCE)] = {
-                    placeholder: L.getData(tab, "placeholder"),
-                    source: L.getData(tab, SOURCE),
-                    help: L.getData(tab, "help"),
+                m[tab.dataset[SOURCE]] = {
+                    placeholder: tab.dataset.placeholder,
+                    source: tab.dataset[SOURCE],
+                    help: tab.dataset.help,
                     tip: tab.title
                 };
             });
 
             return m;
 
-        }(L.getData(form.querySelector("." + SEARCH_TAB + "-active"), SOURCE)),
+        }(form.querySelector("." + SEARCH_TAB + "-active").dataset[SOURCE]),
 
         view = function() {
 
@@ -39,7 +39,7 @@ if (document.querySelector(".search-form"))  {
                         L.activate(tabs[newVal.source], SEARCH_TAB);
                     },
                     click: function() {
-                        view.fire(CLICK, L.getData(this, SOURCE));
+                        view.fire(CLICK, this.dataset[SOURCE]);
                     }
                 };
 
@@ -47,7 +47,7 @@ if (document.querySelector(".search-form"))  {
 
             tabNodes.forEach(function(tab){
                 tab.addEventListener(CLICK, v.click);
-                tabs[L.getData(tab, SOURCE)] = tab;
+                tabs[tab.dataset[SOURCE]] = tab;
             });
 
             return v;
