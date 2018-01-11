@@ -1,4 +1,4 @@
-(function() {
+addEventListener("load", function() {
 
     "use strict";
 
@@ -69,7 +69,7 @@
             case 'c':
                 limit = "mesh-di";
                 break;
-            default: 
+            default:
                 limit = false;
             }
             if (limit) {
@@ -82,4 +82,4 @@
         form.style.visibility = "visible";
     })();
 
-})();
+});
