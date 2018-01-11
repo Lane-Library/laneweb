@@ -3,7 +3,7 @@
     "use strict";
 
     (function() {
-        var i, forms = document.querySelectorAll('form');
+        var forms = document.querySelectorAll('form');
 
         forms.forEach(function(form) {
             form.addEventListener("submit", function(event) {
@@ -29,13 +29,13 @@
     })();
 
     (function() {
-        var i, form = document.querySelector('.verticalPico'),
+        var form = document.querySelector('.verticalPico'),
             inputs = form.querySelectorAll('input[type="text"]'),
             queryInput = form.querySelector("input[name=q]"),
             searchTerms = document.querySelector(".search-form input[name=q]"),
             //build query terms from pico inputs:
             getPicoQuery = function() {
-                var qString = '', j;
+                var qString = '';
                 inputs.forEach(function(input) {
                     if (input.value) {
                         qString += "(" + input.value + ")";
@@ -69,6 +69,8 @@
             case 'c':
                 limit = "mesh-di";
                 break;
+            default: 
+                limit = false;
             }
             if (limit) {
                 suggest = new L.Suggest(input, limit);
