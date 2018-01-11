@@ -108,32 +108,6 @@ var shcPortalTestCase = new Y.Test.Case({
         iInput.dispatchEvent(new Event("keyup"));
         Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(0).value);
         Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(1).value);
-    },
-    
-    "test lane:suggestSelect": function() {
-        var pInput = document.querySelector("input[name='p']");
-        var iInput = document.querySelector("input[name='i']");
-        var qInput = document.querySelectorAll("input[name='q']");
-        pInput.value = "P";
-        iInput.value = "I";
-        qInput.item(0).value = "";
-        qInput.item(1).value = "";
-        Y.Global.fire("lane:suggestSelect")
-        Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(0).value);
-        Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(1).value);
-    },
-    
-    "test lane:suggestSelect no query": function() {
-        var pInput = document.querySelector("input[name='p']");
-        var iInput = document.querySelector("input[name='i']");
-        var qInput = document.querySelectorAll("input[name='q']");
-        pInput.value = "";
-        iInput.value = "";
-        qInput.item(0).value = "";
-        qInput.item(1).value = "";
-        Y.Global.fire("lane:suggestSelect")
-        Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(0).value);
-        Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(1).value);
     }
 
 });
