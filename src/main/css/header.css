@@ -30,7 +30,8 @@ h1 a:hover {
     text-decoration: underline;
 }
 
-#login {
+.login {
+    margin: 0 5%;
     position: absolute;
     right: 0;
     top: .8em;
@@ -44,8 +45,8 @@ h1 a:hover {
     right: 0;
 }
 
-.library-contact > li,#login > li {
-    float: left;
+.library-contact > li, .login > li {
+    display: inline;
     padding: 0 12px;
 }
 

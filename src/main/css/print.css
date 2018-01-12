@@ -8,10 +8,10 @@ input,
 .feedback-link,
 .lane-nav,
 .library-contact,
-#login,
-#laneFooter,
-#lane-subfooter,
-#sm-footer,
+.login,
+.lane-footer,
+.lane-subfooter,
+.som-footer,
 #searchFormContainer {
     height: 0;
     display: none;

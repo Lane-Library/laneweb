@@ -4,7 +4,7 @@
 
     var model = L.Model, redirectUrl,
     persistentStatusCookie = L.Cookie.get('lane-login-expiration-date'),
-    basePath = model.get(model.BASE_PATH)|| "",
+    basePath = model.get(model.BASE_PATH) || "",
     now = new Date(),
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
     // See UserDataBinder.java
@@ -24,7 +24,6 @@
     });
 
     extensionPersistentLoginPopup = function(event){
-        var link = event.target;
         if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
             redirectUrl = event.target.href;
@@ -42,8 +41,8 @@
 
     // The popup window for expension
     popupWindow = function(id, o) {
-        var lightbox = L.Lightbox, shibbolethAnchors,
-            listener = function(event) {
+        var lightbox = L.Lightbox,
+            listener = function() {
                 if (!redirectUrl) {
                     redirectUrl = "/index.html";
                 }
@@ -52,7 +51,7 @@
             };
         lightbox.setContent(o.responseText);
         lightbox.show();
-        shibbolethAnchors = document.querySelectorAll('#shibboleth-links a').forEach(function(node) {
+        document.querySelectorAll('#shibboleth-links a').forEach(function(node) {
             node.addEventListener("click", listener);
         });
     };

@@ -31,7 +31,7 @@
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
                             {selector:".lane-nav", category:"lane:laneNav-top"},
-                            {selector:"#laneFooter", category:"lane:laneNav-footer"}
+                            {selector:".lane-footer", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
                     if (link.closest(handlers[i].selector)) {
@@ -356,7 +356,7 @@
         document.querySelectorAll("a[href*='secure/edtech']").forEach(function(node) {
             node.isTrackableAsPageView = true;
         });
-        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a").forEach(function(node) {
+        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, .lane-footer a").forEach(function(node) {
             node.isTrackableAsEvent = true;
         });
 })();

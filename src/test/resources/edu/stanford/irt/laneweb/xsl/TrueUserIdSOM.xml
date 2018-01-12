@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ul xmlns="http://www.w3.org/1999/xhtml" id="login">
+<ul xmlns="http://www.w3.org/1999/xhtml" class="login">
    <li>sunetid@stanford.edu</li>
    <li class="favorites">
       <a href="/favorites.html">My Bookmarks</a>
@@ -12,6 +12,6 @@
       <a href="/myaccounts.html">MyLane</a>
    </li>
    <li>
-      <a id="logout" href="/logout">Logout</a>
+      <a href="/logout">Logout</a>
    </li>
 </ul>

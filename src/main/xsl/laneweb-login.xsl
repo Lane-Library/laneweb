@@ -10,8 +10,8 @@
 
     <!-- the next 6 template matches handle the login state and show links depending on that state -->
 
-    <!-- the 1st #login li is the login link or the users name -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[1]">
+    <!-- the 1st .login li is the login link or the users name -->
+    <xsl:template match="h:ul[attribute::class='login']/h:li[1]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
@@ -29,8 +29,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- the 2nd #login li is the link to the bookmarks page -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[2]">
+    <!-- the 2nd .login li is the link to the bookmarks page -->
+    <xsl:template match="h:ul[attribute::class='login']/h:li[2]">
         <xsl:if test="string-length($userid) &gt; 0">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -38,8 +38,8 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- the 3rd #login li is the account link -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[3]">
+    <!-- the 3rd .login li is the account link -->
+    <xsl:template match="h:ul[attribute::class='login']/h:li[3]">
         <xsl:if test="string-length($userid) &gt; 0">
             <xsl:copy>
                 <xsl:apply-templates select="child::node()"/>
@@ -47,8 +47,8 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- the 4th #login li is the logout link -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
+    <!-- the 4th .login li is the logout link -->
+    <xsl:template match="h:ul[attribute::class='login']/h:li[4]">
         <xsl:if test="string-length($userid) &gt; 0 or $unauthorized">
             <xsl:copy>
                 <xsl:apply-templates select="child::node()"/>
@@ -56,8 +56,8 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- the 5th #login li is the proxy-off toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[5]">
+    <!-- the 5th .login li is the proxy-off toggle -->
+    <xsl:template match="h:ul[attribute::class='login']/h:li[5]">
         <xsl:if test="$proxy-links ='true' and string-length($userid) = 0 and matches($ipgroup,'^(OTHER|PAVA|ERR)$')">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -65,7 +65,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="h:ul[attribute::id='login']/h:li[5]/h:a">
+    <xsl:template match="h:ul[attribute::class='login']/h:li[5]/h:a">
         <xsl:copy>
             <xsl:attribute name="href">
                 <xsl:choose>
@@ -89,8 +89,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- the 6th #login li is the proxy-on toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[6]">
+    <!-- the 6th .login li is the proxy-on toggle -->
+    <xsl:template match="h:ul[attribute::class='login']/h:li[6]">
         <xsl:if test="$proxy-links = 'false' and string-length($userid) = 0 and matches($ipgroup,'^(OTHER|PAVA|ERR)$')">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"></xsl:apply-templates>
@@ -98,7 +98,7 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="h:ul[attribute::id='login']/h:li[6]/h:a">
+    <xsl:template match="h:ul[attribute::class='login']/h:li[6]/h:a">
         <xsl:copy>
             <xsl:attribute name="href">
                 <xsl:choose>
