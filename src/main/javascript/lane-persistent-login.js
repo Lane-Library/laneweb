@@ -26,6 +26,7 @@
     extensionPersistentLoginPopup = function(event){
         if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
+            event.stopPropagation();
             redirectUrl = event.target.href;
             getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
         }
