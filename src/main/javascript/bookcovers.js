@@ -73,7 +73,7 @@
                         }
                         // don't get more than 20
                         for (i = 0; i < bibids.length && i < 20; i++) {
-                            url = url += "bibid=" + bibids[i] + "&";
+                            url += "bibid=" + bibids[i] + "&";
                             working += bibids[i] + ",";
                         }
 

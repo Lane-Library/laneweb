@@ -15,9 +15,9 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class GrandRoundsGenerator extends AbstractGenerator implements ParametersAware {
 
-    private static final String DEPARTMENT = "department";
+    private static final String DEPT = "department";
 
-    private static final String YEAR = "year";
+    private static final String YR = "year";
 
     private String department;
 
@@ -35,8 +35,8 @@ public class GrandRoundsGenerator extends AbstractGenerator implements Parameter
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
-        this.department = parameters.get(DEPARTMENT);
-        this.year = parameters.get(YEAR);
+        this.department = parameters.get(DEPT);
+        this.year = parameters.get(YR);
     }
 
     @Override
