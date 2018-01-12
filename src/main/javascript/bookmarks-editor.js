@@ -216,7 +216,8 @@
          * @param event {CustomEvent}
          */
         _handleCheckboxClick : function(event) {
-            var i, checked = event.target.get("checked"), editors = this.get("editors");
+            var i, checked = event.target.get("checked"),
+                editors = this.get("editors");
             for (i = 0; i < editors.length; i++) {
                 editors[i].setChecked(checked);
             }
@@ -230,7 +231,7 @@
          */
         _handleDestroyEditor : function(event) {
             var editors = this.get("editors"),
-            position = Y.Array.indexOf(editors, event.target);
+                position = editors.indexOf(event.target);
             editors.splice(position, 1);
         },
 

@@ -84,4 +84,6 @@
         emitFacade : true,
         broadcast : 1
     });
+
+    L.Cookie = Y.Cookie;
 })();

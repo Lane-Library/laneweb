@@ -3,7 +3,7 @@
     "use strict";
 
     var model = L.Model, redirectUrl,
-    persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
+    persistentStatusCookie = L.Cookie.get('lane-login-expiration-date'),
     basePath = model.get(model.BASE_PATH)|| "",
     now = new Date(),
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
@@ -17,19 +17,17 @@
 
     // if someone click on a proxied link and he is from stanford so he will
     // have the possibility to extend his persistent login
-    Y.on("click", function(event) {
-        extensionPersistentLoginPopup(event);
-    }, "a[href*='/redirect/cme']");
-    Y.on("click", function(event) {
-        extensionPersistentLoginPopup(event);
-    }, "a[href*='laneproxy.stanford.edu/login']");
+    document.addEventListener("click", function(event) {
+        if (event.target.closest("a[href*='laneproxy.stanford.edu/login'], a[href*='/redirect/cme']")) {
+            extensionPersistentLoginPopup(event);
+        }
+    });
 
     extensionPersistentLoginPopup = function(event){
         var link = event.target;
         if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
             event.preventDefault();
-            link.set('rel', 'persistentLogin');
-            redirectUrl = event.target.get('href');
+            redirectUrl = event.target.href;
             getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
         }
     };
@@ -44,18 +42,19 @@
 
     // The popup window for expension
     popupWindow = function(id, o) {
-        var lightbox = L.Lightbox, shibbolethAnchors;
+        var lightbox = L.Lightbox, shibbolethAnchors,
+            listener = function(event) {
+                if (!redirectUrl) {
+                    redirectUrl = "/index.html";
+                }
+                this.href = basePath+ '/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
+                this.removeEventListener("click", listener);
+            };
         lightbox.setContent(o.responseText);
         lightbox.show();
-        shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
-        Y.once("click", function(event) {
-            var node = event.currentTarget, href;
-            if (!redirectUrl) {
-                redirectUrl = "/index.html";
-            }
-            href =  basePath+ '/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
-            node.set('href', href);
-        }, shibbolethAnchors);
+        shibbolethAnchors = document.querySelectorAll('#shibboleth-links a').forEach(function(node) {
+            node.addEventListener("click", listener);
+        });
     };
     // END POPUP
 
@@ -63,9 +62,9 @@
     if (persistentLoginCheckbox) {
         persistentLoginCheckbox.addEventListener("change", function(event) {
             if (event.target.checked) {
-                Y.Cookie.set("isPersistent", "yes");
+                L.Cookie.set("isPersistent", "yes");
             } else {
-                Y.Cookie.remove("isPersistent");
+                L.Cookie.remove("isPersistent");
             }
         });
     }
