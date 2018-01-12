@@ -7,7 +7,7 @@ L.io = function(url, config) {
     }]);
 };
 
-L.Cookie = {
+Y.Cookie = {
         get : function() {
             persistentLoginTestCase.cookieArgs = {name:"get",args:arguments};
         },
