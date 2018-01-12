@@ -76,7 +76,6 @@
                 model = L.Model;
                 basePath = model.get(model.BASE_PATH) || "";
                 hash = node.hash;
-                event.preventDefault();
                 if (lightbox.get("visible")) {
                     lightbox.hide();
                 }

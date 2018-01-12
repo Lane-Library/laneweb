@@ -11,7 +11,7 @@
 
             // initialize the imageMap
             bookImageNodes.forEach(function(imageNode) {
-                var bibid = L.getData(imageNode, "bibid");
+                var bibid = imageNode.dataset.bibid;
                 imageMap[bibid] = imageMap[bibid] || [];
                 imageMap[bibid].push(imageNode);
             });
@@ -73,7 +73,7 @@
                         }
                         // don't get more than 20
                         for (i = 0; i < bibids.length && i < 20; i++) {
-                            url = url += "bibid=" + bibids[i] + "&";
+                            url += "bibid=" + bibids[i] + "&";
                             working += bibids[i] + ",";
                         }
 

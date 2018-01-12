@@ -1,4 +1,4 @@
-.main{
+.main {
     margin-top: 0;
 }
 
@@ -8,11 +8,10 @@ input,
 .feedback-link,
 .lane-nav,
 .library-contact,
-#login,
-#laneFooter,
-#lane-subfooter,
-#sm-footer,
-#searchFormContainer {
+.login,
+.lane-footer,
+.lane-subfooter,
+.som-footer {
     height: 0;
     display: none;
 }

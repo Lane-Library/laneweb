@@ -13,8 +13,8 @@ if (document.querySelector(".search-form"))  {
                 def: def,
                 current: current
             };
-        }(L.getData(inputNode, PLACEHOLDER),
-                L.getData(document.querySelector(".search-tab-active"), PLACEHOLDER)),
+          }(inputNode.dataset[PLACEHOLDER],
+              document.querySelector(".search-tab-active").dataset[PLACEHOLDER]),
 
         view = function() {
 

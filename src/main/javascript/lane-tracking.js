@@ -31,7 +31,7 @@
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
                             {selector:".lane-nav", category:"lane:laneNav-top"},
-                            {selector:"#laneFooter", category:"lane:laneNav-footer"}
+                            {selector:".lane-footer", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
                     if (link.closest(handlers[i].selector)) {
@@ -180,7 +180,7 @@
                 if (node.nodeName !== "A" && node.querySelector("a")) {
                     node = node.querySelector("a");
                 }
-                if (!node.dataset.isTrackableAsPageView) {
+                if (!node.isTrackableAsPageView) {
                     node = node.closest("a");
                     if (!node) {
                         throw 'not trackable';
@@ -259,7 +259,7 @@
                         if (link.closest('.seeAll') || link.href.match('^javascript:void.*bookmarklet.*') && ("dragend" === event.type || "contextmenu" === event.type) ) {
                             isTrackable = true;
                         } else {
-                            isTrackable = link.dataset.isTrackableAsEvent;
+                            isTrackable = link.isTrackableAsEvent;
                         }
                     }
                     return isTrackable;
@@ -267,7 +267,7 @@
                 isTrackableAsPageview: function(theLink) {
                     var isTrackable = false,
                         link = theLink;
-                    if (link.dataset.isTrackableAsPageView) {
+                    if (link.isTrackableAsPageView) {
                         isTrackable = true;
                     } else {
                         //find self ancestor that is <a>
@@ -351,12 +351,12 @@
         Tracker.addTarget(L);
 
         document.querySelectorAll(".searchFacet a, *[rel^='popup local']").forEach(function(node) {
-            node.dataset.isTrackableAsPageView = true;
+            node.isTrackableAsPageView = true;
         });
         document.querySelectorAll("a[href*='secure/edtech']").forEach(function(node) {
-            node.dataset.isTrackableAsPageView = true;
+            node.isTrackableAsPageView = true;
         });
-        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, #laneFooter a").forEach(function(node) {
-            node.dataset.isTrackableAsEvent = true;
+        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, .lane-footer a").forEach(function(node) {
+            node.isTrackableAsEvent = true;
         });
 })();

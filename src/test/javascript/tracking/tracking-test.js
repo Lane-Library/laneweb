@@ -82,7 +82,7 @@ var trackingTestCase = new Y.Test.Case({
     },
 
     testLaneFooterClick: function() {
-        var link = Y.one("#laneFooter a");
+        var link = Y.one(".lane-footer a");
         link.simulate("click");
         Y.Assert.areEqual(link.get("text"), this.event.label);
         Y.Assert.areEqual("lane:laneNav-footer", this.event.category);

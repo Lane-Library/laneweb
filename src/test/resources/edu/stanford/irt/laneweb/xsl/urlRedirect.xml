@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ul xmlns="http://www.w3.org/1999/xhtml" id="login">
+<ul xmlns="http://www.w3.org/1999/xhtml" class="login">
    <li>
       <a href="/secure/login.html?url=%2FredirectPath%3Fsomething%3Delse%26param%3Donemore">MyLane login</a>
    </li>

@@ -1,4 +1,4 @@
-<ul id="login" xmlns="http://www.w3.org/1999/xhtml">
+<ul class="login" xmlns="http://www.w3.org/1999/xhtml">
     <li>
         <a href="/secure/login.html">MyLane login</a>
     </li>
@@ -10,7 +10,7 @@
         <a href="/myaccounts.html">MyLane</a>
     </li>
     <li>
-        <a id="logout" href="/logout">Logout</a>
+        <a href="/logout">Logout</a>
     </li>
     <li>
         <a href="?proxy-links=false">Guest Access</a>

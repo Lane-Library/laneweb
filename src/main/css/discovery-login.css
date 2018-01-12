@@ -59,7 +59,15 @@
     background-image: url('../images/LPCH-discoverylogo.png');
 }
 
-.discovery-login hr {
+.discovery-login-links hr {
     color: #ddd;
     width: 19rem;
+}
+
+.discovery-login-links span {
+    background: none;
+    font-weight: normal;
+    font-size: initial;
+    position: relative;
+    top: 150px;
 }

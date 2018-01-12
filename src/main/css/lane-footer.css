@@ -1,18 +1,18 @@
-#laneFooter,
-#lane-subfooter {
+.lane-footer,
+.lane-subfooter {
     background-color: #8c1515;
 }
 
-#laneFooter {
+.lane-footer {
     margin-top: 12px;
     padding-top: 17px;
 }
 
-#laneFooter .centered {
+.lane-footer .centered {
     border-bottom: 1px solid #902827;
     padding-bottom: 12px;
 }
-#laneFooter h2 {
+.lane-footer h2 {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 24px;
     font-weight: 300;
@@ -24,7 +24,7 @@
     background-image: none;
 }
 
-#laneFooter h3 {
+.lane-footer h3 {
     color: white;
     font-size: 16px;
     font-weight: 300;
@@ -35,50 +35,50 @@
     background-image: none;
 }
 
-#laneFooter li,#laneFooter h2,
-#laneFooter h3 {
+.lane-footer li,.lane-footer h2,
+.lane-footer h3 {
     border-bottom: 1px solid #902827;
 }
 
-#laneFooter a, #laneFooter a .fa {
+.lane-footer a, .lane-footer a .fa {
     color: white;
 }
 
-#laneFooter li {
+.lane-footer li {
     font-size: 12px;
     line-height: 24px;
 }
 
-#laneFooter li:last-child {
+.lane-footer li:last-child {
     border-bottom: none;
 }
 
-#lane-subfooter {
+.lane-subfooter {
     font-size: 12px;
     font-weight: 400;
     line-height: 22px;
     padding: 6px 0 6px;
 }
 
-#lane-subfooter,
-#lane-subfooter a {
+.lane-subfooter,
+.lane-subfooter a {
     color: #999999;
 }
 
-#lane-subfooter ul {
+.lane-subfooter ul {
     float: right;
 }
 
-#lane-subfooter li {
+.lane-subfooter li {
     display: inline-block;
     padding: 3px 5px 5px 0;
 }
 
-#lane-subfooter span {
+.lane-subfooter span {
     display: none;
 }
 
-#lane-subfooter i {
+.lane-subfooter i {
     background-color: #999999;
     border-radius: 11px;
     color: #8c1515;
