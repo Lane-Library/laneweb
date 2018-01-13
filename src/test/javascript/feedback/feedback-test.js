@@ -1,31 +1,30 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
-L.io = function(url, config) {
-    config.on.success.apply(config.context);
-};
+    "use strict";
 
-var feedbackTestCase = new Y.Test.Case({
-    name: 'Lane Feedback Test Case',
+    L.io = function(url, config) {
+        config.on.success.apply(config.context);
+    };
 
-    resetContent: function() {
-        L.Lightbox.set("hash", "#feedback1");
-        L.Lightbox.setContent("<div id='feedback'>" + Y.one("#xfeedback").get("innerHTML") + "</div>");
-    },
+    var feedbackTestCase = new Y.Test.Case({
+        name: 'Lane Feedback Test Case',
 
-    testSendFeedback: function() {
-        this.resetContent();
-        var feedback = Y.Widget.getByNode("#feedback");
-        feedback.sendFeedback(Y.one("form"));
-        Y.Assert.areEqual(feedback.get("thanks"), feedback.get("contentBox").one(".feedback-contents").get("text"));
-    }
+        resetContent: function() {
+            L.Lightbox.set("hash", "#feedback1");
+            L.Lightbox.setContent("<div id='feedback'>" + Y.one("#xfeedback").get("innerHTML") + "</div>");
+        },
+
+        testSendFeedback: function() {
+            this.resetContent();
+            document.querySelector("form").dispatchEvent(new Event("submit"));
+            Y.Assert.areEqual("Thank you for your feedback.", Y.one(".feedback-contents").get("text"));
+        }
+    });
+
+    new Y.Test.Console().render();
+
+    Y.Test.Runner.add(feedbackTestCase);
+    Y.Test.Runner.masterSuite.name = "feedback-test.js";
+    Y.Test.Runner.run();
+
 });
-
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
-
-
-Y.Test.Runner.add(feedbackTestCase);
-Y.Test.Runner.masterSuite.name = "feedback-test.js";
-Y.Test.Runner.run();

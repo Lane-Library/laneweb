@@ -1,23 +1,23 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
-window.model = {"base-path":""};
+    "use strict";
 
-Y.Test.Runner.add(new Y.Test.Case({
+    window.model = {"base-path":""};
 
-    name: "Search Help TestCase",
-    
-    "test searchTabs:change": function() {
-        L.fire("searchTabs:change", {newVal:{source:"foo",foo:{help:"new href"}}});
-        Y.Assert.areEqual("new href", document.querySelector(".search-help").getAttribute("href"));
-    }
+    Y.Test.Runner.add(new Y.Test.Case({
 
-}));
+        name: "Search Help TestCase",
 
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
+        "test searchTabs:change": function() {
+            L.fire("searchTabs:change", {newVal:{source:"foo",foo:{help:"new href"}}});
+            Y.Assert.areEqual("new href", document.querySelector(".search-help").getAttribute("href"));
+        }
 
+    }));
 
-Y.Test.Runner.masterSuite.name = "search-help-test.js";
-Y.Test.Runner.run();
+    new Y.Test.Console().render();
+
+    Y.Test.Runner.masterSuite.name = "search-help-test.js";
+    Y.Test.Runner.run();
+
+});

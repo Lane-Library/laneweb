@@ -3,7 +3,7 @@
     "use strict";
 
     var model = L.Model, redirectUrl,
-    persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
+    persistentStatusCookie = L.Cookie.get('lane-login-expiration-date'),
     basePath = model.get(model.BASE_PATH)|| "",
     now = new Date(),
     // isStanfordActive == true only if user is from stanford and is active in the LDAP
@@ -63,9 +63,9 @@
     if (persistentLoginCheckbox) {
         persistentLoginCheckbox.addEventListener("change", function(event) {
             if (event.target.checked) {
-                Y.Cookie.set("isPersistent", "yes");
+                L.Cookie.set("isPersistent", "yes");
             } else {
-                Y.Cookie.remove("isPersistent");
+                L.Cookie.remove("isPersistent");
             }
         });
     }

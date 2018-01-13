@@ -27,7 +27,7 @@
         },
         gaPageTracker = noopTracker;
 
-    Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
+    L.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var model = L.Model,
                 ipgroup = model.get(model.IPGROUP),

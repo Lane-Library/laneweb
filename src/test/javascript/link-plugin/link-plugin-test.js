@@ -1,71 +1,72 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", "node-pluginhost", function(Y) {
 
-var linkTestCase = new Y.Test.Case({
-    name: "Lane Link Test Case",
+    "use strict";
 
-    testIsLocalLink : function() {
-        var anchor = Y.one("#local");
-        Y.Assert.isTrue(anchor.link.get("local"));
-    },
+    var linkTestCase = new Y.Test.Case({
+        name: "Lane Link Test Case",
 
-    testIsProxyLoginLink : function () {
-        var anchor = Y.one("#proxylogin");
-        Y.Assert.isTrue(anchor.link.get("proxyLogin"));
-    },
+        testIsLocalLink : function() {
+            var anchor = Y.one("#local");
+            Y.Assert.isTrue(anchor.link.get("local"));
+        },
 
-    testIsProxyLink : function() {
-        var anchor1 = Y.one("#proxyurl1"), anchor2 = Y.one("#proxyurl2");
-        Y.Assert.isTrue(anchor1.link.get("proxy"));
-        Y.Assert.isTrue(anchor2.link.get("proxy"));
-    },
+        testIsProxyLoginLink : function () {
+            var anchor = Y.one("#proxylogin");
+            Y.Assert.isTrue(anchor.link.get("proxyLogin"));
+        },
 
-    testProxyLoginIsNotLocal : function() {
-        var anchor = Y.one("#proxylogin");
-        Y.Assert.isFalse(anchor.link.get("local"));
-    },
+        testIsProxyLink : function() {
+            var anchor1 = Y.one("#proxyurl1"), anchor2 = Y.one("#proxyurl2");
+            Y.Assert.isTrue(anchor1.link.get("proxy"));
+            Y.Assert.isTrue(anchor2.link.get("proxy"));
+        },
 
-    testGetURL : function() {
-        var anchor = Y.one("#example");
-        Y.Assert.areEqual("http://www.example.com/example", anchor.link.get("url"));
-    },
+        testProxyLoginIsNotLocal : function() {
+            var anchor = Y.one("#proxylogin");
+            Y.Assert.isFalse(anchor.link.get("local"));
+        },
 
-    testGetProxiedLoginURL : function() {
-        var anchor = Y.one("#proxylogin");
-        Y.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
-    },
+        testGetURL : function() {
+            var anchor = Y.one("#example");
+            Y.Assert.areEqual("http://www.example.com/example", anchor.link.get("url"));
+        },
 
-    testGetProxiedURL : function() {
-        var anchor1 = Y.one("#proxyurl1"), anchor2 = Y.one("#proxyurl2");
-        Y.Assert.areEqual("http://www.nejm.org/", anchor1.link.get("url"));
-        Y.Assert.areEqual("http://www.nejm.org/", anchor2.link.get("url"));
-    },
+        testGetProxiedLoginURL : function() {
+            var anchor = Y.one("#proxylogin");
+            Y.Assert.areEqual("http://www.nejm.org/", anchor.link.get("url"));
+        },
 
-    testCookiesFetchIsNotLocal : function() {
-        var anchor = Y.one("#cookiesFetch");
-        Y.Assert.isFalse(anchor.link.get("local"));
-    },
+        testGetProxiedURL : function() {
+            var anchor1 = Y.one("#proxyurl1"), anchor2 = Y.one("#proxyurl2");
+            Y.Assert.areEqual("http://www.nejm.org/", anchor1.link.get("url"));
+            Y.Assert.areEqual("http://www.nejm.org/", anchor2.link.get("url"));
+        },
 
-    testGetCookiesFetchURL : function() {
-        var anchor = Y.one("#cookiesFetch");
-        Y.Assert.areEqual("http://www.thomsonhc.com/carenotes/librarian/", anchor.link.get("url"));
-    },
+        testCookiesFetchIsNotLocal : function() {
+            var anchor = Y.one("#cookiesFetch");
+            Y.Assert.isFalse(anchor.link.get("local"));
+        },
 
-    testGetTitle: function() {
-        var i, anchor, anchors = Y.all("#testGetTitle a");
-        for (i = 0; i < anchors.size(); i++) {
-            anchor = anchors.item(i);
-            Y.Assert.areEqual(anchor.get("rel"), anchor.link.get("title"));
+        testGetCookiesFetchURL : function() {
+            var anchor = Y.one("#cookiesFetch");
+            Y.Assert.areEqual("http://www.thomsonhc.com/carenotes/librarian/", anchor.link.get("url"));
+        },
+
+        testGetTitle: function() {
+            var i, anchor, anchors = Y.all("#testGetTitle a");
+            for (i = 0; i < anchors.size(); i++) {
+                anchor = anchors.item(i);
+                Y.Assert.areEqual(anchor.get("rel"), anchor.link.get("title"));
+            }
         }
-    }
+    });
+
+    Y.all("a").plug(L.LinkPlugin);
+
+    new Y.Test.Console().render();
+
+    Y.Test.Runner.add(linkTestCase);
+    Y.Test.Runner.masterSuite.name = "link-plugin-test.js";
+    Y.Test.Runner.run();
+
 });
-
-Y.all("a").plug(L.LinkPlugin);
-
-Y.one("body").addClass("yui3-skin-sam");
-new Y.Console({
-    newestOnTop: false
-}).render("#log");
-
-Y.Test.Runner.add(linkTestCase);
-Y.Test.Runner.masterSuite.name = "link-plugin-test.js";
-Y.Test.Runner.run();

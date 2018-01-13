@@ -1,28 +1,31 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", function(Y) {
 
-L.io = function(url, config) {
-    config.on.success.apply(this, [0, {responseText:"responseText"}]);
-};
+    "use strict";
 
-var lightboxTestCase = new Y.Test.Case({
-    name: 'Lane Feedback Test Case',
+    var lightboxTestCase = new Y.Test.Case({
 
-    testAutoLightbox: function() {
-        Y.Assert.areEqual("visible", Y.one(".yui3-lightbox").getStyle("visibility"));
-    },
+        name: 'Lane Feedback Test Case',
 
-    testLightbox: function() {
-        Y.one("a[rel=lightbox]").simulate("click");
-        Y.Assert.areEqual("responseText", Y.one(".yui3-lightbox").get("text"));
-    }
+        lightbox: L.Lightbox,
+
+        testAutoLightbox: function() {
+            Y.Assert.isTrue(this.lightbox.get("visible"));
+            Y.Assert.areEqual("responseText", this.lightbox.get("contentBox").get("innerHTML"));
+        },
+
+        testLightbox: function() {
+            this.lightbox.hide();
+            Y.Assert.isFalse(this.lightbox.get("visible"));
+            document.querySelector("a[rel^='lightbox']").click();
+            Y.Assert.isTrue(this.lightbox.get("visible"));
+            Y.Assert.areEqual("responseText", this.lightbox.get("contentBox").get("innerHTML"));
+        }
+    });
+
+    new Y.Test.Console().render();
+
+    Y.Test.Runner.add(lightboxTestCase);
+    Y.Test.Runner.masterSuite.name = "lightbox-test.js";
+    Y.Test.Runner.run();
+
 });
-
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
-
-
-Y.Test.Runner.add(lightboxTestCase);
-Y.Test.Runner.masterSuite.name = "lightbox-test.js";
-Y.Test.Runner.run();

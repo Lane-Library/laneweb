@@ -10,6 +10,31 @@
         node.classList.remove(clazz + "-active");
     };
 
+    L.getUserAgent = function() {
+        return window.navigator.userAgent;
+    }
+
+    /*
+     * stubbable method for setting location.href
+     */
+    L.setLocationHref = function(href) {
+        location.href = href;
+    };
+
+    L.addEventTarget = function(obj, args) {
+        Y.augment(obj, Y.EventTarget, false, null, args);
+    };
+
+    L.io = Y.io;
+    L.Get = Y.Get;
+    L.Cookie = Y.Cookie;
+
+    L.addEventTarget(L, {
+        prefix : "lane",
+        emitFacade : true,
+        broadcast : 1
+    });
+
     /*
      * polyfill for NodeList.prototype.forEach() from
      * https://github.com/imagitama/nodelist-foreach-polyfill
@@ -22,13 +47,6 @@
             }
         };
     }
-
-    /*
-     * stubbable method for setting location.href
-     */
-    L.setLocationHref = function(href) {
-        location.href = href;
-    };
 
     /*
      * polyfill for Element.prototype.matches() from
@@ -54,7 +72,10 @@
         };
     }
 
- // from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+    /*
+     * polyfill for remove()
+     * from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+     */
     (function (arr) {
       arr.forEach(function (item) {
         if (item.hasOwnProperty('remove')) {
@@ -73,15 +94,4 @@
       });
     })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-    L.io = Y.io;
-
-    L.addEventTarget = function(obj, args) {
-        Y.augment(obj, Y.EventTarget, false, null, args);
-    };
-
-    L.addEventTarget(L, {
-        prefix : "lane",
-        emitFacade : true,
-        broadcast : 1
-    });
 })();

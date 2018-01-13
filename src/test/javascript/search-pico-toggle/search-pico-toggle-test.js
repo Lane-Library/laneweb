@@ -1,3 +1,5 @@
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+
 "use strict";
 
 var searchPicoToggleTestCase = new Y.Test.Case({
@@ -73,11 +75,10 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     }
 });
 
-Y.one("body").addClass("yui3-skin-sam");
-new Y.Console({
-    newestOnTop: false
-}).render("#log");
+new Y.Test.Console().render();
 
 Y.Test.Runner.add(searchPicoToggleTestCase);
 Y.Test.Runner.masterSuite.name = "search-pico-toggle-test.js";
 Y.Test.Runner.run();
+
+});
