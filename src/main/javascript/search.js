@@ -66,7 +66,7 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     close: function() {
-                        L.deactivate(form, "search-form");
+                        form.classList.remove("search-form-active");
                       //anim included for smooth scrolling of window
                         new Y.Anim({
                             node: "win",
@@ -80,7 +80,7 @@ if (document.querySelector(".search-form"))  {
                         view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
-                        L.activate(form, "search-form");
+                        form.classList.add("search-form-active");
                         view.fire("open");
                     },
                     reset: function() {

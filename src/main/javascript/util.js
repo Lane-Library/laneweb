@@ -2,14 +2,6 @@
 
     "use strict";
 
-    L.activate = function(node, clazz) {
-        node.classList.add(clazz +"-active");
-    };
-
-    L.deactivate = function(node, clazz) {
-        node.classList.remove(clazz + "-active");
-    };
-
     L.getUserAgent = function() {
         return window.navigator.userAgent;
     };

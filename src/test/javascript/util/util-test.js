@@ -12,17 +12,6 @@ YUI({filter:"debug"}).use("test", "test-console", function(Y) {
             Y.Assert.isObject(L);
         },
 
-        "test activate": function() {
-            L.activate(document.querySelector(".test", "test"));
-            Y.Assert.isTrue(Y.one(".test").hasClass("test-active"));
-        },
-
-        "test deactivate": function() {
-            Y.one(".test").addClass("test-active");
-            L.deactivate(document.querySelector(".test"), "test");
-            Y.Assert.isFalse(Y.one(".test").hasClass("test-active"));
-        },
-
         "test NodeList.forEach": function() {
             Y.Assert.areEqual(typeof document.querySelectorAll("*").forEach, "function");
         }

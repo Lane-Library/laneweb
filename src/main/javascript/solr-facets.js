@@ -48,7 +48,7 @@
                     success:function(id, o) {
                         facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
                         // fade in facets container
-                        L.activate(facetsContainer, "solrFacets");
+                        facetsContainer.classList.add("solrFacets-active");
                         processEnabledFacets(facetsContainer);
                         L.fire("lane:new-content");
                     }
