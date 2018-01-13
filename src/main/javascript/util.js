@@ -12,7 +12,7 @@
 
     L.getUserAgent = function() {
         return window.navigator.userAgent;
-    }
+    };
 
     /*
      * stubbable method for setting location.href
