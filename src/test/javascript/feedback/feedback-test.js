@@ -2,6 +2,10 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
+    document.addEventListener("submit", function(event) {
+        event.preventDefault();
+    });
+
     L.io = function(url, config) {
         config.on.success.apply(config.context);
     };
@@ -16,7 +20,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         testSendFeedback: function() {
             this.resetContent();
-            document.querySelector("form").dispatchEvent(new Event("submit"));
+            document.querySelector("input[type='submit']").click();
             Y.Assert.areEqual("Thank you for your feedback.", Y.one(".feedback-contents").get("text"));
         }
     });

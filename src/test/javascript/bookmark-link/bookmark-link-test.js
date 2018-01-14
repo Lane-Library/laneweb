@@ -70,9 +70,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             var bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", 5);
-            var event = document.createEvent("MouseEvents");
-            event.initMouseEvent("mouseover")
-            this.link.get("node")._node.dispatchEvent(event);
+            this.link.get("node").simulate("mouseover");
             Y.Assert.areSame(2, this.link.get("status"));
         },
 
@@ -80,9 +78,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             var bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", 2);
-            var event = document.createEvent("MouseEvents");
-            event.initMouseEvent("mouseout")
-            this.link.get("node")._node.dispatchEvent(event);
+            this.link.get("node").simulate("mouseout");
             Y.Assert.areSame(5, this.link.get("status"));
         },
 
@@ -122,7 +118,8 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             this.link.get("node")._node.click();
             Y.Assert.areSame(3, status);
             Y.Assert.areSame(4, this.link.get("status"));
-            Y.Assert.areSame('{"label":"local","url":"/foo?bar=baz"}', data);
+            var expected = '{"label":"local","url":"' + L.Model.get(L.Model.BASE_PATH) + '/foo?bar=baz"}';
+            Y.Assert.areSame(expected, data);
         },
 
         testTimer : function() {

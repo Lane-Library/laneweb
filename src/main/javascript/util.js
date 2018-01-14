@@ -57,10 +57,10 @@
     if (!Element.prototype.closest) {
         Element.prototype.closest = function(selector) {
             var el = this;
-            while (el.matches && !el.matches(selector)) {
+            while (el && el.matches && !el.matches(selector)) {
                 el = el.parentNode;
             }
-            return el.matches ? el : null;
+            return el && el.matches ? el : null;
         };
     }
 

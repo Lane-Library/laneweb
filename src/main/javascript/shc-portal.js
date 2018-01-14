@@ -13,10 +13,10 @@ addEventListener("load", function() {
                     trackingData.title = 'SHC-Epic Lane search ' + L.search.getSource();
                 }
                 if (trackingData.title) {
-                    re = event.target.action.match('.*:\/\/([a-zA-Z\.\-]*)\/(.*)');
-                    trackingData.host = re[1];
-                    trackingData.path = re[2];
-                    trackingData.external = trackingData.host !== location.host;
+                    re = event.target.action.match('.*:\/\/([a-zA-Z0-9:\.\-]*)\/(.*)');
+                    trackingData.host = re[1] === location.host ? "" : re[1];
+                    trackingData.path = "/" + re[2];
+                    trackingData.external = trackingData.host.length > 0;
                     L.fire("tracker:trackablePageview", {
                         host : trackingData.host,
                         path : trackingData.path,

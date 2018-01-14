@@ -17,11 +17,13 @@ YUI().use("test", "test-console", function(Y) {
             var handle = L.on("tracker:trackablePageview", function(e) {
                 event = e;
             });
-            document.querySelector("form").dispatchEvent(new Event("submit"));
+            var submit = document.createEvent("Event");
+            submit.initEvent("submit", true, true); 
+            document.querySelector("form").dispatchEvent(submit);
             handle.detach();
             Y.Assert.areEqual("SHC-Epic UpToDate Search", event.title);
             Y.Assert.areEqual("www-uptodate-com.laneproxy.stanford.edu", event.host);
-            Y.Assert.areEqual("contents/search", event.path);
+            Y.Assert.areEqual("/contents/search", event.path);
             Y.Assert.isTrue(event.external);
         },
 
@@ -30,11 +32,13 @@ YUI().use("test", "test-console", function(Y) {
             var handle = L.on("tracker:trackablePageview", function(e) {
                 event = e;
             });
-            document.querySelector(".search-form").dispatchEvent(new Event("submit"));
+            var submit = document.createEvent("Event");
+            submit.initEvent("submit", false, true); 
+            document.querySelector(".search-form").dispatchEvent(submit);
             handle.detach();
-            Y.Assert.areEqual("SHC-Epic Lane search source", event.title);
+            Y.Assert.areEqual("SHC-Epic Lane search all-all", event.title);
             Y.Assert.areEqual("", event.host);
-            Y.Assert.areEqual("search.html", event.path);
+            Y.Assert.areEqual(L.Model.get(L.Model.BASE_PATH) + "/search.html", event.path);
             Y.Assert.isFalse(event.external);
         },
 
@@ -43,7 +47,9 @@ YUI().use("test", "test-console", function(Y) {
             var handle = L.on("tracker:trackablePageview", function(e) {
                 event = e;
             });
-            document.querySelector("#unexpected").dispatchEvent(new Event("submit"));
+            var submit = document.createEvent("Event");
+            submit.initEvent("submit", false, true); 
+            document.querySelector("#unexpected").dispatchEvent(submit);
             handle.detach();
             Y.Assert.isNull(event);
         },
@@ -56,7 +62,9 @@ YUI().use("test", "test-console", function(Y) {
             iInput.value = "I";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            pInput.dispatchEvent(new Event("blur"));
+            var blur = document.createEvent("Event");
+            blur.initEvent("blur", false, true); 
+            pInput.dispatchEvent(blur);
             Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(0).value);
             Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(1).value);
         },
@@ -69,7 +77,9 @@ YUI().use("test", "test-console", function(Y) {
             iInput.value = "";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            pInput.dispatchEvent(new Event("blur"));
+            var blur = document.createEvent("Event");
+            blur.initEvent("blur", false, true); 
+            pInput.dispatchEvent(blur);
             Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(0).value);
             Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(1).value);
         },
@@ -82,7 +92,9 @@ YUI().use("test", "test-console", function(Y) {
             iInput.value = "";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            pInput.dispatchEvent(new Event("blur"));
+            var blur = document.createEvent("Event");
+            blur.initEvent("blur", false, true); 
+            pInput.dispatchEvent(blur);
             Y.Assert.areEqual("A", document.querySelectorAll("input[name='q']").item(0).value);
             Y.Assert.areEqual("A", document.querySelectorAll("input[name='q']").item(1).value);
         },
@@ -95,7 +107,9 @@ YUI().use("test", "test-console", function(Y) {
             iInput.value = "I";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            iInput.dispatchEvent(new Event("keyup"));
+            var keyup = document.createEvent("Event");
+            keyup.initEvent("keyup", false, true); 
+            pInput.dispatchEvent(keyup);
             Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(0).value);
             Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(1).value);
         },
@@ -108,7 +122,9 @@ YUI().use("test", "test-console", function(Y) {
             iInput.value = "";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            iInput.dispatchEvent(new Event("keyup"));
+            var keyup = document.createEvent("Event");
+            keyup.initEvent("keyup", false, true); 
+            iInput.dispatchEvent(keyup);
             Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(0).value);
             Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(1).value);
         }
