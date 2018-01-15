@@ -2,26 +2,26 @@
 
     "use strict";
 
-    var model = L.Model, redirectUrl,
-    loginExpirationDate = L.Cookie.get('lane-login-expiration-date'),
-    basePath = model.get(model.BASE_PATH)|| "",
-    // isStanfordActive == true only if user is from stanford and is active in the LDAP
-    // See UserDataBinder.java
-    isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
-    // the check box for persistent login on the discovery login page
-    persistentLoginCheckbox = document.getElementById('is-persistent-login'),
-    myAccountsLink = document.getElementById("persistent-login"),
+    var model = L.Model,
+        redirectUrl,
+        loginExpirationDate = L.Cookie.get('lane-login-expiration-date'),
+        basePath = model.get(model.BASE_PATH)|| "",
+        // isStanfordActive == true only if user is from stanford and is active in the LDAP
+        // See UserDataBinder.java
+        isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
+        // the check box for persistent login on the discovery login page
+        persistentLoginCheckbox = document.getElementById('is-persistent-login'),
+        myAccountsLink = document.getElementById("persistent-login"),
 
-    // The popup window for expension
-    popupWindow = function(id, o) {
-        var lightbox = L.Lightbox, okLink;
-        lightbox.setContent(o.responseText);
-        redirectUrl = redirectUrl || "/index.html";
-        okLink = document.querySelector(".yui3-lightbox a");
-        okLink.href = basePath + "/persistentLogin.html?pl=renew&url=" + encodeURIComponent(redirectUrl);
-        lightbox.show();
-    };
-    // END POPUP
+        // The popup window for extension
+        popupWindow = function(id, o) {
+            var lightbox = L.Lightbox, okLink;
+            lightbox.setContent(o.responseText);
+            redirectUrl = redirectUrl || "/index.html";
+            okLink = document.querySelector(".yui3-lightbox a");
+            okLink.href = basePath + "/persistentLogin.html?pl=renew&url=" + encodeURIComponent(redirectUrl);
+            lightbox.show();
+        };
 
     // if someone click on a proxied link and he is from stanford so he will
     // have the possibility to extend his persistent login
@@ -40,7 +40,7 @@
                 });
             }
         });
-    };
+    }
 
     //handle checking or unchecking the check box on the discovery login page
     if (persistentLoginCheckbox) {
