@@ -70,7 +70,9 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             var bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", 5);
-            this.link.get("node").simulate("mouseover");
+            var event = document.createEvent("MouseEvents");
+            event.initMouseEvent("mouseover")
+            this.link.get("node")._node.dispatchEvent(event);
             Y.Assert.areSame(2, this.link.get("status"));
         },
 
@@ -78,7 +80,9 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             var bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", 2);
-            this.link.get("node").simulate("mouseout");
+            var event = document.createEvent("MouseEvents");
+            event.initMouseEvent("mouseout")
+            this.link.get("node")._node.dispatchEvent(event);
             Y.Assert.areSame(5, this.link.get("status"));
         },
 
