@@ -1,10 +1,4 @@
-YUI({fetchCSS:false}).use(
-        "anim-base",
-        "anim-easing",
-        "anim-scroll",
-        "node-base",
-        "node-screen",
-        function(Y) {
+(function() {
 
     "use strict";
 
@@ -18,13 +12,8 @@ YUI({fetchCSS:false}).use(
          * @private
          */
         fadeIn = function() {
-            var a = new Y.Anim({
-                node: backToTop,
-                to: {opacity: 1 },
-                duration: 0.45
-            });
+            backToTop.style.visibility = "visible";
             backToTop.classList.add("active");
-            a.run();
         },
 
         /**
@@ -32,15 +21,10 @@ YUI({fetchCSS:false}).use(
          * @private
          */
         fadeOut = function() {
-            var a = new Y.Anim({
-                node: backToTop,
-                to: {opacity: 0 },
-                duration: 0.45
-            });
-            a.on("end", function() {
-                backToTop.classList.remove("active");
-            });
-            a.run();
+            setTimeout(function() {
+                backToTop.style.visibility = "hidden";
+            }, 450);
+            backToTop.classList.remove("active");
         },
 
         /**
@@ -48,13 +32,7 @@ YUI({fetchCSS:false}).use(
          * @private
          */
         scrollToTop = function() {
-            var a = new Y.Anim({
-                node: "win",
-                to: { scroll: [0, -100] },
-                duration: 0.3,
-                easing: Y.Easing.easeBoth
-            });
-            a.run();
+            document.documentElement.scrollIntoView();
         };
 
     // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
@@ -75,4 +53,4 @@ YUI({fetchCSS:false}).use(
     // append the backToTop node
     document.body.appendChild(backToTop);
 
-});
+})();
