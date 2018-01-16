@@ -13,6 +13,10 @@ public class IPGroupTest {
 
     @Test
     public void testAllRanges() {
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.232.53.46"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.233.24.133"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.238.31.255"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.239.23.145"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.128.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.217.148"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.255.255"));
