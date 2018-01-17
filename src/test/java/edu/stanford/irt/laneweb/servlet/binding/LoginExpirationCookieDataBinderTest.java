@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import java.time.Duration;
@@ -89,6 +90,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         replay(this.request);
         this.binder.bind(this.model, this.request);
+        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
         verify(this.request);
     }
 
@@ -97,6 +99,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(null);
         replay(this.request);
         this.binder.bind(this.model, this.request);
+        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
         verify(this.request);
     }
 
@@ -106,6 +109,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn("name");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
+        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
         verify(this.request, this.cookie);
     }
 
@@ -115,6 +119,18 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
+        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        verify(this.request, this.cookie);
+    }
+
+    @Test
+    public void testEmptyValue() {
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.cookie.getName()).andReturn(CookieName.EXPIRATION.toString());
+        expect(this.cookie.getValue()).andReturn("");
+        replay(this.request, this.cookie);
+        this.binder.bind(this.model, this.request);
+        assertEquals("ERROR", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
         verify(this.request, this.cookie);
     }
 }

@@ -57,14 +57,15 @@ public class CookieUserFactory implements UserFactory {
 
     private User getUserFromCookie(final Cookie cookie, final String userAgent) {
         User user = null;
-        if (userAgent != null) {
+        String value = cookie.getValue();
+        if (userAgent != null && !value.isEmpty()) {
             try {
-                PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue(), this.userIdHashKey);
+                PersistentLoginToken token = this.codec.restoreLoginToken(value, this.userIdHashKey);
                 if (token.isValidFor(this.clock.millis(), userAgent.hashCode())) {
                     user = token.getUser();
                 }
             } catch (LanewebException e) {
-                log.error("failed to decode userid from cookie: value='{}'", cookie.getValue());
+                log.error("failed to decode userid from cookie: value='{}'", value);
             }
         }
         return user;

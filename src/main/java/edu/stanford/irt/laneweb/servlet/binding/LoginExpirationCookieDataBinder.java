@@ -47,14 +47,18 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
 
     private String getExpirationValue(final String cookieValue) {
         String result = null;
-        try {
-            long expiry = Long.parseLong(cookieValue) - this.clock.millis();
-            if (expiry > 0) {
-                result = Long.toString(expiry / ONE_DAY);
-            }
-        } catch (NumberFormatException e) {
-            log.error("failed to decode expiration date from cookie: value='{}'", cookieValue);
+        if (cookieValue.isEmpty()) {
             result = "ERROR";
+        } else {
+            try {
+                long expiry = Long.parseLong(cookieValue) - this.clock.millis();
+                if (expiry > 0) {
+                    result = Long.toString(expiry / ONE_DAY);
+                }
+            } catch (NumberFormatException e) {
+                log.error("failed to decode expiration date from cookie: value='{}'", cookieValue);
+                result = "ERROR";
+            }
         }
         return result;
     }
