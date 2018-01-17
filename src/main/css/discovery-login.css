@@ -47,15 +47,15 @@
     background-color: transparent;
 }
 
-.discovery-login-links :nth-child(1) {
+.discovery-login-links a:nth-child(1) {
     background-image: url('../images/SU-discoverylogo.png');
 }
 
-.discovery-login-links :nth-child(2) {
+.discovery-login-links a:nth-child(2) {
     background-image: url('../images/SHC-discoverylogo.png');
 }
 
-.discovery-login-links :nth-child(3) {
+.discovery-login-links a:nth-child(3) {
     background-image: url('../images/LPCH-discoverylogo.png');
 }
 
@@ -65,7 +65,6 @@
 }
 
 .discovery-login-links span {
-    background: none;
     font-weight: normal;
     font-size: initial;
     position: relative;
