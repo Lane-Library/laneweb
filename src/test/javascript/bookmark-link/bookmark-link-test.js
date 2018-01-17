@@ -71,7 +71,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             this.link.set("target", bookmarkable);
             this.link.set("status", 5);
             var event = document.createEvent("MouseEvents");
-            event.initMouseEvent("mouseover")
+            event.initMouseEvent("mouseover", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
             this.link.get("node")._node.dispatchEvent(event);
             Y.Assert.areSame(2, this.link.get("status"));
         },
@@ -81,7 +81,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             this.link.set("target", bookmarkable);
             this.link.set("status", 2);
             var event = document.createEvent("MouseEvents");
-            event.initMouseEvent("mouseout")
+            event.initMouseEvent("mouseout", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
             this.link.get("node")._node.dispatchEvent(event);
             Y.Assert.areSame(5, this.link.get("status"));
         },
