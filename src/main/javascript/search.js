@@ -67,13 +67,7 @@ if (document.querySelector(".search-form"))  {
                 v = {
                     close: function() {
                         form.classList.remove("search-form-active");
-                      //anim included for smooth scrolling of window
-                        new Y.Anim({
-                            node: "win",
-                            to: { scroll: [0, 0] },
-                            duration: 0.3,
-                            easing: Y.Easing.easeBoth
-                        }).run();
+                        document.documentElement.scrollIntoView();
                         view.fire("close");
                     },
                     inputChange: function() {
