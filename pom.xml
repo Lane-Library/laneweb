@@ -495,7 +495,7 @@
                                 <include>menu-min.js</include>
                                 <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
-                                <include>link-plugin-min.js</include>
+                                <include>link-info-min.js</include>
                                 <include>lane-ie-min.js</include>
                                 <include>lane-mobile-ad-min.js</include>
                                 <include>lane-persistent-login-min.js</include>

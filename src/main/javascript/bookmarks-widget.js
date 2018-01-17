@@ -150,17 +150,17 @@
         HTML_PARSER : {
             items : ["li"],
             bookmarks : function(srcNode) {
-                var i, anchor, label, url, query, bookmarks = [], anchors = srcNode.all("a");
+                var i, anchor, linkinfo, label, url, query, bookmarks = [], anchors = srcNode.all("a");
                 for (i = 0; i < anchors.size(); i++) {
                     anchor = anchors.item(i);
-                    anchor.plug(L.LinkPlugin);
-                    label = anchor.link.get("title");
-                    if (anchor.link.get("local")) {
-                        url = anchor.link.get("path");
-                        query = anchor.link.get("query");
+                    linkinfo = new L.LinkInfo(anchor._node);
+                    label = linkinfo.title;
+                    if (linkinfo.local) {
+                        url = linkinfo.path;
+                        query = linkinfo.query;
                         url = query ? url + query : url;
                     } else {
-                        url = anchor.link.get("url");
+                        url = linkinfo.url;
                     }
                     bookmarks.push(new Bookmark(label, url));
                 }

@@ -44,7 +44,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "menu.js",
         "golfclub-headings.js",
         "model.js",
-        "link-plugin.js",
+        "link-info.js",
         "lane-ie.js",
         "lane-mobile-ad.js",
         "lane-persistent-login.js",
