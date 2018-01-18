@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" class="login">
-   <li class="login-item-active">
+   <li class="login-item">
       <i class="fa fa-sign-in fa-lg fa-fw"/>
       <a href="/myaccounts.html">
          <strong>MyLane login</strong>
