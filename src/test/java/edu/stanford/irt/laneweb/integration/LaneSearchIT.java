@@ -165,6 +165,17 @@ public class LaneSearchIT {
     }
 
     @Test
+    public void testLaneSearchJournalMedicalResearch() throws Exception {
+        // journal of medical research; older journal should still appear near top
+        this.mockMvc
+                .perform(get("/eresources/search.html?q=journal of medical research")
+                        .servletPath("/eresources/search.html"))
+                .andExpect(xpath(
+                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of medical research']",
+                        this.ns).exists());
+    }
+
+    @Test
     public void testLaneSearchLongFormMonth() throws Exception {
         // citation search variant 1: long form month
         this.mockMvc
@@ -233,12 +244,6 @@ public class LaneSearchIT {
                 .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
-    /**
-     * Test basic Solr relevance. Only runs if edu.stanford.irt.laneweb.solr-url-laneSearch in a Solr instance is
-     * accessible.
-     *
-     * @throws Exception
-     */
     @Test
     public void testLaneSearchScience() throws Exception {
         // science
