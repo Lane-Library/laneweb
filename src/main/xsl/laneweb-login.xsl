@@ -10,7 +10,12 @@
     <xsl:variable name="auth-error" select="matches($path, '^/error_auth[nz].html$')"/>
     <xsl:variable name="proxy-ipgroup" select="matches($ipgroup, '^(OTHER|PAVA|ERR)$')"/>
 
-    <xsl:template match="h:ul[attribute::class = 'login']/h:li[position() &lt; 7]">
+    <xsl:template match="
+        h:ul[attribute::class = 'login']/h:li[1]|
+        h:ul[attribute::class = 'login']/h:li[2]|
+        h:ul[attribute::class = 'login']/h:li[3]|
+        h:ul[attribute::class = 'login']/h:li[4]|
+        h:ul[attribute::class = 'login']/h:li[5]">
         <!-- position() is one greater than expected because class attribute of ul is #1 -->
         <xsl:copy>
             <xsl:choose>
