@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" class="login">
-   <li>
-      <a href="/secure/login.html?url=%3Fsomething%3Delse">MyLane login</a>
+   <li class="login-item-active">
+      <i class="fa fa-sign-in fa-lg fa-fw"/>
+      <a href="/secure/login.html?url=%3Fsomething%3Delse">
+         <strong>MyLane login</strong>
+      </a>
    </li>
-   <li>
-      <a href="?something=else&amp;proxy-links=false">Guest Access</a>
+   <li class="login-item"/>
+   <li class="login-item">
+      <div class=" favorites dropdown">
+         <i class="fa fa-star fa-lg fa-fw"/>
+         <a href="/favorites.html">My Bookmarks</a>
+         <div class="dropdown-content"/>
+      </div>
+   </li>
+   <li class="login-item">
+      <a href="/myaccounts.html">MyLane</a>
+   </li>
+   <li class="login-item">
+      <a href="/logout">Logout</a>
+   </li>
+   <li class="login-item-active">
+        Stanford <a href="?something=else&amp;proxy-links=false">
+         <i class="fa fa-toggle-on" style="transform:scale(-1, 1)"/> Guest</a>
+   </li>
+   <li class="login-item">
+      <a href="?something=else&amp;proxy-links=true&amp;proxy-links=true">Stanford <i class="fa fa-toggle-on"/>
+      </a> Guest
+    </li>
+   <li class="login-item-active">
+      <a href="/translated/chinese.html">查詢</a>
    </li>
 </ul>
