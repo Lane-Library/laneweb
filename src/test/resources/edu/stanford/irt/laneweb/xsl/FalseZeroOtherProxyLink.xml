@@ -6,21 +6,21 @@
          <strong>MyLane login</strong>
       </a>
    </li>
-   <li class="login-item"/>
-   <li class="login-item">
+   <li/>
+   <li>
       <div class=" favorites dropdown">
          <i class="fa fa-star fa-lg fa-fw"/>
          <a href="/favorites.html">My Bookmarks</a>
          <div class="dropdown-content"/>
       </div>
    </li>
-   <li class="login-item">
+   <li>
       <a href="/myaccounts.html">MyLane</a>
    </li>
-   <li class="login-item">
+   <li>
       <a href="/logout">Logout</a>
    </li>
-   <li class="login-item">
+   <li>
         Stanford <a href="?proxy-links=false&amp;proxy-links=false">
          <i class="fa fa-toggle-on" style="transform:scale(-1, 1)"/> Guest</a>
    </li>

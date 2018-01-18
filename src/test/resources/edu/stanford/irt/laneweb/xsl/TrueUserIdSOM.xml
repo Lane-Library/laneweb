@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" class="login">
-   <li class="login-item">
+   <li>
       <i class="fa fa-sign-in fa-lg fa-fw"/>
       <a href="/myaccounts.html">
          <strong>MyLane login</strong>
@@ -25,11 +25,11 @@
    <li class="login-item-active">
       <a href="/logout">Logout</a>
    </li>
-   <li class="login-item">
+   <li>
         Stanford <a href="?proxy-links=false">
          <i class="fa fa-toggle-on" style="transform:scale(-1, 1)"/> Guest</a>
    </li>
-   <li class="login-item">
+   <li>
       <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"/>
       </a> Guest
     </li>

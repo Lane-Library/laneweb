@@ -1,9 +1,9 @@
 <ul class="login" xmlns="http://www.w3.org/1999/xhtml">
-    <li class="login-item"><i class="fa fa-sign-in fa-lg fa-fw"></i>
+    <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
         <a href="/secure/login.html"><strong>MyLane login</strong></a>
     </li>
-    <li class="login-item">&#160;</li>
-    <li class="login-item">
+    <li>&#160;</li>
+    <li>
         <div class=" favorites dropdown">
             <i class="fa fa-star fa-lg fa-fw"></i>
             <a href="/favorites.html">My Bookmarks</a>
@@ -12,16 +12,16 @@
             </div>
         </div>
     </li>
-    <li class="login-item">
+    <li>
         <a href="/myaccounts.html">MyLane</a>
     </li>
-    <li class="login-item">
+    <li>
         <a href="/logout">Logout</a>
     </li>
-    <li class="login-item">
+    <li>
         Stanford <a href="?proxy-links=false"><i class="fa fa-toggle-on" style="transform:scale(-1, 1)"></i> Guest</a>
     </li>
-    <li class="login-item">
+    <li>
         <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"></i></a> Guest
     </li>
     <li class="login-item-active">
