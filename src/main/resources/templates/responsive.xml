@@ -108,7 +108,7 @@
             <div class="lane-header">
                 <div class="centered">
                     <h1>
-                        <a href="/index.html"><span>Lane</span> Medical Library</a>
+                        <a href="/index.html">Lane<br/>Medical Library</a>
                     </h1>
                     <ul class="library-contact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/hours.html">Hours</a>: <?laneweb todays-hours?></li>
@@ -201,11 +201,11 @@
             </div>
             <div id="nav" class="nav">
                 <ul class="login">
-                    <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
+                    <li class="login-item"><i class="fa fa-sign-in fa-lg fa-fw"></i>
                         <a href="/secure/login.html"><strong>MyLane login</strong></a>
                     </li>
-                    <li>&#160;</li>
-                    <li>
+                    <li class="login-item">&#160;</li>
+                    <li class="login-item">
                         <div class=" favorites dropdown">
                             <i class="fa fa-star fa-lg fa-fw"></i>
                             <a href="/favorites.html">My Bookmarks</a>
@@ -214,16 +214,16 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="login-item">
                         <a href="/myaccounts.html">MyLane</a>
                     </li>
-                    <li>
+                    <li class="login-item">
                         <a href="/logout">Logout</a>
                     </li>
-                    <li>
+                    <li class="login-item">
                         Stanford <a href="?proxy-links=false"><i class="fa fa-toggle-on" style="transform:scale(-1, 1)"></i> Guest</a>
                     </li>
-                    <li>
+                    <li class="login-item">
                         <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"></i></a> Guest
                     </li>
                     <li class="login-item-active">

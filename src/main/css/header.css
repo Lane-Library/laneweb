@@ -45,11 +45,11 @@ h1 a:hover {
     right: 0;
 }
 
-.login > li {
+.login-item {
     display: none;
 }
 
-.library-contact > li, .login > .login-item-active {
+.library-contact > li, .login-item-active {
     display: inline-block;
     padding: 0 12px;
 }
