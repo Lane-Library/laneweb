@@ -24,7 +24,7 @@
                     <xsl:value-of select="'login-item-active'"/>
                 </xsl:when>
                 <!-- other links active if logged in -->
-                <xsl:when test="$position != 1 and $position != 5 and $logged-in">
+                <xsl:when test="$position != 1 and $position != 5 and $logged-in and not($auth-error)">
                     <xsl:value-of select="'login-item-active'"/>
                 </xsl:when>
                 <!-- default not active -->
