@@ -2,38 +2,24 @@
     box-sizing: border-box;
     height: 50px;
     min-width: 1089px;
-    padding: 0 5%;
     position: absolute;
     top: 0;
     width: 100%;
 }
 
 .som-header div {
-    display: inline-block;
     background-image: url('../images/logo-sprite-globalheader-off.png');
-    background-repeat: no-repeat;
-    height: 50px;
-}
-
-.som-header div:nth-child(2) {
-    float: right;
-}
-
-.som-header div:hover {
-    background-color: #454545;
-}
-
-.som-header div:nth-child(1) {
-    background-position: 0 50%;
-    width: 150px;
-}
-
-.som-header div:nth-child(2) {
     background-position: 100% 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    float: right;
+    height: 50px;
+    margin-right: 5%;
     width: 130px;
 }
 
 .som-header div:hover {
+    background-color: #454545;
     background-image: url('../images/logo-sprite-globalheader-on.png');
 }
 
@@ -45,11 +31,7 @@
     top: 50px;
 }
 
-.som-header div:nth-child(1) ul {
-    width: 154px;
-}
-
-.som-header div:nth-child(2) ul {
+.som-header ul {
     right: 0;
     width: 134px;
 }

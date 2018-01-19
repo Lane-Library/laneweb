@@ -62,7 +62,8 @@
             <div class="lane-header">
                 <div class="centered">
                     <h1>
-                        <a href="/index.html"><span>Lane</span> Medical Library</a>
+                        <a href="http://med.stanford.edu/">Stanford Medicine</a>
+                        <a href="/index.html">Lane<br/>Medical Library</a>
                     </h1>
                     <ul class="library-contact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/hours.html">Hours</a>: <?laneweb todays-hours?></li>
@@ -235,16 +236,6 @@
             </div>
         </div>
         <div class="som-header">
-            <div class="dropdown">
-                <ul class="dropdown-content">
-                    <li><a href="http://med.stanford.edu/">Home</a></li>
-                    <li><a href="http://med.stanford.edu/health-care.html">Health Care</a></li>
-                    <li><a href="http://med.stanford.edu/research.html">Research</a></li>
-                    <li><a href="http://med.stanford.edu/education.html">Education</a></li>
-                    <li><a href="http://medicalgiving.stanford.edu/">Give</a></li>
-                    <li><a href="http://med.stanford.edu/about.html">About</a></li>
-                </ul>
-            </div>
             <div class="dropdown">
                 <ul class="dropdown-content">
                     <li><a href="http://www.stanford.edu/">Home</a></li>
