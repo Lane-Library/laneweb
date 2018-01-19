@@ -30,22 +30,41 @@
                      color: white;
                  }
                  .login {
-                     border-bottom: 1px solid white;
-                     margin: 0;
-                     position: static;
-                 }
-                 .login li {
                      background-color: #666;
                      background-image: url('./resources/images/diag.png');
-                     display: list-item;
+                     border-bottom: 1px solid white;
+                     color: rgb(121, 121, 121);
+                     font-size: 15px;
+                     margin: 0;
+                     padding: 12px;
+                     position: static;
                  }
-                 .login strong {
+                 .login li.login-item-active {
+                     display: list-item;
+                     padding: 0;
+                 }
+                 .login li:nth-child(1) {
                      display: inline-block;
-                     line-height: 55px;
+                 }
+                 .login li:nth-child(1) a {
                      background-color: rgb(0, 109, 129);
-                     width: 114px;
+                     display: block;
+                     line-height: 55px;
                      text-align: center;
                      text-transform: capitalize;
+                     width: 114px;
+                 }
+                 .login li:nth-child(1) .fa, .login li:nth-child(8) {
+                     display: none;
+                 }
+                 .login li:nth-child(6), .login li:nth-child(7) {
+                     text-align: center;
+                     word-spacing: 27px;
+                  }
+                 .login li:nth-child(6) .fa, .login li:nth-child(7) .fa {
+                     color: rgb(193, 193, 193);
+                     font-size: 62px;
+                     vertical-align: middle;
                  }
                  .lane-nav {
                      background-color: #666;
