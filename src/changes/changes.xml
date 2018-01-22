@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-01-22" version="3.4.2" description="3.4.2 bug fix release">
+            <action date="2018-01-18" dev="ceyates" issue="138359" type="update">
+                use SOM logo in place of current book logo in header
+            </action>
+            <action date="2018-01-16" dev="ryanmax" issue="138286" type="update">
+                update LPCH internal network ranges
+            </action>
+            <action date="2018-01-22" dev="ceyates" issue="137605" type="fix">
+                catalog links to software rooms no longer work
+            </action>
+        </release>
         <release date="2018-01-12" version="3.4.1" description="3.4.1 bug fix release">
             <action date="2018-01-09" dev="ceyates" issue="137745" type="update">
                 rename new discovery login pages to old name
