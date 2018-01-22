@@ -2,7 +2,9 @@
 
     "use strict";
 
-    if (Y.UA.ie) {
+    var userAgent = L.getUserAgent();
+
+    if (/MSIE/.test(userAgent)) {
 
         //toggle bookmarklet instructions for IE on favorites page
         document.querySelectorAll('#bookmarkletNotIE, .bookmarklet-not-ie').forEach(function(node) {
@@ -14,7 +16,7 @@
         });
     }
 
-    if (/Edge/.test(window.navigator.userAgent)) {
+    if (/Edge/.test(userAgent)) {
 
         //toggle bookmarklet instructions for IE on favorites page
         document.querySelectorAll('#bookmarkletNotIE, .bookmarklet-not-ie').forEach(function(node) {

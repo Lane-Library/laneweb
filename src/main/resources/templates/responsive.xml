@@ -16,21 +16,6 @@
                 right: 20px;
                 top: 20px;
             }
-            h1 {
-                background-image: url('./resources/images/sm-logo.svg');
-                box-sizing: border-box;
-                font-size: 18px;
-                height: 80px;
-                padding: 20px 0 0;
-            }
-            h1 a, h1 a:visited {
-                background-color: white;
-                border-left: 1px #333333 solid;
-                color: #333333;
-                display: inline-block;
-                margin-left: 168px;
-                padding-left: 6px;
-            }
             @media (max-width: 921px) {
                 .som-header, .nav, .library-contact, .lane-footer, .som-footer {
                     display: none;
@@ -45,22 +30,41 @@
                      color: white;
                  }
                  .login {
-                     border-bottom: 1px solid white;
-                     margin: 0;
-                     position: static;
-                 }
-                 .login li {
                      background-color: #666;
                      background-image: url('./resources/images/diag.png');
-                     display: list-item;
+                     border-bottom: 1px solid white;
+                     color: rgb(121, 121, 121);
+                     font-size: 15px;
+                     margin: 0;
+                     padding: 12px;
+                     position: static;
                  }
-                 .login strong {
+                 .login li.login-item-active {
+                     display: list-item;
+                     padding: 0;
+                 }
+                 .login li:nth-child(1) {
                      display: inline-block;
-                     line-height: 55px;
+                 }
+                 .login li:nth-child(1) a {
                      background-color: rgb(0, 109, 129);
-                     width: 114px;
+                     display: block;
+                     line-height: 55px;
                      text-align: center;
                      text-transform: capitalize;
+                     width: 114px;
+                 }
+                 .login li:nth-child(1) .fa, .login li:nth-child(8) {
+                     display: none;
+                 }
+                 .login li:nth-child(6), .login li:nth-child(7) {
+                     text-align: center;
+                     word-spacing: 27px;
+                  }
+                 .login li:nth-child(6) .fa, .login li:nth-child(7) .fa {
+                     color: rgb(193, 193, 193);
+                     font-size: 62px;
+                     vertical-align: middle;
                  }
                  .lane-nav {
                      background-color: #666;
@@ -97,9 +101,12 @@
                  }
             }
             @media (max-width: 426px) {
-                h1 a {
-                    border-left: none;
-                    margin-left: 44px;
+                 h1 a:nth-child(1) {
+                     width: 44px;
+                 }
+                 h1 a:nth-child(2) {
+                     border-left: none;
+                 }
             }
         </style>
     </head>
@@ -108,6 +115,7 @@
             <div class="lane-header">
                 <div class="centered">
                     <h1>
+                        <a href="http://med.stanford.edu/">Stanford Medicine</a>
                         <a href="/index.html">Lane<br/>Medical Library</a>
                     </h1>
                     <ul class="library-contact">
@@ -204,10 +212,14 @@
                     <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
                         <a href="/secure/login.html"><strong>MyLane login</strong></a>
                     </li>
-                    <li class="favorites dropdown"><i class="fa fa-star fa-lg fa-fw"></i>
-                        <a href="/favorites.html">My Bookmarks</a>
-                        <div class="dropdown-content">
-                            <?laneweb bookmarks?>
+                    <li>&#160;</li>
+                    <li>
+                        <div class=" favorites dropdown">
+                            <i class="fa fa-star fa-lg fa-fw"></i>
+                            <a href="/favorites.html">My Bookmarks</a>
+                            <div class="dropdown-content">
+                                <?laneweb bookmarks?>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -222,7 +234,7 @@
                     <li>
                         <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"></i></a> Guest
                     </li>
-                    <li>
+                    <li class="login-item-active">
                         <a href="/translated/chinese.html">查詢</a>
                     </li>
                 </ul>
@@ -278,16 +290,6 @@
             </div>
         </div>
         <div class="som-header">
-            <div class="dropdown">
-                <ul class="dropdown-content">
-                    <li><a href="http://med.stanford.edu/">Home</a></li>
-                    <li><a href="http://med.stanford.edu/health-care.html">Health Care</a></li>
-                    <li><a href="http://med.stanford.edu/research.html">Research</a></li>
-                    <li><a href="http://med.stanford.edu/education.html">Education</a></li>
-                    <li><a href="http://medicalgiving.stanford.edu/">Give</a></li>
-                    <li><a href="http://med.stanford.edu/about.html">About</a></li>
-                </ul>
-            </div>
             <div class="dropdown">
                 <ul class="dropdown-content">
                     <li><a href="http://www.stanford.edu/">Home</a></li>

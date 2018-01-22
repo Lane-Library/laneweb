@@ -4,9 +4,13 @@ if (document.querySelector(".pico-toggle"))  {
 
     "use strict";
 
-    var PICO_ON = "pico-on",
+    var ACTIVE = "-active",
+        PICO_ON = "pico-on",
+        PICO_ON_ACTIVE = PICO_ON + ACTIVE,
         PICO_OFF = "pico-off",
+        PICO_OFF_ACTIVE = PICO_OFF + ACTIVE,
         PICO_TOGGLE = "pico-toggle",
+        PICO_TOGGLE_ACTIVE = PICO_TOGGLE + ACTIVE,
 
         view = function(toggle) {
 
@@ -14,28 +18,28 @@ if (document.querySelector(".pico-toggle"))  {
                 off = toggle.querySelector("." + PICO_OFF),
                 v = {
                     activate: function() {
-                        L.activate(toggle, PICO_TOGGLE);
-                        L.activate(on, PICO_ON);
-                        L.deactivate(off, PICO_OFF);
+                        toggle.classList.add(PICO_TOGGLE_ACTIVE);
+                        on.classList.add(PICO_ON_ACTIVE);
+                        off.classList.remove(PICO_OFF_ACTIVE);
                     },
                     deactivate: function() {
-                        L.deactivate(toggle, PICO_TOGGLE);
-                        L.deactivate(on, PICO_ON);
-                        L.deactivate(off, PICO_OFF);
+                        toggle.classList.remove(PICO_TOGGLE_ACTIVE);
+                        on.classList.remove(PICO_ON_ACTIVE);
+                        off.classList.remove(PICO_OFF_ACTIVE);
                     },
                     picoOn: function() {
-                        L.deactivate(on, PICO_ON);
-                        L.activate(off, PICO_OFF);
+                        on.classList.remove(PICO_ON_ACTIVE);
+                        off.classList.add(PICO_OFF_ACTIVE);
                         v.fire("on");
                     },
                     picoOff: function() {
-                        L.deactivate(off, PICO_OFF);
-                        L.activate(on, PICO_ON);
+                        off.classList.remove(PICO_OFF_ACTIVE);
+                        on.classList.add(PICO_ON_ACTIVE);
                         v.fire("off");
                     },
                     reset: function() {
-                        L.activate(on, PICO_ON);
-                        L.deactivate(off, PICO_OFF);
+                        on.classList.add(PICO_ON_ACTIVE);
+                        off.classList.remove(PICO_OFF_ACTIVE);
                     }
                 };
 

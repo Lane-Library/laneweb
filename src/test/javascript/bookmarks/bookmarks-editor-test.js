@@ -1,3 +1,5 @@
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+
 "use strict";
 
 var bookmarksTestCase = new Y.Test.Case({
@@ -35,12 +37,10 @@ var bookmarksTestCase = new Y.Test.Case({
 
 });
 
-
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
+new Y.Test.Console().render();
 
 Y.Test.Runner.add(bookmarksTestCase);
 Y.Test.Runner.masterSuite.name = "bookmarks-editor-test.js";
 Y.Test.Runner.run();
+
+});

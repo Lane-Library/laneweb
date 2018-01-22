@@ -316,7 +316,7 @@
             };
             Tracker.trackEvent(e);
             //put in a delay for safari to make the tracking request:
-            if (Y.UA.webkit && (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e))) {
+            if (/AppleWebKit/.test(L.getUserAgent()) && (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e))) {
                     while (t) {
                         // have safari follow link if it's not:
                         //  - popup or facet

@@ -2,78 +2,61 @@
 
     "use strict";
 
-    var model = L.Model, redirectUrl,
-    persistentStatusCookie = Y.Cookie.get('lane-login-expiration-date'),
-    basePath = model.get(model.BASE_PATH)|| "",
-    now = new Date(),
-    // isStanfordActive == true only if user is from stanford and is active in the LDAP
-    // See UserDataBinder.java
-    isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
-    extensionPersistentLoginPopup,
-    popupWindow,
-    getPopup,
-    // the check box for persistent login on the discovery login page
-    persistentLoginCheckbox = document.querySelector('#is-persistent-login');
+    var model = L.Model,
+        redirectUrl,
+        loginExpirationDate = L.Cookie.get('lane-login-expiration-date'),
+        basePath = model.get(model.BASE_PATH)|| "",
+        // isStanfordActive == true only if user is from stanford and is active in the LDAP
+        // See UserDataBinder.java
+        isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
+        // the check box for persistent login on the discovery login page
+        persistentLoginCheckbox = document.getElementById('is-persistent-login'),
+        myAccountsLink = document.getElementById("persistent-login"),
+
+        // The popup window for extension
+        popupWindow = function(id, o) {
+            var lightbox = L.Lightbox, okLink;
+            lightbox.setContent(o.responseText);
+            redirectUrl = redirectUrl || "/index.html";
+            okLink = document.querySelector(".yui3-lightbox a");
+            okLink.href = basePath + "/persistentLogin.html?pl=renew&url=" + encodeURIComponent(redirectUrl);
+            lightbox.show();
+        };
 
     // if someone click on a proxied link and he is from stanford so he will
     // have the possibility to extend his persistent login
-    Y.on("click", function(event) {
-        extensionPersistentLoginPopup(event);
-    }, "a[href*='/redirect/cme']");
-    Y.on("click", function(event) {
-        extensionPersistentLoginPopup(event);
-    }, "a[href*='laneproxy.stanford.edu/login']");
-
-    extensionPersistentLoginPopup = function(event){
-        var link = event.target;
-        if (isStanfordActive && persistentStatusCookie && now.getTime() > persistentStatusCookie) {
-            event.preventDefault();
-            link.set('rel', 'persistentLogin');
-            redirectUrl = event.target.get('href');
-            getPopup(basePath + '/plain/shibboleth-persistent-extension.html');
-        }
-    };
-
-    getPopup = function(urlPage) {
-        L.io(urlPage, {
-            on : {
-                success : popupWindow
+    if (isStanfordActive && loginExpirationDate) {
+        document.addEventListener("click", function(event) {
+            var node = event.target.closest("a[href*='laneproxy.stanford.edu/login'], a[href*='/redirect/cme']");
+            if (node && new Date().getTime() > loginExpirationDate) {
+                event.preventDefault();
+                redirectUrl = node.href;
+                // setting rel keeps the tracking redirect thing from happening
+                node.rel = "persistentLogin";
+                L.io(basePath + '/plain/shibboleth-persistent-extension.html', {
+                    on : {
+                        success : popupWindow
+                    }
+                });
             }
         });
-    };
-
-    // The popup window for expension
-    popupWindow = function(id, o) {
-        var lightbox = L.Lightbox, shibbolethAnchors;
-        lightbox.setContent(o.responseText);
-        lightbox.show();
-        shibbolethAnchors = lightbox.get("contentBox").all('#shibboleth-links a');
-        Y.once("click", function(event) {
-            var node = event.currentTarget, href;
-            if (!redirectUrl) {
-                redirectUrl = "/index.html";
-            }
-            href =  basePath+ '/persistentLogin.html?pl=renew&url='+ encodeURIComponent(redirectUrl);
-            node.set('href', href);
-        }, shibbolethAnchors);
-    };
-    // END POPUP
+    }
 
     //handle checking or unchecking the check box on the discovery login page
     if (persistentLoginCheckbox) {
         persistentLoginCheckbox.addEventListener("change", function(event) {
             if (event.target.checked) {
-                Y.Cookie.set("isPersistent", "yes");
+                L.Cookie.set("isPersistent", "yes");
             } else {
-                Y.Cookie.remove("isPersistent");
+                L.Cookie.remove("isPersistent");
             }
         });
     }
 
     // for the static page myaccounts.html Click on YES this way the user
     // will not have to go through webauth.
-    if (document.querySelector('#persistent-login')) {
-        document.querySelector("#persistent-login").addEventListener('click',function(event) {
+    if (myAccountsLink) {
+        myAccountsLink.addEventListener('click',function(event) {
             event.preventDefault();
             if (isStanfordActive) {
                 L.setLocationHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');

@@ -18,9 +18,9 @@
             element = elements.item(i);
             if (id === element.id && i <= activeElementIndex) {
                 activeElementIndex = i;
-                L.activate(element, "popin");
+                element.classList.add("popin-active");
             } else if (i > activeElementIndex) {
-                L.deactivate(element, "popin");
+                element.classList.remove("popin-active");
             }
         }
     });

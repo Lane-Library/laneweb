@@ -1,3 +1,5 @@
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+
 "use strict";
 
 Y.Test.Runner.add(new Y.Test.Case({
@@ -49,11 +51,9 @@ Y.Test.Runner.add(new Y.Test.Case({
 
 }));
 
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
-
+new Y.Test.Console().render();
 
 Y.Test.Runner.masterSuite.name = "search-pico-fields-test.js";
 Y.Test.Runner.run();
+
+});

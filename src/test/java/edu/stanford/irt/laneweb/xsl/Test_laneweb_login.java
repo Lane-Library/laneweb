@@ -187,6 +187,7 @@ public class Test_laneweb_login extends AbstractXSLTest {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.REQUEST_URI, "/base/error_authz.html");
+        this.transformer.setParameter(Model.BASE_PATH, "/base");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("Unauthorized.xml"), sw.toString());
     }

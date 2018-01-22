@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>lane-bassett javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
+        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
     </head>
-    <body>
+    <body class="yui3-skin-sam">
         <div class="bassett-error">bassett error</div>
         <div id="bassett-menu">
             <ul class="region" id="abdomen">
@@ -68,7 +68,7 @@
         <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
         <script src="../../../main/javascript/util.js" type="text/javascript"></script>
         <script type="text/javascript">
-var content = Y.one("#bassettContent").get("innerHTML");
+var content = document.querySelector("#bassettContent").innerHTML;
 L.io = function(url, config) {
         var responseText = "<span>" + url + "</span>" + content;
         config.on.success.apply(config.context, [0, {responseText:responseText}, {}]);

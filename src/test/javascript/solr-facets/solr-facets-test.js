@@ -1,7 +1,9 @@
 /**
  * @author ryanmax
  */
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+
+    "use strict";
 
 L.Model.set(L.Model.URL_ENCODED_QUERY, "foo");
 
@@ -10,7 +12,9 @@ L.io = function(url, config) {
 };
 
 var solrFacetsTestCase = new Y.Test.Case({
+
     name: "Solr Facets TestCase",
+
     testBasic: function() {
         var solrFacets = Y.one('.solrFacets');
         Y.Assert.areEqual(2, solrFacets.all("li").size());
@@ -18,12 +22,10 @@ var solrFacetsTestCase = new Y.Test.Case({
     }
 });
 
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
-
+new Y.Test.Console().render();
 
 Y.Test.Runner.add(solrFacetsTestCase);
 Y.Test.Runner.masterSuite.name = "solr-facets-test.js";
 Y.Test.Runner.run();
+
+});

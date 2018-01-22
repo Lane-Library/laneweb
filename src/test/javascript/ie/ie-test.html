@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>lane-ie javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.13.0.css"/>
+        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
     </head>
-    <body>
+    <body class="yui3-skin-sam">
         <div class="lane-nav">
             <div id="laneNavMenu">
                 <ul>
@@ -22,7 +22,9 @@
         <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
         <script src="../../../main/javascript/util.js" type="text/javascript"></script>
         <script type="text/javascript">
-            Y.UA.ie=8;
+        L.getUserAgent = function() {
+            return "MSIE";
+        }
         </script>
         <script src="../../../main/javascript/lane-ie.js" type="text/javascript"></script>
         <script src="ie-test.js" type="text/javascript"></script>

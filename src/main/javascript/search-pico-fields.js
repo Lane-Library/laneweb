@@ -3,15 +3,16 @@
     "use strict";
 
     var PICO_FIELDS = "pico-fields",
+        PICO_FIELDS_ACTIVE = PICO_FIELDS + "-active",
 
         view = function(pico) {
 
             return {
                     hide: function() {
-                        L.deactivate(pico, PICO_FIELDS);
+                        pico.classList.remove(PICO_FIELDS_ACTIVE);
                     },
                     show: function() {
-                        L.activate(pico, PICO_FIELDS);
+                        pico.classList.add(PICO_FIELDS_ACTIVE);
                     }
                 };
 

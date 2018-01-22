@@ -1,3 +1,5 @@
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+
 "use strict";
 
 var searchPicoToggleTestCase = new Y.Test.Case({
@@ -22,8 +24,8 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
     
     "test not clinical search tab activated": function() {
-        L.activate(this.on, "pico-on");
-        L.activate(this.toggle, "pico-toggle");
+        this.on.classList.add("pico-on-active");
+        this.toggle.classList.add("pico-toggle-active");
         L.fire("searchTabs:change", {newVal: {source:"foo"}});
         Y.Assert.areEqual("pico-on", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
@@ -31,8 +33,8 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
 
     "test on click": function() {
-        L.activate(this.on, "pico-on");
-        L.activate(this.toggle, "pico-toggle");
+        this.on.classList.add("pico-on-active");
+        this.toggle.classList.add("pico-toggle-active");
         var active;
         L.once("picoToggle:change", function(event) {
             active = event.active;
@@ -47,8 +49,8 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
 
     "test off click": function() {
-        L.activate(this.off, "pico-off");
-        L.activate(this.toggle, "pico-toggle");
+        this.off.classList.add("pico-off-active");
+        this.toggle.classList.add("pico-toggle-active");
         var active;
         L.once("picoToggle:change", function(event) {
             active = event.active;
@@ -63,9 +65,9 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
     
     "test active change resets": function() {
-        L.deactivate(this.on, "pico-on");
-        L.activate(this.off, "pico-off");
-        L.activate(this.toggle, "pico-toggle");
+        this.on.classList.remove("pico-on-active");
+        this.off.classList.add("pico-off-active");
+        this.toggle.classList.add("pico-toggle-active");
         L.fire("search:activeChange", {active: false});
         Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
@@ -73,11 +75,10 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     }
 });
 
-Y.one("body").addClass("yui3-skin-sam");
-new Y.Console({
-    newestOnTop: false
-}).render("#log");
+new Y.Test.Console().render();
 
 Y.Test.Runner.add(searchPicoToggleTestCase);
 Y.Test.Runner.masterSuite.name = "search-pico-toggle-test.js";
 Y.Test.Runner.run();
+
+});

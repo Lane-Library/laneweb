@@ -107,10 +107,10 @@
     var laneSuggest,
         hybridInput = document.querySelector('.laneSuggest');
     if (hybridInput) {
-        laneSuggest = new L.Suggest(new Y.Node(hybridInput));
-        laneSuggest.on("select",function(){
+        laneSuggest = new L.Suggest(hybridInput);
+        laneSuggest.on("select", function() {
             L.searchIndicator.show();
-            L.ancestor(hybridInput, "form").submit();
+            hybridInput.closest("form").submit();
         });
     }
 })();

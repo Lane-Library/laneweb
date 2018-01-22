@@ -46,7 +46,7 @@
                                 // case 132771 use protocol relative urls for images
                                 // from the bookcover database (substring(5))
                                 imageMap[bibid][i].src = updates[bibid].substring(5);
-                                L.activate(imageMap[bibid][i], "bookcover");
+                                imageMap[bibid][i].classList.add("bookcover-active");
                             }
                         }
                         delete imageMap[bibid];

@@ -7,6 +7,7 @@ if (document.querySelector(".search-form"))  {
     var CLICK = "click",
         SOURCE = "source",
         SEARCH_TAB = "search-tab",
+        SEARCH_TAB_ACTIVE = SEARCH_TAB + "-active",
         form = document.querySelector(".search-form"),
         tabNodes = form.querySelectorAll("." + SEARCH_TAB),
 
@@ -27,7 +28,7 @@ if (document.querySelector(".search-form"))  {
 
             return m;
 
-        }(form.querySelector("." + SEARCH_TAB + "-active").dataset[SOURCE]),
+        }(form.querySelector("." + SEARCH_TAB_ACTIVE).dataset[SOURCE]),
 
         view = function() {
 
@@ -35,8 +36,8 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     change: function(newVal, oldVal) {
-                        L.deactivate(tabs[oldVal.source], SEARCH_TAB);
-                        L.activate(tabs[newVal.source], SEARCH_TAB);
+                        tabs[oldVal.source].classList.remove(SEARCH_TAB_ACTIVE);
+                        tabs[newVal.source].classList.add(SEARCH_TAB_ACTIVE);
                     },
                     click: function() {
                         view.fire(CLICK, this.dataset[SOURCE]);

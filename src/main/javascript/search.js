@@ -66,21 +66,15 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     close: function() {
-                        L.deactivate(form, "search-form");
-                      //anim included for smooth scrolling of window
-                        new Y.Anim({
-                            node: "win",
-                            to: { scroll: [0, 0] },
-                            duration: 0.3,
-                            easing: Y.Easing.easeBoth
-                        }).run();
+                        form.classList.remove("search-form-active");
+                        document.documentElement.scrollIntoView();
                         view.fire("close");
                     },
                     inputChange: function() {
                         view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
-                        L.activate(form, "search-form");
+                        form.classList.add("search-form-active");
                         view.fire("open");
                     },
                     reset: function() {

@@ -14,7 +14,7 @@
          *
          * @class BookmarksLink
          * @uses Base
-         * @uses LinkPlugin
+         * @uses LinkInfo
          * @constructor
          */
         BookmarkLink = function() {
@@ -90,23 +90,24 @@
             },
 
             /**
-             * Responds to BookmarkLink clicks.  Adds the LinkPlugin to the target link and uses
+             * Responds to BookmarkLink clicks.  Wraps the target link in LinkInfo and uses
              * that to determine the url (translates proxy links to the base url).  Changes the
              * status to BOOKMARKING
              * @method _handleClick
              * @private
              */
             _handleClick : function() {
-                var target = this.get("target"), label, url, query, bookmarks;
-                target.plug(L.LinkPlugin);
-                label = target.link.get("title");
-                if (target.link.get("local")) {
-                    url = target.link.get("path");
+                var target = this.get("target"),
+                    linkinfo = new L.LinkInfo(target._node),
+                    label, url, query, bookmarks;
+                label = linkinfo.title;
+                if (linkinfo.local) {
+                    url = linkinfo.path;
                     //case 71646 local links lack query string
-                    query = target.link.get("query");
+                    query = linkinfo.query;
                     url = query ? url + query : url;
                 } else {
-                    url = target.link.get("url");
+                    url = linkinfo.url;
                 }
                 this.set("status", BookmarkLink.BOOKMARKING);
                 bookmarks = this.get("bookmarks");
@@ -176,14 +177,14 @@
              * @returns {Boolean}
              */
             _isAlreadyBookmarked : function(target) {
-                var url, bookmarks, query;
-                target.plug(L.LinkPlugin);
-                if (target.link.get("local")) {
-                    url = target.link.get("path");
-                    query = target.link.get("query");
+                var url, bookmarks, query,
+                    linkinfo = new L.LinkInfo(target._node);
+                if (linkinfo.local) {
+                    url = linkinfo.path;
+                    query = linkinfo.query;
                     url = query ? url + query : url;
                 } else {
-                    url = target.link.get("url");
+                    url = linkinfo.url;
                 }
                 bookmarks = this.get("bookmarks");
                 if (bookmarks) {

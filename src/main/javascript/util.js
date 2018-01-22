@@ -2,13 +2,30 @@
 
     "use strict";
 
-    L.activate = function(node, clazz) {
-        node.classList.add(clazz +"-active");
+    L.getUserAgent = function() {
+        return window.navigator.userAgent;
     };
 
-    L.deactivate = function(node, clazz) {
-        node.classList.remove(clazz + "-active");
+    /*
+     * stubbable method for setting location.href
+     */
+    L.setLocationHref = function(href) {
+        location.href = href;
     };
+
+    L.addEventTarget = function(obj, args) {
+        Y.augment(obj, Y.EventTarget, false, null, args);
+    };
+
+    L.io = Y.io;
+    L.Get = Y.Get;
+    L.Cookie = Y.Cookie;
+
+    L.addEventTarget(L, {
+        prefix : "lane",
+        emitFacade : true,
+        broadcast : 1
+    });
 
     /*
      * polyfill for NodeList.prototype.forEach() from
@@ -22,13 +39,6 @@
             }
         };
     }
-
-    /*
-     * stubbable method for setting location.href
-     */
-    L.setLocationHref = function(href) {
-        location.href = href;
-    };
 
     /*
      * polyfill for Element.prototype.matches() from
@@ -47,14 +57,17 @@
     if (!Element.prototype.closest) {
         Element.prototype.closest = function(selector) {
             var el = this;
-            while (el.matches && !el.matches(selector)) {
+            while (el && el.matches && !el.matches(selector)) {
                 el = el.parentNode;
             }
-            return el.matches ? el : null;
+            return el && el.matches ? el : null;
         };
     }
 
- // from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+    /*
+     * polyfill for remove()
+     * from:https://github.com/jserz/js_piece/blob/master/DOM/ChildNode/remove()/remove().md
+     */
     (function (arr) {
       arr.forEach(function (item) {
         if (item.hasOwnProperty('remove')) {
@@ -73,15 +86,4 @@
       });
     })([Element.prototype, CharacterData.prototype, DocumentType.prototype]);
 
-    L.io = Y.io;
-
-    L.addEventTarget = function(obj, args) {
-        Y.augment(obj, Y.EventTarget, false, null, args);
-    };
-
-    L.addEventTarget(L, {
-        prefix : "lane",
-        emitFacade : true,
-        broadcast : 1
-    });
 })();

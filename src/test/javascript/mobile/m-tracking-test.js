@@ -1,7 +1,7 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
-YUI().use("*", function(Y) {
-    
+    "use strict";
+
     var pushed;
     
     _gaq = {
@@ -152,14 +152,10 @@ YUI().use("*", function(Y) {
         }
     });
 
-
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
-        newestOnTop: false
-    }).render('#log');
-
+    new Y.Test.Console().render();
 
     Y.Test.Runner.add(laneMobileTestCase);
     Y.Test.Runner.masterSuite.name = "m-tracking-test.js";
     Y.Test.Runner.run();
+
 });

@@ -69,7 +69,7 @@ public class CookieUserFactoryTest {
         expect(this.request.getHeader("User-Agent")).andReturn("useragent");
         expect(this.cookie.getName()).andReturn("name");
         expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
-        expect(this.cookie.getValue()).andReturn("value").times(2);
+        expect(this.cookie.getValue()).andReturn("value");
         LanewebException ex = new LanewebException("invalid encryptedValue");
         expect(this.codec.restoreLoginToken("value", "key")).andThrow(ex);
         replay(this.codec, this.request, this.cookie, this.token, this.user);
@@ -89,5 +89,44 @@ public class CookieUserFactoryTest {
         replay(this.codec, this.request, this.cookie, this.token, this.user);
         assertNull(this.factory.createUser(this.request));
         verify(this.codec, this.request, this.cookie, this.token, this.user);
+    }
+
+    @Test
+    public void testCreateUserEmptyCookieValue() {
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.request.getHeader("User-Agent")).andReturn("useragent");
+        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
+        expect(this.cookie.getValue()).andReturn("");
+        replay(this.request, this.cookie);
+        assertNull(this.factory.createUser(this.request));
+        verify(this.request, this.cookie);
+    }
+
+    @Test
+    public void testCreateUserNullUserAgent() {
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.request.getHeader("User-Agent")).andReturn(null);
+        expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
+        expect(this.cookie.getValue()).andReturn("value");
+        replay(this.request, this.cookie);
+        assertNull(this.factory.createUser(this.request));
+        verify(this.request, this.cookie);
+    }
+
+    @Test
+    public void testNoCookies() {
+        expect(this.request.getCookies()).andReturn(null);
+        replay(this.request);
+        assertNull(this.factory.createUser(this.request));
+        verify(this.request);
+    }
+
+    @Test
+    public void testNoRelevantCookies() {
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.cookie.getName()).andReturn("name");
+        replay(this.request, this.cookie);
+        assertNull(this.factory.createUser(this.request));
+        verify(this.request, this.cookie);
     }
 }

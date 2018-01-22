@@ -1,65 +1,51 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
-L.on("viewport:init", function(event) {
+    "use strict";
 
-    var viewportTestCase = new Y.Test.Case({
+    L.on("viewport:init", function(event) {
 
-        name: "Lane Viewport Testcase",
+        var viewportTestCase = new Y.Test.Case({
 
-        viewport: event.viewport,
+            name: "Lane Viewport Testcase",
 
-        "test viewport exists": function() {
-            Y.Assert.isObject(this.viewport);
-        },
+            viewport: event.viewport,
 
-        "test in viewport": function() {
-            Y.Assert.isTrue(this.viewport.inView(document.querySelector("#top")));
-        },
+            "test viewport exists": function() {
+                Y.Assert.isObject(this.viewport);
+            },
 
-        "test not in viewport": function() {
-            Y.Assert.isFalse(this.viewport.inView(document.querySelector("#bottom")));
-        },
+            "test in viewport": function() {
+                Y.Assert.isTrue(this.viewport.inView(document.querySelector("#top")));
+            },
 
-        "test scroll": function() {
-            var a = new Y.Anim({
-                node: "win",
-                to: { scroll: [1000, 1000] },
-                duration: 0.1,
-                easing: Y.Easing.easeBoth
-            });
-            a.run();
-            this.wait(function() {
+            "test not in viewport": function() {
+                Y.Assert.isFalse(this.viewport.inView(document.querySelector("#bottom")));
+            },
+
+            "test scroll": function() {
+                window.scrollTo(0, 1000);
                 Y.Assert.isTrue(this.viewport.inView(document.querySelector("#bottom")));
-            }, 200);
-        },
+            },
 
-        "test scroll event": function() {
-            var topInView = this.viewport.inView(document.querySelector("#top"));
-            Y.Assert.isFalse(topInView);
-            L.once("viewport:scrolled", function(event) {
-                topInView = event.viewport.inView(document.querySelector("#top"));
-            });
-            var a = new Y.Anim({
-                node: "win",
-                to: { scroll: [-1000, -1000] },
-                duration: 0.1,
-                easing: Y.Easing.easeBoth
-            });
-            a.run();
-            this.wait(function() {
-                Y.Assert.isTrue(topInView);
-            }, 1200);
-        }
+            "test scroll event": function() {
+                var topInView = this.viewport.inView(document.querySelector("#top"));
+                Y.Assert.isFalse(topInView);
+                L.once("viewport:scrolled", function(event) {
+                    topInView = event.viewport.inView(document.querySelector("#top"));
+                });
+                window.scrollTo(0, 0);
+                this.wait(function() {
+                    Y.Assert.isTrue(topInView);
+                }, 1200);
+            }
+        });
+
+        new Y.Test.Console().render();
+
+        Y.Test.Runner.add(viewportTestCase);
+        Y.Test.Runner.masterSuite.name = "viewport-test.js";
+        Y.Test.Runner.run();
+
     });
 
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
-        newestOnTop: false
-    }).render('#log');
-
-
-    Y.Test.Runner.add(viewportTestCase);
-    Y.Test.Runner.masterSuite.name = "viewport-test.js";
-    Y.Test.Runner.run();
-    
 });

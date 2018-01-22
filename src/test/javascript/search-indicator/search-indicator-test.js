@@ -1,32 +1,33 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
-var searchIndicatorTestCase = new Y.Test.Case({
+    "use strict";
 
-    name: "Lane Search Indicator Test Case",
+    var searchIndicatorTestCase = new Y.Test.Case({
 
-    indicator : L.searchIndicator,
+        name: "Lane Search Indicator Test Case",
 
-    node: document.querySelector(".search-indicator"),
+        indicator : L.searchIndicator,
 
-    testShowAndHide: function() {
-        this.indicator.show();
-        Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
-        this.indicator.hide();
-        Y.Assert.areEqual("search-indicator", this.node.className);
-    },
+        node: document.querySelector(".search-indicator"),
 
-    "test search:search event shows": function() {
-        L.fire("search:search");
-        Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
-    }
+        testShowAndHide: function() {
+            this.indicator.show();
+            Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
+            this.indicator.hide();
+            Y.Assert.areEqual("search-indicator", this.node.className);
+        },
+
+        "test search:search event shows": function() {
+            L.fire("search:search");
+            Y.Assert.areEqual("search-indicator search-indicator-active", this.node.className);
+        }
+    });
+
+    new Y.Test.Console().render();
+
+
+    Y.Test.Runner.add(searchIndicatorTestCase);
+    Y.Test.Runner.masterSuite.name = "search-indicator-test.js";
+    Y.Test.Runner.run();
+
 });
-
-Y.one("body").addClass("yui3-skin-sam");
-new Y.Console({
-    newestOnTop: false
-}).render("#log");
-
-
-Y.Test.Runner.add(searchIndicatorTestCase);
-Y.Test.Runner.masterSuite.name = "search-indicator-test.js";
-Y.Test.Runner.run();

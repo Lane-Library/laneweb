@@ -1,26 +1,28 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
-var modelTestCase = new Y.Test.Case({
+    "use strict";
 
-    name: 'Lane Model Test Case',
-    model: L.Model,
+    var modelTestCase = new Y.Test.Case({
 
-    testGetValue : function() {
-        Y.Assert.areEqual(this.model.get("key"), "value");
-    },
+        name: 'Lane Model Test Case',
 
-    testSetGetValue: function() {
-        this.model.set("key", "newvalue");
-        Y.Assert.areEqual(this.model.get("key"), "newvalue");
-    }
+        model: L.Model,
+
+        testGetValue : function() {
+            Y.Assert.areEqual(this.model.get("key"), "value");
+        },
+
+        testSetGetValue: function() {
+            this.model.set("key", "newvalue");
+            Y.Assert.areEqual(this.model.get("key"), "newvalue");
+        }
+
+    });
+
+    new Y.Test.Console().render();
+
+    Y.Test.Runner.add(modelTestCase);
+    Y.Test.Runner.masterSuite.name = "model-test.js";
+    Y.Test.Runner.run();
 
 });
-
-Y.one('body').addClass('yui3-skin-sam');
-new Y.Console({
-    newestOnTop: false
-}).render('#log');
-
-Y.Test.Runner.add(modelTestCase);
-Y.Test.Runner.masterSuite.name = "model-test.js";
-Y.Test.Runner.run();

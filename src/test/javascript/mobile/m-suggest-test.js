@@ -1,9 +1,11 @@
-"use strict";
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {"use strict";
 
-YUI().use("*", function(Y) {
+
 
     var laneMobileTestCase = new Y.Test.Case({
+
         name: "Lane Mobile TestCase",
+
         "test $.LANE exists" : function() {
             Y.Assert.isObject($.LANE);
         },
@@ -54,14 +56,10 @@ YUI().use("*", function(Y) {
         }
     });
 
-
-    Y.one('body').addClass('yui3-skin-sam');
-    new Y.Console({
-        newestOnTop: false
-    }).render('#log');
-
+    new Y.Test.Console().render();
 
     Y.Test.Runner.add(laneMobileTestCase);
     Y.Test.Runner.masterSuite.name = "m-suggest-test.js";
     Y.Test.Runner.run();
+
 });

@@ -562,6 +562,7 @@ proto = {
             getLoader(Y);
         }
 
+        // Y.log(Y.id + ' initialized', 'info', 'yui');
     },
 
     /**
@@ -613,6 +614,7 @@ with any configuration info required for the module.
 
     YUI.add('davglass', function (Y) {
         Y.davglass = function () {
+            Y.log('Dav was here!');
         };
     }, '3.4.0', {
         requires: ['harley-davidson', 'mt-dew']
@@ -744,6 +746,7 @@ with any configuration info required for the module.
                         moot = true;
                     }
 
+                    // Y.log('no js def for: ' + name, 'info', 'yui');
 
                     //if (!loader || !loader.moduleInfo[name]) {
                     //if ((!loader || !loader.moduleInfo[name]) && !moot) {
@@ -772,6 +775,7 @@ with any configuration info required for the module.
                     // are not attached when they were already loaded into the
                     // page (when bundling for example)
                     if (loader && !loader._canBeAttached(name)) {
+                        Y.log('Failed to attach module ' + name, 'warn', 'yui');
                         return true;
                     }
 
@@ -908,11 +912,15 @@ with any configuration info required for the module.
             mod.push('event-synthetic');
         }
 
+        Y.log('Delaying use callback until: ' + until.event, 'info', 'yui');
         return function() {
+            Y.log('Use callback fired, waiting on delay', 'info', 'yui');
             var args = arguments;
             Y._use(mod, function() {
+                Y.log('Delayed use wrapper callback after dependencies', 'info', 'yui');
                 Y.on(until.event, function() {
                     args[1].delayUntil = until.event;
+                    Y.log('Delayed use callback done after ' + until.event, 'info', 'yui');
                     cb.apply(Y, args);
                 }, until.args);
             });
@@ -1014,6 +1022,7 @@ with any configuration info required for the module.
 
             if (provisioned) {
                 if (args.length) {
+                    Y.log('already provisioned: ' + args, 'info', 'yui');
                 }
                 Y._notify(callback, ALREADY_DONE, args);
                 return Y;
@@ -1245,12 +1254,14 @@ with any configuration info required for the module.
                 if (redo && data) {
                     Y._loading = true;
                     Y._use(missing, function() {
+                        Y.log('Nested use callback: ' + data, 'info', 'yui');
                         if (Y._attach(data)) {
                             Y._notify(callback, response, data);
                         }
                     });
                 } else {
                     if (data) {
+                        // Y.log('attaching from loader: ' + data, 'info', 'yui');
                         ret = Y._attach(data);
                     }
                     if (ret) {
@@ -1264,6 +1275,7 @@ with any configuration info required for the module.
 
             };
 
+// Y.log(Y.id + ': use called: ' + a + ' :: ' + callback, 'info', 'yui');
 
         // YUI().use('*'); // bind everything available
         if (firstArg === '*') {
@@ -1281,13 +1293,16 @@ with any configuration info required for the module.
         }
 
         if ((mods.loader || mods['loader-base']) && !Y.Loader) {
+            Y.log('Loader was found in meta, but it is not attached. Attaching..', 'info', 'yui');
             Y._attach(['loader' + ((!mods.loader) ? '-base' : '')]);
         }
 
+        // Y.log('before loader requirements: ' + args, 'info', 'yui');
 
         // use loader to expand dependencies and sort the
         // requirements if it is available.
         if (boot && Y.Loader && args.length) {
+            Y.log('Using loader to expand dependencies', 'info', 'yui');
             loader = getLoader(Y);
             loader.require(args);
             loader.ignoreRegistered = true;
@@ -1305,11 +1320,14 @@ with any configuration info required for the module.
         if (len) {
             missing = YArray.dedupe(missing);
             len = missing.length;
+Y.log('Modules missing: ' + missing + ', ' + missing.length, 'info', 'yui');
         }
 
 
         // dynamic load
         if (boot && len && Y.Loader) {
+// Y.log('Using loader to fetch missing deps: ' + missing, 'info', 'yui');
+            Y.log('Using Loader', 'info', 'yui');
             Y._loading = true;
             loader = getLoader(Y);
             loader.onEnd = handleLoader;
@@ -1334,15 +1352,18 @@ with any configuration info required for the module.
             };
 
             if (G_ENV._bootstrapping) {
+Y.log('Waiting for loader', 'info', 'yui');
                 queue.add(handleBoot);
             } else {
                 G_ENV._bootstrapping = true;
+Y.log('Fetching loader: ' + config.base + config.loaderPath, 'info', 'yui');
                 Y.Get.script(config.base + config.loaderPath, {
                     onEnd: handleBoot
                 });
             }
 
         } else {
+            Y.log('Attaching available dependencies: ' + args, 'info', 'yui');
             ret = Y._attach(args);
             if (ret) {
                 handleLoader();
@@ -1678,6 +1699,232 @@ or handle dependency resolution yourself.
 **/
 
 /**
+If `true`, `Y.log()` messages will be written to the browser's debug console
+when available and when `useBrowserConsole` is also `true`.
+
+@property {Boolean} debug
+@default true
+**/
+
+/**
+Log messages to the browser console if `debug` is `true` and the browser has a
+supported console.
+
+@property {Boolean} useBrowserConsole
+@default true
+**/
+
+/**
+A hash of log sources that should be logged. If specified, only messages from
+these sources will be logged. Others will be discarded.
+
+@property {Object} logInclude
+@type object
+**/
+
+/**
+A hash of log sources that should be not be logged. If specified, all sources
+will be logged *except* those on this list.
+
+@property {Object} logExclude
+**/
+
+/**
+When the YUI seed file is dynamically loaded after the `window.onload` event has
+fired, set this to `true` to tell YUI that it shouldn't wait for `window.onload`
+to occur.
+
+This ensures that components that rely on `window.onload` and the `domready`
+custom event will work as expected even when YUI is dynamically injected.
+
+@property {Boolean} injected
+@default false
+**/
+
+/**
+If `true`, `Y.error()` will generate or re-throw a JavaScript error. Otherwise,
+errors are merely logged silently.
+
+@property {Boolean} throwFail
+@default true
+**/
+
+/**
+Reference to the global object for this execution context.
+
+In a browser, this is the current `window` object. In Node.js, this is the
+Node.js `global` object.
+
+@property {Object} global
+**/
+
+/**
+The browser window or frame that this YUI instance should operate in.
+
+When running in Node.js, this property is `undefined`, since there is no
+`window` object. Use `global` to get a reference to the global object that will
+work in both browsers and Node.js.
+
+@property {Window} win
+**/
+
+/**
+The browser `document` object associated with this YUI instance's `win` object.
+
+When running in Node.js, this property is `undefined`, since there is no
+`document` object.
+
+@property {Document} doc
+**/
+
+/**
+A list of modules that defines the YUI core (overrides the default list).
+
+@property {Array} core
+@type Array
+@default ['get', 'features', 'intl-base', 'yui-log', 'yui-later', 'loader-base', 'loader-rollup', 'loader-yui3']
+**/
+
+/**
+A list of languages to use in order of preference.
+
+This list is matched against the list of available languages in modules that the
+YUI instance uses to determine the best possible localization of language
+sensitive modules.
+
+Languages are represented using BCP 47 language tags, such as "en-GB" for
+English as used in the United Kingdom, or "zh-Hans-CN" for simplified Chinese as
+used in China. The list may be provided as a comma-separated string or as an
+array.
+
+@property {String|String[]} lang
+**/
+
+/**
+Default date format.
+
+@property {String} dateFormat
+@deprecated Use configuration in `DataType.Date.format()` instead.
+**/
+
+/**
+Default locale.
+
+@property {String} locale
+@deprecated Use `config.lang` instead.
+**/
+
+/**
+Default generic polling interval in milliseconds.
+
+@property {Number} pollInterval
+@default 20
+**/
+
+/**
+The number of dynamic `<script>` nodes to insert by default before automatically
+removing them when loading scripts.
+
+This applies only to script nodes because removing the node will not make the
+evaluated script unavailable. Dynamic CSS nodes are not auto purged, because
+removing a linked style sheet will also remove the style definitions.
+
+@property {Number} purgethreshold
+@default 20
+**/
+
+/**
+Delay in milliseconds to wait after a window `resize` event before firing the
+event. If another `resize` event occurs before this delay has elapsed, the
+delay will start over to ensure that `resize` events are throttled.
+
+@property {Number} windowResizeDelay
+@default 40
+**/
+
+/**
+Base directory for dynamic loading.
+
+@property {String} base
+**/
+
+/**
+Base URL for a dynamic combo handler. This will be used to make combo-handled
+module requests if `combine` is set to `true.
+
+@property {String} comboBase
+@default "http://yui.yahooapis.com/combo?"
+**/
+
+/**
+Root path to prepend to each module path when creating a combo-handled request.
+
+This is updated for each YUI release to point to a specific version of the
+library; for example: "3.8.0/build/".
+
+@property {String} root
+**/
+
+/**
+Filter to apply to module urls. This filter will modify the default path for all
+modules.
+
+The default path for the YUI library is the minified version of the files (e.g.,
+event-min.js). The filter property can be a predefined filter or a custom
+filter. The valid predefined filters are:
+
+  - **debug**: Loads debug versions of modules (e.g., event-debug.js).
+  - **raw**: Loads raw, non-minified versions of modules without debug logging
+    (e.g., event.js).
+
+You can also define a custom filter, which must be an object literal containing
+a search regular expression and a replacement string:
+
+    myFilter: {
+        searchExp : "-min\\.js",
+        replaceStr: "-debug.js"
+    }
+
+@property {Object|String} filter
+**/
+
+/**
+Skin configuration and customizations.
+
+@property {Object} skin
+@param {String} [skin.defaultSkin='sam'] Default skin name. This skin will be
+    applied automatically to skinnable components if not overridden by a
+    component-specific skin name.
+@param {String} [skin.base='assets/skins/'] Default base path for a skin,
+    relative to Loader's `base` path.
+@param {Object} [skin.overrides] Component-specific skin name overrides. Specify
+    a component name as the key and, as the value, a string or array of strings
+    for a skin or skins that should be loaded for that component instead of the
+    `defaultSkin`.
+**/
+
+/**
+Hash of per-component filter specifications. If specified for a given component,
+this overrides the global `filter` config.
+
+@example
+    YUI({
+        modules: {
+            'foo': './foo.js',
+            'bar': './bar.js',
+            'baz': './baz.js'
+        },
+        filters: {
+            'foo': {
+                searchExp: '.js',
+                replaceStr: '-coverage.js'
+            }
+        }
+    }).use('foo', 'bar', 'baz', function (Y) {
+        // foo-coverage.js is loaded
+        // bar.js is loaded
+        // baz.js is loaded
+    });
 
 @property {Object} filters
 **/
@@ -4294,6 +4541,7 @@ Y.Get = Get = {
     abort: function (transaction) {
         var i, id, item, len, pending;
 
+        Y.log('`Y.Get.abort()` is deprecated as of 3.5.0. Use the `abort()` method on the transaction instead.', 'warn', 'get');
 
         if (!transaction.abort) {
             id          = transaction;
@@ -4341,7 +4589,9 @@ Y.Get = Get = {
         // Load a single CSS file and log a message on completion.
         Y.Get.css('foo.css', function (err) {
             if (err) {
+                Y.log('foo.css failed to load!');
             } else {
+                Y.log('foo.css was loaded successfully');
             }
         });
 
@@ -4351,7 +4601,9 @@ Y.Get = Get = {
 
         Y.Get.css(urls, function (err) {
             if (err) {
+                Y.log('one or more files failed to load!');
             } else {
+                Y.log('all files loaded successfully');
             }
         });
 
@@ -4416,7 +4668,9 @@ Y.Get = Get = {
         // Load a single JS file and log a message on completion.
         Y.Get.js('foo.js', function (err) {
             if (err) {
+                Y.log('foo.js failed to load!');
             } else {
+                Y.log('foo.js was loaded successfully');
             }
         });
 
@@ -4426,7 +4680,9 @@ Y.Get = Get = {
 
         Y.Get.js(urls, function (err) {
             if (err) {
+                Y.log('one or more files failed to load!');
             } else {
+                Y.log('all files loaded successfully');
             }
         });
 
@@ -4486,7 +4742,9 @@ Y.Get = Get = {
         // when all files have finished loading.
         Y.Get.load(['foo.css', 'bar.js', 'baz.css'], function (err) {
             if (err) {
+                Y.log('one or more files failed to load!');
             } else {
+                Y.log('all files loaded successfully');
             }
         });
 
@@ -4525,6 +4783,7 @@ Y.Get = Get = {
     **/
     _autoPurge: function (threshold) {
         if (threshold && this._purgeNodes.length >= threshold) {
+            Y.log('autopurge triggered after ' + this._purgeNodes.length + ' nodes', 'info', 'get');
             this._purge(this._purgeNodes);
         }
     },
@@ -4609,6 +4868,7 @@ Y.Get = Get = {
                 Y.mix(req, url, false, null, 0, true);
                 url = url.url; // Make url a string so we can use it later.
             } else {
+                Y.log('URL must be a string or an object with a `url` property.', 'error', 'get');
                 continue;
             }
 
@@ -4622,6 +4882,7 @@ Y.Get = Get = {
                     req.type = 'css';
                 } else {
                     if (!this.REGEX_JS.test(url)) {
+                        Y.log("Can't guess file type from URL. Assuming JS: " + url, 'warn', 'get');
                     }
 
                     req.type = 'js';
@@ -4638,12 +4899,14 @@ Y.Get = Get = {
 
             // Backcompat for <3.5.0 behavior.
             if (req.win) {
+                Y.log('The `win` option is deprecated as of 3.5.0. Use `doc` instead.', 'warn', 'get');
                 req.doc = req.win.document;
             } else {
                 req.win = req.doc.defaultView || req.doc.parentWindow;
             }
 
             if (req.charset) {
+                Y.log('The `charset` option is deprecated as of 3.5.0. Set `attributes.charset` instead.', 'warn', 'get');
                 req.attributes.charset = req.charset;
             }
 
@@ -5280,6 +5543,7 @@ Transaction.prototype = {
                 request: req
             });
 
+            Y.log(err, 'error', 'get');
         }
 
         req.node._yuiget_finished = req.finished = true;
@@ -5395,6 +5659,7 @@ Y.mix(Y.namespace('Features'), {
             feature = cat_o && cat_o[name];
 
         if (!feature) {
+            Y.log('Feature test ' + cat + ', ' + name + ' not found');
         } else {
 
             result = feature.result;
@@ -6682,6 +6947,7 @@ Y.Loader.prototype = {
                 // Inspect the page for the CSS module and mark it as loaded.
                 if (v && v.type === CSS) {
                     if (this.isCSSLoaded(v.name, true)) {
+                        Y.log('Found CSS module on page: ' + v.name, 'info', 'loader');
                         this.loaded[v.name] = true;
                     }
                 }
@@ -6940,6 +7206,7 @@ Y.Loader.prototype = {
                     } else if (i === 'groups') {
                         for (j in val) {
                             if (val.hasOwnProperty(j)) {
+                                // Y.log('group: ' + j);
                                 groupName = j;
                                 group = val[j];
                                 self.addGroup(group, groupName);
@@ -7072,6 +7339,7 @@ Y.Loader.prototype = {
                 }
                 this.addModule(nmod, name);
 
+                Y.log('Adding skin (' + name + '), ' + parent + ', ' + pkg + ', ' + nmod.path, 'info', 'loader');
             }
         }
 
@@ -7234,6 +7502,7 @@ Y.Loader.prototype = {
             o.type = JS;
             p = o.path || o.fullpath;
             if (p && this.REGEX_CSS.test(p)) {
+                Y.log('Auto determined module type as CSS', 'warn', 'loader');
                 o.type = CSS;
             }
         }
@@ -7366,6 +7635,7 @@ Y.Loader.prototype = {
                                 o.lang.push(lang);
                             }
 
+// Y.log('pack ' + packName + ' should supersede ' + supName);
 // Add rollup file, need to add to supersedes list too
 
                             // default packages
@@ -7382,6 +7652,7 @@ Y.Loader.prototype = {
                                 smod.supersedes.push(supName);
                             }
 
+// Y.log('pack ' + packName + ' should supersede ' + supName);
 // Add rollup file, need to add to supersedes list too
 
                         }
@@ -7454,6 +7725,7 @@ Y.Loader.prototype = {
         if (o.configFn) {
             ret = o.configFn(o);
             if (ret === false) {
+                Y.log('Config function returned false for ' + name + ', skipping.', 'info', 'loader');
                 delete this.moduleInfo[name];
                 delete GLOBAL_ENV._renderedMods[name];
                 o = null;
@@ -7625,6 +7897,7 @@ Y.Loader.prototype = {
         reparse = !((!this.lang || mod.langCache === this.lang) && (mod.skinCache === this.skin.defaultSkin));
 
         if (mod.expanded && !reparse) {
+            //Y.log('Already expanded ' + name + ', ' + mod.expanded);
             return mod.expanded;
         }
 
@@ -7653,12 +7926,15 @@ Y.Loader.prototype = {
         }
         o = this.filterRequires(mod.optional);
 
+        // Y.log("getRequires: " + name + " (dirty:" + this.dirty +
+        // ", expanded:" + mod.expanded + ")");
 
         mod._parsed = true;
         mod.langCache = this.lang;
         mod.skinCache = this.skin.defaultSkin;
 
         for (i = 0; i < r.length; i++) {
+            //Y.log(name + ' requiring ' + r[i], 'info', 'loader');
             if (!hash[r[i]]) {
                 d.push(r[i]);
                 hash[r[i]] = true;
@@ -7799,6 +8075,7 @@ Y.Loader.prototype = {
 
             if (mod.lang && !mod.langPack && Y.Intl) {
                 lang = Y.Intl.lookupBestLang(this.lang || ROOT_LANG, mod.lang);
+                //Y.log('Best lang: ' + lang + ', this.lang: ' + this.lang + ', mod.lang: ' + mod.lang);
                 packName = this.getLangPackName(lang, name);
                 if (packName) {
                     d.unshift(packName);
@@ -7823,6 +8100,7 @@ Y.Loader.prototype = {
     isCSSLoaded: function(name, skip) {
         //TODO - Make this call a batching call with name being an array
         if (!name || !YUI.Env.cssStampEl || (!skip && this.ignoreRegistered)) {
+            Y.log('isCSSLoaded was skipped for ' + name, 'warn', 'loader');
             return false;
         }
         var el = YUI.Env.cssStampEl,
@@ -7832,6 +8110,7 @@ Y.Loader.prototype = {
 
 
         if (mod !== undefined) {
+            //Y.log('isCSSLoaded was cached for ' + name, 'warn', 'loader');
             return mod;
         }
 
@@ -7846,6 +8125,7 @@ Y.Loader.prototype = {
             ret = true;
         }
 
+        Y.log('Has Skin? ' + name + ' : ' + ret, 'info', 'loader');
 
         el.className = ''; //Reset the classname to ''
 
@@ -8081,6 +8361,7 @@ Y.Loader.prototype = {
             }
         }
 
+        // Y.log('After explode: ' + YObject.keys(r));
     },
     /**
     * The default method used to test a module against a pattern
@@ -8111,8 +8392,10 @@ Y.Loader.prototype = {
         // check the patterns library to see if we should automatically add
         // the module with defaults
         if (!m || (m && m.ext)) {
+           // Y.log('testing patterns ' + YObject.keys(patterns));
             for (pname in patterns) {
                 if (patterns.hasOwnProperty(pname)) {
+                    // Y.log('testing pattern ' + i);
                     p = patterns[pname];
 
                     //There is no test method, create a default one that tests
@@ -8134,8 +8417,11 @@ Y.Loader.prototype = {
         if (!m) {
             if (found) {
                 if (p.action) {
+                    // Y.log('executing pattern action: ' + pname);
                     p.action.call(this, mname, pname);
                 } else {
+Y.log('Undefined module: ' + mname + ', matched a pattern: ' +
+    pname, 'info', 'loader');
                     // ext true or false?
                     m = this.addModule(Y.merge(found, {
                         test: void 0,
@@ -8207,6 +8493,8 @@ Y.Loader.prototype = {
     * @param {Boolean} success A boolean denoting success or failure
     */
     _finish: function(msg, success) {
+        Y.log('loader finishing: ' + msg + ', ' + Y.id + ', ' +
+            this.data, 'info', 'loader');
 
         _queue.running = false;
 
@@ -8297,6 +8585,7 @@ Y.Loader.prototype = {
 
         msg = msg.join(',');
 
+        Y.log('load error: ' + msg + ', ' + Y.id, 'error', 'loader');
 
         if (f) {
             f.call(this.context, {
@@ -8317,6 +8606,7 @@ Y.Loader.prototype = {
     * @private
     */
     _onTimeout: function(transaction) {
+        Y.log('loader timeout: ' + Y.id, 'error', 'loader');
         var f = this.onTimeout;
         if (f) {
             f.call(this.context, {
@@ -8405,6 +8695,7 @@ Y.Loader.prototype = {
     */
     _insert: function(source, o, type, skipcalc) {
 
+        Y.log('private _insert() ' + (type || '') + ', ' + Y.id, "info", "loader");
 
         // restore the state at the time of the request
         if (source) {
@@ -8466,8 +8757,10 @@ Y.Loader.prototype = {
 
             if (actions === comp) {
                 self._loading = null;
+                Y.log('Loader actions complete!', 'info', 'loader');
                 if (self._refetch.length) {
                     //Get the deps for the new meta-data and reprocess
+                    Y.log('Found potential modules to refetch', 'info', 'loader');
                     for (i = 0; i < self._refetch.length; i++) {
                         deps = self.getRequires(self.getModule(self._refetch[i]));
                         for (o = 0; o < deps.length; o++) {
@@ -8479,6 +8772,7 @@ Y.Loader.prototype = {
                     }
                     mods = Y.Object.keys(mods);
                     if (mods.length) {
+                        Y.log('Refetching modules with new meta-data', 'info', 'loader');
                         self.require(mods);
                         resMods = self.resolve(true);
                         if (resMods.cssMods.length) {
@@ -8498,6 +8792,7 @@ Y.Loader.prototype = {
                     }
                 }
                 if (d && d.fn) {
+                    Y.log('Firing final Loader callback!', 'info', 'loader');
                     fn = d.fn;
                     delete d.fn;
                     fn.call(self, d);
@@ -8508,6 +8803,7 @@ Y.Loader.prototype = {
         this._loading = true;
 
         if (!modules.js.length && !modules.css.length) {
+            Y.log('No modules resolved..', 'warn', 'loader');
             actions = -1;
             complete({
                 fn: self._onSuccess
@@ -8517,6 +8813,7 @@ Y.Loader.prototype = {
 
 
         if (modules.css.length) { //Load CSS first
+            Y.log('Loading CSS modules', 'info', 'loader');
             Y.Get.css(modules.css, {
                 data: modules.cssMods,
                 attributes: self.cssAttributes,
@@ -8544,6 +8841,7 @@ Y.Loader.prototype = {
         }
 
         if (modules.js.length) {
+            Y.log('Loading JS modules', 'info', 'loader');
             Y.Get.js(modules.js, {
                 data: modules.jsMods,
                 insertBefore: self.insertBefore,
@@ -8593,6 +8891,7 @@ Y.Loader.prototype = {
      * @param {string} type the type of dependency to insert.
      */
     insert: function(o, type, skipsort) {
+        Y.log('public insert() ' + (type || '') + ', ' + Y.Object.keys(this.required), "info", "loader");
         var self = this, copy = Y.merge(this);
         delete copy.require;
         delete copy.dirty;
@@ -8614,6 +8913,7 @@ Y.Loader.prototype = {
      * one).
      */
     loadNext: function() {
+        Y.log('loadNext was called..', 'error', 'loader');
         return;
     },
 
@@ -8719,6 +9019,7 @@ Y.Loader.prototype = {
                 resolved[mod.type].push(url);
                 resolved[mod.type + 'Mods'].push(mod);
             } else {
+                Y.log('Undefined Module', 'warn', 'loader');
             }
 
         };
@@ -8832,6 +9133,7 @@ Y.Loader.prototype = {
                 comboMeta    = comboSources[comboBase];
                 comboSep     = comboMeta.comboSep;
                 maxURLLength = comboMeta.maxURLLength;
+                Y.log('Using maxURLLength of ' + maxURLLength, 'info', 'loader');
                 for (type in comboMeta) {
                     if (type === JS || type === CSS) {
                         modules = comboMeta[type + 'Mods'];
@@ -8846,11 +9148,13 @@ Y.Loader.prototype = {
                         tmpBase = comboBase + frags.join(comboSep);
                         baseLen = tmpBase.length;
                         if (maxURLLength <= comboBase.length) {
+                            Y.log('maxURLLength (' + maxURLLength + ') is lower than the comboBase length (' + comboBase.length + '), resetting to default (' + MAX_URL_LENGTH + ')', 'error', 'loader');
                             maxURLLength = MAX_URL_LENGTH;
                         }
 
                         if (frags.length) {
                             if (baseLen > maxURLLength) {
+                                Y.log('Exceeded maxURLLength (' + maxURLLength + ') for ' + type + ', splitting', 'info', 'loader');
                                 fragSubset = [];
                                 for (i = 0, len = frags.length; i < len; i++) {
                                     fragSubset.push(frags[i]);
@@ -8903,6 +9207,7 @@ Y.Loader.prototype = {
     */
     load: function(cb) {
         if (!cb) {
+            Y.log('No callback supplied to load()', 'error', 'loader');
             return;
         }
         var self = this,
@@ -8991,14 +9296,17 @@ Y.Loader.prototype._rollup = function() {
                         // use the rollup module
                         } else if (r[s[j]] && m.type === smod.type) {
                             c++;
+                            // Y.log("adding to thresh: " + c + ", " + s[j]);
                             roll = (c >= m.rollup);
                             if (roll) {
+                                // Y.log("over thresh " + c + ", " + s[j]);
                                 break;
                             }
                         }
                     }
 
                     if (roll) {
+                        // Y.log("adding rollup: " +  i);
                         // add the rollup
                         r[i] = true;
                         rolled = true;
@@ -12878,6 +13186,7 @@ YUI.add('attribute-core', function (Y, NAME) {
          */
         addAttr : function(name, config, lazy) {
 
+            Y.log('Adding attribute: ' + name, 'info', 'attribute');
 
             var host = this, // help compression
                 state = host._state,
@@ -12901,11 +13210,13 @@ YUI.add('attribute-core', function (Y, NAME) {
                 };
             } else {
 
+                if (added && !config.isLazyAdd) { Y.log('Attribute: ' + name + ' already exists. Cannot add it again without removing it first', 'warn', 'attribute'); }
 
                 if (!added || config.isLazyAdd) {
 
                     hasValue = (VALUE in config);
 
+                    if (config.readOnly && !hasValue) { Y.log('readOnly attribute: ' + name + ', added without an initial value. Value will be set on initial call to set', 'warn', 'attribute');}
 
                     if (hasValue) {
 
@@ -13101,15 +13412,18 @@ YUI.add('attribute-core', function (Y, NAME) {
             if (!initialSet && !force) {
 
                 if (writeOnce) {
+                    Y.log('Set attribute:' + name + ', aborted; Attribute is writeOnce', 'warn', 'attribute');
                     allowSet = false;
                 }
 
                 if (cfg.readOnly) {
+                    Y.log('Set attribute:' + name + ', aborted; Attribute is readOnly', 'warn', 'attribute');
                     allowSet = false;
                 }
             }
 
             if (!initializing && !force && writeOnce === INIT_ONLY) {
+                Y.log('Set attribute:' + name + ', aborted; Attribute is writeOnce: "initOnly"', 'warn', 'attribute');
                 allowSet = false;
             }
 
@@ -13123,6 +13437,7 @@ YUI.add('attribute-core', function (Y, NAME) {
                    val = O.setValue(Y.clone(currVal), path, val);
 
                    if (val === undefined) {
+                       Y.log('Set attribute path:' + strPath + ', aborted; Path is invalid', 'warn', 'attribute');
                        allowSet = false;
                    }
                 }
@@ -13327,11 +13642,14 @@ YUI.add('attribute-core', function (Y, NAME) {
 
                         if (retVal === INVALID_VALUE) {
                             if (initializing) {
+                                Y.log('Attribute: ' + attrName + ', setter returned Attribute.INVALID_VALUE for value:' + newVal + ', initializing to default value', 'warn', 'attribute');
                                 newVal = cfg.defaultValue;
                             } else {
+                                Y.log('Attribute: ' + attrName + ', setter returned Attribute.INVALID_VALUE for value:' + newVal, 'warn', 'attribute');
                                 allowSet = false;
                             }
                         } else if (retVal !== undefined){
+                            Y.log('Attribute: ' + attrName + ', raw value: ' + newVal + ' modified by setter to:' + retVal, 'info', 'attribute');
                             newVal = retVal;
                         }
                     }
@@ -13339,6 +13657,7 @@ YUI.add('attribute-core', function (Y, NAME) {
 
                 if (allowSet) {
                     if(!subAttrName && (newVal === prevRawVal) && !Lang.isObject(newVal)) {
+                        Y.log('Attribute: ' + attrName + ', value unchanged:' + newVal, 'warn', 'attribute');
                         allowSet = false;
                     } else {
                         // Store value
@@ -13350,6 +13669,7 @@ YUI.add('attribute-core', function (Y, NAME) {
                 }
 
             } else {
+                Y.log('Attribute:' + attrName + ', Validation failed for value:' + newVal, 'warn', 'attribute');
                 allowSet = false;
             }
 
@@ -13750,6 +14070,7 @@ DO = {
      * @static
      */
     before: function(fn, obj, sFn, c) {
+        // Y.log('Do before: ' + sFn, 'info', 'event');
         var f = fn, a;
         if (c) {
             a = [fn, c].concat(Y.Array(arguments, 4, true));
@@ -13917,6 +14238,7 @@ DO.Method.prototype.register = function (sid, fn, when) {
  * @param when {string} when to execute the function
  */
 DO.Method.prototype._delete = function (sid) {
+    // Y.log('Y.Do._delete: ' + sid, 'info', 'Event');
     delete this.before[sid];
     delete this.after[sid];
 };
@@ -14513,6 +14835,7 @@ Y.CustomEvent.prototype = {
      */
     _on: function(fn, context, args, when) {
 
+        if (!fn) { this.log('Invalid callback for CE: ' + this.type); }
 
         var s = new Y.Subscriber(fn, context, args, when),
             firedWith;
@@ -14566,6 +14889,7 @@ Y.CustomEvent.prototype = {
      * @deprecated use on.
      */
     subscribe: function(fn, context) {
+        Y.log('ce.subscribe deprecated, use "on"', 'warn', 'deprecated');
         var a = (arguments.length > 2) ? nativeSlice.call(arguments, 2) : null;
         return this._on(fn, context, a, true);
     },
@@ -14670,12 +14994,14 @@ Y.CustomEvent.prototype = {
      */
     _notify: function(s, args, ef) {
 
+        this.log(this.type + '->' + 'sub: ' + s.id);
 
         var ret;
 
         ret = s.notify(args, this);
 
         if (false === ret || this.stopped > 1) {
+            this.log(this.type + ' cancelled by subscriber');
             return false;
         }
 
@@ -14689,6 +15015,7 @@ Y.CustomEvent.prototype = {
      * @param {string} cat log category.
      */
     log: function(msg, cat) {
+        if (!this.silent) { Y.log(this.id + ': ' + msg, cat || 'info', 'event'); }
     },
 
     /**
@@ -14733,6 +15060,7 @@ Y.CustomEvent.prototype = {
     _fire: function(args) {
 
         if (this.fireOnce && this.fired) {
+            this.log('fireOnce event: ' + this.type + ' already fired');
             return true;
         } else {
 
@@ -14777,6 +15105,7 @@ Y.CustomEvent.prototype = {
 
     // Requires the event-custom-complex module for full funcitonality.
     fireComplex: function(args) {
+        this.log('Missing event-custom-complex needed to emit a facade for: ' + this.type);
         args[0] = args[0] || {};
         return this.fireSimple(args);
     },
@@ -15089,6 +15418,7 @@ Y.EventHandle.prototype = {
     detach: function() {
         var evt = this.evt, detached = 0, i;
         if (evt) {
+            // Y.log('EventHandle.detach: ' + this.sub, 'info', 'Event');
             if (Y.Lang.isArray(evt)) {
                 for (i = 0; i < evt.length; i++) {
                     detached += evt[i].detach();
@@ -15401,6 +15731,7 @@ ET.prototype = {
         if (Node && Y.instanceOf(this, Node) && (shorttype in Node.DOM_EVENTS)) {
             args = nativeSlice.call(arguments, 0);
             args.splice(2, 0, Node.getDOMNode(this));
+            // Y.log("Node detected, redirecting with these args: " + args);
             return Y.on.apply(Y, args);
         }
 
@@ -15431,6 +15762,7 @@ ET.prototype = {
 
             // check for the existance of an event adaptor
             if (adapt) {
+                Y.log('Using adaptor for ' + shorttype + ', ' + n, 'info', 'event');
                 handle = adapt.on.apply(Y, args);
             } else if ((!type) || domevent) {
                 handle = Y.Event._attach(args);
@@ -15464,6 +15796,7 @@ ET.prototype = {
      * @deprecated use on
      */
     subscribe: function() {
+        Y.log('EventTarget subscribe() is deprecated, use on()', 'warn', 'deprecated');
         return this.on.apply(this, arguments);
     },
 
@@ -15586,6 +15919,7 @@ ET.prototype = {
      * @deprecated use detach
      */
     unsubscribe: function() {
+Y.log('EventTarget unsubscribe() is deprecated, use detach()', 'warn', 'deprecated');
         return this.detach.apply(this, arguments);
     },
 
@@ -15609,6 +15943,7 @@ ET.prototype = {
      * @deprecated use detachAll
      */
     unsubscribeAll: function() {
+Y.log('EventTarget unsubscribeAll() is deprecated, use detachAll()', 'warn', 'deprecated');
         return this.detachAll.apply(this, arguments);
     },
 
@@ -16298,6 +16633,7 @@ CEProto.fireComplex = function(args) {
 
         // queue this event if the current item in the queue bubbles
         if (self.queuable && self.type !== stack.next.type) {
+            self.log('queue ' + self.type);
 
             if (!stack.queue) {
                 stack.queue = [];
@@ -16348,6 +16684,8 @@ CEProto.fireComplex = function(args) {
             events.on('stopped', self.stoppedFn);
         }
 
+        // self.log("Firing " + self  + ", " + "args: " + args);
+        self.log("Firing " + self.type);
 
         self._facade = null; // kill facade to eliminate stale properties
 
@@ -17012,6 +17350,7 @@ YUI.add('attribute-observable', function (Y, NAME) {
 
             if (!this._setAttrVal(e.attrName, e.subAttrName, e.prevVal, e.newVal, opts)) {
 
+                Y.log('State not updated and stopImmediatePropagation called for attribute: ' + e.attrName + ' , value:' + e.newVal, 'warn', 'attribute');
 
                 if (!eventFastPath) {
                     // Prevent "after" listeners from being invoked since nothing changed.
@@ -17139,6 +17478,7 @@ YUI.add('attribute-extras', function (Y, NAME) {
                     }
                 }
             } else {
+                Y.log('Attribute modifyAttr:' + name + ' has not been added. Use addAttr to add the attribute', 'warn', 'attribute');
             }
         },
 
@@ -17456,8 +17796,10 @@ YUI.add('base-core', function (Y, NAME) {
         if (!this._BaseInvoked) {
             this._BaseInvoked = true;
 
+            Y.log('constructor called', 'life', 'base');
             this._initBase(cfg);
         }
+        else { Y.log('Based constructor called more than once. Ignoring duplicate calls', 'life', 'base'); }
     }
 
     /**
@@ -17613,6 +17955,7 @@ YUI.add('base-core', function (Y, NAME) {
          * @private
          */
         _initBase : function(config) {
+            Y.log('init called', 'life', 'base');
 
             Y.stamp(this);
 
@@ -17659,6 +18002,7 @@ YUI.add('base-core', function (Y, NAME) {
          * @return {BaseCore} A reference to this object
          */
         init: function(cfg) {
+            Y.log('init called', 'life', 'base');
 
             this._baseInit(cfg);
 
@@ -17935,8 +18279,10 @@ YUI.add('base-core', function (Y, NAME) {
                 clone = cfg.cloneDefaultValue;
 
             if (clone === DEEP || clone === true) {
+                Y.log('Cloning default value for attribute:' + attr, 'info', 'base');
                 cfg.value = Y.clone(val);
             } else if (clone === SHALLOW) {
+                Y.log('Merging default value for attribute:' + attr, 'info', 'base');
                 cfg.value = Y.merge(val);
             } else if ((clone === undefined && (OBJECT_CONSTRUCTOR === val.constructor || L.isArray(val)))) {
                 cfg.value = Y.clone(val);
@@ -18333,6 +18679,7 @@ YUI.add('base-observable', function (Y, NAME) {
          * @chainable
          */
         destroy: function() {
+            Y.log('destroy called', 'life', 'base');
 
             /**
              * <p>
@@ -19061,6 +19408,7 @@ Y.mix(Y_DOM, {
             attr = Y_DOM.CUSTOM_ATTRIBUTES[attr] || attr;
             el.setAttribute(attr, val, ieAttr);
         }
+        else { Y.log('bad input to setAttribute', 'warn', 'dom'); }
     },
 
 
@@ -19083,6 +19431,7 @@ Y.mix(Y_DOM, {
                 ret = ''; // per DOM spec
             }
         }
+        else { Y.log('bad input to getAttribute', 'warn', 'dom'); }
         return ret;
     },
 
@@ -19185,6 +19534,7 @@ Y.mix(Y_DOM.VALUE_GETTERS, {
         if (options && options.length) {
             // TODO: implement multipe select
             if (node.multiple) {
+                Y.log('multiple select normalization not implemented', 'warn', 'DOM');
             } else if (node.selectedIndex > -1) {
                 val = Y_DOM.getValue(options[node.selectedIndex]);
             }
@@ -19250,6 +19600,7 @@ Y.mix(Y.DOM, {
      * @param {String} newClassName the class name that will be replacing the old class name
      */
     replaceClass: function(node, oldC, newC) {
+        //Y.log('replaceClass replacing ' + oldC + ' with ' + newC, 'info', 'Node');
         removeClass(node, oldC); // remove first in case oldC === newC
         addClass(node, newC);
     },
@@ -20657,6 +21008,7 @@ if (!testFeature('style', 'opacity') && testFeature('style', 'filter')) {
                 try { // make sure its in the document
                     val = node[FILTERS]('alpha')[OPACITY];
                 } catch(err) {
+                    Y.log('getStyle: IE opacity filter not found; returning 1', 'warn', 'dom-style');
                 }
             }
             return val / 100;
@@ -20698,6 +21050,7 @@ try {
             if (floatVal >= 0 || val === 'auto' || val === '') {
                 style.height = val;
             } else {
+                Y.log('invalid style value for height: ' + val, 'warn', 'dom-style');
             }
         }
     };
@@ -20708,6 +21061,7 @@ try {
             if (floatVal >= 0 || val === 'auto' || val === '') {
                 style.width = val;
             } else {
+                Y.log('invalid style value for width: ' + val, 'warn', 'dom-style');
             }
         }
     };
@@ -21162,6 +21516,7 @@ var _eventenv = Y.Env.evt,
             // TODO: See if there's a more performant way to return true early on this, for the common case
             return (o && typeof o !== "string" && Y.Lang.isNumber(o.length) && !o.tagName && !Y.DOM.isWindow(o));
         } catch(ex) {
+            Y.log("collection check failure", "warn", "event");
             return false;
         }
     },
@@ -21500,6 +21855,7 @@ Event._interval = setInterval(Event._poll, Event.POLL_INTERVAL);
             }
 
             if (!fn || !fn.call) {
+                Y.log(type + " attach call failed, invalid callback", "error", "event");
                 return false;
             }
 
@@ -21564,6 +21920,7 @@ Event._interval = setInterval(Event._poll, Event.POLL_INTERVAL);
 
             // Element should be an html element or node
             if (!el) {
+                Y.log("unable to attach event " + type, "warn", "event");
                 return false;
             }
 
@@ -21812,6 +22169,7 @@ Event._interval = setInterval(Event._poll, Event.POLL_INTERVAL);
                         item.fn.apply(context, (Y.Lang.isArray(ov)) ? ov : []);
                     }
                 } catch (e) {
+                    Y.log("Error in available or contentReady callback", 'error', 'event');
                 }
             };
 
@@ -22042,6 +22400,7 @@ if (Y.UA.ie) {
         try {
             add(win, "unload", onUnload);
         } catch(e) {
+            Y.log("Registering unload listener failed.", "warn", "event-base");
         }
     }
 }
@@ -22280,6 +22639,7 @@ var Selector = {
             }
         }
 
+        Y.log('query: ' + selector + ' returning: ' + ret.length, 'info', 'Selector');
         return (firstOnly) ? (ret[0] || null) : ret;
 
     },
@@ -22372,8 +22732,10 @@ var Selector = {
             return Y.Selector.query(selector, root, one, true); // redo with skipNative true to try brute query
         }
         try {
+            //Y.log('trying native query with: ' + selector, 'info', 'selector-native');
             return root['querySelector' + (one ? '' : 'All')](selector);
         } catch(e) { // fallback to brute if available
+            //Y.log('native query error; reverting to brute query with: ' + selector, 'info', 'selector-native');
             return Y.Selector.query(selector, root, one, true); // redo with skipNative true
         }
     },
@@ -22398,6 +22760,8 @@ var Selector = {
                 }
             }
         } else {
+            Y.log('invalid filter input (nodes: ' + nodes +
+                    ', selector: ' + selector + ')', 'warn', 'Selector');
         }
 
         return ret;
@@ -22755,6 +23119,7 @@ Y_Node.addMethod = function(name, fn, context) {
             return ret;
         };
     } else {
+        Y.log('unable to add method: ' + name, 'warn', 'Node');
     }
 };
 
@@ -23454,6 +23819,7 @@ NodeList.each = function(instance, fn, context) {
     if (nodes && nodes.length) {
         Y.Array.each(nodes, fn, context || instance);
     } else {
+        Y.log('no nodes bound to ' + this, 'warn', 'NodeList');
     }
 };
 
@@ -23483,6 +23849,7 @@ NodeList.addMethod = function(name, fn, context) {
             return ret.length ? ret : this;
         };
     } else {
+        Y.log('unable to add method: ' + name + ' to NodeList', 'warn', 'node');
     }
 };
 
@@ -24027,6 +24394,7 @@ Y.Array.each([
     'createCaption'
 
 ], function(method) {
+    Y.log('adding: ' + method, 'info', 'node');
     Y.Node.prototype[method] = function(arg1, arg2, arg3) {
         var ret = this.invoke(method, arg1, arg2, arg3);
         return ret;
@@ -24951,6 +25319,7 @@ Y.Node.prototype.focus = function () {
     try {
         this._node.focus();
     } catch (e) {
+        Y.log('error focusing node: ' + e.toString(), 'error', 'node');
     }
 
     return this;
@@ -24971,6 +25340,7 @@ Y.Node.ATTRS.type = {
             try { // IE errors when changing the type from "hidden'
                 this._node.type = val;
             } catch (e) {
+                Y.log('error setting type: ' + val, 'info', 'node');
             }
         }
         return val;
@@ -25945,6 +26315,7 @@ YUI.add('anim-base', function (Y, NAME) {
 
                 this._node = node;
                 if (!node) {
+                    Y.log(node + ' is not a valid node', 'warn', 'Anim');
                 }
                 return node;
             }
@@ -28987,6 +29358,8 @@ Usage:
 
     YUI().use('event-valuechange', function (Y) {
         Y.one('#my-input').on('valuechange', function (e) {
+            Y.log('previous value: ' + e.prevVal);
+            Y.log('new value: ' + e.newVal);
         });
     });
 
@@ -29001,6 +29374,8 @@ Usage:
 
     YUI().use('event-valuechange', function (Y) {
         Y.one('#my-input').on('valuechange', function (e) {
+            Y.log('previous value: ' + e.prevVal);
+            Y.log('new value: ' + e.newVal);
         });
     });
 
@@ -29065,6 +29440,7 @@ VC = {
             facade, prevVal, newVal, nodeName, selectedOption, stopElement;
 
         if (!(domNode && vcData)) {
+            Y.log('_poll: node #' + node.get('id') + ' disappeared; stopping polling and removing all notifiers.', 'warn', 'event-valuechange');
             VC._stopPolling(node);
             return;
         }
@@ -29144,6 +29520,7 @@ VC = {
         // The node may have been destroyed, so check that it still exists
         // before trying to get its data. Otherwise an error will occur.
         if (!node._node) {
+            Y.log('_stopPolling: node disappeared', 'warn', 'event-valuechange');
             return;
         }
 
@@ -29154,9 +29531,11 @@ VC = {
         // If we don't see any changes within the timeout period (10 seconds by
         // default), stop polling.
         vcData.timeout = setTimeout(function () {
+            Y.log('timeout: #' + node.get('id'), 'info', 'event-valuechange');
             VC._stopPolling(node, notifier);
         }, VC.TIMEOUT);
 
+        Y.log('_refreshTimeout: #' + node.get('id'), 'info', 'event-valuechange');
     },
 
     /**
@@ -29181,6 +29560,7 @@ VC = {
         var vcData, isEditable;
 
         if (!node.test('input,textarea,select') && !(isEditable = VC._isEditable(node))) {
+            Y.log('_startPolling: aborting poll on #' + node.get('id') + ' -- not a detectable node', 'warn', 'event-valuechange');
             return;
         }
 
@@ -29219,6 +29599,7 @@ VC = {
             VC._poll(node, options);
         }, VC.POLL_INTERVAL);
 
+        Y.log('_startPolling: #' + node.get('id'), 'info', 'event-valuechange');
 
         VC._refreshTimeout(node, notifier);
     },
@@ -29237,6 +29618,7 @@ VC = {
         // The node may have been destroyed, so check that it still exists
         // before trying to get its data. Otherwise an error will occur.
         if (!node._node) {
+            Y.log('_stopPolling: node disappeared', 'info', 'event-valuechange');
             return;
         }
 
@@ -29253,6 +29635,7 @@ VC = {
             vcData.notifiers = {};
         }
 
+        Y.log('_stopPolling: #' + node.get('id'), 'info', 'event-valuechange');
     },
 
     /**
@@ -29501,6 +29884,8 @@ programmatic value changes on nodes that don't have focus won't be detected.
 
     YUI().use('event-valuechange', function (Y) {
         Y.one('#my-input').on('valuechange', function (e) {
+            Y.log('previous value: ' + e.prevVal);
+            Y.log('new value: ' + e.newVal);
         });
     });
 
@@ -29762,6 +30147,7 @@ AutoCompleteBase.prototype = {
             request = requestTemplate ?
                 requestTemplate.call(this, query) : query;
 
+            Y.log('sendRequest: ' + request, 'info', 'autocomplete-base');
 
             source.sendRequest({
                 query  : query,
@@ -30007,6 +30393,7 @@ AutoCompleteBase.prototype = {
                 results = filters[i].call(this, query, results.concat());
 
                 if (!results) {
+                    Y.log("Filter didn't return anything.", 'warn', 'autocomplete-base');
                     return;
                 }
 
@@ -30036,6 +30423,7 @@ AutoCompleteBase.prototype = {
                             results.concat());
 
                     if (!highlighted) {
+                        Y.log("Highlighter didn't return anything.", 'warn', 'autocomplete-base');
                         return;
                     }
 
@@ -30055,6 +30443,7 @@ AutoCompleteBase.prototype = {
                     formatted = formatter.call(this, query, results.concat());
 
                     if (!formatted) {
+                        Y.log("Formatter didn't return anything.", 'warn', 'autocomplete-base');
                         return;
                     }
 
@@ -30106,6 +30495,7 @@ AutoCompleteBase.prototype = {
         // don't need to get the value of the `enableCache` attribute on every
         // request, which would be sloooow.
         this._cache = value ? {} : null;
+        Y.log('Cache ' + (value ? 'enabled' : 'disabled'), 'debug', 'autocomplete-base');
     },
 
     /**
@@ -30353,6 +30743,7 @@ AutoCompleteBase.prototype = {
             self._inputNode.set(VALUE, newVal);
         }
 
+        Y.log('valueChange: new: "' + newVal + '"; old: "' + e.prevVal + '"', 'info', 'autocomplete-base');
 
         minQueryLength = self.get('minQueryLength');
         query          = self._parseValue(newVal) || '';
@@ -30484,6 +30875,7 @@ AutoCompleteBase.prototype = {
     @protected
     **/
     _defQueryFn: function (e) {
+        Y.log('query: "' + e.query + '"; inputValue: "' + e.inputValue + '"', 'info', 'autocomplete-base');
         this.sendRequest(e.query); // sendRequest will set the 'query' attribute
     },
 
@@ -30496,6 +30888,7 @@ AutoCompleteBase.prototype = {
     @protected
     **/
     _defResultsFn: function (e) {
+        Y.log('results: ' + Y.dump(e.results), 'info', 'autocomplete-base');
         this._set(RESULTS, e[RESULTS]);
     }
 };
@@ -31142,7 +31535,7 @@ Y.mix(ACBase.prototype, {
 
         // If the object is a JSONPRequest instance, try to use it as a JSONP
         // source.
-        if (JSONPRequest && source instanceof JSONPRequest) {
+        if (Y.JSONPRequest && source instanceof Y.JSONPRequest) {
             return this._createJSONPSource(source);
         }
 
@@ -31187,7 +31580,7 @@ Y.mix(ACBase.prototype, {
                         var data;
 
                         try {
-                            data = JSON.parse(response.responseText);
+                            data = Y.JSON.parse(response.responseText);
                         } catch (ex) {
                             Y.error('JSON parse error', ex);
                         }
@@ -31278,8 +31671,8 @@ Y.mix(ACBase.prototype, {
             Y.use('jsonp', function () {
                 // Turn the source into a JSONPRequest instance if it isn't
                 // one already.
-                if (!(source instanceof JSONPRequest)) {
-                    source = new JSONPRequest(source, {
+                if (!(source instanceof Y.JSONPRequest)) {
+                    source = new Y.JSONPRequest(source, {
                         format: Y.bind(that._jsonpFormatter, that)
                     });
                 }
@@ -31848,6 +32241,7 @@ Y.mix(Y_DOM, {
      */
     winHeight: function(node) {
         var h = Y_DOM._getWinSize(node).height;
+        Y.log('winHeight returning ' + h, 'info', 'dom-screen');
         return h;
     },
 
@@ -31858,6 +32252,7 @@ Y.mix(Y_DOM, {
      */
     winWidth: function(node) {
         var w = Y_DOM._getWinSize(node).width;
+        Y.log('winWidth returning ' + w, 'info', 'dom-screen');
         return w;
     },
 
@@ -31868,6 +32263,7 @@ Y.mix(Y_DOM, {
      */
     docHeight:  function(node) {
         var h = Y_DOM._getDocSize(node).height;
+        Y.log('docHeight returning ' + h, 'info', 'dom-screen');
         return Math.max(h, Y_DOM._getWinSize(node).height);
     },
 
@@ -31878,6 +32274,7 @@ Y.mix(Y_DOM, {
      */
     docWidth:  function(node) {
         var w = Y_DOM._getDocSize(node).width;
+        Y.log('docWidth returning ' + w, 'info', 'dom-screen');
         return Math.max(w, Y_DOM._getWinSize(node).width);
     },
 
@@ -32142,7 +32539,9 @@ Y.mix(Y_DOM, {
                 }
             }
 
+            Y.log('setXY setting position to ' + xy, 'info', 'dom-screen');
         } else {
+            Y.log('setXY failed to set ' + node + ' to ' + xy, 'info', 'dom-screen');
         }
     },
 
@@ -32492,6 +32891,7 @@ Y.Node.ATTRS.scrollLeft = {
                 Y.DOM._getWin(node).scrollTo(val, Y.DOM.docScrollY(node)); // scroll window if win or doc
             }
         } else {
+            Y.log('unable to set scrollLeft for ' + node, 'error', 'Node');
         }
     }
 };
@@ -32511,6 +32911,7 @@ Y.Node.ATTRS.scrollTop = {
                 Y.DOM._getWin(node).scrollTo(Y.DOM.docScrollX(node), val); // scroll window if win or doc
             }
         } else {
+            Y.log('unable to set scrollTop for ' + node, 'error', 'Node');
         }
     }
 };
@@ -33043,6 +33444,7 @@ var PARENT_NODE = 'parentNode',
             } while (found && selector.length);
 
             if (!found || selector.length) { // not fully parsed
+                Y.log('query: ' + query + ' contains unsupported token in: ' + selector, 'warn', 'Selector');
                 tokens = [];
             }
             return tokens;
@@ -33367,6 +33769,7 @@ YUI.add('pluginhost-base', function (Y, NAME) {
                             this[ns].setAttrs(config);
                         }
                         else {
+                            Y.log("Attempt to replug an already attached plugin, and we can't setAttrs, because it's not Attribute based: " + ns, "warn", "PluginHost");
                         }
                     } else {
                         // Create new instance
@@ -33375,6 +33778,7 @@ YUI.add('pluginhost-base', function (Y, NAME) {
                     }
                 }
                 else {
+                    Y.log("Attempt to plug in an invalid plugin. Host:" + this + ", Plugin:" + Plugin, "error", "PluginHost");
                 }
             }
             return this;
@@ -34105,6 +34509,7 @@ var L = Y.Lang,
  * @extends Base
  */
 function Widget(config) {
+    Y.log('constructor called', 'life', 'widget');
 
     // kweight
     var widget = this,
@@ -34407,6 +34812,7 @@ Y.extend(Widget, Y.Base, {
      * @param  config {Object} Configuration object literal for the widget
      */
     initializer: function(config) {
+        Y.log('initializer called', 'life', 'widget');
 
         var bb = this.get(BOUNDING_BOX);
 
@@ -34449,6 +34855,7 @@ Y.extend(Widget, Y.Base, {
      * @protected
      */
     destructor: function() {
+        Y.log('destructor called', 'life', 'widget');
 
         var boundingBox = this.get(BOUNDING_BOX),
             bbGuid;
@@ -34552,6 +34959,7 @@ Y.extend(Widget, Y.Base, {
      * </p>
      */
     render: function(parentNode) {
+        if (this.get(DESTROYED)) { Y.log("Render failed; widget has been destroyed", "error", "widget"); }
 
         if (!this.get(DESTROYED) && !this.get(RENDERED)) {
              /**
@@ -35758,6 +36166,7 @@ function delegate(type, fn, el, filter) {
 
     if (!handle) {
         if (!type || !fn || !el || !filter) {
+            Y.log("delegate requires type, callback, parent, & filter", "warn");
             return;
         }
 
@@ -36264,6 +36673,7 @@ Y.mix(Widget.prototype, {
             queue = this._uiEvtsInitQueue || {};
 
         if (sType && !queue[sType]) {
+            Y.log("Deferring creation of " + type + " delegate until render.", "info", "widget");
 
             this._uiEvtsInitQueue = queue[sType] = 1;
 
@@ -37023,6 +37433,8 @@ PositionAlign.prototype = {
             break;
 
         default:
+            Y.log('align: Invalid Points Arguments', 'info',
+                'widget-position-align');
             break;
 
         }
@@ -37170,6 +37582,8 @@ PositionAlign.prototype = {
             break;
 
         default:
+            Y.log('align: Invalid Points Argument', 'info',
+                'widget-position-align');
             break;
 
         }
@@ -38402,1538 +38816,6 @@ Plugin.AutoCompleteList = ACListPlugin;
 
 
 }, '3.18.1', {"requires": ["autocomplete-list", "node-pluginhost"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add("lang/console_en",function(e){e.Intl.add("console","en",{title:"Log Console",pause:"Pause",clear:"Clear",collapse:"Collapse",expand:"Expand"})},"3.18.1");
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('console', function (Y, NAME) {
-
-/**
- * Console creates a visualization for messages logged through calls to a YUI
- * instance's <code>Y.log( message, category, source )</code> method.  The
- * debug versions of YUI modules will include logging statements to offer some
- * insight into the steps executed during that module's operation.  Including
- * log statements in your code will cause those messages to also appear in the
- * Console.  Use Console to aid in developing your page or application.
- *
- * Entry categories &quot;info&quot;, &quot;warn&quot;, and &quot;error&quot;
- * are also referred to as the log level, and entries are filtered against the
- * configured logLevel.
- *
- * @module console
- */
-var getCN = Y.ClassNameManager.getClassName,
-    CHECKED        = 'checked',
-    CLEAR          = 'clear',
-    CLICK          = 'click',
-    COLLAPSED      = 'collapsed',
-    CONSOLE        = 'console',
-    CONTENT_BOX    = 'contentBox',
-    DISABLED       = 'disabled',
-    ENTRY          = 'entry',
-    ERROR          = 'error',
-    HEIGHT         = 'height',
-    INFO           = 'info',
-    LAST_TIME      = 'lastTime',
-    PAUSE          = 'pause',
-    PAUSED         = 'paused',
-    RESET          = 'reset',
-    START_TIME     = 'startTime',
-    TITLE          = 'title',
-    WARN           = 'warn',
-
-    DOT = '.',
-
-    C_BUTTON           = getCN(CONSOLE,'button'),
-    C_CHECKBOX         = getCN(CONSOLE,'checkbox'),
-    C_CLEAR            = getCN(CONSOLE,CLEAR),
-    C_COLLAPSE         = getCN(CONSOLE,'collapse'),
-    C_COLLAPSED        = getCN(CONSOLE,COLLAPSED),
-    C_CONSOLE_CONTROLS = getCN(CONSOLE,'controls'),
-    C_CONSOLE_HD       = getCN(CONSOLE,'hd'),
-    C_CONSOLE_BD       = getCN(CONSOLE,'bd'),
-    C_CONSOLE_FT       = getCN(CONSOLE,'ft'),
-    C_CONSOLE_TITLE    = getCN(CONSOLE,TITLE),
-    C_ENTRY            = getCN(CONSOLE,ENTRY),
-    C_ENTRY_CAT        = getCN(CONSOLE,ENTRY,'cat'),
-    C_ENTRY_CONTENT    = getCN(CONSOLE,ENTRY,'content'),
-    C_ENTRY_META       = getCN(CONSOLE,ENTRY,'meta'),
-    C_ENTRY_SRC        = getCN(CONSOLE,ENTRY,'src'),
-    C_ENTRY_TIME       = getCN(CONSOLE,ENTRY,'time'),
-    C_PAUSE            = getCN(CONSOLE,PAUSE),
-    C_PAUSE_LABEL      = getCN(CONSOLE,PAUSE,'label'),
-
-    RE_INLINE_SOURCE = /^(\S+)\s/,
-    RE_AMP = /&(?!#?[a-z0-9]+;)/g,
-    RE_GT  = />/g,
-    RE_LT  = /</g,
-
-    ESC_AMP = '&#38;',
-    ESC_GT  = '&#62;',
-    ESC_LT  = '&#60;',
-
-    ENTRY_TEMPLATE_STR =
-        '<div class="{entry_class} {cat_class} {src_class}">'+
-            '<p class="{entry_meta_class}">'+
-                '<span class="{entry_src_class}">'+
-                    '{sourceAndDetail}'+
-                '</span>'+
-                '<span class="{entry_cat_class}">'+
-                    '{category}</span>'+
-                '<span class="{entry_time_class}">'+
-                    ' {totalTime}ms (+{elapsedTime}) {localTime}'+
-                '</span>'+
-            '</p>'+
-            '<pre class="{entry_content_class}">{message}</pre>'+
-        '</div>',
-
-    L = Y.Lang,
-    create     = Y.Node.create,
-    isNumber   = L.isNumber,
-    isString   = L.isString,
-    merge      = Y.merge,
-    substitute = Y.Lang.sub;
-
-/**
-A basic console that displays messages logged throughout your application.
-
-@class Console
-@constructor
-@extends Widget
-@param [config] {Object} Object literal specifying widget configuration properties.
-**/
-function Console() {
-    Console.superclass.constructor.apply(this,arguments);
-}
-
-Y.Console = Y.extend(Console, Y.Widget,
-
-// Y.Console prototype
-{
-    /**
-     * Category to prefix all event subscriptions to allow for ease of detach
-     * during destroy.
-     *
-     * @property _evtCat
-     * @type string
-     * @protected
-     */
-    _evtCat : null,
-
-    /**
-     * Reference to the Node instance containing the header contents.
-     *
-     * @property _head
-     * @type Node
-     * @default null
-     * @protected
-     */
-    _head    : null,
-
-    /**
-     * Reference to the Node instance that will house the console messages.
-     *
-     * @property _body
-     * @type Node
-     * @default null
-     * @protected
-     */
-    _body    : null,
-
-    /**
-     * Reference to the Node instance containing the footer contents.
-     *
-     * @property _foot
-     * @type Node
-     * @default null
-     * @protected
-     */
-    _foot    : null,
-
-    /**
-     * Holds the object API returned from <code>Y.later</code> for the print
-     * loop interval.
-     *
-     * @property _printLoop
-     * @type Object
-     * @default null
-     * @protected
-     */
-    _printLoop : null,
-
-    /**
-     * Array of normalized message objects awaiting printing.
-     *
-     * @property buffer
-     * @type Array
-     * @default null
-     * @protected
-     */
-    buffer   : null,
-
-    /**
-     * Wrapper for <code>Y.log</code>.
-     *
-     * @method log
-     * @param arg* {MIXED} (all arguments passed through to <code>Y.log</code>)
-     * @chainable
-     */
-    log : function () {
-        Y.log.apply(Y,arguments);
-
-        return this;
-    },
-
-    /**
-     * Clear the console of messages and flush the buffer of pending messages.
-     *
-     * @method clearConsole
-     * @chainable
-     */
-    clearConsole : function () {
-        // TODO: clear event listeners from console contents
-        this._body.empty();
-
-        this._cancelPrintLoop();
-
-        this.buffer = [];
-
-        return this;
-    },
-
-    /**
-     * Clears the console and resets internal timers.
-     *
-     * @method reset
-     * @chainable
-     */
-    reset : function () {
-        this.fire(RESET);
-
-        return this;
-    },
-
-    /**
-     * Collapses the body and footer.
-     *
-     * @method collapse
-     * @chainable
-     */
-    collapse : function () {
-        this.set(COLLAPSED, true);
-
-        return this;
-    },
-
-    /**
-     * Expands the body and footer if collapsed.
-     *
-     * @method expand
-     * @chainable
-     */
-    expand : function () {
-        this.set(COLLAPSED, false);
-
-        return this;
-    },
-
-    /**
-     * Outputs buffered messages to the console UI.  This is typically called
-     * from a scheduled interval until the buffer is empty (referred to as the
-     * print loop).  The number of buffered messages output to the Console is
-     * limited to the number provided as an argument.  If no limit is passed,
-     * all buffered messages are rendered.
-     *
-     * @method printBuffer
-     * @param limit {Number} (optional) max number of buffered entries to write
-     * @chainable
-     */
-    printBuffer: function (limit) {
-        var messages    = this.buffer,
-            debug       = Y.config.debug,
-            entries     = [],
-            consoleLimit= this.get('consoleLimit'),
-            newestOnTop = this.get('newestOnTop'),
-            anchor      = newestOnTop ? this._body.get('firstChild') : null,
-            i;
-
-        if (messages.length > consoleLimit) {
-            messages.splice(0, messages.length - consoleLimit);
-        }
-
-        limit = Math.min(messages.length, (limit || messages.length));
-
-        // turn off logging system
-        Y.config.debug = false;
-
-        if (!this.get(PAUSED) && this.get('rendered')) {
-
-            for (i = 0; i < limit && messages.length; ++i) {
-                entries[i] = this._createEntryHTML(messages.shift());
-            }
-
-            if (!messages.length) {
-                this._cancelPrintLoop();
-            }
-
-            if (entries.length) {
-                if (newestOnTop) {
-                    entries.reverse();
-                }
-
-                this._body.insertBefore(create(entries.join('')), anchor);
-
-                if (this.get('scrollIntoView')) {
-                    this.scrollToLatest();
-                }
-
-                this._trimOldEntries();
-            }
-        }
-
-        // restore logging system
-        Y.config.debug = debug;
-
-        return this;
-    },
-
-
-    /**
-     * Constructor code.  Set up the buffer and entry template, publish
-     * internal events, and subscribe to the configured logEvent.
-     *
-     * @method initializer
-     * @protected
-     */
-    initializer : function () {
-        this._evtCat = Y.stamp(this) + '|';
-
-        this.buffer = [];
-
-        this.get('logSource').on(this._evtCat +
-            this.get('logEvent'),Y.bind("_onLogEvent",this));
-
-        /**
-         * Transfers a received message to the print loop buffer.  Default
-         * behavior defined in _defEntryFn.
-         *
-         * @event entry
-         * @param event {EventFacade} An Event Facade object with the following attribute specific properties added:
-         *  <dl>
-         *      <dt>message</dt>
-         *          <dd>The message data normalized into an object literal (see _normalizeMessage)</dd>
-         *  </dl>
-         * @preventable _defEntryFn
-         */
-        this.publish(ENTRY, { defaultFn: this._defEntryFn });
-
-        /**
-         * Triggers the reset behavior via the default logic in _defResetFn.
-         *
-         * @event reset
-         * @param event {EventFacade} Event Facade object
-         * @preventable _defResetFn
-         */
-        this.publish(RESET, { defaultFn: this._defResetFn });
-
-        this.after('rendered', this._schedulePrint);
-    },
-
-    /**
-     * Tears down the instance, flushing event subscriptions and purging the UI.
-     *
-     * @method destructor
-     * @protected
-     */
-    destructor : function () {
-        var bb = this.get('boundingBox');
-
-        this._cancelPrintLoop();
-
-        this.get('logSource').detach(this._evtCat + '*');
-
-        bb.purge(true);
-    },
-
-    /**
-     * Generate the Console UI.
-     *
-     * @method renderUI
-     * @protected
-     */
-    renderUI : function () {
-        this._initHead();
-        this._initBody();
-        this._initFoot();
-
-        // Apply positioning to the bounding box if appropriate
-        var style = this.get('style');
-        if (style !== 'block') {
-            this.get('boundingBox').addClass(this.getClassName(style));
-        }
-    },
-
-    /**
-     * Sync the UI state to the current attribute state.
-     *
-     * @method syncUI
-     */
-    syncUI : function () {
-        this._uiUpdatePaused(this.get(PAUSED));
-        this._uiUpdateCollapsed(this.get(COLLAPSED));
-        this._uiSetHeight(this.get(HEIGHT));
-    },
-
-    /**
-     * Set up event listeners to wire up the UI to the internal state.
-     *
-     * @method bindUI
-     * @protected
-     */
-    bindUI : function () {
-        this.get(CONTENT_BOX).one('button.'+C_COLLAPSE).
-            on(CLICK,this._onCollapseClick,this);
-
-        this.get(CONTENT_BOX).one('input[type=checkbox].'+C_PAUSE).
-            on(CLICK,this._onPauseClick,this);
-
-        this.get(CONTENT_BOX).one('button.'+C_CLEAR).
-            on(CLICK,this._onClearClick,this);
-
-        // Attribute changes
-        this.after(this._evtCat + 'stringsChange',
-            this._afterStringsChange);
-        this.after(this._evtCat + 'pausedChange',
-            this._afterPausedChange);
-        this.after(this._evtCat + 'consoleLimitChange',
-            this._afterConsoleLimitChange);
-        this.after(this._evtCat + 'collapsedChange',
-            this._afterCollapsedChange);
-    },
-
-
-    /**
-     * Create the DOM structure for the header elements.
-     *
-     * @method _initHead
-     * @protected
-     */
-    _initHead : function () {
-        var cb   = this.get(CONTENT_BOX),
-            info = merge(Console.CHROME_CLASSES, {
-                        str_collapse : this.get('strings.collapse'),
-                        str_title : this.get('strings.title')
-                    });
-
-        this._head = create(substitute(Console.HEADER_TEMPLATE,info));
-
-        cb.insertBefore(this._head,cb.get('firstChild'));
-    },
-
-    /**
-     * Create the DOM structure for the console body&#8212;where messages are
-     * rendered.
-     *
-     * @method _initBody
-     * @protected
-     */
-    _initBody : function () {
-        this._body = create(substitute(
-                            Console.BODY_TEMPLATE,
-                            Console.CHROME_CLASSES));
-
-        this.get(CONTENT_BOX).appendChild(this._body);
-    },
-
-    /**
-     * Create the DOM structure for the footer elements.
-     *
-     * @method _initFoot
-     * @protected
-     */
-    _initFoot : function () {
-        var info = merge(Console.CHROME_CLASSES, {
-                id_guid   : Y.guid(),
-                str_pause : this.get('strings.pause'),
-                str_clear : this.get('strings.clear')
-            });
-
-        this._foot = create(substitute(Console.FOOTER_TEMPLATE,info));
-
-        this.get(CONTENT_BOX).appendChild(this._foot);
-    },
-
-    /**
-     * Determine if incoming log messages are within the configured logLevel
-     * to be buffered for printing.
-     *
-     * @method _isInLogLevel
-     * @protected
-     */
-    _isInLogLevel : function (e) {
-        var cat = e.cat, lvl = this.get('logLevel');
-
-        if (lvl !== INFO) {
-            cat = cat || INFO;
-
-            if (isString(cat)) {
-                cat = cat.toLowerCase();
-            }
-
-            if ((cat === WARN && lvl === ERROR) ||
-                (cat === INFO && lvl !== INFO)) {
-                return false;
-            }
-        }
-
-        return true;
-    },
-
-    /**
-     * Create a log entry message from the inputs including the following keys:
-     * <ul>
-     *     <li>time - this moment</li>
-     *     <li>message - leg message</li>
-     *     <li>category - logLevel or custom category for the message</li>
-     *     <li>source - when provided, the widget or util calling Y.log</li>
-     *     <li>sourceAndDetail - same as source but can include instance info</li>
-     *     <li>localTime - readable version of time</li>
-     *     <li>elapsedTime - ms since last entry</li>
-     *     <li>totalTime - ms since Console was instantiated or reset</li>
-     * </ul>
-     *
-     * @method _normalizeMessage
-     * @param e {Event} custom event containing the log message
-     * @return Object the message object
-     * @protected
-     */
-    _normalizeMessage : function (e) {
-
-        var msg = e.msg,
-            cat = e.cat,
-            src = e.src,
-
-            m = {
-                time            : new Date(),
-                message         : msg,
-                category        : cat || this.get('defaultCategory'),
-                sourceAndDetail : src || this.get('defaultSource'),
-                source          : null,
-                localTime       : null,
-                elapsedTime     : null,
-                totalTime       : null
-            };
-
-        // Extract m.source "Foo" from m.sourceAndDetail "Foo bar baz"
-        m.source          = RE_INLINE_SOURCE.test(m.sourceAndDetail) ?
-                                RegExp.$1 : m.sourceAndDetail;
-        m.localTime       = m.time.toLocaleTimeString ?
-                            m.time.toLocaleTimeString() : (m.time + '');
-        m.elapsedTime     = m.time - this.get(LAST_TIME);
-        m.totalTime       = m.time - this.get(START_TIME);
-
-        this._set(LAST_TIME,m.time);
-
-        return m;
-    },
-
-    /**
-     * Sets an interval for buffered messages to be output to the console.
-     *
-     * @method _schedulePrint
-     * @protected
-     */
-    _schedulePrint : function () {
-        if (!this._printLoop && !this.get(PAUSED) && this.get('rendered')) {
-            this._printLoop = Y.later(
-                                this.get('printTimeout'),
-                                this, this.printBuffer,
-                                this.get('printLimit'), true);
-        }
-    },
-
-    /**
-     * Translates message meta into the markup for a console entry.
-     *
-     * @method _createEntryHTML
-     * @param m {Object} object literal containing normalized message metadata
-     * @return String
-     * @protected
-     */
-    _createEntryHTML : function (m) {
-        m = merge(
-                this._htmlEscapeMessage(m),
-                Console.ENTRY_CLASSES,
-                {
-                    cat_class : this.getClassName(ENTRY,m.category),
-                    src_class : this.getClassName(ENTRY,m.source)
-                });
-
-        return this.get('entryTemplate').replace(/\{(\w+)\}/g,
-            function (_,token) {
-                return token in m ? m[token] : '';
-            });
-    },
-
-    /**
-     * Scrolls to the most recent entry
-     *
-     * @method scrollToLatest
-     * @chainable
-     */
-    scrollToLatest : function () {
-        var scrollTop = this.get('newestOnTop') ?
-                            0 :
-                            this._body.get('scrollHeight');
-
-        this._body.set('scrollTop', scrollTop);
-    },
-
-    /**
-     * Performs HTML escaping on strings in the message object.
-     *
-     * @method _htmlEscapeMessage
-     * @param m {Object} the normalized message object
-     * @return Object the message object with proper escapement
-     * @protected
-     */
-    _htmlEscapeMessage : function (m) {
-        m.message         = this._encodeHTML(m.message);
-        m.source          = this._encodeHTML(m.source);
-        m.sourceAndDetail = this._encodeHTML(m.sourceAndDetail);
-        m.category        = this._encodeHTML(m.category);
-
-        return m;
-    },
-
-    /**
-     * Removes the oldest message entries from the UI to maintain the limit
-     * specified in the consoleLimit configuration.
-     *
-     * @method _trimOldEntries
-     * @protected
-     */
-    _trimOldEntries : function () {
-        // Turn off the logging system for the duration of this operation
-        // to prevent an infinite loop
-        Y.config.debug = false;
-
-        var bd = this._body,
-            limit = this.get('consoleLimit'),
-            debug = Y.config.debug,
-            entries,e,i,l;
-
-        if (bd) {
-            entries = bd.all(DOT+C_ENTRY);
-            l = entries.size() - limit;
-
-            if (l > 0) {
-                if (this.get('newestOnTop')) {
-                    i = limit;
-                    l = entries.size();
-                } else {
-                    i = 0;
-                }
-
-                this._body.setStyle('display','none');
-
-                for (;i < l; ++i) {
-                    e = entries.item(i);
-                    if (e) {
-                        e.remove();
-                    }
-                }
-
-                this._body.setStyle('display','');
-            }
-
-        }
-
-        Y.config.debug = debug;
-    },
-
-    /**
-     * Returns the input string with ampersands (&amp;), &lt, and &gt; encoded
-     * as HTML entities.
-     *
-     * @method _encodeHTML
-     * @param s {String} the raw string
-     * @return String the encoded string
-     * @protected
-     */
-    _encodeHTML : function (s) {
-        return isString(s) ?
-            s.replace(RE_AMP,ESC_AMP).
-              replace(RE_LT, ESC_LT).
-              replace(RE_GT, ESC_GT) :
-            s;
-    },
-
-    /**
-     * Clears the timeout for printing buffered messages.
-     *
-     * @method _cancelPrintLoop
-     * @protected
-     */
-    _cancelPrintLoop : function () {
-        if (this._printLoop) {
-            this._printLoop.cancel();
-            this._printLoop = null;
-        }
-    },
-
-    /**
-     * Validates input value for style attribute.  Accepts only values 'inline',
-     * 'block', and 'separate'.
-     *
-     * @method _validateStyle
-     * @param style {String} the proposed value
-     * @return {Boolean} pass/fail
-     * @protected
-     */
-    _validateStyle : function (style) {
-        return style === 'inline' || style === 'block' || style === 'separate';
-    },
-
-    /**
-     * Event handler for clicking on the Pause checkbox to update the paused
-     * attribute.
-     *
-     * @method _onPauseClick
-     * @param e {Event} DOM event facade for the click event
-     * @protected
-     */
-    _onPauseClick : function (e) {
-        this.set(PAUSED,e.target.get(CHECKED));
-    },
-
-    /**
-     * Event handler for clicking on the Clear button.  Pass-through to
-     * <code>this.clearConsole()</code>.
-     *
-     * @method _onClearClick
-     * @param e {Event} DOM event facade for the click event
-     * @protected
-     */
-    _onClearClick : function (e) {
-        this.clearConsole();
-    },
-
-    /**
-     * Event handler for clicking on the Collapse/Expand button. Sets the
-     * &quot;collapsed&quot; attribute accordingly.
-     *
-     * @method _onCollapseClick
-     * @param e {Event} DOM event facade for the click event
-     * @protected
-     */
-    _onCollapseClick : function (e) {
-        this.set(COLLAPSED, !this.get(COLLAPSED));
-    },
-
-
-    /**
-     * Validator for logSource attribute.
-     *
-     * @method _validateLogSource
-     * @param v {Object} the desired logSource
-     * @return {Boolean} true if the input is an object with an <code>on</code>
-     *                   method
-     * @protected
-     */
-    _validateLogSource: function (v) {
-        return v && Y.Lang.isFunction(v.on);
-    },
-
-    /**
-     * Setter method for logLevel attribute.  Acceptable values are
-     * &quot;error&quot, &quot;warn&quot, and &quot;info&quot (case
-     * insensitive).  Other values are treated as &quot;info&quot;.
-     *
-     * @method _setLogLevel
-     * @param v {String} the desired log level
-     * @return String One of Console.LOG_LEVEL_INFO, _WARN, or _ERROR
-     * @protected
-     */
-    _setLogLevel : function (v) {
-        if (isString(v)) {
-            v = v.toLowerCase();
-        }
-
-        return (v === WARN || v === ERROR) ? v : INFO;
-    },
-
-    /**
-     * Getter method for useBrowserConsole attribute.  Just a pass through to
-     * the YUI instance configuration setting.
-     *
-     * @method _getUseBrowserConsole
-     * @return {Boolean} or null if logSource is not a YUI instance
-     * @protected
-     */
-    _getUseBrowserConsole: function () {
-        var logSource = this.get('logSource');
-        return logSource instanceof YUI ?
-            logSource.config.useBrowserConsole : null;
-    },
-
-    /**
-     * Setter method for useBrowserConsole attributes.  Only functional if the
-     * logSource attribute points to a YUI instance.  Passes the value down to
-     * the YUI instance.  NOTE: multiple Console instances cannot maintain
-     * independent useBrowserConsole values, since it is just a pass through to
-     * the YUI instance configuration.
-     *
-     * @method _setUseBrowserConsole
-     * @param v {Boolean} false to disable browser console printing (default)
-     * @return {Boolean} true|false if logSource is a YUI instance
-     * @protected
-     */
-    _setUseBrowserConsole: function (v) {
-        var logSource = this.get('logSource');
-        if (logSource instanceof YUI) {
-            v = !!v;
-            logSource.config.useBrowserConsole = v;
-            return v;
-        } else {
-            return Y.Attribute.INVALID_VALUE;
-        }
-    },
-
-    /**
-     * Set the height of the Console container.  Set the body height to the
-     * difference between the configured height and the calculated heights of
-     * the header and footer.
-     * Overrides Widget.prototype._uiSetHeight.
-     *
-     * @method _uiSetHeight
-     * @param v {String|Number} the new height
-     * @protected
-     */
-    _uiSetHeight : function (v) {
-        Console.superclass._uiSetHeight.apply(this,arguments);
-
-        if (this._head && this._foot) {
-            var h = this.get('boundingBox').get('offsetHeight') -
-                    this._head.get('offsetHeight') -
-                    this._foot.get('offsetHeight');
-
-            this._body.setStyle(HEIGHT,h+'px');
-        }
-    },
-
-    /**
-     * Over-ride default content box sizing to do nothing, since we're sizing
-     * the body section to fill out height ourselves.
-     *
-     * @method _uiSizeCB
-     * @protected
-     */
-    _uiSizeCB : function() {
-        // Do Nothing. Ideally want to move to Widget-StdMod, which accounts for
-        // _uiSizeCB
-    },
-
-    /**
-     * Updates the UI if changes are made to any of the strings in the strings
-     * attribute.
-     *
-     * @method _afterStringsChange
-     * @param e {Event} Custom event for the attribute change
-     * @protected
-     */
-    _afterStringsChange : function (e) {
-        var prop   = e.subAttrName ? e.subAttrName.split(DOT)[1] : null,
-            cb     = this.get(CONTENT_BOX),
-            before = e.prevVal,
-            after  = e.newVal;
-
-        if ((!prop || prop === TITLE) && before.title !== after.title) {
-            cb.all(DOT+C_CONSOLE_TITLE).setHTML(after.title);
-        }
-
-        if ((!prop || prop === PAUSE) && before.pause !== after.pause) {
-            cb.all(DOT+C_PAUSE_LABEL).setHTML(after.pause);
-        }
-
-        if ((!prop || prop === CLEAR) && before.clear !== after.clear) {
-            cb.all(DOT+C_CLEAR).set('value',after.clear);
-        }
-    },
-
-    /**
-     * Updates the UI and schedules or cancels the print loop.
-     *
-     * @method _afterPausedChange
-     * @param e {Event} Custom event for the attribute change
-     * @protected
-     */
-    _afterPausedChange : function (e) {
-        var paused = e.newVal;
-
-        if (e.src !== Y.Widget.SRC_UI) {
-            this._uiUpdatePaused(paused);
-        }
-
-        if (!paused) {
-            this._schedulePrint();
-        } else if (this._printLoop) {
-            this._cancelPrintLoop();
-        }
-    },
-
-    /**
-     * Checks or unchecks the paused checkbox
-     *
-     * @method _uiUpdatePaused
-     * @param on {Boolean} the new checked state
-     * @protected
-     */
-    _uiUpdatePaused : function (on) {
-        var node = this._foot.all('input[type=checkbox].'+C_PAUSE);
-
-        if (node) {
-            node.set(CHECKED,on);
-        }
-    },
-
-    /**
-     * Calls this._trimOldEntries() in response to changes in the configured
-     * consoleLimit attribute.
-     *
-     * @method _afterConsoleLimitChange
-     * @param e {Event} Custom event for the attribute change
-     * @protected
-     */
-    _afterConsoleLimitChange : function () {
-        this._trimOldEntries();
-    },
-
-
-    /**
-     * Updates the className of the contentBox, which should trigger CSS to
-     * hide or show the body and footer sections depending on the new value.
-     *
-     * @method _afterCollapsedChange
-     * @param e {Event} Custom event for the attribute change
-     * @protected
-     */
-    _afterCollapsedChange : function (e) {
-        this._uiUpdateCollapsed(e.newVal);
-    },
-
-    /**
-     * Updates the UI to reflect the new Collapsed state
-     *
-     * @method _uiUpdateCollapsed
-     * @param v {Boolean} true for collapsed, false for expanded
-     * @protected
-     */
-    _uiUpdateCollapsed : function (v) {
-        var bb     = this.get('boundingBox'),
-            button = bb.all('button.'+C_COLLAPSE),
-            method = v ? 'addClass' : 'removeClass',
-            str    = this.get('strings.'+(v ? 'expand' : 'collapse'));
-
-        bb[method](C_COLLAPSED);
-
-        if (button) {
-            button.setHTML(str);
-        }
-
-        this._uiSetHeight(v ? this._head.get('offsetHeight'): this.get(HEIGHT));
-    },
-
-    /**
-     * Makes adjustments to the UI if needed when the Console is hidden or shown
-     *
-     * @method _afterVisibleChange
-     * @param e {Event} the visibleChange event
-     * @protected
-     */
-    _afterVisibleChange : function (e) {
-        Console.superclass._afterVisibleChange.apply(this,arguments);
-
-        this._uiUpdateFromHideShow(e.newVal);
-    },
-
-    /**
-     * Recalculates dimensions and updates appropriately when shown
-     *
-     * @method _uiUpdateFromHideShow
-     * @param v {Boolean} true for visible, false for hidden
-     * @protected
-     */
-    _uiUpdateFromHideShow : function (v) {
-        if (v) {
-            this._uiSetHeight(this.get(HEIGHT));
-        }
-    },
-
-    /**
-     * Responds to log events by normalizing qualifying messages and passing
-     * them along through the entry event for buffering etc.
-     *
-     * @method _onLogEvent
-     * @param msg {String} the log message
-     * @param cat {String} OPTIONAL the category or logLevel of the message
-     * @param src {String} OPTIONAL the source of the message (e.g. widget name)
-     * @protected
-     */
-    _onLogEvent : function (e) {
-
-        if (!this.get(DISABLED) && this._isInLogLevel(e)) {
-
-            var debug = Y.config.debug;
-
-            /* TODO: needed? */
-            Y.config.debug = false;
-
-            this.fire(ENTRY, {
-                message : this._normalizeMessage(e)
-            });
-
-            Y.config.debug = debug;
-        }
-    },
-
-    /**
-     * Clears the console, resets the startTime attribute, enables and
-     * unpauses the widget.
-     *
-     * @method _defResetFn
-     * @protected
-     */
-    _defResetFn : function () {
-        this.clearConsole();
-        this.set(START_TIME,new Date());
-        this.set(DISABLED,false);
-        this.set(PAUSED,false);
-    },
-
-    /**
-     * Buffers incoming message objects and schedules the printing.
-     *
-     * @method _defEntryFn
-     * @param e {Event} The Custom event carrying the message in its payload
-     * @protected
-     */
-    _defEntryFn : function (e) {
-        if (e.message) {
-            this.buffer.push(e.message);
-            this._schedulePrint();
-        }
-    }
-
-},
-
-// Y.Console static properties
-{
-    /**
-     * The identity of the widget.
-     *
-     * @property NAME
-     * @type String
-     * @static
-     */
-    NAME : CONSOLE,
-
-    /**
-     * Static identifier for logLevel configuration setting to allow all
-     * incoming messages to generate Console entries.
-     *
-     * @property LOG_LEVEL_INFO
-     * @type String
-     * @static
-     */
-    LOG_LEVEL_INFO  : INFO,
-
-    /**
-     * Static identifier for logLevel configuration setting to allow only
-     * incoming messages of logLevel &quot;warn&quot; or &quot;error&quot;
-     * to generate Console entries.
-     *
-     * @property LOG_LEVEL_WARN
-     * @type String
-     * @static
-     */
-    LOG_LEVEL_WARN  : WARN,
-
-    /**
-     * Static identifier for logLevel configuration setting to allow only
-     * incoming messages of logLevel &quot;error&quot; to generate
-     * Console entries.
-     *
-     * @property LOG_LEVEL_ERROR
-     * @type String
-     * @static
-     */
-    LOG_LEVEL_ERROR : ERROR,
-
-    /**
-     * Map (object) of classNames used to populate the placeholders in the
-     * Console.ENTRY_TEMPLATE markup when rendering a new Console entry.
-     *
-     * <p>By default, the keys contained in the object are:</p>
-     * <ul>
-     *    <li>entry_class</li>
-     *    <li>entry_meta_class</li>
-     *    <li>entry_cat_class</li>
-     *    <li>entry_src_class</li>
-     *    <li>entry_time_class</li>
-     *    <li>entry_content_class</li>
-     * </ul>
-     *
-     * @property ENTRY_CLASSES
-     * @type Object
-     * @static
-     */
-    ENTRY_CLASSES   : {
-        entry_class         : C_ENTRY,
-        entry_meta_class    : C_ENTRY_META,
-        entry_cat_class     : C_ENTRY_CAT,
-        entry_src_class     : C_ENTRY_SRC,
-        entry_time_class    : C_ENTRY_TIME,
-        entry_content_class : C_ENTRY_CONTENT
-    },
-
-    /**
-     * Map (object) of classNames used to populate the placeholders in the
-     * Console.HEADER_TEMPLATE, Console.BODY_TEMPLATE, and
-     * Console.FOOTER_TEMPLATE markup when rendering the Console UI.
-     *
-     * <p>By default, the keys contained in the object are:</p>
-     * <ul>
-     *   <li>console_hd_class</li>
-     *   <li>console_bd_class</li>
-     *   <li>console_ft_class</li>
-     *   <li>console_controls_class</li>
-     *   <li>console_checkbox_class</li>
-     *   <li>console_pause_class</li>
-     *   <li>console_pause_label_class</li>
-     *   <li>console_button_class</li>
-     *   <li>console_clear_class</li>
-     *   <li>console_collapse_class</li>
-     *   <li>console_title_class</li>
-     * </ul>
-     *
-     * @property CHROME_CLASSES
-     * @type Object
-     * @static
-     */
-    CHROME_CLASSES  : {
-        console_hd_class       : C_CONSOLE_HD,
-        console_bd_class       : C_CONSOLE_BD,
-        console_ft_class       : C_CONSOLE_FT,
-        console_controls_class : C_CONSOLE_CONTROLS,
-        console_checkbox_class : C_CHECKBOX,
-        console_pause_class    : C_PAUSE,
-        console_pause_label_class : C_PAUSE_LABEL,
-        console_button_class   : C_BUTTON,
-        console_clear_class    : C_CLEAR,
-        console_collapse_class : C_COLLAPSE,
-        console_title_class    : C_CONSOLE_TITLE
-    },
-
-    /**
-     * Markup template used to generate the DOM structure for the header
-     * section of the Console when it is rendered.  The template includes
-     * these {placeholder}s:
-     *
-     * <ul>
-     *   <li>console_button_class - contributed by Console.CHROME_CLASSES</li>
-     *   <li>console_collapse_class - contributed by Console.CHROME_CLASSES</li>
-     *   <li>console_hd_class - contributed by Console.CHROME_CLASSES</li>
-     *   <li>console_title_class - contributed by Console.CHROME_CLASSES</li>
-     *   <li>str_collapse - pulled from attribute strings.collapse</li>
-     *   <li>str_title - pulled from attribute strings.title</li>
-     * </ul>
-     *
-     * @property HEADER_TEMPLATE
-     * @type String
-     * @static
-     */
-    HEADER_TEMPLATE :
-        '<div class="{console_hd_class}">'+
-            '<h4 class="{console_title_class}">{str_title}</h4>'+
-            '<button type="button" class="'+
-                '{console_button_class} {console_collapse_class}">{str_collapse}'+
-            '</button>'+
-        '</div>',
-
-    /**
-     * Markup template used to generate the DOM structure for the Console body
-     * (where the messages are inserted) when it is rendered.  The template
-     * includes only the {placeholder} &quot;console_bd_class&quot;, which is
-     * constributed by Console.CHROME_CLASSES.
-     *
-     * @property BODY_TEMPLATE
-     * @type String
-     * @static
-     */
-    BODY_TEMPLATE : '<div class="{console_bd_class}"></div>',
-
-    /**
-     * Markup template used to generate the DOM structure for the footer
-     * section of the Console when it is rendered.  The template includes
-     * many of the {placeholder}s from Console.CHROME_CLASSES as well as:
-     *
-     * <ul>
-     *   <li>id_guid - generated unique id, relates the label and checkbox</li>
-     *   <li>str_pause - pulled from attribute strings.pause</li>
-     *   <li>str_clear - pulled from attribute strings.clear</li>
-     * </ul>
-     *
-     * @property FOOTER_TEMPLATE
-     * @type String
-     * @static
-     */
-    FOOTER_TEMPLATE :
-        '<div class="{console_ft_class}">'+
-            '<div class="{console_controls_class}">'+
-                '<label class="{console_pause_label_class}"><input type="checkbox" class="{console_checkbox_class} {console_pause_class}" value="1" id="{id_guid}"> {str_pause}</label>' +
-                '<button type="button" class="'+
-                    '{console_button_class} {console_clear_class}">{str_clear}'+
-                '</button>'+
-            '</div>'+
-        '</div>',
-
-    /**
-     * Default markup template used to create the DOM structure for Console
-     * entries. The markup contains {placeholder}s for content and classes
-     * that are replaced via Y.Lang.sub.  The default template contains
-     * the {placeholder}s identified in Console.ENTRY_CLASSES as well as the
-     * following placeholders that will be populated by the log entry data:
-     *
-     * <ul>
-     *   <li>cat_class</li>
-     *   <li>src_class</li>
-     *   <li>totalTime</li>
-     *   <li>elapsedTime</li>
-     *   <li>localTime</li>
-     *   <li>sourceAndDetail</li>
-     *   <li>message</li>
-     * </ul>
-     *
-     * @property ENTRY_TEMPLATE
-     * @type String
-     * @static
-     */
-    ENTRY_TEMPLATE : ENTRY_TEMPLATE_STR,
-
-    /**
-     * Static property used to define the default attribute configuration of
-     * the Widget.
-     *
-     * @property ATTRS
-     * @Type Object
-     * @static
-     */
-    ATTRS : {
-
-        /**
-         * Name of the custom event that will communicate log messages.
-         *
-         * @attribute logEvent
-         * @type String
-         * @default "yui:log"
-         */
-        logEvent : {
-            value : 'yui:log',
-            writeOnce : true,
-            validator : isString
-        },
-
-        /**
-         * Object that will emit the log events.  By default the YUI instance.
-         * To have a single Console capture events from all YUI instances, set
-         * this to the Y.Global object.
-         *
-         * @attribute logSource
-         * @type EventTarget
-         * @default Y
-         */
-        logSource : {
-            value : Y,
-            writeOnce : true,
-            validator : function (v) {
-                return this._validateLogSource(v);
-            }
-        },
-
-        /**
-         * Collection of strings used to label elements in the Console UI.
-         * Default collection contains the following name:value pairs:
-         *
-         * <ul>
-         *   <li>title : &quot;Log Console&quot;</li>
-         *   <li>pause : &quot;Pause&quot;</li>
-         *   <li>clear : &quot;Clear&quot;</li>
-         *   <li>collapse : &quot;Collapse&quot;</li>
-         *   <li>expand : &quot;Expand&quot;</li>
-         * </ul>
-         *
-         * @attribute strings
-         * @type Object
-         */
-        strings : {
-            valueFn: function() { return Y.Intl.get("console"); }
-        },
-
-        /**
-         * Boolean to pause the outputting of new messages to the console.
-         * When paused, messages will accumulate in the buffer.
-         *
-         * @attribute paused
-         * @type boolean
-         * @default false
-         */
-        paused : {
-            value : false,
-            validator : L.isBoolean
-        },
-
-        /**
-         * If a category is not specified in the Y.log(..) statement, this
-         * category will be used. Categories &quot;info&quot;,
-         * &quot;warn&quot;, and &quot;error&quot; are also called log level.
-         *
-         * @attribute defaultCategory
-         * @type String
-         * @default "info"
-         */
-        defaultCategory : {
-            value : INFO,
-            validator : isString
-        },
-
-        /**
-         * If a source is not specified in the Y.log(..) statement, this
-         * source will be used.
-         *
-         * @attribute defaultSource
-         * @type String
-         * @default "global"
-         */
-        defaultSource   : {
-            value : 'global',
-            validator : isString
-        },
-
-        /**
-         * Markup template used to create the DOM structure for Console entries.
-         *
-         * @attribute entryTemplate
-         * @type String
-         * @default Console.ENTRY_TEMPLATE
-         */
-        entryTemplate : {
-            value : ENTRY_TEMPLATE_STR,
-            validator : isString
-        },
-
-        /**
-         * Minimum entry log level to render into the Console.  The initial
-         * logLevel value for all Console instances defaults from the
-         * Y.config.logLevel YUI configuration, or Console.LOG_LEVEL_INFO if
-         * that configuration is not set.
-         *
-         * Possible values are &quot;info&quot;, &quot;warn&quot;,
-         * &quot;error&quot; (case insensitive), or their corresponding statics
-         * Console.LOG_LEVEL_INFO and so on.
-         *
-         * @attribute logLevel
-         * @type String
-         * @default Y.config.logLevel or Console.LOG_LEVEL_INFO
-         */
-        logLevel : {
-            value : Y.config.logLevel || INFO,
-            setter : function (v) {
-                return this._setLogLevel(v);
-            }
-        },
-
-        /**
-         * Millisecond timeout between iterations of the print loop, moving
-         * entries from the buffer to the UI.
-         *
-         * @attribute printTimeout
-         * @type Number
-         * @default 100
-         */
-        printTimeout : {
-            value : 100,
-            validator : isNumber
-        },
-
-        /**
-         * Maximum number of entries printed in each iteration of the print
-         * loop. This is used to prevent excessive logging locking the page UI.
-         *
-         * @attribute printLimit
-         * @type Number
-         * @default 50
-         */
-        printLimit : {
-            value : 50,
-            validator : isNumber
-        },
-
-        /**
-         * Maximum number of Console entries allowed in the Console body at one
-         * time.  This is used to keep acquired messages from exploding the
-         * DOM tree and impacting page performance.
-         *
-         * @attribute consoleLimit
-         * @type Number
-         * @default 300
-         */
-        consoleLimit : {
-            value : 300,
-            validator : isNumber
-        },
-
-        /**
-         * New entries should display at the top of the Console or the bottom?
-         *
-         * @attribute newestOnTop
-         * @type Boolean
-         * @default true
-         */
-        newestOnTop : {
-            value : true
-        },
-
-        /**
-         * When new entries are added to the Console UI, should they be
-         * scrolled into view?
-         *
-         * @attribute scrollIntoView
-         * @type Boolean
-         * @default true
-         */
-        scrollIntoView : {
-            value : true
-        },
-
-        /**
-         * The baseline time for this Console instance, used to measure elapsed
-         * time from the moment the console module is <code>use</code>d to the
-         * moment each new entry is logged (not rendered).
-         *
-         * This value is reset by the instance method myConsole.reset().
-         *
-         * @attribute startTime
-         * @type Date
-         * @default The moment the console module is <code>use</code>d
-         */
-        startTime : {
-            value : new Date()
-        },
-
-        /**
-         * The precise time the last entry was logged.  Used to measure elapsed
-         * time between log messages.
-         *
-         * @attribute lastTime
-         * @type Date
-         * @default The moment the console module is <code>use</code>d
-         */
-        lastTime : {
-            value : new Date(),
-            readOnly: true
-        },
-
-        /**
-         * Controls the collapsed state of the Console
-         *
-         * @attribute collapsed
-         * @type Boolean
-         * @default false
-         */
-        collapsed : {
-            value : false
-        },
-
-        /**
-        * String with units, or number, representing the height of the Console,
-        * inclusive of header and footer. If a number is provided, the default
-        * unit, defined by Widget's DEF_UNIT, property is used.
-        *
-        * @attribute height
-        * @default "300px"
-        * @type {String | Number}
-        */
-        height: {
-            value: "300px"
-        },
-
-        /**
-        * String with units, or number, representing the width of the Console.
-        * If a number is provided, the default unit, defined by Widget's
-        * DEF_UNIT, property is used.
-        *
-        * @attribute width
-        * @default "300px"
-        * @type {String | Number}
-        */
-        width: {
-            value: "300px"
-        },
-
-        /**
-         * Pass through to the YUI instance useBrowserConsole configuration.
-         * By default this is set to false, which will disable logging to the
-         * browser console when a Console instance is created.  If the
-         * logSource is not a YUI instance, this has no effect.
-         *
-         * @attribute useBrowserConsole
-         * @type {Boolean}
-         * @default false
-         */
-         useBrowserConsole : {
-            lazyAdd: false,
-            value: false,
-            getter : function () {
-                return this._getUseBrowserConsole();
-            },
-            setter : function (v) {
-                return this._setUseBrowserConsole(v);
-            }
-         },
-
-         /**
-          * Allows the Console to flow in the document.  Available values are
-          * 'inline', 'block', and 'separate' (the default).
-          *
-          * @attribute style
-          * @type {String}
-          * @default 'separate'
-          */
-         style : {
-            value : 'separate',
-            writeOnce : true,
-            validator : function (v) {
-                return this._validateStyle(v);
-            }
-         }
-    }
-
-});
-
-
-}, '3.18.1', {"requires": ["yui-log", "widget"], "skinnable": true, "lang": ["en", "es", "hu", "it", "ja"]});
 /*
 YUI 3.18.1 (build f7e7bcb)
 Copyright 2014 Yahoo! Inc. All rights reserved.
@@ -41319,6 +40201,7 @@ YUI.add('dd-drag', function (Y, NAME) {
         */
         bubbles: {
             setter: function(t) {
+                Y.log('bubbles is deprecated use bubbleTargets: HOST', 'warn', 'dd');
                 this.addTarget(t);
                 return t;
             }
@@ -41682,8 +40565,10 @@ YUI.add('dd-drag', function (Y, NAME) {
                 if (Drag.START_EVENT.indexOf('gesture') !== 0) {
                     //Only do these if it's not a gesture
                     if (this.get('haltDown')) {
+                        Y.log('Halting MouseDown', 'info', 'drag');
                         ev.halt();
                     } else {
+                        Y.log('Preventing Default on MouseDown', 'info', 'drag');
                         ev.preventDefault();
                     }
                 }
@@ -43440,6 +42325,7 @@ YUI.add('dd-drop', function (Y, NAME) {
         */
         bubbles: {
             setter: function(t) {
+                Y.log('bubbles is deprecated use bubbleTargets: HOST', 'warn', 'dd');
                 this.addTarget(t);
                 return t;
             }
@@ -44090,1082 +42976,6 @@ YUI.add('dd-proxy', function (Y, NAME) {
 
 
 }, '3.18.1', {"requires": ["dd-drag"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('dump', function (Y, NAME) {
-
-/**
- * Returns a simple string representation of the object or array.
- * Other types of objects will be returned unprocessed.  Arrays
- * are expected to be indexed.  Use object notation for
- * associative arrays.
- *
- * If included, the dump method is added to the YUI instance.
- *
- * @module dump
- */
-
-    var L = Y.Lang,
-        OBJ = '{...}',
-        FUN = 'f(){...}',
-        COMMA = ', ',
-        ARROW = ' => ',
-
-    /**
-     * Returns a simple string representation of the object or array.
-     * Other types of objects will be returned unprocessed.  Arrays
-     * are expected to be indexed.
-     *
-     * @method dump
-     * @param {Object} o The object to dump.
-     * @param {Number} d How deep to recurse child objects, default 3.
-     * @return {String} the dump result.
-     * @for YUI
-     */
-    dump = function(o, d) {
-        var i, len, s = [], type = L.type(o);
-
-        // Cast non-objects to string
-        // Skip dates because the std toString is what we want
-        // Skip HTMLElement-like objects because trying to dump
-        // an element will cause an unhandled exception in FF 2.x
-        if (!L.isObject(o)) {
-            return o + '';
-        } else if (type == 'date') {
-            return o;
-        } else if (o.nodeType && o.tagName) {
-            return o.tagName + '#' + o.id;
-        } else if (o.document && o.navigator) {
-            return 'window';
-        } else if (o.location && o.body) {
-            return 'document';
-        } else if (type == 'function') {
-            return FUN;
-        }
-
-        // dig into child objects the depth specifed. Default 3
-        d = (L.isNumber(d)) ? d : 3;
-
-        // arrays [1, 2, 3]
-        if (type == 'array') {
-            s.push('[');
-            for (i = 0, len = o.length; i < len; i = i + 1) {
-                if (L.isObject(o[i])) {
-                    s.push((d > 0) ? L.dump(o[i], d - 1) : OBJ);
-                } else {
-                    s.push(o[i]);
-                }
-                s.push(COMMA);
-            }
-            if (s.length > 1) {
-                s.pop();
-            }
-            s.push(']');
-        // regexp /foo/
-        } else if (type == 'regexp') {
-            s.push(o.toString());
-        // objects {k1 => v1, k2 => v2}
-        } else {
-            s.push('{');
-            for (i in o) {
-                if (o.hasOwnProperty(i)) {
-                    try {
-                        s.push(i + ARROW);
-                        if (L.isObject(o[i])) {
-                            s.push((d > 0) ? L.dump(o[i], d - 1) : OBJ);
-                        } else {
-                            s.push(o[i]);
-                        }
-                        s.push(COMMA);
-                    } catch (e) {
-                        s.push('Error: ' + e.message);
-                    }
-                }
-            }
-            if (s.length > 1) {
-                s.pop();
-            }
-            s.push('}');
-        }
-
-        return s.join('');
-    };
-
-    Y.dump = dump;
-    L.dump = dump;
-
-
-
-}, '3.18.1', {"requires": ["yui-base"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('event-simulate', function (Y, NAME) {
-
-(function() {
-/**
- * Simulate user interaction by generating native DOM events.
- *
- * @module event-simulate
- * @requires event
- */
-
-//shortcuts
-var L   = Y.Lang,
-    win = Y.config.win,
-    isFunction  = L.isFunction,
-    isString    = L.isString,
-    isBoolean   = L.isBoolean,
-    isObject    = L.isObject,
-    isNumber    = L.isNumber,
-
-    //mouse events supported
-    mouseEvents = {
-        click:      1,
-        dblclick:   1,
-        mouseover:  1,
-        mouseout:   1,
-        mousedown:  1,
-        mouseup:    1,
-        mousemove:  1,
-        contextmenu:1
-    },
-
-    pointerEvents = (win && win.PointerEvent) ? {
-        pointerover:  1,
-        pointerout:   1,
-        pointerdown:  1,
-        pointerup:    1,
-        pointermove:  1
-    } : {
-        MSPointerOver:  1,
-        MSPointerOut:   1,
-        MSPointerDown:  1,
-        MSPointerUp:    1,
-        MSPointerMove:  1
-    },
-
-    //key events supported
-    keyEvents   = {
-        keydown:    1,
-        keyup:      1,
-        keypress:   1
-    },
-
-    //HTML events supported
-    uiEvents  = {
-        submit:     1,
-        blur:       1,
-        change:     1,
-        focus:      1,
-        resize:     1,
-        scroll:     1,
-        select:     1
-    },
-
-    //events that bubble by default
-    bubbleEvents = {
-        scroll:     1,
-        resize:     1,
-        reset:      1,
-        submit:     1,
-        change:     1,
-        select:     1,
-        error:      1,
-        abort:      1
-    },
-
-    //touch events supported
-    touchEvents = {
-        touchstart: 1,
-        touchmove: 1,
-        touchend: 1,
-        touchcancel: 1
-    },
-
-    gestureEvents = {
-        gesturestart: 1,
-        gesturechange: 1,
-        gestureend: 1
-    };
-
-//all key, mouse and touch events bubble
-Y.mix(bubbleEvents, mouseEvents);
-Y.mix(bubbleEvents, keyEvents);
-Y.mix(bubbleEvents, touchEvents);
-
-/*
- * Note: Intentionally not for YUIDoc generation.
- * Simulates a key event using the given event information to populate
- * the generated event object. This method does browser-equalizing
- * calculations to account for differences in the DOM and IE event models
- * as well as different browser quirks. Note: keydown causes Safari 2.x to
- * crash.
- * @method simulateKeyEvent
- * @private
- * @static
- * @param {HTMLElement} target The target of the given event.
- * @param {String} type The type of event to fire. This can be any one of
- *      the following: keyup, keydown, and keypress.
- * @param {Boolean} [bubbles=true] Indicates if the event can be
- *      bubbled up. DOM Level 3 specifies that all key events bubble by
- *      default.
- * @param {Boolean} [cancelable=true] Indicates if the event can be
- *      canceled using preventDefault(). DOM Level 3 specifies that all
- *      key events can be cancelled.
- * @param {Window} [view=window] The view containing the target. This is
- *      typically the window object.
- * @param {Boolean} [ctrlKey=false] Indicates if one of the CTRL keys
- *      is pressed while the event is firing.
- * @param {Boolean} [altKey=false] Indicates if one of the ALT keys
- *      is pressed while the event is firing.
- * @param {Boolean} [shiftKey=false] Indicates if one of the SHIFT keys
- *      is pressed while the event is firing.
- * @param {Boolean} [metaKey=false] Indicates if one of the META keys
- *      is pressed while the event is firing.
- * @param {Number} [keyCode=0] The code for the key that is in use.
- * @param {Number} [charCode=0] The Unicode code for the character
- *      associated with the key being used.
- */
-function simulateKeyEvent(target /*:HTMLElement*/, type /*:String*/,
-                             bubbles /*:Boolean*/,  cancelable /*:Boolean*/,
-                             view /*:Window*/,
-                             ctrlKey /*:Boolean*/,    altKey /*:Boolean*/,
-                             shiftKey /*:Boolean*/,   metaKey /*:Boolean*/,
-                             keyCode /*:int*/,        charCode /*:int*/) /*:Void*/
-{
-    //check target
-    if (!target){
-        Y.error("simulateKeyEvent(): Invalid target.");
-    }
-
-    //check event type
-    if (isString(type)){
-        type = type.toLowerCase();
-        switch(type){
-            case "textevent": //DOM Level 3
-                type = "keypress";
-                break;
-            case "keyup":
-            case "keydown":
-            case "keypress":
-                break;
-            default:
-                Y.error("simulateKeyEvent(): Event type '" + type + "' not supported.");
-        }
-    } else {
-        Y.error("simulateKeyEvent(): Event type must be a string.");
-    }
-
-    //setup default values
-    if (!isBoolean(bubbles)){
-        bubbles = true; //all key events bubble
-    }
-    if (!isBoolean(cancelable)){
-        cancelable = true; //all key events can be cancelled
-    }
-    if (!isObject(view)){
-        view = Y.config.win; //view is typically window
-    }
-    if (!isBoolean(ctrlKey)){
-        ctrlKey = false;
-    }
-    if (!isBoolean(altKey)){
-        altKey = false;
-    }
-    if (!isBoolean(shiftKey)){
-        shiftKey = false;
-    }
-    if (!isBoolean(metaKey)){
-        metaKey = false;
-    }
-    if (!isNumber(keyCode)){
-        keyCode = 0;
-    }
-    if (!isNumber(charCode)){
-        charCode = 0;
-    }
-
-    //try to create a mouse event
-    var customEvent /*:MouseEvent*/ = null;
-
-    //check for DOM-compliant browsers first
-    if (isFunction(Y.config.doc.createEvent)){
-
-        try {
-
-            //try to create key event
-            customEvent = Y.config.doc.createEvent("KeyEvents");
-
-            /*
-             * Interesting problem: Firefox implemented a non-standard
-             * version of initKeyEvent() based on DOM Level 2 specs.
-             * Key event was removed from DOM Level 2 and re-introduced
-             * in DOM Level 3 with a different interface. Firefox is the
-             * only browser with any implementation of Key Events, so for
-             * now, assume it's Firefox if the above line doesn't error.
-             */
-            // @TODO: Decipher between Firefox's implementation and a correct one.
-            customEvent.initKeyEvent(type, bubbles, cancelable, view, ctrlKey,
-                altKey, shiftKey, metaKey, keyCode, charCode);
-
-        } catch (ex /*:Error*/){
-
-            /*
-             * If it got here, that means key events aren't officially supported.
-             * Safari/WebKit is a real problem now. WebKit 522 won't let you
-             * set keyCode, charCode, or other properties if you use a
-             * UIEvent, so we first must try to create a generic event. The
-             * fun part is that this will throw an error on Safari 2.x. The
-             * end result is that we need another try...catch statement just to
-             * deal with this mess.
-             */
-            try {
-
-                //try to create generic event - will fail in Safari 2.x
-                customEvent = Y.config.doc.createEvent("Events");
-
-            } catch (uierror /*:Error*/){
-
-                //the above failed, so create a UIEvent for Safari 2.x
-                customEvent = Y.config.doc.createEvent("UIEvents");
-
-            } finally {
-
-                customEvent.initEvent(type, bubbles, cancelable);
-
-                //initialize
-                customEvent.view = view;
-                customEvent.altKey = altKey;
-                customEvent.ctrlKey = ctrlKey;
-                customEvent.shiftKey = shiftKey;
-                customEvent.metaKey = metaKey;
-                customEvent.keyCode = keyCode;
-                customEvent.charCode = charCode;
-
-            }
-
-        }
-
-        //fire the event
-        target.dispatchEvent(customEvent);
-
-    } else if (isObject(Y.config.doc.createEventObject)){ //IE
-
-        //create an IE event object
-        customEvent = Y.config.doc.createEventObject();
-
-        //assign available properties
-        customEvent.bubbles = bubbles;
-        customEvent.cancelable = cancelable;
-        customEvent.view = view;
-        customEvent.ctrlKey = ctrlKey;
-        customEvent.altKey = altKey;
-        customEvent.shiftKey = shiftKey;
-        customEvent.metaKey = metaKey;
-
-        /*
-         * IE doesn't support charCode explicitly. CharCode should
-         * take precedence over any keyCode value for accurate
-         * representation.
-         */
-        customEvent.keyCode = (charCode > 0) ? charCode : keyCode;
-
-        //fire the event
-        target.fireEvent("on" + type, customEvent);
-
-    } else {
-        Y.error("simulateKeyEvent(): No event simulation framework present.");
-    }
-}
-
-/*
- * Note: Intentionally not for YUIDoc generation.
- * Simulates a mouse event using the given event information to populate
- * the generated event object. This method does browser-equalizing
- * calculations to account for differences in the DOM and IE event models
- * as well as different browser quirks.
- * @method simulateMouseEvent
- * @private
- * @static
- * @param {HTMLElement} target The target of the given event.
- * @param {String} type The type of event to fire. This can be any one of
- *      the following: click, dblclick, mousedown, mouseup, mouseout,
- *      mouseover, and mousemove.
- * @param {Boolean} bubbles (Optional) Indicates if the event can be
- *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
- *      default. The default is true.
- * @param {Boolean} cancelable (Optional) Indicates if the event can be
- *      canceled using preventDefault(). DOM Level 2 specifies that all
- *      mouse events except mousemove can be cancelled. The default
- *      is true for all events except mousemove, for which the default
- *      is false.
- * @param {Window} view (Optional) The view containing the target. This is
- *      typically the window object. The default is window.
- * @param {Number} detail (Optional) The number of times the mouse button has
- *      been used. The default value is 1.
- * @param {Number} screenX (Optional) The x-coordinate on the screen at which
- *      point the event occured. The default is 0.
- * @param {Number} screenY (Optional) The y-coordinate on the screen at which
- *      point the event occured. The default is 0.
- * @param {Number} clientX (Optional) The x-coordinate on the client at which
- *      point the event occured. The default is 0.
- * @param {Number} clientY (Optional) The y-coordinate on the client at which
- *      point the event occured. The default is 0.
- * @param {Boolean} ctrlKey (Optional) Indicates if one of the CTRL keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} altKey (Optional) Indicates if one of the ALT keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} shiftKey (Optional) Indicates if one of the SHIFT keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} metaKey (Optional) Indicates if one of the META keys
- *      is pressed while the event is firing. The default is false.
- * @param {Number} button (Optional) The button being pressed while the event
- *      is executing. The value should be 0 for the primary mouse button
- *      (typically the left button), 1 for the terciary mouse button
- *      (typically the middle button), and 2 for the secondary mouse button
- *      (typically the right button). The default is 0.
- * @param {HTMLElement} relatedTarget (Optional) For mouseout events,
- *      this is the element that the mouse has moved to. For mouseover
- *      events, this is the element that the mouse has moved from. This
- *      argument is ignored for all other events. The default is null.
- */
-function simulateMouseEvent(target /*:HTMLElement*/, type /*:String*/,
-                               bubbles /*:Boolean*/,  cancelable /*:Boolean*/,
-                               view /*:Window*/,        detail /*:int*/,
-                               screenX /*:int*/,        screenY /*:int*/,
-                               clientX /*:int*/,        clientY /*:int*/,
-                               ctrlKey /*:Boolean*/,    altKey /*:Boolean*/,
-                               shiftKey /*:Boolean*/,   metaKey /*:Boolean*/,
-                               button /*:int*/,         relatedTarget /*:HTMLElement*/) /*:Void*/
-{
-    //check target
-    if (!target){
-        Y.error("simulateMouseEvent(): Invalid target.");
-    }
-
-
-    if (isString(type)){
-
-        //make sure it's a supported mouse event or an msPointerEvent.
-        if (!mouseEvents[type.toLowerCase()] && !pointerEvents[type]){
-            Y.error("simulateMouseEvent(): Event type '" + type + "' not supported.");
-        }
-    }
-    else {
-        Y.error("simulateMouseEvent(): Event type must be a string.");
-    }
-
-    //setup default values
-    if (!isBoolean(bubbles)){
-        bubbles = true; //all mouse events bubble
-    }
-    if (!isBoolean(cancelable)){
-        cancelable = (type !== "mousemove"); //mousemove is the only one that can't be cancelled
-    }
-    if (!isObject(view)){
-        view = Y.config.win; //view is typically window
-    }
-    if (!isNumber(detail)){
-        detail = 1;  //number of mouse clicks must be at least one
-    }
-    if (!isNumber(screenX)){
-        screenX = 0;
-    }
-    if (!isNumber(screenY)){
-        screenY = 0;
-    }
-    if (!isNumber(clientX)){
-        clientX = 0;
-    }
-    if (!isNumber(clientY)){
-        clientY = 0;
-    }
-    if (!isBoolean(ctrlKey)){
-        ctrlKey = false;
-    }
-    if (!isBoolean(altKey)){
-        altKey = false;
-    }
-    if (!isBoolean(shiftKey)){
-        shiftKey = false;
-    }
-    if (!isBoolean(metaKey)){
-        metaKey = false;
-    }
-    if (!isNumber(button)){
-        button = 0;
-    }
-
-    relatedTarget = relatedTarget || null;
-
-    //try to create a mouse event
-    var customEvent /*:MouseEvent*/ = null;
-
-    //check for DOM-compliant browsers first
-    if (isFunction(Y.config.doc.createEvent)){
-
-        customEvent = Y.config.doc.createEvent("MouseEvents");
-
-        //Safari 2.x (WebKit 418) still doesn't implement initMouseEvent()
-        if (customEvent.initMouseEvent){
-            customEvent.initMouseEvent(type, bubbles, cancelable, view, detail,
-                                 screenX, screenY, clientX, clientY,
-                                 ctrlKey, altKey, shiftKey, metaKey,
-                                 button, relatedTarget);
-        } else { //Safari
-
-            //the closest thing available in Safari 2.x is UIEvents
-            customEvent = Y.config.doc.createEvent("UIEvents");
-            customEvent.initEvent(type, bubbles, cancelable);
-            customEvent.view = view;
-            customEvent.detail = detail;
-            customEvent.screenX = screenX;
-            customEvent.screenY = screenY;
-            customEvent.clientX = clientX;
-            customEvent.clientY = clientY;
-            customEvent.ctrlKey = ctrlKey;
-            customEvent.altKey = altKey;
-            customEvent.metaKey = metaKey;
-            customEvent.shiftKey = shiftKey;
-            customEvent.button = button;
-            customEvent.relatedTarget = relatedTarget;
-        }
-
-        /*
-         * Check to see if relatedTarget has been assigned. Firefox
-         * versions less than 2.0 don't allow it to be assigned via
-         * initMouseEvent() and the property is readonly after event
-         * creation, so in order to keep YAHOO.util.getRelatedTarget()
-         * working, assign to the IE proprietary toElement property
-         * for mouseout event and fromElement property for mouseover
-         * event.
-         */
-        if (relatedTarget && !customEvent.relatedTarget){
-            if (type === "mouseout"){
-                customEvent.toElement = relatedTarget;
-            } else if (type === "mouseover"){
-                customEvent.fromElement = relatedTarget;
-            }
-        }
-
-        //fire the event
-        target.dispatchEvent(customEvent);
-
-    } else if (isObject(Y.config.doc.createEventObject)){ //IE
-
-        //create an IE event object
-        customEvent = Y.config.doc.createEventObject();
-
-        //assign available properties
-        customEvent.bubbles = bubbles;
-        customEvent.cancelable = cancelable;
-        customEvent.view = view;
-        customEvent.detail = detail;
-        customEvent.screenX = screenX;
-        customEvent.screenY = screenY;
-        customEvent.clientX = clientX;
-        customEvent.clientY = clientY;
-        customEvent.ctrlKey = ctrlKey;
-        customEvent.altKey = altKey;
-        customEvent.metaKey = metaKey;
-        customEvent.shiftKey = shiftKey;
-
-        //fix button property for IE's wacky implementation
-        switch(button){
-            case 0:
-                customEvent.button = 1;
-                break;
-            case 1:
-                customEvent.button = 4;
-                break;
-            case 2:
-                //leave as is
-                break;
-            default:
-                customEvent.button = 0;
-        }
-
-        /*
-         * Have to use relatedTarget because IE won't allow assignment
-         * to toElement or fromElement on generic events. This keeps
-         * YAHOO.util.customEvent.getRelatedTarget() functional.
-         */
-        customEvent.relatedTarget = relatedTarget;
-
-        //fire the event
-        target.fireEvent("on" + type, customEvent);
-
-    } else {
-        Y.error("simulateMouseEvent(): No event simulation framework present.");
-    }
-}
-
-/*
- * Note: Intentionally not for YUIDoc generation.
- * Simulates a UI event using the given event information to populate
- * the generated event object. This method does browser-equalizing
- * calculations to account for differences in the DOM and IE event models
- * as well as different browser quirks.
- * @method simulateHTMLEvent
- * @private
- * @static
- * @param {HTMLElement} target The target of the given event.
- * @param {String} type The type of event to fire. This can be any one of
- *      the following: click, dblclick, mousedown, mouseup, mouseout,
- *      mouseover, and mousemove.
- * @param {Boolean} bubbles (Optional) Indicates if the event can be
- *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
- *      default. The default is true.
- * @param {Boolean} cancelable (Optional) Indicates if the event can be
- *      canceled using preventDefault(). DOM Level 2 specifies that all
- *      mouse events except mousemove can be cancelled. The default
- *      is true for all events except mousemove, for which the default
- *      is false.
- * @param {Window} view (Optional) The view containing the target. This is
- *      typically the window object. The default is window.
- * @param {Number} detail (Optional) The number of times the mouse button has
- *      been used. The default value is 1.
- */
-function simulateUIEvent(target /*:HTMLElement*/, type /*:String*/,
-                               bubbles /*:Boolean*/,  cancelable /*:Boolean*/,
-                               view /*:Window*/,        detail /*:int*/) /*:Void*/
-{
-
-    //check target
-    if (!target){
-        Y.error("simulateUIEvent(): Invalid target.");
-    }
-
-    //check event type
-    if (isString(type)){
-        type = type.toLowerCase();
-
-        //make sure it's a supported mouse event
-        if (!uiEvents[type]){
-            Y.error("simulateUIEvent(): Event type '" + type + "' not supported.");
-        }
-    } else {
-        Y.error("simulateUIEvent(): Event type must be a string.");
-    }
-
-    //try to create a mouse event
-    var customEvent = null;
-
-
-    //setup default values
-    if (!isBoolean(bubbles)){
-        bubbles = (type in bubbleEvents);  //not all events bubble
-    }
-    if (!isBoolean(cancelable)){
-        cancelable = (type === "submit"); //submit is the only one that can be cancelled
-    }
-    if (!isObject(view)){
-        view = Y.config.win; //view is typically window
-    }
-    if (!isNumber(detail)){
-        detail = 1;  //usually not used but defaulted to this
-    }
-
-    //check for DOM-compliant browsers first
-    if (isFunction(Y.config.doc.createEvent)){
-
-        //just a generic UI Event object is needed
-        customEvent = Y.config.doc.createEvent("UIEvents");
-        customEvent.initUIEvent(type, bubbles, cancelable, view, detail);
-
-        //fire the event
-        target.dispatchEvent(customEvent);
-
-    } else if (isObject(Y.config.doc.createEventObject)){ //IE
-
-        //create an IE event object
-        customEvent = Y.config.doc.createEventObject();
-
-        //assign available properties
-        customEvent.bubbles = bubbles;
-        customEvent.cancelable = cancelable;
-        customEvent.view = view;
-        customEvent.detail = detail;
-
-        //fire the event
-        target.fireEvent("on" + type, customEvent);
-
-    } else {
-        Y.error("simulateUIEvent(): No event simulation framework present.");
-    }
-}
-
-/*
- * (iOS only) This is for creating native DOM gesture events which only iOS
- * v2.0+ is supporting.
- *
- * @method simulateGestureEvent
- * @private
- * @param {HTMLElement} target The target of the given event.
- * @param {String} type The type of event to fire. This can be any one of
- *      the following: touchstart, touchmove, touchend, touchcancel.
- * @param {Boolean} bubbles (Optional) Indicates if the event can be
- *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
- *      default. The default is true.
- * @param {Boolean} cancelable (Optional) Indicates if the event can be
- *      canceled using preventDefault(). DOM Level 2 specifies that all
- *      touch events except touchcancel can be cancelled. The default
- *      is true for all events except touchcancel, for which the default
- *      is false.
- * @param {Window} view (Optional) The view containing the target. This is
- *      typically the window object. The default is window.
- * @param {Number} detail (Optional) Specifies some detail information about
- *      the event depending on the type of event.
- * @param {Number} screenX (Optional) The x-coordinate on the screen at which
- *      point the event occured. The default is 0.
- * @param {Number} screenY (Optional) The y-coordinate on the screen at which
- *      point the event occured. The default is 0.
- * @param {Number} clientX (Optional) The x-coordinate on the client at which
- *      point the event occured. The default is 0.
- * @param {Number} clientY (Optional) The y-coordinate on the client at which
- *      point the event occured. The default is 0.
- * @param {Boolean} ctrlKey (Optional) Indicates if one of the CTRL keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} altKey (Optional) Indicates if one of the ALT keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} shiftKey (Optional) Indicates if one of the SHIFT keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} metaKey (Optional) Indicates if one of the META keys
- *      is pressed while the event is firing. The default is false.
- * @param {Number} scale (iOS v2+ only) The distance between two fingers
- *      since the start of an event as a multiplier of the initial distance.
- *      The default value is 1.0.
- * @param {Number} rotation (iOS v2+ only) The delta rotation since the start
- *      of an event, in degrees, where clockwise is positive and
- *      counter-clockwise is negative. The default value is 0.0.
- */
-function simulateGestureEvent(target, type,
-    bubbles,            // boolean
-    cancelable,         // boolean
-    view,               // DOMWindow
-    detail,             // long
-    screenX, screenY,   // long
-    clientX, clientY,   // long
-    ctrlKey, altKey, shiftKey, metaKey, // boolean
-    scale,              // float
-    rotation            // float
-) {
-    var customEvent;
-
-    if(!Y.UA.ios || Y.UA.ios<2.0) {
-        Y.error("simulateGestureEvent(): Native gesture DOM eventframe is not available in this platform.");
-    }
-
-    // check taget
-    if (!target){
-        Y.error("simulateGestureEvent(): Invalid target.");
-    }
-
-    //check event type
-    if (Y.Lang.isString(type)) {
-        type = type.toLowerCase();
-
-        //make sure it's a supported touch event
-        if (!gestureEvents[type]){
-            Y.error("simulateTouchEvent(): Event type '" + type + "' not supported.");
-        }
-    } else {
-        Y.error("simulateGestureEvent(): Event type must be a string.");
-    }
-
-    // setup default values
-    if (!Y.Lang.isBoolean(bubbles)) { bubbles = true; } // bubble by default
-    if (!Y.Lang.isBoolean(cancelable)) { cancelable = true; }
-    if (!Y.Lang.isObject(view))     { view = Y.config.win; }
-    if (!Y.Lang.isNumber(detail))   { detail = 2; }     // usually not used.
-    if (!Y.Lang.isNumber(screenX))  { screenX = 0; }
-    if (!Y.Lang.isNumber(screenY))  { screenY = 0; }
-    if (!Y.Lang.isNumber(clientX))  { clientX = 0; }
-    if (!Y.Lang.isNumber(clientY))  { clientY = 0; }
-    if (!Y.Lang.isBoolean(ctrlKey)) { ctrlKey = false; }
-    if (!Y.Lang.isBoolean(altKey))  { altKey = false; }
-    if (!Y.Lang.isBoolean(shiftKey)){ shiftKey = false; }
-    if (!Y.Lang.isBoolean(metaKey)) { metaKey = false; }
-
-    if (!Y.Lang.isNumber(scale)){ scale = 1.0; }
-    if (!Y.Lang.isNumber(rotation)){ rotation = 0.0; }
-
-    customEvent = Y.config.doc.createEvent("GestureEvent");
-
-    customEvent.initGestureEvent(type, bubbles, cancelable, view, detail,
-        screenX, screenY, clientX, clientY,
-        ctrlKey, altKey, shiftKey, metaKey,
-        target, scale, rotation);
-
-    target.dispatchEvent(customEvent);
-}
-
-
-/*
- * @method simulateTouchEvent
- * @private
- * @param {HTMLElement} target The target of the given event.
- * @param {String} type The type of event to fire. This can be any one of
- *      the following: touchstart, touchmove, touchend, touchcancel.
- * @param {Boolean} bubbles (Optional) Indicates if the event can be
- *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
- *      default. The default is true.
- * @param {Boolean} cancelable (Optional) Indicates if the event can be
- *      canceled using preventDefault(). DOM Level 2 specifies that all
- *      touch events except touchcancel can be cancelled. The default
- *      is true for all events except touchcancel, for which the default
- *      is false.
- * @param {Window} view (Optional) The view containing the target. This is
- *      typically the window object. The default is window.
- * @param {Number} detail (Optional) Specifies some detail information about
- *      the event depending on the type of event.
- * @param {Number} screenX (Optional) The x-coordinate on the screen at which
- *      point the event occured. The default is 0.
- * @param {Number} screenY (Optional) The y-coordinate on the screen at which
- *      point the event occured. The default is 0.
- * @param {Number} clientX (Optional) The x-coordinate on the client at which
- *      point the event occured. The default is 0.
- * @param {Number} clientY (Optional) The y-coordinate on the client at which
- *      point the event occured. The default is 0.
- * @param {Boolean} ctrlKey (Optional) Indicates if one of the CTRL keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} altKey (Optional) Indicates if one of the ALT keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} shiftKey (Optional) Indicates if one of the SHIFT keys
- *      is pressed while the event is firing. The default is false.
- * @param {Boolean} metaKey (Optional) Indicates if one of the META keys
- *      is pressed while the event is firing. The default is false.
- * @param {TouchList} touches A collection of Touch objects representing
- *      all touches associated with this event.
- * @param {TouchList} targetTouches A collection of Touch objects
- *      representing all touches associated with this target.
- * @param {TouchList} changedTouches A collection of Touch objects
- *      representing all touches that changed in this event.
- * @param {Number} scale (iOS v2+ only) The distance between two fingers
- *      since the start of an event as a multiplier of the initial distance.
- *      The default value is 1.0.
- * @param {Number} rotation (iOS v2+ only) The delta rotation since the start
- *      of an event, in degrees, where clockwise is positive and
- *      counter-clockwise is negative. The default value is 0.0.
- */
-function simulateTouchEvent(target, type,
-    bubbles,            // boolean
-    cancelable,         // boolean
-    view,               // DOMWindow
-    detail,             // long
-    screenX, screenY,   // long
-    clientX, clientY,   // long
-    ctrlKey, altKey, shiftKey, metaKey, // boolean
-    touches,            // TouchList
-    targetTouches,      // TouchList
-    changedTouches,     // TouchList
-    scale,              // float
-    rotation            // float
-) {
-
-    var customEvent;
-
-    // check taget
-    if (!target){
-        Y.error("simulateTouchEvent(): Invalid target.");
-    }
-
-    //check event type
-    if (Y.Lang.isString(type)) {
-        type = type.toLowerCase();
-
-        //make sure it's a supported touch event
-        if (!touchEvents[type]){
-            Y.error("simulateTouchEvent(): Event type '" + type + "' not supported.");
-        }
-    } else {
-        Y.error("simulateTouchEvent(): Event type must be a string.");
-    }
-
-    // note that the caller is responsible to pass appropriate touch objects.
-    // check touch objects
-    // Android(even 4.0) doesn't define TouchList yet
-    /*if(type === 'touchstart' || type === 'touchmove') {
-        if(!touches instanceof TouchList) {
-            Y.error('simulateTouchEvent(): Invalid touches. It must be a TouchList');
-        } else {
-            if(touches.length === 0) {
-                Y.error('simulateTouchEvent(): No touch object found.');
-            }
-        }
-    } else if(type === 'touchend') {
-        if(!changedTouches instanceof TouchList) {
-            Y.error('simulateTouchEvent(): Invalid touches. It must be a TouchList');
-        } else {
-            if(changedTouches.length === 0) {
-                Y.error('simulateTouchEvent(): No touch object found.');
-            }
-        }
-    }*/
-
-    if(type === 'touchstart' || type === 'touchmove') {
-        if(touches.length === 0) {
-            Y.error('simulateTouchEvent(): No touch object in touches');
-        }
-    } else if(type === 'touchend') {
-        if(changedTouches.length === 0) {
-            Y.error('simulateTouchEvent(): No touch object in changedTouches');
-        }
-    }
-
-    // setup default values
-    if (!Y.Lang.isBoolean(bubbles)) { bubbles = true; } // bubble by default.
-    if (!Y.Lang.isBoolean(cancelable)) {
-        cancelable = (type !== "touchcancel"); // touchcancel is not cancelled
-    }
-    if (!Y.Lang.isObject(view))     { view = Y.config.win; }
-    if (!Y.Lang.isNumber(detail))   { detail = 1; } // usually not used. defaulted to # of touch objects.
-    if (!Y.Lang.isNumber(screenX))  { screenX = 0; }
-    if (!Y.Lang.isNumber(screenY))  { screenY = 0; }
-    if (!Y.Lang.isNumber(clientX))  { clientX = 0; }
-    if (!Y.Lang.isNumber(clientY))  { clientY = 0; }
-    if (!Y.Lang.isBoolean(ctrlKey)) { ctrlKey = false; }
-    if (!Y.Lang.isBoolean(altKey))  { altKey = false; }
-    if (!Y.Lang.isBoolean(shiftKey)){ shiftKey = false; }
-    if (!Y.Lang.isBoolean(metaKey)) { metaKey = false; }
-    if (!Y.Lang.isNumber(scale))    { scale = 1.0; }
-    if (!Y.Lang.isNumber(rotation)) { rotation = 0.0; }
-
-
-    //check for DOM-compliant browsers first
-    if (Y.Lang.isFunction(Y.config.doc.createEvent)) {
-        if (Y.UA.android) {
-            /*
-                * Couldn't find android start version that supports touch event.
-                * Assumed supported(btw APIs broken till icecream sandwitch)
-                * from the beginning.
-            */
-            if(Y.UA.android < 4.0) {
-                /*
-                    * Touch APIs are broken in androids older than 4.0. We will use
-                    * simulated touch apis for these versions.
-                    * App developer still can listen for touch events. This events
-                    * will be dispatched with touch event types.
-                    *
-                    * (Note) Used target for the relatedTarget. Need to verify if
-                    * it has a side effect.
-                */
-                customEvent = Y.config.doc.createEvent("MouseEvents");
-                customEvent.initMouseEvent(type, bubbles, cancelable, view, detail,
-                    screenX, screenY, clientX, clientY,
-                    ctrlKey, altKey, shiftKey, metaKey,
-                    0, target);
-
-                customEvent.touches = touches;
-                customEvent.targetTouches = targetTouches;
-                customEvent.changedTouches = changedTouches;
-            } else {
-                customEvent = Y.config.doc.createEvent("TouchEvent");
-
-                // Andoroid isn't compliant W3C initTouchEvent method signature.
-                customEvent.initTouchEvent(touches, targetTouches, changedTouches,
-                    type, view,
-                    screenX, screenY, clientX, clientY,
-                    ctrlKey, altKey, shiftKey, metaKey);
-            }
-        } else if (Y.UA.ios) {
-            if(Y.UA.ios >= 2.0) {
-                customEvent = Y.config.doc.createEvent("TouchEvent");
-
-                // Available iOS 2.0 and later
-                customEvent.initTouchEvent(type, bubbles, cancelable, view, detail,
-                    screenX, screenY, clientX, clientY,
-                    ctrlKey, altKey, shiftKey, metaKey,
-                    touches, targetTouches, changedTouches,
-                    scale, rotation);
-            } else {
-                Y.error('simulateTouchEvent(): No touch event simulation framework present for iOS, '+Y.UA.ios+'.');
-            }
-        } else {
-            Y.error('simulateTouchEvent(): Not supported agent yet, '+Y.UA.userAgent);
-        }
-
-        //fire the event
-        target.dispatchEvent(customEvent);
-    //} else if (Y.Lang.isObject(doc.createEventObject)){ // Windows Mobile/IE, support later
-    } else {
-        Y.error('simulateTouchEvent(): No event simulation framework present.');
-    }
-}
-
-/**
- * Simulates the event or gesture with the given name on a target.
- * @param {HTMLElement} target The DOM element that's the target of the event.
- * @param {String} type The type of event or name of the supported gesture to simulate
- *      (i.e., "click", "doubletap", "flick").
- * @param {Object} options (Optional) Extra options to copy onto the event object.
- *      For gestures, options are used to refine the gesture behavior.
- * @for Event
- * @method simulate
- * @static
- */
-Y.Event.simulate = function(target, type, options){
-
-    options = options || {};
-
-    if (mouseEvents[type] || pointerEvents[type]){
-        simulateMouseEvent(target, type, options.bubbles,
-            options.cancelable, options.view, options.detail, options.screenX,
-            options.screenY, options.clientX, options.clientY, options.ctrlKey,
-            options.altKey, options.shiftKey, options.metaKey, options.button,
-            options.relatedTarget);
-    } else if (keyEvents[type]){
-        simulateKeyEvent(target, type, options.bubbles,
-            options.cancelable, options.view, options.ctrlKey,
-            options.altKey, options.shiftKey, options.metaKey,
-            options.keyCode, options.charCode);
-    } else if (uiEvents[type]){
-        simulateUIEvent(target, type, options.bubbles,
-            options.cancelable, options.view, options.detail);
-
-    // touch low-level event simulation
-    } else if (touchEvents[type]) {
-        if((Y.config.win && ("ontouchstart" in Y.config.win)) && !(Y.UA.phantomjs) && !(Y.UA.chrome && Y.UA.chrome < 6)) {
-            simulateTouchEvent(target, type,
-                options.bubbles, options.cancelable, options.view, options.detail,
-                options.screenX, options.screenY, options.clientX, options.clientY,
-                options.ctrlKey, options.altKey, options.shiftKey, options.metaKey,
-                options.touches, options.targetTouches, options.changedTouches,
-                options.scale, options.rotation);
-        } else {
-            Y.error("simulate(): Event '" + type + "' can't be simulated. Use gesture-simulate module instead.");
-        }
-
-    // ios gesture low-level event simulation (iOS v2+ only)
-    } else if(Y.UA.ios && Y.UA.ios >= 2.0 && gestureEvents[type]) {
-        simulateGestureEvent(target, type,
-            options.bubbles, options.cancelable, options.view, options.detail,
-            options.screenX, options.screenY, options.clientX, options.clientY,
-            options.ctrlKey, options.altKey, options.shiftKey, options.metaKey,
-            options.scale, options.rotation);
-
-    // anything else
-    } else {
-        Y.error("simulate(): Event '" + type + "' can't be simulated.");
-    }
-};
-
-
-})();
-
-
-
-}, '3.18.1', {"requires": ["event-base"]});
 /*
 YUI 3.18.1 (build f7e7bcb)
 Copyright 2014 Yahoo! Inc. All rights reserved.
@@ -45903,8 +43713,10 @@ IO.prototype = {
         // querystring-stringify-simple.
         if ((Y.Lang.isObject(data) && !data.nodeType) && !transaction.upload) {
             if (Y.QueryString && Y.QueryString.stringify) {
+                Y.log('Stringifying config.data for request', 'info', 'io');
                 config.data = data = Y.QueryString.stringify(data);
             } else {
+                Y.log('Failed to stringify config.data object, likely because `querystring-stringify-simple` is missing.', 'warn', 'io');
             }
         }
 
@@ -45930,6 +43742,7 @@ IO.prototype = {
                 case 'DELETE':
                     u = io._concat(u, data);
                     data = '';
+                    Y.log('HTTP' + method + ' with data.  The querystring is: ' + u, 'info', 'io');
                     break;
                 case 'POST':
                 case 'PUT':
@@ -46015,6 +43828,7 @@ IO.prototype = {
         // initialize timeout polling.
         if (config.timeout) {
             io._startTimeout(transaction, config.timeout);
+            Y.log('Configuration timeout set to: ' + config.timeout, 'info', 'io');
         }
 
         return {
@@ -46208,12 +44022,14 @@ Y.mix(Y.IO, {
     */
     defaultTransport: function(id) {
         if (id) {
+            Y.log('Setting default IO to: ' + id, 'info', 'io');
             Y.IO._default = id;
         } else {
             var o = {
                 c: Y.IO.transports[Y.IO._default](),
                 notify: Y.IO._default === 'xhr' ? false : true
             };
+            Y.log('Creating default transport: ' + Y.IO._default, 'info', 'io');
             return o;
         }
     },
@@ -46284,2082 +44100,16 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add('async-queue', function (Y, NAME) {
+YUI.add('json-parse', function (Y, NAME) {
 
-/**
- * <p>AsyncQueue allows you create a chain of function callbacks executed
- * via setTimeout (or synchronously) that are guaranteed to run in order.
- * Items in the queue can be promoted or removed.  Start or resume the
- * execution chain with run().  pause() to temporarily delay execution, or
- * stop() to halt and clear the queue.</p>
- *
- * @module async-queue
- */
+var _JSON = Y.config.global.JSON;
 
-/**
- * <p>A specialized queue class that supports scheduling callbacks to execute
- * sequentially, iteratively, even asynchronously.</p>
- *
- * <p>Callbacks can be function refs or objects with the following keys.  Only
- * the <code>fn</code> key is required.</p>
- *
- * <ul>
- * <li><code>fn</code> -- The callback function</li>
- * <li><code>context</code> -- The execution context for the callbackFn.</li>
- * <li><code>args</code> -- Arguments to pass to callbackFn.</li>
- * <li><code>timeout</code> -- Millisecond delay before executing callbackFn.
- *                     (Applies to each iterative execution of callback)</li>
- * <li><code>iterations</code> -- Number of times to repeat the callback.
- * <li><code>until</code> -- Repeat the callback until this function returns
- *                         true.  This setting trumps iterations.</li>
- * <li><code>autoContinue</code> -- Set to false to prevent the AsyncQueue from
- *                        executing the next callback in the Queue after
- *                        the callback completes.</li>
- * <li><code>id</code> -- Name that can be used to get, promote, get the
- *                        indexOf, or delete this callback.</li>
- * </ul>
- *
- * @class AsyncQueue
- * @extends EventTarget
- * @constructor
- * @param callback* {Function|Object} 0..n callbacks to seed the queue
- */
-Y.AsyncQueue = function() {
-    this._init();
-    this.add.apply(this, arguments);
-};
-
-var Queue   = Y.AsyncQueue,
-    EXECUTE = 'execute',
-    SHIFT   = 'shift',
-    PROMOTE = 'promote',
-    REMOVE  = 'remove',
-
-    isObject   = Y.Lang.isObject,
-    isFunction = Y.Lang.isFunction;
-
-/**
- * <p>Static default values used to populate callback configuration properties.
- * Preconfigured defaults include:</p>
- *
- * <ul>
- *  <li><code>autoContinue</code>: <code>true</code></li>
- *  <li><code>iterations</code>: 1</li>
- *  <li><code>timeout</code>: 10 (10ms between callbacks)</li>
- *  <li><code>until</code>: (function to run until iterations &lt;= 0)</li>
- * </ul>
- *
- * @property defaults
- * @type {Object}
- * @static
- */
-Queue.defaults = Y.mix({
-    autoContinue : true,
-    iterations   : 1,
-    timeout      : 10,
-    until        : function () {
-        this.iterations |= 0;
-        return this.iterations <= 0;
-    }
-}, Y.config.queueDefaults || {});
-
-Y.extend(Queue, Y.EventTarget, {
-    /**
-     * Used to indicate the queue is currently executing a callback.
-     *
-     * @property _running
-     * @type {Boolean|Object} true for synchronous callback execution, the
-     *                        return handle from Y.later for async callbacks.
-     *                        Otherwise false.
-     * @protected
-     */
-    _running : false,
-
-    /**
-     * Initializes the AsyncQueue instance properties and events.
-     *
-     * @method _init
-     * @protected
-     */
-    _init : function () {
-        Y.EventTarget.call(this, { prefix: 'queue', emitFacade: true });
-
-        this._q = [];
-
-        /**
-         * Callback defaults for this instance.  Static defaults that are not
-         * overridden are also included.
-         *
-         * @property defaults
-         * @type {Object}
-         */
-        this.defaults = {};
-
-        this._initEvents();
-    },
-
-    /**
-     * Initializes the instance events.
-     *
-     * @method _initEvents
-     * @protected
-     */
-    _initEvents : function () {
-        this.publish({
-            'execute' : { defaultFn : this._defExecFn,    emitFacade: true },
-            'shift'   : { defaultFn : this._defShiftFn,   emitFacade: true },
-            'add'     : { defaultFn : this._defAddFn,     emitFacade: true },
-            'promote' : { defaultFn : this._defPromoteFn, emitFacade: true },
-            'remove'  : { defaultFn : this._defRemoveFn,  emitFacade: true }
-        });
-    },
-
-    /**
-     * Returns the next callback needing execution.  If a callback is
-     * configured to repeat via iterations or until, it will be returned until
-     * the completion criteria is met.
-     *
-     * When the queue is empty, null is returned.
-     *
-     * @method next
-     * @return {Function} the callback to execute
-     */
-    next : function () {
-        var callback;
-
-        while (this._q.length) {
-            callback = this._q[0] = this._prepare(this._q[0]);
-            if (callback && callback.until()) {
-                this.fire(SHIFT, { callback: callback });
-                callback = null;
-            } else {
-                break;
-            }
-        }
-
-        return callback || null;
-    },
-
-    /**
-     * Default functionality for the &quot;shift&quot; event.  Shifts the
-     * callback stored in the event object's <em>callback</em> property from
-     * the queue if it is the first item.
-     *
-     * @method _defShiftFn
-     * @param e {Event} The event object
-     * @protected
-     */
-    _defShiftFn : function (e) {
-        if (this.indexOf(e.callback) === 0) {
-            this._q.shift();
-        }
-    },
-
-    /**
-     * Creates a wrapper function to execute the callback using the aggregated
-     * configuration generated by combining the static AsyncQueue.defaults, the
-     * instance defaults, and the specified callback settings.
-     *
-     * The wrapper function is decorated with the callback configuration as
-     * properties for runtime modification.
-     *
-     * @method _prepare
-     * @param callback {Object|Function} the raw callback
-     * @return {Function} a decorated function wrapper to execute the callback
-     * @protected
-     */
-    _prepare: function (callback) {
-        if (isFunction(callback) && callback._prepared) {
-            return callback;
-        }
-
-        var config = Y.merge(
-            Queue.defaults,
-            { context : this, args: [], _prepared: true },
-            this.defaults,
-            (isFunction(callback) ? { fn: callback } : callback)),
-
-            wrapper = Y.bind(function () {
-                if (!wrapper._running) {
-                    wrapper.iterations--;
-                }
-                if (isFunction(wrapper.fn)) {
-                    wrapper.fn.apply(wrapper.context || Y,
-                                     Y.Array(wrapper.args));
-                }
-            }, this);
-
-        return Y.mix(wrapper, config);
-    },
-
-    /**
-     * Sets the queue in motion.  All queued callbacks will be executed in
-     * order unless pause() or stop() is called or if one of the callbacks is
-     * configured with autoContinue: false.
-     *
-     * @method run
-     * @return {AsyncQueue} the AsyncQueue instance
-     * @chainable
-     */
-    run : function () {
-        var callback,
-            cont = true;
-
-        if (this._executing) {
-            this._running = true;
-            return this;
-        }
-
-        for (callback = this.next();
-            callback && !this.isRunning();
-            callback = this.next())
-        {
-            cont = (callback.timeout < 0) ?
-                this._execute(callback) :
-                this._schedule(callback);
-
-            // Break to avoid an extra call to next (final-expression of the
-            // 'for' loop), because the until function of the next callback
-            // in the queue may return a wrong result if it depends on the
-            // not-yet-finished work of the previous callback.
-            if (!cont) {
-                break;
-            }
-        }
-
-        if (!callback) {
-            /**
-             * Event fired when there is no remaining callback in the running queue. Also fired after stop().
-             * @event complete
-             */
-            this.fire('complete');
-        }
-
-        return this;
-    },
-
-    /**
-     * Handles the execution of callbacks. Returns a boolean indicating
-     * whether it is appropriate to continue running.
-     *
-     * @method _execute
-     * @param callback {Object} the callback object to execute
-     * @return {Boolean} whether the run loop should continue
-     * @protected
-     */
-    _execute : function (callback) {
-
-        this._running   = callback._running = true;
-        this._executing = callback;
-
-        callback.iterations--;
-        this.fire(EXECUTE, { callback: callback });
-
-        var cont = this._running && callback.autoContinue;
-
-        this._running   = callback._running = false;
-        this._executing = false;
-
-        return cont;
-    },
-
-    /**
-     * Schedules the execution of asynchronous callbacks.
-     *
-     * @method _schedule
-     * @param callback {Object} the callback object to execute
-     * @return {Boolean} whether the run loop should continue
-     * @protected
-     */
-    _schedule : function (callback) {
-        this._running = Y.later(callback.timeout, this, function () {
-            if (this._execute(callback)) {
-                this.run();
-            }
-        });
-
-        return false;
-    },
-
-    /**
-     * Determines if the queue is waiting for a callback to complete execution.
-     *
-     * @method isRunning
-     * @return {Boolean} true if queue is waiting for a
-     *                   from any initiated transactions
-     */
-    isRunning : function () {
-        return !!this._running;
-    },
-
-    /**
-     * Default functionality for the &quot;execute&quot; event.  Executes the
-     * callback function
-     *
-     * @method _defExecFn
-     * @param e {Event} the event object
-     * @protected
-     */
-    _defExecFn : function (e) {
-        e.callback();
-    },
-
-    /**
-     * Add any number of callbacks to the end of the queue. Callbacks may be
-     * provided as functions or objects.
-     *
-     * @method add
-     * @param callback* {Function|Object} 0..n callbacks
-     * @return {AsyncQueue} the AsyncQueue instance
-     * @chainable
-     */
-    add : function () {
-        this.fire('add', { callbacks: Y.Array(arguments,0,true) });
-
-        return this;
-    },
-
-    /**
-     * Default functionality for the &quot;add&quot; event.  Adds the callbacks
-     * in the event facade to the queue. Callbacks successfully added to the
-     * queue are present in the event's <code>added</code> property in the
-     * after phase.
-     *
-     * @method _defAddFn
-     * @param e {Event} the event object
-     * @protected
-     */
-    _defAddFn : function(e) {
-        var _q = this._q,
-            added = [];
-
-        Y.Array.each(e.callbacks, function (c) {
-            if (isObject(c)) {
-                _q.push(c);
-                added.push(c);
-            }
-        });
-
-        e.added = added;
-    },
-
-    /**
-     * Pause the execution of the queue after the execution of the current
-     * callback completes.  If called from code outside of a queued callback,
-     * clears the timeout for the pending callback. Paused queue can be
-     * restarted with q.run()
-     *
-     * @method pause
-     * @return {AsyncQueue} the AsyncQueue instance
-     * @chainable
-     */
-    pause: function () {
-        if (this._running && isObject(this._running)) {
-            this._running.cancel();
-        }
-
-        this._running = false;
-
-        return this;
-    },
-
-    /**
-     * Stop and clear the queue after the current execution of the
-     * current callback completes.
-     *
-     * @method stop
-     * @return {AsyncQueue} the AsyncQueue instance
-     * @chainable
-     */
-    stop : function () {
-
-        this._q = [];
-
-        if (this._running && isObject(this._running)) {
-            this._running.cancel();
-            this._running = false;
-        }
-        // otherwise don't systematically set this._running to false, because if
-        // stop has been called from inside a queued callback, the _execute method
-        // currenty running needs to call run() one more time for the 'complete'
-        // event to be fired.
-
-        // if stop is called from outside a callback, we need to explicitely call
-        // run() once again to fire the 'complete' event.
-        if (!this._executing) {
-            this.run();
-        }
-
-        return this;
-    },
-
-    /**
-     * Returns the current index of a callback.  Pass in either the id or
-     * callback function from getCallback.
-     *
-     * @method indexOf
-     * @param callback {String|Function} the callback or its specified id
-     * @return {Number} index of the callback or -1 if not found
-     */
-    indexOf : function (callback) {
-        var i = 0, len = this._q.length, c;
-
-        for (; i < len; ++i) {
-            c = this._q[i];
-            if (c === callback || c.id === callback) {
-                return i;
-            }
-        }
-
-        return -1;
-    },
-
-    /**
-     * Retrieve a callback by its id.  Useful to modify the configuration
-     * while the queue is running.
-     *
-     * @method getCallback
-     * @param id {String} the id assigned to the callback
-     * @return {Object} the callback object
-     */
-    getCallback : function (id) {
-        var i = this.indexOf(id);
-
-        return (i > -1) ? this._q[i] : null;
-    },
-
-    /**
-     * Promotes the named callback to the top of the queue. If a callback is
-     * currently executing or looping (via until or iterations), the promotion
-     * is scheduled to occur after the current callback has completed.
-     *
-     * @method promote
-     * @param callback {String|Object} the callback object or a callback's id
-     * @return {AsyncQueue} the AsyncQueue instance
-     * @chainable
-     */
-    promote : function (callback) {
-        var payload = { callback : callback },e;
-
-        if (this.isRunning()) {
-            e = this.after(SHIFT, function () {
-                    this.fire(PROMOTE, payload);
-                    e.detach();
-                }, this);
-        } else {
-            this.fire(PROMOTE, payload);
-        }
-
-        return this;
-    },
-
-    /**
-     * <p>Default functionality for the &quot;promote&quot; event.  Promotes the
-     * named callback to the head of the queue.</p>
-     *
-     * <p>The event object will contain a property &quot;callback&quot;, which
-     * holds the id of a callback or the callback object itself.</p>
-     *
-     * @method _defPromoteFn
-     * @param e {Event} the custom event
-     * @protected
-     */
-    _defPromoteFn : function (e) {
-        var i = this.indexOf(e.callback),
-            promoted = (i > -1) ? this._q.splice(i,1)[0] : null;
-
-        e.promoted = promoted;
-
-        if (promoted) {
-            this._q.unshift(promoted);
-        }
-    },
-
-    /**
-     * Removes the callback from the queue.  If the queue is active, the
-     * removal is scheduled to occur after the current callback has completed.
-     *
-     * @method remove
-     * @param callback {String|Object} the callback object or a callback's id
-     * @return {AsyncQueue} the AsyncQueue instance
-     * @chainable
-     */
-    remove : function (callback) {
-        var payload = { callback : callback },e;
-
-        // Can't return the removed callback because of the deferral until
-        // current callback is complete
-        if (this.isRunning()) {
-            e = this.after(SHIFT, function () {
-                    this.fire(REMOVE, payload);
-                    e.detach();
-                },this);
-        } else {
-            this.fire(REMOVE, payload);
-        }
-
-        return this;
-    },
-
-    /**
-     * <p>Default functionality for the &quot;remove&quot; event.  Removes the
-     * callback from the queue.</p>
-     *
-     * <p>The event object will contain a property &quot;callback&quot;, which
-     * holds the id of a callback or the callback object itself.</p>
-     *
-     * @method _defRemoveFn
-     * @param e {Event} the custom event
-     * @protected
-     */
-    _defRemoveFn : function (e) {
-        var i = this.indexOf(e.callback);
-
-        e.removed = (i > -1) ? this._q.splice(i,1)[0] : null;
-    },
-
-    /**
-     * Returns the number of callbacks in the queue.
-     *
-     * @method size
-     * @return {Number}
-     */
-    size : function () {
-        // next() flushes callbacks that have met their until() criteria and
-        // therefore shouldn't count since they wouldn't execute anyway.
-        if (!this.isRunning()) {
-            this.next();
-        }
-
-        return this._q.length;
-    }
-});
-
-
-
-}, '3.18.1', {"requires": ["event-custom"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('gesture-simulate', function (Y, NAME) {
-
-/**
- * Simulate high-level user gestures by generating a set of native DOM events.
- *
- * @module gesture-simulate
- * @requires event-simulate, async-queue, node-screen
- */
-
-var NAME = "gesture-simulate",
-
-    // phantomjs check may be temporary, until we determine if it really support touch all the way through, like it claims to (http://code.google.com/p/phantomjs/issues/detail?id=375)
-    SUPPORTS_TOUCH = ((Y.config.win && ("ontouchstart" in Y.config.win)) && !(Y.UA.phantomjs) && !(Y.UA.chrome && Y.UA.chrome < 6)),
-
-    gestureNames = {
-        tap: 1,
-        doubletap: 1,
-        press: 1,
-        move: 1,
-        flick: 1,
-        pinch: 1,
-        rotate: 1
-    },
-
-    touchEvents = {
-        touchstart: 1,
-        touchmove: 1,
-        touchend: 1,
-        touchcancel: 1
-    },
-
-    document = Y.config.doc,
-    emptyTouchList,
-
-    EVENT_INTERVAL = 20,        // 20ms
-    START_PAGEX,                // will be adjusted to the node element center
-    START_PAGEY,                // will be adjusted to the node element center
-
-    // defaults that user can override.
-    DEFAULTS = {
-        // tap gestures
-        HOLD_TAP: 10,           // 10ms
-        DELAY_TAP: 10,          // 10ms
-
-        // press gesture
-        HOLD_PRESS: 3000,       // 3sec
-        MIN_HOLD_PRESS: 1000,   // 1sec
-        MAX_HOLD_PRESS: 60000,  // 1min
-
-        // move gesture
-        DISTANCE_MOVE: 200,     // 200 pixels
-        DURATION_MOVE: 1000,    // 1sec
-        MAX_DURATION_MOVE: 5000,// 5sec
-
-        // flick gesture
-        MIN_VELOCITY_FLICK: 1.3,
-        DISTANCE_FLICK: 200,     // 200 pixels
-        DURATION_FLICK: 1000,    // 1sec
-        MAX_DURATION_FLICK: 5000,// 5sec
-
-        // pinch/rotation
-        DURATION_PINCH: 1000     // 1sec
-    },
-
-    TOUCH_START = 'touchstart',
-    TOUCH_MOVE = 'touchmove',
-    TOUCH_END = 'touchend',
-
-    GESTURE_START = 'gesturestart',
-    GESTURE_CHANGE = 'gesturechange',
-    GESTURE_END = 'gestureend',
-
-    MOUSE_UP    = 'mouseup',
-    MOUSE_MOVE  = 'mousemove',
-    MOUSE_DOWN  = 'mousedown',
-    MOUSE_CLICK = 'click',
-    MOUSE_DBLCLICK = 'dblclick',
-
-    X_AXIS = 'x',
-    Y_AXIS = 'y';
-
-
-function Simulations(node) {
-    if(!node) {
-        Y.error(NAME+': invalid target node');
-    }
-    this.node = node;
-    this.target = Y.Node.getDOMNode(node);
-
-    var startXY = this.node.getXY(),
-        dims = this._getDims();
-
-    START_PAGEX = startXY[0] + (dims[0])/2;
-    START_PAGEY = startXY[1] + (dims[1])/2;
-}
-
-Simulations.prototype = {
-
-    /**
-     * Helper method to convert a degree to a radian.
-     *
-     * @method _toRadian
-     * @private
-     * @param {Number} deg A degree to be converted to a radian.
-     * @return {Number} The degree in radian.
-     */
-    _toRadian: function(deg) {
-        return deg * (Math.PI/180);
-    },
-
-    /**
-     * Helper method to get height/width while accounting for
-     * rotation/scale transforms where possible by using the
-     * bounding client rectangle height/width instead of the
-     * offsetWidth/Height which region uses.
-     * @method _getDims
-     * @private
-     * @return {Array} Array with [height, width]
-     */
-    _getDims : function() {
-        var region,
-            width,
-            height;
-
-        // Ideally, this should be in DOM somewhere.
-        if (this.target.getBoundingClientRect) {
-            region = this.target.getBoundingClientRect();
-
-            if ("height" in region) {
-                height = region.height;
-            } else {
-                // IE7,8 has getBCR, but no height.
-                height = Math.abs(region.bottom - region.top);
-            }
-
-            if ("width" in region) {
-                width = region.width;
-            } else {
-                // IE7,8 has getBCR, but no width.
-                width = Math.abs(region.right - region.left);
-            }
-        } else {
-            region = this.node.get("region");
-            width = region.width;
-            height = region.height;
-        }
-
-        return [width, height];
-    },
-
-    /**
-     * Helper method to convert a point relative to the node element into
-     * the point in the page coordination.
-     *
-     * @method _calculateDefaultPoint
-     * @private
-     * @param {Array} point A point relative to the node element.
-     * @return {Array} The same point in the page coordination.
-     */
-    _calculateDefaultPoint: function(point) {
-
-        var height;
-
-        if(!Y.Lang.isArray(point) || point.length === 0) {
-            point = [START_PAGEX, START_PAGEY];
-        } else {
-            if(point.length == 1) {
-                height = this._getDims[1];
-                point[1] = height/2;
-            }
-            // convert to page(viewport) coordination
-            point[0] = this.node.getX() + point[0];
-            point[1] = this.node.getY() + point[1];
-        }
-
-        return point;
-    },
-
-    /**
-     * The "rotate" and "pinch" methods are essencially same with the exact same
-     * arguments. Only difference is the required parameters. The rotate method
-     * requires "rotation" parameter while the pinch method requires "startRadius"
-     * and "endRadius" parameters.
-     *
-     * @method rotate
-     * @param {Function} cb The callback to execute when the gesture simulation
-     *      is completed.
-     * @param {Array} center A center point where the pinch gesture of two fingers
-     *      should happen. It is relative to the top left corner of the target
-     *      node element.
-     * @param {Number} startRadius A radius of start circle where 2 fingers are
-     *      on when the gesture starts. This is optional. The default is a fourth of
-     *      either target node width or height whichever is smaller.
-     * @param {Number} endRadius A radius of end circle where 2 fingers will be on when
-     *      the pinch or spread gestures are completed. This is optional.
-     *      The default is a fourth of either target node width or height whichever is less.
-     * @param {Number} duration A duration of the gesture in millisecond.
-     * @param {Number} start A start angle(0 degree at 12 o'clock) where the
-     *      gesture should start. Default is 0.
-     * @param {Number} rotation A rotation in degree. It is required.
-     */
-    rotate: function(cb, center, startRadius, endRadius, duration, start, rotation) {
-        var radius,
-            r1 = startRadius,   // optional
-            r2 = endRadius;     // optional
-
-        if(!Y.Lang.isNumber(r1) || !Y.Lang.isNumber(r2) || r1<0 || r2<0) {
-            radius = (this.target.offsetWidth < this.target.offsetHeight)?
-                this.target.offsetWidth/4 : this.target.offsetHeight/4;
-            r1 = radius;
-            r2 = radius;
-        }
-
-        // required
-        if(!Y.Lang.isNumber(rotation)) {
-            Y.error(NAME+'Invalid rotation detected.');
-        }
-
-        this.pinch(cb, center, r1, r2, duration, start, rotation);
-    },
-
-    /**
-     * The "rotate" and "pinch" methods are essencially same with the exact same
-     * arguments. Only difference is the required parameters. The rotate method
-     * requires "rotation" parameter while the pinch method requires "startRadius"
-     * and "endRadius" parameters.
-     *
-     * The "pinch" gesture can simulate various 2 finger gestures such as pinch,
-     * spread and/or rotation. The "startRadius" and "endRadius" are required.
-     * If endRadius is larger than startRadius, it becomes a spread gesture
-     * otherwise a pinch gesture.
-     *
-     * @method pinch
-     * @param {Function} cb The callback to execute when the gesture simulation
-     *      is completed.
-     * @param {Array} center A center point where the pinch gesture of two fingers
-     *      should happen. It is relative to the top left corner of the target
-     *      node element.
-     * @param {Number} startRadius A radius of start circle where 2 fingers are
-     *      on when the gesture starts. This paramenter is required.
-     * @param {Number} endRadius A radius of end circle where 2 fingers will be on when
-     *      the pinch or spread gestures are completed. This parameter is required.
-     * @param {Number} duration A duration of the gesture in millisecond.
-     * @param {Number} start A start angle(0 degree at 12 o'clock) where the
-     *      gesture should start. Default is 0.
-     * @param {Number} rotation If rotation is desired during the pinch or
-     *      spread gestures, this parameter can be used. Default is 0 degree.
-     */
-    pinch: function(cb, center, startRadius, endRadius, duration, start, rotation) {
-        var eventQueue,
-            i,
-            interval = EVENT_INTERVAL,
-            touches,
-            id = 0,
-            r1 = startRadius,   // required
-            r2 = endRadius,     // required
-            radiusPerStep,
-            centerX, centerY,
-            startScale, endScale, scalePerStep,
-            startRot, endRot, rotPerStep,
-            path1 = {start: [], end: []}, // paths for 1st and 2nd fingers.
-            path2 = {start: [], end: []},
-            steps,
-            touchMove;
-
-        center = this._calculateDefaultPoint(center);
-
-        if(!Y.Lang.isNumber(r1) || !Y.Lang.isNumber(r2) || r1<0 || r2<0) {
-            Y.error(NAME+'Invalid startRadius and endRadius detected.');
-        }
-
-        if(!Y.Lang.isNumber(duration) || duration <= 0) {
-            duration = DEFAULTS.DURATION_PINCH;
-        }
-
-        if(!Y.Lang.isNumber(start)) {
-            start = 0.0;
-        } else {
-            start = start%360;
-            while(start < 0) {
-                start += 360;
-            }
-        }
-
-        if(!Y.Lang.isNumber(rotation)) {
-            rotation = 0.0;
-        }
-
-        Y.AsyncQueue.defaults.timeout = interval;
-        eventQueue = new Y.AsyncQueue();
-
-        // range determination
-        centerX = center[0];
-        centerY = center[1];
-
-        startRot = start;
-        endRot = start + rotation;
-
-        // 1st finger path
-        path1.start = [
-            centerX + r1*Math.sin(this._toRadian(startRot)),
-            centerY - r1*Math.cos(this._toRadian(startRot))
-        ];
-        path1.end   = [
-            centerX + r2*Math.sin(this._toRadian(endRot)),
-            centerY - r2*Math.cos(this._toRadian(endRot))
-        ];
-
-        // 2nd finger path
-        path2.start = [
-            centerX - r1*Math.sin(this._toRadian(startRot)),
-            centerY + r1*Math.cos(this._toRadian(startRot))
-        ];
-        path2.end   = [
-            centerX - r2*Math.sin(this._toRadian(endRot)),
-            centerY + r2*Math.cos(this._toRadian(endRot))
-        ];
-
-        startScale = 1.0;
-        endScale = endRadius/startRadius;
-
-        // touch/gesture start
-        eventQueue.add({
-            fn: function() {
-                var coord1, coord2, coord, touches;
-
-                // coordinate for each touch object.
-                coord1 = {
-                    pageX: path1.start[0],
-                    pageY: path1.start[1],
-                    clientX: path1.start[0],
-                    clientY: path1.start[1]
-                };
-                coord2 = {
-                    pageX: path2.start[0],
-                    pageY: path2.start[1],
-                    clientX: path2.start[0],
-                    clientY: path2.start[1]
-                };
-                touches = this._createTouchList([Y.merge({
-                    identifier: (id++)
-                }, coord1), Y.merge({
-                    identifier: (id++)
-                }, coord2)]);
-
-                // coordinate for top level event
-                coord = {
-                    pageX: (path1.start[0] + path2.start[0])/2,
-                    pageY: (path1.start[0] + path2.start[1])/2,
-                    clientX: (path1.start[0] + path2.start[0])/2,
-                    clientY: (path1.start[0] + path2.start[1])/2
-                };
-
-                this._simulateEvent(this.target, TOUCH_START, Y.merge({
-                    touches: touches,
-                    targetTouches: touches,
-                    changedTouches: touches,
-                    scale: startScale,
-                    rotation: startRot
-                }, coord));
-
-                if(Y.UA.ios >= 2.0) {
-                    /* gesture starts when the 2nd finger touch starts.
-                    * The implementation will fire 1 touch start event for both fingers,
-                    * simulating 2 fingers touched on the screen at the same time.
-                    */
-                    this._simulateEvent(this.target, GESTURE_START, Y.merge({
-                        scale: startScale,
-                        rotation: startRot
-                    }, coord));
-                }
-            },
-            timeout: 0,
-            context: this
-        });
-
-        // gesture change
-        steps = Math.floor(duration/interval);
-        radiusPerStep = (r2 - r1)/steps;
-        scalePerStep = (endScale - startScale)/steps;
-        rotPerStep = (endRot - startRot)/steps;
-
-        touchMove = function(step) {
-            var radius = r1 + (radiusPerStep)*step,
-                px1 = centerX + radius*Math.sin(this._toRadian(startRot + rotPerStep*step)),
-                py1 = centerY - radius*Math.cos(this._toRadian(startRot + rotPerStep*step)),
-                px2 = centerX - radius*Math.sin(this._toRadian(startRot + rotPerStep*step)),
-                py2 = centerY + radius*Math.cos(this._toRadian(startRot + rotPerStep*step)),
-                px = (px1+px2)/2,
-                py = (py1+py2)/2,
-                coord1, coord2, coord, touches;
-
-            // coordinate for each touch object.
-            coord1 = {
-                pageX: px1,
-                pageY: py1,
-                clientX: px1,
-                clientY: py1
-            };
-            coord2 = {
-                pageX: px2,
-                pageY: py2,
-                clientX: px2,
-                clientY: py2
-            };
-            touches = this._createTouchList([Y.merge({
-                identifier: (id++)
-            }, coord1), Y.merge({
-                identifier: (id++)
-            }, coord2)]);
-
-            // coordinate for top level event
-            coord = {
-                pageX: px,
-                pageY: py,
-                clientX: px,
-                clientY: py
-            };
-
-            this._simulateEvent(this.target, TOUCH_MOVE, Y.merge({
-                touches: touches,
-                targetTouches: touches,
-                changedTouches: touches,
-                scale: startScale + scalePerStep*step,
-                rotation: startRot + rotPerStep*step
-            }, coord));
-
-            if(Y.UA.ios >= 2.0) {
-                this._simulateEvent(this.target, GESTURE_CHANGE, Y.merge({
-                    scale: startScale + scalePerStep*step,
-                    rotation: startRot + rotPerStep*step
-                }, coord));
-            }
-        };
-
-        for (i=0; i < steps; i++) {
-            eventQueue.add({
-                fn: touchMove,
-                args: [i],
-                context: this
-            });
-        }
-
-        // gesture end
-        eventQueue.add({
-            fn: function() {
-                var emptyTouchList = this._getEmptyTouchList(),
-                    coord1, coord2, coord, touches;
-
-                // coordinate for each touch object.
-                coord1 = {
-                    pageX: path1.end[0],
-                    pageY: path1.end[1],
-                    clientX: path1.end[0],
-                    clientY: path1.end[1]
-                };
-                coord2 = {
-                    pageX: path2.end[0],
-                    pageY: path2.end[1],
-                    clientX: path2.end[0],
-                    clientY: path2.end[1]
-                };
-                touches = this._createTouchList([Y.merge({
-                    identifier: (id++)
-                }, coord1), Y.merge({
-                    identifier: (id++)
-                }, coord2)]);
-
-                // coordinate for top level event
-                coord = {
-                    pageX: (path1.end[0] + path2.end[0])/2,
-                    pageY: (path1.end[0] + path2.end[1])/2,
-                    clientX: (path1.end[0] + path2.end[0])/2,
-                    clientY: (path1.end[0] + path2.end[1])/2
-                };
-
-                if(Y.UA.ios >= 2.0) {
-                    this._simulateEvent(this.target, GESTURE_END, Y.merge({
-                        scale: endScale,
-                        rotation: endRot
-                    }, coord));
-                }
-
-                this._simulateEvent(this.target, TOUCH_END, Y.merge({
-                    touches: emptyTouchList,
-                    targetTouches: emptyTouchList,
-                    changedTouches: touches,
-                    scale: endScale,
-                    rotation: endRot
-                }, coord));
-            },
-            context: this
-        });
-
-        if(cb && Y.Lang.isFunction(cb)) {
-            eventQueue.add({
-                fn: cb,
-
-                // by default, the callback runs the node context where
-                // simulateGesture method is called.
-                context: this.node
-
-                //TODO: Use args to pass error object as 1st param if there is an error.
-                //args:
-            });
-        }
-
-        eventQueue.run();
-    },
-
-    /**
-     * The "tap" gesture can be used for various single touch point gestures
-     * such as single tap, N number of taps, long press. The default is a single
-     * tap.
-     *
-     * @method tap
-     * @param {Function} cb The callback to execute when the gesture simulation
-     *      is completed.
-     * @param {Array} point A point(relative to the top left corner of the
-     *      target node element) where the tap gesture should start. The default
-     *      is the center of the taget node.
-     * @param {Number} times The number of taps. Default is 1.
-     * @param {Number} hold The hold time in milliseconds between "touchstart" and
-     *      "touchend" event generation. Default is 10ms.
-     * @param {Number} delay The time gap in millisecond between taps if this
-     *      gesture has more than 1 tap. Default is 10ms.
-     */
-    tap: function(cb, point, times, hold, delay) {
-        var eventQueue = new Y.AsyncQueue(),
-            emptyTouchList = this._getEmptyTouchList(),
-            touches,
-            coord,
-            i,
-            touchStart,
-            touchEnd;
-
-        point = this._calculateDefaultPoint(point);
-
-        if(!Y.Lang.isNumber(times) || times < 1) {
-            times = 1;
-        }
-
-        if(!Y.Lang.isNumber(hold)) {
-            hold = DEFAULTS.HOLD_TAP;
-        }
-
-        if(!Y.Lang.isNumber(delay)) {
-            delay = DEFAULTS.DELAY_TAP;
-        }
-
-        coord = {
-            pageX: point[0],
-            pageY: point[1],
-            clientX: point[0],
-            clientY: point[1]
-        };
-
-        touches = this._createTouchList([Y.merge({identifier: 0}, coord)]);
-
-        touchStart = function() {
-            this._simulateEvent(this.target, TOUCH_START, Y.merge({
-                touches: touches,
-                targetTouches: touches,
-                changedTouches: touches
-            }, coord));
-        };
-
-        touchEnd = function() {
-            this._simulateEvent(this.target, TOUCH_END, Y.merge({
-                touches: emptyTouchList,
-                targetTouches: emptyTouchList,
-                changedTouches: touches
-            }, coord));
-        };
-
-        for (i=0; i < times; i++) {
-            eventQueue.add({
-                fn: touchStart,
-                context: this,
-                timeout: (i === 0)? 0 : delay
-            });
-
-            eventQueue.add({
-                fn: touchEnd,
-                context: this,
-                timeout: hold
-            });
-        }
-
-        if(times > 1 && !SUPPORTS_TOUCH) {
-            eventQueue.add({
-                fn: function() {
-                    this._simulateEvent(this.target, MOUSE_DBLCLICK, coord);
-                },
-                context: this
-            });
-        }
-
-        if(cb && Y.Lang.isFunction(cb)) {
-            eventQueue.add({
-                fn: cb,
-
-                // by default, the callback runs the node context where
-                // simulateGesture method is called.
-                context: this.node
-
-                //TODO: Use args to pass error object as 1st param if there is an error.
-                //args:
-            });
-        }
-
-        eventQueue.run();
-    },
-
-    /**
-     * The "flick" gesture is a specialized "move" that has some velocity
-     * and the movement always runs either x or y axis. The velocity is calculated
-     * with "distance" and "duration" arguments. If the calculated velocity is
-     * below than the minimum velocity, the given duration will be ignored and
-     * new duration will be created to make a valid flick gesture.
-     *
-     * @method flick
-     * @param {Function} cb The callback to execute when the gesture simulation
-     *      is completed.
-     * @param {Array} point A point(relative to the top left corner of the
-     *      target node element) where the flick gesture should start. The default
-     *      is the center of the taget node.
-     * @param {String} axis Either "x" or "y".
-     * @param {Number} distance A distance in pixels to flick.
-     * @param {Number} duration A duration of the gesture in millisecond.
-     *
-     */
-    flick: function(cb, point, axis, distance, duration) {
-        var path;
-
-        point = this._calculateDefaultPoint(point);
-
-        if(!Y.Lang.isString(axis)) {
-            axis = X_AXIS;
-        } else {
-            axis = axis.toLowerCase();
-            if(axis !== X_AXIS && axis !== Y_AXIS) {
-                Y.error(NAME+'(flick): Only x or y axis allowed');
-            }
-        }
-
-        if(!Y.Lang.isNumber(distance)) {
-            distance = DEFAULTS.DISTANCE_FLICK;
-        }
-
-        if(!Y.Lang.isNumber(duration)){
-            duration = DEFAULTS.DURATION_FLICK; // ms
-        } else {
-            if(duration > DEFAULTS.MAX_DURATION_FLICK) {
-                duration = DEFAULTS.MAX_DURATION_FLICK;
-            }
-        }
-
-        /*
-         * Check if too slow for a flick.
-         * Adjust duration if the calculated velocity is less than
-         * the minimum velcocity to be claimed as a flick.
-         */
-        if(Math.abs(distance)/duration < DEFAULTS.MIN_VELOCITY_FLICK) {
-            duration = Math.abs(distance)/DEFAULTS.MIN_VELOCITY_FLICK;
-        }
-
-        path = {
-            start: Y.clone(point),
-            end: [
-                (axis === X_AXIS) ? point[0]+distance : point[0],
-                (axis === Y_AXIS) ? point[1]+distance : point[1]
-            ]
-        };
-
-        this._move(cb, path, duration);
-    },
-
-    /**
-     * The "move" gesture simulate the movement of any direction between
-     * the straight line of start and end point for the given duration.
-     * The path argument is an object with "point", "xdist" and "ydist" properties.
-     * The "point" property is an array with x and y coordinations(relative to the
-     * top left corner of the target node element) while "xdist" and "ydist"
-     * properties are used for the distance along the x and y axis. A negative
-     * distance number can be used to drag either left or up direction.
-     *
-     * If no arguments are given, it will simulate the default move, which
-     * is moving 200 pixels from the center of the element to the positive X-axis
-     * direction for 1 sec.
-     *
-     * @method move
-     * @param {Function} cb The callback to execute when the gesture simulation
-     *      is completed.
-     * @param {Object} path An object with "point", "xdist" and "ydist".
-     * @param {Number} duration A duration of the gesture in millisecond.
-     */
-    move: function(cb, path, duration) {
-        var convertedPath;
-
-        if(!Y.Lang.isObject(path)) {
-            path = {
-                point: this._calculateDefaultPoint([]),
-                xdist: DEFAULTS.DISTANCE_MOVE,
-                ydist: 0
-            };
-        } else {
-            // convert to the page coordination
-            if(!Y.Lang.isArray(path.point)) {
-                path.point = this._calculateDefaultPoint([]);
-            } else {
-                path.point = this._calculateDefaultPoint(path.point);
-            }
-
-            if(!Y.Lang.isNumber(path.xdist)) {
-                path.xdist = DEFAULTS.DISTANCE_MOVE;
-            }
-
-            if(!Y.Lang.isNumber(path.ydist)) {
-                path.ydist = 0;
-            }
-        }
-
-        if(!Y.Lang.isNumber(duration)){
-            duration = DEFAULTS.DURATION_MOVE; // ms
-        } else {
-            if(duration > DEFAULTS.MAX_DURATION_MOVE) {
-                duration = DEFAULTS.MAX_DURATION_MOVE;
-            }
-        }
-
-        convertedPath = {
-            start: Y.clone(path.point),
-            end: [path.point[0]+path.xdist, path.point[1]+path.ydist]
-        };
-
-        this._move(cb, convertedPath, duration);
-    },
-
-    /**
-     * A base method on top of "move" and "flick" methods. The method takes
-     * the path with start/end properties and duration to generate a set of
-     * touch events for the movement gesture.
-     *
-     * @method _move
-     * @private
-     * @param {Function} cb The callback to execute when the gesture simulation
-     *      is completed.
-     * @param {Object} path An object with "start" and "end" properties. Each
-     *      property should be an array with x and y coordination (e.g. start: [100, 50])
-     * @param {Number} duration A duration of the gesture in millisecond.
-     */
-    _move: function(cb, path, duration) {
-        var eventQueue,
-            i,
-            interval = EVENT_INTERVAL,
-            steps, stepX, stepY,
-            id = 0,
-            touchMove;
-
-        if(!Y.Lang.isNumber(duration)){
-            duration = DEFAULTS.DURATION_MOVE; // ms
-        } else {
-            if(duration > DEFAULTS.MAX_DURATION_MOVE) {
-                duration = DEFAULTS.MAX_DURATION_MOVE;
-            }
-        }
-
-        if(!Y.Lang.isObject(path)) {
-            path = {
-                start: [
-                    START_PAGEX,
-                    START_PAGEY
-                ],
-                end: [
-                    START_PAGEX + DEFAULTS.DISTANCE_MOVE,
-                    START_PAGEY
-                ]
-            };
-        } else {
-            if(!Y.Lang.isArray(path.start)) {
-                path.start = [
-                    START_PAGEX,
-                    START_PAGEY
-                ];
-            }
-            if(!Y.Lang.isArray(path.end)) {
-                path.end = [
-                    START_PAGEX + DEFAULTS.DISTANCE_MOVE,
-                    START_PAGEY
-                ];
-            }
-        }
-
-        Y.AsyncQueue.defaults.timeout = interval;
-        eventQueue = new Y.AsyncQueue();
-
-        // start
-        eventQueue.add({
-            fn: function() {
-                var coord = {
-                        pageX: path.start[0],
-                        pageY: path.start[1],
-                        clientX: path.start[0],
-                        clientY: path.start[1]
-                    },
-                    touches = this._createTouchList([
-                        Y.merge({identifier: (id++)}, coord)
-                    ]);
-
-                this._simulateEvent(this.target, TOUCH_START, Y.merge({
-                    touches: touches,
-                    targetTouches: touches,
-                    changedTouches: touches
-                }, coord));
-            },
-            timeout: 0,
-            context: this
-        });
-
-        // move
-        steps = Math.floor(duration/interval);
-        stepX = (path.end[0] - path.start[0])/steps;
-        stepY = (path.end[1] - path.start[1])/steps;
-
-        touchMove = function(step) {
-            var px = path.start[0]+(stepX * step),
-                py = path.start[1]+(stepY * step),
-                coord = {
-                    pageX: px,
-                    pageY: py,
-                    clientX: px,
-                    clientY: py
-                },
-                touches = this._createTouchList([
-                    Y.merge({identifier: (id++)}, coord)
-                ]);
-
-            this._simulateEvent(this.target, TOUCH_MOVE, Y.merge({
-                touches: touches,
-                targetTouches: touches,
-                changedTouches: touches
-            }, coord));
-        };
-
-        for (i=0; i < steps; i++) {
-            eventQueue.add({
-                fn: touchMove,
-                args: [i],
-                context: this
-            });
-        }
-
-        // last move
-        eventQueue.add({
-            fn: function() {
-                var coord = {
-                        pageX: path.end[0],
-                        pageY: path.end[1],
-                        clientX: path.end[0],
-                        clientY: path.end[1]
-                    },
-                    touches = this._createTouchList([
-                        Y.merge({identifier: id}, coord)
-                    ]);
-
-                this._simulateEvent(this.target, TOUCH_MOVE, Y.merge({
-                    touches: touches,
-                    targetTouches: touches,
-                    changedTouches: touches
-                }, coord));
-            },
-            timeout: 0,
-            context: this
-        });
-
-        // end
-        eventQueue.add({
-            fn: function() {
-                var coord = {
-                    pageX: path.end[0],
-                    pageY: path.end[1],
-                    clientX: path.end[0],
-                    clientY: path.end[1]
-                },
-                emptyTouchList = this._getEmptyTouchList(),
-                touches = this._createTouchList([
-                    Y.merge({identifier: id}, coord)
-                ]);
-
-                this._simulateEvent(this.target, TOUCH_END, Y.merge({
-                    touches: emptyTouchList,
-                    targetTouches: emptyTouchList,
-                    changedTouches: touches
-                }, coord));
-            },
-            context: this
-        });
-
-        if(cb && Y.Lang.isFunction(cb)) {
-            eventQueue.add({
-                fn: cb,
-
-                // by default, the callback runs the node context where
-                // simulateGesture method is called.
-                context: this.node
-
-                //TODO: Use args to pass error object as 1st param if there is an error.
-                //args:
-            });
-        }
-
-        eventQueue.run();
-    },
-
-    /**
-     * Helper method to return a singleton instance of empty touch list.
-     *
-     * @method _getEmptyTouchList
-     * @private
-     * @return {TouchList | Array} An empty touch list object.
-     */
-    _getEmptyTouchList: function() {
-        if(!emptyTouchList) {
-            emptyTouchList = this._createTouchList([]);
-        }
-
-        return emptyTouchList;
-    },
-
-    /**
-     * Helper method to convert an array with touch points to TouchList object as
-     * defined in http://www.w3.org/TR/touch-events/
-     *
-     * @method _createTouchList
-     * @private
-     * @param {Array} touchPoints
-     * @return {TouchList | Array} If underlaying platform support creating touch list
-     *      a TouchList object will be returned otherwise a fake Array object
-     *      will be returned.
-     */
-    _createTouchList: function(touchPoints) {
-        /*
-        * Android 4.0.3 emulator:
-        * Native touch api supported starting in version 4.0 (Ice Cream Sandwich).
-        * However the support seems limited. In Android 4.0.3 emulator, I got
-        * "TouchList is not defined".
-        */
-        var touches = [],
-            touchList,
-            self = this;
-
-        if(!!touchPoints && Y.Lang.isArray(touchPoints)) {
-            if(Y.UA.android && Y.UA.android >= 4.0 || Y.UA.ios && Y.UA.ios >= 2.0) {
-                Y.each(touchPoints, function(point) {
-                    if(!point.identifier) {point.identifier = 0;}
-                    if(!point.pageX) {point.pageX = 0;}
-                    if(!point.pageY) {point.pageY = 0;}
-                    if(!point.screenX) {point.screenX = 0;}
-                    if(!point.screenY) {point.screenY = 0;}
-
-                    touches.push(document.createTouch(Y.config.win,
-                        self.target,
-                        point.identifier,
-                        point.pageX, point.pageY,
-                        point.screenX, point.screenY));
-                });
-
-                touchList = document.createTouchList.apply(document, touches);
-            } else if(Y.UA.ios && Y.UA.ios < 2.0) {
-                Y.error(NAME+': No touch event simulation framework present.');
-            } else {
-                // this will inclide android(Y.UA.android && Y.UA.android < 4.0)
-                // and desktops among all others.
-
-                /*
-                 * Touch APIs are broken in androids older than 4.0. We will use
-                 * simulated touch apis for these versions.
-                 */
-                touchList = [];
-                Y.each(touchPoints, function(point) {
-                    if(!point.identifier) {point.identifier = 0;}
-                    if(!point.clientX)  {point.clientX = 0;}
-                    if(!point.clientY)  {point.clientY = 0;}
-                    if(!point.pageX)    {point.pageX = 0;}
-                    if(!point.pageY)    {point.pageY = 0;}
-                    if(!point.screenX)  {point.screenX = 0;}
-                    if(!point.screenY)  {point.screenY = 0;}
-
-                    touchList.push({
-                        target: self.target,
-                        identifier: point.identifier,
-                        clientX: point.clientX,
-                        clientY: point.clientY,
-                        pageX: point.pageX,
-                        pageY: point.pageY,
-                        screenX: point.screenX,
-                        screenY: point.screenY
-                    });
-                });
-
-                touchList.item = function(i) {
-                    return touchList[i];
-                };
-            }
-        } else {
-            Y.error(NAME+': Invalid touchPoints passed');
-        }
-
-        return touchList;
-    },
-
-    /**
-     * @method _simulateEvent
-     * @private
-     * @param {HTMLElement} target The DOM element that's the target of the event.
-     * @param {String} type The type of event or name of the supported gesture to simulate
-     *      (i.e., "click", "doubletap", "flick").
-     * @param {Object} options (Optional) Extra options to copy onto the event object.
-     *      For gestures, options are used to refine the gesture behavior.
-     */
-    _simulateEvent: function(target, type, options) {
-        var touches;
-
-        if (touchEvents[type]) {
-            if(SUPPORTS_TOUCH) {
-                Y.Event.simulate(target, type, options);
-            } else {
-                // simulate using mouse events if touch is not applicable on this platform.
-                // but only single touch event can be simulated.
-                if(this._isSingleTouch(options.touches, options.targetTouches, options.changedTouches)) {
-                    type = {
-                        touchstart: MOUSE_DOWN,
-                        touchmove: MOUSE_MOVE,
-                        touchend: MOUSE_UP
-                    }[type];
-
-                    options.button = 0;
-                    options.relatedTarget = null; // since we are not using mouseover event.
-
-                    // touchend has none in options.touches.
-                    touches = (type === MOUSE_UP)? options.changedTouches : options.touches;
-
-                    options = Y.mix(options, {
-                        screenX: touches.item(0).screenX,
-                        screenY: touches.item(0).screenY,
-                        clientX: touches.item(0).clientX,
-                        clientY: touches.item(0).clientY
-                    }, true);
-
-                    Y.Event.simulate(target, type, options);
-
-                    if(type == MOUSE_UP) {
-                        Y.Event.simulate(target, MOUSE_CLICK, options);
-                    }
-                } else {
-                    Y.error("_simulateEvent(): Event '" + type + "' has multi touch objects that can't be simulated in your platform.");
-                }
-            }
-        } else {
-            // pass thru for all non touch events
-            Y.Event.simulate(target, type, options);
-        }
-    },
-
-    /**
-     * Helper method to check the single touch.
-     * @method _isSingleTouch
-     * @private
-     * @param {TouchList} touches
-     * @param {TouchList} targetTouches
-     * @param {TouchList} changedTouches
-     */
-    _isSingleTouch: function(touches, targetTouches, changedTouches) {
-        return (touches && (touches.length <= 1)) &&
-            (targetTouches && (targetTouches.length <= 1)) &&
-            (changedTouches && (changedTouches.length <= 1));
-    }
-};
-
-/*
- * A gesture simulation class.
- */
-Y.GestureSimulation = Simulations;
-
-/*
- * Various simulation default behavior properties. If user override
- * Y.GestureSimulation.defaults, overriden values will be used and this
- * should be done before the gesture simulation.
- */
-Y.GestureSimulation.defaults = DEFAULTS;
-
-/*
- * The high level gesture names that YUI knows how to simulate.
- */
-Y.GestureSimulation.GESTURES = gestureNames;
-
-/**
- * Simulates the higher user level gesture of the given name on a target.
- * This method generates a set of low level touch events(Apple specific gesture
- * events as well for the iOS platforms) asynchronously. Note that gesture
- * simulation is relying on `Y.Event.simulate()` method to generate
- * the touch events under the hood. The `Y.Event.simulate()` method
- * itself is a synchronous method.
- *
- * Users are suggested to use `Node.simulateGesture()` method which
- * basically calls this method internally. Supported gestures are `tap`,
- * `doubletap`, `press`, `move`, `flick`, `pinch` and `rotate`.
- *
- * The `pinch` gesture is used to simulate the pinching and spreading of two
- * fingers. During a pinch simulation, rotation is also possible. Essentially
- * `pinch` and `rotate` simulations share the same base implementation to allow
- * both pinching and rotation at the same time. The only difference is `pinch`
- * requires `start` and `end` option properties while `rotate` requires `rotation`
- * option property.
- *
- * The `pinch` and `rotate` gestures can be described as placing 2 fingers along a
- * circle. Pinching and spreading can be described by start and end circles while
- * rotation occurs on a single circle. If the radius of the start circle is greater
- * than the end circle, the gesture becomes a pinch, otherwise it is a spread spread.
- *
- * @example
- *
- *     var node = Y.one("#target");
- *
- *     // double tap example
- *     node.simulateGesture("doubletap", function() {
- *         // my callback function
- *     });
- *
- *     // flick example from the center of the node, move 50 pixels down for 50ms)
- *     node.simulateGesture("flick", {
- *         axis: y,
- *         distance: -100
- *         duration: 50
- *     }, function() {
- *         // my callback function
- *     });
- *
- *     // simulate rotating a node 75 degrees counter-clockwise
- *     node.simulateGesture("rotate", {
- *         rotation: -75
- *     });
- *
- *     // simulate a pinch and a rotation at the same time.
- *     // fingers start on a circle of radius 100 px, placed at top/bottom
- *     // fingers end on a circle of radius 50px, placed at right/left
- *     node.simulateGesture("pinch", {
- *         r1: 100,
- *         r2: 50,
- *         start: 0
- *         rotation: 90
- *     });
- *
- * @method simulateGesture
- * @param {HTMLElement|Node} node The YUI node or HTML element that's the target
- *      of the event.
- * @param {String} name The name of the supported gesture to simulate. The
- *      supported gesture name is one of "tap", "doubletap", "press", "move",
- *      "flick", "pinch" and "rotate".
- * @param {Object} [options] Extra options used to define the gesture behavior:
- *
- *      Valid options properties for the `tap` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
- *        where the tap should be simulated. Default is the center of the node
- *        element.
- *      @param {Number} [options.hold=10] (Optional) The hold time in milliseconds.
- *        This is the time between `touchstart` and `touchend` event generation.
- *      @param {Number} [options.times=1] (Optional) Indicates the number of taps.
- *      @param {Number} [options.delay=10] (Optional) The number of milliseconds
- *        before the next tap simulation happens. This is valid only when `times`
- *        is more than 1.
- *
- *      Valid options properties for the `doubletap` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
- *        where the doubletap should be simulated. Default is the center of the
- *        node element.
- *
- *      Valid options properties for the `press` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
- *        where the press should be simulated. Default is the center of the node
- *        element.
- *      @param {Number} [options.hold=3000] (Optional) The hold time in milliseconds.
- *        This is the time between `touchstart` and `touchend` event generation.
- *        Default is 3000ms (3 seconds).
- *
- *      Valid options properties for the `move` gesture:
- *
- *      @param {Object} [options.path] (Optional) Indicates the path of the finger
- *        movement. It's an object with three optional properties: `point`,
- *        `xdist` and  `ydist`.
- *        @param {Array} [options.path.point] A starting point of the gesture.
- *          Default is the center of the node element.
- *        @param {Number} [options.path.xdist=200] A distance to move in pixels
- *          along the X axis. A negative distance value indicates moving left.
- *        @param {Number} [options.path.ydist=0] A distance to move in pixels
- *          along the Y axis. A negative distance value indicates moving up.
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds.
- *
- *      Valid options properties for the `flick` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x, y] coordinates
- *        where the flick should be simulated. Default is the center of the
- *        node element.
- *      @param {String} [options.axis='x'] (Optional) Valid values are either
- *        "x" or "y". Indicates axis to move along. The flick can move to one of
- *        4 directions(left, right, up and down).
- *      @param {Number} [options.distance=200] (Optional) Distance to move in pixels
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds. User given value could be automatically
- *        adjusted by the framework if it is below the minimum velocity to be
- *        a flick gesture.
- *
- *      Valid options properties for the `pinch` gesture:
- *
- *      @param {Array} [options.center] (Optional) The center of the circle where
- *        two fingers are placed. Default is the center of the node element.
- *      @param {Number} [options.r1] (Required) Pixel radius of the start circle
- *        where 2 fingers will be on when the gesture starts. The circles are
- *        centered at the center of the element.
- *      @param {Number} [options.r2] (Required) Pixel radius of the end circle
- *        when this gesture ends.
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds.
- *      @param {Number} [options.start=0] (Optional) Starting degree of the first
- *        finger. The value is relative to the path of the north. Default is 0
- *        (i.e., 12:00 on a clock).
- *      @param {Number} [options.rotation=0] (Optional) Degrees to rotate from
- *        the starting degree. A negative value means rotation to the
- *        counter-clockwise direction.
- *
- *      Valid options properties for the `rotate` gesture:
- *
- *      @param {Array} [options.center] (Optional) The center of the circle where
- *        two fingers are placed. Default is the center of the node element.
- *      @param {Number} [options.r1] (Optional) Pixel radius of the start circle
- *        where 2 fingers will be on when the gesture starts. The circles are
- *        centered at the center of the element. Default is a fourth of the node
- *        element width or height, whichever is smaller.
- *      @param {Number} [options.r2] (Optional) Pixel radius of the end circle
- *        when this gesture ends. Default is a fourth of the node element width or
- *        height, whichever is smaller.
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds.
- *      @param {Number} [options.start=0] (Optional) Starting degree of the first
- *        finger. The value is relative to the path of the north. Default is 0
- *        (i.e., 12:00 on a clock).
- *      @param {Number} [options.rotation] (Required) Degrees to rotate from
- *        the starting degree. A negative value means rotation to the
- *        counter-clockwise direction.
- *
- * @param {Function} [cb] The callback to execute when the asynchronouse gesture
- *      simulation is completed.
- *      @param {Error} cb.err An error object if the simulation is failed.
- * @for Event
- * @static
- */
-Y.Event.simulateGesture = function(node, name, options, cb) {
-
-    node = Y.one(node);
-
-    var sim = new Y.GestureSimulation(node);
-    name = name.toLowerCase();
-
-    if(!cb && Y.Lang.isFunction(options)) {
-        cb = options;
-        options = {};
-    }
-
-    options = options || {};
-
-    if (gestureNames[name]) {
-        switch(name) {
-            // single-touch: point gestures
-            case 'tap':
-                sim.tap(cb, options.point, options.times, options.hold, options.delay);
-                break;
-            case 'doubletap':
-                sim.tap(cb, options.point, 2);
-                break;
-            case 'press':
-                if(!Y.Lang.isNumber(options.hold)) {
-                    options.hold = DEFAULTS.HOLD_PRESS;
-                } else if(options.hold < DEFAULTS.MIN_HOLD_PRESS) {
-                    options.hold = DEFAULTS.MIN_HOLD_PRESS;
-                } else if(options.hold > DEFAULTS.MAX_HOLD_PRESS) {
-                    options.hold = DEFAULTS.MAX_HOLD_PRESS;
-                }
-                sim.tap(cb, options.point, 1, options.hold);
-                break;
-
-            // single-touch: move gestures
-            case 'move':
-                sim.move(cb, options.path, options.duration);
-                break;
-            case 'flick':
-                sim.flick(cb, options.point, options.axis, options.distance,
-                    options.duration);
-                break;
-
-            // multi-touch: pinch/rotation gestures
-            case 'pinch':
-                sim.pinch(cb, options.center, options.r1, options.r2,
-                    options.duration, options.start, options.rotation);
-                break;
-            case 'rotate':
-                sim.rotate(cb, options.center, options.r1, options.r2,
-                    options.duration, options.start, options.rotation);
-                break;
-        }
-    } else {
-        Y.error(NAME+': Not a supported gesture simulation: '+name);
-    }
+Y.namespace('JSON').parse = function (obj, reviver, space) {
+    return _JSON.parse((typeof obj === 'string' ? obj : obj + ''), reviver, space);
 };
 
 
-}, '3.18.1', {"requires": ["async-queue", "event-simulate", "node-screen"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('node-event-simulate', function (Y, NAME) {
-
-/**
- * Adds functionality to simulate events.
- * @module node
- * @submodule node-event-simulate
- */
-
-/**
- * Simulates an event on the node.
- * @param {String} type The type of event (i.e., "click").
- * @param {Object} options (Optional) Extra options to copy onto the event object.
- * @for Node
- * @method simulate
- */
-Y.Node.prototype.simulate = function (type, options) {
-
-    Y.Event.simulate(Y.Node.getDOMNode(this), type, options);
-};
-
-/**
- * Simulates the higher user level gesture of the given name on this node.
- * This method generates a set of low level touch events(Apple specific gesture
- * events as well for the iOS platforms) asynchronously. Note that gesture
- * simulation is relying on `Y.Event.simulate()` method to generate
- * the touch events under the hood. The `Y.Event.simulate()` method
- * itself is a synchronous method.
- *
- * Supported gestures are `tap`, `doubletap`, `press`, `move`, `flick`, `pinch`
- * and `rotate`.
- *
- * The `pinch` gesture is used to simulate the pinching and spreading of two
- * fingers. During a pinch simulation, rotation is also possible. Essentially
- * `pinch` and `rotate` simulations share the same base implementation to allow
- * both pinching and rotation at the same time. The only difference is `pinch`
- * requires `start` and `end` option properties while `rotate` requires `rotation`
- * option property.
- *
- * The `pinch` and `rotate` gestures can be described as placing 2 fingers along a
- * circle. Pinching and spreading can be described by start and end circles while
- * rotation occurs on a single circle. If the radius of the start circle is greater
- * than the end circle, the gesture becomes a pinch, otherwise it is a spread spread.
- *
- * @example
- *
- *     var node = Y.one("#target");
- *
- *     // double tap example
- *     node.simulateGesture("doubletap", function() {
- *         // my callback function
- *     });
- *
- *     // flick example from the center of the node, move 50 pixels down for 50ms)
- *     node.simulateGesture("flick", {
- *         axis: y,
- *         distance: -100
- *         duration: 50
- *     }, function() {
- *         // my callback function
- *     });
- *
- *     // simulate rotating a node 75 degrees counter-clockwise
- *     node.simulateGesture("rotate", {
- *         rotation: -75
- *     });
- *
- *     // simulate a pinch and a rotation at the same time.
- *     // fingers start on a circle of radius 100 px, placed at top/bottom
- *     // fingers end on a circle of radius 50px, placed at right/left
- *     node.simulateGesture("pinch", {
- *         r1: 100,
- *         r2: 50,
- *         start: 0
- *         rotation: 90
- *     });
- *
- * @method simulateGesture
- * @param {String} name The name of the supported gesture to simulate. The
- *      supported gesture name is one of "tap", "doubletap", "press", "move",
- *      "flick", "pinch" and "rotate".
- * @param {Object} [options] Extra options used to define the gesture behavior:
- *
- *      Valid options properties for the `tap` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
- *        where the tap should be simulated. Default is the center of the node
- *        element.
- *      @param {Number} [options.hold=10] (Optional) The hold time in milliseconds.
- *        This is the time between `touchstart` and `touchend` event generation.
- *      @param {Number} [options.times=1] (Optional) Indicates the number of taps.
- *      @param {Number} [options.delay=10] (Optional) The number of milliseconds
- *        before the next tap simulation happens. This is valid only when `times`
- *        is more than 1.
- *
- *      Valid options properties for the `doubletap` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
- *        where the doubletap should be simulated. Default is the center of the
- *        node element.
- *
- *      Valid options properties for the `press` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
- *        where the press should be simulated. Default is the center of the node
- *        element.
- *      @param {Number} [options.hold=3000] (Optional) The hold time in milliseconds.
- *        This is the time between `touchstart` and `touchend` event generation.
- *        Default is 3000ms (3 seconds).
- *
- *      Valid options properties for the `move` gesture:
- *
- *      @param {Object} [options.path] (Optional) Indicates the path of the finger
- *        movement. It's an object with three optional properties: `point`,
- *        `xdist` and  `ydist`.
- *        @param {Array} [options.path.point] A starting point of the gesture.
- *          Default is the center of the node element.
- *        @param {Number} [options.path.xdist=200] A distance to move in pixels
- *          along the X axis. A negative distance value indicates moving left.
- *        @param {Number} [options.path.ydist=0] A distance to move in pixels
- *          along the Y axis. A negative distance value indicates moving up.
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds.
- *
- *      Valid options properties for the `flick` gesture:
- *
- *      @param {Array} [options.point] (Optional) Indicates the [x, y] coordinates
- *        where the flick should be simulated. Default is the center of the
- *        node element.
- *      @param {String} [options.axis='x'] (Optional) Valid values are either
- *        "x" or "y". Indicates axis to move along. The flick can move to one of
- *        4 directions(left, right, up and down).
- *      @param {Number} [options.distance=200] (Optional) Distance to move in pixels
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds. User given value could be automatically
- *        adjusted by the framework if it is below the minimum velocity to be
- *        a flick gesture.
- *
- *      Valid options properties for the `pinch` gesture:
- *
- *      @param {Array} [options.center] (Optional) The center of the circle where
- *        two fingers are placed. Default is the center of the node element.
- *      @param {Number} [options.r1] (Required) Pixel radius of the start circle
- *        where 2 fingers will be on when the gesture starts. The circles are
- *        centered at the center of the element.
- *      @param {Number} [options.r2] (Required) Pixel radius of the end circle
- *        when this gesture ends.
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds.
- *      @param {Number} [options.start=0] (Optional) Starting degree of the first
- *        finger. The value is relative to the path of the north. Default is 0
- *        (i.e., 12:00 on a clock).
- *      @param {Number} [options.rotation=0] (Optional) Degrees to rotate from
- *        the starting degree. A negative value means rotation to the
- *        counter-clockwise direction.
- *
- *      Valid options properties for the `rotate` gesture:
- *
- *      @param {Array} [options.center] (Optional) The center of the circle where
- *        two fingers are placed. Default is the center of the node element.
- *      @param {Number} [options.r1] (Optional) Pixel radius of the start circle
- *        where 2 fingers will be on when the gesture starts. The circles are
- *        centered at the center of the element. Default is a fourth of the node
- *        element width or height, whichever is smaller.
- *      @param {Number} [options.r2] (Optional) Pixel radius of the end circle
- *        when this gesture ends. Default is a fourth of the node element width or
- *        height, whichever is smaller.
- *      @param {Number} [options.duration=1000] (Optional) The duration of the
- *        gesture in milliseconds.
- *      @param {Number} [options.start=0] (Optional) Starting degree of the first
- *        finger. The value is relative to the path of the north. Default is 0
- *        (i.e., 12:00 on a clock).
- *      @param {Number} [options.rotation] (Required) Degrees to rotate from
- *        the starting degree. A negative value means rotation to the
- *        counter-clockwise direction.
- *
- * @param {Function} [cb] The callback to execute when the asynchronouse gesture
- *      simulation is completed.
- *      @param {Error} cb.err An error object if the simulation is failed.
- * @for Node
- */
-Y.Node.prototype.simulateGesture = function (name, options, cb) {
-
-    Y.Event.simulateGesture(this, name, options, cb);
-};
-
-
-}, '3.18.1', {"requires": ["node-base", "event-simulate", "gesture-simulate"]});
+}, '3.18.1', {"requires": ["yui-base"]});
 /*
 YUI 3.18.1 (build f7e7bcb)
 Copyright 2014 Yahoo! Inc. All rights reserved.
@@ -50087,7 +45837,9 @@ YUI.add('plugin', function (Y, NAME) {
          * @param {Object} config Configuration object with property name/value pairs.
          */
         initializer : function(config) {
+            if (!this.get("host")) { Y.log('No host defined for plugin ' + this, 'warn', 'Plugin');}
             this._handles = [];
+            Y.log('Initializing: ' + this.constructor.NAME, 'info', 'Plugin');
         },
 
         /**
@@ -50328,6 +46080,3127 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
+YUI.add('event-mousewheel', function (Y, NAME) {
+
+/**
+ * Adds mousewheel event support
+ * @module event
+ * @submodule event-mousewheel
+ */
+var DOM_MOUSE_SCROLL = 'DOMMouseScroll',
+    fixArgs = function(args) {
+        var a = Y.Array(args, 0, true), target;
+        if (Y.UA.gecko) {
+            a[0] = DOM_MOUSE_SCROLL;
+            target = Y.config.win;
+        } else {
+            target = Y.config.doc;
+        }
+
+        if (a.length < 3) {
+            a[2] = target;
+        } else {
+            a.splice(2, 0, target);
+        }
+
+        return a;
+    };
+
+/**
+ * Mousewheel event.  This listener is automatically attached to the
+ * correct target, so one should not be supplied.  Mouse wheel
+ * direction and velocity is stored in the 'wheelDelta' field.
+ * @event mousewheel
+ * @param type {string} 'mousewheel'
+ * @param fn {function} the callback to execute
+ * @param context optional context object
+ * @param args 0..n additional arguments to provide to the listener.
+ * @return {EventHandle} the detach handle
+ * @for YUI
+ */
+Y.Env.evt.plugins.mousewheel = {
+    on: function() {
+        return Y.Event._attach(fixArgs(arguments));
+    },
+
+    detach: function() {
+        return Y.Event.detach.apply(Y.Event, fixArgs(arguments));
+    }
+};
+
+
+}, '3.18.1', {"requires": ["node-base"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-mouseenter', function (Y, NAME) {
+
+/**
+ * <p>Adds subscription and delegation support for mouseenter and mouseleave
+ * events.  Unlike mouseover and mouseout, these events aren't fired from child
+ * elements of a subscribed node.</p>
+ *
+ * <p>This avoids receiving three mouseover notifications from a setup like</p>
+ *
+ * <pre><code>div#container > p > a[href]</code></pre>
+ *
+ * <p>where</p>
+ *
+ * <pre><code>Y.one('#container').on('mouseover', callback)</code></pre>
+ *
+ * <p>When the mouse moves over the link, one mouseover event is fired from
+ * #container, then when the mouse moves over the p, another mouseover event is
+ * fired and bubbles to #container, causing a second notification, and finally
+ * when the mouse moves over the link, a third mouseover event is fired and
+ * bubbles to #container for a third notification.</p>
+ *
+ * <p>By contrast, using mouseenter instead of mouseover, the callback would be
+ * executed only once when the mouse moves over #container.</p>
+ *
+ * @module event
+ * @submodule event-mouseenter
+ */
+
+var domEventProxies = Y.Env.evt.dom_wrappers,
+    contains = Y.DOM.contains,
+    toArray = Y.Array,
+    noop = function () {},
+
+    config = {
+        proxyType: "mouseover",
+        relProperty: "fromElement",
+
+        _notify: function (e, property, notifier) {
+            var el = this._node,
+                related = e.relatedTarget || e[property];
+
+            if (el !== related && !contains(el, related)) {
+                notifier.fire(new Y.DOMEventFacade(e, el,
+                    domEventProxies['event:' + Y.stamp(el) + e.type]));
+            }
+        },
+
+        on: function (node, sub, notifier) {
+            var el = Y.Node.getDOMNode(node),
+                args = [
+                    this.proxyType,
+                    this._notify,
+                    el,
+                    null,
+                    this.relProperty,
+                    notifier];
+
+            sub.handle = Y.Event._attach(args, { facade: false });
+            // node.on(this.proxyType, notify, null, notifier);
+        },
+
+        detach: function (node, sub) {
+            sub.handle.detach();
+        },
+
+        delegate: function (node, sub, notifier, filter) {
+            var el = Y.Node.getDOMNode(node),
+                args = [
+                    this.proxyType,
+                    noop,
+                    el,
+                    null,
+                    notifier
+                ];
+
+            sub.handle = Y.Event._attach(args, { facade: false });
+            sub.handle.sub.filter = filter;
+            sub.handle.sub.relProperty = this.relProperty;
+            sub.handle.sub._notify = this._filterNotify;
+        },
+
+        _filterNotify: function (thisObj, args, ce) {
+            args = args.slice();
+            if (this.args) {
+                args.push.apply(args, this.args);
+            }
+
+            var currentTarget = Y.delegate._applyFilter(this.filter, args, ce),
+                related = args[0].relatedTarget || args[0][this.relProperty],
+                e, i, len, ret, ct;
+
+            if (currentTarget) {
+                currentTarget = toArray(currentTarget);
+
+                for (i = 0, len = currentTarget.length && (!e || !e.stopped); i < len; ++i) {
+                    ct = currentTarget[0];
+                    if (!contains(ct, related)) {
+                        if (!e) {
+                            e = new Y.DOMEventFacade(args[0], ct, ce);
+                            e.container = Y.one(ce.el);
+                        }
+                        e.currentTarget = Y.one(ct);
+
+                        // TODO: where is notifier? args? this.notifier?
+                        ret = args[1].fire(e);
+
+                        if (ret === false) {
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return ret;
+        },
+
+        detachDelegate: function (node, sub) {
+            sub.handle.detach();
+        }
+    };
+
+Y.Event.define("mouseenter", config, true);
+Y.Event.define("mouseleave", Y.merge(config, {
+    proxyType: "mouseout",
+    relProperty: "toElement"
+}), true);
+
+
+}, '3.18.1', {"requires": ["event-synthetic"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-key', function (Y, NAME) {
+
+/**
+ * Functionality to listen for one or more specific key combinations.
+ * @module event
+ * @submodule event-key
+ */
+
+var ALT      = "+alt",
+    CTRL     = "+ctrl",
+    META     = "+meta",
+    SHIFT    = "+shift",
+
+    trim     = Y.Lang.trim,
+
+    eventDef = {
+        KEY_MAP: {
+            enter    : 13,
+            space    : 32,
+            esc      : 27,
+            backspace: 8,
+            tab      : 9,
+            pageup   : 33,
+            pagedown : 34
+        },
+
+        _typeRE: /^(up|down|press):/,
+        _keysRE: /^(?:up|down|press):|\+(alt|ctrl|meta|shift)/g,
+
+        processArgs: function (args) {
+            var spec = args.splice(3,1)[0],
+                mods = Y.Array.hash(spec.match(/\+(?:alt|ctrl|meta|shift)\b/g) || []),
+                config = {
+                    type: this._typeRE.test(spec) ? RegExp.$1 : null,
+                    mods: mods,
+                    keys: null
+                },
+                // strip type and modifiers from spec, leaving only keyCodes
+                bits = spec.replace(this._keysRE, ''),
+                chr, uc, lc, i;
+
+            if (bits) {
+                bits = bits.split(',');
+
+                config.keys = {};
+
+                // FIXME: need to support '65,esc' => keypress, keydown
+                for (i = bits.length - 1; i >= 0; --i) {
+                    chr = trim(bits[i]);
+
+                    // catch sloppy filters, trailing commas, etc 'a,,'
+                    if (!chr) {
+                        continue;
+                    }
+
+                    // non-numerics are single characters or key names
+                    if (+chr == chr) {
+                        config.keys[chr] = mods;
+                    } else {
+                        lc = chr.toLowerCase();
+
+                        if (this.KEY_MAP[lc]) {
+                            config.keys[this.KEY_MAP[lc]] = mods;
+                            // FIXME: '65,enter' defaults keydown for both
+                            if (!config.type) {
+                                config.type = "down"; // safest
+                            }
+                        } else {
+                            // FIXME: Character mapping only works for keypress
+                            // events. Otherwise, it uses String.fromCharCode()
+                            // from the keyCode, which is wrong.
+                            chr = chr.charAt(0);
+                            uc  = chr.toUpperCase();
+
+                            if (mods["+shift"]) {
+                                chr = uc;
+                            }
+
+                            // FIXME: stupid assumption that
+                            // the keycode of the lower case == the
+                            // charCode of the upper case
+                            // a (key:65,char:97), A (key:65,char:65)
+                            config.keys[chr.charCodeAt(0)] =
+                                (chr === uc) ?
+                                    // upper case chars get +shift free
+                                    Y.merge(mods, { "+shift": true }) :
+                                    mods;
+                        }
+                    }
+                }
+            }
+
+            if (!config.type) {
+                config.type = "press";
+            }
+
+            return config;
+        },
+
+        on: function (node, sub, notifier, filter) {
+            var spec   = sub._extra,
+                type   = "key" + spec.type,
+                keys   = spec.keys,
+                method = (filter) ? "delegate" : "on";
+
+            // Note: without specifying any keyCodes, this becomes a
+            // horribly inefficient alias for 'keydown' (et al), but I
+            // can't abort this subscription for a simple
+            // Y.on('keypress', ...);
+            // Please use keyCodes or just subscribe directly to keydown,
+            // keyup, or keypress
+            sub._detach = node[method](type, function (e) {
+                var key = keys ? keys[e.which] : spec.mods;
+
+                if (key &&
+                    (!key[ALT]   || (key[ALT]   && e.altKey)) &&
+                    (!key[CTRL]  || (key[CTRL]  && e.ctrlKey)) &&
+                    (!key[META]  || (key[META]  && e.metaKey)) &&
+                    (!key[SHIFT] || (key[SHIFT] && e.shiftKey)))
+                {
+                    notifier.fire(e);
+                }
+            }, filter);
+        },
+
+        detach: function (node, sub, notifier) {
+            sub._detach.detach();
+        }
+    };
+
+eventDef.delegate = eventDef.on;
+eventDef.detachDelegate = eventDef.detach;
+
+/**
+ * <p>Add a key listener.  The listener will only be notified if the
+ * keystroke detected meets the supplied specification.  The
+ * specification is a string that is defined as:</p>
+ *
+ * <dl>
+ *   <dt>spec</dt>
+ *   <dd><code>[{type}:]{code}[,{code}]*</code></dd>
+ *   <dt>type</dt>
+ *   <dd><code>"down", "up", or "press"</code></dd>
+ *   <dt>code</dt>
+ *   <dd><code>{keyCode|character|keyName}[+{modifier}]*</code></dd>
+ *   <dt>modifier</dt>
+ *   <dd><code>"shift", "ctrl", "alt", or "meta"</code></dd>
+ *   <dt>keyName</dt>
+ *   <dd><code>"enter", "space", "backspace", "esc", "tab", "pageup", or "pagedown"</code></dd>
+ * </dl>
+ *
+ * <p>Examples:</p>
+ * <ul>
+ *   <li><code>Y.on("key", callback, "press:12,65+shift+ctrl", "#my-input");</code></li>
+ *   <li><code>Y.delegate("key", preventSubmit, "#forms", "enter", "input[type=text]");</code></li>
+ *   <li><code>Y.one("doc").on("key", viNav, "j,k,l,;");</code></li>
+ * </ul>
+ *
+ * @event key
+ * @for YUI
+ * @param type {string} 'key'
+ * @param fn {function} the function to execute
+ * @param id {string|HTMLElement|collection} the element(s) to bind
+ * @param spec {string} the keyCode and modifier specification
+ * @param o optional context object
+ * @param args 0..n additional arguments to provide to the listener.
+ * @return {Event.Handle} the detach handle
+ */
+Y.Event.define('key', eventDef, true);
+
+
+}, '3.18.1', {"requires": ["event-synthetic"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-hover', function (Y, NAME) {
+
+/**
+ * Adds support for a "hover" event.  The event provides a convenience wrapper
+ * for subscribing separately to mouseenter and mouseleave.  The signature for
+ * subscribing to the event is</p>
+ *
+ * <pre><code>node.on("hover", overFn, outFn);
+ * node.delegate("hover", overFn, outFn, ".filterSelector");
+ * Y.on("hover", overFn, outFn, ".targetSelector");
+ * Y.delegate("hover", overFn, outFn, "#container", ".filterSelector");
+ * </code></pre>
+ *
+ * <p>Additionally, for compatibility with a more typical subscription
+ * signature, the following are also supported:</p>
+ *
+ * <pre><code>Y.on("hover", overFn, ".targetSelector", outFn);
+ * Y.delegate("hover", overFn, "#container", outFn, ".filterSelector");
+ * </code></pre>
+ *
+ * @module event
+ * @submodule event-hover
+ */
+var isFunction = Y.Lang.isFunction,
+    noop = function () {},
+    conf = {
+        processArgs: function (args) {
+            // Y.delegate('hover', over, out, '#container', '.filter')
+            // comes in as ['hover', over, out, '#container', '.filter'], but
+            // node.delegate('hover', over, out, '.filter')
+            // comes in as ['hover', over, containerEl, out, '.filter']
+            var i = isFunction(args[2]) ? 2 : 3;
+
+            return (isFunction(args[i])) ? args.splice(i,1)[0] : noop;
+        },
+
+        on: function (node, sub, notifier, filter) {
+            var args = (sub.args) ? sub.args.slice() : [];
+
+            args.unshift(null);
+
+            sub._detach = node[(filter) ? "delegate" : "on"]({
+                mouseenter: function (e) {
+                    e.phase = 'over';
+                    notifier.fire(e);
+                },
+                mouseleave: function (e) {
+                    var thisObj = sub.context || this;
+
+                    args[0] = e;
+
+                    e.type = 'hover';
+                    e.phase = 'out';
+                    sub._extra.apply(thisObj, args);
+                }
+            }, filter);
+        },
+
+        detach: function (node, sub, notifier) {
+            sub._detach.detach();
+        }
+    };
+
+conf.delegate = conf.on;
+conf.detachDelegate = conf.detach;
+
+Y.Event.define("hover", conf);
+
+
+}, '3.18.1', {"requires": ["event-mouseenter"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-outside', function (Y, NAME) {
+
+/**
+ * Outside events are synthetic DOM events that fire when a corresponding native
+ * or synthetic DOM event occurs outside a bound element.
+ *
+ * The following outside events are pre-defined by this module:
+ * <ul>
+ *   <li>blur</li>
+ *   <li>change</li>
+ *   <li>click</li>
+ *   <li>dblclick</li>
+ *   <li>focus</li>
+ *   <li>keydown</li>
+ *   <li>keypress</li>
+ *   <li>keyup</li>
+ *   <li>mousedown</li>
+ *   <li>mousemove</li>
+ *   <li>mouseout</li>
+ *   <li>mouseover</li>
+ *   <li>mouseup</li>
+ *   <li>select</li>
+ *   <li>submit</li>
+ * </ul>
+ *
+ * Define new outside events with
+ * <code>Y.Event.defineOutside(eventType);</code>.
+ * By default, the created synthetic event name will be the name of the event
+ * with "outside" appended (e.g. "click" becomes "clickoutside"). If you want
+ * a different name for the created Event, pass it as a second argument like so:
+ * <code>Y.Event.defineOutside(eventType, "yonderclick")</code>.
+ *
+ * This module was contributed by Brett Stimmerman, promoted from his
+ * gallery-outside-events module at
+ * http://yuilibrary.com/gallery/show/outside-events
+ *
+ * @module event
+ * @submodule event-outside
+ * @author brettstimmerman
+ * @since 3.4.0
+ */
+
+// Outside events are pre-defined for each of these native DOM events
+var nativeEvents = [
+        'blur', 'change', 'click', 'dblclick', 'focus', 'keydown', 'keypress',
+        'keyup', 'mousedown', 'mousemove', 'mouseout', 'mouseover', 'mouseup',
+        'select', 'submit'
+    ];
+
+/**
+ * Defines a new outside event to correspond with the given DOM event.
+ *
+ * By default, the created synthetic event name will be the name of the event
+ * with "outside" appended (e.g. "click" becomes "clickoutside"). If you want
+ * a different name for the created Event, pass it as a second argument like so:
+ * <code>Y.Event.defineOutside(eventType, "yonderclick")</code>.
+ *
+ * @method defineOutside
+ * @param {String} event DOM event
+ * @param {String} name (optional) custom outside event name
+ * @static
+ * @for Event
+ */
+Y.Event.defineOutside = function (event, name) {
+    name = name || (event + 'outside');
+
+    var config = {
+
+        on: function (node, sub, notifier) {
+            sub.handle = Y.one('doc').on(event, function(e) {
+                if (this.isOutside(node, e.target)) {
+                    e.currentTarget = node;
+                    notifier.fire(e);
+                }
+            }, this);
+        },
+
+        detach: function (node, sub, notifier) {
+            sub.handle.detach();
+        },
+
+        delegate: function (node, sub, notifier, filter) {
+            sub.handle = Y.one('doc').delegate(event, function (e) {
+                if (this.isOutside(node, e.target)) {
+                    notifier.fire(e);
+                }
+            }, filter, this);
+        },
+
+        isOutside: function (node, target) {
+            return target !== node && !target.ancestor(function (p) {
+                    return p === node;
+                });
+        }
+    };
+    config.detachDelegate = config.detach;
+
+    Y.Event.define(name, config);
+};
+
+// Define outside events for some common native DOM events
+Y.Array.each(nativeEvents, function (event) {
+    Y.Event.defineOutside(event);
+});
+
+
+}, '3.18.1', {"requires": ["event-synthetic"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-touch', function (Y, NAME) {
+
+/**
+Adds touch event facade normalization properties (touches, changedTouches, targetTouches etc.) to the DOM event facade. Adds
+touch events to the DOM events whitelist.
+
+@example
+    YUI().use('event-touch', function (Y) {
+        Y.one('#myDiv').on('touchstart', function(e) {
+            ...
+        });
+    });
+@module event
+@submodule event-touch
+ */
+var SCALE = "scale",
+    ROTATION = "rotation",
+    IDENTIFIER = "identifier",
+    win = Y.config.win,
+    GESTURE_MAP = {};
+
+/**
+ * Adds touch event facade normalization properties to the DOM event facade
+ *
+ * @method _touch
+ * @for DOMEventFacade
+ * @private
+ * @param ev {Event} the DOM event
+ * @param currentTarget {HTMLElement} the element the listener was attached to
+ * @param wrapper {CustomEvent} the custom event wrapper for this DOM event
+ */
+Y.DOMEventFacade.prototype._touch = function(e, currentTarget, wrapper) {
+
+    var i,l, etCached, et,touchCache;
+
+    Y.log("Calling facade._touch() with e = " + e, "debug", "event-touch");
+
+    if (e.touches) {
+        Y.log("Found e.touches. Replicating on facade", "info", "event-touch");
+
+        /**
+         * Array of individual touch events for touch points that are still in
+         * contact with the touch surface.
+         *
+         * @property touches
+         * @type {DOMEventFacade[]}
+         */
+        this.touches = [];
+        touchCache = {};
+
+        for (i = 0, l = e.touches.length; i < l; ++i) {
+            et = e.touches[i];
+            touchCache[Y.stamp(et)] = this.touches[i] = new Y.DOMEventFacade(et, currentTarget, wrapper);
+        }
+    }
+
+    if (e.targetTouches) {
+        Y.log("Found e.targetTouches. Replicating on facade", "info", "event-touch");
+
+        /**
+         * Array of individual touch events still in contact with the touch
+         * surface and whose `touchstart` event occurred inside the same taregt
+         * element as the current target element.
+         *
+         * @property targetTouches
+         * @type {DOMEventFacade[]}
+         */
+        this.targetTouches = [];
+
+        for (i = 0, l = e.targetTouches.length; i < l; ++i) {
+            et = e.targetTouches[i];
+            etCached = touchCache && touchCache[Y.stamp(et, true)];
+
+            this.targetTouches[i] = etCached || new Y.DOMEventFacade(et, currentTarget, wrapper);
+
+            if (etCached) { Y.log("Found native event in touches. Using same facade in targetTouches", "info", "event-touch"); }
+        }
+    }
+
+    if (e.changedTouches) {
+        Y.log("Found e.changedTouches. Replicating on facade", "info", "event-touch");
+
+        /**
+        An array of event-specific touch events.
+
+        For `touchstart`, the touch points that became active with the current
+        event.
+
+        For `touchmove`, the touch points that have changed since the last
+        event.
+
+        For `touchend`, the touch points that have been removed from the touch
+        surface.
+
+        @property changedTouches
+        @type {DOMEventFacade[]}
+        **/
+        this.changedTouches = [];
+
+        for (i = 0, l = e.changedTouches.length; i < l; ++i) {
+            et = e.changedTouches[i];
+            etCached = touchCache && touchCache[Y.stamp(et, true)];
+
+            this.changedTouches[i] = etCached || new Y.DOMEventFacade(et, currentTarget, wrapper);
+
+            if (etCached) { Y.log("Found native event in touches. Using same facade in changedTouches", "info", "event-touch"); }
+        }
+    }
+
+    if (SCALE in e) {
+        this[SCALE] = e[SCALE];
+    }
+
+    if (ROTATION in e) {
+        this[ROTATION] = e[ROTATION];
+    }
+
+    if (IDENTIFIER in e) {
+        this[IDENTIFIER] = e[IDENTIFIER];
+    }
+};
+
+//Adding MSPointer events to whitelisted DOM Events. MSPointer event payloads
+//have the same properties as mouse events.
+if (Y.Node.DOM_EVENTS) {
+    Y.mix(Y.Node.DOM_EVENTS, {
+        touchstart:1,
+        touchmove:1,
+        touchend:1,
+        touchcancel:1,
+        gesturestart:1,
+        gesturechange:1,
+        gestureend:1,
+        MSPointerDown:1,
+        MSPointerUp:1,
+        MSPointerMove:1,
+        MSPointerCancel:1,
+        pointerdown:1,
+        pointerup:1,
+        pointermove:1,
+        pointercancel:1
+    });
+}
+
+//Add properties to Y.EVENT.GESTURE_MAP based on feature detection.
+if ((win && ("ontouchstart" in win)) && !(Y.UA.chrome && Y.UA.chrome < 6)) {
+    GESTURE_MAP.start = ["touchstart", "mousedown"];
+    GESTURE_MAP.end = ["touchend", "mouseup"];
+    GESTURE_MAP.move = ["touchmove", "mousemove"];
+    GESTURE_MAP.cancel = ["touchcancel", "mousecancel"];
+}
+
+else if (win && win.PointerEvent) {
+    GESTURE_MAP.start = "pointerdown";
+    GESTURE_MAP.end = "pointerup";
+    GESTURE_MAP.move = "pointermove";
+    GESTURE_MAP.cancel = "pointercancel";
+}
+
+else if (win && ("msPointerEnabled" in win.navigator)) {
+    GESTURE_MAP.start = "MSPointerDown";
+    GESTURE_MAP.end = "MSPointerUp";
+    GESTURE_MAP.move = "MSPointerMove";
+    GESTURE_MAP.cancel = "MSPointerCancel";
+}
+
+else {
+    GESTURE_MAP.start = "mousedown";
+    GESTURE_MAP.end = "mouseup";
+    GESTURE_MAP.move = "mousemove";
+    GESTURE_MAP.cancel = "mousecancel";
+}
+
+/**
+ * A object literal with keys "start", "end", and "move". The value for each key is a
+ * string representing the event for that environment. For touch environments, the respective
+ * values are "touchstart", "touchend" and "touchmove". Mouse and MSPointer environments are also
+ * supported via feature detection.
+ *
+ * @property _GESTURE_MAP
+ * @type Object
+ * @static
+ */
+Y.Event._GESTURE_MAP = GESTURE_MAP;
+
+
+}, '3.18.1', {"requires": ["node-base"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-move', function (Y, NAME) {
+
+/**
+ * Adds lower level support for "gesturemovestart", "gesturemove" and "gesturemoveend" events, which can be used to create drag/drop
+ * interactions which work across touch and mouse input devices. They correspond to "touchstart", "touchmove" and "touchend" on a touch input
+ * device, and "mousedown", "mousemove", "mouseup" on a mouse based input device.
+ *
+ * <p>Documentation for the gesturemove triplet of events can be found on the <a href="../classes/YUI.html#event_gesturemove">YUI</a> global,
+ * along with the other supported events.</p>
+
+ @example
+
+     YUI().use('event-move', function (Y) {
+         Y.one('#myNode').on('gesturemovestart', function (e) {
+             Y.log('gesturemovestart Fired.');
+         });
+         Y.one('#myNode').on('gesturemove', function (e) {
+             Y.log('gesturemove Fired.');
+         });
+         Y.one('#myNode').on('gesturemoveend', function (e) {
+             Y.log('gesturemoveend Fired.');
+         });
+     });
+
+ * @module event-gestures
+ * @submodule event-move
+ */
+
+
+ var GESTURE_MAP = Y.Event._GESTURE_MAP,
+     EVENT = {
+         start: GESTURE_MAP.start,
+         end: GESTURE_MAP.end,
+         move: GESTURE_MAP.move
+     },
+    START = "start",
+    MOVE = "move",
+    END = "end",
+
+    GESTURE_MOVE = "gesture" + MOVE,
+    GESTURE_MOVE_END = GESTURE_MOVE + END,
+    GESTURE_MOVE_START = GESTURE_MOVE + START,
+
+    _MOVE_START_HANDLE = "_msh",
+    _MOVE_HANDLE = "_mh",
+    _MOVE_END_HANDLE = "_meh",
+
+    _DEL_MOVE_START_HANDLE = "_dmsh",
+    _DEL_MOVE_HANDLE = "_dmh",
+    _DEL_MOVE_END_HANDLE = "_dmeh",
+
+    _MOVE_START = "_ms",
+    _MOVE = "_m",
+
+    MIN_TIME = "minTime",
+    MIN_DISTANCE = "minDistance",
+    PREVENT_DEFAULT = "preventDefault",
+    BUTTON = "button",
+    OWNER_DOCUMENT = "ownerDocument",
+
+    CURRENT_TARGET = "currentTarget",
+    TARGET = "target",
+
+    NODE_TYPE = "nodeType",
+    _getTouchAction = function(win) {
+        var touchAction;
+        if(win) {
+            if("PointerEvent" in win) {
+                touchAction = "touchAction";
+            } else if("msPointerEnabled" in win.navigator) {
+                touchAction = "msTouchAction";
+            }
+        }
+        return touchAction;
+    },
+    TOUCH_ACTION = _getTouchAction(Y.config.win),
+    SUPPORTS_POINTER = (TOUCH_ACTION === "msTouchAction" || TOUCH_ACTION === "touchAction"),
+    MS_TOUCH_ACTION_COUNT = 'msTouchActionCount',
+    MS_INIT_TOUCH_ACTION = 'msInitTouchAction',
+
+    _defArgsProcessor = function(se, args, delegate) {
+        var iConfig = (delegate) ? 4 : 3,
+            config = (args.length > iConfig) ? Y.merge(args.splice(iConfig,1)[0]) : {};
+
+        if (!(PREVENT_DEFAULT in config)) {
+            config[PREVENT_DEFAULT] = se.PREVENT_DEFAULT;
+        }
+
+        return config;
+    },
+
+    _getRoot = function(node, subscriber) {
+        return subscriber._extra.root || (node.get(NODE_TYPE) === 9) ? node : node.get(OWNER_DOCUMENT);
+    },
+
+    //Checks to see if the node is the document, and if it is, returns the documentElement.
+    _checkDocumentElem = function(node) {
+        var elem = node.getDOMNode();
+        if (node.compareTo(Y.config.doc) && elem.documentElement) {
+            return elem.documentElement;
+        }
+        else {
+            return false;
+        }
+    },
+
+    _normTouchFacade = function(touchFacade, touch, params) {
+        touchFacade.pageX = touch.pageX;
+        touchFacade.pageY = touch.pageY;
+        touchFacade.screenX = touch.screenX;
+        touchFacade.screenY = touch.screenY;
+        touchFacade.clientX = touch.clientX;
+        touchFacade.clientY = touch.clientY;
+        touchFacade[TARGET] = touchFacade[TARGET] || touch[TARGET];
+        touchFacade[CURRENT_TARGET] = touchFacade[CURRENT_TARGET] || touch[CURRENT_TARGET];
+
+        touchFacade[BUTTON] = (params && params[BUTTON]) || 1; // default to left (left as per vendors, not W3C which is 0)
+    },
+
+    /*
+    In IE10 touch mode, gestures will not work properly unless the -ms-touch-action CSS property is set to something other than 'auto'. Read http://msdn.microsoft.com/en-us/library/windows/apps/hh767313.aspx for more info. To get around this, we set -ms-touch-action: none which is the same as e.preventDefault() on touch environments. This tells the browser to fire DOM events for all touch events, and not perform any default behavior.
+
+    The user can over-ride this by setting a more lenient -ms-touch-action property on a node (such as pan-x, pan-y, etc.) via CSS when subscribing to the 'gesturemovestart' event.
+    */
+    _setTouchActions = function (node) {
+        var elem = node.getDOMNode(),
+            num = node.getData(MS_TOUCH_ACTION_COUNT);
+
+        //Checks to see if msTouchAction is supported.
+        if (SUPPORTS_POINTER) {
+            if (!num) {
+                num = 0;
+                node.setData(MS_INIT_TOUCH_ACTION, elem.style[TOUCH_ACTION]);
+            }
+            elem.style[TOUCH_ACTION] = Y.Event._DEFAULT_TOUCH_ACTION;
+            num++;
+            node.setData(MS_TOUCH_ACTION_COUNT, num);
+        }
+    },
+
+    /*
+    Resets the element's -ms-touch-action property back to the original value, This is called on detach() and detachDelegate().
+    */
+    _unsetTouchActions = function (node) {
+        var elem = node.getDOMNode(),
+            num = node.getData(MS_TOUCH_ACTION_COUNT),
+            initTouchAction = node.getData(MS_INIT_TOUCH_ACTION);
+
+        if (SUPPORTS_POINTER) {
+            num--;
+            node.setData(MS_TOUCH_ACTION_COUNT, num);
+            if (num === 0 && elem.style[TOUCH_ACTION] !== initTouchAction) {
+                elem.style[TOUCH_ACTION] = initTouchAction;
+            }
+        }
+    },
+
+    _prevent = function(e, preventDefault) {
+        if (preventDefault) {
+            // preventDefault is a boolean or a function
+            if (!preventDefault.call || preventDefault(e)) {
+                e.preventDefault();
+            }
+        }
+    },
+
+    define = Y.Event.define;
+    Y.Event._DEFAULT_TOUCH_ACTION = 'none';
+
+/**
+ * Sets up a "gesturemovestart" event, that is fired on touch devices in response to a single finger "touchstart",
+ * and on mouse based devices in response to a "mousedown". The subscriber can specify the minimum time
+ * and distance thresholds which should be crossed before the "gesturemovestart" is fired and for the mouse,
+ * which button should initiate a "gesturemovestart". This event can also be listened for using node.delegate().
+ *
+ * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
+ * however if you want to pass the context and arguments as additional signature arguments to on/delegate,
+ * you need to provide a null value for the configuration object, e.g: <code>node.on("gesturemovestart", fn, null, context, arg1, arg2, arg3)</code></p>
+ *
+ * @event gesturemovestart
+ * @for YUI
+ * @param type {string} "gesturemovestart"
+ * @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event (mousedown or touchstart.touches[0]) which contains position co-ordinates.
+ * @param cfg {Object} Optional. An object which specifies:
+ *
+ * <dl>
+ * <dt>minDistance (defaults to 0)</dt>
+ * <dd>The minimum distance threshold which should be crossed before the gesturemovestart is fired</dd>
+ * <dt>minTime (defaults to 0)</dt>
+ * <dd>The minimum time threshold for which the finger/mouse should be help down before the gesturemovestart is fired</dd>
+ * <dt>button (no default)</dt>
+ * <dd>In the case of a mouse input device, if the event should only be fired for a specific mouse button.</dd>
+ * <dt>preventDefault (defaults to false)</dt>
+ * <dd>Can be set to true/false to prevent default behavior as soon as the touchstart or mousedown is received (that is before minTime or minDistance thresholds are crossed, and so before the gesturemovestart listener is notified) so that things like text selection and context popups (on touch devices) can be
+ * prevented. This property can also be set to a function, which returns true or false, based on the event facade passed to it (for example, DragDrop can determine if the target is a valid handle or not before preventing default).</dd>
+ * </dl>
+ *
+ * @return {EventHandle} the detach handle
+ */
+
+define(GESTURE_MOVE_START, {
+
+    on: function (node, subscriber, ce) {
+
+        //Set -ms-touch-action on IE10 and set preventDefault to true
+        if (!_checkDocumentElem(node)) {
+            _setTouchActions(node);
+        }
+        
+        subscriber[_MOVE_START_HANDLE] = node.on(EVENT[START],
+            this._onStart,
+            this,
+            node,
+            subscriber,
+            ce);
+    },
+
+    delegate : function(node, subscriber, ce, filter) {
+
+        var se = this;
+
+        subscriber[_DEL_MOVE_START_HANDLE] = node.delegate(EVENT[START],
+            function(e) {
+                se._onStart(e, node, subscriber, ce, true);
+            },
+            filter);
+    },
+
+    detachDelegate : function(node, subscriber, ce, filter) {
+        var handle = subscriber[_DEL_MOVE_START_HANDLE];
+
+        if (handle) {
+            handle.detach();
+            subscriber[_DEL_MOVE_START_HANDLE] = null;
+        }
+
+        if (!_checkDocumentElem(node)) {
+            _unsetTouchActions(node);
+        }
+    },
+
+    detach: function (node, subscriber, ce) {
+        var startHandle = subscriber[_MOVE_START_HANDLE];
+
+        if (startHandle) {
+            startHandle.detach();
+            subscriber[_MOVE_START_HANDLE] = null;
+        }
+
+        if (!_checkDocumentElem(node)) {
+            _unsetTouchActions(node);
+        }
+    },
+
+    processArgs : function(args, delegate) {
+        var params = _defArgsProcessor(this, args, delegate);
+
+        if (!(MIN_TIME in params)) {
+            params[MIN_TIME] = this.MIN_TIME;
+        }
+
+        if (!(MIN_DISTANCE in params)) {
+            params[MIN_DISTANCE] = this.MIN_DISTANCE;
+        }
+
+        return params;
+    },
+
+    _onStart : function(e, node, subscriber, ce, delegate) {
+
+        if (delegate) {
+            node = e[CURRENT_TARGET];
+        }
+
+        var params = subscriber._extra,
+            fireStart = true,
+            minTime = params[MIN_TIME],
+            minDistance = params[MIN_DISTANCE],
+            button = params.button,
+            preventDefault = params[PREVENT_DEFAULT],
+            root = _getRoot(node, subscriber),
+            startXY;
+
+        if (e.touches) {
+            if (e.touches.length === 1) {
+                _normTouchFacade(e, e.touches[0], params);
+            } else {
+                fireStart = false;
+            }
+        } else {
+            fireStart = (button === undefined) || (button === e.button);
+        }
+
+        Y.log("gesturemovestart: params = button:" + button + ", minTime = " + minTime + ", minDistance = " + minDistance, "event-gestures");
+
+        if (fireStart) {
+
+            _prevent(e, preventDefault);
+
+            if (minTime === 0 || minDistance === 0) {
+                Y.log("gesturemovestart: No minTime or minDistance. Firing immediately", "event-gestures");
+                this._start(e, node, ce, params);
+
+            } else {
+
+                startXY = [e.pageX, e.pageY];
+
+                if (minTime > 0) {
+
+                    Y.log("gesturemovestart: minTime specified. Setup timer.", "event-gestures");
+                    Y.log("gesturemovestart: initialTime for minTime = " + new Date().getTime(), "event-gestures");
+
+                    params._ht = Y.later(minTime, this, this._start, [e, node, ce, params]);
+
+                    params._hme = root.on(EVENT[END], Y.bind(function() {
+                        this._cancel(params);
+                    }, this));
+                }
+
+                if (minDistance > 0) {
+
+                    Y.log("gesturemovestart: minDistance specified. Setup native mouse/touchmove listener to measure distance.", "event-gestures");
+                    Y.log("gesturemovestart: initialXY for minDistance = " + startXY, "event-gestures");
+
+                    params._hm = root.on(EVENT[MOVE], Y.bind(function(em) {
+                        if (Math.abs(em.pageX - startXY[0]) > minDistance || Math.abs(em.pageY - startXY[1]) > minDistance) {
+                            Y.log("gesturemovestart: minDistance hit.", "event-gestures");
+                            this._start(e, node, ce, params);
+                        }
+                    }, this));
+                }
+            }
+        }
+    },
+
+    _cancel : function(params) {
+        if (params._ht) {
+            params._ht.cancel();
+            params._ht = null;
+        }
+        if (params._hme) {
+            params._hme.detach();
+            params._hme = null;
+        }
+        if (params._hm) {
+            params._hm.detach();
+            params._hm = null;
+        }
+    },
+
+    _start : function(e, node, ce, params) {
+
+        if (params) {
+            this._cancel(params);
+        }
+
+        e.type = GESTURE_MOVE_START;
+
+        Y.log("gesturemovestart: Firing start: " + new Date().getTime(), "event-gestures");
+
+        node.setData(_MOVE_START, e);
+        ce.fire(e);
+    },
+
+    MIN_TIME : 0,
+    MIN_DISTANCE : 0,
+    PREVENT_DEFAULT : false
+});
+
+/**
+ * Sets up a "gesturemove" event, that is fired on touch devices in response to a single finger "touchmove",
+ * and on mouse based devices in response to a "mousemove".
+ *
+ * <p>By default this event is only fired when the same node
+ * has received a "gesturemovestart" event. The subscriber can set standAlone to true, in the configuration properties,
+ * if they want to listen for this event without an initial "gesturemovestart".</p>
+ *
+ * <p>By default this event sets up it's internal "touchmove" and "mousemove" DOM listeners on the document element. The subscriber
+ * can set the root configuration property, to specify which node to attach DOM listeners to, if different from the document.</p>
+ *
+ * <p>This event can also be listened for using node.delegate().</p>
+ *
+ * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
+ * however if you want to pass the context and arguments as additional signature arguments to on/delegate,
+ * you need to provide a null value for the configuration object, e.g: <code>node.on("gesturemove", fn, null, context, arg1, arg2, arg3)</code></p>
+ *
+ * @event gesturemove
+ * @for YUI
+ * @param type {string} "gesturemove"
+ * @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event (mousemove or touchmove.touches[0]) which contains position co-ordinates.
+ * @param cfg {Object} Optional. An object which specifies:
+ * <dl>
+ * <dt>standAlone (defaults to false)</dt>
+ * <dd>true, if the subscriber should be notified even if a "gesturemovestart" has not occured on the same node.</dd>
+ * <dt>root (defaults to document)</dt>
+ * <dd>The node to which the internal DOM listeners should be attached.</dd>
+ * <dt>preventDefault (defaults to false)</dt>
+ * <dd>Can be set to true/false to prevent default behavior as soon as the touchmove or mousemove is received. As with gesturemovestart, can also be set to function which returns true/false based on the event facade passed to it.</dd>
+ * </dl>
+ *
+ * @return {EventHandle} the detach handle
+ */
+define(GESTURE_MOVE, {
+
+    on : function (node, subscriber, ce) {
+        var moveHandle,
+            root;
+
+        // if the passed node is NOT the document itself, modify the ms-pointer
+        // behavior to prevent scrolling, highlighting, etc.
+        if (!_checkDocumentElem(node)) {
+            _setTouchActions(node);         
+        }
+
+        root = _getRoot(node, subscriber, EVENT[MOVE]);
+
+        moveHandle = root.on(EVENT[MOVE],
+            this._onMove,
+            this,
+            node,
+            subscriber,
+            ce);
+
+        subscriber[_MOVE_HANDLE] = moveHandle;
+
+    },
+
+    delegate : function(node, subscriber, ce, filter) {
+
+        var se = this;
+
+        subscriber[_DEL_MOVE_HANDLE] = node.delegate(EVENT[MOVE],
+            function(e) {
+                se._onMove(e, node, subscriber, ce, true);
+            },
+            filter);
+    },
+
+    detach : function (node, subscriber, ce) {
+        var moveHandle = subscriber[_MOVE_HANDLE];
+
+        if (moveHandle) {
+            moveHandle.detach();
+            subscriber[_MOVE_HANDLE] = null;
+        }
+
+        if (!_checkDocumentElem(node)) {
+            _unsetTouchActions(node);
+        }
+    },
+
+    detachDelegate : function(node, subscriber, ce, filter) {
+        var handle = subscriber[_DEL_MOVE_HANDLE];
+
+        if (handle) {
+            handle.detach();
+            subscriber[_DEL_MOVE_HANDLE] = null;
+        }
+
+        if (!_checkDocumentElem(node)) {
+            _unsetTouchActions(node);
+        }
+
+    },
+
+    processArgs : function(args, delegate) {
+        return _defArgsProcessor(this, args, delegate);
+    },
+
+    _onMove : function(e, node, subscriber, ce, delegate) {
+
+        if (delegate) {
+            node = e[CURRENT_TARGET];
+        }
+
+        var fireMove = subscriber._extra.standAlone || node.getData(_MOVE_START),
+            preventDefault = subscriber._extra.preventDefault;
+
+        Y.log("onMove initial fireMove check:" + fireMove,"event-gestures");
+
+        if (fireMove) {
+
+            if (e.touches) {
+                if (e.touches.length === 1) {
+                    _normTouchFacade(e, e.touches[0]);
+                } else {
+                    fireMove = false;
+                }
+            }
+
+            if (fireMove) {
+
+                _prevent(e, preventDefault);
+
+                Y.log("onMove second fireMove check:" + fireMove,"event-gestures");
+
+                e.type = GESTURE_MOVE;
+                ce.fire(e);
+            }
+        }
+    },
+
+    PREVENT_DEFAULT : false
+});
+
+/**
+ * Sets up a "gesturemoveend" event, that is fired on touch devices in response to a single finger "touchend",
+ * and on mouse based devices in response to a "mouseup".
+ *
+ * <p>By default this event is only fired when the same node
+ * has received a "gesturemove" or "gesturemovestart" event. The subscriber can set standAlone to true, in the configuration properties,
+ * if they want to listen for this event without a preceding "gesturemovestart" or "gesturemove".</p>
+ *
+ * <p>By default this event sets up it's internal "touchend" and "mouseup" DOM listeners on the document element. The subscriber
+ * can set the root configuration property, to specify which node to attach DOM listeners to, if different from the document.</p>
+ *
+ * <p>This event can also be listened for using node.delegate().</p>
+ *
+ * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
+ * however if you want to pass the context and arguments as additional signature arguments to on/delegate,
+ * you need to provide a null value for the configuration object, e.g: <code>node.on("gesturemoveend", fn, null, context, arg1, arg2, arg3)</code></p>
+ *
+ *
+ * @event gesturemoveend
+ * @for YUI
+ * @param type {string} "gesturemoveend"
+ * @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event (mouseup or touchend.changedTouches[0]).
+ * @param cfg {Object} Optional. An object which specifies:
+ * <dl>
+ * <dt>standAlone (defaults to false)</dt>
+ * <dd>true, if the subscriber should be notified even if a "gesturemovestart" or "gesturemove" has not occured on the same node.</dd>
+ * <dt>root (defaults to document)</dt>
+ * <dd>The node to which the internal DOM listeners should be attached.</dd>
+ * <dt>preventDefault (defaults to false)</dt>
+ * <dd>Can be set to true/false to prevent default behavior as soon as the touchend or mouseup is received. As with gesturemovestart, can also be set to function which returns true/false based on the event facade passed to it.</dd>
+ * </dl>
+ *
+ * @return {EventHandle} the detach handle
+ */
+define(GESTURE_MOVE_END, {
+
+    on : function (node, subscriber, ce) {
+        var endHandle,
+            root;
+
+        if (!_checkDocumentElem(node)) {
+            _setTouchActions(node);
+        }
+        
+        root = _getRoot(node, subscriber);
+        endHandle = root.on(EVENT[END],
+            this._onEnd,
+            this,
+            node,
+            subscriber,
+            ce);
+
+        subscriber[_MOVE_END_HANDLE] = endHandle;
+    },
+
+    delegate : function(node, subscriber, ce, filter) {
+
+        var se = this;
+
+        subscriber[_DEL_MOVE_END_HANDLE] = node.delegate(EVENT[END],
+            function(e) {
+                se._onEnd(e, node, subscriber, ce, true);
+            },
+            filter);
+    },
+
+    detachDelegate : function(node, subscriber, ce, filter) {
+        var handle = subscriber[_DEL_MOVE_END_HANDLE];
+
+        if (handle) {
+            handle.detach();
+            subscriber[_DEL_MOVE_END_HANDLE] = null;
+        }
+
+        if (!_checkDocumentElem(node)) {
+            _unsetTouchActions(node);
+        }
+
+    },
+
+    detach : function (node, subscriber, ce) {
+        var endHandle = subscriber[_MOVE_END_HANDLE];
+
+        if (endHandle) {
+            endHandle.detach();
+            subscriber[_MOVE_END_HANDLE] = null;
+        }
+
+        if (!_checkDocumentElem(node)) {
+            _unsetTouchActions(node);
+        }
+    },
+
+    processArgs : function(args, delegate) {
+        return _defArgsProcessor(this, args, delegate);
+    },
+
+    _onEnd : function(e, node, subscriber, ce, delegate) {
+
+        if (delegate) {
+            node = e[CURRENT_TARGET];
+        }
+
+        var fireMoveEnd = subscriber._extra.standAlone || node.getData(_MOVE) || node.getData(_MOVE_START),
+            preventDefault = subscriber._extra.preventDefault;
+
+        if (fireMoveEnd) {
+
+            if (e.changedTouches) {
+                if (e.changedTouches.length === 1) {
+                    _normTouchFacade(e, e.changedTouches[0]);
+                } else {
+                    fireMoveEnd = false;
+                }
+            }
+
+            if (fireMoveEnd) {
+
+                _prevent(e, preventDefault);
+
+                e.type = GESTURE_MOVE_END;
+                ce.fire(e);
+
+                node.clearData(_MOVE_START);
+                node.clearData(_MOVE);
+            }
+        }
+    },
+
+    PREVENT_DEFAULT : false
+});
+
+
+}, '3.18.1', {"requires": ["node-base", "event-touch", "event-synthetic"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-flick', function (Y, NAME) {
+
+/**
+ * The gestures module provides gesture events such as "flick", which normalize user interactions
+ * across touch and mouse or pointer based input devices. This layer can be used by application developers
+ * to build input device agnostic components which behave the same in response to either touch or mouse based
+ * interaction.
+ *
+ * <p>Documentation for events added by this module can be found in the event document for the <a href="../classes/YUI.html#events">YUI</a> global.</p>
+ *
+ *
+ @example
+
+     YUI().use('event-flick', function (Y) {
+         Y.one('#myNode').on('flick', function (e) {
+             Y.log('flick event fired. The event payload has goodies.');
+         });
+     });
+
+ *
+ * @module event-gestures
+ */
+
+/**
+ * Adds support for a "flick" event, which is fired at the end of a touch or mouse based flick gesture, and provides
+ * velocity of the flick, along with distance and time information.
+ *
+ * <p>Documentation for the flick event can be found on the <a href="../classes/YUI.html#event_flick">YUI</a> global,
+ * along with the other supported events.</p>
+ *
+ * @module event-gestures
+ * @submodule event-flick
+ */
+var GESTURE_MAP = Y.Event._GESTURE_MAP,
+    EVENT = {
+        start: GESTURE_MAP.start,
+        end: GESTURE_MAP.end,
+        move: GESTURE_MAP.move
+    },
+    START = "start",
+    END = "end",
+    MOVE = "move",
+
+    OWNER_DOCUMENT = "ownerDocument",
+    MIN_VELOCITY = "minVelocity",
+    MIN_DISTANCE = "minDistance",
+    PREVENT_DEFAULT = "preventDefault",
+
+    _FLICK_START = "_fs",
+    _FLICK_START_HANDLE = "_fsh",
+    _FLICK_END_HANDLE = "_feh",
+    _FLICK_MOVE_HANDLE = "_fmh",
+
+    NODE_TYPE = "nodeType";
+
+/**
+ * Sets up a "flick" event, that is fired whenever the user initiates a flick gesture on the node
+ * where the listener is attached. The subscriber can specify a minimum distance or velocity for
+ * which the event is to be fired. The subscriber can also specify if there is a particular axis which
+ * they are interested in - "x" or "y". If no axis is specified, the axis along which there was most distance
+ * covered is used.
+ *
+ * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
+ * however if you want to pass the context and arguments as additional signature arguments to "on",
+ * you need to provide a null value for the configuration object, e.g: <code>node.on("flick", fn, null, context, arg1, arg2, arg3)</code></p>
+ *
+ * @event flick
+ * @for YUI
+ * @param type {string} "flick"
+ * @param fn {function} The method the event invokes. It receives an event facade with an e.flick object containing the flick related properties: e.flick.time, e.flick.distance, e.flick.velocity and e.flick.axis, e.flick.start.
+ * @param cfg {Object} Optional. An object which specifies any of the following:
+ * <dl>
+ * <dt>minDistance (in pixels, defaults to 10)</dt>
+ * <dd>The minimum distance between start and end points, which would qualify the gesture as a flick.</dd>
+ * <dt>minVelocity (in pixels/ms, defaults to 0)</dt>
+ * <dd>The minimum velocity which would qualify the gesture as a flick.</dd>
+ * <dt>preventDefault (defaults to false)</dt>
+ * <dd>Can be set to true/false to prevent default behavior as soon as the touchstart/touchend or mousedown/mouseup is received so that things like scrolling or text selection can be
+ * prevented. This property can also be set to a function, which returns true or false, based on the event facade passed to it.</dd>
+ * <dt>axis (no default)</dt>
+ * <dd>Can be set to "x" or "y" if you want to constrain the flick velocity and distance to a single axis. If not
+ * defined, the axis along which the maximum distance was covered is used.</dd>
+ * </dl>
+ * @return {EventHandle} the detach handle
+ */
+
+Y.Event.define('flick', {
+
+    on: function (node, subscriber, ce) {
+
+        var startHandle = node.on(EVENT[START],
+            this._onStart,
+            this,
+            node,
+            subscriber,
+            ce);
+
+        subscriber[_FLICK_START_HANDLE] = startHandle;
+    },
+
+    detach: function (node, subscriber, ce) {
+
+        var startHandle = subscriber[_FLICK_START_HANDLE],
+            endHandle = subscriber[_FLICK_END_HANDLE];
+
+        if (startHandle) {
+            startHandle.detach();
+            subscriber[_FLICK_START_HANDLE] = null;
+        }
+
+        if (endHandle) {
+            endHandle.detach();
+            subscriber[_FLICK_END_HANDLE] = null;
+        }
+    },
+
+    processArgs: function(args) {
+        var params = (args.length > 3) ? Y.merge(args.splice(3, 1)[0]) : {};
+
+        if (!(MIN_VELOCITY in params)) {
+            params[MIN_VELOCITY] = this.MIN_VELOCITY;
+        }
+
+        if (!(MIN_DISTANCE in params)) {
+            params[MIN_DISTANCE] = this.MIN_DISTANCE;
+        }
+
+        if (!(PREVENT_DEFAULT in params)) {
+            params[PREVENT_DEFAULT] = this.PREVENT_DEFAULT;
+        }
+
+        return params;
+    },
+
+    _onStart: function(e, node, subscriber, ce) {
+
+        var start = true, // always true for mouse
+            endHandle,
+            moveHandle,
+            doc,
+            preventDefault = subscriber._extra.preventDefault,
+            origE = e;
+
+        if (e.touches) {
+            start = (e.touches.length === 1);
+            e = e.touches[0];
+        }
+
+        if (start) {
+
+            if (preventDefault) {
+                // preventDefault is a boolean or function
+                if (!preventDefault.call || preventDefault(e)) {
+                    origE.preventDefault();
+                }
+            }
+
+            e.flick = {
+                time : new Date().getTime()
+            };
+
+            subscriber[_FLICK_START] = e;
+
+            endHandle = subscriber[_FLICK_END_HANDLE];
+
+            doc = (node.get(NODE_TYPE) === 9) ? node : node.get(OWNER_DOCUMENT);
+            if (!endHandle) {
+                endHandle = doc.on(EVENT[END], Y.bind(this._onEnd, this), null, node, subscriber, ce);
+                subscriber[_FLICK_END_HANDLE] = endHandle;
+            }
+
+            subscriber[_FLICK_MOVE_HANDLE] = doc.once(EVENT[MOVE], Y.bind(this._onMove, this), null, node, subscriber, ce);
+        }
+    },
+
+    _onMove: function(e, node, subscriber, ce) {
+        var start = subscriber[_FLICK_START];
+
+        // Start timing from first move.
+        if (start && start.flick) {
+            start.flick.time = new Date().getTime();
+        }
+    },
+
+    _onEnd: function(e, node, subscriber, ce) {
+
+        var endTime = new Date().getTime(),
+            start = subscriber[_FLICK_START],
+            valid = !!start,
+            endEvent = e,
+            startTime,
+            time,
+            preventDefault,
+            params,
+            xyDistance,
+            distance,
+            velocity,
+            axis,
+            moveHandle = subscriber[_FLICK_MOVE_HANDLE];
+
+        if (moveHandle) {
+            moveHandle.detach();
+            delete subscriber[_FLICK_MOVE_HANDLE];
+        }
+
+        if (valid) {
+
+            if (e.changedTouches) {
+                if (e.changedTouches.length === 1 && e.touches.length === 0) {
+                    endEvent = e.changedTouches[0];
+                } else {
+                    valid = false;
+                }
+            }
+
+            if (valid) {
+
+                params = subscriber._extra;
+                preventDefault = params[PREVENT_DEFAULT];
+
+                if (preventDefault) {
+                    // preventDefault is a boolean or function
+                    if (!preventDefault.call || preventDefault(e)) {
+                        e.preventDefault();
+                    }
+                }
+
+                startTime = start.flick.time;
+                endTime = new Date().getTime();
+                time = endTime - startTime;
+
+                xyDistance = [
+                    endEvent.pageX - start.pageX,
+                    endEvent.pageY - start.pageY
+                ];
+
+                if (params.axis) {
+                    axis = params.axis;
+                } else {
+                    axis = (Math.abs(xyDistance[0]) >= Math.abs(xyDistance[1])) ? 'x' : 'y';
+                }
+
+                distance = xyDistance[(axis === 'x') ? 0 : 1];
+                velocity = (time !== 0) ? distance/time : 0;
+
+                if (isFinite(velocity) && (Math.abs(distance) >= params[MIN_DISTANCE]) && (Math.abs(velocity)  >= params[MIN_VELOCITY])) {
+
+                    e.type = "flick";
+                    e.flick = {
+                        time:time,
+                        distance: distance,
+                        velocity:velocity,
+                        axis: axis,
+                        start : start
+                    };
+
+                    ce.fire(e);
+
+                }
+
+                subscriber[_FLICK_START] = null;
+            }
+        }
+    },
+
+    MIN_VELOCITY : 0,
+    MIN_DISTANCE : 0,
+    PREVENT_DEFAULT : false
+});
+
+
+}, '3.18.1', {"requires": ["node-base", "event-touch", "event-synthetic"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-tap', function (Y, NAME) {
+
+/**
+The tap module provides a gesture events, "tap", which normalizes user interactions
+across touch and mouse or pointer based input devices.  This can be used by application developers
+to build input device agnostic components which behave the same in response to either touch or mouse based
+interaction.
+
+'tap' is like a touchscreen 'click', only it requires much less finger-down time since it listens to touch events,
+but reverts to mouse events if touch is not supported.
+
+@example
+
+    YUI().use('event-tap', function (Y) {
+        Y.one('#my-button').on('tap', function (e) {
+            Y.log('Button was tapped on');
+        });
+    });
+
+@module event
+@submodule event-tap
+@author Andres Garza, matuzak and tilo mitra
+@since 3.7.0
+
+*/
+var doc = Y.config.doc,
+    GESTURE_MAP = Y.Event._GESTURE_MAP,
+    EVT_START = GESTURE_MAP.start,
+    EVT_TAP = 'tap',
+    POINTER_EVENT_TEST = /pointer/i,
+
+    HANDLES = {
+        START: 'Y_TAP_ON_START_HANDLE',
+        END: 'Y_TAP_ON_END_HANDLE',
+        CANCEL: 'Y_TAP_ON_CANCEL_HANDLE'
+    };
+
+function detachHandles(subscription, handles) {
+    handles = handles || Y.Object.values(HANDLES);
+
+    Y.Array.each(handles, function (item) {
+        var handle = subscription[item];
+        if (handle) {
+            handle.detach();
+            subscription[item] = null;
+        }
+    });
+
+}
+
+
+/**
+Sets up a "tap" event, that is fired on touch devices in response to a tap event (finger down, finder up).
+This event can be used instead of listening for click events which have a 500ms delay on most touch devices.
+This event can also be listened for using node.delegate().
+
+@event tap
+@param type {string} "tap"
+@param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event.
+@for Event
+@return {EventHandle} the detach handle
+*/
+Y.Event.define(EVT_TAP, {
+    publishConfig: {
+        preventedFn: function (e) {
+            var sub = e.target.once('click', function (click) {
+                click.preventDefault();
+            });
+
+            // Make sure to detach the subscription during the next event loop
+            // so this doesn't `preventDefault()` on the wrong click event.
+            setTimeout(function () {
+                sub.detach();
+            //Setting this to `0` causes the detachment to occur before the click
+            //comes in on Android 4.0.3-4.0.4. 100ms seems to be a reliable number here
+            //that works across the board.
+            }, 100);
+        }
+    },
+
+    processArgs: function (args, isDelegate) {
+
+        //if we return for the delegate use case, then the `filter` argument
+        //returns undefined, and we have to get the filter from sub._extra[0] (ugly)
+
+        if (!isDelegate) {
+            var extra = args[3];
+            // remove the extra arguments from the array as specified by
+            // http://yuilibrary.com/yui/docs/event/synths.html
+            args.splice(3,1);
+            return extra;
+        }
+    },
+    /**
+    This function should set up the node that will eventually fire the event.
+
+    Usage:
+
+        node.on('tap', function (e) {
+            Y.log('the node was tapped on');
+        });
+
+    @method on
+    @param {Node} node
+    @param {Array} subscription
+    @param {Boolean} notifier
+    @public
+    @static
+    **/
+    on: function (node, subscription, notifier) {
+        subscription[HANDLES.START] = node.on(EVT_START, this._start, this, node, subscription, notifier);
+    },
+
+    /**
+    Detaches all event subscriptions set up by the event-tap module
+
+    @method detach
+    @param {Node} node
+    @param {Array} subscription
+    @param {Boolean} notifier
+    @public
+    @static
+    **/
+    detach: function (node, subscription, notifier) {
+        detachHandles(subscription);
+    },
+
+    /**
+    Event delegation for the 'tap' event. The delegated event will use a
+    supplied selector or filtering function to test if the event references at least one
+    node that should trigger the subscription callback.
+
+    Usage:
+
+        node.delegate('tap', function (e) {
+            Y.log('li a inside node was tapped.');
+        }, 'li a');
+
+    @method delegate
+    @param {Node} node
+    @param {Array} subscription
+    @param {Boolean} notifier
+    @param {String | Function} filter
+    @public
+    @static
+    **/
+    delegate: function (node, subscription, notifier, filter) {
+        subscription[HANDLES.START] = Y.delegate(EVT_START, function (e) {
+            this._start(e, node, subscription, notifier, true);
+        }, node, filter, this);
+    },
+
+    /**
+    Detaches the delegated event subscriptions set up by the event-tap module.
+    Only used if you use node.delegate(...) instead of node.on(...);
+
+    @method detachDelegate
+    @param {Node} node
+    @param {Array} subscription
+    @param {Boolean} notifier
+    @public
+    @static
+    **/
+    detachDelegate: function (node, subscription, notifier) {
+        detachHandles(subscription);
+    },
+
+    /**
+    Called when the monitor(s) are tapped on, either through touchstart or mousedown.
+
+    @method _start
+    @param {DOMEventFacade} event
+    @param {Node} node
+    @param {Array} subscription
+    @param {Boolean} notifier
+    @param {Boolean} delegate
+    @protected
+    @static
+    **/
+    _start: function (event, node, subscription, notifier, delegate) {
+
+        var context = {
+                canceled: false,
+                eventType: event.type
+            },
+            preventMouse = subscription.preventMouse || false;
+
+        //move ways to quit early to the top.
+        // no right clicks
+        if (event.button && event.button === 3) {
+            return;
+        }
+
+        // for now just support a 1 finger count (later enhance via config)
+        if (event.touches && event.touches.length !== 1) {
+            return;
+        }
+
+        context.node = delegate ? event.currentTarget : node;
+
+        //There is a double check in here to support event simulation tests, in which
+        //event.touches can be undefined when simulating 'touchstart' on touch devices.
+        if (event.touches) {
+          context.startXY = [ event.touches[0].pageX, event.touches[0].pageY ];
+        }
+        else {
+          context.startXY = [ event.pageX, event.pageY ];
+        }
+
+        //If `onTouchStart()` was called by a touch event, set up touch event subscriptions.
+        //Otherwise, set up mouse/pointer event event subscriptions.
+        if (event.touches) {
+
+            subscription[HANDLES.END] = node.once('touchend', this._end, this, node, subscription, notifier, delegate, context);
+            subscription[HANDLES.CANCEL] = node.once('touchcancel', this.detach, this, node, subscription, notifier, delegate, context);
+
+            //Since this is a touch* event, there will be corresponding mouse events
+            //that will be fired. We don't want these events to get picked up and fire
+            //another `tap` event, so we'll set this variable to `true`.
+            subscription.preventMouse = true;
+        }
+
+        //Only add these listeners if preventMouse is `false`
+        //ie: not when touch events have already been subscribed to
+        else if (context.eventType.indexOf('mouse') !== -1 && !preventMouse) {
+            subscription[HANDLES.END] = node.once('mouseup', this._end, this, node, subscription, notifier, delegate, context);
+            subscription[HANDLES.CANCEL] = node.once('mousecancel', this.detach, this, node, subscription, notifier, delegate, context);
+        }
+
+        //If a mouse event comes in after a touch event, it will go in here and
+        //reset preventMouse to `true`.
+        //If a mouse event comes in without a prior touch event, preventMouse will be
+        //false in any case, so this block doesn't do anything.
+        else if (context.eventType.indexOf('mouse') !== -1 && preventMouse) {
+            subscription.preventMouse = false;
+        }
+
+        else if (POINTER_EVENT_TEST.test(context.eventType)) {
+            subscription[HANDLES.END] = node.once(GESTURE_MAP.end, this._end, this, node, subscription, notifier, delegate, context);
+            subscription[HANDLES.CANCEL] = node.once(GESTURE_MAP.cancel, this.detach, this, node, subscription, notifier, delegate, context);
+        }
+
+    },
+
+
+    /**
+    Called when the monitor(s) fires a touchend event (or the mouse equivalent).
+    This method fires the 'tap' event if certain requirements are met.
+
+    @method _end
+    @param {DOMEventFacade} event
+    @param {Node} node
+    @param {Array} subscription
+    @param {Boolean} notifier
+    @param {Boolean} delegate
+    @param {Object} context
+    @protected
+    @static
+    **/
+    _end: function (event, node, subscription, notifier, delegate, context) {
+        var startXY = context.startXY,
+            endXY,
+            clientXY,
+            sensitivity = 15;
+
+        if (subscription._extra && subscription._extra.sensitivity >= 0) {
+            sensitivity = subscription._extra.sensitivity;
+        }
+
+        //There is a double check in here to support event simulation tests, in which
+        //event.touches can be undefined when simulating 'touchstart' on touch devices.
+        if (event.changedTouches) {
+          endXY = [ event.changedTouches[0].pageX, event.changedTouches[0].pageY ];
+          clientXY = [event.changedTouches[0].clientX, event.changedTouches[0].clientY];
+        }
+        else {
+          endXY = [ event.pageX, event.pageY ];
+          clientXY = [event.clientX, event.clientY];
+        }
+
+        // make sure mouse didn't move
+        if (Math.abs(endXY[0] - startXY[0]) <= sensitivity && Math.abs(endXY[1] - startXY[1]) <= sensitivity) {
+
+            event.type = EVT_TAP;
+            event.pageX = endXY[0];
+            event.pageY = endXY[1];
+            event.clientX = clientXY[0];
+            event.clientY = clientXY[1];
+            event.currentTarget = context.node;
+
+            notifier.fire(event);
+        }
+
+        detachHandles(subscription, [HANDLES.END, HANDLES.CANCEL]);
+    }
+});
+
+
+}, '3.18.1', {"requires": ["node-base", "event-base", "event-touch", "event-synthetic"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('dd-gestures', function (Y, NAME) {
+
+
+    /**
+    * This module is the conditional loaded `dd` module to support gesture events
+    * in the event that `dd` is loaded onto a device that support touch based events.
+    *
+    * This module is loaded and over rides 2 key methods on `DD.Drag` and `DD.DDM` to
+    * attach the gesture events. Overrides `DD.Drag._prep` and `DD.DDM._setupListeners`
+    * methods as well as set's the property `DD.Drag.START_EVENT` to `gesturemovestart`
+    * to enable gesture movement instead of mouse based movement.
+    * @module dd
+    * @submodule dd-gestures
+    */
+    Y.log('Drag gesture support loaded', 'info', 'drag-gestures');
+
+    Y.DD.Drag.START_EVENT = 'gesturemovestart';
+
+    Y.DD.Drag.prototype._prep = function() {
+        Y.log('Using DD override prep to attach gesture events', 'info', 'drag-gestures');
+        this._dragThreshMet = false;
+        var node = this.get('node'), DDM = Y.DD.DDM;
+
+        node.addClass(DDM.CSS_PREFIX + '-draggable');
+
+        node.on(Y.DD.Drag.START_EVENT, Y.bind(this._handleMouseDownEvent, this), {
+            minDistance: this.get('clickPixelThresh'),
+            minTime: this.get('clickTimeThresh')
+        });
+
+        node.on('gesturemoveend', Y.bind(this._handleMouseUp, this), { standAlone: true });
+        node.on('dragstart', Y.bind(this._fixDragStart, this));
+
+    };
+
+    var _unprep = Y.DD.Drag.prototype._unprep;
+
+    Y.DD.Drag.prototype._unprep = function() {
+        var node = this.get('node');
+        _unprep.call(this);
+        node.detachAll('gesturemoveend');
+    };
+
+    Y.DD.DDM._setupListeners = function() {
+        var DDM = Y.DD.DDM;
+
+        this._createPG();
+        this._active = true;
+        Y.one(Y.config.doc).on('gesturemove', Y.throttle(Y.bind(DDM._move, DDM), DDM.get('throttleTime')), {
+            standAlone: true
+        });
+    };
+
+
+
+}, '3.18.1', {"requires": ["dd-drag", "event-synthetic", "event-gestures"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('json-stringify', function (Y, NAME) {
+
+/**
+ * Provides Y.JSON.stringify method for converting objects to JSON strings.
+ *
+ * @module json
+ * @submodule json-stringify
+ * @for JSON
+ * @static
+ */
+var COLON     = ':',
+    _JSON     = Y.config.global.JSON;
+
+Y.mix(Y.namespace('JSON'), {
+    /**
+     * Serializes a Date instance as a UTC date string.  Used internally by
+     * stringify.  Override this method if you need Dates serialized in a
+     * different format.
+     *
+     * @method dateToString
+     * @param d {Date} The Date to serialize
+     * @return {String} stringified Date in UTC format YYYY-MM-DDTHH:mm:SSZ
+     * @deprecated Use a replacer function
+     * @static
+     */
+    dateToString: function (d) {
+        function _zeroPad(v) {
+            return v < 10 ? '0' + v : v;
+        }
+
+        return d.getUTCFullYear()           + '-' +
+              _zeroPad(d.getUTCMonth() + 1) + '-' +
+              _zeroPad(d.getUTCDate())      + 'T' +
+              _zeroPad(d.getUTCHours())     + COLON +
+              _zeroPad(d.getUTCMinutes())   + COLON +
+              _zeroPad(d.getUTCSeconds())   + 'Z';
+    },
+
+    /**
+     * <p>Converts an arbitrary value to a JSON string representation.</p>
+     *
+     * <p>Objects with cyclical references will trigger an exception.</p>
+     *
+     * <p>If a whitelist is provided, only matching object keys will be
+     * included.  Alternately, a replacer function may be passed as the
+     * second parameter.  This function is executed on every value in the
+     * input, and its return value will be used in place of the original value.
+     * This is useful to serialize specialized objects or class instances.</p>
+     *
+     * <p>If a positive integer or non-empty string is passed as the third
+     * parameter, the output will be formatted with carriage returns and
+     * indentation for readability.  If a String is passed (such as "\t") it
+     * will be used once for each indentation level.  If a number is passed,
+     * that number of spaces will be used.</p>
+     *
+     * @method stringify
+     * @param o {MIXED} any arbitrary value to convert to JSON string
+     * @param w {Array|Function} (optional) whitelist of acceptable object
+     *                  keys to include, or a replacer function to modify the
+     *                  raw value before serialization
+     * @param ind {Number|String} (optional) indentation character or depth of
+     *                  spaces to format the output.
+     * @return {string} JSON string representation of the input
+     * @static
+     */
+    stringify: function () {
+        return _JSON.stringify.apply(_JSON, arguments);
+    },
+
+    /**
+     * <p>Number of occurrences of a special character within a single call to
+     * stringify that should trigger promotion of that character to a dedicated
+     * preprocess step for future calls.  This is only used in environments
+     * that don't support native JSON, or when useNativeJSONStringify is set to
+     * false.</p>
+     *
+     * <p>So, if set to 50 and an object is passed to stringify that includes
+     * strings containing the special character \x07 more than 50 times,
+     * subsequent calls to stringify will process object strings through a
+     * faster serialization path for \x07 before using the generic, slower,
+     * replacement process for all special characters.</p>
+     *
+     * <p>To prime the preprocessor cache, set this value to 1, then call
+     * <code>Y.JSON.stringify("<em>(all special characters to
+     * cache)</em>");</code>, then return this setting to a more conservative
+     * value.</p>
+     *
+     * <p>Special characters \ " \b \t \n \f \r are already cached.</p>
+     *
+     * @property charCacheThreshold
+     * @static
+     * @default 100
+     * @type {Number}
+     */
+    charCacheThreshold: 100
+});
+
+
+}, '3.18.1', {"requires": ["yui-base"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('event-simulate', function (Y, NAME) {
+
+(function() {
+/**
+ * Simulate user interaction by generating native DOM events.
+ *
+ * @module event-simulate
+ * @requires event
+ */
+
+//shortcuts
+var L   = Y.Lang,
+    win = Y.config.win,
+    isFunction  = L.isFunction,
+    isString    = L.isString,
+    isBoolean   = L.isBoolean,
+    isObject    = L.isObject,
+    isNumber    = L.isNumber,
+
+    //mouse events supported
+    mouseEvents = {
+        click:      1,
+        dblclick:   1,
+        mouseover:  1,
+        mouseout:   1,
+        mousedown:  1,
+        mouseup:    1,
+        mousemove:  1,
+        contextmenu:1
+    },
+
+    pointerEvents = (win && win.PointerEvent) ? {
+        pointerover:  1,
+        pointerout:   1,
+        pointerdown:  1,
+        pointerup:    1,
+        pointermove:  1
+    } : {
+        MSPointerOver:  1,
+        MSPointerOut:   1,
+        MSPointerDown:  1,
+        MSPointerUp:    1,
+        MSPointerMove:  1
+    },
+
+    //key events supported
+    keyEvents   = {
+        keydown:    1,
+        keyup:      1,
+        keypress:   1
+    },
+
+    //HTML events supported
+    uiEvents  = {
+        submit:     1,
+        blur:       1,
+        change:     1,
+        focus:      1,
+        resize:     1,
+        scroll:     1,
+        select:     1
+    },
+
+    //events that bubble by default
+    bubbleEvents = {
+        scroll:     1,
+        resize:     1,
+        reset:      1,
+        submit:     1,
+        change:     1,
+        select:     1,
+        error:      1,
+        abort:      1
+    },
+
+    //touch events supported
+    touchEvents = {
+        touchstart: 1,
+        touchmove: 1,
+        touchend: 1,
+        touchcancel: 1
+    },
+
+    gestureEvents = {
+        gesturestart: 1,
+        gesturechange: 1,
+        gestureend: 1
+    };
+
+//all key, mouse and touch events bubble
+Y.mix(bubbleEvents, mouseEvents);
+Y.mix(bubbleEvents, keyEvents);
+Y.mix(bubbleEvents, touchEvents);
+
+/*
+ * Note: Intentionally not for YUIDoc generation.
+ * Simulates a key event using the given event information to populate
+ * the generated event object. This method does browser-equalizing
+ * calculations to account for differences in the DOM and IE event models
+ * as well as different browser quirks. Note: keydown causes Safari 2.x to
+ * crash.
+ * @method simulateKeyEvent
+ * @private
+ * @static
+ * @param {HTMLElement} target The target of the given event.
+ * @param {String} type The type of event to fire. This can be any one of
+ *      the following: keyup, keydown, and keypress.
+ * @param {Boolean} [bubbles=true] Indicates if the event can be
+ *      bubbled up. DOM Level 3 specifies that all key events bubble by
+ *      default.
+ * @param {Boolean} [cancelable=true] Indicates if the event can be
+ *      canceled using preventDefault(). DOM Level 3 specifies that all
+ *      key events can be cancelled.
+ * @param {Window} [view=window] The view containing the target. This is
+ *      typically the window object.
+ * @param {Boolean} [ctrlKey=false] Indicates if one of the CTRL keys
+ *      is pressed while the event is firing.
+ * @param {Boolean} [altKey=false] Indicates if one of the ALT keys
+ *      is pressed while the event is firing.
+ * @param {Boolean} [shiftKey=false] Indicates if one of the SHIFT keys
+ *      is pressed while the event is firing.
+ * @param {Boolean} [metaKey=false] Indicates if one of the META keys
+ *      is pressed while the event is firing.
+ * @param {Number} [keyCode=0] The code for the key that is in use.
+ * @param {Number} [charCode=0] The Unicode code for the character
+ *      associated with the key being used.
+ */
+function simulateKeyEvent(target /*:HTMLElement*/, type /*:String*/,
+                             bubbles /*:Boolean*/,  cancelable /*:Boolean*/,
+                             view /*:Window*/,
+                             ctrlKey /*:Boolean*/,    altKey /*:Boolean*/,
+                             shiftKey /*:Boolean*/,   metaKey /*:Boolean*/,
+                             keyCode /*:int*/,        charCode /*:int*/) /*:Void*/
+{
+    //check target
+    if (!target){
+        Y.error("simulateKeyEvent(): Invalid target.");
+    }
+
+    //check event type
+    if (isString(type)){
+        type = type.toLowerCase();
+        switch(type){
+            case "textevent": //DOM Level 3
+                type = "keypress";
+                break;
+            case "keyup":
+            case "keydown":
+            case "keypress":
+                break;
+            default:
+                Y.error("simulateKeyEvent(): Event type '" + type + "' not supported.");
+        }
+    } else {
+        Y.error("simulateKeyEvent(): Event type must be a string.");
+    }
+
+    //setup default values
+    if (!isBoolean(bubbles)){
+        bubbles = true; //all key events bubble
+    }
+    if (!isBoolean(cancelable)){
+        cancelable = true; //all key events can be cancelled
+    }
+    if (!isObject(view)){
+        view = Y.config.win; //view is typically window
+    }
+    if (!isBoolean(ctrlKey)){
+        ctrlKey = false;
+    }
+    if (!isBoolean(altKey)){
+        altKey = false;
+    }
+    if (!isBoolean(shiftKey)){
+        shiftKey = false;
+    }
+    if (!isBoolean(metaKey)){
+        metaKey = false;
+    }
+    if (!isNumber(keyCode)){
+        keyCode = 0;
+    }
+    if (!isNumber(charCode)){
+        charCode = 0;
+    }
+
+    //try to create a mouse event
+    var customEvent /*:MouseEvent*/ = null;
+
+    //check for DOM-compliant browsers first
+    if (isFunction(Y.config.doc.createEvent)){
+
+        try {
+
+            //try to create key event
+            customEvent = Y.config.doc.createEvent("KeyEvents");
+
+            /*
+             * Interesting problem: Firefox implemented a non-standard
+             * version of initKeyEvent() based on DOM Level 2 specs.
+             * Key event was removed from DOM Level 2 and re-introduced
+             * in DOM Level 3 with a different interface. Firefox is the
+             * only browser with any implementation of Key Events, so for
+             * now, assume it's Firefox if the above line doesn't error.
+             */
+            // @TODO: Decipher between Firefox's implementation and a correct one.
+            customEvent.initKeyEvent(type, bubbles, cancelable, view, ctrlKey,
+                altKey, shiftKey, metaKey, keyCode, charCode);
+
+        } catch (ex /*:Error*/){
+
+            /*
+             * If it got here, that means key events aren't officially supported.
+             * Safari/WebKit is a real problem now. WebKit 522 won't let you
+             * set keyCode, charCode, or other properties if you use a
+             * UIEvent, so we first must try to create a generic event. The
+             * fun part is that this will throw an error on Safari 2.x. The
+             * end result is that we need another try...catch statement just to
+             * deal with this mess.
+             */
+            try {
+
+                //try to create generic event - will fail in Safari 2.x
+                customEvent = Y.config.doc.createEvent("Events");
+
+            } catch (uierror /*:Error*/){
+
+                //the above failed, so create a UIEvent for Safari 2.x
+                customEvent = Y.config.doc.createEvent("UIEvents");
+
+            } finally {
+
+                customEvent.initEvent(type, bubbles, cancelable);
+
+                //initialize
+                customEvent.view = view;
+                customEvent.altKey = altKey;
+                customEvent.ctrlKey = ctrlKey;
+                customEvent.shiftKey = shiftKey;
+                customEvent.metaKey = metaKey;
+                customEvent.keyCode = keyCode;
+                customEvent.charCode = charCode;
+
+            }
+
+        }
+
+        //fire the event
+        target.dispatchEvent(customEvent);
+
+    } else if (isObject(Y.config.doc.createEventObject)){ //IE
+
+        //create an IE event object
+        customEvent = Y.config.doc.createEventObject();
+
+        //assign available properties
+        customEvent.bubbles = bubbles;
+        customEvent.cancelable = cancelable;
+        customEvent.view = view;
+        customEvent.ctrlKey = ctrlKey;
+        customEvent.altKey = altKey;
+        customEvent.shiftKey = shiftKey;
+        customEvent.metaKey = metaKey;
+
+        /*
+         * IE doesn't support charCode explicitly. CharCode should
+         * take precedence over any keyCode value for accurate
+         * representation.
+         */
+        customEvent.keyCode = (charCode > 0) ? charCode : keyCode;
+
+        //fire the event
+        target.fireEvent("on" + type, customEvent);
+
+    } else {
+        Y.error("simulateKeyEvent(): No event simulation framework present.");
+    }
+}
+
+/*
+ * Note: Intentionally not for YUIDoc generation.
+ * Simulates a mouse event using the given event information to populate
+ * the generated event object. This method does browser-equalizing
+ * calculations to account for differences in the DOM and IE event models
+ * as well as different browser quirks.
+ * @method simulateMouseEvent
+ * @private
+ * @static
+ * @param {HTMLElement} target The target of the given event.
+ * @param {String} type The type of event to fire. This can be any one of
+ *      the following: click, dblclick, mousedown, mouseup, mouseout,
+ *      mouseover, and mousemove.
+ * @param {Boolean} bubbles (Optional) Indicates if the event can be
+ *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
+ *      default. The default is true.
+ * @param {Boolean} cancelable (Optional) Indicates if the event can be
+ *      canceled using preventDefault(). DOM Level 2 specifies that all
+ *      mouse events except mousemove can be cancelled. The default
+ *      is true for all events except mousemove, for which the default
+ *      is false.
+ * @param {Window} view (Optional) The view containing the target. This is
+ *      typically the window object. The default is window.
+ * @param {Number} detail (Optional) The number of times the mouse button has
+ *      been used. The default value is 1.
+ * @param {Number} screenX (Optional) The x-coordinate on the screen at which
+ *      point the event occured. The default is 0.
+ * @param {Number} screenY (Optional) The y-coordinate on the screen at which
+ *      point the event occured. The default is 0.
+ * @param {Number} clientX (Optional) The x-coordinate on the client at which
+ *      point the event occured. The default is 0.
+ * @param {Number} clientY (Optional) The y-coordinate on the client at which
+ *      point the event occured. The default is 0.
+ * @param {Boolean} ctrlKey (Optional) Indicates if one of the CTRL keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} altKey (Optional) Indicates if one of the ALT keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} shiftKey (Optional) Indicates if one of the SHIFT keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} metaKey (Optional) Indicates if one of the META keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Number} button (Optional) The button being pressed while the event
+ *      is executing. The value should be 0 for the primary mouse button
+ *      (typically the left button), 1 for the terciary mouse button
+ *      (typically the middle button), and 2 for the secondary mouse button
+ *      (typically the right button). The default is 0.
+ * @param {HTMLElement} relatedTarget (Optional) For mouseout events,
+ *      this is the element that the mouse has moved to. For mouseover
+ *      events, this is the element that the mouse has moved from. This
+ *      argument is ignored for all other events. The default is null.
+ */
+function simulateMouseEvent(target /*:HTMLElement*/, type /*:String*/,
+                               bubbles /*:Boolean*/,  cancelable /*:Boolean*/,
+                               view /*:Window*/,        detail /*:int*/,
+                               screenX /*:int*/,        screenY /*:int*/,
+                               clientX /*:int*/,        clientY /*:int*/,
+                               ctrlKey /*:Boolean*/,    altKey /*:Boolean*/,
+                               shiftKey /*:Boolean*/,   metaKey /*:Boolean*/,
+                               button /*:int*/,         relatedTarget /*:HTMLElement*/) /*:Void*/
+{
+    //check target
+    if (!target){
+        Y.error("simulateMouseEvent(): Invalid target.");
+    }
+
+
+    if (isString(type)){
+
+        //make sure it's a supported mouse event or an msPointerEvent.
+        if (!mouseEvents[type.toLowerCase()] && !pointerEvents[type]){
+            Y.error("simulateMouseEvent(): Event type '" + type + "' not supported.");
+        }
+    }
+    else {
+        Y.error("simulateMouseEvent(): Event type must be a string.");
+    }
+
+    //setup default values
+    if (!isBoolean(bubbles)){
+        bubbles = true; //all mouse events bubble
+    }
+    if (!isBoolean(cancelable)){
+        cancelable = (type !== "mousemove"); //mousemove is the only one that can't be cancelled
+    }
+    if (!isObject(view)){
+        view = Y.config.win; //view is typically window
+    }
+    if (!isNumber(detail)){
+        detail = 1;  //number of mouse clicks must be at least one
+    }
+    if (!isNumber(screenX)){
+        screenX = 0;
+    }
+    if (!isNumber(screenY)){
+        screenY = 0;
+    }
+    if (!isNumber(clientX)){
+        clientX = 0;
+    }
+    if (!isNumber(clientY)){
+        clientY = 0;
+    }
+    if (!isBoolean(ctrlKey)){
+        ctrlKey = false;
+    }
+    if (!isBoolean(altKey)){
+        altKey = false;
+    }
+    if (!isBoolean(shiftKey)){
+        shiftKey = false;
+    }
+    if (!isBoolean(metaKey)){
+        metaKey = false;
+    }
+    if (!isNumber(button)){
+        button = 0;
+    }
+
+    relatedTarget = relatedTarget || null;
+
+    //try to create a mouse event
+    var customEvent /*:MouseEvent*/ = null;
+
+    //check for DOM-compliant browsers first
+    if (isFunction(Y.config.doc.createEvent)){
+
+        customEvent = Y.config.doc.createEvent("MouseEvents");
+
+        //Safari 2.x (WebKit 418) still doesn't implement initMouseEvent()
+        if (customEvent.initMouseEvent){
+            customEvent.initMouseEvent(type, bubbles, cancelable, view, detail,
+                                 screenX, screenY, clientX, clientY,
+                                 ctrlKey, altKey, shiftKey, metaKey,
+                                 button, relatedTarget);
+        } else { //Safari
+
+            //the closest thing available in Safari 2.x is UIEvents
+            customEvent = Y.config.doc.createEvent("UIEvents");
+            customEvent.initEvent(type, bubbles, cancelable);
+            customEvent.view = view;
+            customEvent.detail = detail;
+            customEvent.screenX = screenX;
+            customEvent.screenY = screenY;
+            customEvent.clientX = clientX;
+            customEvent.clientY = clientY;
+            customEvent.ctrlKey = ctrlKey;
+            customEvent.altKey = altKey;
+            customEvent.metaKey = metaKey;
+            customEvent.shiftKey = shiftKey;
+            customEvent.button = button;
+            customEvent.relatedTarget = relatedTarget;
+        }
+
+        /*
+         * Check to see if relatedTarget has been assigned. Firefox
+         * versions less than 2.0 don't allow it to be assigned via
+         * initMouseEvent() and the property is readonly after event
+         * creation, so in order to keep YAHOO.util.getRelatedTarget()
+         * working, assign to the IE proprietary toElement property
+         * for mouseout event and fromElement property for mouseover
+         * event.
+         */
+        if (relatedTarget && !customEvent.relatedTarget){
+            if (type === "mouseout"){
+                customEvent.toElement = relatedTarget;
+            } else if (type === "mouseover"){
+                customEvent.fromElement = relatedTarget;
+            }
+        }
+
+        //fire the event
+        target.dispatchEvent(customEvent);
+
+    } else if (isObject(Y.config.doc.createEventObject)){ //IE
+
+        //create an IE event object
+        customEvent = Y.config.doc.createEventObject();
+
+        //assign available properties
+        customEvent.bubbles = bubbles;
+        customEvent.cancelable = cancelable;
+        customEvent.view = view;
+        customEvent.detail = detail;
+        customEvent.screenX = screenX;
+        customEvent.screenY = screenY;
+        customEvent.clientX = clientX;
+        customEvent.clientY = clientY;
+        customEvent.ctrlKey = ctrlKey;
+        customEvent.altKey = altKey;
+        customEvent.metaKey = metaKey;
+        customEvent.shiftKey = shiftKey;
+
+        //fix button property for IE's wacky implementation
+        switch(button){
+            case 0:
+                customEvent.button = 1;
+                break;
+            case 1:
+                customEvent.button = 4;
+                break;
+            case 2:
+                //leave as is
+                break;
+            default:
+                customEvent.button = 0;
+        }
+
+        /*
+         * Have to use relatedTarget because IE won't allow assignment
+         * to toElement or fromElement on generic events. This keeps
+         * YAHOO.util.customEvent.getRelatedTarget() functional.
+         */
+        customEvent.relatedTarget = relatedTarget;
+
+        //fire the event
+        target.fireEvent("on" + type, customEvent);
+
+    } else {
+        Y.error("simulateMouseEvent(): No event simulation framework present.");
+    }
+}
+
+/*
+ * Note: Intentionally not for YUIDoc generation.
+ * Simulates a UI event using the given event information to populate
+ * the generated event object. This method does browser-equalizing
+ * calculations to account for differences in the DOM and IE event models
+ * as well as different browser quirks.
+ * @method simulateHTMLEvent
+ * @private
+ * @static
+ * @param {HTMLElement} target The target of the given event.
+ * @param {String} type The type of event to fire. This can be any one of
+ *      the following: click, dblclick, mousedown, mouseup, mouseout,
+ *      mouseover, and mousemove.
+ * @param {Boolean} bubbles (Optional) Indicates if the event can be
+ *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
+ *      default. The default is true.
+ * @param {Boolean} cancelable (Optional) Indicates if the event can be
+ *      canceled using preventDefault(). DOM Level 2 specifies that all
+ *      mouse events except mousemove can be cancelled. The default
+ *      is true for all events except mousemove, for which the default
+ *      is false.
+ * @param {Window} view (Optional) The view containing the target. This is
+ *      typically the window object. The default is window.
+ * @param {Number} detail (Optional) The number of times the mouse button has
+ *      been used. The default value is 1.
+ */
+function simulateUIEvent(target /*:HTMLElement*/, type /*:String*/,
+                               bubbles /*:Boolean*/,  cancelable /*:Boolean*/,
+                               view /*:Window*/,        detail /*:int*/) /*:Void*/
+{
+
+    //check target
+    if (!target){
+        Y.error("simulateUIEvent(): Invalid target.");
+    }
+
+    //check event type
+    if (isString(type)){
+        type = type.toLowerCase();
+
+        //make sure it's a supported mouse event
+        if (!uiEvents[type]){
+            Y.error("simulateUIEvent(): Event type '" + type + "' not supported.");
+        }
+    } else {
+        Y.error("simulateUIEvent(): Event type must be a string.");
+    }
+
+    //try to create a mouse event
+    var customEvent = null;
+
+
+    //setup default values
+    if (!isBoolean(bubbles)){
+        bubbles = (type in bubbleEvents);  //not all events bubble
+    }
+    if (!isBoolean(cancelable)){
+        cancelable = (type === "submit"); //submit is the only one that can be cancelled
+    }
+    if (!isObject(view)){
+        view = Y.config.win; //view is typically window
+    }
+    if (!isNumber(detail)){
+        detail = 1;  //usually not used but defaulted to this
+    }
+
+    //check for DOM-compliant browsers first
+    if (isFunction(Y.config.doc.createEvent)){
+
+        //just a generic UI Event object is needed
+        customEvent = Y.config.doc.createEvent("UIEvents");
+        customEvent.initUIEvent(type, bubbles, cancelable, view, detail);
+
+        //fire the event
+        target.dispatchEvent(customEvent);
+
+    } else if (isObject(Y.config.doc.createEventObject)){ //IE
+
+        //create an IE event object
+        customEvent = Y.config.doc.createEventObject();
+
+        //assign available properties
+        customEvent.bubbles = bubbles;
+        customEvent.cancelable = cancelable;
+        customEvent.view = view;
+        customEvent.detail = detail;
+
+        //fire the event
+        target.fireEvent("on" + type, customEvent);
+
+    } else {
+        Y.error("simulateUIEvent(): No event simulation framework present.");
+    }
+}
+
+/*
+ * (iOS only) This is for creating native DOM gesture events which only iOS
+ * v2.0+ is supporting.
+ *
+ * @method simulateGestureEvent
+ * @private
+ * @param {HTMLElement} target The target of the given event.
+ * @param {String} type The type of event to fire. This can be any one of
+ *      the following: touchstart, touchmove, touchend, touchcancel.
+ * @param {Boolean} bubbles (Optional) Indicates if the event can be
+ *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
+ *      default. The default is true.
+ * @param {Boolean} cancelable (Optional) Indicates if the event can be
+ *      canceled using preventDefault(). DOM Level 2 specifies that all
+ *      touch events except touchcancel can be cancelled. The default
+ *      is true for all events except touchcancel, for which the default
+ *      is false.
+ * @param {Window} view (Optional) The view containing the target. This is
+ *      typically the window object. The default is window.
+ * @param {Number} detail (Optional) Specifies some detail information about
+ *      the event depending on the type of event.
+ * @param {Number} screenX (Optional) The x-coordinate on the screen at which
+ *      point the event occured. The default is 0.
+ * @param {Number} screenY (Optional) The y-coordinate on the screen at which
+ *      point the event occured. The default is 0.
+ * @param {Number} clientX (Optional) The x-coordinate on the client at which
+ *      point the event occured. The default is 0.
+ * @param {Number} clientY (Optional) The y-coordinate on the client at which
+ *      point the event occured. The default is 0.
+ * @param {Boolean} ctrlKey (Optional) Indicates if one of the CTRL keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} altKey (Optional) Indicates if one of the ALT keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} shiftKey (Optional) Indicates if one of the SHIFT keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} metaKey (Optional) Indicates if one of the META keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Number} scale (iOS v2+ only) The distance between two fingers
+ *      since the start of an event as a multiplier of the initial distance.
+ *      The default value is 1.0.
+ * @param {Number} rotation (iOS v2+ only) The delta rotation since the start
+ *      of an event, in degrees, where clockwise is positive and
+ *      counter-clockwise is negative. The default value is 0.0.
+ */
+function simulateGestureEvent(target, type,
+    bubbles,            // boolean
+    cancelable,         // boolean
+    view,               // DOMWindow
+    detail,             // long
+    screenX, screenY,   // long
+    clientX, clientY,   // long
+    ctrlKey, altKey, shiftKey, metaKey, // boolean
+    scale,              // float
+    rotation            // float
+) {
+    var customEvent;
+
+    if(!Y.UA.ios || Y.UA.ios<2.0) {
+        Y.error("simulateGestureEvent(): Native gesture DOM eventframe is not available in this platform.");
+    }
+
+    // check taget
+    if (!target){
+        Y.error("simulateGestureEvent(): Invalid target.");
+    }
+
+    //check event type
+    if (Y.Lang.isString(type)) {
+        type = type.toLowerCase();
+
+        //make sure it's a supported touch event
+        if (!gestureEvents[type]){
+            Y.error("simulateTouchEvent(): Event type '" + type + "' not supported.");
+        }
+    } else {
+        Y.error("simulateGestureEvent(): Event type must be a string.");
+    }
+
+    // setup default values
+    if (!Y.Lang.isBoolean(bubbles)) { bubbles = true; } // bubble by default
+    if (!Y.Lang.isBoolean(cancelable)) { cancelable = true; }
+    if (!Y.Lang.isObject(view))     { view = Y.config.win; }
+    if (!Y.Lang.isNumber(detail))   { detail = 2; }     // usually not used.
+    if (!Y.Lang.isNumber(screenX))  { screenX = 0; }
+    if (!Y.Lang.isNumber(screenY))  { screenY = 0; }
+    if (!Y.Lang.isNumber(clientX))  { clientX = 0; }
+    if (!Y.Lang.isNumber(clientY))  { clientY = 0; }
+    if (!Y.Lang.isBoolean(ctrlKey)) { ctrlKey = false; }
+    if (!Y.Lang.isBoolean(altKey))  { altKey = false; }
+    if (!Y.Lang.isBoolean(shiftKey)){ shiftKey = false; }
+    if (!Y.Lang.isBoolean(metaKey)) { metaKey = false; }
+
+    if (!Y.Lang.isNumber(scale)){ scale = 1.0; }
+    if (!Y.Lang.isNumber(rotation)){ rotation = 0.0; }
+
+    customEvent = Y.config.doc.createEvent("GestureEvent");
+
+    customEvent.initGestureEvent(type, bubbles, cancelable, view, detail,
+        screenX, screenY, clientX, clientY,
+        ctrlKey, altKey, shiftKey, metaKey,
+        target, scale, rotation);
+
+    target.dispatchEvent(customEvent);
+}
+
+
+/*
+ * @method simulateTouchEvent
+ * @private
+ * @param {HTMLElement} target The target of the given event.
+ * @param {String} type The type of event to fire. This can be any one of
+ *      the following: touchstart, touchmove, touchend, touchcancel.
+ * @param {Boolean} bubbles (Optional) Indicates if the event can be
+ *      bubbled up. DOM Level 2 specifies that all mouse events bubble by
+ *      default. The default is true.
+ * @param {Boolean} cancelable (Optional) Indicates if the event can be
+ *      canceled using preventDefault(). DOM Level 2 specifies that all
+ *      touch events except touchcancel can be cancelled. The default
+ *      is true for all events except touchcancel, for which the default
+ *      is false.
+ * @param {Window} view (Optional) The view containing the target. This is
+ *      typically the window object. The default is window.
+ * @param {Number} detail (Optional) Specifies some detail information about
+ *      the event depending on the type of event.
+ * @param {Number} screenX (Optional) The x-coordinate on the screen at which
+ *      point the event occured. The default is 0.
+ * @param {Number} screenY (Optional) The y-coordinate on the screen at which
+ *      point the event occured. The default is 0.
+ * @param {Number} clientX (Optional) The x-coordinate on the client at which
+ *      point the event occured. The default is 0.
+ * @param {Number} clientY (Optional) The y-coordinate on the client at which
+ *      point the event occured. The default is 0.
+ * @param {Boolean} ctrlKey (Optional) Indicates if one of the CTRL keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} altKey (Optional) Indicates if one of the ALT keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} shiftKey (Optional) Indicates if one of the SHIFT keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {Boolean} metaKey (Optional) Indicates if one of the META keys
+ *      is pressed while the event is firing. The default is false.
+ * @param {TouchList} touches A collection of Touch objects representing
+ *      all touches associated with this event.
+ * @param {TouchList} targetTouches A collection of Touch objects
+ *      representing all touches associated with this target.
+ * @param {TouchList} changedTouches A collection of Touch objects
+ *      representing all touches that changed in this event.
+ * @param {Number} scale (iOS v2+ only) The distance between two fingers
+ *      since the start of an event as a multiplier of the initial distance.
+ *      The default value is 1.0.
+ * @param {Number} rotation (iOS v2+ only) The delta rotation since the start
+ *      of an event, in degrees, where clockwise is positive and
+ *      counter-clockwise is negative. The default value is 0.0.
+ */
+function simulateTouchEvent(target, type,
+    bubbles,            // boolean
+    cancelable,         // boolean
+    view,               // DOMWindow
+    detail,             // long
+    screenX, screenY,   // long
+    clientX, clientY,   // long
+    ctrlKey, altKey, shiftKey, metaKey, // boolean
+    touches,            // TouchList
+    targetTouches,      // TouchList
+    changedTouches,     // TouchList
+    scale,              // float
+    rotation            // float
+) {
+
+    var customEvent;
+
+    // check taget
+    if (!target){
+        Y.error("simulateTouchEvent(): Invalid target.");
+    }
+
+    //check event type
+    if (Y.Lang.isString(type)) {
+        type = type.toLowerCase();
+
+        //make sure it's a supported touch event
+        if (!touchEvents[type]){
+            Y.error("simulateTouchEvent(): Event type '" + type + "' not supported.");
+        }
+    } else {
+        Y.error("simulateTouchEvent(): Event type must be a string.");
+    }
+
+    // note that the caller is responsible to pass appropriate touch objects.
+    // check touch objects
+    // Android(even 4.0) doesn't define TouchList yet
+    /*if(type === 'touchstart' || type === 'touchmove') {
+        if(!touches instanceof TouchList) {
+            Y.error('simulateTouchEvent(): Invalid touches. It must be a TouchList');
+        } else {
+            if(touches.length === 0) {
+                Y.error('simulateTouchEvent(): No touch object found.');
+            }
+        }
+    } else if(type === 'touchend') {
+        if(!changedTouches instanceof TouchList) {
+            Y.error('simulateTouchEvent(): Invalid touches. It must be a TouchList');
+        } else {
+            if(changedTouches.length === 0) {
+                Y.error('simulateTouchEvent(): No touch object found.');
+            }
+        }
+    }*/
+
+    if(type === 'touchstart' || type === 'touchmove') {
+        if(touches.length === 0) {
+            Y.error('simulateTouchEvent(): No touch object in touches');
+        }
+    } else if(type === 'touchend') {
+        if(changedTouches.length === 0) {
+            Y.error('simulateTouchEvent(): No touch object in changedTouches');
+        }
+    }
+
+    // setup default values
+    if (!Y.Lang.isBoolean(bubbles)) { bubbles = true; } // bubble by default.
+    if (!Y.Lang.isBoolean(cancelable)) {
+        cancelable = (type !== "touchcancel"); // touchcancel is not cancelled
+    }
+    if (!Y.Lang.isObject(view))     { view = Y.config.win; }
+    if (!Y.Lang.isNumber(detail))   { detail = 1; } // usually not used. defaulted to # of touch objects.
+    if (!Y.Lang.isNumber(screenX))  { screenX = 0; }
+    if (!Y.Lang.isNumber(screenY))  { screenY = 0; }
+    if (!Y.Lang.isNumber(clientX))  { clientX = 0; }
+    if (!Y.Lang.isNumber(clientY))  { clientY = 0; }
+    if (!Y.Lang.isBoolean(ctrlKey)) { ctrlKey = false; }
+    if (!Y.Lang.isBoolean(altKey))  { altKey = false; }
+    if (!Y.Lang.isBoolean(shiftKey)){ shiftKey = false; }
+    if (!Y.Lang.isBoolean(metaKey)) { metaKey = false; }
+    if (!Y.Lang.isNumber(scale))    { scale = 1.0; }
+    if (!Y.Lang.isNumber(rotation)) { rotation = 0.0; }
+
+
+    //check for DOM-compliant browsers first
+    if (Y.Lang.isFunction(Y.config.doc.createEvent)) {
+        if (Y.UA.android) {
+            /*
+                * Couldn't find android start version that supports touch event.
+                * Assumed supported(btw APIs broken till icecream sandwitch)
+                * from the beginning.
+            */
+            if(Y.UA.android < 4.0) {
+                /*
+                    * Touch APIs are broken in androids older than 4.0. We will use
+                    * simulated touch apis for these versions.
+                    * App developer still can listen for touch events. This events
+                    * will be dispatched with touch event types.
+                    *
+                    * (Note) Used target for the relatedTarget. Need to verify if
+                    * it has a side effect.
+                */
+                customEvent = Y.config.doc.createEvent("MouseEvents");
+                customEvent.initMouseEvent(type, bubbles, cancelable, view, detail,
+                    screenX, screenY, clientX, clientY,
+                    ctrlKey, altKey, shiftKey, metaKey,
+                    0, target);
+
+                customEvent.touches = touches;
+                customEvent.targetTouches = targetTouches;
+                customEvent.changedTouches = changedTouches;
+            } else {
+                customEvent = Y.config.doc.createEvent("TouchEvent");
+
+                // Andoroid isn't compliant W3C initTouchEvent method signature.
+                customEvent.initTouchEvent(touches, targetTouches, changedTouches,
+                    type, view,
+                    screenX, screenY, clientX, clientY,
+                    ctrlKey, altKey, shiftKey, metaKey);
+            }
+        } else if (Y.UA.ios) {
+            if(Y.UA.ios >= 2.0) {
+                customEvent = Y.config.doc.createEvent("TouchEvent");
+
+                // Available iOS 2.0 and later
+                customEvent.initTouchEvent(type, bubbles, cancelable, view, detail,
+                    screenX, screenY, clientX, clientY,
+                    ctrlKey, altKey, shiftKey, metaKey,
+                    touches, targetTouches, changedTouches,
+                    scale, rotation);
+            } else {
+                Y.error('simulateTouchEvent(): No touch event simulation framework present for iOS, '+Y.UA.ios+'.');
+            }
+        } else {
+            Y.error('simulateTouchEvent(): Not supported agent yet, '+Y.UA.userAgent);
+        }
+
+        //fire the event
+        target.dispatchEvent(customEvent);
+    //} else if (Y.Lang.isObject(doc.createEventObject)){ // Windows Mobile/IE, support later
+    } else {
+        Y.error('simulateTouchEvent(): No event simulation framework present.');
+    }
+}
+
+/**
+ * Simulates the event or gesture with the given name on a target.
+ * @param {HTMLElement} target The DOM element that's the target of the event.
+ * @param {String} type The type of event or name of the supported gesture to simulate
+ *      (i.e., "click", "doubletap", "flick").
+ * @param {Object} options (Optional) Extra options to copy onto the event object.
+ *      For gestures, options are used to refine the gesture behavior.
+ * @for Event
+ * @method simulate
+ * @static
+ */
+Y.Event.simulate = function(target, type, options){
+
+    options = options || {};
+
+    if (mouseEvents[type] || pointerEvents[type]){
+        simulateMouseEvent(target, type, options.bubbles,
+            options.cancelable, options.view, options.detail, options.screenX,
+            options.screenY, options.clientX, options.clientY, options.ctrlKey,
+            options.altKey, options.shiftKey, options.metaKey, options.button,
+            options.relatedTarget);
+    } else if (keyEvents[type]){
+        simulateKeyEvent(target, type, options.bubbles,
+            options.cancelable, options.view, options.ctrlKey,
+            options.altKey, options.shiftKey, options.metaKey,
+            options.keyCode, options.charCode);
+    } else if (uiEvents[type]){
+        simulateUIEvent(target, type, options.bubbles,
+            options.cancelable, options.view, options.detail);
+
+    // touch low-level event simulation
+    } else if (touchEvents[type]) {
+        if((Y.config.win && ("ontouchstart" in Y.config.win)) && !(Y.UA.phantomjs) && !(Y.UA.chrome && Y.UA.chrome < 6)) {
+            simulateTouchEvent(target, type,
+                options.bubbles, options.cancelable, options.view, options.detail,
+                options.screenX, options.screenY, options.clientX, options.clientY,
+                options.ctrlKey, options.altKey, options.shiftKey, options.metaKey,
+                options.touches, options.targetTouches, options.changedTouches,
+                options.scale, options.rotation);
+        } else {
+            Y.error("simulate(): Event '" + type + "' can't be simulated. Use gesture-simulate module instead.");
+        }
+
+    // ios gesture low-level event simulation (iOS v2+ only)
+    } else if(Y.UA.ios && Y.UA.ios >= 2.0 && gestureEvents[type]) {
+        simulateGestureEvent(target, type,
+            options.bubbles, options.cancelable, options.view, options.detail,
+            options.screenX, options.screenY, options.clientX, options.clientY,
+            options.ctrlKey, options.altKey, options.shiftKey, options.metaKey,
+            options.scale, options.rotation);
+
+    // anything else
+    } else {
+        Y.error("simulate(): Event '" + type + "' can't be simulated.");
+    }
+};
+
+
+})();
+
+
+
+}, '3.18.1', {"requires": ["event-base"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
 YUI.add('test', function (Y, NAME) {
 
 
@@ -50363,7 +49236,7 @@ YUITest.Object = Y.Object;
 YUITest.Array = Y.Array;
 YUITest.Util = {
     mix: Y.mix,
-    JSON: JSON
+    JSON: Y.JSON
 };
 
 /**
@@ -50672,7 +49545,7 @@ YUITest.TestCase.prototype = {
     @example
     ```
     // using test.resume()
-    JSONp(uri, function (response) {
+    Y.jsonp(uri, function (response) {
         test.resume(function () {
             Y.Assert.isObject(response);
         });
@@ -50680,7 +49553,7 @@ YUITest.TestCase.prototype = {
     test.wait();
 
     // using test.next()
-    JSONp(uri, test.next(function (response) {
+    Y.jsonp(uri, test.next(function (response) {
         Y.Assert.isObject(response);
     }));
     test.wait();
@@ -54204,1961 +53077,4655 @@ Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
 
-YUI.add('event-mousewheel', function (Y, NAME) {
+YUI.add("lang/console_en",function(e){e.Intl.add("console","en",{title:"Log Console",pause:"Pause",clear:"Clear",collapse:"Collapse",expand:"Expand"})},"3.18.1");
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('console', function (Y, NAME) {
 
 /**
- * Adds mousewheel event support
- * @module event
- * @submodule event-mousewheel
+ * Console creates a visualization for messages logged through calls to a YUI
+ * instance's <code>Y.log( message, category, source )</code> method.  The
+ * debug versions of YUI modules will include logging statements to offer some
+ * insight into the steps executed during that module's operation.  Including
+ * log statements in your code will cause those messages to also appear in the
+ * Console.  Use Console to aid in developing your page or application.
+ *
+ * Entry categories &quot;info&quot;, &quot;warn&quot;, and &quot;error&quot;
+ * are also referred to as the log level, and entries are filtered against the
+ * configured logLevel.
+ *
+ * @module console
  */
-var DOM_MOUSE_SCROLL = 'DOMMouseScroll',
-    fixArgs = function(args) {
-        var a = Y.Array(args, 0, true), target;
-        if (Y.UA.gecko) {
-            a[0] = DOM_MOUSE_SCROLL;
-            target = Y.config.win;
-        } else {
-            target = Y.config.doc;
-        }
+var getCN = Y.ClassNameManager.getClassName,
+    CHECKED        = 'checked',
+    CLEAR          = 'clear',
+    CLICK          = 'click',
+    COLLAPSED      = 'collapsed',
+    CONSOLE        = 'console',
+    CONTENT_BOX    = 'contentBox',
+    DISABLED       = 'disabled',
+    ENTRY          = 'entry',
+    ERROR          = 'error',
+    HEIGHT         = 'height',
+    INFO           = 'info',
+    LAST_TIME      = 'lastTime',
+    PAUSE          = 'pause',
+    PAUSED         = 'paused',
+    RESET          = 'reset',
+    START_TIME     = 'startTime',
+    TITLE          = 'title',
+    WARN           = 'warn',
 
-        if (a.length < 3) {
-            a[2] = target;
-        } else {
-            a.splice(2, 0, target);
-        }
+    DOT = '.',
 
-        return a;
-    };
+    C_BUTTON           = getCN(CONSOLE,'button'),
+    C_CHECKBOX         = getCN(CONSOLE,'checkbox'),
+    C_CLEAR            = getCN(CONSOLE,CLEAR),
+    C_COLLAPSE         = getCN(CONSOLE,'collapse'),
+    C_COLLAPSED        = getCN(CONSOLE,COLLAPSED),
+    C_CONSOLE_CONTROLS = getCN(CONSOLE,'controls'),
+    C_CONSOLE_HD       = getCN(CONSOLE,'hd'),
+    C_CONSOLE_BD       = getCN(CONSOLE,'bd'),
+    C_CONSOLE_FT       = getCN(CONSOLE,'ft'),
+    C_CONSOLE_TITLE    = getCN(CONSOLE,TITLE),
+    C_ENTRY            = getCN(CONSOLE,ENTRY),
+    C_ENTRY_CAT        = getCN(CONSOLE,ENTRY,'cat'),
+    C_ENTRY_CONTENT    = getCN(CONSOLE,ENTRY,'content'),
+    C_ENTRY_META       = getCN(CONSOLE,ENTRY,'meta'),
+    C_ENTRY_SRC        = getCN(CONSOLE,ENTRY,'src'),
+    C_ENTRY_TIME       = getCN(CONSOLE,ENTRY,'time'),
+    C_PAUSE            = getCN(CONSOLE,PAUSE),
+    C_PAUSE_LABEL      = getCN(CONSOLE,PAUSE,'label'),
+
+    RE_INLINE_SOURCE = /^(\S+)\s/,
+    RE_AMP = /&(?!#?[a-z0-9]+;)/g,
+    RE_GT  = />/g,
+    RE_LT  = /</g,
+
+    ESC_AMP = '&#38;',
+    ESC_GT  = '&#62;',
+    ESC_LT  = '&#60;',
+
+    ENTRY_TEMPLATE_STR =
+        '<div class="{entry_class} {cat_class} {src_class}">'+
+            '<p class="{entry_meta_class}">'+
+                '<span class="{entry_src_class}">'+
+                    '{sourceAndDetail}'+
+                '</span>'+
+                '<span class="{entry_cat_class}">'+
+                    '{category}</span>'+
+                '<span class="{entry_time_class}">'+
+                    ' {totalTime}ms (+{elapsedTime}) {localTime}'+
+                '</span>'+
+            '</p>'+
+            '<pre class="{entry_content_class}">{message}</pre>'+
+        '</div>',
+
+    L = Y.Lang,
+    create     = Y.Node.create,
+    isNumber   = L.isNumber,
+    isString   = L.isString,
+    merge      = Y.merge,
+    substitute = Y.Lang.sub;
 
 /**
- * Mousewheel event.  This listener is automatically attached to the
- * correct target, so one should not be supplied.  Mouse wheel
- * direction and velocity is stored in the 'wheelDelta' field.
- * @event mousewheel
- * @param type {string} 'mousewheel'
- * @param fn {function} the callback to execute
- * @param context optional context object
- * @param args 0..n additional arguments to provide to the listener.
- * @return {EventHandle} the detach handle
- * @for YUI
- */
-Y.Env.evt.plugins.mousewheel = {
-    on: function() {
-        return Y.Event._attach(fixArgs(arguments));
+A basic console that displays messages logged throughout your application.
+
+@class Console
+@constructor
+@extends Widget
+@param [config] {Object} Object literal specifying widget configuration properties.
+**/
+function Console() {
+    Console.superclass.constructor.apply(this,arguments);
+}
+
+Y.Console = Y.extend(Console, Y.Widget,
+
+// Y.Console prototype
+{
+    /**
+     * Category to prefix all event subscriptions to allow for ease of detach
+     * during destroy.
+     *
+     * @property _evtCat
+     * @type string
+     * @protected
+     */
+    _evtCat : null,
+
+    /**
+     * Reference to the Node instance containing the header contents.
+     *
+     * @property _head
+     * @type Node
+     * @default null
+     * @protected
+     */
+    _head    : null,
+
+    /**
+     * Reference to the Node instance that will house the console messages.
+     *
+     * @property _body
+     * @type Node
+     * @default null
+     * @protected
+     */
+    _body    : null,
+
+    /**
+     * Reference to the Node instance containing the footer contents.
+     *
+     * @property _foot
+     * @type Node
+     * @default null
+     * @protected
+     */
+    _foot    : null,
+
+    /**
+     * Holds the object API returned from <code>Y.later</code> for the print
+     * loop interval.
+     *
+     * @property _printLoop
+     * @type Object
+     * @default null
+     * @protected
+     */
+    _printLoop : null,
+
+    /**
+     * Array of normalized message objects awaiting printing.
+     *
+     * @property buffer
+     * @type Array
+     * @default null
+     * @protected
+     */
+    buffer   : null,
+
+    /**
+     * Wrapper for <code>Y.log</code>.
+     *
+     * @method log
+     * @param arg* {MIXED} (all arguments passed through to <code>Y.log</code>)
+     * @chainable
+     */
+    log : function () {
+        Y.log.apply(Y,arguments);
+
+        return this;
     },
 
-    detach: function() {
-        return Y.Event.detach.apply(Y.Event, fixArgs(arguments));
-    }
-};
+    /**
+     * Clear the console of messages and flush the buffer of pending messages.
+     *
+     * @method clearConsole
+     * @chainable
+     */
+    clearConsole : function () {
+        // TODO: clear event listeners from console contents
+        this._body.empty();
 
+        this._cancelPrintLoop();
 
-}, '3.18.1', {"requires": ["node-base"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+        this.buffer = [];
 
-YUI.add('event-mouseenter', function (Y, NAME) {
+        return this;
+    },
 
-/**
- * <p>Adds subscription and delegation support for mouseenter and mouseleave
- * events.  Unlike mouseover and mouseout, these events aren't fired from child
- * elements of a subscribed node.</p>
- *
- * <p>This avoids receiving three mouseover notifications from a setup like</p>
- *
- * <pre><code>div#container > p > a[href]</code></pre>
- *
- * <p>where</p>
- *
- * <pre><code>Y.one('#container').on('mouseover', callback)</code></pre>
- *
- * <p>When the mouse moves over the link, one mouseover event is fired from
- * #container, then when the mouse moves over the p, another mouseover event is
- * fired and bubbles to #container, causing a second notification, and finally
- * when the mouse moves over the link, a third mouseover event is fired and
- * bubbles to #container for a third notification.</p>
- *
- * <p>By contrast, using mouseenter instead of mouseover, the callback would be
- * executed only once when the mouse moves over #container.</p>
- *
- * @module event
- * @submodule event-mouseenter
- */
+    /**
+     * Clears the console and resets internal timers.
+     *
+     * @method reset
+     * @chainable
+     */
+    reset : function () {
+        this.fire(RESET);
 
-var domEventProxies = Y.Env.evt.dom_wrappers,
-    contains = Y.DOM.contains,
-    toArray = Y.Array,
-    noop = function () {},
+        return this;
+    },
 
-    config = {
-        proxyType: "mouseover",
-        relProperty: "fromElement",
+    /**
+     * Collapses the body and footer.
+     *
+     * @method collapse
+     * @chainable
+     */
+    collapse : function () {
+        this.set(COLLAPSED, true);
 
-        _notify: function (e, property, notifier) {
-            var el = this._node,
-                related = e.relatedTarget || e[property];
+        return this;
+    },
 
-            if (el !== related && !contains(el, related)) {
-                notifier.fire(new Y.DOMEventFacade(e, el,
-                    domEventProxies['event:' + Y.stamp(el) + e.type]));
-            }
-        },
+    /**
+     * Expands the body and footer if collapsed.
+     *
+     * @method expand
+     * @chainable
+     */
+    expand : function () {
+        this.set(COLLAPSED, false);
 
-        on: function (node, sub, notifier) {
-            var el = Y.Node.getDOMNode(node),
-                args = [
-                    this.proxyType,
-                    this._notify,
-                    el,
-                    null,
-                    this.relProperty,
-                    notifier];
+        return this;
+    },
 
-            sub.handle = Y.Event._attach(args, { facade: false });
-            // node.on(this.proxyType, notify, null, notifier);
-        },
+    /**
+     * Outputs buffered messages to the console UI.  This is typically called
+     * from a scheduled interval until the buffer is empty (referred to as the
+     * print loop).  The number of buffered messages output to the Console is
+     * limited to the number provided as an argument.  If no limit is passed,
+     * all buffered messages are rendered.
+     *
+     * @method printBuffer
+     * @param limit {Number} (optional) max number of buffered entries to write
+     * @chainable
+     */
+    printBuffer: function (limit) {
+        var messages    = this.buffer,
+            debug       = Y.config.debug,
+            entries     = [],
+            consoleLimit= this.get('consoleLimit'),
+            newestOnTop = this.get('newestOnTop'),
+            anchor      = newestOnTop ? this._body.get('firstChild') : null,
+            i;
 
-        detach: function (node, sub) {
-            sub.handle.detach();
-        },
-
-        delegate: function (node, sub, notifier, filter) {
-            var el = Y.Node.getDOMNode(node),
-                args = [
-                    this.proxyType,
-                    noop,
-                    el,
-                    null,
-                    notifier
-                ];
-
-            sub.handle = Y.Event._attach(args, { facade: false });
-            sub.handle.sub.filter = filter;
-            sub.handle.sub.relProperty = this.relProperty;
-            sub.handle.sub._notify = this._filterNotify;
-        },
-
-        _filterNotify: function (thisObj, args, ce) {
-            args = args.slice();
-            if (this.args) {
-                args.push.apply(args, this.args);
-            }
-
-            var currentTarget = Y.delegate._applyFilter(this.filter, args, ce),
-                related = args[0].relatedTarget || args[0][this.relProperty],
-                e, i, len, ret, ct;
-
-            if (currentTarget) {
-                currentTarget = toArray(currentTarget);
-
-                for (i = 0, len = currentTarget.length && (!e || !e.stopped); i < len; ++i) {
-                    ct = currentTarget[0];
-                    if (!contains(ct, related)) {
-                        if (!e) {
-                            e = new Y.DOMEventFacade(args[0], ct, ce);
-                            e.container = Y.one(ce.el);
-                        }
-                        e.currentTarget = Y.one(ct);
-
-                        // TODO: where is notifier? args? this.notifier?
-                        ret = args[1].fire(e);
-
-                        if (ret === false) {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return ret;
-        },
-
-        detachDelegate: function (node, sub) {
-            sub.handle.detach();
+        if (messages.length > consoleLimit) {
+            messages.splice(0, messages.length - consoleLimit);
         }
-    };
 
-Y.Event.define("mouseenter", config, true);
-Y.Event.define("mouseleave", Y.merge(config, {
-    proxyType: "mouseout",
-    relProperty: "toElement"
-}), true);
+        limit = Math.min(messages.length, (limit || messages.length));
 
+        // turn off logging system
+        Y.config.debug = false;
 
-}, '3.18.1', {"requires": ["event-synthetic"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+        if (!this.get(PAUSED) && this.get('rendered')) {
 
-YUI.add('event-key', function (Y, NAME) {
-
-/**
- * Functionality to listen for one or more specific key combinations.
- * @module event
- * @submodule event-key
- */
-
-var ALT      = "+alt",
-    CTRL     = "+ctrl",
-    META     = "+meta",
-    SHIFT    = "+shift",
-
-    trim     = Y.Lang.trim,
-
-    eventDef = {
-        KEY_MAP: {
-            enter    : 13,
-            space    : 32,
-            esc      : 27,
-            backspace: 8,
-            tab      : 9,
-            pageup   : 33,
-            pagedown : 34
-        },
-
-        _typeRE: /^(up|down|press):/,
-        _keysRE: /^(?:up|down|press):|\+(alt|ctrl|meta|shift)/g,
-
-        processArgs: function (args) {
-            var spec = args.splice(3,1)[0],
-                mods = Y.Array.hash(spec.match(/\+(?:alt|ctrl|meta|shift)\b/g) || []),
-                config = {
-                    type: this._typeRE.test(spec) ? RegExp.$1 : null,
-                    mods: mods,
-                    keys: null
-                },
-                // strip type and modifiers from spec, leaving only keyCodes
-                bits = spec.replace(this._keysRE, ''),
-                chr, uc, lc, i;
-
-            if (bits) {
-                bits = bits.split(',');
-
-                config.keys = {};
-
-                // FIXME: need to support '65,esc' => keypress, keydown
-                for (i = bits.length - 1; i >= 0; --i) {
-                    chr = trim(bits[i]);
-
-                    // catch sloppy filters, trailing commas, etc 'a,,'
-                    if (!chr) {
-                        continue;
-                    }
-
-                    // non-numerics are single characters or key names
-                    if (+chr == chr) {
-                        config.keys[chr] = mods;
-                    } else {
-                        lc = chr.toLowerCase();
-
-                        if (this.KEY_MAP[lc]) {
-                            config.keys[this.KEY_MAP[lc]] = mods;
-                            // FIXME: '65,enter' defaults keydown for both
-                            if (!config.type) {
-                                config.type = "down"; // safest
-                            }
-                        } else {
-                            // FIXME: Character mapping only works for keypress
-                            // events. Otherwise, it uses String.fromCharCode()
-                            // from the keyCode, which is wrong.
-                            chr = chr.charAt(0);
-                            uc  = chr.toUpperCase();
-
-                            if (mods["+shift"]) {
-                                chr = uc;
-                            }
-
-                            // FIXME: stupid assumption that
-                            // the keycode of the lower case == the
-                            // charCode of the upper case
-                            // a (key:65,char:97), A (key:65,char:65)
-                            config.keys[chr.charCodeAt(0)] =
-                                (chr === uc) ?
-                                    // upper case chars get +shift free
-                                    Y.merge(mods, { "+shift": true }) :
-                                    mods;
-                        }
-                    }
-                }
+            for (i = 0; i < limit && messages.length; ++i) {
+                entries[i] = this._createEntryHTML(messages.shift());
             }
 
-            if (!config.type) {
-                config.type = "press";
+            if (!messages.length) {
+                this._cancelPrintLoop();
             }
 
-            return config;
-        },
-
-        on: function (node, sub, notifier, filter) {
-            var spec   = sub._extra,
-                type   = "key" + spec.type,
-                keys   = spec.keys,
-                method = (filter) ? "delegate" : "on";
-
-            // Note: without specifying any keyCodes, this becomes a
-            // horribly inefficient alias for 'keydown' (et al), but I
-            // can't abort this subscription for a simple
-            // Y.on('keypress', ...);
-            // Please use keyCodes or just subscribe directly to keydown,
-            // keyup, or keypress
-            sub._detach = node[method](type, function (e) {
-                var key = keys ? keys[e.which] : spec.mods;
-
-                if (key &&
-                    (!key[ALT]   || (key[ALT]   && e.altKey)) &&
-                    (!key[CTRL]  || (key[CTRL]  && e.ctrlKey)) &&
-                    (!key[META]  || (key[META]  && e.metaKey)) &&
-                    (!key[SHIFT] || (key[SHIFT] && e.shiftKey)))
-                {
-                    notifier.fire(e);
+            if (entries.length) {
+                if (newestOnTop) {
+                    entries.reverse();
                 }
-            }, filter);
-        },
 
-        detach: function (node, sub, notifier) {
-            sub._detach.detach();
+                this._body.insertBefore(create(entries.join('')), anchor);
+
+                if (this.get('scrollIntoView')) {
+                    this.scrollToLatest();
+                }
+
+                this._trimOldEntries();
+            }
         }
-    };
 
-eventDef.delegate = eventDef.on;
-eventDef.detachDelegate = eventDef.detach;
+        // restore logging system
+        Y.config.debug = debug;
 
-/**
- * <p>Add a key listener.  The listener will only be notified if the
- * keystroke detected meets the supplied specification.  The
- * specification is a string that is defined as:</p>
- *
- * <dl>
- *   <dt>spec</dt>
- *   <dd><code>[{type}:]{code}[,{code}]*</code></dd>
- *   <dt>type</dt>
- *   <dd><code>"down", "up", or "press"</code></dd>
- *   <dt>code</dt>
- *   <dd><code>{keyCode|character|keyName}[+{modifier}]*</code></dd>
- *   <dt>modifier</dt>
- *   <dd><code>"shift", "ctrl", "alt", or "meta"</code></dd>
- *   <dt>keyName</dt>
- *   <dd><code>"enter", "space", "backspace", "esc", "tab", "pageup", or "pagedown"</code></dd>
- * </dl>
- *
- * <p>Examples:</p>
- * <ul>
- *   <li><code>Y.on("key", callback, "press:12,65+shift+ctrl", "#my-input");</code></li>
- *   <li><code>Y.delegate("key", preventSubmit, "#forms", "enter", "input[type=text]");</code></li>
- *   <li><code>Y.one("doc").on("key", viNav, "j,k,l,;");</code></li>
- * </ul>
- *
- * @event key
- * @for YUI
- * @param type {string} 'key'
- * @param fn {function} the function to execute
- * @param id {string|HTMLElement|collection} the element(s) to bind
- * @param spec {string} the keyCode and modifier specification
- * @param o optional context object
- * @param args 0..n additional arguments to provide to the listener.
- * @return {Event.Handle} the detach handle
- */
-Y.Event.define('key', eventDef, true);
+        return this;
+    },
 
 
-}, '3.18.1', {"requires": ["event-synthetic"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
+    /**
+     * Constructor code.  Set up the buffer and entry template, publish
+     * internal events, and subscribe to the configured logEvent.
+     *
+     * @method initializer
+     * @protected
+     */
+    initializer : function () {
+        this._evtCat = Y.stamp(this) + '|';
 
-YUI.add('event-hover', function (Y, NAME) {
+        this.buffer = [];
 
-/**
- * Adds support for a "hover" event.  The event provides a convenience wrapper
- * for subscribing separately to mouseenter and mouseleave.  The signature for
- * subscribing to the event is</p>
- *
- * <pre><code>node.on("hover", overFn, outFn);
- * node.delegate("hover", overFn, outFn, ".filterSelector");
- * Y.on("hover", overFn, outFn, ".targetSelector");
- * Y.delegate("hover", overFn, outFn, "#container", ".filterSelector");
- * </code></pre>
- *
- * <p>Additionally, for compatibility with a more typical subscription
- * signature, the following are also supported:</p>
- *
- * <pre><code>Y.on("hover", overFn, ".targetSelector", outFn);
- * Y.delegate("hover", overFn, "#container", outFn, ".filterSelector");
- * </code></pre>
- *
- * @module event
- * @submodule event-hover
- */
-var isFunction = Y.Lang.isFunction,
-    noop = function () {},
-    conf = {
-        processArgs: function (args) {
-            // Y.delegate('hover', over, out, '#container', '.filter')
-            // comes in as ['hover', over, out, '#container', '.filter'], but
-            // node.delegate('hover', over, out, '.filter')
-            // comes in as ['hover', over, containerEl, out, '.filter']
-            var i = isFunction(args[2]) ? 2 : 3;
-
-            return (isFunction(args[i])) ? args.splice(i,1)[0] : noop;
-        },
-
-        on: function (node, sub, notifier, filter) {
-            var args = (sub.args) ? sub.args.slice() : [];
-
-            args.unshift(null);
-
-            sub._detach = node[(filter) ? "delegate" : "on"]({
-                mouseenter: function (e) {
-                    e.phase = 'over';
-                    notifier.fire(e);
-                },
-                mouseleave: function (e) {
-                    var thisObj = sub.context || this;
-
-                    args[0] = e;
-
-                    e.type = 'hover';
-                    e.phase = 'out';
-                    sub._extra.apply(thisObj, args);
-                }
-            }, filter);
-        },
-
-        detach: function (node, sub, notifier) {
-            sub._detach.detach();
-        }
-    };
-
-conf.delegate = conf.on;
-conf.detachDelegate = conf.detach;
-
-Y.Event.define("hover", conf);
-
-
-}, '3.18.1', {"requires": ["event-mouseenter"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('event-outside', function (Y, NAME) {
-
-/**
- * Outside events are synthetic DOM events that fire when a corresponding native
- * or synthetic DOM event occurs outside a bound element.
- *
- * The following outside events are pre-defined by this module:
- * <ul>
- *   <li>blur</li>
- *   <li>change</li>
- *   <li>click</li>
- *   <li>dblclick</li>
- *   <li>focus</li>
- *   <li>keydown</li>
- *   <li>keypress</li>
- *   <li>keyup</li>
- *   <li>mousedown</li>
- *   <li>mousemove</li>
- *   <li>mouseout</li>
- *   <li>mouseover</li>
- *   <li>mouseup</li>
- *   <li>select</li>
- *   <li>submit</li>
- * </ul>
- *
- * Define new outside events with
- * <code>Y.Event.defineOutside(eventType);</code>.
- * By default, the created synthetic event name will be the name of the event
- * with "outside" appended (e.g. "click" becomes "clickoutside"). If you want
- * a different name for the created Event, pass it as a second argument like so:
- * <code>Y.Event.defineOutside(eventType, "yonderclick")</code>.
- *
- * This module was contributed by Brett Stimmerman, promoted from his
- * gallery-outside-events module at
- * http://yuilibrary.com/gallery/show/outside-events
- *
- * @module event
- * @submodule event-outside
- * @author brettstimmerman
- * @since 3.4.0
- */
-
-// Outside events are pre-defined for each of these native DOM events
-var nativeEvents = [
-        'blur', 'change', 'click', 'dblclick', 'focus', 'keydown', 'keypress',
-        'keyup', 'mousedown', 'mousemove', 'mouseout', 'mouseover', 'mouseup',
-        'select', 'submit'
-    ];
-
-/**
- * Defines a new outside event to correspond with the given DOM event.
- *
- * By default, the created synthetic event name will be the name of the event
- * with "outside" appended (e.g. "click" becomes "clickoutside"). If you want
- * a different name for the created Event, pass it as a second argument like so:
- * <code>Y.Event.defineOutside(eventType, "yonderclick")</code>.
- *
- * @method defineOutside
- * @param {String} event DOM event
- * @param {String} name (optional) custom outside event name
- * @static
- * @for Event
- */
-Y.Event.defineOutside = function (event, name) {
-    name = name || (event + 'outside');
-
-    var config = {
-
-        on: function (node, sub, notifier) {
-            sub.handle = Y.one('doc').on(event, function(e) {
-                if (this.isOutside(node, e.target)) {
-                    e.currentTarget = node;
-                    notifier.fire(e);
-                }
-            }, this);
-        },
-
-        detach: function (node, sub, notifier) {
-            sub.handle.detach();
-        },
-
-        delegate: function (node, sub, notifier, filter) {
-            sub.handle = Y.one('doc').delegate(event, function (e) {
-                if (this.isOutside(node, e.target)) {
-                    notifier.fire(e);
-                }
-            }, filter, this);
-        },
-
-        isOutside: function (node, target) {
-            return target !== node && !target.ancestor(function (p) {
-                    return p === node;
-                });
-        }
-    };
-    config.detachDelegate = config.detach;
-
-    Y.Event.define(name, config);
-};
-
-// Define outside events for some common native DOM events
-Y.Array.each(nativeEvents, function (event) {
-    Y.Event.defineOutside(event);
-});
-
-
-}, '3.18.1', {"requires": ["event-synthetic"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('event-touch', function (Y, NAME) {
-
-/**
-Adds touch event facade normalization properties (touches, changedTouches, targetTouches etc.) to the DOM event facade. Adds
-touch events to the DOM events whitelist.
-
-@example
-    YUI().use('event-touch', function (Y) {
-        Y.one('#myDiv').on('touchstart', function(e) {
-            ...
-        });
-    });
-@module event
-@submodule event-touch
- */
-var SCALE = "scale",
-    ROTATION = "rotation",
-    IDENTIFIER = "identifier",
-    win = Y.config.win,
-    GESTURE_MAP = {};
-
-/**
- * Adds touch event facade normalization properties to the DOM event facade
- *
- * @method _touch
- * @for DOMEventFacade
- * @private
- * @param ev {Event} the DOM event
- * @param currentTarget {HTMLElement} the element the listener was attached to
- * @param wrapper {CustomEvent} the custom event wrapper for this DOM event
- */
-Y.DOMEventFacade.prototype._touch = function(e, currentTarget, wrapper) {
-
-    var i,l, etCached, et,touchCache;
-
-
-    if (e.touches) {
+        this.get('logSource').on(this._evtCat +
+            this.get('logEvent'),Y.bind("_onLogEvent",this));
 
         /**
-         * Array of individual touch events for touch points that are still in
-         * contact with the touch surface.
+         * Transfers a received message to the print loop buffer.  Default
+         * behavior defined in _defEntryFn.
          *
-         * @property touches
-         * @type {DOMEventFacade[]}
+         * @event entry
+         * @param event {EventFacade} An Event Facade object with the following attribute specific properties added:
+         *  <dl>
+         *      <dt>message</dt>
+         *          <dd>The message data normalized into an object literal (see _normalizeMessage)</dd>
+         *  </dl>
+         * @preventable _defEntryFn
          */
-        this.touches = [];
-        touchCache = {};
-
-        for (i = 0, l = e.touches.length; i < l; ++i) {
-            et = e.touches[i];
-            touchCache[Y.stamp(et)] = this.touches[i] = new Y.DOMEventFacade(et, currentTarget, wrapper);
-        }
-    }
-
-    if (e.targetTouches) {
+        this.publish(ENTRY, { defaultFn: this._defEntryFn });
 
         /**
-         * Array of individual touch events still in contact with the touch
-         * surface and whose `touchstart` event occurred inside the same taregt
-         * element as the current target element.
+         * Triggers the reset behavior via the default logic in _defResetFn.
          *
-         * @property targetTouches
-         * @type {DOMEventFacade[]}
+         * @event reset
+         * @param event {EventFacade} Event Facade object
+         * @preventable _defResetFn
          */
-        this.targetTouches = [];
+        this.publish(RESET, { defaultFn: this._defResetFn });
 
-        for (i = 0, l = e.targetTouches.length; i < l; ++i) {
-            et = e.targetTouches[i];
-            etCached = touchCache && touchCache[Y.stamp(et, true)];
-
-            this.targetTouches[i] = etCached || new Y.DOMEventFacade(et, currentTarget, wrapper);
-
-        }
-    }
-
-    if (e.changedTouches) {
-
-        /**
-        An array of event-specific touch events.
-
-        For `touchstart`, the touch points that became active with the current
-        event.
-
-        For `touchmove`, the touch points that have changed since the last
-        event.
-
-        For `touchend`, the touch points that have been removed from the touch
-        surface.
-
-        @property changedTouches
-        @type {DOMEventFacade[]}
-        **/
-        this.changedTouches = [];
-
-        for (i = 0, l = e.changedTouches.length; i < l; ++i) {
-            et = e.changedTouches[i];
-            etCached = touchCache && touchCache[Y.stamp(et, true)];
-
-            this.changedTouches[i] = etCached || new Y.DOMEventFacade(et, currentTarget, wrapper);
-
-        }
-    }
-
-    if (SCALE in e) {
-        this[SCALE] = e[SCALE];
-    }
-
-    if (ROTATION in e) {
-        this[ROTATION] = e[ROTATION];
-    }
-
-    if (IDENTIFIER in e) {
-        this[IDENTIFIER] = e[IDENTIFIER];
-    }
-};
-
-//Adding MSPointer events to whitelisted DOM Events. MSPointer event payloads
-//have the same properties as mouse events.
-if (Y.Node.DOM_EVENTS) {
-    Y.mix(Y.Node.DOM_EVENTS, {
-        touchstart:1,
-        touchmove:1,
-        touchend:1,
-        touchcancel:1,
-        gesturestart:1,
-        gesturechange:1,
-        gestureend:1,
-        MSPointerDown:1,
-        MSPointerUp:1,
-        MSPointerMove:1,
-        MSPointerCancel:1,
-        pointerdown:1,
-        pointerup:1,
-        pointermove:1,
-        pointercancel:1
-    });
-}
-
-//Add properties to Y.EVENT.GESTURE_MAP based on feature detection.
-if ((win && ("ontouchstart" in win)) && !(Y.UA.chrome && Y.UA.chrome < 6)) {
-    GESTURE_MAP.start = ["touchstart", "mousedown"];
-    GESTURE_MAP.end = ["touchend", "mouseup"];
-    GESTURE_MAP.move = ["touchmove", "mousemove"];
-    GESTURE_MAP.cancel = ["touchcancel", "mousecancel"];
-}
-
-else if (win && win.PointerEvent) {
-    GESTURE_MAP.start = "pointerdown";
-    GESTURE_MAP.end = "pointerup";
-    GESTURE_MAP.move = "pointermove";
-    GESTURE_MAP.cancel = "pointercancel";
-}
-
-else if (win && ("msPointerEnabled" in win.navigator)) {
-    GESTURE_MAP.start = "MSPointerDown";
-    GESTURE_MAP.end = "MSPointerUp";
-    GESTURE_MAP.move = "MSPointerMove";
-    GESTURE_MAP.cancel = "MSPointerCancel";
-}
-
-else {
-    GESTURE_MAP.start = "mousedown";
-    GESTURE_MAP.end = "mouseup";
-    GESTURE_MAP.move = "mousemove";
-    GESTURE_MAP.cancel = "mousecancel";
-}
-
-/**
- * A object literal with keys "start", "end", and "move". The value for each key is a
- * string representing the event for that environment. For touch environments, the respective
- * values are "touchstart", "touchend" and "touchmove". Mouse and MSPointer environments are also
- * supported via feature detection.
- *
- * @property _GESTURE_MAP
- * @type Object
- * @static
- */
-Y.Event._GESTURE_MAP = GESTURE_MAP;
-
-
-}, '3.18.1', {"requires": ["node-base"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('event-move', function (Y, NAME) {
-
-/**
- * Adds lower level support for "gesturemovestart", "gesturemove" and "gesturemoveend" events, which can be used to create drag/drop
- * interactions which work across touch and mouse input devices. They correspond to "touchstart", "touchmove" and "touchend" on a touch input
- * device, and "mousedown", "mousemove", "mouseup" on a mouse based input device.
- *
- * <p>Documentation for the gesturemove triplet of events can be found on the <a href="../classes/YUI.html#event_gesturemove">YUI</a> global,
- * along with the other supported events.</p>
-
- @example
-
-     YUI().use('event-move', function (Y) {
-         Y.one('#myNode').on('gesturemovestart', function (e) {
-         });
-         Y.one('#myNode').on('gesturemove', function (e) {
-         });
-         Y.one('#myNode').on('gesturemoveend', function (e) {
-         });
-     });
-
- * @module event-gestures
- * @submodule event-move
- */
-
-
- var GESTURE_MAP = Y.Event._GESTURE_MAP,
-     EVENT = {
-         start: GESTURE_MAP.start,
-         end: GESTURE_MAP.end,
-         move: GESTURE_MAP.move
-     },
-    START = "start",
-    MOVE = "move",
-    END = "end",
-
-    GESTURE_MOVE = "gesture" + MOVE,
-    GESTURE_MOVE_END = GESTURE_MOVE + END,
-    GESTURE_MOVE_START = GESTURE_MOVE + START,
-
-    _MOVE_START_HANDLE = "_msh",
-    _MOVE_HANDLE = "_mh",
-    _MOVE_END_HANDLE = "_meh",
-
-    _DEL_MOVE_START_HANDLE = "_dmsh",
-    _DEL_MOVE_HANDLE = "_dmh",
-    _DEL_MOVE_END_HANDLE = "_dmeh",
-
-    _MOVE_START = "_ms",
-    _MOVE = "_m",
-
-    MIN_TIME = "minTime",
-    MIN_DISTANCE = "minDistance",
-    PREVENT_DEFAULT = "preventDefault",
-    BUTTON = "button",
-    OWNER_DOCUMENT = "ownerDocument",
-
-    CURRENT_TARGET = "currentTarget",
-    TARGET = "target",
-
-    NODE_TYPE = "nodeType",
-    _getTouchAction = function(win) {
-        var touchAction;
-        if(win) {
-            if("PointerEvent" in win) {
-                touchAction = "touchAction";
-            } else if("msPointerEnabled" in win.navigator) {
-                touchAction = "msTouchAction";
-            }
-        }
-        return touchAction;
-    },
-    TOUCH_ACTION = _getTouchAction(Y.config.win),
-    SUPPORTS_POINTER = (TOUCH_ACTION === "msTouchAction" || TOUCH_ACTION === "touchAction"),
-    MS_TOUCH_ACTION_COUNT = 'msTouchActionCount',
-    MS_INIT_TOUCH_ACTION = 'msInitTouchAction',
-
-    _defArgsProcessor = function(se, args, delegate) {
-        var iConfig = (delegate) ? 4 : 3,
-            config = (args.length > iConfig) ? Y.merge(args.splice(iConfig,1)[0]) : {};
-
-        if (!(PREVENT_DEFAULT in config)) {
-            config[PREVENT_DEFAULT] = se.PREVENT_DEFAULT;
-        }
-
-        return config;
+        this.after('rendered', this._schedulePrint);
     },
 
-    _getRoot = function(node, subscriber) {
-        return subscriber._extra.root || (node.get(NODE_TYPE) === 9) ? node : node.get(OWNER_DOCUMENT);
+    /**
+     * Tears down the instance, flushing event subscriptions and purging the UI.
+     *
+     * @method destructor
+     * @protected
+     */
+    destructor : function () {
+        var bb = this.get('boundingBox');
+
+        this._cancelPrintLoop();
+
+        this.get('logSource').detach(this._evtCat + '*');
+
+        bb.purge(true);
     },
 
-    //Checks to see if the node is the document, and if it is, returns the documentElement.
-    _checkDocumentElem = function(node) {
-        var elem = node.getDOMNode();
-        if (node.compareTo(Y.config.doc) && elem.documentElement) {
-            return elem.documentElement;
-        }
-        else {
-            return false;
+    /**
+     * Generate the Console UI.
+     *
+     * @method renderUI
+     * @protected
+     */
+    renderUI : function () {
+        this._initHead();
+        this._initBody();
+        this._initFoot();
+
+        // Apply positioning to the bounding box if appropriate
+        var style = this.get('style');
+        if (style !== 'block') {
+            this.get('boundingBox').addClass(this.getClassName(style));
         }
     },
 
-    _normTouchFacade = function(touchFacade, touch, params) {
-        touchFacade.pageX = touch.pageX;
-        touchFacade.pageY = touch.pageY;
-        touchFacade.screenX = touch.screenX;
-        touchFacade.screenY = touch.screenY;
-        touchFacade.clientX = touch.clientX;
-        touchFacade.clientY = touch.clientY;
-        touchFacade[TARGET] = touchFacade[TARGET] || touch[TARGET];
-        touchFacade[CURRENT_TARGET] = touchFacade[CURRENT_TARGET] || touch[CURRENT_TARGET];
-
-        touchFacade[BUTTON] = (params && params[BUTTON]) || 1; // default to left (left as per vendors, not W3C which is 0)
+    /**
+     * Sync the UI state to the current attribute state.
+     *
+     * @method syncUI
+     */
+    syncUI : function () {
+        this._uiUpdatePaused(this.get(PAUSED));
+        this._uiUpdateCollapsed(this.get(COLLAPSED));
+        this._uiSetHeight(this.get(HEIGHT));
     },
 
-    /*
-    In IE10 touch mode, gestures will not work properly unless the -ms-touch-action CSS property is set to something other than 'auto'. Read http://msdn.microsoft.com/en-us/library/windows/apps/hh767313.aspx for more info. To get around this, we set -ms-touch-action: none which is the same as e.preventDefault() on touch environments. This tells the browser to fire DOM events for all touch events, and not perform any default behavior.
+    /**
+     * Set up event listeners to wire up the UI to the internal state.
+     *
+     * @method bindUI
+     * @protected
+     */
+    bindUI : function () {
+        this.get(CONTENT_BOX).one('button.'+C_COLLAPSE).
+            on(CLICK,this._onCollapseClick,this);
 
-    The user can over-ride this by setting a more lenient -ms-touch-action property on a node (such as pan-x, pan-y, etc.) via CSS when subscribing to the 'gesturemovestart' event.
-    */
-    _setTouchActions = function (node) {
-        var elem = node.getDOMNode(),
-            num = node.getData(MS_TOUCH_ACTION_COUNT);
+        this.get(CONTENT_BOX).one('input[type=checkbox].'+C_PAUSE).
+            on(CLICK,this._onPauseClick,this);
 
-        //Checks to see if msTouchAction is supported.
-        if (SUPPORTS_POINTER) {
-            if (!num) {
-                num = 0;
-                node.setData(MS_INIT_TOUCH_ACTION, elem.style[TOUCH_ACTION]);
-            }
-            elem.style[TOUCH_ACTION] = Y.Event._DEFAULT_TOUCH_ACTION;
-            num++;
-            node.setData(MS_TOUCH_ACTION_COUNT, num);
-        }
+        this.get(CONTENT_BOX).one('button.'+C_CLEAR).
+            on(CLICK,this._onClearClick,this);
+
+        // Attribute changes
+        this.after(this._evtCat + 'stringsChange',
+            this._afterStringsChange);
+        this.after(this._evtCat + 'pausedChange',
+            this._afterPausedChange);
+        this.after(this._evtCat + 'consoleLimitChange',
+            this._afterConsoleLimitChange);
+        this.after(this._evtCat + 'collapsedChange',
+            this._afterCollapsedChange);
     },
 
-    /*
-    Resets the element's -ms-touch-action property back to the original value, This is called on detach() and detachDelegate().
-    */
-    _unsetTouchActions = function (node) {
-        var elem = node.getDOMNode(),
-            num = node.getData(MS_TOUCH_ACTION_COUNT),
-            initTouchAction = node.getData(MS_INIT_TOUCH_ACTION);
 
-        if (SUPPORTS_POINTER) {
-            num--;
-            node.setData(MS_TOUCH_ACTION_COUNT, num);
-            if (num === 0 && elem.style[TOUCH_ACTION] !== initTouchAction) {
-                elem.style[TOUCH_ACTION] = initTouchAction;
-            }
-        }
+    /**
+     * Create the DOM structure for the header elements.
+     *
+     * @method _initHead
+     * @protected
+     */
+    _initHead : function () {
+        var cb   = this.get(CONTENT_BOX),
+            info = merge(Console.CHROME_CLASSES, {
+                        str_collapse : this.get('strings.collapse'),
+                        str_title : this.get('strings.title')
+                    });
+
+        this._head = create(substitute(Console.HEADER_TEMPLATE,info));
+
+        cb.insertBefore(this._head,cb.get('firstChild'));
     },
 
-    _prevent = function(e, preventDefault) {
-        if (preventDefault) {
-            // preventDefault is a boolean or a function
-            if (!preventDefault.call || preventDefault(e)) {
-                e.preventDefault();
-            }
-        }
+    /**
+     * Create the DOM structure for the console body&#8212;where messages are
+     * rendered.
+     *
+     * @method _initBody
+     * @protected
+     */
+    _initBody : function () {
+        this._body = create(substitute(
+                            Console.BODY_TEMPLATE,
+                            Console.CHROME_CLASSES));
+
+        this.get(CONTENT_BOX).appendChild(this._body);
     },
 
-    define = Y.Event.define;
-    Y.Event._DEFAULT_TOUCH_ACTION = 'none';
-
-/**
- * Sets up a "gesturemovestart" event, that is fired on touch devices in response to a single finger "touchstart",
- * and on mouse based devices in response to a "mousedown". The subscriber can specify the minimum time
- * and distance thresholds which should be crossed before the "gesturemovestart" is fired and for the mouse,
- * which button should initiate a "gesturemovestart". This event can also be listened for using node.delegate().
- *
- * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
- * however if you want to pass the context and arguments as additional signature arguments to on/delegate,
- * you need to provide a null value for the configuration object, e.g: <code>node.on("gesturemovestart", fn, null, context, arg1, arg2, arg3)</code></p>
- *
- * @event gesturemovestart
- * @for YUI
- * @param type {string} "gesturemovestart"
- * @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event (mousedown or touchstart.touches[0]) which contains position co-ordinates.
- * @param cfg {Object} Optional. An object which specifies:
- *
- * <dl>
- * <dt>minDistance (defaults to 0)</dt>
- * <dd>The minimum distance threshold which should be crossed before the gesturemovestart is fired</dd>
- * <dt>minTime (defaults to 0)</dt>
- * <dd>The minimum time threshold for which the finger/mouse should be help down before the gesturemovestart is fired</dd>
- * <dt>button (no default)</dt>
- * <dd>In the case of a mouse input device, if the event should only be fired for a specific mouse button.</dd>
- * <dt>preventDefault (defaults to false)</dt>
- * <dd>Can be set to true/false to prevent default behavior as soon as the touchstart or mousedown is received (that is before minTime or minDistance thresholds are crossed, and so before the gesturemovestart listener is notified) so that things like text selection and context popups (on touch devices) can be
- * prevented. This property can also be set to a function, which returns true or false, based on the event facade passed to it (for example, DragDrop can determine if the target is a valid handle or not before preventing default).</dd>
- * </dl>
- *
- * @return {EventHandle} the detach handle
- */
-
-define(GESTURE_MOVE_START, {
-
-    on: function (node, subscriber, ce) {
-
-        //Set -ms-touch-action on IE10 and set preventDefault to true
-        if (!_checkDocumentElem(node)) {
-            _setTouchActions(node);
-        }
-        
-        subscriber[_MOVE_START_HANDLE] = node.on(EVENT[START],
-            this._onStart,
-            this,
-            node,
-            subscriber,
-            ce);
-    },
-
-    delegate : function(node, subscriber, ce, filter) {
-
-        var se = this;
-
-        subscriber[_DEL_MOVE_START_HANDLE] = node.delegate(EVENT[START],
-            function(e) {
-                se._onStart(e, node, subscriber, ce, true);
-            },
-            filter);
-    },
-
-    detachDelegate : function(node, subscriber, ce, filter) {
-        var handle = subscriber[_DEL_MOVE_START_HANDLE];
-
-        if (handle) {
-            handle.detach();
-            subscriber[_DEL_MOVE_START_HANDLE] = null;
-        }
-
-        if (!_checkDocumentElem(node)) {
-            _unsetTouchActions(node);
-        }
-    },
-
-    detach: function (node, subscriber, ce) {
-        var startHandle = subscriber[_MOVE_START_HANDLE];
-
-        if (startHandle) {
-            startHandle.detach();
-            subscriber[_MOVE_START_HANDLE] = null;
-        }
-
-        if (!_checkDocumentElem(node)) {
-            _unsetTouchActions(node);
-        }
-    },
-
-    processArgs : function(args, delegate) {
-        var params = _defArgsProcessor(this, args, delegate);
-
-        if (!(MIN_TIME in params)) {
-            params[MIN_TIME] = this.MIN_TIME;
-        }
-
-        if (!(MIN_DISTANCE in params)) {
-            params[MIN_DISTANCE] = this.MIN_DISTANCE;
-        }
-
-        return params;
-    },
-
-    _onStart : function(e, node, subscriber, ce, delegate) {
-
-        if (delegate) {
-            node = e[CURRENT_TARGET];
-        }
-
-        var params = subscriber._extra,
-            fireStart = true,
-            minTime = params[MIN_TIME],
-            minDistance = params[MIN_DISTANCE],
-            button = params.button,
-            preventDefault = params[PREVENT_DEFAULT],
-            root = _getRoot(node, subscriber),
-            startXY;
-
-        if (e.touches) {
-            if (e.touches.length === 1) {
-                _normTouchFacade(e, e.touches[0], params);
-            } else {
-                fireStart = false;
-            }
-        } else {
-            fireStart = (button === undefined) || (button === e.button);
-        }
-
-
-        if (fireStart) {
-
-            _prevent(e, preventDefault);
-
-            if (minTime === 0 || minDistance === 0) {
-                this._start(e, node, ce, params);
-
-            } else {
-
-                startXY = [e.pageX, e.pageY];
-
-                if (minTime > 0) {
-
-
-                    params._ht = Y.later(minTime, this, this._start, [e, node, ce, params]);
-
-                    params._hme = root.on(EVENT[END], Y.bind(function() {
-                        this._cancel(params);
-                    }, this));
-                }
-
-                if (minDistance > 0) {
-
-
-                    params._hm = root.on(EVENT[MOVE], Y.bind(function(em) {
-                        if (Math.abs(em.pageX - startXY[0]) > minDistance || Math.abs(em.pageY - startXY[1]) > minDistance) {
-                            this._start(e, node, ce, params);
-                        }
-                    }, this));
-                }
-            }
-        }
-    },
-
-    _cancel : function(params) {
-        if (params._ht) {
-            params._ht.cancel();
-            params._ht = null;
-        }
-        if (params._hme) {
-            params._hme.detach();
-            params._hme = null;
-        }
-        if (params._hm) {
-            params._hm.detach();
-            params._hm = null;
-        }
-    },
-
-    _start : function(e, node, ce, params) {
-
-        if (params) {
-            this._cancel(params);
-        }
-
-        e.type = GESTURE_MOVE_START;
-
-
-        node.setData(_MOVE_START, e);
-        ce.fire(e);
-    },
-
-    MIN_TIME : 0,
-    MIN_DISTANCE : 0,
-    PREVENT_DEFAULT : false
-});
-
-/**
- * Sets up a "gesturemove" event, that is fired on touch devices in response to a single finger "touchmove",
- * and on mouse based devices in response to a "mousemove".
- *
- * <p>By default this event is only fired when the same node
- * has received a "gesturemovestart" event. The subscriber can set standAlone to true, in the configuration properties,
- * if they want to listen for this event without an initial "gesturemovestart".</p>
- *
- * <p>By default this event sets up it's internal "touchmove" and "mousemove" DOM listeners on the document element. The subscriber
- * can set the root configuration property, to specify which node to attach DOM listeners to, if different from the document.</p>
- *
- * <p>This event can also be listened for using node.delegate().</p>
- *
- * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
- * however if you want to pass the context and arguments as additional signature arguments to on/delegate,
- * you need to provide a null value for the configuration object, e.g: <code>node.on("gesturemove", fn, null, context, arg1, arg2, arg3)</code></p>
- *
- * @event gesturemove
- * @for YUI
- * @param type {string} "gesturemove"
- * @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event (mousemove or touchmove.touches[0]) which contains position co-ordinates.
- * @param cfg {Object} Optional. An object which specifies:
- * <dl>
- * <dt>standAlone (defaults to false)</dt>
- * <dd>true, if the subscriber should be notified even if a "gesturemovestart" has not occured on the same node.</dd>
- * <dt>root (defaults to document)</dt>
- * <dd>The node to which the internal DOM listeners should be attached.</dd>
- * <dt>preventDefault (defaults to false)</dt>
- * <dd>Can be set to true/false to prevent default behavior as soon as the touchmove or mousemove is received. As with gesturemovestart, can also be set to function which returns true/false based on the event facade passed to it.</dd>
- * </dl>
- *
- * @return {EventHandle} the detach handle
- */
-define(GESTURE_MOVE, {
-
-    on : function (node, subscriber, ce) {
-        var moveHandle,
-            root;
-
-        // if the passed node is NOT the document itself, modify the ms-pointer
-        // behavior to prevent scrolling, highlighting, etc.
-        if (!_checkDocumentElem(node)) {
-            _setTouchActions(node);         
-        }
-
-        root = _getRoot(node, subscriber, EVENT[MOVE]);
-
-        moveHandle = root.on(EVENT[MOVE],
-            this._onMove,
-            this,
-            node,
-            subscriber,
-            ce);
-
-        subscriber[_MOVE_HANDLE] = moveHandle;
-
-    },
-
-    delegate : function(node, subscriber, ce, filter) {
-
-        var se = this;
-
-        subscriber[_DEL_MOVE_HANDLE] = node.delegate(EVENT[MOVE],
-            function(e) {
-                se._onMove(e, node, subscriber, ce, true);
-            },
-            filter);
-    },
-
-    detach : function (node, subscriber, ce) {
-        var moveHandle = subscriber[_MOVE_HANDLE];
-
-        if (moveHandle) {
-            moveHandle.detach();
-            subscriber[_MOVE_HANDLE] = null;
-        }
-
-        if (!_checkDocumentElem(node)) {
-            _unsetTouchActions(node);
-        }
-    },
-
-    detachDelegate : function(node, subscriber, ce, filter) {
-        var handle = subscriber[_DEL_MOVE_HANDLE];
-
-        if (handle) {
-            handle.detach();
-            subscriber[_DEL_MOVE_HANDLE] = null;
-        }
-
-        if (!_checkDocumentElem(node)) {
-            _unsetTouchActions(node);
-        }
-
-    },
-
-    processArgs : function(args, delegate) {
-        return _defArgsProcessor(this, args, delegate);
-    },
-
-    _onMove : function(e, node, subscriber, ce, delegate) {
-
-        if (delegate) {
-            node = e[CURRENT_TARGET];
-        }
-
-        var fireMove = subscriber._extra.standAlone || node.getData(_MOVE_START),
-            preventDefault = subscriber._extra.preventDefault;
-
-
-        if (fireMove) {
-
-            if (e.touches) {
-                if (e.touches.length === 1) {
-                    _normTouchFacade(e, e.touches[0]);
-                } else {
-                    fireMove = false;
-                }
-            }
-
-            if (fireMove) {
-
-                _prevent(e, preventDefault);
-
-
-                e.type = GESTURE_MOVE;
-                ce.fire(e);
-            }
-        }
-    },
-
-    PREVENT_DEFAULT : false
-});
-
-/**
- * Sets up a "gesturemoveend" event, that is fired on touch devices in response to a single finger "touchend",
- * and on mouse based devices in response to a "mouseup".
- *
- * <p>By default this event is only fired when the same node
- * has received a "gesturemove" or "gesturemovestart" event. The subscriber can set standAlone to true, in the configuration properties,
- * if they want to listen for this event without a preceding "gesturemovestart" or "gesturemove".</p>
- *
- * <p>By default this event sets up it's internal "touchend" and "mouseup" DOM listeners on the document element. The subscriber
- * can set the root configuration property, to specify which node to attach DOM listeners to, if different from the document.</p>
- *
- * <p>This event can also be listened for using node.delegate().</p>
- *
- * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
- * however if you want to pass the context and arguments as additional signature arguments to on/delegate,
- * you need to provide a null value for the configuration object, e.g: <code>node.on("gesturemoveend", fn, null, context, arg1, arg2, arg3)</code></p>
- *
- *
- * @event gesturemoveend
- * @for YUI
- * @param type {string} "gesturemoveend"
- * @param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event (mouseup or touchend.changedTouches[0]).
- * @param cfg {Object} Optional. An object which specifies:
- * <dl>
- * <dt>standAlone (defaults to false)</dt>
- * <dd>true, if the subscriber should be notified even if a "gesturemovestart" or "gesturemove" has not occured on the same node.</dd>
- * <dt>root (defaults to document)</dt>
- * <dd>The node to which the internal DOM listeners should be attached.</dd>
- * <dt>preventDefault (defaults to false)</dt>
- * <dd>Can be set to true/false to prevent default behavior as soon as the touchend or mouseup is received. As with gesturemovestart, can also be set to function which returns true/false based on the event facade passed to it.</dd>
- * </dl>
- *
- * @return {EventHandle} the detach handle
- */
-define(GESTURE_MOVE_END, {
-
-    on : function (node, subscriber, ce) {
-        var endHandle,
-            root;
-
-        if (!_checkDocumentElem(node)) {
-            _setTouchActions(node);
-        }
-        
-        root = _getRoot(node, subscriber);
-        endHandle = root.on(EVENT[END],
-            this._onEnd,
-            this,
-            node,
-            subscriber,
-            ce);
-
-        subscriber[_MOVE_END_HANDLE] = endHandle;
-    },
-
-    delegate : function(node, subscriber, ce, filter) {
-
-        var se = this;
-
-        subscriber[_DEL_MOVE_END_HANDLE] = node.delegate(EVENT[END],
-            function(e) {
-                se._onEnd(e, node, subscriber, ce, true);
-            },
-            filter);
-    },
-
-    detachDelegate : function(node, subscriber, ce, filter) {
-        var handle = subscriber[_DEL_MOVE_END_HANDLE];
-
-        if (handle) {
-            handle.detach();
-            subscriber[_DEL_MOVE_END_HANDLE] = null;
-        }
-
-        if (!_checkDocumentElem(node)) {
-            _unsetTouchActions(node);
-        }
-
-    },
-
-    detach : function (node, subscriber, ce) {
-        var endHandle = subscriber[_MOVE_END_HANDLE];
-
-        if (endHandle) {
-            endHandle.detach();
-            subscriber[_MOVE_END_HANDLE] = null;
-        }
-
-        if (!_checkDocumentElem(node)) {
-            _unsetTouchActions(node);
-        }
-    },
-
-    processArgs : function(args, delegate) {
-        return _defArgsProcessor(this, args, delegate);
-    },
-
-    _onEnd : function(e, node, subscriber, ce, delegate) {
-
-        if (delegate) {
-            node = e[CURRENT_TARGET];
-        }
-
-        var fireMoveEnd = subscriber._extra.standAlone || node.getData(_MOVE) || node.getData(_MOVE_START),
-            preventDefault = subscriber._extra.preventDefault;
-
-        if (fireMoveEnd) {
-
-            if (e.changedTouches) {
-                if (e.changedTouches.length === 1) {
-                    _normTouchFacade(e, e.changedTouches[0]);
-                } else {
-                    fireMoveEnd = false;
-                }
-            }
-
-            if (fireMoveEnd) {
-
-                _prevent(e, preventDefault);
-
-                e.type = GESTURE_MOVE_END;
-                ce.fire(e);
-
-                node.clearData(_MOVE_START);
-                node.clearData(_MOVE);
-            }
-        }
-    },
-
-    PREVENT_DEFAULT : false
-});
-
-
-}, '3.18.1', {"requires": ["node-base", "event-touch", "event-synthetic"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('event-flick', function (Y, NAME) {
-
-/**
- * The gestures module provides gesture events such as "flick", which normalize user interactions
- * across touch and mouse or pointer based input devices. This layer can be used by application developers
- * to build input device agnostic components which behave the same in response to either touch or mouse based
- * interaction.
- *
- * <p>Documentation for events added by this module can be found in the event document for the <a href="../classes/YUI.html#events">YUI</a> global.</p>
- *
- *
- @example
-
-     YUI().use('event-flick', function (Y) {
-         Y.one('#myNode').on('flick', function (e) {
-         });
-     });
-
- *
- * @module event-gestures
- */
-
-/**
- * Adds support for a "flick" event, which is fired at the end of a touch or mouse based flick gesture, and provides
- * velocity of the flick, along with distance and time information.
- *
- * <p>Documentation for the flick event can be found on the <a href="../classes/YUI.html#event_flick">YUI</a> global,
- * along with the other supported events.</p>
- *
- * @module event-gestures
- * @submodule event-flick
- */
-var GESTURE_MAP = Y.Event._GESTURE_MAP,
-    EVENT = {
-        start: GESTURE_MAP.start,
-        end: GESTURE_MAP.end,
-        move: GESTURE_MAP.move
-    },
-    START = "start",
-    END = "end",
-    MOVE = "move",
-
-    OWNER_DOCUMENT = "ownerDocument",
-    MIN_VELOCITY = "minVelocity",
-    MIN_DISTANCE = "minDistance",
-    PREVENT_DEFAULT = "preventDefault",
-
-    _FLICK_START = "_fs",
-    _FLICK_START_HANDLE = "_fsh",
-    _FLICK_END_HANDLE = "_feh",
-    _FLICK_MOVE_HANDLE = "_fmh",
-
-    NODE_TYPE = "nodeType";
-
-/**
- * Sets up a "flick" event, that is fired whenever the user initiates a flick gesture on the node
- * where the listener is attached. The subscriber can specify a minimum distance or velocity for
- * which the event is to be fired. The subscriber can also specify if there is a particular axis which
- * they are interested in - "x" or "y". If no axis is specified, the axis along which there was most distance
- * covered is used.
- *
- * <p>It is recommended that you use Y.bind to set up context and additional arguments for your event handler,
- * however if you want to pass the context and arguments as additional signature arguments to "on",
- * you need to provide a null value for the configuration object, e.g: <code>node.on("flick", fn, null, context, arg1, arg2, arg3)</code></p>
- *
- * @event flick
- * @for YUI
- * @param type {string} "flick"
- * @param fn {function} The method the event invokes. It receives an event facade with an e.flick object containing the flick related properties: e.flick.time, e.flick.distance, e.flick.velocity and e.flick.axis, e.flick.start.
- * @param cfg {Object} Optional. An object which specifies any of the following:
- * <dl>
- * <dt>minDistance (in pixels, defaults to 10)</dt>
- * <dd>The minimum distance between start and end points, which would qualify the gesture as a flick.</dd>
- * <dt>minVelocity (in pixels/ms, defaults to 0)</dt>
- * <dd>The minimum velocity which would qualify the gesture as a flick.</dd>
- * <dt>preventDefault (defaults to false)</dt>
- * <dd>Can be set to true/false to prevent default behavior as soon as the touchstart/touchend or mousedown/mouseup is received so that things like scrolling or text selection can be
- * prevented. This property can also be set to a function, which returns true or false, based on the event facade passed to it.</dd>
- * <dt>axis (no default)</dt>
- * <dd>Can be set to "x" or "y" if you want to constrain the flick velocity and distance to a single axis. If not
- * defined, the axis along which the maximum distance was covered is used.</dd>
- * </dl>
- * @return {EventHandle} the detach handle
- */
-
-Y.Event.define('flick', {
-
-    on: function (node, subscriber, ce) {
-
-        var startHandle = node.on(EVENT[START],
-            this._onStart,
-            this,
-            node,
-            subscriber,
-            ce);
-
-        subscriber[_FLICK_START_HANDLE] = startHandle;
-    },
-
-    detach: function (node, subscriber, ce) {
-
-        var startHandle = subscriber[_FLICK_START_HANDLE],
-            endHandle = subscriber[_FLICK_END_HANDLE];
-
-        if (startHandle) {
-            startHandle.detach();
-            subscriber[_FLICK_START_HANDLE] = null;
-        }
-
-        if (endHandle) {
-            endHandle.detach();
-            subscriber[_FLICK_END_HANDLE] = null;
-        }
-    },
-
-    processArgs: function(args) {
-        var params = (args.length > 3) ? Y.merge(args.splice(3, 1)[0]) : {};
-
-        if (!(MIN_VELOCITY in params)) {
-            params[MIN_VELOCITY] = this.MIN_VELOCITY;
-        }
-
-        if (!(MIN_DISTANCE in params)) {
-            params[MIN_DISTANCE] = this.MIN_DISTANCE;
-        }
-
-        if (!(PREVENT_DEFAULT in params)) {
-            params[PREVENT_DEFAULT] = this.PREVENT_DEFAULT;
-        }
-
-        return params;
-    },
-
-    _onStart: function(e, node, subscriber, ce) {
-
-        var start = true, // always true for mouse
-            endHandle,
-            moveHandle,
-            doc,
-            preventDefault = subscriber._extra.preventDefault,
-            origE = e;
-
-        if (e.touches) {
-            start = (e.touches.length === 1);
-            e = e.touches[0];
-        }
-
-        if (start) {
-
-            if (preventDefault) {
-                // preventDefault is a boolean or function
-                if (!preventDefault.call || preventDefault(e)) {
-                    origE.preventDefault();
-                }
-            }
-
-            e.flick = {
-                time : new Date().getTime()
-            };
-
-            subscriber[_FLICK_START] = e;
-
-            endHandle = subscriber[_FLICK_END_HANDLE];
-
-            doc = (node.get(NODE_TYPE) === 9) ? node : node.get(OWNER_DOCUMENT);
-            if (!endHandle) {
-                endHandle = doc.on(EVENT[END], Y.bind(this._onEnd, this), null, node, subscriber, ce);
-                subscriber[_FLICK_END_HANDLE] = endHandle;
-            }
-
-            subscriber[_FLICK_MOVE_HANDLE] = doc.once(EVENT[MOVE], Y.bind(this._onMove, this), null, node, subscriber, ce);
-        }
-    },
-
-    _onMove: function(e, node, subscriber, ce) {
-        var start = subscriber[_FLICK_START];
-
-        // Start timing from first move.
-        if (start && start.flick) {
-            start.flick.time = new Date().getTime();
-        }
-    },
-
-    _onEnd: function(e, node, subscriber, ce) {
-
-        var endTime = new Date().getTime(),
-            start = subscriber[_FLICK_START],
-            valid = !!start,
-            endEvent = e,
-            startTime,
-            time,
-            preventDefault,
-            params,
-            xyDistance,
-            distance,
-            velocity,
-            axis,
-            moveHandle = subscriber[_FLICK_MOVE_HANDLE];
-
-        if (moveHandle) {
-            moveHandle.detach();
-            delete subscriber[_FLICK_MOVE_HANDLE];
-        }
-
-        if (valid) {
-
-            if (e.changedTouches) {
-                if (e.changedTouches.length === 1 && e.touches.length === 0) {
-                    endEvent = e.changedTouches[0];
-                } else {
-                    valid = false;
-                }
-            }
-
-            if (valid) {
-
-                params = subscriber._extra;
-                preventDefault = params[PREVENT_DEFAULT];
-
-                if (preventDefault) {
-                    // preventDefault is a boolean or function
-                    if (!preventDefault.call || preventDefault(e)) {
-                        e.preventDefault();
-                    }
-                }
-
-                startTime = start.flick.time;
-                endTime = new Date().getTime();
-                time = endTime - startTime;
-
-                xyDistance = [
-                    endEvent.pageX - start.pageX,
-                    endEvent.pageY - start.pageY
-                ];
-
-                if (params.axis) {
-                    axis = params.axis;
-                } else {
-                    axis = (Math.abs(xyDistance[0]) >= Math.abs(xyDistance[1])) ? 'x' : 'y';
-                }
-
-                distance = xyDistance[(axis === 'x') ? 0 : 1];
-                velocity = (time !== 0) ? distance/time : 0;
-
-                if (isFinite(velocity) && (Math.abs(distance) >= params[MIN_DISTANCE]) && (Math.abs(velocity)  >= params[MIN_VELOCITY])) {
-
-                    e.type = "flick";
-                    e.flick = {
-                        time:time,
-                        distance: distance,
-                        velocity:velocity,
-                        axis: axis,
-                        start : start
-                    };
-
-                    ce.fire(e);
-
-                }
-
-                subscriber[_FLICK_START] = null;
-            }
-        }
-    },
-
-    MIN_VELOCITY : 0,
-    MIN_DISTANCE : 0,
-    PREVENT_DEFAULT : false
-});
-
-
-}, '3.18.1', {"requires": ["node-base", "event-touch", "event-synthetic"]});
-/*
-YUI 3.18.1 (build f7e7bcb)
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-http://yuilibrary.com/license/
-*/
-
-YUI.add('event-tap', function (Y, NAME) {
-
-/**
-The tap module provides a gesture events, "tap", which normalizes user interactions
-across touch and mouse or pointer based input devices.  This can be used by application developers
-to build input device agnostic components which behave the same in response to either touch or mouse based
-interaction.
-
-'tap' is like a touchscreen 'click', only it requires much less finger-down time since it listens to touch events,
-but reverts to mouse events if touch is not supported.
-
-@example
-
-    YUI().use('event-tap', function (Y) {
-        Y.one('#my-button').on('tap', function (e) {
-        });
-    });
-
-@module event
-@submodule event-tap
-@author Andres Garza, matuzak and tilo mitra
-@since 3.7.0
-
-*/
-var doc = Y.config.doc,
-    GESTURE_MAP = Y.Event._GESTURE_MAP,
-    EVT_START = GESTURE_MAP.start,
-    EVT_TAP = 'tap',
-    POINTER_EVENT_TEST = /pointer/i,
-
-    HANDLES = {
-        START: 'Y_TAP_ON_START_HANDLE',
-        END: 'Y_TAP_ON_END_HANDLE',
-        CANCEL: 'Y_TAP_ON_CANCEL_HANDLE'
-    };
-
-function detachHandles(subscription, handles) {
-    handles = handles || Y.Object.values(HANDLES);
-
-    Y.Array.each(handles, function (item) {
-        var handle = subscription[item];
-        if (handle) {
-            handle.detach();
-            subscription[item] = null;
-        }
-    });
-
-}
-
-
-/**
-Sets up a "tap" event, that is fired on touch devices in response to a tap event (finger down, finder up).
-This event can be used instead of listening for click events which have a 500ms delay on most touch devices.
-This event can also be listened for using node.delegate().
-
-@event tap
-@param type {string} "tap"
-@param fn {function} The method the event invokes. It receives the event facade of the underlying DOM event.
-@for Event
-@return {EventHandle} the detach handle
-*/
-Y.Event.define(EVT_TAP, {
-    publishConfig: {
-        preventedFn: function (e) {
-            var sub = e.target.once('click', function (click) {
-                click.preventDefault();
+    /**
+     * Create the DOM structure for the footer elements.
+     *
+     * @method _initFoot
+     * @protected
+     */
+    _initFoot : function () {
+        var info = merge(Console.CHROME_CLASSES, {
+                id_guid   : Y.guid(),
+                str_pause : this.get('strings.pause'),
+                str_clear : this.get('strings.clear')
             });
 
-            // Make sure to detach the subscription during the next event loop
-            // so this doesn't `preventDefault()` on the wrong click event.
-            setTimeout(function () {
-                sub.detach();
-            //Setting this to `0` causes the detachment to occur before the click
-            //comes in on Android 4.0.3-4.0.4. 100ms seems to be a reliable number here
-            //that works across the board.
-            }, 100);
+        this._foot = create(substitute(Console.FOOTER_TEMPLATE,info));
+
+        this.get(CONTENT_BOX).appendChild(this._foot);
+    },
+
+    /**
+     * Determine if incoming log messages are within the configured logLevel
+     * to be buffered for printing.
+     *
+     * @method _isInLogLevel
+     * @protected
+     */
+    _isInLogLevel : function (e) {
+        var cat = e.cat, lvl = this.get('logLevel');
+
+        if (lvl !== INFO) {
+            cat = cat || INFO;
+
+            if (isString(cat)) {
+                cat = cat.toLowerCase();
+            }
+
+            if ((cat === WARN && lvl === ERROR) ||
+                (cat === INFO && lvl !== INFO)) {
+                return false;
+            }
+        }
+
+        return true;
+    },
+
+    /**
+     * Create a log entry message from the inputs including the following keys:
+     * <ul>
+     *     <li>time - this moment</li>
+     *     <li>message - leg message</li>
+     *     <li>category - logLevel or custom category for the message</li>
+     *     <li>source - when provided, the widget or util calling Y.log</li>
+     *     <li>sourceAndDetail - same as source but can include instance info</li>
+     *     <li>localTime - readable version of time</li>
+     *     <li>elapsedTime - ms since last entry</li>
+     *     <li>totalTime - ms since Console was instantiated or reset</li>
+     * </ul>
+     *
+     * @method _normalizeMessage
+     * @param e {Event} custom event containing the log message
+     * @return Object the message object
+     * @protected
+     */
+    _normalizeMessage : function (e) {
+
+        var msg = e.msg,
+            cat = e.cat,
+            src = e.src,
+
+            m = {
+                time            : new Date(),
+                message         : msg,
+                category        : cat || this.get('defaultCategory'),
+                sourceAndDetail : src || this.get('defaultSource'),
+                source          : null,
+                localTime       : null,
+                elapsedTime     : null,
+                totalTime       : null
+            };
+
+        // Extract m.source "Foo" from m.sourceAndDetail "Foo bar baz"
+        m.source          = RE_INLINE_SOURCE.test(m.sourceAndDetail) ?
+                                RegExp.$1 : m.sourceAndDetail;
+        m.localTime       = m.time.toLocaleTimeString ?
+                            m.time.toLocaleTimeString() : (m.time + '');
+        m.elapsedTime     = m.time - this.get(LAST_TIME);
+        m.totalTime       = m.time - this.get(START_TIME);
+
+        this._set(LAST_TIME,m.time);
+
+        return m;
+    },
+
+    /**
+     * Sets an interval for buffered messages to be output to the console.
+     *
+     * @method _schedulePrint
+     * @protected
+     */
+    _schedulePrint : function () {
+        if (!this._printLoop && !this.get(PAUSED) && this.get('rendered')) {
+            this._printLoop = Y.later(
+                                this.get('printTimeout'),
+                                this, this.printBuffer,
+                                this.get('printLimit'), true);
         }
     },
 
-    processArgs: function (args, isDelegate) {
+    /**
+     * Translates message meta into the markup for a console entry.
+     *
+     * @method _createEntryHTML
+     * @param m {Object} object literal containing normalized message metadata
+     * @return String
+     * @protected
+     */
+    _createEntryHTML : function (m) {
+        m = merge(
+                this._htmlEscapeMessage(m),
+                Console.ENTRY_CLASSES,
+                {
+                    cat_class : this.getClassName(ENTRY,m.category),
+                    src_class : this.getClassName(ENTRY,m.source)
+                });
 
-        //if we return for the delegate use case, then the `filter` argument
-        //returns undefined, and we have to get the filter from sub._extra[0] (ugly)
+        return this.get('entryTemplate').replace(/\{(\w+)\}/g,
+            function (_,token) {
+                return token in m ? m[token] : '';
+            });
+    },
 
-        if (!isDelegate) {
-            var extra = args[3];
-            // remove the extra arguments from the array as specified by
-            // http://yuilibrary.com/yui/docs/event/synths.html
-            args.splice(3,1);
-            return extra;
+    /**
+     * Scrolls to the most recent entry
+     *
+     * @method scrollToLatest
+     * @chainable
+     */
+    scrollToLatest : function () {
+        var scrollTop = this.get('newestOnTop') ?
+                            0 :
+                            this._body.get('scrollHeight');
+
+        this._body.set('scrollTop', scrollTop);
+    },
+
+    /**
+     * Performs HTML escaping on strings in the message object.
+     *
+     * @method _htmlEscapeMessage
+     * @param m {Object} the normalized message object
+     * @return Object the message object with proper escapement
+     * @protected
+     */
+    _htmlEscapeMessage : function (m) {
+        m.message         = this._encodeHTML(m.message);
+        m.source          = this._encodeHTML(m.source);
+        m.sourceAndDetail = this._encodeHTML(m.sourceAndDetail);
+        m.category        = this._encodeHTML(m.category);
+
+        return m;
+    },
+
+    /**
+     * Removes the oldest message entries from the UI to maintain the limit
+     * specified in the consoleLimit configuration.
+     *
+     * @method _trimOldEntries
+     * @protected
+     */
+    _trimOldEntries : function () {
+        // Turn off the logging system for the duration of this operation
+        // to prevent an infinite loop
+        Y.config.debug = false;
+
+        var bd = this._body,
+            limit = this.get('consoleLimit'),
+            debug = Y.config.debug,
+            entries,e,i,l;
+
+        if (bd) {
+            entries = bd.all(DOT+C_ENTRY);
+            l = entries.size() - limit;
+
+            if (l > 0) {
+                if (this.get('newestOnTop')) {
+                    i = limit;
+                    l = entries.size();
+                } else {
+                    i = 0;
+                }
+
+                this._body.setStyle('display','none');
+
+                for (;i < l; ++i) {
+                    e = entries.item(i);
+                    if (e) {
+                        e.remove();
+                    }
+                }
+
+                this._body.setStyle('display','');
+            }
+
+        }
+
+        Y.config.debug = debug;
+    },
+
+    /**
+     * Returns the input string with ampersands (&amp;), &lt, and &gt; encoded
+     * as HTML entities.
+     *
+     * @method _encodeHTML
+     * @param s {String} the raw string
+     * @return String the encoded string
+     * @protected
+     */
+    _encodeHTML : function (s) {
+        return isString(s) ?
+            s.replace(RE_AMP,ESC_AMP).
+              replace(RE_LT, ESC_LT).
+              replace(RE_GT, ESC_GT) :
+            s;
+    },
+
+    /**
+     * Clears the timeout for printing buffered messages.
+     *
+     * @method _cancelPrintLoop
+     * @protected
+     */
+    _cancelPrintLoop : function () {
+        if (this._printLoop) {
+            this._printLoop.cancel();
+            this._printLoop = null;
         }
     },
+
     /**
-    This function should set up the node that will eventually fire the event.
-
-    Usage:
-
-        node.on('tap', function (e) {
-        });
-
-    @method on
-    @param {Node} node
-    @param {Array} subscription
-    @param {Boolean} notifier
-    @public
-    @static
-    **/
-    on: function (node, subscription, notifier) {
-        subscription[HANDLES.START] = node.on(EVT_START, this._start, this, node, subscription, notifier);
+     * Validates input value for style attribute.  Accepts only values 'inline',
+     * 'block', and 'separate'.
+     *
+     * @method _validateStyle
+     * @param style {String} the proposed value
+     * @return {Boolean} pass/fail
+     * @protected
+     */
+    _validateStyle : function (style) {
+        return style === 'inline' || style === 'block' || style === 'separate';
     },
 
     /**
-    Detaches all event subscriptions set up by the event-tap module
-
-    @method detach
-    @param {Node} node
-    @param {Array} subscription
-    @param {Boolean} notifier
-    @public
-    @static
-    **/
-    detach: function (node, subscription, notifier) {
-        detachHandles(subscription);
+     * Event handler for clicking on the Pause checkbox to update the paused
+     * attribute.
+     *
+     * @method _onPauseClick
+     * @param e {Event} DOM event facade for the click event
+     * @protected
+     */
+    _onPauseClick : function (e) {
+        this.set(PAUSED,e.target.get(CHECKED));
     },
 
     /**
-    Event delegation for the 'tap' event. The delegated event will use a
-    supplied selector or filtering function to test if the event references at least one
-    node that should trigger the subscription callback.
-
-    Usage:
-
-        node.delegate('tap', function (e) {
-        }, 'li a');
-
-    @method delegate
-    @param {Node} node
-    @param {Array} subscription
-    @param {Boolean} notifier
-    @param {String | Function} filter
-    @public
-    @static
-    **/
-    delegate: function (node, subscription, notifier, filter) {
-        subscription[HANDLES.START] = Y.delegate(EVT_START, function (e) {
-            this._start(e, node, subscription, notifier, true);
-        }, node, filter, this);
+     * Event handler for clicking on the Clear button.  Pass-through to
+     * <code>this.clearConsole()</code>.
+     *
+     * @method _onClearClick
+     * @param e {Event} DOM event facade for the click event
+     * @protected
+     */
+    _onClearClick : function (e) {
+        this.clearConsole();
     },
 
     /**
-    Detaches the delegated event subscriptions set up by the event-tap module.
-    Only used if you use node.delegate(...) instead of node.on(...);
+     * Event handler for clicking on the Collapse/Expand button. Sets the
+     * &quot;collapsed&quot; attribute accordingly.
+     *
+     * @method _onCollapseClick
+     * @param e {Event} DOM event facade for the click event
+     * @protected
+     */
+    _onCollapseClick : function (e) {
+        this.set(COLLAPSED, !this.get(COLLAPSED));
+    },
 
-    @method detachDelegate
-    @param {Node} node
-    @param {Array} subscription
-    @param {Boolean} notifier
-    @public
-    @static
-    **/
-    detachDelegate: function (node, subscription, notifier) {
-        detachHandles(subscription);
+
+    /**
+     * Validator for logSource attribute.
+     *
+     * @method _validateLogSource
+     * @param v {Object} the desired logSource
+     * @return {Boolean} true if the input is an object with an <code>on</code>
+     *                   method
+     * @protected
+     */
+    _validateLogSource: function (v) {
+        return v && Y.Lang.isFunction(v.on);
     },
 
     /**
-    Called when the monitor(s) are tapped on, either through touchstart or mousedown.
+     * Setter method for logLevel attribute.  Acceptable values are
+     * &quot;error&quot, &quot;warn&quot, and &quot;info&quot (case
+     * insensitive).  Other values are treated as &quot;info&quot;.
+     *
+     * @method _setLogLevel
+     * @param v {String} the desired log level
+     * @return String One of Console.LOG_LEVEL_INFO, _WARN, or _ERROR
+     * @protected
+     */
+    _setLogLevel : function (v) {
+        if (isString(v)) {
+            v = v.toLowerCase();
+        }
 
-    @method _start
-    @param {DOMEventFacade} event
-    @param {Node} node
-    @param {Array} subscription
-    @param {Boolean} notifier
-    @param {Boolean} delegate
-    @protected
-    @static
-    **/
-    _start: function (event, node, subscription, notifier, delegate) {
+        return (v === WARN || v === ERROR) ? v : INFO;
+    },
 
-        var context = {
-                canceled: false,
-                eventType: event.type
+    /**
+     * Getter method for useBrowserConsole attribute.  Just a pass through to
+     * the YUI instance configuration setting.
+     *
+     * @method _getUseBrowserConsole
+     * @return {Boolean} or null if logSource is not a YUI instance
+     * @protected
+     */
+    _getUseBrowserConsole: function () {
+        var logSource = this.get('logSource');
+        return logSource instanceof YUI ?
+            logSource.config.useBrowserConsole : null;
+    },
+
+    /**
+     * Setter method for useBrowserConsole attributes.  Only functional if the
+     * logSource attribute points to a YUI instance.  Passes the value down to
+     * the YUI instance.  NOTE: multiple Console instances cannot maintain
+     * independent useBrowserConsole values, since it is just a pass through to
+     * the YUI instance configuration.
+     *
+     * @method _setUseBrowserConsole
+     * @param v {Boolean} false to disable browser console printing (default)
+     * @return {Boolean} true|false if logSource is a YUI instance
+     * @protected
+     */
+    _setUseBrowserConsole: function (v) {
+        var logSource = this.get('logSource');
+        if (logSource instanceof YUI) {
+            v = !!v;
+            logSource.config.useBrowserConsole = v;
+            return v;
+        } else {
+            return Y.Attribute.INVALID_VALUE;
+        }
+    },
+
+    /**
+     * Set the height of the Console container.  Set the body height to the
+     * difference between the configured height and the calculated heights of
+     * the header and footer.
+     * Overrides Widget.prototype._uiSetHeight.
+     *
+     * @method _uiSetHeight
+     * @param v {String|Number} the new height
+     * @protected
+     */
+    _uiSetHeight : function (v) {
+        Console.superclass._uiSetHeight.apply(this,arguments);
+
+        if (this._head && this._foot) {
+            var h = this.get('boundingBox').get('offsetHeight') -
+                    this._head.get('offsetHeight') -
+                    this._foot.get('offsetHeight');
+
+            this._body.setStyle(HEIGHT,h+'px');
+        }
+    },
+
+    /**
+     * Over-ride default content box sizing to do nothing, since we're sizing
+     * the body section to fill out height ourselves.
+     *
+     * @method _uiSizeCB
+     * @protected
+     */
+    _uiSizeCB : function() {
+        // Do Nothing. Ideally want to move to Widget-StdMod, which accounts for
+        // _uiSizeCB
+    },
+
+    /**
+     * Updates the UI if changes are made to any of the strings in the strings
+     * attribute.
+     *
+     * @method _afterStringsChange
+     * @param e {Event} Custom event for the attribute change
+     * @protected
+     */
+    _afterStringsChange : function (e) {
+        var prop   = e.subAttrName ? e.subAttrName.split(DOT)[1] : null,
+            cb     = this.get(CONTENT_BOX),
+            before = e.prevVal,
+            after  = e.newVal;
+
+        if ((!prop || prop === TITLE) && before.title !== after.title) {
+            cb.all(DOT+C_CONSOLE_TITLE).setHTML(after.title);
+        }
+
+        if ((!prop || prop === PAUSE) && before.pause !== after.pause) {
+            cb.all(DOT+C_PAUSE_LABEL).setHTML(after.pause);
+        }
+
+        if ((!prop || prop === CLEAR) && before.clear !== after.clear) {
+            cb.all(DOT+C_CLEAR).set('value',after.clear);
+        }
+    },
+
+    /**
+     * Updates the UI and schedules or cancels the print loop.
+     *
+     * @method _afterPausedChange
+     * @param e {Event} Custom event for the attribute change
+     * @protected
+     */
+    _afterPausedChange : function (e) {
+        var paused = e.newVal;
+
+        if (e.src !== Y.Widget.SRC_UI) {
+            this._uiUpdatePaused(paused);
+        }
+
+        if (!paused) {
+            this._schedulePrint();
+        } else if (this._printLoop) {
+            this._cancelPrintLoop();
+        }
+    },
+
+    /**
+     * Checks or unchecks the paused checkbox
+     *
+     * @method _uiUpdatePaused
+     * @param on {Boolean} the new checked state
+     * @protected
+     */
+    _uiUpdatePaused : function (on) {
+        var node = this._foot.all('input[type=checkbox].'+C_PAUSE);
+
+        if (node) {
+            node.set(CHECKED,on);
+        }
+    },
+
+    /**
+     * Calls this._trimOldEntries() in response to changes in the configured
+     * consoleLimit attribute.
+     *
+     * @method _afterConsoleLimitChange
+     * @param e {Event} Custom event for the attribute change
+     * @protected
+     */
+    _afterConsoleLimitChange : function () {
+        this._trimOldEntries();
+    },
+
+
+    /**
+     * Updates the className of the contentBox, which should trigger CSS to
+     * hide or show the body and footer sections depending on the new value.
+     *
+     * @method _afterCollapsedChange
+     * @param e {Event} Custom event for the attribute change
+     * @protected
+     */
+    _afterCollapsedChange : function (e) {
+        this._uiUpdateCollapsed(e.newVal);
+    },
+
+    /**
+     * Updates the UI to reflect the new Collapsed state
+     *
+     * @method _uiUpdateCollapsed
+     * @param v {Boolean} true for collapsed, false for expanded
+     * @protected
+     */
+    _uiUpdateCollapsed : function (v) {
+        var bb     = this.get('boundingBox'),
+            button = bb.all('button.'+C_COLLAPSE),
+            method = v ? 'addClass' : 'removeClass',
+            str    = this.get('strings.'+(v ? 'expand' : 'collapse'));
+
+        bb[method](C_COLLAPSED);
+
+        if (button) {
+            button.setHTML(str);
+        }
+
+        this._uiSetHeight(v ? this._head.get('offsetHeight'): this.get(HEIGHT));
+    },
+
+    /**
+     * Makes adjustments to the UI if needed when the Console is hidden or shown
+     *
+     * @method _afterVisibleChange
+     * @param e {Event} the visibleChange event
+     * @protected
+     */
+    _afterVisibleChange : function (e) {
+        Console.superclass._afterVisibleChange.apply(this,arguments);
+
+        this._uiUpdateFromHideShow(e.newVal);
+    },
+
+    /**
+     * Recalculates dimensions and updates appropriately when shown
+     *
+     * @method _uiUpdateFromHideShow
+     * @param v {Boolean} true for visible, false for hidden
+     * @protected
+     */
+    _uiUpdateFromHideShow : function (v) {
+        if (v) {
+            this._uiSetHeight(this.get(HEIGHT));
+        }
+    },
+
+    /**
+     * Responds to log events by normalizing qualifying messages and passing
+     * them along through the entry event for buffering etc.
+     *
+     * @method _onLogEvent
+     * @param msg {String} the log message
+     * @param cat {String} OPTIONAL the category or logLevel of the message
+     * @param src {String} OPTIONAL the source of the message (e.g. widget name)
+     * @protected
+     */
+    _onLogEvent : function (e) {
+
+        if (!this.get(DISABLED) && this._isInLogLevel(e)) {
+
+            var debug = Y.config.debug;
+
+            /* TODO: needed? */
+            Y.config.debug = false;
+
+            this.fire(ENTRY, {
+                message : this._normalizeMessage(e)
+            });
+
+            Y.config.debug = debug;
+        }
+    },
+
+    /**
+     * Clears the console, resets the startTime attribute, enables and
+     * unpauses the widget.
+     *
+     * @method _defResetFn
+     * @protected
+     */
+    _defResetFn : function () {
+        this.clearConsole();
+        this.set(START_TIME,new Date());
+        this.set(DISABLED,false);
+        this.set(PAUSED,false);
+    },
+
+    /**
+     * Buffers incoming message objects and schedules the printing.
+     *
+     * @method _defEntryFn
+     * @param e {Event} The Custom event carrying the message in its payload
+     * @protected
+     */
+    _defEntryFn : function (e) {
+        if (e.message) {
+            this.buffer.push(e.message);
+            this._schedulePrint();
+        }
+    }
+
+},
+
+// Y.Console static properties
+{
+    /**
+     * The identity of the widget.
+     *
+     * @property NAME
+     * @type String
+     * @static
+     */
+    NAME : CONSOLE,
+
+    /**
+     * Static identifier for logLevel configuration setting to allow all
+     * incoming messages to generate Console entries.
+     *
+     * @property LOG_LEVEL_INFO
+     * @type String
+     * @static
+     */
+    LOG_LEVEL_INFO  : INFO,
+
+    /**
+     * Static identifier for logLevel configuration setting to allow only
+     * incoming messages of logLevel &quot;warn&quot; or &quot;error&quot;
+     * to generate Console entries.
+     *
+     * @property LOG_LEVEL_WARN
+     * @type String
+     * @static
+     */
+    LOG_LEVEL_WARN  : WARN,
+
+    /**
+     * Static identifier for logLevel configuration setting to allow only
+     * incoming messages of logLevel &quot;error&quot; to generate
+     * Console entries.
+     *
+     * @property LOG_LEVEL_ERROR
+     * @type String
+     * @static
+     */
+    LOG_LEVEL_ERROR : ERROR,
+
+    /**
+     * Map (object) of classNames used to populate the placeholders in the
+     * Console.ENTRY_TEMPLATE markup when rendering a new Console entry.
+     *
+     * <p>By default, the keys contained in the object are:</p>
+     * <ul>
+     *    <li>entry_class</li>
+     *    <li>entry_meta_class</li>
+     *    <li>entry_cat_class</li>
+     *    <li>entry_src_class</li>
+     *    <li>entry_time_class</li>
+     *    <li>entry_content_class</li>
+     * </ul>
+     *
+     * @property ENTRY_CLASSES
+     * @type Object
+     * @static
+     */
+    ENTRY_CLASSES   : {
+        entry_class         : C_ENTRY,
+        entry_meta_class    : C_ENTRY_META,
+        entry_cat_class     : C_ENTRY_CAT,
+        entry_src_class     : C_ENTRY_SRC,
+        entry_time_class    : C_ENTRY_TIME,
+        entry_content_class : C_ENTRY_CONTENT
+    },
+
+    /**
+     * Map (object) of classNames used to populate the placeholders in the
+     * Console.HEADER_TEMPLATE, Console.BODY_TEMPLATE, and
+     * Console.FOOTER_TEMPLATE markup when rendering the Console UI.
+     *
+     * <p>By default, the keys contained in the object are:</p>
+     * <ul>
+     *   <li>console_hd_class</li>
+     *   <li>console_bd_class</li>
+     *   <li>console_ft_class</li>
+     *   <li>console_controls_class</li>
+     *   <li>console_checkbox_class</li>
+     *   <li>console_pause_class</li>
+     *   <li>console_pause_label_class</li>
+     *   <li>console_button_class</li>
+     *   <li>console_clear_class</li>
+     *   <li>console_collapse_class</li>
+     *   <li>console_title_class</li>
+     * </ul>
+     *
+     * @property CHROME_CLASSES
+     * @type Object
+     * @static
+     */
+    CHROME_CLASSES  : {
+        console_hd_class       : C_CONSOLE_HD,
+        console_bd_class       : C_CONSOLE_BD,
+        console_ft_class       : C_CONSOLE_FT,
+        console_controls_class : C_CONSOLE_CONTROLS,
+        console_checkbox_class : C_CHECKBOX,
+        console_pause_class    : C_PAUSE,
+        console_pause_label_class : C_PAUSE_LABEL,
+        console_button_class   : C_BUTTON,
+        console_clear_class    : C_CLEAR,
+        console_collapse_class : C_COLLAPSE,
+        console_title_class    : C_CONSOLE_TITLE
+    },
+
+    /**
+     * Markup template used to generate the DOM structure for the header
+     * section of the Console when it is rendered.  The template includes
+     * these {placeholder}s:
+     *
+     * <ul>
+     *   <li>console_button_class - contributed by Console.CHROME_CLASSES</li>
+     *   <li>console_collapse_class - contributed by Console.CHROME_CLASSES</li>
+     *   <li>console_hd_class - contributed by Console.CHROME_CLASSES</li>
+     *   <li>console_title_class - contributed by Console.CHROME_CLASSES</li>
+     *   <li>str_collapse - pulled from attribute strings.collapse</li>
+     *   <li>str_title - pulled from attribute strings.title</li>
+     * </ul>
+     *
+     * @property HEADER_TEMPLATE
+     * @type String
+     * @static
+     */
+    HEADER_TEMPLATE :
+        '<div class="{console_hd_class}">'+
+            '<h4 class="{console_title_class}">{str_title}</h4>'+
+            '<button type="button" class="'+
+                '{console_button_class} {console_collapse_class}">{str_collapse}'+
+            '</button>'+
+        '</div>',
+
+    /**
+     * Markup template used to generate the DOM structure for the Console body
+     * (where the messages are inserted) when it is rendered.  The template
+     * includes only the {placeholder} &quot;console_bd_class&quot;, which is
+     * constributed by Console.CHROME_CLASSES.
+     *
+     * @property BODY_TEMPLATE
+     * @type String
+     * @static
+     */
+    BODY_TEMPLATE : '<div class="{console_bd_class}"></div>',
+
+    /**
+     * Markup template used to generate the DOM structure for the footer
+     * section of the Console when it is rendered.  The template includes
+     * many of the {placeholder}s from Console.CHROME_CLASSES as well as:
+     *
+     * <ul>
+     *   <li>id_guid - generated unique id, relates the label and checkbox</li>
+     *   <li>str_pause - pulled from attribute strings.pause</li>
+     *   <li>str_clear - pulled from attribute strings.clear</li>
+     * </ul>
+     *
+     * @property FOOTER_TEMPLATE
+     * @type String
+     * @static
+     */
+    FOOTER_TEMPLATE :
+        '<div class="{console_ft_class}">'+
+            '<div class="{console_controls_class}">'+
+                '<label class="{console_pause_label_class}"><input type="checkbox" class="{console_checkbox_class} {console_pause_class}" value="1" id="{id_guid}"> {str_pause}</label>' +
+                '<button type="button" class="'+
+                    '{console_button_class} {console_clear_class}">{str_clear}'+
+                '</button>'+
+            '</div>'+
+        '</div>',
+
+    /**
+     * Default markup template used to create the DOM structure for Console
+     * entries. The markup contains {placeholder}s for content and classes
+     * that are replaced via Y.Lang.sub.  The default template contains
+     * the {placeholder}s identified in Console.ENTRY_CLASSES as well as the
+     * following placeholders that will be populated by the log entry data:
+     *
+     * <ul>
+     *   <li>cat_class</li>
+     *   <li>src_class</li>
+     *   <li>totalTime</li>
+     *   <li>elapsedTime</li>
+     *   <li>localTime</li>
+     *   <li>sourceAndDetail</li>
+     *   <li>message</li>
+     * </ul>
+     *
+     * @property ENTRY_TEMPLATE
+     * @type String
+     * @static
+     */
+    ENTRY_TEMPLATE : ENTRY_TEMPLATE_STR,
+
+    /**
+     * Static property used to define the default attribute configuration of
+     * the Widget.
+     *
+     * @property ATTRS
+     * @Type Object
+     * @static
+     */
+    ATTRS : {
+
+        /**
+         * Name of the custom event that will communicate log messages.
+         *
+         * @attribute logEvent
+         * @type String
+         * @default "yui:log"
+         */
+        logEvent : {
+            value : 'yui:log',
+            writeOnce : true,
+            validator : isString
+        },
+
+        /**
+         * Object that will emit the log events.  By default the YUI instance.
+         * To have a single Console capture events from all YUI instances, set
+         * this to the Y.Global object.
+         *
+         * @attribute logSource
+         * @type EventTarget
+         * @default Y
+         */
+        logSource : {
+            value : Y,
+            writeOnce : true,
+            validator : function (v) {
+                return this._validateLogSource(v);
+            }
+        },
+
+        /**
+         * Collection of strings used to label elements in the Console UI.
+         * Default collection contains the following name:value pairs:
+         *
+         * <ul>
+         *   <li>title : &quot;Log Console&quot;</li>
+         *   <li>pause : &quot;Pause&quot;</li>
+         *   <li>clear : &quot;Clear&quot;</li>
+         *   <li>collapse : &quot;Collapse&quot;</li>
+         *   <li>expand : &quot;Expand&quot;</li>
+         * </ul>
+         *
+         * @attribute strings
+         * @type Object
+         */
+        strings : {
+            valueFn: function() { return Y.Intl.get("console"); }
+        },
+
+        /**
+         * Boolean to pause the outputting of new messages to the console.
+         * When paused, messages will accumulate in the buffer.
+         *
+         * @attribute paused
+         * @type boolean
+         * @default false
+         */
+        paused : {
+            value : false,
+            validator : L.isBoolean
+        },
+
+        /**
+         * If a category is not specified in the Y.log(..) statement, this
+         * category will be used. Categories &quot;info&quot;,
+         * &quot;warn&quot;, and &quot;error&quot; are also called log level.
+         *
+         * @attribute defaultCategory
+         * @type String
+         * @default "info"
+         */
+        defaultCategory : {
+            value : INFO,
+            validator : isString
+        },
+
+        /**
+         * If a source is not specified in the Y.log(..) statement, this
+         * source will be used.
+         *
+         * @attribute defaultSource
+         * @type String
+         * @default "global"
+         */
+        defaultSource   : {
+            value : 'global',
+            validator : isString
+        },
+
+        /**
+         * Markup template used to create the DOM structure for Console entries.
+         *
+         * @attribute entryTemplate
+         * @type String
+         * @default Console.ENTRY_TEMPLATE
+         */
+        entryTemplate : {
+            value : ENTRY_TEMPLATE_STR,
+            validator : isString
+        },
+
+        /**
+         * Minimum entry log level to render into the Console.  The initial
+         * logLevel value for all Console instances defaults from the
+         * Y.config.logLevel YUI configuration, or Console.LOG_LEVEL_INFO if
+         * that configuration is not set.
+         *
+         * Possible values are &quot;info&quot;, &quot;warn&quot;,
+         * &quot;error&quot; (case insensitive), or their corresponding statics
+         * Console.LOG_LEVEL_INFO and so on.
+         *
+         * @attribute logLevel
+         * @type String
+         * @default Y.config.logLevel or Console.LOG_LEVEL_INFO
+         */
+        logLevel : {
+            value : Y.config.logLevel || INFO,
+            setter : function (v) {
+                return this._setLogLevel(v);
+            }
+        },
+
+        /**
+         * Millisecond timeout between iterations of the print loop, moving
+         * entries from the buffer to the UI.
+         *
+         * @attribute printTimeout
+         * @type Number
+         * @default 100
+         */
+        printTimeout : {
+            value : 100,
+            validator : isNumber
+        },
+
+        /**
+         * Maximum number of entries printed in each iteration of the print
+         * loop. This is used to prevent excessive logging locking the page UI.
+         *
+         * @attribute printLimit
+         * @type Number
+         * @default 50
+         */
+        printLimit : {
+            value : 50,
+            validator : isNumber
+        },
+
+        /**
+         * Maximum number of Console entries allowed in the Console body at one
+         * time.  This is used to keep acquired messages from exploding the
+         * DOM tree and impacting page performance.
+         *
+         * @attribute consoleLimit
+         * @type Number
+         * @default 300
+         */
+        consoleLimit : {
+            value : 300,
+            validator : isNumber
+        },
+
+        /**
+         * New entries should display at the top of the Console or the bottom?
+         *
+         * @attribute newestOnTop
+         * @type Boolean
+         * @default true
+         */
+        newestOnTop : {
+            value : true
+        },
+
+        /**
+         * When new entries are added to the Console UI, should they be
+         * scrolled into view?
+         *
+         * @attribute scrollIntoView
+         * @type Boolean
+         * @default true
+         */
+        scrollIntoView : {
+            value : true
+        },
+
+        /**
+         * The baseline time for this Console instance, used to measure elapsed
+         * time from the moment the console module is <code>use</code>d to the
+         * moment each new entry is logged (not rendered).
+         *
+         * This value is reset by the instance method myConsole.reset().
+         *
+         * @attribute startTime
+         * @type Date
+         * @default The moment the console module is <code>use</code>d
+         */
+        startTime : {
+            value : new Date()
+        },
+
+        /**
+         * The precise time the last entry was logged.  Used to measure elapsed
+         * time between log messages.
+         *
+         * @attribute lastTime
+         * @type Date
+         * @default The moment the console module is <code>use</code>d
+         */
+        lastTime : {
+            value : new Date(),
+            readOnly: true
+        },
+
+        /**
+         * Controls the collapsed state of the Console
+         *
+         * @attribute collapsed
+         * @type Boolean
+         * @default false
+         */
+        collapsed : {
+            value : false
+        },
+
+        /**
+        * String with units, or number, representing the height of the Console,
+        * inclusive of header and footer. If a number is provided, the default
+        * unit, defined by Widget's DEF_UNIT, property is used.
+        *
+        * @attribute height
+        * @default "300px"
+        * @type {String | Number}
+        */
+        height: {
+            value: "300px"
+        },
+
+        /**
+        * String with units, or number, representing the width of the Console.
+        * If a number is provided, the default unit, defined by Widget's
+        * DEF_UNIT, property is used.
+        *
+        * @attribute width
+        * @default "300px"
+        * @type {String | Number}
+        */
+        width: {
+            value: "300px"
+        },
+
+        /**
+         * Pass through to the YUI instance useBrowserConsole configuration.
+         * By default this is set to false, which will disable logging to the
+         * browser console when a Console instance is created.  If the
+         * logSource is not a YUI instance, this has no effect.
+         *
+         * @attribute useBrowserConsole
+         * @type {Boolean}
+         * @default false
+         */
+         useBrowserConsole : {
+            lazyAdd: false,
+            value: false,
+            getter : function () {
+                return this._getUseBrowserConsole();
             },
-            preventMouse = subscription.preventMouse || false;
+            setter : function (v) {
+                return this._setUseBrowserConsole(v);
+            }
+         },
 
-        //move ways to quit early to the top.
-        // no right clicks
-        if (event.button && event.button === 3) {
-            return;
-        }
+         /**
+          * Allows the Console to flow in the document.  Available values are
+          * 'inline', 'block', and 'separate' (the default).
+          *
+          * @attribute style
+          * @type {String}
+          * @default 'separate'
+          */
+         style : {
+            value : 'separate',
+            writeOnce : true,
+            validator : function (v) {
+                return this._validateStyle(v);
+            }
+         }
+    }
 
-        // for now just support a 1 finger count (later enhance via config)
-        if (event.touches && event.touches.length !== 1) {
-            return;
-        }
+});
 
-        context.node = delegate ? event.currentTarget : node;
 
-        //There is a double check in here to support event simulation tests, in which
-        //event.touches can be undefined when simulating 'touchstart' on touch devices.
-        if (event.touches) {
-          context.startXY = [ event.touches[0].pageX, event.touches[0].pageY ];
-        }
-        else {
-          context.startXY = [ event.pageX, event.pageY ];
-        }
+}, '3.18.1', {"requires": ["yui-log", "widget"], "skinnable": true, "lang": ["en", "es", "hu", "it", "ja"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
 
-        //If `onTouchStart()` was called by a touch event, set up touch event subscriptions.
-        //Otherwise, set up mouse/pointer event event subscriptions.
-        if (event.touches) {
+YUI.add('console-filters', function (Y, NAME) {
 
-            subscription[HANDLES.END] = node.once('touchend', this._end, this, node, subscription, notifier, delegate, context);
-            subscription[HANDLES.CANCEL] = node.once('touchcancel', this.detach, this, node, subscription, notifier, delegate, context);
+/**
+ * <p>Provides Plugin.ConsoleFilters plugin class.</p>
+ *
+ * <p>This plugin adds the ability to control which Console entries display by filtering on category and source. Two groups of checkboxes are added to the Console footer, one for categories and the other for sources.  Only those messages that match a checked category or source are displayed.</p>
+ *
+ * @module console-filters
+ * @namespace Plugin
+ * @class ConsoleFilters
+ */
 
-            //Since this is a touch* event, there will be corresponding mouse events
-            //that will be fired. We don't want these events to get picked up and fire
-            //another `tap` event, so we'll set this variable to `true`.
-            subscription.preventMouse = true;
-        }
+// Some common strings and functions
+var getCN = Y.ClassNameManager.getClassName,
+    CONSOLE = 'console',
+    FILTERS = 'filters',
+    FILTER  = 'filter',
+    CATEGORY = 'category',
+    SOURCE   = 'source',
+    CATEGORY_DOT = 'category.',
+    SOURCE_DOT   = 'source.',
 
-        //Only add these listeners if preventMouse is `false`
-        //ie: not when touch events have already been subscribed to
-        else if (context.eventType.indexOf('mouse') !== -1 && !preventMouse) {
-            subscription[HANDLES.END] = node.once('mouseup', this._end, this, node, subscription, notifier, delegate, context);
-            subscription[HANDLES.CANCEL] = node.once('mousecancel', this.detach, this, node, subscription, notifier, delegate, context);
-        }
+    HOST     = 'host',
+    CHECKED  = 'checked',
+    DEF_VISIBILITY = 'defaultVisibility',
 
-        //If a mouse event comes in after a touch event, it will go in here and
-        //reset preventMouse to `true`.
-        //If a mouse event comes in without a prior touch event, preventMouse will be
-        //false in any case, so this block doesn't do anything.
-        else if (context.eventType.indexOf('mouse') !== -1 && preventMouse) {
-            subscription.preventMouse = false;
-        }
+    DOT = '.',
+    EMPTY   = '',
 
-        else if (POINTER_EVENT_TEST.test(context.eventType)) {
-            subscription[HANDLES.END] = node.once(GESTURE_MAP.end, this._end, this, node, subscription, notifier, delegate, context);
-            subscription[HANDLES.CANCEL] = node.once(GESTURE_MAP.cancel, this.detach, this, node, subscription, notifier, delegate, context);
-        }
+    C_BODY       = DOT + Y.Console.CHROME_CLASSES.console_bd_class,
+    C_FOOT       = DOT + Y.Console.CHROME_CLASSES.console_ft_class,
 
-    },
+    SEL_CHECK    = 'input[type=checkbox].',
 
+    isString = Y.Lang.isString;
+
+function ConsoleFilters() {
+    ConsoleFilters.superclass.constructor.apply(this,arguments);
+}
+
+Y.namespace('Plugin').ConsoleFilters = Y.extend(ConsoleFilters, Y.Plugin.Base,
+
+// Y.Plugin.ConsoleFilters prototype
+{
+    /**
+     * Collection of all log messages passed through since the plugin's
+     * instantiation.  This holds all messages regardless of filter status.
+     * Used as a single source of truth for repopulating the Console body when
+     * filters are changed.
+     *
+     * @property _entries
+     * @type Array
+     * @protected
+     */
+    _entries : null,
 
     /**
-    Called when the monitor(s) fires a touchend event (or the mouse equivalent).
-    This method fires the 'tap' event if certain requirements are met.
+     * Maximum number of entries to store in the message cache.
+     *
+     * @property _cacheLimit
+     * @type {Number}
+     * @default Infinity
+     * @protected
+     */
+    _cacheLimit : Number.POSITIVE_INFINITY,
 
-    @method _end
-    @param {DOMEventFacade} event
-    @param {Node} node
-    @param {Array} subscription
-    @param {Boolean} notifier
-    @param {Boolean} delegate
-    @param {Object} context
-    @protected
-    @static
-    **/
-    _end: function (event, node, subscription, notifier, delegate, context) {
-        var startXY = context.startXY,
-            endXY,
-            clientXY,
-            sensitivity = 15;
+    /**
+     * The container node created to house the category filters.
+     *
+     * @property _categories
+     * @type Node
+     * @protected
+     */
+    _categories : null,
 
-        if (subscription._extra && subscription._extra.sensitivity >= 0) {
-            sensitivity = subscription._extra.sensitivity;
+    /**
+     * The container node created to house the source filters.
+     *
+     * @property _sources
+     * @type Node
+     * @protected
+     */
+    _sources : null,
+
+    /**
+     * Initialize entries collection and attach listeners to host events and
+     * methods.
+     *
+     * @method initializer
+     * @protected
+     */
+    initializer : function () {
+        this._entries = [];
+
+        this.get(HOST).on("entry", this._onEntry, this);
+
+        this.doAfter("renderUI", this.renderUI);
+        this.doAfter("syncUI", this.syncUI);
+        this.doAfter("bindUI", this.bindUI);
+
+        this.doAfter("clearConsole", this._afterClearConsole);
+
+        if (this.get(HOST).get('rendered')) {
+            this.renderUI();
+            this.syncUI();
+            this.bindUI();
         }
 
-        //There is a double check in here to support event simulation tests, in which
-        //event.touches can be undefined when simulating 'touchstart' on touch devices.
-        if (event.changedTouches) {
-          endXY = [ event.changedTouches[0].pageX, event.changedTouches[0].pageY ];
-          clientXY = [event.changedTouches[0].clientX, event.changedTouches[0].clientY];
+        this.after("cacheLimitChange", this._afterCacheLimitChange);
+    },
+
+    /**
+     * Removes the plugin UI and unwires events.
+     *
+     * @method destructor
+     * @protected
+     */
+    destructor : function () {
+        //TODO: grab last {consoleLimit} entries and update the console with
+        //them (no filtering)
+        this._entries = [];
+
+        if (this._categories) {
+            this._categories.remove();
         }
-        else {
-          endXY = [ event.pageX, event.pageY ];
-          clientXY = [event.clientX, event.clientY];
+        if (this._sources) {
+            this._sources.remove();
+        }
+    },
+
+    /**
+     * Adds the category and source filter sections to the Console footer.
+     *
+     * @method renderUI
+     * @protected
+     */
+    renderUI : function () {
+        var foot = this.get(HOST).get('contentBox').one(C_FOOT),
+            html;
+
+        if (foot) {
+            html = Y.Lang.sub(
+                        ConsoleFilters.CATEGORIES_TEMPLATE,
+                        ConsoleFilters.CHROME_CLASSES);
+
+            this._categories = foot.appendChild(Y.Node.create(html));
+
+            html = Y.Lang.sub(
+                        ConsoleFilters.SOURCES_TEMPLATE,
+                        ConsoleFilters.CHROME_CLASSES);
+
+            this._sources = foot.appendChild(Y.Node.create(html));
+        }
+    },
+
+    /**
+     * Binds to checkbox click events and internal attribute change events to
+     * maintain the UI state.
+     *
+     * @method bindUI
+     * @protected
+     */
+    bindUI : function () {
+        this._categories.on('click', Y.bind(this._onCategoryCheckboxClick, this));
+
+        this._sources.on('click', Y.bind(this._onSourceCheckboxClick, this));
+
+        this.after('categoryChange',this._afterCategoryChange);
+        this.after('sourceChange',  this._afterSourceChange);
+    },
+
+    /**
+     * Updates the UI to be in accordance with the current state of the plugin.
+     *
+     * @method syncUI
+     */
+    syncUI : function () {
+        Y.each(this.get(CATEGORY), function (v, k) {
+            this._uiSetCheckbox(CATEGORY, k, v);
+        }, this);
+
+        Y.each(this.get(SOURCE), function (v, k) {
+            this._uiSetCheckbox(SOURCE, k, v);
+        }, this);
+
+        this.refreshConsole();
+    },
+
+    /**
+     * Ensures a filter is set up for any new categories or sources and
+     * collects the messages in _entries.  If the message is stamped with a
+     * category or source that is currently being filtered out, the message
+     * will not pass to the Console's print buffer.
+     *
+     * @method _onEntry
+     * @param e {Event} the custom event object
+     * @protected
+     */
+    _onEntry : function (e) {
+        this._entries.push(e.message);
+
+        var cat = CATEGORY_DOT + e.message.category,
+            src = SOURCE_DOT + e.message.source,
+            cat_filter = this.get(cat),
+            src_filter = this.get(src),
+            overLimit  = this._entries.length - this._cacheLimit,
+            visible;
+
+        if (overLimit > 0) {
+            this._entries.splice(0, overLimit);
         }
 
-        // make sure mouse didn't move
-        if (Math.abs(endXY[0] - startXY[0]) <= sensitivity && Math.abs(endXY[1] - startXY[1]) <= sensitivity) {
-
-            event.type = EVT_TAP;
-            event.pageX = endXY[0];
-            event.pageY = endXY[1];
-            event.clientX = clientXY[0];
-            event.clientY = clientXY[1];
-            event.currentTarget = context.node;
-
-            notifier.fire(event);
+        if (cat_filter === undefined) {
+            visible = this.get(DEF_VISIBILITY);
+            this.set(cat, visible);
+            cat_filter = visible;
         }
 
-        detachHandles(subscription, [HANDLES.END, HANDLES.CANCEL]);
+        if (src_filter === undefined) {
+            visible = this.get(DEF_VISIBILITY);
+            this.set(src, visible);
+            src_filter = visible;
+        }
+
+        if (!cat_filter || !src_filter) {
+            e.preventDefault();
+        }
+    },
+
+    /**
+     * Flushes the cached entries after a call to the Console's clearConsole().
+     *
+     * @method _afterClearConsole
+     * @protected
+     */
+    _afterClearConsole : function () {
+        this._entries = [];
+    },
+
+    /**
+     * Triggers the Console to update if a known category filter
+     * changes value (e.g. visible => hidden).  Updates the appropriate
+     * checkbox's checked state if necessary.
+     *
+     * @method _afterCategoryChange
+     * @param e {Event} the attribute change event object
+     * @protected
+     */
+    _afterCategoryChange : function (e) {
+        var cat    = e.subAttrName.replace(/category\./, EMPTY),
+            before = e.prevVal,
+            after  = e.newVal;
+
+        // Don't update the console for new categories
+        if (!cat || before[cat] !== undefined) {
+            this.refreshConsole();
+
+            this._filterBuffer();
+        }
+
+        if (cat && !e.fromUI) {
+            this._uiSetCheckbox(CATEGORY, cat, after[cat]);
+        }
+    },
+
+    /**
+     * Triggers the Console to update if a known source filter
+     * changes value (e.g. visible => hidden).  Updates the appropriate
+     * checkbox's checked state if necessary.
+     *
+     * @method _afterSourceChange
+     * @param e {Event} the attribute change event object
+     * @protected
+     */
+    _afterSourceChange : function (e) {
+        var src     = e.subAttrName.replace(/source\./, EMPTY),
+            before = e.prevVal,
+            after  = e.newVal;
+
+        // Don't update the console for new sources
+        if (!src || before[src] !== undefined) {
+            this.refreshConsole();
+
+            this._filterBuffer();
+        }
+
+        if (src && !e.fromUI) {
+            this._uiSetCheckbox(SOURCE, src, after[src]);
+        }
+    },
+
+    /**
+     * Flushes the Console's print buffer of any entries that have a category
+     * or source that is currently being excluded.
+     *
+     * @method _filterBuffer
+     * @protected
+     */
+    _filterBuffer : function () {
+        var cats = this.get(CATEGORY),
+            srcs = this.get(SOURCE),
+            buffer = this.get(HOST).buffer,
+            start = null,
+            i;
+
+        for (i = buffer.length - 1; i >= 0; --i) {
+            if (!cats[buffer[i].category] || !srcs[buffer[i].source]) {
+                start = start || i;
+            } else if (start) {
+                buffer.splice(i,(start - i));
+                start = null;
+            }
+        }
+        if (start) {
+            buffer.splice(0,start + 1);
+        }
+    },
+
+    /**
+     * Trims the cache of entries to the appropriate new length.
+     *
+     * @method _afterCacheLimitChange
+     * @param e {Event} the attribute change event object
+     * @protected
+     */
+    _afterCacheLimitChange : function (e) {
+        if (isFinite(e.newVal)) {
+            var delta = this._entries.length - e.newVal;
+
+            if (delta > 0) {
+                this._entries.splice(0,delta);
+            }
+        }
+    },
+
+    /**
+     * Repopulates the Console with entries appropriate to the current filter
+     * settings.
+     *
+     * @method refreshConsole
+     */
+    refreshConsole : function () {
+        var entries   = this._entries,
+            host      = this.get(HOST),
+            body      = host.get('contentBox').one(C_BODY),
+            remaining = host.get('consoleLimit'),
+            cats      = this.get(CATEGORY),
+            srcs      = this.get(SOURCE),
+            buffer    = [],
+            i,e;
+
+        if (body) {
+            host._cancelPrintLoop();
+
+            // Evaluate all entries from latest to oldest
+            for (i = entries.length - 1; i >= 0 && remaining >= 0; --i) {
+                e = entries[i];
+                if (cats[e.category] && srcs[e.source]) {
+                    buffer.unshift(e);
+                    --remaining;
+                }
+            }
+
+            body.setHTML(EMPTY);
+            host.buffer = buffer;
+            host.printBuffer();
+        }
+    },
+
+    /**
+     * Updates the checked property of a filter checkbox of the specified type.
+     * If no checkbox is found for the input params, one is created.
+     *
+     * @method _uiSetCheckbox
+     * @param type {String} 'category' or 'source'
+     * @param item {String} the name of the filter (e.g. 'info', 'event')
+     * @param checked {Boolean} value to set the checkbox's checked property
+     * @protected
+     */
+    _uiSetCheckbox : function (type, item, checked) {
+        if (type && item) {
+            var container = type === CATEGORY ?
+                                this._categories :
+                                this._sources,
+                sel      = SEL_CHECK + getCN(CONSOLE,FILTER,item),
+                checkbox = container.one(sel),
+                host;
+
+            if (!checkbox) {
+                host = this.get(HOST);
+
+                this._createCheckbox(container, item);
+
+                checkbox = container.one(sel);
+
+                host._uiSetHeight(host.get('height'));
+            }
+
+            checkbox.set(CHECKED, checked);
+        }
+    },
+
+    /**
+     * Passes checkbox clicks on to the category attribute.
+     *
+     * @method _onCategoryCheckboxClick
+     * @param e {Event} the DOM event
+     * @protected
+     */
+    _onCategoryCheckboxClick : function (e) {
+        var t = e.target, cat;
+
+        if (t.hasClass(ConsoleFilters.CHROME_CLASSES.filter)) {
+            cat = t.get('value');
+            if (cat && cat in this.get(CATEGORY)) {
+                this.set(CATEGORY_DOT + cat, t.get(CHECKED), { fromUI: true });
+            }
+        }
+    },
+
+    /**
+     * Passes checkbox clicks on to the source attribute.
+     *
+     * @method _onSourceCheckboxClick
+     * @param e {Event} the DOM event
+     * @protected
+     */
+    _onSourceCheckboxClick : function (e) {
+        var t = e.target, src;
+
+        if (t.hasClass(ConsoleFilters.CHROME_CLASSES.filter)) {
+            src = t.get('value');
+            if (src && src in this.get(SOURCE)) {
+                this.set(SOURCE_DOT + src, t.get(CHECKED), { fromUI: true });
+            }
+        }
+    },
+
+    /**
+     * Hides any number of categories from the UI.  Convenience method for
+     * myConsole.filter.set('category.foo', false); set('category.bar', false);
+     * and so on.
+     *
+     * @method hideCategory
+     * @param cat* {String} 1..n categories to filter out of the UI
+     */
+    hideCategory : function (cat, multiple) {
+        if (isString(multiple)) {
+            Y.Array.each(arguments, this.hideCategory, this);
+        } else {
+            this.set(CATEGORY_DOT + cat, false);
+        }
+    },
+
+    /**
+     * Shows any number of categories in the UI.  Convenience method for
+     * myConsole.filter.set('category.foo', true); set('category.bar', true);
+     * and so on.
+     *
+     * @method showCategory
+     * @param cat* {String} 1..n categories to allow to display in the UI
+     */
+    showCategory : function (cat, multiple) {
+        if (isString(multiple)) {
+            Y.Array.each(arguments, this.showCategory, this);
+        } else {
+            this.set(CATEGORY_DOT + cat, true);
+        }
+    },
+
+    /**
+     * Hides any number of sources from the UI.  Convenience method for
+     * myConsole.filter.set('source.foo', false); set('source.bar', false);
+     * and so on.
+     *
+     * @method hideSource
+     * @param src* {String} 1..n sources to filter out of the UI
+     */
+    hideSource : function (src, multiple) {
+        if (isString(multiple)) {
+            Y.Array.each(arguments, this.hideSource, this);
+        } else {
+            this.set(SOURCE_DOT + src, false);
+        }
+    },
+
+    /**
+     * Shows any number of sources in the UI.  Convenience method for
+     * myConsole.filter.set('source.foo', true); set('source.bar', true);
+     * and so on.
+     *
+     * @method showSource
+     * @param src* {String} 1..n sources to allow to display in the UI
+     */
+    showSource : function (src, multiple) {
+        if (isString(multiple)) {
+            Y.Array.each(arguments, this.showSource, this);
+        } else {
+            this.set(SOURCE_DOT + src, true);
+        }
+    },
+
+    /**
+     * Creates a checkbox and label from the ConsoleFilters.FILTER_TEMPLATE for
+     * the provided type and name.  The checkbox and label are appended to the
+     * container node passes as the first arg.
+     *
+     * @method _createCheckbox
+     * @param container {Node} the parentNode of the new checkbox and label
+     * @param name {String} the identifier of the filter
+     * @protected
+     */
+    _createCheckbox : function (container, name) {
+        var info = Y.merge(ConsoleFilters.CHROME_CLASSES, {
+                        filter_name  : name,
+                        filter_class : getCN(CONSOLE, FILTER, name)
+                   }),
+            node = Y.Node.create(
+                        Y.Lang.sub(ConsoleFilters.FILTER_TEMPLATE, info));
+
+        container.appendChild(node);
+    },
+
+    /**
+     * Validates category updates are objects and the subattribute is not too
+     * deep.
+     *
+     * @method _validateCategory
+     * @param cat {String} the new category:visibility map
+     * @param v {String} the subattribute path updated
+     * @return Boolean
+     * @protected
+     */
+    _validateCategory : function (cat, v) {
+        return Y.Lang.isObject(v,true) && cat.split(/\./).length < 3;
+    },
+
+    /**
+     * Validates source updates are objects and the subattribute is not too
+     * deep.
+     *
+     * @method _validateSource
+     * @param cat {String} the new source:visibility map
+     * @param v {String} the subattribute path updated
+     * @return Boolean
+     * @protected
+     */
+    _validateSource : function (src, v) {
+        return Y.Lang.isObject(v,true) && src.split(/\./).length < 3;
+    },
+
+    /**
+     * Setter method for cacheLimit attribute.  Basically a validator to ensure
+     * numeric input.
+     *
+     * @method _setCacheLimit
+     * @param v {Number} Maximum number of entries
+     * @return {Number}
+     * @protected
+     */
+    _setCacheLimit: function (v) {
+        if (Y.Lang.isNumber(v)) {
+            this._cacheLimit = v;
+            return v;
+        } else {
+            return Y.Attribute.INVALID_VALUE;
+        }
+    }
+},
+
+// Y.Plugin.ConsoleFilters static properties
+{
+    /**
+     * Plugin name.
+     *
+     * @property NAME
+     * @type String
+     * @static
+     * @default 'consoleFilters'
+     */
+    NAME : 'consoleFilters',
+
+    /**
+     * The namespace hung off the host object that this plugin will inhabit.
+     *
+     * @property NS
+     * @type String
+     * @static
+     * @default 'filter'
+     */
+    NS : FILTER,
+
+    /**
+     * Markup template used to create the container for the category filters.
+     *
+     * @property CATEGORIES_TEMPLATE
+     * @type String
+     * @static
+     */
+    CATEGORIES_TEMPLATE :
+        '<div class="{categories}"></div>',
+
+    /**
+     * Markup template used to create the container for the source filters.
+     *
+     * @property SOURCES_TEMPLATE
+     * @type String
+     * @static
+     */
+    SOURCES_TEMPLATE :
+        '<div class="{sources}"></div>',
+
+    /**
+     * Markup template used to create the category and source filter checkboxes.
+     *
+     * @property FILTER_TEMPLATE
+     * @type String
+     * @static
+     */
+    FILTER_TEMPLATE :
+        // IE8 and FF3 don't permit breaking _between_ nowrap elements.  IE8
+        // doesn't understand (non spec) wbr tag, nor does it create text nodes
+        // for spaces in innerHTML strings.  The thin-space entity suffices to
+        // create a breakable point.
+        '<label class="{filter_label}">'+
+            '<input type="checkbox" value="{filter_name}" '+
+                'class="{filter} {filter_class}"> {filter_name}'+
+        '</label>&#8201;',
+
+    /**
+     * Classnames used by the templates when creating nodes.
+     *
+     * @property CHROME_CLASSES
+     * @type Object
+     * @static
+     * @protected
+     */
+    CHROME_CLASSES : {
+        categories   : getCN(CONSOLE,FILTERS,'categories'),
+        sources      : getCN(CONSOLE,FILTERS,'sources'),
+        category     : getCN(CONSOLE,FILTER,CATEGORY),
+        source       : getCN(CONSOLE,FILTER,SOURCE),
+        filter       : getCN(CONSOLE,FILTER),
+        filter_label : getCN(CONSOLE,FILTER,'label')
+    },
+
+    ATTRS : {
+        /**
+         * Default visibility applied to new categories and sources.
+         *
+         * @attribute defaultVisibility
+         * @type {Boolean}
+         * @default true
+         */
+        defaultVisibility : {
+            value : true,
+            validator : Y.Lang.isBoolean
+        },
+
+        /**
+         * <p>Map of entry categories to their visibility status.  Update a
+         * particular category's visibility by setting the subattribute to true
+         * (visible) or false (hidden).</p>
+         *
+         * <p>For example, yconsole.filter.set('category.info', false) to hide
+         * log entries with the category/logLevel of 'info'.</p>
+         *
+         * <p>Similarly, yconsole.filter.get('category.warn') will return a
+         * boolean indicating whether that category is currently being included
+         * in the UI.</p>
+         *
+         * <p>Unlike the YUI instance configuration's logInclude and logExclude
+         * properties, filtered entries are only hidden from the UI, but
+         * can be made visible again.</p>
+         *
+         * @attribute category
+         * @type Object
+         */
+        category : {
+            value : {},
+            validator : function (v,k) {
+                return this._validateCategory(k,v);
+            }
+        },
+
+        /**
+         * <p>Map of entry sources to their visibility status.  Update a
+         * particular sources's visibility by setting the subattribute to true
+         * (visible) or false (hidden).</p>
+         *
+         * <p>For example, yconsole.filter.set('sources.slider', false) to hide
+         * log entries originating from Y.Slider.</p>
+         *
+         * @attribute source
+         * @type Object
+         */
+        source : {
+            value : {},
+            validator : function (v,k) {
+                return this._validateSource(k,v);
+            }
+        },
+
+        /**
+         * Maximum number of entries to store in the message cache.  Use this to
+         * limit the memory footprint in environments with heavy log usage.
+         * By default, there is no limit (Number.POSITIVE_INFINITY).
+         *
+         * @attribute cacheLimit
+         * @type {Number}
+         * @default Number.POSITIVE_INFINITY
+         */
+        cacheLimit : {
+            value : Number.POSITIVE_INFINITY,
+            setter : function (v) {
+                return this._setCacheLimit(v);
+            }
+        }
     }
 });
 
 
-}, '3.18.1', {"requires": ["node-base", "event-base", "event-touch", "event-synthetic"]});
+}, '3.18.1', {"requires": ["plugin", "console"], "skinnable": true});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('test-console', function (Y, NAME) {
+
+/**
+Provides a specialized log console widget that's pre-configured to display YUI
+Test output with no extra configuration.
+
+@example
+
+    <div id="log" class="yui3-skin-sam"></div>
+
+    <script>
+    YUI().use('test-console', function (Y) {
+        // ... set up your test cases here ...
+
+        // Render the console inside the #log div, then run the tests.
+        new Y.Test.Console().render('#log');
+        Y.Test.Runner.run();
+    });
+    </script>
+
+@module test-console
+@namespace Test
+@class Console
+@extends Console
+@constructor
+
+@param {Object} [config] Config attributes.
+    @param {Object} [config.filters] Category filter configuration.
+
+@since 3.5.0
+**/
+
+function TestConsole() {
+    TestConsole.superclass.constructor.apply(this, arguments);
+}
+
+Y.namespace('Test').Console = Y.extend(TestConsole, Y.Console, {
+    initializer: function (config) {
+        this.on('entry', this._onEntry);
+
+        this.plug(Y.Plugin.ConsoleFilters, {
+            category: Y.merge({
+                info  : true,
+                pass  : false,
+                fail  : true,
+                status: false
+            }, (config && config.filters) || {}),
+
+            defaultVisibility: false,
+
+            source: {
+                TestRunner: true
+            }
+        });
+
+        Y.Test.Runner.on('complete', Y.bind(this._parseCoverage, this));
+    },
+
+    // -- Protected Coverage Parser ---------------------------------------------
+    /**
+    * Scans the coverage data to determine if it's an Istanbul coverage object.
+    * @method _isIstanbul
+    * @param {Object} json The coverage data to scan
+    * @return {Boolean} True if this is Istanbul Coverage
+    */
+    _isIstanbul: function(json) {
+        var first = Y.Object.keys(json)[0],
+            ret = false;
+
+        if (json[first].s !== undefined && json[first].fnMap !== undefined) {
+            ret = true;
+        }
+
+        if (json.s !== undefined && json.fnMap !== undefined) {
+            ret = true;
+        }
+        return ret;
+    },
+    /**
+    * Parses and logs a summary of YUITest coverage data.
+    * @method parseYUITest
+    * @param {Object} coverage The YUITest Coverage JSON data
+    */
+    parseYUITestCoverage: function (coverage) {
+        var cov = {
+            lines: {
+                hit: 0,
+                miss: 0,
+                total: 0,
+                percent: 0
+            },
+            functions: {
+                hit: 0,
+                miss: 0,
+                total: 0,
+                percent: 0
+            }
+        }, coverageLog;
+
+        Y.Object.each(coverage, function(info) {
+            cov.lines.total += info.coveredLines;
+            cov.lines.hit += info.calledLines;
+            cov.lines.miss += (info.coveredLines - info.calledLines);
+            cov.lines.percent = Math.floor((cov.lines.hit / cov.lines.total) * 100);
+
+            cov.functions.total += info.coveredFunctions;
+            cov.functions.hit += info.calledFunctions;
+            cov.functions.miss += (info.coveredFunctions - info.calledFunctions);
+            cov.functions.percent = Math.floor((cov.functions.hit / cov.functions.total) * 100);
+        });
+
+
+        coverageLog = 'Lines: Hit:' + cov.lines.hit + ' Missed:' + cov.lines.miss + ' Total:' + cov.lines.total + ' Percent:' + cov.lines.percent + '%\n';
+        coverageLog += 'Functions: Hit:' + cov.functions.hit + ' Missed:' + cov.functions.miss + ' Total:' + cov.functions.total + ' Percent:' + cov.functions.percent + '%';
+
+        this.log('Coverage: ' + coverageLog, 'info', 'TestRunner');
+    },
+    /**
+    * Generates a generic summary object used for Istanbul conversions.
+    * @method _blankSummary
+    * @return {Object} Generic summary object
+    */
+    _blankSummary: function () {
+        return {
+            lines: {
+                total: 0,
+                covered: 0,
+                pct: 'Unknown'
+            },
+            statements: {
+                total: 0,
+                covered: 0,
+                pct: 'Unknown'
+            },
+            functions: {
+                total: 0,
+                covered: 0,
+                pct: 'Unknown'
+            },
+            branches: {
+                total: 0,
+                covered: 0,
+                pct: 'Unknown'
+            }
+        };
+    },
+    /**
+    * Calculates line numbers from statement coverage
+    * @method _addDerivedInfoForFile
+    * @private
+    * @param {Object} fileCoverage JSON coverage data
+    */
+    _addDerivedInfoForFile: function (fileCoverage) {
+        var statementMap = fileCoverage.statementMap,
+            statements = fileCoverage.s,
+            lineMap;
+
+        if (!fileCoverage.l) {
+            fileCoverage.l = lineMap = {};
+            Y.Object.each(statements, function (value, st) {
+                var line = statementMap[st].start.line,
+                    count = statements[st],
+                    prevVal = lineMap[line];
+                if (typeof prevVal === 'undefined' || prevVal < count) {
+                    lineMap[line] = count;
+                }
+            });
+        }
+    },
+    /**
+    * Generic percent calculator
+    * @method _percent
+    * @param {Number} covered The covered amount
+    * @param {Number} total The total
+    * @private
+    */
+    _percent: function (covered, total) {
+        var tmp, pct = 100.00;
+        if (total > 0) {
+            tmp = 1000 * 100 * covered / total + 5;
+            pct = Math.floor(tmp / 10) / 100;
+        }
+        return pct;
+    },
+    /**
+    * Summarize simple properties in the coverage data
+    * @method _computSimpleTotals
+    * @private
+    * @param {Object} fileCoverage JSON coverage data
+    * @param {String} property The property to summarize
+    */
+    _computeSimpleTotals: function (fileCoverage, property) {
+        var stats = fileCoverage[property],
+            ret = { total: 0, covered: 0 };
+
+        Y.Object.each(stats, function(val) {
+            ret.total += 1;
+            if (val) {
+                ret.covered += 1;
+            }
+        });
+        ret.pct = this._percent(ret.covered, ret.total);
+        return ret;
+    },
+    /**
+    * Noramlizes branch data from Istanbul
+    * @method _computeBranchTotals
+    * @private
+    * @param {Object} fileCoverage JSON coverage data
+    */
+    _computeBranchTotals: function (fileCoverage) {
+        var stats = fileCoverage.b,
+            ret = { total: 0, covered: 0 };
+
+        Y.Object.each(stats, function (branches) {
+            var covered = Y.Array.filter(branches, function (num) { return num > 0; });
+            ret.total += branches.length;
+            ret.covered += covered.length;
+        });
+        ret.pct = this._percent(ret.covered, ret.total);
+        return ret;
+    },
+    /**
+    * Takes an Istanbul coverage object, normalizes it and prints a log with a summary
+    * @method parseInstanbul
+    * @param {Object} coverage The coverage object to normalize and log
+    */
+    parseIstanbul: function (coverage) {
+        var self = this,
+            str = 'Coverage Report:\n';
+
+        Y.Object.each(coverage, function(fileCoverage, file) {
+            var ret = self._blankSummary();
+
+            self._addDerivedInfoForFile(fileCoverage);
+            ret.lines = self._computeSimpleTotals(fileCoverage, 'l');
+            ret.functions = self._computeSimpleTotals(fileCoverage, 'f');
+            ret.statements = self._computeSimpleTotals(fileCoverage, 's');
+            ret.branches = self._computeBranchTotals(fileCoverage);
+            str += file + ':\n';
+            Y.Array.each(['lines','functions','statements','branches'], function(key) {
+                str += '    ' + key +': ' + ret[key].covered + '/' + ret[key].total + ' : ' + ret[key].pct + '%\n';
+            });
+
+        });
+        this.log(str, 'info', 'TestRunner');
+
+    },
+    /**
+    * Parses YUITest or Istanbul coverage results if they are available and logs them.
+    * @method _parseCoverage
+    * @private
+    */
+    _parseCoverage: function() {
+        var coverage = Y.Test.Runner.getCoverage();
+        if (!coverage) {
+            return;
+        }
+        if (this._isIstanbul(coverage)) {
+            this.parseIstanbul(coverage);
+        } else {
+            this.parseYUITestCoverage(coverage);
+        }
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
+    _onEntry: function (e) {
+        var msg = e.message;
+
+        if (msg.category === 'info'
+                && /\s(?:case|suite)\s|yuitests\d+|began/.test(msg.message)) {
+            msg.category = 'status';
+        } else if (msg.category === 'fail') {
+            this.printBuffer();
+        }
+    }
+}, {
+    NAME: 'testConsole',
+
+    ATTRS: {
+        entryTemplate: {
+            value:
+                '<div class="{entry_class} {cat_class} {src_class}">' +
+                    '<div class="{entry_content_class}">{message}</div>' +
+                '</div>'
+        },
+
+        height: {
+            value: '350px'
+        },
+
+        newestOnTop: {
+            value: false
+        },
+
+        style: {
+            value: 'block'
+        },
+
+        width: {
+            value: Y.UA.ie && Y.UA.ie < 9 ? '100%' : 'inherit'
+        }
+    }
+});
+
+
+}, '3.18.1', {"requires": ["console-filters", "test", "array-extras"], "skinnable": true});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('async-queue', function (Y, NAME) {
+
+/**
+ * <p>AsyncQueue allows you create a chain of function callbacks executed
+ * via setTimeout (or synchronously) that are guaranteed to run in order.
+ * Items in the queue can be promoted or removed.  Start or resume the
+ * execution chain with run().  pause() to temporarily delay execution, or
+ * stop() to halt and clear the queue.</p>
+ *
+ * @module async-queue
+ */
+
+/**
+ * <p>A specialized queue class that supports scheduling callbacks to execute
+ * sequentially, iteratively, even asynchronously.</p>
+ *
+ * <p>Callbacks can be function refs or objects with the following keys.  Only
+ * the <code>fn</code> key is required.</p>
+ *
+ * <ul>
+ * <li><code>fn</code> -- The callback function</li>
+ * <li><code>context</code> -- The execution context for the callbackFn.</li>
+ * <li><code>args</code> -- Arguments to pass to callbackFn.</li>
+ * <li><code>timeout</code> -- Millisecond delay before executing callbackFn.
+ *                     (Applies to each iterative execution of callback)</li>
+ * <li><code>iterations</code> -- Number of times to repeat the callback.
+ * <li><code>until</code> -- Repeat the callback until this function returns
+ *                         true.  This setting trumps iterations.</li>
+ * <li><code>autoContinue</code> -- Set to false to prevent the AsyncQueue from
+ *                        executing the next callback in the Queue after
+ *                        the callback completes.</li>
+ * <li><code>id</code> -- Name that can be used to get, promote, get the
+ *                        indexOf, or delete this callback.</li>
+ * </ul>
+ *
+ * @class AsyncQueue
+ * @extends EventTarget
+ * @constructor
+ * @param callback* {Function|Object} 0..n callbacks to seed the queue
+ */
+Y.AsyncQueue = function() {
+    this._init();
+    this.add.apply(this, arguments);
+};
+
+var Queue   = Y.AsyncQueue,
+    EXECUTE = 'execute',
+    SHIFT   = 'shift',
+    PROMOTE = 'promote',
+    REMOVE  = 'remove',
+
+    isObject   = Y.Lang.isObject,
+    isFunction = Y.Lang.isFunction;
+
+/**
+ * <p>Static default values used to populate callback configuration properties.
+ * Preconfigured defaults include:</p>
+ *
+ * <ul>
+ *  <li><code>autoContinue</code>: <code>true</code></li>
+ *  <li><code>iterations</code>: 1</li>
+ *  <li><code>timeout</code>: 10 (10ms between callbacks)</li>
+ *  <li><code>until</code>: (function to run until iterations &lt;= 0)</li>
+ * </ul>
+ *
+ * @property defaults
+ * @type {Object}
+ * @static
+ */
+Queue.defaults = Y.mix({
+    autoContinue : true,
+    iterations   : 1,
+    timeout      : 10,
+    until        : function () {
+        this.iterations |= 0;
+        return this.iterations <= 0;
+    }
+}, Y.config.queueDefaults || {});
+
+Y.extend(Queue, Y.EventTarget, {
+    /**
+     * Used to indicate the queue is currently executing a callback.
+     *
+     * @property _running
+     * @type {Boolean|Object} true for synchronous callback execution, the
+     *                        return handle from Y.later for async callbacks.
+     *                        Otherwise false.
+     * @protected
+     */
+    _running : false,
+
+    /**
+     * Initializes the AsyncQueue instance properties and events.
+     *
+     * @method _init
+     * @protected
+     */
+    _init : function () {
+        Y.EventTarget.call(this, { prefix: 'queue', emitFacade: true });
+
+        this._q = [];
+
+        /**
+         * Callback defaults for this instance.  Static defaults that are not
+         * overridden are also included.
+         *
+         * @property defaults
+         * @type {Object}
+         */
+        this.defaults = {};
+
+        this._initEvents();
+    },
+
+    /**
+     * Initializes the instance events.
+     *
+     * @method _initEvents
+     * @protected
+     */
+    _initEvents : function () {
+        this.publish({
+            'execute' : { defaultFn : this._defExecFn,    emitFacade: true },
+            'shift'   : { defaultFn : this._defShiftFn,   emitFacade: true },
+            'add'     : { defaultFn : this._defAddFn,     emitFacade: true },
+            'promote' : { defaultFn : this._defPromoteFn, emitFacade: true },
+            'remove'  : { defaultFn : this._defRemoveFn,  emitFacade: true }
+        });
+    },
+
+    /**
+     * Returns the next callback needing execution.  If a callback is
+     * configured to repeat via iterations or until, it will be returned until
+     * the completion criteria is met.
+     *
+     * When the queue is empty, null is returned.
+     *
+     * @method next
+     * @return {Function} the callback to execute
+     */
+    next : function () {
+        var callback;
+
+        while (this._q.length) {
+            callback = this._q[0] = this._prepare(this._q[0]);
+            if (callback && callback.until()) {
+                this.fire(SHIFT, { callback: callback });
+                callback = null;
+            } else {
+                break;
+            }
+        }
+
+        return callback || null;
+    },
+
+    /**
+     * Default functionality for the &quot;shift&quot; event.  Shifts the
+     * callback stored in the event object's <em>callback</em> property from
+     * the queue if it is the first item.
+     *
+     * @method _defShiftFn
+     * @param e {Event} The event object
+     * @protected
+     */
+    _defShiftFn : function (e) {
+        if (this.indexOf(e.callback) === 0) {
+            this._q.shift();
+        }
+    },
+
+    /**
+     * Creates a wrapper function to execute the callback using the aggregated
+     * configuration generated by combining the static AsyncQueue.defaults, the
+     * instance defaults, and the specified callback settings.
+     *
+     * The wrapper function is decorated with the callback configuration as
+     * properties for runtime modification.
+     *
+     * @method _prepare
+     * @param callback {Object|Function} the raw callback
+     * @return {Function} a decorated function wrapper to execute the callback
+     * @protected
+     */
+    _prepare: function (callback) {
+        if (isFunction(callback) && callback._prepared) {
+            return callback;
+        }
+
+        var config = Y.merge(
+            Queue.defaults,
+            { context : this, args: [], _prepared: true },
+            this.defaults,
+            (isFunction(callback) ? { fn: callback } : callback)),
+
+            wrapper = Y.bind(function () {
+                if (!wrapper._running) {
+                    wrapper.iterations--;
+                }
+                if (isFunction(wrapper.fn)) {
+                    wrapper.fn.apply(wrapper.context || Y,
+                                     Y.Array(wrapper.args));
+                }
+            }, this);
+
+        return Y.mix(wrapper, config);
+    },
+
+    /**
+     * Sets the queue in motion.  All queued callbacks will be executed in
+     * order unless pause() or stop() is called or if one of the callbacks is
+     * configured with autoContinue: false.
+     *
+     * @method run
+     * @return {AsyncQueue} the AsyncQueue instance
+     * @chainable
+     */
+    run : function () {
+        var callback,
+            cont = true;
+
+        if (this._executing) {
+            this._running = true;
+            return this;
+        }
+
+        for (callback = this.next();
+            callback && !this.isRunning();
+            callback = this.next())
+        {
+            cont = (callback.timeout < 0) ?
+                this._execute(callback) :
+                this._schedule(callback);
+
+            // Break to avoid an extra call to next (final-expression of the
+            // 'for' loop), because the until function of the next callback
+            // in the queue may return a wrong result if it depends on the
+            // not-yet-finished work of the previous callback.
+            if (!cont) {
+                break;
+            }
+        }
+
+        if (!callback) {
+            /**
+             * Event fired when there is no remaining callback in the running queue. Also fired after stop().
+             * @event complete
+             */
+            this.fire('complete');
+        }
+
+        return this;
+    },
+
+    /**
+     * Handles the execution of callbacks. Returns a boolean indicating
+     * whether it is appropriate to continue running.
+     *
+     * @method _execute
+     * @param callback {Object} the callback object to execute
+     * @return {Boolean} whether the run loop should continue
+     * @protected
+     */
+    _execute : function (callback) {
+
+        this._running   = callback._running = true;
+        this._executing = callback;
+
+        callback.iterations--;
+        this.fire(EXECUTE, { callback: callback });
+
+        var cont = this._running && callback.autoContinue;
+
+        this._running   = callback._running = false;
+        this._executing = false;
+
+        return cont;
+    },
+
+    /**
+     * Schedules the execution of asynchronous callbacks.
+     *
+     * @method _schedule
+     * @param callback {Object} the callback object to execute
+     * @return {Boolean} whether the run loop should continue
+     * @protected
+     */
+    _schedule : function (callback) {
+        this._running = Y.later(callback.timeout, this, function () {
+            if (this._execute(callback)) {
+                this.run();
+            }
+        });
+
+        return false;
+    },
+
+    /**
+     * Determines if the queue is waiting for a callback to complete execution.
+     *
+     * @method isRunning
+     * @return {Boolean} true if queue is waiting for a
+     *                   from any initiated transactions
+     */
+    isRunning : function () {
+        return !!this._running;
+    },
+
+    /**
+     * Default functionality for the &quot;execute&quot; event.  Executes the
+     * callback function
+     *
+     * @method _defExecFn
+     * @param e {Event} the event object
+     * @protected
+     */
+    _defExecFn : function (e) {
+        e.callback();
+    },
+
+    /**
+     * Add any number of callbacks to the end of the queue. Callbacks may be
+     * provided as functions or objects.
+     *
+     * @method add
+     * @param callback* {Function|Object} 0..n callbacks
+     * @return {AsyncQueue} the AsyncQueue instance
+     * @chainable
+     */
+    add : function () {
+        this.fire('add', { callbacks: Y.Array(arguments,0,true) });
+
+        return this;
+    },
+
+    /**
+     * Default functionality for the &quot;add&quot; event.  Adds the callbacks
+     * in the event facade to the queue. Callbacks successfully added to the
+     * queue are present in the event's <code>added</code> property in the
+     * after phase.
+     *
+     * @method _defAddFn
+     * @param e {Event} the event object
+     * @protected
+     */
+    _defAddFn : function(e) {
+        var _q = this._q,
+            added = [];
+
+        Y.Array.each(e.callbacks, function (c) {
+            if (isObject(c)) {
+                _q.push(c);
+                added.push(c);
+            }
+        });
+
+        e.added = added;
+    },
+
+    /**
+     * Pause the execution of the queue after the execution of the current
+     * callback completes.  If called from code outside of a queued callback,
+     * clears the timeout for the pending callback. Paused queue can be
+     * restarted with q.run()
+     *
+     * @method pause
+     * @return {AsyncQueue} the AsyncQueue instance
+     * @chainable
+     */
+    pause: function () {
+        if (this._running && isObject(this._running)) {
+            this._running.cancel();
+        }
+
+        this._running = false;
+
+        return this;
+    },
+
+    /**
+     * Stop and clear the queue after the current execution of the
+     * current callback completes.
+     *
+     * @method stop
+     * @return {AsyncQueue} the AsyncQueue instance
+     * @chainable
+     */
+    stop : function () {
+
+        this._q = [];
+
+        if (this._running && isObject(this._running)) {
+            this._running.cancel();
+            this._running = false;
+        }
+        // otherwise don't systematically set this._running to false, because if
+        // stop has been called from inside a queued callback, the _execute method
+        // currenty running needs to call run() one more time for the 'complete'
+        // event to be fired.
+
+        // if stop is called from outside a callback, we need to explicitely call
+        // run() once again to fire the 'complete' event.
+        if (!this._executing) {
+            this.run();
+        }
+
+        return this;
+    },
+
+    /**
+     * Returns the current index of a callback.  Pass in either the id or
+     * callback function from getCallback.
+     *
+     * @method indexOf
+     * @param callback {String|Function} the callback or its specified id
+     * @return {Number} index of the callback or -1 if not found
+     */
+    indexOf : function (callback) {
+        var i = 0, len = this._q.length, c;
+
+        for (; i < len; ++i) {
+            c = this._q[i];
+            if (c === callback || c.id === callback) {
+                return i;
+            }
+        }
+
+        return -1;
+    },
+
+    /**
+     * Retrieve a callback by its id.  Useful to modify the configuration
+     * while the queue is running.
+     *
+     * @method getCallback
+     * @param id {String} the id assigned to the callback
+     * @return {Object} the callback object
+     */
+    getCallback : function (id) {
+        var i = this.indexOf(id);
+
+        return (i > -1) ? this._q[i] : null;
+    },
+
+    /**
+     * Promotes the named callback to the top of the queue. If a callback is
+     * currently executing or looping (via until or iterations), the promotion
+     * is scheduled to occur after the current callback has completed.
+     *
+     * @method promote
+     * @param callback {String|Object} the callback object or a callback's id
+     * @return {AsyncQueue} the AsyncQueue instance
+     * @chainable
+     */
+    promote : function (callback) {
+        var payload = { callback : callback },e;
+
+        if (this.isRunning()) {
+            e = this.after(SHIFT, function () {
+                    this.fire(PROMOTE, payload);
+                    e.detach();
+                }, this);
+        } else {
+            this.fire(PROMOTE, payload);
+        }
+
+        return this;
+    },
+
+    /**
+     * <p>Default functionality for the &quot;promote&quot; event.  Promotes the
+     * named callback to the head of the queue.</p>
+     *
+     * <p>The event object will contain a property &quot;callback&quot;, which
+     * holds the id of a callback or the callback object itself.</p>
+     *
+     * @method _defPromoteFn
+     * @param e {Event} the custom event
+     * @protected
+     */
+    _defPromoteFn : function (e) {
+        var i = this.indexOf(e.callback),
+            promoted = (i > -1) ? this._q.splice(i,1)[0] : null;
+
+        e.promoted = promoted;
+
+        if (promoted) {
+            this._q.unshift(promoted);
+        }
+    },
+
+    /**
+     * Removes the callback from the queue.  If the queue is active, the
+     * removal is scheduled to occur after the current callback has completed.
+     *
+     * @method remove
+     * @param callback {String|Object} the callback object or a callback's id
+     * @return {AsyncQueue} the AsyncQueue instance
+     * @chainable
+     */
+    remove : function (callback) {
+        var payload = { callback : callback },e;
+
+        // Can't return the removed callback because of the deferral until
+        // current callback is complete
+        if (this.isRunning()) {
+            e = this.after(SHIFT, function () {
+                    this.fire(REMOVE, payload);
+                    e.detach();
+                },this);
+        } else {
+            this.fire(REMOVE, payload);
+        }
+
+        return this;
+    },
+
+    /**
+     * <p>Default functionality for the &quot;remove&quot; event.  Removes the
+     * callback from the queue.</p>
+     *
+     * <p>The event object will contain a property &quot;callback&quot;, which
+     * holds the id of a callback or the callback object itself.</p>
+     *
+     * @method _defRemoveFn
+     * @param e {Event} the custom event
+     * @protected
+     */
+    _defRemoveFn : function (e) {
+        var i = this.indexOf(e.callback);
+
+        e.removed = (i > -1) ? this._q.splice(i,1)[0] : null;
+    },
+
+    /**
+     * Returns the number of callbacks in the queue.
+     *
+     * @method size
+     * @return {Number}
+     */
+    size : function () {
+        // next() flushes callbacks that have met their until() criteria and
+        // therefore shouldn't count since they wouldn't execute anyway.
+        if (!this.isRunning()) {
+            this.next();
+        }
+
+        return this._q.length;
+    }
+});
+
+
+
+}, '3.18.1', {"requires": ["event-custom"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('gesture-simulate', function (Y, NAME) {
+
+/**
+ * Simulate high-level user gestures by generating a set of native DOM events.
+ *
+ * @module gesture-simulate
+ * @requires event-simulate, async-queue, node-screen
+ */
+
+var NAME = "gesture-simulate",
+
+    // phantomjs check may be temporary, until we determine if it really support touch all the way through, like it claims to (http://code.google.com/p/phantomjs/issues/detail?id=375)
+    SUPPORTS_TOUCH = ((Y.config.win && ("ontouchstart" in Y.config.win)) && !(Y.UA.phantomjs) && !(Y.UA.chrome && Y.UA.chrome < 6)),
+
+    gestureNames = {
+        tap: 1,
+        doubletap: 1,
+        press: 1,
+        move: 1,
+        flick: 1,
+        pinch: 1,
+        rotate: 1
+    },
+
+    touchEvents = {
+        touchstart: 1,
+        touchmove: 1,
+        touchend: 1,
+        touchcancel: 1
+    },
+
+    document = Y.config.doc,
+    emptyTouchList,
+
+    EVENT_INTERVAL = 20,        // 20ms
+    START_PAGEX,                // will be adjusted to the node element center
+    START_PAGEY,                // will be adjusted to the node element center
+
+    // defaults that user can override.
+    DEFAULTS = {
+        // tap gestures
+        HOLD_TAP: 10,           // 10ms
+        DELAY_TAP: 10,          // 10ms
+
+        // press gesture
+        HOLD_PRESS: 3000,       // 3sec
+        MIN_HOLD_PRESS: 1000,   // 1sec
+        MAX_HOLD_PRESS: 60000,  // 1min
+
+        // move gesture
+        DISTANCE_MOVE: 200,     // 200 pixels
+        DURATION_MOVE: 1000,    // 1sec
+        MAX_DURATION_MOVE: 5000,// 5sec
+
+        // flick gesture
+        MIN_VELOCITY_FLICK: 1.3,
+        DISTANCE_FLICK: 200,     // 200 pixels
+        DURATION_FLICK: 1000,    // 1sec
+        MAX_DURATION_FLICK: 5000,// 5sec
+
+        // pinch/rotation
+        DURATION_PINCH: 1000     // 1sec
+    },
+
+    TOUCH_START = 'touchstart',
+    TOUCH_MOVE = 'touchmove',
+    TOUCH_END = 'touchend',
+
+    GESTURE_START = 'gesturestart',
+    GESTURE_CHANGE = 'gesturechange',
+    GESTURE_END = 'gestureend',
+
+    MOUSE_UP    = 'mouseup',
+    MOUSE_MOVE  = 'mousemove',
+    MOUSE_DOWN  = 'mousedown',
+    MOUSE_CLICK = 'click',
+    MOUSE_DBLCLICK = 'dblclick',
+
+    X_AXIS = 'x',
+    Y_AXIS = 'y';
+
+
+function Simulations(node) {
+    if(!node) {
+        Y.error(NAME+': invalid target node');
+    }
+    this.node = node;
+    this.target = Y.Node.getDOMNode(node);
+
+    var startXY = this.node.getXY(),
+        dims = this._getDims();
+
+    START_PAGEX = startXY[0] + (dims[0])/2;
+    START_PAGEY = startXY[1] + (dims[1])/2;
+}
+
+Simulations.prototype = {
+
+    /**
+     * Helper method to convert a degree to a radian.
+     *
+     * @method _toRadian
+     * @private
+     * @param {Number} deg A degree to be converted to a radian.
+     * @return {Number} The degree in radian.
+     */
+    _toRadian: function(deg) {
+        return deg * (Math.PI/180);
+    },
+
+    /**
+     * Helper method to get height/width while accounting for
+     * rotation/scale transforms where possible by using the
+     * bounding client rectangle height/width instead of the
+     * offsetWidth/Height which region uses.
+     * @method _getDims
+     * @private
+     * @return {Array} Array with [height, width]
+     */
+    _getDims : function() {
+        var region,
+            width,
+            height;
+
+        // Ideally, this should be in DOM somewhere.
+        if (this.target.getBoundingClientRect) {
+            region = this.target.getBoundingClientRect();
+
+            if ("height" in region) {
+                height = region.height;
+            } else {
+                // IE7,8 has getBCR, but no height.
+                height = Math.abs(region.bottom - region.top);
+            }
+
+            if ("width" in region) {
+                width = region.width;
+            } else {
+                // IE7,8 has getBCR, but no width.
+                width = Math.abs(region.right - region.left);
+            }
+        } else {
+            region = this.node.get("region");
+            width = region.width;
+            height = region.height;
+        }
+
+        return [width, height];
+    },
+
+    /**
+     * Helper method to convert a point relative to the node element into
+     * the point in the page coordination.
+     *
+     * @method _calculateDefaultPoint
+     * @private
+     * @param {Array} point A point relative to the node element.
+     * @return {Array} The same point in the page coordination.
+     */
+    _calculateDefaultPoint: function(point) {
+
+        var height;
+
+        if(!Y.Lang.isArray(point) || point.length === 0) {
+            point = [START_PAGEX, START_PAGEY];
+        } else {
+            if(point.length == 1) {
+                height = this._getDims[1];
+                point[1] = height/2;
+            }
+            // convert to page(viewport) coordination
+            point[0] = this.node.getX() + point[0];
+            point[1] = this.node.getY() + point[1];
+        }
+
+        return point;
+    },
+
+    /**
+     * The "rotate" and "pinch" methods are essencially same with the exact same
+     * arguments. Only difference is the required parameters. The rotate method
+     * requires "rotation" parameter while the pinch method requires "startRadius"
+     * and "endRadius" parameters.
+     *
+     * @method rotate
+     * @param {Function} cb The callback to execute when the gesture simulation
+     *      is completed.
+     * @param {Array} center A center point where the pinch gesture of two fingers
+     *      should happen. It is relative to the top left corner of the target
+     *      node element.
+     * @param {Number} startRadius A radius of start circle where 2 fingers are
+     *      on when the gesture starts. This is optional. The default is a fourth of
+     *      either target node width or height whichever is smaller.
+     * @param {Number} endRadius A radius of end circle where 2 fingers will be on when
+     *      the pinch or spread gestures are completed. This is optional.
+     *      The default is a fourth of either target node width or height whichever is less.
+     * @param {Number} duration A duration of the gesture in millisecond.
+     * @param {Number} start A start angle(0 degree at 12 o'clock) where the
+     *      gesture should start. Default is 0.
+     * @param {Number} rotation A rotation in degree. It is required.
+     */
+    rotate: function(cb, center, startRadius, endRadius, duration, start, rotation) {
+        var radius,
+            r1 = startRadius,   // optional
+            r2 = endRadius;     // optional
+
+        if(!Y.Lang.isNumber(r1) || !Y.Lang.isNumber(r2) || r1<0 || r2<0) {
+            radius = (this.target.offsetWidth < this.target.offsetHeight)?
+                this.target.offsetWidth/4 : this.target.offsetHeight/4;
+            r1 = radius;
+            r2 = radius;
+        }
+
+        // required
+        if(!Y.Lang.isNumber(rotation)) {
+            Y.error(NAME+'Invalid rotation detected.');
+        }
+
+        this.pinch(cb, center, r1, r2, duration, start, rotation);
+    },
+
+    /**
+     * The "rotate" and "pinch" methods are essencially same with the exact same
+     * arguments. Only difference is the required parameters. The rotate method
+     * requires "rotation" parameter while the pinch method requires "startRadius"
+     * and "endRadius" parameters.
+     *
+     * The "pinch" gesture can simulate various 2 finger gestures such as pinch,
+     * spread and/or rotation. The "startRadius" and "endRadius" are required.
+     * If endRadius is larger than startRadius, it becomes a spread gesture
+     * otherwise a pinch gesture.
+     *
+     * @method pinch
+     * @param {Function} cb The callback to execute when the gesture simulation
+     *      is completed.
+     * @param {Array} center A center point where the pinch gesture of two fingers
+     *      should happen. It is relative to the top left corner of the target
+     *      node element.
+     * @param {Number} startRadius A radius of start circle where 2 fingers are
+     *      on when the gesture starts. This paramenter is required.
+     * @param {Number} endRadius A radius of end circle where 2 fingers will be on when
+     *      the pinch or spread gestures are completed. This parameter is required.
+     * @param {Number} duration A duration of the gesture in millisecond.
+     * @param {Number} start A start angle(0 degree at 12 o'clock) where the
+     *      gesture should start. Default is 0.
+     * @param {Number} rotation If rotation is desired during the pinch or
+     *      spread gestures, this parameter can be used. Default is 0 degree.
+     */
+    pinch: function(cb, center, startRadius, endRadius, duration, start, rotation) {
+        var eventQueue,
+            i,
+            interval = EVENT_INTERVAL,
+            touches,
+            id = 0,
+            r1 = startRadius,   // required
+            r2 = endRadius,     // required
+            radiusPerStep,
+            centerX, centerY,
+            startScale, endScale, scalePerStep,
+            startRot, endRot, rotPerStep,
+            path1 = {start: [], end: []}, // paths for 1st and 2nd fingers.
+            path2 = {start: [], end: []},
+            steps,
+            touchMove;
+
+        center = this._calculateDefaultPoint(center);
+
+        if(!Y.Lang.isNumber(r1) || !Y.Lang.isNumber(r2) || r1<0 || r2<0) {
+            Y.error(NAME+'Invalid startRadius and endRadius detected.');
+        }
+
+        if(!Y.Lang.isNumber(duration) || duration <= 0) {
+            duration = DEFAULTS.DURATION_PINCH;
+        }
+
+        if(!Y.Lang.isNumber(start)) {
+            start = 0.0;
+        } else {
+            start = start%360;
+            while(start < 0) {
+                start += 360;
+            }
+        }
+
+        if(!Y.Lang.isNumber(rotation)) {
+            rotation = 0.0;
+        }
+
+        Y.AsyncQueue.defaults.timeout = interval;
+        eventQueue = new Y.AsyncQueue();
+
+        // range determination
+        centerX = center[0];
+        centerY = center[1];
+
+        startRot = start;
+        endRot = start + rotation;
+
+        // 1st finger path
+        path1.start = [
+            centerX + r1*Math.sin(this._toRadian(startRot)),
+            centerY - r1*Math.cos(this._toRadian(startRot))
+        ];
+        path1.end   = [
+            centerX + r2*Math.sin(this._toRadian(endRot)),
+            centerY - r2*Math.cos(this._toRadian(endRot))
+        ];
+
+        // 2nd finger path
+        path2.start = [
+            centerX - r1*Math.sin(this._toRadian(startRot)),
+            centerY + r1*Math.cos(this._toRadian(startRot))
+        ];
+        path2.end   = [
+            centerX - r2*Math.sin(this._toRadian(endRot)),
+            centerY + r2*Math.cos(this._toRadian(endRot))
+        ];
+
+        startScale = 1.0;
+        endScale = endRadius/startRadius;
+
+        // touch/gesture start
+        eventQueue.add({
+            fn: function() {
+                var coord1, coord2, coord, touches;
+
+                // coordinate for each touch object.
+                coord1 = {
+                    pageX: path1.start[0],
+                    pageY: path1.start[1],
+                    clientX: path1.start[0],
+                    clientY: path1.start[1]
+                };
+                coord2 = {
+                    pageX: path2.start[0],
+                    pageY: path2.start[1],
+                    clientX: path2.start[0],
+                    clientY: path2.start[1]
+                };
+                touches = this._createTouchList([Y.merge({
+                    identifier: (id++)
+                }, coord1), Y.merge({
+                    identifier: (id++)
+                }, coord2)]);
+
+                // coordinate for top level event
+                coord = {
+                    pageX: (path1.start[0] + path2.start[0])/2,
+                    pageY: (path1.start[0] + path2.start[1])/2,
+                    clientX: (path1.start[0] + path2.start[0])/2,
+                    clientY: (path1.start[0] + path2.start[1])/2
+                };
+
+                this._simulateEvent(this.target, TOUCH_START, Y.merge({
+                    touches: touches,
+                    targetTouches: touches,
+                    changedTouches: touches,
+                    scale: startScale,
+                    rotation: startRot
+                }, coord));
+
+                if(Y.UA.ios >= 2.0) {
+                    /* gesture starts when the 2nd finger touch starts.
+                    * The implementation will fire 1 touch start event for both fingers,
+                    * simulating 2 fingers touched on the screen at the same time.
+                    */
+                    this._simulateEvent(this.target, GESTURE_START, Y.merge({
+                        scale: startScale,
+                        rotation: startRot
+                    }, coord));
+                }
+            },
+            timeout: 0,
+            context: this
+        });
+
+        // gesture change
+        steps = Math.floor(duration/interval);
+        radiusPerStep = (r2 - r1)/steps;
+        scalePerStep = (endScale - startScale)/steps;
+        rotPerStep = (endRot - startRot)/steps;
+
+        touchMove = function(step) {
+            var radius = r1 + (radiusPerStep)*step,
+                px1 = centerX + radius*Math.sin(this._toRadian(startRot + rotPerStep*step)),
+                py1 = centerY - radius*Math.cos(this._toRadian(startRot + rotPerStep*step)),
+                px2 = centerX - radius*Math.sin(this._toRadian(startRot + rotPerStep*step)),
+                py2 = centerY + radius*Math.cos(this._toRadian(startRot + rotPerStep*step)),
+                px = (px1+px2)/2,
+                py = (py1+py2)/2,
+                coord1, coord2, coord, touches;
+
+            // coordinate for each touch object.
+            coord1 = {
+                pageX: px1,
+                pageY: py1,
+                clientX: px1,
+                clientY: py1
+            };
+            coord2 = {
+                pageX: px2,
+                pageY: py2,
+                clientX: px2,
+                clientY: py2
+            };
+            touches = this._createTouchList([Y.merge({
+                identifier: (id++)
+            }, coord1), Y.merge({
+                identifier: (id++)
+            }, coord2)]);
+
+            // coordinate for top level event
+            coord = {
+                pageX: px,
+                pageY: py,
+                clientX: px,
+                clientY: py
+            };
+
+            this._simulateEvent(this.target, TOUCH_MOVE, Y.merge({
+                touches: touches,
+                targetTouches: touches,
+                changedTouches: touches,
+                scale: startScale + scalePerStep*step,
+                rotation: startRot + rotPerStep*step
+            }, coord));
+
+            if(Y.UA.ios >= 2.0) {
+                this._simulateEvent(this.target, GESTURE_CHANGE, Y.merge({
+                    scale: startScale + scalePerStep*step,
+                    rotation: startRot + rotPerStep*step
+                }, coord));
+            }
+        };
+
+        for (i=0; i < steps; i++) {
+            eventQueue.add({
+                fn: touchMove,
+                args: [i],
+                context: this
+            });
+        }
+
+        // gesture end
+        eventQueue.add({
+            fn: function() {
+                var emptyTouchList = this._getEmptyTouchList(),
+                    coord1, coord2, coord, touches;
+
+                // coordinate for each touch object.
+                coord1 = {
+                    pageX: path1.end[0],
+                    pageY: path1.end[1],
+                    clientX: path1.end[0],
+                    clientY: path1.end[1]
+                };
+                coord2 = {
+                    pageX: path2.end[0],
+                    pageY: path2.end[1],
+                    clientX: path2.end[0],
+                    clientY: path2.end[1]
+                };
+                touches = this._createTouchList([Y.merge({
+                    identifier: (id++)
+                }, coord1), Y.merge({
+                    identifier: (id++)
+                }, coord2)]);
+
+                // coordinate for top level event
+                coord = {
+                    pageX: (path1.end[0] + path2.end[0])/2,
+                    pageY: (path1.end[0] + path2.end[1])/2,
+                    clientX: (path1.end[0] + path2.end[0])/2,
+                    clientY: (path1.end[0] + path2.end[1])/2
+                };
+
+                if(Y.UA.ios >= 2.0) {
+                    this._simulateEvent(this.target, GESTURE_END, Y.merge({
+                        scale: endScale,
+                        rotation: endRot
+                    }, coord));
+                }
+
+                this._simulateEvent(this.target, TOUCH_END, Y.merge({
+                    touches: emptyTouchList,
+                    targetTouches: emptyTouchList,
+                    changedTouches: touches,
+                    scale: endScale,
+                    rotation: endRot
+                }, coord));
+            },
+            context: this
+        });
+
+        if(cb && Y.Lang.isFunction(cb)) {
+            eventQueue.add({
+                fn: cb,
+
+                // by default, the callback runs the node context where
+                // simulateGesture method is called.
+                context: this.node
+
+                //TODO: Use args to pass error object as 1st param if there is an error.
+                //args:
+            });
+        }
+
+        eventQueue.run();
+    },
+
+    /**
+     * The "tap" gesture can be used for various single touch point gestures
+     * such as single tap, N number of taps, long press. The default is a single
+     * tap.
+     *
+     * @method tap
+     * @param {Function} cb The callback to execute when the gesture simulation
+     *      is completed.
+     * @param {Array} point A point(relative to the top left corner of the
+     *      target node element) where the tap gesture should start. The default
+     *      is the center of the taget node.
+     * @param {Number} times The number of taps. Default is 1.
+     * @param {Number} hold The hold time in milliseconds between "touchstart" and
+     *      "touchend" event generation. Default is 10ms.
+     * @param {Number} delay The time gap in millisecond between taps if this
+     *      gesture has more than 1 tap. Default is 10ms.
+     */
+    tap: function(cb, point, times, hold, delay) {
+        var eventQueue = new Y.AsyncQueue(),
+            emptyTouchList = this._getEmptyTouchList(),
+            touches,
+            coord,
+            i,
+            touchStart,
+            touchEnd;
+
+        point = this._calculateDefaultPoint(point);
+
+        if(!Y.Lang.isNumber(times) || times < 1) {
+            times = 1;
+        }
+
+        if(!Y.Lang.isNumber(hold)) {
+            hold = DEFAULTS.HOLD_TAP;
+        }
+
+        if(!Y.Lang.isNumber(delay)) {
+            delay = DEFAULTS.DELAY_TAP;
+        }
+
+        coord = {
+            pageX: point[0],
+            pageY: point[1],
+            clientX: point[0],
+            clientY: point[1]
+        };
+
+        touches = this._createTouchList([Y.merge({identifier: 0}, coord)]);
+
+        touchStart = function() {
+            this._simulateEvent(this.target, TOUCH_START, Y.merge({
+                touches: touches,
+                targetTouches: touches,
+                changedTouches: touches
+            }, coord));
+        };
+
+        touchEnd = function() {
+            this._simulateEvent(this.target, TOUCH_END, Y.merge({
+                touches: emptyTouchList,
+                targetTouches: emptyTouchList,
+                changedTouches: touches
+            }, coord));
+        };
+
+        for (i=0; i < times; i++) {
+            eventQueue.add({
+                fn: touchStart,
+                context: this,
+                timeout: (i === 0)? 0 : delay
+            });
+
+            eventQueue.add({
+                fn: touchEnd,
+                context: this,
+                timeout: hold
+            });
+        }
+
+        if(times > 1 && !SUPPORTS_TOUCH) {
+            eventQueue.add({
+                fn: function() {
+                    this._simulateEvent(this.target, MOUSE_DBLCLICK, coord);
+                },
+                context: this
+            });
+        }
+
+        if(cb && Y.Lang.isFunction(cb)) {
+            eventQueue.add({
+                fn: cb,
+
+                // by default, the callback runs the node context where
+                // simulateGesture method is called.
+                context: this.node
+
+                //TODO: Use args to pass error object as 1st param if there is an error.
+                //args:
+            });
+        }
+
+        eventQueue.run();
+    },
+
+    /**
+     * The "flick" gesture is a specialized "move" that has some velocity
+     * and the movement always runs either x or y axis. The velocity is calculated
+     * with "distance" and "duration" arguments. If the calculated velocity is
+     * below than the minimum velocity, the given duration will be ignored and
+     * new duration will be created to make a valid flick gesture.
+     *
+     * @method flick
+     * @param {Function} cb The callback to execute when the gesture simulation
+     *      is completed.
+     * @param {Array} point A point(relative to the top left corner of the
+     *      target node element) where the flick gesture should start. The default
+     *      is the center of the taget node.
+     * @param {String} axis Either "x" or "y".
+     * @param {Number} distance A distance in pixels to flick.
+     * @param {Number} duration A duration of the gesture in millisecond.
+     *
+     */
+    flick: function(cb, point, axis, distance, duration) {
+        var path;
+
+        point = this._calculateDefaultPoint(point);
+
+        if(!Y.Lang.isString(axis)) {
+            axis = X_AXIS;
+        } else {
+            axis = axis.toLowerCase();
+            if(axis !== X_AXIS && axis !== Y_AXIS) {
+                Y.error(NAME+'(flick): Only x or y axis allowed');
+            }
+        }
+
+        if(!Y.Lang.isNumber(distance)) {
+            distance = DEFAULTS.DISTANCE_FLICK;
+        }
+
+        if(!Y.Lang.isNumber(duration)){
+            duration = DEFAULTS.DURATION_FLICK; // ms
+        } else {
+            if(duration > DEFAULTS.MAX_DURATION_FLICK) {
+                duration = DEFAULTS.MAX_DURATION_FLICK;
+            }
+        }
+
+        /*
+         * Check if too slow for a flick.
+         * Adjust duration if the calculated velocity is less than
+         * the minimum velcocity to be claimed as a flick.
+         */
+        if(Math.abs(distance)/duration < DEFAULTS.MIN_VELOCITY_FLICK) {
+            duration = Math.abs(distance)/DEFAULTS.MIN_VELOCITY_FLICK;
+        }
+
+        path = {
+            start: Y.clone(point),
+            end: [
+                (axis === X_AXIS) ? point[0]+distance : point[0],
+                (axis === Y_AXIS) ? point[1]+distance : point[1]
+            ]
+        };
+
+        this._move(cb, path, duration);
+    },
+
+    /**
+     * The "move" gesture simulate the movement of any direction between
+     * the straight line of start and end point for the given duration.
+     * The path argument is an object with "point", "xdist" and "ydist" properties.
+     * The "point" property is an array with x and y coordinations(relative to the
+     * top left corner of the target node element) while "xdist" and "ydist"
+     * properties are used for the distance along the x and y axis. A negative
+     * distance number can be used to drag either left or up direction.
+     *
+     * If no arguments are given, it will simulate the default move, which
+     * is moving 200 pixels from the center of the element to the positive X-axis
+     * direction for 1 sec.
+     *
+     * @method move
+     * @param {Function} cb The callback to execute when the gesture simulation
+     *      is completed.
+     * @param {Object} path An object with "point", "xdist" and "ydist".
+     * @param {Number} duration A duration of the gesture in millisecond.
+     */
+    move: function(cb, path, duration) {
+        var convertedPath;
+
+        if(!Y.Lang.isObject(path)) {
+            path = {
+                point: this._calculateDefaultPoint([]),
+                xdist: DEFAULTS.DISTANCE_MOVE,
+                ydist: 0
+            };
+        } else {
+            // convert to the page coordination
+            if(!Y.Lang.isArray(path.point)) {
+                path.point = this._calculateDefaultPoint([]);
+            } else {
+                path.point = this._calculateDefaultPoint(path.point);
+            }
+
+            if(!Y.Lang.isNumber(path.xdist)) {
+                path.xdist = DEFAULTS.DISTANCE_MOVE;
+            }
+
+            if(!Y.Lang.isNumber(path.ydist)) {
+                path.ydist = 0;
+            }
+        }
+
+        if(!Y.Lang.isNumber(duration)){
+            duration = DEFAULTS.DURATION_MOVE; // ms
+        } else {
+            if(duration > DEFAULTS.MAX_DURATION_MOVE) {
+                duration = DEFAULTS.MAX_DURATION_MOVE;
+            }
+        }
+
+        convertedPath = {
+            start: Y.clone(path.point),
+            end: [path.point[0]+path.xdist, path.point[1]+path.ydist]
+        };
+
+        this._move(cb, convertedPath, duration);
+    },
+
+    /**
+     * A base method on top of "move" and "flick" methods. The method takes
+     * the path with start/end properties and duration to generate a set of
+     * touch events for the movement gesture.
+     *
+     * @method _move
+     * @private
+     * @param {Function} cb The callback to execute when the gesture simulation
+     *      is completed.
+     * @param {Object} path An object with "start" and "end" properties. Each
+     *      property should be an array with x and y coordination (e.g. start: [100, 50])
+     * @param {Number} duration A duration of the gesture in millisecond.
+     */
+    _move: function(cb, path, duration) {
+        var eventQueue,
+            i,
+            interval = EVENT_INTERVAL,
+            steps, stepX, stepY,
+            id = 0,
+            touchMove;
+
+        if(!Y.Lang.isNumber(duration)){
+            duration = DEFAULTS.DURATION_MOVE; // ms
+        } else {
+            if(duration > DEFAULTS.MAX_DURATION_MOVE) {
+                duration = DEFAULTS.MAX_DURATION_MOVE;
+            }
+        }
+
+        if(!Y.Lang.isObject(path)) {
+            path = {
+                start: [
+                    START_PAGEX,
+                    START_PAGEY
+                ],
+                end: [
+                    START_PAGEX + DEFAULTS.DISTANCE_MOVE,
+                    START_PAGEY
+                ]
+            };
+        } else {
+            if(!Y.Lang.isArray(path.start)) {
+                path.start = [
+                    START_PAGEX,
+                    START_PAGEY
+                ];
+            }
+            if(!Y.Lang.isArray(path.end)) {
+                path.end = [
+                    START_PAGEX + DEFAULTS.DISTANCE_MOVE,
+                    START_PAGEY
+                ];
+            }
+        }
+
+        Y.AsyncQueue.defaults.timeout = interval;
+        eventQueue = new Y.AsyncQueue();
+
+        // start
+        eventQueue.add({
+            fn: function() {
+                var coord = {
+                        pageX: path.start[0],
+                        pageY: path.start[1],
+                        clientX: path.start[0],
+                        clientY: path.start[1]
+                    },
+                    touches = this._createTouchList([
+                        Y.merge({identifier: (id++)}, coord)
+                    ]);
+
+                this._simulateEvent(this.target, TOUCH_START, Y.merge({
+                    touches: touches,
+                    targetTouches: touches,
+                    changedTouches: touches
+                }, coord));
+            },
+            timeout: 0,
+            context: this
+        });
+
+        // move
+        steps = Math.floor(duration/interval);
+        stepX = (path.end[0] - path.start[0])/steps;
+        stepY = (path.end[1] - path.start[1])/steps;
+
+        touchMove = function(step) {
+            var px = path.start[0]+(stepX * step),
+                py = path.start[1]+(stepY * step),
+                coord = {
+                    pageX: px,
+                    pageY: py,
+                    clientX: px,
+                    clientY: py
+                },
+                touches = this._createTouchList([
+                    Y.merge({identifier: (id++)}, coord)
+                ]);
+
+            this._simulateEvent(this.target, TOUCH_MOVE, Y.merge({
+                touches: touches,
+                targetTouches: touches,
+                changedTouches: touches
+            }, coord));
+        };
+
+        for (i=0; i < steps; i++) {
+            eventQueue.add({
+                fn: touchMove,
+                args: [i],
+                context: this
+            });
+        }
+
+        // last move
+        eventQueue.add({
+            fn: function() {
+                var coord = {
+                        pageX: path.end[0],
+                        pageY: path.end[1],
+                        clientX: path.end[0],
+                        clientY: path.end[1]
+                    },
+                    touches = this._createTouchList([
+                        Y.merge({identifier: id}, coord)
+                    ]);
+
+                this._simulateEvent(this.target, TOUCH_MOVE, Y.merge({
+                    touches: touches,
+                    targetTouches: touches,
+                    changedTouches: touches
+                }, coord));
+            },
+            timeout: 0,
+            context: this
+        });
+
+        // end
+        eventQueue.add({
+            fn: function() {
+                var coord = {
+                    pageX: path.end[0],
+                    pageY: path.end[1],
+                    clientX: path.end[0],
+                    clientY: path.end[1]
+                },
+                emptyTouchList = this._getEmptyTouchList(),
+                touches = this._createTouchList([
+                    Y.merge({identifier: id}, coord)
+                ]);
+
+                this._simulateEvent(this.target, TOUCH_END, Y.merge({
+                    touches: emptyTouchList,
+                    targetTouches: emptyTouchList,
+                    changedTouches: touches
+                }, coord));
+            },
+            context: this
+        });
+
+        if(cb && Y.Lang.isFunction(cb)) {
+            eventQueue.add({
+                fn: cb,
+
+                // by default, the callback runs the node context where
+                // simulateGesture method is called.
+                context: this.node
+
+                //TODO: Use args to pass error object as 1st param if there is an error.
+                //args:
+            });
+        }
+
+        eventQueue.run();
+    },
+
+    /**
+     * Helper method to return a singleton instance of empty touch list.
+     *
+     * @method _getEmptyTouchList
+     * @private
+     * @return {TouchList | Array} An empty touch list object.
+     */
+    _getEmptyTouchList: function() {
+        if(!emptyTouchList) {
+            emptyTouchList = this._createTouchList([]);
+        }
+
+        return emptyTouchList;
+    },
+
+    /**
+     * Helper method to convert an array with touch points to TouchList object as
+     * defined in http://www.w3.org/TR/touch-events/
+     *
+     * @method _createTouchList
+     * @private
+     * @param {Array} touchPoints
+     * @return {TouchList | Array} If underlaying platform support creating touch list
+     *      a TouchList object will be returned otherwise a fake Array object
+     *      will be returned.
+     */
+    _createTouchList: function(touchPoints) {
+        /*
+        * Android 4.0.3 emulator:
+        * Native touch api supported starting in version 4.0 (Ice Cream Sandwich).
+        * However the support seems limited. In Android 4.0.3 emulator, I got
+        * "TouchList is not defined".
+        */
+        var touches = [],
+            touchList,
+            self = this;
+
+        if(!!touchPoints && Y.Lang.isArray(touchPoints)) {
+            if(Y.UA.android && Y.UA.android >= 4.0 || Y.UA.ios && Y.UA.ios >= 2.0) {
+                Y.each(touchPoints, function(point) {
+                    if(!point.identifier) {point.identifier = 0;}
+                    if(!point.pageX) {point.pageX = 0;}
+                    if(!point.pageY) {point.pageY = 0;}
+                    if(!point.screenX) {point.screenX = 0;}
+                    if(!point.screenY) {point.screenY = 0;}
+
+                    touches.push(document.createTouch(Y.config.win,
+                        self.target,
+                        point.identifier,
+                        point.pageX, point.pageY,
+                        point.screenX, point.screenY));
+                });
+
+                touchList = document.createTouchList.apply(document, touches);
+            } else if(Y.UA.ios && Y.UA.ios < 2.0) {
+                Y.error(NAME+': No touch event simulation framework present.');
+            } else {
+                // this will inclide android(Y.UA.android && Y.UA.android < 4.0)
+                // and desktops among all others.
+
+                /*
+                 * Touch APIs are broken in androids older than 4.0. We will use
+                 * simulated touch apis for these versions.
+                 */
+                touchList = [];
+                Y.each(touchPoints, function(point) {
+                    if(!point.identifier) {point.identifier = 0;}
+                    if(!point.clientX)  {point.clientX = 0;}
+                    if(!point.clientY)  {point.clientY = 0;}
+                    if(!point.pageX)    {point.pageX = 0;}
+                    if(!point.pageY)    {point.pageY = 0;}
+                    if(!point.screenX)  {point.screenX = 0;}
+                    if(!point.screenY)  {point.screenY = 0;}
+
+                    touchList.push({
+                        target: self.target,
+                        identifier: point.identifier,
+                        clientX: point.clientX,
+                        clientY: point.clientY,
+                        pageX: point.pageX,
+                        pageY: point.pageY,
+                        screenX: point.screenX,
+                        screenY: point.screenY
+                    });
+                });
+
+                touchList.item = function(i) {
+                    return touchList[i];
+                };
+            }
+        } else {
+            Y.error(NAME+': Invalid touchPoints passed');
+        }
+
+        return touchList;
+    },
+
+    /**
+     * @method _simulateEvent
+     * @private
+     * @param {HTMLElement} target The DOM element that's the target of the event.
+     * @param {String} type The type of event or name of the supported gesture to simulate
+     *      (i.e., "click", "doubletap", "flick").
+     * @param {Object} options (Optional) Extra options to copy onto the event object.
+     *      For gestures, options are used to refine the gesture behavior.
+     */
+    _simulateEvent: function(target, type, options) {
+        var touches;
+
+        if (touchEvents[type]) {
+            if(SUPPORTS_TOUCH) {
+                Y.Event.simulate(target, type, options);
+            } else {
+                // simulate using mouse events if touch is not applicable on this platform.
+                // but only single touch event can be simulated.
+                if(this._isSingleTouch(options.touches, options.targetTouches, options.changedTouches)) {
+                    type = {
+                        touchstart: MOUSE_DOWN,
+                        touchmove: MOUSE_MOVE,
+                        touchend: MOUSE_UP
+                    }[type];
+
+                    options.button = 0;
+                    options.relatedTarget = null; // since we are not using mouseover event.
+
+                    // touchend has none in options.touches.
+                    touches = (type === MOUSE_UP)? options.changedTouches : options.touches;
+
+                    options = Y.mix(options, {
+                        screenX: touches.item(0).screenX,
+                        screenY: touches.item(0).screenY,
+                        clientX: touches.item(0).clientX,
+                        clientY: touches.item(0).clientY
+                    }, true);
+
+                    Y.Event.simulate(target, type, options);
+
+                    if(type == MOUSE_UP) {
+                        Y.Event.simulate(target, MOUSE_CLICK, options);
+                    }
+                } else {
+                    Y.error("_simulateEvent(): Event '" + type + "' has multi touch objects that can't be simulated in your platform.");
+                }
+            }
+        } else {
+            // pass thru for all non touch events
+            Y.Event.simulate(target, type, options);
+        }
+    },
+
+    /**
+     * Helper method to check the single touch.
+     * @method _isSingleTouch
+     * @private
+     * @param {TouchList} touches
+     * @param {TouchList} targetTouches
+     * @param {TouchList} changedTouches
+     */
+    _isSingleTouch: function(touches, targetTouches, changedTouches) {
+        return (touches && (touches.length <= 1)) &&
+            (targetTouches && (targetTouches.length <= 1)) &&
+            (changedTouches && (changedTouches.length <= 1));
+    }
+};
+
+/*
+ * A gesture simulation class.
+ */
+Y.GestureSimulation = Simulations;
+
+/*
+ * Various simulation default behavior properties. If user override
+ * Y.GestureSimulation.defaults, overriden values will be used and this
+ * should be done before the gesture simulation.
+ */
+Y.GestureSimulation.defaults = DEFAULTS;
+
+/*
+ * The high level gesture names that YUI knows how to simulate.
+ */
+Y.GestureSimulation.GESTURES = gestureNames;
+
+/**
+ * Simulates the higher user level gesture of the given name on a target.
+ * This method generates a set of low level touch events(Apple specific gesture
+ * events as well for the iOS platforms) asynchronously. Note that gesture
+ * simulation is relying on `Y.Event.simulate()` method to generate
+ * the touch events under the hood. The `Y.Event.simulate()` method
+ * itself is a synchronous method.
+ *
+ * Users are suggested to use `Node.simulateGesture()` method which
+ * basically calls this method internally. Supported gestures are `tap`,
+ * `doubletap`, `press`, `move`, `flick`, `pinch` and `rotate`.
+ *
+ * The `pinch` gesture is used to simulate the pinching and spreading of two
+ * fingers. During a pinch simulation, rotation is also possible. Essentially
+ * `pinch` and `rotate` simulations share the same base implementation to allow
+ * both pinching and rotation at the same time. The only difference is `pinch`
+ * requires `start` and `end` option properties while `rotate` requires `rotation`
+ * option property.
+ *
+ * The `pinch` and `rotate` gestures can be described as placing 2 fingers along a
+ * circle. Pinching and spreading can be described by start and end circles while
+ * rotation occurs on a single circle. If the radius of the start circle is greater
+ * than the end circle, the gesture becomes a pinch, otherwise it is a spread spread.
+ *
+ * @example
+ *
+ *     var node = Y.one("#target");
+ *
+ *     // double tap example
+ *     node.simulateGesture("doubletap", function() {
+ *         // my callback function
+ *     });
+ *
+ *     // flick example from the center of the node, move 50 pixels down for 50ms)
+ *     node.simulateGesture("flick", {
+ *         axis: y,
+ *         distance: -100
+ *         duration: 50
+ *     }, function() {
+ *         // my callback function
+ *     });
+ *
+ *     // simulate rotating a node 75 degrees counter-clockwise
+ *     node.simulateGesture("rotate", {
+ *         rotation: -75
+ *     });
+ *
+ *     // simulate a pinch and a rotation at the same time.
+ *     // fingers start on a circle of radius 100 px, placed at top/bottom
+ *     // fingers end on a circle of radius 50px, placed at right/left
+ *     node.simulateGesture("pinch", {
+ *         r1: 100,
+ *         r2: 50,
+ *         start: 0
+ *         rotation: 90
+ *     });
+ *
+ * @method simulateGesture
+ * @param {HTMLElement|Node} node The YUI node or HTML element that's the target
+ *      of the event.
+ * @param {String} name The name of the supported gesture to simulate. The
+ *      supported gesture name is one of "tap", "doubletap", "press", "move",
+ *      "flick", "pinch" and "rotate".
+ * @param {Object} [options] Extra options used to define the gesture behavior:
+ *
+ *      Valid options properties for the `tap` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
+ *        where the tap should be simulated. Default is the center of the node
+ *        element.
+ *      @param {Number} [options.hold=10] (Optional) The hold time in milliseconds.
+ *        This is the time between `touchstart` and `touchend` event generation.
+ *      @param {Number} [options.times=1] (Optional) Indicates the number of taps.
+ *      @param {Number} [options.delay=10] (Optional) The number of milliseconds
+ *        before the next tap simulation happens. This is valid only when `times`
+ *        is more than 1.
+ *
+ *      Valid options properties for the `doubletap` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
+ *        where the doubletap should be simulated. Default is the center of the
+ *        node element.
+ *
+ *      Valid options properties for the `press` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
+ *        where the press should be simulated. Default is the center of the node
+ *        element.
+ *      @param {Number} [options.hold=3000] (Optional) The hold time in milliseconds.
+ *        This is the time between `touchstart` and `touchend` event generation.
+ *        Default is 3000ms (3 seconds).
+ *
+ *      Valid options properties for the `move` gesture:
+ *
+ *      @param {Object} [options.path] (Optional) Indicates the path of the finger
+ *        movement. It's an object with three optional properties: `point`,
+ *        `xdist` and  `ydist`.
+ *        @param {Array} [options.path.point] A starting point of the gesture.
+ *          Default is the center of the node element.
+ *        @param {Number} [options.path.xdist=200] A distance to move in pixels
+ *          along the X axis. A negative distance value indicates moving left.
+ *        @param {Number} [options.path.ydist=0] A distance to move in pixels
+ *          along the Y axis. A negative distance value indicates moving up.
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds.
+ *
+ *      Valid options properties for the `flick` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x, y] coordinates
+ *        where the flick should be simulated. Default is the center of the
+ *        node element.
+ *      @param {String} [options.axis='x'] (Optional) Valid values are either
+ *        "x" or "y". Indicates axis to move along. The flick can move to one of
+ *        4 directions(left, right, up and down).
+ *      @param {Number} [options.distance=200] (Optional) Distance to move in pixels
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds. User given value could be automatically
+ *        adjusted by the framework if it is below the minimum velocity to be
+ *        a flick gesture.
+ *
+ *      Valid options properties for the `pinch` gesture:
+ *
+ *      @param {Array} [options.center] (Optional) The center of the circle where
+ *        two fingers are placed. Default is the center of the node element.
+ *      @param {Number} [options.r1] (Required) Pixel radius of the start circle
+ *        where 2 fingers will be on when the gesture starts. The circles are
+ *        centered at the center of the element.
+ *      @param {Number} [options.r2] (Required) Pixel radius of the end circle
+ *        when this gesture ends.
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds.
+ *      @param {Number} [options.start=0] (Optional) Starting degree of the first
+ *        finger. The value is relative to the path of the north. Default is 0
+ *        (i.e., 12:00 on a clock).
+ *      @param {Number} [options.rotation=0] (Optional) Degrees to rotate from
+ *        the starting degree. A negative value means rotation to the
+ *        counter-clockwise direction.
+ *
+ *      Valid options properties for the `rotate` gesture:
+ *
+ *      @param {Array} [options.center] (Optional) The center of the circle where
+ *        two fingers are placed. Default is the center of the node element.
+ *      @param {Number} [options.r1] (Optional) Pixel radius of the start circle
+ *        where 2 fingers will be on when the gesture starts. The circles are
+ *        centered at the center of the element. Default is a fourth of the node
+ *        element width or height, whichever is smaller.
+ *      @param {Number} [options.r2] (Optional) Pixel radius of the end circle
+ *        when this gesture ends. Default is a fourth of the node element width or
+ *        height, whichever is smaller.
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds.
+ *      @param {Number} [options.start=0] (Optional) Starting degree of the first
+ *        finger. The value is relative to the path of the north. Default is 0
+ *        (i.e., 12:00 on a clock).
+ *      @param {Number} [options.rotation] (Required) Degrees to rotate from
+ *        the starting degree. A negative value means rotation to the
+ *        counter-clockwise direction.
+ *
+ * @param {Function} [cb] The callback to execute when the asynchronouse gesture
+ *      simulation is completed.
+ *      @param {Error} cb.err An error object if the simulation is failed.
+ * @for Event
+ * @static
+ */
+Y.Event.simulateGesture = function(node, name, options, cb) {
+
+    node = Y.one(node);
+
+    var sim = new Y.GestureSimulation(node);
+    name = name.toLowerCase();
+
+    if(!cb && Y.Lang.isFunction(options)) {
+        cb = options;
+        options = {};
+    }
+
+    options = options || {};
+
+    if (gestureNames[name]) {
+        switch(name) {
+            // single-touch: point gestures
+            case 'tap':
+                sim.tap(cb, options.point, options.times, options.hold, options.delay);
+                break;
+            case 'doubletap':
+                sim.tap(cb, options.point, 2);
+                break;
+            case 'press':
+                if(!Y.Lang.isNumber(options.hold)) {
+                    options.hold = DEFAULTS.HOLD_PRESS;
+                } else if(options.hold < DEFAULTS.MIN_HOLD_PRESS) {
+                    options.hold = DEFAULTS.MIN_HOLD_PRESS;
+                } else if(options.hold > DEFAULTS.MAX_HOLD_PRESS) {
+                    options.hold = DEFAULTS.MAX_HOLD_PRESS;
+                }
+                sim.tap(cb, options.point, 1, options.hold);
+                break;
+
+            // single-touch: move gestures
+            case 'move':
+                sim.move(cb, options.path, options.duration);
+                break;
+            case 'flick':
+                sim.flick(cb, options.point, options.axis, options.distance,
+                    options.duration);
+                break;
+
+            // multi-touch: pinch/rotation gestures
+            case 'pinch':
+                sim.pinch(cb, options.center, options.r1, options.r2,
+                    options.duration, options.start, options.rotation);
+                break;
+            case 'rotate':
+                sim.rotate(cb, options.center, options.r1, options.r2,
+                    options.duration, options.start, options.rotation);
+                break;
+        }
+    } else {
+        Y.error(NAME+': Not a supported gesture simulation: '+name);
+    }
+};
+
+
+}, '3.18.1', {"requires": ["async-queue", "event-simulate", "node-screen"]});
+/*
+YUI 3.18.1 (build f7e7bcb)
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+
+YUI.add('node-event-simulate', function (Y, NAME) {
+
+/**
+ * Adds functionality to simulate events.
+ * @module node
+ * @submodule node-event-simulate
+ */
+
+/**
+ * Simulates an event on the node.
+ * @param {String} type The type of event (i.e., "click").
+ * @param {Object} options (Optional) Extra options to copy onto the event object.
+ * @for Node
+ * @method simulate
+ */
+Y.Node.prototype.simulate = function (type, options) {
+
+    Y.Event.simulate(Y.Node.getDOMNode(this), type, options);
+};
+
+/**
+ * Simulates the higher user level gesture of the given name on this node.
+ * This method generates a set of low level touch events(Apple specific gesture
+ * events as well for the iOS platforms) asynchronously. Note that gesture
+ * simulation is relying on `Y.Event.simulate()` method to generate
+ * the touch events under the hood. The `Y.Event.simulate()` method
+ * itself is a synchronous method.
+ *
+ * Supported gestures are `tap`, `doubletap`, `press`, `move`, `flick`, `pinch`
+ * and `rotate`.
+ *
+ * The `pinch` gesture is used to simulate the pinching and spreading of two
+ * fingers. During a pinch simulation, rotation is also possible. Essentially
+ * `pinch` and `rotate` simulations share the same base implementation to allow
+ * both pinching and rotation at the same time. The only difference is `pinch`
+ * requires `start` and `end` option properties while `rotate` requires `rotation`
+ * option property.
+ *
+ * The `pinch` and `rotate` gestures can be described as placing 2 fingers along a
+ * circle. Pinching and spreading can be described by start and end circles while
+ * rotation occurs on a single circle. If the radius of the start circle is greater
+ * than the end circle, the gesture becomes a pinch, otherwise it is a spread spread.
+ *
+ * @example
+ *
+ *     var node = Y.one("#target");
+ *
+ *     // double tap example
+ *     node.simulateGesture("doubletap", function() {
+ *         // my callback function
+ *     });
+ *
+ *     // flick example from the center of the node, move 50 pixels down for 50ms)
+ *     node.simulateGesture("flick", {
+ *         axis: y,
+ *         distance: -100
+ *         duration: 50
+ *     }, function() {
+ *         // my callback function
+ *     });
+ *
+ *     // simulate rotating a node 75 degrees counter-clockwise
+ *     node.simulateGesture("rotate", {
+ *         rotation: -75
+ *     });
+ *
+ *     // simulate a pinch and a rotation at the same time.
+ *     // fingers start on a circle of radius 100 px, placed at top/bottom
+ *     // fingers end on a circle of radius 50px, placed at right/left
+ *     node.simulateGesture("pinch", {
+ *         r1: 100,
+ *         r2: 50,
+ *         start: 0
+ *         rotation: 90
+ *     });
+ *
+ * @method simulateGesture
+ * @param {String} name The name of the supported gesture to simulate. The
+ *      supported gesture name is one of "tap", "doubletap", "press", "move",
+ *      "flick", "pinch" and "rotate".
+ * @param {Object} [options] Extra options used to define the gesture behavior:
+ *
+ *      Valid options properties for the `tap` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
+ *        where the tap should be simulated. Default is the center of the node
+ *        element.
+ *      @param {Number} [options.hold=10] (Optional) The hold time in milliseconds.
+ *        This is the time between `touchstart` and `touchend` event generation.
+ *      @param {Number} [options.times=1] (Optional) Indicates the number of taps.
+ *      @param {Number} [options.delay=10] (Optional) The number of milliseconds
+ *        before the next tap simulation happens. This is valid only when `times`
+ *        is more than 1.
+ *
+ *      Valid options properties for the `doubletap` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
+ *        where the doubletap should be simulated. Default is the center of the
+ *        node element.
+ *
+ *      Valid options properties for the `press` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x,y] coordinates
+ *        where the press should be simulated. Default is the center of the node
+ *        element.
+ *      @param {Number} [options.hold=3000] (Optional) The hold time in milliseconds.
+ *        This is the time between `touchstart` and `touchend` event generation.
+ *        Default is 3000ms (3 seconds).
+ *
+ *      Valid options properties for the `move` gesture:
+ *
+ *      @param {Object} [options.path] (Optional) Indicates the path of the finger
+ *        movement. It's an object with three optional properties: `point`,
+ *        `xdist` and  `ydist`.
+ *        @param {Array} [options.path.point] A starting point of the gesture.
+ *          Default is the center of the node element.
+ *        @param {Number} [options.path.xdist=200] A distance to move in pixels
+ *          along the X axis. A negative distance value indicates moving left.
+ *        @param {Number} [options.path.ydist=0] A distance to move in pixels
+ *          along the Y axis. A negative distance value indicates moving up.
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds.
+ *
+ *      Valid options properties for the `flick` gesture:
+ *
+ *      @param {Array} [options.point] (Optional) Indicates the [x, y] coordinates
+ *        where the flick should be simulated. Default is the center of the
+ *        node element.
+ *      @param {String} [options.axis='x'] (Optional) Valid values are either
+ *        "x" or "y". Indicates axis to move along. The flick can move to one of
+ *        4 directions(left, right, up and down).
+ *      @param {Number} [options.distance=200] (Optional) Distance to move in pixels
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds. User given value could be automatically
+ *        adjusted by the framework if it is below the minimum velocity to be
+ *        a flick gesture.
+ *
+ *      Valid options properties for the `pinch` gesture:
+ *
+ *      @param {Array} [options.center] (Optional) The center of the circle where
+ *        two fingers are placed. Default is the center of the node element.
+ *      @param {Number} [options.r1] (Required) Pixel radius of the start circle
+ *        where 2 fingers will be on when the gesture starts. The circles are
+ *        centered at the center of the element.
+ *      @param {Number} [options.r2] (Required) Pixel radius of the end circle
+ *        when this gesture ends.
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds.
+ *      @param {Number} [options.start=0] (Optional) Starting degree of the first
+ *        finger. The value is relative to the path of the north. Default is 0
+ *        (i.e., 12:00 on a clock).
+ *      @param {Number} [options.rotation=0] (Optional) Degrees to rotate from
+ *        the starting degree. A negative value means rotation to the
+ *        counter-clockwise direction.
+ *
+ *      Valid options properties for the `rotate` gesture:
+ *
+ *      @param {Array} [options.center] (Optional) The center of the circle where
+ *        two fingers are placed. Default is the center of the node element.
+ *      @param {Number} [options.r1] (Optional) Pixel radius of the start circle
+ *        where 2 fingers will be on when the gesture starts. The circles are
+ *        centered at the center of the element. Default is a fourth of the node
+ *        element width or height, whichever is smaller.
+ *      @param {Number} [options.r2] (Optional) Pixel radius of the end circle
+ *        when this gesture ends. Default is a fourth of the node element width or
+ *        height, whichever is smaller.
+ *      @param {Number} [options.duration=1000] (Optional) The duration of the
+ *        gesture in milliseconds.
+ *      @param {Number} [options.start=0] (Optional) Starting degree of the first
+ *        finger. The value is relative to the path of the north. Default is 0
+ *        (i.e., 12:00 on a clock).
+ *      @param {Number} [options.rotation] (Required) Degrees to rotate from
+ *        the starting degree. A negative value means rotation to the
+ *        counter-clockwise direction.
+ *
+ * @param {Function} [cb] The callback to execute when the asynchronouse gesture
+ *      simulation is completed.
+ *      @param {Error} cb.err An error object if the simulation is failed.
+ * @for Node
+ */
+Y.Node.prototype.simulateGesture = function (name, options, cb) {
+
+    Y.Event.simulateGesture(this, name, options, cb);
+};
+
+
+}, '3.18.1', {"requires": ["node-base", "event-simulate", "gesture-simulate"]});
