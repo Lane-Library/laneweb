@@ -1,5 +1,5 @@
 html, .som-header, .centered {
-    min-width: 0
+    min-width: 0;
 }
 
 a .fa-bars {
@@ -23,9 +23,11 @@ a .fa-bars {
     .nav a {
         color: white;
     }
-    .login {
+    .login, .lane-nav {
         background-color: #666;
-        background-image: url("./resources/images/diag.png");
+        background-image: url('./resources/images/diag.png');
+    }
+    .login {
         border-bottom: 1px solid white;
         color: rgb(121, 121, 121);
         font-size: 15px;
@@ -69,8 +71,6 @@ a .fa-bars {
         vertical-align: middle;
     }
     .lane-nav {
-        background-color: #666;
-        background-image: url("./resources/images/diag.png");
         box-shadow: none;
         position: static;
         width: 304px;
@@ -89,7 +89,7 @@ a .fa-bars {
         background-color: #666;
         color: white;
     }
-    .nav-menu span, nav-menu a {
+    .nav-menu span, .nav-menu a {
         color: white;
         padding: 0 21px;
         text-align: left;
