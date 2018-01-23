@@ -29,10 +29,10 @@ a .fa-bars {
     }
     .login {
         border-bottom: 1px solid white;
-        color: rgb(121, 121, 121);
+        color: rgb(220, 220, 220);
         font-size: 15px;
         margin: 0;
-        padding: 12px;
+        padding: 12px 12px 0;
         position: static;
     }
     .login > li.login-item-active {
@@ -45,7 +45,7 @@ a .fa-bars {
     .login > li.login-item-active:nth-child(5) {
         box-sizing: border-box;
         display: inline-block;
-        padding: 12px;
+        padding: 0 12px;
         width: 50%;
     }
     .login > li:nth-child(1) a,
@@ -69,6 +69,11 @@ a .fa-bars {
         color: rgb(193, 193, 193);
         font-size: 62px;
         vertical-align: middle;
+    }
+    .favorites .dropdown-content {
+        background-color: #666;
+        background-image: url('./resources/images/diag.png');
+        text-align: left;
     }
     .lane-nav {
         box-shadow: none;
