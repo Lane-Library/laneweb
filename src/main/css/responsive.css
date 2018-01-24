@@ -1,0 +1,118 @@
+html, .som-header, .centered {
+    min-width: 0;
+}
+
+a .fa-bars {
+    color: black;
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+@media ( max-width : 921px) {
+    .som-header, .nav, .library-contact, .lane-footer, .som-footer {
+        display: none;
+    }
+    #nav:target {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .nav a {
+        color: white;
+    }
+    .login, .lane-nav {
+        background-color: #666;
+        background-image: url('./resources/images/diag.png');
+    }
+    .login {
+        border-bottom: 1px solid white;
+        color: rgb(220, 220, 220);
+        font-size: 15px;
+        margin: 0;
+        padding: 12px 12px 0;
+        position: static;
+    }
+    .login > li.login-item-active {
+        display: list-item;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+    .login > li.login-item-active:nth-child(1),
+    .login > li.login-item-active:nth-child(4),
+    .login > li.login-item-active:nth-child(5) {
+        box-sizing: border-box;
+        display: inline-block;
+        padding: 0 12px;
+        width: 50%;
+    }
+    .login > li:nth-child(1) a,
+    .login > li:nth-child(4) a,
+    .login > li:nth-child(5) a {
+        background-color: rgb(0, 109, 129);
+        display: block;
+        line-height: 55px;
+        text-align: center;
+        text-transform: capitalize;
+        width: 100%;
+    }
+    .login li:nth-child(1) .fa, .login li:nth-child(8) {
+        display: none;
+    }
+    .login li:nth-child(6), .login li:nth-child(7) {
+        text-align: center;
+        word-spacing: 27px;
+    }
+    .login li:nth-child(6) .fa, .login li:nth-child(7) .fa {
+        color: rgb(193, 193, 193);
+        font-size: 62px;
+        vertical-align: middle;
+    }
+    .favorites .dropdown-content {
+        background-color: #666;
+        background-image: url('./resources/images/diag.png');
+        text-align: left;
+    }
+    .lane-nav {
+        box-shadow: none;
+        position: static;
+        width: 304px;
+        z-index: 2;
+    }
+    .lane-nav .centered {
+        margin: 0;
+    }
+    .lane-nav ul {
+        display: block;
+    }
+    .nav-menu {
+        display: list-item;
+    }
+    .nav-menu:hover {
+        background-color: #666;
+        color: white;
+    }
+    .nav-menu span, .nav-menu a {
+        color: white;
+        padding: 0 21px;
+        text-align: left;
+        text-transform: uppercase;
+    }
+    .main, .search-form {
+        margin-top: 0;
+    }
+    a .fa-bars {
+        display: inline-block;
+    }
+}
+
+@media ( max-width : 426px) {
+    h1 a:nth-child(1) {
+        width: 44px;
+    }
+    h1 a:nth-child(2) {
+        border-left: none;
+    }
+}

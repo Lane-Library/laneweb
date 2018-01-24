@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet.mvc;
+package edu.stanford.irt.laneweb.config;
 
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
@@ -11,8 +11,8 @@ import java.util.Collections;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
-import javax.servlet.SessionTrackingMode;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,16 +38,14 @@ public class LanewebApplicationInitializerTest {
     }
 
     @Test
-    public void testOnStartup() {
-        expect(this.servletContext.getFilterRegistration("javamelody")).andReturn(this.filterRegistration);
-        expect(this.filterRegistration.setInitParameter("storage-directory", "null/logs/javamelody")).andReturn(true);
-        this.servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
-        expect(this.servletContext.setInitParameter("webAppRootKey", "laneweb")).andReturn(true);
+    public void testOnStartup() throws ServletException {
         this.servletContext.addListener(isA(ContextLoaderListener.class));
-        expect(this.servletContext.addServlet(eq("DispatcherServlet"), isA(DispatcherServlet.class)))
-                .andReturn(this.dynamic);
+        expect(this.servletContext.addServlet(eq("dispatcher"), isA(DispatcherServlet.class))).andReturn(this.dynamic);
         this.dynamic.setLoadOnStartup(1);
         expect(this.dynamic.addMapping("/")).andReturn(Collections.emptySet());
+        this.dynamic.setAsyncSupported(true);
+        expect(this.servletContext.getFilterRegistration("javamelody")).andReturn(this.filterRegistration);
+        expect(this.filterRegistration.setInitParameter("storage-directory", "null/logs/javamelody")).andReturn(true);
         replay(this.servletContext, this.filterRegistration, this.dynamic);
         this.initializer.onStartup(this.servletContext);
         verify(this.servletContext, this.filterRegistration, this.dynamic);
