@@ -1,30 +1,33 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.util.Collections;
-
 import javax.servlet.ServletContext;
-import javax.servlet.ServletRegistration;
-import javax.servlet.SessionTrackingMode;
+import javax.servlet.ServletException;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class LanewebApplicationInitializer implements WebApplicationInitializer {
+import edu.stanford.irt.laneweb.config.LanewebConfiguration;
+
+public class LanewebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
-    public void onStartup(final ServletContext servletContext) {
+    public void onStartup(final ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
         servletContext.getFilterRegistration("javamelody").setInitParameter("storage-directory",
                 System.getProperty("catalina.base") + "/logs/javamelody");
-        servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
-        servletContext.setInitParameter("webAppRootKey", "laneweb");
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("edu.stanford.irt.laneweb.config.LanewebConfiguration");
-        servletContext.addListener(new ContextLoaderListener(context));
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet",
-                new DispatcherServlet(context));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+    }
+
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[] { LanewebConfiguration.class };
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return null;
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[] { "/" };
     }
 }
