@@ -23,7 +23,7 @@ a .fa-bars {
     .nav a {
         color: white;
     }
-    .login, .lane-nav {
+    .login, .lane-nav, .favorites .dropdown-content {
         background-color: #666;
         background-image: url('./resources/images/diag.png');
     }
@@ -71,8 +71,6 @@ a .fa-bars {
         vertical-align: middle;
     }
     .favorites .dropdown-content {
-        background-color: #666;
-        background-image: url('./resources/images/diag.png');
         text-align: left;
     }
     .lane-nav {
