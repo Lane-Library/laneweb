@@ -15,6 +15,7 @@ import org.springframework.data.solr.core.mapping.SolrDocument;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
+
 @SolrDocument(collection="laneSearch")
 public class Eresource {
 
