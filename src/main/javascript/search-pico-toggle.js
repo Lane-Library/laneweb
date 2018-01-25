@@ -18,9 +18,12 @@ if (document.querySelector(".pico-toggle"))  {
                 off = toggle.querySelector("." + PICO_OFF),
                 v = {
                     activate: function() {
-                        toggle.classList.add(PICO_TOGGLE_ACTIVE);
-                        on.classList.add(PICO_ON_ACTIVE);
-                        off.classList.remove(PICO_OFF_ACTIVE);
+                        // don't activate if already active
+                        if (!toggle.classList.contains(PICO_TOGGLE_ACTIVE)) {
+                            toggle.classList.add(PICO_TOGGLE_ACTIVE);
+                            on.classList.add(PICO_ON_ACTIVE);
+                            off.classList.remove(PICO_OFF_ACTIVE);
+                        }
                     },
                     deactivate: function() {
                         toggle.classList.remove(PICO_TOGGLE_ACTIVE);
