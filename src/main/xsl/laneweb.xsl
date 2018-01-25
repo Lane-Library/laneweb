@@ -272,7 +272,7 @@
     </xsl:template>
     
     <!-- add active to the pico-on link if $search-source=clinical-all and no PICO values present -->
-    <xsl:template match="h:span[@class='pico-on' and $search-source='clinical-all' and not($p or $i or $c or $o)]/@class">
+    <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o) and not($path='/portals/peds.html' or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
     
@@ -285,6 +285,9 @@
     <xsl:template match="h:fieldset[@class='pico-fields' and (matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) or $path='/portals/peds.html' or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-fields pico-fields-active'"/>
     </xsl:template>
+    
+    <!-- enable pico fields if one or more pico input values present or path is /portals/peds.html or /picosearch.html-->
+    <xsl:template match="h:input[(($p or $i or $c or $o) and (@name='p' or @name='i' or @name = 'c' or @name = 'o')) or $path='/portals/peds.html' or $path='/picosearch.html']/@disabled"/>
     
     <!-- make the .search-reset active if there is a query -->
     <xsl:template match="h:div[@class='search-reset' and $query]/@class">
