@@ -23,7 +23,7 @@
             } else {
                 pageTracker = gat._createTracker("UA-3203486-2","gaPageTracker");
             }
-            return pageTracker;
+            return pageTracker ? pageTracker : noopTracker;
         },
         gaPageTracker = noopTracker;
 
