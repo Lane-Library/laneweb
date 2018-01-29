@@ -24,9 +24,6 @@
         <xsl:attribute name="value" select="$o"/>
     </xsl:template>
 
-    <!-- enable pico fields if one or more pico input values present -->
-    <xsl:template match="h:input[($p or $i or $c or $o) and (@name='p' or @name='i' or @name = 'c' or @name = 'o')]/@disabled"/>
-
     <xsl:template match="h:input[@name='source']/@value">
         <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>

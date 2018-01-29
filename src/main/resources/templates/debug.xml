@@ -63,7 +63,7 @@
                 <div class="centered">
                     <h1>
                         <a href="http://med.stanford.edu/">Stanford Medicine</a>
-                        <a href="/index.html">Lane<br/>Medical Library</a>
+                        <a href="/index.html">Lane Medical Library</a>
                     </h1>
                     <ul class="library-contact">
                         <li><i class="fa fa-clock-o fa-lg fa-fw"></i><a href="/about/hours.html">Hours</a>: <?laneweb todays-hours?></li>

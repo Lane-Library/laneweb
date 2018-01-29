@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-01-29" version="3.4.3" description="3.4.3 bug fix release">
+            <action date="2018-01-25" dev="ceyates" issue="138562" type="fix">
+                Feedback-suggestion: PICO boxes not clickable
+            </action>
+            <action date="2018-01-24" dev="ceyates" issue="138465" type="update">
+                bottom align h1 elements and text on single line
+            </action>
+        </release>
         <release date="2018-01-22" version="3.4.2" description="3.4.2 bug fix release">
             <action date="2018-01-18" dev="ceyates" issue="138359" type="update">
                 use SOM logo in place of current book logo in header
