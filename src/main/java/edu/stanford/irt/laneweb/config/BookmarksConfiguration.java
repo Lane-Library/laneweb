@@ -42,7 +42,7 @@ public class BookmarksConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.bookmarks.BookmarkService")
     @Profile("!gce")
-    public BookmarkService bookmarkService(@Qualifier("javax.sql.DataSource/bookmarks") final DataSource dataSource) {
+    public BookmarkService bookmarkService(final DataSource dataSource) {
         return new StanfordDomainStrippingBookmarkService(new JDBCBookmarkService(dataSource));
     }
 
