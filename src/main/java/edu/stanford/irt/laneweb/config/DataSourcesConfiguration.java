@@ -24,8 +24,7 @@ public class DataSourcesConfiguration {
 
     private static final int THREE_SECONDS = 3;
 
-    @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks",
-            "javax.sql.DataSource/bookcovers" })
+    @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks" })
     @Profile("!gce")
     public DataSource onPremiseDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,
@@ -46,8 +45,7 @@ public class DataSourcesConfiguration {
         return dataSource;
     }
 
-    @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks",
-            "javax.sql.DataSource/bookcovers" })
+    @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks" })
     @Profile("gce")
     public DataSource googleCloudDataSource(HikariConfig config) {
         return new HikariDataSource(config);
