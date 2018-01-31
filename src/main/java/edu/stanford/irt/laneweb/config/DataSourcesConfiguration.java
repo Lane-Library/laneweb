@@ -19,7 +19,7 @@ public class DataSourcesConfiguration {
 
     private static final int THREE_SECONDS = 3;
 
-    @Bean(name = { "javax.sql.DataSource/eresources", "javax.sql.DataSource/bookmarks" })
+    @Bean
     @Profile("!gce")
     public DataSource onPremiseDataSource(@Value("${edu.stanford.irt.laneweb.db.eresources.url}") final String url,
             @Value("${edu.stanford.irt.laneweb.db.eresources.user}") final String user,

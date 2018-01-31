@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -42,7 +41,7 @@ public class BookmarksConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.bookmarks.BookmarkService")
     @Profile("!gce")
-    public BookmarkService bookmarkService(@Qualifier("javax.sql.DataSource/bookmarks") final DataSource dataSource) {
+    public BookmarkService bookmarkService(final DataSource dataSource) {
         return new StanfordDomainStrippingBookmarkService(new JDBCBookmarkService(dataSource));
     }
 
