@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.bookcovers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -24,7 +24,7 @@ public class BookCoverService {
         this.bookCoverServiceURI = bookCoverServiceURI;
     }
 
-    public Map<Integer, String> getBookCoverURLs(final List<Integer> bibids) {
+    public Map<Integer, String> getBookCoverURLs(final Collection<Integer> bibids) {
         StringBuilder queryStringBuilder = new StringBuilder("bookcovers?bibIDs=")
             .append(bibids.stream().map(Object::toString).collect(Collectors.joining(",")));
         try (InputStream input = IOUtils.getStream(this.bookCoverServiceURI.resolve(queryStringBuilder.toString()))) {
