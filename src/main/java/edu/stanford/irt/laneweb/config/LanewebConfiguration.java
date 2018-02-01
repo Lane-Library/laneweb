@@ -80,6 +80,12 @@ public class LanewebConfiguration {
                 .map((final String s) -> s + "application.properties")
                 .map(resourceLoader::getResource)
                 .collect(Collectors.toList());
+        Arrays.stream(environment.getActiveProfiles()).forEach((final String profile) -> {
+            locations.addAll(DEFAULT_LOCATIONS.stream()
+                .map((final String s) -> s + "application-" + profile + ".properties")
+                .map(resourceLoader::getResource)
+                .collect(Collectors.toList()));
+        });
         String springConfigProperty = environment.getProperty("spring.config.location");
         if (springConfigProperty != null) {
             locations.addAll(Arrays.stream(springConfigProperty.split(","))
