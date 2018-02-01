@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
+
 public class BookmarksConfigurationTest {
 
     private BookmarksConfiguration configuration;
@@ -32,5 +34,25 @@ public class BookmarksConfigurationTest {
     @Test
     public void testBookmarkService() {
         assertNotNull(this.configuration.bookmarkService(null));
+    }
+
+    @Test
+    public void testDummyBookmarkService() {
+        BookmarkService service = this.configuration.dummyBookmarkService();
+        try {
+            service.getLinks(null);
+        } catch (UnsupportedOperationException e) {
+            assertNotNull(e);
+        }
+        try {
+            service.getRowCount();
+        } catch (UnsupportedOperationException e) {
+            assertNotNull(e);
+        }
+        try {
+            service.saveLinks(null, null);
+        } catch (UnsupportedOperationException e) {
+            assertNotNull(e);
+        }
     }
 }
