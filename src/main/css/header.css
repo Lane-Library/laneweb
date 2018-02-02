@@ -5,29 +5,20 @@
 }
 
 h1 {
-    padding-top: 20px;
+    padding-top: 18px;
 }
 
 h1 a {
-    display: inline-block;
-    vertical-align: top;
-}
-
-h1 a:nth-child(1) {
     background-image: url('../images/sm-logo.svg');
-    border-right: 1px #333333 solid;
-    box-sizing: content-box;
+    background-repeat: no-repeat;
     display: inline-block;
-    height: 41px;
-    text-indent: -1000px;
-    width: 168px;
-}
-
-h1 a:nth-child(2) {
     color: #333333;
     font-size: 18px;
-    margin-top: 23px;
-    padding-left: 4px;
+    padding: 24px 0 0 176px;
+}
+
+h1 a:active, h1 a:visited, h1 a:hover {
+    color: #333;
 }
 
 .login {
