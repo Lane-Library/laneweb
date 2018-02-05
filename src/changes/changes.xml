@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-02-05" version="3.4.4" description="3.4.4 bug fix release">
+            <action date="2018-02-01" dev="ryanmax" issue="138727" type="update">
+                update our ICO to the shield for lane and history center
+            </action>
+            <action date="2018-02-02" dev="ceyates" issue="138725" type="update">
+                remove duplicate links from h1 logo, use only to lane.stanford.edu
+            </action>
+            <action date="2018-01-30" dev="ceyates" issue="138666" type="add">
+                create a microservice for bookcovers
+            </action>
+        </release>
         <release date="2018-01-29" version="3.4.3" description="3.4.3 bug fix release">
             <action date="2018-01-25" dev="ceyates" issue="138562" type="fix">
                 Feedback-suggestion: PICO boxes not clickable
