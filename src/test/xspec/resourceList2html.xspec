@@ -30,7 +30,7 @@
             <s:result type="searchContent"/>
         </x:context>
         <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
-            <li class="resource">
+            <li class="resource" data-sid="">
                 <span class="primaryType">Article</span>
                 <div>
                     <a class="primaryLink"
@@ -49,7 +49,7 @@
             <s:result type="eresource"/>
         </x:context>
         <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
-            <li class="resource">
+            <li class="resource" data-sid="">
             <span class="primaryType"/>
             <div class="resultInfo">
             </div>

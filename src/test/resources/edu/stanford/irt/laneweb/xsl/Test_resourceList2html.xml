@@ -21,7 +21,7 @@
     <description>description</description>
   </result>
   <result score="62" type="eresource">
-    <id>12370</id>
+    <id>bib-301866</id>
     <recordId>301866</recordId>
     <recordType>bib</recordType>
     <title><keyword>Music</keyword> that works</title>
@@ -43,7 +43,7 @@
   </result>
   <!-- impact factor links should never be first, but test just in case -->
   <result score="1" type="eresource">
-    <id>123</id>
+    <id>bib-123</id>
     <recordId>123</recordId>
     <recordType>bib</recordType>
     <title><keyword>Music</keyword> that works</title>

@@ -121,7 +121,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <li class="resource">
+        <li class="resource" data-sid="{s:contentId}">
             <span class="primaryType">Article</span>
             <div>
                 <a class="primaryLink" href="{$primaryLink}">
@@ -163,7 +163,7 @@
     <xsl:template match="s:result[@type='eresource']">
         <xsl:variable name="total" select="number(s:total)"/>
         <xsl:variable name="available" select="number(s:available)"/>
-        <li class="resource">
+        <li class="resource" data-sid="{s:id}">
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
