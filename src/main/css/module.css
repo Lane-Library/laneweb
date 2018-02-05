@@ -113,7 +113,7 @@
 .new-resource {
     background-color: transparent;
     text-align: center;
-    margin: 50px 12px 12px auto;
+    margin: 0 12px 12px auto;
 }
 
 .new-resource p, .new-resource ul {
