@@ -106,7 +106,7 @@
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-feed.xml" type="wildcard">
-            <map:generate type="file" src="http://lane-local.stanford.edu/laneblog-feed.xml"/>
+            <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
