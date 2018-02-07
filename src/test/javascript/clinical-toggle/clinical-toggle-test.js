@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", function(Y) {
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
@@ -6,35 +6,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         name : "Clinical Toggle TestCase",
 
-        setUp: function() {
-            L.searchIndicator.hide();
-            Y.one(".clinical-toggle").set("className", "clinical-toggle");
-            Y.one(".clinical-toggle-circle").set("className", "clinical-toggle-circle clinical-toggle-circle-all");
-        },
-
         "test indicator active on click" : function() {
-            var toggle = Y.one(".clinical-toggle");
-            var indicator = Y.one(".search-indicator");
-            Y.Assert.isFalse(indicator.hasClass("search-indicator-active"));
-            toggle.simulate("click");
-            Y.Assert.isTrue(indicator.hasClass("search-indicator-active"));
-        },
-
-        "test circle changes from all to peds on click": function() {
-            var toggle = Y.one(".clinical-toggle");
-            var circle = Y.one(".clinical-toggle-circle");
-            Y.Assert.isFalse(circle.hasClass("clinical-toggle-circle-peds"));
-            toggle.simulate("click");
-            Y.Assert.isTrue(circle.hasClass("clinical-toggle-circle-peds"));
-        },
-
-        "test circle changes from peds to all on click": function() {
-            var toggle = Y.one(".clinical-toggle");
-            var circle = Y.one(".clinical-toggle-circle");
-            circle.set("className", "clinical-toggle-circle clinical-toggle-circle-peds");
-            Y.Assert.isTrue(circle.hasClass("clinical-toggle-circle-peds"));
-            toggle.simulate("click");
-            Y.Assert.isFalse(circle.hasClass("clinical-toggle-circle-peds"));
+            var toggle = document.querySelector(".clinical-toggle");
+            var indicator = document.querySelector(".search-indicator");
+            Y.Assert.isFalse(indicator.classList.contains("search-indicator-active"));
+            toggle.click();
+            Y.Assert.isTrue(indicator.classList.contains("search-indicator-active"));
         }
     });
 
