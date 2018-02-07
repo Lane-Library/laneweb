@@ -35,10 +35,6 @@
     color: rgb(180,13,26);
 }
 
-.bookmark-link.successful {
-    background-color: rgb(180,13,26);
-}
-
 .yui3-bookmark-editor {
     cursor: move;
 }

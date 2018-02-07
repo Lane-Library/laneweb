@@ -3,7 +3,12 @@
     "use strict";
 
     var BookmarkLink,
-        Model = L.Model;
+        Model = L.Model,
+        OFF = "off",
+        READY = "ready",
+        ACTIVE = "active",
+        BOOKMARKING = "bookmarking",
+        TIMING = "timing";
 
     //don't create BookmarkLink if in disaster mode
     if (!Model.get(Model.DISASTER_MODE)) {
@@ -41,7 +46,7 @@
                     value:500
                 },
                 status : {
-                    value : 0 //BookmarkLink.OFF
+                    value : OFF
                 }
         };
 
@@ -63,12 +68,12 @@
             },
 
             /**
-             * Responds to bookmarks:addSync event, changes the status to SUCCESSFUL
+             * Responds to bookmarks:addSync event, changes the status to OFF
              * @method _handleSyncEvent
              * @private
              */
             _handleSyncEvent : function() {
-                this.set("status", BookmarkLink.SUCCESSFUL);
+                this.set("status", OFF);
             },
 
             /**
@@ -77,7 +82,7 @@
              * @private
              */
             _handleBookmarkMouseout : function() {
-                this.set("status", BookmarkLink.TIMING);
+                this.set("status", TIMING);
             },
 
             /**
@@ -86,7 +91,7 @@
              * @private
              */
             _handleBookmarkMouseover : function() {
-                this.set("status", BookmarkLink.ACTIVE);
+                this.set("status", ACTIVE);
             },
 
             /**
@@ -109,7 +114,7 @@
                 } else {
                     url = linkinfo.url;
                 }
-                this.set("status", BookmarkLink.BOOKMARKING);
+                this.set("status", BOOKMARKING);
                 bookmarks = this.get("bookmarks");
                 if (bookmarks) {
                     bookmarks.addBookmark(new L.Bookmark(label, url));
@@ -126,7 +131,7 @@
              */
             _handleTargetMouseout : function(event) {
                 if (this._isBookmarkable(event.currentTarget)) {
-                    this.set("status", BookmarkLink.TIMING);
+                    this.set("status", TIMING);
                 }
             },
 
@@ -139,7 +144,7 @@
             _handleTargetMouseover : function(event) {
                 if (this._isBookmarkable(event.currentTarget)) {
                     this.set("target", event.currentTarget);
-                    this.set("status", BookmarkLink.READY);
+                    this.set("status", READY);
                 }
             },
 
@@ -193,7 +198,7 @@
              * @private
              */
             _turnOff : function() {
-                this.set("status", BookmarkLink.OFF);
+                this.set("status", OFF);
             },
 
             /**
@@ -223,50 +228,36 @@
                 node.purge(false);
                 switch(event.newVal) {
                 //OFF: not visible
-                case BookmarkLink.OFF :
+                case OFF :
                     node.remove(false);
                     node.removeClass("active");
                     node.removeClass("bookmarking");
-                    node.removeClass("successful");
                     break;
                 //READY: visible but not enabled
-                case BookmarkLink.READY :
+                case READY :
                     target.insert(node, "after");
                     break;
                 //ACTIVE: enabled (mouseover)
-                case BookmarkLink.ACTIVE :
+                case ACTIVE :
                     node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.on("click", this._handleClick, this);
                     node.addClass("active");
                     break;
                 //BOOKMARKING: clicked and waiting for server sync message
-                case BookmarkLink.BOOKMARKING :
+                case BOOKMARKING :
                     node.on("mouseout", this._handleBookmarkMouseout, this);
                     node.replaceClass("active", "bookmarking");
                     break;
-                //SUCCESSFUL: server sync was successful
-                case BookmarkLink.SUCCESSFUL :
-                    node.on("mouseout", this._handleBookmarkMouseout, this);
-                    node.replaceClass("bookmarking", "successful");
-                    break;
                 //TIMING: waiting to hide
-                case BookmarkLink.TIMING :
+                case TIMING :
                     node.on("mouseover",this._handleBookmarkMouseover, this);
                     node.removeClass("active");
                     node.removeClass("bookmarking");
-                    node.removeClass("successful");
                     this._timer = Y.later(this.get("hideDelay"), this, this._turnOff);
                     break;
                 default:
                 }
             }
-        }, {
-            OFF : 0,
-            READY : 1,
-            ACTIVE : 2,
-            BOOKMARKING : 3,
-            SUCCESSFUL : 4,
-            TIMING : 5
         });
 
         //create a BookmarkLink and save reference
