@@ -119,32 +119,6 @@
             },
 
             /**
-             * Handle clicks on the bookmarkSearch link.
-             * @method _handleBookmarkSearchClick
-             * @private
-             */
-            _handleBookmarkSearchClick : function(event) {
-                var encodedQuery = Model.get(Model.URL_ENCODED_QUERY),
-                    encodedSource = Model.get(Model.URL_ENCODED_SOURCE),
-                    label = "Search for: " + decodeURIComponent(encodedQuery),
-                    url = "/search.html?source=" + encodedSource + "&q=" + encodedQuery,
-                    bookmarkSearch = event.currentTarget,
-                    eventHandle = null,
-                    bookmarks = this.get("bookmarks");
-                if (bookmarks) {
-                    bookmarkSearch.addClass("bookmarking");
-                    eventHandle = bookmarks.after("addSync", function() {
-                        bookmarkSearch.removeClass("active");
-                        bookmarkSearch.removeClass("bookmarking");
-                        eventHandle.detach();
-                    }, this);
-                    bookmarks.addBookmark(new L.Bookmark(label, url));
-                } else {
-                    L.BookmarkLogin.addBookmark(label, url);
-                }
-            },
-
-            /**
              * Responds to mouseout on target anchors, checks if they are bookmarkable, changes the status to TIMING.
              * @method _handleTargetMouseout
              * @private
