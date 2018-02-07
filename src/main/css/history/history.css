@@ -27,28 +27,39 @@ a:visited,a:active,a:hover {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.centered {
+.centered, h1 {
     width: 989px;
     margin: auto;
 }
 
-#header {
-    margin-top: 32px;
-    height: 92px;
+.header {
     background-color: white;
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .5);
+    box-shadow: 0 0 6px 0 rgba(0,0,0,.5);
+    margin-top: 34px;
 }
 
 h1 {
-    display: inline-block;
-    font-size: 20px;
-    font-weight: 400;
-    padding: 52px 0 0 190px;
+    padding:10px 0;
 }
 
-h1 a, h1 a:visited, h1 a:active, h1 a:hover{
-    color: #333333;
-    text-decoration: none;
+h1 a {
+    background-image: url('../../images/sm-logo.svg');
+    background-repeat: no-repeat;
+    color: #333;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 16px;
+    padding: 10px 0 0 176px;
+}
+
+h1 a:visited,
+h1 a:active,
+h1 a:hover {
+    color: #333;
+}
+
+h1 i {
+    font-size: 12px;
 }
 
 #sm-header {
@@ -147,19 +158,6 @@ h1 a, h1 a:visited, h1 a:active, h1 a:hover{
 }
 .nav-item .explore i{
     font-size: 6px;
-}
-
-#sm {
-    position: absolute;
-    display: block;
-    height: 45px;
-    width: 180px;
-    background-repeat: no-repeat;
-    background-image: url('../../images/history/sm.png');
-    top: 58px;
-    border-right: 1px black solid;
-    text-indent: -9999px;
-    box-sizing: border-box;
 }
 
 #lane-footer,#lane-subfooter {

@@ -20,12 +20,11 @@ ga('send', 'pageview');
 </script>
     </head>
     <body>
-        <div id="header">
-            <div class="centered">
-                <h1>
-                    <a href="/med-history/index.html">Medical History Center</a>
-                </h1>
-            </div>
+        <div class="header">
+            <h1>
+                <a href="/med-history/index.html">Lane Medical Library<br/>
+                    <i>Medical History Center</i></a>
+            </h1>
         </div>
         <div class="centered">
             <?laneweb content?>
@@ -391,9 +390,6 @@ ga('send', 'pageview');
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="centered">
-            <a id="sm" href="http://med.stanford.edu/">Stanford Medicine</a>
         </div>
         <div id="lane-footer">
         <div class="centered">
