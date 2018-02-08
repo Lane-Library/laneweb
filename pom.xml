@@ -77,7 +77,7 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.70.0</version>
+            <version>1.71.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -99,7 +99,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-7</version>
+            <version>9.8.0-8</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -314,7 +314,7 @@
         <dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.ehcache.modules</groupId>
