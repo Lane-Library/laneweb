@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-02-12" version="3.4.5" description="3.4.5 bug fix release">
+            <action date="2018-02-05" dev="ryanmax" issue="138791" type="add">
+                add document IDs to search result click events
+            </action>
+            <action date="2018-02-05" dev="olgary" issue="138790" type="update">
+                remove margin for the new-resource in module.css
+            </action>
+            <action date="2018-02-07" dev="ceyates" issue="138726" type="update">
+                update History center logo
+            </action>
+            <action date="2018-02-07" dev="ceyates" issue="138559" type="fix">
+                duplicate bookmarks
+            </action>
+            <action date="2018-02-07" dev="ceyates" issue="138306" type="add">
+                add pubmed api key to spellcheck-pubmed-espell project
+            </action>
+            <action date="2018-02-07" dev="ceyates" issue="137701" type="update">
+                change the toggle to font awesome toggle icons?
+            </action>
+        </release>
         <release date="2018-02-05" version="3.4.4" description="3.4.4 bug fix release">
             <action date="2018-02-01" dev="ryanmax" issue="138727" type="update">
                 update our ICO to the shield for lane and history center
