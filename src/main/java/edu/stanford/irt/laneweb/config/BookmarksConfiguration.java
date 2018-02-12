@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -52,17 +53,17 @@ public class BookmarksConfiguration {
 
             @Override
             public List<Bookmark> getLinks(final String userid) {
-                throw new UnsupportedOperationException();
+                return Collections.emptyList();
             }
 
             @Override
             public int getRowCount() {
-                throw new UnsupportedOperationException();
+                return 0;
             }
 
             @Override
             public void saveLinks(final String userid, final List<Bookmark> links) {
-                throw new UnsupportedOperationException();
+                // do nothing
             }
         };
     }
