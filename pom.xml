@@ -109,7 +109,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.0.72</version>
+            <version>3.0.73</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
