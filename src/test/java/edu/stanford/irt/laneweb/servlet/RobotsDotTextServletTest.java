@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +24,16 @@ public class RobotsDotTextServletTest {
     private static class FakeServletOutputStream extends ServletOutputStream {
 
         private final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+
+        @Override
+        public boolean isReady() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void setWriteListener(final WriteListener writeListener) {
+            throw new UnsupportedOperationException();
+        }
 
         @Override
         public String toString() {
