@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb;
 
 import org.apache.catalina.connector.Connector;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
@@ -17,10 +18,10 @@ public class Laneweb {
     }
 
     @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
+    public EmbeddedServletContainerFactory servletContainer(@Value("${edu.stanford.irt.laneweb.ajpPort:8009}") int ajpPort) {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         Connector ajpConnector = new Connector("AJP/1.3");
-        ajpConnector.setPort(8009);
+        ajpConnector.setPort(ajpPort);
         tomcat.addAdditionalTomcatConnectors(ajpConnector);
         return tomcat;
     }
