@@ -27,42 +27,6 @@
         </encoder>
     </appender>
     
-    <appender name="search" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_PATH}/search.log</File>
-        <encoder>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <maxIndex>10</maxIndex>
-            <FileNamePattern>${LOG_PATH}/search.log.%i</FileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>
-    </appender>
-    
-    <logger name="edu.stanford.irt.search" level="error" additivity="false">
-        <appender-ref ref="search"/>
-    </logger>
-    
-    <appender name="querymap" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_PATH}/querymap.log</File>
-        <encoder>
-            <pattern>%d %p %m%n</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <maxIndex>10</maxIndex>
-            <FileNamePattern>${LOG_PATH}/querymap.log.%i</FileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>
-    </appender>
-    
-    <logger name="querymap" level="info" additivity="false">
-        <appender-ref ref="querymap"/>
-    </logger>
-    
     <root level="${edu.stanford.irt.laneweb.log.level:-INFO}">
         <appender-ref ref="${edu.stanford.irt.laneweb.log.appender:-LOG}" />
     </root>
