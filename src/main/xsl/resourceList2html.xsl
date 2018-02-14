@@ -390,7 +390,7 @@
         <xsl:param name="simplePrimaryType" />
         <span>
             <xsl:choose>
-                <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')">Print</xsl:when>
+                <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or contains(s:url,'//searchworks.stanford.edu/view')">Print</xsl:when>
                 <xsl:when test="$primaryType = s:label">
                     <a href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
                 </xsl:when>
