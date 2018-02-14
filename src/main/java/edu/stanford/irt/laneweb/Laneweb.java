@@ -18,7 +18,8 @@ public class Laneweb {
     }
 
     @Bean
-    public EmbeddedServletContainerFactory servletContainer(@Value("${edu.stanford.irt.laneweb.ajpPort:8009}") int ajpPort) {
+    public EmbeddedServletContainerFactory servletContainer(
+            @Value("${edu.stanford.irt.laneweb.ajpPort:8009}") int ajpPort) {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         Connector ajpConnector = new Connector("AJP/1.3");
         ajpConnector.setPort(ajpPort);

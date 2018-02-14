@@ -410,7 +410,9 @@
                 <version>1.5.8.RELEASE</version>
                 <configuration>
                     <executable>true</executable>
-                    <mainClass>edu.stanford.irt.laneweb.Laneweb</mainClass>
+                    <embeddedLaunchScriptProperties>
+                        <confFolder>/etc/laneweb</confFolder>
+                    </embeddedLaunchScriptProperties>
                 </configuration>
                 <executions>
                     <execution>
