@@ -315,10 +315,10 @@
                 L.setLocationHref(t.href);
             };
             Tracker.trackEvent(e);
-            //put in a delay for safari to make the tracking request:
-            if (/AppleWebKit/.test(L.getUserAgent()) && (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e))) {
+            //put in a delay to make the tracking request:
+            if (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e)) {
                     while (t) {
-                        // have safari follow link if it's not:
+                        // follow link if it's not:
                         //  - popup or facet
                         //    (can't halt facet click propagation b/c they need to be tracked)
                         if (t.href &&
