@@ -71,6 +71,8 @@ public class LanewebConfiguration {
         this.constants.put(Model.CONTENT_BASE, contentBase);
         this.constants.put(Model.DISASTER_MODE, disasterMode);
         this.constants.put(Model.VERSION, version);
+        // set the http.agent system property:
+        System.setProperty("http.agent", "laneweb-" + version);
     }
 
     @Bean

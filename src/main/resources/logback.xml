@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     
+    <property name="LOG_PATH" value="${LOG_PATH:-${catalina.base:-${java.io.tmpdir:-/tmp}}/logs}"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH}/laneweb.log}"/>
+    <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d %p [%t][%c{1}] - %m%n}"/>
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-${FILE_LOG_PATTERN}}"/>
+
     <appender name="LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${catalina.base}/logs/laneweb.log</File>
+        <File>${LOG_FILE}</File>
         <encoder>
-            <pattern>%d %p [%t][%c{1}] - %m%n</pattern>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
             <minIndex>1</minIndex>
             <maxIndex>10</maxIndex>
-            <FileNamePattern>${catalina.base}/logs/laneweb.log.%i</FileNamePattern>
+            <FileNamePattern>${LOG_FILE}.%i</FileNamePattern>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>10MB</MaxFileSize>
@@ -18,48 +23,12 @@
     
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d %p [%t][%c{1}] - %m%n</pattern>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
     
-    <appender name="search" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${catalina.base}/logs/search.log</File>
-        <encoder>
-            <pattern>%d %p [%t][%c{1}] - %m%n</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <maxIndex>10</maxIndex>
-            <FileNamePattern>${catalina.base}/logs/search.log.%i</FileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>
-    </appender>
-    
-    <logger name="edu.stanford.irt.search" level="error" additivity="false">
-        <appender-ref ref="search"/>
-    </logger>
-    
-    <appender name="querymap" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${catalina.base}/logs/querymap.log</File>
-        <encoder>
-            <pattern>%d %p %m%n</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <maxIndex>10</maxIndex>
-            <FileNamePattern>${catalina.base}/logs/querymap.log.%i</FileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>
-    </appender>
-    
-    <logger name="querymap" level="info" additivity="false">
-        <appender-ref ref="querymap"/>
-    </logger>
-    
-    <root level="${edu.stanford.irt.laneweb.log.level}">
-        <appender-ref ref="${edu.stanford.irt.laneweb.log.appender}"/>
+    <root level="${edu.stanford.irt.laneweb.log.level:-INFO}">
+        <appender-ref ref="${edu.stanford.irt.laneweb.log.appender:-LOG}" />
     </root>
     
 </configuration>

@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-02-16" version="3.5.0" description="3.5.0 minor version release">
+            <action date="2018-02-14" dev="ryanmax" issue="139053" type="fix">
+                Feedback-suggestion: some SUL print holding are displaying as Digital
+            </action>
+            <action date="2018-02-13" dev="ceyates" issue="139036" type="update">
+                convert to spring boot application
+            </action>
+            <action date="2018-02-15" dev="ryanmax" issue="138789" type="fix">
+                FireFox not reporting events correctly
+            </action>
+        </release>
         <release date="2018-02-12" version="3.4.5" description="3.4.5 bug fix release">
             <action date="2018-02-05" dev="ryanmax" issue="138791" type="add">
                 add document IDs to search result click events
