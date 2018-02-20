@@ -22,7 +22,13 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             startDivWithClass(xmlConsumer, "pure-u-1-8");
             String id = Integer.toString(item.getId());
             AttributesImpl atts = new AttributesImpl();
+            atts.addAttribute("", "class", "class", "CDATA", "fa fa-book");
+            atts.addAttribute("", "style", "style", "CDATA", "position:absolute;font-size: 86px;left: 18px;");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
+            atts = new AttributesImpl();
             atts.addAttribute("", "class", "class", "CDATA", "bookcover");
+            atts.addAttribute("", "style", "style", "CDATA", "float:none;position: relative;top: -144px;left: 6px;");
             atts.addAttribute("", "data-bibid", "data-bibid", "CDATA", id);
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
