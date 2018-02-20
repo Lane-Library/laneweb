@@ -13,7 +13,20 @@
     float: left;
     margin-right: 1em;
 }
+
 .bookcover.module-img {
     height: 81px;
     width: 59px;
+}
+
+.course-reserves-item .fa-book {
+    font-size: 86px;
+    left: 18px;
+    position: absolute;
+}
+
+.course-reserves-item .bookcover {
+    float: none;
+    left: 6px;
+    position: relative;
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<li class="resource">
+<li class="resource course-reserves-item">
    <div class="pure-g">
       <div class="pure-u-1-8">
+         <i class="fa fa-book"/>
          <img class="bookcover" data-bibid="1"/>
       </div>
       <div class="pure-u-7-8">

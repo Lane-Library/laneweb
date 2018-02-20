@@ -17,11 +17,15 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
     @Override
     public void toSAX(final CourseReservesItem item, final XMLConsumer xmlConsumer) {
         try {
-            startLiWithClass(xmlConsumer, "resource");
+            startLiWithClass(xmlConsumer, "resource course-reserves-item");
             startDivWithClass(xmlConsumer, "pure-g");
             startDivWithClass(xmlConsumer, "pure-u-1-8");
             String id = Integer.toString(item.getId());
             AttributesImpl atts = new AttributesImpl();
+            atts.addAttribute("", "class", "class", "CDATA", "fa fa-book");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
+            atts = new AttributesImpl();
             atts.addAttribute("", "class", "class", "CDATA", "bookcover");
             atts.addAttribute("", "data-bibid", "data-bibid", "CDATA", id);
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
