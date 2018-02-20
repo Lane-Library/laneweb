@@ -313,8 +313,8 @@
                     <div class="pure-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
                     <div class="pure-u-1-2">
                          <ul>
-                            <li><a href="http://www.stanford.edu/site/terms.html">Terms of Use</a></li>
-                            <li><a title="See us on Facebook" href="https://www.facebook.com/LaneLibStanford/"><span>See us on Facebook</span><i class="fa fa-facebook"></i></a></li>           
+                            <li><a href="https://www.stanford.edu/site/terms/">Terms of Use</a></li>
+                            <li><a title="See us on Facebook" href="https://www.facebook.com/LaneLibStanford/"><span>See us on Facebook</span><i class="fa fa-facebook"></i></a></li>
                             <li><a title="See us on Twitter" href="https://twitter.com/LaneLibStanford"><span>See us on Twitter</span><i class="fa fa-twitter"></i></a></li>
                         </ul>
                     </div>

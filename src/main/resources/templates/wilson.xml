@@ -414,20 +414,20 @@ ga('send', 'pageview');
                     <div class="pure-u-1-5">
                         <ul>
                             <li><a href="/med-history/events.html">Upcoming Events</a></li>
-                            <li><a href="/med-history/contact.html">Contact Us</a></li> 
+                            <li><a href="/med-history/contact.html">Contact Us</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-1-5">
                         <ul>
                             <li><a href="https://www.flickr.com/photos/40390680@N08/">Historic Images</a></li>
-                            <li><a href="/med-history/exhibits/current.html">Exhibits</a></li> 
+                            <li><a href="/med-history/exhibits/current.html">Exhibits</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-1-5">
                     </div>
                     <div class="pure-u-1-5">
                         <ul>
-                            <li><a href="http://lane.stanford.edu">Lane Medical Library</a></li> 
+                            <li><a href="http://lane.stanford.edu">Lane Medical Library</a></li>
                         </ul>
                     </div>
                 </div></div>
@@ -438,7 +438,7 @@ ga('send', 'pageview');
                <div class="pure-g">
                     <div class="pure-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
                     <div class="pure-u-1-4">
-                        <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>    
+                        <a href="https://www.stanford.edu/site/terms/">Terms of Use</a>    
                     </div>
                     <div class="pure-u-1-4">
                         <a href="https://flic.kr/ps/BG8qu">
