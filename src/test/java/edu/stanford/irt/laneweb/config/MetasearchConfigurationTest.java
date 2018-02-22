@@ -55,11 +55,6 @@ public class MetasearchConfigurationTest {
     }
 
     @Test
-    public void testMetaSearchManagerSource() {
-        assertNotNull(this.configuration.springContextMetaSearchService());
-    }
-
-    @Test
     public void testMetasearchResultSAXStrategy() {
         assertNotNull(this.configuration.metasearchResultSAXStrategy());
     }

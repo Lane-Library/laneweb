@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,7 +39,6 @@ import edu.stanford.irt.laneweb.metasearch.ScoreStrategy;
 import edu.stanford.irt.laneweb.metasearch.SearchDirectoryTransformer;
 import edu.stanford.irt.laneweb.metasearch.SearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.SearchResultSAXStrategy;
-import edu.stanford.irt.laneweb.metasearch.SpringContextMetaSearchService;
 import edu.stanford.irt.search.impl.Result;
 
 @Configuration
@@ -123,7 +120,6 @@ public class MetasearchConfiguration {
     }
 
     @Bean
-    @Profile("gce")
     public MetaSearchService httpMetaSearchService(final ObjectMapper objectMapper,
             @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URL metaSearchURL) {
         return new HTTPMetaSearchService(metaSearchURL, objectMapper, SEVENTY_SECONDS);
@@ -185,12 +181,5 @@ public class MetasearchConfiguration {
     @Scope("prototype")
     public Generator searchGenerator(final MetaSearchService metaSearchService) {
         return new SearchGenerator(metaSearchService, metasearchResultSAXStrategy());
-    }
-
-    @Bean(destroyMethod = "dispose")
-    @Profile("!gce")
-    public MetaSearchService springContextMetaSearchService() {
-        return new SpringContextMetaSearchService(
-                new ClassPathXmlApplicationContext(new String[] { "search-lane.xml" }, false, null));
     }
 }
