@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-02-26" version="3.5.1" description="3.5.1 bug fix release">
+            <action date="2018-02-22" dev="ceyates" issue="139219" type="update">
+                extract metasearch into a separate microservice
+            </action>
+            <action date="2018-02-20" dev="ryanmax" issue="139209" type="fix">
+                ICO doesn't display correctly
+            </action>
+            <action date="2018-02-20" dev="olgary" issue="139201" type="update">
+                link change in the template, debug, responsive, history
+            </action>
+            <action date="2018-02-20" dev="ceyates" issue="138558" type="fix">
+                Feedback-suggestion: missing book images on course reserves page
+            </action>
+        </release>
         <release date="2018-02-16" version="3.5.0" description="3.5.0 minor version release">
             <action date="2018-02-14" dev="ryanmax" issue="139053" type="fix">
                 Feedback-suggestion: some SUL print holding are displaying as Digital
