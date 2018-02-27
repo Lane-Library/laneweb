@@ -8,55 +8,6 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
-        <style type="text/css">
-            .main {
-            margin-top: 0;
-            }
-            .lane-header {
-            height: 132px;
-            }
-            h1 {
-            padding-top: 57px;
-            }
-            .lane-header {
-            height: 125px;
-            }
-            .library-contact li {
-            border: 2px #007c92 solid;
-            border-radius: 6px;
-            margin-left: 12px;
-            padding: 12px;
-            top: 56px;
-            }
-            .library-contact .fa {
-            color: #007c92;
-            }
-            .library-contact .live-chat {
-            padding: 12px;
-            }
-            .nav header {
-            background-color: black;
-            color: rgb(193,193,193);
-            font-weight: 600;
-            height: 33px;
-            margin: 0;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            }
-            .login {
-            }
-            .login a, .login .fa {
-            color: white;
-            }
-            .favorites .dropdown-content {
-            background-color: #666;
-            background-image: url('./resources/images/diag.png');
-            }
-            .lane-nav {
-            top: 125px;
-            }
-        </style>
     </head>
     <body>
         <div class="main">

@@ -476,7 +476,6 @@
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
                                 <include>search-image-min.css</include>
-                                <include>som-header-min.css</include>
                                 <include>classes-min.css</include>
                                 <include>shc-portal-min.css</include>
                                 <include>live-chat-min.css</include>

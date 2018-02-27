@@ -1,12 +1,17 @@
 .favorites .dropdown-content {
-    z-index: 2;
+    background-color: #666;
+    background-image: url('../images/diag.png');
     padding: 0 18px;
-    border-top: 1px solid #dadad9;
+    border: none;
+    font-weight: initial;
+    line-height: initial;
+    right: -12px;
     white-space: nowrap;
+    z-index: 2;
 }
 
 .favorites li {
-    margin: 1em 0;
+    margin: 6px 0;
 }
 
 .bookmark-link {

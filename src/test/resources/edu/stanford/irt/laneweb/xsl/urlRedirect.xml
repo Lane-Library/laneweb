@@ -15,9 +15,6 @@
       </div>
    </li>
    <li>
-      <a href="/myaccounts.html">MyLane</a>
-   </li>
-   <li>
       <a href="/logout">Logout</a>
    </li>
    <li>
@@ -28,6 +25,10 @@
       <a href="?something=else&amp;proxy-links=true&amp;param=onemore&amp;proxy-links=true">Stanford <i class="fa fa-toggle-on"/>
       </a> Guest
     </li>
+   <li>
+      <i class="fa fa-question-circle"/>
+      <div class="login-info"/>
+   </li>
    <li class="login-item-active">
       <a href="/translated/chinese.html">查詢</a>
    </li>

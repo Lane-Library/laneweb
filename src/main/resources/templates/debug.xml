@@ -39,7 +39,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-image.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/som-header.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/classes.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/shc-portal.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/live-chat.css" />
@@ -153,36 +152,53 @@
                 <?laneweb content?>
             </div>
             <div id="nav" class="nav">
-                <ul class="login">
-                    <li><i class="fa fa-sign-in fa-lg fa-fw"></i>
-                        <a href="/secure/login.html"><strong>MyLane login</strong></a>
-                    </li>
-                    <li>&#160;</li>
-                    <li>
-                        <div class=" favorites dropdown">
-                            <i class="fa fa-star fa-lg fa-fw"></i>
-                            <a href="/favorites.html">My Bookmarks</a>
-                            <div class="dropdown-content">
-                                <?laneweb bookmarks?>
+                <header>
+                    <ul class="login">
+                        <li><i class="fa fa-lock fa-lg fa-fw"></i>
+                            <a href="/secure/login.html">STANFORD LOGIN</a>
+                        </li>
+                        <li><i class="fa fa-user fa-lg fa-fw"></i>&#160;</li>
+                        <li>
+                            <div class=" favorites dropdown">
+                                <i class="fa fa-bookmark fa-lg fa-fw"></i>
+                                <a href="/favorites.html">My Bookmarks</a>
+                                <div class="dropdown-content">
+                                    <?laneweb bookmarks?>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/myaccounts.html">MyLane</a>
-                    </li>
-                    <li>
-                        <a href="/logout">Logout</a>
-                    </li>
-                    <li>
-                        Stanford <a href="?proxy-links=false"><i class="fa fa-toggle-on" style="transform:scale(-1, 1)"></i> Guest</a>
-                    </li>
-                    <li>
-                        <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"></i></a> Guest
-                    </li>
-                    <li class="login-item-active">
-                        <a href="/translated/chinese.html">查詢</a>
-                    </li>
-                </ul>
+                        </li>
+                        <li>
+                            <a href="/logout">LOGOUT</a>
+                        </li>
+                        <li>
+                            <a href="?proxy-links=false">GUEST VIEW</a>
+                        </li>
+                        <li>
+                            <a href="?proxy-links=true">LOGOUT GUEST</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-question-circle"></i>
+                            <div class="login-info">
+                                <div class="pure-g">
+                                    <div class="pure-u-1-2">
+                                        STANFORD LOGIN
+                                        <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
+                                    </div>
+                                    <div class="pure-u-1-2">
+                                        GUEST VIEW
+                                        <p>If you are not affiliated with Stanford, but have your own licensed access</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="login-item-active">
+                            <a href="/translated/chinese.html">查詢</a>
+                        </li>
+                        <li class="login-item-active">
+                            <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
+                        </li>
+                    </ul>
+                </header>
                 <div class="lane-nav">
                     <ul class="centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
@@ -232,15 +248,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div class="som-header">
-            <div class="dropdown">
-                <ul class="dropdown-content">
-                    <li><a href="http://www.stanford.edu/">Home</a></li>
-                    <li><a href="http://library.stanford.edu/">Stanford Libraries</a></li>
-                    <li><a href="http://searchworks.stanford.edu/">SearchWorks</a></li>
-                </ul>
             </div>
         </div>
         <div class="lane-footer">

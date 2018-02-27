@@ -14,9 +14,6 @@
          <div class="dropdown-content"/>
       </div>
    </li>
-   <li>
-      <a href="/base/myaccounts.html">MyLane</a>
-   </li>
    <li class="login-item-active">
       <a href="/base/logout">Logout</a>
    </li>
@@ -28,6 +25,10 @@
       <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"/>
       </a> Guest
     </li>
+   <li>
+      <i class="fa fa-question-circle"/>
+      <div class="login-info"/>
+   </li>
    <li class="login-item-active">
       <a href="/base/translated/chinese.html">查詢</a>
    </li>

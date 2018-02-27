@@ -1,8 +1,19 @@
+.nav header {
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    height: 33px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
 .lane-nav {
     background-color: rgb(197, 207, 209);
     box-shadow: inset 0 5px 5px -5px #000;
     position: absolute;
-    top: 80px;
+    top: 125px;
     width: 100%;
 }
 

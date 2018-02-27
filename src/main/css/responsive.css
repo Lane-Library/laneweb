@@ -1,4 +1,4 @@
-html, .som-header, .centered {
+html, .centered {
     min-width: 0;
 }
 
@@ -11,7 +11,7 @@ a .fa-bars {
 }
 
 @media ( max-width : 921px) {
-    .som-header, .nav, .library-contact, .lane-footer, .som-footer {
+    .nav, .library-contact, .lane-footer, .som-footer {
         display: none;
     }
     #nav:target {
@@ -25,7 +25,7 @@ a .fa-bars {
     }
     .login, .lane-nav, .favorites .dropdown-content {
         background-color: #666;
-        background-image: url('./resources/images/diag.png');
+        background-image: url('../images/diag.png');
     }
     .login {
         border-bottom: 1px solid white;
@@ -98,7 +98,7 @@ a .fa-bars {
         text-align: left;
         text-transform: uppercase;
     }
-    .main, .search-form {
+    .search-form {
         margin-top: 0;
     }
     a .fa-bars {

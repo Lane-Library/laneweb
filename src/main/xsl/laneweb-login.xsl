@@ -14,8 +14,7 @@
         h:ul[attribute::class = 'login']/h:li[1]|
         h:ul[attribute::class = 'login']/h:li[2]|
         h:ul[attribute::class = 'login']/h:li[3]|
-        h:ul[attribute::class = 'login']/h:li[4]|
-        h:ul[attribute::class = 'login']/h:li[5]">
+        h:ul[attribute::class = 'login']/h:li[4]">
         <!-- position() is one greater than expected because class attribute of ul is #1 -->
         <xsl:copy>
             <xsl:choose>
@@ -24,12 +23,12 @@
                     <xsl:attribute name="class" select="'login-item-active'"/>
                 </xsl:when>
                 <!-- logout link active if logged in or auth error -->
-                <xsl:when test="position() = 6 and ($logged-in or $auth-error)">
+                <xsl:when test="position() = 5 and ($logged-in or $auth-error)">
                     <xsl:attribute name="class" select="'login-item-active'"/>
                 </xsl:when>
                 <!-- other links active if logged in -->
                 <xsl:when
-                    test="position() != 2 and position() != 6 and $logged-in and not($auth-error)">
+                    test="position() != 2 and position() != 5 and $logged-in and not($auth-error)">
                     <xsl:attribute name="class" select="'login-item-active'"/>
                 </xsl:when>
             </xsl:choose>
@@ -48,7 +47,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="h:ul[attribute::class = 'login']/h:li[6]">
+    <xsl:template match="h:ul[attribute::class = 'login']/h:li[5]">
         <xsl:copy>
             <xsl:if test="$proxy-links = 'true' and not($logged-in) and $proxy-ipgroup">
                 <xsl:attribute name="class" select="'login-item-active'"/>
@@ -57,7 +56,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:ul[attribute::class = 'login']/h:li[6]/h:a/@href">
+    <xsl:template match="h:ul[attribute::class = 'login']/h:li[5]/h:a/@href">
         <xsl:attribute name="href">
             <xsl:choose>
                 <xsl:when test="string-length($query-string) = 0">
@@ -78,7 +77,7 @@
         </xsl:attribute>
     </xsl:template>
 
-    <xsl:template match="h:ul[attribute::class = 'login']/h:li[7]">
+    <xsl:template match="h:ul[attribute::class = 'login']/h:li[6]">
         <xsl:copy>
             <xsl:if test="$proxy-links = 'false' and not($logged-in) and $proxy-ipgroup">
                 <xsl:attribute name="class" select="'login-item-active'"/>
@@ -87,7 +86,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:ul[attribute::class = 'login']/h:li[7]/h:a/@href">
+    <xsl:template match="h:ul[attribute::class = 'login']/h:li[6]/h:a/@href">
         <xsl:attribute name="href">
             <xsl:choose>
                 <xsl:when test="string-length($query-string) = 0">
@@ -106,6 +105,15 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:attribute>
+    </xsl:template>
+    
+    <xsl:template match="h:ul[attribute::class = 'login']/h:li[7]">
+        <xsl:copy>
+            <xsl:if test="not($logged-in) and $proxy-ipgroup">
+                <xsl:attribute name="class" select="'login-item-active'"/>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>
