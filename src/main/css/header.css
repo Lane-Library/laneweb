@@ -61,12 +61,12 @@ h1 a:active, h1 a:visited, h1 a:hover {
 
 .login > :nth-child(5),
 .login > :nth-child(6) {
-    background-color:rgb(83,83,83)
+    background-color: rgb(83,83,83);
 }
 
 .login > :nth-child(5) a,
 .login > :nth-child(6) a {
-    color:rgb(193,193,193)
+    color: rgb(193,193,193);
 }
 
 .login > :nth-child(7) {
@@ -78,12 +78,13 @@ h1 a:active, h1 a:visited, h1 a:hover {
 .login > :nth-child(7) .fa,
 .login > :nth-child(8) a,
 .login > :nth-child(9) a {
-    color: rgb(135, 135, 135)
+    color: rgb(135, 135, 135);
 }
 
 .login-info {
     background-color: white;
     border: 1px black solid;
+    box-sizing: content-box;
     color: black;
     display: none;
     left: -137px;
@@ -99,11 +100,10 @@ h1 a:active, h1 a:visited, h1 a:hover {
     bottom: 100%;
     left: 50%;
     border: solid transparent;
-    content: " ";
+    content: ' ';
     height: 0;
     width: 0;
     position: absolute;
-    pointer-events: none;
 }
 
 .login-info:after {
