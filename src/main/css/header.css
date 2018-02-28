@@ -34,7 +34,6 @@ h1 a:active, h1 a:visited, h1 a:hover {
     display: none;
 }
 
-.library-contact li,
 .login > .login-item-active {
     display: inline-block;
     padding: 0 12px;
@@ -140,9 +139,9 @@ h1 a:active, h1 a:visited, h1 a:hover {
 .library-contact li {
     border: 2px #007c92 solid;
     border-radius: 6px;
+    display: inline-block;
     margin-left: 12px;
     padding: 12px;
-    top: 56px;
 }
 
 .library-contact .fa {

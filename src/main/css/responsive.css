@@ -10,7 +10,14 @@ a .fa-bars {
     top: 20px;
 }
 
-@media ( max-width : 921px) {
+@media ( max-width : 978px) {
+    .lane-header {
+        padding-top: 0;
+    }
+    h1 {
+        height: 77px;
+        padding-top: 17px;
+    }
     .nav, .library-contact, .lane-footer, .som-footer {
         display: none;
     }
@@ -19,6 +26,9 @@ a .fa-bars {
         position: absolute;
         top: 0;
         right: 0;
+    }
+    .nav header {
+        position: static;
     }
     .nav a {
         color: white;
@@ -107,10 +117,8 @@ a .fa-bars {
 }
 
 @media ( max-width : 426px) {
-    h1 a:nth-child(1) {
-        width: 51px;
-    }
-    h1 a:nth-child(2) {
-        border-left: none;
+    h1 a {
+        background-image: url('../images/sm-logo2.svg');
+        padding: 10px 0 10px 50px;
     }
 }
