@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>31</version>
+        <version>32-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.5.2-SNAPSHOT</version>
@@ -48,7 +48,6 @@
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
-        <org.springframework.version>5.0.4.RELEASE</org.springframework.version>
     </properties>
     <dependencies>
         <dependency>
@@ -222,7 +221,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>3.0.3.RELEASE</version>
+            <version>3.0.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -317,7 +316,7 @@
         <dependency>
             <groupId>org.ehcache.modules</groupId>
             <artifactId>ehcache-107</artifactId>
-            <version>3.4.0</version>
+            <version>3.5.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -328,7 +327,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>8.5.27</version>
+            <version>8.5.28</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
