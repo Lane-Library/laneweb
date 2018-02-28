@@ -2,7 +2,7 @@
     background-color: black;
     color: white;
     font-weight: 600;
-    height: 33px;
+    height: 32px;
     margin: 0;
     position: absolute;
     top: 0;
@@ -13,7 +13,7 @@
     background-color: rgb(197, 207, 209);
     box-shadow: inset 0 5px 5px -5px #000;
     position: absolute;
-    top: 125px;
+    top: 124px;
     width: 100%;
 }
 

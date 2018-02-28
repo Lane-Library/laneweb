@@ -1,11 +1,13 @@
 .lane-header {
     background-color: white;
     font-size: 14px;
-    height: 125px;
+    padding-top: 32px;
 }
 
 h1 {
-    padding-top: 57px;
+    box-sizing: border-box;
+    height: 92px;
+    padding-top: 27px;
 }
 
 h1 a {
@@ -22,7 +24,7 @@ h1 a:active, h1 a:visited, h1 a:hover {
 }
 
 .login {
-    line-height: 33px;
+    line-height: 32px;
     margin: 0 5%;
     position: absolute;
     right: 0;
@@ -130,10 +132,9 @@ h1 a:active, h1 a:visited, h1 a:hover {
 }
 
 .library-contact {
-    top: 54px;
-    white-space: nowrap;
     position: absolute;
     right: 0;
+    top: 27px;
 }
 
 .library-contact li {
