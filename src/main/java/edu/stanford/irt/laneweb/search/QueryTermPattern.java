@@ -35,7 +35,7 @@ public final class QueryTermPattern {
 
     private static final Pattern SPACE_HYPHEN_PATTERN = Pattern.compile("[- ]");
 
-    private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,-_\" [\\\\\\?\\[]&]");
+    private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,\\-_\" &]");
 
     private QueryTermPattern() {
         // empty constructor
@@ -48,7 +48,7 @@ public final class QueryTermPattern {
      *  trim
      *  lower-case
      *  remove parentheses
-     *  replace [^a-zA-Z0-9,-_ [\\\\\\?\\[]]] with \W
+     *  replace UNACCEPTABLE_CHARS with \W
      *  replace quotes with "\W?"
      *  invert comma separated terms: Heparin, Low-Molecular-Weight becomes Low-Molecular-Weight Heparin
      *  replace hyphens and spaces with "\W"
