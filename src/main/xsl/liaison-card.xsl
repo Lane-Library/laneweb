@@ -8,7 +8,7 @@
 	<xsl:template match="h:div[@id=$liaison]">
 		<xsl:variable name="liaison-profile-link"
 			select=".//h:a[@class='liaison-profile-link']/@href" />
-		<div class="business-card">
+		<div class="business-card no-bookmarking">
 			<h3>Your Librarian</h3>
 			<div class="pure-g">
 				<xsl:choose>
