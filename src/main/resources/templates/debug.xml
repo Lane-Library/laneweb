@@ -154,14 +154,13 @@
             <div id="nav" class="nav">
                 <header>
                     <ul class="login">
-                        <li><i class="fa fa-lock fa-lg fa-fw"></i>
-                            <a href="/secure/login.html">STANFORD LOGIN</a>
-                        </li>
-                        <li><i class="fa fa-user fa-lg fa-fw"></i>&#160;</li>
                         <li>
-                            <div class=" favorites dropdown">
-                                <i class="fa fa-bookmark fa-lg fa-fw"></i>
-                                <a href="/favorites.html">My Bookmarks</a>
+                            <a href="/secure/login.html"><i class="fa fa-lock"></i> STANFORD LOGIN</a>
+                        </li>
+                        <li><i class="fa fa-user"></i>&#160;</li>
+                        <li>
+                            <div class="favorites dropdown">
+                                <a href="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>
                                 <div class="dropdown-content">
                                     <?laneweb bookmarks?>
                                 </div>

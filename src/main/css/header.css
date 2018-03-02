@@ -32,11 +32,18 @@ h1 a:active, h1 a:visited, h1 a:hover {
 
 .login > li {
     display: none;
+    font-size: 15px;
+    letter-spacing: .75px;
+    padding: 0 24px;
 }
 
 .login > .login-item-active {
     display: inline-block;
-    padding: 0 12px;
+}
+
+.login .fa {
+    font-size: 15px;
+    margin-right: 2px;
 }
 
 .login a,
@@ -72,8 +79,13 @@ h1 a:active, h1 a:visited, h1 a:hover {
 
 .login > :nth-child(7) {
     cursor: pointer;
-    margin-right: 50px;
+    margin-right: 38px;
+    padding-left: 12px;
     position: relative;
+}
+
+.login > :nth-child(8) {
+    border-right: 1px rgb(135, 135, 135) solid;
 }
 
 .login > :nth-child(7) .fa,
@@ -88,12 +100,14 @@ h1 a:active, h1 a:visited, h1 a:hover {
     box-sizing: content-box;
     color: black;
     display: none;
-    left: -137px;
+    font-size: 12px;
+    font-weight: bold;
+    left: -130px;
     line-height: initial;
-    padding: 12px;
+    padding: 23px;
     position: absolute;
     top: 40px;
-    width: 284px;
+    width: 250px;
     z-index: 1;
 }
 
@@ -122,8 +136,9 @@ h1 a:active, h1 a:visited, h1 a:hover {
 }
 
 .login-info p {
+    font-size: 12px;
     font-weight: initial;
-    margin-bottom: 0;
+    margin: 5px 22px 0 0;
 }
 
 .login > :nth-child(7):hover .login-info {
