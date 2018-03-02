@@ -39,10 +39,10 @@
     <xsl:template match="h:ul[attribute::class = 'login']/h:li[2]/text()">
         <xsl:choose>
             <xsl:when test="string-length($name) &gt; 0">
-                <xsl:value-of select="$name"/>
+                <xsl:value-of select="concat(' ', $name)"/>
             </xsl:when>
             <xsl:when test="string-length($userid) &gt; 0">
-                <xsl:value-of select="$userid"/>
+                <xsl:value-of select="concat(' ', $userid)"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>

@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" class="login">
    <li class="login-item-active">
-      <i class="fa fa-sign-in fa-lg fa-fw"/>
       <a href="/secure/login.html?url=">
-         <strong>MyLane login</strong>
-      </a>
+         <i class="fa fa-lock"/> STANFORD LOGIN</a>
    </li>
-   <li/>
    <li>
-      <div class=" favorites dropdown">
-         <i class="fa fa-star fa-lg fa-fw"/>
-         <a href="/favorites.html">My Bookmarks</a>
+      <i class="fa fa-user"/>
+   </li>
+   <li>
+      <div class="favorites dropdown">
+         <a href="/favorites.html">
+            <i class="fa fa-bookmark"/> My Bookmarks</a>
          <div class="dropdown-content"/>
       </div>
    </li>
    <li>
-      <a href="/logout">Logout</a>
+      <a href="/logout">LOGOUT</a>
    </li>
    <li class="login-item-active">
-        Stanford <a href="?proxy-links=false">
-         <i class="fa fa-toggle-on" style="transform:scale(-1, 1)"/> Guest</a>
+      <a href="?proxy-links=false">GUEST VIEW</a>
    </li>
    <li>
-      <a href="?proxy-links=true">Stanford <i class="fa fa-toggle-on"/>
-      </a> Guest
-    </li>
+      <a href="?proxy-links=true">LOGOUT GUEST</a>
+   </li>
    <li class="login-item-active">
       <i class="fa fa-question-circle"/>
-      <div class="login-info"/>
+      <div class="login-info">
+         <div class="pure-g">
+            <div class="pure-u-1-2">
+                    STANFORD LOGIN
+                    <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
+            </div>
+            <div class="pure-u-1-2">
+                    GUEST VIEW
+                    <p>If you are not affiliated with Stanford, but have your own licensed access</p>
+            </div>
+         </div>
+      </div>
    </li>
    <li class="login-item-active">
       <a href="/translated/chinese.html">查詢</a>
+   </li>
+   <li class="login-item-active">
+      <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
    </li>
 </ul>
