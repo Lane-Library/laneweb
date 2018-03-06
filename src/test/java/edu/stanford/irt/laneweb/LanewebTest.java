@@ -8,6 +8,6 @@ public class LanewebTest {
 
     @Test
     public void testServletContainer() {
-        assertNotNull(new Laneweb().servletContainer(8009));
+        assertNotNull(new Laneweb().webServerFactory(8009));
     }
 }
