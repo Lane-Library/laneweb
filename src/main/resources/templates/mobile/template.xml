@@ -18,6 +18,6 @@
         </div>
 
         <script type="text/javascript" id="model">//</script>
-        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${timestamp}"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${project.version}"> </script>
     </body>
 </html>
