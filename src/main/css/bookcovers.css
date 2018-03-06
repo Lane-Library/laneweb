@@ -30,3 +30,12 @@
     left: 6px;
     position: relative;
 }
+
+.resource .fa-book {
+    float: right;
+    font-size: 86px;
+}
+
+.resource .bookcover {
+    margin-right: -80px;
+}

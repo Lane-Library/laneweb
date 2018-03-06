@@ -168,6 +168,7 @@
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
             <xsl:if test="contains(s:primaryType, 'Book')">
+                <i class="fa fa-book"></i>
                 <img class="bookcover" data-bibid="{s:recordId}"/>
             </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
