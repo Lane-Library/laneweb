@@ -1,0 +1,1 @@
+{"host":"indlovu.local","items":[{"message":"database contains 166 rows","status":"INFO"},{"message":"database contains 49 rows with null url","status":"INFO"},{"message":"database connection took 52ms","status":"OK"}],"name":"bookcovers","pid":7037,"time":"2018-03-05T16:54:28.172-08:00","version":"4.0.1-SNAPSHOT"}

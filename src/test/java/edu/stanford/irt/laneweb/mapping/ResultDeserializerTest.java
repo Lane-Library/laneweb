@@ -9,9 +9,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -32,7 +30,7 @@ public class ResultDeserializerTest {
     }
 
     @Test
-    public void testDescribePubMedDeserialize() throws JsonParseException, JsonMappingException, IOException {
+    public void testDescribePubMedDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("describe-pubmed.json"),
                 Result.class);
         assertNotNull(result);
@@ -74,7 +72,7 @@ public class ResultDeserializerTest {
     }
 
     @Test
-    public void testSearchAAFPSuccessfulDeserialize() throws JsonParseException, JsonMappingException, IOException {
+    public void testSearchAAFPSuccessfulDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-aafp_patients.json"),
                 Result.class);
         assertNotNull(result);
@@ -123,7 +121,7 @@ public class ResultDeserializerTest {
     }
 
     @Test
-    public void testSearchMMBIDDeserialize() throws JsonParseException, JsonMappingException, IOException {
+    public void testSearchMMBIDDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-mmbid.json"), Result.class);
         assertNotNull(result);
         assertEquals("2069082541", result.getId());
@@ -160,7 +158,7 @@ public class ResultDeserializerTest {
     }
 
     @Test
-    public void testSearchPubMedRunningDeserialize() throws JsonParseException, JsonMappingException, IOException {
+    public void testSearchPubMedRunningDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-running.json"),
                 Result.class);
         assertNotNull(result);
@@ -189,7 +187,7 @@ public class ResultDeserializerTest {
     }
 
     @Test
-    public void testSearchPubMedSuccessfulDeserialize() throws JsonParseException, JsonMappingException, IOException {
+    public void testSearchPubMedSuccessfulDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-successful.json"),
                 Result.class);
         assertNotNull(result);
