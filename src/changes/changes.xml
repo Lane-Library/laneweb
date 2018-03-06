@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-03-" version="3.5.2" description="3.5.2 bug fix release">
+            <action date="2018-03-05" dev="ceyates" issue="139499" type="add">
+                report bookcover service status on status page
+            </action>
+            <action date="2018-03-02" dev="ceyates" issue="139443" type="update">
+                bookmarks feature off for bus card
+            </action>
+            <action date="2018-02-28" dev="ryanmax" issue="139366" type="fix">
+                QueryTermPatternTest failure and errors with java 9
+            </action>
+            <action date="2018-03-05" dev="ceyates" issue="139110" type="update">
+                redesign of header
+            </action>
+            <action date="2018-03-06" dev="ceyates" issue="134581" type="update">
+                provide book icon if no bookcover available
+            </action>
+        </release>
         <release date="2018-02-26" version="3.5.1" description="3.5.1 bug fix release">
             <action date="2018-02-22" dev="ceyates" issue="139219" type="update">
                 extract metasearch into a separate microservice
