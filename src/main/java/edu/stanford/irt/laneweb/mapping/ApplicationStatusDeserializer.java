@@ -19,8 +19,8 @@ public class ApplicationStatusDeserializer extends JsonDeserializer<ApplicationS
 
     private static List<StatusItem> getItems(final JsonNode node) {
         List<StatusItem> items = new ArrayList<>();
-        node.forEach(
-                n -> items.add(new StatusItem(Status.valueOf(n.get("status").asText()), n.get("message").asText())));
+        node.forEach((final JsonNode n)
+                -> items.add(new StatusItem(Status.valueOf(n.get("status").asText()), n.get("message").asText())));
         return items;
     }
 
