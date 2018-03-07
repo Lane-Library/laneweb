@@ -10,7 +10,6 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.util.EntityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +22,6 @@ public class UrlTester {
 
     private MetaSearchService metaSearchService;
 
-    @Autowired
     public UrlTester(final MetaSearchService metaSearchService) {
         this.metaSearchService = metaSearchService;
     }

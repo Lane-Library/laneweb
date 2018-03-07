@@ -36,23 +36,24 @@ public class PersistentLoginController {
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
+    private Clock clock;
+
     private UserCookieCodec codec;
 
     private UserDataBinder userBinder;
 
-    private Clock clock;
+    @Autowired
+    public PersistentLoginController(final UserDataBinder userBinder,
+            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec) {
+        this(userBinder, activeSunetidDataBinder, codec, Clock.systemDefaultZone());
+    }
+
     public PersistentLoginController(final UserDataBinder userBinder,
             final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec, final Clock clock) {
         this.userBinder = userBinder;
         this.activeSunetidDataBinder = activeSunetidDataBinder;
         this.codec = codec;
         this.clock = clock;
-    }
-
-    @Autowired
-    public PersistentLoginController(final UserDataBinder userBinder,
-            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec) {
-        this(userBinder, activeSunetidDataBinder, codec, Clock.systemDefaultZone());
     }
 
     @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })

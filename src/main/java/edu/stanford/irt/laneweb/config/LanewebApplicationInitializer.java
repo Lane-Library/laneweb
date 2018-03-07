@@ -5,8 +5,6 @@ import javax.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import edu.stanford.irt.laneweb.config.LanewebConfiguration;
-
 public class LanewebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

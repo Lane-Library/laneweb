@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +31,6 @@ public class JSONBookmarkController extends BookmarkController {
 
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
-    @Autowired
     public JSONBookmarkController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder, final RemoteProxyIPDataBinder proxyLinksDataBinder) {
         super(bookmarkService, bookmarkDataBinder, userDataBinder);

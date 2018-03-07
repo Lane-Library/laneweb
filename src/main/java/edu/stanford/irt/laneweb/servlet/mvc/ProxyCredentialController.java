@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +25,6 @@ public class ProxyCredentialController {
 
     private UserDataBinder userBinder;
 
-    @Autowired
     public ProxyCredentialController(final TicketDataBinder ticketBinder, final UserDataBinder userBinder) {
         this.ticketBinder = ticketBinder;
         this.userBinder = userBinder;

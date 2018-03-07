@@ -13,7 +13,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -36,7 +35,6 @@ public class SearchImageInterceptor extends HandlerInterceptorAdapter {
 
     private SolrImageService service;
 
-    @Autowired
     public SearchImageInterceptor(final SolrImageService service) {
         this.service = service;
         this.copyrightMapping = new HashMap<>();

@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -18,7 +17,6 @@ public class JsonImageSearchController {
 
     private SolrImageService service;
 
-    @Autowired
     public JsonImageSearchController(final SolrImageService service) {
         this.service = service;
     }

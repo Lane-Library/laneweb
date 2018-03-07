@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 @Controller
 public class AppsSitemapController extends AbstractSitemapController {
 
-    @Autowired
     public AppsSitemapController(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder,
             @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/applications") final Sitemap sitemap,

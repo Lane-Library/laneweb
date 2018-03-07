@@ -5,7 +5,6 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +49,6 @@ public class EMailController {
 
     private EMailSender sender;
 
-    @Autowired
     public EMailController(final RequestHeaderDataBinder headerBinder, final RemoteProxyIPDataBinder remoteIPBinder,
             final EMailSender sender) {
         this.headerBinder = headerBinder;

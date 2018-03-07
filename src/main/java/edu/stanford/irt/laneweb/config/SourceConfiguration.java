@@ -10,7 +10,6 @@ import javax.cache.Cache;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
@@ -42,7 +41,6 @@ public class SourceConfiguration implements InitializingBean {
 
     private SourceResolverImpl sourceResolver;
 
-    @Autowired
     public SourceConfiguration(final BeanFactory beanFactory, Cache<Serializable, CachedResponse> cache, ComponentFactory componentFactory, ResourceLoader resourceLoader) {
         this.beanFactory = beanFactory;
         this.cache = cache;

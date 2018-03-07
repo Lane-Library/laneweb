@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -28,26 +27,26 @@ import edu.stanford.irt.solr.BassettImage;
 import edu.stanford.irt.solr.configuration.SolrLaneImageConfiguration;
 import edu.stanford.irt.solr.service.SolrImageService;
 
-@Configuration 
-@Import({SolrLaneImageConfiguration.class})
+@Configuration
+@Import({ SolrLaneImageConfiguration.class })
 public class ImagesConfiguration {
 
-    
-    @Autowired
-    public SolrImageService solrImageService;
-    
-    
-    
+    private SolrImageService solrImageService;
+
+    public ImagesConfiguration(final SolrImageService solrImageService) {
+        this.solrImageService = solrImageService;
+    }
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")
     public Generator bassettAccordionGenerator() {
-        return new BassettAccordionGenerator(solrImageService, countSAXStrategy());
+        return new BassettAccordionGenerator(this.solrImageService, countSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett")
     @Scope("prototype")
     public Generator bassettGenerator() {
-        return new BassettImageGenerator(solrImageService, pageSAXStrategy());
+        return new BassettImageGenerator(this.solrImageService, pageSAXStrategy());
     }
 
     @Bean
@@ -63,7 +62,7 @@ public class ImagesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/admin-search-image")
     @Scope("prototype")
     public Generator solrAdminImageSearchGenerator() {
-        return new SolrAdminImageSearchGenerator(solrImageService, solrAdminImageSearchSAXStrategy());
+        return new SolrAdminImageSearchGenerator(this.solrImageService, solrAdminImageSearchSAXStrategy());
     }
 
     @Bean
@@ -71,11 +70,10 @@ public class ImagesConfiguration {
         return new SolrAdminImageSearchSAXStrategy(websiteIdMapping());
     }
 
-    
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image")
     @Scope("prototype")
     public Generator solrImageSearchGenerator() {
-        return new SolrImageSearchGenerator(solrImageService, solrImageSearchSAXStrategy());
+        return new SolrImageSearchGenerator(this.solrImageService, solrImageSearchSAXStrategy());
     }
 
     @Bean
@@ -86,11 +84,8 @@ public class ImagesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/facet-copyright")
     @Scope("prototype")
     public Generator solrImageSearchTabGenerator(final Marshaller marshaller) {
-        return new SolrImageSearchTabGenerator(solrImageService, marshaller);
+        return new SolrImageSearchTabGenerator(this.solrImageService, marshaller);
     }
-
-     
-
 
     @Bean
     public Map<String, String> websiteIdMapping() {

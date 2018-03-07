@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,8 @@ public class BookmarkExportController extends BookmarkController {
             "<!DOCTYPE NETSCAPE-Bookmark-file-1>\n"
             + "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; charset=UTF-8\">\n"
             + "<TITLE>Bookmarks</TITLE>\n"
-            + "<H1>Lane Bookmarks</H1>\n" + "<DL><p>\n"
+            + "<H1>Lane Bookmarks</H1>\n"
+            + "<DL><p>\n"
             + "    <DT><H3 ADD_DATE=\"0\">Lane Bookmarks</H3>\n"
             + "    <DL><p>\n";
 
@@ -35,7 +35,6 @@ public class BookmarkExportController extends BookmarkController {
 
     private static final String ITEM_SUFFIX = "</A>\n";
 
-    @Autowired
     public BookmarkExportController(final BookmarkService bookmarkService, final BookmarkDataBinder bookmarkDataBinder,
             final UserDataBinder userDataBinder) {
         super(bookmarkService, bookmarkDataBinder, userDataBinder);
