@@ -94,6 +94,10 @@ h1 a:active, h1 a:visited, h1 a:hover {
     color: rgb(135, 135, 135);
 }
 
+.login > :nth-child(9) {
+    padding-right: 0;
+}
+
 .login-info {
     background-color: white;
     border: 1px black solid;
