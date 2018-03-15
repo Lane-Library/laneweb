@@ -7,17 +7,17 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         name: "authors toggle Test Case",
 
         testToggleAuthors: function() {
-            var trigger = Y.one(".authorsTrigger"), 
-            parent = trigger.get('parentNode'),
-            hiddenAuthors = parent.one('.authors-hide');
+            var trigger = document.querySelector(".authorsTrigger"), 
+                parent = trigger.parentNode,
+                hiddenAuthors = parent.querySelector(".authors-hide");
 
-            Y.Assert.areEqual(hiddenAuthors.getStyle('display'), 'none');
-            trigger.simulate('click');
-            Y.Assert.areNotEqual(hiddenAuthors.getStyle('display'), 'none');
-            Y.Assert.areEqual('Show Less', trigger.get("text").trim());
-            trigger.simulate('click');
-            Y.Assert.areEqual(hiddenAuthors.getStyle('display'), 'none');
-            Y.Assert.areEqual('Show More', trigger.get("text").trim());
+            Y.Assert.areEqual("", hiddenAuthors.style.display);
+            trigger.click();
+            Y.Assert.areNotEqual("", hiddenAuthors.style.display);
+            Y.Assert.areEqual("Show Less", trigger.textContent.trim());
+            trigger.click();
+            Y.Assert.areEqual("none", hiddenAuthors.style.display);
+            Y.Assert.areEqual("Show More", trigger.textContent.trim());
         }
     });
 
