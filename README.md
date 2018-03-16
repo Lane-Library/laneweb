@@ -1,4 +1,4 @@
-[![Build Status](https://ci.med.stanford.edu/api/badges/irt-lane/laneweb/status.svg)](https://ci.med.stanford.edu/irt-lane/laneweb)
+[![Build Status](https://ci.med.stanford.edu/api/badges/lane/laneweb/status.svg)](https://ci.med.stanford.edu/lane/laneweb)
 
 # Laneweb WAR in Docker
 
@@ -23,7 +23,7 @@ $ git-crypt unlock
     
 ```
 $ cd $HOME/projects/lane
-$ git clone git@gitlab.med.stanford.edu:irt-lane/laneweb.git
+$ git clone git@gitlab.med.stanford.edu:lane/laneweb.git
 $ cd laneweb
 
 $ make app
@@ -48,7 +48,7 @@ $ make pull
 ```
 ## CI/CD Support
 
-This repo supports [DroneCI](https://ci.med.stanford.edu/irt-lane/laneweb).
+This repo supports [DroneCI](https://ci.med.stanford.edu/lane/laneweb).
 
 #### Get and setup personal drone token
 Drone CLI requires access token to talk to drone server.

@@ -25,6 +25,6 @@ export DOCKER_REGISTRY_PASSWORD_PATH=${SEC_PATH}/common/gcr-user
 # Drone configuration
 export DRONE_SERVER=https://ci.med.stanford.edu
 export DRONE_TOKEN_FILE=${HOME}/.drone-token
-export DRONE_REPO=irt-lane/laneweb
+export DRONE_REPO=lane/laneweb
 export DRONE_SEC_FILE=.drone.sec
 export DRONE_REGISTRY_FILE=.drone.reg
