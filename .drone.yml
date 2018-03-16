@@ -23,7 +23,7 @@ pipeline:
     image: plugins/downstream
     server: https://ci.med.stanford.edu
     repositories:
-      - irt-lane/kube-laneweb@master
+      - irt-lane/kube-laneweb
     fork: true
     secrets: [ downstream_token ]
     when:
