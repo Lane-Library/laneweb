@@ -10,9 +10,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -90,7 +87,7 @@ public class HTTPMetaSearchService implements MetaSearchService {
     @Override
     public byte[] testURL(String url) {
         try {
-            URLConnection connection = new URL(this.metaSearchURL, "url-tester?url=" + url).openConnection();
+            URLConnection connection = new URL(this.metaSearchURL, "test-url?url=" + url).openConnection();
             connection.setReadTimeout(this.readTimeout);
             try (InputStream input = connection.getInputStream()) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
