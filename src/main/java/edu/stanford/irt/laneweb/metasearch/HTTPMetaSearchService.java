@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.metasearch;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -87,7 +88,24 @@ public class HTTPMetaSearchService implements MetaSearchService {
     }
 
     @Override
-    public HttpResponse execute(HttpGet httpGet) {
-        throw new UnsupportedOperationException();
+    public byte[] testURL(String url) {
+        try {
+            URLConnection connection = new URL(this.metaSearchURL, "url-tester?url=" + url).openConnection();
+            connection.setReadTimeout(this.readTimeout);
+            try (InputStream input = connection.getInputStream()) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                while (true) {
+                    int i = input.read(buffer);
+                    if (i == -1) {
+                        break;
+                    }
+                    baos.write(buffer, 0, i);
+                }
+                return baos.toByteArray();
+            }
+        } catch (IOException e) {
+            throw new LanewebException(e);
+        }
     }
 }
