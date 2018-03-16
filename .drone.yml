@@ -33,11 +33,13 @@ pipeline:
   slack:
     image: plugins/slack
     channel: irt-dcs-cicd
-    username: irt-lane/laneweb
-    template: >
-      irt-lane/laneweb build #{{ build.number }} finished with a {{ build.status }} status
-      Build log: https://ci.med.stanford.edu/irt-lane/laneweb/{{ build.number }}
-      Changes: https://gitlab.med.stanford.edu/irt-lane/laneweb/commit/{{ build.commit }}
+    username: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
+    template: |
+      *Build ${DRONE_BUILD_NUMBER}*: _*{{ build.status }}*_
+      *Log*: ${DRONE_BUILD_LINK}
+      *Changes*: ${DRONE_REPO_LINK}/commit/${DRONE_COMMIT_SHA}
+      *Author*: ${CI_COMMIT_AUTHOR_NAME}
+      *Message*: ${DRONE_COMMIT_MESSAGE}
     secrets: [ slack_webhook ]
     when:
       status: [ success, failure ]
