@@ -17,6 +17,8 @@ import edu.stanford.irt.search.impl.Result;
 
 public class HTTPMetaSearchService implements MetaSearchService {
 
+    private static final int BUFFER_SIZE = 4096;
+
     private static final String UTF8 = StandardCharsets.UTF_8.name();
 
     private URL metaSearchURL;
@@ -45,10 +47,25 @@ public class HTTPMetaSearchService implements MetaSearchService {
         }
     }
 
+    private static byte[] getByteArrayFromStream(final InputStream input) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[BUFFER_SIZE];
+        while (true) {
+            int i = input.read(buffer);
+            if (i == -1) {
+                break;
+            }
+            baos.write(buffer, 0, i);
+        }
+        return baos.toByteArray();
+    }
+
+    @Override
     public void clearAllCaches() {
         getResponse("clearCache", String.class);
     }
 
+    @Override
     public void clearCache(final String query) {
         String requestURI = null;
         try {
@@ -59,17 +76,32 @@ public class HTTPMetaSearchService implements MetaSearchService {
         getResponse(requestURI, String.class);
     }
 
+    @Override
     public Result describe(final String query, final Collection<String> engines) {
         StringBuilder requestURI = new StringBuilder("describe");
         addQueryString(requestURI, query, engines);
         return getResponse(requestURI.toString(), Result.class);
     }
 
+    @Override
     public Result search(final String query, final Collection<String> engines, final long wait) {
         StringBuilder requestURI = new StringBuilder("search");
         addQueryString(requestURI, query, engines);
         requestURI.append("&timeout=").append(wait);
         return getResponse(requestURI.toString(), Result.class);
+    }
+
+    @Override
+    public byte[] testURL(final String url) {
+        try {
+            URLConnection connection = new URL(this.metaSearchURL, "test-url?url=" + url).openConnection();
+            connection.setReadTimeout(this.readTimeout);
+            try (InputStream input = connection.getInputStream()) {
+                return getByteArrayFromStream(input);
+            }
+        } catch (IOException e) {
+            throw new LanewebException(e);
+        }
     }
 
     private <T> T getResponse(final String requestURI, final Class<T> clazz) {
@@ -78,28 +110,6 @@ public class HTTPMetaSearchService implements MetaSearchService {
             connection.setReadTimeout(this.readTimeout);
             try (InputStream input = connection.getInputStream()) {
                 return this.objectMapper.readValue(input, clazz);
-            }
-        } catch (IOException e) {
-            throw new LanewebException(e);
-        }
-    }
-
-    @Override
-    public byte[] testURL(String url) {
-        try {
-            URLConnection connection = new URL(this.metaSearchURL, "test-url?url=" + url).openConnection();
-            connection.setReadTimeout(this.readTimeout);
-            try (InputStream input = connection.getInputStream()) {
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                byte[] buffer = new byte[4096];
-                while (true) {
-                    int i = input.read(buffer);
-                    if (i == -1) {
-                        break;
-                    }
-                    baos.write(buffer, 0, i);
-                }
-                return baos.toByteArray();
             }
         } catch (IOException e) {
             throw new LanewebException(e);
