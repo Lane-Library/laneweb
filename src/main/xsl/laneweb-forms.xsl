@@ -24,7 +24,7 @@
         <xsl:attribute name="value" select="$o"/>
     </xsl:template>
 
-    <xsl:template match="h:input[@name='source']/@value">
+    <xsl:template match="h:input[@name='source' and ancestor::h:form/@class = 'search-form']/@value">
         <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>
     

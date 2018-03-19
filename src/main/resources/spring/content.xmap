@@ -57,12 +57,6 @@
         </map:match>
         <!-- search.html -->
         <map:match pattern="search.html" type="wildcard">
-            <!-- bassett search pages -->
-            <map:match type="regex-parameter" pattern="bassett">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:generate src="cocoon://content/biomed-resources/bassett/bassettsView.html" type="file"/>
-                <map:serialize type="xhtml"/>
-            </map:match>
             <map:match type="regex-parameter" pattern="^all-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
