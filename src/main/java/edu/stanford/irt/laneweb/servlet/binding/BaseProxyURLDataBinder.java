@@ -19,11 +19,11 @@ public class BaseProxyURLDataBinder implements DataBinder {
 
     private static final String HOSPITAL = "https://login.laneproxy.stanford.edu/login?url=";
 
+    private static final String PROXY_CREDENTIAL = "/secure/apps/proxy/credential?url=";
+
     private static final String TICKET = "&ticket=";
 
     private static final String URL = "&url=";
-
-    private static final String WEBAUTH = "/secure/apps/proxy/credential?url=";
 
     @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -38,7 +38,7 @@ public class BaseProxyURLDataBinder implements DataBinder {
                 String userid = ModelUtil.getString(model, Model.USER_ID);
                 Ticket ticket = ModelUtil.getObject(model, Model.TICKET, Ticket.class);
                 if (ticket == null || userid == null) {
-                    baseProxyURL.append(ModelUtil.getString(model, Model.BASE_PATH)).append(WEBAUTH);
+                    baseProxyURL.append(ModelUtil.getString(model, Model.BASE_PATH)).append(PROXY_CREDENTIAL);
                 } else {
                     baseProxyURL.append(EZPROXY).append(userid).append(TICKET).append(ticket).append(URL);
                 }

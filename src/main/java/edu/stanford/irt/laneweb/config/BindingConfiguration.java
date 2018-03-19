@@ -123,6 +123,7 @@ public class BindingConfiguration {
         Set<String> keys = new HashSet<>();
         keys.add("auth");
         keys.add("base-path");
+        keys.add("base-proxy-url");
         keys.add("disaster-mode");
         keys.add("isActiveSunetID");
         keys.add("ipgroup");

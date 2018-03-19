@@ -14,6 +14,7 @@
         //keep these in sync with edu.stanford.irt.laneweb.model.Model
         AUTH : "auth",
         BASE_PATH : "base-path",
+        BASE_PROXY_URL : "base-proxy-url",
         BOOKMARKS : "bookmarks",
         DISASTER_MODE : "disaster-mode",
         IPGROUP : "ipgroup",
