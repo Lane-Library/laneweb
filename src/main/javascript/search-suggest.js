@@ -33,11 +33,13 @@ if (document.querySelector(".search-form"))  {
                 sourceChange: function(event) {
                     // default suggest limit is mesh-di
                     var source = event.newVal,
-                        limit = "";
+                        limit;
                     if (source.match(/^all/)) {
                         limit = "er-mesh";
                     } else if (source.match(/^(bioresearch|images)/)) {
                         limit = "mesh";
+                    } else {
+                        limit = "";
                     }
                     model.suggest.setLimit(limit);
                     model.source = source;

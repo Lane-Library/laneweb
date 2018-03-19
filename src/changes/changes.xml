@@ -11,6 +11,9 @@
             <action date="2018-03-16" dev="ceyates" issue="139722" type="add">
                 implement url tester for metasearch
             </action>
+            <action date="2018-03-19" dev="ryanmax" issue="139664" type="remove">
+                create local Bassett search, remove Bassett tab from main search
+            </action>
             <action date="2018-03-14" dev="ceyates" issue="139658" type="update">
                 add more space on the right side of the Stanford Login button
             </action>
