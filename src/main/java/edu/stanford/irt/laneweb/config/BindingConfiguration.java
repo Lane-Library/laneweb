@@ -129,6 +129,7 @@ public class BindingConfiguration {
         keys.add("proxy-links");
         keys.add("url-encoded-query");
         keys.add("url-encoded-source");
+        keys.add("bookmarks");
         return new ModelDataBinder(keys, objectMapper);
     }
 

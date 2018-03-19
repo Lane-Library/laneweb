@@ -14,6 +14,7 @@
         //keep these in sync with edu.stanford.irt.laneweb.model.Model
         AUTH : "auth",
         BASE_PATH : "base-path",
+        BOOKMARKS : "bookmarks",
         DISASTER_MODE : "disaster-mode",
         IPGROUP : "ipgroup",
         IS_ACTIVE_SUNETID : "isActiveSunetID",
