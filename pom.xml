@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-8</version>
+            <version>9.8.0-10</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -314,7 +314,7 @@
         <dependency>
             <groupId>org.ehcache.modules</groupId>
             <artifactId>ehcache-107</artifactId>
-            <version>3.5.0</version>
+            <version>3.5.2</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
