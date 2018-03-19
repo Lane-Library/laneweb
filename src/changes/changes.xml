@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-03-19" version="3.5.3" description="3.5.3 bug fix release">
+            <action date="2018-03-16" dev="ceyates" issue="139722" type="add">
+                implement url tester for metasearch
+            </action>
+            <action date="2018-03-14" dev="ceyates" issue="139658" type="update">
+                add more space on the right side of the Stanford Login button
+            </action>
+            <action date="2018-0314-" dev="olgary" issue="139655" type="remove">
+                removed CONTACT US button from the right edge and the css
+            </action>
+        </release>
         <release date="2018-03-12" version="3.5.2" description="3.5.2 bug fix release">
             <action date="2018-03-05" dev="ceyates" issue="139499" type="add">
                 report bookcover service status on status page
