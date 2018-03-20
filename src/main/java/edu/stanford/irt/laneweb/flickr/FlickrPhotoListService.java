@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.flickr;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +14,7 @@ public class FlickrPhotoListService {
     private Random random = new Random();
 
     public FlickrPhotoListService(final List<FlickrPhoto> photos) {
-        this.photos = photos;
+        this.photos = new ArrayList<>(photos);
     }
 
     public List<FlickrPhoto> getRandomPhotos(final int number) {

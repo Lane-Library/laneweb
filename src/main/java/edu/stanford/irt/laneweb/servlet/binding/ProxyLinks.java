@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
@@ -12,8 +13,8 @@ public class ProxyLinks {
     private List<CIDRRange> proxyCIDRRange;
 
     public ProxyLinks(final List<CIDRRange> proxyCIDRRange, final List<CIDRRange> noProxyCIDRRange) {
-        this.proxyCIDRRange = proxyCIDRRange;
-        this.noProxyCIDRRange = noProxyCIDRRange;
+        this.proxyCIDRRange = new ArrayList<>(proxyCIDRRange);
+        this.noProxyCIDRRange = new ArrayList<>(noProxyCIDRRange);
     }
 
     public Boolean getProxyLinks(final IPGroup ipGroup, final String remoteAddress) {

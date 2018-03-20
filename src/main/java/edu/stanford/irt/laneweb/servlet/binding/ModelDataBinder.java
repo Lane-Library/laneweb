@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet.binding;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class ModelDataBinder implements DataBinder {
     private ObjectMapper objectMapper;
 
     public ModelDataBinder(final Set<String> keys, final ObjectMapper objectMapper) {
-        this.keys = keys;
+        this.keys = new HashSet<>(keys);
         this.objectMapper = objectMapper;
     }
 

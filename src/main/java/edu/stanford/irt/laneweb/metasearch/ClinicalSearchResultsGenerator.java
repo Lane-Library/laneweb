@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.metasearch;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,9 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
             final SAXStrategy<ClinicalSearchResults> saxStrategy, final List<String> engines,
             final ClinicalSearchResultsFactory factory) {
         super(metaSearchService, saxStrategy);
-        this.engines = engines;
+        if (engines != null) {
+            this.engines = new ArrayList<>(engines);
+        }
         this.factory = factory;
     }
 

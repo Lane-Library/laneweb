@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class UserDataBinder implements DataBinder {
     private List<UserFactory> userFactories;
 
     public UserDataBinder(final List<UserFactory> userFactories) {
-        this.userFactories = userFactories;
+        this.userFactories = new ArrayList<>(userFactories);
     }
 
     @Override
