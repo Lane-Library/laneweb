@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.resource;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class PagingList<E extends Object> extends ArrayList<E> {
 
@@ -10,7 +11,7 @@ public class PagingList<E extends Object> extends ArrayList<E> {
     private PagingData pagingData;
 
     public PagingList(final Collection<E> collection, final PagingData pagingData) {
-        super(collection);
+        super(Collections.unmodifiableList(new ArrayList<>(collection)));
         this.pagingData = pagingData;
     }
 

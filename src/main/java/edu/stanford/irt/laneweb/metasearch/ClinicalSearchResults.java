@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.stanford.irt.laneweb.resource.PagingList;
@@ -16,7 +17,7 @@ public class ClinicalSearchResults {
 
     public ClinicalSearchResults(final List<Result> resourceResults, final PagingList<SearchResult> searchResults,
             final int total) {
-        this.resourceResults = new ArrayList<>(resourceResults);
+        this.resourceResults = Collections.unmodifiableList(new ArrayList<>(resourceResults));
         this.searchResults = searchResults;
         this.total = total;
     }
