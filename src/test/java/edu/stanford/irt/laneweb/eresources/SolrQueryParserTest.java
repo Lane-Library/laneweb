@@ -53,20 +53,24 @@ public class SolrQueryParserTest {
         assertEquals("recordId:12345", this.parser.parse("12345"));
         assertEquals("12345 54321", this.parser.parse("12345 54321"));
         assertEquals("12345\\-54321", this.parser.parse("12345-54321"));
-        assertEquals("\"10.1016 j.it.2015.02.003\"", this.parser.parse("10.1016/j.it.2015.02.003"));
-        assertEquals("\"10.1016 j.it.2015.02.003\"", this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
-        assertEquals("\"10.1016 j.it.2015.02.003\"", this.parser.parse("dx.doi.org/10.1016/j.it.2015.02.003"));
-        assertEquals("\"10.1016 j.it.2015.02.003\"", this.parser.parse("doi.org/10.1016/j.it.2015.02.003"));
-        assertEquals("BMJ 2015; 351 doi\\: \"10.1136 bmj.h5942\"",
+        assertEquals("\"10.1016/j.lfs.2015.10.025\"",
+                this.parser.parse("Life Sci. 2016 May 1;152:244-8. doi: 10.1016/j.lfs.2015.10.025. Epub 2015 Oct 24."));
+        assertEquals("\"10.1016/S1474\\-4422(12)70296\\-X\"", this.parser
+                .parse("Lancet Neurol. 2013 Feb;12(2):186-94. doi: 10.1016/S1474-4422(12)70296-X. Epub 2012 Dec 21."));
+        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("10.1016/j.it.2015.02.003"));
+        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("dx.doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("\"10.1136/bmj.h5942\"",
                 this.parser.parse("BMJ 2015; 351 doi: http://dx.doi.org/10.1136/bmj.h5942"));
-        assertEquals("\"10.1016 j.it.2015.02.003\" \"10.1136 bmj.h5942\"",
+        assertEquals("\"10.1016/j.it.2015.02.003\"",
                 this.parser.parse("doi.org/10.1016/j.it.2015.02.003 http://dx.doi.org/10.1136/bmj.h5942"));
         assertEquals("(id:12345 OR id:123456) OR (id:12345 OR id:123456)", this.parser.parse("id:12345 OR id:123456"));
         assertEquals("(recordId:12345 OR pmid\\:123456) OR (recordId:12345 OR pmid\\:123456)",
                 this.parser.parse("recordId:12345 OR pmid:123456"));
-        assertEquals(
-                "Journal of Antimicrobial Chemotherapy, Volume 72, Issue 4, 1 April 2017, 1147–1151, \"10.1093 jac dkw537\"",
-                this.parser.parse(
-                        "Journal of Antimicrobial Chemotherapy, Volume 72, Issue 4, 1 April 2017, 1147–1151, https://doi.org/10.1093/jac/dkw537"));
+        assertEquals("\"10.1093/jac/dkw537\"", this.parser.parse(
+                "Journal of Antimicrobial Chemotherapy, Volume 72, Issue 4, 1 April 2017, 1147–1151, https://doi.org/10.1093/jac/dkw537"));
+        assertEquals("10. 99 Han SS, ten Haaf K, Hazelton WD. Not a DOI",
+                this.parser.parse("10. 99 Han SS, ten Haaf K, Hazelton WD. Not a DOI"));
     }
 }

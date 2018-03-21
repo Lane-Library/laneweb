@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public final class DoiQueryInspector implements QueryInspector {
 
-    private static final Pattern DOI_PATTERN = Pattern.compile("(\\b10\\.[^ ]+\\b)");
+    private static final Pattern DOI_PATTERN = Pattern.compile("(\\b10\\.\\d+[^ ]+\\b)");
 
     private static final Pattern PREFIX_PATTERN = Pattern
             .compile("(?:https?:\\/\\/)?(?:dx\\.)?doi\\.org/(10\\.\\w+)\\b", Pattern.CASE_INSENSITIVE);
@@ -25,10 +25,9 @@ public final class DoiQueryInspector implements QueryInspector {
     public String inspect(final String query) {
         String parsed = PREFIX_PATTERN.matcher(query).replaceAll("$1");
         if (DOI_PATTERN.matcher(parsed).find()) {
-            // add quotes to DOIs to improve precision
-            parsed = DOI_PATTERN.matcher(parsed).replaceAll(QUOTE + "$1" + QUOTE);
-            // remove slashes in DOIs because they give edismax parser trouble
-            parsed = parsed.replace('/', ' ');
+            // if a DOI is found, strip it and quote it alone
+            parsed = DOI_PATTERN.matcher(parsed).replaceFirst(":::$1###");
+            parsed = parsed.replaceFirst(".*:::(.*)###.*", QUOTE + "$1" + QUOTE);
         }
         return parsed;
     }
