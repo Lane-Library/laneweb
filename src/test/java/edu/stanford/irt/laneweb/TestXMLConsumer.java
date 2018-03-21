@@ -6,33 +6,44 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 
 import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
 
 public class TestXMLConsumer extends TransformerSerializer {
 
-    private static Properties PROPS;
+    private static Map<String, String> PROPS;
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
     static {
-        PROPS = new Properties();
-        PROPS.setProperty("method", "xml");
-        PROPS.setProperty("encoding", UTF_8);
-        PROPS.setProperty("indent", "yes");
+        PROPS = new HashMap<>();
+        PROPS.put("method", "xml");
+        PROPS.put("encoding", UTF_8);
+        PROPS.put("indent", "yes");
     }
 
     private ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
     public TestXMLConsumer() {
-        super("test",
-                (SAXTransformerFactory) TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null),
+        super("test", getTransformerHandler(
+                (SAXTransformerFactory) TransformerFactory.newInstance("net.sf.saxon.TransformerFactoryImpl", null)),
                 PROPS);
         setParameters(Collections.emptyMap());
         setOutputStream(this.baos);
+    }
+
+    private static final TransformerHandler getTransformerHandler(final SAXTransformerFactory factory) {
+        try {
+            return factory.newTransformerHandler();
+        } catch (TransformerConfigurationException e) {
+            throw new LanewebException(e);
+        }
     }
 
     public String getExpectedResult(final Object test, final String fileName) throws IOException {

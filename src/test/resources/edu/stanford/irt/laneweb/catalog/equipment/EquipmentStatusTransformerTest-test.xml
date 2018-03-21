@@ -4,6 +4,9 @@
         <title>Equipment</title>
     </head>
     <body>
+        <!-- comment -->
+        cdata
+        <?processing-instruction?>
         <ul>
             <li data-bibid="304254">
                 <div class="pure-g">

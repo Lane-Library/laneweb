@@ -38,6 +38,7 @@ public class EquipmentStatusTransformerTest {
         this.transformer.setXMLConsumer(this.xmlConsumer);
         this.xmlReader = XMLReaderFactory.createXMLReader();
         this.xmlReader.setContentHandler(this.transformer);
+        this.xmlReader.setProperty("http://xml.org/sax/properties/lexical-handler", this.transformer);
     }
 
     @Test

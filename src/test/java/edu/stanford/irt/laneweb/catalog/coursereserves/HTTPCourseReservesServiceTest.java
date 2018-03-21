@@ -15,12 +15,11 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class HTTPCourseReservesServiceTest {
 
@@ -35,7 +34,7 @@ public class HTTPCourseReservesServiceTest {
     }
 
     @Test
-    public void testGetCourses() throws JsonParseException, JsonMappingException, IOException {
+    public void testGetCourses() throws IOException {
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(TypeReference.class)))
                 .andReturn(Collections.emptyList());
         replay(this.objectMapper);
@@ -43,8 +42,16 @@ public class HTTPCourseReservesServiceTest {
         verify(this.objectMapper);
     }
 
+    @Test(expected = LanewebException.class)
+    public void testGetCoursesThrowsException() throws IOException {
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(TypeReference.class)))
+                .andThrow(new IOException());
+        replay(this.objectMapper);
+        this.service.getCourses();
+    }
+
     @Test
-    public void testGetItems() throws JsonParseException, JsonMappingException, IOException {
+    public void testGetItems() throws IOException {
         CourseReservesItemList list = mock(CourseReservesItemList.class);
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andReturn(list);
         replay(this.objectMapper);
@@ -53,11 +60,27 @@ public class HTTPCourseReservesServiceTest {
     }
 
     @Test
-    public void testGetItemsInt() throws JsonParseException, JsonMappingException, IOException {
+    public void testGetItemsInt() throws IOException {
         CourseReservesItemList list = mock(CourseReservesItemList.class);
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andReturn(list);
         replay(this.objectMapper);
         assertSame(list, this.service.getItems(1));
         verify(this.objectMapper);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testGetItemsIntThrowsException() throws IOException {
+        mock(CourseReservesItemList.class);
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andThrow(new IOException());
+        replay(this.objectMapper);
+        this.service.getItems(1);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testGetItemsThrowsException() throws IOException {
+        mock(CourseReservesItemList.class);
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andThrow(new IOException());
+        replay(this.objectMapper);
+        this.service.getItems();
     }
 }
