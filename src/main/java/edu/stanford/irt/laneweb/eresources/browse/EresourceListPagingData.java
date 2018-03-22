@@ -13,7 +13,7 @@ public class EresourceListPagingData extends PagingData {
 
     private String alpha;
 
-    private List<Eresource> list;
+    private transient List<Eresource> list;
 
     private int page;
 
