@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
  */
 public class SubjectSource {
 
-    private static final Logger LOG = LoggerFactory.getLogger("error handler");
+    private static final Logger LOG = LoggerFactory.getLogger(SubjectSource.class);
+
+    private LoginContext loginContext;
 
     private String name;
 
@@ -21,6 +23,16 @@ public class SubjectSource {
 
     private KerberosTicket ticket;
 
+    public SubjectSource(final LoginContext loginContext) {
+        this.loginContext = loginContext;
+    }
+
+    /**
+     * Although preferable to inject the LoginContext, for the sake of simplifying integraton testing by not requiring a
+     * jaas configuration will lazy initialize it using this constructor.
+     * 
+     * @param name
+     */
     public SubjectSource(final String name) {
         this.name = name;
     }
@@ -40,16 +52,13 @@ public class SubjectSource {
         return this.subject;
     }
 
-    // protected method so that tests can mock the LoginContext
-    protected LoginContext getLoginContext(final String name) throws LoginException {
-        return new LoginContext(name);
-    }
-
     private void authenticateIfNecessary() throws LoginException {
+        if (this.loginContext == null) {
+            this.loginContext = new LoginContext(this.name);
+        }
         if (null == this.subject || null == this.ticket || !this.ticket.isCurrent()) {
-            LoginContext loginContext = getLoginContext(this.name);
-            loginContext.login();
-            this.subject = loginContext.getSubject();
+            this.loginContext.login();
+            this.subject = this.loginContext.getSubject();
             for (KerberosTicket subjectTicket : this.subject.getPrivateCredentials(KerberosTicket.class)) {
                 this.ticket = subjectTicket;
             }

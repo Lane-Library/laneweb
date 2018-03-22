@@ -15,13 +15,13 @@ public class UserConfigurationTest {
     }
 
     @Test
-    public void testLdapContextSource() {
-        assertNotNull(this.configuration.ldapContextSource());
+    public void testLdapTemplate() {
+        assertNotNull(this.configuration.ldapTemplate());
     }
 
     @Test
     public void testLdapDataAccess() {
-        assertNotNull(this.configuration.ldapDataAccess());
+        assertNotNull(this.configuration.ldapDataAccess(null, null));
     }
 
     @Test
