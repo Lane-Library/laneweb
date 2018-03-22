@@ -17,6 +17,17 @@ import edu.stanford.irt.laneweb.user.SubjectSource;
 public class UserConfiguration {
 
     @Bean
+    public LdapContextSource ldapContextSource() {
+        LdapContextSource contextSource = new LdapContextSource();
+        contextSource.setUrl("ldap://ldap.stanford.edu/");
+        contextSource.setBase("cn=people,dc=stanford,dc=edu");
+        contextSource.setAuthenticationStrategy(new GSSAPIAuthenticationStrategy());
+        contextSource
+                .setBaseEnvironmentProperties(Collections.singletonMap("com.sun.jndi.ldap.connect.timeout", "5000"));
+        return contextSource;
+    }
+
+    @Bean
     public LDAPDataAccess ldapDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource) {
         Set<String> activeAffiliations = new HashSet<>(24);
         activeAffiliations.add("stanford:affiliate:sponsored");
@@ -47,13 +58,7 @@ public class UserConfiguration {
     }
 
     @Bean
-    public LdapTemplate ldapTemplate() {
-        LdapContextSource ldapContextSource = new LdapContextSource();
-        ldapContextSource.setUrl("ldap://ldap.stanford.edu/");
-        ldapContextSource.setBase("cn=people,dc=stanford,dc=edu");
-        ldapContextSource.setAuthenticationStrategy(new GSSAPIAuthenticationStrategy());
-        ldapContextSource
-                .setBaseEnvironmentProperties(Collections.singletonMap("com.sun.jndi.ldap.connect.timeout", "5000"));
+    public LdapTemplate ldapTemplate(final LdapContextSource ldapContextSource) {
         return new LdapTemplate(ldapContextSource);
     }
 
