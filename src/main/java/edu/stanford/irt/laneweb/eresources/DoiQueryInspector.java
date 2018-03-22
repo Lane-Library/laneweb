@@ -11,9 +11,12 @@ public final class DoiQueryInspector implements QueryInspector {
 
     private static final Pattern DOI_PATTERN = Pattern.compile("(\\b10\\.\\d+[^ ]+\\b)");
 
-    private static final String QUOTE = "\"";
+    private static final Pattern EPUB_PATTERN = Pattern.compile("\\bepub\\b", Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern REPLACED_PATTERN = Pattern.compile(".*:::(.*)###.*");
+    private static final Pattern PREFIX_PATTERN = Pattern
+            .compile("(?:https?:\\/\\/)?(?:dx\\.)?doi\\.org/(10\\.\\w+)\\b", Pattern.CASE_INSENSITIVE);
+
+    private static final String QUOTE = "\"";
 
     @Override
     public boolean combinable() {
@@ -22,10 +25,11 @@ public final class DoiQueryInspector implements QueryInspector {
 
     @Override
     public String inspect(final String query) {
-        String parsed = query;
+        String parsed = PREFIX_PATTERN.matcher(query).replaceAll("$1");
         if (DOI_PATTERN.matcher(parsed).find()) {
             parsed = DOI_PATTERN.matcher(parsed).replaceFirst(":::$1###");
-            parsed = REPLACED_PATTERN.matcher(parsed).replaceFirst(QUOTE + "$1" + QUOTE);
+            parsed = parsed.replaceFirst(":::(.*)###\\.?", QUOTE + "$1" + QUOTE);
+            parsed = EPUB_PATTERN.matcher(parsed).replaceAll("");
         }
         return parsed;
     }

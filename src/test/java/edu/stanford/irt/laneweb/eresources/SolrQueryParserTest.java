@@ -53,7 +53,9 @@ public class SolrQueryParserTest {
         assertEquals("recordId:12345", this.parser.parse("12345"));
         assertEquals("12345 54321", this.parser.parse("12345 54321"));
         assertEquals("12345\\-54321", this.parser.parse("12345-54321"));
-        assertEquals("\"10.1016/j.lfs.2015.10.025\"",
+        assertEquals("Diabetes 1995 Aug; 44(8)\\: 968\\-983. \"10.2337/diab.44.8.968\" retinopathy",
+                this.parser.parse("Diabetes 1995 Aug; 44(8): 968-983. https://doi.org/10.2337/diab.44.8.968 retinopathy"));
+        assertEquals("Life Sci. 2016 May 1;152\\:244\\-8. doi\\: \"10.1016/j.lfs.2015.10.025\"  2015 Oct 24.",
                 this.parser.parse("Life Sci. 2016 May 1;152:244-8. doi: 10.1016/j.lfs.2015.10.025. Epub 2015 Oct 24."));
         assertEquals("\"10.1016/S1474\\-4422(12)70296\\-X\"", this.parser
                 .parse("Lancet Neurol. 2013 Feb;12(2):186-94. doi: 10.1016/S1474-4422(12)70296-X. Epub 2012 Dec 21."));
