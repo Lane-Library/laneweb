@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -14,10 +14,6 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -25,8 +21,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(EresourceListPagingData.class)
 public class EresourceListPagingDataSAXStrategyTest {
 
     private PagingEresourceList list;
@@ -43,9 +37,9 @@ public class EresourceListPagingDataSAXStrategyTest {
     public void setUp() throws Exception {
         this.xmlConsumer = new TestXMLConsumer();
         this.strategy = new EresourceListPagingDataSAXStrategy();
-        this.pagingData = PowerMock.createMock(EresourceListPagingData.class);
-        this.list = createMock(PagingEresourceList.class);
-        this.pagingLabel = createMock(PagingLabel.class);
+        this.pagingData = mock(EresourceListPagingData.class);
+        this.list = mock(PagingEresourceList.class);
+        this.pagingLabel = mock(PagingLabel.class);
     }
 
     @Test
@@ -135,7 +129,7 @@ public class EresourceListPagingDataSAXStrategyTest {
         expect(this.pagingData.getLength()).andReturn(50).times(2);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getBaseQuery()).andReturn("a=a");
-        XMLConsumer consumer = createMock(XMLConsumer.class);
+        XMLConsumer consumer = mock(XMLConsumer.class);
         consumer.startElement(eq("http://www.w3.org/1999/xhtml"), eq("div"), eq("div"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(consumer, this.pagingLabel, this.pagingData, this.list);
