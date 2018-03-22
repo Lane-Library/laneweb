@@ -22,7 +22,7 @@ public class EresourceListPagingData extends PagingData {
     public EresourceListPagingData(final List<Eresource> list, final int page, final String baseQuery,
             final String alpha) {
         super(list, page, baseQuery);
-        this.list = list;
+        this.list = new ArrayList<>(list);
         this.page = page;
         this.alpha = alpha;
     }
