@@ -29,15 +29,17 @@ public class PagingData implements Serializable {
         this(resources, page, baseQuery, DEFAULT_PAGE_SIZE, MAX_PAGE_COUNT);
     }
 
-    public PagingData(final List<? extends Object> resources, final int page, final String baseQuery,
-            final int pageSize, final int pageCount) {
-        if (page >= pageCount) {
+    public PagingData(final List<? extends Object> resources, final int page, final String baseQuery, final int ps,
+            final int pc) {
+        if (page >= pc) {
             throw new IllegalArgumentException("not so many pages: " + page);
         }
         this.page = page;
         this.size = resources.size();
         this.baseQuery = baseQuery;
-        this.pageSize = calculatePageSize(this.size, pageCount, pageSize);
+        this.pageSize = this.size / pc;
+        this.pageSize = this.size % pc != 0 ? this.pageSize + 1 : this.pageSize;
+        this.pageSize = this.pageSize < ps ? ps : this.pageSize;
         if (page < 0 || this.size <= this.pageSize) {
             this.start = 0;
             this.length = this.size;
@@ -47,17 +49,6 @@ public class PagingData implements Serializable {
         }
         this.pages = this.size / this.pageSize;
         this.pages = this.size % this.pageSize != 0 ? this.pages + 1 : this.pages;
-    }
-
-    private static int calculatePageSize(final int size, final int pageCount, final int pageSize) {
-        int ps = size / pageCount;
-        if (ps % pageCount != 0) {
-            ps += 1;
-        }
-        if (ps < pageSize) {
-            ps = pageSize;
-        }
-        return ps;
     }
 
     public String getBaseQuery() {
