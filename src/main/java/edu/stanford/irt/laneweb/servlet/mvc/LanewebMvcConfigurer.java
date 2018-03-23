@@ -24,6 +24,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -98,6 +100,13 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     @Bean
     public RedirectHandlerInterceptor redirectHandlerInterceptor() {
         return new RedirectHandlerInterceptor(this.redirectProcessor);
+    }
+
+    @Bean
+    public UrlBasedViewResolver redirectViewResolver() {
+        UrlBasedViewResolver redirectViewResolver = new UrlBasedViewResolver();
+        redirectViewResolver.setViewClass(RedirectView.class);
+        return redirectViewResolver;
     }
 
     @Bean
