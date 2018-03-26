@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-03-26" version="3.5.4" description="3.5.4 bug fix release">
+            <action date="2018-03-22" dev="ceyates" issue="139916" type="update">
+                scale elements on discovery login page
+            </action>
+            <action date="2018-03-20" dev="ryanmax" issue="139850" type="fix">
+                SSL warnings from laneblog images on front page
+            </action>
+            <action date="2018-03-19" dev="ceyates" issue="139795" type="fix">
+                right clicking a link causes navigation to the link url
+            </action>
+            <action date="2018-03-21" dev="ryanmax" issue="139640" type="update">
+                improve precision for DOI searches
+            </action>
+        </release>
         <release date="2018-03-19" version="3.5.3" description="3.5.3 bug fix release">
             <action date="2018-03-16" dev="ceyates" issue="139722" type="add">
                 implement url tester for metasearch
