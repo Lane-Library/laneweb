@@ -110,7 +110,7 @@ public class LanewebIT {
         this.mockMvc.perform(get("/wp-login.php").servletPath("/wp-login.php")).andExpect(status().isNotFound());
     }
 
-//    @Test
+    @Test
     public void testPubmedSearch() throws Exception {
             Map<String, String> ns = new HashMap<>();
             ns.put("h", "http://www.w3.org/1999/xhtml");
