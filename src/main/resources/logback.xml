@@ -1,35 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-    
-    <property name="LOG_PATH" value="${LOG_PATH:-${catalina.base:-${java.io.tmpdir:-/tmp}}/logs}"/>
-    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH}/laneweb.log}"/>
+
+    <property name="LOG_PATH" value="${LOG_PATH:-${catalina.base:-${java.io.tmpdir:-/tmp}}/logs/}"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}laneweb.log}"/>
     <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d %p [%t][%c{1}] - %m%n}"/>
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-${FILE_LOG_PATTERN}}"/>
+    <property name="LEVEL" value="${edu.stanford.irt.laneweb.log.level:-INFO}"/>
+    <property name="APPENDER" value="${edu.stanford.irt.laneweb.log.appender:-CONSOLE}"/>
 
-    <appender name="LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${LOG_FILE}</File>
-        <encoder>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <minIndex>1</minIndex>
-            <maxIndex>10</maxIndex>
-            <FileNamePattern>${LOG_FILE}.%i</FileNamePattern>
-        </rollingPolicy>
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
-        </triggeringPolicy>
-    </appender>
-    
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-        </encoder>
-    </appender>
-    
-    <root level="${edu.stanford.irt.laneweb.log.level:-INFO}">
-        <appender-ref ref="${edu.stanford.irt.laneweb.log.appender:-LOG}" />
-    </root>
-    
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+	<root level="${LEVEL}">
+		<appender-ref ref="${APPENDER}" />
+	</root>
+
 </configuration>
 
