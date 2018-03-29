@@ -11,6 +11,7 @@ import org.springframework.ldap.core.support.LdapContextSource;
 
 import edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.laneweb.user.LoginContextFactory;
 import edu.stanford.irt.laneweb.user.SubjectSource;
 
 @Configuration
@@ -63,7 +64,12 @@ public class UserConfiguration {
     }
 
     @Bean
-    public SubjectSource subjectSource() {
-        return new SubjectSource("IRT_K5");
+    public LoginContextFactory loginContextFactory() {
+        return new LoginContextFactory("IRT_K5");
+    }
+
+    @Bean
+    public SubjectSource subjectSource(final LoginContextFactory loginContextFactory) {
+        return new SubjectSource(loginContextFactory);
     }
 }

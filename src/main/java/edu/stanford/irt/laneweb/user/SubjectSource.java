@@ -15,26 +15,14 @@ public class SubjectSource {
 
     private static final Logger LOG = LoggerFactory.getLogger(SubjectSource.class);
 
-    private LoginContext loginContext;
-
-    private String name;
-
     private Subject subject;
 
     private KerberosTicket ticket;
 
-    public SubjectSource(final LoginContext loginContext) {
-        this.loginContext = loginContext;
-    }
-
-    /**
-     * Although preferable to inject the LoginContext, for the sake of simplifying integraton testing by not requiring a
-     * jaas configuration will lazy initialize it using this constructor.
-     * 
-     * @param name
-     */
-    public SubjectSource(final String name) {
-        this.name = name;
+    private LoginContextFactory loginContextFactory;
+    
+    public SubjectSource(final LoginContextFactory loginContextFactory) {
+        this.loginContextFactory = loginContextFactory;
     }
 
     /**
@@ -53,12 +41,10 @@ public class SubjectSource {
     }
 
     private void authenticateIfNecessary() throws LoginException {
-        if (this.loginContext == null) {
-            this.loginContext = new LoginContext(this.name);
-        }
         if (null == this.subject || null == this.ticket || !this.ticket.isCurrent()) {
-            this.loginContext.login();
-            this.subject = this.loginContext.getSubject();
+            LoginContext loginContext = this.loginContextFactory.getLoginContext();
+            loginContext.login();
+            this.subject = loginContext.getSubject();
             for (KerberosTicket subjectTicket : this.subject.getPrivateCredentials(KerberosTicket.class)) {
                 this.ticket = subjectTicket;
             }

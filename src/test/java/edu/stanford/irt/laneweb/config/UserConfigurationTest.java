@@ -31,6 +31,11 @@ public class UserConfigurationTest {
 
     @Test
     public void testSubjectSource() {
-        assertNotNull(this.configuration.subjectSource());
+        assertNotNull(this.configuration.subjectSource(null));
+    }
+    
+    @Test
+    public void testLoginContextFactory() {
+        assertNotNull(this.configuration.loginContextFactory());
     }
 }
