@@ -18,6 +18,9 @@
             <maxIndex>10</maxIndex>
             <FileNamePattern>${LOG_FILE}.%i</FileNamePattern>
         </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
     </appender>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
