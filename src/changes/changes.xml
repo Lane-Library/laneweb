@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-04-02" version="3.5.5" description="3.5.5 bug fix release">
+            <action date="2018-03-29" dev="ryanmax" issue="140333" type="update">
+                update SHC Epic order set redirects
+            </action>
+            <action date="2018-03-29" dev="ceyates" issue="140285" type="fix">
+                kerberos authentication for ldap.stanford.edu failing
+            </action>
+            <action date="2018-03-26" dev="ryanmax" issue="140089" type="update">
+                add LaneAskUs@stanford.edu to feedback form error messages
+            </action>
+        </release>
         <release date="2018-03-26" version="3.5.4" description="3.5.4 bug fix release">
             <action date="2018-03-22" dev="ceyates" issue="139916" type="update">
                 scale elements on discovery login page
