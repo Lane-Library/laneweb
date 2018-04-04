@@ -28,6 +28,7 @@ a .fa-bars {
         right: 0;
     }
     .nav header {
+        height: auto;
         position: static;
     }
     .nav a {
@@ -38,55 +39,34 @@ a .fa-bars {
         background-image: url('../images/diag.png');
     }
     .login {
-        border-bottom: 1px solid white;
-        color: rgb(220, 220, 220);
-        font-size: 15px;
+        box-sizing: border-box;
+        line-height: 48px;
         margin: 0;
-        padding: 12px 12px 0;
+        padding: 14px 36px 12px 26px;
         position: static;
+        width: 275px;
     }
-    .login > li.login-item-active {
+    .login > .login-item-active {
         display: list-item;
         margin-bottom: 12px;
+        padding: 0;
         text-align: center;
     }
-    .login > li.login-item-active:nth-child(1),
-    .login > li.login-item-active:nth-child(4),
-    .login > li.login-item-active:nth-child(5) {
-        box-sizing: border-box;
-        display: inline-block;
-        padding: 0 12px;
-        width: 50%;
-    }
-    .login > li:nth-child(1) a,
-    .login > li:nth-child(4) a,
-    .login > li:nth-child(5) a {
-        background-color: rgb(0, 109, 129);
-        display: block;
-        line-height: 55px;
-        text-align: center;
-        text-transform: capitalize;
-        width: 100%;
-    }
-    .login li:nth-child(1) .fa, .login li:nth-child(8) {
+    .login > .login-item-active:nth-child(7),
+    .login > .login-item-active:nth-child(8) {
         display: none;
     }
-    .login li:nth-child(6), .login li:nth-child(7) {
-        text-align: center;
-        word-spacing: 27px;
+    .login > :nth-child(9) {
+        border: 1px solid #878787;
     }
-    .login li:nth-child(6) .fa, .login li:nth-child(7) .fa {
-        color: rgb(193, 193, 193);
-        font-size: 62px;
-        vertical-align: middle;
+    .login > li a {
+        display: block;
     }
     .favorites .dropdown-content {
-        text-align: left;
     }
     .lane-nav {
         box-shadow: none;
         position: static;
-        width: 304px;
         z-index: 2;
     }
     .lane-nav .centered {
