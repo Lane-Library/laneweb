@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.isNull;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -40,11 +40,11 @@ public class SolrAdminImageSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.saxStrategy = createMock(SAXStrategy.class);
-        this.service = createMock(SolrImageService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
+        this.service = mock(SolrImageService.class);
         this.generator = new SolrAdminImageSearchGenerator(this.service, this.saxStrategy);
-        this.page = createMock(Page.class);
-        this.facetPage = createMock(FacetPage.class);
+        this.page = mock(Page.class);
+        this.facetPage = mock(FacetPage.class);
     }
 
     @Test

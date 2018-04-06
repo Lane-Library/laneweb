@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.util;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -26,8 +26,8 @@ public class CachedResponseResourceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.cachedResponse = createMock(CachedResponse.class);
-        this.realResource = createMock(Resource.class);
+        this.cachedResponse = mock(CachedResponse.class);
+        this.realResource = mock(Resource.class);
         this.resource = new CachedResponseResource(this.cachedResponse, this.realResource);
     }
 

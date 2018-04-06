@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
@@ -42,16 +42,16 @@ public class SolrServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.repository = createMock(SolrRepository.class);
-        this.template = createMock(SolrTemplate.class);
+        this.repository = mock(SolrRepository.class);
+        this.template = mock(SolrTemplate.class);
         this.solrService = new SolrService(new SolrQueryParser(Collections.emptyList()), this.repository,
                 this.template);
-        this.cursor = createMock(Cursor.class);
+        this.cursor = mock(Cursor.class);
     }
 
     @Test
     public final void testFacetByField() {
-        FacetPage<Object> fpage = createMock(FacetPage.class);
+        FacetPage<Object> fpage = mock(FacetPage.class);
         expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
         this.solrService.facetByField("query", "filters", "field", 0, 10, 1, FacetSort.COUNT);
@@ -65,7 +65,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testFacetByManyFields() {
-        FacetPage<Object> fpage = createMock(FacetPage.class);
+        FacetPage<Object> fpage = mock(FacetPage.class);
         expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
         replay(this.template, fpage);
         this.solrService.facetByManyFields("query", "filters", 1);
@@ -151,12 +151,12 @@ public class SolrServiceTest {
     public final void testSearchCount() {
         Set<String> types = new TreeSet<>();
         types.add("type1");
-        SolrResultPage page = createMock(SolrResultPage.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        FacetFieldEntry facetFieldEntry = createMock(FacetFieldEntry.class);
-        Collection<Page<FacetFieldEntry>> facetResultPages = createMock(Collection.class);
-        Iterator it1 = createMock(Iterator.class);
-        Iterator it2 = createMock(Iterator.class);
+        SolrResultPage page = mock(SolrResultPage.class);
+        Page<FacetFieldEntry> page1 = mock(Page.class);
+        FacetFieldEntry facetFieldEntry = mock(FacetFieldEntry.class);
+        Collection<Page<FacetFieldEntry>> facetResultPages = mock(Collection.class);
+        Iterator it1 = mock(Iterator.class);
+        Iterator it2 = mock(Iterator.class);
         expect(this.repository.facetByType(eq("query"), isA(PageRequest.class))).andReturn(page);
         expect(page.getTotalElements()).andReturn((long) 20);
         expect(page.getFacetResultPages()).andReturn(facetResultPages);
@@ -183,8 +183,8 @@ public class SolrServiceTest {
 
     @Test
     public final void testSearchWithFilters() {
-        Page<Eresource> page = createMock(Page.class);
-        PageRequest pr = createMock(PageRequest.class);
+        Page<Eresource> page = mock(Page.class);
+        PageRequest pr = mock(PageRequest.class);
         expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value", pr)).andReturn(page);
         replay(this.repository, page);
         this.solrService.searchWithFilters("query", "field1:value::field2:value", pr);
@@ -193,8 +193,8 @@ public class SolrServiceTest {
 
     @Test
     public final void testSearchWithFiltersFacetsNull() {
-        Page<Eresource> page = createMock(Page.class);
-        PageRequest pr = createMock(PageRequest.class);
+        Page<Eresource> page = mock(Page.class);
+        PageRequest pr = mock(PageRequest.class);
         expect(this.repository.searchFindAllWithFilter("query", "", pr)).andReturn(page);
         replay(this.repository, page);
         this.solrService.searchWithFilters("query", null, pr);

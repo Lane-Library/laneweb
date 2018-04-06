@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -36,9 +36,9 @@ public class EresourceSAXStrategyTest {
     @Before
     public void setUp() throws Exception {
         this.strategy = new EresourceSAXStrategy();
-        this.eresource = createMock(Eresource.class);
+        this.eresource = mock(Eresource.class);
         this.xmlConsumer = new TestXMLConsumer();
-        this.link = createMock(Link.class);
+        this.link = mock(Link.class);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class EresourceSAXStrategyTest {
 
     @Test
     public void testToSAXThrowsException() throws SAXException {
-        XMLConsumer consumer = createMock(XMLConsumer.class);
+        XMLConsumer consumer = mock(XMLConsumer.class);
         consumer.startElement(eq(Resource.NAMESPACE), eq(Resource.RESULT), eq(Resource.RESULT), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(consumer, this.eresource);

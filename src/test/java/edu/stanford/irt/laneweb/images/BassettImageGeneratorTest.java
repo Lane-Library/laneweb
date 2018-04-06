@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -38,11 +38,11 @@ public class BassettImageGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.service = createMock(SolrImageService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.service = mock(SolrImageService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new BassettImageGenerator(this.service, this.saxStrategy);
-        this.xmlConsumer = createMock(XMLConsumer.class);
-        this.resultPage = createMock(Page.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
+        this.resultPage = mock(Page.class);
     }
 
     @Test

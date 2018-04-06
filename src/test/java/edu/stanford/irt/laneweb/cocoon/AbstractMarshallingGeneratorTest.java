@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
@@ -44,9 +44,9 @@ public class AbstractMarshallingGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        this.marshaller = createStrictMock(Marshaller.class);
+        this.marshaller = mock(Marshaller.class);
         this.generator = new TestGenerator(this.marshaller);
-        this.xmlConsumer = createStrictMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

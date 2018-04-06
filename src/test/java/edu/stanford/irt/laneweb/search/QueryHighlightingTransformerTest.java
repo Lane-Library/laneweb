@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -31,7 +31,7 @@ public class QueryHighlightingTransformerTest {
     @Before
     public void setUp() throws Exception {
         this.model = new HashMap<>();
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer = new QueryHighlightingTransformer();
         this.transformer.setXMLConsumer(this.xmlConsumer);
     }

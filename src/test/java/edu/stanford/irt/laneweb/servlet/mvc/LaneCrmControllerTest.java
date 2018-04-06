@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -28,15 +28,15 @@ public class LaneCrmControllerTest {
 
     @Before
     public void setUp() {
-        this.connectionFactory = createMock(URLConnectionFactory.class);
+        this.connectionFactory = mock(URLConnectionFactory.class);
         this.controller = new LaneCrmController("acquisitions", "askus", this.connectionFactory);
-        this.connection = createMock(HttpsURLConnection.class);
+        this.connection = mock(HttpsURLConnection.class);
     }
 
     @Test
     public void testFormSubmitLaneaskus() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Model model = createMock(Model.class);
+        Model model = mock(Model.class);
         expect(model.asMap()).andReturn(Collections.singletonMap("foo", "bar"));
         expect(this.connectionFactory.getConnection("askus")).andReturn(this.connection);
         this.connection.setDoOutput(true);
@@ -51,7 +51,7 @@ public class LaneCrmControllerTest {
     @Test
     public void testFormSubmitLanelibacqs() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Model model = createMock(Model.class);
+        Model model = mock(Model.class);
         expect(model.asMap()).andReturn(Collections.singletonMap("foo", "bar"));
         expect(this.connectionFactory.getConnection("acquisitions")).andReturn(this.connection);
         this.connection.setDoOutput(true);

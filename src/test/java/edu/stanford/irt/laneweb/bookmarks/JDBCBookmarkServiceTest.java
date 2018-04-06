@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
 import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -45,11 +45,11 @@ public class JDBCBookmarkServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.dataSource = createMock(DataSource.class);
+        this.dataSource = mock(DataSource.class);
         this.dao = new JDBCBookmarkService(this.dataSource);
-        this.connection = createMock(Connection.class);
-        this.statement = createMock(PreparedStatement.class);
-        this.resultSet = createMock(ResultSet.class);
+        this.connection = mock(Connection.class);
+        this.statement = mock(PreparedStatement.class);
+        this.resultSet = mock(ResultSet.class);
         this.bookmark = new Bookmark("label", "url");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new ObjectOutputStream(baos).writeObject(Collections.singletonList(this.bookmark));

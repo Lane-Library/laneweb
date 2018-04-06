@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.util;
 
 import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -21,8 +21,8 @@ public class XMLUtilsTest {
 
     @Before
     public void setUp() {
-        this.xmlConsumer = createMock(XMLConsumer.class);
-        this.atts = createMock(AttributesImpl.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
+        this.atts = mock(AttributesImpl.class);
     }
 
     @Test

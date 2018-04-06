@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -39,11 +39,11 @@ public class UserDataBinderTest {
 
     @Before
     public void setUp() {
-        this.userFactory = createMock(UserFactory.class);
+        this.userFactory = mock(UserFactory.class);
         this.binder = new UserDataBinder(Arrays.asList(new UserFactory[] { this.userFactory, this.userFactory }));
-        this.request = createMock(HttpServletRequest.class);
-        this.session = createMock(HttpSession.class);
-        this.user = createMock(User.class);
+        this.request = mock(HttpServletRequest.class);
+        this.session = mock(HttpSession.class);
+        this.user = mock(User.class);
     }
 
     @Test

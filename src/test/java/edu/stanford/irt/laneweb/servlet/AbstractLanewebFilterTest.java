@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
@@ -37,9 +37,9 @@ public class AbstractLanewebFilterTest {
     @Before
     public void setUp() throws Exception {
         this.filter = new TestAbstractLanewebFilter();
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.chain = createMock(FilterChain.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.chain = mock(FilterChain.class);
     }
 
     @Test

@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -52,15 +52,15 @@ public class PersistentLoginControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.userSource = createMock(UserDataBinder.class);
-        this.ldap = createMock(ActiveSunetidDataBinder.class);
-        this.codec = createMock(UserCookieCodec.class);
+        this.userSource = mock(UserDataBinder.class);
+        this.ldap = mock(ActiveSunetidDataBinder.class);
+        this.codec = mock(UserCookieCodec.class);
         this.persistenLoginController = new PersistentLoginController(this.userSource, this.ldap, this.codec);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
-        this.user = createMock(User.class);
-        this.token = createMock(PersistentLoginToken.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
+        this.user = mock(User.class);
+        this.token = mock(PersistentLoginToken.class);
     }
 
     @Test

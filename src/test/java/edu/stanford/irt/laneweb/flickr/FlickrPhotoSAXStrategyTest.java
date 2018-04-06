@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.flickr;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.junit.Assert.assertEquals;
 
@@ -41,7 +41,7 @@ public class FlickrPhotoSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXPhotoThrows() throws SAXException {
-        XMLConsumer x = createMock(XMLConsumer.class);
+        XMLConsumer x = mock(XMLConsumer.class);
         x.startDocument();
         x.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
         x.startElement("http://www.w3.org/1999/xhtml", "html", "html", XMLUtils.EMPTY_ATTRIBUTES);
@@ -54,7 +54,7 @@ public class FlickrPhotoSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrows() throws SAXException {
-        XMLConsumer x = createMock(XMLConsumer.class);
+        XMLConsumer x = mock(XMLConsumer.class);
         x.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(x);

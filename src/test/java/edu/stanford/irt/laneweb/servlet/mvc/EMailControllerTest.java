@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -42,14 +42,14 @@ public class EMailControllerTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.headerBinder = createMock(RequestHeaderDataBinder.class);
-        this.remoteIPBinder = createMock(RemoteProxyIPDataBinder.class);
-        this.sender = createMock(EMailSender.class);
+        this.headerBinder = mock(RequestHeaderDataBinder.class);
+        this.remoteIPBinder = mock(RemoteProxyIPDataBinder.class);
+        this.sender = mock(EMailSender.class);
         this.controller = new EMailController(this.headerBinder, this.remoteIPBinder, this.sender);
-        this.atts = createMock(RedirectAttributes.class);
-        this.model = createMock(Model.class);
-        this.request = createMock(HttpServletRequest.class);
-        this.map = createMock(Map.class);
+        this.atts = mock(RedirectAttributes.class);
+        this.model = mock(Model.class);
+        this.request = mock(HttpServletRequest.class);
+        this.map = mock(Map.class);
     }
 
     @Test

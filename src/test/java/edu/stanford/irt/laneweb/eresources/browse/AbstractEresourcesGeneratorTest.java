@@ -1,9 +1,8 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
-import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -62,11 +61,11 @@ public class AbstractEresourcesGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.solrService = createMock(SolrService.class);
-        this.eresource = createMock(Eresource.class);
+        this.solrService = mock(SolrService.class);
+        this.eresource = mock(Eresource.class);
         this.eresourceList = Collections.singletonList(this.eresource);
-        this.saxStrategy = createMock(SAXStrategy.class);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.saxStrategy = mock(SAXStrategy.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.generator = new TestAbstractEresourcesGenerator(this.solrService, this.saxStrategy, this.eresourceList);
     }
 

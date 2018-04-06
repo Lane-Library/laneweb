@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -29,8 +29,8 @@ public class IPGroupSerializerTest {
     public void setUp() throws Exception {
         this.serializer = new IPGroupSerializer();
         this.ipgroup = IPGroup.OTHER;
-        this.jgen = createMock(JsonGenerator.class);
-        this.provider = createMock(SerializerProvider.class);
+        this.jgen = mock(JsonGenerator.class);
+        this.provider = mock(SerializerProvider.class);
     }
 
     @Test

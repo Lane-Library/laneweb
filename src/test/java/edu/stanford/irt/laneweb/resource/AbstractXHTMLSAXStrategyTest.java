@@ -2,9 +2,9 @@ package edu.stanford.irt.laneweb.resource;
 
 import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -34,7 +34,7 @@ public class AbstractXHTMLSAXStrategyTest {
     @Before
     public void setUp() {
         this.strategy = new TestAbstractXHTMLSAXStrategy();
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

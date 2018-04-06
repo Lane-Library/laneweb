@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -18,7 +18,7 @@ public class StanfordDomainStrippingBookmarkServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.wrappedDAO = createMock(BookmarkService.class);
+        this.wrappedDAO = mock(BookmarkService.class);
         this.bookmarkDAO = new StanfordDomainStrippingBookmarkService(this.wrappedDAO);
     }
 

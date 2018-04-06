@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
@@ -42,13 +42,13 @@ public class SearchImageInterceptorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(SolrImageService.class);
+        this.service = mock(SolrImageService.class);
         this.filter = new SearchImageInterceptor(this.service);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.imageFacetPage = createMock(FacetPage.class);
-        this.page = createMock(Page.class);
-        this.entry = createMock(FacetFieldEntry.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.imageFacetPage = mock(FacetPage.class);
+        this.page = mock(Page.class);
+        this.entry = mock(FacetFieldEntry.class);
     }
 
     @Test

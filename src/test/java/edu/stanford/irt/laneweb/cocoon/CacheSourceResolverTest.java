@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -47,12 +47,12 @@ public class CacheSourceResolverTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.cache = createMock(Cache.class);
-        this.sourceResolver = createMock(SourceResolver.class);
+        this.cache = mock(Cache.class);
+        this.sourceResolver = mock(SourceResolver.class);
         this.cacheSourceResolver = new CacheSourceResolver(this.cache, this.sourceResolver);
-        this.cachedResponse = createMock(CachedResponse.class);
-        this.validity = createMock(Validity.class);
-        this.source = createMock(Source.class);
+        this.cachedResponse = mock(CachedResponse.class);
+        this.validity = mock(Validity.class);
+        this.source = mock(Source.class);
     }
 
     @Test

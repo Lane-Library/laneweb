@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.hours;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -31,9 +31,9 @@ public class TodaysHoursTest {
 
     @Before
     public void setUp() {
-        this.service = createMock(LibraryHoursService.class);
-        this.hours = createMock(Hours.class);
-        this.clock = createMock(Clock.class);
+        this.service = mock(LibraryHoursService.class);
+        this.hours = mock(Hours.class);
+        this.clock = mock(Clock.class);
     }
 
     @Test

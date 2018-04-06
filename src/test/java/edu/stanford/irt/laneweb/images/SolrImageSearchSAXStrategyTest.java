@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -46,11 +46,11 @@ public class SolrImageSearchSAXStrategyTest {
         this.idMapping = Collections.singletonMap("id", "mappedId");
         this.strategy = new SolrImageSearchSAXStrategy(this.idMapping);
         this.xmlConsumer = new TestXMLConsumer();
-        this.imagePage = createMock(Page.class);
-        this.image = createMock(Image.class);
-        this.facetFieldEntryPage = createMock(Page.class);
-        this.facetFieldEntry = createMock(FacetFieldEntry.class);
-        this.result = createMock(SolrImageSearchResult.class);
+        this.imagePage = mock(Page.class);
+        this.image = mock(Image.class);
+        this.facetFieldEntryPage = mock(Page.class);
+        this.facetFieldEntry = mock(FacetFieldEntry.class);
+        this.result = mock(SolrImageSearchResult.class);
     }
 
     @Test
@@ -219,7 +219,7 @@ public class SolrImageSearchSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException {
-        XMLConsumer consumer = createMock(XMLConsumer.class);
+        XMLConsumer consumer = mock(XMLConsumer.class);
         consumer.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.result, consumer);

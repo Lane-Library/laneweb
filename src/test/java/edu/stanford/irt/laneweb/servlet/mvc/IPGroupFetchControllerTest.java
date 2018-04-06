@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -29,10 +29,10 @@ public class IPGroupFetchControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.binder = createMock(RemoteProxyIPDataBinder.class);
+        this.binder = mock(RemoteProxyIPDataBinder.class);
         this.controller = new IPGroupFetchController(this.binder);
-        this.model = createMock(Model.class);
-        this.request = createMock(HttpServletRequest.class);
+        this.model = mock(Model.class);
+        this.request = mock(HttpServletRequest.class);
     }
 
     @Test

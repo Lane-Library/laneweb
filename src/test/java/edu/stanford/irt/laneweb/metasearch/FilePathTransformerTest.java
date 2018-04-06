@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -41,12 +41,12 @@ public class FilePathTransformerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.saxParser = createMock(SAXParser.class);
-        this.sourceResolver = createMock(SourceResolver.class);
+        this.saxParser = mock(SAXParser.class);
+        this.sourceResolver = mock(SourceResolver.class);
         this.transformer = new FilePathTransformer(this.sourceResolver, this.saxParser);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
-        this.attributes = createMock(Attributes.class);
+        this.attributes = mock(Attributes.class);
     }
 
     @Test
@@ -87,8 +87,8 @@ public class FilePathTransformerTest {
 
     @Test
     public void testStartElementFile() throws SAXException, IOException, URISyntaxException {
-        CacheableSource source = createMock(CacheableSource.class);
-        Validity validity = createMock(Validity.class);
+        CacheableSource source = mock(CacheableSource.class);
+        Validity validity = mock(Validity.class);
         expect(this.attributes.getValue("path")).andReturn("path");
         expect(this.sourceResolver.resolveURI(new URI("file:path"))).andReturn(source);
         expect(source.getValidity()).andReturn(validity);

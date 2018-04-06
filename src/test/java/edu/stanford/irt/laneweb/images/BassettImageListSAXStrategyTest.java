@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -33,8 +33,8 @@ public class BassettImageListSAXStrategyTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.image = createMock(BassettImage.class);
-        this.facetPage = createMock(FacetPage.class);
+        this.image = mock(BassettImage.class);
+        this.facetPage = mock(FacetPage.class);
         this.strategy = new BassettImageListSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
     }
@@ -119,7 +119,7 @@ public class BassettImageListSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException {
-        XMLConsumer x = createMock(XMLConsumer.class);
+        XMLConsumer x = mock(XMLConsumer.class);
         x.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.image, x);

@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -33,12 +33,12 @@ public class SolrPagingEresourceSAXStrategyTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.eresourceStrategy = createMock(SAXStrategy.class);
+        this.eresourceStrategy = mock(SAXStrategy.class);
         this.strategy = new SolrPagingEresourceSAXStrategy(this.eresourceStrategy);
         this.xmlConsumer = new TestXMLConsumer();
-        this.page = createMock(Page.class);
-        this.eresource = createMock(Eresource.class);
-        this.result = createMock(SolrSearchResult.class);
+        this.page = mock(Page.class);
+        this.eresource = mock(Eresource.class);
+        this.result = mock(SolrSearchResult.class);
     }
 
     @Test

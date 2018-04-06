@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
@@ -23,7 +23,7 @@ public class SourceConfigurationTest {
 
     @Before
     public void setUp() {
-        this.beanFactory = createMock(BeanFactory.class);
+        this.beanFactory = mock(BeanFactory.class);
         this.configuration = new SourceConfiguration(this.beanFactory, null, null, null);
     }
 

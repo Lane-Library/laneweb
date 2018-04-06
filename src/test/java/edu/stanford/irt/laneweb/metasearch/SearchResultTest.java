@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
@@ -25,8 +25,8 @@ public class SearchResultTest {
 
     @Before
     public void setUp() {
-        this.contentResult = createMock(ContentResult.class);
-        this.resourceResult = createMock(Result.class);
+        this.contentResult = mock(ContentResult.class);
+        this.resourceResult = mock(Result.class);
         expect(this.contentResult.getTitle()).andReturn("title");
         replay(this.contentResult);
         this.searchResult = new SearchResult(this.contentResult, this.resourceResult, 100);
@@ -78,7 +78,7 @@ public class SearchResultTest {
 
     @Test
     public void testCompareToTitle() {
-        ContentResult result = createMock(ContentResult.class);
+        ContentResult result = mock(ContentResult.class);
         expect(result.getTitle()).andReturn("first title");
         replay(result, this.contentResult);
         SearchResult first = new SearchResult(result, this.resourceResult, 100);
@@ -130,7 +130,7 @@ public class SearchResultTest {
 
     @Test
     public void testGetSortTitle() {
-        ContentResult r = createMock(ContentResult.class);
+        ContentResult r = mock(ContentResult.class);
         expect(r.getTitle()).andReturn("the title");
         replay(r);
         SearchResult c = new SearchResult(r, this.resourceResult, 0);
@@ -164,7 +164,7 @@ public class SearchResultTest {
 
     @Test
     public void testHashCode() {
-        ContentResult result = createMock(ContentResult.class);
+        ContentResult result = mock(ContentResult.class);
         expect(result.getTitle()).andReturn("the title");
         replay(result, this.contentResult);
         SearchResult other = new SearchResult(result, this.resourceResult, 0);
@@ -174,7 +174,7 @@ public class SearchResultTest {
 
     @Test
     public void testNotEquals() {
-        ContentResult result = createMock(ContentResult.class);
+        ContentResult result = mock(ContentResult.class);
         expect(result.getTitle()).andReturn("not the title");
         replay(this.contentResult, result);
         SearchResult other = new SearchResult(result, this.resourceResult, 0);

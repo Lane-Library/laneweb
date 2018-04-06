@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertFalse;
@@ -32,10 +32,10 @@ public class PersistentLoginHandlerInterceptorTest {
     @Before
     public void setUp() {
         this.interceptor = new PersistentLoginHandlerInterceptor();
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
         this.handler = null;
-        this.cookie = createMock(Cookie.class);
+        this.cookie = mock(Cookie.class);
     }
 
     @Test

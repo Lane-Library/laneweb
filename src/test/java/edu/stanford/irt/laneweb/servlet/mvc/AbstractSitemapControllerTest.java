@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -59,13 +59,13 @@ public class AbstractSitemapControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.componentFactory = createMock(ComponentFactory.class);
-        this.processor = createMock(Sitemap.class);
-        this.dataBinder = createMock(DataBinder.class);
+        this.componentFactory = mock(ComponentFactory.class);
+        this.processor = mock(Sitemap.class);
+        this.dataBinder = mock(DataBinder.class);
         this.handler = new TestAbstractSitemapController(this.componentFactory, this.dataBinder, this.processor, null);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.pipeline = createMock(Pipeline.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.pipeline = mock(Pipeline.class);
         this.model = new HashMap<>();
     }
 

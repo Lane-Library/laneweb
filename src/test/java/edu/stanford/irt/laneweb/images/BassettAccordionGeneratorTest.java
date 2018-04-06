@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -34,11 +34,11 @@ public class BassettAccordionGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.service = createMock(SolrImageService.class);
-        this.facetPage = createMock(FacetPage.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.service = mock(SolrImageService.class);
+        this.facetPage = mock(FacetPage.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new BassettAccordionGenerator(this.service, this.saxStrategy);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

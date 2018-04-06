@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -24,7 +24,7 @@ public class SpellCheckControllerTest {
 
     @Before
     public void setUp() {
-        this.spellChecker = createMock(SpellChecker.class);
+        this.spellChecker = mock(SpellChecker.class);
         this.controller = new SpellCheckController(this.spellChecker);
     }
 

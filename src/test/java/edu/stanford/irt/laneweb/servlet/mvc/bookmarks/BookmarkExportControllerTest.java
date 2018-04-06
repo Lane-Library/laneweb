@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -25,7 +25,7 @@ public class BookmarkExportControllerTest {
     @Before
     public void setUp() throws Exception {
         this.controller = new BookmarkExportController(null, null, null);
-        this.bookmark = createMock(Bookmark.class);
+        this.bookmark = mock(Bookmark.class);
         this.bookmarks = Arrays.asList(new Bookmark[] { this.bookmark, this.bookmark });
     }
 

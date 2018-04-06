@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +23,7 @@ public class EresourceListPagingDataTest {
 
     @Before
     public void setUp() throws Exception {
-        this.eresource = createMock(Eresource.class);
+        this.eresource = mock(Eresource.class);
         List<Eresource> list = Arrays.asList(new Eresource[256]);
         Collections.fill(list, this.eresource);
         this.pagingData = new EresourceListPagingData(list, 0, "", "a");

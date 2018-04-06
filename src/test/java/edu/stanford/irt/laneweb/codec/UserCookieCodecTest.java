@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.codec;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class UserCookieCodecTest {
 
     @Before
     public void setUp() {
-        this.clock = createMock(Clock.class);
+        this.clock = mock(Clock.class);
         this.codec = new UserCookieCodec("key", this.clock);
     }
 
