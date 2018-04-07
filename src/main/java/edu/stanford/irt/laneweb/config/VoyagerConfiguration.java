@@ -21,7 +21,8 @@ public class VoyagerConfiguration {
 
     @Bean
     public LoginService httpLoginService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         return new HTTPLoginService(objectMapper, catalogServiceURI, uriResolver);
     }
 

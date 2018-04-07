@@ -36,7 +36,8 @@ public class EquipmentConfiguration {
 
     @Bean
     public EquipmentService httpEquipmentService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         return new HTTPEquipmentService(objectMapper, catalogServiceURI, uriResolver);
     }
 }

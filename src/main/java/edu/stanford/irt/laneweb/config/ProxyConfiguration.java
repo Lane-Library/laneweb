@@ -37,7 +37,8 @@ public class ProxyConfiguration {
 
     @Bean
     public ProxyServersService httpProxyServersService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         return new HTTPProxyServersService(objectMapper, catalogServiceURI, uriResolver);
     }
 

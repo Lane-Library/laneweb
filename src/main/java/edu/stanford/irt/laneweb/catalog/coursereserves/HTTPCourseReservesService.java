@@ -28,7 +28,8 @@ public class HTTPCourseReservesService implements CourseReservesService {
 
     private ServiceURIResolver uriResolver;
 
-    public HTTPCourseReservesService(final ObjectMapper objectMapper, final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+    public HTTPCourseReservesService(final ObjectMapper objectMapper, final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.catalogServiceURI = catalogServiceURI;
         this.uriResolver = uriResolver;
@@ -36,7 +37,8 @@ public class HTTPCourseReservesService implements CourseReservesService {
 
     @Override
     public List<Course> getCourses() {
-        try (InputStream input = this.uriResolver.getInputStream(this.catalogServiceURI.resolve(COURSES_ENDPOINT_PATH))) {
+        try (InputStream input = this.uriResolver
+                .getInputStream(this.catalogServiceURI.resolve(COURSES_ENDPOINT_PATH))) {
             return this.objectMapper.readValue(input, new TypeReference<List<Course>>() {
             });
         } catch (IOException e) {

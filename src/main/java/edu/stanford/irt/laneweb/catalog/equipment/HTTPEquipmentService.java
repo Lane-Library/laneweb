@@ -20,10 +20,11 @@ public class HTTPEquipmentService implements EquipmentService {
     private URI catalogServiceURI;
 
     private ObjectMapper objectMapper;
-    
+
     private ServiceURIResolver uriResolver;
 
-    public HTTPEquipmentService(final ObjectMapper objectMapper, final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+    public HTTPEquipmentService(final ObjectMapper objectMapper, final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.catalogServiceURI = catalogServiceURI;
         this.uriResolver = uriResolver;
@@ -41,7 +42,7 @@ public class HTTPEquipmentService implements EquipmentService {
     @Override
     public List<EquipmentStatus> getStatus(final String idList) {
         String pathWithIDListParam = String.format(STATUS_ENDPOINT_PATH_FORMAT, idList);
-        try (InputStream input = this.uriResolver.getInputStream(this.catalogServiceURI.resolve (pathWithIDListParam))) {
+        try (InputStream input = this.uriResolver.getInputStream(this.catalogServiceURI.resolve(pathWithIDListParam))) {
             return this.objectMapper.readValue(input, new TypeReference<List<EquipmentStatus>>() {
             });
         } catch (IOException e) {

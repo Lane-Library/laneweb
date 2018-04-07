@@ -22,7 +22,8 @@ public class BookCoverService {
 
     private ServiceURIResolver uriResolver;
 
-    public BookCoverService(final ObjectMapper objectMapper, final URI bookCoverServiceURI, final ServiceURIResolver uriResolver) {
+    public BookCoverService(final ObjectMapper objectMapper, final URI bookCoverServiceURI,
+            final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.bookCoverServiceURI = bookCoverServiceURI;
         this.uriResolver = uriResolver;
@@ -31,7 +32,8 @@ public class BookCoverService {
     public Map<Integer, String> getBookCoverURLs(final Collection<Integer> bibids) {
         StringBuilder queryStringBuilder = new StringBuilder("bookcovers?bibIDs=")
                 .append(bibids.stream().map(Object::toString).collect(Collectors.joining(",")));
-        try (InputStream input = this.uriResolver.getInputStream(this.bookCoverServiceURI.resolve(queryStringBuilder.toString()))) {
+        try (InputStream input = this.uriResolver
+                .getInputStream(this.bookCoverServiceURI.resolve(queryStringBuilder.toString()))) {
             return this.objectMapper.readValue(input, new TypeReference<Map<Integer, String>>() {
             });
         } catch (IOException e) {

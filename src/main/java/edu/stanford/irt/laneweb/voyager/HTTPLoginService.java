@@ -16,10 +16,11 @@ public class HTTPLoginService implements LoginService {
     private URI catalogServiceURI;
 
     private ObjectMapper objectMapper;
-    
+
     private ServiceURIResolver uriResolver;
 
-    public HTTPLoginService(final ObjectMapper objectMapper, final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+    public HTTPLoginService(final ObjectMapper objectMapper, final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.catalogServiceURI = catalogServiceURI;
         this.uriResolver = uriResolver;

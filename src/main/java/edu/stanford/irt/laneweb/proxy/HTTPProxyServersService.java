@@ -22,10 +22,11 @@ public class HTTPProxyServersService implements ProxyServersService {
     private URI catalogServiceURI;
 
     private ObjectMapper objectMapper;
-    
+
     private ServiceURIResolver uriResolver;
 
-    public HTTPProxyServersService(final ObjectMapper objectMapper, final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+    public HTTPProxyServersService(final ObjectMapper objectMapper, final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.catalogServiceURI = catalogServiceURI;
         this.uriResolver = uriResolver;
