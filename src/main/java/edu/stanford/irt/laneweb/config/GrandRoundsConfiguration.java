@@ -27,7 +27,8 @@ public class GrandRoundsConfiguration {
 
     @Bean
     public GrandRoundsService httpGrandRoundsService(
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
         return new HTTPGrandRoundsService(catalogServiceURI, uriResolver);
     }
 
