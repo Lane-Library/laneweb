@@ -33,6 +33,7 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
 import edu.stanford.irt.laneweb.eresources.search.Facet;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 @ImportResource({
@@ -132,5 +133,10 @@ public class LanewebConfiguration {
     @Scope("request")
     public Map<String, Object> model() {
         return new HashMap<>(this.constants);
+    }
+
+    @Bean
+    public ServiceURIResolver serviceURIResolver() {
+        return new ServiceURIResolver();
     }
 }

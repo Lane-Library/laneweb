@@ -16,7 +16,7 @@ public class VoyagerConfigurationTest {
 
     @Test
     public void testHttpLoginService() {
-        assertNotNull(this.configuration.httpLoginService(null, null));
+        assertNotNull(this.configuration.httpLoginService(null, null, null));
     }
 
     @Test

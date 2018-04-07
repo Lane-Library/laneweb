@@ -10,6 +10,7 @@ import org.xml.sax.XMLReader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 import edu.stanford.irt.laneweb.voyager.HTTPLoginService;
 import edu.stanford.irt.laneweb.voyager.LoginService;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
@@ -20,8 +21,8 @@ public class VoyagerConfiguration {
 
     @Bean
     public LoginService httpLoginService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
-        return new HTTPLoginService(objectMapper, catalogServiceURI);
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+        return new HTTPLoginService(objectMapper, catalogServiceURI, uriResolver);
     }
 
     @Bean(name = "org.xml.sax.XMLReader/marc")

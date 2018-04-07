@@ -20,7 +20,7 @@ public class BookCoverConfigurationTest {
 
     @Test
     public void testBookCoverService() {
-        assertNotNull(this.configuration.bookCoverService(null, null));
+        assertNotNull(this.configuration.bookCoverService(null, null, null));
     }
 
     @Test

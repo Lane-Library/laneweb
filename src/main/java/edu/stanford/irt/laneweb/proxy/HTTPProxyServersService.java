@@ -9,7 +9,7 @@ import java.util.Set;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.util.IOUtils;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 public class HTTPProxyServersService implements ProxyServersService {
 
@@ -22,15 +22,18 @@ public class HTTPProxyServersService implements ProxyServersService {
     private URI catalogServiceURI;
 
     private ObjectMapper objectMapper;
+    
+    private ServiceURIResolver uriResolver;
 
-    public HTTPProxyServersService(final ObjectMapper objectMapper, final URI catalogServiceURI) {
+    public HTTPProxyServersService(final ObjectMapper objectMapper, final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.catalogServiceURI = catalogServiceURI;
+        this.uriResolver = uriResolver;
     }
 
     @Override
     public Set<String> getHosts() {
-        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(HOSTS_ENDPOINT))) {
+        try (InputStream input = this.uriResolver.getInputStream(this.catalogServiceURI.resolve(HOSTS_ENDPOINT))) {
             return this.objectMapper.readValue(input, Set.class);
         } catch (IOException e) {
             throw new LanewebException(e);
@@ -39,7 +42,7 @@ public class HTTPProxyServersService implements ProxyServersService {
 
     @Override
     public void write(final OutputStream outputStream) throws IOException {
-        try (InputStream input = IOUtils.getStream(this.catalogServiceURI.resolve(WRITE_ENDPOINT))) {
+        try (InputStream input = this.uriResolver.getInputStream(this.catalogServiceURI.resolve(WRITE_ENDPOINT))) {
             byte[] buffer = new byte[BYTE_BUFFER_SIZE];
             int i = 0;
             while (true) {

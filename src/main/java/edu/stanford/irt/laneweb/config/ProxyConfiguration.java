@@ -18,6 +18,7 @@ import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
 import edu.stanford.irt.laneweb.proxy.ProxyLinkSelector;
 import edu.stanford.irt.laneweb.proxy.ProxyServersService;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 public class ProxyConfiguration {
@@ -36,8 +37,8 @@ public class ProxyConfiguration {
 
     @Bean
     public ProxyServersService httpProxyServersService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
-        return new HTTPProxyServersService(objectMapper, catalogServiceURI);
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+        return new HTTPProxyServersService(objectMapper, catalogServiceURI, uriResolver);
     }
 
     @Bean(destroyMethod = "destroy")
