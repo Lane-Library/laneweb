@@ -18,8 +18,14 @@ a .fa-bars {
         height: 77px;
         padding-top: 17px;
     }
+    .search-form {
+        margin-top: 0;
+    }
     .nav, .library-contact, .lane-footer, .som-footer {
         display: none;
+    }
+    .nav {
+        z-index: 1;
     }
     #nav:target {
         display: block;
@@ -39,10 +45,11 @@ a .fa-bars {
         background-image: url('../images/diag.png');
     }
     .login {
+        border-bottom: 1px solid #878787;
         box-sizing: border-box;
         line-height: 48px;
         margin: 0;
-        padding: 14px 36px 12px 26px;
+        padding: 14px 36px 18px 26px;
         position: static;
         width: 275px;
     }
@@ -56,6 +63,11 @@ a .fa-bars {
     .login > .login-item-active:nth-child(8) {
         display: none;
     }
+    .login > :nth-child(2) {
+        line-height: initial;
+        padding: 10px 0;
+        text-align: left;
+    }
     .login > :nth-child(9) {
         border: 1px solid #878787;
     }
@@ -63,11 +75,16 @@ a .fa-bars {
         display: block;
     }
     .favorites .dropdown-content {
+        background: linear-gradient(rgb(21,21,21), rgb(81,81,81));
+        box-sizing: border-box;
+        left: 0;
+        right: auto;
+        text-align: left;
+        width: 100%;
     }
     .lane-nav {
         box-shadow: none;
         position: static;
-        z-index: 2;
     }
     .lane-nav .centered {
         margin: 0;
@@ -78,18 +95,41 @@ a .fa-bars {
     .nav-menu {
         display: list-item;
     }
-    .nav-menu:hover {
-        background-color: #666;
+    .nav-menu > span {
         color: white;
-    }
-    .nav-menu span, .nav-menu a {
-        color: white;
-        padding: 0 21px;
+        font-size: 20px;
+        padding-left: 28px;
         text-align: left;
-        text-transform: uppercase;
     }
-    .search-form {
-        margin-top: 0;
+    .nav-menu:hover,
+    .nav-menu-active {
+        color: inherit;
+        background-color: inherit;
+        box-shadow: none;
+    }
+    .nav-menu .nav-menu-content {
+        left: auto;
+        right: 0;
+    }
+    .nav-menu-content {
+        background: linear-gradient(rgb(21,21,21), rgb(81,81,81));
+        border: none;
+        width: 100%;
+    }
+    .nav-menu-content.portals {
+        width: 375px;
+    }
+    .nav-menu-content li {
+        border-bottom: none;
+    }
+    .nav-menu-content.portals ul {
+        column-count: 2;
+    }
+    .nav-menu-content a:hover,
+    .nav-menu-content a:visited,
+    .nav-menu-content .fa,
+    .nav-menu-content h5 {
+        color: white;
     }
     a .fa-bars {
         display: inline-block;
