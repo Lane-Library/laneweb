@@ -15,7 +15,7 @@ public class CourseReservesItemListGenerator extends AbstractGenerator implement
 
     private CourseReservesService dao;
 
-    private int id = 0;
+    private int id;
 
     private SAXStrategy<CourseReservesItemList> saxStrategy;
 

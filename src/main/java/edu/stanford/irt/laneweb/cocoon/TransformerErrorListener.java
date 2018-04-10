@@ -11,7 +11,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class TransformerErrorListener implements ErrorListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ErrorListener.class);
+    private static final Logger log = LoggerFactory.getLogger(ErrorListener.class);
 
     @Override
     public void error(final TransformerException te) {
@@ -25,7 +25,7 @@ public class TransformerErrorListener implements ErrorListener {
 
     @Override
     public void warning(final TransformerException te) {
-        LOG.warn(getMessage(te));
+        log.warn(getMessage(te));
     }
 
     private String getMessage(final TransformerException te) {
