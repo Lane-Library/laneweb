@@ -90,7 +90,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
     }
 
     @Test
-    public void tesToSAXEmptyDescription() throws SAXException, IOException {
+    public void testToSAXEmptyDescription() throws SAXException, IOException {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
