@@ -86,12 +86,8 @@ public class QueryTermPatternTest {
     @Test
     public void testOpenSquareBracket() {
         String openSquareBracket = "atyp[ical meningiomas";
-        try {
-            Pattern pattern = QueryTermPattern.getPattern(openSquareBracket);
-            assertTrue(pattern.matcher(openSquareBracket).matches());
-        } catch (LanewebException e) {
-            fail("getPattern() should handle a String an open square bracket");
-        }
+        Pattern pattern = QueryTermPattern.getPattern(openSquareBracket);
+        assertTrue(pattern.matcher(openSquareBracket).matches());
     }
 
     @Test

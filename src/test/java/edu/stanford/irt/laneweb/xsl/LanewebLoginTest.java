@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-public class Test_laneweb_login extends AbstractXSLTest {
+public class LanewebLoginTest extends AbstractXSLTest {
 
     private Source source;
 

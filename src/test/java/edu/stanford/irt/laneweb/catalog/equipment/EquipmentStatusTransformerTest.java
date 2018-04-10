@@ -42,7 +42,7 @@ public class EquipmentStatusTransformerTest {
     }
 
     @Test
-    public void test() throws IOException, SAXException, SQLException {
+    public void testTransform() throws IOException, SAXException, SQLException {
         List<EquipmentStatus> status = new ArrayList<>();
         status.add(new EquipmentStatus("304254", "1"));
         status.add(new EquipmentStatus("296290", "10"));

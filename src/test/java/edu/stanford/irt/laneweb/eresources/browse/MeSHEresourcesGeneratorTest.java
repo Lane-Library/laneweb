@@ -24,30 +24,6 @@ public class MeSHEresourcesGeneratorTest {
 
     private SolrService solrService;
 
-    @Test
-    public void setModelMesh() {
-        this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
-        assertEquals("p=0;t=;m=mesh", this.generator.createKey().toString());
-    }
-
-    @Test
-    public void setModelNull() {
-        this.generator.setModel(Collections.emptyMap());
-        assertEquals("p=0;t=;m=", this.generator.createKey().toString());
-    }
-
-    @Test
-    public void setParametersNoType() {
-        this.generator.setParameters(Collections.emptyMap());
-        assertEquals("p=0;t=;m=", this.generator.createKey().toString());
-    }
-
-    @Test
-    public void setParametersType() {
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        assertEquals("p=0;t=type;m=", this.generator.createKey().toString());
-    }
-
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
@@ -97,5 +73,29 @@ public class MeSHEresourcesGeneratorTest {
     @Test
     public void testGetHeading() {
         assertNull(this.generator.getHeading());
+    }
+
+    @Test
+    public void testSetModelMesh() {
+        this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
+        assertEquals("p=0;t=;m=mesh", this.generator.createKey().toString());
+    }
+
+    @Test
+    public void testSetModelNull() {
+        this.generator.setModel(Collections.emptyMap());
+        assertEquals("p=0;t=;m=", this.generator.createKey().toString());
+    }
+
+    @Test
+    public void testSetParametersNoType() {
+        this.generator.setParameters(Collections.emptyMap());
+        assertEquals("p=0;t=;m=", this.generator.createKey().toString());
+    }
+
+    @Test
+    public void testSetParametersType() {
+        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
+        assertEquals("p=0;t=type;m=", this.generator.createKey().toString());
     }
 }

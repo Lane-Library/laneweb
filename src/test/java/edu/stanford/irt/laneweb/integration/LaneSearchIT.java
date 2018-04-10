@@ -51,15 +51,6 @@ public class LaneSearchIT {
     }
 
     @Test
-    public void testLaneSearchAccess_Medicine() throws Exception {
-        // Access Medicine
-        this.mockMvc.perform(get("/eresources/search.html?q=Access Medicine").servletPath("/eresources/search.html"))
-                .andExpect(
-                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
-                                this.ns).exists());
-    }
-
-    @Test
     public void testLaneSearchaccessmedicine() throws Exception {
         // accessmedicine
         this.mockMvc.perform(get("/eresources/search.html?q=accessmedicine").servletPath("/eresources/search.html"))
@@ -72,6 +63,15 @@ public class LaneSearchIT {
     public void testLaneSearchAccessMedicine() throws Exception {
         // AccessMedicine
         this.mockMvc.perform(get("/eresources/search.html?q=AccessMedicine").servletPath("/eresources/search.html"))
+                .andExpect(
+                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                                this.ns).exists());
+    }
+
+    @Test
+    public void testLaneSearchAccessSpaceMedicine() throws Exception {
+        // Access Medicine
+        this.mockMvc.perform(get("/eresources/search.html?q=Access Medicine").servletPath("/eresources/search.html"))
                 .andExpect(
                         xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
                                 this.ns).exists());
@@ -253,7 +253,7 @@ public class LaneSearchIT {
     }
 
     @Test
-    public void testLaneSearchUp_To_Date() throws Exception {
+    public void testLaneSearchUpSpaceToSpaceDate() throws Exception {
         this.mockMvc.perform(get("/eresources/search.html?q=Up To Date").servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
                         .exists());

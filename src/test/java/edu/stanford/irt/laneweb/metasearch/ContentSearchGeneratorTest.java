@@ -40,7 +40,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearch() {
+    public void testDoSearch() {
         expect(this.metaSearchService.search("query", null, 20000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);
@@ -49,7 +49,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchEngines() {
+    public void testDoSearchEngines() {
         this.model.put(Model.TIMEOUT, "1000");
         this.generator.setModel(this.model);
         expect(this.metaSearchService.search("query", Arrays.asList(new String[] { "a", "b", "c" }), 1000L))
@@ -62,7 +62,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchTimeout() {
+    public void testDoSearchTimeout() {
         expect(this.metaSearchService.search("query", Collections.emptyList(), 1000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);
@@ -73,7 +73,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchTimeoutNFE() {
+    public void testDoSearchTimeoutNFE() {
         expect(this.metaSearchService.search("query", Collections.emptyList(), 20000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);
@@ -84,7 +84,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchTimeoutParameter() {
+    public void testDoSearchTimeoutParameter() {
         expect(this.metaSearchService.search("query", Collections.emptyList(), 1000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);

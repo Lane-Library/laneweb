@@ -40,8 +40,8 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void createElementNS(final ContentHandler contentHandler, final String namespaceURI, final String localName,
-            final String stringValue) throws SAXException {
+    public static void createElementNS(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName, final String stringValue) throws SAXException {
         startElement(contentHandler, namespaceURI, localName);
         data(contentHandler, stringValue);
         endElement(contentHandler, namespaceURI, localName);
@@ -76,13 +76,13 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void endElement(final ContentHandler contentHandler, final String namespaceURI, final String localName)
-            throws SAXException {
+    public static void endElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName) throws SAXException {
         contentHandler.endElement(namespaceURI, localName, localName);
     }
 
-    public static void maybeCreateElement(final ContentHandler contentHandler, final String namespaceURI, final String name,
-            final Object value) throws SAXException {
+    public static void maybeCreateElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String name, final Object value) throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(contentHandler, namespaceURI, name, value.toString());
         }
@@ -100,8 +100,8 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void startElement(final ContentHandler contentHandler, final String namespaceURI, final String localName)
-            throws SAXException {
+    public static void startElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName) throws SAXException {
         contentHandler.startElement(namespaceURI, localName, localName, EMPTY_ATTRIBUTES);
     }
 
@@ -120,8 +120,8 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void startElement(final ContentHandler contentHandler, final String namespaceURI, final String localName,
-            final Attributes atts) throws SAXException {
+    public static void startElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName, final Attributes atts) throws SAXException {
         contentHandler.startElement(namespaceURI, localName, localName, atts);
     }
 }
