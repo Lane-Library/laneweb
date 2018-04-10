@@ -49,8 +49,8 @@ public class HoursListSAXStrategy implements SAXStrategy<List<List<Hours>>> {
             if (hours.isClosed()) {
                 sb.append("Closed");
             } else {
-            sb.append(hours.getOpen().toLocalTime().format(HOURS_FORMATTER).toLowerCase(Locale.US)).append(" - ")
-                    .append(hours.getClose().toLocalTime().format(HOURS_FORMATTER).toLowerCase(Locale.US));
+                sb.append(hours.getOpen().toLocalTime().format(HOURS_FORMATTER).toLowerCase(Locale.US)).append(" - ")
+                        .append(hours.getClose().toLocalTime().format(HOURS_FORMATTER).toLowerCase(Locale.US));
             }
             XMLUtils.data(xmlConsumer, sb.toString());
             XMLUtils.endElement(xmlConsumer, NS, "description");

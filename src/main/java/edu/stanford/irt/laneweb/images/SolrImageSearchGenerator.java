@@ -34,7 +34,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
 
     protected String copyright = "0";
 
-    protected int pageNumber = 0;
+    protected int pageNumber;
 
     protected String resourceId;
 

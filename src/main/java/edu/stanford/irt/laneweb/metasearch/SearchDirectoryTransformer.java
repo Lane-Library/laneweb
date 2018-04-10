@@ -14,13 +14,8 @@ public class SearchDirectoryTransformer extends AbstractCacheableTransformer imp
 
     private static final String FILE = "file";
 
-    private static final FileFilter FILE_FILTER = new FileFilter() {
-
-        @Override
-        public boolean accept(final File file) {
-            return file.isFile() && file.canRead() && file.getName().endsWith(".html");
-        }
-    };
+    private static final FileFilter FILE_FILTER = 
+            (final File file) -> file.isFile() && file.canRead() && file.getName().endsWith(".html");
 
     private static final String NAMESPACE = "http://lane.stanford.edu/search-templates/ns";
 
