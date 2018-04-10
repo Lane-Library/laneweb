@@ -13,7 +13,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
-public abstract class BookmarkController {
+public class BookmarkController {
 
     private BookmarkDataBinder bookmarkDataBinder;
 
@@ -33,8 +33,8 @@ public abstract class BookmarkController {
         this.userDataBinder.bind(model.asMap(), request);
         this.bookmarkDataBinder.bind(model.asMap(), request);
         // case 73359 need to put null value into model if not present.
-        if (!model.containsAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS)) {
-            model.addAttribute(edu.stanford.irt.laneweb.model.Model.BOOKMARKS, null);
+        if (!model.containsAttribute(Model.BOOKMARKS)) {
+            model.addAttribute(Model.BOOKMARKS, null);
         }
     }
 

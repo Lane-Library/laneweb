@@ -13,7 +13,7 @@ public class VoyagerLogin {
 
     private static final String ERROR_URL = "/voyagerError.html";
 
-    private static final Logger LOG = LoggerFactory.getLogger(VoyagerLogin.class);
+    private static final Logger log = LoggerFactory.getLogger(VoyagerLogin.class);
 
     private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
 
@@ -26,9 +26,9 @@ public class VoyagerLogin {
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         String voyagerURL = ERROR_URL;
         if (pid == null || !PID_PATTERN.matcher(pid).matches()) {
-            LOG.error("bad pid: {}", pid);
+            log.error("bad pid: {}", pid);
         } else if (univId == null || univId.length() == 0) {
-            LOG.error("bad univId: {}", univId);
+            log.error("bad univId: {}", univId);
         } else {
             // voyager data prepends 0
             String voyagerUnivId = "0" + univId;
@@ -36,10 +36,10 @@ public class VoyagerLogin {
                 if (this.service.login(voyagerUnivId, pid)) {
                     voyagerURL = BASE_URL.concat(queryString).concat("&authenticate=Y");
                 } else {
-                    LOG.error("unable to find univId in voyager: {}", univId);
+                    log.error("unable to find univId in voyager: {}", univId);
                 }
             } catch (LanewebException e) {
-                LOG.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
                 voyagerURL = ERROR_URL;
             }
         }

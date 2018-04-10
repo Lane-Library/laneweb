@@ -35,11 +35,11 @@ public class ProxyCredentialController {
             final RedirectAttributes attrs,
             @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
-        StringBuilder sb = new StringBuilder();
         String queryString = request.getQueryString();
         if (queryString == null) {
             throw new IllegalArgumentException("null queryString");
         }
+        StringBuilder sb = new StringBuilder();
         if (userid == null || ticket == null) {
             sb.append("/secure/apps/proxy/credential?").append(queryString);
         } else {

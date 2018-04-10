@@ -19,7 +19,7 @@ public class RequestAttributeUserFactory implements UserFactory {
 
     private static final String EMAIL_ATTRIBUTE_NAME = "mail";
 
-    private static final Logger LOG = LoggerFactory.getLogger(RequestAttributeUserFactory.class);
+    private static final Logger log = LoggerFactory.getLogger(RequestAttributeUserFactory.class);
 
     private static final String NAME_ATTRIBUTE_NAME = "displayName";
 
@@ -71,7 +71,7 @@ public class RequestAttributeUserFactory implements UserFactory {
                 domain = domain.substring(first + 1, domain.length());
             }
         } catch (URISyntaxException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             domain = "unknown";
         }
         return domain;

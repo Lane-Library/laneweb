@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SubjectSource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SubjectSource.class);
+    private static final Logger log = LoggerFactory.getLogger(SubjectSource.class);
 
     private Subject subject;
 
@@ -34,7 +34,7 @@ public class SubjectSource {
         try {
             authenticateIfNecessary();
         } catch (LoginException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             this.subject = null;
         }
         return this.subject;

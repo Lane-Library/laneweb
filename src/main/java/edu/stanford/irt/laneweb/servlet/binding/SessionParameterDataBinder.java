@@ -18,7 +18,6 @@ public abstract class SessionParameterDataBinder<T extends Serializable> impleme
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         HttpSession session = request.getSession();
         String parameterValue = request.getParameter(this.parameterName);

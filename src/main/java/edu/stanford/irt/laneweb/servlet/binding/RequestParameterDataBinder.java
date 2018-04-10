@@ -66,7 +66,6 @@ public class RequestParameterDataBinder implements DataBinder {
     }
 
     @Override
-    @SuppressWarnings("rawtypes")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();

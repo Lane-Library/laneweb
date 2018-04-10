@@ -17,9 +17,9 @@ public abstract class AbstractTextProcessingTransformer extends AbstractXMLPipe 
 
     private CharBuffer chars = CharBuffer.allocate(BUFFER_SIZE);
 
-    private boolean inTargetElement = false;
+    private boolean inTargetElement;
 
-    private int parseLevel = 0;
+    private int parseLevel;
 
     private XMLConsumer xmlConsumer;
 

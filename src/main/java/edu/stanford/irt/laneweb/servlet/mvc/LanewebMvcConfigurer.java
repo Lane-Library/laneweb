@@ -78,7 +78,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setUrlMap(Collections.singletonMap("/**/*.*", staticRequestHandler));
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
-        handlerMapping.setInterceptors(new Object[] { redirectHandlerInterceptor() });
+        handlerMapping.setInterceptors(redirectHandlerInterceptor());
         return handlerMapping;
     }
 
@@ -113,8 +113,8 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     public ResourceHttpRequestHandler staticRequestHandler(
             @Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase) throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"),
-                new ClassPathResource("/static/"), new UrlResource(liveBase.toURL()) }));
+        handler.setLocations(Arrays.asList(new ClassPathResource("/"),
+                new ClassPathResource("/static/"), new UrlResource(liveBase.toURL())));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
