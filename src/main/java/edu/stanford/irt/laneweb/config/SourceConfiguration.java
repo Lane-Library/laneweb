@@ -28,8 +28,8 @@ import edu.stanford.irt.laneweb.cocoon.CachedXMLSourceResolver;
 @Configuration
 public class SourceConfiguration implements InitializingBean {
 
-    private static final List<String> SITEMAPS = Arrays
-            .asList(new String[] { "content", "applications", "eresources", "rss", "mobile", "classes", "bookmarks" });
+    private static final List<String> SITEMAPS = Arrays.asList("content", "applications", "eresources", "rss", "mobile",
+            "classes", "bookmarks");
 
     private BeanFactory beanFactory;
 
@@ -41,7 +41,8 @@ public class SourceConfiguration implements InitializingBean {
 
     private SourceResolverImpl sourceResolver;
 
-    public SourceConfiguration(final BeanFactory beanFactory, Cache<Serializable, CachedResponse> cache, ComponentFactory componentFactory, ResourceLoader resourceLoader) {
+    public SourceConfiguration(final BeanFactory beanFactory, final Cache<Serializable, CachedResponse> cache,
+            final ComponentFactory componentFactory, final ResourceLoader resourceLoader) {
         this.beanFactory = beanFactory;
         this.cache = cache;
         this.componentFactory = componentFactory;
@@ -54,7 +55,6 @@ public class SourceConfiguration implements InitializingBean {
         SitemapSourceResolver sitemapSourceResolver = new SitemapSourceResolver(this.componentFactory,
                 this.sourceResolver) {
 
-            @SuppressWarnings("unchecked")
             @Override
             protected Map<String, Object> getModel() {
                 return SourceConfiguration.this.beanFactory.getBean("edu.stanford.irt.cocoon.Model", Map.class);
