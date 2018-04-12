@@ -1,7 +1,7 @@
 pipeline:
 
   build:
-    image: gcr.io/som-laneweb/maven-grover
+    image: gcr.io/som-laneweb/maven-grover:jdk-10
     commands:
       - mvn -B -q -s settings.xml package
     when:
