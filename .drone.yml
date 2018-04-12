@@ -3,7 +3,7 @@ pipeline:
   build:
     image: gcr.io/som-laneweb/maven-grover:jdk-10
     environment:
-      - JAVA_OPTS="--release 8"
+      - MAVEN_OPTS="--release 8 $MAVEN_OPTS"
     commands:
       - mvn -B -q -s settings.xml package
     when:
