@@ -14,11 +14,11 @@ import javax.net.ssl.HttpsURLConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -44,6 +44,8 @@ public class LaneCrmController {
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 
+	private static final String ERROR_URL = "/error.html";
+
     private String acquisitionURL;
 
     private String askUsURL;
@@ -66,32 +68,34 @@ public class LaneCrmController {
     @RequestMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLaneaskus(final Model model, final RedirectAttributes atts) throws IOException {
         Map<String, Object> map = model.asMap();
-        submitRequestToCrmServer(map, this.askUsURL);
-        return getRedirectTo(map);
+        ResponseEntity<String> response = submitRequestToCrmServer(map, this.askUsURL);
+        return getRedirectTo(map, response);
     }
 
     @RequestMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) throws IOException {
         Map<String, Object> map = model.asMap();
-        submitRequestToCrmServer(map, this.acquisitionURL);
-        return getRedirectTo(map);
-    }
-
-    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void jsonSubmitLaneaskus(@RequestBody final Map<String, Object> feedback) throws IOException {
-        submitRequestToCrmServer(feedback, this.askUsURL);
+        ResponseEntity<String> response = submitRequestToCrmServer(map, this.acquisitionURL);
+        return getRedirectTo(map, response);
     }
 
     @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback) throws IOException {
-        submitRequestToCrmServer(feedback, this.acquisitionURL);
+    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback) throws IOException {
+    	return submitRequestToCrmServer(feedback, this.acquisitionURL);
     }
 
-    private String getRedirectTo(final Map<String, Object> map) {
+    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
+    public ResponseEntity<String> jsonSubmitLaneaskus(@RequestBody final Map<String, Object> feedback) throws IOException {
+    	return submitRequestToCrmServer(feedback, this.askUsURL);
+    }
+    
+    
+    private String getRedirectTo(final Map<String, Object> map, ResponseEntity<String> response) {
         String redirectTo = (String) map.get("redirect");
-        if (redirectTo == null) {
+        if(!response.getStatusCode().equals(HttpStatus.OK)){
+        	redirectTo = ERROR_URL;
+    	}
+        else if (redirectTo == null) {
             redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
         }
         if (redirectTo == null) {
@@ -100,7 +104,7 @@ public class LaneCrmController {
         return "redirect:" + redirectTo;
     }
 
-    private void submitRequestToCrmServer(final Map<String, Object> feedback, final String crmUrl) throws IOException {
+    private ResponseEntity<String> submitRequestToCrmServer(final Map<String, Object> feedback, final String crmUrl) throws IOException {
         StringBuilder queryString = new StringBuilder();
         for (Entry<String, Object> entry : feedback.entrySet()) {
             queryString.append(entry.getKey()).append('=').append(URLEncoder.encode(entry.getValue().toString(), UTF_8))
@@ -112,6 +116,10 @@ public class LaneCrmController {
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(queryString.toString());
         wr.close();
-        con.getResponseCode();
+         int responseCode = con.getResponseCode();
+         if(200 != responseCode){
+        	 return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
+         }
+    	 return new ResponseEntity<String>(HttpStatus.OK);
     }
 }
