@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2018-04-16" version="3.5.6" description="3.5.6 bug fix release">
+        <release date="2018-04-17" version="3.5.7" description="3.5.7 bug fix release">
+            <action date="2018-04-17" dev="ceyates" issue="141095" type="fix">
+                laneweb-3.5.6 failing in production
+            </action>
+        </release>
+        <release date="2018-04-16" version="3.5.6" description="3.5.6 bug fix release [rolled back]">
             <action date="2018-04-09" dev="ryanmax" issue="140806" type="update">
                 update LPCH network ranges
             </action>
