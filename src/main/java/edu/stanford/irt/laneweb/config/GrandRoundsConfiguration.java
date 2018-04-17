@@ -14,6 +14,7 @@ import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService;
 import edu.stanford.irt.laneweb.catalog.grandrounds.HTTPGrandRoundsService;
 import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 public class GrandRoundsConfiguration {
@@ -26,8 +27,9 @@ public class GrandRoundsConfiguration {
 
     @Bean
     public GrandRoundsService httpGrandRoundsService(
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
-        return new HTTPGrandRoundsService(catalogServiceURI);
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
+        return new HTTPGrandRoundsService(catalogServiceURI, uriResolver);
     }
 
     @Bean

@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -26,8 +26,8 @@ public class CoreEresourcesGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.solrService = createMock(SolrService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.solrService = mock(SolrService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new CoreEresourcesGenerator("type", this.solrService, this.saxStrategy);
     }
 

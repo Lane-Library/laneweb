@@ -43,7 +43,6 @@ public class JDBCBookmarkService implements BookmarkService {
         this.dataSource = dataSource;
     }
 
-    @SuppressWarnings("unchecked")
     private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt) throws SQLException {
         List<Bookmark> links = null;
         try (ResultSet rs = pstmt.executeQuery()) {

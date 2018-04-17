@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.redirect;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class CompositeRedirectProcessor implements RedirectProcessor {
     private List<RedirectProcessor> redirectProcessors = Collections.emptyList();
 
     public CompositeRedirectProcessor(final List<RedirectProcessor> redirectProcessors) {
-        this.redirectProcessors = redirectProcessors;
+        this.redirectProcessors = new ArrayList<>(redirectProcessors);
     }
 
     @Override

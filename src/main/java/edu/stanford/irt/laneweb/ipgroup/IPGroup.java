@@ -56,7 +56,7 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("10.252.50.0/23", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.54.0/23", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.60.0/23", LPCH));
-        ROOT.addSubrange(new CIDRRange("10.252.63.0/23", LPCH));
+        ROOT.addSubrange(new CIDRRange("10.252.62.0/23", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.64.12/32", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.64.17/32", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.64.23/32", LPCH));
@@ -94,8 +94,6 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("10.252.153.0/24", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.200.0/24", LPCH));
         ROOT.addSubrange(new CIDRRange("10.252.250.96/27", LPCH));
-        ROOT.addSubrange(new CIDRRange("10.253.220.0/24", LPCH));
-        ROOT.addSubrange(new CIDRRange("10.253.254.0/23", LPCH));
         ROOT.addSubrange(new CIDRRange("10.50.0.0/16", LPCH));
         ROOT.addSubrange(new CIDRRange("10.250.128.0/17", LPCH));
         ROOT.addSubrange(new CIDRRange("10.251.128.0/17", LPCH));
@@ -122,7 +120,7 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("10.251.0.0/17", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.112.0/24", SHC));
         ROOT.addSubrange(new CIDRRange("171.65.116.0/22", SHC));
-        ROOT.addSubrange(new CIDRRange("171.65.126.0/24", LPCH));
+        ROOT.addSubrange(new CIDRRange("171.65.126.0/25", LPCH));
         ROOT.addSubrange(new CIDRRange("171.65.44.0/24", PAVA));
         ROOT.addSubrange(new CIDRRange("171.65.65.46/32", OTHER));
         ROOT.addSubrange(new CIDRRange("171.65.46.0/23", SHC));

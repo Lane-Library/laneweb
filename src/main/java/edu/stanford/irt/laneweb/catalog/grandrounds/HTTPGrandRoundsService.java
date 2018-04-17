@@ -16,7 +16,7 @@ import edu.stanford.irt.grandrounds.GrandRoundsException;
 import edu.stanford.irt.grandrounds.Link;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.util.IOUtils;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 import edu.stanford.lane.catalog.CatalogSQLException;
 import edu.stanford.lane.catalog.Record;
 import edu.stanford.lane.catalog.RecordCollection;
@@ -30,9 +30,12 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
     private static final String UTF8 = StandardCharsets.UTF_8.name();
 
     private URI catalogServiceURI;
+    
+    private ServiceURIResolver uriResolver;
 
-    public HTTPGrandRoundsService(final URI catalogServiceURI) {
+    public HTTPGrandRoundsService(final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
         this.catalogServiceURI = catalogServiceURI;
+        this.uriResolver = uriResolver;
     }
 
     @Override
@@ -67,7 +70,7 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
         try {
             String endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
                     URLEncoder.encode(year, UTF8));
-            return IOUtils.getStream(this.catalogServiceURI.resolve(endpointPath));
+            return this.uriResolver.getInputStream(this.catalogServiceURI.resolve(endpointPath));
         } catch (IOException e) {
             throw new LanewebException(e);
         }

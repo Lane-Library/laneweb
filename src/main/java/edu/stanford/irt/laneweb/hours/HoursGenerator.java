@@ -23,7 +23,11 @@ import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 public class HoursGenerator extends AbstractGenerator implements ModelAware, CacheablePipelineComponent {
 
+    private static final int DAYS_PER_WEEK = 7;
+
     private static final long ONE_HOUR = Duration.ofHours(1).toMillis();
+
+    private static final int WEEKS_TO_DISPLAY = 4;
 
     private SAXStrategy<List<List<Hours>>> saxStrategy;
 
@@ -42,12 +46,12 @@ public class HoursGenerator extends AbstractGenerator implements ModelAware, Cac
     private static List<List<Hours>> divideIntoWeeks(final List<Hours> hours) {
         List<List<Hours>> lists = new ArrayList<>();
         int fromIndex = 0;
-        int toIndex = 7;
-        int numberOfWeeks = hours.size() / 7;
+        int toIndex = DAYS_PER_WEEK;
+        int numberOfWeeks = hours.size() / DAYS_PER_WEEK;
         for (int i = 0; i < numberOfWeeks; i++) {
             lists.add(hours.subList(fromIndex, toIndex));
-            fromIndex += 7;
-            toIndex += 7;
+            fromIndex += DAYS_PER_WEEK;
+            toIndex += DAYS_PER_WEEK;
         }
         return lists;
     }
@@ -75,7 +79,7 @@ public class HoursGenerator extends AbstractGenerator implements ModelAware, Cac
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         LocalDate monday = this.today.with(DayOfWeek.MONDAY);
-        List<Hours> hours = this.service.getHours(monday, Period.ofWeeks(4));
+        List<Hours> hours = this.service.getHours(monday, Period.ofWeeks(WEEKS_TO_DISPLAY));
         this.saxStrategy.toSAX(divideIntoWeeks(hours), xmlConsumer);
     }
 }

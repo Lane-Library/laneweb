@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -52,17 +52,17 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
     @Before
     public void setUp() throws Exception {
         this.xmlConsumer = new TestXMLConsumer();
-        this.eresource = createMock(Eresource.class);
+        this.eresource = mock(Eresource.class);
         Arrays.fill(this.eresourceArray, this.eresource);
-        this.eresourceStrategy = createMock(SAXStrategy.class);
-        this.pagingSaxStrategy = createMock(SAXStrategy.class);
+        this.eresourceStrategy = mock(SAXStrategy.class);
+        this.pagingSaxStrategy = mock(SAXStrategy.class);
         this.strategy = new PagingEresourceListXHTMLSAXStrategy(this.eresourceStrategy, this.pagingSaxStrategy);
-        this.list = createMock(PagingEresourceList.class);
-        this.listIterator = createMock(ListIterator.class);
-        this.pagingLabel = createMock(PagingLabel.class);
-        this.pagingLabels = createMock(List.class);
-        this.pagingLabelsIterator = createMock(ListIterator.class);
-        this.pagingData = createMock(EresourceListPagingData.class);
+        this.list = mock(PagingEresourceList.class);
+        this.listIterator = mock(ListIterator.class);
+        this.pagingLabel = mock(PagingLabel.class);
+        this.pagingLabels = mock(List.class);
+        this.pagingLabelsIterator = mock(ListIterator.class);
+        this.pagingData = mock(EresourceListPagingData.class);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
     }
 
     @Test
-    public void testoSAXEmptyDescription() throws SAXException, IOException {
+    public void testToSAXEmptyDescription() throws SAXException, IOException {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
         expect(this.pagingData.getLength()).andReturn(100);
@@ -264,7 +264,7 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException, IOException {
-        XMLConsumer c = createMock(XMLConsumer.class);
+        XMLConsumer c = mock(XMLConsumer.class);
         c.startDocument();
         expectLastCall().andThrow(new SAXException());
         expect(this.list.getPagingData()).andReturn(this.pagingData);

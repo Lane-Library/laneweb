@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.user;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -33,9 +33,9 @@ public class LDAPAttributesMapperTest {
     @Before
     public void setUp() throws Exception {
         this.mapper = new LDAPAttributesMapper(Collections.singleton("stanford:staff"));
-        this.attributes = createMock(Attributes.class);
-        this.attribute = createMock(Attribute.class);
-        this.enumeration = createMock(NamingEnumeration.class);
+        this.attributes = mock(Attributes.class);
+        this.attribute = mock(Attribute.class);
+        this.enumeration = mock(NamingEnumeration.class);
     }
 
     @SuppressWarnings("unchecked")

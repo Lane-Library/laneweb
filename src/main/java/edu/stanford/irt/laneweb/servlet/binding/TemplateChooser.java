@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -42,7 +43,7 @@ public class TemplateChooser {
             }
         }
         this.defaultTemplate = defaultTemplate;
-        this.existingTemplates = existingTemplates;
+        this.existingTemplates = new HashSet<>(existingTemplates);
     }
 
     public String getDefaultTemplate() {

@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -32,9 +32,9 @@ public class ValidParameterFilterTest {
     @Before
     public void setUp() throws Exception {
         this.filter = new ValidParameterFilter();
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.chain = createMock(FilterChain.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.chain = mock(FilterChain.class);
     }
 
     @Test

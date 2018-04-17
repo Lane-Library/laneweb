@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.eresources;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class SolrQueryParser {
+public class SolrQueryParser {
 
     private List<QueryInspector> combinables;
 

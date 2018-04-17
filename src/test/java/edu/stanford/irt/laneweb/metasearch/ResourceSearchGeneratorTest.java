@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -33,10 +33,10 @@ public class ResourceSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metaSearchService = createMock(MetaSearchService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.metaSearchService = mock(MetaSearchService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new ResourceSearchGenerator(this.metaSearchService, this.saxStrategy);
-        this.result = createMock(Result.class);
+        this.result = mock(Result.class);
     }
 
     @SuppressWarnings("unchecked")

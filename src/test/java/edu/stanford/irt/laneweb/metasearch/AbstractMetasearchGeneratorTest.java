@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -42,8 +42,8 @@ public class AbstractMetasearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metaSearchService = createMock(MetaSearchService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.metaSearchService = mock(MetaSearchService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new TestAbstractMetasearchGenerator(this.metaSearchService, this.saxStrategy);
         this.query = "query";
     }

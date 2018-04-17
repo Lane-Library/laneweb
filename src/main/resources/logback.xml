@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-    
-    <property name="LOG_PATH" value="${LOG_PATH:-${catalina.base:-${java.io.tmpdir:-/tmp}}/logs}"/>
-    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH}/laneweb.log}"/>
+
+    <property name="LOG_PATH" value="${LOG_PATH:-${catalina.base:-${java.io.tmpdir:-/tmp}}/logs/}"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}laneweb.log}"/>
     <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d %p [%t][%c{1}] - %m%n}"/>
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-${FILE_LOG_PATTERN}}"/>
+    <property name="LEVEL" value="${edu.stanford.irt.laneweb.log.level:-INFO}"/>
+    <property name="APPENDER" value="${edu.stanford.irt.laneweb.log.appender:-console}"/>
 
     <appender name="LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_FILE}</File>
@@ -20,16 +22,16 @@
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
-    
+
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-    
-    <root level="${edu.stanford.irt.laneweb.log.level:-INFO}">
-        <appender-ref ref="${edu.stanford.irt.laneweb.log.appender:-LOG}" />
-    </root>
-    
+
+	<root level="${LEVEL}">
+		<appender-ref ref="${APPENDER}" />
+	</root>
+
 </configuration>
 

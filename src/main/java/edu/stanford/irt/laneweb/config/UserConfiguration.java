@@ -11,6 +11,7 @@ import org.springframework.ldap.core.support.LdapContextSource;
 
 import edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.laneweb.user.LoginContextFactory;
 import edu.stanford.irt.laneweb.user.SubjectSource;
 
 @Configuration
@@ -28,7 +29,7 @@ public class UserConfiguration {
     }
 
     @Bean
-    public LDAPDataAccess ldapDataAccess() {
+    public LDAPDataAccess ldapDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource) {
         Set<String> activeAffiliations = new HashSet<>(24);
         activeAffiliations.add("stanford:affiliate:sponsored");
         activeAffiliations.add("stanford:faculty*");
@@ -54,11 +55,21 @@ public class UserConfiguration {
         activeAffiliations.add("stanford:student:mla");
         activeAffiliations.add("stanford:student:ndo");
         activeAffiliations.add("sumc:staff");
-        return new LDAPDataAccess(new LdapTemplate(ldapContextSource()), subjectSource(), activeAffiliations);
+        return new LDAPDataAccess(ldapTemplate, subjectSource, activeAffiliations);
     }
 
     @Bean
-    public SubjectSource subjectSource() {
-        return new SubjectSource("IRT_K5");
+    public LdapTemplate ldapTemplate(final LdapContextSource ldapContextSource) {
+        return new LdapTemplate(ldapContextSource);
+    }
+
+    @Bean
+    public LoginContextFactory loginContextFactory() {
+        return new LoginContextFactory("IRT_K5");
+    }
+
+    @Bean
+    public SubjectSource subjectSource(final LoginContextFactory loginContextFactory) {
+        return new SubjectSource(loginContextFactory);
     }
 }

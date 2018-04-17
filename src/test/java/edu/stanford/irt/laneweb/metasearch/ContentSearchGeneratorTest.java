@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -31,16 +31,16 @@ public class ContentSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metaSearchService = createMock(MetaSearchService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
-        this.conversionStrategy = createMock(ContentResultConversionStrategy.class);
+        this.metaSearchService = mock(MetaSearchService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
+        this.conversionStrategy = mock(ContentResultConversionStrategy.class);
         this.generator = new ContentSearchGenerator(this.metaSearchService, this.saxStrategy, this.conversionStrategy);
         this.model = new HashMap<>();
         this.model.put(Model.QUERY, "query");
     }
 
     @Test
-    public void testdoSearch() {
+    public void testDoSearch() {
         expect(this.metaSearchService.search("query", null, 20000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);
@@ -49,7 +49,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchEngines() {
+    public void testDoSearchEngines() {
         this.model.put(Model.TIMEOUT, "1000");
         this.generator.setModel(this.model);
         expect(this.metaSearchService.search("query", Arrays.asList(new String[] { "a", "b", "c" }), 1000L))
@@ -62,7 +62,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchTimeout() {
+    public void testDoSearchTimeout() {
         expect(this.metaSearchService.search("query", Collections.emptyList(), 1000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);
@@ -73,7 +73,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchTimeoutNFE() {
+    public void testDoSearchTimeoutNFE() {
         expect(this.metaSearchService.search("query", Collections.emptyList(), 20000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);
@@ -84,7 +84,7 @@ public class ContentSearchGeneratorTest {
     }
 
     @Test
-    public void testdoSearchTimeoutParameter() {
+    public void testDoSearchTimeoutParameter() {
         expect(this.metaSearchService.search("query", Collections.emptyList(), 1000L)).andReturn(null);
         expect(this.conversionStrategy.convertResult(null)).andReturn(Collections.emptyList());
         replay(this.metaSearchService, this.conversionStrategy, this.saxStrategy);

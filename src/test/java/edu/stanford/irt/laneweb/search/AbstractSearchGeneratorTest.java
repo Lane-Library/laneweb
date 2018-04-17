@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -40,7 +40,7 @@ public class AbstractSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new TestAbstractSearchGenerator(this.saxStrategy);
     }
 

@@ -16,7 +16,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.junit.Before;
 import org.junit.Test;
 
-public class Test_resourceListPagination extends AbstractXSLTest {
+public class ResourceListPaginationTest extends AbstractXSLTest {
 
     private Source source;
 
@@ -26,7 +26,7 @@ public class Test_resourceListPagination extends AbstractXSLTest {
     public void setUp() throws Exception {
         this.transformer = TransformerFactory.newInstance()
                 .newTransformer(new StreamSource("src/main/xsl/resourceList2html.xsl"));
-        this.source = new StreamSource(getClass().getResourceAsStream("Test_resourceListPagingation.xml"));
+        this.source = new StreamSource(getClass().getResourceAsStream("ResourceListPaginationTest.xml"));
         this.transformer.setOutputProperty("indent", "yes");
         this.transformer.setOutputProperty("method", "xml");
     }

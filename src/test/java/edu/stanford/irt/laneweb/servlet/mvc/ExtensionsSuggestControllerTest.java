@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class ExtensionsSuggestControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.suggestionService = createMock(SuggestionService.class);
+        this.suggestionService = mock(SuggestionService.class);
         this.controller = new ExtensionsSuggestController(this.suggestionService);
     }
 

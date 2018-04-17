@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.hours;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -23,17 +23,17 @@ public class TodaysHoursTest {
 
     private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
+    private Clock clock;
+
     private Hours hours;
 
     private LibraryHoursService service;
 
-    private Clock clock;
-
     @Before
     public void setUp() {
-        this.service = createMock(LibraryHoursService.class);
-        this.hours = createMock(Hours.class);
-        this.clock = createMock(Clock.class);
+        this.service = mock(LibraryHoursService.class);
+        this.hours = mock(Hours.class);
+        this.clock = mock(Clock.class);
     }
 
     @Test
@@ -83,8 +83,10 @@ public class TodaysHoursTest {
         expect(this.service.getHours(LocalDate.now(AMERICA_LA))).andReturn(this.hours).times(2);
         expect(this.hours.isClosed()).andReturn(false).times(2);
         expect(this.hours.getOpen()).andReturn(open).times(2);
-        expect(this.hours.getClose()).andReturn(ZonedDateTime.parse("2017-03-10T20:00:00.000-08:00[America/Los_Angeles]"));
-        expect(this.hours.getClose()).andReturn(ZonedDateTime.parse("2017-03-10T18:00:00.000-08:00[America/Los_Angeles]"));
+        expect(this.hours.getClose())
+                .andReturn(ZonedDateTime.parse("2017-03-10T20:00:00.000-08:00[America/Los_Angeles]"));
+        expect(this.hours.getClose())
+                .andReturn(ZonedDateTime.parse("2017-03-10T18:00:00.000-08:00[America/Los_Angeles]"));
         expect(this.clock.millis()).andReturn(now + Duration.ofMinutes(1).toMillis());
         expect(this.clock.millis()).andReturn(now + Duration.ofHours(1).toMillis());
         replay(this.service, this.hours, this.clock);

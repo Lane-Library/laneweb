@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -28,10 +28,10 @@ public class UserDataControllerTest {
 
     @Before
     public void setUp() {
-        this.dataBinder = createMock(DataBinder.class);
+        this.dataBinder = mock(DataBinder.class);
         this.controller = new UserDataController(this.dataBinder);
-        this.model = createMock(Model.class);
-        this.request = createMock(HttpServletRequest.class);
+        this.model = mock(Model.class);
+        this.request = mock(HttpServletRequest.class);
     }
 
     @Test

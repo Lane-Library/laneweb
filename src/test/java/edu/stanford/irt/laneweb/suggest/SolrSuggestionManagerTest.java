@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.suggest;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -25,9 +25,9 @@ public class SolrSuggestionManagerTest {
 
     @Before
     public void setUp() {
-        this.solrService = createMock(SolrService.class);
+        this.solrService = mock(SolrService.class);
         this.manager = new SolrSuggestionManager(this.solrService);
-        this.eresource = createMock(Eresource.class);
+        this.eresource = mock(Eresource.class);
     }
 
     @Test(expected = IllegalArgumentException.class)

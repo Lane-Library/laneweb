@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.trends;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -22,9 +22,9 @@ public class GoogleTrackerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.connectionFactory = createMock(GoogleTracker.URLConnectionFactory.class);
+        this.connectionFactory = mock(GoogleTracker.URLConnectionFactory.class);
         this.tracker = new GoogleTracker(this.connectionFactory);
-        this.connection = createMock(URLConnection.class);
+        this.connection = mock(URLConnection.class);
         this.tracker.setDomainName("domainName");
         this.tracker.setGoogleAccount("googleAccount");
         this.tracker.setReferer("referer");

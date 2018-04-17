@@ -7,6 +7,50 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-04-16" version="3.5.6" description="3.5.6 bug fix release">
+            <action date="2018-04-09" dev="ryanmax" issue="140806" type="update">
+                update LPCH network ranges
+            </action>
+        </release>
+        <release date="2018-04-02" version="3.5.5" description="3.5.5 bug fix release">
+            <action date="2018-03-29" dev="ryanmax" issue="140333" type="update">
+                update SHC Epic order set redirects
+            </action>
+            <action date="2018-03-29" dev="ceyates" issue="140285" type="fix">
+                kerberos authentication for ldap.stanford.edu failing
+            </action>
+            <action date="2018-03-26" dev="ryanmax" issue="140089" type="update">
+                add LaneAskUs@stanford.edu to feedback form error messages
+            </action>
+        </release>
+        <release date="2018-03-26" version="3.5.4" description="3.5.4 bug fix release">
+            <action date="2018-03-22" dev="ceyates" issue="139916" type="update">
+                scale elements on discovery login page
+            </action>
+            <action date="2018-03-20" dev="ryanmax" issue="139850" type="fix">
+                SSL warnings from laneblog images on front page
+            </action>
+            <action date="2018-03-19" dev="ceyates" issue="139795" type="fix">
+                right clicking a link causes navigation to the link url
+            </action>
+            <action date="2018-03-21" dev="ryanmax" issue="139640" type="update">
+                improve precision for DOI searches
+            </action>
+        </release>
+        <release date="2018-03-19" version="3.5.3" description="3.5.3 bug fix release">
+            <action date="2018-03-16" dev="ceyates" issue="139722" type="add">
+                implement url tester for metasearch
+            </action>
+            <action date="2018-03-19" dev="ryanmax" issue="139664" type="remove">
+                create local Bassett search, remove Bassett tab from main search
+            </action>
+            <action date="2018-03-14" dev="ceyates" issue="139658" type="update">
+                add more space on the right side of the Stanford Login button
+            </action>
+            <action date="2018-0314-" dev="olgary" issue="139655" type="remove">
+                removed CONTACT US button from the right edge and the css
+            </action>
+        </release>
         <release date="2018-03-12" version="3.5.2" description="3.5.2 bug fix release">
             <action date="2018-03-05" dev="ceyates" issue="139499" type="add">
                 report bookcover service status on status page

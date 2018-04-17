@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -44,12 +44,12 @@ public class JSONBookmarkControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.bookmarkService = createMock(BookmarkService.class);
+        this.bookmarkService = mock(BookmarkService.class);
         this.controller = new JSONBookmarkController(this.bookmarkService, null, null, null);
         this.userid = "ditenus";
         this.bookmarks = new ArrayList<>();
         this.bookmark = new Bookmark("label", "url");
-        this.session = createMock(HttpSession.class);
+        this.session = mock(HttpSession.class);
     }
 
     @Test

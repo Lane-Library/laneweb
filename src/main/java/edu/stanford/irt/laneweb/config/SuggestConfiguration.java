@@ -11,7 +11,6 @@ import edu.stanford.irt.laneweb.suggest.DefaultSuggestionService;
 import edu.stanford.irt.laneweb.suggest.SolrSuggestionManager;
 import edu.stanford.irt.laneweb.suggest.SuggestionService;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
-import edu.stanford.irt.suggest.SuggestionManager;
 
 @Configuration
 public class SuggestConfiguration {
@@ -25,7 +24,7 @@ public class SuggestConfiguration {
     public CompositeSuggestionManager extensionsSuggestionManager(
             final SolrSuggestionManager eresourceSuggestionManager, final MeshSuggestionManager meshSuggestionManager) {
         return new CompositeSuggestionManager(
-                Arrays.asList(new SuggestionManager[] { eresourceSuggestionManager, meshSuggestionManager }));
+                Arrays.asList(eresourceSuggestionManager, meshSuggestionManager));
     }
 
     @Bean

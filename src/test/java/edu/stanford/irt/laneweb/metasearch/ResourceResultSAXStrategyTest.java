@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -40,11 +40,11 @@ public class ResourceResultSAXStrategyTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.contentSAXStrategy = createMock(SAXStrategy.class);
+        this.contentSAXStrategy = mock(SAXStrategy.class);
         this.strategy = new ResourceResultSAXStrategy(this.contentSAXStrategy);
         this.xmlConsumer = new TestXMLConsumer();
-        this.result = createMock(Result.class);
-        this.contentResult = createMock(ContentResult.class);
+        this.result = mock(Result.class);
+        this.contentResult = mock(ContentResult.class);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class ResourceResultSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException, IOException {
-        XMLConsumer c = createMock(XMLConsumer.class);
+        XMLConsumer c = mock(XMLConsumer.class);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
         expect(this.result.getId()).andReturn("id");
         expect(this.result.getURL()).andReturn("url");

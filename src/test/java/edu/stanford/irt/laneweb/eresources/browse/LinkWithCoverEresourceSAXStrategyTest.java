@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
@@ -37,8 +37,8 @@ public class LinkWithCoverEresourceSAXStrategyTest {
     public void setUp() {
         this.saxStrategy = new LinkWithCoverEresourceSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
-        this.eresource = createMock(Eresource.class);
-        this.link = createMock(Link.class);
+        this.eresource = mock(Eresource.class);
+        this.link = mock(Link.class);
     }
 
     @Test(expected = LanewebException.class)
@@ -68,7 +68,7 @@ public class LinkWithCoverEresourceSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws IOException, SAXException {
-        XMLConsumer x = createMock(XMLConsumer.class);
+        XMLConsumer x = mock(XMLConsumer.class);
         expect(this.eresource.getRecordId()).andReturn("12");
         expect(this.eresource.getLinks()).andReturn(Collections.singleton(this.link));
         expect(this.link.getUrl()).andReturn("url");

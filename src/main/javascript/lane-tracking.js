@@ -311,19 +311,21 @@
         }();
 
         document.addEventListener('click', function(e) {
-            var t = e.target, setLocation = function() {
-                L.setLocationHref(t.href);
-            };
+            var leftClick = e.button === 0,
+                t = e.target,
+                setLocation = function() {
+                    L.setLocationHref(t.href);
+                };
             Tracker.trackEvent(e);
             //put in a delay to make the tracking request:
-            if (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e)) {
+            if (leftClick && (Tracker.isTrackableAsPageview(e.target) || Tracker.isTrackableAsEvent(e))) {
                     while (t) {
                         // follow link if it's not:
                         //  - popup or facet
                         //    (can't halt facet click propagation b/c they need to be tracked)
                         if (t.href &&
                                 (!t.rel && !t.target) &&
-                                !t.parentNode.classList.contains('searchFacet') ) {
+                                !t.parentNode.classList.contains('searchFacet')) {
                             e.preventDefault();
                             setTimeout(setLocation, 200);
                             break;

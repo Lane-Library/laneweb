@@ -2,11 +2,11 @@ package edu.stanford.irt.laneweb.metasearch;
 
 import static org.easymock.EasyMock.aryEq;
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -40,10 +40,10 @@ public class ContentResultSAXStrategyTest {
     @Before
     public void setUp() throws Exception {
         this.strategy = new SearchResultSAXStrategy();
-        this.searchResult = createMock(SearchResult.class);
-        this.xmlConsumer = createMock(XMLConsumer.class);
-        this.contentResult = createMock(ContentResult.class);
-        this.resourceResult = createMock(Result.class);
+        this.searchResult = mock(SearchResult.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
+        this.contentResult = mock(ContentResult.class);
+        this.resourceResult = mock(Result.class);
     }
 
     @Test

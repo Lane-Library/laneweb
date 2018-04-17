@@ -15,7 +15,7 @@ public class Bookmark implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private transient int hashcode = 0;
+    private transient int hashcode;
 
     private String label;
 

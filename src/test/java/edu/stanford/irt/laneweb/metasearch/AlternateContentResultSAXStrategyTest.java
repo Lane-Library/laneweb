@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,7 @@ public class AlternateContentResultSAXStrategyTest {
     public void setUp() {
         this.strategy = new AlternateContentResultSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
-        this.contentResult = createMock(ContentResult.class);
+        this.contentResult = mock(ContentResult.class);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class AlternateContentResultSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException, IOException {
-        XMLConsumer c = createMock(XMLConsumer.class);
+        XMLConsumer c = mock(XMLConsumer.class);
         c.startElement(eq("http://irt.stanford.edu/search/2.0"), eq("content"), eq("content"),
                 eq(XMLUtils.EMPTY_ATTRIBUTES));
         expectLastCall().andThrow(new SAXException());

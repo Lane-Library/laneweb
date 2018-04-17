@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
@@ -58,7 +58,7 @@ public class AbstractTextProcessingTransformerTest {
 
     @Before
     public void setup() {
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

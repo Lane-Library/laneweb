@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -44,13 +44,13 @@ public class BookmarkletControllerTest {
 
     @Before
     public void setUp() {
-        this.userBinder = createMock(UserDataBinder.class);
-        this.dao = createMock(BookmarkService.class);
-        this.bookmarkBinder = createMock(BookmarkDataBinder.class);
+        this.userBinder = mock(UserDataBinder.class);
+        this.dao = mock(BookmarkService.class);
+        this.bookmarkBinder = mock(BookmarkDataBinder.class);
         this.controller = new BookmarkletController(this.dao, this.bookmarkBinder, this.userBinder);
-        this.request = createMock(HttpServletRequest.class);
-        this.model = createMock(Model.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.model = mock(Model.class);
+        this.session = mock(HttpSession.class);
         this.bookmarks = new ArrayList<>();
     }
 

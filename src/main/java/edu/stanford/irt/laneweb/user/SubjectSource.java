@@ -13,16 +13,16 @@ import org.slf4j.LoggerFactory;
  */
 public class SubjectSource {
 
-    private static final Logger LOG = LoggerFactory.getLogger("error handler");
-
-    private String name;
+    private static final Logger log = LoggerFactory.getLogger(SubjectSource.class);
 
     private Subject subject;
 
     private KerberosTicket ticket;
 
-    public SubjectSource(final String name) {
-        this.name = name;
+    private LoginContextFactory loginContextFactory;
+    
+    public SubjectSource(final LoginContextFactory loginContextFactory) {
+        this.loginContextFactory = loginContextFactory;
     }
 
     /**
@@ -34,20 +34,15 @@ public class SubjectSource {
         try {
             authenticateIfNecessary();
         } catch (LoginException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             this.subject = null;
         }
         return this.subject;
     }
 
-    // protected method so that tests can mock the LoginContext
-    protected LoginContext getLoginContext(final String name) throws LoginException {
-        return new LoginContext(name);
-    }
-
     private void authenticateIfNecessary() throws LoginException {
         if (null == this.subject || null == this.ticket || !this.ticket.isCurrent()) {
-            LoginContext loginContext = getLoginContext(this.name);
+            LoginContext loginContext = this.loginContextFactory.getLoginContext();
             loginContext.login();
             this.subject = loginContext.getSubject();
             for (KerberosTicket subjectTicket : this.subject.getPrivateCredentials(KerberosTicket.class)) {

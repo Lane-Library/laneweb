@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.redirect;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -18,7 +18,7 @@ public class CompositeRedirectProcessorTest {
     private CompositeRedirectProcessor processor;
 
     public CompositeRedirectProcessorTest() {
-        this.child = createMock(RedirectProcessor.class);
+        this.child = mock(RedirectProcessor.class);
         this.processor = new CompositeRedirectProcessor(
                 Arrays.asList(new RedirectProcessor[] { this.child, this.child }));
     }

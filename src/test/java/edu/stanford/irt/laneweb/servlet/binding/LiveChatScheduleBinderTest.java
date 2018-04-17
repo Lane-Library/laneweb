@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertSame;
@@ -23,7 +23,7 @@ public class LiveChatScheduleBinderTest {
 
     @Before
     public void setUp() {
-        this.schedule = createMock(Schedule.class);
+        this.schedule = mock(Schedule.class);
         this.dataBinder = new LiveChatScheduleBinder(this.schedule);
     }
 

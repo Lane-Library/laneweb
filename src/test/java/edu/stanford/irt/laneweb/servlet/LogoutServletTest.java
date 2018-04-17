@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -36,9 +36,9 @@ public class LogoutServletTest {
 
     @Test
     public void testNullReferePage() throws ServletException, IOException {
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
         expect(this.request.getHeader("referer")).andReturn(null);
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(this.session);
@@ -53,9 +53,9 @@ public class LogoutServletTest {
 
     @Test
     public void testService() throws ServletException, IOException {
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
         expect(this.request.getHeader("referer")).andReturn("/logout.html");
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getLocalName()).andReturn("localhost");
@@ -70,9 +70,9 @@ public class LogoutServletTest {
 
     @Test
     public void testServiceNullCookiesAndSession() throws ServletException, IOException {
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
         expect(this.request.getHeader("referer")).andReturn("/logout.html");
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(null);
@@ -86,9 +86,9 @@ public class LogoutServletTest {
 
     @Test
     public void testServicePersistent() throws ServletException, IOException {
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
         expect(this.request.getHeader("referer")).andReturn("/logout.html");
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(this.session);
@@ -103,9 +103,9 @@ public class LogoutServletTest {
 
     @Test
     public void testServicePersistentDenied() throws ServletException, IOException {
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
         expect(this.request.getHeader("referer")).andReturn("/index.html");
         expect(this.request.getLocalName()).andReturn("localhost");
         expect(this.request.getSession(false)).andReturn(this.session);
@@ -120,9 +120,9 @@ public class LogoutServletTest {
 
     @Test
     public void testServiceRemoteReferer() throws ServletException, IOException {
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.session = mock(HttpSession.class);
         expect(this.request.getHeader("referer")).andReturn("http://evil.server.com/");
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getLocalName()).andReturn("localhost");

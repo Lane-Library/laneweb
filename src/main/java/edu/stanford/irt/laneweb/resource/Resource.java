@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.resource;
 
-public class Resource {
+public final class Resource {
 
     public static final String ADDITIONAL_TEXT = "additional-text";
 

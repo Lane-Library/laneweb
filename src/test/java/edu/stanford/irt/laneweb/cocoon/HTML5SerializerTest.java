@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertArrayEquals;
@@ -27,7 +27,7 @@ public class HTML5SerializerTest {
 
     @Before
     public void setUp() {
-        this.transformerHandler = createMock(TransformerHandler.class);
+        this.transformerHandler = mock(TransformerHandler.class);
         this.serializer = new HTML5Serializer(null, this.transformerHandler, Collections.emptyMap());
     }
 
@@ -46,7 +46,7 @@ public class HTML5SerializerTest {
     @Test(expected = SAXException.class)
     public void testStartDocumentThrowsIOException() throws SAXException, IOException {
         this.transformerHandler.setResult(isA(Result.class));
-        OutputStream output = createMock(OutputStream.class);
+        OutputStream output = mock(OutputStream.class);
         output.write(isA(byte[].class));
         expectLastCall().andThrow(new IOException());
         replay(this.transformerHandler, output);

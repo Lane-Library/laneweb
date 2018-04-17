@@ -48,6 +48,8 @@ import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
 @Configuration
 public class PipelineConfiguration {
 
+    private static final long FIVE_MINUTES = 300;
+
     private static final String NO = "no";
 
     private static final String UTF_8 = "UTF-8";
@@ -84,7 +86,7 @@ public class PipelineConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/expires")
     @Scope("prototype")
     public Pipeline expiresCachingPipeline(final Cache<Serializable, CachedResponse> cache) {
-        return new ExpiresCachingPipeline(cache, 300);
+        return new ExpiresCachingPipeline(cache, FIVE_MINUTES);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/file")
@@ -128,7 +130,8 @@ public class PipelineConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/joost")
     @Scope("prototype")
     public Transformer joostTransformer(
-            @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost") final TransformerHandlerFactory joostTransformerHandlerFactory) {
+            @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/joost")
+                final TransformerHandlerFactory joostTransformerHandlerFactory) {
         return new TraxTransformer("joost", joostTransformerHandlerFactory);
     }
 
@@ -160,7 +163,8 @@ public class PipelineConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/saxon")
     @Scope("prototype")
     public Transformer saxonTransformer(
-            @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon") final TransformerHandlerFactory saxonTransformerHandlerFactory) {
+            @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon")
+                final TransformerHandlerFactory saxonTransformerHandlerFactory) {
         return new TraxTransformer("saxon", saxonTransformerHandlerFactory);
     }
 
@@ -195,8 +199,8 @@ public class PipelineConfiguration {
     @Bean
     @Scope("prototype")
     public TransformerHandler transformerHandler(
-            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon") final SAXTransformerFactory transformerFactory)
-            throws TransformerConfigurationException {
+            @Qualifier("javax.xml.transform.sax.SAXTransformerFactory/saxon")
+                final SAXTransformerFactory transformerFactory) throws TransformerConfigurationException {
         return transformerFactory.newTransformerHandler();
     }
 

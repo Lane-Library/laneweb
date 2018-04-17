@@ -39,7 +39,6 @@ public abstract class AbstractSitemapController {
             final String prefix) throws IOException {
         String method = request.getMethod();
         String sitemapURI = getSitemapURI(request, prefix);
-        @SuppressWarnings("unchecked")
         Map<String, Object> model = this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class);
         this.dataBinder.bind(model, request);
         model.put(Model.SITEMAP_URI, sitemapURI);

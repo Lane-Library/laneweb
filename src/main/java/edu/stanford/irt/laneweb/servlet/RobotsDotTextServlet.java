@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 @WebServlet("/robots.txt")
 public class RobotsDotTextServlet extends HttpServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RobotsDotTextServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(RobotsDotTextServlet.class);
 
     private static final byte[] NONPRODUCTION = "User-agent: *\nDisallow: /".getBytes(StandardCharsets.UTF_8);
 
@@ -48,7 +48,7 @@ public class RobotsDotTextServlet extends HttpServlet {
             }
             outputStream.close();
         } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 }

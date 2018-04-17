@@ -39,17 +39,20 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
         this.conversionStrategy = conversionStrategy;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
         this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class, Collections.emptyList());
         String p = ModelUtil.getString(model, Model.PAGE, "1");
-        try {
-            this.page = "all".equals(p) ? -1 : Integer.parseInt(p) - 1;
-        } catch (NumberFormatException nfe) {
-            this.page = 0;
+        if ("all".equals(p)) {
+            this.page = -1;
+        } else {
+            try {
+                this.page = Integer.parseInt(p) - 1;
+            } catch (NumberFormatException nfe) {
+                this.page = 0;
+            }
         }
         this.urlEncodedQuery = ModelUtil.getString(model, Model.URL_ENCODED_QUERY);
     }

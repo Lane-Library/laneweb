@@ -22,6 +22,7 @@ import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemListSAX
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CoursesSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.coursereserves.HTTPCourseReservesService;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 public class CourseReservesConfiguration {
@@ -51,7 +52,8 @@ public class CourseReservesConfiguration {
 
     @Bean
     public CourseReservesService httpCourseReservesService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
-        return new HTTPCourseReservesService(objectMapper, catalogServiceURI);
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
+        return new HTTPCourseReservesService(objectMapper, catalogServiceURI, uriResolver);
     }
 }

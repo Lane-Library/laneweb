@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -39,13 +39,13 @@ public class BookmarkDataBinderTest {
 
     @Before
     public void setUp() throws Exception {
-        this.bookmarkService = createMock(BookmarkService.class);
+        this.bookmarkService = mock(BookmarkService.class);
         this.binder = new BookmarkDataBinder(this.bookmarkService);
         this.model = new HashMap<>();
         this.model.put(Model.USER_ID, "ditenus");
         this.bookmarks = Collections.emptyList();
-        this.request = createMock(HttpServletRequest.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.session = mock(HttpSession.class);
     }
 
     @Test

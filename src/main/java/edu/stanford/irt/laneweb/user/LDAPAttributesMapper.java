@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.user;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.naming.NamingEnumeration;
@@ -14,7 +15,7 @@ class LDAPAttributesMapper implements AttributesMapper<LDAPData> {
     private Set<String> activeAffiliations;
 
     public LDAPAttributesMapper(final Set<String> activeAffiliations) {
-        this.activeAffiliations = activeAffiliations;
+        this.activeAffiliations = new HashSet<>(activeAffiliations);
     }
 
     @Override

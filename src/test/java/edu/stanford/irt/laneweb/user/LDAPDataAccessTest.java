@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.user;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -34,10 +34,10 @@ public class LDAPDataAccessTest {
 
     @Before
     public void setUp() {
-        this.ldapTemplate = createMock(LdapTemplate.class);
-        this.subjectSource = createMock(SubjectSource.class);
+        this.ldapTemplate = mock(LdapTemplate.class);
+        this.subjectSource = mock(SubjectSource.class);
         this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource, Collections.emptySet());
-        this.ldapData = createMock(LDAPData.class);
+        this.ldapData = mock(LDAPData.class);
     }
 
     @SuppressWarnings("unchecked")

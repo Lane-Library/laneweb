@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.cme;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -31,9 +31,9 @@ public class HTMLCMELinkTransformerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.attributes = createMock(Attributes.class);
+        this.attributes = mock(Attributes.class);
         this.model = new HashMap<>();
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer = new HTMLCMELinkTransformer();
         this.transformer.setXMLConsumer(this.xmlConsumer);
     }

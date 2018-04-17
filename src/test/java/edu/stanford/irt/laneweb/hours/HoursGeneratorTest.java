@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.hours;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
@@ -39,10 +39,10 @@ public class HoursGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(LibraryHoursService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.service = mock(LibraryHoursService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new HoursGenerator(this.service, this.saxStrategy);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.hours = new ArrayList<>(Collections.nCopies(14, null));
     }
 

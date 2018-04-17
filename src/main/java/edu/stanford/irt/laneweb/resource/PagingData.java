@@ -38,8 +38,12 @@ public class PagingData implements Serializable {
         this.size = resources.size();
         this.baseQuery = baseQuery;
         this.pageSize = this.size / pc;
-        this.pageSize = this.size % pc != 0 ? this.pageSize + 1 : this.pageSize;
-        this.pageSize = this.pageSize < ps ? ps : this.pageSize;
+        if (this.size % pc != 0 ) {
+            this.pageSize += 1;
+        }
+        if (this.pageSize < ps) {
+            this.pageSize = ps;
+        }
         if (page < 0 || this.size <= this.pageSize) {
             this.start = 0;
             this.length = this.size;
@@ -63,15 +67,15 @@ public class PagingData implements Serializable {
         return this.page;
     }
 
-    public final int getPages() {
+    public int getPages() {
         return this.pages;
     }
 
-    public final int getPageSize() {
+    public int getPageSize() {
         return this.pageSize;
     }
 
-    public final int getSize() {
+    public int getSize() {
         return this.size;
     }
 

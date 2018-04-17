@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -25,9 +25,9 @@ public class FlickrPhotoControllerTest {
 
     @Before
     public void setUp() {
-        this.service = createMock(FlickrPhotoListService.class);
+        this.service = mock(FlickrPhotoListService.class);
         this.controller = new FlickrPhotoController(this.service);
-        this.response = createMock(HttpServletResponse.class);
+        this.response = mock(HttpServletResponse.class);
     }
 
     @Test

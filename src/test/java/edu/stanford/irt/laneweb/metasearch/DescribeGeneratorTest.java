@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -29,11 +29,11 @@ public class DescribeGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.metaSearchService = createMock(MetaSearchService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.metaSearchService = mock(MetaSearchService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new DescribeGenerator(this.metaSearchService, this.saxStrategy);
-        this.result = createMock(Result.class);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.result = mock(Result.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

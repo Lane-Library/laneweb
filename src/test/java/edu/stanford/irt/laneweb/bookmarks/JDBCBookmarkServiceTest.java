@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
 import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -45,11 +45,11 @@ public class JDBCBookmarkServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.dataSource = createMock(DataSource.class);
+        this.dataSource = mock(DataSource.class);
         this.dao = new JDBCBookmarkService(this.dataSource);
-        this.connection = createMock(Connection.class);
-        this.statement = createMock(PreparedStatement.class);
-        this.resultSet = createMock(ResultSet.class);
+        this.connection = mock(Connection.class);
+        this.statement = mock(PreparedStatement.class);
+        this.resultSet = mock(ResultSet.class);
         this.bookmark = new Bookmark("label", "url");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         new ObjectOutputStream(baos).writeObject(Collections.singletonList(this.bookmark));
@@ -87,14 +87,10 @@ public class JDBCBookmarkServiceTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testGetLinksNullUserid() throws SQLException, IOException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.getLinks(null);
-        } catch (NullPointerException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.getLinks(null);
     }
 
     @Test
@@ -139,7 +135,7 @@ public class JDBCBookmarkServiceTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testGetRowCountThrowsException() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
@@ -149,11 +145,7 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.getRowCount();
-        } catch (LanewebException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.getRowCount();
     }
 
     @Test
@@ -177,27 +169,19 @@ public class JDBCBookmarkServiceTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testSaveLinksNullBookmarks() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.saveLinks("userid", null);
-        } catch (NullPointerException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.saveLinks("userid", null);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testSaveLinksNullUserid() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.saveLinks(null, Collections.singletonList(this.bookmark));
-        } catch (NullPointerException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.saveLinks(null, Collections.singletonList(this.bookmark));
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testSaveLinksRollbackThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
@@ -210,11 +194,7 @@ public class JDBCBookmarkServiceTest {
         this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.saveLinks("userid", Collections.emptyList());
-        } catch (LanewebException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.saveLinks("userid", Collections.emptyList());
     }
 
     @Test
@@ -233,7 +213,7 @@ public class JDBCBookmarkServiceTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testSaveLinksStatementThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
@@ -245,21 +225,13 @@ public class JDBCBookmarkServiceTest {
         this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.saveLinks("userid", Collections.emptyList());
-        } catch (LanewebException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.saveLinks("userid", Collections.emptyList());
     }
 
-    @Test
+    @Test(expected = LanewebException.class)
     public void testSaveLinksThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andThrow(new SQLException());
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        try {
-            this.dao.saveLinks("userid", Collections.emptyList());
-        } catch (LanewebException e) {
-        }
-        verify(this.dataSource, this.connection, this.statement, this.resultSet);
+        this.dao.saveLinks("userid", Collections.emptyList());
     }
 }

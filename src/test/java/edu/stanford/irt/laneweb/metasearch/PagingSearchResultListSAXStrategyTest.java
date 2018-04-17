@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -14,10 +14,6 @@ import java.util.ListIterator;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -25,8 +21,6 @@ import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.search.impl.Result;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(PagingData.class)
 public class PagingSearchResultListSAXStrategyTest {
 
     private ListIterator<SearchResult> iterator;
@@ -50,15 +44,15 @@ public class PagingSearchResultListSAXStrategyTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.results = createMock(List.class);
+        this.results = mock(List.class);
         this.xmlConsumer = new TestXMLConsumer();
-        this.result = createMock(SearchResult.class);
-        this.iterator = createMock(ListIterator.class);
-        this.resultStrategy = createMock(SAXStrategy.class);
+        this.result = mock(SearchResult.class);
+        this.iterator = mock(ListIterator.class);
+        this.resultStrategy = mock(SAXStrategy.class);
         this.strategy = new PagingSearchResultListSAXStrategy(this.resultStrategy);
-        this.list = createMock(PagingSearchResultList.class);
-        this.pagingData = PowerMock.createMock(PagingData.class);
-        this.resourceResult = createMock(Result.class);
+        this.list = mock(PagingSearchResultList.class);
+        this.pagingData = mock(PagingData.class);
+        this.resourceResult = mock(Result.class);
     }
 
     @Test

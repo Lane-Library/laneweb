@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.catalog.coursereserves;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -41,13 +41,13 @@ public class CourseReservesItemListSAXStrategyTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.courseStrategy = createMock(SAXStrategy.class);
-        this.itemStrategy = createMock(SAXStrategy.class);
+        this.courseStrategy = mock(SAXStrategy.class);
+        this.itemStrategy = mock(SAXStrategy.class);
         this.saxStrategy = new CourseReservesItemListSAXStrategy(this.courseStrategy, this.itemStrategy);
-        this.itemList = createMock(CourseReservesItemList.class);
+        this.itemList = mock(CourseReservesItemList.class);
         this.xmlConsumer = new TestXMLConsumer();
-        this.course = createMock(Course.class);
-        this.item = createMock(CourseReservesItem.class);
+        this.course = mock(Course.class);
+        this.item = mock(CourseReservesItem.class);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class CourseReservesItemListSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException, IOException {
-        XMLConsumer mock = createMock(XMLConsumer.class);
+        XMLConsumer mock = mock(XMLConsumer.class);
         mock.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(this.itemList, mock);

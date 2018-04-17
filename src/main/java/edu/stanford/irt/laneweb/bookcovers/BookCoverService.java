@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.util.IOUtils;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 import edu.stanford.irt.status.ApplicationStatus;
 
 public class BookCoverService {
@@ -20,15 +20,20 @@ public class BookCoverService {
 
     private ObjectMapper objectMapper;
 
-    public BookCoverService(final ObjectMapper objectMapper, final URI bookCoverServiceURI) {
+    private ServiceURIResolver uriResolver;
+
+    public BookCoverService(final ObjectMapper objectMapper, final URI bookCoverServiceURI,
+            final ServiceURIResolver uriResolver) {
         this.objectMapper = objectMapper;
         this.bookCoverServiceURI = bookCoverServiceURI;
+        this.uriResolver = uriResolver;
     }
 
     public Map<Integer, String> getBookCoverURLs(final Collection<Integer> bibids) {
         StringBuilder queryStringBuilder = new StringBuilder("bookcovers?bibIDs=")
                 .append(bibids.stream().map(Object::toString).collect(Collectors.joining(",")));
-        try (InputStream input = IOUtils.getStream(this.bookCoverServiceURI.resolve(queryStringBuilder.toString()))) {
+        try (InputStream input = this.uriResolver
+                .getInputStream(this.bookCoverServiceURI.resolve(queryStringBuilder.toString()))) {
             return this.objectMapper.readValue(input, new TypeReference<Map<Integer, String>>() {
             });
         } catch (IOException e) {
@@ -37,7 +42,7 @@ public class BookCoverService {
     }
 
     public ApplicationStatus getStatus() {
-        try (InputStream input = IOUtils.getStream(this.bookCoverServiceURI.resolve("status.json"))) {
+        try (InputStream input = this.uriResolver.getInputStream(this.bookCoverServiceURI.resolve("status.json"))) {
             return this.objectMapper.readValue(input, new TypeReference<ApplicationStatus>() {
             });
         } catch (IOException e) {

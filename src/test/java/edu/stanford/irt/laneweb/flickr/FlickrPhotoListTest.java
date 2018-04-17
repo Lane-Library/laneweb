@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.flickr;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +23,7 @@ public class FlickrPhotoListTest {
 
     @Test
     public void testFlickrPhotoListIOException() throws IOException {
-        InputStream input = createMock(InputStream.class);
+        InputStream input = mock(InputStream.class);
         expect(input.read(isA(byte[].class), eq(0), eq(8192))).andThrow(new IOException());
         input.close();
         replay(input);

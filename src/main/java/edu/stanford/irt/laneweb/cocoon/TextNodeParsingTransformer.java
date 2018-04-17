@@ -44,7 +44,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe
 
     private Collection<String> elementNames;
 
-    private boolean inElement = false;
+    private boolean inElement;
 
     private SAXParser saxParser;
 

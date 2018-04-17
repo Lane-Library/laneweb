@@ -73,15 +73,15 @@ public class TodaysHours {
     private final String getLatestHours(final LocalDate localDate) {
         String latestHours;
         try {
-            Hours hours = this.service.getHours(localDate);
-            if (hours == null) {
+            Hours calendarHours = this.service.getHours(localDate);
+            if (calendarHours == null) {
                 log.error("failed to get hours for {} from service", localDate);
                 latestHours = UNKNOWN;
-            } else if (hours.isClosed()) {
+            } else if (calendarHours.isClosed()) {
                 latestHours = "CLOSED";
             } else {
-                latestHours = String.format("%s – %s", hours.getOpen().format(FORMAT).toLowerCase(Locale.US),
-                        hours.getClose().format(FORMAT).toLowerCase(Locale.US));
+                latestHours = String.format("%s – %s", calendarHours.getOpen().format(FORMAT).toLowerCase(Locale.US),
+                        calendarHours.getClose().format(FORMAT).toLowerCase(Locale.US));
             }
         } catch (LibraryHoursException e) {
             log.error("failed to get hours from service", e);

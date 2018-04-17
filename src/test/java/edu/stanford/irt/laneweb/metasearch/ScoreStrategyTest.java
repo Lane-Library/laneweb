@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +27,7 @@ public class ScoreStrategyTest {
     @Before
     public void setUp() throws Exception {
         this.scoreStrategy = new ScoreStrategy();
-        this.result = createMock(ContentResult.class);
+        this.result = mock(ContentResult.class);
     }
 
     @Test

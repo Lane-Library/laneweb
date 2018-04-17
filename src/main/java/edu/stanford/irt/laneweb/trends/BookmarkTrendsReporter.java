@@ -9,7 +9,7 @@ import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 
 public class BookmarkTrendsReporter {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BookmarkTrendsReporter.class);
+    private static final Logger log = LoggerFactory.getLogger(BookmarkTrendsReporter.class);
 
     private BookmarkService bookmarkService;
 
@@ -37,7 +37,7 @@ public class BookmarkTrendsReporter {
             this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", this.localHostname, "dailyUserCount",
                     this.bookmarkService.getRowCount());
         } catch (LanewebException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
 }

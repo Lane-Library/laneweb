@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.suggest;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +18,7 @@ public class CompositeSuggestionManager implements SuggestionManager {
     private List<SuggestionManager> suggestionManagers;
 
     public CompositeSuggestionManager(final List<SuggestionManager> suggestionManagers) {
-        this.suggestionManagers = suggestionManagers;
+        this.suggestionManagers = new ArrayList<>(suggestionManagers);
     }
 
     @Override

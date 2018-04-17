@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.flickr;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -40,9 +40,9 @@ public class FlickrPhotoListCreatorTest {
 
     @Before
     public void setUp() throws IOException {
-        this.objectMapper = createMock(ObjectMapper.class);
+        this.objectMapper = mock(ObjectMapper.class);
         this.creator = new FlickrPhotoListCreator("apiKey", "file:/", this.objectMapper);
-        this.photo = createMock(FlickrPhoto.class);
+        this.photo = mock(FlickrPhoto.class);
     }
 
     @SuppressWarnings("unchecked")

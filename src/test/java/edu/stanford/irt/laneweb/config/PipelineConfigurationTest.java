@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
 
 import javax.xml.transform.TransformerConfigurationException;
@@ -17,7 +17,7 @@ public class PipelineConfigurationTest {
 
     @Before
     public void setUp() {
-        this.beanFactory = createMock(BeanFactory.class);
+        this.beanFactory = mock(BeanFactory.class);
         this.configuration = new PipelineConfiguration();
     }
 

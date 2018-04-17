@@ -9,18 +9,19 @@ import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 public class HTTPCourseReservesServiceTest {
 
@@ -28,36 +29,76 @@ public class HTTPCourseReservesServiceTest {
 
     private HTTPCourseReservesService service;
 
+    private URI uri;
+
+    private ServiceURIResolver uriResolver;
+
     @Before
     public void setUp() throws URISyntaxException {
         this.objectMapper = mock(ObjectMapper.class);
-        this.service = new HTTPCourseReservesService(this.objectMapper, getClass().getResource("").toURI());
+        this.uri = getClass().getResource("").toURI();
+        this.uriResolver = mock(ServiceURIResolver.class);
+        this.service = new HTTPCourseReservesService(this.objectMapper, this.uri, this.uriResolver);
     }
 
     @Test
-    public void testGetCourses() throws JsonParseException, JsonMappingException, IOException {
+    public void testGetCourses() throws IOException {
+        expect(this.uriResolver.getInputStream(this.uri.resolve("coursereserves/courses")))
+                .andReturn(getClass().getResourceAsStream("coursereserves/courses"));
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(TypeReference.class)))
                 .andReturn(Collections.emptyList());
-        replay(this.objectMapper);
+        replay(this.objectMapper, this.uriResolver);
         assertSame(Collections.emptyList(), this.service.getCourses());
-        verify(this.objectMapper);
+        verify(this.objectMapper, this.uriResolver);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testGetCoursesThrowsException() throws IOException {
+        expect(this.uriResolver.getInputStream(this.uri.resolve("coursereserves/courses")))
+                .andReturn(getClass().getResourceAsStream("coursereserves/courses"));
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(TypeReference.class)))
+                .andThrow(new IOException());
+        replay(this.objectMapper, this.uriResolver);
+        this.service.getCourses();
     }
 
     @Test
-    public void testGetItems() throws JsonParseException, JsonMappingException, IOException {
+    public void testGetItems() throws IOException {
+        expect(this.uriResolver.getInputStream(this.uri.resolve("coursereserves/items")))
+                .andReturn(getClass().getResourceAsStream("coursereserves/items"));
         CourseReservesItemList list = mock(CourseReservesItemList.class);
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andReturn(list);
-        replay(this.objectMapper);
+        replay(this.objectMapper, this.uriResolver);
         assertSame(list, this.service.getItems());
-        verify(this.objectMapper);
+        verify(this.objectMapper, this.uriResolver);
     }
 
     @Test
-    public void testGetItemsInt() throws JsonParseException, JsonMappingException, IOException {
+    public void testGetItemsInt() throws IOException {
+        expect(this.uriResolver.getInputStream(this.uri.resolve("coursereserves/items?id=1")))
+                .andReturn(getClass().getResourceAsStream("coursereserves/items"));
         CourseReservesItemList list = mock(CourseReservesItemList.class);
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andReturn(list);
-        replay(this.objectMapper);
+        replay(this.objectMapper, this.uriResolver);
         assertSame(list, this.service.getItems(1));
-        verify(this.objectMapper);
+        verify(this.objectMapper, this.uriResolver);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testGetItemsIntThrowsException() throws IOException {
+        expect(this.uriResolver.getInputStream(this.uri.resolve("coursereserves/items?id=1")))
+                .andReturn(getClass().getResourceAsStream("coursereserves/items"));
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andThrow(new IOException());
+        replay(this.objectMapper, this.uriResolver);
+        this.service.getItems(1);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testGetItemsThrowsException() throws IOException {
+        expect(this.uriResolver.getInputStream(this.uri.resolve("coursereserves/items")))
+                .andReturn(getClass().getResourceAsStream("coursereserves/items"));
+        expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andThrow(new IOException());
+        replay(this.objectMapper, this.uriResolver);
+        this.service.getItems();
     }
 }

@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -56,30 +56,30 @@ public class SolrSearchFacetsGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(SolrService.class);
-        this.marshaller = createMock(Marshaller.class);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.service = mock(SolrService.class);
+        this.marshaller = mock(Marshaller.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         Collection<String> publicationTypes = Arrays.asList("Required1", "Required2");
         FacetComparator facetComparator = new FacetComparator(publicationTypes);
         this.generator = new SolrSearchFacetsGenerator(this.service, this.marshaller, 10, 2,
                 Arrays.asList("MeshSkip1", "MeshSkip2"), publicationTypes, facetComparator);
         this.model = new HashMap<>();
-        this.facetpage = createMock(FacetPage.class);
-        this.pageFacetQueries = createMock(Page.class);
-        this.facetQueryEntry = createMock(FacetQueryEntry.class);
-        this.facetResultPages = createMock(Collection.class);
+        this.facetpage = mock(FacetPage.class);
+        this.pageFacetQueries = mock(Page.class);
+        this.facetQueryEntry = mock(FacetQueryEntry.class);
+        this.facetResultPages = mock(Collection.class);
     }
 
     @SuppressWarnings({ "boxing", "unchecked" })
     @Test
     public final void testDoGenerateXMLConsumerBrowseFacetField() throws Exception {
-        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
-        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        Page<FacetFieldEntry> page2 = createMock(Page.class);
-        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
-        Field field = createMock(Field.class);
+        Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
+        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
+        Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
+        Page<FacetFieldEntry> page1 = mock(Page.class);
+        Page<FacetFieldEntry> page2 = mock(Page.class);
+        FacetFieldEntry ffe = mock(FacetFieldEntry.class);
+        Field field = mock(Field.class);
         Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
         this.model.put(Model.FACET, "facet");
@@ -120,7 +120,7 @@ public class SolrSearchFacetsGeneratorTest {
     @SuppressWarnings({ "boxing", "unchecked" })
     @Test
     public final void testDoGenerateXMLConsumerBrowseFacetQuery() throws Exception {
-        Iterator<FacetQueryEntry> facetQueryIterator = createMock(Iterator.class);
+        Iterator<FacetQueryEntry> facetQueryIterator = mock(Iterator.class);
         Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
         this.model.put(Model.FACET, "facet");
@@ -157,12 +157,12 @@ public class SolrSearchFacetsGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearch() throws Exception {
-        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
-        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
-        Field field = createMock(Field.class);
+        Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
+        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
+        Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
+        Page<FacetFieldEntry> page1 = mock(Page.class);
+        FacetFieldEntry ffe = mock(FacetFieldEntry.class);
+        Field field = mock(Field.class);
         Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
         this.model.put(Model.QUERY, "query");
@@ -225,12 +225,12 @@ public class SolrSearchFacetsGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithAddPrioritizedPublicationTypes() throws Exception {
-        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
-        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
-        Field field = createMock(Field.class);
+        Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
+        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
+        Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
+        Page<FacetFieldEntry> page1 = mock(Page.class);
+        FacetFieldEntry ffe = mock(FacetFieldEntry.class);
+        Field field = mock(Field.class);
         Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
         this.model.put(Model.QUERY, "query");
@@ -302,12 +302,12 @@ public class SolrSearchFacetsGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithRequestMoreMesh() throws Exception {
-        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
-        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
-        Field field = createMock(Field.class);
+        Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
+        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
+        Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
+        Page<FacetFieldEntry> page1 = mock(Page.class);
+        FacetFieldEntry ffe = mock(FacetFieldEntry.class);
+        Field field = mock(Field.class);
         Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
         this.model.put(Model.QUERY, "query");
@@ -374,12 +374,12 @@ public class SolrSearchFacetsGeneratorTest {
     @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithRequestMoreTypes() throws Exception {
-        Iterator<FacetQueryEntry> it0 = createMock(Iterator.class);
-        Iterator<Page<FacetFieldEntry>> it1 = createMock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = createMock(Iterator.class);
-        Page<FacetFieldEntry> page1 = createMock(Page.class);
-        FacetFieldEntry ffe = createMock(FacetFieldEntry.class);
-        Field field = createMock(Field.class);
+        Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
+        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
+        Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
+        Page<FacetFieldEntry> page1 = mock(Page.class);
+        FacetFieldEntry ffe = mock(FacetFieldEntry.class);
+        Field field = mock(Field.class);
         Capture<Map<String, Collection<Facet>>> mapCapture = newCapture();
         Capture<SAXResult> saxResultCapture = newCapture();
         this.model.put(Model.QUERY, "query");

@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.metasearch;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -53,5 +54,11 @@ public class HTTPMetaSearchServiceTest {
         assertNotNull(result.getId());
         assertEquals("none", result.getURL());
         assertEquals(1, result.getChildren().size());
+    }
+
+    @Test
+    public void testTestURL() {
+        MetaSearchService service = new HTTPMetaSearchService(this.url, this.mapper, this.timeout);
+        assertArrayEquals("test".getBytes(), service.testURL("url"));
     }
 }

@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -29,8 +29,8 @@ public class UnividDataBinderTest {
     @Before
     public void setUp() {
         this.dataBinder = new UnividDataBinder();
-        this.request = createMock(HttpServletRequest.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.session = mock(HttpSession.class);
     }
 
     @Test

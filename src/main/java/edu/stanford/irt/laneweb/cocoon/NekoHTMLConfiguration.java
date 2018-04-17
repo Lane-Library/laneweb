@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import org.cyberneko.html.HTMLConfiguration;
 
-public class NekoHTMLConfiguration extends HTMLConfiguration {
+public final class NekoHTMLConfiguration extends HTMLConfiguration {
 
     public NekoHTMLConfiguration(final Map<String, String> properties, final Map<String, Boolean> features) {
         for (Entry<String, String> entry : properties.entrySet()) {

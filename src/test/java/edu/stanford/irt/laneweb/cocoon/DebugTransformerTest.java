@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -23,7 +23,7 @@ public class DebugTransformerTest {
 
     @Before
     public void setUp() {
-        this.consumer = createMock(XMLConsumer.class);
+        this.consumer = mock(XMLConsumer.class);
         this.transformer = new DebugTransformer();
         this.transformer.setXMLConsumer(this.consumer);
     }

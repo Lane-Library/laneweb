@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -36,11 +36,11 @@ public class ProxyCredentialControllerTest {
 
     @Before
     public void setUp() {
-        this.ticketBinder = createMock(TicketDataBinder.class);
-        this.userBinder = createMock(UserDataBinder.class);
+        this.ticketBinder = mock(TicketDataBinder.class);
+        this.userBinder = mock(UserDataBinder.class);
         this.controller = new ProxyCredentialController(this.ticketBinder, this.userBinder);
-        this.request = createMock(HttpServletRequest.class);
-        this.model = createMock(Model.class);
+        this.request = mock(HttpServletRequest.class);
+        this.model = mock(Model.class);
     }
 
     @Test

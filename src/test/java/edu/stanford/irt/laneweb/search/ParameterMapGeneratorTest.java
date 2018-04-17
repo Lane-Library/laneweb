@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -33,9 +33,9 @@ public class ParameterMapGeneratorTest {
 
     @Before
     public void setUp() {
-        this.marshaller = createMock(Marshaller.class);
+        this.marshaller = mock(Marshaller.class);
         this.generator = new ParameterMapGenerator(this.marshaller);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

@@ -1,89 +1,64 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertArrayEquals;
 
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 
 public class UrlTesterTest {
 
-    private HttpEntity entity;
+    private MetaSearchService metasearchService;
 
-    private byte[] expectedResult = "response text\n\n\n<!--\n\nRequest Headers:\n\n\n\n\nResponse Headers:\n\nname ==> value\n\n-->"
-            .getBytes();
+    private HttpServletResponse servletResponse;
 
-    private Header header;
-
-    private HttpResponse httpResponse;
-
-    private MetaSearchService metaSearchService;
-
-    private ServletOutputStream outputStream;
-
-    private HttpServletResponse response;
-
-    private String responseText = "response text";
-
-    private UrlTester tester;
+    private UrlTester urlTester;
 
     @Before
-    public void setUp() throws Exception {
-        this.metaSearchService = createMock(MetaSearchService.class);
-        this.tester = new UrlTester(this.metaSearchService);
-        this.response = createMock(HttpServletResponse.class);
-        this.httpResponse = createMock(HttpResponse.class);
-        this.entity = createMock(HttpEntity.class);
-        this.outputStream = createMock(ServletOutputStream.class);
-        this.header = createMock(Header.class);
+    public void setUp() {
+        this.metasearchService = mock(MetaSearchService.class);
+        this.urlTester = new UrlTester(this.metasearchService);
+        this.servletResponse = mock(HttpServletResponse.class);
     }
 
     @Test
     public void testTestUrl() throws IOException {
-        expect(this.metaSearchService.execute(isA(HttpGet.class))).andReturn(this.httpResponse);
-        expect(this.httpResponse.getEntity()).andReturn(this.entity);
-        expect(this.entity.getContent())
-                .andReturn(new ByteArrayInputStream(this.responseText.getBytes(StandardCharsets.UTF_8)));
-        expect(this.entity.getContentLength()).andReturn((long) this.responseText.length()).times(2);
-        this.response.setHeader("Content-Type", "text/plain");
-        expect(this.response.getOutputStream()).andReturn(this.outputStream);
-        expect(this.httpResponse.getAllHeaders()).andReturn(new Header[] { this.header });
-        expect(this.header.getName()).andReturn("name");
-        expect(this.header.getValue()).andReturn("value");
-        this.outputStream.write(aryEq(this.expectedResult));
-        replay(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
-        this.tester.testUrl("url", this.response);
-        verify(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
-    }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ServletOutputStream output = new ServletOutputStream() {
 
-    @Test
-    public void testTestUrlException() throws IOException {
-        expect(this.metaSearchService.execute(isA(HttpGet.class))).andThrow(new IOException());
-        replay(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
-        try {
-            this.tester.testUrl("url", this.response);
-            fail();
-        } catch (LanewebException e) {
-        }
-        verify(this.metaSearchService, this.response, this.httpResponse, this.entity, this.outputStream, this.header);
+            @Override
+            public boolean isReady() {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void setWriteListener(final WriteListener writeListener) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void write(final int b) throws IOException {
+                baos.write(b);
+            }
+        };
+        expect(this.metasearchService.testURL("url")).andReturn("result".getBytes());
+        this.servletResponse.setHeader("Content-Type", "text/plain");
+        expect(this.servletResponse.getOutputStream()).andReturn(output);
+        replay(this.metasearchService, this.servletResponse);
+        this.urlTester.testUrl("url", this.servletResponse);
+        assertArrayEquals("result".getBytes(), baos.toByteArray());
+        verify(this.metasearchService, this.servletResponse);
     }
 }

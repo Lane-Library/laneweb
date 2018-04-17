@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -28,10 +28,10 @@ public class TemplateDataBinderTest {
 
     @Before
     public void setUp() throws Exception {
-        this.chooser = createMock(TemplateChooser.class);
+        this.chooser = mock(TemplateChooser.class);
         this.binder = new TemplateDataBinder(this.chooser);
         this.model = new HashMap<>();
-        this.request = createMock(HttpServletRequest.class);
+        this.request = mock(HttpServletRequest.class);
     }
 
     @Test

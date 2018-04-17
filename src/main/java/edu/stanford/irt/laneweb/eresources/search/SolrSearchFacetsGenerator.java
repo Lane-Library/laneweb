@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources.search;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -74,8 +75,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         // increment by one so we know if "next" link is needed
         this.facetsToShowBrowse = facetsToShowBrowse + 1;
         this.facetsToShowSearch = facetsToShowSearch + 1;
-        this.meshToIgnoreInSearch = meshToIgnoreInSearch;
-        this.prioritizedPublicationTypes = publicationTypes;
+        this.meshToIgnoreInSearch = new HashSet<>(meshToIgnoreInSearch);
+        this.prioritizedPublicationTypes = new HashSet<>(publicationTypes);
         this.comparator = comparator;
     }
 

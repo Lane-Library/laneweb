@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.resource;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class PagingDataTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.resources = createMock(List.class);
+        this.resources = mock(List.class);
         expect(this.resources.size()).andReturn(351);
         replay(this.resources);
         this.data = new PagingData(this.resources, 3, "/foo/bar");
