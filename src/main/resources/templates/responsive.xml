@@ -23,7 +23,7 @@
                         <li><i class="fa fa-envelope fa-fw"></i><a href="/help/feedback.html#askus" rel="lightbox">Ask Us</a></li>
                     </ul>
                 </div>
-                <a href="#nav"><i class="fa fa-bars fa-3x"></i></a>
+                <a href="#nav" class="menu-toggle menu-toggle-on"><i class="fa fa-bars"></i></a>
             </div>
             <form action="/search.html" class="search-form" id="search">
                 <div class="centered">
@@ -99,6 +99,7 @@
                 <?laneweb content?>
             </div>
             <div id="nav" class="nav">
+                <a href="#" class="menu-toggle menu-toggle-off"><i class="fa fa-bars"></i></a>
                 <header>
                     <ul class="login">
                         <li>
