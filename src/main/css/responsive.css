@@ -2,12 +2,27 @@ html, .centered {
     min-width: 0;
 }
 
-a .fa-bars {
-    color: black;
+.menu-toggle {
+    background-color: white;
     display: none;
+    font-size: 42px;
+    line-height: 75px;
     position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100px;
+}
+
+.menu-toggle .fa {
+    color: black;
+}
+
+.menu-toggle-on {
     right: 20px;
-    top: 20px;
+}
+
+.menu-toggle-off {
+    right: 275px;
 }
 
 @media ( max-width : 978px) {
@@ -17,6 +32,9 @@ a .fa-bars {
     h1 {
         height: 77px;
         padding-top: 17px;
+    }
+    .menu-toggle-on {
+        display: block;
     }
     .search-form {
         margin-top: 0;
@@ -32,6 +50,9 @@ a .fa-bars {
         position: absolute;
         top: 0;
         right: 0;
+    }
+    #nav:target .menu-toggle-off {
+        display: block;
     }
     .nav header {
         height: auto;
@@ -130,9 +151,6 @@ a .fa-bars {
     .nav-menu-content .fa,
     .nav-menu-content h5 {
         color: white;
-    }
-    a .fa-bars {
-        display: inline-block;
     }
 }
 
