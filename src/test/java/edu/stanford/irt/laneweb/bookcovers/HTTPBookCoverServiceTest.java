@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
-public class BookCoverServiceTest {
+public class HTTPBookCoverServiceTest {
 
     private ObjectMapper objectMapper;
 
@@ -37,7 +37,7 @@ public class BookCoverServiceTest {
         this.objectMapper = mock(ObjectMapper.class);
         this.uri = getClass().getResource(".").toURI();
         this.uriResolver = mock(ServiceURIResolver.class);
-        this.service = new BookCoverService(this.objectMapper, this.uri, this.uriResolver);
+        this.service = new HTTPBookCoverService(this.objectMapper, this.uri, this.uriResolver);
     }
 
     @Test

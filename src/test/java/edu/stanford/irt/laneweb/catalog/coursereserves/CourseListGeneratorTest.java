@@ -14,8 +14,6 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
-import edu.stanford.irt.coursereserves.CourseReservesService;
-import edu.stanford.irt.coursereserves.JDBCCourseReservesService;
 
 public class CourseListGeneratorTest {
 
@@ -30,7 +28,7 @@ public class CourseListGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.dao = mock(JDBCCourseReservesService.class);
+        this.dao = mock(CourseReservesService.class);
         this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new CourseListGenerator(this.dao, this.saxStrategy);
         this.xmlConsumer = mock(XMLConsumer.class);

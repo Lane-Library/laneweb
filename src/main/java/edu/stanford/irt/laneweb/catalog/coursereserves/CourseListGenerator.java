@@ -6,7 +6,6 @@ import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
-import edu.stanford.irt.coursereserves.CourseReservesService;
 
 public class CourseListGenerator extends AbstractGenerator {
 

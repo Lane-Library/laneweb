@@ -10,7 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.coursereserves.CourseReservesService;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
