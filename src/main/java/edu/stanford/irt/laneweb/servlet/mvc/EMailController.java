@@ -35,10 +35,6 @@ public class EMailController {
 
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
-    private static final String ISSUE_ADDRESS = "lane-issue@med.stanford.edu";
-
-    private static final String ISSUE_PATH = "/lane-issue";
-
     private static final String JSON_MIME_TYPE = "application/json";
 
     private static final String SUBJECT = "subject";
@@ -71,13 +67,6 @@ public class EMailController {
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = ISSUE_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitLaneissue(final Model model, final RedirectAttributes atts) {
-        Map<String, Object> map = model.asMap();
-        sendEmail(ISSUE_ADDRESS, map);
-        return getRedirectTo(map);
-    }
-
     @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
@@ -91,13 +80,6 @@ public class EMailController {
     public void jsonSubmitDocxpress(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
         sendEmail(DOCXPRESS_ADDRESS, feedback);
-    }
-
-    @RequestMapping(value = ISSUE_PATH, consumes = JSON_MIME_TYPE)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void jsonSubmitLaneissue(@RequestBody final Map<String, Object> feedback, final Model model) {
-        feedback.putAll(model.asMap());
-        sendEmail(ISSUE_ADDRESS, feedback);
     }
 
     @ModelAttribute
