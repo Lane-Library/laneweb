@@ -19,8 +19,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -47,7 +45,7 @@ public class FlickrPhotoListCreatorTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testPrintList() throws JsonParseException, JsonMappingException, IOException {
+    public void testPrintList() throws IOException {
         Map<String, String> photoMap = new HashMap<>();
         photoMap.put("owner", "OWNER");
         photoMap.put("id", "ID");
@@ -67,7 +65,7 @@ public class FlickrPhotoListCreatorTest {
 
     @SuppressWarnings("unchecked")
     @Test(expected = LanewebException.class)
-    public void testPrintListError() throws JsonParseException, JsonMappingException, IOException {
+    public void testPrintListError() throws IOException {
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class)))
                 .andReturn(Collections.singletonMap("message", "oopsie"));
         replay(this.objectMapper);
