@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +36,11 @@ public class SolrService {
     public static final String COLLECTION = "laneSearch";
 
     public static final String FACETS_SEPARATOR = "::";
-    
+
+    public static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
+
+    public static final Pattern FACETS_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR);
+
     private static final String ALL_QUERY = "*:*";
 
     private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
@@ -67,6 +72,8 @@ public class SolrService {
     private static final int PAST_TEN_YEARS = CURRENT_YEAR - 10;
 
     private static final int PAST_YEAR = CURRENT_YEAR - 1;
+
+    private static final Pattern SINGLE_SPACE_PATTERN = Pattern.compile(" ");
 
     private static final String TYPE = "type";
 
@@ -213,8 +220,9 @@ public class SolrService {
     }
 
     public List<Eresource> suggestFindAll(final String query) {
-        String cleanQuery = this.parser.parse(query);
-        return this.repository.suggestFindAll(cleanQuery.toLowerCase(Locale.US), cleanQuery.replaceAll(" ", " +"),
+        String parsedQuery = this.parser.parse(query);
+        String plusQuery = SINGLE_SPACE_PATTERN.matcher(parsedQuery).replaceAll(" +");
+        return this.repository.suggestFindAll(parsedQuery.toLowerCase(Locale.US), plusQuery,
                 PageRequest.of(0, PAGE_SIZE));
     }
 
@@ -249,8 +257,8 @@ public class SolrService {
     private String facetStringToFilters(final String facets) {
         String filters = EMPTY;
         if (null != facets) {
-            filters = facets.replaceFirst(FACETS_SEPARATOR + "$", EMPTY);
-            filters = filters.replaceAll(FACETS_SEPARATOR, AND);
+            filters = FACETS_LAST_SEPARATOR_PATTERN.matcher(facets).replaceFirst(EMPTY);
+            filters = FACETS_SEPARATOR_PATTERN.matcher(filters).replaceAll(AND);
         }
         return filters;
     }

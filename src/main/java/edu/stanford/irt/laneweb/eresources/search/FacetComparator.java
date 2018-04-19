@@ -4,11 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.regex.Pattern;
 
 public class FacetComparator implements Comparator<Facet>, Serializable {
 
+    private static final Pattern DATE_PATTERN = Pattern.compile("(date:\\[20.*){2}");
+
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
+
+    private static final Pattern TYPE_PATTERN = Pattern.compile("(type:.*){2}");
 
     private Collection<String> prioritizedPublicationTypes = new ArrayList<>();
 
@@ -28,10 +33,10 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
         String combinedFacetNames = new StringBuilder(facet1Name).append(facet2Name).toString();
         int countDiff = (int) (facet2.getCount() - facet1.getCount());
         int retValue = 0;
-        // case 110630: Move 5 years to be higher then last 10 years within Year filter
-        if (combinedFacetNames.matches("(date:\\[20.*){2}")) {
+        // case 110630: Move 5 years to be higher than last 10 years within Year filter
+        if (DATE_PATTERN.matcher(combinedFacetNames).matches()) {
             retValue = facet2Name.compareTo(facet1Name);
-        } else if (combinedFacetNames.matches("(type:.*){2}")) {
+        } else if (TYPE_PATTERN.matcher(combinedFacetNames).matches()) {
             // case 131450: indent Digital and Print subtypes of Book and Journal
             retValue = facet1Name.compareTo(facet2Name);
         } else if (this.prioritizedPublicationTypes.contains(facet1Name)

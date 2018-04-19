@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.images;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.data.domain.Page;
 import org.xml.sax.SAXException;
@@ -43,6 +44,8 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
     private static final String PREVIOUS_PAGE = "previous-page";
 
     private static final String REGIONS = "regions";
+
+    private static final Pattern SUBREGION_PATTERN = Pattern.compile("_sub_region_");
 
     private static final String TITLE = "title";
 
@@ -135,7 +138,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
         boolean alreadyIn = false;
         StringBuilder sb = new StringBuilder();
         for (String region : regionAndSubRegion) {
-            String[] splittedRegion = region.split("_sub_region_");
+            String[] splittedRegion = SUBREGION_PATTERN.split(region);
             if (alreadyIn && splittedRegion.length > 1) {
                 sb.append(", ");
             }

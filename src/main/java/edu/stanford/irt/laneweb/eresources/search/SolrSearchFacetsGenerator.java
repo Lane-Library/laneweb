@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -35,6 +36,10 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private static final String EMPTY = "";
 
+    private static final Pattern FACET_SEPARATOR_PATTERN = Pattern.compile(SolrService.FACETS_SEPARATOR);
+
+    private static final Pattern LEADING_QUESTIONMARK_PATTERN = Pattern.compile("^?\"$?");
+
     private static final Logger log = LoggerFactory.getLogger(SolrSearchFacetsGenerator.class);
 
     private static final String MESH = "mesh";
@@ -42,6 +47,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
     private static final int PAGE_SIZE = 1000;
 
     private static final String PUBLICATION_TYPE = "publicationType";
+
+    private static final Pattern STARTS_WITH_BOOK_OR_JOURNAL_PATTERN = Pattern.compile("^(Book|Journal).*");
 
     private static final String TYPE = "type";
 
@@ -151,11 +158,11 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (this.facets.isEmpty()) {
             return facetsMap;
         }
-        String[] tokens = this.facets.split(SolrService.FACETS_SEPARATOR);
+        String[] tokens = FACET_SEPARATOR_PATTERN.split(this.facets);
         for (String token2 : tokens) {
             String[] token = token2.split(COLON);
             String fieldName = token[0];
-            String facetValue = token[1].replaceAll("^?\"$?", EMPTY);
+            String facetValue = LEADING_QUESTIONMARK_PATTERN.matcher(token[1]).replaceAll(EMPTY);
             Collection<Facet> facetList = facetsMap.get(fieldName);
             if (null == facetList) {
                 facetList = new ArrayList<>();
@@ -251,7 +258,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             Collection<Facet> allTypes = typeFacetMap.get(TYPE);
             if (null != allTypes) {
                 Collection<Facet> moreTypes = allTypes.stream()
-                        .filter((final Facet s) -> s.getValue().matches("^(Book|Journal).*"))
+                        .filter((final Facet s) -> STARTS_WITH_BOOK_OR_JOURNAL_PATTERN.matcher(s.getValue()).matches())
                         .collect(Collectors.toList());
                 facetList.addAll(moreTypes);
             }

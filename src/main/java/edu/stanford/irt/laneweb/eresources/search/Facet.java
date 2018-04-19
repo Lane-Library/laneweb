@@ -10,6 +10,8 @@ import edu.stanford.irt.laneweb.eresources.SolrService;
 
 public final class Facet {
 
+    private static final Pattern BEGIN_OR_END_FACET_SEPARATOR_PATTERN = Pattern.compile("(^::|::$)");
+
     private static final String BEGINS_WITH_OR_TWO_COLONS = "(^|::)";
 
     private static final String COLON = ":";
@@ -69,7 +71,7 @@ public final class Facet {
             facetUrl = this.activeFacets + joiner + this.fieldName + COLON + getMaybeQuote() + this.value
                     + getMaybeQuote();
         }
-        facetUrl = facetUrl.replaceAll("(^::|::$)", EMPTY);
+        facetUrl = BEGIN_OR_END_FACET_SEPARATOR_PATTERN.matcher(facetUrl).replaceAll(EMPTY);
         return encodeString(facetUrl);
     }
 
