@@ -23,7 +23,9 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public Generator equipmentGenerator(final EquipmentService equipmentService,
+    public Generator equipmentGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.catalog.equipment.EquipmentService")
+            final EquipmentService equipmentService,
             @Qualifier("org.xml.sax.XMLReader/marc") final XMLReader marcXMLReader) {
         return new CatalogRecordGenerator(equipmentService, marcXMLReader);
     }
@@ -34,7 +36,7 @@ public class EquipmentConfiguration {
         return new EquipmentStatusTransformer(equipmentService);
     }
 
-    @Bean
+    @Bean("edu.stanford.irt.laneweb.catalog.equipment.EquipmentService/HTTP")
     public EquipmentService httpEquipmentService(final ObjectMapper objectMapper,
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final ServiceURIResolver uriResolver) {

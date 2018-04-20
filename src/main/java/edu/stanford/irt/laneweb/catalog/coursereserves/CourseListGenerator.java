@@ -9,17 +9,17 @@ import edu.stanford.irt.coursereserves.Course;
 
 public class CourseListGenerator extends AbstractGenerator {
 
-    private CourseReservesService dao;
-
     private SAXStrategy<List<Course>> saxStrategy;
 
-    public CourseListGenerator(final CourseReservesService dao, final SAXStrategy<List<Course>> saxStrategy) {
-        this.dao = dao;
+    private CourseReservesService service;
+
+    public CourseListGenerator(final CourseReservesService service, final SAXStrategy<List<Course>> saxStrategy) {
+        this.service = service;
         this.saxStrategy = saxStrategy;
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        this.saxStrategy.toSAX(this.dao.getCourses(), xmlConsumer);
+        this.saxStrategy.toSAX(this.service.getCourses(), xmlConsumer);
     }
 }

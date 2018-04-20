@@ -29,13 +29,17 @@ public class CourseReservesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
     @Scope("prototype")
-    public Generator courseReservesItemListGenerator(final CourseReservesService courseReservesService) {
+    public Generator courseReservesItemListGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/HTTP")
+            final CourseReservesService courseReservesService) {
         return new CourseReservesItemListGenerator(courseReservesService, coursesReservesItemListSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
     @Scope("prototype")
-    public Generator coursesGenerator(final CourseReservesService courseReservesService) {
+    public Generator coursesGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/HTTP")
+            final CourseReservesService courseReservesService) {
         return new CourseListGenerator(courseReservesService, coursesSAXStrategy());
     }
 
@@ -50,7 +54,7 @@ public class CourseReservesConfiguration {
         return new CoursesSAXStrategy();
     }
 
-    @Bean
+    @Bean("edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/HTTP")
     public CourseReservesService httpCourseReservesService(final ObjectMapper objectMapper,
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final ServiceURIResolver uriResolver) {

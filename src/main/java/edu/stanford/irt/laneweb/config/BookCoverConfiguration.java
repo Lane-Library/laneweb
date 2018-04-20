@@ -17,6 +17,13 @@ import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 @Configuration
 public class BookCoverConfiguration {
 
+    @Bean("edu.stanford.irt.laneweb.bookcovers.BookCoverService/HTTP")
+    public BookCoverService bookCoverService(final ObjectMapper objectMapper,
+            @Qualifier("java.net.URI/bookcover-service") final URI bookCoverServiceURI,
+            final ServiceURIResolver uriResolver) {
+        return new HTTPBookCoverService(objectMapper, bookCoverServiceURI, uriResolver);
+    }
+
     @Bean("java.net.URI/bookcover-service")
     public URI bookcoverServiceURI(
             @Value("${edu.stanford.irt.laneweb.bookcover-service.scheme}") final String scheme,
@@ -25,13 +32,5 @@ public class BookCoverConfiguration {
             @Value("${edu.stanford.irt.laneweb.bookcover-service.path}") final String path)
             throws URISyntaxException {
         return new URI(scheme, null, host, port, path, null, null);
-    }
-    
-    @Bean
-    public BookCoverService bookCoverService(
-            final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/bookcover-service") final URI bookCoverServiceURI,
-            final ServiceURIResolver uriResolver) {
-        return new HTTPBookCoverService(objectMapper, bookCoverServiceURI, uriResolver);
     }
 }

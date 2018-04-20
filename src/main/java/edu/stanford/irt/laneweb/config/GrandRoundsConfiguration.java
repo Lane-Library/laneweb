@@ -21,11 +21,13 @@ public class GrandRoundsConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
     @Scope("prototype")
-    public Generator grandRoundsGenerator(final GrandRoundsService grandRoundsService) {
+    public Generator grandRoundsGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService/HTTP")
+            final GrandRoundsService grandRoundsService) {
         return new GrandRoundsGenerator(grandRoundsService, presentationSAXStrategy());
     }
 
-    @Bean
+    @Bean("edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService/HTTP")
     public GrandRoundsService httpGrandRoundsService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final ServiceURIResolver uriResolver) {
