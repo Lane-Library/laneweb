@@ -24,7 +24,7 @@ public class EquipmentConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
     public Generator equipmentGenerator(
-            @Qualifier("edu.stanford.irt.laneweb.catalog.equipment.EquipmentService")
+            @Qualifier("edu.stanford.irt.laneweb.catalog.equipment.EquipmentService/HTTP")
             final EquipmentService equipmentService,
             @Qualifier("org.xml.sax.XMLReader/marc") final XMLReader marcXMLReader) {
         return new CatalogRecordGenerator(equipmentService, marcXMLReader);
