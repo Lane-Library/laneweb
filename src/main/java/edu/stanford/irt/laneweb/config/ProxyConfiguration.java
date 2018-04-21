@@ -35,7 +35,7 @@ public class ProxyConfiguration {
         return new HtmlProxyLinkTransformer(proxyHostManager);
     }
 
-    @Bean
+    @Bean("edu.stanford.irt.laneweb.proxy.ProxyServersService/HTTP")
     public ProxyServersService httpProxyServersService(final ObjectMapper objectMapper,
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final ServiceURIResolver uriResolver) {

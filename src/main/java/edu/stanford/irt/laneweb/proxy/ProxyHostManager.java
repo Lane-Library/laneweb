@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -28,7 +29,9 @@ public class ProxyHostManager {
 
     private Set<String> proxyHosts;
 
-    public ProxyHostManager(final ProxyServersService service, final ScheduledExecutorService executor) {
+    public ProxyHostManager(
+            @Qualifier("edu.stanford.irt.laneweb.proxy.ProxyServersService/HTTP") final ProxyServersService service,
+            final ScheduledExecutorService executor) {
         this.executor = executor;
         this.proxyHosts = new HashSet<>();
         String proxyHost = null;

@@ -19,7 +19,7 @@ import edu.stanford.lane.catalog.impl.xml.DefaultMarcReader;
 @Configuration
 public class VoyagerConfiguration {
 
-    @Bean
+    @Bean("edu.stanford.irt.laneweb.voyager.LoginService/HTTP")
     public LoginService httpLoginService(final ObjectMapper objectMapper,
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final ServiceURIResolver uriResolver) {
@@ -33,7 +33,8 @@ public class VoyagerConfiguration {
     }
 
     @Bean
-    public VoyagerLogin voyagerLogin(final LoginService loginService) {
+    public VoyagerLogin voyagerLogin(
+            @Qualifier("edu.stanford.irt.laneweb.voyager.LoginService/HTTP") final LoginService loginService) {
         return new VoyagerLogin(loginService);
     }
 }
