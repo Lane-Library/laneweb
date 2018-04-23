@@ -22,6 +22,8 @@ import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemSAXStra
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CoursesSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.coursereserves.HTTPCourseReservesService;
+import edu.stanford.irt.laneweb.catalog.coursereserves.RESTCourseReservesService;
+import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
@@ -33,6 +35,20 @@ public class CourseReservesConfiguration {
             @Qualifier("edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/HTTP")
             final CourseReservesService courseReservesService) {
         return new CourseReservesItemListGenerator(courseReservesService, coursesReservesItemListSAXStrategy());
+    }
+
+    @Bean(name = "edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/HTTP")
+    public CourseReservesService courseReservesService(final ObjectMapper objectMapper,
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
+        return new HTTPCourseReservesService(objectMapper, catalogServiceURI, uriResolver);
+    }
+
+    @Bean(name = "edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/REST")
+    public CourseReservesService courseReservesService(
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final RESTService restService) {
+        return new RESTCourseReservesService(catalogServiceURI, restService);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
@@ -52,12 +68,5 @@ public class CourseReservesConfiguration {
     @Bean
     public SAXStrategy<List<Course>> coursesSAXStrategy() {
         return new CoursesSAXStrategy();
-    }
-
-    @Bean("edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService/HTTP")
-    public CourseReservesService httpCourseReservesService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final ServiceURIResolver uriResolver) {
-        return new HTTPCourseReservesService(objectMapper, catalogServiceURI, uriResolver);
     }
 }

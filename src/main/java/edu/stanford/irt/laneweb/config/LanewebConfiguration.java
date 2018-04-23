@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.config;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +23,15 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.xstream.XStream;
 
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
@@ -33,6 +40,7 @@ import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
 import edu.stanford.irt.laneweb.eresources.search.Facet;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
@@ -54,7 +62,7 @@ import edu.stanford.irt.laneweb.util.ServiceURIResolver;
     "edu.stanford.irt.laneweb.bookmarks"
 })
 public class LanewebConfiguration {
-    
+
     private static final List<String> DEFAULT_LOCATIONS =
             Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
@@ -107,6 +115,11 @@ public class LanewebConfiguration {
     }
 
     @Bean
+    public ClientHttpRequestFactory clientHttpRequestFactory() {
+        return new HttpComponentsClientHttpRequestFactory();
+    }
+
+    @Bean
     public ComponentFactory componentFactory() {
         return new SpringComponentFactory();
     }
@@ -133,6 +146,18 @@ public class LanewebConfiguration {
     @Scope("request")
     public Map<String, Object> model() {
         return new HashMap<>(this.constants);
+    }
+
+    @Bean
+    public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory, ObjectMapper objectMapper) {
+        RestTemplate template =  new RestTemplate(clientHttpRequestFactory);
+        template.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter(objectMapper)));
+        return template;
+    }
+    
+    @Bean
+    public RESTService restService(RestOperations restOperations) {
+        return new RESTService(restOperations);
     }
 
     @Bean

@@ -28,7 +28,7 @@ public class GrandRoundsConfiguration {
     }
 
     @Bean("edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService/HTTP")
-    public GrandRoundsService httpGrandRoundsService(
+    public GrandRoundsService grandRoundsService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final ServiceURIResolver uriResolver) {
         return new HTTPGrandRoundsService(catalogServiceURI, uriResolver);

@@ -19,13 +19,18 @@ public class BookCoverConfigurationTest {
     }
 
     @Test
-    public void testBookCoverService() {
+    public void testBookcoverServiceURI() throws URISyntaxException {
+        URI uri = this.configuration.bookcoverServiceURI("http", "localhost", 80, "/");
+        assertEquals("http://localhost:80/", uri.toString());
+    }
+
+    @Test
+    public void testHttpBookCoverService() {
         assertNotNull(this.configuration.bookCoverService(null, null, null));
     }
 
     @Test
-    public void testBookcoverServiceURI() throws URISyntaxException {
-        URI uri = this.configuration.bookcoverServiceURI("http", "localhost", 80, "/");
-        assertEquals("http://localhost:80/", uri.toString());
+    public void testRestBookCoverService() {
+        assertNotNull(this.configuration.bookCoverService(null, null));
     }
 }

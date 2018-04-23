@@ -22,6 +22,11 @@ public class GrandRoundsConfigurationTest {
     }
 
     @Test
+    public void testHTTPGrandRoundsService() {
+        assertNotNull(this.configuration.grandRoundsService(null, null));
+    }
+
+    @Test
     public void testPresentationSAXStrategy() {
         assertNotNull(this.configuration.presentationSAXStrategy());
     }
