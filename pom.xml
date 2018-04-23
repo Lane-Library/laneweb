@@ -501,7 +501,6 @@
                                 <include>model-min.js</include>
                                 <include>link-info-min.js</include>
                                 <include>lane-ie-min.js</include>
-                                <include>lane-mobile-ad-min.js</include>
                                 <include>lane-persistent-login-min.js</include>
                                 <include>search-indicator-min.js</include>
                                 <include>lane-bassett-min.js</include>
