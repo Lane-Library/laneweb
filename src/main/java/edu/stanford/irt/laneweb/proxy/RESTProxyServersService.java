@@ -11,9 +11,9 @@ public class RESTProxyServersService implements ProxyServersService {
 
     private static final String HOSTS_ENDPOINT = "proxy/hosts";
 
-    public RESTService restservice;
-
     private URI catalogServiceURI;
+
+    private RESTService restservice;
 
     public RESTProxyServersService(final URI catalogServiceURI, final RESTService restService) {
         this.catalogServiceURI = catalogServiceURI;

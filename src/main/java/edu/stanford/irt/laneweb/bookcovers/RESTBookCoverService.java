@@ -14,9 +14,9 @@ public class RESTBookCoverService implements BookCoverService {
     private static final TypeReference<Map<Integer, String>> TYPE = new TypeReference<Map<Integer, String>>() {
     };
 
-    public RESTService restService;
-
     private URI bookCoverServiceURI;
+
+    private RESTService restService;
 
     public RESTBookCoverService(final URI bookCoverServiceURI, final RESTService restService) {
         this.bookCoverServiceURI = bookCoverServiceURI;

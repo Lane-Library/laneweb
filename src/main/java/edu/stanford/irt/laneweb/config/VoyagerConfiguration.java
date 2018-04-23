@@ -34,7 +34,7 @@ public class VoyagerConfiguration {
         return new DefaultMarcReader();
     }
 
-    @Bean("edu.stanford.irt.laneweb.voyager.LoginService/HTTP")
+    @Bean("edu.stanford.irt.laneweb.voyager.LoginService/REST")
     public LoginService loginService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
             final RESTService restService) {
         return new RESTLoginService(catalogServiceURI, restService);
@@ -42,7 +42,7 @@ public class VoyagerConfiguration {
 
     @Bean
     public VoyagerLogin voyagerLogin(
-            @Qualifier("edu.stanford.irt.laneweb.voyager.LoginService/REST") final LoginService loginService) {
+            @Qualifier("edu.stanford.irt.laneweb.voyager.LoginService/HTTP") final LoginService loginService) {
         return new VoyagerLogin(loginService);
     }
 }

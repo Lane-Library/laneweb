@@ -149,14 +149,16 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory, ObjectMapper objectMapper) {
+    public RestOperations restOperations(
+            final ClientHttpRequestFactory clientHttpRequestFactory,
+            final ObjectMapper objectMapper) {
         RestTemplate template =  new RestTemplate(clientHttpRequestFactory);
         template.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter(objectMapper)));
         return template;
     }
-    
+
     @Bean
-    public RESTService restService(RestOperations restOperations) {
+    public RESTService restService(final RestOperations restOperations) {
         return new RESTService(restOperations);
     }
 

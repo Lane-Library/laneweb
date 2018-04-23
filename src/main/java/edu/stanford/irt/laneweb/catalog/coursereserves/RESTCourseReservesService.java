@@ -19,9 +19,9 @@ public class RESTCourseReservesService implements CourseReservesService {
     private static final TypeReference<List<Course>> TYPE = new TypeReference<List<Course>>() {
     };
 
-    public RESTService restService;
-
     private URI catalogServiceURI;
+
+    private RESTService restService;
 
     public RESTCourseReservesService(final URI catalogServiceURI, final RESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
