@@ -12,7 +12,6 @@
     visibility: hidden;
 }
 .yui3-tooltip-trigger {
-    color: #007c92;
     cursor: pointer;
 }
 .yui3-tooltip-content p:last-child {
