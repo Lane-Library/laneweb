@@ -118,7 +118,7 @@ public class LaneCrmController {
         wr.writeBytes(queryString.toString());
         wr.close();
         int responseCode = con.getResponseCode();
-        if (200 != responseCode) {
+        if (HttpsURLConnection.HTTP_OK != responseCode) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<>(HttpStatus.OK);
