@@ -36,6 +36,8 @@ public class LaneCrmController {
 
     private static final String ASKUS_PATH = "/apps/laneaskus";
 
+    private static final String ERROR_URL = "/error.html";
+
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
     private static final String JSON_MIME_TYPE = "application/json";
@@ -43,8 +45,6 @@ public class LaneCrmController {
     private static final String LANELIBACQ_PATH = "/apps/lanelibacqs";
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
-
-	private static final String ERROR_URL = "/error.html";
 
     private String acquisitionURL;
 
@@ -79,23 +79,23 @@ public class LaneCrmController {
         return getRedirectTo(map, response);
     }
 
-    @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
-    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback) throws IOException {
-    	return submitRequestToCrmServer(feedback, this.acquisitionURL);
+    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
+    public ResponseEntity<String> jsonSubmitLaneaskus(@RequestBody final Map<String, Object> feedback)
+            throws IOException {
+        return submitRequestToCrmServer(feedback, this.askUsURL);
     }
 
-    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
-    public ResponseEntity<String> jsonSubmitLaneaskus(@RequestBody final Map<String, Object> feedback) throws IOException {
-    	return submitRequestToCrmServer(feedback, this.askUsURL);
+    @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
+    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback)
+            throws IOException {
+        return submitRequestToCrmServer(feedback, this.acquisitionURL);
     }
-    
-    
-    private String getRedirectTo(final Map<String, Object> map, ResponseEntity<String> response) {
+
+    private String getRedirectTo(final Map<String, Object> map, final ResponseEntity<String> response) {
         String redirectTo = (String) map.get("redirect");
-        if(!response.getStatusCode().equals(HttpStatus.OK)){
-        	redirectTo = ERROR_URL;
-    	}
-        else if (redirectTo == null) {
+        if (!response.getStatusCode().equals(HttpStatus.OK)) {
+            redirectTo = ERROR_URL;
+        } else if (redirectTo == null) {
             redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
         }
         if (redirectTo == null) {
@@ -104,7 +104,8 @@ public class LaneCrmController {
         return "redirect:" + redirectTo;
     }
 
-    private ResponseEntity<String> submitRequestToCrmServer(final Map<String, Object> feedback, final String crmUrl) throws IOException {
+    private ResponseEntity<String> submitRequestToCrmServer(final Map<String, Object> feedback, final String crmUrl)
+            throws IOException {
         StringBuilder queryString = new StringBuilder();
         for (Entry<String, Object> entry : feedback.entrySet()) {
             queryString.append(entry.getKey()).append('=').append(URLEncoder.encode(entry.getValue().toString(), UTF_8))
@@ -116,10 +117,10 @@ public class LaneCrmController {
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(queryString.toString());
         wr.close();
-         int responseCode = con.getResponseCode();
-         if(200 != responseCode){
-        	 return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR); 
-         }
-    	 return new ResponseEntity<String>(HttpStatus.OK);
+        int responseCode = con.getResponseCode();
+        if (200 != responseCode) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
