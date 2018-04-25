@@ -147,7 +147,8 @@ public class CacheSourceResolver implements SourceResolver {
                 baos.write(buffer, 0, i);
             }
         } catch (IOException e) {
-            throw new CacheSourceException("failed to get bytes", e);
+            String message = String.format("failed to get bytes from {}", source.getURI());
+            throw new CacheSourceException(message, e);
         }
         return baos.toByteArray();
     }
