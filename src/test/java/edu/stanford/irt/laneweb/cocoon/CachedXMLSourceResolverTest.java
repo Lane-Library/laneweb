@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
@@ -65,6 +66,7 @@ public class CachedXMLSourceResolverTest {
     public void testGetBytesFromSourceThrowsException() {
         this.saxParser.parse(eq(this.source), isA(XMLConsumer.class));
         expectLastCall().andThrow(new XMLException("oops"));
+        expect(this.source.getURI()).andReturn("uri");
         replay(this.cache, this.sourceResolver, this.saxParser, this.source);
         assertNotNull(this.resolver.getBytesFromSource(this.source));
         verify(this.cache, this.sourceResolver, this.saxParser, this.source);

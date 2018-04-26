@@ -79,6 +79,7 @@ public class CacheSourceResolverTest {
         expect(this.cache.get(new URI("cache:20:http://www.example.com/"))).andReturn(null);
         expect(this.sourceResolver.resolveURI(new URI("http://www.example.com/"))).andReturn(this.source);
         expect(this.source.getInputStream()).andThrow(new IOException());
+        expect(this.source.getURI()).andReturn("http://www.example.com/");
         replay(this.cache, this.sourceResolver, this.cachedResponse, this.validity, this.source);
         try {
             this.cacheSourceResolver.resolveURI(new URI("cache:20:http://www.example.com/"));
@@ -132,6 +133,7 @@ public class CacheSourceResolverTest {
         expect(this.validity.isValid()).andReturn(false);
         expect(this.sourceResolver.resolveURI(new URI("http://www.example.com/"))).andReturn(this.source);
         expect(this.source.getInputStream()).andThrow(new SocketTimeoutException());
+        expect(this.source.getURI()).andReturn("\"http://www.example.com/\"");
         expect(this.cachedResponse.getBytes()).andReturn("foo".getBytes());
         replay(this.cache, this.sourceResolver, this.cachedResponse, this.validity, this.source);
         Source source = this.cacheSourceResolver.resolveURI(new URI("cache:20:http://www.example.com/"));

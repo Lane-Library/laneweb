@@ -53,7 +53,7 @@ public class CachedXMLSourceResolver extends CacheSourceResolver {
         try {
             this.parser.parse(source, compiler);
         } catch (XMLException e) {
-            String message = String.format("failed to get bytes from {}", source.getURI());
+            String message = String.format("failed to get bytes from %s", source.getURI());
             throw new CacheSourceException(message, e);
         }
         return compiler.getBytes();
