@@ -14,6 +14,7 @@ include ${SCRIPTS_DIR}/makefile_parts/shared.mk
 include ${SCRIPTS_DIR}/makefile_parts/vault.mk
 include ${SCRIPTS_DIR}/makefile_parts/docker-compose.mk
 include ${SCRIPTS_DIR}/makefile_parts/drone08.mk
+include ${SCRIPTS_DIR}/makefile_parts/deps.mk
 # END COMMON MAKEFILE PARTS INCLUDES
 
 .PHONY: build
