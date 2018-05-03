@@ -5,15 +5,23 @@
     background-color: #f2f3ed;
     text-align: left;
 }
+
 .yui3-tooltip {
     position: absolute;
 }
+
 .yui3-tooltip-hidden {
     visibility: hidden;
 }
+
 .yui3-tooltip-trigger {
     cursor: pointer;
 }
+
 .yui3-tooltip-content p:last-child {
     margin-bottom: 0;
+}
+
+.tooltip-trigger {
+    color: #007c92;
 }
