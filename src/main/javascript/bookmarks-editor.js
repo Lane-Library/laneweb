@@ -3,7 +3,8 @@
     "use strict";
 
     var BookmarksEditor,
-        BookmarkEditor = L.BookmarkEditor;
+        BookmarkEditor = L.BookmarkEditor,
+        editorsNode = document.querySelector("#bookmarks-editor");
 
 
     /**
@@ -356,10 +357,19 @@
     });
 
     //Create a new BookmarksEditor
-    if (L.BookmarksWidget && document.querySelector("#bookmarks-editor")) {
-        L.BookmarksEditor = new BookmarksEditor({
-            srcNode : "#bookmarks-editor",
-            bookmarks : L.BookmarksWidget.get("bookmarks"),
-            render : true});
+    if (editorsNode) {
+        if (L.BookmarksWidget) {
+            L.BookmarksEditor = new BookmarksEditor({
+                srcNode : "#bookmarks-editor",
+                bookmarks : L.BookmarksWidget.get("bookmarks"),
+                render : true});
+        } else {
+            // case 141805 bookmark edit buttons fail if bookmarks editor not initialized
+            editorsNode.querySelectorAll("button").forEach(function(node) {
+                node.addEventListener("click", function(event) {
+                    event.preventDefault();
+                });
+            });
+        }
     }
 })();
