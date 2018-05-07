@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-05-07" version="3.5.9" description="3.5.9 bug fix release">
+            <action date="2018-45-24" dev="ceyates" issue="141396" type="fix">
+                search tab font color
+            </action>
+        </release>
         <release date="2018-04-23" version="3.5.8" description="3.5.8 bug fix release">
             <action date="2018-04-23" dev="ceyates" issue="141336" type="fix">
                 header links on some mobile devices displayed incorrectly
