@@ -487,6 +487,7 @@
                                 <includes>youtube-thumbnail-min.css</includes>
                                 <includes>calendar-min.css</includes>
                                 <includes>password-table-min.css</includes>
+                                <include>portals-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
