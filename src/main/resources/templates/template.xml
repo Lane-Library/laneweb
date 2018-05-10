@@ -135,9 +135,6 @@
                             </div>
                         </li>
                         <li class="login-item-active">
-                            <a href="/translated/chinese.html">查詢</a>
-                        </li>
-                        <li class="login-item-active">
                             <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
                         </li>
                     </ul>

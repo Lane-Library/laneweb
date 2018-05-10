@@ -80,8 +80,7 @@ html, .centered {
         padding: 0;
         text-align: center;
     }
-    .login > .login-item-active:nth-child(7),
-    .login > .login-item-active:nth-child(8) {
+    .login > .login-item-active:nth-child(7) {
         display: none;
     }
     .login > :nth-child(2) {
@@ -89,8 +88,9 @@ html, .centered {
         padding: 10px 0;
         text-align: left;
     }
-    .login > :nth-child(9) {
+    .login > :nth-child(8) {
         border: 1px solid #878787;
+        margin-left: 0;
     }
     .login > li a {
         display: block;
