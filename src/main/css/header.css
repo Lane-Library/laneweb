@@ -84,6 +84,7 @@ h1 a:active, h1 a:visited, h1 a:hover {
 }
 
 .login > :nth-child(8) {
+    border-right: 1px rgb(135, 135, 135) solid;
     margin-left: 38px;
 }
 
