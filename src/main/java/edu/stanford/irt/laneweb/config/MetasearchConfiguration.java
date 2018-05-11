@@ -60,6 +60,7 @@ public class MetasearchConfiguration {
         engines.add("pubmed");
         engines.add("pubmed_clinicaltrial");
         engines.add("pubmed_cochrane_reviews");
+        engines.add("pubmed_cost");
         engines.add("pubmed_diagnosis_focused");
         engines.add("pubmed_epidemiology_focused");
         engines.add("pubmed_etiology_focused");
@@ -146,7 +147,9 @@ public class MetasearchConfiguration {
         engines.add("aapwebsite");
         engines.add("dynamed_allchild");
         engines.add("guideline_clearinghouse_allchild");
+        engines.add("pubmed_allchild");
         engines.add("pubmed_clinicaltrial_allchild");
+        engines.add("pubmed_cost_allchild");
         engines.add("pubmed_diagnosis_focused_allchild");
         engines.add("pubmed_epidemiology_focused_allchild");
         engines.add("pubmed_etiology_focused_allchild");
