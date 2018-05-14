@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.catalog.grandrounds;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -40,8 +40,8 @@ public class PresentationSAXStrategyTest {
     public void setUp() {
         this.strategy = new PresentationSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
-        this.presentation = createMock(Presentation.class);
-        this.link = createMock(Link.class);
+        this.presentation = mock(Presentation.class);
+        this.link = mock(Link.class);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PresentationSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws IOException, SAXException, URISyntaxException {
-        XMLConsumer mockXMLConsumer = createMock(XMLConsumer.class);
+        XMLConsumer mockXMLConsumer = mock(XMLConsumer.class);
         expect(this.presentation.getId()).andReturn(0);
         expect(this.presentation.getDate()).andReturn(null);
         expect(this.presentation.getLinks()).andReturn(null);

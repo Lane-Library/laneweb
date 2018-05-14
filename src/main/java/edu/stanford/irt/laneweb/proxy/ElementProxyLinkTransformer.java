@@ -11,7 +11,7 @@ public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private StringBuilder builder = new StringBuilder(BUILDER_CAPACITY);
 
-    private boolean building = false;
+    private boolean building;
 
     private String elementName;
 

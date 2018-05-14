@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -24,6 +23,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -76,7 +77,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setUrlMap(Collections.singletonMap("/**/*.*", staticRequestHandler));
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
-        handlerMapping.setInterceptors(new Object[] { redirectHandlerInterceptor() });
+        handlerMapping.setInterceptors(redirectHandlerInterceptor());
         return handlerMapping;
     }
 
@@ -101,11 +102,18 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
+    public UrlBasedViewResolver redirectViewResolver() {
+        UrlBasedViewResolver redirectViewResolver = new UrlBasedViewResolver();
+        redirectViewResolver.setViewClass(RedirectView.class);
+        return redirectViewResolver;
+    }
+
+    @Bean
     public ResourceHttpRequestHandler staticRequestHandler(
             @Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase) throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new Resource[] { new ClassPathResource("/"),
-                new ClassPathResource("/static/"), new UrlResource(liveBase.toURL()) }));
+        handler.setLocations(Arrays.asList(new ClassPathResource("/"),
+                new ClassPathResource("/static/"), new UrlResource(liveBase.toURL())));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

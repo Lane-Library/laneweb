@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertFalse;
@@ -29,10 +29,10 @@ public class RedirectHandlerInterceptorTest {
 
     @Before
     public void setUp() {
-        this.redirectProcessor = createMock(RedirectProcessor.class);
+        this.redirectProcessor = mock(RedirectProcessor.class);
         this.interceptor = new RedirectHandlerInterceptor(this.redirectProcessor);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
     }
 
     @Test

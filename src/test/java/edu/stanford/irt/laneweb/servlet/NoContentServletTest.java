@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -21,7 +21,7 @@ public class NoContentServletTest {
     @Before
     public void setUp() throws Exception {
         this.filter = new NoContentServlet();
-        this.response = createMock(HttpServletResponse.class);
+        this.response = mock(HttpServletResponse.class);
     }
 
     @Test

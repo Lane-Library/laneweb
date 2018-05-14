@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
 
 import org.apache.solr.client.solrj.SolrClient;
@@ -88,6 +88,6 @@ public class EresourcesConfigurationTest {
 
     @Test
     public void testSolrTemplate() {
-        assertNotNull(this.configuration.solrTemplate(createMock(SolrClient.class)));
+        assertNotNull(this.configuration.solrTemplate(mock(SolrClient.class)));
     }
 }

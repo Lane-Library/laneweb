@@ -5,13 +5,10 @@ package edu.stanford.irt.laneweb.search;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.regex.Pattern;
 
 import org.junit.Test;
-
-import edu.stanford.irt.laneweb.LanewebException;
 
 /**
  * @author ryanmax
@@ -86,12 +83,8 @@ public class QueryTermPatternTest {
     @Test
     public void testOpenSquareBracket() {
         String openSquareBracket = "atyp[ical meningiomas";
-        try {
-            Pattern pattern = QueryTermPattern.getPattern(openSquareBracket);
-            assertTrue(pattern.matcher(openSquareBracket).matches());
-        } catch (LanewebException e) {
-            fail("getPattern() should handle a String an open square bracket");
-        }
+        Pattern pattern = QueryTermPattern.getPattern(openSquareBracket);
+        assertTrue(pattern.matcher(openSquareBracket).matches());
     }
 
     @Test

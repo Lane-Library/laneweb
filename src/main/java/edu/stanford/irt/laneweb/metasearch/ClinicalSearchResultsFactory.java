@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.metasearch;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class ClinicalSearchResultsFactory {
         this.conversionStrategy = conversionStrategy;
     }
 
-    public ClinicalSearchResults createResults(final Result result, final String query, final List<String> facets,
+    public ClinicalSearchResults createResults(final Result result, final String query, final Collection<String> facets,
             final int page) {
         List<Result> resourceResults = result
                 .getChildren()

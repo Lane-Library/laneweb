@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.model;
 /**
  * Model for sitemap components.
  */
-public class Model {
+public final class Model {
 
     public static final String ACTION = "action";
 

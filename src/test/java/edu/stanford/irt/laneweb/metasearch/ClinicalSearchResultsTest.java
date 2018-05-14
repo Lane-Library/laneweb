@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
@@ -26,7 +26,7 @@ public class ClinicalSearchResultsTest {
     @Before
     public void setUp() {
         this.resourceResults = Collections.emptyList();
-        this.searchResults = createMock(PagingList.class);
+        this.searchResults = mock(PagingList.class);
         this.total = 10;
         this.results = new ClinicalSearchResults(this.resourceResults, this.searchResults, this.total);
     }

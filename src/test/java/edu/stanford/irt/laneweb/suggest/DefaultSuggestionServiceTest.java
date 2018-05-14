@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.suggest;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
@@ -35,14 +35,14 @@ public class DefaultSuggestionServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        this.eresource = createMock(SolrSuggestionManager.class);
-        this.mesh = createMock(MeshSuggestionManager.class);
+        this.eresource = mock(SolrSuggestionManager.class);
+        this.mesh = mock(MeshSuggestionManager.class);
         this.service = new DefaultSuggestionService(this.eresource, this.mesh);
     }
 
     @Test
     public void testGetSuggestions() throws IOException {
-        Suggestion suggestion = createMock(Suggestion.class);
+        Suggestion suggestion = mock(Suggestion.class);
         expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis").atLeastOnce();
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
         replay(suggestion, this.eresource, this.mesh);

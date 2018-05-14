@@ -1,10 +1,9 @@
 package edu.stanford.irt.laneweb.util;
 
 import org.xml.sax.Attributes;
+import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
-
-import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 /**
  * XML utility methods.
@@ -20,17 +19,17 @@ public final class XMLUtils {
         // empty default constructor
     }
 
-    public static void createElement(final XMLConsumer xmlConsumer, final String ns, final String name,
+    public static void createElement(final ContentHandler contentHandler, final String ns, final String name,
             final AttributesImpl atts, final String text) throws SAXException {
-        startElement(xmlConsumer, ns, name, atts);
-        data(xmlConsumer, text);
-        endElement(xmlConsumer, ns, name);
+        startElement(contentHandler, ns, name, atts);
+        data(contentHandler, text);
+        endElement(contentHandler, ns, name);
     }
 
     /**
      * Create a start and endElement without Attributes The content of the Element is set to the stringValue parameter
      *
-     * @param xmlConsumer
+     * @param contentHandler
      *            The SAX content handler
      * @param namespaceURI
      *            The Namespace URI
@@ -41,25 +40,25 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void createElementNS(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
-            final String stringValue) throws SAXException {
-        startElement(xmlConsumer, namespaceURI, localName);
-        data(xmlConsumer, stringValue);
-        endElement(xmlConsumer, namespaceURI, localName);
+    public static void createElementNS(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName, final String stringValue) throws SAXException {
+        startElement(contentHandler, namespaceURI, localName);
+        data(contentHandler, stringValue);
+        endElement(contentHandler, namespaceURI, localName);
     }
 
     /**
      * Add string data
      *
-     * @param xmlConsumer
+     * @param contentHandler
      *            The SAX content handler
      * @param data
      *            The string data
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void data(final XMLConsumer xmlConsumer, final String data) throws SAXException {
-        xmlConsumer.characters(data.toCharArray(), 0, data.length());
+    public static void data(final ContentHandler contentHandler, final String data) throws SAXException {
+        contentHandler.characters(data.toCharArray(), 0, data.length());
     }
 
     /**
@@ -68,7 +67,7 @@ public final class XMLUtils {
      * For information on the names, see startElement.
      * </p>
      *
-     * @param xmlConsumer
+     * @param contentHandler
      *            The SAX content handler
      * @param namespaceURI
      *            The Namespace URI
@@ -77,22 +76,22 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void endElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName)
-            throws SAXException {
-        xmlConsumer.endElement(namespaceURI, localName, localName);
+    public static void endElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName) throws SAXException {
+        contentHandler.endElement(namespaceURI, localName, localName);
     }
 
-    public static void maybeCreateElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String name,
-            final Object value) throws SAXException {
+    public static void maybeCreateElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String name, final Object value) throws SAXException {
         if (value != null && !"".equals(value)) {
-            XMLUtils.createElementNS(xmlConsumer, namespaceURI, name, value.toString());
+            XMLUtils.createElementNS(contentHandler, namespaceURI, name, value.toString());
         }
     }
 
     /**
      * Create a startElement without Attributes Prefix must be mapped to empty String
      *
-     * @param xmlConsumer
+     * @param contentHandler
      *            The SAX content handler
      * @param namespaceURI
      *            The Namespace URI
@@ -101,15 +100,15 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void startElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName)
-            throws SAXException {
-        xmlConsumer.startElement(namespaceURI, localName, localName, EMPTY_ATTRIBUTES);
+    public static void startElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName) throws SAXException {
+        contentHandler.startElement(namespaceURI, localName, localName, EMPTY_ATTRIBUTES);
     }
 
     /**
      * Create a startElement with a empty Namespace Prefix must be mapped to empty String
      *
-     * @param xmlConsumer
+     * @param contentHandler
      *            The SAX content handler
      * @param namespaceURI
      *            The Namespace URI
@@ -121,8 +120,8 @@ public final class XMLUtils {
      * @exception org.xml.sax.SAXException
      *                Any SAX exception, possibly wrapping another exception.
      */
-    public static void startElement(final XMLConsumer xmlConsumer, final String namespaceURI, final String localName,
-            final Attributes atts) throws SAXException {
-        xmlConsumer.startElement(namespaceURI, localName, localName, atts);
+    public static void startElement(final ContentHandler contentHandler, final String namespaceURI,
+            final String localName, final Attributes atts) throws SAXException {
+        contentHandler.startElement(namespaceURI, localName, localName, atts);
     }
 }

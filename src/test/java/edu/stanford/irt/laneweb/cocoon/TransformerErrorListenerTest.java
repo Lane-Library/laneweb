@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -24,8 +24,8 @@ public class TransformerErrorListenerTest {
     @Before
     public void setUp() {
         this.listener = new TransformerErrorListener();
-        this.exception = createMock(TransformerException.class);
-        this.locator = createMock(SourceLocator.class);
+        this.exception = mock(TransformerException.class);
+        this.locator = mock(SourceLocator.class);
     }
 
     @Test

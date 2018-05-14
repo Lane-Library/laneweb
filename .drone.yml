@@ -1,7 +1,7 @@
 pipeline:
 
   build:
-    image: gcr.io/som-laneweb/maven-grover
+    image: gcr.io/som-laneweb/maven-grover:3-jdk-8-slim
     commands:
       - mvn -B -q -s settings.xml package
     when:
@@ -25,10 +25,10 @@ pipeline:
     repositories:
       - irt-lane/kube-laneweb
     fork: true
+    wait: true
     secrets: [ downstream_token ]
     when:
       status: success
-      branch: master
 
   slack:
     image: plugins/slack

@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -40,14 +40,14 @@ public class HTMLBookmarkControllerTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.bookmarkService = createMock(BookmarkService.class);
-        this.bookmarkDataBinder = createMock(BookmarkDataBinder.class);
-        this.userDataBinder = createMock(UserDataBinder.class);
+        this.bookmarkService = mock(BookmarkService.class);
+        this.bookmarkDataBinder = mock(BookmarkDataBinder.class);
+        this.userDataBinder = mock(UserDataBinder.class);
         this.controller = new HTMLBookmarkController(this.bookmarkService, this.bookmarkDataBinder,
                 this.userDataBinder);
-        this.redirectAttributes = createMock(RedirectAttributes.class);
-        this.bookmarks = createMock(List.class);
-        this.session = createMock(HttpSession.class);
+        this.redirectAttributes = mock(RedirectAttributes.class);
+        this.bookmarks = mock(List.class);
+        this.session = mock(HttpSession.class);
     }
 
     @Test

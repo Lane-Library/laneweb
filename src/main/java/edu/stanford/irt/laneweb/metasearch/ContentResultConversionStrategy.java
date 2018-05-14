@@ -32,7 +32,7 @@ public class ContentResultConversionStrategy {
         return results;
     }
 
-    public List<SearchResult> convertResults(final Collection<Result> results, final String query) {
+    public List<SearchResult> convertResults(final Iterable<Result> results, final String query) {
         Map<SearchResult, SearchResult> resultMap = new HashMap<>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(query);
         for (Result result : results) {

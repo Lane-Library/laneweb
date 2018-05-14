@@ -1,9 +1,7 @@
 package edu.stanford.irt.laneweb.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -12,30 +10,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.zip.GZIPInputStream;
 
-import edu.stanford.irt.laneweb.LanewebException;
+public class ServiceURIResolver {
 
-public final class IOUtils {
-
-    private IOUtils() {
-        // private empty constructor
-    }
-
-    public static String getResourceAsString(final Class<?> clazz, final String name) {
-        StringBuilder sb = new StringBuilder();
-        try (InputStream input = clazz.getResourceAsStream(name);
-                InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
-                BufferedReader b = new BufferedReader(reader)) {
-            String s;
-            while ((s = b.readLine()) != null) {
-                sb.append(s).append('\n');
-            }
-        } catch (IOException e) {
-            throw new LanewebException(e);
-        }
-        return sb.toString();
-    }
-
-    public static InputStream getStream(final URI uri) throws IOException {
+    public InputStream getInputStream(final URI uri) throws IOException {
         InputStream inputStream;
         URL url = uri.toURL();
         URLConnection connection = url.openConnection();

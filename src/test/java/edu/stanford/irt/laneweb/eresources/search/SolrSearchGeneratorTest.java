@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -35,8 +35,8 @@ public class SolrSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(SolrService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.service = mock(SolrService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new SolrSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<>();
     }

@@ -66,7 +66,7 @@ public class LanewebConfigurationTest {
         expect(resourceLoader.getResource("file:./config/application.properties")).andReturn(null);
         expect(resourceLoader.getResource("file:/laneweb.properties")).andReturn(null);
         expect(resourceLoader.getResource("file:/etc/laneweb.conf")).andReturn(null);
-        expect(environment.getActiveProfiles()).andReturn(new String[] {"gce"});
+        expect(environment.getActiveProfiles()).andReturn(new String[] { "gce" });
         expect(resourceLoader.getResource("classpath:/application-gce.properties")).andReturn(null);
         expect(resourceLoader.getResource("classpath:/config/application-gce.properties")).andReturn(null);
         expect(resourceLoader.getResource("file:./application-gce.properties")).andReturn(null);
@@ -76,5 +76,10 @@ public class LanewebConfigurationTest {
         replay(environment, resourceLoader);
         assertNotNull(LanewebConfiguration.propertySourcesPlaceholderConfigurer(environment, resourceLoader));
         verify(environment, resourceLoader);
+    }
+
+    @Test
+    public void testServiceURIResolver() {
+        assertNotNull(this.configuration.serviceURIResolver());
     }
 }

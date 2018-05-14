@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.flickr;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -19,8 +19,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -40,14 +38,14 @@ public class FlickrPhotoListCreatorTest {
 
     @Before
     public void setUp() throws IOException {
-        this.objectMapper = createMock(ObjectMapper.class);
+        this.objectMapper = mock(ObjectMapper.class);
         this.creator = new FlickrPhotoListCreator("apiKey", "file:/", this.objectMapper);
-        this.photo = createMock(FlickrPhoto.class);
+        this.photo = mock(FlickrPhoto.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testPrintList() throws JsonParseException, JsonMappingException, IOException {
+    public void testPrintList() throws IOException {
         Map<String, String> photoMap = new HashMap<>();
         photoMap.put("owner", "OWNER");
         photoMap.put("id", "ID");
@@ -67,7 +65,7 @@ public class FlickrPhotoListCreatorTest {
 
     @SuppressWarnings("unchecked")
     @Test(expected = LanewebException.class)
-    public void testPrintListError() throws JsonParseException, JsonMappingException, IOException {
+    public void testPrintListError() throws IOException {
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class)))
                 .andReturn(Collections.singletonMap("message", "oopsie"));
         replay(this.objectMapper);

@@ -11,10 +11,22 @@ import org.springframework.ldap.core.support.LdapContextSource;
 
 import edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy;
 import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.laneweb.user.LoginContextFactory;
 import edu.stanford.irt.laneweb.user.SubjectSource;
 
 @Configuration
 public class UserConfiguration {
+
+    @Bean
+    public LdapContextSource ldapContextSource() {
+        LdapContextSource contextSource = new LdapContextSource();
+        contextSource.setUrl("ldap://ldap.stanford.edu/");
+        contextSource.setBase("cn=people,dc=stanford,dc=edu");
+        contextSource.setAuthenticationStrategy(new GSSAPIAuthenticationStrategy());
+        contextSource
+                .setBaseEnvironmentProperties(Collections.singletonMap("com.sun.jndi.ldap.connect.timeout", "5000"));
+        return contextSource;
+    }
 
     @Bean
     public LDAPDataAccess ldapDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource) {
@@ -47,18 +59,17 @@ public class UserConfiguration {
     }
 
     @Bean
-    public LdapTemplate ldapTemplate() {
-        LdapContextSource ldapContextSource = new LdapContextSource();
-        ldapContextSource.setUrl("ldap://ldap.stanford.edu/");
-        ldapContextSource.setBase("cn=people,dc=stanford,dc=edu");
-        ldapContextSource.setAuthenticationStrategy(new GSSAPIAuthenticationStrategy());
-        ldapContextSource
-                .setBaseEnvironmentProperties(Collections.singletonMap("com.sun.jndi.ldap.connect.timeout", "5000"));
+    public LdapTemplate ldapTemplate(final LdapContextSource ldapContextSource) {
         return new LdapTemplate(ldapContextSource);
     }
 
     @Bean
-    public SubjectSource subjectSource() {
-        return new SubjectSource("IRT_K5");
+    public LoginContextFactory loginContextFactory() {
+        return new LoginContextFactory("IRT_K5");
+    }
+
+    @Bean
+    public SubjectSource subjectSource(final LoginContextFactory loginContextFactory) {
+        return new SubjectSource(loginContextFactory);
     }
 }

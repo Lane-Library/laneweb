@@ -3,8 +3,8 @@
  */
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -49,9 +49,9 @@ public class MobileSiteInterceptorTest {
         this.desktopRedirects.put("/index.html", "/m/index.html");
         this.desktopRedirects.put("/biomed-resources/eb.html", "/m/book.html");
         this.desktopRedirects.put("/biomed-resources/ej.html", "/m/ej.html");
-        this.device = createMock(Device.class);
+        this.device = mock(Device.class);
         this.response = new MockHttpServletResponse();
-        this.sitePreferenceHandler = createMock(StandardSitePreferenceHandler.class);
+        this.sitePreferenceHandler = mock(StandardSitePreferenceHandler.class);
         this.interceptor = new MobileSiteInterceptor(this.sitePreferenceHandler, this.desktopRedirects);
     }
 

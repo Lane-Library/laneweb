@@ -15,8 +15,8 @@ public class UserConfigurationTest {
     }
 
     @Test
-    public void testLdapTemplate() {
-        assertNotNull(this.configuration.ldapTemplate());
+    public void testLdapContextSource() {
+        assertNotNull(this.configuration.ldapContextSource());
     }
 
     @Test
@@ -25,7 +25,17 @@ public class UserConfigurationTest {
     }
 
     @Test
+    public void testLdapTemplate() {
+        assertNotNull(this.configuration.ldapTemplate(null));
+    }
+
+    @Test
+    public void testLoginContextFactory() {
+        assertNotNull(this.configuration.loginContextFactory());
+    }
+
+    @Test
     public void testSubjectSource() {
-        assertNotNull(this.configuration.subjectSource());
+        assertNotNull(this.configuration.subjectSource(null));
     }
 }

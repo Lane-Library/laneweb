@@ -9,7 +9,6 @@ import edu.stanford.irt.laneweb.model.Model;
 public class ParameterMapDataBinder implements DataBinder {
 
     @Override
-    @SuppressWarnings("rawtypes")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Map parameterMap = request.getParameterMap();
         if (!parameterMap.isEmpty()) {

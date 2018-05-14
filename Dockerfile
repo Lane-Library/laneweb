@@ -1,15 +1,14 @@
-FROM alpine:3.4
+FROM openjdk:jre-alpine
 
-RUN apk add --no-cache bash git openssh 
+RUN apk --update add \
+    fontconfig \
+    ttf-dejavu
 
-COPY assets/start.sh /start.sh
-COPY target/laneweb.war ROOT.war
+COPY target/laneweb.war laneweb.war
 
-# volume to be shared with tomcat
-VOLUME /base/webapps
-VOLUME /content
+VOLUME /config
+VOLUME /secrets
 
-# volume for git deploy keys
-VOLUME /keys
+ENV SPRING_CONFIG_LOCATION=/secrets/application.properties,/config/application.properties
 
-CMD ["/start.sh"]
+CMD ["java", "-jar", "laneweb.war"]

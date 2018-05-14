@@ -18,6 +18,9 @@ import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
 import edu.stanford.irt.laneweb.proxy.ProxyLinkSelector;
 import edu.stanford.irt.laneweb.proxy.ProxyServersService;
+import edu.stanford.irt.laneweb.proxy.RESTProxyServersService;
+import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 public class ProxyConfiguration {
@@ -34,19 +37,29 @@ public class ProxyConfiguration {
         return new HtmlProxyLinkTransformer(proxyHostManager);
     }
 
-    @Bean
-    public ProxyServersService httpProxyServersService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI) {
-        return new HTTPProxyServersService(objectMapper, catalogServiceURI);
+    @Bean("edu.stanford.irt.laneweb.proxy.ProxyServersService/HTTP")
+    public ProxyServersService proxyServersService(final ObjectMapper objectMapper,
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final ServiceURIResolver uriResolver) {
+        return new HTTPProxyServersService(objectMapper, catalogServiceURI, uriResolver);
     }
 
     @Bean(destroyMethod = "destroy")
-    public ProxyHostManager proxyHostManager(final ProxyServersService proxyServersService) {
+    public ProxyHostManager proxyHostManager(
+            @Qualifier("edu.stanford.irt.laneweb.proxy.ProxyServersService/HTTP")
+            final ProxyServersService proxyServersService) {
         return new ProxyHostManager(proxyServersService, Executors.newScheduledThreadPool(1));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.sitemap.select.Selector/proxy-links")
     public Selector proxyLinkSelector() {
         return new ProxyLinkSelector();
+    }
+
+    @Bean("edu.stanford.irt.laneweb.proxy.ProxyServersService/REST")
+    public ProxyServersService proxyServersService(
+            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final RESTService restService) {
+        return new RESTProxyServersService(catalogServiceURI, restService);
     }
 }

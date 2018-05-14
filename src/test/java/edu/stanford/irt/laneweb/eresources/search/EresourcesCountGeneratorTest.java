@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.fail;
@@ -31,9 +31,9 @@ public class EresourcesCountGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        this.solrService = createMock(SolrService.class);
+        this.solrService = mock(SolrService.class);
         this.generator = new EresourcesCountGenerator(this.solrService);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

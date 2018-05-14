@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * Clean query strings before sending to Solr
@@ -17,6 +18,8 @@ public final class EscapingQueryInspector implements QueryInspector {
     private static final Set<Character> ESCAPEABLE_CHARS = new HashSet<>();
 
     private static final Set<String> FIELDS = new HashSet<>();
+
+    private static final Pattern NON_WORD_CHAR_PATTERN = Pattern.compile("\\W");
     static {
         // these seem harmless | &
         // these seem useful and harmless " * ( )
@@ -50,7 +53,7 @@ public final class EscapingQueryInspector implements QueryInspector {
 
     private static boolean isField(final String s) {
         int index = s.lastIndexOf(' ') + 1;
-        String maybeField = s.substring(index).replaceAll("\\W", "");
+        String maybeField = NON_WORD_CHAR_PATTERN.matcher(s.substring(index)).replaceAll("");
         return FIELDS.contains(s) || FIELDS.contains(maybeField);
     }
 

@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertFalse;
@@ -50,9 +50,9 @@ public class SessionParameterDataBinderTest {
     @Before
     public void setUp() throws Exception {
         this.binder = new TestSessionParameterDataBinder("key", "name");
-        this.request = createMock(HttpServletRequest.class);
+        this.request = mock(HttpServletRequest.class);
         this.model = new HashMap<>();
-        this.session = createMock(HttpSession.class);
+        this.session = mock(HttpSession.class);
         this.object = new java.io.Serializable() {
 
             private static final long serialVersionUID = 1L;

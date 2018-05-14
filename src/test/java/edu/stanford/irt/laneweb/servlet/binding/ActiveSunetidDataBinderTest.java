@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertSame;
@@ -33,11 +33,11 @@ public class ActiveSunetidDataBinderTest {
 
     @Before
     public void setUp() {
-        this.ldapDataAccess = createMock(LDAPDataAccess.class);
+        this.ldapDataAccess = mock(LDAPDataAccess.class);
         this.dataBinder = new ActiveSunetidDataBinder(this.ldapDataAccess);
-        this.request = createMock(HttpServletRequest.class);
-        this.session = createMock(HttpSession.class);
-        this.user = createMock(User.class);
+        this.request = mock(HttpServletRequest.class);
+        this.session = mock(HttpSession.class);
+        this.user = mock(User.class);
     }
 
     @Test

@@ -121,7 +121,8 @@ public class MetasearchConfiguration {
 
     @Bean
     public MetaSearchService httpMetaSearchService(final ObjectMapper objectMapper,
-            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URL metaSearchURL) {
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
+            final URL metaSearchURL) {
         return new HTTPMetaSearchService(metaSearchURL, objectMapper, SEVENTY_SECONDS);
     }
 

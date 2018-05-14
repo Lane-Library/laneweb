@@ -1,0 +1,70 @@
+
+.portal .module h4 {
+    color: white;
+    background-color: #09425a;
+    background-image: none;
+    font-size: 18px;
+    line-height: 19.8px;
+     margin: -12px -12px 6px;
+     padding: 10px 12px;
+}
+
+.portal .module h4:after {
+    content: none;
+}
+
+.portal .module h4 a {
+    color: white;
+}
+
+.portal .popular {
+    background-color: rgb(169, 90, 16);
+    border: none;
+    padding: 0;
+}
+
+.portal .popular:before {
+    content: none;
+}
+
+.portal .popular li {
+    border: .5px white solid;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 6px 12px;
+    width: 100%;
+}
+
+.portal .popular .short-item {
+    width: 50%;
+    text-align: center;
+}
+
+.portal .business-card {
+    background-color: white;
+    border: 10px #666666 solid;
+    padding: 0;
+}
+
+.portal .business-card h3 {
+    background-color: #666666;
+    font-size: 18px;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.portal .business-card > div {
+    background-color: white;
+    color: black;
+    margin: 12px;
+}
+
+.portal .business-card a,
+.portal .business-card p,
+.portal .business-card a .fa {
+    color: black;
+}
+
+.portal .business-card p {
+    padding: 6px;
+}

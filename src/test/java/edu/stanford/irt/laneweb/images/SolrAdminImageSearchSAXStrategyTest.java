@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.images;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +27,7 @@ public class SolrAdminImageSearchSAXStrategyTest {
     public void setUp() {
         this.strategy = new SolrAdminImageSearchSAXStrategy(null);
         this.xmlConsumer = new TestXMLConsumer();
-        this.image = createMock(Image.class);
+        this.image = mock(Image.class);
     }
 
     @Test

@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.catalog.grandrounds;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -40,12 +40,12 @@ public class GrandRoundsGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(GrandRoundsService.class);
-        this.presentationSAXStrategy = createMock(SAXStrategy.class);
+        this.service = mock(GrandRoundsService.class);
+        this.presentationSAXStrategy = mock(SAXStrategy.class);
         this.generator = new GrandRoundsGenerator(this.service, this.presentationSAXStrategy);
         this.xmlConsumer = new TestXMLConsumer();
         this.parameters = new HashMap<>();
-        this.presentation = createMock(Presentation.class);
+        this.presentation = mock(Presentation.class);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class GrandRoundsGeneratorTest {
 
     @Test(expected = LanewebException.class)
     public void testDoGenerateThrowsException() throws IOException, SAXException {
-        XMLConsumer mockXMLConsumer = createMock(XMLConsumer.class);
+        XMLConsumer mockXMLConsumer = mock(XMLConsumer.class);
         this.parameters.put("department", "department");
         this.parameters.put("year", "year");
         this.generator.setParameters(this.parameters);

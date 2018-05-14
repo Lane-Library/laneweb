@@ -8,7 +8,7 @@ public enum LinkType {
 
     private String type;
 
-    private LinkType(final String type) {
+    LinkType(final String type) {
         this.type = type;
     }
 

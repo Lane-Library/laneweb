@@ -168,7 +168,6 @@ public class Eresource {
                 versionText));
     }
 
-    @SuppressWarnings("unchecked")
     private void setLinks() {
         List<Map<String, Object>> versionData = null;
         try {

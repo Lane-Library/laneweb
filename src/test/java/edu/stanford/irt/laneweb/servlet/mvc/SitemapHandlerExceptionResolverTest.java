@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -31,10 +31,10 @@ public class SitemapHandlerExceptionResolverTest {
 
     @Before
     public void setUp() {
-        this.controller = createMock(SitemapController.class);
+        this.controller = mock(SitemapController.class);
         this.resolver = new SitemapHandlerExceptionResolver(this.controller);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
     }
 
     @Test

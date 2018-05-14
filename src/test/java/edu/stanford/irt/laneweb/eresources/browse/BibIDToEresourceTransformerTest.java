@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.browse;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -33,14 +33,14 @@ public class BibIDToEresourceTransformerTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.solrService = createMock(SolrService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.solrService = mock(SolrService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.transformer = new BibIDToEresourceTransformer(this.solrService, this.saxStrategy, "type",
                 AlwaysValid.SHARED_INSTANCE);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
-        this.attributes = createMock(Attributes.class);
-        this.eresource = createMock(Eresource.class);
+        this.attributes = mock(Attributes.class);
+        this.eresource = mock(Eresource.class);
     }
 
     @Test

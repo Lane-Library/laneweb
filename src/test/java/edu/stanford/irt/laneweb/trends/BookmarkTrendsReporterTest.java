@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.trends;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -20,8 +20,8 @@ public class BookmarkTrendsReporterTest {
 
     @Before
     public void setUp() throws Exception {
-        this.bookmarkService = createMock(BookmarkService.class);
-        this.tracker = createMock(GoogleTracker.class);
+        this.bookmarkService = mock(BookmarkService.class);
+        this.tracker = mock(GoogleTracker.class);
         this.reporter = new BookmarkTrendsReporter(this.bookmarkService, this.tracker, "localhost");
     }
 

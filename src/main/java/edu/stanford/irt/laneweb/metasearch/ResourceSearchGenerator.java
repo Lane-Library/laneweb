@@ -41,7 +41,6 @@ public class ResourceSearchGenerator extends SearchGenerator {
         return super.searchWithEngines(query, enginesToRun);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);

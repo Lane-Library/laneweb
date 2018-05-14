@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.catalog.coursereserves;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -21,7 +21,7 @@ import edu.stanford.irt.laneweb.TestXMLConsumer;
 
 public class CoursesSAXStrategyTest {
 
-    private Course course = createMock(Course.class);
+    private Course course = mock(Course.class);
 
     private CoursesSAXStrategy saxStrategy;
 
@@ -47,7 +47,7 @@ public class CoursesSAXStrategyTest {
 
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException {
-        XMLConsumer mock = createMock(XMLConsumer.class);
+        XMLConsumer mock = mock(XMLConsumer.class);
         mock.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(mock);

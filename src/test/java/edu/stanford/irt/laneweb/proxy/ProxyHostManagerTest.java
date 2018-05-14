@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.proxy;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
@@ -32,8 +32,8 @@ public class ProxyHostManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.service = createMock(ProxyServersService.class);
-        this.executor = createMock(ScheduledExecutorService.class);
+        this.service = mock(ProxyServersService.class);
+        this.executor = mock(ScheduledExecutorService.class);
         expect(this.executor.scheduleAtFixedRate(isA(Runnable.class), eq(0L), eq(120L), eq(TimeUnit.MINUTES)))
                 .andReturn(null);
         replay(this.executor);

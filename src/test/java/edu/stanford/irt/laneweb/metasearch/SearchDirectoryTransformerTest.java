@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +27,7 @@ public class SearchDirectoryTransformerTest {
     @Before
     public void setUp() throws Exception {
         this.transformer = new SearchDirectoryTransformer();
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
         this.transformer
                 .setParameters(Collections.singletonMap("directories", "file:" + System.getProperty("user.dir")));

@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
@@ -49,9 +49,9 @@ public class HTMLSAXParserTest {
                 Collections.singletonMap("http://cyberneko.org/html/features/insert-namespaces", Boolean.TRUE));
         this.parser = new HTMLSAXParser(this.configuration);
         this.xmlConsumer = new TestXMLConsumer();
-        this.source = createMock(Source.class);
+        this.source = mock(Source.class);
         this.inputStream = new ByteArrayInputStream("<html><title>foo<table><td>bar".getBytes());
-        this.lexicalHandler = createMock(LexicalHandler.class);
+        this.lexicalHandler = mock(LexicalHandler.class);
     }
 
     @Test

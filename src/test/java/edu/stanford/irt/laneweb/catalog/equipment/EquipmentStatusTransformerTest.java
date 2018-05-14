@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.catalog.equipment;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,7 @@ public class EquipmentStatusTransformerTest {
 
     @Before
     public void setUp() throws SAXException {
-        this.service = createMock(EquipmentService.class);
+        this.service = mock(EquipmentService.class);
         this.transformer = new EquipmentStatusTransformer(this.service);
         this.xmlConsumer = new TestXMLConsumer();
         this.transformer.setXMLConsumer(this.xmlConsumer);
@@ -42,7 +42,7 @@ public class EquipmentStatusTransformerTest {
     }
 
     @Test
-    public void test() throws IOException, SAXException, SQLException {
+    public void testTransform() throws IOException, SAXException, SQLException {
         List<EquipmentStatus> status = new ArrayList<>();
         status.add(new EquipmentStatus("304254", "1"));
         status.add(new EquipmentStatus("296290", "10"));

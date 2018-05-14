@@ -64,7 +64,6 @@ public class FlickrPhotoListCreator {
         return getPhotosFromMap(this.objectMapper.readValue(input, Map.class));
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     private Collection<Map<String, String>> getPhotosFromMap(final Map result) {
         Map<String, ?> photos = (Map<String, ?>) result.get("photos");
         if (photos == null) {

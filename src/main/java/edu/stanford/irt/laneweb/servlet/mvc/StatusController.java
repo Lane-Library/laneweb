@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +18,9 @@ public class StatusController {
 
     private StatusService statusService;
 
-    public StatusController(final StatusService statusService, final BookCoverService bookcoverService) {
+    public StatusController(final StatusService statusService,
+            @Qualifier("edu.stanford.irt.laneweb.bookcovers.BookCoverService/HTTP")
+            final BookCoverService bookcoverService) {
         this.statusService = statusService;
         this.bookcoverService = bookcoverService;
     }

@@ -161,6 +161,8 @@ public class BindingConfiguration {
         noProxyCIDRRange.add(new CIDRRange("10.98.0.0/15"));
         // 10.128.0.0 - 10.135.255.255 Wireless NAT range for "Stanford Secure" SSID for Student Residences
         noProxyCIDRRange.add(new CIDRRange("10.128.0.0/13"));
+        // 10.109.63.0 - 10.109.63.255 Vaden health center: routes out as 171.66.10.x
+        noProxyCIDRRange.add(new CIDRRange("10.109.63.0/24"));
         return new ProxyLinks(proxyCIDRRange, noProxyCIDRRange);
     }
 

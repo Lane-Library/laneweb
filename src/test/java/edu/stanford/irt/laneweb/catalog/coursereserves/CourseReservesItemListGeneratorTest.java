@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.catalog.coursereserves;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -13,8 +13,6 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.coursereserves.CourseReservesService;
-import edu.stanford.irt.coursereserves.JDBCCourseReservesService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class CourseReservesItemListGeneratorTest {
@@ -32,11 +30,11 @@ public class CourseReservesItemListGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.dao = createMock(JDBCCourseReservesService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
+        this.dao = mock(CourseReservesService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new CourseReservesItemListGenerator(this.dao, this.saxStrategy);
-        this.items = createMock(CourseReservesItemList.class);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.items = mock(CourseReservesItemList.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

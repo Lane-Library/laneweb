@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.proxy;
 
 import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -24,7 +24,7 @@ public class ElementProxyLinkTransformerTest {
     @Before
     public void setUp() throws Exception {
         this.transformer = new ElementProxyLinkTransformer("elementName");
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
     }
 

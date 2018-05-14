@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.images;
 
 import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -38,9 +38,9 @@ public class SolrImageSearchGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(SolrImageService.class);
-        this.saxStrategy = createMock(SAXStrategy.class);
-        this.facetPage = createMock(FacetPage.class);
+        this.service = mock(SolrImageService.class);
+        this.saxStrategy = mock(SAXStrategy.class);
+        this.facetPage = mock(FacetPage.class);
         this.generator = new SolrImageSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<>();
         this.model.put(Model.QUERY, "query");

@@ -13,7 +13,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class TodaysHoursBinder implements DataBinder {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TodaysHoursBinder.class);
+    private static final Logger log = LoggerFactory.getLogger(TodaysHoursBinder.class);
 
     private TodaysHours hours;
 
@@ -27,7 +27,7 @@ public class TodaysHoursBinder implements DataBinder {
         try {
             todaysHoursString = this.hours.getHours();
         } catch (LanewebException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             todaysHoursString = TodaysHours.UNKNOWN;
         }
         model.put(Model.TODAYS_HOURS, todaysHoursString);

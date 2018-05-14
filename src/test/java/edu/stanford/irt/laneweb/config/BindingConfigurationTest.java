@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.MalformedURLException;
@@ -20,7 +20,7 @@ public class BindingConfigurationTest {
 
     @Before
     public void setUp() throws MalformedURLException {
-        this.servletContext = createMock(ServletContext.class);
+        this.servletContext = mock(ServletContext.class);
         this.configuration = new BindingConfiguration();
     }
 
@@ -81,7 +81,7 @@ public class BindingConfigurationTest {
 
     @Test
     public void testTodaysHours() {
-        LibraryHoursService hoursService = createMock(LibraryHoursService.class);
+        LibraryHoursService hoursService = mock(LibraryHoursService.class);
         assertNotNull(this.configuration.todaysHours(hoursService));
     }
 

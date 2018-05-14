@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.time.Duration;
@@ -27,7 +26,12 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
     private static class NullOutputStream extends OutputStream {
 
         @Override
-        public void write(final int b) throws IOException {
+        public void write(final byte[] b, final int off, final int len) {
+            // do nothing
+        }
+
+        @Override
+        public void write(final int b) {
             // do nothing
         }
     }

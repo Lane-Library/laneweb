@@ -2,7 +2,9 @@
 
     "use strict";
 
-    var DEFAULT_THANKS = "Thank you for your feedback.",
+    var DEFAULT_FAILURE = "Sorry, sending feedback failed.",
+
+    DEFAULT_THANKS = "Thank you for your feedback.",
 
     Feedback = function(config) {
         Feedback.superclass.constructor.apply(this, arguments);
@@ -18,6 +20,9 @@
     Feedback.ATTRS = {
         activeItem : {
             value : 0
+        },
+        failure : {
+            value : DEFAULT_FAILURE
         },
         items : {
             value : null,
@@ -74,6 +79,7 @@
             if (sending) {
                 this.set("sending", sending.get("innerHTML"));
             }
+            this._resetFailure();
             this._resetThanks();
         },
         sendFeedback : function(form) {
@@ -92,7 +98,7 @@
                         this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("thanks"));
                     },
                     failure : function() {
-                        L.showMessage("Sorry, sending feedback failed.");
+                        this.get("contentBox").one(".feedback-contents").set("innerHTML", this.get("failure"));
                     }
                 },
                 context : this
@@ -139,9 +145,14 @@
             event.preventDefault();
             this.sendFeedback(new Y.Node(event.currentTarget));
         },
+        _resetFailure: function() {
+            var srcNode = this.get("srcNode"),
+            failure = srcNode.one("#failure");
+            this.set("failure", failure ? failure.get("innerHTML") : DEFAULT_FAILURE);
+        },
         _resetThanks: function() {
             var srcNode = this.get("srcNode"),
-                thanks = srcNode.one("#thanks");
+            thanks = srcNode.one("#thanks");
             this.set("thanks", thanks ? thanks.get("innerHTML") : DEFAULT_THANKS);
         }
     });

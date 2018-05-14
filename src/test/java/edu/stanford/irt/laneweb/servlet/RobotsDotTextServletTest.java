@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertFalse;
@@ -57,8 +57,8 @@ public class RobotsDotTextServletTest {
     @Before
     public void setUp() {
         this.servlet = new RobotsDotTextServlet();
-        this.response = createMock(HttpServletResponse.class);
-        this.request = createMock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.request = mock(HttpServletRequest.class);
         this.outputStream = new FakeServletOutputStream();
     }
 

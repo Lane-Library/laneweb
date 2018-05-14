@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.flickr;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -27,10 +27,10 @@ public class FlickrPhotoGeneratorTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.service = createMock(FlickrPhotoListService.class);
-        this.strategy = createMock(SAXStrategy.class);
+        this.service = mock(FlickrPhotoListService.class);
+        this.strategy = mock(SAXStrategy.class);
         this.generator = new FlickrPhotoGenerator(this.service, this.strategy);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test

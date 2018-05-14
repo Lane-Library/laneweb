@@ -18,7 +18,6 @@ public class EngineSearchGenerator extends SearchGenerator {
         super(metaSearchService, saxStrategy);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);

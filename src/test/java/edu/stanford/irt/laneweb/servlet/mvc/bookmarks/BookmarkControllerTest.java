@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -46,14 +46,14 @@ public class BookmarkControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.bookmarkService = createMock(BookmarkService.class);
-        this.bookmarkDataBinder = createMock(BookmarkDataBinder.class);
-        this.userDataBinder = createMock(UserDataBinder.class);
+        this.bookmarkService = mock(BookmarkService.class);
+        this.bookmarkDataBinder = mock(BookmarkDataBinder.class);
+        this.userDataBinder = mock(UserDataBinder.class);
         this.controller = new TestBookmarkController(this.bookmarkService, this.bookmarkDataBinder,
                 this.userDataBinder);
-        this.request = createMock(HttpServletRequest.class);
-        this.model = createMock(Model.class);
-        this.session = createMock(HttpSession.class);
+        this.request = mock(HttpServletRequest.class);
+        this.model = mock(Model.class);
+        this.session = mock(HttpSession.class);
     }
 
     @Test

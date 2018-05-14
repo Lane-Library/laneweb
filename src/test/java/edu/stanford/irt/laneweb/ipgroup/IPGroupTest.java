@@ -13,14 +13,18 @@ public class IPGroupTest {
 
     @Test
     public void testAllRanges() {
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("199.68.152.135"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.232.53.46"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.233.24.133"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.238.0.221"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.238.31.255"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.239.0.221"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.239.23.145"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.128.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.217.148"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.250.255.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.251.128.0"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.251.199.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.251.255.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.1.1"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.1.2"));
@@ -92,10 +96,10 @@ public class IPGroupTest {
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.71.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.84.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.85.255"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.253.220.0"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.253.220.255"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.253.254.0"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.253.255.255"));
+        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("10.253.220.0"));
+        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("10.253.220.255"));
+        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("10.253.254.0"));
+        assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("10.253.255.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.50.0.0"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.50.255.255"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("159.140.183.0"));
@@ -103,7 +107,7 @@ public class IPGroupTest {
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.112.0"));
         assertEquals(IPGroup.SHC, IPGroup.getGroupForIP("171.65.112.255"));
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.0"));
-        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.255"));
+        assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("171.65.126.127"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("209.11.188.0"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("209.11.191.255"));
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("0.0.0.0"));

@@ -7,21 +7,20 @@ import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.coursereserves.CourseReservesService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class CourseReservesItemListGenerator extends AbstractGenerator implements ModelAware {
 
-    private CourseReservesService dao;
-
-    private int id = 0;
+    private int id;
 
     private SAXStrategy<CourseReservesItemList> saxStrategy;
 
-    public CourseReservesItemListGenerator(final CourseReservesService dao,
+    private CourseReservesService service;
+
+    public CourseReservesItemListGenerator(final CourseReservesService service,
             final SAXStrategy<CourseReservesItemList> saxStrategy) {
-        this.dao = dao;
+        this.service = service;
         this.saxStrategy = saxStrategy;
     }
 
@@ -36,9 +35,9 @@ public class CourseReservesItemListGenerator extends AbstractGenerator implement
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         CourseReservesItemList list;
         if (this.id == 0) {
-            list = this.dao.getItems();
+            list = this.service.getItems();
         } else {
-            list = this.dao.getItems(this.id);
+            list = this.service.getItems(this.id);
         }
         this.saxStrategy.toSAX(list, xmlConsumer);
     }

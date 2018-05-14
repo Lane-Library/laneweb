@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -33,11 +33,11 @@ public class CMERedirectControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.dataBinder = createMock(CompositeDataBinder.class);
+        this.dataBinder = mock(CompositeDataBinder.class);
         this.controller = new CMERedirectController(this.dataBinder);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.model = createMock(org.springframework.ui.Model.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
+        this.model = mock(org.springframework.ui.Model.class);
         this.map = new HashMap<>();
     }
 

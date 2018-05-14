@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -18,7 +18,7 @@ public class XIncludeExceptionListenerImplTest {
     @Before
     public void setUp() {
         this.listener = new XIncludeExceptionListenerImpl();
-        this.locator = createMock(Locator.class);
+        this.locator = mock(Locator.class);
     }
 
     @Test

@@ -83,18 +83,13 @@ h1 a:active, h1 a:visited, h1 a:hover {
     position: relative;
 }
 
-.login > :nth-child(8) {
-    border-right: 1px rgb(135, 135, 135) solid;
-    margin-left: 38px;
-}
-
 .login > :nth-child(7) .fa,
-.login > :nth-child(8) a,
-.login > :nth-child(9) a {
+.login > :nth-child(8) a {
     color: rgb(135, 135, 135);
 }
 
-.login > :nth-child(9) {
+.login > :nth-child(8) {
+    margin-left: 38px;
     padding-right: 0;
 }
 
@@ -160,6 +155,10 @@ h1 a:active, h1 a:visited, h1 a:hover {
     border-radius: 6px;
     display: inline-block;
     margin-left: 12px;
+}
+
+.library-contact a {
+    display: block;
     padding: 12px;
 }
 

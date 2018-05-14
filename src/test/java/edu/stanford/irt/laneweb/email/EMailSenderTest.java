@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.email;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -40,10 +40,10 @@ public class EMailSenderTest {
 
     @Before
     public void setUp() throws Exception {
-        this.javaMailSender = createMock(JavaMailSender.class);
+        this.javaMailSender = mock(JavaMailSender.class);
         this.eMailSender = new EMailSender(this.javaMailSender);
         this.map = new HashMap<>();
-        this.message = createMock(MimeMessage.class);
+        this.message = mock(MimeMessage.class);
     }
 
     @Test

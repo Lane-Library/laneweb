@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -36,13 +36,13 @@ public class ContentResultConversionStrategyTest {
 
     @Before
     public void setUp() throws Exception {
-        this.scoreStrategy = createMock(ScoreStrategy.class);
+        this.scoreStrategy = mock(ScoreStrategy.class);
         this.conversionStrategy = new ContentResultConversionStrategy(this.scoreStrategy);
-        this.uberResult = createMock(Result.class);
-        this.query = createMock(Query.class);
-        this.result = createMock(Result.class);
-        this.hitCountResult = createMock(Result.class);
-        this.contentResult = createMock(ContentResult.class);
+        this.uberResult = mock(Result.class);
+        this.query = mock(Query.class);
+        this.result = mock(Result.class);
+        this.hitCountResult = mock(Result.class);
+        this.contentResult = mock(ContentResult.class);
     }
 
     @Test

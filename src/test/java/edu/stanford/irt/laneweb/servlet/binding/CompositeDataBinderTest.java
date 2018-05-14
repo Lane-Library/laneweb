@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -25,9 +25,9 @@ public class CompositeDataBinderTest {
 
     @Before
     public void setUp() {
-        this.child = createMock(DataBinder.class);
+        this.child = mock(DataBinder.class);
         this.binder = new CompositeDataBinder(Collections.singletonList(this.child));
-        this.request = createMock(HttpServletRequest.class);
+        this.request = mock(HttpServletRequest.class);
         this.model = new HashMap<>();
     }
 

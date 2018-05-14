@@ -76,10 +76,14 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator
     @Override
     public void setModel(final Map<String, Object> model) {
         String p = ModelUtil.getString(model, Model.PAGE, "1");
-        try {
-            this.page = "all".equals(p) ? -1 : Integer.parseInt(p) - 1;
-        } catch (NumberFormatException nfe) {
-            this.page = 0;
+        if ("all".equals(p)) {
+            this.page = -1;
+        } else {
+            try {
+                this.page = Integer.parseInt(p) - 1;
+            } catch (NumberFormatException e) {
+                this.page = 0;
+            }
         }
         this.queryString = ModelUtil.getString(model, Model.QUERY_STRING, "");
     }

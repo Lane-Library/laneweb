@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -25,10 +25,10 @@ public class VoyagerLoginControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.voyagerLogin = createMock(VoyagerLogin.class);
+        this.voyagerLogin = mock(VoyagerLogin.class);
         this.voyagerLoginController = new VoyagerLoginController(this.voyagerLogin, null, null);
-        this.request = createMock(HttpServletRequest.class);
-        this.response = createMock(HttpServletResponse.class);
+        this.request = mock(HttpServletRequest.class);
+        this.response = mock(HttpServletResponse.class);
     }
 
     @Test

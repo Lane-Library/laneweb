@@ -15,7 +15,7 @@ import org.springframework.ldap.core.LdapTemplate;
 
 public class LDAPDataAccess {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LDAPDataAccess.class);
+    private static final Logger log = LoggerFactory.getLogger(LDAPDataAccess.class);
 
     private AttributesMapper<LDAPData> attributesMapper;
 
@@ -50,7 +50,7 @@ public class LDAPDataAccess {
                 ldapData = data.get(0);
             }
         } catch (SecurityException | NamingException e) {
-            LDAPDataAccess.LOG.error("failed to get ldap data", e);
+            LDAPDataAccess.log.error("failed to get ldap data", e);
             ldapData = LDAPData.NULL;
         }
         return ldapData;

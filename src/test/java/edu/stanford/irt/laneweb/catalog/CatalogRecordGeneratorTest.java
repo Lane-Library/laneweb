@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.catalog;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertSame;
@@ -33,10 +33,10 @@ public class CatalogRecordGeneratorTest {
 
     @Before
     public void setUp() throws IOException, SAXException {
-        this.service = createMock(CatalogRecordService.class);
+        this.service = mock(CatalogRecordService.class);
         this.xmlReader = XMLReaderFactory.createXMLReader();
         this.generator = new CatalogRecordGenerator(this.service, this.xmlReader);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class CatalogRecordGeneratorTest {
 
     @Test
     public void testDoGenerateIOException() throws SQLException, IOException {
-        InputStream input = createMock(InputStream.class);
+        InputStream input = mock(InputStream.class);
         IOException exception = new IOException();
         expect(this.service.getRecords(Collections.emptyList())).andReturn(input);
         expect(input.read()).andThrow(exception);

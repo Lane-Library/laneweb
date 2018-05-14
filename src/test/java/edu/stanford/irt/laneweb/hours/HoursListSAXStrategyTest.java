@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.hours;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -32,7 +32,7 @@ public class HoursListSAXStrategyTest {
     public void setUp() {
         this.generator = new HoursListSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
-        this.hours = createMock(Hours.class);
+        this.hours = mock(Hours.class);
     }
 
     @Test

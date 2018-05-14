@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -27,7 +27,7 @@ public class BookmarkGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        this.marshaller = createMock(Marshaller.class);
+        this.marshaller = mock(Marshaller.class);
         this.generator = new BookmarkGenerator(this.marshaller);
         this.generator.setModel(Collections.singletonMap(Model.BOOKMARKS, Collections.emptyList()));
     }

@@ -43,7 +43,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SEARCH)
     Page<Eresource> searchFindByType(String query, String type, Pageable page);
 
-    @Query(value = "(+?1) OR title_sort:/?0.*/", requestHandler = Handlers.SUGGEST)
+    @Query(value = "(+?1) title_sort:/?0.*/", requestHandler = Handlers.SUGGEST)
     List<Eresource> suggestFindAll(String term, String tokenizedTerm, Pageable page);
 
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SUGGEST)

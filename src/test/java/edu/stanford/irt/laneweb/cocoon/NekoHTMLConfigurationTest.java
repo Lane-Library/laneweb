@@ -28,7 +28,7 @@ public class NekoHTMLConfigurationTest {
     }
 
     @Test
-    public void test() {
+    public void testConfiguration() {
         assertEquals(UTF_8, this.configuration.getProperty("http://cyberneko.org/html/properties/default-encoding"));
         assertEquals("lower", this.configuration.getProperty("http://cyberneko.org/html/properties/names/elems"));
         assertEquals("http://www.w3.org/1999/xhtml",

@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.servlet.binding.user;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.gt;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNull;
@@ -40,12 +40,12 @@ public class CookieUserFactoryTest {
     @Before
     public void setUp() {
         this.userIdHashKey = "key";
-        this.codec = createMock(UserCookieCodec.class);
+        this.codec = mock(UserCookieCodec.class);
         this.factory = new CookieUserFactory(this.codec, this.userIdHashKey);
-        this.request = createMock(HttpServletRequest.class);
-        this.cookie = createMock(Cookie.class);
-        this.token = createMock(PersistentLoginToken.class);
-        this.user = createMock(User.class);
+        this.request = mock(HttpServletRequest.class);
+        this.cookie = mock(Cookie.class);
+        this.token = mock(PersistentLoginToken.class);
+        this.user = mock(User.class);
     }
 
     @Test

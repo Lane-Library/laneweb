@@ -7,6 +7,80 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-05-14" version="3.5.10" description="3.5.10 bug fix release">
+            <action date="2018-05-10" dev="ryanmax" issue="142122" type="update">
+                access from Vaden Health Center
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="142118" type="update">
+                link full buttons
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="142117" type="fix">
+                parts of application fail if built with jdk > 8 and run in jre 8
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="142064" type="remove">
+                remove link to chinese page from header
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="141943" type="update">
+                updated look and feel for the portals
+            </action>
+            <action date="2018-05-07" dev="ceyates" issue="141805" type="fix">
+                bookmark edit buttons fail if bookmarks editor not initialized
+            </action>
+        </release>
+        <release date="2018-05-07" version="3.5.9" description="3.5.9 bug fix release">
+            <action date="2018-05-24" dev="ceyates" issue="141396" type="fix">
+                search tab font color
+            </action>
+        </release>
+        <release date="2018-04-23" version="3.5.8" description="3.5.8 bug fix release">
+            <action date="2018-04-23" dev="ceyates" issue="141336" type="fix">
+                header links on some mobile devices displayed incorrectly
+            </action>
+            <action date="2018-04-19" dev="ceyates" issue="141169" type="remove">
+                remove /apps/email/lane-issue endpoint
+            </action>
+            <action date="2018-04-20" dev="ceyates" issue="141135" type="update">
+                make the tooltip triggers the same color as reg links in the text
+            </action>
+            <action date="2018-04-20" dev="ceyates" issue="137678" type="add">
+                drop down menu
+            </action>
+        </release>
+        <release date="2018-04-17" version="3.5.7" description="3.5.7 bug fix release">
+            <action date="2018-04-17" dev="ceyates" issue="141095" type="fix">
+                laneweb-3.5.6 failing in production
+            </action>
+        </release>
+        <release date="2018-04-16" version="3.5.6" description="3.5.6 bug fix release [rolled back]">
+            <action date="2018-04-09" dev="ryanmax" issue="140806" type="update">
+                update LPCH network ranges
+            </action>
+        </release>
+        <release date="2018-04-02" version="3.5.5" description="3.5.5 bug fix release">
+            <action date="2018-03-29" dev="ryanmax" issue="140333" type="update">
+                update SHC Epic order set redirects
+            </action>
+            <action date="2018-03-29" dev="ceyates" issue="140285" type="fix">
+                kerberos authentication for ldap.stanford.edu failing
+            </action>
+            <action date="2018-03-26" dev="ryanmax" issue="140089" type="update">
+                add LaneAskUs@stanford.edu to feedback form error messages
+            </action>
+        </release>
+        <release date="2018-03-26" version="3.5.4" description="3.5.4 bug fix release">
+            <action date="2018-03-22" dev="ceyates" issue="139916" type="update">
+                scale elements on discovery login page
+            </action>
+            <action date="2018-03-20" dev="ryanmax" issue="139850" type="fix">
+                SSL warnings from laneblog images on front page
+            </action>
+            <action date="2018-03-19" dev="ceyates" issue="139795" type="fix">
+                right clicking a link causes navigation to the link url
+            </action>
+            <action date="2018-03-21" dev="ryanmax" issue="139640" type="update">
+                improve precision for DOI searches
+            </action>
+        </release>
         <release date="2018-03-19" version="3.5.3" description="3.5.3 bug fix release">
             <action date="2018-03-16" dev="ceyates" issue="139722" type="add">
                 implement url tester for metasearch

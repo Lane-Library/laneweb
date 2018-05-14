@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
@@ -28,9 +28,9 @@ public class LanewebHTTPSFilterTest {
     @Before
     public void setUp() {
         this.filter = new LanewebHTTPSFilter();
-        this.chain = createMock(FilterChain.class);
-        this.response = createMock(HttpServletResponse.class);
-        this.request = createMock(HttpServletRequest.class);
+        this.chain = mock(FilterChain.class);
+        this.response = mock(HttpServletResponse.class);
+        this.request = mock(HttpServletRequest.class);
     }
 
     @Test

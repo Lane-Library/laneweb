@@ -27,6 +27,11 @@ public class ProxyConfigurationTest {
     }
 
     @Test
+    public void testHttpProxyServersService() {
+        assertNotNull(this.configuration.proxyServersService(null, null, null));
+    }
+
+    @Test
     public void testProxyHostManager() throws IOException {
         assertNotNull(this.configuration.proxyHostManager(null));
     }
@@ -34,5 +39,10 @@ public class ProxyConfigurationTest {
     @Test
     public void testProxyLinkSelector() {
         assertNotNull(this.configuration.proxyLinkSelector());
+    }
+
+    @Test
+    public void testRestProxyServersService() {
+        assertNotNull(this.configuration.proxyServersService(null, null));
     }
 }

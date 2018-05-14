@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import static org.easymock.EasyMock.aryEq;
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
@@ -36,15 +36,15 @@ public class TextNodeParsingTransformerTest {
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
-        this.saxParser = createMock(SAXParser.class);
+        this.saxParser = mock(SAXParser.class);
         this.transformer = new TextNodeParsingTransformer("type", this.saxParser);
-        this.parameters = createMock(Map.class);
+        this.parameters = mock(Map.class);
         expect(this.parameters.containsKey("elementNames")).andReturn(true);
         expect(this.parameters.get("elementNames")).andReturn("element");
         replay(this.parameters);
         this.transformer.setParameters(this.parameters);
         verify(this.parameters);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
     }
 

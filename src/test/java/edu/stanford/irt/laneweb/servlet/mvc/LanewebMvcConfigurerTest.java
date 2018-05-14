@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
@@ -29,8 +29,8 @@ public class LanewebMvcConfigurerTest {
 
     @Test
     public void testAddInterceptors() {
-        InterceptorRegistry registry = createMock(InterceptorRegistry.class);
-        InterceptorRegistration registration = createMock(InterceptorRegistration.class);
+        InterceptorRegistry registry = mock(InterceptorRegistry.class);
+        InterceptorRegistration registration = mock(InterceptorRegistration.class);
         expect(registry.addInterceptor(isA(PersistentLoginHandlerInterceptor.class))).andReturn(registration);
         expect(registration.addPathPatterns("/**/secure/**", "/**/redirect/cme/**")).andReturn(registration);
         expect(registry.addInterceptor(isA(DeviceResolverHandlerInterceptor.class))).andReturn(registration);

@@ -1,9 +1,9 @@
 package edu.stanford.irt.laneweb.classes;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertSame;
@@ -40,13 +40,13 @@ public class EventListTransformerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.saxParser = createMock(SAXParser.class);
-        this.sourceResolver = createMock(SourceResolver.class);
+        this.saxParser = mock(SAXParser.class);
+        this.sourceResolver = mock(SourceResolver.class);
         this.transformer = new EventListTransformer(this.sourceResolver, this.saxParser);
-        this.xmlConsumer = createMock(XMLConsumer.class);
+        this.xmlConsumer = mock(XMLConsumer.class);
         this.transformer.setXMLConsumer(this.xmlConsumer);
-        this.attributes = createMock(Attributes.class);
-        this.source = createMock(Source.class);
+        this.attributes = mock(Attributes.class);
+        this.source = mock(Source.class);
     }
 
     @Test
