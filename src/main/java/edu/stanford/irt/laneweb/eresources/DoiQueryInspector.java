@@ -18,6 +18,8 @@ public final class DoiQueryInspector implements QueryInspector {
 
     private static final String QUOTE = "\"";
 
+    private static final Pattern TMP_PATTERN = Pattern.compile(":::(.*)###\\.?");
+
     @Override
     public boolean combinable() {
         return true;
@@ -28,7 +30,7 @@ public final class DoiQueryInspector implements QueryInspector {
         String parsed = PREFIX_PATTERN.matcher(query).replaceAll("$1");
         if (DOI_PATTERN.matcher(parsed).find()) {
             parsed = DOI_PATTERN.matcher(parsed).replaceFirst(":::$1###");
-            parsed = parsed.replaceFirst(":::(.*)###\\.?", QUOTE + "$1" + QUOTE);
+            parsed = TMP_PATTERN.matcher(parsed).replaceFirst(QUOTE + "$1" + QUOTE);
             parsed = EPUB_PATTERN.matcher(parsed).replaceAll("");
         }
         return parsed;
