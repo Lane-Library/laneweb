@@ -7,7 +7,7 @@
         <version>33</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.5.10-SNAPSHOT</version>
+    <version>3.5.11-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -46,7 +46,7 @@
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
-        <org.springframework.version>5.0.5.RELEASE</org.springframework.version>
+        <org.springframework.version>5.0.6.RELEASE</org.springframework.version>
     </properties>
     <dependencies>
         <dependency>
@@ -103,7 +103,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-11</version>
+            <version>9.8.0-12</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -215,17 +215,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>2.0.1.RELEASE</version>
+            <version>2.0.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.0.1.RELEASE</version>
+            <version>2.0.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>3.0.6.RELEASE</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -293,12 +293,12 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>2.0.2.RELEASE</version>
+            <version>2.0.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>5.0.3.RELEASE</version>
+            <version>5.0.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -338,10 +338,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-           <groupId>org.glassfish.jaxb</groupId>
-           <artifactId>jaxb-runtime</artifactId>
-           <version>2.3.0</version>
-           <scope>runtime</scope>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.0</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
     <build>
@@ -389,7 +389,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.1.RELEASE</version>
+                <version>2.0.2.RELEASE</version>
                 <configuration>
                     <executable>true</executable>
                     <embeddedLaunchScriptProperties>
@@ -407,7 +407,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.1</version>
             </plugin>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
@@ -647,6 +647,26 @@
                         <exclude>src/main/javascript/yui-3.18.1.js</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.4.1</version>
+                <configuration>
+                    <rules>
+                        <requireJavaVersion>
+                            <version>(1.8,9.0)</version>
+                        </requireJavaVersion>
+                    </rules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>enforce-versions</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <pluginManagement>

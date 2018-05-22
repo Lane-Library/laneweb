@@ -122,6 +122,7 @@
 
 .new-resource img {
     margin-bottom: 12px;
+    max-width: 100%;
 }
 
 .new-resource h3 {

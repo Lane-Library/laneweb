@@ -7,8 +7,28 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-05-14" version="3.5.10" description="3.5.10 bug fix release">
+            <action date="2018-05-10" dev="ryanmax" issue="142122" type="update">
+                access from Vaden Health Center
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="142118" type="update">
+                link full buttons
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="142117" type="fix">
+                parts of application fail if built with jdk > 8 and run in jre 8
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="142064" type="remove">
+                remove link to chinese page from header
+            </action>
+            <action date="2018-05-10" dev="ceyates" issue="141943" type="update">
+                updated look and feel for the portals
+            </action>
+            <action date="2018-05-07" dev="ceyates" issue="141805" type="fix">
+                bookmark edit buttons fail if bookmarks editor not initialized
+            </action>
+        </release>
         <release date="2018-05-07" version="3.5.9" description="3.5.9 bug fix release">
-            <action date="2018-45-24" dev="ceyates" issue="141396" type="fix">
+            <action date="2018-05-24" dev="ceyates" issue="141396" type="fix">
                 search tab font color
             </action>
         </release>

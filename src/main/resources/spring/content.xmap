@@ -97,7 +97,7 @@
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
                         <map:parameter name="timeout" value="0"/>
-                        <map:parameter name="engines" value="all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,clinicaltrials,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,proteome,cap,pubmed,stanford_clinicaltrials,lane,stanfordcorefacilities,isi_biosis,crossdb,engineering_village1,sciencecitation,uspto,ubcbioinfolinks,crosssearch1"/>
+                        <map:parameter name="engines" value="all_pubmedbook,dtic_all,drugbank,biomedseminars,slac,abminer,biomedcentral,cosexpertisestanford,pharmgkb,unitprot,cshprotocols,portal_acm_digitallibrary,obrc,scopus,rseek,enzymology,cosfundingopportunities,stanford_somgoogle,ieeexplore,f1000,isi_derwent,proteome,cap,pubmed,stanford_clinicaltrials,lane,stanfordcorefacilities,isi_biosis,crossdb,engineering_village1,sciencecitation,uspto,ubcbioinfolinks,crosssearch1"/>
                     </map:generate>
                     <map:generate type="file" src="cocoon://content/cached/search/bioresearch-all.html"/>
                 </map:aggregate>
