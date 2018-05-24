@@ -34,6 +34,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
 
     private static final String COLON = ":";
 
+    private static final Pattern COLON_PATTERN = Pattern.compile(COLON);
+
     private static final String EMPTY = "";
 
     private static final Pattern FACET_SEPARATOR_PATTERN = Pattern.compile(SolrService.FACETS_SEPARATOR);
@@ -161,7 +163,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         String[] tokens = FACET_SEPARATOR_PATTERN.split(this.facets);
         for (String facetToken : tokens) {
             if (facetToken.contains(COLON)) {
-                String[] token = facetToken.split(COLON);
+                String[] token = COLON_PATTERN.split(facetToken);
                 String fieldName = token[0];
                 String facetValue = LEADING_QUESTIONMARK_PATTERN.matcher(token[1]).replaceAll(EMPTY);
                 Collection<Facet> facetList = facetsMap.get(fieldName);
@@ -276,7 +278,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             Collection<Facet> facetList = new ArrayList<>();
             String pageValue = page.getValue();
             if (pageValue.contains(COLON)) {
-                String[] value = pageValue.split(COLON);
+                String[] value = COLON_PATTERN.split(pageValue);
                 String fieldName = value[0];
                 String facetValue = value[1];
                 long facetValueCount = page.getValueCount();
