@@ -159,20 +159,20 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             return facetsMap;
         }
         String[] tokens = FACET_SEPARATOR_PATTERN.split(this.facets);
-        for (String token2 : tokens) {
-            String[] token = token2.split(COLON);
-            String fieldName = token[0];
-            String facetValue = LEADING_QUESTIONMARK_PATTERN.matcher(token[1]).replaceAll(EMPTY);
-            Collection<Facet> facetList = facetsMap.get(fieldName);
-            if (null == facetList) {
-                facetList = new ArrayList<>();
-            }
-            long present = facetList.stream()
-                    .filter((final Facet s) -> facetValue.equals(s.getValue()))
-                    .count();
-            if (present < 1) {
-                facetList.add(new Facet(fieldName, facetValue, 0, this.facets));
-                facetsMap.put(fieldName, facetList);
+        for (String facetToken : tokens) {
+            if (facetToken.contains(COLON)) {
+                String[] token = facetToken.split(COLON);
+                String fieldName = token[0];
+                String facetValue = LEADING_QUESTIONMARK_PATTERN.matcher(token[1]).replaceAll(EMPTY);
+                Collection<Facet> facetList = facetsMap.get(fieldName);
+                if (null == facetList) {
+                    facetList = new ArrayList<>();
+                }
+                long present = facetList.stream().filter((final Facet s) -> facetValue.equals(s.getValue())).count();
+                if (present < 1) {
+                    facetList.add(new Facet(fieldName, facetValue, 0, this.facets));
+                    facetsMap.put(fieldName, facetList);
+                }
             }
         }
         return facetsMap;
@@ -221,8 +221,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
             facetList = new ArrayList<>();
         }
         long count = facetList.stream()
-                .filter((final Facet s) -> this.prioritizedPublicationTypes.contains(s.getValue()))
-                .count();
+                .filter((final Facet s) -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
         if (count < this.prioritizedPublicationTypes.size()) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 0,
                     PAGE_SIZE, 1, parseSort());
@@ -244,12 +243,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         if (null == facetList) {
             facetList = new ArrayList<>();
         }
-        long books = facetList.stream()
-                .filter((final Facet s) -> s.getValue().startsWith("Book"))
-                .count();
-        long journals = facetList.stream()
-                .filter((final Facet s) -> s.getValue().startsWith("Journal"))
-                .count();
+        long books = facetList.stream().filter((final Facet s) -> s.getValue().startsWith("Book")).count();
+        long journals = facetList.stream().filter((final Facet s) -> s.getValue().startsWith("Journal")).count();
         if ((books > 0 && books < ALL_BOOK_OR_JOURNAL_TYPES)
                 || (journals > 0 && journals < ALL_BOOK_OR_JOURNAL_TYPES)) {
             FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, TYPE, 0, PAGE_SIZE, 1,
@@ -279,16 +274,19 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator impl
         // extract from facet queries
         for (FacetQueryEntry page : facetpage.getFacetQueryResult()) {
             Collection<Facet> facetList = new ArrayList<>();
-            String[] value = page.getValue().split(COLON);
-            String fieldName = value[0];
-            String facetValue = value[1];
-            long facetValueCount = page.getValueCount();
-            if (facetsMap.containsKey(fieldName)) {
-                facetList = facetsMap.get(fieldName);
-            }
-            if (facetValueCount > 0) {
-                facetList.add(new Facet(fieldName, facetValue, facetValueCount, this.facets));
-                facetsMap.put(fieldName, facetList);
+            String pageValue = page.getValue();
+            if (pageValue.contains(COLON)) {
+                String[] value = pageValue.split(COLON);
+                String fieldName = value[0];
+                String facetValue = value[1];
+                long facetValueCount = page.getValueCount();
+                if (facetsMap.containsKey(fieldName)) {
+                    facetList = facetsMap.get(fieldName);
+                }
+                if (facetValueCount > 0) {
+                    facetList.add(new Facet(fieldName, facetValue, facetValueCount, this.facets));
+                    facetsMap.put(fieldName, facetList);
+                }
             }
         }
         // extract from facet fields
