@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-05-25" version="3.5.11" description="3.5.11 bug fix release">
+            <action date="2018-05-24" dev="ryanmax" issue="142627" type="fix">
+                missing facet separator can cause java.lang.ArrayIndexOutOfBoundsException
+            </action>
+        </release>
         <release date="2018-05-14" version="3.5.10" description="3.5.10 bug fix release">
             <action date="2018-05-10" dev="ryanmax" issue="142122" type="update">
                 access from Vaden Health Center
@@ -28,7 +33,7 @@
             </action>
         </release>
         <release date="2018-05-07" version="3.5.9" description="3.5.9 bug fix release">
-            <action date="2018-05-24" dev="ceyates" issue="141396" type="fix">
+            <action date="2018-04-24" dev="ceyates" issue="141396" type="fix">
                 search tab font color
             </action>
         </release>
