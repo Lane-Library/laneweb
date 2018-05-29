@@ -17,7 +17,6 @@
     color: white;
 }
 
-
 .portal .popular {
     background-color: transparent;
     border: none;
@@ -38,11 +37,11 @@
     margin-bottom: 0;
     padding: 6px;
 }
- 
+
 .popular  div  div {
     border-bottom: 1px white solid;
  }
-  
+
 .popular a {
     box-sizing: border-box;
     display: inline-block;
