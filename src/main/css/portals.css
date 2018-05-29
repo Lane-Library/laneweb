@@ -27,7 +27,7 @@
     content: none;
 }
 
-.popular  div,
+.portal .popular  div,
 .portal .popular h3 {
     background-color: rgb(169, 90, 16);
 }
@@ -38,11 +38,11 @@
     padding: 6px;
 }
 
-.popular  div  div {
+.portal .popular  div  div {
     border-bottom: 1px white solid;
  }
 
-.popular a {
+.portal .popular a {
     box-sizing: border-box;
     display: inline-block;
     padding: 6px;
@@ -51,11 +51,11 @@
     width: 50%;
 }
 
-.popular a:nth-child(odd) {
+.portal .popular a:nth-child(odd) {
     border-right: 1px white solid;
 }
 
-.popular a:nth-child(even) {
+.portal .popular a:nth-child(even) {
     border-left: 1px white solid;
     margin-left: -1px;
 }
