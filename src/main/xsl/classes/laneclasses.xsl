@@ -3,8 +3,6 @@
 
 	<xsl:import href="laneclasses-common.xsl" />
 	
-	<xsl:template match="/doc/noncached-classes"/>
-	
 	<xsl:template match="/">
 		<html><head><title>classes</title></head><body><xsl:apply-templates/></body></html>
 	</xsl:template>

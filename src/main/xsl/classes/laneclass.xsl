@@ -5,16 +5,13 @@
 
 	<xsl:import href="laneclasses.xsl" />
 	
-
-	<xsl:template match="/doc/noncached-classes"/>
-
 	<xsl:param name="class-id" />
 
 	<xsl:variable name="internal-id">
-		<xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:internal_id/text()" />
+		<xsl:value-of select="/lc:classes/lc:event_data/lc:module_id[ ./text() = $class-id]/../lc:internal_id/text()" />
 	</xsl:variable>
 
- 	<xsl:template match="/doc/lc:classes">
+ 	<xsl:template match="/lc:classes">
 		<html>
 			<body>
 				<xsl:apply-templates select="./lc:event_data[./lc:module_id = $class-id]" />
@@ -28,7 +25,7 @@
 		</h4>
 		<xsl:apply-templates select="./lc:event_description" /> 
 		<xsl:apply-templates select="./lc:downloads/lc:download_description" /> 
-		 <xsl:for-each select="/doc/lc:classes/lc:event_data/lc:internal_id[ ./text() = $internal-id]/..">
+		 <xsl:for-each select="/lc:classes/lc:event_data/lc:internal_id[ ./text() = $internal-id]/..">
 			<xsl:call-template name="class-detail" />
 		</xsl:for-each> 
 	</xsl:template>

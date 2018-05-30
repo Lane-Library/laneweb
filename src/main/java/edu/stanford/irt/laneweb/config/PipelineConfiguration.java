@@ -38,7 +38,6 @@ import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
 import edu.stanford.irt.laneweb.classes.EventListTransformer;
-import edu.stanford.irt.laneweb.classes.RootElementProvidingGenerator;
 import edu.stanford.irt.laneweb.cocoon.DebugTransformer;
 import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
 import edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer;
@@ -141,12 +140,6 @@ public class PipelineConfiguration {
         return new NamespaceFilter();
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/noncached-classes")
-    @Scope("prototype")
-    public Generator nonCachedClassesGenerator(
-            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
-        return new RootElementProvidingGenerator("noncached-classes", xmlSAXParser);
-    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/noncaching")
     @Scope("prototype")

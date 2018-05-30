@@ -130,3 +130,7 @@
     width: inherit;
     padding-left: 9px;
 }
+
+.remaining-seats{
+	height: 26px;
+}
