@@ -524,6 +524,7 @@
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
+                                <include>lane-classes-min.js</include>
                                 <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
