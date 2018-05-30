@@ -5,8 +5,8 @@
     background-image: none;
     font-size: 18px;
     line-height: 19.8px;
-     margin: -12px -12px 6px;
-     padding: 10px 12px;
+    margin: -12px -12px 6px;
+    padding: 10px 12px;
 }
 
 .portal .module h4:after {
@@ -18,7 +18,7 @@
 }
 
 .portal .popular {
-    background-color: rgb(169, 90, 16);
+    background-color: transparent;
     border: none;
     padding: 0;
 }
@@ -27,17 +27,37 @@
     content: none;
 }
 
-.portal .popular li {
-    border: .5px white solid;
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 6px 12px;
-    width: 100%;
+.portal .popular  div,
+.portal .popular h3 {
+    background-color: rgb(169, 90, 16);
 }
 
-.portal .popular .short-item {
-    width: 50%;
+.portal .popular h3 {
+    border-bottom: 1px white solid;
+    margin-bottom: 0;
+    padding: 6px;
+}
+
+.portal .popular  div  div {
+    border-bottom: 1px white solid;
+ }
+
+.portal .popular a {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 6px;
     text-align: center;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.portal .popular a:nth-child(odd) {
+    border-right: 1px white solid;
+}
+
+.portal .popular a:nth-child(even) {
+    border-left: 1px white solid;
+    margin-left: -1px;
 }
 
 .portal .business-card {
