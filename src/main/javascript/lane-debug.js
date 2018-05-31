@@ -94,8 +94,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "authors-toggle.js",
         "clinical-toggle.js",
         "search-form-scroll.js",
-        "message.js",
-        "subscription.js"
+        "message.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:
