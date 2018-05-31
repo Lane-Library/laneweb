@@ -8,7 +8,7 @@
 	if (document.querySelectorAll(".remaining-seats").length > 0) {
 		L.io(url, {
 			on : {
-				success : succesHandle,
+				success : succesHandle
 			}
 		})
 	}
