@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2018-06-04" version="3.5.12" description="3.5.12 bug fix release">
+            <action date="2018-05-31" dev="alainb" issue="142891" type="add">
+                obtain class seats available number in a separate client request
+            </action>
             <action date="2018-05-29" dev="ceyates" issue="142764" type="update">
                 change popular resources on portal pages to two column grid
             </action>
