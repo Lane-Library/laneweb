@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-06-04" version="3.5.12" description="3.5.12 bug fix release">
+            <action date="2018-05-29" dev="ceyates" issue="142764" type="update">
+                change popular resources on portal pages to two column grid
+            </action>
+        </release>
         <release date="2018-05-25" version="3.5.11" description="3.5.11 bug fix release">
             <action date="2018-05-24" dev="ryanmax" issue="142627" type="fix">
                 missing facet separator can cause java.lang.ArrayIndexOutOfBoundsException
