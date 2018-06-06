@@ -67,7 +67,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 
     private Map<String, String> websiteIdMapping;
 
-    public SolrImageSearchSAXStrategy(Map<String, String> websiteIdMapping) {
+    public SolrImageSearchSAXStrategy(final Map<String, String> websiteIdMapping) {
         this.websiteIdMapping = websiteIdMapping;
     }
 
@@ -142,6 +142,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
     }
 
+    private void createImageDetailLabel(final XMLConsumer xmlConsumer, final String clazz, final String text)
+            throws SAXException {
+        startDivWithClass(xmlConsumer, clazz);
+        createElement(xmlConsumer, LABEL, text);
+        createEmptyElement(xmlConsumer, P);
+        endDiv(xmlConsumer);
+    }
+
     private void generateDetailImage(final XMLConsumer xmlConsumer, final int rowNumber) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "imageDetailHidden");
@@ -169,29 +177,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "pure-u-2-5");
         startDivWithClass(xmlConsumer, "gl");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
-        startDivWithClass(xmlConsumer, "desc");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "Description: ");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
-        endDiv(xmlConsumer);
-        startDivWithClass(xmlConsumer, "copyright");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "Rights Statement: ");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
-        endDiv(xmlConsumer);
-        startDivWithClass(xmlConsumer, "article-title");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.data(xmlConsumer, "Article Title: ");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, P);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, P);
-        endDiv(xmlConsumer);
+        createEmptyElement(xmlConsumer, "h3");
+        createImageDetailLabel(xmlConsumer, "desc", "Description: ");
+        createImageDetailLabel(xmlConsumer, "copyright", "Rights Statement: ");
+        createImageDetailLabel(xmlConsumer, "article-title", "Article Title: ");
         startDivWithClass(xmlConsumer, "to-image");
         startAnchor(xmlConsumer, "");
         atts = new AttributesImpl();

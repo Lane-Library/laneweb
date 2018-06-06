@@ -91,6 +91,11 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
         XMLUtils.createElement(xmlConsumer, XHTML_NS, name, atts, text);
     }
 
+    protected void createEmptyElement(final XMLConsumer xmlConsumer, final String name) throws SAXException {
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, name);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, name);
+    }
+
     protected void createSpan(final XMLConsumer xmlConsumer, final String text) throws SAXException {
         createElement(xmlConsumer, SPAN, text);
     }
