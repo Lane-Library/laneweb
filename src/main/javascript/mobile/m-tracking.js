@@ -37,7 +37,9 @@ $.LANE.tracking.isExternal = function(node) {
     if(node.nodeName !== 'A'){
         return false;
     }
-    else if (node.pathname.indexOf('secure/apps/proxy/credential') > -1 || node.host && (node.host.match('^(?:login\\.)?laneproxy.stanford.edu$') || node.host !== document.location.host)) {
+    else if (node.pathname.indexOf('secure/apps/proxy/credential') > -1
+            || node.host && (node.host.match('^(?:login\\.)?laneproxy.stanford.edu$')
+                    || node.host !== document.location.host)) {
         return true;
     }
     return false;

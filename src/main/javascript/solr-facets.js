@@ -35,10 +35,20 @@
             enabledFacets.forEach(function(facet) {
                 label = facet.querySelector('.facetLabel').textContent;
                 url = facet.querySelector('a').href;
-                html += '<span>' + label + '<a title="remove filter" href="' + url + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
+                html += '<span>'
+                    + label
+                    + '<a title="remove filter" href="'
+                    + url
+                    + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
             });
             if (enabledFacets.length > 0) {
-                html += '<span class="clearLimits"><a href="' + basePath + '/search.html?source=all-all&q=' + query + '">Clear all <i class="fa fa-times-circle fa-lg"></i></a> to show ' + count + ' results</span>';
+                html += '<span class="clearLimits"><a href="'
+                    + basePath
+                    + '/search.html?source=all-all&q='
+                    + query
+                    + '">Clear all <i class="fa fa-times-circle fa-lg"></i></a> to show '
+                    + count
+                    + ' results</span>';
                 limitsContainer.insertAdjacentHTML("beforeEnd", html);
             }
         },
