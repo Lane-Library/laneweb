@@ -26,7 +26,7 @@
                     if ( seats != 0) {
                         classEvents[i].innerText = SEATS_LEFT + seats;
                     } else {
-                        //Waiting LIST 
+                        //Waiting LIST
                         link = document.getElementById("class-registration-button-" + classId);
                         href = link.getAttribute("data-help");
                         link.setAttribute("href" , href);
