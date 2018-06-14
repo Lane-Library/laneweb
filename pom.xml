@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>33</version>
+        <version>34-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.5.13-SNAPSHOT</version>
@@ -46,7 +46,6 @@
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
-        <org.springframework.version>5.0.7.RELEASE</org.springframework.version>
     </properties>
     <dependencies>
         <dependency>
