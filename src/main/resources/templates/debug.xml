@@ -192,7 +192,7 @@
                 <div class="lane-nav">
                     <ul class="centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
-                            <span>Biomedical Resources</span>
+                            <span>Resources</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
@@ -216,7 +216,7 @@
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/about/">
-                            <span>About Lane</span>
+                            <span>About</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-about.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
@@ -227,14 +227,14 @@
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
                         </li>
-                        <li class="nav-menu">
-                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
-                        </li>
                         <li class="dropdown nav-menu" data-path="/contacts/">
                             <span>Contact</span>
                             <div class="dropdown-content nav-menu-content" style="right:0;left:auto"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
+                        </li>
+                        <li class="nav-menu">
+                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
                         </li>
                     </ul>
                 </div>
