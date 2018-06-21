@@ -192,7 +192,7 @@
                 <div class="lane-nav">
                     <ul class="centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
-                            <span>Resources</span>
+                            <span>Biomedical Resources</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
