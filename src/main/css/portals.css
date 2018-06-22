@@ -80,11 +80,11 @@
 }
 
 .portal .business-card a,
-.portal .business-card p,
 .portal .business-card a .fa {
-    color: black;
+    color: #007c92;
 }
 
 .portal .business-card p {
+    color: black;
     padding: 6px;
 }
