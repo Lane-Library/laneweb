@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-06-25" version="3.5.13" description="3.5.13 bug fix release">
+            <action date="2018-06-22" dev="ceyates" issue="143312" type="update">
+                links in the business cards
+            </action>
+            <action date="2018-06-19" dev="olgary" issue="143247" type="update">
+                minor changes to the main nav labels - template, debug.xml
+            </action>
+        </release>
         <release date="2018-06-04" version="3.5.12" description="3.5.12 bug fix release">
             <action date="2018-05-31" dev="alainb" issue="142891" type="add">
                 obtain class seats available number in a separate client request
