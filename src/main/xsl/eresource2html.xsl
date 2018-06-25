@@ -24,7 +24,8 @@
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
-            <xsl:if test="$type = 'Book' and contains(s:primaryType, 'Book')">
+            <xsl:if test="($type = 'Book' and contains(s:primaryType, 'Book'))
+                or ($type = 'Journal' and contains(s:primaryType, 'Journal'))">
                 <i class="fa fa-book"></i>
                 <img class="bookcover" data-bibid="{s:recordId}"/>
             </xsl:if>

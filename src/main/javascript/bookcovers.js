@@ -39,13 +39,15 @@
 
                 // add src attributes to imag nodes
                 update: function(updates) {
-                    var bibid, i;
+                    var bibid, src, i;
                     for (bibid in updates) {
                         if (updates[bibid]) {
                             for (i = 0; i < imageMap[bibid].length; i++) {
                                 // case 132771 use protocol relative urls for images
                                 // from the bookcover database (substring(5))
-                                imageMap[bibid][i].src = updates[bibid].substring(5);
+                                src = updates[bibid];
+                                src = src.substring(src.indexOf(":") + 1);
+                                imageMap[bibid][i].src = src;
                                 imageMap[bibid][i].classList.add("bookcover-active");
                             }
                         }
