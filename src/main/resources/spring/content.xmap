@@ -145,17 +145,6 @@
               <map:serialize type="xml"/>
             </map:match>
          </map:match>
-        <!-- TODO: temporarily moving this out of caching pipeline because of intermittent NullPointerExceptioins -->
-        <map:match pattern="portals/cvicu.html" type="wildcard">
-            <map:generate type="html" src="{content-base}/portals/cvicu.html"/>
-            <map:transform type="xinclude"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="random/**" type="wildcard">
-            <map:generate type="file" src="{1}"/>
-            <map:transform type="saxon" src="classpath:/xsl/random.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <!-- To replace persistent.html login later -->
         <map:match pattern="myaccounts.html" type="wildcard">
             <map:generate type="html" src="{content-base}/myaccounts.html"/>
