@@ -22,6 +22,8 @@ public class BookmarkTrendsReporter {
      *            the bookmarkService to set
      * @param googleTracker
      *            the googleTracker to set
+     * @param localHostName
+     *            the hostname
      */
     public BookmarkTrendsReporter(final BookmarkService bookmarkService, final GoogleTracker googleTracker,
             final String localHostName) {
