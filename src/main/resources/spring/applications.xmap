@@ -100,7 +100,9 @@
             <map:transform src="classpath:/xsl/sfx2json.xsl" type="saxon">
                 <map:parameter name="sfx-request" value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact"/>
             </map:transform>
-            <map:serialize type="text"/>
+            <map:serialize type="text">
+                <map:parameter name="media-type" value="application/json"/>
+            </map:serialize>
         </map:match>
     </map:pipeline>
     <map:pipeline type="expires">
