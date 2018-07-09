@@ -73,7 +73,7 @@ public class LaneCrmController {
 
     private String getRedirectTo(final Map<String, Object> map, final ResponseEntity<String> response) {
         String redirectTo = (String) map.get("redirect");
-        if (!response.getStatusCode().equals(HttpStatus.OK)) {
+        if (response.getStatusCode() != HttpStatus.OK) {
             redirectTo = ERROR_URL;
         } else if (redirectTo == null) {
             redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
