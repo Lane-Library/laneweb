@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
@@ -57,18 +56,14 @@ public class PersistentLoginController {
         this.clock = clock;
     }
 
-    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" },
-            params = { "pl=false" },
-            method = RequestMethod.GET)
+    @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
     public String disablePersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletResponse response) {
         resetCookies(response);
         return getRedirectURL(url);
     }
 
-    @RequestMapping(value = "/secure/persistentLogin.html",
-            params = { "pl=true" },
-            method = RequestMethod.GET)
+    @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
@@ -76,9 +71,7 @@ public class PersistentLoginController {
         return getRedirectURL(url);
     }
 
-    @RequestMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" },
-            params = { "url", "pl=renew" },
-            method = RequestMethod.GET)
+    @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
     public String renewPersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.IS_ACTIVE_SUNETID) final Boolean isActiveSunetId,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
