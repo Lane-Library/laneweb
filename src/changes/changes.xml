@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-07-09" version="3.5.15" description="3.5.15 bug fix release">
+            <action date="2018-03" dev="ryanmax" issue="143517" type="fix">
+                incorrect content type for SFX requests
+            </action>
+        </release>
         <release date="2018-07-02" version="3.5.14" description="3.5.14 bug fix release">
             <action date="2018-06-25" dev="ceyates" issue="143171" type="add">
                 use browzine api to get journal cover images on search and browse pages
