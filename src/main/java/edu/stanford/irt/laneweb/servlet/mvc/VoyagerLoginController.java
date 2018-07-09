@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -31,7 +32,7 @@ public class VoyagerLoginController {
         this.unividDataBinder = unividDataBinder;
     }
 
-    @RequestMapping(value = "/secure/voyager/lmldb")
+    @RequestMapping(value = "/secure/voyager/lmldb", method = RequestMethod.GET)
     public void login(@RequestParam("PID") final String pid,
             @ModelAttribute(Model.UNIVID) final String univid,
             final HttpServletRequest request,

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.flickr.FlickrPhoto;
@@ -22,7 +23,7 @@ public class FlickrPhotoController {
         this.service = service;
     }
 
-    @RequestMapping("/apps/getFlickrPhotoList")
+    @RequestMapping(value = "/apps/getFlickrPhotoList", method = RequestMethod.GET)
     @ResponseBody
     public List<FlickrPhoto> getFlickrPhotoList(final HttpServletResponse response) {
         response.setHeader("Cache-Control", "no-cache");

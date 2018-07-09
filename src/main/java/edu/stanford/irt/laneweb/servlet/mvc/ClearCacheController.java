@@ -6,6 +6,7 @@ import javax.cache.Cache;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.cocoon.cache.CachedResponse;
@@ -19,7 +20,7 @@ public class ClearCacheController {
         this.cache = cache;
     }
 
-    @RequestMapping(value = "/secure/admin/clearcache")
+    @RequestMapping(value = "/secure/admin/clearcache", method = RequestMethod.GET)
     @ResponseBody
     public String clearCache() {
         this.cache.clear();

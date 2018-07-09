@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.stanford.irt.laneweb.model.Model;
@@ -42,7 +43,7 @@ public class CMERedirectController {
         this.dataBinder = dataBinder;
     }
 
-    @RequestMapping(value = "redirect/cme")
+    @RequestMapping(value = "redirect/cme", method = RequestMethod.GET)
     public void cmeRedirect(@ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.BASE_PATH) final String basePath, @ModelAttribute(Model.EMRID) final String emrid,
             @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,
@@ -54,7 +55,7 @@ public class CMERedirectController {
         }
     }
 
-    @RequestMapping(value = "secure/redirect/cme")
+    @RequestMapping(value = "secure/redirect/cme", method = RequestMethod.GET)
     public void cmeSecureRedirect(@ModelAttribute(Model.AUTH) final String userHash,
             @ModelAttribute(Model.EMRID) final String emrid,
             @ModelAttribute(Model.PROXY_LINKS) final boolean proxyLinks, @RequestParam final String url,

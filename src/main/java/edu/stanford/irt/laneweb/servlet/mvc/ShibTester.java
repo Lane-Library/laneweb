@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ShibTester {
@@ -22,7 +23,7 @@ public class ShibTester {
             "postalAddress", "sn", "street", "suAffiliation", "suDisplayNameLF", "suUnivID", "targeted-id",
             "telephoneNumber", "title", "uid", "uid-alt", "unscoped-affiliation", "upn");
 
-    @RequestMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
+    @RequestMapping(value = { "/secure/header-test", "/shib-secure/header-test" }, method = RequestMethod.GET)
     public void testUrl(final HttpServletRequest request, final ServletResponse response) throws IOException {
         response.setContentType("text/plain");
         PrintWriter result = response.getWriter();

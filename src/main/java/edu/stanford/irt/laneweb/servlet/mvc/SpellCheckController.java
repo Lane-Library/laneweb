@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -25,7 +26,7 @@ public class SpellCheckController {
         this.spellChecker = spellChecker;
     }
 
-    @RequestMapping(value = "/apps/spellcheck/json")
+    @RequestMapping(value = "/apps/spellcheck/json", method = RequestMethod.GET)
     @ResponseBody
     public SpellCheckResult checkSpelling(@RequestParam final String q) {
         return this.spellChecker.spellCheck(q);

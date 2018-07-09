@@ -7,6 +7,7 @@ import javax.servlet.ServletResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.stanford.irt.laneweb.proxy.ProxyServersService;
 
@@ -21,7 +22,7 @@ public class EzproxyServersController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/eresources/ezproxy-servers.txt")
+    @RequestMapping(value = "/eresources/ezproxy-servers.txt", method = RequestMethod.GET)
     public void getEzproxyServers(final ServletResponse response) throws IOException {
         this.service.write(response.getOutputStream());
     }

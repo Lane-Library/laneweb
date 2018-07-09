@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc.bookmarks;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
@@ -16,7 +17,7 @@ public class BookmarkMetricsController {
         this.bookmarkService = bookmarkService;
     }
 
-    @RequestMapping(value = "/rowcount")
+    @RequestMapping(value = "/rowcount", method = RequestMethod.GET)
     @ResponseBody
     public int getRowCount() {
         return this.bookmarkService.getRowCount();
