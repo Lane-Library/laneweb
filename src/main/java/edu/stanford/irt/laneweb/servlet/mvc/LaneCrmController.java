@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -58,14 +59,14 @@ public class LaneCrmController {
         this.connectionFactory = connectionFactory;
     }
 
-    @RequestMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
+    @RequestMapping(value = LANELIBACQ_PATH, method = RequestMethod.POST, consumes = FORM_MIME_TYPE)
     public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) throws IOException {
         Map<String, Object> map = model.asMap();
         ResponseEntity<String> response = submitRequestToCrmServer(map, this.acquisitionURL);
         return getRedirectTo(map, response);
     }
 
-    @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
+    @RequestMapping(value = LANELIBACQ_PATH, method = RequestMethod.POST, consumes = JSON_MIME_TYPE)
     public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback)
             throws IOException {
         return submitRequestToCrmServer(feedback, this.acquisitionURL);
