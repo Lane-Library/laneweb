@@ -32,38 +32,8 @@ public class LaneCrmControllerTest {
     @Before
     public void setUp() {
         this.connectionFactory = mock(URLConnectionFactory.class);
-        this.controller = new LaneCrmController("acquisitions", "askus", this.connectionFactory);
+        this.controller = new LaneCrmController("acquisitions", this.connectionFactory);
         this.connection = mock(HttpsURLConnection.class);
-    }
-
-    @Test
-    public void testFormSubmitLaneaskus() throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Model model = mock(Model.class);
-        expect(model.asMap()).andReturn(Collections.singletonMap("foo", "bar"));
-        expect(this.connectionFactory.getConnection("askus")).andReturn(this.connection);
-        this.connection.setDoOutput(true);
-        expect(this.connection.getOutputStream()).andReturn(baos);
-        expect(this.connection.getResponseCode()).andReturn(200);
-        replay(model, this.connectionFactory, this.connection);
-        assertEquals("redirect:/index.html", this.controller.formSubmitLaneaskus(model, null));
-        assertEquals("foo=bar&id=", new String(baos.toByteArray()));
-        verify(model, this.connectionFactory, this.connection);
-    }
-
-    @Test
-    public void testFormSubmitLaneaskusRedirect() throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Model model = mock(Model.class);
-        expect(model.asMap()).andReturn(Collections.singletonMap("redirect", "redirect"));
-        expect(this.connectionFactory.getConnection("askus")).andReturn(this.connection);
-        this.connection.setDoOutput(true);
-        expect(this.connection.getOutputStream()).andReturn(baos);
-        expect(this.connection.getResponseCode()).andReturn(200);
-        replay(model, this.connectionFactory, this.connection);
-        assertEquals("redirect:redirect", this.controller.formSubmitLaneaskus(model, null));
-        assertEquals("redirect=redirect&id=", new String(baos.toByteArray()));
-        verify(model, this.connectionFactory, this.connection);
     }
 
     @Test
@@ -94,17 +64,6 @@ public class LaneCrmControllerTest {
         assertEquals("redirect:/error.html", this.controller.formSubmitLanelibacqs(model, null));
         assertEquals("foo=bar&id=", new String(baos.toByteArray()));
         verify(model, this.connectionFactory, this.connection);
-    }
-
-    @Test
-    public void testJsonSubmitLaneAskus() throws IOException {
-        expect(this.connectionFactory.getConnection("askus")).andReturn(this.connection);
-        this.connection.setDoOutput(true);
-        expect(this.connection.getOutputStream()).andReturn(new ByteArrayOutputStream());
-        expect(this.connection.getResponseCode()).andReturn(200);
-        replay(this.connectionFactory, this.connection);
-        ResponseEntity<String> response = this.controller.jsonSubmitLaneaskus(Collections.emptyMap());
-        assertSame(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test

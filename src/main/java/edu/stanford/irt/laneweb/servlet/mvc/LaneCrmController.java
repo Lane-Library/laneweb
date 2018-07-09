@@ -34,8 +34,6 @@ public class LaneCrmController {
         }
     }
 
-    private static final String ASKUS_PATH = "/apps/laneaskus";
-
     private static final String ERROR_URL = "/error.html";
 
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
@@ -48,28 +46,16 @@ public class LaneCrmController {
 
     private String acquisitionURL;
 
-    private String askUsURL;
-
     private URLConnectionFactory connectionFactory;
 
     @Autowired
-    public LaneCrmController(@Value("${edu.stanford.irt.laneweb.acquisition-api.url}") final String acquisitionURL,
-            @Value("${edu.stanford.irt.laneweb.askus-api.url}") final String askUsURL) {
-        this(acquisitionURL, askUsURL, new URLConnectionFactory());
+    public LaneCrmController(@Value("${edu.stanford.irt.laneweb.acquisition-api.url}") final String acquisitionURL) {
+        this(acquisitionURL, new URLConnectionFactory());
     }
 
-    LaneCrmController(final String acquisitionURL, final String askUsURL,
-            final URLConnectionFactory connectionFactory) {
+    LaneCrmController(final String acquisitionURL, final URLConnectionFactory connectionFactory) {
         this.acquisitionURL = acquisitionURL;
-        this.askUsURL = askUsURL;
         this.connectionFactory = connectionFactory;
-    }
-
-    @RequestMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitLaneaskus(final Model model, final RedirectAttributes atts) throws IOException {
-        Map<String, Object> map = model.asMap();
-        ResponseEntity<String> response = submitRequestToCrmServer(map, this.askUsURL);
-        return getRedirectTo(map, response);
     }
 
     @RequestMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
@@ -77,12 +63,6 @@ public class LaneCrmController {
         Map<String, Object> map = model.asMap();
         ResponseEntity<String> response = submitRequestToCrmServer(map, this.acquisitionURL);
         return getRedirectTo(map, response);
-    }
-
-    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
-    public ResponseEntity<String> jsonSubmitLaneaskus(@RequestBody final Map<String, Object> feedback)
-            throws IOException {
-        return submitRequestToCrmServer(feedback, this.askUsURL);
     }
 
     @RequestMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
