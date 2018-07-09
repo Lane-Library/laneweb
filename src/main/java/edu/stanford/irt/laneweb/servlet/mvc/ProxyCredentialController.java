@@ -3,9 +3,8 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -31,7 +30,7 @@ public class ProxyCredentialController {
         this.userBinder = userBinder;
     }
 
-    @RequestMapping(value = "/apps/proxy/credential", method = RequestMethod.GET)
+    @GetMapping(value = "/apps/proxy/credential")
     public View proxyRedirect(final HttpServletRequest request,
             final RedirectAttributes attrs,
             @ModelAttribute(Model.USER_ID) final String userid,
@@ -52,7 +51,7 @@ public class ProxyCredentialController {
         return view;
     }
 
-    @RequestMapping(value = "/secure/apps/proxy/credential", method = RequestMethod.GET)
+    @GetMapping(value = "/secure/apps/proxy/credential")
     public View secureProxyRedirect(final HttpServletRequest request,
             final RedirectAttributes attrs,
             @ModelAttribute(Model.USER_ID) final String userid,

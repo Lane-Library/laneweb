@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 
 // TODO: the individual methods for each address probably can be combined
 @Controller
-@RequestMapping(value = "/apps/mail", method = RequestMethod.POST)
+@RequestMapping(value = "/apps/mail")
 public class EMailController {
 
     private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
@@ -52,7 +52,7 @@ public class EMailController {
         this.sender = sender;
     }
 
-    @RequestMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
+    @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
         appendNameToSubject(map);
@@ -60,14 +60,14 @@ public class EMailController {
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
+    @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
         sendEmail(DOCXPRESS_ADDRESS, map);
         return getRedirectTo(map);
     }
 
-    @RequestMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
+    @PostMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());
@@ -75,7 +75,7 @@ public class EMailController {
         sendEmail(ASKUS_ADDRESS, feedback);
     }
 
-    @RequestMapping(value = DOCXPRESS_PATH, consumes = JSON_MIME_TYPE)
+    @PostMapping(value = DOCXPRESS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitDocxpress(@RequestBody final Map<String, Object> feedback, final Model model) {
         feedback.putAll(model.asMap());

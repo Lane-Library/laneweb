@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,7 +16,7 @@ public class ClearSearchCacheController {
         this.metaSearchService = metaSearchService;
     }
 
-    @RequestMapping(value = "/apps/search/clearcache", method = RequestMethod.GET)
+    @GetMapping(value = "/apps/search/clearcache")
     @ResponseBody
     public String clearCache(@RequestParam(required = false) final String q) {
         if (q != null) {

@@ -5,8 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -32,7 +31,7 @@ public class QueryMapController {
         this.queryMapper = queryMapper;
     }
 
-    @RequestMapping(value = "/apps/querymap/json", method = RequestMethod.GET)
+    @GetMapping(value = "/apps/querymap/json")
     @ResponseBody
     public ResourceMap getJSONResourceMap(@RequestParam final String q) {
         return this.queryMapper.getResourceMap(this.parser.parse(q));

@@ -10,10 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -37,7 +40,7 @@ public class JSONBookmarkController extends BookmarkController {
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+    @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void addBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
@@ -50,7 +53,7 @@ public class JSONBookmarkController extends BookmarkController {
         bookmarks.add(0, bookmark);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @DeleteMapping
     @ResponseStatus(value = HttpStatus.OK)
     public void deleteBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
@@ -74,7 +77,7 @@ public class JSONBookmarkController extends BookmarkController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public Bookmark getBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.PROXY_LINKS) final Boolean proxyLinks,
             @RequestParam final int i,
@@ -83,7 +86,7 @@ public class JSONBookmarkController extends BookmarkController {
         return bookmarks.get(i);
     }
 
-    @RequestMapping(value = "/move", method = RequestMethod.POST, consumes = "application/json")
+    @PostMapping(value = "/move", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void moveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
@@ -97,7 +100,7 @@ public class JSONBookmarkController extends BookmarkController {
         bookmarks.add(to, bookmarks.remove(from));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
+    @PutMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
