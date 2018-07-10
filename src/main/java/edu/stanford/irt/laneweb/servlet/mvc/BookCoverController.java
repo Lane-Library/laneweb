@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +15,7 @@ public class BookCoverController {
 
     private BookCoverService service;
 
-    public BookCoverController(
-            @Qualifier("edu.stanford.irt.laneweb.bookcovers.BookCoverService/HTTP")
-            final BookCoverService service) {
+    public BookCoverController(final BookCoverService service) {
         this.service = service;
     }
 

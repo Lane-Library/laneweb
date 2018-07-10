@@ -8,25 +8,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import edu.stanford.irt.laneweb.bookcovers.BookCoverService;
-import edu.stanford.irt.laneweb.bookcovers.HTTPBookCoverService;
 import edu.stanford.irt.laneweb.bookcovers.RESTBookCoverService;
 import edu.stanford.irt.laneweb.rest.RESTService;
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 public class BookCoverConfiguration {
 
-    @Bean("edu.stanford.irt.laneweb.bookcovers.BookCoverService/HTTP")
-    public BookCoverService bookCoverService(final ObjectMapper objectMapper,
-            @Qualifier("java.net.URI/bookcover-service") final URI bookCoverServiceURI,
-            final ServiceURIResolver uriResolver) {
-        return new HTTPBookCoverService(objectMapper, bookCoverServiceURI, uriResolver);
-    }
-
-    @Bean("edu.stanford.irt.laneweb.bookcovers.BookCoverService/REST")
+    @Bean
     public BookCoverService bookCoverService(
             @Qualifier("java.net.URI/bookcover-service") final URI bookCoverServiceURI,
             final RESTService restService) {

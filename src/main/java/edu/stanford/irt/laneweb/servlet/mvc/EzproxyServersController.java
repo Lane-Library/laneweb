@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletResponse;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -15,9 +14,7 @@ public class EzproxyServersController {
 
     private ProxyServersService service;
 
-    public EzproxyServersController(
-            @Qualifier("edu.stanford.irt.laneweb.proxy.ProxyServersService/HTTP")
-            final ProxyServersService service) {
+    public EzproxyServersController(final ProxyServersService service) {
         this.service = service;
     }
 

@@ -25,11 +25,6 @@ public class BookCoverConfigurationTest {
     }
 
     @Test
-    public void testHttpBookCoverService() {
-        assertNotNull(this.configuration.bookCoverService(null, null, null));
-    }
-
-    @Test
     public void testRestBookCoverService() {
         assertNotNull(this.configuration.bookCoverService(null, null));
     }

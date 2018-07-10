@@ -37,11 +37,6 @@ public class CourseReservesConfigurationTest {
     }
 
     @Test
-    public void testHTTPCourseReservesService() {
-        assertNotNull(this.configuration.courseReservesService(null, null, null));
-    }
-
-    @Test
     public void testRESTCourseReservesService() {
         assertNotNull(this.configuration.courseReservesService(null, null));
     }
