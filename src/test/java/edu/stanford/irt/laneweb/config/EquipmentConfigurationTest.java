@@ -28,7 +28,7 @@ public class EquipmentConfigurationTest {
     }
 
     @Test
-    public void testHttpEquipmentService() {
-        assertNotNull(this.configuration.httpEquipmentService(null, null, null));
+    public void testRestEquipmentService() {
+        assertNotNull(this.configuration.restEquipmentService(null, null, null));
     }
 }
