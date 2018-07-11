@@ -8,14 +8,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.laneweb.catalog.CatalogRecordGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
-import edu.stanford.irt.laneweb.catalog.equipment.HTTPEquipmentService;
+import edu.stanford.irt.laneweb.catalog.equipment.RESTEquipmentService;
+import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
@@ -23,9 +22,7 @@ public class EquipmentConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment")
     @Scope("prototype")
-    public Generator equipmentGenerator(
-            @Qualifier("edu.stanford.irt.laneweb.catalog.equipment.EquipmentService/HTTP")
-            final EquipmentService equipmentService,
+    public Generator equipmentGenerator(final EquipmentService equipmentService,
             @Qualifier("org.xml.sax.XMLReader/marc") final XMLReader marcXMLReader) {
         return new CatalogRecordGenerator(equipmentService, marcXMLReader);
     }
@@ -36,10 +33,11 @@ public class EquipmentConfiguration {
         return new EquipmentStatusTransformer(equipmentService);
     }
 
-    @Bean("edu.stanford.irt.laneweb.catalog.equipment.EquipmentService/HTTP")
-    public EquipmentService httpEquipmentService(final ObjectMapper objectMapper,
+    @Bean
+    public EquipmentService restEquipmentService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            final RESTService restService,
             final ServiceURIResolver uriResolver) {
-        return new HTTPEquipmentService(objectMapper, catalogServiceURI, uriResolver);
+        return new RESTEquipmentService(catalogServiceURI, restService, uriResolver);
     }
 }
