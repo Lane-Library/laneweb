@@ -99,7 +99,7 @@ public class LaneSearchIT {
         // Classes
         this.mockMvc.perform(get("/eresources/search.html?q=classes").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'laneclasses.html')]",
+                        "//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'laneclasses.html')]",
                         this.ns).exists());
     }
 
