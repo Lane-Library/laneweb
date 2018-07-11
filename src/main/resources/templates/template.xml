@@ -99,7 +99,7 @@
                 <header>
                     <ul class="login">
                         <li>
-                            <a href="/secure/login.html"><i class="fa fa-lock"></i> STANFORD LOGIN</a>
+                            <a href="/secure/login.html"><i class="fa fa-lock"></i> LOGIN</a>
                         </li>
                         <li><i class="fa fa-user"></i>&#160;</li>
                         <li>
@@ -124,7 +124,7 @@
                             <div class="login-info">
                                 <div class="pure-g">
                                     <div class="pure-u-1-2">
-                                        STANFORD LOGIN
+                                      LOGIN
                                         <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
                                     </div>
                                     <div class="pure-u-1-2">
@@ -142,7 +142,7 @@
                 <div class="lane-nav">
                     <ul class="centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
-                            <span>Biomedical Resources</span>
+                            <span>Resources</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
@@ -154,7 +154,7 @@
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/classes-consult/">
-                            <span>Classes &amp; Tutorials</span>
+                            <span>Library Classes</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-classes.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
@@ -172,7 +172,7 @@
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/help/">
-                            <span>How To</span>
+                            <span>FAQs</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-howto.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
@@ -211,15 +211,15 @@
                     <div class="pure-u-1-6">
                         <ul>
                             <li><a href="/classes-consult/laneclasses.html">Upcoming Classes</a></li>
-                            <li><a href="/classes-consult/archives.html">Classes Archive</a></li>
+                            <li><a href="/classes-consult/archives.html">Past Classes</a></li>
                             <li><a href="/beemap.html">EBP Infographic</a></li>
-                            <li><a href="/classes-consult/pom-ebp.html">Practice of Medicine &amp; EBP Curriculum</a></li>
+                            <li><a href="/classes-consult/pom-ebp.html">Practice of Medicine Curriculum</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-1-6">
                         <ul>
-                            <li><a href="/using-lib/eligibility.html">Your Eligibility</a></li>
-                            <li><a href="/using-lib/lane-login.html">Your Login</a></li>
+                            <li><a href="/using-lib/eligibility.html">Who Can Use Lane</a></li>
+                            <li><a href="/using-lib/lane-login.html">Login Help</a></li>
                             <li><a href="https://docxpress.stanford.edu/">DocXpress <i class="fa fa-external-link"></i></a></li>
                             <li><a href="/using-lib/study-computing-spaces.html">Study &amp; Computing Spaces</a></li>
                             <li><a href="/using-lib/borrow.html">Borrow, Renew &amp; Return</a></li>
@@ -231,7 +231,7 @@
                             <li><a href="/about/directions-maps.html">Directions &amp; Maps</a></li>
                             <li><a href="/contacts/main-contacts.html">Contact Us</a></li>
                             <li><a href="/contacts/liaisons.html">Library Liaisons</a></li>
-                            <li><a href="/about/grantwriters.html">Info for Grant Writers</a></li>
+                            <li><a href="/about/grantwriters.html">About Lane</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-1-6">
