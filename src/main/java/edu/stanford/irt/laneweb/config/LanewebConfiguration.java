@@ -2,8 +2,8 @@ package edu.stanford.irt.laneweb.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +25,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
@@ -41,7 +43,6 @@ import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
 import edu.stanford.irt.laneweb.eresources.search.Facet;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.rest.RESTService;
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 @ImportResource({
@@ -65,6 +66,10 @@ public class LanewebConfiguration {
 
     private static final List<String> DEFAULT_LOCATIONS =
             Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
+
+    private static final int HTTP_CONNECT_TIMEOUT = 5000;
+
+    private static final int HTTP_READ_TIMEOUT = 15000;
 
     private Map<String, Object> constants;
 
@@ -116,7 +121,10 @@ public class LanewebConfiguration {
 
     @Bean
     public ClientHttpRequestFactory clientHttpRequestFactory() {
-        return new HttpComponentsClientHttpRequestFactory();
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(HTTP_READ_TIMEOUT);
+        return requestFactory;
     }
 
     @Bean
@@ -153,17 +161,15 @@ public class LanewebConfiguration {
             final ClientHttpRequestFactory clientHttpRequestFactory,
             final ObjectMapper objectMapper) {
         RestTemplate template =  new RestTemplate(clientHttpRequestFactory);
-        template.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter(objectMapper)));
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
+        messageConverters.add(new ResourceHttpMessageConverter());
+        template.setMessageConverters(messageConverters);
         return template;
     }
 
     @Bean
     public RESTService restService(final RestOperations restOperations) {
         return new RESTService(restOperations);
-    }
-
-    @Bean
-    public ServiceURIResolver serviceURIResolver() {
-        return new ServiceURIResolver();
     }
 }

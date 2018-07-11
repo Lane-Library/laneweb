@@ -77,9 +77,4 @@ public class LanewebConfigurationTest {
         assertNotNull(LanewebConfiguration.propertySourcesPlaceholderConfigurer(environment, resourceLoader));
         verify(environment, resourceLoader);
     }
-
-    @Test
-    public void testServiceURIResolver() {
-        assertNotNull(this.configuration.serviceURIResolver());
-    }
 }

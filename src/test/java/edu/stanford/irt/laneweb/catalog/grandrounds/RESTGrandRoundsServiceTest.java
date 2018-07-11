@@ -13,29 +13,29 @@ import java.net.URISyntaxException;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
+import edu.stanford.irt.laneweb.rest.RESTService;
 
-public class HTTPGrandRoundsServiceTest {
+public class RESTGrandRoundsServiceTest {
 
-    private HTTPGrandRoundsService service;
+    private RESTGrandRoundsService service;
 
     private URI uri;
 
-    private ServiceURIResolver uriResolver;
+    private RESTService restService;
 
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = getClass().getResource("").toURI();
-        this.uriResolver = mock(ServiceURIResolver.class);
-        this.service = new HTTPGrandRoundsService(this.uri, this.uriResolver);
+        this.restService = mock(RESTService.class);
+        this.service = new RESTGrandRoundsService(this.uri, this.restService);
     }
 
     @Test
     public void testGetGrandRounds() throws IOException {
-        expect(this.uriResolver.getInputStream(this.uri.resolve("grandrounds?department=department&year=year")))
+        expect(this.restService.getInputStream(this.uri.resolve("grandrounds?department=department&year=year")))
                 .andReturn(getClass().getResourceAsStream("grandrounds"));
-        replay(this.uriResolver);
+        replay(this.restService);
         assertEquals(39, this.service.getGrandRounds("department", "year").size());
-        verify(this.uriResolver);
+        verify(this.restService);
     }
 }

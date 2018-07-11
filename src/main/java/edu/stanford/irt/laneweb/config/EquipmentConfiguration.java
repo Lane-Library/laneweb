@@ -15,7 +15,6 @@ import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatusTransformer;
 import edu.stanford.irt.laneweb.catalog.equipment.RESTEquipmentService;
 import edu.stanford.irt.laneweb.rest.RESTService;
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 @Configuration
 public class EquipmentConfiguration {
@@ -36,8 +35,7 @@ public class EquipmentConfiguration {
     @Bean
     public EquipmentService restEquipmentService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final RESTService restService,
-            final ServiceURIResolver uriResolver) {
-        return new RESTEquipmentService(catalogServiceURI, restService, uriResolver);
+            final RESTService restService) {
+        return new RESTEquipmentService(catalogServiceURI, restService);
     }
 }

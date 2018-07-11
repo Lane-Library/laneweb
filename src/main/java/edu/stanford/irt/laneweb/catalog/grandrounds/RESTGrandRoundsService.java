@@ -16,12 +16,12 @@ import edu.stanford.irt.grandrounds.GrandRoundsException;
 import edu.stanford.irt.grandrounds.Link;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
+import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.lane.catalog.CatalogSQLException;
 import edu.stanford.lane.catalog.Record;
 import edu.stanford.lane.catalog.RecordCollection;
 
-public class HTTPGrandRoundsService implements GrandRoundsService {
+public class RESTGrandRoundsService implements GrandRoundsService {
 
     private static final String ENDPOINT_PATH_FORMAT = "grandrounds?department=%s&year=%s";
 
@@ -30,12 +30,12 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
     private static final String UTF8 = StandardCharsets.UTF_8.name();
 
     private URI catalogServiceURI;
-    
-    private ServiceURIResolver uriResolver;
 
-    public HTTPGrandRoundsService(final URI catalogServiceURI, final ServiceURIResolver uriResolver) {
+    private RESTService restService;
+
+    public RESTGrandRoundsService(final URI catalogServiceURI, final RESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
-        this.uriResolver = uriResolver;
+        this.restService = restService;
     }
 
     @Override
@@ -47,8 +47,7 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
                 addPresentationIfValid(new Presentation(record), presentations);
             }
             return presentations.stream()
-                    .sorted((final Presentation p1, final Presentation p2)
-                            -> p2.getDate().compareTo(p1.getDate()))
+                    .sorted((final Presentation p1, final Presentation p2) -> p2.getDate().compareTo(p1.getDate()))
                     .collect(Collectors.toList());
         } catch (CatalogSQLException | IOException e) {
             throw new LanewebException(e);
@@ -70,7 +69,7 @@ public class HTTPGrandRoundsService implements GrandRoundsService {
         try {
             String endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
                     URLEncoder.encode(year, UTF8));
-            return this.uriResolver.getInputStream(this.catalogServiceURI.resolve(endpointPath));
+            return this.restService.getInputStream(this.catalogServiceURI.resolve(endpointPath));
         } catch (IOException e) {
             throw new LanewebException(e);
         }

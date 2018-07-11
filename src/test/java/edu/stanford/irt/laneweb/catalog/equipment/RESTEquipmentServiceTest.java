@@ -20,7 +20,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
 
 public class RESTEquipmentServiceTest {
 
@@ -30,23 +29,20 @@ public class RESTEquipmentServiceTest {
 
     private URI uri;
 
-    private ServiceURIResolver uriResolver;
-
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = getClass().getResource("").toURI();
         this.restService = mock(RESTService.class);
-        this.uriResolver = mock(ServiceURIResolver.class);
-        this.service = new RESTEquipmentService(this.uri, this.restService, this.uriResolver);
+        this.service = new RESTEquipmentService(this.uri, this.restService);
     }
 
     @Test
     public void testGetRecords() throws IOException {
-        expect(this.uriResolver.getInputStream(this.uri.resolve("equipment/records")))
+        expect(this.restService.getInputStream(this.uri.resolve("equipment/records")))
                 .andReturn(getClass().getResourceAsStream(("equipment/records")));
-        replay(this.uriResolver);
+        replay(this.restService);
         assertEquals(-1, this.service.getRecords(Collections.emptyList()).read());
-        verify(this.uriResolver);
+        verify(this.restService);
     }
 
     @Test

@@ -12,26 +12,24 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService;
-import edu.stanford.irt.laneweb.catalog.grandrounds.HTTPGrandRoundsService;
+import edu.stanford.irt.laneweb.catalog.grandrounds.RESTGrandRoundsService;
 import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
-import edu.stanford.irt.laneweb.util.ServiceURIResolver;
+import edu.stanford.irt.laneweb.rest.RESTService;
 
 @Configuration
 public class GrandRoundsConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/grandrounds")
     @Scope("prototype")
-    public Generator grandRoundsGenerator(
-            @Qualifier("edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService/HTTP")
-            final GrandRoundsService grandRoundsService) {
+    public Generator grandRoundsGenerator(final GrandRoundsService grandRoundsService) {
         return new GrandRoundsGenerator(grandRoundsService, presentationSAXStrategy());
     }
 
-    @Bean("edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService/HTTP")
+    @Bean
     public GrandRoundsService grandRoundsService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final ServiceURIResolver uriResolver) {
-        return new HTTPGrandRoundsService(catalogServiceURI, uriResolver);
+            final RESTService restService) {
+        return new RESTGrandRoundsService(catalogServiceURI, restService);
     }
 
     @Bean
