@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.rest;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
@@ -37,6 +38,13 @@ public class TypeReferenceTest {
     public void testGetType() {
         assertSame(String.class, new TypeReference<String>() {
         }.getType());
+    }
+
+    @Test
+    public void testHashCode() {
+        TypeReference<Object> typeReference = new TypeReference<Object>() {
+        };
+        assertEquals(typeReference.getType().hashCode(), typeReference.hashCode());
     }
 
     @Test

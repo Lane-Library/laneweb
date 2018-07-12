@@ -34,4 +34,9 @@ public abstract class TypeReference<T> extends ParameterizedTypeReference<T> {
     public Type getType() {
         return this.type;
     }
+
+    @Override
+    public int hashCode() {
+        return this.type.hashCode();
+    }
 }
