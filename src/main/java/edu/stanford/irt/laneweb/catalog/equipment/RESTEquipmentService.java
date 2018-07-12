@@ -17,8 +17,8 @@ public class RESTEquipmentService implements EquipmentService {
 
     private static final String STATUS_ENDPOINT_PATH_FORMAT = "equipment/status?idList=%s";
 
-    private static final TypeReference<List<Map<String, String>>> TYPE = new TypeReference<List<Map<String, String>>>() {
-    };
+    private static final TypeReference<List<Map<String, String>>> TYPE =
+            new TypeReference<List<Map<String, String>>>() {};
 
     private URI catalogServiceURI;
 
