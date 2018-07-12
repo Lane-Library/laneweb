@@ -33,6 +33,11 @@ public class LanewebConfigurationTest {
     }
 
     @Test
+    public void testClientHttpRequestFactory() {
+        assertNotNull(this.configuration.clientHttpRequestFactory());
+    }
+
+    @Test
     public void testComponentFactory() {
         assertNotNull(this.configuration.componentFactory());
     }
@@ -76,5 +81,10 @@ public class LanewebConfigurationTest {
         replay(environment, resourceLoader);
         assertNotNull(LanewebConfiguration.propertySourcesPlaceholderConfigurer(environment, resourceLoader));
         verify(environment, resourceLoader);
+    }
+
+    @Test
+    public void testRestOperations() {
+        assertNotNull(this.configuration.restOperations(this.configuration.clientHttpRequestFactory(), null));
     }
 }
