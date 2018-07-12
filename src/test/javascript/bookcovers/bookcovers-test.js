@@ -15,7 +15,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("//www.example.com/src1", document.querySelector("img[data-bibid='1']").getAttribute("src"))
+            Y.Assert.areEqual("//www.example.com/src1", document.querySelector("div[data-bibid='1'] img").getAttribute("src"))
         },
 
         "test viewport:scrolled": function() {
@@ -26,7 +26,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("//www.example.com/src2", document.querySelector("img[data-bibid='2']").getAttribute("src"))
+            Y.Assert.areEqual("//www.example.com/src2", document.querySelector("div[data-bibid='2'] img").getAttribute("src"))
         }
     });
 

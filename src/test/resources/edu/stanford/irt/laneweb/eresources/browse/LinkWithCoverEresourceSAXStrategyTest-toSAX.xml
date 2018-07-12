@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div>
    <a href="url">
-      <img data-bibid="12"
-           class="bookcover module-img"
-           title="Book Cover: Lancet"/>
+      <div data-bibid="12" class="bookcover">
+         <i class="fa fa-book"/>
+      </div>
    </a>
    <a href="url">Lancet</a>
 </div>

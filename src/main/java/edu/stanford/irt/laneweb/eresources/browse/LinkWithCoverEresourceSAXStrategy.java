@@ -27,11 +27,16 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
             startAnchor(xmlConsumer, href);
             String title = eresource.getTitle();
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
-            atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover module-img");
-            atts.addAttribute(EMPTY_NS, "title", "title", CDATA, "Book Cover: " + title);
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
+          atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
+          atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover");
+          XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
+            createElementWithClass(xmlConsumer, "i", "fa fa-book", "");
+            endDiv(xmlConsumer);
+//            atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
+//            atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover module-img");
+//            atts.addAttribute(EMPTY_NS, "title", "title", CDATA, "Book Cover: " + title);
+//            XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
+//            XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
             endAnchor(xmlConsumer);
             createAnchor(xmlConsumer, href, title);
         } catch (SAXException e) {

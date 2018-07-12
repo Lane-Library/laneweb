@@ -35,6 +35,20 @@
     padding-top: 10px;
 }
 
+.resource .bookcover {
+    float: right;
+}
+
+.resource .fa-book {
+    float: right;
+    font-size: 86px;
+}
+
+.resource img {
+    height: 112px;
+    width: 80px;
+}
+
 /* abstract and description related styles*/
 .description {
     display: none;
