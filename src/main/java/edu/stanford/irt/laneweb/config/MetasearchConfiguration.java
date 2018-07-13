@@ -132,7 +132,8 @@ public class MetasearchConfiguration {
 
     @Bean("edu.stanford.irt.laneweb.metasearch.MetaSearchService/HTTP")
     public MetaSearchService httpMetaSearchService(final ObjectMapper objectMapper,
-            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URL metaSearchURL) {
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
+    final URL metaSearchURL) {
         return new HTTPMetaSearchService(metaSearchURL, objectMapper, SEVENTY_SECONDS);
     }
 
@@ -188,7 +189,8 @@ public class MetasearchConfiguration {
 
     @Bean("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
     public MetaSearchService restMetaSearchService(final RESTService restService,
-            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URI metaSearchURI) {
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
+    final URI metaSearchURI) {
         return new RESTMetaSearchService(metaSearchURI, restService);
     }
 
