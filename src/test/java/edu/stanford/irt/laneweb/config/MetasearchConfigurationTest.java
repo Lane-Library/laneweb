@@ -55,6 +55,11 @@ public class MetasearchConfigurationTest {
     }
 
     @Test
+    public void testHttpMetaSearchService() {
+        assertNotNull(this.configuration.httpMetaSearchService(null, null));
+    }
+
+    @Test
     public void testMetasearchResultSAXStrategy() {
         assertNotNull(this.configuration.metasearchResultSAXStrategy());
     }
@@ -72,6 +77,11 @@ public class MetasearchConfigurationTest {
     @Test
     public void testResourceSearchGenerator() {
         assertNotNull(this.configuration.resourceSearchGenerator(null));
+    }
+
+    @Test
+    public void testRestMetaSearchService() {
+        assertNotNull(this.configuration.restMetaSearchService(null, null));
     }
 
     @Test

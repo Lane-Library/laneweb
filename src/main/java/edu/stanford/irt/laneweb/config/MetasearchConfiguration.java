@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +34,14 @@ import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.MetasearchResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.PagingSearchResultList;
 import edu.stanford.irt.laneweb.metasearch.PagingSearchResultListSAXStrategy;
+import edu.stanford.irt.laneweb.metasearch.RESTMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.ResourceResultSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.ResourceSearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.ScoreStrategy;
 import edu.stanford.irt.laneweb.metasearch.SearchDirectoryTransformer;
 import edu.stanford.irt.laneweb.metasearch.SearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.SearchResultSAXStrategy;
+import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.search.impl.Result;
 
 @Configuration
@@ -48,7 +51,9 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
-    public Generator allClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
+    public Generator allClinicalSearchResultsGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService,
             final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
         List<String> engines = new ArrayList<>(21);
         engines.add("aafp_patients");
@@ -94,7 +99,9 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-content")
     @Scope("prototype")
-    public Generator contentSearchGenerator(final MetaSearchService metaSearchService,
+    public Generator contentSearchGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService,
             final ContentResultConversionStrategy contentResultConversionStrategy) {
         return new ContentSearchGenerator(metaSearchService, pagingSearchResultListSAXStrategy(),
                 contentResultConversionStrategy);
@@ -102,13 +109,17 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-describe")
     @Scope("prototype")
-    public Generator describeGenerator(final MetaSearchService metaSearchService) {
+    public Generator describeGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService) {
         return new DescribeGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-engine")
     @Scope("prototype")
-    public Generator engineSearchGenerator(final MetaSearchService metaSearchService) {
+    public Generator engineSearchGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService) {
         return new EngineSearchGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 
@@ -119,10 +130,9 @@ public class MetasearchConfiguration {
         return new FilePathTransformer(sourceResolver, saxParser);
     }
 
-    @Bean
+    @Bean("edu.stanford.irt.laneweb.metasearch.MetaSearchService/HTTP")
     public MetaSearchService httpMetaSearchService(final ObjectMapper objectMapper,
-            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
-            final URL metaSearchURL) {
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URL metaSearchURL) {
         return new HTTPMetaSearchService(metaSearchURL, objectMapper, SEVENTY_SECONDS);
     }
 
@@ -139,7 +149,9 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/peds-all")
     @Scope("prototype")
-    public Generator pedsClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
+    public Generator pedsClinicalSearchResultsGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService,
             final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
         List<String> engines = new ArrayList<>(20);
         engines.add("aafp_patients");
@@ -168,8 +180,16 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-resource")
     @Scope("prototype")
-    public Generator resourceSearchGenerator(final MetaSearchService metaSearchService) {
+    public Generator resourceSearchGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService) {
         return new ResourceSearchGenerator(metaSearchService, metasearchResultSAXStrategy());
+    }
+
+    @Bean("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+    public MetaSearchService restMetaSearchService(final RESTService restService,
+            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/") final URI metaSearchURI) {
+        return new RESTMetaSearchService(metaSearchURI, restService);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/search-directory")
@@ -180,7 +200,9 @@ public class MetasearchConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search")
     @Scope("prototype")
-    public Generator searchGenerator(final MetaSearchService metaSearchService) {
+    public Generator searchGenerator(
+            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
+            final MetaSearchService metaSearchService) {
         return new SearchGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 }
