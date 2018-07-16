@@ -7,8 +7,22 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-07-16" version="3.5.16" description="3.5.16 bug fix release">
+            <action date="2018-07-11" dev="olyary" issue="143740" type="update">
+                3 templates label link changes
+            </action>
+            <action date="2018-07-11" dev="ceyates" issue="143703" type="add">
+                use Spring RestTemplate where possible for GET requests
+            </action>
+            <action date="2018-07-09" dev="ceyates" issue="143688" type="remove">
+                remove @RequestMapping /apps/laneaskus
+            </action>
+            <action date="2018-07-12" dev="ceyates" issue="143311" type="add">
+                book icon for the portals
+            </action>
+        </release>
         <release date="2018-07-09" version="3.5.15" description="3.5.15 bug fix release">
-            <action date="2018-03" dev="ryanmax" issue="143517" type="fix">
+            <action date="2018-07-03" dev="ryanmax" issue="143517" type="fix">
                 incorrect content type for SFX requests
             </action>
         </release>
