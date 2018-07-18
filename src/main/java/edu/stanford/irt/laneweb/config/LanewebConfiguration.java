@@ -27,6 +27,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
@@ -162,6 +163,7 @@ public class LanewebConfiguration {
             final ObjectMapper objectMapper) {
         RestTemplate template =  new RestTemplate(clientHttpRequestFactory);
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+        messageConverters.add(new StringHttpMessageConverter());
         messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
         messageConverters.add(new ResourceHttpMessageConverter());
         template.setMessageConverters(messageConverters);

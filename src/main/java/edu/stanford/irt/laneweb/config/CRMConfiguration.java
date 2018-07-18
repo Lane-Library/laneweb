@@ -7,14 +7,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import edu.stanford.irt.laneweb.crm.CRMService;
-import edu.stanford.irt.laneweb.crm.HTTPCRMService;
+import edu.stanford.irt.laneweb.crm.RESTCRMService;
+import edu.stanford.irt.laneweb.rest.RESTService;
 
 @Configuration
 public class CRMConfiguration {
 
     @Bean
-    public CRMService httpCrmService(
-            @Value("${edu.stanford.irt.laneweb.acquisition-api.url}") final URI acquisitionURI) {
-        return new HTTPCRMService(acquisitionURI);
+    public CRMService restCrmService(
+            @Value("${edu.stanford.irt.laneweb.acquisition-api.url}") final URI uri,
+            RESTService restService) {
+        return new RESTCRMService(uri, restService);
     }
 }

@@ -27,4 +27,8 @@ public class RESTService {
     public <T> T getObject(final URI uri, final TypeReference<T> type) {
         return this.restOperations.exchange(uri, HttpMethod.GET, null, type).getBody();
     }
+
+    public int postString(final URI uri, final String object) {
+        return this.restOperations.postForEntity(uri, object, String.class).getStatusCodeValue();
+    }
 }

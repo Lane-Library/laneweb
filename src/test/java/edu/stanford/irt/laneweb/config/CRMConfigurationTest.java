@@ -16,6 +16,6 @@ public class CRMConfigurationTest {
 
     @Test
     public void testHttpCrmService() {
-        assertNotNull(this.configuration.httpCrmService(null));
+        assertNotNull(this.configuration.restCrmService(null, null));
     }
 }
