@@ -55,12 +55,11 @@ public class MetasearchConfiguration {
             @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
             final MetaSearchService metaSearchService,
             final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
-        List<String> engines = new ArrayList<>(21);
+        List<String> engines = new ArrayList<>(20);
         engines.add("aafp_patients");
         engines.add("acpjc");
         engines.add("bmj_clinical_evidence");
         engines.add("dynamed");
-        engines.add("guideline_clearinghouse");
         engines.add("medlineplus");
         engines.add("pubmed");
         engines.add("pubmed_clinicaltrial");
@@ -154,12 +153,11 @@ public class MetasearchConfiguration {
             @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
             final MetaSearchService metaSearchService,
             final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
-        List<String> engines = new ArrayList<>(20);
+        List<String> engines = new ArrayList<>(19);
         engines.add("aafp_patients");
         engines.add("aappatient");
         engines.add("aapwebsite");
         engines.add("dynamed_allchild");
-        engines.add("guideline_clearinghouse_allchild");
         engines.add("pubmed_allchild");
         engines.add("pubmed_clinicaltrial_allchild");
         engines.add("pubmed_cost_allchild");
