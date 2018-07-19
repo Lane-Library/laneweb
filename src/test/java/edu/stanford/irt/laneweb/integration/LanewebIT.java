@@ -73,9 +73,11 @@ public class LanewebIT {
     public void testDuplicateProxyLinks() throws Exception {
         Map<String, String> ns = new HashMap<>();
         ns.put("h", "http://www.w3.org/1999/xhtml");
-        // guest logout link should only have one proxy-link parameter
-        this.mockMvc.perform(get("/portals/index.html?proxy-links=true").servletPath("/portals/index.html"))
-                .andExpect(xpath("//h:a[.='LOGOUT GUEST']/@href", ns).string("?proxy-links=true"));
+        // guest view and logout links should only have one proxy-link parameter
+        this.mockMvc
+                .perform(get("/portals/index.html?foo=bar&proxy-links=true&bar=baz").servletPath("/portals/index.html"))
+                .andExpect(xpath("//h:ul/h:li[5]/h:a/@href", ns).string("?foo=bar&proxy-links=false&bar=baz"))
+                .andExpect(xpath("//h:ul/h:li[6]/h:a/@href", ns).string("?foo=bar&proxy-links=true&bar=baz"));
     }
 
     @Test
