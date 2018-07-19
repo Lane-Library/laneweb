@@ -75,7 +75,7 @@ public class LanewebIT {
         ns.put("h", "http://www.w3.org/1999/xhtml");
         // guest logout link should only have one proxy-link parameter
         this.mockMvc.perform(get("/portals/index.html?proxy-links=true").servletPath("/portals/index.html"))
-                .andExpect(xpath("//h:a[.='LOGOUT GUEST']/@href", ns).string("?proxy-links=false"));
+                .andExpect(xpath("//h:a[.='LOGOUT GUEST']/@href", ns).string("?proxy-links=true"));
     }
 
     @Test
