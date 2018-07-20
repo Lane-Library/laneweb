@@ -5,12 +5,10 @@ import java.io.InputStream;
 import java.net.URI;
 
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestOperations;
 
 public class RESTService {
