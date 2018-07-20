@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.net.URI;
 
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -32,9 +31,9 @@ public class RESTService {
     }
 
     public int postString(final URI uri, final String object) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        RequestEntity<String> request = new RequestEntity<>(object, headers, HttpMethod.POST, uri);
+        RequestEntity<String> request = RequestEntity.post(uri)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(object);
         return this.restOperations.exchange(request, String.class).getStatusCodeValue();
     }
 }
