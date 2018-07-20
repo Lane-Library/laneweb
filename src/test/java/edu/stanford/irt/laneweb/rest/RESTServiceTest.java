@@ -1,8 +1,10 @@
 package edu.stanford.irt.laneweb.rest;
 
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
@@ -16,6 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestOperations;
 
@@ -75,7 +78,7 @@ public class RESTServiceTest {
     @Test
     public void testPostString() {
         ResponseEntity<String> entity = mock(ResponseEntity.class);
-        expect(this.restOperations.postForEntity(this.uri, "foo", String.class)).andReturn(entity);
+        expect(this.restOperations.exchange(isA(RequestEntity.class), same(String.class))).andReturn(entity);
         expect(entity.getStatusCodeValue()).andReturn(9);
         replay(this.restOperations, entity);
         assertEquals(9, this.service.postString(this.uri, "foo"));

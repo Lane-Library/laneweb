@@ -163,7 +163,9 @@ public class LanewebConfiguration {
             final ObjectMapper objectMapper) {
         RestTemplate template =  new RestTemplate(clientHttpRequestFactory);
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        messageConverters.add(new StringHttpMessageConverter());
+        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+        stringConverter.setWriteAcceptCharset(false);
+        messageConverters.add(stringConverter);
         messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
         messageConverters.add(new ResourceHttpMessageConverter());
         template.setMessageConverters(messageConverters);

@@ -5,7 +5,12 @@ import java.io.InputStream;
 import java.net.URI;
 
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestOperations;
 
 public class RESTService {
@@ -29,6 +34,9 @@ public class RESTService {
     }
 
     public int postString(final URI uri, final String object) {
-        return this.restOperations.postForEntity(uri, object, String.class).getStatusCodeValue();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        RequestEntity<String> request = new RequestEntity<>(object, headers, HttpMethod.POST, uri);
+        return this.restOperations.exchange(request, String.class).getStatusCodeValue();
     }
 }
