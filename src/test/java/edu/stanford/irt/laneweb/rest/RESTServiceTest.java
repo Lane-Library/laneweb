@@ -76,12 +76,12 @@ public class RESTServiceTest {
     }
 
     @Test
-    public void testPostString() {
+    public void testPostURLEncodedString() {
         ResponseEntity<String> entity = mock(ResponseEntity.class);
         expect(this.restOperations.exchange(isA(RequestEntity.class), same(String.class))).andReturn(entity);
         expect(entity.getStatusCodeValue()).andReturn(9);
         replay(this.restOperations, entity);
-        assertEquals(9, this.service.postString(this.uri, "foo"));
+        assertEquals(9, this.service.postURLEncodedString(this.uri, "foo"));
         verify(this.restOperations, entity);
     }
 }

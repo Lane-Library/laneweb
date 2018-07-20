@@ -30,7 +30,7 @@ public class RESTService {
         return this.restOperations.exchange(uri, HttpMethod.GET, null, type).getBody();
     }
 
-    public int postString(final URI uri, final String object) {
+    public int postURLEncodedString(final URI uri, final String object) {
         RequestEntity<String> request = RequestEntity.post(uri)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .body(object);

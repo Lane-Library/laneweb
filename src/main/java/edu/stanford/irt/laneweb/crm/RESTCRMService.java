@@ -30,6 +30,6 @@ public class RESTCRMService implements CRMService {
                     .append('&');
         }
         queryString.append("id=");
-        return this.restService.postString(this.uri, queryString.toString());
+        return this.restService.postURLEncodedString(this.uri, queryString.toString());
     }
 }
