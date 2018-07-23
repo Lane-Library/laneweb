@@ -241,7 +241,7 @@
              */
             _defRemoveFn : function(event) {
                 var indexes = JSON.stringify(event.positions);
-                L.io(BASE_PATH + "/bookmarks?indexes=" + indexes, {
+                L.io(BASE_PATH + "/bookmarks?indexes=" + encodeURIComponent(indexes), {
                     method : "delete",
                     on : {
                         success : function() {
