@@ -12,9 +12,10 @@ export VAULT_AUTH_METHOD=ldap
 export VAULT_CACHE=${HOME}/.vault-local
 export SEC_PATH=secret/projects/${GCP_PROJECT_NAME}
 
-# Utility scripts
-export SCRIPTS_DIR=${HOME}/bin/gcloud-scripts
-export SCRIPTS_REPO=https://gitlab.med.stanford.edu/irt-public/gcloud-scripts.git
+# PS Cloud Framework (Scripts, shared config, etc.)
+export FRAMEWORK_DIR=${HOME}/bin/ps-cloud-framework
+export FRAMEWORK_BUCKET=ps-cloud-framework
+export SCRIPTS_DIR=${FRAMEWORK_DIR}/scripts
 
 # Docker configuration
 export DOCKER_IMAGE=laneweb
