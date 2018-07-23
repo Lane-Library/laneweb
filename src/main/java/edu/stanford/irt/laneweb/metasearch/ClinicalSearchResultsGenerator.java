@@ -16,7 +16,7 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
 
     private static final Result EMPTY_RESULT = Result.newResultBuilder().id("").query(new SimpleQuery("")).build();
 
-    private static final long MAX_WAIT_TIME = 20_000L;
+    private static final long MAX_WAIT_TIME = 14_000L;
 
     private List<String> engines;
 
