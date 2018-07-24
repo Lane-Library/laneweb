@@ -18,7 +18,7 @@
       <a href="/logout">LOGOUT</a>
    </li>
    <li>
-      <a href="?something=else&amp;proxy-links=false&amp;param=onemore&amp;proxy-links=false">GUEST VIEW</a>
+      <a href="?something=else&amp;proxy-links=false&amp;param=onemore">GUEST VIEW</a>
    </li>
    <li class="login-item-active">
       <a href="?something=else&amp;proxy-links=true&amp;param=onemore">LOGOUT GUEST</a>

@@ -21,7 +21,7 @@
       <a href="?proxy-links=false">GUEST VIEW</a>
    </li>
    <li>
-      <a href="?proxy-links=true&amp;proxy-links=true">LOGOUT GUEST</a>
+      <a href="?proxy-links=true">LOGOUT GUEST</a>
    </li>
    <li class="login-item-active">
       <i class="fa fa-question-circle"/>

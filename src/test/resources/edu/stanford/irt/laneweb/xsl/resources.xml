@@ -34,8 +34,9 @@
          </li>
          <li class="resource" data-sid="bib-301866">
             <span class="primaryType">Book</span>
-            <i class="fa fa-book"/>
-            <img class="bookcover" data-bibid="301866"/>
+            <div class="bookcover" data-bibid="301866">
+               <i class="fa fa-book"/>
+            </div>
             <div>
                <a class="primaryLink"
                   href="http://link.springer.com/978-3-211-75120-6"
@@ -65,8 +66,9 @@
          </li>
          <li class="resource" data-sid="bib-123">
             <span class="primaryType">Book</span>
-            <i class="fa fa-book"/>
-            <img class="bookcover" data-bibid="123"/>
+            <div class="bookcover" data-bibid="123">
+               <i class="fa fa-book"/>
+            </div>
             <div>
                <a class="primaryLink"
                   href="http://impactfactor.org/"

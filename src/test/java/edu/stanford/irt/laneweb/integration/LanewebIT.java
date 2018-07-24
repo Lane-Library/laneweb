@@ -70,6 +70,17 @@ public class LanewebIT {
     }
 
     @Test
+    public void testDuplicateProxyLinks() throws Exception {
+        Map<String, String> ns = new HashMap<>();
+        ns.put("h", "http://www.w3.org/1999/xhtml");
+        // guest view and logout links should only have one proxy-link parameter
+        this.mockMvc
+                .perform(get("/portals/index.html?foo=bar&proxy-links=true&bar=baz").servletPath("/portals/index.html"))
+                .andExpect(xpath("//h:ul/h:li[5]/h:a/@href", ns).string("?foo=bar&proxy-links=false&bar=baz"))
+                .andExpect(xpath("//h:ul/h:li[6]/h:a/@href", ns).string("?foo=bar&proxy-links=true&bar=baz"));
+    }
+
+    @Test
     public void testEresourceBrowse() throws Exception {
         this.mockMvc
                 .perform(
@@ -116,7 +127,8 @@ public class LanewebIT {
         ns.put("h", "http://www.w3.org/1999/xhtml");
         // query term must appear within <strong> in first three results
         this.mockMvc
-                .perform(get("/apps/search/content/html/pubmed?q=skin").servletPath("/apps/search/content/html/pubmed"))
+                .perform(
+                        get("/apps/search/content/html/pubmed?q=Ebola").servletPath("/apps/search/content/html/pubmed"))
                 .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }

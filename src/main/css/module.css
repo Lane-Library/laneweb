@@ -18,9 +18,22 @@
     visibility: hidden;
 }
 
+.core-covers .bookcover,
+.core-covers-3 .bookcover,
 .module-img {
     float: left;
     margin-right: 1em;
+}
+
+.core-covers img,
+.core-covers-3 img {
+    height: 81px;
+    width: 59px;
+}
+
+.core-covers .fa-book,
+.core-covers-3 .fa-book {
+    font-size: 72px;
 }
 
 /* book covers in 2 columns*/

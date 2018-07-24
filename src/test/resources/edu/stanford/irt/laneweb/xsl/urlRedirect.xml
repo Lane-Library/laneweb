@@ -21,7 +21,7 @@
       <a href="?something=else&amp;proxy-links=false&amp;param=onemore">GUEST VIEW</a>
    </li>
    <li>
-      <a href="?something=else&amp;proxy-links=true&amp;param=onemore&amp;proxy-links=true">LOGOUT GUEST</a>
+      <a href="?something=else&amp;proxy-links=true&amp;param=onemore">LOGOUT GUEST</a>
    </li>
    <li>
       <i class="fa fa-question-circle"/>

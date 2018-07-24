@@ -64,9 +64,9 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:text>?</xsl:text>
-                    <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=true)(.*)">
+                    <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=(true|false))(.*)">
                         <xsl:matching-substring>
-                            <xsl:value-of select="concat(regex-group(1), 'proxy-links=false', regex-group(3))"/>
+                            <xsl:value-of select="concat(regex-group(1), 'proxy-links=false', regex-group(4))"/>
                         </xsl:matching-substring>
                         <xsl:non-matching-substring>
                             <xsl:value-of select="concat($query-string, '&amp;proxy-links=false')"/>
@@ -94,9 +94,9 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:text>?</xsl:text>
-                    <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=false)(.*)">
+                    <xsl:analyze-string select="$query-string" regex="(.*)(proxy-links=(true|false))(.*)">
                         <xsl:matching-substring>
-                            <xsl:value-of select="concat(regex-group(1), 'proxy-links=true', regex-group(3))"/>
+                            <xsl:value-of select="concat(regex-group(1), 'proxy-links=true', regex-group(4))"/>
                         </xsl:matching-substring>
                         <xsl:non-matching-substring>
                             <xsl:value-of select="concat($query-string, '&amp;proxy-links=true')"/>

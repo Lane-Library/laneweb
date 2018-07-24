@@ -6,6 +6,8 @@ import java.net.URI;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.web.client.RestOperations;
 
 public class RESTService {
@@ -26,5 +28,12 @@ public class RESTService {
 
     public <T> T getObject(final URI uri, final TypeReference<T> type) {
         return this.restOperations.exchange(uri, HttpMethod.GET, null, type).getBody();
+    }
+
+    public int postURLEncodedString(final URI uri, final String object) {
+        RequestEntity<String> request = RequestEntity.post(uri)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(object);
+        return this.restOperations.exchange(request, String.class).getStatusCodeValue();
     }
 }

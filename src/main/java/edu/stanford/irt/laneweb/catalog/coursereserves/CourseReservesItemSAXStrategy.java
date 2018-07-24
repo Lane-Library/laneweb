@@ -28,14 +28,11 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             startDivWithClass(xmlConsumer, "pure-u-1-8");
             String id = Integer.toString(item.getId());
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "fa fa-book");
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
-            atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "bookcover");
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, id);
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
+            atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "bookcover");
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
+            createElementWithClass(xmlConsumer, "i", "fa fa-book", "");
+            endDiv(xmlConsumer);
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer, "pure-u-7-8");
             boolean isDigital = item.isDigital();

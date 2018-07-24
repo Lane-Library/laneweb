@@ -3,7 +3,7 @@
     "use strict";
 
     // view handles interactions with the DOM, created a with a NodeList
-    // img nodes that have data-bibid attributes.
+    // div nodes that have class bookcover.
     var view = function(bookImageNodes) {
 
             // an object that maps bibids to img nodes
@@ -27,7 +27,7 @@
                     for (bibid in imageMap) {
                         if (imageMap.hasOwnProperty(bibid)) {
                             for (i = 0; i < imageMap[bibid].length; i++) {
-                                if (!imageMap[bibid][i].src && viewport.inView(imageMap[bibid][i])) {
+                                if (!imageMap[bibid][i].querySelector("img") && viewport.inView(imageMap[bibid][i])) {
                                     imagesForUpdate.push(bibid);
                                     break;
                                 }
@@ -47,15 +47,14 @@
                                 // from the bookcover database (substring(5))
                                 src = updates[bibid];
                                 src = src.substring(src.indexOf(":") + 1);
-                                imageMap[bibid][i].src = src;
-                                imageMap[bibid][i].classList.add("bookcover-active");
+                                imageMap[bibid][i].innerHTML = "<img src='" + src + "'/>";
                             }
                         }
                         delete imageMap[bibid];
                     }
                 }
             };
-        }(document.querySelectorAll("img[data-bibid]")),
+        }(document.querySelectorAll(".bookcover")),
 
         // communicates with the server to get bookcover thumbnail urls for bibids
         bookcoverService = function() {
