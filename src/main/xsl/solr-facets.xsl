@@ -35,6 +35,7 @@
         <xsl:variable name="label">
             <xsl:choose>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'pubmed'">PubMed</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'sul'"><span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University Libraries.">SearchWorks (<i>biomedical subset</i>)</span></xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'bib'"><span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span></xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'web'">Lane Web Site</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
