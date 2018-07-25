@@ -78,7 +78,7 @@ public class LanewebConfiguration {
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
             @Value("${edu.stanford.irt.laneweb.disaster-mode}") final Boolean disasterMode,
-            @Value("${edu.stanford.irt.laneweb.bookmarking") final String bookmarking,
+            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking,
             ServletContext servletContext,
             @Value("${edu.stanford.irt.laneweb.version}") final String version) {
         this.constants = new HashMap<>();
