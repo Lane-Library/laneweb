@@ -12,7 +12,7 @@
     
     <stx:template match="/">
         <stx:choose>
-            <stx:when test="$bookmarking = 'rw'">
+            <stx:when test="$bookmarking != 'rw'">
                 <div>Bookmark editing is not available at the moment.</div>
             </stx:when>
             <stx:otherwise>
