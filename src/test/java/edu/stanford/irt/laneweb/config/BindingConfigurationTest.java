@@ -35,13 +35,13 @@ public class BindingConfigurationTest {
     }
 
     @Test
-    public void testDataBinder() {
-        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null));
+    public void testBookmarkingDataBinder() {
+        assertNotNull(this.configuration.bookmarkingDataBinder(null));
     }
 
     @Test
-    public void testDisasterModeDataBinder() {
-        assertNotNull(this.configuration.disasterModeDataBinder(null));
+    public void testDataBinder() {
+        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null));
     }
 
     @Test

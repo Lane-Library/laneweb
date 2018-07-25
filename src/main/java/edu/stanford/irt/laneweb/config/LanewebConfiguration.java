@@ -78,6 +78,7 @@ public class LanewebConfiguration {
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
             @Value("${edu.stanford.irt.laneweb.disaster-mode}") final Boolean disasterMode,
+            @Value("${edu.stanford.irt.laneweb.bookmarking") final String bookmarking,
             ServletContext servletContext,
             @Value("${edu.stanford.irt.laneweb.version}") final String version) {
         this.constants = new HashMap<>();
@@ -85,6 +86,7 @@ public class LanewebConfiguration {
         this.constants.put(Model.CLASSES_SERVICE_URI, classesServiceURI);
         this.constants.put(Model.CONTENT_BASE, contentBase);
         this.constants.put(Model.DISASTER_MODE, disasterMode);
+        this.constants.put(Model.BOOKMARKING, bookmarking);
         this.constants.put(Model.VERSION, version);
         // set the http.agent system property:
         System.setProperty("http.agent", "laneweb-" + version);

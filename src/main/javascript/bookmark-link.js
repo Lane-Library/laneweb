@@ -11,7 +11,7 @@
         TIMING = "timing";
 
     //don't create BookmarkLink if in disaster mode
-    if (!Model.get(Model.DISASTER_MODE)) {
+    if (Model.get(Model.BOOKMARKING) !== "rw") {
 
         /**
          * A link that appears when mousing over bookmarkable links and adds that link to bookmarks

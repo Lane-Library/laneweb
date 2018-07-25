@@ -67,6 +67,9 @@
     
     <xsl:param name="sort"/>
     
+    <!-- bookmarking wil be rw, ro, or off -->
+    <xsl:param name="bookmarking"/>
+    
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
@@ -168,7 +171,7 @@
             <xsl:when test=".='todays-hours'">
                 <xsl:value-of select="$todays-hours"/>
             </xsl:when>
-            <xsl:when test=".='bookmarks' and string-length($userid) &gt; 0">
+            <xsl:when test=".='bookmarks' and string-length($userid) &gt; 0 and $bookmarking != 'off'">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://bookmarks/list.html">
                     <xi:fallback/>
                 </xi:include>

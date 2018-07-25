@@ -24,10 +24,10 @@ import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.BookmarkingDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.DisasterModeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LoginExpirationCookieDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder;
@@ -69,6 +69,12 @@ public class BindingConfiguration {
         return new BaseProxyURLDataBinder();
     }
 
+    @Bean
+    public BookmarkingDataBinder bookmarkingDataBinder(
+            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking) {
+        return new BookmarkingDataBinder(bookmarking);
+    }
+
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/cme")
     public DataBinder cmeDataBinder(final UserDataBinder userDataBinder, final BasePathDataBinder basePathDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(4);
@@ -105,12 +111,6 @@ public class BindingConfiguration {
         dataBinders.add(modelDataBinder);
         dataBinders.add(new TodayDataBinder());
         return new CompositeDataBinder(dataBinders);
-    }
-
-    @Bean
-    public DisasterModeDataBinder disasterModeDataBinder(
-            @Value("${edu.stanford.irt.laneweb.disaster-mode}") final Boolean disasterMode) {
-        return new DisasterModeDataBinder(disasterMode);
     }
 
     @Bean
@@ -237,7 +237,7 @@ public class BindingConfiguration {
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/userdata")
     public DataBinder userDataDataBinder(final UserDataBinder userDataBinder,
             final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
-            final BasePathDataBinder basePathDataBinder, final DisasterModeDataBinder disasterModeDataBinder,
+            final BasePathDataBinder basePathDataBinder, final BookmarkingDataBinder bookmarkingDataBinder,
             final BookmarkDataBinder bookmarkDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(9);
         dataBinders.add(userDataBinder);
@@ -246,7 +246,7 @@ public class BindingConfiguration {
         dataBinders.add(remoteProxyIPDataBinder());
         dataBinders.add(emridDataBinder());
         dataBinders.add(basePathDataBinder);
-        dataBinders.add(disasterModeDataBinder);
+        dataBinders.add(bookmarkingDataBinder);
         dataBinders.add(bookmarkDataBinder);
         dataBinders.add(baseProxyUrlDataBinder());
         return new CompositeDataBinder(dataBinders);

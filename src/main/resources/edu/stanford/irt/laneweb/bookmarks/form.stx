@@ -5,14 +5,14 @@
     version="1.0"
     pass-through="all">
     
-    <stx:param name="disaster-mode"/>
+    <stx:param name="bookmarking"/>
     
     <!-- item is a counter for the li elements, incremented with each one -->
     <stx:variable name="item" select="0"/>
     
     <stx:template match="/">
         <stx:choose>
-            <stx:when test="$disaster-mode = 'true'">
+            <stx:when test="$bookmarking = 'rw'">
                 <div>Bookmark editing is not available at the moment.</div>
             </stx:when>
             <stx:otherwise>
