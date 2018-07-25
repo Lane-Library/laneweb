@@ -207,7 +207,7 @@
 
                 <xsl:if test="s:recordType = 'sul'">
                     <span>
-                        <a href="https://searchworks.stanford.edu/view/{s:recordId}">SU Catalog (SearchWorks)</a>
+                        <a href="https://searchworks.stanford.edu/view/{s:recordId}">SearchWorks Record</a>
                     </span>
                 </xsl:if>
 
