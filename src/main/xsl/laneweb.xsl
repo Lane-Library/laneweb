@@ -60,9 +60,6 @@
     <!-- json version of the data model -->
     <xsl:param name="model"/>
 
-    <!-- boolean: is app running in DR mode -->
-    <xsl:param name="disaster-mode"/>
-
     <!-- target parameter for shibboleth discovery service page -->
     <xsl:param name="return"/>
 
