@@ -124,13 +124,13 @@ public class BindingConfiguration {
         keys.add("auth");
         keys.add("base-path");
         keys.add("base-proxy-url");
-        keys.add("disaster-mode");
+        keys.add("bookmarking");
+        keys.add("bookmarks");
         keys.add("isActiveSunetID");
         keys.add("ipgroup");
         keys.add("proxy-links");
         keys.add("url-encoded-query");
         keys.add("url-encoded-source");
-        keys.add("bookmarks");
         return new ModelDataBinder(keys, objectMapper);
     }
 
