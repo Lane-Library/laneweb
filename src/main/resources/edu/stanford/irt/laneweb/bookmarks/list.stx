@@ -5,8 +5,8 @@
     
     <stx:param name="bookmarking"/>
     
-    <!-- if the list is null, xstream outputs <null/> -->
-    <stx:template match="null"/>
+    <!-- if the list is null, xstream outputs <null/> when it is empty it is <empty-list/> -->
+    <stx:template match="null | empty-list"/>
     
     <stx:template match="list">
         <ul id="bookmarks" xmlns="http://www.w3.org/1999/xhtml">
