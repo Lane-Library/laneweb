@@ -44,8 +44,6 @@ public class RESTProxyServersService implements ProxyServersService {
                 }
                 outputStream.write(buffer, 0, i);
             }
-        } catch (IOException e) {
-            throw new LanewebException(e);
         }
     }
 }
