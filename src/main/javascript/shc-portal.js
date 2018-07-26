@@ -58,24 +58,9 @@ addEventListener("load", function() {
             };
 
         inputs.forEach(function(input) {
-            var limit, suggest;
-            switch (input.name) {
-            case 'p':
-                limit = "mesh-d";
-                break;
-            case 'i':
-                limit = "mesh-i";
-                break;
-            case 'c':
-                limit = "mesh-di";
-                break;
-            default:
-                limit = false;
-            }
-            if (limit) {
-                suggest = new L.Suggest(input, limit);
-                suggest.on("suggest:select", eventHandler);
-            }
+            var suggest;
+            suggest = new L.Suggest(input, "mesh");
+            suggest.on("suggest:select", eventHandler);
             input.addEventListener("blur", eventHandler);
             input.addEventListener("keyup", eventHandler);
         });

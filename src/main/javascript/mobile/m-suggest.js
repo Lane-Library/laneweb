@@ -57,10 +57,7 @@ $.LANE.getACLimit = function(input){
     var i, limit,
         id = input.attr('id').toLowerCase(),
         limits = [
-               {regex : /condition/, limit : "mesh-d"},
-               {regex : /intervention/, limit : "mesh-i"},
-               {regex : /comparison/, limit : "mesh-di"},
-               {regex : /(clinical|ped)/, limit : "mesh-di"},
+               {regex : /(clinical|ped|condition|intervention|comparison|outcome)/, limit : "mesh"},
                {regex : /book/, limit : "Book"},
                {regex : /journal/, limit : "Journal"}
                ];

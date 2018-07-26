@@ -45,11 +45,11 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {"use strict";
         
         "test AC limit" : function() {
             var acLimit = $.LANE.getACLimit;
-            Y.Assert.areSame("mesh-d", acLimit($("<input id='condition'/>")));
-            Y.Assert.areSame("mesh-i", acLimit($("<input id='intervention'/>")));
-            Y.Assert.areSame("mesh-di", acLimit($("<input id='comparison'/>")));
-            Y.Assert.areSame("mesh-di", acLimit($("<input id='clinical'/>")));
-            Y.Assert.areSame("mesh-di", acLimit($("<input id='ped'/>")));
+            Y.Assert.areSame("mesh", acLimit($("<input id='condition'/>")));
+            Y.Assert.areSame("mesh", acLimit($("<input id='intervention'/>")));
+            Y.Assert.areSame("mesh", acLimit($("<input id='comparison'/>")));
+            Y.Assert.areSame("mesh", acLimit($("<input id='clinical'/>")));
+            Y.Assert.areSame("mesh", acLimit($("<input id='ped'/>")));
             Y.Assert.areSame("Book", acLimit($("<input id='book'/>")));
             Y.Assert.areSame("Journal", acLimit($("<input id='journal'/>")));
             Y.Assert.areSame("er-mesh", acLimit($("<input id='foo'/>")));
