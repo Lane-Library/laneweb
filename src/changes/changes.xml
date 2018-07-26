@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-07-30" version="3.5.17" description="3.5.17 bug fix release">
+            <action date="2018-07-26" dev="ceyates" issue="144067" type="update">
+                remove MeSH suggestion limits on PIC fields; add suggestions to O field
+            </action>
+            <action date="2018-07-25" dev="ceyates" issue="144024" type="add">
+                enable bookmarking to have three states: read-write, read-only and off
+            </action>
+            <action date="2018-07-19" dev="ceyates" issue="143922" type="fix">
+                multiple proxy-link parameters created in some circumstances
+            </action>
+            <action date="2018-07-18" dev="ceyates" issue="143920" type="add">
+                use RestTemplate for post to CRM
+            </action>
+            <action date="2018-07-18" dev="ceyates" issue="143917" type="remove">
+                remove National Guideline Clearinghouse from clinical searches
+            </action>
+            <action date="2018-07-17" dev="ceyates" issue="143824" type="update">
+                refactor crm code into its own package
+            </action>
+        </release>
         <release date="2018-07-16" version="3.5.16" description="3.5.16 bug fix release">
             <action date="2018-07-11" dev="olyary" issue="143740" type="update">
                 3 templates label link changes
