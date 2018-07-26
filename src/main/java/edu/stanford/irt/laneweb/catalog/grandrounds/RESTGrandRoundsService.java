@@ -67,13 +67,13 @@ public class RESTGrandRoundsService implements GrandRoundsService {
     }
 
     private InputStream getInputStream(final String department, final String year) {
-            String endpointPath = null;
-            try {
-                endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
-                        URLEncoder.encode(year, UTF8));
-            } catch (UnsupportedEncodingException e) {
-                // won't happen
-            }
-            return this.restService.getInputStream(this.catalogServiceURI.resolve(endpointPath));
+        String endpointPath = null;
+        try {
+            endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
+                    URLEncoder.encode(year, UTF8));
+        } catch (UnsupportedEncodingException e) {
+            // won't happen
+        }
+        return this.restService.getInputStream(this.catalogServiceURI.resolve(endpointPath));
     }
 }

@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.Set;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
 public class RESTProxyServersService implements ProxyServersService {

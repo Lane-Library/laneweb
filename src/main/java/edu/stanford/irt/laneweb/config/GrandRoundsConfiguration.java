@@ -12,8 +12,8 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsGenerator;
 import edu.stanford.irt.laneweb.catalog.grandrounds.GrandRoundsService;
-import edu.stanford.irt.laneweb.catalog.grandrounds.RESTGrandRoundsService;
 import edu.stanford.irt.laneweb.catalog.grandrounds.PresentationSAXStrategy;
+import edu.stanford.irt.laneweb.catalog.grandrounds.RESTGrandRoundsService;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
 @Configuration
