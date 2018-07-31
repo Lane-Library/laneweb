@@ -22,7 +22,7 @@ Y.Test.Runner.add(new Y.Test.Case({
         Y.Assert.areEqual("mesh", this.suggest.limit);
         L.fire("search:sourceChange", {newVal: "all-all"});
         Y.Assert.areEqual("er-mesh", this.suggest.limit);
-        L.fire("search:sourceChange", {newVal: "clinical-all"});
+        L.fire("search:sourceChange", {newVal: "images-all"});
         Y.Assert.areEqual("mesh", this.suggest.limit);
         L.fire("search:sourceChange", {newVal: "textbooks-all"});
         Y.Assert.areEqual("", this.suggest.limit);
