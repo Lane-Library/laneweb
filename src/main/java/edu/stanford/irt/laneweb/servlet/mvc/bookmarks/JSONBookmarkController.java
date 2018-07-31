@@ -33,7 +33,7 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 // TODO: revisit conscious decision not to synchronize list operations.
 @Controller
-@RequestMapping(value = "/bookmarks", consumes = "application/json")
+@RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {
 
     private static final Logger log = LoggerFactory.getLogger(BookmarkController.class);
@@ -46,7 +46,7 @@ public class JSONBookmarkController extends BookmarkController {
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void addBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
@@ -98,7 +98,7 @@ public class JSONBookmarkController extends BookmarkController {
         log.error(e.getMessage());
     }
 
-    @PostMapping(value = "/move")
+    @PostMapping(value = "/move", consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void moveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
@@ -112,7 +112,7 @@ public class JSONBookmarkController extends BookmarkController {
         bookmarks.add(to, bookmarks.remove(from));
     }
 
-    @PutMapping
+    @PutMapping(consumes = "application/json")
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
