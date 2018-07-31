@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +37,9 @@ public class BookmarkDataBinder implements DataBinder {
                 try {
                     bookmarks = this.bookmarkService.getLinks(userid);
                 } catch (BookmarkException e) {
-                    // if getting bookmarks from the service fails turn bookmarking off for this user
-                    // and return without putting bookmarks in the model
                     log.error(e.getMessage());
+                    // if getting bookmarks from the service fails turn bookmarking off for this user
+                    // and return without putting bookmarks in the model or session
                     model.put(Model.BOOKMARKING, "off");
                     return;
                 }

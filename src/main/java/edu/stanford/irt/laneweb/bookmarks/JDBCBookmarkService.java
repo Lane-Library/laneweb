@@ -36,7 +36,8 @@ public class JDBCBookmarkService implements BookmarkService {
         this.dataSource = dataSource;
     }
 
-    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt) throws SQLException, IOException, ClassNotFoundException {
+    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt)
+            throws SQLException, IOException, ClassNotFoundException {
         List<Bookmark> links = null;
         try (ResultSet rs = pstmt.executeQuery()) {
             if (rs.next()) {
