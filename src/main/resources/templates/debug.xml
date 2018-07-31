@@ -100,41 +100,34 @@
                         <button class="search-button"><i class="fa fa-search"></i></button>
                     </fieldset>
                     <div class="pure-g">
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/lanesearch.html"
                             data-source="all-all"
                             data-placeholder="Enter title words of article, journal, book, etc., or author, subject, PMID, ISSN, DOI, or Call Number"
                             title="Searches Pubmed, Lane Catalog (titles and descriptions of books, journals, etc. from Lane) and website"
                             >Lane <i class="fa fa-plus"></i></div></div>
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/picosearch.html"
                             data-source="clinical-all"
                             data-placeholder="Enter patient condition, treatment alternatives, or use PICO (advanced search)"
                             title="Searches evidence-based resources: BMJ, Cochrane, Dare, DynaMed Plus, National Guidelines, Pubmed, UptoDate"
                             >Clinical</div></div>
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/bioimagesearch.html"
                             data-source="images-all"
                             data-placeholder="Enter keywords for subject or images desired"
                             title="Find images related to medicine and biology and their reuse rights"
                             >Images</div></div>
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/textbooksearch.html"
                             data-source="textbooks-all"
                             data-placeholder="Enter topic, condition, diagnosis or disease keywords"
                             title="Search the full text of major clinical textbooks in 25 medical specialites"
                             >Clinical Textbooks</div></div>
-                        <div class="pure-u-1-5"><div
-                            class="search-tab"
-                            data-help="/bioresearchsearch.html"
-                            data-source="bioresearch-all"
-                            data-placeholder="Enter molecular biology or bench research keywords"
-                            title="Find protocols, reagents, genomic, proteomic and patent databases, programming, funding and Stanford lab resources, and more"
-                            >Bioresearch</div></div>
                     </div>
                 </div>
             </form>

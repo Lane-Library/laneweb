@@ -58,12 +58,6 @@ public class LanewebIT {
     }
 
     @Test
-    public void testBioresearchSearch() throws Exception {
-        this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test").servletPath("/search.html"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
-    }
-
-    @Test
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
                 .andExpect(content().contentType(IMAGE_PNG));

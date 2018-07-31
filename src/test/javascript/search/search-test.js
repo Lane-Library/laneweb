@@ -80,8 +80,8 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                 this.search.once("sourceChange", function(event) {
                     value = event.newVal;
                 });
-                this.search.setSource("bioresearch-all");
-                Y.Assert.areEqual("bioresearch-all", value);
+                this.search.setSource("clinical-all");
+                Y.Assert.areEqual("clinical-all", value);
             },
 
             testSourceChangeEventBubble: function() {
@@ -90,9 +90,9 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                     newVal = event.newVal;
                     oldVal = event.oldVal;
                 });
-                this.search.setSource("bioresearch-all");
+                this.search.setSource("clinical-all");
                 Y.Assert.areEqual("all-all", oldVal);
-                Y.Assert.areEqual("bioresearch-all", newVal);
+                Y.Assert.areEqual("clinical-all", newVal);
             },
 
             "test searchTabs:change event": function() {

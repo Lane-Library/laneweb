@@ -36,7 +36,7 @@ if (document.querySelector(".search-form"))  {
                         limit;
                     if (source.match(/^all/)) {
                         limit = "er-mesh";
-                    } else if (source.match(/^(bioresearch|images)/)) {
+                    } else if (source.match(/^images/)) {
                         limit = "mesh";
                     } else {
                         limit = "";
