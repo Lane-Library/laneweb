@@ -1,13 +1,11 @@
 package edu.stanford.irt.laneweb.catalog.equipment;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
@@ -31,11 +29,7 @@ public class RESTEquipmentService implements EquipmentService {
 
     @Override
     public InputStream getRecords(final List<String> params) {
-        try {
-            return this.restService.getInputStream(this.catalogServiceURI.resolve(RECORDS_ENDPOINT_PATH));
-        } catch (IOException e) {
-            throw new LanewebException(e);
-        }
+        return this.restService.getInputStream(this.catalogServiceURI.resolve(RECORDS_ENDPOINT_PATH));
     }
 
     @Override

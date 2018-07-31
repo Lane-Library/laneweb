@@ -3,12 +3,21 @@
     version="1.0"
     pass-through="all">
     
-    <!-- if the list is null, xstream outputs <null/> -->
-    <stx:template match="null"/>
+    <stx:param name="bookmarking"/>
+    
+    <!-- if the list is null, xstream outputs <null/> when it is empty it is <empty-list/> -->
+    <stx:template match="null | empty-list"/>
     
     <stx:template match="list">
         <ul id="bookmarks" xmlns="http://www.w3.org/1999/xhtml">
-            <stx:process-children/>
+            <stx:choose>
+                <stx:when test="$bookmarking = 'off'">
+                    <li>bookmarks temporarily unavailable</li>
+                </stx:when>
+                <stx:otherwise>
+                    <stx:process-children/>
+                </stx:otherwise>
+            </stx:choose>
         </ul>
     </stx:template>
     

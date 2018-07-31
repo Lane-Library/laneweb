@@ -29,7 +29,7 @@ public class LanewebConfigurationTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.configuration = new LanewebConfiguration(new URI("classes"), new URI("content"), Boolean.TRUE,
-                mock(ServletContext.class), "version");
+                "rw", mock(ServletContext.class), "version");
     }
 
     @Test
@@ -59,6 +59,7 @@ public class LanewebConfigurationTest {
         assertSame(Boolean.TRUE, model.get(Model.DISASTER_MODE));
         assertEquals("content", ModelUtil.getObject(model, Model.CONTENT_BASE, URI.class).toString());
         assertEquals("classes", ModelUtil.getObject(model, Model.CLASSES_SERVICE_URI, URI.class).toString());
+        assertEquals("rw", ModelUtil.getString(model, Model.BOOKMARKING));
     }
 
     @Test

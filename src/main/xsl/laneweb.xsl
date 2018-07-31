@@ -60,9 +60,6 @@
     <!-- json version of the data model -->
     <xsl:param name="model"/>
 
-    <!-- boolean: is app running in DR mode -->
-    <xsl:param name="disaster-mode"/>
-
     <!-- target parameter for shibboleth discovery service page -->
     <xsl:param name="return"/>
 
@@ -104,7 +101,7 @@
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/ethics')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/careercenter')">all-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/bioresearch')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>

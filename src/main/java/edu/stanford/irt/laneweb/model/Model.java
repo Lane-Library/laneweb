@@ -19,6 +19,8 @@ public final class Model {
 
     public static final String BOOKMARKS = "bookmarks";
 
+    public static final String BOOKMARKING = "bookmarking";
+
     public static final String CALLBACK = "callback";
 
     public static final String CATEGORY = "category";

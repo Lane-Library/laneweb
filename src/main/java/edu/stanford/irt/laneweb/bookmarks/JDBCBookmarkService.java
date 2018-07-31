@@ -16,11 +16,6 @@ import java.util.Objects;
 
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import edu.stanford.irt.laneweb.LanewebException;
-
 public class JDBCBookmarkService implements BookmarkService {
 
     private static final int BYTES = 2;
@@ -28,8 +23,6 @@ public class JDBCBookmarkService implements BookmarkService {
     private static final String DELETE_BOOKMARKS_SQL = "DELETE FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (SUNETID, BOOKMARKS) VALUES (?, ?)";
-
-    private static final Logger log = LoggerFactory.getLogger(JDBCBookmarkService.class);
 
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
@@ -43,14 +36,13 @@ public class JDBCBookmarkService implements BookmarkService {
         this.dataSource = dataSource;
     }
 
-    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt) throws SQLException {
+    private static List<Bookmark> getLinksFromStatement(final PreparedStatement pstmt)
+            throws SQLException, IOException, ClassNotFoundException {
         List<Bookmark> links = null;
         try (ResultSet rs = pstmt.executeQuery()) {
             if (rs.next()) {
                 try (ObjectInputStream oip = new ObjectInputStream(new ByteArrayInputStream(rs.getBytes(1)))) {
                     links = (List<Bookmark>) oip.readObject();
-                } catch (IOException | ClassNotFoundException e) {
-                    log.error(e.getMessage(), e);
                 }
             }
         }
@@ -58,7 +50,7 @@ public class JDBCBookmarkService implements BookmarkService {
     }
 
     private static void saveLinksAndResetAutocommit(final String userid, final List<Bookmark> links,
-            final Connection conn) throws SQLException {
+            final Connection conn) throws SQLException, IOException {
         try (PreparedStatement pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
             pstmt.execute();
@@ -66,7 +58,7 @@ public class JDBCBookmarkService implements BookmarkService {
             conn.commit();
         } catch (IOException | SQLException e) {
             conn.rollback();
-            throw new LanewebException(e);
+            throw e;
         } finally {
             conn.setAutoCommit(true);
         }
@@ -95,8 +87,8 @@ public class JDBCBookmarkService implements BookmarkService {
                 PreparedStatement pstmt = conn.prepareStatement(READ_BOOKMARKS_SQL)) {
             pstmt.setString(USER_ID, userid);
             links = getLinksFromStatement(pstmt);
-        } catch (SQLException e) {
-            log.error(e.getMessage(), e);
+        } catch (SQLException | ClassNotFoundException | IOException e) {
+            throw new BookmarkException(e);
         }
         return links;
     }
@@ -111,7 +103,7 @@ public class JDBCBookmarkService implements BookmarkService {
                 count = rs.getInt(1);
             }
         } catch (SQLException e) {
-            throw new LanewebException(e);
+            throw new BookmarkException(e);
         }
         return count;
     }
@@ -123,8 +115,8 @@ public class JDBCBookmarkService implements BookmarkService {
         try (Connection conn = this.dataSource.getConnection()) {
             conn.setAutoCommit(false);
             saveLinksAndResetAutocommit(userid, links, conn);
-        } catch (SQLException e) {
-            throw new LanewebException(e);
+        } catch (SQLException | IOException e) {
+            throw new BookmarkException(e);
         }
     }
 }
