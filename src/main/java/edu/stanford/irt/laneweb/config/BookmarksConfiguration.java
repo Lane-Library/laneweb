@@ -1,10 +1,12 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.util.Collections;
-import java.util.List;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,12 +15,13 @@ import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
-import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkGenerator;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.bookmarks.JDBCBookmarkService;
+import edu.stanford.irt.laneweb.bookmarks.RESTBookmarkService;
 import edu.stanford.irt.laneweb.bookmarks.StanfordDomainStrippingBookmarkService;
 import edu.stanford.irt.laneweb.cocoon.ActionSelector;
+import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
 
 @Configuration
@@ -40,31 +43,23 @@ public class BookmarksConfiguration {
         return new BookmarkGenerator(marshaller);
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.bookmarks.BookmarkService")
-    @Profile("!gce")
+    @Bean
     public BookmarkService bookmarkService(final DataSource dataSource) {
         return new StanfordDomainStrippingBookmarkService(new JDBCBookmarkService(dataSource));
     }
 
-    @Bean(name = "edu.stanford.irt.laneweb.bookmarks.BookmarkService")
-    @Profile("gce")
-    public BookmarkService dummyBookmarkService() {
-        return new BookmarkService() {
+    @Bean("java.net.URI/bookmark-service")
+    public URI bookmarkServiceURI(
+            @Value("${edu.stanford.irt.laneweb.bookmark-service.scheme}") final String scheme,
+            @Value("${edu.stanford.irt.laneweb.bookmark-service.host}") final String host,
+            @Value("${edu.stanford.irt.laneweb.bookmark-service.port}") final int port,
+            @Value("${edu.stanford.irt.laneweb.bookmark-service.path}") final String path) throws URISyntaxException {
+        return new URI(scheme, null, host, port, path, null, null);
+    }
 
-            @Override
-            public List<Bookmark> getLinks(final String userid) {
-                return Collections.emptyList();
-            }
-
-            @Override
-            public int getRowCount() {
-                return 0;
-            }
-
-            @Override
-            public void saveLinks(final String userid, final List<Bookmark> links) {
-                // do nothing
-            }
-        };
+    public BookmarkService restBookmarkService(
+            @Qualifier("java.net.URI/bookmark-service") final URI bookmarksURI,
+            final RESTService restService) {
+        return new RESTBookmarkService(bookmarksURI, restService);
     }
 }

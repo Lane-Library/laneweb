@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface BookmarkService {
 
-    List<Bookmark> getLinks(String userid);
+    List<Bookmark> getLinks(String userid) throws BookmarkException;
 
-    int getRowCount();
+    int getRowCount() throws BookmarkException;
 
-    void saveLinks(String userid, List<Bookmark> links);
+    void saveLinks(String userid, List<Bookmark> links) throws BookmarkException;
 }

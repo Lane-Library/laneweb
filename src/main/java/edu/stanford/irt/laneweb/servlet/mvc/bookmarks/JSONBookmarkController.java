@@ -8,9 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkException;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
@@ -29,8 +33,10 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 // TODO: revisit conscious decision not to synchronize list operations.
 @Controller
-@RequestMapping(value = "/bookmarks")
+@RequestMapping(value = "/bookmarks", consumes = "application/json")
 public class JSONBookmarkController extends BookmarkController {
+
+    private static final Logger log = LoggerFactory.getLogger(BookmarkController.class);
 
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
@@ -40,7 +46,7 @@ public class JSONBookmarkController extends BookmarkController {
         this.proxyLinksDataBinder = proxyLinksDataBinder;
     }
 
-    @PostMapping(consumes = "application/json")
+    @PostMapping
     @ResponseStatus(value = HttpStatus.OK)
     public void addBookmark(
             @ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
@@ -86,7 +92,13 @@ public class JSONBookmarkController extends BookmarkController {
         return bookmarks.get(i);
     }
 
-    @PostMapping(value = "/move", consumes = "application/json")
+    @ExceptionHandler(BookmarkException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public void handleException(final BookmarkException e) {
+        log.error(e.getMessage());
+    }
+
+    @PostMapping(value = "/move")
     @ResponseStatus(value = HttpStatus.OK)
     public void moveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,
@@ -100,7 +112,7 @@ public class JSONBookmarkController extends BookmarkController {
         bookmarks.add(to, bookmarks.remove(from));
     }
 
-    @PutMapping(consumes = "application/json")
+    @PutMapping
     @ResponseStatus(value = HttpStatus.OK)
     public void saveBookmark(@ModelAttribute(Model.BOOKMARKS) final List<Bookmark> bookmarks,
             @ModelAttribute(Model.USER_ID) final String userid,

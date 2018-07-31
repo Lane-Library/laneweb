@@ -1,18 +1,25 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkException;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BookmarkDataBinder implements DataBinder {
+    
+    private static final Logger log = LoggerFactory.getLogger(BookmarkDataBinder.class);
 
     private BookmarkService bookmarkService;
 
@@ -28,7 +35,15 @@ public class BookmarkDataBinder implements DataBinder {
             HttpSession session = request.getSession();
             bookmarks = (List<Bookmark>) session.getAttribute(Model.BOOKMARKS);
             if (bookmarks == null) {
-                bookmarks = this.bookmarkService.getLinks(userid);
+                try {
+                    bookmarks = this.bookmarkService.getLinks(userid);
+                } catch (BookmarkException e) {
+                    // if getting bookmarks from the service fails turn bookmarking off for this user
+                    // and return without putting bookmarks in the model
+                    log.error(e.getMessage());
+                    model.put(Model.BOOKMARKING, "off");
+                    return;
+                }
                 if (bookmarks == null) {
                     bookmarks = new ArrayList<>();
                 }

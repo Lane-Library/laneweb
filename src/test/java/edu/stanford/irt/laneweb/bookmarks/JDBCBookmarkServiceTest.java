@@ -25,8 +25,6 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
-
 public class JDBCBookmarkServiceTest {
 
     private Bookmark bookmark;
@@ -93,7 +91,7 @@ public class JDBCBookmarkServiceTest {
         this.dao.getLinks(null);
     }
 
-    @Test
+    @Test(expected = BookmarkException.class)
     public void testGetLinksThrowSQLException() throws SQLException, IOException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
@@ -135,7 +133,7 @@ public class JDBCBookmarkServiceTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = BookmarkException.class)
     public void testGetRowCountThrowsException() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         expect(this.connection.createStatement()).andReturn(this.statement);
@@ -181,7 +179,7 @@ public class JDBCBookmarkServiceTest {
         this.dao.saveLinks(null, Collections.singletonList(this.bookmark));
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = BookmarkException.class)
     public void testSaveLinksRollbackThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
@@ -213,7 +211,7 @@ public class JDBCBookmarkServiceTest {
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = BookmarkException.class)
     public void testSaveLinksStatementThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         this.connection.setAutoCommit(false);
@@ -228,7 +226,7 @@ public class JDBCBookmarkServiceTest {
         this.dao.saveLinks("userid", Collections.emptyList());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test(expected = BookmarkException.class)
     public void testSaveLinksThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andThrow(new SQLException());
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
