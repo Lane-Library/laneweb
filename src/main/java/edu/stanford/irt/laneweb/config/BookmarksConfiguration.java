@@ -44,7 +44,7 @@ public class BookmarksConfiguration {
     }
 
     @Bean
-    @Profile("!gce")
+    @Profile({ "!gce", "!dev" })
     public BookmarkService bookmarkService(final DataSource dataSource) {
         return new StanfordDomainStrippingBookmarkService(new JDBCBookmarkService(dataSource));
     }
@@ -59,7 +59,7 @@ public class BookmarksConfiguration {
     }
 
     @Bean
-    @Profile("gce")
+    @Profile({ "gce", "dev" })
     public BookmarkService restBookmarkService(
             @Qualifier("java.net.URI/bookmark-service") final URI bookmarksURI,
             final RESTService restService) {
