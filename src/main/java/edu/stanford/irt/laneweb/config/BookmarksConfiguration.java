@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.oxm.Marshaller;
 
@@ -43,8 +42,6 @@ public class BookmarksConfiguration {
         return new BookmarkGenerator(marshaller);
     }
 
-    @Bean
-    @Profile({ "!gce", "!dev" })
     public BookmarkService bookmarkService(final DataSource dataSource) {
         return new StanfordDomainStrippingBookmarkService(new JDBCBookmarkService(dataSource));
     }
@@ -59,7 +56,6 @@ public class BookmarksConfiguration {
     }
 
     @Bean
-    @Profile({ "gce", "dev" })
     public BookmarkService restBookmarkService(
             @Qualifier("java.net.URI/bookmark-service") final URI bookmarksURI,
             final RESTService restService) {
