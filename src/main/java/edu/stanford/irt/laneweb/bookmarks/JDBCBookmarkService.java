@@ -11,10 +11,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javax.sql.DataSource;
+
+import edu.stanford.irt.status.ApplicationStatus;
+import edu.stanford.irt.status.Status;
+import edu.stanford.irt.status.StatusItem;
 
 public class JDBCBookmarkService implements BookmarkService {
 
@@ -24,9 +31,15 @@ public class JDBCBookmarkService implements BookmarkService {
 
     private static final String INSERT_BOOKMARKS_SQL = "INSERT INTO BOOKMARKS (SUNETID, BOOKMARKS) VALUES (?, ?)";
 
+    private static final long MAX_OK_TIME = 1_000;
+
     private static final String READ_BOOKMARKS_SQL = "SELECT BOOKMARKS FROM BOOKMARKS WHERE SUNETID = ?";
 
     private static final String ROW_COUNT = "SELECT COUNT(*) FROM BOOKMARKS";
+
+    private static final String ROWCOUNT_FORMAT = "total row count = %s";
+
+    private static final String TIME_FORMAT = "getRowcount connection took %sms";
 
     private static final int USER_ID = 1;
 
@@ -106,6 +119,18 @@ public class JDBCBookmarkService implements BookmarkService {
             throw new BookmarkException(e);
         }
         return count;
+    }
+
+    @Override
+    public ApplicationStatus getStatus() {
+        List<StatusItem> list = new ArrayList<>();
+        Instant start = Instant.now();
+        int rowCount = getRowCount();
+        long time = Duration.between(start, Instant.now()).toMillis();
+        list.add(new StatusItem(Status.INFO, String.format(ROWCOUNT_FORMAT, Integer.valueOf(rowCount))));
+        Status status = time < MAX_OK_TIME ? Status.OK : Status.WARN;
+        list.add(new StatusItem(status, String.format(TIME_FORMAT, Long.valueOf(time))));
+        return new ApplicationStatus(null, null, null, 0, null, list);
     }
 
     @Override

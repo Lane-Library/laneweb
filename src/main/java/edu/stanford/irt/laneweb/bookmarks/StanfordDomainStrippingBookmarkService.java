@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.bookmarks;
 
 import java.util.List;
 
+import edu.stanford.irt.status.ApplicationStatus;
+
 /**
  * This class is a wrapper for the JDBCBookmarkService to provide backwards compatibility for the bookmarks table by
  * removing {@literal @}stanford.edu from the userid for the database queries.
@@ -24,6 +26,11 @@ public class StanfordDomainStrippingBookmarkService implements BookmarkService {
     @Override
     public int getRowCount() {
         return this.bookmarkService.getRowCount();
+    }
+
+    @Override
+    public ApplicationStatus getStatus() {
+        return this.bookmarkService.getStatus();
     }
 
     @Override

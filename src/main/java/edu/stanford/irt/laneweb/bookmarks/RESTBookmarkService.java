@@ -6,6 +6,7 @@ import java.util.List;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.status.ApplicationStatus;
 
 public class RESTBookmarkService implements BookmarkService {
 
@@ -40,6 +41,12 @@ public class RESTBookmarkService implements BookmarkService {
         } catch (RESTException e) {
             throw new BookmarkException(e);
         }
+    }
+
+    @Override
+    public ApplicationStatus getStatus() {
+        URI uri = this.bookmarksURI.resolve("status.json");
+        return this.restService.getObject(uri, ApplicationStatus.class);
     }
 
     @Override
