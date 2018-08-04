@@ -17,29 +17,29 @@ import edu.stanford.irt.coursereserves.Course;
 
 public class CourseListGeneratorTest {
 
-    private CourseReservesService dao;
-
     private CourseListGenerator generator;
 
     private SAXStrategy<List<Course>> saxStrategy;
+
+    private CourseReservesService service;
 
     private XMLConsumer xmlConsumer;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
-        this.dao = mock(CourseReservesService.class);
+        this.service = mock(CourseReservesService.class);
         this.saxStrategy = mock(SAXStrategy.class);
-        this.generator = new CourseListGenerator(this.dao, this.saxStrategy);
+        this.generator = new CourseListGenerator(this.service, this.saxStrategy);
         this.xmlConsumer = mock(XMLConsumer.class);
     }
 
     @Test
     public void testDoGenerateXMLConsumer() {
-        expect(this.dao.getCourses()).andReturn(Collections.emptyList());
+        expect(this.service.getCourses()).andReturn(Collections.emptyList());
         this.saxStrategy.toSAX(Collections.emptyList(), this.xmlConsumer);
-        replay(this.dao, this.saxStrategy, this.xmlConsumer);
+        replay(this.service, this.saxStrategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.dao, this.saxStrategy, this.xmlConsumer);
+        verify(this.service, this.saxStrategy, this.xmlConsumer);
     }
 }

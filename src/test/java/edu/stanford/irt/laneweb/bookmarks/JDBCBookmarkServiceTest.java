@@ -9,6 +9,7 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.io.ByteArrayOutputStream;
@@ -33,18 +34,18 @@ public class JDBCBookmarkServiceTest {
 
     private Connection connection;
 
-    private JDBCBookmarkService dao;
-
     private DataSource dataSource;
 
     private ResultSet resultSet;
+
+    private JDBCBookmarkService service;
 
     private PreparedStatement statement;
 
     @Before
     public void setUp() throws Exception {
         this.dataSource = mock(DataSource.class);
-        this.dao = new JDBCBookmarkService(this.dataSource);
+        this.service = new JDBCBookmarkService(this.dataSource);
         this.connection = mock(Connection.class);
         this.statement = mock(PreparedStatement.class);
         this.resultSet = mock(ResultSet.class);
@@ -66,7 +67,7 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertEquals(this.bookmark, this.dao.getLinks("userid").get(0));
+        assertEquals(this.bookmark, this.service.getLinks("userid").get(0));
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
@@ -81,14 +82,14 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertNull(this.dao.getLinks("userid"));
+        assertNull(this.service.getLinks("userid"));
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
     @Test(expected = NullPointerException.class)
     public void testGetLinksNullUserid() throws SQLException, IOException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.getLinks(null);
+        this.service.getLinks(null);
     }
 
     @Test(expected = BookmarkException.class)
@@ -100,7 +101,7 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertNull(this.dao.getLinks("userid"));
+        assertNull(this.service.getLinks("userid"));
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
@@ -115,7 +116,7 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertEquals(1, this.dao.getRowCount());
+        assertEquals(1, this.service.getRowCount());
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
@@ -129,7 +130,7 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        assertEquals(0, this.dao.getRowCount());
+        assertEquals(0, this.service.getRowCount());
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
@@ -143,7 +144,22 @@ public class JDBCBookmarkServiceTest {
         this.statement.close();
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.getRowCount();
+        this.service.getRowCount();
+    }
+
+    @Test
+    public void testGetStatus() throws SQLException {
+        expect(this.dataSource.getConnection()).andReturn(this.connection);
+        expect(this.connection.createStatement()).andReturn(this.statement);
+        expect(this.statement.executeQuery("SELECT COUNT(*) FROM BOOKMARKS")).andReturn(this.resultSet);
+        expect(this.resultSet.next()).andReturn(true);
+        expect(this.resultSet.getInt(1)).andReturn(1);
+        this.resultSet.close();
+        this.statement.close();
+        this.connection.close();
+        replay(this.dataSource, this.connection, this.statement, this.resultSet);
+        assertNotNull(this.service.getStatus());
+        verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
     @Test
@@ -163,20 +179,20 @@ public class JDBCBookmarkServiceTest {
         this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks("userid", Collections.singletonList(this.bookmark));
+        this.service.saveLinks("userid", Collections.singletonList(this.bookmark));
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
     @Test(expected = NullPointerException.class)
     public void testSaveLinksNullBookmarks() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks("userid", null);
+        this.service.saveLinks("userid", null);
     }
 
     @Test(expected = NullPointerException.class)
     public void testSaveLinksNullUserid() throws SQLException {
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks(null, Collections.singletonList(this.bookmark));
+        this.service.saveLinks(null, Collections.singletonList(this.bookmark));
     }
 
     @Test(expected = BookmarkException.class)
@@ -192,7 +208,7 @@ public class JDBCBookmarkServiceTest {
         this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks("userid", Collections.emptyList());
+        this.service.saveLinks("userid", Collections.emptyList());
     }
 
     @Test
@@ -207,7 +223,7 @@ public class JDBCBookmarkServiceTest {
         this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks("userid", Collections.emptyList());
+        this.service.saveLinks("userid", Collections.emptyList());
         verify(this.dataSource, this.connection, this.statement, this.resultSet);
     }
 
@@ -223,13 +239,13 @@ public class JDBCBookmarkServiceTest {
         this.connection.setAutoCommit(true);
         this.connection.close();
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks("userid", Collections.emptyList());
+        this.service.saveLinks("userid", Collections.emptyList());
     }
 
     @Test(expected = BookmarkException.class)
     public void testSaveLinksThrowsSQLException() throws SQLException {
         expect(this.dataSource.getConnection()).andThrow(new SQLException());
         replay(this.dataSource, this.connection, this.statement, this.resultSet);
-        this.dao.saveLinks("userid", Collections.emptyList());
+        this.service.saveLinks("userid", Collections.emptyList());
     }
 }

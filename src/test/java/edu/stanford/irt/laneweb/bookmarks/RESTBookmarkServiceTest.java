@@ -21,6 +21,7 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.status.ApplicationStatus;
 
 public class RESTBookmarkServiceTest {
 
@@ -68,6 +69,15 @@ public class RESTBookmarkServiceTest {
                 .andThrow(new RESTException(new IOException()));
         replay(this.restService);
         this.bookmarkService.getRowCount();
+    }
+
+    @Test
+    public void testGetStatus() {
+        ApplicationStatus status = mock(ApplicationStatus.class);
+        expect(this.restService.getObject(this.uri.resolve("status.json"), ApplicationStatus.class)).andReturn(status);
+        replay(this.restService);
+        assertSame(status, this.bookmarkService.getStatus());
+        verify(this.restService);
     }
 
     @Test

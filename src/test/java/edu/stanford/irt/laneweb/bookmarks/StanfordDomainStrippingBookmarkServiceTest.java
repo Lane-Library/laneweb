@@ -6,59 +6,71 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.status.ApplicationStatus;
+
 public class StanfordDomainStrippingBookmarkServiceTest {
 
-    private StanfordDomainStrippingBookmarkService bookmarkDAO;
+    private StanfordDomainStrippingBookmarkService service;
 
-    private BookmarkService wrappedDAO;
+    private BookmarkService wrappedService;
 
     @Before
     public void setUp() throws Exception {
-        this.wrappedDAO = mock(BookmarkService.class);
-        this.bookmarkDAO = new StanfordDomainStrippingBookmarkService(this.wrappedDAO);
+        this.wrappedService = mock(BookmarkService.class);
+        this.service = new StanfordDomainStrippingBookmarkService(this.wrappedService);
     }
 
     @Test
     public void testGetLinks() {
-        expect(this.wrappedDAO.getLinks("id@domain")).andReturn(null);
-        replay(this.wrappedDAO);
-        assertNull(this.bookmarkDAO.getLinks("id@domain"));
-        verify(this.wrappedDAO);
+        expect(this.wrappedService.getLinks("id@domain")).andReturn(null);
+        replay(this.wrappedService);
+        assertNull(this.service.getLinks("id@domain"));
+        verify(this.wrappedService);
     }
 
     @Test
     public void testGetLinksStanfordDomain() {
-        expect(this.wrappedDAO.getLinks("id")).andReturn(null);
-        replay(this.wrappedDAO);
-        assertNull(this.bookmarkDAO.getLinks("id@stanford.edu"));
-        verify(this.wrappedDAO);
+        expect(this.wrappedService.getLinks("id")).andReturn(null);
+        replay(this.wrappedService);
+        assertNull(this.service.getLinks("id@stanford.edu"));
+        verify(this.wrappedService);
     }
 
     @Test
     public void testGetRowCount() {
-        expect(this.wrappedDAO.getRowCount()).andReturn(0);
-        replay(this.wrappedDAO);
-        assertEquals(0, this.bookmarkDAO.getRowCount());
-        verify(this.wrappedDAO);
+        expect(this.wrappedService.getRowCount()).andReturn(0);
+        replay(this.wrappedService);
+        assertEquals(0, this.service.getRowCount());
+        verify(this.wrappedService);
+    }
+
+    @Test
+    public void testGetStatus() {
+        ApplicationStatus status = mock(ApplicationStatus.class);
+        expect(this.wrappedService.getStatus()).andReturn(status);
+        replay(this.wrappedService);
+        assertSame(status, this.service.getStatus());
+        verify(this.wrappedService);
     }
 
     @Test
     public void testSaveLinks() {
-        this.wrappedDAO.saveLinks("id@domain", null);
-        replay(this.wrappedDAO);
-        this.bookmarkDAO.saveLinks("id@domain", null);
-        verify(this.wrappedDAO);
+        this.wrappedService.saveLinks("id@domain", null);
+        replay(this.wrappedService);
+        this.service.saveLinks("id@domain", null);
+        verify(this.wrappedService);
     }
 
     @Test
     public void testSaveLinksStanfordDomain() {
-        this.wrappedDAO.saveLinks("id", null);
-        replay(this.wrappedDAO);
-        this.bookmarkDAO.saveLinks("id@stanford.edu", null);
-        verify(this.wrappedDAO);
+        this.wrappedService.saveLinks("id", null);
+        replay(this.wrappedService);
+        this.service.saveLinks("id@stanford.edu", null);
+        verify(this.wrappedService);
     }
 }
