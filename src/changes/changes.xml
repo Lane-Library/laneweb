@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-08-06" version="3.5.18" description="3.5.18 bug fix release">
+            <action date="2018-07-31" dev="ryanmax" issue="144151" type="remove">
+                remove bioresearch search
+            </action>
+            <action date="2018-08-03" dev="ceyates" issue="143702" type="add">
+                create a bookmarks microservice
+            </action>
+        </release>
         <release date="2018-07-30" version="3.5.17" description="3.5.17 bug fix release">
             <action date="2018-07-26" dev="ryanmax" issue="144067" type="update">
                 remove MeSH suggestion limits on PIC fields; add suggestions to O field
