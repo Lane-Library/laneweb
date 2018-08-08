@@ -128,13 +128,6 @@ public class LanewebIT {
     }
 
     @Test
-    public void testQueryMap() throws Exception {
-        this.mockMvc
-                .perform(get("/apps/querymap/json?q=ganz slipped capital femoral epiphysis").accept(APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON));
-    }
-
-    @Test
     public void testRedirects() throws Exception {
         this.mockMvc.perform(get("/beemap")).andExpect(status().isFound())
                 .andExpect(header().string("location", "/beemap.html"));
