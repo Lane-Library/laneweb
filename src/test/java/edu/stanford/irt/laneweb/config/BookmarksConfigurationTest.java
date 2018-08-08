@@ -33,11 +33,6 @@ public class BookmarksConfigurationTest {
     }
 
     @Test
-    public void testBookmarkService() {
-        assertNotNull(this.configuration.bookmarkService(null));
-    }
-
-    @Test
     public void testBookmarkServiceURI() throws URISyntaxException {
         assertNotNull(this.configuration.bookmarkServiceURI(null, null, 0, null));
     }

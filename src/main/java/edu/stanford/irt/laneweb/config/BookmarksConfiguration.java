@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.config;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,9 +14,7 @@ import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkGenerator;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
-import edu.stanford.irt.laneweb.bookmarks.JDBCBookmarkService;
 import edu.stanford.irt.laneweb.bookmarks.RESTBookmarkService;
-import edu.stanford.irt.laneweb.bookmarks.StanfordDomainStrippingBookmarkService;
 import edu.stanford.irt.laneweb.cocoon.ActionSelector;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
@@ -40,10 +36,6 @@ public class BookmarksConfiguration {
     @Scope("prototype")
     public Generator bookmarkGenerator(final Marshaller marshaller) {
         return new BookmarkGenerator(marshaller);
-    }
-
-    public BookmarkService bookmarkService(final DataSource dataSource) {
-        return new StanfordDomainStrippingBookmarkService(new JDBCBookmarkService(dataSource));
     }
 
     @Bean("java.net.URI/bookmark-service")

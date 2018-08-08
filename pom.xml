@@ -94,11 +94,6 @@
             <version>1.9.22</version>
         </dependency>
         <dependency>
-            <artifactId>querymap</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>2.0.2</version>
-        </dependency>
-        <dependency>
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
@@ -243,30 +238,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>12.2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ons</artifactId>
-            <version>12.2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ucp</artifactId>
-            <version>12.2.0.1</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -531,7 +502,6 @@
                                 <include>lane-popin-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>lane-findit-min.js</include>
-                                <include>lane-querymap-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>lane-feedback-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
