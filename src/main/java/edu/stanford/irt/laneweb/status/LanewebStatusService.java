@@ -12,12 +12,12 @@ import edu.stanford.irt.status.StatusService;
 
 public class LanewebStatusService {
 
-    private static Logger log = LoggerFactory.getLogger(LanewebStatusService.class);
+    private static final Logger log = LoggerFactory.getLogger(LanewebStatusService.class);
 
     private List<StatusService> services;
 
     public LanewebStatusService(final List<StatusService> services) {
-        this.services = services;
+        this.services = new ArrayList<>(services);
     }
 
     public List<ApplicationStatus> getStatus() {
