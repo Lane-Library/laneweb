@@ -37,7 +37,7 @@ public class RESTProxyServersServiceTest {
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
         this.service = new RESTProxyServersService(this.uri, this.restService);
-        this.inputStream = new ByteArrayInputStream(new byte[] {60});
+        this.inputStream = new ByteArrayInputStream(new byte[] { 60 });
     }
 
     @Test
@@ -54,7 +54,7 @@ public class RESTProxyServersServiceTest {
         expect(this.restService.getInputStream(new URI("/proxy/write"))).andReturn(this.inputStream);
         replay(this.restService);
         this.service.write(baos);
-        assertArrayEquals(new byte[] {60}, baos.toByteArray());
+        assertArrayEquals(new byte[] { 60 }, baos.toByteArray());
         verify(this.restService);
     }
 }

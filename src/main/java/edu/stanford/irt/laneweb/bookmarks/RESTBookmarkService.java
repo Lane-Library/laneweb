@@ -19,10 +19,13 @@ public class RESTBookmarkService implements BookmarkService {
 
     private URI rowCountURI;
 
+    private URI statusURI;
+
     public RESTBookmarkService(final URI bookmarksURI, final RESTService restService) {
         this.bookmarksURI = bookmarksURI;
         this.restService = restService;
         this.rowCountURI = bookmarksURI.resolve("rowCount");
+        this.statusURI = bookmarksURI.resolve("status.json");
     }
 
     @Override
@@ -45,8 +48,7 @@ public class RESTBookmarkService implements BookmarkService {
 
     @Override
     public ApplicationStatus getStatus() {
-        URI uri = this.bookmarksURI.resolve("status.json");
-        return this.restService.getObject(uri, ApplicationStatus.class);
+        return this.restService.getObject(this.statusURI, ApplicationStatus.class);
     }
 
     @Override

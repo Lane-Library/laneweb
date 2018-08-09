@@ -253,15 +253,15 @@ public class LaneSearchIT {
     }
 
     @Test
-    public void testLaneSearchUpSpaceToSpaceDate() throws Exception {
-        this.mockMvc.perform(get("/eresources/search.html?q=Up To Date").servletPath("/eresources/search.html"))
+    public void testLaneSearchUpdashTodashDate() throws Exception {
+        this.mockMvc.perform(get("/eresources/search.html?q=Up-To-Date").servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
                         .exists());
     }
 
     @Test
-    public void testLaneSearchUpdashTodashDate() throws Exception {
-        this.mockMvc.perform(get("/eresources/search.html?q=Up-To-Date").servletPath("/eresources/search.html"))
+    public void testLaneSearchUpSpaceToSpaceDate() throws Exception {
+        this.mockMvc.perform(get("/eresources/search.html?q=Up To Date").servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
                         .exists());
     }

@@ -90,28 +90,6 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
     }
 
     @Test
-    public void testToSAXEmptyDescription() throws SAXException, IOException {
-        expect(this.list.getPagingData()).andReturn(this.pagingData);
-        expect(this.pagingData.getStart()).andReturn(0);
-        expect(this.pagingData.getLength()).andReturn(100);
-        expect(this.list.getHeading()).andReturn("A");
-        expect(this.list.size()).andReturn(0);
-        expect(this.list.listIterator(0)).andReturn(this.listIterator);
-        expect(this.listIterator.hasNext()).andReturn(true).times(101);
-        expect(this.listIterator.next()).andReturn(this.eresource).times(100);
-        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
-        expectLastCall().times(100);
-        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
-                this.pagingLabels, this.pagingLabelsIterator);
-        this.strategy.toSAX(this.list, this.xmlConsumer);
-        assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "PagingEresourceListXHTMLSAXStrategyTest-testPage0ToSAX.xml"),
-                this.xmlConsumer.getStringValue());
-        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
-                this.pagingLabels, this.pagingLabelsIterator);
-    }
-
-    @Test
     public void testPage0ToSAX() throws SAXException, IOException {
         expect(this.list.getPagingData()).andReturn(this.pagingData);
         expect(this.pagingData.getStart()).andReturn(0);
@@ -235,6 +213,28 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
         assertEquals(
                 this.xmlConsumer.getExpectedResult(this,
                         "PagingEresourceListXHTMLSAXStrategyTest-testToSAXDescription.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+    }
+
+    @Test
+    public void testToSAXEmptyDescription() throws SAXException, IOException {
+        expect(this.list.getPagingData()).andReturn(this.pagingData);
+        expect(this.pagingData.getStart()).andReturn(0);
+        expect(this.pagingData.getLength()).andReturn(100);
+        expect(this.list.getHeading()).andReturn("A");
+        expect(this.list.size()).andReturn(0);
+        expect(this.list.listIterator(0)).andReturn(this.listIterator);
+        expect(this.listIterator.hasNext()).andReturn(true).times(101);
+        expect(this.listIterator.next()).andReturn(this.eresource).times(100);
+        this.eresourceStrategy.toSAX(this.eresource, this.xmlConsumer);
+        expectLastCall().times(100);
+        replay(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
+                this.pagingLabels, this.pagingLabelsIterator);
+        this.strategy.toSAX(this.list, this.xmlConsumer);
+        assertEquals(
+                this.xmlConsumer.getExpectedResult(this, "PagingEresourceListXHTMLSAXStrategyTest-testPage0ToSAX.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.eresource, this.eresourceStrategy, this.list, this.listIterator, this.pagingData, this.pagingLabel,
                 this.pagingLabels, this.pagingLabelsIterator);
