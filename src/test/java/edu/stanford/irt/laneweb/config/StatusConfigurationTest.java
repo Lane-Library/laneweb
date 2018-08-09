@@ -29,7 +29,7 @@ public class StatusConfigurationTest {
 
     @Test
     public void testLanewebStatusService() {
-        assertNotNull(this.configuration.lanewebStatusService(null));
+        assertNotNull(this.configuration.lanewebStatusService(Collections.emptyList()));
     }
 
     @Test
