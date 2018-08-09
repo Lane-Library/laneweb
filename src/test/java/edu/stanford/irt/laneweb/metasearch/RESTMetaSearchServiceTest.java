@@ -15,8 +15,10 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.status.ApplicationStatus;
 
 public class RESTMetaSearchServiceTest {
 
@@ -37,11 +39,36 @@ public class RESTMetaSearchServiceTest {
     }
 
     @Test
+    public void testClearAllCaches() throws RESTException, URISyntaxException {
+        expect(this.restService.getObject(new URI("/clearCache"), String.class)).andReturn("OK");
+        replay(this.restService);
+        this.service.clearAllCaches();
+        verify(this.restService);
+    }
+
+    @Test
+    public void testClearCache() throws RESTException, URISyntaxException {
+        expect(this.restService.getObject(new URI("/clearCache?query=the+query"), String.class)).andReturn("OK");
+        replay(this.restService);
+        this.service.clearCache("the query");
+        verify(this.restService);
+    }
+
+    @Test
     public void testDescribe() throws URISyntaxException {
         expect(this.restService.getObject(new URI("/describe?query=the+query&engines=pubmed"), Result.class))
                 .andReturn(this.result);
         replay(this.restService);
         assertSame(this.result, this.service.describe("the query", Collections.singleton("pubmed")));
+        verify(this.restService);
+    }
+
+    @Test
+    public void testGetStatus() throws RESTException, URISyntaxException {
+        ApplicationStatus status = mock(ApplicationStatus.class);
+        expect(this.restService.getObject(new URI("/status.json"), ApplicationStatus.class)).andReturn(status);
+        replay(this.restService);
+        assertSame(status, this.service.getStatus());
         verify(this.restService);
     }
 

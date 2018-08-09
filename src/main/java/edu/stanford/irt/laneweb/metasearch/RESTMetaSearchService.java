@@ -81,7 +81,7 @@ public class RESTMetaSearchService implements MetaSearchService {
 
     @Override
     public ApplicationStatus getStatus() {
-        return getResponse(this.metaSearchURI.resolve("1.2/status.json"), ApplicationStatus.class);
+        return getResponse(this.metaSearchURI.resolve("status.json"), ApplicationStatus.class);
     }
 
     @Override
