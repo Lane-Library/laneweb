@@ -43,8 +43,6 @@ import edu.stanford.irt.search.impl.Result;
 @Configuration
 public class MetasearchConfiguration {
 
-    private static final int SEVENTY_SECONDS = 70_000;
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/clinical-all")
     @Scope("prototype")
     public Generator allClinicalSearchResultsGenerator(
