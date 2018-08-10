@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-08-10" version="3.5.19" description="3.5.19 bug fix release">
+            <action date="2018-08-08" dev="olgary" issue="144328" type="remove">
+                removed old logos from application
+            </action>
+            <action date="2018-08-08" dev="olgary" issue="144327" type="update">
+                3 templates xml - changed footer links
+            </action>
+            <action date="2018-08-08" dev="ceyates" issue="144319" type="remove">
+                remove querymapping code
+            </action>
+            <action date="2018-08-09" dev="ceyates" issue="144236" type="update">
+                refactor status package to more gracefully handle subsystem failures
+            </action>
+        </release>
         <release date="2018-08-06" version="3.5.18" description="3.5.18 bug fix release">
             <action date="2018-07-31" dev="ryanmax" issue="144151" type="remove">
                 remove bioresearch search
