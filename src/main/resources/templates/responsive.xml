@@ -121,7 +121,7 @@
                             <div class="login-info">
                                 <div class="pure-g">
                                     <div class="pure-u-1-2">
-                                        STANFORD LOGIN
+                                      LOGIN
                                         <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
                                     </div>
                                     <div class="pure-u-1-2">
@@ -163,25 +163,25 @@
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/about/">
-                            <span>About Lane</span>
+                            <span>About</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-about.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/help/">
-                            <span>How To</span>
+                            <span>FAQs</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-faqs.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
-                        </li>
-                        <li class="nav-menu">
-                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
                         </li>
                         <li class="dropdown nav-menu" data-path="/contacts/">
                             <span>Contact</span>
                             <div class="dropdown-content nav-menu-content" style="right:0;left:auto"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
+                        </li>
+                        <li class="nav-menu">
+                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
                         </li>
                     </ul>
                 </div>
