@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-08-20" version="3.5.20" description="3.5.20 bug fix release">
+            <action date="2018-08-14" dev="olgary" issue="144584" type="update">
+                all templates relink to faq drop down
+            </action>
+        </release>
         <release date="2018-08-10" version="3.5.19" description="3.5.19 bug fix release">
             <action date="2018-08-08" dev="olgary" issue="144328" type="remove">
                 removed old logos from application
