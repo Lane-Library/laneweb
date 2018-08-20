@@ -57,7 +57,7 @@ public class RESTBookmarkServiceTest {
 
     @Test
     public void testGetRowCount() {
-        expect(this.restService.getObject(this.uri.resolve("rowCount"), Integer.class)).andReturn(Integer.valueOf(1));
+        expect(this.restService.getObject(this.uri.resolve("rowcount"), Integer.class)).andReturn(Integer.valueOf(1));
         replay(this.restService);
         assertEquals(1, this.bookmarkService.getRowCount());
         verify(this.restService);
@@ -65,7 +65,7 @@ public class RESTBookmarkServiceTest {
 
     @Test(expected = BookmarkException.class)
     public void testGetRowCountThrows() {
-        expect(this.restService.getObject(this.uri.resolve("rowCount"), Integer.class))
+        expect(this.restService.getObject(this.uri.resolve("rowcount"), Integer.class))
                 .andThrow(new RESTException(new IOException()));
         replay(this.restService);
         this.bookmarkService.getRowCount();

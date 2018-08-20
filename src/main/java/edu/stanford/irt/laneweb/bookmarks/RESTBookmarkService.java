@@ -24,7 +24,7 @@ public class RESTBookmarkService implements BookmarkService {
     public RESTBookmarkService(final URI bookmarksURI, final RESTService restService) {
         this.bookmarksURI = bookmarksURI;
         this.restService = restService;
-        this.rowCountURI = bookmarksURI.resolve("rowCount");
+        this.rowCountURI = bookmarksURI.resolve("rowcount");
         this.statusURI = bookmarksURI.resolve("status.json");
     }
 
