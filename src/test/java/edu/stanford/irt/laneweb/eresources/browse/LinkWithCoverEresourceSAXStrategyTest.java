@@ -50,10 +50,11 @@ public class LinkWithCoverEresourceSAXStrategyTest {
     }
 
     @Test
-    public void testToSAX() throws IOException, SAXException {
+    public void testToSAXBook() throws IOException, SAXException {
         expect(this.eresource.getRecordId()).andReturn("12");
         expect(this.eresource.getLinks()).andReturn(Collections.singleton(this.link));
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.eresource.getPrimaryType()).andReturn("Book");
         expect(this.eresource.getTitle()).andReturn("Lancet");
         replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
@@ -62,7 +63,25 @@ public class LinkWithCoverEresourceSAXStrategyTest {
         this.xmlConsumer.endElement("", "div", "div");
         this.xmlConsumer.endDocument();
         verify(this.eresource, this.link);
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "LinkWithCoverEresourceSAXStrategyTest-toSAX.xml"),
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "LinkWithCoverEresourceSAXStrategyTest-toSAXBook.xml"),
+                this.xmlConsumer.getStringValue());
+    }
+
+    @Test
+    public void testToSAXJournal() throws IOException, SAXException {
+        expect(this.eresource.getRecordId()).andReturn("12");
+        expect(this.eresource.getLinks()).andReturn(Collections.singleton(this.link));
+        expect(this.link.getUrl()).andReturn("url");
+        expect(this.eresource.getPrimaryType()).andReturn("Journal");
+        expect(this.eresource.getTitle()).andReturn("Lancet");
+        replay(this.eresource, this.link);
+        this.xmlConsumer.startDocument();
+        this.xmlConsumer.startElement("", "div", "div", new AttributesImpl());
+        this.saxStrategy.toSAX(this.eresource, this.xmlConsumer);
+        this.xmlConsumer.endElement("", "div", "div");
+        this.xmlConsumer.endDocument();
+        verify(this.eresource, this.link);
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "LinkWithCoverEresourceSAXStrategyTest-toSAXJournal.xml"),
                 this.xmlConsumer.getStringValue());
     }
 
@@ -72,6 +91,7 @@ public class LinkWithCoverEresourceSAXStrategyTest {
         expect(this.eresource.getRecordId()).andReturn("12");
         expect(this.eresource.getLinks()).andReturn(Collections.singleton(this.link));
         expect(this.link.getUrl()).andReturn("url");
+        expect(this.eresource.getPrimaryType()).andReturn("");
         x.startElement(same("http://www.w3.org/1999/xhtml"), same("a"), same("a"), isA(AttributesImpl.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.eresource, this.link, x);
