@@ -137,7 +137,6 @@ body {
     font-size: 1.1em;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
-    background-color: #eeedeb;
     background-image: linear-gradient(to bottom, #eeedeb 0,#ccc8c5 50%,#bbb7b2 51%,#f2ede8 100%);
 }
 
@@ -767,6 +766,7 @@ input[type='text'] {
 .results {
     list-style: none;
     margin: 0;
+    min-height: 415px;
     background-color: #fff;
     padding: 51px 0 0;
 }
@@ -824,10 +824,6 @@ input[type='text'] {
 
 .more {
     text-decoration: none;
-}
-
-.results {
-    min-height: 415px;
 }
 
 .results .spell {
