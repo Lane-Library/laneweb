@@ -475,8 +475,6 @@ h4 {
 
 .content ol {
     list-style-type: decimal;
-    margin-top: 0;
-    margin-bottom: 12px;
     display: block;
     margin: 1em 0 1em 0;
     padding-left: 40px;
@@ -731,7 +729,6 @@ http://lane.stanford.edu/samples/button-css.html
     border-top: 1px solid #dddddd;
 }
 .landing ul li{
-    list-style-image: none;
     list-style: none;
 }
 

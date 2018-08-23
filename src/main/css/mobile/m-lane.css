@@ -137,8 +137,8 @@ body {
     font-size: 1.1em;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
-    background: #eeedeb;
-    background: linear-gradient(to bottom, #eeedeb 0,#ccc8c5 50%,#bbb7b2 51%,#f2ede8 100%);
+    background-color: #eeedeb;
+    background-image: linear-gradient(to bottom, #eeedeb 0,#ccc8c5 50%,#bbb7b2 51%,#f2ede8 100%);
 }
 
 .homeBtn.ui-link {
@@ -148,8 +148,8 @@ body {
 }
 
 .webauthLogin.ui-link:active,.homeBtn.ui-link:active {
-    background: #f2ede8;
-    background: linear-gradient(to bottom, #f2ede8 0,#bbb7b2 50%,#ccc8c5 51%,#eeedeb 100%);
+    background-color: #f2ede8;
+    background-image: linear-gradient(to bottom, #f2ede8 0,#bbb7b2 50%,#ccc8c5 51%,#eeedeb 100%);
     box-shadow: 0 0 8px #fff;
 }
 
