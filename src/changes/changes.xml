@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-08-27" version="3.5.21" description="3.5.21 bug fix release">
+            <action date="2018-08-22" dev="ceyates" issue="144707" type="add">
+                icon for the journals
+            </action>
+            <action date="2018-08-21" dev="ceyates" issue="144702" type="add">
+                provide a list to course reserves by instructor
+            </action>
+        </release>
         <release date="2018-08-20" version="3.5.20" description="3.5.20 bug fix release">
             <action date="2018-08-14" dev="olgary" issue="144584" type="update">
                 all templates relink to faq drop down
