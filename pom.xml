@@ -75,12 +75,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.72.0</version>
+            <version>1.74.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.72.0</version>
+            <version>1.74.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -102,7 +102,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -264,7 +264,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>coursereserves</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
@@ -284,7 +284,7 @@
         <dependency>
             <groupId>org.ehcache.modules</groupId>
             <artifactId>ehcache-107</artifactId>
-            <version>3.5.2</version>
+            <version>3.6.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
