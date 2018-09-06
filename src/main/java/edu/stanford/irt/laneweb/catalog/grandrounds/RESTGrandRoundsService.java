@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.catalog.grandrounds;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -66,12 +67,13 @@ public class RESTGrandRoundsService implements GrandRoundsService {
     }
 
     private InputStream getInputStream(final String department, final String year) {
+        String endpointPath = null;
         try {
-            String endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
+            endpointPath = String.format(ENDPOINT_PATH_FORMAT, URLEncoder.encode(department, UTF8),
                     URLEncoder.encode(year, UTF8));
-            return this.restService.getInputStream(this.catalogServiceURI.resolve(endpointPath));
-        } catch (IOException e) {
-            throw new LanewebException(e);
+        } catch (UnsupportedEncodingException e) {
+            // won't happen
         }
+        return this.restService.getInputStream(this.catalogServiceURI.resolve(endpointPath));
     }
 }

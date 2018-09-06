@@ -28,8 +28,8 @@ public class LanewebConfigurationTest {
 
     @Before
     public void setUp() throws URISyntaxException {
-        this.configuration = new LanewebConfiguration(new URI("classes"), new URI("content"), Boolean.TRUE,
-                "rw", mock(ServletContext.class), "version");
+        this.configuration = new LanewebConfiguration(new URI("classes"), new URI("content"), Boolean.TRUE, "rw",
+                mock(ServletContext.class), "version");
     }
 
     @Test

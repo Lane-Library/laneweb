@@ -36,6 +36,11 @@
     font-size: 72px;
 }
 
+.core-covers .fa-newspaper-o,
+.core-covers-3 .fa-newspaper-o {
+    font-size: 59px;
+}
+
 /* book covers in 2 columns*/
 .core-covers {
     box-sizing: border-box;

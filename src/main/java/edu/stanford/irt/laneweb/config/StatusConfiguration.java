@@ -20,8 +20,10 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.eresources.EresourceStatusProvider;
 import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.servlet.mvc.IndexDotHtmlStatusProvider;
+import edu.stanford.irt.laneweb.status.LanewebStatusService;
 import edu.stanford.irt.laneweb.suggest.SuggestStatusProvider;
 import edu.stanford.irt.laneweb.suggest.SuggestionService;
+import edu.stanford.irt.status.DefaultStatusService;
 import edu.stanford.irt.status.StatusProvider;
 import edu.stanford.irt.status.StatusService;
 
@@ -53,6 +55,11 @@ public class StatusConfiguration {
     }
 
     @Bean
+    public LanewebStatusService lanewebStatusService(final List<StatusService> services) {
+        return new LanewebStatusService(services);
+    }
+
+    @Bean
     public StatusService statusService(final List<StatusProvider> providers,
             @Value("${edu.stanford.irt.laneweb.version}") final String version) throws UnknownHostException {
         String host;
@@ -66,7 +73,7 @@ public class StatusConfiguration {
             host = InetAddress.getLocalHost().getHostName();
             pid = -1;
         }
-        return new StatusService("laneweb", version, host, pid, providers);
+        return new DefaultStatusService("laneweb", version, host, pid, providers);
     }
 
     @Bean

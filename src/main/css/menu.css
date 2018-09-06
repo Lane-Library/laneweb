@@ -37,6 +37,7 @@
 
 .menu .fa {
     color: white;
+    float: right;
 }
 
 .menu a:hover, .menu ul .menuitem-active:hover {
@@ -80,10 +81,6 @@
 
 .submenu.submenu-active {
     max-height: 250px;
-}
-
-.menu .fa {
-    float: right;
 }
 
 .menu li:last-child a::after {

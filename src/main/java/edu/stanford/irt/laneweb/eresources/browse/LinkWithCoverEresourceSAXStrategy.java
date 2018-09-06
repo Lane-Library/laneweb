@@ -24,13 +24,19 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
                     .findFirst()
                     .orElseThrow(() -> new LanewebException("no link for eresource " + bibID))
                     .getUrl();
+            String fontAwesomeClass;
+            if (eresource.getPrimaryType().startsWith("Journal")) {
+                fontAwesomeClass = "fa fa-newspaper-o";
+            } else {
+                fontAwesomeClass = "fa fa-book";
+            }
             startAnchor(xmlConsumer, href);
             String title = eresource.getTitle();
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
             atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            createElementWithClass(xmlConsumer, "i", "fa fa-book", "");
+            createElementWithClass(xmlConsumer, "i", fontAwesomeClass, "");
             endDiv(xmlConsumer);
             endAnchor(xmlConsumer);
             createAnchor(xmlConsumer, href, title);

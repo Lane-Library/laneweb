@@ -8,9 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkException;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
@@ -31,6 +35,8 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 @Controller
 @RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {
+
+    private static final Logger log = LoggerFactory.getLogger(BookmarkController.class);
 
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
@@ -84,6 +90,12 @@ public class JSONBookmarkController extends BookmarkController {
             final HttpSession session) {
         // TODO: extend Bookmark or create a map to add the proxylink url
         return bookmarks.get(i);
+    }
+
+    @ExceptionHandler(BookmarkException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public void handleException(final BookmarkException e) {
+        log.error(e.getMessage());
     }
 
     @PostMapping(value = "/move", consumes = "application/json")

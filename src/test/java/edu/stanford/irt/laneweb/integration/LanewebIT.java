@@ -58,12 +58,6 @@ public class LanewebIT {
     }
 
     @Test
-    public void testBioresearchSearch() throws Exception {
-        this.mockMvc.perform(get("/search.html?source=bioresearch-all&q=test").servletPath("/search.html"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
-    }
-
-    @Test
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
                 .andExpect(content().contentType(IMAGE_PNG));
@@ -131,13 +125,6 @@ public class LanewebIT {
                         get("/apps/search/content/html/pubmed?q=Ebola").servletPath("/apps/search/content/html/pubmed"))
                 .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
-    }
-
-    @Test
-    public void testQueryMap() throws Exception {
-        this.mockMvc
-                .perform(get("/apps/querymap/json?q=ganz slipped capital femoral epiphysis").accept(APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON));
     }
 
     @Test

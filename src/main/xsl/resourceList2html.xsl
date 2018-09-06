@@ -205,6 +205,12 @@
                     </span>
                 </xsl:if>
 
+                <xsl:if test="s:recordType = 'sul'">
+                    <span>
+                        <a href="https://searchworks.stanford.edu/view/{s:recordId}">SearchWorks Record</a>
+                    </span>
+                </xsl:if>
+
             </div>
             <xsl:apply-templates select="s:description"/>
             <div class="sourceInfo">
@@ -392,7 +398,7 @@
         <xsl:param name="simplePrimaryType" />
         <span>
             <xsl:choose>
-                <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or contains(s:url,'//searchworks.stanford.edu/view')">Print</xsl:when>
+                <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or (contains(s:url,'//searchworks.stanford.edu/view') and ../s:recordType!= 'sul')">Print</xsl:when>
                 <xsl:when test="$primaryType = s:label">
                     <a href="{s:url}" title="{s:label}"><xsl:value-of select="s:label"/></a>
                 </xsl:when>

@@ -6,7 +6,7 @@
     var model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
     SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
-    DEFAULT_LIMIT = "mesh-di",
+    DEFAULT_LIMIT = "mesh",
     SELECT = "select",
 
     /**

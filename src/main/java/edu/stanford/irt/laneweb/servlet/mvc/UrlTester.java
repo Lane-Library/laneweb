@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +15,7 @@ public class UrlTester {
 
     private MetaSearchService metaSearchService;
 
-    public UrlTester(
-            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
-            final MetaSearchService metaSearchService) {
+    public UrlTester(final MetaSearchService metaSearchService) {
         this.metaSearchService = metaSearchService;
     }
 

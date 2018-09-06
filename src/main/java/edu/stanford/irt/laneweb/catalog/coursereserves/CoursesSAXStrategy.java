@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.catalog.coursereserves;
 import java.util.List;
 
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
@@ -20,9 +21,17 @@ public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
                 startLi(xmlConsumer);
                 startAnchor(xmlConsumer, "?id=" + course.getId());
                 XMLUtils.data(xmlConsumer, course.getName());
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "br");
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "br");
-                XMLUtils.data(xmlConsumer, '(' + course.getNumber() + ')');
+                AttributesImpl atts = new AttributesImpl();
+                atts.addAttribute("", "style", "style", "CDATA", "font-size:smaller");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "span", atts);
+                String courseInfo = new StringBuilder(" -\u00a0")
+                        .append(course.getInstructor())
+                        .append(" (")
+                        .append(course.getNumber())
+                        .append(')')
+                        .toString();
+                XMLUtils.data(xmlConsumer, courseInfo);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
             }

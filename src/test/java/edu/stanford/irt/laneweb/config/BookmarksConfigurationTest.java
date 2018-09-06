@@ -2,10 +2,11 @@ package edu.stanford.irt.laneweb.config;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 
 public class BookmarksConfigurationTest {
 
@@ -32,27 +33,12 @@ public class BookmarksConfigurationTest {
     }
 
     @Test
-    public void testBookmarkService() {
-        assertNotNull(this.configuration.bookmarkService(null));
+    public void testBookmarkServiceURI() throws URISyntaxException {
+        assertNotNull(this.configuration.bookmarkServiceURI(null, null, 0, null));
     }
 
     @Test
-    public void testDummyBookmarkService() {
-        BookmarkService service = this.configuration.dummyBookmarkService();
-        try {
-            service.getLinks(null);
-        } catch (UnsupportedOperationException e) {
-            assertNotNull(e);
-        }
-        try {
-            service.getRowCount();
-        } catch (UnsupportedOperationException e) {
-            assertNotNull(e);
-        }
-        try {
-            service.saveLinks(null, null);
-        } catch (UnsupportedOperationException e) {
-            assertNotNull(e);
-        }
+    public void testRestBookmarkService() throws URISyntaxException {
+        assertNotNull(this.configuration.restBookmarkService(new URI("/"), null));
     }
 }

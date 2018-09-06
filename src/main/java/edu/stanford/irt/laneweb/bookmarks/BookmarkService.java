@@ -2,11 +2,13 @@ package edu.stanford.irt.laneweb.bookmarks;
 
 import java.util.List;
 
-public interface BookmarkService {
+import edu.stanford.irt.status.StatusService;
 
-    List<Bookmark> getLinks(String userid);
+public interface BookmarkService extends StatusService {
 
-    int getRowCount();
+    List<Bookmark> getLinks(String userid) throws BookmarkException;
 
-    void saveLinks(String userid, List<Bookmark> links);
+    int getRowCount() throws BookmarkException;
+
+    void saveLinks(String userid, List<Bookmark> links) throws BookmarkException;
 }

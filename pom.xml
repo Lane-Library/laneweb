@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>34</version>
+        <version>35</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.5.17-SNAPSHOT</version>
+    <version>3.5.22-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -75,12 +75,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.72.0</version>
+            <version>1.74.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.72.0</version>
+            <version>1.74.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -94,20 +94,15 @@
             <version>1.9.22</version>
         </dependency>
         <dependency>
-            <artifactId>querymap</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>2.0.2</version>
-        </dependency>
-        <dependency>
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.8.0-12</version>
+            <version>9.8.0-14</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.2.0</version>
+            <version>3.2.1</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -214,17 +209,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>2.0.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>2.0.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>3.0.8.RELEASE</version>
+            <version>3.0.9.RELEASE</version>
+            <exclusions>
+            	<exclusion>
+            		<groupId>org.apache.zookeeper</groupId>
+            		<artifactId>zookeeper</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -245,30 +246,6 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>12.2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ons</artifactId>
-            <version>12.2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ucp</artifactId>
-            <version>12.2.0.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
             <version>3.9.1</version>
@@ -287,7 +264,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>coursereserves</artifactId>
-            <version>3.0.1</version>
+            <version>3.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
@@ -307,7 +284,7 @@
         <dependency>
             <groupId>org.ehcache.modules</groupId>
             <artifactId>ehcache-107</artifactId>
-            <version>3.5.2</version>
+            <version>3.6.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -323,7 +300,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>status</artifactId>
-            <version>2.1.0</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -341,6 +318,11 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.0.1</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.6</version>
         </dependency>
     </dependencies>
     <build>
@@ -388,7 +370,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.2.RELEASE</version>
+                <version>2.0.4.RELEASE</version>
                 <configuration>
                     <executable>true</executable>
                     <embeddedLaunchScriptProperties>
@@ -531,7 +513,6 @@
                                 <include>lane-popin-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>lane-findit-min.js</include>
-                                <include>lane-querymap-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>lane-feedback-min.js</include>
                                 <include>purchase-suggestions-min.js</include>
@@ -603,7 +584,7 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
-                <version>2.0.0</version>
+                <version>2.1.0</version>
                 <configuration>
                     <testDir>src/test/javascript</testDir>
                 </configuration>

@@ -2,24 +2,15 @@
 
     "use strict";
 
-    var limits = {
-            p: "mesh-d",
-            i: "mesh-i",
-            c: "mesh-di"
-        },
+    var fields = [],
 
-        fields = [],
-
-        PicoField = function(input, limit) {
+        PicoField = function(input) {
             var suggest,
                 self = this;
-            if (limit) {
-                suggest = new L.Suggest(input, limit);
-                suggest.on("select", function() {
-                    self.fire("input");
-                });
-            }
-
+            suggest = new L.Suggest(input, "mesh");
+            suggest.on("select", function() {
+                self.fire("input");
+            });
             input.addEventListener("input", function() {
                 self.fire("input");
             });
@@ -42,7 +33,7 @@
     L.addEventTarget(fields);
 
     document.querySelectorAll(".pico-fields input").forEach(function(input) {
-        fields.push(new PicoField(input, limits[input.name]));
+        fields.push(new PicoField(input));
     });
 
     L.on("picoFields:change", function(event) {

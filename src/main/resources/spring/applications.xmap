@@ -67,7 +67,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <!-- search2json.xsl converts the result xml to json -->
-            <!-- it is used in lane-metasearch.js and lane-querymap.js -->
+            <!-- it is used in lane-metasearch.js -->
             <map:match pattern="search/json" type="wildcard">
                 <map:generate type="search-resource">
                     <map:parameter name="timeout" value="0"/>

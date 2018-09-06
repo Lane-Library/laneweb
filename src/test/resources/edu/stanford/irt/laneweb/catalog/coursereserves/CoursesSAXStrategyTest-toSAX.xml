@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <li>
-   <a href="?id=1">name<br/>(number)</a>
+   <a href="?id=1">name<span style="font-size:smaller"> - instructor (number)</span>
+   </a>
 </li>

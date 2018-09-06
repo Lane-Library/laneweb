@@ -12,6 +12,7 @@ import java.util.Collection;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.status.ApplicationStatus;
 
 public class RESTMetaSearchService implements MetaSearchService {
 
@@ -76,6 +77,11 @@ public class RESTMetaSearchService implements MetaSearchService {
         StringBuilder requestURI = new StringBuilder("describe");
         addQueryString(requestURI, query, engines);
         return getResponse(this.metaSearchURI.resolve(requestURI.toString()), Result.class);
+    }
+
+    @Override
+    public ApplicationStatus getStatus() {
+        return getResponse(this.metaSearchURI.resolve("status.json"), ApplicationStatus.class);
     }
 
     @Override

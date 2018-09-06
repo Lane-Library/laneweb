@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
+import edu.stanford.irt.laneweb.bookmarks.BookmarkException;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -49,6 +51,18 @@ public class BookmarkDataBinderTest {
     }
 
     @Test
+    public void testBookmarkException() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
+        expect(this.bookmarkService.getLinks("ditenus")).andThrow(new BookmarkException(null));
+        replay(this.bookmarkService, this.request, this.session);
+        this.binder.bind(this.model, this.request);
+        assertNull(this.model.get(Model.BOOKMARKS));
+        assertEquals("off", this.model.get(Model.BOOKMARKING));
+        verify(this.bookmarkService, this.request, this.session);
+    }
+
+    @Test
     public void testInSession() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(this.bookmarks);
@@ -59,7 +73,7 @@ public class BookmarkDataBinderTest {
     }
 
     @Test
-    public void testNotInDAO() {
+    public void testNotFromService() {
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.BOOKMARKS)).andReturn(null);
         expect(this.bookmarkService.getLinks("ditenus")).andReturn(null);

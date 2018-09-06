@@ -28,6 +28,11 @@ public class StatusConfigurationTest {
     }
 
     @Test
+    public void testLanewebStatusService() {
+        assertNotNull(this.configuration.lanewebStatusService(Collections.emptyList()));
+    }
+
+    @Test
     public void testStatusService() throws UnknownHostException {
         assertNotNull(this.configuration.statusService(Collections.emptyList(), null));
     }

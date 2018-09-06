@@ -71,7 +71,6 @@ public class PipelineConfigurationTest {
         assertNotNull(this.configuration.namespaceFilterTransformer());
     }
 
-
     @Test
     public void testNonCachingPipeline() {
         assertNotNull(this.configuration.nonCachingPipeline());

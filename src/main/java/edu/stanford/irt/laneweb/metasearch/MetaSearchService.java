@@ -3,8 +3,9 @@ package edu.stanford.irt.laneweb.metasearch;
 import java.util.Collection;
 
 import edu.stanford.irt.search.impl.Result;
+import edu.stanford.irt.status.StatusService;
 
-public interface MetaSearchService {
+public interface MetaSearchService extends StatusService {
 
     void clearAllCaches();
 

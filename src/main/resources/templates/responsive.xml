@@ -54,41 +54,34 @@
                         <button class="search-button"><i class="fa fa-search"></i></button>
                     </fieldset>
                     <div class="pure-g">
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/lanesearch.html"
                             data-source="all-all"
                             data-placeholder="Enter title words of article, journal, book, etc., or author, subject, PMID, ISSN, DOI, or Call Number"
                             title="Searches Pubmed, Lane Catalog (titles and descriptions of books, journals, etc. from Lane) and website"
                             >Lane <i class="fa fa-plus"></i></div></div>
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/picosearch.html"
                             data-source="clinical-all"
                             data-placeholder="Enter patient condition, treatment alternatives, or use PICO (advanced search)"
                             title="Searches evidence-based resources: BMJ, Cochrane, Dare, DynaMed Plus, National Guidelines, Pubmed, UptoDate"
                             >Clinical</div></div>
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/bioimagesearch.html"
                             data-source="images-all"
                             data-placeholder="Enter keywords for subject or images desired"
                             title="Find images related to medicine and biology and their reuse rights"
                             >Images</div></div>
-                        <div class="pure-u-1-5"><div
+                        <div class="pure-u-1-4"><div
                             class="search-tab"
                             data-help="/textbooksearch.html"
                             data-source="textbooks-all"
                             data-placeholder="Enter topic, condition, diagnosis or disease keywords"
                             title="Search the full text of major clinical textbooks in 25 medical specialites"
                             >Clinical Textbooks</div></div>
-                        <div class="pure-u-1-5"><div
-                            class="search-tab"
-                            data-help="/bioresearchsearch.html"
-                            data-source="bioresearch-all"
-                            data-placeholder="Enter molecular biology or bench research keywords"
-                            title="Find protocols, reagents, genomic, proteomic and patent databases, programming, funding and Stanford lab resources, and more"
-                            >Bioresearch</div></div>
                     </div>
                 </div>
             </form>
@@ -128,7 +121,7 @@
                             <div class="login-info">
                                 <div class="pure-g">
                                     <div class="pure-u-1-2">
-                                        STANFORD LOGIN
+                                      LOGIN
                                         <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
                                     </div>
                                     <div class="pure-u-1-2">
@@ -170,25 +163,25 @@
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/about/">
-                            <span>About Lane</span>
+                            <span>About</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-about.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/help/">
-                            <span>How To</span>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-howto.html">
+                            <span>FAQs</span>
+                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-faqs.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
-                        </li>
-                        <li class="nav-menu">
-                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
                         </li>
                         <li class="dropdown nav-menu" data-path="/contacts/">
                             <span>Contact</span>
                             <div class="dropdown-content nav-menu-content" style="right:0;left:auto"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
+                        </li>
+                        <li class="nav-menu">
+                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
                         </li>
                     </ul>
                 </div>
@@ -235,7 +228,7 @@
                             <li><a href="/about/directions-maps.html">Directions &amp; Maps</a></li>
                             <li><a href="/contacts/main-contacts.html">Contact Us</a></li>
                             <li><a href="/contacts/liaisons.html">Library Liaisons</a></li>
-                            <li><a href="/about/grantwriters.html">About Lane</a></li>
+                            <li><a href="/about/about.html">About Lane</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-1-6">

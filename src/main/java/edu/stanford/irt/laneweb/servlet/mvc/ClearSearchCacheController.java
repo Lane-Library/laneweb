@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +13,6 @@ public class ClearSearchCacheController {
     private MetaSearchService metaSearchService;
 
     public ClearSearchCacheController(
-            @Qualifier("edu.stanford.irt.laneweb.metasearch.MetaSearchService/REST")
             final MetaSearchService metaSearchService) {
         this.metaSearchService = metaSearchService;
     }

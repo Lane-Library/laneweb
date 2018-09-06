@@ -17,11 +17,11 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 
 public class RESTGrandRoundsServiceTest {
 
+    private RESTService restService;
+
     private RESTGrandRoundsService service;
 
     private URI uri;
-
-    private RESTService restService;
 
     @Before
     public void setUp() throws URISyntaxException {
