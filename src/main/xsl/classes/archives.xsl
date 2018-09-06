@@ -47,14 +47,14 @@
                     <xsl:with-param name="value" select="."/>
                     <xsl:with-param name="count" select="$description-length"/>
                 </xsl:call-template>
-                <xsl:text>...</xsl:text>
-                    <a href="/classes-consult/archive.html?class-id={../lc:module_id}"> More <i class="fa fa-arrow-right"/></a>
-                     
+                <xsl:text>...</xsl:text>   
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>
             </xsl:otherwise>
+             
         </xsl:choose>
+         <a href="/classes-consult/archive.html?class-id={../lc:module_id}"> All course content <i class="fa fa-arrow-right"/></a>
     </xsl:template>
 
     <xsl:template match="lc:event_data">
