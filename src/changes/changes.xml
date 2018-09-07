@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-09-10" version="3.5.22" description="3.5.22 bug fix release">
+            <action date="2018-09-06" dev="alainb" issue="145247" type="update">
+                Adding a link to each instance that shows on "Past Classes" to "All course content"
+            </action>
+        </release>
         <release date="2018-08-27" version="3.5.21" description="3.5.21 bug fix release">
             <action date="2018-08-22" dev="ceyates" issue="144707" type="add">
                 icon for the journals
