@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItem;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.coursereserves.ItemType;
 
 public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseReservesItemList> {
 
@@ -27,8 +28,8 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
                 n.get("id").asInt(),
                 n.get("availableCount").asInt(),
                 getTextFromNode(n.get("title")),
-                n.get("digital").asBoolean(),
-                getTextFromNode(n.get("url")))));
+                getTextFromNode(n.get("url")),
+                ItemType.valueOf(n.get("type").asText()))));
         if (node.hasNonNull("course")) {
             JsonNode n = node.get("course");
             Course course = new Course(

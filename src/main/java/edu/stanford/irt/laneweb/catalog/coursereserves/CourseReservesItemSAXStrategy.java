@@ -8,6 +8,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.CourseReservesItem;
+import edu.stanford.irt.coursereserves.ItemType;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.util.XMLUtils;
@@ -35,7 +36,8 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             endDiv(xmlConsumer);
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer, "pure-u-7-8");
-            boolean isDigital = item.isDigital();
+            ItemType type = item.getType();
+            boolean isDigital = type == ItemType.DIGITAL_BOOK || type == ItemType.VIDEO;
             String url = item.getURL();
             String href;
             if (isDigital && url != null) {
@@ -49,10 +51,14 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
                 createElement(xmlConsumer, "div", Normalizer.normalize(author, Form.NFKC));
             }
             startDiv(xmlConsumer);
-            createStrong(xmlConsumer, "Book ");
-            XMLUtils.data(xmlConsumer, isDigital ? "Digital" : "Print");
+            if (type == ItemType.DIGITAL_BOOK || type == ItemType.PRINT_BOOK) {
+                createStrong(xmlConsumer, "Book ");
+                XMLUtils.data(xmlConsumer, isDigital ? "Digital" : "Print");
+            } else if (type == ItemType.VIDEO) {
+                createStrong(xmlConsumer, "Video");
+            }
             endDiv(xmlConsumer);
-            if (!isDigital) {
+            if (type == ItemType.PRINT_BOOK) {
                 availableCount(xmlConsumer, item.getAvailableCount());
                 callNumber(xmlConsumer, item.getCallNumber());
             }

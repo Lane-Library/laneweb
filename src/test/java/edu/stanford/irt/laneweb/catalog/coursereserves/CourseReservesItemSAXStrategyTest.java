@@ -18,6 +18,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.CourseReservesItem;
+import edu.stanford.irt.coursereserves.ItemType;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
@@ -39,7 +40,7 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
-        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
@@ -57,7 +58,7 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAX0AvailableCount() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
-        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
@@ -76,7 +77,7 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAXNullAuthor() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
-        expect(this.item.isDigital()).andReturn(true);
+        expect(this.item.getType()).andReturn(ItemType.DIGITAL_BOOK);
         expect(this.item.getURL()).andReturn("url");
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn(null);
@@ -92,7 +93,7 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAXNullAvailableCount() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
-        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
@@ -112,7 +113,7 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAXNullCallNumber() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
-        expect(this.item.isDigital()).andReturn(false);
+        expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
@@ -131,7 +132,7 @@ public class CourseReservesItemSAXStrategyTest {
     @Test
     public void testToSAXNullURL() throws SAXException, IOException {
         expect(this.item.getId()).andReturn(1);
-        expect(this.item.isDigital()).andReturn(true);
+        expect(this.item.getType()).andReturn(ItemType.DIGITAL_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
@@ -151,5 +152,21 @@ public class CourseReservesItemSAXStrategyTest {
         expectLastCall().andThrow(new SAXException());
         replay(mock, this.item);
         this.saxStrategy.toSAX(this.item, mock);
+    }
+
+    @Test
+    public void testToSAXVideo() throws SAXException, IOException {
+        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getType()).andReturn(ItemType.VIDEO);
+        expect(this.item.getURL()).andReturn(null);
+        expect(this.item.getTitle()).andReturn("title");
+        expect(this.item.getAuthor()).andReturn("author");
+        replay(this.item);
+        this.xmlConsumer.startDocument();
+        this.saxStrategy.toSAX(this.item, this.xmlConsumer);
+        this.xmlConsumer.endDocument();
+        verify(this.item);
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "CourseReservesItemSAXStrategyTest-toSAXVideo.xml"),
+                this.xmlConsumer.getStringValue());
     }
 }
