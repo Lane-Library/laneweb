@@ -7,7 +7,10 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2018-09-17" version="3.5.23" description="3.5.23 bug fix release">
+        <release date="2018-09-14" version="3.5.23" description="3.5.23 bug fix release">
+            <action date="2018-09-13" dev="ceyates" issue="145372" type="fix">
+                classpath resources always have invalid cache validity when in jar file
+            </action>
             <action date="2018-09-11" dev="ceyates" issue="145268" type="fix">
                 video in course reserves list described as a book
             </action>
