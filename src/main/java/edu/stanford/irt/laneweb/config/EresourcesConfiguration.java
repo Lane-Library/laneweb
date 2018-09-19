@@ -27,6 +27,7 @@ import edu.stanford.irt.laneweb.eresources.DoiQueryInspector;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EscapingQueryInspector;
+import edu.stanford.irt.laneweb.eresources.LcnQueryInspector;
 import edu.stanford.irt.laneweb.eresources.NumberQueryInspector;
 import edu.stanford.irt.laneweb.eresources.ORQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmidQueryInspector;
@@ -180,6 +181,7 @@ public class EresourcesConfiguration {
         queryInspectors.add(new AdvancedQueryInspector());
         queryInspectors.add(new DoiQueryInspector());
         queryInspectors.add(new PmidQueryInspector());
+        queryInspectors.add(new LcnQueryInspector());
         queryInspectors.add(new NumberQueryInspector());
         queryInspectors.add(new ORQueryInspector());
         queryInspectors.add(new EscapingQueryInspector());

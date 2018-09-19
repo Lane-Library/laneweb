@@ -19,6 +19,7 @@ public class SolrQueryParserTest {
         this.inspectors = new ArrayList<>();
         this.inspectors.add(new AdvancedQueryInspector());
         this.inspectors.add(new DoiQueryInspector());
+        this.inspectors.add(new LcnQueryInspector());
         this.inspectors.add(new PmidQueryInspector());
         this.inspectors.add(new NumberQueryInspector());
         this.inspectors.add(new ORQueryInspector());
@@ -40,6 +41,11 @@ public class SolrQueryParserTest {
         assertEquals("string year:{1990 TO 2000} string",
                 this.parser.parse("advanced:true string year:{1990 TO 2000} string"));
         assertEquals("Whose life is it anyway\\?", this.parser.parse("Whose life is it anyway?"));
+        assertEquals("id:bib-12345", this.parser.parse("BIBID:12345"));
+        assertEquals("id:bib-12345", this.parser.parse("BIBID:L12345"));
+        assertEquals("id:bib-12345", this.parser.parse("bibid : L12345"));
+        assertEquals("id:bib-12", this.parser.parse("bibid :12"));
+        assertEquals("id:bib-12", this.parser.parse("bibid 12"));
         assertEquals("pmid\\:12345", this.parser.parse("pmid 12345"));
         assertEquals("pmid\\:12345", this.parser.parse("pmid:12345"));
         assertEquals("pmid\\:12345", this.parser.parse("pmid : 12345"));
