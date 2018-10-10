@@ -169,9 +169,14 @@
             <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="samples/spiritual.html" type="wildcard">
+        <map:match pattern="samples/drupal/*.html" type="wildcard">
             <map:generate type="html" src="{content-base}/{0}"/>
+            <map:transform type="drupal"/>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementNames" value="drupal"/>
+            </map:transform>
             <map:transform type="link-with-cover"/>
+            <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
