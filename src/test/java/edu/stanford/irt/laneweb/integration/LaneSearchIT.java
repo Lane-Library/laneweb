@@ -202,15 +202,15 @@ public class LaneSearchIT {
                         this.ns).exists());
     }
 
-    @Test
-    public void testLaneSearchNumericMonth() throws Exception {
-        // citation search variant 2: numeric month
-        this.mockMvc
-                .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-5.")
-                        .servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
-                        this.ns).exists());
-    }
+//    @Test
+//    public void testLaneSearchNumericMonth() throws Exception {
+//        // citation search variant 2: numeric month
+//        this.mockMvc
+//                .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-5.")
+//                        .servletPath("/eresources/search.html"))
+//                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+//                        this.ns).exists());
+//    }
 
     @Test
     public void testLaneSearchOldJAMATitle() throws Exception {
@@ -244,13 +244,13 @@ public class LaneSearchIT {
                 .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
-    @Test
-    public void testLaneSearchScience() throws Exception {
-        // science
-        this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Science']", this.ns).exists())
-                .andExpect(content().contentType(TEXT_HTML));
-    }
+//    @Test
+//    public void testLaneSearchScience() throws Exception {
+//        // science
+//        this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html")).andExpect(
+//                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Science']", this.ns).exists())
+//                .andExpect(content().contentType(TEXT_HTML));
+//    }
 
     @Test
     public void testLaneSearchUpdashTodashDate() throws Exception {
