@@ -9,8 +9,8 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class DrupalAPIService {
 
-    private static final TypeReference<Map<String, List<Map<String, String>>>> TYPE = new TypeReference<Map<String, List<Map<String, String>>>>() {
-    };
+    private static final TypeReference<Map<String, List<Map<String, String>>>> TYPE =
+            new TypeReference<Map<String, List<Map<String, String>>>>() {};
 
     private URI drupalBaseURI;
 
