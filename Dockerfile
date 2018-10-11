@@ -1,6 +1,7 @@
-FROM openjdk:jre-alpine
+FROM openjdk:11-jre
 
-RUN apk --update add \
+RUN apt-get update && \
+    apt-get -y install \
     fontconfig \
     ttf-dejavu
 
