@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>36</version>
+        <version>37</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.5.25-SNAPSHOT</version>
@@ -43,7 +43,6 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
-        <org.springframework.version>5.1.1.RELEASE</org.springframework.version>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
@@ -210,22 +209,22 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>2.0.5.RELEASE</version>
+            <version>2.0.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.0.5.RELEASE</version>
+            <version>2.0.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
             <version>3.0.10.RELEASE</version>
             <exclusions>
-            	<exclusion>
-            		<groupId>org.apache.zookeeper</groupId>
-            		<artifactId>zookeeper</artifactId>
-            	</exclusion>
+                <exclusion>
+                    <groupId>org.apache.zookeeper</groupId>
+                    <artifactId>zookeeper</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -371,7 +370,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.5.RELEASE</version>
+                <version>2.0.6.RELEASE</version>
                 <configuration>
                     <executable>true</executable>
                     <embeddedLaunchScriptProperties>
