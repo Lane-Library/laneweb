@@ -1,5 +1,6 @@
 THIS_MAKEFILE := $(realpath $(lastword $(MAKEFILE_LIST)))
 PATH := ${SCRIPTS_DIR}:${PATH}
+include gcp-env.sh
 include env.sh
 export
 
