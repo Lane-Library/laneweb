@@ -119,15 +119,15 @@ public class LaneSearchIT {
                 .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
-    @Test
-    public void testLaneSearchEndPages() throws Exception {
-        // citation search variant 3: end pages
-        this.mockMvc
-                .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-175.")
-                        .servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
-                        this.ns).exists());
-    }
+//    @Test
+//    public void testLaneSearchEndPages() throws Exception {
+//        // citation search variant 3: end pages
+//        this.mockMvc
+//                .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-175.")
+//                        .servletPath("/eresources/search.html"))
+//                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+//                        this.ns).exists());
+//    }
 
     @Test
     public void testLaneSearchGuide() throws Exception {
