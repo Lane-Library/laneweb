@@ -8,6 +8,8 @@
             <map:generate type="er-search"/>
             <map:transform type="query-highlighting"/>
             <map:transform type="description-labeling"/>
+            <map:transform type="description-linebreak"/>
+            <map:transform type="description-linking"/>
             <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
             <map:serialize type="xml">
                 <map:parameter name="media-type" value="text/html"/>

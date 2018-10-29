@@ -234,6 +234,9 @@
             <xsl:when test=". = 'web' or . = 'laneblog'">
                 <xsl:copy-of select="$label"/><a href="/index.html">Lane Website</a>
             </xsl:when>
+            <xsl:when test=". = 'redivis'">
+                <xsl:copy-of select="$label"/><a href="https://redivis.com/StanfordPHS">Redivis - Stanford Center for Population Health Sciences</a>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
 
@@ -241,6 +244,14 @@
         <div class="description">
             <xsl:apply-templates/>
         </div>
+    </xsl:template>
+
+    <xsl:template match="s:desc-link">
+        <a href="{s:link}"><xsl:value-of select="s:label"/></a>
+    </xsl:template>
+
+    <xsl:template match="s:desc-linebreak">
+        <br/>
     </xsl:template>
 
     <xsl:template match="s:link[1]">

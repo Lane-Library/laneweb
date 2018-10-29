@@ -18,6 +18,10 @@ public final class Resource {
 
     public static final String DESCRIPTION_LABEL = "desc-label";
 
+    public static final String DESCRIPTION_LINEBREAK = "desc-linebreak";
+
+    public static final String DESCRIPTION_LINK = "desc-link";
+
     public static final String EMPTY_NS = "";
 
     public static final String ID = "id";

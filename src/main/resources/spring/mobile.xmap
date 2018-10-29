@@ -24,6 +24,8 @@
         <map:match pattern="search/lane" type="wildcard">
             <map:generate type="er-search"/>
             <map:transform type="description-labeling"/>
+            <map:transform type="description-linebreak"/>
+            <map:transform type="description-linking"/>
             <map:transform type="query-highlighting"/>
             <map:transform type="saxon" src="classpath:/xsl/mobile-search-result2html.xsl"/>
             <map:transform type="saxon" src="classpath:/xsl/mobile-content.xsl"/>
