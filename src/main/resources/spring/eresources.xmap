@@ -6,10 +6,10 @@
         <map:parameter name="request-key" value="remote-addr={remote-addr};request-uri={request-uri};source={source};q={query};facets={facets}"/>
         <map:match pattern="search.html" type="wildcard">
             <map:generate type="er-search"/>
-            <map:transform type="query-highlighting"/>
             <map:transform type="description-labeling"/>
             <map:transform type="description-linebreak"/>
             <map:transform type="description-linking"/>
+            <map:transform type="query-highlighting"/>
             <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
             <map:serialize type="xml">
                 <map:parameter name="media-type" value="text/html"/>
