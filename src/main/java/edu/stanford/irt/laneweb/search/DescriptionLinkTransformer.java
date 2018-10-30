@@ -25,7 +25,7 @@ public class DescriptionLinkTransformer extends AbstractTextProcessingTransforme
         consumer.characters(match, 0, match.length);
         consumer.endElement(Resource.NAMESPACE, Resource.LABEL, Resource.LABEL);
         consumer.startElement(Resource.NAMESPACE, Resource.LINK, Resource.LINK, EMPTY_ATTRIBUTES);
-        match = matcher.group(2).toCharArray();
+        match = matcher.group(matcher.groupCount()).toCharArray();
         consumer.characters(match, 0, match.length);
         consumer.endElement(Resource.NAMESPACE, Resource.LINK, Resource.LINK);
         consumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION_LINK, Resource.DESCRIPTION_LINK);
