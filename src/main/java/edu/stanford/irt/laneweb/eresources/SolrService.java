@@ -48,7 +48,7 @@ public class SolrService {
     private static final String AND = " AND ";
 
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
-            new SimpleStringCriteria("isRecent:1 OR isLaneConnex:1"));
+            new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
 
     private static final SimpleFilterQuery CORE_FQ = new SimpleFilterQuery(new SimpleStringCriteria("isCore:1"));
 
