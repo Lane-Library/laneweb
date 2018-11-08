@@ -171,7 +171,7 @@ public class LaneSearchIT {
                 .perform(get("/eresources/search.html?q=journal of medical research")
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of medical research']",
+                        "//h:li[position() <= 15]//h:a[@class='primaryLink' and @title='Journal of medical research']",
                         this.ns).exists());
     }
 
