@@ -303,7 +303,7 @@
                 <xsl:with-param name="primaryType" select="../s:primaryType"/>
                 <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
             </xsl:call-template>
-            <xsl:if test="$simple-primary-type != s:label">
+            <xsl:if test="$simple-primary-type != string(s:label)">
                 <span>
                     <a href="{s:url}" title="{s:label}">
                         <xsl:value-of select="s:link-text"/>
