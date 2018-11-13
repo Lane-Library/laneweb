@@ -41,12 +41,7 @@ public class JsonImageSearchController {
         Image image = this.service.adminFindById(id);
         String websiteId = id.substring(0, id.indexOf('/'));
         image.setWebsiteId(websiteId);
-        boolean isEnable = image.isEnable();
-        if (isEnable) {
-            image.setEnable(false);
-        } else {
-            image.setEnable(true);
-        }
+        image.setEnable(!image.isEnable());
         this.service.saveImage(image);
         return image;
     }
