@@ -37,7 +37,6 @@ public class CachedXMLSourceResolverTest {
 
     private SourceResolver sourceResolver;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.cache = mock(Cache.class);

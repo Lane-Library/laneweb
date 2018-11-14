@@ -26,7 +26,6 @@ public class DescribeGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metaSearchService = mock(MetaSearchService.class);

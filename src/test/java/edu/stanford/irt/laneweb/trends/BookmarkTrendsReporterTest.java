@@ -25,7 +25,6 @@ public class BookmarkTrendsReporterTest {
         this.reporter = new BookmarkTrendsReporter(this.bookmarkService, this.tracker, "localhost");
     }
 
-    @SuppressWarnings("boxing")
     @Test
     public final void testReportCount() throws Exception {
         expect(this.bookmarkService.getRowCount()).andReturn(10).times(2);

@@ -34,7 +34,6 @@ public class MetasearchResultSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.engineSAXStrategy = mock(SAXStrategy.class);

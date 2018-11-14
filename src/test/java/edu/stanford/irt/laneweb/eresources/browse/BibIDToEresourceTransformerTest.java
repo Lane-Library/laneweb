@@ -30,7 +30,6 @@ public class BibIDToEresourceTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.solrService = mock(SolrService.class);
