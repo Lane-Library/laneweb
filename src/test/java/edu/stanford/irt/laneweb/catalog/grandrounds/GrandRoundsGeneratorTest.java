@@ -37,7 +37,6 @@ public class GrandRoundsGeneratorTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = mock(GrandRoundsService.class);

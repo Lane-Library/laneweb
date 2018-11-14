@@ -32,7 +32,6 @@ public class SolrSearchGeneratorTest {
 
     private SolrService service;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = mock(SolrService.class);

@@ -48,7 +48,6 @@ public class PagingEresourceListXHTMLSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.xmlConsumer = new TestXMLConsumer();
