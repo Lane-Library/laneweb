@@ -37,7 +37,6 @@ public class SolrAdminImageSearchGeneratorTest {
 
     private SolrImageService service;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.saxStrategy = mock(SAXStrategy.class);

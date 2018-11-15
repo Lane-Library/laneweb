@@ -41,7 +41,6 @@ public class PagingSearchResultListSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.results = mock(List.class);

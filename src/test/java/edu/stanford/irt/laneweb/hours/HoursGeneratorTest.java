@@ -36,7 +36,6 @@ public class HoursGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = mock(LibraryHoursService.class);

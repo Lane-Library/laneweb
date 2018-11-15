@@ -38,7 +38,6 @@ public class BassettCountSAXStrategyTest {
 
     private XMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.strategy = new BassettCountSAXStrategy();
