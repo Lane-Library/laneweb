@@ -23,6 +23,7 @@ public class CoreEresourcesGeneratorTest {
 
     private SolrService solrService;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.solrService = mock(SolrService.class);

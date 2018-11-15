@@ -53,6 +53,7 @@ public class SolrSearchFacetsGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = mock(SolrService.class);
@@ -69,6 +70,7 @@ public class SolrSearchFacetsGeneratorTest {
         this.facetResultPages = mock(Collection.class);
     }
 
+    @SuppressWarnings({ "boxing", "unchecked" })
     @Test
     public final void testDoGenerateXMLConsumerBrowseFacetField() throws Exception {
         Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
@@ -115,6 +117,7 @@ public class SolrSearchFacetsGeneratorTest {
         assertEquals("{fieldName=[value = 10; enabled=false; url=fieldName%3A%22value%22]}", mapCapture.toString());
     }
 
+    @SuppressWarnings({ "boxing", "unchecked" })
     @Test
     public final void testDoGenerateXMLConsumerBrowseFacetQuery() throws Exception {
         Iterator<FacetQueryEntry> facetQueryIterator = mock(Iterator.class);
@@ -151,6 +154,7 @@ public class SolrSearchFacetsGeneratorTest {
                 mapCapture.toString());
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearch() throws Exception {
         Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
@@ -218,6 +222,7 @@ public class SolrSearchFacetsGeneratorTest {
                 mapCapture.toString());
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithAddPrioritizedPublicationTypes() throws Exception {
         Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
@@ -294,6 +299,7 @@ public class SolrSearchFacetsGeneratorTest {
                 mapCapture.toString());
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithRequestMoreMesh() throws Exception {
         Iterator<FacetQueryEntry> it0 = mock(Iterator.class);
@@ -365,6 +371,7 @@ public class SolrSearchFacetsGeneratorTest {
                 mapCapture.toString());
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public final void testDoGenerateXMLConsumerSearchWithRequestMoreTypes() throws Exception {
         Iterator<FacetQueryEntry> it0 = mock(Iterator.class);

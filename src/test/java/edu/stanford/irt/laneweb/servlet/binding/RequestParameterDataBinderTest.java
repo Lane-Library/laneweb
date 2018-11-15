@@ -28,6 +28,7 @@ public class RequestParameterDataBinderTest {
 
     private HttpServletRequest request;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.binder = new RequestParameterDataBinder();

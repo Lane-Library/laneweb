@@ -35,6 +35,7 @@ public class BassettImageGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.service = mock(SolrImageService.class);

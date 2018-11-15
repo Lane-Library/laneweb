@@ -31,6 +31,7 @@ public class JsonImageSearchControllerTest {
 
     private SolrImageService service;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = mock(SolrImageService.class);

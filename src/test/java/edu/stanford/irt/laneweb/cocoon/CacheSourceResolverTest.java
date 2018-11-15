@@ -44,6 +44,7 @@ public class CacheSourceResolverTest {
 
     private Validity validity;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.cache = mock(Cache.class);

@@ -37,6 +37,7 @@ public class AbstractSearchGeneratorTest {
 
     private SAXStrategy<Object> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.saxStrategy = mock(SAXStrategy.class);

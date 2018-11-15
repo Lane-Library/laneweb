@@ -24,6 +24,7 @@ public class BrowseAllEresourcesGeneratorTest {
 
     private SolrService solrService;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.solrService = mock(SolrService.class);

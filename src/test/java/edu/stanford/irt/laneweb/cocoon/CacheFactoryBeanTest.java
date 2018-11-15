@@ -24,6 +24,7 @@ public class CacheFactoryBeanTest {
 
     private CacheManager cacheManager;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.cache = mock(Cache.class);

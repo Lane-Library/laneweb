@@ -38,6 +38,7 @@ public class CourseReservesItemListSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.courseStrategy = mock(SAXStrategy.class);

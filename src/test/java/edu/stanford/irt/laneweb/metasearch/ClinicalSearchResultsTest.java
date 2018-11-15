@@ -22,6 +22,7 @@ public class ClinicalSearchResultsTest {
 
     private int total;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.resourceResults = Collections.emptyList();

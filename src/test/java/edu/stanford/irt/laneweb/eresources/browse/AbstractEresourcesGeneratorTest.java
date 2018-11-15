@@ -58,6 +58,7 @@ public class AbstractEresourcesGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.solrService = mock(SolrService.class);

@@ -28,6 +28,7 @@ public class ContentSearchGeneratorTest {
 
     private SAXStrategy<PagingSearchResultList> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metaSearchService = mock(MetaSearchService.class);

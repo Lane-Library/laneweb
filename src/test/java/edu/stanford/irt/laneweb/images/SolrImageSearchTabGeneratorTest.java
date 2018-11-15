@@ -40,6 +40,7 @@ public class SolrImageSearchTabGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.service = mock(SolrImageService.class);

@@ -41,6 +41,7 @@ public class CMERedirectControllerTest {
         this.map = new HashMap<>();
     }
 
+    @SuppressWarnings("boxing")
     @Test
     public void testBind() {
         expect(this.model.asMap()).andReturn(this.map);
@@ -58,6 +59,7 @@ public class CMERedirectControllerTest {
         verify(this.dataBinder, this.model);
     }
 
+    @SuppressWarnings("boxing")
     @Test
     public void testBindData() {
         expect(this.model.asMap()).andReturn(this.map);

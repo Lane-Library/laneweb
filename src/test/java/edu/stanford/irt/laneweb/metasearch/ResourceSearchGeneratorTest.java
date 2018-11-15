@@ -30,6 +30,7 @@ public class ResourceSearchGeneratorTest {
 
     private SAXStrategy<Result> saxStrategy;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.metaSearchService = mock(MetaSearchService.class);

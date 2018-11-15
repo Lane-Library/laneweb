@@ -37,6 +37,7 @@ public class HTMLBookmarkControllerTest {
 
     private UserDataBinder userDataBinder;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.bookmarkService = mock(BookmarkService.class);
