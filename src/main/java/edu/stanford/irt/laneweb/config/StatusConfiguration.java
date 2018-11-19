@@ -24,6 +24,7 @@ import edu.stanford.irt.laneweb.status.LanewebStatusService;
 import edu.stanford.irt.laneweb.suggest.SuggestStatusProvider;
 import edu.stanford.irt.laneweb.suggest.SuggestionService;
 import edu.stanford.irt.status.DefaultStatusService;
+import edu.stanford.irt.status.RuntimeMXBeanStatusProvider;
 import edu.stanford.irt.status.StatusProvider;
 import edu.stanford.irt.status.StatusService;
 
@@ -39,19 +40,25 @@ public class StatusConfiguration {
     private static final int SLOW_SUGGESTION_TIME = 250;
 
     @Bean
-    @Order(3)
+    @Order(4)
     public EresourceStatusProvider eresourceStatusProvider(final SolrService solrService) {
         return new EresourceStatusProvider(solrService, MIN_BIB_COUNT, MIN_PUBMED_COUNT);
     }
 
     @Bean
-    @Order(2)
+    @Order(3)
     public IndexDotHtmlStatusProvider indexDotHtmlStatusProvider(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap") final Sitemap sitemap,
             final SourceResolver sourceResolver, @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI) {
         return new IndexDotHtmlStatusProvider(sitemap, componentFactory, sourceResolver, SLOW_INDEX_HTML_TIME,
                 contentBase, classesServiceURI);
+    }
+
+    @Bean
+    @Order(1)
+    public RuntimeMXBeanStatusProvider jvmStatusProvider() {
+        return new RuntimeMXBeanStatusProvider();
     }
 
     @Bean
@@ -77,7 +84,7 @@ public class StatusConfiguration {
     }
 
     @Bean
-    @Order(1)
+    @Order(2)
     public SuggestStatusProvider suggestStatusProvider(final SuggestionService suggestionService) {
         return new SuggestStatusProvider(suggestionService, SLOW_SUGGESTION_TIME, "cardio");
     }
