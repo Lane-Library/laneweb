@@ -48,7 +48,7 @@ public class HoursGeneratorTest {
     @SuppressWarnings({ "unchecked" })
     @Test
     public void testDoGenerateXMLConsumer() {
-        expect(this.service.getHours(LocalDate.parse("2017-02-27"), Period.ofWeeks(4))).andReturn(this.hours);
+        expect(this.service.getHours(LocalDate.parse("2017-02-27"), Period.ofWeeks(6))).andReturn(this.hours);
         this.saxStrategy.toSAX(isA(List.class), same(this.xmlConsumer));
         replay(this.service, this.saxStrategy, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.TODAY, LocalDate.parse("2017-03-01")));
