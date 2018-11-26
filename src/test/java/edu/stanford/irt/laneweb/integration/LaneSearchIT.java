@@ -157,7 +157,6 @@ public class LaneSearchIT {
                         this.ns).exists());
     }
 
-    @Test
     public void testLaneSearchJAMA() throws Exception {
         // jama
         this.mockMvc.perform(get("/eresources/search.html?q=jama").servletPath("/eresources/search.html")).andExpect(

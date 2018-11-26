@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-11-26" version="3.5.26" description="3.5.26 bug fix release">
+            <action date="2018-11-20" dev="ceyates" issue="146961" type="update">
+                temporarily increase calendar display to show six weeks
+            </action>
+        </release>
         <release date="2018-11-12" version="3.5.25" description="3.5.25 bug fix release">
             <action date="2018-11-12" dev="ryanmax" issue="146408" type="add">
                 Redivis search results integration
