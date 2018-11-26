@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.MediaType;
@@ -157,6 +158,7 @@ public class LaneSearchIT {
                         this.ns).exists());
     }
 
+    @Test
     public void testLaneSearchJAMA() throws Exception {
         // jama
         this.mockMvc.perform(get("/eresources/search.html?q=jama").servletPath("/eresources/search.html")).andExpect(
@@ -244,6 +246,7 @@ public class LaneSearchIT {
     }
 
     @Test
+    @Ignore
     public void testLaneSearchScience() throws Exception {
         // science
         this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html")).andExpect(
