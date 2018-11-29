@@ -103,7 +103,9 @@
             <xsl:when test="starts-with($path,'/portals/careercenter')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/bioresearch')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/LPCH-nursing')">all-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/SHC-nursing')">all-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
