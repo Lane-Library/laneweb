@@ -1,4 +1,4 @@
-pipeline:
+pipeline: 
 
   build:
     image: gcr.io/som-laneweb/maven-grover:3.5.3
@@ -35,11 +35,11 @@ pipeline:
     channel: irt-dcs-cicd
     username: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
     template: |
-      *Build ${DRONE_BUILD_NUMBER}*: _*{{ build.status }}*_
-      *Log*: ${DRONE_BUILD_LINK}
-      *Changes*: ${DRONE_REPO_LINK}/commit/${DRONE_COMMIT_SHA}
+      *Build ${DRONE_BUILD_NUMBER}*: _*{{ build.status }}*_ on event _*${DRONE_BUILD_EVENT}*_
       *Author*: ${CI_COMMIT_AUTHOR_NAME}
+      *<${DRONE_BUILD_LINK}|Build logs>* *<${DRONE_REPO_LINK}/commit/${DRONE_COMMIT_SHA}|Code changes>* *<https://sonarqube.med.stanford.edu/dashboard?id=${DRONE_REPO_OWNER}:${DRONE_REPO_NAME}|Code qulity>* 
       *Message*: ${DRONE_COMMIT_MESSAGE}
     secrets: [ slack_webhook ]
     when:
       status: [ success, failure ]
+

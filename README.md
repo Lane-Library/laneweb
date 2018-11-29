@@ -1,4 +1,5 @@
 [![Build Status](https://ci.med.stanford.edu/api/badges/lane/laneweb/status.svg)](https://ci.med.stanford.edu/lane/laneweb)
+[![Code Qulity](https://sonarqube.med.stanford.edu/api/project_badges/measure?project=edu.stanford.irt%3Alaneweb&metric=alert_status)](https://sonarqube.med.stanford.edu/dashboard?id=edu.stanford.irt:laneweb)
 
 # Laneweb WAR in Docker
 

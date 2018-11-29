@@ -22,6 +22,7 @@ endif
 include ${FRAMEWORK_DIR}/makefile_parts/shared.mk
 include ${FRAMEWORK_DIR}/makefile_parts/vault.mk
 include ${FRAMEWORK_DIR}/makefile_parts/docker-compose.mk
+include ${FRAMEWORK_DIR}/makefile_parts/sonarqube.mk
 include ${FRAMEWORK_DIR}/makefile_parts/drone08.mk
 include ${FRAMEWORK_DIR}/makefile_parts/deps.mk
 # END COMMON MAKEFILE PARTS INCLUDES
@@ -30,11 +31,13 @@ include ${FRAMEWORK_DIR}/makefile_parts/deps.mk
 build: build-app build-docker ## build app and docker image
 
 build-app: ## build app
-	docker run -v ${current_dir}:/build \
-		maven bash -c "cd /build; mvn -B -q -s settings.xml clean package"
+	mvn -B -s settings.xml clean package
 
 .PHONY: push
 push: push-version push-latest ## push both latest and versioned image to docker registry
 
 .PHONY: pull
 pull: pull-latest ## pull latest image from project's docker registry
+
+.PHONY: scan
+scan: build-app mvn-scan ## mvn clean package sonar:sonar
