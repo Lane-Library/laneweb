@@ -30,13 +30,6 @@ pipeline:
     when:
       status: success
 
-  code-analysis:
-    image: aosapps/drone-sonar-plugin
-    timeout: 20
-    level: INFO
-    showProfiling: true
-    secrets: [sonar_host, sonar_token]
-
   slack:
     image: plugins/slack
     channel: irt-dcs-cicd
