@@ -13,6 +13,8 @@ pipeline:
     level: INFO
     showProfiling: true
     secrets: [sonar_host, sonar_token]
+    sources: src/main/java,src/main/javascript,src/main/css
+    exclusions: "**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css"
 
   publish:
     image: plugins/docker
