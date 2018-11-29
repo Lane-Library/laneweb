@@ -1,5 +1,12 @@
 pipeline: 
 
+  code-analysis:
+    image: aosapps/drone-sonar-plugin
+    timeout: 20
+    level: INFO
+    showProfiling: true
+    secrets: [sonar_host, sonar_token]
+
   build:
     image: gcr.io/som-laneweb/maven-grover:3.5.3
     commands:

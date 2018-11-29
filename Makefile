@@ -40,4 +40,5 @@ push: push-version push-latest ## push both latest and versioned image to docker
 pull: pull-latest ## pull latest image from project's docker registry
 
 .PHONY: scan
-scan: build-app mvn-scan ## mvn clean package sonar:sonar
+scan: build-app sonar-scan ## mvn clean package and sonar-scan
+	@echo 'See report on https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb'
