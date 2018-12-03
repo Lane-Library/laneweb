@@ -105,6 +105,7 @@
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/LPCH-nursing')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/SHC-nursing')">all-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/spiritual')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
