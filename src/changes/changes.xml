@@ -8,7 +8,7 @@
     </properties>
     <body>
         <release date="2018-12-03" version="3.5.27" description="3.5.27 bug fix release">
-            <action date="2018-11-29" dev="ceyates" issue="147151" type="update">
+            <action date="2018-12-03" dev="ceyates" issue="147151" type="update">
                 switch to Lane search
             </action>
         </release>
