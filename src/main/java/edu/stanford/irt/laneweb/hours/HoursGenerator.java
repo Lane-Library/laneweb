@@ -27,7 +27,7 @@ public class HoursGenerator extends AbstractGenerator implements ModelAware, Cac
 
     private static final long ONE_HOUR = Duration.ofHours(1).toMillis();
 
-    private static final int WEEKS_TO_DISPLAY = 6;
+    private static final int WEEKS_TO_DISPLAY = 4;
 
     private SAXStrategy<List<List<Hours>>> saxStrategy;
 
