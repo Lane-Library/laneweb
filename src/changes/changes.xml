@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2018-12-10" version="3.5.28" description="3.5.28 bug fix release">
+            <action date="2018-12-04" dev="ceyates" issue="147245" type="update">
+                switch to Lane search for other portals
+            </action>
+        </release>
         <release date="2018-12-03" version="3.5.27" description="3.5.27 bug fix release">
             <action date="2018-12-03" dev="ceyates" issue="147151" type="update">
                 switch to Lane search
