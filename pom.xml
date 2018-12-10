@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>38</version>
+        <version>39</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.5.29-SNAPSHOT</version>
@@ -43,7 +43,6 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
-        <org.springframework.version>5.1.3.RELEASE</org.springframework.version>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
@@ -76,12 +75,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.74.0</version>
+            <version>1.75.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.74.0</version>
+            <version>1.75.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
