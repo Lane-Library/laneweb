@@ -79,9 +79,7 @@ public class SourceConfiguration implements InitializingBean {
                         this.beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/xml", SAXParser.class),
                         this.cache, this.sourceResolver));
         this.sourceResolver.setSourceResolvers(sourceResolvers);
-        SpringResourceSourceResolver springResourceSourceResolver = new SpringResourceSourceResolver();
-        springResourceSourceResolver.setResourceLoader(this.resourceLoader);
-        this.sourceResolver.setDefaultResolver(springResourceSourceResolver);
+        this.sourceResolver.setDefaultResolver(new SpringResourceSourceResolver(this.resourceLoader));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.source.SourceResolver")
