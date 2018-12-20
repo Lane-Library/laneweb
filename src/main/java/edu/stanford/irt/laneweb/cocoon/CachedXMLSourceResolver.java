@@ -19,14 +19,15 @@ public class CachedXMLSourceResolver extends CacheSourceResolver {
 
     private static final class CachedXMLSource extends ByteArraySource implements XMLizable {
 
-        private byte[] bytesArray;
+        private final byte[] bytesArray;
 
-        private XMLByteStreamInterpreter xmlByteStreamInterpreter;
+        private final XMLByteStreamInterpreter xmlByteStreamInterpreter;
 
         CachedXMLSource(final byte[] byteArray, final String uri, final Validity validity,
                 final XMLByteStreamInterpreter xmlByteStreamInterpreter) {
             super(byteArray, uri, validity);
             this.bytesArray = byteArray;
+            this.xmlByteStreamInterpreter = xmlByteStreamInterpreter;
         }
 
         @Override
@@ -35,9 +36,9 @@ public class CachedXMLSourceResolver extends CacheSourceResolver {
         }
     }
 
-    private SAXParser parser;
+    private final SAXParser parser;
 
-    private XMLByteStreamInterpreter xmlByteStreamInterpreter;
+    private final XMLByteStreamInterpreter xmlByteStreamInterpreter;
 
     public CachedXMLSourceResolver(final SAXParser parser, final Cache<Serializable, CachedResponse> cache,
             final SourceResolver sourceResolver, final XMLByteStreamInterpreter xmlByteStreamInterpreter) {
