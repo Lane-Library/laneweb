@@ -39,7 +39,7 @@ public class LanewebConfigurationTest {
 
     @Test
     public void testComponentFactory() {
-        assertNotNull(this.configuration.componentFactory());
+        assertNotNull(this.configuration.componentFactory(null));
     }
 
     @Test
