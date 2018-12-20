@@ -10,11 +10,14 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.cache.Cache;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.CocoonException;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
@@ -24,6 +27,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLByteStreamInterpreter;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
+import edu.stanford.irt.cocoon.xml.XMLizable;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class CachedXMLSourceResolverTest {
@@ -73,6 +77,17 @@ public class CachedXMLSourceResolverTest {
         expect(this.source.getURI()).andReturn("uri");
         replay(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
         assertNotNull(this.resolver.getBytesFromSource(this.source));
+        verify(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
+    }
+
+    @Test
+    public void testToSAX() throws URISyntaxException, SAXException {
+        CachedResponse response = new CachedResponse(AlwaysValid.SHARED_INSTANCE, new byte[0]);
+        expect(this.cache.get(new URI("file:/"))).andReturn(response);
+        this.xmlByteStreamInterpreter.deserialize(new byte[0], null);
+        replay(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
+        XMLizable source = (XMLizable) this.resolver.resolveURI(new URI("file:/"));
+        source.toSAX(null);
         verify(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
     }
 }
