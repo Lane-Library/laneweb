@@ -16,13 +16,14 @@ import javax.cache.Cache;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.cocoon.CocoonException;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLByteStreamInterpreter;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.cocoon.xml.XMLException;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class CachedXMLSourceResolverTest {
@@ -37,37 +38,41 @@ public class CachedXMLSourceResolverTest {
 
     private SourceResolver sourceResolver;
 
+    private XMLByteStreamInterpreter xmlByteStreamInterpreter;
+
     @Before
     public void setUp() {
         this.cache = mock(Cache.class);
         this.sourceResolver = mock(SourceResolver.class);
         this.saxParser = mock(SAXParser.class);
-        this.resolver = new CachedXMLSourceResolver(this.saxParser, this.cache, this.sourceResolver);
+        this.xmlByteStreamInterpreter = mock(XMLByteStreamInterpreter.class);
+        this.resolver = new CachedXMLSourceResolver(this.saxParser, this.cache, this.sourceResolver,
+                this.xmlByteStreamInterpreter);
         this.source = mock(Source.class);
     }
 
     @Test
     public void testCreateSource() {
-        replay(this.cache, this.sourceResolver, this.saxParser);
+        replay(this.cache, this.sourceResolver, this.saxParser, this.xmlByteStreamInterpreter);
         assertNotNull(this.resolver.createSource(new byte[0], "uri", AlwaysValid.SHARED_INSTANCE));
-        verify(this.cache, this.sourceResolver, this.saxParser);
+        verify(this.cache, this.sourceResolver, this.saxParser, this.xmlByteStreamInterpreter);
     }
 
     @Test
     public void testGetBytesFromSource() {
         this.saxParser.parse(eq(this.source), isA(XMLConsumer.class));
-        replay(this.cache, this.sourceResolver, this.saxParser, this.source);
+        replay(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
         assertNotNull(this.resolver.getBytesFromSource(this.source));
-        verify(this.cache, this.sourceResolver, this.saxParser, this.source);
+        verify(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
     }
 
     @Test(expected = LanewebException.class)
     public void testGetBytesFromSourceThrowsException() {
         this.saxParser.parse(eq(this.source), isA(XMLConsumer.class));
-        expectLastCall().andThrow(new XMLException("oops"));
+        expectLastCall().andThrow(new CocoonException("oops"));
         expect(this.source.getURI()).andReturn("uri");
-        replay(this.cache, this.sourceResolver, this.saxParser, this.source);
+        replay(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
         assertNotNull(this.resolver.getBytesFromSource(this.source));
-        verify(this.cache, this.sourceResolver, this.saxParser, this.source);
+        verify(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
     }
 }

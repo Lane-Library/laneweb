@@ -28,7 +28,7 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testCachingPipeline() {
-        assertNotNull(this.configuration.cachingPipeline(null));
+        assertNotNull(this.configuration.cachingPipeline(null, null));
     }
 
     @Test
@@ -43,7 +43,7 @@ public class PipelineConfigurationTest {
 
     @Test
     public void testExpiresCachingPipeline() {
-        assertNotNull(this.configuration.expiresCachingPipeline(null));
+        assertNotNull(this.configuration.expiresCachingPipeline(null, null));
     }
 
     @Test

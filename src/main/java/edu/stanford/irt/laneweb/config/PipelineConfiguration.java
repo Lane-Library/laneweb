@@ -37,6 +37,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
+import edu.stanford.irt.cocoon.xml.XMLByteStreamInterpreter;
 import edu.stanford.irt.laneweb.classes.EventListTransformer;
 import edu.stanford.irt.laneweb.cocoon.DebugTransformer;
 import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
@@ -65,8 +66,9 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/caching")
     @Scope("prototype")
-    public Pipeline cachingPipeline(final Cache<Serializable, CachedResponse> cache) {
-        return new CachingPipeline(cache);
+    public Pipeline cachingPipeline(final Cache<Serializable, CachedResponse> cache,
+            final XMLByteStreamInterpreter xmlByteStreamInterpreter) {
+        return new CachingPipeline(cache, xmlByteStreamInterpreter);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/debug")
@@ -84,8 +86,9 @@ public class PipelineConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/expires")
     @Scope("prototype")
-    public Pipeline expiresCachingPipeline(final Cache<Serializable, CachedResponse> cache) {
-        return new ExpiresCachingPipeline(cache, FIVE_MINUTES);
+    public Pipeline expiresCachingPipeline(final Cache<Serializable, CachedResponse> cache,
+            final XMLByteStreamInterpreter xmlByteStreamInterpreter) {
+        return new ExpiresCachingPipeline(cache, xmlByteStreamInterpreter, FIVE_MINUTES);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/file")
@@ -139,7 +142,6 @@ public class PipelineConfiguration {
     public Transformer namespaceFilterTransformer() {
         return new NamespaceFilter();
     }
-
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/noncaching")
     @Scope("prototype")
@@ -215,6 +217,11 @@ public class PipelineConfiguration {
     public Transformer xIncludeTransformer(final BeanFactory beanFactory) {
         return new XIncludeTransformer(
                 beanFactory.getBean("edu.stanford.irt.cocoon.xml.XIncludePipe", XIncludePipe.class));
+    }
+
+    @Bean
+    public XMLByteStreamInterpreter xmlByteStreamInterpreter() {
+        return new XMLByteStreamInterpreter();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Serializer/xml")

@@ -22,6 +22,7 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.source.SourceResolverImpl;
 import edu.stanford.irt.cocoon.spring.SpringResourceSourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
+import edu.stanford.irt.cocoon.xml.XMLByteStreamInterpreter;
 import edu.stanford.irt.laneweb.cocoon.CacheSourceResolver;
 import edu.stanford.irt.laneweb.cocoon.CachedXMLSourceResolver;
 
@@ -41,12 +42,16 @@ public class SourceConfiguration implements InitializingBean {
 
     private SourceResolverImpl sourceResolver;
 
+    private XMLByteStreamInterpreter xmlByteStreamInterpreter;
+
     public SourceConfiguration(final BeanFactory beanFactory, final Cache<Serializable, CachedResponse> cache,
-            final ComponentFactory componentFactory, final ResourceLoader resourceLoader) {
+            final ComponentFactory componentFactory, final ResourceLoader resourceLoader,
+            final XMLByteStreamInterpreter xmlByteStreamInterpreter) {
         this.beanFactory = beanFactory;
         this.cache = cache;
         this.componentFactory = componentFactory;
         this.resourceLoader = resourceLoader;
+        this.xmlByteStreamInterpreter = xmlByteStreamInterpreter;
     }
 
     @Override
@@ -77,7 +82,7 @@ public class SourceConfiguration implements InitializingBean {
         sourceResolvers.put("cachedxml",
                 new CachedXMLSourceResolver(
                         this.beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/xml", SAXParser.class),
-                        this.cache, this.sourceResolver));
+                        this.cache, this.sourceResolver, this.xmlByteStreamInterpreter));
         this.sourceResolver.setSourceResolvers(sourceResolvers);
         this.sourceResolver.setDefaultResolver(new SpringResourceSourceResolver(this.resourceLoader));
     }
