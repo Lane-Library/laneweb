@@ -31,6 +31,9 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         super(type, solrService, saxStrategy);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {
@@ -45,6 +48,9 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
         }
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

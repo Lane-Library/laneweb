@@ -30,6 +30,9 @@ public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator {
         this.service = service;
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

@@ -37,6 +37,9 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
         this.conversionStrategy = conversionStrategy;
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {
@@ -56,6 +59,9 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSe
         this.urlEncodedQuery = ModelUtil.getString(model, Model.URL_ENCODED_QUERY);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

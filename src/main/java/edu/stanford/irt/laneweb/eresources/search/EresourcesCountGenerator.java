@@ -26,6 +26,9 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         this.solrService = solrService;
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

@@ -17,6 +17,9 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
 
     private String emrid;
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

@@ -22,6 +22,9 @@ public class DebugTransformer extends AbstractXMLPipe implements Transformer {
         this.model = Collections.emptyMap();
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

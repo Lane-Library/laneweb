@@ -22,6 +22,9 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
         super(componentType, solrService, saxStrategy);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {
@@ -30,6 +33,9 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
         this.mesh = ModelUtil.getString(model, Model.MESH);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

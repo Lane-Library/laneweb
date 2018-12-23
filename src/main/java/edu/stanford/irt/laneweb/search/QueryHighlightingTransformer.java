@@ -25,6 +25,9 @@ public class QueryHighlightingTransformer extends AbstractTextProcessingTransfor
         this.queryPattern = UNMATCHABLE;
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

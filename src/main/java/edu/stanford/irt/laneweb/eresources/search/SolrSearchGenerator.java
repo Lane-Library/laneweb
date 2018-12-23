@@ -45,6 +45,9 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         this.solrService = solrService;
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {
@@ -59,6 +62,9 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         this.type = ModelUtil.getString(model, Model.TYPE);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

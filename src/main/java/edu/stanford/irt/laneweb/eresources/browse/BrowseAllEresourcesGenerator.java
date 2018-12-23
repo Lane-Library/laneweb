@@ -19,6 +19,9 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
         super(type, solrService, saxStrategy);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

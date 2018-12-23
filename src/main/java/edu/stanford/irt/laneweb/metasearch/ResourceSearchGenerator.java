@@ -41,6 +41,9 @@ public class ResourceSearchGenerator extends SearchGenerator {
         return super.searchWithEngines(query, enginesToRun);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {
@@ -48,6 +51,9 @@ public class ResourceSearchGenerator extends SearchGenerator {
         this.resources = ModelUtil.getObject(model, Model.RESOURCES, Collection.class);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

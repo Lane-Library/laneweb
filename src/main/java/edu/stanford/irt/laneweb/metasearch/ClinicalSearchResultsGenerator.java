@@ -36,6 +36,9 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
         this.factory = factory;
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

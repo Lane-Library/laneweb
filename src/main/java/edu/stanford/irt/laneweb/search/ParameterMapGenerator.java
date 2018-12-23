@@ -19,6 +19,9 @@ public class ParameterMapGenerator extends AbstractMarshallingGenerator {
         super(marshaller);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {

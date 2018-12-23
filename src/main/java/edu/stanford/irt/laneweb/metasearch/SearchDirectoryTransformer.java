@@ -37,6 +37,9 @@ public class SearchDirectoryTransformer extends AbstractCacheableTransformer {
         super.endDocument();
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {

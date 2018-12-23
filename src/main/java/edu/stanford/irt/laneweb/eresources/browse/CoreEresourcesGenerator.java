@@ -19,6 +19,9 @@ public class CoreEresourcesGenerator extends AbstractEresourcesGenerator {
         super(componentType, solrService, saxStrategy);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setModel(final Map<String, Object> model) {
@@ -26,6 +29,9 @@ public class CoreEresourcesGenerator extends AbstractEresourcesGenerator {
         this.type = ModelUtil.getString(model, Model.TYPE);
     }
 
+    /**
+     * @deprecated this will be replaced with constructor injection
+     */
     @Override
     @Deprecated
     public void setParameters(final Map<String, String> parameters) {
