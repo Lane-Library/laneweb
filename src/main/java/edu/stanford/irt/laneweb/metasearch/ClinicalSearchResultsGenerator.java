@@ -37,6 +37,7 @@ public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         String f = ModelUtil.getString(model, Model.FACET, null);

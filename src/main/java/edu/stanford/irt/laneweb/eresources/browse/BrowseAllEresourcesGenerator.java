@@ -20,6 +20,7 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (parameters.containsKey(Model.TYPE)) {

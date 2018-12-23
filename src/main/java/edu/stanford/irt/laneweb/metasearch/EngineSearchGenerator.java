@@ -19,12 +19,14 @@ public class EngineSearchGenerator extends SearchGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class);
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (this.engines == null) {

@@ -20,6 +20,7 @@ public class ParameterMapGenerator extends AbstractMarshallingGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.parameters = new HashMap<>();
         Map<String, String[]> map = ModelUtil.getObject(model, Model.PARAMETER_MAP, Map.class);

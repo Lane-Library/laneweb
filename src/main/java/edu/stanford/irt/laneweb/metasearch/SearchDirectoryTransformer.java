@@ -38,6 +38,7 @@ public class SearchDirectoryTransformer extends AbstractCacheableTransformer {
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         this.directories = parameters.get("directories").split(",");
     }

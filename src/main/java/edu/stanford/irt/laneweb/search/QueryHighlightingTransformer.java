@@ -26,6 +26,7 @@ public class QueryHighlightingTransformer extends AbstractTextProcessingTransfor
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         String query = ModelUtil.getString(model, Model.QUERY);
         if (query != null) {

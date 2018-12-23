@@ -22,12 +22,14 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.timeout = ModelUtil.getString(model, Model.TIMEOUT);
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         if (this.timeout == null) {
             this.timeout = parameters.get(Model.TIMEOUT);

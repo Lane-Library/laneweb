@@ -46,6 +46,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.facets = ModelUtil.getString(model, Model.FACETS);
@@ -59,6 +60,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.TYPE)) {
             try {

@@ -70,6 +70,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         String p = ModelUtil.getString(model, Model.PAGE, "1");
         if ("all".equals(p)) {
@@ -85,6 +86,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.EXPIRES)) {
             this.expires = Long.parseLong(parameters.get(Model.EXPIRES));

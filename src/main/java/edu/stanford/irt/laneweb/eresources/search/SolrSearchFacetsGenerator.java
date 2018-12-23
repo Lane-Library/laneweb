@@ -89,6 +89,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.facet = ModelUtil.getString(model, Model.FACET, null);
         this.facets = ModelUtil.getString(model, Model.FACETS, EMPTY);

@@ -23,6 +23,7 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.type = ModelUtil.getString(model, Model.TYPE);
@@ -30,6 +31,7 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (parameters.containsKey(Model.TYPE)) {

@@ -70,6 +70,7 @@ public class HoursGenerator extends AbstractGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.today = ModelUtil.getObject(model, Model.TODAY, LocalDate.class);
     }

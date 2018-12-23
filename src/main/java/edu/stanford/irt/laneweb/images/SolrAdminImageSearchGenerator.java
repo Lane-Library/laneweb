@@ -30,6 +30,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.limit = ModelUtil.getString(model, Model.LIMIT);

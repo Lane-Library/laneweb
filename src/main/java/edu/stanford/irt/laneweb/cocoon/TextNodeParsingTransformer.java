@@ -109,6 +109,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         if (!parameters.containsKey("elementNames")) {
             throw new LanewebException("elementNames parameter is required");

@@ -42,12 +42,14 @@ public class ResourceSearchGenerator extends SearchGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.resources = ModelUtil.getObject(model, Model.RESOURCES, Collection.class);
     }
 
     @Override
+    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (this.resources == null) {

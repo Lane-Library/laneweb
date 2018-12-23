@@ -53,6 +53,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         String page = ModelUtil.getString(model, Model.PAGE);

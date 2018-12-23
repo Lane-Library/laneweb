@@ -30,6 +30,7 @@ public class BassettAccordionGenerator extends AbstractGenerator {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.query = ModelUtil.getString(model, Model.QUERY);
     }

@@ -61,6 +61,7 @@ public class BibIDToEresourceTransformer extends AbstractXMLPipe implements Tran
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.key = ModelUtil.getString(model, Model.SITEMAP_URI);
     }

@@ -23,6 +23,7 @@ public class DebugTransformer extends AbstractXMLPipe implements Transformer {
     }
 
     @Override
+    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.model = model;
     }
