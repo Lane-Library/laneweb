@@ -22,8 +22,7 @@ import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 
-public class TextNodeParsingTransformer extends AbstractXMLPipe
-        implements Transformer, CacheablePipelineComponent {
+public class TextNodeParsingTransformer extends AbstractXMLPipe implements Transformer {
 
     // the html parser creates screwy processing instructions from the classes
     // xml.

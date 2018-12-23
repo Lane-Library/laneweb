@@ -17,8 +17,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
-public abstract class AbstractEresourcesGenerator extends AbstractGenerator
-        implements CacheablePipelineComponent {
+public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     /** the default cache expiration time, 20 minutes */
     private static final long DEFAULT_EXPIRES = Duration.ofMinutes(20).toMillis();

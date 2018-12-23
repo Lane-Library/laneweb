@@ -20,7 +20,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.libraryhours.Hours;
 import edu.stanford.irt.libraryhours.LibraryHoursService;
 
-public class HoursGenerator extends AbstractGenerator implements CacheablePipelineComponent {
+public class HoursGenerator extends AbstractGenerator {
 
     private static final int DAYS_PER_WEEK = 7;
 

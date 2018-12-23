@@ -20,8 +20,7 @@ import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class BibIDToEresourceTransformer extends AbstractXMLPipe
-        implements Transformer, CacheablePipelineComponent {
+public class BibIDToEresourceTransformer extends AbstractXMLPipe implements Transformer {
 
     private static final Logger log = LoggerFactory.getLogger(BibIDToEresourceTransformer.class);
 

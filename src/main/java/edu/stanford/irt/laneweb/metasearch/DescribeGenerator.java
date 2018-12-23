@@ -10,7 +10,7 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.search.impl.Result;
 
-public class DescribeGenerator extends AbstractGenerator implements CacheablePipelineComponent {
+public class DescribeGenerator extends AbstractGenerator {
 
     private static final String EMPTY_QUERY = "";
 
