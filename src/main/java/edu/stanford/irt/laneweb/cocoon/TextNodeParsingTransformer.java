@@ -13,7 +13,6 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
-import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;

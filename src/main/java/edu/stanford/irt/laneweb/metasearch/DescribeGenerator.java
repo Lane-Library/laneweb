@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
-import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
