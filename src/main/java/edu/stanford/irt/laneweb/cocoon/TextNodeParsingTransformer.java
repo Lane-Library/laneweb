@@ -14,7 +14,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
@@ -24,7 +23,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class TextNodeParsingTransformer extends AbstractXMLPipe
-        implements Transformer, CacheablePipelineComponent, ParametersAware {
+        implements Transformer, CacheablePipelineComponent {
 
     // the html parser creates screwy processing instructions from the classes
     // xml.

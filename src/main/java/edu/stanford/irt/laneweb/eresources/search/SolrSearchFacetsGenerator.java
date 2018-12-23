@@ -20,7 +20,6 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.core.query.result.FacetQueryEntry;
 import org.springframework.oxm.Marshaller;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator;
 import edu.stanford.irt.laneweb.eresources.Eresource;
@@ -28,7 +27,7 @@ import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator implements ModelAware {
+public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
 
     private static final int ALL_BOOK_OR_JOURNAL_TYPES = 3;
 

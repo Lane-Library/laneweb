@@ -7,10 +7,9 @@ import java.util.Map;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 
-public class SearchDirectoryTransformer extends AbstractCacheableTransformer implements ParametersAware {
+public class SearchDirectoryTransformer extends AbstractCacheableTransformer {
 
     private static final String FILE = "file";
 

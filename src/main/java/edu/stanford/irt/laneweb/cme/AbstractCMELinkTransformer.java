@@ -2,13 +2,12 @@ package edu.stanford.irt.laneweb.cme;
 
 import java.util.Map;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe implements Transformer, ModelAware {
+public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe implements Transformer {
 
     protected static final String CME_REDIRECT = "/redirect/cme?url=";
 

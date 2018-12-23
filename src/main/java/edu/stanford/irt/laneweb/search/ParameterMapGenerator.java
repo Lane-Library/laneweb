@@ -6,13 +6,12 @@ import java.util.Map.Entry;
 
 import org.springframework.oxm.Marshaller;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class ParameterMapGenerator extends AbstractMarshallingGenerator implements ModelAware {
+public class ParameterMapGenerator extends AbstractMarshallingGenerator {
 
     private Map<String, String[]> parameters;
 

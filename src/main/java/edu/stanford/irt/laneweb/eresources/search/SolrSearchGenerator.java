@@ -14,7 +14,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.solr.core.query.SolrPageRequest;
 
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.Eresource;
@@ -23,7 +22,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
 
-public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> implements ParametersAware {
+public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> {
 
     private static final int DEFAULT_RESULTS = 50;
 

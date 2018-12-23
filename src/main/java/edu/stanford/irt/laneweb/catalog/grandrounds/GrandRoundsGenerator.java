@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -13,7 +12,7 @@ import edu.stanford.irt.grandrounds.Presentation;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class GrandRoundsGenerator extends AbstractGenerator implements ParametersAware {
+public class GrandRoundsGenerator extends AbstractGenerator {
 
     private static final String DEPT = "department";
 

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -17,8 +16,7 @@ import edu.stanford.irt.search.impl.Result;
 /**
  * @author ryanmax
  */
-public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSearchResultList>
-        implements ParametersAware {
+public class ContentSearchGenerator extends AbstractMetasearchGenerator<PagingSearchResultList> {
 
     private static final long DEFAULT_TIMEOUT = 20000;
 

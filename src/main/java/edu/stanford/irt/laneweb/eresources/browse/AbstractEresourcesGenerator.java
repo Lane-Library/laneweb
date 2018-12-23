@@ -8,8 +8,6 @@ import java.util.Map;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -20,7 +18,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator
-        implements CacheablePipelineComponent, ParametersAware, ModelAware {
+        implements CacheablePipelineComponent {
 
     /** the default cache expiration time, 20 minutes */
     private static final long DEFAULT_EXPIRES = Duration.ofMinutes(20).toMillis();

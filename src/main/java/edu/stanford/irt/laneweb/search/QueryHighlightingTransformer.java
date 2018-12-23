@@ -7,14 +7,13 @@ import java.util.regex.Pattern;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.ImmutableEmptyAttributes;
 
-public class QueryHighlightingTransformer extends AbstractTextProcessingTransformer implements ModelAware {
+public class QueryHighlightingTransformer extends AbstractTextProcessingTransformer {
 
     private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
