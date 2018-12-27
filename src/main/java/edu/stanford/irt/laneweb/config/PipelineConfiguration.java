@@ -28,6 +28,7 @@ import edu.stanford.irt.cocoon.pipeline.Serializer;
 import edu.stanford.irt.cocoon.pipeline.ThrottlingPipeline;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.pipeline.generate.AggregatorImpl;
+import edu.stanford.irt.cocoon.pipeline.generate.DefaultAggregator;
 import edu.stanford.irt.cocoon.pipeline.generate.URLGenerator;
 import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
 import edu.stanford.irt.cocoon.pipeline.transform.NamespaceFilter;
@@ -58,10 +59,16 @@ public class PipelineConfiguration {
 
     private static final String YES = "yes";
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Aggregator/<aggregator>")
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Aggregator/caching")
     @Scope("prototype")
-    public Aggregator aggregator() {
-        return new AggregatorImpl("<aggregator>");
+    public Aggregator cachingAggregator() {
+        return new AggregatorImpl("caching");
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Aggregator/default")
+    @Scope("prototype")
+    public Aggregator defaultAggregator() {
+        return new DefaultAggregator();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/caching")

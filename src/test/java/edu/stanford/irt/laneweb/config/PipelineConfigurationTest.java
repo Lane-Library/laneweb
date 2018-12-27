@@ -28,8 +28,8 @@ public class PipelineConfigurationTest {
     }
 
     @Test
-    public void testAggregator() {
-        assertNotNull(this.configuration.aggregator());
+    public void testCachingAggregator() {
+        assertNotNull(this.configuration.cachingAggregator());
     }
 
     @Test
@@ -40,6 +40,11 @@ public class PipelineConfigurationTest {
     @Test
     public void testDebugTransformer() {
         assertNotNull(this.configuration.debugTransformer());
+    }
+
+    @Test
+    public void testDefaultAggregator() {
+        assertNotNull(this.configuration.defaultAggregator());
     }
 
     @Test

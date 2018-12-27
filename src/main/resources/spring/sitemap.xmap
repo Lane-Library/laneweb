@@ -30,60 +30,6 @@
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
-    <!-- holding of on caching for now . . .
-    </map:pipeline>
-    <!-/- cache responses for 20 minutes if cacheable (see CacheableSelector.java) -/->
-    <map:pipeline type="expires">
-        <map:parameter name="cache-expires" value="1200"/>
-        <map:parameter name="cache-key" value="{sitemap-uri}?{query-string};ipgroup={ipgroup};proxy-links={proxy-links}"/>
-        <map:select type="cacheable">
-            <map:when test="">
-                <map:match pattern="plain/**.html" type="wildcard">
-                    <map:generate type="file" src="content:/{1}.html"/>
-                    <map:select type="cme-links">
-                        <map:when test="true">
-                            <map:transform type="html-cme-links"/>
-                        </map:when>
-                    </map:select>
-                    <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
-                    <map:select type="proxy-links">
-                        <map:when test="true">
-                            <map:transform type="proxy-links"/>
-                        </map:when>
-                    </map:select>
-                    <map:transform type="namespace-filter"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="**.html" type="wildcard">
-                    <map:aggregate type="default" element="doc">
-                        <map:generate type="file" src="content:/{1}.html"/>
-                        <map:generate type="file" src="content:/templates/{template}.xml"/>
-                    </map:aggregate>
-                    <map:select type="cme-links">
-                        <map:when test="true">
-                            <map:transform type="html-cme-links"/>
-                        </map:when>
-                    </map:select>
-                    <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
-                    <map:select type="logged-in">
-                        <map:when test="true">
-                            <map:transform type="xinclude"/>
-                        </map:when>
-                    </map:select>
-                    <map:select type="proxy-links">
-                        <map:when test="true">
-                            <map:transform type="proxy-links"/>
-                        </map:when>
-                    </map:select>
-                    <map:transform type="namespace-filter"/>
-                    <map:transform type="debug"/>
-                    <map:serialize type="html5"/>
-                </map:match>
-            </map:when>
-        </map:select>
-    </map:pipeline>
-    <map:pipeline type="noncaching">
-    -->
        <map:match pattern="plain/**.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/{1}.html"/>
             <map:select type="cme-links">
