@@ -7,7 +7,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -65,6 +67,9 @@ public class ResourceResultSAXStrategyTest {
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAX.xml"),
                 this.xmlConsumer.getStringValue());
+        assertTrue(equalToCompressingWhiteSpace(
+                this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAX.xml"))
+                        .matches(this.xmlConsumer.getStringValue()));
         verify(this.result, this.contentSAXStrategy);
     }
 
@@ -87,6 +92,9 @@ public class ResourceResultSAXStrategyTest {
         this.xmlConsumer.endDocument();
         assertEquals(this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAXNullStatus.xml"),
                 this.xmlConsumer.getStringValue());
+        assertTrue(equalToCompressingWhiteSpace(
+                this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAXNullStatus.xml"))
+                        .matches(this.xmlConsumer.getStringValue()));
         verify(this.result, this.contentSAXStrategy);
     }
 

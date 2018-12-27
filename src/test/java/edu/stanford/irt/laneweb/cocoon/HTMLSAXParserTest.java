@@ -4,7 +4,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.hamcrest.text.IsEqualIgnoringWhiteSpace.equalToIgnoringWhiteSpace;
+import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -60,7 +60,7 @@ public class HTMLSAXParserTest {
         expect(this.source.getInputStream()).andReturn(this.inputStream);
         replay(this.source, this.lexicalHandler);
         this.parser.parse(this.source, this.xmlConsumer);
-        assertTrue(equalToIgnoringWhiteSpace(this.xmlConsumer.getExpectedResult(this, "html.xml"))
+        assertTrue(equalToCompressingWhiteSpace(this.xmlConsumer.getExpectedResult(this, "html.xml"))
                 .matches(this.xmlConsumer.getStringValue()));
         verify(this.source, this.lexicalHandler);
     }

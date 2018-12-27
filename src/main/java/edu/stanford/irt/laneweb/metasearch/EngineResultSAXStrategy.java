@@ -45,7 +45,6 @@ public class EngineResultSAXStrategy extends AbstractResultSAXStrategy<Result> {
             atts.addAttribute(NAMESPACE, STATUS, STATUS, CDATA, status.toString().toLowerCase(Locale.US));
         }
         try {
-            xmlConsumer.startPrefixMapping("", NAMESPACE);
             xmlConsumer.startElement(NAMESPACE, ENGINE, ENGINE, atts);
             handleElement(xmlConsumer, URL, url);
             handleElement(xmlConsumer, HITS, hits);
@@ -56,7 +55,6 @@ public class EngineResultSAXStrategy extends AbstractResultSAXStrategy<Result> {
                 this.resourceSAXStrategy.toSAX(child, xmlConsumer);
             }
             xmlConsumer.endElement(NAMESPACE, ENGINE, ENGINE);
-            xmlConsumer.endPrefixMapping("");
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
