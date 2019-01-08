@@ -142,7 +142,7 @@
 
             <div class="resultInfo">
                 <xsl:if test="s:description">
-                    <span class="descriptionTrigger searchContent"/>
+                    <span class="descriptionTrigger searchContent no-bookmarking"/>
                         </xsl:if>
                         <xsl:apply-templates select="s:contentId"/>
             </div>
@@ -176,41 +176,23 @@
             <xsl:apply-templates select="s:pub-text"/>
             <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
             <div class="resultInfo">
+                <xsl:choose>
+                    <xsl:when test="s:description and s:recordType = 'pubmed'">
+                        <span class="descriptionTrigger searchContent no-bookmarking"/>
+                    </xsl:when>
+                    <xsl:when test="s:description">
+                        <span class="descriptionTrigger eresource no-bookmarking"/>
+                    </xsl:when>
+                </xsl:choose>
                 <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
-                <xsl:choose>
-                    <xsl:when test="s:description and s:recordType = 'pubmed'">
-                        <span class="descriptionTrigger searchContent"/>
-                    </xsl:when>
-                    <xsl:when test="s:description">
-                        <span class="descriptionTrigger eresource"/>
-                    </xsl:when>
-                </xsl:choose>
-
                 <xsl:if test="s:recordType = 'pubmed'">
-	                <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/></a></span>
+                    <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/></a></span>
                 </xsl:if>
-
                 <xsl:if test="s:recordType = 'bib'">
                     <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
-                    <span>
-                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
-                    </span>
                 </xsl:if>
-
-                <xsl:if test="s:recordType = 'auth'">
-                    <span>
-                        <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Community Info Record</a>
-                    </span>
-                </xsl:if>
-
-                <xsl:if test="s:recordType = 'sul'">
-                    <span>
-                        <a href="https://searchworks.stanford.edu/view/{s:recordId}">SearchWorks Record</a>
-                    </span>
-                </xsl:if>
-
             </div>
             <xsl:apply-templates select="s:description"/>
             <div class="sourceInfo">
@@ -225,8 +207,14 @@
             <xsl:when test=". = 'pubmed'">
                 <xsl:copy-of select="$label"/><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed</a>
             </xsl:when>
+            <xsl:when test=". = 'sul'">
+                <xsl:copy-of select="$label"/><a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="SearchWorks Record">SearchWorks</a>
+            </xsl:when>
+            <xsl:when test=". = 'bib'">
+                <xsl:copy-of select="$label"/><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Catalog Record">Lane Catalog</a>
+            </xsl:when>
             <xsl:when test=". = 'auth'">
-                <xsl:copy-of select="$label"/><a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}">Lane Community Info</a>
+                <xsl:copy-of select="$label"/><a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Community Info Record">Lane Community Info</a>
             </xsl:when>
             <xsl:when test=". = 'class'">
                 <xsl:copy-of select="$label"/><a href="/classes-consult/laneclasses.html">Lane Classes</a>
