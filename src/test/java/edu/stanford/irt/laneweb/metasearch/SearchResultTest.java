@@ -35,9 +35,9 @@ public class SearchResultTest {
 
     @Test
     public void testCompareToSameTitleDifferentContentIds() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("99999").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
         SearchResult first = new SearchResult(result1, this.resourceResult, 900);
         SearchResult second = new SearchResult(result2, this.resourceResult, 900);
@@ -46,9 +46,9 @@ public class SearchResultTest {
 
     @Test
     public void testCompareToSameTitleDifferentDates() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").date("2012").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").date("2010").build();
         SearchResult first = new SearchResult(result1, this.resourceResult, 900);
         SearchResult second = new SearchResult(result2, this.resourceResult, 900);
@@ -67,9 +67,9 @@ public class SearchResultTest {
 
     @Test
     public void testCompareToSameTitleSameContentIds() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
         SearchResult first = new SearchResult(result1, this.resourceResult, 900);
         SearchResult second = new SearchResult(result2, this.resourceResult, 900);
@@ -88,9 +88,9 @@ public class SearchResultTest {
 
     @Test
     public void testEquals() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
@@ -104,9 +104,9 @@ public class SearchResultTest {
 
     @Test
     public void testEqualsNullContentIdsNullCompareStrings() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
@@ -184,9 +184,9 @@ public class SearchResultTest {
 
     @Test
     public void testNotEqualsDifferentContentIds() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("99999").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("999").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
@@ -195,9 +195,9 @@ public class SearchResultTest {
 
     @Test
     public void testNotEqualsDifferentContentIdsDifferentAuthors() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("cid").author("authors").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").author("different authors").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
@@ -206,9 +206,9 @@ public class SearchResultTest {
 
     @Test
     public void testNotEqualsTwoDifferentContentIds() {
-        ContentResult result1 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result1 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("cid").build();
-        ContentResult result2 = ContentResult.newContentResultBuilder().id("id").description("description").url("url")
+        ContentResult result2 = ContentResult.contentBuilder().id("id").description("description").url("url")
                 .title("same title").contentId("different cid").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);

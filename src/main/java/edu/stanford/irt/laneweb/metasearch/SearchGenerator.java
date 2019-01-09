@@ -13,7 +13,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator<Result> {
 
     private static final long DEFAULT_TIMEOUT = 60000;
 
-    private static final Result EMPTY_RESULT = Result.newResultBuilder().id("").query(new SimpleQuery("")).build();
+    private static final Result EMPTY_RESULT = Result.builder().id("").query(new SimpleQuery("")).build();
 
     private String timeout;
 

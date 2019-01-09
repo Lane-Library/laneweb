@@ -33,8 +33,8 @@ public class ClinicalSearchResultsSAXStrategyTest {
     public void setUp() {
         this.strategy = new ClinicalSearchResultsSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
-        this.contentResult = ContentResult.newContentResultBuilder().id("id").title("title").build();
-        this.result = Result.newResultBuilder().id("id").hits("10").url("url")
+        this.contentResult = ContentResult.contentBuilder().id("id").title("title").build();
+        this.result = Result.builder().id("id").hits("10").url("url")
                 .children(Collections.singletonList(this.contentResult)).build();
         List<Result> resourceResults = Collections.singletonList(this.result);
         this.searchResult = new SearchResult(this.contentResult, this.result, 0);
