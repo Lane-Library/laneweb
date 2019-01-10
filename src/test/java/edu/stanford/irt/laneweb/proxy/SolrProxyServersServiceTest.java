@@ -44,8 +44,7 @@ public class SolrProxyServersServiceTest {
     public final void testWrite() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         FacetPage<Eresource> fps = mock(FacetPage.class);
-        expect(this.solrService.facetByField("*", null, "proxyHosts", 0, Integer.MAX_VALUE, 1, FacetSort.INDEX))
-                .andReturn(fps);
+        expect(this.solrService.facetByField("*", null, "proxyHosts", 0, 100000, 1, FacetSort.INDEX)).andReturn(fps);
         Collection<Page<FacetFieldEntry>> facetResultPages = mock(Collection.class);
         Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
         Iterator<FacetFieldEntry> it2 = mock(Iterator.class);

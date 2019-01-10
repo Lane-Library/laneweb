@@ -23,6 +23,8 @@ public class SolrProxyServersService implements ProxyServersService {
 
     private static final byte[] HJ = { 'H', 'J', ' ' };
 
+    private static final int MAX_HOSTS = 100_000;
+
     private static final byte[] T = { 'T', ' ' };
 
     private static final byte[] U_HTTPS = { 'U', ' ', 'h', 't', 't', 'p', 's', ':', '/', '/' };
@@ -35,7 +37,7 @@ public class SolrProxyServersService implements ProxyServersService {
 
     @Override
     public Set<String> getHosts() {
-        FacetPage<Eresource> fps = this.solrService.facetByField("*", null, "proxyHosts", 0, Integer.MAX_VALUE, 1,
+        FacetPage<Eresource> fps = this.solrService.facetByField("*", null, "proxyHosts", 0, MAX_HOSTS, 1,
                 FacetSort.INDEX);
         Set<String> hosts = extractHosts(fps.getFacetResultPages());
         hosts.add("bodoni.stanford.edu");
