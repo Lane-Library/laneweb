@@ -43,9 +43,10 @@ public class ProxyHostManager {
         executor.scheduleAtFixedRate(() -> {
             try {
                 this.proxyHosts = service.getHosts();
-                log.info("successfully retrieved proxy hosts from the voyager catalog");
+                log.info("successfully retrieved proxy hosts from {}", service.getClass().getName());
             } catch (LanewebException e) {
-                log.error("failed to retrieve proxy host hosts from the voyager catalog: {}", e.getMessage());
+                log.error("failed to retrieve proxy host hosts from {}: {}", service.getClass().getName(),
+                        e.getMessage());
             }
         }, 0L, DEFAULT_DELAY, TimeUnit.MINUTES);
     }

@@ -38,6 +38,6 @@ public class ProxyConfigurationTest {
 
     @Test
     public void testRestProxyServersService() {
-        assertNotNull(this.configuration.proxyServersService(null, null));
+        assertNotNull(this.configuration.proxyServersService(null));
     }
 }
