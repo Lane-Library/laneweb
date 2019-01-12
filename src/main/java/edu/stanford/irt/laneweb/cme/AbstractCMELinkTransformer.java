@@ -17,11 +17,7 @@ public abstract class AbstractCMELinkTransformer extends AbstractXMLPipe impleme
 
     private String emrid;
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.emrid = ModelUtil.getString(model, Model.EMRID);
         this.basePath = ModelUtil.getString(model, Model.BASE_PATH);

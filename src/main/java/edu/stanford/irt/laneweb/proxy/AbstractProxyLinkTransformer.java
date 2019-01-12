@@ -11,11 +11,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractXMLPipe imple
 
     private String baseProxyURL;
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.baseProxyURL = ModelUtil.getString(model, Model.BASE_PROXY_URL);
     }

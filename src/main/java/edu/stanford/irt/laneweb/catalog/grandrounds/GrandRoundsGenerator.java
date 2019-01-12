@@ -32,11 +32,7 @@ public class GrandRoundsGenerator extends AbstractGenerator {
         this.presentationSAXStrategy = presentationSAXStrategy;
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         this.department = parameters.get(DEPT);
         this.year = parameters.get(YR);

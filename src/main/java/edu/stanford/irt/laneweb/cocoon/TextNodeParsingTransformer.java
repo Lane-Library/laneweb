@@ -108,11 +108,7 @@ public class TextNodeParsingTransformer extends AbstractXMLPipe implements Trans
         return AlwaysValid.SHARED_INSTANCE;
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         if (!parameters.containsKey("elementNames")) {
             throw new LanewebException("elementNames parameter is required");

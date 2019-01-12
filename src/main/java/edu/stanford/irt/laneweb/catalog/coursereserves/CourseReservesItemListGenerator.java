@@ -23,11 +23,7 @@ public class CourseReservesItemListGenerator extends AbstractGenerator {
         this.saxStrategy = saxStrategy;
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         if (model.containsKey(Model.ID)) {
             this.id = Integer.parseInt(ModelUtil.getString(model, Model.ID));

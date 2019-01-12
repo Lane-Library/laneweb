@@ -29,11 +29,7 @@ public class SolrAdminImageSearchGenerator extends SolrImageSearchGenerator {
         super(service, saxStrategy);
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.limit = ModelUtil.getString(model, Model.LIMIT);

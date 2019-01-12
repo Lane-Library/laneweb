@@ -18,21 +18,13 @@ public class EngineSearchGenerator extends SearchGenerator {
         super(metaSearchService, saxStrategy);
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
         this.engines = ModelUtil.getObject(model, Model.ENGINES, Collection.class);
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
         if (this.engines == null) {

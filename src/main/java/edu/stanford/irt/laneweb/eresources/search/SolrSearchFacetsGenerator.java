@@ -88,11 +88,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
         this.comparator = comparator;
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.facet = ModelUtil.getString(model, Model.FACET, null);
         this.facets = ModelUtil.getString(model, Model.FACETS, EMPTY);

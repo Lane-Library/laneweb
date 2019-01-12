@@ -69,11 +69,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
         this.expires = expires;
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         String p = ModelUtil.getString(model, Model.PAGE, "1");
         if ("all".equals(p)) {
@@ -88,11 +84,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
         this.queryString = ModelUtil.getString(model, Model.QUERY_STRING, "");
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.EXPIRES)) {
             this.expires = Long.parseLong(parameters.get(Model.EXPIRES));

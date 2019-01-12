@@ -23,11 +23,7 @@ public class BookmarkGenerator extends AbstractMarshallingGenerator {
         marshal(this.bookmarks, xmlConsumer);
     }
 
-    /**
-     * @deprecated this will be replaced with constructor injection
-     */
     @Override
-    @Deprecated
     public void setModel(final Map<String, Object> model) {
         this.bookmarks = ModelUtil.getObject(model, Model.BOOKMARKS, List.class);
     }
