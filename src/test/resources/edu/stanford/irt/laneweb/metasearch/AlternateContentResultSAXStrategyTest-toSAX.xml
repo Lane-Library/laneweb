@@ -4,10 +4,6 @@
    <title>title</title>
    <description>description</description>
    <author>author</author>
-   <pub-date>publicationDate</pub-date>
-   <pub-title>publicationTitle</pub-title>
-   <pub-volume>publicationVolume</pub-volume>
-   <pub-issue>publicationIssue</pub-issue>
    <pub-text>publicationText</pub-text>
    <url>url</url>
 </content>

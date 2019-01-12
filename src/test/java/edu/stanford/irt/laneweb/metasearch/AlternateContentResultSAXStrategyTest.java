@@ -41,10 +41,6 @@ public class AlternateContentResultSAXStrategyTest {
         expect(this.contentResult.getTitle()).andReturn("title");
         expect(this.contentResult.getDescription()).andReturn("description");
         expect(this.contentResult.getAuthor()).andReturn("author");
-        expect(this.contentResult.getPublicationDate()).andReturn("publicationDate");
-        expect(this.contentResult.getPublicationTitle()).andReturn("publicationTitle");
-        expect(this.contentResult.getPublicationVolume()).andReturn("publicationVolume");
-        expect(this.contentResult.getPublicationIssue()).andReturn("publicationIssue");
         expect(this.contentResult.getPublicationText()).andReturn("publicationText");
         expect(this.contentResult.getURL()).andReturn("url");
         replay(this.contentResult);

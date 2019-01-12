@@ -15,23 +15,27 @@ public class SearchResult implements Comparable<SearchResult> {
 
     private static final Pattern WHITESPACE = Pattern.compile("\\W");
 
-    private ContentResult contentResult;
+    private final ContentResult contentResult;
 
-    private int hashCode;
+    private final Result resourceResult;
 
-    private Result resourceResult;
+    private final int score;
 
-    private int score;
+    private final String sortTitle;
 
-    private String sortTitle;
-
-    private String title;
+    private final String title;
 
     public SearchResult(final ContentResult contentResult, final Result resourceResult, final int score) {
         this.score = score < 0 ? 0 : score;
         this.title = contentResult.getTitle();
         this.contentResult = contentResult;
         this.resourceResult = resourceResult;
+        String temp = "";
+        if (this.title != null) {
+            temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
+            temp = WHITESPACE.matcher(temp).replaceAll("").toLowerCase(Locale.US);
+        }
+        this.sortTitle = temp;
     }
 
     @Override
@@ -71,14 +75,6 @@ public class SearchResult implements Comparable<SearchResult> {
     }
 
     public String getSortTitle() {
-        if (this.sortTitle == null) {
-            if (this.title == null) {
-                this.sortTitle = "";
-            } else {
-                String temp = NON_FILING_PATTERN.matcher(this.title).replaceFirst("");
-                this.sortTitle = WHITESPACE.matcher(temp).replaceAll("").toLowerCase(Locale.US);
-            }
-        }
         return this.sortTitle;
     }
 
@@ -89,10 +85,13 @@ public class SearchResult implements Comparable<SearchResult> {
 
     @Override
     public int hashCode() {
-        if (this.hashCode == 0) {
-            this.hashCode = getSortTitle().hashCode();
-        }
-        return this.hashCode;
+        return this.sortTitle.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "SearchResult [id=" + this.contentResult.getId() + ", score=" + this.score + ", title=" + this.title
+                + "]";
     }
 
     private int compareToIgnoreScore(final SearchResult other) {
