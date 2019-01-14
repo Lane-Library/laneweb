@@ -14,7 +14,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ClinicalSearchResultsGenerator extends AbstractMetasearchGenerator<ClinicalSearchResults> {
 
-    private static final Result EMPTY_RESULT = Result.builder().id("").query(new SimpleQuery("")).build();
+    private static final Result EMPTY_RESULT = Result.newResultBuilder().id("").query(new SimpleQuery("")).build();
 
     private static final long MAX_WAIT_TIME = 14_000L;
 

@@ -13,7 +13,7 @@ import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.ContentResult;
 import edu.stanford.irt.search.impl.Result;
-import edu.stanford.irt.search.impl.Result.Builder;
+import edu.stanford.irt.search.impl.Result.ResultBuilder;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResultDeserializer extends JsonDeserializer<Result> {
@@ -27,7 +27,7 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
     }
 
     private static Result getContentResultFromNode(final JsonNode node) {
-        return ContentResult.contentBuilder()
+        return ContentResult.newContentResultBuilder()
                 .author(node.get("author").asText(null))
                 .contentId(node.get("contentId").asText(null))
                 .date(node.get("publicationDate").asText(null))
@@ -42,7 +42,7 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
     }
 
     private static Result getPlainResultFromNode(final JsonNode node, int depth) {
-        Builder builder = Result.builder()
+        ResultBuilder builder = Result.newResultBuilder()
                 .children(getChildren(node.get("children"), depth))
                 .description(node.get("description").textValue())
                 .id(node.get("id").textValue())
