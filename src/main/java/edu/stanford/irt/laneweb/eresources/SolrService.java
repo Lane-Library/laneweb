@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,26 +31,20 @@ import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 public class SolrService {
 
-    public static final String COLLECTION = "laneSearch";
-
     public static final String FACETS_SEPARATOR = "::";
 
-    public static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
-
-    public static final Pattern FACETS_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR);
-
     private static final String ALL_QUERY = "*:*";
-
-    private static final ZoneId AMERICA_LA = ZoneId.of("America/Los_Angeles");
 
     private static final String AND = " AND ";
 
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
             new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
 
+    private static final String COLLECTION = "laneSearch";
+
     private static final SimpleFilterQuery CORE_FQ = new SimpleFilterQuery(new SimpleStringCriteria("isCore:1"));
 
-    private static final int CURRENT_YEAR = ZonedDateTime.now(AMERICA_LA).getYear();
+    private static final int CURRENT_YEAR = LocalDate.now().getYear();
 
     private static final String DATE_QUERY_PREFIX = "date:[";
 
@@ -62,6 +54,10 @@ public class SolrService {
 
     private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
             "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year", "date");
+
+    private static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
+
+    private static final Pattern FACETS_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR);
 
     private static final String NULL_TYPE = "null type";
 
@@ -112,7 +108,7 @@ public class SolrService {
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
         String facetFilters = facetStringToFilters(filters);
         String cleanQuery = this.parser.parse(query);
-        String monthDay = LocalDate.now(AMERICA_LA).format(this.formatter);
+        String monthDay = LocalDate.now().format(this.formatter);
         FacetOptions facetOptions = new FacetOptions();
         facetOptions.addFacetOnFlieldnames(FACET_FIELDS);
         facetOptions.setFacetMinCount(1);
