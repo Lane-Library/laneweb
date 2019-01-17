@@ -52,7 +52,6 @@ public class MetasearchConfiguration {
         engines.add("aafp_patients");
         engines.add("acpjc");
         engines.add("bmj_clinical_evidence");
-        engines.add("dynamed");
         engines.add("medlineplus");
         engines.add("pubmed");
         engines.add("pubmed_clinicaltrial");
@@ -139,7 +138,6 @@ public class MetasearchConfiguration {
         engines.add("aafp_patients");
         engines.add("aappatient");
         engines.add("aapwebsite");
-        engines.add("dynamed_allchild");
         engines.add("pubmed_allchild");
         engines.add("pubmed_clinicaltrial_allchild");
         engines.add("pubmed_cost_allchild");
