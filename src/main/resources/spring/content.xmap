@@ -65,10 +65,24 @@
                 <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="regex-parameter" pattern="^all-test$">
+            <map:match type="regex-parameter" pattern="^all-testNoStx$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
                 <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="regex-parameter" pattern="^all-testOnlyErc$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="regex-parameter" pattern="^all-testOnlySl$">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="joost" src="classpath:/xsl/solr-limits.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="regex-parameter" pattern="^(clinical-all|peds-all)$">
