@@ -4,8 +4,10 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 exclude-result-prefixes="h"
                 version="2.0">
-<!-- process #solrLimits if facets parameter present to prevent interface 
-    bounce when #solrLimits populated via JS -->
+<!-- 
+    process #solrLimits if facets parameter present to prevent interface bounce when #solrLimits populated via JS
+    converted from solr-limits.stx because of intermittent performance problems in GCP
+-->
 
     <xsl:param name="facets"/>
 

@@ -6,6 +6,7 @@
                 version="2.0">
 <!-- 
     This counts the number of li children of @class='lwSearchResults' and if 0 processes #noHitsText
+    converted from eresources-count.stx because of intermittent performance problems in GCP
 -->
 
     <xsl:template match="child::node()">
@@ -18,7 +19,7 @@
         <xsl:copy-of select="."/>
     </xsl:template>
 
-    <xsl:template match="h:div[@id='noHitsText']">
+    <xsl:template match="h:*[@id='noHitsText']">
         <xsl:if test="count(//h:ul[@class='lwSearchResults']/h:li) = 0">
             <xsl:copy-of select="."/>
         </xsl:if>
