@@ -17,12 +17,13 @@
 
 	<xsl:template match="rss">
 		<xsl:apply-templates
-			select="channel/item[category[ . = 'New Resource']][position() &lt; 2]" />
+			select="channel/item[category[ . = 'New Resource'] and  not(category[ . = 'Highlighted Resource']) and contains(./content:encoded, '&lt;article&gt;')] [position() &lt; 3]" />
 	</xsl:template>
 
 
 	<xsl:template match="item">
-		<div>
+		<div class="pure-u-1-2">
+		<div>			
 			<div class="newsfeed-item-title">
                 <a href="{link}" title="feed link---{../../channel/title}">
                     <xsl:value-of select="title" />
@@ -37,6 +38,16 @@
 				<xsl:text>Read More </xsl:text>
 				<i class="fa fa-arrow-right"></i> 
 			</a>
+			       <hr/>
+             <div class="newsfeed-item-time">
+                <xsl:variable name="date" select="tokenize(pubDate, '\s+')"/>
+                <xsl:value-of select="$date[3]"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="$date[2]"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="$date[4]"/>
+            </div>
+		</div>
 		</div>
 	</xsl:template>
 </xsl:stylesheet>
