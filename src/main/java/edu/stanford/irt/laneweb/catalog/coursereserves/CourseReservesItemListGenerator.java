@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.catalog.coursereserves;
 
 import java.util.Map;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -10,7 +9,7 @@ import edu.stanford.irt.coursereserves.CourseReservesItemList;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class CourseReservesItemListGenerator extends AbstractGenerator implements ModelAware {
+public class CourseReservesItemListGenerator extends AbstractGenerator {
 
     private int id;
 

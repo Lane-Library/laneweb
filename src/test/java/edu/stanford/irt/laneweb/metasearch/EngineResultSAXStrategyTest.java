@@ -34,7 +34,6 @@ public class EngineResultSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.resourceSAXStrategy = mock(SAXStrategy.class);

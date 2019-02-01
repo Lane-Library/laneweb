@@ -34,37 +34,23 @@
             <xsl:apply-templates select="s:pub-text"/>
             <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
             <div class="resultInfo">
+                <xsl:if test="s:description">
+                    <span class="descriptionTrigger eresource no-bookmarking"/>
+                </xsl:if>
                 <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
                     <span>Status: Not Checked Out</span>
                 </xsl:if>
-                <xsl:if test="s:description">
-                    <span class="descriptionTrigger eresource"/>
-                </xsl:if>
-                
-                
                 <xsl:if test="s:recordType = 'bib'">
                     <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
-                    <span>
-                        <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
-                    </span>
-                </xsl:if>
-                
-                <xsl:if test="s:recordType = 'auth'">
-                    <span>
-                        <a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Community Info Record</a>
-                    </span>
-                </xsl:if>
-                
-                <xsl:if test="s:recordType = 'sul'">
-                    <span>
-                        <a href="https://searchworks.stanford.edu/view/{s:recordId}">SearchWorks Record</a>
-                    </span>
                 </xsl:if>
             </div>
             <xsl:apply-templates select="s:description"/>
+            <div class="sourceInfo">
+                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+            </div>
         </li>
     </xsl:template>
-    
+
     <xsl:template match="s:description">
         <div class="description">
             <xsl:apply-templates/>

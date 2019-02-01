@@ -7,6 +7,43 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-01-18" version="3.5.29" description="3.5.29 bug fix release">
+            <action date="2018-01-17" dev="ceyates" issue="148443" type="remove">
+                remove DynamedPlus from clinical searches
+            </action>
+            <action date="2018-01-16" dev="ryanmax" issue="148422" type="fix">
+                Year facet sometimes shows as Solr range query instead of "last 12 months" etc
+            </action>
+            <action date="2018-01-10" dev="ryanmax" issue="148267" type="update">
+                extract proxy hosts from Solr
+            </action>
+            <action date="2018-01-08" dev="ryanmax" issue="148196" type="update">
+                prep for SearchWorks integration: source label/location
+            </action>
+            <action date="2018-01-08" dev="ryanmax" issue="148195" type="update">
+                prep for SearchWorks integration: label/mouseover
+            </action>
+        </release>
+        <release date="2018-12-10" version="3.5.28" description="3.5.28 bug fix release">
+            <action date="2018-12-04" dev="ceyates" issue="147245" type="update">
+                switch to Lane search for other portals
+            </action>
+        </release>
+        <release date="2018-12-03" version="3.5.27" description="3.5.27 bug fix release">
+            <action date="2018-12-03" dev="ceyates" issue="147151" type="update">
+                switch to Lane search
+            </action>
+        </release>
+        <release date="2018-11-26" version="3.5.26" description="3.5.26 bug fix release">
+            <action date="2018-11-20" dev="ceyates" issue="146961" type="update">
+                temporarily increase calendar display to show six weeks
+            </action>
+        </release>
+        <release date="2018-11-12" version="3.5.25" description="3.5.25 bug fix release">
+            <action date="2018-11-12" dev="ryanmax" issue="146408" type="add">
+                Redivis search results integration
+            </action>
+        </release>
         <release date="2018-09-24" version="3.5.24" description="3.5.24 bug fix release">
             <action date="2018-09-20" dev="ryanmax" issue="145501" type="update">
                 provide mechanism to return only one Lane Catalog result

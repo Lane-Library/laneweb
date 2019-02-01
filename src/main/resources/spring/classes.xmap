@@ -13,7 +13,7 @@
     <map:pipeline type="caching">
         <!-- Classes Menu  to display only -->
         <map:match pattern="menu/archives.html" type="wildcard">
-            <map:aggregate type="default" element="doc">
+            <map:aggregate type="caching" element="doc">
                 <map:generate type="file" src="cocoon://classes/archives.xml"/>
                 <map:generate type="html" src="{content-base}/includes/leftmenu-archives-category.html"/>
             </map:aggregate>
@@ -21,7 +21,7 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="menu/categories.html" type="wildcard">
-            <map:aggregate type="default" element="doc">
+            <map:aggregate type="caching" element="doc">
                 <map:generate type="file" src="cocoon://classes/open-classes.xml?id=null"/>
                 <map:generate type="html" src="{content-base}/includes/leftmenu-classes-category.html"/>
             </map:aggregate>

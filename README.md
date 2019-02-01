@@ -1,4 +1,5 @@
 [![Build Status](https://ci.med.stanford.edu/api/badges/lane/laneweb/status.svg)](https://ci.med.stanford.edu/lane/laneweb)
+[![Code Qulity](https://sonarqube.med.stanford.edu/api/project_badges/measure?project=lane%3Alaneweb&metric=alert_status)](https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb)
 
 # Laneweb WAR in Docker
 
@@ -63,4 +64,3 @@ _NOTE_: Do not add newline at the end of the token.
 ```
 $ make drone-setup
 ```
-

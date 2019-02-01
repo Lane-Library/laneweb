@@ -33,7 +33,6 @@ public class TextNodeParsingTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.saxParser = mock(SAXParser.class);

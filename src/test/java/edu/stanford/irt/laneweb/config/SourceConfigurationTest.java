@@ -24,7 +24,7 @@ public class SourceConfigurationTest {
     @Before
     public void setUp() {
         this.beanFactory = mock(BeanFactory.class);
-        this.configuration = new SourceConfiguration(this.beanFactory, null, null, null);
+        this.configuration = new SourceConfiguration(this.beanFactory, null, null, null, null);
     }
 
     @Test

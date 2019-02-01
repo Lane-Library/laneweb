@@ -10,7 +10,6 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.oxm.Marshaller;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.cocoon.AbstractMarshallingGenerator;
 import edu.stanford.irt.laneweb.model.Model;
@@ -18,7 +17,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
-public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator implements ModelAware {
+public class SolrImageSearchTabGenerator extends AbstractMarshallingGenerator {
 
     private NumberFormat nf = NumberFormat.getInstance();
 

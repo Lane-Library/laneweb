@@ -10,8 +10,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.cache.Validity;
-import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -21,8 +19,7 @@ import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class BibIDToEresourceTransformer extends AbstractXMLPipe
-        implements Transformer, CacheablePipelineComponent, ModelAware {
+public class BibIDToEresourceTransformer extends AbstractXMLPipe implements Transformer {
 
     private static final Logger log = LoggerFactory.getLogger(BibIDToEresourceTransformer.class);
 

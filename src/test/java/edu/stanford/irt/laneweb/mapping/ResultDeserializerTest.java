@@ -111,11 +111,7 @@ public class ResultDeserializerTest {
                 assertNull(content.getContentId());
                 assertEquals(13, content.getDescription().length());
                 assertEquals("aafp_patients_content_25", content.getId());
-                assertEquals("", content.getPublicationDate());
-                assertNull(content.getPublicationIssue());
-                assertNull(content.getPublicationTitle());
                 assertEquals("", content.getPublicationText());
-                assertNull(content.getPublicationVolume());
             }
         }
     }
@@ -229,11 +225,7 @@ public class ResultDeserializerTest {
                 assertEquals("PMID:27599689", content.getContentId());
                 assertEquals(1663, content.getDescription().length());
                 assertEquals("pubmed_content_1", content.getId());
-                assertEquals("2016 Sep 3", content.getPublicationDate());
-                assertNull(content.getPublicationIssue());
-                assertEquals("Clin Microbiol Infect", content.getPublicationTitle());
                 assertEquals("Clin Microbiol Infect. 2016 Sep 3", content.getPublicationText());
-                assertNull(content.getPublicationVolume());
             }
         }
     }

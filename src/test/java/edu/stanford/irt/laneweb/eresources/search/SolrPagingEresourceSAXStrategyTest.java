@@ -4,7 +4,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 
@@ -30,7 +31,6 @@ public class SolrPagingEresourceSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.eresourceStrategy = mock(SAXStrategy.class);
@@ -54,8 +54,9 @@ public class SolrPagingEresourceSAXStrategyTest {
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.result, this.xmlConsumer);
         this.xmlConsumer.endDocument();
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "SolrPagingEresourceSAXStrategyTest-testToSAX.xml"),
-                this.xmlConsumer.getStringValue());
+        assertTrue(equalToCompressingWhiteSpace(
+                this.xmlConsumer.getExpectedResult(this, "SolrPagingEresourceSAXStrategyTest-testToSAX.xml"))
+                        .matches(this.xmlConsumer.getStringValue()));
         verify(this.page, this.result);
     }
 }

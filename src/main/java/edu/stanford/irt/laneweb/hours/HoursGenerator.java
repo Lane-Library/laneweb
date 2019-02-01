@@ -11,8 +11,6 @@ import java.util.Map;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
-import edu.stanford.irt.cocoon.pipeline.CacheablePipelineComponent;
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -21,13 +19,13 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.libraryhours.Hours;
 import edu.stanford.irt.libraryhours.LibraryHoursService;
 
-public class HoursGenerator extends AbstractGenerator implements ModelAware, CacheablePipelineComponent {
+public class HoursGenerator extends AbstractGenerator {
 
     private static final int DAYS_PER_WEEK = 7;
 
     private static final long ONE_HOUR = Duration.ofHours(1).toMillis();
 
-    private static final int WEEKS_TO_DISPLAY = 4;
+    private static final int WEEKS_TO_DISPLAY = 6;
 
     private SAXStrategy<List<List<Hours>>> saxStrategy;
 

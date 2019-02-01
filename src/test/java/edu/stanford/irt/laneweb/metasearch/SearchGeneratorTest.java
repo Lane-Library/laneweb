@@ -28,7 +28,6 @@ public class SearchGeneratorTest {
 
     private SAXStrategy<Result> saxStrategy;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.metaSearchService = mock(MetaSearchService.class);

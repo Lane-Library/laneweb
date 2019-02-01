@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
@@ -131,8 +132,8 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public ComponentFactory componentFactory() {
-        return new SpringComponentFactory();
+    public ComponentFactory componentFactory(BeanFactory beanFactory) {
+        return new SpringComponentFactory(beanFactory);
     }
 
     @Bean

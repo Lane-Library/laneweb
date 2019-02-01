@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
@@ -15,7 +14,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class EresourcesCountGenerator extends AbstractGenerator implements ModelAware {
+public class EresourcesCountGenerator extends AbstractGenerator {
 
     private static final String FACETS_NS = "http://lane.stanford.edu/hitcounts/1.0";
 

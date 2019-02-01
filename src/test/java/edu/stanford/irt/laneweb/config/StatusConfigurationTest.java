@@ -28,6 +28,11 @@ public class StatusConfigurationTest {
     }
 
     @Test
+    public void testJvmStatusProvider() {
+        assertNotNull(this.configuration.jvmStatusProvider());
+    }
+
+    @Test
     public void testLanewebStatusService() {
         assertNotNull(this.configuration.lanewebStatusService(Collections.emptyList()));
     }

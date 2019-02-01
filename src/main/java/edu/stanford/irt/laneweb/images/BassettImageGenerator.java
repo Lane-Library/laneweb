@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -18,7 +17,7 @@ import edu.stanford.irt.solr.service.SolrImageService;
 /**
  * @author alainb
  */
-public class BassettImageGenerator extends AbstractGenerator implements ModelAware {
+public class BassettImageGenerator extends AbstractGenerator {
 
     private static final int IMAGES_BY_PAGE = 30;
 

@@ -2,14 +2,13 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public abstract class AbstractSearchGenerator<T> extends AbstractGenerator implements ModelAware {
+public abstract class AbstractSearchGenerator<T> extends AbstractGenerator {
 
     private String query;
 

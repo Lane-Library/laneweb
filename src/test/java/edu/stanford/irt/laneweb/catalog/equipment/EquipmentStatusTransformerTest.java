@@ -4,7 +4,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -49,8 +50,9 @@ public class EquipmentStatusTransformerTest {
         expect(this.service.getStatus("304254,296290")).andReturn(status);
         replay(this.service);
         this.xmlReader.parse(new InputSource(getClass().getResourceAsStream("equipment.html")));
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "EquipmentStatusTransformerTest-test.xml"),
-                this.xmlConsumer.getStringValue());
+        assertTrue(equalToCompressingWhiteSpace(
+                this.xmlConsumer.getExpectedResult(this, "EquipmentStatusTransformerTest-test.xml"))
+                        .matches(this.xmlConsumer.getStringValue()));
         verify(this.service);
     }
 }

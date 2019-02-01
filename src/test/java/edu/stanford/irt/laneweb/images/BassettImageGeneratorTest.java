@@ -27,7 +27,7 @@ public class BassettImageGeneratorTest {
 
     private BassettImageGenerator generator;
 
-    private Pageable page = new PageRequest(0, 30);
+    private Pageable page = PageRequest.of(0, 30);
 
     private Page<BassettImage> resultPage;
 
@@ -35,7 +35,6 @@ public class BassettImageGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.service = mock(SolrImageService.class);
@@ -80,7 +79,7 @@ public class BassettImageGeneratorTest {
 
     @Test
     public void testDoGenerateRegionByPage() {
-        Pageable testPage = new PageRequest(3, 30);
+        Pageable testPage = PageRequest.of(3, 30);
         expect(this.service.findBassettByQueryFilterByRegion("query", "region", testPage)).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.service, this.xmlConsumer, this.saxStrategy, this.resultPage);

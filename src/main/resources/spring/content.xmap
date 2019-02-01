@@ -7,13 +7,13 @@
             <map:match pattern="biomed-resources/(ej|eb|cc|db|exam|video|images|statistics|software).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="biomed-resources/((.+)?(browse|core|mobile|pda|software-)(.+)?).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="biomed-resources/bassett/raw/**.html" type="wildcard">
@@ -61,8 +61,8 @@
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="classpath:/xsl/solr-limits.stx"/>
-                <map:transform type="joost" src="classpath:/xsl/eresources-count.stx"/>
+                <map:transform type="saxon" src="classpath:/xsl/solr-limits.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="regex-parameter" pattern="^(clinical-all|peds-all)$">

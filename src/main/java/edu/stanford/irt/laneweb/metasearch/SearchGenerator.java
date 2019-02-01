@@ -3,14 +3,13 @@ package edu.stanford.irt.laneweb.metasearch;
 import java.util.Collection;
 import java.util.Map;
 
-import edu.stanford.irt.cocoon.pipeline.ParametersAware;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-public class SearchGenerator extends AbstractMetasearchGenerator<Result> implements ParametersAware {
+public class SearchGenerator extends AbstractMetasearchGenerator<Result> {
 
     private static final long DEFAULT_TIMEOUT = 60000;
 

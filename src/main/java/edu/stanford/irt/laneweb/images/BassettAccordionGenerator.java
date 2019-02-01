@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.data.solr.core.query.result.FacetPage;
 
-import edu.stanford.irt.cocoon.pipeline.ModelAware;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -16,7 +15,7 @@ import edu.stanford.irt.solr.service.SolrImageService;
 /**
  * @author alainb
  */
-public class BassettAccordionGenerator extends AbstractGenerator implements ModelAware {
+public class BassettAccordionGenerator extends AbstractGenerator {
 
     protected SolrImageService service;
 

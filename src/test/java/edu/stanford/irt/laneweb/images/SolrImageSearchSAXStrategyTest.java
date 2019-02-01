@@ -40,7 +40,6 @@ public class SolrImageSearchSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() {
         this.idMapping = Collections.singletonMap("id", "mappedId");

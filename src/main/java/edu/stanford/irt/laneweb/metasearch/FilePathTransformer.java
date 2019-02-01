@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.AggregatedValidity;
+import edu.stanford.irt.cocoon.cache.validity.NeverValid;
 import edu.stanford.irt.cocoon.pipeline.transform.AbstractCacheableTransformer;
 import edu.stanford.irt.cocoon.source.Source;
 import edu.stanford.irt.cocoon.source.SourceResolver;
@@ -28,11 +29,13 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
 
     private AggregatedValidity validity;
 
+    private AggregatedValidity.Builder validityBuilder;
+
     public FilePathTransformer(final SourceResolver sourceResolver, final SAXParser saxParser) {
         super(TYPE);
         this.sourceResolver = sourceResolver;
         this.saxParser = saxParser;
-        this.validity = new AggregatedValidity();
+        this.validityBuilder = new AggregatedValidity.Builder();
     }
 
     @Override
@@ -44,6 +47,9 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
 
     @Override
     public Validity getValidity() {
+        if (this.validity == null) {
+            this.validity = this.validityBuilder.build();
+        }
         return this.validity;
     }
 
@@ -64,9 +70,9 @@ public class FilePathTransformer extends AbstractCacheableTransformer {
                 throw new SAXException(e);
             }
             if (source instanceof Cacheable) {
-                this.validity.add(((Cacheable) source).getValidity());
+                this.validityBuilder.add(((Cacheable) source).getValidity());
             } else {
-                this.validity.add(null);
+                this.validityBuilder.add(NeverValid.SHARED_INSTANCE);
             }
             this.saxParser.parse(source, this.pipe);
         } else {

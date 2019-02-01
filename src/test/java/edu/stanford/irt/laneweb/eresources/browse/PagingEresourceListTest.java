@@ -26,7 +26,6 @@ public class PagingEresourceListTest {
 
     private PagingData pagingData;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.eresources = mock(Collection.class);
