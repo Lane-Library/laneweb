@@ -7,9 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="2019-02-4" version="3.5.29" description="3.5.30 new index page release">
-            <action date="2018-02-01" dev="alainb" issue="148746" type="feature">
+    	<release date="2019-02-04" version="3.5.30" description="3.5.30 bug fix release">
+            <action date="2019-02-01" dev="alainb" issue="148746" type="add">
                 Display the highlighted resource from blog
+            </action>
+            <action date="2019-02-02" dev="ceyates" issue="148758" type="remove">
+                remove drupal related code
             </action>
         </release>
         <release date="2019-01-18" version="3.5.29" description="3.5.29 bug fix release">
