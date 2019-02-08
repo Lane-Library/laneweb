@@ -141,7 +141,7 @@
                             </xi:include></div>
                         </li>
                         <li class="dropdown nav-menu" data-path="/portals/">
-                            <span>Specialty Portals</span>
+                            <span>Subject Guides</span>
                             <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-portals.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
@@ -164,15 +164,12 @@
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
                         </li>
+                        <li class="nav-menu">
+                           <a href="/med-history/index.html"><span>Medical History Center</span></a>
+                        </li>
                         <li class="dropdown nav-menu" data-path="/help/">
                             <span>FAQs</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-faqs.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu" data-path="/contacts/">
-                            <span>Contact</span>
-                            <div class="dropdown-content nav-menu-content" style="right:0;left:auto"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-contacts.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include></div>
                         </li>
@@ -213,7 +210,7 @@
                         <ul>
                             <li><a href="/using-lib/eligibility.html">Who Can Use Lane</a></li>
                             <li><a href="/using-lib/lane-login.html">Login Help</a></li>
-                            <li><a href="https://docxpress.stanford.edu/">DocXpress <i class="fa fa-external-link"></i></a></li>
+                            <li><a href="https://docxpress.stanford.edu/">Document Delivery <i class="fa fa-external-link"></i></a></li>
                             <li><a href="/using-lib/study-computing-spaces.html">Study &amp; Computing Spaces</a></li>
                             <li><a href="/using-lib/borrow.html">Borrow, Renew &amp; Return</a></li>
                         </ul>
