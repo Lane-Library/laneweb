@@ -165,7 +165,7 @@
                             </xi:include></div>
                         </li>
                         <li class="nav-menu">
-                           <a href="/med-history/index.html"><span>Medical History Center</span></a>
+                           <span><a href="/med-history/index.html">Medical History Center</a></span>
                         </li>
                         <li class="dropdown nav-menu" data-path="/help/">
                             <span>FAQs</span>
