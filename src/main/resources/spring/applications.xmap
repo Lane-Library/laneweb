@@ -129,17 +129,6 @@
     </map:pipeline>
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
-    	<!-- DELETE  at the next release and file laneblog-last2newresources-rss2html.xsl   -->
-         <map:match pattern="laneblog-last2newresources-rss.xml" type="wildcard">
-            <map:generate type="file" src="cocoon://apps/laneblog-feed.xml"/>
-            <map:transform type="saxon" src="classpath:/xsl/laneblog-last2newresources-rss2html.xsl"/>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementNames" value="content"/>
-            </map:transform>
-            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-		<!-- END of DELETE -->
         <map:match pattern="laneblog-highlightedresources-rss.xml" type="wildcard">
             <map:generate type="file" src="cocoon://apps/laneblog-feed.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/laneblog-highlightedresources-rss2html.xsl"/>
