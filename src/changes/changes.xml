@@ -7,7 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="2019-02-04" version="3.5.30" description="3.5.30 bug fix release">
+        <release date="2019-02-11" version="3.5.31" description="3.5.31 bug fix release">
+            <action date="2019-02-08" dev="olgary" issue="149308" type="update">
+                templates main nav changes
+            </action>
+        </release>
+        <release date="2019-02-04" version="3.5.30" description="3.5.30 bug fix release">
             <action date="2019-02-01" dev="alainb" issue="148746" type="add">
                 Display the highlighted resource from blog
             </action>
