@@ -165,7 +165,7 @@
                             </xi:include></div>
                         </li>
                         <li class="nav-menu">
-                           <span><a href="/med-history/index.html">Medical History Center</a></span>
+                           <span><a href="/med-history/index.html" style="color:#3c3623;">Medical History Center</a></span>
                         </li>
                         <li class="dropdown nav-menu" data-path="/help/">
                             <span>FAQs</span>
@@ -174,7 +174,7 @@
                             </xi:include></div>
                         </li>
                         <li class="nav-menu">
-                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
+                            <span><a href="http://laneblog.stanford.edu/" style="color:#3c3623;">Blog</a></span>
                         </li>
                     </ul>
                 </div>
@@ -194,7 +194,6 @@
                             <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
                             <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
                             <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                            <li><a href="/biomed-resources/cc.html?a=a">Calculators, Formulas, Algorithms</a></li>
                             <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
                         </ul>
                     </div>
