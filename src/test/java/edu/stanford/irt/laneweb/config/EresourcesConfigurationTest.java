@@ -17,6 +17,16 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
+    public void testAtoZBrowseSAXStrategy() {
+        assertNotNull(this.configuration.aToZBrowseSAXStrategy());
+    }
+
+    @Test
+    public void testEresourcesAtoZBrowseGenerator() {
+        assertNotNull(this.configuration.eresourcesAtoZBrowseGenerator(null));
+    }
+
+    @Test
     public void testEresourcesBrowseAllGenerator() {
         assertNotNull(this.configuration.eresourcesBrowseAllGenerator(null));
     }

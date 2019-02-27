@@ -40,6 +40,7 @@ import edu.stanford.irt.laneweb.eresources.browse.AtoZBrowseSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.BibIDToEresourceTransformer;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseAllEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
+import edu.stanford.irt.laneweb.eresources.browse.BrowseLetter;
 import edu.stanford.irt.laneweb.eresources.browse.CoreEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrategy;
@@ -54,9 +55,8 @@ import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
 
 @Configuration
-@EnableSolrRepositories(
-        basePackages = { "edu.stanford.irt.laneweb.eresources" },
-        solrTemplateRef = "laneSearchSolrTemplate")
+@EnableSolrRepositories(basePackages = {
+        "edu.stanford.irt.laneweb.eresources" }, solrTemplateRef = "laneSearchSolrTemplate")
 public class EresourcesConfiguration {
 
     private static final int FACETS_TO_SHOW_BROWSE = 20;
@@ -110,10 +110,15 @@ public class EresourcesConfiguration {
         this.facetComparator = new FacetComparator(this.publicationTypes);
     }
 
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/er-a2z-browse-xml")
+    public SAXStrategy<List<BrowseLetter>> aToZBrowseSAXStrategy() {
+        return new AtoZBrowseSAXStrategy();
+    }
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-a2z-browse-html")
     @Scope("prototype")
     public Generator eresourcesAtoZBrowseGenerator(final SolrService solrService) {
-        return new AtoZBrowseGenerator("er-a2z-browse-html", solrService, new AtoZBrowseSAXStrategy());
+        return new AtoZBrowseGenerator("er-a2z-browse-html", solrService, aToZBrowseSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
