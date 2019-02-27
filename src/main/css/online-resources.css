@@ -5,36 +5,42 @@
 #resources-header a{
     font-size: 16px;
 }
-#browseTabs{
+/* TODO: remove #browseTabs once purged from content */
+#browseTabs, .browseTabs{
     background-color: #c1c1c1;
     padding: 12px 22px;
     position: relative;
     margin-bottom: 12px;
 }
-#browseTabs li{
+#browseTabs li, .browseTabs li{
     border-bottom: 0;
     display: inline-block;
     padding: 0;
 }
-#browseTabs li:before{
+#browseTabs li:before, .browseTabs li:before{
     content: '\2022';
     position: absolute;
     margin-left: -1px;
     top: 13px;
 }
-#browseTabs li:first-child:before{
+#browseTabs li:first-child:before, .browseTabs li:first-child:before{
     content: '';
 }
-#browseTabs:after{
+#browseTabs:after, .browseTabs:after{
     content: '.';
     display: block;
     height: 0;
     clear: both;
     visibility: hidden;
 }
-#browseTabs a{
+#browseTabs a, .browseTabs a{
     display: inline-block;
     width: 35px;
+}
+.browseTabs .disabled {
+    color: #666;
+    cursor: default;
+    pointer-events: none;
 }
 
 .eresources{

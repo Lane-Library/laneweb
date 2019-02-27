@@ -35,6 +35,12 @@
             <map:transform type="saxon" src="classpath:/xsl/software-installed-eresource2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match type="wildcard" pattern="a2z-browse/*.html">
+            <map:generate type="er-a2z-browse-html">
+                <map:parameter name="type" value="{1}"/>
+            </map:generate>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match type="wildcard" pattern="browse/*/*.html">
             <map:generate type="er-browse-html">
                 <map:parameter name="{1}" value="{2}"/>

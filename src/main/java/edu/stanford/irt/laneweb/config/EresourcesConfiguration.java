@@ -35,6 +35,8 @@ import edu.stanford.irt.laneweb.eresources.QueryInspector;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
 import edu.stanford.irt.laneweb.eresources.SolrRepository;
 import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.browse.AtoZBrowseGenerator;
+import edu.stanford.irt.laneweb.eresources.browse.AtoZBrowseSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.BibIDToEresourceTransformer;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseAllEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
@@ -106,6 +108,12 @@ public class EresourcesConfiguration {
         this.publicationTypes.add("Systematic Review");
         this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
         this.facetComparator = new FacetComparator(this.publicationTypes);
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-a2z-browse-html")
+    @Scope("prototype")
+    public Generator eresourcesAtoZBrowseGenerator(final SolrService solrService) {
+        return new AtoZBrowseGenerator("er-a2z-browse-html", solrService, new AtoZBrowseSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
@@ -203,7 +211,7 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.solr.SolrService")
     public SolrService solrService(final SolrRepository solrRepository,
-            @Qualifier("laneSearchSolrTemplate")  final SolrTemplate solrTemplate) {
+            @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
         return new SolrService(solrQueryParser(), solrRepository, solrTemplate);
     }
 
