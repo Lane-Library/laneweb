@@ -62,7 +62,7 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
 
     @Override
     public Serializable getKey() {
-        return new StringBuilder("r=").append(this.requestUri).append(";t=").append(this.browseType);
+        return (new StringBuilder("r=").append(this.requestUri).append(";t=").append(this.browseType)).toString();
     }
 
     @Override
