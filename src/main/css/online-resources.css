@@ -37,11 +37,6 @@
     display: inline-block;
     width: 35px;
 }
-.browseTabs .disabled {
-    color: #666;
-    cursor: default;
-    pointer-events: none;
-}
 
 .eresources{
     margin: 12px 0 0;
