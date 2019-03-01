@@ -24,13 +24,13 @@ public class AtoZBrowseSAXStrategyTest {
         this.saxStrategy = new AtoZBrowseSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
         this.letters = new ArrayList<>();
-        this.letters.add(new BrowseLetter("request-uri", "#", 10));
+        this.letters.add(new BrowseLetter("base-path", "#", 10));
         for (char alphabet = 'a'; alphabet <= 'z'; alphabet++) {
             int count = 10;
             if ("cxz".contains(Character.toString(alphabet))) {
                 count = 0;
             }
-            this.letters.add(new BrowseLetter("request-uri", Character.toString(alphabet), count));
+            this.letters.add(new BrowseLetter("base-path", Character.toString(alphabet), count));
         }
     }
 

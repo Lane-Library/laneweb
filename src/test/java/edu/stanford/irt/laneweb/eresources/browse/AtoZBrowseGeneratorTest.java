@@ -84,7 +84,7 @@ public class AtoZBrowseGeneratorTest {
     @Test
     public void testGetKey() {
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "foo"));
-        assertEquals("r=null;t=foo", this.generator.getKey());
+        assertEquals("t=foo", this.generator.getKey());
     }
 
     @Test
@@ -104,16 +104,14 @@ public class AtoZBrowseGeneratorTest {
     }
 
     @Test
-    public void testSetEmptyModelAndParameters() {
-        this.generator.setModel(Collections.emptyMap());
+    public void testSetEmptyParameters() {
         this.generator.setParameters(Collections.emptyMap());
-        assertEquals("r=null;t=null", this.generator.getKey());
+        assertEquals("t=null", this.generator.getKey());
     }
 
     @Test
-    public void testSetModelAndParameters() {
-        this.generator.setModel(Collections.singletonMap(Model.REQUEST_URI, "request-uri"));
+    public void testSetParameters() {
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "some-type"));
-        assertEquals("r=request-uri;t=some-type", this.generator.getKey());
+        assertEquals("t=some-type", this.generator.getKey());
     }
 }

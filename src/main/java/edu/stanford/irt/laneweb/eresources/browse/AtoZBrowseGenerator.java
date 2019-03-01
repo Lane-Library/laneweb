@@ -25,7 +25,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.Eresource;
 import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class AtoZBrowseGenerator extends AbstractGenerator {
 
@@ -39,13 +38,13 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
 
     private static final String PREFIX = "ertlsw";
 
+    private String basePath;
+
     private String browseType;
 
     private String componentType;
 
     private long expires = DEFAULT_EXPIRES;
-
-    private String requestUri;
 
     private SAXStrategy<List<BrowseLetter>> saxStrategy;
 
@@ -62,7 +61,7 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
 
     @Override
     public Serializable getKey() {
-        return (new StringBuilder("r=").append(this.requestUri).append(";t=").append(this.browseType)).toString();
+        return (new StringBuilder("t=").append(this.browseType)).toString();
     }
 
     @Override
@@ -79,13 +78,6 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
     }
 
     @Override
-    public void setModel(final Map<String, Object> model) {
-        if (model.containsKey(Model.REQUEST_URI)) {
-            this.requestUri = ModelUtil.getString(model, Model.REQUEST_URI);
-        }
-    }
-
-    @Override
     public void setParameters(final Map<String, String> parameters) {
         if (parameters.containsKey(Model.TYPE)) {
             try {
@@ -93,6 +85,9 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
             } catch (UnsupportedEncodingException e) {
                 throw new LanewebException("won't happen", e);
             }
+        }
+        if (parameters.containsKey(Model.BASE_PATH)) {
+            this.basePath = parameters.get(Model.BASE_PATH);
         }
     }
 
@@ -117,7 +112,7 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
                     letter = entryValue.substring(PREFIX.length());
                 }
                 if (null != letter && ACCEPTABLE_LETTERS.matcher(letter).matches()) {
-                    letters.add(new BrowseLetter(this.requestUri, letter, (int) entry.getValueCount()));
+                    letters.add(new BrowseLetter(this.basePath, letter, (int) entry.getValueCount()));
                 }
             }
         }

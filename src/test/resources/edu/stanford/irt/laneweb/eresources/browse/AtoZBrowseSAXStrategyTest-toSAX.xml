@@ -2,85 +2,85 @@
 <div>
    <ul class="browseTabs no-bookmarking">
       <li>
-         <a href="request-uri?a=%23" title="non-alphabetical characters">#</a>
+         <a href="base-path.html?a=%23" title="non-alphabetical characters">#</a>
       </li>
       <li>
-         <a href="request-uri?a=a">A</a>
+         <a href="base-path.html?a=a">A</a>
       </li>
       <li>
-         <a href="request-uri?a=b">B</a>
+         <a href="base-path.html?a=b">B</a>
       </li>
       <li>
-         <a class="disabled" href="request-uri?a=c">C</a>
+         <a class="disabled" href="base-path.html?a=c">C</a>
       </li>
       <li>
-         <a href="request-uri?a=d">D</a>
+         <a href="base-path.html?a=d">D</a>
       </li>
       <li>
-         <a href="request-uri?a=e">E</a>
+         <a href="base-path.html?a=e">E</a>
       </li>
       <li>
-         <a href="request-uri?a=f">F</a>
+         <a href="base-path.html?a=f">F</a>
       </li>
       <li>
-         <a href="request-uri?a=g">G</a>
+         <a href="base-path.html?a=g">G</a>
       </li>
       <li>
-         <a href="request-uri?a=h">H</a>
+         <a href="base-path.html?a=h">H</a>
       </li>
       <li>
-         <a href="request-uri?a=i">I</a>
+         <a href="base-path.html?a=i">I</a>
       </li>
       <li>
-         <a href="request-uri?a=j">J</a>
+         <a href="base-path.html?a=j">J</a>
       </li>
       <li>
-         <a href="request-uri?a=k">K</a>
+         <a href="base-path.html?a=k">K</a>
       </li>
       <li>
-         <a href="request-uri?a=l">L</a>
+         <a href="base-path.html?a=l">L</a>
       </li>
       <li>
-         <a href="request-uri?a=m">M</a>
+         <a href="base-path.html?a=m">M</a>
       </li>
       <li>
-         <a href="request-uri?a=n">N</a>
+         <a href="base-path.html?a=n">N</a>
       </li>
       <li>
-         <a href="request-uri?a=o">O</a>
+         <a href="base-path.html?a=o">O</a>
       </li>
       <li>
-         <a href="request-uri?a=p">P</a>
+         <a href="base-path.html?a=p">P</a>
       </li>
       <li>
-         <a href="request-uri?a=q">Q</a>
+         <a href="base-path.html?a=q">Q</a>
       </li>
       <li>
-         <a href="request-uri?a=r">R</a>
+         <a href="base-path.html?a=r">R</a>
       </li>
       <li>
-         <a href="request-uri?a=s">S</a>
+         <a href="base-path.html?a=s">S</a>
       </li>
       <li>
-         <a href="request-uri?a=t">T</a>
+         <a href="base-path.html?a=t">T</a>
       </li>
       <li>
-         <a href="request-uri?a=u">U</a>
+         <a href="base-path.html?a=u">U</a>
       </li>
       <li>
-         <a href="request-uri?a=v">V</a>
+         <a href="base-path.html?a=v">V</a>
       </li>
       <li>
-         <a href="request-uri?a=w">W</a>
+         <a href="base-path.html?a=w">W</a>
       </li>
       <li>
-         <a class="disabled" href="request-uri?a=x">X</a>
+         <a class="disabled" href="base-path.html?a=x">X</a>
       </li>
       <li>
-         <a href="request-uri?a=y">Y</a>
+         <a href="base-path.html?a=y">Y</a>
       </li>
       <li>
-         <a class="disabled" href="request-uri?a=z">Z</a>
+         <a class="disabled" href="base-path.html?a=z">Z</a>
       </li>
    </ul>
 </div>
