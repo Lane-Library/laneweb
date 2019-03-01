@@ -52,6 +52,11 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
+    public void testEresourcesSubjectBrowseGenerator() {
+        assertNotNull(this.configuration.eresourcesSubjectBrowseGenerator(null, null));
+    }
+
+    @Test
     public void testLinkWithCoverSAXStrategy() {
         assertNotNull(this.configuration.linkWithCoverSAXStrategy());
     }

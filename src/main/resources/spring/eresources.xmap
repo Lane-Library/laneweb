@@ -42,6 +42,16 @@
             </map:generate>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match type="wildcard" pattern="subject-browse/*.html">
+            <map:aggregate type="caching" element="doc">
+                <map:generate type="html" src="{content-base}/includes/eresource-subject-browse.html"/>
+                <map:generate type="er-subject-browse">
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+            </map:aggregate>
+            <map:transform type="saxon" src="classpath:/xsl/eresource-subject-browse.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match type="wildcard" pattern="browse/*/*.html">
             <map:generate type="er-browse-html">
                 <map:parameter name="{1}" value="{2}"/>
