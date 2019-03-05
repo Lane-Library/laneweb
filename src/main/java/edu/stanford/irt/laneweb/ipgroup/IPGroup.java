@@ -34,6 +34,8 @@ public final class IPGroup implements Serializable {
     static {
         ROOT.addSubrange(new CIDRRange("10.252.0.0/14", SHC));
         ROOT.addSubrange(new CIDRRange("10.0.0.0/8", SU));
+        ROOT.addSubrange(new CIDRRange("45.42.34.136/32", LPCH));
+        ROOT.addSubrange(new CIDRRange("68.65.248.136/32", LPCH));
         ROOT.addSubrange(new CIDRRange("160.109.100.132/32", LPCH));
         ROOT.addSubrange(new CIDRRange("199.68.152.135/32", LPCH));
         ROOT.addSubrange(new CIDRRange("199.68.152.137/32", LPCH));
