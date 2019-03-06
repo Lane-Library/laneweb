@@ -24,7 +24,7 @@ import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * A generator that pulls
+ * A generator that returns from Solr a faceted list of MeSH with hit counts, limited by resource type
  */
 public class SubjectBrowseGenerator extends AbstractMarshallingGenerator {
 
@@ -83,8 +83,8 @@ public class SubjectBrowseGenerator extends AbstractMarshallingGenerator {
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         if (null != this.browseType) {
             FacetPage<Eresource> fps = this.service.facetByField(
-                    "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)", "type:" + this.browseType,
-                    "mesh", 0, MAX_FACETS, 1, FacetSort.INDEX);
+                    "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
+                    "type:\"" + this.browseType + '"', "mesh", 0, MAX_FACETS, 1, FacetSort.INDEX);
             Map<String, Long> map = new HashMap<>();
             for (Page<FacetFieldEntry> page : fps.getFacetResultPages()) {
                 for (FacetFieldEntry entry : page) {

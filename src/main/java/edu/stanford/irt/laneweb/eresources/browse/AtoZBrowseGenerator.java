@@ -95,8 +95,8 @@ public class AtoZBrowseGenerator extends AbstractGenerator {
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         if (null != this.browseType) {
             FacetPage<Eresource> fps = this.service.facetByField(
-                    "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)", "type:" + this.browseType,
-                    "title_starts", 0, MAX_FACETS, 0, FacetSort.INDEX);
+                    "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
+                    "type:\"" + this.browseType + '"', "title_starts", 0, MAX_FACETS, 0, FacetSort.INDEX);
             List<BrowseLetter> letters = extractFacets(fps.getFacetResultPages());
             this.saxStrategy.toSAX(letters, xmlConsumer);
         }

@@ -57,7 +57,7 @@ public class AtoZBrowseGeneratorTest {
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "foo"));
         this.saxStrategy.toSAX(isA(List.class), eq(this.xmlConsumer));
         expect(this.solrService.facetByField("advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
-                "type:foo", "title_starts", 0, 200, 0, FacetSort.INDEX)).andReturn(facetpage);
+                "type:\"foo\"", "title_starts", 0, 200, 0, FacetSort.INDEX)).andReturn(facetpage);
         expect(facetpage.getFacetResultPages()).andReturn(facetResultPages);
         expect(facetResultPages.iterator()).andReturn(it1);
         expect(it1.hasNext()).andReturn(true);

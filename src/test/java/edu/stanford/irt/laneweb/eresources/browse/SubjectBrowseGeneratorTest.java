@@ -52,7 +52,7 @@ public class SubjectBrowseGeneratorTest {
         FacetFieldEntry ffe = mock(FacetFieldEntry.class);
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "foo"));
         expect(this.solrService.facetByField("advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
-                "type:foo", "mesh", 0, 20000, 1, FacetSort.INDEX)).andReturn(facetpage);
+                "type:\"foo\"", "mesh", 0, 20000, 1, FacetSort.INDEX)).andReturn(facetpage);
         expect(facetpage.getFacetResultPages()).andReturn(facetResultPages);
         expect(facetResultPages.iterator()).andReturn(it1);
         expect(it1.hasNext()).andReturn(true);
