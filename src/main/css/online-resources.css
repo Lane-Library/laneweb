@@ -37,7 +37,9 @@
     display: inline-block;
     width: 35px;
 }
-
+.browseTabs a.disabled {
+    color: #666;
+}
 .eresources{
     margin: 12px 0 0;
     padding-bottom: 4px;

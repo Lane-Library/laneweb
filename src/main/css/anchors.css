@@ -7,7 +7,7 @@ a:visited, a:active, a:hover {
     color: #428bca;
 }
 a.disabled {
-    color: #666;
+    color: #ccc;
     cursor: default;
     pointer-events: none;
 }
