@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2019-03-15" version="3.5.33" description="3.5.33 bug fix release">
+        <release date="2019-03-15" version="3.5.34" description="3.5.34 bug fix release">
             <action date="2019-03-11" dev="olgary" issue="150081" type="update">
                 templates for documen delivery name
             </action>
@@ -18,12 +18,23 @@
                 LPCH/Epic public IP addresses
             </action>
         </release>
-        <release date="2019-03-04" version="3.5.32" description="3.5.32 bug fix release [not deployed]">
-            <action date="2019-03-01" dev="ryanmax" issue="149804" type="update">
+        <release date="2019-03-04" version="3.5.33" description="3.5.33 bug fix release [not deployed]">
+            <action date="2019-02-25" dev="ryanmax" issue="149804" type="update">
                 dyanamic MeSH browse lists
             </action>
             <action date="2019-02-27" dev="ryanmax" issue="149784" type="update">
                 dynamic A-Z browse
+            </action>
+        </release>
+        <release date="2019-02-25" version="3.5.32" description="3.5.32 bug fix release">
+            <action date="2019-02-25" dev="ryanmax" issue="149746" type="update">
+                formatting for installed software lists
+            </action>
+            <action date="2019-02-19" dev="olgary" issue="149683" type="update">
+                history.xml and wilson.xml link change
+            </action>
+            <action date="2019-02-13" dev="olgary" issue="149540" type="update">
+                templates nav color fix and remove calc from footer
             </action>
         </release>
         <release date="2019-02-11" version="3.5.31" description="3.5.31 bug fix release">
