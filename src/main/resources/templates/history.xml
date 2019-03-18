@@ -18,6 +18,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', location.host === 'lane.stanford.edu' ?  'UA-3202241-2' : 'UA-3203486-2', 'auto');
 ga('send', 'pageview');
 </script>
+<script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0069/9206.js" async="async"></script>
     </head>
     <body>
         <div class="header">

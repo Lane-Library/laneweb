@@ -3,6 +3,7 @@
 <head>
 <title>Lane Medical Library, Stanford University Medical Center</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
+    <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0069/9206.js" async="async"></script>   
 </head>
 <body>
     <?laneweb content?>
