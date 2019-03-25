@@ -7,9 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-03-25" version="3.5.35" description="3.5.35 bug fix release">
+            <action date="2019-03-19" dev="olgary" issue="150195" type="update">
+                add crazy egg js to templates 
+            </action>
+        </release>
         <release date="2019-03-15" version="3.5.34" description="3.5.34 bug fix release">
             <action date="2019-03-11" dev="olgary" issue="150081" type="update">
-                templates for documen delivery name
+                templates for document delivery name
             </action>
             <action date="2019-03-05" dev="olgary" issue="149885" type="fix">
                 wilson and history xml
