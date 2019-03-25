@@ -8,7 +8,7 @@ pipeline:
       branch: master
 
   code-analysis:
-    image: aosapps/drone-sonar-plugin:v0.8
+    image: aosapps/drone-sonar-plugin:0.8
     timeout: 20
     level: INFO
     showProfiling: true
