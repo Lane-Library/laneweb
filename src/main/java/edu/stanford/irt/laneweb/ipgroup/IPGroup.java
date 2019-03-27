@@ -32,8 +32,6 @@ public final class IPGroup implements Serializable {
     private static final long serialVersionUID = 1L;
 
     static {
-        ROOT.addSubrange(new CIDRRange("127.0.0.1/32", SHC));
-        ROOT.addSubrange(new CIDRRange("13.56.32.141/32", SHC));
         ROOT.addSubrange(new CIDRRange("10.252.0.0/14", SHC));
         ROOT.addSubrange(new CIDRRange("10.0.0.0/8", SU));
         ROOT.addSubrange(new CIDRRange("45.42.34.136/32", LPCH));
