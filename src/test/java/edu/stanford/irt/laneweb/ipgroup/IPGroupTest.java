@@ -4,8 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import org.junit.Test;
 
@@ -284,6 +288,19 @@ public class IPGroupTest {
     @Test
     public void testProxyServer() {
         assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("171.65.65.46"));
+    }
+
+    @Test
+    public void testSerializedFormEquals() throws IOException, ClassNotFoundException {
+        IPGroup shc = IPGroup.SHC;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(shc);
+        oos.close();
+        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
+        Object o = ois.readObject();
+        ois.close();
+        assertEquals(shc, o);
     }
 
     @Test
