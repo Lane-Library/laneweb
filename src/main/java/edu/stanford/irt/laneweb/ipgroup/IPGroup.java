@@ -30,7 +30,6 @@ public final class IPGroup implements Serializable {
     };
 
     private static final long serialVersionUID = 1L;
-
     static {
         ROOT.addSubrange(new CIDRRange("10.252.0.0/14", SHC));
         ROOT.addSubrange(new CIDRRange("10.0.0.0/8", SU));
@@ -135,12 +134,26 @@ public final class IPGroup implements Serializable {
 
     private String stringValue;
 
-    private IPGroup(final String stringValue) {
+    protected IPGroup(final String stringValue) {
         this.stringValue = stringValue;
     }
 
     public static IPGroup getGroupForIP(final String ip) {
         return ROOT.getIPGroup(ip);
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        boolean equals = false;
+        if (other != null && other.getClass() == getClass() && other.hashCode() == hashCode()) {
+            return true;
+        }
+        return equals;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.toString().hashCode();
     }
 
     @Override

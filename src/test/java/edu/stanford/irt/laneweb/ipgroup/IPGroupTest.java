@@ -260,6 +260,13 @@ public class IPGroupTest {
     }
 
     @Test
+    public void testEquals() {
+        assertNotEquals(IPGroup.LPCH, new Object());
+        assertEquals(IPGroup.SHC, new IPGroup("SHC"));
+        assertNotEquals(IPGroup.SHC, new IPGroup("LPCH"));
+    }
+
+    @Test
     public void testGetipGroupForIP() {
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.31.112"));
     }
