@@ -1,5 +1,5 @@
 [![Build Status](https://ci.med.stanford.edu/api/badges/lane/laneweb/status.svg)](https://ci.med.stanford.edu/lane/laneweb)
-[![Code Qulity](https://sonarqube.med.stanford.edu/api/project_badges/measure?project=lane%3Alaneweb&metric=alert_status)](https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb)
+[![Code Quality](https://sonarqube.med.stanford.edu/api/project_badges/measure?project=lane%3Alaneweb&metric=alert_status)](https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb)
 
 # Laneweb WAR in Docker
 
@@ -11,15 +11,6 @@
 
 ## Build Laneweb image
 
-### Clone the account repo and setup credentials
-
-```
-$ mkdir -p $HOME/projects/lane
-$ cd $HOME/projects/lane
-$ git clone git@gitlab.med.stanford.edu:irt-lane/accounts.git
-$ cd accounts
-$ git-crypt unlock
-```
 ### Clone the laneweb repo and build app war
     
 ```
