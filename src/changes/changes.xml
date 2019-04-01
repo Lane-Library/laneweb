@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-04-01" version="3.5.36" description="3.5.36 bug fix release">
+            <action date="2019-03-27" dev="ryanmax" issue="150284" type="fix">
+                SHC machines prompted to authenticate 
+            </action>
+            <action date="2019-03-25" dev="olgary" issue="150263" type="update">
+                fixed another clinical trials link
+            </action>
+        </release>
         <release date="2019-03-25" version="3.5.35" description="3.5.35 bug fix release">
             <action date="2019-03-19" dev="olgary" issue="150195" type="update">
                 add crazy egg js to templates 
