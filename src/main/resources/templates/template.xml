@@ -43,7 +43,7 @@
                         </div>
                     </fieldset>
                     <fieldset>
-                        <input name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder="" value=""/>
+                        <input class="data-hj-whitelist" name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder="" value=""/>
                         <input name="source" type="hidden" value="all-all"/>
                         <input name="sourceid" type="hidden" value="" disabled="disabled"/>
                         <input name="facets" type="hidden" value="" disabled="disabled"/>
