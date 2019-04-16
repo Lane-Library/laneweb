@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
     <style type="text/css">html {background-color:#fff;}</style>
     <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}"></script>
-    <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0069/9206.js" async="async"></script>
 </head>
 <body>
     <?laneweb content?>
