@@ -55,8 +55,7 @@ import edu.stanford.irt.laneweb.rest.RESTService;
     "classpath:/spring/eresources.xmap",
     "classpath:/spring/mobile.xmap",
     "classpath:/spring/rss.xmap",
-    "classpath:/spring/sitemap.xmap",
-    "classpath:/net/bull/javamelody/monitoring-spring.xml"
+    "classpath:/spring/sitemap.xmap"
 })
 @ComponentScan({
     "edu.stanford.irt.laneweb.config",
