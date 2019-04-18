@@ -184,10 +184,8 @@ public class EresourcesConfiguration {
 
     @Bean(name = "solrLaneSearchClient")
     public SolrClient solrClient(@Value("${edu.stanford.irt.laneweb.solr-url-laneSearch}") final String solrServerUrl) {
-        HttpSolrClient solrClient = new HttpSolrClient.Builder(solrServerUrl).build();
-        solrClient.setConnectionTimeout(SOLR_CONNECT_TIMEOUT);
-        solrClient.setSoTimeout(SOLR_READ_TIMEOUT);
-        return solrClient;
+        return new HttpSolrClient.Builder(solrServerUrl).withConnectionTimeout(SOLR_CONNECT_TIMEOUT)
+                .withSocketTimeout(SOLR_READ_TIMEOUT).build();
     }
 
     @Bean
