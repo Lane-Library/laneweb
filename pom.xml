@@ -44,7 +44,7 @@
     </scm>
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
-        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
+        <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css,**/hotjar.js</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
