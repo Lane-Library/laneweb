@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-04-22" version="3.5.37" description="3.5.37 bug fix release">
+            <action date="2019-04-16" dev="ryanmax" issue="150402" type="update">
+                install hotjar tracking tool
+            </action>
+            <action date="2019-04-16" dev="ryanmax" issue="150617" type="update">
+                remove crazyegg tracking scripts from templates 
+            </action>
+        </release>
         <release date="2019-04-01" version="3.5.36" description="3.5.36 bug fix release">
             <action date="2019-03-27" dev="ryanmax" issue="150284" type="fix">
                 SHC machines prompted to authenticate 
