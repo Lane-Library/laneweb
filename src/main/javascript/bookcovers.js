@@ -6,14 +6,14 @@
     // div nodes that have class bookcover.
     var view = function(bookImageNodes) {
 
-            // an object that maps bibids to img nodes
+            // an object that maps bookcover ids (bcids) to img nodes
             var imageMap = {};
 
             // initialize the imageMap
             bookImageNodes.forEach(function(imageNode) {
-                var bibid = imageNode.dataset.bibid;
-                imageMap[bibid] = imageMap[bibid] || [];
-                imageMap[bibid].push(imageNode);
+                var bcid = imageNode.dataset.bcid;
+                imageMap[bcid] = imageMap[bcid] || [];
+                imageMap[bcid].push(imageNode);
             });
 
             // make a couple of view functions available
@@ -23,12 +23,12 @@
                 // img nodes that are in the viewport and requiring src attributes.
                 getImgsForUpdate: function(viewport) {
                     var imagesForUpdate = [],
-                        bibid, i;
-                    for (bibid in imageMap) {
-                        if (imageMap.hasOwnProperty(bibid)) {
-                            for (i = 0; i < imageMap[bibid].length; i++) {
-                                if (!imageMap[bibid][i].querySelector("img") && viewport.inView(imageMap[bibid][i])) {
-                                    imagesForUpdate.push(bibid);
+                        bcid, i;
+                    for (bcid in imageMap) {
+                        if (imageMap.hasOwnProperty(bcid)) {
+                            for (i = 0; i < imageMap[bcid].length; i++) {
+                                if (!imageMap[bcid][i].querySelector("img") && viewport.inView(imageMap[bcid][i])) {
+                                    imagesForUpdate.push(bcid);
                                     break;
                                 }
                             }
@@ -39,43 +39,43 @@
 
                 // add src attributes to imag nodes
                 update: function(updates) {
-                    var bibid, src, i;
-                    for (bibid in updates) {
-                        if (updates[bibid]) {
-                            for (i = 0; i < imageMap[bibid].length; i++) {
+                    var bcid, src, i;
+                    for (bcid in updates) {
+                        if (updates[bcid]) {
+                            for (i = 0; i < imageMap[bcid].length; i++) {
                                 // case 132771 use protocol relative urls for images
                                 // from the bookcover database (substring(5))
-                                src = updates[bibid];
+                                src = updates[bcid];
                                 src = src.substring(src.indexOf(":") + 1);
-                                imageMap[bibid][i].innerHTML = "<img src='" + src + "'/>";
+                                imageMap[bcid][i].innerHTML = "<img src='" + src + "'/>";
                             }
                         }
-                        delete imageMap[bibid];
+                        delete imageMap[bcid];
                     }
                 }
             };
         }(document.querySelectorAll(".bookcover")),
 
-        // communicates with the server to get bookcover thumbnail urls for bibids
+        // communicates with the server to get bookcover thumbnail urls for bcids
         bookcoverService = function() {
 
             var baseURL = window.model["base-path"] + "/apps/bookcovers?",
 
-                // working is a comma separated list of bibids being looked up, or empty
+                // working is a comma separated list of bcids being looked up, or empty
                 working = "",
 
                 service = {
 
-                    // get thumbnail urls for bibids from the server
-                    getBookCoverURLs: function(bibids) {
+                    // get thumbnail urls for bcids from the server
+                    getBookCoverURLs: function(bcids) {
                         var i, request, url = baseURL;
                         if (working) {
                             throw new Error("still working on " + working);
                         }
                         // don't get more than 20
-                        for (i = 0; i < bibids.length && i < 20; i++) {
-                            url += "bibid=" + bibids[i] + "&";
-                            working += bibids[i] + ",";
+                        for (i = 0; i < bcids.length && i < 20; i++) {
+                            url += "bcid=" + bcids[i] + "&";
+                            working += bcids[i] + ",";
                         }
 
                         request = new XMLHttpRequest();
@@ -103,12 +103,12 @@
                 view.update(event.covers);
             },
 
-            // handler for the viewport update event, gets bibids from the view
+            // handler for the viewport update event, gets bcids from the view
             // and asks the service of bookcover urls for them.
             update: function(viewport) {
-                var bibids = view.getImgsForUpdate(viewport);
-                if (bibids.length > 0) {
-                    bookcoverService.getBookCoverURLs(bibids);
+                var bcids = view.getImgsForUpdate(viewport);
+                if (bcids.length > 0) {
+                    bookcoverService.getBookCoverURLs(bcids);
                 }
             }
         };

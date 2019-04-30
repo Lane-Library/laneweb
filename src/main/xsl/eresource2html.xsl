@@ -26,9 +26,7 @@
             </span>
             <xsl:if test="($type = 'Book' and contains(s:primaryType, 'Book'))
                 or ($type = 'Journal' and contains(s:primaryType, 'Journal'))">
-                <div class="bookcover" data-bibid="{s:recordId}"><i class="fa fa-book"></i></div>
-                <!--<i class="fa fa-book"></i>
-                <img class="bookcover" data-bibid="{s:recordId}"/>-->
+                <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
             </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
             <xsl:apply-templates select="s:pub-text"/>

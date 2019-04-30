@@ -11,7 +11,7 @@ import edu.stanford.irt.status.ApplicationStatus;
 
 public class RESTBookCoverService implements BookCoverService {
 
-    private static final TypeReference<Map<Integer, String>> TYPE = new TypeReference<Map<Integer, String>>() {
+    private static final TypeReference<Map<String, String>> TYPE = new TypeReference<Map<String, String>>() {
     };
 
     private URI bookCoverServiceURI;
@@ -24,9 +24,9 @@ public class RESTBookCoverService implements BookCoverService {
     }
 
     @Override
-    public Map<Integer, String> getBookCoverURLs(final Collection<Integer> bibids) {
-        StringBuilder queryStringBuilder = new StringBuilder("bookcovers?bibIDs=")
-                .append(bibids.stream().map(Object::toString).collect(Collectors.joining(",")));
+    public Map<String, String> getBookCoverURLs(final Collection<String> bcids) {
+        StringBuilder queryStringBuilder = new StringBuilder("4/bookcovers?resourceIds=")
+                .append(bcids.stream().map(Object::toString).collect(Collectors.joining(",")));
         URI uri = this.bookCoverServiceURI.resolve(queryStringBuilder.toString());
         return this.restService.getObject(uri, TYPE);
     }

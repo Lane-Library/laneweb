@@ -7,5 +7,5 @@ import edu.stanford.irt.status.StatusService;
 
 public interface BookCoverService extends StatusService {
 
-    Map<Integer, String> getBookCoverURLs(Collection<Integer> bibids);
+    Map<String, String> getBookCoverURLs(Collection<String> bcids);
 }

@@ -27,9 +27,9 @@ public class BookCoverControllerTest {
 
     @Test
     public void testGetBookCovers() {
-        expect(this.service.getBookCoverURLs(Collections.singletonList(12))).andReturn(Collections.emptyMap());
+        expect(this.service.getBookCoverURLs(Collections.singletonList("bib-12"))).andReturn(Collections.emptyMap());
         replay(this.service);
-        assertSame(Collections.emptyMap(), this.controller.getBookCovers(Collections.singletonList(12)));
+        assertSame(Collections.emptyMap(), this.controller.getBookCovers(Collections.singletonList("bib-12")));
         verify(this.service);
     }
 }

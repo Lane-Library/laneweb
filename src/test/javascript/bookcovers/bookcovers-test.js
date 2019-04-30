@@ -15,7 +15,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("//www.example.com/src1", document.querySelector("div[data-bibid='1'] img").getAttribute("src"))
+            Y.Assert.areEqual("//www.example.com/srcbib-1", document.querySelector("div[data-bcid='bib-1'] img").getAttribute("src"))
         },
 
         "test viewport:scrolled": function() {
@@ -26,7 +26,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("//www.example.com/src2", document.querySelector("div[data-bibid='2'] img").getAttribute("src"))
+            Y.Assert.areEqual("//www.example.com/srcsul-2", document.querySelector("div[data-bcid='sul-2'] img").getAttribute("src"))
         }
     });
 

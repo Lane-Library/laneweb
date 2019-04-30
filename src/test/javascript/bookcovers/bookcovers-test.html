@@ -5,18 +5,18 @@
         <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
     </head>
     <body class="yui3-skin-sam">
-        <div class="bookcover" data-bibid="1"><i/></div>
-        <div class="bookcover" data-bibid="2"><i/></div>
+        <div class="bookcover" data-bcid="bib-1"><i/></div>
+        <div class="bookcover" data-bcid="sul-2"><i/></div>
         <script type="text/javascript">
 var XMLHttpRequest = function() {
     return {
         status: 200,
         open: function(a, b, c) {
-            this.bibid = /\/apps\/bookcovers\?bibid=(\d)/.exec(b)[1];
+            this.bcid = /\/apps\/bookcovers\?bcid=([a-z]+-\d)/.exec(b)[1];
         },
         send: function () {
             var result = {};
-            result[this.bibid] = "http://www.example.com/src" + this.bibid;
+            result[this.bcid] = "http://www.example.com/src" + this.bcid;
             this.responseText = JSON.stringify(result);
             this.onload();
         }

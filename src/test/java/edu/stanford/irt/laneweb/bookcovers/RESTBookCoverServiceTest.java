@@ -41,11 +41,10 @@ public class RESTBookCoverServiceTest {
 
     @Test
     public void testGetBookCoverURLs() throws RestClientException, URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/bookcovers?bibIDs=12")), isA(TypeReference.class)))
+        expect(this.restService.getObject(eq(new URI("/4/bookcovers?resourceIds=bib-12")), isA(TypeReference.class)))
                 .andReturn(Collections.emptyMap());
         replay(this.restService);
-        assertSame(Collections.emptyMap(),
-                this.service.getBookCoverURLs(Collections.singletonList(Integer.valueOf(12))));
+        assertSame(Collections.emptyMap(), this.service.getBookCoverURLs(Collections.singletonList("bib-12")));
         verify(this.restService);
     }
 
