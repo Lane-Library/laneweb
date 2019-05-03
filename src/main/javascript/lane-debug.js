@@ -77,7 +77,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-tooltips.js",
         "lane-popin.js",
         "lane-spellcheck.js",
-        "lane-findit.js",
         "description-toggle.js",
         "lane-feedback.js",
         "purchase-suggestions.js",

@@ -512,7 +512,6 @@
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-popin-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
-                                <include>lane-findit-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>lane-feedback-min.js</include>
                                 <include>purchase-suggestions-min.js</include>

@@ -94,18 +94,6 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="expires">
-        <map:parameter name="cache-key" value="{request-uri};q={query}"/>
-        <map:match pattern="sfx/json" type="wildcard">
-            <map:generate type="html" src="http://sfx.stanford.edu/local?sid=stanford:laneweb-auto&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
-            <map:transform src="classpath:/xsl/sfx2json.xsl" type="saxon">
-                <map:parameter name="sfx-request" value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={url-encoded-query}&amp;sfx.title_search=exact"/>
-            </map:transform>
-            <map:serialize type="text">
-                <map:parameter name="media-type" value="application/json"/>
-            </map:serialize>
-        </map:match>
-    </map:pipeline>
-    <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-feed.xml" type="wildcard">
             <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>

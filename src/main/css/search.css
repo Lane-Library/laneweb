@@ -8,7 +8,7 @@
 .popin > .popin-active {
     display: inline;
 }
-#spellCheckLink, #findItLink {
+#spellCheckLink {
     padding-right: 25px;
 }
 .primaryLink {
