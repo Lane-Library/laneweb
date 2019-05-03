@@ -6,8 +6,8 @@
     <xsl:param name="sfx-request"/>
     
     <xsl:variable name="sfx-title">
-            <xsl:if test="/h:html/h:body/h:div/h:table/h:tr/h:td[@class='BlockTitle'] = 'Full Text'">
-                <xsl:value-of select="normalize-space(/h:html/h:body/h:div/h:table/h:tr/h:td[@id='laneweb_source']/text())"/>
+            <xsl:if test="/h:html/h:body/h:div/h:table/h:tbody/h:tr/h:td[@class='BlockTitle'] = 'Full Text'">
+                <xsl:value-of select="normalize-space(/h:html/h:body/h:div/h:table/h:tbody/h:tr/h:td[@id='laneweb_source']/text())"/>
             </xsl:if>
     </xsl:variable>
     
