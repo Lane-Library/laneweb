@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-05-06" version="3.5.38" description="3.5.38 bug fix release">
+            <action date="2019-05-03" dev="ryanmax" issue="150966" type="remove">
+                remove FindIt search suggestions  
+            </action>
+            <action date="2019-04-30" dev="ryanmax" issue="150896" type="add">
+                make bookcovers compatible with SUL data 
+            </action>
+        </release>
         <release date="2019-04-22" version="3.5.37" description="3.5.37 bug fix release">
             <action date="2019-04-16" dev="ryanmax" issue="150402" type="update">
                 install hotjar tracking tool
