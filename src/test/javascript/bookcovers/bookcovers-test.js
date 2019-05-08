@@ -18,7 +18,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             Y.Assert.areEqual("//www.example.com/srcbib-1", document.querySelector("div[data-bcid='bib-1'] img").getAttribute("src"))
         },
 
-        "test viewport:scrolled": function() {
+        "test viewport:scrolled 1": function() {
             L.fire("viewport:scrolled", {
                 viewport: {
                     inView: function() {
@@ -27,6 +27,17 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 }
             });
             Y.Assert.areEqual("//www.example.com/srcsul-2", document.querySelector("div[data-bcid='sul-2'] img").getAttribute("src"))
+        },
+        
+        "test viewport:scrolled 2": function() {
+            L.fire("viewport:scrolled", {
+                viewport: {
+                    inView: function() {
+                        return true;
+                    }
+                }
+            });
+            Y.Assert.areEqual("//www.example.com/srcbib-3", document.querySelector("div[data-bibid='3'] img").getAttribute("src"))
         }
     });
 

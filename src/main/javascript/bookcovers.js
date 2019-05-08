@@ -6,12 +6,15 @@
     // div nodes that have class bookcover.
     var view = function(bookImageNodes) {
 
-            // an object that maps bookcover ids (bcids) to img nodes
+            // an object that maps bookcover ids (bcids and bibids) to img nodes
             var imageMap = {};
 
             // initialize the imageMap
             bookImageNodes.forEach(function(imageNode) {
                 var bcid = imageNode.dataset.bcid;
+                if (bcid === undefined && imageNode.dataset.bibid) {
+                    bcid = "bib-" + imageNode.dataset.bibid;
+                }
                 imageMap[bcid] = imageMap[bcid] || [];
                 imageMap[bcid].push(imageNode);
             });
