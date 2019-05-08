@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-05-08" version="3.5.39" description="3.5.39 emergency release">
+            <action date="2019-05-07" dev="ryanmax" issue="151036" type="fix">
+                book cover images missing on portal and course reserves pages
+            </action>
+        </release>
         <release date="2019-05-06" version="3.5.38" description="3.5.38 bug fix release">
             <action date="2019-05-03" dev="ryanmax" issue="150966" type="remove">
                 remove FindIt search suggestions  
