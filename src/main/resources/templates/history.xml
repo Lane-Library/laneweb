@@ -124,7 +124,7 @@ ga('send', 'pageview');
                                             href="http://med.stanford.edu/school/directory/research-administration.html">Research administration</a>
                                     </li>
                                     <li>
-                                        <a href="https://med.stanford.edu/profiles/index.html">Academic profiles</a>
+                                        <a href="https://med.stanford.edu/profiles/">Academic profiles</a>
                                     </li>
                                         <li>
                                         <a href="http://clinicaltrials.stanford.edu/">Clinical trials</a>
@@ -187,7 +187,7 @@ ga('send', 'pageview');
                                     </li>
                                     <li style="margin-top:10px">EDUCATION RESOURCES</li>
                                     <li>
-                                        <a href="//med.stanford.edu/profiles/">Academic profiles</a>
+                                        <a href="https://med.stanford.edu/profiles/">Academic profiles</a>
                                     </li>
                                     <li>
                                         <a

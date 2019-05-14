@@ -52,7 +52,7 @@ public class SolrService {
 
     private static final String EMPTY = "";
 
-    private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
+    private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh",
             "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year", "date");
 
     private static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
