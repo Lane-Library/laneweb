@@ -10,7 +10,7 @@
         </map:match>
     </map:pipeline>
     <!-- caching pipeline for static documents -->
-    <map:pipeline type="caching">
+    <map:pipeline type="noncaching">
         <!-- Classes Menu  to display only -->
         <map:match pattern="menu/archives.html" type="wildcard">
             <map:aggregate type="caching" element="doc">
@@ -68,8 +68,8 @@
         </map:match>
     </map:pipeline>
 
-    <map:pipeline type="caching">
-        <map:parameter name="cache-key" value="{request-uri}?{query-string}"/>
+    <map:pipeline type="noncaching">
+        <!--map:parameter name="cache-key" value="{request-uri}?{query-string}"/ -->
         <map:match pattern="open-classes.xml" type="wildcard">
             <map:generate type="file" src="cachedxml:720:{classes-service-uri}/registerlistxml.asp?p=2&amp;dsd=0&amp;s=4&amp;m=257&amp;cat={id}"/>
             <map:transform type="joost" src="classpath:/xsl/classes/event-urls.stx"/>
