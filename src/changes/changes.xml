@@ -7,8 +7,13 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="2019-03-06" version="3.5.40" description="3.5.40 bug fix release">
-            <action date="2019-03-06" dev="olya" issue="151124" type="fix">
+    	<release date="" version="3.5.41" description="3.5.41 bug fix release">
+            <action date="2019-06-05" dev="alainb" issue="151498" type="fix">
+				image admin doesn't display any images
+            </action>
+        </release>
+    	<release date="2019-06-02" version="3.5.40" description="3.5.40 bug fix release">
+            <action date="2019-06-02" dev="olya" issue="151124" type="fix">
             	broken link fix in history template   
             </action>
         </release>
