@@ -153,7 +153,7 @@ public class LaneSearchIT {
     public void testLaneSearchJAAD() throws Exception {
         // jaad
         this.mockMvc.perform(get("/eresources/search.html?q=jaad").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']",
+                xpath("//h:li[position() <= 2]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']",
                         this.ns).exists());
     }
 
