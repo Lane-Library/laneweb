@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="" version="3.5.41" description="3.5.41 bug fix release">
+    	<release date="2019-06-10" version="3.5.41" description="3.5.41 bug fix release">
             <action date="2019-06-05" dev="alainb" issue="151498" type="fix">
 				image admin doesn't display any images
             </action>
