@@ -6,7 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -19,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,7 +39,9 @@ public class LaneSearchIT {
     @Before
     public void setupFixture() {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
-        this.ns = Collections.singletonMap("h", "http://www.w3.org/1999/xhtml");
+        this.ns = new HashMap<>();
+        this.ns.put("h", "http://www.w3.org/1999/xhtml");
+        this.ns.put("s", "http://lane.stanford.edu/resources/1.0");
     }
 
     @Test
@@ -83,6 +86,19 @@ public class LaneSearchIT {
         this.mockMvc.perform(get("/eresources/search.html?q=anatomy images").servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='e-Anatomy']", this.ns)
                         .exists());
+    }
+
+    @Test
+    public void testLaneSearchAndFacetCountsMatch() throws Exception {
+        MvcResult facetCountResult = this.mockMvc.perform(
+                get("/eresources/count.xml?source=all-all&q=information science").servletPath("/eresources/count.xml"))
+                .andReturn();
+        String facetCount = facetCountResult.getResponse().getContentAsString()
+                .replaceFirst(".*<facet name=\"all\" hits=\"(\\d+)\"/>.*", "$1");
+        this.mockMvc
+                .perform(get("/eresources/search.xml?source=all-all&q=information science")
+                        .servletPath("/eresources/search.xml"))
+                .andExpect(xpath("//s:resources/@size", this.ns).string(facetCount));
     }
 
     @Test
