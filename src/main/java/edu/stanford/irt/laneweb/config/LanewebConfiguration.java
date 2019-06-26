@@ -7,14 +7,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,12 +71,8 @@ public class LanewebConfiguration {
     private static final List<String> DEFAULT_LOCATIONS =
             Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
-    private static final int HTTP_CLOSE_IDLE_CONNECTIONS = 4000;
-
     private static final int HTTP_CONNECT_TIMEOUT = 5000;
     
-    private static final int HTTP_VALIDATE_AFTER_INACTIVITY = HTTP_CONNECT_TIMEOUT;
-
     private static final int HTTP_READ_TIMEOUT = 15000;
 
     private Map<String, Object> constants;
@@ -132,11 +127,12 @@ public class LanewebConfiguration {
 
     @Bean
     public ClientHttpRequestFactory clientHttpRequestFactory() {
-        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        connectionManager.closeIdleConnections(HTTP_CLOSE_IDLE_CONNECTIONS, TimeUnit.MILLISECONDS);
-        connectionManager.setValidateAfterInactivity(HTTP_VALIDATE_AFTER_INACTIVITY);
-        CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager)
-                .setKeepAliveStrategy(new ConnectionKeepAliveStrategyImpl())
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setConnectionRequestTimeout(25_000)
+                .setSocketTimeout(59_000)
+                .build();
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultRequestConfig(requestConfig)
                 .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
