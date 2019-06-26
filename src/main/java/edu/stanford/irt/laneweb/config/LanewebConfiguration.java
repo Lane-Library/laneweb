@@ -76,6 +76,8 @@ public class LanewebConfiguration {
 
     private static final int HTTP_CONNECT_TIMEOUT = 5000;
     
+    private static final int HTTP_VALIDATE_AFTER_INACTIVITY = HTTP_CONNECT_TIMEOUT;
+
     private static final int HTTP_READ_TIMEOUT = 15000;
 
     private Map<String, Object> constants;
@@ -132,6 +134,7 @@ public class LanewebConfiguration {
     public ClientHttpRequestFactory clientHttpRequestFactory() {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.closeIdleConnections(HTTP_CLOSE_IDLE_CONNECTIONS, TimeUnit.MILLISECONDS);
+        connectionManager.setValidateAfterInactivity(HTTP_VALIDATE_AFTER_INACTIVITY);
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager)
                 .setKeepAliveStrategy(new ConnectionKeepAliveStrategyImpl())
                 .build();
