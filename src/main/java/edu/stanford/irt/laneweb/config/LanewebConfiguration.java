@@ -11,9 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -72,7 +69,7 @@ public class LanewebConfiguration {
             Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
     private static final int HTTP_CONNECT_TIMEOUT = 5000;
-    
+
     private static final int HTTP_READ_TIMEOUT = 15000;
 
     private Map<String, Object> constants;
@@ -127,17 +124,9 @@ public class LanewebConfiguration {
 
     @Bean
     public ClientHttpRequestFactory clientHttpRequestFactory() {
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectionRequestTimeout(25_000)
-                .setSocketTimeout(59_000)
-                .build();
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setDefaultRequestConfig(requestConfig)
-                .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
         requestFactory.setReadTimeout(HTTP_READ_TIMEOUT);
-        requestFactory.setHttpClient(httpClient);
         return requestFactory;
     }
 
@@ -174,7 +163,7 @@ public class LanewebConfiguration {
     public RestOperations restOperations(
             final ClientHttpRequestFactory clientHttpRequestFactory,
             final ObjectMapper objectMapper) {
-        RestTemplate template = new RestTemplate(clientHttpRequestFactory);
+        RestTemplate template =  new RestTemplate(clientHttpRequestFactory);
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setWriteAcceptCharset(false);
@@ -189,5 +178,4 @@ public class LanewebConfiguration {
     public RESTService restService(final RestOperations restOperations) {
         return new RESTService(restOperations);
     }
-
 }
