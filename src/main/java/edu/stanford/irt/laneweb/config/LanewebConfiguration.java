@@ -133,7 +133,7 @@ public class LanewebConfiguration {
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.closeIdleConnections(HTTP_CLOSE_IDLE_CONNECTIONS, TimeUnit.MILLISECONDS);
         CloseableHttpClient httpClient = HttpClients.custom().setConnectionManager(connectionManager)
-//                .setKeepAliveStrategy(new ConnectionKeepAliveStrategyImpl())
+                .setKeepAliveStrategy(new ConnectionKeepAliveStrategyImpl())
                 .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
