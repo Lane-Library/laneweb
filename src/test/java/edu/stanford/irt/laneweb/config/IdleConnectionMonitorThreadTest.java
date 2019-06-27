@@ -45,7 +45,7 @@ public class IdleConnectionMonitorThreadTest {
         expectLastCall().times(2);
         replay(this.connectionManager);
         this.monitor.start();
-        TimeUnit.MILLISECONDS.sleep(200);
+        TimeUnit.MILLISECONDS.sleep(250);
         this.monitor.shutdown();
         verify(this.connectionManager);
     }
