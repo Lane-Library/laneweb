@@ -6,13 +6,17 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class IdleConnectionMonitorThreadTest {
 
     private HttpClientConnectionManager connectionManager;
@@ -48,5 +52,14 @@ public class IdleConnectionMonitorThreadTest {
         TimeUnit.MILLISECONDS.sleep(250);
         this.monitor.shutdown();
         verify(this.connectionManager);
+    }
+
+    @Test
+    // run last so don't interrupt other tests
+    public final void testRunWithException() throws Exception {
+        this.monitor.setPollingTime(10);
+        Thread.currentThread().interrupt();
+        this.monitor.run();
+        assertTrue(this.monitor.isShutdown());
     }
 }
