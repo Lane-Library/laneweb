@@ -144,11 +144,7 @@ public final class IPGroup implements Serializable {
 
     @Override
     public boolean equals(final Object other) {
-        boolean equals = false;
-        if (other != null && other.getClass() == getClass() && other.hashCode() == hashCode()) {
-            return true;
-        }
-        return equals;
+        return (other != null && other.getClass() == getClass() && other.hashCode() == hashCode());
     }
 
     @Override
