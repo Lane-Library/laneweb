@@ -11,10 +11,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -128,17 +124,10 @@ public class LanewebConfiguration {
 
     @Bean
     public ClientHttpRequestFactory clientHttpRequestFactory() {
-        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setSocketTimeout(HTTP_READ_TIMEOUT)
-                .setConnectTimeout(HTTP_CONNECT_TIMEOUT).build();
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setConnectionManager(connectionManager)
-                .setDefaultRequestConfig(requestConfig).build();
-        IdleConnectionMonitorThread monitor = new IdleConnectionMonitorThread(connectionManager);
-        monitor.setDaemon(true);
-        monitor.start();
-        return new HttpComponentsClientHttpRequestFactory(httpClient);
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
+        requestFactory.setReadTimeout(HTTP_READ_TIMEOUT);
+        return requestFactory;
     }
 
     @Bean
