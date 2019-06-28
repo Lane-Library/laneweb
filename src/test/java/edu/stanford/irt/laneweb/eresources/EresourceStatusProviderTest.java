@@ -26,7 +26,7 @@ public class EresourceStatusProviderTest {
     @Before
     public void setUp() {
         this.solrService = strictMock(SolrService.class);
-        this.statusProvider = new EresourceStatusProvider(this.solrService, 100, 100);
+        this.statusProvider = new EresourceStatusProvider(this.solrService, 100, 100, 100);
     }
 
     @Test

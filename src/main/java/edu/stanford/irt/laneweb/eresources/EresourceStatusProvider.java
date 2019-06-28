@@ -13,24 +13,32 @@ import edu.stanford.irt.status.StatusProvider;
 
 public class EresourceStatusProvider implements StatusProvider {
 
-    private static final String BIB_SUCCESS_FORMAT = "bib record count: %d";
+    private static final String BIB = "bib";
 
     private static final String FAIL_FORMAT = "solr record counts failed: %s";
 
     private static final Logger log = LoggerFactory.getLogger(EresourceStatusProvider.class);
 
-    private static final String PUBMED_SUCCESS_FORMAT = "pubmed record count: %d";
+    private static final String PUBMED = "pubmed";
+
+    private static final String RECORD_SUCCESS_FORMAT = "%s record count: %d";
+
+    private static final String SUL = "sul";
 
     private long minBibCount;
 
     private long minPubmedCount;
 
+    private long minSulCount;
+
     private SolrService solrService;
 
-    public EresourceStatusProvider(final SolrService solrService, final long minBibCount, final long minPubmedCount) {
+    public EresourceStatusProvider(final SolrService solrService, final long minBibCount, final long minPubmedCount,
+            final long minSulCount) {
         this.solrService = solrService;
         this.minBibCount = minBibCount;
         this.minPubmedCount = minPubmedCount;
+        this.minSulCount = minSulCount;
     }
 
     @Override
@@ -38,12 +46,15 @@ public class EresourceStatusProvider implements StatusProvider {
         List<StatusItem> items = new ArrayList<>();
         try {
             Map<String, Long> results = this.solrService.recordCount();
-            long bibCount = results.containsKey("bib") ? results.get("bib").longValue() : 0;
+            long bibCount = results.containsKey(BIB) ? results.get(BIB).longValue() : 0;
             Status bibStatus = bibCount > this.minBibCount ? Status.OK : Status.ERROR;
-            items.add(new StatusItem(bibStatus, String.format(BIB_SUCCESS_FORMAT, bibCount)));
-            long pubmedCount = results.containsKey("pubmed") ? results.get("pubmed").longValue() : 0;
+            items.add(new StatusItem(bibStatus, String.format(RECORD_SUCCESS_FORMAT, BIB, bibCount)));
+            long pubmedCount = results.containsKey(PUBMED) ? results.get(PUBMED).longValue() : 0;
             Status pubmedStatus = pubmedCount > this.minPubmedCount ? Status.OK : Status.ERROR;
-            items.add(new StatusItem(pubmedStatus, String.format(PUBMED_SUCCESS_FORMAT, pubmedCount)));
+            items.add(new StatusItem(pubmedStatus, String.format(RECORD_SUCCESS_FORMAT, PUBMED, pubmedCount)));
+            long searchworksCount = results.containsKey(SUL) ? results.get(SUL).longValue() : 0;
+            Status searchworksStatus = searchworksCount > this.minSulCount ? Status.OK : Status.ERROR;
+            items.add(new StatusItem(searchworksStatus, String.format(RECORD_SUCCESS_FORMAT, SUL, searchworksCount)));
         } catch (RuntimeException e) {
             String message = String.format(FAIL_FORMAT, e);
             items.add(new StatusItem(Status.ERROR, message));

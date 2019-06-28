@@ -35,6 +35,8 @@ public class StatusConfiguration {
 
     private static final int MIN_PUBMED_COUNT = 27_000_000;
 
+    private static final int MIN_SUL_COUNT = 2_000_000;
+
     private static final int SLOW_INDEX_HTML_TIME = 250;
 
     private static final int SLOW_SUGGESTION_TIME = 250;
@@ -42,7 +44,7 @@ public class StatusConfiguration {
     @Bean
     @Order(4)
     public EresourceStatusProvider eresourceStatusProvider(final SolrService solrService) {
-        return new EresourceStatusProvider(solrService, MIN_BIB_COUNT, MIN_PUBMED_COUNT);
+        return new EresourceStatusProvider(solrService, MIN_BIB_COUNT, MIN_PUBMED_COUNT, MIN_SUL_COUNT);
     }
 
     @Bean
