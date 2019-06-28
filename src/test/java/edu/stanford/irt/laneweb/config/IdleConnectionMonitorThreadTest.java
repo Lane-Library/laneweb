@@ -44,13 +44,15 @@ public class IdleConnectionMonitorThreadTest {
     public final void testRun() throws Exception {
         this.monitor.setPollingTime(100);
         this.connectionManager.closeExpiredConnections();
-        expectLastCall().times(2);
+        expectLastCall().atLeastOnce();
         this.connectionManager.closeIdleConnections(30_000, TimeUnit.MILLISECONDS);
-        expectLastCall().times(2);
+        expectLastCall().atLeastOnce();
         replay(this.connectionManager);
         this.monitor.start();
         TimeUnit.MILLISECONDS.sleep(250);
         verify(this.connectionManager);
+        this.monitor.shutdown();
+        assertTrue(this.monitor.isShutdown());
     }
 
     @Test
