@@ -10,7 +10,7 @@
                 <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="biomed-resources/((.+)?(browse|core|mobile|pda|software-)(.+)?).html" type="regexp">
+            <map:match pattern="biomed-resources/((.+)?(browse|mobile|pda|software-)(.+)?).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>

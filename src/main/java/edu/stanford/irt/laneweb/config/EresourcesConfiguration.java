@@ -41,7 +41,6 @@ import edu.stanford.irt.laneweb.eresources.browse.BibIDToEresourceTransformer;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseAllEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseLetter;
-import edu.stanford.irt.laneweb.eresources.browse.CoreEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.MeSHEresourcesGenerator;
@@ -138,12 +137,6 @@ public class EresourcesConfiguration {
     @Scope("prototype")
     public Generator eresourcesBrowseGenerator(final SolrService solrService) {
         return new BrowseEresourcesGenerator("er-browse-html", solrService, pagingEresourceListHTMLSAXStrategy());
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-core-html")
-    @Scope("prototype")
-    public Generator eresourcesCoreGenerator(final SolrService solrService) {
-        return new CoreEresourcesGenerator("er-core-html", solrService, pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/eresources-count")

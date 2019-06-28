@@ -70,14 +70,5 @@
             </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="core/type/*.html" type="wildcard">
-            <map:generate type="er-core-html">
-                <map:parameter name="type" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
-                <map:parameter name="type" value="{1}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
     </map:pipeline>
 </map:sitemap>

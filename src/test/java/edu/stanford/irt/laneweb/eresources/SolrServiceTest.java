@@ -78,20 +78,6 @@ public class SolrServiceTest {
     }
 
     @Test
-    public final void testGetCore() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getCore("type");
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetCoreException() {
-        this.solrService.getCore(null);
-    }
-
-    @Test
     public final void testGetMesh() {
         expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);

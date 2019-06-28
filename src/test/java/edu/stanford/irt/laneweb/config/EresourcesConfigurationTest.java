@@ -37,11 +37,6 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
-    public void testEresourcesCoreGenerator() {
-        assertNotNull(this.configuration.eresourcesCoreGenerator(null));
-    }
-
-    @Test
     public void testEresourcesCountGenerator() {
         assertNotNull(this.configuration.eresourcesCountGenerator(null));
     }

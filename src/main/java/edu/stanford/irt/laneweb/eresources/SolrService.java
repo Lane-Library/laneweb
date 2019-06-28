@@ -129,17 +129,6 @@ public class SolrService {
         return this.repository.getByBibID(bibID);
     }
 
-    public List<Eresource> getCore(final String type) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(CORE_FQ);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
     public List<Eresource> getMesh(final String type, final String mesh) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
