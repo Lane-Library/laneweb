@@ -7,14 +7,25 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="2019-06-10" version="3.5.41" description="3.5.41 bug fix release">
-            <action date="2019-06-05" dev="alainb" issue="151498" type="fix">
-				image admin doesn't display any images
+        <release date="2019-07-01" version="3.5.42" description="3.5.42 bug fix release">
+            <action date="2019-06-28" dev="ryanmax" issue="152687" type="update">
+                remove browse by "core" materials generator
+            </action>
+            <action date="2019-06-27" dev="ryanmax" issue="152691" type="update">
+                add status check for SUL/SearchWorks records
+            </action>
+            <action date="2019-06-17" dev="olgary" issue="151936" type="update">
+                remove "formerly DocXpress" from templates
             </action>
         </release>
-    	<release date="2019-06-02" version="3.5.40" description="3.5.40 bug fix release">
-            <action date="2019-06-02" dev="olya" issue="151124" type="fix">
-            	broken link fix in history template   
+        <release date="2019-06-10" version="3.5.41" description="3.5.41 bug fix release">
+            <action date="2019-06-05" dev="alainb" issue="151498" type="fix">
+                image admin doesn't display any images
+            </action>
+        </release>
+        <release date="2019-06-02" version="3.5.40" description="3.5.40 bug fix release">
+            <action date="2019-06-02" dev="olgary" issue="151124" type="fix">
+                broken link fix in history template   
             </action>
         </release>
         <release date="2019-05-08" version="3.5.39" description="3.5.39 emergency release">
@@ -205,7 +216,7 @@
             </action>
         </release>
         <release date="2018-07-16" version="3.5.16" description="3.5.16 bug fix release">
-            <action date="2018-07-11" dev="olyary" issue="143740" type="update">
+            <action date="2018-07-11" dev="olgary" issue="143740" type="update">
                 3 templates label link changes
             </action>
             <action date="2018-07-11" dev="ceyates" issue="143703" type="add">
@@ -617,7 +628,7 @@
                 add search box to the Dr Wilson's book
             </action>
         </release>
-    	<release date="2017-09-18" version="3.3.45" description="3.3.45 bug fix release">
+        <release date="2017-09-18" version="3.3.45" description="3.3.45 bug fix release">
             <action date="2017-09-13" dev="ryanmax" issue="134403" type="update">
                 Lane+ display change requests
             </action>
