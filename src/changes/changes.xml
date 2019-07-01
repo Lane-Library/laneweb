@@ -14,6 +14,9 @@
             <action date="2019-06-27" dev="ryanmax" issue="152691" type="update">
                 add status check for SUL/SearchWorks records
             </action>
+            <action date="2019-06-27" dev="ryanmax" issue="152689" type="add">
+                add ability to close idle and expired HTTPClient connections for GCP Cloud NAT (disabled in release)
+            </action>
             <action date="2019-06-17" dev="olgary" issue="151936" type="update">
                 remove "formerly DocXpress" from templates
             </action>
