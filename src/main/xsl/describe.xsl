@@ -54,7 +54,7 @@
 
     <xsl:template match="s:resource">
       
-            <tr><td><xsl:value-of select="@s:id"/> <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg=035a+%28LaneConnex%29+{@s:id}&amp;Search_Code=CMD*&amp;CNT=10"><img src="/graphics/icons/infoIcon.gif"  border="0"/></a></td> 
+            <tr><td><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg=035a+%28LaneConnex%29+{@s:id}&amp;Search_Code=CMD*&amp;CNT=10"><xsl:value-of select="@s:id"/></a></td> 
              <td><xsl:call-template name="resource-portals">
                   <xsl:with-param name="resource" select="@s:id"/>
               </xsl:call-template>
