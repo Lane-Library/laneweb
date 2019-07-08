@@ -2,67 +2,67 @@
 
     "use strict";
 
-    var gaJsHost = (("https:" === location.protocol) ? "https://ssl." : "http://www."),
-        noop = function() {/*do nothing*/},
-        noopTracker = {
-            _setDomainName: noop,
-            _setVar: noop,
-            _setCustomVar: noop,
-            _trackPageview: noop,
-            _trackEvent: noop
-        },
-        createPageTracker = function(gat) {
-            var host = location.host,
-                pageTracker;
-            if (!gat) {
-                pageTracker = noopTracker;
-            } else if (host.match("lane.stanford.edu")) {
-                pageTracker = gat._createTracker("UA-3202241-2","gaPageTracker");
-            } else if (host.match("lane-beta.stanford.edu")) {
-                pageTracker = gat._createTracker("UA-3203486-9","gaPageTracker");
-            } else {
-                pageTracker = gat._createTracker("UA-3203486-2","gaPageTracker");
-            }
-            return pageTracker ? pageTracker : noopTracker;
-        },
-        gaPageTracker = noopTracker;
+    var getTrackerId = function () {
+        var host = location.host,
+            trackerId;
+        if (host.match("lane.stanford.edu")) {
+            trackerId = "UA-3202241-2";
+        } else if (host.match("lane-beta.stanford.edu")) {
+            trackerId = "UA-3203486-9";
+        } else {
+            trackerId = "UA-3203486-2";
+        }
+        return trackerId;
+    },
+    GA_MEASUREMENT_ID = getTrackerId(),
+    // custom dimension indexes must be configured in the GA admin interface for each property
+    // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
+    IP_GROUP_DIMENSION = 'dimension1',
+    AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
+    BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3';
 
-    L.Get.script(gaJsHost + "google-analytics.com/ga.js", {
+    // load analytics.js and add the ga object
+    // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
+    L.Get.script("https://www.google-analytics.com/analytics.js", {
         onSuccess: function() {
             var model = L.Model,
-                ipgroup = model.get(model.IPGROUP),
+                ipGroup = model.get(model.IPGROUP),
                 auth = model.get(model.AUTH);
-            gaPageTracker = createPageTracker(window._gat);
-            //you can call _setLocalServerMode on gaPageTracker for testing/debugging
-            gaPageTracker._setDomainName(".stanford.edu");
-            if (ipgroup) {
-                gaPageTracker._setVar(ipgroup);
-                gaPageTracker._setCustomVar(1,'ipGroup',ipgroup ,2);
+
+            window.ga = window.ga || function() {
+                    (ga.q = ga.q || []).push(arguments)
+                };
+            ga.l = 1 * new Date();
+
+            ga('create', GA_MEASUREMENT_ID, 'auto');
+
+            if (ipGroup) {
+                ga('set', IP_GROUP_DIMENSION, ipGroup);
             }
             if (auth) {
-                gaPageTracker._setCustomVar(2,'authenticatedSession',auth,2);
+                ga('set', AUTHENTICATED_SESSION_DIMENSION, auth);
                 if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
-                    gaPageTracker._setCustomVar(3,'bookmarkEnabledSession',auth,2);
+                    ga('set', BOOKMARK_ENABLED_SESSION_DIMENSION, auth);
                 }
             }
-            gaPageTracker._trackPageview();
+            ga('send', 'pageview');
         }
     });
 
     L.on("tracker:trackableEvent",  function(event) {
-        gaPageTracker._trackEvent(event.category, event.action, event.label, event.value);
+        ga('send', 'event', event.category, event.action, event.label, event.value);
     });
 
     L.on("tracker:trackablePageview",  function(event) {
         if (event.external) {
             if(event.query !== undefined && event.query !== '' ){
-                gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(event.title) ,event.host+event.path+event.query);
+                ga('send', 'event', 'lane:offsite', "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title), event.host + event.path + event.query);
             }else{
-                gaPageTracker._trackEvent('lane:offsite', "/OFFSITE-CLICK-EVENT/"+encodeURIComponent(event.title) ,event.host+event.path);
+                ga('send', 'event', 'lane:offsite', "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title), event.host + event.path);
             }
-            gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(event.title));
+            ga('send', 'pageview', '/OFFSITE/' + encodeURIComponent(event.title));
         } else {
-            gaPageTracker._trackPageview('/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path);
+            ga('send', 'pageview', '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path);
         }
     });
 })();

@@ -1,33 +1,34 @@
 // Google Analytics tracking
-var _gaq = _gaq || [];
+// custom dimension indexes must be configured in the GA admin interface for each property
+// https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
+var IP_GROUP_DIMENSION = 'dimension1',
+AUTHENTICATED_SESSION_DIMENSION = 'dimension2';
+
 $.ajax({
-    url: window.model['base-path'] + "/apps/ipGroupFetch",
-    dataType: "text",
-    success: function(ipGroup) {
-        if(ipGroup) {
-            if(document.location.host.match("lane.stanford.edu")){
-                _gaq.push(['_setAccount', 'UA-3202241-10']);
-            }
-            else {
-                _gaq.push(['_setAccount', 'UA-3203486-11']);
-            }
-            //_gaq.push(['_setLocalServerMode']);
-            _gaq.push(['_setDomainName', '.stanford.edu']);
-            _gaq.push(['_setVar', ipGroup]);
-            _gaq.push(['_setCustomVar', 1, 'ipGroup', ipGroup, 2]);
-            _gaq.push(['_trackPageview']);
+    url: "https://www.google-analytics.com/analytics.js",
+    dataType: "script",
+    success: function() {
+        var model = window.model,
+        ipGroup = model['ipgroup'],
+        auth = model['auth'],
+        trackerId = location.host.match("lane.stanford.edu") ? "UA-3202241-10" : "UA-3203486-11";
+    
+        window.ga = window.ga || function() {
+                (ga.q = ga.q || []).push(arguments)
+            };
+        ga.l = 1 * new Date();
+        
+        ga('create', trackerId, 'auto');
+        
+        if (ipGroup) {
+            ga('set', IP_GROUP_DIMENSION, ipGroup);
         }
+        if (auth) {
+            ga('set', AUTHENTICATED_SESSION_DIMENSION, auth);
+        }
+        ga('send', 'pageview');
     }
 });
-
-(function() {
-    var s, ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-})();
 
 if (typeof ($.LANE.tracking) === "undefined") {
     $.LANE.tracking = {};
@@ -102,27 +103,27 @@ $.LANE.tracking.track = function(event) {
             click: function(node) {
                 var label, basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
                 if(node.nodeName === 'A' && $(node).parent().attr('rank')){
-                    _gaq.push(['_trackEvent', "searchResultClick", $("input[name=qSearch]").val(), $(node).text(), parseInt($(node).parent().attr('rank'),10)]);
+                    ga('send', 'event', "searchResultClick", $("input[name=qSearch]").val(), $(node).text(), parseInt($(node).parent().attr('rank'),10));
                 }
                 if (node.nodeName === 'A'||node.nodeName === 'IMG') {
-                    _gaq.push(['_trackPageview', basePath + encodeURIComponent($.LANE.tracking.getTrackingTitle(node))]);
+                    ga('send', 'pageview', basePath + encodeURIComponent($.LANE.tracking.getTrackingTitle(node)));
                 } else if (node.nodeName === 'H4' && node.parentNode.parentNode.id === 'hours') {
                     label = (node.parentNode.parentNode.className === 'expanded') ? "open" : "close";
-                    _gaq.push(['_trackPageview', basePath + "hours/" + label]);
+                    ga('send', 'pageview', basePath + "hours/" + label);
                 }
             },
             vclick: function(node) {
                 if (node.parentNode && node.parentNode.className === 'searchTabs' && node.nodeName === 'LI') {
-                    _gaq.push(['_trackEvent', "searchTabClick", $(node).text()]);
+                    ga('send', 'event', "searchTabClick", $(node).text());
                 }
             },
             submit: function(node) {
                 if (node.nodeName === 'FORM') {
-                    _gaq.push(['_trackPageview', "/search?source="+$(node).attr('action')+"&"+$(node).serialize()]);
+                    ga('send', 'pageview', "/search?source="+$(node).attr('action')+"&"+$(node).serialize());
                 }
             },
             autocompleteselect: function(node) {
-                _gaq.push(['_trackEvent', "suggestSelect", node.id, decodeURIComponent(node.textContent)]);
+                ga('send', 'event', "suggestSelect", node.id, decodeURIComponent(node.value));
             }
     };
     anchorNode = getAnchorNode(event);
@@ -148,5 +149,5 @@ $(document).bind("vclick", function(e) {
     $.LANE.tracking.track(e);
 });
 $(document).bind('spellSuggestion spellSuggestionClick', function(e, form, searchTerm, suggestion) {
-    _gaq.push(['_trackEvent', e.type, form.attr('action'), "term->"+searchTerm+"::suggestion->"+suggestion]);
+    ga('send', 'event', e.type, form.attr('action'), "term->"+searchTerm+"::suggestion->"+suggestion);
 });
