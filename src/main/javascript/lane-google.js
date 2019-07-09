@@ -32,8 +32,8 @@
 
             window.ga = window.ga || function() {
                 ga.q = ga.q || [];
-                    ga.q.push(arguments);
-                };
+                ga.q.push(arguments);
+            };
             ga.l = (new Date()).getTime();
 
             ga('create', GA_MEASUREMENT_ID, 'auto');

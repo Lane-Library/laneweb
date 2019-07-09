@@ -1,8 +1,4 @@
 // Google Analytics tracking
-// custom dimension indexes must be configured in the GA admin interface for each property
-// https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
-var IP_GROUP_DIMENSION = 'dimension1',
-AUTHENTICATED_SESSION_DIMENSION = 'dimension2';
 
 $.ajax({
     url: "https://www.google-analytics.com/analytics.js",
@@ -11,15 +7,22 @@ $.ajax({
         var model = window.model,
         ipGroup = model['ipgroup'],
         auth = model['auth'],
-        trackerId = location.host.match("lane.stanford.edu") ? "UA-3202241-10" : "UA-3203486-11";
-    
+        trackerId = location.host.match("lane.stanford.edu") ? "UA-3202241-10" : "UA-3203486-11",
+        // custom dimension indexes must be configured in the GA admin interface for each property
+        // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
+        IP_GROUP_DIMENSION = 'dimension1',
+        AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
+        ga = window.ga;
+
         window.ga = window.ga || function() {
-                (ga.q = ga.q || []).push(arguments)
-            };
-        ga.l = 1 * new Date();
-        
+            ga.q = ga.q || [];
+            ga.q.push(arguments);
+        };
+
+        ga.l = (new Date()).getTime();
+
         ga('create', trackerId, 'auto');
-        
+
         if (ipGroup) {
             ga('set', IP_GROUP_DIMENSION, ipGroup);
         }
