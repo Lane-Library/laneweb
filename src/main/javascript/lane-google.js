@@ -27,12 +27,14 @@
         onSuccess: function() {
             var model = L.Model,
                 ipGroup = model.get(model.IPGROUP),
-                auth = model.get(model.AUTH);
+                auth = model.get(model.AUTH),
+                ga = window.ga;
 
             window.ga = window.ga || function() {
-                    (ga.q = ga.q || []).push(arguments)
+                ga.q = ga.q || [];
+                    ga.q.push(arguments);
                 };
-            ga.l = 1 * new Date();
+            ga.l = (new Date()).getTime();
 
             ga('create', GA_MEASUREMENT_ID, 'auto');
 
