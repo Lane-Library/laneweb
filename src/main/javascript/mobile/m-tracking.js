@@ -88,7 +88,7 @@ $.LANE.tracking.getTrackingTitle = function(node) {
 
 $.LANE.tracking.track = function(event) {
 
-    var handle, anchorNode, getAnchorNode = function(e) {
+    var ga = window.ga, handle, anchorNode, getAnchorNode = function(e) {
         var node = e.srcElement || e.target;
         // find parent A for IMG and STRONG nodes if possible
         if(node.nodeName === 'IMG'||node.nodeName === 'STRONG'){
@@ -104,7 +104,7 @@ $.LANE.tracking.track = function(event) {
     },
     eventHandlers = {
             click: function(node) {
-                var ga = window.ga, label, basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
+                var label, basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
                 if(node.nodeName === 'A' && $(node).parent().attr('rank')){
                     ga('send', 'event', "searchResultClick", $("input[name=qSearch]").val(), $(node).text(), parseInt($(node).parent().attr('rank'),10));
                 }
@@ -152,5 +152,5 @@ $(document).bind("vclick", function(e) {
     $.LANE.tracking.track(e);
 });
 $(document).bind('spellSuggestion spellSuggestionClick', function(e, form, searchTerm, suggestion) {
-    ga('send', 'event', e.type, form.attr('action'), "term->"+searchTerm+"::suggestion->"+suggestion);
+    window.ga('send', 'event', e.type, form.attr('action'), "term->"+searchTerm+"::suggestion->"+suggestion);
 });

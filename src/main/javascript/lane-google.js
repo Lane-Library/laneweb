@@ -19,7 +19,8 @@
     // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
     IP_GROUP_DIMENSION = 'dimension1',
     AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
-    BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3';
+    BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3',
+    ga = window.ga;
 
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
@@ -27,8 +28,7 @@
         onSuccess: function() {
             var model = L.Model,
                 ipGroup = model.get(model.IPGROUP),
-                auth = model.get(model.AUTH),
-                ga = window.ga;
+                auth = model.get(model.AUTH);
 
             window.ga = window.ga || function() {
                 ga.q = ga.q || [];
