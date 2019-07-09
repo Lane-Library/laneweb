@@ -42,8 +42,6 @@ public class SolrService {
 
     private static final String COLLECTION = "laneSearch";
 
-    private static final SimpleFilterQuery CORE_FQ = new SimpleFilterQuery(new SimpleStringCriteria("isCore:1"));
-
     private static final int CURRENT_YEAR = LocalDate.now().getYear();
 
     private static final String DATE_QUERY_PREFIX = "date:[";
