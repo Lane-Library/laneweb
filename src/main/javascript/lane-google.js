@@ -19,8 +19,7 @@
     // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
     IP_GROUP_DIMENSION = 'dimension1',
     AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
-    BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3',
-    ga = window.ga;
+    BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3';
 
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
@@ -28,7 +27,8 @@
         onSuccess: function() {
             var model = L.Model,
                 ipGroup = model.get(model.IPGROUP),
-                auth = model.get(model.AUTH);
+                auth = model.get(model.AUTH),
+                ga = window.ga;
 
             window.ga = window.ga || function() {
                 ga.q = ga.q || [];
@@ -52,10 +52,11 @@
     });
 
     L.on("tracker:trackableEvent",  function(event) {
-        ga('send', 'event', event.category, event.action, event.label, event.value);
+        window.ga('send', 'event', event.category, event.action, event.label, event.value);
     });
 
     L.on("tracker:trackablePageview",  function(event) {
+        var ga = window.ga;
         if (event.external) {
             if(event.query !== undefined && event.query !== '' ){
                 ga('send', 'event', 'lane:offsite', "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title), event.host + event.path + event.query);
