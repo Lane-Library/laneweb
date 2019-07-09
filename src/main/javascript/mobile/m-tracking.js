@@ -4,9 +4,8 @@ $.ajax({
     url: "https://www.google-analytics.com/analytics.js",
     dataType: "script",
     success: function() {
-        var model = window.model,
-        ipGroup = model['ipgroup'],
-        auth = model['auth'],
+        var ipGroup = window.model['ipgroup'],
+        auth = window.model['auth'],
         trackerId = location.host.match("lane.stanford.edu") ? "UA-3202241-10" : "UA-3203486-11",
         // custom dimension indexes must be configured in the GA admin interface for each property
         // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
@@ -45,8 +44,9 @@ $.LANE.tracking.isExternal = function(node) {
             || node.host && (node.host.match('^(?:login\\.)?laneproxy.stanford.edu$')
                     || node.host !== document.location.host)) {
         return true;
+    } else {
+        return false;
     }
-    return false;
 };
 
 $.LANE.tracking.getTrackingTitle = function(node) {
@@ -104,7 +104,7 @@ $.LANE.tracking.track = function(event) {
     },
     eventHandlers = {
             click: function(node) {
-                var label, basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
+                var ga = window.ga, label, basePath = $.LANE.tracking.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
                 if(node.nodeName === 'A' && $(node).parent().attr('rank')){
                     ga('send', 'event', "searchResultClick", $("input[name=qSearch]").val(), $(node).text(), parseInt($(node).parent().attr('rank'),10));
                 }
