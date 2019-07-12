@@ -10,8 +10,8 @@ public class BookmarkingDataBinder implements DataBinder {
 
     private String bookmarking;
 
-    public BookmarkingDataBinder(final String disasterMode) {
-        this.bookmarking = disasterMode == null ? "off" : disasterMode;
+    public BookmarkingDataBinder(final String bookmarkingMode) {
+        this.bookmarking = bookmarkingMode == null ? "off" : bookmarkingMode;
     }
 
     @Override
