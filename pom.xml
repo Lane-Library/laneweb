@@ -443,7 +443,8 @@
                                 <include>lane-reset-min.css</include>
                                 <include>pure-grids-min.css</include>
                                 <include>googlefonts-min.css</include>
-                                <include>fontawesome-min.css</include>
+                                <include>fontawesome/all-min.css</include>
+                                <include>fontawesome/v4-shims-min.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
                                 <include>fontawesome-local-min.css</include>

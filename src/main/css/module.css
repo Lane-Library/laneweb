@@ -117,15 +117,21 @@
 .grand-rounds:before {
     background-color: #aabec6;
     content: '\f0f1';
+    font-family: 'Font Awesome 5 Free';
+    font-weight:900;
 }
 
 .upcoming-classes:before {
     background-color: #aabec6;
     content: '\f19d';
+    font-family: 'Font Awesome 5 Free';
+    font-weight:900;
 }
 .popular:before {
     background-color: #8c1515;
     content: '\f005';
+    font-family: 'Font Awesome 5 Free';
+    font-weight:900;
 }
 
 .new-resource {
