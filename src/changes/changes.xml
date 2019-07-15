@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-07-15" version="3.5.43" description="bug fix release">
+            <action date="2019-07-12" dev="ryanmax" issue="52579" type="update">
+                simplify proxy links: remove ticket authentication from proxy links
+            </action>
+            <action date="2019-07-09" dev="ryanmax" issue="150934" type="update">
+                upgrade Google Analytics tracking code
+            </action>
+        </release>
         <release date="2019-07-01" version="3.5.42" description="3.5.42 bug fix release">
             <action date="2019-06-28" dev="ryanmax" issue="152687" type="update">
                 remove browse by "core" materials generator
