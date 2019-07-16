@@ -6,7 +6,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,7 +27,7 @@ public class LanewebConfigurationTest {
 
     @Before
     public void setUp() throws URISyntaxException {
-        this.configuration = new LanewebConfiguration(new URI("classes"), new URI("content"), Boolean.TRUE, "rw",
+        this.configuration = new LanewebConfiguration(new URI("classes"), new URI("content"), "rw",
                 mock(ServletContext.class), "version");
     }
 
@@ -56,7 +55,6 @@ public class LanewebConfigurationTest {
     public void testModel() {
         Map<String, Object> model = this.configuration.model();
         assertEquals("version", model.get(Model.VERSION));
-        assertSame(Boolean.TRUE, model.get(Model.DISASTER_MODE));
         assertEquals("content", ModelUtil.getObject(model, Model.CONTENT_BASE, URI.class).toString());
         assertEquals("classes", ModelUtil.getObject(model, Model.CLASSES_SERVICE_URI, URI.class).toString());
         assertEquals("rw", ModelUtil.getString(model, Model.BOOKMARKING));

@@ -27,13 +27,6 @@ public class BaseProxyURLDataBinderTest {
     }
 
     @Test
-    public void testBindDisasterModeTrue() {
-        this.model.put(Model.DISASTER_MODE, Boolean.TRUE);
-        this.binder.bind(this.model, null);
-        assertEquals("https://login.laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
-    }
-
-    @Test
     public void testBindProxyLinksFalse() {
         this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
         this.binder.bind(this.model, null);
@@ -59,7 +52,7 @@ public class BaseProxyURLDataBinderTest {
         this.model.put(Model.BASE_PATH, "");
         this.model.put(Model.USER_ID, "userid");
         this.binder.bind(this.model, null);
-        assertEquals("/secure/apps/proxy/credential?url=", this.model.get(Model.BASE_PROXY_URL));
+        assertEquals("https://login.laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
     }
 
     @Test
@@ -67,7 +60,7 @@ public class BaseProxyURLDataBinderTest {
         this.model.put(Model.BASE_PATH, "");
         this.model.put(Model.TICKET, new Ticket("", ""));
         this.binder.bind(this.model, null);
-        assertEquals("/secure/apps/proxy/credential?url=", this.model.get(Model.BASE_PROXY_URL));
+        assertEquals("https://login.laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
     }
 
     @Test
@@ -84,7 +77,6 @@ public class BaseProxyURLDataBinderTest {
         Ticket ticket = new Ticket("", "");
         this.model.put(Model.TICKET, ticket);
         this.binder.bind(this.model, null);
-        assertEquals("https://login.laneproxy.stanford.edu/login?user=userid&ticket=" + ticket + "&url=",
-                this.model.get(Model.BASE_PROXY_URL));
+        assertEquals("https://login.laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
     }
 }
