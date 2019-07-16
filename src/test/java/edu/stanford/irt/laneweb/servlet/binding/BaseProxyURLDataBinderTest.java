@@ -27,13 +27,6 @@ public class BaseProxyURLDataBinderTest {
     }
 
     @Test
-    public void testBindDisasterModeTrue() {
-        this.model.put(Model.DISASTER_MODE, Boolean.TRUE);
-        this.binder.bind(this.model, null);
-        assertEquals("https://login.laneproxy.stanford.edu/login?url=", this.model.get(Model.BASE_PROXY_URL));
-    }
-
-    @Test
     public void testBindProxyLinksFalse() {
         this.model.put(Model.PROXY_LINKS, Boolean.FALSE);
         this.binder.bind(this.model, null);

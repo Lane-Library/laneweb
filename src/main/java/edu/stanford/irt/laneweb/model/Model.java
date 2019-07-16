@@ -33,8 +33,6 @@ public final class Model {
 
     public static final String DEBUG = "debug";
 
-    public static final String DISASTER_MODE = "disaster-mode";
-
     public static final String EMAIL = "email";
 
     public static final String EMRID = "emrid";
