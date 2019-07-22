@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2019-07-22" version="3.5.44" description="bug fix release">
+            <action date="2019-07-16" dev="ryanmax" issue="153271" type="update">
+                remove disaster-mode config flag
+            </action>
+        </release>
         <release date="2019-07-15" version="3.5.43" description="bug fix release">
             <action date="2019-07-12" dev="ryanmax" issue="52579" type="update">
                 simplify proxy links: remove ticket authentication from proxy links
