@@ -7,13 +7,21 @@
     xmlns:a="aggregate"
     exclude-result-prefixes="h s a r" version="2.0">
 
-    <xsl:param name="source"/>
-
-    <xsl:param name="proxy-links"/>
+    <xsl:param name="facets"/>
 
     <xsl:param name="ipgroup"/>
 
+    <xsl:param name="proxy-links"/>
+
+    <xsl:param name="page"/>
+
     <xsl:param name="query"/>
+
+    <xsl:param name="query-string"/>
+
+    <xsl:param name="sort" />
+
+    <xsl:param name="source"/>
 
     <xsl:param name="url-encoded-query"/>
 
@@ -22,9 +30,6 @@
     </xsl:variable>
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
-
-    <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
-    <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
     <xsl:include href="resourceListPagination.xsl"/>
 
