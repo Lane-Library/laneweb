@@ -22,6 +22,9 @@
     <xsl:param name="sort" />
 
     <xsl:param name="source"/>
+    
+    <!-- used to enable image promotion -->
+    <xsl:param name="sourceid"/>
 
     <xsl:param name="url-encoded-query"/>
 
@@ -35,6 +38,8 @@
 
     <!--  placement of image search results -->
     <xsl:variable name="images-promo-position">4</xsl:variable>
+
+    <xsl:variable name="images-promo-enabled" select="$sourceid = 'images-promo'"/>
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
@@ -449,7 +454,7 @@
 
     <xsl:template name="images-promotion">
         <xsl:param name="result-position"/>
-        <xsl:if test="contains($query-string,'promo') and $images-promo-position = $result-position">
+        <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position">
             <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image?source=pmc-images-all&amp;q=',$url-encoded-query)"/>
             <xsl:variable name="imageResults" select="document($imageUrl)"/>
             <xsl:if test="count($imageResults//img) > 50">
