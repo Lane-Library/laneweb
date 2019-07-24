@@ -45,7 +45,6 @@ $.LANE.validateForm = function(event){
     if(!valid){
         event.stopPropagation();
         event.preventDefault();
-        alert('nothing to search for');
     }
     return valid;
 };
