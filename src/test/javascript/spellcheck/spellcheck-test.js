@@ -10,6 +10,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var node = Y.one("#spellCheck").one("a");
             Y.Assert.areEqual("suggestion", node.get("text"));
             Y.Assert.areEqual(location.href, node.get("href"));
+            Y.Assert.areEqual("inline", node.getStyle("display"));
         }
     });
 
