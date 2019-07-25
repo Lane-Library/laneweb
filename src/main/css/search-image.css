@@ -303,5 +303,6 @@
 }
 
 #imageList.searchPromo {
-    max-width: 835px;
+    max-width: 95%;
+    overflow: hidden;
 }
