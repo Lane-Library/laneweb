@@ -4,10 +4,6 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     exclude-result-prefixes="h s" version="2.0">
     
-    <xsl:param name="page"/>
-    
-    <xsl:param name="facets"/>
-
     <xsl:variable name="base-query-string" select="concat('?',replace($query-string,'&amp;page=\d+',''))"/>
 
     <xsl:template name="resultsText">

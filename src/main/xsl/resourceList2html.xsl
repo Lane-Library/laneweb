@@ -7,13 +7,24 @@
     xmlns:a="aggregate"
     exclude-result-prefixes="h s a r" version="2.0">
 
-    <xsl:param name="source"/>
-
-    <xsl:param name="proxy-links"/>
+    <xsl:param name="facets"/>
 
     <xsl:param name="ipgroup"/>
 
+    <xsl:param name="proxy-links"/>
+
+    <xsl:param name="page"/>
+
     <xsl:param name="query"/>
+
+    <xsl:param name="query-string"/>
+
+    <xsl:param name="sort" />
+
+    <xsl:param name="source"/>
+    
+    <!-- used to enable image promotion -->
+    <xsl:param name="sourceid"/>
 
     <xsl:param name="url-encoded-query"/>
 
@@ -21,10 +32,16 @@
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
 
-    <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
+    <xsl:variable name="images-url">
+        <xsl:value-of select="concat('/search.html?source=images-all&amp;q=',$url-encoded-query)"/>
+    </xsl:variable>
 
-    <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
-    <xsl:variable name="moreResultsLimit">10</xsl:variable>
+    <!--  placement of image search results -->
+    <xsl:variable name="images-promo-position">4</xsl:variable>
+
+    <xsl:variable name="images-promo-enabled" select="$sourceid = 'images-promo'"/>
+
+    <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
     <xsl:include href="resourceListPagination.xsl"/>
 
@@ -163,6 +180,9 @@
     <xsl:template match="s:result[@type='eresource']">
         <xsl:variable name="total" select="number(s:total)"/>
         <xsl:variable name="available" select="number(s:available)"/>
+        <xsl:call-template name="images-promotion">
+            <xsl:with-param name="result-position" select="position()"/>
+        </xsl:call-template>
         <li class="resource" data-sid="{s:id}">
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
@@ -430,6 +450,28 @@
                 <xsl:value-of select="concat(string-join($tokens[position() &lt; $index], ', '), ', ')"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="images-promotion">
+        <xsl:param name="result-position"/>
+        <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position">
+            <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image?source=pmc-images-all&amp;q=',$url-encoded-query)"/>
+            <xsl:variable name="imageResults" select="document($imageUrl)"/>
+            <xsl:if test="count($imageResults//img) > 50">
+                <li>
+                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Biomedical Images Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Biomedical Search</a>
+                    <div id="imageList" class="searchPromo">
+                        <div class="pure-g">
+                            <xsl:for-each select="$imageResults//div[@id='imageList'][1]//img/@src">
+                                <div class="pure-u-1-5">
+                                    <a href="{$images-url}" title="More images from Lane's Biomedical Images Search"><img src="{.}"/></a>
+                                </div>
+                            </xsl:for-each>
+                        </div>
+                    </div>
+                </li>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>

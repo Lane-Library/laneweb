@@ -75,7 +75,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-metasearch.js",
         "lane-search-images.js",
         "lane-tooltips.js",
-        "lane-popin.js",
         "lane-spellcheck.js",
         "description-toggle.js",
         "lane-feedback.js",

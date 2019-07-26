@@ -301,3 +301,8 @@
 #tabs-image-search span {
     font-weight: normal;
 }
+
+#imageList.searchPromo {
+    max-width: 95%;
+    overflow: hidden;
+}
