@@ -42,18 +42,28 @@
 	</xsl:template>
 
 	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li[@class=$source]//h:a/h:span">
-		<xsl:variable name="a" select="substring(@id, 10)"></xsl:variable>
+		<xsl:variable name="copyright" select="substring(@id, 10)"></xsl:variable>
 		<xsl:copy>
-			<xsl:value-of select="/d:doc/map/entry/string[text() = $a]/following-sibling::string"></xsl:value-of>
+			<xsl:choose>
+				<xsl:when test="/d:doc/map/entry/string[text() = $copyright]/following-sibling::string != ''">
+					<xsl:value-of select="/d:doc/map/entry/string[text() = $copyright]/following-sibling::string"></xsl:value-of>
+				</xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
+			</xsl:choose>
 			<xsl:text> images with</xsl:text>
 		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="h:div[@id='tabs-image-search']/h:ul/h:li[@class!=$source]//h:a/h:span">
-		<xsl:variable name="a" select="substring(@id, 10)"></xsl:variable>
+		<xsl:variable name="copyright" select="substring(@id, 10)"></xsl:variable>
 		<xsl:copy>
 			<xsl:text>(</xsl:text>
-			<xsl:value-of select="/d:doc/map/entry/string[text() = $a]/following-sibling::string"></xsl:value-of>
+			<xsl:choose>
+				<xsl:when test="/d:doc/map/entry/string[text() = $copyright]/following-sibling::string != ''">
+					<xsl:value-of select="/d:doc/map/entry/string[text() = $copyright]/following-sibling::string"></xsl:value-of>
+				</xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
+			</xsl:choose>
 			<xsl:text>)</xsl:text>
 		</xsl:copy>
 	</xsl:template>

@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2019-07-28" version="3.5.45" description="bug fix release">
+            <action date="2019-07-26" dev="alain" issue="153633" type="update">
+                () showing up instead of (0) when no images found
+            </action>
+        </release>
     	<release date="2019-07-22" version="3.5.44" description="bug fix release">
             <action date="2019-07-16" dev="ryanmax" issue="153271" type="update">
                 remove disaster-mode config flag
