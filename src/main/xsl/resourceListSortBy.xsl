@@ -4,10 +4,6 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     exclude-result-prefixes="h s" version="2.0">
 
-    <xsl:param name="query-string" />
-
-    <xsl:param name="sort" />
-
     <xsl:variable name="query-string-no-page"
         select="replace($query-string,'&amp;page=\d+','')" />
 
