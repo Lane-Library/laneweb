@@ -440,7 +440,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
                             <includes>
-                                <include>lane-reset-min.css</include>
+                                <include>reset-min.css</include>
                                 <include>pure-grids-min.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
@@ -451,12 +451,12 @@
                                 <include>header-min.css</include>
                                 <include>search-form-min.css</include>
                                 <include>dropdown-min.css</include>
-                                <include>lane-nav-min.css</include>
+                                <include>nav-min.css</include>
                                 <include>lists-min.css</include>
                                 <include>anchors-min.css</include>
                                 <include>som-footer-min.css</include>
-                                <include>lane-footer-min.css</include>
-                                <include>headers-min.css</include>
+                                <include>footer-min.css</include>
+                                <include>headings-min.css</include>
                                 <include>golfclub-min.css</include>
                                 <include>module-min.css</include>
                                 <include>search-min.css</include>
@@ -582,7 +582,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>../lane-reset-min.css</include>
+                                <include>../reset-min.css</include>
                                 <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
                                 <include>../golfclub-min.css</include>
