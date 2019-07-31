@@ -14,12 +14,12 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
-      
+        <link rel="stylesheet" type="text/css" href="/resources/css/headings.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lists.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/som-footer.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-footer.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/headings.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/footer.css" />
+
         <link rel="stylesheet" type="text/css" href="/resources/css/golfclub.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/module.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
@@ -62,25 +62,25 @@
        <div class="utility-menu">
                     <ul class="login">
                         <li>
-                            <a HREF="/secure/login.html"><i class="fa fa-lock"></i> LOGIN</a>
+                            <a href="/secure/login.html"><i class="fa fa-lock"></i> LOGIN</a>
                         </li>
                         <li><i class="fa fa-user"></i>&#160;</li>
                         <li>
                             <div class="favorites dropdown">
-                                <a HREF="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>
+                                <a href="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>
                                 <div class="dropdown-content">
                                     <?laneweb bookmarks?>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a HREF="/logout">LOGOUT</a>
+                            <a href="/logout">LOGOUT</a>
                         </li>
                         <li>
-                            <a HREF="?proxy-links=false">GUEST VIEW</a>
+                            <a href="?proxy-links=false">GUEST VIEW</a>
                         </li>
                         <li>
-                            <a HREF="?proxy-links=true">LOGOUT GUEST</a>
+                            <a href="?proxy-links=true">LOGOUT GUEST</a>
                         </li>
                         <li>
                             <i class="fa fa-question-circle"></i>
@@ -98,7 +98,7 @@
                             </div>
                         </li>
                         <li class="login-item-active">
-                            <a HREF="http://library.stanford.edu/">STANFORD LIBRARIES</a>
+                            <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
                         </li>
                     </ul>
                     </div>
@@ -108,14 +108,14 @@
                     <div class="brand">
                     <div class="brand-logo">
                     </div>
-                    <div class="brand-sitename"><a HREF="/index.html">Lane Medical Library</a>
+                    <div class="brand-sitename"><a href="/index.html">Lane Medical Library</a>
                     </div>
                     </div>
                     <ul class="library-contact">
-                        <li><a HREF="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
-                        <li><a HREF="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>
-                        <li class="live-chat"><a HREF="/contacts/live-chat.html" REL="popup console 575 550"><i class="fa fa-comments-o fa-lg fa-fw"></i><span>Live Chat</span></a></li>
-                        <li><a HREF="/help/feedback.html#askus" REL="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a></li>
+                        <li><a href="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
+                        <li><a href="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>
+                        <li class="live-chat"><a href="/contacts/live-chat.html" REL="popup console 575 550"><i class="fa fa-comments-o fa-lg fa-fw"></i><span>Live Chat</span></a></li>
+                        <li><a href="/help/feedback.html#askus" REL="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a></li>
                     </ul>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                             <span class="pico-off">Close advanced search </span>
                             <i class="fa fa-arrow-right"></i>
                         </span>
-                        <a class="search-help" HREF="/lanesearch.html">Search Help <i class="fa fa-arrow-right"></i></a>
+                        <a class="search-help" href="/lanesearch.html">Search Help <i class="fa fa-arrow-right"></i></a>
                     </div>
                     <fieldset class="pico-fields">
                         <div class="pure-g">
@@ -227,78 +227,82 @@
                
             </form>
             </div>
-                        <div class="content centered">
+            <div class="content centered">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/announcement.html">
                     <xi:fallback></xi:fallback>
                 </xi:include>
                 <?laneweb content?>
             </div>
-        <div class="lane-footer">
-            <div class="centered">
-                <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
+            <footer>
+               <div class="super-footer">
+            <div class="centered">        
+                <h2><a href="//med.stanford.edu">Lane Medical Library</a></h2>
                 <div class="pure-g">
-                    <div class="pure-u-1-6"><h3><a href="/index.html">Lane Medical Library</a></h3></div>
-                    <div class="pure-u-2-3"></div>
-                    <div class="pure-u-1-6"><h3>Other</h3></div>
-                </div>
-                <div class="pure-g">
-                    <div class="pure-u-1-6">
-                        <ul>
+                    <div class="pure-u-1-4">
+                    <h3><a href="//med.stanford.edu">Stanford Medicine</a></h3>
+                            <ul>
                             <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
                             <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
                             <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
                             <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
                         </ul>
                     </div>
-                    <div class="pure-u-1-6">
-                        <ul>
-                            <li><a href="/classes-consult/laneclasses.html">Upcoming Classes</a></li>
-                            <li><a href="/classes-consult/archives.html">Past Classes</a></li>
-                            <li><a href="/beemap.html">EBP Infographic</a></li>
-                            <li><a href="/classes-consult/pom-ebp.html">Practice of Medicine Curriculum</a></li>
+                    <div class="pure-u-1-4">
+                    <h3><a href="//med.stanford.edu">Health Care</a></h3>
+                           <ul>
+                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
+                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
+                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
+                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
                         </ul>
                     </div>
-                    <div class="pure-u-1-6">
-                        <ul>
-                            <li><a href="/using-lib/eligibility.html">Who Can Use Lane</a></li>
-                            <li><a href="/using-lib/lane-login.html">Login Help</a></li>
-                            <li><a href="https://docxpress.stanford.edu/">Document Delivery <i class="fa fa-external-link"></i></a></li>
-                            <li><a href="/using-lib/study-computing-spaces.html">Study &amp; Computing Spaces</a></li>
-                            <li><a href="/using-lib/borrow.html">Borrow, Renew &amp; Return</a></li>
+                    <div class="pure-u-3-8">
+                     <h3><a href="//med.stanford.edu">Stanford School of Medicine</a></h3>
+                      <div class="pure-g">
+                          <div class="pure-u-1-2">
+                           <ul>
+                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
+                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
+                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
+                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
                         </ul>
+                          </div>
+                          <div class="pure-u-1-2">
+                           <ul>
+                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
+                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
+                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
+                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
+                        </ul>
+                          </div>
+                       </div>
                     </div>
-                    <div class="pure-u-1-6">
-                        <ul>
-                            <li><a href="/about/hours.html">Hours</a></li>
-                            <li><a href="/about/directions-maps.html">Directions &amp; Maps</a></li>
-                            <li><a href="/contacts/main-contacts.html">Contact Us</a></li>
-                            <li><a href="/contacts/liaisons.html">Library Liaisons</a></li>
-                            <li><a href="/about/about.html">About Lane</a></li>
-                        </ul>
+                </div>
+                
+            </div>
+        </div>
+            </footer>
+          
+        <div class="footer-link-bar">
+            <div class="centered">
+                <div class="pure-g">
+                    <div class="pure-u-1-4">
+                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
                     </div>
-                    <div class="pure-u-1-6">
-                        <ul>
-                            <li><a href="https://laneblog.stanford.edu/use-browzine/">Use BrowZine at Stanford</a></li>
-                            <li><a href="https://laneblog.stanford.edu/use-endnote-x7-accessing-fulltext/">Use EndNote X8: Accessing Full Text</a></li>
-                            <li><a href="https://laneblog.stanford.edu/using-uptodate/">Use UpToDate</a></li>
-                            <li><a href="/help/making-informed-publish-decisions.html">Making Informed Publishing Decisions</a></li>
-                        </ul>
+                    <div class="pure-u-1-4">
+                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
                     </div>
-                    <div class="pure-u-1-6">
-                        <ul>
-                            <li><a href="http://healthlibrary.stanford.edu/lectures/index.html">Stanford Hospital Health Library</a></li>
-                            <li><a href="https://med.stanford.edu/cme/learning-opportunities/live.html">CME Conferences and Workshops</a></li>
-                            <li><a href="https://med.stanford.edu/cme/learning-opportunities/online.html">CME  Online Courses</a></li>
-                            <li><a href="http://med.stanford.edu/irt/edtech/classrooms.html">SoM Classroom Scheduling </a></li>
-                            <li><a href="http://med.stanford.edu/seminars/">Biomed Seminars Calendar </a></li>
-                        </ul>
+                     <div class="pure-u-1-4">
+                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
+                    </div>
+                     <div class="pure-u-1-4">
+                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="lane-subfooter">
-            <div class="centered">
-                <div class="pure-g">
+        <div class="som-footer">
+        <div class="pure-g">
                     <div class="pure-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
                     <div class="pure-u-1-2">
                          <ul>
@@ -308,9 +312,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="som-footer">
             <ul class="centered">
                 <li><a href="http://www.stanford.edu/" title="Stanford University logo">Stanford University</a></li>
                 <li><a href="http://med.stanford.edu/" title="Stanford School of Medicine logo">Stanford School of Medicine</a></li>
