@@ -23,6 +23,7 @@ import edu.stanford.irt.laneweb.images.SolrImageSearchGenerator;
 import edu.stanford.irt.laneweb.images.SolrImageSearchResult;
 import edu.stanford.irt.laneweb.images.SolrImageSearchSAXStrategy;
 import edu.stanford.irt.laneweb.images.SolrImageSearchTabGenerator;
+import edu.stanford.irt.laneweb.images.SorlImageSearchPreviewGenerator;
 import edu.stanford.irt.solr.BassettImage;
 import edu.stanford.irt.solr.configuration.SolrLaneImageConfiguration;
 import edu.stanford.irt.solr.service.SolrImageService;
@@ -48,7 +49,7 @@ public class ImagesConfiguration {
     public Generator bassettGenerator() {
         return new BassettImageGenerator(this.solrImageService, pageSAXStrategy());
     }
-
+    
     @Bean
     public SAXStrategy<FacetPage<BassettImage>> countSAXStrategy() {
         return new BassettCountSAXStrategy();
@@ -76,6 +77,13 @@ public class ImagesConfiguration {
         return new SolrImageSearchGenerator(this.solrImageService, solrImageSearchSAXStrategy());
     }
 
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-preview-image")
+    @Scope("prototype")
+    public Generator sorlImageSearchPreviewGenerator(final Marshaller marshaller) {
+        return new SorlImageSearchPreviewGenerator( marshaller, this.solrImageService);
+    }
+
+    
     @Bean
     public SAXStrategy<SolrImageSearchResult> solrImageSearchSAXStrategy() {
         return new SolrImageSearchSAXStrategy(websiteIdMapping());

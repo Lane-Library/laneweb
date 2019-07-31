@@ -223,6 +223,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
+        atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, "no");
+        atts.addAttribute(EMPTY, NAME, NAME, CDATA, "auto");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, INPUT);
+        atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, TYPE, TYPE, CDATA, HIDDEN);
         atts.addAttribute(EMPTY, VALUE, VALUE, CDATA, String.valueOf(page.getTotalPages()));
         atts.addAttribute(EMPTY, NAME, NAME, CDATA, "totalPages");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, INPUT, atts);
@@ -287,14 +293,14 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
             startUlWithClass(xmlConsumer, "pagingLabels");
             if (totalFacet > 1 && !"All".equals(selectedResource)) {
                 startLi(xmlConsumer);
-                startAnchor(xmlConsumer, path);
+                startAnchor(xmlConsumer, path+ "&auto=no");
                 XMLUtils.data(xmlConsumer, "All (" + nf.format(totalElement) + ")");
                 endAnchor(xmlConsumer);
                 endLi(xmlConsumer);
             }
             for (FacetFieldEntry facetFieldEntry : facetList) {
                 startLi(xmlConsumer);
-                startAnchor(xmlConsumer, path + "&rid=" + facetFieldEntry.getValue());
+                startAnchor(xmlConsumer, path + "&auto=no&rid=" + facetFieldEntry.getValue());
                 XMLUtils.data(xmlConsumer, getDisplayedResourceName(facetFieldEntry.getValue()) + " ("
                         + nf.format(facetFieldEntry.getValueCount()) + ") ");
                 endAnchor(xmlConsumer);
@@ -312,9 +318,9 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
             final SolrImageSearchResult result) throws SAXException {
         String path = result.getPath();
         if (result.getSelectedResource() != null && !"".equals(result.getSelectedResource())) {
-            path = path + "&rid=" + result.getSelectedResource();
+            path = path + "&auto=no&rid=" + result.getSelectedResource();
         }
-        path = path.concat("&page=");
+        path = path.concat("&auto=no&page=");
         startDivWithClass(xmlConsumer, "pagination");
         int currentPage = page.getNumber();
         int totalPages = page.getTotalPages();
