@@ -1,30 +1,17 @@
-.lane-header {
-    background-color: white;
-    font-size: 14px;
-    padding-top: 32px;
-}
-
-h1 {
-    box-sizing: border-box;
-    height: 92px;
-    padding-top: 27px;
-}
-
-h1 a {
-    background-image: url('../images/sm-logo.svg');
-    background-repeat: no-repeat;
-    display: inline-block;
-    color: #333333;
-    font-size: 18px;
-    padding: 24px 0 0 176px;
-}
-
-h1 a:active, h1 a:visited, h1 a:hover {
-    color: #333;
+/* utility menu with login */
+.utility-menu {
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    height: 32px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
 .login {
-    line-height: 32px;
+    line-height: 31px;
     margin: 0 5%;
     position: absolute;
     right: 0;
@@ -32,9 +19,9 @@ h1 a:active, h1 a:visited, h1 a:hover {
 
 .login > li {
     display: none;
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: .75px;
-    padding: 0 24px;
+    padding: 0 25px;
 }
 
 .login > .login-item-active {
@@ -42,7 +29,7 @@ h1 a:active, h1 a:visited, h1 a:hover {
 }
 
 .login .fa {
-    font-size: 15px;
+    font-size: 16px;
     margin-right: 2px;
 }
 
@@ -97,9 +84,9 @@ h1 a:active, h1 a:visited, h1 a:hover {
     background-color: white;
     border: 1px black solid;
     box-sizing: content-box;
-    color: black;
+    color: #333;
     display: none;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     left: -130px;
     line-height: initial;
@@ -144,6 +131,38 @@ h1 a:active, h1 a:visited, h1 a:hover {
     display: block;
 }
 
+/* lane header */
+.lane-header {
+    background-color: white;
+    font-size: 14px;
+    padding-top: 32px;
+}
+
+.brand {
+    height: 100px;
+    padding-top: 27px;
+    display: block;
+    margin: 0;
+}
+
+.brand-logo {
+	background-image: url('../images/sm-logo.svg');
+    background-repeat: no-repeat;
+    padding: 48px 0 0 176px;
+    float:left;
+}
+
+.brand-sitename {
+	margin-top: 21px;
+}
+
+.brand a, .brand a:link, .brand a:focus, .brand a:visited {
+    color: #333333;
+    font-weight: 400;
+    text-decoration: none;
+    font-size:20px;
+}
+    
 .library-contact {
     position: absolute;
     right: 0;

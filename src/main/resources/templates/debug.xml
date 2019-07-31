@@ -3,23 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-reset.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/pure-grids.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-local.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-nav.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
+      
         <link rel="stylesheet" type="text/css" href="/resources/css/lists.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/som-footer.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-footer.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/headers.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/headings.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/golfclub.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/module.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
@@ -53,113 +53,34 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/calendar.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/password-table.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/portals.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
-        <div class="main">
-            <div class="lane-header">
-                <div class="centered">
-                    <h1>
-                        <a href="/index.html">Lane Medical Library</a>
-                    </h1>
-                    <ul class="library-contact">
-                        <li><a href="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
-                        <li><a href="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>
-                        <li class="live-chat"><a href="/contacts/live-chat.html" rel="popup console 575 550"><i class="fa fa-comments-o fa-lg fa-fw"></i><span>Live Chat</span></a></li>
-                        <li><a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <form action="/search.html" class="search-form" id="search">
-                <div class="centered">
-                    <div class="search-close">Close <i class="fa fa-close"></i></div>
-                    <div class="search-info">
-                        <span class="pico-toggle">
-                            <span class="pico-on">Advanced (PICO) Search </span>
-                            <span class="pico-off">Close advanced search </span>
-                            <i class="fa fa-arrow-right"></i>
-                        </span>
-                        <a class="search-help" href="/lanesearch.html">Search Help <i class="fa fa-arrow-right"></i></a>
-                    </div>
-                    <fieldset class="pico-fields">
-                        <div class="pure-g">
-                            <div class="pure-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled" value=""/></div>
-                            <div class="pure-u-1-4"><input name="i" placeholder="intervention" disabled="disabled" value=""/></div>
-                            <div class="pure-u-1-4"><input name="c" placeholder="comparison" disabled="disabled" value=""/></div>
-                            <div class="pure-u-1-4"><input name="o" placeholder="outcome" disabled="disabled" value=""/></div>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <input name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder="" value=""/>
-                        <input name="source" type="hidden" value="all-all"/>
-                        <input name="sourceid" type="hidden" value="" disabled="disabled"/>
-                        <input name="facets" type="hidden" value="" disabled="disabled"/>
-                        <input name="sort" type="hidden" value="" disabled="disabled"/>
-                        <div class="search-reset" title="Clear Search"><i class="fa fa-times-circle fa-lg"></i></div>
-                        <button class="search-button"><i class="fa fa-search"></i></button>
-                    </fieldset>
-                    <div class="pure-g">
-                        <div class="pure-u-1-4"><div
-                            class="search-tab"
-                            data-help="/lanesearch.html"
-                            data-source="all-all"
-                            data-placeholder="Enter title words of article, journal, book, etc., or author, subject, PMID, ISSN, DOI, or Call Number"
-                            title="Searches Pubmed, Lane Catalog (titles and descriptions of books, journals, etc. from Lane) and website"
-                            >Lane <i class="fa fa-plus"></i></div></div>
-                        <div class="pure-u-1-4"><div
-                            class="search-tab"
-                            data-help="/picosearch.html"
-                            data-source="clinical-all"
-                            data-placeholder="Enter patient condition, treatment alternatives, or use PICO (advanced search)"
-                            title="Searches evidence-based resources: BMJ, Cochrane, Dare, DynaMed Plus, National Guidelines, Pubmed, UptoDate"
-                            >Clinical</div></div>
-                        <div class="pure-u-1-4"><div
-                            class="search-tab"
-                            data-help="/bioimagesearch.html"
-                            data-source="images-all"
-                            data-placeholder="Enter keywords for subject or images desired"
-                            title="Find images related to medicine and biology and their reuse rights"
-                            >Images</div></div>
-                        <div class="pure-u-1-4"><div
-                            class="search-tab"
-                            data-help="/textbooksearch.html"
-                            data-source="textbooks-all"
-                            data-placeholder="Enter topic, condition, diagnosis or disease keywords"
-                            title="Search the full text of major clinical textbooks in 25 medical specialites"
-                            >Clinical Textbooks</div></div>
-                    </div>
-                </div>
-            </form>
-            <div class="content centered">
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/announcement.html">
-                    <xi:fallback></xi:fallback>
-                </xi:include>
-                <?laneweb content?>
-            </div>
-            <div id="nav" class="nav">
-                <header>
+     <header>
+       <div class="utility-menu">
                     <ul class="login">
                         <li>
-                            <a href="/secure/login.html"><i class="fa fa-lock"></i> LOGIN</a>
+                            <a HREF="/secure/login.html"><i class="fa fa-lock"></i> LOGIN</a>
                         </li>
                         <li><i class="fa fa-user"></i>&#160;</li>
                         <li>
                             <div class="favorites dropdown">
-                                <a href="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>
+                                <a HREF="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>
                                 <div class="dropdown-content">
                                     <?laneweb bookmarks?>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a href="/logout">LOGOUT</a>
+                            <a HREF="/logout">LOGOUT</a>
                         </li>
                         <li>
-                            <a href="?proxy-links=false">GUEST VIEW</a>
+                            <a HREF="?proxy-links=false">GUEST VIEW</a>
                         </li>
                         <li>
-                            <a href="?proxy-links=true">LOGOUT GUEST</a>
+                            <a HREF="?proxy-links=true">LOGOUT GUEST</a>
                         </li>
                         <li>
                             <i class="fa fa-question-circle"></i>
@@ -177,12 +98,30 @@
                             </div>
                         </li>
                         <li class="login-item-active">
-                            <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
+                            <a HREF="http://library.stanford.edu/">STANFORD LIBRARIES</a>
                         </li>
                     </ul>
-                </header>
-                <div class="lane-nav">
-                    <ul class="centered">
+                    </div>
+                
+            <div class="lane-header">
+                <div class="centered">
+                    <div class="brand">
+                    <div class="brand-logo">
+                    </div>
+                    <div class="brand-sitename"><a HREF="/index.html">Lane Medical Library</a>
+                    </div>
+                    </div>
+                    <ul class="library-contact">
+                        <li><a HREF="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
+                        <li><a HREF="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>
+                        <li class="live-chat"><a HREF="/contacts/live-chat.html" REL="popup console 575 550"><i class="fa fa-comments-o fa-lg fa-fw"></i><span>Live Chat</span></a></li>
+                        <li><a HREF="/help/feedback.html#askus" REL="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a></li>
+                    </ul>
+                </div>
+            </div>
+     </header>
+     <nav>
+           <ul class="centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
                             <span>Resources</span>
                             <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
@@ -226,9 +165,74 @@
                             <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
                         </li>
                     </ul>
-                </div>
+          </nav> 
+            <div class="hero-unit">
+            <form ACTION="/search.html" class="search-form" id="search">
+                    <div class="search-close">Close <i class="fa fa-close"></i></div>
+                    <div class="search-info">
+                        <span class="pico-toggle">
+                            <span class="pico-on">Advanced (PICO) Search </span>
+                            <span class="pico-off">Close advanced search </span>
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+                        <a class="search-help" HREF="/lanesearch.html">Search Help <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                    <fieldset class="pico-fields">
+                        <div class="pure-g">
+                            <div class="pure-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled" VALUE=""/></div>
+                            <div class="pure-u-1-4"><input name="i" placeholder="intervention" disabled="disabled" VALUE=""/></div>
+                            <div class="pure-u-1-4"><input name="c" placeholder="comparison" disabled="disabled" VALUE=""/></div>
+                            <div class="pure-u-1-4"><input name="o" placeholder="outcome" disabled="disabled" VALUE=""/></div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <input name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder="" VALUE=""/>
+                        <input name="source" TYPE="hidden" VALUE="all-all"/>
+                        <input name="sourceid" TYPE="hidden" VALUE="" disabled="disabled"/>
+                        <input name="facets" TYPE="hidden" VALUE="" disabled="disabled"/>
+                        <input name="sort" TYPE="hidden" VALUE="" disabled="disabled"/>
+                        <div class="search-reset" title="Clear Search"><i class="fa fa-times-circle fa-lg"></i></div>
+                        <button class="search-button"><i class="fa fa-search"></i></button>
+                    </fieldset>
+                    <div class="pure-g">
+                        <div class="pure-u-1-4"><div
+                            class="search-tab"
+                            data-help="/lanesearch.html"
+                            data-source="all-all"
+                            data-placeholder="Enter title words of article, journal, book, etc., or author, subject, PMID, ISSN, DOI, or Call Number"
+                            title="Searches Pubmed, Lane Catalog (titles and descriptions of books, journals, etc. from Lane) and website"
+                            >Lane <i class="fa fa-plus"></i></div></div>
+                        <div class="pure-u-1-4"><div
+                            class="search-tab"
+                            data-help="/picosearch.html"
+                            data-source="clinical-all"
+                            data-placeholder="Enter patient condition, treatment alternatives, or use PICO (advanced search)"
+                            title="Searches evidence-based resources: BMJ, Cochrane, Dare, DynaMed Plus, National Guidelines, Pubmed, UptoDate"
+                            >Clinical</div></div>
+                        <div class="pure-u-1-4"><div
+                            class="search-tab"
+                            data-help="/bioimagesearch.html"
+                            data-source="images-all"
+                            data-placeholder="Enter keywords for subject or images desired"
+                            title="Find images related to medicine and biology and their reuse rights"
+                            >Images</div></div>
+                        <div class="pure-u-1-4"><div
+                            class="search-tab"
+                            data-help="/textbooksearch.html"
+                            data-source="textbooks-all"
+                            data-placeholder="Enter topic, condition, diagnosis or disease keywords"
+                            title="Search the full text of major clinical textbooks in 25 medical specialites"
+                            >Clinical Textbooks</div></div>
+                    </div>
+               
+            </form>
             </div>
-        </div>
+                        <div class="content centered">
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/announcement.html">
+                    <xi:fallback></xi:fallback>
+                </xi:include>
+                <?laneweb content?>
+            </div>
         <div class="lane-footer">
             <div class="centered">
                 <h2><a href="//med.stanford.edu">Stanford Medicine</a></h2>
