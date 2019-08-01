@@ -39,6 +39,9 @@
     <!--  placement of image search results -->
     <xsl:variable name="images-promo-position">4</xsl:variable>
 
+    <!--  number of images to show in search results -->
+    <xsl:variable name="images-promo-show">5</xsl:variable>
+
     <xsl:variable name="images-promo-enabled" select="$sourceid = 'images-promo'"/>
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
@@ -455,14 +458,14 @@
     <xsl:template name="images-promotion">
         <xsl:param name="result-position"/>
         <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position">
-            <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image?source=pmc-images-all&amp;q=',$url-encoded-query)"/>
+            <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image/preview?q=',$url-encoded-query)"/>
             <xsl:variable name="imageResults" select="document($imageUrl)"/>
-            <xsl:if test="count($imageResults//img) > 50">
+            <xsl:if test="count($imageResults//string) >= $images-promo-show">
                 <li>
                     <a class="primaryLink" href="{$images-url}" title="More images from Lane's Biomedical Images Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Biomedical Search</a>
                     <div id="imageList" class="searchPromo">
                         <div class="pure-g">
-                            <xsl:for-each select="$imageResults//div[@id='imageList'][1]//img/@src">
+                            <xsl:for-each select="$imageResults//string[position() &lt;= $images-promo-show]">
                                 <div class="pure-u-1-5">
                                     <a href="{$images-url}" title="More images from Lane's Biomedical Images Search"><img src="{.}"/></a>
                                 </div>
