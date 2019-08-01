@@ -77,6 +77,12 @@ public class ImagesConfiguration {
         return new SolrImageSearchGenerator(this.solrImageService, solrImageSearchSAXStrategy());
     }
 
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image-preview")
+    @Scope("prototype")
+    public Generator solrImageSearchPreviewGenerator(final Marshaller marshaller) {
+        return new SorlImageSearchPreviewGenerator(marshaller, this.solrImageService);
+    }
+
     @Bean
     public SAXStrategy<SolrImageSearchResult> solrImageSearchSAXStrategy() {
         return new SolrImageSearchSAXStrategy(websiteIdMapping());
@@ -86,12 +92,6 @@ public class ImagesConfiguration {
     @Scope("prototype")
     public Generator solrImageSearchTabGenerator(final Marshaller marshaller) {
         return new SolrImageSearchTabGenerator(this.solrImageService, marshaller);
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image-preview")
-    @Scope("prototype")
-    public Generator sorlImageSearchPreviewGenerator(final Marshaller marshaller) {
-        return new SorlImageSearchPreviewGenerator(marshaller, this.solrImageService);
     }
 
     @Bean
