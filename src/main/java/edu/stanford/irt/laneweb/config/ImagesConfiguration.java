@@ -77,7 +77,7 @@ public class ImagesConfiguration {
         return new SolrImageSearchGenerator(this.solrImageService, solrImageSearchSAXStrategy());
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-preview-image")
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-image-preview")
     @Scope("prototype")
     public Generator sorlImageSearchPreviewGenerator(final Marshaller marshaller) {
         return new SorlImageSearchPreviewGenerator( marshaller, this.solrImageService);
