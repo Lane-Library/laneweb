@@ -59,11 +59,11 @@ public class SearchImageInterceptorTest {
         expect(this.service.facetOnCopyright("query")).andReturn(this.imageFacetPage);
         expect(this.imageFacetPage.getFacetResultPage("copyright")).andReturn(this.page);
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.entry));
-        expect(this.entry.getValueCount()).andReturn(2L).times(2);
+        expect(this.entry.getValueCount()).andReturn(2L);
         expect(this.entry.getValue()).andReturn("0");
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("url"));
         expect(this.request.getQueryString()).andReturn("source=pmc-images-all");
-        this.response.sendRedirect("url?source=images-all");
+        this.response.sendRedirect("url?source=images-all&auto=no");
         replay(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
         assertFalse(this.filter.preHandle(this.request, this.response, null));
         verify(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
@@ -87,11 +87,11 @@ public class SearchImageInterceptorTest {
         expect(this.service.facetOnCopyright("query")).andReturn(this.imageFacetPage);
         expect(this.imageFacetPage.getFacetResultPage("copyright")).andReturn(this.page);
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.entry));
-        expect(this.entry.getValueCount()).andReturn(2L).times(2);
+        expect(this.entry.getValueCount()).andReturn(2L);
         expect(this.entry.getValue()).andReturn("10");
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("url"));
         expect(this.request.getQueryString()).andReturn("source=images-all");
-        this.response.sendRedirect("url?source=cc-images-all");
+        this.response.sendRedirect("url?source=cc-images-all&auto=no");
         replay(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
         assertFalse(this.filter.preHandle(this.request, this.response, null));
         verify(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
@@ -106,25 +106,7 @@ public class SearchImageInterceptorTest {
         verify(this.request, this.response);
     }
 
-    @Test
-    public void testInternalDoFilterEmptySource() throws IOException {
-        reset(this.service);
-        expect(this.request.getParameter("source")).andReturn("images-all");
-        expect(this.request.getParameter("auto")).andReturn(null);
-        expect(this.request.getParameter("q")).andReturn("query");
-        expect(this.service.facetOnCopyright("query")).andReturn(this.imageFacetPage);
-        expect(this.imageFacetPage.getFacetResultPage("copyright")).andReturn(this.page);
-        expect(this.page.getContent()).andReturn(Collections.singletonList(this.entry));
-        expect(this.entry.getValueCount()).andReturn(2L).times(2);
-        expect(this.entry.getValue()).andReturn("X");
-        expect(this.request.getRequestURL()).andReturn(new StringBuffer("url"));
-        expect(this.request.getQueryString()).andReturn("source=images-all");
-        this.response.sendRedirect("url?source=");
-        replay(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
-        assertFalse(this.filter.preHandle(this.request, this.response, null));
-        verify(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
-    }
-
+   
     @Test
     public void testInternalDoFilterNoResults() throws IOException {
         reset(this.service);
@@ -158,11 +140,11 @@ public class SearchImageInterceptorTest {
         expect(this.service.facetOnCopyright("query")).andReturn(this.imageFacetPage);
         expect(this.imageFacetPage.getFacetResultPage("copyright")).andReturn(this.page);
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.entry));
-        expect(this.entry.getValueCount()).andReturn(2L).times(2);
+        expect(this.entry.getValueCount()).andReturn(2L);
         expect(this.entry.getValue()).andReturn("15");
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("url"));
         expect(this.request.getQueryString()).andReturn("source=images-all");
-        this.response.sendRedirect("url?source=pmc-images-all");
+        this.response.sendRedirect("url?source=pmc-images-all&auto=no");
         replay(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
         assertFalse(this.filter.preHandle(this.request, this.response, null));
         verify(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
@@ -177,11 +159,11 @@ public class SearchImageInterceptorTest {
         expect(this.service.facetOnCopyright("query")).andReturn(this.imageFacetPage);
         expect(this.imageFacetPage.getFacetResultPage("copyright")).andReturn(this.page);
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.entry));
-        expect(this.entry.getValueCount()).andReturn(2L).times(2);
+        expect(this.entry.getValueCount()).andReturn(2L);
         expect(this.entry.getValue()).andReturn("20");
         expect(this.request.getRequestURL()).andReturn(new StringBuffer("url"));
         expect(this.request.getQueryString()).andReturn("source=images-all");
-        this.response.sendRedirect("url?source=rl-images-all");
+        this.response.sendRedirect("url?source=rl-images-all&auto=no");
         replay(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
         assertFalse(this.filter.preHandle(this.request, this.response, null));
         verify(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
@@ -196,7 +178,7 @@ public class SearchImageInterceptorTest {
         expect(this.service.facetOnCopyright("query")).andReturn(this.imageFacetPage);
         expect(this.imageFacetPage.getFacetResultPage("copyright")).andReturn(this.page);
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.entry));
-        expect(this.entry.getValueCount()).andReturn(2L).times(2);
+        expect(this.entry.getValueCount()).andReturn(2L);
         expect(this.entry.getValue()).andReturn("0");
         replay(this.request, this.response, this.service, this.imageFacetPage, this.page, this.entry);
         assertTrue(this.filter.preHandle(this.request, this.response, null));

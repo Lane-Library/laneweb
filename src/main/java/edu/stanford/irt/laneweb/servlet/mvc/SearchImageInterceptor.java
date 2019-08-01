@@ -55,7 +55,7 @@ public class SearchImageInterceptor extends HandlerInterceptorAdapter {
 			String query = request.getParameter("q");
 			String copyrightName = this.getTabValuesFromSolr(query, sourceOri);
 			String source = copyrightMapping.get(copyrightName);
-			if (null != copyrightName && !source.equals(sourceOri)) {
+			if (null != copyrightName && null != source && !source.equals(sourceOri)) {
 				String url = request.getRequestURL() + "?" + request.getQueryString();
 				response.sendRedirect(url.replace(sourceOri, source).concat("&auto=no"));
 				return false;
