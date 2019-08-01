@@ -3,14 +3,15 @@
    <div class="result-summary">
       <div class="result">11 to 11 of 2 results</div>
       <div class="pagination">
-         <a class="actived no-bookmarking" href="/path&amp;page=1">
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
             <span class="fa fa-fast-backward no-bookmarking"/> First</a>
-         <a class="actived no-bookmarking" href="/path&amp;page=1">
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
             <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
             <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="no" name="auto"/>
             <input type="hidden" value="2" name="totalPages"/>
             <input type="text" size="4" value="2" name="page"/>
          </form>
@@ -72,14 +73,15 @@
    </div>
    <div class="result-summary">
       <div class="pagination">
-         <a class="actived no-bookmarking" href="/path&amp;page=1">
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
             <span class="fa fa-fast-backward no-bookmarking"/> First</a>
-         <a class="actived no-bookmarking" href="/path&amp;page=1">
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
             <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
             <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="no" name="auto"/>
             <input type="hidden" value="2" name="totalPages"/>
             <input type="text" size="4" value="2" name="page"/>
          </form>
