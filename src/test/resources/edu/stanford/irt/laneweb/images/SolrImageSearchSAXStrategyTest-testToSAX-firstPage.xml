@@ -9,7 +9,7 @@
                <div class="general-dropdown-content dropdown-content">
                   <ul class="pagingLabels">
                      <li>
-                        <a href="/path&amp;rid=Bassett">Bassett (2) </a>
+                        <a href="/path&amp;auto=no&amp;rid=Bassett">Bassett (2) </a>
                      </li>
                   </ul>
                </div>
@@ -21,13 +21,14 @@
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
             <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="no" name="auto"/>
             <input type="hidden" value="2" name="totalPages"/>
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>
@@ -90,13 +91,14 @@
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
             <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="no" name="auto"/>
             <input type="hidden" value="2" name="totalPages"/>
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>

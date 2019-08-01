@@ -9,7 +9,7 @@
                <div class="general-dropdown-content dropdown-content">
                   <ul class="pagingLabels">
                      <li>
-                        <a href="&amp;rid=Bassett">Bassett (2) </a>
+                        <a href="&amp;auto=no&amp;rid=Bassett">Bassett (2) </a>
                      </li>
                   </ul>
                </div>
@@ -17,14 +17,15 @@
          </div>
       </div>
       <div class="pagination">
-         <a class="actived no-bookmarking" href="&amp;page=1">
+         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
             <span class="fa fa-fast-backward no-bookmarking"/> First</a>
-         <a class="actived no-bookmarking" href="&amp;page=1">
+         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
             <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
             <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="no" name="auto"/>
             <input type="hidden" value="2" name="totalPages"/>
             <input type="text" size="4" value="2" name="page"/>
          </form>
@@ -86,14 +87,15 @@
    </div>
    <div class="result-summary">
       <div class="pagination">
-         <a class="actived no-bookmarking" href="&amp;page=1">
+         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
             <span class="fa fa-fast-backward no-bookmarking"/> First</a>
-         <a class="actived no-bookmarking" href="&amp;page=1">
+         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
             <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
             <input type="hidden" value="query" name="q"/>
+            <input type="hidden" value="no" name="auto"/>
             <input type="hidden" value="2" name="totalPages"/>
             <input type="text" size="4" value="2" name="page"/>
          </form>
