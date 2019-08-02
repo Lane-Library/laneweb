@@ -17,9 +17,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/headings.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/lists.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/som-footer.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/footer.css" />
-
         <link rel="stylesheet" type="text/css" href="/resources/css/golfclub.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/module.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
@@ -233,27 +231,24 @@
                 </xi:include>
                 <?laneweb content?>
             </div>
-            <footer>
-               <div class="super-footer">
+            <footer class="super-footer">
             <div class="centered">        
                 <h2><a href="//med.stanford.edu">Lane Medical Library</a></h2>
                 <div class="pure-g">
                     <div class="pure-u-1-4">
                     <h3><a href="//med.stanford.edu">Stanford Medicine</a></h3>
                             <ul>
-                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
-                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
-                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
+                            <li><a href="http://med.stanford.edu/news.html">News</a></li>
+                            <li><a href="https://med.stanford.edu/about/events.html">Events</a></li>
+                            <li><a href="https://stanfordcareers.stanford.edu/">Careers</a></li>
+                            <li><a href="http://med.stanford.edu/about/contacts.html">Contact</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-1-4">
                     <h3><a href="//med.stanford.edu">Health Care</a></h3>
                            <ul>
-                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
-                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
-                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
+                            <li><a href="https://stanfordhealthcare.org/">Stanford Health Care</a></li>
+                            <li><a href="https://www.stanfordchildrens.org/">Stanford Children's Health</a></li>
                         </ul>
                     </div>
                     <div class="pure-u-3-8">
@@ -261,18 +256,18 @@
                       <div class="pure-g">
                           <div class="pure-u-1-2">
                            <ul>
-                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
-                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
-                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
+                            <li><a href="http://med.stanford.edu/school.html">About</a></li>
+                            <li><a href="http://med.stanford.edu/school/contacts.html">Contact</a></li>
+                            <li><a href="http://med.stanford.edu/school/contacts/maps.html">Maps &amp; Directions</a></li>
+                            <li><a href="http://stanfordcareers.stanford.edu">Jobs</a></li>
                         </ul>
                           </div>
                           <div class="pure-u-1-2">
                            <ul>
-                            <li><a href="/biomed-resources/ej.html?a=a">Journals</a></li>
-                            <li><a href="/biomed-resources/eb.html?a=a">Books</a></li>
-                            <li><a href="/biomed-resources/db.html?a=a">Databases</a></li>
-                            <li><a href="/biomed-resources/course-reserves.html">Course Reserves</a></li>
+                            <li><a href="http://med.stanford.edu/school/directory/basic-science-departments.html">Basic Science Departments</a></li>
+                            <li><a href="http://med.stanford.edu/school/directory/clinical-science-departments.html">Clinical Science Departments</a></li>
+                            <li><a href="http://med.stanford.edu/education.html">Academic Programs</a></li>
+                            <li><a href="http://med.stanford.edu/about/vision.html">Vision</a></li>
                         </ul>
                           </div>
                        </div>
@@ -280,39 +275,41 @@
                 </div>
                 
             </div>
-        </div>
             </footer>
           
-        <div class="footer-link-bar">
+        <footer class="footer-link-bar">
             <div class="centered">
                 <div class="pure-g">
                     <div class="pure-u-1-4">
                     <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
                     </div>
                     <div class="pure-u-1-4">
-                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
+                    <a href="http://med.stanford.edu/school/contacts/maps.html"><i class="fa fa fa-map-marker"></i> Visit Stanford</a>
                     </div>
                      <div class="pure-u-1-4">
-                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
+                    <a href="http://clinicaltrials.stanford.edu/"><i class="fa fa fa-check"></i> Search Clinical Trials</a>
                     </div>
                      <div class="pure-u-1-4">
-                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
+                    <a href="http://medicalgiving.stanford.edu/"><i class="fa fa fa-gift"></i> Give a Gift</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="som-footer">
-        <div class="pure-g">
+        </footer>
+           <footer class="footer-copyright">
+        <div class="pure-g centered">
                     <div class="pure-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
                     <div class="pure-u-1-2">
-                         <ul>
-                            <li><a href="https://www.stanford.edu/site/terms/">Terms of Use</a></li>
+                         <ul class="right-aligned">
+                            <li><a href="http://www.stanford.edu/site/privacy">Privacy Policy</a></li>
+                            <li class="bullet"><a href="https://www.stanford.edu/site/terms/">Terms of Use</a></li>
                             <li><a title="See us on Facebook" href="https://www.facebook.com/LaneLibStanford/"><span>See us on Facebook</span><i class="fa fa-facebook"></i></a></li>
                             <li><a title="See us on Twitter" href="https://twitter.com/LaneLibStanford"><span>See us on Twitter</span><i class="fa fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>
-            <ul class="centered">
+        </footer>
+        <footer class="footer-global">
+            <ul class="footer-logos centered">
                 <li><a href="http://www.stanford.edu/" title="Stanford University logo">Stanford University</a></li>
                 <li><a href="http://med.stanford.edu/" title="Stanford School of Medicine logo">Stanford School of Medicine</a></li>
                 <li><a href="https://stanfordhealthcare.org/" title="Stanford Health Care">Stanford Health Care</a></li>
@@ -320,7 +317,7 @@
                 <li><a href="http://www.stanfordchildrens.org/" title="Lucile Packard Children's Hospital Stanford logo">Stanford Children's Hospital</a></li>
                 <li><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
             </ul>
-        </div>
+        </footer>
         <div class="search-indicator"><i class="fa fa-spinner fa-spin"></i></div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="https://yui-s.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
