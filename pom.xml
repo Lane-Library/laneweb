@@ -69,18 +69,18 @@
         <dependency>
             <artifactId>jackson-databind</artifactId>
             <groupId>com.fasterxml.jackson.core</groupId>
-            <version>2.9.9.1</version>
+            <version>2.9.9.2</version>
         </dependency>
         <dependency>
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.78.0</version>
+            <version>1.79.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.78.0</version>
+            <version>1.79.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -224,24 +224,7 @@
 		<dependency>
 			<groupId>org.apache.solr</groupId>
 			<artifactId>solr-solrj</artifactId>
-			<version>8.1.1</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.apache.zookeeper</groupId>
-					<artifactId>zookeeper</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.zookeeper</groupId>
-			<artifactId>zookeeper</artifactId>
-			<version>3.5.5</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
+			<version>8.2.0</version>
 		</dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -296,7 +279,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>5.1.7.RELEASE</version>
+            <version>5.1.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
