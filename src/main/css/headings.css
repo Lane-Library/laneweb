@@ -17,11 +17,12 @@ h3, h4 {
     color: #333;
     font-size: 22px;
     line-height: 1.2em;
-    margin-bottom: .2em;
+    margin-bottom: 1em;
     padding-bottom: 12px;
+    border-bottom: 1px solid #d8dbdc;
 }
 
-h4:after {
+/*h4:after {
     content: ' ';
     border-top: 1px solid #d8dbdc;
     border-left: 26px solid #d8dbdc;
@@ -29,7 +30,7 @@ h4:after {
     height: 4px;
     margin-top: 10px;
     box-sizing: content-box;
-}
+}*/
 
 h5 {
     color: #8c1515;
