@@ -126,7 +126,7 @@
                     </ul>
           </nav> 
             <div class="hero-unit">
-            <form ACTION="/search.html" class="search-form" id="search">
+            <form action="/search.html" class="search-form" id="search">
                     <div class="search-close">Close <i class="fa fa-close"></i></div>
                     <div class="search-info">
                         <span class="pico-toggle">
@@ -138,18 +138,18 @@
                     </div>
                     <fieldset class="pico-fields">
                         <div class="pure-g">
-                            <div class="pure-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled" VALUE=""/></div>
-                            <div class="pure-u-1-4"><input name="i" placeholder="intervention" disabled="disabled" VALUE=""/></div>
-                            <div class="pure-u-1-4"><input name="c" placeholder="comparison" disabled="disabled" VALUE=""/></div>
-                            <div class="pure-u-1-4"><input name="o" placeholder="outcome" disabled="disabled" VALUE=""/></div>
+                            <div class="pure-u-1-4"><input name="p" placeholder="patient condition" disabled="disabled" value=""/></div>
+                            <div class="pure-u-1-4"><input name="i" placeholder="intervention" disabled="disabled" value=""/></div>
+                            <div class="pure-u-1-4"><input name="c" placeholder="comparison" disabled="disabled" value=""/></div>
+                            <div class="pure-u-1-4"><input name="o" placeholder="outcome" disabled="disabled" value=""/></div>
                         </div>
                     </fieldset>
                     <fieldset>
-                        <input name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder="" VALUE=""/>
-                        <input name="source" TYPE="hidden" VALUE="all-all"/>
-                        <input name="sourceid" TYPE="hidden" VALUE="" disabled="disabled"/>
-                        <input name="facets" TYPE="hidden" VALUE="" disabled="disabled"/>
-                        <input name="sort" TYPE="hidden" VALUE="" disabled="disabled"/>
+                        <input name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder="" value=""/>
+                        <input name="source" type="hidden" value="all-all"/>
+                        <input name="sourceid" type="hidden" value="" disabled="disabled"/>
+                        <input name="facets" type="hidden" value="" disabled="disabled"/>
+                        <input name="sort" type="hidden" value="" disabled="disabled"/>
                         <div class="search-reset" title="Clear Search"><i class="fa fa-times-circle fa-lg"></i></div>
                         <button class="search-button"><i class="fa fa-search"></i></button>
                     </fieldset>
