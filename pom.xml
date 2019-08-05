@@ -499,7 +499,6 @@
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
                                 <include>menu-min.js</include>
-                                <include>golfclub-headings-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-info-min.js</include>
                                 <include>lane-ie-min.js</include>
@@ -591,7 +590,6 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/javascript/history/lane-history.js</output>
                             <includes>
-                                <include>../golfclub-headings-min.js</include>
                                 <include>flickr-min.js</include>
                                 <include>../back-to-top-min.js</include>
                             </includes>
