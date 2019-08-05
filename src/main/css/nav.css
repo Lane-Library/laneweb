@@ -45,11 +45,12 @@ nav > ul {
     text-align: center;
     display: block;
     margin-top: -20px;
+    color: #999999;
 }
 
 .nav-menu:hover > i.fa-caret-down::before,
 .nav-menu-active > i.fa-caret-down::before {
-    content: "\f0d8"
+    color: #ffffff;
 }
 
 .nav-menu-content {
