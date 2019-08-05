@@ -457,7 +457,6 @@
                                 <include>som-footer-min.css</include>
                                 <include>footer-min.css</include>
                                 <include>headings-min.css</include>
-                                <include>golfclub-min.css</include>
                                 <include>module-min.css</include>
                                 <include>search-min.css</include>
                                 <include>popups-min.css</include>
@@ -585,7 +584,6 @@
                                 <include>../reset-min.css</include>
                                 <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
-                                <include>../golfclub-min.css</include>
                                 <include>../back-to-top-min.css</include>
                             </includes>
                         </aggregation>
