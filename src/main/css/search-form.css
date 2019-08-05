@@ -29,7 +29,7 @@
     max-height: 46px;
     overflow: hidden;
     position: relative;
-    width: 100%;
+    width: 60%;
 }
 
 .search-form .fa,
@@ -81,7 +81,7 @@
 
 .search-form fieldset {
     position: relative;
-    width: 72%;
+    width: 100%;
     color: black;
 }
 
