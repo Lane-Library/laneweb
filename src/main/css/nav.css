@@ -41,6 +41,17 @@ nav > ul {
     z-index: 1;
 }
 
+.nav-menu > i.fa-caret-down {
+    text-align: center;
+    display: block;
+    margin-top: -20px;
+}
+
+.nav-menu:hover > i.fa-caret-down::before,
+.nav-menu-active > i.fa-caret-down::before {
+    content: "\f0d8"
+}
+
 .nav-menu-content {
 	 font-family: 'Source Sans Pro', sans serif;
 }
