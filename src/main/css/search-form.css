@@ -1,5 +1,5 @@
 .hero-unit {
-    padding: 100px 0;
+    padding: 40px 0 0 0;
     background-color: #8c1515;
    /* background-image: url('../images/search-back.jpg');*/
     background-repeat: no-repeat;
@@ -8,6 +8,14 @@
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+.hero-unit-front-page, .hero-unit-front-page.hero-unit-search-active {
+    padding: 100px 0;
+}
+
+.hero-unit-search-active {
+    padding: 100px 0 0 0;
 }
 
 /*
@@ -199,12 +207,12 @@
 
 .search-form-active {
     padding: 0 0 35px;
-    max-height: 200px;
     overflow: visible;
     width: 75%
 }
 
 .search-form-active.search-form-results {
+    max-height: 200px;
     padding-bottom: 0;
 }
 
