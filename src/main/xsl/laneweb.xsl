@@ -247,6 +247,20 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- add class="hero-unit-front-page" to .hero-unit div on the home page -->
+    <xsl:template match="h:div[attribute::class='hero-unit' and $path='/index.html']/@class">
+        <xsl:attribute name="class">
+            <xsl:value-of select="concat(., ' hero-unit-front-page')"/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <!-- add class="hero-unit-search-active" to .hero-unit when query present -->
+    <xsl:template match="h:div[attribute::class='hero-unit' and $query]/@class">
+        <xsl:attribute name="class">
+            <xsl:value-of select="concat(., ' hero-unit-search-active')"/>
+        </xsl:attribute>
+    </xsl:template>
+
     <!-- add class="nav-menu-active" to .nav-menu li when the path matches -->
     <xsl:template match="h:li[attribute::class='dropdown nav-menu'][starts-with($path, attribute::data-path)]/@class">
         <xsl:attribute name="class">
@@ -264,9 +278,16 @@
     
     <!-- add active to class to search form for /portals/peds.html and /picosearch.html -->
     <xsl:template match="h:form[@class='search-form' and ($path='/portals/peds.html' or $path='/picosearch.html')]/@class">
-        <xsl:attribute name="class" select="'search-form search-form-active'"/>
+        <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
     
+    <!-- add class="hero-unit-search-active" to .hero-unit for /portals/peds.html and /picosearch.html -->
+    <xsl:template match="h:div[attribute::class='hero-unit' and ($path='/portals/peds.html' or $path='/picosearch.html')]/@class">
+        <xsl:attribute name="class">
+            <xsl:value-of select="concat(., ' hero-unit-search-active')"/>
+        </xsl:attribute>
+    </xsl:template>
+
     <!-- add active to the pico-toggle link if $search-source=clinical|peds-all or path is /portals/peds.html or /picosearch.html -->
     <xsl:template match="h:span[@class='pico-toggle' and (matches($search-source,'(clinical|peds)-all') or $path='/portals/peds.html' or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
