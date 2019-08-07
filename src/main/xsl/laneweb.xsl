@@ -99,7 +99,6 @@
 
     <xsl:variable name="search-source">
         <xsl:choose>
-            <xsl:when test="starts-with($path,'/picosearch')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/emergency')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/endocrinology')">clinical-all</xsl:when>
@@ -113,7 +112,6 @@
             <xsl:when test="starts-with($path,'/portals')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
-            <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="$source">
                 <xsl:choose>
                     <!-- various -images-all source parameters get images-all -->
@@ -126,6 +124,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
+            <xsl:when test="starts-with($path,'/picosearch')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/bioimagesearch')">images-all</xsl:when>
             <xsl:when test="starts-with($path,'/textbooksearch')">textbooks-all</xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
