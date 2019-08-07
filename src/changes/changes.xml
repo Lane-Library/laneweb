@@ -7,6 +7,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	
+    	<release date="2019-08-11" version="3.5.47" description="bug fix release">
+            <action date="2019-08-05" dev="alainb" issue="154117" type="update">
+                change js to stay on the screen
+            </action>
+        </release>
     	<release date="2019-08-04" version="3.5.46" description="bug fix release">
             <action date="2019-08-04" dev="ryanmax" issue="154079" type="add">
                 preview image search in default search results
