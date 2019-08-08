@@ -19,11 +19,14 @@
 .core-covers .bookcover,
 .core-covers-3 .bookcover,
 .module-img {
-    float: left;
     margin-right: 1em;
 }
 
-.core-covers img,
+.core-covers-3 .bookcover,
+.core-covers-3 .module-img {
+    float: left;
+}
+
 .core-covers-3 img {
     height: 81px;
     width: 59px;

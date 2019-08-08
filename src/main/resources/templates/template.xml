@@ -56,14 +56,9 @@
                 
             <div class="lane-header">
                 <div class="centered">
-                    <a href="/index.html">
                     <div class="brand">
-                    <div class="brand-logo">
+                        <a href="/index.html">Lane Medical Library</a>
                     </div>
-                    <div class="brand-sitename"><a href="/index.html">Lane Medical Library</a>
-                    </div>
-                    </div>
-                    </a>
                     <ul class="library-contact">
                         <li><a href="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
                         <li><a href="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>
@@ -194,7 +189,7 @@
             </div>
             <footer class="super-footer">
             <div class="centered">        
-                <h2><a href="//med.stanford.edu">Lane Medical Library</a></h2>
+                <h2><a href="/index.html">Lane Medical Library</a></h2>
                 <div class="pure-g">
                     <div class="pure-u-1-4">
                     <h3><a href="//med.stanford.edu">Stanford Medicine</a></h3>
