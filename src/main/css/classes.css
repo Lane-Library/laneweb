@@ -98,6 +98,7 @@
 .venue{
     position: relative;
     margin-top: 60px;
+    font-size: 13px;
 }
 
 .location{
