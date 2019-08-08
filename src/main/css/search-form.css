@@ -1,5 +1,4 @@
 .hero-unit {
-    padding: 40px 0 0 0;
     background-color: #8c1515;
    /* background-image: url('../images/search-back.jpg');*/
     background-repeat: no-repeat;
@@ -11,11 +10,11 @@
 }
 
 .hero-unit-front-page, .hero-unit-front-page.hero-unit-search-active {
-    padding: 100px 0;
+    padding: 72px 0 100px 0;
 }
 
 .hero-unit-search-active {
-    padding: 100px 0 0 0;
+    padding: 71px 0 0 0;
 }
 
 /*

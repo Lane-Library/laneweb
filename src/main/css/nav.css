@@ -1,6 +1,5 @@
 nav {
 	background-color: #333;
-    position: absolute;
     top: 124px;
     width: 100%;
     font-family: 'Fjord One', serif;
@@ -27,8 +26,7 @@ nav > ul {
     font-family: 'Fjord', serif;
 }
 
-.nav-menu:hover,
-.nav-menu-active {
+.nav-menu:hover, .nav-menu-active {
     color: white;
     background-color: #8c1515;
     border: none;

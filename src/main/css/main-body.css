@@ -1,13 +1,12 @@
 html {
     background-color: #f0f4f5;
-    min-width: 940px;
+    min-width: 1089px;
     scroll-behavior: smooth;
 }
 
 .centered {
     position: relative;
     margin: 0 5%;
-    min-width: 990px;
 }
 
 .content {

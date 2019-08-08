@@ -5,7 +5,6 @@
     font-weight: 600;
     height: 32px;
     margin: 0;
-    position: absolute;
     top: 0;
     width: 100%;
 }
@@ -135,11 +134,10 @@
 .lane-header {
     background-color: white;
     font-size: 14px;
-    padding-top: 32px;
 }
 
 .brand {
-    height: 100px;
+    height: 65px;
     padding-top: 27px;
     display: block;
     margin: 0;
