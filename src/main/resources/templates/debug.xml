@@ -102,14 +102,9 @@
                 
             <div class="lane-header">
                 <div class="centered">
-                    <a href="/index.html">
                     <div class="brand">
-                    <div class="brand-logo">
+                        <a href="/index.html">Lane Medical Library</a>
                     </div>
-                    <div class="brand-sitename"><a href="/index.html">Lane Medical Library</a>
-                    </div>
-                    </div>
-                    </a>
                     <ul class="library-contact">
                         <li><a href="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
                         <li><a href="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>

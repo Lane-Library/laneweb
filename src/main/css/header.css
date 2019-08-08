@@ -145,19 +145,11 @@
     margin: 0;
 }
 
-.brand-logo {
+.brand a, .brand a:link, .brand a:focus, .brand a:visited {
 	background-image: url('../images/sm-logo.svg');
     background-repeat: no-repeat;
-    padding: 48px 0 0 176px;
+    padding: 21px 0 0 176px;
     float:left;
-}
-
-
-.brand-sitename {
-	margin-top: 21px;
-}
-
-.brand a, .brand a:link, .brand a:focus, .brand a:visited {
     color: #333333;
     font-weight: 400;
     text-decoration: none;
