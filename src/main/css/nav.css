@@ -24,6 +24,7 @@ nav > ul {
     text-align: center;
     white-space: nowrap;
     font-family: 'Fjord', serif;
+    cursor: pointer;
 }
 
 .nav-menu:hover, .nav-menu-active {
