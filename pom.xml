@@ -462,15 +462,15 @@
                                 <include>shc-portal-min.css</include>
                                 <include>live-chat-min.css</include>
                                 <include>menu-min.css</include>
-                                <includes>gutters-min.css</includes>
+                                <include>gutters-min.css</include>
                                 <include>back-to-top-min.css</include>
-                                <includes>solr-facets-min.css</includes>
-                                <includes>equipment-min.css</includes>
-                                <includes>clinical-search-min.css</includes>
-                                <includes>newsfeed-item-min.css</includes>
-                                <includes>youtube-thumbnail-min.css</includes>
-                                <includes>calendar-min.css</includes>
-                                <includes>password-table-min.css</includes>
+                                <include>solr-facets-min.css</include>
+                                <include>equipment-min.css</include>
+                                <include>clinical-search-min.css</include>
+                                <include>newsfeed-item-min.css</include>
+                                <include>youtube-thumbnail-min.css</include>
+                                <include>calendar-min.css</include>
+                                <include>password-table-min.css</include>
                                 <include>portals-min.css</include>
                             </includes>
                         </aggregation>
