@@ -7,10 +7,18 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	
     	<release date="2019-08-11" version="3.5.47" description="bug fix release">
+    	  	<action date="2019-07-26" dev="olgary" issue="154107" type="update">
+                update css and template for new header, footer, and body styles
+            </action>
             <action date="2019-08-05" dev="alainb" issue="154117" type="update">
                 change js to stay on the screen
+            </action>
+            <action date="2019-08-08" dev="alainb" issue="154159" type="update">
+               header rendering issues on mobile device
+            </action>
+            <action date="2019-08-09" dev="ryanmax" issue="154160" type="update">
+               nav menu doesn't open on mobile devices
             </action>
         </release>
     	<release date="2019-08-04" version="3.5.46" description="bug fix release">
