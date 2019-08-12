@@ -113,9 +113,9 @@
     content: ' ';
     position: absolute;
     background-color: #fff;
-    height: 12px;
+    height: 14px;
     left: 19px;
-    width: 10px;
+    width: 14px;
     z-index: -1;
 }
 

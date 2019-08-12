@@ -1,23 +1,12 @@
-.nav header {
-    background-color: black;
-    color: white;
-    font-weight: 600;
-    height: 32px;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-.lane-nav {
-    background-color: rgb(197, 207, 209);
-    box-shadow: inset 0 5px 5px -5px #000;
-    position: absolute;
+nav {
+	background-color: #333;
     top: 124px;
     width: 100%;
+    font-family: 'Fjord One', serif;
+    color: white;
 }
 
-.lane-nav > ul {
+nav > ul {
     display: flex;
 }
 
@@ -26,47 +15,58 @@
     flex: 1 1 auto;
 }
 
-.nav-menu > span {
-    color: #3c3623;
+.nav-menu > span, .nav-menu > span a {
+    color: white;
     cursor: default;
     display: block;
-    font-size: 15px;
-    line-height: 46px;
+    font-size: 18px;
+    line-height: 64px;
     text-align: center;
     white-space: nowrap;
+    font-family: 'Fjord', serif;
+    cursor: pointer;
 }
 
-.nav-menu:hover,
-.nav-menu-active {
-    color: #3c3623;
-    background-color: white;
-    box-shadow: inset 0 5px 5px -5px #000;
+.nav-menu:hover, .nav-menu-active {
+    color: white;
+    background-color: #8c1515;
     border: none;
 }
 
 .nav-menu .nav-menu-content {
     border-top: none;
     left: 0;
-    padding: 6px 0;
+    padding: 12px 0 24px 14px;
     z-index: 1;
 }
 
-.nav-menu-content li {
-    width: 205px;
-    padding: 6px 6px 6px 18px;
-    box-sizing: border-box;
-    border-bottom: solid 1px #f0f4f5;
+.nav-menu > i.fa-caret-down {
+    text-align: center;
+    display: block;
+    margin-top: -20px;
+    color: #999999;
 }
 
-.nav-menu-content li:last-child {
-    border-bottom: none;
+.nav-menu:hover > i.fa-caret-down::before,
+.nav-menu-active > i.fa-caret-down::before {
+    color: #ffffff;
+}
+
+.nav-menu-content {
+	 font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav-menu-content li {
+    width: 300px;
+    padding: 6px 6px 6px 18px;
+    box-sizing: border-box;
 }
 
 .nav-menu-content a {
     display: inline;
     font-weight: normal;
     color: #007c92;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .nav-menu-content a:visited {

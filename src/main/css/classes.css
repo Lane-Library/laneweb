@@ -3,7 +3,7 @@
     position: relative;
     /* this z-index and the .class .date:before rules related to case 119823 involved with getting
        the date box the same height as the class information*/
-    z-index: 1;
+    z-index: 0;
     min-height: 200px;
 }
 
@@ -97,7 +97,8 @@
 
 .venue{
     position: relative;
-    margin-top: 78px;
+    margin-top: 60px;
+    font-size: 13px;
 }
 
 .location{

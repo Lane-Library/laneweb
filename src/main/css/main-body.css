@@ -4,15 +4,9 @@ html {
     scroll-behavior: smooth;
 }
 
-.main {
-    text-align: left;
-    position: relative;
-}
-
 .centered {
     position: relative;
     margin: 0 5%;
-    min-width: 990px;
 }
 
 .content {

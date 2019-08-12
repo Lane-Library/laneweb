@@ -1,11 +1,9 @@
 .module {
-    margin-top: 12px;
+    margin-top: 24px;
     padding: 12px;
     box-sizing: border-box;
     line-height: 1.6em;
     background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
     position: relative;
 }
 
@@ -21,11 +19,14 @@
 .core-covers .bookcover,
 .core-covers-3 .bookcover,
 .module-img {
-    float: left;
     margin-right: 1em;
 }
 
-.core-covers img,
+.core-covers-3 .bookcover,
+.core-covers-3 .module-img {
+    float: left;
+}
+
 .core-covers-3 img {
     height: 81px;
     width: 59px;
@@ -101,32 +102,7 @@
     background-image: none;
 }
 
-.grand-rounds:before, .upcoming-classes:before, .popular:before {
-    border-radius: 50px;
-    font-family: 'FontAwesome';
-    display: block;
-    position: absolute;
-    width: 48px;
-    color: #fff;
-    text-align: center;
-    font-size: 2em;
-    line-height: 48px;
-    top: -24px;
-    left: 45%;
-}
-.grand-rounds:before {
-    background-color: #aabec6;
-    content: '\f0f1';
-}
 
-.upcoming-classes:before {
-    background-color: #aabec6;
-    content: '\f19d';
-}
-.popular:before {
-    background-color: #8c1515;
-    content: '\f005';
-}
 
 .new-resource {
     background-color: transparent;
@@ -161,5 +137,5 @@
 }
 
 .staff-list h4 {
-    font-size: 14px;
+    font-size: 16px;
 }

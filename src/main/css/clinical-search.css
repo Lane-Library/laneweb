@@ -66,9 +66,9 @@
     content: ' ';
     position: absolute;
     background-color: #fff;
-    height: 12px;
+    height: 14px;
     left: 4px;
-    width: 12px;
+    width: 14px;
     z-index: -1;
     border-radius: 6px;
 }
