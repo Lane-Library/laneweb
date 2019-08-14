@@ -6,25 +6,35 @@ nav {
     color: white;
 }
 
-nav > ul {
-    display: flex;
+nav > ul.content {
+	display: flex;
+    margin-top: 0px;
 }
 
-.nav-menu {
+
+ul.content .nav-menu {
     display: inline-block;
     flex: 1 1 auto;
+    border:0;
+	padding: 0;
 }
 
 .nav-menu > span, .nav-menu > span a {
     color: white;
-    cursor: default;
     display: block;
     font-size: 18px;
     line-height: 64px;
     text-align: center;
     white-space: nowrap;
     font-family: 'Fjord', serif;
-    cursor: pointer;
+}
+
+.nav-menu > span{
+	cursor: default;
+}
+
+.nav-menu > span a{
+	cursor: pointer;
 }
 
 .nav-menu:hover, .nav-menu-active {
