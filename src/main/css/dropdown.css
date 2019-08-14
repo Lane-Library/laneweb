@@ -7,7 +7,6 @@
     position: absolute;
     border: 1px solid #dadad9;
     background: white;
-    margin-top: 4px;
 }
 
 .dropdown:hover .dropdown-content{

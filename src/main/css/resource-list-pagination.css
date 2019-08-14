@@ -1,105 +1,102 @@
-.resourceListPagination{
-    font-size: 13px;
+.resourceListPagination {
+	font-size: 13px;
 }
 
-.view-by{
-    position: relative;
-    white-space: nowrap;
+.view-by {
+	float: right;
 }
 
 .view-by .dropdown {
-    position: absolute;
-    right: 0;
-    top: -4px;
+	white-space: nowrap;
 }
 
 .pagingLabels {
-    padding: 0 12px;
+	padding: 0 12px;
 }
 
 .pagingLabels.disabled {
-    color: #999;
+	color: #999;
 }
 
-.labelTitle{
-    display: inline-block;
-    width: 175px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: bottom;
-    padding-left: 4px;
-    box-sizing: border-box;
+.labelTitle {
+	display: inline-block;
+	width: 175px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: bottom;
+	padding-left: 4px;
+	box-sizing: border-box;
 }
 
 .pagingButton {
-    position: relative;
-    float: right;
-    cursor: pointer;
-    bottom: 4px;
-    padding: 4px 8px;
-    border: 1px solid #dadad9;
-    border-radius: 3px 3px 0 0;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-    margin-left: 3px;
+	position: relative;
+	float: right;
+	cursor: pointer;
+	bottom: 4px;
+	padding: 4px 8px;
+	border: 1px solid #dadad9;
+	border-radius: 3px 3px 0 0;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	margin-left: 3px;
 }
 
 .pagingForm {
-    display: inline;
-    padding: 5px;
+	display: inline;
+	padding: 5px;
 }
 
 .pagingForm input {
-    width: 28px;
-    text-align: center;
+	width: 28px;
+	text-align: center;
 }
 
 .s-pagination {
-    float: right;
-    white-space: nowrap;
+	float: right;
+	white-space: nowrap;
 }
 
 .s-pagination .pagingButton {
-    float: none;
-    bottom: 0;
+	float: none;
+	bottom: 0;
 }
 
 .pagingButton.disabled {
-    color: #ccc;
-    cursor: default;
+	color: #ccc;
+	cursor: default;
 }
 
 .pagingButton i {
-    color: #007c92;
+	color: #007c92;
 }
 
 .pagingButton i:hover {
-    color: #428bca;
+	color: #428bca;
 }
 
 .pagingButton.disabled i {
-    color: #ccc;
+	color: #ccc;
 }
 
 .view-by.sort .dropdown {
-    right: inherit;
+	right: inherit;
 }
 
 .view-by.sort .general-dropdown-content {
-    left: 6px;
-    min-width: 140px;
+	left: 6px;
+	min-width: 140px;
 }
 
 .view-by.sort i {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .view-by.sort span {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .s-pagination .error {
-    margin-top: -20px;
-    text-align: center;
-    color: red;
-    font-size: 14px;
+	margin-top: -20px;
+	text-align: center;
+	color: red;
+	font-size: 14px;
 }

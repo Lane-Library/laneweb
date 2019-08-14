@@ -48,6 +48,7 @@ ul.content .nav-menu {
     left: 0;
     padding: 12px 0 24px 14px;
     z-index: 1;
+    margin-top: 4px;
 }
 
 .nav-menu > i.fa-caret-down {
