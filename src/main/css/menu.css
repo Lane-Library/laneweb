@@ -1,21 +1,18 @@
 .menu-container {
     margin: 12px 0 24px;
+    font-family: 'Fjord One', serif;
 }
 
 .menu-container h3 {
-    font-size: 22px;
+    font-size: 24px;
     letter-spacing: 1px;
     background-color: #8c1515;
     color: white;
-    text-transform: uppercase;
-    padding: 60px 13px 48px;
+    padding: 4em 1.5em .5em 1.5em;
     margin: 0;
-    background-image: none;
+    line-height: 130%;
 }
 
-.menu {
-    border-top: 12px solid #8c1515;
-}
 
 .menu li {
     padding: 0;
@@ -23,16 +20,15 @@
 }
 
 .menu a {
-    background-color: #333;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 100%);
-    border-bottom: 1px solid #333333;
-    color: white;
+    background-color: #fff;
+    border-bottom: 2px solid #f0f4f5;
     display: block;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     line-height: 16px;
     letter-spacing: .5px;
-    padding: 9px 22px 9px 13px;
+    padding: 1em 1em 1em 2em;
+    color: #333;
 }
 
 .menu .fa {
@@ -40,21 +36,18 @@
     float: right;
 }
 
-.menu a:hover, .menu ul .menuitem-active:hover {
-    background-color: #555;
+.menu a:hover, .menu .menuitem-active /*, .menu ul .menuitem-active:hover*/ {
+    background-color: #666;
+    color: #fff;
 }
 
-.menu .menuitem-active {
-    background-color: #555555;
-}
-
+/*
 .menu ul {
     border-top: none;
 }
 
 .menu ul a {
     background-color: #707070;
-    background-image: none;
     padding: 6px 22px 6px 13px;
     border-bottom: none;
 }
@@ -81,8 +74,4 @@
 
 .submenu.submenu-active {
     max-height: 250px;
-}
-
-.menu li:last-child a::after {
-    background-image: none;
-}
+}*/

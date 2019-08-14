@@ -1,17 +1,19 @@
-h2 {
-    margin-top: 24px;
-    margin-bottom: 12px;
-    font-weight: 400;
-    font-size: 30px;
-    font-family: 'Fjord One', serif;
-    color: #666666;
+h1  {
+	font-family: 'Fjord One', serif;
+	color: #666666;
+	font-size: 30px;
     text-align: center;
 }
-
-/*bigger margin-top for h2 on homepage*/
-.homepage {
-    margin-top: 42px;
+h2 {
+    color: #333;
+    font-size: 22px;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d8dbdc;
+    font-family: 'Fjord One', serif;
 }
+
 
 h3, h4 {
     color: #333;
@@ -20,17 +22,9 @@ h3, h4 {
     margin-bottom: 1em;
     padding-bottom: 12px;
     border-bottom: 1px solid #d8dbdc;
+    font-family: 'Fjord One', serif;
 }
 
-/*h4:after {
-    content: ' ';
-    border-top: 1px solid #d8dbdc;
-    border-left: 26px solid #d8dbdc;
-    display: block;
-    height: 4px;
-    margin-top: 10px;
-    box-sizing: content-box;
-}*/
 
 h5 {
     color: #8c1515;
