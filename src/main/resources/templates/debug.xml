@@ -115,7 +115,7 @@
             </div>
      </header>
      <nav>
-           <ul class="centered">
+           <ul class="content centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
                             <span>Resources</span>
                             <i class="fa fa-caret-down" aria-hidden="true"></i>
