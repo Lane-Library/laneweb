@@ -13,7 +13,11 @@
             </action>
              <action date="2019-08-15" dev="olgary" issue="154285" type="update">
                 tooltips colors updated
-            </action>     
+            </action>   
+            <action date="2019-08-15" dev="olgary" issue="154286" type="update">
+                align GR and classes modules with popular resources on homepage
+            </action> 
+            
         </release>
     	<release date="2019-08-11" version="3.5.47" description="bug fix release">
     	  	<action date="2019-07-26" dev="olgary" issue="154107" type="update">
