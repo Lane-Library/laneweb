@@ -2,31 +2,9 @@
 http://lane.stanford.edu/samples/button-css.html
  */
  
- button {
-    font-size: 16px;
-    font-weight: 400;
-    padding: 12px 24px;
-    cursor: pointer;
-    display: inline-block;
-    background-color: #007C92;
-    text-transform: uppercase;
-    color: white;
-    border: 0;
- }
+
  
- 
-.form-button span:after {
-    font-family: FontAwesome;
-    content: "\f061";
-    color: white;
-    font-size: 13px;
-    padding-left: 10px;
-    line-height: 0;
-    position: relative;
-    top: -1px;
- }
- 
-/*.button {
+.button {
     font-size: 16px;
     font-weight: 400;
     padding: 5.25px 10.5px;
@@ -80,4 +58,4 @@ http://lane.stanford.edu/samples/button-css.html
 
 .button.alt1 .icon {
     color: #8c1515;
-}*/
+}
