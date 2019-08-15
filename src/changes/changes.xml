@@ -9,8 +9,11 @@
     <body>
         <release date="2019-08-19" version="3.5.48" description="bug fix release">
             <action date="2019-08-14" dev="olgary" issue="154260" type="update">
-                preview image search in default search results
+                new left menu look, headings fix
             </action>
+             <action date="2019-08-15" dev="olgary" issue="154285" type="update">
+                tooltips colors updated
+            </action>     
         </release>
     	<release date="2019-08-11" version="3.5.47" description="bug fix release">
     	  	<action date="2019-07-26" dev="olgary" issue="154107" type="update">
