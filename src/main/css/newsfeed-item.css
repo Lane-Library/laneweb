@@ -1,33 +1,55 @@
 /*news feed from the blog on homepage*/
-.newsfeed-item-title {
-    color: #8c1515;
-    font-size: 18px;
-    margin: 12px auto 12px 0;
+
+
+.newsfeed{
+	min-height: 550px;
+	margin-top: 24px;
+	line-height: 1.6em;
+    box-sizing: border-box;
+    background-color: white;
 }
 
-.newsfeed-item-content img {
-    max-width: 100%;
+.newsfeed figure article{
+	display: none;
 }
 
-.newsfeed-item-time {
-    font-size: 12px;
-    color: #999999;
+.newsfeed figure article:first-child{
+	display:block;
+	padding:0;	
 }
 
-.newsfeed-item-time:before {
-    color: #999999;
-    content: '\f017';
-    font-family: 'FontAwesome';
-    margin-right: 6px;
+.newsfeed section article:first-child{
+	display: none;
 }
 
-.newsfeed-item-footer {
-    background-color: #8c1515;
-    text-transform: uppercase;
-    color: #ffffff;
-    padding: 12px;
+
+.newsfeed figure img{
+	 width:100%;
+	 height: 192px;
 }
 
-.newsfeed-item-footer  a {
-    color: #ffffff;
+
+.newsfeed section{
+	padding:12px;
+} 
+
+.newsfeed hr{
+	margin:12px;
 }
+
+.newsfeed-title {
+	margin-top: 24px;
+	padding:12px;
+}
+
+
+
+.newsfeed header{
+	padding: 10px; 
+	color: WHITE;
+	background-color: darkred;
+	font-size: 10px;
+	font-family: 'Fjord One',serif;
+	position: absolute;
+}
+
