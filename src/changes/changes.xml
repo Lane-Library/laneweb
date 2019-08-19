@@ -7,6 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-08-26" version="3.5.49" description="bug fix release">
+            <action date="2019-08-19" dev="olgary" issue="154333" type="fix">
+               add a hero image to the search background
+            </action>
+        </release>
+        <release date="2019-08-26" version="3.5.49" description="bug fix release">
+            <action date="2019-08-19" dev="olgary" issue="154332" type="fix">
+               changed logo link on history site to go back to lane homepage 
+            </action>
+        </release>
         <release date="2019-08-19" version="3.5.48" description="bug fix release">
             <action date="2019-08-14" dev="alain" issue="154263" type="update">
                drop downs Aa-Zz on resources pages not working    
