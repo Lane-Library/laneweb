@@ -1,3 +1,4 @@
+
 html {
     scroll-behavior: smooth;
 }
@@ -160,129 +161,7 @@ h1 i {
     font-size: 6px;
 }
 
-#lane-footer,#lane-subfooter {
-    background-color: #8c1515;
-}
 
-#lane-footer {
-    margin-top: 10px;
-}
-
-#lane-footer h2 {
-    font-size: 24px;
-    padding: 17px 0 12px;
-    margin-bottom: 24px;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-#lane-footer h3 {
-    font-size: 16px;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-#lane-footer li,#lane-footer h3,#lane-footer h2 {
-    border-bottom: 1px solid #902827;
-}
-
-#lane-footer li:last-child {
-    border-bottom: none;
-}
-#lane-footer a {
-    color: white;
-    line-height: 24px;
-    text-decoration: none;
-    font-weight: 300;
-    white-space: nowrap;
-}
-
-#lane-footer ul a,#lane-subfooter {
-    font-size: 12px;
-    font-weight: 400;
-}
-
-#lane-subfooter {
-    line-height: 22px;
-    padding: 22px 0 7px;
-}
-
-#lane-subfooter,#lane-subfooter a {
-    color: #999999;
-    text-decoration: none;
-}
-
-#lane-subfooter ul {
-    float: right;
-}
-
-#lane-subfooter li {
-    float: left;
-    padding: 3px 5px 5px 0;
-}
-
-#lane-subfooter span {
-    display: none;
-}
-
-#lane-subfooter i {
-    background-color: #999999;
-    border-radius: 11px;
-    color: #8c1515;
-    height: 22px;
-    line-height: 20px;
-    margin-left: 0;
-    text-align: center;
-    width: 22px;
-}
-
-#sm-footer {
-    background-color: rgb(38, 38, 38);
-    color: rgb(158, 158, 158);
-    height: 160px;
-    padding: 30px 0;
-    box-sizing: border-box;
-}
-
-#sm-footer ul {
-    margin-top: 16px;
-    background-image: url('../../images/footer-logos.png');
-    background-repeat: no-repeat;
-}
-
-#sm-footer li {
-    display: inline-block;
-    list-style-type: none;
-}
-
-#sm-footer a {
-    display: block;
-    text-indent: -9999px;
-    width: 100%;
-    height: 60px;
-    cursor: pointer;
-}
-
-#footer-su {
-    width: 110px;
-}
-
-#footer-sm {
-    width: 156px;
-}
-
-#footer-shc {
-    width: 142px;
-}
-
-#footer-sch {
-    width: 176px;
-}
-
-#footer-schos {
-    width: 176px;
-}
-#footer-uha {
-    width: 228px;
-}
 
 #gift {
     display: block;
@@ -773,3 +652,163 @@ http://lane.stanford.edu/samples/button-css.html
     right: 0;
     bottom: 0;
 }
+
+/* FOOTER */
+
+/* superfooter */
+.super-footer {
+    background-color: #666;
+}
+
+.super-footer {
+    margin-top: 12px;
+    padding-top: 17px;
+}
+
+.super-footer .centered {
+    padding-bottom: 12px;
+}
+.super-footer h2, .super-footer h3 {
+    font-family: 'Fjord', serif;
+    font-size: 24px;
+    font-weight: 300;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    line-height: 24px;
+    text-transform: none;
+    text-align: left;
+    border-bottom: none;
+}
+
+
+.super-footer h3 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.super-footer a, .super-footer a .fa {
+    color: white;
+}
+
+.super-footer li {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 11px;
+}
+/* subfooter */
+
+.footer-link-bar {
+	background-color: transparent;
+    font-size: 18px;
+    clear: both;
+    padding: 15px 0;
+    text-align: center;
+
+}
+
+.footer-link-bar a {
+    color: #333;
+    font-family: 'Fjord One', serif;
+}
+
+.footer-link-bar ul {
+    float: right;
+}
+
+.footer-link-bar li {
+    display: inline-block;
+    padding: 8px 0;
+}
+
+
+.footer-link-bar i {
+    color: #8c1515;
+    height: 22px;
+    line-height: 20px;
+    text-align: center;
+    width: 22px;
+}
+
+/* copyright footer */
+.footer-copyright {
+    background-color: rgb(51, 51, 51);
+    color: white;
+    padding: 30px 0;
+    box-sizing: border-box;
+}
+
+.footer-copyright li {
+	display: inline-block;
+}
+
+.footer-copyright a, .footer-copyright i {
+	color: white;
+    padding-right: 8px;
+}
+
+.footer-copyright .right-aligned {
+	float: right;
+}
+
+.footer-copyright .bullet:before {
+	content: '\00a0\2022\00a0\00a0';
+	color:#fff;
+	margin-left: 2px;
+	margin-right: 6px;
+}
+
+.footer-copyright span {
+    display: none;
+}
+
+/*global footer*/
+.footer-global {
+    background-color: rgb(51, 51, 51);
+    box-sizing: border-box;
+}
+
+.footer-global .footer-logos {
+    background-image: url('../images/footer-logos-white.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px auto;
+    text-align: center;
+    width: 989px;
+}
+
+.footer-logos li {
+    display: inline-block;
+}
+
+.footer-logos a {
+    display: block;
+    text-indent: -9999px;
+    width: 100%;
+    height: 60px;
+    cursor: pointer;
+}
+
+.footer-logos li:nth-child(1) {
+    width: 12%;
+}
+
+.footer-logos li:nth-child(2) {
+    width: 15%;
+}
+
+.footer-logos li:nth-child(3) {
+    width: 14%;
+}
+
+.footer-logos li:nth-child(4) {
+    width: 18%;
+}
+
+.footer-logos li:nth-child(5) {
+    width: 18%;
+}
+
+.footer-logos li:nth-child(6) {
+    width: 18%;
+}
+
