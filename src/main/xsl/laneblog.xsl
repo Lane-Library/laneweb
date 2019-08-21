@@ -4,7 +4,7 @@
     version="2.0"
 >
    
-   <xsl:param name="highlightedresources"/>
+
    
    
    <xsl:template match="node()">
@@ -26,9 +26,7 @@
    <xsl:template match="h:item">
       <div class="pure-u-1-3">
          <div class="newsfeed">
-            <xsl:if test="$highlightedresources = 'true'">
-               <header>Resources of the Months</header>
-            </xsl:if>
+            <header>Resources of the Months</header>
             <figure>
                <xsl:copy-of select=".//*:img[1]"/>
                </figure>
