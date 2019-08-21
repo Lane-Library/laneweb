@@ -4,6 +4,7 @@
     border: 6px solid;
     border-top: 0;
     border-bottom: 0;
+    min-width: 1035px;
 }
 
 #imageList {
@@ -161,6 +162,8 @@
 
 #sourceFilter {
     margin-left: 55px;
+    width: 400px;
+    float: none;
 }
 
 .pagination {

@@ -23,7 +23,7 @@ ga('send', 'pageview');
     <body>
         <div class="header">
             <h1>
-                <a href="/med-history/index.html">Lane Medical Library<br/>
+                <a href="/index.html">Lane Medical Library<br/>
                     <i>Medical History Center</i></a>
             </h1>
         </div>
