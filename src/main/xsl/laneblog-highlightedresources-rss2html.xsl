@@ -18,7 +18,7 @@
    <xsl:template match="rss">
       <laneblog-rss>
       <xsl:apply-templates
-         select="channel/item[category[ . = 'Highlighted Resource']  and contains(./content:encoded, '&lt;article&gt;')][position() &lt; 2]"/>
+         select="channel/item[category[ . = 'Highlighted Resource'] ]"/>
       </laneblog-rss>
    </xsl:template>
    
