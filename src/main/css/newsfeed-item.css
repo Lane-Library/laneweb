@@ -9,18 +9,6 @@
     background-color: white;
 }
 
-.newsfeed figure article{
-	display: none;
-}
-
-.newsfeed figure article:first-child{
-	display:block;
-	padding:0;	
-}
-
-.newsfeed section article:first-child{
-	display: none;
-}
 
 
 .newsfeed figure img{
