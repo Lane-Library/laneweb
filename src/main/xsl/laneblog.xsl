@@ -18,7 +18,7 @@
    </xsl:template>
    
     <xsl:template match="/">
-      <xsl:apply-templates select="h:laneblog-rss/h:item"/>
+      <xsl:apply-templates select="h:laneblog-rss//h:item"/>
     </xsl:template>
    
    

@@ -127,7 +127,9 @@
             <map:transform type="textNodeParser">
                 <map:parameter name="elementNames" value="content"/>
             </map:transform>
-            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
+             <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl">
+            	<map:parameter name="highlightedresources" value="true"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="laneblog-news-n-newresources-rss.xml" type="wildcard">
