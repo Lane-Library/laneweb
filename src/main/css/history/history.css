@@ -29,8 +29,8 @@ a:visited,a:active,a:hover {
 }
 
 .centered, h1 {
-    width: 989px; 
-    margin: auto;
+    min-width: 989px;
+    margin: 24px;
     position: relative;
 }
 
