@@ -15,7 +15,7 @@
    </xsl:template>
    
    <xsl:template match="rss">
-      <xsl:apply-templates select="./channel/item[category[ . = 'Highlighted Resource']]  and  count(./content:encoded//h:article) &gt; 0  [position() &lt; 2]"/>
+      <xsl:apply-templates select="./channel/item[category[ . = 'Highlighted Resource'] and  count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 2]"/>
    </xsl:template>
    
    <xsl:template match="item">
@@ -39,4 +39,12 @@
          </div>
       </div>        
    </xsl:template>
+   
+   <xsl:template match="h:img">
+      <xsl:copy>
+         <xsl:attribute name="src" select="replace(@src,'http:','')"/>
+      </xsl:copy>
+   </xsl:template>
+   
+   
 </xsl:stylesheet>
