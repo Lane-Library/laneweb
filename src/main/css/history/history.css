@@ -61,7 +61,7 @@ h1 i {
 }
 
 #mhc-logo{
-    position: fixed;
+    position: absolute;
     top: 85px;
     font-size: 12px;
     left: 225px;
