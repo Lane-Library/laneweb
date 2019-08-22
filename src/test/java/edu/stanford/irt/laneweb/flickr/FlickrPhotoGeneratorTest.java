@@ -34,7 +34,7 @@ public class FlickrPhotoGeneratorTest {
 
     @Test
     public void testDoGenerateXMLConsumer() {
-        expect(this.service.getRandomPhotos(6)).andReturn(Collections.emptyList());
+        expect(this.service.getRandomPhotos(12)).andReturn(Collections.emptyList());
         this.strategy.toSAX(Collections.emptyList(), this.xmlConsumer);
         replay(this.service, this.strategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
