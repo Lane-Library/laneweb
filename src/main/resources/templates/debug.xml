@@ -55,7 +55,7 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
-     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/template/header.html">
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/header.html">
          <xi:fallback></xi:fallback>
      </xi:include>  
      <nav>
@@ -178,7 +178,7 @@
                 <?laneweb content?>
             </div>
             
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/template/footer.html">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/footer.html">
                     <xi:fallback></xi:fallback>
             </xi:include>
             
