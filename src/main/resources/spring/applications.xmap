@@ -121,6 +121,10 @@
     </map:pipeline>
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
+        <map:match pattern="header.html" type="wildcard">
+            <map:generate type="file" src="classpath:/static/header.html"/>
+            <map:serialize type="html5"/>
+        </map:match>
         <map:match pattern="laneblog-highlightedresources-rss.xml" type="wildcard">
             <map:generate type="file" src="cocoon://apps/laneblog-feed.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/laneblog-highlightedresources-rss2html.xsl"/>
