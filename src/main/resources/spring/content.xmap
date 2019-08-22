@@ -214,6 +214,10 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
+    	<map:match pattern="(header|footer).html" type="regexp">
+            <map:generate type="html" src="classpath:/static/{1}.html"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match type="regexp" pattern="^(announcement|error)\.html$">
             <map:generate type="html" src="{content-base}/{1}.html"/>
             <map:serialize type="xml"/>
