@@ -11,10 +11,14 @@
             <action date="2019-08-19" dev="olgary" issue="154333" type="fix">
                add a hero image to the search background
             </action>
-        </release>
-        <release date="2019-08-26" version="3.5.49" description="bug fix release">
             <action date="2019-08-19" dev="olgary" issue="154332" type="fix">
                changed logo link on history site to go back to lane homepage 
+            </action>
+            <action date="2019-08-22" dev="alain" issue="154331" type="update">
+                  header and footer for the med history site
+            </action>
+            <action date="2019-08-22" dev="alain" issue="154371" type="update">
+                white space between images content and tab with firefox
             </action>
         </release>
         <release date="2019-08-19" version="3.5.48" description="bug fix release">
