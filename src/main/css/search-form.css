@@ -1,15 +1,21 @@
 .hero-unit {
     background-color: #8c1515;
-    background-image: url('../images/search-back.jpg');
+    background-image: url('../images/search-back.jpg'); 
     background-repeat: no-repeat;
     color: white;
     background-size: cover;
     display: flex;
     justify-content: center;
     width: 100%;
+    padding-top: 74px;
+    
 }
 
-.hero-unit-front-page, .hero-unit-front-page.hero-unit-search-active {
+.hero-unit-front-page{
+	padding: 72px 0 65px 0;
+}
+
+.hero-unit-front-page.hero-unit-search-active {
     padding: 72px 0 100px 0;
 }
 
@@ -18,9 +24,7 @@
 }
 
 .search-form {
-    padding: 36px;
     color: white;
-    max-height: 46px;
     overflow: hidden;
     position: relative;
     width: 60%;
@@ -194,7 +198,6 @@
 .search-form-active {
     padding: 0 0 35px;
     overflow: visible;
-    width: 75%
 }
 
 .search-form-active.search-form-results {
