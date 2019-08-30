@@ -163,7 +163,6 @@
 }
 
 .search-tab {
-    margin-top: 24px;
     line-height: 41px;
     font-size: 14px;
     font-weight: 700;
@@ -225,7 +224,6 @@
 }
 
 .search-form-active .search-tab {
-    margin-top: 0;
     opacity: 1;
     visibility: visible;
 }
