@@ -188,13 +188,11 @@
 }
 
 .search-form-active {
-    padding: 0 0 35px;
     overflow: visible;
 }
 
 .search-form-active.search-form-results {
     max-height: 200px;
-    padding-bottom: 0;
 }
 
 .search-form-active .search-heading,
