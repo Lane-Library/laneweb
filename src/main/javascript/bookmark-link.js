@@ -58,8 +58,8 @@
              */
             initializer : function() {
                 this._timer = null;
-                Y.delegate("mouseover", this._handleTargetMouseover,".content", "a", this);
-                Y.delegate("mouseout", this._handleTargetMouseout,".content", "a", this);
+                Y.delegate("mouseover", this._handleTargetMouseover,"div.content", "a", this);
+                Y.delegate("mouseout", this._handleTargetMouseout,"div.content", "a", this);
                 this.on("statusChange", this._handleStatusChange);
                 var bookmarks = this.get("bookmarks");
                 if (bookmarks) {
