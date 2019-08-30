@@ -66,7 +66,6 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     close: function() {
-                        form.parentNode.classList.remove("hero-unit-search-active");
                         form.classList.remove("search-form-active");
                         document.documentElement.scrollIntoView();
                         view.fire("close");
@@ -75,7 +74,6 @@ if (document.querySelector(".search-form"))  {
                         view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
-                        form.parentNode.classList.add("hero-unit-search-active");
                         form.classList.add("search-form-active");
                         view.fire("open");
                     },

@@ -256,13 +256,6 @@
         </xsl:attribute>
     </xsl:template>
 
-    <!-- add class="hero-unit-search-active" to .hero-unit when query present -->
-    <xsl:template match="h:div[attribute::class='hero-unit' and $query]/@class">
-        <xsl:attribute name="class">
-            <xsl:value-of select="concat(., ' hero-unit-search-active')"/>
-        </xsl:attribute>
-    </xsl:template>
-
     <!-- add class="nav-menu-active" to .nav-menu li when the path matches -->
     <xsl:template match="h:li[attribute::class='dropdown nav-menu'][starts-with($path, attribute::data-path)]/@class">
         <xsl:attribute name="class">
@@ -283,13 +276,6 @@
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
     
-    <!-- add class="hero-unit-search-active" to .hero-unit for /picosearch.html -->
-    <xsl:template match="h:div[attribute::class='hero-unit' and ($path='/picosearch.html')]/@class">
-        <xsl:attribute name="class">
-            <xsl:value-of select="concat(., ' hero-unit-search-active')"/>
-        </xsl:attribute>
-    </xsl:template>
-
     <!-- add active to the pico-toggle link if $search-source=clinical|peds-all or path is or /picosearch.html -->
     <xsl:template match="h:span[@class='pico-toggle' and (matches($search-source,'(clinical|peds)-all') or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
