@@ -7,25 +7,31 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2019-08-26" version="3.5.49" description="bug fix release">
-            <action date="2019-08-19" dev="olgary" issue="154333" type="fix">
-               add a hero image to the search background
+        <release date="2019-08-30" version="3.5.50" description="bug fix release">
+            <action date="2019-08-29" dev="alainb" issue="154482" type="fix">
+               search suggestions hard to avoid
             </action>
-            <action date="2019-08-19" dev="olgary" issue="154332" type="fix">
-               changed logo link on history site to go back to lane homepage 
+            <action date="2019-08-30" dev="ryanmax" issue="154483" type="fix">
+               search tabs clickable even when not visible
             </action>
-            <action date="2019-08-22" dev="alain" issue="154331" type="update">
-                  header and footer for the med history site
+            <action date="2019-08-30" dev="ryanmax" issue="154490" type="fix">
+               bookmark links not appearing in interface
             </action>
-            <action date="2019-08-22" dev="alain" issue="154371" type="update">
-                white space between images content and tab with firefox
+            <action date="2019-08-30" dev="ryanmax" issue="154491" type="fix">
+               pagination alignment on search and browse pages
+            </action>
+            <action date="2019-08-30" dev="ryanmax" issue="154511" type="fix">
+               "images" search tab is not legible
+            </action>
+            <action date="2019-08-30" dev="ryanmax" issue="154512" type="fix">
+               excessive content and banner bouncing
             </action>
         </release>
         <release date="2019-08-19" version="3.5.48" description="bug fix release">
-            <action date="2019-08-14" dev="alain" issue="154263" type="update">
+            <action date="2019-08-14" dev="alainb" issue="154263" type="update">
                drop downs Aa-Zz on resources pages not working    
             </action>
-            <action date="2019-08-14" dev="alain" issue="154320" type="update">
+            <action date="2019-08-14" dev="alainb" issue="154320" type="update">
                 nav menu should not have cursor
             </action>
             <action date="2019-08-14" dev="olgary" issue="154260" type="update">
