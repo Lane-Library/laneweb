@@ -38,7 +38,7 @@
             });
         };
 
-        document.querySelector(".content").addEventListener("click", function(event) {
+        document.querySelector("#searchResults").addEventListener("click", function(event) {
             var node = event.target.closest(".descriptionTrigger");
             if (node) {
                 handleClick(node, event);
