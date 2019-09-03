@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-09-02" version="3.5.51" description="bug fix release">
+            <action date="2019-08-31" dev="ryanmax" issue="154518" type="fix">
+               "preview abstract" and "view description" buttons broken
+            </action>
+        </release>
         <release date="2019-08-30" version="3.5.50" description="bug fix release">
             <action date="2019-08-29" dev="alainb" issue="154482" type="fix">
                search suggestions hard to avoid
@@ -27,7 +32,18 @@
                excessive content and banner bouncing
             </action>
         </release>
-        <release date="2019-08-19" version="3.5.48" description="bug fix release">
+        <release date="2019-08-26" version="3.5.49" description="bug fix release">
+             <action date="2019-08-19" dev="olgary" issue="154332" type="fix">
+                changed logo link on history site to go back to lane homepage 
+             </action>
+            <action date="2019-08-22" dev="alainb" issue="154331" type="update">
+                  header and footer for the med history site
+            </action>
+            <action date="2019-08-22" dev="alainb" issue="154371" type="update">
+                white space between images content and tab with firefox
+            </action>
+         </release>
+         <release date="2019-08-19" version="3.5.48" description="bug fix release">
             <action date="2019-08-14" dev="alainb" issue="154263" type="update">
                drop downs Aa-Zz on resources pages not working    
             </action>
@@ -44,7 +60,7 @@
                 align GR and classes modules with popular resources on homepage
             </action> 
         </release>
-    	<release date="2019-08-11" version="3.5.47" description="bug fix release">
+    	<release date="2019-08-11" version="3.5.47" description="redesign release">
     	  	<action date="2019-07-26" dev="olgary" issue="154107" type="update">
                 update css and template for new header, footer, and body styles
             </action>
