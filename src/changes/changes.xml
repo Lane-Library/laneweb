@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-09-09" version="3.5.52" description="bug fix release">
+            <action date="2019-09-03" dev="alainb" issue="154549" type="fix">
+              Button not aligned in Askus
+            </action>
+        </release>
         <release date="2019-09-02" version="3.5.51" description="bug fix release">
             <action date="2019-08-31" dev="ryanmax" issue="154518" type="fix">
                "preview abstract" and "view description" buttons broken
