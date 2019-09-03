@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-09-02" version="3.5.51" description="bug fix release">
+            <action date="2019-08-31" dev="ryanmax" issue="154518" type="fix">
+               "preview abstract" and "view description" buttons broken
+            </action>
+        </release>
         <release date="2019-08-30" version="3.5.50" description="bug fix release">
             <action date="2019-08-29" dev="alainb" issue="154482" type="fix">
                search suggestions hard to avoid
