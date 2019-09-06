@@ -66,14 +66,29 @@
             </action> 
         </release>
     	<release date="2019-08-11" version="3.5.47" description="redesign release">
+    	  	<action date="2019-07-25" dev="ryanmax" issue="153707" type="fix">
+                search description pages don't default to their respective search options
+            </action>
     	  	<action date="2019-07-26" dev="olgary" issue="154107" type="update">
                 update css and template for new header, footer, and body styles
+            </action>
+            <action date="2019-08-05" dev="ryanmax" issue="154032" type="update">
+                 css for search box and down arrows 
             </action>
             <action date="2019-08-05" dev="alainb" issue="154117" type="update">
                 change js to stay on the screen
             </action>
+            <action date="2019-08-07" dev="ryanmax" issue="154141" type="update">
+               switch to lane+ as default for peds 
+            </action>
+            <action date="2019-08-07" dev="ryanmax" issue="153491" type="fix">
+               bookcover title formatting issue 
+            </action>
             <action date="2019-08-08" dev="alainb" issue="154159" type="update">
                header rendering issues on mobile device
+            </action>
+            <action date="2019-08-08" dev="ryanmax" issue="154162" type="fix">
+               broken markup in template near site brand 
             </action>
             <action date="2019-08-09" dev="ryanmax" issue="154160" type="update">
                nav menu doesn't open on mobile devices
