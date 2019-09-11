@@ -295,7 +295,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>lanehours</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
