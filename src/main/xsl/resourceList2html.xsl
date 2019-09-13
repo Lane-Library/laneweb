@@ -461,7 +461,8 @@
             <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image/preview?q=',$url-encoded-query)"/>
             <xsl:variable name="imageResults" select="document($imageUrl)"/>
             <xsl:if test="count($imageResults//string) >= $images-promo-show">
-                <li>
+                <li class="no-bookmarking">
+                    <span class="primaryType" style="display:none;">Image Search Promo</span>
                     <a class="primaryLink" href="{$images-url}" title="More images from Lane's Biomedical Images Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Biomedical Search</a>
                     <div id="imageList" class="searchPromo">
                         <div class="pure-g">
@@ -470,6 +471,17 @@
                                     <a href="{$images-url}" title="More images from Lane's Biomedical Images Search"><img src="{.}"/></a>
                                 </div>
                             </xsl:for-each>
+                        </div>
+                        <div class="imageSurvey">
+                            <div class="surveyLinks">
+                                Are these image results useful?
+                                <a href="#"><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i> Yes</a>
+                                <a href="#"><i class="fa fa-frown-o fa-lg" aria-hidden="true"></i> No</a>
+                            </div>
+                            <div class="surveySent">
+                                Thank you for your feedback! 
+                                Please send further suggestions to <a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a>.
+                            </div>
                         </div>
                     </div>
                 </li>

@@ -309,3 +309,13 @@
     max-width: 95%;
     overflow: hidden;
 }
+
+#imageList .surveyLinks a {
+    margin: 0 15px 0 5px;
+}
+.imageSurvey {
+    float:right;
+}
+.surveySent {
+    display: none;
+}
