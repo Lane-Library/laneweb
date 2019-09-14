@@ -4,7 +4,7 @@
 
     /**
      * tracking for images search survey
-     * reportable events: 
+     * reportable events:
      *  - images preview present in search results
      *  - images preview and survey within viewport
      *  - survey response
