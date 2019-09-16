@@ -463,12 +463,12 @@
             <xsl:if test="count($imageResults//string) >= $images-promo-show">
                 <li class="no-bookmarking">
                     <span class="primaryType" style="display:none;">Image Search Promo</span>
-                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Biomedical Images Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Biomedical Search</a>
+                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Bio-Image Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Bio-Image Search</a>
                     <div id="imageList" class="searchPromo">
                         <div class="pure-g">
                             <xsl:for-each select="$imageResults//string[position() &lt;= $images-promo-show]">
                                 <div class="pure-u-1-5">
-                                    <a href="{$images-url}" title="More images from Lane's Biomedical Images Search"><img src="{.}"/></a>
+                                    <a href="{$images-url}" title="More images from Bio-Image Search"><img src="{.}"/></a>
                                 </div>
                             </xsl:for-each>
                         </div>
