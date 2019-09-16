@@ -42,7 +42,7 @@
     <!--  number of images to show in search results -->
     <xsl:variable name="images-promo-show">5</xsl:variable>
 
-    <xsl:variable name="images-promo-enabled" select="$sourceid = 'images-promo'"/>
+    <xsl:variable name="images-promo-enabled" select="'true'"/>
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
