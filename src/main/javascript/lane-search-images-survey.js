@@ -10,6 +10,7 @@
      *  - survey response
      */
     var imageSurvey = document.querySelector('.imageSurvey'),
+        query = L.Model.get(L.Model.URL_ENCODED_QUERY),
         impressionRecorded = false,
         // report when user scrolls to include images preview in viewport
         recordImpression = function(viewport) {
@@ -18,7 +19,7 @@
                 L.fire("tracker:trackableEvent", {
                     category : "lane:imageSearchPromo",
                     action : "images viewed",
-                    label : window.model["query"]
+                    label : query
                 });
             }
     };
@@ -29,7 +30,7 @@
             L.fire("tracker:trackableEvent", {
                 category : "lane:imageSearchPromo",
                 action : "images present",
-                label : window.model["query"]
+                label : query
             });
         });
 

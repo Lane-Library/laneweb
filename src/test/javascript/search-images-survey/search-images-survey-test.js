@@ -35,6 +35,7 @@ YUI().use("test", "test-console", function(Y) {
             });
             Y.Assert.areEqual("lane:imageSearchPromo", event.category);
             Y.Assert.areEqual("images viewed", event.action);
+            Y.Assert.areEqual("turtles", event.label);
         }
 
     });
