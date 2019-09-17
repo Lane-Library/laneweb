@@ -27,7 +27,7 @@ public class SolrImageSearchPreviewGeneratorTest {
 
     private FacetPage<Image> facetPage;
 
-    private SorlImageSearchPreviewGenerator generator;
+    private SolrImageSearchPreviewGenerator generator;
 
     private Marshaller marshaller;
 
@@ -43,7 +43,7 @@ public class SolrImageSearchPreviewGeneratorTest {
     public void setUp() throws Exception {
         this.service = mock(SolrImageService.class);
         this.marshaller = mock(Marshaller.class);
-        this.generator = new SorlImageSearchPreviewGenerator(this.marshaller, this.service);
+        this.generator = new SolrImageSearchPreviewGenerator(this.marshaller, this.service);
         this.xmlConsumer = mock(XMLConsumer.class);
         this.facetPage = mock(FacetPage.class);
         this.page = mock(Page.class);
