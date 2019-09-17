@@ -14,6 +14,7 @@ import javax.xml.transform.sax.SAXResult;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.oxm.Marshaller;
@@ -33,6 +34,8 @@ public class SolrImageSearchPreviewGeneratorTest {
 
     private Page<FacetFieldEntry> page;
 
+    private Page<Image> pageImage;
+
     private SolrImageService service;
 
     private FacetFieldEntry value;
@@ -46,6 +49,7 @@ public class SolrImageSearchPreviewGeneratorTest {
         this.generator = new SolrImageSearchPreviewGenerator(this.marshaller, this.service);
         this.xmlConsumer = mock(XMLConsumer.class);
         this.facetPage = mock(FacetPage.class);
+        this.pageImage = mock(Page.class);
         this.page = mock(Page.class);
         this.value = mock(FacetFieldEntry.class);
     }
@@ -55,11 +59,15 @@ public class SolrImageSearchPreviewGeneratorTest {
         expect(this.service.facetOnCopyright("query")).andReturn(this.facetPage);
         expect(this.facetPage.getFacetResultPage("copyright")).andReturn(this.page);
         expect(this.page.getContent()).andReturn(Collections.singletonList(this.value));
-        expect(this.value.getValueCount()).andReturn((long) 0);
+        expect(this.value.getValueCount()).andReturn((long) 1);
+        expect(this.value.getValue()).andReturn("value");
+        expect(this.service.findByTitleAndDescriptionFilterOnCopyright("query", "value", PageRequest.of(0, 10)))
+                .andReturn(this.pageImage);
+        expect(this.pageImage.getContent()).andReturn(Collections.emptyList());
         this.marshaller.marshal(eq(Collections.EMPTY_LIST), isA(SAXResult.class));
-        replay(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value);
+        replay(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value, this.pageImage);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value);
+        verify(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value, this.pageImage);
     }
 }
