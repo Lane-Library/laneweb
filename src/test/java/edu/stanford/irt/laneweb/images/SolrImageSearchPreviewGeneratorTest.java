@@ -30,6 +30,8 @@ public class SolrImageSearchPreviewGeneratorTest {
 
     private SolrImageSearchPreviewGenerator generator;
 
+    private Image image;
+
     private Marshaller marshaller;
 
     private Page<FacetFieldEntry> page;
@@ -51,6 +53,7 @@ public class SolrImageSearchPreviewGeneratorTest {
         this.facetPage = mock(FacetPage.class);
         this.pageImage = mock(Page.class);
         this.page = mock(Page.class);
+        this.image = mock(Image.class);
         this.value = mock(FacetFieldEntry.class);
     }
 
@@ -63,11 +66,14 @@ public class SolrImageSearchPreviewGeneratorTest {
         expect(this.value.getValue()).andReturn("value");
         expect(this.service.findByTitleAndDescriptionFilterOnCopyright("query", "value", PageRequest.of(0, 10)))
                 .andReturn(this.pageImage);
-        expect(this.pageImage.getContent()).andReturn(Collections.emptyList());
-        this.marshaller.marshal(eq(Collections.EMPTY_LIST), isA(SAXResult.class));
-        replay(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value, this.pageImage);
+        expect(this.pageImage.getContent()).andReturn(Collections.singletonList(this.image));
+        expect(this.image.getThumbnailSrc()).andReturn("getThumbnailSrc");
+        this.marshaller.marshal(eq(Collections.singletonList("getThumbnailSrc")), isA(SAXResult.class));
+        replay(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value, this.pageImage,
+                this.image);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value, this.pageImage);
+        verify(this.marshaller, this.service, this.xmlConsumer, this.facetPage, this.page, this.value, this.pageImage,
+                this.image);
     }
 }
