@@ -17,11 +17,18 @@
     <xsl:template match="h:content">
         <xsl:apply-templates select="h:article" />
     </xsl:template>
-
+    
+    
     <xsl:template match="h:img">
-        <xsl:copy>
-             <xsl:attribute name="src" select="replace(@src,'http:','')" />
-        </xsl:copy>
+      <xsl:copy>
+         <xsl:attribute name="src" select="replace(@src,'http:','')"/>
+         <xsl:if test="ends-with( ./@src, 'jpg')">
+            <xsl:attribute name="src" select="replace(@src, '\.jpg' ,'-153.jpg')"/>
+         </xsl:if>
+         <xsl:if test="ends-with( ./@src, 'png')">
+            <xsl:attribute name="src" select="replace(@src, '\.png' ,'-153.png')"/>
+         </xsl:if> 
+      </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>

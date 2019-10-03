@@ -2,7 +2,7 @@
 .newsfeed-item-title {
     color: #8c1515;
     font-size: 18px;
-    margin: 12px auto 12px 0;
+    margin: 0px auto 12px 0;
 }
 
 .newsfeed-item-content img {
@@ -30,4 +30,9 @@
 
 .newsfeed-item-footer  a {
     color: #ffffff;
+}
+
+.wp-block-image{
+	text-align: center;
+	padding: 24px;
 }

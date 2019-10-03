@@ -106,7 +106,6 @@
 
 .new-resource {
     background-color: transparent;
-    text-align: center;
     margin: 0 12px 12px auto;
 }
 
@@ -115,7 +114,6 @@
 }
 
 .new-resource img {
-    margin-bottom: 12px;
     max-width: 100%;
 }
 
