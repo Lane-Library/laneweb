@@ -31,8 +31,6 @@ public class LanewebIT {
     private static final MediaType APPLICATION_JAVASCRIPT = new MediaType("application", "javascript",
             StandardCharsets.UTF_8);
 
-    private static final MediaType APPLICATION_JSON = new MediaType("application", "json", StandardCharsets.UTF_8);
-
     private static final MediaType IMAGE_PNG = new MediaType("image", "png");
 
     private static final MediaType TEXT_HTML = new MediaType("text", "html", StandardCharsets.UTF_8);
@@ -85,13 +83,13 @@ public class LanewebIT {
     @Test
     public void testGetSuggestionList() throws Exception {
         this.mockMvc.perform(get("/apps/suggest/getSuggestionList?q=cardio")).andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
     public void testGetSuggestions() throws Exception {
         this.mockMvc.perform(get("/apps/suggest/json?q=cardio")).andExpect(status().isOk())
-                .andExpect(content().contentType(APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
