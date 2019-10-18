@@ -310,11 +310,11 @@
     overflow: hidden;
 }
 
-#imageList .surveyLinks a {
-    margin: 0 15px 0 5px;
-}
 .imageSurvey {
-    float:right;
+    padding-left: 10px;
+}
+.surveyLinks a {
+    margin: 0 10px;
 }
 .surveySent {
     display: none;

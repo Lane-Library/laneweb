@@ -47,7 +47,7 @@
                     label : event.currentTarget.textContent
                 });
                 surveyLinks.style.display = 'none';
-                surveySent.style.display = 'block';
+                surveySent.style.display = 'inherit';
             });
         });
     }

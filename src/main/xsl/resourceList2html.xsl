@@ -37,7 +37,7 @@
     </xsl:variable>
 
     <!--  placement of image search results -->
-    <xsl:variable name="images-promo-position">4</xsl:variable>
+    <xsl:variable name="images-promo-position">3</xsl:variable>
 
     <!--  number of images to show in search results -->
     <xsl:variable name="images-promo-show">5</xsl:variable>
@@ -463,7 +463,18 @@
             <xsl:if test="count($imageResults//string) >= $images-promo-show">
                 <li class="no-bookmarking">
                     <span class="primaryType" style="display:none;">Image Search Promo</span>
-                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Bio-Image Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Bio-Image Search</a>
+                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Bio-Image Search">Results from Lane's Bio-Image Search</a>
+                    <span class="imageSurvey">
+                        <span class="surveyLinks">
+                            Useful?
+                            <a href="#"><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i> Yes</a>
+                            <a href="#"><i class="fa fa-frown-o fa-lg" aria-hidden="true"></i> No</a>
+                        </span>
+                        <span class="surveySent">
+                            Thank you for your feedback! 
+                            Please send further suggestions to <a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a>.
+                        </span>
+                    </span>
                     <div id="imageList" class="searchPromo">
                         <div class="pure-g">
                             <xsl:for-each select="$imageResults//string[position() &lt;= $images-promo-show]">
@@ -471,17 +482,6 @@
                                     <a href="{$images-url}" title="More images from Bio-Image Search"><img src="{.}"/></a>
                                 </div>
                             </xsl:for-each>
-                        </div>
-                        <div class="imageSurvey">
-                            <div class="surveyLinks">
-                                Are these image results useful?
-                                <a href="#"><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i> Yes</a>
-                                <a href="#"><i class="fa fa-frown-o fa-lg" aria-hidden="true"></i> No</a>
-                            </div>
-                            <div class="surveySent">
-                                Thank you for your feedback! 
-                                Please send further suggestions to <a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a>.
-                            </div>
                         </div>
                     </div>
                 </li>
