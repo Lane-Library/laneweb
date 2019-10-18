@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}" media="print" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}-${git.commit.id.abbrev}" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}-${git.commit.id.abbrev}" media="print" />
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
@@ -279,6 +279,6 @@
         </div>
         <div class="search-indicator"><i class="fa fa-spinner fa-spin"></i></div>
         <script type="text/javascript" id="model">//</script>
-        <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}-${git.commit.id.abbrev}"></script>
     </body>
 </html>

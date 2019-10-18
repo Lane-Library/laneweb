@@ -7,7 +7,7 @@
         <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="http://lane.stanford.edu/apple-touch-icon.png" />
         <link rel="stylesheet" type="text/css" href="/resources/css/mobile/lane-mobile.css?${timestamp}" />
-        <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}"></script>
+        <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}-${git.commit.id.abbrev}"></script>
     </head>
     <body>
         
@@ -19,6 +19,6 @@
         </div>
 
         <script type="text/javascript" id="model">//</script>
-        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${project.version}"> </script>
+        <script type="text/javascript" src="/resources/javascript/mobile/lane-mobile.js?${project.version}-${git.commit.id.abbrev}"> </script>
     </body>
 </html>
