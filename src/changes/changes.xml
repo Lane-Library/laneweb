@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2019-10-21" version="3.5.55" description="bug fix release">
+            <action date="2019-10-18" dev="ryanmax" issue="155035" type="update">
+               templates: append git hash to project.version for CSS and JS file links
+            </action>
+            <action date="2019-10-18" dev="ryanmax" issue="155034" type="update">
+               image search preview changes
+            </action>
+        </release> 
         <release date="2019-10-7" version="3.5.54" description="bug fix release">
             <action date="2019-10-4" dev="ryanmax" issue="154868" type="fix">
                bookcovers not appearing on anesthesia sub-pages
