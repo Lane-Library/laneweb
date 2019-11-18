@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -9,7 +10,9 @@ import java.util.regex.Pattern;
  */
 public final class OrcidQueryInspector implements QueryInspector {
 
-    private static final Pattern ORCID_PATTERN = Pattern.compile("(\\b(?:\\d{4}\\-){3}\\d{3}[\\dXx]\\b)");
+    private static final int ORCID_MAX_LENGTH = 19;
+
+    private static final Pattern ORCID_PATTERN = Pattern.compile("(\\b(?:\\d{4}\\-){3,}\\d{3}[\\dXx]\\b)");
 
     @Override
     public boolean combinable() {
@@ -18,10 +21,10 @@ public final class OrcidQueryInspector implements QueryInspector {
 
     @Override
     public String inspect(final String query) {
-        String parsed = query;
-        if (ORCID_PATTERN.matcher(parsed).find()) {
-            parsed = ORCID_PATTERN.matcher(parsed).replaceFirst("\"$1\"");
+        Matcher m = ORCID_PATTERN.matcher(query);
+        if (m.find() && ORCID_MAX_LENGTH == m.group(1).length()) {
+            return m.replaceFirst("\"$1\"");
         }
-        return parsed;
+        return query;
     }
 }
