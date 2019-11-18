@@ -11,6 +11,9 @@
             <action date="2019-11-14" dev="alainb" issue="LANEWEB-10510" type="update">
                Update edu.stanford.irt.laneweb.acquisition-api.url
             </action>
+            <action date="2019-11-18" dev="ryanmax" issue="LANEWEB-10513" type="update">
+               improve ORCID searching in Lane Search
+            </action>
         </release> 
         <release date="2019-10-21" version="3.5.55" description="bug fix release">
             <action date="2019-10-18" dev="ryanmax" issue="155035" type="update">
