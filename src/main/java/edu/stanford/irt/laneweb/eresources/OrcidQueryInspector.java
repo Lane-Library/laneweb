@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public final class OrcidQueryInspector implements QueryInspector {
 
-    private static final Pattern ORCID_PATTERN = Pattern.compile("(\\b(?:\\d{4}\\-){3}\\d{3}[[0-9]Xx]\\b)");
+    private static final Pattern ORCID_PATTERN = Pattern.compile("(\\b(?:\\d{4}\\-){3}\\d{3}[\\dXx]\\b)");
 
     @Override
     public boolean combinable() {
