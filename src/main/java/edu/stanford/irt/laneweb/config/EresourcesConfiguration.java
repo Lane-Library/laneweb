@@ -30,6 +30,7 @@ import edu.stanford.irt.laneweb.eresources.EscapingQueryInspector;
 import edu.stanford.irt.laneweb.eresources.LcnQueryInspector;
 import edu.stanford.irt.laneweb.eresources.NumberQueryInspector;
 import edu.stanford.irt.laneweb.eresources.ORQueryInspector;
+import edu.stanford.irt.laneweb.eresources.OrcidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.QueryInspector;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
@@ -188,11 +189,12 @@ public class EresourcesConfiguration {
 
     @Bean
     public SolrQueryParser solrQueryParser() {
-        List<QueryInspector> queryInspectors = new ArrayList<>(6);
+        List<QueryInspector> queryInspectors = new ArrayList<>(7);
         queryInspectors.add(new AdvancedQueryInspector());
         queryInspectors.add(new DoiQueryInspector());
         queryInspectors.add(new PmidQueryInspector());
         queryInspectors.add(new LcnQueryInspector());
+        queryInspectors.add(new OrcidQueryInspector());
         queryInspectors.add(new NumberQueryInspector());
         queryInspectors.add(new ORQueryInspector());
         queryInspectors.add(new EscapingQueryInspector());
