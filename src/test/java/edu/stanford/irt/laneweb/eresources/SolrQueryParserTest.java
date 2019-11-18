@@ -88,5 +88,7 @@ public class SolrQueryParserTest {
         assertEquals("\"0000\\-0002\\-8263\\-8141\"", this.parser.parse("0000-0002-8263-8141"));
         assertEquals("lead \"0000\\-0002\\-8263\\-8141\" correction",
                 this.parser.parse("lead 0000-0002-8263-8141 correction"));
+        assertEquals("\"0000\\-0002\\-0879\\-455X\"", this.parser.parse("0000-0002-0879-455X"));
+        assertEquals("\"0000\\-0002\\-0879\\-455x\"", this.parser.parse("0000-0002-0879-455x"));
     }
 }
