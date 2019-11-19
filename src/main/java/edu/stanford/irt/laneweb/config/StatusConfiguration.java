@@ -1,12 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
-import java.lang.management.ManagementFactory;
-import java.net.InetAddress;
 import java.net.URI;
-import java.net.UnknownHostException;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,19 +65,8 @@ public class StatusConfiguration {
 
     @Bean
     public StatusService statusService(final List<StatusProvider> providers,
-            @Value("${edu.stanford.irt.laneweb.version}") final String version) throws UnknownHostException {
-        String host;
-        int pid;
-        String name = ManagementFactory.getRuntimeMXBean().getName();
-        Matcher matcher = Pattern.compile("(\\d+)@(.+)").matcher(name);
-        if (matcher.matches()) {
-            host = matcher.group(2);
-            pid = Integer.valueOf(matcher.group(1));
-        } else {
-            host = InetAddress.getLocalHost().getHostName();
-            pid = -1;
-        }
-        return new DefaultStatusService("laneweb", version, host, pid, providers);
+            @Value("${edu.stanford.irt.laneweb.version}") final String version) {
+        return new DefaultStatusService("laneweb", version, providers);
     }
 
     @Bean
