@@ -1,12 +1,5 @@
 pipeline: 
 
-  build:
-    image: gcr.io/som-laneweb/maven-grover:3.5.3
-    commands:
-      - mvn -B -q -s settings.xml package
-    when:
-      branch: master
-
   code-analysis:
     image: aosapps/drone-sonar-plugin:0.8
     timeout: 20
