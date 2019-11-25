@@ -98,6 +98,21 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="expires">
+        <map:parameter name="cache-key" value="{request-uri};q={query}"/>
+        <map:match pattern="sfx-illiad" type="wildcard">
+            <map:generate type="html" src="http://sfx.stanford.edu/local/cgi/public/illiad-redirect.cgi?identifier={url-encoded-query}"/>
+            <map:serialize type="text">
+                <map:parameter name="media-type" value="application/json"/>
+            </map:serialize>
+        </map:match>
+        <map:match pattern="sfx-illiad/*/*" type="wildcard">
+            <map:generate type="html" src="http://sfx.stanford.edu/local/cgi/public/illiad-redirect.cgi?callback={1}&amp;identifier={2}"/>
+            <map:serialize type="text">
+                <map:parameter name="media-type" value="application/javascript"/>
+            </map:serialize>
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-feed.xml" type="wildcard">
             <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
