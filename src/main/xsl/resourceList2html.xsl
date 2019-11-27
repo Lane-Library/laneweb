@@ -457,7 +457,7 @@
 
     <xsl:template name="images-promotion">
         <xsl:param name="result-position"/>
-        <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position">
+        <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position and $facets = ''">
             <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image/preview?q=',$url-encoded-query)"/>
             <xsl:variable name="imageResults" select="document($imageUrl)"/>
             <xsl:if test="count($imageResults//string) >= $images-promo-show">
