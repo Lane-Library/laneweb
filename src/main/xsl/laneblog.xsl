@@ -21,13 +21,14 @@
     
     <xsl:template match="h:img">
       <xsl:copy>
-         <xsl:attribute name="src" select="replace(@src,'http:','')"/>
-         <xsl:if test="ends-with( ./@src, 'jpg')">
-            <xsl:attribute name="src" select="replace(@src, '.jpg' ,'-153.jpg')"/>
-         </xsl:if>
-         <xsl:if test="ends-with( ./@src, 'png')">
-            <xsl:attribute name="src" select="replace(@src, '.png' ,'-153.png')"/>
-         </xsl:if> 
+        <!-- protocol-less @src if image is http://  -->
+        <xsl:variable name="newSrc" select="replace(@src,'http:','')"/>
+        <xsl:if test="ends-with($newSrc, 'jpg')">
+           <xsl:attribute name="src" select="replace($newSrc, '.jpg' ,'-153.jpg')"/>
+        </xsl:if>
+        <xsl:if test="ends-with($newSrc, 'png')">
+           <xsl:attribute name="src" select="replace($newSrc, '.png' ,'-153.png')"/>
+        </xsl:if> 
       </xsl:copy>
     </xsl:template>
 
