@@ -280,7 +280,7 @@
                 </xsl:call-template>
                 <xsl:if test="$simple-primary-type != string(s:label) and s:link-text != 'Lane Catalog Record'">
                     <span>
-                        <a href="{s:url}" title="{../s:title}">
+                        <a href="{s:url}" title="{s:label}">
                             <xsl:value-of select="s:link-text" />
                         </a>
                     </span>
