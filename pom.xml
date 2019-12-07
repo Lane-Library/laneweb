@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>52</version>
+        <version>53</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.5.57-SNAPSHOT</version>
@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.9.1-5</version>
+            <version>9.9.1-6</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -215,15 +215,15 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-solr</artifactId>
-			<version>4.1.2.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-solrj</artifactId>
-			<version>8.3.0</version>
-		</dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+            <version>4.1.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>8.3.1</version>
+        </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
