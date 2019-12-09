@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2019-12-09" version="3.5.57" description="bug fix release">
+            <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10516" type="fix">
+               auto-populate illiad form based on PMID or DOI
+            </action>
+            <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10517" type="fix">
+               SSL warnings from laneblog images on front page
+            </action>
+         </release>  
          <release date="2019-11-18" version="3.5.56" description="bug fix release">
             <action date="2019-11-14" dev="alainb" issue="LANEWEB-10510" type="update">
                Update edu.stanford.irt.laneweb.acquisition-api.url
