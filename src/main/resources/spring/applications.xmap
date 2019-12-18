@@ -100,7 +100,7 @@
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{request-uri};q={query}"/>
         <map:match pattern="sfx-illiad" type="wildcard">
-            <map:generate type="html" src="http://sfx.stanford.edu/local/cgi/public/illiad-redirect.cgi?callback=LANE.redirect&amp;identifier={url-encoded-query}"/>
+            <map:generate type="html" src="http://sfx.stanford.edu/local/cgi/public/illiad-redirect.cgi?callback=AutoPop.redirect&amp;identifier={url-encoded-query}"/>
             <map:serialize type="text">
                 <map:parameter name="media-type" value="application/javascript"/>
             </map:serialize>
