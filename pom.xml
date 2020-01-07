@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>53</version>
+        <version>55</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.5.58-SNAPSHOT</version>
@@ -182,7 +182,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.1.7</version>
+            <version>1.1.8</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
