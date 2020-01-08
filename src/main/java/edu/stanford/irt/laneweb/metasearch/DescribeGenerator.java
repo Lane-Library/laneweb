@@ -26,7 +26,7 @@ public class DescribeGenerator extends AbstractGenerator {
 
     @Override
     public Serializable getKey() {
-        return TYPE;
+        return getType();
     }
 
     @Override
