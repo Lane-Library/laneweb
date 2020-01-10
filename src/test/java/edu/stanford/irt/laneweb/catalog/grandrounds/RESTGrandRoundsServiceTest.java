@@ -6,7 +6,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -31,11 +30,21 @@ public class RESTGrandRoundsServiceTest {
     }
 
     @Test
-    public void testGetGrandRounds() throws IOException {
+    public void testGetGrandRounds() {
         expect(this.restService.getInputStream(this.uri.resolve("grandrounds?department=department&year=year")))
                 .andReturn(getClass().getResourceAsStream("grandrounds"));
         replay(this.restService);
-        assertEquals(39, this.service.getGrandRounds("department", "year").size());
+        assertEquals(39, this.service.getByYear("department", "year").size());
+        verify(this.restService);
+    }
+
+    @Test
+    public void testGetGrandRoundsRecent() {
+        expect(this.restService
+                .getInputStream(this.uri.resolve("grandrounds/recent?department=department&limit=limit")))
+                        .andReturn(getClass().getResourceAsStream("grandrounds"));
+        replay(this.restService);
+        assertEquals(39, this.service.getRecent("department", "limit").size());
         verify(this.restService);
     }
 }
