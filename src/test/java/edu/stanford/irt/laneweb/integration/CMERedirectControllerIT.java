@@ -64,10 +64,11 @@ public class CMERedirectControllerIT {
 
     @Test
     public void testCMEControllerRedirect1() throws Exception {
+        Map<String, Object> attributes = Collections.singletonMap(Model.USER, USER);
         String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
         String redirect1 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
-        this.mockMvc.perform(get(url).sessionAttrs(Collections.singletonMap(Model.USER, USER)))
-                .andExpect(status().isFound()).andExpect(redirectedUrlPattern(redirect1));
+        this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
+                .andExpect(redirectedUrlPattern(redirect1));
     }
 
     @Test
@@ -91,18 +92,16 @@ public class CMERedirectControllerIT {
 
     @Test
     public void testCMEControllerUpToDate() throws Exception {
-        this.mockMvc
-                .perform(get("/redirect/cme?url=www.uptodate.com")
-                        .sessionAttrs(Collections.singletonMap(Model.USER, USER)))
+        Map<String, Object> attributes = Collections.singletonMap(Model.USER, USER);
+        this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
     }
 
     @Test
     public void testCMEControllerUser() throws Exception {
-        this.mockMvc
-                .perform(get("/secure/redirect/cme?url=www.uptodate.com")
-                        .sessionAttrs(Collections.singletonMap(Model.USER, USER)))
+        Map<String, Object> attributes = Collections.singletonMap(Model.USER, USER);
+        this.mockMvc.perform(get("/secure/redirect/cme?url=www.uptodate.com").sessionAttrs(attributes))
                 .andExpect(status().isFound())
                 .andExpect(redirectedUrl("https://login.laneproxy.stanford.edu/login?url=www.uptodate.com"));
     }
