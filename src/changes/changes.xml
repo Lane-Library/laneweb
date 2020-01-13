@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-01-13" version="3.5.58" description="bug fix release">
+            <action date="2020-01-07" dev="ryanmax" issue="LANEWEB-10523" type="fix">
+               incorrect date facet labels at turn of calendar year
+            </action>
+            <action date="2020-01-10" dev="ryanmax" issue="LANEWEB-10527" type="fix">
+               create new "recent" grand rounds video generator
+            </action>
+            <action date="2020-01-08" dev="alainb" issue="LANEWEB-10522" type="update">
+                  http://lane.stanford.edu/classes/all-classes.xml too long to request
+            </action>
+         </release>  
          <release date="2019-12-09" version="3.5.57" description="bug fix release">
             <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10516" type="fix">
                auto-populate illiad form based on PMID or DOI
