@@ -78,6 +78,15 @@ public class SolrServiceTest {
     }
 
     @Test
+    public final void testGetByBibID() {
+        Eresource er = mock(Eresource.class);
+        expect(this.repository.getByBibID("123")).andReturn(er);
+        replay(this.repository, er);
+        this.solrService.getByBibID("123");
+        verify(this.repository, er);
+    }
+
+    @Test
     public final void testGetMesh() {
         expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);

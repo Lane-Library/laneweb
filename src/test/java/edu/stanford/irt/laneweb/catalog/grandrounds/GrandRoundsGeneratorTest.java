@@ -52,8 +52,21 @@ public class GrandRoundsGeneratorTest {
         this.parameters.put("department", "department");
         this.parameters.put("year", "year");
         this.generator.setParameters(this.parameters);
-        expect(this.service.getGrandRounds("department", "year"))
-                .andReturn(Collections.singletonList(this.presentation));
+        expect(this.service.getByYear("department", "year")).andReturn(Collections.singletonList(this.presentation));
+        this.presentationSAXStrategy.toSAX(this.presentation, this.xmlConsumer);
+        replay(this.service, this.presentation, this.presentationSAXStrategy);
+        this.generator.doGenerate(this.xmlConsumer);
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "GrandRoundsGeneratorTest-testDoGenerate.xml"),
+                this.xmlConsumer.getStringValue());
+        verify(this.service, this.presentation, this.presentationSAXStrategy);
+    }
+
+    @Test
+    public void testDoGenerateRecent() throws IOException {
+        this.parameters.put("department", "department");
+        this.parameters.put("limit", "5");
+        this.generator.setParameters(this.parameters);
+        expect(this.service.getRecent("department", "5")).andReturn(Collections.singletonList(this.presentation));
         this.presentationSAXStrategy.toSAX(this.presentation, this.xmlConsumer);
         replay(this.service, this.presentation, this.presentationSAXStrategy);
         this.generator.doGenerate(this.xmlConsumer);
@@ -68,8 +81,7 @@ public class GrandRoundsGeneratorTest {
         this.parameters.put("department", "department");
         this.parameters.put("year", "year");
         this.generator.setParameters(this.parameters);
-        expect(this.service.getGrandRounds("department", "year"))
-                .andReturn(Collections.singletonList(this.presentation));
+        expect(this.service.getByYear("department", "year")).andReturn(Collections.singletonList(this.presentation));
         expect(this.presentation.getPresenterList())
                 .andReturn(Arrays.asList(new String[] { "presenter1", "presenter2" }));
         mockXMLConsumer.startDocument();

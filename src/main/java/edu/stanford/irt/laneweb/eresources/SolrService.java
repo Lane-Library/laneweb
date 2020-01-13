@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -42,11 +43,7 @@ public class SolrService {
 
     private static final String COLLECTION = "laneSearch";
 
-    private static final int CURRENT_YEAR = LocalDate.now().getYear();
-
-    private static final String DATE_QUERY_PREFIX = "date:[";
-
-    private static final String DATE_QUERY_SUFFIX = " TO *]";
+    private static final String DATE_QUERY = "date:[%s TO *]";
 
     private static final String EMPTY = "";
 
@@ -61,17 +58,11 @@ public class SolrService {
 
     private static final int PAGE_SIZE = 10;
 
-    private static final int PAST_FIVE_YEARS = CURRENT_YEAR - 5;
-
-    private static final int PAST_TEN_YEARS = CURRENT_YEAR - 10;
-
-    private static final int PAST_YEAR = CURRENT_YEAR - 1;
-
     private static final Pattern SINGLE_SPACE_PATTERN = Pattern.compile(" ");
 
     private static final String TYPE = "type";
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMdd");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYYMMdd");
 
     private SolrQueryParser parser;
 
@@ -106,15 +97,17 @@ public class SolrService {
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
         String facetFilters = facetStringToFilters(filters);
         String cleanQuery = this.parser.parse(query);
-        String monthDay = LocalDate.now().format(this.formatter);
         FacetOptions facetOptions = new FacetOptions();
         facetOptions.addFacetOnFlieldnames(FACET_FIELDS);
         facetOptions.setFacetMinCount(1);
         facetOptions.setFacetLimit(facetLimit);
-        // TODO: use String.format(format, args) for these:
-        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_YEAR + monthDay + DATE_QUERY_SUFFIX));
-        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_FIVE_YEARS + monthDay + DATE_QUERY_SUFFIX));
-        facetOptions.addFacetQuery(new SimpleQuery(DATE_QUERY_PREFIX + PAST_TEN_YEARS + monthDay + DATE_QUERY_SUFFIX));
+        LocalDate now = LocalDate.now();
+        String lastYear = now.minus(1, ChronoUnit.YEARS).format(this.formatter);
+        String lastFiveYears = now.minus(5, ChronoUnit.YEARS).format(this.formatter);
+        String lastTenYears = now.minus(10, ChronoUnit.YEARS).format(this.formatter);
+        facetOptions.addFacetQuery(new SimpleQuery(String.format(DATE_QUERY, lastYear)));
+        facetOptions.addFacetQuery(new SimpleQuery(String.format(DATE_QUERY, lastFiveYears)));
+        facetOptions.addFacetQuery(new SimpleQuery(String.format(DATE_QUERY, lastTenYears)));
         FacetQuery fquery = new SimpleFacetQuery(new SimpleStringCriteria(cleanQuery)).setFacetOptions(facetOptions);
         fquery.setRequestHandler(SolrRepository.Handlers.FACET);
         if (!facetFilters.isEmpty()) {

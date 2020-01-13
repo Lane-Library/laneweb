@@ -6,9 +6,9 @@ import edu.stanford.irt.status.StatusService;
 
 public interface BookmarkService extends StatusService {
 
-    List<Bookmark> getLinks(String userid) throws BookmarkException;
+    List<Bookmark> getLinks(String userid);
 
-    int getRowCount() throws BookmarkException;
+    int getRowCount();
 
-    void saveLinks(String userid, List<Bookmark> links) throws BookmarkException;
+    void saveLinks(String userid, List<Bookmark> links);
 }
