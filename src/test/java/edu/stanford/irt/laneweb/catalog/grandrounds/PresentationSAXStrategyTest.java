@@ -52,7 +52,7 @@ public class PresentationSAXStrategyTest {
         expect(this.link.getURI()).andReturn(new URI("uri"));
         expect(this.link.getLinkText()).andReturn("linkText");
         expect(this.presentation.getTitle()).andReturn("title");
-        expect(this.presentation.getSunetRequired()).andReturn(true);
+        expect(this.presentation.isSunetRequired()).andReturn(true);
         expect(this.presentation.getPresenterList()).andReturn(Collections.singletonList("presenter"));
         expect(this.presentation.getDescriptions()).andReturn(Collections.singletonList("description"));
         replay(this.presentation, this.link);
