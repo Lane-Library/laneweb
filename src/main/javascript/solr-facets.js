@@ -4,7 +4,7 @@
 
     var model = L.Model,
         query = model.get(model.URL_ENCODED_QUERY),
-        locationSearch = location.search,
+        locationSearch = model.get(model.QUERY_STRING),
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = document.querySelector('.solrFacets'),
         handleKeyDown = function(event) {
@@ -53,7 +53,7 @@
             }
         },
         makeRequest = function() {
-            L.io(basePath + '/apps/search/facets/html' + locationSearch, {
+            L.io(basePath + '/apps/search/facets/html?' + locationSearch, {
                 on: {
                     success:function(id, o) {
                         facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
