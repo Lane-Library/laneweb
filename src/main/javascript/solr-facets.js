@@ -19,6 +19,13 @@
                 pagingNode = browseFacetNavContainer.querySelector(".pagingButton." + direction);
                 if (pagingNode) {
                     event.preventDefault();
+                    // tracker to see if arrow keys are used
+                    // if not, remove handleKeyDown functionality
+                    L.fire("tracker:trackableEvent", {
+                        category: "lane:facetArrowKey",
+                        action: direction,
+                        label: pagingNode.href
+                    });
                     pagingNode.click();
                 }
             }
