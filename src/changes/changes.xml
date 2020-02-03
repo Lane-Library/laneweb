@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-02-03" version="3.5.59" description="bug fix release">
+            <action date="2020-02-01" dev="ryanmax" issue="LANEWEB-10536" type="fix">
+                  facet browse pane blends into search results
+            </action>
+            <action date="2020-01-10" dev="ryanmax" issue="LANEWEB-10533" type="update">
+                  poor spelling suggestions
+            </action>
+            <action date="2020-02-31" dev="ryanmax" issue="LANEWEB-10535" type="update">
+                  left/right arrow key facet browsing: is it used?
+            </action>
+            <action date="2020-02-31" dev="ryanmax" issue="LANEWEB-10537" type="fix">
+                Resource Type info icon overlapping when facet enabled
+            </action>
+         </release>  
          <release date="2020-01-13" version="3.5.58" description="bug fix release">
             <action date="2020-01-07" dev="ryanmax" issue="LANEWEB-10523" type="fix">
                incorrect date facet labels at turn of calendar year

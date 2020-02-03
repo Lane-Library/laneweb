@@ -55,8 +55,10 @@ public class EMailController {
     @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
+        System.out.println("form");
+        
         appendNameToSubject(map);
-        sendEmail(ASKUS_ADDRESS, map);
+//        sendEmail(ASKUS_ADDRESS, map);
         return getRedirectTo(map);
     }
 
@@ -70,9 +72,10 @@ public class EMailController {
     @PostMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
+    	System.out.println("json " + feedback );
         feedback.putAll(model.asMap());
         appendNameToSubject(feedback);
-        sendEmail(ASKUS_ADDRESS, feedback);
+//        sendEmail(ASKUS_ADDRESS, feedback);
     }
 
     @PostMapping(value = DOCXPRESS_PATH, consumes = JSON_MIME_TYPE)
