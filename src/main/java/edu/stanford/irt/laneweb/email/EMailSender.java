@@ -63,8 +63,6 @@ public class EMailSender {
                 }
             }
             helper.setText(text.toString());
-            
-            
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
