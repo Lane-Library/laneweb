@@ -22,7 +22,7 @@ public final class EscapingQueryInspector implements QueryInspector {
     private static final Pattern NON_WORD_CHAR_PATTERN = Pattern.compile("\\W");
     static {
         // these seem harmless | &
-        // these seem useful and harmless " * ( )
+        // these seem useful and harmless " * ( ) ~
         ESCAPEABLE_CHARS.add(Character.valueOf('+'));
         ESCAPEABLE_CHARS.add(Character.valueOf('-'));
         ESCAPEABLE_CHARS.add(Character.valueOf('!'));
@@ -31,7 +31,6 @@ public final class EscapingQueryInspector implements QueryInspector {
         ESCAPEABLE_CHARS.add(Character.valueOf('['));
         ESCAPEABLE_CHARS.add(Character.valueOf(']'));
         ESCAPEABLE_CHARS.add(Character.valueOf('^'));
-        ESCAPEABLE_CHARS.add(Character.valueOf('~'));
         ESCAPEABLE_CHARS.add(Character.valueOf('?'));
         ESCAPEABLE_CHARS.add(Character.valueOf('\\'));
     }
