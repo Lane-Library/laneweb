@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-02-10" version="3.5.60" description="bug fix release">
+            <action date="2020-02-05" dev="ryanmax" issue="LANEWEB-10541" type="fix">
+                 support proximity operator
+            </action>
+         </release>
          <release date="2020-02-03" version="3.5.59" description="bug fix release">
             <action date="2020-02-01" dev="ryanmax" issue="LANEWEB-10536" type="fix">
                   facet browse pane blends into search results
