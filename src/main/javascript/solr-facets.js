@@ -14,7 +14,7 @@
             if (locationSearch){
                 rq = rq + locationSearch;
             } else if (locationPath.indexOf('/view/') > -1) {
-                rq = rq + locationPath.replace(/\/view\/([a-z]+)\/(\d+)/,'?source=all-all&facets=recordType:"$1"&q=$2');
+                rq = rq + locationPath.replace(/\/view\/([a-z]{3,10})\/(\d+)/,'?source=all-all&facets=recordType:"$1"&q=$2');
             }
             return rq;
         },
