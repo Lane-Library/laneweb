@@ -20,7 +20,6 @@
         IPGROUP : "ipgroup",
         IS_ACTIVE_SUNETID : "isActiveSunetID",
         PROXY_LINKS : "proxy-links",
-        QUERY_STRING : "query-string",
         URL_ENCODED_SOURCE : "url-encoded-source",
         URL_ENCODED_QUERY : "url-encoded-query"
     };

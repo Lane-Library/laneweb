@@ -4,9 +4,20 @@
 
     var model = L.Model,
         query = model.get(model.URL_ENCODED_QUERY),
-        locationSearch = model.get(model.QUERY_STRING),
+        locationSearch = location.search,
+        locationPath = location.pathname,
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = document.querySelector('.solrFacets'),
+        facetRequestQuery = function() {
+            var rq = basePath + '/apps/search/facets/html';
+            // support /view/<recordType>/<id> requests when location.search not present
+            if (locationSearch){
+                rq = rq + locationSearch;
+            } else if (locationPath.indexOf('/view/') > -1) {
+                rq = rq + locationPath.replace(/\/view\/([a-z]+)\/(\d+)/,'?source=all-all&facets=recordType:"$1"&q=$2');
+            }
+            return rq;
+        },
         handleKeyDown = function(event) {
             var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
                 pagingNode, direction;
@@ -60,7 +71,7 @@
             }
         },
         makeRequest = function() {
-            L.io(basePath + '/apps/search/facets/html?' + locationSearch, {
+            L.io(facetRequestQuery(), {
                 on: {
                     success:function(id, o) {
                         facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);

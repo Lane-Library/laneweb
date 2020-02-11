@@ -129,7 +129,6 @@ public class BindingConfiguration {
         keys.add("isActiveSunetID");
         keys.add("ipgroup");
         keys.add("proxy-links");
-        keys.add("query-string");
         keys.add("url-encoded-query");
         keys.add("url-encoded-source");
         return new ModelDataBinder(keys, objectMapper);
