@@ -6,6 +6,8 @@
 
     DEFAULT_THANKS = "Thank you for your feedback.",
 
+    FILE_CONTENT, FOUR_MEGA_BYTES = 4194304,
+    
     Feedback = function(config) {
         Feedback.superclass.constructor.apply(this, arguments);
     };
@@ -15,7 +17,7 @@
     Feedback.HTML_PARSER = {
             menu : ["#feedbackMenu > li"],
             items : ["#feedbackItems > li"]
-    };
+     };
 
     Feedback.ATTRS = {
         activeItem : {
@@ -44,6 +46,7 @@
         renderUI : function() {
             this.get("menu").addClass(this.getClassName("menu"));
             this.get("items").addClass(this.getClassName("item"));
+            document.querySelector("#attachment").addEventListener("change", uploadFile, false);
         },
         bindUI : function() {
             var self = this, eventHandle1, eventHandle2;
@@ -83,8 +86,8 @@
             this._resetThanks();
         },
         sendFeedback : function(form) {
-            var contentBox = this.get("contentBox"),
-                data = JSON.stringify(this._getFeedback(form));
+           var contentBox = this.get("contentBox"),
+           data = JSON.stringify( this._getFeedback(form));
             contentBox.one(".feedback-contents").set("innerHTML", this.get("sending"));
             contentBox.scrollIntoView();
             L.io(form.getAttribute("action"), {
@@ -109,9 +112,13 @@
             for (i = 0; i < nodes.size(); i++) {
                 node = nodes.item(i);
                 name = node.get("name");
-                if (name && (node.get("type") !== "radio" || node.get("checked"))) {
+                if (name && (node.get("type") !== "radio" && node.get("type") !== "file" || node.get("checked"))) {
                     feedback[name] = node.get("value");
                 }
+                else if (node.get("type") == "file" && node._node.files[0]) {
+                	feedback[name + "FileName"] =  node._node.files[0].name;
+					feedback[name] = FILE_CONTENT;
+				}
             }
             return feedback;
         },
@@ -176,4 +183,24 @@
         }
     });
 
+	
+	
+	function uploadFile(evt) {
+		var file =  evt.target.files[0],
+		reader = new FileReader();
+		reader.onload = (function(event) {
+			setFileContent(this.result);
+		});
+		reader.readAsDataURL(file);
+	}
+	
+    function setFileContent(content){
+    	if( content.length >  FOUR_MEGA_BYTES ){
+    		document.querySelector("#attachment").value = "";
+    		alert( "File too big !  (4MB max)");
+    	}else{
+    		FILE_CONTENT  = content;
+    	}
+    }
+   
 })();

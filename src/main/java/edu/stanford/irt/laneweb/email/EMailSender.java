@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.email;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -45,10 +46,16 @@ public class EMailSender {
     }
 
     public void sendEmail(final Map<String, Object> map) {
+        sendEmail(map, null);
+    }
+    
+    
+    public void sendEmail(final Map<String, Object> map, File file) {
         final MimeMessage message = this.mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        try {
-            helper.setSubject((String) map.get(SUBJECT));
+        MimeMessageHelper helper;
+		try {
+			helper = new MimeMessageHelper(message, (file != null) );
+		    helper.setSubject((String) map.get(SUBJECT));
             helper.setTo((String) map.get(RECIPIENT));
             String from = (String) map.get(EMAIL);
             if (from == null || !EMAIL_PATTERN.matcher(from).matches()) {
@@ -63,6 +70,9 @@ public class EMailSender {
                 }
             }
             helper.setText(text.toString());
+            if(null != file) {
+            	helper.addAttachment(file.getName() , file);
+            }
         } catch (MessagingException e) {
             throw new LanewebException(e);
         }
