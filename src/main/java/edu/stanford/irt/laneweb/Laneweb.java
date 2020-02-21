@@ -24,6 +24,7 @@ public class Laneweb {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
         Connector ajpConnector = new Connector("AJP/1.3");
         ajpConnector.setPort(ajpPort);
+        ajpConnector.setProperty("secretRequired", "false");
         ajpConnector.setProperty("tomcatAuthentication", "false");
         ajpConnector.setProperty("URIEncoding", "UTF-8");
         tomcat.addAdditionalTomcatConnectors(ajpConnector);
