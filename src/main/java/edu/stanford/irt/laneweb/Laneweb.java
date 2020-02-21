@@ -26,7 +26,7 @@ public class Laneweb {
         ajpConnector.setPort(ajpPort);
         ajpConnector.setProperty("secretRequired", "false");
         ajpConnector.setProperty("address", "0.0.0.0");
-        ajpConnector.setProperty("allowedRequestAttributesPattern", "AJP_.*");
+        ajpConnector.setProperty("allowedRequestAttributesPattern", ".*");
         ajpConnector.setProperty("tomcatAuthentication", "false");
         ajpConnector.setProperty("URIEncoding", "UTF-8");
         tomcat.addAdditionalTomcatConnectors(ajpConnector);
