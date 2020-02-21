@@ -184,23 +184,29 @@
     });
 
 	
-	
+
 	function uploadFile(evt) {
-		var file =  evt.target.files[0],
-		reader = new FileReader();
+		var file = evt.target.files[0], reader = new FileReader();
 		reader.onload = (function(event) {
 			setFileContent(this.result);
 		});
 		reader.readAsDataURL(file);
 	}
+
+	function setFileContent(content) {
+		var input = document.querySelector("#attachment"), 
+		size = input.files[0].size, contentType = input.files[0].type;
+		if (size > FOUR_MEGA_BYTES) {
+			input.value = "";
+			alert("File too big !  (4MB max)");
+		} else if (!contentType.startsWith("image/")) {
+			input.value = "";
+			alert("Only image is supported");
+		} else {
+			FILE_CONTENT = content;
+		}
+	}
+
+    
 	
-    function setFileContent(content){
-    	if( content.length >  FOUR_MEGA_BYTES ){
-    		document.querySelector("#attachment").value = "";
-    		alert( "File too big !  (4MB max)");
-    	}else{
-    		FILE_CONTENT  = content;
-    	}
-    }
-   
 })();
