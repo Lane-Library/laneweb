@@ -24,12 +24,6 @@ public class Laneweb {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
         Connector ajpConnector = new Connector("AJP/1.3");
         ajpConnector.setPort(ajpPort);
-        ajpConnector.setProperty("secretRequired", "false");
-        ajpConnector.setProperty("address", "0.0.0.0");
-        ajpConnector.setProperty("allowedRequestAttributesPattern",
-                "(Shib\\-Identity\\-Provider|affiliation|cn|displayName|eduPersonEntitlement|eppn|givenName"
-                        + "|group|mail|ou|persistent-id|postalAddress|sn|street|suAffiliation|suDisplayNameLF"
-                        + "|suUnivID|targeted\\-id|telephoneNumber|title|uid|uid\\-alt|unscoped\\-affiliation|upn)");
         ajpConnector.setProperty("tomcatAuthentication", "false");
         ajpConnector.setProperty("URIEncoding", "UTF-8");
         tomcat.addAdditionalTomcatConnectors(ajpConnector);
