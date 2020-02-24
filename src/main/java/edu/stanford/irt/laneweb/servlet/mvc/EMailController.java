@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -29,7 +31,7 @@ import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 @RequestMapping(value = "/apps/mail")
 public class EMailController {
 
-    private static final String ASKUS_ADDRESS = "laneaskus@stanford.edu";
+    private static final String ASKUS_ADDRESS = "alainb@stanford.edu";
 
     private static final String ASKUS_PATH = "/askus";
 
@@ -39,6 +41,8 @@ public class EMailController {
 
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
+    private static final String MULTIPART_MIME_TYPE = "multipart/form-data";
+    
     private static final String JSON_MIME_TYPE = "application/json";
 
     private static final String SUBJECT = "subject";
@@ -58,14 +62,16 @@ public class EMailController {
         this.sender = sender;
     }
 
-    @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
+    @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE )
+    public String formSubmitAskUs(final Model model, @RequestParam("attachment") MultipartFile file, final RedirectAttributes atts) throws IllegalStateException, IOException {
         Map<String, Object> map = model.asMap();
         appendNameToSubject(map);
-        sendEmail(ASKUS_ADDRESS, map);
+        File attachment =  validateFileMultipartFile(file); 
+        sendEmail(ASKUS_ADDRESS, map, attachment);
         return getRedirectTo(map);
     }
 
+    
     @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
@@ -150,6 +156,7 @@ public class EMailController {
             }
             file = generateImageFile(content, feedback);
             if (file.length() > FOUR_MEGA_BYTES) {
+                file.delete();
                 return null;
             }
         }
@@ -171,4 +178,24 @@ public class EMailController {
         }
         return file;
     }
+    
+    private File validateFileMultipartFile(MultipartFile attachment) throws IllegalStateException, IOException {
+        File file = null;
+        if (attachment != null && attachment.getSize() != 0) {
+            String contentType = attachment.getContentType();
+            if(!contentType.startsWith("image/")) {
+                return null;
+            }
+            file = new File(attachment.getOriginalFilename());
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(attachment.getBytes());
+            fos.close();
+            if (file.length() > FOUR_MEGA_BYTES) {
+                file.delete();
+                return null;
+            }
+        }
+        return file;
+    }
+    
 }
