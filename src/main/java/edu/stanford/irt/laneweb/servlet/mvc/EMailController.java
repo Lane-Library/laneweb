@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.config.MultipartResolverConfig;
 import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
@@ -31,7 +32,7 @@ import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 @RequestMapping(value = "/apps/mail")
 public class EMailController {
 
-    private static final String ASKUS_ADDRESS = "alainb@stanford.edu";
+    private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
 
     private static final String ASKUS_PATH = "/askus";
 
@@ -46,8 +47,6 @@ public class EMailController {
     private static final String JSON_MIME_TYPE = "application/json";
 
     private static final String SUBJECT = "subject";
-
-    private static final long FOUR_MEGA_BYTES = 4194304;
 
     private RequestHeaderDataBinder headerBinder;
 
@@ -149,13 +148,14 @@ public class EMailController {
     private File getAttachmentFile(Map<String, Object> feedback) {
         File file = null;
         String content = (String) feedback.remove("attachment");
+        String fileName = (String) feedback.remove("attachmentFileName");
         if (null != content && !"".equals(content)) {
             String contentType = content.substring(5, content.indexOf(","));
             if (!contentType.contains("image/")) {
                 return null;
             }
-            file = generateImageFile(content, feedback);
-            if (file.length() > FOUR_MEGA_BYTES) {
+            file = generateImageFile(content, fileName, feedback);
+            if (file.length() > MultipartResolverConfig.FOUR_MEGA_BYTES) {
                 file.delete();
                 return null;
             }
@@ -163,8 +163,7 @@ public class EMailController {
         return file;
     }
 
-    private File generateImageFile(String content, Map<String, Object> feedback) {
-        String fileName = (String) feedback.remove("attachmentFileName");
+    private File generateImageFile(String content, String fileName, Map<String, Object> feedback) {
         File file = null;
         try {
             file = new File(fileName);
@@ -190,7 +189,7 @@ public class EMailController {
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(attachment.getBytes());
             fos.close();
-            if (file.length() > FOUR_MEGA_BYTES) {
+            if (file.length() > MultipartResolverConfig.FOUR_MEGA_BYTES) {
                 file.delete();
                 return null;
             }
