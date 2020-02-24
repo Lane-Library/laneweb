@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
@@ -14,10 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
@@ -40,6 +42,8 @@ public class EMailControllerTest {
     private HttpServletRequest request;
 
     private EMailSender sender;
+    
+    private MultipartFile multipartFile; 
 
     @Before
     public void setUp() throws Exception {
@@ -51,19 +55,20 @@ public class EMailControllerTest {
         this.model = mock(Model.class);
         this.request = mock(HttpServletRequest.class);
         this.map = mock(Map.class);
+        this.multipartFile = mock(MockMultipartFile.class);
     }
 
     @Test
-    public void testFormSubmitAskUs() {
+    public void testFormSubmitAskUs() throws IllegalStateException, IOException {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("subject")).andReturn("subject");
         expect(this.map.get("name")).andReturn("name");
         expect(this.map.put("subject", "subject (name)")).andReturn(null);
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
-        this.sender.sendEmail(this.map);
+        this.sender.sendEmail(this.map, null);
         expect(this.map.get("redirect")).andReturn("redirect");
         replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-        this.controller.formSubmitAskUs(this.model, this.atts);
+        this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts);
         verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
     }
 
@@ -98,6 +103,7 @@ public class EMailControllerTest {
         this.map.putAll(this.map);
         expect(this.map.get("subject")).andReturn("subject");
         expect(this.map.get("name")).andReturn("name");
+        expect(this.map.remove("attachmentFileName")).andReturn(null);
         expect(this.map.remove("attachment")).andReturn(null);
         expect(this.map.put("subject", "subject (name)")).andReturn(null);
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
@@ -165,32 +171,32 @@ public class EMailControllerTest {
     
     
     @Test
-    public void testRedirectToIndex() {
+    public void testRedirectToIndex() throws IllegalStateException, IOException {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("subject")).andReturn("subject");
         expect(this.map.get("name")).andReturn("name");
         expect(this.map.put("subject", "subject (name)")).andReturn(null);
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
-        this.sender.sendEmail(this.map);
+        this.sender.sendEmail(this.map, null);
         expect(this.map.get("redirect")).andReturn(null);
         expect(this.map.get("referrer")).andReturn(null);
         replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-        assertEquals("redirect:/index.html", this.controller.formSubmitAskUs(this.model, this.atts));
+        assertEquals("redirect:/index.html", this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts));
         verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
     }
 
     @Test
-    public void testRedirectToReferrer() {
+    public void testRedirectToReferrer() throws IllegalStateException, IOException {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("subject")).andReturn("subject");
         expect(this.map.get("name")).andReturn("name");
         expect(this.map.put("subject", "subject (name)")).andReturn(null);
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
-        this.sender.sendEmail(this.map);
+        this.sender.sendEmail(this.map, null);
         expect(this.map.get("redirect")).andReturn(null);
         expect(this.map.get("referrer")).andReturn("referrer");
         replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
-        assertEquals("redirect:referrer", this.controller.formSubmitAskUs(this.model, this.atts));
+        assertEquals("redirect:referrer", this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts));
         verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map);
     }
 }

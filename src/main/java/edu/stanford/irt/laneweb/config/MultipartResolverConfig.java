@@ -9,7 +9,7 @@ import org.springframework.web.multipart.support.MultipartFilter;
 @Configuration
 public class MultipartResolverConfig {
     
-    private static final long FOUR_MEGA_BYTES = 4194304;
+    public static final long FOUR_MEGA_BYTES = 4194304;
 
     @Bean
     public CommonsMultipartResolver multipartResolver() {
