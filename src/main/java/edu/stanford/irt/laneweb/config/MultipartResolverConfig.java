@@ -1,28 +1,25 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.multipart.support.MultipartFilter;
 
 @Configuration
 public class MultipartResolverConfig {
     
-    public static final long FOUR_MEGA_BYTES = 4194304;
+    
+    int MAX_UPLOAD_FILE =  13107200;
 
     @Bean
-    public CommonsMultipartResolver multipartResolver() {
+    public CommonsMultipartResolver multipartResolver() throws IOException {
+        Resource tmp = new FileSystemResource("/tmp");
         CommonsMultipartResolver multipart = new CommonsMultipartResolver();
-        multipart.setMaxUploadSize(FOUR_MEGA_BYTES);
+        multipart.setUploadTempDir(tmp);
+        multipart.setMaxUploadSize(MAX_UPLOAD_FILE);
         return multipart;
-    }
-
-    @Bean
-    @Order(0)
-    public MultipartFilter multipartFilter() {
-        MultipartFilter multipartFilter = new MultipartFilter();
-        multipartFilter.setMultipartResolverBeanName("multipartReso‌​lver");
-        return multipartFilter;
     }
 }

@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.config.MultipartResolverConfig;
 import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
@@ -48,6 +47,10 @@ public class EMailController {
 
     private static final String SUBJECT = "subject";
 
+    private static final Object ERROR_MESSAGE = "Attachment deleted for security raison, use your email client to see the attachment";
+    
+    public static final long MAX_UPLOAD_SIZE = 4194304;
+
     private RequestHeaderDataBinder headerBinder;
 
     private RemoteProxyIPDataBinder remoteIPBinder;
@@ -61,11 +64,14 @@ public class EMailController {
         this.sender = sender;
     }
 
-    @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE )
+    @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE)
     public String formSubmitAskUs(final Model model, @RequestParam("attachment") MultipartFile file, final RedirectAttributes atts) throws IllegalStateException, IOException {
+        File attachment =  validateFileMultipartFile(file); 
+        if(attachment == null && !file.isEmpty()) {
+            return "redirect:/error_upload_file.html";
+        }
         Map<String, Object> map = model.asMap();
         appendNameToSubject(map);
-        File attachment =  validateFileMultipartFile(file); 
         sendEmail(ASKUS_ADDRESS, map, attachment);
         return getRedirectTo(map);
     }
@@ -152,10 +158,11 @@ public class EMailController {
         if (null != content && !"".equals(content)) {
             String contentType = content.substring(5, content.indexOf(","));
             if (!contentType.contains("image/")) {
+                feedback.put("attachment", ERROR_MESSAGE);
                 return null;
             }
             file = generateImageFile(content, fileName, feedback);
-            if (file.length() > MultipartResolverConfig.FOUR_MEGA_BYTES) {
+            if (file.length() > MAX_UPLOAD_SIZE) {
                 file.delete();
                 return null;
             }
@@ -180,7 +187,7 @@ public class EMailController {
     
     private File validateFileMultipartFile(MultipartFile attachment) throws IllegalStateException, IOException {
         File file = null;
-        if (attachment != null && attachment.getSize() != 0) {
+        if (attachment != null && !attachment.isEmpty()) {
             String contentType = attachment.getContentType();
             if(!contentType.startsWith("image/")) {
                 return null;
@@ -189,7 +196,7 @@ public class EMailController {
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(attachment.getBytes());
             fos.close();
-            if (file.length() > MultipartResolverConfig.FOUR_MEGA_BYTES) {
+            if (file.length() > MAX_UPLOAD_SIZE) {
                 file.delete();
                 return null;
             }
