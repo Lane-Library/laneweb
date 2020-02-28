@@ -18,29 +18,6 @@
             }
             return rq;
         },
-        handleKeyDown = function(event) {
-            var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
-                pagingNode, direction;
-            if (browseFacetNavContainer) {
-                if (event.keyCode === 37 || event.key === "ArrowLeft") {
-                    direction = "previous";
-                } else if (event.keyCode === 39 || event.key === "ArrowRight") {
-                    direction = "next";
-                }
-                pagingNode = browseFacetNavContainer.querySelector(".pagingButton." + direction);
-                if (pagingNode) {
-                    event.preventDefault();
-                    // tracker to see if arrow keys are used
-                    // if not, remove handleKeyDown functionality
-                    L.fire("tracker:trackableEvent", {
-                        category: "lane:facetArrowKey",
-                        action: direction,
-                        label: pagingNode.href
-                    });
-                    pagingNode.click();
-                }
-            }
-        },
         processEnabledFacets = function(facetsContainer) {
             var enabledFacets = facetsContainer.querySelectorAll('.enabled'),
                 limitsContainer = document.querySelector('#solrLimits'),
@@ -85,8 +62,6 @@
         };
         if (query && facetsContainer && !document.querySelector("#bassettContent") ) {
             makeRequest();
-            // listener for left/right arrows
-            document.addEventListener("keydown", handleKeyDown);
             // close button on facet browse lightbox
             L.Lightbox.on("contentChanged", function() {
                 var browseFacetClose = document.querySelector(".facetBrowse .close");
