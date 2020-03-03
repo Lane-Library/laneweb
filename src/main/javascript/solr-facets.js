@@ -5,23 +5,18 @@
     var model = L.Model,
         query = model.get(model.URL_ENCODED_QUERY),
         locationSearch = location.search,
+        locationPath = location.pathname,
         basePath = model.get(model.BASE_PATH) || "",
         facetsContainer = document.querySelector('.solrFacets'),
-        handleKeyDown = function(event) {
-            var browseFacetNavContainer = document.querySelector(".facetBrowse .s-pagination"),
-                pagingNode, direction;
-            if (browseFacetNavContainer) {
-                if (event.keyCode === 37 || event.key === "ArrowLeft") {
-                    direction = "previous";
-                } else if (event.keyCode === 39 || event.key === "ArrowRight") {
-                    direction = "next";
-                }
-                pagingNode = browseFacetNavContainer.querySelector(".pagingButton." + direction);
-                if (pagingNode) {
-                    event.preventDefault();
-                    pagingNode.click();
-                }
+        facetRequestQuery = function() {
+            var rq = basePath + '/apps/search/facets/html';
+            // support /view/<recordType>/<id> requests when location.search not present
+            if (locationSearch){
+                rq = rq + locationSearch;
+            } else if (locationPath.indexOf('/view/') > -1) {
+                rq = rq + locationPath.replace(/\/view\/([a-z]{3,10})\/(\d+)/,'?source=all-all&facets=recordType:"$1"&q=$2');
             }
+            return rq;
         },
         processEnabledFacets = function(facetsContainer) {
             var enabledFacets = facetsContainer.querySelectorAll('.enabled'),
@@ -53,7 +48,7 @@
             }
         },
         makeRequest = function() {
-            L.io(basePath + '/apps/search/facets/html' + locationSearch, {
+            L.io(facetRequestQuery(), {
                 on: {
                     success:function(id, o) {
                         facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
@@ -67,8 +62,6 @@
         };
         if (query && facetsContainer && !document.querySelector("#bassettContent") ) {
             makeRequest();
-            // listener for left/right arrows
-            document.addEventListener("keydown", handleKeyDown);
             // close button on facet browse lightbox
             L.Lightbox.on("contentChanged", function() {
                 var browseFacetClose = document.querySelector(".facetBrowse .close");

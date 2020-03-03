@@ -1,3 +1,4 @@
+
 html {
     scroll-behavior: smooth;
 }
@@ -28,15 +29,12 @@ a:visited,a:active,a:hover {
 }
 
 .centered, h1 {
-    width: 989px;
-    margin: auto;
+    min-width: 989px;
+    margin: 0 48px;
+    position: relative;
 }
 
-.header {
-    background-color: white;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,.5);
-    margin-top: 34px;
-}
+
 
 h1 {
     padding: 10px 0;
@@ -62,17 +60,11 @@ h1 i {
     font-size: 12px;
 }
 
-#sm-header {
+#mhc-logo{
     position: absolute;
-    top: 0;
-    width: 100%;
-    height: 34px;
-    background-color: black;
-    color: white;
-}
-
-#sm-header .centered {
-    position: relative;
+    top: 85px;
+    font-size: 12px;
+    left: 225px;
 }
 
 #nav {
@@ -160,129 +152,7 @@ h1 i {
     font-size: 6px;
 }
 
-#lane-footer,#lane-subfooter {
-    background-color: #8c1515;
-}
 
-#lane-footer {
-    margin-top: 10px;
-}
-
-#lane-footer h2 {
-    font-size: 24px;
-    padding: 17px 0 12px;
-    margin-bottom: 24px;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-#lane-footer h3 {
-    font-size: 16px;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-#lane-footer li,#lane-footer h3,#lane-footer h2 {
-    border-bottom: 1px solid #902827;
-}
-
-#lane-footer li:last-child {
-    border-bottom: none;
-}
-#lane-footer a {
-    color: white;
-    line-height: 24px;
-    text-decoration: none;
-    font-weight: 300;
-    white-space: nowrap;
-}
-
-#lane-footer ul a,#lane-subfooter {
-    font-size: 12px;
-    font-weight: 400;
-}
-
-#lane-subfooter {
-    line-height: 22px;
-    padding: 22px 0 7px;
-}
-
-#lane-subfooter,#lane-subfooter a {
-    color: #999999;
-    text-decoration: none;
-}
-
-#lane-subfooter ul {
-    float: right;
-}
-
-#lane-subfooter li {
-    float: left;
-    padding: 3px 5px 5px 0;
-}
-
-#lane-subfooter span {
-    display: none;
-}
-
-#lane-subfooter i {
-    background-color: #999999;
-    border-radius: 11px;
-    color: #8c1515;
-    height: 22px;
-    line-height: 20px;
-    margin-left: 0;
-    text-align: center;
-    width: 22px;
-}
-
-#sm-footer {
-    background-color: rgb(38, 38, 38);
-    color: rgb(158, 158, 158);
-    height: 160px;
-    padding: 30px 0;
-    box-sizing: border-box;
-}
-
-#sm-footer ul {
-    margin-top: 16px;
-    background-image: url('../../images/footer-logos.png');
-    background-repeat: no-repeat;
-}
-
-#sm-footer li {
-    display: inline-block;
-    list-style-type: none;
-}
-
-#sm-footer a {
-    display: block;
-    text-indent: -9999px;
-    width: 100%;
-    height: 60px;
-    cursor: pointer;
-}
-
-#footer-su {
-    width: 110px;
-}
-
-#footer-sm {
-    width: 156px;
-}
-
-#footer-shc {
-    width: 142px;
-}
-
-#footer-sch {
-    width: 176px;
-}
-
-#footer-schos {
-    width: 176px;
-}
-#footer-uha {
-    width: 228px;
-}
 
 #gift {
     display: block;
@@ -772,4 +642,344 @@ http://lane.stanford.edu/samples/button-css.html
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+/* FOOTER */
+
+/* superfooter */
+.super-footer {
+    background-color: #666;
+}
+
+.super-footer {
+    margin-top: 12px;
+    padding-top: 17px;
+}
+
+.super-footer .centered {
+    padding-bottom: 12px;
+}
+.super-footer h2, .super-footer h3 {
+    font-family: 'Fjord', serif;
+    font-size: 24px;
+    font-weight: 300;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    line-height: 24px;
+    text-transform: none;
+    text-align: left;
+    border-bottom: none;
+}
+
+
+.super-footer h3 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.super-footer a, .super-footer a .fa {
+    color: white;
+}
+
+.super-footer li {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 11px;
+}
+/* subfooter */
+
+.footer-link-bar {
+	background-color: transparent;
+    font-size: 18px;
+    clear: both;
+    padding: 15px 0;
+    text-align: center;
+
+}
+
+.footer-link-bar a {
+    color: #333;
+    font-family: 'Fjord One', serif;
+}
+
+.footer-link-bar ul {
+    float: right;
+}
+
+.footer-link-bar li {
+    display: inline-block;
+    padding: 8px 0;
+}
+
+
+.footer-link-bar i {
+    color: #8c1515;
+    height: 22px;
+    line-height: 20px;
+    text-align: center;
+    width: 22px;
+}
+
+/* copyright footer */
+.footer-copyright {
+    background-color: rgb(51, 51, 51);
+    color: white;
+    padding: 30px 0;
+    box-sizing: border-box;
+}
+
+.footer-copyright li {
+	display: inline-block;
+}
+
+.footer-copyright a, .footer-copyright i {
+	color: white;
+    padding-right: 8px;
+}
+
+.footer-copyright .right-aligned {
+	float: right;
+}
+
+.footer-copyright .bullet:before {
+	content: '\00a0\2022\00a0\00a0';
+	color:#fff;
+	margin-left: 2px;
+	margin-right: 6px;
+}
+
+.footer-copyright span {
+    display: none;
+}
+
+/*global footer*/
+.footer-global {
+    background-color: rgb(51, 51, 51);
+    box-sizing: border-box;
+}
+
+.footer-global .footer-logos {
+    background-image: url('../../images/footer-logos-white.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px auto;
+    text-align: center;
+    width: 989px;
+}
+
+.footer-logos li {
+    display: inline-block;
+}
+
+.footer-logos a {
+    display: block;
+    text-indent: -9999px;
+    width: 100%;
+    height: 60px;
+    cursor: pointer;
+}
+
+.footer-logos li:nth-child(1) {
+    width: 12%;
+}
+
+.footer-logos li:nth-child(2) {
+    width: 15%;
+}
+
+.footer-logos li:nth-child(3) {
+    width: 14%;
+}
+
+.footer-logos li:nth-child(4) {
+    width: 18%;
+}
+
+.footer-logos li:nth-child(5) {
+    width: 18%;
+}
+
+.footer-logos li:nth-child(6) {
+    width: 18%;
+}
+
+/* HEADER.css */
+
+
+.utility-menu {
+    background-color: black;
+    color: white;
+    font-weight: 600;
+    height: 32px;
+    margin: 0;
+    top: 0;
+    width: 100%;
+}
+
+.login {
+    line-height: 32px;
+    margin: 0 5%;
+    position: absolute;
+    right: 0;
+}
+
+.login > li {
+    display: none;
+    font-size: 16px;
+    letter-spacing: .75px;
+    padding: 0 25px;
+}
+
+.login > .login-item-active {
+    display: inline-block;
+}
+
+.login .fa {
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+.login a,
+.login a:active,
+.login a:visited,
+.login a:hover,
+.login .fa,
+.login a .fa {
+    color: white;
+}
+
+.login > :nth-child(1) {
+    background-color: rgb(13,105,128);
+}
+
+.login > :nth-child(3) {
+    background-color: rgb(166,90,31);
+}
+
+.login > :nth-child(4) {
+    background-color: rgb(135, 135, 135);
+}
+
+.login > :nth-child(5),
+.login > :nth-child(6) {
+    background-color: rgb(83,83,83);
+}
+
+.login > :nth-child(5) a,
+.login > :nth-child(6) a {
+    color: rgb(193,193,193);
+}
+
+.login > :nth-child(7) {
+    cursor: pointer;
+    padding-left: 12px;
+    position: relative;
+}
+
+.login > :nth-child(7) .fa,
+.login > :nth-child(8) a {
+    color: rgb(135, 135, 135);
+}
+
+.login > :nth-child(8) {
+    margin-left: 38px;
+    padding-right: 0;
+}
+
+.login-info {
+    background-color: white;
+    border: 1px black solid;
+    box-sizing: content-box;
+    color: #333;
+    display: none;
+    font-size: 14px;
+    font-weight: bold;
+    left: -130px;
+    line-height: initial;
+    padding: 23px;
+    position: absolute;
+    top: 40px;
+    width: 250px;
+    z-index: 1;
+}
+
+.login-info:after, .login-info:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+}
+
+.login-info:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 15px;
+    margin-left: -15px;
+}
+
+.login-info:before {
+    border-color: rgba(0, 0, 0, 0);
+    border-bottom-color: #000000;
+    border-width: 16px;
+    margin-left: -16px;
+}
+
+.login-info p {
+    font-size: 12px;
+    font-weight: initial;
+    margin: 5px 22px 0 0;
+}
+
+.login > :nth-child(7):hover .login-info {
+    display: block;
+}
+
+/* lane header */
+.lane-header {
+    background-color: white;
+    font-size: 14px;
+}
+
+.brand {
+    height: 65px;
+    padding-top: 27px;
+    display: block;
+    margin: 0;
+}
+
+.brand a, .brand a:link, .brand a:focus, .brand a:visited {
+	background-image: url('../../images/sm-logo.svg');
+    background-repeat: no-repeat;
+    padding-left: 176px;
+    height: 48px;
+    float:left;
+    color: #333333;
+    font-weight: 400;
+    text-decoration: none;
+    font-size:20px;
+}
+    
+.library-contact {
+    position: absolute;
+    right: 0;
+    top: 27px;
+}
+
+.library-contact li {
+    border: 2px #007c92 solid;
+    border-radius: 6px;
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.library-contact a {
+    display: block;
+    padding: 12px;
+}
+
+.library-contact .fa {
+    color: #007c92;
 }

@@ -8,7 +8,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
 public class FlickrPhotoGenerator extends AbstractGenerator {
 
-    private static final int RANDOM_PHOTO_COUNT = 6;
+    private static final int RANDOM_PHOTO_COUNT = 12;
 
     private FlickrPhotoListService service;
 

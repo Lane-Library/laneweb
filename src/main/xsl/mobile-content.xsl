@@ -25,7 +25,6 @@
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="ipgroup"/>
     
-    <!-- today's hours computed from includes/hours.xml -->
     <xsl:param name="todays-hours"/>
 
     <xsl:param name="version"/>

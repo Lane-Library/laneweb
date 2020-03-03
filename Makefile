@@ -28,10 +28,7 @@ include ${FRAMEWORK_DIR}/makefile_parts/deps.mk
 # END COMMON MAKEFILE PARTS INCLUDES
 
 .PHONY: build
-build: build-app build-docker ## build app and docker image
-
-build-app: ## build app
-	mvn -B -s settings.xml clean package
+build: build-docker ## build docker image
 
 .PHONY: push
 push: push-version push-latest ## push both latest and versioned image to docker registry
@@ -39,6 +36,6 @@ push: push-version push-latest ## push both latest and versioned image to docker
 .PHONY: pull
 pull: pull-latest ## pull latest image from project's docker registry
 
-.PHONY: scan
-scan: build-app sonar-scan ## mvn clean package and sonar-scan
-	@echo 'See report on https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb'
+#.PHONY: scan
+#scan: build-app sonar-scan ## mvn clean package and sonar-scan
+#	@echo 'See report on https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb'

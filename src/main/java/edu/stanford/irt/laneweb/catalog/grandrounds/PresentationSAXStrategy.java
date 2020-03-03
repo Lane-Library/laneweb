@@ -24,7 +24,7 @@ public class PresentationSAXStrategy implements SAXStrategy<Presentation> {
             XMLUtils.startElement(xmlConsumer, "", "presentation", atts);
             XMLUtils.createElementNS(xmlConsumer, "", "date", FORMATTER.format(presentation.getDate()));
             XMLUtils.createElementNS(xmlConsumer, "", "title", presentation.getTitle());
-            XMLUtils.createElementNS(xmlConsumer, "", "sunet", Boolean.toString(presentation.getSunetRequired()));
+            XMLUtils.createElementNS(xmlConsumer, "", "sunet", Boolean.toString(presentation.isSunetRequired()));
             for (String presenterText : presentation.getPresenterList()) {
                 XMLUtils.createElementNS(xmlConsumer, "", "presenter", presenterText);
             }

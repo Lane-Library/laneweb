@@ -16,6 +16,6 @@ public class SpellConfigurationTest {
 
     @Test
     public void testSpellChecker() {
-        assertNotNull(this.configuration.spellChecker(null));
+        assertNotNull(this.configuration.spellChecker());
     }
 }

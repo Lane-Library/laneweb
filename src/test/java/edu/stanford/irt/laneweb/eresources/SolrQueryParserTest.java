@@ -19,6 +19,7 @@ public class SolrQueryParserTest {
         this.inspectors = new ArrayList<>();
         this.inspectors.add(new AdvancedQueryInspector());
         this.inspectors.add(new DoiQueryInspector());
+        this.inspectors.add(new OrcidQueryInspector());
         this.inspectors.add(new LcnQueryInspector());
         this.inspectors.add(new PmidQueryInspector());
         this.inspectors.add(new NumberQueryInspector());
@@ -84,5 +85,11 @@ public class SolrQueryParserTest {
                         "Journal of Antimicrobial Chemotherapy, Volume 72, Issue 4, 1 April 2017, 1147–1151, https://doi.org/10.1093/jac/dkw537"));
         assertEquals("10. 99 Han SS, ten Haaf K, Hazelton WD. Not a DOI",
                 this.parser.parse("10. 99 Han SS, ten Haaf K, Hazelton WD. Not a DOI"));
+        assertEquals("\"0000\\-0002\\-8263\\-8141\"", this.parser.parse("0000-0002-8263-8141"));
+        assertEquals("lead \"0000\\-0002\\-8263\\-8141\" correction",
+                this.parser.parse("lead 0000-0002-8263-8141 correction"));
+        assertEquals("\"0000\\-0002\\-0879\\-455X\"", this.parser.parse("0000-0002-0879-455X"));
+        assertEquals("\"0000\\-0002\\-0879\\-455x\"", this.parser.parse("0000-0002-0879-455x"));
+        assertEquals("0000\\-0000\\-0001\\-5769\\-0004", this.parser.parse("0000-0000-0001-5769-0004"));
     }
 }

@@ -55,65 +55,9 @@
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml" />
     </head>
     <body>
-     <header>
-       <div class="utility-menu">
-                    <ul class="login">
-                        <li>
-                            <a href="/secure/login.html"><i class="fa fa-lock"></i> LOGIN</a>
-                        </li>
-                        <li><i class="fa fa-user"></i>&#160;</li>
-                        <li>
-                            <div class="favorites dropdown">
-                                <a href="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>
-                                <div class="dropdown-content">
-                                    <?laneweb bookmarks?>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="/logout">LOGOUT</a>
-                        </li>
-                        <li>
-                            <a href="?proxy-links=false">GUEST VIEW</a>
-                        </li>
-                        <li>
-                            <a href="?proxy-links=true">LOGOUT GUEST</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-question-circle"></i>
-                            <div class="login-info">
-                                <div class="pure-g">
-                                    <div class="pure-u-1-2">
-                                        LOGIN
-                                        <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
-                                    </div>
-                                    <div class="pure-u-1-2">
-                                        GUEST VIEW
-                                        <p>If you are not affiliated with Stanford, but have your own licensed access</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="login-item-active">
-                            <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
-                        </li>
-                    </ul>
-                    </div>
-                
-            <div class="lane-header">
-                <div class="centered">
-                    <div class="brand">
-                        <a href="/index.html">Lane Medical Library</a>
-                    </div>
-                    <ul class="library-contact">
-                        <li><a href="/about/hours.html"><i class="fa fa-clock-o fa-lg fa-fw"></i>Hours: <?laneweb todays-hours?></a></li>
-                        <li><a href="tel:+1-650-723-6831"><i class="fa fa-phone fa-lg fa-fw"></i>650-723-6831</a></li>
-                        <li class="live-chat"><a href="/contacts/live-chat.html" rel="popup console 575 550"><i class="fa fa-comments-o fa-lg fa-fw"></i><span>Live Chat</span></a></li>
-                        <li><a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a></li>
-                    </ul>
-                </div>
-            </div>
-     </header>
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/header.html">
+         <xi:fallback></xi:fallback>
+     </xi:include>  
      <nav>
            <ul class="content centered">
                         <li class="dropdown nav-menu" data-path="/biomed-resources/">
@@ -233,93 +177,11 @@
                 </xi:include>
                 <?laneweb content?>
             </div>
-            <footer class="super-footer">
-            <div class="centered">        
-                <h2><a href="/index.html">Lane Medical Library</a></h2>
-                <div class="pure-g">
-                    <div class="pure-u-1-4">
-                    <h3><a href="//med.stanford.edu">Stanford Medicine</a></h3>
-                            <ul>
-                            <li><a href="http://med.stanford.edu/news.html">News</a></li>
-                            <li><a href="https://med.stanford.edu/about/events.html">Events</a></li>
-                            <li><a href="https://stanfordcareers.stanford.edu/">Careers</a></li>
-                            <li><a href="http://med.stanford.edu/about/contacts.html">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="pure-u-1-4">
-                    <h3><a href="//med.stanford.edu">Health Care</a></h3>
-                           <ul>
-                            <li><a href="https://stanfordhealthcare.org/">Stanford Health Care</a></li>
-                            <li><a href="https://www.stanfordchildrens.org/">Stanford Children's Health</a></li>
-                        </ul>
-                    </div>
-                    <div class="pure-u-3-8">
-                     <h3><a href="//med.stanford.edu">Stanford School of Medicine</a></h3>
-                      <div class="pure-g">
-                          <div class="pure-u-1-2">
-                           <ul>
-                            <li><a href="http://med.stanford.edu/school.html">About</a></li>
-                            <li><a href="http://med.stanford.edu/school/contacts.html">Contact</a></li>
-                            <li><a href="http://med.stanford.edu/school/contacts/maps.html">Maps &amp; Directions</a></li>
-                            <li><a href="http://stanfordcareers.stanford.edu">Jobs</a></li>
-                        </ul>
-                          </div>
-                          <div class="pure-u-1-2">
-                           <ul>
-                            <li><a href="http://med.stanford.edu/school/directory/basic-science-departments.html">Basic Science Departments</a></li>
-                            <li><a href="http://med.stanford.edu/school/directory/clinical-science-departments.html">Clinical Science Departments</a></li>
-                            <li><a href="http://med.stanford.edu/education.html">Academic Programs</a></li>
-                            <li><a href="http://med.stanford.edu/about/vision.html">Vision</a></li>
-                        </ul>
-                          </div>
-                       </div>
-                    </div>
-                </div>
-                
-            </div>
-            </footer>
-          
-        <footer class="footer-link-bar">
-            <div class="centered">
-                <div class="pure-g">
-                    <div class="pure-u-1-4">
-                    <a href="https://profiles.stanford.edu/"><i class="fa fa-users"></i> Find People</a>
-                    </div>
-                    <div class="pure-u-1-4">
-                    <a href="http://med.stanford.edu/school/contacts/maps.html"><i class="fa fa fa-map-marker"></i> Visit Stanford</a>
-                    </div>
-                     <div class="pure-u-1-4">
-                    <a href="http://clinicaltrials.stanford.edu/"><i class="fa fa fa-check"></i> Search Clinical Trials</a>
-                    </div>
-                     <div class="pure-u-1-4">
-                    <a href="http://medicalgiving.stanford.edu/"><i class="fa fa fa-gift"></i> Give a Gift</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-           <footer class="footer-copyright">
-        <div class="pure-g centered">
-                    <div class="pure-u-1-2">©<?laneweb current-year?> Stanford Medicine</div>
-                    <div class="pure-u-1-2">
-                         <ul class="right-aligned">
-                            <li><a href="http://www.stanford.edu/site/privacy">Privacy Policy</a></li>
-                            <li class="bullet"><a href="https://www.stanford.edu/site/terms/">Terms of Use</a></li>
-                            <li><a title="See us on Facebook" href="https://www.facebook.com/LaneLibStanford/"><span>See us on Facebook</span><i class="fa fa-facebook"></i></a></li>
-                            <li><a title="See us on Twitter" href="https://twitter.com/LaneLibStanford"><span>See us on Twitter</span><i class="fa fa-twitter"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-        </footer>
-        <footer class="footer-global">
-            <ul class="footer-logos centered">
-                <li><a href="http://www.stanford.edu/" title="Stanford University logo">Stanford University</a></li>
-                <li><a href="http://med.stanford.edu/" title="Stanford School of Medicine logo">Stanford School of Medicine</a></li>
-                <li><a href="https://stanfordhealthcare.org/" title="Stanford Health Care">Stanford Health Care</a></li>
-                <li><a href="http://www.stanfordchildrens.org/" title="Stanford Children's Health logo">Stanford Children's Health</a></li>
-                <li><a href="http://www.stanfordchildrens.org/" title="Lucile Packard Children's Hospital Stanford logo">Stanford Children's Hospital</a></li>
-                <li><a href="http://universityhealthcarealliance.org/" title="University Healthcare Alliance logo">University Healthcare Alliance</a></li>
-            </ul>
-        </footer>
+            
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/footer.html">
+                    <xi:fallback></xi:fallback>
+            </xi:include>
+            
         <div class="search-indicator"><i class="fa fa-spinner fa-spin"></i></div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="https://yui-s.yahooapis.com/3.18.1/yui/yui-debug.js"></script>

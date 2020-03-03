@@ -1,26 +1,22 @@
 .hero-unit {
     background-color: #8c1515;
-    background-image: url('../images/search-back.jpg');
+    background-image: url('../images/search-back.jpg'); 
     background-repeat: no-repeat;
     color: white;
     background-size: cover;
     display: flex;
     justify-content: center;
     width: 100%;
+    padding-top: 65px;
 }
 
-.hero-unit-front-page, .hero-unit-front-page.hero-unit-search-active {
-    padding: 72px 0 100px 0;
-}
-
-.hero-unit-search-active {
-    padding: 71px 0 0 0;
+.hero-unit-front-page {
+    padding-top: 100px;
+    padding-bottom: 65px;
 }
 
 .search-form {
-    padding: 36px;
     color: white;
-    max-height: 46px;
     overflow: hidden;
     position: relative;
     width: 60%;
@@ -159,7 +155,6 @@
 }
 
 .search-tab {
-    margin-top: 24px;
     line-height: 41px;
     font-size: 14px;
     font-weight: 700;
@@ -168,6 +163,7 @@
     opacity: 0;
     height: 41px;
     box-sizing: border-box;
+    visibility: hidden;
 }
 
 .search-tab-active,
@@ -192,14 +188,11 @@
 }
 
 .search-form-active {
-    padding: 0 0 35px;
     overflow: visible;
-    width: 75%
 }
 
 .search-form-active.search-form-results {
     max-height: 200px;
-    padding-bottom: 0;
 }
 
 .search-form-active .search-heading,
@@ -221,6 +214,6 @@
 }
 
 .search-form-active .search-tab {
-    margin-top: 0;
     opacity: 1;
+    visibility: visible;
 }

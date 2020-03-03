@@ -86,4 +86,9 @@ public class LanewebConfigurationTest {
     public void testRestOperations() {
         assertNotNull(this.configuration.restOperations(this.configuration.clientHttpRequestFactory(), null));
     }
+
+    @Test
+    public void testRestService() {
+        assertNotNull(this.configuration.restService(null));
+    }
 }

@@ -1,23 +1,16 @@
 pipeline: 
 
-  build:
-    image: gcr.io/som-laneweb/maven-grover:3.5.3
-    commands:
-      - mvn -B -q -s settings.xml package
-    when:
-      branch: master
-
-  code-analysis:
-    image: aosapps/drone-sonar-plugin:0.8
-    timeout: 20
-    level: INFO
-    showProfiling: true
-    secrets: [sonar_host, sonar_token]
-    sources: src/main/java,src/main/javascript,src/main/css
-    exclusions: "**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css"
-    when:
-      branch: master
-
+#   code-analysis:
+#     image: aosapps/drone-sonar-plugin:0.8
+#     timeout: 20
+#     level: INFO
+#     showProfiling: true
+#     secrets: [sonar_host, sonar_token]
+#     sources: src/main/java,src/main/javascript,src/main/css
+#     exclusions: "**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css"
+#     when:
+#       branch: master
+#
   publish:
     image: plugins/docker
     registry: gcr.io

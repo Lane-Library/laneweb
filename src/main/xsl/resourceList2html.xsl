@@ -37,12 +37,12 @@
     </xsl:variable>
 
     <!--  placement of image search results -->
-    <xsl:variable name="images-promo-position">4</xsl:variable>
+    <xsl:variable name="images-promo-position">3</xsl:variable>
 
     <!--  number of images to show in search results -->
     <xsl:variable name="images-promo-show">5</xsl:variable>
 
-    <xsl:variable name="images-promo-enabled" select="$sourceid = 'images-promo'"/>
+    <xsl:variable name="images-promo-enabled" select="'true'"/>
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
@@ -280,7 +280,7 @@
                 </xsl:call-template>
                 <xsl:if test="$simple-primary-type != string(s:label) and s:link-text != 'Lane Catalog Record'">
                     <span>
-                        <a href="{s:url}" title="{../s:title}">
+                        <a href="{s:url}" title="{s:label}">
                             <xsl:value-of select="s:link-text" />
                         </a>
                     </span>
@@ -457,17 +457,29 @@
 
     <xsl:template name="images-promotion">
         <xsl:param name="result-position"/>
-        <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position">
+        <xsl:if test="$images-promo-enabled and $images-promo-position = $result-position and $facets = ''">
             <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image/preview?q=',$url-encoded-query)"/>
             <xsl:variable name="imageResults" select="document($imageUrl)"/>
             <xsl:if test="count($imageResults//string) >= $images-promo-show">
-                <li>
-                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Biomedical Images Search">Images of <strong><xsl:value-of select="$query"/></strong> from Lane's Biomedical Search</a>
+                <li class="no-bookmarking">
+                    <span class="primaryType" style="display:none;">Image Search Promo</span>
+                    <a class="primaryLink" href="{$images-url}" title="More images from Lane's Bio-Image Search">Results from Lane's Bio-Image Search</a>
+                    <span class="imageSurvey">
+                        <span class="surveyLinks">
+                            Useful?
+                            <a href="#"><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i> Yes</a>
+                            <a href="#"><i class="fa fa-frown-o fa-lg" aria-hidden="true"></i> No</a>
+                        </span>
+                        <span class="surveySent">
+                            Thank you for your feedback! 
+                            Please send further suggestions to <a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a>.
+                        </span>
+                    </span>
                     <div id="imageList" class="searchPromo">
                         <div class="pure-g">
                             <xsl:for-each select="$imageResults//string[position() &lt;= $images-promo-show]">
                                 <div class="pure-u-1-5">
-                                    <a href="{$images-url}" title="More images from Lane's Biomedical Images Search"><img src="{.}"/></a>
+                                    <a href="{$images-url}" title="More images from Bio-Image Search"><img src="{.}"/></a>
                                 </div>
                             </xsl:for-each>
                         </div>

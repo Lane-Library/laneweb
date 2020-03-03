@@ -4,6 +4,7 @@
 
 .view-by {
 	float: right;
+	margin-top: -4px;
 }
 
 .view-by .dropdown {
