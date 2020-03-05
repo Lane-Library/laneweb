@@ -183,8 +183,6 @@
         }
     });
 
-	
-
 	function uploadFile(evt) {
 		var file = evt.target.files[0], reader = new FileReader();
 		reader.onload = (function(event) {

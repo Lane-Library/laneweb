@@ -1,9 +1,13 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -12,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.LanewebException;
@@ -35,9 +41,15 @@ public class EMailController {
 
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
+    private static final String MULTIPART_MIME_TYPE = "multipart/form-data";
+    
     private static final String JSON_MIME_TYPE = "application/json";
 
     private static final String SUBJECT = "subject";
+
+    private static final Object ERROR_MESSAGE = "Attachment deleted for security raison, use your email client to see the attachment";
+    
+    public static final long MAX_UPLOAD_SIZE = 4194304;
 
     private RequestHeaderDataBinder headerBinder;
 
@@ -52,14 +64,19 @@ public class EMailController {
         this.sender = sender;
     }
 
-    @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitAskUs(final Model model, final RedirectAttributes atts) {
+    @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE)
+    public String formSubmitAskUs(final Model model, @RequestParam("attachment") MultipartFile file, final RedirectAttributes atts) throws IllegalStateException, IOException {
+        File attachment =  validateFileMultipartFile(file); 
+        if(attachment == null && !file.isEmpty()) {
+            return "redirect:/error_upload_file.html";
+        }
         Map<String, Object> map = model.asMap();
         appendNameToSubject(map);
-        sendEmail(ASKUS_ADDRESS, map);
+        sendEmail(ASKUS_ADDRESS, map, attachment);
         return getRedirectTo(map);
     }
 
+    
     @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
@@ -70,9 +87,10 @@ public class EMailController {
     @PostMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
     public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
+        File file = getAttachmentFile(feedback);
         feedback.putAll(model.asMap());
         appendNameToSubject(feedback);
-        sendEmail(ASKUS_ADDRESS, feedback);
+        sendEmail(ASKUS_ADDRESS, feedback, file);
     }
 
     @PostMapping(value = DOCXPRESS_PATH, consumes = JSON_MIME_TYPE)
@@ -119,4 +137,71 @@ public class EMailController {
         data.put("recipient", recipient);
         this.sender.sendEmail(data);
     }
+
+    private void sendEmail(final String recipient, final Map<String, Object> data, File file) {
+        try {
+            data.put("recipient", recipient);
+            this.sender.sendEmail(data, file);
+        } catch (Exception e) {
+            throw new LanewebException(e);
+        } finally {
+            if (null != file) {
+                file.delete();
+            }
+        }
+    }
+
+    private File getAttachmentFile(Map<String, Object> feedback) {
+        File file = null;
+        String content = (String) feedback.remove("attachment");
+        String fileName = (String) feedback.remove("attachmentFileName");
+        if (null != content && !"".equals(content)) {
+            String contentType = content.substring(5, content.indexOf(","));
+            if (!contentType.contains("image/")) {
+                feedback.put("attachment", ERROR_MESSAGE);
+                return null;
+            }
+            file = generateImageFile(content, fileName, feedback);
+            if (file.length() > MAX_UPLOAD_SIZE) {
+                file.delete();
+                return null;
+            }
+        }
+        return file;
+    }
+
+    private File generateImageFile(String content, String fileName, Map<String, Object> feedback) {
+        File file = null;
+        try {
+            file = new File(fileName);
+            String image = content.substring(content.indexOf(",") + 1);
+            byte[] imageBytes = DatatypeConverter.parseBase64Binary(image);
+            FileOutputStream out = new FileOutputStream(fileName);
+            out.write(imageBytes);
+            out.close();
+        } catch (IOException e) {
+            throw new LanewebException(feedback.toString(), e);
+        }
+        return file;
+    }
+    
+    private File validateFileMultipartFile(MultipartFile attachment) throws IllegalStateException, IOException {
+        File file = null;
+        if (attachment != null && !attachment.isEmpty()) {
+            String contentType = attachment.getContentType();
+            if(!contentType.startsWith("image/")) {
+                return null;
+            }
+            file = new File(attachment.getOriginalFilename());
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(attachment.getBytes());
+            fos.close();
+            if (file.length() > MAX_UPLOAD_SIZE) {
+                file.delete();
+                return null;
+            }
+        }
+        return file;
+    }
+    
 }
