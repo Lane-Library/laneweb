@@ -7,7 +7,7 @@
         <version>57</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.5.62-SNAPSHOT</version>
+    <version>3.5.63-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -75,12 +75,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.81.0</version>
+            <version>1.82.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.81.0</version>
+            <version>1.82.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -182,7 +182,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.1.8</version>
+            <version>1.1.9</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>

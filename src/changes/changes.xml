@@ -7,7 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-          <release date="2020-02-14" version="3.5.61" description="bug fix release">
+         <release date="2020-03-02" version="3.5.62" description="bug fix release">
+            <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10545" type="update">
+               Tomcat 9.0.31 changes the default AJP connector behavior. This is a breaking change for laneweb and will require config changes.
+            </action>
+            <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10546" type="update">
+               remove left/right arrow key facet browsing
+            </action>
+         </release>
+         <release date="2020-02-14" version="3.5.61" description="bug fix release">
             <action date="2020-02-11" dev="ryanmax" issue="LANEWEB-10542" type="fix">
                Qualys-reported cross site scripting vulnerability
             </action>
