@@ -7,19 +7,14 @@
       <xsl:copy>
          <xsl:apply-templates select="node()|@*"/>
       </xsl:copy>
-      
    </xsl:template>
    <xsl:template match="@*">
       <xsl:copy-of select="."/>
    </xsl:template>
-   
    <xsl:template match="rss">
       <xsl:apply-templates
          select="channel/item[ (category[ . = 'New Resource']  or category[ . = 'News'])  and  not(category[ . = 'Highlighted Resource']) and  count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]"/>
    </xsl:template>
-   
-   
-   
    <xsl:template match="item">
       <div class="pure-u-1-3">
          <div class="newsfeed">
@@ -40,13 +35,16 @@
          </div>
       </div>
    </xsl:template>
-   
-   
    <xsl:template match="h:img">
       <xsl:copy>
-         <xsl:attribute name="src" select="replace(@src,'http:','')"/>
+         <!-- protocol-less @src if image is http:// -->
+         <xsl:variable name="newSrc" select="replace(@src,'http:','')"/>
+         <xsl:if test="ends-with($newSrc, 'jpg')">
+            <xsl:attribute name="src" select="replace($newSrc, '.jpg' ,'-153.jpg')"/>
+         </xsl:if>
+         <xsl:if test="ends-with($newSrc, 'png')">
+            <xsl:attribute name="src" select="replace($newSrc, '.png' ,'-153.png')"/>
+         </xsl:if>
       </xsl:copy>
    </xsl:template>
-   
-   
 </xsl:stylesheet>
