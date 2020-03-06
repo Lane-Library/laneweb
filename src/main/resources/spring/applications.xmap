@@ -136,12 +136,13 @@
         <map:match pattern="laneblog-highlightedresources-rss.xml" type="wildcard">
             <map:generate type="file" src="cocoon://apps/laneblog-feed.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/laneblog-highlightedresources-rss2html.xsl"/>
-            
+            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="laneblog-news-n-newresources-rss.xml" type="wildcard">
             <map:generate type="file" src="cocoon://apps/laneblog-feed.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/laneblog-news-n-newresources-rss2html.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/laneblog.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="search-templates.xml" type="wildcard">
