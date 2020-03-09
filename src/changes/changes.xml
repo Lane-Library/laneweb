@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-03-09" version="3.5.63" description="bug fix release">
+            <action date="2020-03-05" dev="alainb" issue="LANEWEB-10549" type="update">
+                  Add attachment to laneAskUs
+            </action>
+         </release>
          <release date="2020-03-02" version="3.5.62" description="bug fix release">
             <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10545" type="update">
                Tomcat 9.0.31 changes the default AJP connector behavior. This is a breaking change for laneweb and will require config changes.
