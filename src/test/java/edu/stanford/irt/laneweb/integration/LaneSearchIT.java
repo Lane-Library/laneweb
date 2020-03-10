@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.integration;
 
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
@@ -266,6 +267,22 @@ public class LaneSearchIT {
         this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html")).andExpect(
                 xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Science']", this.ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
+    }
+
+    @Test
+    public void testLaneSearchSplitOnNumerics() throws Exception {
+        // covid19
+        MvcResult facetCountResult = this.mockMvc
+                .perform(get("/eresources/count.xml?q=covid19").servletPath("/eresources/count.xml")).andReturn();
+        String facetCount = facetCountResult.getResponse().getContentAsString()
+                .replaceFirst(".*<facet name=\"all\" hits=\"(\\d+)\"/>.*", "$1");
+        assertTrue(Integer.parseInt(facetCount) >= 400);
+        // doi
+        this.mockMvc
+                .perform(get("/eresources/search.html?q=10.1113/jphysiol.1972.sp009847")
+                        .servletPath("/eresources/search.html"))
+                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'5039275')]",
+                        this.ns).exists());
     }
 
     @Test
