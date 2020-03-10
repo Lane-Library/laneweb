@@ -86,7 +86,7 @@ public class EMailController {
 
     @PostMapping(value = ASKUS_PATH, consumes = JSON_MIME_TYPE)
     @ResponseStatus(value = HttpStatus.OK)
-    public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) {
+    public void jsonSubmitAskUs(@RequestBody final Map<String, Object> feedback, final Model model) throws IOException {
         File file = getAttachmentFile(feedback);
         feedback.putAll(model.asMap());
         appendNameToSubject(feedback);
