@@ -183,8 +183,6 @@
         }
     });
 
-	
-
 	function uploadFile(evt) {
 		var file = evt.target.files[0], reader = new FileReader();
 		reader.onload = (function(event) {
@@ -198,7 +196,7 @@
 		size = input.files[0].size, contentType = input.files[0].type;
 		if (size > FOUR_MEGA_BYTES) {
 			input.value = "";
-			alert("File too big !  (4MB max)");
+			alert("File too big!  (4MB max)");
 		} else if (!contentType.startsWith("image/")) {
 			input.value = "";
 			alert("Only image is supported");
