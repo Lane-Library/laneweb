@@ -7,9 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-03-16" version="3.5.64" description="bug fix release">
+            <action date="2020-03-12" dev="ryanmax" issue="LANEWEB-10554" type="update">
+               Update commons-fileupload to the 1.4 version
+            </action>
+         </release>
          <release date="2020-03-09" version="3.5.63" description="bug fix release">
             <action date="2020-03-05" dev="alainb" issue="LANEWEB-10549" type="update">
-                  Add attachment to laneAskUs
+               Add attachment to laneAskUs
             </action>
          </release>
          <release date="2020-03-02" version="3.5.62" description="bug fix release">
