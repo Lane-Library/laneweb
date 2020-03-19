@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.user;
 import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.security.auth.Subject;
 
@@ -24,10 +23,10 @@ public class LDAPDataAccess {
     private final SubjectSource subjectSource;
 
     public LDAPDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource,
-            final Set<String> activeAffiliations) {
+            final List<String> activeAffiliations) {
         this.ldapTemplate = ldapTemplate;
         this.subjectSource = subjectSource;
-        this.attributesMapper = new LDAPAttributesMapper(Collections.unmodifiableSet(activeAffiliations));
+        this.attributesMapper = new LDAPAttributesMapper(Collections.unmodifiableList( activeAffiliations));
     }
 
     public String getActiveSunetId(final String univid) {

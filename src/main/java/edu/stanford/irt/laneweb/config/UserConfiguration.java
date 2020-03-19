@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,32 +30,11 @@ public class UserConfiguration {
 
     @Bean
     public LDAPDataAccess ldapDataAccess(final LdapTemplate ldapTemplate, final SubjectSource subjectSource) {
-        Set<String> activeAffiliations = new HashSet<>(24);
-        activeAffiliations.add("stanford:affiliate:sponsored");
-        activeAffiliations.add("stanford:faculty*");
-        activeAffiliations.add("stanford:faculty:onleave");
-        activeAffiliations.add("stanford:faculty:otherteaching");
-        activeAffiliations.add("stanford:faculty:slac");
-        activeAffiliations.add("stanford:faculty");
-        activeAffiliations.add("stanford:faculty:affiliate");
-        activeAffiliations.add("stanford:faculty:emeritus");
-        activeAffiliations.add("stanford:faculty:retired");
-        activeAffiliations.add("stanford:staff*");
-        activeAffiliations.add("stanford:staff");
-        activeAffiliations.add("stanford:staff:academic");
-        activeAffiliations.add("stanford:faculty:onleave");
-        activeAffiliations.add("stanford:staff:emeritus");
-        activeAffiliations.add("stanford:staff:otherteaching");
-        activeAffiliations.add("stanford:staff:temporary");
-        activeAffiliations.add("stanford:staff:casual");
-        activeAffiliations.add("stanford:student*");
-        activeAffiliations.add("stanford:student");
-        activeAffiliations.add("stanford:student:onleave");
-        activeAffiliations.add("stanford:student:postdoc");
-        activeAffiliations.add("stanford:student:mla");
-        activeAffiliations.add("stanford:student:ndo");
-        activeAffiliations.add("sumc:staff");
-        return new LDAPDataAccess(ldapTemplate, subjectSource, activeAffiliations);
+        List<String> privilegeGroup = new ArrayList<String>(3);
+        privilegeGroup.add("stanford:library-eresources-eligible");
+        privilegeGroup.add("lane:proxy-access");
+        privilegeGroup.add("sulair:proxy-access");
+        return new LDAPDataAccess(ldapTemplate, subjectSource, privilegeGroup);
     }
 
     @Bean

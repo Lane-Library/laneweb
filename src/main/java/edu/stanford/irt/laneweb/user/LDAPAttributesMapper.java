@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.user;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
@@ -12,21 +12,21 @@ import org.springframework.ldap.core.AttributesMapper;
 
 class LDAPAttributesMapper implements AttributesMapper<LDAPData> {
 
-    private Set<String> activeAffiliations;
+    private List<String> privilegeGroups;
 
-    public LDAPAttributesMapper(final Set<String> activeAffiliations) {
-        this.activeAffiliations = new HashSet<>(activeAffiliations);
+    public LDAPAttributesMapper(final List<String> privilegeGroups) {
+        this.privilegeGroups = new ArrayList<>(privilegeGroups);
     }
 
     @Override
     public LDAPData mapFromAttributes(final Attributes attributes) throws NamingException {
         String sunetid = null;
         boolean isActive = false;
-        Attribute suAffiliations = attributes.get("suAffiliation");
-        if (suAffiliations != null) {
-            NamingEnumeration<?> suAffiliation = suAffiliations.getAll();
-            while (!isActive && suAffiliation.hasMore()) {
-                isActive = this.activeAffiliations.contains(suAffiliation.next());
+        Attribute privilegeGroups = attributes.get("suPrivilegeGroup");
+        if (privilegeGroups != null) {
+            NamingEnumeration<?> privilegeGroup = privilegeGroups.getAll();
+            while (!isActive && privilegeGroup.hasMore()) {
+                isActive = this.privilegeGroups.contains(privilegeGroup.next());
             }
         }
         if (isActive) {

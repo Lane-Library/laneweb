@@ -36,7 +36,7 @@ public class LDAPDataAccessTest {
     public void setUp() {
         this.ldapTemplate = mock(LdapTemplate.class);
         this.subjectSource = mock(SubjectSource.class);
-        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource, Collections.emptySet());
+        this.lDAPDataAccess = new LDAPDataAccess(this.ldapTemplate, this.subjectSource, Collections.emptyList());
         this.ldapData = mock(LDAPData.class);
     }
 

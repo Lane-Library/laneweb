@@ -32,7 +32,7 @@ public class LDAPAttributesMapperTest {
 
     @Before
     public void setUp() throws Exception {
-        this.mapper = new LDAPAttributesMapper(Collections.singleton("stanford:staff"));
+        this.mapper = new LDAPAttributesMapper( Collections.singletonList("stanford:staff"));
         this.attributes = mock(Attributes.class);
         this.attribute = mock(Attribute.class);
         this.enumeration = mock(NamingEnumeration.class);
@@ -43,7 +43,7 @@ public class LDAPAttributesMapperTest {
     public void testMapFromAttributes() throws NamingException {
         expect(this.attributes.get("uid")).andReturn(this.attribute);
         expect(this.attribute.get()).andReturn("uid");
-        expect(this.attributes.get("suAffiliation")).andReturn(this.attribute);
+        expect(this.attributes.get("suPrivilegeGroup")).andReturn(this.attribute);
         expect(this.attribute.getAll()).andReturn(this.enumeration);
         expect(this.enumeration.hasMore()).andReturn(true);
         expect(this.enumeration.next()).andReturn("");
@@ -59,7 +59,7 @@ public class LDAPAttributesMapperTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testMapFromAttributesNotActive() throws NamingException {
-        expect(this.attributes.get("suAffiliation")).andReturn(this.attribute);
+        expect(this.attributes.get("suPrivilegeGroup")).andReturn(this.attribute);
         expect(this.attribute.getAll()).andReturn(this.enumeration);
         expect(this.enumeration.hasMore()).andReturn(true);
         expect(this.enumeration.next()).andReturn("");
@@ -75,7 +75,7 @@ public class LDAPAttributesMapperTest {
 
     @Test
     public void testMapFromAttributesNullAttributes() throws NamingException {
-        expect(this.attributes.get("suAffiliation")).andReturn(null);
+        expect(this.attributes.get("suPrivilegeGroup")).andReturn(null);
         replay(this.attributes, this.attribute, this.enumeration);
         LDAPData data = this.mapper.mapFromAttributes(this.attributes);
         assertNull(data.getSunetId());

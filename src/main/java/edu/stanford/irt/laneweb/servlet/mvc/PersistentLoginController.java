@@ -29,7 +29,7 @@ import edu.stanford.irt.laneweb.user.User;
 @Controller
 public class PersistentLoginController {
 
-    private static final long DURATION_MILLIS = Duration.ofDays(14).toMillis();
+    private static final long DURATION_MILLIS = Duration.ofDays(11).toMillis();
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
@@ -105,7 +105,7 @@ public class PersistentLoginController {
     private String getRedirectURL(final String url) {
         StringBuilder sb = new StringBuilder("redirect:");
         if (null == url) {
-            sb.append("/myaccounts.html");
+            sb.append("/index.html");
         } else {
             sb.append(url);
         }
