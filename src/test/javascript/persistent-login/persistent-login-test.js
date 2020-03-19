@@ -110,7 +110,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                 href = h;
             };
             node.click();
-            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=/myaccounts.html", href);
+            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=/index.html", href);
         }
 
     });

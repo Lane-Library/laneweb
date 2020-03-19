@@ -11,8 +11,6 @@
         isStanfordActive = model.get(model.IS_ACTIVE_SUNETID),
         // the check box for persistent login on the discovery login page
         persistentLoginCheckbox = document.getElementById('is-persistent-login'),
-        myAccountsLink = document.getElementById("persistent-login"),
-
         // The popup window for extension
         popupWindow = function(id, o) {
             var lightbox = L.Lightbox, okLink;
@@ -53,17 +51,6 @@
         });
     }
 
-    // for the static page myaccounts.html Click on YES this way the user
-    // will not have to go through webauth.
-    if (myAccountsLink) {
-        myAccountsLink.addEventListener('click',function(event) {
-            event.preventDefault();
-            if (isStanfordActive) {
-                L.setLocationHref(basePath + '/persistentLogin.html?pl=renew&url=/myaccounts.html');
-            } else {
-                L.setLocationHref(basePath + '/secure/persistentLogin.html?pl=true');
-            }
-        });
-    }
+   
 
 })();

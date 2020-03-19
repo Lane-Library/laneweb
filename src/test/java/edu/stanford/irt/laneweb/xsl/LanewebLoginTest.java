@@ -83,6 +83,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
         this.transformer.setParameter(Model.PROXY_LINKS, "false");
         this.transformer.setParameter(Model.USER_ID, "sunetid@stanford.edu");
         this.transformer.setParameter(Model.IPGROUP, "SOM");
+        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("FalseUserIdSOM.xml"), sw.toString());
     }
@@ -158,6 +159,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
         this.transformer.setParameter(Model.PROXY_LINKS, "true");
         this.transformer.setParameter(Model.USER_ID, "sunetid@stanford.edu");
         this.transformer.setParameter(Model.IPGROUP, "SOM");
+        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("TrueUserIdSOM.xml"), sw.toString());
     }
