@@ -19,7 +19,7 @@ public class UrlTester {
         this.metaSearchService = metaSearchService;
     }
 
-    @GetMapping(value = "/apps/url-tester")
+    @GetMapping(value = "/secure/apps/url-tester")
     public void testUrl(@RequestParam final String url, final HttpServletResponse response) throws IOException {
         response.setHeader("Content-Type", "text/plain");
         response.getOutputStream().write(this.metaSearchService.testURL(url));
