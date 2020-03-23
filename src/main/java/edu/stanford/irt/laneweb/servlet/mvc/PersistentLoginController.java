@@ -106,10 +106,10 @@ public class PersistentLoginController {
     
     private String getRedirectURL(final String url) {
         StringBuilder sb = new StringBuilder("redirect:");
-        if(!validateUrl(url)) {
-            sb.append("/error.html");
-        }else  if (null == url) {
+        if (null == url) {
             sb.append("/index.html");
+        }else if(!validateUrl(url)) {
+            sb.append("/error.html");
         } else {
             sb.append(url);
         }
