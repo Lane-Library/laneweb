@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+          <release date="2020-03-23" version="3.5.65" description="bug fix release">
+            <action date="2020-03-23" dev="alainb" issue="LANEWEB-10554" type="update">
+               Moderate Security Finding - persistent login redirect
+            </action>
+             <action date="2020-03-19" dev="alainb" issue="LANEWEB-10553" type="update">
+               Critical Security Finding - url-tester
+            </action>
+             <action date="2020-03-16" dev="alainb" issue="LANEWEB-10474" type="update">
+               news section of the homepage look
+            </action>
+         </release>
          <release date="2020-03-16" version="3.5.64" description="bug fix release">
             <action date="2020-03-12" dev="ryanmax" issue="LANEWEB-10554" type="update">
                Update commons-fileupload to the 1.4 version
