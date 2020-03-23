@@ -27,7 +27,7 @@
     // have the possibility to extend his persistent login
     if (isStanfordActive && loginExpirationDate) {
         document.addEventListener("click", function(event) {
-            var node = event.target.closest("a[href*='laneproxy.stanford.edu/login']");  // , a[href*='/redirect/cme']");
+            var node = event.target.closest("a[href*='laneproxy.stanford.edu/login'], a[href*='/redirect/cme']");
             if (node && new Date().getTime() > loginExpirationDate) {
                 event.preventDefault();
                 redirectUrl = node.href;

@@ -35,6 +35,8 @@ public class PersistentLoginController {
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
     
     private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
+    
+    private static final String LANE_CME_URL = "https://lane.stanford.edu/redirect/cme?url=https://www.uptodate.com/";
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
@@ -118,6 +120,9 @@ public class PersistentLoginController {
 
     private boolean validateUrl(String url) {
         if(url.startsWith(LANE_PROXY_URL)) {
+            return true;
+        }
+        if(url.startsWith(LANE_CME_URL)) {
             return true;
         }
         else {
