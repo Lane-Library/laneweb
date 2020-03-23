@@ -33,6 +33,8 @@ public class PersistentLoginController {
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
+    
+    private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
@@ -106,12 +108,23 @@ public class PersistentLoginController {
         StringBuilder sb = new StringBuilder("redirect:");
         if (null == url) {
             sb.append("/index.html");
+        }else if(!validateUrl(url)) {
+            sb.append("/error.html");
         } else {
             sb.append(url);
         }
         return sb.toString();
     }
 
+    private boolean validateUrl(String url) {
+        if(url.startsWith(LANE_PROXY_URL)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
     private void resetCookies(final HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");

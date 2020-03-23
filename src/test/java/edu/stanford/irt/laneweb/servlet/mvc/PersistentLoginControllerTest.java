@@ -30,6 +30,8 @@ import edu.stanford.irt.laneweb.user.User;
 
 public class PersistentLoginControllerTest {
 
+    private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
+    
     private UserCookieCodec codec;
 
     private ActiveSunetidDataBinder ldap;
@@ -44,7 +46,9 @@ public class PersistentLoginControllerTest {
 
     private PersistentLoginToken token;
 
-    private String url = "/test.html";
+    
+    
+    private String url = LANE_PROXY_URL+"/test.html";
 
     private User user;
 
@@ -73,7 +77,7 @@ public class PersistentLoginControllerTest {
                 this.token);
         String redirect = this.persistenLoginController.disablePersistentLogin(null, this.user, this.url,
                 this.response);
-        assertEquals("redirect:/test.html", redirect);
+        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", redirect);
         assertCookieDeleted(cookie1.getValue());
         assertCookieDeleted(cookie2.getValue());
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
@@ -97,6 +101,27 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
+    public void testEnablePersistentLoginNotNullUrlNotValidURL() {
+        String notValidUrl = "test.html";
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
+        this.response.addCookie(capture(cookie1));
+        this.response.addCookie(capture(cookie2));
+        expect(this.request.getHeader("User-Agent")).andReturn("firefox");
+        expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
+        expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
+        replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
+                this.token);
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, notValidUrl, this.request,
+                this.response);
+        assertEquals("redirect:/error.html", redirect);
+        assertEquals(1209600, cookie1.getValue().getMaxAge());
+        assertEquals("encryptedValue", cookie1.getValue().getValue());
+        assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
+        verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,           this.token);
+    }
+    
+    @Test
     public void testEnablePersistentLoginNotNullUrl() {
         Capture<Cookie> cookie1 = newCapture();
         Capture<Cookie> cookie2 = newCapture();
@@ -109,7 +134,7 @@ public class PersistentLoginControllerTest {
                 this.token);
         String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, this.url, this.request,
                 this.response);
-        assertEquals("redirect:/test.html", redirect);
+        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", redirect);
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
         assertTrue(System.currentTimeMillis() + Duration.ofDays(11).minus(Duration.ofMillis(100)).toMillis() < Long
@@ -118,6 +143,7 @@ public class PersistentLoginControllerTest {
         verify(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
                 this.token);
     }
+    
 
     @Test
     public void testEnablePersistentLoginNullUrl() {
@@ -168,7 +194,7 @@ public class PersistentLoginControllerTest {
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
                 this.token);
-        assertEquals("redirect:/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.TRUE,
+        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.TRUE,
                 this.user, this.url, this.request, this.response));
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
@@ -187,7 +213,7 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
                 this.token);
-        assertEquals("redirect:/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.FALSE,
+        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.FALSE,
                 this.user, this.url, this.request, this.response));
         assertCookieDeleted(cookie1.getValue());
         assertCookieDeleted(cookie2.getValue());
@@ -203,7 +229,7 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
                 this.token);
-        assertEquals("redirect:/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.FALSE,
+        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.FALSE,
                 this.user, this.url, this.request, this.response));
         assertCookieDeleted(cookie1.getValue());
         assertCookieDeleted(cookie2.getValue());
@@ -219,7 +245,7 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
                 this.token);
-        assertEquals("redirect:/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.FALSE,
+        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", this.persistenLoginController.renewPersistentLogin(null, Boolean.FALSE,
                 null, this.url, this.request, this.response));
         assertCookieDeleted(cookie1.getValue());
         assertCookieDeleted(cookie2.getValue());
