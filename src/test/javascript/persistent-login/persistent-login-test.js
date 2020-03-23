@@ -40,14 +40,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             event.preventDefault();
         },
 
-        "test redirectcme click" : function() {
-            var node = document.querySelector("#cmeredirect");
-            node.addEventListener("click", this.preventDefault);
-            node.click();
-            node.removeEventListener("click", this.preventDefault);
-            Y.Assert.areSame("/plain/shibboleth-persistent-extension.html", this.url);
-        },
-
         "test proxylogin click" : function() {
             var node = document.querySelector("#proxylogin");
             node.addEventListener("click", this.preventDefault);
