@@ -157,13 +157,6 @@ public class PersistentLoginController {
     }
 
     private boolean validateUrl(final String url) {
-        if (url.startsWith(LANE_PROXY_URL)) {
-            return true;
-        }
-        if (url.startsWith(LANE_CME_URL)) {
-            return true;
-        } else {
-            return false;
-        }
+        return url.startsWith(LANE_PROXY_URL) || url.startsWith(LANE_CME_URL);
     }
 }
