@@ -33,10 +33,10 @@ public class PersistentLoginController {
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
-    
-    private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
-    
+
     private static final String LANE_CME_URL = "https://lane.stanford.edu/redirect/cme?url=https://www.uptodate.com/";
+
+    private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
@@ -85,9 +85,9 @@ public class PersistentLoginController {
         } else {
             resetCookies(response);
         }
-        if(validateUrl(url) ) {
+        if (validateUrl(url)) {
             return getRedirectURL(url);
-        }else {
+        } else {
             return "redirect:/error.html";
         }
     }
@@ -109,30 +109,17 @@ public class PersistentLoginController {
             resetCookies(response);
         }
     }
-    
+
     private String getRedirectURL(final String url) {
         StringBuilder sb = new StringBuilder("redirect:");
         if (null == url) {
             sb.append("/index.html");
-        }
-        else {
+        } else {
             sb.append(url);
         }
         return sb.toString();
     }
 
-    private boolean validateUrl(String url) {
-        if(url.startsWith(LANE_PROXY_URL)) {
-            return true;
-        }
-        if(url.startsWith(LANE_CME_URL)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
     private void resetCookies(final HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
@@ -166,6 +153,17 @@ public class PersistentLoginController {
             cookie.setPath("/");
             cookie.setMaxAge(DURATION_SECONDS);
             response.addCookie(cookie);
+        }
+    }
+
+    private boolean validateUrl(final String url) {
+        if (url.startsWith(LANE_PROXY_URL)) {
+            return true;
+        }
+        if (url.startsWith(LANE_CME_URL)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
