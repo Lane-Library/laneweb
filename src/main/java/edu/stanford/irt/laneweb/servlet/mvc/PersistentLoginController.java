@@ -33,10 +33,6 @@ public class PersistentLoginController {
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
-    
-    private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
-    
-    private static final String LANE_CME_URL = "https://lane.stanford.edu/redirect/cme?url=https://www.uptodate.com/";
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
@@ -64,18 +60,20 @@ public class PersistentLoginController {
     public String disablePersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletResponse response) {
         resetCookies(response);
-        return getRedirectURL(url, true);
+        return getRedirectURL(url);
     }
 
     @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.IS_ACTIVE_SUNETID) final Boolean isActiveSunetId,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
-        if(isActiveSunetId) {
-            checkUserAndSetCookies(user, request, response);
+        if (null != user) {
+            setCookies(request, response, user);
+            return getRedirectURL(url);
+        } else {
+            resetCookies(response);
+            return "redirect:/error.html";
         }
-        return getRedirectURL(url, isActiveSunetId);
     }
 
     @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
@@ -83,13 +81,13 @@ public class PersistentLoginController {
             @ModelAttribute(Model.IS_ACTIVE_SUNETID) final Boolean isActiveSunetId,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
-        if (isActiveSunetId) {
-            checkUserAndSetCookies(user, request, response);
-         
+        if (null != user && isActiveSunetId) {
+            setCookies(request, response, user);
+            return getRedirectURL(url);
         } else {
             resetCookies(response);
+            return "redirect:/error.html";
         }
-        return getRedirectURL(url, isActiveSunetId);
     }
 
     @ModelAttribute
@@ -101,41 +99,10 @@ public class PersistentLoginController {
         }
     }
 
-    private void checkUserAndSetCookies(final User user, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        if (null != user) {
-            setCookies(request, response, user);
-        } else {
-            resetCookies(response);
-        }
-    }
-    
-    private String getRedirectURL(final String url, boolean isActive) {
-        StringBuilder sb = new StringBuilder("redirect:");
-        if (null == url) {
-            sb.append("/index.html");
-        }
-        else if(!validateUrl(url) || !isActive) {
-            sb.append("/error.html");
-        } 
-        else {
-            sb.append(url);
-        }
-        return sb.toString();
+    private String getRedirectURL(final String url) {
+        return (null == url) ? "redirect:/index.html" : "redirect:" + url;
     }
 
-    private boolean validateUrl(String url) {
-        if(url.startsWith(LANE_PROXY_URL)) {
-            return true;
-        }
-        if(url.startsWith(LANE_CME_URL)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    
     private void resetCookies(final HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
         cookie.setPath("/");
