@@ -85,7 +85,11 @@ public class PersistentLoginController {
         } else {
             resetCookies(response);
         }
-        return getRedirectURL(url);
+        if(validateUrl(url) ) {
+            return getRedirectURL(url);
+        }else {
+            return "redirect:/error.html";
+        }
     }
 
     @ModelAttribute
@@ -110,9 +114,8 @@ public class PersistentLoginController {
         StringBuilder sb = new StringBuilder("redirect:");
         if (null == url) {
             sb.append("/index.html");
-        }else if(!validateUrl(url)) {
-            sb.append("/error.html");
-        } else {
+        }
+        else {
             sb.append(url);
         }
         return sb.toString();

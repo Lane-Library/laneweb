@@ -112,7 +112,7 @@ public class PersistentLoginControllerTest {
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.ldap, this.codec, this.request, this.response, this.session, this.user,
                 this.token);
-        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, notValidUrl, this.request,
+        String redirect = this.persistenLoginController.renewPersistentLogin(null, true, this.user, notValidUrl, this.request,
                 this.response);
         assertEquals("redirect:/error.html", redirect);
         assertEquals(1209600, cookie1.getValue().getMaxAge());
