@@ -29,12 +29,14 @@ import edu.stanford.irt.laneweb.user.User;
 @Controller
 public class PersistentLoginController {
 
-    private static final long DURATION_MILLIS = Duration.ofDays(11).toMillis();
+    private static final long DURATION_MILLIS = Duration.ofDays(14).toMillis();
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
     
     private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
+    
+    private static final String LANE_CME_URL = "https://lane.stanford.edu/redirect/cme?url=https://www.uptodate.com/";
 
     private ActiveSunetidDataBinder activeSunetidDataBinder;
 
@@ -62,15 +64,18 @@ public class PersistentLoginController {
     public String disablePersistentLogin(final RedirectAttributes redirectAttrs,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletResponse response) {
         resetCookies(response);
-        return getRedirectURL(url);
+        return getRedirectURL(url, true);
     }
 
     @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
+            @ModelAttribute(Model.IS_ACTIVE_SUNETID) final Boolean isActiveSunetId,
             @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
             final HttpServletResponse response) {
-        checkUserAndSetCookies(user, request, response);
-        return getRedirectURL(url);
+        if(isActiveSunetId) {
+            checkUserAndSetCookies(user, request, response);
+        }
+        return getRedirectURL(url, isActiveSunetId);
     }
 
     @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
@@ -80,10 +85,11 @@ public class PersistentLoginController {
             final HttpServletResponse response) {
         if (isActiveSunetId) {
             checkUserAndSetCookies(user, request, response);
+         
         } else {
             resetCookies(response);
         }
-        return getRedirectURL(url);
+        return getRedirectURL(url, isActiveSunetId);
     }
 
     @ModelAttribute
@@ -103,14 +109,16 @@ public class PersistentLoginController {
             resetCookies(response);
         }
     }
-
-    private String getRedirectURL(final String url) {
+    
+    private String getRedirectURL(final String url, boolean isActive) {
         StringBuilder sb = new StringBuilder("redirect:");
         if (null == url) {
             sb.append("/index.html");
-        }else if(!validateUrl(url)) {
+        }
+        else if(!validateUrl(url) || !isActive) {
             sb.append("/error.html");
-        } else {
+        } 
+        else {
             sb.append(url);
         }
         return sb.toString();
@@ -118,6 +126,9 @@ public class PersistentLoginController {
 
     private boolean validateUrl(String url) {
         if(url.startsWith(LANE_PROXY_URL)) {
+            return true;
+        }
+        if(url.startsWith(LANE_CME_URL)) {
             return true;
         }
         else {
