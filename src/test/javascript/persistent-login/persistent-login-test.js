@@ -95,16 +95,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             Y.Assert.areSame("yes", this.cookieArgs.args[1]);
         },
 
-        "test persistent-login click" : function() {
-            var node = document.querySelector("#persistent-login");
-            var href = null;
-            L.setLocationHref = function(h) {
-                href = h;
-            };
-            node.click();
-            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=/index.html", href);
-        }
-
     });
 
     new Y.Test.Console().render();
