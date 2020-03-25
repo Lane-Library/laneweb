@@ -20,7 +20,7 @@ $ cd laneweb
 
 $ make app
 ```
-TEST
+
 ### Build docker image
     
 ```
