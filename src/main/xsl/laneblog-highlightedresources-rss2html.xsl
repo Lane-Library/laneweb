@@ -21,7 +21,7 @@
    <xsl:template match="item">
       <div class="pure-u-1-3">
          <div class="newsfeed">
-             <header>Resources of the Months</header>
+             <header>Resource of the Month</header>
             <figure>
                <xsl:copy-of select="./content:encoded/h:article//h:img[1]"/>
                </figure>
