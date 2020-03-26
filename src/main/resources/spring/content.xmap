@@ -268,10 +268,6 @@
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="olgary/**" type="wildcard">
-            <map:generate type="html" src="https://people.stanford.edu/olgary/"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="**" type="wildcard">
             <map:generate type="html" src="{content-base}/{1}"/>
             <map:transform type="xinclude"/>
