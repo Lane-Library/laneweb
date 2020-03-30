@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-03-30" version="3.5.66" description="bug fix release">
+            <action date="2020-03-27" dev="ryanmax" issue="LANEWEB-10558" type="update">
+               Content listing visible
+            </action>
+             <action date="2020-03-26" dev="ryanmax" issue="LANEWEB-10559" type="update">
+               Live chat on front page should be hidden outside of live chat hours
+            </action>
+             <action date="2020-03-26" dev="alainb" issue="LANEWEB-10556" type="update">
+               poor language "Resources of the Months"
+            </action>
+         </release>
           <release date="2020-03-23" version="3.5.65" description="bug fix release">
             <action date="2020-03-23" dev="alainb" issue="LANEWEB-10554" type="update">
                Moderate Security Finding - persistent login redirect
