@@ -11,12 +11,6 @@
             <action date="2020-04-08" dev="alainb" issue="LANEWEB-10561" type="update">
                Grand Round are not displayed
             </action>
-             <action date="2020-03-26" dev="ryanmax" issue="LANEWEB-10559" type="update">
-               Live chat on front page should be hidden outside of live chat hours
-            </action>
-             <action date="2020-03-26" dev="alainb" issue="LANEWEB-10556" type="update">
-               poor language "Resources of the Months"
-            </action>
          </release>
          <release date="2020-03-30" version="3.5.66" description="bug fix release">
             <action date="2020-03-27" dev="ryanmax" issue="LANEWEB-10558" type="update">
