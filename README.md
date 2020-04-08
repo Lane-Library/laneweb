@@ -48,7 +48,11 @@ Drone CLI requires access token to talk to drone server.
 Please get your personal token from https://ci.med.stanford.edu/account/token, 
 and save the the token to ${HOME}/.drone-token file. 
 
-_NOTE_: Do not add newline at the end of the token.
+_NOTE_: Do not add newline at the end of the token. Use:
+
+```
+echo -n <token> > ${HOME}/.drone-token
+```
 
 #### To turn on the ci job defined in .drone.yml
 
