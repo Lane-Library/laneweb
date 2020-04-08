@@ -21,6 +21,16 @@
             });
         });
 
+        // To hide the images if there is an error 
+        document.querySelectorAll('#imageList img').forEach(function(img){
+          	img.onerror = function(){
+          		var level = 3,  el = this;
+          		while((--level >=0 ) && el){
+          	        el = el.parentNode;
+          	    }
+          		el.style.display='none'};
+        })
+        
         //On click on Image to open the imageDetail
         document.querySelectorAll('#imageList  div[row]').forEach(function(node) {
             node.addEventListener('click', function(e) {
@@ -47,6 +57,8 @@
             node.addEventListener("click", cleanDetailImageWindow);
         });
 
+        
+        
         //Admin on click on the id
         document.querySelectorAll(".imagedeco-admin").forEach(function(node) {
             node.addEventListener("click", function(e) {
