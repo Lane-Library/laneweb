@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-04-13" version="3.5.68" description="emergency release">
+            <action date="2020-04-08" dev="alainb" issue="LANEWEB-10547" type="update">
+               broken links in image search
+            </action>
+         </release>
          <release date="2020-04-08" version="3.5.67" description="emergency release">
             <action date="2020-04-08" dev="alainb" issue="LANEWEB-10561" type="update">
                Grand Round are not displayed
