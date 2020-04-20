@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-04-20" version="3.5.69" description="release">
+            <action date="2020-04-17" dev="ryanmax" issue="LANEWEB-10566" type="update">
+                Update website footer links and format
+            </action>
+         </release>
          <release date="2020-04-13" version="3.5.68" description="emergency release">
             <action date="2020-04-08" dev="alainb" issue="LANEWEB-10547" type="update">
                broken links in image search
