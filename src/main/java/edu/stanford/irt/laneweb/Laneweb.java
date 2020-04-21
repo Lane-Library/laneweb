@@ -29,6 +29,8 @@ public class Laneweb {
         ajpConnector.setProperty("allowedRequestAttributesPattern", ".*");
         ajpConnector.setProperty("tomcatAuthentication", "false");
         ajpConnector.setProperty("URIEncoding", "UTF-8");
+        // LANEWEB-10567: packetSize must match ProxyIOBufferSize value set in httpd conf
+        ajpConnector.setProperty("packetSize", "16384");
         tomcat.addAdditionalTomcatConnectors(ajpConnector);
         return tomcat;
     }
