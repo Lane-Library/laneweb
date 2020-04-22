@@ -22,9 +22,11 @@
       <div class="pure-u-1-3">
          <div class="newsfeed">
              <header>Resource of the Month</header>
-            <figure>
+             <div class="same-height-2" >
+               <figure>
                <xsl:copy-of select="./content:encoded/h:article//h:img[1]"/>
                </figure>
+               </div>
             <div class="newsfeed-title">
                <a href="{link}" title="feed link---{../../channel/title}">
                   <xsl:value-of select="title"/>
