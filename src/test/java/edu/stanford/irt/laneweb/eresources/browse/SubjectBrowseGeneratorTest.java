@@ -50,9 +50,9 @@ public class SubjectBrowseGeneratorTest {
         Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
         Page<FacetFieldEntry> page1 = mock(Page.class);
         FacetFieldEntry ffe = mock(FacetFieldEntry.class);
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "foo"));
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "foo"));
         expect(this.solrService.facetByField("advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
-                "type:\"foo\"", "mesh", 0, 20000, 1, FacetSort.INDEX)).andReturn(facetpage);
+                "foo", "mesh", 0, 20000, 1, FacetSort.INDEX)).andReturn(facetpage);
         expect(facetpage.getFacetResultPages()).andReturn(facetResultPages);
         expect(facetResultPages.iterator()).andReturn(it1);
         expect(it1.hasNext()).andReturn(true);
@@ -71,8 +71,8 @@ public class SubjectBrowseGeneratorTest {
 
     @Test
     public void testGetKey() {
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "foo"));
-        assertEquals("t=foo", this.generator.getKey());
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "foo"));
+        assertEquals("q=foo", this.generator.getKey());
     }
 
     @Test
@@ -88,12 +88,12 @@ public class SubjectBrowseGeneratorTest {
     @Test
     public void testSetEmptyParameters() {
         this.generator.setParameters(Collections.emptyMap());
-        assertEquals("t=null", this.generator.getKey());
+        assertEquals("q=null", this.generator.getKey());
     }
 
     @Test
     public void testSetParameters() {
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "some-type"));
-        assertEquals("t=some-type", this.generator.getKey());
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "some-query"));
+        assertEquals("q=some-query", this.generator.getKey());
     }
 }

@@ -34,10 +34,9 @@ public class AtoZBrowseGenerator extends AbstractBrowseGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        if (null != this.browseType) {
-            FacetPage<Eresource> fps = this.solrService.facetByField(
-                    "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
-                    "type:\"" + this.browseType + '"', "title_starts", 0, MAX_FACETS, 0, FacetSort.INDEX);
+        if (null != this.browseQuery) {
+            FacetPage<Eresource> fps = this.solrService.facetByField(BASE_BROWSE_QUERY, this.browseQuery,
+                    "title_starts", 0, MAX_FACETS, 0, FacetSort.INDEX);
             List<BrowseLetter> letters = extractFacets(fps.getFacetResultPages());
             this.saxStrategy.toSAX(letters, xmlConsumer);
         }

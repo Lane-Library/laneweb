@@ -35,10 +35,9 @@ public class SubjectBrowseGenerator extends AbstractBrowseGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        if (null != this.browseType) {
-            FacetPage<Eresource> fps = this.solrService.facetByField(
-                    "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)",
-                    "type:\"" + this.browseType + '"', "mesh", 0, MAX_FACETS, 1, FacetSort.INDEX);
+        if (null != this.browseQuery) {
+            FacetPage<Eresource> fps = this.solrService.facetByField(BASE_BROWSE_QUERY, this.browseQuery, "mesh", 0,
+                    MAX_FACETS, 1, FacetSort.INDEX);
             Map<String, Long> map = new HashMap<>();
             for (Page<FacetFieldEntry> page : fps.getFacetResultPages()) {
                 for (FacetFieldEntry entry : page) {
