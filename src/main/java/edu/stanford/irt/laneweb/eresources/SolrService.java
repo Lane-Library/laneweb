@@ -38,6 +38,7 @@ public class SolrService {
 
     private static final String AND = " AND ";
 
+    // consider moving this to /lane-browse solr handler
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
             new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
 
@@ -54,13 +55,13 @@ public class SolrService {
 
     private static final Pattern FACETS_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR);
 
+    private static final String NULL_QUERY = "null query";
+
     private static final String NULL_TYPE = "null type";
 
     private static final int PAGE_SIZE = 10;
 
     private static final Pattern SINGLE_SPACE_PATTERN = Pattern.compile(" ");
-
-    private static final String TYPE = "type";
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYYMMdd");
 
@@ -74,6 +75,45 @@ public class SolrService {
         this.parser = parser;
         this.repository = repository;
         this.solrTemplate = solrTemplate;
+    }
+
+    public List<Eresource> browseByQuery(final String query) {
+        if (null == query) {
+            throw new IllegalArgumentException(NULL_QUERY);
+        }
+        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(query)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
+        return cursorToList(cursor);
+    }
+
+    public List<Eresource> browseByQuery(final String query, final char alpha) {
+        if (null == query) {
+            throw new IllegalArgumentException(NULL_QUERY);
+        }
+        char sAlpha = alpha;
+        // solr stores starts with numeric as '1'
+        if ('#' == sAlpha) {
+            sAlpha = '1';
+        }
+        SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(query)));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
+        return cursorToList(cursor);
+    }
+
+    public List<Eresource> browseMeshByQuery(final String query, final String mesh) {
+        if (null == query) {
+            throw new IllegalArgumentException(NULL_QUERY);
+        }
+        if (null == mesh) {
+            throw new IllegalArgumentException("null mesh");
+        }
+        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
+        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(query)));
+        q.addFilterQuery(buildFilterQuery("mesh", mesh));
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
+        return cursorToList(cursor);
     }
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
@@ -118,45 +158,6 @@ public class SolrService {
 
     public Eresource getByBibID(final String bibID) {
         return this.repository.getByBibID(bibID);
-    }
-
-    public List<Eresource> getMesh(final String type, final String mesh) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        if (null == mesh) {
-            throw new IllegalArgumentException("null mesh");
-        }
-        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        q.addFilterQuery(buildFilterQuery("mesh", mesh));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    public List<Eresource> getType(final String type) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    public List<Eresource> getType(final String type, final char alpha) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        char sAlpha = alpha;
-        // solr stores starts with numeric as '1'
-        if ('#' == sAlpha) {
-            sAlpha = '1';
-        }
-        SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
     }
 
     public Map<String, Long> recordCount() {

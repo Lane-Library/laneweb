@@ -34,7 +34,7 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     @Facet(fields = { "type" }, minCount = 0, limit = 100)
     SolrResultPage<Eresource> facetByType(String term, Pageable page);
 
-    @Query(value = "*:*", filters = { "id:bib-?0" }, requestHandler = Handlers.BROWSE)
+    @Query(value = "*:*", filters = { "id:bib-?0" }, requestHandler = Handlers.SEARCH)
     Eresource getByBibID(String bibID);
 
     @Query(value = "?0", filters = { "?1" }, requestHandler = Handlers.SEARCH)

@@ -33,11 +33,11 @@ public class BrowseEresourcesGeneratorTest {
     @Test
     public void testEncodedType() {
         this.generator.setModel(Collections.emptyMap());
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type%20space"));
-        expect(this.solrService.getType("type space", 'a')).andReturn(null);
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query%20space"));
+        expect(this.solrService.browseByQuery("query space", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type space", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;q=query space", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
@@ -45,14 +45,14 @@ public class BrowseEresourcesGeneratorTest {
     public void testGetEresourceListNull() {
         this.generator.setModel(Collections.emptyMap());
         assertEquals(0, this.generator.getEresourceList(this.solrService).size());
-        assertEquals("p=0;a=a;t=", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;q=", this.generator.createKey().toString());
     }
 
     @Test
     public void testGetEresourceListType() {
         this.generator.setModel(Collections.emptyMap());
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.solrService.getType("type", 'a')).andReturn(null);
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        expect(this.solrService.browseByQuery("query", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
         verify(this.solrService);
@@ -61,44 +61,44 @@ public class BrowseEresourcesGeneratorTest {
     @Test
     public void testGetEresourceListTypeAlpha() {
         this.generator.setModel(Collections.singletonMap(Model.ALPHA, "a"));
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.solrService.getType("type", 'a')).andReturn(null);
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        expect(this.solrService.browseByQuery("query", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;q=query", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
     @Test
     public void testGetEresourceListTypeAlphaString() {
         this.generator.setModel(Collections.singletonMap(Model.ALPHA, "abc"));
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.solrService.getType("type", 'a')).andReturn(null);
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        expect(this.solrService.browseByQuery("query", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;q=query", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
     @Test
     public void testGetEresourceListTypeEmptyAlpha() {
         this.generator.setModel(Collections.singletonMap(Model.ALPHA, ""));
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.solrService.getType("type", 'a')).andReturn(null);
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        expect(this.solrService.browseByQuery("query", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;q=query", this.generator.createKey().toString());
         verify(this.solrService);
     }
 
     @Test
     public void testGetEresourceListTypeNoAlpha() {
-        this.generator.setModel(Collections.singletonMap(Model.TYPE, "type"));
+        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.setParameters(Collections.emptyMap());
-        expect(this.solrService.getType("type", 'a')).andReturn(null);
+        expect(this.solrService.browseByQuery("query", 'a')).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
-        assertEquals("p=0;a=a;t=type", this.generator.createKey().toString());
+        assertEquals("p=0;a=a;q=query", this.generator.createKey().toString());
         verify(this.solrService);
     }
 }

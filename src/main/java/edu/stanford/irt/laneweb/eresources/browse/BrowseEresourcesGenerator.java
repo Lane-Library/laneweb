@@ -24,7 +24,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     private String alpha;
 
-    private String type;
+    private String query;
 
     public BrowseEresourcesGenerator(final String type, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
@@ -34,7 +34,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        this.type = ModelUtil.getString(model, Model.TYPE);
+        this.query = ModelUtil.getString(model, Model.QUERY);
         this.alpha = ModelUtil.getString(model, Model.ALPHA, DEFAULT_ALPHA);
         if (this.alpha.length() == 0) {
             this.alpha = DEFAULT_ALPHA;
@@ -47,15 +47,15 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
-        if (parameters.containsKey(Model.TYPE)) {
-            this.type = decode(parameters.get(Model.TYPE));
+        if (parameters.containsKey(Model.QUERY)) {
+            this.query = decode(parameters.get(Model.QUERY));
         }
     }
 
     @Override
     protected StringBuilder createKey() {
-        return super.createKey().append(";a=").append(this.alpha).append(";t=")
-                .append(null == this.type ? "" : this.type);
+        return super.createKey().append(";a=").append(this.alpha).append(";q=")
+                .append(null == this.query ? "" : this.query);
     }
 
     /**
@@ -76,10 +76,10 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
         List<Eresource> list;
-        if (this.type == null) {
+        if (this.query == null) {
             list = Collections.emptyList();
         } else {
-            list = solrService.getType(this.type, this.alpha.charAt(0));
+            list = solrService.browseByQuery(this.query, this.alpha.charAt(0));
         }
         return list;
     }
@@ -87,7 +87,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     protected String getHeading() {
         String heading = null;
-        if (this.type.indexOf("software, installed") == -1) {
+        if (this.query.indexOf("software, installed") == -1) {
             heading = this.alpha.toUpperCase(Locale.US);
         }
         return heading;

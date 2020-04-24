@@ -87,62 +87,6 @@ public class SolrServiceTest {
     }
 
     @Test
-    public final void testGetMesh() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getMesh("type", "mesh");
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetMeshException1() {
-        this.solrService.getMesh("type", null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetMeshException2() {
-        this.solrService.getMesh(null, "mesh");
-    }
-
-    @Test
-    public final void testGetTypeString() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getType("type");
-        verify(this.template, this.cursor);
-    }
-
-    @Test
-    public final void testGetTypeStringChar() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getType("type", 'a');
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetTypeStringCharException() {
-        this.solrService.getType(null, 'a');
-    }
-
-    @Test
-    public final void testGetTypeStringCharHash() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getType("type", '#');
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetTypeStringException() {
-        this.solrService.getType(null);
-    }
-
-    @Test
     public final void testSearchCount() {
         Set<String> types = new TreeSet<>();
         types.add("type1");

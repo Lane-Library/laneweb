@@ -15,7 +15,7 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
 
     private String mesh;
 
-    private String type;
+    private String query;
 
     public MeSHEresourcesGenerator(final String componentType, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
@@ -25,30 +25,30 @@ public class MeSHEresourcesGenerator extends AbstractEresourcesGenerator {
     @Override
     public void setModel(final Map<String, Object> model) {
         super.setModel(model);
-        this.type = ModelUtil.getString(model, Model.TYPE);
+        this.query = ModelUtil.getString(model, Model.QUERY);
         this.mesh = ModelUtil.getString(model, Model.MESH);
     }
 
     @Override
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
-        if (parameters.containsKey(Model.TYPE)) {
-            this.type = parameters.get(Model.TYPE);
+        if (parameters.containsKey(Model.QUERY)) {
+            this.query = parameters.get(Model.QUERY);
         }
     }
 
     @Override
     protected StringBuilder createKey() {
-        return super.createKey().append(";t=").append(null == this.type ? "" : this.type).append(";m=")
+        return super.createKey().append(";q=").append(null == this.query ? "" : this.query).append(";m=")
                 .append(null == this.mesh ? "" : this.mesh);
     }
 
     @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
-        if (this.mesh == null || this.type == null) {
+        if (this.mesh == null || this.query == null) {
             return Collections.emptyList();
         }
-        return solrService.getMesh(this.type, this.mesh);
+        return solrService.browseMeshByQuery(this.query, this.mesh);
     }
 
     @Override
