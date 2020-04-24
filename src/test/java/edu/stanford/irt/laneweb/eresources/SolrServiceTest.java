@@ -50,6 +50,62 @@ public class SolrServiceTest {
     }
 
     @Test
+    public final void testBrowseByQueryString() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseByQuery("query");
+        verify(this.template, this.cursor);
+    }
+
+    @Test
+    public final void testBrowseByQueryStringChar() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseByQuery("query", 'a');
+        verify(this.template, this.cursor);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseByQueryStringCharException() {
+        this.solrService.browseByQuery(null, 'a');
+    }
+
+    @Test
+    public final void testBrowseByQueryStringCharHash() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseByQuery("type", '#');
+        verify(this.template, this.cursor);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseByQueryStringException() {
+        this.solrService.browseByQuery(null);
+    }
+
+    @Test
+    public final void testBrowseMeshByQuery() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseMeshByQuery("type", "mesh");
+        verify(this.template, this.cursor);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseMeshByQuery2() {
+        this.solrService.browseMeshByQuery(null, "mesh");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseMeshByQueryException1() {
+        this.solrService.browseMeshByQuery("type", null);
+    }
+
+    @Test
     public final void testFacetByField() {
         FacetPage<Object> fpage = mock(FacetPage.class);
         expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
@@ -84,62 +140,6 @@ public class SolrServiceTest {
         replay(this.repository, er);
         this.solrService.getByBibID("123");
         verify(this.repository, er);
-    }
-
-    @Test
-    public final void testGetMesh() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getMesh("type", "mesh");
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetMeshException1() {
-        this.solrService.getMesh("type", null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetMeshException2() {
-        this.solrService.getMesh(null, "mesh");
-    }
-
-    @Test
-    public final void testGetTypeString() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getType("type");
-        verify(this.template, this.cursor);
-    }
-
-    @Test
-    public final void testGetTypeStringChar() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getType("type", 'a');
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetTypeStringCharException() {
-        this.solrService.getType(null, 'a');
-    }
-
-    @Test
-    public final void testGetTypeStringCharHash() {
-        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
-        expect(this.cursor.hasNext()).andReturn(false);
-        replay(this.template, this.cursor);
-        this.solrService.getType("type", '#');
-        verify(this.template, this.cursor);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public final void testGetTypeStringException() {
-        this.solrService.getType(null);
     }
 
     @Test

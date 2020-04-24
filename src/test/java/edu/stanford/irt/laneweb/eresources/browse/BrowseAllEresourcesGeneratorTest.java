@@ -33,15 +33,15 @@ public class BrowseAllEresourcesGeneratorTest {
 
     @Test
     public void testCreateKey() {
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        assertEquals("p=;a=;t=type", this.generator.createKey().toString());
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        assertEquals("p=;a=;q=query", this.generator.createKey().toString());
     }
 
     @Test
     public void testGetEresourceList() {
-        expect(this.solrService.getType("type")).andReturn(Collections.singletonList(null));
+        expect(this.solrService.browseByQuery("query")).andReturn(Collections.singletonList(null));
         replay(this.solrService);
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
         assertEquals(1, this.generator.getEresourceList(this.solrService).size());
         verify(this.solrService);
     }

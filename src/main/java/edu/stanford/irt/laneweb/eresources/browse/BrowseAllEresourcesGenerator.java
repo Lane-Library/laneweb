@@ -12,7 +12,7 @@ import edu.stanford.irt.laneweb.resource.PagingData;
 
 public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
 
-    private String type;
+    private String query;
 
     public BrowseAllEresourcesGenerator(final String type, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
@@ -22,23 +22,23 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
     @Override
     public void setParameters(final Map<String, String> parameters) {
         super.setParameters(parameters);
-        if (parameters.containsKey(Model.TYPE)) {
-            this.type = decode(parameters.get(Model.TYPE));
+        if (parameters.containsKey(Model.QUERY)) {
+            this.query = decode(parameters.get(Model.QUERY));
         }
     }
 
     @Override
     protected StringBuilder createKey() {
-        return new StringBuilder("p=;a=;t=").append(this.type);
+        return new StringBuilder("p=;a=;q=").append(this.query);
     }
 
     @Override
     protected List<Eresource> getEresourceList(final SolrService solrService) {
         List<Eresource> list;
-        if (this.type == null) {
+        if (this.query == null) {
             list = Collections.emptyList();
         } else {
-            list = solrService.getType(this.type);
+            list = solrService.browseByQuery(this.query);
         }
         return list;
     }

@@ -46,8 +46,8 @@ public class MeSHEresourcesGeneratorTest {
     @Test
     public void testGetEresourceList() {
         this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        expect(this.solrService.getMesh("type", "mesh")).andReturn(null);
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        expect(this.solrService.browseMeshByQuery("query", "mesh")).andReturn(null);
         replay(this.solrService);
         this.generator.getEresourceList(this.solrService);
         verify(this.solrService);
@@ -55,14 +55,14 @@ public class MeSHEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceListNullMesh() {
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
         replay(this.solrService);
         assertEquals(0, this.generator.getEresourceList(this.solrService).size());
         verify(this.solrService);
     }
 
     @Test
-    public void testGetEresourceListNullType() {
+    public void testGetEresourceListNullQuery() {
         this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
         replay(this.solrService);
         assertEquals(0, this.generator.getEresourceList(this.solrService).size());
@@ -77,24 +77,24 @@ public class MeSHEresourcesGeneratorTest {
     @Test
     public void testSetModelMesh() {
         this.generator.setModel(Collections.singletonMap(Model.MESH, "mesh"));
-        assertEquals("p=0;t=;m=mesh", this.generator.createKey().toString());
+        assertEquals("p=0;q=;m=mesh", this.generator.createKey().toString());
     }
 
     @Test
     public void testSetModelNull() {
         this.generator.setModel(Collections.emptyMap());
-        assertEquals("p=0;t=;m=", this.generator.createKey().toString());
+        assertEquals("p=0;q=;m=", this.generator.createKey().toString());
     }
 
     @Test
-    public void testSetParametersNoType() {
+    public void testSetParametersNoQuery() {
         this.generator.setParameters(Collections.emptyMap());
-        assertEquals("p=0;t=;m=", this.generator.createKey().toString());
+        assertEquals("p=0;q=;m=", this.generator.createKey().toString());
     }
 
     @Test
-    public void testSetParametersType() {
-        this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
-        assertEquals("p=0;t=type;m=", this.generator.createKey().toString());
+    public void testSetParametersQuery() {
+        this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
+        assertEquals("p=0;q=query;m=", this.generator.createKey().toString());
     }
 }

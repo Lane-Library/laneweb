@@ -5,7 +5,7 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     exclude-result-prefixes="h s" version="2.0">
     
-    <xsl:param name="type"/>
+    <xsl:param name="browse-query"/>
     
     <xsl:template match="child::node()">
         <xsl:copy>
@@ -24,8 +24,8 @@
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
-            <xsl:if test="($type = 'Book' and contains(s:primaryType, 'Book'))
-                or ($type = 'Journal' and contains(s:primaryType, 'Journal'))">
+            <xsl:if test="(contains($browse-query,'Book') and contains(s:primaryType, 'Book'))
+                or (contains($browse-query,'Journal') and contains(s:primaryType, 'Journal'))">
                 <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
             </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
@@ -134,7 +134,7 @@
     </xsl:template>
 
     <xsl:template match="s:primaryType">
-        <xsl:if test="$type and contains('JournalBook',$type)">
+        <xsl:if test="$browse-query and (contains($browse-query,'Book') or contains($browse-query,'Journal'))">
             <xsl:choose>
                 <xsl:when test="not(contains(., 'Print')) and ../s:link[s:label = 'Lane Catalog Record']">Digital/Print</xsl:when>
                 <xsl:when test="contains(., 'Print')">Print</xsl:when>
@@ -159,7 +159,7 @@
         <xsl:param name="simplePrimaryType" />
         <xsl:variable name="showLabel">
             <xsl:choose>
-                <xsl:when test="not(contains('JournalBook',$type))">true</xsl:when>
+                <xsl:when test="not((contains($browse-query,'Book') or contains($browse-query,'Journal')))">true</xsl:when>
                 <xsl:when test="not(contains($primaryType, 'Print')) and ../s:link[s:label = 'Lane Catalog Record']">true</xsl:when>
                 <xsl:when test="$primaryType = s:label">true</xsl:when>
                 <xsl:otherwise>false</xsl:otherwise>
