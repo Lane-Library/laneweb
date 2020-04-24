@@ -38,6 +38,7 @@ public class SolrService {
 
     private static final String AND = " AND ";
 
+    // consider moving this to /lane-browse solr handler
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
             new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
 
@@ -61,8 +62,6 @@ public class SolrService {
     private static final int PAGE_SIZE = 10;
 
     private static final Pattern SINGLE_SPACE_PATTERN = Pattern.compile(" ");
-
-    private static final String TYPE = "type";
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYYMMdd");
 
@@ -161,48 +160,6 @@ public class SolrService {
         return this.repository.getByBibID(bibID);
     }
 
-    // TODO: remove me
-    public List<Eresource> getMesh(final String type, final String mesh) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        if (null == mesh) {
-            throw new IllegalArgumentException("null mesh");
-        }
-        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        q.addFilterQuery(buildFilterQuery("mesh", mesh));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    // TODO: remove me
-    public List<Eresource> getType(final String type) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
-    // TODO: remove me
-    public List<Eresource> getType(final String type, final char alpha) {
-        if (null == type) {
-            throw new IllegalArgumentException(NULL_TYPE);
-        }
-        char sAlpha = alpha;
-        // solr stores starts with numeric as '1'
-        if ('#' == sAlpha) {
-            sAlpha = '1';
-        }
-        SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
-        q.addFilterQuery(buildFilterQuery(TYPE, type));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
     public Map<String, Long> recordCount() {
         Map<String, Long> result = new HashMap<>();
         SolrResultPage<Eresource> facets = this.repository.facetByRecordType(PageRequest.of(0, 1));
@@ -226,7 +183,6 @@ public class SolrService {
         return result;
     }
 
-    // TODO: where is this used?
     public Page<Eresource> searchType(final String type, final String query, final Pageable pageRequest) {
         if (null == type) {
             throw new IllegalArgumentException(NULL_TYPE);
@@ -256,7 +212,6 @@ public class SolrService {
         SimpleQuery q = new SimpleQuery(query);
         q.setRequestHandler(SolrRepository.Handlers.BROWSE);
         q.addSort(Sort.by("title_sort", "id"));
-        // TODO: remove? would mean isLaneConnex, etc in content
         q.addFilterQuery(BASE_FQ);
         q.setTimeAllowed(Integer.MIN_VALUE);
         return q;
