@@ -32,10 +32,6 @@ public class PersistentLoginController {
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
 
-    private static final String LANE_CME_URL = "https://lane.stanford.edu/redirect/cme?url=https://www.uptodate.com/";
-
-    private static final String LANE_PROXY_URL = "https://login.laneproxy.stanford.edu/login";
-
     private UserCookieCodec codec;
 
     private UserDataBinder userBinder;
@@ -64,7 +60,7 @@ public class PersistentLoginController {
         return "redirect:/myaccounts.html";
     }
 
-    @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
+    @GetMapping(value = { "/secure/persistentLogin.html" }, params = { "pl=false" })
     public String disablePersistentLogin(@ModelAttribute(Model.USER) final User user, final String url,
             final HttpServletResponse response) {
         resetCookies(response);
@@ -92,13 +88,13 @@ public class PersistentLoginController {
     }
 
     private String getRedirectURL(final String url) {
+        StringBuilder sb = new StringBuilder("redirect:");
         if (null == url) {
-            return "redirect:/index.html";
+            sb.append("/index.html");
+        } else {
+            sb.append(url);
         }
-        if (validateUrl(url)) {
-            return "redirect:" + url;
-        }
-        return "redirect:/error.html";
+        return sb.toString();
     }
 
     private void resetCookies(final HttpServletResponse response) {
@@ -137,7 +133,5 @@ public class PersistentLoginController {
         }
     }
 
-    private boolean validateUrl(final String url) {
-        return url.startsWith(LANE_PROXY_URL) || url.startsWith(LANE_CME_URL);
-    }
+    
 }
