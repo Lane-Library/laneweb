@@ -77,8 +77,6 @@ public final class Model {
 
     public static final String PERSISTENT_LOGIN = "persistent-login";
 
-    public static final String PERSISTENT_LOGIN_EXPIRATION_DATE = "lane-login-expiration-date";
-
     public static final String PICO_C = "c";
 
     public static final String PICO_I = "i";

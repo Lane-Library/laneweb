@@ -132,6 +132,12 @@
               <map:serialize type="xml"/>
             </map:match>
          </map:match>
+         <map:match pattern="myaccounts.html" type="wildcard">
+            <map:generate type="html" src="{content-base}/myaccounts.html"/>
+            <map:transform src="classpath:/xsl/persistentlogin.xsl" type="saxon"/>
+            <map:transform type="xinclude"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <!-- med-history/search-form.html is to be used in an xinclude. If there is a q parameter, the
             first pipeline in this match is invoked, xincluding the form and the metasearch results, otherwise
             the second pipeline is invoked xincluding just the form -->

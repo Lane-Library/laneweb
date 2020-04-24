@@ -22,7 +22,6 @@ import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.CookieName;
-import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.user.User;
 
@@ -30,30 +29,36 @@ import edu.stanford.irt.laneweb.user.User;
 public class PersistentLoginController {
 
     private static final long DURATION_MILLIS = Duration.ofDays(14).toMillis();
-
+    
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
-
-    private ActiveSunetidDataBinder activeSunetidDataBinder;
-
-    private Clock clock;
 
     private UserCookieCodec codec;
 
     private UserDataBinder userBinder;
+    
+    private Clock clock;
 
     @Autowired
-    public PersistentLoginController(final UserDataBinder userBinder,
-            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec) {
-        this(userBinder, activeSunetidDataBinder, codec, Clock.systemDefaultZone());
+    public PersistentLoginController(final UserDataBinder userBinder, final UserCookieCodec codec) {
+        this(userBinder, codec, Clock.systemDefaultZone());
     }
 
-    public PersistentLoginController(final UserDataBinder userBinder,
-            final ActiveSunetidDataBinder activeSunetidDataBinder, final UserCookieCodec codec, final Clock clock) {
+    public PersistentLoginController(final UserDataBinder userBinder, final UserCookieCodec codec, final Clock clock) {
         this.userBinder = userBinder;
-        this.activeSunetidDataBinder = activeSunetidDataBinder;
         this.codec = codec;
         this.clock = clock;
+    }
+
+    @GetMapping(value = { "/secure/persistentLogin/myaccount.html", "/persistentLogin/myaccount.html" })
+    public String myaccount(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user,
+            final String pl,  final HttpServletRequest request, final HttpServletResponse response) {
+        if ("true".equals(pl) && null != user) {
+            setCookies(request, response, user);
+        } else {
+            resetCookies(response);
+        }
+        return "redirect:/myaccounts.html";
     }
 
     @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "pl=false" })
@@ -76,24 +81,9 @@ public class PersistentLoginController {
         }
     }
 
-    @GetMapping(value = { "/secure/persistentLogin.html", "/persistentLogin.html" }, params = { "url", "pl=renew" })
-    public String renewPersistentLogin(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.IS_ACTIVE_SUNETID) final Boolean isActiveSunetId,
-            @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        if (null != user && isActiveSunetId) {
-            setCookies(request, response, user);
-            return getRedirectURL(url);
-        } else {
-            resetCookies(response);
-            return "redirect:/error.html";
-        }
-    }
-
     @ModelAttribute
     protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
         this.userBinder.bind(model.asMap(), request);
-        this.activeSunetidDataBinder.bind(model.asMap(), request);
         if (!model.containsAttribute(Model.USER)) {
             model.addAttribute(Model.USER, null);
         }
@@ -102,6 +92,7 @@ public class PersistentLoginController {
     private String getRedirectURL(final String url) {
         return (null == url) ? "redirect:/index.html" : "redirect:" + url;
     }
+
 
     private void resetCookies(final HttpServletResponse response) {
         Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
@@ -138,4 +129,5 @@ public class PersistentLoginController {
             response.addCookie(cookie);
         }
     }
+    
 }

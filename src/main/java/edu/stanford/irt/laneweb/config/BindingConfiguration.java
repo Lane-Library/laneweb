@@ -20,7 +20,6 @@ import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
 import edu.stanford.irt.laneweb.livechat.Schedule;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.binding.ActiveSunetidDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BookmarkDataBinder;
@@ -48,16 +47,12 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory;
 import edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory;
 import edu.stanford.irt.laneweb.servlet.binding.user.UserFactory;
-import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 @Configuration
 public class BindingConfiguration {
 
-    @Bean
-    public ActiveSunetidDataBinder activeSunetidDataBinder(final LDAPDataAccess ldapDataAccess) {
-        return new ActiveSunetidDataBinder(ldapDataAccess);
-    }
+   
 
     @Bean
     public BasePathDataBinder basePathDataBinder(final ServletContext servletContext) {
@@ -86,13 +81,11 @@ public class BindingConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
-    public DataBinder dataBinder(final UserDataBinder userDataBinder,
-            final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
+    public DataBinder dataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder,
             final BookmarkDataBinder bookmarkDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
             final ModelDataBinder modelDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(19);
         dataBinders.add(userDataBinder);
-        dataBinders.add(activeSunetidDataBinder);
         dataBinders.add(ticketDataBinder);
         dataBinders.add(new BooleanSessionParameterDataBinder(Model.DEBUG, Model.DEBUG));
         dataBinders.add(remoteProxyIPDataBinder());
@@ -235,13 +228,11 @@ public class BindingConfiguration {
     }
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/userdata")
-    public DataBinder userDataDataBinder(final UserDataBinder userDataBinder,
-            final ActiveSunetidDataBinder activeSunetidDataBinder, final TicketDataBinder ticketDataBinder,
+    public DataBinder userDataDataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder,
             final BasePathDataBinder basePathDataBinder, final BookmarkingDataBinder bookmarkingDataBinder,
             final BookmarkDataBinder bookmarkDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(9);
         dataBinders.add(userDataBinder);
-        dataBinders.add(activeSunetidDataBinder);
         dataBinders.add(ticketDataBinder);
         dataBinders.add(remoteProxyIPDataBinder());
         dataBinders.add(emridDataBinder());
