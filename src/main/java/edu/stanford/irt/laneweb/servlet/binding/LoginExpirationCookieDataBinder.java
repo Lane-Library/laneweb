@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.CookieName;
 
 public class LoginExpirationCookieDataBinder implements DataBinder {
@@ -40,7 +39,7 @@ public class LoginExpirationCookieDataBinder implements DataBinder {
                 }
             }
             if (expiration != null) {
-                model.put(Model.PERSISTENT_LOGIN_EXPIRATION_DATE, expiration);
+                model.put(CookieName.EXPIRATION.toString(), expiration);
             }
         }
     }

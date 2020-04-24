@@ -152,11 +152,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <artifactId>spring-ldap-core</artifactId>
-            <groupId>org.springframework.ldap</groupId>
-            <version>2.3.2.RELEASE</version>
-        </dependency>
-        <dependency>
             <artifactId>spring-mobile-device</artifactId>
             <groupId>org.springframework.mobile</groupId>
             <version>1.1.5.RELEASE</version>

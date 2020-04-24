@@ -40,48 +40,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             event.preventDefault();
         },
 
-        "test redirectcme click" : function() {
-            var node = document.querySelector("#cmeredirect");
-            node.addEventListener("click", this.preventDefault);
-            node.click();
-            node.removeEventListener("click", this.preventDefault);
-            Y.Assert.areSame("/plain/shibboleth-persistent-extension.html", this.url);
-        },
-
-        "test proxylogin click" : function() {
-            var node = document.querySelector("#proxylogin");
-            node.addEventListener("click", this.preventDefault);
-            node.click();
-            node.removeEventListener("click", this.preventDefault);
-            Y.Assert.areSame("/plain/shibboleth-persistent-extension.html", this.url);
-        },
-
-        "test stanford click" : function() {
-            var node = document.querySelector("#proxylogin");
-            node.addEventListener("click", this.preventDefault);
-            node.click();
-            node.removeEventListener("click", this.preventDefault);
-            var stanford = document.querySelector("#Stanford");
-            stanford.addEventListener("click", this.preventDefault);
-            stanford.click();
-            stanford.removeEventListener("click", this.preventDefault);
-            var expected = stanford.pathname + stanford.search;
-            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=https%3A%2F%2Flogin.laneproxy.stanford.edu%2Flogin%3Furl%3Dfoo", expected);
-        },
-
-        "test stanford click 2" : function() {
-            var node = document.querySelector("#proxylogin2");
-            node.addEventListener("click", this.preventDefault);
-            node.click();
-            node.removeEventListener("click", this.preventDefault);
-            var stanford = document.querySelector("#Stanford");
-            stanford.addEventListener("click", this.preventDefault);
-            stanford.click();
-            stanford.removeEventListener("click", this.preventDefault);
-            var expected = stanford.pathname + stanford.search;
-            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=http%3A%2F%2Flaneproxy.stanford.edu%2Flogin%3Furl%3Dfoo", expected);
-        },
-
         "test unchecked is persistent login" : function() {
             var node = document.querySelector("#is-persistent-login");
             node.checked = false;
@@ -102,16 +60,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             Y.Assert.areSame("isPersistent", this.cookieArgs.args[0]);
             Y.Assert.areSame("yes", this.cookieArgs.args[1]);
         },
-
-        "test persistent-login click" : function() {
-            var node = document.querySelector("#persistent-login");
-            var href = null;
-            L.setLocationHref = function(h) {
-                href = h;
-            };
-            node.click();
-            Y.Assert.areSame("/persistentLogin.html?pl=renew&url=/myaccounts.html", href);
-        }
 
     });
 

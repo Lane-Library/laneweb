@@ -47,7 +47,7 @@ public class LoginExpirationCookieDataBinderTest {
                 Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertEquals("1", this.model.get(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 
@@ -58,7 +58,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getValue()).andReturn(Long.toString(System.currentTimeMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertNull(this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertNull(this.model.get(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 
@@ -70,7 +70,7 @@ public class LoginExpirationCookieDataBinderTest {
                 Long.toString(System.currentTimeMillis() + Duration.ofDays(1).plus(Duration.ofMillis(100)).toMillis()));
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertEquals("1", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertEquals("1", this.model.get(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 
@@ -81,7 +81,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getValue()).andReturn("bad number");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertEquals("ERROR", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertEquals("ERROR", this.model.get(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 
@@ -90,7 +90,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         replay(this.request);
         this.binder.bind(this.model, this.request);
-        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertFalse(this.model.containsKey(CookieName.EXPIRATION.toString()));
         verify(this.request);
     }
 
@@ -99,7 +99,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.request.getCookies()).andReturn(null);
         replay(this.request);
         this.binder.bind(this.model, this.request);
-        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertFalse(this.model.containsKey(CookieName.EXPIRATION.toString()));
         verify(this.request);
     }
 
@@ -109,7 +109,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn("name");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertFalse(this.model.containsKey(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 
@@ -119,7 +119,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getName()).andReturn(CookieName.USER.toString());
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertFalse(this.model.containsKey(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertFalse(this.model.containsKey(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 
@@ -130,7 +130,7 @@ public class LoginExpirationCookieDataBinderTest {
         expect(this.cookie.getValue()).andReturn("");
         replay(this.request, this.cookie);
         this.binder.bind(this.model, this.request);
-        assertEquals("ERROR", this.model.get(Model.PERSISTENT_LOGIN_EXPIRATION_DATE));
+        assertEquals("ERROR", this.model.get(CookieName.EXPIRATION.toString()));
         verify(this.request, this.cookie);
     }
 }

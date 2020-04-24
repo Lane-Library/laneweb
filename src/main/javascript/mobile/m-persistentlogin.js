@@ -7,32 +7,6 @@ $.LANE.popupWindow = function(url){
     });
 };
 
-(function() {
-
-    var redirectUrl;
-
-    $(document).on("click", 'a[href*="laneproxy"]', function(event) {
-        var link = event.currentTarget, threeDays = 3600 *3 ,
-        now = new Date(), cookieValue = $.LANE.getCookie('lane-login-expiration-date');
-        if (window.model.isActiveSunetID && cookieValue &&  (cookieValue - threeDays) < now.getTime()){
-            redirectUrl = encodeURIComponent(link.href);
-            $.LANE.popupWindow(window.model['base-path'] + '/m/plain/shibboleth-persistentlogin-extension.html');
-            event.preventDefault();
-        }
-    });
-
-    $(document).on("click", '#shibboleth-links a', function(event) {
-        var persistentUrl = window.model['base-path']+ '/persistentLogin.html?pl=';
-        if (!redirectUrl) {
-            redirectUrl = "/index.html";
-        }
-        event.preventDefault();
-        document.location =   persistentUrl + 'renew&url='+ encodeURIComponent(redirectUrl);
-    });
-
-})();
-
-
 $(document).on("click", "#close", function() {
     document.location = window.model['base-path'] + '/';
 });

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" class="login">
    <li>
-      <a href="/myaccounts.html">
+      <a href="/secure/login.html?url=%2FredirectPath">
          <i class="fa fa-lock"/> STANFORD LOGIN</a>
    </li>
    <li class="login-item-active">
