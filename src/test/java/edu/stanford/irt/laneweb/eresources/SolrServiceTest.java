@@ -50,6 +50,62 @@ public class SolrServiceTest {
     }
 
     @Test
+    public final void testBrowseByQueryString() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseByQuery("query");
+        verify(this.template, this.cursor);
+    }
+
+    @Test
+    public final void testBrowseByQueryStringChar() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseByQuery("query", 'a');
+        verify(this.template, this.cursor);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseByQueryStringCharException() {
+        this.solrService.browseByQuery(null, 'a');
+    }
+
+    @Test
+    public final void testBrowseByQueryStringCharHash() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseByQuery("type", '#');
+        verify(this.template, this.cursor);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseByQueryStringException() {
+        this.solrService.browseByQuery(null);
+    }
+
+    @Test
+    public final void testBrowseMeshByQuery() {
+        expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
+        expect(this.cursor.hasNext()).andReturn(false);
+        replay(this.template, this.cursor);
+        this.solrService.browseMeshByQuery("type", "mesh");
+        verify(this.template, this.cursor);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseMeshByQuery2() {
+        this.solrService.browseMeshByQuery(null, "mesh");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public final void testBrowseMeshByQueryException1() {
+        this.solrService.browseMeshByQuery("type", null);
+    }
+
+    @Test
     public final void testFacetByField() {
         FacetPage<Object> fpage = mock(FacetPage.class);
         expect(this.template.queryForFacetPage(anyObject(), anyObject(), anyObject())).andReturn(fpage);
