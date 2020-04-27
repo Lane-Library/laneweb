@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
@@ -50,7 +51,7 @@ public class PersistentLoginController {
     }
 
     @GetMapping(value = { "/secure/persistentLogin/myaccount.html", "/persistentLogin/myaccount.html" })
-    public String myaccount(@ModelAttribute(Model.USER) final User user, final String pl,
+    public String myaccount(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user, final String pl,
             final HttpServletRequest request, final HttpServletResponse response) {
         if ("true".equals(pl) && null != user) {
             setCookies(request, response, user);
@@ -63,7 +64,7 @@ public class PersistentLoginController {
   
 
     @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
-    public String enablePersistentLogin(@ModelAttribute(Model.USER) final User user, final String url,
+    public String enablePersistentLogin(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user, final String url,
             final HttpServletRequest request, final HttpServletResponse response) {
         if (null != user) {
             setCookies(request, response, user);
