@@ -51,8 +51,8 @@ public class PersistentLoginController {
     }
 
     @GetMapping(value = { "/secure/persistentLogin/myaccount.html", "/persistentLogin/myaccount.html" })
-    public String myaccount(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user, final String pl,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public String myaccount(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user,
+            final String pl, final HttpServletRequest request, final HttpServletResponse response) {
         if ("true".equals(pl) && null != user) {
             setCookies(request, response, user);
         } else {
@@ -61,16 +61,24 @@ public class PersistentLoginController {
         return "redirect:/myaccounts.html";
     }
 
-  
-
     @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
-    public String enablePersistentLogin(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user, final String url,
-            final HttpServletRequest request, final HttpServletResponse response) {
+    public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
+            @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
+            final HttpServletResponse response) {
         if (null != user) {
             setCookies(request, response, user);
             return getRedirectURL(url);
         } else {
             resetCookies(response);
+            return "redirect:/error.html";
+        }
+    }
+
+    @GetMapping(value = "/secure/login.html")
+    public String login(final RedirectAttributes redirectAttrs, String url, User user) {
+        if (null != user) {
+            return getRedirectURL(url);
+        } else {
             return "redirect:/error.html";
         }
     }
@@ -128,6 +136,4 @@ public class PersistentLoginController {
             response.addCookie(cookie);
         }
     }
-
-    
 }
