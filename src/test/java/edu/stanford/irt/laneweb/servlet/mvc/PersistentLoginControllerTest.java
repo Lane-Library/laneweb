@@ -71,7 +71,7 @@ public class PersistentLoginControllerTest {
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.enablePersistentLogin(this.user, this.url, this.request,
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, this.url, this.request,
                 this.response);
         assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", redirect);
         assertEquals(1209600, cookie1.getValue().getMaxAge());
@@ -89,7 +89,7 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        this.persistenLoginController.enablePersistentLogin(null, this.url, this.request, this.response);
+        this.persistenLoginController.enablePersistentLogin(null, null, this.url, this.request, this.response);
         assertCookieDeleted(cookie1.getValue());
         assertCookieDeleted(cookie2.getValue());
         verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
@@ -105,7 +105,7 @@ public class PersistentLoginControllerTest {
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.enablePersistentLogin(this.user, null, this.request,
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, null, this.request,
                 this.response);
         assertEquals("redirect:/index.html", redirect);
         assertEquals(1209600, cookie1.getValue().getMaxAge());
@@ -126,7 +126,7 @@ public class PersistentLoginControllerTest {
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.myaccount(this.user, "true", this.request, this.response);
+        String redirect = this.persistenLoginController.myaccount(null, this.user, "true", this.request, this.response);
         assertEquals("redirect:/myaccounts.html", redirect);
         assertEquals(1209600, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
@@ -143,7 +143,7 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.myaccount(null, "true", this.request, this.response);
+        String redirect = this.persistenLoginController.myaccount(null, null, "true", this.request, this.response);
         assertEquals("redirect:/myaccounts.html", redirect);
         assertCookieDeleted(cookie1.getValue());
         assertCookieDeleted(cookie2.getValue());
