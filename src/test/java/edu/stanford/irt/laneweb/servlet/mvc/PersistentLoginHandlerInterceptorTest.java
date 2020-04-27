@@ -40,7 +40,7 @@ public class PersistentLoginHandlerInterceptorTest {
 
     @Test
     public void testPreHandleIsPersistentCookieValueFoo() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri").times(2);
+        expect(this.request.getRequestURI()).andReturn("uri");
         expect(this.request.getQueryString()).andReturn("query-string").times(2);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn("isPersistent");
@@ -67,7 +67,7 @@ public class PersistentLoginHandlerInterceptorTest {
 
     @Test
     public void testPreHandleNoQueryString() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri").times(2);
+        expect(this.request.getRequestURI()).andReturn("uri");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         replay(this.request, this.response, this.cookie);
@@ -77,7 +77,7 @@ public class PersistentLoginHandlerInterceptorTest {
 
     @Test
     public void testPreHandleNotCookie() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri").times(2);
+        expect(this.request.getRequestURI()).andReturn("uri");
         expect(this.request.getQueryString()).andReturn("query-string").times(2);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn("name");
@@ -88,7 +88,7 @@ public class PersistentLoginHandlerInterceptorTest {
 
     @Test
     public void testPreHandleNullCookies() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri").times(2);
+        expect(this.request.getRequestURI()).andReturn("uri");
         expect(this.request.getQueryString()).andReturn("query-string").times(2);
         expect(this.request.getCookies()).andReturn(null);
         replay(this.request, this.response, this.cookie);
@@ -96,29 +96,6 @@ public class PersistentLoginHandlerInterceptorTest {
         verify(this.request, this.response, this.cookie);
     }
 
-    @Test
-    public void testPreHandleSecureLogin() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("/secure/login.html").times(2);
-        expect(this.request.getParameter("url")).andReturn("url");
-        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn("name");
-        expect(this.request.getContextPath()).andReturn("/stage");
-        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=false&url=url");
-        replay(this.request, this.response, this.cookie);
-        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
-        verify(this.request, this.response, this.cookie);
-    }
 
-    @Test
-    public void testPreHandleSecureLoginNullURL() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("/secure/login.html").times(2);
-        expect(this.request.getParameter("url")).andReturn(null);
-        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.cookie.getName()).andReturn("name");
-        expect(this.request.getContextPath()).andReturn("/stage");
-        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=false&url=%2Findex.html");
-        replay(this.request, this.response, this.cookie);
-        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
-        verify(this.request, this.response, this.cookie);
-    }
+   
 }

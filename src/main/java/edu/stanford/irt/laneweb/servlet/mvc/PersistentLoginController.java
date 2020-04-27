@@ -60,12 +60,7 @@ public class PersistentLoginController {
         return "redirect:/myaccounts.html";
     }
 
-    @GetMapping(value = { "/secure/persistentLogin.html" }, params = { "pl=false" })
-    public String disablePersistentLogin(@ModelAttribute(Model.USER) final User user, final String url,
-            final HttpServletResponse response) {
-        resetCookies(response);
-        return getRedirectURL(url);
-    }
+  
 
     @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
     public String enablePersistentLogin(@ModelAttribute(Model.USER) final User user, final String url,

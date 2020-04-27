@@ -1,15 +1,4 @@
 
-$.LANE.popupWindow = function(url){
-    $.mobile.changePage(url, {
-        transition : "pop",
-        reverse : false,
-        changeHash : false
-    });
-};
-
-$(document).on("click", "#close", function() {
-    document.location = window.model['base-path'] + '/';
-});
 
 // click on login link
 $(document).on("click", ".webauthLogin:contains('Logout')", function(e) {

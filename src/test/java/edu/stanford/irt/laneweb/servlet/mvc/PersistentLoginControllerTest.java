@@ -62,34 +62,6 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
-    public void testDisablePersistentLoginUrlNotNull() {
-        Capture<Cookie> cookie1 = newCapture();
-        Capture<Cookie> cookie2 = newCapture();
-        this.response.addCookie(capture(cookie1));
-        this.response.addCookie(capture(cookie2));
-        replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.disablePersistentLogin(this.user, this.url, this.response);
-        assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", redirect);
-        assertCookieDeleted(cookie1.getValue());
-        assertCookieDeleted(cookie2.getValue());
-        verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-    }
-
-    @Test
-    public void testDisablePersistentLoginUrlNull() {
-        Capture<Cookie> cookie1 = newCapture();
-        Capture<Cookie> cookie2 = newCapture();
-        this.response.addCookie(capture(cookie1));
-        this.response.addCookie(capture(cookie2));
-        replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.disablePersistentLogin(this.user, null, this.response);
-        assertEquals("redirect:/index.html", redirect);
-        assertCookieDeleted(cookie1.getValue());
-        assertCookieDeleted(cookie2.getValue());
-        verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-    }
-
-    @Test
     public void testEnablePersistentLoginNotNullUrl() {
         Capture<Cookie> cookie1 = newCapture();
         Capture<Cookie> cookie2 = newCapture();

@@ -28,10 +28,7 @@ public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter
             response.addCookie(cookie);
             response.sendRedirect(request.getContextPath() + "/secure/persistentLogin.html?pl=true&url=" + encodedURL);
             return false;
-        } else if (request.getRequestURI().contains("/secure/login.html")) {
-            response.sendRedirect(request.getContextPath() + "/secure/persistentLogin.html?pl=false&url=" + encodedURL);
-            return false;
-        }
+        } 
         return true;
     }
 
