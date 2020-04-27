@@ -7,6 +7,32 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-04-27" version="3.6.0" description="bug fix release">
+            <action date="2020-04-23" dev="alainb" issue="" type="update">
+               remove auto-renewal of persistent login token for Stanford users
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+            <action date="2020-04-2" dev="" issue="" type="update">
+                  
+            </action>
+         </release>
          <release date="2020-04-20" version="3.5.69" description="release">
             <action date="2020-04-17" dev="ryanmax" issue="LANEWEB-10566" type="update">
                 Update website footer links and format
