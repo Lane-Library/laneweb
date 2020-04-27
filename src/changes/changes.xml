@@ -8,29 +8,23 @@
     </properties>
     <body>
          <release date="2020-04-27" version="3.6.0" description="bug fix release">
-            <action date="2020-04-23" dev="alainb" issue="" type="update">
+            <action date="2020-04-23" dev="alainb" issue="LANEWEB-10562" type="update">
                remove auto-renewal of persistent login token for Stanford users
             </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
+            <action date="2020-04-22" dev="ryanmax" issue="LANEWEB-10567" type="update">
+               frequent 400 errors (bad request) in logs
             </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
+            <action date="2020-04-23" dev="ryanmax" issue="LANEWEB-10569" type="update">
+               support browse by query instead of fixed field (type)
             </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
+            <action date="2020-04-23" dev="alainb" issue="LANEWEB-10550" type="update">
+	           verify and/or update list of Stanford affiliations for persistent login ext   
             </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
+            <action date="2020-04-23" dev="alainb" issue="LANEWEB-10564" type="update">
+               myaccounts functionality
             </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
-            </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
-            </action>
-            <action date="2020-04-2" dev="" issue="" type="update">
-                  
+            <action date="2020-04-22" dev="alainb" issue="LANEWEB-10568" type="update">
+               laneblog image distorted
             </action>
          </release>
          <release date="2020-04-20" version="3.5.69" description="release">
