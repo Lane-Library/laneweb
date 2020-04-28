@@ -70,48 +70,5 @@
             </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <!-- next 5 pipelines are all for backwards browse type compatibility: remove after content changes in 3.6.0 release -->
-        <map:match type="regexp" pattern="browse/type/((.+)?Software, Installed(.+)?).html">
-            <map:generate type="er-browse-all-html">
-                <map:parameter name="query" value="type:&#34;{1}&#34;"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/software-installed-eresource2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match type="wildcard" pattern="a2z-browse/*/*.html">
-            <map:generate type="er-a2z-browse-html">
-                <map:parameter name="base-path" value="{1}"/>
-                <map:parameter name="query" value="type:&#34;{2}&#34;"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match type="wildcard" pattern="subject-browse/*.html">
-            <map:aggregate type="caching" element="doc">
-                <map:generate type="html" src="{content-base}/includes/eresource-subject-browse.html"/>
-                <map:generate type="er-subject-browse">
-                    <map:parameter name="query" value="type:&#34;{1}&#34;"/>
-                </map:generate>
-            </map:aggregate>
-            <map:transform type="saxon" src="classpath:/xsl/eresource-subject-browse.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match type="wildcard" pattern="browse/*/*.html">
-            <map:generate type="er-browse-html">
-                <map:parameter name="query" value="type:&#34;{2}&#34;"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
-                <map:parameter name="browse-query" value="{2}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="mesh/type/*.html" type="wildcard">
-            <map:generate type="er-mesh-html">
-                <map:parameter name="query" value="type:&#34;{1}&#34;"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
-                <map:parameter name="browse-query" value="{1}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
     </map:pipeline>
 </map:sitemap>
