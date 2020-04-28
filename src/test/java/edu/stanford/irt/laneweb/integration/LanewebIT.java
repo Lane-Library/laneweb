@@ -76,7 +76,7 @@ public class LanewebIT {
     public void testEresourceBrowse() throws Exception {
         this.mockMvc
                 .perform(
-                        get("/eresources/browse/type/Journal.html").servletPath("/eresources/browse/type/Journal.html"))
+                        get("/eresources/browse/query/type:Journal.html").servletPath("/eresources/browse/query/type:Journal.html"))
                 .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
     }
 
