@@ -46,14 +46,23 @@
     
     <x:scenario label="Scenario for testing template with match 's:result[@type='eresource']">
         <x:context>
-            <s:result type="eresource"/>
+            <s:result type="eresource">
+                <s:recordType>foo</s:recordType>
+                <s:recordId>12345</s:recordId>
+            </s:result>
         </x:context>
         <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
             <li class="resource" data-sid="">
             <span class="primaryType"/>
             <div class="resultInfo">
             </div>
-            <div class="sourceInfo" />
+            <div class="sourceInfo" >
+               <span class="permalink no-bookmarking">
+                  <a title="permalink to this result" href="/view/foo/12345">
+                     <i class="fa fa-link fa-rotate-90"/>
+                  </a>
+               </span>
+            </div>
         </li>
         </x:expect>
     </x:scenario>

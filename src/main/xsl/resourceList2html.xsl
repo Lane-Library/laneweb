@@ -91,6 +91,7 @@
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
+                    <br/>
                     <div class="no-bookmarking"><div class="pure-g">
                       <div class="pure-u-1-3"/>
                       <div class="pure-u-1-3">
@@ -218,6 +219,9 @@
             <xsl:apply-templates select="s:description"/>
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
+                <span class="permalink no-bookmarking">
+                    <a title="permalink to this result" href="/view/{s:recordType}/{s:recordId}"><i class="fa fa-link fa-rotate-90"></i></a>
+                </span>
             </div>
         </li>
     </xsl:template>

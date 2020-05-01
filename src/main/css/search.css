@@ -118,3 +118,9 @@ li.active .description {
     padding: 1px 5px;
     border: 1px solid #ccc;
 }
+.permalink {
+    float: right;
+    padding-left: 60px;
+    /* drop link to next line when result only has one .resultInfo div */
+    padding-left: 75%;
+}
