@@ -220,7 +220,7 @@
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
                 <span class="permalink no-bookmarking">
-                    <a title="permalink to this result" href="/view/{s:recordType}/{s:recordId}"><i class="fa fa-link fa-rotate-90"></i></a>
+                    Permalink: <a title="permanent link to this record" href="/view/{s:recordType}/{s:recordId}"><i class="fa fa-link fa-rotate-90"></i></a>
                 </span>
             </div>
         </li>
@@ -248,7 +248,7 @@
                 <xsl:copy-of select="$label"/><a href="/index.html">Lane Website</a>
             </xsl:when>
             <xsl:when test=". = 'redivis'">
-                <xsl:copy-of select="$label"/><a href="https://redivis.com/StanfordPHS">Redivis - Stanford Center for Population Health Sciences</a>
+                <xsl:copy-of select="$label"/><a href="https://redivis.com/StanfordPHS" title="Redivis - Stanford Center for Population Health Sciences">Redivis</a>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
