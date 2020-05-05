@@ -46,7 +46,8 @@
             <div class="sourceInfo">
                 <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
                 <span class="permalink no-bookmarking">
-                    Permalink: <a title="permanent link to this record" href="/view/{s:recordType}/{s:recordId}"><i class="fa fa-link fa-rotate-90"></i></a>
+                    Permalink: <a title="Right click and copy for a permanent link to this record." href="/view/{s:recordType}/{s:recordId}">
+                    <i class="fa fa-link fa-rotate-90"></i></a>
                 </span>
             </div>
         </li>
