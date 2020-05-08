@@ -220,8 +220,8 @@
             <div class="sourceInfo">
                 <xsl:apply-templates select="s:recordType"/>
                 <span class="permalink no-bookmarking">
-                    Permalink: <a title="Right click and copy for a permanent link to this record." href="/view/{s:recordType}/{s:recordId}">
-                    <i class="fa fa-link fa-rotate-90"></i></a>
+                    <a title="Right click and copy for a permanent link to this record." href="/view/{s:recordType}/{s:recordId}">
+                    <i class="fa fa-link fa-rotate-90"></i> Permalink</a>
                 </span>
             </div>
         </li>

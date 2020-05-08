@@ -61,10 +61,9 @@
             <div class="sourceInfo">Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=301866"
                   title="Lane Catalog Record">Lane Catalog</a>
                <span class="permalink no-bookmarking">
-                    Permalink: <a title="Right click and copy for a permanent link to this record."
+                  <a title="Right click and copy for a permanent link to this record."
                      href="/view/bib/301866">
-                     <i class="fa fa-link fa-rotate-90"/>
-                  </a>
+                     <i class="fa fa-link fa-rotate-90"/> Permalink</a>
                </span>
             </div>
          </li>
@@ -112,10 +111,9 @@
             <div class="sourceInfo">Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=123"
                   title="Lane Catalog Record">Lane Catalog</a>
                <span class="permalink no-bookmarking">
-                    Permalink: <a title="Right click and copy for a permanent link to this record."
+                  <a title="Right click and copy for a permanent link to this record."
                      href="/view/bib/123">
-                     <i class="fa fa-link fa-rotate-90"/>
-                  </a>
+                     <i class="fa fa-link fa-rotate-90"/> Permalink</a>
                </span>
             </div>
          </li>
