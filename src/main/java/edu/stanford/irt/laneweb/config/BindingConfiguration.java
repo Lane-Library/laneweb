@@ -179,7 +179,6 @@ public class BindingConfiguration {
         templateNames.add("wilson");
         templateNames.add("libapps");
         Map<String, String> templateMap = new HashMap<>();
-        templateMap.put("^/libapps/.*", "libapps");
         templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "bassettLargerView");
         templateMap.put("^/discoveryLoginPage.html", "none");
         templateMap.put("^/devDiscoveryLoginPage.html", "none");
