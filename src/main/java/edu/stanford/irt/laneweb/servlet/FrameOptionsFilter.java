@@ -23,8 +23,8 @@ public class FrameOptionsFilter extends AbstractLanewebFilter {
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) throws IOException, ServletException {
         String referer = request.getHeader("referer");
-        if (referer != null && !STANFORD_PATTERN.matcher(referer).matches()
-                && referer.indexOf(".telemetrytv.com") == -1) {
+        if (referer == null ||( !STANFORD_PATTERN.matcher(referer).matches()
+                && referer.indexOf(".telemetrytv.com") == -1)) {
             response.setHeader("X-Frame-Options", "SAMEORIGIN");
         }
         chain.doFilter(request, response);
