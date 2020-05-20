@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
-        <link rel="stylesheet" type="text/css" href="//lane-stanford.libguides.com/web/css2.0.7/lg-public.min.css"/>
+        <link rel="stylesheet" type="text/css" href="//lane-stanford.libguides.com/web/css2.1.2/lg-public.min.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}-${git.commit.id.abbrev}" />
         <link rel="stylesheet" type="text/css" href="//libapps.s3.amazonaws.com/sites/18925/include/libapps.css"/> 
         <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}-${git.commit.id.abbrev}" media="print" />
