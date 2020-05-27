@@ -198,7 +198,7 @@
             isTrackableLocalClick = function(link) {
                 var isTrackable, pathname = link.pathname;
                 // rely on page tracking for \.html$ and \/$pages except for cookiesFetch
-                if (!(/cookiesFetch/).test(pathname) && (/\.html$/).test(pathname) || (/\/$/).test(pathname)) {
+                if (!(/cookiesFetch/).test(pathname) && (/\.html$/).test(pathname) || (/libapps/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
                     //all others fall through to trackable
                 } else {
