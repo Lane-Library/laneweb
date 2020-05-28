@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width,maximum-scale=1.0,minimum-scale=1.0" />
         <link rel="icon" type="image/png" href="/favicon.ico" />
         <link rel="apple-touch-icon-precomposed" href="http://lane.stanford.edu/apple-touch-icon.png" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/mobile/lane-mobile.css?${timestamp}" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/mobile/lane-mobile.css?${project.version}-${git.commit.id.abbrev}" />
         <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}-${git.commit.id.abbrev}"></script>
     </head>
     <body>
