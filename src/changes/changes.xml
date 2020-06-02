@@ -7,6 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+          <release date="2020-05-22" version="3.6.2" description="bug fix release">
+            <action date="2020-05-17" dev="alainb" issue="LANEWEB-10571" type="fix">
+                Security: no X-Frame-Options header, nor a Content-Security-Policy header
+            </action>
+         </release>
+         <release date="2020-05-11" version="3.6.1" description="bug fix release">
+            <action date="2020-05-07" dev="ryanmax" issue="LANEWEB-10570" type="update">
+                direct link to search record (permalink)
+            </action>
+         </release>
          <release date="2020-04-27" version="3.6.0" description="bug fix release">
             <action date="2020-04-23" dev="alainb" issue="LANEWEB-10562" type="update">
                remove auto-renewal of persistent login token for Stanford users

@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Filter to add an X-Frame-Options header with value SAMEORIGIN when a referrer is present and not .stanford.edu. This
- * filter will not apply to requests lacking a referrer, including HTTPS requests. See case 112758 for more details.
+ * Filter to add an X-Frame-Options header with value SAMEORIGIN when a referrer is present and not .stanford.edu or
+ * .telemetrytv.com. This filter also applies to requests lacking a referrer. See cases 112758 and LANEWEB-10571 for
+ * more details.
  */
 @WebFilter("*.html")
 public class FrameOptionsFilter extends AbstractLanewebFilter {
@@ -23,8 +24,8 @@ public class FrameOptionsFilter extends AbstractLanewebFilter {
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) throws IOException, ServletException {
         String referer = request.getHeader("referer");
-        if (referer != null && !STANFORD_PATTERN.matcher(referer).matches()
-                && referer.indexOf(".telemetrytv.com") == -1) {
+        if (referer == null
+                || (!STANFORD_PATTERN.matcher(referer).matches() && referer.indexOf(".telemetrytv.com") == -1)) {
             response.setHeader("X-Frame-Options", "SAMEORIGIN");
         }
         chain.doFilter(request, response);

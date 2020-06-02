@@ -36,6 +36,7 @@ public class FrameOptionsFilterTest {
     @Test
     public void testInternalDoFilterNullReferrer() throws IOException, ServletException {
         expect(this.request.getHeader("referer")).andReturn(null);
+        this.response.setHeader("X-Frame-Options", "SAMEORIGIN");
         this.chain.doFilter(this.request, this.response);
         replay(this.chain, this.request, this.response);
         this.filter.doFilter(this.request, this.response, this.chain);
