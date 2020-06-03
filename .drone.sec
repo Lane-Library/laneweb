@@ -7,6 +7,7 @@
 #           @filename
 #           string_value
 
+gcp_key             base64vault://${GCP_KEY_PATH}
 docker_username     ${DOCKER_REGISTRY_USERNAME}                 -image plugins/docker
 docker_password     vault://${DOCKER_REGISTRY_PASSWORD_PATH}    -image plugins/docker
 slack_webhook       vault://${SEC_PATH}/slack/irt-dcs-cicd      -image plugins/slack

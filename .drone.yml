@@ -22,6 +22,30 @@ pipeline:
     when:
       status: success
       branch: master
+      event: [push, pull_request]
+
+
+  publish-tag:
+    image: plugins/docker
+    registry: gcr.io
+    repo: gcr.io/som-laneweb/laneweb
+    tag:
+      - latest
+      - "${DRONE_COMMIT_SHA}"
+    secrets: [ docker_username, docker_password ]
+    when:
+      event: tag
+      tag: laneweb*
+          
+  add-last-git-tag:
+    image: gcr.io/clever-circlet-125504/gcloud
+    pull: true
+    commands:
+      - make add-last-git-tag
+    secrets: [ gcp_key ]
+    when:
+      event: tag
+      tag: laneweb*
 
   downstream:
     image: plugins/downstream
