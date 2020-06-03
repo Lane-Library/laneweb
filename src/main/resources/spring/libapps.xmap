@@ -3,11 +3,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
    	
-   	
     <map:pipeline type="caching">
+    
         <map:match pattern="menu-guide.html" type="wildcard">
+	        <map:aggregate type="caching" element="doc">
+	            <map:generate type="file" src="cocoon://libapps/libapps-menu-guide.html"/>
+	            <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
+	        </map:aggregate>
+			<map:transform type="saxon" src="classpath:/xsl/menu-guide.xsl"/>
+	        <map:serialize type="xml"/>
+        </map:match>
+   
+        <map:match pattern="libapps-menu-guide.html" type="wildcard">
 			<map:generate type="file" src="cachedxml:600:{libapps-service-uri}/oai.php?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=guides"/>
-	         <map:transform type="saxon" src="classpath:/xsl/menu-guide-libapps.xsl"/>
+	         <map:transform type="saxon" src="classpath:/xsl/libapps-menu-guide.xsl"/>
 	        <map:serialize type="xml"/>
         </map:match>
    
