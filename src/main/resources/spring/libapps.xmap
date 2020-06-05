@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
-   	
-    <map:pipeline type="caching">
-    
-        <map:match pattern="menu-guide.html" type="wildcard">
-	        <map:aggregate type="caching" element="doc">
-	            <map:generate type="file" src="cocoon://libapps/libapps-menu-guide.html"/>
-	            <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
-	        </map:aggregate>
-			<map:transform type="saxon" src="classpath:/xsl/menu-guide.xsl"/>
-	        <map:serialize type="xml"/>
-        </map:match>
+<map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd"
+>
+   <map:pipeline type="caching">
    
-        <map:match pattern="libapps-menu-guide.html" type="wildcard">
-			<map:generate type="file" src="cachedxml:600:{libapps-service-uri}/oai.php?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=guides"/>
-	         <map:transform type="saxon" src="classpath:/xsl/libapps-menu-guide.xsl"/>
-	        <map:serialize type="xml"/>
-        </map:match>
-   
-        <map:match pattern="content/**" type="wildcard">
-			<map:generate type="html" src="https://lane-stanford.libguides.com/{1}?{query-string}"/>
-	        <map:transform type="xinclude"/>
-	        <map:transform type="saxon" src="classpath:/xsl/libapps.xsl"/>
-	        <map:serialize type="xhtml"/>
-        </map:match>
-        
-   		<map:match pattern="**" type="wildcard">
-            <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
-                <map:generate type="file" src="cocoon://libapps/content/{1}"/>
-                <map:generate type="file" src="cocoon://content/templates/libapps.xml"/>
-            </map:aggregate>
-            <map:select type="cme-links">
-                <map:when test="true">
-                    <map:transform type="html-cme-links"/>
-                </map:when>
-            </map:select>
-            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
-            <map:select type="logged-in">
-                <map:when test="true">
-                    <map:transform type="xinclude"/>
-                </map:when>
-            </map:select>
-            <map:select type="proxy-links">
-                <map:when test="true">
-                    <map:transform type="proxy-links"/>
-                </map:when>
-            </map:select>
-            <map:transform type="namespace-filter"/>
-            <map:transform type="debug"/>
-            <map:serialize type="html5"/>
-        </map:match>
-
-	</map:pipeline>
-	    
+      <!-- ********* menu ********** -->
+      <!-- Get menu from https://lane-stanford.libguides.com/ -->
+      <map:match pattern="libapps-guides-menu.html" type="wildcard">
+         <map:generate type="file"
+            src="cachedxml:600:{libapps-service-uri}/oai.php?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=guides"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps-guides-menu.xsl"/>
+         <map:serialize type="xml"/>
+      </map:match>
+      
+      <!-- Guides Menu display in laneweb -->
+      <map:match pattern="guides-menu.html" type="wildcard">
+         <map:aggregate type="caching" element="doc">
+            <map:generate type="file" src="cocoon://libapps/libapps-guides-menu.html"/>
+            <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
+         </map:aggregate>
+         <map:transform type="saxon" src="classpath:/xsl/guides-menu.xsl"/>
+         <map:serialize type="xml"/>
+      </map:match>
+      
+      <!-- Guides Menu display in lane-stanford.libguides.com -->
+      <map:match pattern="lane-guides-menu.html" type="wildcard">
+         <map:generate type="file" src="cocoon://libapps/guides-menu.html"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps-links.xsl"/>
+         <map:serialize type="xml"/>
+      </map:match>
+      
+      
+      
+       <!-- ********* CONTENT ********** -->
+       <!-- Content from lane-stanford.libguides.com -->
+      <map:match pattern="content/**" type="wildcard">
+         <map:generate type="html" src="cache:600:{libapps-service-uri}/{1}?{query-string}"/>
+         <map:transform type="xinclude"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps.xsl"/>
+         <map:serialize type="xhtml"/>
+      </map:match>
+      
+      <!--  Apply template -->
+      <map:match pattern="**" type="wildcard">
+         <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
+            <map:generate type="file" src="cocoon://libapps/content/{1}"/>
+            <map:generate type="file" src="cocoon://content/templates/libapps.xml"/>
+         </map:aggregate>
+         <map:select type="cme-links">
+            <map:when test="true">
+               <map:transform type="html-cme-links"/>
+            </map:when>
+         </map:select>
+         <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+         <map:select type="logged-in">
+            <map:when test="true">
+               <map:transform type="xinclude"/>
+            </map:when>
+         </map:select>
+         <map:select type="proxy-links">
+            <map:when test="true">
+               <map:transform type="proxy-links"/>
+            </map:when>
+         </map:select>
+         <map:transform type="namespace-filter"/>
+         <map:transform type="debug"/>
+         <map:serialize type="html5"/>
+      </map:match>
+   </map:pipeline>
 </map:sitemap>
