@@ -322,7 +322,7 @@ public class LaneSearchIT {
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", this.ns).string("Book"))
                 .andExpect(
-                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", this.ns)
+                        xpath("//h:li[position() <= 3]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", this.ns)
                                 .exists());
     }
 }
