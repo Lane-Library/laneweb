@@ -58,6 +58,8 @@ public final class Model {
     public static final String IS_ACTIVE_SUNETID = "isActiveSunetID";
 
     public static final String ITEMS = "items";
+    
+    public static final String LIBAPPS_SERVICE_URI = "libapps-service-uri";
 
     public static final String LIMIT = "limit";
 
@@ -159,6 +161,7 @@ public final class Model {
 
     public static final String VERSION = "version";
 
+    
     private Model() {
         // private constructior
     }
