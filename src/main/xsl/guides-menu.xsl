@@ -6,10 +6,10 @@
 
    <xsl:template match="/doc">
       <ul>
-         <xsl:for-each select="//h:li">
+         <xsl:for-each-group select="//h:li" group-by=".">
             <xsl:sort select="."/>
             <xsl:copy-of select="."/>
-         </xsl:for-each>
+         </xsl:for-each-group>
       </ul>
    </xsl:template>
 
