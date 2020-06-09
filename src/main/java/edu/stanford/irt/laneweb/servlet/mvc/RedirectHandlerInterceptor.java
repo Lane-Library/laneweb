@@ -14,8 +14,6 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
 
     private RedirectProcessor redirectProcessor;
 
-    private static final String HTTPS = "https";
-
     public RedirectHandlerInterceptor(final RedirectProcessor redirectProcessor) {
         this.redirectProcessor = redirectProcessor;
     }
@@ -28,13 +26,6 @@ public class RedirectHandlerInterceptor extends HandlerInterceptorAdapter {
         String uri = requestURI.substring(basePath.length());
         String redirectURL = this.redirectProcessor.getRedirectURL(uri, basePath, request.getQueryString());
         if (redirectURL != null) {
-            // LANEWEB-10573
-            if (request.getHeader("gohttps") != null || HTTPS.equals(request.getHeader("x-forwarded-proto"))) {
-                StringBuilder httpsRedirectURL = new StringBuilder(HTTPS + "://");
-                httpsRedirectURL.append(request.getLocalName());
-                httpsRedirectURL.append(redirectURL);
-                redirectURL = httpsRedirectURL.toString();
-            }
             response.sendRedirect(redirectURL);
             return false;
         }

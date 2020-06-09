@@ -51,8 +51,6 @@ public class RedirectHandlerInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/classes");
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
-        expect(this.request.getHeader("gohttps")).andReturn(null);
-        expect(this.request.getHeader("x-forwarded-proto")).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/classes", "", null)).andReturn("/classes/");
         this.response.sendRedirect("/classes/");
         replay(this.request, this.response, this.redirectProcessor);
@@ -65,8 +63,6 @@ public class RedirectHandlerInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/clinician");
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getQueryString()).andReturn(null);
-        expect(this.request.getHeader("gohttps")).andReturn(null);
-        expect(this.request.getHeader("x-forwarded-proto")).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/clinician", "", null)).andReturn("/clinician/");
         this.response.sendRedirect("/clinician/");
         replay(this.request, this.response, this.redirectProcessor);
@@ -78,8 +74,6 @@ public class RedirectHandlerInterceptorTest {
     public void testSlashLKSCPrint() throws IOException {
         expect(this.request.getRequestURI()).andReturn("/lksc-print.html");
         expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getHeader("gohttps")).andReturn(null);
-        expect(this.request.getHeader("x-forwarded-proto")).andReturn(null);
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/lksc-print.html", "", null)).andReturn("/help/lksc-print.html");
         this.response.sendRedirect("/help/lksc-print.html");
@@ -93,39 +87,8 @@ public class RedirectHandlerInterceptorTest {
         expect(this.request.getRequestURI()).andReturn("/laneweb/m");
         expect(this.request.getContextPath()).andReturn("/laneweb");
         expect(this.request.getQueryString()).andReturn(null);
-        expect(this.request.getHeader("gohttps")).andReturn(null);
-        expect(this.request.getHeader("x-forwarded-proto")).andReturn(null);
         expect(this.redirectProcessor.getRedirectURL("/m", "/laneweb", null)).andReturn("/laneweb/m/");
         this.response.sendRedirect("/laneweb/m/");
-        replay(this.request, this.response, this.redirectProcessor);
-        assertFalse(this.interceptor.preHandle(this.request, this.response, null));
-        verify(this.request, this.response, this.redirectProcessor);
-    }
-    
-    @Test
-    public void testHttpsReponseWithGoHttps() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("/classes");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getQueryString()).andReturn(null);
-        expect(this.request.getHeader("gohttps")).andReturn("yes");
-        expect(this.request.getLocalName()).andReturn("localhost");
-        expect(this.redirectProcessor.getRedirectURL("/classes", "", null)).andReturn("/classes/");
-        this.response.sendRedirect("https://localhost/classes/");
-        replay(this.request, this.response, this.redirectProcessor);
-        assertFalse(this.interceptor.preHandle(this.request, this.response, null));
-        verify(this.request, this.response, this.redirectProcessor);
-    }
-    
-    @Test
-    public void testHttpsReponseWithXForwardedProto() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("/classes");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getQueryString()).andReturn(null);
-        expect(this.request.getHeader("gohttps")).andReturn(null);
-        expect(this.request.getHeader("x-forwarded-proto")).andReturn("https");
-        expect(this.request.getLocalName()).andReturn("localhost");
-        expect(this.redirectProcessor.getRedirectURL("/classes", "", null)).andReturn("/classes/");
-        this.response.sendRedirect("https://localhost/classes/");
         replay(this.request, this.response, this.redirectProcessor);
         assertFalse(this.interceptor.preHandle(this.request, this.response, null));
         verify(this.request, this.response, this.redirectProcessor);
