@@ -24,7 +24,7 @@ include ${FRAMEWORK_DIR}/makefile_parts/shared.mk
 include ${FRAMEWORK_DIR}/makefile_parts/vault.mk
 include ${FRAMEWORK_DIR}/makefile_parts/docker-compose.mk
 include ${FRAMEWORK_DIR}/makefile_parts/sonarqube.mk
-include ${FRAMEWORK_DIR}/makefile_parts/drone08.mk
+include ${FRAMEWORK_DIR}/makefile_parts/drone1.mk
 include ${FRAMEWORK_DIR}/makefile_parts/deps.mk
 # END COMMON MAKEFILE PARTS INCLUDES
 

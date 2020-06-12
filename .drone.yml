@@ -1,73 +1,85 @@
-pipeline: 
+kind: pipeline
+type: kubernetes
+name: drone
 
-#   code-analysis:
-#     image: aosapps/drone-sonar-plugin:0.8
-#     timeout: 20
-#     level: INFO
-#     showProfiling: true
-#     secrets: [sonar_host, sonar_token]
-#     sources: src/main/java,src/main/javascript,src/main/css
-#     exclusions: "**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css"
-#     when:
-#       branch: master
-#
-  publish:
-    image: plugins/docker
-    registry: gcr.io
-    repo: gcr.io/som-laneweb/laneweb
-    tag:
-      - latest
-      - "${DRONE_COMMIT_SHA}"
-    secrets: [ docker_username, docker_password ]
+metadata:
+  namespace: drone
+
+steps:
+  - name: publish
+    pull: always
+    image: gcr.io/clever-circlet-125504/drone-kaniko
+    settings:
+      registry: gcr.io
+      repo: som-laneweb/laneweb
+      cache: true
+      tag:
+        - latest
+        - "${DRONE_COMMIT_SHA}"
+      json_key:
+        from_secret: docker_password
     when:
-      status: success
-      branch: master
-      event: [push, pull_request]
+      branch:
+        - master
 
-
-  publish-tag:
-    image: plugins/docker
-    registry: gcr.io
-    repo: gcr.io/som-laneweb/laneweb
-    tag:
-      - latest
-      - "${DRONE_COMMIT_SHA}"
-    secrets: [ docker_username, docker_password ]
+  # Job triiger by tag event      
+  - name: publish-tag
+    pull: always
+    image: gcr.io/clever-circlet-125504/drone-kaniko
+    settings:
+      registry: gcr.io
+      repo: som-laneweb/laneweb
+      cache: true
+      tag:
+        - latest
+        - "${DRONE_COMMIT_SHA}"
+      json_key:
+        from_secret: docker_password
     when:
-      event: tag
-      tag: laneweb*
-          
-  add-last-git-tag:
+      event:
+        - tag
+  
+  # Job triiger by tag event 
+  - name: add-last-git-tag
+    pull: always
     image: gcr.io/clever-circlet-125504/gcloud
-    pull: true
+    environment:
+      GCP_KEY:
+        from_secret: gcp_key_base64
     commands:
       - make add-last-git-tag
-    secrets: [ gcp_key ]
     when:
-      event: tag
-      tag: laneweb*
+      status: success
+      event: 
+        - tag
 
-  downstream:
+  - name: downstream-build
+    pull: always
     image: plugins/downstream
-    server: https://ci.med.stanford.edu
-    repositories:
-      - irt-lane/kube-laneweb
-    fork: true
-    wait: true
-    secrets: [ downstream_token ]
+    settings:
+      server: https://drone.med.stanford.edu
+      token:
+        from_secret: downstream_token
+      fork: true
+      repositories:
+        - irt-lane/kube-laneweb
     when:
       status: success
 
-  slack:
+  - name: slack
+    pull: always
     image: plugins/slack
-    channel: irt-dcs-cicd
-    username: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
-    template: |
-      *Build ${DRONE_BUILD_NUMBER}*: _*{{ build.status }}*_ on event _*${DRONE_BUILD_EVENT}*_
-      *Author*: ${CI_COMMIT_AUTHOR_NAME}
-      *<${DRONE_BUILD_LINK}|Build logs>* *<${DRONE_REPO_LINK}/commit/${DRONE_COMMIT_SHA}|Code changes>* *<https://sonarqube.med.stanford.edu/dashboard?id=${DRONE_REPO_OWNER}:${DRONE_REPO_NAME}|Code quality>* 
-      *Message*: ${DRONE_COMMIT_MESSAGE}
-    secrets: [ slack_webhook ]
-    when:
-      status: [ success, failure ]
-
+    settings:
+      webhook:
+        from_secret: slack_webhook
+      channel: irt-dcs-cicd
+      username: ${DRONE_REPO_OWNER}/${DRONE_REPO_NAME}
+      template: |
+        *<${DRONE_BUILD_LINK}|Build ${DRONE_BUILD_NUMBER}>*: *{{build.status}}* in {{since build.started}}
+        *Event*: ${DRONE_BUILD_EVENT} on branch ${DRONE_COMMIT_BRANCH}
+        *Author*: ${DRONE_COMMIT_AUTHOR}
+        *<${DRONE_COMMIT_LINK}|Commit>*: ${DRONE_COMMIT_MESSAGE}
+      when:
+        status:
+          - success
+          - failure
