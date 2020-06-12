@@ -1,3 +1,7 @@
+# GENERATED GCP SHARED ENVIRONMENT VARIABLES. DO NOT EDIT.
+# The source file is gcp-env.sh in the som-laneweb repository.
+# If it is changed, re-run 'make sync-env' in som-laneweb repository.
+#
 # GCLOUD Configuration for GCP som-laneweb
 export GOOGLE_CLOUD_PROJECT=som-laneweb
 export GCP_PROJECT_ID=${GOOGLE_CLOUD_PROJECT}
@@ -23,9 +27,10 @@ export VAULT_CACHE=${HOME}/.vault-local
 export SEC_PATH=secret/projects/${GCP_PROJECT_NAME}
 export GCP_KEY_PATH=${SEC_PATH}/common/gcp-provision
 export GCP_KEY_FILE=${VAULT_CACHE}/${GCP_KEY_PATH}
+export SPLUNK_SINK_SEC_PATH=${SEC_PATH}/common/splunk-sink
 
 # Drone env
-export DRONE_SERVER=https://ci.med.stanford.edu
+export DRONE_SERVER=https://drone.med.stanford.edu
 export DRONE_TOKEN_FILE=${HOME}/.drone-token
 
 # GCP artifacts bucket
@@ -34,6 +39,8 @@ export GCP_ARTIFACTS_BUCKET=${GCP_PROJECT_NAME}-artifacts
 # Required by Terraform
 export GCP_INFRASTRUCTURE_BUCKET=${GCP_PROJECT_ID}-infrastructure
 export TF_BACKEND_PREFIX=terraform/${GCP_PROJECT_ID}/${GCP_ENVIRONMENT}/state
+# Upgrade to terraform v0.12
+export TF_CMD=/usr/local/bin/terraform
 
 # GCP Networking
 export GCP_NETWORK=${GCP_VPC_NAME}
