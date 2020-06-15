@@ -8,7 +8,7 @@
       <!-- Get menu from https://lane-stanford.libguides.com/ -->
       <map:match pattern="libapps-guides-menu.html" type="wildcard">
          <map:generate type="file"
-            src="cachedxml:600:{libapps-service-uri}/oai.php?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=guides"/>
+            src="cachedxml:600:{libguide-service-uri}/oai.php?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=guides"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps-guides-menu.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
@@ -35,9 +35,9 @@
        <!-- ********* CONTENT ********** -->
        <!-- Content from lane-stanford.libguides.com -->
       <map:match pattern="content/**" type="wildcard">
-         <map:generate type="html" src="cache:600:{libapps-service-uri}/{1}?{query-string}"/>
+         <map:generate type="html" src="cache:600:{libguide-service-uri}/{1}?{query-string}"/>
          <map:transform type="xinclude"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps.xsl"/>
+         <map:transform type="saxon" src="classpath:/xsl/libguide.xsl"/>
          <map:serialize type="xhtml"/>
       </map:match>
       

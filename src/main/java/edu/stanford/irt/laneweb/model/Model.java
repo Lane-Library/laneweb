@@ -59,8 +59,10 @@ public final class Model {
 
     public static final String ITEMS = "items";
     
-    public static final String LIBAPPS_SERVICE_URI = "libapps-service-uri";
+    public static final String LIBGUIDE_SERVICE_URI = "libguide-service-uri";
 
+    public static final String LIBCAL_SERVICE_URI = "libcal-service-uri";
+    
     public static final String LIMIT = "limit";
 
     public static final String LIVE_CHAT_AVAILABLE = "live-chat-available";
