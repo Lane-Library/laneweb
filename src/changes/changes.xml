@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-06-22" version="3.6.4" description="bug fix release">
+            <action date="2020-06-09" dev="ryanmax" issue="LANEWEB-10578" type="fix">
+                  login requests redirect to http
+            </action>
+         </release>
          <release date="2020-06-08" version="3.6.3" description="bug fix release">
             <action date="2020-05-01" dev="alainb" issue="LANEWEB-10573" type="fix">
                   https requests redirecting to http
