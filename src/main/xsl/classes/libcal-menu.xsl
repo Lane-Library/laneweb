@@ -15,7 +15,7 @@
       <li>
          <a>
             <xsl:attribute name="href">
-                     <xsl:value-of select="concat('/classes-consult/laneclasses.html?id=', ../id)"/>                               
+                     <xsl:value-of select="concat('https://lane-stanford.libcal.com/calendar/classes/?cid=12663&amp;t=d&amp;ct[]=', ../id )"/>                               
                   </xsl:attribute>
             <xsl:value-of select="."/>
          </a>
