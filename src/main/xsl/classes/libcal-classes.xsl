@@ -46,11 +46,61 @@
       <h4>
          <a>
             <xsl:attribute name="href">
-                 <xsl:apply-templates select="../url"/>                         
+                 <xsl:value-of select="../url/public"/>                         
           </xsl:attribute>
             <xsl:value-of select="."/>
          </a>
       </h4>
+   </xsl:template>
+   
+    <xsl:template match="start">
+      <div class="month-day">
+         <xsl:value-of select="month"/>
+         <xsl:text> </xsl:text>
+         <xsl:value-of select="day"/>
+      </div>
+      <div class="year">
+         <xsl:value-of select="year"/>
+      </div>
+      <div class="time">
+         <xsl:value-of select="hour"/>
+         <xsl:text> – </xsl:text>
+         <xsl:value-of select="../end/hour"/>
+      </div>
+   </xsl:template>
+   <xsl:template match="location">
+      <div class="location">
+         <xsl:value-of select="."/>
+         <xsl:text>&#160;&#160;&#160;</xsl:text>
+         <i class="fa fa-map-marker fa-2x"></i>
+      </div>
+   </xsl:template>
+   <xsl:template match="presenter">
+      <div class="instructor">
+         Instructor(s):
+         <div>
+            <b>
+               <xsl:value-of select="."/>
+            </b>
+         </div>
+      </div>
+   </xsl:template>
+   <xsl:template match="remainingSeats">
+      <div class="register">
+         <div>
+            <a class="button alt1">
+               <xsl:attribute name="href">
+               <xsl:apply-templates select="../url/public"/>                               
+            </xsl:attribute>
+               <span>Register</span>
+               <i class="icon fa fa-arrow-right"/>
+            </a>
+            <div class="remaining-seats">
+               Seats left:
+               <xsl:value-of select="."/>
+            </div>
+         </div>
+      </div>
    </xsl:template>
 
    

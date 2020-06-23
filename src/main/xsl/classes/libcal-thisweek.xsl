@@ -30,7 +30,7 @@
                <p>
                   <a>
                      <xsl:attribute name="href">
-                        <xsl:apply-templates select="url"/>                              
+                        <xsl:value-of select="../url/public"/>                                  
                      </xsl:attribute>
                      <xsl:value-of select="title"/>
                   </a>
