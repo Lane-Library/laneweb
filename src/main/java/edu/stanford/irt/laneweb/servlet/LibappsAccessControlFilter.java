@@ -19,9 +19,6 @@ public class LibappsAccessControlFilter extends AbstractLanewebFilter {
     @Qualifier("java.net.URI/libguide-service") 
     private URI libguideServiceURI;
 
-    @Autowired
-    @Qualifier("java.net.URI/libcal-service") 
-    private URI libcalServiceURI;
     
     @Override
     protected void internalDoFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -29,7 +26,7 @@ public class LibappsAccessControlFilter extends AbstractLanewebFilter {
         if( this.libguideServiceURI.getHost().equals(request.getRemoteHost())){
             response.addHeader("Access-Control-Allow-Origin", this.libguideServiceURI.getScheme()+ "://" + this.libguideServiceURI.getHost());
         }else {
-            response.addHeader("Access-Control-Allow-Origin", this.libcalServiceURI.getScheme()+ "://" + this.libcalServiceURI.getHost());
+            response.addHeader("Access-Control-Allow-Origin", "https://lane-stanford.libcal.com");
         }   
         chain.doFilter(request, response);
     }
