@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class LibappsServiceConfiguration {
+public class LibguideServiceConfiguration {
 
-    @Bean("java.net.URI/libapps-service")
+    @Bean("java.net.URI/libguide-service")
     public URI classesServiceURI(
-            @Value("${edu.stanford.irt.laneweb.libapps-service.scheme}") String scheme,
-            @Value("${edu.stanford.irt.laneweb.libapps-service.host}") String host,
-            @Value("${edu.stanford.irt.laneweb.libapps-service.port}") int port
+            @Value("${edu.stanford.irt.laneweb.libguide-service.scheme}") String scheme,
+            @Value("${edu.stanford.irt.laneweb.libguide-service.host}") String host,
+            @Value("${edu.stanford.irt.laneweb.libguide-service.port}") int port
             ) throws URISyntaxException {
         return new URI(scheme, null, host, port, null, null, null);
     }

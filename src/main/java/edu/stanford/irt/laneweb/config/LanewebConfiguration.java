@@ -76,7 +76,8 @@ public class LanewebConfiguration {
     private Map<String, Object> constants;
 
     public LanewebConfiguration(
-            @Qualifier("java.net.URI/libapps-service") final URI libappsServiceURI,
+            @Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
+            @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
             @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking,
@@ -85,7 +86,8 @@ public class LanewebConfiguration {
         this.constants = new HashMap<>();
         this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
         this.constants.put(Model.CLASSES_SERVICE_URI, classesServiceURI);
-        this.constants.put(Model.LIBAPPS_SERVICE_URI, libappsServiceURI);
+        this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
+        this.constants.put(Model.LIBCAL_SERVICE_URI, libcalServiceURI);
         this.constants.put(Model.CONTENT_BASE, contentBase);
         this.constants.put(Model.BOOKMARKING, bookmarking);
         this.constants.put(Model.VERSION, version);

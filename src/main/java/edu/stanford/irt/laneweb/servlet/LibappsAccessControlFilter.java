@@ -16,13 +16,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public class LibappsAccessControlFilter extends AbstractLanewebFilter {
 
     @Autowired
-    @Qualifier("java.net.URI/libapps-service") 
-    private URI libappsServiceURI;
+    @Qualifier("java.net.URI/libguide-service") 
+    private URI libguideServiceURI;
+
+    @Autowired
+    @Qualifier("java.net.URI/libcal-service") 
+    private URI libcalServiceURI;
     
     @Override
     protected void internalDoFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        response.addHeader("Access-Control-Allow-Origin", this.libappsServiceURI.getScheme()+ "://" + this.libappsServiceURI.getHost());
+        if( this.libguideServiceURI.getHost().equals(request.getRemoteHost())){
+            response.addHeader("Access-Control-Allow-Origin", this.libguideServiceURI.getScheme()+ "://" + this.libguideServiceURI.getHost());
+        }else {
+            response.addHeader("Access-Control-Allow-Origin", this.libcalServiceURI.getScheme()+ "://" + this.libcalServiceURI.getHost());
+        }   
         chain.doFilter(request, response);
     }
 }
