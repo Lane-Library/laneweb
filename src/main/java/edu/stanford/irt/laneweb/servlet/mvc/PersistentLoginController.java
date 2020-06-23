@@ -68,19 +68,17 @@ public class PersistentLoginController {
         if (null != user) {
             setCookies(request, response, user);
             return getRedirectURL(url);
-        } else {
-            resetCookies(response);
-            return "redirect:/error.html";
         }
+        resetCookies(response);
+        return "redirect:/error.html";
     }
 
     @GetMapping(value = "/secure/login.html")
     public String login(final RedirectAttributes redirectAttrs, String url, User user) {
         if (null != user) {
             return getRedirectURL(url);
-        } else {
-            return "redirect:/error.html";
         }
+        return "redirect:/error.html";
     }
 
     @ModelAttribute

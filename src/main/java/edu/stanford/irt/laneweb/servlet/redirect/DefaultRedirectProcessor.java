@@ -30,9 +30,8 @@ public class DefaultRedirectProcessor implements RedirectProcessor {
                 String result = matcher.replaceAll(entry.getValue());
                 if (result.charAt(0) == '/') {
                     return basePath + result;
-                } else {
-                    return result;
                 }
+                return result;
             }
         }
         return null;
