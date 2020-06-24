@@ -9,7 +9,7 @@ RUN mkdir -p /root/.m2
 #
 # build phase
 #
-FROM gcr.io/som-laneweb/maven-grover:3.5.3 AS MAVEN_TOOL_CHAIN
+FROM gcr.io/som-laneweb/maven-grover:3.6.3 AS MAVEN_TOOL_CHAIN
 COPY --from=PREVIOUS_IMAGE /root/.m2 /root/.m2
 RUN mkdir -p /build
 COPY pom.xml settings.xml /build/
