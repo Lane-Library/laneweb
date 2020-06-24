@@ -111,11 +111,11 @@
    
    <map:pipeline type="noncaching">
         <map:match pattern="libcal-classes.xml" type="wildcard">
-         <map:generate type="file" src="cocoon://classes/libcals-by-category.html"/>
+         <map:generate type="file" src="cocoon://classes/libcals-by-category.xml"/>
          <map:transform type="saxon" src="classpath:/xsl/classes/libcal-classes.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
-      <map:match pattern="libcals-by-category.html" type="wildcard">
+      <map:match pattern="libcals-by-category.xml" type="wildcard">
          <map:generate type="file" src="cache:600:{libcal-service-uri}/events/12663/{id}"/>
          <map:transform type="textNodeParser">
             <map:parameter name="elementNames" value="short_description,description"/>
@@ -126,26 +126,25 @@
    
    <map:pipeline type="caching">
       <map:parameter name="cache-key" value="{request-uri}?{query-string}"/>
-      <map:match pattern="libcal/*/classes/thisweek.xml" type="wildcard">
-         <map:generate type="file" src="cocoon://classes/libcals.html"/>
+      <map:match pattern="*/thisweek.xml" type="wildcard">
+         <map:generate type="file" src="cocoon://classes/libcals.xml"/>
          <map:transform type="saxon" src="classpath:/xsl/classes/libcal-thisweek.xsl">
            <map:parameter name="class-number" value="{1}"/>
          </map:transform>
          <map:serialize type="xml"/>
       </map:match>
       <map:match pattern="libcal-history.xml" type="wildcard">
-         <map:generate type="file" src="cocoon://classes/libcals.html?id=49008"/>
+         <map:generate type="file" src="cocoon://classes/libcals.xml?id=49008"/>
          <map:transform type="saxon" src="classpath:/xsl/classes/libcal-history.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
       <map:match pattern="libcal-menu.xml" type="wildcard">
-         <map:generate type="file" src="cocoon://classes/libcals.html"/>
+         <map:generate type="file" src="cocoon://classes/libcals.xml"/>
          <map:transform type="saxon" src="classpath:/xsl/classes/libcal-menu.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
-      
       <!-- Cached requests from the libcal website -->
-      <map:match pattern="libcals.html" type="wildcard">
+      <map:match pattern="libcals.xml" type="wildcard">
          <map:generate type="file" src="cache:600:{libcal-service-uri}/events/12663"/>
          <map:serialize type="xml"/>
       </map:match>
