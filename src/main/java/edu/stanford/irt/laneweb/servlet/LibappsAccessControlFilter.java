@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 
-@WebFilter({"/libapps/lane-guides-menu.html", "/classes/libcal-menu.xml"})
+@WebFilter({"/libapps/lane-guides-menu.html", "/classes/libcal-menu.html"})
 public class LibappsAccessControlFilter extends AbstractLanewebFilter {
 
     @Autowired
