@@ -7,7 +7,7 @@
                <h3>Categories</h3>
                <ul class="menu">
                   <li>
-                     <a href="https://lane-stanford.libcal.com/calendar/classes/?cid=12663">By Date</a>
+                     <a href="https://lane-stanford.libcal.com/calendar/classes/?cid=12663&amp;t=d&amp;d=0000-00-00&amp;cal=12663&amp;inc=0">By Date</a>
                   </li>
                   <xsl:for-each-group select="./class/categories//category" group-by="name">
                      <xsl:sort select="."/>
@@ -23,7 +23,7 @@
          <a>
             <xsl:attribute name="href">
                      <xsl:value-of
-               select="concat('https://lane-stanford.libcal.com/calendar/classes/?cid=12663&amp;t=d&amp;ct[]=', ../id )"/>                               
+               select="concat(concat('https://lane-stanford.libcal.com/calendar/classes/?cid=12663&amp;t=d&amp;d=0000-00-00&amp;cal=12663&amp;ct=', ../id ),'&amp;inc=0')"/>                               
                   </xsl:attribute>
             <xsl:value-of select="."/>
          </a>
