@@ -1,15 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0     http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <mirrors>
-   <mirror>
-     <id>irt-maven</id>
-     <mirrorOf>central</mirrorOf>
-     <url>https://irt-maven.stanford.edu/nexus/content/repositories/public</url>
-   </mirror>
+    <mirror>
+      <id>med-maven-group</id>
+      <name>med-maven-group</name>
+      <mirrorOf>*</mirrorOf>
+      <url>https://nexus.med.stanford.edu/repository/med-maven/</url>
+    </mirror>
   </mirrors>
+
   <profiles>
     <profile>
-      <id>nexus</id>
+      <id>med-maven</id>
+      <properties>
+        <downloadSources>true</downloadSources>
+        <downloadJavadocs>true</downloadJavadocs>
+      </properties>
       <repositories>
         <repository>
           <id>central</id>
@@ -36,7 +42,9 @@
       </pluginRepositories>
     </profile>
   </profiles>
+
   <activeProfiles>
-    <activeProfile>nexus</activeProfile>
+    <!--make the profile active all the time -->
+    <activeProfile>med-maven</activeProfile>
   </activeProfiles>
 </settings>
