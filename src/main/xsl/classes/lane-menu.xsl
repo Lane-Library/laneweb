@@ -5,7 +5,7 @@
                <h3>Categories</h3>
                <ul class="menu">
                   <li>
-                     <a href="https://lane-stanford.libcal.com/calendar/classes/?cid=12663">By Date</a>
+                     <a href="/classes-consult/laneclasses.html">By Date</a>
                   </li>
                   <xsl:for-each-group select="./class/categories//category" group-by="name">
                      <xsl:sort select="."/>
