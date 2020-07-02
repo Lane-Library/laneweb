@@ -13,7 +13,7 @@ steps:
       registry: gcr.io
       repo: som-laneweb/laneweb
       cache: true
-      tag:
+      tags:
         - latest
         - "${DRONE_COMMIT_SHA}"
       json_key:
@@ -30,7 +30,7 @@ steps:
       registry: gcr.io
       repo: som-laneweb/laneweb
       cache: true
-      tag:
+      tags:
         - latest
         - "${DRONE_COMMIT_SHA}"
       json_key:
