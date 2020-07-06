@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-07-06" version="3.6.5" description="bug fix release">
+            <action date="2020-07-02" dev="ryanmax" issue="LANEWEB-10583" type="update">
+                  bassett images moved to lane.stanford.edu/elane/public/L254573
+            </action>
+            <action date="2020-06-29" dev="alainb" issue="LANEWEB-10577" type="update">
+                     basic LibCal integration
+            </action>
+         </release>
          <release date="2020-06-22" version="3.6.4" description="bug fix release">
             <action date="2020-06-09" dev="ryanmax" issue="LANEWEB-10578" type="fix">
                   login requests redirect to http
