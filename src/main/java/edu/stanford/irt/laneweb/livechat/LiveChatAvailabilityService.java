@@ -14,14 +14,14 @@ public class LiveChatAvailabilityService {
 
     private URI liveChatServiceURI;
 
-    public static final long TEN_MINUTES = Duration.ofMinutes(10).toMillis();
+    public static final long TIME_BETWEEN_REQUESTS = Duration.ofMinutes(5).toMillis();
 
     private long nextUpdate;
-    
+
     private Clock clock;
 
     private long expires;
-    
+
     private boolean available;
 
     private RESTService restservice;
@@ -29,10 +29,11 @@ public class LiveChatAvailabilityService {
     private static final Logger log = LoggerFactory.getLogger(LiveChatAvailabilityService.class);
 
     public LiveChatAvailabilityService(final URI liveChatServiceURI, final RESTService restservice) {
-        this(liveChatServiceURI, restservice, Clock.systemDefaultZone(), TEN_MINUTES);
+        this(liveChatServiceURI, restservice, Clock.systemDefaultZone(), TIME_BETWEEN_REQUESTS);
     }
 
-    LiveChatAvailabilityService(final URI liveChatServiceURI, final RESTService restservice, final Clock clock, final long expires) {
+    LiveChatAvailabilityService(final URI liveChatServiceURI, final RESTService restservice, final Clock clock,
+            final long expires) {
         this.liveChatServiceURI = liveChatServiceURI;
         this.restservice = restservice;
         this.clock = clock;
@@ -48,7 +49,7 @@ public class LiveChatAvailabilityService {
         }
         return this.available;
     }
-    
+
     private boolean checkChatPresence() {
         try {
             return "available".equalsIgnoreCase(this.restservice.getObject(this.liveChatServiceURI, String.class));
