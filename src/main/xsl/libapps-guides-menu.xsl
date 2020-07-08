@@ -13,7 +13,7 @@
    <xsl:template match="oai:metadata">
       <li>
          <a>
-            <xsl:attribute name="href" select="replace(./oai_dc:dc/dc:identifier ,'https://lane-stanford.libguides.com/','/libapps/')"/>
+            <xsl:attribute name="href" select="replace(./oai_dc:dc/dc:identifier ,'https://lane-stanford.libguides.com/','/libguides/')"/>
             <xsl:value-of select="./oai_dc:dc/dc:title"/>
          </a>
       </li>
