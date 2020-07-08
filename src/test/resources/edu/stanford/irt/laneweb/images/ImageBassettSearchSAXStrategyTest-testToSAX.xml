@@ -9,7 +9,7 @@
          <li id="110-3" class="yui3-tooltip-trigger">
             <a href="/biomed-resources/bassett/bassettView.html?bn=110-3">
                <div id="image">
-                  <image src="http://elane.stanford.edu/public/L254573/small/bassettSrc"/>
+                  <image src="//lane.stanford.edu/elane/public/L254573/small/bassettSrc"/>
                </div>
                <div>title</div>
             </a>
@@ -18,7 +18,7 @@
    </div>
    <div style="display:none" class="tooltips">
       <span id="110-3Tooltip">
-         <image src="http://elane.stanford.edu/public/L254573/medium/bassettSrc"
+         <image src="//lane.stanford.edu/elane/public/L254573/medium/bassettSrc"
                 style="max-width: 300px;max-height: 240px"/>
       </span>
    </div>

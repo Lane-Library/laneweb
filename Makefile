@@ -7,20 +7,18 @@ export
 # FRAMEWORK SYNC
 ifeq ($(MAKELEVEL),0)
     _ := $(shell >&2 echo)
-	ifneq ($(wildcard ${FRAMEWORK_DIR}/.git/),)
-		_ := $(shell >&2 echo Updating PS cloud framework from Git into ${FRAMEWORK_DIR}...)
-		_ := $(shell cd ${FRAMEWORK_DIR}; git pull)
-	else
+    INSTALLED := $(firstword $(wildcard ${FRAMEWORK_DIR}))
+    ifeq (${INSTALLED},)
 		_ := $(shell >&2 echo Updating PS cloud framework in ${FRAMEWORK_DIR}...)
-		_ := $(shell mkdir -p ${FRAMEWORK_DIR} && curl --retry 3 -s https://storage.googleapis.com/${FRAMEWORK_BUCKET}/framework.tar.gz?random=$$(date +%s) | tar -xzf - -C ${FRAMEWORK_DIR})
+		_ := $(shell mkdir -p ${FRAMEWORK_DIR} && curl --retry 3 -s https://storage.googleapis.com/${FRAMEWORK_BUCKET}/stable/framework.tar.gz?random=$$(date +%s) | tar -xzf - -C ${FRAMEWORK_DIR})
 		_ := $(shell >&2 echo - framework version: $$(cat ${FRAMEWORK_DIR}/sha.txt))
 	endif
 endif
 # END FRAMEWORK SYNC
 
 # COMMON MAKEFILE PARTS INCLUDES
-include ${FRAMEWORK_DIR}/makefile_parts/config.mk
 include ${FRAMEWORK_DIR}/makefile_parts/shared.mk
+include ${FRAMEWORK_DIR}/makefile_parts/config.mk
 include ${FRAMEWORK_DIR}/makefile_parts/vault.mk
 include ${FRAMEWORK_DIR}/makefile_parts/docker-compose.mk
 include ${FRAMEWORK_DIR}/makefile_parts/sonarqube.mk

@@ -23,7 +23,7 @@
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="classpath:/xsl/bassett.xsl">
-                    <map:parameter name="images-url" value="http://elane.stanford.edu/public/L254573"/>
+                    <map:parameter name="images-url" value="//lane.stanford.edu/elane/public/L254573"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>

@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>63-java11</version>
+        <version>64-java11</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.6.4-SNAPSHOT</version>
+    <version>3.6.6-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -280,8 +280,8 @@
             <version>1.1.1</version>
         </dependency>
         <dependency>
-            <groupId>org.ehcache.modules</groupId>
-            <artifactId>ehcache-107</artifactId>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
             <version>3.8.1</version>
             <scope>runtime</scope>
         </dependency>
@@ -580,7 +580,7 @@
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
-                <version>2.1.0</version>
+                <version>2.1.1</version>
                 <configuration>
                     <testDir>src/test/javascript</testDir>
                 </configuration>
