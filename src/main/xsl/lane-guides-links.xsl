@@ -9,8 +9,8 @@
    <xsl:template match="h:a">
       <xsl:copy>
          <xsl:choose>
-            <xsl:when test="starts-with(@href, '/libapps')">
-               <xsl:attribute name="href" select="replace(@href,'/libapps/','https://lane-stanford.libguides.com/')"/>
+            <xsl:when test="starts-with(@href, '/libguides')">
+               <xsl:attribute name="href" select="replace(@href,'/libguides/','https://lane-stanford.libguides.com/')"/>
             </xsl:when>
             <xsl:otherwise>
                <xsl:attribute name="href" select="concat('https://lane.stanford.edu', @href)"/>

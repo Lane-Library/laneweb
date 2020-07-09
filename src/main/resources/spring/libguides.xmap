@@ -16,7 +16,7 @@
       <!-- Guides Menu display in laneweb -->
       <map:match pattern="guides-menu.html" type="wildcard">
          <map:aggregate type="caching" element="doc">
-            <map:generate type="file" src="cocoon://libapps/libapps-guides-menu.html"/>
+            <map:generate type="file" src="cocoon://libguides/libapps-guides-menu.html"/>
             <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
          </map:aggregate>
          <map:transform type="saxon" src="classpath:/xsl/guides-menu.xsl"/>
@@ -25,8 +25,8 @@
       
       <!-- Guides Menu display in lane-stanford.libguides.com -->
       <map:match pattern="lane-guides-menu.html" type="wildcard">
-         <map:generate type="file" src="cocoon://libapps/guides-menu.html"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps-links.xsl"/>
+         <map:generate type="file" src="cocoon://libguides/guides-menu.html"/>
+         <map:transform type="saxon" src="classpath:/xsl/lane-guides-links.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
       
@@ -44,8 +44,8 @@
       <!--  Apply template -->
       <map:match pattern="**" type="wildcard">
          <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
-            <map:generate type="file" src="cocoon://libapps/content/{1}"/>
-            <map:generate type="file" src="cocoon://content/templates/libapps.xml"/>
+            <map:generate type="file" src="cocoon://libguides/content/{1}"/>
+            <map:generate type="file" src="cocoon://content/templates/libguides.xml"/>
          </map:aggregate>
          <map:select type="cme-links">
             <map:when test="true">
