@@ -16,21 +16,21 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 @Service
 public class LiveChatAvailabilityService {
 
-    @Value("${edu.stanford.irt.laneweb.live-chat-api.url}")
-    private URI liveChatServiceURI;
-
-    @Autowired
-    private RESTService restservice;
-
-    private long expires = Duration.ofMinutes(5).toMillis();
-
-    private Clock clock = Clock.systemDefaultZone();
-
-    private long nextUpdate;
+    private static final Logger log = LoggerFactory.getLogger(LiveChatAvailabilityService.class);
 
     private boolean available;
 
-    private static final Logger log = LoggerFactory.getLogger(LiveChatAvailabilityService.class);
+    private Clock clock = Clock.systemDefaultZone();
+
+    private long expires = Duration.ofMinutes(5).toMillis();
+
+    @Value("${edu.stanford.irt.laneweb.live-chat-api.url}")
+    private URI liveChatServiceURI;
+
+    private long nextUpdate;
+
+    @Autowired
+    private RESTService restService;
 
     public boolean isAvailable() {
         long now = this.clock.millis();
@@ -43,10 +43,25 @@ public class LiveChatAvailabilityService {
 
     private boolean checkChatPresence() {
         try {
-           return "available".equalsIgnoreCase(this.restservice.getObject(this.liveChatServiceURI, String.class));
+            return "available".equalsIgnoreCase(this.restService.getObject(this.liveChatServiceURI, String.class));
         } catch (RESTException e) {
             log.error("problem fetching availability from live chat service", e);
         }
         return false;
+    }
+
+    // for unit testing
+    protected void setLiveChatServiceURI(final URI liveChatServiceURI) {
+        this.liveChatServiceURI = liveChatServiceURI;
+    }
+
+    // for unit testing
+    protected void setNextUpdate(final long nextUpdate) {
+        this.nextUpdate = nextUpdate;
+    }
+
+    // for unit testing
+    protected void setRestService(final RESTService restService) {
+        this.restService = restService;
     }
 }

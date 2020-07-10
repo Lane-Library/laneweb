@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.net.URI;
 import java.time.Clock;
+import static org.easymock.EasyMock.isA;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,31 +31,34 @@ public class LiveChatAvailabilityServiceTest {
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
         this.service = new LiveChatAvailabilityService();
+        this.service.setNextUpdate(0);
+        this.service.setRestService(this.restService);
+        this.service.setLiveChatServiceURI(this.uri);
     }
 
     @Test
     public final void testIsAvailable() throws Exception {
-//        expect(this.restService.getObject(new URI("/"), String.class)).andReturn("aVailable");
-//        replay(this.restService);
-//        assertTrue(this.service.isAvailable());
-//        assertTrue(this.service.isAvailable());
-//        verify(this.restService);
+        expect(this.restService.getObject(this.uri, String.class)).andReturn("aVailable");
+        replay(this.restService);
+        assertTrue(this.service.isAvailable());
+        assertTrue(this.service.isAvailable());
+        verify(this.restService);
     }
 
     @Test
     public final void testIsAvailableAndThenIsNot() throws Exception {
-//        this.service = new LiveChatAvailabilityService(this.uri, this.restService, Clock.systemDefaultZone(), 0);
-//        expect(this.restService.getObject(new URI("/"), String.class)).andReturn("aVailable");
-//        expect(this.restService.getObject(new URI("/"), String.class)).andReturn("unavailable");
-//        replay(this.restService);
-//        assertTrue(this.service.isAvailable());
-//        assertFalse(this.service.isAvailable());
-//        verify(this.restService);
+        expect(this.restService.getObject(this.uri, String.class)).andReturn("aVailable");
+        expect(this.restService.getObject(this.uri, String.class)).andReturn("unavailable");
+        replay(this.restService);
+        assertTrue(this.service.isAvailable());
+        this.service.setNextUpdate(0);
+        assertFalse(this.service.isAvailable());
+        verify(this.restService);
     }
 
     @Test
     public final void testIsAvailableRESTException() throws Exception {
-        expect(this.restService.getObject(new URI("/"), String.class))
+        expect(this.restService.getObject(this.uri, String.class))
                 .andThrow(new RESTException(new IOException("oops")));
         replay(this.restService);
         assertFalse(this.service.isAvailable());
