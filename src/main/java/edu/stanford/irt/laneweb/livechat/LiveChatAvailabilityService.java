@@ -7,7 +7,7 @@ import java.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import edu.stanford.irt.laneweb.rest.RESTException;
@@ -24,7 +24,8 @@ public class LiveChatAvailabilityService {
 
     private long expires = Duration.ofMinutes(5).toMillis();
 
-    @Value("${edu.stanford.irt.laneweb.live-chat-api.url}")
+    @Autowired
+    @Qualifier("java.net.URI/live-chat-service")
     private URI liveChatServiceURI;
 
     private long nextUpdate;
