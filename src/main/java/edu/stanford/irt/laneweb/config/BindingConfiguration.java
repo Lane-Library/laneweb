@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
-import edu.stanford.irt.laneweb.livechat.Schedule;
+import edu.stanford.irt.laneweb.livechat.LiveChatAvailabilityService;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BaseProxyURLDataBinder;
@@ -27,7 +27,7 @@ import edu.stanford.irt.laneweb.servlet.binding.BookmarkingDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.LiveChatScheduleBinder;
+import edu.stanford.irt.laneweb.servlet.binding.LiveChatAvailabilityBinder;
 import edu.stanford.irt.laneweb.servlet.binding.LoginExpirationCookieDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.ModelDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.ParameterMapDataBinder;
@@ -51,8 +51,6 @@ import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 @Configuration
 public class BindingConfiguration {
-
-   
 
     @Bean
     public BasePathDataBinder basePathDataBinder(final ServletContext servletContext) {
@@ -83,7 +81,7 @@ public class BindingConfiguration {
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public DataBinder dataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder,
             final BookmarkDataBinder bookmarkDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
-            final ModelDataBinder modelDataBinder) {
+            final ModelDataBinder modelDataBinder, final LiveChatAvailabilityBinder liveChatAvailabilityBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(19);
         dataBinders.add(userDataBinder);
         dataBinders.add(ticketDataBinder);
@@ -96,7 +94,7 @@ public class BindingConfiguration {
         dataBinders.add(new RequestMethodDataBinder());
         dataBinders.add(requestHeaderDataBinder());
         dataBinders.add(new LoginExpirationCookieDataBinder());
-        dataBinders.add(new LiveChatScheduleBinder(new Schedule()));
+        dataBinders.add(liveChatAvailabilityBinder);
         dataBinders.add(bookmarkDataBinder);
         dataBinders.add(todaysHoursDataBinder);
         dataBinders.add(new ParameterMapDataBinder());
@@ -109,6 +107,11 @@ public class BindingConfiguration {
     @Bean
     public DataBinder emridDataBinder() {
         return new StringSessionParameterDataBinder("emrid", "emrid");
+    }
+
+    @Bean
+    public LiveChatAvailabilityBinder liveChatAvailability(final LiveChatAvailabilityService service) {
+        return new LiveChatAvailabilityBinder(service);
     }
 
     @Bean

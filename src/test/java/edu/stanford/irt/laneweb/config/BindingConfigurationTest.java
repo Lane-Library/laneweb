@@ -41,7 +41,7 @@ public class BindingConfigurationTest {
 
     @Test
     public void testDataBinder() {
-        assertNotNull(this.configuration.dataBinder(null, null, null, null, null));
+        assertNotNull(this.configuration.dataBinder(null, null, null, null, null, null));
     }
 
     @Test

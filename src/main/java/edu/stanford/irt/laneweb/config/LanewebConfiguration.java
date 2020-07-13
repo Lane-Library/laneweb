@@ -62,7 +62,8 @@ import edu.stanford.irt.laneweb.rest.RESTService;
     "edu.stanford.irt.laneweb.config",
     "edu.stanford.irt.solr.service",
     "edu.stanford.irt.laneweb.servlet.mvc",
-    "edu.stanford.irt.laneweb.bookmarks"
+    "edu.stanford.irt.laneweb.bookmarks",
+    "edu.stanford.irt.laneweb.livechat"
 })
 public class LanewebConfiguration {
 
