@@ -53,7 +53,7 @@ import edu.stanford.irt.laneweb.rest.RESTService;
     "classpath:/spring/classes.xmap",
     "classpath:/spring/content.xmap",
     "classpath:/spring/eresources.xmap",
-    "classpath:/spring/libapps.xmap",
+    "classpath:/spring/libguides.xmap",
     "classpath:/spring/mobile.xmap",
     "classpath:/spring/rss.xmap",
     "classpath:/spring/sitemap.xmap"
@@ -62,7 +62,8 @@ import edu.stanford.irt.laneweb.rest.RESTService;
     "edu.stanford.irt.laneweb.config",
     "edu.stanford.irt.solr.service",
     "edu.stanford.irt.laneweb.servlet.mvc",
-    "edu.stanford.irt.laneweb.bookmarks"
+    "edu.stanford.irt.laneweb.bookmarks",
+    "edu.stanford.irt.laneweb.livechat"
 })
 public class LanewebConfiguration {
 

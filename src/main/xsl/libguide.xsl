@@ -62,7 +62,7 @@
          <xsl:copy-of select="@*"/>
          <xsl:choose>
             <xsl:when test="starts-with(@href, 'https://lane-stanford.libguides.com/')">
-               <xsl:attribute name="href" select="replace(@href,'https://lane-stanford.libguides.com/','/libapps/')"/>
+               <xsl:attribute name="href" select="replace(@href,'https://lane-stanford.libguides.com/','/libguides/')"/>
             </xsl:when>
             <xsl:otherwise>
                <xsl:attribute name="href" select="@href"/>

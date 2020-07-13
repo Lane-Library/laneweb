@@ -12,28 +12,28 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.livechat.Schedule;
+import edu.stanford.irt.laneweb.livechat.LiveChatAvailabilityService;
 import edu.stanford.irt.laneweb.model.Model;
 
-public class LiveChatScheduleBinderTest {
+public class LiveChatAvailabilityBinderTest {
 
-    private LiveChatScheduleBinder dataBinder;
+    private LiveChatAvailabilityBinder dataBinder;
 
-    private Schedule schedule;
+    private LiveChatAvailabilityService service;
 
     @Before
     public void setUp() {
-        this.schedule = mock(Schedule.class);
-        this.dataBinder = new LiveChatScheduleBinder(this.schedule);
+        this.service = mock(LiveChatAvailabilityService.class);
+        this.dataBinder = new LiveChatAvailabilityBinder(this.service);
     }
 
     @Test
     public void testBind() {
-        expect(this.schedule.isAvailable()).andReturn(true);
+        expect(this.service.isAvailable()).andReturn(true);
         Map<String, Object> model = new HashMap<>();
-        replay(this.schedule);
+        replay(this.service);
         this.dataBinder.bind(model, null);
         assertSame(Boolean.TRUE, model.get(Model.LIVE_CHAT_AVAILABLE));
-        verify(this.schedule);
+        verify(this.service);
     }
 }
