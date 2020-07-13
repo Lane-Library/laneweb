@@ -31,7 +31,8 @@ public class LiveChatAvailabilityServiceTest {
         this.service = new LiveChatAvailabilityService();
         this.service.setNextUpdate(0);
         this.service.setRestService(this.restService);
-        this.service.setLiveChatServiceURI(this.uri);
+        this.service.setLiveChatServiceURI(this.uri.getScheme(), this.uri.getHost(), this.uri.getPort(),
+                this.uri.getPath());
     }
 
     @Test
