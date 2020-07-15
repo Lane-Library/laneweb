@@ -23,13 +23,13 @@ public class RESTCRMService implements CRMService {
     }
 
     @Override
-    public int submitRequest(final Map<String, Object> feedback) throws UnsupportedEncodingException {
+    public int submitRequest(final Map<String, Object> feedback, String ip) throws UnsupportedEncodingException {
         StringBuilder queryString = new StringBuilder();
         for (Entry<String, Object> entry : feedback.entrySet()) {
             queryString.append(entry.getKey()).append('=').append(URLEncoder.encode(entry.getValue().toString(), UTF_8))
                     .append('&');
         }
-        queryString.append("id=");
+        queryString.append("id=&ip="+ip);
         return this.restService.postURLEncodedString(this.uri, queryString.toString());
     }
 }

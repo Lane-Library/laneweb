@@ -3,6 +3,8 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,17 +35,19 @@ public class LaneCrmController {
     }
 
     @PostMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts) throws IOException {
+    public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts,  HttpServletRequest request) throws IOException {
         Map<String, Object> map = model.asMap();
-        int responseCode = this.crmService.submitRequest(map);
+        String ip = request.getRemoteAddr();
+        int responseCode = this.crmService.submitRequest(map, ip);
         ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.resolve(responseCode));
         return getRedirectTo(map, response);
     }
 
     @PostMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
-    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback)
+    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, HttpServletRequest request)
             throws IOException {
-        int responseCode = this.crmService.submitRequest(feedback);
+        String ip = request.getRemoteAddr();
+        int responseCode = this.crmService.submitRequest(feedback, ip);
         return new ResponseEntity<>(HttpStatus.resolve(responseCode));
     }
 

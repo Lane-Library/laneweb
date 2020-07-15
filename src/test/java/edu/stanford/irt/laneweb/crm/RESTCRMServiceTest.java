@@ -33,9 +33,9 @@ public class RESTCRMServiceTest {
 
     @Test
     public void testSubmitRequest() throws UnsupportedEncodingException {
-        expect(this.restService.postURLEncodedString(this.uri, "key=value&id=")).andReturn(200);
+        expect(this.restService.postURLEncodedString(this.uri, "key=value&id=&ip=ip")).andReturn(200);
         replay(this.restService);
-        assertEquals(200, this.crmService.submitRequest(Collections.singletonMap("key", "value")));
+        assertEquals(200, this.crmService.submitRequest(Collections.singletonMap("key", "value"), "ip"));
         verify(this.restService);
     }
 }
