@@ -8,10 +8,10 @@
     </properties>
     <body>
          <release date="2020-07-17" version="3.6.7" description="bug fix release">
-            <action date="2020-06-14" dev="ryanmax" issue="LANEWEB-10579" type="update">
+            <action date="2020-07-13" dev="ryanmax" issue="LANEWEB-10579" type="update">
                migrate to Java 11
             </action>
-            <action date="2020-06-15" dev="alainb" issue="LANECRM-40" type="update">
+            <action date="2020-07-15" dev="alainb" issue="LANECRM-40" type="update">
                spam handling on CRM API (used by laneweb)
             </action>
          </release>
