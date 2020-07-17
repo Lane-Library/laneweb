@@ -28,7 +28,7 @@ steps:
     image: gcr.io/clever-circlet-125504/drone-kaniko
     settings:
       registry: gcr.io
-      repo: som-laneweb/solr-javamelody
+      repo: som-laneweb/laneweb
       cache: false
       auto_tag: true
       json_key:
