@@ -7,9 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-07-17" version="3.6.7" description="bug fix release">
+            <action date="2020-06-14" dev="ryanmax" issue="LANEWEB-10579" type="update">
+               migrate to Java 11
+            </action>
+            <action date="2020-06-15" dev="alainb" issue="LANECRM-40" type="update">
+               spam handling on CRM API (used by laneweb)
+            </action>
+         </release>
          <release date="2020-07-13" version="3.6.6" description="bug fix release">
             <action date="2020-06-10" dev="ryanmax" issue="LANEWEB-10584" type="update">
-                     toggle live chat header button based on real-time status of the chat service
+               toggle live chat header button based on real-time status of the chat service
             </action>
          </release>
          <release date="2020-07-06" version="3.6.5" description="bug fix release">
