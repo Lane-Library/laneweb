@@ -22,35 +22,19 @@ steps:
       branch:
         - master
 
-  # Job triiger by tag event      
+  # Job triggered by tag event      
   - name: publish-tag
     pull: always
     image: gcr.io/clever-circlet-125504/drone-kaniko
     settings:
       registry: gcr.io
-      repo: som-laneweb/laneweb
-      cache: true
-      tags:
-        - latest
-        - "${DRONE_COMMIT_SHA}"
+      repo: som-laneweb/solr-javamelody
+      cache: false
+      auto_tag: true
       json_key:
         from_secret: docker_password
     when:
       event:
-        - tag
-  
-  # Job triiger by tag event 
-  - name: add-last-git-tag
-    pull: always
-    image: gcr.io/clever-circlet-125504/gcloud
-    environment:
-      GCP_KEY:
-        from_secret: gcp_key_base64
-    commands:
-      - make add-last-git-tag
-    when:
-      status: success
-      event: 
         - tag
 
   - name: downstream-build
