@@ -58,11 +58,13 @@ public final class Model {
     public static final String IS_ACTIVE_SUNETID = "isActiveSunetID";
 
     public static final String ITEMS = "items";
-    
-    public static final String LIBGUIDE_SERVICE_URI = "libguide-service-uri";
 
     public static final String LIBCAL_SERVICE_URI = "libcal-service-uri";
-    
+
+    public static final String LIBGUIDE_API_SERVICE_URI = "libguide-api-service-uri";
+
+    public static final String LIBGUIDE_SERVICE_URI = "libguide-service-uri";
+
     public static final String LIMIT = "limit";
 
     public static final String LIVE_CHAT_AVAILABLE = "live-chat-available";
@@ -163,7 +165,6 @@ public final class Model {
 
     public static final String VERSION = "version";
 
-    
     private Model() {
         // private constructior
     }
