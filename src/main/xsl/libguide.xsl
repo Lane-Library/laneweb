@@ -71,4 +71,13 @@
          <xsl:apply-templates select="*|text()"/>
       </xsl:copy>
    </xsl:template>
+   
+   
+   <xsl:template match="h:li[@id='s-lg-guide-header-url']//h:span[@class='s-lg-text-greyout']">
+      <xsl:copy>
+         <xsl:attribute name="class" select="@class"/>
+         <xsl:value-of select="replace(./text(),'lane-stanford.libguides.com/','lane.stanford.edu/libguides/')"/>
+      </xsl:copy> 
+   </xsl:template>
+   
 </xsl:stylesheet>
