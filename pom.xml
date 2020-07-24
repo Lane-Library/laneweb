@@ -468,6 +468,7 @@
                                 <include>calendar-min.css</include>
                                 <include>password-table-min.css</include>
                                 <include>portals-min.css</include>
+                                <include>course-reserves-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -527,6 +528,7 @@
                                 <include>clinical-toggle-min.js</include>
                                 <include>search-form-scroll-min.js</include>
                                 <include>message-min.js</include>
+                                <include>course-reserves-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>

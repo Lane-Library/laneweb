@@ -132,12 +132,6 @@ hr {
     text-transform: uppercase;
 }
 
-.course-reserves-instructor {
-    margin-top: 13px;
-    line-height: 13px;
-    font-size: 13px;
-}
-
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 .bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE {
     display: none;

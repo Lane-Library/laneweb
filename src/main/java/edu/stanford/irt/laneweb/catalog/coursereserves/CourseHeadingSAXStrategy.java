@@ -16,7 +16,7 @@ public class CourseHeadingSAXStrategy extends AbstractXHTMLSAXStrategy<Course> {
             return;
         }
         try {
-            startElementWithClass(xmlConsumer, "h4", "backgr-blue-094");
+            startElementWithClass(xmlConsumer, "h4", "course-reserves-heading");
             XMLUtils.data(xmlConsumer, course.getName());
             XMLUtils.data(xmlConsumer, " (");
             XMLUtils.data(xmlConsumer, course.getNumber());
