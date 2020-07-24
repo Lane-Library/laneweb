@@ -61,9 +61,14 @@
          <xsl:value-of select="year"/>
       </div>
       <div class="time">
-         <xsl:value-of select="hour"/>
-         <xsl:text> – </xsl:text>
-         <xsl:value-of select="../end/hour"/>
+         <xsl:if test="./hour != '12:00 AM'">
+            <xsl:value-of select="./hour"/>
+            <xsl:text> – </xsl:text>
+            <xsl:value-of select="../end/hour"/>
+         </xsl:if>
+         <xsl:if test="./hour = '12:00 AM'">
+            <xsl:text>All Day Event</xsl:text>
+         </xsl:if>
       </div>
    </xsl:template>
    <xsl:template match="location">

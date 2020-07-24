@@ -8,7 +8,7 @@
       <!-- Get menu from https://lane-stanford.libguides.com/ -->
       <map:match pattern="libapps-guides-menu.html" type="wildcard">
          <map:generate type="file"
-            src="cachedxml:600:{libguide-service-uri}/oai.php?verb=ListRecords&amp;metadataPrefix=oai_dc&amp;set=guides"/>
+            src="cachedxml:600:{libguide-api-service-uri}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps-guides-menu.xsl"/>
          <map:serialize type="xml"/>
       </map:match>

@@ -78,6 +78,7 @@ public class LanewebConfiguration {
 
     public LanewebConfiguration(
             @Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
+            @Qualifier("java.net.URI/libguide-api-service") final URI libguideApiServiceURI,
             @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
             @Qualifier("java.net.URI/classes-service") final URI classesServiceURI,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
@@ -88,6 +89,7 @@ public class LanewebConfiguration {
         this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
         this.constants.put(Model.CLASSES_SERVICE_URI, classesServiceURI);
         this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
+        this.constants.put(Model.LIBGUIDE_API_SERVICE_URI, libguideApiServiceURI);
         this.constants.put(Model.LIBCAL_SERVICE_URI, libcalServiceURI);
         this.constants.put(Model.CONTENT_BASE, contentBase);
         this.constants.put(Model.BOOKMARKING, bookmarking);
