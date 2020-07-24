@@ -35,9 +35,14 @@
                   </a>
                   <br/>
                   <span class="time">
+                     <xsl:if test="./start/hour != '12:00 AM'">
                      <xsl:value-of select="./start/hour"/>
                      <xsl:text> – </xsl:text>
-                     <xsl:value-of select="./start/hour"/>
+                     <xsl:value-of select="./end/hour"/>
+                     </xsl:if>
+                     <xsl:if test="./start/hour = '12:00 AM'">
+                        <xsl:text>All Day Event</xsl:text>
+                     </xsl:if>
                   </span>
                </p>
             </div>
