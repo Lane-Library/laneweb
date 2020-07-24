@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<li>
-   <a href="?id=1">name<span style="font-size:smaller"> - instructor (number)</span>
-   </a>
-</li>
+<tr>
+   <td>
+      <a class="course-name" href="course-reserves-list.html?id=1">name</a>
+      <span class="course-number"> (number)</span>
+   </td>
+   <td>instructor</td>
+   <td>department</td>
+</tr>

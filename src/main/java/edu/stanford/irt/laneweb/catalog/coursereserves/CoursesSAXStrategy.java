@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.catalog.coursereserves;
 import java.util.List;
 
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
@@ -18,22 +17,19 @@ public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
         try {
             xmlConsumer.startDocument();
             for (Course course : list) {
-                startLi(xmlConsumer);
-                startAnchor(xmlConsumer, "?id=" + course.getId());
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "tr");
+                XMLUtils.startElement(xmlConsumer, XHTML_NS, "td");
+                startAnchorWithClass(xmlConsumer, "course-reserves-list.html?id=" + course.getId(), "course-name");
                 XMLUtils.data(xmlConsumer, course.getName());
-                AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute("", "style", "style", "CDATA", "font-size:smaller");
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "span", atts);
-                String courseInfo = new StringBuilder(" -\u00a0")
-                        .append(course.getInstructor())
-                        .append(" (")
-                        .append(course.getNumber())
-                        .append(')')
-                        .toString();
+                endAnchor(xmlConsumer);
+                startElementWithClass(xmlConsumer, "span", "course-number");
+                String courseInfo = new StringBuilder(" (").append(course.getNumber()).append(")").toString();
                 XMLUtils.data(xmlConsumer, courseInfo);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
-                endAnchor(xmlConsumer);
-                endLi(xmlConsumer);
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "td");
+                createElement(xmlConsumer, "td", course.getInstructor());
+                createElement(xmlConsumer, "td", course.getDepartment());
+                XMLUtils.endElement(xmlConsumer, XHTML_NS, "tr");
             }
             xmlConsumer.endDocument();
         } catch (SAXException e) {

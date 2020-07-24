@@ -39,6 +39,7 @@ public class CoursesSAXStrategyTest {
         expect(this.course.getName()).andReturn("name");
         expect(this.course.getInstructor()).andReturn("instructor");
         expect(this.course.getNumber()).andReturn("number");
+        expect(this.course.getDepartment()).andReturn("department");
         replay(this.course);
         this.saxStrategy.toSAX(Collections.singletonList(this.course), this.xmlConsumer);
         verify(this.course);

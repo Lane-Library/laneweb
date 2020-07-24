@@ -133,11 +133,9 @@ hr {
 }
 
 .course-reserves-instructor {
-    float: right;
     margin-top: 13px;
     line-height: 13px;
     font-size: 13px;
-    color: #333;
 }
 
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/

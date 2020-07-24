@@ -36,7 +36,8 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
                     n.get("id").asInt(),
                     n.get("name").asText(),
                     n.get("number").asText(),
-                    n.get("instructor").asText());
+                    n.get("instructor").asText(),
+                    n.get("department").asText());
             return new CourseReservesItemList(course, itemList);
         } else {
             return new CourseReservesItemList(itemList);

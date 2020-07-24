@@ -15,6 +15,6 @@ public class CourseDeserializer extends JsonDeserializer<Course> {
     public Course deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
         return new Course(node.get("id").asInt(), node.get("name").asText(), node.get("number").asText(),
-                node.get("instructor").asText());
+                node.get("instructor").asText(), node.get("department").asText());
     }
 }
