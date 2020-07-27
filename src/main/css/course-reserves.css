@@ -44,16 +44,16 @@
 }
 
 #course-reserves-search {
-    width: 95%;
+    width: 100%;
     font-size: 14px;
     height: 30px;
     padding-left: 7px;
+    box-sizing: border-box;
 }
 
 .course-reserves-search-button {
-    position: relative;
-    left: -25px;
-    top: 0;
+    top: 88px;
+    right: 20px;
 }
 
 /* so page doesn't bounce when course list is filtered */
