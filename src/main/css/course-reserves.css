@@ -7,7 +7,7 @@
 }
 .course-reserves .button {
     border: none;
-    background-color: unset;
+    background-color: transparent;
 }
 
 .course-reserves table {
@@ -15,8 +15,8 @@
 }
 
 .course-reserves thead {
-    color: unset;
-    background: unset;
+    color: #000;
+    background-color: transparent;
 }
 
 .course-reserves th {
@@ -24,11 +24,11 @@
     border-bottom: 1px solid #d0d8da;
     padding: 10px;
 }
-.course-reserves tr {
+.course-reserves tbody tr {
     border-bottom: 1px solid #d0d8da;
-    background: none;
+    background-color: transparent;
 }
-.course-reserves td {
+.course-reserves tbody td {
     border-left: none;
     border-right: none;
     text-align: left;
