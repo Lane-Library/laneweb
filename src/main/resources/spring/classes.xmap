@@ -134,7 +134,7 @@
          <map:serialize type="xml"/>
       </map:match>
       <map:match pattern="libcal-history.xml" type="wildcard">
-         <map:generate type="file" src="cocoon://classes/libcals.xml?id=49008"/>
+         <map:generate type="file" src="cache:600:{libcal-service-uri}/events/12663/49008"/>
          <map:transform type="saxon" src="classpath:/xsl/classes/libcal-history.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
