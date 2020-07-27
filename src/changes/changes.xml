@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-07-27" version="3.6.9" description="bug fix release">
+            <action date="2020-07-27" dev="ryanmax" issue="LANEWEB-10594" type="update">
+               libcal changes not appearing in class lists (cache validity too long)
+            </action>
+            <action date="2020-07-27" dev="ryanmax" issue="LANEWEB-10593" type="update">
+               libcal classes not appearing on /med-history/events.html
+            </action>
+         </release>
          <release date="2020-07-24" version="3.6.8" description="emergency release">
             <action date="2020-07-15" dev="alainb" issue="LANEWEB-10590" type="fix">
               Library Classes Homepage- end time wrong
