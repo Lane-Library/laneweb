@@ -51,6 +51,11 @@
     box-sizing: border-box;
 }
 
+/* disable IE 11 input clear 'X' button */
+#course-reserves-search::-ms-clear {
+    display: none;
+}
+
 .course-reserves-search-button {
     top: 88px;
     right: 20px;
