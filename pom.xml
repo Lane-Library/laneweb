@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>65</version>
+        <version>66</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.6.10-SNAPSHOT</version>
@@ -293,7 +293,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.36</version>
+            <version>9.0.37</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
