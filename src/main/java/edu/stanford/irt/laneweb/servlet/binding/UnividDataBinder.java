@@ -17,7 +17,7 @@ public class UnividDataBinder implements DataBinder {
             HttpSession session = request.getSession();
             String univid = (String) session.getAttribute(Model.UNIVID);
             if (univid == null) {
-                univid = (String) request.getAttribute("suUnivID");
+                univid = request.getHeader("LANE_OIDC_employeeID");
                 if (univid != null) {
                     session.setAttribute(Model.UNIVID, univid);
                 }

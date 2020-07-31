@@ -39,7 +39,7 @@ public class UnividDataBinderTest {
         model.put(Model.USER_ID, "user@stanford.edu");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
-        expect(this.request.getAttribute("suUnivID")).andReturn("univid");
+        expect(this.request.getHeader("LANE_OIDC_employeeID")).andReturn("univid");
         this.session.setAttribute(Model.UNIVID, "univid");
         replay(this.request, this.session);
         this.dataBinder.bind(model, this.request);
@@ -65,7 +65,7 @@ public class UnividDataBinderTest {
         model.put(Model.USER_ID, "user@stanford.edu");
         expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.UNIVID)).andReturn(null);
-        expect(this.request.getAttribute("suUnivID")).andReturn(null);
+        expect(this.request.getHeader("LANE_OIDC_employeeID")).andReturn(null);
         replay(this.request, this.session);
         this.dataBinder.bind(model, this.request);
         assertNull(model.get(Model.UNIVID));
