@@ -1,11 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.binding.user;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -17,21 +11,17 @@ public class RequestAttributeUserFactory implements UserFactory {
 
     private static final String AT = "@";
 
-    private static final String EMAIL_ATTRIBUTE_NAME = "mail";
+    private static final String EMAIL_ATTRIBUTE_NAME = "LANE_OIDC_mail";
 
     private static final Logger log = LoggerFactory.getLogger(RequestAttributeUserFactory.class);
 
-    private static final String NAME_ATTRIBUTE_NAME = "displayName";
-
-    private static final String SHIBBOLETH_PROVIDER = "Shib-Identity-Provider";
-
-    private final Map<String, String> domainMap;
+    private static final String NAME_ATTRIBUTE_NAME = "LANE_OIDC_displayName";
 
     private final String userIdHashKey;
 
+    // TODO: using headers instead of attributes. best practice? rename class?
     public RequestAttributeUserFactory(final String userIdHashKey) {
         this.userIdHashKey = userIdHashKey;
-        this.domainMap = new HashMap<>();
     }
 
     @Override
@@ -39,67 +29,27 @@ public class RequestAttributeUserFactory implements UserFactory {
         User user = null;
         String remoteUser = request.getRemoteUser();
         if (remoteUser != null) {
-            user = new User(getId(remoteUser, request), getName(request), getEmail(request), this.userIdHashKey);
+            user = new User(checkId(remoteUser), getName(request), getEmail(request), this.userIdHashKey);
         }
         return user;
     }
 
-    private String getDomain(final HttpServletRequest request) {
-        String domain;
-        String provider = (String) request.getAttribute(SHIBBOLETH_PROVIDER);
-        if (provider == null) {
-            domain = "unknown";
-        } else {
-            synchronized (this.domainMap) {
-                domain = this.domainMap.get(provider);
-                if (domain == null) {
-                    domain = getDomainFromProvider(provider);
-                    this.domainMap.put(provider, domain);
-                }
-            }
-        }
-        return domain;
-    }
-
-    private String getDomainFromProvider(final String provider) {
-        String domain = null;
-        try {
-            domain = new URI(provider).getHost();
-            int first = domain.indexOf('.');
-            int last = domain.lastIndexOf('.');
-            if (first != last) {
-                domain = domain.substring(first + 1, domain.length());
-            }
-        } catch (URISyntaxException e) {
-            log.error(e.getMessage(), e);
-            domain = "unknown";
-        }
-        return domain;
-    }
-
-    private String getEmail(final HttpServletRequest request) {
-        return getFirstToken(request.getAttribute(EMAIL_ATTRIBUTE_NAME));
-    }
-
-    private String getFirstToken(final Object value) {
-        String firstToken = null;
-        if (value != null) {
-            firstToken = new StringTokenizer(value.toString(), ";").nextToken();
-        }
-        return firstToken;
-    }
-
-    private String getId(final String remoteUser, final HttpServletRequest request) {
-        String id;
-        if (remoteUser.contains(AT)) {
-            id = remoteUser;
-        } else {
-            id = new StringBuilder(remoteUser).append(AT).append(getDomain(request)).toString();
+    // TODO: can we assume OIDC will always populate user domain?
+    // if not, may need another attribute from OIDC/RedHatSSO to determine domain
+    private String checkId(final String remoteUser) {
+        String id = remoteUser;
+        if (!id.contains(AT)) {
+            id = id + AT + "unknown";
+            log.error("user mising domain: {}", remoteUser);
         }
         return id;
     }
 
+    private String getEmail(final HttpServletRequest request) {
+        return request.getHeader(EMAIL_ATTRIBUTE_NAME);
+    }
+
     private String getName(final HttpServletRequest request) {
-        return getFirstToken(request.getAttribute(NAME_ATTRIBUTE_NAME));
+        return request.getHeader(NAME_ATTRIBUTE_NAME);
     }
 }
