@@ -257,7 +257,7 @@ public class LaneSearchIT {
     @Test
     public void testLaneSearchReferenceManager() throws Exception {
         // reference manager
-        this.mockMvc.perform(get("/eresources/search.html?q=reference manager").servletPath("/eresources/search.html"))
+        this.mockMvc.perform(get("/eresources/search.html?q=reference manager&facets=recordType:\"bib\"").servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
