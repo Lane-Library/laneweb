@@ -112,6 +112,13 @@ public class LaneSearchIT {
     }
 
     @Test
+    public void testLaneSearchCitationManager() throws Exception {
+        // citation manager
+        this.mockMvc.perform(get("/eresources/search.html?q=citation manager").servletPath("/eresources/search.html"))
+                .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
+    }
+
+    @Test
     public void testLaneSearchClasses() throws Exception {
         // Classes
         this.mockMvc.perform(get("/eresources/search.html?q=classes").servletPath("/eresources/search.html"))
@@ -252,13 +259,6 @@ public class LaneSearchIT {
         this.mockMvc.perform(get("/eresources/search.html?q=PubMed").servletPath("/eresources/search.html")).andExpect(
                 xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", this.ns).exists());
         // pubmed
-    }
-
-    @Test
-    public void testLaneSearchReferenceManager() throws Exception {
-        // reference manager
-        this.mockMvc.perform(get("/eresources/search.html?q=reference manager&facets=recordType:\"bib\"").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
     @Test
