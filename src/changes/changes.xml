@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-08-10" version="3.6.10" description="bug fix release">
+            <action date="2020-07-31" dev="ryanmax" issue="LANEWEB-10585" type="update">
+                Update Course Reserves Page Functionality &amp; Layout
+            </action>
+         </release>
          <release date="2020-07-27" version="3.6.9" description="bug fix release">
             <action date="2020-07-27" dev="ryanmax" issue="LANEWEB-10594" type="update">
                libcal changes not appearing in class lists (cache validity too long)
