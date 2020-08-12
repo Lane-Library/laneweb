@@ -12,9 +12,12 @@
             <xsl:when test="starts-with(@href, '/libguides')">
                <xsl:attribute name="href" select="replace(@href,'/libguides/','https://lane-stanford.libguides.com/')"/>
             </xsl:when>
-             <xsl:when test="starts-with(@href, '/')">
+             <xsl:when test="starts-with(@href, '/') and not(starts-with(@href, '//')) ">
                <xsl:attribute name="href" select="concat('//lane.stanford.edu', @href)"/>
             </xsl:when>
+            <xsl:otherwise>
+             <xsl:attribute name="href" select="@href" />
+            </xsl:otherwise>
          </xsl:choose>
          <xsl:apply-templates select="*|text()"/>
       </xsl:copy>
