@@ -39,7 +39,6 @@ import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
 import edu.stanford.irt.cocoon.xml.XMLByteStreamInterpreter;
-import edu.stanford.irt.laneweb.classes.EventListTransformer;
 import edu.stanford.irt.laneweb.cocoon.DebugTransformer;
 import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
 import edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer;
@@ -82,13 +81,6 @@ public class PipelineConfiguration {
     @Scope("prototype")
     public Transformer debugTransformer() {
         return new DebugTransformer();
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/eventlist")
-    @Scope("prototype")
-    public Transformer eventListTransformer(final SourceResolver sourceResolver,
-            @Qualifier("edu.stanford.irt.cocoon.xml.SAXParser/xml") final SAXParser xmlSAXParser) {
-        return new EventListTransformer(sourceResolver, xmlSAXParser);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/expires")

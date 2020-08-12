@@ -61,7 +61,7 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
         this.sourceResolver = sourceResolver;
         this.maxOKTime = maxOKTime;
         this.contentBase = contentBase;
-        this.classesURI = classesURI;
+       this.classesURI = classesURI;
     }
 
     @Override
@@ -74,7 +74,7 @@ public class IndexDotHtmlStatusProvider implements StatusProvider {
         model.put(Model.SITEMAP_URI, "/index.html");
         model.put(Model.CONTENT_BASE, this.contentBase);
         model.put(Model.TEMPLATE, "template");
-        model.put(Model.CLASSES_SERVICE_URI, this.classesURI);
+        model.put(Model.LIBCAL_SERVICE_URI, this.classesURI);
         model.put(Sitemap.class.getName(), this.sitemap);
         try {
             Pipeline pipeline = this.sitemap

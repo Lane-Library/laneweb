@@ -115,7 +115,7 @@
         </map:match>
         <!-- these classes pages need to not be cached as failed xincludes may get cached
             see case https://irt-bugs.stanford.edu/default.asp?135432 -->
-        <map:match pattern="classes-consult/(laneclasses|archives|laneclass|archive)\.html" type="regexp">
+        <map:match pattern="classes-consult/laneclasses.html" type="regexp">
             <map:generate type="html" src="{content-base}/{0}"/>
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>

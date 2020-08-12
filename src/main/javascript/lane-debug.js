@@ -69,7 +69,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "bookmark-login.js",
         "lane-tracking.js",
         "lane-google.js",
-        "lane-classes.js",
         "lane-popup.js",
         "lane-metasearch.js",
         "lane-search-images.js",

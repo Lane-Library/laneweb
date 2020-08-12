@@ -27,7 +27,7 @@ public class LanewebConfigurationTest {
 
     @Before
     public void setUp() throws URISyntaxException {
-        this.configuration = new LanewebConfiguration(new URI("libguide"), new URI("libguideApi"), new URI("libcal"), new URI("classes"), new URI("content"), "rw",
+        this.configuration = new LanewebConfiguration(new URI("libguide"), new URI("libguideApi"), new URI("libcal"), new URI("content"), "rw",
                 mock(ServletContext.class), "version");
     }
 
@@ -56,7 +56,6 @@ public class LanewebConfigurationTest {
         Map<String, Object> model = this.configuration.model();
         assertEquals("version", model.get(Model.VERSION));
         assertEquals("content", ModelUtil.getObject(model, Model.CONTENT_BASE, URI.class).toString());
-        assertEquals("classes", ModelUtil.getObject(model, Model.CLASSES_SERVICE_URI, URI.class).toString());
         assertEquals("libguide", ModelUtil.getObject(model, Model.LIBGUIDE_SERVICE_URI, URI.class).toString());
         assertEquals("libcal", ModelUtil.getObject(model, Model.LIBCAL_SERVICE_URI, URI.class).toString()); 
         assertEquals("rw", ModelUtil.getString(model, Model.BOOKMARKING));

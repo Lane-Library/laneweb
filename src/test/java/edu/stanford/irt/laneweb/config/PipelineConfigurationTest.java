@@ -48,11 +48,6 @@ public class PipelineConfigurationTest {
     }
 
     @Test
-    public void testEventListTransformer() {
-        assertNotNull(this.configuration.eventListTransformer(null, null));
-    }
-
-    @Test
     public void testExpiresCachingPipeline() {
         assertNotNull(this.configuration.expiresCachingPipeline(null, null));
     }
