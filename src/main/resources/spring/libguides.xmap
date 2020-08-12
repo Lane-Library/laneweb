@@ -23,16 +23,10 @@
          <map:serialize type="xml"/>
       </map:match>
       
-      <!-- Guides Menu display in lane-stanford.libguides.com -->
-      <map:match pattern="lane-guides-menu.html" type="wildcard">
-         <map:generate type="file" src="cocoon://libguides/guides-menu.html"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
-         <map:serialize type="xml"/>
-      </map:match>
       
-      <!-- Footer to display in lane-stanford.libguides.com and lane-stanford.libcal.com -->
-      <map:match pattern="footer.html" type="wildcard">
-         <map:generate type="file" src="cocoon://content/footer.html"/>
+      <!-- Footer and navigation to display in lane-stanford.libguides.com and lane-stanford.libcal.com -->
+        <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
+         <map:generate type="file" src="cocoon://content/{0}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
          <map:serialize type="xml"/>
       </map:match>     
