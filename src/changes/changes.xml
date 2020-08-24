@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-08-24" version="3.6.12" description="bug fix release">
+            <action date="2020-08-24" dev="alainb" issue="LANEWEB-10603" type="fix">
+                Double / in the libcal URL
+            </action>
+            <action date="2020-08-24" dev="alainb" issue="LANEWEB-10604" type="fix">
+                class menu not display on libcal
+            </action>
+         </release>
          <release date="2020-08-17" version="3.6.11" description="bug fix release">
             <action date="2020-08-10" dev="alainb" issue="LANEWEB-10589" type="update">
                 ORC cleanup
