@@ -71,3 +71,7 @@
     line-height: 13px;
     font-size: 13px;
 }
+
+.version-note {
+    padding-left: 25px;
+}
