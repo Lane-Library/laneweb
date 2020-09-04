@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-09-04" version="3.6.13" description="bug fix release">
+            <action date="2020-08-10" dev="ryanmax" issue="/LANEWEB-10605" type="update">
+               add holdings note to reserves items
+            </action>
+         </release>
          <release date="2020-08-24" version="3.6.12" description="bug fix release">
             <action date="2020-08-24" dev="alainb" issue="LANEWEB-10603" type="fix">
                 Double / in the libcal URL
