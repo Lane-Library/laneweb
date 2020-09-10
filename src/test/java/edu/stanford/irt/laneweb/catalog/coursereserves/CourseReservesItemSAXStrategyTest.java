@@ -46,6 +46,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getAuthor()).andReturn("author");
         expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(1));
         expect(this.item.getCallNumber()).andReturn("call number");
+        expect(this.item.getVersionNote()).andReturn("version note");
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
@@ -64,6 +65,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getAuthor()).andReturn("author");
         expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(0));
         expect(this.item.getCallNumber()).andReturn("call number");
+        expect(this.item.getVersionNote()).andReturn(null);
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
@@ -81,6 +83,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getURL()).andReturn("url");
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn(null);
+        expect(this.item.getVersionNote()).andReturn(null);
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
@@ -99,6 +102,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getAuthor()).andReturn("author");
         expect(this.item.getAvailableCount()).andReturn(null);
         expect(this.item.getCallNumber()).andReturn("call number");
+        expect(this.item.getVersionNote()).andReturn(null);
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
@@ -119,6 +123,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getAuthor()).andReturn("author");
         expect(this.item.getAvailableCount()).andReturn(Integer.valueOf(1));
         expect(this.item.getCallNumber()).andReturn(null);
+        expect(this.item.getVersionNote()).andReturn(null);
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
@@ -136,6 +141,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
+        expect(this.item.getVersionNote()).andReturn(null);
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);
@@ -161,6 +167,7 @@ public class CourseReservesItemSAXStrategyTest {
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
         expect(this.item.getAuthor()).andReturn("author");
+        expect(this.item.getVersionNote()).andReturn(null);
         replay(this.item);
         this.xmlConsumer.startDocument();
         this.saxStrategy.toSAX(this.item, this.xmlConsumer);

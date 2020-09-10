@@ -47,7 +47,7 @@ public class StatusConfiguration {
     public IndexDotHtmlStatusProvider indexDotHtmlStatusProvider(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap") final Sitemap sitemap,
             final SourceResolver sourceResolver, @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
-            @Qualifier("java.net.URI/classes-service") final URI classesServiceURI) {
+            @Qualifier("java.net.URI/libcal-service") final URI classesServiceURI) {
         return new IndexDotHtmlStatusProvider(sitemap, componentFactory, sourceResolver, SLOW_INDEX_HTML_TIME,
                 contentBase, classesServiceURI);
     }

@@ -57,6 +57,10 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             } else if (type == ItemType.VIDEO) {
                 createStrong(xmlConsumer, "Video");
             }
+            String versionNote = item.getVersionNote();
+            if (versionNote != null) {
+                createSpanWithClass(xmlConsumer, "version-note", versionNote);
+            }
             endDiv(xmlConsumer);
             if (type == ItemType.PRINT_BOOK) {
                 availableCount(xmlConsumer, item.getAvailableCount());

@@ -1,0 +1,77 @@
+/* course reserves style for /biomed-resources/course-reserves.html */
+
+.course-reserves-heading {
+    color: #fff;
+    background-color: #09425a;
+    padding: 10px 12px;
+}
+.course-reserves .button {
+    border: none;
+    background-color: transparent;
+}
+
+.course-reserves table {
+    width: 100%;
+}
+
+.course-reserves thead {
+    color: #000;
+    background-color: transparent;
+}
+
+.course-reserves th {
+    text-align: left;
+    border-bottom: 1px solid #d0d8da;
+    padding: 10px;
+}
+.course-reserves tbody tr {
+    border-bottom: 1px solid #d0d8da;
+    background-color: transparent;
+}
+.course-reserves tbody td {
+    border-left: none;
+    border-right: none;
+    text-align: left;
+    padding: 10px;
+}
+
+.course-name {
+    font-weight: bolder;
+}
+
+.course-number {
+    font-size: smaller;
+}
+
+#course-reserves-search {
+    width: 100%;
+    font-size: 14px;
+    height: 30px;
+    padding-left: 7px;
+    box-sizing: border-box;
+}
+
+/* disable IE 11 input clear 'X' button */
+#course-reserves-search::-ms-clear {
+    display: none;
+}
+
+.course-reserves-search-button {
+    top: 88px;
+    right: 20px;
+}
+
+/* so page doesn't bounce when course list is filtered */
+.course-reserves-container {
+    min-height: 575px;
+}
+
+.course-reserves-instructor {
+    margin-top: 13px;
+    line-height: 13px;
+    font-size: 13px;
+}
+
+.version-note {
+    padding-left: 25px;
+}

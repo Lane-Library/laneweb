@@ -7,6 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-09-04" version="3.6.13" description="bug fix release">
+            <action date="2020-08-10" dev="ryanmax" issue="LANEWEB-10605" type="update">
+               add holdings note to reserves items
+            </action>
+         </release>
+         <release date="2020-08-24" version="3.6.12" description="bug fix release">
+            <action date="2020-08-24" dev="alainb" issue="LANEWEB-10603" type="fix">
+                Double / in the libcal URL
+            </action>
+            <action date="2020-08-24" dev="alainb" issue="LANEWEB-10604" type="fix">
+                class menu not display on libcal
+            </action>
+         </release>
+         <release date="2020-08-17" version="3.6.11" description="bug fix release">
+            <action date="2020-08-10" dev="alainb" issue="LANEWEB-10589" type="update">
+                ORC cleanup
+            </action>
+         </release>
+         <release date="2020-08-10" version="3.6.10" description="bug fix release">
+            <action date="2020-07-31" dev="ryanmax" issue="LANEWEB-10585" type="update">
+                Update Course Reserves Page Functionality &amp; Layout
+            </action>
+         </release>
          <release date="2020-07-27" version="3.6.9" description="bug fix release">
             <action date="2020-07-27" dev="ryanmax" issue="LANEWEB-10594" type="update">
                libcal changes not appearing in class lists (cache validity too long)

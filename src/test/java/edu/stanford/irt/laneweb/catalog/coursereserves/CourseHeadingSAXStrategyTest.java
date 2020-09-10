@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.catalog.coursereserves;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -17,7 +18,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class CourseHeadingSAXStrategyTest {
 
@@ -37,6 +37,7 @@ public class CourseHeadingSAXStrategyTest {
     @Test
     public void testToSAX() throws SAXException, IOException {
         expect(this.course.getName()).andReturn("name");
+        expect(this.course.getNumber()).andReturn("number");
         expect(this.course.getInstructor()).andReturn("instructor");
         replay(this.course);
         this.xmlConsumer.startDocument();
@@ -58,7 +59,7 @@ public class CourseHeadingSAXStrategyTest {
     @Test(expected = LanewebException.class)
     public void testToSAXThrowsException() throws SAXException {
         XMLConsumer mock = mock(XMLConsumer.class);
-        mock.startElement("http://www.w3.org/1999/xhtml", "h3", "h3", XMLUtils.EMPTY_ATTRIBUTES);
+        mock.startElement(isA(String.class), isA(String.class), isA(String.class), isA(org.xml.sax.Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(mock);
         this.saxStrategy.toSAX(this.course, mock);

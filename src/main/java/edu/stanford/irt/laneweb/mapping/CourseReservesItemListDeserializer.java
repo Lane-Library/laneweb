@@ -29,14 +29,16 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
                 n.get("availableCount").asInt(),
                 getTextFromNode(n.get("title")),
                 getTextFromNode(n.get("url")),
-                ItemType.valueOf(n.get("type").asText()))));
+                ItemType.valueOf(n.get("type").asText()),
+                getTextFromNode(n.get("versionNote")))));
         if (node.hasNonNull("course")) {
             JsonNode n = node.get("course");
             Course course = new Course(
                     n.get("id").asInt(),
                     n.get("name").asText(),
                     n.get("number").asText(),
-                    n.get("instructor").asText());
+                    n.get("instructor").asText(),
+                    n.get("department").asText());
             return new CourseReservesItemList(course, itemList);
         } else {
             return new CourseReservesItemList(itemList);

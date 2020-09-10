@@ -16,13 +16,16 @@ public class CourseHeadingSAXStrategy extends AbstractXHTMLSAXStrategy<Course> {
             return;
         }
         try {
-            XMLUtils.startElement(xmlConsumer, XHTML_NS, "h3");
+            startElementWithClass(xmlConsumer, "h4", "course-reserves-heading");
             XMLUtils.data(xmlConsumer, course.getName());
-            startElementWithClass(xmlConsumer, "span", "course-reserves-instructor");
+            XMLUtils.data(xmlConsumer, " (");
+            XMLUtils.data(xmlConsumer, course.getNumber());
+            XMLUtils.data(xmlConsumer, ")");
+            startElementWithClass(xmlConsumer, "div", "course-reserves-instructor");
             XMLUtils.data(xmlConsumer, "Instructor: ");
-            createElement(xmlConsumer, "strong", course.getInstructor());
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
-            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h3");
+            XMLUtils.data(xmlConsumer, course.getInstructor());
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "div");
+            XMLUtils.endElement(xmlConsumer, XHTML_NS, "h4");
         } catch (SAXException e) {
             throw new LanewebException(e);
         }

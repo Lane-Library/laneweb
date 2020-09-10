@@ -6,38 +6,37 @@
    
       <!-- ********* menu ********** -->
       <!-- Get menu from https://lane-stanford.libguides.com/ -->
-      <map:match pattern="libapps-guides-menu.html" type="wildcard">
+      <map:match pattern="remote-guides-menu.html" type="wildcard">
          <map:generate type="file"
             src="cachedxml:600:{libguide-api-service-uri}"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps-guides-menu.xsl"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/remote-guides-menu.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
       
       <!-- Guides Menu display in laneweb -->
       <map:match pattern="guides-menu.html" type="wildcard">
          <map:aggregate type="caching" element="doc">
-            <map:generate type="file" src="cocoon://libguides/libapps-guides-menu.html"/>
+            <map:generate type="file" src="cocoon://libguides/remote-guides-menu.html"/>
             <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
          </map:aggregate>
-         <map:transform type="saxon" src="classpath:/xsl/guides-menu.xsl"/>
-         <map:serialize type="xml"/>
-      </map:match>
-      
-      <!-- Guides Menu display in lane-stanford.libguides.com -->
-      <map:match pattern="lane-guides-menu.html" type="wildcard">
-         <map:generate type="file" src="cocoon://libguides/guides-menu.html"/>
-         <map:transform type="saxon" src="classpath:/xsl/lane-guides-links.xsl"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-guides-menu.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
       
       
+      <!-- Footer and navigation to display in lane-stanford.libguides.com and lane-stanford.libcal.com -->
+        <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
+         <map:generate type="file" src="cocoon://content/{0}"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
+         <map:serialize type="xml"/>
+      </map:match>     
       
        <!-- ********* CONTENT ********** -->
        <!-- Content from lane-stanford.libguides.com -->
       <map:match pattern="content/**" type="wildcard">
          <map:generate type="html" src="cache:600:{libguide-service-uri}/{1}?{query-string}"/>
          <map:transform type="xinclude"/>
-         <map:transform type="saxon" src="classpath:/xsl/libguide.xsl"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl"/>
          <map:serialize type="xhtml"/>
       </map:match>
       
