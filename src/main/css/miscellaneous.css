@@ -133,7 +133,7 @@ hr {
 }
 
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-.bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE {
+.bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE, .no-js {
     display: none;
 }
 

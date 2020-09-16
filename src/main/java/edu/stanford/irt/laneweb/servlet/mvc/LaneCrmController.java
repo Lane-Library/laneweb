@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,40 +26,43 @@ public class LaneCrmController {
 
     private static final String LANELIBACQ_PATH = "/apps/lanelibacqs";
 
+    private static final String[] VALID_EMAILS = { ".*@stanford.edu$", ".*@stanfordhealthcare.org$", ".*@stanfordchildrens.org$" };
+
     private CRMService crmService;
 
     @Autowired
     public LaneCrmController(final CRMService crmService) {
         this.crmService = crmService;
     }
-
+    
+   
     @PostMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
-    public String formSubmitLanelibacqs(final Model model, final RedirectAttributes atts,  HttpServletRequest request) throws IOException {
-        Map<String, Object> map = model.asMap();
-        String ip = request.getRemoteAddr();
-        int responseCode = this.crmService.submitRequest(map, ip);
-        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.resolve(responseCode));
-        return getRedirectTo(map, response);
+    public String formSubmitLanelibacqs( final RedirectAttributes atts, HttpServletRequest request)  {
+            return  "redirect:"+ ERROR_URL;
     }
-
+    
     @PostMapping(value = LANELIBACQ_PATH, consumes = JSON_MIME_TYPE)
-    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback, HttpServletRequest request)
-            throws IOException {
+    public ResponseEntity<String> jsonSubmitLanelibacqs(@RequestBody final Map<String, Object> feedback,
+            HttpServletRequest request) throws IOException {
+          if (!validateStanfordEmail(feedback)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         String ip = request.getRemoteAddr();
         int responseCode = this.crmService.submitRequest(feedback, ip);
         return new ResponseEntity<>(HttpStatus.resolve(responseCode));
     }
 
-    private String getRedirectTo(final Map<String, Object> map, final ResponseEntity<String> response) {
-        String redirectTo = (String) map.get("redirect");
-        if (response.getStatusCode() != HttpStatus.OK) {
-            redirectTo = ERROR_URL;
-        } else if (redirectTo == null) {
-            redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
+    
+    private boolean validateStanfordEmail(Map<String, Object> httpParameters) {
+        String email = (String) httpParameters.get("requestedBy.email");
+        if(null == email || "".equals(email)) {
+            return false;
         }
-        if (redirectTo == null) {
-            redirectTo = "/index.html";
+        for (String emailValidation : VALID_EMAILS) {
+            if (email.matches(emailValidation)) {
+                return true;
+            }
         }
-        return "redirect:" + redirectTo;
+        return false;
     }
 }

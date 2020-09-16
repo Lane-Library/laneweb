@@ -9,6 +9,8 @@ import static org.junit.Assert.assertSame;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.crm.CRMService;
 
@@ -27,54 +28,65 @@ public class LaneCrmControllerTest {
     private CRMService service;
     
     private HttpServletRequest request;
-
+    
+    Map<String, Object > requestParameters;
     @Before
     public void setUp() {
         this.service = mock(CRMService.class);
         this.request = mock(HttpServletRequest.class);
         this.controller = new LaneCrmController(this.service);
+        requestParameters = new HashMap<String, Object>();
+        requestParameters.put("requestedBy.email", "test@stanford.edu"); 
+
     }
 
     @Test
     public void testFormSubmitLanelibacqs() throws IOException {
-        Model model = mock(Model.class);
-        expect(model.asMap()).andReturn(Collections.singletonMap("foo", "bar"));
-        expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(this.service.submitRequest(Collections.singletonMap("foo", "bar"), "ip")).andReturn(200);
-        replay(model, this.request, this.service);
-        assertEquals("redirect:/index.html", this.controller.formSubmitLanelibacqs(model, null, this.request));
-        verify(model, this.service);
-    }
-
-    @Test
-    public void testFormSubmitLanelibacqs500() throws IOException {
-        Model model = mock(Model.class);
-        expect(model.asMap()).andReturn(Collections.singletonMap("foo", "bar"));
-        expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(this.service.submitRequest(Collections.singletonMap("foo", "bar"), "ip")).andReturn(500);
-        replay(model, this.request, this.service);
-        assertEquals("redirect:/error.html", this.controller.formSubmitLanelibacqs(model, null, this.request));
-        verify(model, this.service);
-    }
-
-    @Test
-    public void testFormSubmitLanelibacqsRedirect() throws IOException {
-        Model model = mock(Model.class);
-        expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(model.asMap()).andReturn(Collections.singletonMap("redirect", "/redirect"));
-        expect(this.service.submitRequest(Collections.singletonMap("redirect", "/redirect"), "ip")).andReturn(200);
-        replay(model, this.request, this.service);
-        assertEquals("redirect:/redirect", this.controller.formSubmitLanelibacqs(model, null, this.request));
-        verify(model, this.service);
+        assertEquals("redirect:/error.html", this.controller.formSubmitLanelibacqs( null, this.request));
     }
 
     @Test
     public void testJsonSubmitLanelibacqs() throws IOException {
         expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(this.service.submitRequest(Collections.emptyMap(),"ip")).andReturn(200);
+        expect(this.service.submitRequest(Collections.singletonMap("requestedBy.email", "test@stanford.edu"),"ip")).andReturn(200);
         replay(this.request, this.service);
-        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.emptyMap(), this.request);
+        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanford.edu"), this.request);
         assertSame(HttpStatus.OK, response.getStatusCode());
-        verify(this.service);
+        verify(this.service, this.request);
     }
+    
+
+    @Test
+    public void testShcValidEmail() throws IOException {
+        expect(this.request.getRemoteAddr()).andReturn("ip");
+        expect(this.service.submitRequest(Collections.singletonMap("requestedBy.email", "test@stanfordhealthcare.org"),"ip")).andReturn(200);
+        replay(this.request, this.service);
+        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanfordhealthcare.org"), this.request);
+        assertSame(HttpStatus.OK, response.getStatusCode());
+        verify(this.service, this.request);
+    }
+    
+    @Test
+    public void testLpchValidEmail() throws IOException {
+        expect(this.request.getRemoteAddr()).andReturn("ip");
+        expect(this.service.submitRequest(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.org"),"ip")).andReturn(200);
+        replay(this.request, this.service);
+        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.org"), this.request);
+        assertSame(HttpStatus.OK, response.getStatusCode());
+        verify(this.service, this.request);
+    }
+    
+    @Test
+    public void testNotValidEmail() throws IOException {
+        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@gmail.com"), this.request);
+        assertSame(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+    
+    @Test
+    public void testNotEndValidEmail() throws IOException {
+        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.orgg"), this.request);
+        assertSame(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+    
+    
 }
