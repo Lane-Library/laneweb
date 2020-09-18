@@ -14,7 +14,7 @@ public class DescriptionLabelTransformer extends AbstractTextProcessingTransform
 
     private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
-    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Za-z0-9 '/,\\-\\(\\)&]+)##");
+    private static final Pattern LABEL_PATTERN = Pattern.compile("::([A-Za-z0-9 '/,\\-\\(\\)&]+):?##");
 
     @Override
     protected void createSAXEvents(final XMLConsumer consumer, final Matcher matcher) throws SAXException {
