@@ -19,6 +19,9 @@ import org.slf4j.LoggerFactory;
 @WebServlet("/robots.txt")
 public class RobotsDotTextServlet extends HttpServlet {
 
+    private static final byte[] GCP_STAGE = "User-agent: *\nAllow: /lmldbx/\nDisallow: /"
+            .getBytes(StandardCharsets.UTF_8);
+
     private static final Logger log = LoggerFactory.getLogger(RobotsDotTextServlet.class);
 
     private static final byte[] NONPRODUCTION = "User-agent: *\nDisallow: /".getBytes(StandardCharsets.UTF_8);
@@ -43,6 +46,8 @@ public class RobotsDotTextServlet extends HttpServlet {
             OutputStream outputStream = resp.getOutputStream();
             if ("lane.stanford.edu".equals(hostHeader)) {
                 outputStream.write(PRODUCTION);
+            } else if ("lane-prototype.stanford.edu".equals(hostHeader)) {
+                outputStream.write(GCP_STAGE);
             } else {
                 outputStream.write(NONPRODUCTION);
             }
