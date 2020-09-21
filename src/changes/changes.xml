@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2020-09-21" version="3.6.14" description="bug fix release">
+            <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10616" type="update">
+               permit crawlers to index lane-prototype/lmldbx/
+            </action>
+            <action date="2020-09-16" dev="alainb" issue="LANEWEB-10613" type="update">
+               Preventing spam from hitting SFP CRM
+            </action>
+            <action date="2020-09-17" dev="ryanmax" issue="LANEWEB-10614" type="update">
+               PubMed article abstract formatting problem
+            </action>
+         </release>
          <release date="2020-09-04" version="3.6.13" description="bug fix release">
             <action date="2020-08-10" dev="ryanmax" issue="LANEWEB-10605" type="update">
                add holdings note to reserves items
