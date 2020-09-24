@@ -122,3 +122,14 @@ li.active .description {
     position: absolute;
     left: 180px;
 }
+.requestIt {
+    background-color: #428bca;
+    border-radius: 3px;
+    padding: 0 5px;
+    margin-left: 12px;
+    position: absolute;
+    left: 300px;
+}
+.requestIt a {
+    color: white;
+}

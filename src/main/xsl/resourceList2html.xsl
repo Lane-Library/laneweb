@@ -217,12 +217,17 @@
                 </xsl:if>
             </div>
             <xsl:apply-templates select="s:description"/>
-            <div class="sourceInfo">
+            <div class="sourceInfo no-bookmarking">
                 <xsl:apply-templates select="s:recordType"/>
-                <span class="permalink no-bookmarking">
+                <span class="permalink">
                     <a title="Right click and copy for a permanent link to this record." href="/view/{s:recordType}/{s:recordId}">
                     <i class="fa fa-link fa-rotate-90"></i> Permalink</a>
                 </span>
+                <xsl:if test="s:primaryType = 'Book Print' and $available &gt; 0">
+                    <span class="requestIt">
+                        <a title="Request this item for pickup" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request</a>
+                    </span>
+                </xsl:if>
             </div>
         </li>
     </xsl:template>
