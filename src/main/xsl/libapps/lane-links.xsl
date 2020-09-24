@@ -2,6 +2,9 @@
 <xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h"
 >
+
+   <xsl:param name="laneguide-uri"/>
+
    <xsl:template match="/">
       <xsl:apply-templates select="*"/>
    </xsl:template>
@@ -10,7 +13,7 @@
       <xsl:copy>
          <xsl:choose>
             <xsl:when test="starts-with(@href, '/libguides')">
-               <xsl:attribute name="href" select="replace(@href,'/libguides/','https://lane-stanford.libguides.com/')"/>
+               <xsl:attribute name="href" select="replace(@href,'/libguides/', concat( $laneguide-uri, '/') )"/>
             </xsl:when>
              <xsl:when test="starts-with(@href, '/') and not(starts-with(@href, '//')) ">
                <xsl:attribute name="href" select="concat('//lane.stanford.edu', @href)"/>
