@@ -9,12 +9,17 @@
     <xsl:param name="ticket"/>
     <xsl:param name="title"/>
     <xsl:param name="proxy-links"/>
+    
+    
+    <xsl:variable name="authorized-host">https://www.micromedexsolutions.com</xsl:variable>
     <xsl:variable name="proxy-url">https://login.laneproxy.stanford.edu/login?</xsl:variable>
 
     <xsl:template match="node()">
-        <xsl:copy>
-            <xsl:apply-templates select="node() | @*"/>
-        </xsl:copy>
+         <xsl:if test="starts-with($url, $authorized-host) and starts-with($entry-url, $authorized-host)"> 
+           <xsl:copy>
+               <xsl:apply-templates select="node() | @*"/>
+           </xsl:copy>
+         </xsl:if>
     </xsl:template>
 
     <xsl:template match="@*">
