@@ -6,7 +6,7 @@
     exclude-result-prefixes="h s" version="2.0">
     
     <xsl:param name="browse-query"/>
-    
+
     <xsl:template match="child::node()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -35,17 +35,24 @@
                 <xsl:if test="s:description">
                     <span class="descriptionTrigger eresource no-bookmarking"/>
                 </xsl:if>
-                <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
-                    <span>Status: Not Checked Out</span>
-                </xsl:if>
                 <xsl:if test="s:recordType = 'bib'">
                     <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
                 </xsl:if>
             </div>
             <xsl:apply-templates select="s:description"/>
-            <div class="sourceInfo">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
-                <span class="permalink no-bookmarking">
+            <div class="sourceInfo no-bookmarking">
+                <span>
+                    <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog Record</a>
+                </span>
+                <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
+                    <span>Status: Not Checked Out</span>
+                </xsl:if>
+                <xsl:if test="s:primaryType = 'Book Print' and $available &gt; 0">
+                    <span class="requestIt">
+                        <a title="Request this item for pickup" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request</a>
+                    </span>
+                </xsl:if>
+                <span class="permalink">
                     <a title="Right click and copy for a permanent link to this record." href="/view/{s:recordType}/{s:recordId}">
                     <i class="fa fa-link fa-rotate-90"></i> Permalink</a>
                 </span>

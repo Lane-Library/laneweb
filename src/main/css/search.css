@@ -118,7 +118,19 @@ li.active .description {
     padding: 1px 5px;
     border: 1px solid #ccc;
 }
-.permalink {
-    position: absolute;
-    left: 180px;
+.sourceInfo span {
+    margin-left: 30px;
+    display: inline-block;
+}
+.sourceInfo span:first-child {
+    min-width: 140px;
+    margin-left: 0;
+}
+.requestIt {
+    background-color: #428bca;
+    border-radius: 4px;
+    padding: 0 5px;
+}
+.requestIt a {
+    color: white;
 }
