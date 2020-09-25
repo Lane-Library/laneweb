@@ -38,7 +38,8 @@
                 </div>
                 <div class="resultInfo">
                 </div>
-                <div class="sourceInfo">Source: <a href="">: NaN </a>
+                <div class="sourceInfo">
+                    <span>Source: <a href="">: NaN </a></span>
                 </div>
             </li>
         </x:expect>
@@ -57,6 +58,7 @@
             <div class="resultInfo">
             </div>
             <div class="sourceInfo no-bookmarking" >
+               <span></span>
                <span class="permalink">
                   <a title="Right click and copy for a permanent link to this record." href="/view/foo/12345">
                      <i class="fa fa-link fa-rotate-90"/> Permalink</a>
