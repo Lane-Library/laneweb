@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+          <release date="2020-09-28" version="3.6.15" description="bug fix release">
+            <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10618" type="update">
+               add curbside pickup request buttons to Lane Search
+            </action>
+            <action date="2020-09-24" dev="ryanmax" issue="LANEWEB-10619" type="fix">
+               cookiesFetch.html open redirect (INC01331108)
+            </action>
+            <action date="2020-09-25" dev="ryanmax" issue="LANEWEB-10572" type="fix">
+               Permalink rendering issues on mobile
+            </action>
+         </release>
          <release date="2020-09-21" version="3.6.14" description="bug fix release">
             <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10616" type="update">
                permit crawlers to index lane-prototype/lmldbx/
