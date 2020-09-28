@@ -17,6 +17,9 @@
             <action date="2020-09-25" dev="ryanmax" issue="LANEWEB-10572" type="fix">
                Permalink rendering issues on mobile
             </action>
+            <action date="2020-09-25" dev="alainb" issue="LANEWC-44" type="fix">
+               Set-Up Let's Encrypt Certificate for LibGuides &amp; LibCal
+            </action>
          </release>
          <release date="2020-09-21" version="3.6.14" description="bug fix release">
             <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10616" type="update">
