@@ -39,7 +39,7 @@ This repo supports [DroneCI](https://drone.med.stanford.edu/lane/laneweb).
 #### Get and setup personal drone token
 Drone CLI requires access token to talk to drone server.
 
-Please get your personal token from https://drone.med.stanford.edu/account/token, 
+Please get your personal token from (https://drone.med.stanford.edu/account) , 
 and save the the token to ${HOME}/.drone-token file. 
 
 _NOTE_: Do not add newline at the end of the token. Use:
