@@ -30,9 +30,9 @@
         <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
          <map:generate type="file" src="cocoon://content/{0}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl">
-               <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
+            <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
          </map:transform>
-         <map:serialize type="xml"/>
+         <map:serialize type="html5"/>
       </map:match>     
       
        <!-- ********* CONTENT ********** -->
