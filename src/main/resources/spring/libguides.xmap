@@ -27,12 +27,13 @@
       
       
       <!-- Footer and navigation to display in https://laneguides.stanford.edu and lanecal.stanford.edu -->
-        <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
+      <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
          <map:generate type="file" src="cocoon://content/{0}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl">
-            <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
+               <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
          </map:transform>
-         <map:serialize type="html5"/>
+         <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+         <map:serialize type="xml"/>
       </map:match>     
       
        <!-- ********* CONTENT ********** -->
