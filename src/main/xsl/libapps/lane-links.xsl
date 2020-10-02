@@ -3,8 +3,7 @@
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h"
 >
 
-   <xsl:param name="laneguide-uri"/>
-
+  
    <xsl:template match="/">
       <xsl:apply-templates select="*"/>
    </xsl:template>
@@ -12,10 +11,7 @@
    <xsl:template match="h:a">
       <xsl:copy>
          <xsl:choose>
-            <xsl:when test="starts-with(@href, '/libguides')">
-               <xsl:attribute name="href" select="replace(@href,'/libguides/', concat( $laneguide-uri, '/') )"/>
-            </xsl:when>
-             <xsl:when test="starts-with(@href, '/') and not(starts-with(@href, '//')) ">
+            <xsl:when test="starts-with(@href, '/') and not(starts-with(@href, '//')) ">
                <xsl:attribute name="href" select="concat('//lane.stanford.edu', @href)"/>
             </xsl:when>
             <xsl:otherwise>
@@ -26,6 +22,10 @@
       </xsl:copy>
    </xsl:template>
    
+     <!-- xincludes often include html/head and html/body, this ignores them-->
+    <xsl:template match="h:html">
+        <xsl:apply-templates select="h:body/child::node()"/>
+    </xsl:template>
    
    <xsl:template match="child::node()">
       <xsl:copy>

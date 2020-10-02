@@ -5,13 +5,10 @@
    <map:pipeline type="caching">
    
       <!-- ********* menu ********** -->
-      <!-- Get menu from https://laneguides.stanford.edu/ -->
+     <!-- Get menu from https://laneguides.stanford.edu/ -->
       <map:match pattern="remote-guides-menu.html" type="wildcard">
-         <map:generate type="file"
-            src="cachedxml:600:{libguide-api-service-uri}"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/remote-guides-menu.xsl">
-               <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
-         </map:transform>
+         <map:generate type="file"   src="cachedxml:600:{libguide-api-service-uri}"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/remote-guides-menu.xsl"/>               
          <map:serialize type="xml"/>
       </map:match>
       
@@ -22,18 +19,15 @@
             <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
          </map:aggregate>
          <map:transform type="saxon" src="classpath:/xsl/libapps/lane-guides-menu.xsl"/>
-         <map:serialize type="xml"/>
+         <map:serialize type="xhtml"/>
       </map:match>
       
       
       <!-- Footer and navigation to display in https://laneguides.stanford.edu and lanecal.stanford.edu -->
-      <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
+        <map:match pattern="(footer|includes/libapps-navigation)\.html" type="regexp">
          <map:generate type="file" src="cocoon://content/{0}"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl">
-               <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
-         </map:transform>
-         <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
-         <map:serialize type="xml"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
+         <map:serialize type="html5"/>
       </map:match>     
       
        <!-- ********* CONTENT ********** -->
