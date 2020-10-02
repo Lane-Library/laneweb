@@ -7,7 +7,7 @@
    <xsl:template match="/doc">
       <ul>
          <xsl:for-each-group select="//h:li" group-by=".">
-            <xsl:sort select="."/>
+            <xsl:sort select="."  case-order="lower-first"/> 
             <xsl:copy-of select="."/>
          </xsl:for-each-group>
       </ul>
