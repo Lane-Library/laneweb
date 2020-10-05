@@ -6,7 +6,12 @@
         <author email="ceyates@stanford.edu">Charles Yates</author>
         <title>Laneweb Releases</title>
     </properties>
-    <body>
+      <body>
+          <release date="2020-10-05" version="3.6.16" description="bug fix release">
+            <action date="2020-10-05" dev="alainb" issue="LANEWEB-10622" type="update"> 
+               LibGuides integration to Subject Guides Navigation Menu
+            </action>
+          </release>
           <release date="2020-09-28" version="3.6.15" description="bug fix release">
             <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10618" type="update">
                add curbside pickup request buttons to Lane Search
