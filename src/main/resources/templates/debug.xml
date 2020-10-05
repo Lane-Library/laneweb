@@ -58,58 +58,9 @@
      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/header.html">
          <xi:fallback></xi:fallback>
      </xi:include>  
-     <nav>
-           <ul class="content centered">
-                        <li class="dropdown nav-menu" data-path="/biomed-resources/">
-                            <span>Resources</span>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-resources.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu" data-path="/portals/">
-                            <span>Subject Guides</span>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            <div class="dropdown-content nav-menu-content portals"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-portals.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu" data-path="/classes-consult/">
-                            <span>Library Classes</span>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-classes.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu" data-path="/using-lib/">
-                            <span>Services</span>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-services.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="dropdown nav-menu" data-path="/about/">
-                            <span>About</span>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-about.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="nav-menu">
-                           <span><a href="/med-history/index.html">Medical History Center</a></span>
-                        </li>
-                        <li class="dropdown nav-menu" data-path="/help/">
-                            <span>FAQs</span>
-                            <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            <div class="dropdown-content nav-menu-content"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/dropdownmenu-faqs.html">
-                                <xi:fallback></xi:fallback>
-                            </xi:include></div>
-                        </li>
-                        <li class="nav-menu">
-                            <span><a href="http://laneblog.stanford.edu/">Blog</a></span>
-                        </li>
-                    </ul>
-          </nav> 
+     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/navigation.html">
+         <xi:fallback></xi:fallback>
+      </xi:include>
             <div class="hero-unit">
             <form action="/search.html" class="search-form" id="search">
                     <div class="search-close">Close <i class="fa fa-close"></i></div>
