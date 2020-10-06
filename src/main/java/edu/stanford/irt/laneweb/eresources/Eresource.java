@@ -27,6 +27,9 @@ public class Eresource {
     @Field
     private String description;
 
+    @Field
+    private Collection<String> dois;
+    
     @Id
     @Field
     private String id;
@@ -70,6 +73,10 @@ public class Eresource {
         return this.description;
     }
 
+    public Collection<String> getDois() {
+        return this.dois;
+    }
+    
     public String getId() {
         return this.id;
     }

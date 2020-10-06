@@ -91,6 +91,12 @@
                 <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key=06d7c09fef338652778c8589fc52d5bb&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="search/browzine/doi.json" type="wildcard">
+                <map:generate type="html" src="https://public-api.thirdiron.com/public/v1/libraries/1462/articles/doi/{url-encoded-query}?include=journal&amp;access_token=5644f164-0afb-41b7-b751-d847e7b70f58"/>
+                <map:serialize type="text">
+                    <map:parameter name="media-type" value="application/json"/>
+                </map:serialize>
+            </map:match>
         </map:match>
         <map:match pattern="search.xml" type="wildcard">
             <map:generate type="search-engine"/>
