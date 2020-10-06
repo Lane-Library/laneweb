@@ -522,13 +522,13 @@
                                 <include>solr-facets-min.js</include>
                                 <include>solr-pagination-min.js</include>
                                 <include>bookcovers-min.js</include>
+                                <include>browzine-min.js</include>
                                 <include>viewport-min.js</include>
                                 <include>authors-toggle-min.js</include>
                                 <include>clinical-toggle-min.js</include>
                                 <include>search-form-scroll-min.js</include>
                                 <include>message-min.js</include>
                                 <include>course-reserves-min.js</include>
-                                <include>browzine-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
