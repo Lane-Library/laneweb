@@ -88,7 +88,7 @@
             </map:match>
             <!-- TODO: find permanent home for this -->
             <map:match pattern="search/flickr.xml" type="wildcard">
-                <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key=06d7c09fef338652778c8589fc52d5bb&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
+                <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key={flickr-token}&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:match>
