@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>9.9.1-7</version>
+            <version>10.2</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
