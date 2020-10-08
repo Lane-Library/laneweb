@@ -20,11 +20,13 @@ public class DebugTransformerTest {
     private XMLConsumer consumer;
 
     private DebugTransformer transformer;
-
+    
+   
     @Before
     public void setUp() {
+        
         this.consumer = mock(XMLConsumer.class);
-        this.transformer = new DebugTransformer();
+        this.transformer = new DebugTransformer(Collections.emptyList());
         this.transformer.setXMLConsumer(this.consumer);
     }
 
