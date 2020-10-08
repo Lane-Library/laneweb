@@ -1,7 +1,9 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.cache.Cache;
@@ -16,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.oxm.Marshaller;
+
+
 
 import edu.stanford.irt.cocoon.cache.CachedResponse;
 import edu.stanford.irt.cocoon.pipeline.Aggregator;
@@ -42,6 +46,7 @@ import edu.stanford.irt.cocoon.xml.XMLByteStreamInterpreter;
 import edu.stanford.irt.laneweb.cocoon.DebugTransformer;
 import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
 import edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.search.ParameterMapGenerator;
 import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
 
@@ -80,7 +85,9 @@ public class PipelineConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/debug")
     @Scope("prototype")
     public Transformer debugTransformer() {
-        return new DebugTransformer();
+        List<String> disallowToDisplay = new ArrayList<>();
+        disallowToDisplay.add(Model.FLICKR_TOKEN);
+        return new DebugTransformer(disallowToDisplay);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Pipeline/expires")

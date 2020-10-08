@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -18,8 +19,12 @@ public class DebugTransformer extends AbstractXMLPipe implements Transformer {
 
     private Map<String, Object> model;
 
-    public DebugTransformer() {
+    private List<String> notToDisplay;
+    
+    
+    public DebugTransformer(List<String> disallowList) {
         this.model = Collections.emptyMap();
+        this.notToDisplay = disallowList;
     }
 
     @Override
@@ -33,7 +38,9 @@ public class DebugTransformer extends AbstractXMLPipe implements Transformer {
         if (ModelUtil.getObject(this.model, Model.DEBUG, Boolean.class, Boolean.FALSE).booleanValue()) {
             StringBuilder sb = new StringBuilder();
             for (Entry<String, Object> entry : this.model.entrySet()) {
-                sb.append('\n').append(entry.getKey()).append(": ").append(entry.getValue());
+                if( !this.notToDisplay.contains(entry.getKey())) {
+                    sb.append('\n').append(entry.getKey()).append(": ").append(entry.getValue());
+                }
             }
             sb.append('\n');
             comment(sb.toString().toCharArray(), 0, sb.length());
