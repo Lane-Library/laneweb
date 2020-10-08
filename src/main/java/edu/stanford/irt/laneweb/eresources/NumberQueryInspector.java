@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public final class NumberQueryInspector implements QueryInspector {
 
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d{1,8})$");
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("^(\\d{1,10})$");
 
     @Override
     public boolean combinable() {
