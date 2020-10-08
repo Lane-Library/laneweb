@@ -1,7 +1,7 @@
 /**
  * @author ryanmax
  */
-YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", function(Y) {
 
     "use strict";
 
@@ -11,7 +11,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         testFramedSHC: function() {
             if (window.self !== window.top) {
-                var shc = Y.one("#SHC");
+                var shc = Y.one("a[title='SSO SHC']");
                 var currentTopHref = window.top.location.href;
                 window.onbeforeunload = function(e) {
                     e.preventDefault();
