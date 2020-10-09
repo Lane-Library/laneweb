@@ -14,10 +14,7 @@
             <map:serialize type="xml"/>
         </map:match>
      </map:pipeline>
-    
-   
-    
-    <map:pipeline type="noncaching">
+     <map:pipeline type="noncaching">
       <map:match pattern="search.html" type="wildcard">
          <map:aggregate type="default" element="doc">
             <map:generate type="file" src="cocoon://eresources/er-search.xml"/>
