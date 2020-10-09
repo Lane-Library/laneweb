@@ -24,11 +24,13 @@
     <xsl:variable name="values-per-facet" select="4"/>
     <xsl:variable name="today" select="number(format-dateTime(current-dateTime(),'[Y,4][M,2][D,2]'))"/>
     <xsl:variable name="header">
-        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h4>
+        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filterr Results</h4>
         <xsl:if test="not($search-mode)">
             <a class="close fa fa-close"></a>
         </xsl:if>
     </xsl:variable>
+
+   <xsl:variable name="counts" select="/doc/hc:hitcounts/hc:facet[@name='all']/@hits"/>
 
     <xsl:template match="facet">
         <xsl:variable name="count-formatted" select="format-number(count,'###,##0')"/>
@@ -71,7 +73,7 @@
     <xsl:template name="field">
         <xsl:param name="id"/>
         <xsl:param name="label"/>
-        <xsl:variable name="entry" select="/linked-hash-map/entry/string[. = $id]/.."/>
+        <xsl:variable name="entry" select="/doc/linked-hash-map/entry[string[text() = $id]]"/>
         <xsl:if test="$entry//facet">
             <xsl:choose>
                 <xsl:when test="$search-mode">
@@ -124,22 +126,22 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="/">
+    <xsl:template match="doc">
         <html>
             <body>
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="linked-hash-map"/>
             </body>
         </html>
     </xsl:template>
 
-    <xsl:template match="/string">
+
+
+    <xsl:template match="/doc/string">
             <xsl:copy-of select="$header"/>
         <p><xsl:value-of select="."/></p>
     </xsl:template>
 
-    <xsl:template match="/linked-hash-map">
-        <xsl:variable name="counts"
-            select="document('cocoon://eresources/count.xml')/hc:hitcounts/hc:facet[@name = 'all']/@hits"/>
+    <xsl:template match="linked-hash-map">
         <!-- hidden element that gets moved into place by solr-facets.js -->
         <xsl:if test="$search-mode and string-length($facets) > 0">
             <span id="solrAllCount">
@@ -147,7 +149,7 @@
             </span>
         </xsl:if>
         <xsl:choose>
-            <xsl:when test="$counts > 0 and (entry or string-length($facets) > 0)">
+            <xsl:when test="$counts > 0 and (./entry or string-length($facets) > 0)">
                     <xsl:copy-of select="$header"/>
                     <ul>
                         <xsl:call-template name="field">
