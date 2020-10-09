@@ -508,7 +508,6 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
                                 <include>lane-search-images-min.js</include>
-                                <include>lane-search-images-survey-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>description-toggle-min.js</include>

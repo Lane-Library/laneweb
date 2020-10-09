@@ -58,6 +58,7 @@ public class SolrQueryParserTest {
         assertEquals("pubmed id 12345678", this.parser.parse("advanced:true pubmed id 12345678"));
         assertEquals("recordId:12345678", this.parser.parse("12345678"));
         assertEquals("recordId:12345", this.parser.parse("12345"));
+        assertEquals("recordId:2054954793", this.parser.parse("2054954793"));
         assertEquals("12345 54321", this.parser.parse("12345 54321"));
         assertEquals("12345\\-54321", this.parser.parse("12345-54321"));
         assertEquals("Diabetes 1995 Aug; 44(8)\\: 968\\-983. \"10.2337/diab.44.8.968\" retinopathy", this.parser

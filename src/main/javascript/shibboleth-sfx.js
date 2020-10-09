@@ -13,7 +13,7 @@
     };
     if (shibbLinks && inFrame()) {
         shibbLinks.querySelectorAll('a').forEach(function(node) {
-            if (node.href.match(/stanfordmed|sch-sts/)) {
+            if (node.href.match(/idp\.stanford|adfs\.stanfordmed|fs\.stanfordchildrens|sch-sts/)) {
                 node.addEventListener("click", function() {
                     top.location.href = this.href;
                 });

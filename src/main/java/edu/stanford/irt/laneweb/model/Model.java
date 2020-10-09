@@ -44,6 +44,8 @@ public final class Model {
     public static final String FACET_SORT = "facet.sort";
 
     public static final String FACETS = "facets";
+    
+    public static final String FLICKR_TOKEN = "flickr-token";
 
     public static final String HOST = "host";
 
@@ -160,6 +162,7 @@ public final class Model {
     public static final String USER_ID = "userid";
 
     public static final String VERSION = "version";
+   
 
     private Model() {
         // private constructior

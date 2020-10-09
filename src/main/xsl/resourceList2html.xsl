@@ -483,17 +483,6 @@
                 <li class="no-bookmarking">
                     <span class="primaryType" style="display:none;">Image Search Promo</span>
                     <a class="primaryLink" href="{$images-url}" title="More images from Lane's Bio-Image Search">Results from Lane's Bio-Image Search</a>
-                    <span class="imageSurvey">
-                        <span class="surveyLinks">
-                            Useful?
-                            <a href="#"><i class="fa fa-smile-o fa-lg" aria-hidden="true"></i> Yes</a>
-                            <a href="#"><i class="fa fa-frown-o fa-lg" aria-hidden="true"></i> No</a>
-                        </span>
-                        <span class="surveySent">
-                            Thank you for your feedback! 
-                            Please send further suggestions to <a href="/help/feedback.html#askus" rel="lightbox"><i class="fa fa-envelope fa-fw"></i>Ask Us</a>.
-                        </span>
-                    </span>
                     <div id="imageList" class="searchPromo">
                         <div class="pure-g">
                             <xsl:for-each select="$imageResults//string[position() &lt;= $images-promo-show]">
