@@ -7,7 +7,7 @@
       <!-- ********* menu ********** -->
      <!-- Get menu from https://laneguides.stanford.edu/ -->
       <map:match pattern="remote-guides-menu.html" type="wildcard">
-         <map:generate type="file"   src="cachedxml:600:{libguide-api-service-uri}"/>
+         <map:generate type="file"   src="cache:10:{libguide-api-service-uri}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/remote-guides-menu.xsl"/>               
          <map:serialize type="xml"/>
       </map:match>
