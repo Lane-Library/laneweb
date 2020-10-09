@@ -24,7 +24,7 @@
     <xsl:variable name="values-per-facet" select="4"/>
     <xsl:variable name="today" select="number(format-dateTime(current-dateTime(),'[Y,4][M,2][D,2]'))"/>
     <xsl:variable name="header">
-        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filterr Results</h4>
+        <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">Filter Results</h4>
         <xsl:if test="not($search-mode)">
             <a class="close fa fa-close"></a>
         </xsl:if>
