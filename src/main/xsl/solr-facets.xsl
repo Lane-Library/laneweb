@@ -73,7 +73,7 @@
     <xsl:template name="field">
         <xsl:param name="id"/>
         <xsl:param name="label"/>
-        <xsl:variable name="entry" select="/doc/linked-hash-map/entry[string[text() = $id]]"/>
+        <xsl:variable name="entry" select="/doc/linked-hash-map/entry/string[text() = $id]/.."/>
         <xsl:if test="$entry//facet">
             <xsl:choose>
                 <xsl:when test="$search-mode">
@@ -85,7 +85,7 @@
                     </li>
                     <xsl:choose>
                       <xsl:when test="$id = 'year'">
-                        <xsl:apply-templates select="/linked-hash-map/entry/string[. = 'date']/../sorted-set/facet[contains(value,'TO *') and count > 0]"/>
+                        <xsl:apply-templates select="/doc/linked-hash-map/entry/string[. = 'date']/../sorted-set/facet[contains(value,'TO *') and count > 0]"/>
                         <xsl:apply-templates select="$entry/sorted-set/facet[enabled = 'true']"/>
                       </xsl:when>
                       <xsl:when test="$id = 'type'">
