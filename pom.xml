@@ -7,7 +7,7 @@
         <version>66</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.6.17-SNAPSHOT</version>
+    <version>3.6.16-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -319,7 +319,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
+            <version>4.5.12</version>
         </dependency>
         <dependency>
              <groupId>commons-fileupload</groupId>
@@ -508,6 +508,7 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-metasearch-min.js</include>
                                 <include>lane-search-images-min.js</include>
+                                <include>lane-search-images-survey-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>description-toggle-min.js</include>
