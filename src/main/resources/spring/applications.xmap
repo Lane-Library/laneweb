@@ -92,7 +92,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/browzine/doi.json" type="wildcard">
-                <map:generate type="html" src="https://public-api.thirdiron.com/public/v1/libraries/1462/articles/doi/{url-encoded-query}?include=journal&amp;access_token=5644f164-0afb-41b7-b751-d847e7b70f58"/>
+                <map:generate type="html" src="https://public-api.thirdiron.com/public/v1/libraries/1462/articles/doi/{url-encoded-query}?include=journal&amp;access_token={browzine-token}"/>
                 <map:serialize type="text">
                     <map:parameter name="media-type" value="application/json"/>
                 </map:serialize>
