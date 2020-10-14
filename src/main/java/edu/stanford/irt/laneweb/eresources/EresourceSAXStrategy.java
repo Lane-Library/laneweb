@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import java.util.Collection;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -34,6 +36,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
             maybeCreateElement(xmlConsumer, Resource.DESCRIPTION, eresource.getDescription());
             maybeCreateElement(xmlConsumer, Resource.AUTHOR, eresource.getPublicationAuthorsText());
             maybeCreateElement(xmlConsumer, Resource.PUBLICATION_TEXT, eresource.getPublicationText());
+            maybeCreateElement(xmlConsumer, "doi", eresource.getDois());
             for (Link link : eresource.getLinks()) {
                 handleLink(xmlConsumer, link);
             }
@@ -55,6 +58,15 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
         maybeCreateElement(xmlConsumer, "publisher", link.getPublisher());
         maybeCreateElement(xmlConsumer, "version-text", link.getVersionText());
         XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.LINK);
+    }
+
+    private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final Collection<String> values)
+            throws SAXException {
+        if (values != null && !values.isEmpty()) {
+            for (String value : values) {
+                maybeCreateElement(xmlConsumer, name, value);
+            }
+        }
     }
 
     private void maybeCreateElement(final XMLConsumer xmlConsumer, final String name, final String value)

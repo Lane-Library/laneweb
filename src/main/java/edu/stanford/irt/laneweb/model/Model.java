@@ -21,6 +21,8 @@ public final class Model {
 
     public static final String BOOKMARKING = "bookmarking";
 
+    public static final String BROWZINE_TOKEN = "browzine-token";
+
     public static final String CALLBACK = "callback";
 
     public static final String CATEGORY = "category";
