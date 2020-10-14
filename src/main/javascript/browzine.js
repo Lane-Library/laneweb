@@ -121,8 +121,11 @@
 
     articleLookupService.on("article", controller.article);
 
-    L.on(["viewport:init","viewport:scrolled"], function(event){
-            controller.update(event.viewport);
-    });
+    // toggle off in production
+    if('lane.stanford.edu' != location.hostname){
+        L.on(["viewport:init","viewport:scrolled"], function(event){
+                controller.update(event.viewport);
+        });
+    }
 
 })();
