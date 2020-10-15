@@ -10,6 +10,7 @@ import static org.easymock.EasyMock.verify;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,15 +71,13 @@ public class SolrAdminImageSearchGeneratorTest {
 
     @Test
     public void testGetPageLimit() {
-        java.util.Date.from(LocalDate.parse("1969-05-05").atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant());
-        expect(this.service.adminFindAllFilterOnCopyrightAndWebsiteIdAndDate(eq("query"), eq("0"), isNull(),
-                eq(java.util.Date.from(
-                        LocalDate.parse("1969-05-05").atStartOfDay(ZoneId.of("America/Los_Angeles")).toInstant())),
+        DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy/MM/dd"); 
+         expect(this.service.adminFindAllFilterOnCopyrightAndWebsiteIdAndDate(eq("query"), eq("0"), isNull(),      eq( LocalDate.parse("2020/10/01", formatter)),
                 isA(PageRequest.class))).andReturn(this.page);
         replay(this.saxStrategy, this.service, this.page);
         Map<String, Object> model = new HashMap<>();
         model.put(Model.BASE_PATH, "base-path");
-        model.put(Model.LIMIT, "1969/05/05");
+        model.put(Model.LIMIT, "2020/10/01");
         this.generator.setModel(model);
         this.generator.getPage("query");
         verify(this.saxStrategy, this.service, this.page);
