@@ -1,7 +1,7 @@
 /**
  * @author ryanmax
  */
-YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", function(Y) {
+YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
@@ -10,18 +10,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         name: "Lane Shibboleth SFX Testcase",
 
         testFramedSHC: function() {
+            var shc = Y.one("a[title='SSO SHC']");
             if (window.self !== window.top) {
-                var shc = Y.one("a[title='SSO SHC']");
-                var currentTopHref = window.top.location.href;
-                window.onbeforeunload = function(e) {
-                    e.preventDefault();
-                    Y.Assert.isTrue(e.target.location.href != currentTopHref);
-                }
-                var clickHandle = shc.on("click", function(event) {
-                    event.preventDefault();
-                });
-                shc.simulate("click");
-                clickHandle.detach();
+                Y.Assert.isTrue("_blank" == shc.getAttribute('target'));
+            }
+            else {
+                Y.Assert.isFalse("_blank" == shc.getAttribute('target'));
             }
         }
     });
