@@ -7,14 +7,14 @@
       <!-- ********* menu ********** -->
      <!-- Get menu from https://laneguides.stanford.edu/ -->
       <map:match pattern="remote-guides-menu.html" type="wildcard">
-         <map:generate type="file"   src="cache:60:{libguide-api-service-uri}"/>
+         <map:generate type="file"   src="cache:1:{libguide-api-service-uri}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/remote-guides-menu.xsl"/>               
          <map:serialize type="xml"/>
       </map:match>
       
       <!-- Guides Menu display in laneweb -->
       <map:match pattern="guides-menu.html" type="wildcard">
-         <map:aggregate type="caching" element="doc">
+         <map:aggregate type="default" element="doc">
             <map:generate type="file" src="cocoon://libguides/remote-guides-menu.html"/>
             <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
          </map:aggregate>

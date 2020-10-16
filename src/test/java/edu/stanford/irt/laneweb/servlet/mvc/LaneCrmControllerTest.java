@@ -19,74 +19,86 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import edu.stanford.irt.laneweb.crm.CRMService;
+import edu.stanford.irt.laneweb.email.EMailSender;
 
 public class LaneCrmControllerTest {
 
     private LaneCrmController controller;
 
-    private CRMService service;
-    
+    private EMailSender emailSender;
+
     private HttpServletRequest request;
-    
-    Map<String, Object > requestParameters;
+
+    Map<String, Object> emailContent;
+
     @Before
     public void setUp() {
-        this.service = mock(CRMService.class);
+        this.emailSender = mock(EMailSender.class);
         this.request = mock(HttpServletRequest.class);
-        this.controller = new LaneCrmController(this.service);
-        requestParameters = new HashMap<String, Object>();
-        requestParameters.put("requestedBy.email", "test@stanford.edu"); 
-
+        this.controller = new LaneCrmController(this.emailSender, "email@address.com");
+        emailContent = new HashMap<String, Object>();
+        emailContent.put("subject", "SFP:ARRIVAL");
+        emailContent.put("IP", "ip");
+        emailContent.put("recipient", "email@address.com");
     }
 
     @Test
     public void testFormSubmitLanelibacqs() throws IOException {
-        assertEquals("redirect:/error.html", this.controller.formSubmitLanelibacqs( null, this.request));
+        assertEquals("redirect:/error.html", this.controller.formSubmitLanelibacqs(null, this.request));
     }
 
     @Test
-    public void testJsonSubmitLanelibacqs() throws IOException {
+    public void testSendEmail() throws IOException {
+        emailContent.put("json", "{\"requestedBy.email\":\"test@stanford.edu\"}");
+        emailContent.put("requestedBy.email", "test@stanford.edu");
         expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(this.service.submitRequest(Collections.singletonMap("requestedBy.email", "test@stanford.edu"),"ip")).andReturn(200);
-        replay(this.request, this.service);
-        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanford.edu"), this.request);
+        this.emailSender.sendEmail(emailContent);
+        replay(this.request, this.emailSender);
+        ResponseEntity<String> response = this.controller.sendEmail(Collections.singletonMap("requestedBy.email", "test@stanford.edu"), this.request);
         assertSame(HttpStatus.OK, response.getStatusCode());
-        verify(this.service, this.request);
+        verify(this.emailSender, this.request);
     }
-    
 
     @Test
     public void testShcValidEmail() throws IOException {
+        emailContent.put("json", "{\"requestedBy.email\":\"test@stanfordhealthcare.org\"}");
+        emailContent.put("requestedBy.email", "test@stanfordhealthcare.org");
         expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(this.service.submitRequest(Collections.singletonMap("requestedBy.email", "test@stanfordhealthcare.org"),"ip")).andReturn(200);
-        replay(this.request, this.service);
-        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanfordhealthcare.org"), this.request);
+        this.emailSender.sendEmail(emailContent);
+        replay(this.request, this.emailSender);
+        ResponseEntity<String> response = this.controller.sendEmail(Collections.singletonMap("requestedBy.email", "test@stanfordhealthcare.org"), this.request);
         assertSame(HttpStatus.OK, response.getStatusCode());
-        verify(this.service, this.request);
+        verify(this.emailSender, this.request);
     }
     
-    @Test
-    public void testLpchValidEmail() throws IOException {
-        expect(this.request.getRemoteAddr()).andReturn("ip");
-        expect(this.service.submitRequest(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.org"),"ip")).andReturn(200);
-        replay(this.request, this.service);
-        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.org"), this.request);
-        assertSame(HttpStatus.OK, response.getStatusCode());
-        verify(this.service, this.request);
-    }
+     @Test
+     public void testLpchValidEmail() throws IOException {
+         emailContent.put("json", "{\"requestedBy.email\":\"test@stanfordchildrens.org\"}");
+         emailContent.put("requestedBy.email", "test@stanfordchildrens.org");
+         expect(this.request.getRemoteAddr()).andReturn("ip");
+         this.emailSender.sendEmail(emailContent);
+         replay(this.request, this.emailSender);
+         ResponseEntity<String> response = this.controller.sendEmail(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.org"), this.request);
+         assertSame(HttpStatus.OK, response.getStatusCode());
+         verify(this.emailSender, this.request);
+     }
     
-    @Test
-    public void testNotValidEmail() throws IOException {
-        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@gmail.com"), this.request);
-        assertSame(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    }
+     @Test
+     public void testNotValidEmail() throws IOException {
+     ResponseEntity<String> response =
+     this.controller.sendEmail(Collections.singletonMap("requestedBy.email", "test@gmail.com"),   this.request);
+     assertSame(HttpStatus.BAD_REQUEST, response.getStatusCode());
+     }
     
-    @Test
-    public void testNotEndValidEmail() throws IOException {
-        ResponseEntity<String> response = this.controller.jsonSubmitLanelibacqs(Collections.singletonMap("requestedBy.email", "test@stanfordchildrens.orgg"), this.request);
-        assertSame(HttpStatus.BAD_REQUEST, response.getStatusCode());
-    }
+     
+     
+     @Test
+     public void testNotEndValidEmail() throws IOException {
+     ResponseEntity<String> response =
+     this.controller.sendEmail(Collections.singletonMap("requestedBy.email",
+     "test@stanfordchildrens.orgg"), this.request);
+     assertSame(HttpStatus.BAD_REQUEST, response.getStatusCode());
+     }
     
     
 }

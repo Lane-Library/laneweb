@@ -12,6 +12,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,7 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getAvailable()).andReturn(5);
         expect(this.eresource.getLinks())
                 .andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
+        expect(this.eresource.getDois()).andReturn(Collections.singletonList("doi"));
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(Resource.LABEL);
         expect(this.link.getUrl()).andReturn(Resource.URL);

@@ -1,5 +1,6 @@
-// SFX kludge: SHC and LPCH set X-Frame-Options to DENY so clicks on their organization links will fail when our discovery page is loaded in a frame
-// detect this situation and make SHC/LPCH clicks take over the parent frame
+// SFX kludge: authentication systems set X-Frame-Options to DENY
+// clicks on organization IdP links will fail when our discovery page is loaded in a frame (SFX)
+// detect this situation and open IdP links in a new page
 (function() {
 
     "use strict";
@@ -14,9 +15,7 @@
     if (shibbLinks && inFrame()) {
         shibbLinks.querySelectorAll('a').forEach(function(node) {
             if (node.href.match(/idp\.stanford|adfs\.stanfordmed|fs\.stanfordchildrens|sch-sts/)) {
-                node.addEventListener("click", function() {
-                    top.location.href = this.href;
-                });
+                node.target = '_blank';
             }
         });
     }

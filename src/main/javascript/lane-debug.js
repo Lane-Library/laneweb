@@ -85,11 +85,13 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "solr-facets.js",
         "solr-pagination.js",
         "bookcovers.js",
+        "browzine.js",
         "viewport.js",
         "authors-toggle.js",
         "clinical-toggle.js",
         "search-form-scroll.js",
-        "message.js"
+        "message.js",
+        "course-reserves.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:

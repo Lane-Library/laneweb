@@ -28,7 +28,7 @@ public class LanewebConfigurationTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.configuration = new LanewebConfiguration(new URI("libguide"), new URI("libguideApi"), new URI("libcal"), new URI("content"), "rw",
-                mock(ServletContext.class), "version", "flickr-token");
+                mock(ServletContext.class), "version", "browzine-token", "flickr-token");
     }
 
     @Test
@@ -59,6 +59,7 @@ public class LanewebConfigurationTest {
         assertEquals("libguide", ModelUtil.getObject(model, Model.LIBGUIDE_SERVICE_URI, URI.class).toString());
         assertEquals("libcal", ModelUtil.getObject(model, Model.LIBCAL_SERVICE_URI, URI.class).toString()); 
         assertEquals("rw", ModelUtil.getString(model, Model.BOOKMARKING));
+        assertEquals("browzine-token",  ModelUtil.getString(model, Model.BROWZINE_TOKEN));
         assertEquals("flickr-token",  ModelUtil.getString(model, Model.FLICKR_TOKEN));
     }
 
