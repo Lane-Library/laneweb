@@ -14,6 +14,7 @@ import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.xpath.XPathFactory;
 import javax.xml.xpath.XPathFactoryConfigurationException;
 
+import org.apache.xerces.xni.parser.XMLDocumentFilter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,7 @@ import edu.stanford.irt.cocoon.xml.XIncludePipe;
 import edu.stanford.irt.cocoon.xml.XPointerProcessor;
 import edu.stanford.irt.cocoon.xml.xpointer.XPointerProcessorImpl;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.cocoon.DuplicateAttrsRemover;
 import edu.stanford.irt.laneweb.cocoon.HTMLSAXParser;
 import edu.stanford.irt.laneweb.cocoon.NekoHTMLConfiguration;
 import edu.stanford.irt.laneweb.cocoon.TransformerErrorListener;
@@ -80,6 +82,8 @@ public class XMLConfiguration {
         features.put("http://cyberneko.org/html/features/insert-namespaces", Boolean.TRUE);
         features.put("http://cyberneko.org/html/features/balance-tags/document-fragment", Boolean.TRUE);
         NekoHTMLConfiguration configuration = new NekoHTMLConfiguration(properties, features);
+        XMLDocumentFilter[] filters = { new DuplicateAttrsRemover() };
+        configuration.setProperty("http://cyberneko.org/html/properties/filters", filters);
         return new HTMLSAXParser(configuration);
     }
 
@@ -93,6 +97,8 @@ public class XMLConfiguration {
         Map<String, Boolean> features = Collections.singletonMap("http://cyberneko.org/html/features/insert-namespaces",
                 Boolean.TRUE);
         NekoHTMLConfiguration configuration = new NekoHTMLConfiguration(properties, features);
+        XMLDocumentFilter[] filters = { new DuplicateAttrsRemover() };
+        configuration.setProperty("http://cyberneko.org/html/properties/filters", filters);
         return new HTMLSAXParser(configuration);
     }
 
