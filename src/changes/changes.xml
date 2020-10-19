@@ -14,6 +14,9 @@
             <action date="2020-10-16" dev="alainb" issue="LANEWEB-10630" type="update">
 		Issues with LibGuides in Navigation Menu
             </action>
+	    <action date="2020-10-14" dev="alainb" issue="LANECRM-57" type="update">
+            	improve CRM DR experience
+	    </action>
          </release>
          <release date="2020-10-12" version="3.6.17" description="bug fix release">
             <action date="2020-09-30" dev="ryanmax" issue="LANEWEB-10621" type="update">
