@@ -9,8 +9,8 @@ import org.apache.xerces.xni.XMLAttributes;
 import org.cyberneko.html.filters.DefaultFilter;
 
 /*
- * This class remove the double attributes if the list attributes size if bigger than 8
- * net.sf.saxon.om.LargeAttributeMap check for double attributes and only if the size is superior to 8
+ * This class removes duplicate attributes if the list attributes size is larger than 8
+ * net.sf.saxon.om.LargeAttributeMap checks for duplicate attributes if the attributes list size is superior to 8
  * net.sf.saxon.om.SmallAttributeMap.LIMIT = 8
  */
 
