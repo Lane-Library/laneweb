@@ -12,7 +12,7 @@
          <map:serialize type="html5"/>
       </map:match>
       
-      <!-- Guides Menu display in laneweb -->
+       <!-- Guides Menu display in laneweb -->
       <map:match pattern="guides-menu.html" type="wildcard">
          <map:aggregate type="default" element="doc">
             <map:generate type="file" src="cocoon://libguides/remote-guides-menu.html"/>
