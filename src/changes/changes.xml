@@ -7,16 +7,21 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
-	 <release date="2020-10-19" version="3.6.18" description="bug fix release">
-            <action date="2020-10-15" dev="ryanmax" issue="LANEWEB-10621" type="update">
-		Stanford IdP Change: login screen cannot be framed
+         <release date="2020-10-26" version="3.6.19" description="bug fix release">
+            <action date="2020-10-23" dev="alainb" issue="LANEWEB-10633" type="update"> 
+               "Obstetrics &amp; Gynecology” broke “Subject Guides” menu
             </action>
-            <action date="2020-10-16" dev="alainb" issue="LANEWEB-10630" type="update">
-		Issues with LibGuides in Navigation Menu
+         </release>
+         <release date="2020-10-19" version="3.6.18" description="bug fix release">
+            <action date="2020-10-15" dev="ryanmax" issue="LANEWEB-10621" type="update"> 
+               Stanford IdP Change: login screen cannot be framed
             </action>
-	    <action date="2020-10-14" dev="alainb" issue="LANECRM-57" type="update">
-            	improve CRM DR experience
-	    </action>
+            <action date="2020-10-16" dev="alainb" issue="LANEWEB-10630" type="update"> 
+               Issues with LibGuides in Navigation Menu
+            </action>
+            <action date="2020-10-14" dev="alainb" issue="LANECRM-57" type="update"> 
+               improve CRM DR experience
+            </action>
          </release>
          <release date="2020-10-12" version="3.6.17" description="bug fix release">
             <action date="2020-09-30" dev="ryanmax" issue="LANEWEB-10621" type="update">
