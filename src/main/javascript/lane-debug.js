@@ -88,6 +88,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "browzine.js",
         "viewport.js",
         "authors-toggle.js",
+        "permalink-toggle.js",
         "clinical-toggle.js",
         "search-form-scroll.js",
         "message.js",

@@ -53,7 +53,7 @@
                     </span>
                 </xsl:if>
                 <span class="permalink">
-                    <a title="Right click and copy for a permanent link to this record." href="/view/{s:recordType}/{s:recordId}">
+                    <a title="click to copy a permanent link to this record" href="https://lane.stanford.edu/view/{s:recordType}/{s:recordId}">
                     <i class="fa fa-link fa-rotate-90"></i> Permalink</a>
                 </span>
             </div>
