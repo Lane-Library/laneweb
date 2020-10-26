@@ -4,8 +4,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     xmlns:r="http://lane.stanford.edu/results/1.0"
-    xmlns:a="aggregate"
-    exclude-result-prefixes="h s a r" version="2.0">
+    exclude-result-prefixes="h s r" version="2.0">
 
     <xsl:param name="facets"/>
 
@@ -44,14 +43,14 @@
         </xsl:copy>
     </xsl:template>
 
-   <xsl:template match="a:doc">
+   <xsl:template match="/doc">
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
 
     <xsl:template match="h:ul[@class='lwSearchResults']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:apply-templates select="/a:doc/r:results/s:result"/>
+            <xsl:apply-templates select="/doc/r:results/s:result"/>
         </xsl:copy>
     </xsl:template>
 
