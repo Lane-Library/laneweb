@@ -174,6 +174,11 @@
         <xsl:variable name="total" select="number(s:total)"/>
         <xsl:variable name="available" select="number(s:available)"/>
        <li class="resource" data-sid="{s:id}">
+            <xsl:if test="s:doi[1]">
+                <xsl:attribute name="data-doi">
+                    <xsl:value-of select="s:doi[1]"/>
+                </xsl:attribute>
+            </xsl:if>
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
