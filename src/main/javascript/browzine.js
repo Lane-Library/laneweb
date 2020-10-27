@@ -11,7 +11,7 @@
 
             // initialize the doiMap
             searchResultNodes.forEach(function(searchResultNode) {
-                var doi = searchResultNode.dataset.doi;
+                var doi = searchResultNode.dataset.doi.toLowerCase();
                 doiMap[doi] = doiMap[doi] || [];
                 doiMap[doi].push(searchResultNode);
             });
@@ -39,10 +39,9 @@
 
                 // add PDF link search result nodes
                 update: function(article) {
-                    var doi, i, url;
-                    if (article.fullTextFile) {
-                        doi = article.doi;
-                        url = article.fullTextFile;
+                    var i, url = article.fullTextFile,
+                        doi = article.doi ? article.doi.toLowerCase() : null;
+                    if (url && doi) {
                         for (i = 0; i < doiMap[doi].length; i++) {
                             doiMap[doi][i].fetched = true;
                             doiMap[doi][i].querySelector('.primaryLink').href = url;
