@@ -13,7 +13,7 @@ import org.springframework.mobile.device.site.CookieSitePreferenceRepository;
 import org.springframework.mobile.device.site.SitePreference;
 import org.springframework.mobile.device.site.SitePreferenceHandler;
 import org.springframework.mobile.device.site.StandardSitePreferenceHandler;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * Interceptor to switch between mobile and desktop sites. Based on Keith Donald's
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *
  * @author ryanmax
  */
-public class MobileSiteInterceptor extends HandlerInterceptorAdapter {
+public class MobileSiteInterceptor implements HandlerInterceptor {
 
     private static final String MOBILE_HELP_PATH = "/help/m.html";
 

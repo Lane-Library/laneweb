@@ -9,11 +9,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import edu.stanford.irt.laneweb.servlet.CookieName;
 
-public class PersistentLoginHandlerInterceptor extends HandlerInterceptorAdapter {
+public class PersistentLoginHandlerInterceptor implements HandlerInterceptor {
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 

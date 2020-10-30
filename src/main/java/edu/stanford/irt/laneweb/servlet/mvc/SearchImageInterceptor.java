@@ -17,13 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import edu.stanford.irt.laneweb.images.FacetFieldComparator;
 import edu.stanford.irt.solr.Image;
 import edu.stanford.irt.solr.service.SolrImageService;
 
-public class SearchImageInterceptor extends HandlerInterceptorAdapter {
+public class SearchImageInterceptor implements HandlerInterceptor {
 
     private static final String ALL_IMAGES = "images-all";
 
