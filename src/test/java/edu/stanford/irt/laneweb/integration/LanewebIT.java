@@ -56,6 +56,16 @@ public class LanewebIT {
     }
 
     @Test
+    public void testClinicalSearch() throws Exception {
+        Map<String, String> ns = new HashMap<>();
+        ns.put("h", "http://www.w3.org/1999/xhtml");
+        this.mockMvc.perform(get("/search.html?source=clinical-all&q=test").servletPath("/search.html"))
+                .andExpect(status().isOk())
+                .andExpect(xpath("//h:li[position() >= 10]//h:a[@class='primaryLink']/h:strong", ns).exists())
+                .andExpect(content().contentType(TEXT_HTML));
+    }
+
+    @Test
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
                 .andExpect(content().contentType(IMAGE_PNG));
