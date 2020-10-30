@@ -52,16 +52,12 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(final InterceptorRegistry registry) {
-        registry.addInterceptor(new PersistentLoginHandlerInterceptor())
-            .addPathPatterns("/**/secure/**", "/**/redirect/cme/**");
-        registry.addInterceptor(new DeviceResolverHandlerInterceptor())
-            .addPathPatterns("/**/*.html");
-        registry.addInterceptor(mobileSiteInterceptor())
-             .addPathPatterns("/**/*.html");
-        registry.addInterceptor(redirectHandlerInterceptor())
-            .addPathPatterns("/**");
-        registry.addInterceptor(new SearchImageInterceptor(this.solrImageService))
-            .addPathPatterns("/search.html");
+        registry.addInterceptor(new PersistentLoginHandlerInterceptor()).addPathPatterns("/secure/**",
+                "/redirect/cme/**");
+        registry.addInterceptor(new DeviceResolverHandlerInterceptor());
+        registry.addInterceptor(mobileSiteInterceptor());
+        registry.addInterceptor(redirectHandlerInterceptor());
+        registry.addInterceptor(new SearchImageInterceptor(this.solrImageService)).addPathPatterns("/search.html");
     }
 
     @Override
@@ -112,8 +108,8 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     public ResourceHttpRequestHandler staticRequestHandler(
             @Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase) throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new ClassPathResource("/"),
-                new ClassPathResource("/static/"), new UrlResource(liveBase.toURL())));
+        handler.setLocations(Arrays.asList(new ClassPathResource("/"), new ClassPathResource("/static/"),
+                new UrlResource(liveBase.toURL())));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
