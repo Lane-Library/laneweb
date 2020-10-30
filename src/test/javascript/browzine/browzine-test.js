@@ -15,7 +15,9 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("fulltext-url", document.querySelector("li[data-doi='1'] a").getAttribute("href"))
+            var links = document.querySelectorAll("li[data-doi='1'] a"),
+                lastLink = links[links.length - 1];
+            Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
         },
 
         "test viewport:scrolled 1": function() {
@@ -26,7 +28,9 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("fulltext-url", document.querySelector("li[data-doi='2'] a").getAttribute("href"))
+            var links = document.querySelectorAll("li[data-doi='2'] a"),
+                lastLink = links[links.length - 1];
+            Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
         },
         
         "test viewport:scrolled 2": function() {
@@ -38,6 +42,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 }
             });
             Y.Assert.areEqual("old", document.querySelector("li:not([data-doi]) a").getAttribute("href"))
+            Y.Assert.areEqual(1, document.querySelectorAll("li:not([data-doi]) a").length);
         }
     });
 
