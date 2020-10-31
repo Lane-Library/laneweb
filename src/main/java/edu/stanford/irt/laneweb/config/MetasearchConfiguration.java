@@ -1,6 +1,8 @@
 package edu.stanford.irt.laneweb.config;
 
+
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,8 +168,11 @@ public class MetasearchConfiguration {
 
     @Bean
     public MetaSearchService restMetaSearchService(final RESTService restService,
-            @Value("http://${edu.stanford.irt.laneweb.metasearch.host}:${edu.stanford.irt.laneweb.metasearch.port}/")
-    final URI metaSearchURI) {
+            @Value("${edu.stanford.irt.laneweb.metasearch.scheme}") final String scheme,
+            @Value("${edu.stanford.irt.laneweb.metasearch.host}") final String host,
+            @Value("${edu.stanford.irt.laneweb.metasearch.port}") final int port,
+            @Value("${edu.stanford.irt.laneweb.metasearch.path}") final String path) throws URISyntaxException {
+        URI metaSearchURI = new URI(scheme, null, host, port, path, null, null);
         return new RESTMetaSearchService(metaSearchURI, restService);
     }
 

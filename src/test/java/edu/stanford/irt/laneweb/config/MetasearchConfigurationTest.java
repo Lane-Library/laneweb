@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.config;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.net.URISyntaxException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,8 +77,8 @@ public class MetasearchConfigurationTest {
     }
 
     @Test
-    public void testRestMetaSearchService() {
-        assertNotNull(this.configuration.restMetaSearchService(null, null));
+    public void testRestMetaSearchService() throws URISyntaxException {
+        assertNotNull(this.configuration.restMetaSearchService(null, null, null, 0 ,null));
     }
 
     @Test
