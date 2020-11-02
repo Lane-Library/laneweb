@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+          <release date="2020-11-02" version="3.6.20" description="bug fix release">
+            <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update"> 
+               Refactoring the config file to use lane-api-dev
+            </action>
+            <action date="2020-10-28" dev="alainb" issue="LANEWEB-10636" type="update"> 
+               Update spring to 5.3.0
+            </action>
+            <action date="2020-10-25" dev="alainb" issue="LANEWEB-10634" type="update"> 
+               Update saxon library from 9 to 10
+            </action>
+            <action date="2020-10-27" dev="ryanmax" issue="LANEWEB-10632" type="update"> 
+               Expand permalink functionality
+            </action>
+            <action date="2020-10-14" dev="ryanmax" issue="LANEWEB-10623" type="update"> 
+               Use Browzine API for fulltext links   
+            </action>
+         </release>
          <release date="2020-10-26" version="3.6.19" description="bug fix release">
             <action date="2020-10-23" dev="alainb" issue="LANEWEB-10633" type="update"> 
                "Obstetrics &amp; Gynecology” broke “Subject Guides” menu
