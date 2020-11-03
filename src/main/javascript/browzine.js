@@ -45,12 +45,16 @@
                         for (i = 0; i < doiMap[doi].length; i++) {
                             doiMap[doi][i].fetched = true;
                             doiMap[doi][i].querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                                "<span><i class=\"fa fa-file-pdf-o\" aria-hidden=\"true\"></i> " +
-                                "<a href=\"" + url + "\">Direct to PDF</a>" +
-                                "</span>"
+                                '<span><i class="fa fa-file-pdf-o" aria-hidden="true"></i> ' +
+                                '<a class="bzFT" href="' + url + '">Direct to PDF</a>' +
+                                '</span>'
                             )
                         }
                     }
+                    // browzine fulltext links should be trackable as searchResultClick events
+                    document.querySelectorAll(".bzFT").forEach(function(node) {
+                        node.isTrackableAsEvent = true;
+                    });
                     delete doiMap[doi];
                 }
             };

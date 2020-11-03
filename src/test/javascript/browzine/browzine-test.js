@@ -18,6 +18,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var links = document.querySelectorAll("li[data-doi='1'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
+            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
 
         "test viewport:scrolled 1": function() {
@@ -31,6 +32,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var links = document.querySelectorAll("li[data-doi='2'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
+            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
         
         "test viewport:scrolled 2": function() {
