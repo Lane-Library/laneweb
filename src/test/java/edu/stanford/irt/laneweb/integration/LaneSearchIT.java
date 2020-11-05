@@ -49,8 +49,8 @@ public class LaneSearchIT {
     public void testLaneSearch20428285() throws Exception {
         // known PMID
         this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() = 1]//h:div[@class='resultInfo']//h:a", this.ns)
-                        .string("PMID: 20428285"))
+                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                        this.ns).exists())
                 .andExpect(xpath("//h:li", this.ns).nodeCount(1));
     }
 

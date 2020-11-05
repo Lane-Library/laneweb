@@ -31,7 +31,7 @@
         <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
 
-    <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
+    <xsl:variable name="pubmed-baseUrl">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
 
     <xsl:include href="resourceListPagination.xsl"/>
 
@@ -160,7 +160,7 @@
                     <xsl:text>Source: </xsl:text>
                     <a href="{s:resourceUrl}">
                         <xsl:value-of select="s:resourceName"/>
-                        <xsl:text>: </xsl:text>
+                        <xsl:text> - </xsl:text>
                         <xsl:value-of select="format-number(number(s:resourceHits),'###,###,##0')"/>
                         <xsl:text> </xsl:text>
                     </a>
@@ -197,9 +197,6 @@
                         <span class="descriptionTrigger eresource no-bookmarking"/>
                     </xsl:when>
                 </xsl:choose>
-                <xsl:if test="s:recordType = 'pubmed'">
-                    <span><a href="{concat($pubmed-baseUrl,s:recordId,'?otool=stanford')}">PMID: <xsl:value-of select="s:recordId"/></a></span>
-                </xsl:if>
                 <xsl:if test="s:recordType = 'bib'">
                     <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
                 </xsl:if>
@@ -229,7 +226,7 @@
         <xsl:variable name="label"><xsl:text>Source: </xsl:text></xsl:variable>
         <xsl:choose>
             <xsl:when test=". = 'pubmed'">
-                <xsl:copy-of select="$label"/><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term={$url-encoded-query}">PubMed</a>
+                <xsl:copy-of select="$label"/><a href="https://pubmed.ncbi.nlm.nih.gov/{../s:recordId}/?otool=Stanford" title="PubMed: PMID {../s:recordId}">PubMed</a>
             </xsl:when>
             <xsl:when test=". = 'sul'">
                 <xsl:copy-of select="$label"/><a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="SearchWorks Record">SearchWorks</a>
@@ -386,7 +383,7 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')"/>
         </xsl:variable>
-        <span><a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/></a></span>
+        <span><a href="{concat($pubmed-baseUrl,$pmid,'/?otool=stanford')}">PMID: <xsl:value-of select="$pmid"/></a></span>
     </xsl:template>
 
     <xsl:template match="s:contentId"/>

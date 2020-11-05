@@ -39,7 +39,7 @@
                 <div class="resultInfo">
                 </div>
                 <div class="sourceInfo">
-                    <span>Source: <a href="">: NaN </a></span>
+                    <span>Source: <a href=""> - NaN </a></span>
                 </div>
             </li>
         </x:expect>
@@ -156,7 +156,7 @@
         </x:context>
         <x:expect label="s:contentId starting with PMID: should get a link to pubmed in a span">
             <span>
-            <a href="http://www.ncbi.nlm.nih.gov/pubmed/1234567?otool=stanford">PMID: 1234567</a>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/1234567/?otool=stanford">PMID: 1234567</a>
         </span>
         </x:expect>
     </x:scenario>
