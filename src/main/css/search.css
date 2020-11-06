@@ -34,8 +34,7 @@
     padding-left: 30px;
 }
 
-.resource .fa-book, .resource .fa-file-o {
-    float: right;
+.resource .bookcover i {
     font-size: 86px;
 }
 
