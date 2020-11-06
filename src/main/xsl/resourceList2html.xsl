@@ -186,7 +186,7 @@
                 <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
             </xsl:if>
             <xsl:if test="s:primaryType = 'Article'">
-                <div class="bookcover"><i class="fa fa-file-text fa-flip-horizontal"></i></div>
+                <div class="bookcover"><i class="fa fa-file-text-o fa-flip-horizontal"></i></div>
             </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
             <xsl:apply-templates select="s:pub-text"/>
