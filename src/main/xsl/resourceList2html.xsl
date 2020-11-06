@@ -176,7 +176,7 @@
        <li class="resource" data-sid="{s:id}">
             <xsl:if test="s:doi[1]">
                 <xsl:attribute name="data-doi">
-                    <xsl:value-of select="s:doi[1]"/>
+                    <xsl:value-of select="lower-case(s:doi[1])"/>
                 </xsl:attribute>
             </xsl:if>
             <span class="primaryType">
@@ -184,6 +184,9 @@
             </span>
             <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
                 <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
+            </xsl:if>
+            <xsl:if test="s:primaryType = 'Article'">
+                <div class="bookcover"><i class="fa fa-file-o fa-flip-horizontal"></i></div>
             </xsl:if>
             <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
             <xsl:apply-templates select="s:pub-text"/>

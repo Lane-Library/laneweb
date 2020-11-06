@@ -31,9 +31,10 @@
 
 .resource .bookcover {
     float: right;
+    padding-left: 30px;
 }
 
-.resource .fa-book {
+.resource .fa-book, .resource .fa-file-o {
     float: right;
     font-size: 86px;
 }

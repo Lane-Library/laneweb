@@ -15,8 +15,10 @@
                 if (bcid === undefined && imageNode.dataset.bibid) {
                     bcid = "bib-" + imageNode.dataset.bibid;
                 }
-                imageMap[bcid] = imageMap[bcid] || [];
-                imageMap[bcid].push(imageNode);
+                if (bcid !== undefined) {
+                    imageMap[bcid] = imageMap[bcid] || [];
+                    imageMap[bcid].push(imageNode);
+                }
             });
 
             // make a couple of view functions available
