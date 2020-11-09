@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:r="http://lane.stanford.edu/results/1.0"
-    xmlns:a="aggregate">
+  >
 
     <xsl:param name="facet"/>
     <xsl:param name="source"/>
@@ -18,12 +18,12 @@
     <xsl:template match="h:span[starts-with(@r:ref, '@')]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name() = 'r:ref')]"/>
-            <xsl:value-of select="/a:doc/r:results/attribute::node()[name() = substring-after(current()/@r:ref, '@')]"/>
+            <xsl:value-of select="/doc/r:results/attribute::node()[name() = substring-after(current()/@r:ref, '@')]"/>
         </xsl:copy>
     </xsl:template>
     
     <xsl:template match="h:span[starts-with(@r:ref, 'resource@')][ends-with(@r:ref, '/@count')]">
-        <xsl:variable name="content-count" select="/a:doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@count'), '@')]/@count"/>
+        <xsl:variable name="content-count" select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@count'), '@')]/@count"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name() = 'r:ref')]"/>
             <xsl:choose>
@@ -57,13 +57,13 @@
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
-                <xsl:when test="number(/a:doc/r:results/@size) = 0">
+                <xsl:when test="number(/doc/r:results/@size) = 0">
                     <xsl:apply-templates select="child::node()[@class='search-summary-none']/child::node()"/>
                 </xsl:when>
-                <xsl:when test="number(/a:doc/r:results/@size) = 1">
+                <xsl:when test="number(/doc/r:results/@size) = 1">
                     <xsl:apply-templates select="child::node()[@class='search-summary-one']/child::node()"/>
                 </xsl:when>
-                <xsl:when test="number(/a:doc/r:results/@pages) = 1">
+                <xsl:when test="number(/doc/r:results/@pages) = 1">
                     <xsl:apply-templates select="child::node()[@class='search-summary-more']/child::node()"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -74,7 +74,7 @@
     </xsl:template>
     
     <xsl:template match="h:span[starts-with(@r:ref, 'resource@')][ends-with(@r:ref, '/@hits')]">
-        <xsl:variable name="hits" select="/a:doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@hits'), '@')]/@hits"/>
+        <xsl:variable name="hits" select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@hits'), '@')]/@hits"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name() = 'r:ref')]"/>
             <xsl:choose>
@@ -85,7 +85,7 @@
     </xsl:template>
     
     <xsl:template match="h:a[starts-with(@r:ref, 'resource@')][ends-with(@r:ref, '/@url')]">
-        <xsl:variable name="url" select="/a:doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@url'), '@')]/@url"/>
+        <xsl:variable name="url" select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@url'), '@')]/@url"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name() = 'r:ref')]"/>
             <xsl:attribute name="href" select="$url"/>
@@ -94,7 +94,7 @@
     </xsl:template>
     
     <xsl:template match="h:div[starts-with(@class, 's-pagination')]">
-        <xsl:if test="number(/a:doc/r:results/@pages) &gt; 1">
+        <xsl:if test="number(/doc/r:results/@pages) &gt; 1">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node() | child::node()"/>
             </xsl:copy>
@@ -102,12 +102,12 @@
     </xsl:template>
     
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='page']/@value">
-        <xsl:attribute name="value" select="number(/a:doc/r:results/@page)"/>
+        <xsl:attribute name="value" select="number(/doc/r:results/@page)"/>
     </xsl:template>
     
     <xsl:template match="h:span[contains(@class, 'paging-button-back')]">
         <xsl:choose>
-            <xsl:when test="number(/a:doc/r:results/@page) = 1">
+            <xsl:when test="number(/doc/r:results/@page) = 1">
                 <xsl:copy>
                     <xsl:attribute name="class" select="concat(@class, ' disabled')"/>
                     <xsl:apply-templates/>
@@ -120,7 +120,7 @@
                         <xsl:choose>
                             <xsl:when test="contains(@class, 'fast')">1</xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="number(/a:doc/r:results/@page) - 1"/>
+                                <xsl:value-of select="number(/doc/r:results/@page) - 1"/>
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:if test="$facet">
@@ -135,7 +135,7 @@
     
     <xsl:template match="h:span[contains(@class, 'paging-button-forward')]">
         <xsl:choose>
-            <xsl:when test="number(/a:doc/r:results/@page) = number(/a:doc/r:results/@pages)">
+            <xsl:when test="number(/doc/r:results/@page) = number(/doc/r:results/@pages)">
                 <xsl:copy>
                     <xsl:attribute name="class" select="concat(@class, ' disabled')"/>
                     <xsl:apply-templates/>
@@ -147,10 +147,10 @@
                         <xsl:value-of select="concat('?source=', $source, '&amp;q=', $query, '&amp;page=')"/>
                         <xsl:choose>
                             <xsl:when test="contains(@class, 'fast')">
-                                <xsl:value-of select="/a:doc/r:results/@pages"/>
+                                <xsl:value-of select="/doc/r:results/@pages"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="number(/a:doc/r:results/@page) + 1"/>
+                                <xsl:value-of select="number(/doc/r:results/@page) + 1"/>
                             </xsl:otherwise>
                         </xsl:choose>
                         <xsl:if test="$facet">
