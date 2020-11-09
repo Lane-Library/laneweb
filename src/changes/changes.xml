@@ -17,6 +17,9 @@
             <action date="2020-11-07" dev="ryanmax" issue="LANEWEB-10641" type="update"> 
                add journal cover images to articles
             </action>
+            <action date="2020-11-09" dev="alainb" issue="LANEWEB-10643" type="update">
+            	The left menu on the clinical search doesn't display the facet number
+            </action>
          </release>
           <release date="2020-11-02" version="3.6.20" description="bug fix release">
             <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update"> 
