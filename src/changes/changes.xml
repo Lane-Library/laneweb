@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	   <release date="2020-11-09" version="3.6.21" description="bug fix release">
+            <action date="2020-11-03" dev="ryanmax" issue="LANEWEB-10635" type="update"> 
+               reduce redundant PubMed links in article results
+            </action>
+            <action date="2020-11-04" dev="ryanmax" issue="LANEWEB-10638" type="update"> 
+               browzine "Direct to PDF" links are not tracked
+            </action>
+            <action date="2020-11-07" dev="ryanmax" issue="LANEWEB-10641" type="update"> 
+               add journal cover images to articles
+            </action>
+         </release>
           <release date="2020-11-02" version="3.6.20" description="bug fix release">
             <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update"> 
                Refactoring the config file to use lane-api-dev
