@@ -12,8 +12,7 @@
             // initialize the doiMap
             searchResultNodes.forEach(function(searchResultNode) {
                 var doi = searchResultNode.dataset.doi.toLowerCase();
-                doiMap[doi] = doiMap[doi] || [];
-                doiMap[doi].push(searchResultNode);
+                doiMap[doi] = searchResultNode;
             });
 
             // make a couple of view functions available
@@ -23,14 +22,11 @@
                 // search result nodes that are in the viewport and requiring article lookups
                 getDoisForUpdate: function(viewport) {
                     var doisForUpdate = [],
-                        doi, i;
+                        doi;
                     for (doi in doiMap) {
                         if (doiMap.hasOwnProperty(doi)) {
-                            for (i = 0; i < doiMap[doi].length; i++) {
-                                if (!doiMap[doi][i].fetched && viewport.inView(doiMap[doi][i])) {
-                                    doisForUpdate.push(doi);
-                                    break;
-                                }
+                            if (!doiMap[doi].fetched && viewport.inView(doiMap[doi])) {
+                                doisForUpdate.push(doi);
                             }
                         }
                     }
@@ -39,16 +35,20 @@
 
                 // add PDF link search result nodes
                 update: function(article) {
-                    var i, url = article.fullTextFile,
-                        doi = article.doi ? article.doi.toLowerCase() : null;
-                    if (url && doi) {
-                        for (i = 0; i < doiMap[doi].length; i++) {
-                            doiMap[doi][i].fetched = true;
-                            doiMap[doi][i].querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
+                    var fulltextUrl = article.data.fullTextFile,
+                        doi = article.data.doi ? article.data.doi.toLowerCase() : null,
+                        coverImageUrl = (article.included[0] && article.included[0].coverImageUrl) ? article.included[0].coverImageUrl : null;
+                    if (doiMap[doi]) {
+                        doiMap[doi].fetched = true;
+                        if (fulltextUrl) {
+                            doiMap[doi].querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
                                 '<span><i class="fa fa-file-pdf-o" aria-hidden="true"></i> ' +
-                                '<a class="bzFT" href="' + url + '">Direct to PDF</a>' +
+                                '<a class="bzFT" href="' + fulltextUrl + '">Direct to PDF</a>' +
                                 '</span>'
                             )
+                        }
+                        if (coverImageUrl) {
+                            doiMap[doi].querySelector('.bookcover').innerHTML = '<image src="' + coverImageUrl + '"/>';
                         }
                     }
                     // browzine fulltext links should be trackable as searchResultClick events
@@ -104,7 +104,7 @@
 
             // handler for the service covers event, sends the article data to the view
             article: function(event) {
-                view.update(event.article.data);
+                view.update(event.article);
             },
 
             // handler for the viewport update event, gets dois from the view
