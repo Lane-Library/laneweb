@@ -4,7 +4,7 @@
 
     <x:scenario label="test count and total">
         <x:context>
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" total="100" >
                         <resource id="foo" count="10"/>
                 </results>
@@ -17,7 +17,7 @@
             </doc>
         </x:context>
         <x:expect label="expected count and total">
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" total="100">
                     <resource id="foo" count="10"/>
                 </results>
@@ -33,7 +33,7 @@
     
     <x:scenario label="no results">
         <x:context>
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="0" start="0" end="0" page="1" pages="0" total="100"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -47,7 +47,7 @@
             </doc>
         </x:context>
         <x:expect label="no results">
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="0" start="0" end="0" page="1" pages="0" total="100"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -59,7 +59,7 @@
     
     <x:scenario label="one result">
         <x:context>
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="1" start="1" end="1" page="1" pages="1"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -73,7 +73,7 @@
             </doc>
         </x:context>
         <x:expect label="one result">
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="1" start="1" end="1" page="1" pages="1"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -85,7 +85,7 @@
     
     <x:scenario label="more results">
         <x:context>
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="22" start="1" end="22" page="1" pages="1"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -99,7 +99,7 @@
             </doc>
         </x:context>
         <x:expect label="more results">
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="22" start="1" end="22" page="1" pages="1"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -111,7 +111,7 @@
     
     <x:scenario label="multipages">
         <x:context>
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="593" start="1" end="149" page="1" pages="4"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -125,7 +125,7 @@
             </doc>
         </x:context>
         <x:expect label="multipages">
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="593" start="1" end="149" page="1" pages="4"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
                     xmlns:r="http://lane.stanford.edu/results/1.0">
@@ -137,7 +137,7 @@
     
     <x:scenario label="resource hits and url">
         <x:context>
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0">
                     <resource id="foo" hits="20" url="url"/>
                 </results>
@@ -150,7 +150,7 @@
             </doc>
         </x:context>
         <x:expect label="resourc hits and url">
-            <doc xmlns="aggregate">
+            <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0">
                     <resource id="foo" hits="20" url="url"/>
                 </results>
