@@ -9,7 +9,7 @@
       <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}-${git.commit.id.abbrev}"></script>
    </head>
    <body>
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/header.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/header.html">
          <xi:fallback></xi:fallback>
       </xi:include>
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/navigation.html">
@@ -99,7 +99,7 @@
          </xi:include>
                 <?laneweb content?>
       </div>
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/footer.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/footer.html">
          <xi:fallback></xi:fallback>
       </xi:include>
       <div class="search-indicator">
