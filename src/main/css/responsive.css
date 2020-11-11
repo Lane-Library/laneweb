@@ -1,4 +1,4 @@
-/* 
+ 
 html{
 	box-sizing: border-box;
 }
@@ -9,7 +9,7 @@ html{
 
 img{
 	max-width: 100%;
-} */
+} 
 
 .menu-toggle {
     background-color: white;
@@ -52,23 +52,23 @@ img{
     nav, .utility-menu, .footer-link-bar, .super-footer {
         display: none;
     }
-    .nav {
+    nav {
         z-index: 1;
     }
     #nav:target {
         display: block;
         position: absolute;
-        top: 0;
         right: 0;
+        width: 60%;
     }
     #nav:target .menu-toggle-off {
         display: block;
     }
-    .nav header {
+    nav header {
         height: auto;
         position: static;
     }
-    .nav a {
+    nav a {
         color: white;
     }
     .login, .lane-nav, .favorites .dropdown-content {
@@ -113,14 +113,14 @@ img{
         text-align: left;
         width: 100%;
     }
-    .lane-nav {
+    nav {
         box-shadow: none;
         position: static;
     }
-    .lane-nav .centered {
+    nav .centered {
         margin: 0;
     }
-    .lane-nav ul {
+    nav ul {
         display: block;
     }
     .nav-menu {
@@ -169,21 +169,22 @@ img{
         margin: 0;
         min-width: 0;
     }
-    h1 a {
-        background-image: url('../images/sm-logo2.svg');
-        padding: 10px 0 10px 50px;
+    .brand a, .brand a:link, .brand a:focus, .brand a:visited{
+        background-image: url('../images/sm-logo.svg');
+        background-size:129px;
+        padding:17px 0px 0px 134px;
+        font-size: 14px;
     }
     .menu-toggle-on {
         right: 0;
     }
-    .lane-header {
-        height: 186px;
-    }
+    
     .library-contact {
-        display: block;
-        left: 0;
-        top: 70px;
+        position: relative;
+        top: 0px;
+        padding-top: 20px;
     }
+    
     .library-contact li {
         box-sizing: border-box;
         margin-bottom: 12px;
@@ -199,4 +200,5 @@ img{
         margin-left: 48px;
         width: 110px;
     }
+    
 }
