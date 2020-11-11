@@ -29,43 +29,6 @@
           <map:transform type="namespace-filter"/>
          <map:serialize type="html5"/>
       </map:match>     
-      
-       <!-- ********* CONTENT ********** -->
-       <!-- Content from https://laneguides.stanford.edu -->
-      <map:match pattern="content/**" type="wildcard">
-         <map:generate type="html" src="cache:600:{libguide-service-uri}/{1}?{query-string}"/>
-         <map:transform type="xinclude"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
-            <map:parameter name="laneguide-uri" value="{libguide-service-uri}"/>
-         </map:transform>
-         <map:serialize type="xhtml"/>
-      </map:match>
-      
-      <!--  Apply template -->
-      <map:match pattern="**" type="wildcard">
-         <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
-            <map:generate type="file" src="cocoon://libguides/content/{1}"/>
-            <map:generate type="file" src="cocoon://content/templates/libguides.xml"/>
-         </map:aggregate>
-         <map:select type="cme-links">
-            <map:when test="true">
-               <map:transform type="html-cme-links"/>
-            </map:when>
-         </map:select>
-         <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
-         <map:select type="logged-in">
-            <map:when test="true">
-               <map:transform type="xinclude"/>
-            </map:when>
-         </map:select>
-         <map:select type="proxy-links">
-            <map:when test="true">
-               <map:transform type="proxy-links"/>
-            </map:when>
-         </map:select>
-         <map:transform type="namespace-filter"/>
-         <map:transform type="debug"/>
-         <map:serialize type="html5"/>
-      </map:match>
+     
    </map:pipeline>
 </map:sitemap>
