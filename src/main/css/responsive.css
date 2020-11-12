@@ -10,7 +10,7 @@ html{
 img{
 	max-width: 100%;
 } 
-
+ 
 .menu-toggle {
     background-color: white;
     display: none;
@@ -49,7 +49,7 @@ img{
     .search-form {
         margin-top: 0;
     }
-    nav, .utility-menu, .footer-link-bar, .super-footer {
+    nav,.utility-menu, .footer-link-bar, .super-footer {
         display: none;
     }
     nav {
@@ -58,8 +58,9 @@ img{
     #nav:target {
         display: block;
         position: absolute;
+        top: 0;
         right: 0;
-        width: 60%;
+        
     }
     #nav:target .menu-toggle-off {
         display: block;
@@ -71,14 +72,14 @@ img{
     nav a {
         color: white;
     }
-    .login, .lane-nav, .favorites .dropdown-content {
+   .login, #lane-nav, .favorites .dropdown-content {
         background-color: #666;
         background-image: url('../images/diag.png');
     }
     .login {
         border-bottom: 1px solid #878787;
         box-sizing: border-box;
-        line-height: 48px;
+        line-height: normal;
         margin: 0;
         padding: 14px 36px 18px 26px;
         position: static;
@@ -104,7 +105,7 @@ img{
     }
     .login > li a {
         display: block;
-    }
+    } 
     .favorites .dropdown-content {
         background: linear-gradient(rgb(21,21,21), rgb(81,81,81));
         box-sizing: border-box;
@@ -113,15 +114,13 @@ img{
         text-align: left;
         width: 100%;
     }
-    nav {
+    #lane-nav {
         box-shadow: none;
-        position: static;
+       
+        display: grid;
     }
-    nav .centered {
+    #lane-nav .centered {
         margin: 0;
-    }
-    nav ul {
-        display: block;
     }
     .nav-menu {
         display: list-item;
@@ -178,11 +177,13 @@ img{
     .menu-toggle-on {
         right: 0;
     }
-    
+    .lane-header {
+        height: 186px;
+    }
     .library-contact {
-        position: relative;
-        top: 0px;
-        padding-top: 20px;
+        display: block;
+        left: 0;
+        top: 70px;
     }
     
     .library-contact li {
@@ -190,15 +191,12 @@ img{
         margin-bottom: 12px;
         text-align: center;
     }
-    .library-contact li:nth-child(1),
-    .library-contact li:nth-child(3) {
-        margin-left: 18px;
-        width: 180px;
+    .library-contact li,
+    .library-contact li {
+        margin-left: 10%;
+        width: 35%;
     }
-    .library-contact li:nth-child(2),
-    .library-contact li:nth-child(4) {
-        margin-left: 48px;
-        width: 110px;
-    }
-    
+   
 }
+
+
