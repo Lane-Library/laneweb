@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	  <release date="2020-11-16" version="3.6.22" description="bug fix release">
+            <action date="2020-11-13" dev="alainb" issue="LANEWEB-10645" type="update"> 
+        		Small text updates to header and footer
+            </action>
+           </release>
       	   <release date="2020-11-09" version="3.6.21" description="bug fix release">
             <action date="2020-11-03" dev="ryanmax" issue="LANEWEB-10635" type="update"> 
                reduce redundant PubMed links in article results
