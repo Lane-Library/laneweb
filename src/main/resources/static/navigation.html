@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Navigation</title>
+</head>
+
+<body>
+
+<a href="#" class="custom-toggle" id="toggle"><s class="bar"></s><s class="bar"></s><s class="bar"></s></a>
+
+<div class="custom-wrapper" id="menu">
+    <div id="nav" class="pure-menu pure-menu-horizontal  custom-can-transform">
+		<ul class="pure-menu-list" id="main-nav">
+			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/biomed-resources/">
+				<a	class="pure-menu-link">Resources</a>
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-resources.html">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+			</li>
+			<li  class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu"  data-path="/portals/">
+				<a class="pure-menu-link">Subject Guides</a>
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-portals.html">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+			</li>
+			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/classes-consult/">
+			<a class="pure-menu-link">Library Classes</a> 
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-classes.html">
+					<xi:fallback></xi:fallback>
+				</xi:include>
+			
+			</li>
+				
+			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/using-lib/">
+				<a	class="pure-menu-link">Services</a>
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-services.html">
+					<xi:fallback></xi:fallback>
+				</xi:include>
+			</li>
+			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/about/">
+				<a class="pure-menu-link">About</a>
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-about.html">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+			</li>
+			<li class="pure-menu-item  nav-menu">
+				<a href="/med-history/index.html" class="pure-menu-link">Medical History Center</a>
+			</li>
+			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/help/">
+				<a class="pure-menu-link">FAQs</a>
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-faqs.html">
+					<xi:fallback></xi:fallback>
+				</xi:include>
+			</li>
+			<li class="pure-menu-item  nav-menu"><a href="#" class="pure-menu-link">Blog</a>
+			</li>
+			</ul>
+		</div>
+
+</div>
+</body>
+</html>

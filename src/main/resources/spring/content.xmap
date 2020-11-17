@@ -213,7 +213,7 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
-    	<map:match pattern="(header|footer).html" type="regexp">
+    	<map:match pattern="(header|footer|navigation).html" type="regexp">
             <map:generate type="html" src="classpath:/static/{1}.html"/>
             <map:serialize type="xml"/>
         </map:match>

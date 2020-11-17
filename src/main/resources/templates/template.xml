@@ -107,5 +107,6 @@
       </div>
       <script type="text/javascript" id="model">//</script>
       <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}-${git.commit.id.abbrev}"></script>
+        <script type="text/javascript" src="/resources/javascript/main-menu.js?${project.version}-${git.commit.id.abbrev}"></script>
    </body>
 </html>
