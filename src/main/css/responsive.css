@@ -4,8 +4,7 @@ html {
 
 *, *:before, *:after {
 	box-sizing: inherit;
-}
-
+} 
 img {
 	max-width: 100%;
 }
@@ -119,17 +118,18 @@ img {
 		height: 186px;
 	}
 	.brand {
-    
-    padding-top: 15px;
+        padding-top: 15px;
 	}
     
-    .nav-menu-content li {
+  .nav-menu-content li {
         border-bottom: none;
     }
-    #portal {
-        column-count: 2;
+   
+    #portals {
+        column-count: inherit;
          width: 375px;
-         margin-left:0px;
+         background-color: red;
+         z-index: 1;
     }
   
     
