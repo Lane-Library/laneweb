@@ -73,6 +73,7 @@
     position: relative;
     width: 100%;
     color: black;
+    padding: 0px;
 }
 
 .search-form input {

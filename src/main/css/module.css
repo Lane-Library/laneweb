@@ -16,6 +16,10 @@
     visibility: hidden;
 }
 
+.module fieldset{
+	padding: 0px;
+}
+
 .core-covers .bookcover,
 .core-covers-3 .bookcover,
 .module-img {
