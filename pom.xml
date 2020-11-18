@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>69</version>
+        <version>72</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.6.23-SNAPSHOT</version>
@@ -177,7 +177,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.1.10</version>
+            <version>1.1.11</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
@@ -217,7 +217,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>8.6.3</version>
+            <version>8.7.0</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
