@@ -21,7 +21,7 @@
 
 
 		menu.classList.toggle('open');
-		document.getElementById('toggle').classList.toggle('x');
+		document.getElementById('navbar-toggle').classList.toggle('open');
 	};
 
 	function closeMenu() {
@@ -30,7 +30,7 @@
 		}
 	}
 
-	document.getElementById('toggle').addEventListener('click', function(e) {
+	document.getElementById('navbar-toggle').addEventListener('click', function(e) {
 		toggleMenu();
 		e.preventDefault();
 	});
