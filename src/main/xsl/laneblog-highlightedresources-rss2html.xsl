@@ -19,7 +19,7 @@
    </xsl:template>
    
    <xsl:template match="item">
-      <div class="pure-u-1-3">
+      <div class="pure-u-1 pure-u-md-1-3">
          <div class="newsfeed">
              <header>Resource of the Month</header>
              <div class="same-height-2" >

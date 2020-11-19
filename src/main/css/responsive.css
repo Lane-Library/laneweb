@@ -4,31 +4,30 @@ html {
 
 *, *:before, *:after {
 	box-sizing: inherit;
-} 
+}
+
 img {
 	max-width: 100%;
 }
- 
- .custom-wrapper {
-    z-index:1;
-    width: 100%;
-    -webkit-transition: height 0.5s;
-    -moz-transition: height 0.5s;
-    -ms-transition: height 0.5s;
-    transition: height 0.5s;
+
+.custom-wrapper {
+	z-index: 1;
+	width: 100%;
+	-webkit-transition: height 0.5s;
+	-moz-transition: height 0.5s;
+	-ms-transition: height 0.5s;
+	transition: height 0.5s;
 }
 
- 
 .custom-wrapper.open {
-    display: block;
-    position: absolute;
-    top : 0px;
+	display: block;
+	position: absolute;
+	top: 0px;
 }
-
 
 .custom-toggle {
 	top: 12px;
-    right: 8px;
+	right: 8px;
 	position: absolute;
 	display: none;
 }
@@ -47,22 +46,20 @@ img {
 	transition: all 0.5s;
 }
 
- .custom-toggle .bar:first-child {
+.custom-toggle .bar:first-child {
 	-webkit-transform: translateY(-6px);
 	-moz-transform: translateY(-6px);
 	-ms-transform: translateY(-6px);
 	transform: translateY(-6px);
 }
- 
- .custom-toggle .bar:last-child {
+
+.custom-toggle .bar:last-child {
 	-webkit-transform: translateY(6px);
 	-moz-transform: translateY(6px);
 	-ms-transform: translateY(6px);
 	transform: translateY(6px);
 }
-  
- 
- 
+
 .custom-toggle.x .bar {
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
@@ -75,18 +72,17 @@ img {
 	-moz-transform: rotate(-45deg);
 	-ms-transform: rotate(-45deg);
 	transform: rotate(-45deg);
-} 
+}
 
 .custom-toggle.x .bar:last-child {
-	display:none;
-}  
- 
+	display: none;
+}
+
 @media ( max-width : 768px) {
-	
 	.custom-toggle {
 		display: block;
 		z-index: 2;
-	}	
+	}
 	.custom-wrapper {
 		display: none;
 		margin-top: 0px;
@@ -95,22 +91,19 @@ img {
 	#main-nav {
 		display: contents;
 	}
-	.nav-menu > a, .nav-menu > a:visited {
+	.nav-menu>a, .nav-menu>a:visited {
 		text-align: left;
 	}
-	.nav-menu-content{
+	.nav-menu-content {
 		margin-left: 30%;
 	}
-	.login > li:nth-child(8) {
+	.login>li:nth-child(8), .footer-logos {
 		display: none;
 	}
-		
-	
 	html, .centered {
 		margin: 0;
 		min-width: 0;
 	}
-
 	.menu-toggle-on {
 		right: 0;
 	}
@@ -118,22 +111,15 @@ img {
 		height: 186px;
 	}
 	.brand {
-        padding-top: 15px;
+		padding-top: 15px;
 	}
-    
-  .nav-menu-content li {
-        border-bottom: none;
-    }
-   
-    #portals {
-        column-count: inherit;
-         width: 375px;
-         background-color: red;
-         z-index: 1;
-    }
-  
-    
-	
+	.nav-menu-content li {
+		border-bottom: none;
+	}
+	#portals {
+		column-count: 2;
+		width: 375px;
+	}
 	.library-contact {
 		display: block;
 		left: 0;
@@ -143,10 +129,14 @@ img {
 		margin-bottom: 12px;
 		text-align: center;
 	}
-	 
 	.library-contact li, .library-contact li {
 		margin-left: 10%;
 		width: 35%;
 	}
+	
+	.pure-md-hide{
+	 display: none;
+	}
+	
 	
 }

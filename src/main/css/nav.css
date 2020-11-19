@@ -88,6 +88,6 @@
 }
 
 #portals li.pure-menu-item.pure-menu-item {
-	display: inline-block;
+	display: flex;
 	 width: 200px;
 }

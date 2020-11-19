@@ -15,6 +15,13 @@
     padding-bottom: 65px;
 }
 
+@media ( max-width : 768px) {
+	.hero-unit-front-page, .hero-unit {
+	    padding-top: 30px;
+	    padding-bottom: 30px;
+	}
+}
+
 .search-form {
     color: white;
     overflow: hidden;
@@ -73,7 +80,9 @@
     position: relative;
     width: 100%;
     color: black;
+    padding: 0px;
 }
+
 
 .search-form input {
     font-size: 14px;

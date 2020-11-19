@@ -16,7 +16,7 @@
          select="channel/item[ (category[ . = 'New Resource']  or category[ . = 'News'])  and  not(category[ . = 'Highlighted Resource']) and  count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]"/>
    </xsl:template>
    <xsl:template match="item">
-      <div class="pure-u-1-3">
+      <div class="pure-u-1 pure-u-md-1-3">
          <div class="newsfeed">
             <div class="same-height-2" >
             <figure>

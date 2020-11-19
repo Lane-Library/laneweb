@@ -4,6 +4,13 @@
     position: relative;
     z-index: 1;
 }
+
+
+/* Create class  */
+.event .pure-u-5-6{
+	padding-left: 12px !important;
+}
+
 .date{
     text-transform: uppercase;
     text-align: right;
