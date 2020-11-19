@@ -17,7 +17,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -54,7 +53,6 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(new PersistentLoginHandlerInterceptor()).addPathPatterns("/secure/**",
                 "/redirect/cme/**");
-        registry.addInterceptor(new DeviceResolverHandlerInterceptor());
         registry.addInterceptor(mobileSiteInterceptor());
         registry.addInterceptor(redirectHandlerInterceptor());
         registry.addInterceptor(new SearchImageInterceptor(this.solrImageService)).addPathPatterns("/search.html");
