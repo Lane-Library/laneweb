@@ -55,10 +55,6 @@ public class LanewebMvcConfigurerTest {
         assertNotNull(this.configuration.getSitemapHandlerExceptionResolver(null));
     }
 
-    @Test
-    public void testMobileSiteInterceptor() {
-        assertNotNull(this.configuration.mobileSiteInterceptor());
-    }
 
     @Test
     public void testRedirectHandlerInterceptor() {
