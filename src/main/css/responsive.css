@@ -12,8 +12,8 @@ img {
 
 .custom-wrapper {
 	z-index: 1;
-	width: 100%;
-	-webkit-transition: height 0.5s;
+	right: 0px;
+   -webkit-transition: height 0.5s;
 	-moz-transition: height 0.5s;
 	-ms-transition: height 0.5s;
 	transition: height 0.5s;
@@ -22,7 +22,9 @@ img {
 .custom-wrapper.open {
 	display: block;
 	position: absolute;
-	top: 0px;
+	top: 32px;
+	width: 54%;
+	right: 0px;
 }
 
 .custom-toggle {
@@ -86,6 +88,7 @@ img {
 	.custom-wrapper {
 		display: none;
 		margin-top: 0px;
+		
 		-webkit-font-smoothing: antialiased;
 	}
 	#main-nav {
@@ -93,9 +96,6 @@ img {
 	}
 	.nav-menu>a, .nav-menu>a:visited {
 		text-align: left;
-	}
-	.nav-menu-content {
-		margin-left: 30%;
 	}
 	.login>li:nth-child(8), .footer-logos {
 		display: none;
@@ -117,23 +117,28 @@ img {
 		border-bottom: none;
 	}
 	#portals {
-		column-count: 2;
-		width: 375px;
+		column-count: 1;
+		width: 100%
 	}
 	.library-contact {
 		display: block;
 		left: 0;
 		top: 70px;
 	}
+	
+	
 	.library-contact li {
 		margin-bottom: 12px;
 		text-align: center;
 	}
 	.library-contact li, .library-contact li {
 		margin-left: 10%;
-		width: 35%;
 	}
 	
+	.pure-menu-allow-hover:hover > .pure-menu-children, .pure-menu-active > .pure-menu-children {
+    position: relative;
+	}
+
 	.pure-md-hide{
 	 display: none;
 	}
