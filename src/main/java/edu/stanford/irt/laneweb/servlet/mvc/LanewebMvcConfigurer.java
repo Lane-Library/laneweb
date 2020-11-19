@@ -5,9 +5,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +51,6 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(new PersistentLoginHandlerInterceptor()).addPathPatterns("/secure/**",
                 "/redirect/cme/**");
-        registry.addInterceptor(mobileSiteInterceptor());
         registry.addInterceptor(redirectHandlerInterceptor());
         registry.addInterceptor(new SearchImageInterceptor(this.solrImageService)).addPathPatterns("/search.html");
     }
@@ -81,14 +78,6 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         return new SitemapHandlerExceptionResolver(sitemapController);
     }
 
-    @Bean
-    public MobileSiteInterceptor mobileSiteInterceptor() {
-        Map<String, String> redirectMap = new HashMap<>();
-        redirectMap.put("/index.html", "/m/index.html");
-        redirectMap.put("/biomed-resources/eb.html", "/m/book.html");
-        redirectMap.put("/biomed-resources/ej.html", "/m/ej.html");
-        return new MobileSiteInterceptor(redirectMap);
-    }
 
     @Bean
     public RedirectHandlerInterceptor redirectHandlerInterceptor() {
