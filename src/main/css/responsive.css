@@ -12,7 +12,6 @@ img {
 
 .custom-wrapper {
 	z-index: 1;
-	
 	-webkit-transition: height 0.5s;
 	-moz-transition: height 0.5s;
 	-ms-transition: height 0.5s;
@@ -27,19 +26,14 @@ img {
 	right: 0px;
 }
 
-.menu-toggle.open {
-	top: 0px;
-	right: 66%;
-}
 
 .menu-toggle {
-	top: -32px;
+	background-color: grey;
+	padding: 9px;
 	right: 0px;
 	position: absolute;
 	display: none;
-	background-color: grey;
-	padding: 9px;
-	z-index: 2;
+	
 }
 
 .menu-toggle span, .menu-toggle i{
@@ -49,8 +43,18 @@ img {
 
 .menu-toggle i {
 	font-size: 32px;
-
 }
+
+#navbar-toggle{
+	top: -32px;
+	z-index: 2;	
+}
+
+#navbar-toggle.open {
+	top: 0px;
+	right: 66%;
+}
+
 
 @media ( max-width : 768px) {
 	.menu-toggle {
@@ -73,19 +77,21 @@ img {
 	.login>li:nth-child(8), .footer-logos {
 		display: none;
 	}
-	html, .centered {
+	html, .content	{
 		margin: 0;
 		min-width: 0;
 	}
 	.lane-header {
 		height: 186px;
 	}
+	.lane-header div{
+		margin: 0;
+	}
+	
 	.brand {
 		padding-top: 15px;
 	}
-	.nav-menu-content li {
-		border-bottom: none;
-	}
+	
 	#portals {
 		column-count: 1;
 		width: 100%

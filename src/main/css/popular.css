@@ -40,3 +40,25 @@
 .popular a, .popular a .fa {
     color: #fff;
 }
+
+#popular-content:target {
+		display: block;
+	}
+
+
+
+@media ( max-width : 768px) {
+ 	#popular-content{
+		 display: none;
+	}
+
+	
+
+	.popular  .menu-toggle{
+	   top: -1px;
+      right: -1px;
+	}
+	
+}
+
+
