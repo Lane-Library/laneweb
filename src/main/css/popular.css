@@ -1,64 +1,57 @@
 .popular {
-    margin-top: 24px;
-    padding: 12%;
-    line-height: 1.6em;
-    background-color: #333333;
-    color: #ffffff;
-    border: 1px solid #333333;
-    box-sizing: border-box;
-    position: relative;
+	margin-top: 24px;
+	padding: 12%;
+	line-height: 1.6em;
+	background-color: #333333;
+	color: #ffffff;
+	border: 1px solid #333333;
+	box-sizing: border-box;
+	position: relative;
 }
 
 .popular h3 {
-    text-transform: uppercase;
-    font-family: 'Fjord One', serif;
-    color: #ffffff;
-    text-align: center;
-    background-image: none;
+	text-transform: uppercase;
+	font-family: 'Fjord One', serif;
+	color: #ffffff;
+	text-align: center;
+	background-image: none;
 }
 
 .popular h4 {
-    text-transform: uppercase;
-    font-family: 'Fjord One', serif;
-    color: #ffffff;
-    text-align: center;
-    background-image: none;
-}
-.popular li {
-    border-bottom: none;
+	text-transform: uppercase;
+	font-family: 'Fjord One', serif;
+	color: #ffffff;
+	text-align: center;
+	background-image: none;
 }
 
-.popular:after{
-    content: '.';
-    display: block;
-    height: 0;
-    font-size: 0;
-    clear: both;
-    visibility: hidden;
+.popular li {
+	border-bottom: none;
+}
+
+.popular:after {
+	content: '.';
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
 }
 
 .popular a, .popular a .fa {
-    color: #fff;
+	color: #fff;
 }
 
 #popular-content:target {
-		display: block;
-	}
-
-
-
-@media ( max-width : 768px) {
- 	#popular-content{
-		 display: none;
-	}
-
-	
-
-	.popular  .menu-toggle{
-	   top: -1px;
-      right: -1px;
-	}
-	
+	display: block;
 }
 
-
+@media ( max-width : 768px) {
+	#popular-content {
+		display: none;
+	}
+	.popular  .menu-toggle {
+		top: -1px;
+		right: -1px;
+	}
+}

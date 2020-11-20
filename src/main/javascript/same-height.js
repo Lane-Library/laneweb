@@ -14,11 +14,10 @@
         classes = {},
         regex = /.*(same-height-\d).*/,
         matches,
-        smallmedia = window.matchMedia("(max-width: 738px)")
-        ;
-
-    
-    if( ! smallmedia){
+        smallmedia = window.matchMedia("(max-width: 738px)");
+       
+  	//if small media the div are located on top of each other
+    if( ! smallmedia.matches){
 		 // find the class for each group
 		    
 	    for (i = 0; i < nodes.length; i++) {
