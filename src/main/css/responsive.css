@@ -10,33 +10,15 @@ img {
 	max-width: 100%;
 }
 
-.custom-wrapper {
-	z-index: 1;
-	-webkit-transition: height 0.5s;
-	-moz-transition: height 0.5s;
-	-ms-transition: height 0.5s;
-	transition: height 0.5s;
-}
-
-.custom-wrapper.open {
-	display: block;
-	position: absolute;
-	top: 32px;
-	width: 66%;
-	right: 0px;
-}
-
-
 .menu-toggle {
 	background-color: grey;
 	padding: 9px;
 	right: 0px;
 	position: absolute;
 	display: none;
-	
 }
 
-.menu-toggle span, .menu-toggle i{
+.menu-toggle span, .menu-toggle i {
 	color: white;
 	display: block;
 }
@@ -45,31 +27,13 @@ img {
 	font-size: 32px;
 }
 
-#navbar-toggle{
-	top: -32px;
-	z-index: 2;	
-}
-
-#navbar-toggle.open {
-	top: 0px;
-	right: 66%;
-}
-
-
 @media ( max-width : 768px) {
+	html, .content {
+		margin: 0;
+		min-width: 0;
+	}
 	.menu-toggle {
 		display: block;
-	}
-	.custom-wrapper {
-		display: none;
-		margin-top: 0px;
-		-webkit-font-smoothing: antialiased;
-	}
-	#main-nav {
-		display: contents;
-	}
-	.nav-menu>a, .nav-menu>a:visited {
-		text-align: left;
 	}
 	.login {
 		position: relative;
@@ -77,24 +41,14 @@ img {
 	.login>li:nth-child(8), .footer-logos {
 		display: none;
 	}
-	html, .content	{
-		margin: 0;
-		min-width: 0;
-	}
 	.lane-header {
 		height: 186px;
 	}
-	.lane-header div{
+	.lane-header div {
 		margin: 0;
 	}
-	
 	.brand {
 		padding-top: 15px;
-	}
-	
-	#portals {
-		column-count: 1;
-		width: 100%
 	}
 	.library-contact {
 		display: block;
@@ -108,10 +62,6 @@ img {
 	.library-contact li, .library-contact li {
 		margin-left: 10%;
 		width: 35%;
-	}
-	.pure-menu-allow-hover:hover>.pure-menu-children, .pure-menu-active>.pure-menu-children
-		{
-		position: relative;
 	}
 	.pure-md-hide {
 		display: none;

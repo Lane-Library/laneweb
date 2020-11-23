@@ -6,57 +6,60 @@
 
 <body>
 
-<a href="#" class="custom-toggle" id="toggle"><s class="bar"></s><s class="bar"></s><s class="bar"></s></a>
-
-<div class="custom-wrapper" id="menu">
-    <div id="nav" class="pure-menu pure-menu-horizontal  custom-can-transform">
-		<ul class="pure-menu-list" id="main-nav">
-			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/biomed-resources/">
-				<a	class="pure-menu-link">Resources</a>
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-resources.html">
+	
+<div class="custom-wrapper" id="navigation">
+    <a href="#navigation" id="nav-toggle-on" class="menu-toggle">
+		<i class="fa fa-bars"></i>
+		<span class="label-menu">Menu</span>
+	</a>
+	<a href="#" id="nav-toggle-off" class="menu-toggle">
+		<i class="fa fa-times"></i>
+		<span class="label-menu"> Close</span>
+	</a>
+ 	<nav>
+		<ul class="content centered">
+			<li class="dropdown nav-menu"  data-path="/biomed-resources/"><span>Resources</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+				<div class="dropdown-content nav-menu-content">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-resources.html">
 						<xi:fallback></xi:fallback>
 					</xi:include>
-			</li>
-			<li  class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu"  data-path="/portals/">
-				<a class="pure-menu-link">Subject Guides</a>
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-portals.html">
+				</div></li>
+			<li class="dropdown nav-menu" data-path="/portals/"><span>Subject Guides</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+				<div class="dropdown-content nav-menu-content portals">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://libguides/guides-menu.html">
 						<xi:fallback></xi:fallback>
 					</xi:include>
-			</li>
-			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/classes-consult/">
-			<a class="pure-menu-link">Library Classes</a> 
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-classes.html">
-					<xi:fallback></xi:fallback>
-				</xi:include>
-			
-			</li>
-				
-			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/using-lib/">
-				<a	class="pure-menu-link">Services</a>
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-services.html">
-					<xi:fallback></xi:fallback>
-				</xi:include>
-			</li>
-			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/about/">
-				<a class="pure-menu-link">About</a>
+				</div></li>
+			<li class="dropdown nav-menu" data-path="/classes-consult/"><span>Library Classes</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+				<div class="dropdown-content nav-menu-content">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-classes.html">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+				</div></li>
+			<li class="dropdown nav-menu" data-path="/using-lib/"><span>Services</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+				<div class="dropdown-content nav-menu-content">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-services.html">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+				</div></li>
+			<li class="dropdown nav-menu" data-path="/about/"><span>About</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+				<div class="dropdown-content nav-menu-content">
 					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-about.html">
 						<xi:fallback></xi:fallback>
 					</xi:include>
-			</li>
-			<li class="pure-menu-item  nav-menu">
-				<a href="/med-history/index.html" class="pure-menu-link">Medical History Center</a>
-			</li>
-			<li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover nav-menu" data-path="/help/">
-				<a class="pure-menu-link">FAQs</a>
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-faqs.html">
-					<xi:fallback></xi:fallback>
-				</xi:include>
-			</li>
-			<li class="pure-menu-item  nav-menu"><a href="#" class="pure-menu-link">Blog</a>
-			</li>
-			</ul>
-		</div>
-
-</div>
+				</div></li>
+			<li class="nav-menu"><span><a href="/med-history/index.html">Medical History Center</a></span></li>
+			<li class="dropdown nav-menu" data-path="/help/"><span>FAQs</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+				<div class="dropdown-content nav-menu-content">
+					<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/dropdownmenu-faqs.html">
+						<xi:fallback></xi:fallback>
+					</xi:include>
+				</div></li>
+			<li class="nav-menu"><span><a href="http://laneblog.stanford.edu/">Blog</a></span></li>
+		</ul>
+	</nav>
+ 
+   </div>
+   
 </body>
 </html>
