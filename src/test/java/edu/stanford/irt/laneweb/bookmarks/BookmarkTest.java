@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.util.Arrays;
@@ -29,32 +28,32 @@ public class BookmarkTest {
 
     @Test
     public void testEquals() {
-        assertTrue(this.bookmark.equals(new Bookmark(this.label, this.url)));
+        assertEquals(this.bookmark, new Bookmark(this.label, this.url));
     }
 
     @Test
     public void testEqualsDifferent() {
-        assertFalse(this.bookmark.equals(new Bookmark("foo", "bar")));
+        assertNotEquals(this.bookmark, new Bookmark("foo", "bar"));
     }
 
     @Test
     public void testEqualsNotBookmark() {
-        assertFalse(this.bookmark.equals(new Object()));
+        assertNotEquals(this.bookmark, new Object());
     }
 
     @Test
     public void testEqualsNull() {
-        assertFalse(this.bookmark.equals(null));
+        assertNotEquals(this.bookmark, null);
     }
 
     @Test
     public void testEqualsSame() {
-        assertTrue(this.bookmark.equals(this.bookmark));
+        assertEquals(this.bookmark, this.bookmark);
     }
 
     @Test
     public void testEqualsSameHashDifferentLabel() {
-        assertFalse(this.bookmark.equals(new Bookmark("newlabel", this.url) {
+        assertNotEquals(this.bookmark, new Bookmark("newlabel", this.url) {
 
             private static final long serialVersionUID = 1L;
 
@@ -62,12 +61,12 @@ public class BookmarkTest {
             public int hashCode() {
                 return BookmarkTest.this.bookmark.hashCode();
             }
-        }));
+        });
     }
 
     @Test
     public void testEqualsSameHashDifferentUrl() {
-        assertFalse(this.bookmark.equals(new Bookmark(this.label, "newurl") {
+        assertNotEquals(this.bookmark, new Bookmark(this.label, "newurl") {
 
             private static final long serialVersionUID = 1L;
 
@@ -75,7 +74,7 @@ public class BookmarkTest {
             public int hashCode() {
                 return BookmarkTest.this.bookmark.hashCode();
             }
-        }));
+        });
     }
 
     @Test
