@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
@@ -100,7 +101,7 @@ public class AtoZBrowseGeneratorTest {
     @Test
     public void testGetValidityAgain() {
         Validity validity = this.generator.getValidity();
-        assertTrue(validity == this.generator.getValidity());
+        assertSame(validity, this.generator.getValidity());
     }
 
     @Test
