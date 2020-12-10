@@ -61,9 +61,9 @@
     </xsl:template>
 
     <xsl:template match="s:description">
-        <div class="description">
+        <span class="description">
             <xsl:apply-templates/>
-        </div>
+        </span>
     </xsl:template>
 
     <xsl:template match="s:link[1]">

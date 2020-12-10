@@ -81,7 +81,7 @@
             <s:description>description</s:description>
         </x:context>
         <x:expect label="s:description should go in a div with class description">
-            <div class="description">description</div>
+            <span class="description">description</span>
         </x:expect>
     </x:scenario>
     <!--
