@@ -33,4 +33,9 @@ public class SearchConfigurationTest {
     public void testQueryHighlightingTransformer() {
         assertNotNull(this.configuration.queryHighlightingTransformer());
     }
+
+    @Test
+    public void testSolrHighlightingTransformer() {
+        assertNotNull(this.configuration.solrHighlightingTransformer());
+    }
 }

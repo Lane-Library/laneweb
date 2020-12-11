@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 import org.springframework.data.solr.repository.Facet;
+import org.springframework.data.solr.repository.Highlight;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 
@@ -26,6 +28,10 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
         }
     }
 
+    static final String SOLR_HIGHLIGHT_END = ":::";
+
+    static final String SOLR_HIGHLIGHT_START = "___";
+
     @Query(value = "*:*", requestHandler = Handlers.FACET)
     @Facet(fields = { "recordType" }, minCount = 0, limit = 100)
     SolrResultPage<Eresource> facetByRecordType(Pageable page);
@@ -38,10 +44,14 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
     Eresource getByBibID(String bibID);
 
     @Query(value = "?0", filters = { "?1" }, requestHandler = Handlers.SEARCH)
-    Page<Eresource> searchFindAllWithFilter(String query, String filter, Pageable page);
+    @Highlight(fragsize = Integer.MAX_VALUE, prefix = SOLR_HIGHLIGHT_START, postfix = SOLR_HIGHLIGHT_END, fields = {
+            "title", "description" })
+    HighlightPage<Eresource> searchFindAllWithFilter(String query, String filter, Pageable page);
 
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SEARCH)
-    Page<Eresource> searchFindByType(String query, String type, Pageable page);
+    @Highlight(fragsize = Integer.MAX_VALUE, prefix = SOLR_HIGHLIGHT_START, postfix = SOLR_HIGHLIGHT_END, fields = {
+            "title", "description" })
+    HighlightPage<Eresource> searchFindByType(String query, String type, Pageable page);
 
     @Query(value = "(+?1) title_sort:/?0.*/", requestHandler = Handlers.SUGGEST)
     List<Eresource> suggestFindAll(String term, String tokenizedTerm, Pageable page);

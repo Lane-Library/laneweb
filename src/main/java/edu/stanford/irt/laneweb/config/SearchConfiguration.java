@@ -9,6 +9,7 @@ import edu.stanford.irt.laneweb.search.DescriptionLabelTransformer;
 import edu.stanford.irt.laneweb.search.DescriptionLineBreakTransformer;
 import edu.stanford.irt.laneweb.search.DescriptionLinkTransformer;
 import edu.stanford.irt.laneweb.search.QueryHighlightingTransformer;
+import edu.stanford.irt.laneweb.search.SolrQueryHighlightingTransformer;
 
 @Configuration
 public class SearchConfiguration {
@@ -35,5 +36,11 @@ public class SearchConfiguration {
     @Scope("prototype")
     public Transformer queryHighlightingTransformer() {
         return new QueryHighlightingTransformer();
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/solr-query-highlighting")
+    @Scope("prototype")
+    public Transformer solrHighlightingTransformer() {
+        return new SolrQueryHighlightingTransformer();
     }
 }
