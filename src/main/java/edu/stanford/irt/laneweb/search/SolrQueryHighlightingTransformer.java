@@ -11,6 +11,10 @@ import edu.stanford.irt.laneweb.eresources.SolrRepository;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.ImmutableEmptyAttributes;
 
+/**
+ * A {@code Transformer} to highlight query terms found in title and description fields. Relies on Solr for query
+ * highlighting.
+ */
 public class SolrQueryHighlightingTransformer extends AbstractTextProcessingTransformer {
 
     private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
