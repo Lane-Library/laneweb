@@ -15,8 +15,8 @@ public class SolrQueryHighlightingTransformer extends AbstractTextProcessingTran
 
     private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
-    private static final Pattern SOLR_HIGHLIGHT_PATTERN = Pattern.compile(
-            SolrRepository.SOLR_HIGHLIGHT_START + "([^" + SolrRepository.SOLR_HIGHLIGHT_START + "]+)" + SolrRepository.SOLR_HIGHLIGHT_END);
+    private static final Pattern SOLR_HIGHLIGHT_PATTERN = Pattern.compile(SolrRepository.HighlightTags.START + "([^"
+            + SolrRepository.HighlightTags.START + "]+)" + SolrRepository.HighlightTags.END);
 
     @Override
     protected void createSAXEvents(final XMLConsumer consumer, final Matcher matcher) throws SAXException {

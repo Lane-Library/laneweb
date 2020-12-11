@@ -17,8 +17,8 @@ import edu.stanford.irt.laneweb.resource.Resource;
 
 public class SolrQueryHighlightingTransformerTest {
 
-    private static final String SAMPLE = "data " + SolrRepository.SOLR_HIGHLIGHT_START + "keyword"
-            + SolrRepository.SOLR_HIGHLIGHT_END + " data";
+    private static final String SAMPLE = "data " + SolrRepository.HighlightTags.START + "keyword"
+            + SolrRepository.HighlightTags.END + " data";
 
     private static final char[] SAMPLE_CHARS = SAMPLE.toCharArray();
 
