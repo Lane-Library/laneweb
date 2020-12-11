@@ -37,6 +37,7 @@ public class SolrQueryHighlightingTransformer extends AbstractTextProcessingTran
 
     @Override
     protected boolean isTargetName(final String name) {
-        return "title".equals(name) || "description".equals(name);
+        return Resource.TITLE.equals(name) || Resource.DESCRIPTION.equals(name) || Resource.AUTHOR.equals(name)
+                || Resource.PUBLICATION_TEXT.equals(name);
     }
 }

@@ -83,6 +83,10 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
                             er.setTitle(h.getSnipplets().get(0));
                         } else if ("description".equals(h.getField().getName())) {
                             er.setDescription(h.getSnipplets().get(0));
+                        } else if ("publicationText".equals(h.getField().getName())) {
+                            er.setPublicationText(h.getSnipplets().get(0));
+                        } else if ("publicationAuthorsText".equals(h.getField().getName())) {
+                            er.setPublicationAuthorsText(h.getSnipplets().get(0));
                         }
                     });
                 });

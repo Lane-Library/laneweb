@@ -51,12 +51,12 @@ public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     @Query(value = "?0", filters = { "?1" }, requestHandler = Handlers.SEARCH)
     @Highlight(fragsize = Integer.MAX_VALUE, prefix = HighlightTags.START, postfix = HighlightTags.END, fields = {
-            "title", "description" })
+            "title", "description", "publicationAuthorsText", "publicationText" })
     HighlightPage<Eresource> searchFindAllWithFilter(String query, String filter, Pageable page);
 
     @Query(value = "?0", filters = { "type:\"?1\"" }, requestHandler = Handlers.SEARCH)
     @Highlight(fragsize = Integer.MAX_VALUE, prefix = HighlightTags.START, postfix = HighlightTags.END, fields = {
-            "title", "description" })
+            "title", "description", "publicationAuthorsText", "publicationText" })
     HighlightPage<Eresource> searchFindByType(String query, String type, Pageable page);
 
     @Query(value = "(+?1) title_sort:/?0.*/", requestHandler = Handlers.SUGGEST)
