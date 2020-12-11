@@ -253,9 +253,9 @@
     </xsl:template>
 
     <xsl:template match="s:description">
-        <span class="description">
+        <div class="description">
             <xsl:apply-templates/>
-        </span>
+        </div>
     </xsl:template>
 
     <xsl:template match="s:desc-link">
