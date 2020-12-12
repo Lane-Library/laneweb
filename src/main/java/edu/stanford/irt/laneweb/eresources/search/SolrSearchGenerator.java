@@ -79,14 +79,16 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
                 solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
                     Eresource er = hightlight.getEntity();
                     hightlight.getHighlights().forEach((final Highlight h) -> {
-                        if ("title".equals(h.getField().getName())) {
-                            er.setTitle(h.getSnipplets().get(0));
-                        } else if ("description".equals(h.getField().getName())) {
-                            er.setDescription(h.getSnipplets().get(0));
-                        } else if ("publicationText".equals(h.getField().getName())) {
-                            er.setPublicationText(h.getSnipplets().get(0));
-                        } else if ("publicationAuthorsText".equals(h.getField().getName())) {
-                            er.setPublicationAuthorsText(h.getSnipplets().get(0));
+                        String field = h.getField().getName();
+                        String highlightedData = h.getSnipplets().get(0);
+                        if ("title".equals(field)) {
+                            er.setTitle(highlightedData);
+                        } else if ("description".equals(field)) {
+                            er.setDescription(highlightedData);
+                        } else if ("publicationText".equals(field)) {
+                            er.setPublicationText(highlightedData);
+                        } else if ("publicationAuthorsText".equals(field)) {
+                            er.setPublicationAuthorsText(highlightedData);
                         }
                     });
                 });
