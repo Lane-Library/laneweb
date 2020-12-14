@@ -26,7 +26,7 @@
             <map:transform type="description-labeling"/>
             <map:transform type="description-linebreak"/>
             <map:transform type="description-linking"/>
-            <map:transform type="query-highlighting"/>
+            <map:transform type="solr-query-highlighting"/>
             <map:transform type="saxon" src="classpath:/xsl/mobile-search-result2html.xsl"/>
             <map:transform type="saxon" src="classpath:/xsl/mobile-content.xsl"/>
             <map:select type="proxy-links">
@@ -40,7 +40,7 @@
             <map:generate type="er-search">
                 <map:parameter name="type" value="{1}"/>
             </map:generate>
-            <map:transform type="query-highlighting"/>
+            <map:transform type="solr-query-highlighting"/>
             <map:transform type="saxon" src="classpath:/xsl/mobile-search-result2html.xsl"/>
             <map:transform type="saxon" src="classpath:/xsl/mobile-content.xsl"/>
             <map:select type="proxy-links">

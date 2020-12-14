@@ -5,7 +5,7 @@
     xmlns:template="http://lane.stanford.edu/ns/template"
     exclude-result-prefixes="h template">
 
-    <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
+    <xsl:strip-space elements="h:html h:head h:body h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the request-uri ( not including parameters ) -->

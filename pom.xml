@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>69</version>
+        <version>72</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.6.23-SNAPSHOT</version>
@@ -69,7 +69,7 @@
         <dependency>
             <artifactId>jackson-databind</artifactId>
             <groupId>com.fasterxml.jackson.core</groupId>
-            <version>2.11.3</version>
+            <version>2.12.0</version>
         </dependency>
         <dependency>
             <artifactId>javamelody-core</artifactId>
@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>10.2</version>
+            <version>10.3</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -177,12 +177,12 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.1.10</version>
+            <version>1.1.11</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
-            <version>1.4.12</version>
+            <version>1.4.14</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -217,7 +217,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>8.6.3</version>
+            <version>8.7.0</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -267,7 +267,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>2.3.0.RELEASE</version>
+            <version>2.4.1</version>
         </dependency>
         <dependency>
             <groupId>io.lettuce</groupId>
@@ -293,7 +293,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.39</version>
+            <version>9.0.40</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -303,7 +303,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.11.3</version>
+            <version>2.12.0</version>
         </dependency>
         <dependency>
             <groupId>guru.nidi</groupId>

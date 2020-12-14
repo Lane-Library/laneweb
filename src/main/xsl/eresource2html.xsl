@@ -161,7 +161,9 @@
     </xsl:template>
     
     <xsl:template match="s:pub-text">
-        <xsl:apply-templates/>
+        <div class="citation">
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template name="build-link-label">

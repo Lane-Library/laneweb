@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
@@ -85,7 +86,7 @@ public class AbstractEresourcesGeneratorTest {
     @Test
     public void testGetKeyAgain() {
         Serializable key = this.generator.getKey();
-        assertTrue(key == this.generator.getKey());
+        assertSame(key, this.generator.getKey());
     }
 
     @Test
@@ -101,7 +102,7 @@ public class AbstractEresourcesGeneratorTest {
     @Test
     public void testGetValidityAgain() {
         Validity validity = this.generator.getValidity();
-        assertTrue(validity == this.generator.getValidity());
+        assertSame(validity, this.generator.getValidity());
     }
 
     @Test

@@ -9,7 +9,7 @@
             <map:transform type="description-labeling"/>
             <map:transform type="description-linebreak"/>
             <map:transform type="description-linking"/>
-            <map:transform type="query-highlighting"/>
+            <map:transform type="solr-query-highlighting"/>
             <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
@@ -27,7 +27,7 @@
       </map:match>
       <map:match pattern="search.xml" type="wildcard">
             <map:generate type="er-search"/>
-        <map:serialize type="xml"/>
+            <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="count.xml" type="wildcard">
             <map:generate type="eresources-count"/>

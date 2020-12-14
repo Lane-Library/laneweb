@@ -27,6 +27,7 @@ import org.springframework.data.solr.core.query.Query;
 import org.springframework.data.solr.core.query.result.Cursor;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -178,7 +179,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testSearchWithFilters() {
-        Page<Eresource> page = mock(Page.class);
+        HighlightPage<Eresource> page = mock(HighlightPage.class);
         PageRequest pr = mock(PageRequest.class);
         expect(this.repository.searchFindAllWithFilter("query", "field1:value AND field2:value", pr)).andReturn(page);
         replay(this.repository, page);
@@ -188,7 +189,7 @@ public class SolrServiceTest {
 
     @Test
     public final void testSearchWithFiltersFacetsNull() {
-        Page<Eresource> page = mock(Page.class);
+        HighlightPage<Eresource> page = mock(HighlightPage.class);
         PageRequest pr = mock(PageRequest.class);
         expect(this.repository.searchFindAllWithFilter("query", "", pr)).andReturn(page);
         replay(this.repository, page);
