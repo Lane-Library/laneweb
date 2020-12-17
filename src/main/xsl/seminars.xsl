@@ -67,9 +67,7 @@
 			<xsl:if test="position() > 3">
 				<xsl:attribute name="style">display:none;</xsl:attribute>
 			</xsl:if>
-			<div class="pure-g">
-				<div class="pure-u-1-6">
-					<div class="date grandrounds-date">
+				<div class="date grandrounds-date">
 						<div class="month">
 							<xsl:value-of select="$month" />
 						</div>
@@ -77,8 +75,7 @@
 							<xsl:value-of select="$day" />
 						</div>
 					</div>
-				</div>
-				<div class="pure-u-5-6">
+				<div>
 					<p>
 						<xsl:copy-of select="$anchor" />
 						<xsl:if test="$time != ''">
@@ -87,7 +84,6 @@
 					</p>
 				</div>
 			</div>
-		</div>
 	</xsl:template>
 
 </xsl:stylesheet>

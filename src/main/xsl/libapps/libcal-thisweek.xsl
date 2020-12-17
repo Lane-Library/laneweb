@@ -13,42 +13,39 @@
    </xsl:template>
    
    <xsl:template match="class">
-      <div class="event">
-         <div class="pure-g">
-            <div class="pure-u-1-6">
-               <div class="date lane-date">
-                  <div class="month">
-                     <xsl:value-of select="./start/month"/>
-                  </div>
-                  <div class="day">
-                     <xsl:value-of select="./start/day"/>
-                  </div>
-               </div>
-            </div>
-            <div class="pure-u-5-6">
-               <p>
-                  <a>
-                     <xsl:attribute name="href">
-                        <xsl:value-of select="./url/public"/>                                  
+	<div class="event laneclass">
+		<div class="date lane-date">
+			<div class="month">
+				<xsl:value-of select="./start/month" />
+			</div>
+			<div class="day">
+				<xsl:value-of select="./start/day" />
+			</div>
+		</div>
+		<div>
+		<p>
+			<a>
+				<xsl:attribute name="href">
+                        <xsl:value-of
+					select="./url/public" />                                  
                      </xsl:attribute>
-                     <xsl:value-of select="title"/>
-                  </a>
-                  <br/>
-                  <span class="time">
-                     <xsl:if test="./allday = 'false'">
-                        <xsl:value-of select="./start/hour"/>
-                        <xsl:text> – </xsl:text>
-                        <xsl:value-of select="./end/hour"/>
-                     </xsl:if>
-                     <xsl:if test="./allday ='true'">
-                        <xsl:text>All Day Event</xsl:text>
-                     </xsl:if>
-                  </span>
-               </p>
-            </div>
-         </div>
-      </div>
-   </xsl:template>
+				<xsl:value-of select="title" />
+			</a>
+			<br />
+			<span class="time">
+				<xsl:if test="./allday = 'false'">
+					<xsl:value-of select="./start/hour" />
+					<xsl:text> – </xsl:text>
+					<xsl:value-of select="./end/hour" />
+				</xsl:if>
+				<xsl:if test="./allday ='true'">
+					<xsl:text>All Day Event</xsl:text>
+				</xsl:if>
+			</span>
+		</p>
+		</div>
+	</div>
+</xsl:template>
    
   
 </xsl:stylesheet>

@@ -4,34 +4,41 @@
     position: relative;
     z-index: 1;
 }
-
-
-/* Create class  */
-.event .pure-u-5-6{
-	padding-left: 12px !important;
-}
-
-.date{
-    text-transform: uppercase;
-    text-align: right;
-    color: white;
-    padding: 4px 4px 20px;
-    box-sizing: border-box;
-}
 /* :before rules are about getting colored date box the same height as the .event box */
-.event .date:before {
+ .event:before {
     content: ' ';
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    width: 16.6667%;
+     width: 17%;
     z-index: -1;
+} 
+
+
+.event div:nth-child(2){
+	 width: 73%;
+	 padding-left: 12px 
 }
-.grandrounds-date:before {
+
+.event div{
+	display: inline-grid;
+}
+
+
+.date{
+    text-transform: uppercase;
+    color: white;
+    padding: 4px 4px 20px; 
+     width: 17%;
+}
+
+
+.seminar:before {
     background-color: #09425a;
 }
-.lane-date:before {
+
+.laneclass:before {
     background-color: #009abb;
 }
 .time{

@@ -8,6 +8,8 @@
       <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml"/>
       <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}-${git.commit.id.abbrev}"></script>
      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      	<link rel="stylesheet" type="text/css" href="/resources/css/columns.css" />
+      	<link rel="stylesheet" type="text/css" href="/resources/css/contacts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/pure-grids.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
@@ -59,10 +61,15 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
      
+	<script>
+		document.addEventListener("touchstart", function() {},false);
+	</script>
 
    </head>
    
-   <body>
+   
+   
+   <body  ontouchstart="">
    
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/header.html">
          <xi:fallback></xi:fallback>

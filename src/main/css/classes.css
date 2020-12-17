@@ -31,9 +31,31 @@
     width: 24.2%;
 }
 
-.archive .date:before {
-    background-color: #ccc;
-    width: 12.5%;
+@media ( max-width :768px) {
+	.class {
+		margin: 12px 0 122px;
+	}
+	.class .date:before {
+		background-color: white;
+		width: 24.2%;
+	}
+	.class .date {
+		background-color: #009abb;
+	}
+	.class .venue {
+		margin-top: 0px;
+	}
+	.register {
+		position: absolute;
+		bottom: -104px;
+	}
+	.register i {
+		display: none;
+	}
+	.class .col-1-4{
+	margin-right: 12px;
+	}
+	
 }
 
 /*.class.presentation is on the grandrounds pages*/
