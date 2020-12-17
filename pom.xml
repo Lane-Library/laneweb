@@ -426,7 +426,6 @@
                             <includes>
                                 <include>reset-min.css</include>
                                 <include>pure-grids-min.css</include>
-                                <include>grids-responsive-min.css</include>
                                 <include>googlefonts-min.css</include>
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
