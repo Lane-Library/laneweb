@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
    <xsl:template match="/classes">
-            <div class="menu-container">
-               <h3>Categories</h3>
+            <div id="mobile-menu-header"  class="menu-container">
+               <h3>
+               		<a href="#mobile-menu-header" class="menu-toggle">
+						<i class="fa fa-bars"></i>
+					</a>
+					<a href="#off" id="off"  class="menu-toggle">
+						<i class="fa fa-times"></i>
+					</a>
+					Categories
+					
+               </h3>
+               
                <ul class="menu">
                   <li>
                      <a href="/classes-consult/laneclasses.html">By Date</a>

@@ -42,29 +42,11 @@
 	color: #fff;
 }
 
-#popular:target div{
-	display: block;
-}
-
-#popular:target h3 a:first-child{
-	display: none;
-}
-
-#popular:target h3 a:nth-child(2){
-	display: block;
-}
-
 @media ( max-width : 768px) {
-	#popular div{
-		display: none;
-	}
 	.popular  .menu-toggle {
 		top: -1px;
 		right: -1px;
 	}
 	
-	.popular a:nth-child(2){
-		display: none;
-	}
-	
-}
+
+}	 

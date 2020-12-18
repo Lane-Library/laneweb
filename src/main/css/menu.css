@@ -13,6 +13,9 @@
     line-height: 130%;
 }
 
+.menu-container .menu-toggle {
+    top: 80px;
+}
 
 .menu li {
     padding: 0;
