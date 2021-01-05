@@ -175,17 +175,15 @@
     	float: left;
 	}
 	
-	
 	#searchFacets {
 		background-color: white;
 		padding-top: 0;
 	}
 	
 	#searchFacets h4 {
-		padding-bottom: 30px;
 		margin: 0px;
 		border: none;
-		padding:12px
+		padding: 12px 0px 0px 12px;
 	}
 	#searchFacets ul {
 		display: none;
