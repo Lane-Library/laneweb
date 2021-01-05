@@ -15,15 +15,6 @@
     padding-bottom: 65px;
 }
 
-@media ( max-width : 768px) {
-	.hero-unit-front-page, .hero-unit {
-	    padding-top: 30px;
-	    padding-bottom: 30px;
-	}
-	.search-form {
-	width: 80%;
-	}	
-}
 
 .search-form {
     color: white;
@@ -229,3 +220,14 @@
     opacity: 1;
     visibility: visible;
 }
+
+@media ( max-width : 768px) {
+	.hero-unit-front-page, .hero-unit {
+	    padding-top: 30px;
+	    padding-bottom: 30px;
+	}
+	.search-form {
+	width: 80%;
+	}	
+}
+
