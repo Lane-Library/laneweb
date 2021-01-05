@@ -24,13 +24,16 @@
     <xsl:variable name="values-per-facet" select="4"/>
     <xsl:variable name="today" select="number(format-dateTime(current-dateTime(),'[Y,4][M,2][D,2]'))"/>
     <xsl:variable name="header">
+      	<span>
+      	<a href="#searchFacets" class="menu-toggle">
+			<i class="fa fa-bars"></i>
+		</a>
+		<a href="#off" id="off"  class="menu-toggle">
+			<i class="fa fa-times"></i>
+		</a>
+		</span>
         <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
-        <a href="#searchFacets" class="menu-toggle">
-						<i class="fa fa-bars"></i>
-					</a>
-					<a href="#off" id="off"  class="menu-toggle">
-						<i class="fa fa-times"></i>
-					</a>
+      
         
         Filter Results</h4>
         <xsl:if test="not($search-mode)">
@@ -150,12 +153,6 @@
     </xsl:template>
 
     <xsl:template match="linked-hash-map">
-        <!-- hidden element that gets moved into place by solr-facets.js -->
-        <xsl:if test="$search-mode and string-length($facets) > 0">
-            <span id="solrAllCount">
-                <xsl:value-of select="format-number($counts, '###,##0')"/>
-            </span>
-        </xsl:if>
         <xsl:choose>
             <xsl:when test="$counts > 0 and (./entry or string-length($facets) > 0)">
                     <xsl:copy-of select="$header"/>
@@ -217,6 +214,12 @@
                 </a>
             </xsl:otherwise>
         </xsl:choose>
+         <!-- hidden element that gets moved into place by solr-facets.js -->
+        <xsl:if test="$search-mode and string-length($facets) > 0">
+            <span id="solrAllCount">
+                <xsl:value-of select="format-number($counts, '###,##0')"/>
+            </span>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
