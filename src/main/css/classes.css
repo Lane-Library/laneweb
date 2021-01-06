@@ -135,7 +135,7 @@
 
 @media ( max-width :768px) {
 	.class {
-		margin: 12px 0 122px;
+		margin: 12px 0 51px;
 	}
 
 	.class .date:before {
@@ -150,13 +150,20 @@
 		margin-top: 0px;
 	}
 	.register {
-		position: absolute;
-		bottom: -104px;
+		position: relative;
+    	margin-bottom: 15px;
 	}
 	.register i {
 		display: none;
 	}
 	.class .col-1-4{
-	margin-right: 12px;
+		margin-right: 12px;
+	}
+	.instructor{
+		display: inline-flex;
+		line-height: 3.6em;
+	}
+	.instructor div{
+		padding-left: 6px;
 	}
 }
