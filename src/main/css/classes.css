@@ -137,7 +137,16 @@
 	.class {
 		margin: 12px 0 51px;
 	}
-
+	
+	.class .pure-g{
+		background-color: #eee;
+		
+	}
+	.class .pure-g .pure-u-3-4{
+		 padding: 6px;
+		
+	}
+	   
 	.class .date:before {
 		background-color: white;
 		width: 24.2%;
@@ -153,13 +162,14 @@
 		position: relative;
     	margin-bottom: 15px;
 	}
-	.register i {
+	.register i, .location {
 		display: none;
 	}
 	.class .col-1-4{
 		margin-right: 12px;
 	}
 	.instructor{
+		margin-top: -17px;
 		display: inline-flex;
 		line-height: 3.6em;
 	}
