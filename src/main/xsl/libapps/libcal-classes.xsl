@@ -13,30 +13,32 @@
       </html>
    </xsl:template>
 
-	<xsl:template match="class">
-		<div class="class">
-			<div class="pure-g">
-				<div class="pure-u-1-4">
-					<div class="date">
-						<xsl:apply-templates select="start" />
-					</div>
-					<div class="venue">
-						<xsl:apply-templates select="location" />
-					</div>
-				</div>
-				<div class="pure-u-3-4">
-					<xsl:apply-templates select="title" />
-					<div>
-						<xsl:apply-templates select="presenter" />
-						<xsl:apply-templates select="remainingSeats" />
-					</div>
-					<div>
-						<xsl:value-of select="short_description" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</xsl:template>
+<xsl:template match="class">
+      <div class="class">
+         <div class="pure-g">
+            <div class="pure-u-1-4">
+               <div class="date">
+                  <xsl:apply-templates select="start"/>
+               </div>
+               <div class="venue">
+                  <xsl:apply-templates select="location"/>
+               </div>
+            </div>
+            <div class="pure-u-3-4">
+               <xsl:apply-templates select="title"/>
+               <div class="pure-g">
+                  <div class="pure-u-1-4">
+                     <xsl:apply-templates select="presenter"/>
+                     <xsl:apply-templates select="remainingSeats"/>
+                  </div>
+                  <div class="pure-u-3-4">
+                     <xsl:value-of select="short_description"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </xsl:template>
    
     <xsl:template match="title">
       <h4>
