@@ -40,10 +40,12 @@ img {
 	}
 	.login {
 		position: relative;
+		padding-left: 0px;
 	}
-	.login>li:nth-child(8), .footer-logos {
+	.login>li:nth-child(8), .footer-logos, .login-item-active:first-child {
 		display: none;
 	}
+	
 	.lane-header {
 		height: 186px;
 	}
