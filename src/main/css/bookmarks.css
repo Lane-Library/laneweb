@@ -1,123 +1,135 @@
 .favorites .dropdown-content {
-    background-color: #666;
-    background-image: url('../images/diag.png');
-    padding: 8px 18px 12px;
-    border: none;
-    font-weight: initial;
-    line-height: initial;
-    right: -24px;
-    white-space: nowrap;
-    z-index: 2;
+	background-color: #666;
+	background-image: url('../images/diag.png');
+	padding: 8px 18px 12px;
+	border: none;
+	font-weight: initial;
+	line-height: initial;
+	right: -24px;
+	white-space: nowrap;
+	z-index: 2;
 }
 
 .favorites li {
-    font-size: 13px;
-    letter-spacing: initial;
-    margin: 6px 0;
+	font-size: 13px;
+	letter-spacing: initial;
+	margin: 6px 0;
 }
 
 .bookmark-link {
-    cursor: pointer;
-    display: inline-block;
-    height: 17px;
-    width: 26px;
-    box-sizing: content-box;
-    position: absolute;
-    margin-left: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    text-align: center;
-    line-height: 17px;
-    background-color: white;
-    background-image: linear-gradient(to right, white , #ccc);
-    font-size: 13px;
+	cursor: pointer;
+	display: inline-block;
+	height: 17px;
+	width: 26px;
+	box-sizing: content-box;
+	position: absolute;
+	margin-left: 5px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	text-align: center;
+	line-height: 17px;
+	background-color: white;
+	background-image: linear-gradient(to right, white, #ccc);
+	font-size: 13px;
 }
 
 .bookmark-link .fa {
-    color: gray;
+	color: gray;
 }
 
-.bookmark-link.active .fa,
-.bookmark-link.bookmarking .fa {
-    color: rgb(180,13,26);
+.bookmark-link.active .fa, .bookmark-link.bookmarking .fa {
+	color: rgb(180, 13, 26);
 }
 
 .yui3-bookmark-editor {
-    cursor: move;
+	cursor: move;
 }
 
 .yui3-bookmark-editor:nth-child(even) {
-    background: #fff;
+	background: #fff;
 }
 
 .yui3-bookmark-editor:nth-child(odd) {
-    background: #ddd;
+	background: #ddd;
 }
 
-.yui3-bookmark-editor label,
-.yui3-bookmark-editor input[type='text'],
-.yui3-bookmark-editor button {
-    display: none;
+.yui3-bookmark-editor label, .yui3-bookmark-editor input[type='text'],
+	.yui3-bookmark-editor button {
+	display: none;
 }
 
-.yui3-bookmark-editor-active label,
-.yui3-bookmark-editor-active input[type='text'],
-.yui3-bookmark-editor-active button {
-    display: inline;
+.yui3-bookmark-editor-active label, .yui3-bookmark-editor-active input[type='text'],
+	.yui3-bookmark-editor-active button {
+	display: inline;
 }
 
-.yui3-bookmark-editor-active a,
-.yui3-bookmark-editor-active input[type='checkbox'] {
-    display: none;
+.yui3-bookmark-editor-active a, .yui3-bookmark-editor-active input[type='checkbox']
+	{
+	display: none;
 }
 
 #bookmarks-editor fieldset {
-    border: 1px #dadad8 solid;
-    background-color: #f4f5ef;
-    padding: 14px 12px 5px;
+	border: 1px #dadad8 solid;
+	background-color: #f4f5ef;
+	padding: 14px 12px 5px;
 }
 
-#bookmarks-editor ul{
-    padding-left: 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
-    border-top: none;
+#bookmarks-editor ul {
+	padding-left: 0;
+	background-color: white;
+	border: 1px solid #ccc;
+	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
+	border-top: none;
 }
 
 #bookmarks-editor li {
-    border-bottom: 1px #dadad8 solid;
-    padding: 12px;
+	border-bottom: 1px #dadad8 solid;
+	padding: 12px;
 }
 
 #bookmarks-editor input {
-    margin-right: 12px;
+	margin-right: 12px;
 }
 
 #bookmarks-editor button {
-    margin-right: 6px;
+	margin-right: 6px;
 }
 
 #bookmarks-editor input[type='text'] {
-    box-shadow: rgba(0, 0, 0, .1) 0 0 8px;
-    padding: 5px;
-    border: solid 2px #c9c9c9;
-    width: 266px;
-    box-sizing: border-box;
+	box-shadow: rgba(0, 0, 0, .1) 0 0 8px;
+	padding: 5px;
+	border: solid 2px #c9c9c9;
+	width: 266px;
+	box-sizing: border-box;
 }
 
 /* next two are for the login required lightbox popup */
 .bookmark-login {
-    text-align: center;
-    padding: 30px;
-    width: 460px;
-    box-sizing: border-box;
-    background-color: white;
+	text-align: center;
+	padding: 30px;
+	width: 460px;
+	box-sizing: border-box;
+	background-color: white;
 }
 
 .bookmark-login-heading {
-    color: #414042;
-    font-weight: bold;
-    font-size: 14px;
-    padding-bottom: 28px;
+	color: #414042;
+	font-weight: bold;
+	font-size: 14px;
+	padding-bottom: 28px;
+}
+
+@media ( max-width : 768px) {
+	#bookmarks-editor i {
+		display: none;
+	}
+	#bookmarks-editor button {
+		margin: 10px 3px;
+	}
+	.favorites .dropdown-content {
+		right: -66px;
+	}
+	.favorites li {
+		margin: 9px 0;
+	}
 }

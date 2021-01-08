@@ -98,13 +98,6 @@
     padding: 12%;
 }
 
-@media ( max-width : 768px) {
-	.grand-rounds, .upcoming-classes {
-	    padding: 6px;
-		min-height: inherit;		    
-	}
-}
-
 .grand-rounds h3, .upcoming-classes h3 {
     text-transform: uppercase;
     font-family: 'Fjord One', serif;
@@ -122,14 +115,19 @@
     width: 31%;
 }
 
+.staff-list h4 {
+    font-size: 16px;
+}
+
 @media ( max-width : 768px) {
 	.staff-list .module{
 	  	display: block;
    	 	width: 100%;	
    	 	height: auto;    
 	}
+	.grand-rounds, .upcoming-classes {
+	    padding: 6px;
+		min-height: inherit;		    
+	}
 }
 
-.staff-list h4 {
-    font-size: 16px;
-}
