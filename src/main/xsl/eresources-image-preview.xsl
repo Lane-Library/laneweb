@@ -31,7 +31,7 @@
       <xsl:if test="$images-promo-enabled and $facets = ''">
          <xsl:variable name="imageUrl" select="concat('cocoon://apps/search/image/preview?q=',$url-encoded-query)"/>
          <xsl:if test="count(/doc/list/string) >= $images-promo-show">
-            <li class="no-bookmarking">
+            <li class="no-bookmarking pure-md-hide">
                <span class="primaryType" style="display:none;">Image Search Promo</span>
                <a class="primaryLink" href="{$images-url}" title="More images from Lane's Bio-Image Search">Results from Lane's Bio-Image Search</a>
                <div id="imageList" class="searchPromo">
