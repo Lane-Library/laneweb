@@ -14,7 +14,7 @@
         classes = {},
         regex = /.*(same-height-\d).*/,
         matches,
-        smallmedia = window.matchMedia("(max-width: 738px)");
+        smallmedia = window.matchMedia("(max-width: 768px)");
        
   	//if small media the div are located on top of each other
     if( ! smallmedia.matches){
