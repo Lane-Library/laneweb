@@ -71,11 +71,7 @@ img {
 		display: none;
 	}
 	
-	#mobile-menu-header ul{
-		display: none;
-	}
-	
-	#mobile-menu-header span a:nth-child(2){
+	#mobile-menu-header ul, .bookmark-link,	#mobile-menu-header span a:nth-child(2){
 		display: none;
 	}
 	
