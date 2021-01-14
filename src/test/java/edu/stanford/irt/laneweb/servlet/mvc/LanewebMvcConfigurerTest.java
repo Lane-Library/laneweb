@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.mobile.device.DeviceResolverHandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
