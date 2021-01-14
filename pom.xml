@@ -156,11 +156,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <artifactId>spring-mobile-device</artifactId>
-            <groupId>org.springframework.mobile</groupId>
-            <version>1.1.5.RELEASE</version>
-        </dependency>
-        <dependency>
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
             <scope>test</scope>

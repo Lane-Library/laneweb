@@ -33,8 +33,6 @@ public class LanewebMvcConfigurerTest {
         InterceptorRegistration registration = mock(InterceptorRegistration.class);
         expect(registry.addInterceptor(isA(PersistentLoginHandlerInterceptor.class))).andReturn(registration);
         expect(registration.addPathPatterns("/secure/**", "/redirect/cme/**")).andReturn(registration);
-        expect(registry.addInterceptor(isA(DeviceResolverHandlerInterceptor.class))).andReturn(registration);
-        expect(registry.addInterceptor(isA(MobileSiteInterceptor.class))).andReturn(registration);
         expect(registry.addInterceptor(isA(RedirectHandlerInterceptor.class))).andReturn(registration);
         expect(registry.addInterceptor(isA(SearchImageInterceptor.class))).andReturn(registration);
         expect(registration.addPathPatterns("/search.html")).andReturn(registration);
