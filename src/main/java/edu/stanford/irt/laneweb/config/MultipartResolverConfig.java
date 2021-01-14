@@ -10,9 +10,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 public class MultipartResolverConfig {
-    
-    
-    int MAX_UPLOAD_FILE =  13107200;
+
+    private static final int MAX_UPLOAD_FILE = 13107200;
 
     @Bean
     public CommonsMultipartResolver multipartResolver() throws IOException {
