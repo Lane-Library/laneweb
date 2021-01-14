@@ -247,15 +247,7 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="portals/**" type="wildcard">
-            <map:match pattern="portals/palliative-care.html" type="wildcard">
-                <map:generate type="html" src="{content-base}/portals/palliative-care.html"/>
-                <map:transform type="link-with-cover"/>
-                <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="classpath:/xsl/rss2html.xsl"/>
-                <map:transform type="saxon" src="classpath:/xsl/youtubeAtom2Html-list.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="regexp" pattern="portals/(reference|rheumatology)\.html$">
+            <map:match type="regexp" pattern="portals/(rheumatology)\.html$">
                 <map:generate type="html" src="{content-base}/portals/{1}.html"/>
                 <map:transform type="link-with-cover"/>
                 <map:transform type="xinclude"/>

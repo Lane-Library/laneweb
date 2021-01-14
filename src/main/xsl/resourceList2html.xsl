@@ -143,9 +143,7 @@
             </xsl:if>
 
             <xsl:if test="s:pub-text">
-                <div class="citation">
-                        <xsl:value-of select="s:pub-text"/>
-                </div>
+                <xsl:apply-templates select="s:pub-text"/>
             </xsl:if>
 
             <div class="resultInfo">
@@ -377,7 +375,7 @@
                     </span>
                     <span class="authors-hide"><xsl:value-of select="substring-after(.,$authorString)"/></span>
                 </xsl:when>
-                <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+                <xsl:otherwise><xsl:apply-templates/></xsl:otherwise>
             </xsl:choose>
         </div>
     </xsl:template>
@@ -412,7 +410,9 @@
     </xsl:template>
 
     <xsl:template match="s:pub-text">
-        <xsl:apply-templates/>
+        <div class="citation">
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template name="build-link-label">

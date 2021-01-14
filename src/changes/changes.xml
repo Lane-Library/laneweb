@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	  <release date="2021-01-04" version="3.6.23" description="bug fix release">
+      	    <action date="2020-12-10" dev="ryanmax" issue="LANEWEB-10649" type="update"> 
+               	improve keyword highlighting
+            </action>
+            <action date="2020-12-11" dev="ryanmax" issue="LANEWEB-10648" type="fix"> 
+            	odd formatting on keyword highlighting in descriptions
+            </action>
+            <action date="2020-11-17" dev="alainb" issue="LANEWEB-10646" type="update"> 
+        		update Pure Grid CSS
+            </action>
+          </release>	
       	  <release date="2020-11-16" version="3.6.22" description="bug fix release">
             <action date="2020-11-13" dev="alainb" issue="LANEWEB-10645" type="update"> 
         		Small text updates to header and footer
@@ -24,7 +35,7 @@
             </action>
             <action date="2020-11-09" dev="alainb" issue="LANEWEB-10643" type="update">
             	The left menu on the clinical search doesn't display the facet number
-            </action>
+      s      </action>
          </release>
           <release date="2020-11-02" version="3.6.20" description="bug fix release">
             <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update"> 

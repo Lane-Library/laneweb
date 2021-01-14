@@ -5,7 +5,7 @@
     xmlns:template="http://lane.stanford.edu/ns/template"
     exclude-result-prefixes="h template">
 
-    <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
+    <xsl:strip-space elements="h:html h:head h:body h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the request-uri ( not including parameters ) -->
@@ -100,18 +100,10 @@
     <xsl:variable name="search-source">
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/clinical')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/emergency')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/endocrinology')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/medicalEd')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/md-pa-students')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/primary-care')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/rheumatology')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/shc')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/surgery')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
             <xsl:when test="$source">
                 <xsl:choose>
                     <!-- various -images-all source parameters get images-all -->

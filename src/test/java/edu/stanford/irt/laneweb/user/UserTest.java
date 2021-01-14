@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.user;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,17 +17,17 @@ public class UserTest {
 
     @Test
     public void testEqualsNotUser() {
-        assertFalse(this.user.equals(new Object()));
+        assertNotEquals(this.user, new Object());
     }
 
     @Test
     public void testEqualsObjectDifferentId() {
-        assertFalse(this.user.equals(new User("di@domain", null, null, null)));
+        assertNotEquals(this.user, new User("di@domain", null, null, null));
     }
 
     @Test
     public void testEqualsObjectSameId() {
-        assertTrue(this.user.equals(new User("id@domain", null, null, null)));
+        assertEquals(this.user, new User("id@domain", null, null, null));
     }
 
     @Test

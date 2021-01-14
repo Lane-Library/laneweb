@@ -7,6 +7,8 @@ import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -94,12 +96,12 @@ public class SearchResultTest {
                 .title("same title").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
-        assertTrue(one.equals(two));
+        assertEquals(one, two);
     }
 
     @Test
     public void testEqualsDifferentObject() {
-        assertFalse(this.searchResult.equals(new Object()));
+        assertNotEquals(this.searchResult, new Object());
     }
 
     @Test
@@ -110,17 +112,17 @@ public class SearchResultTest {
                 .title("same title").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
-        assertTrue(one.equals(two));
+        assertEquals(one, two);
     }
 
     @Test
     public void testGetContentResult() {
-        assertTrue(this.contentResult == this.searchResult.getContentResult());
+        assertSame(this.contentResult, this.searchResult.getContentResult());
     }
 
     @Test
     public void testGetResourceResult() {
-        assertTrue(this.resourceResult == this.searchResult.getResourceResult());
+        assertSame(this.resourceResult, this.searchResult.getResourceResult());
     }
 
     @Test
@@ -178,7 +180,7 @@ public class SearchResultTest {
         expect(result.getTitle()).andReturn("not the title");
         replay(this.contentResult, result);
         SearchResult other = new SearchResult(result, this.resourceResult, 0);
-        assertFalse(this.searchResult.equals(other));
+        assertNotEquals(this.searchResult, other);
         verify(result, this.contentResult);
     }
 
@@ -190,7 +192,7 @@ public class SearchResultTest {
                 .title("same title").contentId("999").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
-        assertFalse(one.equals(two));
+        assertNotEquals(one, two);
     }
 
     @Test
@@ -201,7 +203,7 @@ public class SearchResultTest {
                 .title("same title").author("different authors").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
-        assertFalse(one.equals(two));
+        assertNotEquals(one, two);
     }
 
     @Test
@@ -212,6 +214,6 @@ public class SearchResultTest {
                 .title("same title").contentId("different cid").build();
         SearchResult one = new SearchResult(result1, this.resourceResult, 100);
         SearchResult two = new SearchResult(result2, this.resourceResult, 100);
-        assertFalse(one.equals(two));
+        assertNotEquals(one, two);
     }
 }
