@@ -23,7 +23,7 @@
       </map:match>
       
       <!-- Footer and navigation to display in https://laneguides.stanford.edu and lanecal.stanford.edu -->
-        <map:match pattern="(footer|includes/navigation)\.html" type="regexp">
+        <map:match pattern="includes/(footer|navigation)\.html" type="regexp">
          <map:generate type="file" src="cocoon://content/{0}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
           <map:transform type="namespace-filter"/>
