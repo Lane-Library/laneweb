@@ -61,13 +61,13 @@
             </head>
             <body>
                 <div class="no-bookmarking"><div class="pure-g">
-                  <div class="pure-u-1-3">
+                  <div class="pure-u-7-24">
                     <xsl:call-template name="resultsText"/>
                   </div>
-                  <div class="pure-u-1-3">
+                  <div class="pure-u-7-24">
                     <xsl:call-template name="sortBy"/>
                   </div>
-                  <div class="pure-u-1-3">
+                  <div class="pure-u-10-24">
                     <xsl:call-template name="paginationLinks"/>
                   </div>
                 </div></div>
@@ -80,11 +80,11 @@
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
                     <br/>
                     <div class="no-bookmarking"><div class="pure-g">
-                      <div class="pure-u-1-3"/>
-                      <div class="pure-u-1-3">
+                      <div class="pure-u-7-24"/>
+                      <div class="pure-u-7-24">
                         <xsl:call-template name="sortBy"/>
                       </div>
-                      <div class="pure-u-1-3">
+                      <div class="pure-u-10-24">
                         <xsl:call-template name="paginationLinks"/>
                       </div>
                     </div></div>
