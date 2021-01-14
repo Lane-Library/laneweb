@@ -18,8 +18,8 @@
             }
             return rq;
         },
-        processEnabledFacets = function(facetsContainer) {
-            var enabledFacets = facetsContainer.querySelectorAll('.enabled'),
+        processEnabledFacets = function(container) {
+            var enabledFacets = container.querySelectorAll('.enabled'),
                 limitsContainer = document.querySelector('#solrLimits'),
                 allCount = document.querySelector('#solrAllCount'),
                 count = 0,
