@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+          <release date="2021-01-15" version="3.6.24" description="bug fix release">
+      	    <action date="2021-01-14" dev="alainb" issue="LANEWEB-10654" type="fix"> 
+               	footer.html not displayed in libguide and libcal
+            </action>
+            <action date="2021-01-13" dev="alainb" issue="LANEWEB-10653" type="fix"> 
+            	"sort by" dropdown lay over first page button pagination
+            </action>
+            <action date="2021-01-12" dev="ryanmax" issue="LANEWEB-10652" type="update"> 
+        		remove youtube to HTML RSS handling
+            </action>
+            <action date="2020-11-15" dev="ryanmax" issue="LANEWEB-10511" type="update"> 
+        		portal pages: default search option is not consistent
+            </action>
+          </release>	
       	  <release date="2021-01-04" version="3.6.23" description="bug fix release">
       	    <action date="2020-12-10" dev="ryanmax" issue="LANEWEB-10649" type="update"> 
                	improve keyword highlighting
