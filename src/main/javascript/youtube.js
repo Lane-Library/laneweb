@@ -24,7 +24,7 @@
         this._iframe = iframe;
         this._parent = iframe.parentNode;
         id = src.substring(src.lastIndexOf("/", src.length) + 1, src.length);
-        if (id.includes("?")) {
+        if (id.indexOf("?") > -1) {
             id = id.substring(0, id.indexOf("?"));
         }
         url = "//img.youtube.com/vi/" + id + "/mqdefault.jpg";
