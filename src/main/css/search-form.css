@@ -219,7 +219,7 @@
     visibility: visible;
 }
 
-@media ( max-width : 768px) {
+@media ( max-width : 812px) {
 	.hero-unit-front-page, .hero-unit {
 	    padding-top: 30px;
 	    padding-bottom: 30px;

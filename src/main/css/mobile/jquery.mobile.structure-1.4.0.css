@@ -3313,7 +3313,7 @@ for Android 4.1 */
     transition: transform 300ms ease;
 }
 /* Fix for Windows Phone issue #6349: unset the transition for transforms in case of fixed toolbars. */
-@media screen and ( max-device-width: 768px ) {
+@media screen and ( max-device-width: 812px ) {
     .ui-page-header-fixed .ui-panel-animate.ui-panel-wrapper,
     .ui-page-footer-fixed .ui-panel-animate.ui-panel-wrapper,
     .ui-panel-animate.ui-panel-fixed-toolbar {

@@ -15,7 +15,7 @@
 	padding: 0 12px;
 }
 
-@media ( max-width : 768px) {
+@media ( max-width : 812px) {
 	.pure-g>div:first-child {
 		padding-right: 0px;
 	}

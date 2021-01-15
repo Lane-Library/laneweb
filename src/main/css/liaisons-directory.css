@@ -1,7 +1,7 @@
 
 
 
-@media ( max-width : 768px) {
+@media ( max-width : 812px) {
 	.liaisons-directory table, .liaisons-directory thead, .liaisons-directory tbody, .liaisons-directory th, .liaisons-directory td, .liaisons-directory tr { 
 		display: block; 
 	}

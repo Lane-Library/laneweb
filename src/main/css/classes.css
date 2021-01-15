@@ -132,7 +132,7 @@
 	height: 26px;
 }
 
-@media ( max-width :768px) {
+@media ( max-width :812px) {
 	.class {
 		margin: 12px 0 51px;
 	}

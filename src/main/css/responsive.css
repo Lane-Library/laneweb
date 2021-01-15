@@ -27,7 +27,7 @@ img {
 	font-size: 32px;
 }
 
-@media ( max-width : 768px) {
+@media ( max-width : 812px) {
 	html {
 		margin: 0;
 		min-width: 0;

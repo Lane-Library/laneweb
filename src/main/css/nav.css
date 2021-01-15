@@ -103,7 +103,7 @@ ul.content .nav-menu {
 	width: 200px;
 }
 
-@media ( max-width :768px) {
+@media ( max-width :812px) {
 	.nav-menu>a, .nav-menu>a:visited {
 		text-align: left;
 	}
