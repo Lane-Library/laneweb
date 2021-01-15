@@ -18,6 +18,8 @@
              <xsl:attribute name="href" select="@href" />
             </xsl:otherwise>
          </xsl:choose>
+           <xsl:attribute name="id" select="@id"/>
+           <xsl:attribute name="class" select="@class"/>
          <xsl:apply-templates select="*|text()"/>
       </xsl:copy>
    </xsl:template>
