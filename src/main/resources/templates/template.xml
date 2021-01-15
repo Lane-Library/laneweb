@@ -69,12 +69,12 @@
    
    
    
-   <body  ontouchstart="">
+   <body>
    
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/header.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/header.html">
          <xi:fallback></xi:fallback>
       </xi:include>
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/navigation.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/navigation.html">
          <xi:fallback></xi:fallback>
       </xi:include>
       <div class="hero-unit">
