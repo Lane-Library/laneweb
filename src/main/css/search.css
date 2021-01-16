@@ -118,6 +118,9 @@ li.active .description {
     padding: 1px 5px;
     border: 1px solid #ccc;
 }
+.sourceInfo {
+    white-space: nowrap;
+}
 .sourceInfo span {
     margin-left: 30px;
     display: inline-block;
@@ -156,9 +159,18 @@ li.active .description {
 .expandedPermalink input {
     border: none;
     font-size: 100%;
-    min-width: 350px;
+    width: 100%;
     background-color: #f2f3ed;
 }
 .expandedPermalink input:focus, .permalink input:focus{
     outline: none;
+}
+
+@media ( max-width : 812px) {
+    .sourceInfo span:first-child {
+        min-width: unset;
+    }
+    .sourceInfo span {
+        margin-left: 5px;
+    }
 }
