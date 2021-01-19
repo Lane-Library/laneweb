@@ -80,4 +80,7 @@
 	.course-reserves tbody td {
 	    padding: 5px;
 	}
+	.course-reserves-search-button i{
+    	font-size: 21px;
+    }
 }
