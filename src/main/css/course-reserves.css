@@ -75,3 +75,9 @@
 .version-note {
     padding-left: 25px;
 }
+
+@media ( max-width : 812px) {
+	.course-reserves tbody td {
+	    padding: 5px;
+	}
+}
