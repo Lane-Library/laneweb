@@ -9,7 +9,7 @@ body, select, input, button, textarea {
 }
 
 .scaled-image {
-    width: 100%;
+    width: auto;
     height: auto;
     margin-bottom: 12px;
 }
