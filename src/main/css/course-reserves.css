@@ -46,7 +46,7 @@
 #course-reserves-search {
     width: 100%;
     font-size: 14px;
-    height: 30px;
+    height: 36px;
     padding-left: 7px;
     box-sizing: border-box;
 }
@@ -57,7 +57,7 @@
 }
 
 .course-reserves-search-button {
-    top: 88px;
+    top: 90px;
     right: 20px;
 }
 
