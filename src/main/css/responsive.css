@@ -67,11 +67,7 @@ img {
 		margin-left: 10%;
 		width: 35%;
 	}
-	.pure-md-hide {
-		display: none;
-	}
-	#mobile-menu-header ul, span.bookmark-link, #mobile-menu-header span a:nth-child(2)
-		{
+	.pure-md-hide, span.bookmark-link {
 		display: none;
 	}
 	.pure-u-1, .pure-u-1-1, .pure-u-1-2, .pure-u-1-3, .pure-u-2-3,
@@ -88,7 +84,11 @@ img {
 	}
 
 	/*Display Menu (hamburger) in mobile version*/
-	#mobile-menu-header:target ul {
+	#mobile-menu-header ul, #mobile-menu-header div, #mobile-menu-header hr,
+		span.bookmark-link, #mobile-menu-header span a:nth-child(2) {
+		display: none;
+	}
+	#mobile-menu-header:target ul, #mobile-menu-header:target div,#mobile-menu-header:target hr {
 		display: block;
 	}
 	#mobile-menu-header:target span a:first-child {
