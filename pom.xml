@@ -407,8 +407,6 @@
                         <exclude>**/lane-all.css</exclude>
                         <exclude>**/lane-all.js</exclude>
                         <exclude>**/lane-history.js</exclude>
-                        <exclude>**/lane-mobile.css</exclude>
-                        <exclude>**/lane-mobile.js</exclude>
                         <exclude>**/test/*/*.js</exclude>
                         <exclude>**/yui*.*</exclude>
                     </excludes>
@@ -531,33 +529,6 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/classes/resources/css/mobile/lane-mobile.css</output>
-                            <includes>
-                                <include>jquery.mobile.structure-1.4.0-min.css</include>
-                                <include>jquery-ui-1.10.4.custom-min.css</include>
-                                <include>m-lane-min.css</include>
-                                <include>m-buttons-min.css</include>
-                            </includes>
-                        </aggregation>
-                        <aggregation>
-                            <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/classes/resources/javascript/mobile/lane-mobile.js</output>
-                            <includes>
-                                <include>jquery-1.9.1-min.js</include>
-                                <include>jquery.mobile-1.4.0.custom-min.js</include>
-                                <include>jquery-ui-1.10.4.custom-min.js</include>
-                                <include>m-lane-min.js</include>
-                                <include>m-persistentlogin-min.js</include>
-                                <include>m-cookie-min.js</include>
-                                <include>m-hours-min.js</include>
-                                <include>m-search-min.js</include>
-                                <include>m-spellcheck-min.js</include>
-                                <include>m-suggest-min.js</include>
-                                <include>m-tracking-min.js</include>
-                            </includes>
-                        </aggregation>
-                        <aggregation>
-                            <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
                                 <include>../reset-min.css</include>
@@ -617,9 +588,6 @@
                         <directory>src/main/javascript</directory>
                     </directories>
                     <excludes>
-                        <exclude>src/main/javascript/mobile/jquery-1.9.1.js</exclude>
-                        <exclude>src/main/javascript/mobile/jquery-ui-1.10.4.custom.js</exclude>
-                        <exclude>src/main/javascript/mobile/jquery.mobile-1.4.0.custom.js</exclude>
                         <exclude>src/main/javascript/yui-3.18.1.js</exclude>
                     </excludes>
                 </configuration>
@@ -696,7 +664,7 @@
                 <version>0.7</version>
                 <configuration>
                     <jsDir>src/main/javascript/</jsDir>
-                    <excludes>mobile/jquery*.js yui-*.js</excludes>
+                    <excludes>yui-*.js</excludes>
                 </configuration>
                 <reportSets>
                     <reportSet>
