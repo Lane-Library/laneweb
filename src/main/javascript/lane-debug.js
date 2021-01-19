@@ -45,7 +45,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "model.js",
         "link-info.js",
         "lane-ie.js",
-        "lane-mobile-ad.js",
         "lane-persistent-login.js",
         "search-indicator.js",
         "lane-bassett.js",
