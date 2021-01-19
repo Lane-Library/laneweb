@@ -13,6 +13,7 @@ img {
 .menu-toggle {
 	background-color: grey;
 	padding: 9px;
+	top: 0px;
 	right: 0px;
 	position: absolute;
 	display: none;
@@ -112,5 +113,7 @@ img {
 	#mobile-menu-header1:target span a:nth-child(2) {
 		display: block;
 	}
+	
+	
 	
 }
