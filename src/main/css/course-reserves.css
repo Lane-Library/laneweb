@@ -46,9 +46,12 @@
 #course-reserves-search {
     width: 100%;
     font-size: 14px;
-    height: 36px;
+    height: 40px;
     padding-left: 7px;
     box-sizing: border-box;
+}
+.course-reserves-search-button .fa {
+    padding: 4px;
 }
 
 /* disable IE 11 input clear 'X' button */
