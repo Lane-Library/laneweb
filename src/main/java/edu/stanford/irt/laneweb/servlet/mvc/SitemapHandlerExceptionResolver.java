@@ -66,7 +66,7 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
         } else {
             Throwable cause = throwable.getCause();
             if (cause == null) {
-                log.error("sitemap error {}", throwable, throwable);
+                log.error(throwable.toString(), throwable);
             } else {
                 logException(cause);
             }
