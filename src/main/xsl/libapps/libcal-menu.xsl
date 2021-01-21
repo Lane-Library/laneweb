@@ -3,7 +3,15 @@
    <xsl:template match="/classes">
       <html>
          <body>
-            <div class="menu-container">
+            <div  id="mobile-menu-header" class="menu-container">
+            	<span>
+               		<a href="#mobile-menu-header" class="menu-toggle">
+						<i class="fa fa-bars"></i>
+					</a>
+					<a href="#off" id="off"  class="menu-toggle">
+						<i class="fa fa-times"></i>
+					</a>
+			   </span>	
                <h3>Categories</h3>
                <ul class="menu">
                   <li>
