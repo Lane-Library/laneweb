@@ -1,3 +1,7 @@
+.menu-container h3 {
+	display: none;
+}
+
 @media ( max-width : 812px) {
 	.centered, h1 {
 		min-width: auto;
@@ -7,7 +11,7 @@
 		width: 83%;
 	}
 	#search fieldset {
-	  	background-color: #8c1515;
+		background-color: #8c1515;
 		width: 90%;
 	}
 	#mhc-logo {
@@ -22,5 +26,23 @@
 	}
 	.gutter-right {
 		margin-right: 0px;
+	}
+	.menu-container h3 {
+		display: block;
+		font-size: 24px;
+		letter-spacing: 1px;
+		background-color: #8c1515;
+		color: white;
+		padding: 12px 28px;
+		margin-bottom: 0px;
+	}
+	
+	#gift{
+		margin-top: 24px;
+	}
+	
+	.menu {
+		border: none;
+		margin-bottom: 12px;
 	}
 }
