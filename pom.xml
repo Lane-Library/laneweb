@@ -537,6 +537,8 @@
                                 <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
                                 <include>../back-to-top-min.css</include>
+                                <include>../responsive-min.css</include>
+                                <include>history-responsive-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

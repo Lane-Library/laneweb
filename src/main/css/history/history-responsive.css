@@ -1,0 +1,25 @@
+@media ( max-width : 812px) {
+	.centered, h1 {
+		min-width: auto;
+		margin: 0 9px;
+	}
+	#search input[type='text'] {
+		width: 83%;
+	}
+	#search fieldset {
+		width: 90%;
+	}
+	#mhc-logo {
+		top: 77px;
+		left: 177px;
+	}
+	.core-covers {
+		width: 100%;
+	}
+	.gutter-left {
+		margin-left: 0px;
+	}
+	.gutter-right {
+		margin-right: 0px;
+	}
+}
