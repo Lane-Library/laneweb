@@ -35,7 +35,7 @@
       <map:match pattern="libcal-menu.html" type="wildcard">
          <map:generate type="file" src="cocoon://classes/libcals.xml"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/libcal-menu.xsl"/>
-         <map:serialize type="xml"/>
+         <map:serialize type="xhtml"/>
       </map:match>
         <map:match pattern="lane-menu.xml" type="wildcard">
          <map:generate type="file" src="cocoon://classes/libcals.xml"/>
