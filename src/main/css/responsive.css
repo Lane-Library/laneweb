@@ -99,6 +99,7 @@ img {
 	}
 	#mobile-menu-header:target ul, #mobile-menu-header:target div,#mobile-menu-header:target hr {
 		display: block;
+		border: none;
 	}
 	#mobile-menu-header:target span:first-child a:first-child {
 		display: none;
