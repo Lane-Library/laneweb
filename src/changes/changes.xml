@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	  <release date="2021-01-24" version="3.6.25" description="bug fix release">
+      	    <action date="2021-01-20" dev="ryanmax" issue="LANEWEB-10667" type="update"> 
+               	large increase in CPU use and response times
+            </action>
+          </release>	
           <release date="2021-01-15" version="3.6.24" description="bug fix release">
       	    <action date="2021-01-14" dev="alainb" issue="LANEWEB-10654" type="fix"> 
                	footer.html not displayed in libguide and libcal
