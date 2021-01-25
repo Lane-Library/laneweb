@@ -115,6 +115,7 @@ img {
 	}
 	#mobile-menu-header1:target ul, #mobile-menu-header1:target div,#mobile-menu-header1:target hr {
 		display: block;
+		border: none;
 	}
 	#mobile-menu-header1:target span a:first-child {
 		display: none;
