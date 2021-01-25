@@ -28,6 +28,10 @@ img {
 	font-size: 32px;
 }
 
+.lrg-screen-hide{
+	display: none;
+}
+
 @media ( max-width : 812px) {
 	html {
 		margin: 0;
@@ -36,7 +40,7 @@ img {
 	.content {
 		margin: 0 12px;
 	}
-	.menu-toggle {
+	.menu-toggle, .lrg-screen-hide{
 		display: block;
 	}
 	.login {
@@ -84,18 +88,22 @@ img {
 		width: 100%;
 	}
 
-	/*Display Menu (hamburger) in mobile version*/
-	#mobile-menu-header ul, #mobile-menu-header div, #mobile-menu-header hr,
+	.mobile-header{
+		font-size: 28px;
+	}
+
+	/*Display Menu  in mobile version*/
+	#mobile-menu-header ul, #mobile-menu-header div , #mobile-menu-header hr,
 		 #mobile-menu-header span a:nth-child(2) {
 		display: none;
 	}
 	#mobile-menu-header:target ul, #mobile-menu-header:target div,#mobile-menu-header:target hr {
 		display: block;
 	}
-	#mobile-menu-header:target span a:first-child {
+	#mobile-menu-header:target span:first-child a:first-child {
 		display: none;
 	}
-	#mobile-menu-header:target span a:nth-child(2) {
+	#mobile-menu-header:target span:first-child a:nth-child(2) {
 		display: block;
 	}
 	

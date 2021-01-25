@@ -1,11 +1,12 @@
-.menu-container h3 {
-	display: none;
-}
 
 @media ( max-width : 812px) {
 	.centered, h1 {
 		min-width: auto;
 		margin: 0 9px;
+	}
+	#mhc-logo {
+		top: 76px;
+		left: 176px;
 	}
 	#search input[type='text'] {
 		width: 83%;
@@ -13,10 +14,6 @@
 	#search fieldset {
 		background-color: #8c1515;
 		width: 90%;
-	}
-	#mhc-logo {
-		top: 76px;
-		left: 176px;
 	}
 	.core-covers {
 		width: 100%;
@@ -27,23 +24,21 @@
 	.gutter-right {
 		margin-right: 0px;
 	}
-	.menu-container h3 {
+	.menu-container span:first-child {
 		display: block;
 		font-size: 24px;
 		letter-spacing: 1px;
 		background-color: #8c1515;
-		color: white;
 		padding: 11px 28px;
 		margin-bottom: 0px;
 	}
-	.menu-toggle {
-		top: 12px;
+	
+	.menu-container span:first-child a{
+			color: white;
 	}
+	
 	#gift {
 		margin-top: 24px;
 	}
-	.menu {
-		border: none;
-		margin-bottom: 12px;
-	}
+	
 }
