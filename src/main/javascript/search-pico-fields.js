@@ -5,7 +5,7 @@
     var PICO_FIELDS = "pico-fields",
         PICO_FIELDS_ACTIVE = PICO_FIELDS + "-active",
 
-        view = function(pico) {
+        picoView = function(pico) {
 
             return {
                     hide: function() {
@@ -44,7 +44,7 @@
                 }
             };
 
-        }(view);
+        }(picoView);
 
         L.addEventTarget(controller, {
             prefix: "picoFields",

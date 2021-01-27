@@ -12,7 +12,7 @@ if (document.querySelector(".pico-toggle"))  {
         PICO_TOGGLE = "pico-toggle",
         PICO_TOGGLE_ACTIVE = PICO_TOGGLE + ACTIVE,
 
-        view = function(toggle) {
+        picoView = function(toggle) {
 
             var on = toggle.querySelector("." + PICO_ON),
                 off = toggle.querySelector("." + PICO_OFF),
@@ -90,7 +90,7 @@ if (document.querySelector(".pico-toggle"))  {
             });
             controller.addTarget(L);
 
-        })(view);
+        })(picoView);
 
 })();
 

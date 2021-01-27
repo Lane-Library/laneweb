@@ -8,7 +8,7 @@ import edu.stanford.irt.cocoon.xml.XIncludeExceptionListener;
 
 public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener {
 
-    private static final Logger log = LoggerFactory.getLogger(XIncludeExceptionListener.class);
+    private static final Logger log = LoggerFactory.getLogger(XIncludeExceptionListenerImpl.class);
 
     @Override
     public void exception(final Locator locator, final Exception e) {
@@ -33,6 +33,6 @@ public class XIncludeExceptionListenerImpl implements XIncludeExceptionListener 
             .append(locator.getColumnNumber());
         }
         message.append(": ").append(e);
-        log.error(message.toString());
+        log.error("xinclude error: {}", message);
     }
 }

@@ -14,12 +14,12 @@
             if (locationSearch){
                 rq = rq + locationSearch;
             } else if (locationPath.indexOf('/view/') > -1) {
-                rq = rq + locationPath.replace(/\/view\/([a-z]{3,10})\/(\d+)/,'?source=all-all&facets=recordType:"$1"&q=$2');
+                rq = rq + locationPath.replace(/\/view\/([a-z]{3,10})\/(\d{1,10})/,'?source=all-all&facets=recordType:"$1"&q=$2');
             }
             return rq;
         },
-        processEnabledFacets = function(facetsContainer) {
-            var enabledFacets = facetsContainer.querySelectorAll('.enabled'),
+        processEnabledFacets = function(container) {
+            var enabledFacets = container.querySelectorAll('.enabled'),
                 limitsContainer = document.querySelector('#solrLimits'),
                 allCount = document.querySelector('#solrAllCount'),
                 count = 0,

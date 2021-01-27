@@ -36,7 +36,7 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 @RequestMapping(value = "/bookmarks")
 public class JSONBookmarkController extends BookmarkController {
 
-    private static final Logger log = LoggerFactory.getLogger(BookmarkController.class);
+    private static final Logger log = LoggerFactory.getLogger(JSONBookmarkController.class);
 
     private RemoteProxyIPDataBinder proxyLinksDataBinder;
 
