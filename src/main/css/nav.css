@@ -141,7 +141,7 @@ ul.content .nav-menu {
 	}
 	#navigation ul {
 		position: relative;
-		display: block; 
+		display: contents; 
 	}
 	.dropdown:active .dropdown-content, #navigation li ,#navigation:target nav{
 		display: block;
