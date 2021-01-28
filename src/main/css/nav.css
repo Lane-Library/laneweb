@@ -121,9 +121,17 @@ ul.content .nav-menu {
 		margin-top: 0px;
 		-webkit-font-smoothing: antialiased;
 	}
+	#navigation ul {
+		position: relative;
+		display: block;
+		margin: 0;
+	}
 	#navigation .nav-menu-content {
 		position: relative;
 		margin: 0;
+	}
+	.nav-menu-content.portals {
+    	width: auto;
 	}
 	.nav-menu-content.portals ul {
 		column-count: 1;
@@ -139,11 +147,6 @@ ul.content .nav-menu {
 	}
 	#nav-toggle-off i, #nav-toggle-on i {
 		text-align: center;
-	}
-	#navigation ul {
-		position: relative;
-		display: block;
-		margin: 0;
 	}
 	.dropdown:active .dropdown-content, #navigation li, #navigation:target nav
 		{
