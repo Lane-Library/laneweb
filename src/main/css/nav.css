@@ -87,9 +87,6 @@ ul.content .nav-menu {
 	color: #820000;
 }
 
-.nav-menu-content.portals {
-	width: 600px;
-}
 
 .nav-menu-content.portals ul {
 	column-count: 3;
@@ -104,10 +101,6 @@ ul.content .nav-menu {
 @media ( max-width :812px) {
 	.nav-menu>a, .nav-menu>a:visited {
 		text-align: left;
-	}
-	.portals {
-		column-count: 1;
-		width: 100%
 	}
 	#navigation {
 		position: absolute;
@@ -130,11 +123,9 @@ ul.content .nav-menu {
 		position: relative;
 		margin: 0;
 	}
-	.nav-menu-content.portals {
-    	width: auto;
-	}
 	.nav-menu-content.portals ul {
 		column-count: 1;
+		width: auto;
 	}
 	#nav-toggle-on {
 		display: block;
