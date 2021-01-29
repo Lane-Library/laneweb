@@ -35,7 +35,7 @@
                         if (visibleSeminarCount-- > 0 && Date.parse(date + " " + endTime) < Date.now()) {
                             node.style.display = "none";
                             if (hiddenSeminarArray.length > 0) {
-                                hiddenSeminarArray.shift().style.display = "block";
+                                hiddenSeminarArray.shift().style.display = "flex";
                             }
                         }
                     }
