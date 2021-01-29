@@ -61,16 +61,18 @@ img {
 	}
 	.library-contact {
 		display: block;
+		position:relative;
 		left: 0;
-		top: 70px;
+		top: 4px;
 	}
 	.library-contact li {
 		margin-bottom: 12px;
 		text-align: center;
 	}
-	.library-contact li, .library-contact li {
-		margin-left: 10%;
+	.library-contact li {
+	    margin-left: 10%;
 		width: 35%;
+		min-width: 133px;
 	}
 	.pure-md-hide, span.bookmark-link {
 		display: none;
@@ -122,8 +124,21 @@ img {
 	}
 	#mobile-menu-header1:target span a:nth-child(2) {
 		display: block;
-	}
-	
-	
-	
+	}	
 }
+
+
+@media ( max-width : 360px) {
+	 .library-contact li {
+	 	margin-left: 3%;
+		width: 45%;
+	} 
+	.brand a, .brand a:link{
+		font-size: 15px;
+		padding-top: 28px;		
+	}
+	.login > :nth-child(7) {
+		display: none;
+	}
+} 
+
