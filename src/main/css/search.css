@@ -1,176 +1,196 @@
-.tooltips,
-.popin > div,
-#search-content-counts,
-#showPubMedStrategies {
-    display: none;
+.tooltips, .popin>div, #search-content-counts, #showPubMedStrategies {
+	display: none;
 }
 
 #spellCheckLink {
-    padding-right: 25px;
+	padding-right: 25px;
 }
+
 .primaryLink {
-    font-size: 16px;
+	font-size: 16px;
 }
+
 .primaryType {
-    text-transform: uppercase;
-    color: #999;
+	text-transform: uppercase;
+	color: #999;
 }
+
 .popin {
-    height: 16px;
+	height: 16px;
 }
+
 .popInLabel {
-    font-weight: bold;
-    padding-right: 25px;
+	font-weight: bold;
+	padding-right: 25px;
 }
+
 #spellCheck .popInLabel {
-    padding-right: 5px;
+	padding-right: 5px;
 }
+
 #searchResults {
-    padding-top: 10px;
+	padding-top: 10px;
 }
 
 .resource .bookcover {
-    float: right;
-    padding-left: 30px;
+	float: right;
+	padding-left: 30px;
 }
 
 .resource .bookcover i {
-    font-size: 86px;
+	font-size: 86px;
 }
 
 .resource img {
-    height: 112px;
-    width: 80px;
+	height: 112px;
+	width: 80px;
 }
 
 /* abstract and description related styles*/
 .description {
-    display: none;
-    position: relative;
-    top: -1px;
-    background-color: #f2f3ed;
-    border: 1px solid;
-    padding: 12px;
+	display: none;
+	position: relative;
+	top: -1px;
+	background-color: #f2f3ed;
+	border: 1px solid;
+	padding: 12px;
 }
+
 .descriptionTrigger {
-    cursor: pointer;
-    padding: 1px 5px;
-    border: 1px solid #ccc;
+	cursor: pointer;
+	padding: 1px 5px;
+	border: 1px solid #ccc;
 }
+
 .descriptionTrigger .fa-eye {
-    color: #428bca;
+	color: #428bca;
 }
+
 li.active .descriptionTrigger {
-    background-color: #f2f3ed;
-    border: 1px solid;
-    padding: 0 12px;
-    border-bottom-color: #f2f3ed;
-    display: inline-block;
-    position: relative;
-    z-index: 1;
+	background-color: #f2f3ed;
+	border: 1px solid;
+	padding: 0 12px;
+	border-bottom-color: #f2f3ed;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
 }
+
 li.active .description {
-    display: block;
+	display: block;
 }
 
 .resultInfo span {
-    display: inline-block;
-    margin-right: 24px;
+	display: inline-block;
+	margin-right: 24px;
 }
+
 .resultInfo span:first-child {
-    min-width: 103px;
-    margin-right: 10px;
+	min-width: 103px;
+	margin-right: 10px;
 }
+
 .results-nav {
-    background-color: #f7f3e5;
-    padding: 10px 5px 24px;
-    font-size: 11px;
+	background-color: #f7f3e5;
+	padding: 10px 5px 24px;
+	font-size: 11px;
 }
+
 .searchTerms {
-    text-transform: none;
-    font-weight: bold;
-    font-style: italic;
+	text-transform: none;
+	font-weight: bold;
+	font-style: italic;
 }
+
 .rightSearchTips {
-    padding: 0 12px;
-    white-space: nowrap;
+	padding: 0 12px;
+	white-space: nowrap;
 }
 
 .rightSearchTips .heading {
-    font-weight: bold;
-    padding: 10px 0 5px;
-    border-bottom: solid 1px rgb(144,144,144);
-    margin-bottom: 4px;
+	font-weight: bold;
+	padding: 10px 0 5px;
+	border-bottom: solid 1px rgb(144, 144, 144);
+	margin-bottom: 4px;
 }
 
 .rightSearchTips ul {
-    padding-left: 0;
+	padding-left: 0;
 }
+
 .content .rightSearchTips li {
-    padding: 3px 0 2px;
-    border-bottom: none;
+	padding: 3px 0 2px;
+	border-bottom: none;
 }
+
 .authors-hide {
-    display: none;
+	display: none;
 }
+
 .authorsTrigger {
-    cursor: pointer;
-    padding: 1px 5px;
-    border: 1px solid #ccc;
+	cursor: pointer;
+	padding: 1px 5px;
+	border: 1px solid #ccc;
 }
-.sourceInfo {
-    white-space: nowrap;
-}
+
 .sourceInfo span {
-    margin-left: 30px;
-    display: inline-block;
-    vertical-align: top;
+	margin-left: 30px;
+	display: inline-block;
+	vertical-align: top;
 }
+
 .sourceInfo span:first-child {
-    min-width: 140px;
-    margin-left: 0;
+	min-width: 140px;
+	margin-left: 0;
 }
-.requestIt {
-    background-color: #428bca;
-    border-radius: 4px;
-    padding: 0 5px;
-}
+
 .requestIt a {
-    color: white;
+	color: white;
+	background-color: #428bca;
+	border-radius: 4px;
+	padding: 2px 5px;
 }
 
 .permalink a {
-    padding: 0 10px;
+	padding: 0 10px;
 }
+
 .permalink.active {
-    background-color: #f2f3ed;
-    border: 1px solid;
-    border-bottom-color: #f2f3ed;
-    z-index: 1;
-    position: relative;
+	background-color: #f2f3ed;
+	border: 1px solid;
+	border-bottom-color: #f2f3ed;
+	z-index: 1;
+	position: relative;
 }
+
 .expandedPermalink {
-    background-color: #f2f3ed;
-    border: 1px solid;
-    padding: 0 12px;
-    position: relative;
-    top: -1px;
+	background-color: #f2f3ed;
+	border: 1px solid;
+	padding: 0 12px;
+	position: relative;
+	top: -1px;
 }
+
 .expandedPermalink input {
-    border: none;
-    font-size: 100%;
-    width: 100%;
-    background-color: #f2f3ed;
+	border: none;
+	font-size: 100%;
+	width: 100%;
+	background-color: #f2f3ed;
 }
-.expandedPermalink input:focus, .permalink input:focus{
-    outline: none;
+
+.expandedPermalink input:focus, .permalink input:focus {
+	outline: none;
 }
 
 @media ( max-width : 812px) {
-    .sourceInfo span:first-child {
-        min-width: unset;
-    }
-    .sourceInfo span {
-        margin-left: 5px;
-    }
+	.sourceInfo span:first-child {
+		min-width: unset;
+	}
+	.sourceInfo span {
+		display: block;
+		margin: unset;
+	}
+	.permalink a {
+		padding: 0px;
+	}
 }

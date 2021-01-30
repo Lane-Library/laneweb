@@ -1,12 +1,7 @@
-
 @media ( max-width : 812px) {
 	.centered, h1 {
 		min-width: auto;
 		margin: 0 9px;
-	}
-	#mhc-logo {
-		top: 76px;
-		left: 176px;
 	}
 	#search input[type='text'] {
 		width: 83%;
@@ -32,17 +27,23 @@
 		padding: 11px 28px;
 		margin-bottom: 0px;
 	}
-	
-	.menu-container span:first-child a{
-			color: white;
+	.menu-container span:first-child a {
+		color: white;
 	}
-	
 	#gift {
 		margin-top: 24px;
 	}
-	
-	.brand{
-     height: auto; 
+	.brand {
+		height: auto;
 	}
-	
+	#mhc-logo {
+		top: 75px;
+		left: 178px;
+	}
+}
+
+@media ( max-width : 360px) {
+	.brand a, .brand a:link {
+		padding-top: 0px !important;
+	}
 }
