@@ -133,6 +133,10 @@ li.active .description {
 	border: 1px solid #ccc;
 }
 
+.sourceInfo{
+	position: relative;
+}
+
 .sourceInfo span {
 	margin-left: 30px;
 	display: inline-block;
@@ -142,6 +146,12 @@ li.active .description {
 .sourceInfo span:first-child {
 	min-width: 140px;
 	margin-left: 0;
+}
+
+.directToPDF{
+	position: absolute;
+    top: 0px;
+    left: 297px;	
 }
 
 .requestIt a {
@@ -183,14 +193,20 @@ li.active .description {
 }
 
 @media ( max-width : 812px) {
-	.sourceInfo span:first-child {
-		min-width: unset;
-	}
-	.sourceInfo span {
+	.sourceInfo span:first-child, .sourceInfo span.permalink {
 		display: block;
-		margin: unset;
+		
 	}
-	.permalink a {
-		padding: 0px;
+	.sourceInfo span{
+		margin-left: 0px;
+	} 
+	.sourceInfo span.permalink a {
+	 	padding-left: 0px;
+	}
+	.sourceInfo span.requestIt{
+		margin-left: 6px;
+	}
+	.directToPDF{
+		position: static;
 	}
 }

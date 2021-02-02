@@ -42,7 +42,7 @@
                         doiMap[doi].fetched = true;
                         if (fulltextUrl) {
                             doiMap[doi].querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                                '<span><i class="fa fa-file-pdf-o" aria-hidden="true"></i> ' +
+                                '<span class="directToPDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> ' +
                                 '<a class="bzFT" href="' + fulltextUrl + '">Direct to PDF</a>' +
                                 '</span>'
                             )

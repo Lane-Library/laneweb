@@ -10,11 +10,11 @@
             node.classList.toggle("active");
             var isActive = node.classList.contains("active"),
                 li = node.closest('li'),
-                sourceInfo = li.querySelector('.sourceInfo'),
+                permalink = li.querySelector('.permalink'),
                 expandedPermalink = li.querySelector('.expandedPermalink');
 
             if (isActive) {
-                sourceInfo.insertAdjacentHTML("afterend",
+                permalink.insertAdjacentHTML("afterend",
                   '<div class="expandedPermalink no-bookmarking">' +
                   ' <div>' +
                   '   <input value="' + node.querySelector('a').href + '"/>' +
