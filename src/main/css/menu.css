@@ -1,6 +1,7 @@
 .menu-container {
     margin: 24px 0 24px;
     font-family: 'Fjord One', serif;
+    position: relative;
 }
 
 .menu-container h3 {
@@ -13,9 +14,6 @@
     line-height: 130%;
 }
 
-.menu-container .menu-toggle {
-    top: 116px;
-}
 
 .menu li {
     padding: 0;
@@ -43,6 +41,8 @@
     background-color: #666;
     color: #fff;
 }
+
+
 
 /*
 .menu ul {
