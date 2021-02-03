@@ -467,6 +467,7 @@
                                 <include>portals-min.css</include>
                                 <include>course-reserves-min.css</include>
                                 <include>contacts-min.css</include>
+                                <include>liaisons-directory-min.css</include>
                                 <include>responsive-min.css</include>
                             </includes>
                         </aggregation>
