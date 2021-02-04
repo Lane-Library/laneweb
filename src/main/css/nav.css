@@ -106,6 +106,7 @@ ul.content .nav-menu {
 		position: absolute;
 		top: 32px;
 		width: 66%;
+		max-width: 282px;
 		right: 0px;
 		z-index: 2;
 	}
