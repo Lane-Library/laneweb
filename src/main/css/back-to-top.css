@@ -6,7 +6,7 @@
     position: fixed;
     padding: 3px 8px;
     right: 0;
-    top: 75%;
+    top: 90%;
     transition: opacity .45s;
     visibility: hidden;
 }
