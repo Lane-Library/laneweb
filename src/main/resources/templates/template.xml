@@ -8,21 +8,12 @@
       <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml"/>
       <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}-${git.commit.id.abbrev}"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-     
-	<script>
-		document.addEventListener("touchstart", function() {},false);
-	</script>
-
    </head>
-   
-   
-   
    <body>
-   
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/header.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/header.html">
          <xi:fallback></xi:fallback>
       </xi:include>
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/navigation.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/navigation.html">
          <xi:fallback></xi:fallback>
       </xi:include>
       <div class="hero-unit">
