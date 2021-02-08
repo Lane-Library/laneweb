@@ -33,7 +33,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators = new HashMap<>();
             this.parameterValidators.put("a", new ParameterValueValidator("a", Pattern.compile("^([a-z#]|all)$")));
             this.parameterValidators.put("page", new ParameterValueValidator("page", Pattern.compile("^(\\d+|all)$")));
-            this.parameterValidators.put("m", new ParameterValueValidator("m", Pattern.compile("^[\\w -/,]*$")));
+            this.parameterValidators.put("m", new ParameterValueValidator("m", Pattern.compile("^[\\w '\\-/,]*$")));
             this.parameterValidators.put("proxy-links",
                     new ParameterValueValidator("proxy-links", Pattern.compile("^(true|false)$")));
             this.parameterValidators.put("sourceid",
@@ -44,7 +44,6 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("q", valid);
             this.parameterValidators.put("laneNav", valid);
             this.parameterValidators.put("template", valid);
-            this.parameterValidators.put("site_preference", valid);
             this.parameterValidators.put("source", valid);
             this.parameterValidators.put("id", new ParameterValueValidator("id", Pattern.compile("^\\d+$")));
             // next three get put into google search results
