@@ -53,13 +53,9 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/course-reserves.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/liaisons-directory.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
-
-	<script>
-		document.addEventListener("touchstart", function() {},false);
-	</script>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
       <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/header.html">
