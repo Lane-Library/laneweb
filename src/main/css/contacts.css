@@ -67,4 +67,7 @@
 	.content .contacts-choice li {
 		padding: 6px 13px;
 	}
+	ul.contacts-choice {
+		white-space: unset;
+	}
 }
