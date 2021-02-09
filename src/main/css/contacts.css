@@ -1,63 +1,69 @@
-
-.contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active, .contacts-choice a:hover  {
-	    padding: 18px 16%;
-		color: black;
-}
-
-.contacts-choice a .fa{
+.contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
+	.contacts-choice a:hover {
 	color: black;
 }
 
-.contacts-choice{
+.contacts-choice a .fa {
+	color: black;
+}
+
+.contacts-choice {
 	display: flex;
+	white-space: nowrap;
 }
 
-.contacts-choice li{
+.contacts-choice li {
 	display: block;
-    flex: 1 1 auto;
-    margin: 0;
-    padding: 0;;
+	flex: 1 1 auto;
+	margin: 0;
+	padding: 6px;
+	border: none;
 }
 
-.sfp-choice a:link{
-	 padding: 18px 36%;	 
+.sfp-choice a:link {
+	padding: 18px 36%;
 }
-.contacts-choice.sfp-choice span{
+
+.contacts-choice.sfp-choice span {
 	font-size: 16px;
 }
 
-
-#liaisons, #docxpress, #ejp, #sfp-book, #sfp-journal, #sfp-other{
+#liaisons, #docxpress, #ejp, #sfp-book, #sfp-journal, #sfp-other {
 	display: none;
 }
 
-:target ~ #laneaskus{
-	 display: none;
-} 
+:target ~ #laneaskus {
+	display: none;
+}
 
-#liaisons:target, #docxpress:target,  #ejp:target, #sfp-book:target, #sfp-journal:target, #sfp-other:target{
+#liaisons:target, #docxpress:target, #ejp:target, #sfp-book:target,
+	#sfp-journal:target, #sfp-other:target {
 	display: block;
 }
 
-#liaisons:target .liaisons-button, #laneaskus:target .laneaskus-button , #docxpress:target .docxpress-button ,
-#liaisons:target .liaisons-button span, #laneaskus:target .laneaskus-button span, #docxpress:target .docxpress-button span,
-#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa, #docxpress:target .docxpress-button .fa,
-#ejp:target .ejp-button, #sfp-book:target .sfp-book-button, #sfp-journal:target .sfp-journal-button,
-#ejp:target .ejp-button span, #sfp-book:target .sfp-book-button span, #sfp-journal:target .sfp-journal-button span,
-#ejp:target .ejp-button .fa, #sfp-journal:target .sfp-journal-button .fa, #sfp-other:target .sfp-other-button,
-#sfp-journal:target .sfp-button, #sfp-other:target .sfp-button, #sfp-book:target .sfp-button,
-#sfp-journal:target .sfp-button span, #sfp-other:target .sfp-button span, #sfp-book:target .sfp-button span,
-#sfp-journal:target .sfp-button .fa, #sfp-other:target .sfp-button .fa, #sfp-book:target .sfp-button .fa
-{
-	background-color: rgb(13,105,128);
+#liaisons:target .liaisons-button, #laneaskus:target .laneaskus-button,
+	#docxpress:target .docxpress-button, #liaisons:target .liaisons-button span,
+	#laneaskus:target .laneaskus-button span, #docxpress:target .docxpress-button span,
+	#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
+	#docxpress:target .docxpress-button .fa, #ejp:target .ejp-button,
+	#sfp-book:target .sfp-book-button, #sfp-journal:target .sfp-journal-button,
+	#ejp:target .ejp-button span, #sfp-book:target .sfp-book-button span,
+	#sfp-journal:target .sfp-journal-button span, #ejp:target .ejp-button .fa,
+	#sfp-journal:target .sfp-journal-button .fa, #sfp-other:target .sfp-other-button,
+	#sfp-journal:target .sfp-button, #sfp-other:target .sfp-button,
+	#sfp-book:target .sfp-button, #sfp-journal:target .sfp-button span,
+	#sfp-other:target .sfp-button span, #sfp-book:target .sfp-button span,
+	#sfp-journal:target .sfp-button .fa, #sfp-other:target .sfp-button .fa,
+	#sfp-book:target .sfp-button .fa {
+	background-color: #006CB8;
 	color: white;
+	border-radius: 21px;
 }
 
 @media ( max-width : 812px) {
 	.contacts-choice span {
 		font-size: 12px;
 	}
-	
 	.content .contacts-choice li {
 		padding: 6px 13px;
 	}
