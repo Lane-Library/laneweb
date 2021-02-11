@@ -7,49 +7,75 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+        <release date="2021-02-11" version="3.7.0" description="responsive UI feature">
+            <action date="2021-01-21" dev="ryanmax" issue="LANEWEB-10666" type="fix">
+                permalinks rendering oddly on mobile devices
+            </action>
+            <action date="2021-01-21" dev="ryanmax" issue="LANEWEB-10664" type="fix">
+                logos on citation management page are too small on mobile device
+            </action>
+            <action date="2021-01-21" dev="ryanmax" issue="LANEWEB-10663" type="fix">
+                staff pictures pixelated on mobile devices
+            </action>
+            <action date="2021-01-21" dev="ryanmax" issue="LANEWEB-10661" type="fix">
+                Course Reserves: odd appearance of search bar in mobile devices
+            </action>
+            <action date="2021-01-21" dev="alainb" issue="LANEWEB-10658" type="fix">
+                Course Reserves: collapse menus
+            </action>
+            <action date="2021-01-21" dev="alainb" issue="LANEWEB-10657" type="fix">
+                Journals: collapse dark grey box, add Popular as header
+            </action>
+            <action date="2021-01-21" dev="alainb" issue="LANEWEB-10656" type="fix">
+                SHC Portal: collapse the dark grey box, add Top Resources header
+            </action>
+            <action date="2021-01-21" dev="alainb" issue="LANEWEB-10655" type="fix">
+                iPhone X is 812px in landscape mode
+            </action>
+          </release>
       	  <release date="2021-01-24" version="3.6.25" description="bug fix release">
-      	    <action date="2021-01-20" dev="ryanmax" issue="LANEWEB-10667" type="update"> 
+      	    <action date="2021-01-20" dev="ryanmax" issue="LANEWEB-10667" type="update">
                	large increase in CPU use and response times
             </action>
-          </release>	
+          </release>
           <release date="2021-01-15" version="3.6.24" description="bug fix release">
-      	    <action date="2021-01-14" dev="alainb" issue="LANEWEB-10654" type="fix"> 
+      	    <action date="2021-01-14" dev="alainb" issue="LANEWEB-10654" type="fix">
                	footer.html not displayed in libguide and libcal
             </action>
-            <action date="2021-01-13" dev="alainb" issue="LANEWEB-10653" type="fix"> 
+            <action date="2021-01-13" dev="alainb" issue="LANEWEB-10653" type="fix">
             	"sort by" dropdown lay over first page button pagination
             </action>
-            <action date="2021-01-12" dev="ryanmax" issue="LANEWEB-10652" type="update"> 
+            <action date="2021-01-12" dev="ryanmax" issue="LANEWEB-10652" type="update">
         		remove youtube to HTML RSS handling
             </action>
-            <action date="2020-11-15" dev="ryanmax" issue="LANEWEB-10511" type="update"> 
+            <action date="2020-11-15" dev="ryanmax" issue="LANEWEB-10511" type="update">
         		portal pages: default search option is not consistent
             </action>
-          </release>	
+          </release>
       	  <release date="2021-01-04" version="3.6.23" description="bug fix release">
-      	    <action date="2020-12-10" dev="ryanmax" issue="LANEWEB-10649" type="update"> 
+      	    <action date="2020-12-10" dev="ryanmax" issue="LANEWEB-10649" type="update">
                	improve keyword highlighting
             </action>
-            <action date="2020-12-11" dev="ryanmax" issue="LANEWEB-10648" type="fix"> 
+            <action date="2020-12-11" dev="ryanmax" issue="LANEWEB-10648" type="fix">
             	odd formatting on keyword highlighting in descriptions
             </action>
-            <action date="2020-11-17" dev="alainb" issue="LANEWEB-10646" type="update"> 
+            <action date="2020-11-17" dev="alainb" issue="LANEWEB-10646" type="update">
         		update Pure Grid CSS
             </action>
-          </release>	
+          </release>
       	  <release date="2020-11-16" version="3.6.22" description="bug fix release">
-            <action date="2020-11-13" dev="alainb" issue="LANEWEB-10645" type="update"> 
+            <action date="2020-11-13" dev="alainb" issue="LANEWEB-10645" type="update">
         		Small text updates to header and footer
             </action>
            </release>
       	   <release date="2020-11-09" version="3.6.21" description="bug fix release">
-            <action date="2020-11-03" dev="ryanmax" issue="LANEWEB-10635" type="update"> 
+            <action date="2020-11-03" dev="ryanmax" issue="LANEWEB-10635" type="update">
                reduce redundant PubMed links in article results
             </action>
-            <action date="2020-11-04" dev="ryanmax" issue="LANEWEB-10638" type="update"> 
+            <action date="2020-11-04" dev="ryanmax" issue="LANEWEB-10638" type="update">
                browzine "Direct to PDF" links are not tracked
             </action>
-            <action date="2020-11-07" dev="ryanmax" issue="LANEWEB-10641" type="update"> 
+            <action date="2020-11-07" dev="ryanmax" issue="LANEWEB-10641" type="update">
                add journal cover images to articles
             </action>
             <action date="2020-11-09" dev="alainb" issue="LANEWEB-10643" type="update">
@@ -57,35 +83,35 @@
       s      </action>
          </release>
           <release date="2020-11-02" version="3.6.20" description="bug fix release">
-            <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update"> 
+            <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update">
                Refactoring the config file to use lane-api-dev
             </action>
-            <action date="2020-10-28" dev="alainb" issue="LANEWEB-10636" type="update"> 
+            <action date="2020-10-28" dev="alainb" issue="LANEWEB-10636" type="update">
                Update spring to 5.3.0
             </action>
-            <action date="2020-10-25" dev="alainb" issue="LANEWEB-10634" type="update"> 
+            <action date="2020-10-25" dev="alainb" issue="LANEWEB-10634" type="update">
                Update saxon library from 9 to 10
             </action>
-            <action date="2020-10-27" dev="ryanmax" issue="LANEWEB-10632" type="update"> 
+            <action date="2020-10-27" dev="ryanmax" issue="LANEWEB-10632" type="update">
                Expand permalink functionality
             </action>
-            <action date="2020-10-14" dev="ryanmax" issue="LANEWEB-10623" type="update"> 
-               Use Browzine API for fulltext links   
+            <action date="2020-10-14" dev="ryanmax" issue="LANEWEB-10623" type="update">
+               Use Browzine API for fulltext links
             </action>
          </release>
          <release date="2020-10-26" version="3.6.19" description="bug fix release">
-            <action date="2020-10-23" dev="alainb" issue="LANEWEB-10633" type="update"> 
+            <action date="2020-10-23" dev="alainb" issue="LANEWEB-10633" type="update">
                "Obstetrics &amp; Gynecology” broke “Subject Guides” menu
             </action>
          </release>
          <release date="2020-10-19" version="3.6.18" description="bug fix release">
-            <action date="2020-10-15" dev="ryanmax" issue="LANEWEB-10621" type="update"> 
+            <action date="2020-10-15" dev="ryanmax" issue="LANEWEB-10621" type="update">
                Stanford IdP Change: login screen cannot be framed
             </action>
-            <action date="2020-10-16" dev="alainb" issue="LANEWEB-10630" type="update"> 
+            <action date="2020-10-16" dev="alainb" issue="LANEWEB-10630" type="update">
                Issues with LibGuides in Navigation Menu
             </action>
-            <action date="2020-10-14" dev="alainb" issue="LANECRM-57" type="update"> 
+            <action date="2020-10-14" dev="alainb" issue="LANECRM-57" type="update">
                improve CRM DR experience
             </action>
          </release>
@@ -102,12 +128,12 @@
             <action date="2020-10-09" dev="ryanmax" issue="LANEWEB-10626" type="update">
                remove image search survey
             </action>
-            <action date="2020-10-09" dev="alainb" issue="LANEWEB-10627" type="fix"> 
+            <action date="2020-10-09" dev="alainb" issue="LANEWEB-10627" type="fix">
                caching issue with libguides in the Subject Guides menu
             </action>
          </release>
           <release date="2020-10-05" version="3.6.16" description="bug fix release">
-            <action date="2020-10-05" dev="alainb" issue="LANEWEB-10622" type="update"> 
+            <action date="2020-10-05" dev="alainb" issue="LANEWEB-10622" type="update">
                LibGuides integration to Subject Guides Navigation Menu
             </action>
           </release>
@@ -230,7 +256,7 @@
                support browse by query instead of fixed field (type)
             </action>
             <action date="2020-04-23" dev="alainb" issue="LANEWEB-10550" type="update">
-	           verify and/or update list of Stanford affiliations for persistent login ext   
+	           verify and/or update list of Stanford affiliations for persistent login ext
             </action>
             <action date="2020-04-23" dev="alainb" issue="LANEWEB-10564" type="update">
                myaccounts functionality
@@ -317,7 +343,7 @@
             <action date="2020-02-31" dev="ryanmax" issue="LANEWEB-10537" type="fix">
                 Resource Type info icon overlapping when facet enabled
             </action>
-         </release>  
+         </release>
          <release date="2020-01-13" version="3.5.58" description="bug fix release">
             <action date="2020-01-07" dev="ryanmax" issue="LANEWEB-10523" type="fix">
                incorrect date facet labels at turn of calendar year
@@ -328,7 +354,7 @@
             <action date="2020-01-08" dev="alainb" issue="LANEWEB-10522" type="update">
                   http://lane.stanford.edu/classes/all-classes.xml too long to request
             </action>
-         </release>  
+         </release>
          <release date="2019-12-09" version="3.5.57" description="bug fix release">
             <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10516" type="fix">
                auto-populate illiad form based on PMID or DOI
@@ -336,7 +362,7 @@
             <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10517" type="fix">
                SSL warnings from laneblog images on front page
             </action>
-         </release>  
+         </release>
          <release date="2019-11-18" version="3.5.56" description="bug fix release">
             <action date="2019-11-14" dev="alainb" issue="LANEWEB-10510" type="update">
                Update edu.stanford.irt.laneweb.acquisition-api.url
@@ -344,7 +370,7 @@
             <action date="2019-11-18" dev="ryanmax" issue="LANEWEB-10513" type="update">
                improve ORCID searching in Lane Search
             </action>
-        </release> 
+        </release>
         <release date="2019-10-21" version="3.5.55" description="bug fix release">
             <action date="2019-10-18" dev="ryanmax" issue="155035" type="update">
                templates: append git hash to project.version for CSS and JS file links
@@ -352,7 +378,7 @@
             <action date="2019-10-18" dev="ryanmax" issue="155034" type="update">
                image search preview changes
             </action>
-        </release> 
+        </release>
         <release date="2019-10-7" version="3.5.54" description="bug fix release">
             <action date="2019-10-4" dev="ryanmax" issue="154868" type="fix">
                bookcovers not appearing on anesthesia sub-pages
@@ -360,12 +386,12 @@
             <action date="2019-10-3" dev="alainb" issue="154897" type="update">
                change laneblog image size
             </action>
-        </release> 
+        </release>
         <release date="2019-09-23" version="3.5.53" description="bug fix release">
             <action date="2019-09-16" dev="ryanmax" issue="154658" type="update">
               image search promotion: add survey question to images preview
             </action>
-        </release> 
+        </release>
         <release date="2019-09-09" version="3.5.52" description="bug fix release">
             <action date="2019-09-03" dev="alainb" issue="154549" type="fix">
               Button not aligned in Askus
@@ -398,7 +424,7 @@
         </release>
         <release date="2019-08-26" version="3.5.49" description="bug fix release">
              <action date="2019-08-19" dev="olgary" issue="154332" type="fix">
-                changed logo link on history site to go back to lane homepage 
+                changed logo link on history site to go back to lane homepage
              </action>
             <action date="2019-08-22" dev="alainb" issue="154331" type="update">
                   header and footer for the med history site
@@ -409,7 +435,7 @@
          </release>
          <release date="2019-08-19" version="3.5.48" description="bug fix release">
             <action date="2019-08-14" dev="alainb" issue="154263" type="update">
-               drop downs Aa-Zz on resources pages not working    
+               drop downs Aa-Zz on resources pages not working
             </action>
             <action date="2019-08-14" dev="alainb" issue="154320" type="update">
                 nav menu should not have cursor
@@ -419,10 +445,10 @@
             </action>
              <action date="2019-08-15" dev="olgary" issue="154285" type="update">
                 tooltips colors updated
-            </action>   
+            </action>
             <action date="2019-08-15" dev="olgary" issue="154286" type="update">
                 align GR and classes modules with popular resources on homepage
-            </action> 
+            </action>
         </release>
     	<release date="2019-08-11" version="3.5.47" description="redesign release">
     	  	<action date="2019-07-25" dev="ryanmax" issue="153707" type="fix">
@@ -432,22 +458,22 @@
                 update css and template for new header, footer, and body styles
             </action>
             <action date="2019-08-05" dev="ryanmax" issue="154032" type="update">
-                 css for search box and down arrows 
+                 css for search box and down arrows
             </action>
             <action date="2019-08-05" dev="alainb" issue="154117" type="update">
                 change js to stay on the screen
             </action>
             <action date="2019-08-07" dev="ryanmax" issue="154141" type="update">
-               switch to lane+ as default for peds 
+               switch to lane+ as default for peds
             </action>
             <action date="2019-08-07" dev="ryanmax" issue="153491" type="fix">
-               bookcover title formatting issue 
+               bookcover title formatting issue
             </action>
             <action date="2019-08-08" dev="alainb" issue="154159" type="update">
                header rendering issues on mobile device
             </action>
             <action date="2019-08-08" dev="ryanmax" issue="154162" type="fix">
-               broken markup in template near site brand 
+               broken markup in template near site brand
             </action>
             <action date="2019-08-09" dev="ryanmax" issue="154160" type="update">
                nav menu doesn't open on mobile devices
@@ -497,7 +523,7 @@
         </release>
         <release date="2019-06-02" version="3.5.40" description="3.5.40 bug fix release">
             <action date="2019-06-02" dev="olgary" issue="151124" type="fix">
-                broken link fix in history template   
+                broken link fix in history template
             </action>
         </release>
         <release date="2019-05-08" version="3.5.39" description="3.5.39 emergency release">
@@ -507,10 +533,10 @@
         </release>
         <release date="2019-05-06" version="3.5.38" description="3.5.38 bug fix release">
             <action date="2019-05-03" dev="ryanmax" issue="150966" type="remove">
-                remove FindIt search suggestions  
+                remove FindIt search suggestions
             </action>
             <action date="2019-04-30" dev="ryanmax" issue="150896" type="add">
-                make bookcovers compatible with SUL data 
+                make bookcovers compatible with SUL data
             </action>
         </release>
         <release date="2019-04-22" version="3.5.37" description="3.5.37 bug fix release">
@@ -518,12 +544,12 @@
                 install hotjar tracking tool
             </action>
             <action date="2019-04-16" dev="ryanmax" issue="150617" type="update">
-                remove crazyegg tracking scripts from templates 
+                remove crazyegg tracking scripts from templates
             </action>
         </release>
         <release date="2019-04-01" version="3.5.36" description="3.5.36 bug fix release">
             <action date="2019-03-27" dev="ryanmax" issue="150284" type="fix">
-                SHC machines prompted to authenticate 
+                SHC machines prompted to authenticate
             </action>
             <action date="2019-03-25" dev="olgary" issue="150263" type="update">
                 fixed another clinical trials link
@@ -531,7 +557,7 @@
         </release>
         <release date="2019-03-25" version="3.5.35" description="3.5.35 bug fix release">
             <action date="2019-03-19" dev="olgary" issue="150195" type="update">
-                add crazy egg js to templates 
+                add crazy egg js to templates
             </action>
         </release>
         <release date="2019-03-15" version="3.5.34" description="3.5.34 bug fix release">
@@ -985,7 +1011,7 @@
                 fixed the background color to match SoM - main-body.css
             </action>
             <action date="2017-11-15" dev="ceyates" issue="136672" type="update">
-                layout fixes 
+                layout fixes
             </action>
         </release>
         <release date="2017-11-13" version="3.3.53" description="3.3.53 bug fix release">
@@ -1143,10 +1169,10 @@
                 fb 135409
             </action>
             <action date="2017-08-08" dev="olgary" issue="135645" type="update">
-                templates to change the dropdowns to dropdown-filename.html 
+                templates to change the dropdowns to dropdown-filename.html
             </action>
             <action date="2017-08-07" dev="ceyates" issue="134458" type="add">
-                submenu for the left section nav 
+                submenu for the left section nav
             </action>
         </release>
         <release date="2017-08-07" version="3.3.40" description="3.3.40 bug fix release">
@@ -1162,7 +1188,7 @@
         </release>
         <release date="2017-07-31" version="3.3.39" description="3.3.39 bug fix release">
             <action date="2017-07-31" dev="ceyates" issue="135474" type="fix">
-                support for authors link on very bottom of home page is broken 
+                support for authors link on very bottom of home page is broken
             </action>
         </release>
         <release date="2017-07-31" version="3.3.38" description="3.3.38 bug fix release">
@@ -1263,7 +1289,7 @@
             <action date="2017-05-24" dev="ceyates" issue="131541" type="update">
                 use google calendar and api for library hours
             </action>
-        </release>   
+        </release>
         <release date="2017-05-29" version="3.3.32" description="3.3.32 bug fix release">
             <action date="2017-05-22" dev="olgary" issue="134138" type="add">
                 links in footer
@@ -1383,7 +1409,7 @@
         </release>
         <release date="2017-03-20" version="3.3.24" description="3.3.24 bug fix release">
             <action date="2017-03-15" dev="ceyates" issue="132667" type="update">
-                refactor time calculations to use java.time.Duration 
+                refactor time calculations to use java.time.Duration
             </action>
             <action date="2017-03-13" dev="ryanmax" issue="132608" type="fix">
                 clinical search: cost, prevention and clinical trials facets often produces the same results
@@ -1403,7 +1429,7 @@
                 template.xml, debug.xml - added Radiology portal
             </action>
             <action date="2017-03-07" dev="olgary" issue="132481" type="update">
-                liaison-card.xsl 
+                liaison-card.xsl
             </action>
             <action date="2017-03-06" dev="ceyates" issue="132438" type="remove">
                 remove unnecessary ldap data fetching
@@ -1443,7 +1469,7 @@
                 toolip collapsed view
             </action>
             <action date="2017-01-31" dev="ryanmax" issue="131562" type="remove">
-                remove software by room search facets 
+                remove software by room search facets
             </action>
             <action date="2017-01-30" dev="ryanmax" issue="131450" type="add">
                 indent Print and Digital types in facet list
@@ -1529,7 +1555,7 @@
                 incorrect color for selected facet in facet browse screen
             </action>
             <action date="2016-11-22" dev="ceyates" issue="129698" type="update">
-                change from container managed datasources to application managed 
+                change from container managed datasources to application managed
             </action>
             <action date="2016-11-22" dev="ceyates" issue="129596" type="add">
                 permit build environment to override project properties for integration tests
@@ -1647,7 +1673,7 @@
         </release>
         <release date="2016-10-17" version="3.3.6" description="3.3.6 bug fix release">
             <action date="2016-10-13" dev="ryanmax" issue="128000" type="update">
-                lane pages cannot be iframed in new plasma screen app 
+                lane pages cannot be iframed in new plasma screen app
             </action>
         </release>
         <release date="2016-10-10" version="3.3.5" description="3.3.5 bug fix release"/>
@@ -1696,7 +1722,7 @@
                 template.xml, debug.xml
             </action>
             <action date="2016-07-26" dev="ryanmax" issue="125259" type="fix">
-                overlapping X in search box 
+                overlapping X in search box
             </action>
         </release>
         <release date="2016-07-25" version="3.2.31" description="3.2.31 bug fix release">
@@ -1746,7 +1772,7 @@
         </release>
         <release date="2016-07-01" version="3.2.28" description="3.2.28 bug fix release">
             <action date="2016-06-28" dev="ceyates" issue="122542" type="update">
-                Exclude 2 categories from the course reserves 
+                Exclude 2 categories from the course reserves
             </action>
         </release>
         <release date="2016-06-20" version="3.2.27" description="3.2.27 bug fix release"/>
@@ -1935,16 +1961,16 @@
         </release>
         <release date="2016-03-14" version="3.2.12" description="3.2.12 bug fix release">
             <action date="2016-03-08" dev="ryanmax" issue="111997" type="update">
-                use new date field instead of year: change to 'last 12 months',  not last year... 
+                use new date field instead of year: change to 'last 12 months',  not last year...
             </action>
             <action date="2016-03-08" dev="ryanmax" issue="117279" type="update">
-                mobile search result pagination 
+                mobile search result pagination
             </action>
             <action date="2016-03-08" dev="ryanmax" issue="117280" type="update">
-                search on mobile Book and Journal pages not limited by format 
+                search on mobile Book and Journal pages not limited by format
             </action>
             <action date="2016-03-08" dev="ryanmax" issue="117291" type="update">
-                improve mobile search display 
+                improve mobile search display
             </action>
         </release>
         <release date="2016-03-07" version="3.2.11" description="3.2.11 bug fix release">
@@ -2047,19 +2073,19 @@
         </release>
         <release date="2015-11-30" version="3.2.0" description="3.2.0 solr release">
             <action date="2015-11-24" dev="ryanmax" issue="97975" type="fix">
-                IP maps are out of date (updates from SHC) 
+                IP maps are out of date (updates from SHC)
             </action>
             <action date="2015-11-24" dev="ryanmax" issue="113113" type="fix">
-                link "need help?" links to separate landing pages  
+                link "need help?" links to separate landing pages
             </action>
             <action date="2015-11-24" dev="ryanmax" issue="113126" type="update">
                 remove link to beta Solr in the header, remove animation "NEW"
             </action>
             <action date="2015-11-24" dev="ryanmax" issue="113127" type="fix">
-                improve doi searching 
+                improve doi searching
             </action>
             <action date="2015-11-10" dev="ryanmax" issue="112734" type="fix">
-                improve pubmed id searching 
+                improve pubmed id searching
             </action>
             <action date="2015-11-02" dev="ryanmax" issue="112523" type="fix">
                 browse pages missing "Also available: Print" links and "Print Material" labels
@@ -2105,10 +2131,10 @@
         </release>
         <release date="2015-11-23" version="3.1.15" description="3.1.15 bug fix release">
             <action date="2015-11-17" dev="ryanmax" issue="112758" type="fix">
-                deter non-Stanford sites from framing laneweb content  (Qualys Clickjacking - Framable Page) 
+                deter non-Stanford sites from framing laneweb content  (Qualys Clickjacking - Framable Page)
             </action>
             <action date="2015-11-17" dev="ryanmax" issue="112927" type="fix">
-                javascript error when no querymap response 
+                javascript error when no querymap response
             </action>
         </release>
         <release date="2015-11-16" version="3.1.14" description="3.1.14 bug fix release">
@@ -2124,7 +2150,7 @@
         </release>
         <release date="2015-11-09" version="3.1.13" description="3.1.13 bug fix release">
             <action date="2015-11-09" dev="ceyates" issue="112620" type="fix">
-                Not Found using-lib/docdeliver.html DocXpress 
+                Not Found using-lib/docdeliver.html DocXpress
             </action>
             <action date="2015-11-06" dev="ceyates" issue="112616" type="fix">
                 crawler site validation not working (google and yahoo)
@@ -2172,7 +2198,7 @@
                 sourceid parameter duplicated on browse pages
             </action>
             <action date="2015-10-15" dev="olgary" issue="111975" type="update">
-                update template and debug.xml 
+                update template and debug.xml
             </action>
             <action date="2015-10-16" dev="ceyates" issue="111946" type="update">
                 Feedback-suggestion: 'images.html' page only
@@ -2192,7 +2218,7 @@
                 multiple 830 fields cause multiple grand rounds listings
             </action>
             <action date="2015-10-09" dev="alainb" issue="111673" type="add">
-                Create a calendar filter by instructor 
+                Create a calendar filter by instructor
             </action>
             <action date="2015-10-06" dev="ceyates" issue="111666" type="fix">
                 trailing text in 830 ^d causes invalid grand rounds presentation
@@ -2287,7 +2313,7 @@
                 some youtube videos links not appearing
             </action>
             <action date="2015-08-20" dev="olgary" issue="110410" type="update">
-                Feedback-suggestion - Change the grey text in bioresearch search 
+                Feedback-suggestion - Change the grey text in bioresearch search
             </action>
             <action date="2015-08-21" dev="olgary" issue="109445" type="update">
                 updated redirect links - template.xml, debug.xml
@@ -2369,7 +2395,7 @@
                 remove images from history footer: footer-logos.png, logo-sprite-globalfooter.png
             </action>
             <action date="2015-07-08" dev="ceyates" issue="109221" type="update">
-                combine gift.png and gift-transp.png into one 
+                combine gift.png and gift-transp.png into one
             </action>
             <action date="2015-07-07" dev="ryanmax" issue="109211" type="update">
                 changes to IPGroup reporting: stop reporting STAFF, SOM_xxx
@@ -2407,7 +2433,7 @@
             </action>
              <action date="2015-06-22" dev="alainb" issue="108562" type="fix">
                  Fwd: missing next, last button on Bassett?
-            </action> 
+            </action>
             <action date="2015-06-18" dev="ceyates" issue="108492" type="fix">
                 xinclude of liaison-card/[sunetid].html may produce wrong liaison card
             </action>
