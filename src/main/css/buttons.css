@@ -1,9 +1,9 @@
 /*class button for mimicing SOM buttons.  See markup at:
 http://lane.stanford.edu/samples/button-css.html
  */
- 
 
- 
+
+
 .button {
     font-size: 16px;
     font-weight: 400;
@@ -14,6 +14,7 @@ http://lane.stanford.edu/samples/button-css.html
     background-color: #f1f1f1;
     display: inline-block;
 }
+
 
 .button:hover {
     border-color: #adadad;
@@ -59,3 +60,13 @@ http://lane.stanford.edu/samples/button-css.html
 .button.alt1 .icon {
     color: #8c1515;
 }
+
+.button.alt2 {
+    background-color: #8c1515;
+    width: 100%;
+    color: white;
+    padding:9px;
+    border: 1px solid #8c1515;
+    border-radius: 9px;
+}
+

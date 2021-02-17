@@ -1,32 +1,36 @@
+#contacts input, #contacts textarea, #contacts select{
+    border-radius: 9px;
+}
+
 .contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
 	.contacts-choice a:hover {
 	color: black;
 }
 
 .contacts-choice a .fa {
-	color: black;
+	color: #ccc;
 }
+
 
 .contacts-choice {
 	display: flex;
 	white-space: nowrap;
 }
 
-.contacts-choice li {
-	display: block;
+.contacts-choice li, .contacts-choice  li:last-child {
 	flex: 1 1 auto;
-	margin: 0;
-	padding: 6px;
-	border: none;
+	margin: 3px;
+	border: 1px solid #ccc;
+	border-radius: 9px;
 }
 
-.sfp-choice a:link {
-	padding: 18px 36%;
+.sfp-journal-button a, .sfp-other-button a ,  .sfp-book-button a{
+    text-align: center;
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
-.contacts-choice.sfp-choice span {
-	font-size: 16px;
-}
 
 #liaisons, #docxpress, #ejp, #sfp-book, #sfp-journal, #sfp-other {
 	display: none;
@@ -46,18 +50,13 @@
 	#laneaskus:target .laneaskus-button span, #docxpress:target .docxpress-button span,
 	#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
 	#docxpress:target .docxpress-button .fa, #ejp:target .ejp-button,
-	#sfp-book:target .sfp-book-button, #sfp-journal:target .sfp-journal-button,
-	#ejp:target .ejp-button span, #sfp-book:target .sfp-book-button span,
-	#sfp-journal:target .sfp-journal-button span, #ejp:target .ejp-button .fa,
-	#sfp-journal:target .sfp-journal-button .fa, #sfp-other:target .sfp-other-button,
-	#sfp-journal:target .sfp-button, #sfp-other:target .sfp-button,
-	#sfp-book:target .sfp-button, #sfp-journal:target .sfp-button span,
-	#sfp-other:target .sfp-button span, #sfp-book:target .sfp-button span,
-	#sfp-journal:target .sfp-button .fa, #sfp-other:target .sfp-button .fa,
-	#sfp-book:target .sfp-button .fa {
-	background-color: #006CB8;
-	color: white;
-	border-radius: 21px;
+	#ejp:target .ejp-button span, #ejp:target .ejp-button .fa,
+	#sfp-journal:target .sfp-journal-button, #sfp-journal:target .sfp-journal-button  span, #sfp-journal:target .sfp-button,#sfp-journal:target .sfp-button span,
+	#sfp-other:target .sfp-other-button, #sfp-other:target .sfp-other-button span, #sfp-other:target .sfp-button, #sfp-other:target .sfp-button span,
+	#sfp-book:target .sfp-book-button,  #sfp-book:target .sfp-book-button span , #sfp-book:target .sfp-button,  #sfp-book:target .sfp-button span {
+	background-color: #007C92;
+	color: white !important;
+	border: 1px solid #007C92;
 }
 
 @media ( max-width : 812px) {

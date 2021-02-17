@@ -53,6 +53,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/course-reserves.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/liaisons-directory.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/contacts.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
