@@ -77,6 +77,14 @@ public class EMailController {
         return getRedirectTo(map);
     }
 
+    @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
+    public String submitAskUs(final Model model,final RedirectAttributes atts) throws IllegalStateException, IOException {
+        Map<String, Object> map = model.asMap();
+        appendNameToSubject(map);
+        sendEmail(ASKUS_ADDRESS, map);
+        return getRedirectTo(map);
+    }
+
     @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
     public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
