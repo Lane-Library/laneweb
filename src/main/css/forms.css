@@ -37,6 +37,7 @@
     background: #ffffff;
     width: 100%;
     box-sizing: border-box;
+    border-radius: 9px;
 }
 
 #feedback select,#subscribe select {
@@ -75,11 +76,11 @@
 #feedbackMenu /*tabs on the left */ {
     text-align: left;
     margin-top: 40px;
-  
+
 }
 
 #feedbackMenu li {
-    padding: 10px 15px;    
+    padding: 10px 15px;
 }
 
 #purchaseItems select{
