@@ -31,7 +31,7 @@
 .feedbackText {
     padding: 9px;
     margin-bottom: .5em;
-    border: solid 2px #c9c9c9;
+    border: solid 1px #ccc;
     outline: 0;
     font: normal 13px/100% 'Source Sans Pro', sans-serif;
     background: #ffffff;
