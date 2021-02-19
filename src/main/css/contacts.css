@@ -57,13 +57,11 @@
 }
 
 @media ( max-width : 812px) {
-	.contacts-choice span {
-		font-size: 12px;
+	.content .contacts-choice {
+		display: block;
 	}
-	.content .contacts-choice li {
-		padding: 6px 13px;
-	}
-	ul.contacts-choice {
-		white-space: unset;
-	}
+	.content .contacts-choice li{
+        border-radius: 0px;
+        margin: 0px;
+    }
 }
