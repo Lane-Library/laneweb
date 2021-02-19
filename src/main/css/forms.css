@@ -49,6 +49,13 @@
     box-sizing: border-box;
 }
 
+/* Validation */
+.submitted .feedbackText:invalid{
+    background-color:  #8C15151A ;
+    border: 1px solid #8C15154D;
+}
+
+
 #subscribe input:hover,
 #subscribe textarea:hover,
 #subscribe input:focus,

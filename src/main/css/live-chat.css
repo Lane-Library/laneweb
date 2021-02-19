@@ -1,3 +1,7 @@
 .live-chat-inactive, li.live-chat-inactive {
     display: none;
 }
+
+.contacts-live-chat-inactive button.button{
+    background-color: grey;
+}

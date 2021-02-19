@@ -31,7 +31,7 @@
     <xsl:param name="proxy-links"/>
 
     <xsl:param name="userid"/>
-    
+
     <xsl:param name="email"/>
 
     <!-- a MeSH term -->
@@ -56,7 +56,7 @@
 
     <!-- this is the a= parameter for the online resources -->
     <xsl:param name="alpha"/>
-    
+
     <!-- json version of the data model -->
     <xsl:param name="model"/>
 
@@ -64,9 +64,9 @@
     <xsl:param name="return"/>
 
     <xsl:param name="facets"/>
-    
+
     <xsl:param name="sort"/>
-    
+
     <!-- ==========================  VARIABLES  ========================== -->
 
     <!-- the root node of the requested content document -->
@@ -81,14 +81,14 @@
             <xsl:value-of select="replace($query,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
-    
+
     <xsl:variable name="path-and-query">
         <xsl:choose>
             <xsl:when test="$query-string != ''">
             <xsl:value-of select="concat( $path, '?', $query-string)"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$path"/>        
+                <xsl:value-of select="$path"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -133,7 +133,7 @@
     <xsl:template match="/template:doc">
         <xsl:apply-templates select="h:html[2]"/>
     </xsl:template>
-    
+
     <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
     <xsl:template match="/h:html">
         <xsl:apply-templates select="child::node()"/>
@@ -195,7 +195,7 @@
             </xsl:comment>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="h:script[@id='model']/text()">
         <xsl:text>
             var model = </xsl:text>
@@ -203,7 +203,7 @@
         <xsl:text>;
         </xsl:text>
     </xsl:template>
-    
+
     <!-- match and copy the template body with the attributes from the content body -->
     <xsl:template match="h:body">
         <xsl:copy>
@@ -257,50 +257,50 @@
 
     <!-- don't copy data-path attribute referenced above -->
     <xsl:template match="h:li/@data-path"/>
-    
+
     <!-- add active to class to search form query present -->
     <xsl:template match="h:form[@class='search-form' and $query]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
-    
+
     <!-- add active to class to search form for /picosearch.html -->
     <xsl:template match="h:form[@class='search-form' and ($path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
-    
+
     <!-- add active to the pico-toggle link if $search-source=clinical|peds-all or path is or /picosearch.html -->
     <xsl:template match="h:span[@class='pico-toggle' and (matches($search-source,'(clinical|peds)-all') or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-toggle pico-toggle-active'"/>
     </xsl:template>
-    
+
     <!-- add active to the pico-on link if $search-source=clinical-all and no PICO values present -->
     <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o) and not($path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
-    
+
     <!-- add active to the pico-off link if PICO values present or path is /picosearch.html -->
     <xsl:template match="h:span[@class='pico-off' and ($p or $i or $c or $o or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-off pico-off-active'"/>
     </xsl:template>
-    
+
     <!-- add active to the pico-fields fieldset if $search-source=clinical|peds-all and PICO values present or path is /picosearch.html -->
     <xsl:template match="h:fieldset[@class='pico-fields' and (matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-fields pico-fields-active'"/>
     </xsl:template>
-    
+
     <!-- enable pico fields if one or more pico input values present or path is /picosearch.html-->
     <xsl:template match="h:input[(($p or $i or $c or $o) and (@name='p' or @name='i' or @name = 'c' or @name = 'o')) or $path='/picosearch.html']/@disabled"/>
-    
+
     <!-- make the .search-reset active if there is a query -->
     <xsl:template match="h:div[@class='search-reset' and $query]/@class">
         <xsl:attribute name="class" select="'search-reset search-reset-active'"/>
     </xsl:template>
-    
+
     <!-- add active to the appropriate search-tab -->
     <xsl:template match="h:div[@class='search-tab' and @data-source = $search-source]/@class">
         <xsl:attribute name="class" select="'search-tab search-tab-active'"/>
     </xsl:template>
-    
+
     <!-- add active to the clinical search-tab if search-source is peds-all-->
     <xsl:template match="h:div[@class='search-tab' and $search-source = 'peds-all' and @data-source = 'clinical-all']/@class">
         <xsl:attribute name="class" select="'search-tab search-tab-active'"/>
@@ -321,7 +321,7 @@
         <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $related-tab]/@data-help)"/>
     </xsl:template>
 
-    
+
     <!-- att class menuitem-active to the menu item link for the current page -->
     <xsl:template match="h:ul[contains(@class,'menu')]//h:li/h:a[@href=$path-and-query]">
       <a class="menuitem-active">
@@ -341,6 +341,24 @@
             <xsl:apply-templates select="attribute::node()[not(name() = 'class')] | child::node()"/>
         </xsl:copy>
     </xsl:template>
+
+
+      <!-- disable live chat if not scheduled to be available -->
+    <xsl:template match="h:a[@class = 'contacts-live-chat']">
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="$live-chat-available = 'false'">
+                    <xsl:attribute name="class">contacts-live-chat-inactive</xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                     <xsl:copy-of select="@*"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates />
+        </xsl:copy>
+    </xsl:template>
+
+
 
     <!-- add a div with class landing-content inside .module.landing so it can be given padding -->
     <xsl:template match="h:div[@class='module landing']">

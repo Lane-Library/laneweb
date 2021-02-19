@@ -524,6 +524,7 @@
                                 <include>message-min.js</include>
                                 <include>course-reserves-min.js</include>
                                 <include>permalink-toggle-min.js</include>
+                                <include>validation-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
