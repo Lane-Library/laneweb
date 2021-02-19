@@ -1,4 +1,12 @@
+#contacts fieldset:last-child{
+	margin-top: 12px;
+}
 
+#contacts ul.bulleted-list{
+	margin-top: 9px;
+	margin-bottom: 15px;
+
+}
 
 .contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
 	.contacts-choice a:hover {
@@ -12,6 +20,9 @@
 .contacts-choice {
 	display: flex;
 	white-space: nowrap;
+	text-align: center;
+	margin-top: 6px;
+	margin-bottom: 24px;
 }
 
 .contacts-choice li, .contacts-choice  li:last-child {
