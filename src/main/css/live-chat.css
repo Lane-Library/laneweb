@@ -4,4 +4,5 @@
 
 .contacts-live-chat-inactive button.button{
     background-color: grey;
+    cursor: default;
 }
