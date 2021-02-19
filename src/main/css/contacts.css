@@ -1,11 +1,10 @@
-#contacts fieldset:last-child{
+#contacts fieldset:last-child {
 	margin-top: 12px;
 }
 
-#contacts ul.bulleted-list{
+#contacts ul.bulleted-list {
 	margin-top: 9px;
 	margin-bottom: 15px;
-
 }
 
 .contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
@@ -32,13 +31,12 @@
 	border-radius: 9px;
 }
 
-.sfp-journal-button a, .sfp-other-button a ,  .sfp-book-button a{
-    text-align: center;
+.sfp-journal-button a, .sfp-other-button a, .sfp-book-button a {
+	text-align: center;
 	display: block;
 	width: 100%;
 	height: 100%;
 }
-
 
 #liaisons, #docxpress, #ejp, #sfp-book, #sfp-journal, #sfp-other {
 	display: none;
@@ -57,11 +55,14 @@
 	#docxpress:target .docxpress-button, #liaisons:target .liaisons-button span,
 	#laneaskus:target .laneaskus-button span, #docxpress:target .docxpress-button span,
 	#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
-	#docxpress:target .docxpress-button .fa, #ejp:target .ejp-button,
-	#ejp:target .ejp-button span, #ejp:target .ejp-button .fa,
-	#sfp-journal:target .sfp-journal-button, #sfp-journal:target .sfp-journal-button  span, #sfp-journal:target .sfp-button,#sfp-journal:target .sfp-button span,
-	#sfp-other:target .sfp-other-button, #sfp-other:target .sfp-other-button span, #sfp-other:target .sfp-button, #sfp-other:target .sfp-button span,
-	#sfp-book:target .sfp-book-button,  #sfp-book:target .sfp-book-button span , #sfp-book:target .sfp-button,  #sfp-book:target .sfp-button span {
+	#docxpress:target .docxpress-button .fa, #ejp:target .ejp-button, #ejp:target .ejp-button span,
+	#ejp:target .ejp-button .fa, #sfp-journal:target .sfp-journal-button,
+	#sfp-journal:target .sfp-journal-button  span, #sfp-journal:target .sfp-button,
+	#sfp-journal:target .sfp-button span, #sfp-other:target .sfp-other-button,
+	#sfp-other:target .sfp-other-button span, #sfp-other:target .sfp-button,
+	#sfp-other:target .sfp-button span, #sfp-book:target .sfp-book-button,
+	#sfp-book:target .sfp-book-button span, #sfp-book:target .sfp-button,
+	#sfp-book:target .sfp-button span {
 	background-color: #007C92;
 	color: white !important;
 	border: 1px solid #007C92;
@@ -71,8 +72,7 @@
 	.content .contacts-choice {
 		display: block;
 	}
-	.content .contacts-choice li{
-        border-radius: 0px;
-        margin: 0px;
-    }
+	.content .contacts-choice a {
+		display: block;
+	}
 }
