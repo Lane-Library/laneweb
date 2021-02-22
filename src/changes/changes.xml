@@ -7,7 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
-        <release date="2021-02-11" version="3.7.0" description="responsive UI feature">
+         <release date="2021-02-22" version="3.7.1" description="bug fix release">
+            <action date="2021-02-15" dev="alainb" issue="LANEWEB-10675" type="update">
+                laneblog featured image
+            </action>
+            <action date="2021-02-18" dev="alainb" issue="LANEWEB-10680" type="fix">
+                Error page form does not submit
+            </action>
+          </release>
+         <release date="2021-02-11" version="3.7.0" description="responsive UI feature">
             <action date="2021-01-21" dev="ryanmax" issue="LANEWEB-10666" type="fix">
                 permalinks rendering oddly on mobile devices
             </action>
