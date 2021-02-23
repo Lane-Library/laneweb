@@ -6,7 +6,6 @@
       <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}-${git.commit.id.abbrev}"/>
       <link rel="stylesheet" type="text/css" href="/resources/css/print-min.css?${project.version}-${git.commit.id.abbrev}" media="print"/>
       <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library" href="/extensions/laneconnex-engine.xml"/>
-      <script type="text/javascript" src="/resources/javascript/hotjar-min.js?${project.version}-${git.commit.id.abbrev}"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
    </head>
    <body>
