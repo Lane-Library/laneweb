@@ -38,7 +38,9 @@
 	height: 100%;
 }
 
-#liaisons, #docxpress, #ejp, #sfp-book, #sfp-journal, #sfp-other {
+
+#liaisons, #docxpress, #request-resource, #sfp-book, #sfp-journal,
+	#sfp-other {
 	display: none;
 }
 
@@ -46,7 +48,7 @@
 	display: none;
 }
 
-#liaisons:target, #docxpress:target, #ejp:target, #sfp-book:target,
+#liaisons:target, #docxpress:target, #request-resource:target, #sfp-book:target,
 	#sfp-journal:target, #sfp-other:target {
 	display: block;
 }
@@ -55,8 +57,9 @@
 	#docxpress:target .docxpress-button, #liaisons:target .liaisons-button span,
 	#laneaskus:target .laneaskus-button span, #docxpress:target .docxpress-button span,
 	#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
-	#docxpress:target .docxpress-button .fa, #ejp:target .ejp-button, #ejp:target .ejp-button span,
-	#ejp:target .ejp-button .fa, #sfp-journal:target .sfp-journal-button,
+	#docxpress:target .docxpress-button .fa, #request-resource:target .request-resource-button,
+	#request-resource:target .request-resource-button span,
+	#request-resource:target .request-resource-button .fa, #sfp-journal:target .sfp-journal-button,
 	#sfp-journal:target .sfp-journal-button  span, #sfp-journal:target .sfp-button,
 	#sfp-journal:target .sfp-button span, #sfp-other:target .sfp-other-button,
 	#sfp-other:target .sfp-other-button span, #sfp-other:target .sfp-button,
@@ -68,6 +71,36 @@
 	border: 1px solid #007C92;
 }
 
+/* Confirmation page */
+
+.contact-confirmation p{
+    font-size: 22px;
+    color: #707070;
+}
+
+.contact-confirmation div{
+    text-align: center;
+}
+.contact-confirmation div:first-of-type{
+    margin-top: 150px;
+}
+.contact-confirmation div:first-of-type i {
+	font-size: 15em;
+}
+.contact-confirmation div:nth-of-type(2){
+    margin-top:30px;
+    font-size: 55px
+}
+.contact-confirmation div:nth-of-type(3){
+    margin:30px 15% ;
+    font-size: 30px;
+    color: #707070;
+    line-height: 1.3em;
+}
+.contact-confirmation div:nth-of-type(4){
+	margin:  180px 0px 30px 0px;
+}
+
 @media ( max-width : 812px) {
 	.content .contacts-choice {
 		display: block;
@@ -76,3 +109,4 @@
 		display: block;
 	}
 }
+
