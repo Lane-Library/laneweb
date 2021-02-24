@@ -10,6 +10,8 @@
 .contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
 	.contacts-choice a:hover {
 	color: black;
+	display: block;
+    width: 100%;
 }
 
 .contacts-choice a .fa {
@@ -39,7 +41,7 @@
 }
 
 
-#liaisons, #docxpress, #request-resource, #sfp-book, #sfp-journal,
+#liaisons, #ejp, #request-resource, #sfp-book, #sfp-journal,
 	#sfp-other {
 	display: none;
 }
@@ -48,16 +50,16 @@
 	display: none;
 }
 
-#liaisons:target, #docxpress:target, #request-resource:target, #sfp-book:target,
+#liaisons:target, #ejp:target, #request-resource:target, #sfp-book:target,
 	#sfp-journal:target, #sfp-other:target {
 	display: block;
 }
 
 #liaisons:target .liaisons-button, #laneaskus:target .laneaskus-button,
-	#docxpress:target .docxpress-button, #liaisons:target .liaisons-button span,
-	#laneaskus:target .laneaskus-button span, #docxpress:target .docxpress-button span,
+	#ejp:target .ejp-button, #liaisons:target .liaisons-button span,
+	#laneaskus:target .laneaskus-button span, #ejp:target .ejp-button span,
 	#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
-	#docxpress:target .docxpress-button .fa, #request-resource:target .request-resource-button,
+	#ejp:target .ejp-button .fa, #request-resource:target .request-resource-button,
 	#request-resource:target .request-resource-button span,
 	#request-resource:target .request-resource-button .fa, #sfp-journal:target .sfp-journal-button,
 	#sfp-journal:target .sfp-journal-button  span, #sfp-journal:target .sfp-button,
