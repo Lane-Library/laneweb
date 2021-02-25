@@ -1,9 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,30 +9,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
 
 @Controller
 public class LaneCrmController {
 
-  private static final String ERROR_URL = "/error.html";
+  private static final String ERROR_PAGE = "/error.html";
+
+  private static final String NEXT_PAGE = "redirect:/contacts/sfp-confirmation.html";
 
   private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
-
-
   private static final String LANELIBACQ_PATH = "/apps/lanelibacqs";
 
-  private static final String[] VALID_EMAILS = { ".*@stanford.edu$", ".*@stanfordhealthcare.org$",
-      ".*@stanfordchildrens.org$" };
+  private static final String[] VALID_EMAILS = { ".*@stanford.edu$", ".*@stanfordhealthcare.org$",".*@stanfordchildrens.org$" };
 
   private static final String SUBJECT = "subject";
 
   private static final String SUBJECT_CONTENT = "SFP:ARRIVAL";
+
 
   private String sfpEmailAddress;
 
@@ -47,27 +47,17 @@ public class LaneCrmController {
   }
 
   @PostMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
-  public String sendEmail( final HttpServletRequest request) throws JsonProcessingException {
-    Map<String, String> data = this.getParameterMap(request);
-    if (!validateStanfordEmail(request)) {
-      return ERROR_URL;
+  public String sendEmail(final Model model) throws JsonProcessingException {
+    Map<String, Object> data = model.asMap();
+    if (!validateStanfordEmail(data)) {
+      return ERROR_PAGE;
     }
-    ObjectMapper om = new ObjectMapper();
-    Map<String, Object> emailContent = new HashMap<>();
-    emailContent.putAll(data);
-    emailContent.put("json", om.writeValueAsString(data));
-    emailContent.put("IP", request.getRemoteAddr());
-    emailContent.put(SUBJECT, SUBJECT_CONTENT);
-    emailContent.put("recipient", this.sfpEmailAddress);
-
-    System.out.println(emailContent);
-
-//    this.sender.sendEmail(emailContent);
-    return "redirect:/contacts/sfp-confirmation.html";
+    this.sender.sendEmail(data);
+    return NEXT_PAGE;
   }
 
-  private boolean validateStanfordEmail(final HttpServletRequest request) {
-    String email = (String) request.getParameter("requestedBy.email");
+  private boolean validateStanfordEmail(final  Map<String, Object> data) {
+    String email = (String) data.get("requestedBy.email");
     if (null == email || "".equals(email)) {
       return false;
     }
@@ -79,14 +69,22 @@ public class LaneCrmController {
     return false;
   }
 
-  private Map<String, String> getParameterMap(final HttpServletRequest request) {
-    Map<String, String> parameterMap = new HashMap<String, String>();
-    Enumeration<String> parameterNames = request.getParameterNames();
-    while (parameterNames.hasMoreElements()) {
-      String key = (String) parameterNames.nextElement();
-      parameterMap.put(key, request.getParameter(key));
+  @ModelAttribute
+  protected void getParameters(final HttpServletRequest request, final Model model) throws JsonProcessingException {
+    Map<String, String[]> map = request.getParameterMap();
+    for (Entry<String, String[]> entry : map.entrySet()) {
+      String[] value = entry.getValue();
+      if (value.length == 1) {
+        model.addAttribute(entry.getKey(), value[0]);
+      } else {
+        throw new LanewebException("multiple values for parameter " + entry.getKey());
+      }
     }
-    return parameterMap;
+    ObjectMapper om = new ObjectMapper();
+    model.addAttribute("json", om.writeValueAsString(model));
+    model.addAttribute("IP", request.getRemoteAddr());
+    model.addAttribute(SUBJECT, SUBJECT_CONTENT);
+    model.addAttribute("recipient", this.sfpEmailAddress);
   }
 
 }

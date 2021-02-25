@@ -35,15 +35,19 @@ public class EMailController {
 
   private static final String DOCXPRESS_PATH = "/docxpress";
 
+  private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
+
+  private static final String EJP_PATH = "/ejp";
+
   private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
   private static final String MULTIPART_MIME_TYPE = "multipart/form-data";
 
-  private static final String JSON_MIME_TYPE = "application/json";
-
   private static final String SUBJECT = "subject";
 
-  private static final Object ERROR_MESSAGE = "Attachment deleted for security raison, use your email client to see the attachment";
+  private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
+
+  private static final String UPLOAD_ERROR_URL = "redirect:/error_upload_file.html";
 
   public static final long MAX_UPLOAD_SIZE = 4194304;
 
@@ -66,15 +70,15 @@ public class EMailController {
     throws IllegalStateException, IOException {
     File attachment = validateFileMultipartFile(file);
     if (attachment == null && !file.isEmpty()) {
-      return "redirect:/error_upload_file.html";
+      return UPLOAD_ERROR_URL;
     }
     Map<String, Object> map = model.asMap();
     appendNameToSubject(map);
     sendEmail(ASKUS_ADDRESS, map, attachment);
-    return "/contacts/confirmation.html";
+    return CONFIRMATION_PAGE;
   }
 
-  // From the error 404 page
+  // Form from the error 404 page
   @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
   public String submitAskUs(final Model model, final RedirectAttributes atts) throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
@@ -83,17 +87,24 @@ public class EMailController {
     return getRedirectTo(map);
   }
 
-  @PostMapping(value = DOCXPRESS_PATH, consumes = MULTIPART_MIME_TYPE)
-  public String formSubmitDocxpress(final Model model, @RequestParam("attachment") MultipartFile file,
-      final RedirectAttributes atts)
+  // Form coming from docxpress.stanford.edu
+  @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
+  public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
+    Map<String, Object> map = model.asMap();
+    sendEmail(DOCXPRESS_ADDRESS, map);
+    return getRedirectTo(map);
+  }
+
+  @PostMapping(value = EJP_PATH, consumes = MULTIPART_MIME_TYPE)
+  public String formSubmitEJP(final Model model, @RequestParam("attachment") MultipartFile file, final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     File attachment = validateFileMultipartFile(file);
     if (attachment == null && !file.isEmpty()) {
-      return "redirect:/error_upload_file.html";
+      return UPLOAD_ERROR_URL;
     }
     Map<String, Object> map = model.asMap();
-    sendEmail(DOCXPRESS_ADDRESS, map);
-    return "/contacts/confirmation.html";
+    sendEmail(EJP_ADDRESS, map);
+    return CONFIRMATION_PAGE;
   }
 
   @ModelAttribute
@@ -131,17 +142,13 @@ public class EMailController {
 
   private void sendEmail(final String recipient, final Map<String, Object> data) {
     data.put("recipient", recipient);
-    System.out.println(data);
-//    this.sender.sendEmail(data);
+    this.sender.sendEmail(data);
   }
 
   private void sendEmail(final String recipient, final Map<String, Object> data, File file) {
     try {
       data.put("recipient", recipient);
-      System.out.println(data);
-
-
-//      this.sender.sendEmail(data, file);
+      this.sender.sendEmail(data, file);
     } catch (Exception e) {
       throw new LanewebException(e);
     } finally {
@@ -150,8 +157,6 @@ public class EMailController {
       }
     }
   }
-
-
 
   private File validateFileMultipartFile(MultipartFile attachment) throws IllegalStateException, IOException {
     File file = null;

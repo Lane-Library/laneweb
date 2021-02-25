@@ -32,6 +32,9 @@
 	border: 1px solid #ccc;
 	border-radius: 9px;
 }
+.contacts-info > div{
+	margin-top: 9px;
+}
 
 .sfp-journal-button a, .sfp-other-button a, .sfp-book-button a {
 	text-align: center;

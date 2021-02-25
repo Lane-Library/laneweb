@@ -52,7 +52,7 @@ img {
 		display: none;
 	}
 	.lane-header {
-		height: 186px;
+		height: 126px;
 	}
 	.lane-header div {
 		margin: 0;
@@ -61,10 +61,9 @@ img {
 		padding-top: 15px;
 	}
 	.library-contact {
-		display: block;
-		position:relative;
+		display: inline-flex;
 		left: 0;
-		top: 4px;
+		top: 108px;
 	}
 	.library-contact li {
 		margin-bottom: 12px;
@@ -72,9 +71,15 @@ img {
 	}
 	.library-contact li {
 	    margin-left: 10%;
-		width: 35%;
+		width: 40%;
 		min-width: 133px;
 	}
+	.library-contact li a {
+        padding: 5px 0px;
+	}
+	.library-contact li .fa{
+        color: white;
+    }
 	.pure-md-hide, span.bookmark-link {
 		display: none;
 	}
@@ -110,7 +115,7 @@ img {
 	#mobile-menu-header:target span:first-child a:nth-child(2) {
 		display: block;
 	}
-	
+
 	/* If 2 second  Menu (hamburger) is needed in the same page */
 	#mobile-menu-header1 ul, #mobile-menu-header1 div, #mobile-menu-header1 hr,
 		 #mobile-menu-header1 span a:nth-child(2) {
@@ -125,7 +130,7 @@ img {
 	}
 	#mobile-menu-header1:target span a:nth-child(2) {
 		display: block;
-	}	
+	}
 }
 
 
@@ -133,13 +138,13 @@ img {
 	 .library-contact li {
 	 	margin-left: 3%;
 		width: 45%;
-	} 
+	}
 	.brand a, .brand a:link{
 		font-size: 15px;
-		padding-top: 28px;		
+		padding-top: 28px;
 	}
 	.login > :nth-child(7) {
 		display: none;
 	}
-} 
+}
 
