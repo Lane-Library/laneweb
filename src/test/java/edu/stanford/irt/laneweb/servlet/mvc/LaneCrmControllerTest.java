@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
@@ -23,7 +21,6 @@ public class LaneCrmControllerTest {
   private LaneCrmController controller;
 
   private EMailSender emailSender;
-
 
   private Model model;
 
@@ -66,7 +63,7 @@ public class LaneCrmControllerTest {
 
   @Test
   public void testLpchValidEmail() throws IOException {
-    this.emailContent.put("requestedBy.email","test@stanfordchildrens.org");
+    this.emailContent.put("requestedBy.email", "test@stanfordchildrens.org");
     expect(this.model.asMap()).andReturn(this.emailContent);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender);
@@ -77,7 +74,7 @@ public class LaneCrmControllerTest {
 
   @Test
   public void testNotValidEmail() throws IOException {
-    this.emailContent.put("requestedBy.email","test@stanfordchildens.org");
+    this.emailContent.put("requestedBy.email", "test@stanfordchildens.org");
     expect(this.model.asMap()).andReturn(this.emailContent);
     replay(this.model);
     String nextPage = this.controller.sendEmail(this.model);
