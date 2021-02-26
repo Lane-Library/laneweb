@@ -113,9 +113,14 @@ public class EMailController {
   @ModelAttribute
   protected void getParameters(final HttpServletRequest request, final Model model) {
     Map<String, Object> modelMap = model.asMap();
+    Map<String, String[]> map = request.getParameterMap();
+    String question = request.getParameter("question");
+    if(question != null) {
+      modelMap.put("question", question.concat("\n\n"));
+      map.remove("question");
+    }
     this.remoteIPBinder.bind(modelMap, request);
     this.headerBinder.bind(modelMap, request);
-    Map<String, String[]> map = request.getParameterMap();
     for (Entry<String, String[]> entry : map.entrySet()) {
       String[] value = entry.getValue();
       if (value.length == 1) {
