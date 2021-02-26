@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.email.EMailSender;
 @Controller
 public class LaneCrmController {
 
-  private static final String ERROR_PAGE = "/error.html";
+  private static final String ERROR_PAGE = "redirect:/error.html";
 
   private static final String NEXT_PAGE = "redirect:/contacts/sfp-confirmation.html";
 

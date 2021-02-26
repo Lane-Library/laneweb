@@ -28,7 +28,7 @@ public class LaneCrmControllerTest {
 
   private static final String NEXT_PAGE = "redirect:/contacts/sfp-confirmation.html";
 
-  private static final String ERROR_URL = "/error.html";
+  private static final String ERROR_URL = "redirect:/error.html";
 
   @Before
   public void setUp() {
