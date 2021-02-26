@@ -91,7 +91,7 @@ public class EMailSender {
       LinkedHashMap<String, Object> sortedData = new LinkedHashMap<String, Object>();
       String question = (String) data.get("question");
       if(question != null) {
-        sortedData.put("question", question+"\n\n\n\n");
+        sortedData.put("question","\n"+ question+"\n\n\n\n");
         data.remove("question");
       }
       sortedData.putAll(data);
