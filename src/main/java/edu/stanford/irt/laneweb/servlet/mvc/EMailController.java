@@ -103,6 +103,9 @@ public class EMailController {
       return UPLOAD_ERROR_URL;
     }
     Map<String, Object> map = model.asMap();
+    StringBuilder subject = new StringBuilder((String) map.get(SUBJECT));
+    subject.append(" (").append(map.get("title")).append(')');
+    map.put(SUBJECT, subject.toString());
     sendEmail(EJP_ADDRESS, map);
     return CONFIRMATION_PAGE;
   }
