@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.email;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -48,8 +49,8 @@ public class EMailSender {
     public void sendEmail(final Map<String, Object> map) {
         sendEmail(map, null);
     }
-    
-    
+
+
     public void sendEmail(final Map<String, Object> map, File file) {
         final MimeMessage message = this.mailSender.createMimeMessage();
         MimeMessageHelper helper;
@@ -63,7 +64,8 @@ public class EMailSender {
             }
             helper.setFrom(from);
             StringBuilder text = new StringBuilder();
-            for (Entry<String, Object> entry : map.entrySet()) {
+            Map<String, Object> sortedData = this.sortData(map);
+            for (Entry<String, Object> entry : sortedData.entrySet()) {
                 String field = entry.getKey();
                 if (!this.excludedFields.contains(field)) {
                     text.append(field).append(": ").append(entry.getValue()).append("\n\n");
@@ -82,4 +84,18 @@ public class EMailSender {
             throw new LanewebException(map.toString(), e);
         }
     }
+
+
+    //To have the question appear on top of the email
+    private Map<String, Object> sortData( final Map<String, Object> data) {
+      LinkedHashMap<String, Object> sortedData = new LinkedHashMap<String, Object>();
+      String question = (String) data.get("question");
+      if(question != null) {
+        sortedData.put("question", question+"\n\n\n\n");
+        data.remove("question");
+      }
+      sortedData.putAll(data);
+      return sortedData;
+    }
+
 }
