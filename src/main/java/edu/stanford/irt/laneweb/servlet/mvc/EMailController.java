@@ -104,7 +104,7 @@ public class EMailController {
     }
     Map<String, Object> map = model.asMap();
     StringBuilder subject = new StringBuilder((String) map.get(SUBJECT));
-    subject.append(" (").append(map.get("title")).append(')');
+    subject.append(" ").append(map.get("title"));
     map.put(SUBJECT, subject.toString());
     sendEmail(EJP_ADDRESS, map);
     return CONFIRMATION_PAGE;
