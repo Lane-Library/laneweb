@@ -45,7 +45,7 @@ public class LaneCrmControllerTest {
     expect(this.model.asMap()).andReturn(this.emailContent);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender);
-    String nextPage = this.controller.sendEmail(this.model);
+    String nextPage = this.controller.sendEmail(this.model, null);
     assertSame(NEXT_PAGE, nextPage);
     verify(this.emailSender, this.model);
   }
@@ -56,7 +56,7 @@ public class LaneCrmControllerTest {
     expect(this.model.asMap()).andReturn(this.emailContent);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender);
-    String nextPage = this.controller.sendEmail(this.model);
+    String nextPage = this.controller.sendEmail(this.model, null);
     assertSame(NEXT_PAGE, nextPage);
     verify(this.emailSender, this.model);
   }
@@ -67,7 +67,7 @@ public class LaneCrmControllerTest {
     expect(this.model.asMap()).andReturn(this.emailContent);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender);
-    String nextPage = this.controller.sendEmail(this.model);
+    String nextPage = this.controller.sendEmail(this.model, null);
     assertSame(NEXT_PAGE, nextPage);
     verify(this.emailSender, this.model);
   }
@@ -77,7 +77,7 @@ public class LaneCrmControllerTest {
     this.emailContent.put("requestedBy.email", "test@stanfordchildens.org");
     expect(this.model.asMap()).andReturn(this.emailContent);
     replay(this.model);
-    String nextPage = this.controller.sendEmail(this.model);
+    String nextPage = this.controller.sendEmail(this.model, null);
     assertSame(ERROR_URL, nextPage);
     verify(this.model);
   }
