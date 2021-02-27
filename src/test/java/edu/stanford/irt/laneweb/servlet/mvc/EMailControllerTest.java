@@ -135,6 +135,7 @@ public class EMailControllerTest {
     @Test
     public void testGetParameters() {
         expect(this.model.asMap()).andReturn(this.map);
+        expect(this.request.getParameter("question")).andReturn("question");
         this.remoteIPBinder.bind(this.map, this.request);
         this.headerBinder.bind(this.map, this.request);
         expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("key", new String[] { "value" }));
@@ -147,6 +148,7 @@ public class EMailControllerTest {
     @Test(expected = LanewebException.class)
     public void testGetParametersMultipleValues() {
         expect(this.model.asMap()).andReturn(this.map);
+        expect(this.request.getParameter("question")).andReturn("question");
         this.remoteIPBinder.bind(this.map, this.request);
         this.headerBinder.bind(this.map, this.request);
         expect(this.request.getParameterMap())
