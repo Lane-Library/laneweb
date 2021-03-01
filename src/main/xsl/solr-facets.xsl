@@ -33,8 +33,8 @@
 		</a>
 		</span>
         <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
-      
-        
+
+
         Filter Results</h4>
         <xsl:if test="not($search-mode)">
             <a class="close fa fa-close"></a>
@@ -209,7 +209,7 @@
             <xsl:otherwise>
                 <h4>Can we help?</h4>
                 <a class="button" rel="lightbox disableBackground"
-                    href="{$base-path}/help/feedback.html#askus">
+                    href="{$base-path}/contacts/index.html#laneaskus">
                     <span><i class="icon fa fa-comments"/>Ask Us</span>
                 </a>
             </xsl:otherwise>
