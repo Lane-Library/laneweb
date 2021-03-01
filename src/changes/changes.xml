@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+       <release date="2021-03-01" version="3.7.2" description="bug fix release">
+            <action date="2021-02-15" dev="ryanmax" issue="LANEWEB-10681" type="update">
+                   Remove Hotjar Javascript
+            </action>
+            <action date="2021-02-18" dev="alainb" issue="LANEWEB-10678" type="update">
+                    Contact Us Page Redesign
+            </action>
+          </release>
          <release date="2021-02-22" version="3.7.1" description="bug fix release">
             <action date="2021-02-15" dev="alainb" issue="LANEWEB-10675" type="update">
                 laneblog featured image
