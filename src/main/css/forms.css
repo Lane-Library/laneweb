@@ -1,32 +1,14 @@
 
-/*--------------ALL forms within lightbox-----------------------------------------------------*/
-#feedback {
-    cursor: move;
-}
-
-#feedback form, #subscribe form, .contentForm {
+.contentForm {
     padding: 20px;
     text-align: left;
 }
 
-#feedback label, #subscribe label, .contentForm label {
+ .contentForm label {
     display: block;
     margin-top: .5em;
 }
 
-#subscribe input,
-#subscribe textarea,
-#subscribe select,
-#feedback input,
-#feedback textarea,
-#feedback select {
-    box-shadow: rgba(0, 0, 0, .1) 0 0 8px;
-}
-
-#feedback textarea {
-    height: 150px;
-    line-height: 150%;
-}
 
 .feedbackText {
     padding: 9px;
@@ -40,123 +22,14 @@
     border-radius: 9px;
 }
 
-#feedback select,#subscribe select {
-    border: 2px solid #c9c9c9;
-    width: 100%;
-    height: 37px;
-    padding: 6px;
-    margin-top: 28px;
-    box-sizing: border-box;
-}
-
 /* Validation */
 .submitted .feedbackText:invalid{
     background-color:  #8C15151A ;
     border: 1px solid #8C15154D;
 }
 
-
-#subscribe input:hover,
-#subscribe textarea:hover,
-#subscribe input:focus,
-#subscribe textarea:focus,
-#feedback input:hover,
-#feedback textarea:hover,
-#feedback input:focus,
-#feedback textarea:focus {
-    border-color: #9d9b94;
-}
-
 .submit-btn {
     text-align: center;
 }
 
-/*-------------------------feedback widget--------------------------------------------------------------------------*/
-#feedback .mainFeedback /*looks the same as h4*/ {
-    font-size: 1.8em;
-    letter-spacing: .05em;
-    line-height: 1.2em;
-    margin-bottom: .2em;
-    color: #820000;
-}
 
-#feedbackMenu /*tabs on the left */ {
-    text-align: left;
-    margin-top: 40px;
-
-}
-
-#feedbackMenu li {
-    padding: 10px 15px;
-}
-
-#purchaseItems select{
-	margin-top: 0px;
-}
-
-.yui3-lightbox #feedbackItems {
-    background-color: white;
-    border: 2px solid #fff;
-    box-shadow: rgba(152, 152, 152, 5) 0 0 6px;
-}
-
-.yui3-feedback-item,.yui3-purchase-item {
-    display: none;
-}
-
-.yui3-feedback-item-active,.yui3-purchase-item-active {
-    display: block;
-}
-
-.yui3-feedback-menu-active {
-    background-color: white;
-    box-sizing: border-box;
-    border: 2px solid #fff;
-    border-right: none;
-    box-shadow: rgba(152, 152, 152, 5) -4px 0 6px;
-}
-
-.feedback-item-thanks {
-    display: none;
-}
-
-/*--------------suggestion for purchase styles--------------------------------------------*/
-#purchaseMenu {
-    margin: 28px ;
-}
-
-#purchaseMenu li {
-    float: left;
-}
-
-#purchaseMenu a {
-    display: block;
-    border: 2px solid #c9c9c9;
-    padding: 4px 50px;
-    margin-right: 12px;
-}
-
-#purchaseMenu a:hover {
-    background: #f4f5ef;
-    border-color: #9d9b94;
-    color: #585347;
-}
-
-
-.requiredField,
-.validatedField {
-    padding: 5px;
-    font-size: 1.5em;
-}
-
-.requiredField {
-    color: #990000;
-}
-
-.validatedField {
-    color: green;
-}
-
-.breadcrumbForm {
-    margin-top: 12px;
-}

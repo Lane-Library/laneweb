@@ -66,14 +66,11 @@ img {
 		top: 108px;
 	}
 	.library-contact li {
-		margin-bottom: 12px;
-		text-align: center;
-	}
-	.library-contact li {
 	    margin-left: 10%;
 		width: 40%;
 		min-width: 133px;
-	}
+	    text-align: center;
+    }
 	.library-contact li a {
         padding: 5px 0px;
 	}

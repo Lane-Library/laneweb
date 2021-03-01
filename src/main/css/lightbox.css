@@ -24,22 +24,3 @@
     z-index: 3;
     top: 0;
 }
-
-/*---------------the lightbox overall look (the same box for all lightboxes)------------------*/
-.yui3-lightbox #feedback,
-.yui3-lightbox #subscribe {
-    border-radius: 3px;
-    background-color: white;
-    padding: 36px;
-    text-align: left;
-    border: 1px solid #9e9d98;
-    box-sizing: border-box;
-}
-
-.yui3-lightbox #subscribe {
-    width: 540px;
-}
-
-.yui3-lightbox #feedback {
-   width: 875px;
-}
