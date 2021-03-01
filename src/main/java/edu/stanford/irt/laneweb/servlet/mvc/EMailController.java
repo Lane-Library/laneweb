@@ -47,7 +47,9 @@ public class EMailController {
 
   private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
 
-  private static final String UPLOAD_ERROR_URL = "redirect:/error_upload_file.html";
+  private static final String ERROR_PAGE = "redirect:/error.html";
+
+  private static final String UPLOAD_ERROR_PAGE = "redirect:/error_upload_file.html";
 
   public static final long MAX_UPLOAD_SIZE = 4194304;
 
@@ -68,11 +70,14 @@ public class EMailController {
   public String formSubmitAskUs(final Model model, @RequestParam("attachment") MultipartFile file,
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
+    Map<String, Object> map = model.asMap();
+    if(!validateForm(map)) {
+      return ERROR_PAGE;
+    }
     File attachment = validateFileMultipartFile(file);
     if (attachment == null && !file.isEmpty()) {
-      return UPLOAD_ERROR_URL;
+      return UPLOAD_ERROR_PAGE;
     }
-    Map<String, Object> map = model.asMap();
     appendNameToSubject(map);
     sendEmail(ASKUS_ADDRESS, map, attachment);
     return CONFIRMATION_PAGE;
@@ -98,11 +103,14 @@ public class EMailController {
   @PostMapping(value = EJP_PATH, consumes = MULTIPART_MIME_TYPE)
   public String formSubmitEJP(final Model model, @RequestParam("attachment") MultipartFile file, final RedirectAttributes atts)
     throws IllegalStateException, IOException {
+    Map<String, Object> map = model.asMap();
+    if(!validateForm(map)) {
+      return ERROR_PAGE;
+    }
     File attachment = validateFileMultipartFile(file);
     if (attachment == null && !file.isEmpty()) {
-      return UPLOAD_ERROR_URL;
+      return UPLOAD_ERROR_PAGE;
     }
-    Map<String, Object> map = model.asMap();
     StringBuilder subject = new StringBuilder((String) map.get(SUBJECT));
     subject.append(" ").append(map.get("title"));
     map.put(SUBJECT, subject.toString());
@@ -135,6 +143,12 @@ public class EMailController {
     StringBuilder subject = new StringBuilder((String) feedback.get(SUBJECT));
     subject.append(" (").append(feedback.get("name")).append(')');
     feedback.put(SUBJECT, subject.toString());
+  }
+
+  private boolean validateForm(final Map<String, Object> feedback) {
+    return !( feedback.get("email") == null || feedback.get("email").toString().isEmpty()
+          || feedback.get("name") == null || feedback.get("name").toString().isEmpty()
+        );
   }
 
   private String getRedirectTo(final Map<String, Object> map) {
