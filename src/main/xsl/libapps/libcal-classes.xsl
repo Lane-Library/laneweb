@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"  xmlns="http://www.w3.org/1999/xhtml" version="2.0">
-  
+
 
    <xsl:template match="/classes">
       <html>
@@ -39,18 +39,18 @@
          </div>
       </div>
    </xsl:template>
-   
+
     <xsl:template match="title">
       <h4>
          <a>
             <xsl:attribute name="href">
-                 <xsl:value-of select="../url/public"/>                         
+                 <xsl:value-of select="../url/public"/>
           </xsl:attribute>
             <xsl:value-of select="."/>
          </a>
       </h4>
    </xsl:template>
-   
+
     <xsl:template match="start">
       <div class="month-day">
          <xsl:value-of select="month"/>
@@ -72,11 +72,13 @@
       </div>
    </xsl:template>
    <xsl:template match="location">
+      <xsl:if test=". != ''">
       <div class="location">
          <xsl:value-of select="."/>
          <xsl:text>&#160;&#160;&#160;</xsl:text>
          <i class="fa fa-map-marker fa-2x"></i>
       </div>
+      </xsl:if>
    </xsl:template>
    <xsl:template match="presenter">
       <div class="instructor">
@@ -93,7 +95,7 @@
          <div>
             <a class="button alt1">
                <xsl:attribute name="href">
-               <xsl:apply-templates select="../url/public"/>                               
+               <xsl:apply-templates select="../url/public"/>
             </xsl:attribute>
                <span>Register</span>
                <i class="icon fa fa-arrow-right"/>
@@ -106,6 +108,6 @@
       </div>
    </xsl:template>
 
-   
-   
+
+
 </xsl:stylesheet>
