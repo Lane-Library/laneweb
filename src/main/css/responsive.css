@@ -62,18 +62,18 @@ img {
 	}
 	.library-contact {
 		display: inline-flex;
+		width: 100%;
 		left: 0;
 		top: 108px;
 	}
 	.library-contact li {
-	    margin-left: 10%;
-		width: 40%;
-		min-width: 145px;
+	    margin-left: 8%;
+		width: 38%;
 	    text-align: center;
     }
 	.library-contact li a {
         padding: 5px 0px;
-	}
+  	}
 	.library-contact li .fa{
         color: white;
     }
