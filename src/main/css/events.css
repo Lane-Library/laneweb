@@ -42,4 +42,5 @@
 
 .time {
 	font-weight: bold;
+	white-space: nowrap;
 }
