@@ -853,7 +853,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .login > :nth-child(1) {
-    background-color: rgb(13,105,128);
+    background-color: #007c92;
 }
 
 .login > :nth-child(3) {
