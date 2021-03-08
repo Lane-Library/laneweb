@@ -16,17 +16,14 @@
 	 
 	.liaisons-directory td:first-child{
 		border-left:none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 38%; 
 	}
 	
 	.liaisons-directory td:last-child{
 		border-right:none;
 	} 
-	
-	.liaisons-directory td { 
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 38%; 
-	}
 	
 	.liaisons-directory td:before { 
 		position: absolute;
