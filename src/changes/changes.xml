@@ -7,7 +7,15 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
-       <release date="2021-03-01" version="3.7.2" description="bug fix release">
+         <release date="2021-03-08" version="3.7.3" description="bug fix release">
+            <action date="2021-03-02" dev="alainb" issue="LANEWEB-10683" type="update">
+                   hide location icon in the classes
+            </action>
+            <action date="2021-03-04" dev="ryanmax" issue="LANEWEB-10682" type="update">
+                   Contact Us and Login buttons are different shades of blue
+            </action>
+          </release>
+         <release date="2021-03-01" version="3.7.2" description="bug fix release">
             <action date="2021-02-22" dev="ryanmax" issue="LANEWEB-10681" type="update">
                    Remove Hotjar Javascript
             </action>
