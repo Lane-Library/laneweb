@@ -63,7 +63,7 @@ public class SolrService {
 
     private static final Pattern SINGLE_SPACE_PATTERN = Pattern.compile(" ");
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYYMMdd");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
     private SolrQueryParser parser;
 
