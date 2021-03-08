@@ -11,7 +11,7 @@
     right: 43%;
     top: 41%;
     color: white;
-    background-color: rgb(56, 56, 56);
+    background-color: #383838;
     border-radius: 9px;
     width: 42px;
     line-height: 30px;
@@ -19,5 +19,5 @@
 }
 
 .youtube-thumbnail:hover .fa {
-    background-color: rgb(195, 22, 35);
+    background-color: #c31623;
 }

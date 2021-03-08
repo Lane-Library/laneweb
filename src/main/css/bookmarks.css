@@ -38,7 +38,7 @@
 }
 
 .bookmark-link.active .fa, .bookmark-link.bookmarking .fa {
-	color: rgb(180, 13, 26);
+	color: #b40d1a;
 }
 
 .yui3-bookmark-editor {

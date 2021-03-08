@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    background-color: rgb(236, 241, 242);
+    background-color: #ecf1f2;
     font-family: 'Source Sans Pro', sans-serif;
     /* override lane-reset.css for font-size and line-height */
     font-size: initial;
@@ -127,8 +127,8 @@ h1 i {
     font-weight: 400;
     line-height: 16.9px;
     padding: 2px 0 2px 2px;
-    color: rgb(238, 238, 238);
-    text-shadow: rgb(51, 51, 51) 1px 1px 2px;
+    color: #eee;
+    text-shadow: #333 1px 1px 2px;
 }
 .nav-item li a:hover {
     color: white;
@@ -161,13 +161,13 @@ h1 i {
 #gift {
     display: block;
     padding: 10px 10px 18px 68px;
-    background-color: rgb(255, 255, 255);
+    background-color: #fff;
     background-image: url('../../images/gift-transp.png');
     background-position: 9px 7px;
     background-repeat: no-repeat;
     line-height: 18px;
-    border: 1px rgb(203, 192, 193) solid;
-    box-shadow: 0 0 2px rgb(203, 192, 193);
+    border: 1px #cbc0c1 solid;
+    box-shadow: 0 0 2px #cbc0c1;
     font-size: 12px;
 }
 
@@ -726,7 +726,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 /* copyright footer */
 .footer-copyright {
-    background-color: rgb(51, 51, 51);
+    background-color: #333;
     color: white;
     padding: 30px 0;
     box-sizing: border-box;
@@ -758,7 +758,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 /*global footer*/
 .footer-global {
-    background-color: rgb(51, 51, 51);
+    background-color: #333;
     box-sizing: border-box;
 }
 
@@ -857,21 +857,21 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .login > :nth-child(3) {
-    background-color: rgb(166,90,31);
+    background-color: #a65a1f;
 }
 
 .login > :nth-child(4) {
-    background-color: rgb(135, 135, 135);
+    background-color: #878787;
 }
 
 .login > :nth-child(5),
 .login > :nth-child(6) {
-    background-color: rgb(83,83,83);
+    background-color: #535353;
 }
 
 .login > :nth-child(5) a,
 .login > :nth-child(6) a {
-    color: rgb(193,193,193);
+    color: #c1c1c1;
 }
 
 .login > :nth-child(7) {
@@ -882,7 +882,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 .login > :nth-child(7) .fa,
 .login > :nth-child(8) a {
-    color: rgb(135, 135, 135);
+    color: #878787;
 }
 
 .login > :nth-child(8) {

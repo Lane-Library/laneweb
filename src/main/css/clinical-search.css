@@ -11,7 +11,7 @@
 }
 
 .clinical-toggle {
-    background-color: rgb(221,222,223);
+    background-color: #dddedf;
     border-radius: 24px;
     font-size: 14px;
     line-height: 26px;
@@ -25,7 +25,7 @@
 }
 
 .clinical-toggle-label {
-    color: rgb(126, 127, 128);
+    color: #7e7f80;
 }
 
 .clinical-toggle-label-active {
@@ -55,11 +55,11 @@
 .clinical-facet {
     padding: 3px;
     display: block;
-    border-bottom: 1px rgb(231,231,224) solid;
+    border-bottom: 1px #e7e7e0 solid;
 }
 
 .clinical-facet .fa-circle-o {
-    color: rgb(225,225,225);
+    color: #e1e1e1;
 }
 
 .clinical-facet .fa-circle-o::after {

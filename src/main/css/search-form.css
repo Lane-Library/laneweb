@@ -171,7 +171,7 @@
 .search-tab:hover {
     background-color: #f0f4f5;
     color: #8c1515;
-    border-top-color: rgb(191,209,209);
+    border-top-color: #bfd1d1;
     box-shadow: inset 0 5px 5px -5px #000;
 }
 

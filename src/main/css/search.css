@@ -110,7 +110,7 @@ li.active .description {
 .rightSearchTips .heading {
 	font-weight: bold;
 	padding: 10px 0 5px;
-	border-bottom: solid 1px rgb(144, 144, 144);
+	border-bottom: solid 1px #909090;
 	margin-bottom: 4px;
 }
 
