@@ -46,6 +46,8 @@ public class EMailController {
   private static final String SUBJECT = "subject";
 
   private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
+  
+  private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/confirmation-ejp.html";
 
   private static final String ERROR_PAGE = "redirect:/error.html";
 
@@ -115,7 +117,7 @@ public class EMailController {
     subject.append(" ").append(map.get("title"));
     map.put(SUBJECT, subject.toString());
     sendEmail(EJP_ADDRESS, map);
-    return CONFIRMATION_PAGE;
+    return CONFIRMATION_PAGE_EJP;
   }
 
   @ModelAttribute
