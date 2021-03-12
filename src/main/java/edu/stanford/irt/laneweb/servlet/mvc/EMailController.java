@@ -51,8 +51,10 @@ public class EMailController {
 
     private static final String MULTIPART_MIME_TYPE = "multipart/form-data";
 
-    private static final String SUBJECT = "subject";
+    private static final String QUESTION = "question";
 
+    private static final String SUBJECT = "subject";
+    
     private static final String UPLOAD_ERROR_PAGE = "redirect:/error_upload_file.html";
 
     private RequestHeaderDataBinder headerBinder;
@@ -191,10 +193,10 @@ public class EMailController {
     protected void getParameters(final HttpServletRequest request, final Model model) {
         Map<String, Object> modelMap = model.asMap();
         Map<String, String[]> map = request.getParameterMap();
-        String question = request.getParameter("question");
+        String question = request.getParameter(QUESTION);
         if (question != null) {
-            modelMap.put("question", question.concat("\n\n"));
-            map.remove("question");
+            modelMap.put(QUESTION, question.concat("\n\n"));
+            map.remove(QUESTION);
         }
         this.remoteIPBinder.bind(modelMap, request);
         this.headerBinder.bind(modelMap, request);
