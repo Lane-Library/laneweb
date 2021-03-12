@@ -27,185 +27,184 @@ import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 @RequestMapping(value = "/apps/mail")
 public class EMailController {
 
-  private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
+    public static final long MAX_UPLOAD_SIZE = 4194304;
 
-  private static final String ASKUS_PATH = "/askus";
+    private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
 
-  private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
+    private static final String ASKUS_PATH = "/askus";
 
-  private static final String DOCXPRESS_PATH = "/docxpress";
+    private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
 
-  private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
+    private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/confirmation-ejp.html";
 
-  private static final String EJP_PATH = "/ejp";
+    private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
 
-  private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
+    private static final String DOCXPRESS_PATH = "/docxpress";
 
-  private static final String MULTIPART_MIME_TYPE = "multipart/form-data";
+    private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
 
-  private static final String SUBJECT = "subject";
+    private static final String EJP_PATH = "/ejp";
 
-  private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
-  
-  private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/confirmation-ejp.html";
+    private static final String ERROR_PAGE = "redirect:/error.html";
 
-  private static final String ERROR_PAGE = "redirect:/error.html";
+    private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
-  private static final String UPLOAD_ERROR_PAGE = "redirect:/error_upload_file.html";
+    private static final String MULTIPART_MIME_TYPE = "multipart/form-data";
 
-  public static final long MAX_UPLOAD_SIZE = 4194304;
+    private static final String SUBJECT = "subject";
 
-  private RequestHeaderDataBinder headerBinder;
+    private static final String UPLOAD_ERROR_PAGE = "redirect:/error_upload_file.html";
 
-  private RemoteProxyIPDataBinder remoteIPBinder;
+    private RequestHeaderDataBinder headerBinder;
 
-  private EMailSender sender;
+    private RemoteProxyIPDataBinder remoteIPBinder;
 
-  public EMailController(final RequestHeaderDataBinder headerBinder, final RemoteProxyIPDataBinder remoteIPBinder,
-      final EMailSender sender) {
-    this.headerBinder = headerBinder;
-    this.remoteIPBinder = remoteIPBinder;
-    this.sender = sender;
-  }
+    private EMailSender sender;
 
-  @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE)
-  public String formSubmitAskUs(final Model model, @RequestParam("attachment") MultipartFile file,
-      final RedirectAttributes atts)
-    throws IllegalStateException, IOException {
-    Map<String, Object> map = model.asMap();
-    if(!validateForm(map)) {
-      return ERROR_PAGE;
+    public EMailController(final RequestHeaderDataBinder headerBinder, final RemoteProxyIPDataBinder remoteIPBinder,
+            final EMailSender sender) {
+        this.headerBinder = headerBinder;
+        this.remoteIPBinder = remoteIPBinder;
+        this.sender = sender;
     }
-    File attachment = validateFileMultipartFile(file);
-    if (attachment == null && !file.isEmpty()) {
-      return UPLOAD_ERROR_PAGE;
-    }
-    appendNameToSubject(map);
-    sendEmail(ASKUS_ADDRESS, map, attachment);
-    return CONFIRMATION_PAGE;
-  }
 
-  // Form from the error 404 page
-  @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
-  public String submitAskUs(final Model model, final RedirectAttributes atts) throws IllegalStateException, IOException {
-    Map<String, Object> map = model.asMap();
-    appendNameToSubject(map);
-    sendEmail(ASKUS_ADDRESS, map);
-    return getRedirectTo(map);
-  }
-
-  // Form coming from docxpress.stanford.edu
-  @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
-  public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
-    Map<String, Object> map = model.asMap();
-    sendEmail(DOCXPRESS_ADDRESS, map);
-    return getRedirectTo(map);
-  }
-
-  @PostMapping(value = EJP_PATH, consumes = MULTIPART_MIME_TYPE)
-  public String formSubmitEJP(final Model model, @RequestParam("attachment") MultipartFile file, final RedirectAttributes atts)
-    throws IllegalStateException, IOException {
-    Map<String, Object> map = model.asMap();
-    if(!validateForm(map)) {
-      return ERROR_PAGE;
-    }
-    File attachment = validateFileMultipartFile(file);
-    if (attachment == null && !file.isEmpty()) {
-      return UPLOAD_ERROR_PAGE;
-    }
-    StringBuilder subject = new StringBuilder((String) map.get(SUBJECT));
-    subject.append(" ").append(map.get("title"));
-    map.put(SUBJECT, subject.toString());
-    sendEmail(EJP_ADDRESS, map);
-    return CONFIRMATION_PAGE_EJP;
-  }
-
-  @ModelAttribute
-  protected void getParameters(final HttpServletRequest request, final Model model) {
-    Map<String, Object> modelMap = model.asMap();
-    Map<String, String[]> map = request.getParameterMap();
-    String question = request.getParameter("question");
-    if(question != null) {
-      modelMap.put("question", question.concat("\n\n"));
-      map.remove("question");
-    }
-    this.remoteIPBinder.bind(modelMap, request);
-    this.headerBinder.bind(modelMap, request);
-    for (Entry<String, String[]> entry : map.entrySet()) {
-      String[] value = entry.getValue();
-      if (value.length == 1) {
-        model.addAttribute(entry.getKey(), value[0]);
-      } else {
-        throw new LanewebException("multiple values for parameter " + entry.getKey());
-      }
-    }
-  }
-
-  private void appendNameToSubject(final Map<String, Object> feedback) {
-    StringBuilder subject = new StringBuilder((String) feedback.get(SUBJECT));
-    subject.append(" (").append(feedback.get("name")).append(')');
-    feedback.put(SUBJECT, subject.toString());
-  }
-
-  private boolean validateForm(final Map<String, Object> feedback) {
-    return !( feedback.get("email") == null || feedback.get("email").toString().isEmpty()
-          || feedback.get("name") == null || feedback.get("name").toString().isEmpty()
-        );
-  }
-
-  private String getRedirectTo(final Map<String, Object> map) {
-    String redirectTo = (String) map.get("redirect");
-    if (redirectTo == null) {
-      redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
-    }
-    if (redirectTo == null) {
-      redirectTo = "/index.html";
-    }
-    return "redirect:" + redirectTo;
-  }
-
-  private void sendEmail(final String recipient, final Map<String, Object> data) {
-    data.put("recipient", recipient);
-    this.sender.sendEmail(data);
-  }
-
-  private void sendEmail(final String recipient, final Map<String, Object> data, File file) {
-    try {
-      data.put("recipient", recipient);
-      this.sender.sendEmail(data, file);
-    } catch (Exception e) {
-      throw new LanewebException(e);
-    } finally {
-      if (null != file) {
-        file.delete();
-      }
-    }
-  }
-
-  private File validateFileMultipartFile(MultipartFile attachment) throws IllegalStateException, IOException {
-    File file = null;
-    FileOutputStream fos = null;
-    if (attachment != null && !attachment.isEmpty()) {
-      try {
-        String contentType = attachment.getContentType();
-        if (!contentType.startsWith("image/")) {
-          return null;
+    @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE)
+    public String formSubmitAskUs(final Model model, @RequestParam("attachment") final MultipartFile file,
+            final RedirectAttributes atts) throws IllegalStateException, IOException {
+        Map<String, Object> map = model.asMap();
+        if (!validateForm(map)) {
+            return ERROR_PAGE;
         }
-        file = new File(attachment.getOriginalFilename());
-        fos = new FileOutputStream(file);
-        fos.write(attachment.getBytes());
-        if (file.length() > MAX_UPLOAD_SIZE) {
-          file.delete();
-          return null;
+        File attachment = validateFileMultipartFile(file);
+        if (attachment == null && !file.isEmpty()) {
+            return UPLOAD_ERROR_PAGE;
         }
-      } catch (IOException e) {
-        throw new LanewebException(e);
-      } finally {
-        if (null != fos) {
-          fos.close();
-        }
-      }
+        appendNameToSubject(map);
+        sendEmail(ASKUS_ADDRESS, map, attachment);
+        return CONFIRMATION_PAGE;
     }
-    return file;
-  }
+
+    // Form coming from docxpress.stanford.edu
+    @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
+    public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
+        Map<String, Object> map = model.asMap();
+        sendEmail(DOCXPRESS_ADDRESS, map);
+        return getRedirectTo(map);
+    }
+
+    @PostMapping(value = EJP_PATH, consumes = MULTIPART_MIME_TYPE)
+    public String formSubmitEJP(final Model model, @RequestParam("attachment") final MultipartFile file,
+            final RedirectAttributes atts) throws IllegalStateException, IOException {
+        Map<String, Object> map = model.asMap();
+        if (!validateForm(map)) {
+            return ERROR_PAGE;
+        }
+        File attachment = validateFileMultipartFile(file);
+        if (attachment == null && !file.isEmpty()) {
+            return UPLOAD_ERROR_PAGE;
+        }
+        StringBuilder subject = new StringBuilder((String) map.get(SUBJECT));
+        subject.append(" ").append(map.get("title"));
+        map.put(SUBJECT, subject.toString());
+        sendEmail(EJP_ADDRESS, map);
+        return CONFIRMATION_PAGE_EJP;
+    }
+
+    // Form from the error 404 page
+    @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
+    public String submitAskUs(final Model model, final RedirectAttributes atts)
+            throws IllegalStateException, IOException {
+        Map<String, Object> map = model.asMap();
+        appendNameToSubject(map);
+        sendEmail(ASKUS_ADDRESS, map);
+        return getRedirectTo(map);
+    }
+
+    private void appendNameToSubject(final Map<String, Object> feedback) {
+        StringBuilder subject = new StringBuilder((String) feedback.get(SUBJECT));
+        subject.append(" (").append(feedback.get("name")).append(')');
+        feedback.put(SUBJECT, subject.toString());
+    }
+
+    private String getRedirectTo(final Map<String, Object> map) {
+        String redirectTo = (String) map.get("redirect");
+        if (redirectTo == null) {
+            redirectTo = (String) map.get(edu.stanford.irt.laneweb.model.Model.REFERRER);
+        }
+        if (redirectTo == null) {
+            redirectTo = "/index.html";
+        }
+        return "redirect:" + redirectTo;
+    }
+
+    private void sendEmail(final String recipient, final Map<String, Object> data) {
+        data.put("recipient", recipient);
+        this.sender.sendEmail(data);
+    }
+
+    private void sendEmail(final String recipient, final Map<String, Object> data, final File file) {
+        try {
+            data.put("recipient", recipient);
+            this.sender.sendEmail(data, file);
+        } catch (Exception e) {
+            throw new LanewebException(e);
+        } finally {
+            if (null != file) {
+                file.delete();
+            }
+        }
+    }
+
+    private File validateFileMultipartFile(final MultipartFile attachment) throws IllegalStateException, IOException {
+        File file = null;
+        FileOutputStream fos = null;
+        if (attachment != null && !attachment.isEmpty()) {
+            try {
+                String contentType = attachment.getContentType();
+                if (!contentType.startsWith("image/")) {
+                    return null;
+                }
+                file = new File(attachment.getOriginalFilename());
+                fos = new FileOutputStream(file);
+                fos.write(attachment.getBytes());
+                if (file.length() > MAX_UPLOAD_SIZE) {
+                    file.delete();
+                    return null;
+                }
+            } catch (IOException e) {
+                throw new LanewebException(e);
+            } finally {
+                if (null != fos) {
+                    fos.close();
+                }
+            }
+        }
+        return file;
+    }
+
+    private boolean validateForm(final Map<String, Object> feedback) {
+        return !(feedback.get("email") == null || feedback.get("email").toString().isEmpty()
+                || feedback.get("name") == null || feedback.get("name").toString().isEmpty());
+    }
+
+    @ModelAttribute
+    protected void getParameters(final HttpServletRequest request, final Model model) {
+        Map<String, Object> modelMap = model.asMap();
+        Map<String, String[]> map = request.getParameterMap();
+        String question = request.getParameter("question");
+        if (question != null) {
+            modelMap.put("question", question.concat("\n\n"));
+            map.remove("question");
+        }
+        this.remoteIPBinder.bind(modelMap, request);
+        this.headerBinder.bind(modelMap, request);
+        for (Entry<String, String[]> entry : map.entrySet()) {
+            String[] value = entry.getValue();
+            if (value.length == 1) {
+                model.addAttribute(entry.getKey(), value[0]);
+            } else {
+                throw new LanewebException("multiple values for parameter " + entry.getKey());
+            }
+        }
+    }
 }
