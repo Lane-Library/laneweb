@@ -35,7 +35,7 @@ public class EMailController {
 
     private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
 
-    private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/confirmation-ejp.html";
+    private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/ejp-confirmation.html";
 
     private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
 
