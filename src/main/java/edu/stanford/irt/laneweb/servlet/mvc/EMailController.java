@@ -111,7 +111,7 @@ public class EMailController {
     StringBuilder subject = new StringBuilder((String) map.get(SUBJECT));
     subject.append(" ").append(map.get("title"));
     map.put(SUBJECT, subject.toString());
-    sendEmail(EJP_ADDRESS, map);
+    sendEmail(EJP_ADDRESS, map, attachment);
     return CONFIRMATION_PAGE_EJP;
   }
 
