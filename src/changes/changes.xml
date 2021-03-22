@@ -7,11 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+         <release date="2021-03-22" version="3.7.5" description="bug fix release">
+            <action date="2021-03-18" dev="alainb" issue="LANEWEB-10692" type="fix">
+                No attachment from "Access Issues"
+            </action>
+         </release>
          <release date="2021-03-15" version="3.7.4" description="bug fix release">
             <action date="2021-03-12" dev="ryanmax" issue="LANEWEB-10685" type="update">
                    Custom confirmation message for EJP form
             </action>
-          </release>
+         </release>
          <release date="2021-03-08" version="3.7.3" description="bug fix release">
             <action date="2021-03-02" dev="alainb" issue="LANEWEB-10683" type="update">
                    hide location icon in the classes
