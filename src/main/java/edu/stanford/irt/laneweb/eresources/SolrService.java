@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,6 +60,8 @@ public class SolrService {
     private static final String NULL_QUERY = "null query";
 
     private static final String NULL_TYPE = "null type";
+
+    private static final String OR = " OR ";
 
     private static final int PAGE_SIZE = 10;
 
@@ -232,11 +236,42 @@ public class SolrService {
     }
 
     private String facetStringToFilters(final String facets) {
+        StringBuilder sb = new StringBuilder();
         String filters = EMPTY;
-        if (null != facets) {
-            filters = FACETS_LAST_SEPARATOR_PATTERN.matcher(facets).replaceFirst(EMPTY);
-            filters = FACETS_SEPARATOR_PATTERN.matcher(filters).replaceAll(AND);
+        if (null == facets || facets.isBlank() || !facets.contains(":")) {
+            return filters;
         }
-        return filters;
+        filters = FACETS_LAST_SEPARATOR_PATTERN.matcher(facets).replaceFirst(EMPTY);
+        List<String> facetAndValues = Arrays.stream(filters.split(FACETS_SEPARATOR)).collect(Collectors.toList());
+        // build map of facetNames and associated name/value lists
+        Map<String, List<String>> facetMap = new HashMap<>();
+        for (String facetAndValue : facetAndValues) {
+            String facetName = facetAndValue.substring(0, facetAndValue.indexOf(':'));
+            if (facetMap.containsKey(facetName)) {
+                facetMap.get(facetName).add(facetAndValue);
+            } else {
+                List<String> facetList = new ArrayList<>();
+                facetList.add(facetAndValue);
+                facetMap.put(facetName, facetList);
+            }
+        }
+        // OR within a facet
+        // AND between facets
+        for (Entry<String, List<String>> entry : facetMap.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                sb.append('(');
+                for (String facetAndValue : entry.getValue()) {
+                    sb.append(facetAndValue);
+                    sb.append(OR);
+                }
+                sb.delete(sb.length() - OR.length(), sb.length());
+                sb.append(')');
+            } else {
+                sb.append(entry.getValue().get(0));
+            }
+            sb.append(AND);
+        }
+        sb.delete(sb.length() - AND.length(), sb.length());
+        return sb.toString();
     }
 }

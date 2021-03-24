@@ -7,7 +7,7 @@ public class PagingData implements Serializable {
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 
-    private static final int MAX_PAGE_COUNT = 4;
+    private static final int MAX_PAGE_COUNT = 5;
 
     private static final long serialVersionUID = 1L;
 
