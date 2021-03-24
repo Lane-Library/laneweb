@@ -55,8 +55,6 @@ public class SolrService {
 
     private static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
 
-    private static final Pattern FACETS_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR);
-
     private static final String NULL_QUERY = "null query";
 
     private static final String NULL_TYPE = "null type";
