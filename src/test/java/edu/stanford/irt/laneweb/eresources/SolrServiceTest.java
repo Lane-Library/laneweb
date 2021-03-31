@@ -10,13 +10,21 @@ import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
@@ -24,6 +32,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
 import org.springframework.data.solr.core.query.Query;
+import org.springframework.data.solr.core.query.SimpleFilterQuery;
+import org.springframework.data.solr.core.query.SimpleStringCriteria;
 import org.springframework.data.solr.core.query.result.Cursor;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
@@ -50,7 +60,91 @@ public class SolrServiceTest {
         this.cursor = mock(Cursor.class);
     }
 
+    public static final String FACETS_SEPARATOR = "::";
+
+    private static final String ALL_QUERY = "*:*";
+
+    private static final String AND = " AND ";
+
+    private static final String OR = " OR ";
+    
+    // consider moving this to /lane-browse solr handler
+    private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
+            new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
+
+    private static final String COLLECTION = "laneSearch";
+
+    private static final String DATE_QUERY = "date:[%s TO *]";
+
+    private static final String EMPTY = "";
+
+    private static final Collection<String> FACET_FIELDS = Arrays.asList("mesh", "publicationAuthor",
+            "publicationLanguage", "publicationTitle", "publicationType", "type", "recordType", "year", "date");
+
+    private static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
+
+    private static final Pattern FACETS_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR);
+
+    private static final String NULL_QUERY = "null query";
+
+    private static final String NULL_TYPE = "null type";
+
+    private static final int PAGE_SIZE = 10;
+
+    private static final Pattern SINGLE_SPACE_PATTERN = Pattern.compile(" ");
+
+    // create ordered list of facet names and values
+    // (
+    // while next facet name is the same as this one: append facetAndValue and " OR "; replace last " OR " with ")"
+    // while next facet and next facet name is not the same as this one: append " AND "
+    //String f = "publicationAuthor:\"Marcus,+Aaron\"::publicationAuthor:\"Wang,+Wentao\"::mesh:\"Computers\"";
+    String f = "field2:\\\"value1\\\"::field2:\"value2\"::field:\"value\"::publicationAuthor:\"Marcus,+Aaron\"::publicationAuthor:\"Wang,+Wentao\"::mesh:\"Computers\"::field:\"anothValue\"";
+    private String facetStringToFilters(final String facets) {
+        StringBuilder sb = new StringBuilder();
+        String filters = EMPTY;
+        if (null == facets || facets.isBlank()) {
+            return filters;
+        }
+        filters = FACETS_LAST_SEPARATOR_PATTERN.matcher(facets).replaceFirst(EMPTY);
+        List<String> facetAndValues = Arrays.stream(filters.split(FACETS_SEPARATOR))
+                .collect(Collectors.toList());
+        Map<String, List<String>> facetMap = new HashMap<>();
+        for (String facetAndValue : facetAndValues) {
+            String facetName = facetAndValue.substring(0,facetAndValue.indexOf(':'));
+            if (facetMap.containsKey(facetName)) {
+                facetMap.get(facetName).add(facetAndValue);
+            } else {
+                List<String> f = new ArrayList<>();
+                f.add(facetAndValue);
+                facetMap.put(facetName, f);
+            }
+        }
+        for (Entry<String, List<String>> entry : facetMap.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                sb.append("(");
+                for (String fAndV : entry.getValue()) {
+                    sb.append(fAndV);
+                    sb.append(OR);
+                }
+                sb.delete(sb.length() - OR.length(), sb.length());
+                sb.append(")");
+            }
+            else {
+                sb.append(entry.getValue().get(0));
+            }
+            sb.append(AND);
+        }
+        sb.delete(sb.length() - AND.length(), sb.length());
+        return sb.toString();
+    }
+
     @Test
+    public final void testFacetString() {
+        System.out.println(facetStringToFilters(f));
+        
+    }
+
+        @Test
     public final void testBrowseByQueryString() {
         expect(this.template.queryForCursor(anyObject(), isA(Query.class), anyObject())).andReturn(this.cursor);
         expect(this.cursor.hasNext()).andReturn(false);

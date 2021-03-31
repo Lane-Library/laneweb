@@ -53,6 +53,8 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
 
     private static final String TYPE = "type";
 
+    private static final String MERGED_TYPE = "mergedType";
+    
     private FacetComparator comparator;
 
     private String facet;
@@ -110,6 +112,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
                 fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
                 facetsMap = processFacets(fps);
                 maybeRequestMoreTypes(facetsMap);
+                maybeRequestMoreMergedTypes(facetsMap);
                 maybeRequestMorePublicationTypes(facetsMap);
                 maybeAddActiveFacets(facetsMap);
                 maybeRequestMoreMesh(facetsMap);
@@ -263,6 +266,45 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
         return facetsMap;
     }
 
+    private Map<String, Collection<Facet>> maybeRequestMoreMergedTypes(final Map<String, Collection<Facet>> facetsMap) {
+        Collection<Facet> facetList = facetsMap.get(MERGED_TYPE);
+        if (null == facetList) {
+            facetList = new ArrayList<>();
+        }
+        long books = facetList.stream().filter((final Facet s) -> s.getValue().startsWith("Book")).count();
+        long journals = facetList.stream().filter((final Facet s) -> s.getValue().startsWith("Journal")).count();
+        if ((books > 0 && books < ALL_BOOK_OR_JOURNAL_TYPES)
+                || (journals > 0 && journals < ALL_BOOK_OR_JOURNAL_TYPES)) {
+            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MERGED_TYPE, 0, PAGE_SIZE, 1,
+                    parseSort());
+            Map<String, Collection<Facet>> typeFacetMap = processFacets(fps);
+            Collection<Facet> allTypes = typeFacetMap.get(MERGED_TYPE);
+            if (null != allTypes) {
+                Collection<Facet> moreTypes = allTypes.stream()
+                        .filter((final Facet s) -> STARTS_WITH_BOOK_OR_JOURNAL_PATTERN.matcher(s.getValue()).matches())
+                        .collect(Collectors.toList());
+                facetList.addAll(moreTypes);
+            }
+            facetsMap.put(MERGED_TYPE, facetList);
+        }
+//        long count = facetList.stream()
+//                .filter((final Facet s) -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
+//        if (count < this.prioritizedPublicationTypes.size()) {
+//            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, MERGED_TYPE, 0,
+//                    PAGE_SIZE, 1, parseSort());
+//            Map<String, Collection<Facet>> publicationTypeFacetMap = processFacets(fps);
+//            facetList = publicationTypeFacetMap.get(MERGED_TYPE);
+//            if (null != facetList) {
+//                Collection<Facet> moreTypes = facetList.stream()
+//                        .filter((final Facet s) -> this.prioritizedPublicationTypes.contains(s.getValue()))
+//                        .collect(Collectors.toList());
+//                facetList.addAll(moreTypes);
+//            }
+//            facetsMap.put(MERGED_TYPE, facetList);
+//        }
+        return facetsMap;
+    }
+    
     private FacetSort parseSort() {
         if ("index".equals(this.facetSort)) {
             return FacetSort.INDEX;

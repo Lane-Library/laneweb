@@ -164,6 +164,14 @@
                         </xsl:call-template>
 
                         <xsl:call-template name="field">
+                            <xsl:with-param name="id" select="'mergedType'"/>
+                            <xsl:with-param name="label">Merged Type <i
+                                    class="fa fa-info-circle yui3-tooltip-trigger"
+                                    title="article types and resources types in one facet"
+                                /></xsl:with-param>
+                        </xsl:call-template>
+
+                        <xsl:call-template name="field">
                             <xsl:with-param name="id" select="'type'"/>
                             <xsl:with-param name="label">Resource Type <i
                                     class="fa fa-info-circle yui3-tooltip-trigger"

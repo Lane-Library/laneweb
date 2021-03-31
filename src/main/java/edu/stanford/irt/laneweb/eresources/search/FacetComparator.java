@@ -20,6 +20,7 @@ public class FacetComparator implements Comparator<Facet>, Serializable {
     public FacetComparator(final Collection<String> priorityPublicationTypes) {
         for (String pt : priorityPublicationTypes) {
             this.prioritizedPublicationTypes.add("publicationType:" + pt);
+            this.prioritizedPublicationTypes.add("mergedType:" + pt);
         }
     }
 
