@@ -22,7 +22,7 @@
 		<xsl:param name="title" />
 		<xsl:choose>
 			<xsl:when test="contains($url,'do?semid=')">
-				<a title="{concat($title,' [', 'gran-seminar]')}" href="{concat('http://med.stanford.edu/seminars/',$url)}">
+				<a title="{concat($title,' [', 'gran-seminar]')}" href="{concat('https://seminars.med.stanford.edu/',$url)}">
 					<xsl:value-of select="$title" />
 				</a>
 			</xsl:when>
