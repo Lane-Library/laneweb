@@ -18,9 +18,8 @@ a {
     cursor: pointer;
 }
 
-a:visited,a:active,a:hover {
-    color: #428bca;
-    text-decoration: none;
+a:active,a:hover {
+    text-decoration: underline;
 }
 
 /*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
@@ -179,7 +178,6 @@ h1 i {
 .menu a {
     color: white;
     background-color: #333333;
-    text-decoration: none;
     font-weight: 300;
     display: block;
     padding: 9px 20px 9px 13px;
@@ -319,11 +317,6 @@ h4 {
     box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
     overflow: hidden;
     clear: both;
-}
-
-.border-and-shadow a,.side-box a,.content a {
-    color: #428bca;
-    text-decoration: none;
 }
 
 .border-and-shadow img {

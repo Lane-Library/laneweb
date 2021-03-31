@@ -72,21 +72,15 @@ ul.content .nav-menu {
 	box-sizing: border-box;
 }
 
+.content .nav-menu-content li {
+	border-bottom: none;
+}
+
 .nav-menu-content a {
 	display: inline;
 	font-weight: normal;
-	color: #007c92;
 	font-size: 16px;
 }
-
-.nav-menu-content a:visited {
-	color: #428bca;
-}
-
-.nav-menu-content a:hover {
-	color: #820000;
-}
-
 
 .nav-menu-content.portals ul {
 	column-count: 3;
