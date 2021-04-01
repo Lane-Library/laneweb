@@ -9,6 +9,7 @@
 
 .contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
 	.contacts-choice a:hover {
+	color: black;
 	display: block;
     width: 100%;
     text-decoration: none;
