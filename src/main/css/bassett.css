@@ -1,6 +1,7 @@
 /* COMMON TO THE TWO IMAGE VIEWS  */
  #bassettContent td {
     border: none;
+    width: 50%;
 }
 .choice {
     float: left;
@@ -89,15 +90,26 @@
     margin-bottom: 30px;
     text-align: center;
     vertical-align: middle;
-    padding: 2em;
 }
 
 .bassett-image td#image {
     vertical-align: middle;
 }
 
-.bassett-image td#diagram-image {
+.bassett-image td#legend-image , .bassett-image td#legend {
+	padding-top: 20px;
+}
+
+.bassett-image td#diagram-image, .bassett-image td#legend-image {
     vertical-align: top;
+}
+
+.bassett-image td#legend-image img, .bassett-image td#image img {
+    width: 90%;
+}
+
+#legend table {
+    width: 100%;
 }
 
 #legend td {
@@ -117,11 +129,26 @@
     color: #3f3c30;
 }
 
+
 #legend .legend-sub-title {
     padding-bottom: 5px;
     font-style: italic;
 }
 
 #legend .legend-description {
+	padding: 9px;
     padding-bottom: 15px;
 }
+
+#legend table table td{
+	padding-left: 9px;
+}
+
+#legend table td:first-child {
+	width: 5%;
+
+}
+#legend table td:nth-last-of-type() {
+    width: 95%;
+}
+
