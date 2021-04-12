@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+        <release date="2021-04-12" version="3.7.8" description="bug fix release">
+            <action date="2021-04-12" dev="ryanmax" issue="LANEWEB-10693" type="update">
+                Lane Search Results - Remove Images
+            </action>
+            <action date="2021-04-8" dev="alainb" issue="LANEWEB-10698" type="fix">
+                Improve bassett UI
+            </action>
+            <action date="2021-04-01" dev="ryanmax" issue="LANEWEB-10699" type="fix">
+                Reflected Cross Site Scripting/HTML Injection (XSS/HTMLi)
+            </action>
+         </release>
          <release date="2021-04-05" version="3.7.7" description="bug fix release">
             <action date="2021-04-01" dev="ryanmax" issue="LANEWEB-10694" type="fix">
                 Change Link Styling
