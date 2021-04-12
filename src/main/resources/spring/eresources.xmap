@@ -18,9 +18,7 @@
       <map:match pattern="search.html" type="wildcard">
          <map:aggregate type="default" element="doc">
             <map:generate type="file" src="cocoon://eresources/er-search.xml"/>
-            <map:generate type="file" src="cocoon://apps/search/image/preview"/>
          </map:aggregate>
-         <map:transform type="saxon" src="classpath:/xsl/eresources-image-preview.xsl"/>
          <map:serialize type="xml">
             <map:parameter name="media-type" value="text/html"/>
          </map:serialize>

@@ -43,10 +43,6 @@
                 <map:generate type="search-image"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="search/image/preview" type="wildcard">
-                <map:generate type="search-image-preview"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="search/admin/image" type="wildcard">
                 <map:generate type="admin-search-image"/>
                 <map:serialize type="xml"/>

@@ -50,11 +50,6 @@ public class ImagesConfigurationTest {
     }
 
     @Test
-    public void testSolrImageSearchPreviewGenerator() {
-        assertNotNull(this.configuration.solrImageSearchPreviewGenerator(null));
-    }
-
-    @Test
     public void testSolrImageSearchSAXStrategy() {
         assertNotNull(this.configuration.solrImageSearchSAXStrategy());
     }

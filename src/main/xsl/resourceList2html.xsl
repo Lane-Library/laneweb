@@ -22,9 +22,6 @@
 
     <xsl:param name="source"/>
     
-    <!-- used to enable image promotion -->
-    <xsl:param name="sourceid"/>
-
     <xsl:param name="url-encoded-query"/>
 
     <xsl:variable name="guest-mode">
