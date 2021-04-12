@@ -22,6 +22,10 @@
 	color: #fff;
 }
 
+.enabled a:active, .enabled a:hover {
+    text-decoration: none;
+}
+
 .solrFacets .enabled, .facetBrowse .enabled {
 	padding: 1px 5px;
 	background-color: #333;
