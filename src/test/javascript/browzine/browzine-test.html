@@ -32,7 +32,7 @@
             return {
                 status: 200,
                 open: function(a, b, c) {
-                    this.doi = /\/apps\/search\/browzine\/doi\.json\?q=(.*)/.exec(b)[1];
+                    this.doi = /\/apps\/search\/browzine\/doi\/(.*)/.exec(b)[1];
                 },
                 send: function () {
                     this.responseText = '{"data":{"doi":"' + this.doi + '","fullTextFile": "fulltext-url"},"included":[{"coverImageUrl":"cover-url"}]}';
