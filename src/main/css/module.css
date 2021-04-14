@@ -93,17 +93,16 @@
     padding: 12px;
 }
 
-.grand-rounds, .upcoming-classes {
-    margin-top: 24px;
-    padding: 12%;
+.pure-g .module.upcoming-classes {
+    width: 100%;
+    padding: 24px;
 }
 
-.grand-rounds h3, .upcoming-classes h3 {
-    text-transform: uppercase;
+.upcoming-classes h3 {
     font-family: 'Fjord One', serif;
     color: #333333;
-    text-align: center;
     background-image: none;
+    letter-spacing: initial;
 }
 
 /* modules on contacts/staff-dir.html */
@@ -126,7 +125,7 @@
    	 	height: auto;   
    	 	margin: 0px; 
 	}
-	.grand-rounds, .upcoming-classes {
+	.upcoming-classes {
 	    padding: 6px;
 		min-height: inherit;		    
 	}

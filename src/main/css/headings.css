@@ -25,6 +25,9 @@ h3, h4 {
     font-family: 'Fjord One', serif;
 }
 
+.frontpage h3 {
+    border-bottom: 1px solid #000;
+}
 
 h5 {
     color: #8c1515;

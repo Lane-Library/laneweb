@@ -86,8 +86,13 @@ em {
 }
 
 /*styles for redesigned main elements on the landing pages*/
-.detailInfo {
-    font-size: 12px;
+.all-classes {
+    padding-left: 15px;
+}
+
+.all-classes-link {
+    padding-top: 10px;
+    display: block;
 }
 
 hr {

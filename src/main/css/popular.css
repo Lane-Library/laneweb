@@ -9,6 +9,12 @@
 	position: relative;
 }
 
+.frontpage .popular {
+	padding: 5%;
+	background-color: #fff;
+	border: none;
+}
+
 .popular h3 {
 	text-transform: uppercase;
 	font-family: 'Fjord One', serif;
@@ -17,12 +23,9 @@
 	background-image: none;
 }
 
-.popular h4 {
-	text-transform: uppercase;
-	font-family: 'Fjord One', serif;
-	color: #ffffff;
-	text-align: center;
-	background-image: none;
+.frontpage .popular h3 {
+	color: #000;
+	text-transform: none;
 }
 
 .popular li {
@@ -40,6 +43,14 @@
 
 .popular a, .popular a .fa {
 	color: #fff;
+}
+
+.frontpage .popular a, .frontpage .popular a .fa {
+    color: #007c92;
+}
+
+.frontpage .popular li {
+    font-size: 18px;
 }
 
 @media ( max-width : 812px) {
