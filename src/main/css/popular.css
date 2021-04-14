@@ -58,6 +58,10 @@
 		top: -1px;
 		right: -1px;
 	}
+    .frontpage a.menu-toggle .fa {
+        color: white;
+    }
+}
 	
 
 }	 
