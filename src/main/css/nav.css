@@ -125,7 +125,6 @@ ul.content .nav-menu {
 	#nav-toggle-on {
 		display: block;
 		position: absolute;
-		top: -32px;
 	}
 	#nav-toggle-off {
 		display: none;
