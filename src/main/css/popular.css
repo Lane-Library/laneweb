@@ -26,6 +26,7 @@
 .frontpage .popular h3 {
 	color: #000;
 	text-transform: none;
+	text-align: left;
 }
 
 .popular li {
