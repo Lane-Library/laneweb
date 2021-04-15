@@ -13,8 +13,8 @@
    </xsl:template>
    
    <xsl:template match="class">
-    <div class="pure-u-1-3 event laneclass">
-        <div class="date lane-date">
+    <div class="pure-u-1-3 laneclass">
+        <div class="date">
             <xsl:value-of select="./start/month" />
                     <xsl:text> </xsl:text>
             <xsl:value-of select="./start/day" />

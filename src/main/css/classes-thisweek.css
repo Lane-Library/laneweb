@@ -1,12 +1,12 @@
 /*styles for classes on homepage*/
-.event {
+.laneclass {
 	margin-bottom: 15px;
 	position: relative;
 	z-index: 1;
 	display: flex;
 }
 /* :before rules are about getting colored date box the same height as the .event box */
-.event:before {
+.laneclass:before {
 	content: ' ';
 	position: absolute;
 	top: 0;
@@ -16,16 +16,17 @@
 	z-index: -1;
 }
 
-.event div:nth-child(2) {
+.laneclass div:nth-child(2) {
 	width: 73%;
     padding: 12px 0 0 12px;
 }
 
-.event div {
+.laneclass div {
 	display: block;
 }
 
-div.pure-g > div.event.laneclass {
+/* intentionally over-specified to override gutters.css */
+div.pure-g > .upcoming-classes div.laneclass {
     padding: 0 15px;
 }
 
