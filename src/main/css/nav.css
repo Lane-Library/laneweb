@@ -125,10 +125,16 @@ ul.content .nav-menu {
 	#nav-toggle-on {
 		display: block;
 		position: absolute;
+		top: -32px;
 	}
 	#nav-toggle-off {
 		display: none;
 		right: 100%;
+	}
+	/* delete this style and label-menu spans in navigation.html 
+	if decide to hide hamburger labels */
+	#navigation .label-menu {
+	   display: none;
 	}
 	#nav-toggle-off i, #nav-toggle-on i {
 		text-align: center;
