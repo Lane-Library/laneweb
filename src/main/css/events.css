@@ -18,22 +18,27 @@
 
 .event div:nth-child(2) {
 	width: 73%;
-	padding-left: 12px
+    padding: 12px 0 0 12px;
 }
 
 .event div {
 	display: block;
 }
 
+div.pure-g > div.event.laneclass {
+    padding: 0 15px;
+}
+
 .date {
 	text-transform: uppercase;
 	color: white;
-	padding: 4px 4px 20px;
+	padding: 0 20px 20px 0;
 	width: 17%;
 }
 
-.seminar:before {
-	background-color: #09425a;
+.laneclass .date {
+    position: relative;
+    top: 25%;
 }
 
 .laneclass:before {
