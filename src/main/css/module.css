@@ -98,13 +98,6 @@
     padding: 24px;
 }
 
-.upcoming-classes h3 {
-    font-family: 'Fjord One', serif;
-    color: #333333;
-    background-image: none;
-    letter-spacing: initial;
-}
-
 /* modules on contacts/staff-dir.html */
 .staff-list .module {
     display: inline-block;
@@ -124,10 +117,6 @@
    	 	width: 100%;	
    	 	height: auto;   
    	 	margin: 0px; 
-	}
-	.upcoming-classes {
-	    padding: 6px;
-		min-height: inherit;		    
 	}
 }
 
