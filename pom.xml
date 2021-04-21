@@ -164,6 +164,11 @@
             <groupId>org.springframework</groupId>
         </dependency>
         <dependency>
+            <artifactId>spring-security-web</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <version>5.4.6</version>
+        </dependency>
+        <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
             <version>1.0.30</version>
