@@ -12,7 +12,7 @@ img {
 
 .menu-toggle {
 	background-color: grey;
-	padding: 9px;
+	padding: 1px 4px;
 	top: 0px;
 	right: 0px;
 	position: absolute;
@@ -25,7 +25,7 @@ img {
 }
 
 .menu-toggle i {
-	font-size: 32px;
+	font-size: 30px;
 }
 
 .lrg-screen-hide{
