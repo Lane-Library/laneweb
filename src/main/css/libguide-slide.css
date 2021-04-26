@@ -1,0 +1,41 @@
+.libguide-slide-container{
+    margin-top: 24px;
+    padding: 25px;
+    position: relative;
+
+}
+
+#libguide-slide {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    min-height:520px;
+}
+
+.slide {
+    position: absolute;
+    padding: 21px;
+}
+
+.slide img {
+    width: 100%;
+}
+
+ #next-libguide-slide {
+    right: 12px;
+}
+
+#previous-libguide-slide {
+    left: 12px;
+}
+
+ #previous-libguide-slide, #next-libguide-slide {
+    position: absolute;
+    display: block;
+    top: 50%;
+    cursor: pointer;
+}
+
+#previous-libguide-slide .fa, #next-libguide-slide .fa {
+    color: black;
+}

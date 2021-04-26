@@ -469,6 +469,7 @@
                                 <include>portals-min.css</include>
                                 <include>course-reserves-min.css</include>
                                 <include>contacts-min.css</include>
+                                <include>libguide-slide-min.css</include>
                                 <include>liaisons-directory-min.css</include>
                                 <include>responsive-min.css</include>
                             </includes>
@@ -528,6 +529,7 @@
                                 <include>message-min.js</include>
                                 <include>course-reserves-min.js</include>
                                 <include>permalink-toggle-min.js</include>
+                                <include>libguide-slide-min.js</include>
                                 <include>validation-min.js</include>
                             </includes>
                         </aggregation>
