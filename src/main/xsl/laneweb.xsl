@@ -101,6 +101,7 @@
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/shc')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="$source">
