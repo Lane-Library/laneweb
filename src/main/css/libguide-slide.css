@@ -2,23 +2,32 @@
     margin-top: 24px;
     padding: 25px;
     position: relative;
+    display: block;
+    text-align: center;
+}
 
+.s-lib-cpane-caption {
+	text-align: initial;
 }
 
 #libguide-slide {
     overflow: hidden;
     position: relative;
-    display: block;
     min-height:520px;
 }
 
 .slide {
     position: absolute;
     padding: 21px;
+    display: block;
+   height: 450px;
 }
-
+.slide a{
+    display: block;
+}
+/* To limit the image size otherwise the content is hidden by the overflow */
 .slide img {
-    width: 100%;
+    max-height: 300px;
 }
 
  #next-libguide-slide {

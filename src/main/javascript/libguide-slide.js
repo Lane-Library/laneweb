@@ -1,7 +1,7 @@
 $(function() {
-        function left(element, using) {
+	   function left(element, using) {
             element.position({
-                my : "right top-210px",
+                my : "right",
                 at : "left",
                 of : "#libguide-slide",
                 collision : "none",
@@ -10,7 +10,7 @@ $(function() {
         }
         function right(element, using) {
             element.position({
-                my : "left top-210px",
+                my : "left",
                 at : "right",
                 of : "#libguide-slide",
                 collision : "none",
@@ -19,20 +19,20 @@ $(function() {
         }
         function center(element, using) {
             element.position({
-                my : "center top-210px",
+                my : "center",
                 at : "center",
                 of : "#libguide-slide",
                 using : using
             });
         }
 
-        center($(".slide:eq(1)"));
-        left($(".slide:eq(0)"));
-        right($(".slide:eq(2)"));
-
         function animate(to) {
             $(this).stop(true, false).animate(to);
         }
+
+        center($(".slide:eq(1)"));
+        left($(".slide:eq(0)"));
+        right($(".slide:eq(2)"));
 
         function next(event) {
             event.preventDefault();
@@ -56,9 +56,13 @@ $(function() {
             $(".slide").index(this) === 0 ? previous(event) : next(event);
         }); */
 
+
         $(window).on("resize", function() {
             left($(".slide:eq(0)"));
             center($(".slide:eq(1)"));
             right($(".slide:eq(2)"));
         });
+
+
+
     });
