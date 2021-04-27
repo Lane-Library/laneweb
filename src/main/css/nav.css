@@ -131,11 +131,6 @@ ul.content .nav-menu {
 		display: none;
 		right: 100%;
 	}
-	/* delete this style and label-menu spans in navigation.html 
-	if decide to hide hamburger labels */
-	#navigation .label-menu {
-	   display: none;
-	}
 	#nav-toggle-off i, #nav-toggle-on i {
 		text-align: center;
 	}
