@@ -1,11 +1,9 @@
 (function() {
 	"use strict";
 
-var slideIndex = 0,
-	slides = document.getElementsByClassName("slide");
-	slides[0].className += " active";
-
-
+var	slides = document.getElementsByClassName("slide"),
+	slideIndex = Math.floor(Math.random() * slides.length );
+	slides[slideIndex].className += " active";
 
 var next = function() {
 	slides[slideIndex].className = slides[slideIndex].className.replace(
