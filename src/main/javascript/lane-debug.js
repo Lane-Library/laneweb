@@ -41,7 +41,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
 
     var i, laneJavascript = [
         "util.js",
-        "libguide-slide-min.js",
+        "libguide-slide.js",
         "menu.js",
         "model.js",
         "link-info.js",

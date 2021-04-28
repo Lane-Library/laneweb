@@ -5,12 +5,8 @@
 
     <xsl:template match="h:html">
         <div class="module  same-height-1 libguide-slide-container">
-            <a id="previous-libguide-slide" href="#">
-                <i class="fa fa-chevron-left"></i>
-            </a>
-            <a id="next-libguide-slide" href="#">
-                <i class="fa fa-chevron-right"></i>
-            </a>
+            <i id="previous-libguide-slide" class="fa fa-chevron-left" />
+            <i id="next-libguide-slide" class="fa fa-chevron-right" />
             <div id="libguide-slide">
                 <h3>Feature Guides</h3>
                 <xsl:apply-templates select="//h:div[@id='s-lib-cpane-31076085']/h:div" />

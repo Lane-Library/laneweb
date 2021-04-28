@@ -1,50 +1,35 @@
-.libguide-slide-container{
-    margin-top: 24px;
-    padding: 25px;
-    position: relative;
-    display: block;
-    text-align: center;
-}
-
-.s-lib-cpane-caption {
-	text-align: initial;
-}
-
-#libguide-slide {
-    overflow: hidden;
-    position: relative;
-    min-height:520px;
+.libguide-slide-container {
+	margin-top: 24px;
+	padding: 25px;
+	position: relative;
 }
 
 .slide {
-    position: absolute;
-    padding: 21px;
-    display: block;
-   height: 450px;
-}
-.slide a{
-    display: block;
-}
-/* To limit the image size otherwise the content is hidden by the overflow */
-.slide img {
-    max-height: 300px;
+	padding: 0px 18px 21px 18px;
+	display: none;
 }
 
- #next-libguide-slide {
-    right: 12px;
+.slide.active {
+	display: block;
+}
+
+.slide img{
+  width: 100%;
+  padding:0 5% 10% 5%;
+}
+
+#next-libguide-slide {
+	right: 12px;
 }
 
 #previous-libguide-slide {
-    left: 12px;
+	left: 12px;
 }
 
- #previous-libguide-slide, #next-libguide-slide {
-    position: absolute;
-    display: block;
-    top: 50%;
-    cursor: pointer;
-}
-
-#previous-libguide-slide .fa, #next-libguide-slide .fa {
-    color: black;
+#previous-libguide-slide, #next-libguide-slide {
+	position: absolute;
+	display: block;
+	top: 250px;
+	cursor: pointer;
+	color: black;
 }
