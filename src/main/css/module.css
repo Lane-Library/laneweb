@@ -93,18 +93,19 @@
     padding: 12px;
 }
 
-.grand-rounds, .upcoming-classes {
-    margin-top: 24px;
+.pure-g div.module.upcoming-classes {
+    width: 100%;
     padding: 12%;
 }
-
-.grand-rounds h3, .upcoming-classes h3 {
+.libguide-slide h3, .upcoming-classes h3 {
     text-transform: uppercase;
     font-family: 'Fjord One', serif;
     color: #333333;
     text-align: center;
     background-image: none;
 }
+
+
 
 /* modules on contacts/staff-dir.html */
 .staff-list .module {
@@ -119,16 +120,42 @@
     font-size: 16px;
 }
 
+div.same-height {
+  flex: 1;
+  padding: 12px;
+}
+
+div.same-height > div{
+    height: 100%;
+    margin-top: 0px;
+}
+
+.pure-g>div.same-height:not(:first-child):not(:last-child) {
+    padding: 12px 12px;
+}
+
+
+
 @media ( max-width : 812px) {
 	.staff-list .module{
 	  	display: block;
-   	 	width: 100%;	
-   	 	height: auto;   
-   	 	margin: 0px; 
+   	 	width: 100%;
+   	 	height: auto;
+   	 	margin: 0px;
 	}
-	.grand-rounds, .upcoming-classes {
-	    padding: 6px;
-		min-height: inherit;		    
+
+	div.same-height {
+    flex: none;
 	}
+
+	.same-height > div{
+    height: auto;
+    margin-top: inherit;
+	}
+
+	.pure-g > div {
+	   padding: 12px;
+	}
+
 }
 

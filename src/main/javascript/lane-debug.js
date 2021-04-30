@@ -43,6 +43,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "util.js",
         "menu.js",
         "model.js",
+        "libguide-slide.js",
         "link-info.js",
         "lane-ie.js",
         "lane-persistent-login.js",

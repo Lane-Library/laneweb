@@ -15,9 +15,9 @@
         <xsl:apply-templates select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) and count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]"/>
     </xsl:template>
     <xsl:template match="item">
-        <div class="pure-u-1-3">
+        <div class="pure-u-1-3 same-height">
             <div class="newsfeed">
-                <div class="same-height-2">
+                <div>
                     <figure>
                         <xsl:apply-templates select="./content:encoded//h:img" />
                     </figure>

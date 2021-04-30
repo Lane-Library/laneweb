@@ -14,15 +14,3 @@
 .pure-g>div:not(:first-child):not(:last-child) {
 	padding: 0 12px;
 }
-
-@media ( max-width : 812px) {
-	.pure-g>div:first-child {
-		padding-right: 0px;
-	}
-	.pure-g>div:last-child {
-		padding-left: 0px;
-	}
-	.pure-g>div:not(:first-child):not(:last-child) {
-		padding: 0;
-	}
-}

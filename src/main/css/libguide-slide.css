@@ -1,0 +1,36 @@
+.libguide-slide-container {
+	padding: 12%;
+    position: relative;
+    height: 100%;
+    background-color: white;
+}
+
+.slide {
+    padding: 0px 9px 21px 9px;
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img{
+  width: 100%;
+  padding:0 3% 10% 3%;
+}
+
+#next-libguide-slide {
+    right: 12px;
+}
+
+#previous-libguide-slide {
+    left: 12px;
+}
+
+#previous-libguide-slide, #next-libguide-slide {
+    position: absolute;
+    display: block;
+    top: 250px;
+    cursor: pointer;
+    color: black;
+}

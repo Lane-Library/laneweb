@@ -16,10 +16,10 @@
             select="./channel/item[category[ . = 'Highlighted Resource'] and  count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 2]" />
     </xsl:template>
     <xsl:template match="item">
-        <div class="pure-u-1-3">
+        <div class="pure-u-1-3 same-height">
             <div class="newsfeed">
                 <header>Resource of the Month</header>
-                <div class="same-height-2">
+                <div>
                     <figure>
                         <xsl:apply-templates select="./content:encoded//h:img" />
                     </figure>

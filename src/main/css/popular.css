@@ -1,6 +1,6 @@
-.popular {
-	margin-top: 24px;
+div.popular {
 	padding: 12%;
+	margin-top: 24px;
 	line-height: 1.6em;
 	background-color: #333333;
 	color: #ffffff;
@@ -47,6 +47,6 @@
 		top: -1px;
 		right: -1px;
 	}
-	
 
-}	 
+
+}
