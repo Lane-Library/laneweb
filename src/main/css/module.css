@@ -97,7 +97,8 @@
     width: 100%;
     padding: 12%;
 }
-.libguide-slide h3, .upcoming-classes h3 {
+
+.libguide-slide > h3, .upcoming-classes h3 {
     text-transform: uppercase;
     font-family: 'Fjord One', serif;
     color: #333333;
