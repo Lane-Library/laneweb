@@ -19,17 +19,16 @@
 	}
 
 	var next = function() {
-		slides[slideIndex].className = slides[slideIndex].className.replace(
-				new RegExp('( |^)' + "active" + '( |$)', 'g'), ' ').trim();
+		slides[slideIndex].className = "slide";
 		slideIndex = (slides.length - 1 <= slideIndex) ? 0 : slideIndex + 1;
-		slides[slideIndex].className += " active";
+		slides[slideIndex].className += " active-next";
 	}
 
 	var previous = function() {
-		slides[slideIndex].className = slides[slideIndex].className.replace(
-				new RegExp('( |^)' + "active" + '( |$)', 'g'), ' ').trim();
+		slides[slideIndex].className = "slide";
 		slideIndex = (0 >= slideIndex) ? slides.length - 1 : (slideIndex - 1);
-		slides[slideIndex].className += " active";
+		slides[slideIndex].className += " active-previous";
 	}
+
 
 })();

@@ -22,6 +22,12 @@
         </xsl:copy>
     </xsl:template>
 
+    <xsl:template match="h:img">
+        <xsl:copy>
+            <xsl:attribute name="src" select="@src"></xsl:attribute>
+            <xsl:attribute name="loading" select="eager"></xsl:attribute>
+        </xsl:copy>
+    </xsl:template>
 
     <xsl:template match="child::node()">
         <xsl:copy>

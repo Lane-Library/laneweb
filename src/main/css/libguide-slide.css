@@ -5,14 +5,48 @@
     background-color: white;
 }
 
+.libguide-slide{
+	overflow: hidden;
+}
+
 .slide {
     padding: 0px 9px 21px 9px;
     display: none;
+    animation-duration: 0.5s;
+    animation-name: slidein-off;
 }
 
-.slide.active {
+@keyframes slidein-previous {
+  from {
+    margin-left: 100%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+
+
+@keyframes slidein-next {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 0%;
+  }
+}
+
+.slide.active, .slide.active-next, .slide.active-previous {
     display: block;
 }
+
+.slide.active-next{
+    animation-name: slidein-next;
+}
+.slide.active-previous{
+    animation-name: slidein-previous;
+}
+
+
 
 .slide img{
   width: 100%;
