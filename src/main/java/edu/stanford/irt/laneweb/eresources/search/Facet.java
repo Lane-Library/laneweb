@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.eresources.SolrService;
 
 public final class Facet {
 
-    private static final Pattern BEGIN_OR_END_FACET_SEPARATOR_PATTERN = Pattern.compile("(^::|::$)");
+    private static final Pattern BEGIN_OR_END_FACET_SEPARATOR_PATTERN = Pattern.compile("(^::)|(::$)");
 
     private static final String BEGINS_WITH_OR_TWO_COLONS = "(^|::)";
 
