@@ -46,8 +46,6 @@
     animation-name: slidein-previous;
 }
 
-
-
 .slide img{
   width: 100%;
 }
@@ -66,4 +64,8 @@
     top: 250px;
     cursor: pointer;
     color: black;
+}
+
+.s-lib-cpane-caption{
+	margin-top: 18px;
 }
