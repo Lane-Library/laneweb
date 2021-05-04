@@ -15,7 +15,7 @@ public class VoyagerLogin {
 
     private static final Logger log = LoggerFactory.getLogger(VoyagerLogin.class);
 
-    private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
+    private static final Pattern PID_PATTERN = Pattern.compile("[\\w\\-]+");
 
     private LoginService service;
 
