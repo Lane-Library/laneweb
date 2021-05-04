@@ -39,7 +39,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
 
     private static final Pattern FACET_SEPARATOR_PATTERN = Pattern.compile(SolrService.FACETS_SEPARATOR);
 
-    private static final Pattern LEADING_QUESTIONMARK_PATTERN = Pattern.compile("^?\"$?");
+    private static final Pattern LEADING_OR_TRAILING_QUOTE_PATTERN = Pattern.compile("(^\")|(\"$)");
 
     private static final Logger log = LoggerFactory.getLogger(SolrSearchFacetsGenerator.class);
 
@@ -164,7 +164,7 @@ public class SolrSearchFacetsGenerator extends AbstractMarshallingGenerator {
             if (facetToken.contains(COLON)) {
                 String[] token = COLON_PATTERN.split(facetToken);
                 String fieldName = token[0];
-                String facetValue = LEADING_QUESTIONMARK_PATTERN.matcher(token[1]).replaceAll(EMPTY);
+                String facetValue = LEADING_OR_TRAILING_QUOTE_PATTERN.matcher(token[1]).replaceAll(EMPTY);
                 Collection<Facet> facetList = facetsMap.get(fieldName);
                 if (null == facetList) {
                     facetList = new ArrayList<>();
