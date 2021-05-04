@@ -11,7 +11,7 @@ import edu.stanford.irt.laneweb.search.AbstractSolrSearchResult;
 public class SolrSearchResult extends AbstractSolrSearchResult<Eresource> {
 
     public static final SolrSearchResult EMPTY_RESULT = new SolrSearchResult(null,
-            new SolrResultPage<Eresource>(Collections.emptyList()));
+            new SolrResultPage<>(Collections.emptyList()));
 
     public SolrSearchResult(final String query, final Page<Eresource> page) {
         super(query, page);
