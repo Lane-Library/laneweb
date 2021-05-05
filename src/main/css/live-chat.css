@@ -1,8 +1,5 @@
-.live-chat-inactive, li.live-chat-inactive {
-    display: none;
-}
-
-.contacts-live-chat-inactive button.button{
+.contacts-live-chat button[name="chat-inactive"]{
     background-color: grey;
+    border: none;
     cursor: default;
 }
