@@ -330,7 +330,7 @@
 
 
     <!-- disable live chat if not scheduled to be available -->
-    <xsl:template match="h:a[@class = 'contacts-live-chat']">
+    <xsl:template match="h:a[@class = 'live-chat']">
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="$live-chat-available = 'false'">
