@@ -1,22 +1,50 @@
-.libguide-slide-container {
+#libguide-slide-container {
+	position: relative;
 	padding: 12%;
-    position: relative;
     height: 100%;
     background-color: white;
 }
 
 .libguide-slide{
-	overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
 }
+
 
 .slide {
-    padding: 0px 9px 21px 9px;
-    display: none;
+    visibility: hidden;
+	left:0px;
+	position: absolute;
     animation-duration: 0.5s;
-    animation-name: slidein-off;
 }
 
-@keyframes slidein-previous {
+
+
+@keyframes slide-next-off {
+  from {
+    visibility: visible;
+    margin-left: 0%;
+  }
+  to {
+    visibility: hidden;
+    margin-left: 100%;
+  }
+}
+
+@keyframes slide-previous-off {
+  from {
+    visibility: visible;
+    margin-left: 0%;
+  }
+  to {
+    visibility: hidden;
+    margin-left: -100%;
+  }
+}
+
+
+@keyframes slide-previous {
   from {
     margin-left: 100%;
   }
@@ -26,7 +54,7 @@
 }
 
 
-@keyframes slidein-next {
+@keyframes slide-next {
   from {
     margin-left: -100%;
   }
@@ -36,15 +64,26 @@
 }
 
 .slide.active, .slide.active-next, .slide.active-previous {
-    display: block;
+    visibility: visible;
 }
 
 .slide.active-next{
-    animation-name: slidein-next;
+     animation-name: slide-next;
 }
+
+.slide.desactive-next{
+     animation-name: slide-next-off;
+}
+
+
 .slide.active-previous{
-    animation-name: slidein-previous;
+     animation-name: slide-previous;
 }
+
+.slide.desactive-previous{
+     animation-name: slide-previous-off;
+}
+
 
 .slide img{
   width: 100%;
@@ -61,7 +100,7 @@
 #previous-libguide-slide, #next-libguide-slide {
     position: absolute;
     display: block;
-    top: 250px;
+    top: 270px;
     cursor: pointer;
     color: black;
 }

@@ -4,7 +4,7 @@
 >
 
     <xsl:template match="h:html">
-        <div class="libguide-slide-container">
+        <div id="libguide-slide-container">
             <i id="previous-libguide-slide" class="fa fa-chevron-left" />
             <i id="next-libguide-slide" class="fa fa-chevron-right" />
             <div class="libguide-slide">
