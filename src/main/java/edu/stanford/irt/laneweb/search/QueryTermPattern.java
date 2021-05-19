@@ -15,7 +15,7 @@ public final class QueryTermPattern {
 
     private static final String EMPTY = "";
 
-    private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-)+), ((\\w| |-)+)\\)?)");
+    private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?(([\\w \\-])+), (([\\w \\-])+)\\)?)");
 
     private static final String INVERT_REPLACEMENT = "$1 and $4 $2";
 
@@ -25,7 +25,7 @@ public final class QueryTermPattern {
 
     private static final Pattern NULL_QUERY_PATTERN = Pattern.compile(".*");
 
-    private static final Pattern PARENS_PATTERN = Pattern.compile("(\\(|\\))");
+    private static final Pattern PARENS_PATTERN = Pattern.compile("[\\(\\)]");
 
     private static final String PIPE = "|";
 

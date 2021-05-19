@@ -187,7 +187,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, BUTTON);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, BUTTON, atts);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-        XMLUtils.data(xmlConsumer, "Visit Source Page ");
+        XMLUtils.data(xmlConsumer, "Visit Source Page ");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "fa fa-arrow-right");

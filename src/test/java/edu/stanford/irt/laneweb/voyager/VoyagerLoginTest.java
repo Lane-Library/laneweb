@@ -40,10 +40,10 @@ public class VoyagerLoginTest {
 
     @Test
     public void testLaneLoginURL() {
-        expect(this.service.login("0999", "123")).andReturn(true);
+        expect(this.service.login("0999", "mx1AaEt6AkbDINTwdh-GBoG5ah7C")).andReturn(true);
         replay(this.service);
         assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y",
-                this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
+                this.voyagerLogin.getVoyagerURL("999", "mx1AaEt6AkbDINTwdh-GBoG5ah7C", "a=b"));
         verify(this.service);
     }
 

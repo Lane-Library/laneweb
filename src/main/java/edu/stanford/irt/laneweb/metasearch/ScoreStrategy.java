@@ -20,7 +20,7 @@ public class ScoreStrategy {
     private static final int EXACT_TITLE = 100;
 
     private static final Pattern HALF_WEIGHT_PATTERN = Pattern.compile(
-            "^bmj_clinical_evidence|pubmed_(clinicaltrial|recent_reviews|treatment_focused|diagnosis_focused|prognosis_focused|harm_focused|etiology_focused|epidemiology_focused)");
+            "^(bmj_clinical_evidence|pubmed_(clinicaltrial|recent_reviews|treatment_focused|diagnosis_focused|prognosis_focused|harm_focused|etiology_focused|epidemiology_focused))");
 
     private static final int MAX_SCORE = 10;
 
