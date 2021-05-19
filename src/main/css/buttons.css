@@ -3,11 +3,11 @@ http://lane.stanford.edu/samples/button-css.html
  */
 .button-primary, .button-secondary, .button-primary-outline,
 	.button-secondary-outline {
-	padding: 8px 25px;
+	padding: 8px 24px;
 	border-radius: 8px;
 	color: #F0F0F0;
 	cursor: pointer;
-	animation-duration: 0,3s;
+	animation-duration: 0.3s;
 	font-size: 18px;
 	font-family: "Source Sans Pro";
 	font-weight: bold;
@@ -18,7 +18,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .button-primary.disabled, .button-secondary.disabled, .button-primary-outline.disabled, .button-secondary-outline.disabled {
-	padding: 8px 25px;
+	padding: 8px 24px;
 	background-color: #666666;
 	border: none;
 	cursor: not-allowed;
@@ -62,7 +62,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .button-primary-outline {
-	padding: 6px 23px;
+	padding: 6px 22px;
 	color: #8C1515;
 	background-color: #F0F0F0;
 	border: 2px solid #8C1515;
@@ -84,8 +84,8 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .button-secondary-outline {
-	padding: 6px 23px;
-	color: #007C92;
+	padding: 6px 22px;
+    color: #007C92;
 	background-color: #F0F0F0;
 	border: 2px solid #007C92;
 }
