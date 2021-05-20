@@ -29,7 +29,14 @@ http://lane.stanford.edu/samples/button-css.html
 	animation-name: none;
 }
 
-.button-primary {
+.button-primary.disabled .icon, .button-secondary.disabled .icon, .button-primary-outline.disabled .icon, .button-secondary-outline.disabled .icon,
+.button-primary.disabled:hover .icon, .button-secondary.disabled:hover .icon, .button-primary-outline.disabled:hover .icon, .button-secondary-outline.disabled:hover .icon {
+	color: #F0F0F0;
+    background-color: #555;
+	}
+
+
+.button-primary{
 	background-color: #8C1515;
 	border-color: #8C1515;
 }
@@ -71,15 +78,19 @@ http://lane.stanford.edu/samples/button-css.html
 	border-color: #002B33;
 }
 
-.button-primary-outline {
+.button-primary-outline, .button-primary span .icon {
 	color: #8C1515;
 	background-color: #F0F0F0;
 	border-color:  #8C1515;
 }
 
-.button-primary-outline:hover {
-	background-color: #8C1515;
+.button-primary-outline:hover, .button-primary-outline span .icon {
 	color: #F0F0F0;
+	background-color: #8C1515;
+}
+
+.button-primary-outline:hover span .icon{
+	color: #8C1515;
 }
 
 @keyframes  button--primary-outline-active {
@@ -92,17 +103,21 @@ http://lane.stanford.edu/samples/button-css.html
 	background-color: #6F1111;
 }
 
-.button-secondary-outline {
+.button-secondary-outline, .button-secondary span .icon {
 	color: #007C92;
 	background-color: #F0F0F0;
 	border-color: #007C92;
 
 }
 
-.button-secondary-outline:hover {
+.button-secondary-outline:hover, .button-secondary-outline span .icon{
 	color: #F0F0F0;
 	background-color: #007C92;
 }
+
+ .button-secondary-outline:hover span .icon{
+        color: #007C92;
+ }
 
 @keyframes  button--secondary-outline-active {
 	from { background-color:#007C92; }
@@ -113,6 +128,23 @@ http://lane.stanford.edu/samples/button-css.html
 	animation-name: button-secondary-outline-active;
 	background-color: #005766;
 }
+
+.button-primary span .icon, .button-secondary span .icon, .button-primary-outline span .icon, .button-secondary-outline span .icon{
+    border-radius: 12px;
+    font-size: 13px;
+    height: 24px;
+    width: 24px;
+    padding: 4px;
+    box-sizing: border-box;
+    margin-right: 6px;
+    line-height: 15px;
+}
+
+.button-primary span .icon, .button-secondary span .icon, .button-primary-outline:hover span .icon, .button-secondary-outline:hover span .icon{
+    background-color: #F0F0F0;
+}
+
+
 
 .button {
 	font-size: 16px;
