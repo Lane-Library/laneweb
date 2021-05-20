@@ -26,6 +26,21 @@
     margin-top: 2.1375vh;
 }
 
+.discovery-login-persistent span {
+    display: inline-block;
+    padding: 5px 0 5px 5px;
+    font-size: initial;
+    font-weight: 700;
+}
+
+#is-persistent-login {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: 3px;
+    box-shadow: 0 0 0 1px #757575;
+}
+
 .discovery-login-links a {
     background-color: white;
     background-position: 50% 60%;
