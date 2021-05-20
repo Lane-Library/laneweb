@@ -11,26 +11,31 @@ http://lane.stanford.edu/samples/button-css.html
 	font-size: 18px;
 	font-family: "Source Sans Pro";
 	font-weight: bold;
+	border: 2px solid;
 }
 
 .button-primary:link, .button-secondary:link, .button-primary-outline:link,	.button-secondary-outline:link {
 	text-decoration: none;
 }
 
-.button-primary.disabled, .button-secondary.disabled, .button-primary-outline.disabled, .button-secondary-outline.disabled {
-	padding: 8px 24px;
-	background-color: #666666;
-	border: none;
+.button-primary.disabled, .button-secondary.disabled, .button-primary-outline.disabled, .button-secondary-outline.disabled,
+.button-primary.disabled:hover, .button-secondary.disabled:hover, .button-primary-outline.disabled:hover, .button-secondary-outline.disabled:hover {
+	color: #F0F0F0;
+    background-color: #666666;
+    border-color: #666666;
 	cursor: not-allowed;
 	text-decoration: none;
+	animation-name: none;
 }
 
 .button-primary {
 	background-color: #8C1515;
+	border-color: #8C1515;
 }
 
 .button-primary:hover {
 	background-color: #6F1111;
+	border-color: #6F1111;
 }
 
 @keyframes  button-primary-active {
@@ -41,14 +46,17 @@ http://lane.stanford.edu/samples/button-css.html
 .button-primary:active {
 	animation-name: button-primary-active;
 	background-color: #430A0A;
+	border-color: #430A0A;
 }
 
 .button-secondary {
 	background-color: #007C92;
+	border-color: #007C92;
 }
 
 .button-secondary:hover {
 	background-color: #005766;
+	border-color: #005766;
 }
 
 @keyframes  button-secondary-active {
@@ -59,13 +67,13 @@ http://lane.stanford.edu/samples/button-css.html
 .button-secondary:active {
 	animation-name: button-secondary-active;
 	background-color: #002B33;
+	border-color: #002B33;
 }
 
 .button-primary-outline {
-	padding: 6px 22px;
 	color: #8C1515;
 	background-color: #F0F0F0;
-	border: 2px solid #8C1515;
+	border-color:  #8C1515;
 }
 
 .button-primary-outline:hover {
@@ -84,10 +92,10 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .button-secondary-outline {
-	padding: 6px 22px;
-    color: #007C92;
+	color: #007C92;
 	background-color: #F0F0F0;
-	border: 2px solid #007C92;
+	border-color: #007C92;
+
 }
 
 .button-secondary-outline:hover {
