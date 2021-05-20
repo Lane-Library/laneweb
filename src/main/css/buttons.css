@@ -1,8 +1,7 @@
 /*class button for mimicing SOM buttons.  See markup at:
 http://lane.stanford.edu/samples/button-css.html
  */
-.button-primary, .button-secondary, .button-primary-outline,
-	.button-secondary-outline {
+.button-primary, .button-secondary, .button-primary-outline,.button-secondary-outline {
 	padding: 8px 24px;
 	border-radius: 8px;
 	color: #F0F0F0;
@@ -12,6 +11,8 @@ http://lane.stanford.edu/samples/button-css.html
 	font-family: "Source Sans Pro";
 	font-weight: bold;
 	border: 2px solid;
+	line-height: 1;
+	display: inline-block;
 }
 
 .button-primary:link, .button-secondary:link, .button-primary-outline:link,	.button-secondary-outline:link {
