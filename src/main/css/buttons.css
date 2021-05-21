@@ -1,7 +1,9 @@
 /*class button for mimicing SOM buttons.  See markup at:
 http://lane.stanford.edu/samples/button-css.html
  */
-.button-primary, .button-secondary, .button-primary-outline,.button-secondary-outline {
+.btn {
+	background-color: #8C1515;
+    border: 2px solid #8C1515;
 	padding: 8px 24px;
 	border-radius: 8px;
 	color: #F0F0F0;
@@ -10,38 +12,30 @@ http://lane.stanford.edu/samples/button-css.html
 	font-size: 18px;
 	font-family: "Source Sans Pro";
 	font-weight: bold;
-	border: 2px solid;
 	line-height: 1;
 	display: inline-block;
 }
 
-.button-primary:link, .button-secondary:link, .button-primary-outline:link,	.button-secondary-outline:link {
+.btn:link{
 	text-decoration: none;
 }
 
-.button-primary.disabled, .button-secondary.disabled, .button-primary-outline.disabled, .button-secondary-outline.disabled,
-.button-primary.disabled:hover, .button-secondary.disabled:hover, .button-primary-outline.disabled:hover, .button-secondary-outline.disabled:hover {
-	color: #F0F0F0;
+.btn.disabled, .btn.alt.disabled, .btn.alt.outline.disabled, .btn:hover.disabled, .btn:hover.alt.disabled, .btn:hover.alt.outline.disabled {
+	color: #F0F0F0 ;
     background-color: #666666;
     border-color: #666666;
-	cursor: not-allowed;
-	text-decoration: none;
-	animation-name: none;
+	cursor: not-allowed ;
+	text-decoration: none ;
+	animation-name: none ;
 }
 
-.button-primary.disabled .icon, .button-secondary.disabled .icon, .button-primary-outline.disabled .icon, .button-secondary-outline.disabled .icon,
-.button-primary.disabled:hover .icon, .button-secondary.disabled:hover .icon, .button-primary-outline.disabled:hover .icon, .button-secondary-outline.disabled:hover .icon {
+.btn.disabled .icon, .btn.alt.disabled .icon,  .btn.alt.outline.disabled .icon, .btn:hover.disabled .icon, .btn:hover.alt.disabled .icon, .btn:hover.alt.outline.disabled .icon{
 	color: #F0F0F0;
     background-color: #555;
-	}
-
-
-.button-primary{
-	background-color: #8C1515;
-	border-color: #8C1515;
 }
 
-.button-primary:hover {
+
+.btn:hover {
 	background-color: #6F1111;
 	border-color: #6F1111;
 }
@@ -51,18 +45,44 @@ http://lane.stanford.edu/samples/button-css.html
     to {background-color: #430A0A;}
 }
 
-.button-primary:active {
+.btn:active {
 	animation-name: button-primary-active;
 	background-color: #430A0A;
 	border-color: #430A0A;
 }
 
-.button-secondary {
+.btn.outline, .btn span .icon {
+    color: #8C1515;
+    background-color: #F0F0F0;
+    border-color:  #8C1515;
+}
+
+.btn.outline:hover, .btn.outline span .icon {
+    color: #F0F0F0;
+    background-color: #8C1515;
+}
+
+.btn.outline:hover span .icon{
+    color: #8C1515;
+}
+
+@keyframes  button--primary-outline-active {
+    from {  background-color:#8C1515; }
+    to { background-color: #6F1111; }
+}
+
+.btn.outline:active {
+    animation-name: button-primary-outline-active;
+    background-color: #6F1111;
+}
+
+
+.btn.alt {
 	background-color: #007C92;
 	border-color: #007C92;
 }
 
-.button-secondary:hover {
+.btn.alt:hover {
 	background-color: #005766;
 	border-color: #005766;
 }
@@ -72,50 +92,26 @@ http://lane.stanford.edu/samples/button-css.html
 	to { background-color: #002B33;	}
 }
 
-.button-secondary:active {
+.btn.alt:active {
 	animation-name: button-secondary-active;
 	background-color: #002B33;
 	border-color: #002B33;
 }
 
-.button-primary-outline, .button-primary span .icon {
-	color: #8C1515;
-	background-color: #F0F0F0;
-	border-color:  #8C1515;
-}
 
-.button-primary-outline:hover, .button-primary-outline span .icon {
-	color: #F0F0F0;
-	background-color: #8C1515;
-}
-
-.button-primary-outline:hover span .icon{
-	color: #8C1515;
-}
-
-@keyframes  button--primary-outline-active {
-	from {  background-color:#8C1515; }
-	to { background-color: #6F1111;	}
-}
-
-.button-primary-outline:active {
-	animation-name: button-primary-outline-active;
-	background-color: #6F1111;
-}
-
-.button-secondary-outline, .button-secondary span .icon {
+.btn.alt.outline, .btn.alt span .icon {
 	color: #007C92;
 	background-color: #F0F0F0;
 	border-color: #007C92;
 
 }
 
-.button-secondary-outline:hover, .button-secondary-outline span .icon{
+.btn.alt.outline:hover, .btn.alt.outline span .icon{
 	color: #F0F0F0;
 	background-color: #007C92;
 }
 
- .button-secondary-outline:hover span .icon{
+ .btn.alt.outline:hover span .icon{
         color: #007C92;
  }
 
@@ -124,12 +120,12 @@ http://lane.stanford.edu/samples/button-css.html
 	to { background-color: #005766;	}
 }
 
-.button-secondary-outline:active {
+.btn.alt.outline:active {
 	animation-name: button-secondary-outline-active;
 	background-color: #005766;
 }
 
-.button-primary span .icon, .button-secondary span .icon, .button-primary-outline span .icon, .button-secondary-outline span .icon{
+.btn span .icon{
     border-radius: 12px;
     font-size: 13px;
     height: 24px;
@@ -140,7 +136,7 @@ http://lane.stanford.edu/samples/button-css.html
     line-height: 15px;
 }
 
-.button-primary span .icon, .button-secondary span .icon, .button-primary-outline:hover span .icon, .button-secondary-outline:hover span .icon{
+.btn span .icon, .btn.outline:hover span .icon, .btn.alt.outline:hover span .icon{
     background-color: #F0F0F0;
 }
 
