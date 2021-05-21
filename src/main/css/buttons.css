@@ -42,6 +42,10 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 	border-color: #6F1111;
 }
 
+.btn:hover span .icon {
+    color: #6F1111;
+}
+
 @keyframes  button-primary-active {
 	from {  background-color:#6F1111;}
     to {background-color: #430A0A;}
@@ -51,6 +55,10 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 	animation-name: button-primary-active;
 	background-color: #430A0A;
 	border-color: #430A0A;
+}
+
+.btn:active span .icon{
+	color: #430A0A;
 }
 
 .btn.outline, .btn span .icon {
@@ -78,7 +86,6 @@ overwrite any other class ( outline, alt ) if the button is disabled */
     background-color: #6F1111;
 }
 
-
 .btn.alt {
 	background-color: #007C92;
 	border-color: #007C92;
@@ -87,6 +94,10 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 .btn.alt:hover {
 	background-color: #005766;
 	border-color: #005766;
+}
+
+.btn.alt:hover span .icon{
+    color: #005766;
 }
 
 @keyframes  button-secondary-active {
@@ -100,6 +111,9 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 	border-color: #002B33;
 }
 
+.btn.alt:active span .icon{
+    color: #002B33;
+}
 
 .btn.alt.outline, .btn.alt span .icon {
 	color: #007C92;
