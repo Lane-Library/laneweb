@@ -20,18 +20,20 @@ http://lane.stanford.edu/samples/button-css.html
 	text-decoration: none;
 }
 
-.btn.disabled, .btn.alt.disabled, .btn.alt.outline.disabled, .btn:hover.disabled, .btn:hover.alt.disabled, .btn:hover.alt.outline.disabled {
-	color: #F0F0F0 ;
-    background-color: #666666;
-    border-color: #666666;
-	cursor: not-allowed ;
-	text-decoration: none ;
-	animation-name: none ;
+/* I do not like to use the !important but in this case I thought it is making sense  because it will
+overwrite any other class ( outline, alt ) if the button is disabled */
+.btn.disabled {
+	color: #F0F0F0 !important;
+    background-color: #666666 !important;
+    border-color: #666666 !important;
+	cursor: not-allowed !important;
+	text-decoration: none !important;
+	animation-name: none !important;
 }
 
-.btn.disabled .icon, .btn.alt.disabled .icon,  .btn.alt.outline.disabled .icon, .btn:hover.disabled .icon, .btn:hover.alt.disabled .icon, .btn:hover.alt.outline.disabled .icon{
-	color: #F0F0F0;
-    background-color: #555;
+.btn.disabled .icon{
+	color: #F0F0F0 !important;
+    background-color: #555 !important;
 }
 
 
