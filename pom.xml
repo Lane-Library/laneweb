@@ -555,6 +555,7 @@
                     </aggregations>
                 </configuration>
             </plugin>
+            <!-- disable (temporarily?) grover JS tests: istanbul is dependent on ancient node version  
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
@@ -572,6 +573,7 @@
                     </execution>
                 </executions>
             </plugin>
+             -->
             <plugin>
                 <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
