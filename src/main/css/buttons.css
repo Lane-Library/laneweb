@@ -10,7 +10,7 @@ http://lane.stanford.edu/samples/button-css.html
 	cursor: pointer;
 	animation-duration: 0.3s;
 	font-size: 18px;
-	font-family: "Source Sans Pro";
+	font-family: 'Source Sans Pro', serif;
 	font-weight: bold;
 	line-height: 1;
 	display: inline-block;
