@@ -150,6 +150,7 @@ overwrite any other class ( outline, alt ) if the button is disabled */
     box-sizing: border-box;
     margin-right: 6px;
     line-height: 15px;
+    text-align: center;
 }
 
 .btn span .icon, .btn.outline:hover span .icon, .btn.alt.outline:hover span .icon{
