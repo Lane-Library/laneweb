@@ -150,6 +150,7 @@ overwrite any other class ( outline, alt ) if the button is disabled */
     box-sizing: border-box;
     margin-right: 6px;
     line-height: 15px;
+    vertical-align: middle;
     text-align: center;
 }
 
