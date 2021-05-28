@@ -11,6 +11,9 @@
             <action date="2021-05-26" dev="alainb" issue="LANEWEB-10718" type="update">
                 New button icon issue
             </action>
+            <action date="2021-05-27" dev="ryanmax" issue="LANEWEB-10720" type="update">
+                add classes service to laneweb status page
+            </action>
         </release>
         <release date="2021-05-24" version="3.7.12" description="bug fix release">
             <action date="2021-05-20" dev="ryanmax" issue="LANEWEB-10716" type="update">
