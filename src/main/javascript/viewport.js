@@ -14,7 +14,7 @@
                     }
                 };
             window.addEventListener("scroll", updateScrolled);
-            window.setInterval(checkScrolled, 1000);
+            window.setInterval(checkScrolled, 500);
 
             return {
                 inView: function(node) {

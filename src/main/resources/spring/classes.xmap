@@ -10,7 +10,7 @@
          <map:serialize type="xml"/>
       </map:match>
       <map:match pattern="libcals-by-category.xml" type="wildcard">
-         <map:generate type="file" src="cache:60:{libcal-service-uri}/events/12663/{id}"/>
+         <map:generate type="file" src="cache:60:{libcal-service-uri}events/12663/{id}"/>
          <map:transform type="textNodeParser">
             <map:parameter name="elementNames" value="short_description,description"/>
          </map:transform>
@@ -28,7 +28,7 @@
          <map:serialize type="xml"/>
       </map:match>
       <map:match pattern="libcal-history.xml" type="wildcard">
-         <map:generate type="file" src="cache:60:{libcal-service-uri}/events/12663/49008"/>
+         <map:generate type="file" src="cache:60:{libcal-service-uri}events/12663/49008"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/libcal-history.xsl"/>
          <map:serialize type="xml"/>
       </map:match>
@@ -44,7 +44,7 @@
       </map:match>
       <!-- Cached requests from the libcal website -->
       <map:match pattern="libcals.xml" type="wildcard">
-         <map:generate type="file" src="cache:60:{libcal-service-uri}/events/12663"/>
+         <map:generate type="file" src="cache:60:{libcal-service-uri}events/12663"/>
          <map:serialize type="xml"/>
       </map:match>
    </map:pipeline>
