@@ -33,8 +33,6 @@
 
     L.on("search:search", searchIndicator.show);
 
-    addEventListener("beforeunload", searchIndicator.hide);
-
     L.searchIndicator = searchIndicator;
 
 })();
