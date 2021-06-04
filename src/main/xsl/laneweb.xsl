@@ -283,7 +283,7 @@
     </xsl:template>
 
     <!-- add active to the pico-fields fieldset if $search-source=clinical|peds-all and PICO values present or path is /picosearch.html -->
-    <xsl:template match="h:fieldset[@class='pico-fields' and (matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) or $path='/picosearch.html')]/@class">
+    <xsl:template match="h:fieldset[contains(@class,'pico-fields') and (matches($search-source,'(clinical|peds)-all') and ($p or $i or $c or $o) or $path='/picosearch.html')]/@class">
         <xsl:attribute name="class" select="'pico-fields pico-fields-active'"/>
     </xsl:template>
 
