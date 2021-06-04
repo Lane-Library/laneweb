@@ -262,8 +262,8 @@
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
 
-    <!-- add active to class to search form for /picosearch.html -->
-    <xsl:template match="h:form[@class='search-form' and ($path='/picosearch.html')]/@class">
+    <!-- add active to class to search form for search help pages -->
+    <xsl:template match="h:form[@class='search-form' and matches($path,'/(pico|lane|bioimage|textbook)search.html')]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
 
