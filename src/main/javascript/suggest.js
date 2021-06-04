@@ -98,19 +98,3 @@
     //make the Suggest constructor globally accessible
     L.Suggest = Suggest;
 })();
-
-(function() {
-
-    "use strict";
-
-    // hybrid search page inputs
-    var laneSuggest,
-        hybridInput = document.querySelector('.laneSuggest');
-    if (hybridInput) {
-        laneSuggest = new L.Suggest(hybridInput);
-        laneSuggest.on("select", function() {
-            L.searchIndicator.show();
-            hybridInput.closest("form").submit();
-        });
-    }
-})();
