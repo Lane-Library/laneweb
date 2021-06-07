@@ -33,6 +33,9 @@
 
     L.on("search:search", searchIndicator.show);
 
+    // LANEWEB-10724: spinner appears on back button
+    addEventListener("pagehide", searchIndicator.hide);
+
     L.searchIndicator = searchIndicator;
 
 })();

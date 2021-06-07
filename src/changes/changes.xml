@@ -7,7 +7,18 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
-         <release date="2021-05-28" version="3.7.13" description="bug fix release">
+         <release date="2021-06-07" version="3.7.14" description="bug fix release">
+            <action date="2021-06-07" dev="ryanmax" issue="LANEWEB-10724" type="fix">
+                search spinner intermittently appearing on back button
+            </action>
+            <action date="2021-06-04" dev="ryanmax" issue="LANEWEB-10726" type="fix">
+                search help pages not showing their respective search forms
+            </action>
+            <action date="2021-06-04" dev="ryanmax" issue="LANEWEB-10725" type="fix">
+                PICO form not staying open after use
+            </action>
+        </release>
+        <release date="2021-05-28" version="3.7.13" description="bug fix release">
             <action date="2021-05-26" dev="alainb" issue="LANEWEB-10718" type="update">
                 New button icon issue
             </action>
@@ -23,12 +34,12 @@
                 New Button Classes
             </action>
         </release>
-         <release date="2021-05-10" version="3.7.11" description="bug fix release">
+        <release date="2021-05-10" version="3.7.11" description="bug fix release">
             <action date="2021-05-05" dev="ryanmax" issue="LANEWEB-10706" type="update">
                 Contact Us Chat Button Fix
             </action>
         </release>
-         <release date="2021-05-02" version="3.7.10" description="bug fix release">
+        <release date="2021-05-02" version="3.7.10" description="bug fix release">
             <action date="2021-04-27" dev="ryanmax" issue="LANEWEB-10705" type="update">
                 make Lane Search default search option on SHC portal
             </action>
