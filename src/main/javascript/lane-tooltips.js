@@ -457,7 +457,7 @@
     }),
 
     createTooltips = function() {
-            var tooltipTriggerIds = '.search-tab',
+            var tooltipTriggerIds,
                 tooltipContainer, tooltipId, i, j, tt, content = {},
                 tooltipContainerNodeList = document.querySelectorAll('.tooltips');
             for (i = 0; i < tooltipContainerNodeList.length; i++) {
