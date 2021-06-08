@@ -155,10 +155,8 @@ li.active .description {
 }
 
 .requestIt a {
-	color: white;
-	background-color: #428bca;
-	border-radius: 4px;
-	padding: 2px 5px;
+	padding: 3px 10px;
+	font-size: unset;
 }
 
 .permalink a {
