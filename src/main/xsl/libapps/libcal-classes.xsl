@@ -93,12 +93,11 @@
    <xsl:template match="remainingSeats">
       <div class="register">
          <div>
-            <a class="button alt1">
+            <a class="btn">
                <xsl:attribute name="href">
                <xsl:apply-templates select="../url/public"/>
             </xsl:attribute>
                <span>Register</span>
-               <i class="icon fa fa-arrow-right"/>
             </a>
             <div class="remaining-seats">
                Seats left:
