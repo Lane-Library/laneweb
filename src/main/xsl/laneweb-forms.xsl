@@ -30,16 +30,7 @@
 
     <xsl:template match="h:input[@name='q'][@data-placeholder]/@placeholder">
         <xsl:attribute name="placeholder">
-            <xsl:choose>
-                <!-- if there is a query the placeholder for the q input is the data-placeholder from the active tab -->
-                <xsl:when test="$query">
-                    <xsl:value-of  select="ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $search-source]/@data-placeholder"/>
-                </xsl:when>
-                <!-- if there is not a query the placeholder for the q input is the data-placeholder -->
-                <xsl:otherwise>
-                    <xsl:value-of  select="parent::h:input/@data-placeholder"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:value-of select="ancestor::h:form[contains(@class,'search-form')]//h:div[contains(@class,'search-tab') and @data-source = $search-source]/@data-placeholder"/>
         </xsl:attribute>
     </xsl:template>
 
