@@ -208,7 +208,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <h4>Can we help?</h4>
-                <a class="button"
+                <a class="btn alt"
                     href="{$base-path}/contacts/index.html#laneaskus">
                     <span><i class="icon fa fa-comments"/>Ask Us</span>
                 </a>
