@@ -176,10 +176,6 @@
     color: #f0f4f5;
 }
 
-.search-tab .fa {
-    color: #8c1515;
-}
-
 .search-tab-active .fa,
 .search-tab:hover .fa {
     color: #f0f4f5;
@@ -188,8 +184,7 @@
 .search-form,
 .search-close,
 .search-form fieldset,
-.search-tab,
-.search-tab .fa {
+.search-tab {
     transition-property: all;
     transition-duration: .3s;
 }

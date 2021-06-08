@@ -70,34 +70,29 @@
             <div class="pure-g pure-md-hide">
                <div class="pure-u-1-4">
                   <div class="search-tab" data-help="/lanesearch.html" data-source="all-all"
-                     data-placeholder="Enter title words of article, journal, book, etc., or author, subject, PMID, ISSN, DOI, or Call Number"
-                     title="Searches Pubmed, Lane Catalog (titles and descriptions of books, journals, etc. from Lane) and website"
+                     data-placeholder="Search articles, books, journals, databases, our website, and more"
                   >
-                     Lane
-                     <i class="fa fa-plus"></i>
+                     Lane Search
                   </div>
                </div>
                <div class="pure-u-1-4">
                   <div class="search-tab" data-help="/picosearch.html" data-source="clinical-all"
-                     data-placeholder="Enter patient condition, treatment alternatives, or use PICO search builder"
-                     title="Searches evidence-based resources: BMJ, Cochrane, Dare, DynaMed Plus, National Guidelines, Pubmed, UptoDate"
-                  >Clinical</div>
+                     data-placeholder="Search evidence-based resources by patient condition or intervention"
+                  >Clinical Search</div>
                </div>
                <div class="pure-u-1-4">
                   <div class="search-tab" data-help="/bioimagesearch.html" data-source="images-all"
-                     data-placeholder="Enter keywords for subject or images desired"
-                     title="Find images related to medicine and biology and their reuse rights"
-                  >Images</div>
+                     data-placeholder="Search biomedical images and their reuse rights"
+                  >Image Search</div>
                </div>
                <div class="pure-u-1-4">
                   <div class="search-tab" data-help="/textbooksearch.html" data-source="textbooks-all"
-                     data-placeholder="Enter topic, condition, diagnosis or disease keywords"
-                     title="Search the full text of major clinical textbooks in 25 medical specialites"
-                  >Clinical Textbooks</div>
+                     data-placeholder="Search the full text of major clinical textbooks in 25 medical specialties"
+                  >Clinical Textbook Search</div>
                </div>
             </div>
             <fieldset>
-               <input name="q" data-placeholder="Find articles, books, journals, databases, and information on the Lane website" placeholder=""
+               <input name="q" data-placeholder="Search articles, books, journals, databases, our website, and more" placeholder=""
                   value=""/>
                <input name="source" type="hidden" value="all-all"/>
                <input name="sourceid" type="hidden" value="" disabled="disabled"/>
