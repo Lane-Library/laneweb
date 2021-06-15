@@ -77,6 +77,14 @@ public class SolrQueryParserTest {
                 this.parser.parse("BMJ 2015; 351 doi: http://dx.doi.org/10.1136/bmj.h5942"));
         assertEquals("\"10.1016/j.it.2015.02.003\" 10.1136/bmj.h5942",
                 this.parser.parse("doi.org/10.1016/j.it.2015.02.003 http://dx.doi.org/10.1136/bmj.h5942"));
+        assertEquals("\"10.1056/NEJMra2005230\"", this.parser
+                .parse("https://www.nejm.org/doi/10.1056/NEJMra2005230"));
+        assertEquals("Best Practices\\: Application of NI\\-RADS for Posttreatment Surveillance Imaging of Head and Neck Cancer\n"
+                + "Read More\\: \"10.2214/AJR.20.23841\"", this.parser
+                        .parse("Best Practices: Application of NI-RADS for Posttreatment Surveillance Imaging of Head and Neck Cancer\n"
+                                + "Read More: https://www.ajronline.org/doi/full/10.2214/AJR.20.23841"));
+        assertEquals("\"10.1161/CIRCGEN.120.003138\"", this.parser
+                .parse("https://www.ahajournals.org/doi/full/10.1161/CIRCGEN.120.003138"));
         assertEquals("(id:12345 OR id:123456) OR (id:12345 OR id:123456)", this.parser.parse("id:12345 OR id:123456"));
         assertEquals("(recordId:12345 OR pmid\\:123456) OR (recordId:12345 OR pmid\\:123456)",
                 this.parser.parse("recordId:12345 OR pmid:123456"));
