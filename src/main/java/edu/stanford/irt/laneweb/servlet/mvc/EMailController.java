@@ -31,7 +31,8 @@ public class EMailController {
 
   public static final long MAX_UPLOAD_SIZE = 4194304;
 
-  private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
+//  private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
+  private static final String ASKUS_ADDRESS = "alain.boussard@gmail.com";
 
   private static final String ASKUS_PATH = "askus";
 
@@ -41,11 +42,13 @@ public class EMailController {
 
   private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/ejp-confirmation.html";
 
-  private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
+ // private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
+  private static final String DOCXPRESS_ADDRESS = "alain.boussard@gmail.com";
 
   private static final String DOCXPRESS_PATH = "docxpress";
 
-  private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
+//  private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
+  private static final String EJP_ADDRESS = "alain.boussard@gmail.com";
 
   private static final String EJP_PATH = "ejp";
 
@@ -98,7 +101,7 @@ public class EMailController {
   @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
   public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
     Map<String, Object> map = model.asMap();
-    if(spamService.isSpam(ASKUS_PATH, map.get("email").toString())) {
+    if(spamService.isSpam(ASKUS_PORTAL, map.get("email").toString())) {
       return ERROR_PAGE;
     }
     sendEmail(DOCXPRESS_ADDRESS, map);
