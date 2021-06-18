@@ -85,7 +85,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map) || spamService.isSpam(ASKUS_PORTAL, map.get("email").toString())) {
+    if (!validateForm(map) || spamService.isSpam(ASKUS_PORTAL, map)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
@@ -101,7 +101,7 @@ public class EMailController {
   @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
   public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
     Map<String, Object> map = model.asMap();
-    if(spamService.isSpam(ASKUS_PORTAL, map.get("email").toString())) {
+    if(spamService.isSpam(ASKUS_PORTAL, map)) {
       return ERROR_PAGE;
     }
     sendEmail(DOCXPRESS_ADDRESS, map);
@@ -113,7 +113,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map) || spamService.isSpam(ASKUS_PORTAL, map.get("email").toString())) {
+    if (!validateForm(map) || spamService.isSpam(ASKUS_PORTAL, map)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
@@ -132,7 +132,7 @@ public class EMailController {
   public String submitAskUs(final Model model, final RedirectAttributes atts) throws IllegalStateException {
     Map<String, Object> map = model.asMap();
     appendNameToSubject(map);
-    if(spamService.isSpam(ASKUS_PORTAL, map.get("email").toString())) {
+    if(spamService.isSpam(ASKUS_PORTAL, map)) {
       return ERROR_PAGE;
     }
     sendEmail(ASKUS_ADDRESS, map);

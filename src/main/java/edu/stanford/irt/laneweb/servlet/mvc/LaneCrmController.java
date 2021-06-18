@@ -67,7 +67,8 @@ public class LaneCrmController {
     if (null == email || "".equals(email)) {
       return false;
     }
-    if(this.spamService.isSpam( SFP_PORTAL, data.get("requestedBy.email").toString())) {
+
+    if(this.spamService.isSpam( SFP_PORTAL, data)) {
       return false;
     }
     for (String emailValidation : VALID_EMAILS) {
@@ -91,7 +92,8 @@ public class LaneCrmController {
     }
     ObjectMapper om = new ObjectMapper();
     model.addAttribute("json", om.writeValueAsString(model));
-    model.addAttribute("IP", request.getRemoteAddr());
+    model.addAttribute("email", model.getAttribute("requestedBy.email"));
+    model.addAttribute("remote-addr", request.getRemoteAddr());
     model.addAttribute(SUBJECT, SUBJECT_CONTENT);
     model.addAttribute("recipient", this.sfpEmailAddress);
   }
