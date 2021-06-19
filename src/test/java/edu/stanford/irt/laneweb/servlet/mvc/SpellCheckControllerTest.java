@@ -44,6 +44,7 @@ public class SpellCheckControllerTest {
         replay(this.spellChecker, this.solrService);
         SpellingResult spellResult = this.controller.checkSpelling("incorrect");
         assertEquals("correct", spellResult.getSuggestion());
+        assertEquals(100, spellResult.getSuggestionResultCount());
         verify(this.spellChecker, this.solrService);
     }
 
