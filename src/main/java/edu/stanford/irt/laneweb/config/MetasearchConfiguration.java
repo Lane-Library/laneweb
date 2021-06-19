@@ -34,7 +34,6 @@ import edu.stanford.irt.laneweb.metasearch.PagingSearchResultList;
 import edu.stanford.irt.laneweb.metasearch.PagingSearchResultListSAXStrategy;
 import edu.stanford.irt.laneweb.metasearch.RESTMetaSearchService;
 import edu.stanford.irt.laneweb.metasearch.ResourceResultSAXStrategy;
-import edu.stanford.irt.laneweb.metasearch.ResourceSearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.ScoreStrategy;
 import edu.stanford.irt.laneweb.metasearch.SearchDirectoryTransformer;
 import edu.stanford.irt.laneweb.metasearch.SearchGenerator;
@@ -157,13 +156,6 @@ public class MetasearchConfiguration {
         engines.add("uptodate_allchild");
         return new ClinicalSearchResultsGenerator(metaSearchService, clinicalSearchResultsSAXStrategy(), engines,
                 clinicalSearchResultsFactory);
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/search-resource")
-    @Scope("prototype")
-    public Generator resourceSearchGenerator(
-            final MetaSearchService metaSearchService) {
-        return new ResourceSearchGenerator(metaSearchService, metasearchResultSAXStrategy());
     }
 
     @Bean
