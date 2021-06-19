@@ -5,6 +5,7 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
@@ -43,6 +44,19 @@ public class SpellCheckControllerTest {
         replay(this.spellChecker, this.solrService);
         SpellingResult spellResult = this.controller.checkSpelling("incorrect");
         assertEquals("correct", spellResult.getSuggestion());
+        verify(this.spellChecker, this.solrService);
+    }
+
+    @Test
+    public void testCheckSpellingNoresults() {
+        SpellCheckResult result = new SpellCheckResult("corrected");
+        expect(this.spellChecker.spellCheck("original")).andReturn(result);
+        Map<String, Long> map = new HashMap<>();
+        map.put("all", 0L);
+        expect(this.solrService.searchCount("corrected")).andReturn(map);
+        replay(this.spellChecker, this.solrService);
+        SpellingResult spellResult = this.controller.checkSpelling("original");
+        assertNull(spellResult.getSuggestion());
         verify(this.spellChecker, this.solrService);
     }
 
