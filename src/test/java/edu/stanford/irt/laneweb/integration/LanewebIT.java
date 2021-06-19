@@ -156,9 +156,4 @@ public class LanewebIT {
                 .andExpect(status().isOk()).andExpect(content().contentType(TEXT_XML));
     }
 
-    @Test
-    public void testTextbookSearch() throws Exception {
-        this.mockMvc.perform(get("/search.html?source=textbooks-all&q=test").servletPath("/search.html"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
-    }
 }

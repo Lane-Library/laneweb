@@ -78,20 +78,6 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- textbooks -->
-            <map:match type="regex-parameter" pattern="^textbooks-all$">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:aggregate type="default" element="doc">
-                    <map:generate type="search-engine">
-                        <map:parameter name="timeout" value="0"/>
-                        <map:parameter name="engines" value="ck_abeloff,ck_adkinson,ck_auerbach,ck_behrman,ck_braunwald,ck_brenner,ck_browner,ck_canale,ck_cct,ck_cummings,ck_delee,ck_duthie,ck_feldman,ck_frontera,ck_gabbe,ck_goldberger,ck_goldman,ck_grainger,ck_green,ck_habif,ck_harris,ck_hlh,ck_hoffman,ck_keane,ck_khatri,ck_kumar,ck_larsen,ck_long,ck_mandell,ck_marx,ck_mettler,ck_miller,ck_murray,ck_rakel_ig,ck_rakel_tfp,ck_roberts,ck_stern,ck_townsend,ck_walsh,ck_yanoff,ovid-a2529gal,ovid-frad,am_way,ovid-kaplan,ovid-yamada,ovid-mfpr,ovid-modt,am_tintinalli,ovid-lambrou,am_orthopedic,ovid-chsb,ovid-inds,ovid-cllm,am_ophthalmology,am_endocrinology,ovid-chos,ovid-danforth,ovid-wintrobe,ovid-a2514rhe,ovid-caap,ovid-drpl,am_otolaryngology,am_imboden,ovid-cppo,ovid-pppo,ovid-cpem,ovid-adhc,ovid-nettina,dsm-iv,ovid-merritt,ovid-mpre,ovid-lcap,ovid-dlvr,ovid-a2528irw,ovid-a2524sir,am_williams_hematology,am_goodman,ovid-nogy,am_hurst,ovid-carpen,ovid-dambro,am_decherney,ovid-greenfield,ovid-bmap,am_hay,genereviews,ovid-topol,am_morgan,ovid-becker,ovid-clan,ovid-hmsn,ovid-goroll,am_ebert,am_williams,ovid-hnso,am_pulmonary,ovid-togy,ovid-fischbk,am_harrison,ovid-hosm,ovid-cgei,ovid-prgo,ovid-lndg,ovid-diki,ovid-topd,ovid-stbg,aapredbook,ovid-wallach,am_smith,am_hall_principles,naturalmedicines,am_lange,am_fca,ovid-oski,am_crawford,ovid-a2525pat,ovid-cimg,am_goldfrank"/>
-                    </map:generate>
-                    <map:generate type="file" src="cocoon://content/cached/search/textbooks-all.html"/>
-                </map:aggregate>
-                <map:transform type="saxon" src="classpath:/xsl/metasearch.xsl"/>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="regex-parameter" pattern=".*images-all$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:aggregate type="default" element="doc"  ns="doc">
