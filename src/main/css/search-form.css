@@ -1,6 +1,6 @@
 .hero-unit {
     background-color: #8c1515;
-    background-image: url('../images/search-back.jpg'); 
+    background-image: url('../images/search-back.jpg');
     background-repeat: no-repeat;
     color: white;
     background-size: cover;
@@ -76,6 +76,7 @@
     padding-left: 10px;
     padding-right: 60px;
     box-sizing: border-box;
+    border:none;
 }
 
 /* see case 125259 */
@@ -223,6 +224,6 @@
 	}
 	.search-form {
 	width: 80%;
-	}	
+	}
 }
 
