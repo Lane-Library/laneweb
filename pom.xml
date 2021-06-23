@@ -64,7 +64,7 @@
      	<dependency>
             <artifactId>commons-codec</artifactId>
             <groupId>commons-codec</groupId>
-            <version>1.12</version>
+            <version>1.15</version>
         </dependency>
         <dependency>
             <artifactId>jackson-databind</artifactId>
@@ -274,13 +274,22 @@
             <artifactId>cache-api</artifactId>
             <version>1.1.1</version>
         </dependency>
-        <dependency>
+         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>3.9.0</version>
+            <version>3.9.1</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.1</version>
+        </dependency><dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>lanehours</artifactId>
             <version>1.0.2</version>
