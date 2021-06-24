@@ -61,7 +61,7 @@
             <artifactId>irt-cocoon</artifactId>
             <version>1.13.1</version>
         </dependency>
-     	<dependency>
+        <dependency>
             <artifactId>commons-codec</artifactId>
             <groupId>commons-codec</groupId>
             <version>1.15</version>
@@ -289,7 +289,13 @@
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
             <version>2.3.1</version>
-        </dependency><dependency>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.istack</groupId>
+            <artifactId>istack-commons-runtime</artifactId>
+            <version>3.0.10</version>
+        </dependency>
+        <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>lanehours</artifactId>
             <version>1.0.2</version>
