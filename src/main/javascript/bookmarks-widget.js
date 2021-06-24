@@ -133,16 +133,12 @@
          * @private;
          */
         _hideSomeItems : function() {
-            var i, displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li"), 
-            manageBookmarks = this.get("srcNode").one("[class=manageBookmarks]");
+            var i, displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li");
             for (i = 0; i < displayLimit && i < items.size(); i++) {
                 items.item(i).setStyle("display", "block");
             }
             for (i = displayLimit; i < items.size(); i++) {
                 items.item(i).setStyle("display", "none");
-            }
-            if (manageBookmarks && items.size() > displayLimit) {
-                manageBookmarks.setStyle("display", "block");
             }
         }
     }, {
