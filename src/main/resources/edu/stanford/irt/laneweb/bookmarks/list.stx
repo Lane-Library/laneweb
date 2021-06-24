@@ -19,7 +19,7 @@
                 </stx:otherwise>
             </stx:choose>
             <!-- bookmarks-widget.js controls when this link is displayed -->
-            <li xmlns="http://www.w3.org/1999/xhtml" class="manageBookmarks">
+            <li xmlns="http://www.w3.org/1999/xhtml" style="display:none;" class="manageBookmarks">
                 <a xmlns="http://www.w3.org/1999/xhtml" class="btn alt" href="/favorites.html#bookmarks-editor">Manage My Bookmarks</a>
             </li>
         </ul>
