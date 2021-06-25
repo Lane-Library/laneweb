@@ -40,6 +40,7 @@
         syncUI : function() {
             this._truncateLabels();
             this._hideSomeItems();
+            this._showManageBookmarks();
         },
 
         /**
@@ -140,6 +141,22 @@
             for (i = displayLimit; i < items.size(); i++) {
                 items.item(i).setStyle("display", "none");
             }
+        },
+
+        /**
+         * Show manage bookmarks link when more items than displayLimit
+         * @method _showManageBookmarks()
+         * @private;
+         */
+        _showManageBookmarks : function() {
+            var displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li"),
+                manageBookmarks = document.querySelector(".manageBookmarks");
+            if (manageBookmarks && items.size() > displayLimit) {
+                    manageBookmarks.style.display = 'block';
+            } 
+            if (manageBookmarks && items.size() < displayLimit) {
+                    manageBookmarks.style.display = 'none';
+            } 
         }
     }, {
         ATTRS : {
