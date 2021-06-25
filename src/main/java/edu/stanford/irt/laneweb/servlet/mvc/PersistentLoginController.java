@@ -28,10 +28,10 @@ import edu.stanford.irt.laneweb.user.User;
 @Controller
 public class PersistentLoginController {
 
-    private static final long DURATION_MILLIS = Duration.ofDays(14).toMillis();
+    private static final long DURATION_MILLIS = Duration.ofDays(28).toMillis();
 
     // login duration is two weeks:
-    private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
+    private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(28).getSeconds());
 
     private UserCookieCodec codec;
 

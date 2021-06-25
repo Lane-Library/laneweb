@@ -74,9 +74,9 @@ public class PersistentLoginControllerTest {
         String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, this.url, this.request,
                 this.response);
         assertEquals("redirect:https://login.laneproxy.stanford.edu/login/test.html", redirect);
-        assertEquals(1209600, cookie1.getValue().getMaxAge());
+        assertEquals(2419200, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
-        assertTrue(System.currentTimeMillis() + Duration.ofDays(14).minus(Duration.ofMillis(100)).toMillis() < Long
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(28).minus(Duration.ofMillis(100)).toMillis() < Long
                 .valueOf(cookie2.getValue().getValue()));
         assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
@@ -108,9 +108,9 @@ public class PersistentLoginControllerTest {
         String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, null, this.request,
                 this.response);
         assertEquals("redirect:/index.html", redirect);
-        assertEquals(1209600, cookie1.getValue().getMaxAge());
+        assertEquals(2419200, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
-        assertTrue(System.currentTimeMillis() + Duration.ofDays(14).minus(Duration.ofMillis(100)).toMillis() < Long
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(28).minus(Duration.ofMillis(100)).toMillis() < Long
                 .valueOf(cookie2.getValue().getValue()));
         assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
@@ -128,9 +128,9 @@ public class PersistentLoginControllerTest {
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
         String redirect = this.persistenLoginController.myaccount(null, this.user, "true", this.request, this.response);
         assertEquals("redirect:/myaccounts.html", redirect);
-        assertEquals(1209600, cookie1.getValue().getMaxAge());
+        assertEquals(2419200, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
-        assertTrue(System.currentTimeMillis() + Duration.ofDays(14).minus(Duration.ofMillis(100)).toMillis() < Long
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(28).minus(Duration.ofMillis(100)).toMillis() < Long
                 .valueOf(cookie2.getValue().getValue()));
         assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
         verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);

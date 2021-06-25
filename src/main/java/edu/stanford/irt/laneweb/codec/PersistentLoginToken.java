@@ -7,7 +7,7 @@ import edu.stanford.irt.laneweb.user.User;
 
 public class PersistentLoginToken {
 
-    private static final long TWO_WEEKS = Duration.ofDays(14).toMillis();
+    private static final long FOUR_WEEKS = Duration.ofDays(28).toMillis();
 
     private long dateValue;
 
@@ -34,6 +34,6 @@ public class PersistentLoginToken {
     }
 
     public boolean isValidFor(final long dateValue, final int userAgentHash) {
-        return userAgentHash == this.userAgentHash && this.dateValue + TWO_WEEKS > dateValue;
+        return userAgentHash == this.userAgentHash && this.dateValue + FOUR_WEEKS > dateValue;
     }
 }
