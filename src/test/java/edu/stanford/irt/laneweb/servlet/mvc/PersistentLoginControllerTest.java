@@ -11,6 +11,9 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -67,9 +70,11 @@ public class PersistentLoginControllerTest {
         Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
+        this.response.setHeader("Set-Cookie", "cookie");
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
+        expect(this.response.getHeaders("Set-Cookie")).andReturn(Collections.singleton("cookie"));
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
         String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, this.url, this.request,
                 this.response);
@@ -101,6 +106,8 @@ public class PersistentLoginControllerTest {
         Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
+        this.response.setHeader("Set-Cookie", "cookie");
+        expect(this.response.getHeaders("Set-Cookie")).andReturn(Collections.singleton("cookie"));
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
@@ -117,17 +124,49 @@ public class PersistentLoginControllerTest {
     }
 
     @Test
-    public void testPersistentMyaccountsLoginNotNull() {
+    public void testSimpleSameSite() {
         Capture<Cookie> cookie1 = newCapture();
         Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
+        expect(this.response.getHeaders("Set-Cookie")).andReturn(Collections.singleton( CookieName.EXPIRATION.toString()+"cookie"));
+        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"cookie; SameSite=Strict");
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
         replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
-        String redirect = this.persistenLoginController.myaccount(null, this.user, "true", this.request, this.response);
-        assertEquals("redirect:/myaccounts.html", redirect);
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, null, this.request,
+                this.response);
+        assertEquals("redirect:/index.html", redirect);
+        assertEquals(2419200, cookie1.getValue().getMaxAge());
+        assertEquals("encryptedValue", cookie1.getValue().getValue());
+        assertTrue(System.currentTimeMillis() + Duration.ofDays(28).minus(Duration.ofMillis(100)).toMillis() < Long
+                .valueOf(cookie2.getValue().getValue()));
+        assertEquals(CookieName.EXPIRATION.toString(), cookie2.getValue().getName());
+        verify(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
+    }
+
+    @Test
+    public void testSameSiteMutipleCookies() {
+        Capture<Cookie> cookie1 = newCapture();
+        Capture<Cookie> cookie2 = newCapture();
+        this.response.addCookie(capture(cookie1));
+        this.response.addCookie(capture(cookie2));
+        Collection<String> cookieFromHttpResponse = new ArrayList<String>();
+        cookieFromHttpResponse.add(CookieName.EXPIRATION.toString()+"_cookie");
+        cookieFromHttpResponse.add(CookieName.USER.toString()+"_cookie");
+        cookieFromHttpResponse.add("SESSION_cookie");
+        expect(this.response.getHeaders("Set-Cookie")).andReturn(cookieFromHttpResponse);
+        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"_cookie; SameSite=Strict");
+        this.response.addHeader("Set-Cookie", CookieName.USER.toString()+"_cookie; SameSite=Strict");
+        this.response.addHeader("Set-Cookie", "SESSION_cookie");
+        expect(this.request.getHeader("User-Agent")).andReturn("firefox");
+        expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
+        expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
+        replay(this.userSource, this.codec, this.request, this.response, this.session, this.user, this.token);
+        String redirect = this.persistenLoginController.enablePersistentLogin(null, this.user, null, this.request,
+                this.response);
+        assertEquals("redirect:/index.html", redirect);
         assertEquals(2419200, cookie1.getValue().getMaxAge());
         assertEquals("encryptedValue", cookie1.getValue().getValue());
         assertTrue(System.currentTimeMillis() + Duration.ofDays(28).minus(Duration.ofMillis(100)).toMillis() < Long
