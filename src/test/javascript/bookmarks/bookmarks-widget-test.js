@@ -81,6 +81,11 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             Y.Assert.areSame("none", hidden.getStyle("display"));
         },
 
+        testShowManageBookmarks: function() {
+            var link = Y.one(".manageBookmarks");
+            Y.Assert.areSame("block", link.getStyle("display"));
+        },
+
         testToString: function() {
             Y.Assert.areSame("BookmarksWidget:Bookmarks[Bookmark{label:", this.widget.toString().substring(0, 41));
         }

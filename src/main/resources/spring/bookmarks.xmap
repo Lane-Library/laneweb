@@ -5,7 +5,9 @@
     <map:pipeline type="noncaching">
         <map:match type="wildcard" pattern="list.html">
             <map:generate type="bookmark"/>
-            <map:transform type="joost" src="classpath:/edu/stanford/irt/laneweb/bookmarks/list.stx"/>
+            <map:transform type="joost" src="classpath:/edu/stanford/irt/laneweb/bookmarks/list.stx">
+                <map:parameter name="mode" value="widget"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
         <map:match type="wildcard" pattern="list.xml">

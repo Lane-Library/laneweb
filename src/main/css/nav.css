@@ -137,7 +137,6 @@ ul.content .nav-menu {
 	.dropdown:active .dropdown-content, #navigation li, #navigation:target nav
 		{
 		display: block;
-		width: 100%;
 	}
 	.nav-menu-active {
 		background-color: #333;
