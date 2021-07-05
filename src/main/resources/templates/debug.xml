@@ -85,11 +85,6 @@
                      data-placeholder="Search biomedical images and their reuse rights"
                   >Image Search</div>
                </div>
-               <div class="pure-u-1-4">
-                  <div class="search-tab" data-help="/textbooksearch.html" data-source="textbooks-all"
-                     data-placeholder="Search the full text of major clinical textbooks in 25 medical specialties"
-                  >Clinical Textbook Search</div>
-               </div>
             </div>
             <fieldset>
                <input name="q" data-placeholder="Search articles, books, journals, databases, our website, and more" placeholder=""

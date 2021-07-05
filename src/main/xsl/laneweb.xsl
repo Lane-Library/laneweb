@@ -117,7 +117,6 @@
             </xsl:when>
             <xsl:when test="starts-with($path,'/picosearch')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/bioimagesearch')">images-all</xsl:when>
-            <xsl:when test="starts-with($path,'/textbooksearch')">textbooks-all</xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>

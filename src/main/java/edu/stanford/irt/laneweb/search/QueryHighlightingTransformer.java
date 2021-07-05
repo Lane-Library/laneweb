@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.ImmutableEmptyAttributes;
 
 /**
- * A {@code Transformer} to highlight query terms found in title and description fields. Designed for use in metasearch
+ * A {@code Transformer} to highlight query terms found in title and description fields. Designed for use in clincal search
  * content results. Relies on {@code QueryTermPattern} for regular expression pattern matching.
  */
 public class QueryHighlightingTransformer extends AbstractTextProcessingTransformer {

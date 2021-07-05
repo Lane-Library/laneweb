@@ -47,7 +47,7 @@
                 <map:generate type="admin-search-image"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- search/content/html returns xhtmlized metasearch content results -->
+            <!-- search/content/html returns xhtmlized clinical search content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">
                     <map:parameter name="engines" value="{1}"/>
@@ -57,32 +57,6 @@
                 <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
                 <map:serialize type="xml">
                     <map:parameter name="media-type" value="text/html"/>
-                </map:serialize>
-            </map:match>
-            <!-- return raw xml metasearch content results -->
-            <!-- this was used in mobile.xmap -->
-            <map:match pattern="search/content/xml/*" type="wildcard">
-                <map:generate type="search-content">
-                    <map:parameter name="engines" value="{1}"/>
-                </map:generate>
-                <map:transform type="description-labeling"/>
-                <map:transform type="query-highlighting"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <!-- search2json.xsl converts the result xml to json -->
-            <!-- it is used in lane-metasearch.js -->
-            <map:match pattern="search/json" type="wildcard">
-                <map:generate type="search-resource">
-                    <map:parameter name="timeout" value="0"/>
-                </map:generate>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="search-proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:transform type="saxon" src="classpath:/xsl/search2json.xsl"/>
-                <map:serialize type="text">
-                    <map:parameter name="media-type" value="application/json"/>
                 </map:serialize>
             </map:match>
             <!-- TODO: find permanent home for this -->

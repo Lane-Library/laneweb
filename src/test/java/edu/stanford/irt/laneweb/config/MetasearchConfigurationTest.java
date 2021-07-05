@@ -72,11 +72,6 @@ public class MetasearchConfigurationTest {
     }
 
     @Test
-    public void testResourceSearchGenerator() {
-        assertNotNull(this.configuration.resourceSearchGenerator(null));
-    }
-
-    @Test
     public void testRestMetaSearchService() throws URISyntaxException {
         assertNotNull(this.configuration.restMetaSearchService(null, null, null, 0 ,null));
     }
