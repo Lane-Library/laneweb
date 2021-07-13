@@ -43,7 +43,4 @@ public class SpamServiceImpl implements SpamService {
     log.info("is {} a spam for portal {}? {}", identifier, portal, isSpam);
     return isSpam;
   }
-
-
-
 }

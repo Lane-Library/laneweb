@@ -31,9 +31,8 @@ public class EMailController {
 
   public static final long MAX_UPLOAD_SIZE = 4194304;
 
-//  private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
-  private static final String ASKUS_ADDRESS = "alain.boussard@gmail.com";
-
+  private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
+ 
   private static final String ASKUS_PATH = "askus";
 
   private static final String ASKUS_PORTAL = "laneaskus";
@@ -42,13 +41,11 @@ public class EMailController {
 
   private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/ejp-confirmation.html";
 
- // private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
-  private static final String DOCXPRESS_ADDRESS = "alain.boussard@gmail.com";
-
+  private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
+  
   private static final String DOCXPRESS_PATH = "docxpress";
 
-//  private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
-  private static final String EJP_ADDRESS = "alain.boussard@gmail.com";
+  private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
 
   private static final String EJP_PATH = "ejp";
 
@@ -85,7 +82,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map) || spamService.isSpam(ASKUS_PORTAL, map)) {
+    if (!validateForm(map, ASKUS_PORTAL)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
@@ -113,7 +110,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map) || spamService.isSpam(ASKUS_PORTAL, map)) {
+    if (!validateForm(map, ASKUS_PORTAL)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
@@ -195,7 +192,10 @@ public class EMailController {
     return file;
   }
 
-  private boolean validateForm(final Map<String, Object> feedback) {
+  private boolean validateForm(final Map<String, Object> feedback, String portal) {
+    if(spamService.isSpam(portal, feedback)){
+      return false;
+    }
     return !(feedback.get("email") == null || feedback.get("email").toString().isEmpty() || feedback.get("name") == null
         || feedback.get("name").toString().isEmpty());
   }

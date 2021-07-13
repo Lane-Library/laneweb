@@ -67,7 +67,6 @@ public class LaneCrmController {
     if (null == email || "".equals(email)) {
       return false;
     }
-
     if(this.spamService.isSpam( SFP_PORTAL, data)) {
       return false;
     }
