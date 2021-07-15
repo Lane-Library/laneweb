@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.easymock.Mock;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,57 +34,45 @@ public class SpamServiceTest {
   private String ip = "171.0.0.0";
   
   private String portal = "sfp";
+ 
+  Spam spam;
   
   @Before
   public void setUp() throws Exception {
-    this.uri = new URI("http://spam.api");
+    this.uri = new URI("http://spam.api/");
     this.restService = mock(RESTService.class);
     this.service = new SpamServiceImpl(uri, this.restService);
     this.identifiers = new HashMap<String, Object>();
     this.identifiers.put("remote-addr", ip);
     this.identifiers.put("email", email);
+    spam = new Spam(portal, "email", "ip");
   }
 
   @Test
   public void testIsNotSpam()  {
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+email), Boolean.class )).andReturn(false);
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+ip), Boolean.class )).andReturn(false);
+    expect(this.restService.postObject(this.uri.resolve("detection"), spam, Boolean.class )).andReturn(false);
     replay( this.restService);
-    assertFalse(service.isSpam(portal, identifiers));
-    verify(this.restService);
+    assertFalse(service.isSpam(spam));
+   
   }
  
   @Test
-  public void testIsEmailSpam() {
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+email), Boolean.class )).andReturn(true);
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+ip), Boolean.class )).andReturn(false);
+  public void testIsSpam() {
+    expect(this.restService.postObject(this.uri.resolve("detection"), spam, Boolean.class )).andReturn(true);
     replay( this.restService);
-    assertTrue(service.isSpam(portal, identifiers));
+    assertTrue(service.isSpam(spam));
     verify(this.restService);
   }
 
   @Test
-  public void testIsIpSpam() {
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+ip), Boolean.class )).andReturn(true);
-    replay( this.restService);
-    assertTrue(service.isSpam(portal, identifiers));
-    verify(this.restService);
-  }
-  
   public void testExceptionFromSpam(){
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+ip), Boolean.class ));
+    expect(this.restService.postObject(this.uri.resolve("detection"), spam, Boolean.class ));
     expectLastCall().andThrow(new RESTException(new IOException()));
     replay( this.restService);
-    assertFalse(service.isSpam(portal, identifiers));
+    assertFalse(service.isSpam(spam));
   }
   
-  public void testExceptionFromEmail(){
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+ip), Boolean.class )).andReturn(false);
-    expect(this.restService.getObject(this.uri.resolve( portal+ "/"+email), Boolean.class ));
-    expectLastCall().andThrow(new RESTException(new IOException()));
-    replay( this.restService);
-    assertFalse(service.isSpam(portal, identifiers));
-  }
+ 
 
 
   
