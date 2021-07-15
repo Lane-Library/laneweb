@@ -7,6 +7,7 @@ import java.time.Clock;
  * expired date. So 3 days will be subtract from it to popup a extension window if the user is active and from stanford.
  */
 import java.time.Duration;
+import java.util.Collection;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -28,110 +29,135 @@ import edu.stanford.irt.laneweb.user.User;
 @Controller
 public class PersistentLoginController {
 
-    private static final long DURATION_MILLIS = Duration.ofDays(14).toMillis();
+  private static final long DURATION_MILLIS = Duration.ofDays(28).toMillis();
 
-    // login duration is two weeks:
-    private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(14).getSeconds());
+  // login duration is two weeks:
+  private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(28).getSeconds());
 
-    private UserCookieCodec codec;
+  private static final String SAME_SITE = "; SameSite=Strict";
 
-    private UserDataBinder userBinder;
+  private static final String COOKIE_HEADERS = "Set-Cookie";
 
-    private Clock clock;
+  private UserCookieCodec codec;
 
-    @Autowired
-    public PersistentLoginController(final UserDataBinder userBinder, final UserCookieCodec codec) {
-        this(userBinder, codec, Clock.systemDefaultZone());
+  private UserDataBinder userBinder;
+
+  private Clock clock;
+
+  @Autowired
+  public PersistentLoginController(final UserDataBinder userBinder, final UserCookieCodec codec) {
+    this(userBinder, codec, Clock.systemDefaultZone());
+  }
+
+  public PersistentLoginController(final UserDataBinder userBinder, final UserCookieCodec codec, final Clock clock) {
+    this.userBinder = userBinder;
+    this.codec = codec;
+    this.clock = clock;
+  }
+
+
+  @GetMapping(value = { "/secure/persistentLogin/myaccount.html", "/persistentLogin/myaccount.html" })
+  public String myaccount(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user,
+          final String pl, final HttpServletRequest request, final HttpServletResponse response) {
+      if ("true".equals(pl) && null != user) {
+          setCookies(request, response, user);
+      } else {
+          resetCookies(response);
+      }
+      return "redirect:/myaccounts.html";
+  }
+
+  @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
+  public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
+          @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
+          final HttpServletResponse response) {
+      if (null != user) {
+          setCookies(request, response, user);
+          return getRedirectURL(url);
+      }
+      resetCookies(response);
+      return "redirect:/error.html";
+  }
+
+  @GetMapping(value = "/secure/login.html")
+  public String login(final RedirectAttributes redirectAttrs, String url, User user) {
+    if (null != user) {
+      return getRedirectURL(url);
     }
+    return "redirect:/error.html";
+  }
 
-    public PersistentLoginController(final UserDataBinder userBinder, final UserCookieCodec codec, final Clock clock) {
-        this.userBinder = userBinder;
-        this.codec = codec;
-        this.clock = clock;
+  @ModelAttribute
+  protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
+    this.userBinder.bind(model.asMap(), request);
+    if (!model.containsAttribute(Model.USER)) {
+      model.addAttribute(Model.USER, null);
     }
+  }
 
-    @GetMapping(value = { "/secure/persistentLogin/myaccount.html", "/persistentLogin/myaccount.html" })
-    public String myaccount(final RedirectAttributes redirectAttrs, @ModelAttribute(Model.USER) final User user,
-            final String pl, final HttpServletRequest request, final HttpServletResponse response) {
-        if ("true".equals(pl) && null != user) {
-            setCookies(request, response, user);
-        } else {
-            resetCookies(response);
-        }
-        return "redirect:/myaccounts.html";
+  private String getRedirectURL(final String url) {
+    StringBuilder sb = new StringBuilder("redirect:");
+    if (null == url) {
+      sb.append("/index.html");
+    } else {
+      sb.append(url);
     }
+    return sb.toString();
+  }
 
-    @GetMapping(value = "/secure/persistentLogin.html", params = { "pl=true" })
-    public String enablePersistentLogin(final RedirectAttributes redirectAttrs,
-            @ModelAttribute(Model.USER) final User user, final String url, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        if (null != user) {
-            setCookies(request, response, user);
-            return getRedirectURL(url);
-        }
-        resetCookies(response);
-        return "redirect:/error.html";
-    }
+  private void resetCookies(final HttpServletResponse response) {
+    Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
+    cookie.setPath("/");
+    cookie.setMaxAge(0);
+    response.addCookie(cookie);
+    cookie = new Cookie(CookieName.USER.toString(), null);
+    cookie.setPath("/");
+    cookie.setMaxAge(0);
+    cookie.setHttpOnly(true);
+    response.addCookie(cookie);
+  }
 
-    @GetMapping(value = "/secure/login.html")
-    public String login(final RedirectAttributes redirectAttrs, String url, User user) {
-        if (null != user) {
-            return getRedirectURL(url);
-        }
-        return "redirect:/error.html";
+  /**
+   * create and set the lane-user cookie
+   *
+   * @param user
+   * @param request
+   * @param response
+   */
+  private void setCookies(final HttpServletRequest request, final HttpServletResponse response, User user) {
+    String userAgent = request.getHeader("User-Agent");
+    if (null != userAgent && null != user) {
+      PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
+      this.addCookie( CookieName.USER.toString(), token.getEncryptedValue(), response);
+      long expires = this.clock.millis() + DURATION_MILLIS;
+      this.addCookie( CookieName.EXPIRATION.toString(), Long.toString(expires), response);
+      addSameSiteToCookies(response);
     }
+  }
 
-    @ModelAttribute
-    protected void bind(final HttpServletRequest request, final org.springframework.ui.Model model) {
-        this.userBinder.bind(model.asMap(), request);
-        if (!model.containsAttribute(Model.USER)) {
-            model.addAttribute(Model.USER, null);
-        }
-    }
+  private void addCookie(final String name, final String value, final HttpServletResponse response) {
+    Cookie cookie = new Cookie( name, value);
+    cookie.setPath("/");
+    cookie.setMaxAge(DURATION_SECONDS);
+    cookie.setHttpOnly(true);
+    cookie.setSecure(true);
+    response.addCookie(cookie);
+  }
 
-    private String getRedirectURL(final String url) {
-        StringBuilder sb = new StringBuilder("redirect:");
-        if (null == url) {
-            sb.append("/index.html");
-        } else {
-            sb.append(url);
-        }
-        return sb.toString();
+  //Because there is no method to add SameSite=strict with javax.servlet.http.Cookie
+  private void addSameSiteToCookies(HttpServletResponse response) {
+    Collection<String> headers = response.getHeaders(COOKIE_HEADERS);
+    boolean cookieReseted = false;
+    for (String header : headers) {
+      if (header.startsWith(CookieName.EXPIRATION.toString()) || header.startsWith(CookieName.USER.toString())) {
+        header = header.concat(SAME_SITE);
+      }
+      if (!cookieReseted) {
+        response.setHeader(COOKIE_HEADERS, header);
+        cookieReseted = true;
+      } else {
+        response.addHeader(COOKIE_HEADERS, header);
+      }
     }
-
-    private void resetCookies(final HttpServletResponse response) {
-        Cookie cookie = new Cookie(CookieName.EXPIRATION.toString(), null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        cookie = new Cookie(CookieName.USER.toString(), null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
-    }
-
-    /**
-     * create and set the lane-user cookie
-     *
-     * @param user
-     * @param request
-     * @param response
-     */
-    private void setCookies(final HttpServletRequest request, final HttpServletResponse response, final User user) {
-        String userAgent = request.getHeader("User-Agent");
-        if (null != userAgent && null != user) {
-            PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
-            Cookie cookie = new Cookie(CookieName.USER.toString(), token.getEncryptedValue());
-            cookie.setPath("/");
-            cookie.setMaxAge(DURATION_SECONDS);
-            cookie.setHttpOnly(true);
-            response.addCookie(cookie);
-            long expires = this.clock.millis() + DURATION_MILLIS;
-            cookie = new Cookie(CookieName.EXPIRATION.toString(), Long.toString(expires));
-            cookie.setPath("/");
-            cookie.setMaxAge(DURATION_SECONDS);
-            response.addCookie(cookie);
-        }
-    }
+  }
 }

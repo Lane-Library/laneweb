@@ -38,8 +38,8 @@ public class PersistentLoginTokenTest {
     }
 
     @Test
-    public void testIsValidForTwoWeeksAndADay() {
-        long twoWeeksAndADay = Duration.ofDays(14).plus(Duration.ofDays(1)).toMillis();
+    public void testIsValidForFourWeeksAndADay() {
+        long twoWeeksAndADay = Duration.ofDays(28).plus(Duration.ofDays(1)).toMillis();
         assertFalse(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(twoWeeksAndADay, 0));
     }
 

@@ -117,7 +117,6 @@
             </xsl:when>
             <xsl:when test="starts-with($path,'/picosearch')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/bioimagesearch')">images-all</xsl:when>
-            <xsl:when test="starts-with($path,'/textbooksearch')">textbooks-all</xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -263,7 +262,7 @@
     </xsl:template>
 
     <!-- add active to class to search form for search help pages -->
-    <xsl:template match="h:form[@class='search-form' and matches($path,'/(pico|lane|bioimage|textbook)search.html')]/@class">
+    <xsl:template match="h:form[@class='search-form' and matches($path,'/(pico|lane|bioimage)search.html')]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
 

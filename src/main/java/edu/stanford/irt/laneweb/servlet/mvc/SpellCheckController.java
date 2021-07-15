@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.spell.SpellCheckException;
-import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
 
 @Controller
@@ -19,16 +19,29 @@ public class SpellCheckController {
 
     private static final Logger log = LoggerFactory.getLogger(SpellCheckController.class);
 
+    private SolrService service;
+
     private SpellChecker spellChecker;
 
-    public SpellCheckController(final SpellChecker spellChecker) {
+    public SpellCheckController(final SpellChecker spellChecker, final SolrService service) {
+        this.service = service;
         this.spellChecker = spellChecker;
     }
 
     @GetMapping(value = "/apps/spellcheck/json")
     @ResponseBody
-    public SpellCheckResult checkSpelling(@RequestParam final String q) {
-        return this.spellChecker.spellCheck(q);
+    public SpellingResult checkSpelling(@RequestParam final String q) {
+        // only return a suggestion if search would return results for it
+        SpellingResult suggestion = new SpellingResult(this.spellChecker.spellCheck(q).getSuggestion());
+        String correction = suggestion.getSuggestion();
+        if (null != correction && !correction.isBlank()) {
+            int count = this.service.searchCount(correction).get("all").intValue();
+            if (count > 0) {
+                suggestion.suggestionResultCount = count;
+                return suggestion;
+            }
+        }
+        return SpellingResult.NULL_SPELLING_RESULT;
     }
 
     @ResponseStatus(value = HttpStatus.BAD_GATEWAY)

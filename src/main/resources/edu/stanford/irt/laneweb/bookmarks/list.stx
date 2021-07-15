@@ -4,6 +4,7 @@
     pass-through="all">
     
     <stx:param name="bookmarking"/>
+    <stx:param name="mode"/>
     
     <!-- if the list is null, xstream outputs <null/> when it is empty it is <empty-list/> -->
     <stx:template match="null | empty-list"/>
@@ -19,6 +20,12 @@
                 </stx:otherwise>
             </stx:choose>
         </ul>
+        <!-- add manage bookmarks link in widget mode; bookmarks-widget.js controls when this link is displayed -->
+        <stx:if test="$mode = 'widget'">
+            <ul xmlns="http://www.w3.org/1999/xhtml">
+                <li><a class="manageBookmarks btn alt" href="/favorites.html#bookmarks-editor">Manage My Bookmarks</a></li>
+            </ul>
+        </stx:if>
     </stx:template>
     
     <stx:variable name="label"/>
