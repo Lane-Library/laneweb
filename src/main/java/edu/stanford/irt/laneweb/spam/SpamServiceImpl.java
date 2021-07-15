@@ -7,12 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.status.ApplicationStatus;
 
 public class SpamServiceImpl implements SpamService {
 
   private URI spamURI;
 
   private RESTService restService;
+  
+  private String endPointUrl = "detection";
 
   private static final Logger log = LoggerFactory.getLogger(SpamServiceImpl.class);
 
@@ -21,26 +24,31 @@ public class SpamServiceImpl implements SpamService {
     this.restService = restService;
   }
 
-  public boolean isSpam(String portal, Map<String,Object> identifiers) {
+  public boolean isSpam(String portal, Map<String, Object> identifiers) {
     String ip = (String) identifiers.get("remote-addr");
-    if(this.isSpam(portal, ip)) {
-      return true;
-    }
-    String email = (String)identifiers.get("email");
-    return this.isSpam(portal, email);
+    String email = (String) identifiers.get("email");
+    Spam spam = new Spam(portal,email,ip);
+    return this.isSpam(spam);
   }
 
-  public boolean isSpam(String portal, String identifier) {
+  public boolean isSpam(Spam spam) {
     boolean isSpam = false;
     try {
-      isSpam = this.restService.getObject(this.spamURI.resolve(portal + "/" + identifier), Boolean.class);
+      isSpam = this.restService.postObject(this.spamURI.resolve(endPointUrl), spam, Boolean.class);
       if (isSpam) {
-        log.error("SPAM detected:  {} for portal {}  ", identifier, portal);
+        log.error("SPAM detected:  Email {} and IP {} for portal {}  ", spam.getEmail(), spam.getIp(), spam.getPortal());
       }
     } catch (Exception e) {
       log.error(e.getMessage(), e);
     }
-    log.info("is {} a spam for portal {}? {}", identifier, portal, isSpam);
+    log.info("is email:{} or IP:{} a spam for portal {}? {}",  spam.getEmail(), spam.getIp(), spam.getPortal(), isSpam);
     return isSpam;
   }
+
+  @Override
+  public ApplicationStatus getStatus() {
+    URI uri = this.spamURI.resolve("status.json");
+    return this.restService.getObject(uri, ApplicationStatus.class);
+  }
+
 }

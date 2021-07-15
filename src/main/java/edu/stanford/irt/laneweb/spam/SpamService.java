@@ -2,9 +2,13 @@ package edu.stanford.irt.laneweb.spam;
 
 import java.util.Map;
 
-public interface SpamService {
+import edu.stanford.irt.status.ApplicationStatus;
+import edu.stanford.irt.status.StatusService;
 
-  public boolean isSpam(String portal, String identifier);
+public interface SpamService extends StatusService{
+
+  public boolean isSpam(Spam spam);
   public boolean isSpam(String email, Map<String,Object> identifiers);
+  public ApplicationStatus getStatus();
 
 }
