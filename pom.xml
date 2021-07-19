@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>85</version>
+        <version>86</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.8.1-SNAPSHOT</version>
@@ -79,7 +79,7 @@
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.87.0</version>
+            <version>1.88.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -206,7 +206,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>4.3.10</version>
+            <version>4.3.11</version>
         </dependency>
         <dependency>
             <groupId>org.apache.solr</groupId>
