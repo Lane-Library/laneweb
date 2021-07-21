@@ -96,7 +96,7 @@
                <div class="search-reset" title="Clear Search">
                   <i class="fa fa-times-circle fa-lg"></i>
                </div>
-               <button class="search-button">
+               <button class="search-button" aria-label="Search">
                   <i class="fa fa-search"></i>
                </button>
             </fieldset>
