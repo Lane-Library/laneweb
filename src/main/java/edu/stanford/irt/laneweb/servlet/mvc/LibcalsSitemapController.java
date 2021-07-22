@@ -16,18 +16,18 @@ import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 @Controller
-public class ClassesSitemapController extends AbstractSitemapController {
+public class LibcalsSitemapController extends AbstractSitemapController {
 
-    public ClassesSitemapController(final ComponentFactory componentFactory,
+    public LibcalsSitemapController(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder") final DataBinder dataBinder,
-            @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/classes") final Sitemap sitemap,
+            @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/libcals") final Sitemap sitemap,
             final SourceResolver sourceResolver) {
         super(componentFactory, dataBinder, sitemap, sourceResolver);
     }
 
     @Override
-    @RequestMapping(value = "/classes/**", method = { RequestMethod.GET, RequestMethod.HEAD })
+    @RequestMapping(value = "/libcals/**", method = { RequestMethod.GET, RequestMethod.HEAD })
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        doHandleRequest(request, response, "/classes");
+        doHandleRequest(request, response, "/libcals");
     }
 }

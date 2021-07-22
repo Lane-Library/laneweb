@@ -30,7 +30,7 @@ import edu.stanford.irt.laneweb.cocoon.CachedXMLSourceResolver;
 public class SourceConfiguration implements InitializingBean {
 
     private static final List<String> SITEMAPS = Arrays.asList("content", "applications", "eresources", "rss",
-            "classes", "bookmarks", "libguides");
+            "libcals", "bookmarks", "libguides");
 
     private BeanFactory beanFactory;
 
