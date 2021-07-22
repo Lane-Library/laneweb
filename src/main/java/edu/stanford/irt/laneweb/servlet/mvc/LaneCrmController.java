@@ -18,7 +18,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.spam.SpamService;
 
 @Controller
 public class LaneCrmController {
@@ -37,25 +36,21 @@ public class LaneCrmController {
 
   private static final String SUBJECT_CONTENT = "SFP:ARRIVAL";
 
-  private static final String SFP_PORTAL = "sfp";
-
-  private  SpamService spamService;
 
   private String sfpEmailAddress;
 
   private EMailSender sender;
 
   @Autowired
-  public LaneCrmController(final EMailSender sender, @Value("${edu.stanford.irt.laneweb.acquisition.email}") String sfpEmail, SpamService spamService) {
+  public LaneCrmController(final EMailSender sender, @Value("${edu.stanford.irt.laneweb.acquisition.email}") String sfpEmail) {
     this.sender = sender;
     this.sfpEmailAddress = sfpEmail;
-    this.spamService = spamService;
   }
 
   @PostMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
   public String sendEmail(final Model model, final RedirectAttributes atts) throws JsonProcessingException {
     Map<String, Object> data = model.asMap();
-    if (!validateStanfordEmail(data)){
+    if (!validateStanfordEmail(data)) {
       return ERROR_PAGE;
     }
     this.sender.sendEmail(data);
@@ -65,9 +60,6 @@ public class LaneCrmController {
   private boolean validateStanfordEmail(final  Map<String, Object> data) {
     String email = (String) data.get("requestedBy.email");
     if (null == email || "".equals(email)) {
-      return false;
-    }
-    if(this.spamService.isSpam( SFP_PORTAL, data)) {
       return false;
     }
     for (String emailValidation : VALID_EMAILS) {
@@ -91,8 +83,7 @@ public class LaneCrmController {
     }
     ObjectMapper om = new ObjectMapper();
     model.addAttribute("json", om.writeValueAsString(model));
-    model.addAttribute("email", model.getAttribute("requestedBy.email"));
-    model.addAttribute("remote-addr", request.getRemoteAddr());
+    model.addAttribute("IP", request.getRemoteAddr());
     model.addAttribute(SUBJECT, SUBJECT_CONTENT);
     model.addAttribute("recipient", this.sfpEmailAddress);
   }
