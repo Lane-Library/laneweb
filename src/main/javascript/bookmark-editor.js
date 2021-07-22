@@ -21,15 +21,17 @@
             this.get("srcNode").append(
                     "<input type=\"text\" name=\"label\"/>" +
                     "<input type=\"text\" name=\"url\"/>" +
-                    "<button class=\"button\" name=\"action\" value=\"save\" type=\"submit\">" +
-                    "<span><i class=\"icon fa fa-save\"></i>Save</span><i class=\"icon fa fa-arrow-right\"></i>" +
+                    "<div>" +
+                    "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" +
+                    "<span><i class=\"icon fa fa-save\"></i>Save</span>" +
                     "</button>" +
-                    "<button class=\"button\" value=\"reset\" type=\"reset\">" +
-                    "<span><i class=\"icon fa fa-undo\"></i>Undo</span><i class=\"icon fa fa-arrow-right\"></i>" +
+                    "<button class=\"btn alt\" value=\"reset\" type=\"reset\">" +
+                    "<span><i class=\"icon fa fa-undo\"></i>Undo</span>" +
                     "</button>" +
-                    "<button class=\"button\" name=\"action\" value=\"cancel\" type=\"submit\">" +
-                    "<span><i class=\"icon fa fa-times\"></i>Cancel</span><i class=\"icon fa fa-arrow-right\"></i>" +
-                    "</button>");
+                    "<button class=\"btn alt\" name=\"action\" value=\"cancel\" type=\"submit\">" +
+                    "<span><i class=\"icon fa fa-times\"></i>Cancel</span>" +
+                    "</button>" + 
+                    "</div>");
         },
 
         /**
