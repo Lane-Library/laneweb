@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
-import edu.stanford.irt.laneweb.hours.TodaysHours;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
 import edu.stanford.irt.laneweb.livechat.LiveChatAvailabilityService;
 import edu.stanford.irt.laneweb.model.Model;
@@ -41,13 +40,11 @@ import edu.stanford.irt.laneweb.servlet.binding.TemplateChooser;
 import edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TodayDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.TodaysHoursBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UnividDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.user.CookieUserFactory;
 import edu.stanford.irt.laneweb.servlet.binding.user.RequestAttributeUserFactory;
 import edu.stanford.irt.laneweb.servlet.binding.user.UserFactory;
-import edu.stanford.irt.libraryhours.LibraryHoursService;
 
 @Configuration
 public class BindingConfiguration {
@@ -80,8 +77,8 @@ public class BindingConfiguration {
 
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
     public DataBinder dataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder,
-            final BookmarkDataBinder bookmarkDataBinder, final TodaysHoursBinder todaysHoursDataBinder,
-            final ModelDataBinder modelDataBinder, final LiveChatAvailabilityBinder liveChatAvailabilityBinder) {
+            final BookmarkDataBinder bookmarkDataBinder,  final ModelDataBinder modelDataBinder, 
+            final LiveChatAvailabilityBinder liveChatAvailabilityBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(19);
         dataBinders.add(userDataBinder);
         dataBinders.add(ticketDataBinder);
@@ -96,7 +93,6 @@ public class BindingConfiguration {
         dataBinders.add(new LoginExpirationCookieDataBinder());
         dataBinders.add(liveChatAvailabilityBinder);
         dataBinders.add(bookmarkDataBinder);
-        dataBinders.add(todaysHoursDataBinder);
         dataBinders.add(new ParameterMapDataBinder());
         dataBinders.add(baseProxyUrlDataBinder());
         dataBinders.add(modelDataBinder);
@@ -198,16 +194,6 @@ public class BindingConfiguration {
     public TicketDataBinder ticketDataBinder(
             @Value("${edu.stanford.irt.laneweb.ezproxy-key}") final String ezproxyKey) {
         return new TicketDataBinder(ezproxyKey);
-    }
-
-    @Bean
-    public TodaysHours todaysHours(final LibraryHoursService libraryHoursService) {
-        return new TodaysHours(libraryHoursService);
-    }
-
-    @Bean
-    public TodaysHoursBinder todaysHoursDataBinder(final TodaysHours todaysHours) {
-        return new TodaysHoursBinder(todaysHours);
     }
 
     @Bean

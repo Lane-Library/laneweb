@@ -43,8 +43,6 @@
     <!-- whether or not live chat is scheduled to be available -->
     <xsl:param name="live-chat-available"/>
 
-    <xsl:param name="todays-hours"/>
-
     <xsl:param name="version"/>
 
     <xsl:param name="referrer"/>
@@ -162,9 +160,6 @@
             </xsl:when>
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
-            </xsl:when>
-            <xsl:when test=".='todays-hours'">
-                <xsl:value-of select="$todays-hours"/>
             </xsl:when>
             <xsl:when test=".='bookmarks' and string-length($userid) &gt; 0">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://bookmarks/list.html">

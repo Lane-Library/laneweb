@@ -296,11 +296,6 @@
             <version>3.0.10</version>
         </dependency>
         <dependency>
-            <groupId>edu.stanford.irt</groupId>
-            <artifactId>lanehours</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
             <version>9.0.50</version>

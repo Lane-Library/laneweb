@@ -212,14 +212,6 @@
             <map:generate src="{content-base}/{1}" type="html"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="hours/*.xml" type="wildcard">
-            <map:generate type="hours"/>
-            <map:transform type="saxon" src="classpath:/xsl/hours.xsl">
-                <map:parameter name="cache-key" value=";{1}"/>
-                <map:parameter name="mode" value="{1}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="templates/**.xml" type="wildcard">
             <map:generate type="file" src="classpath:/templates/{1}.xml"/>
             <map:transform type="xinclude"/>

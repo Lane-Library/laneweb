@@ -145,8 +145,6 @@ public final class Model {
 
     public static final String TODAY = "today";
 
-    public static final String TODAYS_HOURS = "todays-hours";
-
     public static final String TYPE = "type";
 
     public static final String UNIVID = "univid";
