@@ -157,15 +157,14 @@
 
 .library-contact {
     position: absolute;
-    right: 70px;
+    right: 60px;
     top: 54px;
+    display: inline-flex;
 }
 
 
 .library-contact li {
-    border: 2px #007c92 solid;
-    background-color: #007c92;
-    border-radius: 6px;
+    margin-left: 18px;
 }
 
 .library-contact li a {

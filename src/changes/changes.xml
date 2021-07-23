@@ -43,16 +43,16 @@
             </action>
         </release>
          <release date="2021-06-14" version="3.7.15" description="bug fix release">
-            <action date="2021-06-07" dev="ryanmax" issue="LANEWEB-10721" type="fix">
+            <action date="2021-05-28" dev="ryanmax" issue="LANEWEB-10721" type="fix">
                 revise search tabs interface
             </action>
-            <action date="2021-06-04" dev="ryanmax" issue="LANEWEB-10729" type="fix">
+            <action date="2021-06-08" dev="ryanmax" issue="LANEWEB-10729" type="fix">
                 Change Request button in search results
             </action>
-            <action date="2021-06-04" dev="ryanmax" issue="LANEWEB-10730" type="fix">
+            <action date="2021-06-08" dev="ryanmax" issue="LANEWEB-10730" type="fix">
                Change Register button on Upcoming Classes &amp; Events
             </action>
-            <action date="2021-06-04" dev="ryanmax" issue="LANEWEB-10731" type="fix">
+            <action date="2021-06-08" dev="ryanmax" issue="LANEWEB-10731" type="fix">
                Update button class on Search Results not found page
             </action>
         </release>

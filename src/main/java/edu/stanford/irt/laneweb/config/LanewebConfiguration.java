@@ -50,7 +50,7 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 @ImportResource({
     "classpath:/spring/applications.xmap",
     "classpath:/spring/bookmarks.xmap",
-    "classpath:/spring/classes.xmap",
+    "classpath:/spring/libcals.xmap",
     "classpath:/spring/content.xmap",
     "classpath:/spring/eresources.xmap",
     "classpath:/spring/libguides.xmap",
