@@ -49,9 +49,9 @@
       </map:match>
       
          <!-- library today Hour  display on index.html page -->
-      <map:match pattern="todays-hour.html" type="regexp">
+      <map:match pattern="todays-hours.html" type="regexp">
          <map:generate type="file"   src="cache:60:https://lanecal.stanford.edu/api_hours_today.php?iid=5078&amp;lid=16885&amp;format=xml&amp;systemTime=1"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/todays-hour.xsl"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/todays-hours.xsl"/>
          <map:serialize type="xml"/>
       </map:match>  
       
