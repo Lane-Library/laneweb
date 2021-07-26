@@ -170,7 +170,6 @@
 .library-contact li a {
     display: block;
     padding: 12px;
-    color: white;
     font-size: 18px;
-    text-decoration: none;
+    font-weight: normal;
 }
