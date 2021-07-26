@@ -23,6 +23,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 
     protected static final String BUTTON = "button";
 
+    protected static final String BUTTON_CLASS = "btn alt";
+    
     protected static final String CDATA = "CDATA";
 
     protected static final String CLASS = "class";
@@ -184,16 +186,12 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         startDivWithClass(xmlConsumer, "to-image");
         startAnchor(xmlConsumer, "");
         atts = new AttributesImpl();
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, BUTTON);
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, BUTTON_CLASS);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, BUTTON, atts);
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
-        XMLUtils.data(xmlConsumer, "Visit Source Page ");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN,  new AttributesImpl());
+        XMLUtils.data(xmlConsumer, "Visit Source Page");
         XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-        atts = new AttributesImpl();
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "fa fa-arrow-right");
-        XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", atts);
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
-        XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
+         XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
         endAnchor(xmlConsumer);
         endDiv(xmlConsumer);
         endDiv(xmlConsumer);

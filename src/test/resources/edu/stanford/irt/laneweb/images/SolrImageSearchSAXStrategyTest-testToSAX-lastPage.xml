@@ -60,9 +60,8 @@
                   </div>
                   <div class="to-image">
                      <a href="">
-                        <button class="button">
-                           <span class="button">Visit Source Page </span>
-                           <i class="fa fa-arrow-right"/>
+                        <button class="btn alt">
+                           <span>Visit Source Page </span>
                         </button>
                      </a>
                   </div>
