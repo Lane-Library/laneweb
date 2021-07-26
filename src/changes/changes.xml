@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+        <release date="2021-07-26" version="3.8.2" description="bug fix release">
+            <action date="2021-07-22" dev="ryanmax" issue="LANEWEB-10760" type="update">
+                Update buttons on my bookmarks page
+            </action>
+            <action date="2021-07-22" dev="alainb" issue="LANEWEB-10759" type="update">
+                Today's Hours in Header
+            </action>
+            <action date="2021-07-26" dev="alainb" issue="LANEWEB-10761" type="update">
+                Update all old button class 
+            </action>
+        </release>
         <release date="2021-07-19" version="3.8.1" description="bug fix release">
             <action date="2021-07-13" dev="ryanmax" issue="LANEWEB-10756" type="update">
                 Crawler indexing causing solr performance issues
