@@ -7,6 +7,10 @@
 	margin-bottom: 15px;
 }
 
+#contacts button{
+	width: 100%;
+}
+
 .contacts-choice a, .contacts-choice a:visited, .contacts-choice a:active,
 	.contacts-choice a:hover {
 	color: black;
