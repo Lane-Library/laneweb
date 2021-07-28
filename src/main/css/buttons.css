@@ -143,12 +143,12 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 
 .btn span .icon{
     border-radius: 12px;
-    font-size: 13px;
+    font-size: 15px;
     height: 24px;
     width: 24px;
     padding: 4px;
     box-sizing: border-box;
-    margin-right: 6px;
+    margin-right: 2px;
     line-height: 15px;
     vertical-align: text-top;
     text-align: center;
