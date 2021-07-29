@@ -68,7 +68,7 @@
 	#sfp-book:target .sfp-book-button a, #sfp-book:target .sfp-button a,
 	#sfp-book:target .sfp-button a {
 	background-color: #007C92;
-	color: white;
+	color: #F0F0F0;
 	cursor: not-allowed;
 }
 
@@ -77,7 +77,7 @@
 	#request-resource:target .request-resource-button i.icon, #sfp-other:target .sfp-other-button i.icon,
 	#sfp-journal:target .sfp-button i.icon {
 	color: #007C92;
-	background-color: white;
+	background-color: #F0F0F0;
 }
 
 /* Confirmation page */
