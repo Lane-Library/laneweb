@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+        <release date="2021-08-09" version="3.8.3" description="bug fix release">
+            <action date="2021-07-22" dev="alainb" issue="LANEWEB-10759" type="update">
+               Today's Hours in Header
+            </action>
+            <action date="2021-07-26" dev="alainb" issue="LANEWEB-10762" type="update">
+               Replace button the in image search
+            </action>
+            <action date="2021-07-27" dev="alainb" issue="LANEWEB-10763" type="update">
+               Point to the lane library hour
+            </action>
+            <action date="2021-07-27" dev="alainb" issue="LANEWEB-10764" type="update">
+               Today's Hours on Contact Us Page
+            </action>
+            <action date="2021-07-28" dev="alainb" issue="LANEWEB-10765" type="update">
+               Use btn class in contacts page
+            </action>
+        </release>
         <release date="2021-07-26" version="3.8.2" description="bug fix release">
             <action date="2021-07-22" dev="ryanmax" issue="LANEWEB-10760" type="update">
                 Update buttons on my bookmarks page
