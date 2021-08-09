@@ -74,11 +74,17 @@
 
 #liaisons:target .liaisons-button i.icon, #laneaskus:target .laneaskus-button i.icon,
 	#ejp:target .ejp-button i.icon, #sfp-book:target .sfp-button i.icon,
-	#request-resource:target .request-resource-button i.icon, #sfp-other:target .sfp-other-button i.icon,
+	#request-resource:target .request-resource-button i.icon, #sfp-other:target .sfp-button i.icon,
 	#sfp-journal:target .sfp-button i.icon {
 	color: #007C92;
 	background-color: #F0F0F0;
 }
+
+ #sfp-book:target .sfp-button i.icon-alt, #sfp-other:target .sfp-button i.icon-alt,
+    #sfp-journal:target .sfp-button i.icon-alt {
+    color: #F0F0F0;
+    background-color: #007C92;
+}  
 
 /* Confirmation page */
 .contact-confirmation p {
