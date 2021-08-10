@@ -77,16 +77,6 @@ img {
 	.library-contact li a {
         padding: 5px 0px;
   	}
-	#todays-hours{
-	    font-size:27px;
-	    color: #007C92;
-        background-color: #F0F0F0;
-	} 
-    a:hover #todays-hours{
-        color: #F0F0F0;
-        background-color: #007C92;
-    }	
-	
 	
 	.pure-md-hide, span.bookmark-link {
 		display: none;
