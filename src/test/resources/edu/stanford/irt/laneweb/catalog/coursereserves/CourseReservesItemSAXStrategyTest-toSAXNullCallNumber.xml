@@ -7,12 +7,18 @@
          </div>
       </div>
       <div class="pure-u-7-8">
-         <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=1">title</a>
+         <a href="https://lane.stanford.edu/view/bib/1">title</a>
          <div>author</div>
          <div>
             <strong>Book </strong>Print</div>
          <div>
             <strong>Status: </strong>Available <strong>1</strong>
+            <span class="requestIt">
+               <a class="btn alt"
+                  title="Request this item"
+                  href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=1&amp;lw.req=true"
+                  rel="popup console 1020 800">Request</a>
+            </span>
          </div>
       </div>
    </div>

@@ -79,6 +79,10 @@
     padding-left: 25px;
 }
 
+.course-reserves .requestIt {
+    padding-left: 50px;
+}
+
 @media ( max-width : 812px) {
 	.course-reserves tbody td {
 	    padding: 5px;
