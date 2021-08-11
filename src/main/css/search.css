@@ -156,6 +156,7 @@ li.active .description {
 
 .requestIt a {
 	padding: 3px 10px;
+	margin-top: -5px;
 	font-size: unset;
 }
 
