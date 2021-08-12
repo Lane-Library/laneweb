@@ -36,7 +36,7 @@ public class SpamServiceImpl implements SpamService {
     try {
       isSpam = this.restService.postObject(this.spamURI.resolve(endPointUrl), spam, Boolean.class);
       if (isSpam) {
-        log.warm("SPAM detected:  Email {} and IP {} for portal {}  ", spam.getEmail(), spam.getIp(), spam.getPortal());
+        log.warn("SPAM detected:  Email {} and IP {} for portal {}  ", spam.getEmail(), spam.getIp(), spam.getPortal());
       }
     } catch (Exception e) {
       log.error(e.getMessage(), e);
