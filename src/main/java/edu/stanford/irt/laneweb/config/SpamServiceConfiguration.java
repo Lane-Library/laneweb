@@ -20,8 +20,8 @@ public class SpamServiceConfiguration {
           @Value("${edu.stanford.irt.laneweb.spam.host}") final String host,
           @Value("${edu.stanford.irt.laneweb.spam.port}") final int port,
           @Value("${edu.stanford.irt.laneweb.spam.path}") final String path) throws URISyntaxException {
-      URI metaSearchURI = new URI(scheme, null, host, port, path, null, null);
-      return new SpamServiceImpl(metaSearchURI, restService);
+      URI spamURI = new URI(scheme, null, host, port, path, null, null);
+      return new SpamServiceImpl(spamURI, restService);
   }
 
 }
