@@ -12,10 +12,10 @@
          <div>
             <strong>Book </strong>Print</div>
          <div>
-            <strong>Status: </strong>Checked Out</div>
-         <div>
             <strong>Call #: call number</strong>
          </div>
+         <div>
+            <strong>Status: </strong>Checked Out</div>
       </div>
    </div>
 </li>

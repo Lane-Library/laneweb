@@ -13,6 +13,9 @@
             <strong>Book </strong>Print<span class="version-note">version note</span>
          </div>
          <div>
+            <strong>Call #: call number</strong>
+         </div>
+         <div>
             <strong>Status: </strong>Available <strong>1</strong>
             <span class="requestIt">
                <a class="btn alt"
@@ -20,9 +23,6 @@
                   href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=1&amp;lw.req=true"
                   rel="popup console 1020 800">Request</a>
             </span>
-         </div>
-         <div>
-            <strong>Call #: call number</strong>
          </div>
       </div>
    </div>

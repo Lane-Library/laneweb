@@ -63,8 +63,8 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             }
             endDiv(xmlConsumer);
             if (type == ItemType.PRINT_BOOK) {
-                availableCount(xmlConsumer, item.getAvailableCount(), id);
                 callNumber(xmlConsumer, item.getCallNumber());
+                availableCount(xmlConsumer, item.getAvailableCount(), id);
             }
             endDiv(xmlConsumer);
             endDiv(xmlConsumer);
