@@ -3,7 +3,7 @@
 
 	<xsl:template match="/">
 		<xsl:apply-templates
-			select="libcal/locations/location[name= 'Lane Medical Library']/rendered" />
+			select="libcal/locations/location[lid= '12359']/rendered" />
 	</xsl:template>
 
 
