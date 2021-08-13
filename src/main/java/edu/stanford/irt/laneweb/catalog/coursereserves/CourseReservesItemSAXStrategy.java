@@ -64,7 +64,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             endDiv(xmlConsumer);
             if (type == ItemType.PRINT_BOOK) {
                 callNumber(xmlConsumer, item.getCallNumber());
-                availableCount(xmlConsumer, item.getAvailableCount(), id);
+                availableCount(xmlConsumer, item.getAvailableCount());
             }
             endDiv(xmlConsumer);
             endDiv(xmlConsumer);
@@ -74,7 +74,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
         }
     }
 
-    private void availableCount(final XMLConsumer xmlConsumer, final Integer availableCount, final String id)
+    private void availableCount(final XMLConsumer xmlConsumer, final Integer availableCount)
             throws SAXException {
         if (availableCount != null) {
             startDiv(xmlConsumer);
@@ -84,17 +84,6 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             } else {
                 XMLUtils.data(xmlConsumer, "Available ");
                 createStrong(xmlConsumer, availableCount.toString());
-                startElementWithClass(xmlConsumer, "span", "requestIt");
-                AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "btn alt");
-                atts.addAttribute(EMPTY_NS, "title", "title", CDATA, "Request this item");
-                atts.addAttribute(EMPTY_NS, "href", "href", CDATA,
-                        "https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=" + id + "&lw.req=true");
-                atts.addAttribute(EMPTY_NS, "rel", "rel", CDATA, "popup console 1020 800");
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "a", atts);
-                XMLUtils.data(xmlConsumer, "Request");
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "a");
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
             }
             endDiv(xmlConsumer);
         }
