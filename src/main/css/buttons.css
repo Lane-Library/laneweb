@@ -100,212 +100,157 @@ http://lane.stanford.edu/samples/button-css.html
 	background-color: #005766;
 }
 
-/* I do not like to use the !important but in this case I thought it is making sense  because it will
-overwrite any other class ( outline, alt ) if the button is disabled */
-.btn.disabled {
-	color: #F0F0F0 !important;
-	background-color: #666666 !important;
-	border-color: #666666 !important;
-	cursor: not-allowed !important;
-	text-decoration: none !important;
-	animation-name: none !important;
-}
 
-.btn.disabled .icon {
-	color: #F0F0F0 !important;
-	background-color: #555 !important;
-}
 
 .btn  .icon {
+    color: #F0F0F0;
+    background-color: #8C1515;
+    margin-right: 5px;
+}
+
+.btn:hover  .icon {
+    background-color: #6F1111;
+}
+
+.btn:active  .icon {
+    background-color: #430A0A;
+}
+
+.btn.outline  .icon {
+    color: #8C1515;
+    background-color: #F0F0F0;
+}
+
+.btn.outline:hover  .icon {
+    color: #F0F0F0;
+    background-color: #8C1515;
+}
+
+.btn.outline:active  .icon {
+    background-color: #6F1111;
+}
+
+.btn.alt  .icon {
+    color: #F0F0F0;
+    background-color: #007C92;
+}
+
+.btn.alt:hover  .icon {
+    color: #F0F0F0;
+    background-color: #005766;
+}
+
+.btn.alt:active span .icon {
+    background-color: #002B33;
+}
+
+.btn.alt.outline  .icon {
+    color: #007C92;
+    background-color: #F0F0F0;
+}
+
+.btn.alt.outline:hover  .icon {
+    color: #F0F0F0;
+    background-color: #007C92;
+}
+
+.btn.alt.outline:active  .icon {
+    background-color: #005766;
+}
+
+
+
+/*  Alternate icon without background */
+.btn  .icon-alt {
 	border-radius: 12px;
 	font-size: 15px;
 	height: 24px;
 	width: 24px;
 	padding: 4px;
 	box-sizing: border-box;
-	margin-right: 2px;
+	margin-right: 5px;
 	line-height: 15px;
 	vertical-align: text-top;
 	text-align: center;
 }
 
-.btn .icon {
+.btn .icon-alt {
 	color: #8C1515;
 	background-color: #F0F0F0;
 }
 
-.btn:hover .icon {
+.btn:hover .icon-alt {
 	color: #6F1111;
 }
 
-.btn:active .icon {
+.btn:active .icon-alt {
 	color: #430A0A;
 }
 
-.btn.outline  .icon {
-	color: #F0F0F0;
-	background-color: #8C1515;
-}
-
-.btn.outline:hover  .icon {
-	color: #8C1515;
-	background-color: #F0F0F0;
-}
-
-.btn.outline:active  .icon {
-	color: #6F1111;
-}
-
-.btn.alt  .icon {
-	color: #007C92;
-	background-color: #F0F0F0;
-}
-
-.btn.alt:hover  .icon {
-	color: #005766;
-}
-
-.btn.alt:active  .icon {
-	color: #002B33;
-}
-
-.btn.alt  .icon {
-	color: #007C92;
-	background-color: #F0F0F0;
-}
-
-.btn.alt.outline  .icon {
-	color: #F0F0F0;
-	background-color: #007C92;
-}
-
-.btn.alt.outline:hover  .icon {
-	color: #007C92;
-	background-color: #F0F0F0;
-}
-
-.btn.alt.outline:active  .icon {
-	color: #005766;
-}
-
-/*  Alternate icon without background */
-.btn  .icon-alt {
-	color: #F0F0F0;
-	background-color: #8C1515;
-}
-
-.btn:hover  .icon-alt {
-	background-color: #6F1111;
-}
-
-.btn:active  .icon-alt {
-	background-color: #430A0A;
-}
-
 .btn.outline  .icon-alt {
-	color: #8C1515;
-	background-color: #F0F0F0;
+	color: #F0F0F0;
+	background-color: #8C1515;
 }
 
 .btn.outline:hover  .icon-alt {
-	color: #F0F0F0;
-	background-color: #8C1515;
+	color: #8C1515;
+	background-color: #F0F0F0;
 }
 
 .btn.outline:active  .icon-alt {
-    background-color: #6F1111;
+	color: #6F1111;
 }
 
 .btn.alt  .icon-alt {
-	color: #F0F0F0;
-	background-color: #007C92;
-}
-
-.btn.alt:hover  .icon-alt {
-	color: #F0F0F0;
-	background-color: #005766;
-}
-
-.btn.alt:active span .icon-alt {
-	background-color: #002B33;
-}
-
-.btn.alt.outline  .icon-alt {
 	color: #007C92;
 	background-color: #F0F0F0;
 }
 
-.btn.alt.outline:hover  .icon-alt {
+.btn.alt:hover  .icon-alt {
+	color: #005766;
+}
+
+.btn.alt:active  .icon-alt {
+	color: #002B33;
+}
+
+.btn.alt  .icon-alt {
+	color: #007C92;
+	background-color: #F0F0F0;
+}
+
+.btn.alt.outline  .icon-alt {
 	color: #F0F0F0;
 	background-color: #007C92;
 }
 
+.btn.alt.outline:hover  .icon-alt {
+	color: #007C92;
+	background-color: #F0F0F0;
+}
+
 .btn.alt.outline:active  .icon-alt {
-    background-color: #005766;
+	color: #005766;
 }
 
-.button {
-	font-size: 16px;
-	font-weight: 400;
-	padding: 5.25px 10.5px;
-	border: 1px #cccccc solid;
-	border-radius: 3.5px;
-	cursor: pointer;
-	background-color: #f1f1f1;
-	display: inline-block;
+/* I do not like to use the !important but in this case I thought it is making sense  because it will
+overwrite any other class ( outline, alt ) if the button is disabled */
+.btn.disabled {
+    color: #F0F0F0 !important;
+    background-color: #666666 !important;
+    border-color: #666666 !important;
+    cursor: not-allowed !important;
+    text-decoration: none !important;
+    animation-name: none !important;
 }
 
-.button:hover {
-	border-color: #adadad;
+.btn.disabled .icon-alt {
+    color: #F0F0F0 !important;
+    background-color: #555 !important;
 }
 
-.button span {
-	background-color: #007c92;
-	color: #ffffff;
-	padding: 7px 12px 7px 7px;
-	border-radius: 4px;
-	margin-right: 6px;
-	display: inline-block;
-}
 
-.button span .icon {
-	background-color: #ffffff;
-	border-radius: 12px;
-	font-size: 13px;
-	height: 24px;
-	width: 24px;
-	padding: 4px;
-	box-sizing: border-box;
-	margin-right: 6px;
-	line-height: 15px;
-}
-
-.button .icon {
-	color: #007c92;
-	text-align: center;
-}
-
-.button * {
-	vertical-align: middle;
-}
-
-.button.alt1 span {
-	background-color: #8c1515;
-}
-
-.button.alt1.waitlist span {
-	background-color: #b96d12;
-}
-
-.button.alt1 .icon {
-	color: #8c1515;
-}
-
-.button.alt2 {
-	background-color: #8c1515;
-	width: 100%;
-	color: white;
-	padding: 9px;
-	border: 1px solid #8c1515;
-	border-radius: 9px;
+.btn.disabled .icon {
+    color: #F0F0F0 !important;
+    background-color: #666666 !important;    
 }

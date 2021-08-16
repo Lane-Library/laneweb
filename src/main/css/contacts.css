@@ -1,133 +1,120 @@
 .contact-page{
-	min-width: 1059px;
+    min-width: 1059px;
 }
 
 #contacts fieldset:last-child {
-	margin-top: 12px;
+    margin-top: 12px;
 }
 
 #contacts ul.bulleted-list {
-	margin-top: 9px;
-	margin-bottom: 15px;
+    margin-top: 9px;
+    margin-bottom: 15px;
 }
 
 #contacts button {
-	width: 100%;
+    width: 100%;
 }
 
 .contacts-choice {
-	display: flex;
-	white-space: nowrap;
-	text-align: center;
-	margin-top: 6px;
-	margin-bottom: 24px;
+    display: flex;
+    white-space: nowrap;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 24px;
 }
 
 .contacts-choice li, .contacts-choice  li:last-child {
-	flex: 1 1 auto;
-	margin: 3px;
-	padding: 0px;
-	border-radius: 9px;
+    flex: 1 1 auto;
+    margin: 3px;
+    padding: 0px;
+    border-radius: 9px;
 }
 
 .contacts-choice li a {
-	padding: 10px 2px;
-	width: 100%;
+    padding: 10px 2px;
+    width: 100%;
 }
 
 
 .contacts-info>div {
-	margin-top: 9px;
+    margin-top: 9px;
 }
 
 #liaisons, #ejp, #request-resource, #sfp-book, #sfp-journal, #sfp-other
-	{
-	display: none;
+    {
+    display: none;
 }
 
 :target ~ #laneaskus {
-	display: none;
+    display: none;
 }
 
 #liaisons:target, #ejp:target, #request-resource:target, #sfp-book:target,
-	#sfp-journal:target, #sfp-other:target {
-	display: block;
+    #sfp-journal:target, #sfp-other:target {
+    display: block;
 }
 
 #liaisons:target .liaisons-button a, #laneaskus:target .laneaskus-button a,
-	#ejp:target .ejp-button a, #liaisons:target .liaisons-button span,
-	#laneaskus:target .laneaskus-button span, #ejp:target .ejp-button span,
-	#liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
-	#ejp:target .ejp-button .fa, #request-resource:target .request-resource-button a,
-	#request-resource:target .request-resource-button span,
-	#request-resource:target .request-resource-button .fa, #sfp-journal:target .sfp-journal-button,
-	#sfp-journal:target .sfp-journal-button  a, #sfp-journal:target .sfp-button a,
-	#sfp-journal:target .sfp-button a, #sfp-other:target .sfp-other-button a,
-	#sfp-other:target .sfp-other-button a, #sfp-other:target .sfp-button,
-	#sfp-other:target .sfp-button a, #sfp-book:target .sfp-book-button,
-	#sfp-book:target .sfp-book-button a, #sfp-book:target .sfp-button a,
-	#sfp-book:target .sfp-button a {
-	background-color: #007C92;
-	color: #F0F0F0;
-	cursor: not-allowed;
-}
-
-#liaisons:target .liaisons-button i.icon, #laneaskus:target .laneaskus-button i.icon,
-	#ejp:target .ejp-button i.icon, #sfp-book:target .sfp-button i.icon,
-	#request-resource:target .request-resource-button i.icon, #sfp-other:target .sfp-button i.icon,
-	#sfp-journal:target .sfp-button i.icon {
-	color: #007C92;
-	background-color: #F0F0F0;
-}
-
- #sfp-book:target .sfp-button i.icon-alt, #sfp-other:target .sfp-button i.icon-alt,
-    #sfp-journal:target .sfp-button i.icon-alt {
-    color: #F0F0F0;
+    #ejp:target .ejp-button a, #liaisons:target .liaisons-button span,
+    #laneaskus:target .laneaskus-button span, #ejp:target .ejp-button span,
+    #liaisons:target .liaisons-button .fa, #laneaskus:target .laneaskus-button .fa,
+    #ejp:target .ejp-button .fa, #request-resource:target .request-resource-button a,
+    #request-resource:target .request-resource-button span,
+    #request-resource:target .request-resource-button .fa, #sfp-journal:target .sfp-journal-button,
+    #sfp-journal:target .sfp-journal-button  a, #sfp-journal:target .sfp-button a,
+    #sfp-journal:target .sfp-button a, #sfp-other:target .sfp-other-button a,
+    #sfp-other:target .sfp-other-button a, #sfp-other:target .sfp-button,
+    #sfp-other:target .sfp-button a, #sfp-book:target .sfp-book-button,
+    #sfp-book:target .sfp-book-button a, #sfp-book:target .sfp-button a,
+    #sfp-book:target .sfp-button a ,  #sfp-book:target .sfp-button i.icon, #sfp-other:target .sfp-button i.icon,
+    #sfp-journal:target .sfp-button i.icon{
     background-color: #007C92;
-}  
+    color: #F0F0F0;
+    cursor: not-allowed;
+}
 
 /* Confirmation page */
 .contact-confirmation p {
-	font-size: 22px;
-	color: #707070;
+    font-size: 22px;
+    color: #707070;
 }
 
 .contact-confirmation div {
-	text-align: center;
+    text-align: center;
 }
 
 .contact-confirmation div:nth-of-type(3) {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .contact-confirmation div:nth-of-type(3) i {
-	font-size: 15em;
+    font-size: 15em;
 }
 
 .contact-confirmation div:first-of-type {
-	margin-top: 108px;
-	font-size: 55px;
+    margin-top: 108px;
+    font-size: 55px;
 }
 
 .contact-confirmation div:nth-of-type(2) {
-	margin: 30px 15%;
-	font-size: 30px;
-	color: #707070;
-	line-height: 1.3em;
+    margin: 30px 15%;
+    font-size: 30px;
+    color: #707070;
+    line-height: 1.3em;
 }
 
 .contact-confirmation div:nth-of-type(4) {
-	margin: 126px 0px 30px 0px;
+    margin: 126px 0px 30px 0px;
 }
 
 @media ( max-width : 812px) {
-	.contact-page{
+    .contact-page{
         min-width: unset;
     }
-	.content .contacts-choice {
-		display: block;
-	}
-	.content .contacts-choice a {
-		display: block;
-	}
+    .content .contacts-choice {
+        display: block;
+    }
+    .content .contacts-choice a {
+        display: block;
+    } 
 }
