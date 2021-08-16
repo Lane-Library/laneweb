@@ -121,6 +121,9 @@
 }
 
 @media ( max-width : 812px) {
+	.contact-page{
+        min-width: unset;
+    }
 	.content .contacts-choice {
 		display: block;
 	}
