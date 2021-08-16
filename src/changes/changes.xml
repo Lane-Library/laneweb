@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+       <release date="2021-08-16" version="3.8.4" description="bug fix release">
+            <action date="2021-08-12" dev="ryanmax" issue="LANEWEB-10768" type="update">
+               Course reserves improvement
+            </action>
+            <action date="2021-08-13" dev="alainb" issue="LANEWEB-10769" type="update">
+              Today's Hours pulling all department hours
+            </action>
+            <action date="2021-08-16" dev="alainb" issue="LANEWEB-10777" type="update">
+               Not enough padding today's hours button in responsive mode
+            </action>
+            <action date="2021-08-12" dev="ryanmax" issue="LANEWEB-10767" type="update">
+               Poor alignment on "request" button
+            </action>
+        </release>
         <release date="2021-08-09" version="3.8.3" description="bug fix release">
             <action date="2021-07-22" dev="alainb" issue="LANEWEB-10759" type="update">
                Today's Hours in Header
