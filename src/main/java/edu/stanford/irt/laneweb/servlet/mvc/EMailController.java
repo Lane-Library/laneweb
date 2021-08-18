@@ -45,6 +45,8 @@ public class EMailController {
 
   private static final String EJP_PATH = "ejp";
 
+  private static final String EJP_PORTAL = "ejp";
+  
   private static final String ERROR_PAGE = "redirect:/error.html";
 
   private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
@@ -56,6 +58,8 @@ public class EMailController {
   private static final String SUBJECT = "subject";
 
   private static final String UPLOAD_ERROR_PAGE = "redirect:/error_upload_file.html";
+
+
 
   private RequestHeaderDataBinder headerBinder;
 
@@ -95,7 +99,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map, ASKUS_PORTAL)) {
+    if (!validateForm(map, EJP_PORTAL)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
