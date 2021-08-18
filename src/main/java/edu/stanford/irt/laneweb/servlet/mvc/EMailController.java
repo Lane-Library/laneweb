@@ -22,6 +22,7 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
+import edu.stanford.irt.laneweb.spam.SpamService;
 
 // TODO: the individual methods for each address probably can be combined
 @Controller
@@ -33,6 +34,8 @@ public class EMailController {
   private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
 
   private static final String ASKUS_PATH = "askus";
+
+  private static final String ASKUS_PORTAL = "laneaskus";
 
   private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
 
@@ -58,13 +61,16 @@ public class EMailController {
 
   private RemoteProxyIPDataBinder remoteIPBinder;
 
+  private SpamService spamService;
+
   private EMailSender sender;
 
   public EMailController(final RequestHeaderDataBinder headerBinder, final RemoteProxyIPDataBinder remoteIPBinder,
-      final EMailSender sender) {
+      final EMailSender sender, SpamService spamService) {
     this.headerBinder = headerBinder;
     this.remoteIPBinder = remoteIPBinder;
     this.sender = sender;
+    this.spamService = spamService;
   }
 
   @PostMapping(value = ASKUS_PATH, consumes = MULTIPART_MIME_TYPE)
@@ -72,7 +78,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map)) {
+    if (!validateForm(map, ASKUS_PORTAL)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
@@ -89,7 +95,7 @@ public class EMailController {
       final RedirectAttributes atts)
     throws IllegalStateException, IOException {
     Map<String, Object> map = model.asMap();
-    if (!validateForm(map)) {
+    if (!validateForm(map, ASKUS_PORTAL)) {
       return ERROR_PAGE;
     }
     File attachment = validateFileMultipartFile(file);
@@ -108,6 +114,9 @@ public class EMailController {
   public String submitAskUs(final Model model, final RedirectAttributes atts) throws IllegalStateException {
     Map<String, Object> map = model.asMap();
     appendNameToSubject(map);
+    if (spamService.isSpam(ASKUS_PORTAL, map)) {
+      return ERROR_PAGE;
+    }
     sendEmail(ASKUS_ADDRESS, map);
     return getRedirectTo(map);
   }
@@ -168,7 +177,10 @@ public class EMailController {
     return file;
   }
 
-  private boolean validateForm(final Map<String, Object> feedback) {
+  private boolean validateForm(final Map<String, Object> feedback, String portal) {
+    if (spamService.isSpam(portal, feedback)) {
+      return false;
+    }
     return !(feedback.get("email") == null || feedback.get("email").toString().isEmpty() || feedback.get("name") == null
         || feedback.get("name").toString().isEmpty());
   }
