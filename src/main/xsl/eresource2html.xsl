@@ -49,7 +49,7 @@
                 </xsl:if>
                 <xsl:if test="s:primaryType = 'Book Print' and $available &gt; 0">
                     <span class="requestIt">
-                        <a class="btn alt" title="Request this item for pickup" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request</a>
+                        <a class="btn alt" title="Request this item" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request</a>
                     </span>
                 </xsl:if>
                 <span class="permalink">
