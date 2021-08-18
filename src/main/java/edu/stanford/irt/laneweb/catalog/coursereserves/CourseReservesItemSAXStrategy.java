@@ -25,8 +25,6 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
     public void toSAX(final CourseReservesItem item, final XMLConsumer xmlConsumer) {
         try {
             startLiWithClass(xmlConsumer, "resource course-reserves-item");
-            startDivWithClass(xmlConsumer, "pure-g");
-            startDivWithClass(xmlConsumer, "pure-u-1-8");
             String id = Integer.toString(item.getId());
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, id);
@@ -34,8 +32,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
             createElementWithClass(xmlConsumer, "i", "fa fa-book", "");
             endDiv(xmlConsumer);
-            endDiv(xmlConsumer);
-            startDivWithClass(xmlConsumer, "pure-u-7-8");
+            startDiv(xmlConsumer);
             ItemType type = item.getType();
             boolean isDigital = type == ItemType.DIGITAL_BOOK || type == ItemType.VIDEO;
             String url = item.getURL();
@@ -66,7 +63,6 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
                 callNumber(xmlConsumer, item.getCallNumber());
                 availableCount(xmlConsumer, item.getAvailableCount());
             }
-            endDiv(xmlConsumer);
             endDiv(xmlConsumer);
             endLi(xmlConsumer);
         } catch (SAXException e) {

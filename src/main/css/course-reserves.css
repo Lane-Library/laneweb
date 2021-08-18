@@ -79,6 +79,15 @@
     padding-left: 25px;
 }
 
+.course-reserves .bookcover {
+    float:left;
+    padding: 0 30px 30px;
+}
+
+.course-reserves-item div {
+    overflow: auto;
+}
+
 @media ( max-width : 812px) {
 	.course-reserves tbody td {
 	    padding: 5px;
