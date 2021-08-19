@@ -95,7 +95,7 @@ public class EMailControllerTest {
     expect(this.map.get("subject")).andReturn("[ejp]");
     expect(this.map.get("title")).andReturn("title");
     expect(this.map.put("subject", "[ejp] title")).andReturn(null);
-    expect(spamService.isSpam("laneaskus", this.map)).andReturn(false);
+    expect(spamService.isSpam("ejp", this.map)).andReturn(false);
     expect(this.map.put("recipient", "ejproblem@lists.stanford.edu")).andReturn(null);
     this.sender.sendEmail(this.map, null);
     replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map, this.multipartFile);
@@ -174,7 +174,7 @@ public class EMailControllerTest {
     expect(this.map.get("title")).andReturn("title");
     expect(this.map.put("subject", "[ejp] title")).andReturn(null);
     expect(this.map.put("recipient", "ejproblem@lists.stanford.edu")).andReturn(null);
-    expect(spamService.isSpam("laneaskus", this.map)).andReturn(false);
+    expect(spamService.isSpam("ejp", this.map)).andReturn(false);
     this.sender.sendEmail(this.map, file);
     replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map, this.multipartFile);
     String nextPage = this.controller.formSubmitEJP(this.model, this.multipartFile, this.atts);
