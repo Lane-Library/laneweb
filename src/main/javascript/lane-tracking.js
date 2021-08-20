@@ -93,15 +93,7 @@
             },
             getTrackedHost = function(node) {
                 var host, pathname = node.pathname;
-                if (pathname.indexOf("cookiesFetch") > -1) {
-                    host = decodeURIComponent(node.search);
-                    host = host.substring(host.indexOf("path=") + 6);
-                    if (host.indexOf("&") > -1) {
-                        host = host.substring(0, host.indexOf("&"));
-                    }
-                    host = host.substring(host.indexOf("//") + 2);
-                    host = host.substring(0, host.indexOf("/"));
-                } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
+                if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
                         host = host.substring(0, host.indexOf('/'));
@@ -117,14 +109,6 @@
                 var path, host, pathname = node.pathname;
                 if (isLocalPopup(node)) {
                     path = location.pathname;
-                } else if (pathname.indexOf('cookiesFetch') > -1) {
-                    host = decodeURIComponent(node.search);
-                    host = host.substring(host.indexOf("path=") + 6);
-                    if (host.indexOf("&") > -1) {
-                        host = host.substring(0, host.indexOf("&"));
-                    }
-                    host = host.substring(host.indexOf("//") + 2);
-                    path = host.substring(host.indexOf("/"));
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
@@ -197,8 +181,8 @@
             },
             isTrackableLocalClick = function(link) {
                 var isTrackable, pathname = link.pathname;
-                // rely on page tracking for \.html$ and \/$pages except for cookiesFetch
-                if (!(/cookiesFetch/).test(pathname) && (/\.html$/).test(pathname) || (/libguides/).test(pathname) || (/\/$/).test(pathname)) {
+                // rely on page tracking for \.html$ and \/$pages 
+                if ((/\.html$/).test(pathname) || (/libguides/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
                     //all others fall through to trackable
                 } else {

@@ -42,23 +42,6 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             Y.Assert.areEqual("http://www.nejm.org/", new L.LinkInfo(anchor1).url);
             Y.Assert.areEqual("http://www.nejm.org/", new L.LinkInfo(anchor2).url);
         },
-
-        testIsCookiesFetch : function() {
-            var anchor = document.querySelector("#cookiesFetch");
-            var linkInfo = new L.LinkInfo(anchor);
-            Y.Assert.isTrue(linkInfo.cookiesFetch);
-        },
-
-        testCookiesFetchIsNotLocal : function() {
-            var anchor = document.querySelector("#cookiesFetch");
-            Y.Assert.isFalse(new L.LinkInfo(anchor).local);
-        },
-
-        testGetCookiesFetchURL : function() {
-            var anchor = document.querySelector("#cookiesFetch");
-            Y.Assert.areEqual("http://www.thomsonhc.com/carenotes/librarian/", new L.LinkInfo(anchor).url);
-        },
-
         testGetTitle: function() {
             var i, anchor, anchors = document.querySelectorAll("#testGetTitle a");
             for (i = 0; i < anchors.length; i++) {

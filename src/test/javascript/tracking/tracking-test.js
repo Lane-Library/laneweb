@@ -141,15 +141,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             Y.Assert.isNull(this.event);
         },
 
-        testClickCookieFetch: function() {
-            var link = Y.one("#testTrackCookiesFetch");
-            link.simulate("click");
-            Y.Assert.areEqual("www.thomsonhc.com", this.pageView.host);
-            Y.Assert.areEqual("/carenotes/librarian/" , this.pageView.path);
-            Y.Assert.areEqual(link.get("text"), this.pageView.title);
-            Y.Assert.isNull(this.event);
-        },
-
         testClickProxyCredential: function() {
             var link = Y.one("#proxylink");
             link.simulate("click");

@@ -9,10 +9,8 @@
     var PROXY_HOST_PATTERN = "^(?:login\\.)?laneproxy.stanford.edu$",
         PROXY_LOGIN_PATH = "/login",
         basePath = L.Model.get("base-path") || "",
-        cookiesFetchPath = basePath + "/cookiesFetch.html",
         documentHostName = location.hostname,
         loginPath = basePath + "/secure/apps/proxy/credential",
-
         linkInfo = function(node) {
             this.node = node;
         };
@@ -41,13 +39,6 @@
     };
 
     Object.defineProperties(linkInfo.prototype, {
-        cookiesFetch:  {
-            writeable: false,
-            get: function() {
-                var path = this.node.pathname;
-                return path !== undefined && path.indexOf(cookiesFetchPath) === 0;
-            }
-        },
         linkHost : {
             writeable: false,
             get: function() {
@@ -62,7 +53,7 @@
         local : {
             writeable: false,
             get: function() {
-                return this.linkHost === documentHostName ? !this.proxyLogin && !this.cookiesFetch : false;
+                return this.linkHost === documentHostName ? !this.proxyLogin : false;
             }
         },
         path : {
@@ -146,7 +137,7 @@
             writeable: false,
             get: function() {
                 var host, path, query, title, external;
-                if (this.cookiesFetch || this.proxy || this.proxyLogin) {
+                if ( this.proxy || this.proxyLogin) {
                     host = this.url;
                     host = host.substring(host.indexOf("//") + 2);
                     if (host.indexOf("/") > -1) {
@@ -175,11 +166,7 @@
                 var href = this.node.href;
                 if (this.proxy || this.proxyLogin) {
                     href = href.substring(href.indexOf("url=") + 4);
-                } else if (this.cookiesFetch) {
-                    href = href.substring(href.indexOf("url=") + 4);
-                    href = href.substring(0, href.indexOf("&"));
-                    href = window.decodeURIComponent(href);
-                }
+                } 
                 return href;
             }
         }
