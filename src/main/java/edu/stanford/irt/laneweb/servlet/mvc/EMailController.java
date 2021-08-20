@@ -41,6 +41,12 @@ public class EMailController {
 
   private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/ejp-confirmation.html";
 
+  private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
+
+  private static final String DOCXPRESS_PATH = "docxpress";
+  
+  private static final String DOCXPRESS_PORTAL = "docxpress";
+
   private static final String EJP_ADDRESS = "ejproblem@lists.stanford.edu";
 
   private static final String EJP_PATH = "ejp";
@@ -113,6 +119,18 @@ public class EMailController {
     return CONFIRMATION_PAGE_EJP;
   }
 
+
+  // Form coming from docxpress.stanford.edu
+  @PostMapping(value = DOCXPRESS_PATH, consumes = FORM_MIME_TYPE)
+  public String formSubmitDocxpress(final Model model, final RedirectAttributes atts) {
+    Map<String, Object> map = model.asMap();
+    if (spamService.isSpam(DOCXPRESS_PORTAL, map)) {
+      return ERROR_PAGE;
+    }
+    sendEmail(DOCXPRESS_ADDRESS, map);
+    return getRedirectTo(map);
+  }
+  
   // Form from the error 404 page
   @PostMapping(value = ASKUS_PATH, consumes = FORM_MIME_TYPE)
   public String submitAskUs(final Model model, final RedirectAttributes atts) throws IllegalStateException {
