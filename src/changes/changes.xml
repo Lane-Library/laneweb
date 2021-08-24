@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+        <release date="2021-08-23" version="3.8.5"	description="bug fix release">
+	       <action date="2021-08-21" dev="alainb" issue="LANEWEB-10784" type="update">
+				Spam manager
+			</action>
+			<action date="2021-08-16" dev="alainb" issue="LANEWEB-10778" type="update">
+				Inverse icon background
+			</action>
+			<action date="2021-08-20" dev="ryanmax" issue="LANEWEB-10782" type="update">
+				Course reserves mobile interface formatting
+			</action>
+			<action date="2021-08-21" dev="alainb" issue="LANEWEB-10783" type="update">
+				Remove /cookiesFetch.html functionality?
+			</action>
+			<action date="2021-08-21" dev="alainb" issue="LANEWEB-10786" type="update">
+			     Re-add docxpress email functionality to laneweb
+			</action>
+			<action date="2021-08-20" dev="alainb" issue="LANEWEB-10780" type="update">
+			     Header formatting issues in history template
+			</action>
+       </release>
        <release date="2021-08-16" version="3.8.4" description="bug fix release">
             <action date="2021-08-12" dev="ryanmax" issue="LANEWEB-10768" type="update">
                Course reserves improvement
