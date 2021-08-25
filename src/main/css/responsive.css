@@ -76,6 +76,7 @@ img {
     }
 	.library-contact li a {
         padding: 5px 0px;
+        letter-spacing: -1px; 
   	}
 	
 	.pure-md-hide, span.bookmark-link {
