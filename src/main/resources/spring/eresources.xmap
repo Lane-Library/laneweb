@@ -9,7 +9,7 @@
               <map:transform type="textNodeParser">
                 <map:parameter name="elementNames" value="description"/>
             </map:transform>
-             <map:transform type="namespace-filter"/>
+            <map:transform type="namespace-filter"/>
             <map:transform type="description-labeling"/>
             <map:transform type="description-linking"/>
             <map:transform type="solr-query-highlighting"/>
@@ -65,6 +65,10 @@
             <map:generate type="er-browse-html">
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementNames" value="description" />
+            </map:transform>
+            <map:transform type="namespace-filter" />
             <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>
@@ -74,6 +78,10 @@
             <map:generate type="er-mesh-html">
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementNames" value="description" />
+            </map:transform>
+            <map:transform type="namespace-filter" />
             <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>
