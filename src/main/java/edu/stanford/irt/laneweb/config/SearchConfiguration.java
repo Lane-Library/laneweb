@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.laneweb.search.DescriptionLabelTransformer;
-import edu.stanford.irt.laneweb.search.DescriptionLineBreakTransformer;
 import edu.stanford.irt.laneweb.search.DescriptionLinkTransformer;
 import edu.stanford.irt.laneweb.search.QueryHighlightingTransformer;
 import edu.stanford.irt.laneweb.search.SolrQueryHighlightingTransformer;
@@ -18,12 +18,6 @@ public class SearchConfiguration {
     @Scope("prototype")
     public Transformer descriptionLabelTransformer() {
         return new DescriptionLabelTransformer();
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/description-linebreak")
-    @Scope("prototype")
-    public Transformer descriptionLineBreakTransformer() {
-        return new DescriptionLineBreakTransformer();
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/description-linking")

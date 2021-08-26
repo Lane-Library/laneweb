@@ -257,10 +257,6 @@
         <a href="{s:link}"><xsl:value-of select="s:label"/></a>
     </xsl:template>
 
-    <xsl:template match="s:desc-linebreak">
-        <br/>
-    </xsl:template>
-
     <xsl:template match="s:link[1]">
         <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
         <div>
