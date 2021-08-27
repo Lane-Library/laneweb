@@ -130,7 +130,7 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         expect(this.response.getHeaders("Set-Cookie")).andReturn(Collections.singleton( CookieName.EXPIRATION.toString()+"cookie"));
-        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"cookie; SameSite=None");
+        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"cookie; SameSite=Lax");
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
@@ -157,8 +157,8 @@ public class PersistentLoginControllerTest {
         cookieFromHttpResponse.add(CookieName.USER.toString()+"_cookie");
         cookieFromHttpResponse.add("SESSION_cookie");
         expect(this.response.getHeaders("Set-Cookie")).andReturn(cookieFromHttpResponse);
-        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"_cookie; SameSite=None");
-        this.response.addHeader("Set-Cookie", CookieName.USER.toString()+"_cookie; SameSite=None");
+        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"_cookie; SameSite=Lax");
+        this.response.addHeader("Set-Cookie", CookieName.USER.toString()+"_cookie; SameSite=Lax");
         this.response.addHeader("Set-Cookie", "SESSION_cookie");
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);

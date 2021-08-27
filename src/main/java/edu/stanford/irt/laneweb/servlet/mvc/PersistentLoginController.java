@@ -34,7 +34,7 @@ public class PersistentLoginController {
   // login duration is two weeks:
   private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(28).getSeconds());
 
-  private static final String SAME_SITE = "; SameSite=None";
+  private static final String SAME_SITE = "; SameSite=Lax";
 
   private static final String COOKIE_HEADERS = "Set-Cookie";
 
