@@ -27,10 +27,8 @@ RUN find /root/.m2/repository -atime +30 -iname '*.pom' \
 #
 FROM openjdk:11-jre
 
-RUN apt-get update && \
-    apt-get -y install \
-    fontconfig \
-    ttf-dejavu
+RUN apt-get update
+    
 
 COPY --from=MAVEN_TOOL_CHAIN /root/.m2 /root/.m2
 COPY --from=MAVEN_TOOL_CHAIN /build/target/laneweb.war laneweb.war
