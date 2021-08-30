@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	 <release date="2021-08-30" version="3.8.6"	description="bug fix release">
+	       <action date="2021-08-26" dev="alainb" issue="LANEWEB-10793" type="fix">
+				Bookmarklet not working with persistent login
+			</action>
+			<action date="2021-08-25" dev="alainb" issue="LANEWEB-10795" type="fix">
+				Parse html content from description fields
+			</action>
+			<action date="2021-08-20" dev="ryanmax" issue="LANEWEB-10789" type="update">
+				No need to throttle browzine api requests
+			</action>
+			<action date="2021-08-21" dev="alainb" issue="LANEWEB-10783" type="fix">
+				Poor hours formatting on small screens
+			</action>
+       </release>
         <release date="2021-08-23" version="3.8.5"	description="bug fix release">
 	       <action date="2021-08-21" dev="alainb" issue="LANEWEB-10784" type="update">
 				Spam manager
