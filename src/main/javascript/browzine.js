@@ -35,16 +35,16 @@
                 // add PDF link search result nodes
                 update: function(article) {
                     var fulltextUrl = article.data.fullTextFile,
+                        contentLocation = article.data.contentLocation,
                         doi = article.data.doi ? article.data.doi.toLowerCase() : null,
                         coverImageUrl = (article.included[0] && article.included[0].coverImageUrl) ? article.included[0].coverImageUrl : null;
                     if (doiMap[doi]) {
                         doiMap[doi].fetched = true;
                         if (fulltextUrl) {
-                            doiMap[doi].querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                                '<span class="directToPDF"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> ' +
-                                '<a class="bzFT" href="' + fulltextUrl + '">Direct to PDF</a>' +
-                                '</span>'
-                            )
+                            addFulltextLink(doiMap[doi],'pdf','Direct to PDF',fulltextUrl);
+                        }
+                        else if (contentLocation) {
+                            addFulltextLink(doiMap[doi],'text','Direct to Full Text',contentLocation);
                         }
                         if (coverImageUrl) {
                             doiMap[doi].querySelector('.bookcover').innerHTML = '<image src="' + coverImageUrl + '"/>';
@@ -58,6 +58,14 @@
                 }
             };
         }(document.querySelectorAll("li[data-doi]")),
+
+        addFulltextLink = function(node, type, label, url) {
+            node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
+                '<span class="browzineDirect"><i class="fa fa-file-' + type + '-o" aria-hidden="true"></i> ' +
+                '<a class="bzFT" href="' + url + '">' + label + '</a>' +
+                '</span>'
+            )
+        },
 
         // service to communicate with the server to fetch article data for each DOI
         articleLookupService = function() {

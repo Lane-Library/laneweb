@@ -20,10 +20,20 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
         
-        "test no doi": function() {
+        "test 3 no doi": function() {
             Y.Assert.areEqual("old", document.querySelector("li:not([data-doi]) a").getAttribute("href"))
             Y.Assert.areEqual(1, document.querySelectorAll("li:not([data-doi]) a").length);
+        },
+
+        "test 4": function() {
+            var links = document.querySelectorAll("li[data-doi='4'] a"),
+                lastLink = links[links.length - 1];
+            Y.Assert.areEqual("contentLocation", lastLink.getAttribute("href"))
+            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         }
+
+
+        
     });
 
     new Y.Test.Console().render();

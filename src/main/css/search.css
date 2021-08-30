@@ -148,7 +148,7 @@ li.active .description {
 	margin-left: 0;
 }
 
-.directToPDF{
+.browzineDirect{
 	position: absolute;
     top: 0px;
     left: 297px;	
@@ -205,7 +205,7 @@ li.active .description {
 	.sourceInfo span.requestIt{
 		margin-left: 6px;
 	}
-	.directToPDF{
+	.browzineDirect{
 		position: static;
 	}
 }
