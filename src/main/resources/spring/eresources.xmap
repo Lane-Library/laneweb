@@ -6,8 +6,11 @@
         <map:parameter name="request-key" value="remote-addr={remote-addr};request-uri={request-uri};source={source};q={query};facets={facets}:token={token}"/>
         <map:match pattern="er-search.xml" type="wildcard">
             <map:generate type="er-search"/>
+              <map:transform type="textNodeParser">
+                <map:parameter name="elementNames" value="description"/>
+            </map:transform>
+            <map:transform type="namespace-filter"/>
             <map:transform type="description-labeling"/>
-            <map:transform type="description-linebreak"/>
             <map:transform type="description-linking"/>
             <map:transform type="solr-query-highlighting"/>
             <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
@@ -62,6 +65,10 @@
             <map:generate type="er-browse-html">
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementNames" value="description" />
+            </map:transform>
+            <map:transform type="namespace-filter" />
             <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>
@@ -71,6 +78,10 @@
             <map:generate type="er-mesh-html">
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
+            <map:transform type="textNodeParser">
+                <map:parameter name="elementNames" value="description" />
+            </map:transform>
+            <map:transform type="namespace-filter" />
             <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>
