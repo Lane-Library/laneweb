@@ -72,22 +72,14 @@
 
             var baseURL = window.model["base-path"] + "/apps/search/browzine/doi/",
 
-                // working is a doi being looked up, or empty
-                working = "",
-
                 service = {
 
                     // fetch article data from API
                     getArticleData: function(doi) {
                         var request, url = baseURL + doi;
-                        if (working) {
-                            throw new Error("still working on " + working);
-                        }
-
                         request = new XMLHttpRequest();
                         request.open("GET", url, true);
                         request.onload = function() {
-                            working = "";
                             if (request.status >= 200 && request.status < 400) {
                                 service.fire("article", {article: JSON.parse(request.responseText)});
                             }
