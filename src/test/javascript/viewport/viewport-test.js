@@ -16,6 +16,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
             "test in viewport": function() {
                 Y.Assert.isTrue(this.viewport.inView(document.querySelector("#top")));
+                Y.Assert.isTrue(this.viewport.nearView(document.querySelector("#bottom"),10));
             },
 
             "test not in viewport": function() {

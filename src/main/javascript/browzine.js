@@ -19,12 +19,12 @@
             return {
 
                 // return a list of search result nodes that require article lookups
-                getDoisForUpdate: function() {
+                getDoisForUpdate: function(viewport) {
                     var doisForUpdate = [],
                         doi;
                     for (doi in doiMap) {
                         if (doiMap.hasOwnProperty(doi)) {
-                            if (!doiMap[doi].fetched) {
+                            if (!doiMap[doi].fetched && viewport.nearView(doiMap[doi],3)) {
                                 doisForUpdate.push(doi);
                             }
                         }
@@ -116,8 +116,8 @@
 
             // handler for the viewport update event, gets dois from the view
             // and asks the service of bookcover urls for them.
-            update: function() {
-                var dois = view.getDoisForUpdate();
+            update: function(viewport) {
+                var dois = view.getDoisForUpdate(viewport);
                 if (dois.length > 0) {
                     dois.forEach(function(doi){
                         if (doi.trim()) {
@@ -130,5 +130,8 @@
 
     articleLookupService.on("article", controller.article);
 
-    controller.update();
+    L.on(["viewport:init","viewport:scrolled"], function(event){
+            controller.update(event.viewport);
+    });
+
 })();

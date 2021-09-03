@@ -17,9 +17,14 @@
             window.setInterval(checkScrolled, 500);
 
             return {
-                inView: function(node) {
+                // viewportMultiplier: how many times the viewport's current height
+                // to still be considered in or near the viewport
+                nearView: function(node, viewportMultiplier) {
                     var rect = node.getBoundingClientRect();
-                    return rect.bottom >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight);
+                    return rect.bottom >= 0 && rect.top <= viewportMultiplier * (window.innerHeight || document.documentElement.clientHeight);
+                },
+                inView: function(node) {
+                    return this.nearView(node,1);
                 }
             };
 
