@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+		<release date="2021-09-06" version="3.8.7"	description="bug fix release">
+			<action date="2021-09-02" dev="ryanmax" issue="LANEWEB-10796" type="update">
+				expand Libkey lookups to include fulltext links in addition to PDF links
+			</action>
+			<action date="2021-09-03" dev="ryanmax" issue="LANEWEB-10802" type="update">
+				pre-fetch browzine information when results are close to visible in the viewport
+			</action>
+			<action date="2021-08-03" dev="ryanmax" issue="LANEWEB-10803" type="fix">
+				duplicate bookcover requests
+			</action>
+		</release>
       	 <release date="2021-08-30" version="3.8.6"	description="bug fix release">
 	       <action date="2021-08-26" dev="alainb" issue="LANEWEB-10793" type="fix">
 				Bookmarklet not working with persistent login
