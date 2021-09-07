@@ -19,10 +19,11 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         "test viewport:scrolled 1": function() {
+            var inview = 0;
             L.fire("viewport:scrolled", {
                 viewport: {
                     inView: function() {
-                        return true;
+                        return inview++ === 0;
                     }
                 }
             });
@@ -30,10 +31,11 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
         
         "test viewport:scrolled 2": function() {
+            var inview = 0;
             L.fire("viewport:scrolled", {
                 viewport: {
                     inView: function() {
-                        return true;
+                        return inview++ === 0;
                     }
                 }
             });

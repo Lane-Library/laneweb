@@ -32,7 +32,8 @@
                     for (bcid in imageMap) {
                         if (imageMap.hasOwnProperty(bcid)) {
                             for (i = 0; i < imageMap[bcid].length; i++) {
-                                if (!imageMap[bcid][i].querySelector("img") && viewport.nearView(imageMap[bcid][i],3)) {
+                                if (!imageMap[bcid][i].requested && viewport.inView(imageMap[bcid][i])) {
+                                    imageMap[bcid][i].requested = true;
                                     imagesForUpdate.push(bcid);
                                     break;
                                 }
