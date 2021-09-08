@@ -52,16 +52,10 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 Y.Assert.areSame("lane:offsite", this.eventArgs[2]);
                 Y.Assert.areSame("/OFFSITE-CLICK-EVENT/%26title", this.eventArgs[3]);
                 Y.Assert.areSame("hostpath", this.eventArgs[4]);
-                Y.Assert.areSame("send", this.pageviewArgs[0]);
-                Y.Assert.areSame("pageview", this.pageviewArgs[1]);
-                Y.Assert.areSame("/OFFSITE/%26title", this.pageviewArgs[2]);
             },
 
             testTrackExternalQueryPageview: function() {
                 L.fire("tracker:trackablePageview",{external:true,title:"&title", host:"host", path:"path", query:"query"});
-                Y.Assert.areSame("send", this.pageviewArgs[0]);
-                Y.Assert.areSame("pageview", this.pageviewArgs[1]);
-                Y.Assert.areSame("/OFFSITE/%26title", this.pageviewArgs[2]);
                 Y.Assert.areSame("send", this.eventArgs[0]);
                 Y.Assert.areSame("event", this.eventArgs[1]);
                 Y.Assert.areSame("lane:offsite", this.eventArgs[2]);
