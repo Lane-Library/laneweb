@@ -63,7 +63,6 @@
             }else{
                 ga('send', 'event', 'lane:offsite', "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title), event.host + event.path);
             }
-            ga('send', 'pageview', '/OFFSITE/' + encodeURIComponent(event.title));
         } else {
             ga('send', 'pageview', '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path);
         }

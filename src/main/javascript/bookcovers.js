@@ -32,7 +32,7 @@
                     for (bcid in imageMap) {
                         if (imageMap.hasOwnProperty(bcid)) {
                             for (i = 0; i < imageMap[bcid].length; i++) {
-                                if (!imageMap[bcid][i].requested && viewport.inView(imageMap[bcid][i])) {
+                                if (!imageMap[bcid][i].requested && viewport.nearView(imageMap[bcid][i],3)) {
                                     imageMap[bcid][i].requested = true;
                                     imagesForUpdate.push(bcid);
                                     break;
@@ -67,27 +67,19 @@
 
             var baseURL = window.model["base-path"] + "/apps/bookcovers?",
 
-                // working is a comma separated list of bcids being looked up, or empty
-                working = "",
-
                 service = {
 
                     // get thumbnail urls for bcids from the server
                     getBookCoverURLs: function(bcids) {
                         var i, request, url = baseURL;
-                        if (working) {
-                            throw new Error("still working on " + working);
-                        }
                         // don't get more than 20
                         for (i = 0; i < bcids.length && i < 20; i++) {
                             url += "bcid=" + bcids[i] + "&";
-                            working += bcids[i] + ",";
                         }
 
                         request = new XMLHttpRequest();
                         request.open("GET", url, true);
                         request.onload = function() {
-                            working = "";
                             if (request.status >= 200 && request.status < 400) {
                                 service.fire("covers", {covers: JSON.parse(request.responseText)});
                             }
