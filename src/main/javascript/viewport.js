@@ -14,7 +14,7 @@
                     }
                 };
             window.addEventListener("scroll", updateScrolled);
-            window.setInterval(checkScrolled, 500);
+            window.setInterval(checkScrolled, 1000);
 
             return {
                 // viewportMultiplier: how many times the viewport's current height
