@@ -13,7 +13,6 @@
     <xsl:variable name="sorts">
         <s:sorts>
             <s:sort name="relevance" default="true" />
-            <s:sort name="author" arg="authors_sort asc,title_sort asc" />
             <s:sort name="title" arg="title_sort asc,year desc" />
             <s:sort name="year (new to old)" arg="date desc,title_sort asc" />
             <s:sort name="year (old to new)" arg="date asc,title_sort asc" />

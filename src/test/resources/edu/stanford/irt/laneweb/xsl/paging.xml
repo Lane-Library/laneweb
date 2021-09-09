@@ -21,9 +21,6 @@
                               <i class="fa fa-check"/>
                            </li>
                            <li>
-                              <a href="?&amp;sort=authors_sort+asc,title_sort+asc">author</a>
-                           </li>
-                           <li>
                               <a href="?&amp;sort=title_sort+asc,year+desc">title</a>
                            </li>
                            <li>
