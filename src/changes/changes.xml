@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+        <release date="2021-09-13" version="3.8.8"    description="bug fix release">
+            <action date="2021-06-08" dev="ryanmax" issue="LANEWEB-10732" type="update">
+                remove /OFFSITE pageview tracking
+            </action>
+            <action date="2021-09-08" dev="alainb" issue="LANEWEB-10804" type="update">
+                Changes to Contact Us Page
+            </action>
+            <action date="2021-08-09" dev="ryanmax" issue="LANEWEB-10805" type="update">
+                pre-fetch bookcover information when results are close to visible in the viewport
+            </action>
+            <action date="2021-08-10" dev="ryanmax" issue="LANEWEB-10806" type="update">
+                remove author sort option from Lane Search
+            </action>
+        </release>
 		<release date="2021-09-06" version="3.8.7"	description="bug fix release">
 			<action date="2021-09-02" dev="ryanmax" issue="LANEWEB-10796" type="update">
 				expand Libkey lookups to include fulltext links in addition to PDF links
@@ -91,7 +105,7 @@
                 Today's Hours in Header
             </action>
             <action date="2021-07-26" dev="alainb" issue="LANEWEB-10761" type="update">
-                Update all old button class 
+                Update all old button class
             </action>
         </release>
         <release date="2021-07-19" version="3.8.1" description="bug fix release">
