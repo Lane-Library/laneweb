@@ -52,6 +52,14 @@ public class IPGroupFetchControllerTest {
     }
 
     @Test
+    public void testGetIPGroupMaliciousCallback() {
+        replay(this.binder, this.model, this.request);
+        assertEquals("OTHER",
+                this.controller.getIPGroup(IPGroup.OTHER, "LANE.Tracker.setIpGroup71907%3balert(1)%2f%2f734"));
+        verify(this.binder, this.model, this.request);
+    }
+
+    @Test
     public void testGetIPGroupNoCallback() {
         replay(this.binder, this.model, this.request);
         assertEquals("OTHER", this.controller.getIPGroup(IPGroup.OTHER, null));

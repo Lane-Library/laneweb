@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,8 @@ import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 @Controller
 public class IPGroupFetchController {
 
+    private static final Pattern CALLBACK_PATTERN = Pattern.compile("[A-Za-z\\.]+");
+
     private RemoteProxyIPDataBinder binder;
 
     public IPGroupFetchController(final RemoteProxyIPDataBinder binder) {
@@ -25,11 +29,10 @@ public class IPGroupFetchController {
     @ResponseBody
     public String getIPGroup(@ModelAttribute(Model.IPGROUP) final IPGroup ipGroup,
             @RequestParam(required = false) final String callback) {
-        if (callback == null) {
+        if (callback == null || !CALLBACK_PATTERN.matcher(callback).matches()) {
             return ipGroup.toString();
-        } else {
-            return callback + "('" + ipGroup + "');";
         }
+        return callback + "('" + ipGroup + "');";
     }
 
     @ModelAttribute
