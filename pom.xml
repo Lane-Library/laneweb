@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>89</version>
+        <version>90</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.8.9-SNAPSHOT</version>
@@ -96,7 +96,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>10.5</version>
+            <version>10.6</version>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -206,7 +206,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
-            <version>4.3.12</version>
+            <version>4.3.13</version>
         </dependency>
         <dependency>
             <groupId>org.apache.solr</groupId>
@@ -267,7 +267,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.1.4.RELEASE</version>
+            <version>6.1.5.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
