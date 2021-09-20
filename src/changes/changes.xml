@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	<release date="2021-09-20" version="3.8.9"    description="bug fix release">
+            <action date="2021-06-13" dev="ryanmax" issue="LANEWEB-10807" type="update">
+            	Shorebreak: Reflected Cross Site Scripting/HTML Injection (XSS/HTMLi)    
+            </action>
+        </release>
         <release date="2021-09-13" version="3.8.8"    description="bug fix release">
             <action date="2021-06-08" dev="ryanmax" issue="LANEWEB-10732" type="update">
                 remove /OFFSITE pageview tracking
