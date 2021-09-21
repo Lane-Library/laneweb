@@ -42,7 +42,9 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("old", document.querySelector("li[data-sid='bib-3'] a").getAttribute("href"))
+            var links = document.querySelectorAll("li[data-sid='bib-3'] a"),
+                lastLink = links[links.length - 1];
+            Y.Assert.areEqual("old", lastLink.getAttribute("href"))
         },
 
         "test 4": function() {
@@ -67,7 +69,9 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            Y.Assert.areEqual("old", document.querySelector("li[data-sid='pubmed-5'] a").getAttribute("href"))
+            var links = document.querySelectorAll("li[data-sid='pubmed-5'] a"),
+                lastLink = links[links.length - 1];
+            Y.Assert.areEqual("old", lastLink.getAttribute("href"))
         }
 
 
