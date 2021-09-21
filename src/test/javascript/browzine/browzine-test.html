@@ -7,26 +7,32 @@
     <body class="yui3-skin-sam">
     
     <ul>
-        <li class="resource" data-doi="1">
+        <li class="resource" data-doi="10.1" data-sid="pubmed-1">
             <div><a class="primaryLink" href="old">title 1</a></div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
-        <li class="resource" data-doi="2">
+        <li class="resource" data-doi="10.2" data-sid="pubmed-2">
             <div><a class="primaryLink" href="old">title 2</a></div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
-        <li class="resource">
+        <li class="resource" data-sid="bib-3">
             <div><a class="primaryLink" href="old">title 3</a></div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
-        <li class="resource" data-doi="4">
+        <li class="resource" data-doi="10.4" data-sid="pubmed-4">
             <div><a class="primaryLink" href="old">title 4</a></div>
+            <div class="bookcover"><i/></div>
+            <div class="resultInfo"></div>
+            <div class="sourceInfo"></div>
+        </li>
+        <li class="resource" data-sid="pubmed-5">
+            <div><a class="primaryLink" href="old">title 5</a></div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
@@ -38,13 +44,13 @@
             return {
                 status: 200,
                 open: function(a, b, c) {
-                    this.doi = /\/apps\/search\/browzine\/doi\/(.*)/.exec(b)[1];
+                    this.id = /\/apps\/search\/browzine\/[a-z]+\/(.*)/.exec(b)[1];
                 },
                 send: function () {
-                    if (this.doi == 4) {
-                        this.responseText = '{"data":{"doi":"' + this.doi + '","contentLocation": "contentLocation"},"included":[{"coverImageUrl":"cover-url"}]}';
+                    if (this.id == '10.4') {
+                        this.responseText = '{"data":{"doi":"' + this.id + '","contentLocation": "contentLocation"},"included":[{"coverImageUrl":"cover-url"}]}';
                     } else {
-                        this.responseText = '{"data":{"doi":"' + this.doi + '","fullTextFile": "fulltext-url"},"included":[{"coverImageUrl":"cover-url"}]}';
+                        this.responseText = '{"data":{"doi":"' + this.id + '","fullTextFile": "fulltext-url"},"included":[{"coverImageUrl":"cover-url"}]}';
                     }
                     this.onload();
                 }

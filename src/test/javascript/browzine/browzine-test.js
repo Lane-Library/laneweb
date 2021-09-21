@@ -7,29 +7,67 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         name: "Lane Browzine Testcase",
 
         "test 1": function() {
-            var links = document.querySelectorAll("li[data-doi='1'] a"),
+            L.fire("viewport:init", {
+                viewport: {
+                    nearView: function(node) {
+                        return node.dataset.doi === '10.1';
+                    }
+                }
+            });
+            var links = document.querySelectorAll("li[data-doi='10.1'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
             Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
 
         "test 2": function() {
-            var links = document.querySelectorAll("li[data-doi='2'] a"),
+            L.fire("viewport:scrolled", {
+                viewport: {
+                    nearView: function(node) {
+                        return node.dataset.doi === '10.2';
+                    }
+                }
+            });
+            var links = document.querySelectorAll("li[data-doi='10.2'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
             Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
         
         "test 3 no doi": function() {
-            Y.Assert.areEqual("old", document.querySelector("li:not([data-doi]) a").getAttribute("href"))
-            Y.Assert.areEqual(1, document.querySelectorAll("li:not([data-doi]) a").length);
+            L.fire("viewport:scrolled", {
+                viewport: {
+                    nearView: function(node) {
+                        return node.dataset.sid === 'bib-3';
+                    }
+                }
+            });
+            Y.Assert.areEqual("old", document.querySelector("li[data-sid='bib-3'] a").getAttribute("href"))
         },
 
         "test 4": function() {
-            var links = document.querySelectorAll("li[data-doi='4'] a"),
+            L.fire("viewport:scrolled", {
+                viewport: {
+                    nearView: function(node) {
+                        return node.dataset.doi === '10.4';
+                    }
+                }
+            });
+            var links = document.querySelectorAll("li[data-doi='10.4'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("contentLocation", lastLink.getAttribute("href"))
             Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
+        },
+
+        "test 5": function() {
+            L.fire("viewport:scrolled", {
+                viewport: {
+                    nearView: function(node) {
+                        return node.dataset.sid === 'pubmed-5';
+                    }
+                }
+            });
+            Y.Assert.areEqual("old", document.querySelector("li[data-sid='pubmed-5'] a").getAttribute("href"))
         }
 
 
