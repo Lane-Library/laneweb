@@ -25,10 +25,13 @@ RUN find /root/.m2/repository -atime +30 -iname '*.pom' \
 #
 # run phase
 #
-FROM openjdk:11-jre
+FROM openjdk:11.0.12-jre@sha256:66e1008c06eef761d4bfca05859842d65ee325be754680096313601602014f9a
 
-RUN apt-get update
-    
+RUN apt-get update && \
+    apt-get -y install \
+    net-tools \
+    tini \
+    procps    
 
 COPY --from=MAVEN_TOOL_CHAIN /root/.m2 /root/.m2
 COPY --from=MAVEN_TOOL_CHAIN /build/target/laneweb.war laneweb.war
@@ -38,4 +41,4 @@ VOLUME /secrets
 
 ENV SPRING_CONFIG_LOCATION=/secrets/application.properties,/config/application.properties
 
-CMD ["java", "-jar", "laneweb.war"]
+CMD ["/usr/bin/tini", "--","java", "-jar", "laneweb.war"]
