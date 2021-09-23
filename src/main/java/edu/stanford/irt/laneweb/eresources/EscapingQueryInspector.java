@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Clean query strings before sending to Solr
  * <p>
  * Lucence special characters: + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
- * https://lucene.apache.org/core/2_9_4/queryparsersyntax.html#Escaping%20Special%20Characters
+ * @see https://lucene.apache.org/core/8_9_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#Escaping_Special_Characters
  * </p>
  *
  * @author ryanmax
@@ -22,7 +22,8 @@ public final class EscapingQueryInspector implements QueryInspector {
     private static final Pattern NON_WORD_CHAR_PATTERN = Pattern.compile("\\W");
     static {
         // these seem harmless | &
-        // these seem useful and harmless " * ( ) ~
+        // these seem useful and harmless " * ~
+        // parentheses handled in ParenthesesQueryInspector
         ESCAPEABLE_CHARS.add(Character.valueOf('+'));
         ESCAPEABLE_CHARS.add(Character.valueOf('-'));
         ESCAPEABLE_CHARS.add(Character.valueOf('!'));

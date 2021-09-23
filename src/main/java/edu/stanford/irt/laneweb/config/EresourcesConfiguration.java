@@ -31,6 +31,7 @@ import edu.stanford.irt.laneweb.eresources.LcnQueryInspector;
 import edu.stanford.irt.laneweb.eresources.NumberQueryInspector;
 import edu.stanford.irt.laneweb.eresources.ORQueryInspector;
 import edu.stanford.irt.laneweb.eresources.OrcidQueryInspector;
+import edu.stanford.irt.laneweb.eresources.ParenthesesQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.QueryInspector;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
@@ -198,6 +199,7 @@ public class EresourcesConfiguration {
         queryInspectors.add(new NumberQueryInspector());
         queryInspectors.add(new ORQueryInspector());
         queryInspectors.add(new EscapingQueryInspector());
+        queryInspectors.add(new ParenthesesQueryInspector());
         return new SolrQueryParser(queryInspectors);
     }
 
