@@ -20,6 +20,11 @@ public class SearchConfigurationTest {
     }
 
     @Test
+    public void testDescriptionLineBreakTransformer() {
+        assertNotNull(this.configuration.descriptionLineBreakTransformer());
+    }
+
+    @Test
     public void testDescriptionLinkTransformer() {
         assertNotNull(this.configuration.descriptionLinkTransformer());
     }

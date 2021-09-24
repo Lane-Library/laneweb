@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.IOException;
 
 import org.apache.xerces.parsers.AbstractSAXParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -44,8 +42,6 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
         }
     }
 
-    private static final Logger log = LoggerFactory.getLogger(HTMLSAXParser.class);
-
     public HTMLSAXParser(final NekoHTMLConfiguration config) {
         super(config);
     }
@@ -60,11 +56,7 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
             inputSource.setSystemId(source.getURI());
             inputSource.setByteStream(source.getInputStream());
             parse(inputSource);
-        } catch (SAXException e) {
-            // LANEWEB-10810: bad markup in description element causing zero results
-            // log errors to determine frequency (change to warn?)
-            log.error("sax parse error: {}; continuing", e.getMessage());
-        } catch (IOException e) {
+        } catch (IOException | SAXException e) {
             throw new LanewebException(source.getURI(), e);
         }
     }
