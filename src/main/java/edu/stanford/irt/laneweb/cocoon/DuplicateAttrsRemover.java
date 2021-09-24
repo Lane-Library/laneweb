@@ -30,7 +30,8 @@ public class DuplicateAttrsRemover extends DefaultFilter {
 
     private void removeDuplicateAttributes(XMLAttributes attributes) {
         List<String> attributeNames = new ArrayList<>();
-        for (int i = 0; i < attributes.getLength(); i++) {
+        for (int i = attributes.getLength() -1; i >= 0 ; i--) {
+          System.out.println("index "+i);
             String name = attributes.getQName(i);
             if (attributeNames.contains(name)) {
                 attributes.removeAttributeAt(i);
