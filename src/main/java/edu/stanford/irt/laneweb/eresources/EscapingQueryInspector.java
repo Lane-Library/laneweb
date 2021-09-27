@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Clean query strings before sending to Solr
  * <p>
  * Lucence special characters: + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
- * @see https://lucene.apache.org/core/8_9_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#Escaping_Special_Characters
+ * https://lucene.apache.org/core/8_9_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#Escaping_Special_Characters
  * </p>
  *
  * @author ryanmax
