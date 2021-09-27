@@ -7,12 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
-      	<release date="2021-09-20" version="3.8.9"    description="bug fix release">
+      	<release date="2021-09-27" version="3.8.10" description="bug fix release">
+            <action date="2021-09-24" dev="ryanmax" issue="LANEWEB-10810" type="update">
+    			Exceptions thrown and no results when PubMed results contain markup errors
+            </action>
+            <action date="2021-09-23" dev="ryanmax" issue="LANEWEB-10809" type="update">
+    			Poor results when search terms contain parentheses
+            </action>
+        </release>
+      	<release date="2021-09-20" version="3.8.9" description="bug fix release">
             <action date="2021-06-13" dev="ryanmax" issue="LANEWEB-10807" type="update">
             	Shorebreak: Reflected Cross Site Scripting/HTML Injection (XSS/HTMLi)    
             </action>
         </release>
-        <release date="2021-09-13" version="3.8.8"    description="bug fix release">
+        <release date="2021-09-13" version="3.8.8" description="bug fix release">
             <action date="2021-06-08" dev="ryanmax" issue="LANEWEB-10732" type="update">
                 remove /OFFSITE pageview tracking
             </action>
