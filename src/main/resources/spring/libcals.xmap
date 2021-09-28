@@ -59,7 +59,7 @@
       </map:match>
         
      <map:match pattern="live-chat-hours.html" type="wildcard">
-         <map:generate type="file"   src="{content-base}/contacts/hours.xml"/>
+         <map:generate type="file"   src="cache:60:https://lanecal.stanford.edu/widget/hours/grid?iid=5078&amp;format=xml&amp;weeks=1&amp;systemTime=0"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/live-chat-hours.xsl"/>
          <map:serialize type="xml"/>
       </map:match>  
