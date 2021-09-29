@@ -16,6 +16,16 @@
          </map:transform>
          <map:serialize type="xml"/>
       </map:match>
+      
+      <!-- library today Hour  display on index.html page -->
+      <map:match pattern="todays-hours.html" type="wildcard">
+         <map:generate type="file"   src="cache:60:https://lanecal.stanford.edu/api_hours_today.php?iid=5078&amp;lid=12359&amp;format=xml&amp;systemTime=1">
+             <map:parameter name="id" value="{1}"/>
+         </map:generate>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/todays-hours.xsl"/>
+         <map:serialize type="xml"/>
+      </map:match>  
+      
    </map:pipeline>
    
    <map:pipeline type="caching">
@@ -47,11 +57,10 @@
          <map:generate type="file" src="cache:60:{libcal-service-uri}events/12663"/>
          <map:serialize type="xml"/>
       </map:match>
-      
-         <!-- library today Hour  display on index.html page -->
-      <map:match pattern="todays-hours.html" type="regexp">
-         <map:generate type="file"   src="cache:60:https://lanecal.stanford.edu/api_hours_today.php?iid=5078&amp;lid=12359&amp;format=xml&amp;systemTime=1"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/todays-hours.xsl"/>
+        
+     <map:match pattern="live-chat-hours.html" type="wildcard">
+         <map:generate type="file"   src="cache:60:https://lanecal.stanford.edu/widget/hours/grid?iid=5078&amp;format=xml&amp;weeks=1&amp;systemTime=0"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/live-chat-hours.xsl"/>
          <map:serialize type="xml"/>
       </map:match>  
       
