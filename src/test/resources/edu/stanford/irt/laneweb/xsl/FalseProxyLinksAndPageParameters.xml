@@ -18,31 +18,4 @@
    <li>
       <a href="/logout">LOGOUT</a>
    </li>
-   <li>
-      <a href="?proxy-links=false&amp;page=1">GUEST VIEW</a>
-   </li>
-   <li class="login-item-active">
-      <a href="?proxy-links=true&amp;page=1">LOGOUT GUEST</a>
-   </li>
-   <li class="login-item-active">
-      <i class="fa fa-question-circle"/>
-      <div class="login-info">
-         <div class="pure-g">
-            <div class="pure-u-1-2">
-                    STANFORD LOGIN
-                    <p>If you have a SUNet ID, Enterprise ID, or Stanford Children's Health ID</p>
-            </div>
-            <div class="pure-u-1-2">
-                    GUEST VIEW
-                    <p>If you are not affiliated with Stanford, but have your own licensed access</p>
-            </div>
-         </div>
-      </div>
-   </li>
-   <li class="login-item-active">
-      <a href="/translated/chinese.html">查詢</a>
-   </li>
-   <li class="login-item-active">
-      <a href="http://library.stanford.edu/">STANFORD LIBRARIES</a>
-   </li>
 </ul>
