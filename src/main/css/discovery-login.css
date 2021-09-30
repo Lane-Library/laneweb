@@ -1,7 +1,6 @@
 /*
  * These rules are for the /discoveryLoginPage.html and /devDiscoveryLoginPage.html
  * referenced by Shibboleth configurations.
- */
 .discovery-login {
     margin: 2.85vh auto;
     text-align: center;
@@ -87,3 +86,5 @@
     position: relative;
     top: 12.825vh;
 }
+
+ */
