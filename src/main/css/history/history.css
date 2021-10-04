@@ -812,7 +812,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 .login {
     line-height: 32px;
-    margin: 0 5%;
+    margin: 0;
     position: absolute;
     right: 0;
 }
@@ -854,30 +854,10 @@ http://lane.stanford.edu/samples/button-css.html
     background-color: #878787;
 }
 
-.login > :nth-child(5),
-.login > :nth-child(6) {
-    background-color: #535353;
-}
-
-.login > :nth-child(5) a,
-.login > :nth-child(6) a {
-    color: #c1c1c1;
-}
-
-.login > :nth-child(7) {
+.login > :nth-child(5) {
     cursor: pointer;
     padding-left: 12px;
     position: relative;
-}
-
-.login > :nth-child(7) .fa,
-.login > :nth-child(8) a {
-    color: #878787;
-}
-
-.login > :nth-child(8) {
-    margin-left: 38px;
-    padding-right: 0;
 }
 
 .login-info {
