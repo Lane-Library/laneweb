@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	<release date="2021-10-04" version="3.8.11" description="bug fix release">
+            <action date="2021-09-28" dev="ryanmax" issue="LANEWEB-10813" type="update">
+    			Move Guest View to Login Page
+            </action>
+            <action date="2021-09-27" dev="alainb" issue="LANEWEB-10814" type="update">
+    			Automatically pull today's Live Chat hours on our Chat &amp; Contact Us Page
+            </action>
+        </release>
       	<release date="2021-09-27" version="3.8.10" description="bug fix release">
             <action date="2021-09-24" dev="ryanmax" issue="LANEWEB-10810" type="update">
     			Exceptions thrown and no results when PubMed results contain markup errors
