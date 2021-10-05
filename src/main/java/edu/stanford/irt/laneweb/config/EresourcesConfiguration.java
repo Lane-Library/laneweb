@@ -32,6 +32,7 @@ import edu.stanford.irt.laneweb.eresources.NumberQueryInspector;
 import edu.stanford.irt.laneweb.eresources.ORQueryInspector;
 import edu.stanford.irt.laneweb.eresources.OrcidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.ParenthesesQueryInspector;
+import edu.stanford.irt.laneweb.eresources.PmcQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.QueryInspector;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
@@ -190,10 +191,11 @@ public class EresourcesConfiguration {
 
     @Bean
     public SolrQueryParser solrQueryParser() {
-        List<QueryInspector> queryInspectors = new ArrayList<>(7);
+        List<QueryInspector> queryInspectors = new ArrayList<>(10);
         queryInspectors.add(new AdvancedQueryInspector());
         queryInspectors.add(new DoiQueryInspector());
         queryInspectors.add(new PmidQueryInspector());
+        queryInspectors.add(new PmcQueryInspector());
         queryInspectors.add(new LcnQueryInspector());
         queryInspectors.add(new OrcidQueryInspector());
         queryInspectors.add(new NumberQueryInspector());

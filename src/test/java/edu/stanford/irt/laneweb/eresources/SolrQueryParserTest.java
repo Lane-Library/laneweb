@@ -22,6 +22,7 @@ public class SolrQueryParserTest {
         this.inspectors.add(new OrcidQueryInspector());
         this.inspectors.add(new LcnQueryInspector());
         this.inspectors.add(new PmidQueryInspector());
+        this.inspectors.add(new PmcQueryInspector());
         this.inspectors.add(new NumberQueryInspector());
         this.inspectors.add(new ORQueryInspector());
         this.inspectors.add(new EscapingQueryInspector());
@@ -102,5 +103,14 @@ public class SolrQueryParserTest {
         assertEquals("\"0000\\-0002\\-0879\\-455X\"", this.parser.parse("0000-0002-0879-455X"));
         assertEquals("\"0000\\-0002\\-0879\\-455x\"", this.parser.parse("0000-0002-0879-455x"));
         assertEquals("0000\\-0000\\-0001\\-5769\\-0004", this.parser.parse("0000-0000-0001-5769-0004"));
+        assertEquals("\"PMC3362157\"", this.parser.parse("PMC3362157"));
+        assertEquals("\"PMC3362157\"", this.parser.parse("PMCID: PMC3362157"));
+        assertEquals("\"PMC3362157\"", this.parser.parse("PMCID:PMC3362157"));
+        assertEquals("\"PMC3362157\"", this.parser.parse("https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3362157/"));
+        assertEquals("\"PMC3362157\"", this.parser.parse("https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3362157"));
+        assertEquals(
+                "Bear TLK, Dalziel JE, Coad J, Roy NC, Butts CA, Gopal PK. The Role of the Gut Microbiota in Dietary Interventions for Depression and Anxiety. Adv Nutr. 2020 Jul 1;11\\(4\\)\\:890\\-907. doi\\: \"10.1093/advances/nmaa016\" pmid\\:32149335; \"PMC7360462\"",
+                this.parser.parse(
+                        "Bear TLK, Dalziel JE, Coad J, Roy NC, Butts CA, Gopal PK. The Role of the Gut Microbiota in Dietary Interventions for Depression and Anxiety. Adv Nutr. 2020 Jul 1;11(4):890-907. doi: 10.1093/advances/nmaa016. PMID: 32149335; PMCID: PMC7360462."));
     }
 }
