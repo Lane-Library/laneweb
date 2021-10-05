@@ -12,7 +12,7 @@ public final class PmcQueryInspector implements QueryInspector {
     // PMCID: PMC1234567
     // PMCID:PMC1234567
     // PMC1234567
-    private static final Pattern PMC_PATTERN = Pattern.compile("\\b(?:pmcid: ?)?(PMC[0-9]{1,8})(?:\\.|\\b)",
+    private static final Pattern PMC_PATTERN = Pattern.compile("\\b(?:pubmed central )?(?:pmcid: ?)?(PMC[0-9]{1,8})(?:\\.|\\b)",
             Pattern.CASE_INSENSITIVE);
 
     // https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1496744/

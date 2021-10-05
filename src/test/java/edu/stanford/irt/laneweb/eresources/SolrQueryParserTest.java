@@ -112,5 +112,9 @@ public class SolrQueryParserTest {
                 "Bear TLK, Dalziel JE, Coad J, Roy NC, Butts CA, Gopal PK. The Role of the Gut Microbiota in Dietary Interventions for Depression and Anxiety. Adv Nutr. 2020 Jul 1;11\\(4\\)\\:890\\-907. doi\\: \"10.1093/advances/nmaa016\" pmid\\:32149335; \"PMC7360462\"",
                 this.parser.parse(
                         "Bear TLK, Dalziel JE, Coad J, Roy NC, Butts CA, Gopal PK. The Role of the Gut Microbiota in Dietary Interventions for Depression and Anxiety. Adv Nutr. 2020 Jul 1;11(4):890-907. doi: 10.1093/advances/nmaa016. PMID: 32149335; PMCID: PMC7360462."));
+        assertEquals(
+                "Fibroblast Growth Factor\\-21 Controls Dietary Protein Intake in Male Mice. Endocrinology. 2019 May 1;160\\(5\\)\\:1069\\-1080. doi\\: \"10.1210/en.2018\\-01056\" pmid\\:30802283; \"PMC6469953\"",
+                this.parser.parse(
+                        "Fibroblast Growth Factor-21 Controls Dietary Protein Intake in Male Mice. Endocrinology. 2019 May 1;160(5):1069-1080. doi: 10.1210/en.2018-01056. PubMed PMID: 30802283; PubMed Central PMCID: PMC6469953."));
     }
 }
