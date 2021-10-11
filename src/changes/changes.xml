@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	<release date="2021-10-11" version="3.8.12" description="bug fix release">
+            <action date="2021-10-05" dev="ryanmax" issue="LANEWEB-10816" type="update">
+    			Improve PMCID searching
+            </action>            
+        </release>
       	<release date="2021-10-04" version="3.8.11" description="bug fix release">
             <action date="2021-09-28" dev="ryanmax" issue="LANEWEB-10813" type="update">
     			Move Guest View to Login Page
