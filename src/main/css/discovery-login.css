@@ -1,35 +1,22 @@
 /*
  * These rules are for the /discoveryLoginPage.html and /devDiscoveryLoginPage.html
  * referenced by Shibboleth configurations.
-.discovery-login {
-    margin: 2.85vh auto;
+ */
+.login-option .brand {
+    position: absolute;
+    top: 0px;
+    padding-top: 22px;
+}
+
+.discovery-login-container {
+    max-width: 1800px;
+    margin: auto;
+    padding: 1em 3em;
     text-align: center;
 }
 
-.discovery-login-help {
-    font-size: 1.425vh;
-    line-height: 2.1375vh;
-}
-
-.discovery-login-help .fa {
-    color: #006881;
-    font-size: 2.1375vh;
-}
-
-.discovery-login-help span {
-    font-weight: 600;
-}
-
 .discovery-login-persistent {
-    font-size: 1.71vh;
-    margin-top: 2.1375vh;
-}
-
-.discovery-login-persistent span {
-    display: inline-block;
-    padding: 5px 0 5px 5px;
-    font-size: initial;
-    font-weight: 700;
+    margin: 8em 0 6em;
 }
 
 #is-persistent-login {
@@ -38,47 +25,79 @@
     position: relative;
     top: 3px;
     box-shadow: 0 0 0 1px #757575;
+    margin-right: 5px;
 }
 
-.discovery-login-links a {
-    background-color: white;
-    background-position: 50% 60%;
-    background-repeat: no-repeat;
-    background-size: 27.7875vh;
+.discovery-login-persistent div {
+    color: #757575;
+    font-size: 95%;
+    margin-top: 9px;
+}
+
+.discovery-login {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.login-option {
+    width: 420px;
+    margin: 0.5em;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
     box-sizing: border-box;
+}
+
+.login-link {
+    background-color: white;
+    background-position: 50% 4.5em;
+    background-repeat: no-repeat;
+    background-size: 13em;
     color: black;
-    display: block;
-    font-size: 2.1375vh;
     font-weight: 700;
-    height: 25.365vh;
-    margin: 2.85vh auto 0;
-    padding: 2.85vh;
-    width: 54.72vh;
+    padding: 12em 0 4em;
+    display: block;
 }
 
-.discovery-login-links :hover {
-    background-color: transparent;
-}
-
-.discovery-login-links a:nth-child(1) {
+.login-link.som {
     background-image: url('../images/SU-discoverylogo.png');
 }
 
-.discovery-login-links a:nth-child(2) {
+.login-link.shc {
     background-image: url('../images/SHC-discoverylogo.png');
 }
 
-.discovery-login-links a:nth-child(3) {
+.login-link.lpch {
     background-image: url('../images/LPCH-discoverylogo.png');
-    background-size: 45vh;
+    background-size: 80%;
 }
 
-.discovery-login-links hr {
-    color: #ddd;
-    width: 42.75vh;
+.discovery-login-help {
+    display: flex;
+    align-items: center;
+    display: grid;
+    border: none;
+    box-shadow: none;
 }
+
+.discovery-login-help a {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+    font-weight: inherit;   
+}
+
+.discovery-login-guest {
+    width: 16em;
+    margin: auto;
+    padding: 1em 0 3em;
+}
+
+.discovery-login-guest div{
+    margin-top: 0.7em;
+}
+
 
 .discovery-login-links span {
     font-weight: normal;
@@ -87,4 +106,20 @@
     top: 12.825vh;
 }
 
- */
+ @media ( max-width : 915px) {
+    .discovery-login-container {
+        padding: 0 0.5em;
+    }
+    .login-option{
+        min-width: 320px;
+        flex: 1 1 30%;
+    }
+    .login-link {
+        padding: 8em 0 3em;
+        background-position: 50% 30%;
+    }
+    .discovery-login-persistent {
+        margin-bottom: 4em;
+    }
+    
+}
