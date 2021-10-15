@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>91</version>
+        <version>92</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.8.13-SNAPSHOT</version>
@@ -277,7 +277,7 @@
          <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>3.9.6</version>
+            <version>3.9.7</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
