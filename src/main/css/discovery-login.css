@@ -16,7 +16,7 @@
 }
 
 .discovery-login-persistent {
-    margin: 8em 0 6em;
+    margin: 8em 0 4em;
 }
 
 #is-persistent-login {
@@ -91,7 +91,7 @@
 .discovery-login-guest {
     width: 16em;
     margin: auto;
-    padding: 1em 0 3em;
+    padding: 3em 0;
 }
 
 .discovery-login-guest div{
@@ -118,8 +118,4 @@
         padding: 8em 0 3em;
         background-position: 50% 30%;
     }
-    .discovery-login-persistent {
-        margin-bottom: 4em;
-    }
-    
 }
