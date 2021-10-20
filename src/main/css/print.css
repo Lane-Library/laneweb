@@ -3,9 +3,7 @@ input,
 .lane-nav,
 .library-contact,
 .login,
-.lane-footer,
-.lane-subfooter,
-.som-footer {
+footer {
     height: 0;
     display: none;
 }
