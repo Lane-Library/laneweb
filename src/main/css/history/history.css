@@ -647,6 +647,9 @@ http://lane.stanford.edu/samples/button-css.html
 .footer-organization .brand-som a {
     background-image: url('../../images/som-H-logo.svg') !important;
 }
+.footer-organization .brand {
+    height: 65px;
+}
 
 /* HEADER.css */
 
