@@ -95,6 +95,10 @@
 	display: none;
 }
 
+.pico-toggle{
+	padding-left: 18px;	
+}
+
 .pico-off {
 	display: none;
 }
@@ -102,9 +106,8 @@
 .pico-toggle-active, .pico-on-active, .pico-off-active {
 	display: inline;
 	cursor: pointer;
-	padding-left: 18px;
 }
-
+ 
 /* see case 125259 */
 .search-form input[name='q']::-ms-clear {
 	display: none;
