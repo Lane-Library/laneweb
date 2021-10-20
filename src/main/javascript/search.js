@@ -97,7 +97,7 @@ if (document.querySelector(".search-form"))  {
                     }
                 };
 
-            form.querySelector(".search-close").addEventListener("click", v.close);
+            
             form.addEventListener("submit", v.submit);
 
             queryInput.addEventListener("focus", v.open);

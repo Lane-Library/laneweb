@@ -9,8 +9,14 @@
 	if (dropdown) {
 		dropdown.addEventListener("change", function(e) {
 			var el = e.target,
-				selectedValue = el.options[el.selectedIndex].text;
-			document.querySelector('.search-form .general-dropdown-trigger span').innerHTML = selectedValue;
+				selectedText = el.options[el.selectedIndex].text;
+			document.querySelector('.search-form .general-dropdown-trigger span').innerHTML = selectedText;
+			if(el.value == 'clinical-all'){
+				document.querySelector('.search-info').classList.add("search-info-active");				
+			}else{
+				document.querySelector('.search-info').classList.remove("search-info-active");
+			}
+			
 		});
 	}
 
