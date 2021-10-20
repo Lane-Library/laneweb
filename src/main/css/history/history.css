@@ -641,6 +641,13 @@ http://lane.stanford.edu/samples/button-css.html
     bottom: 0;
 }
 
+/* FOOTER */
+
+/* override path to som image for history */
+.footer-organization .brand-som a {
+    background-image: url('../../images/som-H-logo.svg') !important;
+}
+
 /* HEADER.css */
 
 
