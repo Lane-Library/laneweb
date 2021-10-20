@@ -95,11 +95,15 @@
 	display: none;
 }
 
+.search-info.search-info-active{
+	display: block;
+}
+
 .pico-toggle{
 	padding-left: 18px;	
 }
 
-.pico-off {
+.pico-on, .pico-off {
 	display: none;
 }
 
@@ -206,11 +210,6 @@
 
 .search-form-active fieldset {
 	width: 100%;
-}
-
-.search-form-active .search-tab {
-	opacity: 1;
-	visibility: visible;
 }
 
 @media ( max-width : 812px) {
