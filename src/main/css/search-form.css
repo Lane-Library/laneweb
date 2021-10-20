@@ -102,6 +102,7 @@
 .pico-toggle-active, .pico-on-active, .pico-off-active {
 	display: inline;
 	cursor: pointer;
+	padding-left: 18px;
 }
 
 /* see case 125259 */
