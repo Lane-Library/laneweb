@@ -1,11 +1,9 @@
 .hero-unit {
-    background-color: #8c1515;
-    background-image: url('../images/search-back.jpg');
+    background-color: darkslategray;
+    /* background-image: url('../images/search-back.jpg'); */
     background-repeat: no-repeat;
     color: white;
     background-size: cover;
-    display: flex;
-    justify-content: center;
     width: 100%;
     padding-top: 50px;
     padding-bottom: 60px;
@@ -18,9 +16,68 @@
 
 .search-form {
     color: white;
-    overflow: hidden;
     position: relative;
     width: 60%;
+    margin: auto;
+}
+
+
+.search-form  .search-field {
+    position: relative;
+    color: black;
+    padding: 0px;
+    display: block;
+    background-color: white;
+	height: 46px;
+}
+
+.search-dropdown{
+    height: 46px;
+    padding-top:13px;
+	margin-left: 0;
+	border: none;
+	border-radius:0;
+	display: inline-block;
+	border-right: 1px solid rgb(0 0 0 / 20%);
+	overflow: hidden;
+}
+
+.search-form input {
+    font-size: 14px;
+    height: 46px;
+    padding-left: 16px;
+    border: 1px white;
+    outline:none;
+	width: 80%;
+	position: absolute;
+}
+
+
+.search-form .search-dropdown .fa{	
+	color: black;
+	padding-top: 3px;
+}
+
+.search-dropdown select{
+	position: absolute;
+	display: block;
+	top: -1px;
+	left: 0;
+	height: 46px;
+	outline: 0;
+	margin: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	visibility: visible;
+	border: 0;
+	cursor: pointer;
+}
+
+
+.search-help{
+	text-align: center;
+	padding-top: 6px;	
+	text-decoration: underline;
 }
 
 .search-form .fa,
@@ -32,9 +89,8 @@
     text-decoration: none;
 }
 
-.search-info {
+ .search-info {
     cursor: default;
-    position: absolute;
     font-size: 16px;
     width: 100%;
     background: #333;
@@ -42,12 +98,9 @@
     height: auto;
     padding: 15px 0;
     z-index: 1;
+	/* display: none; */    
 }
 
-.search-info a {
-    padding-left: 12px;
-    padding-right: 40px;
-}
 
 .pico-toggle,
 .pico-on,
@@ -62,30 +115,24 @@
     cursor: pointer;
 }
 
-.search-form fieldset {
-    position: relative;
-    width: 100%;
-    color: black;
-    padding: 0px;
+/* see case 125259 */
+ .search-form input[name='q']::-ms-clear {
+    display: none;
 }
-
-.search-form input {
+/*  .pico-fields {
+    display: none;
+} 
+ */
+.pico-fields input {
+    position: static;
     font-size: 14px;
     width: 100%;
     height: 46px;
     padding-left: 10px;
     padding-right: 60px;
     box-sizing: border-box;
-    border:none;
-}
-
-/* see case 125259 */
-.search-form input[name='q']::-ms-clear {
-    display: none;
-}
-
-.pico-fields {
-    display: none;
+    border: 0;
+    
 }
 .search-form .pico-fields-active {
     display: block;
@@ -102,8 +149,8 @@
     border: none;
     background-color: transparent;
     position: absolute;
-    right: 40px;
-    top: 11px;
+	right: 52px;
+    top: 14px;
     display: none;
 }
 
@@ -125,12 +172,12 @@
     border: none;
     background-color: transparent;
     position: absolute;
-    right: 6px;
-    top: 10px;
+    right: 14px;
+    top: 11px;
 }
 
-.search-button .fa {
-    color: #007c92;
+.search-button .fa.fa-search {
+    color: lightslategrey;
     font-size: 24px;
 }
 
@@ -151,44 +198,8 @@
     display: block;
 }
 
-.search-tab {
-    line-height: 41px;
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    cursor: pointer;
-    opacity: 0;
-    height: 41px;
-    box-sizing: border-box;
-    visibility: hidden;
-    background-color: #f0f4f5;
-    color: #8c1515;
-    /*
-    border-radius: 6px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    box-shadow: inset 0 5px 5px -5px #bfd1d1;
-    */
-}
 
-.search-tab-active,
-.search-tab:hover {
-    background-color: #8c1515;
-    color: #f0f4f5;
-}
 
-.search-tab-active .fa,
-.search-tab:hover .fa {
-    color: #f0f4f5;
-}
-
-.search-form,
-.search-close,
-.search-form fieldset,
-.search-tab {
-    transition-property: all;
-    transition-duration: .3s;
-}
 
 .search-form-active {
     overflow: visible;
@@ -202,11 +213,7 @@
     opacity: 1;
 }
 
-.search-form-active .search-close {
-    cursor: pointer;
-    position: absolute;
-    right: 5px;
-}
+
 
 .search-form-active fieldset {
     width: 100%;
