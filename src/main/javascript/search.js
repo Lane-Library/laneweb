@@ -131,7 +131,7 @@ if (document.querySelector(".search-form"))  {
                         model.setQuery("");
                         view.reset();
                     },
-                    searchTabsChange: function(event) {
+                    searchDropdownChange: function(event) {
                         model.setSource(event.newVal.source);
                         model.search();
                     },
@@ -152,7 +152,7 @@ if (document.querySelector(".search-form"))  {
             view.on("open", controller.open);
             view.on("close", controller.close);
 
-            L.on("searchTabs:change", controller.searchTabsChange);
+            L.on("searchDropdown:change", controller.searchDropdownChange);
             L.on("searchReset:reset", controller.reset);
         })();
 

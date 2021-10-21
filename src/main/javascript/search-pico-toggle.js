@@ -82,7 +82,7 @@ if (document.querySelector(".pico-toggle"))  {
 
             L.on("search:activeChange", controller.activeChange);
 
-            L.on("searchTabs:change", controller.tabChange);
+            L.on("searchDropdown:change", controller.tabChange);
 
             L.addEventTarget(controller, {
                 prefix: "picoToggle",

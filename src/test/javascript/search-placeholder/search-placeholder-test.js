@@ -20,7 +20,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         "test tab change": function() {
-            L.fire("searchTabs:change", {newVal:{source:"clinical-all", "clinical-all":{placeholder:"new placeholder"}}});
+            L.fire("searchDropdown:change", {newVal:{source:"clinical-all", "clinical-all":{placeholder:"new placeholder"}}});
             if (placeholderEnabled) {
                 Y.Assert.areEqual("new placeholder", this.input.placeholder);
             }  else {

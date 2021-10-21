@@ -25,6 +25,6 @@
 
         }();
 
-    L.on("searchTabs:change", controller.change);
+    L.on("searchDropdown:change", controller.change);
 
 })();

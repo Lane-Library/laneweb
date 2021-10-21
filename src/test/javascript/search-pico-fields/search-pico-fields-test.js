@@ -27,14 +27,14 @@ Y.Test.Runner.add(new Y.Test.Case({
         Y.Assert.isTrue(this.picoFields.className === "pico-fields");
     },
     
-    "test searchTabs:change source:'all-all'": function() {
+    "test searchDropdown:change source:'all-all'": function() {
         this.picoFields.className = "pico-fields pico-fields-active";
-        L.fire("searchTabs:change", {newVal:{source:"all-all"}});
+        L.fire("searchDropdown:change", {newVal:{source:"all-all"}});
         Y.Assert.isTrue(this.picoFields.className === "pico-fields");
     },
     
-    "test searchTabs:change source:'clinical-all'": function() {
-        L.fire("searchTabs:change", {newVal:{source:"clinical-all"}});
+    "test searchDropdown:change source:'clinical-all'": function() {
+        L.fire("searchDropdown:change", {newVal:{source:"clinical-all"}});
         Y.Assert.isTrue(this.picoFields.className === "pico-fields");
     },
     

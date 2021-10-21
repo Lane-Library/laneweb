@@ -22,7 +22,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var lastSource = activeTab.dataset.source;
             Array.prototype.forEach.call(document.querySelectorAll(".search-tab"), function(tab) {
                 var newSource, oldSource;
-                L.once("searchTabs:change", function(event) {
+                L.once("searchDropdown:change", function(event) {
                     newSource = event.newVal.source;
                     oldSource = event.oldVal.source;
                 });

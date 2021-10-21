@@ -95,8 +95,8 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                 Y.Assert.areEqual("clinical-all", newVal);
             },
 
-            "test searchTabs:change event": function() {
-                L.fire("searchTabs:change", {newVal: {source:"clinical-all"}});
+            "test searchDropdown:change event": function() {
+                L.fire("searchDropdown:change", {newVal: {source:"clinical-all"}});
                 Y.Assert.areEqual("clinical-all", this.search.getSource());
                 Y.Assert.areEqual("clinical-all", this.sourceInput.get("value"));
             },
@@ -194,26 +194,26 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                 Y.Assert.areEqual("", this.search.getQuery());
             },
 
-            "searchTabs:change submits if query": function() {
+            "searchDropdown:change submits if query": function() {
                 this.search.setQuery("query");
                 var searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });
                 Y.Assert.areEqual("query", this.queryInput.get("value"));
-                L.fire("searchTabs:change", {newVal: {source:"foo"}});
+                L.fire("searchDropdown:change", {newVal: {source:"foo"}});
                 Y.Assert.isTrue(searched);
                 Y.Assert.isTrue(submitted);
             },
 
-            "searchTabs:change doesn't submit if no query": function() {
+            "searchDropdown:change doesn't submit if no query": function() {
                 this.search.setQuery("");
                 var searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });
                 Y.Assert.areEqual("", this.queryInput.get("value"));
-                L.fire("searchTabs:change", {newVal: {source:"foo"}});
+                L.fire("searchDropdown:change", {newVal: {source:"foo"}});
                 Y.Assert.isFalse(searched);
                 Y.Assert.isFalse(submitted);
             }

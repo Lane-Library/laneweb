@@ -72,7 +72,7 @@ if (document.querySelector(".search-form")) {
 			}();
 
 		L.addEventTarget(controller, {
-			prefix: "searchTabs",
+			prefix: "searchDropdown",
 			emitFacade: true
 		});
 
