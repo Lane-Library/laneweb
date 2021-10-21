@@ -7,45 +7,14 @@
         var handlePermalinkClick = function(node, event) {
             event.stopPropagation();
             event.preventDefault();
-            node.classList.toggle("active");
-            var isActive = node.classList.contains("active"),
-                li = node.closest('li'),
-                permalink = li.querySelector('.permalink'),
-                expandedPermalink = li.querySelector('.expandedPermalink');
-
-            if (isActive) {
-                permalink.insertAdjacentHTML("afterend",
-                  '<div class="expandedPermalink no-bookmarking">' +
-                  ' <div>' +
-                  '   <input value="' + node.querySelector('a').href + '"/>' +
-                  ' </div>' +
-                  ' <div>' +
-                  '   <i class="fa fa-clipboard"></i> <a class="copyPermalink" href="#"> Copy permanent link to clipboard </a>' +
-                  ' </div>' +
-                  '</div>');
-                document.querySelector(".copyPermalink").addEventListener("click", function(e) {
-                    handlePermalinkCopyClick(e);
-                });
-            } else if (expandedPermalink) {
-                expandedPermalink.remove();
-            }
-            L.fire("tracker:trackableEvent", {
-                category: "lane:permalinkTrigger",
-                action: event.target.textContent,
-                label: node.querySelector('a').href
-            });
-        },
-        handlePermalinkCopyClick = function(event) {
-            var expandedPermalink = event.target.closest('.expandedPermalink'), 
-                copyNode = expandedPermalink.querySelector('input'),
-                statusNode = expandedPermalink.querySelector('div:nth-child(2)');
-            event.stopPropagation();
-            event.preventDefault();
+            var anchor = node.querySelector('a'), copyNode;
+            anchor.insertAdjacentHTML("afterend",'<input value="' + anchor.href + '"/>');
+            copyNode = node.querySelector("input");
             copyNode.select();
             copyNode.setSelectionRange(0, 99999);
             document.execCommand("copy");
             copyNode.blur();
-            statusNode.innerHTML = '<i class="fa fa-check"></i> Permanent link copied';
+            node.innerHTML = '<i class="fa fa-check"></i> Link copied';
             L.fire("tracker:trackableEvent", {
                 category: "lane:permalinkCopied",
                 action: event.target.textContent,

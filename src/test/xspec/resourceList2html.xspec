@@ -60,8 +60,8 @@
             <div class="sourceInfo no-bookmarking" >
                <span></span>
                <span class="permalink">
-                  <a title="click to copy a permanent link to this record" href="https://lane.stanford.edu/view/foo/12345">
-                     <i class="fa fa-link fa-rotate-90"/> Permalink</a>
+                  <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/foo/12345">
+                     <i class="fa fa-link fa-rotate-90"/> Get shareable link</a>
                </span>
             </div>
         </li>

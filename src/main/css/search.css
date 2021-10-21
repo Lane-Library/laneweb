@@ -164,31 +164,8 @@ li.active .description {
 	padding: 0 10px;
 }
 
-.permalink.active {
-	background-color: #f2f3ed;
-	border: 1px solid;
-	border-bottom-color: #f2f3ed;
-	z-index: 1;
-	position: relative;
-}
-
-.expandedPermalink {
-	background-color: #f2f3ed;
-	border: 1px solid;
-	padding: 0 12px;
-	position: relative;
-	top: -1px;
-}
-
-.expandedPermalink input {
-	border: none;
-	font-size: 100%;
-	width: 100%;
-	background-color: #f2f3ed;
-}
-
-.expandedPermalink input:focus, .permalink input:focus {
-	outline: none;
+.permalink .fa-check {
+	color: green;
 }
 
 @media ( max-width : 812px) {
