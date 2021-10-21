@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var helpNode = document.querySelector(".search-help"),
+    var helpNode = document.querySelector(".search-help a"),
 
         view = function() {
 
