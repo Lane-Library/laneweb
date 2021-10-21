@@ -51,7 +51,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "suggest.js",
         "search.js",
         "search-reset.js",
-        "search-tabs.js",
+        "search-dropdown.js",
         "search-placeholder.js",
         "search-help.js",
         "search-suggest.js",
