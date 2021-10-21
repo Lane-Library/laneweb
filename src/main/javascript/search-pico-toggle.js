@@ -9,7 +9,7 @@ if (document.querySelector(".pico-toggle"))  {
         PICO_ON_ACTIVE = PICO_ON + ACTIVE,
         PICO_OFF = "pico-off",
         PICO_OFF_ACTIVE = PICO_OFF + ACTIVE,
-        PICO_TOGGLE = "pico-toggle",
+        PICO_TOGGLE = "search-info",
         PICO_TOGGLE_ACTIVE = PICO_TOGGLE + ACTIVE,
 
         picoView = function(toggle) {
