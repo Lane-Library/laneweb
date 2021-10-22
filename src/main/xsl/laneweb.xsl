@@ -289,19 +289,29 @@
         <xsl:attribute name="class" select="'search-reset search-reset-active'"/>
     </xsl:template>
 
-    <!-- add active to the appropriate search-tab -->
-    <xsl:template match="h:div[@class='search-tab' and @data-source = $search-source]/@class">
-        <xsl:attribute name="class" select="'search-tab search-tab-active'"/>
+    <!-- activate the appropriate search option -->
+    <xsl:template match="h:select[@id='main-search']/h:option[@value = $search-source or ($search-source = 'peds-all' and @value = 'clinical-all')]">
+        <xsl:copy>
+            <xsl:attribute name="selected" select="'selected'"/>
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
+        </xsl:copy>
     </xsl:template>
 
-    <!-- add active to the clinical search-tab if search-source is peds-all-->
-    <xsl:template match="h:div[@class='search-tab' and $search-source = 'peds-all' and @data-source = 'clinical-all']/@class">
-        <xsl:attribute name="class" select="'search-tab search-tab-active'"/>
+    <!-- select the appropriate search option label -->
+    <xsl:template match="h:span[@id='search-dropdown-label']/text()">
+        <xsl:choose>
+            <xsl:when test="$search-source = 'peds-all'">
+                <xsl:value-of select="../../h:select[@id='main-search']/h:option[@value = 'clinical-all']/text()"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="../../h:select[@id='main-search']/h:option[@value = $search-source]/text()"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!-- put the @data-help value of the active tab into the href of .search-help -->
-    <xsl:template match="h:a[@class='search-help']/@href">
-        <xsl:variable name="related-tab">
+    <xsl:template match="h:div[@class='search-help']/h:a/@href">
+        <xsl:variable name="related-option">
             <xsl:choose>
                 <xsl:when test="$search-source='peds-all'">
                     <xsl:value-of select="'clinical-all'"/>
@@ -311,7 +321,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:div[@class='search-tab'][@data-source = $related-tab]/@data-help)"/>
+        <xsl:attribute name="href" select="concat($base-path, ancestor::h:form[@class='search-form']//h:option[@value = $related-option]/@data-help)"/>
     </xsl:template>
 
 

@@ -28,9 +28,9 @@
         <xsl:attribute name="value" select="$search-source"/>
     </xsl:template>
 
-    <xsl:template match="h:input[@name='q'][@data-placeholder]/@placeholder">
+    <xsl:template match="h:input[@name='q']/@placeholder">
         <xsl:attribute name="placeholder">
-            <xsl:value-of select="ancestor::h:form[contains(@class,'search-form')]//h:div[contains(@class,'search-tab') and @data-source = $search-source]/@data-placeholder"/>
+            <xsl:value-of select="ancestor::h:form[contains(@class,'search-form')]//h:option[@value = $search-source]/@data-placeholder"/>
         </xsl:attribute>
     </xsl:template>
 
