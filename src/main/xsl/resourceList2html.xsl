@@ -213,8 +213,8 @@
                     </span>
                 </xsl:if>
                 <span class="permalink">
-                    <a title="click to copy a permanent link to this record" href="https://lane.stanford.edu/view/{s:recordType}/{s:recordId}">
-                    <i class="fa fa-link fa-rotate-90"></i> Permalink</a>
+                    <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{s:recordType}/{s:recordId}">
+                    <i class="fa fa-link fa-rotate-90"></i> Get shareable link</a>
                 </span>
             </div>
         </li>

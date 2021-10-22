@@ -65,9 +65,9 @@
                      title="Lane Catalog Record">Lane Catalog</a>
                </span>
                <span class="permalink">
-                  <a title="click to copy a permanent link to this record"
+                  <a title="click to copy a shareable link to this record"
                      href="https://lane.stanford.edu/view/bib/301866">
-                     <i class="fa fa-link fa-rotate-90"/> Permalink</a>
+                     <i class="fa fa-link fa-rotate-90"/> Get shareable link</a>
                </span>
             </div>
          </li>
@@ -117,9 +117,9 @@
                      title="Lane Catalog Record">Lane Catalog</a>
                </span>
                <span class="permalink">
-                  <a title="click to copy a permanent link to this record"
+                  <a title="click to copy a shareable link to this record"
                      href="https://lane.stanford.edu/view/bib/123">
-                     <i class="fa fa-link fa-rotate-90"/> Permalink</a>
+                     <i class="fa fa-link fa-rotate-90"/> Get shareable link</a>
                </span>
             </div>
          </li>
