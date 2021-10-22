@@ -73,7 +73,6 @@
 }
 
 .discovery-login-help {
-    display: flex;
     align-items: center;
     display: grid;
     border: none;

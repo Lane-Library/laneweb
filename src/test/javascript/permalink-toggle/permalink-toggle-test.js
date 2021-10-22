@@ -8,38 +8,15 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testTogglePermalinks: function() {
             var permaSpans = Y.all(".permalink"),
-                links = Y.all(".permalink a"),
-                items = Y.all("#searchResults li");
+                links = Y.all(".permalink a");
             Y.Assert.areEqual(2, links.size());
-            Y.Assert.areEqual("Permalink", links.item(0).get("text").trim());
-            Y.Assert.areEqual("Permalink", links.item(1).get("text").trim());
             links.each(function(node) {
+                Y.Assert.areEqual("Get a shareable link", node.get("text").trim());
                 node.simulate("click");
             });
             permaSpans.each(function(node) {
-                Y.Assert.isTrue(node.hasClass("active"));
+                Y.Assert.areEqual("Link copied", node.get("text").trim());
             });
-            items.each(function(node) {
-                Y.Assert.isObject(node.one('.expandedPermalink'));
-            });
-            links.each(function(node) {
-                node.simulate("click");
-            });
-            permaSpans.each(function(node) {
-                Y.Assert.isFalse(node.hasClass("active"));
-            });
-            items.each(function(node) {
-                Y.Assert.isNull(node.one('.expandedPermalink'));
-            });
-        },
-        testCopyPermalinks: function() {
-            Y.one(".permalink a").simulate('click');
-            var expandedPermalinkDiv = Y.one('.expandedPermalink'),
-                expandedPermalink = expandedPermalinkDiv.one('a');
-            Y.Assert.isObject(expandedPermalinkDiv);
-            Y.Assert.areEqual("Copy permanent link to clipboard", expandedPermalink.get("text").trim());
-            expandedPermalink.simulate("click");
-            Y.Assert.areEqual("Permanent link copied", expandedPermalinkDiv.all('div').item(1).get("text").trim());
         }
     });
 
