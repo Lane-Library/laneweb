@@ -1,8 +1,8 @@
 .hero-unit {
+	color: white;
 	background-color:  #8c1515;
 	background-image: url('../images/search-back.jpg'); 
 	background-repeat: no-repeat;
-	color: white;
 	background-size: cover;
 	width: 100%;
 	padding-top: 67px;
@@ -15,13 +15,12 @@
 }
 
 .search-form {
-	color: white;
 	position: relative;
 	width: 60%;
 	margin: auto;
 }
 
-.search-form  .search-field {
+.search-form  .search-field{
 	position: relative;
 	color: black;
 	padding: 0px;
@@ -53,9 +52,8 @@
 	padding-left: 30px;
 	border: 1px white;
 	outline: none;
-	width: 90%;
+	width: 95%;
 }
-
 
 .search-form .search-dropdown .fa {
 	color: black;
@@ -139,14 +137,14 @@
 	border: 0;
 }
 
+.search-form .yui3-aclist-item{
+	color:black;
+}
+
 .search-form .pico-fields-active {
 	display: block;
 	margin-bottom: 12px;
 	padding: 0 25px;
-}
-
-.pico-fields input {
-	padding-right: 0;
 }
 
 .search-reset {
