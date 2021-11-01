@@ -87,7 +87,7 @@
 	text-decoration: none;
 }
 
-.search-info {
+.search-pico {
 	position: absolute;
 	cursor: default;
 	font-size: 16px;
@@ -100,7 +100,7 @@
 	display: none;
 }
 
-.search-info.search-info-active{
+.search-pico.search-pico-active{
 	display: block;
 }
 
@@ -210,7 +210,7 @@
 	max-height: 200px;
 }
 
-.search-form-active .search-info a {
+.search-form-active .search-pico a {
 	opacity: 1;
 }
 
