@@ -5,7 +5,6 @@ if (document.querySelector(".search-form")) {
 		"use strict";
 
 		var CHANGE = "change",
-			SOURCE = "source",
 			SEARCH_DROPDOWN = "main-search",
 			dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
 			options = dropdown.querySelectorAll("option"),
@@ -31,7 +30,6 @@ if (document.querySelector(".search-form")) {
 			}(dropdown[dropdown.selectedIndex].value),
 
 			view = function() {
-
 				var v = {
 					change: function(label) {
 						dropdown_label.innerHTML = label;
@@ -41,11 +39,9 @@ if (document.querySelector(".search-form")) {
 					}
 				}
 
-
 				L.addEventTarget(v);
 				dropdown.addEventListener(CHANGE, v.click);
 				return v;
-
 			}(),
 
 
@@ -64,7 +60,7 @@ if (document.querySelector(".search-form")) {
 							action: source,
 							label: "from " + model.source + " to " + source
 						});
-						this.fire("change", { newVal: newVal, oldVal: model });
+						this.fire(CHANGE, { newVal: newVal, oldVal: model });
 						model = newVal;
 					}
 				};
