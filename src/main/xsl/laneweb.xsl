@@ -268,7 +268,7 @@
     </xsl:template>
 
     <!-- add active to the pico-on link if $search-source=clinical-all and no PICO values present -->
-    <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o)]/@class">
+    <xsl:template match="h:span[@class='pico-on' and matches($search-source,'(clinical|peds)-all') and not($p or $i or $c or $o) and $path!='/picosearch.html']/@class">
         <xsl:attribute name="class" select="'pico-on pico-on-active'"/>
     </xsl:template>
 

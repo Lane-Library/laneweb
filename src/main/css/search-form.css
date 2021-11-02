@@ -93,7 +93,7 @@
 	font-size: 16px;
 	width: 100%;
 	background: #333;
-	opacity: .85;
+	opacity: .95;
 	height: auto;
 	padding: 15px 0;
 	z-index: 1;
@@ -105,7 +105,13 @@
 }
 
 .pico-toggle{
-	padding-left: 18px;	
+	width: 39%;
+    margin: auto;
+    display: block;
+}
+
+.pico-toggle span:last-child{
+	float: right;
 }
 
 .pico-on, .pico-off {
