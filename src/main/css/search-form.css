@@ -235,4 +235,7 @@
 	.search-form {
 		width: 80%;
 	}
+	.search-pico.pure-md-hide.search-pico-active{
+		display: none;
+	}	
 }
