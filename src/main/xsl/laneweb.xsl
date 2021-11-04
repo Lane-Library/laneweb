@@ -258,7 +258,7 @@
 
 	 <!-- add active to the pico container is on if $search-source=clinical-all  -->
     <xsl:template match="h:div[@class='search-pico pure-md-hide' and (matches($search-source,'(clinical|peds)-all') or $path='/picosearch.html')]/@class">
-        <xsl:attribute name="class" select="'search-pico search-pico-active'"/>
+        <xsl:attribute name="class" select="'search-pico search-pico-active pure-md-hide'"/>
     </xsl:template>
 
 
