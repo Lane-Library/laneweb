@@ -21,7 +21,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                 permaSpans.each(function(node) {
                     Y.Assert.areEqual("Get a shareable link", node.get("text").trim());
                 });
-            }, 1000);
+            }, 2200);
             
         }
     });

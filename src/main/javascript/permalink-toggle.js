@@ -22,7 +22,7 @@
             });
             setTimeout(function() {
                 node.innerHTML = originalHtml;
-            }, 300);
+            }, 2000);
         };
 
         document.querySelector(".lwSearchResults").addEventListener("click", function(event) {
