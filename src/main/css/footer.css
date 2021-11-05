@@ -183,18 +183,12 @@
         left: 75%;
     }
 } 
-/* 
-@media ( max-width : 915px) {
-    .footer-link-bar {
-        padding: 0;
-    }
-    .footer-organization {
-        flex: 1 1 51%;
-    }
-} 
- */
+
 @media ( max-width : 812px) {
     .footer-organizations h4 {
         left: 12px;
+    }
+    .footer-organizations {
+    	margin-top: 7%;
     }
 }
