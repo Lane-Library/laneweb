@@ -63,7 +63,7 @@
                 <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Digital')">Digital</xsl:when>
                 <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Print')">Print</xsl:when>
                 <!-- TODO: testing for PMC indexing; remove if RM/Thea decides not to use PMC records -->
-                <xsl:when test="../../string[. = 'recordType'] and value = 'pmcj'">PMC Journals</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'dnlm'">NLM Catalog</xsl:when>
                 <xsl:otherwise><xsl:value-of select="value"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

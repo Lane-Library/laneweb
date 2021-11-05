@@ -249,8 +249,8 @@
                 remove if RM/Thea decides not to use PMC records
                 may also need to add to eresources2html if RM wants PMC items browseable
             -->
-            <xsl:when test=". = 'pmcj'">
-                <xsl:copy-of select="$label"/><a href="https://www.ncbi.nlm.nih.gov/nlmcatalog/?term={../s:recordId}" title="PubMed Central Journals">PMC Journals</a>
+            <xsl:when test=". = 'dnlm'">
+                <xsl:copy-of select="$label"/><a href="https://www.ncbi.nlm.nih.gov/nlmcatalog/?term={../s:recordId}" title="NLM Catalog">NLM Catalog</a>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
