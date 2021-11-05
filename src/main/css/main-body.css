@@ -1,6 +1,5 @@
 html {
     background-color: #f0f4f5;
-    min-width: 1089px;
     scroll-behavior: smooth;
 }
 
@@ -13,4 +12,5 @@ html {
     color: #333333;
     position: relative;
     margin-top: 30px;
+    min-width: 1089px;
 }
