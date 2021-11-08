@@ -35,6 +35,9 @@ img {
 @media ( max-width : 812px) {
 	html {
 		margin: 0;
+		
+	}
+	section.header, section.content{
 		min-width: 0;
 	}
 	.content {
