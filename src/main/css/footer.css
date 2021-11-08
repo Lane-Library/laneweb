@@ -21,17 +21,11 @@
 }
 
 .footer-link-bar div {
-    flex: 1 1 50%;
-    display: flex;
-}
-
-.footer-link-bar span {
+    flex: 1 1 15%;
     padding: 1em 5%;
-	margin:0 12px;
-	flex: 1 1 50%;
-    text-align: center;
+    width: 10em;
+    text-align: left;
 }
-
 
 .footer-copyright {
     background-color: #E3E3E3;
@@ -119,12 +113,11 @@
 }
 
 .footer-organization li {
-    height: 1.9em;
+    height: 1.5em;
     white-space: nowrap;
 }
 
 .footer-organization-address li {
-	height: 1.5em;
     font-size: smaller;
     opacity: 60%;
 }
@@ -181,6 +174,16 @@
         position: absolute;
         top: 16px;
         left: 75%;
+    }
+} 
+
+
+@media ( max-width : 915px) {
+    .footer-link-bar {
+        padding: 0;
+    }
+    .footer-organization {
+        flex: 1 1 51%;
     }
 } 
 

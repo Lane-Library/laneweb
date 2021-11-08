@@ -35,10 +35,10 @@ img {
 @media ( max-width : 812px) {
 	html {
 		margin: 0;
+		min-width: 0;
 	}
 	.content {
 		margin: 0 12px;
-		min-width: 0;
 	}
 	.menu-toggle{
 		display: block;
