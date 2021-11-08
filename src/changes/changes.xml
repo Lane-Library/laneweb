@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	 <release date="2021-11-08" version="3.8.14" description="bug fix release">
+            <action date="2021-11-04" dev="ryanmax" issue="LANEWEB-10827" type="remove">
+                Get Shareable Link UX Fix
+            </action>
+            <action date="2021-10-12" dev="ryanmax" issue="LANEWEB-10825" type="update">
+                Update Permalink to "Get sharable link" in Lane Search Results
+            </action>
+        </release>
         <release date="2021-10-25" version="3.8.13" description="bug fix release">
             <action date="2021-10-13" dev="ryanmax" issue="LANEWEB-10820" type="remove">
                 remove processing for SFX highly accessed articles
