@@ -1,9 +1,10 @@
 .hero-unit {
 	color: white;
 	background-color:  #8c1515;
-	background-image: url('../images/hero-bkgrd.png'); 
+	background-image: url('../images/hero-bkgrd2.png'); 
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: center 70%;
 	width: 100%;
 	padding-top: 67px;
 	padding-bottom: 60px;
