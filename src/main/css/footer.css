@@ -18,6 +18,10 @@
     color: #fff;
 }
 
+.footer-link-bar i {
+    font-size: 18px;
+}
+
 .footer-link-bar div,.footer-link-bar span {
 	width: 49%;
     display: inline-block;
