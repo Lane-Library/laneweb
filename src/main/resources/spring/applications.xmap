@@ -99,11 +99,6 @@
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <!-- cache expires in 21600 seconds = 6 hours -->
         <map:parameter name="cache-expires" value="21600"/>
-        <map:match pattern="seminars/type/*/number-of-items/*/link-label/*.xml" type="wildcard">
-            <map:generate type="seminars"/>
-            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="seminars/grandrounds.xml" type="wildcard">
             <map:generate type="seminars"/>
             <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
