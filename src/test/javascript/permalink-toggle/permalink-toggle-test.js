@@ -17,6 +17,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             permaSpans.each(function(node) {
                 Y.Assert.areEqual("Link copied", node.get("text").trim());
             });
+            this.wait(function(){
+                permaSpans.each(function(node) {
+                    Y.Assert.areEqual("Get a shareable link", node.get("text").trim());
+                });
+            }, 2200);
+            
         }
     });
 

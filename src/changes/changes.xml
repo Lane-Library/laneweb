@@ -7,30 +7,43 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
-      	<release date="2021-10-11" version="3.8.12" description="bug fix release">
-            <action date="2021-10-05" dev="ryanmax" issue="LANEWEB-10816" type="update">
-    			Improve PMCID searching
-            </action>            
+      	 <release date="2021-11-08" version="3.8.14" description="bug fix release">
+            <action date="2021-11-04" dev="ryanmax" issue="LANEWEB-10827" type="fix">
+                Get Shareable Link UX Fix
+            </action>
         </release>
-      	<release date="2021-10-04" version="3.8.11" description="bug fix release">
+        <release date="2021-10-25" version="3.8.13" description="bug fix release">
+            <action date="2021-10-13" dev="ryanmax" issue="LANEWEB-10820" type="remove">
+                remove processing for SFX highly accessed articles
+            </action>
+            <action date="2021-10-12" dev="ryanmax" issue="LANEWEB-10825" type="update">
+                Update Permalink to "Get sharable link" in Lane Search Results
+            </action>
+        </release>
+        <release date="2021-10-11" version="3.8.12" description="bug fix release">
+            <action date="2021-10-05" dev="ryanmax" issue="LANEWEB-10816" type="update">
+                Improve PMCID searching
+            </action>
+        </release>
+        <release date="2021-10-04" version="3.8.11" description="bug fix release">
             <action date="2021-09-28" dev="ryanmax" issue="LANEWEB-10813" type="update">
-    			Move Guest View to Login Page
+                Move Guest View to Login Page
             </action>
             <action date="2021-09-27" dev="alainb" issue="LANEWEB-10814" type="update">
-    			Automatically pull today's Live Chat hours on our Chat &amp; Contact Us Page
+                Automatically pull today's Live Chat hours on our Chat &amp; Contact Us Page
             </action>
         </release>
-      	<release date="2021-09-27" version="3.8.10" description="bug fix release">
+        <release date="2021-09-27" version="3.8.10" description="bug fix release">
             <action date="2021-09-24" dev="ryanmax" issue="LANEWEB-10810" type="update">
-    			Exceptions thrown and no results when PubMed results contain markup errors
+                Exceptions thrown and no results when PubMed results contain markup errors
             </action>
             <action date="2021-09-23" dev="ryanmax" issue="LANEWEB-10809" type="update">
-    			Poor results when search terms contain parentheses
+                Poor results when search terms contain parentheses
             </action>
         </release>
-      	<release date="2021-09-20" version="3.8.9" description="bug fix release">
+        <release date="2021-09-20" version="3.8.9" description="bug fix release">
             <action date="2021-06-13" dev="ryanmax" issue="LANEWEB-10807" type="update">
-            	Shorebreak: Reflected Cross Site Scripting/HTML Injection (XSS/HTMLi)    
+                Shorebreak: Reflected Cross Site Scripting/HTML Injection (XSS/HTMLi)
             </action>
         </release>
         <release date="2021-09-13" version="3.8.8" description="bug fix release">
@@ -47,52 +60,52 @@
                 remove author sort option from Lane Search
             </action>
         </release>
-		<release date="2021-09-06" version="3.8.7"	description="bug fix release">
-			<action date="2021-09-02" dev="ryanmax" issue="LANEWEB-10796" type="update">
-				expand Libkey lookups to include fulltext links in addition to PDF links
-			</action>
-			<action date="2021-09-03" dev="ryanmax" issue="LANEWEB-10802" type="update">
-				pre-fetch browzine information when results are close to visible in the viewport
-			</action>
-			<action date="2021-08-03" dev="ryanmax" issue="LANEWEB-10803" type="fix">
-				duplicate bookcover requests
-			</action>
-		</release>
-      	 <release date="2021-08-30" version="3.8.6"	description="bug fix release">
-	       <action date="2021-08-26" dev="alainb" issue="LANEWEB-10793" type="fix">
-				Bookmarklet not working with persistent login
-			</action>
-			<action date="2021-08-25" dev="alainb" issue="LANEWEB-10795" type="fix">
-				Parse html content from description fields
-			</action>
-			<action date="2021-08-20" dev="ryanmax" issue="LANEWEB-10789" type="update">
-				No need to throttle browzine api requests
-			</action>
-			<action date="2021-08-21" dev="alainb" issue="LANEWEB-10783" type="fix">
-				Poor hours formatting on small screens
-			</action>
-       </release>
-        <release date="2021-08-23" version="3.8.5"	description="bug fix release">
-	       <action date="2021-08-21" dev="alainb" issue="LANEWEB-10784" type="update">
-				Spam manager
-			</action>
-			<action date="2021-08-16" dev="alainb" issue="LANEWEB-10778" type="update">
-				Inverse icon background
-			</action>
-			<action date="2021-08-20" dev="ryanmax" issue="LANEWEB-10782" type="update">
-				Course reserves mobile interface formatting
-			</action>
-			<action date="2021-08-21" dev="alainb" issue="LANEWEB-10783" type="update">
-				Remove /cookiesFetch.html functionality?
-			</action>
-			<action date="2021-08-21" dev="alainb" issue="LANEWEB-10786" type="update">
-			     Re-add docxpress email functionality to laneweb
-			</action>
-			<action date="2021-08-20" dev="alainb" issue="LANEWEB-10780" type="update">
-			     Header formatting issues in history template
-			</action>
-       </release>
-       <release date="2021-08-16" version="3.8.4" description="bug fix release">
+        <release date="2021-09-06" version="3.8.7" description="bug fix release">
+            <action date="2021-09-02" dev="ryanmax" issue="LANEWEB-10796" type="update">
+                expand Libkey lookups to include fulltext links in addition to PDF links
+            </action>
+            <action date="2021-09-03" dev="ryanmax" issue="LANEWEB-10802" type="update">
+                pre-fetch browzine information when results are close to visible in the viewport
+            </action>
+            <action date="2021-08-03" dev="ryanmax" issue="LANEWEB-10803" type="fix">
+                duplicate bookcover requests
+            </action>
+        </release>
+        <release date="2021-08-30" version="3.8.6" description="bug fix release">
+           <action date="2021-08-26" dev="alainb" issue="LANEWEB-10793" type="fix">
+                Bookmarklet not working with persistent login
+            </action>
+            <action date="2021-08-25" dev="alainb" issue="LANEWEB-10795" type="fix">
+                Parse html content from description fields
+            </action>
+            <action date="2021-08-20" dev="ryanmax" issue="LANEWEB-10789" type="update">
+                No need to throttle browzine api requests
+            </action>
+            <action date="2021-08-21" dev="alainb" issue="LANEWEB-10783" type="fix">
+                Poor hours formatting on small screens
+            </action>
+        </release>
+        <release date="2021-08-23" version="3.8.5" description="bug fix release">
+           <action date="2021-08-21" dev="alainb" issue="LANEWEB-10784" type="update">
+                Spam manager
+            </action>
+            <action date="2021-08-16" dev="alainb" issue="LANEWEB-10778" type="update">
+                Inverse icon background
+            </action>
+            <action date="2021-08-20" dev="ryanmax" issue="LANEWEB-10782" type="update">
+                Course reserves mobile interface formatting
+            </action>
+            <action date="2021-08-21" dev="alainb" issue="LANEWEB-10783" type="update">
+                Remove /cookiesFetch.html functionality?
+            </action>
+            <action date="2021-08-21" dev="alainb" issue="LANEWEB-10786" type="update">
+                 Re-add docxpress email functionality to laneweb
+            </action>
+            <action date="2021-08-20" dev="alainb" issue="LANEWEB-10780" type="update">
+                 Header formatting issues in history template
+            </action>
+        </release>
+        <release date="2021-08-16" version="3.8.4" description="bug fix release">
             <action date="2021-08-12" dev="ryanmax" issue="LANEWEB-10768" type="update">
                Course reserves improvement
             </action>
@@ -144,7 +157,7 @@
                 sunset metasearch
             </action>
         </release>
-         <release date="2021-06-28" version="3.7.17" description="bug fix release">
+        <release date="2021-06-28" version="3.7.17" description="bug fix release">
             <action date="2021-06-23" dev="alainb" issue="LANEWEB-10750" type="fix">
                 Review use of cookies in laneweb
             </action>
@@ -169,7 +182,7 @@
                  Copy/paste of journal citations can lead to zero results
             </action>
         </release>
-         <release date="2021-06-14" version="3.7.15" description="bug fix release">
+        <release date="2021-06-14" version="3.7.15" description="bug fix release">
             <action date="2021-05-28" dev="ryanmax" issue="LANEWEB-10721" type="fix">
                 revise search tabs interface
             </action>
@@ -183,7 +196,7 @@
                Update button class on Search Results not found page
             </action>
         </release>
-         <release date="2021-06-07" version="3.7.14" description="bug fix release">
+        <release date="2021-06-07" version="3.7.14" description="bug fix release">
             <action date="2021-06-07" dev="ryanmax" issue="LANEWEB-10724" type="fix">
                 search spinner intermittently appearing on back button
             </action>
@@ -238,52 +251,52 @@
             <action date="2021-04-01" dev="ryanmax" issue="LANEWEB-10699" type="fix">
                 Reflected Cross Site Scripting/HTML Injection (XSS/HTMLi)
             </action>
-         </release>
-         <release date="2021-04-05" version="3.7.7" description="bug fix release">
+        </release>
+        <release date="2021-04-05" version="3.7.7" description="bug fix release">
             <action date="2021-04-01" dev="ryanmax" issue="LANEWEB-10694" type="fix">
                 Change Link Styling
             </action>
-         </release>
-         <release date="2021-03-31" version="3.7.6" description="emergency release">
+        </release>
+        <release date="2021-03-31" version="3.7.6" description="emergency release">
             <action date="2021-03-31" dev="alainb" issue="LANEWEB-10696" type="fix">
                 med seminars failing on front page
             </action>
-         </release>
-         <release date="2021-03-22" version="3.7.5" description="bug fix release">
+        </release>
+        <release date="2021-03-22" version="3.7.5" description="bug fix release">
             <action date="2021-03-18" dev="alainb" issue="LANEWEB-10692" type="fix">
                 No attachment from "Access Issues"
             </action>
-         </release>
-         <release date="2021-03-15" version="3.7.4" description="bug fix release">
+        </release>
+        <release date="2021-03-15" version="3.7.4" description="bug fix release">
             <action date="2021-03-12" dev="ryanmax" issue="LANEWEB-10685" type="update">
                    Custom confirmation message for EJP form
             </action>
-         </release>
-         <release date="2021-03-08" version="3.7.3" description="bug fix release">
+        </release>
+        <release date="2021-03-08" version="3.7.3" description="bug fix release">
             <action date="2021-03-02" dev="alainb" issue="LANEWEB-10683" type="update">
                    hide location icon in the classes
             </action>
             <action date="2021-03-04" dev="ryanmax" issue="LANEWEB-10682" type="update">
                    Contact Us and Login buttons are different shades of blue
             </action>
-          </release>
-         <release date="2021-03-01" version="3.7.2" description="bug fix release">
+        </release>
+        <release date="2021-03-01" version="3.7.2" description="bug fix release">
             <action date="2021-02-22" dev="ryanmax" issue="LANEWEB-10681" type="update">
                    Remove Hotjar Javascript
             </action>
             <action date="2021-02-16" dev="alainb" issue="LANEWEB-10678" type="update">
                     Contact Us Page Redesign
             </action>
-          </release>
-         <release date="2021-02-22" version="3.7.1" description="bug fix release">
+        </release>
+        <release date="2021-02-22" version="3.7.1" description="bug fix release">
             <action date="2021-02-15" dev="alainb" issue="LANEWEB-10675" type="update">
                 laneblog featured image
             </action>
             <action date="2021-02-18" dev="alainb" issue="LANEWEB-10680" type="fix">
                 Error page form does not submit
             </action>
-          </release>
-         <release date="2021-02-11" version="3.7.0" description="responsive UI feature">
+        </release>
+        <release date="2021-02-11" version="3.7.0" description="responsive UI feature">
             <action date="2021-01-21" dev="ryanmax" issue="LANEWEB-10666" type="fix">
                 permalinks rendering oddly on mobile devices
             </action>
@@ -308,43 +321,43 @@
             <action date="2021-01-21" dev="alainb" issue="LANEWEB-10655" type="fix">
                 iPhone X is 812px in landscape mode
             </action>
-          </release>
-      	  <release date="2021-01-24" version="3.6.25" description="bug fix release">
-      	    <action date="2021-01-20" dev="ryanmax" issue="LANEWEB-10667" type="update">
-               	large increase in CPU use and response times
+        </release>
+        <release date="2021-01-24" version="3.6.25" description="bug fix release">
+              <action date="2021-01-20" dev="ryanmax" issue="LANEWEB-10667" type="update">
+                   large increase in CPU use and response times
             </action>
-          </release>
-          <release date="2021-01-15" version="3.6.24" description="bug fix release">
-      	    <action date="2021-01-14" dev="alainb" issue="LANEWEB-10654" type="fix">
-               	footer.html not displayed in libguide and libcal
+        </release>
+        <release date="2021-01-15" version="3.6.24" description="bug fix release">
+              <action date="2021-01-14" dev="alainb" issue="LANEWEB-10654" type="fix">
+                   footer.html not displayed in libguide and libcal
             </action>
             <action date="2021-01-13" dev="alainb" issue="LANEWEB-10653" type="fix">
-            	"sort by" dropdown lay over first page button pagination
+                "sort by" dropdown lay over first page button pagination
             </action>
             <action date="2021-01-12" dev="ryanmax" issue="LANEWEB-10652" type="update">
-        		remove youtube to HTML RSS handling
+                remove youtube to HTML RSS handling
             </action>
             <action date="2020-11-15" dev="ryanmax" issue="LANEWEB-10511" type="update">
-        		portal pages: default search option is not consistent
+                portal pages: default search option is not consistent
             </action>
-          </release>
-      	  <release date="2021-01-04" version="3.6.23" description="bug fix release">
-      	    <action date="2020-12-10" dev="ryanmax" issue="LANEWEB-10649" type="update">
-               	improve keyword highlighting
+        </release>
+        <release date="2021-01-04" version="3.6.23" description="bug fix release">
+              <action date="2020-12-10" dev="ryanmax" issue="LANEWEB-10649" type="update">
+                   improve keyword highlighting
             </action>
             <action date="2020-12-11" dev="ryanmax" issue="LANEWEB-10648" type="fix">
-            	odd formatting on keyword highlighting in descriptions
+                odd formatting on keyword highlighting in descriptions
             </action>
             <action date="2020-11-17" dev="alainb" issue="LANEWEB-10646" type="update">
-        		update Pure Grid CSS
+                update Pure Grid CSS
             </action>
-          </release>
-      	  <release date="2020-11-16" version="3.6.22" description="bug fix release">
+        </release>
+        <release date="2020-11-16" version="3.6.22" description="bug fix release">
             <action date="2020-11-13" dev="alainb" issue="LANEWEB-10645" type="update">
-        		Small text updates to header and footer
+                Small text updates to header and footer
             </action>
-           </release>
-      	   <release date="2020-11-09" version="3.6.21" description="bug fix release">
+        </release>
+        <release date="2020-11-09" version="3.6.21" description="bug fix release">
             <action date="2020-11-03" dev="ryanmax" issue="LANEWEB-10635" type="update">
                reduce redundant PubMed links in article results
             </action>
@@ -355,10 +368,10 @@
                add journal cover images to articles
             </action>
             <action date="2020-11-09" dev="alainb" issue="LANEWEB-10643" type="update">
-            	The left menu on the clinical search doesn't display the facet number
+                The left menu on the clinical search doesn't display the facet number
       s      </action>
-         </release>
-          <release date="2020-11-02" version="3.6.20" description="bug fix release">
+        </release>
+        <release date="2020-11-02" version="3.6.20" description="bug fix release">
             <action date="2020-10-30" dev="alainb" issue="LANEWEB-10637" type="update">
                Refactoring the config file to use lane-api-dev
             </action>
@@ -374,13 +387,13 @@
             <action date="2020-10-14" dev="ryanmax" issue="LANEWEB-10623" type="update">
                Use Browzine API for fulltext links
             </action>
-         </release>
-         <release date="2020-10-26" version="3.6.19" description="bug fix release">
+        </release>
+        <release date="2020-10-26" version="3.6.19" description="bug fix release">
             <action date="2020-10-23" dev="alainb" issue="LANEWEB-10633" type="update">
                "Obstetrics &amp; Gynecology” broke “Subject Guides” menu
             </action>
-         </release>
-         <release date="2020-10-19" version="3.6.18" description="bug fix release">
+        </release>
+        <release date="2020-10-19" version="3.6.18" description="bug fix release">
             <action date="2020-10-15" dev="ryanmax" issue="LANEWEB-10621" type="update">
                Stanford IdP Change: login screen cannot be framed
             </action>
@@ -390,8 +403,8 @@
             <action date="2020-10-14" dev="alainb" issue="LANECRM-57" type="update">
                improve CRM DR experience
             </action>
-         </release>
-         <release date="2020-10-12" version="3.6.17" description="bug fix release">
+        </release>
+        <release date="2020-10-12" version="3.6.17" description="bug fix release">
             <action date="2020-09-30" dev="ryanmax" issue="LANEWEB-10621" type="update">
                Upcoming Stanford IdP Change: login screen cannot be framed
             </action>
@@ -407,13 +420,13 @@
             <action date="2020-10-09" dev="alainb" issue="LANEWEB-10627" type="fix">
                caching issue with libguides in the Subject Guides menu
             </action>
-         </release>
-          <release date="2020-10-05" version="3.6.16" description="bug fix release">
+        </release>
+        <release date="2020-10-05" version="3.6.16" description="bug fix release">
             <action date="2020-10-05" dev="alainb" issue="LANEWEB-10622" type="update">
                LibGuides integration to Subject Guides Navigation Menu
             </action>
-          </release>
-          <release date="2020-09-28" version="3.6.15" description="bug fix release">
+        </release>
+        <release date="2020-09-28" version="3.6.15" description="bug fix release">
             <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10618" type="update">
                add curbside pickup request buttons to Lane Search
             </action>
@@ -426,8 +439,8 @@
             <action date="2020-09-25" dev="alainb" issue="LANEWC-44" type="fix">
                Set-Up Let's Encrypt Certificate for LibGuides &amp; LibCal
             </action>
-         </release>
-         <release date="2020-09-21" version="3.6.14" description="bug fix release">
+        </release>
+        <release date="2020-09-21" version="3.6.14" description="bug fix release">
             <action date="2020-09-19" dev="ryanmax" issue="LANEWEB-10616" type="update">
                permit crawlers to index lane-prototype/lmldbx/
             </action>
@@ -437,91 +450,91 @@
             <action date="2020-09-17" dev="ryanmax" issue="LANEWEB-10614" type="update">
                PubMed article abstract formatting problem
             </action>
-         </release>
-         <release date="2020-09-04" version="3.6.13" description="bug fix release">
+        </release>
+        <release date="2020-09-04" version="3.6.13" description="bug fix release">
             <action date="2020-08-10" dev="ryanmax" issue="LANEWEB-10605" type="update">
                add holdings note to reserves items
             </action>
-         </release>
-         <release date="2020-08-24" version="3.6.12" description="bug fix release">
+        </release>
+        <release date="2020-08-24" version="3.6.12" description="bug fix release">
             <action date="2020-08-24" dev="alainb" issue="LANEWEB-10603" type="fix">
                 Double / in the libcal URL
             </action>
             <action date="2020-08-24" dev="alainb" issue="LANEWEB-10604" type="fix">
                 class menu not display on libcal
             </action>
-         </release>
-         <release date="2020-08-17" version="3.6.11" description="bug fix release">
+        </release>
+        <release date="2020-08-17" version="3.6.11" description="bug fix release">
             <action date="2020-08-10" dev="alainb" issue="LANEWEB-10589" type="update">
                 ORC cleanup
             </action>
-         </release>
-         <release date="2020-08-10" version="3.6.10" description="bug fix release">
+        </release>
+        <release date="2020-08-10" version="3.6.10" description="bug fix release">
             <action date="2020-07-31" dev="ryanmax" issue="LANEWEB-10585" type="update">
                 Update Course Reserves Page Functionality &amp; Layout
             </action>
-         </release>
-         <release date="2020-07-27" version="3.6.9" description="bug fix release">
+        </release>
+        <release date="2020-07-27" version="3.6.9" description="bug fix release">
             <action date="2020-07-27" dev="ryanmax" issue="LANEWEB-10594" type="update">
                libcal changes not appearing in class lists (cache validity too long)
             </action>
             <action date="2020-07-27" dev="ryanmax" issue="LANEWEB-10593" type="update">
                libcal classes not appearing on /med-history/events.html
             </action>
-         </release>
-         <release date="2020-07-24" version="3.6.8" description="emergency release">
+        </release>
+        <release date="2020-07-24" version="3.6.8" description="emergency release">
             <action date="2020-07-15" dev="alainb" issue="LANEWEB-10590" type="fix">
               Library Classes Homepage- end time wrong
             </action>
             <action date="2020-07-20" dev="alainb" issue="LANEWEB-10588" type="update">
                LibGuides Subject Guide Drop down menu
             </action>
-         </release>
-         <release date="2020-07-17" version="3.6.7" description="bug fix release">
+        </release>
+        <release date="2020-07-17" version="3.6.7" description="bug fix release">
             <action date="2020-07-13" dev="ryanmax" issue="LANEWEB-10579" type="update">
                migrate to Java 11
             </action>
             <action date="2020-07-15" dev="alainb" issue="LANECRM-40" type="update">
                spam handling on CRM API (used by laneweb)
             </action>
-         </release>
-         <release date="2020-07-13" version="3.6.6" description="bug fix release">
+        </release>
+        <release date="2020-07-13" version="3.6.6" description="bug fix release">
             <action date="2020-06-10" dev="ryanmax" issue="LANEWEB-10584" type="update">
                toggle live chat header button based on real-time status of the chat service
             </action>
-         </release>
-         <release date="2020-07-06" version="3.6.5" description="bug fix release">
+        </release>
+        <release date="2020-07-06" version="3.6.5" description="bug fix release">
             <action date="2020-07-02" dev="ryanmax" issue="LANEWEB-10583" type="update">
                   bassett images moved to lane.stanford.edu/elane/public/L254573
             </action>
             <action date="2020-06-29" dev="alainb" issue="LANEWEB-10577" type="update">
                      basic LibCal integration
             </action>
-         </release>
-         <release date="2020-06-22" version="3.6.4" description="bug fix release">
+        </release>
+        <release date="2020-06-22" version="3.6.4" description="bug fix release">
             <action date="2020-06-09" dev="ryanmax" issue="LANEWEB-10578" type="fix">
                   login requests redirect to http
             </action>
-         </release>
-         <release date="2020-06-08" version="3.6.3" description="bug fix release">
+        </release>
+        <release date="2020-06-08" version="3.6.3" description="bug fix release">
             <action date="2020-05-01" dev="alainb" issue="LANEWEB-10573" type="fix">
                   https requests redirecting to http
             </action>
             <action date="2020-06-05" dev="alainb" issue="LANEWEB-10576" type="fix">
                   Integrated https://lane-stanford.libguides.com/ into laneweb
             </action>
-         </release>
-          <release date="2020-05-22" version="3.6.2" description="bug fix release">
+        </release>
+        <release date="2020-05-22" version="3.6.2" description="bug fix release">
             <action date="2020-05-17" dev="alainb" issue="LANEWEB-10571" type="fix">
                 Security: no X-Frame-Options header, nor a Content-Security-Policy header
             </action>
-         </release>
-         <release date="2020-05-11" version="3.6.1" description="bug fix release">
+        </release>
+        <release date="2020-05-11" version="3.6.1" description="bug fix release">
             <action date="2020-05-07" dev="ryanmax" issue="LANEWEB-10570" type="update">
                 direct link to search record (permalink)
             </action>
-         </release>
-         <release date="2020-04-27" version="3.6.0" description="bug fix release">
+        </release>
+        <release date="2020-04-27" version="3.6.0" description="bug fix release">
             <action date="2020-04-23" dev="alainb" issue="LANEWEB-10562" type="update">
                remove auto-renewal of persistent login token for Stanford users
             </action>
@@ -532,7 +545,7 @@
                support browse by query instead of fixed field (type)
             </action>
             <action date="2020-04-23" dev="alainb" issue="LANEWEB-10550" type="update">
-	           verify and/or update list of Stanford affiliations for persistent login ext
+               verify and/or update list of Stanford affiliations for persistent login ext
             </action>
             <action date="2020-04-23" dev="alainb" issue="LANEWEB-10564" type="update">
                myaccounts functionality
@@ -540,23 +553,23 @@
             <action date="2020-04-22" dev="alainb" issue="LANEWEB-10568" type="update">
                laneblog image distorted
             </action>
-         </release>
-         <release date="2020-04-20" version="3.5.69" description="release">
+        </release>
+        <release date="2020-04-20" version="3.5.69" description="release">
             <action date="2020-04-17" dev="ryanmax" issue="LANEWEB-10566" type="update">
                 Update website footer links and format
             </action>
-         </release>
-         <release date="2020-04-13" version="3.5.68" description="emergency release">
+        </release>
+        <release date="2020-04-13" version="3.5.68" description="emergency release">
             <action date="2020-04-08" dev="alainb" issue="LANEWEB-10547" type="update">
                broken links in image search
             </action>
-         </release>
-         <release date="2020-04-08" version="3.5.67" description="emergency release">
+        </release>
+        <release date="2020-04-08" version="3.5.67" description="emergency release">
             <action date="2020-04-08" dev="alainb" issue="LANEWEB-10561" type="update">
                Grand Round are not displayed
             </action>
-         </release>
-         <release date="2020-03-30" version="3.5.66" description="bug fix release">
+        </release>
+        <release date="2020-03-30" version="3.5.66" description="bug fix release">
             <action date="2020-03-27" dev="ryanmax" issue="LANEWEB-10558" type="update">
                Content listing visible
             </action>
@@ -566,8 +579,8 @@
              <action date="2020-03-26" dev="alainb" issue="LANEWEB-10556" type="update">
                poor language "Resources of the Months"
             </action>
-         </release>
-          <release date="2020-03-23" version="3.5.65" description="bug fix release">
+        </release>
+        <release date="2020-03-23" version="3.5.65" description="bug fix release">
             <action date="2020-03-23" dev="alainb" issue="LANEWEB-10554" type="update">
                Moderate Security Finding - persistent login redirect
             </action>
@@ -577,36 +590,36 @@
              <action date="2020-03-16" dev="alainb" issue="LANEWEB-10474" type="update">
                news section of the homepage look
             </action>
-         </release>
-         <release date="2020-03-16" version="3.5.64" description="bug fix release">
+        </release>
+        <release date="2020-03-16" version="3.5.64" description="bug fix release">
             <action date="2020-03-12" dev="ryanmax" issue="LANEWEB-10554" type="update">
                Update commons-fileupload to the 1.4 version
             </action>
-         </release>
-         <release date="2020-03-09" version="3.5.63" description="bug fix release">
+        </release>
+        <release date="2020-03-09" version="3.5.63" description="bug fix release">
             <action date="2020-03-05" dev="alainb" issue="LANEWEB-10549" type="update">
                Add attachment to laneAskUs
             </action>
-         </release>
-         <release date="2020-03-02" version="3.5.62" description="bug fix release">
+        </release>
+        <release date="2020-03-02" version="3.5.62" description="bug fix release">
             <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10545" type="update">
                Tomcat 9.0.31 changes the default AJP connector behavior. This is a breaking change for laneweb and will require config changes.
             </action>
             <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10546" type="update">
                remove left/right arrow key facet browsing
             </action>
-         </release>
-         <release date="2020-02-14" version="3.5.61" description="bug fix release">
+        </release>
+        <release date="2020-02-14" version="3.5.61" description="bug fix release">
             <action date="2020-02-11" dev="ryanmax" issue="LANEWEB-10542" type="fix">
                Qualys-reported cross site scripting vulnerability
             </action>
-         </release>
-         <release date="2020-02-10" version="3.5.60" description="bug fix release">
+        </release>
+        <release date="2020-02-10" version="3.5.60" description="bug fix release">
             <action date="2020-02-05" dev="ryanmax" issue="LANEWEB-10541" type="fix">
                  support proximity operator
             </action>
-         </release>
-         <release date="2020-02-03" version="3.5.59" description="bug fix release">
+        </release>
+        <release date="2020-02-03" version="3.5.59" description="bug fix release">
             <action date="2020-02-01" dev="ryanmax" issue="LANEWEB-10536" type="fix">
                   facet browse pane blends into search results
             </action>
@@ -619,8 +632,8 @@
             <action date="2020-02-31" dev="ryanmax" issue="LANEWEB-10537" type="fix">
                 Resource Type info icon overlapping when facet enabled
             </action>
-         </release>
-         <release date="2020-01-13" version="3.5.58" description="bug fix release">
+        </release>
+        <release date="2020-01-13" version="3.5.58" description="bug fix release">
             <action date="2020-01-07" dev="ryanmax" issue="LANEWEB-10523" type="fix">
                incorrect date facet labels at turn of calendar year
             </action>
@@ -630,16 +643,16 @@
             <action date="2020-01-08" dev="alainb" issue="LANEWEB-10522" type="update">
                   http://lane.stanford.edu/classes/all-classes.xml too long to request
             </action>
-         </release>
-         <release date="2019-12-09" version="3.5.57" description="bug fix release">
+        </release>
+        <release date="2019-12-09" version="3.5.57" description="bug fix release">
             <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10516" type="fix">
                auto-populate illiad form based on PMID or DOI
             </action>
             <action date="2019-12-03" dev="ryanmax" issue="LANEWEB-10517" type="fix">
                SSL warnings from laneblog images on front page
             </action>
-         </release>
-         <release date="2019-11-18" version="3.5.56" description="bug fix release">
+        </release>
+        <release date="2019-11-18" version="3.5.56" description="bug fix release">
             <action date="2019-11-14" dev="alainb" issue="LANEWEB-10510" type="update">
                Update edu.stanford.irt.laneweb.acquisition-api.url
             </action>
@@ -708,8 +721,8 @@
             <action date="2019-08-22" dev="alainb" issue="154371" type="update">
                 white space between images content and tab with firefox
             </action>
-         </release>
-         <release date="2019-08-19" version="3.5.48" description="bug fix release">
+        </release>
+        <release date="2019-08-19" version="3.5.48" description="bug fix release">
             <action date="2019-08-14" dev="alainb" issue="154263" type="update">
                drop downs Aa-Zz on resources pages not working
             </action>
@@ -726,11 +739,11 @@
                 align GR and classes modules with popular resources on homepage
             </action>
         </release>
-    	<release date="2019-08-11" version="3.5.47" description="redesign release">
-    	  	<action date="2019-07-25" dev="ryanmax" issue="153707" type="fix">
+        <release date="2019-08-11" version="3.5.47" description="redesign release">
+              <action date="2019-07-25" dev="ryanmax" issue="153707" type="fix">
                 search description pages don't default to their respective search options
             </action>
-    	  	<action date="2019-07-26" dev="olgary" issue="154107" type="update">
+              <action date="2019-07-26" dev="olgary" issue="154107" type="update">
                 update css and template for new header, footer, and body styles
             </action>
             <action date="2019-08-05" dev="ryanmax" issue="154032" type="update">
@@ -755,17 +768,17 @@
                nav menu doesn't open on mobile devices
             </action>
         </release>
-    	<release date="2019-08-04" version="3.5.46" description="bug fix release">
+        <release date="2019-08-04" version="3.5.46" description="bug fix release">
             <action date="2019-08-04" dev="ryanmax" issue="154079" type="add">
                 preview image search in default search results
             </action>
         </release>
-    	<release date="2019-07-28" version="3.5.45" description="bug fix release">
+        <release date="2019-07-28" version="3.5.45" description="bug fix release">
             <action date="2019-07-26" dev="alainb" issue="153633" type="update">
                 () showing up instead of (0) when no images found
             </action>
         </release>
-    	<release date="2019-07-22" version="3.5.44" description="bug fix release">
+        <release date="2019-07-22" version="3.5.44" description="bug fix release">
             <action date="2019-07-16" dev="ryanmax" issue="153271" type="update">
                 remove disaster-mode config flag
             </action>
@@ -2564,7 +2577,7 @@
                 Feedback-bug:  Impact factors links not working
             </action>
         </release>
-        <release date="2015-08-31" version="3.1.3" description="3.1.3 bug fix release  [reverted after deployment]">
+        <release date="2015-08-31" version="3.1.3" description="3.1.3 bug fix release [reverted after deployment]">
             <action date="2015-08-27" dev="ceyates" issue="110718" type="fix">
                 text with diacritics is not composed utf-8 on grand rounds pages
             </action>

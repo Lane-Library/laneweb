@@ -7,7 +7,7 @@
         var handlePermalinkClick = function(node, event) {
             event.stopPropagation();
             event.preventDefault();
-            var anchor = node.querySelector('a'), copyNode;
+            var anchor = node.querySelector('a'), copyNode, originalHtml = node.innerHTML;
             anchor.insertAdjacentHTML("afterend",'<input value="' + anchor.href + '"/>');
             copyNode = node.querySelector("input");
             copyNode.select();
@@ -20,6 +20,9 @@
                 action: event.target.textContent,
                 label: copyNode.value
             });
+            setTimeout(function() {
+                node.innerHTML = originalHtml;
+            }, 2000);
         };
 
         document.querySelector(".lwSearchResults").addEventListener("click", function(event) {
