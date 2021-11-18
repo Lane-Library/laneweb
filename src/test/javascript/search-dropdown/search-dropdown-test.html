@@ -10,16 +10,19 @@
     <body class="yui3-skin-sam">
         <form class="search-form">
             <input name="q" value=""/>
+            <div class="general-dropdown-trigger search-dropdown">
+					<span id="search-dropdown-label">All</span>
             <select id="main-search">
-            <option value="all-all" selected="selected" data-placeholder="all placeholder"  title="all tip">TBN search</option>
+            <option value="all-all" data-placeholder="all placeholder"  title="all tip">All</option>
             <option value="clinical-all" data-placeholder="clinical placeholder" title="clinical tip">Clinical: Adult/Pediatrics</option>
-            <option value="images-all" data-placeholder="images placeholder"  title="images tip">Bio-Images</option>
+            <option value="images-all"  data-placeholder="images placeholder"  title="images tip">Bio-Images</option>
             </select>
+            </div>
         </form>
         <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
         <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
         <script src="../../../main/javascript/util.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/search-tabs.js" type="text/javascript"></script>
-        <script src="search-tabs-test.js" type="text/javascript"></script>
+        <script src="../../../main/javascript/search-dropdown.js" type="text/javascript"></script>
+        <script src="search-dropdown-test.js" type="text/javascript"></script>
     </body>
 </html>
