@@ -17,50 +17,45 @@
                 <title>medcalendar events</title>
             </head>
             <body>
+                <!-- filter grand rounds events; filtering will miss repeat events (rdate) but this is "decent enough"  -->
                 <!-- pull twice the number of seminars required (3) so seminars.js can hide today's past events and display upcoming ones  -->
                 <xsl:apply-templates select="//vevent[contains(lower-case(summary/text()),'grand round') 
-                                            and f:dateString2DateTime(dtstart/text()) >= current-dateTime()]">
+                                            and f:dateString2DateTime(dtstart/text()) >= current-dateTime()]
+                                            [position() &lt;= 6]">
                     <xsl:sort select="dtstart" order="ascending"/>
-                    <xsl:with-param name="start" select="1"/>
-                    <xsl:with-param name="end" select="6"/>
                 </xsl:apply-templates>
             </body>
         </html>
     </xsl:template>
 
     <xsl:template match="vevent">
-        <xsl:param name="start" />
-        <xsl:param name="end" />
-        <xsl:if test="position() &gt;= $start and position() &lt;= $end">
-    
-            <div class="event seminar">
-                <!--  hide events beyond the third so seminars.js can unhide them if needed -->
-                <xsl:if test="position() > 3">
-                    <xsl:attribute name="style">display:none;</xsl:attribute>
-                </xsl:if>
-                    <div class="date grandrounds-date">
-                            <div class="month">
-                                <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[MNn,3-3]')" />
-                            </div>
-                            <div class="day">
-                                <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[D,2]')" />
-                            </div>
-                        </div>
-                    <div>
-                        <p>
-                            <a title="{concat(summary,' [', 'gran-seminar]')}" href="{url/@uri}">
-                                <xsl:value-of select="summary" />
-                            </a>
-                            <br/>
-                            <span class="time">
-                                <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[h1]:[m01] [Pn,2-2]')" />
-                                <xsl:text> - </xsl:text>
-                                <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtend),'[h1]:[m01] [Pn,2-2]')" />
-                            </span>
-                        </p>
+        <div class="event seminar">
+            <!--  hide events beyond the third so seminars.js can unhide them if needed -->
+            <xsl:if test="position() > 3">
+                <xsl:attribute name="style">display:none;</xsl:attribute>
+            </xsl:if>
+            <div class="date grandrounds-date">
+                    <div class="month">
+                        <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[MNn,3-3]')" />
+                    </div>
+                    <div class="day">
+                        <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[D,2]')" />
                     </div>
                 </div>
-        </xsl:if>
+            <div>
+                <p>
+                    <a title="{concat(summary,' [', 'gran-seminar]')}" href="{url/@uri}">
+                        <xsl:value-of select="summary" />
+                    </a>
+                    <br/>
+                    <span class="time">
+                        <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[h1]:[m01] [Pn,2-2]')" />
+                        <xsl:text> - </xsl:text>
+                        <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtend),'[h1]:[m01] [Pn,2-2]')" />
+                    </span>
+                </p>
+            </div>
+        </div>
     </xsl:template>
     
     <xsl:function name="f:dateString2DateTime">
