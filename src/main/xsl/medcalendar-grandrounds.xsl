@@ -17,25 +17,32 @@
                 <title>medcalendar events</title>
             </head>
             <body>
-                <!-- pull twice the number of GR events required (3) so seminars.js can hide today's past events and display upcoming ones  -->
-                <xsl:apply-templates select="//vevent[f:isUpcomingGrandRound(.)][position() &lt;= 6]">
-                </xsl:apply-templates>
+                <!-- pull twice the number of GR events required (3) so 
+                     seminars.js hides today's past events and displays upcoming ones  -->
+                <xsl:variable name="events">
+                    <xsl:apply-templates select="//vevent[f:isUpcomingGrandRound(.)]"/>
+                </xsl:variable>
+                <xsl:for-each select="$events/h:div[position() &lt;= 6]">
+                    <xsl:sort select="@data-sort" order="ascending"/>
+                    <xsl:copy-of select="."/>
+                </xsl:for-each>
             </body>
         </html>
     </xsl:template>
 
     <xsl:template match="vevent">
-        <div class="event seminar">
+        <xsl:variable name="display-date" select="f:getBestDate(.)"/>
+        <div class="event seminar" data-sort="{$display-date}">
             <!--  hide events beyond the third so seminars.js can unhide them if needed -->
             <xsl:if test="position() > 3">
                 <xsl:attribute name="style">display:none;</xsl:attribute>
             </xsl:if>
             <div class="date grandrounds-date">
                 <div class="month">
-                    <xsl:value-of select="format-date(f:dateString2Date(dtstart),'[MNn,3-3]')" />
+                    <xsl:value-of select="format-date($display-date,'[MNn,3-3]')" />
                 </div>
                 <div class="day">
-                    <xsl:value-of select="format-date(f:dateString2Date(dtstart),'[D,2]')" />
+                    <xsl:value-of select="format-date($display-date,'[D,2]')" />
                 </div>
             </div>
             <div>
@@ -54,12 +61,36 @@
         </div>
     </xsl:template>
 
+    <!--  
+        some events have repeatable date (rdate) elements 
+        examine rdate  elements and return rdate or dtstart
+    -->
+    <xsl:function name="f:getBestDate" as="xsd:date">
+        <xsl:param name="event" as="element()?"/>
+        <xsl:choose>
+            <xsl:when test="count($event/rdate)">
+                <xsl:variable name="closeset-rdate" select="$event/rdate[f:dateString2Date(.) >= current-date()][1]"/>
+                <xsl:choose>
+                    <xsl:when test="f:dateString2Date($closeset-rdate) >= current-date()">
+                        <xsl:value-of select="f:dateString2Date($closeset-rdate)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="f:dateString2Date($event/dtstart)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="f:dateString2Date($event/dtstart)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
     <!-- 
         filtering function: include upcoming events with "grand round" in title/summary
     -->
     <xsl:function name="f:isUpcomingGrandRound" as="xsd:boolean">
         <xsl:param name="event" as="element()?"/>
-        <xsl:value-of select="contains(lower-case($event/summary/text()),'grand round') and f:dateString2Date($event/dtstart) >= current-date()"/>
+        <xsl:value-of select="contains(lower-case($event/summary/text()),'grand round') and f:getBestDate($event) >= current-date()"/>
     </xsl:function>
 
     <!--  parse xsd:date from a string  -->
