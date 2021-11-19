@@ -5,7 +5,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:f="https://lane.stanford.edu/functions"
     version="2.0">
-    
+
     <!--
         LANEWEB-10831: alternative source for grand rounds data
         filter and transform https://medicinecalendars.stanford.edu/ event data 
@@ -17,12 +17,8 @@
                 <title>medcalendar events</title>
             </head>
             <body>
-                <!-- filter grand rounds events; filtering will miss repeat events (rdate) but this is "decent enough"  -->
-                <!-- pull twice the number of seminars required (3) so seminars.js can hide today's past events and display upcoming ones  -->
-                <xsl:apply-templates select="//vevent[contains(lower-case(summary/text()),'grand round') 
-                                            and f:dateString2DateTime(dtstart/text()) >= current-dateTime()]
-                                            [position() &lt;= 6]">
-                    <xsl:sort select="dtstart" order="ascending"/>
+                <!-- pull twice the number of GR events required (3) so seminars.js can hide today's past events and display upcoming ones  -->
+                <xsl:apply-templates select="//vevent[f:isUpcomingGrandRound(.)][position() &lt;= 6]">
                 </xsl:apply-templates>
             </body>
         </html>
@@ -35,13 +31,13 @@
                 <xsl:attribute name="style">display:none;</xsl:attribute>
             </xsl:if>
             <div class="date grandrounds-date">
-                    <div class="month">
-                        <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[MNn,3-3]')" />
-                    </div>
-                    <div class="day">
-                        <xsl:value-of select="format-dateTime(f:dateString2DateTime(dtstart),'[D,2]')" />
-                    </div>
+                <div class="month">
+                    <xsl:value-of select="format-date(f:getBestDate(.),'[MNn,3-3]')" />
                 </div>
+                <div class="day">
+                    <xsl:value-of select="format-date(f:getBestDate(.),'[D,2]')" />
+                </div>
+            </div>
             <div>
                 <p>
                     <a title="{concat(summary,' [', 'gran-seminar]')}" href="{url/@uri}">
@@ -57,12 +53,57 @@
             </div>
         </div>
     </xsl:template>
-    
-    <xsl:function name="f:dateString2DateTime">
+
+    <!--  
+        some events have repeatable date (rdate) elements 
+        examine rdate  elements and return rdate or dtstart
+    -->
+    <xsl:function name="f:getBestDate" as="xsd:date">
+        <xsl:param name="event" as="element()?"/>
+        <xsl:choose>
+            <xsl:when test="count($event/rdate)">
+                <xsl:variable name="closeset-rdate" select="$event/rdate[f:dateString2Date(.) >= current-date()][1]"/>
+                <xsl:choose>
+                    <xsl:when test="f:dateString2Date($closeset-rdate) >= current-date()">
+                        <xsl:value-of select="f:dateString2Date($closeset-rdate)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="f:dateString2Date($event/dtstart)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="f:dateString2Date($event/dtstart)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+    <!-- 
+        filtering function: include upcoming events with "grand round" in title/summary
+    -->
+    <xsl:function name="f:isUpcomingGrandRound" as="xsd:boolean">
+        <xsl:param name="event" as="element()?"/>
+        <xsl:value-of select="contains(lower-case($event/summary/text()),'grand round') and f:getBestDate($event) >= current-date()"/>
+    </xsl:function>
+
+    <!--  parse xsd:date from a string  -->
+    <xsl:function name="f:dateString2Date" as="xsd:date">
         <xsl:param name="dtString"/>
         <xsl:variable name="date">
-            <xsl:value-of select="concat(substring($dtString, 1, 4), '-', substring($dtString, 5, 2), '-', substring($dtString, 7, 2))"/>
+            <xsl:choose>
+                <xsl:when test="string-length($dtString) >= 8">
+                    <xsl:value-of select="concat(substring($dtString, 1, 4), '-', substring($dtString, 5, 2), '-', substring($dtString, 7, 2))"/>
+                </xsl:when>
+                <xsl:otherwise>2000-01-01</xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
+        <xsl:value-of select="xsd:date($date)"/>
+    </xsl:function>
+
+    <!--  parse xsd:dateTime from a string  -->
+    <xsl:function name="f:dateString2DateTime" as="xsd:dateTime">
+        <xsl:param name="dtString"/>
+        <xsl:variable name="date" select="f:dateString2Date($dtString)"/>
         <xsl:variable name="time">
             <xsl:choose>
                 <xsl:when test="string-length($dtString) = 15">
@@ -73,5 +114,5 @@
         </xsl:variable>
         <xsl:value-of select="dateTime(xsd:date($date),xsd:time($time))"/>
     </xsl:function>
-    
+
 </xsl:stylesheet>
