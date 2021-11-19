@@ -32,10 +32,10 @@
             </xsl:if>
             <div class="date grandrounds-date">
                 <div class="month">
-                    <xsl:value-of select="format-date(f:getBestDate(.),'[MNn,3-3]')" />
+                    <xsl:value-of select="format-date(f:dateString2Date(dtstart),'[MNn,3-3]')" />
                 </div>
                 <div class="day">
-                    <xsl:value-of select="format-date(f:getBestDate(.),'[D,2]')" />
+                    <xsl:value-of select="format-date(f:dateString2Date(dtstart),'[D,2]')" />
                 </div>
             </div>
             <div>
@@ -54,36 +54,12 @@
         </div>
     </xsl:template>
 
-    <!--  
-        some events have repeatable date (rdate) elements 
-        examine rdate  elements and return rdate or dtstart
-    -->
-    <xsl:function name="f:getBestDate" as="xsd:date">
-        <xsl:param name="event" as="element()?"/>
-        <xsl:choose>
-            <xsl:when test="count($event/rdate)">
-                <xsl:variable name="closeset-rdate" select="$event/rdate[f:dateString2Date(.) >= current-date()][1]"/>
-                <xsl:choose>
-                    <xsl:when test="f:dateString2Date($closeset-rdate) >= current-date()">
-                        <xsl:value-of select="f:dateString2Date($closeset-rdate)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="f:dateString2Date($event/dtstart)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="f:dateString2Date($event/dtstart)"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:function>
-
     <!-- 
         filtering function: include upcoming events with "grand round" in title/summary
     -->
     <xsl:function name="f:isUpcomingGrandRound" as="xsd:boolean">
         <xsl:param name="event" as="element()?"/>
-        <xsl:value-of select="contains(lower-case($event/summary/text()),'grand round') and f:getBestDate($event) >= current-date()"/>
+        <xsl:value-of select="contains(lower-case($event/summary/text()),'grand round') and f:dateString2Date($event/dtstart) >= current-date()"/>
     </xsl:function>
 
     <!--  parse xsd:date from a string  -->
