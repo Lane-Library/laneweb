@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	 <release date="2021-11-22" version="3.8.15" description="bug fix release">
+            <action date="2021-11-17" dev="ryanmax" issue="LANEWEB-10831" type="fix">
+                Missing grand rounds data on front page
+            </action>
+            <action date="2021-11-18" dev="ryanmax" issue="LANEWEB-10832" type="fix">
+                Improve tracking data
+            </action>
+        </release>
       	 <release date="2021-11-08" version="3.8.14" description="bug fix release">
             <action date="2021-11-04" dev="ryanmax" issue="LANEWEB-10827" type="fix">
                 Get Shareable Link UX Fix
