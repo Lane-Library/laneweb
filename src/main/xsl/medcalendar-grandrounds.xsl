@@ -24,7 +24,14 @@
                 </xsl:variable>
                 <xsl:for-each select="$events/h:div[position() &lt;= 6]">
                     <xsl:sort select="@data-sort" order="ascending"/>
-                    <xsl:copy-of select="."/>
+                    <xsl:copy>
+                     <xsl:copy-of select="attribute::node()"/>
+                    <!--  hide events beyond the third so seminars.js can unhide them if needed -->
+                    <xsl:if test="position() > 3">
+                        <xsl:attribute name="style">display:none;</xsl:attribute>
+                    </xsl:if>
+                     <xsl:copy-of select="node()"/>
+                    </xsl:copy>
                 </xsl:for-each>
             </body>
         </html>
@@ -33,10 +40,6 @@
     <xsl:template match="vevent">
         <xsl:variable name="display-date" select="f:getBestDate(.)"/>
         <div class="event seminar" data-sort="{$display-date}">
-            <!--  hide events beyond the third so seminars.js can unhide them if needed -->
-            <xsl:if test="position() > 3">
-                <xsl:attribute name="style">display:none;</xsl:attribute>
-            </xsl:if>
             <div class="date grandrounds-date">
                 <div class="month">
                     <xsl:value-of select="format-date($display-date,'[MNn,3-3]')" />
