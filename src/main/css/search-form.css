@@ -7,17 +7,17 @@
 	background-position: center 70%;
 	width: 100%;
 	padding-top: 67px;
-	padding-bottom: 60px;
+	min-height: 204px;
 }
 
 .hero-unit-front-page {
     padding-top: 98px;
-    padding-bottom: 95px;
+    min-height: 264px;
 }
 
 .search-form {
 	position: relative;
-	width: 45%;
+	width: 50%;
 	margin: auto;
 }
 
@@ -77,8 +77,13 @@
 }
 
 .search-help {
+	display: block;
 	text-align: center;
 	padding-top: 6px;
+}
+
+.search-pico.search-pico-active ~ .search-help{
+	display: none;
 }
 
 .search-form .fa, .search-form a, .search-form a:hover, .search-form a:visited,
@@ -88,14 +93,12 @@
 }
 
 .search-pico {
-	position: absolute;
 	cursor: default;
 	font-size: 16px;
 	width: 100%;
-	background: #333;
 	opacity: .95;
 	height: auto;
-	padding: 15px 0;
+	padding: 6px 0;
 	z-index: 1;
 	display: none;
 }
@@ -133,7 +136,17 @@
 }
 
 .pico-fields {
-	display: none;
+	display: none;	
+}
+
+.search-pico .pure-g>div:not(:first-child):not(:last-child) {
+    padding: 0 6px;
+}
+.search-pico .pure-g>div:first-child {
+    padding-right: 6px;
+}
+.search-pico .pure-g>div:last-child {
+    padding-left: 6px;
 }
 
 .pico-fields input {
@@ -142,7 +155,6 @@
 	width: 100%;
 	height: 46px;
 	padding-left: 10px;
-	padding-right: 60px;
 	box-sizing: border-box;
 	border: 0;
 }
@@ -153,8 +165,8 @@
 
 .search-form .pico-fields-active {
 	display: block;
-	margin-bottom: 12px;
-	padding: 0 25px;
+	margin-bottom: 6px;
+	padding: 0;
 }
 
 .search-reset {
