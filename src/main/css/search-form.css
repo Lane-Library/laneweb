@@ -108,14 +108,11 @@
 }
 
 .pico-toggle{
-	width: 39%;
+	width: 57%;
     margin: auto;
     display: block;
 }
 
-.pico-fields-active ~ .pico-toggle{
-	width: 75%;	
-}
 
 .pico-toggle span:last-child{
 	float: right;
