@@ -2,6 +2,10 @@
 
     "use strict";
 
+    /**
+     * Hide grand round events after they have occurred
+     * markup from (seminars|medicinecalendars)/grandrounds.xml
+     */
     var seminars = document.querySelectorAll('.seminar');
     if (seminars) {
         var now = new Date(),
