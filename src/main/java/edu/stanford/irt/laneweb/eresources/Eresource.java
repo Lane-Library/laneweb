@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-@SolrDocument(collection="laneSearch")
+@SolrDocument(collection = "laneSearch")
 public class Eresource {
 
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -29,7 +29,7 @@ public class Eresource {
 
     @Field
     private Collection<String> dois;
-    
+
     @Id
     @Field
     private String id;
@@ -76,7 +76,7 @@ public class Eresource {
     public Collection<String> getDois() {
         return this.dois;
     }
-    
+
     public String getId() {
         return this.id;
     }
@@ -171,8 +171,10 @@ public class Eresource {
         } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
             linkType = LinkType.IMPACTFACTOR;
         }
-        this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates, publisher,
-                versionText));
+        Link link = new Link.Builder().setLabel(linkLabel).setType(linkType).setUrl(linkUrl).setLinkText(linkText)
+                .setAdditionalText(additionalText).setHoldingsAndDates(holdingsAndDates).setPublisher(publisher)
+                .setVersionText(versionText).build();
+        this.linksList.add(link);
     }
 
     private void setLinks() {

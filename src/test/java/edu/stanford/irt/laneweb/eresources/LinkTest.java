@@ -12,8 +12,9 @@ public class LinkTest {
 
     @Before
     public void setUp() {
-        this.link = new Link("label", LinkType.NORMAL, "url", "linkText", "additionalText", "holdingsAndDates",
-                "publisher", "versionText");
+        this.link = new Link.Builder().setLabel("label").setType(LinkType.NORMAL).setUrl("url").setLinkText("linkText")
+                .setAdditionalText("additionalText").setHoldingsAndDates("holdingsAndDates").setPublisher("publisher")
+                .setVersionText("versionText").build();
     }
 
     @Test
