@@ -44,6 +44,7 @@ public class EresourceSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException, IOException {
+        int[] itemCount = { 1, 1 };
         expect(this.eresource.getId()).andReturn("2");
         expect(this.eresource.getRecordId()).andReturn("3");
         expect(this.eresource.getRecordType()).andReturn(Resource.RECORD_TYPE);
@@ -57,6 +58,7 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getLinks())
                 .andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
         expect(this.eresource.getDois()).andReturn(Collections.singletonList("doi"));
+        // link 1
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(Resource.LABEL);
         expect(this.link.getUrl()).andReturn(Resource.URL);
@@ -65,6 +67,11 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getPublisher()).andReturn("publisher");
         expect(this.link.getVersionText()).andReturn("version-text");
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
+        expect(this.link.getCallnumber()).andReturn("callnumber");
+        expect(this.link.getItemCount()).andReturn(itemCount);
+        expect(this.link.getLocationName()).andReturn("locationName");
+        expect(this.link.getLocationUrl()).andReturn("locationUrl");
+        // link 2
         expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
         expect(this.link.getLabel()).andReturn("get password");
         expect(this.link.getUrl()).andReturn(Resource.URL);
@@ -73,6 +80,11 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getPublisher()).andReturn("publisher");
         expect(this.link.getVersionText()).andReturn("version-text");
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
+        expect(this.link.getCallnumber()).andReturn("callnumber");
+        expect(this.link.getItemCount()).andReturn(itemCount);
+        expect(this.link.getLocationName()).andReturn("locationName");
+        expect(this.link.getLocationUrl()).andReturn("locationUrl");
+        // link 3
         expect(this.link.getType()).andReturn(LinkType.IMPACTFACTOR);
         expect(this.link.getLabel()).andReturn("impact factor");
         expect(this.link.getUrl()).andReturn(Resource.URL);
@@ -81,6 +93,11 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getPublisher()).andReturn("publisher");
         expect(this.link.getVersionText()).andReturn("version-text");
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
+        expect(this.link.getCallnumber()).andReturn(null);
+        expect(this.link.getItemCount()).andReturn(null);
+        expect(this.link.getLocationName()).andReturn("locationName");
+        expect(this.link.getLocationUrl()).andReturn(null);
+        // link 4
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(null);
         expect(this.link.getUrl()).andReturn(Resource.URL);
@@ -89,6 +106,10 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getPublisher()).andReturn("publisher");
         expect(this.link.getVersionText()).andReturn("version-text");
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
+        expect(this.link.getCallnumber()).andReturn("callnumber");
+        expect(this.link.getItemCount()).andReturn(itemCount);
+        expect(this.link.getLocationName()).andReturn("locationName");
+        expect(this.link.getLocationUrl()).andReturn("locationUrl");
         replay(this.eresource, this.link);
         this.xmlConsumer.startDocument();
         this.strategy.toSAX(this.eresource, this.xmlConsumer);
