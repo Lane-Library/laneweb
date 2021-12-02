@@ -4,14 +4,13 @@
       <title>search results</title>
    </head>
    <body>
-      <div class="no-bookmarking">
+      <div class="s-tb no-bookmarking">
          <div class="pure-g">
             <div class="pure-u-7-24"> all 2 results</div>
             <div class="pure-u-7-24"/>
             <div class="pure-u-10-24"/>
          </div>
       </div>
-      <h4 class="eresources"> </h4>
       <ul class="lwSearchResults">
          <li class="resource" data-sid="PMID:25195623">
             <span class="primaryType">Article</span>

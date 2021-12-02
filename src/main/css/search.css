@@ -1,3 +1,12 @@
+.search-results .content {
+    margin-top: 0;
+}
+
+.search-results .pure-u-3-4 .module {
+    margin-top: 0;
+    background-color: unset;
+}
+
 .tooltips, .popin>div, #search-content-counts, #showPubMedStrategies {
     display: none;
 }
@@ -17,6 +26,7 @@
 
 .popin {
     height: 16px;
+    margin-bottom: 20px;
 }
 
 .popInLabel {
@@ -28,13 +38,9 @@
     padding-right: 5px;
 }
 
-#searchResults {
-    padding-top: 10px;
-}
-
 .resource .bookcover {
     float: right;
-    padding-left: 30px;
+    padding: 10px 30px;
 }
 
 .resource .bookcover i {

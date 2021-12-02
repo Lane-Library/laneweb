@@ -43,12 +43,12 @@
     padding-bottom: 4px;
 }
 
-.solrSearch .eresources{
-    margin-top: 0;
-}
-
 .content .resource {
-    padding: 12px 0;
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.24);
+    border-radius: 4px;
+    background-color: #fff;
 }
 
 .resource:after {
