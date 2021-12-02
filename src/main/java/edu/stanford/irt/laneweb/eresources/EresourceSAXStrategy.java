@@ -57,6 +57,14 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
         maybeCreateElement(xmlConsumer, "holdings-dates", link.getHoldingsAndDates());
         maybeCreateElement(xmlConsumer, "publisher", link.getPublisher());
         maybeCreateElement(xmlConsumer, "version-text", link.getVersionText());
+        maybeCreateElement(xmlConsumer, "callnumber", link.getCallnumber());
+        maybeCreateElement(xmlConsumer, "locationName", link.getLocationName());
+        maybeCreateElement(xmlConsumer, "locationUrl", link.getLocationUrl());
+        int[] itemCount = link.getItemCount();
+        if (null != itemCount) {
+            maybeCreateElement(xmlConsumer, "total", Integer.toString(itemCount[0]));
+            maybeCreateElement(xmlConsumer, "available", Integer.toString(itemCount[1]));
+        }
         XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.LINK);
     }
 

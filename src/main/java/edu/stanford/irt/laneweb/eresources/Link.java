@@ -6,9 +6,11 @@ public class Link {
 
         private String additionalText;
 
-        private String callNumber;
+        private String callnumber;
 
         private String holdingsAndDates;
+
+        private int[] itemCount;
 
         private String label;
 
@@ -31,13 +33,18 @@ public class Link {
             return this;
         }
 
-        public Builder setCallNumber(final String callNumber) {
-            this.callNumber = callNumber;
+        public Builder setCallnumber(final String callnumber) {
+            this.callnumber = callnumber;
             return this;
         }
 
         public Builder setHoldingsAndDates(final String holdingsAndDates) {
             this.holdingsAndDates = holdingsAndDates;
+            return this;
+        }
+
+        public Builder setItemCount(final int[] itemCount) {
+            this.itemCount = itemCount;
             return this;
         }
 
@@ -88,9 +95,11 @@ public class Link {
 
     private String additionalText;
 
-    private String callNumber;
+    private String callnumber;
 
     private String holdingsAndDates;
+
+    private int[] itemCount;
 
     private String label;
 
@@ -110,7 +119,7 @@ public class Link {
 
     private Link(final Builder builder) {
         this.additionalText = builder.additionalText;
-        this.callNumber = builder.callNumber;
+        this.callnumber = builder.callnumber;
         this.holdingsAndDates = builder.holdingsAndDates;
         this.label = builder.label;
         this.linkText = builder.linkText;
@@ -120,18 +129,23 @@ public class Link {
         this.type = builder.type;
         this.url = builder.url;
         this.versionText = builder.versionText;
+        this.itemCount = builder.itemCount;
     }
 
     public String getAdditionalText() {
         return this.additionalText;
     }
 
-    public String getCallNumber() {
-        return this.callNumber;
+    public String getCallnumber() {
+        return this.callnumber;
     }
 
     public String getHoldingsAndDates() {
         return this.holdingsAndDates;
+    }
+
+    public int[] getItemCount() {
+        return this.itemCount;
     }
 
     public String getLabel() {

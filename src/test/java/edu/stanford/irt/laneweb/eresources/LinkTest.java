@@ -12,9 +12,11 @@ public class LinkTest {
 
     @Before
     public void setUp() {
+        int[] itemCount = { 2, 1 };
         this.link = new Link.Builder().setLabel("label").setType(LinkType.NORMAL).setUrl("url").setLinkText("linkText")
                 .setAdditionalText("additionalText").setHoldingsAndDates("holdingsAndDates").setPublisher("publisher")
-                .setVersionText("versionText").build();
+                .setVersionText("versionText").setCallnumber("callnumber").setItemCount(itemCount)
+                .setLocationName("locationName").setLocationUrl("locationUrl").build();
     }
 
     @Test
@@ -23,8 +25,19 @@ public class LinkTest {
     }
 
     @Test
+    public void testGetCallnumber() {
+        assertEquals("callnumber", this.link.getCallnumber());
+    }
+
+    @Test
     public void testGetHoldingsAndDates() {
         assertEquals("holdingsAndDates", this.link.getHoldingsAndDates());
+    }
+
+    @Test
+    public void testGetItemCount() {
+        assertEquals(2, this.link.getItemCount()[0]);
+        assertEquals(1, this.link.getItemCount()[1]);
     }
 
     @Test
@@ -35,6 +48,16 @@ public class LinkTest {
     @Test
     public void testGetLinkText() {
         assertEquals("linkText", this.link.getLinkText());
+    }
+
+    @Test
+    public void testGetLocationName() {
+        assertEquals("locationName", this.link.getLocationName());
+    }
+
+    @Test
+    public void testGetLocationUrl() {
+        assertEquals("locationUrl", this.link.getLocationUrl());
     }
 
     @Test

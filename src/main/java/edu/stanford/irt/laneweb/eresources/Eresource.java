@@ -165,6 +165,14 @@ public class Eresource {
         String versionText = (String) versionMap.get("additionalText");
         String holdingsAndDates = (String) versionMap.get("holdingsAndDates");
         String publisher = (String) versionMap.get("publisher");
+        String callnumber = (String) versionMap.get("callnumber");
+        String locationName = (String) versionMap.get("locationName");
+        String locationUrl = (String) versionMap.get("locationUrl");
+        List<Integer> itemCountArray = (List<Integer>) versionMap.get("itemCount");
+        int[] itemCount = null;
+        if (null != itemCountArray) {
+            itemCount = itemCountArray.stream().mapToInt(Integer::intValue).toArray();
+        }
         LinkType linkType = LinkType.NORMAL;
         if (versionMap.get("hasGetPasswordLink") != null && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
             linkType = LinkType.GETPASSWORD;
@@ -173,7 +181,8 @@ public class Eresource {
         }
         Link link = new Link.Builder().setLabel(linkLabel).setType(linkType).setUrl(linkUrl).setLinkText(linkText)
                 .setAdditionalText(additionalText).setHoldingsAndDates(holdingsAndDates).setPublisher(publisher)
-                .setVersionText(versionText).build();
+                .setVersionText(versionText).setCallnumber(callnumber).setLocationName(locationName)
+                .setLocationUrl(locationUrl).setItemCount(itemCount).build();
         this.linksList.add(link);
     }
 
