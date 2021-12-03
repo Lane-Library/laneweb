@@ -4,7 +4,9 @@ package edu.stanford.irt.laneweb.eresources;
  * An enum of the different types of Links
  */
 public enum LinkType {
-    GETPASSWORD("getPassword"), IMPACTFACTOR("impactFactor"), NORMAL("normal");
+
+    LANE_DIGITAL("lane-digital"), LANE_GETPASSWORD("lane-getPassword"), LANE_IMPACTFACTOR(
+            "lane-impactFactor"), LANE_PRINT("lane-print"), NORMAL("normal"), SUL_PRINT("sul-print");
 
     private String type;
 

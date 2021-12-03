@@ -22,7 +22,7 @@
       <total>1</total>
       <available>1</available>
    </link>
-   <link type="getPassword">
+   <link type="lane-getPassword">
       <label>get password</label>
       <link-text>link-text</link-text>
       <url>url</url>
@@ -36,7 +36,7 @@
       <total>1</total>
       <available>1</available>
    </link>
-   <link type="impactFactor">
+   <link type="lane-impactFactor">
       <label>impact factor</label>
       <link-text>link-text</link-text>
       <url>url</url>

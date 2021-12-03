@@ -72,7 +72,7 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getLocationName()).andReturn("locationName");
         expect(this.link.getLocationUrl()).andReturn("locationUrl");
         // link 2
-        expect(this.link.getType()).andReturn(LinkType.GETPASSWORD);
+        expect(this.link.getType()).andReturn(LinkType.LANE_GETPASSWORD);
         expect(this.link.getLabel()).andReturn("get password");
         expect(this.link.getUrl()).andReturn(Resource.URL);
         expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
@@ -85,7 +85,7 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getLocationName()).andReturn("locationName");
         expect(this.link.getLocationUrl()).andReturn("locationUrl");
         // link 3
-        expect(this.link.getType()).andReturn(LinkType.IMPACTFACTOR);
+        expect(this.link.getType()).andReturn(LinkType.LANE_IMPACTFACTOR);
         expect(this.link.getLabel()).andReturn("impact factor");
         expect(this.link.getUrl()).andReturn(Resource.URL);
         expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);

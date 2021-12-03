@@ -175,9 +175,16 @@ public class Eresource {
         }
         LinkType linkType = LinkType.NORMAL;
         if (versionMap.get("hasGetPasswordLink") != null && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
-            linkType = LinkType.GETPASSWORD;
+            linkType = LinkType.LANE_GETPASSWORD;
         } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
-            linkType = LinkType.IMPACTFACTOR;
+            linkType = LinkType.LANE_IMPACTFACTOR;
+        } else if (locationName != null && locationName.toLowerCase().contains("digital")) {
+            linkType = LinkType.LANE_DIGITAL;
+        } else if ("sul".equals(this.recordType) && linkUrl != null
+                && linkUrl.contains("//searchworks.stanford.edu/view")) {
+            linkType = LinkType.SUL_PRINT;
+        } else if (linkUrl != null && linkUrl.contains("//lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID")) {
+            linkType = LinkType.LANE_PRINT;
         }
         Link link = new Link.Builder().setLabel(linkLabel).setType(linkType).setUrl(linkUrl).setLinkText(linkText)
                 .setAdditionalText(additionalText).setHoldingsAndDates(holdingsAndDates).setPublisher(publisher)

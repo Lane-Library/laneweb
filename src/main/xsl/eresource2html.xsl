@@ -28,15 +28,15 @@
                 or (contains($browse-query,'Journal') and contains(s:primaryType, 'Journal'))">
                 <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
             </xsl:if>
-            <xsl:apply-templates select="s:link[not(starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or @type = 'impactFactor') or position() = 1]"/>
+            <xsl:apply-templates select="s:link[not(@type = 'lane-print' or @type = 'lane-impactFactor') or position() = 1]"/>
             <xsl:apply-templates select="s:pub-text"/>
-            <xsl:apply-templates select="s:link[position() > 1 and starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=')]"/>
+            <xsl:apply-templates select="s:link[position() > 1 and @type = 'lane-print']"/>
             <div class="resultInfo">
                 <xsl:if test="s:description">
                     <span class="descriptionTrigger eresource no-bookmarking"/>
                 </xsl:if>
                 <xsl:if test="s:recordType = 'bib'">
-                    <xsl:apply-templates select="s:link[@type = 'impactFactor']"/>
+                    <xsl:apply-templates select="s:link[@type = 'lane-impactFactor']"/>
                 </xsl:if>
             </div>
             <xsl:apply-templates select="s:description"/>
@@ -74,7 +74,7 @@
             </a>
         </div>
         <xsl:apply-templates select="../s:pub-author"/>
-        <xsl:if test="(s:link-text and 'null' != s:link-text) or @type = 'getPassword' or s:version-text or s:publisher">
+        <xsl:if test="(s:link-text and 'null' != s:link-text) or @type = 'lane-getPassword' or s:version-text or s:publisher">
             <div class="resultInfo">
                 <xsl:call-template name="build-link-label">
                     <xsl:with-param name="link" select="."/>
@@ -88,7 +88,7 @@
                         </a>
                     </span>
                 </xsl:if>
-                <xsl:if test="@type = 'getPassword'">
+                <xsl:if test="@type = 'lane-getPassword'">
                     <span>
                         <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
                     </span>
@@ -122,7 +122,7 @@
                     </a>
                 </span>
             </xsl:if>
-            <xsl:if test="@type = 'getPassword'">
+            <xsl:if test="@type = 'lane-getPassword'">
                 <span>
                     <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
                 </span>
@@ -140,7 +140,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="s:link[@type = 'impactFactor' and position() > 1]">
+    <xsl:template match="s:link[@type = 'lane-impactFactor' and position() > 1]">
             <span><a href="{s:url}">Impact Factor</a></span>
     </xsl:template>
 
@@ -181,7 +181,7 @@
         <xsl:if test="$showLabel = 'true'">
             <span>
                 <xsl:choose>
-                    <xsl:when test="starts-with(s:url,'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=') or (contains(s:url,'//searchworks.stanford.edu/view') and ../s:recordType!= 'sul')">Print</xsl:when>
+                    <xsl:when test="@type = 'lane-print' or @type = 'sul-print'">Print</xsl:when>
                     <xsl:when test="$primaryType = s:label">
                         <a href="{s:url}" title="{s:label}: {../s:title}"><xsl:value-of select="s:label"/></a>
                     </xsl:when>
