@@ -34,13 +34,6 @@
     </map:pipeline>
     <map:pipeline type="caching">
         <map:parameter name="mime-type" value="text/html; charset=utf8"/>
-        <map:match type="regexp" pattern="browse/query/((.+)?Software, Installed(.+)?).html">
-            <map:generate type="er-browse-all-html">
-                <map:parameter name="query" value="{1}"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/software-installed-eresource2html.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match type="wildcard" pattern="a2z-browse/base-path/*/query/*.html">
             <map:generate type="er-a2z-browse-html">
                 <map:parameter name="base-path" value="{1}"/>
