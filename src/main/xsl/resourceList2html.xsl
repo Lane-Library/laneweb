@@ -57,7 +57,7 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="count(@size) &gt; 0">
+                <xsl:if test="number(@size) &gt; 0">
                     <div class="s-tb no-bookmarking"><div class="pure-g">
                       <div class="pure-u-7-24">
                         <xsl:call-template name="resultsText"/>
