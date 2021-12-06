@@ -86,11 +86,7 @@ public class BrowseEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @Override
     protected String getHeading() {
-        String heading = null;
-        if (this.query.indexOf("Software, Installed") == -1) {
-            heading = this.alpha.toUpperCase(Locale.US);
-        }
-        return heading;
+        return this.alpha.toUpperCase(Locale.US);
     }
 
     @Override
