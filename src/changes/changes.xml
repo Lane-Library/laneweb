@@ -7,6 +7,26 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	 <release date="2021-12-06" version="3.8.16" description="bug fix release">
+            <action date="2021-11-24" dev="ryanmax" issue="LANEWEB-10836" type="fix">
+                Grand rounds event ordering
+            </action>
+            <action date="2021-10-12" dev="alainb" issue="LANEWEB-10819" type="update">
+       			Change tabbed search options to dropdown         
+            </action>
+            <action date="2021-10-14" dev="ryanmax" issue="LANEWEB-10821" type="update">
+                Update Lane Web Footer
+            </action>
+            <action date="2021-11-04" dev="ryanmax" issue="LANEWEB-10828" type="update">
+                new hero image
+            </action>
+            <action date="2021-11-23" dev="alainb" issue="LANEWEB-10838" type="update">
+                Removing the gray box under Clinical Search
+            </action>
+            <action date="2021-12-04" dev="ryanmax" issue="LANEWEB-10841" type="update">
+                Delete code associated with old Software at Lane page
+            </action>
+         </release>
       	 <release date="2021-11-22" version="3.8.15" description="bug fix release">
             <action date="2021-11-17" dev="ryanmax" issue="LANEWEB-10831" type="fix">
                 Missing grand rounds data on front page
