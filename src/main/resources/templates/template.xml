@@ -10,25 +10,25 @@
    </head>
 	<body>
 		<section class="header">
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/header.html">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/navigation.html">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/search-container.html">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
 		</section>
 		<section class="content">
 			<div class="content centered">
-				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/announcement.html">
+				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/template/announcement.html">
 					<xi:fallback></xi:fallback>
 				</xi:include>
                 <?laneweb content?>
 			</div>
 		</section>
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/footer.html">
+		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
 			<xi:fallback></xi:fallback>
 		</xi:include>
 		<div class="search-indicator">
