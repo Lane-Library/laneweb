@@ -409,7 +409,7 @@
         <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: updated link icon instead? -->
-                <span class="hldgsHeader available"><i class="fa fa-link"></i> Digital Access </span>
+                <span class="hldgsHeader available"><i class="fa fa-link"></i> Digital Access &#160;</span>
                 <span>
                     <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
                         <xsl:value-of select="concat($links[1]/s:publisher, ' ', $links[1]/s:link-text)"/>
@@ -435,7 +435,7 @@
         <xsl:if test="count($links) > 1">
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: updated link icon instead? -->
-                <span class="hldgsHeader available"><i class="fa fa-link"></i> Digital Access </span>
+                <span class="hldgsHeader available"><i class="fa fa-link"></i> Digital Access &#160;</span>
                 <span class="hldgsTrigger"/>
                 <table class="hide-empty-columns">
                     <thead>
