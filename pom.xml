@@ -538,6 +538,8 @@
                                 <include>course-reserves-min.js</include>
                                 <include>permalink-toggle-min.js</include>
                                 <include>validation-min.js</include>
+                                <include>holdings-toggle-min.js</include>
+                                <include>table-hide-empty-columns-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
