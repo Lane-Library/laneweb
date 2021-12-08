@@ -207,6 +207,13 @@ li.active .description {
     color: #8b8989;
 }
 
+.hldgsContainer th {
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 50px;
+}
+
 .hldgsContainer th, .hldgsContainer th:last-child {
     border: 1px solid #d2d2d2;
     border-left: unset;
