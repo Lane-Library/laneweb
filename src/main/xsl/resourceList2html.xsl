@@ -175,8 +175,8 @@
                 <xsl:when test="s:recordType = 'bib'">
                     <xsl:apply-templates select="s:pub-text"/>
                     <xsl:copy-of select="f:descriptionTrigger(.)"/>
-                    <xsl:copy-of select="f:digitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
-                    <xsl:copy-of select="f:printLinks(s:link[@type = 'lane-print'], .)"/>
+                    <xsl:copy-of select="f:handleLaneDigitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
+                    <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="s:link[position() = 1]"/>
@@ -404,7 +404,7 @@
         </div>
     </xsl:function>
 
-    <xsl:function name="f:digitalLinks">
+    <xsl:function name="f:handleLaneDigitalLinks">
         <xsl:param name="links"/>
         <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
@@ -485,7 +485,7 @@
         </xsl:if>
     </xsl:function>
 
-    <xsl:function name="f:printLinks">
+    <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links"/>
         <xsl:param name="eresource"/>
         <xsl:if test="count($links) > 0">
