@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/libguide-slide.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
@@ -59,10 +60,10 @@
     </head>
     <body>
     <section class="header">
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/template/header.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
          <xi:fallback></xi:fallback>
       </xi:include>
-      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/template/navigation.html">
+      <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
          <xi:fallback></xi:fallback>
       </xi:include>
   	<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
@@ -71,7 +72,7 @@
       </section>
       <section class="content">
       <div class="content centered">
-         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/template/announcement.html">
+         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/announcement.html">
             <xi:fallback></xi:fallback>
          </xi:include>
                 <?laneweb content?>
