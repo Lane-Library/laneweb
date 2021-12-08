@@ -16,12 +16,13 @@
 }
 
 .primaryLink {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .primaryType {
     text-transform: uppercase;
     color: #999;
+    display: list-item;
 }
 
 .popin {
