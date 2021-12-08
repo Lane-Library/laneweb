@@ -146,7 +146,6 @@ li.active .description {
 .sourceInfo span {
     margin-left: 30px;
     display: inline-block;
-    vertical-align: top;
 }
 
 .sourceInfo span:first-child {
@@ -156,7 +155,6 @@ li.active .description {
 /* absolute positioning so it doesn't move when shareable link copied */
 .browzineDirect{
     position: absolute;
-    top: 0px;
     left: 355px;    
 }
 
@@ -174,18 +172,11 @@ li.active .description {
 }
 
 @media ( max-width : 812px) {
-    .sourceInfo span:first-child, .sourceInfo span.permalink {
-        display: block;
-        
-    }
-    .sourceInfo span{
+    .sourceInfo span {
         margin-left: 0px;
     } 
     .sourceInfo span.permalink {
-        padding-left: 0px;
-    }
-    .sourceInfo span.requestIt{
-        margin-left: 6px;
+        display: inline;
     }
     .browzineDirect{
         position: static;
@@ -194,8 +185,8 @@ li.active .description {
 
 /* begin print holdings */
 
-.lwSearchResults {
-    line-height: 200%;   
+.lwSearchResults div {
+    padding-top: 10px;   
 }
 
 .hldgsContainer table {
@@ -232,10 +223,19 @@ li.active .description {
     border-right: unset;
     border-bottom: 1px solid #d0d8da;
     padding-right: 50px;
+    max-width: 350px;
 }
 
-.hldgsContainer td span {
+.hldgsContainer td:last-child {
     padding-right: 10px;
+}
+
+.hldgsContainer td span, .getPassword {
+    padding-right: 10px;
+}
+
+.versionText {
+    opacity: 0.75;
 }
 
 .requestIt {
@@ -275,7 +275,8 @@ li.active .description {
 
 @media ( max-width : 812px) {
     .resource .bookcover {
-        padding: 2px;
+        padding: 5px 10px 0 0;
+        float: left;
     }
     .requestIt {
         padding-left: 0;
@@ -286,9 +287,6 @@ li.active .description {
         width: 100%;
     }
     .hldgsTrigger {
-        display: block;
-        width: 80px;
-        margin-left: 0;
+        float: right;
     }
 }
-

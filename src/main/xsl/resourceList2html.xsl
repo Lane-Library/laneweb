@@ -417,7 +417,7 @@
                 </span>
             </div>
             <xsl:if test="$links[1]/@type = 'lane-getPassword'">
-                <span>
+                <span class="getPassword">
                     <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
                 </span>
             </xsl:if>
@@ -427,7 +427,7 @@
                 </span>
             </xsl:if>
             <xsl:if test="$links[1]/s:additional-text">
-                <span>
+                <span class="additionalText">
                     <xsl:value-of select="$links[1]/s:additional-text" />
                 </span>
             </xsl:if>
@@ -462,7 +462,7 @@
                                         </a>
                                     </span>
                                     <xsl:if test="@type = 'lane-getPassword'">
-                                        <span>
+                                        <span class="getPassword">
                                             <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
                                         </span>
                                     </xsl:if>
@@ -472,7 +472,7 @@
                                         </span>
                                     </xsl:if>
                                     <xsl:if test="s:additional-text">
-                                        <span>
+                                        <span class="additionalText">
                                             <xsl:value-of select="s:additional-text" />
                                         </span>
                                     </xsl:if>
