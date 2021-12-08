@@ -59,7 +59,6 @@
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 50000,'0'),' TO *]')">Last 5 Years</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 100000,'0'),' TO *]')">Last 10 Years</xsl:when>
                 <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>
-                <xsl:when test="../../string[. = 'type'] and contains(value,'Software, Installed')"><xsl:value-of select="concat(value,' at Lane')"/></xsl:when>
                 <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Digital')">Digital</xsl:when>
                 <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Print')">Print</xsl:when>
                 <!-- TODO: testing for PMC indexing; remove if RM/Thea decides not to use PMC records -->

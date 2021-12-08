@@ -17,7 +17,7 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     },
     
     "test clinical search tab activated": function() {
-        L.fire("searchTabs:change", {newVal: {source:"clinical-all"}});
+        L.fire("searchDropdown:change", {newVal: {source:"clinical-all"}});
         Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
         Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
@@ -26,7 +26,7 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     "test not clinical search tab activated": function() {
         this.on.classList.add("pico-on-active");
         this.toggle.classList.add("pico-toggle-active");
-        L.fire("searchTabs:change", {newVal: {source:"foo"}});
+        L.fire("searchDropdown:change", {newVal: {source:"foo"}});
         Y.Assert.areEqual("pico-on", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
         Y.Assert.areEqual("pico-toggle", this.toggle.className);

@@ -1,16 +1,19 @@
 html {
-    background-color: #f0f4f5;
-    min-width: 1089px;
-    scroll-behavior: smooth;
+	background-color: #f0f4f5;
+	scroll-behavior: smooth;
+}
+
+section.header, section.content {
+	min-width: 1089px;
 }
 
 .centered {
-    position: relative;
-    margin: 0 5%;
+	position: relative;
+	margin: 0 5%;
 }
 
 .content {
-    color: #333333;
-    position: relative;
-    margin-top: 30px;
+	color: #333333;
+	position: relative;
+	margin-top: 30px;
 }

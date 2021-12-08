@@ -9,7 +9,7 @@ if (document.querySelector(".pico-toggle"))  {
         PICO_ON_ACTIVE = PICO_ON + ACTIVE,
         PICO_OFF = "pico-off",
         PICO_OFF_ACTIVE = PICO_OFF + ACTIVE,
-        PICO_TOGGLE = "pico-toggle",
+        PICO_TOGGLE = "search-pico",
         PICO_TOGGLE_ACTIVE = PICO_TOGGLE + ACTIVE,
 
         picoView = function(toggle) {
@@ -82,7 +82,7 @@ if (document.querySelector(".pico-toggle"))  {
 
             L.on("search:activeChange", controller.activeChange);
 
-            L.on("searchTabs:change", controller.tabChange);
+            L.on("searchDropdown:change", controller.tabChange);
 
             L.addEventTarget(controller, {
                 prefix: "picoToggle",

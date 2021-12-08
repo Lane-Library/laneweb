@@ -7,7 +7,7 @@
         <version>94</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.8.16-SNAPSHOT</version>
+    <version>3.8.17-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -442,7 +442,6 @@
                                 <include>nav-min.css</include>
                                 <include>lists-min.css</include>
                                 <include>anchors-min.css</include>
-                                <include>som-footer-min.css</include>
                                 <include>footer-min.css</include>
                                 <include>headings-min.css</include>
                                 <include>module-min.css</include>
@@ -499,7 +498,7 @@
                                 <include>suggest-min.js</include>
                                 <include>search-min.js</include>
                                 <include>search-reset-min.js</include>
-                                <include>search-tabs-min.js</include>
+                                <include>search-dropdown-min.js</include>
                                 <include>search-placeholder-min.js</include>
                                 <include>search-help-min.js</include>
                                 <include>search-suggest-min.js</include>
@@ -549,6 +548,7 @@
                                 <include>../reset-min.css</include>
                                 <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
+                                <include>../footer-min.css</include>
                                 <include>../back-to-top-min.css</include>
                                 <include>../responsive-min.css</include>
                                 <include>history-responsive-min.css</include>

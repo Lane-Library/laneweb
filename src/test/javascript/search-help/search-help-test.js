@@ -8,8 +8,8 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         name: "Search Help TestCase",
 
-        "test searchTabs:change": function() {
-            L.fire("searchTabs:change", {newVal:{source:"foo",foo:{help:"new href"}}});
+        "test searchDropdown:change": function() {
+            L.fire("searchDropdown:change", {newVal:{source:"foo",foo:{help:"new href"}}});
             Y.Assert.areEqual("new href", document.querySelector(".search-help").getAttribute("href"));
         }
 

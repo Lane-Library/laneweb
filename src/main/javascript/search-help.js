@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var helpNode = document.querySelector(".search-help"),
+    var helpNode = document.querySelector(".search-help a"),
 
         view = function() {
 
@@ -25,6 +25,6 @@
 
         }();
 
-    L.on("searchTabs:change", controller.change);
+    L.on("searchDropdown:change", controller.change);
 
 })();

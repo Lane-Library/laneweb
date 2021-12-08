@@ -54,7 +54,7 @@
         controller.addTarget(L);
 
         L.on("search:activeChange", controller.activeChange);
-        L.on("searchTabs:change", controller.tabChange);
+        L.on("searchDropdown:change", controller.tabChange);
         L.on("picoToggle:change", controller.toggleChange);
 
 })();

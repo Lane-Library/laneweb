@@ -2,10 +2,8 @@
 
     "use strict";
 
-    // create the backToTop node
-    var template = document.createElement("div"),
-        innerHTML = "<a class=\"back-to-top\" title=\"scroll back to top\"><i class=\"fa fa-chevron-up\"></i></a>",
-        backToTop,
+    // backToTop node should be present in footer
+    var backToTop = document.querySelector('.back-to-top'),
 
         /**
          * @method fadeIn display the backToTop node
@@ -44,13 +42,7 @@
         }
     });
 
-    template.innerHTML = innerHTML;
-    backToTop = template.firstChild;
-
     // call the scrollToTop function when backToTop clicked
     backToTop.addEventListener("click", scrollToTop);
-
-    // append the backToTop node
-    document.body.appendChild(backToTop);
 
 })();
