@@ -139,13 +139,8 @@
                 <xsl:apply-templates select="s:pub-text"/>
             </xsl:if>
 
-            <div class="resultInfo">
-                <xsl:if test="s:description">
-                    <span class="descriptionTrigger searchContent no-bookmarking"/>
-                        </xsl:if>
-                        <xsl:apply-templates select="s:contentId"/>
-            </div>
-            <xsl:apply-templates select="s:description"/>
+            <xsl:copy-of select="f:descriptionTrigger(.)"/>
+
             <div class="sourceInfo">
                 <span>
                     <xsl:text>Source: </xsl:text>
@@ -160,39 +155,8 @@
         </li>
     </xsl:template>
 
-    <!-- transforms eresource result node into displayable (all but Lane Catalog records) -->
-    <xsl:template match="s:result[@type='eresource' and not(s:recordType = 'bib')]">
-        <li class="resource" data-sid="{s:id}">
-            <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>
-            <span class="primaryType">
-                <xsl:apply-templates select="s:primaryType"/>
-            </span>
-            <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
-                <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
-            </xsl:if>
-            <xsl:if test="s:primaryType = 'Article'">
-                <div class="bookcover"><i class="fa fa-file-text-o fa-flip-horizontal"></i></div>
-            </xsl:if>
-            <xsl:apply-templates select="s:link[position() = 1]"/>
-            <xsl:apply-templates select="s:pub-text"/>
-            <xsl:apply-templates select="s:link[position() > 1]"/>
-            <div class="resultInfo">
-                <xsl:choose>
-                    <xsl:when test="s:description and s:recordType = 'pubmed'">
-                        <span class="descriptionTrigger searchContent no-bookmarking"/>
-                    </xsl:when>
-                    <xsl:when test="s:description">
-                        <span class="descriptionTrigger eresource no-bookmarking"/>
-                    </xsl:when>
-                </xsl:choose>
-            </div>
-            <xsl:apply-templates select="s:description"/>
-            <xsl:copy-of select="f:build-source-info(.)"/>
-        </li>
-    </xsl:template>
-
     <!-- transforms eresource bib result node into displayable -->
-    <xsl:template match="s:result[@type='eresource' and s:recordType = 'bib']">
+    <xsl:template match="s:result[@type='eresource']">
         <li class="resource" data-sid="{s:id}">
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>
             <span class="primaryType">
@@ -206,20 +170,21 @@
             </xsl:if>
             <xsl:copy-of select="f:primaryLink(s:link[1])"/>
             <xsl:apply-templates select="s:pub-author"/>
-            <xsl:apply-templates select="s:pub-text"/>
-            <div class="resultInfo">
-                <xsl:choose>
-                    <xsl:when test="s:description and s:recordType = 'pubmed'">
-                        <span class="descriptionTrigger searchContent no-bookmarking"/>
-                    </xsl:when>
-                    <xsl:when test="s:description">
-                        <span class="descriptionTrigger eresource no-bookmarking"/>
-                    </xsl:when>
-                </xsl:choose>
-            </div>
-            <xsl:apply-templates select="s:description"/>
-            <xsl:copy-of select="f:digitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
-            <xsl:copy-of select="f:printLinks(s:link[@type = 'lane-print'], .)"/>
+            <xsl:choose>
+                <!-- Lane records get different link processing/order -->
+                <xsl:when test="s:recordType = 'bib'">
+                    <xsl:apply-templates select="s:pub-text"/>
+                    <xsl:copy-of select="f:descriptionTrigger(.)"/>
+                    <xsl:copy-of select="f:digitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
+                    <xsl:copy-of select="f:printLinks(s:link[@type = 'lane-print'], .)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="s:link[position() = 1]"/>
+                    <xsl:apply-templates select="s:pub-text"/>
+                    <xsl:apply-templates select="s:link[position() > 1]"/>
+                    <xsl:copy-of select="f:descriptionTrigger(.)"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:copy-of select="f:build-source-info(.)"/>
         </li>
     </xsl:template>
@@ -273,15 +238,10 @@
         <br/>
     </xsl:template>
 
-    <xsl:template match="s:link[1]">
+    <!-- used for links in non-Lane records (recordType != 'bib'); Lane records use functions -->
+    <xsl:template match="s:link">
         <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
-        <div>
-            <a class="primaryLink" href="{s:url}" title="{../s:title}">
-                <xsl:apply-templates select="../s:title" />
-            </a>
-        </div>
-        <xsl:apply-templates select="../s:pub-author"/>
-        <xsl:if test="(s:link-text and 'null' != s:link-text) or s:version-text or s:publisher">
+        <xsl:if test="(position() > 1 or (s:link-text and 'null' != s:link-text) or s:version-text or s:publisher)">
             <div class="resultInfo">
                 <xsl:copy-of select="f:build-link-label(.)"/>
                 <xsl:if test="$simple-primary-type != string(s:label)">
@@ -303,30 +263,6 @@
                 </xsl:if>
             </div>
         </xsl:if>
-    </xsl:template>
-
-    <xsl:template match="s:link">
-        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
-        <div class="resultInfo">
-            <xsl:copy-of select="f:build-link-label(.)"/>
-            <xsl:if test="$simple-primary-type != string(s:label)">
-                <span>
-                    <a href="{s:url}" title="{s:label}">
-                        <xsl:value-of select="s:link-text"/>
-                    </a>
-                </span>
-            </xsl:if>
-            <xsl:if test="s:version-text">
-                <span class="versionText">
-                    <xsl:value-of select="s:version-text" />
-                </span>
-            </xsl:if>
-            <xsl:if test="s:additional-text">
-                <span>
-                    <xsl:value-of select="s:additional-text" />
-                </span>
-            </xsl:if>
-        </div>
     </xsl:template>
 
     <xsl:template match="s:primaryType">
@@ -603,4 +539,26 @@
             </div>
         </xsl:if>
     </xsl:function>    
+
+    <xsl:function name="f:descriptionTrigger">
+        <xsl:param name="eresource"/>
+        <xsl:if test="$eresource/s:description">
+            <div class="resultInfo">
+                <xsl:choose>
+                    <xsl:when test="$eresource/@type = 'searchContent'">
+                        <span class="descriptionTrigger searchContent no-bookmarking"/>
+                        <xsl:apply-templates select="$eresource/s:contentId"/>
+                    </xsl:when>
+                    <xsl:when test="$eresource/s:recordType = 'pubmed'">
+                        <span class="descriptionTrigger searchContent no-bookmarking"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="descriptionTrigger eresource no-bookmarking"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </div>
+            <xsl:apply-templates select="$eresource/s:description"/>
+        </xsl:if>
+    </xsl:function>
+
 </xsl:stylesheet>
