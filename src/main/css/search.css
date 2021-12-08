@@ -225,7 +225,7 @@ li.active .description {
     border-right: unset;
     border-bottom: 1px solid #d0d8da;
     padding-right: 50px;
-    max-width: 350px;
+    max-width: 380px;
 }
 
 .hldgsContainer td:last-child {
