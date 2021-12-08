@@ -181,6 +181,7 @@ li.active .description {
     }
     .browzineDirect{
         position: static;
+        padding: 10px 0;
     }
 }
 
@@ -276,6 +277,9 @@ li.active .description {
 }
 
 @media ( max-width : 812px) {
+    .search-results .content {
+        margin: 0 5px;
+    }
     .resource .bookcover {
         padding: 5px 10px 0 0;
         float: left;
