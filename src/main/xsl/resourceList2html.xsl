@@ -4,6 +4,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     xmlns:r="http://lane.stanford.edu/results/1.0"
+    xmlns:f="https://lane.stanford.edu/functions"
     exclude-result-prefixes="h s r" version="2.0">
 
     <xsl:param name="facets"/>
@@ -99,7 +100,7 @@
         </html>
     </xsl:template>
 
-    <!-- transforms article result node into displayable -->
+    <!-- transforms metasearch result node into displayable -->
     <xsl:template match="s:result[@type='searchContent']">
         <xsl:variable name="resourceName">
             <xsl:choose>
@@ -159,16 +160,10 @@
         </li>
     </xsl:template>
 
-    <!-- transforms eresource result node into displayable -->
-    <xsl:template match="s:result[@type='eresource']">
-        <xsl:variable name="total" select="number(s:total)"/>
-        <xsl:variable name="available" select="number(s:available)"/>
-       <li class="resource" data-sid="{s:id}">
-            <xsl:if test="s:doi[1]">
-                <xsl:attribute name="data-doi">
-                    <xsl:value-of select="lower-case(s:doi[1])"/>
-                </xsl:attribute>
-            </xsl:if>
+    <!-- transforms eresource result node into displayable (all but Lane Catalog records) -->
+    <xsl:template match="s:result[@type='eresource' and not(s:recordType = 'bib')]">
+        <li class="resource" data-sid="{s:id}">
+            <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>
             <span class="primaryType">
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
@@ -178,9 +173,9 @@
             <xsl:if test="s:primaryType = 'Article'">
                 <div class="bookcover"><i class="fa fa-file-text-o fa-flip-horizontal"></i></div>
             </xsl:if>
-            <xsl:apply-templates select="s:link[not(@type = 'lane-print' or @type = 'lane-impactFactor') or position() = 1]"/>
+            <xsl:apply-templates select="s:link[position() = 1]"/>
             <xsl:apply-templates select="s:pub-text"/>
-            <xsl:apply-templates select="s:link[position() > 1 and @type = 'lane-print']"/>
+            <xsl:apply-templates select="s:link[position() > 1]"/>
             <div class="resultInfo">
                 <xsl:choose>
                     <xsl:when test="s:description and s:recordType = 'pubmed'">
@@ -190,28 +185,42 @@
                         <span class="descriptionTrigger eresource no-bookmarking"/>
                     </xsl:when>
                 </xsl:choose>
-                <xsl:if test="s:recordType = 'bib'">
-                    <xsl:apply-templates select="s:link[@type = 'lane-impactFactor']"/>
-                </xsl:if>
             </div>
             <xsl:apply-templates select="s:description"/>
-            <div class="sourceInfo no-bookmarking">
-                <span>
-                    <xsl:apply-templates select="s:recordType"/>
-                </span>
-                <xsl:if test="contains(s:primaryType,'Print') and $available &gt; 0">
-                    <span>Status: Not Checked Out</span>
-                </xsl:if>
-                <xsl:if test="s:primaryType = 'Book Print' and $available &gt; 0">
-                    <span class="requestIt">
-                        <a class="btn alt" title="Request this item" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request</a>
-                    </span>
-                </xsl:if>
-                <span class="permalink">
-                    <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{s:recordType}/{s:recordId}">
-                    <i class="fa fa-link fa-rotate-90"></i> Get shareable link</a>
-                </span>
+            <xsl:copy-of select="f:build-source-info(.)"/>
+        </li>
+    </xsl:template>
+
+    <!-- transforms eresource bib result node into displayable -->
+    <xsl:template match="s:result[@type='eresource' and s:recordType = 'bib']">
+        <li class="resource" data-sid="{s:id}">
+            <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>
+            <span class="primaryType">
+                <xsl:apply-templates select="s:primaryType"/>
+            </span>
+            <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
+                <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa fa-book"></i></div>
+            </xsl:if>
+            <xsl:if test="s:primaryType = 'Article'">
+                <div class="bookcover"><i class="fa fa-file-text-o fa-flip-horizontal"></i></div>
+            </xsl:if>
+            <xsl:copy-of select="f:primaryLink(s:link[1])"/>
+            <xsl:apply-templates select="s:pub-author"/>
+            <xsl:apply-templates select="s:pub-text"/>
+            <div class="resultInfo">
+                <xsl:choose>
+                    <xsl:when test="s:description and s:recordType = 'pubmed'">
+                        <span class="descriptionTrigger searchContent no-bookmarking"/>
+                    </xsl:when>
+                    <xsl:when test="s:description">
+                        <span class="descriptionTrigger eresource no-bookmarking"/>
+                    </xsl:when>
+                </xsl:choose>
             </div>
+            <xsl:apply-templates select="s:description"/>
+            <xsl:copy-of select="f:digitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
+            <xsl:copy-of select="f:printLinks(s:link[@type = 'lane-print'], .)"/>
+            <xsl:copy-of select="f:build-source-info(.)"/>
         </li>
     </xsl:template>
 
@@ -272,23 +281,14 @@
             </a>
         </div>
         <xsl:apply-templates select="../s:pub-author"/>
-        <xsl:if test="(s:link-text and 'null' != s:link-text) or @type = 'lane-getPassword' or s:version-text or s:publisher">
+        <xsl:if test="(s:link-text and 'null' != s:link-text) or s:version-text or s:publisher">
             <div class="resultInfo">
-                <xsl:call-template name="build-link-label">
-                    <xsl:with-param name="link" select="."/>
-                    <xsl:with-param name="primaryType" select="../s:primaryType"/>
-                    <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
-                </xsl:call-template>
-                <xsl:if test="$simple-primary-type != string(s:label) and s:link-text != 'Lane Catalog Record'">
+                <xsl:copy-of select="f:build-link-label(.)"/>
+                <xsl:if test="$simple-primary-type != string(s:label)">
                     <span>
                         <a href="{s:url}" title="{s:label}">
                             <xsl:value-of select="s:link-text" />
                         </a>
-                    </span>
-                </xsl:if>
-                <xsl:if test="@type = 'lane-getPassword'">
-                    <span>
-                        <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
                     </span>
                 </xsl:if>
                 <xsl:if test="s:version-text">
@@ -308,21 +308,12 @@
     <xsl:template match="s:link">
         <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
         <div class="resultInfo">
-            <xsl:call-template name="build-link-label">
-                <xsl:with-param name="link" select="."/>
-                <xsl:with-param name="primaryType" select="../s:primaryType"/>
-                <xsl:with-param name="simplePrimaryType" select="$simple-primary-type"/>
-            </xsl:call-template>
+            <xsl:copy-of select="f:build-link-label(.)"/>
             <xsl:if test="$simple-primary-type != string(s:label)">
                 <span>
                     <a href="{s:url}" title="{s:label}">
                         <xsl:value-of select="s:link-text"/>
                     </a>
-                </span>
-            </xsl:if>
-            <xsl:if test="@type = 'lane-getPassword'">
-                <span>
-                    <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
                 </span>
             </xsl:if>
             <xsl:if test="s:version-text">
@@ -336,10 +327,6 @@
                 </span>
             </xsl:if>
         </div>
-    </xsl:template>
-
-    <xsl:template match="s:link[@type = 'lane-impactFactor' and position() > 1]">
-            <span><a href="{s:url}">Impact Factor</a></span>
     </xsl:template>
 
     <xsl:template match="s:primaryType">
@@ -361,12 +348,8 @@
                 <xsl:when test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
                     <xsl:variable name="authorTokens" select="tokenize(.,', ')"/>
                     <xsl:variable name="authorString">
-                        <xsl:call-template name="split-authors">
-                            <xsl:with-param name="tokens" select="$authorTokens"/>
-                            <xsl:with-param name="max-string-length" select="$max-first-line-length"/>
-                            <xsl:with-param name="index" select="12"/>
-                        </xsl:call-template>
-          </xsl:variable>
+                        <xsl:value-of select="f:split-authors($max-first-line-length, $authorTokens, 12)"/>
+                    </xsl:variable>
                     <xsl:value-of select="$authorString"/>
                     <span> ... </span>
                     <span class="authorsTrigger no-bookmarking active">
@@ -415,46 +398,209 @@
         </div>
     </xsl:template>
 
-    <xsl:template name="build-link-label">
+    <xsl:function name="f:build-source-info">
+        <xsl:param name="eresource" />
+        <div class="sourceInfo no-bookmarking">
+            <span>
+                <xsl:apply-templates select="$eresource/s:recordType"/>
+            </span>
+            <span class="permalink">
+                <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
+                <i class="fa fa-link fa-rotate-90"></i> Get shareable link</a>
+            </span>
+        </div>
+    </xsl:function>
+
+    <xsl:function name="f:build-link-label">
         <xsl:param name="link" />
-        <xsl:param name="primaryType" />
-        <xsl:param name="simplePrimaryType" />
+        <xsl:variable name="primaryType" select="$link/../s:primaryType"/>
+        <xsl:variable name="simplePrimaryType" select="replace($primaryType,'(Journal|Book) ','')"/>
         <span>
             <xsl:choose>
-                <xsl:when test="@type = 'lane-print' or @type = 'sul-print'">Print</xsl:when>
-                <xsl:when test="$primaryType = s:label">
-                    <a href="{s:url}" title="{s:label}: {../s:title}"><xsl:value-of select="s:label"/></a>
+                <xsl:when test="$link/@type = 'lane-print' or $link/@type = 'sul-print'">Print</xsl:when>
+                <xsl:when test="$primaryType = $link/s:label">
+                    <a href="{$link/s:url}" title="{$link/s:label}: {$link/../s:title}"><xsl:value-of select="$link/s:label"/></a>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$simplePrimaryType"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="s:publisher">
+            <xsl:if test="$link/s:publisher">
                 <xsl:text> : </xsl:text>
                 <i>
-                    <xsl:value-of select="s:publisher" />
+                    <xsl:value-of select="$link/s:publisher" />
                 </i>
             </xsl:if>
         </span>
-    </xsl:template>
+    </xsl:function>
 
     <!--  assume authors are a comma-separated string; break the string at a separator before max-string-length -->
-    <xsl:template name="split-authors">
+    <xsl:function name="f:split-authors">
         <xsl:param name="max-string-length"/>
         <xsl:param name="tokens"/>
         <xsl:param name="index"/>
 
         <xsl:choose>
             <xsl:when test="string-length(string-join($tokens[position() &lt; $index], ', ')) &gt; $max-string-length">
-                <xsl:call-template name="split-authors">
-                  <xsl:with-param name="tokens" select="$tokens"/>
-                  <xsl:with-param name="max-string-length" select="$max-string-length"/>
-                  <xsl:with-param name="index" select="$index - 1"/>
-                </xsl:call-template>
+                <xsl:value-of select="f:split-authors($max-string-length, $tokens, $index - 1)"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat(string-join($tokens[position() &lt; $index], ', '), ', ')"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:function>
+
+    <xsl:function name="f:maybe-add-doi-attribute">
+        <xsl:param name="eresource"/>
+        <xsl:if test="$eresource/s:doi[1]">
+            <xsl:attribute name="data-doi">
+                <xsl:value-of select="lower-case($eresource/s:doi[1])"/>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:function>
+    
+    <xsl:function name="f:primaryLink">
+        <xsl:param name="link"/>
+        <div>
+            <a class="primaryLink" href="{$link/s:url}" title="{$link/../s:title}">
+                <xsl:apply-templates select="$link/../s:title" />
+            </a>
+        </div>
+    </xsl:function>
+
+    <xsl:function name="f:digitalLinks">
+        <xsl:param name="links"/>
+        <xsl:if test="count($links) = 1">
+            <div class="hldgsContainer no-bookmarking">
+                <!-- TODO: updated link icon instead? -->
+                <span class="hldgsHeader available"><i class="fa fa-link"></i> Digital Access Available: </span>
+                <span>
+                    <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
+                        <xsl:value-of select="concat($links[1]/s:publisher, ' ', $links[1]/s:link-text)"/>
+                    </a>
+                </span>
+            </div>
+            <xsl:if test="$links[1]/@type = 'lane-getPassword'">
+                <span>
+                    <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
+                </span>
+            </xsl:if>
+            <xsl:if test="$links[1]/s:version-text">
+                <span class="versionText">
+                    <xsl:value-of select="$links[1]/s:version-text" />
+                </span>
+            </xsl:if>
+            <xsl:if test="$links[1]/s:additional-text">
+                <span>
+                    <xsl:value-of select="$links[1]/s:additional-text" />
+                </span>
+            </xsl:if>
+        </xsl:if>
+        <xsl:if test="count($links) > 1">
+            <div class="hldgsContainer no-bookmarking">
+                <!-- TODO: updated link icon instead? -->
+                <span class="hldgsHeader available"><i class="fa fa-link"></i> Digital Access Available</span>
+                <span class="hldgsTrigger"/>
+                <table class="hide-empty-columns">
+                    <thead>
+                        <tr>
+                            <th>Provider</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <xsl:for-each select="$links">
+                            <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
+                            <tr>
+                                <td>
+                                    <xsl:if test="not(s:publisher) and s:label">
+                                        <xsl:value-of select="s:label"/>
+                                    </xsl:if>
+                                    <xsl:value-of select="s:publisher"/>
+                                </td>
+                                <td>
+                                    <span>
+                                        <a href="{s:url}" title="{s:label}">
+                                            <xsl:value-of select="s:link-text"/>
+                                            <xsl:text> </xsl:text>
+                                        </a>
+                                    </span>
+                                    <xsl:if test="@type = 'lane-getPassword'">
+                                        <span>
+                                            <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
+                                        </span>
+                                    </xsl:if>
+                                    <xsl:if test="s:version-text">
+                                        <span class="versionText">
+                                            <xsl:value-of select="s:version-text" />
+                                        </span>
+                                    </xsl:if>
+                                    <xsl:if test="s:additional-text">
+                                        <span>
+                                            <xsl:value-of select="s:additional-text" />
+                                        </span>
+                                    </xsl:if>
+                                </td>
+                            </tr>
+                        </xsl:for-each>
+                    </tbody>
+                </table>
+            </div>
+        </xsl:if>
+    </xsl:function>
+
+    <xsl:function name="f:printLinks">
+        <xsl:param name="links"/>
+        <xsl:param name="eresource"/>
+        <xsl:if test="count($links) > 0">
+            <div class="hldgsContainer no-bookmarking">
+                <!-- TODO: open book icon instead? -->
+                <xsl:choose>
+                    <xsl:when test="$eresource/s:available &gt; 0">
+                        <span class="hldgsHeader available"><i class="fa fa-book"></i> Print Available</span>
+                        <span class="hldgsTrigger"/>
+                        <span class="requestIt">
+                            <a class="btn" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
+                        </span>
+                    </xsl:when>
+                    <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Status unknown</span>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <table class="hide-empty-columns">
+                    <thead>
+                        <tr>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>Call Number</th>
+                            <th>Number of Items</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <xsl:for-each select="$links">
+                            <tr>
+                                <td>
+                                    <xsl:value-of select="s:locationName"/>
+                                </td>
+                                <td>
+                                    <a href="{s:url}" title="{s:label}">
+                                        <xsl:value-of select="s:link-text"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="s:callnumber"/>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="s:available"/>
+                                </td>
+                            </tr>
+                        </xsl:for-each>
+                    </tbody>
+                </table>
+            </div>
+        </xsl:if>
+    </xsl:function>    
 </xsl:stylesheet>

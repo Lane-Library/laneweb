@@ -161,8 +161,7 @@ li.active .description {
 }
 
 .requestIt a {
-    padding: 3px 10px;
-    margin-top: -5px;
+    padding: 1px 5px;
     font-size: unset;
 }
 
@@ -192,3 +191,97 @@ li.active .description {
         position: static;
     }
 }
+
+/* begin print holdings */
+
+.lwSearchResults {
+    line-height: 200%;   
+}
+
+.hldgsContainer table {
+    padding: 10px 0;
+}
+
+.hldgsContainer thead {
+    background: #f7f7f7;
+    color: #8b8989;
+}
+
+.hldgsContainer th, .hldgsContainer th:last-child {
+    border: 1px solid #d2d2d2;
+    border-left: unset;
+}
+
+.hldgsContainer th, .hldgsContainer th:first-child {
+    border-right: unset;
+}
+
+.hldgsContainer tbody tr:nth-child(2n+1) {
+    background: #fff;
+}
+
+.hldgsContainer td, .hldgsContainer td:first-child {
+    border-left: unset;
+    border-right: unset;
+    border-bottom: 1px solid #d0d8da;
+    padding-right: 50px;
+}
+
+.hldgsContainer td span {
+    padding-right: 10px;
+}
+
+.requestIt {
+    padding: 10px;
+}
+
+.requestIt .btn {
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,.12),0 5px 5px 0 rgba(0,0,0,.24);
+}
+
+.hldgsContainer {
+    padding: 5px 0;
+}
+
+.hldgsContainer table {
+    display:none;
+}
+
+.hldgsHeader {
+    white-space: nowrap;
+}
+
+.hldgsHeader.available {
+    color: #5eaa42;
+}
+
+.hldgsHeader .fa {
+    padding-right: 10px;
+}
+
+.hldgsTrigger {
+    cursor: pointer;
+    padding: 1px 5px;
+    border: 1px solid #ccc;
+    margin: 0 15px;
+}
+
+@media ( max-width : 812px) {
+    .resource .bookcover {
+        padding: 2px;
+    }
+    .requestIt {
+        padding-left: 0;
+        display: block;
+    }
+    .hldgsContainer {
+        overflow-x: auto;
+        width: 100%;
+    }
+    .hldgsTrigger {
+        display: block;
+        width: 80px;
+        margin-left: 0;
+    }
+}
+
