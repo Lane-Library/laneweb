@@ -178,13 +178,14 @@ public class Eresource {
             linkType = LinkType.LANE_GETPASSWORD;
         } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
             linkType = LinkType.LANE_IMPACTFACTOR;
-        } else if (locationName != null && locationName.toLowerCase().contains("digital")) {
-            linkType = LinkType.LANE_DIGITAL;
+            publisher = "Journal Citation Reports";
         } else if ("sul".equals(this.recordType) && linkUrl != null
                 && linkUrl.contains("//searchworks.stanford.edu/view")) {
             linkType = LinkType.SUL_PRINT;
         } else if (linkUrl != null && linkUrl.contains("//lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID")) {
             linkType = LinkType.LANE_PRINT;
+        } else if (locationName != null && locationName.toLowerCase().contains("digital")) {
+            linkType = LinkType.LANE_DIGITAL;
         }
         Link link = new Link.Builder().setLabel(linkLabel).setType(linkType).setUrl(linkUrl).setLinkText(linkText)
                 .setAdditionalText(additionalText).setHoldingsAndDates(holdingsAndDates).setPublisher(publisher)
