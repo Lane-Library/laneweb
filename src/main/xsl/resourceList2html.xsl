@@ -5,7 +5,7 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     xmlns:r="http://lane.stanford.edu/results/1.0"
     xmlns:f="https://lane.stanford.edu/functions"
-    exclude-result-prefixes="h s r" version="2.0">
+    exclude-result-prefixes="f h s r" version="2.0">
 
     <xsl:param name="facets"/>
 
@@ -238,7 +238,7 @@
         <br/>
     </xsl:template>
 
-    <!-- used for links in non-Lane records (recordType != 'bib'); Lane records use functions -->
+    <!-- used for links in non-Lane records (recordType != 'bib'); Lane records use handleLaneXxxLink functions -->
     <xsl:template match="s:link">
         <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')"/>
         <xsl:if test="(position() > 1 or (s:link-text and 'null' != s:link-text) or s:version-text or s:publisher)">
