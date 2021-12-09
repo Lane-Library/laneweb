@@ -334,6 +334,20 @@
         </div>
     </xsl:template>
 
+    <xsl:template match="s:locationName">
+        <xsl:choose>
+            <xsl:when test="../s:locationUrl">
+                <a href="{../s:locationUrl}" rel="popup console 1020 800">
+                    <xsl:apply-templates/>
+                </a>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
         <div class="sourceInfo no-bookmarking">
@@ -519,7 +533,7 @@
                         <xsl:for-each select="$links">
                             <tr>
                                 <td>
-                                    <xsl:value-of select="s:locationName"/>
+                                    <xsl:apply-templates select="s:locationName"/>
                                 </td>
                                 <td>
                                     <a href="{s:url}" title="{s:label}">
