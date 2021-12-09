@@ -17,20 +17,25 @@
         var handleClick = function(node, event) {
             var eresource = node.closest("li"),
                 ancestor = node.closest("div"),
-                active = ancestor.classList.contains("active");
+                active = ancestor.classList.contains("active"),
+                direction,
+                actionLabel;
 
             event.preventDefault();
             ancestor.classList.toggle("active");
             if (active) {
                 node.innerHTML = HTML;
                 ancestor.querySelector('table').style.display = 'none';
+                direction = "-- close";
             } else if (!active) {
-                node.innerHTML = HTML.replace('-down','-up');
+                node.innerHTML = HTML.replace('-down', '-up');
                 ancestor.querySelector('table').style.display = 'block';
+                direction = "-- open";
             }
+            actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " " + event.target.textContent + direction;
             L.fire("tracker:trackableEvent", {
                 category: "lane:hldgsTrigger",
-                action:  event.target.textContent + node.previousElementSibling.textContent,
+                action: actionLabel,
                 label: eresource.querySelector('.primaryLink').textContent
             });
         };
