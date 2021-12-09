@@ -30,7 +30,7 @@
             }
             L.fire("tracker:trackableEvent", {
                 category: "lane:hldgsTrigger",
-                action: event.target.textContent,
+                action:  event.target.textContent + node.previousElementSibling.textContent,
                 label: eresource.querySelector('.primaryLink').textContent
             });
         };
