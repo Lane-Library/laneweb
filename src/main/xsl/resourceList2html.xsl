@@ -337,7 +337,11 @@
     <xsl:template match="s:locationName">
         <xsl:choose>
             <xsl:when test="../s:locationUrl">
-                <a href="{../s:locationUrl}" rel="popup console 1020 800">
+                <a href="{../s:locationUrl}">
+                    <!-- exclude rel attribute for non-http(s) links (e.g. mailto:xxx)-->
+                    <xsl:if test="starts-with(../s:locationUrl,'http')">
+                        <xsl:attribute name="rel">popup console 1020 800</xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </a>
             </xsl:when>
