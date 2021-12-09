@@ -16,11 +16,19 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testToggleHoldings: function() {
-            var triggers = document.querySelectorAll(".hldgsTrigger");
+            var triggers = document.querySelectorAll(".hldgsTrigger"),
+                trackEvent,
+                handler = L.on("tracker:trackableEvent", function(e) {
+                    trackEvent = e;
+                });
             triggers.forEach(function(trigger){
                 trigger.click();
-                Y.Assert.areEqual(0, trigger.querySelectorAll('.fa-angle-double-down').length);
                 Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-angle-double-up').length);
+                Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);
+                Y.Assert.areEqual("lane:hldgsTrigger", trackEvent.category);
+                Y.Assert.isTrue(trackEvent.action.indexOf(' -- open') > -1);
+                Y.Assert.areEqual("Lancet", trackEvent.label);
+                handler.detach();
             });
         }
     });
