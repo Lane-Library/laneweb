@@ -32,7 +32,7 @@
                 ancestor.querySelector('table').style.display = 'block';
                 direction = "-- open";
             }
-            actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " " + event.target.textContent + direction;
+            actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " " + node.textContent + direction;
             L.fire("tracker:trackableEvent", {
                 category: "lane:hldgsTrigger",
                 action: actionLabel,
