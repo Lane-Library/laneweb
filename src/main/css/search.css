@@ -269,6 +269,12 @@ li.active .description {
     padding-right: 10px;
 }
 
+.hldgsHeader .fa-link {
+    padding-left: 10px;
+    margin-left: -10px;
+    transform: rotate(315deg);
+}
+
 .hldgsTrigger {
     cursor: pointer;
     padding: 1px 5px;
