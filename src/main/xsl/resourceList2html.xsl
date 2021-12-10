@@ -5,7 +5,8 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0"
     xmlns:r="http://lane.stanford.edu/results/1.0"
     xmlns:f="https://lane.stanford.edu/functions"
-    exclude-result-prefixes="f h s r" version="2.0">
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="f h r s xsd" version="2.0">
 
     <xsl:param name="facets"/>
 
@@ -510,12 +511,15 @@
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
-                    <xsl:when test="$eresource/s:available &gt; 0">
+                    <xsl:when test="$eresource/s:available &gt; 0 or 
+                                    ($eresource/s:total &gt; 0 and f:specialPrintAvailableLocations($links))">
                         <span class="hldgsHeader available"><i class="fa fa-book"></i> Print Available</span>
                         <span class="hldgsTrigger"/>
-                        <span class="requestIt">
-                            <a class="btn" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
-                        </span>
+                        <xsl:if test="$eresource/s:available &gt; 0">
+                            <span class="requestIt">
+                                <a class="btn" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
+                            </span>
+                        </xsl:if>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
@@ -577,6 +581,15 @@
             </div>
             <xsl:apply-templates select="$eresource/s:description"/>
         </xsl:if>
+    </xsl:function>
+
+    <!--
+    print locations with items that might not circulate should still show as "available" but not have a request button
+    NOTE: brittle since relies on location names
+     -->
+    <xsl:function name="f:specialPrintAvailableLocations" as="xsd:boolean">
+        <xsl:param name="links"/>
+        <xsl:value-of select="count($links[matches(s:locationName,'(reserve|appointment)','i')]) > 0"/>
     </xsl:function>
 
 </xsl:stylesheet>
