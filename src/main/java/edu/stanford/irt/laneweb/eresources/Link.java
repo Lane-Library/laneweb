@@ -2,150 +2,24 @@ package edu.stanford.irt.laneweb.eresources;
 
 public class Link {
 
-    static final class Builder {
-
-        private String additionalText;
-
-        private String callnumber;
-
-        private String holdingsAndDates;
-
-        private int[] itemCount;
-
-        private String label;
-
-        private String linkText;
-
-        private String locationName;
-
-        private String locationUrl;
-
-        private String publisher;
-
-        private LinkType type;
-
-        private String url;
-
-        private String versionText;
-
-        public Builder setAdditionalText(final String additionalText) {
-            this.additionalText = additionalText;
-            return this;
-        }
-
-        public Builder setCallnumber(final String callnumber) {
-            this.callnumber = callnumber;
-            return this;
-        }
-
-        public Builder setHoldingsAndDates(final String holdingsAndDates) {
-            this.holdingsAndDates = holdingsAndDates;
-            return this;
-        }
-
-        public Builder setItemCount(final int[] itemCount) {
-            this.itemCount = itemCount;
-            return this;
-        }
-
-        public Builder setLabel(final String label) {
-            this.label = label;
-            return this;
-        }
-
-        public Builder setLinkText(final String linkText) {
-            this.linkText = linkText;
-            return this;
-        }
-
-        public Builder setLocationName(final String locationName) {
-            this.locationName = locationName;
-            return this;
-        }
-
-        public Builder setLocationUrl(final String locationUrl) {
-            this.locationUrl = locationUrl;
-            return this;
-        }
-
-        public Builder setPublisher(final String publisher) {
-            this.publisher = publisher;
-            return this;
-        }
-
-        public Builder setType(final LinkType type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder setUrl(final String url) {
-            this.url = url;
-            return this;
-        }
-
-        public Builder setVersionText(final String versionText) {
-            this.versionText = versionText;
-            return this;
-        }
-
-        Link build() {
-            return new Link(this);
-        }
-    }
-
     private String additionalText;
-
-    private String callnumber;
-
-    private String holdingsAndDates;
-
-    private int[] itemCount;
 
     private String label;
 
     private String linkText;
 
-    private String locationName;
-
-    private String locationUrl;
-
-    private String publisher;
-
     private LinkType type;
 
     private String url;
 
-    private String versionText;
+    private Version version;
 
-    private Link(final Builder builder) {
-        this.additionalText = builder.additionalText;
-        this.callnumber = builder.callnumber;
-        this.holdingsAndDates = builder.holdingsAndDates;
-        this.label = builder.label;
-        this.linkText = builder.linkText;
-        this.locationName = builder.locationName;
-        this.locationUrl = builder.locationUrl;
-        this.publisher = builder.publisher;
-        this.type = builder.type;
-        this.url = builder.url;
-        this.versionText = builder.versionText;
-        this.itemCount = builder.itemCount;
+    public Link() {
+        // empty for serialization
     }
 
     public String getAdditionalText() {
         return this.additionalText;
-    }
-
-    public String getCallnumber() {
-        return this.callnumber;
-    }
-
-    public String getHoldingsAndDates() {
-        return this.holdingsAndDates;
-    }
-
-    public int[] getItemCount() {
-        return this.itemCount;
     }
 
     public String getLabel() {
@@ -156,18 +30,6 @@ public class Link {
         return this.linkText;
     }
 
-    public String getLocationName() {
-        return this.locationName;
-    }
-
-    public String getLocationUrl() {
-        return this.locationUrl;
-    }
-
-    public String getPublisher() {
-        return this.publisher;
-    }
-
     public LinkType getType() {
         return this.type;
     }
@@ -176,8 +38,32 @@ public class Link {
         return this.url;
     }
 
-    public String getVersionText() {
-        return this.versionText;
+    public Version getVersion() {
+        return this.version;
+    }
+
+    public void setAdditionalText(final String additionalText) {
+        this.additionalText = additionalText;
+    }
+
+    public void setLabel(final String label) {
+        this.label = label;
+    }
+
+    public void setLinkText(final String linkText) {
+        this.linkText = linkText;
+    }
+
+    public void setType(final LinkType type) {
+        this.type = type;
+    }
+
+    public void setUrl(final String url) {
+        this.url = url;
+    }
+
+    public void setVersion(final Version version) {
+        this.version = version;
     }
 
     @Override
