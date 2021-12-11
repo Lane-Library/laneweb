@@ -598,7 +598,7 @@
      -->
     <xsl:function name="f:specialPrintAvailableLocations" as="xsd:boolean">
         <xsl:param name="links"/>
-        <xsl:value-of select="count($links[matches(s:locationName,'(reserve|appointment)','i')]) > 0"/>
+        <xsl:sequence select="count($links[matches(s:locationName,'(reserve|appointment)','i')]) > 0"/>
     </xsl:function>
 
 </xsl:stylesheet>
