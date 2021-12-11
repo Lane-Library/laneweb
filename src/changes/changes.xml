@@ -8,7 +8,7 @@
     </properties>
       <body>
       	 <release date="2021-12-10" version="3.8.17" description="emergency release">
-            <action date="2021-12-10" dev="ryanmax" issue="LANEWEB-10852" type="fix">
+            <action date="2021-12-10" dev="ryanmax" issue="LANEWEB-10851" type="fix">
                 critical log4j-api security vulnerability
             </action>
          </release>
