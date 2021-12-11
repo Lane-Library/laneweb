@@ -106,13 +106,20 @@
     background-image: none;
 }
 
+
+.staff-list{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
 /* modules on contacts/staff-dir.html */
 .staff-list .module {
-    display: inline-block;
-    height: 176px;
+	flex: 1 1 auto;
+    height: 198px;
+    width: 450px;
+    max-width: 450px;
     margin: 12px 6px 0;
-    vertical-align: top;
-    width: 31%;
 }
 
 .staff-list h4 {
@@ -121,10 +128,10 @@
 
 @media ( max-width : 812px) {
 	.staff-list .module{
-	  	display: block;
-   	 	width: 100%;	
-   	 	height: auto;   
-   	 	margin: 0px; 
+  		display: block;
+   	 	max-width: none;
+   	 	height: auto;
+   	 	margin: 7px 0;
 	}
 	.grand-rounds, .upcoming-classes {
 	    padding: 6px;
