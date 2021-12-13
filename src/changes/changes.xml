@@ -7,6 +7,16 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	 <release date="2021-12-13" version="3.9.1" description="bug fix release">
+            <action date="2021-12-10" dev="alainb" issue="LANEWEB-10851" type="fix">
+        		Move template html content in includes/template        
+            </action>
+         </release>
+      	 <release date="2021-12-10" version="3.8.17" description="emergency release">
+            <action date="2021-12-10" dev="ryanmax" issue="LANEWEB-10851" type="fix">
+                critical log4j-api security vulnerability
+            </action>
+         </release>
       	 <release date="2021-12-06" version="3.8.16" description="bug fix release">
             <action date="2021-11-24" dev="ryanmax" issue="LANEWEB-10836" type="fix">
                 Grand rounds event ordering
