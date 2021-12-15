@@ -8,7 +8,7 @@
     </properties>
       <body>
       	 <release date="2021-12-13" version="3.9.1" description="bug fix release">
-            <action date="2021-12-10" dev="alainb" issue="LANEWEB-10851" type="fix">
+            <action date="2021-12-10" dev="alainb" issue="LANEWEB-10854" type="fix">
         		Move template html content in includes/template        
             </action>
          </release>
