@@ -26,7 +26,7 @@ ga('send', 'pageview');
     </head>
 	<body>
 		<section class="header">
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/header.html">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
 			<i id="mhc-logo">Medical History Center</i>
@@ -35,7 +35,7 @@ ga('send', 'pageview');
 			<div class="centered">
             <?laneweb content?>
 			</div>
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/footer.html">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
 		</section>
