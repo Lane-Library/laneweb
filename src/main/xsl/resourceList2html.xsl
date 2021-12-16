@@ -535,13 +535,13 @@
                         </xsl:if>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
+                        <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0">
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Status unknown</span>
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> Status unknown</span>
                     </xsl:otherwise>
                 </xsl:choose>
                 <table class="hide-empty-columns">
