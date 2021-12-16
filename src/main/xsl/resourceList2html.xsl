@@ -174,7 +174,10 @@
             <xsl:choose>
                 <!-- Lane records get different link processing/order -->
                 <xsl:when test="s:recordType = 'bib'">
-                    <xsl:apply-templates select="s:pub-text"/>
+                    <!-- don't show citation/pub-text when already present in "access via" link to parent record -->
+                    <xsl:if test="s:link/s:locationName != s:pub-text"> 
+                        <xsl:apply-templates select="s:pub-text"/>
+                    </xsl:if>
                     <xsl:copy-of select="f:descriptionTrigger(.)"/>
                     <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
                     <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)"/>
@@ -516,7 +519,8 @@
     <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links"/>
         <xsl:param name="eresource"/>
-        <xsl:if test="count($links) > 0">
+        <!-- don't write print holdings when there are no items and a digital holding exists (helps with component/article/chapter records pointing to a parent)  -->
+        <xsl:if test="count($links) > 0 and not($eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) &gt; 0)">
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
@@ -532,6 +536,9 @@
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
+                    </xsl:when>
+                    <xsl:when test="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0">
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Print Unavailable: Status unknown</span>
