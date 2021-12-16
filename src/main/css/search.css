@@ -205,15 +205,18 @@ li.active .description {
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 50px;
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    border-right: none;
+    border-left: none;
 }
 
-.hldgsContainer th, .hldgsContainer th:last-child {
-    border: 1px solid #d2d2d2;
-    border-left: unset;
+.hldgsContainer th:first-child {
+    border-left: 1px solid #d0d8da;
 }
 
-.hldgsContainer th, .hldgsContainer th:first-child {
-    border-right: unset;
+.hldgsContainer th:last-child {
+    border-right: 1px solid #d0d8da;
 }
 
 .hldgsContainer tbody tr:nth-child(2n+1) {
@@ -221,7 +224,6 @@ li.active .description {
 }
 
 .hldgsContainer td, .hldgsContainer td:first-child {
-    border-left: unset;
     border-right: unset;
     border-bottom: 1px solid #d0d8da;
     padding-right: 50px;
