@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>94</version>
+        <version>96</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.9.2-SNAPSHOT</version>
@@ -74,12 +74,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.89.0</version>
+            <version>1.90.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.89.0</version>
+            <version>1.90.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
