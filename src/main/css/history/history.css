@@ -170,9 +170,11 @@ h1 i {
     font-size: 12px;
 }
 
-.menu {
+.content ul.menu{
     border-top: 12px solid #8c1515;
     margin-bottom: 24px;
+    list-style: none;
+    padding-inline-start: 0;
 }
 
 .menu a {
