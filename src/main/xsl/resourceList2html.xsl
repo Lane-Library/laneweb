@@ -290,7 +290,7 @@
 
     <xsl:template match="s:pub-author">
         <xsl:variable name="max-first-line-length" select="105"/>
-        <div>
+        <div class="author">
             <xsl:choose>
                 <!--  when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (105 chars)-->
                 <xsl:when test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
@@ -538,7 +538,7 @@
                         <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0">
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a class="citation" href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Status unknown</span>

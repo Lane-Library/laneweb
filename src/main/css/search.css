@@ -187,8 +187,13 @@ li.active .description {
 
 /* begin print holdings */
 
-.lwSearchResults div {
-    padding-top: 10px;   
+.lwSearchResults div:not(.author, .citation) {
+    padding-top: 10px;
+}
+
+.lwSearchResults .citation {
+    font-style: italic;
+    opacity: .90;
 }
 
 .hldgsContainer table {

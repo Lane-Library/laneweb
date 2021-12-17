@@ -132,7 +132,7 @@
             <s:pub-author>pub-author</s:pub-author>
         </x:context>
         <x:expect label="s:pub-author should go in a div">
-            <div>pub-author</div>
+            <div class="author">pub-author</div>
         </x:expect>
     </x:scenario>
     
