@@ -10,3 +10,13 @@ variables:
 
 downstream:
   trigger: irt-lane/kube-laneweb
+
+build-image:
+  script:
+    - /kaniko/executor
+        --no-cache
+        --context $CI_PROJECT_DIR$BUILD_CONTEXT
+        --dockerfile $CI_PROJECT_DIR$DOCKER_FILE
+        --destination $IMAGE_REPO:latest
+        --destination $IMAGE_REPO:stage-latest
+        --destination $IMAGE_REPO:$CI_COMMIT_SHA
