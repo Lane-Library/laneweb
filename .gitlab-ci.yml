@@ -19,3 +19,4 @@ build-image:
         --destination $IMAGE_REPO:latest
         --destination $IMAGE_REPO:stage-latest
         --destination $IMAGE_REPO:$CI_COMMIT_SHA
+        --image-fs-extract-retry 3
