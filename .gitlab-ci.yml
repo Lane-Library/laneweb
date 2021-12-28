@@ -12,6 +12,8 @@ downstream:
   trigger: irt-lane/kube-laneweb
 
 build-image:
+  image:
+    name: gcr.io/kaniko-project/executor:debug-v1.2.0
   script:
     - /kaniko/executor
         --context $CI_PROJECT_DIR$BUILD_CONTEXT
@@ -19,4 +21,3 @@ build-image:
         --destination $IMAGE_REPO:latest
         --destination $IMAGE_REPO:stage-latest
         --destination $IMAGE_REPO:$CI_COMMIT_SHA
-        --image-fs-extract-retry 3
