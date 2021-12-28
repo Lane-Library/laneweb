@@ -14,7 +14,6 @@ downstream:
 build-image:
   script:
     - /kaniko/executor
-        --no-cache
         --context $CI_PROJECT_DIR$BUILD_CONTEXT
         --dockerfile $CI_PROJECT_DIR$DOCKER_FILE
         --destination $IMAGE_REPO:latest
