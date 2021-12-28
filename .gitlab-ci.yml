@@ -13,7 +13,7 @@ downstream:
 
 build-image:
   image:
-    name: gcr.io/kaniko-project/executor:v1.7.0-debug
+    name: gcr.io/kaniko-project/executor:v1.5.2-debug
   script:
     - /kaniko/executor
         --context $CI_PROJECT_DIR$BUILD_CONTEXT
