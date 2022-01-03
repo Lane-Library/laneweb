@@ -7,7 +7,17 @@
     var initializeHoldingsToggles = function() {
         var triggers = document.querySelectorAll(".hldgsTrigger");
         triggers.forEach(function(node) {
-            node.innerHTML = HTML;
+            // show holdings table when only one row present
+            // otherwise, show "view all" trigger
+            var ancestor = node.closest("div"), 
+                holdingsRows = ancestor.querySelectorAll("tbody tr");
+            if (holdingsRows.length == 1) {
+                ancestor.querySelector('table').style.display = 'block';
+                node.style.display = 'none';
+            }
+            else {
+                node.innerHTML = HTML;
+            }
         });
     }, searchResults = document.querySelector("#searchResults");
 
