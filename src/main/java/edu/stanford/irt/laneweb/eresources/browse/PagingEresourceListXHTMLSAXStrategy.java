@@ -30,7 +30,6 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
         int start = pagingData.getStart();
         int length = pagingData.getLength();
         int size = list.size();
-        String heading = list.getHeading();
         try {
             startHTMLDocument(xmlConsumer);
             startHead(xmlConsumer);
@@ -40,7 +39,6 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             if (size > DEFAULT_PAGE_SIZE) {
                 this.pagingSaxStrategy.toSAX(pagingData, xmlConsumer);
             }
-            createHeading(xmlConsumer, heading);
             startUlWithClass(xmlConsumer, "lwSearchResults");
             if (length > 0) {
                 int i = 0;
@@ -56,12 +54,6 @@ public class PagingEresourceListXHTMLSAXStrategy extends AbstractXHTMLSAXStrateg
             endHTMLDocument(xmlConsumer);
         } catch (SAXException e) {
             throw new LanewebException(e);
-        }
-    }
-
-    private void createHeading(final XMLConsumer xmlConsumer, final String heading) throws SAXException {
-        if (heading != null) {
-            createElementWithClass(xmlConsumer, "h4", "eresources", heading);
         }
     }
 }

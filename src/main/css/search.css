@@ -187,6 +187,14 @@ li.active .description {
 
 /* begin print holdings */
 
+.lwSearchResults .resource {
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.24);
+    border-radius: 4px;
+    background-color: #fff;
+}
+
 .lwSearchResults div:not(.author, .citation) {
     padding-top: 10px;
 }
