@@ -287,8 +287,4 @@
         <xsl:text>: </xsl:text>
     </xsl:template>
 
-    <xsl:template match="s:title">
-        <xsl:apply-templates/>
-    </xsl:template>
-
 </xsl:stylesheet>

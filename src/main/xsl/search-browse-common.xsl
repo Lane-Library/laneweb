@@ -11,6 +11,12 @@
         <br/>
     </xsl:template>
 
+    <xsl:template match="s:description">
+        <div class="description">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
     <xsl:template match="s:keyword">
         <strong>
             <xsl:value-of select="."/>
@@ -75,10 +81,8 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="s:description">
-        <div class="description">
-            <xsl:apply-templates/>
-        </div>
+    <xsl:template match="s:title">
+        <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:function name="f:build-source-info">
