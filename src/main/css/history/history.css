@@ -170,9 +170,11 @@ h1 i {
     font-size: 12px;
 }
 
-.menu {
+.content ul.menu{
     border-top: 12px solid #8c1515;
     margin-bottom: 24px;
+    list-style: none;
+    padding-inline-start: 0;
 }
 
 .menu a {
@@ -546,16 +548,18 @@ http://lane.stanford.edu/samples/button-css.html
 
 /*styles for events on homepage*/
 .event {
-    background-color: #09425a;
+    width:40%;
     font-size: 13px;
     margin-bottom: 15px;
 }
 
 .event-date {
+	background-color: #09425a;
     color: white;
     text-align: right;
     text-transform: uppercase;
     padding: 4px;
+    padding-right: 12px;
 }
 
 .event-info {

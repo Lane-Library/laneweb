@@ -22,8 +22,7 @@ include ${FRAMEWORK_DIR}/makefile_parts/config.mk
 include ${FRAMEWORK_DIR}/makefile_parts/vault.mk
 include ${FRAMEWORK_DIR}/makefile_parts/docker-compose.mk
 include ${FRAMEWORK_DIR}/makefile_parts/sonarqube.mk
-include ${FRAMEWORK_DIR}/makefile_parts/drone1.mk
-include ${FRAMEWORK_DIR}/makefile_parts/deps.mk
+include ${FRAMEWORK_DIR}/makefile_parts/gitlab.mk
 # END COMMON MAKEFILE PARTS INCLUDES
 
 .PHONY: build

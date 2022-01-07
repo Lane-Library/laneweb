@@ -1,0 +1,13 @@
+include:
+  - project: "irt-lane/som-laneweb"
+    file: "/cicd/build-image.yml"
+  - project: "irt-lane/som-laneweb"
+    file: "/cicd/trigger-downstream.yml"
+
+variables:
+  IMAGE_NAME: "laneweb"
+  KANIKO_CACHE: "true"
+
+downstream:
+  trigger: irt-lane/kube-laneweb
+

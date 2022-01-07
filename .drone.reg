@@ -1,6 +1,0 @@
-# Drone docker registries for this repo
-# The file format is
-# The format of registry_def_file is one line for each docker registry:
-#   <registry_host> <registry_username> <regitry_passward>
-
-gcr.io      _json_key       vault://${SEC_PATH}/common/gcr-pull

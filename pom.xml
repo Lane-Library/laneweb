@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>94</version>
+        <version>97</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.9.2-SNAPSHOT</version>
@@ -74,12 +74,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.89.0</version>
+            <version>1.90.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.89.0</version>
+            <version>1.90.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -101,7 +101,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.2.1</version>
+            <version>3.2.2</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -166,7 +166,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.32</version>
+            <version>1.0.33</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -211,7 +211,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>8.11.0</version>
+            <version>8.11.1</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -277,7 +277,7 @@
          <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>3.9.7</version>
+            <version>3.9.9</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -298,7 +298,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.55</version>
+            <version>9.0.56</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>

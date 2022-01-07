@@ -29,10 +29,6 @@ export GCP_KEY_PATH=${SEC_PATH}/common/gcp-provision
 export GCP_KEY_FILE=${VAULT_CACHE}/${GCP_KEY_PATH}
 export SPLUNK_SINK_SEC_PATH=${SEC_PATH}/common/splunk-sink
 
-# Drone env
-export DRONE_SERVER=https://drone.med.stanford.edu
-export DRONE_TOKEN_FILE=${HOME}/.drone-token
-
 # GCP artifacts bucket
 export GCP_ARTIFACTS_BUCKET=${GCP_PROJECT_NAME}-artifacts
 
@@ -41,6 +37,7 @@ export GCP_INFRASTRUCTURE_BUCKET=${GCP_PROJECT_ID}-infrastructure
 export TF_BACKEND_PREFIX=terraform/${GCP_PROJECT_ID}/${GCP_ENVIRONMENT}/state
 # Upgrade to terraform v0.12
 export TF_CMD=/usr/local/bin/terraform
+export TF_VERSION=1.0.0
 
 # GCP Networking
 export GCP_NETWORK=${GCP_VPC_NAME}

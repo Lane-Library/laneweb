@@ -1,0 +1,19 @@
+# Ref: https://docs.gitlab.com/ee/api/project_level_variables.html#create-variable
+# Add all gitlab secrets defined in a file, $1
+#
+# The file format is
+#   <sec_name> <sec_value> <sec_options> ....
+#
+# <sec_value> may be one of:
+#     vault://<path>
+#     file://<path>
+#     string_value
+#
+# <sec_options>:
+#     --form variable_type=[env_var|file]
+#     --form protected=[yes|no]
+#     --form masked=[yes|no]
+
+# kaniko will take GOOGLE_APPLICATION_CREDENTIALS for gcr.io auth
+GOOGLE_APPLICATION_CREDENTIALS  vault://${DOCKER_REGISTRY_PASSWORD_PATH}    --form variable_type=file
+
