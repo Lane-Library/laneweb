@@ -1,44 +1,54 @@
-/*styles for classes on homepage*/
-.event {
-	margin-bottom: 15px;
-	position: relative;
-	z-index: 1;
+
+.event{
 	display: flex;
 }
-/* :before rules are about getting colored date box the same height as the .event box */
-.event:before {
-	content: ' ';
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	width: 17%;
-	z-index: -1;
-}
 
-.event div:nth-child(2) {
-	width: 73%;
-	padding-left: 12px
+li.event{
+	margin: 2em 0;
+	border-bottom: none;
 }
-
-.event div {
+.event span {
+	display: inline-block;
+}
+.event .title {
 	display: block;
 }
 
-.date {
-	text-transform: uppercase;
-	color: white;
-	padding: 4px 4px 20px;
-	width: 17%;
+.event .date{
+    height: 70px;
+    padding-top: 9px;
+    background-color: #09425A;
+    color: white;
+    margin-right: 12px;
 }
+
+.event .date span{
+	width: 60px;
+    text-align: center;
+    font-weight: 100;
+}
+
+.event .date hr{
+	width: 50%;
+	margin: auto;
+}
+
+.event .date span.day{
+    font-weight: bold;
+}	
+
+
+a.all-classes {
+    padding-top:30px;
+    padding-left: 8px;
+    font-weight: bold;
+}
+
 
 .seminar:before {
 	background-color: #09425a;
 }
 
-.laneclass:before {
-	background-color: #009abb;
-}
 
 .time {
 	font-weight: bold;

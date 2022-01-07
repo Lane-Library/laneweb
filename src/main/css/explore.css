@@ -1,0 +1,39 @@
+li.explore {
+	margin: 2em 0;
+	display: flex;
+	border-bottom: none;
+}
+
+.explore div:first-child {
+	margin-right: 15px;
+	align-self: center;
+}
+
+
+.explore div:first-child section {
+	background-color: #8c1515;
+	display: inline-block;
+	height: 60px;
+	width: 60px;
+	vertical-align: middle;
+}
+
+.explore div:first-child span {
+	display: block;
+    padding-left: 17px;
+    padding-top: 15px;
+}
+
+.explore div {
+	line-height: normal;
+}
+
+.explore i {
+	color: white;
+	font-size: 1.9em;
+}
+
+.explore div label {
+	font-size: 20px;
+	font-weight: 600;
+}

@@ -1,0 +1,23 @@
+
+
+.subscription{
+	background-color: #eee;
+	padding: 3em;
+	    
+}
+
+.subscription section{
+	position: relative;	
+}
+
+.subscription input[type='email']{
+	padding: 9px;
+	margin-right: 3px;
+	outline: none;
+	width: 70%;	
+}
+
+.subscription div.mailchimp{
+	display: inline-block;
+	width: 25%;
+}

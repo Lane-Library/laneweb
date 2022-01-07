@@ -1,6 +1,6 @@
 .module {
     margin-top: 24px;
-    padding: 12px;
+    padding: 2em;
     box-sizing: border-box;
     line-height: 1.6em;
     background-color: white;
@@ -93,10 +93,6 @@
     padding: 12px;
 }
 
-.grand-rounds, .upcoming-classes {
-    margin-top: 24px;
-    padding: 12%;
-}
 
 .grand-rounds h3, .upcoming-classes h3 {
     text-transform: uppercase;

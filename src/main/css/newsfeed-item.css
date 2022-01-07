@@ -1,16 +1,27 @@
 /*news feed from the blog on homepage*/
 
 
-.newsfeed{
-	min-height: 561px;
-	margin-top: 24px;
-	line-height: 1.6em;
-    box-sizing: border-box;
-    background-color: white;
+.blog{
+	height:100%;
+	background-color: white;
+	padding: 2.2em;
 }
 
-.newsfeed figure img{
-	 width:100%;
+.newsfeed{
+	margin-top:24px;
+	line-height: 1.6em;
+    box-sizing: border-box;
+    background-color: #f0f4f5;
+    
+}
+
+.newsfeed div:first-child{
+	margin: auto;
+}
+
+.newsfeed  img{
+	 max-width:100%;
+	 vertical-align: middle;
 }
 
 
@@ -18,21 +29,15 @@
 	padding:12px;
 } 
 
-.newsfeed hr{
-	margin:12px;
-}
 
 .newsfeed-title {
 	margin-top: 24px;
 	padding:12px;
+	font-size: larger;
+    font-weight: 600;
 }
 
-.newsfeed header{
-	padding: 10px; 
-	color: WHITE;
-	background-color: darkred;
-	font-size: 10px;
-	font-family: 'Fjord One',serif;
-	position: absolute;
-}
 
+.newsfeed .read-more{
+	font-weight: 600;	
+}
