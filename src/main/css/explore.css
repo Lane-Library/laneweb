@@ -37,3 +37,12 @@ li.explore {
 	font-size: 20px;
 	font-weight: 600;
 }
+
+.explore a {
+	color: black;
+}
+
+.explore a span {
+	display: block;
+
+	}
