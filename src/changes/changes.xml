@@ -7,8 +7,19 @@
         <title>Laneweb Releases</title>
     </properties>
       <body>
+      	<release date="2022-01-10" version="3.9.2" description="bug fix release">
+            <action date="2021-12-15" dev="ryanmax" issue="LANEWEB-10854" type="fix">
+                Header on Medical History Center Pages not loading
+            </action>
+            <action date="2021-12-17" dev="alainb" issue="LANEWEB-10858" type="fix">
+                Event page on Medical History Center Pages not display correctly
+            </action>
+            <action date="2022-01-07" dev="ryanmax" issue="LANEWEB-10861" type="fix">
+                Placeholder text missing on browse resource pages with search boxes
+            </action>
+         </release>
       	 <release date="2021-12-13" version="3.9.1" description="bug fix release">
-            <action date="2021-12-10" dev="alainb" issue="LANEWEB-10854" type="fix">
+            <action date="2021-12-10" dev="alainb" issue="LANEWEB-10846" type="fix">
                 Move template html content in includes/template
             </action>
          </release>
