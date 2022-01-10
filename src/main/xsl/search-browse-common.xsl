@@ -332,7 +332,7 @@
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource"/>
         <xsl:choose>
-            <xsl:when test="contains($eresource/s:primaryType,'Print')">Print</xsl:when>
+            <xsl:when test="matches($eresource/s:primaryType,'(Book|Journal)')"> Print</xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:function>
