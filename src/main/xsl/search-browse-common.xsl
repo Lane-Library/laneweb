@@ -242,14 +242,18 @@
         <xsl:param name="eresource"/>
         <!-- don't write print holdings when there are no items and a digital holding exists (helps with component/article/chapter records pointing to a parent)  -->
         <xsl:if test="count($links) > 0 and not($eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) &gt; 0)">
+            <!-- items can be available but not requestable (reserves, equipment, reference) -->
+            <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0"/>
+            <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
+            <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0"/>
+            <xsl:variable name="linkedToParentRecord" select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 and $links[1]/s:locationUrl"/>
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
-                    <xsl:when test="$eresource/s:available &gt; 0 or 
-                                    ($eresource/s:total &gt; 0 and f:specialPrintAvailableLocations($links))">
+                    <xsl:when test="$itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader available"><i class="fa fa-book"></i> Print Available</span>
                         <span class="hldgsTrigger"/>
-                        <xsl:if test="$eresource/s:available &gt; 0">
+                        <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
                                 <a class="btn" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
                             </span>
@@ -258,7 +262,7 @@
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
                         <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
                     </xsl:when>
-                    <xsl:when test="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 and $links[1]/s:locationUrl">
+                    <xsl:when test="$linkedToParentRecord">
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a class="citation" href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
@@ -319,15 +323,6 @@
             </div>
             <xsl:apply-templates select="$eresource/s:description"/>
         </xsl:if>
-    </xsl:function>
-
-    <!--
-    print locations with items that might not circulate should still show as "available" but not have a request button
-    NOTE: brittle since relies on location names
-     -->
-    <xsl:function name="f:specialPrintAvailableLocations" as="xsd:boolean">
-        <xsl:param name="links"/>
-        <xsl:sequence select="count($links[matches(s:locationName,'(appointment|reference: lc classification|reserve)','i')]) > 0"/>
     </xsl:function>
 
 </xsl:stylesheet>
