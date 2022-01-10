@@ -29,4 +29,3 @@ $ make push
 ```
 $ make pull
 ```
-
