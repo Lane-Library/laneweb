@@ -251,7 +251,7 @@
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
                     <xsl:when test="$itemsAvailableButMaybeNotRequestable">
-                        <span class="hldgsHeader available"><i class="fa fa-book"></i> Print Available</span>
+                        <span class="hldgsHeader available"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Available</span>
                         <span class="hldgsTrigger"/>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
@@ -260,13 +260,13 @@
                         </xsl:if>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
-                        <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> Print Unavailable: Checked out</span>
+                        <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Unavailable: Checked out</span>
                     </xsl:when>
                     <xsl:when test="$linkedToParentRecord">
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a class="citation" href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> Print status unknown</span>
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Status unknown</span>
                         <span class="hldgsTrigger"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -323,6 +323,18 @@
             </div>
             <xsl:apply-templates select="$eresource/s:description"/>
         </xsl:if>
+    </xsl:function>
+
+    <!-- 
+    only print books/journals get "Print" label
+    so things like maps and USB cords don't get called "Print"
+    -->
+    <xsl:function name="f:itemTypeLabel">
+        <xsl:param name="eresource"/>
+        <xsl:choose>
+            <xsl:when test="contains($eresource/s:primaryType,'Print')">Print</xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
     </xsl:function>
 
 </xsl:stylesheet>
