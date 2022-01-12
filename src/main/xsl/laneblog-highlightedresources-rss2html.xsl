@@ -25,10 +25,10 @@
 					select="./content:encoded//h:img" />
 			</div>
 			<div class="pure-u-1-2">
-				<div class="newsfeed-title">
+				<div class="newsfeed-title hightlighted-news">
 					<xsl:value-of select="title" />
 				</div>
-				<section>
+				<section class="hightlighted-news">
 					<xsl:for-each select="./content:encoded//h:article">
 						<xsl:apply-templates />
 					</xsl:for-each>

@@ -1,43 +1,70 @@
 /*news feed from the blog on homepage*/
-
-
-.blog{
-	height:100%;
+.blog {
+	height: 100%;
 	background-color: white;
 	padding: 2.2em;
 }
 
-.newsfeed{
-	margin-top:24px;
+.newsfeed {
+	margin-top: 24px;
 	line-height: 1.6em;
-    box-sizing: border-box;
-    background-color: #f0f4f5;
-    
+	box-sizing: border-box;
+	background-color: #f0f4f5;
 }
 
-.newsfeed div:first-child{
+.newsfeed div:first-child {
 	margin: auto;
 }
 
-.newsfeed  img{
-	 max-width:100%;
-	 vertical-align: middle;
+.newsfeed  img {
+	max-width: 100%;
+	vertical-align: middle;
 }
 
-
-.newsfeed section{
-	padding:12px;
-} 
-
+.newsfeed section {
+	padding: 12px;
+}
 
 .newsfeed-title {
 	margin-top: 24px;
-	padding:12px;
+	padding: 12px;
 	font-size: larger;
-    font-weight: 600;
+	font-weight: 600;
 }
 
+.newsfeed .read-more {
+	font-weight: 600;
+}
 
-.newsfeed .read-more{
-	font-weight: 600;	
+.newsfeed-title.hightlighted-news {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+@media ( max-width : 1750px) {
+	.newsfeed section.hightlighted-news p {
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+	}
+}
+
+@media ( max-width : 1500px) {
+	.newsfeed section.hightlighted-news p {
+		-webkit-line-clamp: 4;
+	}
+}
+
+@media ( max-width : 1300px) {
+	.newsfeed section.hightlighted-news p {
+		-webkit-line-clamp: 3;
+	}
+}
+
+@media ( max-width : 1200px) {
+	.newsfeed section.hightlighted-news p {
+		-webkit-line-clamp: 2;
+	}
 }
