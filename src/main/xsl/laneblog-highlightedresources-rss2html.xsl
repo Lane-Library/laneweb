@@ -20,9 +20,9 @@
 	</xsl:template>
 	<xsl:template match="item">
 		<div class="newsfeed pure-g">
-			<div class="pure-u-1-2 image" >
-			
-				<!-- <xsl:apply-templates select="./content:encoded//h:img" /> -->
+			<div class="pure-u-1-2">
+				<xsl:apply-templates
+					select="./content:encoded//h:img" />
 			</div>
 			<div class="pure-u-1-2">
 				<div class="newsfeed-title">
