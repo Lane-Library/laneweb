@@ -33,7 +33,7 @@ public class CMERedirectController {
 
     private static final String UTD_CME_ARGS = "unid=?&srcsys=?&eiv=2.1.0";
 
-    private static final String UTD_CME_URL = "http://www.uptodate.com/contents/search?";
+    private static final String UTD_CME_URL = "https://www.uptodate.com/contents/search?";
 
     private DataBinder dataBinder;
 
