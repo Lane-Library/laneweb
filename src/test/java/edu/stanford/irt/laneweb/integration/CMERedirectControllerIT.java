@@ -56,7 +56,7 @@ public class CMERedirectControllerIT {
     public void testCMEControllerLPCH() throws Exception {
         Map<String, Object> attributes = new HashMap<>(Collections.singletonMap(Model.USER, USER));
         attributes.put(Model.EMRID, "lpch-emrid");
-        String redirect4 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
+        String redirect4 = "https://login.laneproxy.stanford.edu/login?url=https://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
                 .header("X-FORWARDED-FOR", "10.250.217.148")).andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern(redirect4));
@@ -65,17 +65,17 @@ public class CMERedirectControllerIT {
     @Test
     public void testCMEControllerRedirect1() throws Exception {
         Map<String, Object> attributes = Collections.singletonMap(Model.USER, USER);
-        String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
-        String redirect1 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
+        String url = "/redirect/cme?url=https://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
+        String redirect1 = "https://login.laneproxy.stanford.edu/login?url=https://www.uptodate.com/foo?source=search_result&unid=7629ef7dc159f69ed14476f452c194d0&srcsys=EZPX90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern(redirect1));
     }
 
     @Test
     public void testCMEControllerRedirect2() throws Exception {
-        String url = "/redirect/cme?url=http://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
+        String url = "/redirect/cme?url=https://www.uptodate.com/foo?source=search_result&search=myocardial+infarction&selectedTitle=37%7E150";
         Map<String, Object> attributes = Collections.singletonMap(Model.EMRID, "emrid");
-        String redirect2 = "https://login.laneproxy.stanford.edu/login?url=http://www.uptodate.com/foo?source=search_result&unid=emrid&srcsys=epic90710&eiv=2.1.0";
+        String redirect2 = "https://login.laneproxy.stanford.edu/login?url=https://www.uptodate.com/foo?source=search_result&unid=emrid&srcsys=epic90710&eiv=2.1.0";
         this.mockMvc.perform(get(url).sessionAttrs(attributes)).andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern(redirect2));
     }
@@ -84,7 +84,7 @@ public class CMERedirectControllerIT {
     public void testCMEControllerSHC() throws Exception {
         Map<String, Object> attributes = new HashMap<>(Collections.singletonMap(Model.USER, USER));
         attributes.put(Model.EMRID, "emrid");
-        String redirect3 = "http://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0";
+        String redirect3 = "https://www.uptodate.com/contents/search?unid=emrid&srcsys=epic90710&eiv=2.1.0";
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
                 .header("X-FORWARDED-FOR", "171.65.1.202")).andExpect(status().isFound())
                 .andExpect(redirectedUrl(redirect3));
