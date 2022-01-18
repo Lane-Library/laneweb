@@ -26,7 +26,7 @@ public class UserCookieUpdatorFilter extends AbstractLanewebFilter {
     @Value("${edu.stanford.irt.laneweb.useridcookiecodec.oldkey}")
     String oldUserCookieKey;
 
-    @Value("${edu.stanford.irt.laneweb.oldUseridhashkey}")
+    @Value("${edu.stanford.irt.laneweb.useridhasholdkey}")
     String oldUserIdHashKey;
 
      CookieUserFactory oldCookieUserFactory;
