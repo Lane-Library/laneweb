@@ -5,7 +5,7 @@ public enum CookieName {
     EXPIRATION("lane-login-expiration-date"),
     EZPROXY("ezproxy"),
     IS_PERSISTENT("isPersistent"),
-    USER("lane_user");
+    USER("user");
 
     private String name;
 
