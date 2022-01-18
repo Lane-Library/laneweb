@@ -41,11 +41,11 @@ public class UserCookieUpdatorFilter extends AbstractLanewebFilter {
     @Override
     protected void internalDoFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        if (this.cookieHelper.isOldUserCookiesPresent(request)) {
-            User user = this.oldCookieUserFactory.createUser(request);
-            this.cookieHelper.setCookies(request, response, user);
-            this.cookieHelper.resetOldUserCookies(response);
-        }
+//        if (this.cookieHelper.isOldUserCookiesPresent(request)) {
+//            User user = this.oldCookieUserFactory.createUser(request);
+//            this.cookieHelper.setCookies(request, response, user);
+//            this.cookieHelper.resetOldUserCookies(response);
+//        }
         chain.doFilter(request, response);
     }
 }
