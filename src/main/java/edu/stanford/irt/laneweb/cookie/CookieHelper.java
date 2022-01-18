@@ -26,7 +26,7 @@ public class CookieHelper {
     @Value("edu.stanford.irt.laneweb.useridhashkey")
     String  userIdHashKey; 
 
-    private static final String oldUserCookieName = "lane-user";
+    private static final String oldUserCookieName = "lane_user";
 
     
 
