@@ -48,14 +48,6 @@ public class LanewebIT {
     }
 
     @Test
-    public void testBioresearchBrowse() throws Exception {
-        this.mockMvc
-                .perform(get("/biomed-resources/ejsubjectbrowse.html?m=Ophthalmology")
-                        .servletPath("/biomed-resources/ejsubjectbrowse.html"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
-    }
-
-    @Test
     public void testClinicalSearch() throws Exception {
         Map<String, String> ns = new HashMap<>();
         ns.put("h", "http://www.w3.org/1999/xhtml");
