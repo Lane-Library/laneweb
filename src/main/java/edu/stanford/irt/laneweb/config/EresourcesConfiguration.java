@@ -46,10 +46,8 @@ import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseLetter;
 import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrategy;
-import edu.stanford.irt.laneweb.eresources.browse.MeSHEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
-import edu.stanford.irt.laneweb.eresources.browse.SubjectBrowseGenerator;
 import edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator;
 import edu.stanford.irt.laneweb.eresources.search.FacetComparator;
 import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy;
@@ -146,18 +144,6 @@ public class EresourcesConfiguration {
     @Scope("prototype")
     public Generator eresourcesCountGenerator(final SolrService solrService) {
         return new EresourcesCountGenerator(solrService);
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-mesh-html")
-    @Scope("prototype")
-    public Generator eresourcesMeshGenerator(final SolrService solrService) {
-        return new MeSHEresourcesGenerator("er-mesh-html", solrService, pagingEresourceListHTMLSAXStrategy());
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-subject-browse")
-    @Scope("prototype")
-    public Generator eresourcesSubjectBrowseGenerator(final SolrService solrService, final Marshaller marshaller) {
-        return new SubjectBrowseGenerator("er-subject-browse", solrService, marshaller);
     }
 
     @Bean
