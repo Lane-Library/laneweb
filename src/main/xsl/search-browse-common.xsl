@@ -145,12 +145,24 @@
             </xsl:attribute>
         </xsl:if>
     </xsl:function>
-    
+
     <xsl:function name="f:primaryLink">
         <xsl:param name="link"/>
+        <xsl:variable name="eresource" select="$link/.."/>
+        <!-- use s:locationUrl for Lane Catalog records that point to a parent record -->
+        <xsl:variable name="url">
+            <xsl:choose>
+                <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
+                    <xsl:value-of select="$link/s:locationUrl"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$link/s:url"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <div>
-            <a class="primaryLink" href="{$link/s:url}" title="{$link/../s:title}">
-                <xsl:apply-templates select="$link/../s:title" />
+            <a class="primaryLink" href="{$url}" title="{$eresource/s:title}">
+                <xsl:apply-templates select="$eresource/s:title" />
             </a>
         </div>
     </xsl:function>
@@ -246,7 +258,6 @@
             <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0"/>
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
             <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0"/>
-            <xsl:variable name="linkedToParentRecord" select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 and $links[1]/s:locationUrl"/>
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
@@ -262,7 +273,7 @@
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
                         <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Unavailable: Checked out</span>
                     </xsl:when>
-                    <xsl:when test="$linkedToParentRecord">
+                    <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                         <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a class="citation" href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
@@ -335,6 +346,11 @@
             <xsl:when test="matches($eresource/s:primaryType,'(Book|Journal)')"> Print</xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
+    </xsl:function>
+
+    <xsl:function name="f:isPrintRecordPointingToParent" as="xsd:boolean">
+        <xsl:param name="eresource"/>
+        <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 and $eresource/s:link[1]/s:locationUrl"/>
     </xsl:function>
 
 </xsl:stylesheet>
