@@ -6,6 +6,11 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2022-01-14" version="3.9.3" description="emergency release">
+			<action date="2022-01-14" dev="ryanmax" issue="LANEWEB-10867" type="fix">
+				UpToDate CME redirect not working in Firefox 96.0	
+			</action>			
+		</release>
 		<release date="2022-01-10" version="3.9.2" description="bug fix release">
 			<action date="2021-12-15" dev="ryanmax" issue="LANEWEB-10854" type="fix">
 				Header on Medical History Center Pages not loading
