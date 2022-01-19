@@ -80,6 +80,23 @@ public class UserCookieCodec {
         return new PersistentLoginToken(user, now, userAgentHash, encryptedValue);
     }
 
+    public PersistentLoginToken createLoginToken(final User user, final int userAgentHash, Long expirationDate) {
+        Objects.requireNonNull(user, "null user");
+        StringBuilder builder = new StringBuilder();
+        builder.append(user.getId());
+        builder.append(COOKIE_VALUE_SEPARATOR);
+        builder.append(user.getName());
+        builder.append(COOKIE_VALUE_SEPARATOR);
+        builder.append(user.getEmail());
+        builder.append(COOKIE_VALUE_SEPARATOR);
+        builder.append(expirationDate);
+        builder.append(COOKIE_VALUE_SEPARATOR);
+        builder.append(userAgentHash);
+        String encryptedValue = encrypt(builder.toString());
+        return new PersistentLoginToken(user, expirationDate, userAgentHash, encryptedValue);
+    }
+
+    
     public PersistentLoginToken restoreLoginToken(final String encryptedValue, final String userIdHashKey) {
         Objects.requireNonNull(encryptedValue, "null encryptedValue");
         String decrypted = decrypt(encryptedValue);

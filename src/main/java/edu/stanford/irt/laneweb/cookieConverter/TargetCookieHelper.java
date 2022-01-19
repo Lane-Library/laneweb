@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.cookieConverter;
 
 import java.time.Duration;
 import java.util.Collection;
+import java.util.Objects;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +27,7 @@ public class TargetCookieHelper {
     @Value("edu.stanford.irt.laneweb.useridhashkey")
     String  userIdHashKey; 
 
- 
-
-    
+   
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(28).getSeconds());
@@ -42,10 +41,21 @@ public class TargetCookieHelper {
         String userAgent = request.getHeader("User-Agent");
         if (null != userAgent && null != user) {
             user = new User( user.getId(), user.getName()  , user.getEmail(), userIdHashKey);
-            PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
+            Long expirationDate = this.getExpirationDate(request);
+            PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode(), expirationDate);
             this.addCookie(CookieName.USER.toString(), token.getEncryptedValue(), response);
             addSameSiteToCookies(response);
         }
+    }
+
+    private Long getExpirationDate(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; cookies != null && i < cookies.length; i++) {
+            if (CookieName.EXPIRATION.toString().equals(cookies[i].getName())) {
+                return  Long.valueOf(cookies[i].getValue());
+            }
+        }
+        return null;
     }
 
     private void addCookie(final String name, final String value, final HttpServletResponse response) {
@@ -73,4 +83,5 @@ public class TargetCookieHelper {
             }
         }
     }
+    
 }
