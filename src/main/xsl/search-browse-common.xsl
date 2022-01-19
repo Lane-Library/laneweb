@@ -274,7 +274,7 @@
                         <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Unavailable: Checked out</span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a class="citation" href="{$links[1]/s:locationUrl}"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
+                        <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
                         <span class="hldgsHeader"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Status unknown</span>
