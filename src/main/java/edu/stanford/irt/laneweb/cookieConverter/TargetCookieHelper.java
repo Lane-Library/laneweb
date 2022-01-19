@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cookie;
+package edu.stanford.irt.laneweb.cookieConverter;
 
 import java.time.Duration;
 import java.util.Collection;
@@ -18,7 +18,7 @@ import edu.stanford.irt.laneweb.user.User;
 
 
 @Service
-public class CookieHelper {
+public class TargetCookieHelper {
 
     @Autowired
     UserCookieCodec codec;
@@ -26,7 +26,7 @@ public class CookieHelper {
     @Value("edu.stanford.irt.laneweb.useridhashkey")
     String  userIdHashKey; 
 
-    private static final String oldUserCookieName = "lane_user";
+ 
 
     
 
@@ -72,23 +72,5 @@ public class CookieHelper {
                 response.addHeader(COOKIE_HEADERS, header);
             }
         }
-    }
-
-    public void resetOldUserCookies(final HttpServletResponse response) {
-        Cookie cookie = new Cookie(oldUserCookieName, null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        cookie.setHttpOnly(true);
-        response.addCookie(cookie);
-    }
-
-    public Cookie getOldUserCookies(final HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        for (int i = 0; cookies != null && i < cookies.length; i++) {
-            if (oldUserCookieName.equals(cookies[i].getName())) {
-                return cookies[i];
-            }
-        }
-        return null;
     }
 }
