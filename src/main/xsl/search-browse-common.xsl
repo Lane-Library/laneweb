@@ -150,21 +150,22 @@
         <xsl:param name="link"/>
         <xsl:variable name="eresource" select="$link/.."/>
         <!-- use s:locationUrl for Lane Catalog records that point to a parent record -->
-        <xsl:variable name="url">
-            <xsl:choose>
-                <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
-                    <xsl:value-of select="$link/s:locationUrl"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$link/s:url"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <div>
-            <a class="primaryLink" href="{$url}" title="{$eresource/s:title}">
-                <xsl:apply-templates select="$eresource/s:title" />
-            </a>
-        </div>
+        <xsl:choose>
+            <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
+                <div>
+                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
+                        <xsl:apply-templates select="$eresource/s:title" />
+                    </a>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <div>
+                    <a class="primaryLink" href="{$link/s:url}" title="{$eresource/s:title}">
+                        <xsl:apply-templates select="$eresource/s:title" />
+                    </a>
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
     <!-- used for Lane and SUL digital links -->
