@@ -82,14 +82,13 @@ public class CookieHelper {
         response.addCookie(cookie);
     }
 
-    public boolean isOldUserCookiesPresent(final HttpServletRequest request) {
-        Cookie userCookie = null;
+    public Cookie getOldUserCookies(final HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; cookies != null && i < cookies.length && userCookie == null; i++) {
+        for (int i = 0; cookies != null && i < cookies.length; i++) {
             if (oldUserCookieName.equals(cookies[i].getName())) {
-                return true;
+                return cookies[i];
             }
         }
-        return false;
+        return null;
     }
 }
