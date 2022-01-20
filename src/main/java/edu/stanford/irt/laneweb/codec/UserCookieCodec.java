@@ -43,7 +43,6 @@ public class UserCookieCodec {
     private Clock clock;
 
     private SecretKey desKey;
-    
 
     public UserCookieCodec(final String key) {
         this(key, Clock.systemDefaultZone());
