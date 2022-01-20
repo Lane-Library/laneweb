@@ -38,15 +38,3 @@ pull: pull-latest ## pull latest image from project's docker registry
 #scan: build-app sonar-scan ## mvn clean package and sonar-scan
 #	@echo 'See report on https://sonarqube.med.stanford.edu/dashboard?id=lane:laneweb'
 
-.PHONY: promote-last-git-tag
-promote-last-git-tag: config-gcloud ## promote last git tag to prod-latest
-	@git fetch --tags
-	@export IMAGE_TAG=$$(git describe --abbrev=0 --tags); \
-	export IMAGE_PATH="$${DOCKER_REGISTRY}/$${GCP_PROJECT_ID}/$${DOCKER_IMAGE}" ; \
-	export DOCKER_IMAGE_VERSION=$${IMAGE_TAG} ;\
-	echo "pulling $${DOCKER_IMAGE_VERSION}" ;\
-	make pull-version ;\
-	gcloud --quiet container images add-tag \
-	$${IMAGE_PATH}:$${IMAGE_TAG} \
-	$${IMAGE_PATH}:prod-latest ;\
-	echo "promoted $${IMAGE_TAG} to prod-latest"
