@@ -32,7 +32,10 @@ public class UserCookieUpdatorFilter extends AbstractLanewebFilter {
         // In tomcat, war configuration the @Autowired doesn't work.
         if (this.sourceCookieHelper != null) {
             Cookie oldCookie = this.sourceCookieHelper.getOldUserCookies(request);
-            if (oldCookie != null) {
+            if (oldCookie == null) {
+                chain.doFilter(request, response);
+            }
+            else {
                 try {
                     String sourceCookieValue = this.sourceCookieHelper.getCookieValue(oldCookie, request.getHeader("User-Agent"));
                     log.info("Cookie converter --> {} ", sourceCookieValue);
@@ -46,7 +49,6 @@ public class UserCookieUpdatorFilter extends AbstractLanewebFilter {
                 }
             }
         }
-        chain.doFilter(request, response);
     }
 
     private String getUrl(HttpServletRequest req) {

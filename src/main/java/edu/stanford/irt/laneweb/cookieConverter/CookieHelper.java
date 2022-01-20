@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.cookieConverter;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.time.Clock;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
