@@ -48,6 +48,8 @@ public class UserCookieUpdatorFilter extends AbstractLanewebFilter {
                     response.sendRedirect(url);
                 }
             }
+        }else {
+            chain.doFilter(request, response);
         }
     }
 
