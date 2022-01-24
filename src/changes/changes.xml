@@ -6,8 +6,19 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2022-01-24" version="3.9.4" description="emergency release">
+			<action date="2022-01-24" dev="ryanmax" issue="LANEWEB-10869" type="fix">
+				header/footer missing on wilson pages					
+			</action>
+			<action date="2021-12-03" dev="ryanmax" issue="LANEWEB-10840" type="update">
+				remove subject browse functionality
+			</action>
+			<action date="2022-01-19" dev="alainb" issue="LANEWEB-10868" type="fix">
+				change useridcookiecodec.key and useridhashkey ASAP	
+			</action>			
+		</release>
 		<release date="2022-01-14" version="3.9.3" description="emergency release">
-			<action date="2022-01-14" dev="ryanmax" issue="LANEWEB-10867" type="fix">
+			<action date="2022-01-10" dev="ryanmax" issue="LANEWEB-10867" type="fix">
 				UpToDate CME redirect not working in Firefox 96.0	
 			</action>			
 		</release>
