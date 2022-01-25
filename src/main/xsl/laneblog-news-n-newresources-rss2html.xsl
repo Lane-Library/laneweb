@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:rss="http://purl.org/rss/1.0/"
-	xmlns:content="http://purl.org/rss/1.0/modules/content/"
-	xmlns:h="http://www.w3.org/1999/xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	exclude-result-prefixes="rss h content" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:rss="http://purl.org/rss/1.0/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="rss h content" version="2.0">
 	<xsl:template match="node()">
 		<xsl:copy>
 			<xsl:apply-templates select="node()|@*" />
@@ -15,32 +10,26 @@
 		<xsl:copy-of select="." />
 	</xsl:template>
 	<xsl:template match="rss">
-		<div class="pure-g">
-			<xsl:apply-templates
-				select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) and count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]" />
-		</div>
+		<xsl:apply-templates
+			select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) and count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]" />
 	</xsl:template>
 	<xsl:template match="item">
-		<div class="pure-u-1-2">
+		<div class="pure-u-1-3">
 			<div class="newsfeed">
 				<div>
 					<figure>
-						<xsl:apply-templates
-							select="./content:encoded//h:img" />
+						<xsl:apply-templates select="./content:encoded//h:img" />
 					</figure>
 				</div>
 				<div class="newsfeed-title">
 					<xsl:value-of select="title" />
 				</div>
-
-				<section>
-					<xsl:for-each select="./content:encoded//h:article">
-						<xsl:apply-templates />
-					</xsl:for-each>
-					<a class="read-more" href="{link}" title="feed link---{../../channel/title}">
-						Read more <i class="fa fa-arrow-right"/>
-					</a>
-				</section>
+				<div class="read-more">
+				<a  href="{link}" title="feed link---{../../channel/title}">
+					Read More
+					<i class="fa fa-arrow-right"></i>
+				</a>
+				</div>
 			</div>
 		</div>
 	</xsl:template>

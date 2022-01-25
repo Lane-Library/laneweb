@@ -2,19 +2,26 @@
 .blog {
 	height: 100%;
 	background-color: white;
-	padding: 2.2em;
+	padding: 1.2em;
+}
+
+.blog .pure-g div.pure-u-1-3 {
+	padding: 12px;	
+	position: relative;
+}
+
+.blog h3{
+    margin-left: 12px;
 }
 
 .newsfeed {
-	margin-top: 24px;
+	margin-top: 8px;
 	line-height: 1.6em;
 	box-sizing: border-box;
 	background-color: #f0f4f5;
+	height: 100%;
 }
 
-.newsfeed div:first-child {
-	margin: auto;
-}
 
 .newsfeed  img {
 	max-width: 100%;
@@ -26,45 +33,22 @@
 }
 
 .newsfeed-title {
-	margin-top: 24px;
+	margin-top: 6px;
 	padding: 12px;
 	font-size: larger;
 	font-weight: 600;
+	padding-bottom: 50px;
 }
 
 .newsfeed .read-more {
 	font-weight: 600;
+	padding: 12px;
+	position: absolute;
+	bottom: 9px;
 }
 
 .newsfeed-title.hightlighted-news {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-}
-
-@media ( max-width : 1750px) {
-	.newsfeed section.hightlighted-news p {
-		overflow: hidden;
-		display: -webkit-box;
-		-webkit-line-clamp: 5;
-		-webkit-box-orient: vertical;
-	}
-}
-
-@media ( max-width : 1500px) {
-	.newsfeed section.hightlighted-news p {
-		-webkit-line-clamp: 4;
-	}
-}
-
-@media ( max-width : 1300px) {
-	.newsfeed section.hightlighted-news p {
-		-webkit-line-clamp: 3;
-	}
-}
-
-@media ( max-width : 1200px) {
-	.newsfeed section.hightlighted-news p {
-		-webkit-line-clamp: 2;
-	}
 }

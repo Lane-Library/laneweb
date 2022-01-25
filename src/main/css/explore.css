@@ -1,15 +1,10 @@
-li.explore {
-	margin: 2em 0;
-	display: flex;
-	border-bottom: none;
+.explore {
+	width: 24%;
+	display: inline-block;	
 }
 
-.explore div:first-child {
-	margin-right: 15px;
-	align-self: center;
-}
 
-.explore div:first-child section {
+.explore section {
 	background-color: #8c1515;
 	display: inline-block;
 	height: 60px;
@@ -17,11 +12,25 @@ li.explore {
 	vertical-align: middle;
 }
 
-.explore div:first-child span {
+.explore div.icon span {
 	display: block;
 	padding-left: 17px;
 	padding-top: 15px;
 }
+
+ .explore div.icon{
+ 	margin-left: 6px;
+ }
+
+.explore .explore-container{
+	display: flex;
+	align-items: center;
+	
+}
+
+.explore .detail{
+	 margin-left: 12px;
+}   
 
 .explore div {
 	line-height: normal;
@@ -34,7 +43,7 @@ li.explore {
 
 .explore div label {
 	font-size: 20px;
-	font-weight: 600;
+	font-weight: lighter;
 }
 
 .explore a {
