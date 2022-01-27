@@ -1,5 +1,6 @@
 .subscription {
 	height: calc(100% - 24px);
+	min-height: 300px;
 }
 
 .subscription>div {

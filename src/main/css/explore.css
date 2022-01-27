@@ -1,8 +1,7 @@
 .explore {
 	width: 24%;
-	display: inline-block;	
+	display: inline-block;
 }
-
 
 .explore section {
 	background-color: #8c1515;
@@ -18,19 +17,18 @@
 	padding-top: 15px;
 }
 
- .explore div.icon{
- 	margin-left: 6px;
- }
-
-.explore .explore-container{
-	display: flex;
-	align-items: center;
-	
+.explore div.icon {
+	margin-left: 6px;
 }
 
-.explore .detail{
-	 margin-left: 12px;
-}   
+.explore .explore-container {
+	display: flex;
+	align-items: center;
+}
+
+.explore .detail {
+	margin-left: 12px;
+}
 
 .explore div {
 	line-height: normal;
@@ -54,3 +52,14 @@
 	display: block;
 }
 
+@media ( max-width : 812px) {
+	.explore {
+		width: auto;
+		display: initial;
+	}
+	.explore .explore-container {
+		margin-bottom: 24px;
+	}
+	
+	
+}
