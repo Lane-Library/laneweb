@@ -2,14 +2,18 @@
 	height: calc(100% - 24px);
 }
 
-.event{
-	display: flex;
-}
 
 li.event{
-	margin: 2em 0;
+	display: flex;
 	border-bottom: none;
+	padding: 0px 24px 24px;	
 }
+
+li.event:last-child{
+	padding: 0px 24px;	
+}
+
+
 .event span {
 	display: inline-block;
 }

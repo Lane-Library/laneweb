@@ -1,15 +1,10 @@
 .subscription {
 	height: calc(100% - 24px);
-	min-height: 300px;
 }
 
 .subscription>div {
 	background-color: #eee;
 	padding: 2.5em;
-	margin-right: 2em;
-	align-items: center;
-	position: absolute;
-	top: 34%;
 }
 
 .subscription section {
@@ -20,7 +15,11 @@
 	padding: 9px;
 	margin-right: 3px;
 	outline: none;
-	width: 70%;
+	width: 60%;
+}
+
+.subscription .btn.outline{
+	padding: 8px 12px;
 }
 
 .subscription div.mailchimp {
