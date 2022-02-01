@@ -13,14 +13,21 @@
     content: none;
 }
 
+.portal .module h4:before {
+	border: none;
+}
+
+
 .portal .module h4 a {
-    color: white;
+    color: white;   
 }
 
 .portal .popular {
     background-color: transparent;
     border: none;
     padding: 0;
+    height: auto;
+    margin-top: 24px;
 }
 
 .portal .popular:before {
@@ -35,7 +42,7 @@
 .portal .popular h3 {
     border-bottom: 1px white solid;
     margin-bottom: 0;
-    padding: 6px;
+    padding: 6px;   
 }
 
 .portal .popular  div  div {
@@ -70,9 +77,12 @@
     background-color: #666666;
     font-size: 18px;
     margin: 0;
-    padding-bottom: 10px;
+    padding-bottom: 10px;    
 }
 
+.portal .business-card h3:before {
+	border: none;
+}
 .portal .business-card > div {
     background-color: white;
     color: black;
