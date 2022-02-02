@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.cookieConverter;
 import java.time.Duration;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,24 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.servlet.CookieName;
-import edu.stanford.irt.laneweb.user.User;
 
 
 @Service
-public class TargetCookieHelper {
+public class TargetCookieHelper extends CookieHelper{
 
     @Autowired
     UserCookieCodec codec;
     
-    @Value("edu.stanford.irt.laneweb.useridhashkey")
-    String  userIdHashKey; 
-
- 
-
+    @Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") 
+    String cookieKey;
     
+    @PostConstruct
+    public void setOldUerCookieCodec() {
+        super.setCookieHelper(this.cookieKey);       
+    }
 
     // login duration is two weeks:
     private static final int DURATION_SECONDS = Math.toIntExact(Duration.ofDays(28).getSeconds());
@@ -38,13 +39,16 @@ public class TargetCookieHelper {
     private static final String COOKIE_HEADERS = "Set-Cookie";
 
     // Set the cookie value with the new name
-    public void setCookies(final HttpServletRequest request, final HttpServletResponse response, User user) {
+    public void setCookies(final HttpServletRequest request, final HttpServletResponse response, String  decryptedValue) {
         String userAgent = request.getHeader("User-Agent");
-        if (null != userAgent && null != user) {
-            user = new User( user.getId(), user.getName()  , user.getEmail(), userIdHashKey);
-            PersistentLoginToken token = this.codec.createLoginToken(user, userAgent.hashCode());
-            this.addCookie(CookieName.USER.toString(), token.getEncryptedValue(), response);
-            addSameSiteToCookies(response);
+        if (null != userAgent && decryptedValue != null) {
+            try {
+                String encryptedValue = super.encrypt(decryptedValue);
+                this.addCookie(CookieName.USER.toString(), encryptedValue, response);
+                addSameSiteToCookies(response);
+            } catch (NumberFormatException e) {
+                throw new LanewebException("invalid encryptedValue", e);
+            }
         }
     }
 
@@ -73,4 +77,5 @@ public class TargetCookieHelper {
             }
         }
     }
+    
 }
