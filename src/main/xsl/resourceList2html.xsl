@@ -158,7 +158,7 @@
         </li>
     </xsl:template>
 
-    <!-- transforms eresource bib result node into displayable -->
+    <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <li class="resource" data-sid="{s:id}">
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>

@@ -275,6 +275,8 @@ li.active .description {
 .hldgsHeader {
     white-space: nowrap;
     padding-right: 15px;
+    display: inline-block;
+    min-width: 140px;
 }
 
 .hldgsHeader.available {

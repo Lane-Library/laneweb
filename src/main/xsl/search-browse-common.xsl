@@ -206,7 +206,12 @@
                     <thead>
                         <tr>
                             <th>Provider</th>
-                            <th>Description</th>
+                            <th>Version <i
+                                    class="fa fa-fw fa-info-circle yui3-tooltip-trigger"
+                                    title="Look here for issue, volume, and year information about the items in Lane 
+                                    Library's collection. If a date range has no end date, our collection includes the 
+                                    most recent issue."/>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -263,7 +268,7 @@
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
                     <xsl:when test="$itemsAvailableButMaybeNotRequestable">
-                        <span class="hldgsHeader available"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Available</span>
+                        <span class="hldgsHeader available"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Access</span>
                         <span class="hldgsTrigger"/>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
@@ -286,7 +291,12 @@
                     <thead>
                         <tr>
                             <th>Location</th>
-                            <th>Description</th>
+                            <th>Version <i
+                                    class="fa fa-fw fa-info-circle yui3-tooltip-trigger"
+                                    title="Look here for issue, volume, and year information about the items in Lane 
+                                    Library's collection. If a date range has no end date, our collection includes the 
+                                    most recent issue."/>
+                            </th>
                             <th>Call Number</th>
                             <th>Number of Items</th>
                         </tr>
