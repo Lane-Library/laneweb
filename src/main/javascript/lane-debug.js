@@ -89,7 +89,9 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "search-form-scroll.js",
         "message.js",
         "course-reserves.js",
-        "validation.js"
+        "validation.js",
+        "holdings-toggle.js",
+        "table-hide-empty-columns.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:
