@@ -133,6 +133,10 @@
    	 	height: auto;
    	 	margin: 7px 0;
 	}
+	.staff-list img.scaled-image{
+		max-width: 110px;
+	}
+	
 	.grand-rounds, .upcoming-classes {
 	    padding: 6px;
 		min-height: inherit;		    
