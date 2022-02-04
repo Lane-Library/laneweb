@@ -348,13 +348,13 @@
     </xsl:function>
 
     <!-- 
-    only print books/journals get "Print" label
-    so things like maps and USB cords don't get called "Print"
+    print books, journals, databases, etc. should get "Print" label
+    things like USB cords shouldn't get labeled "Print"
     -->
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource"/>
         <xsl:choose>
-            <xsl:when test="matches($eresource/s:primaryType,'(Book|Journal)')"> Print</xsl:when>
+            <xsl:when test="$eresource/s:primaryType != 'Other'"> Print</xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:function>
