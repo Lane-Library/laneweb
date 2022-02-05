@@ -103,12 +103,6 @@ li.active .description {
     font-size: 11px;
 }
 
-.searchTerms {
-    text-transform: none;
-    font-weight: bold;
-    font-style: italic;
-}
-
 .rightSearchTips {
     padding: 0 12px;
     white-space: nowrap;
