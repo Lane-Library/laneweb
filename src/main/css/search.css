@@ -97,6 +97,7 @@ li.active .description {
     margin-right: 10px;
 }
 
+/* rightSearchTips used on clinical/peds search */
 .rightSearchTips {
     padding: 0 12px;
     white-space: nowrap;
@@ -159,21 +160,6 @@ li.active .description {
 .permalink .fa-check {
     color: green;
 }
-
-@media ( max-width : 812px) {
-    .sourceInfo span {
-        margin-left: 0px;
-    } 
-    .sourceInfo span.permalink {
-        display: inline;
-    }
-    .browzineDirect{
-        position: static;
-        padding: 10px 0;
-    }
-}
-
-/* begin print holdings */
 
 .lwSearchResults .resource {
     padding: 12px;
@@ -292,6 +278,16 @@ li.active .description {
 }
 
 @media ( max-width : 812px) {
+    .sourceInfo span {
+        margin-left: 0px;
+    } 
+    .sourceInfo span.permalink {
+        display: inline;
+    }
+    .browzineDirect{
+        position: static;
+        padding: 10px 0;
+    }
     .search-results .content {
         margin: 0 5px;
     }
