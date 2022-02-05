@@ -97,12 +97,6 @@ li.active .description {
     margin-right: 10px;
 }
 
-.results-nav {
-    background-color: #f7f3e5;
-    padding: 10px 5px 24px;
-    font-size: 11px;
-}
-
 .rightSearchTips {
     padding: 0 12px;
     white-space: nowrap;
