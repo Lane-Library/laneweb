@@ -1,5 +1,4 @@
 .popular {
-	padding: 2.2em;
 	line-height: 1.6em;
 	background-color: white;
 	color: black;
@@ -16,6 +15,12 @@
 
 .popular a, .popular a .fa {
 	color: black;
+}
+
+@media ( max-width : 1100px) {
+	.popular .pure-u-1-2{
+		width: 50%;
+	}
 }
 
 @media ( max-width : 812px) {

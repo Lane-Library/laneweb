@@ -14,22 +14,20 @@
 			select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) and count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]" />
 	</xsl:template>
 	<xsl:template match="item">
-		<div class="pure-u-1-3">
-			<div class="newsfeed">
-				<div>
-					<figure>
-						<xsl:apply-templates select="./content:encoded//h:img" />
-					</figure>
-				</div>
-				<div class="newsfeed-title">
-					<xsl:value-of select="title" />
-				</div>
-				<div class="read-more">
-				<a  href="{link}" title="feed link---{../../channel/title}">
+		<div class="newsfeed">
+			<div>
+				<figure>
+					<xsl:apply-templates select="./content:encoded//h:img" />
+				</figure>
+			</div>
+			<div class="newsfeed-title">
+				<xsl:value-of select="title" />
+			</div>
+			<div class="read-more">
+				<a href="{link}" title="feed link---{../../channel/title}">
 					Read More
 					<i class="fa fa-arrow-right"></i>
 				</a>
-				</div>
 			</div>
 		</div>
 	</xsl:template>

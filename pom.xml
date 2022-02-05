@@ -445,6 +445,7 @@
                                 <include>footer-min.css</include>
                                 <include>headings-min.css</include>
                                 <include>module-min.css</include>
+                                <include>slideshow-min.css</include>
                                 <include>search-min.css</include>
                                 <include>popups-min.css</include>
                                 <include>online-resources-min.css</include>
@@ -498,6 +499,7 @@
                                 <include>search-indicator-min.js</include>
                                 <include>lane-bassett-min.js</include>
                                 <include>suggest-min.js</include>
+                                <include>slideshow-min.js</include>
                                 <include>search-min.js</include>
                                 <include>search-reset-min.js</include>
                                 <include>search-dropdown-min.js</include>
@@ -523,7 +525,6 @@
                                 <include>lane-spellcheck-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>seminars-min.js</include>
-                                <include>same-height-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>
                                 <include>back-to-top-min.js</include>

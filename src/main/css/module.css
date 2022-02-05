@@ -16,6 +16,10 @@
     visibility: hidden;
 }
 
+.module.same-height{
+	height: calc(100% - 24px);
+}
+
 .module fieldset{
 	padding: 0px;
 }
@@ -105,18 +109,30 @@
 
 .staff-list{
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	flex-wrap: wrap;
 }
 
 /* modules on contacts/staff-dir.html */
 .staff-list .module {
-	flex: 1 1 auto;
-    height: 198px;
-    width: 450px;
-    max-width: 450px;
+	flex: 1 1 ;
+    min-width: 370px;
+    max-width: 550px;
     margin: 12px 6px 0;
 }
+
+.staff-list .module.empty{
+	visibility: hidden;	
+}
+
+.staff-list.mgn-team .module {
+	margin: 12px ;
+	width: 47%; 
+	min-width: inherit;
+	max-width: inherit;
+	flex: inherit;	
+}
+
 
 .staff-list h4 {
     font-size: 16px;
@@ -127,8 +143,20 @@
   		display: block;
    	 	max-width: none;
    	 	height: auto;
+   	 	width: 100%;
    	 	margin: 7px 0;
+   	 	flex: inherit;
 	}
+	.staff-list.mgn-team .module {
+		width: 100%;
+	}
+	.staff-list img.scaled-image{
+		max-width: 110px;
+	}
+	.staff-list .module.empty{
+		display: none;	
+	}
+	
 	.grand-rounds, .upcoming-classes {
 	    padding: 6px;
 		min-height: inherit;		    

@@ -1,0 +1,80 @@
+#slide-show {
+	position: relative;
+	overflow: hidden;
+}
+
+.slide-container {
+	position: relative;
+	background-color: white;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	gap: 24px;
+}
+
+.slide {
+	display: inline-flex;
+	position: relative;
+}
+
+.slide.desactive-next {
+	display: none;
+}
+
+.slide.active-previous {
+	display: block;
+}
+
+.slide img {
+	width: 100%;
+}
+
+#next-slide {
+	right: 12px;
+}
+
+#previous-slide {
+	left: 12px;
+}
+
+#previous-slide, #next-slide {
+	position: absolute;
+	display: block;
+	top: 218px;
+	cursor: pointer;
+	color: black;
+	font-size: 2em;
+}
+
+#previous-slide.disable, #next-slide.disable {
+	display: none;
+}
+
+.staff-slide-show {
+	width: 95%;
+	margin: auto;
+	padding: 3em;
+	position: relative;
+}
+
+.staff-slide-show #slide-show{
+	height: 400px;
+}
+
+.staff-slide-show .slide div{
+	position: absolute;
+    padding-top: 100%;
+    width: 100%;
+}
+.staff-slide-show .slide div label{
+	display : block;
+	font-size: xx-large;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+}
+
+.staff-slide-show .slide div label.title{
+	font-size: inherit;
+}

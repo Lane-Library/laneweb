@@ -13,22 +13,20 @@
 		<xsl:apply-templates select="./channel/item[category[ . = 'Highlighted Resource'] and  count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 2]" />
 	</xsl:template>
 	<xsl:template match="item">
-		<div class="pure-u-1-3">
-			<div class="newsfeed">
-				<div>
-					<figure>
-						<xsl:apply-templates select="./content:encoded//h:img" />
-					</figure>
-				</div>
-				<div class="newsfeed-title">
-					<xsl:value-of select="title" />
-				</div>
-				<div class="read-more">
-					<a href="{link}" title="feed link---{../../channel/title}">
-						Read More
-						<i class="fa fa-arrow-right"></i>
-					</a>
-				</div>
+		<div class="newsfeed">
+			<div>
+				<figure>
+					<xsl:apply-templates select="./content:encoded//h:img" />
+				</figure>
+			</div>
+			<div class="newsfeed-title">
+				<xsl:value-of select="title" />
+			</div>
+			<div class="read-more">
+				<a href="{link}" title="feed link---{../../channel/title}">
+					Read More
+					<i class="fa fa-arrow-right"></i>
+				</a>
 			</div>
 		</div>
 

@@ -43,6 +43,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "util.js",
         "menu.js",
         "model.js",
+		"slideshow.js",
         "link-info.js",
         "lane-ie.js",
         "lane-persistent-login.js",
@@ -74,7 +75,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "lane-spellcheck.js",
         "description-toggle.js",
         "seminars.js",
-        "same-height.js",
         "shibboleth-sfx.js",
         "youtube.js",
         "back-to-top.js",
@@ -90,6 +90,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "message.js",
         "course-reserves.js",
         "validation.js"
+		
     ];
 
     //Model doesn't exist yet, get basePath by hand:

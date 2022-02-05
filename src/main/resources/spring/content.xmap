@@ -191,11 +191,33 @@
     <map:pipeline type="caching">
     	<map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match type="wildcard" pattern="liaison-card/*.html">
-            <map:generate type="html" src="{content-base}/contacts/staff-dir.html"/>
+            <map:generate type="file" src="cocoon://content/staff.xml"/>
             <map:transform type="saxon" src="classpath:/xsl/liaison-card.xsl">
                 <map:parameter name="liaison" value="{1}"/>
             </map:transform>
             <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="staff-list.html" type="wildcard">
+            <map:generate type="file" src="cocoon://content/staff.xml"/>
+           	<map:transform type="saxon" src="classpath:/xsl/staff-directory.xsl"/>
+           	
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="manager-list.html" type="wildcard">
+            <map:generate type="file" src="cocoon://content/staff.xml"/>
+           	<map:transform type="saxon" src="classpath:/xsl/staff-directory.xsl">
+           		 <map:parameter name="manager" value="true"/>
+           	</map:transform>
+            <map:serialize type="xml"/>
+        </map:match>
+        <map:match pattern="staff-slideshow.html" type="wildcard">
+       		 <map:generate type="file" src="cocoon://content/staff.xml"/>    
+        	 <map:transform type="saxon" src="classpath:/xsl/staff-slideshow.xsl"/>
+            <map:serialize type="xml"/>
+        </map:match>
+	    <map:match pattern="staff.xml" type="wildcard">	    												    										
+	        <map:generate type="staff" src="https://docs.google.com/spreadsheets/u/2/d/1xbj0fcv2MYKC67ECKyT7LJmx0xwrHDoC/export?format=tsv&amp;id=1xbj0fcv2MYKC67ECKyT7LJmx0xwrHDoC&amp;gid=718995313"/>
+	        <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
     <map:pipeline type="caching">
