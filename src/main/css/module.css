@@ -133,8 +133,14 @@
    	 	height: auto;
    	 	margin: 7px 0;
 	}
-	.staff-list img.scaled-image{
-		max-width: 110px;
+	.staff-list .module div.pure-u-1-5, .staff-list .module  div.pure-u-4-5{
+		padding-right: 12px;
+	}
+	.staff-list .module div.pure-u-1-5{
+		width: 20%;
+	}
+	.staff-list .module div.pure-u-4-5{
+		width: 80%;
 	}
 	
 	.grand-rounds, .upcoming-classes {
