@@ -188,7 +188,7 @@
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
-    <map:pipeline type="caching">
+    <map:pipeline type="expires">
     	<map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match type="wildcard" pattern="liaison-card/*.html">
             <map:generate type="file" src="cocoon://content/staff.xml"/>
@@ -216,7 +216,7 @@
             <map:serialize type="xml"/>
         </map:match>
 	    <map:match pattern="staff.xml" type="wildcard">	    												    										
-	        <map:generate type="staff" src="https://docs.google.com/spreadsheets/u/2/d/1xbj0fcv2MYKC67ECKyT7LJmx0xwrHDoC/export?format=tsv&amp;id=1xbj0fcv2MYKC67ECKyT7LJmx0xwrHDoC&amp;gid=718995313"/>
+	        <map:generate type="staff" src="https://docs.google.com/spreadsheets/u/2/d/1c7kuyEfmzt2ww3k1ViJXm5Ghqe7kSJlQnCI8zcCS3zI/export?format=tsv&amp;id=1c7kuyEfmzt2ww3k1ViJXm5Ghqe7kSJlQnCI8zcCS3zI&amp;gid=0"/>
 	        <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
