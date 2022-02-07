@@ -31,7 +31,7 @@
 			<action date="2022-01-24" dev="alainb" issue="LANEWEB-10874" type="fix">
 				Alt text from Lane Blog not passed to Lane Web		
 			</action>
-			<action date="2022-02-05" dev="ryanmax" issue="LANEWEB-108" type="fix">
+			<action date="2022-02-05" dev="ryanmax" issue="LANEWEB-10875" type="fix">
 				Text not wrapping on Print holdings Prototype			
 			</action>
 		</release>
