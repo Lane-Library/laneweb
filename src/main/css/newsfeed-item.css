@@ -67,7 +67,7 @@
 		right: 12px;
 		left: inherit;
 	}
-	    
-	  
-	
+	.pure-u-17-24.blog-container{
+		order : -1;
+	}    
 }
