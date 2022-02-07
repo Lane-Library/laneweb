@@ -6,7 +6,36 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
-		<release date="2022-01-24" version="3.9.4" description="emergency release">
+		<release date="2022-02-07" version="3.10.0" description="bug fix and update release">
+			<action date="2021-06-02" dev="ryanmax" issue="LANEWEB-10723" type="update">
+				Lane search: add holdings information (location, call number, etc.) to Lane Catalog results			
+			</action>
+			<action date="2021-12-16" dev="ryanmax" issue="LANEWEB-10855" type="update">
+				Records with parent relationships (components, articles, chapters, etc.) are confusing to locate			
+			</action>
+			<action date="2022-01-07" dev="ryanmax" issue="LANEWEB-10862" type="fix">
+				Results on browse pages should match new search styling			
+			</action>
+			<action date="2021-12-09" dev="ryanmax" issue="LANEWEB-10849" type="fix">
+				Course reserves and special collections items show up as "Unavailable: Checked out"			
+			</action>
+			<action date="2021-12-16" dev="ryanmax" issue="LANEWEB-10856" type="update">
+				Minor display changes for print holdings			
+			</action>
+			<action date="2021-12-16" dev="ryanmax" issue="LANEWEB-10857" type="update">
+				Hide “view all” drop-down when only one print option available, but expand table, leaving request button as is.			
+			</action>
+			<action date="2022-02-03" dev="alainb" issue="LANEWEB-10872" type="fix">
+				New staff picture too big on phone width			
+			</action>
+			<action date="2022-01-24" dev="alainb" issue="LANEWEB-10874" type="fix">
+				Alt text from Lane Blog not passed to Lane Web		
+			</action>
+			<action date="2022-02-05" dev="ryanmax" issue="LANEWEB-108" type="fix">
+				Text not wrapping on Print holdings Prototype			
+			</action>
+		</release>
+		<release date="2022-01-24" version="3.9.4" description="bug fix and update release">
 			<action date="2022-01-24" dev="ryanmax" issue="LANEWEB-10869" type="fix">
 				header/footer missing on wilson pages					
 			</action>
