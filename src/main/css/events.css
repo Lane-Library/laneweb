@@ -7,9 +7,9 @@ li.event {
 	flex: 0 1 25%;
 	display: flex;
 	border-bottom: none;
-	padding: 0 0 24px;
 	position: relative;
 }
+
 
 .event span {
 	display: inline-block;
@@ -87,7 +87,13 @@ li.event {
 @media ( max-width : 812px) {
 	li.event {
 		flex: 0 1 100%;
+		padding-bottom:  24px;
 	}
+	
+	li.event:last-child {
+	padding-bottom: 0;
+	}
+	
 	.event:last-child div {
 		padding-left: 30%;
 	}	

@@ -3,6 +3,10 @@
 	margin-bottom: 24px;
 }
 
+.explore:last-child {
+	margin-bottom: 0;
+}
+
 .explore section {
 	background-color: #8c1515;
 	display: inline-block;
