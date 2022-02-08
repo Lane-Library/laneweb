@@ -45,29 +45,9 @@
 	text-overflow: ellipsis;
 }
 
-@media ( max-width : 1100px) {
+@media ( max-width : 812px) {
 	.newsfeed {
-		width: 49%;
-		margin-top: 24px;
-	}
-	.newsfeed:first-child {
 		width: 100%;
-		margin-top: 0;
-		display: flex;
-		padding-bottom: 0;
-	}
-	.newsfeed:first-child  div:first-child, 
-	.newsfeed:first-child .newsfeed-title {
-		width: 50%;
-	}
-	.newsfeed:first-child .newsfeed-title {
-		padding-bottom: 0;
-	}
-	.newsfeed:first-child  .read-more {
-		right: 12px;
-		left: inherit;
-	}
-	.pure-u-17-24.blog-container{
-		order : -1;
-	}    
+		margin-top: 24px;
+	}	    
 }

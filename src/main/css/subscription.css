@@ -11,7 +11,7 @@
 	padding: 9px;
 	margin-right: 3px;
 	outline: none;
-	width: 60%;
+	width: 70%;
 }
 
 .subscription .btn.outline{
@@ -23,8 +23,3 @@
 	width: 25%;
 }
 
-@media ( max-width : 812px) {
-.subscription>div {
-	position: static;
-}
-}

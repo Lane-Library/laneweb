@@ -9,20 +9,12 @@
 	<xsl:template match="/classes">
 		<html>
 			<body>
-				<div class="pure-g">
-					<div class="pure-u-1-2">
-						<ul>
-							<xsl:apply-templates	select="class[position() &lt;= 2]" />
-						</ul>
-					</div>
-					<div class="pure-u-1-2">
-						<ul>
-							<xsl:apply-templates select="class[position() = 3]" />
+				
+				<ul class="classes">
+							<xsl:apply-templates	select="class[position() &lt;= 3]" />
 							<xsl:call-template name="all-classes-link"></xsl:call-template>					
 						</ul>
-						
-					</div>
-				</div>
+				
 			</body>
 		</html>
 	</xsl:template>
@@ -64,10 +56,20 @@
 
 	<xsl:template name="all-classes-link">
 		<li class="event">
-			<a class="all-classes" href="/classes-consult/laneclasses.html">
-				All Classes &amp; Events
-				<i class="fa fa-arrow-right" />
-			</a>
+			<div>
+		
+				<a href="/classes-consult/laneclasses.html">
+					All Classes &amp; Events
+					<i class="fa fa-arrow-right" />
+				</a>
+			
+			
+				<a href="">
+					Research Office Hours
+					<i class="fa fa-arrow-right" />
+				</a>
+			
+			</div>
 		</li>
 	</xsl:template>
 

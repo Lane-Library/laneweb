@@ -21,13 +21,32 @@
 	.popular .pure-u-1-2{
 		width: 50%;
 	}
-}
-
-@media ( max-width : 812px) {
-	.popular  .menu-toggle {
-		top: -1px;
-		right: -1px;
+	
+	.top-resource-container{
+		margin: 0 24px;
 	}
 	
+	.top-resource-container .module{
+		padding: 1em;
+	}
+	
+	#mobile-menu-header.popular h3{
+	margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+	}
+	
+	#mobile-menu-header.popular h3:before{
+		border-top: none
+	}
+
+	.popular  .menu-toggle {
+		background-color: white;
+		display: block;
+	}
+	
+	.popular .pure-g{
+	    margin-top: 24px;
+	}	
 
 }	 

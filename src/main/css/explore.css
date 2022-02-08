@@ -1,6 +1,6 @@
+
 .explore {
-	width: 24%;
-	display: inline-block;
+	margin-bottom: 24px;
 }
 
 .explore section {
@@ -44,6 +44,10 @@
 	color: black;
 }
 
+@media ( max-width : 1100px) {
+.explore-container .pure-u-1-2 {
+	width: 50%;
+}
 
 
 @media ( max-width : 812px) {
