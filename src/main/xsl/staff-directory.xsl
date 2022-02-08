@@ -25,13 +25,13 @@ exclude-result-prefixes="h s" version="2.0">
 				<xsl:attribute name="class">pure-g</xsl:attribute>
 				<xsl:call-template name="staff-profile">
 					<xsl:with-param name="name" select="concat(s:first-name/text(), ' ', s:last-name/text())" />
-					<xsl:with-param name="cap-href" select="s:cap-profile/text()" />
+					<xsl:with-param name="stanford-profile-href" select="s:stanford-profile/text()" />
 					<xsl:with-param name="picture-src" select="s:picture/text()" />
 				</xsl:call-template>				
 				
 				<xsl:call-template name="staff-detail">
 					<xsl:with-param name="email" select="s:email/text()" />
-					<xsl:with-param name="cap-href" select="s:cap-profile/text()" />
+					<xsl:with-param name="stanford-profile-href" select="s:stanford-profile/text()" />
 					<xsl:with-param name="phone" select="s:phone/text()" />
 				</xsl:call-template>
 				
@@ -42,17 +42,18 @@ exclude-result-prefixes="h s" version="2.0">
 
 	<xsl:template name="staff-profile">
 		<xsl:param name="name" />
-		<xsl:param name="cap-href" />
+		<xsl:param name="stanford-profile-href" />
 		<xsl:param name="picture-src" />
 		<div>
 			<xsl:attribute name="class">pure-u-1-5</xsl:attribute>
 			<xsl:choose>
-			<xsl:when test=" $picture-src != '' and $cap-href != ''">
+			<xsl:when test=" $picture-src != '' and $stanford-profile-href != ''">
 				<a>
-					<xsl:attribute name="href" select="$cap-href" />
+					<xsl:attribute name="href" select="$stanford-profile-href" />
 					<img>
 						<xsl:attribute name="class">scaled-image</xsl:attribute>
 						<xsl:attribute name="src" select="$picture-src" />
+						<xsl:attribute name="alt" select="concat($name, ' photo')" />
 					</img>
 
 				</a>
@@ -62,6 +63,7 @@ exclude-result-prefixes="h s" version="2.0">
 				<img>
 					<xsl:attribute name="class">scaled-image</xsl:attribute>
 					<xsl:attribute name="src" select="$picture-src" />
+					<xsl:attribute name="alt" select="concat($name, ' photo')" />
 				</img>
 			</xsl:if>
 			</xsl:otherwise>
@@ -74,7 +76,7 @@ exclude-result-prefixes="h s" version="2.0">
 	<xsl:template name="staff-detail">
 		<xsl:param name="phone" />
 		<xsl:param name="email" />
-		<xsl:param name="cap-href" />
+		<xsl:param name="stanford-profile-href" />
 		<div>
 			<xsl:attribute name="class">pure-u-4-5</xsl:attribute>
 			<ul>
@@ -92,11 +94,11 @@ exclude-result-prefixes="h s" version="2.0">
 						<xsl:value-of select="s:email" />
 					</a>
 				</li>
-				<xsl:if test="$cap-href != ''">
+				<xsl:if test="$stanford-profile-href != ''">
 					<li>
 						<xsl:attribute name="class">liaison-profile-link</xsl:attribute>
 						<a>
-							<xsl:attribute name="href" select="$cap-href" />
+							<xsl:attribute name="href" select="$stanford-profile-href" />
 							<i>
 								<xsl:attribute name="class">fa fa-users</xsl:attribute>							
 							</i>
