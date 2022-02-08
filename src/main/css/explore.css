@@ -1,10 +1,12 @@
-
-.explore {
-	margin-bottom: 48px;
+.explore-container {
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 48px;
 }
 
-.explore:last-child {
-	margin-bottom: 0;
+.explore {
+	flex: 1 1 50%;
+	display: flex;
 }
 
 .explore section {
@@ -21,19 +23,6 @@
 	padding-top: 15px;
 }
 
-.explore .explore-container {
-	display: flex;
-	align-items: center;
-}
-
-.explore .detail {
-	margin-left: 12px;
-}
-
-.explore div {
-	line-height: normal;
-}
-
 .explore i.fa-2x {
 	color: white;
 	font-size: 1.9em;
@@ -42,20 +31,15 @@
 .explore label {
 	font-size: 20px;
 	font-weight: 600;
-}
-
-.explore a {
 	color: black;
 }
 
-@media ( max-width : 1100px) {
-	.explore-container .pure-u-1-2 {
-		width: 50%;
-	}
+.explore .detail {
+	padding: 17px 0 0 12px;
 }
 
 @media ( max-width : 812px) {
-	.explore-container .pure-u-1-2 {
-		width: 100%;
+	.explore {
+		flex-basis: 100%;
 	}
 }
