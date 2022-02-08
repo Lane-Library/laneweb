@@ -18,7 +18,9 @@ img {
 	position: absolute;
 	display: none;
 }
-
+.menu-toggle:hover {
+	text-decoration: none;
+}
 .menu-toggle span, .menu-toggle i {
 	color: white;
 	display: block;
