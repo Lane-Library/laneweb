@@ -81,3 +81,12 @@
 .staff-slide-show .slide div label.title{
 	font-size: inherit;
 }
+
+@media ( max-width : 521px) {
+	.staff-slide-show #slide-show{
+		height: 300px;
+	}
+	#previous-slide, #next-slide {
+		top: 145px;
+	}
+}
