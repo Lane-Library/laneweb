@@ -41,11 +41,14 @@
 #previous-slide, #next-slide {
 	position: absolute;
 	display: block;
-	top: 218px;
+	top: 205px;
 	cursor: pointer;
 	color: black;
-	font-size: 2em;
 }
+
+#previous-slide .fa, #next-slide .fa{
+	font-size: 3em;
+	}
 
 #previous-slide.disable, #next-slide.disable {
 	display: none;

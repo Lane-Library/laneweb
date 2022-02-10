@@ -1,9 +1,5 @@
-nav {
-	background-color: #333;
-	top: 124px;
-	width: 100%;
-	font-family: 'Fjord One', serif;
-	color: white;
+#navigation{
+	flex: 2;
 }
 
 nav>ul.content {
@@ -19,9 +15,10 @@ ul.content .nav-menu {
 }
 
 .nav-menu>span, .nav-menu>span a {
-	color: white;
+	color: black;
 	display: block;
 	font-size: 18px;
+	font-weight: 600;
 	line-height: 64px;
 	text-align: center;
 	white-space: nowrap;
@@ -38,7 +35,7 @@ ul.content .nav-menu {
 
 .nav-menu:hover, .nav-menu:active, .nav-menu-active {
 	color: white;
-	background-color: #8c1515;
+	background-color: #eee;
 	border: none;
 }
 
@@ -47,14 +44,14 @@ ul.content .nav-menu {
 	left: 0;
 	padding: 12px 0 24px 14px;
 	z-index: 2;
-	margin-top: 4px;
 }
 
-.nav-menu>i.fa-caret-down {
+.nav-menu i.fa.fa-angle-down {
 	text-align: center;
-	display: block;
 	margin-top: -20px;
-	color: #999999;
+	font-weight: 600;
+    padding-left: 6px;
+	color: black;
 }
 
 .nav-menu:hover>i.fa-caret-down::before, .nav-menu-active>i.fa-caret-down::before
@@ -92,17 +89,17 @@ ul.content .nav-menu {
 	width: 200px;
 }
 
-@media ( max-width :812px) {
+@media ( max-width :1100px) {
+	
+	
 	.nav-menu>a, .nav-menu>a:visited {
 		text-align: left;
 	}
 	#navigation {
 		position: absolute;
-		top: 32px;
-		width: 66%;
-		max-width: 282px;
-		right: 0px;
 		z-index: 2;
+		flex: 0;
+		right: 12px;
 	}
 	#navigation nav {
 		display: none;
@@ -110,7 +107,7 @@ ul.content .nav-menu {
 		-webkit-font-smoothing: antialiased;
 	}
 	#navigation ul {
-		position: relative;
+		background-color: grey;
 		display: block;
 		margin: 0;
 	}
@@ -123,9 +120,9 @@ ul.content .nav-menu {
 		width: auto;
 	}
 	#nav-toggle-on {
-		display: block;
-		position: absolute;
-		top: -32px;
+		display: block;	
+		position: inherit;	
+		padding-top: 16px;
 	}
 	#nav-toggle-off {
 		display: none;

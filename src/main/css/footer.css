@@ -1,172 +1,185 @@
 /* are these "container" classes generalizable? */
-.flex-container, .flex-container-nowrap {
-    display:flex;
-    flex-wrap: wrap;
-    position: relative;
+footer:first-of-type {
+	background-color: #FFFFFF;
 }
+
+footer:nth-of-type(2) {
+	background-color: #8C1515;
+}
+
+body:nth-child(3) footer {
+	background-color: #E3E3E3;
+}
+
+.flex-container, .flex-container-nowrap {
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+}
+
 .flex-container-nowrap {
-    flex-wrap: nowrap;
+	flex-wrap: nowrap;
 }
 
 .footer-link-bar {
-    background-color: #8C1515;
-    padding:7px 0;
-    text-align: center;
+	background-color: #8C1515;
+	padding: 7px 0;
+	text-align: center;
 }
 
 .footer-link-bar a, .footer-link-bar i {
-    color: #fff;
+	color: #fff;
 }
 
 .footer-link-bar i {
-    font-size: 18px;
+	font-size: 18px;
 	padding-right: 4px;
 }
 
-.footer-link-bar div,.footer-link-bar span {
+.footer-link-bar div, .footer-link-bar span {
 	width: 49%;
-    display: inline-block;
+	display: inline-block;
 }
- 
+
 .footer-link-bar span {
-    white-space: nowrap;
-    
+	white-space: nowrap;
 }
 
 .footer-link-bar div {
-    padding: 1em 0;
-    width: 350px;
+	padding: 1em 0;
+	width: 350px;
 }
 
 .footer-copyright {
-    background-color: #E3E3E3;
-    font-size: smaller;
-    padding: 1em 0;
-    color: unset;
+	font-size: smaller;
+	padding: 1em 0;
+	color: unset;
 }
 
 .footer-copyright div {
-    flex: 0 1 15%;
-    padding-left: 5%;
-    white-space: nowrap;
+	flex: 0 1 15%;
+	padding-left: 5%;
+	white-space: nowrap;
 }
 
 .footer-copyright a {
-    color: #333;
+	color: #333;
 }
 
 .footer-copyright .terms-privacy span {
-    padding-right: 2em;
-    white-space: nowrap;
+	padding-right: 2em;
+	white-space: nowrap;
 }
 
 .footer-organizations {
-    justify-content: center;
-    margin-top: 3em;
+	justify-content: center;
+	margin-top: 3em;
 }
 
 .footer-organizations h4::before {
-    content: " ";
-    position: absolute;
-    width: 4em;
-    border-top: 5px solid #8C1515;
-    top: -5px;
+	content: " ";
+	position: absolute;
+	width: 4em;
+	border-top: 5px solid #8C1515;
+	top: -5px;
 }
 
 .footer-organizations h4 {
-    position: absolute;
-    width: 90%;
-    border-top: 1px solid #ddd;
-    top: -1px;
+	position: absolute;
+	width: 90%;
+	border-top: 1px solid #ddd;
+	top: -1px;
 }
 
 .footer-organization {
-    flex: 1 1 50%;
-    padding: 2em 5%;
-    background-color: #fff;
-    position: relative;
+	flex: 1 1 50%;
+	padding: 2em 5%;
+	background-color: #fff;
+	position: relative;
 }
 
 .footer-organization a {
-    color: black;
+	color: black;
 }
 
 .footer-organization .brand a {
-    background-size: 40%;
-    font-size: unset;
-    padding: 7px 0 0 100px;
+	background-size: 40%;
+	font-size: unset;
+	padding: 7px 0 0 100px;
 }
 
 .footer-organization .brand {
-    padding-top: 0;
-    margin-left: -5px;
+	height: 65px;
+	display: block;
+	margin: 0;
+	padding-top: 0;
+	margin-left: -5px;
 }
 
 .footer-organization .brand-som a {
-    background-image: url('../images/som-H-logo.svg');
-    height: 30px;
-    background-size: 55%;
-    margin-left: 5px;
-    color: transparent;
+	background-image: url('../images/som-H-logo.svg');
+	height: 30px;
+	background-size: 55%;
+	margin-left: 5px;
+	color: transparent;
 }
 
 .footer-organization .flex-container-nowrap div {
-    flex: 1 1 30%;
-    padding-right: 1em;
+	flex: 1 1 30%;
+	padding-right: 1em;
 }
 
 .footer-organization.footer-org-som:before {
-    content: " ";
-    position: absolute;
-    left: 0;
-    height: 8em;
-    border-left: 1px solid #ddd;
+	content: " ";
+	position: absolute;
+	left: 0;
+	height: 8em;
+	border-left: 1px solid #ddd;
 }
 
 .footer-organization li {
-    height: 1.9em;
-    white-space: nowrap;
+	height: 1.9em;
+	white-space: nowrap;
 }
 
 .footer-organization-address li {
-    font-size: smaller;
-    opacity: 60%;
+	font-size: smaller;
+	opacity: 60%;
 }
 
 /* phone # gets special padding */
 .footer-organization-address li:last-of-type {
-    padding-top: 5px;
+	padding-top: 5px;
 }
 
 .footer-organization .social-logos {
-    padding-top: 1.25em;
+	padding-top: 1.25em;
 }
 
 .footer-organization .social-logos a {
-    padding-right: 25px;
+	padding-right: 25px;
 }
 
 .footer-organization .fa-stack-1x, .footer-organization .fa-stack-2x {
-    left: unset;
-    width: unset;
+	left: unset;
+	width: unset;
 }
 
 .footer-organization .fa-facebook, .footer-organization .fa-twitter {
-    color: white;
-    position: relative;
-    left: 5px;
+	color: white;
+	position: relative;
+	left: 5px;
 }
 
 .footer-organization .fa-facebook {
-    font-size: 1.7em;
-    top: 3px;
+	font-size: 1.7em;
+	top: 3px;
 }
 
 .footer-organization .fa-twitter {
-    font-size: 1.3em;
-    top: -2px;
+	font-size: 1.3em;
+	top: -2px;
 }
-
 
 @media ( max-width : 700px) {
 	.footer-organization-address {
@@ -184,31 +197,30 @@
 		padding-left: 10px;
 	}
 	.footer-link-bar div {
-	    width: 100%;
+		width: 100%;
 	}
 	footer div {
 		font-size: 13px;
 	}
 	footer .brand {
-    	height: 55px;
+		height: 55px;
 	}
 }
 
 @media ( max-width : 428px) {
-    .footer-copyright .terms-privacy span {
-        padding-right: 1em;
-    }
-    .footer-organization .social-logos {
-        padding-top: 10px;
-        position: absolute;
-        top: 16px;
-        left: 75%;
-    }
+	.footer-copyright .terms-privacy span {
+		padding-right: 1em;
+	}
+	.footer-organization .social-logos {
+		padding-top: 10px;
+		position: absolute;
+		top: 16px;
+		left: 75%;
+	}
 	.footer-organization .flex-container-nowrap div {
-		width:50%;
-    } 
-     
-} 
+		width: 50%;
+	}
+}
 
 @media ( max-width : 360px) {
 	.footer-organization .brand a, .footer-organization .brand a:link {

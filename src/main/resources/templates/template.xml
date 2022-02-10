@@ -9,17 +9,19 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
    </head>
 	<body>
-		<section class="header">
+		<header>
+			
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/lane-header.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
-		</section>
+			
+		</header>
 		<section class="content">
 			<div class="content centered">
 				<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/announcement.html">

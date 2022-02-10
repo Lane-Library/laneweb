@@ -3,9 +3,22 @@ html {
 	scroll-behavior: smooth;
 }
 
-section.header, section.content {
-	min-width: 1089px;
+
+header section, footer section, .content{
+	max-width: 1700px;
+	margin: auto;	
 }
+
+
+header:first-child{
+ 	background-color: #8c1515;;
+ 	color: white;
+ }
+
+header:nth-child(2){
+	background: white;
+}
+
 
 .centered {
 	position: relative;

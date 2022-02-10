@@ -11,7 +11,7 @@ img {
 }
 
 .menu-toggle {
-	background-color: grey;
+	background-color: white;
 	padding: 1px 4px;
 	top: 0px;
 	right: 0px;
@@ -22,7 +22,7 @@ img {
 	text-decoration: none;
 }
 .menu-toggle span, .menu-toggle i {
-	color: white;
+	color: black;
 	display: block;
 }
 
@@ -91,17 +91,24 @@ img {
 	#mobile-menu-header1:target span a:nth-child(2) {
 		display: block;
 	}
+	.menu-toggle{
+		display: block;
+	}	
+	.pure-tablette-hide {
+		display: none;
+	}
 	
 }
 
 
 @media ( max-width : 812px) {
-	.menu-toggle{
-		display: block;
+	
+	header section{
+	 padding-left: 12px;
+	 padding-right: 12px;
+	 
 	}
-	.lrg-screen-hide{
-	   display: initial;
-	}
+		
 	.login {
 		position: relative;
 		padding-left: 0px;
@@ -109,15 +116,6 @@ img {
 	}
 	.login>li:nth-child(8), .login>li:nth-child(2) {
 		display: none;
-	}
-	.lane-header {
-		height: 126px;
-	}
-	.lane-header div {
-		margin: 0;
-	}
-	.brand {
-		padding-top: 15px;
 	}
 	.library-contact {
 		display: inline-flex;
