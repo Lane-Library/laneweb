@@ -17,6 +17,7 @@ img {
 	right: 0px;
 	position: absolute;
 	display: none;
+	z-index: 2;
 }
 .menu-toggle:hover {
 	text-decoration: none;

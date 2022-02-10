@@ -23,7 +23,7 @@
 }
 
 .portal .popular {
-    background-color: transparent;
+	background-color: transparent;
     border: none;
     padding: 0;
     height: auto;
@@ -50,6 +50,7 @@
  }
 
 .portal .popular a {
+	color: white;
     box-sizing: border-box;
     display: inline-block;
     padding: 6px;
