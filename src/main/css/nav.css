@@ -148,7 +148,7 @@ ul.content .nav-menu {
 	}
 	#navigation .nav-menu-content {
 		position: relative;
-		padding-left: 47px;
+		padding-left: 34px;
 	}
 	#nav-toggle-on {
 		display: block;
@@ -208,9 +208,12 @@ ul.content .nav-menu {
 	 .nav-menu-content.nav-service li {
 		margin: 24px 0;
 	}
+	.nav-service div{
+		border-right: none;
+	}
 }
 @media ( max-width :812px) {
 	#navigation {
-		width: 300px;
+		width: 350px;
 	}
 }
