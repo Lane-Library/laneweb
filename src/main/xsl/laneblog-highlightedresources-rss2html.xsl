@@ -35,6 +35,7 @@
 		<xsl:if test="@class='webfeedsFeaturedVisual wp-post-image'">
 			<xsl:copy>
 				<xsl:attribute name="src" select="@src" />
+				<xsl:attribute name="alt" select="@alt" />
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>

@@ -34,10 +34,10 @@ public class UserCookieUpdatorFilter extends AbstractLanewebFilter {
             Cookie oldCookie = this.sourceCookieHelper.getOldUserCookies(request);
             if (oldCookie == null) {
                 chain.doFilter(request, response);
-            }
-            else {
+            } else {
                 try {
-                    String sourceCookieValue = this.sourceCookieHelper.getCookieValue(oldCookie, request.getHeader("User-Agent"));
+                    String sourceCookieValue = this.sourceCookieHelper.getCookieValue(oldCookie,
+                            request.getHeader("User-Agent"));
                     log.info("Cookie converter --> {} ", sourceCookieValue);
                     this.targetCookieHelper.setCookies(request, response, sourceCookieValue);
                 } catch (Exception e) {

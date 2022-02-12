@@ -1,3 +1,12 @@
+.search-results .content {
+    margin-top: 0;
+}
+
+.search-results .pure-u-3-4 .module {
+    margin-top: 0;
+    background-color: unset;
+}
+
 .tooltips, .popin>div, #search-content-counts, #showPubMedStrategies {
     display: none;
 }
@@ -7,16 +16,18 @@
 }
 
 .primaryLink {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .primaryType {
     text-transform: uppercase;
     color: #999;
+    display: list-item;
 }
 
 .popin {
     height: 16px;
+    margin-bottom: 20px;
 }
 
 .popInLabel {
@@ -28,13 +39,9 @@
     padding-right: 5px;
 }
 
-#searchResults {
-    padding-top: 10px;
-}
-
 .resource .bookcover {
     float: right;
-    padding-left: 30px;
+    padding: 10px 30px;
 }
 
 .resource .bookcover i {
@@ -90,18 +97,7 @@ li.active .description {
     margin-right: 10px;
 }
 
-.results-nav {
-    background-color: #f7f3e5;
-    padding: 10px 5px 24px;
-    font-size: 11px;
-}
-
-.searchTerms {
-    text-transform: none;
-    font-weight: bold;
-    font-style: italic;
-}
-
+/* rightSearchTips used on clinical/peds search */
 .rightSearchTips {
     padding: 0 12px;
     white-space: nowrap;
@@ -140,7 +136,6 @@ li.active .description {
 .sourceInfo span {
     margin-left: 30px;
     display: inline-block;
-    vertical-align: top;
 }
 
 .sourceInfo span:first-child {
@@ -150,13 +145,11 @@ li.active .description {
 /* absolute positioning so it doesn't move when shareable link copied */
 .browzineDirect{
     position: absolute;
-    top: 0px;
     left: 355px;    
 }
 
 .requestIt a {
-    padding: 3px 10px;
-    margin-top: -5px;
+    padding: 1px 5px;
     font-size: unset;
 }
 
@@ -168,21 +161,149 @@ li.active .description {
     color: green;
 }
 
+.lwSearchResults .resource {
+    padding: 12px;
+    margin: 10px 0;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.24);
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.lwSearchResults div:not(.author, .citation) {
+    padding-top: 10px;
+}
+
+.lwSearchResults .citation {
+    font-style: italic;
+    opacity: .90;
+}
+
+.hldgsContainer table {
+    padding: 10px 0;
+}
+
+.hldgsContainer thead {
+    background: #f7f7f7;
+    color: #8b8989;
+}
+
+.hldgsContainer th {
+    vertical-align: middle;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 50px;
+    border-top: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    border-right: none;
+    border-left: none;
+}
+
+.hldgsContainer th:first-child {
+    border-left: 1px solid #d0d8da;
+}
+
+.hldgsContainer th:last-child {
+    border-right: 1px solid #d0d8da;
+}
+
+.hldgsContainer tbody tr:nth-child(2n+1) {
+    background: #fff;
+}
+
+.hldgsContainer td, .hldgsContainer td:first-child {
+    border-right: unset;
+    border-bottom: 1px solid #d0d8da;
+    padding-right: 50px;
+    max-width: 380px;
+}
+
+.hldgsContainer td:last-child {
+    padding-right: 10px;
+}
+
+.hldgsContainer td span, .getPassword {
+    padding-right: 10px;
+}
+
+.versionText {
+    opacity: 0.75;
+}
+
+.requestIt {
+    padding: 10px;
+}
+
+.requestIt .btn {
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,.12),0 5px 5px 0 rgba(0,0,0,.24);
+    font-weight: normal;
+}
+
+.hldgsContainer {
+    padding: 5px 2px;
+}
+
+.hldgsContainer table {
+    display:none;
+}
+
+.hldgsHeader {
+    padding-right: 15px;
+    display: inline-block;
+    min-width: 140px;
+}
+
+.hldgsHeader.available {
+    color: #5eaa42;
+}
+
+.hldgsHeader.unavailable {
+    color: #B96D12;
+}
+
+.hldgsHeader .fa {
+    padding-right: 10px;
+}
+
+.hldgsHeader .fa-link {
+    padding-left: 10px;
+    margin-left: -10px;
+    transform: rotate(315deg);
+}
+
+.hldgsTrigger {
+    cursor: pointer;
+    padding: 1px 5px;
+    border: 1px solid #ccc;
+    margin: 0 15px;
+}
+
 @media ( max-width : 812px) {
-    .sourceInfo span:first-child, .sourceInfo span.permalink {
-        display: block;
-        
-    }
-    .sourceInfo span{
+    .sourceInfo span {
         margin-left: 0px;
     } 
     .sourceInfo span.permalink {
-        padding-left: 0px;
-    }
-    .sourceInfo span.requestIt{
-        margin-left: 6px;
+        display: inline;
     }
     .browzineDirect{
         position: static;
+        padding: 10px 0;
+    }
+    .search-results .content {
+        margin: 0 5px;
+    }
+    .resource .bookcover {
+        padding: 5px 10px 0 0;
+        float: left;
+    }
+    .requestIt {
+        padding-left: 0;
+        display: block;
+    }
+    .hldgsContainer {
+        overflow-x: auto;
+        width: 100%;
+    }
+    .hldgsTrigger {
+        float: right;
     }
 }

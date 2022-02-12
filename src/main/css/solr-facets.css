@@ -5,7 +5,9 @@
 }
 
 .solrFacets h4 {
-	margin-bottom: 20px;
+	margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
 .solrFacets li {
@@ -133,16 +135,20 @@
 }
 
 #solrLimits {
-	font-size: 14px;
+	padding: 40px 0 0 12px;
+}
+
+#solrLimits strong {
+    padding-right: 5px;
 }
 
 #solrLimits span {
-	padding: 0 15px 0 10px;
+	padding: 0 15px 0 0;
 	display: inline-block;
 }
 
-#solrLimits a {
-	padding: 0 5px;
+#solrLimits .fa {
+	padding: 1px;
 }
 
 #solrLimits .fa-times-circle {
@@ -153,16 +159,10 @@
 	color: #428bca;
 }
 
-#solrLimits span:nth-last-child(2) {
-	padding-right: 55px;
-}
-
-#solrLimits .clearLimits {
-	padding: 0;
-}
-
-#solrLimits .clearLimits a {
-	padding: 0;
+#solrLimits span:nth-last-child(1) {
+	padding-left: 0;
+	padding-top: 10px;
+	display: block;
 }
 
 #solrAllCount {

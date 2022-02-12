@@ -1,6 +1,6 @@
 include:
   - project: "irt-lane/som-laneweb"
-    file: "/cicd/build-image.yml"
+    file: "/cicd/build-maven-image.yml"
   - project: "irt-lane/som-laneweb"
     file: "/cicd/trigger-downstream.yml"
 

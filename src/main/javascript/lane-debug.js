@@ -90,7 +90,9 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "message.js",
 		"navigation.js",
         "course-reserves.js",
-        "validation.js"
+        "validation.js",
+        "holdings-toggle.js",
+        "table-hide-empty-columns.js"
 		
     ];
 

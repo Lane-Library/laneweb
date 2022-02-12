@@ -4,22 +4,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-@SolrDocument(collection="laneSearch")
+@SolrDocument(collection = "laneSearch")
 public class Eresource {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = JsonMapper.builder()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).build();
 
     @Field("availableItems")
     private int available;
@@ -29,7 +30,7 @@ public class Eresource {
 
     @Field
     private Collection<String> dois;
-    
+
     @Id
     @Field
     private String id;
@@ -76,7 +77,7 @@ public class Eresource {
     public Collection<String> getDois() {
         return this.dois;
     }
-    
+
     public String getId() {
         return this.id;
     }
@@ -157,37 +158,46 @@ public class Eresource {
         return new StringBuilder("title:").append(this.title).append(" versions:").append(this.linksList).toString();
     }
 
-    private void parseLink(final Map<String, Object> jsonLink, final Map<String, Object> versionMap) {
-        String linkLabel = (String) jsonLink.get("label");
-        String linkUrl = (String) jsonLink.get("url");
-        String linkText = (String) jsonLink.get("linkText");
-        String additionalText = (String) jsonLink.get("additionalText");
-        String versionText = (String) versionMap.get("additionalText");
-        String holdingsAndDates = (String) versionMap.get("holdingsAndDates");
-        String publisher = (String) versionMap.get("publisher");
+    private LinkType computeLinkType(final Link l) {
+        Version v = l.getVersion();
         LinkType linkType = LinkType.NORMAL;
-        if (versionMap.get("hasGetPasswordLink") != null && ((Boolean) versionMap.get("hasGetPasswordLink"))) {
-            linkType = LinkType.GETPASSWORD;
-        } else if (linkLabel != null && "impact factor".equalsIgnoreCase(linkLabel)) {
-            linkType = LinkType.IMPACTFACTOR;
+        String linkUrl = l.getUrl();
+        if (v.hasGetPasswordLink()) {
+            linkType = LinkType.LANE_GETPASSWORD;
+        } else if ("impact factor".equalsIgnoreCase(l.getLabel())) {
+            linkType = LinkType.LANE_IMPACTFACTOR;
+        } else if ("sul".equals(this.recordType) && linkUrl != null
+                && linkUrl.contains("//searchworks.stanford.edu/view")) {
+            linkType = LinkType.SUL_PRINT;
+        } else if ("sul".equals(this.recordType) && this.primaryType.contains("Print")) {
+            linkType = LinkType.SUL_PRINT;
+        } else if (null != linkUrl && linkUrl.contains("//lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID")) {
+            linkType = LinkType.LANE_PRINT;
+        } else if (null != v.getLocationName() && v.getLocationName().toLowerCase().contains("digital")) {
+            linkType = LinkType.LANE_DIGITAL;
         }
-        this.linksList.add(new Link(linkLabel, linkType, linkUrl, linkText, additionalText, holdingsAndDates, publisher,
-                versionText));
+        return linkType;
     }
 
     private void setLinks() {
-        List<Map<String, Object>> versionData = null;
+        Version[] versions;
         try {
-            versionData = mapper.readValue(this.versionsJson, List.class);
+            // versionJson can sometimes contain the string "null" as a value
+            // string replace is simpler than using a jackson custom filter
+            versions = mapper.readValue(this.versionsJson.replace("\"null\"", "\"\""), Version[].class);
         } catch (IOException e) {
             throw new LanewebException(e);
         }
-        for (Map<String, Object> versionMap : versionData) {
-            if (versionMap.containsKey("links")) {
-                for (Map<String, Object> linkObj : (List<Map<String, Object>>) versionMap.get("links")) {
-                    parseLink(linkObj, versionMap);
+        for (Version v : versions) {
+            v.getLinks().stream().forEach((final Link l) -> {
+                l.setVersion(v);
+                LinkType lt = computeLinkType(l);
+                l.setType(lt);
+                if (LinkType.LANE_IMPACTFACTOR.equals(lt)) {
+                    v.setPublisher("Journal Citation Reports");
                 }
-            }
+                this.linksList.add(l);
+            });
         }
     }
 }

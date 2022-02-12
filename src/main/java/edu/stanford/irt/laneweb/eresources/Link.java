@@ -4,39 +4,22 @@ public class Link {
 
     private String additionalText;
 
-    private String holdingsAndDates;
-
     private String label;
 
     private String linkText;
-
-    private String publisher;
 
     private LinkType type;
 
     private String url;
 
-    private String versionText;
+    private Version version;
 
-    public Link(final String label, final LinkType type, final String url, final String linkText,
-            final String additionalText, final String holdingsAndDates, final String publisher,
-            final String versionText) {
-        this.label = label;
-        this.type = type;
-        this.url = url;
-        this.linkText = linkText;
-        this.additionalText = additionalText;
-        this.versionText = versionText;
-        this.holdingsAndDates = holdingsAndDates;
-        this.publisher = publisher;
+    public Link() {
+        // empty for serialization
     }
 
     public String getAdditionalText() {
         return this.additionalText;
-    }
-
-    public String getHoldingsAndDates() {
-        return this.holdingsAndDates;
     }
 
     public String getLabel() {
@@ -47,15 +30,6 @@ public class Link {
         return this.linkText;
     }
 
-    public String getPublisher() {
-        return this.publisher;
-    }
-
-    /**
-     * get the LinkType of this Link
-     *
-     * @return the LinkType
-     */
     public LinkType getType() {
         return this.type;
     }
@@ -64,8 +38,32 @@ public class Link {
         return this.url;
     }
 
-    public String getVersionText() {
-        return this.versionText;
+    public Version getVersion() {
+        return this.version;
+    }
+
+    public void setAdditionalText(final String additionalText) {
+        this.additionalText = additionalText;
+    }
+
+    public void setLabel(final String label) {
+        this.label = label;
+    }
+
+    public void setLinkText(final String linkText) {
+        this.linkText = linkText;
+    }
+
+    public void setType(final LinkType type) {
+        this.type = type;
+    }
+
+    public void setUrl(final String url) {
+        this.url = url;
+    }
+
+    public void setVersion(final Version version) {
+        this.version = version;
     }
 
     @Override
