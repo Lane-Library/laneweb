@@ -492,6 +492,7 @@
                                 <include>lane-min.js</include>
                                 <include>util-min.js</include>
                                 <include>menu-min.js</include>
+                                <include>navigation-min.js</include>
                                 <include>model-min.js</include>
                                 <include>link-info-min.js</include>
                                 <include>lane-ie-min.js</include>

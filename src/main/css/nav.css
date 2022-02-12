@@ -11,7 +11,6 @@ ul.content .nav-menu {
 	display: inline-block;
 	flex: 1 1 auto;
 	border: 0;
-	padding: 0;
 }
 
 .nav-menu>span, .nav-menu>span a {
@@ -34,7 +33,7 @@ ul.content .nav-menu {
 }
 
 .nav-menu:hover, .nav-menu:active, .nav-menu-active {
-	background-color: #eee;
+	background-color: #f0f4f5;
 	border: none;
 }
 
@@ -62,12 +61,16 @@ ul.content .nav-menu {
 }
 
 .nav-menu .nav-menu-content {
-	background-color: #eee;
+	background-color: #f0f4f5;
 	border-top: none;
 	left: 0;
 	padding: 12px 0 24px 14px;
 	z-index: 3;
 	font-family: 'Source Sans Pro', sans-serif;
+}
+
+li.nav-menu:last-of-type{
+	display: none;
 }
 
 .nav-menu-content li {
@@ -108,12 +111,12 @@ ul.content .nav-menu {
 }
 
 .nav-service div p {
-	padding: 0 24px 12px;
+	padding: 12px 24px 6px;
+	font-weight: 600;
 }
 
-.nav-menu-content.nav-service li {
+.nav-menu-content li {
 	margin: 15px 24px;
-	border-bottom: solid 1px #ccc;
 }
 
 .content  .nav-menu-content.nav-service li:last-child {
@@ -121,6 +124,10 @@ ul.content .nav-menu {
 }
 
 @media ( max-width :1100px) {
+	.nav-menu.dropdown:hover .dropdown-content {
+		display: none;
+	}
+	
 	.nav-menu>a, .nav-menu>a:visited {
 		text-align: left;
 	}
@@ -129,7 +136,7 @@ ul.content .nav-menu {
 		z-index: 2;
 		right: 0px;
 		background-color: white;
-		width: 400px;
+		width: 100%;
 	}
 	#navigation nav {
 		display: none;
@@ -141,7 +148,7 @@ ul.content .nav-menu {
 		margin: 0;
 	}
 	#navigation .nav-menu {
-		border-bottom: 1px solid #eee;
+		border-bottom: 1px solid #f0f4f5;
 	}
 	#navigation .nav-menu:last-child {
 		border-bottom: none;
@@ -157,12 +164,17 @@ ul.content .nav-menu {
 	}
 	#nav-toggle-off {
 		display: none;
-		position: inherit;
 		text-align: center;
 		background: black;
 		color: white;
-		padding: 20px;
 		font-weight: 700;
+		position: fixed;
+		top: inherit;
+		padding: 18px;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		z-index: 4;
 	}
 	.nav-menu i.fa.fa-angle-up, .nav-menu i.fa.fa-angle-down {
 		margin-top: 20px;
@@ -175,14 +187,13 @@ ul.content .nav-menu {
 		text-align: center;
 	}
 	.dropdown:active .dropdown-content, #navigation li, #navigation:target nav
-		{
+	{
 		display: block;
 	}
-	.nav-menu-active {
-		background-color: #FFF;
-	}
+
+		
+
 	.nav-menu>span, .nav-menu.nav-menu-active>span {
-		color: #000;
 		text-align: left;
 		padding-left: 24px;
 	}
@@ -211,9 +222,14 @@ ul.content .nav-menu {
 	.nav-service div{
 		border-right: none;
 	}
+	li.nav-menu:last-of-type{
+		display: block;
+		height: 4500px;
+	}
+	li.nav-menu:last-of-type:hover{
+		background-color: white;
+	}
 }
 @media ( max-width :812px) {
-	#navigation {
-		width: 350px;
-	}
+	
 }

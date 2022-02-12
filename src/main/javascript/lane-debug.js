@@ -88,6 +88,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "clinical-toggle.js",
         "search-form-scroll.js",
         "message.js",
+		"navigation.js",
         "course-reserves.js",
         "validation.js"
 		

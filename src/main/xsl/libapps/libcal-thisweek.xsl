@@ -11,7 +11,7 @@
 			<body>
 				
 				<ul class="classes">
-							<xsl:apply-templates	select="class[position() &lt;= 3]" />
+							<xsl:apply-templates select="class[position() &lt;= 3]" />
 							<xsl:call-template name="all-classes-link"></xsl:call-template>					
 						</ul>
 				
@@ -64,7 +64,7 @@
 				</a>
 			
 			
-				<a href="">
+				<a href="/using-lib/research-service.html#officehours">
 					Research Office Hours
 					<i class="fa fa-arrow-right" />
 				</a>
