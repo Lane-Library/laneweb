@@ -11,6 +11,7 @@ ul.content .nav-menu {
 	display: inline-block;
 	flex: 1 1 auto;
 	border: 0;
+	padding: 0;
 }
 
 .nav-menu>span, .nav-menu>span a {
