@@ -1,13 +1,17 @@
 ul.classes {
 	display: flex;
-	gap: 12px;
+	gap: 18px;
 }
 
 li.event {
-	flex: 0 1 25%;
+	flex: 1 1 25%;
 	display: flex;
 	border-bottom: none;
 	position: relative;
+}
+
+li.event:last-of-type {
+	flex: 1 1 200px;
 }
 
 .event span {

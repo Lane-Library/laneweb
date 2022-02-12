@@ -103,12 +103,16 @@ li.nav-menu:last-of-type{
 
 .dropdown:hover .dropdown-content.nav-service {
 	display: flex;
-	padding: 16px 0;
 }
+
+.dropdown-content.nav-service {
+ 	padding: 16px 0;
+ }
 
 .nav-service div {
 	flex: 1 1 50%;
 	border-right: 1px solid #ccc;
+
 }
 
 .nav-service div p {
