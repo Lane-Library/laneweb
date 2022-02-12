@@ -21,7 +21,7 @@
 
 .primaryType {
     text-transform: uppercase;
-    color: #999;
+    color: #666;
     display: list-item;
 }
 
@@ -184,7 +184,7 @@ li.active .description {
 
 .hldgsContainer thead {
     background: #f7f7f7;
-    color: #8b8989;
+    color: #666;
 }
 
 .hldgsContainer th {
@@ -253,11 +253,11 @@ li.active .description {
 }
 
 .hldgsHeader.available {
-    color: #5eaa42;
+    color: #556222;
 }
 
 .hldgsHeader.unavailable {
-    color: #B96D12;
+    color: #C74632;
 }
 
 .hldgsHeader .fa {
