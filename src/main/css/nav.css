@@ -79,7 +79,7 @@ li.nav-menu:last-of-type {
 }
 
 .nav-menu-content li {
-	width: 300px;
+	width: 250px;
 	padding: 6px 6px 6px 18px;
 	box-sizing: border-box;
 }
@@ -102,7 +102,6 @@ li.nav-menu:last-of-type {
 
 .nav-menu-content.portals li {
 	display: inline-block;
-	width: 200px;
 }
 
 .dropdown:hover .dropdown-content.nav-service {
