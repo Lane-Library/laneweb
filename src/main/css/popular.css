@@ -47,18 +47,23 @@
 	
 	#mobile-menu-header.top-resources:target ul ,
 	.top-resources:first-child span {
-		display: block;
+		display: flex;
+		flex-flow: row wrap;
 		height: auto;
 	}
 	.top-resource-container {
 		margin: 0 2em;
 	}
 	.top-resource-container ul {
-		margin: 24px;
+		margin: 12px;
+	}
+	.popular.top-resources li {
+		flex: 0 1 50%;
 	}
 	.top-resource-container .module {
 		padding: 1em;
 	}
+	
 	#mobile-menu-header.popular h3 {
 		margin-bottom: 0;
 		padding-bottom: 0;
