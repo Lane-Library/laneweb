@@ -31,7 +31,8 @@
 	.top-resources:first-child span {
 		display: none;
 	}
-	#mobile-menu-header.top-resources  ul {
+	#mobile-menu-header.top-resources  ul,
+	#mobile-menu-header.top-resources:target ul {
 		display: flex;
 		flex-flow: column wrap;
 		align-items: center;
@@ -41,11 +42,13 @@
 
 @media ( max-width : 812px) {
 	#mobile-menu-header.top-resources  ul {
-		display: none;
-		height: auto;
+		display: none;		
 	}
+	
+	#mobile-menu-header.top-resources:target ul ,
 	.top-resources:first-child span {
 		display: block;
+		height: auto;
 	}
 	.top-resource-container {
 		margin: 0 2em;
