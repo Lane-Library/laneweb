@@ -7,12 +7,7 @@
 	position: relative;
 }
 
-.subscription input[type='email'] {
-	padding: 9px;
-	margin-right: 3px;
-	outline: none;
-	width: 70%;
-}
+
 
 .subscription .btn.outline{
 	padding: 8px 12px;
@@ -23,3 +18,13 @@
 	width: 25%;
 }
 
+@media ( max-width :812px) {
+	.subscription>div {
+		padding: 1em;
+	}	
+
+	.subscription input[type='email'] {
+		width: 58%;
+	}
+
+}
