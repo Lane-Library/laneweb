@@ -44,3 +44,12 @@ _NOTE_: Do not add newline at the end of the token.
 ```
 $ make gl-setup
 ```
+
+#### Eclipse debug
+
+Debug Configurations -> Remote Java Application
+
+ - Connection Type: Standard
+ - Connection Properties: localhost:5001
+
+
