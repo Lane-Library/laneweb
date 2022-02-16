@@ -18,6 +18,7 @@ import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -46,6 +47,7 @@ import edu.stanford.irt.laneweb.eresources.search.Facet;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
+@EnableAspectJAutoProxy
 @Configuration
 @ImportResource({
     "classpath:/spring/applications.xmap",
