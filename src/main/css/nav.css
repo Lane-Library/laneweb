@@ -152,9 +152,10 @@ li.nav-menu:last-of-type {
 		position: absolute;
 		z-index: 2;
 		right: 0px;
-		background-color: white;
 		width: 100%;
+		background-color: white;
 	}
+	
 	#navigation nav {
 		display: none;
 		margin-top: 0px;
@@ -231,14 +232,10 @@ li.nav-menu:last-of-type {
 	.nav-service div {
 		border-right: none;
 	}
-	li.nav-menu:last-of-type {
-		display: block;
-		height: 4500px;
-	}
-	li.nav-menu:last-of-type:hover {
-		background-color: white;
-	}
+	
 }
 
 @media ( max-width :812px) {
+	
+
 }

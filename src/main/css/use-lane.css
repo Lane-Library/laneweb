@@ -1,0 +1,52 @@
+/*Use lane on home page*/
+.use-lane div.pure-u-1-2:first-of-type {
+	margin-top: 5%;
+}
+
+.use-lane div.pure-u-1-2:first-of-type a {
+	margin-top: 33px;
+}
+
+.use-lane div.landing {
+	background-color: #8c1515;
+	margin: 24px 0 24px 100px;
+	padding-bottom: 13px;
+}
+
+.use-lane  div.landing img {
+	display: block;
+	width: 75%;
+	padding-top: 18px;
+	margin-left: -34px
+}
+
+.use-lane  div.landing i {
+	right: 59%;
+	top: 46%;
+}
+
+@media ( max-width : 1100px) {
+	.use-lane {
+		flex-flow: row wrap-reverse;
+	}
+	.use-lane div.pure-u-1-2:first-of-type {
+		margin: 32px 0;
+	} 
+	.use-lane div.landing {
+		margin: auto;
+    	width: 85%;
+	}
+}
+
+@media ( max-width : 812px) {
+	.use-lane div.landing {
+		background-color: transparent;
+		margin: auto;
+		width: 90%
+	}
+.use-lane  div.landing img{	
+	margin: auto;
+	width: 90%;
+}
+	
+}

@@ -25,9 +25,6 @@
 }
 
 @media ( max-width : 1100px) {
-	.popular.top-resources li {
-		flex: inherit;
-	}
 	.top-resources:first-child span {
 		display: none;
 	}
@@ -37,6 +34,9 @@
 		flex-flow: column wrap;
 		align-items: center;
     	height: 114px;
+	}
+	.popular.top-resources li {
+		flex: inherit;
 	}
 }
 
