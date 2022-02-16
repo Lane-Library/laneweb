@@ -112,18 +112,14 @@ section.header a {
 	display: block;
 }
 
-.login2{
-	color: #8c1515;
-	font-weight: 600;
+.lane-header .btn.outline{
 	margin-top: 13px;
-	text-transform: uppercase;
-	padding: 9px 21px;
-	border: 2px solid #8c1515;
+	padding: 6px 17px;
+	font-size: 16px;
+	text-transform: uppercase;	
+	font-weight: normal;
 }
 
-.login2 a {
-	color: #8c1515;
-}
 
 /* lane header */
 .lane-header {

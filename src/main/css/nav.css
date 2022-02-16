@@ -16,13 +16,11 @@ ul.content .nav-menu {
 
 .nav-menu>span, .nav-menu>span a {
 	color: black;
-	display: block;
-	font-size: 18px;
-	font-weight: 600;
-	line-height: 64px;
+	display: block; 
 	text-align: center;
 	white-space: nowrap;
-	font-family: 'Fjord', serif;
+	line-height: 64px;
+	font-weight: 600;
 }
 
 .nav-menu>span {
@@ -100,20 +98,20 @@ ul.content .nav-menu {
 	display: inline-block;
 }
 
-.dropdown:hover .dropdown-content.nav-service {
+.dropdown:hover .dropdown-content.nav-cols-content {
 	display: flex;
 }
 
-.dropdown-content.nav-service {
+.dropdown-content.nav-cols-content {
 	padding: 16px 0;
 }
 
-.nav-service div {
+.nav-cols-content div {
 	flex: 1 1 50%;
 	border-right: 1px solid #ccc;
 }
 
-.nav-service div p {
+.nav-cols-content div p {
 	padding: 12px 24px 6px;
 	font-weight: 600;
 }
@@ -122,7 +120,7 @@ ul.content .nav-menu {
 	margin: 15px 24px;
 }
 
-.content  .nav-menu-content.nav-service li:last-child {
+.content  .nav-menu-content.nav-cols-content li:last-child {
 	border: none;
 }
 
@@ -131,11 +129,22 @@ ul.content .nav-menu {
 		display: none;
 	}
 	.nav-menu.dropdown:hover .dropdown-content-on-click,
-	.nav-menu-active-on-click .dropdown-content-on-click, 
-	#navigation li,	#navigation:target nav {
+		.nav-menu-active-on-click .dropdown-content-on-click, #navigation li,
+		#navigation:target nav {
 		display: block;
 	}
-	.nav-menu-active-on-click {
+	#navigation:target {
+		position: absolute;
+		top: -35px;
+	}
+	#navigation:target .menu-overlay {
+		background-color: white;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0px;
+	}
+	#navigation .nav-menu.nav-menu-active-on-click {
 		background-color: #f0f4f5;
 	}
 	.nav-menu-active-on-click>span {
@@ -145,13 +154,11 @@ ul.content .nav-menu {
 		text-align: left;
 	}
 	#navigation {
-		position: absolute;
-		z-index: 2;
+		position: absolute; z-index : 2;
 		right: 0px;
 		width: 100%;
-		background-color: white;
+		z-index: 2;
 	}
-	
 	#navigation nav {
 		display: none;
 		margin-top: 0px;
@@ -163,13 +170,17 @@ ul.content .nav-menu {
 	}
 	#navigation .nav-menu {
 		border-bottom: 1px solid #f0f4f5;
+		background-color: white;
+	}
+	#navigation .nav-menu:hover {
+		background-color: #f0f4f5;
 	}
 	#navigation .nav-menu:last-child {
 		border-bottom: none;
 	}
 	#navigation .nav-menu-content {
 		position: relative;
-		padding-left: 34px;
+		padding: 0 34px 20px;
 	}
 	#nav-toggle-on {
 		display: block;
@@ -183,12 +194,11 @@ ul.content .nav-menu {
 		color: white;
 		font-weight: 700;
 		position: fixed;
-		top: inherit;
 		padding: 18px;
-		left: 0;
-		bottom: 0;
+		top: auto; bottom : 0;
 		width: 100%;
 		z-index: 4;
+		bottom: 0;
 	}
 	.nav-menu i.fa.fa-angle-up, .nav-menu i.fa.fa-angle-down {
 		margin-top: 20px;
@@ -213,25 +223,23 @@ ul.content .nav-menu {
 	#navigation:target #nav-toggle-off {
 		display: block;
 	}
-	.nav-service {
+	.nav-cols-content {
 		flex-wrap: wrap;
 	}
-	.nav-service div p {
+	.nav-cols-content div p {
 		padding: 0 24px 0 0;
 	}
-	.nav-service div:nth-child(2) p {
+	.nav-cols-content div:nth-child(2) p {
 		padding-top: 24px;
 	}
-	.nav-menu-content.nav-service li {
-		margin: 24px 0;
+	.nav-menu-content li {
+		padding: 0;
+		margin: 0;
 	}
-	.nav-service div {
+	.nav-cols-content div {
 		border-right: none;
 	}
-	
 }
 
 @media ( max-width :812px) {
-	
-
 }

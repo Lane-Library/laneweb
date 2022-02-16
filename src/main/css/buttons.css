@@ -5,7 +5,6 @@ http://lane.stanford.edu/samples/button-css.html
 	background-color: #8C1515;
 	border: 2px solid #8C1515;
 	padding: 8px 24px;
-	border-radius: 8px;
 	color: #F0F0F0;
 	cursor: pointer;
 	animation-duration: 0.3s;
@@ -38,7 +37,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 .btn.outline {
 	color: #8C1515;
-	background-color: #F0F0F0;
+	background-color: transparent;
 }
 
 .btn.outline:hover {
