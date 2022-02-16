@@ -74,10 +74,6 @@ ul.content .nav-menu {
 	display: none;
 }
 
-li.nav-menu:last-of-type {
-	display: none;
-}
-
 .nav-menu-content li {
 	width: 250px;
 	padding: 6px 6px 6px 18px;
