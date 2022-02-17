@@ -1,6 +1,6 @@
 .favorites .dropdown-content {
 	background-color: #f0f4f5;
-	padding: 18px 18px 12px;
+	padding: 18px 27px 12px;
 	border: none;
 	font-weight: initial;
 	line-height: initial;
@@ -12,10 +12,12 @@
 .favorites .dropdown-content label{
 	font-weight: 600;
 }
+
 .favorites .dropdown-content a.manageBookmarks.btn, .favorites .dropdown-content a.manageBookmarks.btn:hover{
 	color: white;
 	border: none;
 	background-color: #8C1515;
+	margin-top: 28px;
 } 
 
 .favorites li {
