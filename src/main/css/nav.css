@@ -46,6 +46,8 @@ ul.content .nav-menu {
 	font-weight: 600;
 	padding-left: 6px;
 	color: black;
+	font-size: 21px;
+    vertical-align: middle;
 }
 
 .nav-menu i.fa.fa-angle-up {
