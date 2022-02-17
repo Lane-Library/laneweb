@@ -18,12 +18,6 @@ section.header div:first-of-type a {
 }
 
 /* utility menu with login */
-.login {
-	line-height: 32px;
-	margin: 0;
-	position: absolute;
-	right: 0;
-}
 
 .login>li {
 	display: none;
@@ -41,79 +35,6 @@ section.header div:first-of-type a {
 	margin-right: 2px;
 }
 
-.login a, .login a:active, .login a:visited, .login a:hover, .login .fa,
-	.login a .fa {
-	color: white;
-}
-
-.login>:nth-child(1) {
-	background-color: #007c92;
-}
-
-.login>:nth-child(3) {
-	background-color: #a65a1f;
-}
-
-.login>:nth-child(4) {
-	background-color: #878787;
-}
-
-.login>:nth-child(5) {
-	cursor: pointer;
-	padding-left: 12px;
-	position: relative;
-}
-
-.login-info {
-	background-color: white;
-	border: 1px black solid;
-	box-sizing: content-box;
-	color: #333;
-	display: none;
-	font-size: 14px;
-	font-weight: bold;
-	left: -130px;
-	line-height: initial;
-	padding: 23px;
-	position: absolute;
-	top: 40px;
-	width: 250px;
-	z-index: 1;
-}
-
-.login-info:after, .login-info:before {
-	bottom: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: ' ';
-	height: 0;
-	width: 0;
-	position: absolute;
-}
-
-.login-info:after {
-	border-color: rgba(255, 255, 255, 0);
-	border-bottom-color: #ffffff;
-	border-width: 15px;
-	margin-left: -15px;
-}
-
-.login-info:before {
-	border-color: rgba(0, 0, 0, 0);
-	border-bottom-color: #000000;
-	border-width: 16px;
-	margin-left: -16px;
-}
-
-.login-info p {
-	font-size: 12px;
-	font-weight: initial;
-	margin: 5px 22px 0 0;
-}
-
-.login>:nth-child(7):hover .login-info {
-	display: block;
-}
 
 .lane-header .btn.outline {
 	margin-top: 13px;
