@@ -19,9 +19,9 @@
         <xsl:copy>
            <xsl:choose> 
                 <!-- login link active if not logged in and not auth error -->
-               <!--  <xsl:when test="position() = 2 and not($logged-in) and not($auth-error)">
+                <xsl:when test="position() = 2 and not($logged-in) and not($auth-error)">
                     <xsl:attribute name="class" select="'login-item-active'"/>
-                </xsl:when>-->
+                </xsl:when>
                 <xsl:when 
                     test="position() != 2">
                     <xsl:attribute name="class" select="'login-item-active'"/>
