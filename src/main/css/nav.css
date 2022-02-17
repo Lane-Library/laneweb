@@ -17,6 +17,7 @@ ul.content .nav-menu {
 .nav-menu>span, .nav-menu>span a {
 	color: black;
 	display: block; 
+	font-size: 18px;
 	text-align: center;
 	white-space: nowrap;
 	line-height: 64px;
@@ -73,8 +74,8 @@ ul.content .nav-menu {
 }
 
 .nav-menu-content li {
-	width: 250px;
-	padding: 6px 6px 6px 18px;
+	width: 260px;
+	margin: 9px 24px;
 	box-sizing: border-box;
 }
 
@@ -114,11 +115,7 @@ ul.content .nav-menu {
 
 .nav-cols-content div p {
 	padding: 12px 24px 6px;
-	font-weight: 600;
-}
-
-.nav-menu-content li {
-	margin: 15px 24px;
+	font-weight: 800;
 }
 
 .content  .nav-menu-content.nav-cols-content li:last-child {

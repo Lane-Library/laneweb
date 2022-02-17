@@ -33,6 +33,27 @@ section.header div:first-of-type a {
 	margin-right: 2px;
 	color: #8C1515;
 }
+/* Logout button */
+.login  li:last-of-type a {
+	color: black;
+	border-color: black;
+}
+
+/* Bookmakrs icon */
+
+.login .favorites.dropdown{
+	line-height: 64px;
+ }
+.login > li .favorites.dropdown a {
+	display: inline-block;
+}
+.login > li .favorites.dropdown  i{
+	font-size: 25px;
+	padding: 0 24px;
+}
+.login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {
+	background-color: #f0f4f5;
+}
 
 .lane-header  .btn.outline {
 	margin-top: 13px;

@@ -1,19 +1,31 @@
 .favorites .dropdown-content {
-	background-color: #666;
-	background-image: url('../images/diag.png');
-	padding: 8px 18px 12px;
+	background-color: #f0f4f5;
+	padding: 18px 18px 12px;
 	border: none;
 	font-weight: initial;
 	line-height: initial;
-	right: -24px;
+	right: 0px;
 	white-space: nowrap;
 	z-index: 2;
 }
 
+.favorites .dropdown-content label{
+	font-weight: 600;
+}
+.favorites .dropdown-content a.manageBookmarks.btn, .favorites .dropdown-content a.manageBookmarks.btn:hover{
+	color: white;
+	border: none;
+	background-color: #8C1515;
+} 
+
 .favorites li {
 	font-size: 13px;
 	letter-spacing: initial;
-	margin: 6px 0;
+	margin: 18px 0;
+}
+
+.favorites li a {
+	color: black;
 }
 
 .bookmark-link {
