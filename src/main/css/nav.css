@@ -259,6 +259,7 @@ ul.content .nav-menu {
 		top: auto;
 		z-index: 1;
 		background: white;
+		box-shadow: 0px -3px 7px rgb(200 200 200 / 97%);
 	}
 	.med-screen-menu div {
 		text-align: center;
