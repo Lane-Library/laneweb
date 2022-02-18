@@ -8,12 +8,14 @@
 }
 
 .use-lane  div.landing .youtube-thumbnail {
-	padding-top: 13px;
-    padding-bottom: 20px;
-    padding-right: 3%;
-	background-color: #8C1515;
-	float: right;
-	width: 90%;
+	border-color: #8C1515;
+    border-style: solid;
+    border-top-width: 15px;
+    border-right-width: 46px;
+    border-bottom-width: 30px;
+    background-color: #8C1515;
+    float: right;
+    width: 90%;
 }
 
 .use-lane  div.landing .youtube-thumbnail img {
@@ -30,12 +32,13 @@
 	}
 	.use-lane  div.landing .youtube-thumbnail {
 		float: initial;
-		margin: auto;		
+		margin: auto;
 	}
 }
 
 @media ( max-width : 812px) {
 	.use-lane  div.landing .youtube-thumbnail {
+		border: none;
 		background: transparent;
 	}
 	.use-lane  div.landing .youtube-thumbnail img {

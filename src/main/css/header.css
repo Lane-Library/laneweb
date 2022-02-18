@@ -50,7 +50,6 @@ section.header div:first-of-type a {
 .login > li .favorites.dropdown  i{
 	font-size: 25px;
 	padding: 0 14px;
-    margin-top: 3px;
     vertical-align: middle;
 }
 .login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {

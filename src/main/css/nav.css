@@ -16,7 +16,7 @@ ul.content .nav-menu {
 
 .nav-menu>span, .nav-menu>span a {
 	color: black;
-	display: block; 
+	display: block;
 	font-size: 18px;
 	text-align: center;
 	white-space: nowrap;
@@ -47,7 +47,7 @@ ul.content .nav-menu {
 	padding-left: 6px;
 	color: black;
 	font-size: 21px;
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .nav-menu i.fa.fa-angle-up {
@@ -110,7 +110,12 @@ ul.content .nav-menu {
 	padding: 16px 0;
 }
 
-.nav-cols-content div {
+.dropdown:hover:last-of-type .dropdown-content.nav-cols-content {
+	right: 0;
+	left: inherit;
+}
+
+.nav-cols-content div:first-child {
 	flex: 1 1 50%;
 	border-right: 1px solid #ccc;
 }
@@ -154,7 +159,8 @@ ul.content .nav-menu {
 		text-align: left;
 	}
 	#navigation {
-		position: absolute; z-index : 2;
+		position: absolute;
+		z-index: 2;
 		right: 0px;
 		width: 100%;
 		z-index: 2;
@@ -195,7 +201,8 @@ ul.content .nav-menu {
 		font-weight: 700;
 		position: fixed;
 		padding: 18px;
-		top: auto; bottom : 0;
+		top: auto;
+		bottom: 0;
 		width: 100%;
 		z-index: 4;
 		bottom: 0;
@@ -239,6 +246,29 @@ ul.content .nav-menu {
 	.nav-cols-content div {
 		border-right: none;
 	}
+
+	/* Menu for small and medium screen */
+	.med-screen-menu.lrg-screen-hide {
+		display: flex;
+		flex-flow: row;
+		justify-content: space-around;
+		width: 100%;
+		bottom: 0px;
+		padding: 9px 0;
+		position: fixed;
+		top: auto;
+		z-index: 1;
+		background: white;
+	}
+	.med-screen-menu div {
+		text-align: center;
+	}
+	.med-screen-menu a, .med-screen-menu a i, .med-screen-menu .login a i {
+		color: black;
+		display: block;
+		font-size: 12px;
+	}
+	/* END of menu for small and medium screen */
 }
 
 @media ( max-width :812px) {
