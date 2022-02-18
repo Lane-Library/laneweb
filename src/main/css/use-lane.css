@@ -8,9 +8,9 @@
 }
 
 .use-lane  div.landing .youtube-thumbnail {
-	padding-top: 16px;
-	padding-bottom: 26px;
-	padding-right: 33px;
+	padding-top: 13px;
+    padding-bottom: 20px;
+    padding-right: 3%;
 	background-color: #8C1515;
 	float: right;
 	width: 90%;
@@ -30,8 +30,7 @@
 	}
 	.use-lane  div.landing .youtube-thumbnail {
 		float: initial;
-		margin: auto;
-		width: 63%;
+		margin: auto;		
 	}
 }
 
