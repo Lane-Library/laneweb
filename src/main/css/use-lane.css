@@ -1,6 +1,6 @@
 /*Use lane on home page*/
-.use-lane div.pure-u-1-2:first-of-type {
-	margin-top: 5%;
+.use-lane {
+	align-items: center;
 }
 
 .use-lane div.pure-u-1-2:first-of-type a {
@@ -8,19 +8,18 @@
 }
 
 .use-lane  div.landing .youtube-thumbnail {
-	border-color: #8C1515;
-	border-style: solid;
-	border-top-width: 18px;
-	border-bottom-width: 33px;
-	border-right-width: 34px;
+	padding-top: 16px;
+	padding-bottom: 26px;
+	padding-right: 33px;
 	background-color: #8C1515;
 	float: right;
-	width: 87%;
+	width: 90%;
 }
 
 .use-lane  div.landing .youtube-thumbnail img {
 	margin-left: -33px;
 }
+
 .use-lane  div.landing .youtube-thumbnail i {
 	right: 50%;
 }
@@ -37,14 +36,10 @@
 }
 
 @media ( max-width : 812px) {
-	
-	.use-lane  div.landing .youtube-thumbnail{
-		border: none;
+	.use-lane  div.landing .youtube-thumbnail {
 		background: transparent;
 	}
 	.use-lane  div.landing .youtube-thumbnail img {
-	margin: 0;
-}
-	
-	
+		margin: 0;
+	}
 }
