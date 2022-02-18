@@ -7,46 +7,44 @@
 	margin-top: 33px;
 }
 
-.use-lane div.landing {
-	background-color: #8c1515;
-	margin: 24px 0 24px 100px;
-	padding-bottom: 13px;
+.use-lane  div.landing .youtube-thumbnail {
+	border-color: #8C1515;
+	border-style: solid;
+	border-top-width: 18px;
+	border-bottom-width: 33px;
+	border-right-width: 34px;
+	background-color: #8C1515;
+	float: right;
+	width: 87%;
 }
 
-.use-lane  div.landing img {
-	display: block;
-	width: 75%;
-	padding-top: 18px;
-	margin-left: -34px
+.use-lane  div.landing .youtube-thumbnail img {
+	margin-left: -33px;
 }
-
-.use-lane  div.landing i {
-	right: 59%;
-	top: 46%;
+.use-lane  div.landing .youtube-thumbnail i {
+	right: 50%;
 }
 
 @media ( max-width : 1100px) {
 	.use-lane {
 		flex-flow: row wrap-reverse;
 	}
-	.use-lane div.pure-u-1-2:first-of-type {
-		margin: 32px 0;
-	} 
-	.use-lane div.landing {
+	.use-lane  div.landing .youtube-thumbnail {
+		float: initial;
 		margin: auto;
-    	width: 85%;
+		width: 63%;
 	}
 }
 
 @media ( max-width : 812px) {
-	.use-lane div.landing {
-		background-color: transparent;
-		margin: auto;
-		width: 90%
+	
+	.use-lane  div.landing .youtube-thumbnail{
+		border: none;
+		background: transparent;
 	}
-.use-lane  div.landing img{	
-	margin: auto;
-	width: 90%;
+	.use-lane  div.landing .youtube-thumbnail img {
+	margin: 0;
 }
+	
 	
 }
