@@ -169,13 +169,13 @@ body:nth-child(3) footer {
 }
 
 .footer-organization .fa-facebook {
-	font-size: 1.7em;
-	top: 3px;
+	font-size: 2.0em;
+	color:#1877F2;
 }
 
 .footer-organization .fa-twitter {
 	font-size: 1.3em;
-	top: -2px;
+	top: -3px;
 }
 
 @media ( max-width : 700px) {

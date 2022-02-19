@@ -4,7 +4,7 @@
 
 nav>ul.content {
 	display: flex;
-	margin-top: 0px;
+	margin: 0 3%;	
 }
 
 ul.content .nav-menu {
@@ -41,24 +41,22 @@ ul.content .nav-menu {
 	color: #8c1515;
 }
 
-.nav-menu i.fa.fa-angle-up, .nav-menu i.fa.fa-angle-down {
+.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
 	text-align: center;
-	font-weight: 600;
-	padding-left: 6px;
+	padding-left: 3px;
 	color: black;
-	font-size: 21px;
 	vertical-align: middle;
 }
 
-.nav-menu i.fa.fa-angle-up {
+.nav-menu i.fa-angle-up {
 	display: none;
 }
 
-.nav-menu:hover i.fa.fa-angle-up {
+.nav-menu:hover i.fa-angle-up {
 	display: inline-block;
 }
 
-.nav-menu:hover i.fa.fa-angle-down {
+.nav-menu:hover i.fa-angle-down {
 	display: none;
 }
 
@@ -191,14 +189,13 @@ ul.content .nav-menu {
 	#nav-toggle-on {
 		display: block;
 		position: inherit;
-		padding: 16px;
+		padding: 22px
 	}
 	#nav-toggle-off {
 		display: none;
 		text-align: center;
 		background: black;
 		color: white;
-		font-weight: 700;
 		position: fixed;
 		padding: 18px;
 		top: auto;
@@ -207,13 +204,11 @@ ul.content .nav-menu {
 		z-index: 4;
 		bottom: 0;
 	}
-	.nav-menu i.fa.fa-angle-up, .nav-menu i.fa.fa-angle-down {
-		margin-top: 20px;
-		font-weight: 600;
+	.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
 		float: right;
-		margin-right: 40px;
-		font-size: 22px;
+		margin: 30px 40px 0 0;
 	}
+	
 	#nav-toggle-off i, #nav-toggle-on i {
 		text-align: center;
 	}
@@ -267,7 +262,7 @@ ul.content .nav-menu {
 	.med-screen-menu a, .med-screen-menu a i, .med-screen-menu .login a i {
 		color: black;
 		display: block;
-		font-size: 12px;
+		padding-bottom: 3px;		
 	}
 	/* END of menu for small and medium screen */
 }

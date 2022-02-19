@@ -24,11 +24,7 @@ img {
 }
 .menu-toggle span, .menu-toggle i {
 	color: black;
-	display: block;
-}
-
-.menu-toggle i {
-	font-size: 30px;
+	display: initial;
 }
 
 .lrg-screen-hide{
@@ -93,8 +89,6 @@ img {
 	.menu-toggle{
 		display: block;
 	}
-	
-	
 	.lrg-screen-hide{
 		display: initial;
 	}	
@@ -109,8 +103,7 @@ img {
 	
 	header section{
 	 padding-left: 12px;
-	 padding-right: 12px;
-	 
+	 padding-right: 12px;	 
 	}
 	
 	.pure-md-hide, span.bookmark-link {
