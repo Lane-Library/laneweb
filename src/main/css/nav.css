@@ -4,7 +4,7 @@
 
 nav>ul.content {
 	display: flex;
-	margin: 0 3%;	
+	margin-top: 0px;
 }
 
 ul.content .nav-menu {

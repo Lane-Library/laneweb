@@ -9,7 +9,7 @@
 	display: flex;
 }
 
-.explore section {
+.explore .icon {
 	background-color: #8c1515;
 	display: inline-block;
 	height: 60px;
@@ -17,25 +17,23 @@
 	vertical-align: middle;
 }
 
-.explore div.icon span {
-	display: block;
-	padding-left: 17px;
-	padding-top: 15px;
-}
-
-.explore i.fa-2x {
+.explore i {
 	color: white;
-	font-size: 1.9em;
+	margin-top: 28px;
+	margin-left: 16px;
+	vertical-align: middle;
 }
 
-.explore label {
+.explore:last-of-type i {
+	margin-left: 12px;
+}
+
+.explore a {
 	font-size: 20px;
 	font-weight: 600;
 	color: black;
-}
-
-.explore .detail {
-	padding: 17px 0 0 12px;
+	padding: 17px 10px;
+	display: block;
 }
 
 @media ( max-width : 812px) {
