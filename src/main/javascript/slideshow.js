@@ -32,7 +32,7 @@
 						model.slides[model.index].className = "slide desactive-next";
 					},
 					updateButton: function() {
-						if (model.index  + model.imageDisplayedNumber >= model.slides.length -1) {
+						if (model.index  + model.imageDisplayedNumber >= model.slides.length ) {
 							nextButton.className = "disable";
 						} else {
 							nextButton.className = "";
