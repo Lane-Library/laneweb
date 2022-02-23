@@ -6,6 +6,20 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2022-02-14" version="3.10.1" description="bug fix and update release">
+			<action date="2021-09-01" dev="ryanmax" issue="LANEWEB-10800" type="update">
+				adjust VPN IP ranges for Stanford VPN changes				
+			</action>
+			<action date="2022-02-10" dev="ryanmax" issue="LANEWEB-10878" type="update">
+				Color contrast - Medical Center Footer			
+			</action>
+			<action date="2022-02-10" dev="ryanmax" issue="LANEWEB-1087" type="update">
+				Change font awesome icon color		
+			</action>
+			<action date="2022-02-10" dev="ryanmax" issue="LANEWEB-108" type="update">
+				Change text color - Lane Search			
+			</action>
+		</release>
 		<release date="2022-02-07" version="3.10.0" description="bug fix and update release">
 			<action date="2021-06-02" dev="ryanmax" issue="LANEWEB-10723" type="update">
 				Lane search: add holdings information (location, call number, etc.) to Lane Catalog results			
