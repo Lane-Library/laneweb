@@ -81,11 +81,3 @@
 	padding-bottom: 12px;
 }
 
- @media ( max-width : 521px) {
-	.staff-slide-show #slide-show, .slide {
-		height: 300px;
-	}
-	#previous-slide, #next-slide {
-		top: 185px;
-	}
-} 
