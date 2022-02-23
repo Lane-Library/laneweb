@@ -1,6 +1,7 @@
 #slide-show {
 	position: relative;
 	overflow: hidden;
+	height: 235px;
 }
 
 .slide-container {
@@ -18,16 +19,16 @@
 	position: relative;
 }
 
+.slide img{
+	height: 230px;
+}
+
 .slide.desactive-next {
 	display: none;
 }
 
 .slide.active-previous {
 	display: block;
-}
-
-.slide img {
-	width: 100%;
 }
 
 #next-slide {
@@ -41,14 +42,10 @@
 #previous-slide, #next-slide {
 	position: absolute;
 	display: block;
-	top: 205px;
+	top: 140px;
 	cursor: pointer;
-	color: black;
+	color: #aabec6;
 }
-
-#previous-slide .fa, #next-slide .fa{
-	font-size: 3em;
-	}
 
 #previous-slide.disable, #next-slide.disable {
 	display: none;
@@ -61,32 +58,34 @@
 	position: relative;
 }
 
-.staff-slide-show #slide-show{
-	height: 400px;
-}
-
-.staff-slide-show .slide div{
+.staff-slide-show .slide div {
 	position: absolute;
-    padding-top: 100%;
-    width: 100%;
-}
-.staff-slide-show .slide div label{
-	display : block;
-	font-size: xx-large;
-    font-weight: 700;
-    color: white;
-    text-align: center;
+	bottom: 12px;
+    line-height: 1.1em;
+	width: 100%;
+	background: linear-gradient(transparent, #333 80%);
 }
 
-.staff-slide-show .slide div label.title{
-	font-size: inherit;
+.staff-slide-show .slide div label {
+	display: block;
+	color: white;
+	text-align: center;
 }
 
-@media ( max-width : 521px) {
-	.staff-slide-show #slide-show{
+.staff-slide-show .slide div label.name {
+	margin-top: 30px;
+}
+
+.staff-slide-show .slide div label.title {
+	font-size: x-small;
+	padding-bottom: 12px;
+}
+
+ @media ( max-width : 521px) {
+	.staff-slide-show #slide-show, .slide {
 		height: 300px;
 	}
 	#previous-slide, #next-slide {
-		top: 145px;
+		top: 185px;
 	}
-}
+} 
