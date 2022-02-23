@@ -2,7 +2,6 @@
     <li>
         <a href="/secure/login.html"><i class="fa fa-lock"></i> STANFORD LOGIN</a>
     </li>
-    <li><i class="fa fa-user"></i>&#160;</li>
     <li>
         <div class="favorites dropdown">
             <a href="/favorites.html"><i class="fa fa-bookmark"></i> My Bookmarks</a>

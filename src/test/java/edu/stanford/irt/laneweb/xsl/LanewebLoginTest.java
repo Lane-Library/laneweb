@@ -152,18 +152,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
         assertEquals(getExpectedResult("TrueQuerySomethingElseProxyLinks.xml"), sw.toString());
     }
 
-    @Test
-    public void testTrueUserIdSOM() throws TransformerException, IOException {
-        StringWriter sw = new StringWriter();
-        Result result = new StreamResult(sw);
-        this.transformer.setParameter(Model.PROXY_LINKS, "true");
-        this.transformer.setParameter(Model.USER_ID, "sunetid@stanford.edu");
-        this.transformer.setParameter(Model.IPGROUP, "SOM");
-        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
-        this.transformer.transform(this.source, result);
-        assertEquals(getExpectedResult("TrueUserIdSOM.xml"), sw.toString());
-    }
-
+    
     @Test
     public void testTrueZeroOther() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();

@@ -5,8 +5,6 @@
          <i class="fa fa-lock"/> STANFORD LOGIN</a>
    </li>
    <li class="login-item-active">
-      <i class="fa fa-user"/> sunetid@stanford.edu</li>
-   <li class="login-item-active">
       <div class="favorites dropdown">
          <a href="/favorites.html">
             <i class="fa fa-bookmark"/> My Bookmarks</a>

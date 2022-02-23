@@ -5,9 +5,6 @@
          <i class="fa fa-lock"/> STANFORD LOGIN</a>
    </li>
    <li>
-      <i class="fa fa-user"/>
-   </li>
-   <li>
       <div class="favorites dropdown">
          <a href="/base/favorites.html">
             <i class="fa fa-bookmark"/> My Bookmarks</a>
