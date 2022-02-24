@@ -5,6 +5,9 @@ docker run --rm -t -p 9090:8080 -p 5001:5000 -v $(pwd)/application.properties:/s
             -- \
             java \
             -agentlib:jdwp=transport=dt_socket,address=*:5000,server=y,suspend=n \
+            -Djaxp.debug=1 \
+            -Dxerces.debug=true \
+            -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeAwareParserConfiguration \
             -Xmx450m \
             -Dedu.stanford.irt.laneweb.live-base=file:/laneweb-content \
             -Dspring.profiles.active=default \
