@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var HTML = "<a href=\"#\">View All <i class=\"fa fa-angle-double-down\"></i></a>";
+    var HTML = "<a href=\"#\">View All <i class=\"fa-regular fa-angles-down fa-xs\"></i></a>";
 
     var initializeHoldingsToggles = function() {
         var triggers = document.querySelectorAll(".hldgsTrigger");

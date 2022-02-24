@@ -37,7 +37,7 @@
                 <div class="general-dropdown dropdown">
                     <div class="general-dropdown-trigger">
                         <xsl:value-of select="$active-sort-name" />
-                        <i class="fa fa-angle-double-down"></i>
+                        <i class="fa-regular fa-angles-down fa-sm"></i>
                     </div>
                     <div class="general-dropdown-content dropdown-content">
                         <xsl:choose>

@@ -285,7 +285,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
                 XMLUtils.data(xmlConsumer,
                         getDisplayedResourceName(selectedResource) + " (" + nf.format(totalElement) + ")");
             }
-            createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
+            createElementWithClass(xmlConsumer, "i", "fa-regular fa-angles-down", "");
             endDiv(xmlConsumer);
             startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
             startUlWithClass(xmlConsumer, "pagingLabels");

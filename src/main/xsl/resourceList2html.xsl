@@ -259,7 +259,7 @@
                     <span> ... </span>
                     <span class="authorsTrigger no-bookmarking active">
                         <a href="#"> Show More </a>
-                        <i class="fa fa-angle-double-down"></i>
+                        <i class="fa-regular fa-angles-down fa-xs"></i>
                     </span>
                     <span class="authors-hide"><xsl:value-of select="substring-after(.,$authorString)"/></span>
                 </xsl:when>

@@ -26,10 +26,10 @@
     <xsl:variable name="header">
       	<span>
       	<a href="#searchFacets" class="menu-toggle">
-			<i class="fa fa-bars"></i>
+			<i class="fa-regular fa-angle-down fa-lg"></i>
 		</a>
 		<a href="#off" id="off"  class="menu-toggle">
-			<i class="fa fa-times"></i>
+			<i class="fa-regular fa-xmark fa-lg"></i>
 		</a>
 		</span>
         <h4 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
@@ -74,10 +74,10 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="enabled = 'true'">
-                 <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="{$indented} fa fa-check-square fa-lg"></i> <span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
+                 <li class="enabled"><a title="remove" href="{$facet-search-base-path}{$furl}"> <i class="{$indented} fa-solid fa-square-check fa-lg"></i> <span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
             </xsl:when>
             <xsl:otherwise>
-                 <li class="{$indented}"><a href="{$facet-search-base-path}{$furl}"><i class="fa fa-square-o fa-lg"></i><span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
+                 <li class="{$indented}"><a href="{$facet-search-base-path}{$furl}"><i class="fa-regular fa-square fa-lg"></i><span class="facetLabel"><xsl:copy-of select="$label"/></span> <span class="facetCount"><xsl:value-of select="$count-formatted"/></span></a></li>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -118,10 +118,10 @@
                     <li>
                         <div class="s-pagination no-bookmarking">
                             <xsl:if test="number($page) &gt; 1">
-                                <a class="pagingButton previous" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa fa-backward"></i> Previous</a>
+                                <a class="pagingButton previous" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) - 1}" title="previous"> <i class="fa-solid fa-backward"></i> Previous</a>
                             </xsl:if>
                             <xsl:if test="count($entry/list/facet) > $facets-per-browse-page">
-                                <a class="pagingButton next" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa fa-forward"></i> </a>
+                                <a class="pagingButton next" rel="lightbox disableAnimation disableBackground" href="{$facet-browse-base-path}&amp;page={number($page) + 1}" title="next">Next <i class="fa-solid fa-forward"></i> </a>
                             </xsl:if>
                             <xsl:choose>
                                 <xsl:when test="$facet.sort = 'index'">

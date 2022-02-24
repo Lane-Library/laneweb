@@ -83,7 +83,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(upperAlpha).append("a-").append(upperAlpha).append('z');
         }
         XMLUtils.data(xmlConsumer, sb.toString());
-        createElementWithClass(xmlConsumer, "i", "fa fa-angle-double-down", "");
+        createElementWithClass(xmlConsumer, "i", "fa-regular fa-angles-down", "");
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
         startUlWithClass(xmlConsumer, "pagingLabels");

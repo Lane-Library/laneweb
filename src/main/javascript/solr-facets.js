@@ -34,14 +34,14 @@
                     + label
                     + '<a title="remove filter" href="'
                     + url
-                    + '"> <i class="fa fa-times-circle fa-lg"></i></a></span>';
+                    + '"> <i class="fa-solid fa-times-circle fa-lg"></i></a></span>';
             });
             if (enabledFacets.length > 0) {
                 html += '<span class="clearLimits"><a href="'
                     + basePath
                     + '/search.html?source=all-all&q='
                     + query
-                    + '">Clear filters <i class="fa fa-times-circle fa-lg"></i></a> to show '
+                    + '">Clear filters <i class="fa-solid fa-times-circle fa-lg"></i></a> to show '
                     + count
                     + ' results</span>';
                 limitsContainer.insertAdjacentHTML("beforeEnd", html);

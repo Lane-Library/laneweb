@@ -269,6 +269,10 @@ li.active .description {
     margin-left: -10px;
     transform: rotate(315deg);
 }
+    
+.fa-link-horizontal {    
+    color: #666;
+}
 
 .hldgsTrigger {
     cursor: pointer;
