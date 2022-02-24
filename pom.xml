@@ -222,7 +222,8 @@
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
             <!-- LANEWEB-10667: performance problems with xerces 2.12.1 -->
-            <version>2.12.0.SP03</version>
+            <!-- add runtime -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeAwareParserConfiguration -->
+            <version>2.12.2</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
