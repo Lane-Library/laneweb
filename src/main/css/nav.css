@@ -63,8 +63,6 @@ ul .nav-menu, ul .nav-login {
 	display: none;
 }
 
-
-
 /* Menu content */
 .nav-menu .nav-menu-content {
 	background-color: #f0f4f5;
@@ -88,7 +86,6 @@ ul .nav-menu, ul .nav-login {
 .content .nav-menu-content li {
 	border-bottom: none;
 }
-
 
 .nav-menu-content a {
 	display: inline;
@@ -126,7 +123,7 @@ ul .nav-menu, ul .nav-login {
 }
 
 /* login Menu */
-.nav-login .login{
+.nav-login .login {
 	display: flex;
 	justify-content: end;
 }
@@ -140,13 +137,12 @@ ul .nav-menu, ul .nav-login {
 		#navigation:target nav {
 		display: block;
 	}
-	
+
 	/* To hide bookmarks link when the navigation is clicked  */
-	 #navigation:target .nav-login .login > li:first-of-type, #navigation:target .nav-login .login > li:last-of-type,
-	 #navigation:target .nav-login .login  a.medium-screen-hide{
-	 	display: none;
+	#navigation:target .nav-login .login>li:first-of-type, #navigation:target .nav-login .login>li:last-of-type,
+		#navigation:target .nav-login .login  a.medium-screen-hide {
+		display: none;
 	}
-	
 	#navigation:target {
 		position: absolute;
 		top: -35px;
@@ -200,10 +196,9 @@ ul .nav-menu, ul .nav-login {
 		padding: 0 34px 20px;
 		border: none;
 	}
-	#navigation .nav-menu-content li{
+	#navigation .nav-menu-content li {
 		padding: 6px 0;
 	}
-	
 	#nav-toggle-on {
 		display: block;
 		position: inherit;
@@ -228,12 +223,10 @@ ul .nav-menu, ul .nav-login {
 	#navigation:target #nav-toggle-off {
 		display: block;
 	}
-	
 	.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
 		float: right;
 		margin: 30px 40px 0 0;
 	}
-	
 	#nav-toggle-off i, #nav-toggle-on i {
 		text-align: center;
 	}
@@ -244,7 +237,6 @@ ul .nav-menu, ul .nav-login {
 	.nav-menu>span a {
 		text-align: left;
 	}
-	
 	.nav-cols-content {
 		flex-wrap: wrap;
 	}
@@ -261,7 +253,7 @@ ul .nav-menu, ul .nav-login {
 	.nav-cols-content div:first-child {
 		border-right: none;
 	}
-	
+
 	/* Bookmarks for medium and smallscreen */
 	.nav-login {
 		width: 100%;
@@ -270,22 +262,20 @@ ul .nav-menu, ul .nav-login {
 		background-color: #8c1515;
 		color: white;
 	}
-	
-	.nav-login .favorites span{
+	.nav-login .favorites span {
 		font-size: 18px;
-	    font-weight: 600;
-	    padding-left: 24px
+		font-weight: 600;
+		padding-left: 24px
 	}
-	.nav-login .favorites .dropdown-content{
+	.nav-login .favorites .dropdown-content {
 		left: 0;
 		width: 100%;
 	}
-	
-	.nav-login .favorites .dropdown-content > ul li{
+	.nav-login .favorites .dropdown-content>ul li {
 		margin: auto;
-    width: 30%;
-    text-align: center;
-    padding-bottom: 30px;
+		width: 183px;
+		text-align: center;
+		padding-bottom: 30px;
 	}
 	/* Menu for small and medium screen */
 	.mobile-screen-menu.lrg-screen-hide {
@@ -299,17 +289,17 @@ ul .nav-menu, ul .nav-login {
 		top: auto;
 		z-index: 1;
 		background: white;
-		box-shadow: 0px -3px 7px rgb(200 200 200 / 97%);
+		box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
 	}
 	.mobile-screen-menu div {
 		text-align: center;
 	}
-	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i {
+	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i
+		{
 		color: black;
 		display: block;
 		padding-bottom: 3px;
-		line-height: normal;		
+		line-height: normal;
 	}
 	/* END of menu for small and medium screen */
 }
-
