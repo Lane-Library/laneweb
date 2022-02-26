@@ -1,14 +1,15 @@
 #navigation {
-	flex: 2;
+	flex: 1;
 }
 
-nav>ul.content {
+nav>ul {
 	display: flex;
-	margin-top: 0px;
+	justify-content: space-between;
+	padding-left: 5%;
 }
 
 /* Menu header */
-ul.content .nav-menu {
+ul .nav-menu, ul .nav-login {
 	display: inline-block;
 	flex: 1 1 auto;
 	border: 0;
@@ -96,15 +97,7 @@ ul.content .nav-menu {
 	color: black;
 }
 
-.nav-menu-content.portals ul {
-	column-count: 3;
-	column-gap: 0;
-}
-
-.nav-menu-content.portals li {
-	display: inline-block;
-}
-
+/* Menu multiple colunms */
 .dropdown:hover .dropdown-content.nav-cols-content {
 	display: flex;
 }
@@ -113,7 +106,7 @@ ul.content .nav-menu {
 	padding: 16px 0;
 }
 
-.dropdown:hover:last-of-type .dropdown-content.nav-cols-content {
+.dropdown:hover:nth-of-type(5) .dropdown-content.nav-cols-content {
 	right: 0;
 	left: inherit;
 }
@@ -132,15 +125,28 @@ ul.content .nav-menu {
 	border: none;
 }
 
+/* login Menu */
+.nav-login .login{
+	display: flex;
+	justify-content: end;
+}
+
 @media ( max-width :1100px) {
 	.nav-menu.dropdown:hover .dropdown-content {
 		display: none;
 	}
 	.nav-menu.dropdown:hover .dropdown-content-on-click,
-		.nav-menu-active-on-click .dropdown-content-on-click, #navigation li,
+		.nav-menu-active-on-click .dropdown-content-on-click, #navigation li.nav-menu,
 		#navigation:target nav {
 		display: block;
 	}
+	
+	/* To hide bookmarks link when the navigation is clicked  */
+	 #navigation:target .nav-login .login > li:first-of-type, #navigation:target .nav-login .login > li:last-of-type,
+	 #navigation:target .nav-login .login  a.medium-screen-hide{
+	 	display: none;
+	}
+	
 	#navigation:target {
 		position: absolute;
 		top: -35px;
@@ -176,10 +182,12 @@ ul.content .nav-menu {
 	#navigation ul {
 		display: block;
 		margin: 0;
+		padding: 0;
 	}
 	#navigation .nav-menu {
 		border-bottom: 1px solid #f0f4f5;
 		background-color: white;
+		position: relative;
 	}
 	#navigation .nav-menu:hover {
 		background-color: #f0f4f5;
@@ -192,6 +200,10 @@ ul.content .nav-menu {
 		padding: 0 34px 20px;
 		border: none;
 	}
+	#navigation .nav-menu-content li{
+		padding: 6px 0;
+	}
+	
 	#nav-toggle-on {
 		display: block;
 		position: inherit;
@@ -210,6 +222,13 @@ ul.content .nav-menu {
 		z-index: 4;
 		bottom: 0;
 	}
+	#navigation:target #nav-toggle-on {
+		display: none;
+	}
+	#navigation:target #nav-toggle-off {
+		display: block;
+	}
+	
 	.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
 		float: right;
 		margin: 30px 40px 0 0;
@@ -225,12 +244,7 @@ ul.content .nav-menu {
 	.nav-menu>span a {
 		text-align: left;
 	}
-	#navigation:target #nav-toggle-on {
-		display: none;
-	}
-	#navigation:target #nav-toggle-off {
-		display: block;
-	}
+	
 	.nav-cols-content {
 		flex-wrap: wrap;
 	}
@@ -247,9 +261,34 @@ ul.content .nav-menu {
 	.nav-cols-content div:first-child {
 		border-right: none;
 	}
-
+	
+	/* Bookmarks for medium and smallscreen */
+	.nav-login {
+		width: 100%;
+	}
+	.nav-login .favorites, .nav-login .favorites:hover {
+		background-color: #8c1515;
+		color: white;
+	}
+	
+	.nav-login .favorites span{
+		font-size: 18px;
+	    font-weight: 600;
+	    padding-left: 24px
+	}
+	.nav-login .favorites .dropdown-content{
+		left: 0;
+		width: 100%;
+	}
+	
+	.nav-login .favorites .dropdown-content > ul li{
+		margin: auto;
+    width: 30%;
+    text-align: center;
+    padding-bottom: 30px;
+	}
 	/* Menu for small and medium screen */
-	.med-screen-menu.lrg-screen-hide {
+	.mobile-screen-menu.lrg-screen-hide {
 		display: flex;
 		flex-flow: row;
 		justify-content: space-around;
@@ -262,16 +301,15 @@ ul.content .nav-menu {
 		background: white;
 		box-shadow: 0px -3px 7px rgb(200 200 200 / 97%);
 	}
-	.med-screen-menu div {
+	.mobile-screen-menu div {
 		text-align: center;
 	}
-	.med-screen-menu a, .med-screen-menu a i, .med-screen-menu .login a i {
+	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i {
 		color: black;
 		display: block;
-		padding-bottom: 3px;		
+		padding-bottom: 3px;
+		line-height: normal;		
 	}
 	/* END of menu for small and medium screen */
 }
 
-@media ( max-width :812px) {
-}

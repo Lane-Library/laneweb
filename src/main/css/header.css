@@ -21,11 +21,11 @@ section.header div:first-of-type a {
 
 .login>li {
 	display: none;
-	padding: 0 3px;
 }
 
 .login>.login-item-active {
-	display: inline-block;
+	display: initial;
+	line-height: 64px;
 }
 
 .login .fa {
@@ -57,7 +57,6 @@ section.header div:first-of-type a {
 }
 
 .lane-header  .btn.outline {
-	margin-top: 13px;
 	padding: 6px 17px;
 	font-size: 16px;
 	text-transform: uppercase;
@@ -68,7 +67,6 @@ section.header div:first-of-type a {
 .lane-header {
 	background-color: white;
 	display: flex;
-	justify-content: space-between;
 	position: relative;
 }
 
