@@ -73,7 +73,9 @@
 
 
 
-		controller.calculateImageDisplayed();
+		window.addEventListener("load",
+		controller.calculateImageDisplayed());
+		
 		nextButton.addEventListener(
 			"click", function(e) {
 				controller.previous();
