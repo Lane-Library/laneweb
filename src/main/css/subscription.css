@@ -12,10 +12,12 @@
 	margin-right: 3px;
 	outline: none;
 	width: 70%;
+	border-radius:inherit;
 }
 
 .subscription .btn.outline{
 	padding: 8px 12px;
+	border-radius:inherit;	
 }
 
 .subscription div.mailchimp {
