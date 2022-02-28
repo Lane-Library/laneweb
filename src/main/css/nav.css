@@ -284,10 +284,10 @@ ul .nav-menu, ul .nav-login {
 		justify-content: space-around;
 		width: 100%;
 		bottom: 0px;
-		padding: 9px 0;
-		position: fixed;
+		padding: 9px 0 18px;
+		position: sticky;
 		top: auto;
-		z-index: 1;
+		z-index: 2;
 		background: white;
 		box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
 	}
@@ -302,4 +302,20 @@ ul .nav-menu, ul .nav-login {
 		line-height: normal;
 	}
 	/* END of menu for small and medium screen */
+	
+	/* Nav angle icon */
+	
+	.nav-menu:hover i.fa-angle-up{
+		display: none;
+	}	
+
+	.nav-menu.nav-menu-active-on-click i.fa-angle-up, .nav-menu:hover i.fa-angle-down {
+		display: inline-block;
+	}
+
+	.nav-menu.nav-menu-active-on-click i.fa-angle-down {
+		display: none;
+	}
+	
+	
 }

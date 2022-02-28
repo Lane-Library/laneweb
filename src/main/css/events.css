@@ -101,6 +101,6 @@ li.event:last-of-type {
 		padding-bottom: 0;
 	}
 	.event:last-child div {
-		padding-left: 30%;
+		margin: auto;
 	}
 }

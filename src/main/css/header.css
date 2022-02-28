@@ -13,10 +13,6 @@ section.header a {
 	color: white;
 }
 
-section.header div:first-of-type a {
-	text-decoration: underline;
-}
-
 /* utility menu with login */
 
 .login>li {
