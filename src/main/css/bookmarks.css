@@ -26,8 +26,13 @@
 	color: black;
 }
 
-.favorites .dropdown-content a:first-of-type{
+.favorites .dropdown-content a{
 	font-weight: 600;
+}
+
+
+.favorites .dropdown-content .bookmarks a{
+	font-weight: normal;
 }
 
 

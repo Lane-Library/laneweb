@@ -16,6 +16,22 @@
 				}
 			});
 		});
+
+
+
+		document.querySelector("#nav-toggle-on").addEventListener(
+			"click", function(e) {
+				document.querySelector(".mobile-screen-menu").style.display = "none";
+				document.querySelector("section.content").style.display = "none";
+				document.querySelector("header:first-of-type").style.display = "none";
+			}, false);
+
+		document.querySelector("#nav-toggle-off").addEventListener(
+			"click", function(e) {
+				document.querySelector(".mobile-screen-menu").style.display = "flex";
+				document.querySelector("section.content").style.display = "initial";
+				document.querySelector("header:first-of-type").style.display = "flex";
+			}, false);
 	}
 
 })();
