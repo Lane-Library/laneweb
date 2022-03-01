@@ -11,28 +11,28 @@
 			padding = 24,
 
 
-		 model = function(slides) {
+			model = function(slides) {
 
-			var m = {
-				slides: slides,
-				index: 0,
-				imageDisplayedNumber: 1
-			}
-			return m;
+				var m = {
+					slides: slides,
+					index: 0,
+					imageDisplayedNumber: 1
+				}
+				return m;
 
-		}(document.querySelectorAll(".slide")),
+			}(document.querySelectorAll(".slide")),
 
 			view = function() {
 				previousButton.className = "disable";
 				return {
-					showSlide: function(){
+					showSlide: function() {
 						model.slides[model.index].className = "slide";
 					},
-					hideSlide: function(){
+					hideSlide: function() {
 						model.slides[model.index].className = "slide desactive-next";
 					},
 					updateButton: function() {
-						if (model.index  + model.imageDisplayedNumber >= model.slides.length ) {
+						if (model.index + model.imageDisplayedNumber >= model.slides.length) {
 							nextButton.className = "disable";
 						} else {
 							nextButton.className = "";
@@ -49,22 +49,22 @@
 			controller = function() {
 				return {
 					next: function() {
-						for(var i = model.imageDisplayedNumber ; i >0 && model.index > 0 ; i--){
-							model.index --;
+						for (var i = model.imageDisplayedNumber; i > 0 && model.index > 0; i--) {
+							model.index--;
 							view.showSlide();
 						}
 						view.updateButton();
 					},
 					previous: function() {
-						for(var i = 0 ; i < model.imageDisplayedNumber && model.index + model.imageDisplayedNumber < model.slides.length ; i++){
+						for (var i = 0; i < model.imageDisplayedNumber && model.index + model.imageDisplayedNumber < model.slides.length; i++) {
 							view.hideSlide();
-							model.index ++;
+							model.index++;
 						}
 						view.updateButton();
 					},
 					calculateImageDisplayed: function() {
 						var imageDiv = model.slides[model.slides.length - 1],
-						t = parseFloat(container.offsetWidth + padding) / (parseFloat(imageDiv.offsetWidth + padding));
+							t = parseFloat(container.offsetWidth + padding) / (parseFloat(imageDiv.offsetWidth + padding));
 						model.imageDisplayedNumber = parseInt(t);
 					}
 				}
@@ -73,9 +73,12 @@
 
 
 
-		window.addEventListener("load",
-		controller.calculateImageDisplayed());
-		
+		window.addEventListener("load", function() {
+			view.updateButton();
+			controller.calculateImageDisplayed();
+		}, false);
+
+
 		nextButton.addEventListener(
 			"click", function(e) {
 				controller.previous();
