@@ -4,7 +4,7 @@
       <a href="/secure/login.html?url=%2FredirectPath">
          <i class="fa fa-lock"/> STANFORD LOGIN</a>
    </li>
-   <li class="login-item-active">
+   <li class="login-item-active nav-menu">
       <div class="favorites dropdown">
          <a href="/favorites.html">
             <i class="fa fa-bookmark"/> My Bookmarks</a>
