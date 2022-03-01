@@ -12,7 +12,7 @@
 	margin-right: 3px;
 	outline: none;
 	width: 70%;
-	border-radius:inherit;
+	border: none;
 }
 
 .subscription .btn.outline{

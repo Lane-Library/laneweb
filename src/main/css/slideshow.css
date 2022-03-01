@@ -60,23 +60,24 @@
 
 .staff-slide-show .slide div {
 	position: absolute;
-	bottom: 12px;
+	bottom: 6px;
     line-height: 1.1em;
+    height: 98px;
 	width: 100%;
-	background: linear-gradient(transparent, #333 80%);
+	background: linear-gradient(transparent, #333 60%);
 }
 
-.staff-slide-show .slide div label {
+.staff-slide-show .slide div span {
 	display: block;
 	color: white;
 	text-align: center;
 }
 
-.staff-slide-show .slide div label.name {
+.staff-slide-show .slide div span.name {
 	margin-top: 30px;
 }
 
-.staff-slide-show .slide div label.title {
+.staff-slide-show .slide div span.title {
 	font-size: x-small;
 	padding-bottom: 12px;
 }

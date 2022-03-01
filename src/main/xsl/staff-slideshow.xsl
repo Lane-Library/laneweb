@@ -16,14 +16,14 @@
 						<xsl:attribute name="src" select="s:picture" />
 					</img>
 					<div>
-						<label class="name">
+						<span class="name">
 							<xsl:value-of select="s:first-name/text()" />
 							<xsl:text> </xsl:text>
 							<xsl:value-of select="s:last-name/text()" />
-						</label>
-						<label class="title">
+						</span>
+						<span class="title">
 							<xsl:value-of select="s:job-title/text()" />
-						</label>
+						</span>
 					</div>
 				</a>
 			</div>
