@@ -224,6 +224,13 @@
             <!-- LANEWEB-10667: performance problems with xerces 2.12.1 -->
             <!-- add runtime -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeAwareParserConfiguration -->
             <version>2.12.2</version>
+            <exclusions>
+                <exclusion>
+                    <!-- https://stackoverflow.com/questions/51094274/eclipse-cant-find-xml-related-classes-after-switching-build-path-to-jdk-10 -->
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>            
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>

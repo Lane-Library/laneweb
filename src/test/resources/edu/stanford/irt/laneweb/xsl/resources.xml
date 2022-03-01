@@ -36,7 +36,7 @@
          <li class="resource" data-sid="bib-301866">
             <span class="primaryType">Book</span>
             <div class="bookcover" data-bcid="bib-301866">
-               <i class="fa fa-book"/>
+               <i class="fa-solid fa-book"/>
             </div>
             <div>
                <a class="primaryLink"
@@ -50,13 +50,13 @@
             <div class="description">Introduction : <strong>music</strong> that works /Roland Haas --Sonification : listen to brain activity /Gerald Baier, Thomas Hermann --Chronobiology, as a foundation for and an approach to a new understanding of the influence of <strong>music</strong> /Hans-Ullrich Balzer --<strong>Music</strong> as medicine : incorporating scalable <strong>music</strong>-based interventions into standard medical practice /Vera Brandes --A perspective on evidence-based practice /Cheryl Dileo, Joke Bradt --The audio-vocal system in song and speech development /Wilfried Gruhn --The significance of exposure to <strong>music</strong> for the formation and stabilisation of complex neuronal relationship matrices in the human brain : implications for the salutogenetic effects of intervention by means of <strong>music</strong> theory /Gerald Hüther --<strong>Music</strong> and the self /Petr Janata --Neural substrates of processing syntax and semantics in <strong>music</strong> /Stefan Koelsch --A city upon a hill : making scientific progress in brain-based <strong>music</strong> research in typical development, autism, and other disorders /Nicolas Lange, Janet E. Lainhart --The rhythm of the heart, the tempus of <strong>music</strong> : Mozart, Ligeti, and the rat /Björn Lemmer --<strong>Music</strong> and child neurology : a developmental perspective /Luisa Lopez --Prenatal "experience" and the phylogenesis and ontogenesis of <strong>music</strong> /Richard Parncutt --<strong>Music</strong> and the evolution of human brain function /Juan G. Roederer --Clinical applications of <strong>music</strong> therapy in neurologic rehabilitation /Concetta M. Tomaino --Human biochronology : on the source and functions of "<strong>music</strong>ality" /Colwyn Trevarthen --A study of synchronisation behaviour in a group of test persons during Basky and Dhikr exercises via psycho-physiological monitoring /Gerhard Tucek, Elisabeth Ferstl, Florentina Maria Fritz --Resonance and silence : the significance in medicine /Rolf Verres --Emotion modulation by means of <strong>music</strong> and coping behaviour /Richard von Georgi, Miriam Göbel, Stefan Gebhardt --Identifying the effectiveness of a <strong>music</strong>-based auditory stimulation method, on children with sensory integration and auditory processing concerns : a pilot study /John Esteves ... [et al.] --<strong>Music</strong> as a medicine : incorporating <strong>music</strong> into standard hospital care /Vera Brandes.</div>
             <div class="hldgsContainer no-bookmarking">
                <span class="hldgsHeader available">
-                  <i class="fa-solid fa-link fa-sm"/> Digital Access  </span>
+                  <i class="fa-solid fa-link-horizontal fa-sm"/> Digital Access  </span>
                <span class="hldgsTrigger"/>
                <table class="hide-empty-columns">
                   <thead>
                      <tr>
                         <th>Provider</th>
-                        <th>Version <i class="fa fa-fw fa-info-circle yui3-tooltip-trigger"
+                        <th>Version <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
                               title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
                         </th>
                      </tr>
@@ -89,14 +89,14 @@
                <span class="permalink">
                   <a title="click to copy a shareable link to this record"
                      href="https://lane.stanford.edu/view/bib/301866">
-                     <i class="fa-solid fa-link fa-sm fa-rotate-90"/> Get shareable link</a>
+                     <i class="fa-solid fa-link fa-sm fa-rotate-180"/> Get shareable link</a>
                </span>
             </div>
          </li>
          <li class="resource" data-sid="bib-123">
             <span class="primaryType">Book</span>
             <div class="bookcover" data-bcid="bib-123">
-               <i class="fa fa-book"/>
+               <i class="fa-solid fa-book"/>
             </div>
             <div>
                <a class="primaryLink"
@@ -110,13 +110,13 @@
             <div class="description">Introduction : <strong>music</strong> that works</div>
             <div class="hldgsContainer no-bookmarking">
                <span class="hldgsHeader available">
-                  <i class="fa-solid fa-link fa-sm"/> Digital Access  </span>
+                  <i class="fa-solid fa-link-horizontal fa-sm"/> Digital Access  </span>
                <span class="hldgsTrigger"/>
                <table class="hide-empty-columns">
                   <thead>
                      <tr>
                         <th>Provider</th>
-                        <th>Version <i class="fa fa-fw fa-info-circle yui3-tooltip-trigger"
+                        <th>Version <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
                               title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
                         </th>
                      </tr>
@@ -149,7 +149,7 @@
                <span class="permalink">
                   <a title="click to copy a shareable link to this record"
                      href="https://lane.stanford.edu/view/bib/123">
-                     <i class="fa-solid fa-link fa-sm fa-rotate-90"/> Get shareable link</a>
+                     <i class="fa-solid fa-link fa-sm fa-rotate-180"/> Get shareable link</a>
                </span>
             </div>
          </li>

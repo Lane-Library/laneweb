@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <li class="resource course-reserves-item">
    <div data-bibid="1" class="bookcover">
-      <i class="fa fa-book"/>
+      <i class="fa-solid fa-book"/>
    </div>
    <div>
       <a href="https://lane.stanford.edu/view/bib/1">title</a>

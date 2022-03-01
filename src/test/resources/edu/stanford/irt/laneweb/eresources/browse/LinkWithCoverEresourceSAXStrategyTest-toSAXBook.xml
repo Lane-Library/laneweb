@@ -2,7 +2,7 @@
 <div>
    <a href="url">
       <div data-bibid="12" class="bookcover">
-         <i class="fa fa-book"/>
+         <i class="fa-solid fa-book"/>
       </div>
    </a>
    <a href="url">Lancet</a>
