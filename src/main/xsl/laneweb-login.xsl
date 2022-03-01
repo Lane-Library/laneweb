@@ -23,12 +23,11 @@
                     <xsl:attribute name="class" select="'login-item-active'"/>
                 </xsl:when>
                 <!-- other links active if logged in -->
-                <xsl:when
-                    test="position() != 2 and position() != 4 and $logged-in and not($auth-error)">
-                    <xsl:attribute name="class" select="'login-item-active'"/>
+                <xsl:when   test="position() != 2 and position() != 4 and $logged-in and not($auth-error)">
+                   <xsl:attribute name="class" select="concat('login-item-active',' ', @class)"/>
                 </xsl:when>
             </xsl:choose>
-            <xsl:apply-templates select="attribute::node() | child::node()"/>
+            <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
 
