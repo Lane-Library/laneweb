@@ -23,7 +23,7 @@
         <!-- add manage bookmarks link in widget mode; bookmarks-widget.js controls when this link is displayed -->
         <stx:if test="$mode = 'widget'">
             <ul xmlns="http://www.w3.org/1999/xhtml">
-                <li><a class="manageBookmarks btn" href="/favorites.html#bookmarks-editor">Manage My Bookmarks</a></li>
+                <li><a class="manageBookmarks btn" href="/favorites.html#bookmarks-editor">Bookmark Manager</a></li>
             </ul>
         </stx:if>
     </stx:template>
