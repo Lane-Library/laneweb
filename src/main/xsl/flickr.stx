@@ -20,7 +20,7 @@
             <stx:process-children/>
         </div>
         <stx:if test="$photo-count &gt;= 10">
-            <div><a href="https://www.flickr.com/search/?w=40390680@N08&amp;q={$query}">More Images for <strong><stx:value-of select="$query"/></strong><stx:text> </stx:text><i class="fa fa-arrow-right"></i></a></div>
+            <div><a href="https://www.flickr.com/search/?w=40390680@N08&amp;q={$query}">More Images for <strong><stx:value-of select="$query"/></strong><stx:text> </stx:text><i class="fa-solid fa-arrow-right"></i></a></div>
         </stx:if>
     </stx:template>
     

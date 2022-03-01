@@ -260,14 +260,12 @@ li.active .description {
     color: #C74632;
 }
 
-.hldgsHeader .fa {
-    padding-right: 10px;
+.hldgsHeader .fa-solid, .hldgsHeader .fa-regular, .hldgsHeader .fa-light {
+    padding-right: 6px;
 }
 
-.hldgsHeader .fa-link {
-    padding-left: 10px;
-    margin-left: -10px;
-    transform: rotate(315deg);
+.hldgsHeader .fa-solid.fa-book {
+    padding-right: 9px;
 }
     
 .fa-link-horizontal {    

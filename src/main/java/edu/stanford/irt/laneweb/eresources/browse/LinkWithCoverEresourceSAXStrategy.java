@@ -26,9 +26,9 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
                     .getUrl();
             String fontAwesomeClass;
             if (eresource.getPrimaryType().startsWith("Journal")) {
-                fontAwesomeClass = "fa fa-newspaper-o";
+                fontAwesomeClass = "fa-solid fa-newspaper";
             } else {
-                fontAwesomeClass = "fa fa-book";
+                fontAwesomeClass = "fa-solid fa-book";
             }
             startAnchor(xmlConsumer, href);
             String title = eresource.getTitle();

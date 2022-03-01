@@ -83,7 +83,7 @@ ul .nav-menu {
 
 .nav-menu-content li {
 	width: 260px;
-	margin: 9px 24px;
+	margin: 12px 24px;
 	box-sizing: border-box;
 }
 
@@ -213,7 +213,7 @@ ul .nav-menu {
 		background: black;
 		color: white;
 		position: fixed;
-		padding: 18px;
+		padding: 18px 0 30px;
 		top: auto;
 		bottom: 0;
 		width: 100%;
@@ -300,7 +300,7 @@ ul .nav-menu {
 		justify-content: space-around;
 		width: 100%;
 		bottom: 0px;
-		padding: 9px 0 18px;
+		padding: 9px 0 24px;
 		position: sticky;
 		top: auto;
 		z-index: 1;

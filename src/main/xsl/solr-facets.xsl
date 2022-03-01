@@ -167,7 +167,7 @@
                         <xsl:call-template name="field">
                             <xsl:with-param name="id" select="'type'"/>
                             <xsl:with-param name="label">Resource Type <i
-                                    class="fa fa-info-circle yui3-tooltip-trigger"
+                                    class="fa-solid fa-info-circle yui3-tooltip-trigger"
                                     title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;"
                                 /></xsl:with-param>
                         </xsl:call-template>

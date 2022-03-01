@@ -60,13 +60,13 @@
 		
 				<a href="/classes-consult/laneclasses.html">
 					All Classes &amp; Events
-					<i class="fa fa-arrow-right" />
+					<i class="fa-solid fa-arrow-right" />
 				</a>
 			
 			
 				<a href="/using-lib/research-service.html#officehours">
 					Research Office Hours
-					<i class="fa fa-arrow-right" />
+					<i class="fa-solid fa-arrow-right" />
 				</a>
 			
 			</div>

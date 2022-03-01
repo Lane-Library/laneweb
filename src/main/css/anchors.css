@@ -1,5 +1,5 @@
 /* these are the default anchor styles*/
-a, a .fa {
+a, a .fa, a .fa-solid, a .fa-regular, a .fa-light, a .fa-thin {
     color: #007c92;
     text-decoration: none;
 }

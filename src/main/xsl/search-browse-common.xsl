@@ -93,7 +93,7 @@
             </span>
             <span class="permalink">
                 <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
-                <i class="fa-solid fa-link fa-sm fa-rotate-90"></i> Get shareable link</a>
+                <i class="fa-solid fa-link fa-sm fa-rotate-180"></i> Get shareable link</a>
             </span>
         </div>
     </xsl:function>
@@ -200,14 +200,14 @@
         <xsl:if test="count($links) > 1">
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: updated link icon instead? -->
-                <span class="hldgsHeader available"><i class="fa-solid fa-link fa-sm"></i> Digital Access &#160;</span>
+                <span class="hldgsHeader available"><i class="fa-solid fa-link-horizontal fa-sm"></i> Digital Access &#160;</span>
                 <span class="hldgsTrigger"/>
                 <table class="hide-empty-columns">
                     <thead>
                         <tr>
                             <th>Provider</th>
                             <th>Version <i
-                                    class="fa fa-fw fa-info-circle yui3-tooltip-trigger"
+                                    class="fa-solid fa-info-circle yui3-tooltip-trigger"
                                     title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue."/>
@@ -268,7 +268,7 @@
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
                     <xsl:when test="$itemsAvailableButMaybeNotRequestable">
-                        <span class="hldgsHeader available"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Access</span>
+                        <span class="hldgsHeader available"><i class="fa-solid fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Access</span>
                         <span class="hldgsTrigger"/>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
@@ -277,13 +277,13 @@
                         </xsl:if>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
-                        <span class="hldgsHeader unavailable"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Unavailable: Checked out</span>
+                        <span class="hldgsHeader unavailable"><i class="fa-solid fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Unavailable: Checked out</span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> Access via <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
+                        <span class="hldgsHeader"><i class="fa-solid fa-book"></i> Access via <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader"><i class="fa fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Status unknown</span>
+                        <span class="hldgsHeader"><i class="fa-solid fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Status unknown</span>
                         <span class="hldgsTrigger"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -292,7 +292,7 @@
                         <tr>
                             <th>Location</th>
                             <th>Version <i
-                                    class="fa fa-fw fa-info-circle yui3-tooltip-trigger"
+                                    class="fa-solid fa-info-circle yui3-tooltip-trigger"
                                     title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue."/>

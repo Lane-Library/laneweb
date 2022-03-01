@@ -30,7 +30,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, id);
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "bookcover");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            createElementWithClass(xmlConsumer, "i", "fa fa-book", "");
+            createElementWithClass(xmlConsumer, "i", "fa-solid fa-book", "");
             endDiv(xmlConsumer);
             startDiv(xmlConsumer);
             ItemType type = item.getType();

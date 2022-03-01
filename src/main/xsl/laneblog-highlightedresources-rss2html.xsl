@@ -25,7 +25,7 @@
 			<div class="read-more">
 				<a href="{link}" title="feed link---{../../channel/title}">
 					Read More
-					<i class="fa fa-arrow-right"></i>
+					<i class="fa-solid fa-arrow-right"></i>
 				</a>
 			</div>
 		</div>
