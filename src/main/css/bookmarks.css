@@ -9,12 +9,13 @@
 	z-index: 2;
 }
 
-.favorites .dropdown-content a.manageBookmarks.btn, .favorites .dropdown-content a.manageBookmarks.btn:hover{
+.favorites .dropdown-content a.manageBookmarks.btn, .favorites .dropdown-content a.manageBookmarks.btn:hover
+	{
 	color: white;
 	border: none;
 	background-color: #8C1515;
 	margin-top: 28px;
-} 
+}
 
 .favorites li {
 	font-size: 13px;
@@ -26,15 +27,13 @@
 	color: black;
 }
 
-.favorites .dropdown-content a{
+.favorites .dropdown-content a {
 	font-weight: 600;
 }
 
-
-.favorites .dropdown-content .bookmarks a{
+.favorites .dropdown-content #bookmarks a {
 	font-weight: normal;
 }
-
 
 .bookmark-link {
 	cursor: pointer;
@@ -143,15 +142,18 @@
 	font-size: 13px;
 }
 
+@media ( max-width : 1100px) {
+	.manageBookmarks {
+	font-size: 16px;
+}	
+}
+
 @media ( max-width : 812px) {
 	#bookmarks-editor i {
 		display: none;
 	}
 	#bookmarks-editor button {
 		margin: 10px 3px;
-	}
-	.favorites .dropdown-content {
-		right: -66px;
 	}
 	.favorites li {
 		margin: 9px 0;

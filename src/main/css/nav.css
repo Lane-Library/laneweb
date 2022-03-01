@@ -9,13 +9,17 @@ nav>ul {
 }
 
 /* Menu header */
-ul .nav-menu, ul .nav-login {
+ul .nav-menu {
 	display: inline-block;
 	flex: 1 1 auto;
 	border: 0;
 	padding: 0;
 }
 
+ ul .nav-login{
+ 	display: flex;
+ 	padding-left: 5%;
+ }
 .nav-menu>span, .nav-menu>span a {
 	color: black;
 	display: block;
@@ -254,25 +258,38 @@ ul .nav-menu, ul .nav-login {
 	}
 
 	/* Bookmarks for medium and smallscreen */
-	.nav-login {
+	ul .nav-login {
+		display:block;
 		width: 100%;
+		padding-left:0;
 	}
 	.nav-login .favorites, .nav-login .favorites:hover {
 		background-color: #8c1515;
 		color: white;
+	}
+	.nav-login .login > li .favorites.dropdown i {
+		color: white;
+		padding: inherit;	
 	}
 	.nav-login .favorites span {
 		font-size: 18px;
 		font-weight: 600;
 		padding-left: 24px
 	}
-	.nav-login .favorites .dropdown-content {
-		left: 0;
-		width: 100%;
+	
+	.nav-menu .favorites.dropdown:hover .dropdown-content {
+		display: none;
 	}
+    
+    .nav-menu .favorites.dropdown .dropdown-content.dropdown-content-on-click,
+    .nav-menu .favorites.dropdown:hover .dropdown-content.dropdown-content-on-click{
+    	display: block;
+    	width: 100%;
+    }
+    
 	.nav-login .favorites .dropdown-content>ul li {
 		margin: auto;
-		width: 183px;
+		width: 203px;
 		text-align: center;
 		padding-bottom: 30px;
 	}
@@ -286,7 +303,7 @@ ul .nav-menu, ul .nav-login {
 		padding: 9px 0 18px;
 		position: sticky;
 		top: auto;
-		z-index: 2;
+		z-index: 1;
 		background: white;
 		box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
 	}
