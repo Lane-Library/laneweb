@@ -1,28 +1,77 @@
 .popular {
+	margin-top: 24px;
+	padding: 12%;
+	line-height: 1.6em;
+	background-color: #333333;
+	color: #ffffff;
+	border: 1px solid #333333;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.popular h3 {
+	text-transform: uppercase;
+	font-family: 'Fjord One', serif;
+	color: #ffffff;
+	text-align: center;
+	background-image: none;
+}
+
+.popular h4 {
+	text-transform: uppercase;
+	font-family: 'Fjord One', serif;
+	color: #ffffff;
+	text-align: center;
+	background-image: none;
+}
+
+.popular li {
+	border-bottom: none;
+}
+
+.popular:after {
+	content: '.';
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.popular a, .popular a .fa {
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+.top-resources{
 	line-height: 1.6em;
 	background-color: white;
 	color: black;
 	box-sizing: border-box;
 	position: relative;
+	height: 100%;
 }
 
-.popular ul {
+.top-resources ul {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.popular li {
+.top-resources li {
 	border-bottom: none;
 	flex: 0 1 50%;
 }
 
-.popular a {
+.top-resources a {
 	color: black;
 }
 
-.popular.top-resources{
-	height: 100%;
-}
 
 @media ( max-width : 1100px) {
 	.top-resources:first-child span {
