@@ -43,6 +43,13 @@
     padding-bottom: 4px;
 }
 
+.eresources-browse{
+	margin-top: 24px;
+}
+.eresources-browse fieldset{
+	padding-top:0; 
+}
+
 .eresources-browse .module {
     background-color: transparent;
 }

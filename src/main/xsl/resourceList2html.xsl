@@ -62,28 +62,28 @@
             </head>
             <body>
                 <xsl:if test="number(@size) &gt; 0">
-                    <div class="s-tb no-bookmarking"><div class="pure-g">
-                      <div class="pure-u-7-24">
+                    <div class="s-tb no-bookmarking">
+                      <div>
                         <xsl:call-template name="resultsText"/>
                       </div>
-                      <div class="pure-u-7-24">
+                      <div>
                         <xsl:call-template name="sortBy"/>
                       </div>
-                      <div class="pure-u-10-24">
+                      <div>
                         <xsl:call-template name="paginationLinks"/>
                       </div>
-                    </div></div>
+                    </div>
                 </xsl:if>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result"/>
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
-                    <div class="s-tb no-bookmarking"><div class="pure-g">
-                      <div class="pure-u-14-24"/>
-                      <div class="pure-u-10-24">
+                    <div class="s-tb no-bookmarking">
+                      <div/>
+                      <div>
                         <xsl:call-template name="paginationLinks"/>
                       </div>
-                    </div></div>
+                    </div>
                 </xsl:if>
                 <div id="search-content-counts">
                     <!-- empty div causes problems when facets are imported with JS -->

@@ -1,95 +1,101 @@
 /* course reserves style for /biomed-resources/course-reserves.html */
-
 .course-reserves-heading {
-    color: #fff;
-    background-color: #09425a;
-    padding: 10px 12px;
+	color: #fff;
+	background-color: #09425a;
+	padding: 10px 12px;
 }
+
 .course-reserves .button {
-    border: none;
-    background-color: transparent;
+	border: none;
+	background-color: transparent;
 }
 
 .course-reserves table {
-    width: 100%;
+	width: 100%;
 }
 
 .course-reserves thead {
-    color: #000;
-    background-color: transparent;
+	color: #000;
+	background-color: transparent;
 }
 
 .course-reserves th {
-    text-align: left;
-    border-bottom: 1px solid #d0d8da;
-    padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #d0d8da;
+	padding: 10px;
 }
+
 .course-reserves tbody tr {
-    border-bottom: 1px solid #d0d8da;
-    background-color: transparent;
+	border-bottom: 1px solid #d0d8da;
+	background-color: transparent;
 }
+
 .course-reserves tbody td {
-    border-left: none;
-    border-right: none;
-    text-align: left;
-    padding: 10px;
+	border-left: none;
+	border-right: none;
+	text-align: left;
+	padding: 10px;
 }
 
 .course-name {
-    font-weight: bolder;
+	font-weight: bolder;
 }
 
 .course-number {
-    font-size: smaller;
+	font-size: smaller;
 }
 
 #course-reserves-search {
-    width: 100%;
-    font-size: 14px;
-    height: 40px;
-    padding-left: 7px;
-    box-sizing: border-box;
+	width: 100%;
+	font-size: 14px;
+	height: 40px;
+	padding-left: 7px;
+	box-sizing: border-box;
 }
+
 .course-reserves-search-button .fa {
-    padding: 4px;
+	padding: 4px;
 }
 
 /* disable IE 11 input clear 'X' button */
 #course-reserves-search::-ms-clear {
-    display: none;
+	display: none;
 }
 
 .course-reserves-search-button {
-    top: 90px;
-    right: 20px;
+	top: 172px;
+	right: 21px;
 }
 
 /* so page doesn't bounce when course list is filtered */
 .course-reserves-container {
-    min-height: 575px;
+	min-height: 575px;
+	background-color: white;
+	padding: 12px;
+	margin-top: 24px;
 }
 
 .course-reserves-instructor {
-    margin-top: 13px;
-    line-height: 13px;
-    font-size: 13px;
+	margin-top: 13px;
+	line-height: 13px;
+	font-size: 13px;
 }
 
 .version-note {
-    padding-left: 25px;
+	padding-left: 25px;
 }
 
 .course-reserves .bookcover {
-    float:left;
-    padding: 0 30px 30px;
+	float: left;
+	padding: 0 30px 30px;
 }
 
 .course-reserves-item div {
-    overflow: auto;
+	overflow: auto;
 }
 
 @media ( max-width : 812px) {
 	.course-reserves tbody td {
-	    padding: 5px;
+		padding: 5px;
 	}
 }

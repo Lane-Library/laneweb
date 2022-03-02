@@ -279,7 +279,7 @@ li.active .description {
     margin: 0 15px;
 }
 
-@media ( max-width : 812px) {
+@media ( max-width : 1100px) {
     .sourceInfo span {
         margin-left: 0px;
     } 
@@ -291,7 +291,7 @@ li.active .description {
         padding: 10px 0;
     }
     .search-results .content {
-        margin: 0 5px;
+        margin: 0 6px;
     }
     .resource .bookcover {
         padding: 5px 10px 0 0;

@@ -1,4 +1,6 @@
-
+.portal .module{
+	padding: 12px;
+}
 .portal .module h4 {
     color: white;
     background-color: #09425a;
@@ -99,3 +101,18 @@
     color: black;
     padding: 6px;
 }
+
+
+
+
+@media ( max-width : 1100px) {
+   
+    .portal .content {
+        margin: 0 6px;
+    }
+  
+}
+	
+	
+
+	

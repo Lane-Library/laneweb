@@ -200,7 +200,6 @@
 
 .search-button .fa-solid.fa-magnifying-glass {
 	color: lightslategrey;
-    font-size: 15px;
     padding-left: 9px;
 }
 
@@ -236,6 +235,8 @@
 .search-form-active fieldset {
 	width: 100%;
 }
+
+
 
 @media ( max-width : 812px) {
 	.hero-unit-front-page, .hero-unit {
