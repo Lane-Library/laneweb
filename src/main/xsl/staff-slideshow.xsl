@@ -10,10 +10,13 @@
 		<xsl:if test="s:picture != '' and s:slideshow = 'TRUE'">
 			<div class="slide">
 				<a>
-					<xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
+					<xsl:if test="s:stanford-profile/text() != ''">
+						<xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
+					</xsl:if>
 					<img>
 						<xsl:attribute name="class">scaled-image</xsl:attribute>
 						<xsl:attribute name="src" select="s:picture" />
+						<xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
 					</img>
 					<div>
 						<span class="name">
