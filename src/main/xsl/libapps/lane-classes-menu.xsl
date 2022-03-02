@@ -4,10 +4,10 @@
             <div id="mobile-menu-header"  class="menu-container">
                 <span>
                		<a href="#mobile-menu-header" class="menu-toggle">
-						<i class="fa fa-bars"></i>
+						<i class="fa-regular fa-bars fa-xl"></i>
 					</a>
 					<a href="#off" id="off"  class="menu-toggle">
-						<i class="fa fa-times"></i>
+						<i class="fa-regular fa-xmark fa-lg"></i>
 					</a>
 				</span>		
 				<h3>

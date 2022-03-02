@@ -18,7 +18,7 @@
                         <ul class="pagingLabels">
                            <li>
                               <a href="?">relevance</a>
-                              <i class="fa fa-check"/>
+                              <i class="fa-regular fa-check"/>
                            </li>
                            <li>
                               <a href="?&amp;sort=title_sort+asc,year+desc">title</a>

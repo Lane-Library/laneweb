@@ -1,6 +1,6 @@
 .popular {
 	margin-top: 24px;
-	padding: 12%;
+	padding: 24px;
 	line-height: 1.6em;
 	background-color: #333333;
 	color: #ffffff;
@@ -44,11 +44,6 @@
 
 
 
-
-
-
-
-
 .top-resources{
 	line-height: 1.6em;
 	background-color: white;
@@ -84,8 +79,21 @@
 		margin-left: 6%;
     	height: 114px;
 	}
-	.popular.top-resources li {
+	.top-resources li {
 		flex: inherit;
+	}
+	
+	.popular .menu-toggle, .popular .menu-toggle i {
+	    background-color: grey;
+	    color: white;
+	}
+	
+	.popular {
+		margin: 0 28px;
+	}
+	.popular  .menu-toggle {
+		top: -1px;
+		right: -1px;
 	}
 }
 
@@ -106,19 +114,22 @@
 	.top-resource-container ul {
 		margin: 12px;
 	}
-	.popular.top-resources li {
+	.top-resources li {
 		flex: 0 1 50%;
 	}
 	.top-resource-container .module {
 		padding: 1em;
 	}
 	
-	#mobile-menu-header.popular h3 {
+	#mobile-menu-header.top-resources h3 {
 		margin-bottom: 0;
 		padding-bottom: 0;
 		border-bottom: none;
 	}
-	#mobile-menu-header.popular h3:before {
+	#mobile-menu-header.top-resources h3:before {
 		border-top: none
 	}
+	
+
+	
 }

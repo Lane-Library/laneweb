@@ -40,7 +40,7 @@
     </xsl:template>
     
     <xsl:template match="h:a[@class='clinical-facet'][$facet][substring-after(@href,'facet=') = $facet]/h:i[1]">
-        <i class="fa fa-check-circle fa-lg"></i>
+        <i class="fa-regular fa-check-circle fa-lg"></i>
     </xsl:template>
     
     <xsl:template match="h:a[@class='clinical-facet'][not($facet)][not(contains(@href, 'facet'))]">
@@ -50,7 +50,7 @@
     </xsl:template>
     
     <xsl:template match="h:a[@class='clinical-facet'][not($facet)][not(contains(@href, 'facet'))]/h:i">
-        <i class="fa fa-check-circle fa-lg"></i>
+        <i class="fa-regular fa-check-circle fa-lg"></i>
     </xsl:template>
     
     <xsl:template match="h:span[@class='search-summary']">

@@ -67,7 +67,7 @@
                                         <li>
                                             <xsl:copy-of select="$anchor" />
                                             <xsl:if test="@arg = $sort or ($sort = '' and not(@arg))">
-                                                <i class="fa fa-check" />
+                                                <i class="fa-regular fa-check" />
                                             </xsl:if>
                                         </li>
                                     </xsl:for-each>

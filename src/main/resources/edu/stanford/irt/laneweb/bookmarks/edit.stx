@@ -47,7 +47,7 @@
                         <span><i class="icon fa fa-undo"></i>Undo</span>
                     </button>
                     <button class="btn alt" name="action" value="cancel" type="submit">
-                        <span><i class="icon fa fa-times"></i>Cancel</span>
+                        <span><i class="icon fa-regular fa-xmark fa-lg"></i>Cancel</span>
                     </button>
                 </div>
             </stx:when>
