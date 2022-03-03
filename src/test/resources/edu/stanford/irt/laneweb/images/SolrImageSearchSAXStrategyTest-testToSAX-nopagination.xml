@@ -18,9 +18,9 @@
       </div>
       <div class="pagination">
          <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
+            <span class="fa-solid fa-fast-backward no-bookmarking"/> First</a>
          <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
+            <span class="fa-solid fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -47,7 +47,8 @@
    <div class="imageDetailHidden"
         style="width:auto; height:auto; min-height:350px;"
         id="imageDetail_0">
-      <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
+      <div id="image-detail-close"
+           class="image-detail-close close fa-solid fa-close"/>
       <div style="margin-top:-29px">
          <div class="pure-g">
             <div class="pure-u-3-5">
@@ -87,9 +88,9 @@
    <div class="result-summary">
       <div class="pagination">
          <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
+            <span class="fa-solid fa-fast-backward no-bookmarking"/> First</a>
          <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
+            <span class="fa-solid fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
