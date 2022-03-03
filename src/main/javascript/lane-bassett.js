@@ -117,7 +117,7 @@
             if (prevSubRegion && prevSubRegion.querySelector('i')) {
                 prevSubRegion.classList.remove('enabled');
                 var iElement = prevSubRegion.querySelector('i');
-                iElement.classList.add('fa-circle-o');
+                iElement.classList.add('fa-circle');
                 iElement.classList.remove('fa-check-circle');
             }
             prevSubRegion = subRegion;
@@ -143,7 +143,7 @@
             resetSubRegion(li);
             li.classList.add('enabled');
             i = li.querySelector('i');
-            i.classList.remove('fa-circle-o');
+            i.classList.remove('fa-circle');
             i.classList.add('fa-check-circle');
         };
 
