@@ -76,7 +76,7 @@
       <div class="location">
          <xsl:value-of select="."/>
          <xsl:text>&#160;&#160;&#160;</xsl:text>
-         <i class="fa fa-map-marker fa-2x"></i>
+         <i class="fa-solid fa-location-dot fa-lg"></i>
       </div>
       </xsl:if>
    </xsl:template>

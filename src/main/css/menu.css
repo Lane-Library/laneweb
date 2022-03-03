@@ -45,39 +45,24 @@
     color: #fff;
 }
 
-
-
-/*
-.menu ul {
-    border-top: none;
+@media ( max-width :1100px) {
+	.menu-container{
+		padding: 0 33px;
+	}
+	
+	.menu-container h3 {
+		margin: 0;
+		padding: 12px 39px;
+	    line-height: 1.2em;
+	}
+	
+	.menu-container .menu-toggle{
+		background-color: inherit;
+	    top: 13px;
+    	right: 56px;
+	}
+	.menu-container .menu-toggle i{
+		color: white;
+	}
+		
 }
-
-.menu ul a {
-    background-color: #707070;
-    padding: 6px 22px 6px 13px;
-    border-bottom: none;
-}
-
-.menu ul ul a, .menu ul ul .menuitem-active {
-    background-color: #dddddd;
-    color: #333333;
-}
-
-.menu ul ul a:hover {
-    color: white;
-}
-
-.menu ul .menuitem-active {
-    font-weight: 600;
-    background-color: #707070;
-}
-
-.submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .3s;
-}
-
-.submenu.submenu-active {
-    max-height: 250px;
-}*/
