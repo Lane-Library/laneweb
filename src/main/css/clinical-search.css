@@ -32,7 +32,7 @@
     color: black;
 }
 
-.clinical-toggle .fa {
+.clinical-toggle .fa-solid {
     color: #3e3f40;
     font-size: 46px;
     padding: 0 18px;
@@ -53,22 +53,24 @@
 }
 
 .clinical-facet {
-    padding: 3px;
+    padding: 4px;
     display: block;
     border-bottom: 1px #e7e7e0 solid;
 }
 
-.clinical-facet .fa-circle-o {
+.clinical-facet .fa-circle {
     color: #e1e1e1;
+    position: relative;
 }
 
-.clinical-facet .fa-circle-o::after {
+.clinical-facet .fa-circle::after{
     content: ' ';
     position: absolute;
     background-color: #fff;
     height: 14px;
-    left: 4px;
-    width: 14px;
+    left: 2px;
+    top: -6px;
+    width: 15px;
     z-index: -1;
     border-radius: 6px;
 }
@@ -83,6 +85,6 @@
     background-color: black;
 }
 
-.clinical-facet-active .fa {
+.clinical-facet-active .fa-solid.fa-check-circle {
     color: white;
 }

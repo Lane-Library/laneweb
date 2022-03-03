@@ -5,11 +5,9 @@
    </head>
    <body>
       <div class="s-tb no-bookmarking">
-         <div class="pure-g">
-            <div class="pure-u-7-24"> all 2 results</div>
-            <div class="pure-u-7-24"/>
-            <div class="pure-u-10-24"/>
-         </div>
+         <div> all 2 results</div>
+         <div/>
+         <div/>
       </div>
       <ul class="lwSearchResults">
          <li class="resource" data-sid="PMID:25195623">
