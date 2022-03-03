@@ -28,7 +28,7 @@
 		document.querySelector("#nav-toggle-off").addEventListener(
 			"click", function(e) {
 				document.querySelector("section.content").style.display = "initial";
-				document.querySelector("header:first-of-type").style.display = "flex";
+				document.querySelector("header:first-of-type").style.display = "block";
 			}, false);
 	}
 
