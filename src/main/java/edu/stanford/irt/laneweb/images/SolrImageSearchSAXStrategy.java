@@ -160,7 +160,7 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, ID, ID, CDATA, "image-detail-close");
-        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "image-detail-close close fa fa-close");
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "image-detail-close close fa-solid fa-close");
         XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
         endDiv(xmlConsumer);
         atts = new AttributesImpl();
@@ -323,8 +323,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         int currentPage = page.getNumber();
         int totalPages = page.getTotalPages();
         if (currentPage != 0) {
-            createBackwardLink(xmlConsumer, "fa fa-fast-backward", "First", ACTIVED, path + "1");
-            createBackwardLink(xmlConsumer, "fa fa-step-backward", "Previous", ACTIVED, path + currentPage);
+            createBackwardLink(xmlConsumer, "fa-solid fa-fast-backward", "First", ACTIVED, path + "1");
+            createBackwardLink(xmlConsumer, "fa-solid fa-step-backward", "Previous", ACTIVED, path + currentPage);
         }
         XMLUtils.startElement(xmlConsumer, XHTML_NS, LABEL);
         XMLUtils.data(xmlConsumer, "Page ");
@@ -334,8 +334,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
         XMLUtils.data(xmlConsumer, " of " + totalPages);
         XMLUtils.endElement(xmlConsumer, XHTML_NS, LABEL);
         if (currentPage != totalPages - 1) {
-            createForwardLink(xmlConsumer, "fa fa-step-forward", "Next", ACTIVED, path + (currentPage + 2));
-            createForwardLink(xmlConsumer, "fa fa-fast-forward", "Last", ACTIVED, path + totalPages);
+            createForwardLink(xmlConsumer, "fa-solid fa-step-forward", "Next", ACTIVED, path + (currentPage + 2));
+            createForwardLink(xmlConsumer, "fa-solid fa-fast-forward", "Last", ACTIVED, path + totalPages);
         }
         endDiv(xmlConsumer);
     }

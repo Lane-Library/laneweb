@@ -26,9 +26,9 @@
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Next <span class="fa-solid fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Last <span class="fa-solid fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>
@@ -47,7 +47,7 @@
    <div class="imageDetailHidden"
         style="width:auto; height:auto; min-height:350px;"
         id="imageDetail_0">
-      <div id="image-detail-close" class="image-detail-close close fa fa-close"/>
+      <div id="image-detail-close" class="image-detail-close close fa-solid fa-close"/>
       <div style="margin-top:-29px">
          <div class="pure-g">
             <div class="pure-u-3-5">
@@ -95,9 +95,9 @@
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Next <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Next <span class="fa-solid fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">Last <span class="fa-solid fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>

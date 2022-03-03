@@ -236,19 +236,21 @@
 	width: 100%;
 }
 
-
+@media ( max-width : 1100px) {
+	.search-help,.search-pico.small-screen-hide.search-pico-active{
+		display: none;
+	}
+		
+}
 
 @media ( max-width : 812px) {
 	.hero-unit-front-page, .hero-unit {
 		padding-top: 30px;
-		padding-bottom: 12px;
+		padding-bottom: 33px;
 		min-height: auto;
 		background-position: unset;
 	}
 	.search-form {
 		width: 80%;
 	}
-	.search-pico.small-screen-hide.search-pico-active{
-		display: none;
-	}	
 }

@@ -210,7 +210,7 @@
 .what-is-image-search {
     position: absolute;
     top: 59px;
-    left: 825px;
+    left: 840px;
     cursor: pointer;
 }
 
@@ -221,9 +221,9 @@
     float: right;
 }
 
-#tabs- .fa {
+#sourceFilter .fa-regular {
     color: white;
-}
+} 
 
 #tabs-image-search {
     margin-left: auto;

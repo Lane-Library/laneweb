@@ -4,9 +4,9 @@
       <div class="result">105 to 106 of 106 results</div>
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
-            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
+            <span class="fa-solid fa-fast-backward no-bookmarking"/> First</a>
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
-            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
+            <span class="fa-solid fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -16,9 +16,9 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">Next <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">Next <span class="fa-solid fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">Last <span class="fa-solid fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>
@@ -77,9 +77,9 @@
    <div class="result-summary">
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
-            <span class="fa fa-fast-backward no-bookmarking"/> First</a>
+            <span class="fa-solid fa-fast-backward no-bookmarking"/> First</a>
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
-            <span class="fa fa-step-backward no-bookmarking"/> Previous</a>
+            <span class="fa-solid fa-step-backward no-bookmarking"/> Previous</a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -89,9 +89,9 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">Next <span class="fa fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">Next <span class="fa-solid fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">Last <span class="fa fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">Last <span class="fa-solid fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>
