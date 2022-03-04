@@ -61,8 +61,7 @@
                 <xsl:when test="../../string[. = 'year'] and value = '0'">Unknown</xsl:when>
                 <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Digital')">Digital</xsl:when>
                 <xsl:when test="$search-mode and ../../string[. = 'type'] and contains(value,' Print')">Print</xsl:when>
-                <!-- TODO: testing for PMC indexing; remove if RM/Thea decides not to use PMC records -->
-                <xsl:when test="../../string[. = 'recordType'] and value = 'dnlm'">NLM Catalog</xsl:when>
+                <xsl:when test="../../string[. = 'recordType'] and value = 'dnlm'"><span class="yui3-tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span></xsl:when>
                 <xsl:otherwise><xsl:value-of select="value"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
