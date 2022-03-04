@@ -82,6 +82,10 @@
 			controller.calculateImageDisplayed();
 		}, false);
 
+		window.addEventListener("orientationchange", function() {
+			controller.calculateImageDisplayed();
+		}, false);
+
 		nextButton.addEventListener(
 			"click", function(e) {
 				controller.previous();
