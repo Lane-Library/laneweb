@@ -61,7 +61,7 @@
 
         addFulltextLink = function(node, type, label, url) {
             node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                '<span class="browzineDirect"><i class="fa fa-file-' + type + '-o" aria-hidden="true"></i> ' +
+                '<span class="browzineDirect"><i class="fa-light fa-file-' + type + '"></i> ' +
                 '<a class="bzFT" href="' + url + '">' + label + '</a>' +
                 '</span>'
             )
