@@ -22,12 +22,14 @@
             });
         }
 
+    // reinitialize when content has changed
+    L.on('lane:new-content', function() {
+        hideNlmCatalog();
+    });
+
+    // added for unit test
     if (document.querySelector('.solrFacet')) {
         hideNlmCatalog();
     }
 
-    //reinitialize when content has changed
-    L.on('lane:new-content', function() {
-        hideNlmCatalog();
-    });
 })();
