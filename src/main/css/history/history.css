@@ -67,7 +67,7 @@ h1 i {
     position: absolute;
     top: 70px;
     font-size: 12px;
-    left: 185px;
+    left: 15px;
 }
 
 #nav {
@@ -722,7 +722,8 @@ section.header a {
 	display: none;
 }
 
-#navigation .nav-login .login>.login-item-active {
+#navigation ul.login > li.login-item-active,
+ul.login > li.login-item-active{
 	display: initial;
 	line-height: 64px;
 }

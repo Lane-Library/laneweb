@@ -6,12 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css"
             href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,200italic,300italic,400italic|Fjord+One" />
-        <link rel="stylesheet" type="text/css"
-            href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-min.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/history/lane-history.css?${project.version}-${git.commit.id.abbrev}" /> 
         <link rel="stylesheet" type="text/css" href="/resources/css/history/history-responsive.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css"/> 
+        <link rel="stylesheet" type="text/css" href="/resources/css/responsive-min.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/buttons-min.css"/> 
          
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
