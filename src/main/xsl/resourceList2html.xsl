@@ -166,7 +166,7 @@
                 <xsl:apply-templates select="s:primaryType"/>
             </span>
             <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
-                <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa-solid fa-book"></i></div>
+                <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}"><i class="fa-regular fa-book"></i></div>
             </xsl:if>
             <xsl:if test="s:primaryType = 'Article'">
                 <div class="bookcover"><i class="fa-regular fa-file-lines fa-flip-horizontal"></i></div>

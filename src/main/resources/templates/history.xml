@@ -24,12 +24,15 @@ ga('send', 'pageview');
 </script>
     </head>
 	<body>
-		<section class="header">
+		
 			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
+			<xi:fallback></xi:fallback>
+			</xi:include>
+			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
 				<xi:fallback></xi:fallback>
 			</xi:include>
+			
 			<i id="mhc-logo">Medical History Center</i>
-		</section>
 		<section class="content">
 			<div class="centered">
             <?laneweb content?>

@@ -65,9 +65,9 @@ h1 i {
 
 #mhc-logo{
     position: absolute;
-    top: 85px;
+    top: 70px;
     font-size: 12px;
-    left: 225px;
+    left: 185px;
 }
 
 #nav {
@@ -643,6 +643,8 @@ http://lane.stanford.edu/samples/button-css.html
     bottom: 0;
 }
 
+
+
 /* FOOTER */
 
 /* override path to som image for history */
@@ -653,159 +655,153 @@ http://lane.stanford.edu/samples/button-css.html
     height: 65px;
 }
 
-/* HEADER.css */
-
-
-.utility-menu {
-    background-color: black;
-    color: white;
-    font-weight: 600;
-    height: 32px;
-    margin: 0;
-    top: 0;
-    width: 100%;
-}
-
-.login {
-    line-height: 32px;
-    margin: 0;
-    position: absolute;
-    right: 0;
-}
-
-.login > li {
-    display: none;
-    font-size: 16px;
-    letter-spacing: .75px;
-    padding: 0 25px;
-}
-
-.login > .login-item-active {
-    display: inline-block;
-}
-
-.login .fa {
-    font-size: 16px;
-    margin-right: 2px;
-}
-
-.login a,
-.login a:active,
-.login a:visited,
-.login a:hover,
-.login .fa,
-.login a .fa {
-    color: white;
-}
-
-.login > :nth-child(1) {
-    background-color: #007c92;
-}
-
-.login > :nth-child(3) {
-    background-color: #a65a1f;
-}
-
-.login > :nth-child(4) {
-    background-color: #878787;
-}
-
-.login > :nth-child(5) {
-    cursor: pointer;
-    padding-left: 12px;
-    position: relative;
-}
-
-.login-info {
-    background-color: white;
-    border: 1px black solid;
-    box-sizing: content-box;
-    color: #333;
-    display: none;
-    font-size: 14px;
-    font-weight: bold;
-    left: -130px;
-    line-height: initial;
-    padding: 23px;
-    position: absolute;
-    top: 40px;
-    width: 250px;
-    z-index: 1;
-}
-
-.login-info:after, .login-info:before {
-    bottom: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: ' ';
-    height: 0;
-    width: 0;
-    position: absolute;
-}
-
-.login-info:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
-    border-width: 15px;
-    margin-left: -15px;
-}
-
-.login-info:before {
-    border-color: rgba(0, 0, 0, 0);
-    border-bottom-color: #000000;
-    border-width: 16px;
-    margin-left: -16px;
-}
-
-.login-info p {
-    font-size: 12px;
-    font-weight: initial;
-    margin: 5px 22px 0 0;
-}
-
-.login > :nth-child(7):hover .login-info {
-    display: block;
+.lane-header  .btn.outline {
+	padding: 6px 17px;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: normal;
 }
 
 /* lane header */
 .lane-header {
-    background-color: white;
-    font-size: 14px;
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
 }
 
-.brand {
-    height: 91px;
-    padding-top: 27px;
-    display: block;
-    margin: 0;
+/* HEADER.css */
+
+
+header section, footer section, .content{
+	max-width: 1700px;
+	margin: auto;	
+}
+
+
+header:first-of-type{
+ 	background-color: #8c1515;;
+ 	color: white;
+ }
+
+header:nth-of-type(2){
+	background: white;
+}
+
+
+header section {
+	padding: 0 33px;
+}
+
+section.header {
+	display: flex;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	justify-content: space-between;
+}
+
+section.header a {
+	color: white;
+}
+
+/* utility menu with login */
+
+
+#navigation ul li{
+	display: none
+}
+
+#navigation ul > .nav-login{
+	display: inline-block;	
+}
+
+#navigation .menu-toggle{
+	display: none;
+}
+.login>li {
+	display: none;
+}
+
+#navigation .nav-login .login>.login-item-active {
+	display: initial;
+	line-height: 64px;
+}
+
+.login .fa {
+	font-size: 16px;
+	margin-right: 2px;
+	color: #8C1515;
+}
+/* Logout button */
+.login  li:last-of-type a {
+	color: black;
+	border-color: black;
+}
+
+/* Bookmakrs icon */
+
+.login .favorites.dropdown{
+	line-height: 64px;
+ }
+.login > li .favorites.dropdown a {
+	display: inline-block;
+}
+.login > li .favorites.dropdown  i{
+	font-size: 25px;
+	padding: 0 14px;
+    vertical-align: middle;
+}
+.login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {
+	background-color: #f0f4f5;
+}
+
+
+
+/* Menu for small and medium screen */
+	.mobile-screen-menu.lrg-screen-hide {
+		display: flex;
+		flex-flow: row;
+		justify-content: space-around;
+		width: 100%;
+		bottom: 0px;
+		padding: 9px 0 24px;
+		position: sticky;
+		top: auto;
+		z-index: 1;
+		background: white;
+		box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
+	}
+	.mobile-screen-menu div {
+		text-align: center;
+	}
+	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i
+		{
+		color: black;
+		display: block;
+		padding-bottom: 3px;
+		line-height: normal;
+	}
+	/* END of menu for small and medium screen */
+
+/* Because the stanford image start with white 7 pixels */
+.lane-header .brand {
+	margin: 16px 0;
+	margin-left: -7px;
+}
+
+.lane-header .brand a {
+	display: block;
 }
 
 .brand a, .brand a:link, .brand a:focus, .brand a:visited {
 	background-image: url('../../images/sm-logo.svg');
-    background-repeat: no-repeat;
-    padding-left: 176px;
-    height: 48px;
-    float:left;
-    color: #333333;
-    font-weight: 400;
-    text-decoration: none;
-    font-size:20px;
+	background-repeat: no-repeat;
+	background-size: 50%;
+	padding: 0 0 0 142px;
+	color: #333333;
+	font-weight: 400;
+	text-decoration: none;
+	font-size: 16px;
+	height: 36px;
 }
 
-.library-contact {
-    position: absolute;
-    right: 60px;
-    top: 54px;
-    display: inline-flex;
-}
-
-.library-contact li {
-    margin-left: 18px;
-}
-
-.library-contact li a {
-    display: block;
-    padding: 12px;
-    font-size: 18px;
-    font-weight: normal;
-}
