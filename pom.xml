@@ -547,6 +547,7 @@
                                 <include>validation-min.js</include>
                                 <include>holdings-toggle-min.js</include>
                                 <include>table-hide-empty-columns-min.js</include>
+                                <include>search-hide-dnlm-facet-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
