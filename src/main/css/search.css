@@ -133,7 +133,7 @@ li.active .description {
     position: relative;
     display: inline-flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 10px 40px;
     align-items: center;
 }
 
@@ -151,10 +151,6 @@ li.active .description {
     font-size: unset;
 }
 
-.permalink {
-    padding: 0 10px;
-}
-
 .permalink .fa-check {
     color: green;
 }
@@ -165,10 +161,6 @@ li.active .description {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.24);
     border-radius: 4px;
     background-color: #fff;
-}
-
-.lwSearchResults div:not(.author, .citation) {
-    padding-top: 10px;
 }
 
 .lwSearchResults .citation {
