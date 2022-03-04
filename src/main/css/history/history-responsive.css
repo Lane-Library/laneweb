@@ -1,45 +1,61 @@
-@media ( max-width : 812px) {
-	.centered, h1 {
-		min-width: auto;
-		margin: 0 9px;
-	}
-	#search input[type='text'] {
-		width: 83%;
-	}
-	#search fieldset {
-		background-color: #8c1515;
-		width: 90%;
-	}
-	.core-covers {
-		width: 100%;
-	}
-	.gutter-left {
-		margin-left: 0px;
-	}
-	.gutter-right {
-		margin-right: 0px;
-	}
-	.menu-container span:first-child {
-		display: block;
-		font-size: 24px;
-		letter-spacing: 1px;
-		background-color: #8c1515;
-		padding: 11px 28px;
-		margin-bottom: 0px;
-	}
-	.menu-container span:first-child a {
-		color: white;
-	}
-	#gift {
-		margin-top: 24px;
-	}
-	.brand {
-		height: 65px;
-	}
-	#mhc-logo {
-		top: 75px;
-		left: 178px;
-	}
+@media(max-width:1100px){
+.content {
+	padding: 10px;
+}
+
+.centered, h1 {
+	min-width: auto;
+	margin: 0 9px;
+}
+
+#search input[type='text'] {
+	width: 83%;
+}
+
+#search fieldset {
+	background-color: #8c1515;
+	width: 90%;
+}
+
+.core-covers {
+	width: 100%;
+}
+
+.gutter-left {
+	margin-left: 0px;
+}
+
+.gutter-right {
+	margin-right: 0px;
+}
+
+/* Menu for small and medium screen */
+.mobile-screen-menu.lrg-screen-hide {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	width: 100%;
+	bottom: 0px;
+	padding: 9px 0 24px;
+	position: sticky;
+	top: auto;
+	z-index: 1;
+	background: white;
+	box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
+}
+
+.mobile-screen-menu div {
+	text-align: center;
+}
+
+.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i
+	{
+	color: black;
+	display: block;
+	padding-bottom: 3px;
+	line-height: normal;
+}
+/* END of menu for small and medium screen */
 }
 
 @media ( max-width : 360px) {

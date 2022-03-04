@@ -35,11 +35,11 @@ ga('send', 'pageview');
 		<section class="content">
 			<div class="centered">
             <?laneweb content?>
-			</div>
-			<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
-				<xi:fallback></xi:fallback>
-			</xi:include>
+			</div>			
 		</section>
+		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
+			<xi:fallback></xi:fallback>
+		</xi:include>
 		<script src="/resources/javascript/history/lane-history.js"></script>
 	</body>
 </html>

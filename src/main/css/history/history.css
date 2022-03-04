@@ -67,7 +67,7 @@ h1 i {
     position: absolute;
     top: 70px;
     font-size: 12px;
-    left: 15px;
+    left: 195px;
 }
 
 #nav {
@@ -755,35 +755,6 @@ ul.login > li.login-item-active{
 .login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {
 	background-color: #f0f4f5;
 }
-
-
-
-/* Menu for small and medium screen */
-	.mobile-screen-menu.lrg-screen-hide {
-		display: flex;
-		flex-flow: row;
-		justify-content: space-around;
-		width: 100%;
-		bottom: 0px;
-		padding: 9px 0 24px;
-		position: sticky;
-		top: auto;
-		z-index: 1;
-		background: white;
-		box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
-	}
-	.mobile-screen-menu div {
-		text-align: center;
-	}
-	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i
-		{
-		color: black;
-		display: block;
-		padding-bottom: 3px;
-		line-height: normal;
-	}
-	/* END of menu for small and medium screen */
-
 /* Because the stanford image start with white 7 pixels */
 .lane-header .brand {
 	margin: 16px 0;
