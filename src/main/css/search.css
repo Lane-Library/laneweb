@@ -133,10 +133,10 @@ li.active .description {
     position: relative;
     display: inline-flex;
     flex-wrap: wrap;
-    gap: 10px 40px;
+    gap: 6px 40px;
+    padding-top: 10px;
     align-items: center;
 }
-
 
 
 /* absolute positioning so it doesn't move when shareable link copied */
