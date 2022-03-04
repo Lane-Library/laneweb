@@ -78,6 +78,9 @@
 			controller.calculateImageDisplayed();
 		}, false);
 
+		window.addEventListener("resize", function() {
+			controller.calculateImageDisplayed();
+		}, false);
 
 		nextButton.addEventListener(
 			"click", function(e) {
