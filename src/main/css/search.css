@@ -131,17 +131,14 @@ li.active .description {
 
 .sourceInfo{
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
 }
 
-.sourceInfo span {
-    margin-left: 30px;    
-}
 
-.sourceInfo span:first-child {
-    min-width: 140px;
-    margin-left: 0;
-}
+
 /* absolute positioning so it doesn't move when shareable link copied */
 .browzineDirect{
     position: absolute;
@@ -281,8 +278,6 @@ li.active .description {
 }
 
 @media ( max-width : 1100px) {
-
-    
     .browzineDirect{
         position: static;
         padding: 10px 0;
