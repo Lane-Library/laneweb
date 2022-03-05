@@ -5,6 +5,8 @@
 
 	if (document.querySelectorAll(".nav-menu") !== undefined) {
 
+		
+
 		document.querySelectorAll(".nav-menu").forEach(function(node) {
 			node.addEventListener("click", function(event) {
 				var smallmedia = window.matchMedia("(min-width: 1100px)"),
@@ -16,20 +18,13 @@
 				}
 			});
 		});
-
-
-
-		document.querySelector("#nav-toggle-on").addEventListener(
+			
+			
+		document.querySelector(".menu-overlay").addEventListener(
 			"click", function(e) {
-				document.querySelector("section.content").style.display = "none";
-				document.querySelector("header:first-of-type").style.display = "none";
+				window.location.hash = "#";				
 			}, false);
 
-		document.querySelector("#nav-toggle-off").addEventListener(
-			"click", function(e) {
-				document.querySelector("section.content").style.display = "initial";
-				document.querySelector("header:first-of-type").style.display = "block";
-			}, false);
 	}
 
 })();

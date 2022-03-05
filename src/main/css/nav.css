@@ -132,7 +132,12 @@ ul .nav-menu {
 	justify-content: end;
 }
 
+
 @media ( max-width :1100px) {
+	
+	html, body {
+     	height: auto;
+	}
 	.nav-menu.dropdown:hover .dropdown-content {
 		display: none;
 	}
@@ -142,20 +147,23 @@ ul .nav-menu {
 		display: block;
 	}
 
+
 	/* To hide bookmarks link when the navigation is clicked  */
 	#navigation:target .nav-login .login>li:first-of-type, #navigation:target .nav-login .login>li:last-of-type,
 		#navigation:target .nav-login .login  a.medium-screen-hide {
 		display: none;
 	}
+
 	#navigation:target {
 		position: absolute;
 	}
 	#navigation:target .menu-overlay {
-		background-color: white;
+		background-color: black;
 		width: 100%;
 		height: 100%;
 		position: fixed;
-		top: 0px;
+		opacity: 50%;
+    	top: 41px;
 	}
 	#navigation .nav-menu.nav-menu-active-on-click {
 		background-color: #f0f4f5;
@@ -175,7 +183,6 @@ ul .nav-menu {
 	}
 	#navigation nav {
 		display: none;
-		margin-top: 0px;
 		-webkit-font-smoothing: antialiased;
 	}
 	#navigation ul {
@@ -213,9 +220,8 @@ ul .nav-menu {
 		background: black;
 		color: white;
 		position: fixed;
-		padding: 18px 0 30px;
+		padding: 18px 0 39px;
 		top: auto;
-		bottom: 0;
 		width: 100%;
 		z-index: 4;
 		bottom: 0;
