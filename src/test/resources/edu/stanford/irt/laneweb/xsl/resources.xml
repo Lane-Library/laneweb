@@ -34,7 +34,7 @@
          <li class="resource" data-sid="bib-301866">
             <span class="primaryType">Book</span>
             <div class="bookcover" data-bcid="bib-301866">
-               <i class="fa-regular fa-book"/>
+               <i class="fa-light fa-book"/>
             </div>
             <div>
                <a class="primaryLink"
@@ -94,7 +94,7 @@
          <li class="resource" data-sid="bib-123">
             <span class="primaryType">Book</span>
             <div class="bookcover" data-bcid="bib-123">
-               <i class="fa-regular fa-book"/>
+               <i class="fa-light fa-book"/>
             </div>
             <div>
                <a class="primaryLink"
