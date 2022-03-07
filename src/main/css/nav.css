@@ -153,7 +153,9 @@ ul .nav-menu {
 
 	#navigation:target {
 		position: absolute;
+		margin-top: -36px;
 	}
+	
 	#navigation:target .menu-overlay {
 		background-color: black;
 		width: 100%;
