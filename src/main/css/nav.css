@@ -241,6 +241,7 @@ ul .nav-menu {
 	.nav-menu>span, .nav-menu.nav-menu-active>span {
 		text-align: left;
 		padding-left: 24px;
+		line-height: 48px;
 	}
 	.nav-menu>span a {
 		text-align: left;
