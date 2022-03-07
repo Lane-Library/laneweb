@@ -58,9 +58,6 @@
             <xsl:when test=". = 'bib'">
                 <xsl:copy-of select="$label"/><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Catalog Record">Lane Catalog</a>
             </xsl:when>
-            <xsl:when test=". = 'auth'">
-                <xsl:copy-of select="$label"/><a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Community Info Record">Lane Community Info</a>
-            </xsl:when>
             <xsl:when test=". = 'class'">
                 <xsl:copy-of select="$label"/><a href="/classes-consult/laneclasses.html">Lane Classes</a>
             </xsl:when>

@@ -53,7 +53,6 @@
                 <xsl:when test="../../string[. = 'recordType'] and value = 'redivis'"><span class="yui3-tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span></xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'web'">Lane Web Site</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'class'">Lane Classes</xsl:when>
-                <xsl:when test="../../string[. = 'recordType'] and value = 'auth'">Lane Community Info</xsl:when>
                 <xsl:when test="../../string[. = 'recordType'] and value = 'laneblog'">Lane Blog</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 10000,'0'),' TO *]')">Last 12 Months</xsl:when>
                 <xsl:when test="../../string[. = 'date'] and value = concat('[',format-number($today - 50000,'0'),' TO *]')">Last 5 Years</xsl:when>
