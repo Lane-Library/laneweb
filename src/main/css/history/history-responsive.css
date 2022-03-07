@@ -1,4 +1,6 @@
 @media(max-width:1100px){
+	
+
 .content {
 	padding: 10px;
 }
@@ -58,8 +60,9 @@
 /* END of menu for small and medium screen */
 }
 
-@media ( max-width : 360px) {
-	.brand a, .brand a:link {
-		padding-top: 0px !important;
+@media(max-width:812px){
+
+	#mhc-logo {
+	    left: 149px;
 	}
 }
