@@ -163,7 +163,7 @@ ul .nav-menu {
 		height: 100%;
 		position: fixed;
 		opacity: 50%;
-    	top: 41px;
+    	top: 58px;
 	}
 	#navigation .nav-menu.nav-menu-active-on-click {
 		background-color: #f0f4f5;
@@ -179,7 +179,6 @@ ul .nav-menu {
 		z-index: 2;
 		right: 0px;
 		width: 100%;
-		z-index: 2;
 	}
 	#navigation nav {
 		display: none;
