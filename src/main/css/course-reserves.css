@@ -63,7 +63,7 @@
 }
 
 .course-reserves-search-button {
-	top: 172px;
+	top: 92px;
 	right: 21px;
 }
 
@@ -73,6 +73,7 @@
 	background-color: white;
 	padding: 12px;
 	margin-top: 24px;
+	position: relative;
 }
 
 .course-reserves-instructor {
