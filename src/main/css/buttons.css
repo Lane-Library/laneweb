@@ -23,13 +23,8 @@ http://lane.stanford.edu/samples/button-css.html
 	border-color: #6F1111;
 }
 
-@keyframes  button-primary-active {
-	from { background-color:#6F1111;}
-    to { background-color: #430A0A;}
-}
 
 .btn:active {
-	animation-name: button-primary-active;
 	background-color: #430A0A;
 	border-color: #430A0A;
 }
@@ -44,14 +39,8 @@ http://lane.stanford.edu/samples/button-css.html
 	background-color: #8C1515;
 }
 
-@keyframes  button-primary-outline-active {
-        from { background-color:#8C1515;}
-        to {background-color: #6F1111;}
-}
-
 
 .btn.outline:active {
-	animation-name: button-primary-outline-active;
 	background-color: #6F1111;
 }
 
@@ -65,13 +54,7 @@ http://lane.stanford.edu/samples/button-css.html
 	border-color: #005766;
 }
 
-@keyframes  button-secondary-active {
-	from { background-color:#005766;}
-    to { background-color: #002B33;}
-}
-
 .btn.alt:active {
-	animation-name: button-secondary-active;
 	background-color: #002B33;
 	border-color: #002B33;
 }
@@ -88,15 +71,32 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 
-@keyframes  button-secondary-outline-active {
-    from { background-color:#007C92;}
-    to { background-color: #005766;}
-}
-
 .btn.alt.outline:active {
-	animation-name: button-secondary-outline-active;
 	background-color: #005766;
 }
+
+
+
+.btn.black {
+	color: #FFF;
+	background-color: #000;
+	border-color: #000;	
+}
+
+
+.btn.black.outline {
+	color: #000;
+	background-color: #FFF;
+	border-color: #000;
+}
+
+.btn.black.outline:hover {
+	color: #FFF;
+	background-color: #000;
+}
+
+
+
 
 
 

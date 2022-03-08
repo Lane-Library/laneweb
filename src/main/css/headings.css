@@ -47,3 +47,30 @@ h5 {
     margin: 24px 0 12px 0;
     padding: 0 12px 0 0;
 }
+
+
+@media ( max-width : 1100px) {
+	h1{
+		font-size: 28px;
+	}
+	h2{
+		font-size: 24px;
+	}
+	h3{
+		font-size: 20px;
+	}
+	
+}
+
+@media ( max-width : 812px) {
+	h1{
+		font-size: 26px;
+	}
+	h2{
+		font-size: 22px;
+	}
+	h3,h4 {
+		font-size: 18px;
+	}
+	
+}
