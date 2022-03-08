@@ -244,14 +244,14 @@
     <!-- add class="nav-menu-active" to .nav-menu li when the path matches -->
 	<xsl:template match="h:li[attribute::class='dropdown nav-menu']">
 		<xsl:copy>
-			<xsl:variable name="isActive">
+			<xsl:variable name="is-active">
 				<xsl:for-each select="./h:div[ starts-with(@class,'dropdown-content nav-menu-content')]//h:a">
 					<xsl:if test="starts-with(@href, $path)">
 						<xsl:value-of select="' nav-menu-active'" />
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:variable>
-			<xsl:attribute name="class" select="concat(@class, $isActive)" />
+			<xsl:attribute name="class" select="concat(@class, $is-active)" />
 			<xsl:apply-templates select=" child::node()" />
 		</xsl:copy>
 	</xsl:template>
