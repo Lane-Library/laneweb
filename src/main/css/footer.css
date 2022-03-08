@@ -109,7 +109,8 @@ body:nth-child(3) footer {
 }
 
 .footer-organization .brand {
-	padding-bottom: 36px;
+	padding-bottom: 24px;
+    padding-top: 12px;
 	margin-left: -5px;
 }
 
