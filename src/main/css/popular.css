@@ -9,7 +9,7 @@
 	position: relative;
 }
 
-.popular h3 {
+.popular h3, .popular h4 {
 	text-transform: uppercase;
 	font-family: 'Fjord One', serif;
 	color: #ffffff;
@@ -17,13 +17,6 @@
 	background-image: none;
 }
 
-.popular h4 {
-	text-transform: uppercase;
-	font-family: 'Fjord One', serif;
-	color: #ffffff;
-	text-align: center;
-	background-image: none;
-}
 
 .popular li {
 	border-bottom: none;
@@ -110,7 +103,7 @@
 		top: -1px;
 		right: -1px;
 	}
-	#mobile-menu-header.popular:target .pure-u-1-2 {
+	#mobile-menu-header.popular:target div.pure-u-1-2 {
 		width: 100%;
 		display: block;
 	}
@@ -138,12 +131,12 @@
 		padding: 1em;
 	}
 	
-	#mobile-menu-header.top-resources h3 {
+	#mobile-menu-header.top-resources h4{
 		margin-bottom: 0;
 		padding-bottom: 0;
 		border-bottom: none;
 	}
-	#mobile-menu-header.top-resources h3:before {
+	#mobile-menu-header.top-resources h4:before {
 		border-top: none
 	}
 	
