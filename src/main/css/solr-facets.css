@@ -66,7 +66,7 @@
 	padding-right: 20px;
 }
 
-.facetBrowse h4 {
+.facetBrowse h3 {
 	margin: 0 20px;
 }
 
@@ -181,11 +181,12 @@
 		margin-top: 24px;
 	    padding: 18px;
 	}
-	#searchFacets h4 {
-		margin: 0px;
+	#searchFacets h3 {
+		margin: 0;
+		padding: 0;
 		border: none;
 	}
-	#searchFacets h4:before {
+	#searchFacets h3:before {
 		border-top: none
 	}
 	#searchFacets ul {
