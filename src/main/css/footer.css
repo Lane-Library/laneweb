@@ -76,12 +76,12 @@ body:nth-child(3) footer {
 	margin-top: 3em;
 }
 
-.footer-organizations h4::before {
+.footer-organization:first-of-type::before {
 	content: " ";
 	position: absolute;
 	width: 4em;
-	border-top: 5px solid #8C1515;
-	top: -5px;
+	border-top: 4px solid #8C1515;
+	top: -2px;
 }
 
 .footer-organizations h4 {

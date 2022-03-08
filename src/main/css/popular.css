@@ -72,6 +72,16 @@
 	.top-resources:first-child span {
 		display: none;
 	}
+	
+	#mobile-menu-header.popular:target div.pure-u-1-2 {
+		width: 50%;
+		display: inline-block;
+	}
+	#mobile-menu-header.popular:target div.pure-g{
+		display: flex;
+	}
+	
+	
 	#mobile-menu-header.top-resources  ul,
 	#mobile-menu-header.top-resources:target ul {
 		display: flex;
@@ -87,17 +97,24 @@
 	    background-color: grey;
 	    color: white;
 	}
-	
-	.popular {
-		margin: 0 28px;
-	}
 	.popular  .menu-toggle {
 		top: -1px;
 		right: -1px;
 	}
 }
 
+
+
 @media ( max-width : 812px) {
+	.popular  .menu-toggle {
+		top: -1px;
+		right: -1px;
+	}
+	#mobile-menu-header.popular:target .pure-u-1-2 {
+		width: 100%;
+		display: block;
+	}
+
 	#mobile-menu-header.top-resources  ul {
 		display: none;		
 	}

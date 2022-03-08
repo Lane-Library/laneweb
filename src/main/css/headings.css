@@ -26,7 +26,7 @@ h3, h4 {
     position: relative;
 }
 
-h3:before, h4:before{
+h4:before{
     content: " ";
     position: absolute;
     width: 3em;
