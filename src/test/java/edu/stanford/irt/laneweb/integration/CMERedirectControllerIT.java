@@ -58,7 +58,7 @@ public class CMERedirectControllerIT {
         attributes.put(Model.EMRID, "lpch-emrid");
         String redirect4 = "https://login.laneproxy.stanford.edu/login?url=https://www.uptodate.com/contents/search?unid=lpch-emrid&srcsys=EPICLPCH90710&eiv=2.1.0";
         this.mockMvc.perform(get("/redirect/cme?url=www.uptodate.com/").sessionAttrs(attributes)
-                .header("X-FORWARDED-FOR", "10.250.217.148")).andExpect(status().isFound())
+                .header("X-FORWARDED-FOR", "45.42.34.136")).andExpect(status().isFound())
                 .andExpect(redirectedUrlPattern(redirect4));
     }
 
