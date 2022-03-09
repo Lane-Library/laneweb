@@ -79,8 +79,8 @@ body:nth-child(3) footer {
 .footer-organization:first-of-type::before {
 	content: " ";
 	position: absolute;
-	width: 4em;
-	border-top: 4px solid #8C1515;
+	width: 5em;
+	border-top: 5px solid #8C1515;
 	top: -2px;
 }
 
@@ -109,7 +109,7 @@ body:nth-child(3) footer {
 }
 
 .footer-organization .brand {
-	padding-bottom: 24px;
+	padding-bottom: 33px;
     padding-top: 12px;
 	margin-left: -5px;
 }
