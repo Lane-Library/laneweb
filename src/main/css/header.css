@@ -29,11 +29,6 @@ section.header a {
 	margin-right: 2px;
 	color: #8C1515;
 }
-/* Logout button */
-.login  li:last-of-type a {
-	color: black;
-	border-color: black;
-}
 
 /* Bookmakrs icon */
 
