@@ -13,14 +13,14 @@ exclude-result-prefixes="h s" version="2.0">
 			<xsl:attribute name="class">module</xsl:attribute>
 			<xsl:attribute name="id" select="s:id/text()" />
 				
-			<h4>
+			<h2>
 				<span>
 					<xsl:value-of select="s:first-name/text()" /><xsl:text> </xsl:text><xsl:value-of select="s:last-name/text()" />
 					<xsl:if test="s:title != ''">, <xsl:value-of select="s:title" />
 					</xsl:if><br/>
 					<xsl:value-of select="s:job-title/text()"></xsl:value-of>
 				</span>
-			</h4>
+			</h2>
 			<div>
 				<xsl:attribute name="class">pure-g</xsl:attribute>
 				<xsl:call-template name="staff-profile">
@@ -107,7 +107,6 @@ exclude-result-prefixes="h s" version="2.0">
 					</li>
 				</xsl:if>
 			</ul>
-			
 			
 	</div>
 	</xsl:template>
