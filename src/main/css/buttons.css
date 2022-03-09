@@ -19,14 +19,14 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn:hover {
-	background-color: #6F1111;
-	border-color: #6F1111;
+	background-color: #651C32;
+	border-color: #651C32;
 }
 
 
 .btn:active {
-	background-color: #430A0A;
-	border-color: #430A0A;
+	background-color: #42081B;
+	border-color: #42081B;
 }
 
 .btn.outline {
@@ -41,7 +41,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 
 .btn.outline:active {
-	background-color: #6F1111;
+	background-color: #651C32;
 }
 
 .btn.alt {
@@ -96,10 +96,6 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 
-
-
-
-
 .btn  .icon {
     color: #F0F0F0;
     background-color: #8C1515;
@@ -107,7 +103,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn:hover  .icon {
-    background-color: #6F1111;
+    background-color: #651C32;
 }
 
 .btn:active  .icon {
@@ -125,7 +121,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn.outline:active  .icon {
-    background-color: #6F1111;
+    background-color: #651C32;
 }
 
 .btn.alt  .icon {
@@ -178,7 +174,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn:hover .icon-alt {
-	color: #6F1111;
+	color: #651C32;
 }
 
 .btn:active .icon-alt {
@@ -196,7 +192,7 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn.outline:active  .icon-alt {
-	color: #6F1111;
+	color: #651C32;
 }
 
 .btn.alt  .icon-alt {
