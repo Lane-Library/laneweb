@@ -51,10 +51,6 @@
 	padding-bottom: .625em;
 }
 
-.eresources-browse .module {
-    background-color: transparent;
-}
-
 .resource:after {
   content: '';
   display: table;
