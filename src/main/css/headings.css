@@ -9,7 +9,7 @@ h2,h3,h4{
 	color: #333;
 	line-height: 1.2em;
     margin-bottom: 1em;
-    padding-bottom: 12px;
+    padding-bottom: 0.75em;
     border-bottom: 1px solid #d8dbdc;
     position: relative;	
 }
