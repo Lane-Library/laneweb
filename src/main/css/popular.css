@@ -131,15 +131,5 @@
 		padding: 1em;
 	}
 	
-	#mobile-menu-header.top-resources h4{
-		margin-bottom: 0;
-		padding-bottom: 0;
-		border-bottom: none;
-	}
-	#mobile-menu-header.top-resources h4:before {
-		border-top: none
-	}
-	
-
 	
 }

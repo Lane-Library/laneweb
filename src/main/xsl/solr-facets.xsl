@@ -32,9 +32,9 @@
 			<i class="fa-regular fa-xmark fa-lg"></i>
 		</a>
 		</span>
-        <h3 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
+        <h2 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
         	Filter Results
-        </h3>
+        </h2>
         <xsl:if test="not($search-mode)">
             <a class="close fa fa-close"></a>
         </xsl:if>

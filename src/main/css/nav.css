@@ -164,7 +164,7 @@ ul .nav-menu {
 		opacity: 50%;
     	top: 0;
 	}
-	#navigation .nav-menu.nav-menu-active-on-click {
+	#navigation .nav-menu.nav-menu-active-on-click, #navigation .nav-menu.nav-menu-active {
 		background-color: #f0f4f5;
 	}
 	.nav-menu-active-on-click>span {
