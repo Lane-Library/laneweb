@@ -88,7 +88,7 @@
     <map:pipeline type="expires">
         <map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match pattern="laneblog-feed.xml" type="wildcard">
-            <map:generate type="file" src="http://laneblog.stanford.edu/feed/"/>
+            <map:generate type="file" src="https://laneblog.stanford.edu/feed/"/>
              <map:transform type="textNodeParser">
                 <map:parameter name="elementNames" value="content:encoded"/>
             </map:transform>
