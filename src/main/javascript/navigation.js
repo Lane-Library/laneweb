@@ -13,11 +13,11 @@
 
         document.querySelectorAll(".nav-menu").forEach(function(node) {
             node.addEventListener("click", function(event) {
-                var smallmedia = window.matchMedia("(min-width: 1100px)"),
+                var isSmallMedia = !window.matchMedia("(min-width: 1100px)").matches,
                     nav = event.currentTarget, 
                     clickTarget = event.target,
                     navContent;
-                if (!smallmedia.matches && !clickTarget.href) {
+                if (isSmallMedia && !clickTarget.href) {
                     navContent = nav.querySelector('.dropdown-content');
                     nav.classList.toggle('nav-menu-active-on-click');
                     navContent.classList.toggle('dropdown-content-on-click');
