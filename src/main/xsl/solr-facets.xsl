@@ -109,9 +109,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <li class="solrFacet facetHeader">
-                        <h5>
-                            <xsl:value-of select="$label"/>
-                        </h5>
+                        <xsl:value-of select="$label"/>
                     </li>
                     <xsl:apply-templates select="$entry/list/facet[position() &lt;= $facets-per-browse-page]"/>
                     <li>
@@ -207,7 +205,7 @@
                     </ul>
             </xsl:when>
             <xsl:otherwise>
-                <h4>Can we help?</h4>
+                <h2>Can We Help?</h2>
                 <a class="btn alt"
                     href="{$base-path}/contacts/index.html#laneaskus">
                     <span><i class="icon fa fa-comments"/>Ask Us</span>

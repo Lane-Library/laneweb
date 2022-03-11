@@ -5,12 +5,6 @@
 	padding: 12px;
 }
 
-.solrFacets h4 {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	border-bottom: none;
-}
-
 .solrFacets li {
 	padding: 0 5px;
 	border-bottom: 1px solid #e6e4dc;
@@ -66,7 +60,12 @@
 	padding-right: 20px;
 }
 
-.facetBrowse h3 {
+.facetBrowse .facetHeader {
+    margin: 20px 0 10px;
+    font-weight: bold;
+}
+
+.facetBrowse h2 {
 	margin: 0 20px;
 }
 
@@ -180,14 +179,6 @@
 		background-color: white;
 		margin-top: 24px;
 	    padding: 18px;
-	}
-	#searchFacets h3 {
-		margin: 0;
-		padding: 0;
-		border: none;
-	}
-	#searchFacets h3:before {
-		border-top: none
 	}
 	#searchFacets ul {
 		display: none;
