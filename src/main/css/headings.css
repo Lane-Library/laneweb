@@ -10,13 +10,13 @@ h2,h3,h4{
 	line-height: 1.2em;
     margin-bottom: 1em;
     padding-bottom: 0.75em;
-    border-bottom: 1px solid #d8dbdc;
     position: relative;	
 }
 
 h2 {
     font-size: 1.5em;
     font-weight: 600;
+    border-bottom: 1px solid #d8dbdc;
 }
 
 h2:before{
