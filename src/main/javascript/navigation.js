@@ -4,6 +4,13 @@
 
     if (document.querySelectorAll(".nav-menu") !== undefined) {
 
+        var toggleSuperHeader = function(){
+            var header = document.querySelector("header:first-of-type");
+            if (header) {
+                header.classList.toggle('medium-screen-hide');
+            }
+        }
+
         document.querySelectorAll(".nav-menu").forEach(function(node) {
             node.addEventListener("click", function(event) {
                 var smallmedia = window.matchMedia("(min-width: 1100px)"),
@@ -19,9 +26,17 @@
         });
 
         document.querySelector(".menu-overlay").addEventListener(
-            "click", function(e) {
+            "click", function() {
                 window.location.hash = "#";
+                toggleSuperHeader();
             }, false);
+
+        document.querySelectorAll("#nav-toggle-on, #nav-toggle-off").forEach(function(node) {
+            node.addEventListener(
+                "click", function() {
+                    toggleSuperHeader();
+                }, false);
+            });
 
     }
 

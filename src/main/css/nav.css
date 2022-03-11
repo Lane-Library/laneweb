@@ -151,11 +151,6 @@ ul .nav-menu {
 		display: none;
 	}
 
-	#navigation:target {
-		position: absolute;
-		margin-top: -36px;
-	}
-	
 	#navigation:target .menu-overlay {
 		background-color: black;
 		width: 100%;
@@ -336,6 +331,5 @@ ul .nav-menu {
 	.nav-menu.nav-menu-active-on-click i.fa-angle-down {
 		display: none;
 	}
-	
-	
+
 }
