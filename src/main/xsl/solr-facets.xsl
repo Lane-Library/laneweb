@@ -151,67 +151,58 @@
     </xsl:template>
 
     <xsl:template match="linked-hash-map">
-        <xsl:choose>
-            <xsl:when test="$counts > 0 and (./entry or string-length($facets) > 0)">
-                    <xsl:copy-of select="$header"/>
-                    <ul>
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'recordType'"/>
-                            <xsl:with-param name="label">Results From <span id="sources"
-                                /></xsl:with-param>
-                        </xsl:call-template>
+        <xsl:if test="$counts > 0 and (./entry or string-length($facets) > 0)">
+            <xsl:copy-of select="$header"/>
+            <ul>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'recordType'"/>
+                    <xsl:with-param name="label">Results From <span id="sources"
+                        /></xsl:with-param>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'type'"/>
-                            <xsl:with-param name="label">Resource Type <i
-                                    class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                                    title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;"
-                                /></xsl:with-param>
-                        </xsl:call-template>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'type'"/>
+                    <xsl:with-param name="label">Resource Type <i
+                            class="fa-solid fa-info-circle yui3-tooltip-trigger"
+                            title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;"
+                        /></xsl:with-param>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'publicationType'"/>
-                            <xsl:with-param name="label" select="'Article Type'"/>
-                        </xsl:call-template>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'publicationType'"/>
+                    <xsl:with-param name="label" select="'Article Type'"/>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'publicationTitle'"/>
-                            <xsl:with-param name="label" select="'Journal Title'"/>
-                        </xsl:call-template>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'publicationTitle'"/>
+                    <xsl:with-param name="label" select="'Journal Title'"/>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'year'"/>
-                            <xsl:with-param name="label" select="'Year'"/>
-                        </xsl:call-template>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'year'"/>
+                    <xsl:with-param name="label" select="'Year'"/>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'mesh'"/>
-                            <xsl:with-param name="label">
-                                <span class="yui3-tooltip-trigger"
-                                    title="Filter down search results to only articles pertaining to these medical subjects"
-                                    >Medical Subject</span>
-                            </xsl:with-param>
-                        </xsl:call-template>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'mesh'"/>
+                    <xsl:with-param name="label">
+                        <span class="yui3-tooltip-trigger"
+                            title="Filter down search results to only articles pertaining to these medical subjects"
+                            >Medical Subject</span>
+                    </xsl:with-param>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'publicationAuthor'"/>
-                            <xsl:with-param name="label" select="'Author'"/>
-                        </xsl:call-template>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'publicationAuthor'"/>
+                    <xsl:with-param name="label" select="'Author'"/>
+                </xsl:call-template>
 
-                        <xsl:call-template name="field">
-                            <xsl:with-param name="id" select="'publicationLanguage'"/>
-                            <xsl:with-param name="label" select="'Language'"/>
-                        </xsl:call-template>
-                    </ul>
-            </xsl:when>
-            <xsl:otherwise>
-                <h2>Can We Help?</h2>
-                <a class="btn alt"
-                    href="{$base-path}/contacts/index.html#laneaskus">
-                    <span><i class="icon fa fa-comments"/>Ask Us</span>
-                </a>
-            </xsl:otherwise>
-        </xsl:choose>
+                <xsl:call-template name="field">
+                    <xsl:with-param name="id" select="'publicationLanguage'"/>
+                    <xsl:with-param name="label" select="'Language'"/>
+                </xsl:call-template>
+            </ul>
+        </xsl:if>
          <!-- hidden element that gets moved into place by solr-facets.js -->
         <xsl:if test="$search-mode and string-length($facets) > 0">
             <span id="solrAllCount">
