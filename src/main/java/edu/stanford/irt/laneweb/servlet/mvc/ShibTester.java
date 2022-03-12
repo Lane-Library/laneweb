@@ -20,7 +20,7 @@ public class ShibTester {
     private static final Collection<String> SHIB_ATTS = Arrays.asList("Shib-Identity-Provider", "affiliation", "cn",
             "displayName", "eduPersonEntitlement", "eppn", "givenName", "group", "mail", "ou", "persistent-id",
             "postalAddress", "sn", "street", "suAffiliation", "suDisplayNameLF", "suUnivID", "targeted-id",
-            "telephoneNumber", "title", "uid", "uid-alt", "unscoped-affiliation", "upn");
+            "telephoneNumber", "title", "uid", "unscoped-affiliation", "upn");
 
     @GetMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
     public void testUrl(final HttpServletRequest request, final ServletResponse response) throws IOException {
