@@ -212,12 +212,10 @@ ul .nav-menu {
 		text-align: center;
 		background: black;
 		color: white;
-		position: fixed;
 		padding: 18px 0 39px;
 		top: auto;
 		width: 100%;
 		z-index: 4;
-		bottom: 0;
 	}
 	#navigation:target #nav-toggle-on {
 		display: none;
