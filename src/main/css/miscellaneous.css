@@ -209,3 +209,6 @@ hr {
 .backgr-red {
     background-color: #8c1515;
 }
+.blur {
+    filter: blur(4px);
+}

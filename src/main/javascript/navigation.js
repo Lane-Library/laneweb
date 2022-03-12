@@ -9,6 +9,8 @@
             if (header) {
                 header.classList.toggle('medium-screen-hide');
             }
+        }, toggleContentBlur = function() {
+            document.querySelector('.content').classList.toggle('blur');
         }
 
         document.querySelectorAll(".nav-menu").forEach(function(node) {
@@ -29,12 +31,14 @@
             "click", function() {
                 window.location.hash = "#";
                 toggleSuperHeader();
+                toggleContentBlur();
             }, false);
 
         document.querySelectorAll("#nav-toggle-on, #nav-toggle-off").forEach(function(node) {
             node.addEventListener(
                 "click", function() {
                     toggleSuperHeader();
+                    toggleContentBlur();
                 }, false);
             });
 
