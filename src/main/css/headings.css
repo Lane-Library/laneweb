@@ -1,15 +1,20 @@
+h1,h2,h3,h4{
+    padding-bottom: 0.6em;
+}
+
 h1  {
 	color: #666666;
 	font-size: 1.875em;
 	text-align: center;
 	font-weight: 600;
+    padding-top: 0.6em;
+    background-color: #aabec63d;
 }
 
 h2,h3,h4{
 	color: #333;
 	line-height: 1.2em;
-    margin-bottom: 1em;
-    padding-bottom: 0.75em;
+    margin-bottom: 0.6em;
     position: relative;	
 }
 
