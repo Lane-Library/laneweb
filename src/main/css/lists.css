@@ -18,7 +18,7 @@ ol li{
 .bulleted-list{
     font-size: 16px;
     list-style-type: disc;
-    padding-left: 20px;
+    padding: 0 0 20px 20px;
 }
 
 .bulleted-list li{
