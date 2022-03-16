@@ -74,11 +74,13 @@
 }
 
 .staff-slide-show .slide div span.name {
-	margin-top: 30px;
+	margin-top: 20px;
+	padding-bottom: 0.6em;
+	font-weight: 700;
 }
 
 .staff-slide-show .slide div span.title {
-	font-size: x-small;
+	font-weight: 200;
 	padding-bottom: 12px;
 }
 
