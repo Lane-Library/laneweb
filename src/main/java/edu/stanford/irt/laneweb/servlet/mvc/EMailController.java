@@ -180,7 +180,7 @@ public class EMailController {
             if (contentType == null || !contentType.startsWith("image/")) {
                 return null;
             }
-            file = new File(attachment.getOriginalFilename());
+            file = new File("/tmp/" + attachment.getOriginalFilename());
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 fos.write(attachment.getBytes());
                 if (file.length() > MAX_UPLOAD_SIZE) {
