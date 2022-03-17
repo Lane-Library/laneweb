@@ -197,7 +197,7 @@ ul .nav-menu {
 	#navigation .nav-menu:last-child {
 		border-bottom: none;
 	}
-	#navigation .login-item-active.nav-menu {
+	#navigation .nav-menu.bookmarks {
 		border-bottom: none;
 	}
 	#navigation .nav-menu-content {
