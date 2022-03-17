@@ -249,8 +249,10 @@
 		padding-bottom: 33px;
 		min-height: auto;
 		background-position: unset;
+		display: flex;
 	}
 	.search-form {
-		width: 80%;
+		width: 100%;
+		margin: 0 2em;
 	}
 }
