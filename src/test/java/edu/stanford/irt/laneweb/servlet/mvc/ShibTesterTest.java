@@ -50,7 +50,7 @@ public class ShibTesterTest {
             expect(this.request.getHeaderNames()).andReturn(Collections.enumeration(Collections.singleton("name")));
             expect(this.request.getHeader("name")).andReturn("value");
             expect(this.request.getRemoteUser()).andReturn("user");
-            expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(25);
+            expect(this.request.getAttribute(isA(String.class))).andReturn("value").times(24);
             expect(this.request.getAttributeNames()).andReturn(
                     Collections.enumeration(Arrays.asList(new String[] { "name", "org.springframework.foo" })));
             this.response.setContentType("text/plain");

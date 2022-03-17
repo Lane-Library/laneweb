@@ -58,9 +58,6 @@
             <xsl:when test=". = 'bib'">
                 <xsl:copy-of select="$label"/><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Catalog Record">Lane Catalog</a>
             </xsl:when>
-            <xsl:when test=". = 'auth'">
-                <xsl:copy-of select="$label"/><a href="http://cifdb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Community Info Record">Lane Community Info</a>
-            </xsl:when>
             <xsl:when test=". = 'class'">
                 <xsl:copy-of select="$label"/><a href="/classes-consult/laneclasses.html">Lane Classes</a>
             </xsl:when>
@@ -70,11 +67,6 @@
             <xsl:when test=". = 'redivis'">
                 <xsl:copy-of select="$label"/><a href="https://redivis.com/StanfordPHS" title="Redivis - Stanford Center for Population Health Sciences">Redivis</a>
             </xsl:when>
-            <!-- 
-                TODO: testing for PMC indexing
-                remove if RM/Thea decides not to use PMC records
-                may also need to add to eresources2html if RM wants PMC items browseable
-            -->
             <xsl:when test=". = 'dnlm'">
                 <xsl:copy-of select="$label"/><a href="https://www.ncbi.nlm.nih.gov/nlmcatalog/?term={../s:recordId}" title="NLM Catalog">NLM Catalog</a>
             </xsl:when>

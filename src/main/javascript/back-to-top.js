@@ -33,16 +33,18 @@
             document.documentElement.scrollIntoView();
         };
 
-    // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
-    document.addEventListener("scroll", function() {
-        if (window.pageYOffset > 270 && !backToTop.classList.contains("active")) {
-            fadeIn();
-        } else if (window.pageYOffset <= 270 && backToTop.classList.contains("active")){
-            fadeOut();
-        }
-    });
-
-    // call the scrollToTop function when backToTop clicked
-    backToTop.addEventListener("click", scrollToTop);
+    if (backToTop) {
+        // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
+        document.addEventListener("scroll", function() {
+            if (window.pageYOffset > 270 && !backToTop.classList.contains("active")) {
+                fadeIn();
+            } else if (window.pageYOffset <= 270 && backToTop.classList.contains("active")){
+                fadeOut();
+            }
+        });
+    
+        // call the scrollToTop function when backToTop clicked
+        backToTop.addEventListener("click", scrollToTop);
+    }
 
 })();

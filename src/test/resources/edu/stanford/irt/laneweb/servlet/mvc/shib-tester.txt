@@ -29,7 +29,6 @@ targeted-id --> value (java.lang.String)
 telephoneNumber --> value (java.lang.String)
 title --> value (java.lang.String)
 uid --> value (java.lang.String)
-uid-alt --> value (java.lang.String)
 unscoped-affiliation --> value (java.lang.String)
 upn --> value (java.lang.String)
 

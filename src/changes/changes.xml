@@ -6,6 +6,33 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2022-03-14" version="3.10.4" description="Pi day release">
+			<action date="2022-03-10" dev="ryanmax" issue="LANEWEB-10909" type="fix">
+				HTTPS mixed content errors on front page 
+			</action>
+			<action date="2022-03-08" dev="ryanmax" issue="LANEWEB-10822" type="update">
+				remove internal networking knowledge
+			</action>
+			<action date="2022-03-07" dev="ryanmax" issue="LANEWEB-10905" type="fix">
+				javascript errors on login discovery page 
+			</action>
+			<action date="2022-03-07" dev="ryanmax" issue="LANEWEB-10901" type="remove">
+				remove "Community Information" UI logic from Lane Search
+			</action>
+		</release>
+		<release date="2022-03-07" version="3.10.3" description="bug fix and update release">
+			<action date="2022-03-04" dev="ryanmax" issue="LANEWEB-10903" type="update">
+				Relabel "NLM Catalog" to "PMC Journals" in facet menu		
+			</action>
+		</release>
+		<release date="2022-02-28" version="3.10.2" description="bug fix and update release">
+			<action date="2021-09-01" dev="ryanmax" issue="LANEWEB-10876" type="update">
+				Update Xerces dependency		
+			</action>
+			<action date="2022-02-23" dev="ryanmax" issue="LANEWEB-10888" type="update">
+				Change green text to #498433	
+			</action>
+		</release>
 		<release date="2022-02-14" version="3.10.1" description="bug fix and update release">
 			<action date="2021-09-01" dev="ryanmax" issue="LANEWEB-10800" type="update">
 				adjust VPN IP ranges for Stanford VPN changes				

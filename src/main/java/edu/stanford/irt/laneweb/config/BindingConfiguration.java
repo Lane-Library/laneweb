@@ -140,19 +140,6 @@ public class BindingConfiguration {
         List<CIDRRange> noProxyCIDRRange = new ArrayList<>();
         //
         noProxyCIDRRange.add(new CIDRRange("171.64.0.0/14"));
-        // 10.34.0.0 - 10.35.255.255 Wireless NAT range for clients registered in NetDB connected to the "Stanford" SSID
-        // in academic buildings
-        noProxyCIDRRange.add(new CIDRRange("10.34.0.0/15"));
-        // 10.39.0.0 - 10.39.255.255 Wireless NAT range for School of Medicine
-        noProxyCIDRRange.add(new CIDRRange("10.39.0.0/16"));
-        // 10.38.0.0 - 10.38.127.25 Wireless NAT range for "Stanford Secure" SSID for School of Medicine
-        noProxyCIDRRange.add(new CIDRRange("10.38.0.0/17"));
-        // 10.98.0.0 - 10.99.255.255 Wireless NAT range for "Stanford Secure" SSID in academic buildings
-        noProxyCIDRRange.add(new CIDRRange("10.98.0.0/15"));
-        // 10.128.0.0 - 10.135.255.255 Wireless NAT range for "Stanford Secure" SSID for Student Residences
-        noProxyCIDRRange.add(new CIDRRange("10.128.0.0/13"));
-        // 10.109.63.0 - 10.109.63.255 Vaden health center: routes out as 171.66.10.x
-        noProxyCIDRRange.add(new CIDRRange("10.109.63.0/24"));
         return new ProxyLinks(proxyCIDRRange, noProxyCIDRRange);
     }
 
