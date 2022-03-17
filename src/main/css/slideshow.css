@@ -1,7 +1,7 @@
 #slide-show {
 	position: relative;
 	overflow: hidden;
-	height: 235px;
+	height: 280px;
 }
 
 .slide-container {
@@ -20,7 +20,7 @@
 }
 
 .slide img{
-	height: 230px;
+	height: 270px;
 }
 
 .slide.desactive-next {
@@ -52,9 +52,9 @@
 }
 
 .staff-slide-show {
-	width: 95%;
+	width: 100%;
 	margin: auto;
-	padding: 3em;
+	padding: 3em 2em;
 	position: relative;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .staff-slide-show .slide div span.title {
-	font-weight: 200;
+	font-weight: 300;
 	padding-bottom: 12px;
 }
 
