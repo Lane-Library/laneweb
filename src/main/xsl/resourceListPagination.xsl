@@ -29,14 +29,9 @@
                 <xsl:text> results</xsl:text>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="number(/s:resources/@size) = 1">
-                    <xsl:text> one result </xsl:text>
-                </xsl:if>
-                <xsl:if test="number(/s:resources/@size) > 1">
-                    <xsl:text> all </xsl:text>
-                    <xsl:value-of select="/s:resources/@size" />
-                    <xsl:text> results</xsl:text>
-                </xsl:if>
+                <xsl:text> all </xsl:text>
+                <xsl:value-of select="/s:resources/@size" />
+                <xsl:text> results</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

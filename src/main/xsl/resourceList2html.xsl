@@ -61,7 +61,7 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="number(@size) &gt; 0">
+                <xsl:if test="number(@size) &gt; 1">
                     <div class="s-tb no-bookmarking">
                       <div>
                         <xsl:call-template name="resultsText"/>
