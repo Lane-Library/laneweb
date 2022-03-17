@@ -26,9 +26,8 @@
                 var isSmallMedia = !window.matchMedia("(min-width: 1100px)").matches,
                     nav = event.currentTarget, 
                     clickTarget = event.target,
-                    navContent;
-                if (isSmallMedia && !clickTarget.href) {
                     navContent = nav.querySelector('.dropdown-content');
+                if (isSmallMedia && navContent && !clickTarget.href) {
                     nav.classList.toggle('nav-menu-active-on-click');
                     navContent.classList.toggle('dropdown-content-on-click');
                 }
