@@ -4,12 +4,21 @@
 
     if (document.querySelectorAll(".nav-menu") !== undefined) {
 
-        var contentNode = document.querySelector('.content'),
-            superHeader = document.querySelector("header:first-of-type"),
+        var superHeader = document.querySelector("header:first-of-type"),
+            blurableNodes = document.querySelectorAll(".content, footer, .mobile-screen-menu.lrg-screen-hide"),
             toggleSuperHeader = function(){
                 if (superHeader) {
                     superHeader.classList.toggle('medium-screen-hide');
                 }
+            },
+            toggleBlur = function(action){
+                blurableNodes.forEach(function(node) {
+                    if ("add" === action) {
+                        node.classList.add('blur');
+                    } else {
+                        node.classList.remove('blur');
+                    }
+                })
             };
 
         document.querySelectorAll(".nav-menu").forEach(function(node) {
@@ -26,23 +35,19 @@
             });
         });
 
-        document.querySelector(".menu-overlay").addEventListener(
-            "click", function() {
-                window.location.hash = "#";
-                toggleSuperHeader();
-                contentNode.classList.remove('blur');
+        document.querySelectorAll(".menu-overlay, #nav-toggle-off").forEach(function(node) {
+            node.addEventListener(
+                "click", function() {
+                    window.location.hash = "#";
+                    toggleSuperHeader();
+                    toggleBlur("remove");
             }, false);
+        });
 
         document.querySelector("#nav-toggle-on").addEventListener(
             "click", function() {
                 toggleSuperHeader();
-                contentNode.classList.add('blur');
-            }, false);
-
-        document.querySelector("#nav-toggle-off").addEventListener(
-            "click", function() {
-                toggleSuperHeader();
-                contentNode.classList.remove('blur');
+                toggleBlur("add");
             }, false);
 
     }
