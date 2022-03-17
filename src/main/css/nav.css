@@ -197,6 +197,9 @@ ul .nav-menu {
 	#navigation .nav-menu:last-child {
 		border-bottom: none;
 	}
+	#navigation .login-item-active.nav-menu {
+		border-bottom: none;
+	}
 	#navigation .nav-menu-content {
 		position: relative;
 		padding: 0 34px 20px;
