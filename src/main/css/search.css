@@ -275,7 +275,7 @@ li.active .description {
         padding: 10px 0;
     }
     .search-results .content {
-        margin: 0 1em;
+        margin: 0 6px;
     }
     .resource .bookcover {
         padding: 5px 10px 0 0;
@@ -291,5 +291,10 @@ li.active .description {
     }
     .hldgsTrigger {
         float: right;
+    }
+}
+@media ( max-width : 812px) {
+    .search-results .search-form {
+        margin: 0 12px;
     }
 }
