@@ -26,8 +26,8 @@
 }
 
 .popin {
-    height: 16px;
-    margin-bottom: 20px;
+    height: 1em;
+    margin: 1em;
 }
 
 .popInLabel {
