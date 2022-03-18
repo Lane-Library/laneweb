@@ -31,7 +31,7 @@ body, select, input, button, textarea {
 
 p {
     margin-bottom: 12px;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 strong {
@@ -99,7 +99,7 @@ hr {
 .nomodule {
     margin: 12px 0 24px;
     line-height: normal;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 /*to make a highlighted note on the right of the module, similar to history site*/

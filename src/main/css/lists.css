@@ -2,13 +2,13 @@
 ol li{
     list-style-type: decimal;
     list-style-position: inside;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 .content li{
     border-bottom: solid 1px #f0f4f5;
     padding: 6px 0;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 .content li:last-child{
@@ -16,7 +16,7 @@ ol li{
 }
 
 .bulleted-list{
-    font-size: 16px;
+    font-size: 1em;
     list-style-type: disc;
     padding: 0 0 20px 20px;
 }
