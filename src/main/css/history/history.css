@@ -709,64 +709,8 @@ section.header a {
 	color: white;
 }
 
-/* utility menu with login */
-/* TODO: consider hiding the entire #navigation menu */
-
-#navigation ul li{
-	display: none
-}
-
-#navigation ul > .nav-login{
-	display: inline-block;	
-}
-
-#navigation .menu-toggle{
-	display: none;
-}
-.login>li {
-	display: none;
-}
-
-.nav-login .login {
-    display: flex;
-    justify-content: end;
-}
-
-#navigation ul.login > li.login-item-active,
-ul.login > li.login-item-active{
-	display: initial;
-	line-height: 64px;
-}
-
-.login .fa {
-	font-size: 16px;
-	margin-right: 2px;
-	color: #8C1515;
-}
-/* Logout button */
-.login  li:last-of-type a {
-	color: black;
-	border-color: black;
-}
-
-/* Bookmarks icon */
-
-.login .favorites.dropdown{
-	line-height: 64px;
- }
-.login > li .favorites.dropdown a {
-	display: inline-block;
-}
-.login > li .favorites.dropdown  i{
-	font-size: 25px;
-	padding: 0 14px;
-    vertical-align: middle;
-}
-.login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {
-	background-color: #f0f4f5;
-}
-/* hide My Bookmarks b/c not populated in history */
-.favorites.dropdown  .dropdown-content {
+/* utility menu: for simplicity, hide nav including login, bookmarks, etc. */
+#navigation {
     display:none;
 }
 
