@@ -48,7 +48,7 @@
 	line-height: 17px;
 	background-color: white;
 	background-image: linear-gradient(to right, white, #ccc);
-	font-size: 13px;
+	font-size: 0.8125em;
 }
 
 .bookmark-link .fa {
@@ -138,7 +138,7 @@
 }
 
 .manageBookmarks {
-	font-size: 13px;
+	font-size: 0.8125em;
 }
 
 @media ( max-width : 1100px) {
