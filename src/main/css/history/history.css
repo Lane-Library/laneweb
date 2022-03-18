@@ -710,7 +710,7 @@ section.header a {
 }
 
 /* utility menu with login */
-
+/* TODO: consider hiding the entire #navigation menu */
 
 #navigation ul li{
 	display: none
@@ -725,6 +725,11 @@ section.header a {
 }
 .login>li {
 	display: none;
+}
+
+.nav-login .login {
+    display: flex;
+    justify-content: end;
 }
 
 #navigation ul.login > li.login-item-active,
@@ -744,7 +749,7 @@ ul.login > li.login-item-active{
 	border-color: black;
 }
 
-/* Bookmakrs icon */
+/* Bookmarks icon */
 
 .login .favorites.dropdown{
 	line-height: 64px;
@@ -760,6 +765,11 @@ ul.login > li.login-item-active{
 .login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {
 	background-color: #f0f4f5;
 }
+/* hide My Bookmarks b/c not populated in history */
+.favorites.dropdown  .dropdown-content {
+    display:none;
+}
+
 /* Because the stanford image start with white 7 pixels */
 .lane-header .brand {
 	margin: 16px 0;
