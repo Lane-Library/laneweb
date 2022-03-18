@@ -2,7 +2,7 @@
 
     "use strict";
 
-    if (document.querySelectorAll(".nav-menu") !== undefined) {
+    if (document.querySelector(".nav-menu")) {
 
         var superHeader = document.querySelector("header:first-of-type"),
             blurableNodes = document.querySelectorAll(".content, footer, .mobile-screen-menu.lrg-screen-hide"),
