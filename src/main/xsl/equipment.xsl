@@ -46,20 +46,19 @@
     <xsl:param name="title"/>
     <div class="equipment-icon"><i aria-hidden="true">
       <xsl:attribute name="class">
-        <xsl:text>fa fa-4x fa-</xsl:text>
+        <xsl:text>fa-4x </xsl:text>
         <xsl:choose>
-          <xsl:when test="contains($title, 'iPad')">tablet</xsl:when>
-          <xsl:when test="contains($title, 'Apple')">apple</xsl:when>
-          <xsl:when test="contains($title, 'Android')">android</xsl:when>
-          <xsl:when test="contains($title, 'Keyboard')">keyboard-o</xsl:when>
-          <xsl:when test="contains($title, 'Headphones')">headphones</xsl:when>
-          <xsl:when test="contains($title, 'Tablet')">tablet</xsl:when>
-          <xsl:when test="contains($title, 'USB')">usb</xsl:when>
-          <xsl:when test="contains($title, 'Cable')">gg</xsl:when>
-          <xsl:when test="contains($title, 'Recorder')">microphone</xsl:when>
-          <xsl:when test="contains($title, 'Polling')">users</xsl:when>
-          <xsl:when test="contains($title, 'magnifying')">search</xsl:when>
-          <xsl:when test="contains($title, 'Virtual Reality')">ge</xsl:when>
+          <xsl:when test="contains($title, 'iPad')">fa-solid fa-tablet-screen-button</xsl:when>
+          <xsl:when test="contains($title, 'Apple')">fa-brands fa-apple</xsl:when>
+          <xsl:when test="contains($title, 'Android')">fa-brands fa-android</xsl:when>
+          <xsl:when test="contains($title, 'Keyboard')">fa-solid fa-keyboard</xsl:when>
+          <xsl:when test="contains($title, 'Headphones')">fa-solid fa-headphones</xsl:when>
+          <xsl:when test="contains($title, 'Tablet')">fa-solid fa-tablet-screen-button</xsl:when>
+          <xsl:when test="contains($title, 'USB')">fa-brands fa-usb</xsl:when>
+          <xsl:when test="contains($title, 'Cable')">fa-brands fa-gg</xsl:when>
+          <xsl:when test="contains($title, 'Recorder')">fa-solid fa-microphone</xsl:when>
+          <xsl:when test="contains($title, 'Polling')">fa-solid fa-users</xsl:when>
+          <xsl:when test="contains($title, 'magnifying')">fa-solid fa-magnifying-glass</xsl:when>
         </xsl:choose>
       </xsl:attribute>
     </i></div>
