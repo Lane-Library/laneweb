@@ -222,7 +222,7 @@ body:nth-child(3) footer {
 
 @media ( max-width : 360px) {
 	.footer-organization .brand a, .footer-organization .brand a:link {
-		font-size: 11px;
+		font-size: 0.6875em;
 		padding-top: 7px;
 		padding-left: 71px;
 	}

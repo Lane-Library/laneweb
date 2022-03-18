@@ -76,7 +76,7 @@ h1 i {
 
 .nav-item {
     float: left;
-    font-size: 11px;
+    font-size: 0.6875em;
 }
 .nav-item:hover{
     background-image: url('../../images/diag.png');
