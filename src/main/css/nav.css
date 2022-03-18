@@ -107,7 +107,7 @@ ul .nav-menu {
 	padding: 16px 0;
 }
 /* To place the "GET HELP" content menu to the right */
-.dropdown:hover:nth-of-type(5) .dropdown-content.nav-cols-content {
+.dropdown:hover .nav-open-right {
 	right: 0;
 	left: inherit;
 }
