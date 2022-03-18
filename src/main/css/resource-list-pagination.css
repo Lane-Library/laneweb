@@ -100,7 +100,7 @@
 	margin-top: -20px;
 	text-align: center;
 	color: red;
-	font-size: 14px;
+	font-size: 0.875em;
 }
 
 @media ( max-width : 812px) {

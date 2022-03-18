@@ -48,7 +48,7 @@
 }
 
 .search-form input{
-	font-size: 14px;
+	font-size: 0.875em;
 	height: 46px;
 	padding-left: 30px;
 	border: 1px white;
@@ -148,7 +148,7 @@
 
 .pico-fields input {
 	position: static;
-	font-size: 14px;
+	font-size: 0.875em;
 	width: 100%;
 	height: 46px;
 	padding-left: 10px;

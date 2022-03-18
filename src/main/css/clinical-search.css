@@ -1,5 +1,5 @@
 .clinical-heading {
-    font-size: 14px;
+    font-size: 0.875em;
     font-weight: bold;
 }
 
@@ -13,7 +13,7 @@
 .clinical-toggle {
     background-color: #dddedf;
     border-radius: 24px;
-    font-size: 14px;
+    font-size: 0.875em;
     line-height: 26px;
     margin: 9px 0 37px;
     padding: 0 21px;
