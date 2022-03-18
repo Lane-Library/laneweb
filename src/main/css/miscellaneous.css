@@ -22,7 +22,7 @@ body, select, input, button, textarea {
     right: 3px;
     top: 3px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 1.375em;
 }
 
 .close.fa:hover {
@@ -128,7 +128,7 @@ hr {
 
 .feature-flex h3 {
     margin-top: 24px;
-    font-size: 22px;
+    font-size: 1.375em;
     text-transform: uppercase;
 }
 
