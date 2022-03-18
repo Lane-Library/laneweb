@@ -72,7 +72,7 @@ em {
     padding: 12px;
     font-family: 'Fjord One', serif;
     color: #fff;
-    font-size: 20px;
+    font-size: 1.25em;
     text-shadow: .07em #000;
     margin-bottom: 12px;
 }
@@ -111,7 +111,7 @@ hr {
     background-color: #556222;
     background-image: none;
     color: #ffffff;
-    font-size: 20px;
+    font-size: 1.25em;
     margin-bottom: 12px;
     padding: 6px 6px 22px 6px;
     text-transform: uppercase;
