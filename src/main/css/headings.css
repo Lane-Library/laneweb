@@ -32,7 +32,10 @@ h2:before{
     bottom: -2px;
 }
 
-
+/* likely only used once: about/about.html */
+h2.white:before{
+    border-top: none;
+}
 
 h3 {
     font-size: 1.25em;
