@@ -136,6 +136,10 @@ ul .nav-menu {
 	display: none;
 }
 
+#nav-toggle-off span {
+	font-size: 16px;
+}
+
 @media ( max-width :1100px) {
 	
 	.nav-menu.dropdown:hover .dropdown-content {
@@ -214,11 +218,11 @@ ul .nav-menu {
 		padding: 22px
 	}
 	#nav-toggle-off i {
-		margin: 30px 40px 0 0;
+		margin: 30px 42px 0 0;
 		padding-left: 10px;
 	}
 	#nav-toggle-off span {
-		line-height: 48px;
+		line-height: 50px;
 	}
 	#navigation:target #nav-toggle-on {
 		display: none;
