@@ -56,7 +56,7 @@ h1 a:hover {
 }
 
 h1 i {
-    font-size: 12px;
+    font-size: 0.75em;
 }
 
 .lrg-screen-hide{
@@ -66,7 +66,7 @@ h1 i {
 #mhc-logo{
     position: absolute;
     top: 38px;
-    font-size: 12px;
+    font-size: 0.75em;
     left: 170px;
 }
 
@@ -142,7 +142,7 @@ h1 i {
     line-height: 16px;
     background-color: #5e3032;
     padding: 4px;
-    font-size: 12px;
+    font-size: 0.75em;
     font-weight: 600;
 }
 .nav-item .explore span{
@@ -167,7 +167,7 @@ h1 i {
     line-height: 18px;
     border: 1px #cbc0c1 solid;
     box-shadow: 0 0 2px #cbc0c1;
-    font-size: 12px;
+    font-size: 0.75em;
 }
 
 .content ul.menu{
@@ -423,7 +423,7 @@ h4 {
 
 .contact-links,.side-box p {
     display: block;
-    font-size: 12px;
+    font-size: 0.75em;
     float: left;
 }
 
@@ -479,7 +479,7 @@ blockquote {
 
 .border-and-shadow .img-caption a,.content .img-caption a {
     color: #fff;
-    font-size: 12px;
+    font-size: 0.75em;
 }
 
 .border-and-shadow .img-caption p,.content .img-caption p {
