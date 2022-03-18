@@ -44,7 +44,7 @@ h1 a {
     background-repeat: no-repeat;
     color: #333;
     display: inline-block;
-    font-size: 18px;
+    font-size: 1.125em;
     line-height: 16px;
     padding: 10px 0 0 176px;
 }
@@ -230,7 +230,7 @@ h1 i {
     border-radius: 6px;
     color: white;
     padding: 12px;
-    font-size: 18px;
+    font-size: 1.125em;
 }
 
 /*content styles start here*/
@@ -585,7 +585,7 @@ http://lane.stanford.edu/samples/button-css.html
     margin: 0;
     padding: 10px 0;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.125em;
     line-height: 19.8px;
 }
 .landing p{

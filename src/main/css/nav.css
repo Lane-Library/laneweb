@@ -23,7 +23,7 @@ ul .nav-menu {
 .nav-menu>span, .nav-menu>span a {
 	color: black;
 	display: block;
-	font-size: 18px;
+	font-size: 1.125em;
 	text-align: center;
 	white-space: nowrap;
 	line-height: 64px;
@@ -281,7 +281,7 @@ ul .nav-menu {
 		padding: inherit;	
 	}
 	.nav-login .favorites span {
-		font-size: 18px;
+		font-size: 1.125em;
 		font-weight: 600;
 		padding-left: 24px
 	}
