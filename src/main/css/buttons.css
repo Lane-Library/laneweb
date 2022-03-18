@@ -157,7 +157,7 @@ http://lane.stanford.edu/samples/button-css.html
 /*  Alternate icon without background */
 .btn  .icon-alt {
 	border-radius: 12px;
-	font-size: 15px;
+	font-size: 0.9375em;
 	height: 24px;
 	width: 24px;
 	padding: 4px;
