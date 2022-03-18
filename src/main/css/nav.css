@@ -20,7 +20,10 @@ ul .nav-menu {
  	display: flex;
  	padding-left: 5%;
  }
-.nav-menu>span, .nav-menu>span a {
+.nav-menu>span a {
+	color: black;
+}
+.nav-menu>span {
 	color: black;
 	display: block;
 	font-size: 1.125em;
