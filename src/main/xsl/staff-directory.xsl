@@ -8,17 +8,19 @@ exclude-result-prefixes="h s" version="2.0">
 
 	<xsl:template match="/s:staff-directory">
 		<xsl:apply-templates select="s:staff">
+			<!--  why sort? source spreadsheet not ordered and StaffSAXStrategy randomizes order -->
 			<xsl:sort select="lower-case(s:last-name)" order="ascending"/>
 			<xsl:sort select="lower-case(s:first-name)" order="ascending"/>
 		</xsl:apply-templates>
 	</xsl:template>
 
 	<xsl:template match="s:staff">
+		<!--  is this used? if not, remove -->
 		<xsl:if test=" $manager != 'true' or s:manager = 'TRUE'">
 		<div>
 			<xsl:attribute name="class">module</xsl:attribute>
 			<xsl:attribute name="id" select="s:id/text()" />
-				
+
 			<h2>
 				<span>
 					<xsl:value-of select="s:first-name/text()" /><xsl:text> </xsl:text><xsl:value-of select="s:last-name/text()" />
@@ -33,14 +35,14 @@ exclude-result-prefixes="h s" version="2.0">
 					<xsl:with-param name="name" select="concat(s:first-name/text(), ' ', s:last-name/text())" />
 					<xsl:with-param name="stanford-profile-href" select="s:stanford-profile/text()" />
 					<xsl:with-param name="picture-src" select="s:picture/text()" />
-				</xsl:call-template>				
-				
+				</xsl:call-template>
+
 				<xsl:call-template name="staff-detail">
 					<xsl:with-param name="email" select="s:email/text()" />
 					<xsl:with-param name="stanford-profile-href" select="s:stanford-profile/text()" />
 					<xsl:with-param name="phone" select="s:phone/text()" />
 				</xsl:call-template>
-				
+
 			</div>
 		</div>
 		</xsl:if>
@@ -64,7 +66,7 @@ exclude-result-prefixes="h s" version="2.0">
 
 				</a>
 			</xsl:when>
-			<xsl:otherwise>	
+			<xsl:otherwise>
 			<xsl:if test="$picture-src != '' ">
 				<img>
 					<xsl:attribute name="class">scaled-image</xsl:attribute>
@@ -76,8 +78,8 @@ exclude-result-prefixes="h s" version="2.0">
 			</xsl:choose>
 		</div>
 	</xsl:template>
-	
-	
+
+
 
 	<xsl:template name="staff-detail">
 		<xsl:param name="phone" />
@@ -106,14 +108,14 @@ exclude-result-prefixes="h s" version="2.0">
 						<a>
 							<xsl:attribute name="href" select="$stanford-profile-href" />
 							<i>
-								<xsl:attribute name="class">fa fa-users</xsl:attribute>							
+								<xsl:attribute name="class">fa fa-users</xsl:attribute>
 							</i>
 							<xsl:text> Stanford Profile</xsl:text>
-						</a>					
+						</a>
 					</li>
 				</xsl:if>
 			</ul>
-			
+
 	</div>
 	</xsl:template>
 </xsl:stylesheet>
