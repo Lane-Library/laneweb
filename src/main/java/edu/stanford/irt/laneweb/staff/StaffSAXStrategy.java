@@ -18,18 +18,18 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 
 public class StaffSAXStrategy implements SAXStrategy<Source> {
 
-    private static final String NAMESPACE = "http://lane.stanford.edu/staff/1.0";
+    private static final String CDATA = "CDATA";
 
-    private static final String STAFF_DIRECTORY = "staff-directory";
+    private static final String COLUMN_SEPARETOR = "\t";
+
+    private static final String ID = "id";
+
+    private static final String NAMESPACE = "http://lane.stanford.edu/staff/1.0";
 
     private static final String STAFF = "staff";
 
-    private static final String COLUMN_SEPARETOR = "\t";
-    
-    private static final String ID = "id";
+    private static final String STAFF_DIRECTORY = "staff-directory";
 
-    private static final String CDATA = "CDATA";
-    
     @Override
     public void toSAX(final Source source, final XMLConsumer xmlConsumer) {
         List<String> lines = new ArrayList<>();
