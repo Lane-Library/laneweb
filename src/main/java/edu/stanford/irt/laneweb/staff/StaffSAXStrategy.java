@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -52,6 +54,7 @@ public class StaffSAXStrategy implements SAXStrategy<Source> {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             XMLUtils.startElement(xmlConsumer, NAMESPACE, STAFF_DIRECTORY);
+            Collections.shuffle(lines, new Random());
             lines.stream().forEach((final String p) -> toSAX(headers, p, xmlConsumer));
             XMLUtils.endElement(xmlConsumer, NAMESPACE, STAFF_DIRECTORY);
             xmlConsumer.endPrefixMapping("");

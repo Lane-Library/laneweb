@@ -6,8 +6,14 @@ exclude-result-prefixes="h s" version="2.0">
 
 	<xsl:param name="manager"/>
 
-	<xsl:template match="/s:staff-directory/s:staff">
-	
+	<xsl:template match="/s:staff-directory">
+		<xsl:apply-templates select="s:staff">
+			<xsl:sort select="lower-case(s:last-name)" order="ascending"/>
+			<xsl:sort select="lower-case(s:first-name)" order="ascending"/>
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<xsl:template match="s:staff">
 		<xsl:if test=" $manager != 'true' or s:manager = 'TRUE'">
 		<div>
 			<xsl:attribute name="class">module</xsl:attribute>
