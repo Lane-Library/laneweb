@@ -42,7 +42,7 @@
 #previous-slide, #next-slide {
 	position: absolute;
 	display: block;
-	top: 140px;
+	top: 170px;
 	cursor: pointer;
 	color: #aabec6;
 }
