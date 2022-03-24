@@ -26,8 +26,10 @@
 }
 
 .popin {
-    height: 1em;
-    margin: 1em;
+   	margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .popInLabel {

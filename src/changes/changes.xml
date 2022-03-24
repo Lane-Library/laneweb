@@ -6,6 +6,14 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2022-03-21" version="3.10.5" description="bug fix and update release">
+			<action date="2022-03-16" dev="ryanmax" issue="LANEWEB-10913" type="fix">
+				Attachments not working on Contact Us form
+			</action>
+			<action date="2022-03-18" dev="ryanmax" issue="LANEWEB-10924" type="update">
+				Remove CIFDB search from history site	
+			</action>
+		</release>
 		<release date="2022-03-14" version="3.10.4" description="Pi day release">
 			<action date="2022-03-10" dev="ryanmax" issue="LANEWEB-10909" type="fix">
 				HTTPS mixed content errors on front page 
