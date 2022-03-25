@@ -17,10 +17,12 @@
 .slide {
 	display: inline-flex;
 	position: relative;
+	min-height: 170px;
+    width: 200px;
 }
 
 .slide img{
-	height: 270px;
+	width: 100%;
 }
 
 .slide.desactive-next {
