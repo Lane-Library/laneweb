@@ -241,19 +241,6 @@
         </xsl:attribute>
     </xsl:template>
 
-    <!-- add class="nav-menu-active" to .nav-menu li when the path matches -->
-    <xsl:template match="h:li[attribute::class='dropdown nav-menu']">
-        <xsl:variable name="is-active">
-            <xsl:if test="h:div[starts-with(@class,'dropdown-content nav-menu-content')]//h:a[starts-with(@href, $path)]">
-                <xsl:value-of select="' nav-menu-active'" />
-            </xsl:if>
-        </xsl:variable>
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, $is-active)" />
-            <xsl:apply-templates select=" child::node()" />
-        </xsl:copy>
-    </xsl:template>
-
     <!-- don't copy data-path attribute referenced above -->
     <xsl:template match="h:li/@data-path"/>
 
