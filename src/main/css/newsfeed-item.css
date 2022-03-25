@@ -6,7 +6,6 @@
 }
 
 .newsfeed {
-	margin-top: 8px;
 	line-height: 1.6em;
 	box-sizing: border-box;
 	background-color: #f0f4f5;
@@ -48,6 +47,8 @@
 @media ( max-width : 812px) {
 	.newsfeed {
 		width: 100%;
+	}
+	.newsfeed:not(:first-of-type) {	
 		margin-top: 24px;
 	}	    
 }

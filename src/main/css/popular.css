@@ -17,7 +17,6 @@
 	background-image: none;
 }
 
-
 .popular li {
 	border-bottom: none;
 }
@@ -35,9 +34,7 @@
 	color: #fff;
 }
 
-
-
-.top-resources{
+.top-resources {
 	line-height: 1.6em;
 	background-color: white;
 	color: black;
@@ -49,6 +46,7 @@
 .top-resources ul {
 	display: flex;
 	flex-wrap: wrap;
+	margin-top: -11px;
 }
 
 .top-resources li {
@@ -60,43 +58,44 @@
 	color: black;
 }
 
-
 @media ( max-width : 1100px) {
 	.top-resources:first-child span {
 		display: none;
 	}
-	
 	#mobile-menu-header.popular:target div.pure-u-1-2 {
 		width: 50%;
 		display: inline-block;
 	}
-	#mobile-menu-header.popular:target div.pure-g{
+	#mobile-menu-header.popular:target div.pure-g {
 		display: flex;
 	}
-	
-	
-	#mobile-menu-header.top-resources  ul,
-	#mobile-menu-header.top-resources:target ul {
+	#mobile-menu-header.top-resources  ul, #mobile-menu-header.top-resources:target ul
+		{
 		display: flex;
 		flex-flow: column wrap;
 		margin-left: 6%;
-    	height: 114px;
+		height: 114px;
+	}
+	#mobile-menu-header.top-resources h2 {
+		margin-bottom: 1.2em;
+		padding-bottom: 0.6em;
+		border-bottom: 1px solid #d8dbdc;
+	}
+	#mobile-menu-header.top-resources h2:before {
+		border-top: 3px solid #8C1515
 	}
 	.top-resources li {
 		flex: inherit;
 	}
-	
 	.popular .menu-toggle, .popular .menu-toggle i {
-	    background-color: grey;
-	    color: white;
+		background-color: grey;
+		color: white;
 	}
 	.popular  .menu-toggle {
 		top: -1px;
 		right: -1px;
 	}
 }
-
-
 
 @media ( max-width : 812px) {
 	.popular  .menu-toggle {
@@ -107,17 +106,25 @@
 		width: 100%;
 		display: block;
 	}
-
 	#mobile-menu-header.top-resources  ul {
-		display: none;		
+		display: none;
 	}
-	
-	#mobile-menu-header.top-resources:target ul ,
-	.top-resources:first-child span {
+	#mobile-menu-header.top-resources:target ul, .top-resources:first-child span
+		{
 		display: flex;
 		flex-flow: row wrap;
 		height: auto;
 	}
+	#mobile-menu-header.top-resources h2 {
+		margin-bottom: 0;
+		padding-bottom: 0;
+		border-bottom: none;
+	}
+	#mobile-menu-header.top-resources h2:before {
+		border-top: none;
+	}
+	
+	
 	.top-resource-container {
 		margin: 0 2em;
 	}
@@ -130,6 +137,4 @@
 	.top-resource-container .module {
 		padding: 1em;
 	}
-	
-	
 }
