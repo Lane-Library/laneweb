@@ -76,21 +76,6 @@
 		window.addEventListener("load", function() {
 			view.updateButton();
 			controller.calculateImageDisplayed();
-			// To load the images in lazy mode
-			var lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-				entries.forEach(function(entry) {
-					if (entry.isIntersecting) {
-						var lazyImage = entry.target;
-						lazyImage.src = lazyImage.dataset.src;
-						lazyImageObserver.unobserve(lazyImage);
-					}
-				});
-			});
-
-			model.slides.forEach(function(slide) {
-				lazyImageObserver.observe(slide.querySelector("[data-src]"));
-			});
-
 		}, false);
 
 		window.addEventListener("resize", function() {
