@@ -25,6 +25,16 @@
 			view = function() {
 				previousButton.className = "disable";
 				return {
+					loadImages: function(viewport) {
+						//This is mostly to not load the image in mobile view
+						if (viewport.nearView(container, 1.5)) {
+							model.slides.forEach(function(div) {
+								var img = div.querySelector("img");
+								img.src = img.dataset.src;
+							})
+						}
+					}
+					,
 					showSlide: function() {
 						model.slides[model.index].className = "slide";
 					},
@@ -71,7 +81,9 @@
 			}();
 
 
-
+		L.on(["viewport:init","viewport:scrolled"], function(event){
+			view.loadImages(event.viewport);
+		});
 
 		window.addEventListener("load", function() {
 			view.updateButton();
