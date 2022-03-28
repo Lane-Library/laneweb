@@ -27,7 +27,7 @@
 				return {
 					loadImages: function(viewport) {
 						//This is mostly to not load the image in mobile view
-						if (viewport.nearView(container, 1.5)) {
+						if (viewport.nearView(container, 2)) {
 							model.slides.forEach(function(div) {
 								var img = div.querySelector("img");
 								img.src = img.dataset.src;
