@@ -29,10 +29,6 @@
         </encoder>
     </appender>
 
-	 <logger name="edu.stanford.irt.laneweb.cookieConverter.UserCookieUpdatorFilter" additivity="false" level="INFO">
-        <appender-ref ref="console"/>  
-    </logger>
-
 	<root level="${LEVEL}">
 		<appender-ref ref="${APPENDER}" />
 	</root>
