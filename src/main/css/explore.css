@@ -9,6 +9,11 @@
 	display: flex;
 }
 
+/* IE explorer only */
+*::-ms-backdrop, :root .explore {
+	margin: 15px 0;
+	}
+
 .explore .icon {
 	background-color: #8c1515;
 	display: inline-block;

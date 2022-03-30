@@ -346,3 +346,12 @@ ul .nav-menu {
 	}
 
 }
+
+/* IE explorer double colunm  menu doesn't work  */
+*::-ms-backdrop, :root .dropdown:hover .nav-cols-content.dropdown-content{
+		display: block;
+	}
+*::-ms-backdrop, :root .login > .login-item-active {
+    display: inline-block;
+}
+ 

@@ -11,7 +11,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-content: center;
-	gap: 24px;
+	gap: 30px 24px;
 }
 
 .slide {
@@ -85,4 +85,11 @@
 	font-weight: 300;
 	padding-bottom: 12px;
 }
+/* IE explorer flex gap menu doesn't work  */ 
+*::-ms-backdrop, :root .slide{
+	padding: 21px 12px;	
+}
 
+*::-ms-backdrop, :root .staff-slide-show .slide div{
+	width: 180px;
+}
