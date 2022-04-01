@@ -295,8 +295,3 @@ li.active .description {
         float: right;
     }
 }
-@media ( max-width : 812px) {
-    .search-results .search-form {
-        margin: 0 12px;
-    }
-}
