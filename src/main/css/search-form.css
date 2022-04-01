@@ -236,12 +236,6 @@
 	width: 100%;
 }
 
-@media ( max-width : 1100px) {
-	.search-help,.search-pico.small-screen-hide.search-pico-active{
-		display: none;
-	}
-		
-}
 
 @media ( max-width : 812px) {
 	.hero-unit-front-page, .hero-unit {
@@ -253,6 +247,6 @@
 	}
 	.search-form {
 		width: 100%;
-		margin: 0 2em;
+		margin: 20px 2em 0;
 	}
 }
