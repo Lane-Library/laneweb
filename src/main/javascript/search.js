@@ -94,6 +94,10 @@ if (document.querySelector(".search-form"))  {
                     },
                     updateSource: function(source) {
                         sourceInput.value = source;
+                        if (facetsInput.value) {
+                            facetsInput.value = '';
+                            facetsInput.disabled = "disabled";
+                        }
                     }
                 };
 
