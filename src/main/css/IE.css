@@ -1,0 +1,112 @@
+
+*::-ms-backdrop, :root  i.fa, *::-ms-backdrop, :root  i.fa-solid{
+	padding: 0;
+	margin: 0;
+}
+
+*::-ms-backdrop, :root  i.fa:before, *::-ms-backdrop, :root  i.fa-solid:before, 
+*::-ms-backdrop, :root  i.fa-regular:before, *::-ms-backdrop, :root  i.fa-light:before 
+	{
+	content: "";
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-position-x: 50%;
+	background-position-y: 50%;
+	background-size: 50%;
+	background-repeat: no-repeat;
+}
+
+*::-ms-backdrop, :root   i.fa-bookmark:before {
+	background-image: url(/graphics/awesome-font-icons/bookmark-solid.svg);
+	position: absolute;
+}
+
+
+*::-ms-backdrop, :root  i.fa-magnifying-glass{
+	background-image: url(/graphics/awesome-font-icons/magnifying-glass-solid.svg);
+}
+
+*::-ms-backdrop, :root  i.fa-fast-backward:before {
+	content: "<<";	
+}
+
+*::-ms-backdrop, :root  i.fa-backward:before {
+	content: "<";
+}
+
+*::-ms-backdrop, :root  i.fa-fast-forward:before {
+	content: ">>";	
+}
+
+*::-ms-backdrop, :root  i.fa-forward:before {
+	content: ">";	
+}
+
+*::-ms-backdrop, :root   i.fa-book:before {
+	background-image: url(/graphics/awesome-font-icons/book-solid.svg);
+	position: absolute;
+}
+
+*::-ms-backdrop, :root   i.fa-books:before {
+	background-image: url(/graphics/awesome-font-icons/books-solid.svg);
+	position: absolute;
+}
+
+*::-ms-backdrop, :root   i.fa-database:before {
+	background-image: url(/graphics/awesome-font-icons/database-solid.svg);
+	position: absolute;
+}
+*::-ms-backdrop, :root   i.fa-map:before {
+	background-image: url(/graphics/awesome-font-icons/map-solid.svg);
+	position: absolute;
+}
+*::-ms-backdrop, :root   i.fa-angle-left:before {
+	background-image: url(/graphics/awesome-font-icons/angle-left-solid.svg);
+	content: "_";
+	color: white;
+	background-size: 100%;	
+}
+*::-ms-backdrop, :root  i.fa-angle-right:before {
+	background-image: url(/graphics/awesome-font-icons/angle-right-solid.svg);
+	content: "_";
+	color: white;
+	background-size: 100%;	
+}
+
+
+
+/* IE explorer double columns  menu doesn't work  */
+*::-ms-backdrop, :root .dropdown:hover .nav-cols-content.dropdown-content{
+		display: block;
+	}
+*::-ms-backdrop, :root .login > .login-item-active {
+    display: inline-block;
+}
+/* Explore module */
+*::-ms-backdrop, :root .explore {
+	margin: 15px 0;
+}
+
+/* Bookmarks home page */
+*::-ms-backdrop, :root .login > li .dropdown.favorites i{
+	padding:0px;
+	padding-right: 38px;
+}
+
+/* Slide show flex gap menu doesn't work  */ 
+*::-ms-backdrop, :root .slide{
+	padding: 12px;	
+}
+
+*::-ms-backdrop, :root .staff-slide-show .slide div{
+	width: 180px;
+}
+
+*::-ms-backdrop, :root .search-button{
+	width: 33px;
+}
+
+*::-ms-backdrop, :root .permalink{
+	padding-left: 24px;
+}

@@ -56,6 +56,7 @@
 		<link rel="stylesheet" type="text/css" href="/resources/css/contacts.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/css/explore.css" />
+		<link rel="stylesheet" type="text/css" href="/resources/css/IE.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/css/use-lane.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/css/subscription.css" />
 		<link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
