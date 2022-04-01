@@ -249,4 +249,8 @@
 		width: 100%;
 		margin: 20px 2em 0;
 	}
+	
+	.search-results .search-form {
+	    margin: 20px 12px 0;
+	}
 }
