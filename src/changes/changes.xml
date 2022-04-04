@@ -6,6 +6,14 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2022-04-04" version="3.11.0" description="bug fix and update release">
+			<action date="2021-04-09" dev="alainb" issue="LANEWEB-10701" type="fix">
+				Homepage Redesign
+			</action>
+			<action date="2022-03-23" dev="ryanmax" issue="LANEWEB-10929" type="fix">
+				spelling suggestions can be very long
+			</action>
+		</release>
 		<release date="2022-03-21" version="3.10.5" description="bug fix and update release">
 			<action date="2022-03-16" dev="ryanmax" issue="LANEWEB-10913" type="fix">
 				Attachments not working on Contact Us form
