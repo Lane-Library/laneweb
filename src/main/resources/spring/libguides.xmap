@@ -4,29 +4,23 @@
 >
    <map:pipeline type="caching">
    
-      <!-- ********* menu ********** -->
-     <!-- Get menu from https://laneguides.stanford.edu/ -->
-      <map:match pattern="remote-guides-menu.html" type="wildcard">
-         <map:generate type="html"   src="cache:60:{libguide-api-service-uri}"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/remote-guides-menu.xsl"/>               
+      <!-- ********* navigation menu ********** -->
+     
+      <map:match pattern="headers.html" type="wildcard">
+         <map:aggregate type="default" element="doc">
+            <map:generate type="html" src="cocoon://content/includes/template/header.html"/>
+            <map:generate type="html" src="cocoon://content/includes/template/navigation.html"/>
+         </map:aggregate>
+        <map:transform type="namespace-filter"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/headers.xsl"/>
          <map:serialize type="html5"/>
       </map:match>
       
-       <!-- Guides Menu display in laneweb -->
-      <map:match pattern="guides-menu.html" type="wildcard">
-         <map:aggregate type="default" element="doc">
-            <map:generate type="file" src="cocoon://libguides/remote-guides-menu.html"/>
-            <map:generate type="file" src="cocoon://content/includes/dropdownmenu-portals.html"/>
-         </map:aggregate>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-guides-menu.xsl"/>
-         <map:serialize type="xhtml"/>
-      </map:match>
-      
       <!-- Footer and navigation to display in https://laneguides.stanford.edu and lanecal.stanford.edu -->
-        <map:match pattern="includes/template/(footer|navigation)\.html" type="regexp">
+        <map:match pattern="includes/template/footer.html" type="regexp">
          <map:generate type="file" src="cocoon://content/{0}"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
-          <map:transform type="namespace-filter"/>
+         <map:transform type="namespace-filter"/>
          <map:serialize type="html5"/>
       </map:match>     
      

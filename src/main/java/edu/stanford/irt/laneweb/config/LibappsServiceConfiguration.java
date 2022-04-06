@@ -29,16 +29,6 @@ public class LibappsServiceConfiguration {
         return new ClassesStatusService(classesServiceURI, restService);
     }
 
-    @Bean("java.net.URI/libguide-api-service")
-    public URI guideApiServiceURI(@Value("${edu.stanford.irt.laneweb.libguide-api-service.scheme}") final String scheme,
-            @Value("${edu.stanford.irt.laneweb.libguide-api-service.host}") final String host,
-            @Value("${edu.stanford.irt.laneweb.libguide-api-service.port}") final int port,
-            @Value("${edu.stanford.irt.laneweb.libguide-api-service.path}") final String path,
-            @Value("${edu.stanford.irt.laneweb.libguide-api-service.query}") final String query)
-            throws URISyntaxException {
-        return new URI(scheme, null, host, port, path, query, null);
-    }
-
     @Bean("java.net.URI/libguide-service")
     public URI guideServiceURI(@Value("${edu.stanford.irt.laneweb.libguide-service.scheme}") final String scheme,
             @Value("${edu.stanford.irt.laneweb.libguide-service.host}") final String host,

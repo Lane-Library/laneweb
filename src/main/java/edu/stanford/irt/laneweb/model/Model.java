@@ -61,8 +61,6 @@ public final class Model {
 
     public static final String LIBCAL_SERVICE_URI = "libcal-service-uri";
 
-    public static final String LIBGUIDE_API_SERVICE_URI = "libguide-api-service-uri";
-
     public static final String LIBGUIDE_SERVICE_URI = "libguide-service-uri";
 
     public static final String LIMIT = "limit";
