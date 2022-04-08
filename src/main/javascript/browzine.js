@@ -34,13 +34,17 @@
 
                 // add PDF link search result nodes
                 update: function(article) {
-                    var fulltextUrl = article.data.fullTextFile,
+                    var retractionNoticeUrl = article.data.retractionNoticeUrl,
+                        fulltextUrl = article.data.fullTextFile,
                         contentLocation = article.data.contentLocation,
                         doi = article.data.doi ? article.data.doi.toLowerCase() : null,
                         coverImageUrl = (article.included[0] && article.included[0].coverImageUrl) ? article.included[0].coverImageUrl : null;
                     if (doiMap[doi]) {
                         doiMap[doi].fetched = true;
-                        if (fulltextUrl) {
+                        if (retractionNoticeUrl) {
+                            addFulltextLink(doiMap[doi],'xmark','Retracted Article',retractionNoticeUrl);
+                        }
+                        else if (fulltextUrl) {
                             addFulltextLink(doiMap[doi],'pdf','Direct to PDF',fulltextUrl);
                         }
                         else if (contentLocation) {
