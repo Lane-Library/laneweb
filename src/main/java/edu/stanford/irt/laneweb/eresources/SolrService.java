@@ -203,12 +203,6 @@ public class SolrService {
         return q;
     }
 
-    private SimpleFilterQuery buildFilterQuery(final String field, final String value) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(field).append(":\"").append(value).append('"');
-        return new SimpleFilterQuery(new SimpleStringCriteria(sb.toString()));
-    }
-
     private List<Eresource> cursorToList(final Cursor<Eresource> cursor) {
         List<Eresource> ers = new ArrayList<>();
         while (cursor.hasNext()) {
