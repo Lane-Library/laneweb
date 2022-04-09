@@ -8,7 +8,7 @@
 		var container = document.getElementById("slide-show"),
 			previousButton = document.getElementById("previous-slide"),
 			nextButton = document.getElementById("next-slide"),
-			padding = 24,
+			padding = 24, imagesLoaded = false,
 
 
 			model = function(slides) {
@@ -27,11 +27,12 @@
 				return {
 					loadImages: function(viewport) {
 						//This is mostly to not load the image in mobile view
-						if (viewport.nearView(container, 2)) {
+						if (viewport.nearView(container, 2) && !imagesLoaded) {
 							model.slides.forEach(function(div) {
 								var img = div.querySelector("img");
 								img.src = img.dataset.src;
 							})
+                            imagesLoaded = true;
 						}
 					}
 					,
