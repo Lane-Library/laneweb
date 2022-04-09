@@ -113,8 +113,9 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="starts-with($path,'/picosearch')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/bioimagesearch')">images-all</xsl:when>
+            <xsl:when test="contains($path,'/lanecatalog')">catalog-all</xsl:when>
+            <xsl:when test="contains($path,'/picosearch')">clinical-all</xsl:when>
+            <xsl:when test="contains($path,'/bioimagesearch')">images-all</xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -154,9 +155,6 @@
             </xsl:when>
             <xsl:when test=".='search-terms'">
                 <xsl:value-of select="$query"/>
-            </xsl:when>
-            <xsl:when test=".='mesh'">
-                <xsl:value-of select="$mesh"/>
             </xsl:when>
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>

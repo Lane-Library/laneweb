@@ -57,7 +57,7 @@
         </map:match>
         <!-- search.html -->
         <map:match pattern="search.html" type="wildcard">
-            <map:match type="regex-parameter" pattern="^all-all$">
+            <map:match type="regex-parameter" pattern="^(all-all|catalog-all)$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:generate type="file" src="cocoon://content/cached/search/solr/search.html"/>
                 <map:transform type="xinclude"/>

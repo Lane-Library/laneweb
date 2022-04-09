@@ -21,7 +21,7 @@ public class RequestParameterDataBinder implements DataBinder {
             { "i", Model.ITEMS } };
 
     private static final String[][] PARAMETER_MODEL = { { "q", Model.QUERY }, { "t", Model.TYPE }, { "a", Model.ALPHA },
-            { "m", Model.MESH }, { "f", Model.FACETS }, { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER },
+            { "f", Model.FACETS }, { "l", Model.LIMIT }, { "bn", Model.BASSETT_NUMBER },
             { "r", Model.REGION }, { "PID", Model.PID }, { "entryUrl", Model.ENTRY_URL },
             { "pl", Model.PERSISTENT_LOGIN }, { "p", Model.PICO_P }, { "i", Model.PICO_I }, { "c", Model.PICO_C },
             { "o", Model.PICO_O }, { "remove-pl", Model.REMOVE_PERSISTENT_LOGIN } };

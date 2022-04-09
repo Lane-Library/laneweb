@@ -72,6 +72,20 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var links = document.querySelectorAll("li[data-sid='pubmed-5'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("old", lastLink.getAttribute("href"))
+        },
+
+        "test 6: retracted": function() {
+            L.fire("viewport:scrolled", {
+                viewport: {
+                    nearView: function(node) {
+                        return node.dataset.sid === 'pubmed-6';
+                    }
+                }
+            });
+            var links = document.querySelectorAll("li[data-doi='10.6'] a"),
+                lastLink = links[links.length - 1];
+            Y.Assert.areEqual("retractionNoticeUrl", lastLink.getAttribute("href"))
+            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         }
 
 

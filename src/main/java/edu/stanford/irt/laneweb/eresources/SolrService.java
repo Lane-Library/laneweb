@@ -102,20 +102,6 @@ public class SolrService {
         return cursorToList(cursor);
     }
 
-    public List<Eresource> browseMeshByQuery(final String query, final String mesh) {
-        if (null == query) {
-            throw new IllegalArgumentException(NULL_QUERY);
-        }
-        if (null == mesh) {
-            throw new IllegalArgumentException("null mesh");
-        }
-        SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
-        q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(query)));
-        q.addFilterQuery(buildFilterQuery("mesh", mesh));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
-        return cursorToList(cursor);
-    }
-
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
             final int pageNumber, final int facetLimit, final int facetMinCount, final FacetSort facetSort) {
         PageRequest pageRequest = PageRequest.of(pageNumber, facetLimit);
@@ -215,12 +201,6 @@ public class SolrService {
         q.addFilterQuery(BASE_FQ);
         q.setTimeAllowed(Integer.MIN_VALUE);
         return q;
-    }
-
-    private SimpleFilterQuery buildFilterQuery(final String field, final String value) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(field).append(":\"").append(value).append('"');
-        return new SimpleFilterQuery(new SimpleStringCriteria(sb.toString()));
     }
 
     private List<Eresource> cursorToList(final Cursor<Eresource> cursor) {

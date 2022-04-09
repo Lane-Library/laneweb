@@ -37,6 +37,12 @@
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
+        <li class="resource" data-doi="10.6" data-sid="pubmed-6">
+            <div><a class="primaryLink" href="old">title 6</a></div>
+            <div class="bookcover"><i/></div>
+            <div class="resultInfo"></div>
+            <div class="sourceInfo"></div>
+        </li>
     </ul>
 
     <script type="text/javascript">
@@ -49,6 +55,9 @@
                 send: function () {
                     if (this.id == '10.4') {
                         this.responseText = '{"data":{"doi":"' + this.id + '","contentLocation": "contentLocation"},"included":[{"coverImageUrl":"cover-url"}]}';
+                    }
+                    else if (this.id == '10.6') {
+                        this.responseText = '{"data":{"doi":"' + this.id + '","retractionNoticeUrl": "retractionNoticeUrl"},"included":[{"coverImageUrl":"cover-url"}]}';
                     } else {
                         this.responseText = '{"data":{"doi":"' + this.id + '","fullTextFile": "fulltext-url"},"included":[{"coverImageUrl":"cover-url"}]}';
                     }

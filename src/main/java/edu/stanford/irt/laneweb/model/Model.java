@@ -67,8 +67,6 @@ public final class Model {
 
     public static final String LIVE_CHAT_AVAILABLE = "live-chat-available";
 
-    public static final String MESH = "mesh";
-
     public static final String MODEL = "model";
 
     public static final String NAME = "name";
