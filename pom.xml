@@ -74,12 +74,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.90.0</version>
+            <version>1.91.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.90.0</version>
+            <version>1.91.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -101,7 +101,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.2.2</version>
+            <version>3.2.3</version>
         </dependency>
         <dependency>
             <artifactId>javax.servlet-api</artifactId>
@@ -166,12 +166,12 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.33</version>
+            <version>1.0.34</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.1.14</version>
+            <version>1.1.15</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
@@ -275,7 +275,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.1.6.RELEASE</version>
+            <version>6.1.8.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
