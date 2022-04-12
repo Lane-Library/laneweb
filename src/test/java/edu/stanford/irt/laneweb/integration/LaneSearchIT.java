@@ -211,10 +211,10 @@ public class LaneSearchIT {
 
     @Test
     public void testLaneSearchMovementDisorder() throws Exception {
-        // movement disorder
+        // movement disorder; test that top results include "Movement disorder" and "Movement disorders" titles
         this.mockMvc.perform(get("/eresources/search.html?q=movement disorder").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@title,'Movement disorders')]",
+                        "//h:li[position() <= 20]//h:a[@class='primaryLink' and contains(@title,'Movement disorders')]",
                         this.ns).exists());
     }
 
