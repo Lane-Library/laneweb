@@ -115,7 +115,7 @@
 	color: #ccc;
 }
 
-.indented.fa-square-check, .indented .fa-square-o::before, .indented .fa-square-o::after
+.indented.fa-square-check, .indented .fa-square::before, .indented .fa-square::after
 	{
 	margin-left: 20px;
 }
