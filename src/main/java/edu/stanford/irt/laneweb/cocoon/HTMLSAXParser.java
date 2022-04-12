@@ -12,6 +12,7 @@ import edu.stanford.irt.cocoon.xml.ContentHandlerWrapper;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
 public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
 
@@ -56,7 +57,9 @@ public class HTMLSAXParser extends AbstractSAXParser implements SAXParser {
             inputSource.setSystemId(source.getURI());
             inputSource.setByteStream(source.getInputStream());
             parse(inputSource);
-        } catch (IOException | SAXException e) {
+        } catch (IOException ioe) {
+            throw new ResourceNotFoundException(ioe.getMessage());          
+        }catch(SAXException e) {
             throw new LanewebException(source.getURI(), e);
         }
     }

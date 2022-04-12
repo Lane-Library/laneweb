@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashSet;
@@ -31,7 +30,6 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
         this.sitemapController = sitemapController;
         this.noStackTraceThrowables = new HashSet<>();
         this.noStackTraceThrowables.add(ResourceNotFoundException.class);
-        this.noStackTraceThrowables.add(FileNotFoundException.class);
         this.noStackTraceThrowables.add(ClientAbortException.class);
         this.noStackTraceThrowables.add(URISyntaxException.class);
     }
@@ -47,6 +45,11 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
                 @Override
                 public String getServletPath() {
                     return "/error.html";
+                }
+                
+                @Override 
+                public String getMethod(){
+                    return "GET";
                 }
             };
             try {
