@@ -76,7 +76,7 @@ public class EresourceSAXStrategyTest {
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn("locationUrl");
         // link 2
-        expect(this.link.getType()).andReturn(LinkType.LANE_GETPASSWORD);
+        expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn("get password");
         expect(this.link.getUrl()).andReturn(Resource.URL);
         expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);

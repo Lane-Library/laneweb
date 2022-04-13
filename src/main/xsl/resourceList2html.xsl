@@ -181,7 +181,7 @@
                         <xsl:apply-templates select="s:pub-text"/>
                     </xsl:if>
                     <xsl:copy-of select="f:descriptionTrigger(.)"/>
-                    <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-getPassword' or @type = 'lane-impactFactor'])"/>
+                    <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital' or @type = 'lane-impactFactor'])"/>
                     <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)"/>
                 </xsl:when>
                 <xsl:when test="s:recordType = 'sul'">

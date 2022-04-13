@@ -8,8 +8,6 @@ public class Version {
 
     private String callnumber;
 
-    private boolean getPasswordLink;
-
     private String holdingsAndDates;
 
     private int[] itemCount;
@@ -62,10 +60,6 @@ public class Version {
         return this.summaryHoldings;
     }
 
-    public boolean hasGetPasswordLink() {
-        return this.getPasswordLink;
-    }
-
     public boolean isProxy() {
         return this.proxy;
     }
@@ -76,10 +70,6 @@ public class Version {
 
     public void setCallnumber(final String callnumber) {
         this.callnumber = callnumber;
-    }
-
-    public void setHasGetPasswordLink(final boolean getPasswordLink) {
-        this.getPasswordLink = getPasswordLink;
     }
 
     public void setHoldingsAndDates(final String holdingsAndDates) {

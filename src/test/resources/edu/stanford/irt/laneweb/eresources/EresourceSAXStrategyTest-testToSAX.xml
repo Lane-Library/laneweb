@@ -22,7 +22,7 @@
       <total>1</total>
       <available>1</available>
    </link>
-   <link type="lane-getPassword">
+   <link type="normal">
       <label>get password</label>
       <link-text>link-text</link-text>
       <url>url</url>

@@ -20,7 +20,6 @@ public class VersionAndLinkTest {
         this.version = new Version();
         this.version.setAdditionalText("versionText");
         this.version.setCallnumber("callnumber");
-        this.version.setHasGetPasswordLink(false);
         this.version.setHoldingsAndDates("holdingsAndDates");
         this.version.setItemCount(itemCount);
         this.version.setLinks(Collections.singletonList(this.link));
