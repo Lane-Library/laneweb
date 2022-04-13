@@ -34,7 +34,7 @@ if (document.querySelector(".search-form"))  {
                     // default suggest limit is mesh-di
                     var source = event.newVal,
                         limit;
-                    if (source.match(/^all/)) {
+                    if (source.match(/^(all|catalog)/)) {
                         limit = "er-mesh";
                     } else if (source.match(/^images/)) {
                         limit = "mesh";
