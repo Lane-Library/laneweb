@@ -213,7 +213,7 @@ li.active .description {
     padding-right: 10px;
 }
 
-.hldgsContainer td span, .getPassword {
+.hldgsContainer td span, .getPassword, .versionText {
     padding-right: 10px;
 }
 
