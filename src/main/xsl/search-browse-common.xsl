@@ -346,7 +346,7 @@
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource"/>
         <xsl:choose>
-            <xsl:when test="$eresource/s:primaryType != 'Other'"> Print</xsl:when>
+            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))"> Print</xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:function>
