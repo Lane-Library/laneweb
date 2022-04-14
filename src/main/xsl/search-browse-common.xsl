@@ -343,7 +343,8 @@
 
     <xsl:function name="f:isPrintRecordPointingToParent" as="xsd:boolean">
         <xsl:param name="eresource"/>
-        <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 and $eresource/s:link[1]/s:locationUrl"/>
+        <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 
+        and contains($eresource/s:link[1]/s:locationUrl,'/view/bib/')"/>
     </xsl:function>
 
 </xsl:stylesheet>
