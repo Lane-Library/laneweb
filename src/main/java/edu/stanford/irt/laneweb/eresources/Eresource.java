@@ -162,9 +162,7 @@ public class Eresource {
         Version v = l.getVersion();
         LinkType linkType = LinkType.NORMAL;
         String linkUrl = l.getUrl();
-        if (v.hasGetPasswordLink()) {
-            linkType = LinkType.LANE_GETPASSWORD;
-        } else if ("impact factor".equalsIgnoreCase(l.getLabel())) {
+        if ("impact factor".equalsIgnoreCase(l.getLabel())) {
             linkType = LinkType.LANE_IMPACTFACTOR;
         } else if ("sul".equals(this.recordType) && linkUrl != null
                 && linkUrl.contains("//searchworks.stanford.edu/view")) {

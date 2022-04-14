@@ -5,8 +5,8 @@ package edu.stanford.irt.laneweb.eresources;
  */
 public enum LinkType {
 
-    LANE_DIGITAL("lane-digital"), LANE_GETPASSWORD("lane-getPassword"), LANE_IMPACTFACTOR(
-            "lane-impactFactor"), LANE_PRINT("lane-print"), NORMAL("normal"), SUL_PRINT("sul-print");
+    LANE_DIGITAL("lane-digital"), LANE_IMPACTFACTOR("lane-impactFactor"), LANE_PRINT("lane-print"), NORMAL(
+            "normal"), SUL_PRINT("sul-print");
 
     private String type;
 

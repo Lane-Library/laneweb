@@ -11,10 +11,6 @@
     display: none;
 }
 
-#spellCheckLink {
-    padding-right: 25px;
-}
-
 .primaryLink {
     font-size: 1.125em;
 }
@@ -213,7 +209,7 @@ li.active .description {
     padding-right: 10px;
 }
 
-.hldgsContainer td span, .getPassword {
+.hldgsContainer td span, .versionText {
     padding-right: 10px;
 }
 

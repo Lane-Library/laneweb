@@ -1,63 +1,63 @@
 .solrFacets.module {
-	border: none;
-	background-color: inherit;
-	box-shadow: none;
-	padding: 12px;
+    border: none;
+    background-color: inherit;
+    box-shadow: none;
+    padding: 12px;
 }
 
 .solrFacets li {
-	padding: 0 5px;
-	border-bottom: 1px solid #e6e4dc;
-	clear: right;
+    padding: 0 5px;
+    border-bottom: 1px solid #e6e4dc;
+    clear: right;
 }
 
 .solrFacets li a {
-	display: block;
-	position: relative;
+    display: block;
+    position: relative;
 }
 
 .enabled .facetCount, .enabled .facetLabel {
-	color: #fff;
+    color: #fff;
 }
 
 .enabled a:active, .enabled a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .solrFacets .enabled, .facetBrowse .enabled {
-	padding: 1px 5px;
-	background-color: #333;
+    padding: 1px 5px;
+    background-color: #333;
 }
 
 .facetBrowse .enabled {
-	margin: 0 15px;
-	padding: 1px 5px;
-	border-bottom: 1px solid #e6e4dc;
+    margin: 0 15px;
+    padding: 1px 5px;
+    border-bottom: 1px solid #e6e4dc;
 }
 
 .facetBrowse li {
-	padding: 0 5px;
+    padding: 0 5px;
 }
 
 .solrFacets {
-	opacity: 0;
-	transition: opacity .5s;
+    opacity: 0;
+    transition: opacity .5s;
 }
 
 .solrFacets-active {
-	opacity: 1;
+    opacity: 1;
 }
 
 .facetBrowse {
-	min-width: 500px;
-	padding: 25px 0;
-	cursor: move;
-	border: 1px solid #ccc;
+    min-width: 500px;
+    padding: 25px 0;
+    cursor: move;
+    border: 1px solid #ccc;
 }
 
 .facetBrowse li, .facetBrowse .facetHeader {
-	padding-left: 20px;
-	padding-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .facetBrowse .facetHeader {
@@ -66,135 +66,133 @@
 }
 
 .facetBrowse h2 {
-	margin: 0 20px;
+    margin: 0 20px;
 }
 
 .facetBrowse li:first-child, .facetBrowse li:last-child {
-	background: none;
+    background: none;
 }
 
 .facetBrowse .s-pagination {
-	padding-top: 25px;
-	float: none;
-	text-align: center;
+    padding-top: 25px;
+    float: none;
+    text-align: center;
 }
 
 #searchFacets .solrFacet.facetHeader {
-	box-sizing: border-box;
-	height: 20px;
-	border-bottom: none;
-	text-transform: none;
-	padding: 0;
-	margin: 20px 0 5px;
-	font-weight: bold;
+    box-sizing: border-box;
+    height: 20px;
+    border-bottom: none;
+    text-transform: none;
+    padding: 0;
+    margin: 20px 0 5px;
+    font-weight: bold;
 }
 
 .facetHeader .fa-info-circle {
-	padding-left: 2px;
+    padding-left: 2px;
 }
 
 .facetHeader .seeAll {
-	font-weight: normal;
-	float: right;
-	padding: 0 10px 5px 0;
+    font-weight: normal;
+    float: right;
+    padding: 0 10px 5px 0;
 }
 
 .facetCount {
-	float: right;
-	padding-right: 5px;
-	color: black;
+    float: right;
+    padding-right: 5px;
+    color: black;
 }
 
 .solrFacets .fa-square-check, .solrFacets .fa-check-circle, .facetBrowse .fa-square-check
-	{
-	color: #fff;
+    {
+    color: #fff;
 }
 
-.solrFacets .fa-square, .facetBrowse .fa-square, .solrFacets .fa-circle
-	{
-	color: #ccc;
+.solrFacets .fa-square, .facetBrowse .fa-square, .solrFacets .fa-circle {
+    color: #ccc;
 }
 
-.indented.fa-square-check, .indented .fa-square-o::before, .indented .fa-square-o::after
-	{
-	margin-left: 20px;
+.indented.fa-square-check, .indented .fa-square::before, .indented .fa-square::after {
+    margin-left: 20px;
 }
 
 .solrFacets .fa-square::after, .facetBrowse .fa-square::after,
-	.solrFacets .fa-circle::after {
-	content: ' ';
-	position: absolute;
-	background-color: #fff;
-	height: 15px;
-	top: 5px;
-	left: 2px;
-	width: 14px;
-	z-index: -1;
+    .solrFacets .fa-circle::after {
+    content: ' ';
+    position: absolute;
+    background-color: #fff;
+    height: 15px;
+    top: 5px;
+    left: 2px;
+    width: 14px;
+    z-index: -1;
 }
 
 .facetLabel {
-	padding-left: 5px;
+    padding-left: 5px;
 }
 
 #solrLimits {
-	padding: 40px 0 0 12px;
+    padding: 40px 0 0 12px;
 }
 
 #solrLimits strong {
-	padding-right: 5px;
+    padding-right: 5px;
 }
 
 #solrLimits span {
-	padding: 0 15px 0 0;
-	display: inline-block;
+    padding: 0 15px 0 0;
+    display: inline-block;
 }
 
 #solrLimits .fa {
-	padding: 1px;
+    padding: 1px;
 }
 
 #solrLimits .fa-times-circle {
-	color: #8c1515;
-	padding: 5px;
+    color: #8c1515;
+    padding: 5px;
 }
 
 #solrLimits .fa-times-circle:hover {
-	color: #428bca;
+    color: #428bca;
 }
 
 #solrLimits span:nth-last-child(1) {
-	padding-left: 0;
-	padding-top: 10px;
-	display: block;
+    padding-left: 0;
+    padding-top: 10px;
+    display: block;
 }
 
 #solrAllCount {
-	display: none;
+    display: none;
 }
 
 @media ( max-width : 1100px) {
-	#searchFacets {
-		background-color: white;
-		margin-top: 24px;
-	    padding: 18px;
-	}
-	#searchFacets ul {
-		display: none;
-	}
-	#searchFacets .menu-toggle{
-	    top: 16px;
-    	right: 19px;
-	}
-	#searchFacets a:nth-child(2) {
-		display: none;
-	}
-	#searchFacets:target ul {
-		display: block;
-	}
-	#searchFacets:target span:first-child a:first-child {
-		display: none;
-	}
-	#searchFacets:target span:first-child a:nth-child(2) {
-		display: block;
-	}
+    #searchFacets {
+        background-color: white;
+        margin-top: 24px;
+        padding: 18px;
+    }
+    #searchFacets ul {
+        display: none;
+    }
+    #searchFacets .menu-toggle {
+        top: 16px;
+        right: 19px;
+    }
+    #searchFacets a:nth-child(2) {
+        display: none;
+    }
+    #searchFacets:target ul {
+        display: block;
+    }
+    #searchFacets:target span:first-child a:first-child {
+        display: none;
+    }
+    #searchFacets:target span:first-child a:nth-child(2) {
+        display: block;
+    }
 }

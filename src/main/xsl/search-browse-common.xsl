@@ -173,11 +173,6 @@
                     </a>
                 </span>
             </div>
-            <xsl:if test="$links[1]/@type = 'lane-getPassword'">
-                <span class="getPassword">
-                    <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
-                </span>
-            </xsl:if>
             <xsl:if test="$links[1]/s:version-text">
                 <span class="versionText">
                     <xsl:value-of select="$links[1]/s:version-text" />
@@ -223,11 +218,6 @@
                                             <xsl:text> </xsl:text>
                                         </a>
                                     </span>
-                                    <xsl:if test="@type = 'lane-getPassword'">
-                                        <span class="getPassword">
-                                            <a href="/secure/ejpw.html" title="Get Password"> Get Password</a>
-                                        </span>
-                                    </xsl:if>
                                     <xsl:if test="s:version-text">
                                         <span class="versionText">
                                             <xsl:value-of select="s:version-text" />
@@ -346,14 +336,15 @@
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource"/>
         <xsl:choose>
-            <xsl:when test="$eresource/s:primaryType != 'Other'"> Print</xsl:when>
+            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))"> Print</xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:function>
 
     <xsl:function name="f:isPrintRecordPointingToParent" as="xsd:boolean">
         <xsl:param name="eresource"/>
-        <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 and $eresource/s:link[1]/s:locationUrl"/>
+        <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 
+        and contains($eresource/s:link[1]/s:locationUrl,'/view/bib/')"/>
     </xsl:function>
 
 </xsl:stylesheet>

@@ -1,7 +1,7 @@
 #
 # maven maintenance
 #
-FROM gcr.io/som-laneweb/laneweb:latest AS PREVIOUS_IMAGE
+FROM gcr.io/som-laneweb/jre-parent:prod-latest
 COPY target/laneweb.war laneweb.war
 
 
