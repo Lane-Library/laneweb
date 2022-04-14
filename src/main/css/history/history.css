@@ -710,7 +710,7 @@ section.header a {
 }
 
 /* utility menu: for simplicity, hide nav including login, bookmarks, etc. */
-#navigation {
+#navigation, ul.login {
     display:none;
 }
 
