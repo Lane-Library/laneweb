@@ -173,15 +173,19 @@
                     </a>
                 </span>
             </div>
-            <xsl:if test="$links[1]/s:version-text">
-                <span class="versionText">
-                    <xsl:value-of select="$links[1]/s:version-text" />
-                </span>
-            </xsl:if>
-            <xsl:if test="$links[1]/s:additional-text">
-                <span class="additionalText">
-                    <xsl:value-of select="$links[1]/s:additional-text" />
-                </span>
+            <xsl:if test="$links[1]/s:version-text or $links[1]/s:additional-text">
+                <div>
+                    <xsl:if test="$links[1]/s:version-text">
+                        <span class="versionText">
+                            <xsl:value-of select="$links[1]/s:version-text" />
+                        </span>
+                    </xsl:if>
+                    <xsl:if test="$links[1]/s:additional-text">
+                        <span class="additionalText">
+                            <xsl:value-of select="$links[1]/s:additional-text" />
+                        </span>
+                    </xsl:if>
+                </div>
             </xsl:if>
         </xsl:if>
         <xsl:if test="count($links) > 1">
