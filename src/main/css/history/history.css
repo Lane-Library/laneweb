@@ -66,7 +66,7 @@ h1 i {
 #mhc-logo{
     position: absolute;
     top: 38px;
-    font-size: 0.75em;
+    font-size: .75em;
     left: 170px;
 }
 
@@ -643,96 +643,4 @@ http://lane.stanford.edu/samples/button-css.html
     bottom: 0;
 }
 
-
-
-/* FOOTER */
-
-/* override path to som image for history */
-.footer-organization .brand-som a {
-    background-image: url('../../images/som-H-logo.svg') !important;
-}
-.footer-organization .brand {
-    height: 65px;
-}
-
-/* Needed to add this section to place the  #mhc-logo evne at the same place  if the first header wrapped */
-.header-container{
-	position: relative;	
-}
-
-
-.lane-header  .btn.outline {
-	padding: 6px 17px;
-	font-size: 1em;
-	text-transform: uppercase;
-	font-weight: normal;
-}
-
-/* lane header */
-.lane-header {
-	background-color: white;
-	display: flex;
-	justify-content: space-between;
-	position: relative;
-}
-
-/* HEADER.css */
-
-
-header section, footer section, .content{
-	margin: auto;	
-}
-
-
-header:first-of-type{
- 	background-color: #8c1515;;
- 	color: white;
- }
-
-header:nth-of-type(2){
-	background: white;
-}
-
-
-header section {
-	padding: 0 33px;
-}
-
-section.header {
-	display: flex;
-	padding-top: 8px;
-	padding-bottom: 8px;
-	justify-content: space-between;
-}
-
-section.header a {
-	color: white;
-}
-
-/* utility menu: for simplicity, hide nav including login, bookmarks, etc. */
-#navigation, ul.login {
-    display:none;
-}
-
-/* Because the stanford image start with white 7 pixels */
-.lane-header .brand {
-	margin: 16px 0;
-	margin-left: -7px;
-}
-
-.lane-header .brand a {
-	display: block;
-}
-
-.brand a, .brand a:link, .brand a:focus, .brand a:visited {
-	background-image: url('../../images/sm-logo.svg');
-	background-repeat: no-repeat;
-	background-size: 50%;
-	padding: 0 0 0 142px;
-	color: #333333;
-	font-weight: 400;
-	text-decoration: none;
-	font-size: 1em;
-	height: 36px;
-}
 

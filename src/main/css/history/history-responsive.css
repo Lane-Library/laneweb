@@ -31,20 +31,6 @@
 	margin-right: 0px;
 }
 
-/* Menu for small and medium screen */
-.mobile-screen-menu.lrg-screen-hide {
-	display: flex;
-	flex-flow: row;
-	justify-content: space-around;
-	width: 100%;
-	bottom: 0px;
-	padding: 9px 0 24px;
-	position: sticky;
-	top: auto;
-	z-index: 1;
-	background: white;
-	box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
-}
 
 .mobile-screen-menu div {
 	text-align: center;

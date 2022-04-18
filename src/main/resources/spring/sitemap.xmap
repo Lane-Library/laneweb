@@ -56,6 +56,11 @@
                 <map:generate type="file" src="cocoon://content/templates/history.xml"/>
             </map:aggregate>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:select type="logged-in">
+                <map:when test="true">
+                    <map:transform type="xinclude"/>
+                </map:when>
+            </map:select>
             <map:transform type="namespace-filter"/>
             <map:serialize type="html5"/>
         </map:match>

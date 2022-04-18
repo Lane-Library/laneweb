@@ -559,12 +559,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
                             <includes>
-                                <include>../reset-min.css</include>
-                                <include>../pure-grids-min.css</include>
                                 <include>history-min.css</include>
-                                <include>../footer-min.css</include>
-                                <include>../back-to-top-min.css</include>
-                                <include>../responsive-min.css</include>
                                 <include>history-responsive-min.css</include>
                             </includes>
                         </aggregation>
