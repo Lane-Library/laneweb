@@ -1,7 +1,7 @@
 #
 # maven maintenance
 #
-FROM gcr.io/som-laneweb/jre-parent:prod-latest
+FROM gcr.io/som-laneweb/jre-parent:openjdk-11.0.14-jre-slim
 COPY target/laneweb.war laneweb.war
 
 
