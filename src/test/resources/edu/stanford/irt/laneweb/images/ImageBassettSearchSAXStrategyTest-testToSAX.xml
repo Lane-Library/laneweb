@@ -19,7 +19,7 @@
    <div style="display:none" class="tooltips">
       <span id="110-3Tooltip">
          <image src="//lane.stanford.edu/elane/public/L254573/medium/bassettSrc"
-                style="max-width: 300px;max-height: 240px"/>
+                 style="max-width: 300px;max-height: 240px"/>
       </span>
    </div>
 </body>

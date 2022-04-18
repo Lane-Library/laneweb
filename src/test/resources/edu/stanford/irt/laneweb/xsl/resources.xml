@@ -14,7 +14,7 @@
             <span class="primaryType">Article</span>
             <div>
                <a class="primaryLink"
-                  href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623">
+                   href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623">
                   <strong>Music</strong>al rhythm discrimination explains individual differences in grammar skills in children.</a>
             </div>
             <div class="author">Gordon RL, Shivers CM, Wieland EA, Kotz SA, Yoder PJ, Devin McAuley J.</div>
@@ -38,8 +38,8 @@
             </div>
             <div>
                <a class="primaryLink"
-                  href="http://link.springer.com/978-3-211-75120-6"
-                  title="Music that works">
+                   href="http://link.springer.com/978-3-211-75120-6"
+                   title="Music that works">
                   <strong>Music</strong> that works</a>
             </div>
             <div class="resultInfo">
@@ -55,7 +55,7 @@
                      <tr>
                         <th>Provider</th>
                         <th>Version <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                              title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
+                               title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
                         </th>
                      </tr>
                   </thead>
@@ -82,11 +82,11 @@
             </div>
             <div class="sourceInfo no-bookmarking">
                <span>Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=301866"
-                     title="Lane Catalog Record">Lane Catalog</a>
+                      title="Lane Catalog Record">Lane Catalog</a>
                </span>
                <span class="permalink">
                   <a title="click to copy a shareable link to this record"
-                     href="https://lane.stanford.edu/view/bib/301866">
+                      href="https://lane.stanford.edu/view/bib/301866">
                      <i class="fa-solid fa-link fa-sm fa-rotate-180"/> Get shareable link</a>
                </span>
             </div>
@@ -98,8 +98,8 @@
             </div>
             <div>
                <a class="primaryLink"
-                  href="http://impactfactor.org/"
-                  title="Music that works">
+                   href="http://impactfactor.org/"
+                   title="Music that works">
                   <strong>Music</strong> that works</a>
             </div>
             <div class="resultInfo">
@@ -115,7 +115,7 @@
                      <tr>
                         <th>Provider</th>
                         <th>Version <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                              title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
+                               title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
                         </th>
                      </tr>
                   </thead>
@@ -142,11 +142,11 @@
             </div>
             <div class="sourceInfo no-bookmarking">
                <span>Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=123"
-                     title="Lane Catalog Record">Lane Catalog</a>
+                      title="Lane Catalog Record">Lane Catalog</a>
                </span>
                <span class="permalink">
                   <a title="click to copy a shareable link to this record"
-                     href="https://lane.stanford.edu/view/bib/123">
+                      href="https://lane.stanford.edu/view/bib/123">
                      <i class="fa-solid fa-link fa-sm fa-rotate-180"/> Get shareable link</a>
                </span>
             </div>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <results xmlns="http://lane.stanford.edu/results/1.0"
-         page="1"
-         pages="1"
-         size="1"
-         start="1"
-         end="1"
-         total="1">
+          page="1"
+          pages="1"
+          size="1"
+          start="1"
+          end="1"
+          total="1">
    <resource id="id" hits="10" url="url" count="1"/>
    <result score="0" type="searchContent">
       <resourceId>id</resourceId>

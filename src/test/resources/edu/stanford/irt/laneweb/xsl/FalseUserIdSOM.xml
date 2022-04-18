@@ -10,7 +10,7 @@
             <i class="fa fa-bookmark"/> My Bookmarks</a>
          <div class="dropdown-content">
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                        href="cocoon://bookmarks/list.html">
+                         href="cocoon://bookmarks/list.html">
                <xi:fallback/>
             </xi:include>
          </div>
