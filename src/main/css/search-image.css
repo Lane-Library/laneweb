@@ -3,8 +3,7 @@
     margin-top: -5px;
     border: 6px solid;
     border-top: 0;
-    border-bottom: 0;
-    min-width: 1035px;
+    border-bottom: 0; 
 }
 
 #imageList {
@@ -14,6 +13,13 @@
     padding-right: 20px;
     margin-bottom: 15px;
     margin-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px 3px;
+    flex-flow: row wrap;
+}
+.imageContainer{
+	width: 230px;
 }
 
 #imageList:after {
@@ -81,9 +87,11 @@
     vertical-align: middle;
 }
 
-.imageDetail .image {
+#imageList .imageDetail img.image {
     margin: auto;
     display: block;
+    width: auto;
+    height: auto;
     max-width: 540px;
     max-height: 320px;
 }
@@ -92,6 +100,9 @@
     text-align: left;
     margin: 0 12px  12px 12px;
     background-color: #eee;
+    position: absolute;
+    left: 0;
+    z-index: 5;
 }
 
 .imageDetailHidden {
@@ -141,7 +152,8 @@
 }
 
 .result-summary {
-    padding: 10px 20px 16px 23px;
+	display: flex;
+    padding: 10px 20px 16px 23px; 
     height: 20px;
     box-sizing: content-box;
 }
@@ -167,7 +179,8 @@
 }
 
 .pagination {
-    float: right;
+    position: absolute;
+    right: 10px;
 }
 
 .pagination  .actived, .actived span, .actived label {
