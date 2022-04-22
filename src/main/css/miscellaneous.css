@@ -29,16 +29,6 @@ body, select, input, button, textarea {
     color: #79455c;
 }
 
-.menu-overlay {
-	display: none;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    opacity: .65;
-    top: 0;
-}
-
 p {
     margin-bottom: 12px;
     font-size: 1em;

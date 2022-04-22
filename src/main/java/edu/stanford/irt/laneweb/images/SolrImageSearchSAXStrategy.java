@@ -182,14 +182,8 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 		createImageDetailLabel(xmlConsumer, "copyright", "Rights Statement: ");
 		createImageDetailLabel(xmlConsumer, "article-title", "Article Title: ");
 		startDivWithClass(xmlConsumer, "to-image");
-		startAnchor(xmlConsumer, "");
-		atts = new AttributesImpl();
-		atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, BUTTON_CLASS);
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, BUTTON, atts);
-		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, new AttributesImpl());
+		startAnchorWithClass(xmlConsumer, HREF, BUTTON_CLASS + " to-source-page");
 		XMLUtils.data(xmlConsumer, "Visit Source Page");
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-		XMLUtils.endElement(xmlConsumer, XHTML_NS, BUTTON);
 		endAnchor(xmlConsumer);
 		endDiv(xmlConsumer);
 		endDiv(xmlConsumer);
@@ -396,6 +390,10 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, DIV, atts);
 		for (Image image : images) {
 			generateImages(xmlConsumer, image, index);
+		}
+		for (int i = 0 ; i < 6; i++ ) {
+		    startDivWithClass(xmlConsumer,"imageContainer empty");
+		    endDiv(xmlConsumer);
 		}
 		endDiv(xmlConsumer);
 		generateDetailImage(xmlConsumer);
