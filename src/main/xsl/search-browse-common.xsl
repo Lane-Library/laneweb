@@ -258,12 +258,15 @@
                         <span class="hldgsTrigger"/>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
-                                <a class="btn" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
+                                <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
                         <span class="hldgsHeader unavailable"><i class="fa-light fa-book"></i> <xsl:value-of select="f:itemTypeLabel($eresource)"/> Unavailable: Checked out</span>
+                        <span class="requestIt">
+                            <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.recall=true" rel="popup console 1020 800">Recall Item</a>
+                        </span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                         <span class="hldgsHeader"><i class="fa-light fa-book"></i> Access via <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults"><xsl:value-of select="$links[1]/s:locationName"/></a></span>
