@@ -60,7 +60,7 @@ public class SolrImageSearchGeneratorTest {
         assertEquals("/search.html?q=query&source=cc-", result.getPath());
         assertEquals("query", result.getQuery());
         assertEquals("Broad Reuse Rights", result.getTab());
-        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
@@ -79,7 +79,7 @@ public class SolrImageSearchGeneratorTest {
         assertEquals("/search.html?q=query&source=images-", result.getPath());
         assertEquals("query", result.getQuery());
         assertEquals("Maximum Reuse Rights", result.getTab());
-        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
@@ -98,7 +98,7 @@ public class SolrImageSearchGeneratorTest {
         assertEquals("/search.html?q=query&source=pmc-", result.getPath());
         assertEquals("query", result.getQuery());
         assertEquals("Possible Reuse Rights", result.getTab());
-        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
@@ -117,7 +117,7 @@ public class SolrImageSearchGeneratorTest {
         assertEquals("/search.html?q=query&source=rl-", result.getPath());
         assertEquals("query", result.getQuery());
         assertEquals("Restrictive Reuse Rights", result.getTab());
-        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
@@ -131,7 +131,7 @@ public class SolrImageSearchGeneratorTest {
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
-        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
@@ -146,7 +146,7 @@ public class SolrImageSearchGeneratorTest {
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         this.generator.doSearch("query");
-        assertEquals(52, pageable.getValue().getPageSize());
+        assertEquals(50, pageable.getValue().getPageSize());
         assertEquals(1, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }

@@ -124,7 +124,13 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 		atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
-		XMLUtils.data(xmlConsumer, " " + text);
+		atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "small-screen-hide");
+		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+		XMLUtils.data(xmlConsumer, " "+ text);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
+		
+		
 		XMLUtils.endElement(xmlConsumer, XHTML_NS, ANCHOR);
 	}
 
@@ -136,7 +142,11 @@ public class SolrImageSearchSAXStrategy extends AbstractXHTMLSAXStrategy<SolrIma
 			atts.addAttribute(EMPTY, HREF, HREF, CDATA, href);
 		}
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, ANCHOR, atts);
-		XMLUtils.data(xmlConsumer, text + " ");
+		atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "small-screen-hide");
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
+        XMLUtils.data(xmlConsumer, text +" ");
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SPAN);
 		atts = new AttributesImpl();
 		atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, faClass + " " + NO_BOOKMARKING);
 		XMLUtils.startElement(xmlConsumer, XHTML_NS, SPAN, atts);
