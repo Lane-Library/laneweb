@@ -28,7 +28,7 @@ public class SolrImageSearchGenerator extends AbstractSearchGenerator<SolrImageS
     private static final String[] TAB_CONTENT = { "Maximum Reuse Rights", "Broad Reuse Rights", "Possible Reuse Rights",
             "Restrictive Reuse Rights" };
 
-    private static final int TOTAL_ELEMENT_BY_PAGE = 52;
+    private static final int TOTAL_ELEMENT_BY_PAGE = 50;
 
     protected String basePath;
 

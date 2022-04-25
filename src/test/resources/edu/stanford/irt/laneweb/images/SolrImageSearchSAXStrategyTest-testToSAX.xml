@@ -4,9 +4,13 @@
       <div class="result">105 to 106 of 106 results</div>
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-fast-backward no-bookmarking"/> First</a>
+            <span class="fa-solid fa-fast-backward no-bookmarking"/>
+            <span class="small-screen-hide"> First</span>
+         </a>
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
-            <span class="fa-solid fa-step-backward no-bookmarking"/> Previous</a>
+            <span class="fa-solid fa-step-backward no-bookmarking"/>
+            <span class="small-screen-hide"> Previous</span>
+         </a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -16,30 +20,36 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">Next <span class="fa-solid fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">
+            <span class="small-screen-hide">Next </span>
+            <span class="fa-solid fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">Last <span class="fa-solid fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">
+            <span class="small-screen-hide">Last </span>
+            <span class="fa-solid fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>
    <div id="imageList">
-      <div class="pure-g">
-         <div class="pure-u-1-5">
-            <div id="id/andSlash" row="0">
-               <a href="pageUrl" class="noproxy">
-                  <img src="thumbnailSrc"/>
-               </a>
-               <div id="imagedecorator" class="imagedecoHidden"> </div>
-            </div>
+      <div class="imageContainer">
+         <div id="id/andSlash" imgIndex="0">
+            <a href="pageUrl" class="noproxy">
+               <img src="thumbnailSrc"/>
+            </a>
+            <div id="imagedecorator" class="imagedecoHidden"> </div>
          </div>
       </div>
+      <div class="imageContainer empty"/>
+      <div class="imageContainer empty"/>
+      <div class="imageContainer empty"/>
+      <div class="imageContainer empty"/>
+      <div class="imageContainer empty"/>
+      <div class="imageContainer empty"/>
    </div>
-   <div class="imageDetailHidden"
-         style="width:auto; height:auto; min-height:350px;"
-         id="imageDetail_0">
+   <div class="imageDetailHidden" id="imageDetail">
       <div id="image-detail-close"
             class="image-detail-close close fa-solid fa-close"/>
-      <div style="margin-top:-29px">
+      <div>
          <div class="pure-g">
             <div class="pure-u-3-5">
                <div class="gr">
@@ -64,11 +74,7 @@
                      <p/>
                   </div>
                   <div class="to-image">
-                     <a href="">
-                        <button class="btn alt">
-                           <span>Visit Source Page</span>
-                        </button>
-                     </a>
+                     <a class="btn alt to-source-page" href="href">Visit Source Page</a>
                   </div>
                </div>
             </div>
@@ -78,9 +84,13 @@
    <div class="result-summary">
       <div class="pagination">
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-fast-backward no-bookmarking"/> First</a>
+            <span class="fa-solid fa-fast-backward no-bookmarking"/>
+            <span class="small-screen-hide"> First</span>
+         </a>
          <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
-            <span class="fa-solid fa-step-backward no-bookmarking"/> Previous</a>
+            <span class="fa-solid fa-step-backward no-bookmarking"/>
+            <span class="small-screen-hide"> Previous</span>
+         </a>
          <label>Page </label>
          <form class="pagingForm" name="paginationForm">
             <input type="hidden" value="source" name="source"/>
@@ -90,9 +100,13 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">Next <span class="fa-solid fa-step-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">
+            <span class="small-screen-hide">Next </span>
+            <span class="fa-solid fa-step-forward no-bookmarking"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">Last <span class="fa-solid fa-fast-forward no-bookmarking"/>
+         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">
+            <span class="small-screen-hide">Last </span>
+            <span class="fa-solid fa-fast-forward no-bookmarking"/>
          </a>
       </div>
    </div>

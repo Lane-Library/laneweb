@@ -30,7 +30,7 @@ public class SolrAdminImageSearchSAXStrategy extends SolrImageSearchSAXStrategy 
             atts.addAttribute(EMPTY, CLASS, CLASS, CDATA, "admin");
         }
         atts.addAttribute(EMPTY, ID, ID, CDATA, image.getId());
-        atts.addAttribute(EMPTY, "row", "row", CDATA, String.valueOf(imageNumber / IMAGE_BY_ROW));
+        atts.addAttribute(EMPTY, "imgIndex", "imgIndex", CDATA, String.valueOf(imageNumber));
         XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY, HREF, HREF, CDATA, image.getPageUrl());

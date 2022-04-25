@@ -22,51 +22,58 @@
         });
 
         // To hide the images if there is an error 
-        document.querySelectorAll('#imageList img').forEach(function(img){
-          	img.onerror = function(){
-          		var level = 3,  el = this;
-          		while((--level >=0 ) && el){
-          	        el = el.parentNode;
-          	    }
-          		el.style.display='none'};
+        document.querySelectorAll('#imageList img').forEach(function(img) {
+            img.onerror = function() {
+                var level = 3, el = this;
+                while ((--level >= 0) && el) {
+                    el = el.parentNode;
+                }
+                el.style.display = 'none'
+            };
         })
-        
+
         //On click on Image to open the imageDetail
-        document.querySelectorAll('#imageList  div[row]').forEach(function(node) {
+        document.querySelectorAll('#imageList  div[imgIndex]').forEach(function(node) {
             node.addEventListener('click', function(e) {
                 var div = e.currentTarget,
-                    row = div.getAttribute("row"),
                     id = div.id;
 
                 L.io(BASE_PATH + "/image?id=" + id, {
-                    on : {
-                        success : successHandler
+                    on: {
+                        success: successHandler
                     },
-                    "arguments" : {
-                        row : row,
-                        div : div
+                    "arguments": {
+                        div: div
                     }
                 });
                 e.stopPropagation();
                 e.preventDefault();
-        });
+            });
         });
 
         //To close the image detail
-        document.querySelectorAll("#image-detail-close").forEach(function(node) {
-            node.addEventListener("click", cleanDetailImageWindow);
+        document.querySelectorAll("#image-detail-close,.img-overlay").forEach(function(node) {
+            node.addEventListener("click", function(e) {
+                cleanDetailImageWindow();
+                e.stopPropagation();
+                e.preventDefault();
+            });
         });
+        
+        
+        document.querySelector(".to-source-page").addEventListener("click", function(e){
+           e.stopPropagation();
+        })
 
-        
-        
+
         //Admin on click on the id
         document.querySelectorAll(".imagedeco-admin").forEach(function(node) {
             node.addEventListener("click", function(e) {
                 var href = e.target.href;
                 L.io(href, {
-                    on : {
-                        success : confirmAdminAction
-                        }
+                    on: {
+                        success: confirmAdminAction
+                    }
                 });
                 e.stopPropagation();
                 e.preventDefault();
@@ -74,15 +81,15 @@
         });
     }
 
-    function confirmAdminAction(unused, o){
+    function confirmAdminAction(unused, o) {
         var image = JSON.parse(o.responseText),
-        id = "#" .concat(image.id.split('.').join('\\.').split('/').join('\\/')),
-        div = document.querySelector( id);
-        if(image.enable){
+            id = "#".concat(image.id.split('.').join('\\.').split('/').join('\\/')),
+            div = document.querySelector(id);
+        if (image.enable) {
             div.classList.remove('admin-disable');
             div.classList.add('admin-enable');
 
-        }else{
+        } else {
             div.classList.remove('admin-enable');
             div.classList.add('admin-disable');
         }
@@ -90,22 +97,19 @@
 
     function successHandler(id, o, args) {
         var image = JSON.parse(o.responseText),
-            row = args.row,
             div = args.div,
-            imageDetail = document.querySelector("#imageDetail_" + row);
-        cleanDetailImageWindow();
-
+            imageDetail = document.querySelector("#imageDetail");
+        document.querySelector('.img-overlay').style.display = 'block';
         imageDetail.querySelector(".image").setAttribute("src", image.src);
         imageDetail.querySelector("h3").innerHTML = image.shortTitle + "&nbsp;";
-        if (undefined !== image.description) {
+        if (null != image.description && '' != image.description) {
             imageDetail.querySelector(".desc p").innerHTML = image.shortDescription;
         }
-
-        if (undefined !== image.articleTitle) {
+        if (null != image.articleTitle && '' != image.articleTitle) {
             imageDetail.querySelector(".article-title").removeAttribute("hidden");
             imageDetail.querySelector(".article-title").style.display = "";
             imageDetail.querySelector(".article-title p").innerHTML = image.shortArticleTitle;
-        }else{
+        } else {
             imageDetail.querySelector(".article-title").hidden = "hidden";
             imageDetail.querySelector(".article-title").style.display = "none";
         }
@@ -113,25 +117,21 @@
         imageDetail.querySelector(".copyright p").innerHTML = image.shortCopyrightText;
         imageDetail.querySelector(".to-image a").href = image.pageUrl;
 
-        div.querySelector("#imagedecorator").classList.remove('imagedecoHidden');
-        div.querySelector("#imagedecorator").classList.add('imagedeco');
+
         imageDetail.classList.remove('imageDetailHidden');
         imageDetail.classList.add('imageDetail');
-        if(row > 1){
-            div = document.querySelector('div[row = "'+(row-1)+'"]');
-            window.location.hash = "#"+encodeURIComponent(div.id);
-        }
+
+        div.appendChild(imageDetail);
+        window.location.hash = "#" + encodeURIComponent(div.id);
+
     }
 
-    function cleanDetailImageWindow(){
-        document.querySelectorAll(".imageDetail").forEach(function(node) {
-            node.classList.remove('imageDetail');
-            node.classList.add('imageDetailHidden');
-        });
-        document.querySelectorAll(".imagedeco").forEach(function(node) {
-            node.classList.remove('imagedeco');
-            node.classList.add('imagedecoHidden');
-        });
+    function cleanDetailImageWindow() {
+        var div = document.querySelector(".imageDetail");
+        div.classList.remove('imageDetail');
+        div.querySelector(".image").setAttribute("src", '');
+        div.classList.add('imageDetailHidden');
+        document.querySelector('.img-overlay').style.display = 'none';
     }
 
 })();
