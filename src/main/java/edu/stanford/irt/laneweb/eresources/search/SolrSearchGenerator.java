@@ -27,7 +27,7 @@ import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
 
 public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> {
 
-    private static final int DEFAULT_RESULTS = 50;
+    private static final int DEFAULT_RESULTS = 20;
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
 

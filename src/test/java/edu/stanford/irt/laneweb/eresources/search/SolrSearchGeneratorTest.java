@@ -50,7 +50,7 @@ public class SolrSearchGeneratorTest {
         this.generator.setModel(this.model);
         SolrSearchResult result = this.generator.doSearch("query");
         assertEquals("query", result.getQuery());
-        assertEquals(50, pageable.getValue().getPageSize());
+        assertEquals(20, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         assertEquals(Sort.unsorted(), pageable.getValue().getSort());
         verify(this.service, this.saxStrategy);
@@ -66,7 +66,7 @@ public class SolrSearchGeneratorTest {
         this.generator.setModel(this.model);
         SolrSearchResult result = this.generator.doSearch("query");
         assertEquals("query", result.getQuery());
-        assertEquals(50, pageable.getValue().getPageSize());
+        assertEquals(20, pageable.getValue().getPageSize());
         assertEquals(4, pageable.getValue().getPageNumber());
         verify(this.service, this.saxStrategy);
     }
@@ -83,7 +83,7 @@ public class SolrSearchGeneratorTest {
         this.generator.setModel(this.model);
         SolrSearchResult result = this.generator.doSearch("query");
         assertEquals("query", result.getQuery());
-        assertEquals(50, pageable.getValue().getPageSize());
+        assertEquals(20, pageable.getValue().getPageSize());
         assertEquals(0, pageable.getValue().getPageNumber());
         assertEquals("authors_sort: ASC,title_sort: ASC", pageable.getValue().getSort().toString());
         verify(this.service, this.saxStrategy);
