@@ -357,9 +357,8 @@
 	}
 	.search-image-content .dropdown:hover .dropdown-content {
 		position: absolute;
-		left: 0px;
 		top: 25px;
-		width: 100%;
+	    right: auto;
 	}
 	#imageList .imageDetail img.image {
 		max-width: 67%;
