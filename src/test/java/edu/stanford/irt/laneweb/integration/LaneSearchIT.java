@@ -113,8 +113,8 @@ public class LaneSearchIT {
 
     @Test
     public void testLaneSearchCitationManager() throws Exception {
-        // citation manager
-        this.mockMvc.perform(get("/eresources/search.html?q=citation manager").servletPath("/eresources/search.html"))
+        // reference management
+        this.mockMvc.perform(get("/eresources/search.html?q=reference management").servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
