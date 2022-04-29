@@ -63,13 +63,7 @@
             <map:match pattern="search/flickr.xml" type="wildcard">
                 <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key={flickr-token}&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
                 <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="search/browzine/doi/(10.\\d+/[-._;()/:a-zA-Z0-9]+)" type="regexp">
-                <map:generate type="html" src="https://public-api.thirdiron.com/public/v1/libraries/1462/articles/doi/{1}?include=journal&amp;access_token={browzine-token}"/>
-                <map:serialize type="text">
-                    <map:parameter name="media-type" value="application/json"/>
-                </map:serialize>
-            </map:match>
+            </map:match>          
         </map:match>
         <map:match pattern="search.xml" type="wildcard">
             <map:generate type="search-engine"/>

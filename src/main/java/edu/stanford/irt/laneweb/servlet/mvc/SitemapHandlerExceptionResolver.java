@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.stanford.irt.laneweb.BrowzineException;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
@@ -46,9 +47,9 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
                 public String getServletPath() {
                     return "/error.html";
                 }
-                
-                @Override 
-                public String getMethod(){
+
+                @Override
+                public String getMethod() {
                     return "GET";
                 }
             };
@@ -62,7 +63,9 @@ public class SitemapHandlerExceptionResolver implements HandlerExceptionResolver
     }
 
     private void logException(final Throwable throwable) {
-        if (this.noStackTraceThrowables.contains(throwable.getClass())) {
+        if (BrowzineException.class.equals(throwable.getClass())) {
+            log.info("{} {}", throwable.getClass().getName(), throwable.getMessage());
+        } else if (this.noStackTraceThrowables.contains(throwable.getClass())) {
             if (log.isWarnEnabled()) {
                 log.warn(throwable.toString());
             }
