@@ -27,7 +27,7 @@ public class BrowzineController {
 
     private static final String BROWZINE_PATH = "/apps/browzine/";
 
-    @GetMapping(value = BROWZINE_PATH + "**")
+    @GetMapping(value = BROWZINE_PATH + "**", produces = "application/json")
     @ResponseBody
     public String getDoi(HttpServletRequest req) {
         String requestUrl = req.getRequestURL().toString();
