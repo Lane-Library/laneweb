@@ -7,11 +7,12 @@
     var initializeHoldingsToggles = function() {
         var triggers = document.querySelectorAll(".hldgsTrigger");
         triggers.forEach(function(node) {
-            // show holdings table when only one row present
+            // show holdings table when only one row present or the record contains version/access notes
             // otherwise, show "view all" trigger
             var ancestor = node.closest("div"), 
-                holdingsRows = ancestor.querySelectorAll("tbody tr");
-            if (holdingsRows.length == 1) {
+                holdingsRows = ancestor.querySelectorAll("tbody tr"),
+                hasNotes = ancestor.querySelectorAll(".additionalText,.versionText").length > 0;
+            if (holdingsRows.length == 1 || hasNotes) {
                 ancestor.querySelector('table').style.display = 'block';
                 node.style.display = 'none';
             }

@@ -12,7 +12,7 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ClinicalSearchResultsFactory {
 
-    private static final int RESULTS_PER_PAGE = 50;
+    private static final int RESULTS_PER_PAGE = 20;
 
     private ContentResultConversionStrategy conversionStrategy;
 
