@@ -1,11 +1,11 @@
 /* This file has rules that don't seem to fit anywhere else */
 body, select, input, button, textarea {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif, Arial;
 }
 
 /*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
 .pure-g [class^='pure-u'] {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif, Arial;
 }
 
 .scaled-image {
