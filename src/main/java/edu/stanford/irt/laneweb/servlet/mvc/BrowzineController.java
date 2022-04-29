@@ -52,7 +52,6 @@ public class BrowzineController {
 
     @Value("${edu.stanford.irt.laneweb.browzine-url}")
     public void setBrowzineUrl( String browzineUrl) {
-        System.out.println(browzineUrl);
         this.browzineUrl = browzineUrl;
     }
 }
