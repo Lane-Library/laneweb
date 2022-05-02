@@ -74,7 +74,7 @@
         // service to communicate with the server to fetch article data for each DOI
         articleLookupService = function() {
 
-            var baseURL = window.model["base-path"] + "/apps/search/browzine/doi/",
+            var baseURL = window.model["base-path"] + "/apps/browzine/doi/",
 
                 service = {
 
