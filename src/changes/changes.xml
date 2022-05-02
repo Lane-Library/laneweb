@@ -13,7 +13,7 @@
             <action date="2022-04-29" dev="ryanmax" issue="LANEWEB-10954" type="fix">
                 Garbled unicode characters displaying
             </action>
-            <action date="2022-04-12" dev="ryanmax" issue="LANEWEB-10976" type="update">
+            <action date="2022-04-12" dev="ryanmax" issue="LANEWEB-10937" type="update">
                 Add a recall button on checked out print items
             </action>
             <action date="2022-04-18" dev="ryanmax" issue="LANEWEB-10948" type="fix">
