@@ -6,6 +6,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2022-05-02" version="3.11.3" description="bug fix and update release">
+            <action date="2022-04-16" dev="alainb" issue="LANEWEB-10914" type="fix">
+                Exceptions sometimes not logged
+            </action>
+            <action date="2022-04-29" dev="ryanmax" issue="LANEWEB-10954" type="fix">
+                Garbled unicode characters displaying
+            </action>
+            <action date="2022-04-12" dev="ryanmax" issue="LANEWEB-10976" type="update">
+                Add a recall button on checked out print items
+            </action>
+            <action date="2022-04-18" dev="ryanmax" issue="LANEWEB-10948" type="fix">
+                Source info not wrapping in search results
+            </action>
+            <action date="2022-04-27" dev="ryanmax" issue="LANEWEB-10952" type="update">
+                Reduce Lane Search and Clinical Search results to 20 per page
+            </action>
+            <action date="2022-04-15" dev="ryanmax" issue="LANEWEB-10955" type="fix">
+                Image search on mobile
+            </action>
+        </release>
         <release date="2022-04-17" version="3.11.2" description="bug fix and update release">
             <action date="2022-04-16" dev="alainb" issue="LANEWEB-10914" type="fix">
                 Exceptions sometimes not logged
@@ -794,7 +814,8 @@
         </release>
         <release date="2020-03-02" version="3.5.62" description="bug fix release">
             <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10545" type="update">
-                Tomcat 9.0.31 changes the default AJP connector behavior. This is a breaking change for laneweb and will require config
+                Tomcat 9.0.31 changes the default AJP connector behavior. This is a breaking change for laneweb and will require
+                config
                 changes.
             </action>
             <action date="2020-02-27" dev="ryanmax" issue="LANEWEB-10546" type="update">
