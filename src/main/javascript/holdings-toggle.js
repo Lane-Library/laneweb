@@ -5,14 +5,16 @@
     var HTML = "<a href=\"#\">View All <i class=\"fa-regular fa-angles-down fa-xs\"></i></a>";
 
     var initializeHoldingsToggles = function() {
-        var triggers = document.querySelectorAll(".hldgsTrigger");
+        var triggers = document.querySelectorAll(".hldgsTrigger"),
+            searchResultCount = searchResults.querySelectorAll('li').length;
         triggers.forEach(function(node) {
-            // show holdings table when only one row present or the record contains version/access notes
+            // show holdings table when:
+            //  - only one search result OR
+            //  - result has only one row present in the holdings table
             // otherwise, show "view all" trigger
             var ancestor = node.closest("div"), 
-                holdingsRows = ancestor.querySelectorAll("tbody tr"),
-                hasNotes = ancestor.querySelectorAll(".additionalText,.versionText").length > 0;
-            if (holdingsRows.length == 1 || hasNotes) {
+                holdingsRows = ancestor.querySelectorAll("tbody tr");
+            if (holdingsRows.length == 1 || searchResultCount == 1) {
                 ancestor.querySelector('table').style.display = 'block';
                 node.style.display = 'none';
             }

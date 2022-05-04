@@ -49,36 +49,12 @@
             <div class="hldgsContainer no-bookmarking">
                <span class="hldgsHeader available">
                   <i class="fa-solid fa-link-horizontal fa-sm"/> Digital Access  </span>
-               <span class="hldgsTrigger"/>
-               <table class="hide-empty-columns">
-                  <thead>
-                     <tr>
-                        <th>Provider</th>
-                        <th>Version <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                               title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
-                        </th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td>Springer</td>
-                        <td>
-                           <span>
-                              <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">2009 </a>
-                           </span>
-                           <span class="additionalText">instruction</span>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td>Impact Factor</td>
-                        <td>
-                           <span>
-                              <a href="http://impactfactor.org/" title="Impact Factor">Impact Factor </a>
-                           </span>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
+               <span>
+                  <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">Springer 2009</a>
+               </span>
+            </div>
+            <div>
+               <span class="additionalText">instruction</span>
             </div>
             <div class="sourceInfo no-bookmarking">
                <span>Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=301866"
@@ -88,6 +64,11 @@
                   <a title="click to copy a shareable link to this record"
                       href="https://lane.stanford.edu/view/bib/301866">
                      <i class="fa-solid fa-link fa-sm fa-rotate-180"/> Get shareable link</a>
+               </span>
+               <span class="impactFactor">
+                  <a title="journal profile from Journal Citation Reports"
+                      href="http://impactfactor.org/">
+                     <i class="fa-duotone fa-chart-simple"/> Journal Impact Factor</a>
                </span>
             </div>
          </li>
@@ -109,36 +90,12 @@
             <div class="hldgsContainer no-bookmarking">
                <span class="hldgsHeader available">
                   <i class="fa-solid fa-link-horizontal fa-sm"/> Digital Access  </span>
-               <span class="hldgsTrigger"/>
-               <table class="hide-empty-columns">
-                  <thead>
-                     <tr>
-                        <th>Provider</th>
-                        <th>Version <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                               title="Look here for issue, volume, and year information about the items in Lane                                      Library's collection. If a date range has no end date, our collection includes the                                      most recent issue."/>
-                        </th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td>Impact Factor</td>
-                        <td>
-                           <span>
-                              <a href="http://impactfactor.org/" title="Impact Factor">Impact Factor </a>
-                           </span>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td>Springer</td>
-                        <td>
-                           <span>
-                              <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">2009 </a>
-                           </span>
-                           <span class="additionalText">instruction</span>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
+               <span>
+                  <a href="http://link.springer.com/978-3-211-75120-6" title="Fulltext">Springer 2009</a>
+               </span>
+            </div>
+            <div>
+               <span class="additionalText">instruction</span>
             </div>
             <div class="sourceInfo no-bookmarking">
                <span>Source: <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=123"
@@ -148,6 +105,11 @@
                   <a title="click to copy a shareable link to this record"
                       href="https://lane.stanford.edu/view/bib/123">
                      <i class="fa-solid fa-link fa-sm fa-rotate-180"/> Get shareable link</a>
+               </span>
+               <span class="impactFactor">
+                  <a title="journal profile from Journal Citation Reports"
+                      href="http://impactfactor.org/">
+                     <i class="fa-duotone fa-chart-simple"/> Journal Impact Factor</a>
                </span>
             </div>
          </li>

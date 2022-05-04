@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>106</version>
+        <version>107</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.11.3-SNAPSHOT</version>
+    <version>3.11.4-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -276,7 +276,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>2.6.2</version>
+            <version>2.6.3</version>
         </dependency>
         <dependency>
             <groupId>io.lettuce</groupId>

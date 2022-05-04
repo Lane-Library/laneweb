@@ -87,6 +87,12 @@
                 <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
                 <i class="fa-solid fa-link fa-sm fa-rotate-180"></i> Get shareable link</a>
             </span>
+            <xsl:if test="count($eresource//s:link[@type = 'lane-impactFactor']) > 0">
+                <span class="impactFactor">
+                    <a title="journal profile from Journal Citation Reports" href="{$eresource//s:link[@type = 'lane-impactFactor']/s:url}">
+                    <i class="fa-duotone fa-chart-simple"></i> Journal Impact Factor</a>
+                </span>
+            </xsl:if>
         </div>
     </xsl:function>
 
