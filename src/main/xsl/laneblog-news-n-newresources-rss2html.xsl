@@ -11,7 +11,7 @@
 	</xsl:template>
 	<xsl:template match="rss">
 		<xsl:apply-templates
-			select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) and count(./content:encoded//h:article) &gt; 0 ] [position() &lt; 3 ]" />
+			select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) ] [position() &lt; 3 ]" />
 	</xsl:template>
 	<xsl:template match="item">
 		<div class="newsfeed">
