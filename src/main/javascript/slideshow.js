@@ -2,7 +2,7 @@
 
 	"use strict";
 
-	if (document.querySelectorAll(".slide") !== undefined && document.querySelectorAll(".slide").length > 0) {
+	if (document.querySelectorAll("#slide-show .slide") !== undefined && document.querySelectorAll("#slide-show .slide").length > 0) {
 
 
 		var container = document.getElementById("slide-show"),

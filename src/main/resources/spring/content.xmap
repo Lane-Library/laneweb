@@ -199,14 +199,15 @@
         </map:match>
         <map:match pattern="staff-list.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/staff.xml"/>
-           	<map:transform type="saxon" src="classpath:/xsl/staff-directory.xsl"/>
-           	
+           	<map:transform type="saxon" src="classpath:/xsl/staff-directory.xsl">
+           	    <map:parameter name="manager" value="FALSE"/>
+            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="manager-list.html" type="wildcard">
+        <map:match pattern="management-list.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/staff.xml"/>
            	<map:transform type="saxon" src="classpath:/xsl/staff-directory.xsl">
-           		 <map:parameter name="manager" value="true"/>
+           		 <map:parameter name="manager" value="TRUE"/>
            	</map:transform>
             <map:serialize type="xml"/>
         </map:match>
