@@ -68,6 +68,7 @@
 	}
 	#mobile-menu-header.popular:target div.pure-g {
 		display: flex;
+		
 	}
 	#mobile-menu-header.top-resources  ul, #mobile-menu-header.top-resources:target ul
 		{
@@ -98,6 +99,9 @@
 }
 
 @media ( max-width : 812px) {
+    .content > .pure-g:first-of-type div.top-resource-container .module:first-of-type{
+	    margin-top: 24px;
+	    }
 	.popular  .menu-toggle {
 		top: -1px;
 		right: -1px;

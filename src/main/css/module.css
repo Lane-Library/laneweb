@@ -101,7 +101,7 @@
 }
 
 @media ( max-width : 1100px) {
-	.module:first-of-type {
+	.content > .module:first-of-type, .content > .pure-g:first-of-type div:first-of-type .module:first-of-type {
 		margin-top: 0;
 	}
 }
