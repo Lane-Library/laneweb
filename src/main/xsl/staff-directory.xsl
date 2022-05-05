@@ -42,8 +42,8 @@
                         <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
                     </img>
                     <div>
+                        <xsl:attribute name="class">staff-info</xsl:attribute>
                         <ul>
-
                             <xsl:attribute name="class">staff-overview</xsl:attribute>
                             <li>
                                 <xsl:value-of select="s:first-name/text()" />
@@ -75,7 +75,7 @@
                                     <xsl:attribute name="href" select="s:stanford-profile/text()" />
                                     <xsl:attribute name="class">no-bookmarking</xsl:attribute>
                                     <xsl:text>Stanford Profile </xsl:text>
-                                    <i class="fa-solid fa-arrow-right"></i>                                   
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                             </li>
                         </ul>

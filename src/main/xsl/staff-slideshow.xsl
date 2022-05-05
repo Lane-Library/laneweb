@@ -22,16 +22,18 @@
                         <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
                     </img>
                     <div>
-                    <ul class="staff-overview">
-                        <li>
-                            <xsl:value-of select="s:first-name/text()" />
-                            <xsl:text> </xsl:text>
-                            <xsl:value-of select="s:last-name/text()" />
-                        </li>
-                        <li>
-                            <xsl:value-of select="s:job-title/text()" />
-                        </li>
-                    </ul>
+                        <xsl:attribute name="class">staff-info</xsl:attribute>
+                        <ul>
+                            <xsl:attribute name="class">staff-overview</xsl:attribute>
+                            <li>
+                                <xsl:value-of select="s:first-name/text()" />
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="s:last-name/text()" />
+                            </li>
+                            <li>
+                                <xsl:value-of select="s:job-title/text()" />
+                            </li>
+                        </ul>
                     </div>
                 </a>
             </div>
