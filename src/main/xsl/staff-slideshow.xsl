@@ -16,7 +16,7 @@
                     <img>
                         <xsl:attribute name="class">scaled-image</xsl:attribute>
                         <xsl:attribute name="src">
-							<xsl:text>/graphics/services/staff/user-solid.svg</xsl:text>
+							<xsl:text>/graphics/services/staff/unknown-staff.svg</xsl:text>
 						</xsl:attribute>
                         <xsl:attribute name="data-src" select="s:picture" />
                         <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />

@@ -35,7 +35,7 @@
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:attribute name="src">
-                                    <xsl:text>/graphics/services/staff/user-solid.svg</xsl:text>
+                                    <xsl:text>/graphics/services/staff/unknown-staff.svg</xsl:text>
                                 </xsl:attribute>
                             </xsl:otherwise>
                         </xsl:choose>
