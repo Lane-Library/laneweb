@@ -206,6 +206,10 @@
  .staff-list .slide div.overlay.on {
   top: 0;
  }
+ 
+.staff-list .slide div.overlay{
+    top: 100%;
+}
 }
 
 @media ( max-width : 812px) {
@@ -233,8 +237,5 @@
  }
  .staff-list .slide div.staff-info {
   bottom: -100px;
- }
- .staff-list .slide:hover div.staff-info {
-  bottom: 0;
  }
 }
