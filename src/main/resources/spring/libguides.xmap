@@ -24,5 +24,10 @@
          <map:serialize type="html5"/>
       </map:match>     
      
+       <map:match pattern="index.html" type="regexp">
+            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=0&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types[0]=3&amp;guide_types[1]=4&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
+         <map:serialize type="html5"/>
+        </map:match>
+        
    </map:pipeline>
 </map:sitemap>
