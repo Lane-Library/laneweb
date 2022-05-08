@@ -58,14 +58,14 @@
                             <xsl:attribute name="class">staff-detail</xsl:attribute>
                             <li>
                                 <a>
-                                    <xsl:attribute name="href" select="concat('mailto:',s:email)" />
+                                    <xsl:attribute name="href" select="concat('mailto:',s:email/text())" />
                                     <xsl:attribute name="class">no-bookmarking</xsl:attribute>
                                     <xsl:value-of select="s:email/text()" />
                                 </a>
                             </li>
                             <li>
                                 <a>
-                                    <xsl:attribute name="href" select="concat('tel:',s:email)" />
+                                    <xsl:attribute name="href" select="concat('tel:',s:phone/text())" />
                                     <xsl:attribute name="class">no-bookmarking</xsl:attribute>
                                     <xsl:value-of select="s:phone/text()" />
                                 </a>
