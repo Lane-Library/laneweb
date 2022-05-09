@@ -76,7 +76,7 @@
 		</xi:include>
 
 		<section class="content">
-			<div class="content centered">
+			<div class="centered">
 			    <?laneweb content?>
 			</div>
 		</section>

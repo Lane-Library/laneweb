@@ -1,107 +1,108 @@
 .module {
-	margin-top: 24px;
-	padding: 2em;
-	box-sizing: border-box;
-	line-height: 1.6em;
-	background-color: white;
-	position: relative;
+    margin-top: 24px;
+    padding: 2em;
+    box-sizing: border-box;
+    line-height: 1.6em;
+    background-color: white;
+    position: relative;
 }
 
 .module:after, .module .after {
-	content: '.';
-	display: block;
-	height: 0;
-	font-size: 0;
-	clear: both;
-	visibility: hidden;
+    content: '.';
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 .module.same-height {
-	height: calc(100% - 24px);
+    height: calc(100% - 24px);
 }
 
 .module fieldset {
-	padding: 0px;
+    padding: 0px;
 }
 
 .core-covers .bookcover, .core-covers-3 .bookcover, .module-img {
-	margin-right: 1em;
+    margin-right: 1em;
 }
 
 .core-covers-3 .bookcover, .core-covers-3 .module-img {
-	float: left;
+    float: left;
 }
 
 .core-covers-3 img {
-	height: 81px;
-	width: 59px;
+    height: 81px;
+    width: 59px;
 }
 
 .core-covers .fa-book, .core-covers-3 .fa-book {
-	font-size: 4.5em;
+    font-size: 4.5em;
 }
 
 .core-covers .fa-newspaper-o, .core-covers-3 .fa-newspaper-o {
-	font-size: 3.6875em;
+    font-size: 3.6875em;
 }
 
 /* book covers in 2 columns*/
 .core-covers {
-	box-sizing: border-box;
-	display: inline-block;
-	padding: 0 1em 13px 0;
-	vertical-align: top;
-	width: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0 1em 13px 0;
+    vertical-align: top;
+    width: 50%;
 }
 
 /* book covers in 3 columns*/
 .core-covers-3 {
-	box-sizing: border-box;
-	display: inline-block;
-	padding: 0 1em 13px 0;
-	vertical-align: top;
-	width: 33%;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 0 1em 13px 0;
+    vertical-align: top;
+    width: 33%;
 }
 
 .landing {
-	padding: 0;
+    padding: 0;
 }
 
 .landing img, .landing iframe {
-	vertical-align: bottom;
-	width: 100%;
+    vertical-align: bottom;
+    width: 100%;
 }
 
 .landing h3 {
-	color: white;
-	background-color: #09425a;
-	background-image: none;
-	margin-bottom: 0;
-	padding: 10px 0;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 1.125em;
-	line-height: 19.8px;
+    color: white;
+    background-color: #09425a;
+    background-image: none;
+    margin-bottom: 0;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.125em;
+    line-height: 19.8px;
 }
 
 .landing h3 a {
-	color: white;
+    color: white;
 }
 
 .landing-content {
-	padding: 12px;
+    padding: 12px;
 }
 
 .grand-rounds h3, .upcoming-classes h3 {
-	text-transform: uppercase;
-	font-family: 'Fjord One', serif;
-	color: #333333;
-	text-align: center;
-	background-image: none;
+    text-transform: uppercase;
+    font-family: 'Fjord One', serif;
+    color: #333333;
+    text-align: center;
+    background-image: none;
 }
 
 @media ( max-width : 1100px) {
-	.content > .module:first-of-type, .content > .pure-g:first-of-type div:first-of-type .module:first-of-type {
-		margin-top: 0;
-	}
+    .content>.centered>.module:first-of-type, .content>.centered>.pure-g:first-of-type div:first-of-type .module:first-of-type
+        {
+        margin-top: 0;
+    }
 }

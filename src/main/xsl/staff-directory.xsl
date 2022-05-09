@@ -81,10 +81,14 @@
                         </li>
                     </ul>
                 </div>
-
+                                   <a>
+                        <xsl:if test="s:stanford-profile/text() != ''">
+                            <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
+                            <xsl:attribute name="class">no-bookmarking</xsl:attribute>
+                        </xsl:if>
                 <div class="overlay">
                 </div>
-
+    </a>
             </div>
         </xsl:if>
     </xsl:template>

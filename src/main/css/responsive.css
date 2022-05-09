@@ -1,131 +1,120 @@
 html {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *, *:before, *:after {
-	box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 img {
-	max-width: 100%;
+    max-width: 100%;
 }
 
 .menu-toggle {
-	background-color: white;
-	padding: 1px 4px;
-	top: 0px;
-	right: 0px;
-	position: absolute;
-	display: none;
-	z-index: 1;
+    background-color: white;
+    padding: 1px 4px;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    display: none;
+    z-index: 1;
 }
+
 .menu-toggle:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
+
 .menu-toggle span, .menu-toggle i {
-	color: black;
-	display: initial;
+    color: black;
+    display: initial;
 }
 
-.lrg-screen-hide{
-	display: none;
+.lrg-screen-hide {
+    display: none;
 }
-
 
 @media ( max-width : 1100px) {
-	html, .content {
-		margin: 0;
-	}
+    html, .content, section.content>div.centered {
+        margin: 0;
+    }
+    section.header, section.content {
+        min-width: 0;
+    }
+    .pure-u-1, .pure-u-1-1, .pure-u-1-2, .pure-u-1-3, .pure-u-2-3,
+        .pure-u-1-4, .pure-u-3-4, .pure-u-1-5, .pure-u-2-5, .pure-u-3-5,
+        .pure-u-4-5, .pure-u-5-5, .pure-u-1-6, .pure-u-5-6, .pure-u-1-8,
+        .pure-u-3-8, .pure-u-5-8, .pure-u-7-8, .pure-u-1-12,
+        .pure-u-5-12, .pure-u-7-12, .pure-u-11-12, .pure-u-1-24,
+        .pure-u-2-24, .pure-u-3-24, .pure-u-4-24, .pure-u-5-24,
+        .pure-u-6-24, .pure-u-7-24, .pure-u-8-24, .pure-u-9-24,
+        .pure-u-10-24, .pure-u-11-24, .pure-u-12-24, .pure-u-13-24,
+        .pure-u-14-24, .pure-u-15-24, .pure-u-16-24, .pure-u-17-24,
+        .pure-u-18-24, .pure-u-19-24, .pure-u-20-24, .pure-u-21-24,
+        .pure-u-22-24, .pure-u-23-24, .pure-u-24-24 {
+        width: 100%;
+    }
 
-	section.header, section.content{
-		min-width: 0;
-	}
-	
-	.pure-u-1, .pure-u-1-1, .pure-u-1-2, .pure-u-1-3, .pure-u-2-3,
-		.pure-u-1-4, .pure-u-3-4, .pure-u-1-5, .pure-u-2-5, .pure-u-3-5,
-		.pure-u-4-5, .pure-u-5-5, .pure-u-1-6, .pure-u-5-6, .pure-u-1-8,
-		.pure-u-3-8, .pure-u-5-8, .pure-u-7-8, .pure-u-1-12, .pure-u-5-12,
-		.pure-u-7-12, .pure-u-11-12, .pure-u-1-24, .pure-u-2-24, .pure-u-3-24,
-		.pure-u-4-24, .pure-u-5-24, .pure-u-6-24, .pure-u-7-24, .pure-u-8-24,
-		.pure-u-9-24, .pure-u-10-24, .pure-u-11-24, .pure-u-12-24,
-		.pure-u-13-24, .pure-u-14-24, .pure-u-15-24, .pure-u-16-24,
-		.pure-u-17-24, .pure-u-18-24, .pure-u-19-24, .pure-u-20-24,
-		.pure-u-21-24, .pure-u-22-24, .pure-u-23-24, .pure-u-24-24 {
-		width: 100%;
-	}
-	
-	
-	/* Display Menu  in mobile version*/
-	#mobile-menu-header ul, #mobile-menu-header div , #mobile-menu-header hr,
-		 #mobile-menu-header span a:nth-child(2) {
-		display: none;
-	}
-	#mobile-menu-header:target ul, #mobile-menu-header:target div,#mobile-menu-header:target hr {
-		display: block;
-		border: none;
-	}
-	#mobile-menu-header:target span:first-child a:first-child {
-		display: none;
-	}
-	#mobile-menu-header:target span:first-child a:nth-child(2) {
-		display: block;
-	}
+    /* Display Menu  in mobile version*/
+    #mobile-menu-header ul, #mobile-menu-header div, #mobile-menu-header hr,
+        #mobile-menu-header span a:nth-child(2) {
+        display: none;
+    }
+    #mobile-menu-header:target ul, #mobile-menu-header:target div,
+        #mobile-menu-header:target hr {
+        display: block;
+        border: none;
+    }
+    #mobile-menu-header:target span:first-child a:first-child {
+        display: none;
+    }
+    #mobile-menu-header:target span:first-child a:nth-child(2) {
+        display: block;
+    }
 
-	/* If 2 second  Menu (hamburger) is needed in the same page */
-	#mobile-menu-header1 ul, #mobile-menu-header1 div, #mobile-menu-header1 hr,
-		 #mobile-menu-header1 span a:nth-child(2) {
-		display: none;
-	}
-	#mobile-menu-header1:target ul, #mobile-menu-header1:target div,#mobile-menu-header1:target hr {
-		display: block;
-		border: none;
-	}
-	#mobile-menu-header1:target span a:first-child {
-		display: none;
-	}
-	#mobile-menu-header1:target span a:nth-child(2) {
-		display: block;
-	}
-	
-	#mobile-menu-header h2, #mobile-menu-header1 h2{
-		margin-bottom: 0;
-		padding-bottom: 0;
-		border-bottom: none;
-	}
-	#mobile-menu-header h2:before, #mobile-menu-header1 h2:before {
-		border-top: none
-	}
-	
-	.menu-toggle{
-		display: block;
-	}
-	.lrg-screen-hide{
-		display: initial;
-	}	
-	.medium-screen-hide{
-		display: none;
-	}
-	
+    /* If 2 second  Menu (hamburger) is needed in the same page */
+    #mobile-menu-header1 ul, #mobile-menu-header1 div, #mobile-menu-header1 hr,
+        #mobile-menu-header1 span a:nth-child(2) {
+        display: none;
+    }
+    #mobile-menu-header1:target ul, #mobile-menu-header1:target div,
+        #mobile-menu-header1:target hr {
+        display: block;
+        border: none;
+    }
+    #mobile-menu-header1:target span a:first-child {
+        display: none;
+    }
+    #mobile-menu-header1:target span a:nth-child(2) {
+        display: block;
+    }
+    #mobile-menu-header h2, #mobile-menu-header1 h2 {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    #mobile-menu-header h2:before, #mobile-menu-header1 h2:before {
+        border-top: none
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .lrg-screen-hide {
+        display: initial;
+    }
+    .medium-screen-hide {
+        display: none;
+    }
 }
-
 
 @media ( max-width : 812px) {
-	
-	header section{
-	 padding-left: 12px;
-	 padding-right: 12px;	 
-	}
-	
-	.small-screen-hide, span.bookmark-link {
-		display: none;
-	}
-
-	.mobile-header{
-		font-size: 1.75em;
-	}
-
+    header section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .small-screen-hide, span.bookmark-link {
+        display: none;
+    }
+    .mobile-header {
+        font-size: 1.75em;
+    }
 }
-
-
-
-
