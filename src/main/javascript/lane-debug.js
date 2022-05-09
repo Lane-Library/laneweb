@@ -80,7 +80,6 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "back-to-top.js",
         "solr-facets.js",
         "solr-pagination.js",
-        "staff-directory.js",
         "bookcovers.js",
         "browzine.js",
         "viewport.js",
