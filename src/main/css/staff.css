@@ -130,10 +130,10 @@
  min-height: 23px;
 }
 
-.staff-list .slide:hover div.staff-info, .staff-list .slide:hover div.staff-info.on {
+.staff-list .slide:hover div.staff-info {
  bottom: 0;
  transition: bottom 1s;
-}
+ }
 
 .staff-list .slide div.overlay {
  top: 100%;
@@ -145,7 +145,7 @@
  z-index: 2;
 }
 
-.staff-list .slide:hover div.overlay,.staff-list .slide:hover div.overlay.on {
+.staff-list .slide:hover div.overlay {
  top: 0;
  transition: top .5s;
 }

@@ -22,27 +22,27 @@
         <xsl:if test="s:manager = $manager and s:team-directory = 'TRUE'">
             <div>
                 <xsl:attribute name="class">slide</xsl:attribute>
-                <a>
-                    <xsl:if test="s:stanford-profile/text() != ''">
-                        <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
-                        <xsl:attribute name="class">no-bookmarking</xsl:attribute>
-                    </xsl:if>
-                    <img>
-                        <xsl:attribute name="class">scaled-image</xsl:attribute>
-                        <xsl:choose>
-                            <xsl:when test="s:picture/text() != ''">
-                                <xsl:attribute name="src" select="s:picture" />
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:attribute name="src">
+                <img>
+                    <xsl:attribute name="class">scaled-image</xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="s:picture/text() != ''">
+                            <xsl:attribute name="src" select="s:picture" />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="src">
                                     <xsl:text>/graphics/services/staff/unknown-staff.svg</xsl:text>
                                 </xsl:attribute>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                        <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
-                    </img>
-                    <div>
-                        <xsl:attribute name="class">staff-info</xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
+                </img>
+                <div>
+                    <xsl:attribute name="class">staff-info</xsl:attribute>
+                    <a>
+                        <xsl:if test="s:stanford-profile/text() != ''">
+                            <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
+                            <xsl:attribute name="class">no-bookmarking</xsl:attribute>
+                        </xsl:if>
                         <ul>
                             <xsl:attribute name="class">staff-overview</xsl:attribute>
                             <li>
@@ -54,36 +54,37 @@
                                 <xsl:value-of select="s:job-title/text()" />
                             </li>
                         </ul>
-                        <ul>
-                            <xsl:attribute name="class">staff-detail</xsl:attribute>
-                            <li>
-                                <a>
-                                    <xsl:attribute name="href" select="concat('mailto:',s:email/text())" />
-                                    <xsl:attribute name="class">no-bookmarking</xsl:attribute>
-                                    <xsl:value-of select="s:email/text()" />
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <xsl:attribute name="href" select="concat('tel:',s:phone/text())" />
-                                    <xsl:attribute name="class">no-bookmarking</xsl:attribute>
-                                    <xsl:value-of select="s:phone/text()" />
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    <xsl:attribute name="href" select="s:stanford-profile/text()" />
-                                    <xsl:attribute name="class">no-bookmarking</xsl:attribute>
-                                    <xsl:text>Stanford Profile </xsl:text>
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    </a>
+                    <ul>
+                        <xsl:attribute name="class">staff-detail</xsl:attribute>
+                        <li>
+                            <a>
+                                <xsl:attribute name="href" select="concat('mailto:',s:email/text())" />
+                                <xsl:attribute name="class">no-bookmarking</xsl:attribute>
+                                <xsl:value-of select="s:email/text()" />
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <xsl:attribute name="href" select="concat('tel:',s:phone/text())" />
+                                <xsl:attribute name="class">no-bookmarking</xsl:attribute>
+                                <xsl:value-of select="s:phone/text()" />
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <xsl:attribute name="href" select="s:stanford-profile/text()" />
+                                <xsl:attribute name="class">no-bookmarking</xsl:attribute>
+                                <xsl:text>Stanford Profile </xsl:text>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="overlay">
-                    </div>
-                </a>
+                <div class="overlay">
+                </div>
+
             </div>
         </xsl:if>
     </xsl:template>

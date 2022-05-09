@@ -7,16 +7,14 @@
         document.querySelectorAll('div[class ="staff-list"] div[class ="slide"]').forEach(function(slide) {
             slide.addEventListener("click", function(event) {
                 var nodeName = event.target.tagName,
-                    currentNode = event.currentTarget;
-                if ("A" != nodeName && currentNode.querySelector("touchstart touchend") !== undefined) {
-                    currentNode.querySelector(".overlay").classList.toggle("on");
-                    currentNode.querySelector(".staff-info").classList.toggle("on");
+                    currentNode = event.currentTarget.tagName;
+                if (("IMG" == nodeName || "DIV" !== nodeName) && "DIV" == currentNode.tagName) {
                     event.stopPropagation();
                     event.preventDefault();
-                }   
+                }
+
             });
         })
-   
     }
 
 
