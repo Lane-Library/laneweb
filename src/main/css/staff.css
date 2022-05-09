@@ -130,7 +130,7 @@
  min-height: 23px;
 }
 
-.staff-list .slide:hover div {
+.staff-list .slide:hover div.staff-info, .staff-list .slide:hover div.staff-info.on {
  bottom: 0;
  transition: bottom 1s;
 }
@@ -145,7 +145,7 @@
  z-index: 2;
 }
 
-.staff-list .slide:hover div.overlay {
+.staff-list .slide:hover div.overlay,.staff-list .slide:hover div.overlay.on {
  top: 0;
  transition: top .5s;
 }
@@ -200,16 +200,6 @@
   justify-content: space-evenly;
   gap: 30px 74px;
  }
- .staff-list .slide div.staff-info.on {
-  bottom: 0;
- }
- .staff-list .slide div.overlay.on {
-  top: 0;
- }
- 
-.staff-list .slide div.overlay{
-    top: 100%;
-}
 }
 
 @media ( max-width : 812px) {

@@ -8,14 +8,15 @@
             slide.addEventListener("click", function(event) {
                 var nodeName = event.target.tagName,
                     currentNode = event.currentTarget;
-                if ("A" != nodeName && currentNode.querySelector(".overlay") !== undefined) {
+                if ("A" != nodeName && currentNode.querySelector("touchstart touchend") !== undefined) {
                     currentNode.querySelector(".overlay").classList.toggle("on");
                     currentNode.querySelector(".staff-info").classList.toggle("on");
                     event.stopPropagation();
                     event.preventDefault();
-                }
+                }   
             });
         })
+   
     }
 
 
