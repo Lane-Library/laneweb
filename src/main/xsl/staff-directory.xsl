@@ -41,7 +41,7 @@
                     <a>
                         <xsl:if test="s:stanford-profile/text() != ''">
                             <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
-                            <xsl:attribute name="class">no-bookmarking</xsl:attribute>
+                           
                         </xsl:if>
                         <ul>
                             <xsl:attribute name="class">staff-overview</xsl:attribute>
@@ -60,35 +60,31 @@
                         <li>
                             <a>
                                 <xsl:attribute name="href" select="concat('mailto:',s:email/text())" />
-                                <xsl:attribute name="class">no-bookmarking</xsl:attribute>
                                 <xsl:value-of select="s:email/text()" />
                             </a>
                         </li>
                         <li>
                             <a>
                                 <xsl:attribute name="href" select="concat('tel:',s:phone/text())" />
-                                <xsl:attribute name="class">no-bookmarking</xsl:attribute>
                                 <xsl:value-of select="s:phone/text()" />
                             </a>
                         </li>
                         <li>
                             <a>
                                 <xsl:attribute name="href" select="s:stanford-profile/text()" />
-                                <xsl:attribute name="class">no-bookmarking</xsl:attribute>
                                 <xsl:text>Stanford Profile </xsl:text>
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
                         </li>
                     </ul>
                 </div>
-                                   <a>
-                        <xsl:if test="s:stanford-profile/text() != ''">
-                            <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
-                            <xsl:attribute name="class">no-bookmarking</xsl:attribute>
-                        </xsl:if>
-                <div class="overlay">
-                </div>
-    </a>
+                <a>
+                    <xsl:if test="s:stanford-profile/text() != ''">
+                        <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
+                    </xsl:if>
+                    <div class="overlay">
+                    </div>
+                </a>
             </div>
         </xsl:if>
     </xsl:template>
