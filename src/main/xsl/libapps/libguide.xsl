@@ -5,8 +5,13 @@
 
     <xsl:template match="/ul">
         <xsl:copy>
-            <xsl:apply-templates select="*" />
+            <xsl:apply-templates select="li" />
         </xsl:copy>
+        <div class="tooltips">
+            <xsl:call-template name="tooltips">
+                <xsl:with-param name="node" select="./li"></xsl:with-param>
+            </xsl:call-template>
+        </div>
     </xsl:template>
 
     <xsl:template match="li">
@@ -21,24 +26,18 @@
                 </xsl:if>
                 <xsl:value-of select="./a/text()" />
             </a>
-            <xsl:call-template name="tooltip">
-                <xsl:with-param name="id" select="$id" />
-                <xsl:with-param name="description" select="$description" />
-            </xsl:call-template>
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template name="tooltip">
-        <xsl:param name="id" />
-        <xsl:param name="description" />
-        <xsl:if test="$description != ''">
-            <div class="tooltips">
-                <span>
-                    <xsl:attribute name="id" select="concat($id, 'Tooltip')"></xsl:attribute>
-                    <xsl:value-of select="$description"></xsl:value-of>
-                </span>
-            </div>
-        </xsl:if>
+    <xsl:template name="tooltips">
+        <xsl:param name="node" />
+        <xsl:for-each select="$node">
+            <xsl:variable name="id" select="replace(lower-case(./a/text()),' ' ,'-')"></xsl:variable>
+            <span>
+                <xsl:attribute name="id" select="$id"></xsl:attribute>
+                <xsl:value-of select="./div/div/text()"></xsl:value-of>
+            </span>
+        </xsl:for-each>
     </xsl:template>
 
 </xsl:stylesheet>
