@@ -133,6 +133,41 @@ hr {
     text-transform: uppercase;
 }
 
+.libguides ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.libguides li {
+    border: none;
+    padding: 6px 0;
+    flex: 1 1 49%;
+    position: relative;
+}
+
+.libguides .s-lg-guide-list-description{
+    display: none;
+    padding: 12px;
+    background-color: white; 
+    border: solid 1px;
+    
+}
+
+.libguides  li:hover .s-lg-guide-list-description {
+    display: block;
+    top: 24px;
+    left: 81px;
+    position: absolute;
+    z-index: 2;
+    }
+
+@media ( max-width :812px) {
+   .libguides li {
+    flex: 0 0 100%;
+    }
+}
+
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 .bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE, .no-js {
     display: none;

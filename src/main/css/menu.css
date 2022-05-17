@@ -1,68 +1,28 @@
-.menu-container {
-    margin: 24px 0 24px;
-    font-family: 'Fjord One', serif;
-    position: relative;
-}
-
-.menu-container h3 {
-    font-size: 1.5em;
-    letter-spacing: 1px;
-    background-color: #8c1515;
-    color: white;
-    padding: 4em 1.5em .5em 1.5em;
-    margin: 0;
-    line-height: 130%;
-}
-.menu-container h3:before{
-	border: none;
-}
-
-
-.menu li {
+.menu-container li {
+    border: none;
     padding: 0;
-    border-bottom: none;
+    margin: 0;
 }
 
-.menu a {
-    background-color: #fff;
-    border-bottom: 2px solid #f0f4f5;
+.menu-container li a {
     display: block;
-    font-size: 1.125em;
-    font-weight: 400;
-    line-height: 16px;
-    letter-spacing: .5px;
-    padding: 1em 1em 1em 2em;
-    color: #333;
+    width: 100%;
+    padding: 9px 24px;
 }
 
-.menu .fa {
+.menu-container li a:hover, .menu-container li a.menuitem-active {
     color: white;
-    float: right;
+    background-color: #666;
+    text-decoration: none;
 }
 
-.menu a:hover, .menu .menuitem-active /*, .menu ul .menuitem-active:hover*/ {
-    background-color: #666;
-    color: #fff;
+.menu-container li a.menuitem-active {
+    background-color: #8c1515;
+    cursor: default;
 }
 
 @media ( max-width :1100px) {
-	.menu-container{
-		padding: 0 33px;
-	}
-	
-	.menu-container h3 {
-		margin: 0;
-		padding: 12px 39px;
-	    line-height: 1.2em;
-	}
-	
-	.menu-container .menu-toggle{
-		background-color: inherit;
-	    top: 13px;
-    	right: 56px;
-	}
-	.menu-container .menu-toggle i{
-		color: white;
-	}
-		
+    .menu-container li a {
+        width: 50%;
+    }
 }

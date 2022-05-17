@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
    <xsl:template match="/classes">
-            <div id="mobile-menu-header"  class="menu-container">
+            <div id="mobile-menu-header"  class="module menu-container">
                 <span>
                		<a href="#mobile-menu-header" class="menu-toggle">
 						<i class="fa-solid fa-angle-down fa-lg"></i>
@@ -14,7 +14,7 @@
 					Categories
 			   </h3>
                
-               <ul class="menu">
+               <ul>
                   <li>
                      <a href="/classes-consult/laneclasses.html">By Date</a>
                   </li>
