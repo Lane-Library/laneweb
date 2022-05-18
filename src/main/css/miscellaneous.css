@@ -146,22 +146,6 @@ hr {
     position: relative;
 }
 
-.libguides .s-lg-guide-list-description{
-    display: none;
-    padding: 12px;
-    background-color: white; 
-    border: solid 1px;
-    
-}
-
-.libguides  li:hover .s-lg-guide-list-description {
-    display: block;
-    top: 24px;
-    left: 81px;
-    position: absolute;
-    z-index: 2;
-    }
-
 @media ( max-width :812px) {
    .libguides li {
     flex: 0 0 100%;
