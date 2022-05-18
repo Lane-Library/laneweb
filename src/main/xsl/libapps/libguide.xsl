@@ -15,13 +15,12 @@
     </xsl:template>
 
     <xsl:template match="li">
-        <xsl:variable name="id" select="replace(lower-case(./a/text()),' ' ,'-')"></xsl:variable>
         <xsl:variable name="description" select="./div/div/text()"></xsl:variable>
         <xsl:copy>
             <a>
                 <xsl:attribute name="href" select="./a/@href"></xsl:attribute>
-                <xsl:attribute name="id" select="$id"></xsl:attribute>
                 <xsl:if test="$description != ''">
+                    <xsl:attribute name="id" select="concat('guide-', position() )"></xsl:attribute>
                     <xsl:attribute name="class">yui3-tooltip-trigger</xsl:attribute>
                 </xsl:if>
                 <xsl:value-of select="./a/text()" />
@@ -32,9 +31,8 @@
     <xsl:template name="tooltips">
         <xsl:param name="node" />
         <xsl:for-each select="$node">
-            <xsl:variable name="id" select="replace(lower-case(./a/text()),' ' ,'-')"></xsl:variable>
             <span>
-                <xsl:attribute name="id" select="$id"></xsl:attribute>
+                <xsl:attribute name="id" select="concat('guide-', position() )"></xsl:attribute>
                 <xsl:value-of select="./div/div/text()"></xsl:value-of>
             </span>
         </xsl:for-each>
