@@ -21,8 +21,16 @@
     cursor: default;
 }
 
+#mobile-menu-header.module.menu-container>span>a {
+    top: 16px;
+    right: 19px;
+}
+
 @media ( max-width :1100px) {
     .menu-container li a {
         width: 50%;
     }
+    #mobile-menu-header.module.menu-container{
+        padding:18px;
+    }    
 }
