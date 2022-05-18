@@ -299,8 +299,9 @@
             triggerHandles.mouseOut = Y.on("mouseleave", Y.bind(this._onNodeMouseLeave, this), node);
 
             title = node.getAttribute("title");
-            node.setAttribute("title", "");
-
+            if(title != ''){
+                node.setAttribute("title", "");
+            }
             currTrigger.mouseX = x;
             currTrigger.mouseY = y;
             currTrigger.mouseClientX = mouseClientX;
@@ -332,8 +333,9 @@
                 triggerHandles.mouseOut.detach();
                 triggerHandles.mouseMove = null;
                 triggerHandles.mouseOut = null;
-
-                node.setAttribute("title", title);
+                if(title != ''){
+                    node.setAttribute("title", title);
+                }
             }
         },
 
