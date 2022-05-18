@@ -10,10 +10,9 @@
 						<i class="fa-solid fa-xmark fa-lg"></i>
 					</a>
 				</span>		
-				<h3>
+				<h2>
 					Categories
-			   </h3>
-               
+			   </h2>
                <ul>
                   <li>
                      <a href="/classes-consult/laneclasses.html">By Date</a>
