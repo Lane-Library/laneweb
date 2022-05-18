@@ -186,11 +186,12 @@ h1 i {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 100%);
 }
 
-.menu a:hover {
+.menu-container li a:hover {
     background-color: #555555;
+    text-decoration: underline;
 }
 
-.menu .menuitem-active {
+.menu-container li a.menuitem-active {
     background-color: #707070;
 }
 
@@ -549,26 +550,30 @@ http://lane.stanford.edu/samples/button-css.html
     width:40%;
     font-size: 0.8125em;
     margin-bottom: 15px;
+    position: relative;
 }
 
-.event-date {
+.event .pure-g{
+    flex-wrap: nowrap;
+}
+
+.event .event-date {
 	background-color: #09425a;
     color: white;
     text-align: right;
     text-transform: uppercase;
-    padding: 4px;
-    padding-right: 12px;
-}
-
-.event-info {
-    background-color: white;
-    padding-left: 6px;
-    /*safari & FF show px of .event background on right so:*/
-    margin-right: -1px;
+    width:60px;
+    height:72px;
+    padding: 12px;
 }
 
 .event-time {
     font-weight: bold;
+}
+
+.event div,.event:last-child div{
+    margin: 0;
+    text-align: left;
 }
 
 .landing{
