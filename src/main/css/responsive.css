@@ -87,14 +87,6 @@ img {
     #mobile-menu-header1:target span a:nth-child(2) {
         display: block;
     }
-    #mobile-menu-header h2, #mobile-menu-header1 h2 {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-    }
-    #mobile-menu-header h2:before, #mobile-menu-header1 h2:before {
-        border-top: none
-    }
     .menu-toggle {
         display: block;
     }
