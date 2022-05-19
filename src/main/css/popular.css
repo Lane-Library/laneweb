@@ -99,9 +99,6 @@
 }
 
 @media ( max-width : 812px) {
-    .content > .centered > .pure-g:first-of-type div.top-resource-container .module:first-of-type{
-	    margin-top: 24px;
-	    }
 	.popular  .menu-toggle {
 		top: -1px;
 		right: -1px;

@@ -99,10 +99,3 @@
     text-align: center;
     background-image: none;
 }
-
-@media ( max-width : 1100px) {
-    .content>.centered>.module:first-of-type, .content>.centered>.pure-g:first-of-type div:first-of-type .module:first-of-type
-        {
-        margin-top: 0;
-    }
-}

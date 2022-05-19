@@ -1,4 +1,3 @@
-
 html {
     scroll-behavior: smooth;
 }
@@ -18,7 +17,7 @@ a {
     cursor: pointer;
 }
 
-a:active,a:hover {
+a:active, a:hover {
     text-decoration: underline;
 }
 
@@ -32,8 +31,6 @@ a:active,a:hover {
     margin: 0 48px;
     position: relative;
 }
-
-
 
 h1 {
     padding: 10px 0;
@@ -49,9 +46,7 @@ h1 a {
     padding: 10px 0 0 176px;
 }
 
-h1 a:visited,
-h1 a:active,
-h1 a:hover {
+h1 a:visited, h1 a:active, h1 a:hover {
     color: #333;
 }
 
@@ -59,11 +54,11 @@ h1 i {
     font-size: 0.75em;
 }
 
-.lrg-screen-hide{
+.lrg-screen-hide {
     display: none;
 }
 
-#mhc-logo{
+#mhc-logo {
     position: absolute;
     top: 38px;
     font-size: .75em;
@@ -78,7 +73,8 @@ h1 i {
     float: left;
     font-size: 0.6875em;
 }
-.nav-item:hover{
+
+.nav-item:hover {
     background-image: url('../../images/diag.png');
     background-color: rgba(204, 204, 204, .5);
 }
@@ -109,7 +105,8 @@ h1 i {
     font-weight: 600;
     border-bottom: 1px #777777 solid;
 }
-.nav-item li:last-child{
+
+.nav-item li:last-child {
     border-bottom: none;
 }
 
@@ -129,11 +126,13 @@ h1 i {
     color: #eee;
     text-shadow: #333 1px 1px 2px;
 }
+
 .nav-item li a:hover {
     color: white;
     background-color: rgba(204, 204, 204, .2);
 }
-.nav-item .explore{
+
+.nav-item .explore {
     width: 144px;
     box-sizing: border-box;
     position: absolute;
@@ -145,17 +144,17 @@ h1 i {
     font-size: 0.75em;
     font-weight: 600;
 }
-.nav-item .explore span{
+
+.nav-item .explore span {
     display: block;
     color: white;
     font-size: 0.8125em;
     border-bottom: 1px rgba(255, 255, 255, .4) solid;
 }
-.nav-item .explore i{
+
+.nav-item .explore i {
     font-size: 0.375em;
 }
-
-
 
 #gift {
     display: block;
@@ -170,7 +169,7 @@ h1 i {
     font-size: 0.75em;
 }
 
-.content ul.menu{
+.content ul.menu {
     border-top: 12px solid #8c1515;
     margin-bottom: 24px;
     list-style: none;
@@ -183,14 +182,16 @@ h1 i {
     font-weight: 300;
     display: block;
     padding: 9px 20px 9px 13px;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .3) 0, rgba(0, 0, 0, 0) 100%);
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .3) 0,
+        rgba(0, 0, 0, 0) 100%);
 }
 
-.menu a:hover {
+.menu-container li a:hover {
     background-color: #555555;
+    text-decoration: underline;
 }
 
-.menu .menuitem-active {
+.menu-container li a.menuitem-active {
     background-color: #707070;
 }
 
@@ -240,7 +241,7 @@ h1 i {
     margin-top: 12px;
 }
 
-.heading-left,.heading-right {
+.heading-left, .heading-right {
     display: inline-block;
     height: 4px;
     width: 28%;
@@ -326,12 +327,12 @@ h4 {
     margin: 0 12px 12px 0;
 }
 
-.border-and-shadow p,.border-and-shadow a {
+.border-and-shadow p, .border-and-shadow a {
     line-height: 1.4;
     margin: 0 0 12px;
 }
 
-.border-and-shadow ul,.side-box ul,.content ul {
+.border-and-shadow ul, .side-box ul, .content ul {
     margin-top: 0;
     margin-bottom: 11px;
     display: block;
@@ -421,7 +422,7 @@ h4 {
     font-size: 0.875em;
 }
 
-.contact-links,.side-box p {
+.contact-links, .side-box p {
     display: block;
     font-size: 0.75em;
     float: left;
@@ -441,7 +442,7 @@ h4 {
     margin: 12px 0 24px 0;
 }
 
-b,strong {
+b, strong {
     color: #8c1515;
     text-transform: uppercase;
     font-size: 0.875em;
@@ -472,17 +473,17 @@ blockquote {
     clear: both;
 }
 
-.border-and-shadow .img-caption img,.content .img-caption img {
+.border-and-shadow .img-caption img, .content .img-caption img {
     float: right;
     margin: 0;
 }
 
-.border-and-shadow .img-caption a,.content .img-caption a {
+.border-and-shadow .img-caption a, .content .img-caption a {
     color: #fff;
     font-size: 0.75em;
 }
 
-.border-and-shadow .img-caption p,.content .img-caption p {
+.border-and-shadow .img-caption p, .content .img-caption p {
     margin: 18px 12px 12px 12px;
     color: #fff;
     overflow: hidden;
@@ -546,39 +547,45 @@ http://lane.stanford.edu/samples/button-css.html
 
 /*styles for events on homepage*/
 .event {
-    width:40%;
+    width: 40%;
     font-size: 0.8125em;
     margin-bottom: 15px;
+    position: relative;
 }
 
-.event-date {
-	background-color: #09425a;
+.event .pure-g {
+    flex-wrap: nowrap;
+}
+
+.event .event-date {
+    background-color: #09425a;
     color: white;
     text-align: right;
     text-transform: uppercase;
-    padding: 4px;
-    padding-right: 12px;
-}
-
-.event-info {
-    background-color: white;
-    padding-left: 6px;
-    /*safari & FF show px of .event background on right so:*/
-    margin-right: -1px;
+    width: 60px;
+    height: 72px;
+    padding: 12px;
 }
 
 .event-time {
     font-weight: bold;
 }
 
-.landing{
+.event div, .event:last-child div {
+    margin: 0;
+    text-align: left;
+}
+
+.landing {
     padding: 0;
 }
-.landing img{
+
+.landing img {
     display: block;
     width: 100%;
 }
-.landing h3{
+
+.landing h3 {
     color: white;
     background-color: #8c1515;
     background-image: none;
@@ -588,16 +595,19 @@ http://lane.stanford.edu/samples/button-css.html
     font-size: 1.125em;
     line-height: 19.8px;
 }
-.landing p{
+
+.landing p {
     padding: 10px;
     margin: 0;
 }
-.landing ul{
+
+.landing ul {
     padding: 10px 0;
     margin: 0 10px;
     border-top: 1px solid #dddddd;
 }
-.landing ul li{
+
+.landing ul li {
     list-style: none;
 }
 
@@ -614,6 +624,7 @@ http://lane.stanford.edu/samples/button-css.html
 .flickr-carousel {
     position: relative;
 }
+
 .flickr-photos {
     white-space: nowrap;
     overflow: hidden;
@@ -621,26 +632,29 @@ http://lane.stanford.edu/samples/button-css.html
     height: 200px;
     opacity: 0;
 }
+
 .flickr-photos, .flickr-photos img {
     transition: opacity 1s;
 }
+
 .flickr-photos a {
     display: inline-block;
     text-align: center;
     overflow: hidden;
 }
+
 .flickr-photos a:before {
     content: '';
     margin-left: -100%;
 }
+
 .flickr-photos a:after {
     content: '';
     margin-right: -100%;
 }
+
 .flickr-carousel-button {
     position: absolute;
     right: 0;
     bottom: 0;
 }
-
-
