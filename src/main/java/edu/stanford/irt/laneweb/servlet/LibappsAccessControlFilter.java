@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 
-@WebFilter( urlPatterns = {"/libguides/*", "/libcals/libcal-menu.html" })
+@WebFilter( urlPatterns = {"/libguides/*", "/libcals/libcal-menu.html", "/apps/suggest/getSuggestionList" })
 public class LibappsAccessControlFilter extends AbstractLanewebFilter {
 
     @Autowired
