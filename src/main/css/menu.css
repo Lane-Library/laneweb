@@ -21,13 +21,13 @@
     cursor: default;
 }
 
-#mobile-menu-header.menu-container .menu-toggle{
+#mobile-menu-header .menu-toggle{
     width: 100%;
     height: 150%;
     background-color: transparent;
 }
 
-#mobile-menu-header.menu-container .menu-toggle i {
+#mobile-menu-header .menu-toggle i {
     float: right;
     padding: 17px 7px;
 }

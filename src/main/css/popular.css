@@ -118,16 +118,9 @@
 		border: none;
 	}
 	
-	#mobile-menu-header.top-resources> h2> span>a {
-        width: 100%;
-        height: 150%;
-        background-color: transparent;
-    }
-
-    #mobile-menu-header.top-resources>h2 >span>a > i {
-        float: right;
-        padding: 11px 7px;
-    }
+	#mobile-menu-header.top-resources .menu-toggle i{
+	   padding-top: 11px;
+	}
 	
 	.top-resource-container {
 		margin: 0 2em;
