@@ -21,13 +21,13 @@
     cursor: default;
 }
 
-#mobile-menu-header.module.menu-container> h2> span>a {
+#mobile-menu-header.menu-container .menu-toggle{
     width: 100%;
     height: 150%;
     background-color: transparent;
 }
 
-#mobile-menu-header.module.menu-container>h2 >span>a > i {
+#mobile-menu-header.menu-container .menu-toggle i {
     float: right;
     padding: 17px 7px;
 }
@@ -37,7 +37,7 @@
     .menu-container li a {
         width: 50%;
     }
-    #mobile-menu-header.module.menu-container{
+    #mobile-menu-header.menu-container{
         padding:18px;
     }    
 }
