@@ -33,7 +33,6 @@
                      </xsl:attribute>
                      <xsl:value-of select="title" />
                   </a>
-                  <br />
                   <span>
                      <xsl:value-of select="start/hour" />
                      <xsl:text> – </xsl:text>
