@@ -32,7 +32,7 @@ body, select, input, button, textarea {
 p {
     margin-bottom: 12px;
     font-size: 1em;
-    line-height:1.5em;
+    line-height: 1.5em;
 }
 
 strong {
@@ -136,19 +136,18 @@ hr {
 .libguides ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 12px 33px;
 }
 
 .libguides li {
     border: none;
-    padding: 6px 0;
-    flex: 1 1 49%;
+    flex: 1 1 47%;
     position: relative;
 }
 
 @media ( max-width :812px) {
-   .libguides li {
-    flex: 0 0 100%;
+    .libguides li {
+        flex: 0 0 100%;
     }
 }
 
@@ -175,60 +174,79 @@ hr {
 .backgr-white {
     background-color: #ffffff;
 }
+
 .backgr-grey-ddd {
     background-color: #dddddd;
 }
+
 .backgr-grey-ccc {
     background-color: #cccccc;
 }
+
 .backgr-grey-999 {
     background-color: #999999;
 }
+
 .backgr-grey-666 {
     background-color: #666666;
 }
+
 .backgr-grey-333 {
     background-color: #333;
 }
+
 .backgr-black {
     background-color: #000000;
 }
+
 .backgr-blue-f0f {
     background-color: #f0f4f5;
 }
+
 .backgr-blue-aab {
     background-color: #aabec6;
 }
+
 .backgr-blue-009 {
     background-color: #009abb;
 }
+
 .backgr-blue-007 {
     background-color: #007c92;
 }
+
 .backgr-blue-094 {
     background-color: #09425a;
 }
+
 .backgr-green-c7d {
     background-color: #c7d1c6;
 }
+
 .backgr-green-809 {
     background-color: #80982a;
 }
+
 .backgr-green-556 {
     background-color: #556222;
 }
+
 .backgr-orange-b96 {
     background-color: #b96d12;
 }
+
 .backgr-purple-532 {
     background-color: #53284f;
 }
+
 .backgr-brown-5e3 {
     background-color: #5e3032;
 }
+
 .backgr-red {
     background-color: #8c1515;
 }
+
 .blur {
     filter: blur(4px);
 }
