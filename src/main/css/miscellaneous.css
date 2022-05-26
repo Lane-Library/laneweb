@@ -47,9 +47,10 @@ em {
     color: #808080;
 }
 
-.top-container{
+.top-container {
     margin-top: 24px;
 }
+
 .more a {
     margin-right: 6px;
     font-size: 0.875em;
@@ -137,15 +138,14 @@ hr {
 }
 
 .libguides ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 33px;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2;
+    column-gap: 24px;
 }
 
 .libguides li {
     border: none;
-    flex: 1 1 47%;
-    position: relative;
 }
 
 @media ( max-width :812px) {
