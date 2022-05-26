@@ -47,6 +47,9 @@ em {
     color: #808080;
 }
 
+.top-container{
+    margin-top: 24px;
+}
 .more a {
     margin-right: 6px;
     font-size: 0.875em;
