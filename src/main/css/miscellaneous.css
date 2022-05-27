@@ -149,8 +149,8 @@ hr {
 }
 
 @media ( max-width :812px) {
-    .libguides li {
-        flex: 0 0 100%;
+    .libguides ul {
+        columns: 1;
     }
 }
 
