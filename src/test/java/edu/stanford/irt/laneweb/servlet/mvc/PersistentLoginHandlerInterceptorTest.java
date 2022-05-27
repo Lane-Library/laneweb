@@ -66,6 +66,21 @@ public class PersistentLoginHandlerInterceptorTest {
     }
 
     @Test
+    public void testPreHandleIsPersistentCookieValueYesGetPassword() throws IOException {
+        expect(this.request.getRequestURI()).andReturn("/secure/ejpw.html");
+        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.cookie.getName()).andReturn("isPersistent");
+        expect(this.cookie.getValue()).andReturn("yes");
+        this.response.addCookie(isA(Cookie.class));
+        expect(this.request.getContextPath()).andReturn("/stage");
+        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=true&url=%2Fsecure%2Fejpw.html");
+        replay(this.request, this.response, this.cookie);
+        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
+        verify(this.request, this.response, this.cookie);
+    }
+
+    @Test
     public void testPreHandleNoQueryString() throws IOException {
         expect(this.request.getRequestURI()).andReturn("uri");
         expect(this.request.getQueryString()).andReturn(null);
@@ -95,7 +110,4 @@ public class PersistentLoginHandlerInterceptorTest {
         assertTrue(this.interceptor.preHandle(this.request, this.response, this.handler));
         verify(this.request, this.response, this.cookie);
     }
-
-
-   
 }

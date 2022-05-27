@@ -28,7 +28,7 @@ public class PersistentLoginHandlerInterceptor implements HandlerInterceptor {
             response.addCookie(cookie);
             response.sendRedirect(request.getContextPath() + "/secure/persistentLogin.html?pl=true&url=" + encodedURL);
             return false;
-        } 
+        }
         return true;
     }
 
@@ -39,6 +39,8 @@ public class PersistentLoginHandlerInterceptor implements HandlerInterceptor {
             url = request.getParameter("url");
         } else if (request.getQueryString() != null) {
             url = requestURI + "?" + request.getQueryString();
+        } else if (requestURI.contains("/secure/")) {
+            url = requestURI;
         }
         if (url == null) {
             url = "/index.html";
