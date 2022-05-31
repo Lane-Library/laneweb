@@ -11,7 +11,6 @@
     width: 9em;
     transition: opacity .45s;
     color: #fff;
-    transition: opacity .45s;
     visibility: hidden;
     opacity: 0;
     z-index: 1;
