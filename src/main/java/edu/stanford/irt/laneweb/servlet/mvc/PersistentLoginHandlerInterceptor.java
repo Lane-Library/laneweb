@@ -13,6 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import edu.stanford.irt.laneweb.servlet.CookieName;
 
+
 public class PersistentLoginHandlerInterceptor implements HandlerInterceptor {
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
@@ -20,28 +21,27 @@ public class PersistentLoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws IOException {
-        String encodedURL = getEncodedURL(request);
         if (hasPersistentCookieSet(request)) {
+            String encodedURL = getEncodedURL(request);
             Cookie cookie = new Cookie(CookieName.IS_PERSISTENT.toString(), null);
             cookie.setPath("/");
             cookie.setMaxAge(0);
             response.addCookie(cookie);
             response.sendRedirect(request.getContextPath() + "/secure/persistentLogin.html?pl=true&url=" + encodedURL);
             return false;
-        } 
+        }
         return true;
     }
 
     private String getEncodedURL(final HttpServletRequest request) throws UnsupportedEncodingException {
-        String requestURI = request.getRequestURI();
-        String url = null;
-        if (requestURI.contains("/secure/login.html")) {
-            url = request.getParameter("url");
+        String url = request.getRequestURI();
+        if (url.contains("/secure/login.html")) {
+            url = request.getParameter("url"); 
+            if(url == null) {
+                url = "/index.html";
+            }
         } else if (request.getQueryString() != null) {
-            url = requestURI + "?" + request.getQueryString();
-        }
-        if (url == null) {
-            url = "/index.html";
+            url = url + "?" + request.getQueryString();
         }
         return URLEncoder.encode(url, UTF_8);
     }

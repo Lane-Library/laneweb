@@ -59,6 +59,8 @@ public class GoogleTracker {
 
     private String localHostIp;
 
+    private Random rand = new Random();
+
     private String referer;
 
     private String userAgent;
@@ -191,7 +193,7 @@ public class GoogleTracker {
      * @return a random number string.
      */
     private String getRandomNumber() {
-        return Integer.toString((new Random()).nextInt(Integer.MAX_VALUE));
+        return Integer.toString(this.rand.nextInt(Integer.MAX_VALUE));
     }
 
     private String getUtmaCookie() throws NoSuchAlgorithmException {

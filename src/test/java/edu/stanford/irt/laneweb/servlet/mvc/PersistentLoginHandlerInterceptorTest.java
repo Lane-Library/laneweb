@@ -40,8 +40,6 @@ public class PersistentLoginHandlerInterceptorTest {
 
     @Test
     public void testPreHandleIsPersistentCookieValueFoo() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri");
-        expect(this.request.getQueryString()).andReturn("query-string").times(2);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn("isPersistent");
         expect(this.cookie.getValue()).andReturn("foo");
@@ -66,19 +64,69 @@ public class PersistentLoginHandlerInterceptorTest {
     }
 
     @Test
-    public void testPreHandleNoQueryString() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri");
+    public void testPreHandleIsPersistentCookieValueYesGetPassword() throws IOException {
+        expect(this.request.getRequestURI()).andReturn("/secure/ejpw.html");
         expect(this.request.getQueryString()).andReturn(null);
-        expect(this.request.getCookies()).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.cookie.getName()).andReturn("isPersistent");
+        expect(this.cookie.getValue()).andReturn("yes");
+        this.response.addCookie(isA(Cookie.class));
+        expect(this.request.getContextPath()).andReturn("/stage");
+        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=true&url=%2Fsecure%2Fejpw.html");
         replay(this.request, this.response, this.cookie);
-        assertTrue(this.interceptor.preHandle(this.request, this.response, this.handler));
+        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
         verify(this.request, this.response, this.cookie);
     }
 
     @Test
+    public void testPreHandleFromSecureLogin() throws IOException {
+        expect(this.request.getRequestURI()).andReturn("/secure/login.html");
+        expect(this.request.getParameter("url")).andReturn("http://redirect.com");
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.cookie.getName()).andReturn("isPersistent");
+        expect(this.cookie.getValue()).andReturn("yes");
+        this.response.addCookie(isA(Cookie.class));
+        expect(this.request.getContextPath()).andReturn("/stage");
+        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=true&url=http%3A%2F%2Fredirect.com");
+        replay(this.request, this.response, this.cookie);
+        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
+        verify(this.request, this.response, this.cookie);
+    }
+
+    @Test
+    public void testPreHandleFromSecureLoginNoRedirectUrl() throws IOException {
+        expect(this.request.getRequestURI()).andReturn("/secure/login.html");
+        expect(this.request.getParameter("url")).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.cookie.getName()).andReturn("isPersistent");
+        expect(this.cookie.getValue()).andReturn("yes");
+        this.response.addCookie(isA(Cookie.class));
+        expect(this.request.getContextPath()).andReturn("/stage");
+        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=true&url=%2Findex.html");
+        replay(this.request, this.response, this.cookie);
+        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
+        verify(this.request, this.response, this.cookie);
+    }
+    
+    @Test
+    public void testPreHandleCmeUrl() throws IOException {
+        expect(this.request.getRequestURI()).andReturn("/redirect/cme/uri");
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.cookie.getName()).andReturn("isPersistent");
+        expect(this.cookie.getValue()).andReturn("yes");
+        this.response.addCookie(isA(Cookie.class));
+        expect(this.request.getContextPath()).andReturn("/stage");
+        this.response.sendRedirect("/stage/secure/persistentLogin.html?pl=true&url=%2Fredirect%2Fcme%2Furi");
+        replay(this.request, this.response, this.cookie);
+        assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
+        verify(this.request, this.response, this.cookie);
+    }
+    
+   
+    
+    @Test
     public void testPreHandleNotCookie() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri");
-        expect(this.request.getQueryString()).andReturn("query-string").times(2);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
         expect(this.cookie.getName()).andReturn("name");
         replay(this.request, this.response, this.cookie);
@@ -88,14 +136,9 @@ public class PersistentLoginHandlerInterceptorTest {
 
     @Test
     public void testPreHandleNullCookies() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("uri");
-        expect(this.request.getQueryString()).andReturn("query-string").times(2);
         expect(this.request.getCookies()).andReturn(null);
         replay(this.request, this.response, this.cookie);
         assertTrue(this.interceptor.preHandle(this.request, this.response, this.handler));
         verify(this.request, this.response, this.cookie);
     }
-
-
-   
 }

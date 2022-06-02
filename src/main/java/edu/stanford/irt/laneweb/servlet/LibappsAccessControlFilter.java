@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 
-@WebFilter( urlPatterns = {"/libguides/*", "/libcals/libcal-menu.html" })
+@WebFilter( urlPatterns = {"/libguides/*", "/libcals/libcal-menu.html", "/apps/suggest/getSuggestionList" })
 public class LibappsAccessControlFilter extends AbstractLanewebFilter {
 
     @Autowired
@@ -36,6 +36,7 @@ public class LibappsAccessControlFilter extends AbstractLanewebFilter {
         String libcalURI = this.libcalScheme + "://" + this.libcalHost;
         String origin = request.getHeader("origin");
         if (libguideURI.equals(origin) || libcalURI.equals(origin)) {
+            response.addHeader("Access-Control-Allow-Headers", "X-Requested-With");
             response.addHeader("Access-Control-Allow-Origin", origin);
         }
         chain.doFilter(request, response);

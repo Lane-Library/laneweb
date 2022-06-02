@@ -167,6 +167,7 @@ li.active .description {
 }
 
 .hldgsContainer table {
+    display:none;
     padding: 10px 0;
 }
 
@@ -228,10 +229,6 @@ li.active .description {
 
 .hldgsContainer {
     padding: 5px 2px;
-}
-
-.hldgsContainer table {
-    display:none;
 }
 
 .hldgsHeader {

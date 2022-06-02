@@ -4,14 +4,15 @@
 >
    <map:pipeline type="caching">
    
-      <!-- ********* navigation menu ********** -->
+      <!-- ********* navigation headers for libcal and libguide ********** -->
      
       <map:match pattern="headers.html" type="wildcard">
          <map:aggregate type="default" element="doc">
-            <map:generate type="html" src="cocoon://content/includes/template/header.html"/>
-            <map:generate type="html" src="cocoon://content/includes/template/navigation.html"/>
+            <map:generate type="file" src="cocoon://content/includes/template/header.html"/>
+            <map:generate type="file" src="cocoon://content/includes/template/navigation.html"/>
+            <map:generate type="file" src="cocoon://content/includes/template/search-container.html"/>
          </map:aggregate>
-        <map:transform type="namespace-filter"/>
+         <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/headers.xsl"/>
          <map:serialize type="html5"/>
       </map:match>
