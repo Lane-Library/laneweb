@@ -193,6 +193,7 @@
     }
     .staff-list .slide {
         font-size: 13px;
+        min-width: inherit;
     }
     .staff-list .slide ul.staff-overview li:first-of-type {
         font-size: 1.2em;
