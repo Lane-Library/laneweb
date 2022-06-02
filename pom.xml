@@ -344,6 +344,11 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.4</version>
         </dependency>
+        <dependency>
+          <groupId>commons-validator</groupId>
+          <artifactId>commons-validator</artifactId>
+          <version>1.7</version>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>

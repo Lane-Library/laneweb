@@ -1,231 +1,210 @@
 #slide-show {
- position: relative;
- overflow: hidden;
- height: 280px;
+    position: relative;
+    overflow: hidden;
+    height: 280px;
 }
 
 .slide-container, .staff-list {
- position: relative;
- background-color: white;
- display: flex;
- flex-wrap: wrap;
- justify-content: center;
- align-content: center;
- gap: 30px 24px;
+    position: relative;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 30px 24px;
 }
 
 .slide {
- position: relative;
- min-height: 170px;
- width: 203px;
+    position: relative;
+    min-height: 170px;
+    width: 203px;
 }
 
 .slide img {
- width: 203px;
- margin-bottom: 0;
+    width: 203px;
+    margin-bottom: 0;
 }
 
 .slide div.staff-info {
- position: absolute;
- width: 100%;
- bottom: 0;
- z-index: 3;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 3;
 }
 
 .slide.desactive-next {
- display: none;
+    display: none;
 }
 
 .slide.active-previous {
- display: block;
+    display: block;
 }
 
 #next-slide {
- right: 12px;
+    right: 12px;
 }
 
 #previous-slide {
- left: 12px;
+    left: 12px;
 }
 
 #previous-slide, #next-slide {
- position: absolute;
- display: block;
- top: 170px;
- cursor: pointer;
- color: #aabec6;
+    position: absolute;
+    display: block;
+    top: 170px;
+    cursor: pointer;
+    color: #aabec6;
 }
 
 #previous-slide.disable, #next-slide.disable {
- display: none;
+    display: none;
 }
 
 .staff-slide-show {
- width: 100%;
- margin: auto;
- padding: 3em 2em;
- position: relative;
+    width: 100%;
+    margin: auto;
+    padding: 3em 2em;
+    position: relative;
 }
 
 .slide ul li, .slide a, .slide a i {
- color: white;
- text-align: center;
- border: none;
- padding: 0;
+    color: white;
+    text-align: center;
+    border: none;
+    padding: 0;
 }
 
 .slide ul.staff-overview {
- height: 92px;
- padding: 0 9px;
- background: transparent
-  linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%) 0%
-  0% no-repeat;
+    height: 92px;
+    padding: 0 9px;
+    background: transparent
+        linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%)
+        0% 0% no-repeat;
 }
 
 .slide ul.staff-overview li:first-of-type {
- font-weight: 700;
+    font-weight: 700;
 }
 
 .slide ul.staff-overview li:last-of-type {
- font-weight: 300;
- line-height: 1.3em;
+    font-weight: 300;
+    line-height: 1.3em;
 }
 
 /* Team directory specific */
 .staff-list {
- padding: 24px 0;
- justify-content: space-between;
+    padding: 24px 0;
+    justify-content: space-between;
 }
 
 .staff-list .slide {
- overflow: hidden;
- max-width: 300px;
- width: 205px;
- flex-grow: 1;
- flex-basis: 20%;
+    overflow: hidden;
+    flex-grow: 1;
+    min-width: 215px;
+    flex-basis: 17%;
 }
 
 .staff-list .slide img {
- width: 100%;
- height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .staff-list .slide div.staff-info {
- bottom: -95px;
+    bottom: -95px;
 }
 
 .staff-list .slide ul.staff-overview li:first-of-type {
- font-size: 1.3em;
- font-weight: normal;
- padding-bottom: 12px;
+    font-size: 1.3em;
+    font-weight: normal;
+    padding-bottom: 12px;
 }
 
 .staff-list .slide ul.staff-detail {
- background-color: #333;
- padding: 8px;
+    background-color: #333;
+    padding: 8px;
 }
 
 /* In case it's missing on of the detail ie no phone */
 .staff-list .slide ul.staff-detail li {
- min-height: 23px;
+    min-height: 23px;
 }
 
 .staff-list .slide:hover div.staff-info {
- bottom: 0;
- transition: bottom 1s;
- }
+    bottom: 0;
+    transition: bottom 1s;
+}
 
 .staff-list .slide div.overlay {
- top: 100%;
- position: absolute;
- width: 100%;
- height: 100%;
- background-color: #333;
- opacity: .5;
- z-index: 2;
+    top: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    opacity: .5;
+    z-index: 2;
 }
 
 .staff-list .slide:hover div.overlay {
- top: 0;
- transition: top .5s;
+    top: 0;
+    transition: top .5s;
 }
 
-.staff-list .managenemt-description {
- background-color: #E3E3E3;
+.staff-list .banner {
+    padding: 2% 11%;
+    position: absolute;
+    right: 0px;
+    color: white;
+    font-size: 1.2em;
+    background-color: gray;
 }
 
-.staff-list .managenemt-description p {
- padding: 1em 2em 0;
- margin: 0;
- width: 100%;
+.staff-list .banner.director {
+    background-color: #8c1515;
 }
 
-.staff-list .managenemt-description p:first-child {
- font-weight: bold;
-}
-
-.staff-list .managenemt-description p:last-of-type {
- position: absolute;
- height: 90px;
- bottom: 0;
- padding-top: 0;
- background-color: #DDDDDD;
- display: flex;
- align-items: center;
-}
-
-.staff-list .managenemt-description p:nth-child(2) {
- max-height: 160px;
- overflow: hidden;
- text-overflow: ellipsis;
- display: -webkit-box;
- -webkit-line-clamp: 6;
- -webkit-box-orient: vertical;
+.staff-list .banner.liaison {
+    background-color: #007c92;
 }
 
 .slide.empty {
- height: 0;
- min-height: unset;
- width: 300px;
+    height: 0;
+    min-height: unset;
+    width: 300px;
 }
 
 @media ( max-width :1100px) {
- .staff-list .slide {
-  overflow: hidden;
-  width: 300px;
-  flex-grow: 0;
-  flex-basis: auto;
- }
- .staff-list {
-  justify-content: space-evenly;
-  gap: 30px 74px;
- }
+    .staff-list .slide {
+        flex-basis: 30%;
+    }
+    .staff-list {
+        justify-content: space-evenly;
+    }
 }
 
 @media ( max-width : 812px) {
- .staff-list .slide {
-  flex: 0 1 49%;
- }
- .staff-list {
-  gap: 6px 3px;
- }
- .module.directory {
-  padding: 1em;
- }
- .staff-list .slide {
-  font-size: 13px;
- }
- .staff-list .slide ul.staff-overview li:first-of-type {
-  font-size: 1.2em;
-  padding-bottom: 6px;
- }
- .staff-list .managenemt-description p {
-  padding: 1em 1em 0;
- }
- .staff-list .managenemt-description p:last-of-type {
-  height: 52px;
- }
- .staff-list .slide div.staff-info {
-  bottom: -100px;
- }
+    .staff-list .slide {
+        flex: 0 1 49%;
+    }
+    .staff-list {
+        gap: 6px 3px;
+    }
+    .module.directory {
+        padding: 1em;
+    }
+    .staff-list .slide {
+        font-size: 13px;
+    }
+    .staff-list .slide ul.staff-overview li:first-of-type {
+        font-size: 1.2em;
+        padding-bottom: 6px;
+    }
+    .staff-list .managenemt-description p {
+        padding: 1em 1em 0;
+    }
+    .staff-list .managenemt-description p:last-of-type {
+        height: 52px;
+    }
+    .staff-list .slide div.staff-info {
+        bottom: -100px;
+    }
 }
