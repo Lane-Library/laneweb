@@ -124,6 +124,10 @@
     padding: 8px;
 }
 
+.staff-list .slide ul.staff-detail a {
+    text-decoration: underline;
+}
+
 /* In case it's missing on of the detail ie no phone */
 .staff-list .slide ul.staff-detail li {
     min-height: 23px;
@@ -198,12 +202,6 @@
     .staff-list .slide ul.staff-overview li:first-of-type {
         font-size: 1.2em;
         padding-bottom: 6px;
-    }
-    .staff-list .managenemt-description p {
-        padding: 1em 1em 0;
-    }
-    .staff-list .managenemt-description p:last-of-type {
-        height: 52px;
     }
     .staff-list .slide div.staff-info {
         bottom: -100px;
