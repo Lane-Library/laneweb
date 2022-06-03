@@ -133,7 +133,7 @@
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
                         <map:parameter name="timeout" value="14000"/>
-                        <map:parameter name="engines" value="stanford-daily,pubmed_history,lmldb-history,wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
+                        <map:parameter name="engines" value="stanford-daily,lmldb-history,wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
                     </map:generate>
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
