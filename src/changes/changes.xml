@@ -6,6 +6,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2022-06-06" version="3.11.7" description="bug fix and update release">
+            <action date="2022-05-11" dev="alainb" issue="LANEWEB-10956" type="update">
+                Staff Directory Redesign
+            </action>
+        </release>
         <release date="2022-05-27" version="3.11.6" description="bug fix and update release">
             <action date="2022-05-25" dev="ryanmax" issue="LANEWEB-10973" type="fix">
                 persistent login feature not working with "Get Password" links
