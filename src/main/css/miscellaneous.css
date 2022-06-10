@@ -137,22 +137,6 @@ hr {
     text-transform: uppercase;
 }
 
-.libguides ul {
-    -webkit-columns: 2;
-    -moz-columns: 2;
-    columns: 2;
-    column-gap: 24px;
-}
-
-.libguides li {
-    border: none;
-}
-
-@media ( max-width :812px) {
-    .libguides ul {
-        columns: 1;
-    }
-}
 
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 .bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE, .no-js {

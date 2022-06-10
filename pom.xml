@@ -453,6 +453,7 @@
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
+                                <include>guides-min.css</include>
                                 <include>fontawesome-local-min.css</include>
                                 <include>som-colors-min.css</include>
                                 <include>header-min.css</include>
@@ -515,6 +516,7 @@
                                 <include>menu-min.js</include>
                                 <include>navigation-min.js</include>
                                 <include>model-min.js</include>
+                                <include>guides-min.js</include>
                                 <include>link-info-min.js</include>
                                 <include>lane-ie-min.js</include>
                                 <include>lane-persistent-login-min.js</include>

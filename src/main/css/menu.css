@@ -32,6 +32,10 @@
     padding: 17px 7px;
 }
 
+.sticky-menu{
+    position: sticky;
+    top: 1px;
+}
 
 @media ( max-width :1100px) {
     .menu-container li a {
