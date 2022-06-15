@@ -28,32 +28,6 @@
     display: none;
  }
 
-/* 
-.libguides div.module .guide-menu-toggle.off, 
- .libguides #event-guides .guide ,
- .libguides #research-guides .guide ,
- .libguides #speciality-guides .guide ,
-  .libguides #all-guides .guide {
-    display: none;
-}
- 
-
- #event-guides:target div .guide-menu-toggle.off, #event-guides:target div div.guide ,
-#speciality-guides:target div .guide-menu-toggle.off, #speciality-guides:target div div.guide,
-#research-guides:target div .guide-menu-toggle.off, #research-guides:target div div.guide,
-#all-guides:target div .guide-menu-toggle.off, #all-guides:target div div.guide
-{
-    display: block;
-}
- 
-#event-guides:target div .guide-menu-toggle.on,
-#speciality-guides:target  div .guide-menu-toggle.on,
-#research-guides:target  div .guide-menu-toggle.on,
-#all-guides:target  div .guide-menu-toggle.on
-{
-    display: none;
-}
- */
 .guide-container ul {
     padding: 24px;
     -webkit-columns: 2;
