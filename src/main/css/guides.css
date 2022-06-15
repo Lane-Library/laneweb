@@ -17,17 +17,6 @@
     margin-top: 12px;
 }
 
-.libguides div .guide, .libguides div .guide-menu-toggle.off{
-    display: none;
-}
-
-.libguides div.active .guide, .libguides div.active .guide-menu-toggle.off{
-    display: block;
-}
- .libguides div.active .guide-menu-toggle.on{
-    display: none;
- }
-
 .guide-container ul {
     padding: 24px;
     -webkit-columns: 2;
@@ -40,12 +29,12 @@
     border: none;
 }
 
-.guide.active {
-    display: block;
+.libguides div .guide, .libguides div .guide-menu-toggle.off, .libguides div.active .guide-menu-toggle.on{
+    display: none;
 }
 
-.guide.hide {
-    display: none;
+.libguides div.active .guide, .libguides div.active .guide-menu-toggle.off{
+    display: block;
 }
 
 @media ( max-width :812px) {
