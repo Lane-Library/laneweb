@@ -5,20 +5,20 @@
 
     if (document.querySelector(".guide")) {
 
+        var defaultGuide = '#all-guides',
+            allGuidesClosed = '#off',
 
-
-        var model = function(id) {
-            if (!id)
-                id = '#all-guides'
-            var m = {
-                target: id,
-            }
-            return m;
-        }(window.location.hash),
+            model = function(id) {
+                if (!id)
+                    id = defaultGuide
+                var m = {
+                    target: id,
+                }
+                return m;
+            }(window.location.hash),
 
             view = function() {
                 return {
-
                     clearMenu: function() {
                         document.querySelectorAll('.menu-guide ul li a.menuitem-active').forEach(function(anchor) {
                             anchor.classList.remove('menuitem-active');
@@ -34,7 +34,9 @@
                     }
                     ,
                     openGuide: function(target) {
-                        document.querySelector(target).classList.add('active');
+                        if (target != allGuidesClosed) {
+                            document.querySelector(target).classList.add('active');
+                        }
                     },
                     closesAllGuides: function() {
                         document.querySelectorAll('.libguides div.active').forEach(function(div) {
@@ -68,13 +70,13 @@
 
         window.addEventListener("load", function() {
             controller.load();
+
             document.querySelectorAll('.menu-guide ul li a').forEach(function(anchor) {
                 anchor.addEventListener('click', function(event) {
                     model.target = event.target.href.substring(event.target.href.indexOf('#'));
                     controller.reload();
                 });
             });
-
 
             document.querySelectorAll('.guide-menu-toggle.on').forEach(function(menubutton) {
                 menubutton.addEventListener('click', function(event) {
