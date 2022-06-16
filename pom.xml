@@ -453,7 +453,6 @@
                                 <include>fontawesome-min.css</include>
                                 <include>main-body-min.css</include>
                                 <include>bassett-min.css</include>
-                                <include>guides-min.css</include>
                                 <include>fontawesome-local-min.css</include>
                                 <include>som-colors-min.css</include>
                                 <include>header-min.css</include>
@@ -465,6 +464,7 @@
                                 <include>footer-min.css</include>
                                 <include>headings-min.css</include>
                                 <include>module-min.css</include>
+                                <include>guides-min.css</include>
                                 <include>staff-min.css</include>
                                 <include>search-min.css</include>
                                 <include>popups-min.css</include>
