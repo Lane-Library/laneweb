@@ -88,13 +88,14 @@
     margin: 20px 0 5px;
     font-weight: bold;
 }
+
 #searchFacets .menu-toggle {
     width: 100%;
     height: 150%;
     background-color: transparent;
 }
 
-#searchFacets .menu-toggle > i {
+#searchFacets .menu-toggle>i {
     float: right;
 }
 
@@ -119,11 +120,13 @@
     color: #fff;
 }
 
-.solrFacets .fa-square, .facetBrowse .fa-square, .solrFacets .fa-circle {
+.solrFacets .fa-square, .facetBrowse .fa-square, .solrFacets .fa-circle
+    {
     color: #ccc;
 }
 
-.indented.fa-square-check, .indented .fa-square::before, .indented .fa-square::after {
+.indented.fa-square-check, .indented .fa-square::before, .indented .fa-square::after
+    {
     margin-left: 20px;
 }
 
@@ -182,21 +185,26 @@
 @media ( max-width : 1100px) {
     #searchFacets {
         background-color: white;
-        margin-top: 24px;
+        margin: 24px; margin-bottom : 12px;
         padding: 18px;
+        margin-bottom: 12px;
     }
     #searchFacets ul {
         display: none;
     }
-    #searchFacets .menu-toggle {
-        top: 12px;
-        right: 19px;
+    #searchFacets .menu-toggle i{
+        padding-top: 11px;
     }
     #searchFacets a:nth-child(2) {
         display: none;
     }
     #searchFacets:target ul {
         display: block;
+    }
+    #searchFacets h2, #searchFacets h2:before {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border: none;
     }
     #searchFacets:target span:first-child a:first-child {
         display: none;
