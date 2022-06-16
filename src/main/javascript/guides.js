@@ -80,7 +80,7 @@
 
             document.querySelectorAll('.guide-menu-toggle.on').forEach(function(menubutton) {
                 menubutton.addEventListener('click', function(event) {
-                    model.target = "#" + event.target.dataset.target;
+                    model.target = "#" + event.currentTarget.dataset.target;
                     controller.reload();
                 });
             });
