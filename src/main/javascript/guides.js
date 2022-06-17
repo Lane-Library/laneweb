@@ -71,24 +71,16 @@
         window.addEventListener("load", function() {
             controller.load();
 
-            document.querySelectorAll('.menu-guide ul li a').forEach(function(anchor) {
+            document.querySelectorAll('.menu-guide ul li a, .guide-menu-toggle.on').forEach(function(anchor) {
                 anchor.addEventListener('click', function(event) {
-                    model.target = event.target.href.substring(event.target.href.indexOf('#'));
-                    controller.reload();
-                });
-            });
-
-            document.querySelectorAll('.guide-menu-toggle.on').forEach(function(menubutton) {
-                menubutton.addEventListener('click', function(event) {
-                    model.target = "#" + event.currentTarget.dataset.target;
+                    model.target = event.currentTarget.hash;
                     controller.reload();
                 });
             });
 
             document.querySelectorAll('.guide-menu-toggle.off').forEach(function(menubutton) {
-                menubutton.addEventListener('click', function(event) {
+                menubutton.addEventListener('click', function() {
                     controller.unactiveAll();
-
                 });
             });
         }, false);
