@@ -44,6 +44,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "menu.js",
         "model.js",
 		"slideshow.js",
+		"guides.js",
         "link-info.js",
         "lane-ie.js",
         "lane-persistent-login.js",

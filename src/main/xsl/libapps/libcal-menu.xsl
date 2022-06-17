@@ -8,10 +8,10 @@
                         Categories
                         <span>
                             <a href="#mobile-menu-header" class="menu-toggle">
-                                <i class="fa-solid fa-angle-down fa-lg"></i>
+                                <i class="fa-regular fa-angle-down fa-lg"></i>
                             </a>
                             <a href="#off" id="off" class="menu-toggle">
-                                <i class="fa-solid fa-xmark fa-lg"></i>
+                                <i class="fa-regular fa-xmark fa-lg"></i>
                             </a>
                         </span>
                     </h2>

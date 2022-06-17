@@ -1,0 +1,44 @@
+.guide-container {
+    background-color: #f0f4f5;
+    padding: 24px
+}
+
+.guide-menu-toggle {
+    display: block;
+    color: black;
+    position: relative;
+    cursor: pointer;
+}
+
+.guide-menu-toggle i {
+    color: black;
+    position: absolute;
+    right: 0px;
+    margin-top: 12px;
+}
+
+.guide-container ul {
+    padding: 24px;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    columns: 2;
+    column-gap: 24px;
+}
+
+.guide-container li {
+    border: none;
+}
+
+.libguides div .guide, .libguides div .guide-menu-toggle.off, .libguides div.active .guide-menu-toggle.on{
+    display: none;
+}
+
+.libguides div.active .guide, .libguides div.active .guide-menu-toggle.off{
+    display: block;
+}
+
+@media ( max-width :812px) {
+    .guide-container ul {
+        columns: 1;
+    }
+}
