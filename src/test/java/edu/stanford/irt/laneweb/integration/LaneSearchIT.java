@@ -265,7 +265,7 @@ public class LaneSearchIT {
     public void testLaneSearchScience() throws Exception {
         // science
         this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='Science']", this.ns).exists())
+                xpath("//h:li[position() <= 3]//h:a[@class='primaryLink' and @title='Science']", this.ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
