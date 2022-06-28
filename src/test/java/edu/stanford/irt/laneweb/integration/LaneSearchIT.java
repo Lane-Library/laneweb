@@ -107,7 +107,7 @@ public class LaneSearchIT {
         // Bates Guide
         this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and @title=\"Bates' Guide to physical examination and history taking. Twelfth edition.\"]",
+                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@title,\"Bates' Guide to physical examination and history taking.\")]",
                         this.ns).exists());
     }
 
