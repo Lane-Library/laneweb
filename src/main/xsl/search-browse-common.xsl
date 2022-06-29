@@ -306,6 +306,12 @@
                                     <a href="{s:url}" title="{s:label}">
                                         <xsl:value-of select="s:link-text"/>
                                     </a>
+                                    <xsl:if test="s:version-text">
+                                        <br/>
+                                        <span class="versionText">
+                                            <xsl:value-of select="s:version-text" />
+                                        </span>
+                                    </xsl:if>
                                 </td>
                                 <td>
                                     <xsl:value-of select="s:callnumber"/>
