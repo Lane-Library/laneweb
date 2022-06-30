@@ -77,6 +77,20 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <!-- LANEWEB-10982: replace "CALL# VARIES" with a search by title link -->
+    <xsl:template match="s:callnumber">
+        <xsl:choose>
+            <xsl:when test="contains(.,'CALL# VARIES')">
+                Call number varies. Search for 
+                <a href="{concat('/search.html?source=catalog-all&amp;q=%22',../../s:title,'%22 NOT title:%22',../../s:title,'%22')}"><xsl:value-of select="../../s:title"/></a>
+                to find individual volumes of this title.
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
         <div class="sourceInfo no-bookmarking">
@@ -314,7 +328,7 @@
                                     </xsl:if>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="s:callnumber"/>
+                                    <xsl:apply-templates select="s:callnumber"/>
                                 </td>
                                 <td>
                                     <xsl:value-of select="s:available"/>
