@@ -169,7 +169,7 @@ public class LaneSearchIT {
         // Harrison's
         this.mockMvc.perform(get("/eresources/search.html?q=Harrison's").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() = 1]//h:a[@class='primaryLink' and starts-with(@title,\"Harrison's\")]",
+                        "//h:li[position() <= 3]//h:a[@class='primaryLink' and starts-with(@title,\"Harrison's\")]",
                         this.ns).exists());
     }
 
