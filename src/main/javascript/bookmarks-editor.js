@@ -71,13 +71,23 @@
         add : function() {
             var items = this.get("srcNode").one("ul"),
                 item = Y.Node.create("<li><input type=\"checkbox\" checked=\"checked\"/><a></a></li>"),
+                editors = this.get("editors"),
+                editing = false,
                 editor;
 
-            items.prepend(item);
-            editor = new BookmarkEditor({srcNode : item, render : true});
-            editor.after("destroy", this._handleDestroyEditor, this);
-            this.get("editors").unshift(editor);
-            editor.set("editing", true);
+            editors.forEach(function(node) {
+                if (node.get("editing")) {
+                    editing = true;
+                }
+            });
+                
+            if(!editing) {
+                items.prepend(item);
+                editor = new BookmarkEditor({srcNode : item, render : true});
+                editor.after("destroy", this._handleDestroyEditor, this);
+                editors.unshift(editor);
+                editor.set("editing", true);
+            }
         },
 
         /**
