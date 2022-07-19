@@ -368,7 +368,7 @@
                         constrain : srcNode.one("ul")
                     }).plug(Y.Plugin.DDProxy, {
                         moveOnEnd: false
-                    }));
+                    }).removeInvalid('a'));
             }
         }
     },
