@@ -75,8 +75,8 @@
                 editing = false,
                 editor;
 
-            editors.forEach(function(node) {
-                if (node.get("editing")) {
+            editors.forEach(function(edtr) {
+                if (edtr.get("editing")) {
                     editing = true;
                 }
             });
