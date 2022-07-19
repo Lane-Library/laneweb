@@ -109,7 +109,7 @@
          * @method edit
          */
         edit : function() {
-            var i, checked = this._getCheckedIndexes(), editors = this.get("editors");
+            var i, checked = this._getCheckedIndexes(), editors = this._getSerializedEditors();
             for (i = 0; i < checked.length; i++) {
                 editors[checked[i]].set("editing", true);
             }
@@ -142,13 +142,30 @@
          * @returns {Array}
          */
         _getCheckedIndexes : function() {
-            var indexes = [], i, editors = this.get("editors");
+            var indexes = [], i, editors = this._getSerializedEditors();
             for (i = 0; i < editors.length; i++) {
-                if (editors[i].isChecked()) {
+                if (editors[i].isChecked() && !editors[i].get("editing")) {
                     indexes.push(i);
                 }
             }
             return indexes;
+        },
+
+        /**
+         * Return an Array of BookmarkEditors that have been written to disk (have an a/href]).
+         * LANEWEB-10988: returning unsaved "add" editor causes many bugs
+         * @method _getSerializedEditors
+         * @private
+         * @returns {Array}
+         */
+        _getSerializedEditors : function() {
+            var filteredEditors = [];
+            this.get("editors").forEach(function(editor) {
+                if (editor.get("srcNode").one("a").get("href") != "") {
+                    filteredEditors.push(editor);
+                }
+            });
+            return filteredEditors;
         },
 
         /**
@@ -169,7 +186,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkMove : function(event) {
-            var editors = this.get("editors");
+            var editors = this._getSerializedEditors();
             editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
         },
 
@@ -181,7 +198,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarksRemove : function(event) {
-            var i, editors = this.get("editors");
+            var i, editors = this._getSerializedEditors();
             for (i = event.positions.length - 1; i >= 0; --i) {
                 this._dd[event.positions[i]].destroy(true);
                 this._dd.splice(event.positions[i], 1);
@@ -196,7 +213,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkUpdate : function(event) {
-            var editors = this.get("editors");
+            var editors = this._getSerializedEditors();
             editors[event.position].update();
         },
 
