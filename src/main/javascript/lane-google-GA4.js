@@ -6,11 +6,11 @@
         var host = location.host,
             trackerId;
         if (host.match("lane.stanford.edu")) {
-            trackerId = "UA-3202241-2";
+            trackerId = "";
         } else if (host.match("lane-beta.stanford.edu")) {
-            trackerId = "UA-3203486-9";
-        } else {
             trackerId = "G-RF4JWB6KG5";
+        } else {
+            trackerId = "";
         }    
         return trackerId;
     },
