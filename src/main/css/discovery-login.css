@@ -50,12 +50,12 @@
 
 .login-link {
     background-color: white;
-    background-position: 50% 4.5em;
+    background-position: 50% 3.5em;
     background-repeat: no-repeat;
     background-size: 13em;
     color: black;
     font-weight: 700;
-    padding: 12em 0 4em;
+    padding: 11.5em 0 4em;
     display: block;
 }
 
@@ -64,12 +64,11 @@
 }
 
 .login-link.shc {
-    background-image: url('../images/SHC-discoverylogo.png');
+    background-image: url('../images/SHC-discoverylogo.svg');
 }
 
 .login-link.lpch {
-    background-image: url('../images/LPCH-discoverylogo.png');
-    background-size: 80%;
+    background-image: url('../images/LPCH-discoverylogo.svg');   
 }
 
 .discovery-login-help {
