@@ -61,6 +61,8 @@
 
 .login-link.som {
     background-image: url('../images/SU-discoverylogo.png');
+    background-size: 15em;
+    background-position: 50% 4em;
 }
 
 .login-link.shc {
