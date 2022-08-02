@@ -59,7 +59,7 @@ addEventListener("load", function() {
 
         inputs.forEach(function(input) {
             var suggest;
-            suggest = new L.Suggest(input, "mesh");
+            suggest = new L.Suggest(input);
             suggest.on("suggest:select", eventHandler);
             input.addEventListener("blur", eventHandler);
             input.addEventListener("keyup", eventHandler);

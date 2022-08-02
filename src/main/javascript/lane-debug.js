@@ -82,6 +82,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "back-to-top.js",
         "solr-facets.js",
         "solr-pagination.js",
+        "solr-facet-suggest.js",
         "bookcovers.js",
         "browzine.js",
         "viewport.js",
@@ -95,7 +96,7 @@ YUI({debug:true,filter:"debug",combine:false,fetchCSS:false}).use(
         "validation.js",
         "holdings-toggle.js",
         "table-hide-empty-columns.js"
-		
+
     ];
 
     //Model doesn't exist yet, get basePath by hand:

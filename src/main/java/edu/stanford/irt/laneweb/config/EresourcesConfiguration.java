@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -15,6 +16,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 import org.springframework.oxm.Marshaller;
 
@@ -35,6 +38,7 @@ import edu.stanford.irt.laneweb.eresources.ParenthesesQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmcQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.QueryInspector;
+import edu.stanford.irt.laneweb.eresources.SolrFacetService;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
 import edu.stanford.irt.laneweb.eresources.SolrRepository;
 import edu.stanford.irt.laneweb.eresources.SolrService;
@@ -54,6 +58,8 @@ import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchFacetsGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
+import edu.stanford.irt.laneweb.eresources.search.redesign.SearchFacetSaxStrategy;
+import edu.stanford.irt.laneweb.eresources.search.redesign.SolrFacetsGenerator;
 
 @Configuration
 @EnableSolrRepositories(basePackages = {
@@ -69,6 +75,10 @@ public class EresourcesConfiguration {
     private static final int SOLR_READ_TIMEOUT = 30_000;
 
     private FacetComparator facetComparator;
+    
+    private edu.stanford.irt.laneweb.eresources.search.redesign.FacetComparator redesignFacetComparator;
+    
+    
 
     private Collection<String> meshToIgnoreInSearch;
 
@@ -103,12 +113,13 @@ public class EresourcesConfiguration {
         this.meshToIgnoreInSearch.add("Young Adult");
         this.meshToIgnoreInSearch = Collections.unmodifiableCollection(this.meshToIgnoreInSearch);
         this.publicationTypes = new HashSet<>(4);
+        this.publicationTypes.add("Review");
         this.publicationTypes.add("Clinical Trial");
         this.publicationTypes.add("Randomized Controlled Trial");
-        this.publicationTypes.add("Review");
         this.publicationTypes.add("Systematic Review");
         this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
         this.facetComparator = new FacetComparator(this.publicationTypes);
+        this.redesignFacetComparator = new edu.stanford.irt.laneweb.eresources.search.redesign.FacetComparator(publicationTypes);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/er-a2z-browse-xml")
@@ -121,6 +132,7 @@ public class EresourcesConfiguration {
     public Generator eresourcesAtoZBrowseGenerator(final SolrService solrService) {
         return new AtoZBrowseGenerator("er-a2z-browse-html", solrService, aToZBrowseSAXStrategy());
     }
+
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
     public SAXStrategy<Eresource> eresourceSAXStrategy() {
@@ -198,6 +210,17 @@ public class EresourcesConfiguration {
                 this.meshToIgnoreInSearch, this.publicationTypes, this.facetComparator);
     }
 
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-facets")
+    @Scope("prototype")
+    public Generator solrFacetsGenerator(final SolrFacetService service, final Marshaller marshaller) {
+        return new SolrFacetsGenerator(service , facetSolrSAXStrategy(), FACETS_TO_SHOW_SEARCH, this.publicationTypes);
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/searchFacetSaxStrategy-xml")
+    public SAXStrategy<Map<String, Collection<FacetFieldEntry>>>  facetSolrSAXStrategy() {
+        return new SearchFacetSaxStrategy();
+    }
+    
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-search")
     @Scope("prototype")
     public Generator solrSearchGenerator(final SolrService solrService) {
@@ -210,6 +233,14 @@ public class EresourcesConfiguration {
         return new SolrService(solrQueryParser(), solrRepository, solrTemplate);
     }
 
+    @Bean(name = "edu.stanford.irt.laneweb.solr.SolrFacetService")
+    public SolrFacetService solrFacetService(final SolrRepository solrRepository,
+            @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
+        return new SolrFacetService(solrQueryParser(), solrRepository, solrTemplate);
+    }
+
+    
+    
     @Bean(name = "laneSearchSolrTemplate")
     public SolrTemplate solrTemplate(@Qualifier("solrLaneSearchClient") final SolrClient solrClient) {
         return new SolrTemplate(solrClient);
