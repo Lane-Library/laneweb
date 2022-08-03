@@ -29,27 +29,29 @@ public class FacetComparator implements Comparator<FacetFieldEntry> {
         }
         String facet1Name = getFacetNameAndValue(facet1);
         String facet2Name = getFacetNameAndValue(facet2);
-        int countDiff = (int) (facet2.getValueCount() - facet1.getValueCount());
+        int countDiff = (int) (facet1.getValueCount() - facet2.getValueCount());
         if (this.priorityOverAll.contains(facet1Name) && !this.priorityOverAll.contains(facet2Name)) {
             return -1;
         }
-        if (!this.priorityOverAll.contains(facet1Name) && this.priorityOverAll.contains(facet2Name)) {
+        else if (!this.priorityOverAll.contains(facet1Name) && this.priorityOverAll.contains(facet2Name)) {
             return 1;
         }
-        if (this.prioritizedPublicationTypes.contains(facet1Name) && this.prioritizedPublicationTypes.contains(facet2Name)) {
+        else if (this.prioritizedPublicationTypes.contains(facet1Name) && this.prioritizedPublicationTypes.contains(facet2Name)) {
             return getPosition(facet1Name, facet2Name);
         } else if (this.prioritizedPublicationTypes.contains(facet1Name) && !this.prioritizedPublicationTypes.contains(facet2Name)) {
             return -1;
         } else if (!this.prioritizedPublicationTypes.contains(facet1Name) && this.prioritizedPublicationTypes.contains(facet2Name)) {
             return 1;
         } else if (countDiff > 0) {
-            return 1;
-        } else if (countDiff < 0) {
             return -1;
+        } else if (countDiff < 0) {
+            return 1;
         } else {
-            return 0;
+            return facet1Name.compareTo(facet2Name);
         }
+        
     }
+
 
     private int getPosition(String facet1Name, String facet2Name) {
         for (String pt : this.prioritizedPublicationTypes) {
