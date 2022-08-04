@@ -1,5 +1,9 @@
 package edu.stanford.irt.laneweb.eresources.search.redesign;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalField;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -67,11 +71,16 @@ public class SolrFacetsGenerator extends AbstractGenerator {
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         try {
+            
+            int start = LocalTime.now().get(ChronoField.MILLI_OF_DAY);
             // addYearToFacets();
             FacetPage<Eresource> fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
             orderFacets(fps);
             maybeRequestMorePublicationTypes();
             this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);
+            int end = LocalTime.now().get(ChronoField.MILLI_OF_DAY);
+            System.out.println(end - start );
+            
         } catch (UncategorizedSolrException e) {
             log.error(e.toString());
             // marshal("searching for facets failed", xmlConsumer);
