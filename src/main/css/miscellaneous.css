@@ -95,7 +95,21 @@ em {
     font-size: 0.75em;
 }
 
-hr {
+#live-chat-stiky-button-container{
+    float: right;
+    margin-right: 144px;
+}
+/* To adjust the X button position do it with the live-chat-stiky-button-container margin-right */
+ #live-chat-stiky-button{
+    position: fixed;
+    background-color: #8c1515;
+    padding: 6px 41px;
+    color: white;
+    bottom: 16px;
+    z-index: 3;
+}
+ 
+ hr {
     color: #dddddd;
     border-top: 1px solid;
     margin-bottom: 12px;

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.FacetOptions;
 import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
@@ -17,7 +16,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 
 public class SolrFacetService {
 
-    public static final Collection<String> FACET_FIELDS = Arrays.asList("type", "publicationType",   "recordType", "publicationTitle", "year");
+    public static final Collection<String> FACET_FIELDS = Arrays.asList("type", "publicationType",   "recordType", "publicationTitle");
 
     private static final String EMPTY = "";
 

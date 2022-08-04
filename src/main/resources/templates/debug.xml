@@ -79,6 +79,9 @@
 		<section class="content">
 			<div class="centered">
 			    <?laneweb content?>
+                <div id="live-chat-stiky-button-container">
+                    <a id="live-chat-stiky-button"  href="/contacts/live-chat.html" class="medium-screen-hide">Live Chat</a>
+                </div>  
 			</div>
 		</section>
 		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
