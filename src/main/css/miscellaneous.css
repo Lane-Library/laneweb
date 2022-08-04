@@ -95,12 +95,12 @@ em {
     font-size: 0.75em;
 }
 
-#live-chat-stiky-button-container{
+#live-chat-sticky-button-container{
     float: right;
     margin-right: 142px;
 }
-/* To adjust the X button position do it with the live-chat-stiky-button-container margin-right */
- #live-chat-stiky-button{
+/* To adjust the X button position do it with the live-chat-sticky-button-container margin-right above*/
+ #live-chat-sticky-button{
     position: fixed;
     background-color: #8c1515;
     padding: 6px 39px;
