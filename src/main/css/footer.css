@@ -1,4 +1,9 @@
 /* are these "container" classes generalizable? */
+footer{
+    position: relative;
+    z-index: 4; 
+}
+
 footer:first-of-type {
 	background-color: #FFFFFF;
 }
@@ -7,8 +12,8 @@ footer:nth-of-type(2) {
 	background-color: #8C1515;
 }
 
-body:nth-child(3) footer {
-	background-color: #E3E3E3;
+footer:nth-of-type(3){
+	 background-color: #E3E3E3;
 }
 
 .flex-container, .flex-container-nowrap {
