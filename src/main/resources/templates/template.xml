@@ -22,10 +22,7 @@
 
         <section class="content">
             <div class="centered">
-                <?laneweb content?>
-               <div id="live-chat-sticky-button-container" class="medium-screen-hide">
-                    <a id="live-chat-sticky-button"  rel="popup console  625 750" href="/contacts/live-chat.html" class="live-chat">Live Chat</a>
-                </div>  
+                <?laneweb content?>               
             </div>
         </section>
         
@@ -35,6 +32,9 @@
         <div class="search-indicator">
             <i class="fa-solid fa-spinner fa-spin"></i>
         </div>
+        <div class="medium-screen-hide">
+            <a id="live-chat-sticky-button"  rel="popup console  625 750" href="/contacts/live-chat.html" class="live-chat">Live Chat</a>
+        </div>  
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}-${git.commit.id.abbrev}"></script>
     </body>
