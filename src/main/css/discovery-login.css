@@ -60,7 +60,9 @@
 }
 
 .login-link.som {
-    background-image: url('../images/SU-discoverylogo.png');
+    background-image: url('../images/SU-discoverylogo.png?id=1');
+    background-size: 18em;
+    background-position: 50% 2.5em;
 }
 
 .login-link.shc {
@@ -113,7 +115,7 @@
         flex: 1 1 30%;
     }
     .login-link {
-        padding: 8em 0 3em;
+        padding: 11em 2em 3em;
         background-position: 50% 30%;
     }
 }

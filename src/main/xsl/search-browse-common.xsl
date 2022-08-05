@@ -77,6 +77,20 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <!-- LANEWEB-10982: replace "CALL# VARIES" with a search by title link -->
+    <xsl:template match="s:callnumber">
+        <xsl:choose>
+            <xsl:when test="contains(.,'CALL# VARIES')">
+                Call number varies. Search for 
+                <a href="{concat('/search.html?source=catalog-all&amp;q=%22',../../s:title,'%22 NOT title:%22',../../s:title,'%22')}"><xsl:value-of select="../../s:title"/></a>
+                to find individual volumes of this title.
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
         <div class="sourceInfo no-bookmarking">
@@ -250,8 +264,7 @@
     <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links"/>
         <xsl:param name="eresource"/>
-        <!-- don't write print holdings when there are no items and a digital holding exists (helps with component/article/chapter records pointing to a parent)  -->
-        <xsl:if test="count($links) > 0 and not($eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) &gt; 0)">
+        <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
             <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0"/>
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
@@ -306,9 +319,15 @@
                                     <a href="{s:url}" title="{s:label}">
                                         <xsl:value-of select="s:link-text"/>
                                     </a>
+                                    <xsl:if test="s:version-text">
+                                        <br/>
+                                        <span class="versionText">
+                                            <xsl:value-of select="s:version-text" />
+                                        </span>
+                                    </xsl:if>
                                 </td>
                                 <td>
-                                    <xsl:value-of select="s:callnumber"/>
+                                    <xsl:apply-templates select="s:callnumber"/>
                                 </td>
                                 <td>
                                     <xsl:value-of select="s:available"/>

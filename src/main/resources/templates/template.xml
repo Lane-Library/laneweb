@@ -23,8 +23,8 @@
         <section class="content">
             <div class="centered">
                 <?laneweb content?>
-                <div id="live-chat-sticky-button-container">
-                    <a id="live-chat-sticky-button"  href="/contacts/live-chat.html" class="live-chat medium-screen-hide">Live Chat</a>
+                <div id="live-chat-sticky-button-container" class="medium-screen-hide">
+                    <a id="live-chat-sticky-button"  rel="popup console  625 750" href="/contacts/live-chat.html" class="live-chat">Live Chat</a>
                 </div>  
             </div>
         </section>

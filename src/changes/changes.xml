@@ -6,12 +6,39 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-         <release date="2022-06-13" version="3.11.8" description="bug fix and update release">
+        <release date="2022-07-25" version="3.11.11" description="bug fix and update release">
+            <action date="2022-03-04" dev="alainb" issue="LANEWEB-10904" type="update">
+                hospital logo/brand change on discovery login page
+            </action>
+            <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10989" type="fix">
+                Delete Bookmark Bug    
+            </action>
+            <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10990" type="fix">
+                Bookmark feature Deleting Bug
+            </action>
+            <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10991" type="fix">
+                Only allow one add option at a time for bookmark feature
+            </action>
+            <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10982" type="fix">
+                Bookmark Reorder bug
+            </action>
+        </release>
+        <release date="2022-07-01" version="3.11.10" description="bug fix and update release">
+            <action date="2022-06-23" dev="ryanmax" issue="LANEWEB-10982" type="update">
+                Shelved under notes not visible in Lane Search results
+            </action>
+        </release>
+        <release date="2022-06-20" version="3.11.9" description="bug fix and update release">
+            <action date="2022-05-11" dev="alainb" issue="LANEWEB-10962" type="update">
+                Create Guides Page
+            </action>
+        </release>
+        <release date="2022-06-13" version="3.11.8" description="bug fix and update release">
             <action date="2022-06-10" dev="alainb" issue="LANEWEB-10977" type="update">
                 Bookmark Feature Star Not Appearing
             </action>
-         </release>
-         <release date="2022-06-06" version="3.11.7" description="bug fix and update release">
+        </release>
+        <release date="2022-06-06" version="3.11.7" description="bug fix and update release">
             <action date="2022-05-11" dev="alainb" issue="LANEWEB-10956" type="update">
                 Staff Directory Redesign
             </action>
