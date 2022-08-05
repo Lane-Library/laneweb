@@ -80,7 +80,7 @@
 			<div class="centered">
 			    <?laneweb content?>
                 <div id="live-chat-sticky-button-container">
-                    <a id="live-chat-sticky-button"  href="/contacts/live-chat.html" class="medium-screen-hide">Live Chat</a>
+                    <a id="live-chat-sticky-button" rel="popup console 625 750"  href="/contacts/live-chat.html" class="live-chat medium-screen-hide">Live Chat</a>
                 </div>  
 			</div>
 		</section>
