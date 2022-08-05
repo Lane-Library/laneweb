@@ -3,10 +3,10 @@
     "use strict";
 
     var userAgent = L.getUserAgent();
-    
-    
-    /* IE 10 and Earlier */
-    if (/MSIE/.test(userAgent)) {
+
+
+     /* IE 10 and Earlier and IE 11*/
+    if (/MSIE|Trident/.test(userAgent)) {
 
         //toggle bookmarklet instructions for IE on favorites page
         document.querySelectorAll('#bookmarkletNotIE, .bookmarklet-not-ie').forEach(function(node) {
@@ -17,15 +17,11 @@
             node.style.display = 'block';
         });
         
-    }
-
-     /* IE 10 and Earlier and IE 11*/
-    if (/MSIE|Trident/.test(userAgent)) {
-        if(document.querySelector('#live-chat-sticky-button')){
+        if (document.querySelector('#live-chat-sticky-button')) {
             document.querySelector('#live-chat-sticky-button').style.display = 'none';
         }
     }
-     
+
     if (/Edge/.test(userAgent)) {
 
         //toggle bookmarklet instructions for IE on favorites page
