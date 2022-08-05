@@ -3,7 +3,7 @@
     "use strict";
 
     var userAgent = L.getUserAgent();
-
+    
     if (/MSIE/.test(userAgent)) {
 
         //toggle bookmarklet instructions for IE on favorites page
@@ -14,6 +14,10 @@
         document.querySelectorAll('#bookmarkletIE, .bookmarklet-ie').forEach(function(node) {
             node.style.display = 'block';
         });
+        
+        if(document.querySelector('#live-chat-sticky-button')){
+            document.querySelector('#live-chat-sticky-button').style.display = 'none';
+        }
     }
 
     if (/Edge/.test(userAgent)) {
