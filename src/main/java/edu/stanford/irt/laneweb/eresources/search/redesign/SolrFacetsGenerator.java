@@ -72,15 +72,11 @@ public class SolrFacetsGenerator extends AbstractGenerator {
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         try {
             
-            int start = LocalTime.now().get(ChronoField.MILLI_OF_DAY);
             // addYearToFacets();
             FacetPage<Eresource> fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShowSearch);
             orderFacets(fps);
             maybeRequestMorePublicationTypes();
             this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);
-            int end = LocalTime.now().get(ChronoField.MILLI_OF_DAY);
-            System.out.println(end - start );
-            
         } catch (UncategorizedSolrException e) {
             log.error(e.toString());
             // marshal("searching for facets failed", xmlConsumer);

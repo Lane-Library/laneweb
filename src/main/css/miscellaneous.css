@@ -95,42 +95,16 @@ em {
     font-size: 0.75em;
 }
 
-#live-chat-sticky-button-container{
-    float: right;
-    margin-right: 142px;
-}
-/* To adjust the X button position do it with the live-chat-sticky-button-container margin-right above*/
+
  #live-chat-sticky-button{
     position: fixed;
+    top: 411px;
+    right:0;
+    writing-mode: vertical-rl;
     background-color: #8c1515;
-    padding: 6px 39px;
+    padding: 23px 7px;
     color: white;
-    bottom: 16px;
     z-index: 3;
-    box-shadow: 0px 3px 6px #00000029;
-    border: 2px solid #fff;
-    border-radius: 2px;
-}
-
-
- 
- 
- hr {
-#live-chat-sticky-button-container{
-    float: right;
-    margin-right: 142px;
-}
-/* To adjust the X button position do it with the live-chat-sticky-button-container margin-right above */
- #live-chat-sticky-button{
-    position: fixed;
-    background-color: #8c1515;
-    padding: 6px 39px;
-    color: white;
-    bottom: 16px;
-    z-index: 3;
-    box-shadow: 0px 3px 6px #00000029;
-    border: 2px solid #fff;
-    border-radius: 2px;
 }
  
  hr {
