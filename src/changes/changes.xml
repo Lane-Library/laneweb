@@ -6,6 +6,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2022-08-08" version="3.11.12" description="bug fix and update release">
+            <action date="2022-08-08" dev="alainb" issue="LANEWEB-11013" type="add">
+                add sticky live chat button to desktop interface
+            </action>
+            <action date="2022-08-05" dev="ryanmax" issue="LANEWEB-11012" type="update">
+                update SHC IP ranges as per Vinayshankar Kumar
+            </action>
+            <action date="2022-08-04" dev="ryanmax" issue="LANEWEB-11009" type="fix">
+                some print holdings without items not displaying
+            </action>
+            <action date="2022-08-02" dev="alainb" issue="LANEWEB-11010" type="add">
+                add sticky menu to header
+            </action>
+        </release>
         <release date="2022-07-25" version="3.11.11" description="bug fix and update release">
             <action date="2022-03-04" dev="alainb" issue="LANEWEB-10904" type="update">
                 hospital logo/brand change on discovery login page
