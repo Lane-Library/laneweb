@@ -100,7 +100,7 @@ em {
     position: fixed;
     top: 411px;
     right:0;
-    writing-mode: vertical-rl;
+    writing-mode: sideways-lr;
     background-color: #8c1515;
     padding: 23px 7px;
     color: white;
