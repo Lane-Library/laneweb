@@ -26,7 +26,7 @@ import edu.stanford.irt.status.StatusService;
 @Configuration
 public class StatusConfiguration {
 
-    private static final int MIN_BIB_COUNT = 310_000;
+    private static final int MIN_BIB_COUNT = 200_000;
 
     private static final int MIN_PUBMED_COUNT = 27_000_000;
 
