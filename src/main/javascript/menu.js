@@ -2,6 +2,16 @@
 
     "use strict";
 
+
+    //For regular mobile menu 
+    document.querySelectorAll('.menu-container.mobile h2').forEach(function(menu) {
+        menu.addEventListener('click', function(event) {
+            event.preventDefault();
+            menu.closest(".menu-container").classList.toggle('active');
+        })
+    });
+
+
     document.querySelectorAll('.menu ul').forEach(function(submenu) {
         if (submenu.querySelector('.menuitem-active')) {
             submenu.className = 'submenu submenu-active';
@@ -19,4 +29,6 @@
             }
         });
     });
+
+
 })();

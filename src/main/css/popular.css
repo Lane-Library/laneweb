@@ -9,12 +9,15 @@
     position: relative;
 }
 
-.popular h3, .popular h4 {
+.popular h2, .popular h3, .popular h4 {
     text-transform: uppercase;
     font-family: 'Fjord One', serif;
     color: #ffffff;
     text-align: center;
     background-image: none;
+}
+.popular h2:before{
+    border: none;
 }
 
 .popular li {
@@ -32,6 +35,15 @@
 
 .popular a, .popular a .fa {
     color: #fff;
+}
+
+.menu-container.popular h2 i{
+    color: white;
+}
+
+
+.menu-container.popular li a{
+    padding: 3px 0;
 }
 
 .top-resources {
@@ -54,75 +66,94 @@
     flex: 0 1 50%;
 }
 
-.top-resources a {
+.top-resources.menu-container a {
     color: black;
+    padding: 6px 0;
+}
+
+.top-resources.menu-container a:hover {
+    color: black;
+    background-color: white;
+    text-decoration: underline;
 }
 
 @media ( max-width : 1100px) {
-    .top-resources:first-child span {
+    
+    .top-resources.menu-container.mobile h2 i, .top-resources.menu-container.mobile.active h2 i,.popular.menu-container  hr
+    {
         display: none;
     }
-    #mobile-menu-header.popular:target div.pure-u-1-2 {
+    .top-resources.menu-container.mobile div.pure-u-1-2,.popular.menu-container  div.pure-u-1-2{
         width: 50%;
         display: inline-block;
     }
-    #mobile-menu-header.popular:target div.pure-g {
+    .top-resources.menu-container.mobile div.pure-g {
         display: flex;
     }
-    #mobile-menu-header.top-resources  ul, #mobile-menu-header.top-resources:target ul
-        {
+    .popular.menu-container  div div{
+        padding: 12px 27px;
+    }
+    .top-resources.menu-container.mobile  ul {
         display: flex;
         flex-flow: column wrap;
         margin-left: 6%;
         height: 114px;
+        padding: 16px 0;
     }
-    #mobile-menu-header.top-resources h2 {
-        margin-bottom: 1.2em;
-        padding-bottom: 0.6em;
+    .top-resources.menu-container.mobile h2 {
+        margin: 24px;
+        padding: 24px 0;
         border-bottom: 1px solid #d8dbdc;
+        cursor: default;
     }
-    #mobile-menu-header.top-resources h2:before {
-        border-top: 3px solid #8C1515
+    .top-resources.menu-container.mobile h2:before {
+        content: " ";
+        position: absolute;
+        width: 3em;
+        border-top: 3px solid #8C1515;
+        bottom: -2px;
     }
     .top-resources li {
         flex: inherit;
     }
-    .popular .menu-toggle, .popular .menu-toggle i {
-        background-color: grey;
-        color: white;
-    }
-    .popular  .menu-toggle {
-        top: -1px;
-        right: -1px;
+    .menu-container.top-resources h2 i {
+        background-color: white;
+        color: black;
     }
 }
 
 @media ( max-width : 812px) {
-    #mobile-menu-header.top-resources  ul {
+    .top-resource-container .module {
+        padding: 1em;
+    }
+    .top-resources.menu-container.mobile {
+        padding: 0;
+        margin: 24px 32px 0;
+    }
+    .top-resources.menu-container.mobile h2 {
+        padding: 16px 0;
+    }
+    .top-resources.menu-container.mobile h2, .top-resources.menu-container.mobile h2:before
+        {
+        margin-bottom: 0;
+        border: none;
+        cursor: pointer;
+    }
+    .top-resources.menu-container h2 i:first-of-type, .top-resources.menu-container.active h2 i:nth-of-type(2)
+        {
+        display: block;
+    }
+    .top-resources.menu-container.mobile  ul, .top-resources.menu-container.active h2 i:first-of-type
+        {
         display: none;
     }
-    #mobile-menu-header.top-resources:target ul, .top-resources:first-child span
-        {
+    .top-resources.menu-container.active ul {
         display: flex;
+        margin-left: 9%;
         flex-flow: row wrap;
         height: auto;
     }
-    #mobile-menu-header.top-resources h2, #mobile-menu-header.top-resources h2:before
-        {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border: none;
-    }
-    #mobile-menu-header.top-resources .menu-toggle i {
-        padding-top: 11px;
-    }
-    .top-resource-container ul {
-        margin: 12px;
-    }
-    .top-resources li {
+    .top-resources.menu-container li {
         flex: 0 1 50%;
-    }
-    .top-resource-container .module {
-        padding: 1em;
     }
 }

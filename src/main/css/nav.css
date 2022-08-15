@@ -224,8 +224,12 @@ ul .nav-menu {
 		margin: 30px 42px 0 0;
 		padding-left: 10px;
 	}
+	.menu-toggle span, .menu-toggle i {
+    color: black;
+    display: initial;
+    }
 	#nav-toggle-off span {
-		line-height: 50px;
+	line-height: 50px; 
 	}
 	#navigation:target #nav-toggle-on {
 		display: none;
