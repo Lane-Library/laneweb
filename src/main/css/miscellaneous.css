@@ -98,11 +98,11 @@ em {
 
  #live-chat-sticky-button{
     position: fixed;
-    top: 411px;
-    right:0;
-    writing-mode: vertical-rl;
+    top: 448px;
+    right: -37px;
+    transform: rotate(-90deg);
     background-color: #8c1515;
-    padding: 23px 7px;
+    padding: 7px 23px;
     color: white;
     z-index: 3;
 }
