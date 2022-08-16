@@ -4,12 +4,13 @@
 
     var bassettContent = document.querySelector('#bassettContent'),
         model = L.Model,
-        basePath = model.get(model.BASE_PATH)|| "",
+        basePath = model.get(model.BASE_PATH) || "",
+        HIDE = 'Hide',
+        SEE_ALL = 'See All',
         diagramDisplay = false,
         accordion,
         history = window.history,
         subRegionToShow = 4,
-        prevRegion,
         prevSubRegion,
 
         formatAjaxUrl = function(string) {
@@ -32,9 +33,9 @@
         submitPagination = function(e) {
             var page = e.target.page.value,
                 pages = e.target.pages;
-            if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.value)){
+            if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.value)) {
                 e.preventDefault();
-                document.querySelectorAll(".bassett-error").forEach(function(node){
+                document.querySelectorAll(".bassett-error").forEach(function(node) {
                     node.style.display = "block";
                 });
                 return;
@@ -52,8 +53,8 @@
                 });
             }
             L.io(url, {
-                on : {
-                    success : successHandler
+                on: {
+                    success: successHandler
                 }
             });
         },
@@ -68,7 +69,7 @@
             }
             url = formatAjaxUrl(this.href);
             try {
-                history.pushState({bassett: url}, "", "");
+                history.pushState({ bassett: url }, "", "");
                 loadContent(url);
             } catch (e) {
                 loadContent(url);
@@ -101,45 +102,49 @@
         },
 
         // For the bassett menu
-        hideSubRegions = function(region) {
-            if (prevRegion && prevRegion.querySelector('.see-all')) {
-                prevRegion.querySelector('.see-all').innerHTML = 'See All';
-                var subRegion = prevRegion.querySelectorAll('li');
-                for (var i = subRegionToShow; i < subRegion.length; i++) {
-                    subRegion[i].hidden = "hidden";
-                    subRegion[i].style.display = "none";
-                }
+        hideSubRegions = function(event) {
+            var i, region = event.currentTarget.closest("ul"),
+                subRegion = region.querySelectorAll('li');
+                resetSubRegion(region);
+            region.querySelector('.see-all').innerHTML = SEE_ALL;
+            for (i = subRegionToShow; i < subRegion.length; i++) {
+                subRegion[i].style.display = "none";
             }
-            prevRegion = region;
         },
 
-        resetSubRegion = function(subRegion) {
-            if (prevSubRegion && prevSubRegion.querySelector('i')) {
-                prevSubRegion.classList.remove('enabled');
-                var iElement = prevSubRegion.querySelector('i');
+        resetSubRegion = function(region) {
+            var i, iElement,
+                subRegion = region.querySelectorAll('li');
+            for (i = 1; i < subRegion.length; i++) {
+                iElement = subRegion[i].querySelector('i');
                 iElement.classList.add('fa-square');
                 iElement.classList.remove('fa-check-square');
             }
-            prevSubRegion = subRegion;
         },
 
         expandSubRegion = function(event) {
-            var i, subRegion, display,
-                region = event.currentTarget.closest("ul");
-            display = region.querySelectorAll('li')[subRegionToShow + 1].style.display;
-            hideSubRegions(region);
-            resetSubRegion();
-            if (display === 'none') {
-                region.querySelector('.see-all').innerHTML = 'hide';
-                subRegion = region.querySelectorAll('li');
-                for (i = subRegionToShow + 1; i < subRegion.length; i++) {
-                    subRegion[i].style.display = 'block';
-                }
+            var i, subRegion,
+            region = event.currentTarget.closest("ul");
+            resetSubRegion(region);
+            region.querySelector('.see-all').innerHTML = HIDE;
+            subRegion = region.querySelectorAll('li');
+            for (i = subRegionToShow + 1; i < subRegion.length; i++) {
+                subRegion[i].style.display = 'block';
+            }
+        },
+
+        displaySubRegion = function(event) {
+            var seeAllContent = event.currentTarget.innerHTML;
+            if (seeAllContent === HIDE) {
+                hideSubRegions(event);
+            }
+            else {
+                expandSubRegion(event);
             }
         },
 
         surlineSubRegion = function(event) {
-            var i,  li = event.currentTarget;
+            var i, li = event.currentTarget;
             resetSubRegion(li);
             li.classList.add('enabled');
             i = li.querySelector('i');
@@ -154,7 +159,7 @@
             registerLinksContainer(accordion);
             registerLinksContainer(bassettContent);
             document.querySelectorAll('.see-all').forEach(function(node) {
-                node.addEventListener('click', expandSubRegion);
+                node.addEventListener('click', displaySubRegion);
             });
             document.querySelectorAll('.region li:not(:first-child)').forEach(function(node) {
                 node.addEventListener('click', surlineSubRegion);
