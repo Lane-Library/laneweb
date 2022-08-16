@@ -103,7 +103,7 @@
         // For the bassett menu
         hideSubRegions = function(region) {
             if (prevRegion && prevRegion.querySelector('.see-all')) {
-                prevRegion.querySelector('.see-all').innerHTML = 'see all';
+                prevRegion.querySelector('.see-all').innerHTML = 'See All';
                 var subRegion = prevRegion.querySelectorAll('li');
                 for (var i = subRegionToShow; i < subRegion.length; i++) {
                     subRegion[i].hidden = "hidden";
