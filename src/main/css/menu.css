@@ -5,20 +5,22 @@
 }
 
 .menu-container li a {
-    display: block;
+    display: inline-block;
     width: 100%;
     padding: 9px 24px;
 }
 
-.menu-container li a:hover, .menu-container li a.menuitem-active {
+.menu-container.hoverline li a:hover{
     color: white;
     background-color: #666;
     text-decoration: none;
 }
 
-.menu-container li a.menuitem-active {
+.menu-container li a.menuitem-active, .menu-container li a:hover.menuitem-active {
     background-color: #8c1515;
+    color:white;
     cursor: default;
+    text-decoration: none;
 }
 
 .menu-container  h2 i {
@@ -46,7 +48,7 @@
     }
     .menu-container.active ul {
         display: block;
-        padding: 16px;
+        margin: 16px;
     }
     .menu-container.mobile h2{
         padding: 16px;

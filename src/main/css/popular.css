@@ -71,11 +71,6 @@
     padding: 6px 0;
 }
 
-.top-resources.menu-container a:hover {
-    color: black;
-    background-color: white;
-    text-decoration: underline;
-}
 
 @media ( max-width : 1100px) {
     

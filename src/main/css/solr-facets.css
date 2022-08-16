@@ -50,16 +50,10 @@
 
 .facet-container .facet a:hover {
     text-decoration: none;
-    background-color: white;
 }
 
 .facet-container li  a:hover .facetLabel {
     text-decoration: underline;
-    color: #007c92;
-}
-
-.facet-container .facetCount:hover {
-    text-decoration: none;
 }
 
 .facet-container .facetCount {
@@ -81,7 +75,6 @@
     {
     width: 80%;
 }
-
 
 .facet-container  input {
     padding: 6px;

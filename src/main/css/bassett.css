@@ -34,13 +34,6 @@
 .menu-container #bassett-menu li a{
     padding: 6px 0px;
     width: 100%;
-    display: inline-block;
-}
-
-.menu-container #bassett-menu li a:hover{
-    background-color: white;
-    color: #007c92;
-    text-decoration: underline;
 }
 .menu-container #bassett-menu li a i {
     color: #666;
