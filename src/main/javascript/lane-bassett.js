@@ -117,8 +117,8 @@
             if (prevSubRegion && prevSubRegion.querySelector('i')) {
                 prevSubRegion.classList.remove('enabled');
                 var iElement = prevSubRegion.querySelector('i');
-                iElement.classList.add('fa-circle');
-                iElement.classList.remove('fa-check-circle');
+                iElement.classList.add('fa-square');
+                iElement.classList.remove('fa-check-square');
             }
             prevSubRegion = subRegion;
         },
@@ -143,8 +143,8 @@
             resetSubRegion(li);
             li.classList.add('enabled');
             i = li.querySelector('i');
-            i.classList.remove('fa-circle');
-            i.classList.add('fa-check-circle');
+            i.classList.remove('fa-square');
+            i.classList.add('fa-check-square');
         };
 
     if (bassettContent) {
