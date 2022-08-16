@@ -59,15 +59,8 @@
     <xsl:variable name="header">
         <h2 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
             Filter Results
-
-            <span>
-                <a href="#mobile-menu-header" class="menu-toggle">
-                    <i class="fa-regular fa-angle-down fa-lg"></i>
-                </a>
-                <a href="#off" id="off" class="menu-toggle">
-                    <i class="fa-regular fa-angle-up fa-lg"></i>
-                </a>
-            </span>
+            <i class="fa-regular fa-angle-down fa-lg"></i>
+            <i class="fa-regular fa-angle-up fa-lg"></i>
         </h2>
     </xsl:variable>
 
@@ -132,7 +125,7 @@
                 <xsl:if test="$facets != ''">
                     <xsl:copy-of select="$filter-facet" />
                 </xsl:if>
-                <div id="mobile-menu-header" class="facet-container module">
+                <div class="facet-container module menu-container mobile">
                     <xsl:apply-templates select="./f:facetResult" />
                 </div>
             </body>

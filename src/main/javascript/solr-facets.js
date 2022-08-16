@@ -2,7 +2,7 @@
 
     "use strict";
 
-    if (document.querySelector(".solrFacets")) {
+    if (document.querySelector("#solr-date-form")) {
 
         var ERROR_MESSAGE_START_YEAR_GREATER_THAN_END_YEAR = "The start year should be smaller than the end year", 
             searchForm = document.querySelector(".search-form"),
