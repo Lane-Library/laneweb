@@ -119,10 +119,4 @@
         margin-left: 32px;
         margin-right: 32px;
     }
-    .facet-container.menu-container {
-        padding: 0 2em;
-    }
-    .facet-container.menu-container.mobile h2 {
-        padding: 16px 0;
-    }
 }

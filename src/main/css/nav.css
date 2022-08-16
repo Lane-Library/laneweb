@@ -224,7 +224,7 @@ ul .nav-menu {
 		margin: 30px 42px 0 0;
 		padding-left: 10px;
 	}
-	.menu-toggle span, .menu-toggle i {
+	.menu-toggle span, .menu-toggle i, .menu-toggle i.fa-regular{
     color: black;
     display: initial;
     }
