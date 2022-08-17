@@ -269,12 +269,6 @@ li.active .description {
         position: static;
         padding: 10px 0;
     }
-    .search-results .content {
-        margin: 0 12px;
-    }
-    .search-results h1 {
-        margin: 0.67em 0;
-    }
     .resource .bookcover {
         padding: 5px 10px 0 0;
         float: left;
