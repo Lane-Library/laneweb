@@ -29,10 +29,6 @@
     display: none;
 }
 
-.sticky-menu {
-    position: sticky;
-    top: 80px;
-}
 
 @media ( max-width :1100px) {
     .menu-container.mobile {

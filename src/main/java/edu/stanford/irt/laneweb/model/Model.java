@@ -31,7 +31,7 @@ public final class Model {
 
     public static final String DEBUG = "debug";
     
-    public static final String END_YEAR = "end-year";
+    public static final String YEAR_END = "end-year";
 
     public static final String EMAIL = "email";
 
@@ -131,7 +131,7 @@ public final class Model {
 
     public static final String SOURCEID = "sourceid";
 
-    public static final String START_YEAR = "start-year";
+    public static final String YEAR_START = "start-year";
     
     public static final String TEMPLATE = "template";
 

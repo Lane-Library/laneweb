@@ -92,12 +92,12 @@
 
         registerLinksContainer = function(container) {
             if (container) {
-                var anchor = container.querySelectorAll('a');
-                for (var i = 0; i < anchor.length; i++) {
-                    if (!anchor[i].rel || anchor[i].rel === "propagation") {
-                        anchor[i].addEventListener('click', handleClick);
+                var anchors = container.querySelectorAll('a');
+                anchors.forEach (function(anchor){
+                    if (!anchor.rel || anchor.rel === "propagation") {
+                        anchor.addEventListener('click', handleClick);
                     }
-                }
+                })
             }
         },
 
@@ -144,8 +144,9 @@
         },
 
         surlineSubRegion = function(event) {
-            var i, li = event.currentTarget;
-            resetSubRegion(li);
+            var i, li = event.currentTarget,
+            ul = li.closest('ul');
+            resetSubRegion(ul);
             li.classList.add('enabled');
             i = li.querySelector('i');
             i.classList.remove('fa-square');

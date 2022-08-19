@@ -73,7 +73,7 @@ public class EresourcesConfigurationTest {
 
     @Test
     public void testSolrSearchFacetsGenerator() {
-        assertNotNull(this.configuration.solrSearchFacetsGenerator(null, null));
+        assertNotNull(this.configuration.facetsGenerator(null));
     }
 
     @Test

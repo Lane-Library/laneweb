@@ -4,7 +4,7 @@
 
     if (document.querySelector("#solr-date-form")) {
 
-        var ERROR_MESSAGE_START_YEAR_GREATER_THAN_END_YEAR = "The start year should be smaller than the end year", 
+        var ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year", 
             searchForm = document.querySelector(".search-form"),
             dateSolrForm = document.querySelector("#solr-date-form"),
             startYearInput = document.querySelector(".date.start"),
@@ -31,7 +31,7 @@
                         errorMessage.textContent = model.endYear.validationMessage;
                     }
                     else if ( model.startYear.value > model.endYear.value) {
-                        errorMessage.textContent = ERROR_MESSAGE_START_YEAR_GREATER_THAN_END_YEAR;
+                        errorMessage.textContent = ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END;
                         
                     }else{
                         searchForm.submit();   

@@ -5,7 +5,7 @@
             <h2>
                 Categories
                 <i class="active fa-regular fa-angle-down fa-lg"></i>
-                <i class="fa-regular fa-xmark fa-lg"></i>
+                <i class="fa-regular fa-angle-up fa-lg"></i>
             </h2>
             <ul>
                 <li>

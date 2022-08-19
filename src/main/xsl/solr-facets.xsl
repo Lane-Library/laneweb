@@ -32,7 +32,7 @@
 			<i class="fa-regular fa-angle-down fa-lg"></i>
 		</a>
 		<a href="#off" id="off"  class="menu-toggle">
-			<i class="fa-regular fa-xmark fa-lg"></i>
+			<i class="fa-regular fa-angle-up fa-lg"></i>
 		</a>
 		</span>
         </h2>

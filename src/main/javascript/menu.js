@@ -14,14 +14,22 @@
 
     document.querySelectorAll('.menu-container ul li a[href^="#"]').forEach(function(link) {
         link.addEventListener('click', function(event) {
-           var link = event.target;
-           link.closest('ul').querySelectorAll('li a').forEach(function(anchor) {
+           var clickTarget = event.target;
+           clickTarget.closest('ul').querySelectorAll('li a').forEach(function(anchor) {
                 anchor.classList.remove('menuitem-active');
             });
-            
-            link.classList.add('menuitem-active');    
+            clickTarget.classList.add('menuitem-active');    
         })
     });
 
+    
+    window.addEventListener("load", function() {
+    var hash = window.location.hash;
+    document.querySelectorAll('.menu-container ul li a[href^="#"]').forEach(function(link) {
+        if(hash === link.hash){
+            link.classList.add('menuitem-active');
+        }       
+    });
+    });
 
 })();

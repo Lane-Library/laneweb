@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Controller;
@@ -13,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrFacetService;
+import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
 
 @Controller
-public class SolrSugggestionController {
+public class FacetSuggestionController {
 
-    private final static String RESULT_NOT_FOUND_MESSAGE="No match found";
+    private static final String RESULT_NOT_FOUND_MESSAGE="No match found";
     
-    private SolrFacetService solrFacetService;
+    private FacetService solrFacetService;
 
-    final int FACET_MIN_COUNT = 1;
+    private static final int FACET_MIN_COUNT = 1;
     
-    public SolrSugggestionController(final SolrFacetService solrFacetService) {
+    
+    public FacetSuggestionController(final FacetService solrFacetService) {
         this.solrFacetService = solrFacetService;
     }
 
