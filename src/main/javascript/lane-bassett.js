@@ -112,20 +112,22 @@
             }
         },
 
-        resetSubRegion = function(region) {
+        resetSubRegions = function() {
             var i, iElement,
-                subRegion = region.querySelectorAll('li');
+                subRegion = document.querySelector('#bassett-menu').querySelectorAll('li');
             for (i = 1; i < subRegion.length; i++) {
                 iElement = subRegion[i].querySelector('i');
-                iElement.classList.add('fa-square');
-                iElement.classList.remove('fa-check-square');
+                if(iElement){
+                    iElement.classList.add('fa-square');
+                    iElement.classList.remove('fa-check-square');
+                }
             }
         },
 
         expandSubRegion = function(event) {
             var i, subRegion,
             region = event.currentTarget.closest("ul");
-            resetSubRegion(region);
+            resetSubRegions();
             region.querySelector('.see-all').innerHTML = HIDE;
             subRegion = region.querySelectorAll('li');
             for (i = subRegionToShow + 1; i < subRegion.length; i++) {
@@ -144,9 +146,8 @@
         },
 
         surlineSubRegion = function(event) {
-            var i, li = event.currentTarget,
-            ul = li.closest('ul');
-            resetSubRegion(ul);
+            var i, li = event.currentTarget;
+            resetSubRegions();
             li.classList.add('enabled');
             i = li.querySelector('i');
             i.classList.remove('fa-square');
