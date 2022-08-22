@@ -53,7 +53,7 @@ import edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetSaxStrategy;
+import edu.stanford.irt.laneweb.eresources.search.redesign.FacetSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
 import edu.stanford.irt.laneweb.eresources.search.redesign.FacetsGenerator;
 
@@ -169,7 +169,7 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/searchFacetSaxStrategy-xml")
     public SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSAXStrategy() {
-        return new FacetSaxStrategy(this.facetFields);
+        return new FacetSAXStrategy(this.facetFields);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-search")

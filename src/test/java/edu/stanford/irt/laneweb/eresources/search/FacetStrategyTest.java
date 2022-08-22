@@ -18,11 +18,11 @@ import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetSaxStrategy;
+import edu.stanford.irt.laneweb.eresources.search.redesign.FacetSAXStrategy;
 
 public class FacetStrategyTest {
 
-    private FacetSaxStrategy strategy;
+    private FacetSAXStrategy strategy;
 
     private TestXMLConsumer xmlConsumer;
 
@@ -41,7 +41,7 @@ public class FacetStrategyTest {
         publicationTypeResult.add(new SimpleFacetFieldEntry(fieldPublicationType, "requiredIndex2", 10));
         solrResult.put(fieldPublicationType.getName(), publicationTypeResult);
         Collection<String> facets = Arrays.asList("type", "publicationType", "test");
-        this.strategy = new FacetSaxStrategy(facets);
+        this.strategy = new FacetSAXStrategy(facets);
         this.xmlConsumer = new TestXMLConsumer();
     }
 

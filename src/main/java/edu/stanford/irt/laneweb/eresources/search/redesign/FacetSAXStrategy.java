@@ -13,13 +13,13 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class FacetSaxStrategy implements SAXStrategy<Map<String, Collection<FacetFieldEntry>>> {
+public class FacetSAXStrategy implements SAXStrategy<Map<String, Collection<FacetFieldEntry>>> {
 
     private static final String CDATA = "CDATA";
 
     private Collection<String> facetFields;
 
-    public FacetSaxStrategy(Collection<String> facetFields) {
+    public FacetSAXStrategy(Collection<String> facetFields) {
         this.facetFields = facetFields;
     }
 
