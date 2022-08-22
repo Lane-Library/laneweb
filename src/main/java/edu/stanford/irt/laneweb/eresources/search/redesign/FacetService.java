@@ -1,5 +1,5 @@
-package edu.stanford.irt.laneweb.eresources.search.redesign;
 
+package edu.stanford.irt.laneweb.eresources.search.redesign;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -35,7 +35,7 @@ public class FacetService {
 
     private SolrTemplate solrTemplate;
 
-    private Collection<String> selectedFacets;
+    private Collection<String> facetFields;
 
     public FacetService(final SolrQueryParser parser, final SolrTemplate solrTemplate) {
         this.parser = parser;
@@ -44,7 +44,7 @@ public class FacetService {
 
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
         FacetOptions facetOptions = new FacetOptions();
-        facetOptions.addFacetOnFlieldnames(this.selectedFacets);
+        facetOptions.addFacetOnFlieldnames(this.facetFields);
         facetOptions.setFacetMinCount(1);
         facetOptions.setFacetLimit(facetLimit);
         return getFacetPage(query, facetOptions, filters);
@@ -91,7 +91,7 @@ public class FacetService {
         return filters;
     }
 
-    public void setSelectedFacets(Collection<String> selectedFacets) {
-        this.selectedFacets = selectedFacets;
+    public void setFacets(Collection<String> facetFields) {
+        this.facetFields = facetFields;
     }
 }

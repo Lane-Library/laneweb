@@ -43,7 +43,7 @@ public class FacetsGenerator extends AbstractGenerator {
 
     private FacetComparator facetComparator;
 
-    private Collection<String> selectedFacet; 
+    private Collection<String> facetFields; 
     
     private Map<String, Collection<FacetFieldEntry>> facetFieldEntries;
 
@@ -78,7 +78,7 @@ public class FacetsGenerator extends AbstractGenerator {
     }
 
     private void orderFacets(FacetPage<Eresource> fps) {
-        for (String facetName : this.selectedFacet) {
+        for (String facetName : this.facetFields) {
             Page<FacetFieldEntry> facetPage = fps.getFacetResultPage(facetName);
             orderFacet(facetName, facetPage);
         }
@@ -103,7 +103,7 @@ public class FacetsGenerator extends AbstractGenerator {
     }
 
     
-    public void setSelectedFacet(Collection<String> selectedFacet) {
-        this.selectedFacet = selectedFacet;
+    public void setFacet(Collection<String> facetFields) {
+        this.facetFields = facetFields;
     }
 }

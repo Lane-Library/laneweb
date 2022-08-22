@@ -163,7 +163,7 @@ public class EresourcesConfiguration {
     @Scope("prototype")
     public Generator facetsGenerator(final FacetService service) {
         FacetsGenerator generator = new FacetsGenerator(service, facetSAXStrategy(), FACETS_TO_SHOW_SEARCH, this.publicationTypes);
-        generator.setSelectedFacet(facetFields);
+        generator.setFacet(facetFields);
         return generator;
     }
 
@@ -188,7 +188,7 @@ public class EresourcesConfiguration {
     public FacetService solrFacetService(final SolrRepository solrRepository,
             @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
         FacetService service = new FacetService(solrQueryParser(), solrTemplate);
-        service.setSelectedFacets(facetFields);
+        service.setFacets(facetFields);
         return service;
     }
 

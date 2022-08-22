@@ -37,7 +37,7 @@ public class FacetComparatorTest {
         assertEquals(1, i.next().getValueCount());
         assertEquals(0, i.next().getValueCount());
         set.clear();
-        // order by value when counts are equal
+        // order by index when counts are equal
         set.add(new SimpleFacetFieldEntry(fieldName, "value2", 1));
         set.add(new SimpleFacetFieldEntry(fieldName, "value1", 1));
         i = set.iterator();
@@ -77,6 +77,25 @@ public class FacetComparatorTest {
         assertEquals("foo", i.next().getValue());
     }
 
+    @Test
+    public final void testComparatorWithAddTopPrioritiesFromFacets() {
+        FacetComparator comparator = new FacetComparator(PUB_TYPES);
+        comparator.addTopPrioritiesFromFacets("type:\"Book\"::type:\"Pictorial\"");
+        Set<FacetFieldEntry> set = new TreeSet<>(comparator);
+        Iterator<FacetFieldEntry> i;
+        SimpleField fieldName = new SimpleField( "fieldName");
+        SimpleField fieldType = new SimpleField( "type");
+        set.add(new SimpleFacetFieldEntry(fieldName, "value1", 1));
+        set.add(new SimpleFacetFieldEntry(fieldName, "value2", 100));
+        set.add(new SimpleFacetFieldEntry(fieldType, "Pictorial", 10));
+        set.add(new SimpleFacetFieldEntry(fieldType, "Book", 50));
+        i = set.iterator();
+        assertEquals("Book", i.next().getValue());
+        assertEquals("Pictorial", i.next().getValue());
+        assertEquals("value2", i.next().getValue());
+        assertEquals("value1", i.next().getValue());
+    }
+    
     @Test(expected = IllegalArgumentException.class)
     public final void testException() {
         Set<SimpleFacetFieldEntry> set = new TreeSet<>(new FacetComparator(PUB_TYPES));

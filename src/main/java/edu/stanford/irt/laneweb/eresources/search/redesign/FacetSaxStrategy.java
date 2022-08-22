@@ -17,10 +17,10 @@ public class FacetSaxStrategy implements SAXStrategy<Map<String, Collection<Face
 
     private static final String CDATA = "CDATA";
 
-    private Collection<String> selectedFacets;
-    
+    private Collection<String> facetFields;
+
     public FacetSaxStrategy(Collection<String> facetFields) {
-       this.selectedFacets = facetFields;
+        this.facetFields = facetFields;
     }
 
     public void toSAX(final Map<String, Collection<FacetFieldEntry>> facetPages, final XMLConsumer xmlConsumer) {
@@ -28,10 +28,12 @@ public class FacetSaxStrategy implements SAXStrategy<Map<String, Collection<Face
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", Resource.NAMESPACE);
             XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, "facetResult");
-            for (String facetName : this.selectedFacets ) {
+            for (String facetName : this.facetFields) {
                 Collection<FacetFieldEntry> facets = facetPages.get(facetName);
-                for (FacetFieldEntry facet : facets) {
-                    saxFacet(facet, xmlConsumer);
+                if (null != facets) {
+                    for (FacetFieldEntry facet : facets) {
+                        saxFacet(facet, xmlConsumer);
+                    }
                 }
             }
             XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, "facetResult");
@@ -50,5 +52,4 @@ public class FacetSaxStrategy implements SAXStrategy<Map<String, Collection<Face
         XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, "facet", attributes);
         XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, "facet");
     }
- 
 }
