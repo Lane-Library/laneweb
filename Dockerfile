@@ -1,7 +1,7 @@
 #
 # maven maintenance
 #
-FROM gcr.io/som-laneweb/jre-parent:openjdk-11.0.16-jre-slim
+FROM gcr.io/som-laneweb/jre-parent:eclipse-temurin-11.0.16.1_1-jre
 COPY target/laneweb.war laneweb.war
 
 
