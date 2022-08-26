@@ -5,6 +5,7 @@
     line-height: 1.6em;
     background-color: white;
     position: relative;
+    scroll-margin-top: 5em;
 }
 
 .module:after, .module .after {

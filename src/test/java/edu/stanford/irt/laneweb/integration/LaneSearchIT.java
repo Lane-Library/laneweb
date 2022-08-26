@@ -114,8 +114,11 @@ public class LaneSearchIT {
     @Test
     public void testLaneSearchCitationManager() throws Exception {
         // reference management
-        this.mockMvc.perform(get("/eresources/search.html?q=reference management").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
+        this.mockMvc
+                .perform(get("/eresources/search.html?q=reference management").servletPath("/eresources/search.html"))
+                .andExpect(xpath(
+                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@href,'laneguides.stanford.edu/reference-management')]",
+                        this.ns).exists());
     }
 
     @Test
@@ -321,8 +324,7 @@ public class LaneSearchIT {
                 "/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", this.ns).string("Book"))
-                .andExpect(
-                        xpath("//h:li[position() <= 3]//h:a[@class='primaryLink' and contains(@title,'USMLE')]", this.ns)
-                                .exists());
+                .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink' and contains(@title,'USMLE')]",
+                        this.ns).exists());
     }
 }

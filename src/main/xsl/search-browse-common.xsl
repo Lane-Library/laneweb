@@ -264,8 +264,7 @@
     <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links"/>
         <xsl:param name="eresource"/>
-        <!-- don't write print holdings when there are no items and a digital holding exists (helps with component/article/chapter records pointing to a parent)  -->
-        <xsl:if test="count($links) > 0 and not($eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) &gt; 0)">
+        <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
             <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0"/>
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->

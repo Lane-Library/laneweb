@@ -334,7 +334,7 @@
                     <xsl:apply-templates select="*[@name = 'chat-inactive']" />
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="@*"/>
+                    <xsl:copy-of select="@* | text()"/>
                     <xsl:apply-templates select="*[@name = 'chat-active']" />
                 </xsl:otherwise>
             </xsl:choose>
