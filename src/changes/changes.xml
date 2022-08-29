@@ -6,9 +6,9 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-         <release date="2022-08-15" version="3.11.13" description="bug fix and update release">
-            <action date="2022-08-11" dev="ryanmax" issue="LANEWEB-11014" type="update">
-                sticky live chat button is wrong orientation in Chrome
+        <release date="2022-08-29" version="3.11.14" description="bug fix and update release">
+            <action date="2022-08-17" dev="alainb" issue="LANEWEB-11015" type="fix">
+                sticky menu sometimes overlaps content
             </action>
         </release>
         <release date="2022-08-08" version="3.11.12" description="bug fix and update release">
