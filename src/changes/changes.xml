@@ -11,6 +11,11 @@
                 sticky menu sometimes overlaps content
             </action>
         </release>
+        <release date="2022-08-15" version="3.11.13" description="bug fix and update release">
+            <action date="2022-08-11" dev="ryanmax" issue="LANEWEB-11014" type="update">
+                sticky live chat button is wrong orientation in Chrome
+            </action>
+        </release>
         <release date="2022-08-08" version="3.11.12" description="bug fix and update release">
             <action date="2022-08-08" dev="alainb" issue="LANEWEB-11013" type="add">
                 add sticky live chat button to desktop interface
