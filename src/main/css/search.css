@@ -2,13 +2,12 @@
     margin-top: 0;
 }
 
-.search-results .pure-u-3-4 .module {
-    margin-top: 0;
-    background-color: unset;
-}
-
 .tooltips, .popin>div, #search-content-counts, #showPubMedStrategies {
     display: none;
+}
+
+.lwSearchResults li {
+    border-bottom: solid 1px #dddddd;
 }
 
 .primaryLink {
@@ -21,25 +20,36 @@
     display: list-item;
 }
 
-.popin {
-   	margin: 10px 0;
+.popin #spellCheck{
+    position: absolute;
+    left: 40%;
+    top: 36px;
+    z-index: 2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .popInLabel {
-    font-weight: bold;
-    padding-right: 25px;
+    color: #8c1515; 
 }
 
 #spellCheck .popInLabel {
-    padding-right: 5px;
+    padding-right: 6px;
 }
 
-.resource .bookcover {
-    float: right;
-    padding: 10px 30px;
+.resource div.resource-detail {
+    width: 100%;
+}
+
+.resource .bookcover-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 18px 0;
+    margin-left: 24px;
+    min-width: 90px;
 }
 
 .resource .bookcover i {
@@ -55,26 +65,30 @@
 .description {
     display: none;
     position: relative;
-    top: -1px;
-    background-color: #f2f3ed;
-    border: 1px solid;
+    background-color: #F0F4F5;
     padding: 12px;
 }
 
 .descriptionTrigger {
+    display: inline-block;
+    width: 100%;
     cursor: pointer;
-    padding: 1px 5px;
-    border: 1px solid #ccc;
+    background-color: #F0F4F5;
+    padding: 12px;
 }
 
-.descriptionTrigger .fa-eye {
-    color: #428bca;
+.descriptionTrigger a, .descriptionTrigger i {
+    color: black;
+}
+
+.descriptionTrigger i {
+    float: right;
+    margin-top: 5px;
 }
 
 li.active .descriptionTrigger {
-    background-color: #f2f3ed;
-    border: 1px solid;
-    padding: 0 12px;
+    background-color: #F0F4F5;
+    padding: 12px;
     border-bottom-color: #f2f3ed;
     display: inline-block;
     position: relative;
@@ -85,16 +99,22 @@ li.active .description {
     display: block;
 }
 
-.resultInfo span {
+.hldgsContainer, .resultInfo {
+    margin-top: 15px;
+}
+
+.hldgsContainer .fa-angle-up, .hldgsContainer table, .hldgsContainer.active .fa-angle-down
+    {
+    display: none;
+}
+
+.hldgsContainer.active .fa-angle-up {
     display: inline-block;
-    margin-right: 24px;
 }
 
-.resultInfo span:first-child {
-    min-width: 103px;
-    margin-right: 10px;
+.hldgsContainer.active table, .hldgsContainer table.active {
+    display: block;
 }
-
 /* rightSearchTips used on clinical/peds search */
 .rightSearchTips {
     padding: 0 12px;
@@ -127,21 +147,13 @@ li.active .description {
     border: 1px solid #ccc;
 }
 
-.sourceInfo{
+.sourceInfo {
     position: relative;
     display: inline-flex;
     flex-wrap: wrap;
     gap: 6px 40px;
     padding-top: 10px;
     align-items: center;
-}
-
-
-/* absolute positioning so it doesn't move when shareable link copied */
-.browzineDirect{
-    position: absolute;
-    left: 355px; 
-    white-space: nowrap;   
 }
 
 .requestIt a {
@@ -154,11 +166,15 @@ li.active .description {
 }
 
 .lwSearchResults .resource {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
     padding: 12px;
     margin: 10px 0;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.24);
-    border-radius: 4px;
-    background-color: #fff;
+}
+
+.lwSearchResults .resource:first-of-type {
+    padding-top: 0;
 }
 
 .lwSearchResults .citation {
@@ -167,43 +183,25 @@ li.active .description {
 }
 
 .hldgsContainer table {
-    display:none;
-    padding: 10px 0;
+    display: none;
+    padding: 18px 0;
 }
 
 .hldgsContainer thead {
-    background: #f7f7f7;
-    color: #666;
+    background: #aabec6;
+    color: #000000;
 }
 
 .hldgsContainer th {
     vertical-align: middle;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-right: 50px;
-    border-top: 1px solid #d2d2d2;
-    border-bottom: 1px solid #d2d2d2;
-    border-right: none;
-    border-left: none;
 }
 
-.hldgsContainer th:first-child {
-    border-left: 1px solid #d0d8da;
-}
-
-.hldgsContainer th:last-child {
-    border-right: 1px solid #d0d8da;
-}
-
-.hldgsContainer tbody tr:nth-child(2n+1) {
-    background: #fff;
-}
 
 .hldgsContainer td, .hldgsContainer td:first-child {
+    background: #f0f4f5;
     border-right: unset;
-    border-bottom: 1px solid #d0d8da;
+    border-bottom: 1px solid #ffffff;
     padding-right: 50px;
-    max-width: 380px;
 }
 
 .hldgsContainer td:last-child {
@@ -223,12 +221,9 @@ li.active .description {
 }
 
 .requestIt .btn {
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,.12),0 5px 5px 0 rgba(0,0,0,.24);
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .12), 0 5px 5px 0
+        rgba(0, 0, 0, .24);
     font-weight: normal;
-}
-
-.hldgsContainer {
-    padding: 5px 2px;
 }
 
 .hldgsHeader {
@@ -245,43 +240,76 @@ li.active .description {
     color: #C74632;
 }
 
-.hldgsHeader .fa-solid, .hldgsHeader .fa-regular, .hldgsHeader .fa-light {
+.hldgsHeader .fa-solid, .hldgsHeader .fa-regular, .hldgsHeader .fa-light
+    {
     padding-right: 6px;
+    color: #AEBDC5;
 }
 
 .hldgsHeader .fa-light.fa-book {
     padding-right: 9px;
 }
-    
-.fa-link-horizontal {    
+
+.fa-link-horizontal {
     color: #666;
 }
 
 .hldgsTrigger {
     cursor: pointer;
-    padding: 1px 5px;
-    border: 1px solid #ccc;
-    margin: 0 15px;
 }
 
-@media ( max-width : 1100px) {
-    .browzineDirect{
-        position: static;
-        padding: 10px 0;
-    }
-    .resource .bookcover {
-        padding: 5px 10px 0 0;
-        float: left;
-    }
-    .requestIt {
-        padding-left: 0;
-        display: block;
-    }
-    .hldgsContainer {
-        overflow-x: auto;
-        width: 100%;
-    }
-    .hldgsTrigger {
-        float: right;
-    }
+.more-detail-container {
+    position: absolute;
+    top: 4px;
+    right: 15px;
+    min-width: 213px;
+}
+
+.more-detail-container div.sourceInfo {
+    display: none;
+}
+
+.more-detail-container:hover div.sourceInfo {
+    display: block;
+    background-color: #F0F0F0;
+    margin-top: 8px;
+    padding: 12px 6px;
+    z-index: 2;
+}
+
+.more-detail-container div.sourceInfo div {
+    padding: 12px
+}
+
+.more-detail-container div.sourceInfo i, .hldgsContainer .fa-arrow-up-right-from-square
+    {
+    margin-right: 12px;
+    border-radius: 50%;
+    padding: 7px;
+    background-color: #007c92;
+    color: white;
+}
+
+.more-detail-container .fa-ellipsis {
+    float: right;
+}
+
+@media
+(
+max-width
+:
+1100px)
+{
+.resource .bookcover {
+    display: none;
+}
+
+.lwSearchResults .resource {
+    display: block;
+}
+
+.more-detail-container {
+    top: 25px;
+    right: 9px;
+}
 }

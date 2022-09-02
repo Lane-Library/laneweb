@@ -167,7 +167,7 @@ public class EresourcesConfiguration {
         return generator;
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/searchFacetSaxStrategy-xml")
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/facetSaxStrategy-xml")
     public SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSAXStrategy() {
         return new FacetSAXStrategy(this.facetFields);
     }

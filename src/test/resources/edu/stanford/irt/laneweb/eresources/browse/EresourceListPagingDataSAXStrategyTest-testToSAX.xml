@@ -8,7 +8,7 @@
       </a>
    </div>
    <div class="view-by">View by page <div class="general-dropdown dropdown">
-         <div class="general-dropdown-trigger">Aa-Az<i class="fa-regular fa-angles-down fa-sm"/>
+         <div class="general-dropdown-trigger">Aa-Az<i class="fa-regular fa-angle-down fa-sm"/>
          </div>
          <div class="general-dropdown-content dropdown-content">
             <ul class="pagingLabels">

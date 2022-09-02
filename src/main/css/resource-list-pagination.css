@@ -1,111 +1,139 @@
-.s-tb, .resourceListPagination {
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 5px 0 rgba(0,0,0,.24);
-    background: #fff;
-    border-radius: 4px;
-    padding: 15px;
+ .s-pagination{
+    float: right;
+    padding: 18px;
+}
+
+.resourceListPagination {
+    padding: 0 15px 12px;
     display: flex;
     gap: 24px;
     align-items: baseline;
     justify-content: space-between;
 }
 
-.resourceListPagination {
-	font-size: 1.125em;
-}
-
 .view-by .dropdown {
 	white-space: nowrap;
 }
 
+
+.resourceListPagination {
+    font-size: 1.125em;
+}
+
 .pagingLabels {
-	padding: 0 12px;
+    padding: 0 12px;
 }
 
 .pagingLabels.disabled {
-	color: #999;
+    color: #999;
 }
 
 .labelTitle {
-	display: inline-block;
-	width: 175px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	vertical-align: bottom;
-	padding-left: 4px;
-	box-sizing: border-box;
+    display: inline-block;
+    width: 175px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    padding-left: 4px;
+    box-sizing: border-box;
 }
 
 .pagingButton {
-	position: relative;
-	float: right;
-	cursor: pointer;
-	bottom: 4px;
-	padding: 4px 8px;
-	border: 1px solid #dadad9;
-	border-radius: 3px 3px 0 0;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-	margin-left: 3px;
+    position: relative;
+    float: right;
+    cursor: pointer;
+    bottom: 4px;
+    padding: 4px 8px;
+    border: 1px solid #dadad9;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    margin-left: 3px;
 }
 
 .pagingForm {
-	display: inline;
-	padding: 5px;
+    display: inline;
+    padding: 5px 21px;
 }
 
 .pagingForm input {
-	width: 28px;
-	text-align: center;
+    width: 28px;
+    text-align: center;
 }
 
 .s-pagination .pagingButton {
-	float: none;
-	bottom: 0;
+    float: none;
+    bottom: 0;
 }
 
 .pagingButton.disabled {
-	color: #ccc;
-	cursor: default;
+    color: #ccc;
+    cursor: default;
 }
 
 .pagingButton i {
-	color: #007c92;
+    color: #007c92;
 }
 
 .pagingButton i:hover {
-	color: #428bca;
+    color: #428bca;
 }
 
 .pagingButton.disabled i {
-	color: #ccc;
+    color: #ccc;
 }
 
-.view-by.sort .dropdown {
-	right: inherit;
+.view-by .dropdown {
+    white-space: nowrap;
 }
 
-.view-by.sort .general-dropdown-content {
-	left: 6px;
-	min-width: 162px;
+.view-by.sort .general-dropdown-trigger {
+    padding: 0 8px;
 }
 
 .view-by.sort i {
-	margin-left: 20px;
+    margin-left: 20px;
 }
 
-.view-by.sort span {
-	font-weight: bold;
+.view-by.sort {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    font-size: initial;
+    font-weight: normal;
+}
+
+.resource.exact-match-resource {
+    background-color: #f8f8f8;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #f0f4f5;
+    margin-bottom: 33px;
+}
+
+.exact-match{
+    color: #171717;
+    background: #eaeaea;
+    padding: 6px 9px;
+    font-weight: bold;
+    width: fit-content;
+    margin-bottom: 12px;
+    font-size: smaller;
+}
+
+.exact-match i {
+    margin-left: 15px;
+    color: black;
+    font-size: smaller;
 }
 
 .s-pagination .error {
-	margin-top: -20px;
-	text-align: center;
-	color: red;
-	font-size: 0.875em;
+    margin-top: -20px;
+    text-align: center;
+    color: red;
+    font-size: 0.875em;
 }
 
 @media ( max-width : 812px) {
-.s-tb, .resourceListPagination{
-	flex-flow: column;
-}
-
+    .s-tb, .resourceListPagination {
+        flex-flow: column;
+    }
 }

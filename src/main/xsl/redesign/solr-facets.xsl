@@ -11,16 +11,16 @@
     <xsl:param name="facet.sort" />
     <xsl:param name="source" />
     <xsl:param name="url-encoded-query" />
-    
+
 
     <xsl:variable name="encoded-facets" select="replace(replace($facets, '\[', '%5B'), '\]','%5D')" />
-    <xsl:variable name="start-year" select="substring-before(substring-after($facets, 'year:['), ' TO')"/>
-    <xsl:variable name="end-year"  select="substring-before(substring-after(substring-after($facets, 'year:['), 'TO '), ']')"/>
+    <xsl:variable name="start-year" select="substring-before(substring-after($facets, 'year:['), ' TO')" />
+    <xsl:variable name="end-year" select="substring-before(substring-after(substring-after($facets, 'year:['), 'TO '), ']')" />
     <xsl:variable name="pageless-query-string" select="replace($query-string,'&amp;page=\d+','')" />
     <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;(facets=[^&amp;]+|facet.sort=index|facets=)',''))" />
     <xsl:variable name="values-per-facet" select="4" />
-    <xsl:variable name="current-year" select="year-from-date(current-date())"/>
-   
+    <xsl:variable name="current-year" select="year-from-date(current-date())" />
+
 
     <xsl:variable name="filter-facet">
         <div class="filter-facet module">
@@ -41,17 +41,19 @@
                         </a>
                     </xsl:if>
                 </xsl:for-each>
-                
+
                 <xsl:if test="$start-year != '' or $end-year != ''">
-                    <xsl:variable name="year-facet" select="concat('year:%5B', $start-year, ' TO ', $end-year, '%5D')" ></xsl:variable>
-                    <xsl:variable name="furl" select="fct:getFacetUrl($year-facet)"/>
+                    <xsl:variable name="year-facet" select="concat('year:%5B', $start-year, ' TO ', $end-year, '%5D')"></xsl:variable>
+                    <xsl:variable name="furl" select="fct:getFacetUrl($year-facet)" />
                     <a href="{$facet-search-base-path}{ $furl}">
                         <span>
-                            <xsl:value-of select="$start-year" /> To <xsl:value-of select="$end-year" />
+                            <xsl:value-of select="$start-year" />
+                            To
+                            <xsl:value-of select="$end-year" />
                             <i class="fa-regular fa-xmark"></i>
                         </span>
                     </a>
-                 </xsl:if>
+                </xsl:if>
             </div>
         </div>
     </xsl:variable>
@@ -72,7 +74,7 @@
         <xsl:choose>
             <xsl:when test="contains($facets,$facet-id)">
                 <li class="facet enabled">
-                    <a  href="{$facet-search-base-path}{$furl}">
+                    <a href="{$facet-search-base-path}{$furl}">
 
                         <span class="facetLabel">
                             <i class="fa-solid fa-square-check"></i>
@@ -147,7 +149,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='type']) > $values-per-facet">
                         <li>
-                           <input name="startWith" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" /> 
+                            <input name="startWith" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -158,9 +160,9 @@
                         <xsl:with-param name="label" select="'Article Type'" />
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationType']) > ($values-per-facet -1)">
-                      <li>
-                        <input name="startWith" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" /> 
-                    </li>
+                        <li>
+                            <input name="startWith" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                        </li>
                     </xsl:if>
                 </xsl:if>
 
@@ -175,12 +177,12 @@
                 <li class="facet facetHeader">
                     Year
                     <div>
-                        <span id="facet-error-message" >  </span>
+                        <span id="facet-error-message">
+                        </span>
                         <form action="" method="get" id="solr-date-form">
-                           
-                            <input name="start-year" type="number" class="date start"  min="1900" max="{$current-year}" value="{$start-year}" required="true" placeholder="From"  />
-                            <input name="end-year"   type="number" class="date end"    min="1900" max="{$current-year}" value="{$end-year}"   required="true"  placeholder="To"  />
-                             <input type="submit" value="Add" class="date" />
+                            <input name="start-year" type="number" class="date start" min="1900" max="{$current-year}" value="{$start-year}" required="true" placeholder="From" />
+                            <input name="end-year" type="number" class="date end" min="1900" max="{$current-year}" value="{$end-year}" required="true" placeholder="To" />
+                            <input type="submit" value="Add" class="date" />
                         </form>
                     </div>
                 </li>
@@ -193,7 +195,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationTitle']) > $values-per-facet">
                         <li>
-                             <input name="startWith" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="startWith" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -203,19 +205,41 @@
 
     </xsl:template>
 
- 
+
     <xsl:function name="fct:getLabel">
         <xsl:param name="name" />
         <xsl:choose>
-            <xsl:when test="$name = 'pubmed'">PubMed</xsl:when>
-            <xsl:when test="$name = 'sul'"><span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">SearchWorks (<i>biomedical subset</i>)</span></xsl:when>
-            <xsl:when test="$name = 'bib'"><span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span></xsl:when>
-            <xsl:when test="$name = 'redivis'"><span class="yui3-tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span></xsl:when>
-            <xsl:when test="$name = 'web'">Lane Web Site</xsl:when>
-            <xsl:when test="$name = 'class'">Lane Classes</xsl:when>
-            <xsl:when test="$name = 'laneblog'">Lane Blog</xsl:when>
-            <xsl:when test="$name = 'dnlm'"><span class="yui3-tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span></xsl:when>
-            <xsl:otherwise><xsl:value-of select="$name" /></xsl:otherwise>
+            <xsl:when test="$name = 'pubmed'">
+                PubMed
+            </xsl:when>
+            <xsl:when test="$name = 'sul'">
+                <span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">
+                    SearchWorks (
+                    <i>biomedical subset</i>
+                    )
+                </span>
+            </xsl:when>
+            <xsl:when test="$name = 'bib'">
+                <span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span>
+            </xsl:when>
+            <xsl:when test="$name = 'redivis'">
+                <span class="yui3-tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span>
+            </xsl:when>
+            <xsl:when test="$name = 'web'">
+                Lane Web Site
+            </xsl:when>
+            <xsl:when test="$name = 'class'">
+                Lane Classes
+            </xsl:when>
+            <xsl:when test="$name = 'laneblog'">
+                Lane Blog
+            </xsl:when>
+            <xsl:when test="$name = 'dnlm'">
+                <span class="yui3-tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$name" />
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
 

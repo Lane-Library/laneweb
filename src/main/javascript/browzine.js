@@ -42,13 +42,13 @@
                     if (doiMap[doi]) {
                         doiMap[doi].fetched = true;
                         if (retractionNoticeUrl) {
-                            addFulltextLink(doiMap[doi],'xmark','Retracted Article',retractionNoticeUrl);
+                            addRetractedArticleLink(doiMap[doi],'xmark','Retracted Article',retractionNoticeUrl);
                         }
                         else if (fulltextUrl) {
-                            addFulltextLink(doiMap[doi],'pdf','Direct to PDF',fulltextUrl);
+                            addFulltextLink(doiMap[doi],'Direct to PDF',fulltextUrl);
                         }
                         else if (contentLocation) {
-                            addFulltextLink(doiMap[doi],'text','Direct to Full Text',contentLocation);
+                            addFulltextLink(doiMap[doi],'Direct to Full Text',contentLocation);
                         }
                         if (coverImageUrl) {
                             doiMap[doi].querySelector('.bookcover').innerHTML = '<image src="' + coverImageUrl + '"/>';
@@ -63,11 +63,23 @@
             };
         }(document.querySelectorAll("li[data-doi]")),
 
-        addFulltextLink = function(node, type, label, url) {
-            node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                '<span class="browzineDirect"><i class="fa-light fa-file-' + type + '"></i> ' +
+        addFulltextLink = function(node, label, url) {
+            node.querySelector('.resource-detail').insertAdjacentHTML("beforeend",
+               '<div class="hldgsContainer no-bookmarking"> <span class="hldgsHeader available"><i class="fa-solid fa-desktop fa-sm"></i>'+
+                'Digital Access'+
+                '</span>'+
+                '<span>'+
+                    '<span><i class="fa-regular fa-arrow-up-right-from-square"></i>' +
                 '<a class="bzFT" href="' + url + '">' + label + '</a>' +
-                '</span>'
+                '</span></div>'
+            )
+        },
+        
+        addRetractedArticleLink = function(node, type, label, url) {
+            node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
+                '<div><i class="fa-light fa-file-' + type + '"></i> ' +
+                '<a class="bzFT" href="' + url + '">' + label + '</a>' +
+                '</div>'
             )
         },
 

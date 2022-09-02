@@ -29,6 +29,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID, eresource.getRecordId());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.TITLE, eresource.getTitle());
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.IS_AN_EXACT_MATCH, eresource.getIsAnExactMatch());
             maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "total", Integer.toString(eresource.getTotal()));
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "available",

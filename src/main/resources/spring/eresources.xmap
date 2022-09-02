@@ -10,7 +10,7 @@
             <map:transform type="description-linebreak"/>
             <map:transform type="description-linking"/>
             <map:transform type="solr-query-highlighting"/>
-            <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/redesign/resourceList2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
      </map:pipeline>
@@ -43,7 +43,7 @@
             <map:generate type="er-browse-html">
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
+            <map:transform type="saxon" src="classpath:/xsl/redesign/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>
             <map:serialize type="xml"/>

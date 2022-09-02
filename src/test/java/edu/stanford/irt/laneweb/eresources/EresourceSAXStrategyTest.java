@@ -104,6 +104,7 @@ public class EresourceSAXStrategyTest {
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn(null);
         // link 4
+        expect(this.eresource.getIsAnExactMatch()).andReturn("false");
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(null);
         expect(this.link.getUrl()).andReturn(Resource.URL);
