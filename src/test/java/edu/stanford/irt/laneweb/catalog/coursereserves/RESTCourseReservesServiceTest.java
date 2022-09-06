@@ -61,7 +61,7 @@ public class RESTCourseReservesServiceTest {
         expect(this.restService.getObject(eq(new URI("/folio/coursereserves/items?id=0")),
                 same(CourseReservesItemList.class))).andReturn(this.itemList);
         replay(this.restService);
-        assertSame(this.itemList, this.service.getItems(0));
+        assertSame(this.itemList, this.service.getItems("0"));
         verify(this.restService);
     }
 }

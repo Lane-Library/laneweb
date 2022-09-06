@@ -33,7 +33,7 @@ public class CourseReservesItemListGenerator extends AbstractGenerator {
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         CourseReservesItemList list;
-        if (this.id.isBlank()) {
+        if (null == this.id || this.id.isBlank()) {
             list = this.service.getItems();
         } else {
             list = this.service.getItems(this.id);
