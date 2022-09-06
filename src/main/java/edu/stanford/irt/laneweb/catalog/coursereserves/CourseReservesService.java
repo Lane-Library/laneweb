@@ -11,5 +11,5 @@ public interface CourseReservesService {
 
     CourseReservesItemList getItems();
 
-    CourseReservesItemList getItems(int id);
+    CourseReservesItemList getItems(String id);
 }

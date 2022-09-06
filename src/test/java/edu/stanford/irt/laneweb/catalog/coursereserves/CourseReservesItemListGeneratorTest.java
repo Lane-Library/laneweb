@@ -48,7 +48,7 @@ public class CourseReservesItemListGeneratorTest {
 
     @Test
     public void testDoGenerateId() {
-        expect(this.service.getItems(1)).andReturn(this.items);
+        expect(this.service.getItems("1")).andReturn(this.items);
         this.saxStrategy.toSAX(this.items, this.xmlConsumer);
         replay(this.service, this.saxStrategy, this.items, this.xmlConsumer);
         this.generator.setModel(Collections.singletonMap(Model.ID, "1"));

@@ -10,9 +10,9 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTCourseReservesService implements CourseReservesService {
 
-    private static final String COURSES_ENDPOINT_PATH = "coursereserves/courses";
+    private static final String COURSES_ENDPOINT_PATH = "folio/coursereserves/courses";
 
-    private static final String ITEMS_ENDPOINT_PATH = "coursereserves/items";
+    private static final String ITEMS_ENDPOINT_PATH = "folio/coursereserves/items";
 
     private static final String ITEMS_BY_ID_ENDPOINT_PATH_FORMAT = ITEMS_ENDPOINT_PATH + "?id=%s";
 
@@ -41,7 +41,7 @@ public class RESTCourseReservesService implements CourseReservesService {
     }
 
     @Override
-    public CourseReservesItemList getItems(final int id) {
+    public CourseReservesItemList getItems(final String id) {
         String pathWithIDParam = String.format(ITEMS_BY_ID_ENDPOINT_PATH_FORMAT, id);
         URI uri = this.catalogServiceURI.resolve(pathWithIDParam);
         return this.restService.getObject(uri, CourseReservesItemList.class);

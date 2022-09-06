@@ -45,7 +45,8 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("laneNav", valid);
             this.parameterValidators.put("template", valid);
             this.parameterValidators.put("source", valid);
-            this.parameterValidators.put("id", new ParameterValueValidator("id", Pattern.compile("^\\d+$")));
+            this.parameterValidators.put("id", new ParameterValueValidator("id",
+                    Pattern.compile("^(\\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$")));
             // next three get put into google search results
             this.parameterValidators.put("ved", valid);
             this.parameterValidators.put("sa", valid);
