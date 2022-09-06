@@ -177,12 +177,7 @@
                             <xsl:apply-templates select="s:pub-text" />
                         </xsl:if>
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
-                        <xsl:if test="s:primaryType != 'Article'">
-                            <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'])" />
-                        </xsl:if>
-                         <xsl:if test="s:primaryType = 'Article'"> 
-                            <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'lane-digital'])" />
-                        </xsl:if>
+                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'])" />
                         <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)" />
                     </xsl:when>
                     <xsl:when test="s:recordType = 'sul'">
@@ -196,6 +191,9 @@
                         <xsl:apply-templates select="s:pub-text" />
                         <xsl:apply-templates select="s:link[position() > 1]" />
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
+                        <xsl:if test="s:primaryType = 'Article' and count(s:link) = 1"> 
+                            <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'normal'])" />
+                        </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>

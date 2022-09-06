@@ -64,15 +64,9 @@
         }(document.querySelectorAll("li[data-doi]")),
 
         addFulltextLink = function(node, label, url) {
-            node.querySelector('.resource-detail').insertAdjacentHTML("beforeend",
-               '<div class="hldgsContainer no-bookmarking"> <span class="hldgsHeader available"><i class="fa-solid fa-desktop fa-sm"></i>'+
-                'Digital Access'+
-                '</span>'+
-                '<span>'+
-                    '<span><i class="fa-regular fa-arrow-up-right-from-square"></i>' +
-                '<a class="bzFT" href="' + url + '">' + label + '</a>' +
-                '</span></div>'
-            )
+           var link = node.querySelector('.resource-detail .hldgsContainer span a')
+            link.href = url;
+            link.text = label;
         },
         
         addRetractedArticleLink = function(node, type, label, url) {

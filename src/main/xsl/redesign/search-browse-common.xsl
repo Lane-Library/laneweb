@@ -300,7 +300,6 @@
     
      <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
-        <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: updated link icon instead? -->
                 <span class="hldgsHeader available">
@@ -314,7 +313,6 @@
                     </a>
                 </span>
             </div>
-    </xsl:if>
     </xsl:function>
         
     <xsl:function name="f:handleLanePrintLinks">
