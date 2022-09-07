@@ -248,73 +248,70 @@
                     <i class="fa-solid fa-angle-down"></i>
                     <i class="fa-solid fa-angle-up"></i>
                 </span>
-                <table class="hide-empty-columns">
-                    <thead>
-                        <tr>
-                            <th>Provider</th>
-                            <th>
-                                Version
-                                <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                                    title="Look here for issue, volume, and year information about the items in Lane 
+                <div class="table-main hide-empty-columns">
+                    <div class="table-row">
+                        <div class="table-head">Provider</div>
+                        <div class="table-head">
+                            Version
+                            <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
+                                title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue." />
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <xsl:for-each select="$links">
-                            <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')" />
-                            <tr>
-                                <td>
-                                    <xsl:if test="not(s:publisher) and s:label">
-                                        <xsl:value-of select="s:label" />
-                                    </xsl:if>
-                                    <xsl:value-of select="s:publisher" />
-                                </td>
-                                <td>
-                                    <span>
-                                        <a href="{s:url}" title="{s:label}">
-                                            <xsl:value-of select="s:link-text" />
-                                            <xsl:text> </xsl:text>
-                                        </a>
+                        </div>
+                    </div>
+
+                    <xsl:for-each select="$links">
+                        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')" />
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <xsl:if test="not(s:publisher) and s:label">
+                                    <xsl:value-of select="s:label" />
+                                </xsl:if>
+                                <xsl:value-of select="s:publisher" />
+                            </div>
+                            <div class="table-cell">
+                                <span>
+                                    <a href="{s:url}" title="{s:label}">
+                                        <xsl:value-of select="s:link-text" />
+                                        <xsl:text> </xsl:text>
+                                    </a>
+                                </span>
+                                <xsl:if test="s:version-text">
+                                    <span class="versionText">
+                                        <xsl:value-of select="s:version-text" />
                                     </span>
-                                    <xsl:if test="s:version-text">
-                                        <span class="versionText">
-                                            <xsl:value-of select="s:version-text" />
-                                        </span>
-                                    </xsl:if>
-                                    <xsl:if test="s:additional-text">
-                                        <span class="additionalText">
-                                            <xsl:value-of select="s:additional-text" />
-                                        </span>
-                                    </xsl:if>
-                                </td>
-                            </tr>
-                        </xsl:for-each>
-                    </tbody>
-                </table>
+                                </xsl:if>
+                                <xsl:if test="s:additional-text">
+                                    <span class="additionalText">
+                                        <xsl:value-of select="s:additional-text" />
+                                    </span>
+                                </xsl:if>
+                            </div>
+                        </div>
+                    </xsl:for-each>
+
+                </div>
             </div>
         </xsl:if>
     </xsl:function>
-    
-    
-     <xsl:function name="f:handleDigitalArticleLinks">
+
+
+    <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
-            <div class="hldgsContainer no-bookmarking">
-                <!-- TODO: updated link icon instead? -->
-                <span class="hldgsHeader available">
-                    <i class="fa-solid fa-desktop fa-sm"></i>
-                    Digital Access &#160;
-                </span>
-                <span>
-                    <i class="fa-regular fa-arrow-up-right-from-square"></i>
-                    <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
-                       Access Options
-                    </a>
-                </span>
-            </div>
+        <div class="hldgsContainer no-bookmarking">
+            <span class="hldgsHeader available">
+                <i class="fa-solid fa-desktop fa-sm"></i>
+                Digital Access
+            </span>
+            <span>
+                <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
+                    Access Options
+                </a>
+            </span>
+        </div>
     </xsl:function>
-        
+
     <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links" />
         <xsl:param name="eresource" />
@@ -367,51 +364,49 @@
                         <span class="hldgsTrigger" />
                     </xsl:otherwise>
                 </xsl:choose>
-                <table class="hide-empty-columns">
-                    <xsl:if test="$itemsRequestableInVoyager">
-                        <xsl:attribute name="class">hide-empty-columns active</xsl:attribute>
-                    </xsl:if>
-                    <thead>
-                        <tr>
-                            <th>Location</th>
-                            <th>
-                                Version
-                                <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
-                                    title="Look here for issue, volume, and year information about the items in Lane 
+                <div class="table-main print-access hide-empty-columns">
+                    <div class="table-row">
+                        <div class="table-head">Location</div>
+                        <div class="table-head">
+                            Version
+                            <i class="fa-solid fa-info-circle yui3-tooltip-trigger"
+                                title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue." />
-                            </th>
-                            <th>Call Number</th>
-                            <th>Number of Items</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <xsl:for-each select="$links">
-                            <tr>
-                                <td>
-                                    <xsl:apply-templates select="s:locationName" />
-                                </td>
-                                <td>
-                                    <a href="{s:url}" title="{s:label}">
-                                        <xsl:value-of select="s:link-text" />
-                                    </a>
-                                    <xsl:if test="s:version-text">
-                                        <br />
-                                        <span class="versionText">
-                                            <xsl:value-of select="s:version-text" />
-                                        </span>
-                                    </xsl:if>
-                                </td>
-                                <td>
-                                    <xsl:apply-templates select="s:callnumber" />
-                                </td>
-                                <td>
-                                    <xsl:value-of select="s:available" />
-                                </td>
-                            </tr>
-                        </xsl:for-each>
-                    </tbody>
-                </table>
+                        </div>
+                        <div class="table-head">Call Number
+                        <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                        <div class="table-head">Number of Items
+                          <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                              
+                    </div>
+                    <xsl:for-each select="$links">
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <xsl:apply-templates select="s:locationName" />
+                            </div>
+                            <div class="table-cell">
+                                <a href="{s:url}" title="{s:label}">
+                                    <xsl:value-of select="s:link-text" />
+                                </a>
+                                <xsl:if test="s:version-text">
+                                    <br />
+                                    <span class="versionText">
+                                        <xsl:value-of select="s:version-text" />
+                                    </span>
+                                </xsl:if>
+                            </div>
+                            <div class="table-cell">
+                                <xsl:apply-templates select="s:callnumber" />
+                            </div>
+                            <div class="table-cell">
+                                <xsl:value-of select="s:available" />
+                            </div>
+                        </div>
+                    </xsl:for-each>
+                </div>
             </div>
         </xsl:if>
     </xsl:function>
@@ -422,7 +417,7 @@
             <div class="resultInfo">
                 <xsl:choose>
                     <xsl:when test="$eresource/@type = 'searchContent'">
-                        <span class="descriptionTrigger searchContent no-bookmarking" />                      
+                        <span class="descriptionTrigger searchContent no-bookmarking" />
                     </xsl:when>
                     <xsl:when test="$eresource/s:recordType = 'pubmed'">
                         <span class="descriptionTrigger searchContent pumed no-bookmarking" />
@@ -434,7 +429,7 @@
             </div>
             <xsl:apply-templates select="$eresource/s:description" />
             <xsl:if test="$eresource/@type = 'searchContent'">
-                <xsl:apply-templates select="$eresource/s:contentId" /> 
+                <xsl:apply-templates select="$eresource/s:contentId" />
             </xsl:if>
         </xsl:if>
     </xsl:function>

@@ -20,7 +20,7 @@
     display: list-item;
 }
 
-.popin #spellCheck{
+.popin #spellCheck {
     position: absolute;
     left: 40%;
     top: 36px;
@@ -31,7 +31,7 @@
 }
 
 .popInLabel {
-    color: #8c1515; 
+    color: #8c1515;
 }
 
 #spellCheck .popInLabel {
@@ -99,22 +99,6 @@ li.active .description {
     display: block;
 }
 
-.hldgsContainer, .resultInfo {
-    margin-top: 15px;
-}
-
-.hldgsContainer .fa-angle-up, .hldgsContainer table, .hldgsContainer.active .fa-angle-down
-    {
-    display: none;
-}
-
-.hldgsContainer.active .fa-angle-up {
-    display: inline-block;
-}
-
-.hldgsContainer.active table, .hldgsContainer table.active {
-    display: block;
-}
 /* rightSearchTips used on clinical/peds search */
 .rightSearchTips {
     padding: 0 12px;
@@ -182,34 +166,75 @@ li.active .description {
     opacity: .90;
 }
 
-.hldgsContainer table {
-    display: none;
-    padding: 18px 0;
+.hldgsContainer, .resultInfo {
+    margin-top: 15px;
 }
 
-.hldgsContainer thead {
-    background: #aabec6;
-    color: #000000;
+.hldgsContainer .table-head, .hldgsContainer .table-cell {
+    display: table-cell;
+    position: relative;
+    padding: 6px 12px;
 }
 
-.hldgsContainer th {
-    vertical-align: middle;
+.hldgsContainer .table-head {
+    background-color: #aabec6;
+    white-space: nowrap;
 }
 
-
-.hldgsContainer td, .hldgsContainer td:first-child {
+.hldgsContainer .table-cell {
     background: #f0f4f5;
     border-right: unset;
     border-bottom: 1px solid #ffffff;
     padding-right: 50px;
 }
 
-.hldgsContainer td:last-child {
-    padding-right: 10px;
+.hldgsContainer .table-row {
+    display: table-row;
 }
 
-.hldgsContainer td span, .versionText {
-    padding-right: 10px;
+.hldgsContainer .fa-angle-up, .hldgsContainer .table-main,
+    .hldgsContainer.active .fa-angle-down {
+    display: none;
+}
+
+.hldgsContainer.active .fa-angle-up {
+    display: inline-block;
+}
+
+.hldgsContainer.active .table-main, .hldgsContainer .table-main.print-access.active
+    {
+    display: table;
+    min-width: 50%;
+}
+
+.hldgsContainer .table-main.print-access {
+    margin-top: 18px;
+    width: 100%;
+}
+
+.hldgsContainer .table-head i.fa-angle-right, .hldgsContainer .table-head i.fa-angle-left
+    {
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    padding: 9px 20px;
+    cursor: pointer;
+}
+
+.hldgsContainer .table-head:last-of-type{
+    min-width: 174px;
+}
+
+.hldgsContainer .print-access .table-head:last-of-type, .hldgsContainer .print-access .table-cell:last-of-type,
+.hldgsContainer .print-access.shifted  i.fa-angle-right,.hldgsContainer .print-access.shifted  .table-head:first-of-type, 
+.hldgsContainer .print-access.shifted  .table-cell:first-of-type 
+    {
+    display: none;
+}
+
+.hldgsContainer .print-access.shifted .table-head:last-of-type, .hldgsContainer .print-access.shifted .table-cell:last-of-type
+{
+    display: table-cell;
 }
 
 .versionText {
@@ -294,22 +319,15 @@ li.active .description {
     float: right;
 }
 
-@media
-(
-max-width
-:
-1100px)
-{
-.resource .bookcover {
-    display: none;
-}
-
-.lwSearchResults .resource {
-    display: block;
-}
-
-.more-detail-container {
-    top: 25px;
-    right: 9px;
-}
+@media ( max-width : 1100px) {
+    .resource .bookcover {
+        display: none;
+    }
+    .lwSearchResults .resource {
+        display: block;
+    }
+    .more-detail-container {
+        top: 25px;
+        right: 9px;
+    }
 }

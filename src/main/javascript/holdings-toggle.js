@@ -2,7 +2,23 @@
 
     "use strict";
 
-    var searchResults = document.querySelector("#searchResults");
+    var initializeHoldingsToggles = function() {
+        var triggers = document.querySelectorAll(".hldgsTrigger"),
+            searchResultCount = searchResults.querySelectorAll('li').length;
+        triggers.forEach(function(node) {
+            // show holdings table when:
+            //  - only one search result OR
+            //  - result has only one row present in the holdings table
+            // otherwise, show "view all" trigger
+            var ancestor = node.closest("div"),
+                holdingsRows = ancestor.querySelectorAll(".table-row");
+            if (holdingsRows.length == 2 || searchResultCount == 1) {
+                ancestor.querySelector('.table-main').style.display = 'table';
+            }
+        })
+    },
+
+    searchResults = document.querySelector("#searchResults");
 
     //add trigger markup and delegate click events
     if (searchResults) {
@@ -32,6 +48,8 @@
                 handleClick(node, event);
             }
         });
+
+        initializeHoldingsToggles();
     }
 
 })();
