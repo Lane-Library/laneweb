@@ -35,7 +35,7 @@ public class CoursesSAXStrategyTest {
 
     @Test
     public void testToSAX() throws IOException {
-        expect(this.course.getId()).andReturn(1);
+        expect(this.course.getId()).andReturn("1");
         expect(this.course.getName()).andReturn("name");
         expect(this.course.getInstructor()).andReturn("instructor");
         expect(this.course.getNumber()).andReturn("number");

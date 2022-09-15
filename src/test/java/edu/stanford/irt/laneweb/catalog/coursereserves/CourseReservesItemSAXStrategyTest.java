@@ -39,7 +39,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
@@ -58,7 +58,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAX0AvailableCount() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
@@ -78,7 +78,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAXNullAuthor() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.DIGITAL_BOOK);
         expect(this.item.getURL()).andReturn("url");
         expect(this.item.getTitle()).andReturn("title");
@@ -95,7 +95,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAXNullAvailableCount() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
@@ -116,7 +116,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAXNullCallNumber() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.PRINT_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
@@ -136,7 +136,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAXNullURL() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.DIGITAL_BOOK);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
@@ -162,7 +162,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     @Test
     public void testToSAXVideo() throws SAXException, IOException {
-        expect(this.item.getId()).andReturn(1);
+        expect(this.item.getId()).andReturn("1");
         expect(this.item.getType()).andReturn(ItemType.VIDEO);
         expect(this.item.getURL()).andReturn(null);
         expect(this.item.getTitle()).andReturn("title");
