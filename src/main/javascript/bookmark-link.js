@@ -76,6 +76,8 @@
              */
             _handleSyncEvent : function() {
                 this.set("status", OFF);
+                // fire an added event for favorites animation
+                L.fire("bookmarks:added");
             },
 
             /**

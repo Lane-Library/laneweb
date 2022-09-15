@@ -539,6 +539,7 @@
                                 <include>bookmark-editor-min.js</include>
                                 <include>bookmarks-editor-min.js</include>
                                 <include>bookmark-link-min.js</include>
+                                <include>bookmark-animation-min.js</include>
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
