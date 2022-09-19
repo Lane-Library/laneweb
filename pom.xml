@@ -7,7 +7,7 @@
         <version>116</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.11.15-SNAPSHOT</version>
+    <version>3.11.15</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -40,7 +40,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:git@gitlab.med.stanford.edu:lane/laneweb.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>laneweb-3.11.15</tag>
     </scm>
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
