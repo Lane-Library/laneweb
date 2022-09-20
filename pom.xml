@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>113</version>
+        <version>116</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.11.15-SNAPSHOT</version>
+    <version>3.11.16-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -177,7 +177,7 @@
         <dependency>
             <artifactId>suggest-query</artifactId>
             <groupId>edu.stanford.irt.suggest</groupId>
-            <version>1.1.15</version>
+            <version>1.1.16</version>
         </dependency>
         <dependency>
             <artifactId>xstream</artifactId>
@@ -249,7 +249,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
-            <version>3.9.3</version>
+            <version>3.9.7</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -539,6 +539,7 @@
                                 <include>bookmark-editor-min.js</include>
                                 <include>bookmarks-editor-min.js</include>
                                 <include>bookmark-link-min.js</include>
+                                <include>bookmark-animation-min.js</include>
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
