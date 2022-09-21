@@ -8,11 +8,11 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -37,25 +37,21 @@ public class RESTEquipmentServiceTest {
     }
 
     @Test
-    public void testGetRecords() throws IOException {
-        expect(this.restService.getInputStream(this.uri.resolve("folio/equipment/records")))
-                .andReturn(getClass().getResourceAsStream(("equipment/records")));
-        replay(this.restService);
-        assertEquals(-1, this.service.getRecords(Collections.emptyList()).read());
-        verify(this.restService);
-    }
-
-    @Test
-    public void testGetStatus() {
+    public void testGetList() {
         Map<String, String> map = new HashMap<>();
         map.put("bibID", "1");
         map.put("count", "1");
-        expect(this.restService.getObject(eq(this.uri.resolve("folio/equipment/status?idList=1")), isA(TypeReference.class)))
+        map.put("title", "title");
+        map.put("note", "note");
+        expect(this.restService.getObject(eq(this.uri.resolve("folio/equipment/list")), isA(TypeReference.class)))
                 .andReturn(Collections.singletonList(map));
         replay(this.restService);
-        EquipmentStatus status = this.service.getStatus("1").get(0);
-        assertEquals("1", status.getBibID());
-        assertEquals("1", status.getCount());
+        List<Equipment> list = this.service.getList();
+        Equipment e = list.get(0);
+        assertEquals("1", e.getBibID());
+        assertEquals("1", e.getCount());
+        assertEquals("title", e.getTitle());
+        assertEquals("note", e.getNote());
         verify(this.restService);
     }
 }

@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.catalog.equipment;
 
-import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +10,10 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentService implements EquipmentService {
 
-    private static final String RECORDS_ENDPOINT_PATH = "folio/equipment/records";
+    private static final String LIST_ENDPOINT_PATH = "folio/equipment/list";
 
-    private static final String STATUS_ENDPOINT_PATH_FORMAT = "folio/equipment/status?idList=%s";
-
-    private static final TypeReference<List<Map<String, String>>> TYPE =
-            new TypeReference<List<Map<String, String>>>() {};
+    private static final TypeReference<List<Map<String, String>>> TYPE = new TypeReference<>() {
+    };
 
     private URI catalogServiceURI;
 
@@ -28,17 +25,10 @@ public class RESTEquipmentService implements EquipmentService {
     }
 
     @Override
-    public InputStream getRecords(final List<String> params) {
-        return this.restService.getInputStream(this.catalogServiceURI.resolve(RECORDS_ENDPOINT_PATH));
-    }
-
-    @Override
-    public List<EquipmentStatus> getStatus(final String idList) {
-        String pathWithIDListParam = String.format(STATUS_ENDPOINT_PATH_FORMAT, idList);
-        List<Map<String, String>> list = this.restService.getObject(this.catalogServiceURI.resolve(pathWithIDListParam),
+    public List<Equipment> getList() {
+        List<Map<String, String>> list = this.restService.getObject(this.catalogServiceURI.resolve(LIST_ENDPOINT_PATH),
                 TYPE);
-        return list.stream()
-                .map(m -> new EquipmentStatus(m.get("bibID"), m.get("count")))
+        return list.stream().map(m -> new Equipment(m.get("bibID"), m.get("count"), m.get("note"), m.get("title")))
                 .collect(Collectors.toList());
     }
 }
