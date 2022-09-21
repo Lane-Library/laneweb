@@ -11,9 +11,9 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentService implements EquipmentService {
 
-    private static final String RECORDS_ENDPOINT_PATH = "equipment/records";
+    private static final String RECORDS_ENDPOINT_PATH = "folio/equipment/records";
 
-    private static final String STATUS_ENDPOINT_PATH_FORMAT = "equipment/status?idList=%s";
+    private static final String STATUS_ENDPOINT_PATH_FORMAT = "folio/equipment/status?idList=%s";
 
     private static final TypeReference<List<Map<String, String>>> TYPE =
             new TypeReference<List<Map<String, String>>>() {};

@@ -38,7 +38,7 @@ public class RESTEquipmentServiceTest {
 
     @Test
     public void testGetRecords() throws IOException {
-        expect(this.restService.getInputStream(this.uri.resolve("equipment/records")))
+        expect(this.restService.getInputStream(this.uri.resolve("folio/equipment/records")))
                 .andReturn(getClass().getResourceAsStream(("equipment/records")));
         replay(this.restService);
         assertEquals(-1, this.service.getRecords(Collections.emptyList()).read());
@@ -50,7 +50,7 @@ public class RESTEquipmentServiceTest {
         Map<String, String> map = new HashMap<>();
         map.put("bibID", "1");
         map.put("count", "1");
-        expect(this.restService.getObject(eq(this.uri.resolve("equipment/status?idList=1")), isA(TypeReference.class)))
+        expect(this.restService.getObject(eq(this.uri.resolve("folio/equipment/status?idList=1")), isA(TypeReference.class)))
                 .andReturn(Collections.singletonList(map));
         replay(this.restService);
         EquipmentStatus status = this.service.getStatus("1").get(0);
