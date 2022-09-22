@@ -530,6 +530,7 @@
                                 <include>suggest-min.js</include>
                                 <include>slideshow-min.js</include>
                                 <include>search-min.js</include>
+                                <include>search-holding-tables.js</include>
                                 <include>search-reset-min.js</include>
                                 <include>search-dropdown-min.js</include>
                                 <include>search-placeholder-min.js</include>
