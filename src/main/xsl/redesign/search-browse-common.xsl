@@ -325,7 +325,7 @@
                 <xsl:choose>
                     <xsl:when test="$itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader available">
-                            <i class="fa-light fa-book-open-cover"></i>
+                            <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Access
                         </span>
@@ -338,7 +338,7 @@
                     </xsl:when>
                     <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
                         <span class="hldgsHeader unavailable">
-                            <i class="fa-light fa-book-open-cover"></i>
+                            <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Unavailable: Checked out
                         </span>
@@ -348,7 +348,7 @@
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                         <span class="hldgsHeader">
-                            <i class="fa-light fa-book-open-cover"></i>
+                            <i class="fa-solid fa-book-open-cover"></i>
                             Access via
                             <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults">
                                 <xsl:value-of select="$links[1]/s:locationName" />
@@ -357,7 +357,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <span class="hldgsHeader">
-                            <i class="fa-light fa-book-open-cover"></i>
+                            <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Status unknown
                         </span>

@@ -47,7 +47,7 @@
     display: flex;
     justify-content: right;
     align-items: center;
-    padding: 18px 0;
+    padding: 24px 0;
     margin-left: 24px;
     min-width: 90px;
 }
@@ -158,8 +158,13 @@ li.active .description {
 }
 
 .lwSearchResults .resource:first-of-type {
-    padding-top: 0;
+    padding-top: 3px;
 }
+
+.lwSearchResults .resource:first-of-type .bookcover-container{
+    margin-top: 9px;
+}
+
 
 .lwSearchResults .citation {
     font-style: italic;
@@ -246,8 +251,6 @@ li.active .description {
 }
 
 .requestIt .btn {
-    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .12), 0 5px 5px 0
-        rgba(0, 0, 0, .24);
     font-weight: normal;
 }
 
@@ -285,8 +288,8 @@ li.active .description {
 
 .more-detail-container {
     position: absolute;
-    top: 4px;
-    right: 15px;
+    top: 15px;
+    right: 12px;
     min-width: 213px;
 }
 
