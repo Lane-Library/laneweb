@@ -25,7 +25,7 @@ public class CourseReservesItemSAXStrategy extends AbstractXHTMLSAXStrategy<Cour
     public void toSAX(final CourseReservesItem item, final XMLConsumer xmlConsumer) {
         try {
             startLiWithClass(xmlConsumer, "resource course-reserves-item");
-            String id = Integer.toString(item.getId());
+            String id = item.getId();
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, id);
             atts.addAttribute(EMPTY_NS, CLASS, CLASS, CDATA, "bookcover");

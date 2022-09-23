@@ -86,6 +86,10 @@
 	display: none;
 }
 
+#bookmarks-editor {
+    scroll-margin-top: 4em;
+}
+
 #bookmarks-editor fieldset {
 	border: 1px #dadad8 solid;
 	background-color: #f4f5ef;
@@ -139,6 +143,40 @@
 
 .manageBookmarks {
 	font-size: 0.8125em;
+}
+
+.favorites.dropdown .fa-bookmark.shake {
+  animation: bookmarks-shake 0.5s;
+  animation-iteration-count: 6;
+}
+
+@keyframes bookmarks-shake {
+  0% { transform: rotate(0deg); }
+  4% { transform: rotate(-5deg); }
+  8% { transform: rotate(-10deg); }
+  12% { transform: rotate(-15deg); }
+  16% { transform: rotate(-20deg); }
+  20% { transform: rotate(-25deg); }
+  24% { transform: rotate(-30deg); }
+  28% { transform: rotate(-25deg); }
+  32% { transform: rotate(-20deg); }
+  36% { transform: rotate(-15deg); }
+  40% { transform: rotate(-10deg); }
+  44% { transform: rotate(-5deg); }
+  48% { transform: rotate(0deg); }
+  52% { transform: rotate(5deg); }
+  56% { transform: rotate(10deg); }
+  60% { transform: rotate(15deg); }
+  64% { transform: rotate(20deg); }
+  68% { transform: rotate(25deg); }
+  72% { transform: rotate(30deg); }
+  76% { transform: rotate(25deg); }
+  80% { transform: rotate(20deg); }
+  84% { transform: rotate(15deg); }
+  88% { transform: rotate(10deg); }
+  92% { transform: rotate(5deg); }
+  96% { transform: rotate(0deg); }
+  100% { transform: rotate(-5deg); }
 }
 
 @media ( max-width : 1100px) {

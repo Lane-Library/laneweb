@@ -25,7 +25,7 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
         itemsNode.forEach((final JsonNode n) -> itemList.add(new CourseReservesItem(
                 getTextFromNode(n.get("author")),
                 getTextFromNode(n.get("callNumber")),
-                n.get("id").asInt(),
+                n.get("id").asText(),
                 n.get("availableCount").asInt(),
                 getTextFromNode(n.get("title")),
                 getTextFromNode(n.get("url")),
@@ -34,7 +34,7 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
         if (node.hasNonNull("course")) {
             JsonNode n = node.get("course");
             Course course = new Course(
-                    n.get("id").asInt(),
+                    n.get("id").asText(),
                     n.get("name").asText(),
                     n.get("number").asText(),
                     n.get("instructor").asText(),
