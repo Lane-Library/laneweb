@@ -76,6 +76,10 @@
     width: 80%;
 }
 
+.yui3-aclist-list{
+    border: solid 1px #ddd;
+}
+
 .facet-container  input {
     padding: 6px;
     margin-top: 12px;

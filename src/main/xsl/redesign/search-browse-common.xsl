@@ -374,12 +374,8 @@
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue." />
                         </div>
-                        <div class="table-head">Call Number
-                        <i class="fa-solid fa-angle-right"></i>
-                        </div>
-                        <div class="table-head">Number of Items
-                          <i class="fa-solid fa-angle-left"></i>
-                        </div>
+                        <div class="table-head">Call Number</div>
+                        <div class="table-head">Items</div>
                               
                     </div>
                     <xsl:for-each select="$links">

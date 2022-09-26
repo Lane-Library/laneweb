@@ -50,11 +50,11 @@ public class FacetService {
         return getFacetPage(query, facetOptions, filters);
     }
 
-    public FacetPage<Eresource> facetByFieldStartsWith(final String query, final String searchTerm, final String field,
+    public FacetPage<Eresource> facetByFieldContains(final String query, final String searchTerm, final String field,
             final String filters, final int facetMinCount) {
         FieldWithFacetParameters fieldWithFacetParams = new FieldWithFacetParameters(field);
-        String pattern = "(?i)^".concat(query).concat(".*");
-        fieldWithFacetParams.addFacetParameter("facet.matches", pattern);
+        fieldWithFacetParams.addFacetParameter("facet.contains.ignoreCase", true);
+        fieldWithFacetParams.addFacetParameter("facet.contains", query);
         FacetOptions facetOptions = new FacetOptions();
         facetOptions.addFacetOnField(fieldWithFacetParams).setFacetMinCount(facetMinCount);
         return getFacetPage(searchTerm, facetOptions, filters);

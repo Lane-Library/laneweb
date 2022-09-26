@@ -47,7 +47,7 @@
     display: flex;
     justify-content: right;
     align-items: center;
-    padding: 24px 0;
+    padding-top: 42px;
     margin-left: 24px;
     min-width: 90px;
 }
@@ -102,8 +102,15 @@ li.active .description {
 /* rightSearchTips used on clinical/peds search */
 .rightSearchTips {
     padding: 0 12px;
-    white-space: nowrap;
+    width: max-content;
 }
+
+
+.rightSearchTips span{
+    float: right;
+    padding-left: 12px;
+} 
+
 
 .rightSearchTips .heading {
     font-weight: bold;
@@ -152,19 +159,21 @@ li.active .description {
 .lwSearchResults .resource {
     display: flex;
     position: relative;
+    padding:0;
+    margin:0;
+    margin-top: 30px;
+    padding-bottom:30px;
     justify-content: space-between;
-    padding: 12px;
-    margin: 10px 0;
+  
 }
 
 .lwSearchResults .resource:first-of-type {
     padding-top: 3px;
 }
 
-.lwSearchResults .resource:first-of-type .bookcover-container{
-    margin-top: 9px;
+.lwSearchResults .resource:first-of-type .more-detail-container{
+    top:16px;
 }
-
 
 .lwSearchResults .citation {
     font-style: italic;
@@ -217,30 +226,6 @@ li.active .description {
     width: 100%;
 }
 
-.hldgsContainer .table-head i.fa-angle-right, .hldgsContainer .table-head i.fa-angle-left
-    {
-    position: absolute;
-    top: 3px;
-    right: 6px;
-    padding: 9px 20px;
-    cursor: pointer;
-}
-
-.hldgsContainer .table-head:last-of-type{
-    min-width: 174px;
-}
-
-.hldgsContainer .print-access .table-head:last-of-type, .hldgsContainer .print-access .table-cell:last-of-type,
-.hldgsContainer .print-access.shifted  i.fa-angle-right,.hldgsContainer .print-access.shifted  .table-head:first-of-type, 
-.hldgsContainer .print-access.shifted  .table-cell:first-of-type 
-    {
-    display: none;
-}
-
-.hldgsContainer .print-access.shifted .table-head:last-of-type, .hldgsContainer .print-access.shifted .table-cell:last-of-type
-{
-    display: table-cell;
-}
 
 .versionText {
     opacity: 0.75;
@@ -288,8 +273,8 @@ li.active .description {
 
 .more-detail-container {
     position: absolute;
-    top: 15px;
-    right: 12px;
+    top: 13px;
+    right: 0px;
     min-width: 213px;
 }
 

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.stereotype.Controller;
@@ -32,9 +31,9 @@ public class FacetSuggestionController {
 
     @GetMapping(value = "/apps/solr/facet/suggest")
     @ResponseBody
-    public Collection<String> getSuggestions(@RequestParam(name="startWith") final String startWithTerm, 
+    public Collection<String> getSuggestions(@RequestParam(name="contains") final String containsTerm, 
             @RequestParam(name = "q") final String searchQuery, final String facet, final String facets) {
-        FacetPage<Eresource> facetPage = this.solrFacetService.facetByFieldStartsWith( startWithTerm,  searchQuery, facet, facets, FACET_MIN_COUNT);
+        FacetPage<Eresource> facetPage = this.solrFacetService.facetByFieldContains( containsTerm,  searchQuery, facet, facets, FACET_MIN_COUNT);
         List<FacetFieldEntry> facetFieldEntry = facetPage.getFacetResultPage(facet).getContent();
         List<String> facetsResult = facetFieldEntry.stream().map(FacetFieldEntry::getValue).collect(Collectors.toList());
         if(facetsResult.isEmpty()) {
