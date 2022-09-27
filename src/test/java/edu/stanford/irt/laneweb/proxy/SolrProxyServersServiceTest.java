@@ -19,7 +19,7 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
 
 public class SolrProxyServersServiceTest {
 

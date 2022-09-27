@@ -18,7 +18,6 @@ import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetSAXStrategy;
 
 public class FacetStrategyTest {
 

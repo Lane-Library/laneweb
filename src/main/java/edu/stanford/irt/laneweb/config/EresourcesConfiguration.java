@@ -50,12 +50,12 @@ import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrat
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator;
+import edu.stanford.irt.laneweb.eresources.search.FacetSAXStrategy;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
+import edu.stanford.irt.laneweb.eresources.search.FacetsGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetSAXStrategy;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetsGenerator;
 
 @Configuration
 @EnableSolrRepositories(basePackages = {

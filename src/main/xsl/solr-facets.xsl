@@ -144,7 +144,7 @@
                         <xsl:with-param name="id" select="f:facet[@f:key='type']" />
                         <xsl:with-param name="label">
                             Resource Type
-                            <i class="fa-solid fa-info-circle yui3-tooltip-trigger" title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;" />
+                            <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;" />
                         </xsl:with-param>
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='type']) > $values-per-facet">

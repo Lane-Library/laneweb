@@ -13,8 +13,6 @@ import org.springframework.data.solr.core.query.SimpleField;
 import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
 
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetComparator;
-
 public class FacetComparatorTest {
 
     private static final Collection<String> PUB_TYPES = Arrays.asList("Req Pub 1", "Req Pub 2", "Req Pub 3");

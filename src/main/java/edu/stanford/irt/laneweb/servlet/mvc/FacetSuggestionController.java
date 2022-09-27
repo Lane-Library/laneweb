@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
 
 @Controller
 public class FacetSuggestionController {

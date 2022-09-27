@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources.search.redesign;
+package edu.stanford.irt.laneweb.eresources.search;
 
 import java.util.Collection;
 import java.util.HashMap;

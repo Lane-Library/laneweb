@@ -23,8 +23,6 @@ import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetsGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class SolrSearchFacetsGeneratorTest {

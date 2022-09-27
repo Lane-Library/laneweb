@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
-import edu.stanford.irt.laneweb.eresources.search.redesign.FacetService;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
