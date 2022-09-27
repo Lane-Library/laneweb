@@ -66,7 +66,7 @@
                 </xsl:if>
                 <ul class="lwSearchResults">
                     <xsl:apply-templates select="s:result[./s:isAnExactMatch = 'true']" />
-                    <xsl:apply-templates select="s:result[./s:isAnExactMatch = 'false']" />
+                    <xsl:apply-templates select="s:result[./s:isAnExactMatch = 'false'] | s:result[not(./s:isAnExactMatch)]" />
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
                     <div class="s-tb no-bookmarking">
