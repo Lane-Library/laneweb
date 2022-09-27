@@ -71,10 +71,10 @@
                     <map:generate type="{0}"/>
                     <map:generate type="html" src="{content-base}/search/{0}.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="classpath:/xsl/redesign/clinical-search.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/clinical-search.xsl"/>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="description-labeling"/>
-                <map:transform type="saxon" src="classpath:/xsl/redesign/resourceList2html.xsl"/>
+                <map:transform type="saxon" src="classpath:/xsl/resourceList2html.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
