@@ -32,12 +32,12 @@
 
     <xsl:template name="sortBy">
         <xsl:if test="$source = 'all-all' and number(/s:resources/@size) &gt; 1">
-            <div class="view-by sort">
+            <div class="view-by sort no-bookmarking">
                 <span>Sort by</span>
                 <div class="general-dropdown dropdown">
                     <div class="general-dropdown-trigger">
                         <xsl:value-of select="$active-sort-name" />
-                        <i class="fa-regular fa-angles-down fa-sm"></i>
+                        <i class="fa-regular fa-angle-down fa-sm"></i>
                     </div>
                     <div class="general-dropdown-content dropdown-content">
                         <xsl:choose>
