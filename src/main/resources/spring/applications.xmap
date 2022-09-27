@@ -6,7 +6,7 @@
       <map:parameter name="request-key" value="remote-addr={remote-addr};request-uri={request-uri};source={source};q={query};facets={facets}"/>
       <map:match pattern="search/facets/html" type="wildcard">
             <map:generate type="solr-facets"/>
-            <map:transform type="saxon" src="classpath:/xsl/redesign/solr-facets.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
          <map:serialize type="html5"/>
       </map:match>
     
