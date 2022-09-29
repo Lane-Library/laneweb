@@ -38,7 +38,11 @@
             <xsl:copy-of select="f:descriptionTrigger(.)"/>
             <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'])"/>
             <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)"/>
-            <xsl:copy-of select="f:build-source-info(.)"/>
+            <div class="more-detail-container">
+                <i class="fa-solid fa-ellipsis fa-xl"></i>
+                <xsl:copy-of select="f:build-source-info(.)" />
+            </div>
+            
             </div>
             <div class="bookcover-container">
             <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">

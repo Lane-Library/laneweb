@@ -232,7 +232,7 @@
             <div class="resultInfo">
                 <xsl:copy-of select="f:build-link-label(.)" />
                 <xsl:if test="$simple-primary-type != string(s:label)">
-                    <span>
+                    <span class="simplePrimaryType">
                         <a href="{s:url}" title="{s:label}">
                             <xsl:value-of select="s:link-text" />
                         </a>

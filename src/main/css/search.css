@@ -184,6 +184,10 @@ li.active .description {
     margin-top: 15px;
 }
 
+.hldgsContainer, .resultInfo .simplePrimaryType{
+    margin-left: 15px;
+}
+
 .hldgsContainer .table-head, .hldgsContainer .table-cell {
     display: table-cell;
     position: relative;
@@ -242,7 +246,6 @@ li.active .description {
 .hldgsHeader {
     padding-right: 15px;
     display: inline-block;
-    min-width: 140px;
 }
 
 .hldgsHeader.available {
