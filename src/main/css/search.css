@@ -317,5 +317,13 @@ li.active .description {
     .lwSearchResults .resource {
         display: block;
     }
+}
+@media ( max-width : 812px) {
+    .lwSearchResults .resource {
+       padding: 12px 0;
+    }
     
+    .table-container{
+        overflow-x: auto;
+    }
 }

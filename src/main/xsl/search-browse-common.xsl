@@ -289,7 +289,6 @@
                             </div>
                         </div>
                     </xsl:for-each>
-
                 </div>
             </div>
         </xsl:if>
@@ -364,44 +363,46 @@
                         <span class="hldgsTrigger" />
                     </xsl:otherwise>
                 </xsl:choose>
-                <div class="table-main print-access hide-empty-columns">
-                    <div class="table-row">
-                        <div class="table-head">Location</div>
-                        <div class="table-head">
-                            Version
-                            <i class="fa-regular fa-info-circle yui3-tooltip-trigger"
-                                title="Look here for issue, volume, and year information about the items in Lane 
+                <div class="table-container">
+                    <div class="table-main print-access hide-empty-columns">
+                        <div class="table-row">
+                            <div class="table-head">Location</div>
+                            <div class="table-head">
+                                Version
+                                <i class="fa-regular fa-info-circle yui3-tooltip-trigger"
+                                    title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue." />
+                            </div>
+                            <div class="table-head">Call Number</div>
+                            <div class="table-head">Items</div>
+
                         </div>
-                        <div class="table-head">Call Number</div>
-                        <div class="table-head">Items</div>
-                              
+                        <xsl:for-each select="$links">
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <xsl:apply-templates select="s:locationName" />
+                                </div>
+                                <div class="table-cell">
+                                    <a href="{s:url}" title="{s:label}">
+                                        <xsl:value-of select="s:link-text" />
+                                    </a>
+                                    <xsl:if test="s:version-text">
+                                        <br />
+                                        <span class="versionText">
+                                            <xsl:value-of select="s:version-text" />
+                                        </span>
+                                    </xsl:if>
+                                </div>
+                                <div class="table-cell">
+                                    <xsl:apply-templates select="s:callnumber" />
+                                </div>
+                                <div class="table-cell">
+                                    <xsl:value-of select="s:available" />
+                                </div>
+                            </div>
+                        </xsl:for-each>
                     </div>
-                    <xsl:for-each select="$links">
-                        <div class="table-row">
-                            <div class="table-cell">
-                                <xsl:apply-templates select="s:locationName" />
-                            </div>
-                            <div class="table-cell">
-                                <a href="{s:url}" title="{s:label}">
-                                    <xsl:value-of select="s:link-text" />
-                                </a>
-                                <xsl:if test="s:version-text">
-                                    <br />
-                                    <span class="versionText">
-                                        <xsl:value-of select="s:version-text" />
-                                    </span>
-                                </xsl:if>
-                            </div>
-                            <div class="table-cell">
-                                <xsl:apply-templates select="s:callnumber" />
-                            </div>
-                            <div class="table-cell">
-                                <xsl:value-of select="s:available" />
-                            </div>
-                        </div>
-                    </xsl:for-each>
                 </div>
             </div>
         </xsl:if>
