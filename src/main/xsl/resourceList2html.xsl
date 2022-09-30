@@ -22,14 +22,10 @@
     <xsl:param name="url-encoded-query" />
 
     <xsl:variable name="guest-mode">
-        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">
-            true
-        </xsl:if>
+        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
 
-    <xsl:variable name="pubmed-baseUrl">
-        https://pubmed.ncbi.nlm.nih.gov/
-    </xsl:variable>
+    <xsl:variable name="pubmed-baseUrl">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
 
     <xsl:include href="resourceListPagination.xsl" />
 
@@ -295,10 +291,9 @@
             <xsl:value-of select="substring-after(.,'PMID:')" />
         </xsl:variable>
         <span class="pmid">
-            <a href="{concat($pubmed-baseUrl,$pmid,'/?otool=stanford')}">
-                PMID:
-                <xsl:value-of select="$pmid" />
-            </a>
+            <a>
+            <xsl:attribute name="href" select="concat($pubmed-baseUrl,$pmid,'/?otool=stanford')"></xsl:attribute>
+            PMID:<xsl:value-of select="$pmid" /></a>
         </span>
     </xsl:template>
 

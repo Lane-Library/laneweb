@@ -6,15 +6,16 @@
             <s:resources/>
         </x:context>
         <x:expect label="page markup">
-            <html>
-                <head>
-                    <title>search results</title>
-                </head>
-                <body>
-                    <ul class="lwSearchResults" />
-                    <div id="search-content-counts">&#160;</div>
-                </body>
-            </html>
+        <html>
+            <head>
+                <title>search results</title>
+            </head>
+            <body>
+                <h2>Search Results</h2>
+                <ul class="lwSearchResults" />
+               <div id="search-content-counts">&#160;</div>
+            </body>
+        </html>
         </x:expect>
     </x:scenario>
     
@@ -23,16 +24,9 @@
             <s:result type="searchContent"/>
         </x:context>
         <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
-            <li class="resource" data-sid="">
-                <span class="primaryType">Article</span>
-                <div>
-                    <a class="primaryLink"
-                        href="" />
-                </div>
-                <div class="sourceInfo">
-                    <span>Source: <a href=""> - NaN </a></span>
-                </div>
-            </li>
+            <li class="resource" data-sid=""><div class="resource-detail">
+            <span class="primaryType">Article</span><div><a class="primaryLink"
+             href="" /></div><div class="sourceInfo"><span>Source: <a href=""> - NaN </a></span></div></div></li>
         </x:expect>
     </x:scenario>
     
@@ -65,8 +59,11 @@
         <x:context>
             <s:recordType>web</s:recordType>
         </x:context>
-        <x:expect label="TODO: need to more actual types">Source: <a
-         href="/index.html">Lane Website</a></x:expect>
+        <x:expect label="TODO: need to more actual types">
+        <a href="/index.html"><i class="fa-solid fa-arrow-right-from-bracket" />
+                    Lane Website
+                </a>
+        </x:expect>
     </x:scenario>
     
     <x:scenario label="Scenario for testing template with match 's:description">
@@ -141,9 +138,8 @@
             <s:contentId>PMID:1234567</s:contentId>
         </x:context>
         <x:expect label="s:contentId starting with PMID: should get a link to pubmed in a span">
-            <span>
-            <a href="https://pubmed.ncbi.nlm.nih.gov/1234567/?otool=stanford">PMID: 1234567</a>
-        </span>
+        <span class="pmid"><a href="https://pubmed.ncbi.nlm.nih.gov/1234567/?otool=stanford">
+            PMID:1234567</a></span>
         </x:expect>
     </x:scenario>
     
