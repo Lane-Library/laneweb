@@ -106,3 +106,9 @@
         scroll-margin-top: 0;
     }
 }
+@media ( max-width : 812px) {
+    .module {
+        padding: 1em;
+        padding-top: 2em;
+    }
+}
