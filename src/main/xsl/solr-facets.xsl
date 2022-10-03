@@ -214,9 +214,7 @@
             </xsl:when>
             <xsl:when test="$name = 'sul'">
                 <span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">
-                    SearchWorks (
-                    <i>biomedical subset</i>
-                    )
+                    SearchWorks (<i>biomedical subset</i>)
                 </span>
             </xsl:when>
             <xsl:when test="$name = 'bib'">

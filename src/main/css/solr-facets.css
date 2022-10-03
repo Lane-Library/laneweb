@@ -34,7 +34,7 @@
     padding: 0;
 }
 
-.facet-container .facet i {
+.facet-container .facet i.fa-square{
     color: black;
     font-size: 13px;
     margin-right: 6px;
