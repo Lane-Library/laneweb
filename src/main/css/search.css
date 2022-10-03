@@ -22,7 +22,8 @@
 
 .popin #spellCheck {
     position: absolute;
-    left: 40%;
+    left: 24%;
+    max-width: 42%;
     top: 36px;
     z-index: 2;
     white-space: nowrap;
