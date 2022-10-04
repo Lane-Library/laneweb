@@ -244,6 +244,7 @@
     <xsl:function name="fct:getFacetUrl">
         <xsl:param name="facet-id" />
         <xsl:choose>
+            <xsl:when test="$encoded-facets = $facet-id"/>
             <xsl:when test="string-length($facets) = 0">
                 <xsl:value-of select="concat('&amp;facets=',  $facet-id)" />
             </xsl:when>
