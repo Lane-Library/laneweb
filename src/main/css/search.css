@@ -2,9 +2,13 @@
     margin-top: 0;
 }
 
-.tooltips, .popin>div, #search-content-counts, #showPubMedStrategies {
+.tooltips, #search-content-counts, #showPubMedStrategies {
     display: none;
 }
+
+ .popin>div{
+    visibility: hidden;
+ }
 
 .lwSearchResults li {
     border-bottom: solid 1px #dddddd;
@@ -21,10 +25,13 @@
 }
 
 .popin #spellCheck {
-    position: absolute;
-    left: 24%;
-    max-width: 42%;
-    top: 36px;
+    display: block;
+    position: relative;
+    text-align: center;
+    margin: auto;
+    max-width: calc(100% - 400px);
+    margin-top: 3px;
+    margin-bottom: -28px;
     z-index: 2;
     white-space: nowrap;
     overflow: hidden;
