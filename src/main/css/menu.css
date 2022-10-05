@@ -10,15 +10,16 @@
     padding: 9px 24px;
 }
 
-.menu-container.hoverline li a:hover{
+.menu-container.hoverline li a:hover {
     color: white;
     background-color: #666;
     text-decoration: none;
 }
 
-.menu-container li a.menuitem-active, .menu-container li a:hover.menuitem-active {
+.menu-container li a.menuitem-active, .menu-container li a:hover.menuitem-active
+    {
     background-color: #8c1515;
-    color:white;
+    color: white;
     cursor: default;
     text-decoration: none;
 }
@@ -28,7 +29,6 @@
     padding: 11px 7px;
     display: none;
 }
-
 
 @media ( max-width :1100px) {
     .menu-container.mobile {
@@ -46,12 +46,18 @@
         display: block;
         margin: 16px;
     }
-    .menu-container.mobile h2{
+    .menu-container.mobile h2 {
         padding: 16px;
     }
     .menu-container.mobile h2, .menu-container.mobile h2:before {
         margin-bottom: 0;
         border: none;
         cursor: pointer;
+    }
+}
+
+@media ( max-width :812px) {
+    .menu-container.mobile {
+        margin: 24px 15px 0;
     }
 }
