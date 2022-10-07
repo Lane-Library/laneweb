@@ -192,10 +192,6 @@ li.active .description {
     margin-top: 15px;
 }
 
-.hldgsContainer, .resultInfo .simplePrimaryType{
-    margin-left: 15px;
-}
-
 .hldgsContainer .table-head, .hldgsContainer .table-cell {
     display: table-cell;
     position: relative;
@@ -230,7 +226,7 @@ li.active .description {
 .hldgsContainer.active .table-main, .hldgsContainer .table-main.print-access.active
     {
     display: table;
-    min-width: 50%;
+    width: 100%;
 }
 
 .hldgsContainer .table-main.print-access {
