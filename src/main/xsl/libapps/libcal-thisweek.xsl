@@ -63,12 +63,6 @@
 					<i class="fa-solid fa-arrow-right" />
 				</a>
 			
-			
-				<a href="/using-lib/research-service.html#officehours">
-					Research Office Hours
-					<i class="fa-solid fa-arrow-right" />
-				</a>
-			
 			</div>
 		</li>
 	</xsl:template>
