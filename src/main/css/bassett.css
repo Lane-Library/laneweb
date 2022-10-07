@@ -22,18 +22,14 @@
 #bassett-title-header {
     margin: 30px 10px 0;
     padding-bottom: 6px;
-    font-size: 2em;
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
 #bassett-menu li:nth-child(n+6) {
     display: none;
 }
 
-#bassett-menu .solrFacet.facetHeader {
-    font-size: 18px;
-    font-weight: 600;
-    margin-top: 12px;
-}
 
 .menu-container #bassett-menu li a {
     padding: 6px 0px;
@@ -44,6 +40,7 @@
     color: #666;
     text-decoration: none;
     font-size: 13px;
+    margin-right: 3px;
 }
 
 .menu-container #bassett-menu li a i.fa-square-check {
