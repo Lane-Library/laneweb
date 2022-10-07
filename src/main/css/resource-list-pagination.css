@@ -141,4 +141,7 @@
     .s-tb, .resourceListPagination {
         flex-flow: column;
     }
+    .lwSearchResults .resource.exact-match-resource {
+     padding: 12px;
+    }
 }

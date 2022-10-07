@@ -6,7 +6,18 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-         <release date="2022-09-26" version="3.11.16" description="bug fix and update release">
+        <release date="2022-10-03" version="3.11.17" description="bug fix and update release">
+            <action date="2022-07-21" dev="alainb" issue="LANEWEB-10995" type="update">
+                Lane Search Results Page Redesign
+            </action>
+            <action date="2022-07-21" dev="alainb" issue="LANEWEB-11003" type="update">
+                Update print holdings tables in Lane Search
+            </action>
+            <action date="2022-07-21" dev="alainb" issue="LANEWEB-11007" type="update">
+                Add Digital Access Option for Articles in Lane Search
+            </action>
+        </release>
+        <release date="2022-09-26" version="3.11.16" description="bug fix and update release">
             <action date="2022-09-23" dev="alainb" issue="LANEWEB-11023" type="fix">
                 Page scrolling too much after a search
             </action>

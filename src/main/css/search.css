@@ -2,9 +2,13 @@
     margin-top: 0;
 }
 
-.tooltips, .popin>div, #search-content-counts, #showPubMedStrategies {
+.tooltips, #search-content-counts, #showPubMedStrategies {
     display: none;
 }
+
+ .popin>div{
+    visibility: hidden;
+ }
 
 .lwSearchResults li {
     border-bottom: solid 1px #dddddd;
@@ -21,10 +25,13 @@
 }
 
 .popin #spellCheck {
-    position: absolute;
-    left: 24%;
-    max-width: 42%;
-    top: 36px;
+    display: block;
+    position: relative;
+    text-align: center;
+    margin: auto;
+    max-width: calc(100% - 400px);
+    margin-top: 3px;
+    margin-bottom: -28px;
     z-index: 2;
     white-space: nowrap;
     overflow: hidden;
@@ -185,10 +192,6 @@ li.active .description {
     margin-top: 15px;
 }
 
-.hldgsContainer, .resultInfo .simplePrimaryType{
-    margin-left: 15px;
-}
-
 .hldgsContainer .table-head, .hldgsContainer .table-cell {
     display: table-cell;
     position: relative;
@@ -223,7 +226,7 @@ li.active .description {
 .hldgsContainer.active .table-main, .hldgsContainer .table-main.print-access.active
     {
     display: table;
-    min-width: 50%;
+    width: 100%;
 }
 
 .hldgsContainer .table-main.print-access {

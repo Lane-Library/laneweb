@@ -142,10 +142,7 @@
                 <xsl:if test="count(f:facet[@f:key='type']) > 0">
                     <xsl:call-template name="field">
                         <xsl:with-param name="id" select="f:facet[@f:key='type']" />
-                        <xsl:with-param name="label">
-                            Resource Type
-                            <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="20+ types of resources: books, journals, chapters, databases, images, videos - check &quot;See All&quot;" />
-                        </xsl:with-param>
+                        <xsl:with-param name="label">Resource Type</xsl:with-param>
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='type']) > $values-per-facet">
                         <li>
@@ -209,13 +206,11 @@
     <xsl:function name="fct:getLabel">
         <xsl:param name="name" />
         <xsl:choose>
-            <xsl:when test="$name = 'pubmed'">
-                PubMed
-            </xsl:when>
+            <xsl:when test="$name = 'pubmed'">PubMed</xsl:when>
             <xsl:when test="$name = 'sul'">
-                <span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">
-                    SearchWorks (<i>biomedical subset</i>)
-                </span>
+                <span class="yui3-tooltip-trigger" 
+                      title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University."
+                      >SearchWorks (<i>biomedical subset</i>)</span>
             </xsl:when>
             <xsl:when test="$name = 'bib'">
                 <span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span>
@@ -223,15 +218,9 @@
             <xsl:when test="$name = 'redivis'">
                 <span class="yui3-tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span>
             </xsl:when>
-            <xsl:when test="$name = 'web'">
-                Lane Web Site
-            </xsl:when>
-            <xsl:when test="$name = 'class'">
-                Lane Classes
-            </xsl:when>
-            <xsl:when test="$name = 'laneblog'">
-                Lane Blog
-            </xsl:when>
+            <xsl:when test="$name = 'web'">Lane Web Site</xsl:when>
+            <xsl:when test="$name = 'class'">Lane Classes</xsl:when>
+            <xsl:when test="$name = 'laneblog'">Lane Blog</xsl:when>
             <xsl:when test="$name = 'dnlm'">
                 <span class="yui3-tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span>
             </xsl:when>
@@ -244,6 +233,7 @@
     <xsl:function name="fct:getFacetUrl">
         <xsl:param name="facet-id" />
         <xsl:choose>
+            <xsl:when test="$encoded-facets = $facet-id"/>
             <xsl:when test="string-length($facets) = 0">
                 <xsl:value-of select="concat('&amp;facets=',  $facet-id)" />
             </xsl:when>

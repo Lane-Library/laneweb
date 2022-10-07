@@ -34,12 +34,14 @@
     padding: 0;
 }
 
-.facet-container .facet i.fa-square{
-    color: black;
+.facet-container .facet i.fa-square, .facet-container .facet i.fa-square-check{
     font-size: 13px;
     margin-right: 6px;
 }
 
+.facet-container .facet i.fa-square{
+    color: black;
+}
 .facet-container .facet i.fa-square-check {
     color: #8C1515;
 }

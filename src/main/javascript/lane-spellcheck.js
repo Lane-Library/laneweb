@@ -21,7 +21,7 @@
                         a = spellCheck.querySelector('a');
                         a.href = correctedUrl;
                         a.innerHTML = sc.suggestion;
-                        spellCheck.style.display = "inline";
+                        spellCheck.style.visibility = "visible";
                         // track suggestion and original query
                         L.fire("tracker:trackableEvent", {
                             category: "lane:spellSuggest",
