@@ -93,7 +93,7 @@
         registerLinksContainer = function(container) {
             if (container) {
                 var anchors = container.querySelectorAll('a');
-                anchors.forEach (function(anchor){
+                anchors.forEach(function(anchor) {
                     if (!anchor.rel || anchor.rel === "propagation") {
                         anchor.addEventListener('click', handleClick);
                     }
@@ -105,7 +105,7 @@
         hideSubRegions = function(event) {
             var i, region = event.currentTarget.closest("ul"),
                 subRegion = region.querySelectorAll('li');
-                resetSubRegion(region);
+            resetSubRegions(region);
             region.querySelector('.see-all').innerHTML = SEE_ALL;
             for (i = subRegionToShow; i < subRegion.length; i++) {
                 subRegion[i].style.display = "none";
@@ -117,16 +117,18 @@
                 subRegion = document.querySelector('#bassett-menu').querySelectorAll('li');
             for (i = 1; i < subRegion.length; i++) {
                 iElement = subRegion[i].querySelector('i');
-                if(iElement){
+                if (iElement) {
                     iElement.classList.add('fa-square');
-                    iElement.classList.remove('fa-check-square');
+                    iElement.classList.add('fa-regular');
+                    iElement.classList.remove('fa-solid');
+                    iElement.classList.remove('fa-square-check');
                 }
             }
         },
 
         expandSubRegion = function(event) {
             var i, subRegion,
-            region = event.currentTarget.closest("ul");
+                region = event.currentTarget.closest("ul");
             resetSubRegions();
             region.querySelector('.see-all').innerHTML = HIDE;
             subRegion = region.querySelectorAll('li');
@@ -151,7 +153,9 @@
             li.classList.add('enabled');
             i = li.querySelector('i');
             i.classList.remove('fa-square');
-            i.classList.add('fa-check-square');
+            i.classList.remove('fa-regular');
+            i.classList.add('fa-solid');
+            i.classList.add('fa-square-check');
         };
 
     if (bassettContent) {
