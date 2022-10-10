@@ -242,7 +242,7 @@
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader hldgsTrigger available">
                     <i class="fa-solid fa-desktop  fa-sm"></i>
-                    Digital Access &#160;
+                    Digital Access
                     <i class="fa-solid fa-angle-down"></i>
                     <i class="fa-solid fa-angle-up"></i>
                 </span>
@@ -328,7 +328,7 @@
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
                              </xsl:if>
                             <i class="fa-solid fa-book-open-cover"></i>
-                            <xsl:value-of select="f:itemTypeLabel($eresource)" />Access &#160;<i class="fa-solid fa-angle-down"></i>
+                            <xsl:value-of select="f:itemTypeLabel($eresource)" /> Access <i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
                         <xsl:if test="$itemsRequestableInVoyager">
@@ -437,9 +437,7 @@
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource" />
         <xsl:choose>
-            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))">
-                Print
-            </xsl:when>
+            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))">Print</xsl:when>
             <xsl:otherwise />
         </xsl:choose>
     </xsl:function>
