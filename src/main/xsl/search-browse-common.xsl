@@ -213,7 +213,6 @@
         <xsl:param name="links" />
         <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
-                <!-- TODO: updated link icon instead? -->
                 <span class="hldgsHeader available">
                     <i class="fa-solid fa-desktop fa-sm"></i>
                     Digital Access &#160;
@@ -241,7 +240,6 @@
         </xsl:if>
         <xsl:if test="count($links) > 1">
             <div class="hldgsContainer no-bookmarking">
-                <!-- TODO: updated link icon instead? -->
                 <span class="hldgsHeader hldgsTrigger available">
                     <i class="fa-solid fa-desktop  fa-sm"></i>
                     Digital Access &#160;
@@ -320,7 +318,6 @@
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
             <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
-                <!-- TODO: open book icon instead? -->
                 <xsl:choose>
                     <xsl:when test="count($links) = 1 and $itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader available">
