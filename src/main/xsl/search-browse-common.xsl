@@ -322,7 +322,20 @@
             <div class="hldgsContainer no-bookmarking">
                 <!-- TODO: open book icon instead? -->
                 <xsl:choose>
-                    <xsl:when test="$itemsAvailableButMaybeNotRequestable">
+                    <xsl:when test="count($links) = 1 and $itemsAvailableButMaybeNotRequestable">
+                        <span class="hldgsHeader available">
+                            <i class="fa-solid fa-book-open-cover"></i>
+                            <xsl:value-of select="f:itemTypeLabel($eresource)" />
+                            Access &#160;
+                        </span>
+                        <span class="hldgsTrigger" />
+                        <xsl:if test="$itemsRequestableInVoyager">
+                            <span class="requestIt">
+                                <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
+                            </span>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:when test="count($links) > 1 and $itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader hldgsTrigger available">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
