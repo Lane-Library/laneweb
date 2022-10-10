@@ -328,9 +328,7 @@
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
                              </xsl:if>
                             <i class="fa-solid fa-book-open-cover"></i>
-                            <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                            Access &#160;
-                            <i class="fa-solid fa-angle-down"></i>
+                            <xsl:value-of select="f:itemTypeLabel($eresource)" />Access &#160;<i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
                         <xsl:if test="$itemsRequestableInVoyager">

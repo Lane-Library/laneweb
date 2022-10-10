@@ -3,31 +3,26 @@
     "use strict";
 
 
-
-    searchResults = document.querySelector("#searchResults");
-
-    //add trigger markup and delegate click events
-    if (searchResults) {
-
-        var handleClick = function(node, event) {
-            var eresource = node.closest("li"),
-                ancestor = node.closest(".hldgsContainer");
+    document.querySelectorAll('.hldgsTrigger').forEach(function(node) {
+        node.addEventListener("click", function(event) {
             event.preventDefault();
+            var eresource = node.closest("li"),
+                ancestor = node.closest(".hldgsContainer"),
+                active = ancestor.classList.contains("active"),
+                actionLabel;
             ancestor.classList.toggle("active");
+            if (active) {
+                actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " -- close";
+            } else {
+                actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " -- open";
+            }
             L.fire("tracker:trackableEvent", {
                 category: "lane:hldgsTrigger",
                 action: actionLabel,
                 label: eresource.querySelector('.primaryLink').textContent
             });
-        };
-
-        searchResults.addEventListener("click", function(event) {
-            var node = event.target.closest(".hldgsTrigger");
-            if (node) {
-                handleClick(node, event);
-            }
         });
+    })
 
-    }
 
 })();
