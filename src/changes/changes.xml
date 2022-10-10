@@ -6,6 +6,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2022-10-10" version="3.11.18" description="bug fix and update release">
+            <action date="2022-10-05" dev="alainb" issue="LANEWEB-11028" type="delete">
+                Remove info icon for Resource Type filter in Search
+            </action>
+            <action date="2022-10-05" dev="alainb" issue="LANEWEB-11029" type="fix">
+                Center "Did You Mean:" into the h2
+            </action>
+            <action date="2022-1--06" dev="ryanmax" issue="LANEWEB-11030" type="delete">
+                Remove Research Office Hours Link from homepage
+            </action>
+            <action date="2022-10-07" dev="ryanmax" issue="LANEWEB-11033" type="fix">
+                Print holdings not always displaying in search results
+            </action>
+            <action date="2022-10-04" dev="ryanmax" issue="LANEWEB-11026" type="fix">
+                Infinite redirect due to empty facets parameter
+            </action>
+            <action date="2022-10-04" dev="ryanmax" issue="LANEWEB-10995" type="fix">
+                Odd facet spacing
+            </action>
+            <action date="2022-10-07" dev="alainb" issue="LANEWEB-11033" type="fix">
+                Top pagination buttons don't work on basset
+            </action>
+        </release>
         <release date="2022-10-03" version="3.11.17" description="bug fix and update release">
             <action date="2022-07-21" dev="alainb" issue="LANEWEB-10995" type="update">
                 Lane Search Results Page Redesign
@@ -59,7 +82,7 @@
                 hospital logo/brand change on discovery login page
             </action>
             <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10989" type="fix">
-                Delete Bookmark Bug    
+                Delete Bookmark Bug
             </action>
             <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10990" type="fix">
                 Bookmark feature Deleting Bug
