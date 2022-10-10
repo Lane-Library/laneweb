@@ -218,6 +218,7 @@ li.active .description {
 
 .hldgsContainer .hldgsTrigger .fa-angle-down, .hldgsContainer.active .hldgsTrigger .fa-angle-up{
     display: inline-block;
+    padding-left: 6px;
 }
 
 .hldgsContainer .table-main {
