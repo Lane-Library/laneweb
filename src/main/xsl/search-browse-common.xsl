@@ -318,22 +318,15 @@
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
             <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
+            <xsl:if test="count($links) = 1">
+                <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+            </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="count($links) = 1 and $itemsAvailableButMaybeNotRequestable">
+                    <xsl:when test="$itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader available">
-                            <i class="fa-solid fa-book-open-cover"></i>
-                            <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                            Access &#160;
-                        </span>
-                        <span class="hldgsTrigger" />
-                        <xsl:if test="$itemsRequestableInVoyager">
-                            <span class="requestIt">
-                                <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
-                            </span>
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:when test="count($links) > 1 and $itemsAvailableButMaybeNotRequestable">
-                        <span class="hldgsHeader hldgsTrigger available">
+                            <xsl:if test="count($links) > 1">
+                                <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
+                             </xsl:if>
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Access &#160;
@@ -375,7 +368,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <div class="table-container">
-                    <div class="table-main print-access hide-empty-columns">
+                    <div class="table-main hide-empty-columns">
                         <div class="table-row">
                             <div class="table-head">Location</div>
                             <div class="table-head">

@@ -6,9 +6,9 @@
     display: none;
 }
 
- .popin>div{
+.popin>div {
     visibility: hidden;
- }
+}
 
 .lwSearchResults li {
     border-bottom: solid 1px #dddddd;
@@ -113,12 +113,10 @@ li.active .description {
     width: max-content;
 }
 
-
-.rightSearchTips span{
+.rightSearchTips span {
     float: right;
     padding-left: 12px;
-} 
-
+}
 
 .rightSearchTips .heading {
     font-weight: bold;
@@ -167,20 +165,19 @@ li.active .description {
 .lwSearchResults .resource {
     display: flex;
     position: relative;
-    padding:12px;
-    margin:0;
+    padding: 12px;
+    margin: 0;
     margin-top: 21px;
-    padding-bottom:35px;
+    padding-bottom: 35px;
     justify-content: space-between;
-  
 }
 
 .lwSearchResults .resource:first-of-type {
     padding-top: 3px;
 }
 
-.lwSearchResults .resource:first-of-type .more-detail-container{
-    top:15px;
+.lwSearchResults .resource:first-of-type .more-detail-container {
+    top: 15px;
 }
 
 .lwSearchResults .citation {
@@ -214,26 +211,24 @@ li.active .description {
     display: table-row;
 }
 
-.hldgsContainer .fa-angle-up, .hldgsContainer .table-main,
-    .hldgsContainer.active .fa-angle-down {
+.hldgsContainer .fa-angle-up, .hldgsContainer .fa-angle-down,
+    .hldgsContainer.active .hldgsTrigger .fa-angle-down {
     display: none;
 }
 
-.hldgsContainer.active .fa-angle-up {
+.hldgsContainer .hldgsTrigger .fa-angle-down, .hldgsContainer.active .hldgsTrigger .fa-angle-up{
     display: inline-block;
 }
 
-.hldgsContainer.active .table-main, .hldgsContainer .table-main.print-access.active
-    {
+.hldgsContainer .table-main {
+    display: none;
+    margin: 6px 0 24px;
+    width: 100%;
+}
+
+.hldgsContainer.active .table-main {
     display: table;
-    width: 100%;
 }
-
-.hldgsContainer .table-main.print-access {
-    margin-top: 18px;
-    width: 100%;
-}
-
 
 .versionText {
     opacity: 0.75;
@@ -315,19 +310,19 @@ li.active .description {
 }
 
 @media ( max-width : 1100px) {
-	.resource .bookcover-container {
+    .resource .bookcover-container {
         display: none;
     }
     .lwSearchResults .resource {
         display: block;
     }
 }
+
 @media ( max-width : 812px) {
     .lwSearchResults .resource {
-       padding: 12px 0;
+        padding: 12px 0;
     }
-    
-    .table-container{
+    .table-container {
         overflow-x: auto;
     }
 }
