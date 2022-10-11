@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
+    
+    <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
+    
 
     <xsl:template match="s:desc-linebreak">
         <br />
@@ -240,6 +243,9 @@
         </xsl:if>
         <xsl:if test="count($links) > 1">
             <div class="hldgsContainer no-bookmarking">
+                <xsl:if test="$total-resources = 1">
+                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                </xsl:if>
                 <span class="hldgsHeader hldgsTrigger available">
                     <i class="fa-solid fa-desktop  fa-sm"></i>
                     Digital Access
@@ -318,7 +324,7 @@
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
             <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
-                <xsl:if test="count($links) = 1">
+                <xsl:if test="count($links) = 1 or $total-resources = 1">
                     <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
                 </xsl:if>
                 <xsl:choose>
