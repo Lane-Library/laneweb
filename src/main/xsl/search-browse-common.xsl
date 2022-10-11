@@ -215,7 +215,7 @@
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader available">
                     <i class="fa-solid fa-desktop fa-sm"></i>
-                    Digital Access &#160;
+                    Digital Access
                 </span>
                 <span>
                     <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
