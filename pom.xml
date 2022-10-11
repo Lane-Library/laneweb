@@ -544,7 +544,6 @@
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
                                 <include>lane-google-min.js</include>
-                                <include>lane-google-GA4-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-search-images-min.js</include>
                                 <include>lane-tooltips-min.js</include>
