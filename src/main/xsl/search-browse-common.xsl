@@ -215,7 +215,7 @@
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader available">
                     <i class="fa-solid fa-desktop fa-sm"></i>
-                    Digital Access &#160;
+                    Digital Access
                 </span>
                 <span>
                     <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
@@ -242,7 +242,7 @@
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader hldgsTrigger available">
                     <i class="fa-solid fa-desktop  fa-sm"></i>
-                    Digital Access &#160;
+                    Digital Access
                     <i class="fa-solid fa-angle-down"></i>
                     <i class="fa-solid fa-angle-up"></i>
                 </span>
@@ -318,25 +318,18 @@
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
             <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
+                <xsl:if test="count($links) = 1">
+                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="count($links) = 1 and $itemsAvailableButMaybeNotRequestable">
+                    <xsl:when test="$itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader available">
+                            <xsl:if test="count($links) > 1">
+                                <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
+                            </xsl:if>
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                            Access &#160;
-                        </span>
-                        <span class="hldgsTrigger" />
-                        <xsl:if test="$itemsRequestableInVoyager">
-                            <span class="requestIt">
-                                <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
-                            </span>
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:when test="count($links) > 1 and $itemsAvailableButMaybeNotRequestable">
-                        <span class="hldgsHeader hldgsTrigger available">
-                            <i class="fa-solid fa-book-open-cover"></i>
-                            <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                            Access &#160;
+                            Access
                             <i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
@@ -375,7 +368,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <div class="table-container">
-                    <div class="table-main print-access hide-empty-columns">
+                    <div class="table-main hide-empty-columns">
                         <div class="table-row">
                             <div class="table-head">Location</div>
                             <div class="table-head">
@@ -446,9 +439,7 @@
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource" />
         <xsl:choose>
-            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))">
-                Print
-            </xsl:when>
+            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))">Print</xsl:when>
             <xsl:otherwise />
         </xsl:choose>
     </xsl:function>
