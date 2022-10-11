@@ -318,17 +318,19 @@
             <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
             <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
-            <xsl:if test="count($links) = 1">
-                <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
-            </xsl:if>
+                <xsl:if test="count($links) = 1">
+                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                </xsl:if>
                 <xsl:choose>
                     <xsl:when test="$itemsAvailableButMaybeNotRequestable">
                         <span class="hldgsHeader available">
                             <xsl:if test="count($links) > 1">
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
-                             </xsl:if>
+                            </xsl:if>
                             <i class="fa-solid fa-book-open-cover"></i>
-                            <xsl:value-of select="f:itemTypeLabel($eresource)" /> Access <i class="fa-solid fa-angle-down"></i>
+                            <xsl:value-of select="f:itemTypeLabel($eresource)" />
+                            Access
+                            <i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
                         <xsl:if test="$itemsRequestableInVoyager">
