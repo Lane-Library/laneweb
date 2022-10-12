@@ -52,12 +52,10 @@
     });
 
     L.on("tracker:trackableEvent",  function(event) {
-        L.fire("ga4Tracker:trackableEvent", event);
         window.ga('send', 'event', event.category, event.action, event.label, event.value);
     });
 
     L.on("tracker:trackablePageview",  function(event) {
-        L.fire("ga4Tracker:trackablePageview", event);
         var ga = window.ga;
         if (event.external) {
             if(event.query !== undefined && event.query !== '' ){

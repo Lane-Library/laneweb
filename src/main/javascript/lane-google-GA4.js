@@ -72,7 +72,7 @@
     } 
     });
 
-    L.on("ga4Tracker:trackableEvent",  function(event) {
+    L.on("tracker:trackableEvent",  function(event) {
         window.gtag( 'event',  event.action , {
            'event_category' : event.category,
            'event_label' : event.label,
@@ -80,7 +80,7 @@
         } );
     });
 
-    L.on("ga4Tracker:trackablePageview",  function(event) {
+    L.on("tracker:trackablePageview",  function(event) {
         if (event.external) {
             if(event.query !== undefined && event.query !== '' ){
                  window.gtag( 'event',  'lane:offsite' , {
