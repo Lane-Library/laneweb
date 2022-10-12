@@ -10,7 +10,7 @@
         } else if (host.match("lane-beta.stanford.edu")) {
             trackerId = "G-RF4JWB6KG5";
         } else {
-            trackerId = "G-RF4JWB6KG5";
+            trackerId = "";
         }    
         return trackerId;
     },
@@ -72,7 +72,7 @@
     } 
     });
 
-    L.on("tracker:trackableEvent",  function(event) {
+    L.on("ga4Tracker:trackableEvent",  function(event) {
         window.gtag( 'event',  event.action , {
            'event_category' : event.category,
            'event_label' : event.label,
@@ -80,7 +80,7 @@
         } );
     });
 
-    L.on("tracker:trackablePageview",  function(event) {
+    L.on("ga4Tracker:trackablePageview",  function(event) {
         if (event.external) {
             if(event.query !== undefined && event.query !== '' ){
                  window.gtag( 'event',  'lane:offsite' , {
