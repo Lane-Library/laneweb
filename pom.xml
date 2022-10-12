@@ -544,6 +544,7 @@
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
                                 <include>lane-google-min.js</include>
+                                <include>lane-google-GA4-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-search-images-min.js</include>
                                 <include>lane-tooltips-min.js</include>
@@ -610,7 +611,7 @@
                 </executions>
             </plugin>
              -->
-            <!--  <plugin 
+            <plugin> 
                 <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
                 <version>1.2</version>
@@ -623,7 +624,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin -->
+            </plugin>
             <plugin>
                 <groupId>com.cj.jshintmojo</groupId>
                 <artifactId>jshint-maven-plugin</artifactId>
