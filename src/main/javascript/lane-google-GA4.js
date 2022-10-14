@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var getTrackerId = function () {
+    var getTrackerId = function() {
         var host = location.host,
             trackerId;
         if (host.match("lane.stanford.edu")) {
@@ -11,97 +11,95 @@
             trackerId = "G-RF4JWB6KG5";
         } else {
             trackerId = "G-RF4JWB6KG5";
-        }    
+        }
         return trackerId;
     },
-    
-    GA_MEASUREMENT_ID = getTrackerId(),
-    
-    // custom dimension indexes must be configured in the GA admin interface for each property
-    // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
-    DIMENSION = 'dimension',
-    IP_GROUP_DIMENSION = 'dimension1',
-    AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
-    BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3',
-    BOOKMARK ='bookmark',
-    IP_GROUP = 'ipGroup',
-    AUTHENTICATED = 'authenticated';
+
+        GA_MEASUREMENT_ID = getTrackerId(),
+
+        // custom dimension indexes must be configured in the GA admin interface for each property
+        // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
+        DIMENSION = 'dimension',
+        IP_GROUP_DIMENSION = 'dimension1',
+        AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
+        BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3',
+        BOOKMARK = 'bookmark',
+        IP_GROUP = 'ipGroup',
+        AUTHENTICATED = 'authenticated';
 
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
-    L.Get.script("https://www.googletagmanager.com/gtag/js?id="+GA_MEASUREMENT_ID, {
+    L.Get.script("https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID, {
         onSuccess: function() {
             var model = L.Model,
                 ipGroup = model.get(model.IPGROUP),
                 auth = model.get(model.AUTH),
                 dimensions = new Map();
-                window.dataLayer = window.dataLayer || [];     
-           
-                window.gtag = window.gtag || function(){
-                    dataLayer.push(arguments);
-                }
-                
-                
+            window.dataLayer = window.dataLayer || [];
+
+            window.gtag = window.gtag || function() {
+                dataLayer.push(arguments);
+            }
+
+
             gtag('js', new Date());
-           
-           if (ipGroup){
-                dimensions.set(IP_GROUP_DIMENSION,  'ipGroup'  );
+
+            if (ipGroup) {
+                dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
             }
-            if (auth){
-                dimensions.set( AUTHENTICATED_SESSION_DIMENSION , 'auth'  );
-                if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0){
-                    dimensions.set( BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark'  );
+            if (auth) {
+                dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
+                if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
+                    dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
                 }
             }
-           
-            
-            gtag('config', GA_MEASUREMENT_ID,{
-            'debug_mode':true,
-            'custom_map': dimensions
-              });
-           
-           if(dimensions.has(IP_GROUP_DIMENSION)){
-                gtag('event', IP_GROUP+'_'+DIMENSION, {'ipGroup': ipGroup});
+
+            gtag('config', GA_MEASUREMENT_ID, {
+                'custom_map': dimensions
+            });
+
+            if (dimensions.has(IP_GROUP_DIMENSION)) {
+                gtag('event', IP_GROUP + '_' + DIMENSION, { 'ipGroup': ipGroup });
             }
-            if(dimensions.has(AUTHENTICATED_SESSION_DIMENSION)){
-                gtag('event', AUTHENTICATED+'_'+DIMENSION, {'auth': auth});
+            if (dimensions.has(AUTHENTICATED_SESSION_DIMENSION)) {
+                gtag('event', AUTHENTICATED + '_' + DIMENSION, { 'auth': auth });
             }
-            if(dimensions.has(BOOKMARK_ENABLED_SESSION_DIMENSION)){
-                gtag('event', BOOKMARK+'_'+DIMENSION , {'bookmark': auth});
-            }        
-    } 
+            if (dimensions.has(BOOKMARK_ENABLED_SESSION_DIMENSION)) {
+                gtag('event', BOOKMARK + '_' + DIMENSION, { 'bookmark': auth });
+            }
+        }
     });
 
-   /* L.on("tracker:trackableEvent",  function(event) {
-        window.gtag( 'event',  event.action , {
-           'event_category' : event.category,
-           'event_label' : event.label,
-           'event_value' : event.value 
-        } );
+    L.on("tracker:trackableEvent", function(event) {
+        window.gtag('event', event.action, {
+            'event_category': event.category,
+            'event_label': event.label,
+            'event_value': event.value
+        });
     });
 
-    L.on("tracker:trackablePageview",  function(event) {
+    L.on("tracker:trackablePageview", function(event) {
         if (event.external) {
-            if(event.query !== undefined && event.query !== '' ){
-                 window.gtag( 'event',  'lane:offsite' , {
-                'event_category' : "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
-                'event_label' : event.host + event.path + event.query
-                } );
-                
-            }else{
-                 window.gtag( 'event',  'lane:offsite' , {
-                'event_category' : "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
-                'event_label' : event.host + event.path
-                } );
+            if (event.query !== undefined && event.query !== '') {
+                window.gtag('event', 'lane:offsite', {
+                    'event_category': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+                    'event_label': event.host + event.path + event.query
+                });
+
+            } else {
+                window.gtag('event', 'lane:offsite', {
+                    'event_category': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+                    'event_label': event.host + event.path
+                });
             }
         } else {
             window.gtag('event', 'page_view', {
-            'page_title':  event.title,
-            'page_location': event.href,
-            'page_path': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path,
-            'send_to': GA_MEASUREMENT_ID
+                'page_title': event.title,
+                'page_location': event.href,
+                'page_path': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path,
+                'send_to': GA_MEASUREMENT_ID
             })
-            
+
         }
-    });*/
+    });
 })();
