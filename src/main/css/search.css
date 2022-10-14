@@ -189,6 +189,10 @@ li.active .description {
     margin-top: 15px;
 }
 
+.resultInfo .linkText {
+    margin: 0 15px;
+}
+
 .hldgsContainer .table-head, .hldgsContainer .table-cell {
     display: table-cell;
     position: relative;
