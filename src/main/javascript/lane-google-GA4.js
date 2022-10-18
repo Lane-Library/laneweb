@@ -34,39 +34,36 @@
             var model = L.Model,
                 ipGroup = model.get(model.IPGROUP),
                 auth = model.get(model.AUTH),
-                dimensions = new Map();
+                dimensions = new Map(),
+                dimensionsValue = [];
             window.dataLayer = window.dataLayer || [];
 
             window.gtag = window.gtag || function() {
                 dataLayer.push(arguments);
             }
-
-
             gtag('js', new Date());
 
             if (ipGroup) {
                 dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
+                dimensionsValue.push( { 'ipGroup': ipGroup });
             }
             if (auth) {
                 dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
+                dimensionsValue.push( { 'auth': auth } );
                 if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
                     dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
+                    dimensionsValue.push({ 'bookmark': auth });
                 }
             }
 
             gtag('config', GA_MEASUREMENT_ID, {
                 'custom_map': dimensions
             });
-
-            if (dimensions.has(IP_GROUP_DIMENSION)) {
-                gtag('event', IP_GROUP + '_' + DIMENSION, { 'ipGroup': ipGroup });
+            
+            if (dimensionsValue.length > 0) {
+                gtag('event', "LANEWEB_" + DIMENSION, dimensionsValue);
             }
-            if (dimensions.has(AUTHENTICATED_SESSION_DIMENSION)) {
-                gtag('event', AUTHENTICATED + '_' + DIMENSION, { 'auth': auth });
-            }
-            if (dimensions.has(BOOKMARK_ENABLED_SESSION_DIMENSION)) {
-                gtag('event', BOOKMARK + '_' + DIMENSION, { 'bookmark': auth });
-            }
+            
         }
     });
 
