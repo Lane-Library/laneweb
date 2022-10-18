@@ -19,6 +19,7 @@
 
         // custom dimension indexes must be configured in the GA admin interface for each property
         // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
+        LANEWEB = "laneweb_",
         DIMENSION = 'dimension',
         IP_GROUP_DIMENSION = 'dimension1',
         AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
@@ -57,7 +58,7 @@
             });
             
             
-            gtag('event', "LANEWEB_" + DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': auth });
+            gtag('event', LANEWEB + DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': auth });
             
             
         }
