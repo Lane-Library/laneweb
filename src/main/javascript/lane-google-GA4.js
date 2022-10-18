@@ -33,9 +33,8 @@
         onSuccess: function() {
             var model = L.Model,
                 ipGroup = model.get(model.IPGROUP),
-                auth = model.get(model.AUTH),
-                dimensions = new Map(),
-                dimensionsValue = [];
+                auth =  model.get(model.AUTH),
+                dimensions = new Map();
             window.dataLayer = window.dataLayer || [];
 
             window.gtag = window.gtag || function() {
@@ -45,14 +44,11 @@
 
             if (ipGroup) {
                 dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
-                dimensionsValue.push( { 'ipGroup': ipGroup });
             }
             if (auth) {
                 dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
-                dimensionsValue.push( { 'auth': auth } );
                 if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
                     dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
-                    dimensionsValue.push({ 'bookmark': auth });
                 }
             }
 
@@ -60,9 +56,9 @@
                 'custom_map': dimensions
             });
             
-            if (dimensionsValue.length > 0) {
-                gtag('event', "LANEWEB_" + DIMENSION, dimensionsValue);
-            }
+            
+            gtag('event', "LANEWEB_" + DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': auth });
+            
             
         }
     });
