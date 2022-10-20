@@ -103,10 +103,6 @@
 	margin-right: 12px;
 }
 
-#bookmarks-editor button {
-	margin-right: 6px;
-}
-
 #bookmarks-editor input[type='text'] {
 	box-shadow: rgba(0, 0, 0, .1) 0 0 8px;
 	padding: 5px;

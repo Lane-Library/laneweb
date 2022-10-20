@@ -20,39 +20,11 @@
                     <fieldset>
                        <div class="addBookmarkContainer">
                             <div class="addBookmark">
-                                <a href="#">Add Bookmark
+                                <button name="action" value="add" type="submit">
+                                    <span>Add Bookmark</span>
                                     <i class="fa-solid fa-angle-down"></i>
                                     <i class="fa-solid fa-angle-up"></i>
-                                </a>
-                            </div>
-                            <div class="bookmarkEdit">
-                                <div class="closeBookmarkForm">
-                                    <button name="action" value="cancel" type="submit">
-                                        <i class="fa-regular fa-xmark fa-lg"></i>
-                                    </button>
-                                </div>
-                                <div class="bookmarkEditContainer">
-                                    <div class="bookmarkEditItem">
-                                        <label for="label">Name</label>
-                                        <input name="label" type="text"></input>
-                                    </div>
-                                    <div class="bookmarkEditItem">
-                                        <label for="url">URL</label>
-                                        <input name="url" type="text" placeholder="https://"></input>
-                                    </div>
-                                </div>
-                                <div class="bookmarkEditContainer">
-                                    <div class="bookmarkEditItem">
-                                        <button class="btn alt" name="action" value="save" type="submit">
-                                            <span>SAVE</span>
-                                        </button>
-                                    </div>
-                                    <div class="bookmarkEditItem">
-                                        <button class="btn alt outline" value="reset" type="reset">
-                                            <span>UNDO</span>
-                                        </button>
-                                    </div>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </fieldset>

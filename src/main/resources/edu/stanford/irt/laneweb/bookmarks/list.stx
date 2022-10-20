@@ -36,50 +36,7 @@
         <stx:assign name="url" select="''"/>
         <li xmlns="http://www.w3.org/1999/xhtml">
             <stx:process-children/>
-            <div class="bookmarkRow">
-                <a href="{$url}"><stx:value-of select="$label"/></a>
-                <div class="actions">
-                    <button name="action" value="edit" type="submit">
-                        <i class="fa-solid fa-lg fa-pen-to-square"></i>
-                    </button>
-                    |
-                    <button name="action" value="delete" type="submit">
-                        <i class="fa-solid fa-lg fa-trash-can"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="bookmarkEdit">
-                <div class="closeBookmarkForm">
-                    <button name="action" value="cancel" type="submit">
-                        <i class="fa-regular fa-xmark fa-lg"></i>
-                    </button>
-                </div>
-                <div class="bookmarkEditContainer">
-                    <div class="bookmarkEditItem">
-                        <label for="label">Name</label>
-                        <input name="label" type="text" value="{$label}"></input>
-                    </div>
-                    <div class="bookmarkEditItem">
-                        <label for="url">URL</label>
-                        <input name="url" type="text" value="{$url}"></input>
-                    </div>
-                </div>
-                <div class="bookmarkEditContainer">
-                    <div class="bookmarkEditItem">
-                        <button class="btn alt" name="action" value="save" type="submit">
-                            <span>SAVE</span>
-                        </button>
-                    </div>
-                    <div class="bookmarkEditItem">
-                        <button class="btn alt outline" value="reset" type="reset">
-                            <span>UNDO</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
+            <a href="{$url}"><stx:value-of select="$label"/></a>
         </li>
     </stx:template>
     

@@ -61,18 +61,20 @@
          */
         add : function() {
             var items = this.get("srcNode").one("ul"),
-                item = Y.Node.create("<li><input type=\"checkbox\" checked=\"checked\"/><a></a></li>"),
-                editors = this.get("editors"),
-                editing = false,
-                editor;
-
-            editors.forEach(function(edtr) {
-                if (edtr.get("editing")) {
-                    editing = true;
-                }
-            });
-                
-            if(!editing) {
+            item = Y.Node.create("<li><a></a></li>"),
+            addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
+            editors = this.get("editors"),
+            adding = editors.length && editors[0].get("editing"),
+            editor;
+            // toggle add bookmark button
+            if (addBookmarkContainer) {
+                addBookmarkContainer.classList.toggle("active");
+            }
+            // destroy add bookmark editor if already present/open
+            // otherwise, create a new add bookmark editor
+            if (adding) {
+                editors[0].destroy();
+            } else {
                 items.prepend(item);
                 editor = new BookmarkEditor({srcNode : item, render : true});
                 editor.after("destroy", this._handleDestroyEditor, this);

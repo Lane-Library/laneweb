@@ -18,34 +18,52 @@
          * @method renderUI
          */
         renderUI : function() {
-//            this.get("srcNode").append(
-//                "<div class=\"bookmarkEdit\">" +
-//                    "<div class=\"closeBookmarkForm\">" +
-//                         "<i class=\"fa-regular fa-xmark fa-lg\"></i>" +
-//                    "</div>" +
-//                    "<div class=\"bookmarkEditContainer\">" +
-//                        "<div class=\"bookmarkEditItem\">" +
-//                            "<label for=\"label\">Name</label>" +
-//                            "<input name=\"label\" type=\"text\"></input>" +
-//                        "</div>" +
-//                        "<div class=\"bookmarkEditItem\">" +
-//                            "<label for=\"url\">URL</label>" +
-//                            "<input name=\"url\" type=\"text\"></input>" +
-//                        "</div>" +
-//                    "</div>" +
-//                    "<div class=\"bookmarkEditContainer\">" +
-//                        "<div class=\"bookmarkEditItem\">" +
-//                            "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" +
-//                                "<span>SAVE</span>" +
-//                            "</button>" +
-//                        "</div>" +
-//                        "<div class=\"bookmarkEditItem\">" +
-//                            "<button class=\"btn alt outline\" value=\"reset\" type=\"reset\">" +
-//                                "<span>UNDO</span>" +
-//                            "</button>" +
-//                        "</div>" +
-//                    "</div>" +
-//                "</div>");
+            var anchor = this.get("srcNode").one("a"),
+            url = anchor.get("href"),
+            label = anchor.get("textContent");
+            anchor.remove();
+            this.get("srcNode").append(
+                "<div class=\"bookmarkRow\">" + 
+                    "<a href=\"" + url + "\">" + label + "</a>" + 
+                    "<div class=\"actions\">" + 
+                        "<button name=\"action\" value=\"edit\" type=\"submit\">" + 
+                            "<i class=\"fa-solid fa-lg fa-pen-to-square\"></i>" + 
+                        "</button>" + 
+                        "|" + 
+                        "<button name=\"action\" value=\"delete\" type=\"submit\">" + 
+                            "<i class=\"fa-solid fa-lg fa-trash-can\"></i>" + 
+                        "</button>" + 
+                    "</div>" + 
+                "</div>" + 
+                "<div class=\"bookmarkEdit\">" + 
+                    "<div class=\"closeBookmarkForm\">" + 
+                        "<button name=\"action\" value=\"cancel\" type=\"submit\">" + 
+                            "<i class=\"fa-regular fa-xmark fa-lg\"></i>" + 
+                        "</button>" + 
+                    "</div>" + 
+                    "<div class=\"bookmarkEditContainer\">" + 
+                        "<div class=\"bookmarkEditItem\">" + 
+                            "<label for=\"label\">Name</label>" + 
+                            "<input name=\"label\" type=\"text\"></input>" + 
+                        "</div>" + 
+                        "<div class=\"bookmarkEditItem\">" + 
+                            "<label for=\"url\">URL</label>" + 
+                            "<input name=\"url\" type=\"text\"></input>" + 
+                        "</div>" + 
+                    "</div>" + 
+                    "<div class=\"bookmarkEditContainer\">" + 
+                        "<div class=\"bookmarkEditItem\">" + 
+                            "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" + 
+                                "<span>SAVE</span>" + 
+                            "</button>" + 
+                        "</div>" + 
+                        "<div class=\"bookmarkEditItem\">" + 
+                            "<button class=\"btn alt outline\" value=\"reset\" type=\"reset\">" + 
+                                "<span>UNDO</span>" + 
+                            "</button>" + 
+                        "</div>" + 
+                    "</div>" + 
+                "</div>");
         },
 
         /**
@@ -119,7 +137,10 @@
          */
         "delete" : function() {
             if (this.get("bookmarks")) {
-                var index = this.get("srcNode").one("input[name='i']").getAttribute("value");
+                var li = this.get("srcNode")._node,
+                ul = li.closest("ul"),
+                lis = Array.from( ul.querySelectorAll("li") ),
+                index = lis.indexOf( li );
                 this.get("bookmarks").removeBookmarks([Number(index)])
             }
         },
