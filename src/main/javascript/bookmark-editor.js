@@ -112,12 +112,16 @@
          * @method cancel
          */
         cancel : function() {
+            var addBookmarkContainer = document.querySelector(".addBookmarkContainer");
             if (this.get("bookmark")) {
                 this.set("editing", false);
             } else {
                 this._labelInput.destroy();
                 this._urlInput.destroy();
                 this.destroy(true);
+                if (addBookmarkContainer) {
+                    addBookmarkContainer.classList.toggle("active");
+                }
             }
         },
 
