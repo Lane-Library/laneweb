@@ -19,13 +19,11 @@
                 <form action="/bookmarks" method="post" id="bookmarks-editor">
                     <fieldset>
                        <div class="addBookmarkContainer">
-                            <div class="addBookmark">
-                                <button name="action" value="add" type="submit">
-                                    <span>Add Bookmark</span>
-                                    <i class="fa-solid fa-angle-down"></i>
-                                    <i class="fa-solid fa-angle-up"></i>
-                                </button>
-                            </div>
+                            <button name="action" value="add" type="submit">
+                                <span>Add Bookmark</span>
+                                <i class="fa-solid fa-angle-down"></i>
+                                <i class="fa-solid fa-angle-up"></i>
+                            </button>
                         </div>
                     </fieldset>
                     <stx:process-children/>

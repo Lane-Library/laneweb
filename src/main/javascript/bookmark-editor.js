@@ -18,46 +18,39 @@
          * @method renderUI
          */
         renderUI : function() {
-            var anchor = this.get("srcNode").one("a"),
-            url = anchor.get("href"),
-            label = anchor.get("textContent");
-            anchor.remove();
             this.get("srcNode").append(
-                "<div class=\"bookmarkRow\">" + 
-                    "<a href=\"" + url + "\">" + label + "</a>" + 
-                    "<div class=\"actions\">" + 
-                        "<button name=\"action\" value=\"edit\" type=\"submit\">" + 
-                            "<i class=\"fa-solid fa-lg fa-pen-to-square\"></i>" + 
-                        "</button>" + 
-                        "|" + 
-                        "<button name=\"action\" value=\"delete\" type=\"submit\">" + 
-                            "<i class=\"fa-solid fa-lg fa-trash-can\"></i>" + 
-                        "</button>" + 
-                    "</div>" + 
+                "<div class=\"actions\">" + 
+                    "<button name=\"action\" value=\"edit\" type=\"submit\">" + 
+                        "<i class=\"fa-solid fa-lg fa-pen-to-square\"></i>" + 
+                    "</button>" + 
+                    "|" + 
+                    "<button name=\"action\" value=\"delete\" type=\"submit\">" + 
+                        "<i class=\"fa-solid fa-lg fa-trash-can\"></i>" + 
+                    "</button>" + 
                 "</div>" + 
-                "<div class=\"bookmarkEdit\">" + 
-                    "<div class=\"closeBookmarkForm\">" + 
+                "<div class=\"editContainer\">" + 
+                    "<div class=\"close\">" + 
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">" + 
                             "<i class=\"fa-regular fa-xmark fa-lg\"></i>" + 
                         "</button>" + 
                     "</div>" + 
-                    "<div class=\"bookmarkEditContainer\">" + 
-                        "<div class=\"bookmarkEditItem\">" + 
+                    "<div class=\"editPanel\">" + 
+                        "<div class=\"editItem\">" + 
                             "<label for=\"label\">Name</label>" + 
                             "<input name=\"label\" type=\"text\"></input>" + 
                         "</div>" + 
-                        "<div class=\"bookmarkEditItem\">" + 
+                        "<div class=\"editItem\">" + 
                             "<label for=\"url\">URL</label>" + 
                             "<input name=\"url\" type=\"text\"></input>" + 
                         "</div>" + 
                     "</div>" + 
-                    "<div class=\"bookmarkEditContainer\">" + 
-                        "<div class=\"bookmarkEditItem\">" + 
+                    "<div class=\"editPanel\">" + 
+                        "<div class=\"editItem\">" + 
                             "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" + 
                                 "<span>SAVE</span>" + 
                             "</button>" + 
                         "</div>" + 
-                        "<div class=\"bookmarkEditItem\">" + 
+                        "<div class=\"editItem\">" + 
                             "<button class=\"btn alt outline\" value=\"reset\" type=\"reset\">" + 
                                 "<span>UNDO</span>" + 
                             "</button>" + 
@@ -126,7 +119,7 @@
         },
 
         /**
-         * Responds to the edit button by showing the bookmarkEdit form and hiding the bookmarkRow.
+         * Responds to the edit button by showing the editContainer form and hiding the bookmark anchor
          * @method edit
          */
         edit : function() {
