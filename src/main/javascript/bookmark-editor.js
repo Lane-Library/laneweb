@@ -18,20 +18,34 @@
          * @method renderUI
          */
         renderUI : function() {
-            this.get("srcNode").append(
-                    "<input type=\"text\" name=\"label\"/>" +
-                    "<input type=\"text\" name=\"url\"/>" +
-                    "<div>" +
-                    "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" +
-                    "<span><i class=\"icon fa fa-save\"></i>Save</span>" +
-                    "</button>" +
-                    "<button class=\"btn alt\" value=\"reset\" type=\"reset\">" +
-                    "<span><i class=\"icon fa fa-undo\"></i>Undo</span>" +
-                    "</button>" +
-                    "<button class=\"btn alt\" name=\"action\" value=\"cancel\" type=\"submit\">" +
-                    "<span><i class=\"icon fa-regular fa-xmark fa-lg\"></i>Cancel</span>" +
-                    "</button>" + 
-                    "</div>");
+//            this.get("srcNode").append(
+//                "<div class=\"bookmarkEdit\">" +
+//                    "<div class=\"closeBookmarkForm\">" +
+//                         "<i class=\"fa-regular fa-xmark fa-lg\"></i>" +
+//                    "</div>" +
+//                    "<div class=\"bookmarkEditContainer\">" +
+//                        "<div class=\"bookmarkEditItem\">" +
+//                            "<label for=\"label\">Name</label>" +
+//                            "<input name=\"label\" type=\"text\"></input>" +
+//                        "</div>" +
+//                        "<div class=\"bookmarkEditItem\">" +
+//                            "<label for=\"url\">URL</label>" +
+//                            "<input name=\"url\" type=\"text\"></input>" +
+//                        "</div>" +
+//                    "</div>" +
+//                    "<div class=\"bookmarkEditContainer\">" +
+//                        "<div class=\"bookmarkEditItem\">" +
+//                            "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" +
+//                                "<span>SAVE</span>" +
+//                            "</button>" +
+//                        "</div>" +
+//                        "<div class=\"bookmarkEditItem\">" +
+//                            "<button class=\"btn alt outline\" value=\"reset\" type=\"reset\">" +
+//                                "<span>UNDO</span>" +
+//                            "</button>" +
+//                        "</div>" +
+//                    "</div>" +
+//                "</div>");
         },
 
         /**
@@ -86,6 +100,27 @@
                 this._labelInput.destroy();
                 this._urlInput.destroy();
                 this.destroy(true);
+            }
+        },
+
+        /**
+         * Responds to the edit button by showing the bookmarkEdit form and hiding the bookmarkRow.
+         * @method edit
+         */
+        edit : function() {
+            if (this.get("bookmark")) {
+                this.set("editing", true);
+            }
+        },
+
+        /**
+         * Responds to the delete button by ...
+         * @method delete
+         */
+        "delete" : function() {
+            if (this.get("bookmarks")) {
+                var index = this.get("srcNode").one("input[name='i']").getAttribute("value");
+                this.get("bookmarks").removeBookmarks([Number(index)])
             }
         },
 
@@ -170,6 +205,7 @@
         _handleEditingChange : function(event) {
             var srcNode = this.get("srcNode"),
             activeClass = this.getClassName() + "-active";
+            srcNode._node.classList.toggle('active');
             if (event.newVal) {
                 srcNode.addClass(activeClass);
                 this.reset();
@@ -192,19 +228,22 @@
         },
 
         /**
-         * Put the text http:// into url input if it is empty
+         * Put the text https:// into url input if it is empty
          * @method _setDefaultUrlInputText
          * @private
          */
         _setDefaultUrlInputText : function() {
             if (this._urlInput.get("value") === "") {
-                this._urlInput.set("value", "http://");
+                this._urlInput.set("value", "https://");
             }
         }
     }, {
         ATTRS : {
             bookmark : {
                 value : null
+            },
+            bookmarks : {
+                value : L.BookmarksWidget.get("bookmarks")
             },
             editing : {
                 value : false

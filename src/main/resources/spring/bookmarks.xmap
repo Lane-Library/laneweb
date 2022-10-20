@@ -18,11 +18,6 @@
             <map:generate type="bookmark"/>
             <map:transform type="joost" src="classpath:/edu/stanford/irt/laneweb/bookmarks/list.stx"/>
             <map:transform type="joost" src="classpath:/edu/stanford/irt/laneweb/bookmarks/form.stx"/>
-            <map:select type="action">
-                <map:when test="edit">
-                    <map:transform type="joost" src="classpath:/edu/stanford/irt/laneweb/bookmarks/edit.stx"/>
-                </map:when>
-            </map:select>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

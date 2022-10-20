@@ -18,15 +18,43 @@
             <stx:otherwise>
                 <form action="/bookmarks" method="post" id="bookmarks-editor">
                     <fieldset>
-                        <button class="btn alt" name="action" value="add" type="submit">
-                            <span><i class="icon fa fa-plus"></i>Add</span>
-                        </button>
-                        <button class="btn alt" name="action" value="delete" type="submit">
-                            <span><i class="icon fa fa-minus"></i>Delete</span>
-                        </button>
-                        <button class="btn alt" name="action" value="edit" type="submit">
-                            <span><i class="icon fa fa-edit"></i>Edit</span>
-                        </button>
+                       <div class="addBookmarkContainer">
+                            <div class="addBookmark">
+                                <a href="#">Add Bookmark
+                                    <i class="fa-solid fa-angle-down"></i>
+                                    <i class="fa-solid fa-angle-up"></i>
+                                </a>
+                            </div>
+                            <div class="bookmarkEdit">
+                                <div class="closeBookmarkForm">
+                                    <button name="action" value="cancel" type="submit">
+                                        <i class="fa-regular fa-xmark fa-lg"></i>
+                                    </button>
+                                </div>
+                                <div class="bookmarkEditContainer">
+                                    <div class="bookmarkEditItem">
+                                        <label for="label">Name</label>
+                                        <input name="label" type="text"></input>
+                                    </div>
+                                    <div class="bookmarkEditItem">
+                                        <label for="url">URL</label>
+                                        <input name="url" type="text" placeholder="https://"></input>
+                                    </div>
+                                </div>
+                                <div class="bookmarkEditContainer">
+                                    <div class="bookmarkEditItem">
+                                        <button class="btn alt" name="action" value="save" type="submit">
+                                            <span>SAVE</span>
+                                        </button>
+                                    </div>
+                                    <div class="bookmarkEditItem">
+                                        <button class="btn alt outline" value="reset" type="reset">
+                                            <span>UNDO</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
                     <stx:process-children/>
                 </form>
@@ -43,7 +71,7 @@
     
     <stx:template match="h:li">
         <stx:copy>
-            <input name="i" value="{$item}" type="checkbox"></input>
+            <input name="i" value="{$item}" type="hidden"></input>
             <stx:process-children/>
         </stx:copy>
         <stx:assign name="item" select="$item + 1"/>

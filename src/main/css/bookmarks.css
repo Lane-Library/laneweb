@@ -73,7 +73,7 @@
 
 .yui3-bookmark-editor label, .yui3-bookmark-editor input[type='text'],
 	.yui3-bookmark-editor button {
-	display: none;
+	/*display: none; */
 }
 
 .yui3-bookmark-editor-active label, .yui3-bookmark-editor-active input[type='text'],
@@ -90,22 +90,12 @@
     scroll-margin-top: 4em;
 }
 
-#bookmarks-editor fieldset {
-	border: 1px #dadad8 solid;
-	background-color: #f4f5ef;
-	padding: 14px 12px 5px;
-}
-
 #bookmarks-editor ul {
 	padding-left: 0;
 	background-color: white;
-	border: 1px solid #ccc;
-	box-shadow: 1px 1px 3px .2px rgba(0, 0, 0, .1);
-	border-top: none;
 }
 
 #bookmarks-editor li {
-	border-bottom: 1px #dadad8 solid;
 	padding: 12px;
 }
 
@@ -186,12 +176,6 @@
 }
 
 @media ( max-width : 812px) {
-	#bookmarks-editor i {
-		display: none;
-	}
-	#bookmarks-editor button {
-		margin: 10px 3px;
-	}
 	.favorites li {
 		margin: 9px 0;
 	}

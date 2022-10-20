@@ -14,14 +14,6 @@
     BookmarksEditor = Y.Base.create("bookmarks-editor", Y.Widget, [], {
 
         /**
-         * Adds a checkbox that will trigger all other checkboxes to toggle to a similar state.
-         * @method renderUI
-         */
-        renderUI : function() {
-            this.get("srcNode").one("fieldset").prepend(Y.Node.create("<input type=\"checkbox\"/>"));
-        },
-
-        /**
          * Sets up various event handlers.
          * @method bindUI
          */
@@ -34,7 +26,6 @@
             bookmarks.after("addSync", this._handleBookmarkAdd, this);
             bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
             bookmarks.after("moveSync", this._handleBookmarkMove, this);
-            srcNode.one("fieldset input[type='checkbox']").on("click", this._handleCheckboxClick, this);
 
             dragManager.on('drag:start', this._handleDragStart, this);
             dragManager.on('drag:end', this._handleDragEnd, this);
@@ -91,64 +82,11 @@
         },
 
         /**
-         * Responds to a click on the delete button.  Gets an array of the indexes of the checked editors
-         * and calls removeBookmarks on the bookmarks object.
-         * @method delete
-         */
-        "delete" : function() {
-            var checked = this._getCheckedIndexes();
-            if (checked.length > 0) {
-                this._clearChecked();
-                this.get("bookmarks").removeBookmarks(checked);
-            }
-        },
-
-        /**
-         * Responds to a click on the edit button.  Gets an array of the indexes of the checked editors
-         * and sets there editing attribute to true.
-         * @method edit
-         */
-        edit : function() {
-            var i, checked = this._getCheckedIndexes(), editors = this._getSerializedEditors();
-            for (i = 0; i < checked.length; i++) {
-                editors[checked[i]].set("editing", true);
-            }
-        },
-
-        /**
-         * Unchecks all BookmarkEditors
-         * @method _clearChecked
-         * @private
-         */
-        _clearChecked : function() {
-            var i, editors = this.get("editors");
-            for (i = 0; i < editors.length; i++) {
-                editors[i].setChecked(false);
-            }
-        },
-
-        /**
          * @method _editorMoved
          * @private
          */
         _editorMoved : function() {
             this.get("bookmarks").moveBookmark(this._to, this._from);
-        },
-
-        /**
-         * Returns an Array of indexes of those BookmarkEditors for which isChecked() is true.
-         * @method _getCheckIndexes
-         * @private
-         * @returns {Array}
-         */
-        _getCheckedIndexes : function() {
-            var indexes = [], i, editors = this._getSerializedEditors();
-            for (i = 0; i < editors.length; i++) {
-                if (editors[i].isChecked() && !editors[i].get("editing")) {
-                    indexes.push(i);
-                }
-            }
-            return indexes;
         },
 
         /**
@@ -233,21 +171,6 @@
                 if (fn) {
                     fn.call(this);
                 }
-            }
-        },
-
-        /**
-         * Responds to click event on the master checkbox.  Sets the checked state of all BookmarkEditors
-         * to the whatever the master is.
-         * @method _handleCheckboxClick
-         * @private
-         * @param event {CustomEvent}
-         */
-        _handleCheckboxClick : function(event) {
-            var i, checked = event.target.get("checked"),
-                editors = this.get("editors");
-            for (i = 0; i < editors.length; i++) {
-                editors[i].setChecked(checked);
             }
         },
 
