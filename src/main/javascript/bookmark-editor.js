@@ -133,13 +133,15 @@
          * @method delete
          */
         "delete" : function() {
-            if (this.get("bookmarks")) {
-                var li = this.get("srcNode")._node,
-                ul = li.closest("ul"),
-                lis = Array.from( ul.querySelectorAll("li") ),
-                index = lis.indexOf( li );
-                this.get("bookmarks").removeBookmarks([Number(index)])
+            var li = this.get("srcNode")._node,
+            ul = li.closest("ul"),
+            lis = Array.from( ul.querySelectorAll("li") ),
+            index = lis.indexOf( li ),
+            firstEditorIsEmptyAddbookmark = !lis[0].querySelector('a').getAttribute('href');
+            if (firstEditorIsEmptyAddbookmark) {
+                index--;
             }
+            this.get("bookmarks").removeBookmarks([Number(index)])
         },
 
         /**
