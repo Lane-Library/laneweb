@@ -306,11 +306,11 @@ li.yui3-bookmark-editor-content {
     #bookmarks-editor .close {
         right: 10px;
     }
-    .editItem {
+    .yui3-bookmark-editor-content .editItem {
         width: 100%;
         padding-left: 0;
     }
-    .editPanel {
+    .yui3-bookmark-editor-content .editPanel {
       width: 55%;
       flex-wrap: wrap;
       margin-bottom: 10px;
