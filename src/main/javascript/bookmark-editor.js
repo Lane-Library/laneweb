@@ -129,19 +129,14 @@
         },
 
         /**
-         * Responds to the delete button by ...
+         * Responds to a click on the delete button. Relies on the bookmarks object to find the index 
+         * of the bookmark to delete and to remove the bookmark.
          * @method delete
          */
         "delete" : function() {
-            var li = this.get("srcNode")._node,
-            ul = li.closest("ul"),
-            lis = Array.from( ul.querySelectorAll("li") ),
-            index = lis.indexOf( li ),
-            firstEditorIsEmptyAddbookmark = !lis[0].querySelector('a').getAttribute('href');
-            if (firstEditorIsEmptyAddbookmark) {
-                index--;
-            }
-            this.get("bookmarks").removeBookmarks([Number(index)])
+            var bookmarks = L.BookmarksWidget.get("bookmarks"),
+                index = bookmarks.indexOf(this.get("bookmark"));
+            bookmarks.removeBookmarks([index]);
         },
 
         /**
@@ -261,9 +256,6 @@
         ATTRS : {
             bookmark : {
                 value : null
-            },
-            bookmarks : {
-                value : L.BookmarksWidget.get("bookmarks")
             },
             editing : {
                 value : false
