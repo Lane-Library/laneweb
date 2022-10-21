@@ -128,6 +128,7 @@
         _handleBookmarkMove : function(event) {
             var editors = this._getSerializedEditors();
             editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
+            this.set("editors", editors);
         },
 
         /**
