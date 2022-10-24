@@ -100,3 +100,15 @@
     text-align: center;
     background-image: none;
 }
+
+@media ( max-width : 1100px) {
+    .module {
+        scroll-margin-top: 0;
+    }
+}
+@media ( max-width : 812px) {
+    .module {
+        padding: 1em;
+        padding-top: 2em;
+    }
+}

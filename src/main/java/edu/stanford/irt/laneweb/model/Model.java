@@ -30,6 +30,8 @@ public final class Model {
     public static final String CONTENT_BASE = "content-base";
 
     public static final String DEBUG = "debug";
+    
+    public static final String YEAR_END = "end-year";
 
     public static final String EMAIL = "email";
 
@@ -129,6 +131,8 @@ public final class Model {
 
     public static final String SOURCEID = "sourceid";
 
+    public static final String YEAR_START = "start-year";
+    
     public static final String TEMPLATE = "template";
 
     public static final String TEXT = "text";
@@ -158,6 +162,8 @@ public final class Model {
     public static final String USER_ID = "userid";
 
     public static final String VERSION = "version";
+
+    
    
 
     private Model() {

@@ -4,57 +4,28 @@
       <title>search results</title>
    </head>
    <body>
-      <div class="s-tb no-bookmarking">
-         <div>
-            <span id="pageStart">1</span> to 100 of 135 results</div>
-         <div>
-            <div class="view-by sort">
-               <span>Sort by</span>
-               <div class="general-dropdown dropdown">
-                  <div class="general-dropdown-trigger">relevance<i class="fa-regular fa-angles-down fa-sm"/>
-                  </div>
-                  <div class="general-dropdown-content dropdown-content">
-                     <ul class="pagingLabels">
-                        <li>
-                           <a href="?">relevance</a>
-                           <i class="fa-regular fa-check"/>
-                        </li>
-                        <li>
-                           <a href="?&amp;sort=title_sort+asc,year+desc">title</a>
-                        </li>
-                        <li>
-                           <a href="?&amp;sort=date+desc,title_sort+asc">year (new to old)</a>
-                        </li>
-                        <li>
-                           <a href="?&amp;sort=date+asc,title_sort+asc">year (old to new)</a>
-                        </li>
-                     </ul>
-                  </div>
-               </div>
+      <h2>Search Results</h2>
+      <div class="view-by sort no-bookmarking">
+         <span>Sort by</span>
+         <div class="general-dropdown dropdown">
+            <div class="general-dropdown-trigger">relevance<i class="fa-regular fa-angle-down fa-sm"/>
             </div>
-         </div>
-         <div>
-            <div class="s-pagination">
-               <span class="pagingButton disabled">
-                  <i class="fa-solid fa-fast-backward"/>
-               </span>
-               <span class="pagingButton disabled">
-                  <i class="fa-solid fa-backward"/>
-               </span>
-               <form class="pagingForm" name="pagination">
-                  <input type="hidden" name="q" value=""/>
-                  <input type="hidden" name="source" value="all-all"/>
-                  <label for="page"> Page </label>
-                  <input type="text" name="page" value="1"/>
-                  <label for="pages"> of 2</label>
-                  <input type="hidden" name="pages" value="2"/>
-               </form>
-               <a class="pagingButton next" href="?&amp;page=2" title="next">
-                  <i class="fa-solid fa-forward"/>
-               </a>
-               <a class="pagingButton" href="?&amp;page=2" title="last">
-                  <i class="fa-solid fa-fast-forward"/>
-               </a>
+            <div class="general-dropdown-content dropdown-content">
+               <ul class="pagingLabels">
+                  <li>
+                     <a href="?">relevance</a>
+                     <i class="fa-regular fa-check"/>
+                  </li>
+                  <li>
+                     <a href="?&amp;sort=title_sort+asc,year+desc">title</a>
+                  </li>
+                  <li>
+                     <a href="?&amp;sort=date+desc,title_sort+asc">year (new to old)</a>
+                  </li>
+                  <li>
+                     <a href="?&amp;sort=date+asc,title_sort+asc">year (old to new)</a>
+                  </li>
+               </ul>
             </div>
          </div>
       </div>

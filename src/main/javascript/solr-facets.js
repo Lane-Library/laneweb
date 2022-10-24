@@ -2,74 +2,79 @@
 
     "use strict";
 
-    var model = L.Model,
-        query = model.get(model.URL_ENCODED_QUERY),
-        locationSearch = location.search,
-        locationPath = location.pathname,
-        basePath = model.get(model.BASE_PATH) || "",
-        facetsContainer = document.querySelector('.solrFacets'),
-        facetRequestQuery = function() {
-            var rq = basePath + '/apps/search/facets/html';
-            // support /view/<recordType>/<id> requests when location.search not present
-            if (locationSearch){
-                rq = rq + locationSearch;
-            } else if (locationPath.indexOf('/view/') > -1) {
-                rq = rq + locationPath.replace(/\/view\/([a-z]{3,10})\/(\d{1,10})/,'?source=all-all&facets=recordType:"$1"&q=$2');
-            }
-            return rq;
-        },
-        processEnabledFacets = function(container) {
-            var enabledFacets = container.querySelectorAll('.enabled'),
-                limitsContainer = document.querySelector('#solrLimits'),
-                allCount = document.querySelector('#solrAllCount'),
-                count = 0,
-                html = '', label, url;
-            if (allCount) {
-                count = allCount.textContent;
-            }
-            enabledFacets.forEach(function(facet) {
-                label = facet.querySelector('.facetLabel').textContent;
-                url = facet.querySelector('a').href;
-                html += '<span>'
-                    + label
-                    + '<a title="remove filter" href="'
-                    + url
-                    + '"> <i class="fa-solid fa-times-circle fa-lg"></i></a></span>';
-            });
-            if (enabledFacets.length > 0) {
-                html += '<span class="clearLimits"><a href="'
-                    + basePath
-                    + '/search.html?source=all-all&q='
-                    + query
-                    + '">Clear filters <i class="fa-solid fa-times-circle fa-lg"></i></a> to show '
-                    + count
-                    + ' results</span>';
-                limitsContainer.insertAdjacentHTML("beforeEnd", html);
-            }
-        },
-        makeRequest = function() {
-            L.io(facetRequestQuery(), {
-                on: {
-                    success:function(id, o) {
-                        facetsContainer.insertAdjacentHTML("beforeEnd", o.responseText);
-                        // fade in facets container
-                        facetsContainer.classList.add("solrFacets-active");
-                        processEnabledFacets(facetsContainer);
-                        L.fire("lane:new-content");
+    if (document.querySelector("#solr-date-form")) {
+
+        var ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year", 
+            searchForm = document.querySelector(".search-form"),
+            dateSolrForm = document.querySelector("#solr-date-form"),
+            startYearInput = document.querySelector(".date.start"),
+            endYearInput = document.querySelector(".date.end"),
+            yearEndwith2Columns = /year:\[.*\]::/i,
+            maybeStartwith2Coulnms = /(::)?year:\[.*\]/i,
+            facets = searchForm.querySelector("input[name=facets]"),
+            errorMessage  = document.querySelector("#facet-error-message"),
+            model = function(input1, input2) {
+                var m = {
+                    startYear: input1,
+                    endYear: input2,
+                }
+                return m;
+            }(startYearInput, endYearInput),
+
+            view = function() {
+                return {
+                    submitSearchForm: function() { 
+                     if (!model.startYear.checkValidity()) {
+                        errorMessage.textContent = model.startYear.validationMessage;
+                    }
+                    else if (!model.endYear.checkValidity()) {
+                        errorMessage.textContent = model.endYear.validationMessage;
+                    }
+                    else if ( model.startYear.value > model.endYear.value) {
+                        errorMessage.textContent = ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END;
+                        
+                    }else{
+                        searchForm.submit();   
                     }
                 }
-            });
-        };
-        if (query && facetsContainer && !document.querySelector("#bassettContent") ) {
-            makeRequest();
-            // close button on facet browse lightbox
-            L.Lightbox.on("contentChanged", function() {
-                var browseFacetClose = document.querySelector(".facetBrowse .close");
-                if (browseFacetClose) {
-                    browseFacetClose.addEventListener('click', function() {
-                        L.Lightbox.hide();
-                    });
                 }
-            });
-        }
+            }(),
+            controller = function() {
+                return {
+                    resetYearFromFacets: function() {
+                        if (yearEndwith2Columns.exec(facets.value) != null) {
+                            facets.value = facets.value.replace(yearEndwith2Columns, '');
+                        }
+                        else if (maybeStartwith2Coulnms.exec(facets.value) != null) {
+                            facets.value = facets.value.replace(maybeStartwith2Coulnms, '');
+                        }
+                    },
+                    setYearFromFacets: function() {
+                        var currentYearFacetValue = 'year:[' + model.startYear.value + ' TO ' + model.endYear.value + ']';
+                        if (model.startYear.value != '' || model.endYear.value != '') {
+                            if (facets && facets.value != '') {
+                                facets.value = facets.value + '::' + currentYearFacetValue;
+                            } else {
+                                facets.disabled = false;
+                                facets.value = currentYearFacetValue;
+                            }
+                        }
+                    },
+                    
+                }
+            }();
+
+
+
+        dateSolrForm.addEventListener("submit", function(event) {
+            controller.resetYearFromFacets();
+            controller.setYearFromFacets();
+            view.submitSearchForm();
+            event.preventDefault();
+        });
+
+    }
+
+
+
 })();

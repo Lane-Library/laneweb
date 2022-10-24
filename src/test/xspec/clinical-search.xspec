@@ -18,20 +18,21 @@
         </x:context>
         <x:expect label="expected count and total">
             <doc>
-                <results xmlns="http://lane.stanford.edu/results/1.0" total="100">
-                    <resource id="foo" count="10"/>
-                </results>
-                <html xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:r="http://lane.stanford.edu/results/1.0">
-                    <span>100</span>
-                    <span>10</span>
-                    <span>?</span>
+            <results xmlns="http://lane.stanford.edu/results/1.0" total="100">
+                <resource id="foo" count="10" />
+            </results>
+            <html xmlns="http://www.w3.org/1999/xhtml" xmlns:r="http://lane.stanford.edu/results/1.0">
+                <span>100</span>
+                <span>10</span>
+                <span>
+                    ?
+                </span>
                 </html>
             </doc>
         </x:expect>
     </x:scenario>
     
-    <x:scenario label="no results">
+       <x:scenario label="no results">
         <x:context>
             <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="0" start="0" end="0" page="1" pages="0" total="100"/>
@@ -163,5 +164,8 @@
             </doc>
         </x:expect>
     </x:scenario>
+    
+    
+   
 
 </x:description>

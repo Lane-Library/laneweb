@@ -3,17 +3,10 @@
     <xsl:template match="/classes">
         <html>
             <body>
-                <div id="mobile-menu-header" class="menu-container">
-                    <h2>
-                        Categories
-                        <span>
-                            <a href="#mobile-menu-header" class="menu-toggle">
-                                <i class="fa-regular fa-angle-down fa-lg"></i>
-                            </a>
-                            <a href="#off" id="off" class="menu-toggle">
-                                <i class="fa-regular fa-xmark fa-lg"></i>
-                            </a>
-                        </span>
+                <div class="menu-container mobile hoverline">
+                    <h2>Categories
+                       <i class="fa-regular fa-angle-down fa-lg"></i>
+                       <i class="fa-regular fa-angle-up fa-lg"></i>
                     </h2>
                     <ul>
                         <li>

@@ -5,13 +5,11 @@
    <map:pipeline type="throttling">
       <map:parameter name="request-key" value="remote-addr={remote-addr};request-uri={request-uri};source={source};q={query};facets={facets}"/>
       <map:match pattern="search/facets/html" type="wildcard">
-         <map:aggregate type="default" element="doc">
-            <map:generate type="solr-search-facets"/>
-            <map:generate type="file" src="cocoon://eresources/count.xml"/>
-         </map:aggregate>
-         <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
+            <map:generate type="solr-facets"/>
+            <map:transform type="saxon" src="classpath:/xsl/solr-facets.xsl"/>
          <map:serialize type="html5"/>
       </map:match>
+    
    </map:pipeline>
     <map:pipeline type="noncaching">
         <map:parameter name="mime-type" value="text/xml; charset=utf8"/>

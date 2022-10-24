@@ -2,10 +2,11 @@ package edu.stanford.irt.laneweb.config;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
@@ -15,8 +16,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
-import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.Generator;
@@ -49,9 +50,10 @@ import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrat
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.search.EresourcesCountGenerator;
-import edu.stanford.irt.laneweb.eresources.search.FacetComparator;
+import edu.stanford.irt.laneweb.eresources.search.FacetSAXStrategy;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
+import edu.stanford.irt.laneweb.eresources.search.FacetsGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrPagingEresourceSAXStrategy;
-import edu.stanford.irt.laneweb.eresources.search.SolrSearchFacetsGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchGenerator;
 import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
 
@@ -60,55 +62,21 @@ import edu.stanford.irt.laneweb.eresources.search.SolrSearchResult;
         "edu.stanford.irt.laneweb.eresources" }, solrTemplateRef = "laneSearchSolrTemplate")
 public class EresourcesConfiguration {
 
-    private static final int FACETS_TO_SHOW_BROWSE = 20;
-
     private static final int FACETS_TO_SHOW_SEARCH = 4;
 
     private static final int SOLR_CONNECT_TIMEOUT = 5_000;
 
     private static final int SOLR_READ_TIMEOUT = 30_000;
 
-    private FacetComparator facetComparator;
-
-    private Collection<String> meshToIgnoreInSearch;
-
     private Collection<String> publicationTypes;
 
+    private Collection<String> facetFields;
+
     public EresourcesConfiguration() {
-        this.meshToIgnoreInSearch = new HashSet<>(25);
-        this.meshToIgnoreInSearch.add("nomesh");
-        this.meshToIgnoreInSearch.add("Adolescent");
-        this.meshToIgnoreInSearch.add("Adult");
-        this.meshToIgnoreInSearch.add("Aged");
-        this.meshToIgnoreInSearch.add("Aged, 80 and over");
-        this.meshToIgnoreInSearch.add("Animals");
-        this.meshToIgnoreInSearch.add("Cats");
-        this.meshToIgnoreInSearch.add("Cattle");
-        this.meshToIgnoreInSearch.add("Chick Embryo");
-        this.meshToIgnoreInSearch.add("Child");
-        this.meshToIgnoreInSearch.add("Child, Preschool");
-        this.meshToIgnoreInSearch.add("Cricetinae");
-        this.meshToIgnoreInSearch.add("Dogs");
-        this.meshToIgnoreInSearch.add("Female");
-        this.meshToIgnoreInSearch.add("Guinea Pigs");
-        this.meshToIgnoreInSearch.add("Humans");
-        this.meshToIgnoreInSearch.add("Infant");
-        this.meshToIgnoreInSearch.add("Infant, Newborn");
-        this.meshToIgnoreInSearch.add("Male");
-        this.meshToIgnoreInSearch.add("Mice");
-        this.meshToIgnoreInSearch.add("Middle Aged");
-        this.meshToIgnoreInSearch.add("Pregnancy");
-        this.meshToIgnoreInSearch.add("Rabbits");
-        this.meshToIgnoreInSearch.add("Rats");
-        this.meshToIgnoreInSearch.add("Young Adult");
-        this.meshToIgnoreInSearch = Collections.unmodifiableCollection(this.meshToIgnoreInSearch);
-        this.publicationTypes = new HashSet<>(4);
-        this.publicationTypes.add("Clinical Trial");
-        this.publicationTypes.add("Randomized Controlled Trial");
-        this.publicationTypes.add("Review");
-        this.publicationTypes.add("Systematic Review");
+        this.facetFields = Arrays.asList("type", "publicationType", "recordType", "publicationTitle");
+        this.facetFields = Collections.unmodifiableCollection(this.facetFields);
+        this.publicationTypes = Arrays.asList("Review", "Clinical Trial", "Randomized Controlled Trial","Systematic Review");
         this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
-        this.facetComparator = new FacetComparator(this.publicationTypes);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/er-a2z-browse-xml")
@@ -191,11 +159,17 @@ public class EresourcesConfiguration {
         return new SolrQueryParser(queryInspectors);
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-search-facets")
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-facets")
     @Scope("prototype")
-    public Generator solrSearchFacetsGenerator(final SolrService solrService, final Marshaller marshaller) {
-        return new SolrSearchFacetsGenerator(solrService, marshaller, FACETS_TO_SHOW_BROWSE, FACETS_TO_SHOW_SEARCH,
-                this.meshToIgnoreInSearch, this.publicationTypes, this.facetComparator);
+    public Generator facetsGenerator(final FacetService service) {
+        FacetsGenerator generator = new FacetsGenerator(service, facetSAXStrategy(), FACETS_TO_SHOW_SEARCH, this.publicationTypes);
+        generator.setFacet(facetFields);
+        return generator;
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/facetSaxStrategy-xml")
+    public SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSAXStrategy() {
+        return new FacetSAXStrategy(this.facetFields);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-search")
@@ -208,6 +182,14 @@ public class EresourcesConfiguration {
     public SolrService solrService(final SolrRepository solrRepository,
             @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
         return new SolrService(solrQueryParser(), solrRepository, solrTemplate);
+    }
+
+    @Bean(name = "edu.stanford.irt.laneweb.solr.FacetService")
+    public FacetService solrFacetService(final SolrRepository solrRepository,
+            @Qualifier("laneSearchSolrTemplate") final SolrTemplate solrTemplate) {
+        FacetService service = new FacetService(solrQueryParser(), solrTemplate);
+        service.setFacets(facetFields);
+        return service;
     }
 
     @Bean(name = "laneSearchSolrTemplate")

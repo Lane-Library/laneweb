@@ -42,13 +42,13 @@
                     if (doiMap[doi]) {
                         doiMap[doi].fetched = true;
                         if (retractionNoticeUrl) {
-                            addFulltextLink(doiMap[doi],'xmark','Retracted Article',retractionNoticeUrl);
+                            addRetractedArticleLink(doiMap[doi],'xmark','Retracted Article',retractionNoticeUrl);
                         }
                         else if (fulltextUrl) {
-                            addFulltextLink(doiMap[doi],'pdf','Direct to PDF',fulltextUrl);
+                            addFulltextLink(doiMap[doi],'Direct to PDF',fulltextUrl);
                         }
                         else if (contentLocation) {
-                            addFulltextLink(doiMap[doi],'text','Direct to Full Text',contentLocation);
+                            addFulltextLink(doiMap[doi],'Direct to Full Text',contentLocation);
                         }
                         if (coverImageUrl) {
                             doiMap[doi].querySelector('.bookcover').innerHTML = '<image src="' + coverImageUrl + '"/>';
@@ -63,11 +63,17 @@
             };
         }(document.querySelectorAll("li[data-doi]")),
 
-        addFulltextLink = function(node, type, label, url) {
+        addFulltextLink = function(node, label, url) {
+           var link = node.querySelector('.resource-detail .hldgsContainer span a')
+            link.href = url;
+            link.text = label;
+        },
+        
+        addRetractedArticleLink = function(node, type, label, url) {
             node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                '<span class="browzineDirect"><i class="fa-light fa-file-' + type + '"></i> ' +
+                '<div><i class="fa-light fa-file-' + type + '"></i> ' +
                 '<a class="bzFT" href="' + url + '">' + label + '</a>' +
-                '</span>'
+                '</div>'
             )
         },
 

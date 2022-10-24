@@ -6,6 +6,64 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2022-10-24" version="3.11.20" description="bug fix and update release">
+            <action date="2022-10-21" dev="ryanmax" issue="LANEWEB-11037" type="fix">
+                Top Resources add bookmark icon formatting problems
+            </action>
+            <action date="2022-10-21" dev="ryanmax" issue="LANEWEB-11038" type="fix">
+                Javascript errors at form submission
+            </action>
+            <action date="2022-10-14" dev="ryanmax" issue="LANEWEB-11041" type="fix">
+                Lane Search Mobile Fixes
+            </action>
+        </release>
+        <release date="2022-10-17" version="3.11.19" description="bug fix and update release">
+            <action date="2022-10-12" dev="alainb" issue="LANEWEB-11035" type="fix">
+                Holdings toggle appears but doesn't do anything
+            </action>
+            <action date="2022-10-14" dev="ryanmax" issue="LANEWEB-11036" type="fix">
+                Search result formatting issue
+            </action>
+        </release>
+        <release date="2022-10-10" version="3.11.18" description="bug fix and update release">
+            <action date="2022-10-05" dev="alainb" issue="LANEWEB-11028" type="delete">
+                Remove info icon for Resource Type filter in Search
+            </action>
+            <action date="2022-10-05" dev="alainb" issue="LANEWEB-11029" type="fix">
+                Center "Did You Mean:" into the h2
+            </action>
+            <action date="2022-1--06" dev="ryanmax" issue="LANEWEB-11030" type="delete">
+                Remove Research Office Hours Link from homepage
+            </action>
+            <action date="2022-10-07" dev="ryanmax" issue="LANEWEB-11033" type="fix">
+                Print holdings not always displaying in search results
+            </action>
+            <action date="2022-10-04" dev="ryanmax" issue="LANEWEB-11026" type="fix">
+                Infinite redirect due to empty facets parameter
+            </action>
+            <action date="2022-10-04" dev="ryanmax" issue="LANEWEB-10995" type="fix">
+                Odd facet spacing
+            </action>
+            <action date="2022-10-07" dev="alainb" issue="LANEWEB-11033" type="fix">
+                Top pagination buttons don't work on basset
+            </action>
+        </release>
+        <release date="2022-10-03" version="3.11.17" description="bug fix and update release">
+            <action date="2022-07-21" dev="alainb" issue="LANEWEB-10995" type="update">
+                Lane Search Results Page Redesign
+            </action>
+            <action date="2022-07-21" dev="alainb" issue="LANEWEB-11003" type="update">
+                Update print holdings tables in Lane Search
+            </action>
+            <action date="2022-07-21" dev="alainb" issue="LANEWEB-11007" type="update">
+                Add Digital Access Option for Articles in Lane Search
+            </action>
+        </release>
+        <release date="2022-09-26" version="3.11.16" description="bug fix and update release">
+            <action date="2022-09-23" dev="alainb" issue="LANEWEB-11023" type="fix">
+                Page scrolling too much after a search
+            </action>
+        </release>
         <release date="2022-09-19" version="3.11.15" description="bug fix and update release">
             <action date="2022-09-14" dev="ryanmax" issue="LANEWEB-11020" type="add">
                 Animation for Bookmark Icon
@@ -43,7 +101,7 @@
                 hospital logo/brand change on discovery login page
             </action>
             <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10989" type="fix">
-                Delete Bookmark Bug    
+                Delete Bookmark Bug
             </action>
             <action date="2022-07-15" dev="ryanmax" issue="LANEWEB-10990" type="fix">
                 Bookmark feature Deleting Bug

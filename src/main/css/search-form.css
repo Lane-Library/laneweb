@@ -108,7 +108,7 @@
 }
 
 .pico-toggle{
-	width: 57%;
+	width: 60%;
     margin: auto;
     display: block;
 }
@@ -156,9 +156,6 @@
 	border: 0;
 }
 
-.search-form .yui3-aclist-item{
-	color:black;
-}
 
 .search-form .pico-fields-active {
 	display: block;

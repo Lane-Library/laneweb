@@ -4,6 +4,7 @@
    <recordId>3</recordId>
    <recordType>recordType</recordType>
    <title>title</title>
+   <isAnExactMatch>false</isAnExactMatch>
    <primaryType>primaryType</primaryType>
    <total>10</total>
    <available>5</available>

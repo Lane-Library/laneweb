@@ -26,6 +26,8 @@ public final class Resource {
 
     public static final String ID = "id";
 
+    public static final String IS_AN_EXACT_MATCH = "isAnExactMatch";
+    
     public static final String KEYWORD = "keyword";
 
     public static final String LABEL = "label";

@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -121,7 +122,26 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
             page = this.solrService.searchType(this.type, this.searchTerm, pageRequest);
         }
         highlightResults(page);
+        if(this.pageNumber == 0) {
+            checkForExactMatch(page);
+        }
         return new SolrSearchResult(query, page);
+    }
+
+    private void checkForExactMatch(Page<Eresource> page) {
+        Collection<Eresource> eresources = page.getContent();
+        for (Eresource eresource : eresources) {
+            String title = eresource.getTitle();
+            
+            
+            if (null != title) {
+              title = title.replace("___", "").replace(":::", "");
+                if (this.searchTerm.equalsIgnoreCase(title)) {
+                    eresource.setAnExactMatch(true);
+                    break;
+                }
+            }
+        }
     }
 
     @Override

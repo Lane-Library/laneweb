@@ -6,9 +6,9 @@
         var triggers = document.querySelectorAll(".descriptionTrigger");
         triggers.forEach(function(node) {
             if (node.classList.contains("eresource")) {
-                node.innerHTML = "<a href=\"#\"><i class=\"fa-regular fa-eye\"></i> View Description <i class=\"fa-regular fa-angles-down fa-xs\"></i></a>";
+                node.innerHTML = "<a href=\"#\">Read Full Description<i class=\"fa-regular fa-angle-down\"></i></a>";
             } else if (node.classList.contains("searchContent")) {
-                node.innerHTML = "<a href=\"#\"><i class=\"fa-regular fa-eye\"></i> Preview Abstract <i class=\"fa-regular fa-angles-down fa-xs\"></i></a>";
+                node.innerHTML = "<a href=\"#\">Abstract<i class=\"fa-regular fa-angle-down\"></i></a>";
             }
         });
     };
@@ -25,12 +25,14 @@
             event.preventDefault();
             ancestor.classList.toggle("active");
             if (active && eresource) {
-                node.innerHTML = "<a href=\"#\"><i class=\"fa-regular fa-eye\"></i> View Description <i class=\"fa-regular fa-angles-down fa-xs\"></i></a>";
+                node.innerHTML = "<a href=\"#\"> Read Full Description <i class=\"fa-regular fa-angle-down\"></i></a>";
             } else if (active && searchContent) {
-                node.innerHTML = "<a href=\"#\"><i class=\"fa-regular fa-eye\"></i> Preview Abstract <i class=\"fa-regular fa-angles-down fa-xs\"></i></a>";
-            } else if (!active) {
-                node.innerHTML = "<a href=\"#\">close... <i class=\"fa-regular fa-angles-up fa-regular fa-xs\"></i></a>";
-            }
+                node.innerHTML = "<a href=\"#\">Abstract <i class=\"fa-regular fa-angle-down\"></i></a>";
+            } else if (!active && eresource) {
+                node.innerHTML = "<a href=\"#\"> Read Full Description <i class=\"fa-regular fa-angle-up\"></i></a>";
+            } else if (!active && searchContent) {
+                node.innerHTML = "<a href=\"#\">Abstract <i class=\"fa-regular fa-angle-up\"></i></a>";
+            } 
             L.fire("tracker:trackableEvent", {
                 category: "lane:descriptionTrigger",
                 action: event.target.textContent,

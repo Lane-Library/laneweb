@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-	<head>
-		<title>Lane Medical Library - Stanford University School of Medicine</title>
-		<link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/pure-grids.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/fontawesome.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-local.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/headings.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/lists.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/anchors.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/footer.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/module.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/popups.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/online-resources.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/events.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/discovery-login.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/tables.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/staff.css" />
+    <head>
+        <title>Lane Medical Library - Stanford University School of Medicine</title>
+        <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/pure-grids.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-local.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/dropdown.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/search-form.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/headings.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/lists.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/anchors.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/footer.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/module.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/search.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/popups.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/online-resources.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/events.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/discovery-login.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/tables.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/lightbox.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/staff.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/guides.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/popular.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/business-card.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/suggest.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/search-image.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/classes.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/shc-portal.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/menu.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/gutters.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/back-to-top.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/solr-facets.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/equipment.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/clinical-search.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/newsfeed-item.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/youtube-thumbnail.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/calendar.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/password-table.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/portals.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/course-reserves.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/liaisons-directory.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/contacts.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/explore.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/IE.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/use-lane.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/subscription.css" />
-		<link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	</head>
-	<body>
+        <link rel="stylesheet" type="text/css" href="/resources/css/popular.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/business-card.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/bookmarks.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/suggest.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/resource-list-pagination.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/search-image.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/classes.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/shc-portal.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/gutters.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/back-to-top.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/solr-facets.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/equipment.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/clinical-search.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/newsfeed-item.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/youtube-thumbnail.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/calendar.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/password-table.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/portals.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/course-reserves.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/liaisons-directory.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/contacts.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/explore.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/IE.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/use-lane.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/subscription.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
 
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
-			<xi:fallback></xi:fallback>
-		</xi:include>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
 
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
-			<xi:fallback></xi:fallback>
-		</xi:include>
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
-			<xi:fallback></xi:fallback>
-		</xi:include>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
 
-		<section class="content">
-			<div class="centered">
-			    <?laneweb content?>               
-			</div>
-		</section>
-		<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
-			<xi:fallback></xi:fallback>
-		</xi:include>
-		<div class="search-indicator">
-			<i class="fa-solid fa-spinner fa-spin"></i>
-		</div>
+        <section class="content">
+            <div class="centered">
+			    <?laneweb content?>
+            </div>
+        </section>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+        <div class="search-indicator">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
         <div class="medium-screen-hide">
             <a id="live-chat-sticky-button" rel="popup console 650 750" href="/contacts/live-chat.html" class="live-chat">Live Chat</a>
-        </div> 
-		<script type="text/javascript" id="model">//</script>
-		<script type="text/javascript" src="https://yui-s.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
-		<script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
-	</body>
+        </div>
+        <script type="text/javascript" id="model">//</script>
+        <script type="text/javascript" src="https://yui-s.yahooapis.com/3.18.1/yui/yui-debug.js"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
+    </body>
 </html>

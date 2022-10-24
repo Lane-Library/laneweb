@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
     <xsl:template match="/classes">
-        <div id="mobile-menu-header" class="module menu-container">
+        <div class="module menu-container mobile hoverline">
             <h2>
                 Categories
-                <span>
-                    <a href="#mobile-menu-header" class="menu-toggle">
-                        <i class="fa-regular fa-angle-down fa-lg"></i>
-                    </a>
-                    <a href="#off" id="off" class="menu-toggle">
-                        <i class="fa-regular fa-xmark fa-lg"></i>
-                    </a>
-                </span>
+                <i class="active fa-regular fa-angle-down fa-lg"></i>
+                <i class="fa-regular fa-angle-up fa-lg"></i>
             </h2>
             <ul>
                 <li>

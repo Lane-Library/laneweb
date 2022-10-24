@@ -5,8 +5,9 @@
 
     var model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
-    SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
+    DEFAULT_SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh",
+    DEFAULT_QUERY_LENGTH = 3,
     SELECT = "select",
 
     /**
@@ -18,11 +19,11 @@
      * @param input {Node} the input node.
      * @param limit {String} the limit parameter for the request.
      */
-    Suggest = function(input, limit) {
+    Suggest = function(input,  minQueryLength, sourceBase) {
         var yuiinput = input._node ? input : new Y.Node(input);
         yuiinput.plug(Y.Plugin.AutoComplete, {
-            minQueryLength: 3,
-            source: SOURCE_BASE + (limit || DEFAULT_LIMIT),
+            minQueryLength: minQueryLength ? minQueryLength : DEFAULT_QUERY_LENGTH,
+            source: sourceBase ? sourceBase :(  DEFAULT_SOURCE_BASE + DEFAULT_LIMIT),
             width: "100%"
         });
 
@@ -85,8 +86,10 @@
          * @param limit {String} the limit parameter
          */
         setLimit : function(limit) {
-            this._ac.set("source", SOURCE_BASE + (limit || DEFAULT_LIMIT));
+            this._ac.set("source", DEFAULT_SOURCE_BASE + (limit || DEFAULT_LIMIT));
         }
+        
+      
     };
 
     //Add EventTarget attributes to the Suggest prototype

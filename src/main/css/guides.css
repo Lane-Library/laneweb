@@ -29,11 +29,11 @@
     border: none;
 }
 
-.libguides div .guide, .libguides div .guide-menu-toggle.off, .libguides div.active .guide-menu-toggle.on{
+.libguides div .guide, .libguides div .guide-menu-toggle.off, .libguides div.menuitem-active .guide-menu-toggle.on{
     display: none;
 }
 
-.libguides div.active .guide, .libguides div.active .guide-menu-toggle.off{
+.libguides div.menuitem-active .guide, .libguides div.menuitem-active .guide-menu-toggle.off{
     display: block;
 }
 

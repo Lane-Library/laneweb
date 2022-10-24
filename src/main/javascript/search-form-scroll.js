@@ -7,7 +7,7 @@
     if (/.*\/search\.html/.test(location.pathname)) {
         var i = 0,
             // adjust scroll based on device width
-            scrollAmount = (window.innerWidth < 812) ? 30 : 65,
+            scrollAmount = (window.innerWidth < 812) ? 30 : 130,
             offset = document.forms[0].offsetTop - scrollAmount ,
         // Edge has scrollY initially set to 0 regardless of previous position
         // this polls value every 100ms for 1s

@@ -15,7 +15,7 @@ import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
 
 public class SolrProxyServersService implements ProxyServersService {
 
@@ -29,16 +29,15 @@ public class SolrProxyServersService implements ProxyServersService {
 
     private static final byte[] U_HTTPS = { 'U', ' ', 'h', 't', 't', 'p', 's', ':', '/', '/' };
 
-    private SolrService solrService;
+    private FacetService solrService;
 
-    public SolrProxyServersService(final SolrService solrService) {
+    public SolrProxyServersService(final FacetService solrService) {
         this.solrService = solrService;
     }
 
     @Override
     public Set<String> getHosts() {
-        FacetPage<Eresource> fps = this.solrService.facetByField("*", null, "proxyHosts", 0, MAX_HOSTS, 1,
-                FacetSort.INDEX);
+        FacetPage<Eresource> fps = this.solrService.facetByField("*", null, "proxyHosts",  MAX_HOSTS, 1, FacetSort.INDEX);
         Set<String> hosts = extractHosts(fps.getFacetResultPages());
         hosts.add("bodoni.stanford.edu");
         hosts.add("library.stanford.edu");

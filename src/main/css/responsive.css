@@ -24,10 +24,6 @@ img {
     text-decoration: none;
 }
 
-.menu-toggle span, .menu-toggle i {
-    color: black;
-    display: initial;
-}
 
 .lrg-screen-hide {
     display: none;
@@ -61,40 +57,30 @@ img {
 
     /* Display Menu  in mobile version*/
     #mobile-menu-header ul, #mobile-menu-header div, #mobile-menu-header hr,
-        #mobile-menu-header span a:nth-child(2) {
+    #mobile-menu-header span:first-child a:first-child.hide,
+    #mobile-menu-header span a:nth-child(2) {
         display: none;
     }
-    #mobile-menu-header:target ul, #mobile-menu-header:target div,
+    
+    #mobile-menu-header ul.open{
+        display: block; 
+    }
+    
+     #mobile-menu-header span:first-child a:nth-child(2).active{
+        display: block;
+    }
+    
+    /* #mobile-menu-header:target ul, #mobile-menu-header:target div,
         #mobile-menu-header:target hr {
         display: block;
         border: none;
-    }
-    #mobile-menu-header:target span:first-child a:first-child {
-        display: none;
-    }
-    #mobile-menu-header:target span:first-child a:nth-child(2) {
+    } */
+    
+   #mobile-menu-header span:first-child a:first-child{
         display: block;
     }
-
-    /* If 2 second  Menu (hamburger) is needed in the same page */
-    #mobile-menu-header1 ul, #mobile-menu-header1 div, #mobile-menu-header1 hr,
-        #mobile-menu-header1 span a:nth-child(2) {
-        display: none;
-    }
-    #mobile-menu-header1:target ul, #mobile-menu-header1:target div,
-        #mobile-menu-header1:target hr {
-        display: block;
-        border: none;
-    }
-    #mobile-menu-header1:target span a:first-child {
-        display: none;
-    }
-    #mobile-menu-header1:target span a:nth-child(2) {
-        display: block;
-    }
-    .menu-toggle {
-        display: block;
-    }
+   
+    
     .lrg-screen-hide {
         display: initial;
     }

@@ -8,7 +8,17 @@
 .clinical-heading a:hover,
 .clinical-heading a:visited {
     color: black;
+    font-size: 18px;
+    font-weight: 600;
 }
+
+.metasearch-results .lwSearchResults .resource{
+    display: block;
+}
+.metasearch-results .pmid{
+    margin-right: 12px;
+}
+
 
 .clinical-toggle {
     background-color: #dddedf;
@@ -37,7 +47,23 @@
     font-size: 2.875em;
     padding: 0 18px;
     vertical-align: middle;
-}
+} 
+
+
+ .clinical-facets a .fa-square,  .clinical-facets a .fa-square-check {
+    color: black;
+    font-size: 13px;
+    margin-right: 6px;
+ }
+ 
+.clinical-facets a .fa-square-check{
+        color: #8C1515;
+ }
+
+.clinical-facets a span{
+    color: black;
+} 
+
 
 .clinical-facets {
     margin-top: 12px;
@@ -55,15 +81,14 @@
 .clinical-facet {
     padding: 4px;
     display: block;
-    border-bottom: 1px #e7e7e0 solid;
 }
 
-.clinical-facet .fa-circle {
+.clinical-facet .fa-square {
     color: #e1e1e1;
     position: relative;
 }
 
-.clinical-facet .fa-circle::after{
+.clinical-facet .fa-square::after{
     content: ' ';
     position: absolute;
     background-color: #fff;

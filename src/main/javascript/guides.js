@@ -7,82 +7,45 @@
 
         var defaultGuide = '#all-guides',
             allGuidesClosed = '#off',
+            hash,
 
-            model = function(id) {
-                if (!id)
-                    id = defaultGuide
-                var m = {
-                    target: id,
+        closeAllGuides = function() {
+            document.querySelectorAll('.menu-guide ul li a, .libguides div.menuitem-active').forEach(function(div) {
+                div.classList.remove('menuitem-active');
+            })
+        },
+            openGuide = function(hash) {
+                if (hash != allGuidesClosed) {
+                    document.querySelector(hash).classList.add('menuitem-active');
+                    document.querySelector('.menu-guide ul li a[href="' + hash + '"]').classList.add('menuitem-active');
                 }
-                return m;
-            }(window.location.hash),
-
-            view = function() {
-                return {
-                    clearMenu: function() {
-                        document.querySelectorAll('.menu-guide ul li a.menuitem-active').forEach(function(anchor) {
-                            anchor.classList.remove('menuitem-active');
-
-                        })
-                    },
-                    activeMenu: function(target) {
-                        document.querySelectorAll('.menu-guide ul li a').forEach(function(anchor) {
-                            if (anchor.href.endsWith(target)) {
-                                anchor.classList.add('menuitem-active');
-                            }
-                        })
-                    }
-                    ,
-                    openGuide: function(target) {
-                        if (target != allGuidesClosed) {
-                            document.querySelector(target).classList.add('active');
-                        }
-                    },
-                    closesAllGuides: function() {
-                        document.querySelectorAll('.libguides div.active').forEach(function(div) {
-                            div.classList.remove('active');
-                        })
-                    }
-                }
-            }(),
-
-            controller = function() {
-                return {
-                    load: function() {
-                        view.clearMenu();
-                        view.activeMenu(model.target);
-                        view.openGuide(model.target);
-                    },
-                    reload: function() {
-                        view.clearMenu();
-                        view.activeMenu(model.target);
-                        view.closesAllGuides();
-                        view.openGuide(model.target);
-                    },
-                    unactiveAll: function() {
-                        view.clearMenu();
-                        view.closesAllGuides();
-                    }
-                }
-            }();
-
-
+            };
 
         window.addEventListener("load", function() {
-            controller.load();
-
-            document.querySelectorAll('.menu-guide ul li a, .guide-menu-toggle.on').forEach(function(anchor) {
-                anchor.addEventListener('click', function(event) {
-                    model.target = event.currentTarget.hash;
-                    controller.reload();
-                });
-            });
-
-            document.querySelectorAll('.guide-menu-toggle.off').forEach(function(menubutton) {
-                menubutton.addEventListener('click', function() {
-                    controller.unactiveAll();
-                });
-            });
+            hash = window.location.hash;
+            if (hash == '') {
+                hash = defaultGuide;
+            }
+            openGuide(hash);
         }, false);
+
+        document.querySelectorAll('.menu-guide ul li a').forEach(function(anchor) {
+            anchor.addEventListener('click', function(event) {
+                openGuide(event.target.hash);
+            });
+        });
+
+        document.querySelectorAll('.guide-menu-toggle.on').forEach(function(anchor) {
+            anchor.addEventListener('click', function(event) {
+                closeAllGuides();
+                openGuide(event.currentTarget.hash);
+            });
+        });
+
+        document.querySelectorAll('.guide-menu-toggle.off').forEach(function(menubutton) {
+            menubutton.addEventListener('click', function() {
+                closeAllGuides();
+            });
+        });
     }
 })();

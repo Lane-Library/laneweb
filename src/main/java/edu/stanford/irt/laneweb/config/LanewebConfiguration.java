@@ -42,7 +42,7 @@ import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.spring.SpringComponentFactory;
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
-import edu.stanford.irt.laneweb.eresources.search.Facet;
+
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
@@ -152,7 +152,6 @@ public class LanewebConfiguration {
         XStreamMarshaller marshaller = new XStreamMarshaller();
         Map<String, Class<?>> aliases = new HashMap<>();
         aliases.put("bookmark", Bookmark.class);
-        aliases.put("facet", Facet.class);
         marshaller.setAliases(aliases);
         marshaller.setMode(XStream.NO_REFERENCES);
         return marshaller;

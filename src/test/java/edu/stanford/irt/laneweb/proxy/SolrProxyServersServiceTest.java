@@ -19,7 +19,7 @@ import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
 
 public class SolrProxyServersServiceTest {
 
@@ -32,11 +32,11 @@ public class SolrProxyServersServiceTest {
 
     private SolrProxyServersService proxyService;
 
-    private SolrService solrService;
+    private FacetService solrService;
 
     @Before
     public void setUp() throws Exception {
-        this.solrService = mock(SolrService.class);
+        this.solrService = mock(FacetService.class);
         this.proxyService = new SolrProxyServersService(this.solrService);
     }
 
@@ -44,7 +44,7 @@ public class SolrProxyServersServiceTest {
     public final void testWrite() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         FacetPage<Eresource> fps = mock(FacetPage.class);
-        expect(this.solrService.facetByField("*", null, "proxyHosts", 0, 100000, 1, FacetSort.INDEX)).andReturn(fps);
+        expect(this.solrService.facetByField("*", null, "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(fps);
         Collection<Page<FacetFieldEntry>> facetResultPages = mock(Collection.class);
         Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
         Iterator<FacetFieldEntry> it2 = mock(Iterator.class);

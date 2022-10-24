@@ -62,6 +62,8 @@ public class Eresource {
     @Field
     private String versionsJson;
 
+    private boolean isAnExactMatch = false;
+
     protected Eresource() {
         // spring-data-solr mapping needs this constructor
     }
@@ -151,6 +153,18 @@ public class Eresource {
 
     public void setVersionsJson(final String versionsJson) {
         this.versionsJson = versionsJson;
+    }
+
+    public String getIsAnExactMatch() {
+        return String.valueOf(this.isAnExactMatch);
+    }
+
+    public boolean isAnExactMatch() {
+        return isAnExactMatch;
+    }
+
+    public void setAnExactMatch(boolean isAnExactMatch) {
+        this.isAnExactMatch = isAnExactMatch;
     }
 
     @Override

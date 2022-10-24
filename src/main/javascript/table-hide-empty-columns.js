@@ -3,31 +3,22 @@
     "use strict";
 
     // hide table columns lacking data
-    document.querySelectorAll("table.hide-empty-columns").forEach(function(node) {
-        var columnIndex = 0;
-
-        node.querySelectorAll('th').forEach(function() {
-
-            // all rows of each column
-            var rows = node.querySelectorAll('tr td:nth-child(' + (columnIndex++) + ')'),
-                rowsLength = rows.length,
-                emptyRows = 0;
-
-            rows.forEach(function(row) {
-                if (row.textContent.trim().length == 0) {
-                    emptyRows++;
-                }
-            });
+    document.querySelectorAll(".table-main.hide-empty-columns").forEach(function(node) {
+        var columnIndex = 0,
+            rowsLength = node.querySelectorAll('.table-row').length - 1;
+        node.querySelectorAll('.table-head').forEach(function() {
+            // all rows emtpy colunm
+            var rows = node.querySelectorAll('.table-cell:nth-of-type(' + (++columnIndex) + '):empty');
 
             // if all rows in the colmun are empty, hide column
-            if (emptyRows > 0 && emptyRows == rowsLength) {
-                node.querySelectorAll('tr th:nth-child(' + (columnIndex - 1) + ')').forEach(function(n) {
-                    n.style.display = 'none';
-                });
-                node.querySelectorAll('tr td:nth-child(' + (columnIndex - 1) + ')').forEach(function(n) {
-                    n.style.display = 'none';
-                });
+            if (rows.length == rowsLength) {
+                node.querySelectorAll('.table-head:nth-of-type(' + columnIndex + '),' +
+                    '.table-cell:nth-of-type(' + columnIndex + ')').forEach(function(n) {
+                        n.style.display = 'none';
+                    });
             }
         });
+
     });
+
 })();

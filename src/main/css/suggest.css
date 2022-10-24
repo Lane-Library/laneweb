@@ -1,28 +1,33 @@
 .yui3-aclist {
-    z-index: 2;
+    z-index: 3;
     position: relative;
 }
+
 .yui3-aclist-hidden {
     visibility: hidden;
 }
+
 .yui3-aclist-aria {
     display: none;
 }
+
+.yui3-aclist-item {
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+}
+
+.menu-container.active .yui3-aclist-list {
+    padding-bottom: 0;
+}
+
 .yui3-aclist-content {
-    background-color: white;
+    background-color: #f0f4f5;
     position: absolute;
     width: 100%;
 }
-.yui3-aclist-list {
-    padding: 0;
-    border: 1px solid #ccc;
-}
-.yui3-aclist-item {
-    cursor: pointer;
-    padding: 2px 5px;
-    border-bottom: 1px solid #ccc;
-}
+
 .yui3-aclist-item-active {
-    background-color: #426fd9;
+    background-color: #666;
     color: white;
 }

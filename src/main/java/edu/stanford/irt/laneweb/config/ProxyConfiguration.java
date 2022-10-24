@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.search.FacetService;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
@@ -44,7 +44,7 @@ public class ProxyConfiguration {
 
     @Bean
     public ProxyServersService proxyServersService(
-            @Qualifier("edu.stanford.irt.laneweb.solr.SolrService") final SolrService solrService) {
-        return new SolrProxyServersService(solrService);
+            @Qualifier("edu.stanford.irt.laneweb.solr.FacetService") final FacetService facetService) {
+        return new SolrProxyServersService(facetService);
     }
 }

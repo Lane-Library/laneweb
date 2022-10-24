@@ -1,32 +1,50 @@
 /* COMMON TO THE TWO IMAGE VIEWS  */
- #bassettContent td {
+#bassettContent td {
     border: none;
     width: 50%;
 }
+
+#bassettContent .s-pagination {
+    padding: 0 18px;
+}
+
 .choice {
     float: left;
-    padding: 10px ;
+    padding: 10px;
+    padding-top: 0;
 }
 
 #paging span {
     margin-left: 10px;
+    padding-bottom: 15px;
 }
 
 #bassett-title-header {
-    margin-left: 10px;
-    margin-top: 12px;
+    margin: 30px 10px 0;
+    padding-bottom: 6px;
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
-#bassett-menu li:nth-child(n + 6) {
+#bassett-menu li:nth-child(n+6) {
     display: none;
 }
 
-#bassett-menu li:nth-child(n + 2) {
-    cursor: pointer;
+
+.menu-container #bassett-menu li a {
+    padding: 6px 0px;
+    width: 100%;
 }
 
-#bassett-menu li:nth-child(n + 2) a {
-    display: block;
+.menu-container #bassett-menu li a i {
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+    margin-right: 3px;
+}
+
+.menu-container #bassett-menu li a i.fa-square-check {
+    color: #8c1515;
 }
 
 .region span {
@@ -34,17 +52,15 @@
     float: right;
 }
 
-.region .enabled a, .region .enabled span {
-    color: white;
-}
-
 /* Multi IMAGES VIEW */
 .bassett-images, .paging, .bassett-image {
     clear: both;
 }
 
-.see-all {
+.menu-container #bassett-menu li a.see-all {
     float: right;
+    width: auto;
+    padding: 0;
 }
 
 .bassett-images div {
@@ -61,7 +77,7 @@
     padding: 3px 0 0 0;
 }
 
-.bassett-error{
+.bassett-error {
     color: red;
     padding-bottom: 10px;
     display: none;
@@ -96,8 +112,8 @@
     vertical-align: middle;
 }
 
-.bassett-image td#legend-image , .bassett-image td#legend {
-	padding-top: 20px;
+.bassett-image td#legend-image, .bassett-image td#legend {
+    padding-top: 20px;
 }
 
 .bassett-image td#diagram-image, .bassett-image td#legend-image {
@@ -129,26 +145,24 @@
     color: #3f3c30;
 }
 
-
 #legend .legend-sub-title {
     padding-bottom: 5px;
     font-style: italic;
 }
 
 #legend .legend-description {
-	padding: 9px;
+    padding: 9px;
     padding-bottom: 15px;
 }
 
-#legend table table td{
-	padding-left: 9px;
+#legend table table td {
+    padding-left: 9px;
 }
 
 #legend table td:first-child {
-	width: 5%;
-
+    width: 5%;
 }
+
 #legend table td:nth-last-of-type() {
     width: 95%;
 }
-

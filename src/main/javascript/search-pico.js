@@ -7,7 +7,7 @@
         PicoField = function(input) {
             var suggest,
                 self = this;
-            suggest = new L.Suggest(input, "mesh");
+            suggest = new L.Suggest(input);
             suggest.on("select", function() {
                 self.fire("input");
             });
