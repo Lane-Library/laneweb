@@ -7,7 +7,7 @@
         <version>117</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.11.19-SNAPSHOT</version>
+    <version>3.11.20-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -611,8 +611,7 @@
                 </executions>
             </plugin>
              -->
-            <plugin> 
-                <groupId>uk.org.adamretter.maven</groupId>
+            <!--  <plugin <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
                 <version>1.2</version>
                 <executions>
@@ -624,7 +623,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin -->
             <plugin>
                 <groupId>com.cj.jshintmojo</groupId>
                 <artifactId>jshint-maven-plugin</artifactId>

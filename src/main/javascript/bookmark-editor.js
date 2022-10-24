@@ -19,19 +19,44 @@
          */
         renderUI : function() {
             this.get("srcNode").append(
-                    "<input type=\"text\" name=\"label\"/>" +
-                    "<input type=\"text\" name=\"url\"/>" +
-                    "<div>" +
-                    "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" +
-                    "<span><i class=\"icon fa fa-save\"></i>Save</span>" +
-                    "</button>" +
-                    "<button class=\"btn alt\" value=\"reset\" type=\"reset\">" +
-                    "<span><i class=\"icon fa fa-undo\"></i>Undo</span>" +
-                    "</button>" +
-                    "<button class=\"btn alt\" name=\"action\" value=\"cancel\" type=\"submit\">" +
-                    "<span><i class=\"icon fa-regular fa-xmark fa-lg\"></i>Cancel</span>" +
+                "<div class=\"actions\">" + 
+                    "<button name=\"action\" value=\"edit\" type=\"submit\">" + 
+                        "<i class=\"fa-solid fa-lg fa-pen-to-square\"></i>" + 
                     "</button>" + 
-                    "</div>");
+                    "|" + 
+                    "<button name=\"action\" value=\"delete\" type=\"submit\">" + 
+                        "<i class=\"fa-solid fa-lg fa-trash-can\"></i>" + 
+                    "</button>" + 
+                "</div>" + 
+                "<div class=\"editContainer\">" + 
+                    "<div class=\"close\">" + 
+                        "<button name=\"action\" value=\"cancel\" type=\"submit\">" + 
+                            "<i class=\"fa-regular fa-xmark fa-lg\"></i>" + 
+                        "</button>" + 
+                    "</div>" + 
+                    "<div class=\"editPanel\">" + 
+                        "<div class=\"editItem\">" + 
+                            "<label for=\"label\">Name</label>" + 
+                            "<input name=\"label\" type=\"text\"></input>" + 
+                        "</div>" + 
+                        "<div class=\"editItem\">" + 
+                            "<label for=\"url\">URL</label>" + 
+                            "<input name=\"url\" type=\"text\"></input>" + 
+                        "</div>" + 
+                    "</div>" + 
+                    "<div class=\"editPanel\">" + 
+                        "<div class=\"editItem\">" + 
+                            "<button class=\"btn alt\" name=\"action\" value=\"save\" type=\"submit\">" + 
+                                "<span>SAVE</span>" + 
+                            "</button>" + 
+                        "</div>" + 
+                        "<div class=\"editItem\">" + 
+                            "<button class=\"btn alt outline\" value=\"reset\" type=\"reset\">" + 
+                                "<span>UNDO</span>" + 
+                            "</button>" + 
+                        "</div>" + 
+                    "</div>" + 
+                "</div>");
         },
 
         /**
@@ -80,13 +105,38 @@
          * @method cancel
          */
         cancel : function() {
+            var addBookmarkContainer = document.querySelector(".addBookmarkContainer");
             if (this.get("bookmark")) {
                 this.set("editing", false);
             } else {
                 this._labelInput.destroy();
                 this._urlInput.destroy();
                 this.destroy(true);
+                if (addBookmarkContainer) {
+                    addBookmarkContainer.classList.toggle("active");
+                }
             }
+        },
+
+        /**
+         * Responds to the edit button by showing the editContainer form and hiding the bookmark anchor
+         * @method edit
+         */
+        edit : function() {
+            if (this.get("bookmark")) {
+                this.set("editing", true);
+            }
+        },
+
+        /**
+         * Responds to a click on the delete button. Relies on the bookmarks object to find the index 
+         * of the bookmark to delete and to remove the bookmark.
+         * @method delete
+         */
+        "delete" : function() {
+            var bookmarks = L.BookmarksWidget.get("bookmarks"),
+                index = bookmarks.indexOf(this.get("bookmark"));
+            bookmarks.removeBookmarks([index]);
         },
 
         /**
@@ -170,6 +220,7 @@
         _handleEditingChange : function(event) {
             var srcNode = this.get("srcNode"),
             activeClass = this.getClassName() + "-active";
+            srcNode._node.classList.toggle('active');
             if (event.newVal) {
                 srcNode.addClass(activeClass);
                 this.reset();
@@ -192,13 +243,13 @@
         },
 
         /**
-         * Put the text http:// into url input if it is empty
+         * Put the text https:// into url input if it is empty
          * @method _setDefaultUrlInputText
          * @private
          */
         _setDefaultUrlInputText : function() {
             if (this._urlInput.get("value") === "") {
-                this._urlInput.set("value", "http://");
+                this._urlInput.set("value", "https://");
             }
         }
     }, {

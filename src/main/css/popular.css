@@ -69,6 +69,8 @@
 .top-resources.menu-container a {
     color: black;
     padding: 6px 0;
+    /* LANEWEB-11037: 100% width interferes with bookmark icon */
+    width: revert; 
 }
 
 

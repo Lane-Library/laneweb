@@ -36,7 +36,7 @@
         <stx:assign name="url" select="''"/>
         <li xmlns="http://www.w3.org/1999/xhtml">
             <stx:process-children/>
-            <a xmlns="http://www.w3.org/1999/xhtml" href="{$url}"><stx:value-of select="$label"/></a>
+            <a href="{$url}"><stx:value-of select="$label"/></a>
         </li>
     </stx:template>
     
