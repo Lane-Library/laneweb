@@ -119,10 +119,3 @@
         margin-right: 32px;
     }
 }
-
-@media ( max-width : 812px) {
-    .filter-facet {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-}
