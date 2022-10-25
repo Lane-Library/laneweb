@@ -12,26 +12,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             render:true
         }),
 
-        testNotChecked : function() {
-            var checked = Y.one("input[type='checkbox']").get("checked");
-            Y.Assert.isFalse(checked);
-            Y.Assert.isFalse(this.editor.isChecked());
-        },
-
-        testSetCheckedTrue : function() {
-            this.editor.setChecked(true);
-            var checked = Y.one("#editor input[type='checkbox']").get("checked");
-            Y.Assert.isTrue(checked);
-            Y.Assert.isTrue(this.editor.isChecked());
-        },
-
-        testSetCheckedFalse : function() {
-            this.editor.setChecked(false);
-            var checked = Y.one("#editor input[type='checkbox']").get("checked");
-            Y.Assert.isFalse(checked);
-            Y.Assert.isFalse(this.editor.isChecked());
-        },
-
         testSetEditingTrue : function() {
             var srcNode = this.editor.get("srcNode");
             Y.Assert.isFalse(srcNode.hasClass("yui3-bookmark-editor-active"));
@@ -53,7 +33,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testCancelNew : function() {
-            Y.one("body").append("<div id='new'><input type='checkbox'/><a>a</a></div>");
+            Y.one("body").append("<div id='new'><input type='hidden'/><a>a</a></div>");
             var anew = new L.BookmarkEditor({srcNode:Y.one("#new"),render:true});
             anew.set("editing", true);
             Y.one("#new button[value='cancel']").simulate("click");
@@ -96,6 +76,18 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             input.set("value", "a new url");
             Y.one("button[value='save']").simulate("click");
             Y.Assert.areSame("a new url", this.editor.get("bookmark").getUrl());
+        },
+
+        testDelete : function() {
+            var fired = false;
+            var bookmarks = L.BookmarksWidget.get("bookmarks");
+            var handler = bookmarks.on("remove", function(event) {
+                event.preventDefault();
+                fired = true;
+            });
+            Y.one("button[value='delete']").simulate("click");
+            handler.detach();
+            Y.Assert.isTrue(fired);
         }
 
     });
