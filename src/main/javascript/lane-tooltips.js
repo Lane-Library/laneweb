@@ -240,10 +240,6 @@
 
             if (mouseClientX >= document.documentElement.clientWidth - width) {
                 x = x - width - Tooltip.OFFSET_X;
-                if (x < 0) {
-                    x = Tooltip.OFFSET_X;
-                }
-    
             } else {
                 x = x + Tooltip.OFFSET_X;
             }

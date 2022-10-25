@@ -31,7 +31,7 @@
                 "<div class=\"editContainer\">" + 
                     "<div class=\"close\">" + 
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">" + 
-                            "<i class=\"fa-regular fa-xmark fa-lg\"></i>" + 
+                            "<i class=\"fa-regular fa-xmark\"></i>" + 
                         "</button>" + 
                     "</div>" + 
                     "<div class=\"editPanel\">" + 
@@ -78,24 +78,6 @@
             this._urlInput = srcNode.one("input[name='url']");
             srcNode.one("input[name='url']").after("focus", this._setDefaultUrlInputText, this);
             this._truncateLabel();
-        },
-
-        /**
-         * Set the checkbox state.
-         * @method setChecked
-         * @param checked {boolean}
-         */
-        setChecked : function(checked) {
-            this.get("srcNode").one("input[type='checkbox']").set("checked", checked);
-        },
-
-        /**
-         * Get the checkbox state.
-         * @method isChecked
-         * @return whether or not the checkbox is checked.
-         */
-        isChecked : function() {
-            return this.get("srcNode").one("input[type='checkbox']").get("checked");
         },
 
         /**
