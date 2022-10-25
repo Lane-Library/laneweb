@@ -81,24 +81,6 @@
         },
 
         /**
-         * Set the checkbox state.
-         * @method setChecked
-         * @param checked {boolean}
-         */
-        setChecked : function(checked) {
-            this.get("srcNode").one("input[type='checkbox']").set("checked", checked);
-        },
-
-        /**
-         * Get the checkbox state.
-         * @method isChecked
-         * @return whether or not the checkbox is checked.
-         */
-        isChecked : function() {
-            return this.get("srcNode").one("input[type='checkbox']").get("checked");
-        },
-
-        /**
          * Responds to the cancel button.  If there is no associated bookmark, like when this editor
          * is for a new bookmark that hasn't been created yet, this editor gets destroyed, otherwise
          * the editing attribute is set to false
