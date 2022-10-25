@@ -31,7 +31,7 @@
                 "<div class=\"editContainer\">" + 
                     "<div class=\"close\">" + 
                         "<button name=\"action\" value=\"cancel\" type=\"submit\">" + 
-                            "<i class=\"fa-regular fa-xmark fa-lg\"></i>" + 
+                            "<i class=\"fa-regular fa-xmark\"></i>" + 
                         "</button>" + 
                     "</div>" + 
                     "<div class=\"editPanel\">" + 
