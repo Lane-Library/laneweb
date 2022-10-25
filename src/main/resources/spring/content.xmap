@@ -171,24 +171,6 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="expires">
-        <map:parameter name="cache-key" value="{request-uri}"/>
-        <map:match pattern="ncbi-rss2html/**" type="wildcard">
-            <map:generate type="file" src="{1}"/>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementNames" value="description"/>
-            </map:transform>
-            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
-            <map:generate type="file" src="{1}"/>
-            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon">
-                <map:parameter name="format" value="brief"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-    </map:pipeline>
-    <map:pipeline type="expires">
     	<map:parameter name="cache-key" value="{sitemap-uri}"/>
         <map:match type="wildcard" pattern="liaison-card/*.html">
             <map:generate type="file" src="cocoon://content/staff.xml"/>
