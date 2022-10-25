@@ -23,7 +23,8 @@ public class FacetService {
 
     public static final String FACETS_SEPARATOR = "::";
 
-    private static final String COLLECTION = "laneSearch";
+    // FIXME: remove -folio before go-live 
+    private static final String COLLECTION = "laneSearch-folio";
 
     private static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
 

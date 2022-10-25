@@ -42,6 +42,7 @@ public class SolrService {
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
             new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
 
+    // FIXME: remove -folio before go-live 
     private static final String COLLECTION = "laneSearch-folio";
 
     private static final String DATE_QUERY = "date:[%s TO *]";

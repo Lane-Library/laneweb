@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
+// FIXME: remove -folio before go-live 
 @SolrDocument(collection = "laneSearch-folio")
 public class Eresource {
 
