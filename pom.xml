@@ -549,7 +549,6 @@
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>description-toggle-min.js</include>
-                                <include>seminars-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>
                                 <include>back-to-top-min.js</include>

@@ -87,21 +87,6 @@
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
-    <map:pipeline type="expires">
-        <map:parameter name="cache-key" value="{sitemap-uri}"/>
-        <!-- cache expires in 21600 seconds = 6 hours -->
-        <map:parameter name="cache-expires" value="21600"/>
-        <map:match pattern="seminars/grandrounds.xml" type="wildcard">
-            <map:generate type="seminars"/>
-            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="medicinecalendars/grandrounds.xml" type="wildcard">
-            <map:generate type="file" src="https://medicinecalendars.stanford.edu/?plugin=all-in-one-event-calendar&amp;controller=ai1ec_exporter_controller&amp;action=export_events&amp;xml=true"/>
-            <map:transform type="saxon" src="classpath:/xsl/medcalendar-grandrounds.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-    </map:pipeline>
     <!-- caching pipeline for static documents -->
     <map:pipeline type="caching">
         <map:match pattern="laneblog-highlightedresources-rss.xml" type="wildcard">

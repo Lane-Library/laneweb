@@ -48,7 +48,6 @@ import edu.stanford.irt.laneweb.cocoon.HTML5Serializer;
 import edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.search.ParameterMapGenerator;
-import edu.stanford.irt.laneweb.seminars.SeminarsGenerator;
 
 @Configuration
 public class PipelineConfiguration {
@@ -168,13 +167,6 @@ public class PipelineConfiguration {
             @Qualifier("edu.stanford.irt.cocoon.xml.TransformerHandlerFactory/saxon")
                 final TransformerHandlerFactory saxonTransformerHandlerFactory) {
         return new TraxTransformer("saxon", saxonTransformerHandlerFactory);
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/seminars")
-    @Scope("prototype")
-    public Generator seminarsGenerator(final BeanFactory beanFactory, final SourceResolver sourceResolver) {
-        return new SeminarsGenerator(beanFactory.getBean("edu.stanford.irt.cocoon.xml.SAXParser/html", SAXParser.class),
-                sourceResolver);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/textNodeParser")
