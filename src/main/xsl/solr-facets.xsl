@@ -59,7 +59,7 @@
     </xsl:variable>
 
     <xsl:variable name="header">
-        <h2 class="yui3-tooltip-trigger" title="Click checkbox(es) to reduce results displayed to only the selected type(s)">
+        <h2>
             Filter Results
             <i class="fa-regular fa-angle-down fa-lg"></i>
             <i class="fa-regular fa-angle-up fa-lg"></i>

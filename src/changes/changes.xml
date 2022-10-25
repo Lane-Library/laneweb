@@ -6,6 +6,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2022-10-24" version="3.11.20" description="bug fix and update release">
+            <action date="2022-10-21" dev="ryanmax" issue="LANEWEB-11037" type="fix">
+                Top Resources add bookmark icon formatting problems
+            </action>
+            <action date="2022-10-21" dev="ryanmax" issue="LANEWEB-11038" type="fix">
+                Javascript errors at form submission
+            </action>
+            <action date="2022-10-14" dev="ryanmax" issue="LANEWEB-11041" type="fix">
+                Lane Search Mobile Fixes
+            </action>
+        </release>
         <release date="2022-10-17" version="3.11.19" description="bug fix and update release">
             <action date="2022-10-12" dev="alainb" issue="LANEWEB-11035" type="fix">
                 Holdings toggle appears but doesn't do anything
