@@ -28,6 +28,47 @@
                     </fieldset>
                     <stx:process-children/>
                 </form>
+                <!-- HTML template used in bookmark-editor.js to construct each editor -->
+                <div id="bookmark-editor-template">
+                    <div class="actions">
+                        <button name="action" value="edit" type="submit">
+                            <i class="fa-solid fa-lg fa-pen-to-square"></i>
+                        </button>
+                        | 
+                        <button name="action" value="delete" type="submit">
+                            <i class="fa-solid fa-lg fa-trash-can"></i>
+                        </button>
+                    </div> 
+                    <div class="editContainer">
+                        <div class="close">
+                            <button name="action" value="cancel" type="submit">
+                                <i class="fa-regular fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="editPanel">
+                            <div class="editItem">
+                                <label for="label">Name</label>
+                                <input name="label" type="text"></input>
+                            </div>
+                            <div class="editItem">
+                                <label for="url">URL</label>
+                                <input name="url" type="text"></input>
+                            </div>
+                        </div>
+                        <div class="editPanel">
+                            <div class="editItem">
+                                <button class="btn alt" name="action" value="save" type="submit">
+                                    <span>SAVE</span>
+                                </button>
+                            </div>
+                            <div class="editItem">
+                                <button class="btn alt outline" value="reset" type="reset">
+                                    <span>UNDO</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </stx:otherwise>
         </stx:choose>
     </stx:template>
