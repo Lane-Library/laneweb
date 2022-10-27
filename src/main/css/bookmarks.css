@@ -319,4 +319,7 @@ li.yui3-bookmark-editor-content {
       flex-wrap: wrap;
       margin-bottom: 10px;
     }
+    .yui3-bookmark-editor:hover {
+      box-shadow: none;
+    }
 }
