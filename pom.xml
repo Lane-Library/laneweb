@@ -172,7 +172,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.34</version>
+            <version>1.0.37</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -281,7 +281,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.2.0.RELEASE</version>
+            <version>6.2.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -312,7 +312,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.67</version>
+            <version>9.0.68</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
