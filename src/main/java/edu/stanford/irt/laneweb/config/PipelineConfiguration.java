@@ -38,7 +38,6 @@ import edu.stanford.irt.cocoon.pipeline.serialize.TransformerSerializer;
 import edu.stanford.irt.cocoon.pipeline.transform.NamespaceFilter;
 import edu.stanford.irt.cocoon.pipeline.transform.TraxTransformer;
 import edu.stanford.irt.cocoon.pipeline.transform.XIncludeTransformer;
-import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.cocoon.xml.SAXParser;
 import edu.stanford.irt.cocoon.xml.TransformerHandlerFactory;
 import edu.stanford.irt.cocoon.xml.XIncludePipe;
