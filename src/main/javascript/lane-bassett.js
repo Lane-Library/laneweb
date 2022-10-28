@@ -44,7 +44,7 @@
 
         loadContent = function(string) {
             var url = basePath + "/plain/biomed-resources/bassett/raw".concat(string);
-            function successHandler(id, o) {
+            function successHandler(_id, o) {
                 bassettContent.innerHTML = o.responseText;
                 registerLinksContainer(bassettContent);
                 document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function(node) {
