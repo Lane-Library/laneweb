@@ -98,11 +98,6 @@ public class PipelineConfigurationTest {
     }
 
     @Test
-    public void testSeminarsGenerator() {
-        assertNotNull(this.configuration.seminarsGenerator(this.beanFactory, null));
-    }
-
-    @Test
     public void testTextNodeParserTransformer() {
         assertNotNull(this.configuration.textNodeParsingTransformer(this.beanFactory));
     }
