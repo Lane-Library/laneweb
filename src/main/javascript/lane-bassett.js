@@ -11,7 +11,6 @@
         accordion,
         history = window.history,
         subRegionToShow = 4,
-        prevSubRegion,
 
         formatAjaxUrl = function(string) {
             var url, href;
@@ -105,7 +104,7 @@
         hideSubRegions = function(event) {
             var i, region = event.currentTarget.closest("ul"),
                 subRegion = region.querySelectorAll('li');
-            resetSubRegions(region);
+            resetSubRegions();
             region.querySelector('.see-all').innerHTML = SEE_ALL;
             for (i = subRegionToShow; i < subRegion.length; i++) {
                 subRegion[i].style.display = "none";
