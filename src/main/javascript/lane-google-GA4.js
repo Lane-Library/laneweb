@@ -87,11 +87,10 @@
                 });
             }
         } else {
-            window.gtag('event', 'page_view', {
+            gtag('config', GA_MEASUREMENT_ID, {
                 'page_title': event.title,
                 'page_location': event.href,
-                'page_path': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path,
-                'send_to': GA_MEASUREMENT_ID
+                'page_path': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
             })
 
         }
