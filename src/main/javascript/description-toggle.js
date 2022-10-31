@@ -25,11 +25,11 @@
             event.preventDefault();
             ancestor.classList.toggle("active");
             if (active && eresource) {
-                node.innerHTML = "<a href=\"#\"> Read Full Description <i class=\"fa-regular fa-angle-down\"></i></a>";
+                node.innerHTML = "<a href=\"#\">Read Full Description<i class=\"fa-regular fa-angle-down\"></i></a>";
             } else if (active && searchContent) {
-                node.innerHTML = "<a href=\"#\">Abstract <i class=\"fa-regular fa-angle-down\"></i></a>";
+                node.innerHTML = "<a href=\"#\">Abstract<i class=\"fa-regular fa-angle-down\"></i></a>";
             } else if (!active && eresource) {
-                node.innerHTML = "<a href=\"#\"> Read Full Description <i class=\"fa-regular fa-angle-up\"></i></a>";
+                node.innerHTML = "<a href=\"#\">Read Full Description<i class=\"fa-regular fa-angle-up\"></i></a>";
             } else if (!active && searchContent) {
                 node.innerHTML = "<a href=\"#\">Abstract <i class=\"fa-regular fa-angle-up\"></i></a>";
             } 
