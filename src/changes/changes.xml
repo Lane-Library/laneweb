@@ -6,6 +6,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2022-10-31" version="3.11.21" description="bug fix and update release">
+            <action date="2022-08-29" dev="ryanmax" issue="LANEWEB-11019" type="update">
+                Update Add, Edit, and Delete Function on Bookmark Page
+            </action>
+            <action date="2022-10-20" dev="ryanmax" issue="LANEWEB-11039" type="fix">
+                Bookmarking bug: updates fail after move/reorder
+            </action>
+            <action date="2022-10-25" dev="ryanmax" issue="LANEWEB-11042" type="update">
+                Remove PubMed RSS processing
+            </action>
+            <action date="2022-10-20" dev="ryanmax" issue="LANEWEB-11043" type="update">
+                Remove grand rounds processing for front page
+            </action>
+        </release>
         <release date="2022-10-24" version="3.11.20" description="bug fix and update release">
             <action date="2022-10-21" dev="ryanmax" issue="LANEWEB-11037" type="fix">
                 Top Resources add bookmark icon formatting problems
