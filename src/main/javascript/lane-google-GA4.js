@@ -22,10 +22,7 @@
         LANEWEB_DIMENSION = 'laneweb_dimension',
         IP_GROUP_DIMENSION = 'dimension1',
         AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
-        BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3',
-        BOOKMARK = 'bookmark',
-        IP_GROUP = 'ipGroup',
-        AUTHENTICATED = 'auth';
+        BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3';
 
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
@@ -35,20 +32,20 @@
                 ipGroup = model.get(model.IPGROUP),
                 auth =  model.get(model.AUTH),
                 dimensions = new Map();
-            window.dataLayer = window.dataLayer || [];
 
+            window.dataLayer = window.dataLayer || [];
             window.gtag = window.gtag || function() {
                 dataLayer.push(arguments);
             }
             gtag('js', new Date());
 
             if (ipGroup) {
-                dimensions.set(IP_GROUP_DIMENSION, IP_GROUP);
+                dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
             }
             if (auth) {
-                dimensions.set(AUTHENTICATED_SESSION_DIMENSION, AUTHENTICATED);
+                dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
                 if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
-                    dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, BOOKMARK);
+                    dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
                 }
             }
 
@@ -56,7 +53,7 @@
                 'custom_map': dimensions
             });
 
-            gtag('event', LANEWEB_DIMENSION, { IP_GROUP: ipGroup , AUTHENTICATED: auth,  BOOKMARK: auth });
+            gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': auth });
 
 
         }
