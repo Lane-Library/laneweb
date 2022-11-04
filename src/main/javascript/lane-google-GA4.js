@@ -19,7 +19,7 @@
 
         // custom dimension indexes must be configured in the GA admin interface for each property
         // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
-        LANEWEB_DIMENSION = 'laneweb_dimension',
+        LANEWEB_DIMENSION = 'laneweb_dimensions',
         IP_GROUP_DIMENSION = 'dimension1',
         AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
         BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3';
