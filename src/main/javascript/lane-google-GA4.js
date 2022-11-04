@@ -6,11 +6,11 @@
         var host = location.host,
             trackerId;
         if (host.match("lane.stanford.edu")) {
-            trackerId = "";
+            trackerId = "G-Y6KGXN1JXT";
         } else if (host.match("lane-beta.stanford.edu")) {
             trackerId = "G-RF4JWB6KG5";
         } else {
-            trackerId = "G-RF4JWB6KG5";
+            trackerId = "G-CRPQYN7JFT";
         }
         return trackerId;
     },
@@ -19,14 +19,13 @@
 
         // custom dimension indexes must be configured in the GA admin interface for each property
         // https://support.google.com/analytics/answer/2709829?hl=en&topic=2709827&ctx=topic
-        LANEWEB = "laneweb_",
-        DIMENSION = 'dimension',
+        LANEWEB_DIMENSION = 'laneweb_dimension',
         IP_GROUP_DIMENSION = 'dimension1',
         AUTHENTICATED_SESSION_DIMENSION = 'dimension2',
         BOOKMARK_ENABLED_SESSION_DIMENSION = 'dimension3',
         BOOKMARK = 'bookmark',
         IP_GROUP = 'ipGroup',
-        AUTHENTICATED = 'authenticated';
+        AUTHENTICATED = 'auth';
 
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
@@ -44,23 +43,22 @@
             gtag('js', new Date());
 
             if (ipGroup) {
-                dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
+                dimensions.set(IP_GROUP_DIMENSION, IP_GROUP);
             }
             if (auth) {
-                dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
+                dimensions.set(AUTHENTICATED_SESSION_DIMENSION, AUTHENTICATED);
                 if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
-                    dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
+                    dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, BOOKMARK);
                 }
             }
 
             gtag('config', GA_MEASUREMENT_ID, {
                 'custom_map': dimensions
             });
-            
-            
-            gtag('event', LANEWEB + DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': auth });
-            
-            
+
+            gtag('event', LANEWEB_DIMENSION, { IP_GROUP: ipGroup , AUTHENTICATED: auth,  BOOKMARK: auth });
+
+
         }
     });
 
@@ -87,7 +85,7 @@
                 });
             }
         } else {
-            gtag('config', GA_MEASUREMENT_ID, {
+            window.gtag('config', GA_MEASUREMENT_ID, {
                 'page_title': event.title,
                 'page_location': event.href,
                 'page_path': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
