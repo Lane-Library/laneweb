@@ -6,6 +6,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2022-11-07" version="3.11.22" description="bug fix and update release">
+            <action date="2022-05-06" dev="alainb" issue="LANEWEB-10961" type="update">
+                Migrate from Universal Analytics to GA 4
+            </action>
+            <action date="2022-10-28" dev="ryanmax" issue="LANEWEB-11046" type="fix">
+               	Bookmark edge case: user logged out but on /favorites.html page
+            </action>
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11048" type="fix">
+                Classes icon formatting problems on small screen
+            </action>
+        </release>
         <release date="2022-10-31" version="3.11.21" description="bug fix and update release">
             <action date="2022-08-29" dev="ryanmax" issue="LANEWEB-11019" type="update">
                 Update Add, Edit, and Delete Function on Bookmark Page
