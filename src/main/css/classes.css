@@ -1,173 +1,128 @@
-.class, .archive {
-	margin: 12px 0 60px;
-	position: relative;
-	/* this z-index and the .class .date:before rules related to case 119823 involved with getting
+.class {
+    margin: 12px 0 60px;
+    position: relative;
+    /* this z-index and the .class .date:before rules related to case 119823 involved with getting
        the date box the same height as the class information*/
-	z-index: 0;
-	min-height: 200px;
+    z-index: 0;
+    min-height: 200px;
 }
 
-.class:last-child, .archive:last-child {
-	margin-bottom: 0;
+.class:last-child {
+    margin-bottom: 0;
 }
 
-.class .date, .archive .date {
-	width: auto;
-	padding: 0 12px;
-	box-sizing: border-box;
+.class .pure-u-7-24 {
+    background-color: #009abb;
+    padding: 6px 0 24px;
 }
 
-.class .date:before, .archive .date:before {
-	content: ' ';
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	z-index: -1;
+.class .pure-g .pure-u-17-24 {
+    padding-left: 24px;
 }
 
-.class .date:before {
-	background-color: #009abb;
-	width: 24.2%;
+.class .date {
+    padding: 0 12px;
 }
 
-/*.class.presentation is on the grandrounds pages*/
-.class.presentation .date:before {
-	width: 19.2%;
+.class .month-day {
+    padding-top: 6px;
+    margin-bottom: 0;
 }
 
-.class .month-day, .archive .month-day {
-	padding-top: 6px;
-	margin-bottom: 0;
-}
-
-.class .year, .archive .year {
-	font-size: 1.5em;
-	font-weight: 700;
-}
-
-.class h3 a, .archive h3 a {
-	color: #8c1515;
+.class .year {
+    font-size: 1.5em;
+    font-weight: 700;
 }
 
 .class .time {
-	margin: 12px 0;
-}
-
-.class-detail {
-	padding-top: 10px;
-}
-
-.class .seats {
-	padding-top: 6px;
-}
-
-.class-description h3, .class-description h4, .handout-description h3,
-	.handout-description h4 {
-	all: inherit;
-}
-
-.class-description ul, .handout-description ul {
-	padding-left: 20px;
-}
-
-.class-description li, .handout-description li {
-	list-style-type: disc;
-	list-style-position: outside;
-	border-bottom: none;
-	padding: 0;
-}
-
-.instructor {
-	margin-bottom: 20px;
-}
-
-.youtube-class {
-	text-align: center;
-	margin-top: 70px;
-}
-
-.youtube-class .youtube-thumbnail img {
-	width: 200px;
-}
-
-.venue {
-	position: relative;
-	margin-top: 60px;
-	font-size: 0.8125em;
+    margin: 12px 0;
 }
 
 .location {
-	text-align: right;
-	position: absolute;
-	width: 94%;
+    text-align: right;
+}
+
+.location i {
+    margin-right: 4%;
+    margin-left: 3px;
 }
 
 .location, .location a, .location .fa-solid {
-	color: white;
+    color: white;
 }
 
-.register {
-	min-height: 68px;
-}
-
-.register div:first-child {
-	position: absolute;
-	bottom: 0;
-}
-
-.register a {
-	margin-bottom: 6px;
+.venue {
+    position: relative;
+    margin-top: 60px;
+    font-size: 0.8125em;
 }
 
 .venue-link {
-	position: absolute;
-	bottom: 0;
-	box-sizing: content-box;
-	width: inherit;
-	padding-left: 9px;
+    position: absolute;
+    bottom: 0;
+    box-sizing: content-box;
+    width: inherit;
+    padding-left: 9px;
+}
+
+.class .seats {
+    padding-top: 6px;
+}
+
+.instructor {
+    margin-bottom: 20px;
+}
+
+.register {
+    min-height: 68px;
+}
+
+.register div:first-child {
+    position: absolute;
+    bottom: 0;
+}
+
+.register a {
+    margin-bottom: 6px;
 }
 
 .remaining-seats {
-	height: 26px;
+    height: 26px;
 }
 
 @media ( max-width :1100px) {
-	.class {
-		margin: 12px 0 51px;
-	}
-	.class .pure-g {
-		background-color: #eee;
-	}
-	.class .pure-g .pure-u-3-4 {
-		padding: 6px;
-	}
-	.class .date:before {
-		background-color: white;
-		width: 24.2%;
-	}
-	.class .date {
-		background-color: #009abb;
-	}
-	.class .venue {
-		margin-top: 0px;
-	}
-	.register {
-		position: relative;
-		margin-bottom: 15px;
-	}
-	.register i, .location {
-		display: none;
-	}
-	.class .col-1-4 {
-		margin-right: 12px;
-	}
-	.instructor {
-		margin-top: -17px;
-		display: inline-flex;
-		line-height: 3.6em;
-	}
-	.instructor div {
-		padding-left: 6px;
-	}
+    .class {
+        margin: 12px 0 51px;
+    }
+    .class .pure-g {
+        background-color: #eee;
+    }
+    .class .pure-g .pure-u-17-24 {
+        padding: 6px;
+    }
+    .class .pure-u-7-24 {
+        padding: 0;
+        margin-bottom: 12px;
+    }
+    .class .date {
+        background-color: #009abb;
+    }
+    .class .venue {
+        margin-top: 0px;
+    }
+    .register {
+        position: relative;
+        margin-bottom: 15px;
+    }
+    .register i, .location {
+        display: none;
+    }
+    .instructor {
+        margin-top: -17px;
+        display: inline-flex;
+        line-height: 3.6em;
+    }
+    .instructor div {
+        padding-left: 6px;
+    }
 }

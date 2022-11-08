@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>118</version>
+        <version>119</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.11.21-SNAPSHOT</version>
+    <version>3.11.23-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -543,6 +543,7 @@
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
+                                <include>lane-google-GA4.js</include>
                                 <include>lane-google-min.js</include>
                                 <include>lane-google-GA4-min.js</include>
                                 <include>lane-popup-min.js</include>

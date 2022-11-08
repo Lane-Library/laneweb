@@ -58,7 +58,7 @@
               <input type="hidden" name="facets" value="{$facets}"/>
           </xsl:if>
           <label for="page"> Page </label>
-          <input type="text" name="page" value="{number(/s:resources/@page + 1)}"/>
+          <input type="text" id="pageStart" name="page" value="{number(/s:resources/@page + 1)}"/>
           <label for="pages"> of <xsl:value-of select="format-number(/s:resources/@pages,'###,##0')" /></label>
           <input type="hidden" name="pages" value="{number(/s:resources/@pages)}"/>
         </form>

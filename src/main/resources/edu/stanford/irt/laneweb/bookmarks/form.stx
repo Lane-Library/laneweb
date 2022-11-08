@@ -6,14 +6,19 @@
     pass-through="all">
     
     <stx:param name="bookmarking"/>
-    
+    <stx:param name="userid"/>
+
     <!-- item is a counter for the li elements, incremented with each one -->
     <stx:variable name="item" select="0"/>
-    
+
     <stx:template match="/">
         <stx:choose>
             <stx:when test="$bookmarking != 'rw'">
                 <div>Bookmark editing is not available at the moment.</div>
+            </stx:when>
+            <!-- LANEWEB-11046: show error when user not logged in -->
+            <stx:when test="string-length($userid) = 0">
+                <li>Your login has expired. Please <a href="/secure/login.html?url=%2Ffavorites.html">login again to see your bookmarks</a>.</li>
             </stx:when>
             <stx:otherwise>
                 <form action="/bookmarks" method="post" id="bookmarks-editor">
