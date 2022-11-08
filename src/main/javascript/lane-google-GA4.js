@@ -60,8 +60,8 @@
     });
 
     L.on("tracker:trackableEvent", function(event) {
-        window.gtag('event', event.action, {
-            'event_category': event.category,
+        window.gtag('event', event.category, {
+            'event_action': event.action,
             'event_label': event.label,
             'event_value': event.value
         });
@@ -71,13 +71,13 @@
         if (event.external) {
             if (event.query !== undefined && event.query !== '') {
                 window.gtag('event', 'lane:offsite', {
-                    'event_category': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
                     'event_label': event.host + event.path + event.query
                 });
 
             } else {
                 window.gtag('event', 'lane:offsite', {
-                    'event_category': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
                     'event_label': event.host + event.path
                 });
             }
