@@ -100,7 +100,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }"     start="{/doc/r:results/@start}" data-position="{position()}" >
+        <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }">
             <div class="resource-detail">
                 <span class="primaryType">Article</span>
                 <div>
