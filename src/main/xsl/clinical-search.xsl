@@ -94,19 +94,20 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
+    
+    <xsl:template match="h:form[@class='pagingForm']">
+         <xsl:copy>
+		 	 <xsl:apply-templates select="attribute::node() | child::node()" />
+		 	 <!--Use by google analytics -->
+		 	 <span id="pageStart" class="hidden">
+				<xsl:value-of select="count(/doc/r:results//s:result) * (number(/doc/r:results/@page -1)) +1"/>
+			</span>
+		 </xsl:copy>
+    </xsl:template>
 
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='source']/@value">
         <xsl:attribute name="value" select="$source" />
     </xsl:template>
-
-
-	<xsl:template	match="h:form[@class='pagingForm']/h:span[@id='pageStart']">
-		 <xsl:copy>
-		 	<xsl:attribute name="id">pageStart</xsl:attribute>
-		 	<xsl:attribute name="class">hidden</xsl:attribute>
-			<xsl:value-of select="count(/doc/r:results//s:result) * (number(/doc/r:results/@page -1)) +1"/>
-		 </xsl:copy>
-	</xsl:template>
     
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='page']/@value">
         <xsl:attribute name="value" select="number(/doc/r:results/@page)" />
