@@ -111,7 +111,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <li class="resource" data-sid="{s:contentId}">
+        <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }">
             <div class="resource-detail">
                 <span class="primaryType">Article</span>
                 <div>
@@ -148,7 +148,8 @@
 
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <li class="resource" data-sid="{s:id}">
+          
+        <li class="resource" data-sid="{s:id}" data-index="{/s:resources/@length * /s:resources/@page + position()}">
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)" />
             <xsl:if test="s:isAnExactMatch = 'true'">
                 <xsl:attribute name="class">resource exact-match-resource</xsl:attribute>

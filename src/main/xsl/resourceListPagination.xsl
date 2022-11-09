@@ -29,7 +29,6 @@
           </xsl:if>
           <label for="page"> Page </label>
           <input type="text" name="page" value="{number(/s:resources/@page + 1)}"/>
-          <span id="pageStart" class="hidden"><xsl:value-of select="number(/s:resources/@length * /s:resources/@page +1)"></xsl:value-of></span>
           <label for="pages"> of <xsl:value-of select="format-number(/s:resources/@pages,'###,##0')" /></label>
           <input type="hidden" name="pages" value="{number(/s:resources/@pages)}"/>
         </form>
