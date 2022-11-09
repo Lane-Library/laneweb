@@ -1,4 +1,4 @@
-<xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml"  xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:r="http://lane.stanford.edu/results/1.0">
 
     <xsl:param name="facet" />
@@ -33,6 +33,7 @@
         </xsl:copy>
     </xsl:template>
 
+	<!-- Element used for google analytics -->
     <xsl:template match="h:a[@class='clinical-facet'][$facet][substring-after(@href,'facet=') = $facet]/h:i[1]">
         <i class="fa-solid fa-square-check fa-lg"></i>
     </xsl:template>
@@ -97,6 +98,15 @@
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='source']/@value">
         <xsl:attribute name="value" select="$source" />
     </xsl:template>
+
+
+	<xsl:template	match="h:form[@class='pagingForm']/h:span[@id='pageStart']">
+		 <xsl:copy>
+		 	<xsl:attribute name="id">pageStart</xsl:attribute>
+		 	<xsl:attribute name="class">hidden</xsl:attribute>
+			<xsl:value-of select="count(/doc/r:results//s:result) * (number(/doc/r:results/@page -1)) +1"/>
+		 </xsl:copy>
+	</xsl:template>
     
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='page']/@value">
         <xsl:attribute name="value" select="number(/doc/r:results/@page)" />
