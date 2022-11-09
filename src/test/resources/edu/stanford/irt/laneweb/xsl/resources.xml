@@ -6,7 +6,7 @@
    <body>
       <h2>Search Results</h2>
       <ul class="lwSearchResults">
-         <li class="resource" data-sid="PMID:25195623">
+         <li class="resource" data-sid="PMID:25195623" data-index="1">
             <div class="resource-detail">
                <span class="primaryType">Article</span>
                <div>
@@ -30,7 +30,7 @@
                </div>
             </div>
          </li>
-         <li class="resource" data-sid="bib-301866">
+         <li class="resource" data-sid="bib-301866" data-index="2">
             <div class="resource-detail">
                <span class="primaryType">Book</span>
                <div>
@@ -86,7 +86,7 @@
                </div>
             </div>
          </li>
-         <li class="resource" data-sid="bib-123">
+         <li class="resource" data-sid="bib-123"  data-index="3">
             <div class="resource-detail">
                <span class="primaryType">Book</span>
                <div>
