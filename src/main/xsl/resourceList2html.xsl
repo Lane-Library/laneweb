@@ -69,17 +69,6 @@
                         <xsl:call-template name="paginationLinks" />
                     </div>
                 </xsl:if>
-                <div id="search-content-counts">
-                    <!-- empty div causes problems when facets are imported with JS -->
-                    <xsl:text>&#160;</xsl:text>
-                    <xsl:for-each select="s:contentHitCounts/s:resource">
-                        <span id="{@resourceId}">
-                            <a href="{@resourceUrl}">
-                                <xsl:value-of select="@resourceHits" />
-                            </a>
-                        </span>
-                    </xsl:for-each>
-                </div>
                 <xsl:if test="/s:resources/s:contentHitCounts/s:resource[contains(@resourceId,'pubmed')]">
                     <span id="showPubMedStrategies">true</span>
                 </xsl:if>
@@ -111,7 +100,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }">
+        <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }"     start="{/doc/r:results/@start}" data-position="{position()}" >
             <div class="resource-detail">
                 <span class="primaryType">Article</span>
                 <div>

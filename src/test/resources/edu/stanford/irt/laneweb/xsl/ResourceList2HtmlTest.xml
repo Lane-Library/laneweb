@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <resources xmlns="http://lane.stanford.edu/resources/1.0" size="2" start="0" length="2" page="0" pages="1">
   <query>music</query>
-  <contentHitCounts>
-    <resource resourceId="pubmed" resourceHits="16847" resourceUrl="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford"/>
-    <resource resourceId="scopus" resourceHits="69876" resourceUrl="http://www.scopus.com/search/submit/quick.url?src=s&amp;origin=resultslist&amp;searchtext=music&amp;x=14&amp;y=11"/>
-    <resource resourceId="pubmed_systematicreviews" resourceHits="264" resourceUrl="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music+AND+systematic%5Bsb%5D+AND+%22humans%22%5Bmesh%5D&amp;holding=f1000%2CF1000M&amp;otool=Stanford"/>
-    <resource resourceId="pubmed_clinicaltrial" resourceHits="1256" resourceUrl="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music+AND+clinical+trial%5Bpt%5D&amp;holding=f1000%2CF1000M&amp;otool=Stanford"/>
-  </contentHitCounts>
-  <result score="75" type="searchContent">
-    <resourceId>pubmed</resourceId>
-    <resourceName>PubMed</resourceName>
-    <resourceUrl>http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford</resourceUrl>
-    <resourceHits>16847</resourceHits>
-    <id>pubmed_content_26</id>
-    <contentId>PMID:25195623</contentId>
-    <title><keyword>Music</keyword>al rhythm discrimination explains individual differences in grammar skills in children.</title>
-    <pub-author>Gordon RL, Shivers CM, Wieland EA, Kotz SA, Yoder PJ, Devin McAuley J.</pub-author>
-    <url>http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623</url>
-    <pub-text>Dev Sci. 2014 Sep 7</pub-text>
-    <description>description</description>
-  </result>
   <result score="62" type="eresource">
     <id>bib-301866</id>
     <recordId>301866</recordId>

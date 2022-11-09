@@ -2,7 +2,7 @@
     margin-top: 0;
 }
 
-.tooltips, #search-content-counts, #showPubMedStrategies {
+.tooltips, #showPubMedStrategies {
     display: none;
 }
 

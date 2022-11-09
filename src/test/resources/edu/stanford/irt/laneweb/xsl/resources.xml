@@ -6,31 +6,7 @@
    <body>
       <h2>Search Results</h2>
       <ul class="lwSearchResults">
-         <li class="resource" data-sid="PMID:25195623" data-index="1">
-            <div class="resource-detail">
-               <span class="primaryType">Article</span>
-               <div>
-                  <a class="primaryLink"
-                      href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623">
-                     <strong>Music</strong>al rhythm discrimination explains individual differences in grammar skills in children.</a>
-               </div>
-               <div class="author">Gordon RL, Shivers CM, Wieland EA, Kotz SA, Yoder PJ, Devin McAuley J.</div>
-               <div class="citation">Dev Sci. 2014 Sep 7</div>
-               <div class="resultInfo">
-                  <span class="descriptionTrigger searchContent no-bookmarking"/>
-               </div>
-               <div class="description">description</div>
-               <span class="pmid">
-                  <a href="https://pubmed.ncbi.nlm.nih.gov/25195623/?otool=stanford">
-            PMID:25195623</a>
-               </span>
-               <div class="sourceInfo">
-                  <span>Source: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford">PubMed - 16,847 </a>
-                  </span>
-               </div>
-            </div>
-         </li>
-         <li class="resource" data-sid="bib-301866" data-index="2">
+         <li class="resource" data-sid="bib-301866" data-index="1">
             <div class="resource-detail">
                <span class="primaryType">Book</span>
                <div>
@@ -86,7 +62,7 @@
                </div>
             </div>
          </li>
-         <li class="resource" data-sid="bib-123"  data-index="3">
+         <li class="resource" data-sid="bib-123" data-index="2">
             <div class="resource-detail">
                <span class="primaryType">Book</span>
                <div>
@@ -143,19 +119,5 @@
             </div>
          </li>
       </ul>
-      <div id="search-content-counts"> <span id="pubmed">
-            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music&amp;holding=f1000%2CF1000M&amp;otool=Stanford">16847</a>
-         </span>
-         <span id="scopus">
-            <a href="http://www.scopus.com/search/submit/quick.url?src=s&amp;origin=resultslist&amp;searchtext=music&amp;x=14&amp;y=11">69876</a>
-         </span>
-         <span id="pubmed_systematicreviews">
-            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music+AND+systematic%5Bsb%5D+AND+%22humans%22%5Bmesh%5D&amp;holding=f1000%2CF1000M&amp;otool=Stanford">264</a>
-         </span>
-         <span id="pubmed_clinicaltrial">
-            <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;term=music+AND+clinical+trial%5Bpt%5D&amp;holding=f1000%2CF1000M&amp;otool=Stanford">1256</a>
-         </span>
-      </div>
-      <span id="showPubMedStrategies">true</span>
    </body>
 </html>
