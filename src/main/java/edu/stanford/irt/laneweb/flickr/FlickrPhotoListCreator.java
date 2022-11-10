@@ -26,15 +26,6 @@ public class FlickrPhotoListCreator {
 
     private static final String URL_FORMAT = "https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&user_id=40390680@N08&api_key=%s&per_page=500&format=json&nojsoncallback=1&page=%%d";
 
-    private ObjectMapper objectMapper;
-
-    private String urlFormat;
-
-    public FlickrPhotoListCreator(final String apiKey, final String urlFormat, final ObjectMapper objectMapper) {
-        this.urlFormat = String.format(urlFormat, apiKey);
-        this.objectMapper = objectMapper;
-    }
-
     public static void main(final String[] args) {
         try {
             new FlickrPhotoListCreator(args[0], URL_FORMAT, new ObjectMapper()).printList(System.out);
@@ -42,6 +33,15 @@ public class FlickrPhotoListCreator {
             LoggerFactory.getLogger(FlickrPhotoListCreator.class).error(e.getMessage(), e);
             System.exit(1);
         }
+    }
+
+    private ObjectMapper objectMapper;
+
+    private String urlFormat;
+
+    public FlickrPhotoListCreator(final String apiKey, final String urlFormat, final ObjectMapper objectMapper) {
+        this.urlFormat = String.format(urlFormat, apiKey);
+        this.objectMapper = objectMapper;
     }
 
     public void printList(final PrintStream out) throws IOException {
@@ -54,9 +54,9 @@ public class FlickrPhotoListCreator {
     }
 
     private String buildString(final Map<String, String> m) {
-        return new StringBuilder(String.format(PAGE, m.get("owner"), m.get("id"))).append(',')
+        return new StringBuilder(String.format(PAGE, m.get("owner"), m.get("id"))).append('\t')
                 .append(String.format(THUMBNAIL, m.get("farm"), m.get("server"), m.get("id"), m.get("secret")))
-                .toString();
+                .append('\t').append(m.get("title")).toString();
     }
 
     private Collection<Map<String, String>> getPhotoMapsForPage(final int page) throws IOException {

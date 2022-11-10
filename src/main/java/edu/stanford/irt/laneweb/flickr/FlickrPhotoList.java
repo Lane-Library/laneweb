@@ -12,11 +12,11 @@ public class FlickrPhotoList extends ArrayList<FlickrPhoto> {
 
     private static final long serialVersionUID = 1L;
 
-    private static Function<String, String[]> split = (final String s) -> s.split(",");
+    private static Function<String, String[]> split = (final String s) -> s.split("\t");
 
     public FlickrPhotoList(final InputStream input) throws IOException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-            br.lines().map(split).forEach((final String[] s) -> add(new FlickrPhoto(s[0], s[1])));
+            br.lines().map(split).forEach((final String[] s) -> add(new FlickrPhoto(s[0], s[1], s[2])));
         }
     }
 }

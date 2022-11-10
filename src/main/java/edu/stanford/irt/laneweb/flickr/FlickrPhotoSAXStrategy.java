@@ -30,6 +30,7 @@ public class FlickrPhotoSAXStrategy extends AbstractXHTMLSAXStrategy<List<Flickr
             startAnchor(xmlConsumer, photo.getPage());
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute("", "src", "src", "CDATA", photo.getThumbnail());
+            atts.addAttribute("", "alt", "alt", "CDATA", photo.getTitle());
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "img", atts);
             XMLUtils.endElement(xmlConsumer, XHTML_NS, "img");
             endAnchor(xmlConsumer);
