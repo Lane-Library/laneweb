@@ -61,7 +61,7 @@
 
     L.on("tracker:trackableEvent", function(event) {
         window.gtag('event', event.category, {
-            'event_ation': event.action,
+            'event_action': event.action,
             'event_label': event.label,
             'event_value': event.value
         });
