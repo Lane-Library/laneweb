@@ -10,11 +10,14 @@
             <action date="2022-11-06" dev="alainb" issue="LANEWEB-10955" type="update">
                Update dimension properties for GA4
             </action>
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11054" type="fix">
+                Images without a text alternative on history center banner
+            </action>
             <action date="2022-11-10" dev="ryanmax" issue="LANEWEB-11053" type="fix">
                	Libguide list shows incorrect tooltips
             </action>
-            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11054" type="fix">
-                Images without a text alternative on history center banner
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11052" type="fix">
+            	Search result clicks are misreported in Google Analytics
             </action>
         </release>
     	<release date="2022-11-07" version="3.11.22" description="bug fix and update release">
