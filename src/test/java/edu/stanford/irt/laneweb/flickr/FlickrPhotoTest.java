@@ -11,7 +11,7 @@ public class FlickrPhotoTest {
 
     @Before
     public void setUp() {
-        this.photo = new FlickrPhoto("page", "thumbnail");
+        this.photo = new FlickrPhoto("page", "thumbnail", "title");
     }
 
     @Test
@@ -22,5 +22,10 @@ public class FlickrPhotoTest {
     @Test
     public void testGetThumbnail() {
         assertEquals("thumbnail", this.photo.getThumbnail());
+    }
+
+    @Test
+    public void testGetTitle() {
+        assertEquals("title", this.photo.getTitle());
     }
 }
