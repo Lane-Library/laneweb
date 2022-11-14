@@ -6,11 +6,22 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2022-11-07" version="3.11.23" description="bug fix and update release">
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-10955" type="update">
+               Update dimension properties for GA4
+            </action>
+            <action date="2022-11-10" dev="ryanmax" issue="LANEWEB-11053" type="fix">
+               	Libguide list shows incorrect tooltips
+            </action>
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11054" type="fix">
+                Images without a text alternative on history center banner
+            </action>
+        </release>
     	<release date="2022-11-07" version="3.11.22" description="bug fix and update release">
             <action date="2022-05-06" dev="alainb" issue="LANEWEB-10961" type="update">
                 Migrate from Universal Analytics to GA 4
             </action>
-            <action date="2022-10-28" dev="ryanmax" issue="LANEWEB-11046" type="fix">
+            <action date="2022-11-11" dev="ryanmax" issue="LANEWEB-11046" type="fix">
                	Bookmark edge case: user logged out but on /favorites.html page
             </action>
             <action date="2022-11-06" dev="alainb" issue="LANEWEB-11048" type="fix">
