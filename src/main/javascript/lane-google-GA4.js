@@ -28,7 +28,7 @@
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
     L.Get.script("https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID, {
         onSuccess: function() {
-            var model = L.Model,
+            var model = L.Model, bookmark,
                 ipGroup = model.get(model.IPGROUP),
                 auth =  model.get(model.AUTH),
                 dimensions = new Map();
@@ -46,6 +46,7 @@
                 dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
                 if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
                     dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
+                    bookmark = auth;
                 }
             }
 
@@ -53,7 +54,7 @@
                 'custom_map': dimensions
             });
 
-            gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': auth });
+            gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': bookmark });
 
 
         }
