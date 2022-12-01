@@ -23,13 +23,13 @@
             <s:result type="searchContent"/>
         </x:context>
         <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
-            <li class="resource" data-sid=""><div class="resource-detail">
+            <li class="resource" data-sid="" data-index=""><div class="resource-detail">
             <span class="primaryType">Article</span><div><a class="primaryLink"
              href="" /></div><div class="sourceInfo"><span>Source: <a href=""> - NaN </a></span></div></div></li>
         </x:expect>
     </x:scenario>
     
-<!-- disable test while work in print holdings revisions
+
     <x:scenario label="Scenario for testing template with match 's:result[@type='eresource']">
         <x:context>
             <s:result type="eresource">
@@ -38,21 +38,17 @@
             </s:result>
         </x:context>
         <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
-            <li class="resource" data-sid="">
-            <span class="primaryType"/>
-            <div class="resultInfo">
-            </div>
-            <div class="sourceInfo no-bookmarking" >
-               <span></span>
-               <span class="permalink">
-                  <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/foo/12345">
-                     <i class="fa fa-link fa-rotate-90"/> Get shareable link</a>
-               </span>
-            </div>
-        </li>
+     	<li  class="resource"
+         data-sid=""
+         data-index=""><div class="resource-detail"><span class="primaryType" /><div><a class="primaryLink"
+             href=""
+             title="" /></div></div><div class="bookcover-container" /><div class="more-detail-container"><i class="fa-solid fa-ellipsis fa-xl" /><div class="sourceInfo no-bookmarking"><div class="permalink"><a title="click to copy a shareable link to this record"
+                href="https://lane.stanford.edu/view/foo/12345"><i class="fa-solid fa-link fa-rotate-180" />
+                    Get Shareable Link
+                </a></div><div /></div></div></li>
         </x:expect>
     </x:scenario>
--->
+
 
     <x:scenario label="Scenario for testing template with match 's:recordType">
         <x:context>
@@ -74,47 +70,17 @@
         </x:expect>
     </x:scenario>
 
-<!-- disable test while work in print holdings revisions
+
     <x:scenario label="Scenario for testing template with match 's:link">
         <x:context>
             <s:link/>
             <s:link><s:label>label</s:label><s:url>url</s:url><s:link-text>link-text</s:link-text><s:publisher>publisher</s:publisher></s:link>
         </x:context>
         <x:expect label="secondary links should go in a div without Also available: ">
-            <div>
-               <a class="primaryLink"
-                   href=""
-                   title="" />
-            </div><div class="resultInfo">
-               <span> : <i>publisher</i>
-               </span>
-               <span>
-                  <a href="url"
-                       title="label">link-text</a>
-               </span>
-            </div>
+           <div  class="resultInfo"><span> : <i>publisher</i></span><span class="linkText"><a href="url"
+           title="label">link-text</a></span></div>
         </x:expect>
     </x:scenario>
--->
-
-<!-- disable test while work in print holdings revisions
-    <x:scenario label="Scenario for testing template with match 's:link[@type = 'impactFactor']">
-        <x:context>
-            <s:link><s:url>url</s:url></s:link>
-            <s:link type="lane-impactFactor"><s:url>url</s:url></s:link>
-        </x:context>
-        <x:expect label="s:link should become a link with the s:url as href and Impact Factor as text inside a div">
-            <div>
-                <a class="primaryLink"
-                    href="url"
-                    title="" />
-            </div>
-            <span>
-                <a href="url">Impact Factor</a>
-            </span>
-        </x:expect>
-    </x:scenario>
--->
 
     <x:scenario label="Scenario for testing template with match 's:primaryType">
         <x:context>
