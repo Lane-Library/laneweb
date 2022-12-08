@@ -237,6 +237,7 @@ li.active .description {
 
 .versionText {
     opacity: 0.75;
+    margin-right: 10px;
 }
 
 .requestIt {
