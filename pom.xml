@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>120</version>
+        <version>121</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.11.25-SNAPSHOT</version>
@@ -217,7 +217,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>9.0.0</version>
+            <version>9.1.0</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -281,7 +281,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.2.1.RELEASE</version>
+            <version>6.2.2.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -312,7 +312,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.68</version>
+            <version>9.0.69</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -337,7 +337,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
+            <version>4.5.14</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
