@@ -18,7 +18,7 @@ public class TrendsConfigurationTest {
 
     @Test
     public void testBookmarkTrendsReporter() throws UnknownHostException {
-        assertNotNull(this.configuration.bookmarkTrendsReporter(null));
+        assertNotNull(this.configuration.bookmarkTrendsReporter(null, null, null));
     }
 
     @Test

@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
+import edu.stanford.irt.laneweb.trends.googleA4.GoogleA4Tracker;
 
 public class BookmarkTrendsReporterTest {
 
@@ -17,22 +18,24 @@ public class BookmarkTrendsReporterTest {
     private BookmarkTrendsReporter reporter;
 
     private GoogleTracker tracker;
+    
+    private GoogleA4Tracker ga4tracker;
 
     @Before
     public void setUp() throws Exception {
         this.bookmarkService = mock(BookmarkService.class);
         this.tracker = mock(GoogleTracker.class);
-        this.reporter = new BookmarkTrendsReporter(this.bookmarkService, this.tracker, "localhost");
+        this.ga4tracker = mock(GoogleA4Tracker.class);
+        this.reporter = new BookmarkTrendsReporter(this.bookmarkService, this.tracker, this.ga4tracker, "localhost");
     }
 
     @Test
     public final void testReportCount() throws Exception {
-        expect(this.bookmarkService.getRowCount()).andReturn(10).times(2);
+        expect(this.bookmarkService.getRowCount()).andReturn(10);
         this.tracker.trackEvent("/bookmarks", "laneTrends:bookmark", "localhost", "dailyUserCount", 10);
-        this.tracker.trackEvent("/bookmarks", "laneTrends:bookmark", "localhost", "dailyUserCount", 10);
-        replay(this.tracker, this.bookmarkService);
+        this.ga4tracker.trackEvent("/bookmarks", "laneTrends:bookmark", "localhost", "dailyUserCount", 10);
+        replay(this.tracker, this.ga4tracker, this.bookmarkService);
         this.reporter.reportCount();
-        this.reporter.reportCount();
-        verify(this.tracker, this.bookmarkService);
+        verify(this.tracker, this.ga4tracker, this.bookmarkService);
     }
 }
