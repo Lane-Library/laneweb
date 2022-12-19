@@ -6,18 +6,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2022-12-19" version="3.11.26" description="bug fix and update release">
+            <action date="2022-12-15" dev="alainb" issue="LANEWEB-11066" type="update">
+        		To report laneTrends:bookmark to GA4
+            </action>
+        </release>
     	<release date="2022-12-12" version="3.11.25" description="bug fix and update release">
-            <action date="2022-12-08" dev="ryanmax" issue="LANEWEB-10963" type="fix">
+            <action date="2022-12-08" dev="ryanmax" issue="LANEWEB-11063" type="fix">
         		Missing space between two words in search display
             </action>
         </release>
     	<release date="2022-12-05" version="3.11.24" description="bug fix and update release">
-            <action date="2022-11-06" dev="alainb" issue="LANEWEB-10961" type="fix">
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11061" type="fix">
         		The same total for auth and bookmark in the GA4 dimension
             </action>
         </release>
     	<release date="2022-11-28" version="3.11.23" description="bug fix and update release">
-            <action date="2022-11-06" dev="alainb" issue="LANEWEB-10955" type="update">
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11055" type="update">
                Update dimension properties for GA4
             </action>
             <action date="2022-11-06" dev="alainb" issue="LANEWEB-11054" type="fix">
@@ -31,7 +36,7 @@
             </action>
         </release>
     	<release date="2022-11-07" version="3.11.22" description="bug fix and update release">
-            <action date="2022-05-06" dev="alainb" issue="LANEWEB-10961" type="update">
+            <action date="2022-05-06" dev="alainb" issue="LANEWEB-11061" type="update">
                 Migrate from Universal Analytics to GA 4
             </action>
             <action date="2022-11-11" dev="ryanmax" issue="LANEWEB-11046" type="fix">
