@@ -574,6 +574,7 @@
                                 <include>validation-min.js</include>
                                 <include>holdings-toggle-min.js</include>
                                 <include>table-hide-empty-columns-min.js</include>
+                                <include>zotero-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
