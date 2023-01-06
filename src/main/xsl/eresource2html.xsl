@@ -24,8 +24,8 @@
     <!-- transforms eresource bib result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <li class="resource" data-sid="{s:id}" data-index="{ position() -1}">
-            <div class="resource-detail"> 
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>
+            <div class="resource-detail">
             <span class="primaryType">
             	<xsl:apply-templates select="s:primaryType"/>
             </span>
