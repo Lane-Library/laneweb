@@ -6,6 +6,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2023-01-09" version="3.11.27" description="bug fix and update release">
+            <action date="2023-01-06" dev="ryanmax" issue="LANEWEB-11068" type="add">
+                Basic Lane Search integration with Zotero
+            </action>
+            <action date="2023-01-06" dev="ryanmax" issue="LANEWEB-11069" type="fix">
+                version text alignment
+            </action>
+        </release>
         <release date="2022-12-19" version="3.11.26" description="bug fix and update release">
             <action date="2022-12-15" dev="alainb" issue="LANEWEB-11066" type="update">
                 To report laneTrends:bookmark to GA4
