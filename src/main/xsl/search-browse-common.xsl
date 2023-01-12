@@ -180,6 +180,31 @@
         </xsl:choose>
     </xsl:function>
 
+    <xsl:function name="f:maybe-add-bcids-attribute">
+        <xsl:param name="eresource" />
+        <xsl:variable name="isxns">
+            <xsl:if test="$eresource/s:isbns">
+                <xsl:for-each select="$eresource/s:isbns">
+                    <xsl:text>isbn-</xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text>,</xsl:text>
+                </xsl:for-each>
+            </xsl:if>
+            <xsl:if test="$eresource/s:issns">
+                <xsl:for-each select="$eresource/s:issns">
+                    <xsl:text>issn-</xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text>,</xsl:text>
+                </xsl:for-each>
+            </xsl:if>
+        </xsl:variable>
+        <xsl:if test="$isxns != ''">
+            <xsl:attribute name="data-bcids">
+                <xsl:value-of select="replace($isxns,',$','')"/>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:function>
+
     <xsl:function name="f:maybe-add-doi-attribute">
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:doi[1]">

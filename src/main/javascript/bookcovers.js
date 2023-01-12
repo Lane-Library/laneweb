@@ -6,19 +6,24 @@
     // div nodes that have class bookcover.
     var view = function(bookImageNodes) {
 
-            // an object that maps bookcover ids (bcids and bibids) to img nodes
+            // an object that maps bookcover ids (bcids) to img nodes
             var imageMap = {};
 
             // initialize the imageMap
+            // add bcids (isxns) and bcid (record id)
+            // bcid goes last to prioritize isxn over record-id-based lookups
             bookImageNodes.forEach(function(imageNode) {
-                var bcid = imageNode.dataset.bcid;
+                var bcids = imageNode.dataset.bcids ? imageNode.dataset.bcids.split(',') : [],
+                    bcid = imageNode.dataset.bcid;
+                // course reserves and equipment records will have a data-bibid (change to data-bcid?)
                 if (bcid === undefined && imageNode.dataset.bibid) {
                     bcid = "bib-" + imageNode.dataset.bibid;
                 }
-                if (bcid !== undefined) {
+                bcids.push(bcid);
+                bcids.forEach(function(bcid) {
                     imageMap[bcid] = imageMap[bcid] || [];
                     imageMap[bcid].push(imageNode);
-                }
+                });
             });
 
             // make a couple of view functions available
@@ -32,8 +37,7 @@
                     for (bcid in imageMap) {
                         if (imageMap.hasOwnProperty(bcid)) {
                             for (i = 0; i < imageMap[bcid].length; i++) {
-                                if (!imageMap[bcid][i].requested && viewport.nearView(imageMap[bcid][i],3)) {
-                                    imageMap[bcid][i].requested = true;
+                                if (viewport.nearView(imageMap[bcid][i],3)) {
                                     imagesForUpdate.push(bcid);
                                     break;
                                 }
@@ -60,7 +64,7 @@
                     }
                 }
             };
-        }(document.querySelectorAll(".bookcover")),
+        }(document.querySelectorAll(".bookcover[data-bcids]")),
 
         // communicates with the server to get bookcover thumbnail urls for bcids
         bookcoverService = function() {

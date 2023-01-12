@@ -38,6 +38,8 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
             maybeCreateElement(xmlConsumer, Resource.AUTHOR, eresource.getPublicationAuthorsText());
             maybeCreateElement(xmlConsumer, Resource.PUBLICATION_TEXT, eresource.getPublicationText());
             maybeCreateElement(xmlConsumer, "doi", eresource.getDois());
+            maybeCreateElement(xmlConsumer, "isbns", eresource.getIsbns());
+            maybeCreateElement(xmlConsumer, "issns", eresource.getIssns());
             for (Link link : eresource.getLinks()) {
                 handleLink(xmlConsumer, link);
             }
