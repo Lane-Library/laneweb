@@ -186,7 +186,7 @@
 
             <div class="bookcover-container">
                 <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
-                    <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}">
+                    <div class="bookcover">
                         <xsl:copy-of select="f:maybe-add-bcids-attribute(.)" />
                     </div>
                 </xsl:if>

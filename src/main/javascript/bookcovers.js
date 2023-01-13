@@ -10,16 +10,12 @@
             var imageMap = {};
 
             // initialize the imageMap
-            // add bcids (isxns) and bcid (record id)
-            // bcid goes last to prioritize isxn over record-id-based lookups
             bookImageNodes.forEach(function(imageNode) {
-                var bcids = imageNode.dataset.bcids ? imageNode.dataset.bcids.split(',') : [],
-                    bcid = imageNode.dataset.bcid;
+                var bcids = imageNode.dataset.bcids ? imageNode.dataset.bcids.split(',') : [];
                 // course reserves and equipment records will have a data-bibid (change to data-bcid?)
-                if (bcid === undefined && imageNode.dataset.bibid) {
-                    bcid = "bib-" + imageNode.dataset.bibid;
+                if (imageNode.dataset.bibid) {
+                    bcids.push("bib-" + imageNode.dataset.bibid);
                 }
-                bcids.push(bcid);
                 bcids.forEach(function(bcid) {
                     imageMap[bcid] = imageMap[bcid] || [];
                     imageMap[bcid].push(imageNode);
@@ -64,7 +60,7 @@
                     }
                 }
             };
-        }(document.querySelectorAll(".bookcover[data-bcids]")),
+        }(document.querySelectorAll(".bookcover[data-bcids],.bookcover[data-bibid]")),
 
         // communicates with the server to get bookcover thumbnail urls for bcids
         bookcoverService = function() {

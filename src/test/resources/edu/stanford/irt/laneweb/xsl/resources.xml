@@ -33,7 +33,7 @@
                </div>
             </div>
             <div class="bookcover-container">
-               <div class="bookcover" data-bcid="bib-301866"/>
+               <div class="bookcover" data-bcids="bib-301866"/>
             </div>
             <div class="more-detail-container">
                <i class="fa-solid fa-ellipsis fa-xl"/>
@@ -89,7 +89,7 @@
                </div>
             </div>
             <div class="bookcover-container">
-               <div class="bookcover" data-bcid="bib-123"/>
+               <div class="bookcover" data-bcids="bib-123"/>
             </div>
             <div class="more-detail-container">
                <i class="fa-solid fa-ellipsis fa-xl"/>
