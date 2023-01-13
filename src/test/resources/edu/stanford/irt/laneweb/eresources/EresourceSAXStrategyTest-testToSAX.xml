@@ -9,6 +9,8 @@
    <total>10</total>
    <available>5</available>
    <doi>doi</doi>
+   <isbn>isbn</isbn>
+   <issn>issn</issn>
    <link type="normal">
       <label>label</label>
       <link-text>link-text</link-text>
