@@ -180,6 +180,31 @@
         </xsl:choose>
     </xsl:function>
 
+    <xsl:function name="f:maybe-add-bcids-attribute">
+        <xsl:param name="eresource" />
+        <xsl:variable name="bcids">
+            <xsl:if test="$eresource/s:isbn">
+                <xsl:for-each select="$eresource/s:isbn">
+                    <xsl:text>isbn-</xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text>,</xsl:text>
+                </xsl:for-each>
+            </xsl:if>
+            <xsl:if test="$eresource/s:issn">
+                <xsl:for-each select="$eresource/s:issn">
+                    <xsl:text>issn-</xsl:text>
+                    <xsl:value-of select="."/>
+                    <xsl:text>,</xsl:text>
+                </xsl:for-each>
+            </xsl:if>
+            <!-- record id last to prioritize isxn lookup in bookcovers.js -->
+            <xsl:value-of select="concat($eresource/s:recordType,'-',$eresource/s:recordId)"/>
+        </xsl:variable>
+        <xsl:attribute name="data-bcids">
+            <xsl:value-of select="$bcids"/>
+        </xsl:attribute>
+    </xsl:function>
+
     <xsl:function name="f:maybe-add-doi-attribute">
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:doi[1]">
