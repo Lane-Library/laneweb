@@ -85,8 +85,7 @@
         } else {
             window.gtag('config', GA_MEASUREMENT_ID, {
                 'page_title': event.title,
-                'page_location': event.href,
-                'page_path': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
+                'page_location': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
             })
 
         }
