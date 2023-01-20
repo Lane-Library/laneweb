@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>11.4</version>
+            <version>12.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -308,7 +308,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.70</version>
+            <version>9.0.71</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -348,7 +348,7 @@
          <dependency>
           <groupId>com.google.code.gson</groupId>
           <artifactId>gson</artifactId>
-          <version>2.10</version>
+          <version>2.10.1</version>
         </dependency>
     </dependencies>
     <build>
