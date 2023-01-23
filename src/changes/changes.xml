@@ -6,6 +6,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-01-23" version="3.11.28" description="bug fix and update release">
+            <action date="2023-01-10" dev="ryanmax" issue="LANEWEB-11070" type="add">
+                Support direct issn and isbn lookups in Bookcovers app
+            </action>
+            <action date="2023-01-13" dev="ryanmax" issue="LANEWEB-11072" type="update">
+                Remove Grand Rounds processing from laneweb
+            </action>
+            <action date="2023-01-20" dev="alainb" issue="LANEWEB-11082" type="fix">
+                ONSITE page view not added to GA4
+            </action>
+        </release>
         <release date="2023-01-09" version="3.11.27" description="bug fix and update release">
             <action date="2023-01-06" dev="ryanmax" issue="LANEWEB-11068" type="add">
                 Basic Lane Search integration with Zotero
