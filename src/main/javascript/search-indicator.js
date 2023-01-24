@@ -27,7 +27,9 @@
          * @static
          */
         hide: function() {
-            indicatorNode.classList.remove(SEARCH_INDICATOR_ACTIVE);
+			if(indicatorNode){
+            	indicatorNode.classList.remove(SEARCH_INDICATOR_ACTIVE);
+            }
         }
     };
 
