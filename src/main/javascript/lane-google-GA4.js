@@ -51,7 +51,7 @@
             }
 
             gtag('config', GA_MEASUREMENT_ID, {
-				'debug_mode':true,
+				//'debug_mode':true,
                 'custom_map': dimensions
             });
 
