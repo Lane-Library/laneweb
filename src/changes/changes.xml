@@ -6,6 +6,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-01-30" version="3.11.29" description="bug fix and update release">
+            <action date="2023-01-10" dev="alainb" issue="LANEWEB-11082" type="fix">
+               ONSITE page view not added to GA4
+            </action>
+            <action date="2023-01-30" dev="alainb" issue="LANEWEB-11083" type="update">
+               Remove Image Search functionality from LaneWeb after 1/31/2023
+            </action>
+        </release>
     	<release date="2023-01-23" version="3.11.28" description="bug fix and update release">
             <action date="2023-01-10" dev="ryanmax" issue="LANEWEB-11070" type="add">
                 Support direct issn and isbn lookups in Bookcovers app
