@@ -26,7 +26,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
-import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
 @EnableWebMvc
@@ -38,13 +37,9 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
 
     private RedirectProcessor redirectProcessor;
 
-    private SolrImageService solrImageService;
-
-    public LanewebMvcConfigurer(final ObjectMapper objectMapper, final RedirectProcessor redirectProcessor,
-            final SolrImageService solrImageService) {
+    public LanewebMvcConfigurer(final ObjectMapper objectMapper, final RedirectProcessor redirectProcessor) {
         this.objectMapper = objectMapper;
         this.redirectProcessor = redirectProcessor;
-        this.solrImageService = solrImageService;
     }
 
     @Override
@@ -52,7 +47,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(new PersistentLoginHandlerInterceptor()).addPathPatterns("/secure/**",
                 "/redirect/cme/**");
         registry.addInterceptor(redirectHandlerInterceptor());
-        registry.addInterceptor(new SearchImageInterceptor(this.solrImageService)).addPathPatterns("/search.html");
+       
     }
 
     @Override

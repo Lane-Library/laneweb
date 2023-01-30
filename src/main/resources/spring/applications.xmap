@@ -37,14 +37,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="search/image" type="wildcard">
-                <map:generate type="search-image"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="search/admin/image" type="wildcard">
-                <map:generate type="admin-search-image"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- search/content/html returns xhtmlized clinical search content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">

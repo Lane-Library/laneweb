@@ -73,7 +73,6 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "lane-google.js",
             "lane-google-GA4.js",
             "lane-popup.js",
-            "lane-search-images.js",
             "lane-tooltips.js",
             "lane-spellcheck.js",
             "description-toggle.js",

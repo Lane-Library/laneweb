@@ -483,7 +483,6 @@
                                 <include>bookmarks-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
-                                <include>search-image-min.css</include>
                                 <include>classes-min.css</include>
                                 <include>shc-portal-min.css</include>
                                 <include>menu-min.css</include>
@@ -517,6 +516,9 @@
                                 <include>menu-min.js</include>
                                 <include>navigation-min.js</include>
                                 <include>model-min.js</include>
+                                <include>lane-tracking-min.js</include>
+                                <include>lane-google-GA4-min.js</include>
+                                <include>lane-google-min.js</include>
                                 <include>guides-min.js</include>
                                 <include>link-info-min.js</include>
                                 <include>lane-ie-min.js</include>
@@ -543,11 +545,7 @@
                                 <include>bookmark-animation-min.js</include>
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
-                                <include>lane-tracking-min.js</include>
-                                <include>lane-google-GA4-min.js</include>
-                                <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
-                                <include>lane-search-images-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>description-toggle-min.js</include>

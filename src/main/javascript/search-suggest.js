@@ -36,8 +36,6 @@ if (document.querySelector(".search-form"))  {
                         limit;
                     if (source.match(/^(all|catalog)/)) {
                         limit = "er-mesh";
-                    } else if (source.match(/^images/)) {
-                        limit = "mesh";
                     } else {
                         limit = "";
                     }
