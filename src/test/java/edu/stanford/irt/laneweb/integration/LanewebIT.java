@@ -130,11 +130,6 @@ public class LanewebIT {
                 .andExpect(header().string("location", "/help/me/index.html"));
     }
 
-    @Test
-    public void testSearchImage() throws Exception {
-        this.mockMvc
-                .perform(get("/apps/search/image?q=elephant&source=cc-images-all").servletPath("/apps/search/image"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_XML));
-    }
+  
 
 }
