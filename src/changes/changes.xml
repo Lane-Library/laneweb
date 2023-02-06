@@ -6,6 +6,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-01-06" version="3.11.30" description="bug fix and update release">
+            <action date="2023-01-03" dev="alainb" issue="LANEWEB-11090" type="update">
+              Update contacts CSS
+            </action>
+        </release>
     	<release date="2023-01-30" version="3.11.29" description="bug fix and update release">
             <action date="2023-01-10" dev="alainb" issue="LANEWEB-11082" type="fix">
                ONSITE page view not added to GA4
