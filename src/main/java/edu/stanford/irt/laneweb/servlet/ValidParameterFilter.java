@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
  * This is a Filter that responds with a 400 response if there is an invalid parameter present. It was created to stop
  * robots from making multiple requests for expensive resources with various bogus parameters.
  */
-@WebFilter("/biomed-resources/*")
+@WebFilter({ "/biomed-resources/*", "/search.html" })
 public class ValidParameterFilter extends AbstractLanewebFilter {
 
     private static class ParameterMapEntryValidator implements Validator<Entry<String, String[]>> {
@@ -46,6 +46,18 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("template", valid);
             this.parameterValidators.put("source", valid);
             this.parameterValidators.put("id", new ParameterValueValidator("id", Pattern.compile("^\\d+$")));
+            // search.html
+            this.parameterValidators.put("facet", valid);
+            this.parameterValidators.put("facets",
+                    new ParameterValueValidator("facets", Pattern.compile("^[a-z].+[\"\\]]$")));
+            this.parameterValidators.put("laneSpellCorrected", valid);
+            this.parameterValidators.put("sort",
+                    new ParameterValueValidator("sort", Pattern.compile("((title_sort|date|year) (asc|desc),?)+$")));
+            this.parameterValidators.put("track", valid);
+            this.parameterValidators.put("p", valid);
+            this.parameterValidators.put("i", valid);
+            this.parameterValidators.put("c", valid);
+            this.parameterValidators.put("o", valid);
             // next three get put into google search results
             this.parameterValidators.put("ved", valid);
             this.parameterValidators.put("sa", valid);
@@ -98,9 +110,8 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
         public Validity isValid(final String value) {
             if (this.pattern.matcher(value).matches()) {
                 return Validity.VALID;
-            } else {
-                return new Validity(false, value + " is not a valid value for " + this.name);
             }
+            return new Validity(false, value + " is not a valid value for " + this.name);
         }
     }
 
