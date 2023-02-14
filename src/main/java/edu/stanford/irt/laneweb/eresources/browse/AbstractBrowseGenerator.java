@@ -16,7 +16,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
-    protected static final String BASE_BROWSE_QUERY = "advanced:true recordType:bib AND (isRecent:1 OR isLaneConnex:1)";
+    protected static final String BASE_BROWSE_QUERY = "advanced:true recordType:bib AND isRecent:1";
 
     // the default cache expiration time, 20 minutes
     private static final long DEFAULT_EXPIRES = Duration.ofMinutes(20).toMillis();
