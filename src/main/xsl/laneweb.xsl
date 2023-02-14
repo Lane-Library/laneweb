@@ -91,10 +91,6 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="source-prefix">
-        <xsl:value-of select="substring-before($source,'-')"/>
-    </xsl:variable>
-
     <xsl:variable name="search-source">
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/clinical')">clinical-all</xsl:when>
