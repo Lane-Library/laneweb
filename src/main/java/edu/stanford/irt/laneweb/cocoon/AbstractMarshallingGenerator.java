@@ -15,7 +15,7 @@ public abstract class AbstractMarshallingGenerator extends AbstractGenerator {
 
     private Marshaller marshaller;
 
-    public AbstractMarshallingGenerator(final Marshaller marshaller) {
+    protected AbstractMarshallingGenerator(final Marshaller marshaller) {
         this.marshaller = marshaller;
     }
 

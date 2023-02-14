@@ -33,7 +33,7 @@ public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
     private Validity validity;
 
-    public AbstractBrowseGenerator(final String componentType, final SolrService solrService) {
+    protected AbstractBrowseGenerator(final String componentType, final SolrService solrService) {
         this.componentType = componentType;
         this.solrService = solrService;
     }

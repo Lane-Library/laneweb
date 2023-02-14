@@ -8,7 +8,7 @@ public abstract class AbstractSolrSearchResult<T> {
 
     private String query;
 
-    public AbstractSolrSearchResult(final String query, final Page<T> page) {
+    protected AbstractSolrSearchResult(final String query, final Page<T> page) {
         this.query = query;
         this.page = page;
     }

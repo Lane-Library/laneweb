@@ -12,7 +12,7 @@ public abstract class SessionParameterDataBinder<T extends Serializable> impleme
 
     private String parameterName;
 
-    public SessionParameterDataBinder(final String modelKey, final String parameterName) {
+    protected SessionParameterDataBinder(final String modelKey, final String parameterName) {
         this.modelKey = modelKey;
         this.parameterName = parameterName;
     }
