@@ -103,6 +103,7 @@
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="contains($path,'/lanecatalog')">catalog-all</xsl:when>
             <xsl:when test="contains($path,'/picosearch')">clinical-all</xsl:when>
+            <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
