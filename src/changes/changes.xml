@@ -6,6 +6,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-01-06" version="3.11.31" description="bug fix and update release">
+            <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11096" type="update">
+    			Requests with invalid data cause unnecessary errors and resource consumption          
+            </action>
+            <action date="2023-10-22" dev="ryanmax" issue="LANEWEB-11047" type="update">
+              	Bookmark edge case: user gets to /favorites.html but has no bookmarks
+            </action>
+            <action date="2023-02-14" dev="ryanmax" issue="LANEWEB-11095" type="update">
+              	Update browse criteria for resource browse pages
+            </action>
+            <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11097" type="fix">
+              	Search drop-down doesn't retain state
+            </action>
+            <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11098" type="fix">
+              	Suggestions not visible or selectable on clinical search
+            </action>
+        </release>
     	<release date="2023-01-06" version="3.11.30" description="bug fix and update release">
             <action date="2023-01-03" dev="alainb" issue="LANEWEB-11090" type="update">
               Update contacts CSS
