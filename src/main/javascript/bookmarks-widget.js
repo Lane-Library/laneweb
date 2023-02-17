@@ -151,10 +151,12 @@
         _showManageBookmarks : function() {
             var displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li"),
                 manageBookmarks = document.querySelector(".manageBookmarks");
-            if (manageBookmarks && items.size() > displayLimit) {
+            if (manageBookmarks && items.size() == 0) {
                     manageBookmarks.style.display = 'block';
-            } 
-            if (manageBookmarks && items.size() < displayLimit) {
+                    manageBookmarks.textContent = 'Add a Bookmark';
+            } else if (manageBookmarks && items.size() > displayLimit) {
+                    manageBookmarks.style.display = 'block';
+            } else if (manageBookmarks && items.size() < displayLimit) {
                     manageBookmarks.style.display = 'none';
             } 
         }
