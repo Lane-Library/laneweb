@@ -277,7 +277,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.2.2.RELEASE</version>
+            <version>6.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -338,7 +338,7 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.4</version>
+            <version>1.5</version>
         </dependency>
         <dependency>
           <groupId>commons-validator</groupId>
