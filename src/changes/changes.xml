@@ -6,6 +6,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-02-27" version="3.11.32" description="bug fix and update release">
+            <action date="2023-02-23" dev="ryanmax" issue="LANEWEB-11102" type="update">
+				Sort by options not visible on Lane Catalog results
+            </action>
+        </release>
     	<release date="2023-01-06" version="3.11.31" description="bug fix and update release">
             <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11096" type="update">
     			Requests with invalid data cause unnecessary errors and resource consumption          
