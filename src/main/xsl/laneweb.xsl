@@ -91,31 +91,15 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="source-prefix">
-        <xsl:value-of select="substring-before($source,'-')"/>
-    </xsl:variable>
-
     <xsl:variable name="search-source">
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
-            <xsl:when test="$source">
-                <xsl:choose>
-                    <!-- various -images-all source parameters get images-all -->
-                    <xsl:when test="ends-with($source, 'images-all')">images-all</xsl:when>
-                    <xsl:when test="string-length($source-prefix) &gt; 0">
-                        <xsl:value-of select="concat($source-prefix,'-all')"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$source"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
             <xsl:when test="contains($path,'/lanecatalog')">catalog-all</xsl:when>
             <xsl:when test="contains($path,'/picosearch')">clinical-all</xsl:when>
-            <xsl:when test="contains($path,'/bioimagesearch')">images-all</xsl:when>
+            <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -254,7 +238,7 @@
 
 
     <!-- add active to class to search form for search help pages -->
-    <xsl:template match="h:form[@class='search-form' and matches($path,'/(pico|lane|bioimage)search.html')]/@class">
+    <xsl:template match="h:form[@class='search-form' and matches($path,'/(pico|lane)search.html')]/@class">
         <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
     </xsl:template>
 
@@ -352,20 +336,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- if an image search, change the search select option value to the source of the request tab -->
-    <xsl:template match="h:option[@value='images-all']/@value">
-        <xsl:choose>
-            <xsl:when test="contains($source, '-images-all')">
-                <xsl:attribute name="value">
-                    <xsl:value-of select="$source"/>
-                </xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:copy-of select="."/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
+    
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 
 

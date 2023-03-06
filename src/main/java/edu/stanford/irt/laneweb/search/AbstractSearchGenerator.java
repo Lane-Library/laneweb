@@ -14,7 +14,7 @@ public abstract class AbstractSearchGenerator<T> extends AbstractGenerator {
 
     private SAXStrategy<T> saxStrategy;
 
-    public AbstractSearchGenerator(final SAXStrategy<T> saxStrategy) {
+    protected AbstractSearchGenerator(final SAXStrategy<T> saxStrategy) {
         this.saxStrategy = saxStrategy;
     }
 

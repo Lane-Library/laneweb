@@ -34,7 +34,7 @@ public class FlickrPhotoSAXStrategyTest {
 
     @Test
     public void testToSAX() throws IOException {
-        this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail")), this.xmlConsumer);
+        this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail", "title")), this.xmlConsumer);
         assertEquals(this.xmlConsumer.getExpectedResult(this, "FlickrPhotoSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
     }
@@ -49,7 +49,7 @@ public class FlickrPhotoSAXStrategyTest {
         x.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(x);
-        this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail")), x);
+        this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail", "title")), x);
     }
 
     @Test(expected = LanewebException.class)

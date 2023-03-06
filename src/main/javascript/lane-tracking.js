@@ -8,14 +8,9 @@
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
                 var trackingData = {},
-                    list = link.closest(".lwSearchResults"),
-                    searchResults =  list.querySelectorAll("li"),
-                    pageStart = document.querySelector("#pageStart"),
-                    clickedLinkPosition = Array.prototype.indexOf.call(searchResults, link.closest("li")) +1,
+                    
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
-                    // pageStart is the value in the pageStart span or 0 if its not there.
-	                pageStart = pageStart ? (pageStart.value -1) * searchResults.length : 0 ;
-	                trackingData.value = clickedLinkPosition + pageStart;
+	                trackingData.value = link.closest("li").dataset['index'];
 	                trackingData.label = link.textContent;
 	                if (searchTerms) {
 	                    trackingData.category = "lane:searchResultClick";
@@ -183,7 +178,7 @@
             },
             isTrackableLocalClick = function(link) {
                 var isTrackable, pathname = link.pathname;
-                // rely on page tracking for \.html$ and \/$pages
+                // rely on page tracking for \.html$ and \/$pages 
                 if ((/\.html$/).test(pathname) || (/libguides/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
                     //all others fall through to trackable

@@ -6,9 +6,12 @@ public class FlickrPhoto {
 
     private String thumbnail;
 
-    public FlickrPhoto(final String page, final String thumbnail) {
+    private String title;
+
+    public FlickrPhoto(final String page, final String thumbnail, final String title) {
         this.page = page;
         this.thumbnail = thumbnail;
+        this.title = title;
     }
 
     public String getPage() {
@@ -17,5 +20,9 @@ public class FlickrPhoto {
 
     public String getThumbnail() {
         return this.thumbnail;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 }

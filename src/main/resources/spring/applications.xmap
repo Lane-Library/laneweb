@@ -37,14 +37,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="search/image" type="wildcard">
-                <map:generate type="search-image"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="search/admin/image" type="wildcard">
-                <map:generate type="admin-search-image"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- search/content/html returns xhtmlized clinical search content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">
@@ -137,28 +129,6 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="noncaching">
-        <map:match pattern="grandrounds-recent/*/*.html" type="wildcard">
-            <map:generate type="grandrounds">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="limit" value="{2}"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/grandrounds2.xsl">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="year" value="{2} Recent"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="grandrounds/*/*.html" type="wildcard">
-            <map:generate type="grandrounds">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="year" value="{2}"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/grandrounds2.xsl">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="year" value="{2}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match type="wildcard" pattern="equipment.xml">
             <map:generate type="equipment"/>
             <map:serialize type="xml"/>

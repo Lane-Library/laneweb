@@ -29,8 +29,8 @@ public class FlickrPhotoListCreatorTest {
 
     private FlickrPhotoListCreator creator;
 
-    private String expected = "https://www.flickr.com/photos/OWNER/ID,https://farmFARM.staticflickr.com/SERVER/ID_SECRET_m.jpg\n"
-            + "https://www.flickr.com/photos/OWNER/ID,https://farmFARM.staticflickr.com/SERVER/ID_SECRET_m.jpg\n";
+    private String expected = "https://www.flickr.com/photos/OWNER/ID\thttps://farmFARM.staticflickr.com/SERVER/ID_SECRET_m.jpg\ttitle\n"
+            + "https://www.flickr.com/photos/OWNER/ID\thttps://farmFARM.staticflickr.com/SERVER/ID_SECRET_m.jpg\ttitle\n";
 
     private ObjectMapper objectMapper;
 
@@ -52,6 +52,7 @@ public class FlickrPhotoListCreatorTest {
         photoMap.put("farm", "FARM");
         photoMap.put("server", "SERVER");
         photoMap.put("secret", "SECRET");
+        photoMap.put("title", "title");
         expect(this.objectMapper.readValue(isA(InputStream.class), isA(Class.class))).andReturn(Collections
                 .singletonMap("photos", Collections.singletonMap("photo", Collections.singletonList(photoMap))))
                 .times(2);

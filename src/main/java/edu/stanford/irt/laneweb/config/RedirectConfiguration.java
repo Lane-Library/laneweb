@@ -28,7 +28,6 @@ public class RedirectConfiguration {
         redirectMap.put("/lksc-print(?:.*)", "/help/lksc-print.html");
         redirectMap.put("/classes", "/classes-consult/laneclasses.html");
         redirectMap.put("/m", "/m/index.html");
-        redirectMap.put("/imagesearch.html", "/bioimagesearch.html");
         redirectMap.put("/beemap", "/beemap.html");
         redirectMap.put("/about/contact.html", "/contacts/index.html");
         redirectMap.put("/about/staff-dir.html", "/contacts/staff-dir.html");

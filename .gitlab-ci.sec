@@ -14,6 +14,6 @@
 #     --form protected=[yes|no]
 #     --form masked=[yes|no]
 
-# kaniko will take GOOGLE_APPLICATION_CREDENTIALS for gcr.io auth
+# kaniko will take GOOGLE_APPLICATION_CREDENTIALS for Artifact Registry auth
 GOOGLE_APPLICATION_CREDENTIALS  vault://${DOCKER_REGISTRY_PASSWORD_PATH}    --form variable_type=file
 

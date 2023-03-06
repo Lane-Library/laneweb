@@ -30,23 +30,31 @@
      
      <map:match pattern="all-guides" type="regexp">
         <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types[0]=1&amp;guide_types[1]=4&amp;guide_types[2]=3&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1652467900068"/>
-        <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl"/>
+        <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
+            <map:parameter name="type" value="all"/>
+        </map:transform>
         <map:serialize type="html5"/>
      </map:match>
      
      <map:match pattern="research-guide" type="wildcard">
            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=4&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
-           <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
+                <map:parameter name="type" value="research"/>
+            </map:transform>
            <map:serialize type="html5"/>
         </map:match>
       <map:match pattern="event-guide" type="wildcard">
            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=1&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
-           <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
+                <map:parameter name="type" value="event"/>
+            </map:transform>
            <map:serialize type="html5"/>
         </map:match>
          <map:match pattern="speciality-guide" type="wildcard">
            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=3&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
-           <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
+                <map:parameter name="type" value="speciality"/>
+            </map:transform>
            <map:serialize type="html5"/>
         </map:match>
    </map:pipeline>

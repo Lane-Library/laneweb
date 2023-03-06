@@ -6,12 +6,95 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="2022-11-07" version="3.11.22" description="bug fix and update release">
-            <action date="2022-05-06" dev="alainb" issue="LANEWEB-10961" type="update">
+    	<release date="2023-02-27" version="3.11.32" description="bug fix and update release">
+            <action date="2023-02-23" dev="ryanmax" issue="LANEWEB-11102" type="update">
+				Sort by options not visible on Lane Catalog results
+            </action>
+        </release>
+    	<release date="2023-01-06" version="3.11.31" description="bug fix and update release">
+            <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11096" type="update">
+    			Requests with invalid data cause unnecessary errors and resource consumption          
+            </action>
+            <action date="2023-10-22" dev="ryanmax" issue="LANEWEB-11047" type="update">
+              	Bookmark edge case: user gets to /favorites.html but has no bookmarks
+            </action>
+            <action date="2023-02-14" dev="ryanmax" issue="LANEWEB-11095" type="update">
+              	Update browse criteria for resource browse pages
+            </action>
+            <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11097" type="fix">
+              	Search drop-down doesn't retain state
+            </action>
+            <action date="2023-02-15" dev="ryanmax" issue="LANEWEB-11098" type="fix">
+              	Suggestions not visible or selectable on clinical search
+            </action>
+        </release>
+    	<release date="2023-01-06" version="3.11.30" description="bug fix and update release">
+            <action date="2023-01-03" dev="alainb" issue="LANEWEB-11090" type="update">
+              Update contacts CSS
+            </action>
+        </release>
+    	<release date="2023-01-30" version="3.11.29" description="bug fix and update release">
+            <action date="2023-01-10" dev="alainb" issue="LANEWEB-11082" type="fix">
+               ONSITE page view not added to GA4
+            </action>
+            <action date="2023-01-30" dev="alainb" issue="LANEWEB-11083" type="update">
+               Remove Image Search functionality from LaneWeb after 1/31/2023
+            </action>
+        </release>
+    	<release date="2023-01-23" version="3.11.28" description="bug fix and update release">
+            <action date="2023-01-10" dev="ryanmax" issue="LANEWEB-11070" type="add">
+                Support direct issn and isbn lookups in Bookcovers app
+            </action>
+            <action date="2023-01-13" dev="ryanmax" issue="LANEWEB-11072" type="update">
+                Remove Grand Rounds processing from laneweb
+            </action>
+            <action date="2023-01-20" dev="alainb" issue="LANEWEB-11082" type="fix">
+                ONSITE page view not added to GA4
+            </action>
+        </release>
+        <release date="2023-01-09" version="3.11.27" description="bug fix and update release">
+            <action date="2023-01-06" dev="ryanmax" issue="LANEWEB-11068" type="add">
+                Basic Lane Search integration with Zotero
+            </action>
+            <action date="2023-01-06" dev="ryanmax" issue="LANEWEB-11069" type="fix">
+                version text alignment
+            </action>
+        </release>
+        <release date="2022-12-19" version="3.11.26" description="bug fix and update release">
+            <action date="2022-12-15" dev="alainb" issue="LANEWEB-11066" type="update">
+                To report laneTrends:bookmark to GA4
+            </action>
+        </release>
+        <release date="2022-12-12" version="3.11.25" description="bug fix and update release">
+            <action date="2022-12-08" dev="ryanmax" issue="LANEWEB-11063" type="fix">
+                Missing space between two words in search display
+            </action>
+        </release>
+        <release date="2022-12-05" version="3.11.24" description="bug fix and update release">
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11061" type="fix">
+                The same total for auth and bookmark in the GA4 dimension
+            </action>
+        </release>
+        <release date="2022-11-28" version="3.11.23" description="bug fix and update release">
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11055" type="update">
+               Update dimension properties for GA4
+            </action>
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11054" type="fix">
+                Images without a text alternative on history center banner
+            </action>
+            <action date="2022-11-10" dev="ryanmax" issue="LANEWEB-11053" type="fix">
+                Libguide list shows incorrect tooltips
+            </action>
+            <action date="2022-11-06" dev="alainb" issue="LANEWEB-11052" type="fix">
+                Search result clicks are misreported in Google Analytics
+            </action>
+        </release>
+        <release date="2022-11-07" version="3.11.22" description="bug fix and update release">
+            <action date="2022-05-06" dev="alainb" issue="LANEWEB-11061" type="update">
                 Migrate from Universal Analytics to GA 4
             </action>
-            <action date="2022-10-28" dev="ryanmax" issue="LANEWEB-11046" type="fix">
-               	Bookmark edge case: user logged out but on /favorites.html page
+            <action date="2022-11-11" dev="ryanmax" issue="LANEWEB-11046" type="fix">
+                Bookmark edge case: user logged out but on /favorites.html page
             </action>
             <action date="2022-11-06" dev="alainb" issue="LANEWEB-11048" type="fix">
                 Classes icon formatting problems on small screen
@@ -51,13 +134,13 @@
             </action>
         </release>
         <release date="2022-10-10" version="3.11.18" description="bug fix and update release">
-            <action date="2022-10-05" dev="alainb" issue="LANEWEB-11028" type="delete">
+            <action date="2022-10-05" dev="alainb" issue="LANEWEB-11028" type="remove">
                 Remove info icon for Resource Type filter in Search
             </action>
             <action date="2022-10-05" dev="alainb" issue="LANEWEB-11029" type="fix">
                 Center "Did You Mean:" into the h2
             </action>
-            <action date="2022-1--06" dev="ryanmax" issue="LANEWEB-11030" type="delete">
+            <action date="2022-1--06" dev="ryanmax" issue="LANEWEB-11030" type="remove">
                 Remove Research Office Hours Link from homepage
             </action>
             <action date="2022-10-07" dev="ryanmax" issue="LANEWEB-11033" type="fix">

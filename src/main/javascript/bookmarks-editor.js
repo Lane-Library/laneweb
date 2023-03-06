@@ -52,6 +52,10 @@
             }
             this.set("editors", editors);
             this._syncDD();
+            // show add bookmarks if no bookmarks present
+            if (0 == items.size()) {
+                this.add();
+            }
         },
 
         /**

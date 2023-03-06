@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doc>
+	<results page="1" pages="27" size="521" start="1" end="20" total="521" xmlns="http://lane.stanford.edu/results/1.0">
+		<s:result score="75" type="searchContent"  xmlns:s="http://lane.stanford.edu/resources/1.0">
+			<s:resourceId>pubmed</s:resourceId>
+			<s:resourceName>PubMed</s:resourceName>
+			<s:resourceUrl>http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed</s:resourceUrl>
+			<s:resourceHits>16847</s:resourceHits>
+			<s:id>pubmed_content_26</s:id>
+			<s:contentId>PMID:25195623</s:contentId>
+			<s:title>
+				<keyword>Music</keyword>
+				skills in children.
+			</s:title>
+			<s:pub-author>Gordon RL</s:pub-author>
+			<s:url>http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623
+			</s:url>
+			<s:pub-text>Dev Sci. 2014 Sep 7</s:pub-text>
+			<s:description>description</s:description>
+		</s:result>
+
+		<s:result score="65" type="searchContent"  xmlns:s="http://lane.stanford.edu/resources/1.0">
+			<s:resourceId>uptodate</s:resourceId>
+			<s:resourceName>Uptodate</s:resourceName>
+			<s:resourceUrl>https://www.uptodate.com/contents/search?search=skin</s:resourceUrl>
+			<s:resourceHits>149</s:resourceHits>
+			<s:id>uptodate_content_3</s:id>
+			<s:title>Skin lesions in the newborn and infant</s:title>
+			<s:url>https://www.uptodate.com/contents/skin-lesions-in-the-newborn-and-infant?search=skin</s:url>
+		</s:result>
+		<s:result score="70" type="searchContent"  xmlns:s="http://lane.stanford.edu/resources/1.0">
+			<s:resourceId>pubmed_rct</s:resourceId>
+			<s:resourceName>PubMed Randomized Controlled Trials</s:resourceName>
+			<s:resourceUrl>https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term=skin+AND+(randomized+controlled+trial%5Bpt%5D+OR+controlled+clinical+trial%5Bpt%5D+OR+randomised%5Btw%5D+OR+randomized%5Btw%5D+OR+placebo%5Btw%5D+OR+drug+therapy%5Bsh%5D+OR+randomly%5Btw%5D+OR+trial%5Bti%5D+OR+groups%5Btw%5D+OR+%E2%80%9Cclinical+trials+as+topic%E2%80%9D%5Bmesh:noexp%5D+OR+%22Randomized+Controlled+Trials+as+Topic%22%5BMesh:NoExp%5D+OR+%E2%80%9Crandom+allocation%E2%80%9D%5Bmesh%5D+OR+%E2%80%9CDouble-Blind+Method%22%5BMesh%5D+OR+%E2%80%9Csingle-blind+method%E2%80%9D%5Bmesh%5D+OR+%E2%80%9Csingle-blind%E2%80%9D%5Btw%5D+OR+%E2%80%9Cdouble-blind%E2%80%9D%5Btw%5D)
+			</s:resourceUrl>
+			<s:resourceHits>179155</s:resourceHits>
+			<s:id>pubmed_rct_content_10</s:id>
+			<s:contentId>PMID:36335037</s:contentId>
+			<s:title>Radiation-induced skin </s:title>
+			<s:description>::INTRODUCTION##The purpose of this study is to
+				systematically review data</s:description>
+			<s:pub-author>Purswani JM,Tattersall IW, Gerber NK.</s:pub-author>
+			<s:url>http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed_rct&amp;id=pmid:36335037
+			</s:url>
+			<s:pub-text>Clin Breast Cancer. 2022 Oct 08</s:pub-text>
+		</s:result>
+	</results>
+	<html id="clinical-all" xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:r="http://lane.stanford.edu/results/1.0">
+		<ul class="lwSearchResults"></ul>
+	</html>
+</doc>

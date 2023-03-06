@@ -38,6 +38,7 @@
                         for(var i = 0; i < 6; i++) {
                             photos[i].image = new Image();
                             photos[i].image.src = photos[i].thumbnail;
+                            photos[i].image.alt = photos[i].title;
                         }
                         setTimeout(function() {
                             flickrPhotos.style.opacity = 0;

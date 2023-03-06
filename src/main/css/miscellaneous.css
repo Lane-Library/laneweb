@@ -249,3 +249,7 @@ em {
 .blur {
     filter: blur(4px);
 }
+
+.zotero-metadata {
+    display: none;
+}

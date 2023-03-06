@@ -51,8 +51,7 @@
             }
 
             gtag('config', GA_MEASUREMENT_ID, {
-				//'debug_mode':true,
-                'custom_map': dimensions
+			    'custom_map': dimensions
             });
 
             gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': bookmark });
@@ -85,9 +84,8 @@
             }
         } else {
             window.gtag('event', 'page_view', {
-                'page_location': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
+                'page_location':'/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
             })
-
         }
     });
 })();

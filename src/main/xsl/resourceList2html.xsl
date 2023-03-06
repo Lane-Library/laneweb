@@ -57,7 +57,7 @@
             </head>
             <body>
                 <h2>Search Results</h2>
-                <xsl:if test="number(@size) &gt; 1">
+                <xsl:if test="number(@size) &gt; 1 and matches($source,'^(all|catalog)')">
                     <xsl:call-template name="sortBy" />
                 </xsl:if>
                 <ul class="lwSearchResults">
@@ -69,17 +69,6 @@
                         <xsl:call-template name="paginationLinks" />
                     </div>
                 </xsl:if>
-                <div id="search-content-counts">
-                    <!-- empty div causes problems when facets are imported with JS -->
-                    <xsl:text>&#160;</xsl:text>
-                    <xsl:for-each select="s:contentHitCounts/s:resource">
-                        <span id="{@resourceId}">
-                            <a href="{@resourceUrl}">
-                                <xsl:value-of select="@resourceHits" />
-                            </a>
-                        </span>
-                    </xsl:for-each>
-                </div>
                 <xsl:if test="/s:resources/s:contentHitCounts/s:resource[contains(@resourceId,'pubmed')]">
                     <span id="showPubMedStrategies">true</span>
                 </xsl:if>
@@ -111,7 +100,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <li class="resource" data-sid="{s:contentId}">
+        <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }">
             <div class="resource-detail">
                 <span class="primaryType">Article</span>
                 <div>
@@ -148,7 +137,8 @@
 
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <li class="resource" data-sid="{s:id}">
+          
+        <li class="resource" data-sid="{s:id}" data-index="{/s:resources/@length * /s:resources/@page + position()}">
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)" />
             <xsl:if test="s:isAnExactMatch = 'true'">
                 <xsl:attribute name="class">resource exact-match-resource</xsl:attribute>
@@ -196,8 +186,8 @@
 
             <div class="bookcover-container">
                 <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
-                    <div class="bookcover" data-bcid="{s:recordType}-{s:recordId}">
-
+                    <div class="bookcover">
+                        <xsl:copy-of select="f:maybe-add-bcids-attribute(.)" />
                     </div>
                 </xsl:if>
                 <xsl:if test="s:primaryType = 'Article'">

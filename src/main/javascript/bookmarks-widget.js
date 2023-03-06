@@ -148,15 +148,19 @@
          * @method _showManageBookmarks()
          * @private;
          */
-        _showManageBookmarks : function() {
+        _showManageBookmarks: function() {
             var displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li"),
                 manageBookmarks = document.querySelector(".manageBookmarks");
-            if (manageBookmarks && items.size() > displayLimit) {
+            if (manageBookmarks) {
+                if (items.size() == 0) {
                     manageBookmarks.style.display = 'block';
-            } 
-            if (manageBookmarks && items.size() < displayLimit) {
+                    manageBookmarks.textContent = 'Add a Bookmark';
+                } else if (items.size() > displayLimit) {
+                    manageBookmarks.style.display = 'block';
+                } else if (items.size() < displayLimit) {
                     manageBookmarks.style.display = 'none';
-            } 
+                }
+            }
         }
     }, {
         ATTRS : {

@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
+import edu.stanford.irt.laneweb.trends.googleA4.GoogleA4Tracker;
 
 public class BookmarkTrendsReporter {
 
@@ -14,6 +15,8 @@ public class BookmarkTrendsReporter {
     private BookmarkService bookmarkService;
 
     private GoogleTracker googleTracker;
+    
+    private GoogleA4Tracker googleA4Tracker;
 
     private String localHostname;
 
@@ -22,13 +25,15 @@ public class BookmarkTrendsReporter {
      *            the bookmarkService to set
      * @param googleTracker
      *            the googleTracker to set
+     * @param googleA4Tracker 
      * @param localHostName
      *            the hostname
      */
     public BookmarkTrendsReporter(final BookmarkService bookmarkService, final GoogleTracker googleTracker,
-            final String localHostName) {
+            GoogleA4Tracker googleA4Tracker, final String localHostName) {
         this.bookmarkService = bookmarkService;
         this.googleTracker = googleTracker;
+        this.googleA4Tracker = googleA4Tracker;
         this.localHostname = localHostName;
     }
 
@@ -36,8 +41,9 @@ public class BookmarkTrendsReporter {
     @Scheduled(cron = "0 16 01 * * *")
     public void reportCount() {
         try {
-            this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", this.localHostname, "dailyUserCount",
-                    this.bookmarkService.getRowCount());
+        	int boobkemarkCount = this.bookmarkService.getRowCount();
+        	this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", this.localHostname, "dailyUserCount", boobkemarkCount);
+            this.googleA4Tracker.trackEvent("/bookmarks" , "laneTrends:bookmark", this.localHostname, "dailyUserCount" , boobkemarkCount);
         } catch (LanewebException e) {
             log.error(e.getMessage(), e);
         }

@@ -10,7 +10,7 @@ public abstract class AbstractMetasearchGenerator<T> extends AbstractSearchGener
 
     private MetaSearchService metaSearchService;
 
-    public AbstractMetasearchGenerator(final MetaSearchService metaSearchService, final SAXStrategy<T> saxStrategy) {
+    protected AbstractMetasearchGenerator(final MetaSearchService metaSearchService, final SAXStrategy<T> saxStrategy) {
         super(saxStrategy);
         this.metaSearchService = metaSearchService;
     }

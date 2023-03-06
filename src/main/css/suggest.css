@@ -25,6 +25,7 @@
     background-color: #f0f4f5;
     position: absolute;
     width: 100%;
+    color: black;
 }
 
 .yui3-aclist-item-active {
