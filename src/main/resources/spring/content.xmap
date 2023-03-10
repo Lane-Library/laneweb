@@ -116,7 +116,7 @@
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="classpath:/xsl/history-photos.xsl"/>
+                <map:transform type="joost" src="classpath:/xsl/history-photos.stx"/>
                 <map:transform type="saxon" src="classpath:/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
