@@ -9,11 +9,23 @@
 
     <xsl:param name="query"/>
 
-    <xsl:template match="/">
+    <!-- copy elements by default -->
+    <xsl:template match="child::node()">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- copy attributes by default -->
+    <xsl:template match="@*">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <xsl:template match="//rss/channel">
         <div class="history-photo-thumbs">
-            <xsl:apply-templates select="//rss/channel/item[position() &lt;= 10]"/>
+            <xsl:apply-templates select="//item[position() &lt;= 10]"/>
         </div>
-        <xsl:if test="count(//rss/channel/item) &gt;= 10">
+        <xsl:if test="count(//item) &gt;= 10">
             <div>
                 <a href="https://exhibits.stanford.edu/medhistory/catalog?f%5Bformat_main_ssim%5D%5B%5D=Image&amp;search_field=search&amp;q={$query}">More Images for <strong><xsl:value-of select="$query"/></strong><xsl:text> </xsl:text><i class="fa-solid fa-arrow-right"></i></a>
             </div>
