@@ -613,21 +613,21 @@ http://lane.stanford.edu/samples/button-css.html
     list-style: none;
 }
 
-.flickr-thumbs {
+.history-photo-thumbs {
     white-space: nowrap;
     overflow: auto;
     margin: 10px 0;
 }
 
-.flickr-thumbs a {
+.history-photo-thumbs a {
     margin-right: 5px;
 }
 
-.flickr-carousel {
+.history-photo-carousel {
     position: relative;
 }
 
-.flickr-photos {
+.history-photos {
     white-space: nowrap;
     overflow: hidden;
     margin-top: 12px;
@@ -635,27 +635,27 @@ http://lane.stanford.edu/samples/button-css.html
     opacity: 0;
 }
 
-.flickr-photos, .flickr-photos img {
+.hsitory-photos, .history-photos img {
     transition: opacity 1s;
 }
 
-.flickr-photos a {
+.history-photos a {
     display: inline-block;
     text-align: center;
     overflow: hidden;
 }
 
-.flickr-photos a:before {
+.history-photos a:before {
     content: '';
     margin-left: -100%;
 }
 
-.flickr-photos a:after {
+.history-photos a:after {
     content: '';
     margin-right: -100%;
 }
 
-.flickr-carousel-button {
+.history-photo-carousel-button {
     position: absolute;
     right: 0;
     bottom: 0;

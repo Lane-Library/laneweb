@@ -8,23 +8,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import edu.stanford.irt.laneweb.flickr.FlickrPhoto;
-import edu.stanford.irt.laneweb.flickr.FlickrPhotoListService;
+import edu.stanford.irt.laneweb.history.HistoryPhotoListService;
+import edu.stanford.irt.laneweb.history.HistoryPhoto;
 
 @Controller
-public class FlickrPhotoController {
+public class HistoryPhotoController {
 
     private static final int RANDOM_PHOTO_COUNT = 6;
 
-    private FlickrPhotoListService service;
+    private HistoryPhotoListService service;
 
-    public FlickrPhotoController(final FlickrPhotoListService service) {
+    public HistoryPhotoController(final HistoryPhotoListService service) {
         this.service = service;
     }
 
-    @GetMapping(value = "/apps/getFlickrPhotoList")
+    @GetMapping(value = "/apps/getHistoryPhotoList")
     @ResponseBody
-    public List<FlickrPhoto> getFlickrPhotoList(final HttpServletResponse response) {
+    public List<HistoryPhoto> getHistoryPhotoList(final HttpServletResponse response) {
         response.setHeader("Cache-Control", "no-cache");
         return this.service.getRandomPhotos(RANDOM_PHOTO_COUNT);
     }

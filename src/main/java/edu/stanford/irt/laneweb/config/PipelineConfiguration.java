@@ -84,7 +84,6 @@ public class PipelineConfiguration {
     @Scope("prototype")
     public Transformer debugTransformer() {
         List<String> disallowToDisplay = new ArrayList<>();
-        disallowToDisplay.add(Model.FLICKR_TOKEN);
         disallowToDisplay.add(Model.BROWZINE_TOKEN);
         return new DebugTransformer(disallowToDisplay);
     }

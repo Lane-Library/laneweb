@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
@@ -14,21 +14,21 @@ import java.io.UncheckedIOException;
 
 import org.junit.Test;
 
-public class FlickrPhotoListTest {
+public class HistoryPhotoListTest {
 
     @Test
-    public void testFlickrPhotoList() throws IOException {
-        assertEquals(877, new FlickrPhotoList(getClass().getResourceAsStream("flickr-photos.txt")).size());
+    public void testHistoryPhotoList() throws IOException {
+        assertEquals(835, new HistoryPhotoList(getClass().getResourceAsStream("history-photos.txt")).size());
     }
 
     @Test
-    public void testFlickrPhotoListIOException() throws IOException {
+    public void testHistoryPhotoListIOException() throws IOException {
         InputStream input = mock(InputStream.class);
         expect(input.read(isA(byte[].class), eq(0), eq(8192))).andThrow(new IOException());
         input.close();
         replay(input);
         try {
-            new FlickrPhotoList(input);
+            new HistoryPhotoList(input);
         } catch (UncheckedIOException e) {
         }
         verify(input);

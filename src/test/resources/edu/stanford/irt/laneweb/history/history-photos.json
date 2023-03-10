@@ -1,0 +1,1486 @@
+{
+    "links": {
+        "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image",
+        "DELETED-next": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026page=2",
+        "last": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026page=70"
+    },
+    "meta": {
+        "pages": {
+            "current_page": 1,
+            "next_page": 2,
+            "prev_page": null,
+            "total_pages": 70,
+            "limit_value": 12,
+            "offset_value": 0,
+            "total_count": 835,
+            "first_page?": true,
+            "last_page?": false
+        }
+    },
+    "data": [
+        {
+            "id": "bk516vb8666",
+            "type": "image",
+            "attributes": {
+                "title": "Emblems and Insignia",
+                "title_full_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#title_full_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Emblems and Insignia",
+                        "label": "Title"
+                    }
+                },
+                "publisher_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#publisher_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "[publisher not identified]",
+                        "label": "Publisher"
+                    }
+                },
+                "topic_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#topic_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Aesculapian staff, Perforated grillwork, Photo File Box 9.12, and Redwood frond",
+                        "label": "Topic"
+                    }
+                },
+                "subject_other_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#subject_other_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Stanford University., School of Medicine.",
+                        "label": "Subject"
+                    }
+                },
+                "physical": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#physical",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "1 photograph : black \u0026amp; white",
+                        "label": "Physical Description"
+                    }
+                },
+                "pub_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#pub_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "xxu and Place of publication not identified]",
+                        "label": "Publication Info"
+                    }
+                },
+                "date_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#date_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "[1996]",
+                        "label": "Date"
+                    }
+                },
+                "place_created_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#place_created_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Place of publication not identified]",
+                        "label": "Place created"
+                    }
+                },
+                "imprint_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#imprint_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Place of publication not identified] : [publisher not identified], [1996]",
+                        "label": "Imprint"
+                    }
+                },
+                "genre_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#genre_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "graphic",
+                        "label": "Genre"
+                    }
+                },
+                "full_text_tesimv": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#full_text_tesimv",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "",
+                        "label": "Sample matches in document text"
+                    }
+                },
+                "format_main_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666#format_main_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Image",
+                        "label": "Resource type"
+                    }
+                }
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/bk516vb8666"
+            }
+        },
+        {
+            "id": "qt402pj1793",
+            "type": "image",
+            "attributes": {
+                "title": "Roy Barnett Cohn with Rodney Rau Beard, David Glick, Sidney Raffel",
+                "title_full_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#title_full_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Roy Barnett Cohn with Rodney Rau Beard, David Glick, Sidney Raffel",
+                        "label": "Title"
+                    }
+                },
+                "publisher_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#publisher_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "[publisher not identified]",
+                        "label": "Publisher"
+                    }
+                },
+                "topic_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#topic_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Physicians, David Glick, Rodney Rau Beard, Roy Barnett Cohn, School of Medicine, Sidney Raffel, Stanford University, and Surgery",
+                        "label": "Topic"
+                    }
+                },
+                "subject_other_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#subject_other_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Beard, Rodney Rau, 1911-2005, Cohn, Roy B. (Roy Barnett), 1909-1999, Glick, David, 1908-2000, and Raffel, Sidney, 1911-2013",
+                        "label": "Subject"
+                    }
+                },
+                "physical": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#physical",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "1 photograph : color.",
+                        "label": "Physical Description"
+                    }
+                },
+                "pub_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#pub_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "cau and Place of publication not identified]",
+                        "label": "Publication Info"
+                    }
+                },
+                "date_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#date_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "[1991?], 1991-",
+                        "label": "Date"
+                    }
+                },
+                "place_created_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#place_created_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Place of publication not identified]",
+                        "label": "Place created"
+                    }
+                },
+                "imprint_display": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#imprint_display",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Place of publication not identified] : [publisher not identified], [1991?] 1991-",
+                        "label": "Imprint"
+                    }
+                },
+                "genre_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#genre_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "graphic",
+                        "label": "Genre"
+                    }
+                },
+                "full_text_tesimv": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#full_text_tesimv",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "",
+                        "label": "Sample matches in document text"
+                    }
+                },
+                "format_main_ssim": {
+                    "id": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793#format_main_ssim",
+                    "type": "document_value",
+                    "attributes": {
+                        "value": "Image",
+                        "label": "Resource type"
+                    }
+                }
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/qt402pj1793"
+            }
+        }
+    ],
+    "included": [
+        {
+            "type": "facet",
+            "id": "format_main_ssim",
+            "attributes": {
+                "label": "Resource type",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Image",
+                            "value": "Image",
+                            "hits": 835
+                        },
+                        "links": {
+                            "remove": "/medhistory/catalog.json"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/format_main_ssim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "pub_year_w_approx_isi",
+            "attributes": {
+                "label": "Date",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "1900",
+                            "value": "1900",
+                            "hits": 434
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1900"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1950",
+                            "value": "1950",
+                            "hits": 8
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1950"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1952",
+                            "value": "1952",
+                            "hits": 3
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1952"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1957",
+                            "value": "1957",
+                            "hits": 3
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1957"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1800",
+                            "value": "1800",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1800"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1929",
+                            "value": "1929",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1929"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1966",
+                            "value": "1966",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1966"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1968",
+                            "value": "1968",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1968"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1980",
+                            "value": "1980",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1980"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1889",
+                            "value": "1889",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1889"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1894",
+                            "value": "1894",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_w_approx_isi%5D%5B%5D=1894"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/pub_year_w_approx_isi.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "pub_year_no_approx_isi",
+            "attributes": {
+                "label": "Date (no approx)",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "1900",
+                            "value": "1900",
+                            "hits": 434
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1900"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1950",
+                            "value": "1950",
+                            "hits": 8
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1950"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1952",
+                            "value": "1952",
+                            "hits": 3
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1952"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1957",
+                            "value": "1957",
+                            "hits": 3
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1957"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1800",
+                            "value": "1800",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1800"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1929",
+                            "value": "1929",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1929"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1966",
+                            "value": "1966",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1966"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1968",
+                            "value": "1968",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1968"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1980",
+                            "value": "1980",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1980"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1889",
+                            "value": "1889",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1889"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1894",
+                            "value": "1894",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpub_year_no_approx_isi%5D%5B%5D=1894"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/pub_year_no_approx_isi.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "place_created_ssim",
+            "attributes": {
+                "label": "Place created",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Place of publication not identified]",
+                            "value": "Place of publication not identified]",
+                            "hits": 767
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bplace_created_ssim%5D%5B%5D=Place+of+publication+not+identified%5D"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "[Place of publication not identified]",
+                            "value": "[Place of publication not identified]",
+                            "hits": 62
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bplace_created_ssim%5D%5B%5D=%5BPlace+of+publication+not+identified%5D"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Los Altos, CA",
+                            "value": "Los Altos, CA",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bplace_created_ssim%5D%5B%5D=Los+Altos%2C+CA"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Place not identified]",
+                            "value": "Place not identified]",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bplace_created_ssim%5D%5B%5D=Place+not+identified%5D"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "[Place not identified]",
+                            "value": "[Place not identified]",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bplace_created_ssim%5D%5B%5D=%5BPlace+not+identified%5D"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "[San Francisco]",
+                            "value": "[San Francisco]",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bplace_created_ssim%5D%5B%5D=%5BSan+Francisco%5D"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/place_created_ssim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "pub_year_tisim",
+            "attributes": {
+                "label": "Date Range",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "1952",
+                            "value": "1952",
+                            "hits": 799
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1952"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1957",
+                            "value": "1957",
+                            "hits": 799
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1957"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1956",
+                            "value": "1956",
+                            "hits": 797
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1956"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1950",
+                            "value": "1950",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1950"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1951",
+                            "value": "1951",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1951"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1953",
+                            "value": "1953",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1953"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1954",
+                            "value": "1954",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1954"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1955",
+                            "value": "1955",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1955"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1958",
+                            "value": "1958",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1958"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1959",
+                            "value": "1959",
+                            "hits": 796
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1959"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1929",
+                            "value": "1929",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1929"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1941",
+                            "value": "1941",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1941"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1943",
+                            "value": "1943",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1943"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1944",
+                            "value": "1944",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1944"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1966",
+                            "value": "1966",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1966"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1968",
+                            "value": "1968",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1968"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1980",
+                            "value": "1980",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1980"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1981",
+                            "value": "1981",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1981"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1982",
+                            "value": "1982",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1982"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1983",
+                            "value": "1983",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1983"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "1984",
+                            "value": "1984",
+                            "hits": 790
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026range%5Bpub_year_tisim%5D%5B%5D=1984"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/pub_year_tisim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "language",
+            "attributes": {
+                "label": "Language",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "English",
+                            "value": "English",
+                            "hits": 3
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Blanguage%5D%5B%5D=English"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/language.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "author_person_facet",
+            "attributes": {
+                "label": "Author",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Stone, Edward Durell, 1902-1978",
+                            "value": "Stone, Edward Durell, 1902-1978",
+                            "hits": 9
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_person_facet%5D%5B%5D=Stone%2C+Edward+Durell%2C+1902-1978\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Borden, A. Gale.",
+                            "value": "Borden, A. Gale.",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_person_facet%5D%5B%5D=Borden%2C+A.+Gale.\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Cunningham, Imogen, 1883-1976",
+                            "value": "Cunningham, Imogen, 1883-1976",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_person_facet%5D%5B%5D=Cunningham%2C+Imogen%2C+1883-1976\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/author_person_facet.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "author_no_collector_ssim",
+            "attributes": {
+                "label": "Author (no Collectors)",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Stone, Edward Durell, 1902-1978",
+                            "value": "Stone, Edward Durell, 1902-1978",
+                            "hits": 9
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_no_collector_ssim%5D%5B%5D=Stone%2C+Edward+Durell%2C+1902-1978\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Borden, A. Gale.",
+                            "value": "Borden, A. Gale.",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_no_collector_ssim%5D%5B%5D=Borden%2C+A.+Gale.\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Cunningham, Imogen, 1883-1976",
+                            "value": "Cunningham, Imogen, 1883-1976",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_no_collector_ssim%5D%5B%5D=Cunningham%2C+Imogen%2C+1883-1976\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/author_no_collector_ssim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "publisher_ssim",
+            "attributes": {
+                "label": "Publisher",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "[publisher not identified]",
+                            "value": "[publisher not identified]",
+                            "hits": 832
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bpublisher_ssim%5D%5B%5D=%5Bpublisher+not+identified%5D"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/publisher_ssim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "topic_facet",
+            "attributes": {
+                "label": "Topic",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Physicians",
+                            "value": "Physicians",
+                            "hits": 277
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Physicians"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Surgery",
+                            "value": "Surgery",
+                            "hits": 230
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Surgery"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Stanford",
+                            "value": "Stanford",
+                            "hits": 221
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Stanford"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Stanford University",
+                            "value": "Stanford University",
+                            "hits": 205
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Stanford+University"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "School of Medicine",
+                            "value": "School of Medicine",
+                            "hits": 200
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=School+of+Medicine"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Stanford University., School of Medicine.",
+                            "value": "Stanford University., School of Medicine.",
+                            "hits": 185
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Stanford+University.%2C+School+of+Medicine."
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Gladys L. Goselin",
+                            "value": "Gladys L. Goselin",
+                            "hits": 128
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Gladys+L.+Goselin"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "World War (II : 1939-1945).",
+                            "value": "World War (II : 1939-1945).",
+                            "hits": 124
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=World+War+%28II+%3A+1939-1945%29."
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "59th Evacuation Hospital Stanford Unit",
+                            "value": "59th Evacuation Hospital Stanford Unit",
+                            "hits": 120
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=59th+Evacuation+Hospital+Stanford+Unit"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Roy B. Cohn",
+                            "value": "Roy B. Cohn",
+                            "hits": 120
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Roy+B.+Cohn"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Nurses",
+                            "value": "Nurses",
+                            "hits": 98
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Btopic_facet%5D%5B%5D=Nurses"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/topic_facet.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "geographic_facet",
+            "attributes": {
+                "label": "Region",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "San Francisco (California)",
+                            "value": "San Francisco (California)",
+                            "hits": 23
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=San+Francisco+%28California%29"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Fort Lewis (Washington (State))",
+                            "value": "Fort Lewis (Washington (State))",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=Fort+Lewis+%28Washington+%28State%29%29"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "France",
+                            "value": "France",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=France"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Guam",
+                            "value": "Guam",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=Guam"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Guerneville (California)",
+                            "value": "Guerneville (California)",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=Guerneville+%28California%29"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Japan",
+                            "value": "Japan",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=Japan"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Vienna (Austria)",
+                            "value": "Vienna (Austria)",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgeographic_facet%5D%5B%5D=Vienna+%28Austria%29"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/geographic_facet.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "author_other_facet",
+            "attributes": {
+                "label": "Organization (as author)",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Stanford Medical History Center",
+                            "value": "Stanford Medical History Center",
+                            "hits": 1
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bauthor_other_facet%5D%5B%5D=Stanford+Medical+History+Center\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/author_other_facet.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "genre_ssim",
+            "attributes": {
+                "label": "Genre",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "graphic",
+                            "value": "graphic",
+                            "hits": 835
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026f%5Bgenre_ssim%5D%5B%5D=graphic"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/genre_ssim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "collection_with_title",
+            "attributes": {
+                "label": "Collection",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "hf919mq6533-|-Gladys L. Goselin papers 1895-1975",
+                            "value": "hf919mq6533-|-Gladys L. Goselin papers 1895-1975",
+                            "hits": 128
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=hf919mq6533-%7C-Gladys+L.+Goselin+papers+1895-1975\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "wk893wq1954-|-[ Collection of photographs of Emile Holman]",
+                            "value": "wk893wq1954-|-[ Collection of photographs of Emile Holman]",
+                            "hits": 52
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=wk893wq1954-%7C-%5B+Collection+of+photographs+of+Emile+Holman%5D\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "qn269jk7253-|-Leo Leonidas Stanley papers, 1916-1950",
+                            "value": "qn269jk7253-|-Leo Leonidas Stanley papers, 1916-1950",
+                            "hits": 32
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=qn269jk7253-%7C-Leo+Leonidas+Stanley+papers%2C+1916-1950\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "kd326ph9316-|-Adolph Barkan papers, 1866-1923",
+                            "value": "kd326ph9316-|-Adolph Barkan papers, 1866-1923",
+                            "hits": 13
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=kd326ph9316-%7C-Adolph+Barkan+papers%2C+1866-1923\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "fk146vz6391-|-[ Collection of photographs of the Drs. Blumer]",
+                            "value": "fk146vz6391-|-[ Collection of photographs of the Drs. Blumer]",
+                            "hits": 7
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=fk146vz6391-%7C-%5B+Collection+of+photographs+of+the+Drs.+Blumer%5D\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "dm104ny0726-|-[ Collection of photographs of Dr. Thomas Addis]",
+                            "value": "dm104ny0726-|-[ Collection of photographs of Dr. Thomas Addis]",
+                            "hits": 5
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=dm104ny0726-%7C-%5B+Collection+of+photographs+of+Dr.+Thomas+Addis%5D\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "yt853xt1638-|-Ray Lyman Wilbur papers, 1913-1954",
+                            "value": "yt853xt1638-|-Ray Lyman Wilbur papers, 1913-1954",
+                            "hits": 5
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=yt853xt1638-%7C-Ray+Lyman+Wilbur+papers%2C+1913-1954\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "dq600bz2460-|-Leo Eloesser papers, 1906-1984",
+                            "value": "dq600bz2460-|-Leo Eloesser papers, 1906-1984",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bcollection_with_title%5D%5B%5D=dq600bz2460-%7C-Leo+Eloesser+papers%2C+1906-1984\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/collection_with_title.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "facet",
+            "id": "exhibit_medhistory_tags_ssim",
+            "attributes": {
+                "label": "Subject ",
+                "items": [
+                    {
+                        "attributes": {
+                            "label": "Women",
+                            "value": "Women",
+                            "hits": 179
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Women\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "World War II",
+                            "value": "World War II",
+                            "hits": 103
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=World+War+II\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Stanford Medicine buildings",
+                            "value": "Stanford Medicine buildings",
+                            "hits": 79
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Stanford+Medicine+buildings\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Class Photos",
+                            "value": "Class Photos",
+                            "hits": 51
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Class+Photos\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Cooper Medical College",
+                            "value": "Cooper Medical College",
+                            "hits": 21
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Cooper+Medical+College\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Asian Pacific Islanders",
+                            "value": "Asian Pacific Islanders",
+                            "hits": 15
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Asian+Pacific+Islanders\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Performance and the Arts",
+                            "value": "Performance and the Arts",
+                            "hits": 7
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Performance+and+the+Arts\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Blacks and African Americans",
+                            "value": "Blacks and African Americans",
+                            "hits": 4
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Blacks+and+African+Americans\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Lane Library",
+                            "value": "Lane Library",
+                            "hits": 3
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Lane+Library\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "Lucile Packard Children's Hospital",
+                            "value": "Lucile Packard Children's Hospital",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=Lucile+Packard+Children%27s+Hospital\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    },
+                    {
+                        "attributes": {
+                            "label": "World War I",
+                            "value": "World War I",
+                            "hits": 2
+                        },
+                        "links": {
+                            "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bexhibit_tags%5D%5B%5D=World+War+I\u0026f%5Bformat_main_ssim%5D%5B%5D=Image"
+                        }
+                    }
+                ]
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog/facet/exhibit_medhistory_tags_ssim.json?f%5Bformat_main_ssim%5D%5B%5D=Image"
+            }
+        },
+        {
+            "type": "search_field",
+            "id": "search",
+            "attributes": {
+                "label": "Everything"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026search_field=search"
+            }
+        },
+        {
+            "type": "search_field",
+            "id": "search_title",
+            "attributes": {
+                "label": "Title"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026search_field=search_title"
+            }
+        },
+        {
+            "type": "search_field",
+            "id": "search_author",
+            "attributes": {
+                "label": "Author/Contributor"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026search_field=search_author"
+            }
+        },
+        {
+            "type": "search_field",
+            "id": "subject_terms",
+            "attributes": {
+                "label": "Subject"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026search_field=subject_terms"
+            }
+        },
+        {
+            "type": "sort",
+            "id": "score desc, pub_year_isi desc, title_sort asc",
+            "attributes": {
+                "label": "relevance"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026sort=score+desc%2C+pub_year_isi+desc%2C+title_sort+asc"
+            }
+        },
+        {
+            "type": "sort",
+            "id": "pub_year_isi desc, title_sort asc",
+            "attributes": {
+                "label": "year (new to old)"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026sort=pub_year_isi+desc%2C+title_sort+asc"
+            }
+        },
+        {
+            "type": "sort",
+            "id": "pub_year_isi asc, title_sort asc",
+            "attributes": {
+                "label": "year (old to new)"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026sort=pub_year_isi+asc%2C+title_sort+asc"
+            }
+        },
+        {
+            "type": "sort",
+            "id": "author_sort asc, title_sort asc",
+            "attributes": {
+                "label": "author"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026sort=author_sort+asc%2C+title_sort+asc"
+            }
+        },
+        {
+            "type": "sort",
+            "id": "title_sort asc, pub_year_isi desc",
+            "attributes": {
+                "label": "title"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026sort=title_sort+asc%2C+pub_year_isi+desc"
+            }
+        },
+        {
+            "type": "sort",
+            "id": "publisher_ssi asc, pub_year_isi desc",
+            "attributes": {
+                "label": "publisher"
+            },
+            "links": {
+                "self": "https://exhibits.stanford.edu/medhistory/catalog.json?f%5Bformat_main_ssim%5D%5B%5D=Image\u0026sort=publisher_ssi+asc%2C+pub_year_isi+desc"
+            }
+        }
+    ]
+}

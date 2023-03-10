@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class FlickrPhotoSAXStrategy extends AbstractXHTMLSAXStrategy<List<FlickrPhoto>> {
+public class HistoryPhotoSAXStrategy extends AbstractXHTMLSAXStrategy<List<HistoryPhoto>> {
 
     @Override
-    public void toSAX(final List<FlickrPhoto> photos, final XMLConsumer xmlConsumer) {
+    public void toSAX(final List<HistoryPhoto> photos, final XMLConsumer xmlConsumer) {
         try {
             startHTMLDocument(xmlConsumer);
             startBody(xmlConsumer);
-            photos.stream().forEach((final FlickrPhoto p) -> toSAX(p, xmlConsumer));
+            photos.stream().forEach((final HistoryPhoto p) -> toSAX(p, xmlConsumer));
             endBody(xmlConsumer);
             endHTMLDocument(xmlConsumer);
         } catch (SAXException e) {
@@ -25,7 +25,7 @@ public class FlickrPhotoSAXStrategy extends AbstractXHTMLSAXStrategy<List<Flickr
         }
     }
 
-    private void toSAX(final FlickrPhoto photo, final XMLConsumer xmlConsumer) {
+    private void toSAX(final HistoryPhoto photo, final XMLConsumer xmlConsumer) {
         try {
             startAnchor(xmlConsumer, photo.getPage());
             AttributesImpl atts = new AttributesImpl();

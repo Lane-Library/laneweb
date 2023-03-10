@@ -13,29 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.flickr.FlickrPhotoListService;
+import edu.stanford.irt.laneweb.history.HistoryPhotoListService;
 
-public class FlickrPhotoControllerTest {
+public class HistoryPhotoControllerTest {
 
-    private FlickrPhotoController controller;
+    private HistoryPhotoController controller;
 
     private HttpServletResponse response;
 
-    private FlickrPhotoListService service;
+    private HistoryPhotoListService service;
 
     @Before
     public void setUp() {
-        this.service = mock(FlickrPhotoListService.class);
-        this.controller = new FlickrPhotoController(this.service);
+        this.service = mock(HistoryPhotoListService.class);
+        this.controller = new HistoryPhotoController(this.service);
         this.response = mock(HttpServletResponse.class);
     }
 
     @Test
-    public void testGetFlickrPhotoList() {
+    public void testGetHistoryPhotoList() {
         this.response.setHeader("Cache-Control", "no-cache");
         expect(this.service.getRandomPhotos(6)).andReturn(Collections.emptyList());
         replay(this.service, this.response);
-        assertEquals(Collections.emptyList(), this.controller.getFlickrPhotoList(this.response));
+        assertEquals(Collections.emptyList(), this.controller.getHistoryPhotoList(this.response));
         verify(this.service, this.response);
     }
 }

@@ -1,6 +1,6 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
-public class FlickrPhoto {
+public class HistoryPhoto {
 
     private String page;
 
@@ -8,7 +8,7 @@ public class FlickrPhoto {
 
     private String title;
 
-    public FlickrPhoto(final String page, final String thumbnail, final String title) {
+    public HistoryPhoto(final String page, final String thumbnail, final String title) {
         this.page = page;
         this.thumbnail = thumbnail;
         this.title = title;

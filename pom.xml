@@ -582,7 +582,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/javascript/history/lane-history.js</output>
                             <includes>
-                                <include>flickr-min.js</include>
+                                <include>history-photos-min.js</include>
                                 <include>../back-to-top-min.js</include>
                             </includes>
                         </aggregation>

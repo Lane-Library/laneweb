@@ -1,17 +1,17 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class FlickrPhotoTest {
+public class HistoryPhotoTest {
 
-    private FlickrPhoto photo;
+    private HistoryPhoto photo;
 
     @Before
     public void setUp() {
-        this.photo = new FlickrPhoto("page", "thumbnail", "title");
+        this.photo = new HistoryPhoto("page", "thumbnail", "title");
     }
 
     @Test
