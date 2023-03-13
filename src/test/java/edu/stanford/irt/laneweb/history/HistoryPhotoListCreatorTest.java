@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.LanewebException;
+
 public class HistoryPhotoListCreatorTest {
 
     private static final String UTF_8 = StandardCharsets.UTF_8.name();
@@ -28,6 +30,12 @@ public class HistoryPhotoListCreatorTest {
     public void setUp() {
         this.creator = new HistoryPhotoListCreator(getClass().getResource("history-photos.json").toExternalForm());
         this.photo = mock(HistoryPhoto.class);
+    }
+
+    @Test(expected = LanewebException.class)
+    public void testMain() {
+        String[] args = { "file:/foo/hm.txt" };
+        HistoryPhotoListCreator.main(args);
     }
 
     @Test

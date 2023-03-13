@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.stanford.irt.laneweb.LanewebException;
 
 public class HistoryPhotoListCreator {
 
@@ -23,11 +23,11 @@ public class HistoryPhotoListCreator {
     private static final String THUMBNAIL = PAGE + ".jpg";
 
     public static void main(final String[] args) {
+        String url = args.length == 1 ? args[0] : BASE_URL;
         try {
-            new HistoryPhotoListCreator(BASE_URL).printList(System.out);
+            new HistoryPhotoListCreator(url).printList(System.out);
         } catch (IOException | NullPointerException e) {
-            LoggerFactory.getLogger(HistoryPhotoListCreator.class).error(e.getMessage(), e);
-            System.exit(1);
+            throw new LanewebException(e);
         }
     }
 
