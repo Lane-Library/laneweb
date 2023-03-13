@@ -2,10 +2,23 @@
 <document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
     <properties>
-        <author email="ceyates@stanford.edu">Charles Yates</author>
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2023-03-13" version="3.11.33" description="bug fix and update release">
+            <action date="2023-03-02" dev="ryanmax" issue="LANEWEB-11103" type="fix">
+                Lane Catalog facet click doesn't do anything in Lane Catalog search
+            </action>
+            <action date="2023-03-09" dev="ryanmax" issue="LANEWEB-11100" type="fix">
+                Access Options and Direct to PDF icons not clickable
+            </action>
+            <action date="2023-03-10" dev="ryanmax" issue="LANEWEB-11106" type="update">
+                Change Medical History Center banner image source to SDR
+            </action>
+            <action date="2023-03-10" dev="ryanmax" issue="LANEWEB-11107" type="update">
+                Replace Flickr with SDR images for Medical History Center Federated Search
+            </action>
+        </release>
         <release date="2023-02-27" version="3.11.32" description="bug fix and update release">
             <action date="2023-02-23" dev="ryanmax" issue="LANEWEB-11102" type="update">
                 Sort by options not visible on Lane Catalog results

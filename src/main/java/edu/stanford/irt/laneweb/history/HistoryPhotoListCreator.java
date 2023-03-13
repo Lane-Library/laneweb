@@ -60,7 +60,7 @@ public class HistoryPhotoListCreator {
                 .append(String.format(THUMBNAIL, m.get("id"))).append('\t').append(title).toString();
     }
 
-    private Collection<Map<String, ?>> getPhotosFromMap(final Map result) {
-        return (List<Map<String, ?>>) result.get("data");
+    private Collection<Map<String, Object>> getPhotosFromMap(final Map result) {
+        return (List<Map<String, Object>>) result.get("data");
     }
 }
