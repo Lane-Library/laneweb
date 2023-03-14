@@ -2,7 +2,7 @@
     margin-top: 0;
 }
 
-.tooltips, #search-content-counts, #showPubMedStrategies {
+.tooltips {
     display: none;
 }
 
@@ -237,6 +237,11 @@ li.active .description {
 
 .versionText {
     opacity: 0.75;
+    margin: 0 10px;
+}
+
+span.versionText:first-child {
+    margin-left: 0;
 }
 
 .requestIt {

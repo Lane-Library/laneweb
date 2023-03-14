@@ -37,7 +37,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     private Validity validity;
 
-    public AbstractEresourcesGenerator(final String componentType, final SolrService solrService,
+    protected AbstractEresourcesGenerator(final String componentType, final SolrService solrService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
         this.componentType = componentType;
         this.solrService = solrService;

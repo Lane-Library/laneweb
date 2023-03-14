@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:r="http://lane.stanford.edu/results/1.0"
+       id="clinical-all">
+   <ul class="lwSearchResults">
+      <li class="resource" data-sid="PMID:25195623" data-index="1">
+         <div class="resource-detail">
+            <span class="primaryType">Article</span>
+            <div>
+               <a class="primaryLink"
+                   href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623&#xA;&#x9;&#x9;&#x9;">
+                  <keyword xmlns="http://lane.stanford.edu/results/1.0"
+                            xmlns:s="http://lane.stanford.edu/resources/1.0">Music</keyword>
+				skills in children.
+			</a>
+            </div>
+            <div class="author">Gordon RL</div>
+            <div class="citation">Dev Sci. 2014 Sep 7</div>
+            <div class="resultInfo">
+               <span class="descriptionTrigger searchContent no-bookmarking"/>
+            </div>
+            <div class="description">description</div>
+            <span class="pmid">
+               <a href="https://pubmed.ncbi.nlm.nih.gov/25195623/?otool=stanford">
+            PMID:25195623</a>
+            </span>
+            <div class="sourceInfo">
+               <span>Source: <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed">PubMed - 16,847 </a>
+               </span>
+            </div>
+         </div>
+      </li>
+      <li class="resource" data-sid="" data-index="2">
+         <div class="resource-detail">
+            <span class="primaryType">Article</span>
+            <div>
+               <a class="primaryLink"
+                   href="https://www.uptodate.com/contents/skin-lesions-in-the-newborn-and-infant?search=skin">Skin lesions in the newborn and infant</a>
+            </div>
+            <div class="sourceInfo">
+               <span>Source: <a href="https://www.uptodate.com/contents/search?search=skin">Uptodate - 149 </a>
+               </span>
+            </div>
+         </div>
+      </li>
+      <li class="resource" data-sid="PMID:36335037" data-index="3">
+         <div class="resource-detail">
+            <span class="primaryType">Article</span>
+            <div>
+               <a class="primaryLink"
+                   href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed_rct&amp;id=pmid:36335037&#xA;&#x9;&#x9;&#x9;">Radiation-induced skin </a>
+            </div>
+            <div class="author">Purswani JM,Tattersall IW, Gerber NK.</div>
+            <div class="citation">Clin Breast Cancer. 2022 Oct 08</div>
+            <div class="resultInfo">
+               <span class="descriptionTrigger searchContent no-bookmarking"/>
+            </div>
+            <div class="description">::INTRODUCTION##The purpose of this study is to
+				systematically review data</div>
+            <span class="pmid">
+               <a href="https://pubmed.ncbi.nlm.nih.gov/36335037/?otool=stanford">
+            PMID:36335037</a>
+            </span>
+            <div class="sourceInfo">
+               <span>Source: <a href="https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&amp;cmd=search&amp;holding=f1000%2CF1000M&amp;otool=Stanford&amp;term=skin+AND+(randomized+controlled+trial%5Bpt%5D+OR+controlled+clinical+trial%5Bpt%5D+OR+randomised%5Btw%5D+OR+randomized%5Btw%5D+OR+placebo%5Btw%5D+OR+drug+therapy%5Bsh%5D+OR+randomly%5Btw%5D+OR+trial%5Bti%5D+OR+groups%5Btw%5D+OR+%E2%80%9Cclinical+trials+as+topic%E2%80%9D%5Bmesh:noexp%5D+OR+%22Randomized+Controlled+Trials+as+Topic%22%5BMesh:NoExp%5D+OR+%E2%80%9Crandom+allocation%E2%80%9D%5Bmesh%5D+OR+%E2%80%9CDouble-Blind+Method%22%5BMesh%5D+OR+%E2%80%9Csingle-blind+method%E2%80%9D%5Bmesh%5D+OR+%E2%80%9Csingle-blind%E2%80%9D%5Btw%5D+OR+%E2%80%9Cdouble-blind%E2%80%9D%5Btw%5D)&#xA;&#x9;&#x9;&#x9;">PubMed Randomized Controlled Trials - 179,155 </a>
+               </span>
+            </div>
+         </div>
+      </li>
+   </ul>
+</html>

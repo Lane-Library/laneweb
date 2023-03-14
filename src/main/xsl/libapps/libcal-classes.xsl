@@ -16,7 +16,7 @@
 <xsl:template match="class">
       <div class="class">
          <div class="pure-g">
-            <div class="pure-u-1-4">
+            <div class="pure-u-7-24">
                <div class="date">
                   <xsl:apply-templates select="start"/>
                </div>
@@ -24,7 +24,7 @@
                   <xsl:apply-templates select="location"/>
                </div>
             </div>
-            <div class="pure-u-3-4">
+            <div class="pure-u-17-24">
                <xsl:apply-templates select="title"/>
                <div class="pure-g">
                   <div class="pure-u-1-4">
@@ -75,7 +75,6 @@
       <xsl:if test=". != ''">
       <div class="location">
          <xsl:value-of select="."/>
-         <xsl:text>&#160;&#160;&#160;</xsl:text>
          <i class="fa-solid fa-location-dot fa-lg"></i>
       </div>
       </xsl:if>

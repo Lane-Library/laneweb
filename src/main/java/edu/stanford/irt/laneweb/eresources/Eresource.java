@@ -36,6 +36,14 @@ public class Eresource {
     @Field
     private String id;
 
+    private boolean isAnExactMatch = false;
+
+    @Field
+    private Collection<String> isbns;
+
+    @Field
+    private Collection<String> issns;
+
     @Transient
     private Collection<Link> linksList = new ArrayList<>();
 
@@ -63,8 +71,6 @@ public class Eresource {
     @Field
     private String versionsJson;
 
-    private boolean isAnExactMatch = false;
-
     protected Eresource() {
         // spring-data-solr mapping needs this constructor
     }
@@ -83,6 +89,18 @@ public class Eresource {
 
     public String getId() {
         return this.id;
+    }
+
+    public String getIsAnExactMatch() {
+        return String.valueOf(this.isAnExactMatch);
+    }
+
+    public Collection<String> getIsbns() {
+        return this.isbns;
+    }
+
+    public Collection<String> getIssns() {
+        return this.issns;
     }
 
     public Collection<Link> getLinks() {
@@ -124,6 +142,14 @@ public class Eresource {
         return this.versionsJson;
     }
 
+    public boolean isAnExactMatch() {
+        return this.isAnExactMatch;
+    }
+
+    public void setAnExactMatch(final boolean isAnExactMatch) {
+        this.isAnExactMatch = isAnExactMatch;
+    }
+
     public void setDescription(final String description) {
         this.description = description;
     }
@@ -154,18 +180,6 @@ public class Eresource {
 
     public void setVersionsJson(final String versionsJson) {
         this.versionsJson = versionsJson;
-    }
-
-    public String getIsAnExactMatch() {
-        return String.valueOf(this.isAnExactMatch);
-    }
-
-    public boolean isAnExactMatch() {
-        return isAnExactMatch;
-    }
-
-    public void setAnExactMatch(boolean isAnExactMatch) {
-        this.isAnExactMatch = isAnExactMatch;
     }
 
     @Override

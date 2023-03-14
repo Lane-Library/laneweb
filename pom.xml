@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>117</version>
+        <version>125</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.11.21-SNAPSHOT</version>
+    <version>3.11.34-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -55,6 +55,7 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
+            <version>5.0.1</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -74,12 +75,12 @@
             <artifactId>javamelody-core</artifactId>
             <groupId>net.bull.javamelody</groupId>
             <scope>runtime</scope>
-            <version>1.91.0</version>
+            <version>1.92.0</version>
         </dependency>
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>1.91.0</version>
+            <version>1.92.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
@@ -96,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>11.4</version>
+            <version>12.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -172,7 +173,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.34</version>
+            <version>1.0.37</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -182,7 +183,7 @@
         <dependency>
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
-            <version>1.4.19</version>
+            <version>1.4.20</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -217,7 +218,7 @@
         <dependency>
             <groupId>org.apache.solr</groupId>
             <artifactId>solr-solrj</artifactId>
-            <version>9.0.0</version>
+            <version>9.1.1</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -252,11 +253,6 @@
             <version>3.9.8</version>
         </dependency>
         <dependency>
-            <groupId>edu.stanford.irt</groupId>
-            <artifactId>grandrounds</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.2</version>
@@ -281,7 +277,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.2.0.RELEASE</version>
+            <version>6.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -312,7 +308,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.67</version>
+            <version>9.0.73</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -337,17 +333,22 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
+            <version>4.5.14</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-            <version>1.4</version>
+            <version>1.5</version>
         </dependency>
         <dependency>
           <groupId>commons-validator</groupId>
           <artifactId>commons-validator</artifactId>
           <version>1.7</version>
+        </dependency>
+         <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.10.1</version>
         </dependency>
     </dependencies>
     <build>
@@ -482,7 +483,6 @@
                                 <include>bookmarks-min.css</include>
                                 <include>suggest-min.css</include>
                                 <include>resource-list-pagination-min.css</include>
-                                <include>search-image-min.css</include>
                                 <include>classes-min.css</include>
                                 <include>shc-portal-min.css</include>
                                 <include>menu-min.css</include>
@@ -543,13 +543,12 @@
                                 <include>lane-lightbox-min.js</include>
                                 <include>bookmark-login-min.js</include>
                                 <include>lane-tracking-min.js</include>
+                                <include>lane-google-GA4-min.js</include>
                                 <include>lane-google-min.js</include>
                                 <include>lane-popup-min.js</include>
-                                <include>lane-search-images-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
                                 <include>description-toggle-min.js</include>
-                                <include>seminars-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>
                                 <include>back-to-top-min.js</include>
@@ -568,6 +567,7 @@
                                 <include>validation-min.js</include>
                                 <include>holdings-toggle-min.js</include>
                                 <include>table-hide-empty-columns-min.js</include>
+                                <include>zotero-min.js</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -582,7 +582,7 @@
                             <removeIncluded>false</removeIncluded>
                             <output>${project.build.directory}/classes/resources/javascript/history/lane-history.js</output>
                             <includes>
-                                <include>flickr-min.js</include>
+                                <include>history-photos-min.js</include>
                                 <include>../back-to-top-min.js</include>
                             </includes>
                         </aggregation>
@@ -610,19 +610,20 @@
                 </executions>
             </plugin>
              -->
-            <!--  <plugin <groupId>uk.org.adamretter.maven</groupId>
-                <artifactId>xspec-maven-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <id>test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>run-xspec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin -->
+			<plugin>
+				<groupId>uk.org.adamretter.maven</groupId>
+				<artifactId>xspec-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>run-xspec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
                 <groupId>com.cj.jshintmojo</groupId>
                 <artifactId>jshint-maven-plugin</artifactId>

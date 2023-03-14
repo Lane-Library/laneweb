@@ -37,14 +37,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="search/image" type="wildcard">
-                <map:generate type="search-image"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="search/admin/image" type="wildcard">
-                <map:generate type="admin-search-image"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <!-- search/content/html returns xhtmlized clinical search content results -->
             <map:match pattern="search/content/html/*" type="wildcard">
                 <map:generate type="search-content">
@@ -58,8 +50,8 @@
                 </map:serialize>
             </map:match>
             <!-- TODO: find permanent home for this -->
-            <map:match pattern="search/flickr.xml" type="wildcard">
-                <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key={flickr-token}&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
+            <map:match pattern="search/exhibits-medhistory.xml" type="wildcard">
+                <map:generate type="file" src="https://exhibits.stanford.edu/medhistory/catalog.rss?f%5Bformat_main_ssim%5D%5B%5D=Image&amp;q={url-encoded-query}"/>
                 <map:serialize type="xml"/>
             </map:match>          
         </map:match>
@@ -84,21 +76,6 @@
              <map:transform type="textNodeParser">
                 <map:parameter name="elementNames" value="content:encoded"/>
             </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-    </map:pipeline>
-    <map:pipeline type="expires">
-        <map:parameter name="cache-key" value="{sitemap-uri}"/>
-        <!-- cache expires in 21600 seconds = 6 hours -->
-        <map:parameter name="cache-expires" value="21600"/>
-        <map:match pattern="seminars/grandrounds.xml" type="wildcard">
-            <map:generate type="seminars"/>
-            <map:transform type="saxon" src="classpath:/xsl/seminars.xsl"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="medicinecalendars/grandrounds.xml" type="wildcard">
-            <map:generate type="file" src="https://medicinecalendars.stanford.edu/?plugin=all-in-one-event-calendar&amp;controller=ai1ec_exporter_controller&amp;action=export_events&amp;xml=true"/>
-            <map:transform type="saxon" src="classpath:/xsl/medcalendar-grandrounds.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
@@ -152,28 +129,6 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="noncaching">
-        <map:match pattern="grandrounds-recent/*/*.html" type="wildcard">
-            <map:generate type="grandrounds">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="limit" value="{2}"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/grandrounds2.xsl">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="year" value="{2} Recent"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="grandrounds/*/*.html" type="wildcard">
-            <map:generate type="grandrounds">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="year" value="{2}"/>
-            </map:generate>
-            <map:transform type="saxon" src="classpath:/xsl/grandrounds2.xsl">
-                <map:parameter name="department" value="{1}"/>
-                <map:parameter name="year" value="{2}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match type="wildcard" pattern="equipment.html">
             <map:generate type="equipment-list"/>
             <map:serialize type="html5"/>
@@ -187,8 +142,8 @@
             <map:generate type="course-reserves-item-list"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="flickr-photos.xml">
-            <map:generate type="flickr-photo"/>
+        <map:match type="wildcard" pattern="history-photos.xml">
+            <map:generate type="history-photo"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

@@ -21,7 +21,6 @@
     <xsl:variable name="values-per-facet" select="4" />
     <xsl:variable name="current-year" select="year-from-date(current-date())" />
 
-
     <xsl:variable name="filter-facet">
         <div class="filter-facet module">
             <h2>
@@ -124,7 +123,7 @@
     <xsl:template match="/">
         <html>
             <body>
-                <xsl:if test="$facets != ''">
+                <xsl:if test="$facets != '' and $source != 'catalog-all'">
                     <xsl:copy-of select="$filter-facet" />
                 </xsl:if>
                 <div class="facet-container module menu-container mobile">
@@ -163,7 +162,7 @@
                     </xsl:if>
                 </xsl:if>
 
-                <xsl:if test="count(f:facet[@f:key='recordType']) > 0">
+                <xsl:if test="count(f:facet[@f:key='recordType']) > 0 and $source != 'catalog-all'">
                     <xsl:call-template name="field">
                         <xsl:with-param name="id" select="f:facet[@f:key='recordType']" />
                         <xsl:with-param name="label" select="'Result From'" />

@@ -40,7 +40,7 @@ public class SolrService {
 
     // consider moving this to /lane-browse solr handler
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
-            new SimpleStringCriteria("recordType:bib AND (isRecent:1 OR isLaneConnex:1)"));
+            new SimpleStringCriteria("recordType:bib AND isRecent:1"));
 
     // FIXME: remove -folio before go-live 
     private static final String COLLECTION = "laneSearch-folio";

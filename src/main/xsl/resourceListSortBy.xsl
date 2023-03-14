@@ -31,54 +31,51 @@
     </xsl:variable>
 
     <xsl:template name="sortBy">
-        <xsl:if test="$source = 'all-all' and number(/s:resources/@size) &gt; 1">
-            <div class="view-by sort no-bookmarking">
-                <span>Sort by</span>
-                <div class="general-dropdown dropdown">
-                    <div class="general-dropdown-trigger">
-                        <xsl:value-of select="$active-sort-name" />
-                        <i class="fa-regular fa-angle-down fa-sm"></i>
-                    </div>
-                    <div class="general-dropdown-content dropdown-content">
-                        <xsl:choose>
-                            <xsl:when test="number(/s:resources/@size) &gt; 500000">
-                                <ul class="pagingLabels disabled">
-                                    <li>large result set</li>
-                                    <li>sort options disabled</li>
-                                </ul>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <ul class="pagingLabels">
-                                    <xsl:for-each select="$sorts//s:sort">
-                                        <xsl:variable name="anchor">
-                                            <xsl:choose>
-                                                <xsl:when test="@arg">
-                                                    <a href="?{$base-query}&amp;sort={replace(./@arg,' ','+')}">
-                                                        <xsl:value-of select="@name" />
-                                                    </a>
-                                                </xsl:when>
-                                                <xsl:otherwise>
-                                                    <a href="?{$base-query}">
-                                                        <xsl:value-of select="@name" />
-                                                    </a>
-                                                </xsl:otherwise>
-                                            </xsl:choose>
-                                        </xsl:variable>
-                                        <li>
-                                            <xsl:copy-of select="$anchor" />
-                                            <xsl:if test="@arg = $sort or ($sort = '' and not(@arg))">
-                                                <i class="fa-regular fa-check" />
-                                            </xsl:if>
-                                        </li>
-                                    </xsl:for-each>
-                                </ul>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </div>
+        <div class="view-by sort no-bookmarking">
+            <span>Sort by</span>
+            <div class="general-dropdown dropdown">
+                <div class="general-dropdown-trigger">
+                    <xsl:value-of select="$active-sort-name" />
+                    <i class="fa-regular fa-angle-down fa-sm"></i>
+                </div>
+                <div class="general-dropdown-content dropdown-content">
+                    <xsl:choose>
+                        <xsl:when test="number(/s:resources/@size) &gt; 500000">
+                            <ul class="pagingLabels disabled">
+                                <li>large result set</li>
+                                <li>sort options disabled</li>
+                            </ul>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <ul class="pagingLabels">
+                                <xsl:for-each select="$sorts//s:sort">
+                                    <xsl:variable name="anchor">
+                                        <xsl:choose>
+                                            <xsl:when test="@arg">
+                                                <a href="?{$base-query}&amp;sort={replace(./@arg,' ','+')}">
+                                                    <xsl:value-of select="@name" />
+                                                </a>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <a href="?{$base-query}">
+                                                    <xsl:value-of select="@name" />
+                                                </a>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:variable>
+                                    <li>
+                                        <xsl:copy-of select="$anchor" />
+                                        <xsl:if test="@arg = $sort or ($sort = '' and not(@arg))">
+                                            <i class="fa-regular fa-check" />
+                                        </xsl:if>
+                                    </li>
+                                </xsl:for-each>
+                            </ul>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </div>
             </div>
-        </xsl:if>
-
+        </div>
     </xsl:template>
 
 </xsl:stylesheet>

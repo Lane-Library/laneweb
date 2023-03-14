@@ -17,15 +17,6 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
-            <!--  date replacement used in med seminars links -->
-            <xsl:when test="contains(.,'{lw-date:YYYY}') or contains(.,'{lw-date:Mon}') or contains(.,'{lw-date:DD}')">
-                <xsl:variable name="v1" select="replace(.,'\{lw-date:YYYY\}',format-dateTime(current-dateTime(),'[Y]'))"/>
-                <xsl:variable name="v2" select="replace($v1,'\{lw-date:Mon\}',format-dateTime(current-dateTime(),'[MNn,3-3]'))"/>
-                <xsl:variable name="v3" select="replace($v2,'\{lw-date:DD\}',format-dateTime(current-dateTime(),'[D,2]'))"/>
-                <xsl:attribute name="href">
-                   <xsl:value-of select="$v3"/>
-                </xsl:attribute>
-            </xsl:when>
             <xsl:when test="contains(., '://') and not(ancestor::h:head) and starts-with(.,'http')">
                 <xsl:attribute name="href">
                     <xsl:value-of select="."/>

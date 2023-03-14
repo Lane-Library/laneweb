@@ -8,22 +8,19 @@
             //TODO more thorough documentation
             var getSearchResultsTrackingData = function(link) {
                 var trackingData = {},
-                    list = link.closest(".lwSearchResults"),
-                    pageStart = document.querySelector("#pageStart"),
+                    
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
-                    // pageStart is the value in the pageStart span or 1 if its not there.
-                pageStart = pageStart ? parseInt(pageStart.textContent, 10) : 1;
-                trackingData.value = Array.prototype.indexOf.call(list.querySelectorAll("li"), link.closest("li")) + pageStart;
-                trackingData.label = link.textContent;
-                if (searchTerms) {
-                    trackingData.category = "lane:searchResultClick";
-                    trackingData.action = decodeURIComponent(searchTerms);
-                    trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
-                } else {
-                    trackingData.category = "lane:browseResultClick";
-                    trackingData.action = location.pathname;
-                }
-                return trackingData;
+	                trackingData.value = link.closest("li").dataset['index'];
+	                trackingData.label = link.textContent;
+	                if (searchTerms) {
+	                    trackingData.category = "lane:searchResultClick";
+	                    trackingData.action = decodeURIComponent(searchTerms);
+	                    trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
+	                } else {
+	                    trackingData.category = "lane:browseResultClick";
+	                    trackingData.action = location.pathname;
+	                }
+	                return trackingData;
             },
             getEventTrackingDataByAncestor = function(link) {
                 var i, trackingData = {},

@@ -30,7 +30,8 @@ public class TicketSerializerTest {
         this.serializer = new TicketSerializer();
         this.jgen = mock(JsonGenerator.class);
         this.provider = mock(SerializerProvider.class);
-        this.ticket = mock(Ticket.class);
+        this.ticket = new Ticket("ryanmax@stanford.edu", "ezfoo");
+        //this.ticket = mock(Ticket.class);
     }
 
     @Test
@@ -40,9 +41,10 @@ public class TicketSerializerTest {
 
     @Test
     public void testSerializeTicketJsonGeneratorSerializerProvider() throws IOException {
+        System.out.println(this.ticket.toString());
         this.jgen.writeString(this.ticket.toString());
-        replay(this.ticket, this.jgen, this.provider);
+        replay(this.jgen, this.provider);
         this.serializer.serialize(this.ticket, this.jgen, this.provider);
-        verify(this.ticket, this.jgen, this.provider);
+        verify(this.jgen, this.provider);
     }
 }

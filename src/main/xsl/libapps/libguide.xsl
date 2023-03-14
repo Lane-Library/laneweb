@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml">
 
-
+    <xsl:param name="type" />
 
     <xsl:template match="/ul">
         <xsl:copy>
@@ -20,7 +20,7 @@
             <a>
                 <xsl:attribute name="href" select="./a/@href"></xsl:attribute>
                 <xsl:if test="$description != ''">
-                    <xsl:attribute name="id" select="concat('guide-', position() )"></xsl:attribute>
+                    <xsl:attribute name="id" select="concat($type, '-guide-', position() )"></xsl:attribute>
                     <xsl:attribute name="class">yui3-tooltip-trigger</xsl:attribute>
                 </xsl:if>
                 <xsl:value-of select="./a/text()" />
@@ -32,7 +32,7 @@
         <xsl:param name="node" />
         <xsl:for-each select="$node">
             <span>
-                <xsl:attribute name="id" select="concat('guide-', position() )"></xsl:attribute>
+                <xsl:attribute name="id" select="concat($type, '-guide-', position(), 'Tooltip' )"></xsl:attribute>
                 <xsl:value-of select="./div/div/text()"></xsl:value-of>
             </span>
         </xsl:for-each>

@@ -24,7 +24,7 @@ public abstract class AbstractSitemapController {
 
     private SourceResolver sourceResolver;
 
-    public AbstractSitemapController(final ComponentFactory componentFactory, final DataBinder dataBinder,
+    protected AbstractSitemapController(final ComponentFactory componentFactory, final DataBinder dataBinder,
             final Sitemap sitemap, final SourceResolver sourceResolver) {
         this.componentFactory = componentFactory;
         this.dataBinder = dataBinder;

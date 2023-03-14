@@ -6,30 +6,74 @@
     pass-through="all">
     
     <stx:param name="bookmarking"/>
-    
+    <stx:param name="userid"/>
+
     <!-- item is a counter for the li elements, incremented with each one -->
     <stx:variable name="item" select="0"/>
-    
+
     <stx:template match="/">
         <stx:choose>
             <stx:when test="$bookmarking != 'rw'">
                 <div>Bookmark editing is not available at the moment.</div>
             </stx:when>
+            <!-- LANEWEB-11046: show error when user not logged in -->
+            <stx:when test="string-length($userid) = 0">
+                <li>Your login has expired. Please <a href="/secure/login.html?url=%2Ffavorites.html">login again to see your bookmarks</a>.</li>
+            </stx:when>
             <stx:otherwise>
                 <form action="/bookmarks" method="post" id="bookmarks-editor">
                     <fieldset>
-                        <button class="btn alt" name="action" value="add" type="submit">
-                            <span><i class="icon fa fa-plus"></i>Add</span>
-                        </button>
-                        <button class="btn alt" name="action" value="delete" type="submit">
-                            <span><i class="icon fa fa-minus"></i>Delete</span>
-                        </button>
-                        <button class="btn alt" name="action" value="edit" type="submit">
-                            <span><i class="icon fa fa-edit"></i>Edit</span>
-                        </button>
+                       <div class="addBookmarkContainer">
+                            <button name="action" value="add" type="submit">
+                                <span>Add Bookmark</span>
+                                <i class="fa-solid fa-angle-down"></i>
+                                <i class="fa-solid fa-angle-up"></i>
+                            </button>
+                        </div>
                     </fieldset>
                     <stx:process-children/>
                 </form>
+                <!-- HTML template used in bookmark-editor.js to construct each editor -->
+                <div id="bookmark-editor-template">
+                    <div class="actions">
+                        <button name="action" value="edit" type="submit">
+                            <i class="fa-solid fa-lg fa-pen-to-square"></i>
+                        </button>
+                        | 
+                        <button name="action" value="delete" type="submit">
+                            <i class="fa-solid fa-lg fa-trash-can"></i>
+                        </button>
+                    </div> 
+                    <div class="editContainer">
+                        <div class="close">
+                            <button name="action" value="cancel" type="submit">
+                                <i class="fa-regular fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="editPanel">
+                            <div class="editItem">
+                                <label for="label">Name</label>
+                                <input name="label" type="text"></input>
+                            </div>
+                            <div class="editItem">
+                                <label for="url">URL</label>
+                                <input name="url" type="text"></input>
+                            </div>
+                        </div>
+                        <div class="editPanel">
+                            <div class="editItem">
+                                <button class="btn alt" name="action" value="save" type="submit">
+                                    <span>SAVE</span>
+                                </button>
+                            </div>
+                            <div class="editItem">
+                                <button class="btn alt outline" value="reset" type="reset">
+                                    <span>UNDO</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </stx:otherwise>
         </stx:choose>
     </stx:template>
@@ -43,7 +87,7 @@
     
     <stx:template match="h:li">
         <stx:copy>
-            <input name="i" value="{$item}" type="checkbox"></input>
+            <input name="i" value="{$item}" type="hidden"></input>
             <stx:process-children/>
         </stx:copy>
         <stx:assign name="item" select="$item + 1"/>

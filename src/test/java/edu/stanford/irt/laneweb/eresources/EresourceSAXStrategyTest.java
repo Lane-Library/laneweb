@@ -61,6 +61,8 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getLinks())
                 .andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
         expect(this.eresource.getDois()).andReturn(Collections.singletonList("doi"));
+        expect(this.eresource.getIsbns()).andReturn(Collections.singletonList("isbn"));
+        expect(this.eresource.getIssns()).andReturn(Collections.singletonList("issn"));
         // link 1
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(Resource.LABEL);

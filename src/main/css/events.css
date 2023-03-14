@@ -71,10 +71,6 @@ li.event:last-of-type {
 	margin-top: 12px;
 }
 
-.seminar:before {
-	background-color: #09425a;
-}
-
 .time {
 	font-weight: bold;
 	white-space: nowrap;

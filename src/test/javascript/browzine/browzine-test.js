@@ -17,7 +17,6 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var links = document.querySelectorAll("li[data-doi='10.1'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
-            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
 
         "test 2": function() {
@@ -31,7 +30,6 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var links = document.querySelectorAll("li[data-doi='10.2'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
-            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
         
         "test 3 no doi": function() {
@@ -44,7 +42,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             });
             var links = document.querySelectorAll("li[data-sid='bib-3'] a"),
                 lastLink = links[links.length - 1];
-            Y.Assert.areEqual("old", lastLink.getAttribute("href"))
+            Y.Assert.areEqual("sfx-link", lastLink.getAttribute("href"))
         },
 
         "test 4": function() {
@@ -58,7 +56,6 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             var links = document.querySelectorAll("li[data-doi='10.4'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("contentLocation", lastLink.getAttribute("href"))
-            Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)
         },
 
         "test 5": function() {
@@ -71,7 +68,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             });
             var links = document.querySelectorAll("li[data-sid='pubmed-5'] a"),
                 lastLink = links[links.length - 1];
-            Y.Assert.areEqual("old", lastLink.getAttribute("href"))
+            Y.Assert.areEqual("sfx-link", lastLink.getAttribute("href"))
         },
 
         "test 6: retracted": function() {

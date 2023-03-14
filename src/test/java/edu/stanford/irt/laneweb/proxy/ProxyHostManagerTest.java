@@ -84,7 +84,7 @@ public class ProxyHostManagerTest {
     @Test
     public void testIsProxyableBadURI() {
         assertTrue(this.manager.isProxyableLink(
-                "https://www.aap.org/en-us/kb/Documents/Red Book Online/Access Red Book Online From Anywhere.pdf"));
+                "https://publications.aap.org/en-us/kb/Documents/Red Book Online/Access Red Book Online From Anywhere.pdf"));
     }
 
     @Test

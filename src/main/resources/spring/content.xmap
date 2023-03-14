@@ -78,16 +78,6 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="regex-parameter" pattern=".*images-all$">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:aggregate type="default" element="doc"  ns="doc">
-                    <map:generate type="facet-copyright"/>
-                       <map:generate type="html" src="cocoon://content/cached/search/search-images.html"/>
-                   </map:aggregate>
-                   <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="classpath:/xsl/search-images.xsl"/>
-                   <map:serialize type="xml"/>
-            </map:match>
             <!-- TODO is this error handling ever invoked? -->
             <map:match pattern="search.html" type="wildcard">
                 <map:generate type="html" src="{content-base}/error.html"/>
@@ -106,19 +96,7 @@
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match pattern="secure/admin/search.html" type="wildcard">
-             <map:match type="regex-parameter" pattern=".*images-all$">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:aggregate type="default" element="doc"  ns="doc">
-                    <map:generate type="facet-copyright"/>
-                       <map:generate type="html" src="cocoon://content/cached/search/admin-search-images.html"/>
-                   </map:aggregate>
-                   <map:transform type="xinclude"/>
-                 <map:transform type="saxon" src="classpath:/xsl/search-images.xsl"/>
-              <map:serialize type="xml"/>
-            </map:match>
-         </map:match>
-         <map:match pattern="myaccounts.html" type="wildcard">
+        <map:match pattern="myaccounts.html" type="wildcard">
             <map:generate type="html" src="{content-base}/myaccounts.html"/>
             <map:transform src="classpath:/xsl/persistentlogin.xsl" type="saxon"/>
             <map:transform type="xinclude"/>
@@ -138,20 +116,13 @@
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/history-photos.stx"/>
                 <map:transform type="saxon" src="classpath:/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO: maybe this following can be removed and the match of ** below will provide cached content -->
             <map:generate type="html" src="{content-base}/{0}"/>
             <map:transform type="xinclude"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <!-- TODO: find permanent home for this -->
-        <map:match type="wildcard" pattern="samples/flickr/results.html">
-            <map:generate type="file" src="{content-base}/{0}"/>
-            <map:transform type="xinclude"/>
-            <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
@@ -167,24 +138,6 @@
         <map:match pattern="secure/**" type="wildcard">
             <map:generate type="html" src="{content-base}/secure/{1}"/>
             <map:transform type="xinclude"/>
-            <map:serialize type="xml"/>
-        </map:match>
-    </map:pipeline>
-    <map:pipeline type="expires">
-        <map:parameter name="cache-key" value="{request-uri}"/>
-        <map:match pattern="ncbi-rss2html/**" type="wildcard">
-            <map:generate type="file" src="{1}"/>
-            <map:transform type="textNodeParser">
-                <map:parameter name="elementNames" value="description"/>
-            </map:transform>
-            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
-            <map:generate type="file" src="{1}"/>
-            <map:transform src="classpath:/xsl/ncbi-rss2html.xsl" type="saxon">
-                <map:parameter name="format" value="brief"/>
-            </map:transform>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

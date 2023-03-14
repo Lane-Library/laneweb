@@ -93,7 +93,7 @@
     padding: 12px;
 }
 
-.grand-rounds h3, .upcoming-classes h3 {
+.upcoming-classes h3 {
     text-transform: uppercase;
     font-family: 'Fjord One', serif;
     color: #333333;

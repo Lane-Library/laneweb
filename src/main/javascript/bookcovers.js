@@ -6,19 +6,20 @@
     // div nodes that have class bookcover.
     var view = function(bookImageNodes) {
 
-            // an object that maps bookcover ids (bcids and bibids) to img nodes
+            // an object that maps bookcover ids (bcids) to img nodes
             var imageMap = {};
 
             // initialize the imageMap
             bookImageNodes.forEach(function(imageNode) {
-                var bcid = imageNode.dataset.bcid;
-                if (bcid === undefined && imageNode.dataset.bibid) {
-                    bcid = "bib-" + imageNode.dataset.bibid;
+                var bcids = imageNode.dataset.bcids ? imageNode.dataset.bcids.split(',') : [];
+                // course reserves and equipment records will have a data-bibid (change to data-bcid?)
+                if (imageNode.dataset.bibid) {
+                    bcids.push("bib-" + imageNode.dataset.bibid);
                 }
-                if (bcid !== undefined) {
+                bcids.forEach(function(bcid) {
                     imageMap[bcid] = imageMap[bcid] || [];
                     imageMap[bcid].push(imageNode);
-                }
+                });
             });
 
             // make a couple of view functions available
@@ -32,8 +33,7 @@
                     for (bcid in imageMap) {
                         if (imageMap.hasOwnProperty(bcid)) {
                             for (i = 0; i < imageMap[bcid].length; i++) {
-                                if (!imageMap[bcid][i].requested && viewport.nearView(imageMap[bcid][i],3)) {
-                                    imageMap[bcid][i].requested = true;
+                                if (viewport.nearView(imageMap[bcid][i],3)) {
                                     imagesForUpdate.push(bcid);
                                     break;
                                 }
@@ -60,7 +60,7 @@
                     }
                 }
             };
-        }(document.querySelectorAll(".bookcover")),
+        }(document.querySelectorAll(".bookcover[data-bcids],.bookcover[data-bibid]")),
 
         // communicates with the server to get bookcover thumbnail urls for bcids
         bookcoverService = function() {
