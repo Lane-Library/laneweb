@@ -41,7 +41,7 @@ public class EquipmentListSAXStrategy extends AbstractXHTMLSAXStrategy<List<Equi
                 endDiv(xmlConsumer);
                 startDivWithClass(xmlConsumer, "pure-u-5-6");
                 startDiv(xmlConsumer);
-                createAnchor(xmlConsumer, "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=" + bid, title);
+                XMLUtils.data(xmlConsumer, title);
                 endDiv(xmlConsumer);
                 startDiv(xmlConsumer);
                 XMLUtils.data(xmlConsumer, equipment.getNote());
