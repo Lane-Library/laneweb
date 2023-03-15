@@ -33,7 +33,6 @@ public class RedirectConfiguration {
         redirectMap.put("/about/staff-dir.html", "/contacts/staff-dir.html");
         redirectMap.put("/about/liaisons.html", "/contacts/liaisons.html");
         redirectMap.put("/about/libadmin.html", "/contacts/mgm-team.html");
-        redirectMap.put("/help/live-chat-only.html", "/contacts/live-chat.html");
         redirectMap.put("/portals/lpch-cerner.html\\?(sourceid=cerner&q=.*)", "/search.html?source=peds-all&$1");
         redirectMap.put("/using-lib/computing.html", "/using-lib/study-computing-spaces.html");
         DefaultRedirectProcessor redirectProcessor = new DefaultRedirectProcessor(redirectMap);

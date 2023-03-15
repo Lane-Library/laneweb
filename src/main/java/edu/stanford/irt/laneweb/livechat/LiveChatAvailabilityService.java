@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +54,7 @@ public class LiveChatAvailabilityService {
 
     private boolean checkChatPresence() {
         try {
-            return "available".equalsIgnoreCase(this.restService.getObject(this.liveChatServiceURI, String.class));
+        	return (boolean)restService.getObject(this.liveChatServiceURI, HashMap.class).get("online");            
         } catch (RESTException e) {
             log.error("problem fetching availability from live chat service", e);
         }
