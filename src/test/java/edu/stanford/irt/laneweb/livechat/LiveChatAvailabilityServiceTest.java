@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,9 +24,13 @@ public class LiveChatAvailabilityServiceTest {
     private LiveChatAvailabilityService service;
 
     private URI uri;
+    
+    private HashMap<String, Object> chatAvailalibity;
 
     @Before
     public void setUp() throws Exception {
+    	this.chatAvailalibity = new HashMap<>();
+    	this.chatAvailalibity.put("online", true);
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
         this.service = new LiveChatAvailabilityService();
@@ -37,7 +42,7 @@ public class LiveChatAvailabilityServiceTest {
 
     @Test
     public final void testIsAvailable() throws Exception {
-        expect(this.restService.getObject(this.uri, String.class)).andReturn("aVailable");
+        expect(this.restService.getObject(this.uri, HashMap.class)).andReturn(this.chatAvailalibity);
         replay(this.restService);
         assertTrue(this.service.isAvailable());
         assertTrue(this.service.isAvailable());
@@ -46,8 +51,10 @@ public class LiveChatAvailabilityServiceTest {
 
     @Test
     public final void testIsAvailableAndThenIsNot() throws Exception {
-        expect(this.restService.getObject(this.uri, String.class)).andReturn("aVailable");
-        expect(this.restService.getObject(this.uri, String.class)).andReturn("unavailable");
+    	HashMap<String, Object> chatNotAvailalibity = new HashMap<>();
+    	chatNotAvailalibity.put("online", false);
+    	expect(this.restService.getObject(this.uri, HashMap.class)).andReturn(this.chatAvailalibity);
+        expect(this.restService.getObject(this.uri, HashMap.class)).andReturn(chatNotAvailalibity);
         replay(this.restService);
         assertTrue(this.service.isAvailable());
         this.service.setNextUpdate(0);
@@ -57,7 +64,7 @@ public class LiveChatAvailabilityServiceTest {
 
     @Test
     public final void testIsAvailableRESTException() throws Exception {
-        expect(this.restService.getObject(this.uri, String.class)).andThrow(new RESTException(new IOException("oops")));
+        expect(this.restService.getObject(this.uri, HashMap.class)).andThrow(new RESTException(new IOException("oops")));
         replay(this.restService);
         assertFalse(this.service.isAvailable());
         verify(this.restService);
