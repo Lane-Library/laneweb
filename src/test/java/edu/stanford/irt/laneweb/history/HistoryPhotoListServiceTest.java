@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,14 +7,14 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FlickrPhotoListServiceTest {
+public class HistoryPhotoListServiceTest {
 
-    private FlickrPhotoListService service;
+    private HistoryPhotoListService service;
 
     @Before
     public void setUp() throws IOException {
-        this.service = new FlickrPhotoListService(
-                new FlickrPhotoList(getClass().getResourceAsStream("flickr-photos.txt")));
+        this.service = new HistoryPhotoListService(
+                new HistoryPhotoList(getClass().getResourceAsStream("history-photos.txt")));
     }
 
     @Test

@@ -54,7 +54,7 @@
                             doiMap[doi].querySelector('.bookcover').innerHTML = '<image src="' + coverImageUrl + '"/>';
                         }
                     }
-                    // browzine fulltext links should be trackable as searchResultClick events
+                    // appended links should be trackable as searchResultClick events
                     document.querySelectorAll(".bzFT").forEach(function(node) {
                         node.isTrackableAsEvent = true;
                     });
@@ -64,16 +64,17 @@
         }(document.querySelectorAll("li[data-doi]")),
 
         addFulltextLink = function(node, label, url) {
-           var link = node.querySelector('.resource-detail .hldgsContainer span a')
+           var link = node.querySelector('.resource-detail .hldgsContainer span a'),
+               span = link.querySelector('span');
             link.href = url;
-            link.text = label;
+            span.textContent = label;
         },
         
         addRetractedArticleLink = function(node, type, label, url) {
             node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
-                '<div><i class="fa-light fa-file-' + type + '"></i> ' +
-                '<a class="bzFT" href="' + url + '">' + label + '</a>' +
-                '</div>'
+                '<div><a class="bzFT" href="' + url + '">' + 
+                '<i class="fa-light fa-file-' + type + '"></i>' + 
+                label + '</a></div>'
             )
         },
 

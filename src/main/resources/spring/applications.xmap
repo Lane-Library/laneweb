@@ -50,8 +50,8 @@
                 </map:serialize>
             </map:match>
             <!-- TODO: find permanent home for this -->
-            <map:match pattern="search/flickr.xml" type="wildcard">
-                <map:generate type="file" src="https://api.flickr.com/services/rest/?method=flickr.photos.search&amp;api_key={flickr-token}&amp;user_id=40390680@N08&amp;text={url-encoded-query}"/>
+            <map:match pattern="search/exhibits-medhistory.xml" type="wildcard">
+                <map:generate type="file" src="https://exhibits.stanford.edu/medhistory/catalog.rss?f%5Bformat_main_ssim%5D%5B%5D=Image&amp;q={url-encoded-query}"/>
                 <map:serialize type="xml"/>
             </map:match>          
         </map:match>
@@ -149,8 +149,8 @@
             <map:generate type="course-reserves-item-list"/>
             <map:serialize type="xml"/>
         </map:match>
-        <map:match type="wildcard" pattern="flickr-photos.xml">
-            <map:generate type="flickr-photo"/>
+        <map:match type="wildcard" pattern="history-photos.xml">
+            <map:generate type="history-photo"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>

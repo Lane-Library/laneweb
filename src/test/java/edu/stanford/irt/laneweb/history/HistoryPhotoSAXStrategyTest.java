@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expectLastCall;
@@ -20,22 +20,22 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class FlickrPhotoSAXStrategyTest {
+public class HistoryPhotoSAXStrategyTest {
 
-    private FlickrPhotoSAXStrategy strategy;
+    private HistoryPhotoSAXStrategy strategy;
 
     private TestXMLConsumer xmlConsumer;
 
     @Before
     public void setUp() {
-        this.strategy = new FlickrPhotoSAXStrategy();
+        this.strategy = new HistoryPhotoSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
     }
 
     @Test
     public void testToSAX() throws IOException {
-        this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail", "title")), this.xmlConsumer);
-        assertEquals(this.xmlConsumer.getExpectedResult(this, "FlickrPhotoSAXStrategyTest-testToSAX.xml"),
+        this.strategy.toSAX(Collections.singletonList(new HistoryPhoto("page", "thumbnail", "title")), this.xmlConsumer);
+        assertEquals(this.xmlConsumer.getExpectedResult(this, "HistoryPhotoSAXStrategyTest-testToSAX.xml"),
                 this.xmlConsumer.getStringValue());
     }
 
@@ -49,7 +49,7 @@ public class FlickrPhotoSAXStrategyTest {
         x.startElement(eq("http://www.w3.org/1999/xhtml"), eq("a"), eq("a"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(x);
-        this.strategy.toSAX(Collections.singletonList(new FlickrPhoto("page", "thumbnail", "title")), x);
+        this.strategy.toSAX(Collections.singletonList(new HistoryPhoto("page", "thumbnail", "title")), x);
     }
 
     @Test(expected = LanewebException.class)

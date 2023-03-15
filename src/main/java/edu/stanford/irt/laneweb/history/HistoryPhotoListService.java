@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -7,17 +7,17 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FlickrPhotoListService {
+public class HistoryPhotoListService {
 
-    private List<FlickrPhoto> photos;
+    private List<HistoryPhoto> photos;
 
     private Random random = new Random();
 
-    public FlickrPhotoListService(final List<FlickrPhoto> photos) {
+    public HistoryPhotoListService(final List<HistoryPhoto> photos) {
         this.photos = new ArrayList<>(photos);
     }
 
-    public List<FlickrPhoto> getRandomPhotos(final int number) {
+    public List<HistoryPhoto> getRandomPhotos(final int number) {
         int size = this.photos.size();
         Set<Integer> generated = new LinkedHashSet<>();
         if (size > number) {

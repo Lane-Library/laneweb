@@ -5,40 +5,118 @@
         <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
     </head>
     <body class="yui3-skin-sam">
-    
+
     <ul>
         <li class="resource" data-doi="10.1" data-sid="pubmed-1">
-            <div><a class="primaryLink" href="old">title 1</a></div>
+            <div class="resource-detail"><a class="primaryLink" href="old">title 1</a>
+                <div class="hldgsContainer no-bookmarking">
+                    <span class="hldgsHeader available">
+                        <i class="fa-solid fa-desktop fa-sm"></i>
+                        Digital Access
+                    </span>
+                    <span>
+                        <a href="sfx-link" title="title">
+                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <span>Access Options</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
         <li class="resource" data-doi="10.2" data-sid="pubmed-2">
-            <div><a class="primaryLink" href="old">title 2</a></div>
+            <div class="resource-detail"><a class="primaryLink" href="old">title 2</a>
+                <div class="hldgsContainer no-bookmarking">
+                    <span class="hldgsHeader available">
+                        <i class="fa-solid fa-desktop fa-sm"></i>
+                        Digital Access
+                    </span>
+                    <span>
+                        <a href="sfx-link" title="title">
+                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <span>Access Options</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
         <li class="resource" data-sid="bib-3">
-            <div><a class="primaryLink" href="old">title 3</a></div>
+            <div class="resource-detail"><a class="primaryLink" href="old">title 3</a>
+                <div class="hldgsContainer no-bookmarking">
+                    <span class="hldgsHeader available">
+                        <i class="fa-solid fa-desktop fa-sm"></i>
+                        Digital Access
+                    </span>
+                    <span>
+                        <a href="sfx-link" title="title">
+                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <span>Access Options</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
         <li class="resource" data-doi="10.4" data-sid="pubmed-4">
-            <div><a class="primaryLink" href="old">title 4</a></div>
+            <div class="resource-detail"><a class="primaryLink" href="old">title 4</a>
+                <div class="hldgsContainer no-bookmarking">
+                    <span class="hldgsHeader available">
+                        <i class="fa-solid fa-desktop fa-sm"></i>
+                        Digital Access
+                    </span>
+                    <span>
+                        <a href="sfx-link" title="title">
+                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <span>Access Options</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
         <li class="resource" data-sid="pubmed-5">
-            <div><a class="primaryLink" href="old">title 5</a></div>
+            <div class="resource-detail"><a class="primaryLink" href="old">title 5</a>
+                <div class="hldgsContainer no-bookmarking">
+                    <span class="hldgsHeader available">
+                        <i class="fa-solid fa-desktop fa-sm"></i>
+                        Digital Access
+                    </span>
+                    <span>
+                        <a href="sfx-link" title="title">
+                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <span>Access Options</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
         <li class="resource" data-doi="10.6" data-sid="pubmed-6">
-            <div><a class="primaryLink" href="old">title 6</a></div>
+            <div class="resource-detail"><a class="primaryLink" href="old">title 6</a>
+                <div class="hldgsContainer no-bookmarking">
+                    <span class="hldgsHeader available">
+                        <i class="fa-solid fa-desktop fa-sm"></i>
+                        Digital Access
+                    </span>
+                    <span>
+                        <a href="sfx-link" title="title">
+                            <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                            <span>Access Options</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
             <div class="bookcover"><i/></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
@@ -50,7 +128,7 @@
             return {
                 status: 200,
                 open: function(a, b, c) {
-                    this.id = /\/apps\/search\/browzine\/[a-z]+\/(.*)/.exec(b)[1];
+                    this.id = /\/apps\/browzine\/[a-z]+\/(.*)/.exec(b)[1];
                 },
                 send: function () {
                     if (this.id == '10.4') {

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.flickr;
+package edu.stanford.irt.laneweb.history;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
@@ -14,21 +14,21 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 
-public class FlickrPhotoGeneratorTest {
+public class HistoryPhotoGeneratorTest {
 
-    private FlickrPhotoGenerator generator;
+    private HistoryPhotoGenerator generator;
 
-    private FlickrPhotoListService service;
+    private HistoryPhotoListService service;
 
-    private SAXStrategy<List<FlickrPhoto>> strategy;
+    private SAXStrategy<List<HistoryPhoto>> strategy;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() {
-        this.service = mock(FlickrPhotoListService.class);
+        this.service = mock(HistoryPhotoListService.class);
         this.strategy = mock(SAXStrategy.class);
-        this.generator = new FlickrPhotoGenerator(this.service, this.strategy);
+        this.generator = new HistoryPhotoGenerator(this.service, this.strategy);
         this.xmlConsumer = mock(XMLConsumer.class);
     }
 

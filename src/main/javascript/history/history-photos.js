@@ -4,9 +4,9 @@
 
     var images = [],
 
-        flickrPhotos = document.querySelector(".flickr-photos"),
+        historyPhotos = document.querySelector(".history-photos"),
 
-        links = flickrPhotos ? flickrPhotos.querySelectorAll("a") : {},
+        links = historyPhotos ? historyPhotos.querySelectorAll("a") : {},
 
         photoService = {
 
@@ -31,7 +31,7 @@
 
             getPhotos: function() {
                 var request = new XMLHttpRequest();
-                request.open("GET", "../apps/getFlickrPhotoList", true);
+                request.open("GET", "../apps/getHistoryPhotoList", true);
                 request.onload = function() {
                     if (request.status >= 200 && request.status < 400) {
                         var photos = JSON.parse(request.responseText);
@@ -41,7 +41,7 @@
                             photos[i].image.alt = photos[i].title;
                         }
                         setTimeout(function() {
-                            flickrPhotos.style.opacity = 0;
+                            historyPhotos.style.opacity = 0;
                             setTimeout(function() {
                                 var factor, j;
                                 images = [];
@@ -55,7 +55,7 @@
                                     links.item(j).href = photos[j].page;
                                     links.item(j).replaceChild(photos[j].image, links.item(j).firstChild);
                                 }
-                                flickrPhotos.style.opacity = 1;
+                                historyPhotos.style.opacity = 1;
                             }, 1000);
                             photoService.getPhotos();
                         }, 15000);
@@ -84,11 +84,11 @@
             for (i = 0; i < 6; i++) {
                 images[i].parentNode.style.width = Math.round(images[i].width * factor) + "px";
             }
-            flickrPhotos.style.opacity = 1;
+            historyPhotos.style.opacity = 1;
             photoService.getPhotos();
         };
 
-    [].forEach.call(flickrPhotos ? flickrPhotos.querySelectorAll("img") : [], function(image) {
+    [].forEach.call(historyPhotos ? historyPhotos.querySelectorAll("img") : [], function(image) {
         images.push(image);
         if (image.complete) {
             photoService.resize(image);

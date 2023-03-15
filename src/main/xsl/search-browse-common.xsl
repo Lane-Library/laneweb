@@ -332,9 +332,9 @@
                 Digital Access
             </span>
             <span>
-                <i class="fa-regular fa-arrow-up-right-from-square"></i>
                 <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
-                    Access Options
+                    <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                    <span>Access Options</span>
                 </a>
             </span>
         </div>

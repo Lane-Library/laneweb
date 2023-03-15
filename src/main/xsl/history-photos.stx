@@ -1,0 +1,41 @@
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+
+    <stx:variable name="photos-count" select="0"/>
+    <stx:variable name="photo-link" />
+    <stx:variable name="photo-title" />
+
+    <stx:param name="query"/>
+
+    <stx:template match="channel/*[contains('title|link|description|language',name(.))]"/>
+
+    <stx:template match="rss/channel">
+        <div class="flickr-thumbs">
+            <stx:process-children/>
+        </div>
+        <stx:if test="$photos-count &gt;= 10">
+            <div><a href="https://exhibits.stanford.edu/medhistory/catalog?f%5Bformat_main_ssim%5D%5B%5D=Image&amp;search_field=search&amp;q={$query}">More Images for <strong><stx:value-of select="$query"/></strong><stx:text> </stx:text><i class="fa-solid fa-arrow-right"></i></a></div>
+        </stx:if>
+    </stx:template>
+
+    <stx:template match="item">
+        <stx:process-children/>
+        <stx:assign name="photos-count" select="$photos-count + 1"/>
+        <stx:if test="$photos-count &lt; 10">
+            <a href="{$photo-link}/">
+                <img width="75" src="https://purl.stanford.edu/{substring-after($photo-link,'https://exhibits.stanford.edu/medhistory/catalog/')}.jpg" alt="{$photo-title}"/>
+            </a>
+        </stx:if>
+    </stx:template>
+
+    <stx:template match="item/title">
+        <stx:assign name="photo-title" select="."/>
+    </stx:template>
+
+    <stx:template match="item/link">
+        <stx:assign name="photo-link" select="."/>
+    </stx:template>
+
+</stx:transform>

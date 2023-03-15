@@ -82,8 +82,7 @@ public class LanewebConfiguration {
             @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking,
             ServletContext servletContext,
             @Value("${edu.stanford.irt.laneweb.version}") final String version,
-            @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken,
-            @Value("${edu.stanford.irt.laneweb.flickr-token}") final String flickrToken) {
+            @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken) {
         this.constants = new HashMap<>();
         this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
         this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
@@ -92,7 +91,6 @@ public class LanewebConfiguration {
         this.constants.put(Model.BOOKMARKING, bookmarking);
         this.constants.put(Model.VERSION, version);
         this.constants.put(Model.BROWZINE_TOKEN, browzineToken);
-        this.constants.put(Model.FLICKR_TOKEN, flickrToken);
         // set the http.agent system property:
         System.setProperty("http.agent", "laneweb-" + version);
     }

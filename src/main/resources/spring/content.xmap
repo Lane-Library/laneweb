@@ -116,20 +116,13 @@
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
+                <map:transform type="joost" src="classpath:/xsl/history-photos.stx"/>
                 <map:transform type="saxon" src="classpath:/xsl/history-search.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO: maybe this following can be removed and the match of ** below will provide cached content -->
             <map:generate type="html" src="{content-base}/{0}"/>
             <map:transform type="xinclude"/>
-            <map:serialize type="xml"/>
-        </map:match>
-        <!-- TODO: find permanent home for this -->
-        <map:match type="wildcard" pattern="samples/flickr/results.html">
-            <map:generate type="file" src="{content-base}/{0}"/>
-            <map:transform type="xinclude"/>
-            <map:transform type="joost" src="classpath:/xsl/flickr.stx"/>
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
