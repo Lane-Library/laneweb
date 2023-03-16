@@ -61,7 +61,7 @@ public class EMailSender {
 		try {
 			helper = new MimeMessageHelper(message, (file != null) );
 		    helper.setSubject((String) map.get(SUBJECT));
-		    helper.setTo(getRecicipient(map));
+		    helper.setTo(getRecipient(map));
             String from = (String) map.get(EMAIL);
             if (from == null || !EMAIL_PATTERN.matcher(from).matches()) {
                 from = "MAILER-DAEMON@stanford.edu";
@@ -90,7 +90,7 @@ public class EMailSender {
     
     /* To Send email to lane-crm-dev@stanford.edu if the host is not lane.stnford.edu 
        Email Controller must  bind data httpreuqest by using emailDataBinder  */
-    private String getRecicipient(Map<String, Object> map) {
+    private String getRecipient(Map<String, Object> map) {
     	String host = (String) map.get(Model.HOST);
     	if(!LANE_STANFORD_EDU.equals(host)) {
     		return DEV_EMAIL;
