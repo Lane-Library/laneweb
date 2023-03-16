@@ -167,6 +167,10 @@ footer:nth-of-type(3){
 		font-size: 1.3em;
 }
 
+.footer-organization .fa-stack.fa-1x{
+		-fa-inverse: white
+}
+
 .footer-organization .fa-facebook {
 	font-size: 2.0em;
 	color:#1877F2;
