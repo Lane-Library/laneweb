@@ -160,18 +160,11 @@ footer:nth-of-type(3){
 }
 
 .footer-organization .social-logos a {
-	padding-right: 25px;
+	text-decoration: none;
 }
 
-.footer-organization .fa-stack-1x, .footer-organization .fa-stack-2x {
-	left: unset;
-	width: unset;
-}
-
-.footer-organization .fa-facebook, .footer-organization .fa-twitter {
-	color: white;
-	position: relative;
-	left: 5px;
+.footer-organization .fab{
+		font-size: 1.3em;
 }
 
 .footer-organization .fa-facebook {
@@ -180,9 +173,14 @@ footer:nth-of-type(3){
 }
 
 .footer-organization .fa-twitter {
-	font-size: 1.3em;
-	top: -3px;
+	margin-top: 1px; 
 }
+
+.footer-organization .fa-instagram {
+	font-weight: 600;
+}
+
+
 
 @media ( max-width : 700px) {
 	.footer-organization-address {
