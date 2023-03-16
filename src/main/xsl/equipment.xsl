@@ -29,7 +29,7 @@
           </xsl:call-template>
         </div>
         <div class="pure-u-5-6">
-          <div><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$bibid}"><xsl:value-of select="$title"/></a></div>
+          <div><xsl:value-of select="$title"/></div>
           <xsl:apply-templates select="slim:datafield[@tag = '500']/slim:subfield[@code = 'a']"/>
         </div>
       </div>
