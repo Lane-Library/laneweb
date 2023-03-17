@@ -34,7 +34,7 @@ import edu.stanford.irt.laneweb.servlet.binding.ProxyLinks;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.HostDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.HostNameDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TemplateChooser;
@@ -71,7 +71,7 @@ public class BindingConfiguration {
         List<DataBinder> dataBinders = new ArrayList<>(4);
         dataBinders.add(requestHeaderDataBinder());
         dataBinders.add(remoteProxyIPDataBinder());
-        dataBinders.add(new HostDataBinder());
+        dataBinders.add(new HostNameDataBinder());
         return new CompositeDataBinder(dataBinders);
     }
     

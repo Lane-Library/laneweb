@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-public class HostDataBinder implements DataBinder {
+public class HostNameDataBinder implements DataBinder {
 	
 	private static final String X_FORWARDED_HOST = "X-Forwarded-Host";
 
