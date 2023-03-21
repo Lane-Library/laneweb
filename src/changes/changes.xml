@@ -9,7 +9,7 @@
             <action date="2023-03-15" dev="ryanmax" issue="LANEWEB-11108" type="fix">
                 Remove links to Voyager from equipment browse list
             </action>
-            <action date="2023-03-8" dev="ryanmax" issue="LANEWEB-11104" type="fix">
+            <action date="2023-03-8" dev="alainb" issue="LANEWEB-11104" type="fix">
                 Add Instagram and Youtube icons/links to Lane Web Footer
             </action>
         </release>
