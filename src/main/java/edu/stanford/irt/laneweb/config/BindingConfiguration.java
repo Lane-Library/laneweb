@@ -34,6 +34,7 @@ import edu.stanford.irt.laneweb.servlet.binding.ProxyLinks;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.HostNameDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.TemplateChooser;
@@ -65,6 +66,15 @@ public class BindingConfiguration {
         return new BookmarkingDataBinder(bookmarking);
     }
 
+    @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/email")
+    public DataBinder emailDataBinder( final BasePathDataBinder basePathDataBinder) {
+        List<DataBinder> dataBinders = new ArrayList<>(4);
+        dataBinders.add(requestHeaderDataBinder());
+        dataBinders.add(remoteProxyIPDataBinder());
+        dataBinders.add(new HostNameDataBinder());
+        return new CompositeDataBinder(dataBinders);
+    }
+    
     @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/cme")
     public DataBinder cmeDataBinder(final UserDataBinder userDataBinder, final BasePathDataBinder basePathDataBinder) {
         List<DataBinder> dataBinders = new ArrayList<>(4);
@@ -153,6 +163,7 @@ public class BindingConfiguration {
         return new RequestHeaderDataBinder();
     }
 
+    
     @Bean
     public TemplateChooser templateChooser() {
         Set<String> templateNames = new HashSet<>();

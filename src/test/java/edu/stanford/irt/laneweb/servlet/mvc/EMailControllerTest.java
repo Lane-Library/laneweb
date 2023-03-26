@@ -22,8 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
-import edu.stanford.irt.laneweb.servlet.binding.RequestHeaderDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.spam.SpamService;
 
 public class EMailControllerTest {
@@ -38,15 +37,13 @@ public class EMailControllerTest {
 
     private EMailController controller;
 
-    private RequestHeaderDataBinder headerBinder;
+    private DataBinder emailDataBinder;
 
     private Map<String, Object> map;
 
     private Model model;
 
     private MultipartFile multipartFile;
-
-    private RemoteProxyIPDataBinder remoteIPBinder;
 
     private HttpServletRequest request;
 
@@ -56,11 +53,10 @@ public class EMailControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.headerBinder = mock(RequestHeaderDataBinder.class);
-        this.remoteIPBinder = mock(RemoteProxyIPDataBinder.class);
+        this.emailDataBinder = mock(DataBinder.class);
         this.spamService = mock(SpamService.class);
         this.sender = mock(EMailSender.class);
-        this.controller = new EMailController(this.headerBinder, this.remoteIPBinder, this.sender, this.spamService);
+        this.controller = new EMailController(this.emailDataBinder, this.sender, this.spamService);
         this.atts = mock(RedirectAttributes.class);
         this.model = mock(Model.class);
         this.request = mock(HttpServletRequest.class);
@@ -80,11 +76,11 @@ public class EMailControllerTest {
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
         this.sender.sendEmail(this.map, null);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         String nextPage = this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts);
         assertSame(NEXT_PAGE, nextPage);
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder,  this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -104,10 +100,10 @@ public class EMailControllerTest {
         expect(this.multipartFile.getOriginalFilename()).andReturn("filename.jpeg");
         expect(this.multipartFile.getBytes()).andReturn(image.toString().getBytes());
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder,  this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         assertEquals(ERROR_PAGE, this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts));
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -119,10 +115,10 @@ public class EMailControllerTest {
         expect(this.map.get("name")).andReturn("name").times(2);
         expect(this.map.get("email")).andReturn("email").times(2);
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         assertEquals(ERROR_PAGE, this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts));
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -143,10 +139,10 @@ public class EMailControllerTest {
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
         this.sender.sendEmail(this.map, file);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         this.controller.formSubmitAskUs(this.model, this.multipartFile, this.atts);
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -162,11 +158,11 @@ public class EMailControllerTest {
         expect(this.spamService.isSpam("ejp", this.map)).andReturn(false);
         expect(this.map.put("recipient", "ejproblem@lists.stanford.edu")).andReturn(null);
         this.sender.sendEmail(this.map, null);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         String nextPage = this.controller.formSubmitEJP(this.model, this.multipartFile, this.atts);
         assertSame(NEXT_EJP_PAGE, nextPage);
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -187,11 +183,11 @@ public class EMailControllerTest {
         expect(this.map.put("recipient", "ejproblem@lists.stanford.edu")).andReturn(null);
         expect(this.spamService.isSpam("ejp", this.map)).andReturn(false);
         this.sender.sendEmail(this.map, file);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         String nextPage = this.controller.formSubmitEJP(this.model, this.multipartFile, this.atts);
         assertSame(NEXT_EJP_PAGE, nextPage);
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -199,29 +195,28 @@ public class EMailControllerTest {
     public void testGetParameters() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.request.getParameter("question")).andReturn("question");
-        this.remoteIPBinder.bind(this.map, this.request);
-        this.headerBinder.bind(this.map, this.request);
+        this.emailDataBinder.bind(this.map, this.request);
         expect(this.request.getParameterMap()).andReturn(Collections.singletonMap("key", new String[] { "value" }));
         expect(this.model.addAttribute("key", "value")).andReturn(this.model);
-        replay(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.request);
+        replay(this.emailDataBinder, this.sender, this.atts, this.model, this.request);
         this.controller.getParameters(this.request, this.model);
-        verify(this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.request);
+        verify(this.emailDataBinder, this.sender, this.atts, this.model, this.request);
     }
 
     @Test(expected = LanewebException.class)
     public void testGetParametersMultipleValues() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.request.getParameter("question")).andReturn("question");
-        this.remoteIPBinder.bind(this.map, this.request);
-        this.headerBinder.bind(this.map, this.request);
+        this.emailDataBinder.bind(this.map, this.request);
+        this.emailDataBinder.bind(this.map, this.request);
         expect(this.request.getParameterMap())
                 .andReturn(Collections.singletonMap("key", new String[] { "value", "anothervalue" }));
         expect(this.model.addAttribute("key", "value")).andReturn(this.model);
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model,
                 this.request);
         this.controller.getParameters(this.request, this.model);
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model,
                 this.request);
     }
 
@@ -236,10 +231,10 @@ public class EMailControllerTest {
         expect(this.map.get("referrer")).andReturn(null);
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
         this.sender.sendEmail(this.map);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         assertEquals("redirect:/index.html", this.controller.submitAskUs(this.model, this.atts));
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -254,10 +249,10 @@ public class EMailControllerTest {
         expect(this.map.get("referrer")).andReturn("referrer");
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(false);
         this.sender.sendEmail(this.map);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         assertEquals("redirect:referrer", this.controller.submitAskUs(this.model, this.atts));
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 
@@ -268,10 +263,10 @@ public class EMailControllerTest {
         expect(this.map.get("name")).andReturn("name");
         expect(this.map.put("subject", "subject (name)")).andReturn(null);
         expect(this.spamService.isSpam("laneaskus", this.map)).andReturn(true);
-        replay(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        replay(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
         assertEquals("redirect:/error.html", this.controller.submitAskUs(this.model, this.atts));
-        verify(this.spamService, this.headerBinder, this.remoteIPBinder, this.sender, this.atts, this.model, this.map,
+        verify(this.spamService, this.emailDataBinder, this.sender, this.atts, this.model, this.map,
                 this.multipartFile);
     }
 }
