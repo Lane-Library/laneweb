@@ -15,7 +15,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.model.Model;
 
 public class EMailSender {
 
@@ -31,10 +30,6 @@ public class EMailSender {
     private static final String REDIRECT = "redirect";
 
     private static final String SUBJECT = "subject";
-    
-    private static final String LANE_STANFORD_EDU = "lane.stanford.edu";
-    
-    private static final String DEV_EMAIL = "lane-crm-dev@stanford.edu";
 
     private static final String[] XCLUDED_FIELDS = new String[] { SUBJECT, RECIPIENT, EMAIL, BINDING_MAP, REDIRECT };
 
@@ -61,7 +56,7 @@ public class EMailSender {
 		try {
 			helper = new MimeMessageHelper(message, (file != null) );
 		    helper.setSubject((String) map.get(SUBJECT));
-		    helper.setTo(getRecipient(map));
+            helper.setTo((String) map.get(RECIPIENT));
             String from = (String) map.get(EMAIL);
             if (from == null || !EMAIL_PATTERN.matcher(from).matches()) {
                 from = "MAILER-DAEMON@stanford.edu";
@@ -82,20 +77,10 @@ public class EMailSender {
             throw new LanewebException(e);
         }
         try {
-        	this.mailSender.send(message);
+            this.mailSender.send(message);
         } catch (MailException e) {
             throw new LanewebException(map.toString(), e);
         }
-    }
-    
-    /* To Send email to lane-crm-dev@stanford.edu if the host is not lane.stnford.edu 
-       Email Controller must  bind data httpreuqest by using emailDataBinder  */
-    private String getRecipient(Map<String, Object> map) {
-    	String host = (String) map.get(Model.HOST);
-    	if(!LANE_STANFORD_EDU.equals(host)) {
-    		return DEV_EMAIL;
-    	}	
-    	return (String) map.get(RECIPIENT);
     }
 
 }

@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.email.EMailSender;
-import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.spam.SpamService;
 
 public class LaneCrmControllerTest {
@@ -29,8 +28,6 @@ public class LaneCrmControllerTest {
   private Model model;
 
   Map<String, Object> emailContent;
-  
-  private DataBinder emailDataBinder;
 
   private static final String NEXT_PAGE = "redirect:/contacts/sfp-confirmation.html";
 
@@ -38,11 +35,10 @@ public class LaneCrmControllerTest {
 
   @Before
   public void setUp() {
-	this.emailDataBinder = mock(DataBinder.class);  
     this.emailSender = mock(EMailSender.class);
     this.model = mock(Model.class);
     this.spamService = mock(SpamService.class);
-    this.controller = new LaneCrmController(this.emailDataBinder, this.emailSender, "email@address.com", this.spamService);
+    this.controller = new LaneCrmController(this.emailSender, "email@address.com", this.spamService);
     emailContent = new HashMap<String, Object>();
     emailContent.put("title", "title");
   }
