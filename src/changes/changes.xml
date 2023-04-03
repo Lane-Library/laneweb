@@ -5,6 +5,19 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-03-27" version="3.11.35" description="bug fix and update release">
+            <action date="2023-03-24" dev="ryanmax" issue="LANEWEB-11114" type="fix">
+                exact match interfering with relevance ranking
+            </action>
+        </release>
+    	<release date="2023-03-20" version="3.11.34" description="bug fix and update release">
+            <action date="2023-03-15" dev="ryanmax" issue="LANEWEB-11108" type="fix">
+                Remove links to Voyager from equipment browse list
+            </action>
+            <action date="2023-03-8" dev="alainb" issue="LANEWEB-11104" type="fix">
+                Add Instagram and Youtube icons/links to Lane Web Footer
+            </action>
+        </release>
         <release date="2023-03-13" version="3.11.33" description="bug fix and update release">
             <action date="2023-03-02" dev="ryanmax" issue="LANEWEB-11103" type="fix">
                 Lane Catalog facet click doesn't do anything in Lane Catalog search

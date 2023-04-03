@@ -61,8 +61,7 @@
                     <xsl:call-template name="sortBy" />
                 </xsl:if>
                 <ul class="lwSearchResults">
-                    <xsl:apply-templates select="s:result[./s:isAnExactMatch = 'true']" />
-                    <xsl:apply-templates select="s:result[./s:isAnExactMatch = 'false'] | s:result[not(./s:isAnExactMatch)]" />
+                    <xsl:apply-templates select="s:result" />
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
                     <div class="s-tb no-bookmarking">
@@ -140,11 +139,11 @@
           
         <li class="resource" data-sid="{s:id}" data-index="{/s:resources/@length * /s:resources/@page + position()}">
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)" />
-            <xsl:if test="s:isAnExactMatch = 'true'">
+            <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                 <xsl:attribute name="class">resource exact-match-resource</xsl:attribute>
             </xsl:if>
             <div class="resource-detail">
-                <xsl:if test="s:isAnExactMatch = 'true'">
+                <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                     <div class="exact-match">
                         Exact Match
                         <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="Your search terms closely match the title of this resource."></i>
