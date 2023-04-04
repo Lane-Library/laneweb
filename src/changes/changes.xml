@@ -5,7 +5,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-    	<release date="2023-03-27" version="3.11.35" description="bug fix and update release">
+    	<release date="2023-04-03" version="3.11.36" description="bug fix and update release">
+            <action date="2023-03-31" dev="ryanmax" issue="LANEWEB-11117" type="update">
+                Use GCP catalog-service instead of on-prem lane-api.stanford.edu
+            </action>
+            <action date="2023-03-31" dev="alainb" issue="LANEWEB-11118" type="update">
+                Switch from Library H3lp to LibChat for the Lane Web Live Chat service
+            </action>
+        </release>
+        <release date="2023-03-27" version="3.11.35" description="bug fix and update release">
             <action date="2023-03-24" dev="ryanmax" issue="LANEWEB-11114" type="fix">
                 exact match interfering with relevance ranking
             </action>
