@@ -23,13 +23,13 @@ public class LaneCrmControllerTest {
   private LaneCrmController controller;
 
   private EMailSender emailSender;
-  
+
   private SpamService spamService;
- 
+
   private Model model;
 
   Map<String, Object> emailContent;
-  
+
   private DataBinder emailDataBinder;
 
   private static final String NEXT_PAGE = "redirect:/contacts/sfp-confirmation.html";
@@ -38,7 +38,7 @@ public class LaneCrmControllerTest {
 
   @Before
   public void setUp() {
-	this.emailDataBinder = mock(DataBinder.class);  
+    this.emailDataBinder = mock(DataBinder.class);
     this.emailSender = mock(EMailSender.class);
     this.model = mock(Model.class);
     this.spamService = mock(SpamService.class);
@@ -51,7 +51,7 @@ public class LaneCrmControllerTest {
   public void testSendEmail() throws IOException {
     emailContent.put("requestedBy.email", "test@stanford.edu");
     expect(this.model.asMap()).andReturn(this.emailContent);
-    expect(this.spamService.isSpam("sfp",this.emailContent)).andReturn(false);
+    expect(this.spamService.isSpam("sfp", this.emailContent)).andReturn(false);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender, this.spamService);
     String nextPage = this.controller.sendEmail(this.model, null);
@@ -63,7 +63,7 @@ public class LaneCrmControllerTest {
   public void testShcValidEmail() throws IOException {
     emailContent.put("requestedBy.email", "test@stanfordhealthcare.org");
     expect(this.model.asMap()).andReturn(this.emailContent);
-    expect(this.spamService.isSpam("sfp",this.emailContent)).andReturn(false);
+    expect(this.spamService.isSpam("sfp", this.emailContent)).andReturn(false);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender, this.spamService);
     String nextPage = this.controller.sendEmail(this.model, null);
@@ -75,8 +75,8 @@ public class LaneCrmControllerTest {
   public void testLpchValidEmail() throws IOException {
     this.emailContent.put("requestedBy.email", "test@stanfordchildrens.org");
     expect(this.model.asMap()).andReturn(this.emailContent);
-    expect(this.spamService.isSpam("sfp",this.emailContent)).andReturn(false);
-    
+    expect(this.spamService.isSpam("sfp", this.emailContent)).andReturn(false);
+
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender, this.spamService);
     String nextPage = this.controller.sendEmail(this.model, null);
@@ -88,7 +88,7 @@ public class LaneCrmControllerTest {
   public void testNotValidEmail() throws IOException {
     this.emailContent.put("requestedBy.email", "test@stanfordchildens.org");
     expect(this.model.asMap()).andReturn(this.emailContent);
-    expect(this.spamService.isSpam("sfp",this.emailContent)).andReturn(false);
+    expect(this.spamService.isSpam("sfp", this.emailContent)).andReturn(false);
     replay(this.model, this.spamService);
     String nextPage = this.controller.sendEmail(this.model, null);
     assertSame(ERROR_URL, nextPage);
@@ -99,12 +99,12 @@ public class LaneCrmControllerTest {
   public void testSpamEmail() throws IOException {
     emailContent.put("requestedBy.email", "test@stanford.edu");
     expect(this.model.asMap()).andReturn(this.emailContent);
-    expect(this.spamService.isSpam("sfp",this.emailContent)).andReturn(true);
+    expect(this.spamService.isSpam("sfp", this.emailContent)).andReturn(true);
     this.emailSender.sendEmail(emailContent);
     replay(this.model, this.emailSender, this.spamService);
     String nextPage = this.controller.sendEmail(this.model, null);
     assertSame(ERROR_URL, nextPage);
     verify(this.model, this.spamService);
   }
-  
+
 }
