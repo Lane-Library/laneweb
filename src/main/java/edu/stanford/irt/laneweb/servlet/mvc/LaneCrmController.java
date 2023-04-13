@@ -93,13 +93,13 @@ public class LaneCrmController {
         throw new LanewebException("multiple values for parameter " + entry.getKey());
       }
     }
-    this.emailDataBinder.bind(model.asMap(), request);
     ObjectMapper om = new ObjectMapper();
     model.addAttribute("json", om.writeValueAsString(model));
     model.addAttribute("email", model.getAttribute("requestedBy.email"));
     model.addAttribute("remote-addr", request.getRemoteAddr());
     model.addAttribute(SUBJECT, SUBJECT_CONTENT);
     model.addAttribute("recipient", this.sfpEmailAddress);
+    this.emailDataBinder.bind(model.asMap(), request);
   }
 
 }
