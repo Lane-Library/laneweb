@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-04-13" version="3.11.38" description="emergency release">
+             <action date="2023-04-13" dev="alainb" issue="LANEWEB-11123" type="fix">
+                Suggest a Purchase" form get an exception
+            </action>
+             <action date="2023-04-05" dev="ryanmax" issue="LANEWEB-11122" type="update">
+                Poor formatting of "Show More" authors toggle
+            </action>
+        </release>
     	<release date="2023-04-10" version="3.11.37" description="bug fix and update release">
             <action date="2023-04-05" dev="alainb" issue="LANEWEB-11120" type="update">
                 To limit access to ejproblem email only on production
