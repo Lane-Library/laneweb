@@ -142,6 +142,7 @@ li.active .description {
     cursor: pointer;
     padding: 1px 5px;
     border: 1px solid #ccc;
+    display: inline-block;
 }
 
 .sourceInfo {
