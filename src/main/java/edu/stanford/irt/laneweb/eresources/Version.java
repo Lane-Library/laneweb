@@ -14,6 +14,8 @@ public class Version {
 
     private List<Link> links;
 
+    private String locationCode;
+
     private String locationName;
 
     private String locationUrl;
@@ -42,6 +44,10 @@ public class Version {
 
     public List<Link> getLinks() {
         return this.links;
+    }
+
+    public String getLocationCode() {
+        return this.locationCode;
     }
 
     public String getLocationName() {
@@ -82,6 +88,10 @@ public class Version {
 
     public void setLinks(final List<Link> links) {
         this.links = links;
+    }
+
+    public void setLocationCode(final String locationCode) {
+        this.locationCode = locationCode;
     }
 
     public void setLocationName(final String locationName) {

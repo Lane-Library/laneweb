@@ -62,6 +62,7 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
         maybeCreateElement(xmlConsumer, "publisher", version.getPublisher());
         maybeCreateElement(xmlConsumer, "version-text", version.getAdditionalText());
         maybeCreateElement(xmlConsumer, "callnumber", version.getCallnumber());
+        maybeCreateElement(xmlConsumer, "locationCode", version.getLocationCode());
         maybeCreateElement(xmlConsumer, "locationName", version.getLocationName());
         maybeCreateElement(xmlConsumer, "locationUrl", version.getLocationUrl());
         int[] itemCount = version.getItemCount();

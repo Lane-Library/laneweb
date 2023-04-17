@@ -366,7 +366,7 @@
                         </span>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
-                                <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
+                                <a class="btn alt" href="https://requests.stanford.edu/pages/new?item_id={$eresource/s:recordId}&amp;origin=LANE&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
