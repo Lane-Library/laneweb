@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
-@SolrDocument(collection = "laneSearch")
+@SolrDocument(collection = "#{@eresourcesConfiguration.laneSearchCollectionName()}")
 public class Eresource {
 
     private static final ObjectMapper mapper = JsonMapper.builder()

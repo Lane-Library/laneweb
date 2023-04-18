@@ -42,8 +42,6 @@ public class SolrService {
     private static final SimpleFilterQuery BASE_FQ = new SimpleFilterQuery(
             new SimpleStringCriteria("recordType:bib AND isRecent:1"));
 
-    private static final String COLLECTION = "laneSearch";
-
     private static final String DATE_QUERY = "date:[%s TO *]";
 
     private static final String EMPTY = "";
@@ -69,12 +67,16 @@ public class SolrService {
 
     private SolrRepository repository;
 
+    private String solrCollectionName;
+
     private SolrTemplate solrTemplate;
 
-    public SolrService(final SolrQueryParser parser, final SolrRepository repository, final SolrTemplate solrTemplate) {
+    public SolrService(final SolrQueryParser parser, final SolrRepository repository, final SolrTemplate solrTemplate,
+            final String solrCollectionName) {
         this.parser = parser;
         this.repository = repository;
         this.solrTemplate = solrTemplate;
+        this.solrCollectionName = solrCollectionName;
     }
 
     public List<Eresource> browseByQuery(final String query) {
@@ -83,7 +85,7 @@ public class SolrService {
         }
         SimpleQuery q = buildBaseBrowseQuery(ALL_QUERY);
         q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(query)));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(this.solrCollectionName, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -98,7 +100,7 @@ public class SolrService {
         }
         SimpleQuery q = buildBaseBrowseQuery("ertlsw" + sAlpha);
         q.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(query)));
-        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(COLLECTION, q, Eresource.class);
+        Cursor<Eresource> cursor = this.solrTemplate.queryForCursor(this.solrCollectionName, q, Eresource.class);
         return cursorToList(cursor);
     }
 
@@ -117,7 +119,7 @@ public class SolrService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(this.solrCollectionName, fquery, Eresource.class);
     }
 
     public FacetPage<Eresource> facetByManyFields(final String query, final String filters, final int facetLimit) {
@@ -139,7 +141,7 @@ public class SolrService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(this.solrCollectionName, fquery, Eresource.class);
     }
 
     public Eresource getByBibID(final String bibID) {
