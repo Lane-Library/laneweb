@@ -23,9 +23,6 @@ public class FacetService {
 
     private static final String AND = " AND ";
 
-    // FIXME: remove -folio before go-live
-    private static final String COLLECTION = "laneSearch-folio";
-
     private static final String EMPTY = "";
 
     private static final Pattern FACETS_LAST_SEPARATOR_PATTERN = Pattern.compile(FACETS_SEPARATOR + "$");
@@ -36,11 +33,15 @@ public class FacetService {
 
     private SolrQueryParser parser;
 
+    private String solrCollectionName;
+
     private SolrTemplate solrTemplate;
 
-    public FacetService(final SolrQueryParser parser, final SolrTemplate solrTemplate) {
+    public FacetService(final SolrQueryParser parser, final SolrTemplate solrTemplate,
+            final String solrCollectionName) {
         this.parser = parser;
         this.solrTemplate = solrTemplate;
+        this.solrCollectionName = solrCollectionName;
     }
 
     public FacetPage<Eresource> facetByField(final String query, final String filters, final String field,
@@ -93,6 +94,6 @@ public class FacetService {
         if (!facetFilters.isEmpty()) {
             fquery.addFilterQuery(new SimpleFilterQuery(new SimpleStringCriteria(facetFilters)));
         }
-        return this.solrTemplate.queryForFacetPage(COLLECTION, fquery, Eresource.class);
+        return this.solrTemplate.queryForFacetPage(this.solrCollectionName, fquery, Eresource.class);
     }
 }

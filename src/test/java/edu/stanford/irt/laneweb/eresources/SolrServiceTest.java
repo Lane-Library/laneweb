@@ -46,7 +46,7 @@ public class SolrServiceTest {
         this.repository = mock(SolrRepository.class);
         this.template = mock(SolrTemplate.class);
         this.solrService = new SolrService(new SolrQueryParser(Collections.emptyList()), this.repository,
-                this.template);
+                this.template, "collectionName");
         this.cursor = mock(Cursor.class);
     }
 
