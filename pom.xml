@@ -173,7 +173,7 @@
         <dependency>
             <groupId>edu.stanford.irt.solr</groupId>
             <artifactId>solr-image-repository</artifactId>
-            <version>1.0.37</version>
+            <version>1.0.38</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
