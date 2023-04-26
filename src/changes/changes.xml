@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	<release date="2023-04-24" version="3.11.39" description="bug fix and update release">
+             <action date="2023-04-24" dev="ryanmax" issue="LANEWEB-11126" type="update">
+                laneSearch collection name is hard-coded
+            </action>
+             <action date="2023-04-05" dev="ryanmax" issue="LANEWEB-11127" type="update">
+                Change LaneSearch solr property name
+            </action>
+        </release>
     	<release date="2023-04-13" version="3.11.38" description="emergency release">
              <action date="2023-04-13" dev="alainb" issue="LANEWEB-11123" type="fix">
                 Suggest a Purchase" form get an exception
