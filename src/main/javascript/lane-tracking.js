@@ -10,17 +10,17 @@
                 var trackingData = {},
                     
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
-	                trackingData.value = link.closest("li").dataset['index'];
-	                trackingData.label = link.textContent;
-	                if (searchTerms) {
-	                    trackingData.category = "lane:searchResultClick";
-	                    trackingData.action = decodeURIComponent(searchTerms);
-	                    trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
-	                } else {
-	                    trackingData.category = "lane:browseResultClick";
-	                    trackingData.action = location.pathname;
-	                }
-	                return trackingData;
+                    trackingData.value = link.closest("li").dataset['index'];
+                    trackingData.label = link.textContent;
+                    if (searchTerms) {
+                        trackingData.category = "lane:searchResultClick";
+                        trackingData.action = decodeURIComponent(searchTerms);
+                        trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
+                    } else {
+                        trackingData.category = "lane:browseResultClick";
+                        trackingData.action = location.pathname;
+                    }
+                    return trackingData;
             },
             getEventTrackingDataByAncestor = function(link) {
                 var i, trackingData = {},
