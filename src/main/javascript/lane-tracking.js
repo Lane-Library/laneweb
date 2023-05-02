@@ -28,7 +28,6 @@
                 handlers = [
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
-                            {selector:".lane-nav", category:"lane:laneNav-top"},
                             {selector:"footer", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
@@ -223,9 +222,6 @@
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (node.closest(".lane-nav")) {
-                        title = "laneNav: " + title;
-                    }
                     //if there is rel="popup local" then add "pop-up" to the title
                     if (isLocalPopup(node)) {
                         title = 'YUI Pop-up [local]: ' + title;
@@ -340,7 +336,7 @@
         document.querySelectorAll("a[href*='secure/edtech']").forEach(function(node) {
             node.isTrackableAsPageView = true;
         });
-        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, footer a").forEach(function(node) {
+        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, footer a").forEach(function(node) {
             node.isTrackableAsEvent = true;
         });
 })();
