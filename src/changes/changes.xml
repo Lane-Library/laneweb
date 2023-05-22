@@ -5,6 +5,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2023-05-22" version="3.11.40" description="bug fix and update release">
+    	      <action date="2023-05-11" dev="ryanmax" issue="LANEWEB-11131" type="fix">
+                Poor precision on DOI searches
+            </action>
+        </release>
     	<release date="2023-04-24" version="3.11.39" description="bug fix and update release">
              <action date="2023-04-24" dev="ryanmax" issue="LANEWEB-11126" type="update">
                 laneSearch collection name is hard-coded
