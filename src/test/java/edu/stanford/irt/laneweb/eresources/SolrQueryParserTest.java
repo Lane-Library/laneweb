@@ -18,6 +18,7 @@ public class SolrQueryParserTest {
     public void setUp() throws Exception {
         this.inspectors = new ArrayList<>();
         this.inspectors.add(new AdvancedQueryInspector());
+        this.inspectors.add(new SingleDoiQueryInspector());
         this.inspectors.add(new DoiQueryInspector());
         this.inspectors.add(new OrcidQueryInspector());
         this.inspectors.add(new LcnQueryInspector());
@@ -71,22 +72,22 @@ public class SolrQueryParserTest {
                 "Lancet Neurol. 2013 Feb;12\\(2\\)\\:186\\-94. doi\\: \"10.1016/S1474\\-4422\\(12\\)70296\\-X\"  2012 Dec 21.",
                 this.parser.parse(
                         "Lancet Neurol. 2013 Feb;12(2):186-94. doi: 10.1016/S1474-4422(12)70296-X. Epub 2012 Dec 21."));
-        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("10.1016/j.it.2015.02.003"));
-        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
-        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("dx.doi.org/10.1016/j.it.2015.02.003"));
-        assertEquals("\"10.1016/j.it.2015.02.003\"", this.parser.parse("doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("10.1016/j.it.2015.02.003"));
+        assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("dx.doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("doi.org/10.1016/j.it.2015.02.003"));
         assertEquals("BMJ 2015; 351 doi\\: \"10.1136/bmj.h5942\"",
                 this.parser.parse("BMJ 2015; 351 doi: http://dx.doi.org/10.1136/bmj.h5942"));
         assertEquals("\"10.1016/j.it.2015.02.003\" 10.1136/bmj.h5942",
                 this.parser.parse("doi.org/10.1016/j.it.2015.02.003 http://dx.doi.org/10.1136/bmj.h5942"));
-        assertEquals("\"10.1056/NEJMra2005230\"", this.parser.parse("https://www.nejm.org/doi/10.1056/NEJMra2005230"));
+        assertEquals("dois:\"10.1056/NEJMra2005230\"", this.parser.parse("https://www.nejm.org/doi/10.1056/NEJMra2005230"));
         assertEquals(
                 "Best Practices\\: Application of NI\\-RADS for Posttreatment Surveillance Imaging of Head and Neck Cancer\n"
                         + "Read More\\: \"10.2214/AJR.20.23841\"",
                 this.parser.parse(
                         "Best Practices: Application of NI-RADS for Posttreatment Surveillance Imaging of Head and Neck Cancer\n"
                                 + "Read More: https://www.ajronline.org/doi/full/10.2214/AJR.20.23841"));
-        assertEquals("\"10.1161/CIRCGEN.120.003138\"",
+        assertEquals("dois:\"10.1161/CIRCGEN.120.003138\"",
                 this.parser.parse("https://www.ahajournals.org/doi/full/10.1161/CIRCGEN.120.003138"));
         assertEquals("(id:12345 OR id:123456) OR (id:12345 OR id:123456)", this.parser.parse("id:12345 OR id:123456"));
         assertEquals("(recordId:12345 OR pmid\\:123456) OR (recordId:12345 OR pmid\\:123456)",
@@ -116,5 +117,10 @@ public class SolrQueryParserTest {
                 "Fibroblast Growth Factor\\-21 Controls Dietary Protein Intake in Male Mice. Endocrinology. 2019 May 1;160\\(5\\)\\:1069\\-1080. doi\\: \"10.1210/en.2018\\-01056\" pmid\\:30802283; \"PMC6469953\"",
                 this.parser.parse(
                         "Fibroblast Growth Factor-21 Controls Dietary Protein Intake in Male Mice. Endocrinology. 2019 May 1;160(5):1069-1080. doi: 10.1210/en.2018-01056. PubMed PMID: 30802283; PubMed Central PMCID: PMC6469953."));
+        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI:https://doi.org/10.1016/j.cjca.2019.11.034"));
+        assertEquals("DOI\\: \"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI: https://doi.org/10.1016/j.cjca.2019.11.034"));
+        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("https://doi.org/10.1016/j.cjca.2019.11.034"));
+        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI:10.1016/j.cjca.2019.11.034"));
+        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI: 10.1016/j.cjca.2019.11.034"));
     }
 }

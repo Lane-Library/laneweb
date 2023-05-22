@@ -38,6 +38,7 @@ import edu.stanford.irt.laneweb.eresources.ParenthesesQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmcQueryInspector;
 import edu.stanford.irt.laneweb.eresources.PmidQueryInspector;
 import edu.stanford.irt.laneweb.eresources.QueryInspector;
+import edu.stanford.irt.laneweb.eresources.SingleDoiQueryInspector;
 import edu.stanford.irt.laneweb.eresources.SolrQueryParser;
 import edu.stanford.irt.laneweb.eresources.SolrRepository;
 import edu.stanford.irt.laneweb.eresources.SolrService;
@@ -180,6 +181,7 @@ public class EresourcesConfiguration {
     public SolrQueryParser solrQueryParser() {
         List<QueryInspector> queryInspectors = new ArrayList<>(10);
         queryInspectors.add(new AdvancedQueryInspector());
+        queryInspectors.add(new SingleDoiQueryInspector());
         queryInspectors.add(new DoiQueryInspector());
         queryInspectors.add(new PmidQueryInspector());
         queryInspectors.add(new PmcQueryInspector());
