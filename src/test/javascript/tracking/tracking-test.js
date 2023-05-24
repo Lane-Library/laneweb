@@ -71,30 +71,10 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             Y.Assert.isNull(this.pageView);
         },
 
-        testLaneNavClick: function() {
-            var link = Y.one(".lane-nav a");
-            link.simulate("click");
-            Y.Assert.areEqual(link.get("text"), this.event.label);
-            Y.Assert.areEqual("lane:laneNav-top", this.event.category);
-            Y.Assert.areEqual(link.get("href"), this.event.action);
-            Y.Assert.isUndefined(this.event.path);
-            Y.Assert.areEqual(link.get("text"), this.event.label);
-            Y.Assert.isNull(this.pageView);
-        },
-
-        testLaneFooterClick: function() {
-            var link = Y.one(".lane-footer a");
-            link.simulate("click");
-            Y.Assert.areEqual(link.get("text"), this.event.label);
-            Y.Assert.areEqual("lane:laneNav-footer", this.event.category);
-            Y.Assert.areEqual(link.get("href"), this.event.action);
-            Y.Assert.isNull(this.pageView);
-        },
-
         testBrowseResultClick: function() {
             var link = Y.one(".lwSearchResults a");
             link.simulate("click");
-            Y.Assert.areEqual(link.get("text"), this.event.label);
+            Y.Assert.areEqual("id-123 -> Primary Type -> " + link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:browseResultClick", this.event.category);
             Y.Assert.areEqual(location.pathname, this.event.action);
             Y.Assert.areEqual(101, this.event.value);

@@ -115,9 +115,6 @@
                 if (!title) {
                     title = 'unknown';
                 }
-                if (node.closest(".lane-nav")) {
-                    title = "laneNav: " + title;
-                }
                 //if there is rel="popup local" then add "pop-up" to the title
                 if (this._isLocalPopup(node)) {
                     title = 'YUI Pop-up [local]: ' + title;
