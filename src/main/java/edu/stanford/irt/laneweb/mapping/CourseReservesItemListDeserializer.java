@@ -25,7 +25,8 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
         itemsNode.forEach((final JsonNode n) -> itemList.add(new CourseReservesItem(
                 getTextFromNode(n.get("author")),
                 getTextFromNode(n.get("callNumber")),
-                n.get("id").asText(),
+                // strip leading L, a, or in chars from FOLIO hrid
+                n.get("id").asText().replaceFirst("^[Lain]+", ""),
                 n.get("availableCount").asInt(),
                 getTextFromNode(n.get("title")),
                 getTextFromNode(n.get("url")),
