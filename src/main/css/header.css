@@ -2,11 +2,11 @@ header section {
 	padding: 0 33px;
 }
 
-header:nth-of-type(2){
-    position: sticky;
-    top: 0px;
-    z-index: 4;
-    box-shadow: 0px 3px 6px #00000029;
+header:nth-of-type(2) {
+	position: sticky;
+	top: 0px;
+	z-index: 4;
+	box-shadow: 0px 3px 6px #00000029;
 }
 
 section.header {
@@ -21,7 +21,6 @@ section.header a {
 }
 
 /* utility menu with login */
-
 .login>li {
 	display: none;
 }
@@ -38,19 +37,21 @@ section.header a {
 }
 
 /* Bookmakrs icon */
-
-.login .favorites.dropdown{
+.login .favorites.dropdown {
 	line-height: 64px;
- }
-.login > li .favorites.dropdown a {
+}
+
+.login>li .favorites.dropdown a {
 	display: inline-block;
 }
-.login > li .favorites.dropdown  i{
+
+.login>li .favorites.dropdown  i {
 	font-size: 1.5625em;
 	padding: 0 14px;
-    vertical-align: middle;
+	vertical-align: middle;
 }
-.login > li .favorites.dropdown a:hover, .favorites.dropdown:hover {
+
+.login>li .favorites.dropdown a:hover, .favorites.dropdown:hover {
 	background-color: #f0f4f5;
 }
 
@@ -78,6 +79,16 @@ section.header a {
 	display: block;
 }
 
+.header .live-chat {
+	margin-right: 45px
+}
+
+.header .live-chat .fa-comments {
+	color: white;
+	margin-right: 3px
+}
+
+
 .brand a, .brand a:link, .brand a:focus, .brand a:visited {
 	background-image: url('../images/sm-logo.svg');
 	background-repeat: no-repeat;
@@ -90,7 +101,7 @@ section.header a {
 }
 
 @media ( max-width : 1100px) {
-    header:nth-of-type(2){
-        position: relative;    
-    }
+	header:nth-of-type(2) {
+		position: relative;
+	}
 }
