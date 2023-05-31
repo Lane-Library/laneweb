@@ -17,9 +17,6 @@
             node.style.display = 'block';
         });
         
-        if (document.querySelector('#live-chat-sticky-button')) {
-            document.querySelector('#live-chat-sticky-button').style.display = 'none';
-        }
     }
 
     if (/Edge/.test(userAgent)) {
