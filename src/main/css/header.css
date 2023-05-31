@@ -64,6 +64,9 @@ section.header a {
 	margin-right: 3px
 }
 
+.header .medium-screen-hide{
+	display: flex;
+}
 
 .lane-header  .btn.outline {
 	padding: 6px 17px;

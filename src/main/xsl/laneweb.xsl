@@ -309,7 +309,7 @@
     </xsl:template>
 
 
-    <!-- disable live chat if not scheduled to be available -->
+    <!-- disable live chat link if not scheduled to be available -->
     <xsl:template match="h:a[@class = 'live-chat']">
         <xsl:copy>
             <xsl:choose>
@@ -318,12 +318,21 @@
                     <xsl:apply-templates select="*[@name = 'chat-inactive']" />
                 </xsl:when>
                 <xsl:otherwise>
-                   	<xsl:copy-of select="self::node()" />
+	                <xsl:copy-of select="@* | text()"/>
                     <xsl:apply-templates select="*[@name = 'chat-active']" />
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
+
+	<!-- disable live chat div if not scheduled to be available -->
+	<xsl:template match="h:div[@class = 'live-chat']">
+		<xsl:if test="$live-chat-available = 'true'">
+			<xsl:copy>
+				<xsl:apply-templates select="@*|child::node()" />
+			</xsl:copy>
+		</xsl:if>
+	</xsl:template>
 
 
     <!-- add a div with class landing-content inside .module.landing so it can be given padding -->
