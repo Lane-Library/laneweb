@@ -54,6 +54,17 @@ section.header a {
 	background-color: #f0f4f5;
 }
 
+/* live chat header */
+.header .live-chat {
+	margin-right: 45px
+}
+
+.header .live-chat .fa-comments {
+	color: white;
+	margin-right: 3px
+}
+
+
 .lane-header  .btn.outline {
 	padding: 6px 17px;
 	font-size: 1em;
