@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.spam.SpamService;
 
 @Controller
@@ -31,7 +32,7 @@ public class LaneCrmController {
 
   private static final String LANELIBACQ_PATH = "/apps/lanelibacqs";
 
-  private static final String[] VALID_EMAILS = { ".*@stanford.edu$", ".*@stanfordhealthcare.org$",".*@stanfordchildrens.org$" };
+  private static final String[] VALID_EMAILS = { ".*@stanford.edu$", ".*@stanfordhealthcare.org$", ".*@stanfordchildrens.org$" };
 
   private static final String SUBJECT = "subject";
 
@@ -39,14 +40,17 @@ public class LaneCrmController {
 
   private static final String SFP_PORTAL = "sfp";
 
-  private  SpamService spamService;
+  private SpamService spamService;
 
   private String sfpEmailAddress;
 
   private EMailSender sender;
 
-  @Autowired
-  public LaneCrmController(final EMailSender sender, @Value("${edu.stanford.irt.laneweb.acquisition.email}") String sfpEmail, SpamService spamService) {
+  private DataBinder emailDataBinder;
+
+  public LaneCrmController(@Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder/email") final DataBinder dataBinder, final EMailSender sender,
+      @Value("${edu.stanford.irt.laneweb.acquisition.email}") String sfpEmail, SpamService spamService) {
+    this.emailDataBinder = dataBinder;
     this.sender = sender;
     this.sfpEmailAddress = sfpEmail;
     this.spamService = spamService;
@@ -55,19 +59,19 @@ public class LaneCrmController {
   @PostMapping(value = LANELIBACQ_PATH, consumes = FORM_MIME_TYPE)
   public String sendEmail(final Model model, final RedirectAttributes atts) throws JsonProcessingException {
     Map<String, Object> data = model.asMap();
-    if (!validateStanfordEmail(data)){
+    if (!validateStanfordEmail(data)) {
       return ERROR_PAGE;
     }
     this.sender.sendEmail(data);
     return NEXT_PAGE;
   }
 
-  private boolean validateStanfordEmail(final  Map<String, Object> data) {
+  private boolean validateStanfordEmail(final Map<String, Object> data) {
     String email = (String) data.get("requestedBy.email");
     if (null == email || "".equals(email)) {
       return false;
     }
-    if(this.spamService.isSpam( SFP_PORTAL, data)) {
+    if (this.spamService.isSpam(SFP_PORTAL, data)) {
       return false;
     }
     for (String emailValidation : VALID_EMAILS) {
@@ -89,6 +93,7 @@ public class LaneCrmController {
         throw new LanewebException("multiple values for parameter " + entry.getKey());
       }
     }
+    this.emailDataBinder.bind(model.asMap(), request);
     ObjectMapper om = new ObjectMapper();
     model.addAttribute("json", om.writeValueAsString(model));
     model.addAttribute("email", model.getAttribute("requestedBy.email"));
