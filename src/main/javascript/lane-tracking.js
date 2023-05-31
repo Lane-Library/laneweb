@@ -10,24 +10,24 @@
                 var trackingData = {},
                     
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
-	                trackingData.value = link.closest("li").dataset['index'];
-	                trackingData.label = link.textContent;
-	                if (searchTerms) {
-	                    trackingData.category = "lane:searchResultClick";
-	                    trackingData.action = decodeURIComponent(searchTerms);
-	                    trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
-	                } else {
-	                    trackingData.category = "lane:browseResultClick";
-	                    trackingData.action = location.pathname;
-	                }
-	                return trackingData;
+                    trackingData.value = link.closest("li").dataset['index'];
+                    trackingData.label = link.textContent;
+                    if (searchTerms) {
+                        trackingData.category = "lane:searchResultClick";
+                        trackingData.action = decodeURIComponent(searchTerms);
+                        trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
+                    } else {
+                        trackingData.category = "lane:browseResultClick";
+                        trackingData.action = location.pathname;
+                        trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
+                    }
+                    return trackingData;
             },
             getEventTrackingDataByAncestor = function(link) {
                 var i, trackingData = {},
                 handlers = [
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
-                            {selector:".lane-nav", category:"lane:laneNav-top"},
                             {selector:"footer", category:"lane:laneNav-footer"}
                             ];
                 for (i = 0; i < handlers.length; i++) {
@@ -222,9 +222,6 @@
                     if (!title) {
                         title = 'unknown';
                     }
-                    if (node.closest(".lane-nav")) {
-                        title = "laneNav: " + title;
-                    }
                     //if there is rel="popup local" then add "pop-up" to the title
                     if (isLocalPopup(node)) {
                         title = 'YUI Pop-up [local]: ' + title;
@@ -339,7 +336,7 @@
         document.querySelectorAll("a[href*='secure/edtech']").forEach(function(node) {
             node.isTrackableAsPageView = true;
         });
-        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, .lane-nav a, footer a").forEach(function(node) {
+        document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, footer a").forEach(function(node) {
             node.isTrackableAsEvent = true;
         });
 })();

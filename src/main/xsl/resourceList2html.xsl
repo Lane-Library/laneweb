@@ -249,7 +249,7 @@
     </xsl:template>
 
     <xsl:template match="s:pub-author">
-        <xsl:variable name="max-first-line-length" select="105" />
+        <xsl:variable name="max-first-line-length" select="95" />
         <div class="author">
             <xsl:choose>
                 <!-- when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (105 chars) -->
