@@ -9,9 +9,9 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.Collection;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -144,7 +144,7 @@ public class PersistentLoginController {
     response.addCookie(cookie);
   }
 
-  //Because there is no method to add SameSite=strict with javax.servlet.http.Cookie
+  //Because there is no method to add SameSite=strict with jakarta.servlet.http.Cookie
   private void addSameSiteToCookies(HttpServletResponse response) {
     Collection<String> headers = response.getHeaders(COOKIE_HEADERS);
     boolean cookieReseted = false;

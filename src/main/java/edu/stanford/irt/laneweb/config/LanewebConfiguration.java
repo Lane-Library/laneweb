@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,11 +10,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -127,10 +129,10 @@ public class LanewebConfiguration {
 
     @Bean
     public ClientHttpRequestFactory clientHttpRequestFactory() {
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setConnectTimeout(HTTP_CONNECT_TIMEOUT);
-        requestFactory.setReadTimeout(HTTP_READ_TIMEOUT);
-        return requestFactory;
+      RestTemplateBuilder builder = new RestTemplateBuilder();
+      builder.setConnectTimeout(Duration.ofMillis(HTTP_CONNECT_TIMEOUT));
+      builder.setReadTimeout(Duration.ofMillis(HTTP_READ_TIMEOUT));
+      return builder.buildRequestFactory();
     }
 
     @Bean

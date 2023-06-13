@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentService implements EquipmentService {
@@ -20,9 +20,9 @@ public class RESTEquipmentService implements EquipmentService {
 
     private URI catalogServiceURI;
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
-    public RESTEquipmentService(final URI catalogServiceURI, final RESTService restService) {
+    public RESTEquipmentService(final URI catalogServiceURI, final BasicAuthRESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
         this.restService = restService;
     }

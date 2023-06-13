@@ -5,6 +5,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -61,7 +62,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     @Bean
     public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ResourceHttpRequestHandler staticRequestHandler) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
-        handlerMapping.setUrlMap(Collections.singletonMap("/**/*.*", staticRequestHandler));
+        handlerMapping.setUrlMap(Collections.singletonMap("/**", staticRequestHandler));
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
         handlerMapping.setInterceptors(redirectHandlerInterceptor());
         return handlerMapping;

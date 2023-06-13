@@ -2,8 +2,7 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,8 @@ import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class SitemapController extends AbstractSitemapController {
@@ -26,8 +27,20 @@ public class SitemapController extends AbstractSitemapController {
     }
 
     @Override
-    @RequestMapping(value = "/**/*.html", method = { RequestMethod.GET, RequestMethod.HEAD })
+    @RequestMapping(value = {"/*.html", "/*/*.html", "/*/*/*.html", "/*/*/*/*.html", "/*/*/*/*/*.html"}, method = { RequestMethod.GET, RequestMethod.HEAD })
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        doHandleRequest(request, response, "");
+      String path = request.getServletPath();
+      doHandleRequest(request, response, "");
     }
+    
+    
+//    @Override
+//    @RequestMapping(value = {"/**"}, method = { RequestMethod.GET, RequestMethod.HEAD })
+//    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+//      String path = request.getServletPath();
+//      System.out.println(path);
+//      if(path.endsWith(".html")) {
+//        doHandleRequest(request, response, "");
+//      }
+//    }
 }

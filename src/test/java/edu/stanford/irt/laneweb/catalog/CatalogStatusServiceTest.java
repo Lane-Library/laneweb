@@ -13,13 +13,14 @@ import java.net.URISyntaxException;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.status.ApplicationStatus;
 
 public class CatalogStatusServiceTest {
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private CatalogStatusService service;
 

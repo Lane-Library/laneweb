@@ -13,11 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.RestClientException;
 
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
 public class RESTLoginServiceTest {
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private RESTLoginService service;
 

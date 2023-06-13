@@ -2,10 +2,11 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.HttpRequestHandler;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * A request handler that is designed to catch any requests that aren't handled by others, It redirects to

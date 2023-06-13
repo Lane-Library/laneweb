@@ -11,10 +11,10 @@ import static org.easymock.EasyMock.verify;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.mail.Address;
-import javax.mail.Message.RecipientType;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.Address;
+import jakarta.mail.Message.RecipientType;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 import org.junit.Before;
 import org.junit.Rule;

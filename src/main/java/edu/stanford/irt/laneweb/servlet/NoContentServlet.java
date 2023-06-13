@@ -3,11 +3,11 @@ package edu.stanford.irt.laneweb.servlet;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * A servlet that sends an empty 204 response. To be used for .php requests, which will always be attempts to spam or

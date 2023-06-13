@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.List;
 
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.HighlightPage;
 import org.springframework.data.solr.core.query.result.SolrResultPage;
@@ -9,7 +10,8 @@ import org.springframework.data.solr.repository.Facet;
 import org.springframework.data.solr.repository.Highlight;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public interface SolrRepository extends SolrCrudRepository<Eresource, String> {
 
     public final class Handlers {

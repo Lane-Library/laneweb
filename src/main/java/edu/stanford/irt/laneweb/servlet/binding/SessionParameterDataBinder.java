@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.servlet.binding;
 import java.io.Serializable;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 public abstract class SessionParameterDataBinder<T extends Serializable> implements DataBinder {
 
