@@ -94,18 +94,6 @@ em {
 .detailInfo {
     font-size: 0.75em;
 }
-
-
- #live-chat-sticky-button{
-    position: fixed;
-    top: 448px;
-    right: -37px;
-    transform: rotate(-90deg);
-    background-color: #8c1515;
-    padding: 7px 23px;
-    color: white;
-    z-index: 3;
-}
  
  hr {
     color: #dddddd;
