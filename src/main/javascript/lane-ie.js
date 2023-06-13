@@ -15,8 +15,7 @@
 
         document.querySelectorAll('#bookmarkletIE, .bookmarklet-ie').forEach(function(node) {
             node.style.display = 'block';
-        });
-        
+        });        
     }
 
     if (/Edge/.test(userAgent)) {
