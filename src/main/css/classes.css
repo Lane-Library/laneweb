@@ -89,6 +89,9 @@
 .remaining-seats {
     height: 26px;
 }
+a .read-more-class{
+	color: #aabec6;
+}
 
 @media ( max-width :1100px) {
     .class {
