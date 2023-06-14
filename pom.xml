@@ -548,6 +548,7 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
+                                <include>live-chat-min.js</include>
                                 <include>description-toggle-min.js</include>
                                 <include>shibboleth-sfx-min.js</include>
                                 <include>youtube-min.js</include>

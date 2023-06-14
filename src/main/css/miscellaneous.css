@@ -105,6 +105,7 @@ em {
     padding: 7px 23px;
     color: white;
     z-index: 3;
+    display: none;
 }
  
  hr {
