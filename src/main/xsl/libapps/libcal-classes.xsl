@@ -45,28 +45,23 @@
 		<h4>
 			<a>
 				<xsl:attribute name="href">
-                 <xsl:value-of select="../url/public" />
-        	  </xsl:attribute>
+    	        <xsl:value-of select="../url/public" />
+        	  	</xsl:attribute>
 				<xsl:value-of select="." />
 			</a>
 		</h4>
 	</xsl:template>
 
 	<xsl:template match="short_description">
-		<xsl:choose>
-			<xsl:when test="ends-with(., '...')">
-				<xsl:value-of select="substring(., 1, string-length(.)-3)" />
-				<a>
-					<xsl:attribute name="href" select="../url/public" />
-					<xsl:text> Read More </xsl:text>		
-					<i class="fa-solid fa-arrow-right read-more-class"	/>		
-				</a>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:value-of select="." />
-			</xsl:otherwise>
-		</xsl:choose>
-
+		<xsl:value-of select="." />
+		<xsl:if test="ends-with(., '...')">
+			<a>
+				<xsl:attribute name="class" >description-read-more</xsl:attribute>
+				<xsl:attribute name="href" select="../url/public" />
+				<xsl:text> Read More </xsl:text>
+				<i class="fa-solid fa-arrow-right" />
+			</a>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="start">
