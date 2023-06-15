@@ -58,13 +58,13 @@
             <xsl:when test=". = 'sul'">
                 <a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="SearchWorks Record">
                     <xsl:copy-of select="$label" />
-                    SearchWorks
+                    View Details
                 </a>
             </xsl:when>
             <xsl:when test=". = 'bib'">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Catalog Record">
+                <a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="Lane Record in SearchWorks">
                     <xsl:copy-of select="$label" />
-                    Lane Catalog
+                    View Details
                 </a>
             </xsl:when>
             <xsl:when test=". = 'class'">
