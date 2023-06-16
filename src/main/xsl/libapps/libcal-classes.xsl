@@ -33,7 +33,16 @@
 							<xsl:apply-templates select="remainingSeats" />
 						</div>
 						<div class="pure-u-3-4">
-							<xsl:apply-templates select="short_description" />
+							<div>
+								<xsl:apply-templates select="short_description" />
+							</div>
+							<div>
+								<a>
+									<xsl:attribute name="href" select="../url/public" />
+									<xsl:text> Read More </xsl:text>
+									<i class="fa-solid fa-arrow-right" />
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -52,17 +61,6 @@
 		</h4>
 	</xsl:template>
 
-	<xsl:template match="short_description">
-		<xsl:value-of select="." />
-		<xsl:if test="ends-with(., '...')">
-			<a>
-				<xsl:attribute name="class" >description-read-more</xsl:attribute>
-				<xsl:attribute name="href" select="../url/public" />
-				<xsl:text> Read More </xsl:text>
-				<i class="fa-solid fa-arrow-right" />
-			</a>
-		</xsl:if>
-	</xsl:template>
 
 	<xsl:template match="start">
 		<div class="month-day">
