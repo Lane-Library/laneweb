@@ -36,13 +36,15 @@
 							<div>
 								<xsl:apply-templates select="short_description" />
 							</div>
-							<div>
-								<a>
-									<xsl:attribute name="href" select="../url/public" />
-									<xsl:text> Read More </xsl:text>
-									<i class="fa-solid fa-arrow-right" />
-								</a>
-							</div>
+							<xsl:if test="ends-with(./short_description, '...')">
+								<div>
+									<a>
+										<xsl:attribute name="href" select="../url/public" />
+										<xsl:text> Read More </xsl:text>
+										<i class="fa-solid fa-arrow-right" />
+									</a>
+								</div>
+							</xsl:if>
 						</div>
 					</div>
 				</div>
