@@ -5,6 +5,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+    	 <release date="2023-06-19" version="3.11.42" description="bug fix and update release">
+    	    <action date="2023-06-14" dev="alainb" issue="LANEWEB-11141" type="update">
+    	    	Live chat button appears on the scroll
+            </action>
+            <action date="2023-06-15" dev="alainb" issue="LANEWEB-11137" type="update">
+            	Add "Read More" link
+            </action>    
+            <action date="2023-06-15" dev="alainb" issue="LANEWEB-11136" type="update">
+            	Make the title and the image clickable
+            </action>    
+            <action date="2023-0-26" dev="alainb" issue="LANEWEB-11135" type="update">
+            	Make the icons clickable
+            </action>   
+        </release>
         <release date="2023-06-05" version="3.11.41" description="bug fix and update release">
     	      <action date="2023-05-26" dev="alainb" issue="LANEWEB-11133" type="update">
                 Live chat link
