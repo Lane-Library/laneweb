@@ -39,7 +39,7 @@
 							<xsl:if test="ends-with(./short_description, '...')">
 								<div>
 									<a>
-										<xsl:attribute name="href" select="../url/public" />
+										<xsl:attribute name="href" select="./url/public" />
 										<xsl:text> Read More </xsl:text>
 										<i class="fa-solid fa-arrow-right" />
 									</a>
