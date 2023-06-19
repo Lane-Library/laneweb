@@ -15,7 +15,7 @@
             <action date="2023-06-15" dev="alainb" issue="LANEWEB-11136" type="update">
             	Make the title and the image clickable
             </action>    
-            <action date="2023-0-26" dev="alainb" issue="LANEWEB-11135" type="update">
+            <action date="2023-06-15" dev="alainb" issue="LANEWEB-11135" type="update">
             	Make the icons clickable
             </action>   
         </release>
