@@ -56,13 +56,13 @@
                 </a>
             </xsl:when>
             <xsl:when test=". = 'sul'">
-                <a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="SearchWorks Record">
+                <a href="https://searchworks.stanford.edu/view/{f:folioInstanceId(..)}" title="SearchWorks Record">
                     <xsl:copy-of select="$label" />
                     View Details
                 </a>
             </xsl:when>
             <xsl:when test=". = 'bib'">
-                <a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="Lane Record in SearchWorks">
+                <a href="https://searchworks.stanford.edu/view/{f:folioInstanceId(..)}" title="Lane Record in SearchWorks">
                     <xsl:copy-of select="$label" />
                     View Details
                 </a>
@@ -479,6 +479,23 @@
         <xsl:param name="eresource" />
         <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 
         and contains($eresource/s:link[1]/s:locationUrl,'/view/bib/')" />
+    </xsl:function>
+
+    <!--  raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->
+    <!--  idiosyncratic rules around SearchWorks/FOLIO ID prefixes: -->
+    <!--    retain "in" for all Folio-created records -->
+    <!--    strip "a" from migrated SUL records -->
+    <!--    retain "L" from migrated Lane records -->
+    <xsl:function name="f:folioInstanceId" as="xsd:string">
+        <xsl:param name="eresource" />
+        <xsl:variable name="prefix">
+            <xsl:choose>
+                <xsl:when test="starts-with($eresource/s:recordId,'000')">in</xsl:when>
+                <xsl:when test="'bib' = $eresource/s:recordType">L</xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="concat($prefix, $eresource/s:recordId)"/>
     </xsl:function>
 
 </xsl:stylesheet>
