@@ -13,8 +13,8 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
 
 public class BibIDToEresourceTransformerTest {
 
@@ -24,7 +24,7 @@ public class BibIDToEresourceTransformerTest {
 
     private SAXStrategy<Eresource> saxStrategy;
 
-    private SolrService solrService;
+    private EresourceSearchService solrService;
 
     private BibIDToEresourceTransformer transformer;
 
@@ -32,7 +32,7 @@ public class BibIDToEresourceTransformerTest {
 
     @Before
     public void setUp() {
-        this.solrService = mock(SolrService.class);
+        this.solrService = mock(EresourceSearchService.class);
         this.saxStrategy = mock(SAXStrategy.class);
         this.transformer = new BibIDToEresourceTransformer(this.solrService, this.saxStrategy, "type",
                 AlwaysValid.SHARED_INSTANCE);

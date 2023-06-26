@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+
 public class EresourceTest {
 
     @Test

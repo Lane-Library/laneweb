@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.resource.PagingData;
 
@@ -14,9 +14,9 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
 
     private String query;
 
-    public BrowseAllEresourcesGenerator(final String type, final SolrService solrService,
+    public BrowseAllEresourcesGenerator(final String type, final EresourceBrowseService restBrowseService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
-        super(type, solrService, saxStrategy);
+        super(type, restBrowseService, saxStrategy);
     }
 
     @Override
@@ -33,12 +33,12 @@ public class BrowseAllEresourcesGenerator extends BrowseEresourcesGenerator {
     }
 
     @Override
-    protected List<Eresource> getEresourceList(final SolrService solrService) {
+    protected List<Eresource> getEresourceList(final EresourceBrowseService restBrowseService) {
         List<Eresource> list;
         if (this.query == null) {
             list = Collections.emptyList();
         } else {
-            list = solrService.browseByQuery(this.query);
+            list = restBrowseService.browseByQuery(this.query);
         }
         return list;
     }

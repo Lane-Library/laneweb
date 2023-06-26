@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class BrowseAllEresourcesGeneratorTest {
@@ -22,13 +22,13 @@ public class BrowseAllEresourcesGeneratorTest {
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
-    private SolrService solrService;
+    private EresourceBrowseService restBrowseService;
 
     @Before
     public void setUp() {
-        this.solrService = mock(SolrService.class);
+        this.restBrowseService = mock(EresourceBrowseService.class);
         this.saxStrategy = mock(SAXStrategy.class);
-        this.generator = new BrowseAllEresourcesGenerator("er-browse", this.solrService, this.saxStrategy);
+        this.generator = new BrowseAllEresourcesGenerator("er-browse", this.restBrowseService, this.saxStrategy);
     }
 
     @Test
@@ -39,17 +39,17 @@ public class BrowseAllEresourcesGeneratorTest {
 
     @Test
     public void testGetEresourceList() {
-        expect(this.solrService.browseByQuery("query")).andReturn(Collections.singletonList(null));
-        replay(this.solrService);
+        expect(this.restBrowseService.browseByQuery("query")).andReturn(Collections.singletonList(null));
+        replay(this.restBrowseService);
         this.generator.setParameters(Collections.singletonMap(Model.QUERY, "query"));
-        assertEquals(1, this.generator.getEresourceList(this.solrService).size());
-        verify(this.solrService);
+        assertEquals(1, this.generator.getEresourceList(this.restBrowseService).size());
+        verify(this.restBrowseService);
     }
 
     @Test
     public void testGetEresourceListNoType() {
         this.generator.setParameters(Collections.emptyMap());
-        assertEquals(0, this.generator.getEresourceList(this.solrService).size());
+        assertEquals(0, this.generator.getEresourceList(this.restBrowseService).size());
     }
 
     @Test

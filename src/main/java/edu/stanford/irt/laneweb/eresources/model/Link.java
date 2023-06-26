@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.eresources.model;
 
 public class Link {
 

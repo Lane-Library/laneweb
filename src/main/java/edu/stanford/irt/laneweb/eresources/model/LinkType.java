@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.eresources.model;
 
 /**
  * An enum of the different types of Links

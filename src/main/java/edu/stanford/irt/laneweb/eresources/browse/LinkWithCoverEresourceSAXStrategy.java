@@ -5,7 +5,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
 import edu.stanford.irt.laneweb.resource.AbstractXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 

@@ -47,40 +47,27 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
 @Configuration
-@ImportResource({
-    "classpath:/spring/applications.xmap",
-    "classpath:/spring/bookmarks.xmap",
-    "classpath:/spring/libcals.xmap",
-    "classpath:/spring/content.xmap",
-    "classpath:/spring/eresources.xmap",
-    "classpath:/spring/libguides.xmap",
-    "classpath:/spring/rss.xmap",
-    "classpath:/spring/sitemap.xmap"
-})
-@ComponentScan({
-    "edu.stanford.irt.laneweb.config",
-    "edu.stanford.irt.solr.service",
-    "edu.stanford.irt.laneweb.servlet.mvc",
-    "edu.stanford.irt.laneweb.bookmarks",
-    "edu.stanford.irt.laneweb.livechat"
-})
+@ImportResource({ "classpath:/spring/applications.xmap", "classpath:/spring/bookmarks.xmap",
+        "classpath:/spring/libcals.xmap", "classpath:/spring/content.xmap", "classpath:/spring/eresources.xmap",
+        "classpath:/spring/libguides.xmap", "classpath:/spring/rss.xmap", "classpath:/spring/sitemap.xmap" })
+@ComponentScan({ "edu.stanford.irt.laneweb.config", "edu.stanford.irt.solr.service",
+        "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks",
+        "edu.stanford.irt.laneweb.livechat" })
 public class LanewebConfiguration {
 
-    private static final List<String> DEFAULT_LOCATIONS =
-            Arrays.asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
+    private static final List<String> DEFAULT_LOCATIONS = Arrays
+            .asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
-    private static final int HTTP_CONNECT_TIMEOUT = 5000;
-    
-    private static final int HTTP_READ_TIMEOUT = 15000;
+    private static final int HTTP_CONNECT_TIMEOUT = 5_000;
+
+    private static final int HTTP_READ_TIMEOUT = 30_000;
 
     private Map<String, Object> constants;
 
-    public LanewebConfiguration(
-            @Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
+    public LanewebConfiguration(@Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
             @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
             @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
-            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking,
-            ServletContext servletContext,
+            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking, ServletContext servletContext,
             @Value("${edu.stanford.irt.laneweb.version}") final String version,
             @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken) {
         this.constants = new HashMap<>();
@@ -98,20 +85,15 @@ public class LanewebConfiguration {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
             final Environment environment, final ResourceLoader resourceLoader) {
-        List<Resource> locations = DEFAULT_LOCATIONS.stream()
-                .map((final String s) -> s + "application.properties")
-                .map(resourceLoader::getResource)
-                .collect(Collectors.toList());
-        Arrays.stream(environment.getActiveProfiles()).forEach((final String profile) ->
-            locations.addAll(DEFAULT_LOCATIONS.stream()
-                .map((final String s) -> s + "application-" + profile + ".properties")
-                .map(resourceLoader::getResource)
-                .collect(Collectors.toList()))
-        );
+        List<Resource> locations = DEFAULT_LOCATIONS.stream().map((final String s) -> s + "application.properties")
+                .map(resourceLoader::getResource).collect(Collectors.toList());
+        Arrays.stream(environment.getActiveProfiles())
+                .forEach((final String profile) -> locations.addAll(
+                        DEFAULT_LOCATIONS.stream().map((final String s) -> s + "application-" + profile + ".properties")
+                                .map(resourceLoader::getResource).collect(Collectors.toList())));
         String springConfigProperty = environment.getProperty("spring.config.location");
         if (springConfigProperty != null) {
-            locations.addAll(Arrays.stream(springConfigProperty.split(","))
-                    .map(resourceLoader::getResource)
+            locations.addAll(Arrays.stream(springConfigProperty.split(",")).map(resourceLoader::getResource)
                     .collect(Collectors.toList()));
         }
         PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
@@ -162,8 +144,7 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public RestOperations restOperations(
-            final ClientHttpRequestFactory clientHttpRequestFactory,
+    public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory,
             final ObjectMapper objectMapper) {
         RestTemplate template = new RestTemplate(clientHttpRequestFactory);
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
@@ -180,5 +161,4 @@ public class LanewebConfiguration {
     public RESTService restService(final RestOperations restOperations) {
         return new RESTService(restOperations);
     }
-
 }

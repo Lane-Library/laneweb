@@ -18,11 +18,6 @@ public class StatusConfigurationTest {
     }
 
     @Test
-    public void testEresourceStatusProvider() {
-        assertNotNull(this.configuration.eresourceStatusProvider(null));
-    }
-
-    @Test
     public void testIndexDotHtmlStatusProvider() {
         assertNotNull(this.configuration.indexDotHtmlStatusProvider(null, null, null, null, null));
     }

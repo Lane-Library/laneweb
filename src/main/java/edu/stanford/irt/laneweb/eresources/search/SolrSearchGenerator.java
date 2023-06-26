@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
+import static org.springframework.data.domain.PageRequest.of;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -9,24 +11,25 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.data.solr.core.query.SolrPageRequest;
-import org.springframework.data.solr.core.query.result.HighlightEntry;
-import org.springframework.data.solr.core.query.result.HighlightEntry.Highlight;
-import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.solr.HighlightEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.HighlightEntry.Highlight;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestPage;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestResult;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
 
-public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> {
+public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult> {
 
     private static final int DEFAULT_RESULTS = 20;
 
@@ -38,15 +41,15 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
 
     private String searchTerm;
 
-    private SolrService solrService;
+    private EresourceSearchService searchService;
 
     private String sort;
 
     private String type;
 
-    public SolrSearchGenerator(final SolrService solrService, final SAXStrategy<SolrSearchResult> saxStrategy) {
+    public SolrSearchGenerator(final EresourceSearchService searchService, final SAXStrategy<RestResult> saxStrategy) {
         super(saxStrategy);
-        this.solrService = solrService;
+        this.searchService = searchService;
     }
 
     @Override
@@ -87,12 +90,17 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         }
     }
 
-    private void highlightResults(final Page<Eresource> page) {
+    
+    
+
+    private Page<Eresource> highlightPage(final Page<Eresource> page) {
+        List<Eresource> content = new ArrayList<>();
         if (null != page) {
-            SolrResultPage<Eresource> solrPage = (SolrResultPage<Eresource>) page;
+            RestPage<Eresource> solrPage = (RestPage<Eresource>) page;
             if (!solrPage.getHighlighted().isEmpty()) {
                 solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
                     Eresource er = hightlight.getEntity();
+                    content.add(er);
                     hightlight.getHighlights().forEach((final Highlight h) -> {
                         String field = h.getField().getName();
                         String highlightedData = h.getSnipplets().get(0);
@@ -108,10 +116,15 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
                     });
                 });
             }
-        }
+       
+        PageRequest pageRequest = PageRequest.of(page.getNumber(), page.getSize());  
+        return new RestPage<>(content, pageRequest, page.getTotalElements() );
+        } 
+        return null;
     }
 
-    private Sort parseSortParam() {
+
+    private Pageable getPageRequest() {
         List<Order> orders = new ArrayList<>();
         for (String string : this.sort.split(",")) {
             String[] s = string.split(" ");
@@ -120,30 +133,30 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
             }
         }
         if (!orders.isEmpty()) {
-            return Sort.by(orders);
+            return of(this.pageNumber.intValue(), DEFAULT_RESULTS, Sort.by(orders));
         }
-        return null;
+        return of(this.pageNumber.intValue(), DEFAULT_RESULTS);
     }
 
     @Override
-    protected SolrSearchResult doSearch(final String query) {
-        Sort sorts = parseSortParam();
-        Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
+    protected RestResult doSearch(final String query) {
+        Pageable pageRequest = this.getPageRequest();
         Page<Eresource> page;
         if (this.type == null) {
-            page = this.solrService.searchWithFilters(query, this.facets, pageRequest);
+            page = this.searchService.searchWithFilters(query, this.facets, pageRequest);
         } else {
-            page = this.solrService.searchType(this.type, this.searchTerm, pageRequest);
+            page = this.searchService.searchType(this.type, this.searchTerm, pageRequest);
         }
-        highlightResults(page);
+        page = highlightPage(page);
+       
         if (this.pageNumber == 0) {
             checkForExactMatch(page);
         }
-        return new SolrSearchResult(query, page);
+        return new RestResult(query, page);
     }
 
     @Override
-    protected SolrSearchResult getEmptyResult() {
-        return SolrSearchResult.EMPTY_RESULT;
+    protected RestResult getEmptyResult() {
+        return RestResult.EMPTY_RESULT;
     }
 }

@@ -10,8 +10,8 @@ import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.PagingData;
@@ -33,14 +33,14 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
-    private SolrService solrService;
+    private EresourceBrowseService restBrowseService;
 
     private Validity validity;
 
-    protected AbstractEresourcesGenerator(final String componentType, final SolrService solrService,
+    protected AbstractEresourcesGenerator(final String componentType, final EresourceBrowseService restBrowseService,
             final SAXStrategy<PagingEresourceList> saxStrategy) {
         this.componentType = componentType;
-        this.solrService = solrService;
+        this.restBrowseService = restBrowseService;
         this.saxStrategy = saxStrategy;
     }
 
@@ -97,7 +97,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Eresource> eresources = getEresourceList(this.solrService);
+        List<Eresource> eresources = getEresourceList(this.restBrowseService);
         String baseQuery = this.queryString;
         if (baseQuery.indexOf("&page=") > -1) {
             baseQuery = baseQuery.substring(0, baseQuery.indexOf("&page="));
@@ -108,7 +108,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
         this.saxStrategy.toSAX(new PagingEresourceList(eresources, pagingData, getHeading()), xmlConsumer);
     }
 
-    protected abstract List<Eresource> getEresourceList(SolrService solrService);
+    protected abstract List<Eresource> getEresourceList(EresourceBrowseService restFacetService);
 
     protected abstract String getHeading();
 

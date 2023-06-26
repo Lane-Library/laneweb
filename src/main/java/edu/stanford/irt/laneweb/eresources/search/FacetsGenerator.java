@@ -6,24 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.solr.UncategorizedSolrException;
-import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
 
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class FacetsGenerator extends AbstractGenerator {
-
-    private static final Logger log = LoggerFactory.getLogger(FacetsGenerator.class);
 
     private static final String EMPTY = "";
 
@@ -35,7 +28,7 @@ public class FacetsGenerator extends AbstractGenerator {
 
     private int facetsToShow;
 
-    private FacetService service;
+    private EresourceFacetService service;
 
     private Collection<String> prioritizedPublicationTypes;
 
@@ -43,11 +36,11 @@ public class FacetsGenerator extends AbstractGenerator {
 
     private FacetComparator facetComparator;
 
-    private Collection<String> facetFields; 
-    
+    private Collection<String> facetFields;
+
     private Map<String, Collection<FacetFieldEntry>> facetFieldEntries;
 
-    public FacetsGenerator(final FacetService service,
+    public FacetsGenerator(final EresourceFacetService service,
             final SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSolrSAXStrategy, final int facetsToShow,
             final Collection<String> publicationTypes) {
         this.service = service;
@@ -67,25 +60,20 @@ public class FacetsGenerator extends AbstractGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        try {
-            FacetPage<Eresource> fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShow);
-            orderFacets(fps);
-            maybeRequestMorePublicationTypes();
-            this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);
-        } catch (UncategorizedSolrException e) {
-            log.error(e.toString());
-        }
+        Map<String,List<FacetFieldEntry>>  fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShow);
+        orderFacets(fps);
+        maybeRequestMorePublicationTypes();
+        this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);
     }
 
-    private void orderFacets(FacetPage<Eresource> fps) {
+    private void orderFacets( Map<String,List<FacetFieldEntry>> facetEntries ) {
         for (String facetName : this.facetFields) {
-            Page<FacetFieldEntry> facetPage = fps.getFacetResultPage(facetName);
+            List<FacetFieldEntry> facetPage = facetEntries.get(facetName);
             orderFacet(facetName, facetPage);
         }
     }
 
-    private void orderFacet(String facetName, Page<FacetFieldEntry> facetPage) {
-        List<FacetFieldEntry> entryList = facetPage.getContent();
+    private void orderFacet(String facetName, List<FacetFieldEntry> entryList) {
         Collection<FacetFieldEntry> orderedFacets = new TreeSet<>(this.facetComparator);
         orderedFacets.addAll(entryList);
         this.facetFieldEntries.put(facetName, orderedFacets);
@@ -96,8 +84,8 @@ public class FacetsGenerator extends AbstractGenerator {
         long count = facetList.stream()
                 .filter((final FacetFieldEntry s) -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
         if (count < this.prioritizedPublicationTypes.size()) {
-            FacetPage<Eresource> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 1000, 1 , FacetSort.COUNT);
-            Page<FacetFieldEntry> facetPage = fps.getFacetResultPage(PUBLICATION_TYPE);
+            Map<String,List<FacetFieldEntry>> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 1000, 1 , FacetSort.COUNT);
+            List<FacetFieldEntry> facetPage = fps.get(PUBLICATION_TYPE);
             orderFacet(PUBLICATION_TYPE, facetPage);
         }
     }

@@ -12,13 +12,17 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.eresources.SolrRepository;
 import edu.stanford.irt.laneweb.resource.Resource;
 
 public class SolrQueryHighlightingTransformerTest {
+    
+    
+    public static final String END = ":::";
 
-    private static final String SAMPLE = "data " + SolrRepository.HighlightTags.START + "keyword"
-            + SolrRepository.HighlightTags.END + " data";
+    public static final String START = "___";
+
+
+    private static final String SAMPLE = "data " + START + "keyword"   + END + " data";
 
     private static final char[] SAMPLE_CHARS = SAMPLE.toCharArray();
 

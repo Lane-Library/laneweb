@@ -59,19 +59,11 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
-    public void testSolrClient() {
-        assertNotNull(this.configuration.solrClient("/"));
-    }
-
-    @Test
     public void testSolrPagingEresourceSAXStrategy() {
         assertNotNull(this.configuration.solrPagingEresourceSAXStrategy());
     }
 
-    @Test
-    public void testSolrQueryParser() {
-        assertNotNull(this.configuration.solrQueryParser());
-    }
+   
 
     @Test
     public void testSolrSearchFacetsGenerator() {
@@ -83,13 +75,5 @@ public class EresourcesConfigurationTest {
         assertNotNull(this.configuration.solrSearchGenerator(null));
     }
 
-    @Test
-    public void testSolrService() {
-        assertNotNull(this.configuration.solrService(null, null));
-    }
-
-    @Test
-    public void testSolrTemplate() {
-        assertNotNull(this.configuration.solrTemplate(mock(SolrClient.class), mock(SolrConverter.class)));
-    }
+   
 }

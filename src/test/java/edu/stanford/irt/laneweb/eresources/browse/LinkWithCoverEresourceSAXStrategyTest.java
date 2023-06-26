@@ -20,8 +20,8 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.Link;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.Link;
 
 public class LinkWithCoverEresourceSAXStrategyTest {
 

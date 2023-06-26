@@ -14,7 +14,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.spell.SpellCheckException;
 import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
@@ -23,42 +23,42 @@ public class SpellCheckControllerTest {
 
     private SpellCheckController controller;
 
-    private SolrService solrService;
+    private EresourceSearchService searchService;
 
     private SpellChecker spellChecker;
 
     @Before
     public void setUp() {
-        this.solrService = mock(SolrService.class);
+        this.searchService = mock(EresourceSearchService.class);
         this.spellChecker = mock(SpellChecker.class);
-        this.controller = new SpellCheckController(this.spellChecker, this.solrService);
+        this.controller = new SpellCheckController(this.spellChecker, this.searchService);
     }
 
     @Test
     public void testCheckSpelling() {
         SpellCheckResult result = new SpellCheckResult("correct");
         expect(this.spellChecker.spellCheck("incorrect")).andReturn(result);
-        Map<String, Long> map = new HashMap<>();
-        map.put("all", 100L);
-        expect(this.solrService.searchCount("correct")).andReturn(map);
-        replay(this.spellChecker, this.solrService);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("all", 100);
+        expect(this.searchService.searchCount("correct")).andReturn(map);
+        replay(this.spellChecker, this.searchService);
         SpellingResult spellResult = this.controller.checkSpelling("incorrect");
         assertEquals("correct", spellResult.getSuggestion());
         assertEquals(100, spellResult.getSuggestionResultCount());
-        verify(this.spellChecker, this.solrService);
+        verify(this.spellChecker, this.searchService);
     }
 
     @Test
     public void testCheckSpellingNoresults() {
         SpellCheckResult result = new SpellCheckResult("corrected");
         expect(this.spellChecker.spellCheck("original")).andReturn(result);
-        Map<String, Long> map = new HashMap<>();
-        map.put("all", 0L);
-        expect(this.solrService.searchCount("corrected")).andReturn(map);
-        replay(this.spellChecker, this.solrService);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("all", 0);
+        expect(this.searchService.searchCount("corrected")).andReturn(map);
+        replay(this.spellChecker, this.searchService);
         SpellingResult spellResult = this.controller.checkSpelling("original");
         assertNull(spellResult.getSuggestion());
-        verify(this.spellChecker, this.solrService);
+        verify(this.spellChecker, this.searchService);
     }
 
     @Test

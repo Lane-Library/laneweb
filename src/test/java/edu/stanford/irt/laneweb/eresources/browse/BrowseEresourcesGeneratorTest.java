@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class BrowseEresourcesGeneratorTest {
@@ -21,11 +21,11 @@ public class BrowseEresourcesGeneratorTest {
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
-    private SolrService solrService;
+    private EresourceBrowseService solrService;
 
     @Before
     public void setUp() throws Exception {
-        this.solrService = mock(SolrService.class);
+        this.solrService = mock(EresourceBrowseService.class);
         this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new BrowseEresourcesGenerator("er-browse", this.solrService, this.saxStrategy);
     }

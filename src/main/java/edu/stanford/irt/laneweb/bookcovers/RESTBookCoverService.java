@@ -34,6 +34,9 @@ public class RESTBookCoverService implements BookCoverService {
     @Override
     public ApplicationStatus getStatus() {
         URI uri = this.bookCoverServiceURI.resolve("status.json");
+        
+        System.out.println(uri);
+        
         return this.restService.getObject(uri, ApplicationStatus.class);
     }
 }
