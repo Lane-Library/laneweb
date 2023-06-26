@@ -30,7 +30,7 @@ public class SolrSearchGeneratorTest {
 
     private Map<String, Object> model;
 
-    private SAXStrategy<RestResult> saxStrategy;
+    private SAXStrategy<RestResult<Eresource>> saxStrategy;
 
     private EresourceSearchService service;
 
