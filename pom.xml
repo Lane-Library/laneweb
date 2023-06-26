@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>130</version>
+        <version>131</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.11.43-SNAPSHOT</version>
@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>12.1</version>
+            <version>12.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -308,7 +308,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.75</version>
+            <version>9.0.76</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -413,7 +413,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
                 <configuration>
                     <archive>
                         <manifestEntries>
