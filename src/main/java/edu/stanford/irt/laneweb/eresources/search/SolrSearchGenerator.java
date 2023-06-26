@@ -29,7 +29,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
 
-public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult> {
+public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eresource>> {
 
     private static final int DEFAULT_RESULTS = 20;
 
@@ -47,7 +47,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult> {
 
     private String type;
 
-    public SolrSearchGenerator(final EresourceSearchService searchService, final SAXStrategy<RestResult> saxStrategy) {
+    public SolrSearchGenerator(final EresourceSearchService searchService, final SAXStrategy<RestResult<Eresource>> saxStrategy) {
         super(saxStrategy);
         this.searchService = searchService;
     }
@@ -139,7 +139,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult> {
     }
 
     @Override
-    protected RestResult doSearch(final String query) {
+    protected RestResult<Eresource> doSearch(final String query) {
         Pageable pageRequest = this.getPageRequest();
         Page<Eresource> page;
         if (this.type == null) {
@@ -148,15 +148,14 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult> {
             page = this.searchService.searchType(this.type, this.searchTerm, pageRequest);
         }
         page = highlightPage(page);
-       
         if (this.pageNumber == 0) {
             checkForExactMatch(page);
         }
-        return new RestResult(query, page);
+        return new RestResult<Eresource>(query, page);
     }
 
     @Override
-    protected RestResult getEmptyResult() {
+    protected RestResult<Eresource> getEmptyResult() {
         return RestResult.EMPTY_RESULT;
     }
 }
