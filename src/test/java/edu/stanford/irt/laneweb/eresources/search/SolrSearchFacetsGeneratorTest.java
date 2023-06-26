@@ -62,8 +62,8 @@ public class SolrSearchFacetsGeneratorTest {
         Field field = new Field("publicationType");
         expect(this.service.facetByManyFields("skin", "", 5)).andReturn(this.eresourcesPage);
         expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
-        expect(this.pageFieldFacet)
-                .andReturn(Arrays.asList(new FacetFieldEntry(field, "Required1", 100)));
+        expect(this.pageFieldFacet).andReturn(Arrays.asList(new FacetFieldEntry(field, "Required1", 100)));
+        expect(this.service.facetByField("skin", "","publicationType",1000, 1, FacetSort.COUNT)).andReturn(this.eresourcesPage);
         replay(this.service, this.eresourcesPage);
         this.generator.generate();
         verify(this.service, this.eresourcesPage);
