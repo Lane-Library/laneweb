@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
-    
+
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
-    
+
+    <xsl:variable name="requests-host" select="'requests-folio-dev.stanford.edu'"/>
+
+    <xsl:variable name="searchworks-host" select="'searchworks-folio-dev.stanford.edu'"/>
 
     <xsl:template match="s:desc-linebreak">
         <br />
@@ -56,13 +59,13 @@
                 </a>
             </xsl:when>
             <xsl:when test=". = 'sul'">
-                <a href="https://searchworks.stanford.edu/view/{f:folioInstanceId(..)}" title="SearchWorks Record">
+                <a href="https://{$searchworks-host}/view/{f:folioInstanceId(..)}" title="SearchWorks Record">
                     <xsl:copy-of select="$label" />
                     View Details
                 </a>
             </xsl:when>
             <xsl:when test=". = 'bib'">
-                <a href="https://searchworks.stanford.edu/view/{f:folioInstanceId(..)}" title="Lane Record in SearchWorks">
+                <a href="https://{$searchworks-host}/view/{f:folioInstanceId(..)}" title="Lane Record in SearchWorks">
                     <xsl:copy-of select="$label" />
                     View Details
                 </a>
@@ -366,7 +369,7 @@
                         </span>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
-                                <a class="btn alt" href="https://requests.stanford.edu/pages/new?item_id={$eresource/s:recordId}&amp;origin=LANE&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
+                                <a class="btn alt" href="https://{$requests-host}/pages/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
@@ -377,7 +380,7 @@
                             Unavailable: Checked out
                         </span>
                         <span class="requestIt">
-                            <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.recall=true" rel="popup console 1020 800">Recall Item</a>
+                            <a class="btn alt" href="https://{$requests-host}/pages/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Recall Item</a>
                         </span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
