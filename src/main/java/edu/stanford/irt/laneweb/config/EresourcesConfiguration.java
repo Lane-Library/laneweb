@@ -19,9 +19,9 @@ import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
+import edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.laneweb.eresources.EresourceStatusService;
 import edu.stanford.irt.laneweb.eresources.browse.AtoZBrowseGenerator;
@@ -137,7 +137,7 @@ public class EresourcesConfiguration {
     }
 
     @Bean
-    public SAXStrategy<RestResult> solrPagingEresourceSAXStrategy() {
+    public SAXStrategy<RestResult<Eresource>> solrPagingEresourceSAXStrategy() {
         return new SolrPagingEresourceSAXStrategy(eresourceSAXStrategy());
     }
 
