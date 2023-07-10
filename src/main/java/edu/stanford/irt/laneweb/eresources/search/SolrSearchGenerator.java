@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -47,7 +46,8 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
 
     private String type;
 
-    public SolrSearchGenerator(final EresourceSearchService searchService, final SAXStrategy<RestResult<Eresource>> saxStrategy) {
+    public SolrSearchGenerator(final EresourceSearchService searchService,
+            final SAXStrategy<RestResult<Eresource>> saxStrategy) {
         super(saxStrategy);
         this.searchService = searchService;
     }
@@ -90,17 +90,12 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
         }
     }
 
-    
-    
-
-    private Page<Eresource> highlightPage(final Page<Eresource> page) {
-        List<Eresource> content = new ArrayList<>();
+    private void highlightPage(final Page<Eresource> page) {
         if (null != page) {
             RestPage<Eresource> solrPage = (RestPage<Eresource>) page;
             if (!solrPage.getHighlighted().isEmpty()) {
                 solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
                     Eresource er = hightlight.getEntity();
-                    content.add(er);
                     hightlight.getHighlights().forEach((final Highlight h) -> {
                         String field = h.getField().getName();
                         String highlightedData = h.getSnipplets().get(0);
@@ -116,13 +111,8 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
                     });
                 });
             }
-       
-        PageRequest pageRequest = PageRequest.of(page.getNumber(), page.getSize());  
-        return new RestPage<>(content, pageRequest, page.getTotalElements() );
-        } 
-        return null;
+        }
     }
-
 
     private Pageable getPageRequest() {
         List<Order> orders = new ArrayList<>();
@@ -147,11 +137,11 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
         } else {
             page = this.searchService.searchType(this.type, this.searchTerm, pageRequest);
         }
-        page = highlightPage(page);
+        highlightPage(page);
         if (this.pageNumber == 0) {
             checkForExactMatch(page);
         }
-        return new RestResult<Eresource>(query, page);
+        return new RestResult<>(query, page);
     }
 
     @Override

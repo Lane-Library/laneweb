@@ -4,6 +4,7 @@ package edu.stanford.irt.laneweb.eresources.model.solr;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -49,6 +50,14 @@ public class RestPage<T> extends PageImpl<T> {
  
     public RestPage() {
         super(new ArrayList<>());
+    }
+    
+    @Override
+    public List<T> getContent(){
+        if(null != this.highlighted ) {
+        return this.highlighted.stream().map( h -> h.getEntity()).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
     public List<HighlightEntry<T>> getHighlighted() {
