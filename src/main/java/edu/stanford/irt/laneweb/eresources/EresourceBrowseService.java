@@ -35,7 +35,7 @@ public class EresourceBrowseService extends AbstractRestService {
     public Map<String, List<FacetFieldEntry>> facetByField(final String query, final String filters, final String field,
             final int pageNumber, final int facetLimit, final int facetMinCount,
             final FacetSort facetSort) {
-        String path = "/facet/field/".concat(this.urlEncode(query));
+        String path = "/facet/field/".concat(query);
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("filters", filters));
         parameters.add(new BasicNameValuePair("field", field));
