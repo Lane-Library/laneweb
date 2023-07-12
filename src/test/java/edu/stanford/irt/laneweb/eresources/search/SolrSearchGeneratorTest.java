@@ -21,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestPage;
 import edu.stanford.irt.laneweb.eresources.model.solr.RestResult;
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -33,6 +34,8 @@ public class SolrSearchGeneratorTest {
     private SAXStrategy<RestResult<Eresource>> saxStrategy;
 
     private EresourceSearchService service;
+    
+    private RestPage<Eresource> page;
 
     @Before
     public void setUp() {
@@ -40,6 +43,7 @@ public class SolrSearchGeneratorTest {
         this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new SolrSearchGenerator(this.service, this.saxStrategy);
         this.model = new HashMap<>();
+        this.page = new RestPage<>();
     }
 
     @Test
@@ -47,7 +51,7 @@ public class SolrSearchGeneratorTest {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.FACETS, "facets");
         Capture<Pageable> pageable = newCapture();
-        expect(this.service.searchWithFilters(eq("query"), eq("facets"), capture(pageable))).andReturn(null);
+        expect(this.service.searchWithFilters(eq("query"), eq("facets"), capture(pageable))).andReturn(page);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         RestResult<Eresource> result = this.generator.doSearch("query");
@@ -63,7 +67,7 @@ public class SolrSearchGeneratorTest {
         this.model.put(Model.QUERY, "query");
         this.model.put(Model.PAGE, "5");
         Capture<Pageable> pageable = newCapture();
-        expect(this.service.searchWithFilters(eq("query"), eq(null), capture(pageable))).andReturn(null);
+        expect(this.service.searchWithFilters(eq("query"), eq(null), capture(pageable))).andReturn(page);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         RestResult<Eresource> result = this.generator.doSearch("query");
@@ -80,7 +84,7 @@ public class SolrSearchGeneratorTest {
         this.model.put(Model.SORT, "authors_sort asc,title_sort asc");
         Capture<Pageable> pageable = newCapture();
         expect(this.service.searchWithFilters(eq("query"), eq("recordType:\"pubmed\""), capture(pageable)))
-                .andReturn(null);
+                .andReturn(page);
         replay(this.service, this.saxStrategy);
         this.generator.setModel(this.model);
         RestResult<Eresource> result = this.generator.doSearch("query");

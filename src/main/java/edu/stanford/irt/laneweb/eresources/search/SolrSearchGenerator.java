@@ -91,26 +91,24 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
     }
 
     private void highlightPage(final Page<Eresource> page) {
-        if (null != page) {
-            RestPage<Eresource> solrPage = (RestPage<Eresource>) page;
-            if (!solrPage.getHighlighted().isEmpty()) {
-                solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
-                    Eresource er = hightlight.getEntity();
-                    hightlight.getHighlights().forEach((final Highlight h) -> {
-                        String field = h.getField().getName();
-                        String highlightedData = h.getSnipplets().get(0);
-                        if ("title".equals(field)) {
-                            er.setTitle(highlightedData);
-                        } else if ("description".equals(field)) {
-                            er.setDescription(highlightedData);
-                        } else if ("publicationText".equals(field)) {
-                            er.setPublicationText(highlightedData);
-                        } else if ("publicationAuthorsText".equals(field)) {
-                            er.setPublicationAuthorsText(highlightedData);
-                        }
-                    });
+        RestPage<Eresource> solrPage = (RestPage<Eresource>) page;
+        if (!solrPage.getHighlighted().isEmpty()) {
+            solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
+                Eresource er = hightlight.getEntity();
+                hightlight.getHighlights().forEach((final Highlight h) -> {
+                    String field = h.getField().getName();
+                    String highlightedData = h.getSnipplets().get(0);
+                    if ("title".equals(field)) {
+                        er.setTitle(highlightedData);
+                    } else if ("description".equals(field)) {
+                        er.setDescription(highlightedData);
+                    } else if ("publicationText".equals(field)) {
+                        er.setPublicationText(highlightedData);
+                    } else if ("publicationAuthorsText".equals(field)) {
+                        er.setPublicationAuthorsText(highlightedData);
+                    }
                 });
-            }
+            });
         }
     }
 

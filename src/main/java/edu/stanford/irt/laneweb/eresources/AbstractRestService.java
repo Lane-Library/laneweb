@@ -46,6 +46,7 @@ public abstract class AbstractRestService {
 
     protected URI getURIWithParameters(String path, Pageable pageable, List<NameValuePair> parameters) {
         try {
+            path = this.searchServiceURI.getPath().concat(path);
             URIBuilder builder = new URIBuilder(this.searchServiceURI).setPath(path);
             if(pageable != null) {
                 addPagingToURI(builder, pageable);
@@ -78,6 +79,7 @@ public abstract class AbstractRestService {
 
     protected URI getURI(String path) {
         try {
+            path = this.searchServiceURI.getPath().concat(path);
             return new URIBuilder(this.searchServiceURI).setPath(path).build();
         } catch (URISyntaxException e) {
             throw new LanewebException(e);

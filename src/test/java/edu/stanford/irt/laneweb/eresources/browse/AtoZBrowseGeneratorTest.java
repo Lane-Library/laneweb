@@ -39,8 +39,7 @@ public class AtoZBrowseGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    protected static final Map<String, List<FacetFieldEntry>> FACET_PAGE_ERESOURCES_TYPE = new HashMap<>();
- 
+   
    
     @Before
     public void setUp() throws Exception {
@@ -53,28 +52,29 @@ public class AtoZBrowseGeneratorTest {
     @Test
     public void testDoGenerate() {
         Map<String, List<FacetFieldEntry>> facetpage = mock(Map.class);
-        Collection<Page<FacetFieldEntry>> facetResultPages = mock(Collection.class);
-        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
         Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
-        Page<FacetFieldEntry> page1 = mock(Page.class);
+        Collection<List<FacetFieldEntry>> c1 = mock(Collection.class);
+        Iterator<List<FacetFieldEntry>> it1 =  mock(Iterator.class);
+        List<FacetFieldEntry> c2 = mock(List.class);
         FacetFieldEntry ffe = mock(FacetFieldEntry.class);
         this.generator.setParameters(Collections.singletonMap(Model.QUERY, "foo"));
         this.saxStrategy.toSAX(isA(List.class), eq(this.xmlConsumer));
         expect(this.eresourceBrowseService.facetByField("advanced:true recordType:bib AND isRecent:1",
-                "foo", "title_starts", 0, 200, 0, FacetSort.INDEX)).andReturn(FACET_PAGE_ERESOURCES_TYPE);
-        expect(facetResultPages.iterator()).andReturn(it1);
+                "foo", "title_starts", 0, 200, 0, FacetSort.INDEX)).andReturn(facetpage);
+        expect(facetpage.values()).andReturn(c1);  
+        expect(c1.iterator()).andReturn(it1);
         expect(it1.hasNext()).andReturn(true);
-        expect(it1.next()).andReturn(page1);
-        expect(page1.iterator()).andReturn(it2);
+        expect(it1.next()).andReturn(c2);
+        expect(c2.iterator()).andReturn(it2);
         expect(it2.hasNext()).andReturn(true);
         expect(it2.next()).andReturn(ffe);
         expect(ffe.getValue()).andReturn("ertlswa");
         expect(ffe.getValueCount()).andReturn(4);
         expect(it2.hasNext()).andReturn(false);
         expect(it1.hasNext()).andReturn(false);
-        replay(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, facetResultPages, it1, it2, page1, ffe);
+        replay(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, c1,c2, it1,  it2,  ffe);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, facetResultPages, it1, it2, page1, ffe);
+        verify(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, c1, c2, it1,  it2,  ffe);
     }
 
     @Test
