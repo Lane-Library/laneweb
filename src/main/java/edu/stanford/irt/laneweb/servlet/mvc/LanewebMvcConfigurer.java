@@ -5,7 +5,6 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -60,7 +59,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ResourceHttpRequestHandler staticRequestHandler) {
+    SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ResourceHttpRequestHandler staticRequestHandler) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setUrlMap(Collections.singletonMap("/**", staticRequestHandler));
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
@@ -69,26 +68,26 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(
+    SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(
             final SitemapController sitemapController) {
         return new SitemapHandlerExceptionResolver(sitemapController);
     }
 
 
     @Bean
-    public RedirectHandlerInterceptor redirectHandlerInterceptor() {
+    RedirectHandlerInterceptor redirectHandlerInterceptor() {
         return new RedirectHandlerInterceptor(this.redirectProcessor);
     }
 
     @Bean
-    public UrlBasedViewResolver redirectViewResolver() {
+    UrlBasedViewResolver redirectViewResolver() {
         UrlBasedViewResolver redirectViewResolver = new UrlBasedViewResolver();
         redirectViewResolver.setViewClass(RedirectView.class);
         return redirectViewResolver;
     }
 
     @Bean
-    public ResourceHttpRequestHandler staticRequestHandler(
+    ResourceHttpRequestHandler staticRequestHandler(
             @Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase) throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
         handler.setLocations(Arrays.asList(new ClassPathResource("/"), new ClassPathResource("/static/"),
