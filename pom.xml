@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>lane-parent</artifactId>
 		<groupId>edu.stanford.irt</groupId>
-		<version>126-spring6-SNAPSHOT</version>
+		<version>131-spring6</version>
 	</parent>
 	<artifactId>laneweb</artifactId>
 	<version>3.11.41-SNAPSHOT</version>
