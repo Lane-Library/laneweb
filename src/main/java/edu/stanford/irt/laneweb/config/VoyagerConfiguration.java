@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Scope;
 import org.xml.sax.XMLReader;
 
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
-import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.voyager.LoginService;
 import edu.stanford.irt.laneweb.voyager.RESTLoginService;
 import edu.stanford.irt.laneweb.voyager.VoyagerLogin;
