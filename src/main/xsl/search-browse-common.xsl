@@ -369,7 +369,7 @@
                         </span>
                         <xsl:if test="$itemsRequestableInVoyager">
                             <span class="requestIt">
-                                <a class="btn alt" href="https://{$requests-host}/pages/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
+                                <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
@@ -380,7 +380,7 @@
                             Unavailable: Checked out
                         </span>
                         <span class="requestIt">
-                            <a class="btn alt" href="https://{$requests-host}/pages/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Recall Item</a>
+                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Recall Item</a>
                         </span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
