@@ -12,17 +12,18 @@ import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.domain.Page;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.bassett.model.BassettImage;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.solr.BassettImage;
+
 
 public class BassettImageListSAXStrategyTest {
 
-    private FacetPage<BassettImage> facetPage;
+    private Page<BassettImage> facetPage;
 
     private BassettImage image;
 
@@ -33,7 +34,7 @@ public class BassettImageListSAXStrategyTest {
     @Before
     public void setUp() throws Exception {
         this.image = mock(BassettImage.class);
-        this.facetPage = mock(FacetPage.class);
+        this.facetPage = mock(Page.class);
         this.strategy = new BassettImageListSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
     }
@@ -44,7 +45,7 @@ public class BassettImageListSAXStrategyTest {
         expect(this.image.getTitle()).andReturn("title");
         expect(this.image.getSource()).andReturn("image");
         expect(this.image.getDiagram()).andReturn("diagram");
-        expect(this.image.getSubRegion()).andReturn("sub region");
+        expect(this.image.getSubRegions()).andReturn( Collections.singletonList("sub region"));
         expect(this.image.getLatinLegend()).andReturn("legend");
         expect(this.image.getEnglishLegend()).andReturn("legend").times(2);
         expect(this.image.getDescription()).andReturn("description").times(2);
@@ -68,7 +69,7 @@ public class BassettImageListSAXStrategyTest {
         expect(this.image.getBassettNumber()).andReturn("bn");
         expect(this.image.getTitle()).andReturn("title");
         expect(this.image.getSource()).andReturn("image");
-        expect(this.image.getSubRegion()).andReturn("sub region");
+        expect(this.image.getSubRegions()).andReturn( Collections.singletonList("sub region"));
         expect(this.image.getDiagram()).andReturn("diagram");
         expect(this.image.getLatinLegend()).andReturn("legend");
         expect(this.image.getDescription()).andReturn(null);
@@ -96,7 +97,7 @@ public class BassettImageListSAXStrategyTest {
         expect(this.image.getTitle()).andReturn("title");
         expect(this.image.getSource()).andReturn("image");
         expect(this.image.getDiagram()).andReturn("diagram");
-        expect(this.image.getSubRegion()).andReturn("sub region");
+        expect(this.image.getSubRegions()).andReturn( Collections.singletonList("sub region"));
         expect(this.image.getLatinLegend()).andReturn("legend");
         expect(this.image.getEnglishLegend()).andReturn(null);
         expect(this.image.getDescription()).andReturn("description").times(2);

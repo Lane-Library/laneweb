@@ -10,29 +10,23 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.query.SimpleField;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.solr.BassettImage;
 
 public class BassettCountSAXStrategyTest {
 
-    private FacetPage<BassettImage> facetPage;
+    private  Map<String, Map<String, Integer>> facetPage;
 
-    private Page<FacetFieldEntry> page;
+    private   Map<String, Integer> page;
 
     private BassettCountSAXStrategy strategy;
 
@@ -42,25 +36,22 @@ public class BassettCountSAXStrategyTest {
     public void setUp() throws Exception {
         this.strategy = new BassettCountSAXStrategy();
         this.xmlConsumer = mock(XMLConsumer.class);
-        this.facetPage = mock(FacetPage.class);
-        this.page = mock(Page.class);
+        this.facetPage = mock(Map.class);
+        this.page = mock(Map.class);
     }
 
     @Test
     public void testToSAX() throws SAXException {
-        List<FacetFieldEntry> list = new ArrayList<>();
-        list.add(new SimpleFacetFieldEntry(new SimpleField("region"), "Region1", 10));
-        list.add(new SimpleFacetFieldEntry(new SimpleField("region"), "Region2", 5));
-        expect(this.facetPage.getFacetResultPage("region")).andReturn(this.page);
-        expect(this.page.iterator()).andReturn(list.iterator());
-        List<FacetFieldEntry> list2 = new ArrayList<>();
-        list2.add(new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region1_sub_region_Subregion1", 5));
-        list2.add(new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region1_sub_region_Subregion2", 5));
-        list2.add(new SimpleFacetFieldEntry(new SimpleField("sub_region"), "Region2_sub_region_Subregion1", 5));
-        expect(this.facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
-        expect(this.page.iterator()).andReturn(list2.iterator());
-        expect(this.facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
-        expect(this.page.iterator()).andReturn(list2.iterator());
+        Map<String, Integer> regions = new HashMap<>();
+        Map<String, Integer> subregions = new HashMap<>();
+        regions.put("Region1", 10);
+        regions.put("Region2", 5);
+       
+        expect(this.facetPage.get("region")).andReturn(regions);
+        subregions.put("Region1_sub_region_Subregion1", 5);
+        subregions.put("Region1_sub_region_Subregion2", 5);
+        subregions.put("Region2_sub_region_Subregion1", 5);
+        expect(this.facetPage.get("sub_region")).andReturn(subregions);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
@@ -103,10 +94,9 @@ public class BassettCountSAXStrategyTest {
                 eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        expect(this.facetPage.getFacetResultPage("region")).andReturn(this.page);
-        expect(this.page.iterator()).andReturn(Collections.EMPTY_LIST.iterator());
-        expect(this.facetPage.getFacetResultPage("sub_region")).andReturn(this.page);
-        expect(this.page.iterator()).andReturn(Collections.EMPTY_LIST.iterator());
+        expect(this.facetPage.get("region")).andReturn(this.page);
+        expect(this.page.entrySet()).andReturn(Collections.EMPTY_SET);
+        expect(this.facetPage.get("sub_region")).andReturn(this.page);
         replay(this.xmlConsumer, this.facetPage, this.page);
         this.strategy.toSAX(this.facetPage, this.xmlConsumer);
         verify(this.xmlConsumer);

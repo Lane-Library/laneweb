@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.images;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
+import java.util.Map;
+import java.util.Set;
+
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -10,9 +10,8 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.solr.BassettImage;
 
-public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettImage>> {
+public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Map<String, Integer>>>{
 
     private static final String BASSETT_COUNT = "bassett_count";
 
@@ -26,24 +25,19 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
 
     private static final String SUB_REGION = "sub_region";
 
-    private static final int SUBREGION_AND_UNDERSCORE_LENGTH = (SUB_REGION + "_").length();
-
-    private static final String TOTAL = "total";
-
+   
     @Override
-    public void toSAX(final FacetPage<BassettImage> facetPage, final XMLConsumer xmlConsumer) {
+    public void toSAX(final Map<String, Map<String, Integer>> facets, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
             xmlConsumer.startPrefixMapping("", NAMESPACE);
             XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT_COUNT);
-            Page<FacetFieldEntry> regions = facetPage.getFacetResultPage(REGION);
-            Page<FacetFieldEntry> subRegions = facetPage.getFacetResultPage(SUB_REGION);
-            for (FacetFieldEntry entry : regions) {
+            Set<String> regions = facets.keySet();
+            for (String region : regions) {
                 AttributesImpl attributes = new AttributesImpl();
-                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, entry.getValue().replace('_', ' '));
-                attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, CDATA, String.valueOf(entry.getValueCount()));
+                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, region.toLowerCase());
                 XMLUtils.startElement(xmlConsumer, NAMESPACE, REGION, attributes);
-                handleSubRegion(xmlConsumer, entry.getValue(), subRegions);
+                handleSubRegion(xmlConsumer, facets.get(region));
                 XMLUtils.endElement(xmlConsumer, NAMESPACE, REGION);
             }
             XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT_COUNT);
@@ -54,18 +48,15 @@ public class BassettCountSAXStrategy implements SAXStrategy<FacetPage<BassettIma
         }
     }
 
-    private void handleSubRegion(final XMLConsumer xmlConsumer, final String region,
-            final Page<FacetFieldEntry> subRegions) throws SAXException {
-        for (FacetFieldEntry entry : subRegions) {
-            String subRegion = entry.getValue();
-            if (subRegion.startsWith(region + "_" + SUB_REGION + "_")) {
-                AttributesImpl attributes = new AttributesImpl();
-                subRegion = subRegion.substring(subRegion.indexOf(SUB_REGION) + SUBREGION_AND_UNDERSCORE_LENGTH);
-                attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subRegion.replace('_', ' '));
-                XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
-                XMLUtils.data(xmlConsumer, String.valueOf(entry.getValueCount()));
-                XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);
-            }
+    private void handleSubRegion(final XMLConsumer xmlConsumer, final Map<String, Integer> subRegionMap)
+            throws SAXException {
+        Set<String> subRegions = subRegionMap.keySet();
+        for (String subRegion : subRegions) {
+            AttributesImpl attributes = new AttributesImpl();
+            attributes.addAttribute(NAMESPACE, NAME, NAME, CDATA, subRegion);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, SUB_REGION, attributes);
+            XMLUtils.data(xmlConsumer, String.valueOf(subRegionMap.get(subRegion)));
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, SUB_REGION);
         }
     }
 }
