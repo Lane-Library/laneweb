@@ -57,7 +57,6 @@ public class BassettImageGeneratorTest {
     @Test
     public void testDoGenerateQuery() {
         this.saxStrategy.toSAX(null, this.xmlConsumer);
-        expect(this.service.findAll(this.page)).andReturn(null);
         replay(this.service, this.xmlConsumer, this.saxStrategy, this.resultPage);
         this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
         this.generator.doGenerate(this.xmlConsumer);
