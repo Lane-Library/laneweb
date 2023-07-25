@@ -349,8 +349,8 @@
         <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
             <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0" />
-            <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
-            <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
+            <!-- catalog.FolioRecord.getInstanceItemCounts() intentionally excludes items with perm loan types of Non-circulating, 2-hour reserve, 12-hour short term  -->
+            <xsl:variable name="itemsRequestable" select="$eresource/s:available &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
                 <xsl:if test="count($links) = 1 or $total-resources = 1">
                     <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
@@ -367,7 +367,7 @@
                             <i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
-                        <xsl:if test="$itemsRequestableInVoyager">
+                        <xsl:if test="$itemsRequestable">
                             <span class="requestIt">
                                 <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
                             </span>
