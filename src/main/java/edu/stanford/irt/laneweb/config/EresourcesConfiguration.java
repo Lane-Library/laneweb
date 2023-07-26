@@ -51,9 +51,6 @@ public class EresourcesConfiguration {
 
     private Collection<String> facetFields;
 
-    @Value("${edu.stanford.irt.laneweb.solr.laneSearch.collectionName}")
-    private String laneSearchCollectionName;
-
     private Collection<String> publicationTypes;
 
     public EresourcesConfiguration() {
@@ -111,11 +108,6 @@ public class EresourcesConfiguration {
                 this.publicationTypes);
         generator.setFacet(this.facetFields);
         return generator;
-    }
-
-    @Bean
-    public String laneSearchCollectionName() {
-        return this.laneSearchCollectionName;
     }
 
     @Bean

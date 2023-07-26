@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>130</version>
+        <version>131</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.11.42-SNAPSHOT</version>
@@ -55,7 +55,6 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>5.0.1</version>
         </dependency>
         <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -176,9 +175,9 @@
             <groupId>org.springframework</groupId>
         </dependency>
         <dependency>
-            <groupId>edu.stanford.irt.solr</groupId>
-            <artifactId>solr-image-repository</artifactId>
-            <version>1.0.39</version>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>bassett</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>

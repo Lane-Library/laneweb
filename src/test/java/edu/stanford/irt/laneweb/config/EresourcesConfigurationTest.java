@@ -1,13 +1,10 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.solr.core.convert.SolrConverter;
-import org.springframework.data.solr.server.support.HttpSolrClientFactory;
+
 
 public class EresourcesConfigurationTest {
 
