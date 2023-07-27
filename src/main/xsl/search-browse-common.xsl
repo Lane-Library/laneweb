@@ -368,7 +368,7 @@
                         <!-- Print Request button above holdings table when only one holding -->
                         <xsl:if test="count($links) = 1 and $links[1]/s:available &gt; 0">
                             <span class="requestIt">
-                                <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
+                                <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request</a>
                             </span>
                         </xsl:if>
                     </xsl:when>

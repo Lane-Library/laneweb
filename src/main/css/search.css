@@ -250,16 +250,8 @@ span.versionText:first-child {
     margin-left: 0;
 }
 
-.requestIt {
-    padding: 10px;
-}
-
 .requestIt .btn {
     font-weight: normal;
-}
-
-.request-cell .requestIt {
-    padding:0;
 }
 
 .hldgsHeader {
