@@ -188,7 +188,7 @@ public class LaneSearchIT {
     public void testLaneSearchJAMA() throws Exception {
         // jama
         this.mockMvc.perform(get("/eresources/search.html?q=jama").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 2]//h:a[@class='primaryLink' and @title='JAMA']", this.ns).exists());
+                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='JAMA']", this.ns).exists());
     }
 
     @Test
