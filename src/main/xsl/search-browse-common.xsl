@@ -4,9 +4,9 @@
 
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
 
-    <xsl:variable name="requests-host" select="'requests-folio-dev.stanford.edu'"/>
+    <xsl:variable name="requests-host" select="'requests.stanford.edu'"/>
 
-    <xsl:variable name="searchworks-host" select="'searchworks-folio-dev.stanford.edu'"/>
+    <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'"/>
 
     <xsl:template match="s:desc-linebreak">
         <br />
