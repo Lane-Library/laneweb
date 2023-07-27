@@ -5,7 +5,7 @@
 
     if (document.querySelector(".guide")) {
 
-        let defaultGuide = '#all-guides',
+        var defaultGuide = '#all-guides',
             allGuidesClosed = '#off',
             hash,
 
@@ -14,6 +14,7 @@
                 div.classList.remove('menuitem-active');
             })
         },
+        
         openGuide = function(hash) {
             if (hash != allGuidesClosed) {
                 document.querySelector(hash).classList.add('menuitem-active');
