@@ -25,6 +25,7 @@
       <locationUrl>locationUrl</locationUrl>
       <total>1</total>
       <available>1</available>
+      <checkedOut>0</checkedOut>
    </link>
    <link type="normal">
       <label>get password</label>
@@ -40,6 +41,7 @@
       <locationUrl>locationUrl</locationUrl>
       <total>1</total>
       <available>1</available>
+      <checkedOut>0</checkedOut>
    </link>
    <link type="lane-impactFactor">
       <label>impact factor</label>
@@ -65,5 +67,6 @@
       <locationUrl>locationUrl</locationUrl>
       <total>1</total>
       <available>1</available>
+      <checkedOut>0</checkedOut>
    </link>
 </result>

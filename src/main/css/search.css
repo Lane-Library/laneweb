@@ -236,6 +236,11 @@ li.active .description {
     display: table;
 }
 
+.hldgsContainer .request-cell {
+    display:table-cell;
+    vertical-align:middle;
+}
+
 .versionText {
     opacity: 0.75;
     margin: 0 10px;
@@ -251,6 +256,10 @@ span.versionText:first-child {
 
 .requestIt .btn {
     font-weight: normal;
+}
+
+.request-cell .requestIt {
+    padding:0;
 }
 
 .hldgsHeader {

@@ -348,15 +348,13 @@
         <xsl:param name="eresource" />
         <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
-            <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0" />
-            <!-- catalog.FolioRecord.getInstanceItemCounts() intentionally excludes items with perm loan types of Non-circulating, 2-hour reserve, 12-hour short term  -->
-            <xsl:variable name="itemsRequestable" select="$eresource/s:available &gt; 0" />
+            <xsl:variable name="itemsAvailable" select="sum($eresource/s:link/s:available) &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
                 <xsl:if test="count($links) = 1 or $total-resources = 1">
                     <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="$itemsAvailableButMaybeNotRequestable">
+                    <xsl:when test="$itemsAvailable">
                         <span class="hldgsHeader available">
                             <xsl:if test="count($links) > 1">
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
@@ -367,13 +365,14 @@
                             <i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
-                        <xsl:if test="$itemsRequestable">
+                        <!-- Print Request button above holdings table when only one holding -->
+                        <xsl:if test="count($links) = 1 and $links[1]/s:available &gt; 0">
                             <span class="requestIt">
                                 <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request Print</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
-                    <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
+                    <xsl:when test="count($links) = 1 and $links[1]/s:checkedOut &gt; 0">
                         <span class="hldgsHeader unavailable">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
@@ -414,6 +413,7 @@
                             </div>
                             <div class="table-head">Call Number</div>
                             <div class="table-head">Items</div>
+                            <div class="table-head"><!-- empty for request button --></div>
 
                         </div>
                         <xsl:for-each select="$links">
@@ -436,7 +436,16 @@
                                     <xsl:apply-templates select="s:callnumber" />
                                 </div>
                                 <div class="table-cell">
-                                    <xsl:value-of select="s:available" />
+                                    <xsl:if test="s:total &gt; 0">
+                                        <xsl:value-of select="s:total" />
+                                    </xsl:if>
+                                </div>
+                                <div class="table-cell request-cell">
+                                    <xsl:if test="s:available &gt; 0 and count($links) &gt; 1">
+                                        <span class="requestIt">
+                                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={s:locationCode}" rel="popup console 1020 800">Request</a>
+                                        </span>
+                                    </xsl:if>
                                 </div>
                             </div>
                         </xsl:for-each>
