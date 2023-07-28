@@ -18,12 +18,13 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentServiceTest {
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private RESTEquipmentService service;
 

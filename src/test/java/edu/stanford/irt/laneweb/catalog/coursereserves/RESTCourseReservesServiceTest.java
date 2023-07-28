@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
@@ -25,6 +26,8 @@ public class RESTCourseReservesServiceTest {
     private CourseReservesItemList itemList;
 
     private RESTService restService;
+    
+    private BasicAuthRESTService basicAuthestService;
 
     private RESTCourseReservesService service;
 
@@ -34,7 +37,7 @@ public class RESTCourseReservesServiceTest {
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
-        this.service = new RESTCourseReservesService(this.uri, this.restService);
+        this.service = new RESTCourseReservesService(this.uri, this.basicAuthestService);
         this.itemList = mock(CourseReservesItemList.class);
     }
 

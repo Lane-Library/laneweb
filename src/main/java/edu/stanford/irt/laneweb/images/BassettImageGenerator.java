@@ -52,7 +52,7 @@ public class BassettImageGenerator extends AbstractGenerator {
             eresources = this.service.findBassettByNumber(this.bassettNumber);
         } else if (this.region != null) {
             if (this.region.contains("--")) {
-                eresources = this.service.findBassettBySubRegion(this.region, page);
+                eresources = this.service.findBassettByRegionAndSubRegion(this.region, page);
             } else {
                 eresources = this.service.findBassettByRegion(this.region, page);
             }            

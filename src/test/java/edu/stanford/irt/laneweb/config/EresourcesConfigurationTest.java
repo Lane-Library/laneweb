@@ -71,6 +71,5 @@ public class EresourcesConfigurationTest {
     public void testSolrSearchGenerator() {
         assertNotNull(this.configuration.solrSearchGenerator(null));
     }
-
    
 }

@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.voyager;
 
 import java.net.URI;
 
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 
 public class RESTLoginService implements LoginService {
 
@@ -10,9 +10,9 @@ public class RESTLoginService implements LoginService {
 
     private URI catalogServiceURI;
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
-    public RESTLoginService(final URI catalogServiceURI, final RESTService restService) {
+    public RESTLoginService(final URI catalogServiceURI, final BasicAuthRESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
         this.restService = restService;
     }
