@@ -11,8 +11,8 @@
                <span class="primaryType">Book</span>
                <div>
                   <a class="primaryLink"
-                      href="http://link.springer.com/978-3-211-75120-6"
-                      title="Music that works">
+                     href="http://link.springer.com/978-3-211-75120-6"
+                     title="Music that works">
                      <strong>Music</strong> that works</a>
                </div>
                <div class="resultInfo">
@@ -40,21 +40,21 @@
                <div class="sourceInfo no-bookmarking">
                   <div class="permalink">
                      <a title="click to copy a shareable link to this record"
-                         href="https://lane.stanford.edu/view/bib/301866">
+                        href="https://lane.stanford.edu/view/bib/301866">
                         <i class="fa-solid fa-link fa-rotate-180"/>
                     Get Shareable Link
                 </a>
                   </div>
                   <div>
                      <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=301866"
-                         title="Lane Catalog Record">
+                        title="Lane Catalog Record">
                         <i class="fa-solid fa-arrow-right-from-bracket"/>
                     Lane Catalog
                 </a>
                   </div>
                   <div class="impactFactor">
                      <a title="journal profile from Journal Citation Reports"
-                         href="http://impactfactor.org/">
+                        href="http://impactfactor.org/">
                         <i class="fa-regular fa-chart-simple"/>
                         Impact Factor
                     </a>
@@ -67,8 +67,8 @@
                <span class="primaryType">Book</span>
                <div>
                   <a class="primaryLink"
-                      href="http://impactfactor.org/"
-                      title="Music that works">
+                     href="http://impactfactor.org/"
+                     title="Music that works">
                      <strong>Music</strong> that works</a>
                </div>
                <div class="resultInfo">
@@ -96,21 +96,21 @@
                <div class="sourceInfo no-bookmarking">
                   <div class="permalink">
                      <a title="click to copy a shareable link to this record"
-                         href="https://lane.stanford.edu/view/bib/123">
+                        href="https://lane.stanford.edu/view/bib/123">
                         <i class="fa-solid fa-link fa-rotate-180"/>
                     Get Shareable Link
                 </a>
                   </div>
                   <div>
                      <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID=123"
-                         title="Lane Catalog Record">
+                        title="Lane Catalog Record">
                         <i class="fa-solid fa-arrow-right-from-bracket"/>
                     Lane Catalog
                 </a>
                   </div>
                   <div class="impactFactor">
                      <a title="journal profile from Journal Citation Reports"
-                         href="http://impactfactor.org/">
+                        href="http://impactfactor.org/">
                         <i class="fa-regular fa-chart-simple"/>
                         Impact Factor
                     </a>
