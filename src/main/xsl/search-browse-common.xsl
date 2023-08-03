@@ -395,7 +395,6 @@
                         <span class="hldgsHeader">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                            Status unknown
                         </span>
                         <span class="hldgsTrigger" />
                     </xsl:otherwise>
