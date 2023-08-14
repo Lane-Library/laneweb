@@ -250,7 +250,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
-            <version>3.9.14</version>
+            <version>3.9.15</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
