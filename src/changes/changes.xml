@@ -5,6 +5,14 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2023-08-14" version="3.11.44" description="bug fix and update release">
+			<action date="2023-08-09" dev="alainb" issue="LANEWEB-11172" type="fix">
+				Remaining seats display is not needed if total available seat equals 0
+			</action>
+			<action date="2023-07-27" dev="alainb" issue="" type="update">
+				To update catalog library 3.9.15 
+			</action>
+		</release>
 		<release date="2023-07-31" version="3.11.43" description="bug fix and update release">
 			<action date="2023-07-26" dev="alainb" issue="LANEWEB-11156" type="update">
 				Delete image solr repos library
