@@ -107,11 +107,16 @@
 			<div>
 				<a class="btn">
 					<xsl:attribute name="href">
-               <xsl:apply-templates select="../url/public" />
-            </xsl:attribute>
+				          			 <xsl:apply-templates select="../url/public" />
+				        	    </xsl:attribute>
 					<span>Register</span>
 				</a>
 				<div class="remaining-seats">
+					<xsl:if test="../seats = ''">
+						<xsl:attribute name="style">
+						visibility: hidden;
+					</xsl:attribute>
+					</xsl:if>
 					Seats left:
 					<xsl:value-of select="." />
 				</div>

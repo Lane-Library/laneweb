@@ -158,7 +158,7 @@ public class EresourcesConfiguration {
                 new EresourceListPagingDataSAXStrategy());
     }
 
-    @Bean(name = "solrLaneSearchClient")
+    @Bean
     public SolrClient solrClient(@Value("${edu.stanford.irt.laneweb.solr.laneSearch.url}") final String solrServerUrl) {
         return new HttpSolrClient.Builder(solrServerUrl).withConnectionTimeout(SOLR_CONNECT_TIMEOUT)
                 .withSocketTimeout(SOLR_READ_TIMEOUT).build();
@@ -207,7 +207,7 @@ public class EresourcesConfiguration {
     }
 
     @Bean(name = "laneSearchSolrTemplate")
-    public SolrTemplate solrTemplate(@Qualifier("solrLaneSearchClient") final SolrClient solrClient,
+    public SolrTemplate solrTemplate(final SolrClient solrClient,
             final SolrConverter solrConverter) {
         return new SolrTemplate(new HttpSolrClientFactory(solrClient), solrConverter);
     }

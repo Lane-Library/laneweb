@@ -1,46 +1,46 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.query.result.FacetPage;
 
+import edu.stanford.irt.bassett.configuration.BassettConfiguration;
+import edu.stanford.irt.bassett.model.BassettImage;
+import edu.stanford.irt.bassett.service.BassettImageService;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.images.BassettAccordionGenerator;
 import edu.stanford.irt.laneweb.images.BassettCountSAXStrategy;
 import edu.stanford.irt.laneweb.images.BassettImageGenerator;
 import edu.stanford.irt.laneweb.images.BassettImageListSAXStrategy;
-import edu.stanford.irt.solr.BassettImage;
-import edu.stanford.irt.solr.configuration.SolrLaneImageConfiguration;
-import edu.stanford.irt.solr.service.SolrImageService;
 
 @Configuration
-@Import({ SolrLaneImageConfiguration.class })
+@Import({ BassettConfiguration.class })
 public class ImagesConfiguration {
 
-    private SolrImageService solrImageService;
+    @Autowired
+    private BassettImageService imageService;
 
-    public ImagesConfiguration(final SolrImageService solrImageService) {
-        this.solrImageService = solrImageService;
-    }
-
+    
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")
     Generator bassettAccordionGenerator() {
-        return new BassettAccordionGenerator(this.solrImageService, countSAXStrategy());
+        return new BassettAccordionGenerator(this.imageService, countSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett")
     @Scope("prototype")
     Generator bassettGenerator() {
-        return new BassettImageGenerator(this.solrImageService, pageSAXStrategy());
+        return new BassettImageGenerator(this.imageService, pageSAXStrategy());
     }
 
     @Bean
-    SAXStrategy<FacetPage<BassettImage>> countSAXStrategy() {
+    SAXStrategy<Map<String, Map<String, Integer>>> countSAXStrategy() {
         return new BassettCountSAXStrategy();
     }
 

@@ -11,7 +11,7 @@ public class ImagesConfigurationTest {
 
     @Before
     public void setUp() {
-        this.configuration = new ImagesConfiguration(null);
+        this.configuration = new ImagesConfiguration();
     }
 
     @Test

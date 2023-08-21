@@ -1,17 +1,17 @@
 package edu.stanford.irt.laneweb.images;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.springframework.data.domain.Page;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.bassett.model.BassettImage;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
-import edu.stanford.irt.solr.BassettImage;
+
 
 public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImage>> {
 
@@ -45,8 +45,6 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
 
     private static final String REGIONS = "regions";
 
-    private static final Pattern SUBREGION_PATTERN = Pattern.compile("_sub_region_");
-
     private static final String TITLE = "title";
 
     private static final String TOTAL_IMAGES = "total-images";
@@ -57,18 +55,20 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
 
     @Override
     public void toSAX(final Page<BassettImage> bassettPage, final XMLConsumer xmlConsumer) {
-        List<BassettImage> bassetts = bassettPage.getContent();
         try {
-            xmlConsumer.startDocument();
-            xmlConsumer.startPrefixMapping("", NAMESPACE);
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
-            handlePaging(xmlConsumer, bassettPage);
-            for (BassettImage eresource : bassetts) {
-                handleEresource(xmlConsumer, eresource);
+            if (bassettPage != null) {
+                List<BassettImage> bassetts = bassettPage.getContent();
+                xmlConsumer.startDocument();
+                xmlConsumer.startPrefixMapping("", NAMESPACE);
+                XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETTS);
+                handlePaging(xmlConsumer, bassettPage);
+                for (BassettImage eresource : bassetts) {
+                    handleEresource(xmlConsumer, eresource);
+                }
+                XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETTS);
+                xmlConsumer.endPrefixMapping("");
+                xmlConsumer.endDocument();
             }
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETTS);
-            xmlConsumer.endPrefixMapping("");
-            xmlConsumer.endDocument();
         } catch (SAXException e) {
             throw new LanewebException(e);
         }
@@ -100,7 +100,7 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
             XMLUtils.data(xmlConsumer, bassett.getDescription());
             XMLUtils.endElement(xmlConsumer, NAMESPACE, DESCRIPTION);
         }
-        handleRegion(xmlConsumer, bassett.getSubRegion());
+        handleRegion(xmlConsumer, bassett);
         XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT);
     }
 
@@ -133,23 +133,17 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
         XMLUtils.endElement(xmlConsumer, NAMESPACE, name);
     }
 
-    private void handleRegion(final XMLConsumer xmlConsumer, final String regions) throws SAXException {
-        String[] regionAndSubRegion = regions.split("\\|");
-        boolean alreadyIn = false;
+    private void handleRegion(final XMLConsumer xmlConsumer, final BassettImage image) throws SAXException {
+        List<String> subregions = image.getSubRegions();
         StringBuilder sb = new StringBuilder();
-        for (String region : regionAndSubRegion) {
-            String[] splittedRegion = SUBREGION_PATTERN.split(region);
-            if (alreadyIn && splittedRegion.length > 1) {
+        if (subregions != null) {
+            for (String region : subregions) {
+                sb.append(region);
                 sb.append(", ");
             }
-            if (splittedRegion.length > 1) {
-                sb.append(splittedRegion[1].replace('_', ' '));
-            }
-            alreadyIn = true;
+            String subRegion = sb.toString().trim();
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
+            XMLUtils.data(xmlConsumer, sb.substring(0, subRegion.length() - 1).concat("."));
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);
         }
-        sb.append('.');
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, REGIONS);
-        XMLUtils.data(xmlConsumer, sb.toString());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);
-    }
-}
+    }}
