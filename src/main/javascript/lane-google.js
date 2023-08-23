@@ -52,18 +52,20 @@
     });
 
     L.on("tracker:trackableEvent",  function(event) {
-        window.ga('send', 'event', event.category, event.action, event.label, event.value);
+		if(window.ga){
+       	 window.ga('send', 'event', event.category, event.action, event.label, event.value);
+        }
     });
 
     L.on("tracker:trackablePageview",  function(event) {
         var ga = window.ga;
-        if (event.external) {
+        if (ga && event.external) {
             if(event.query !== undefined && event.query !== '' ){
                 ga('send', 'event', 'lane:offsite', "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title), event.host + event.path + event.query);
             }else{
                 ga('send', 'event', 'lane:offsite', "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title), event.host + event.path);
             }
-        } else {
+        } else if(ga){
             ga('send', 'pageview', '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path);
         }
     });

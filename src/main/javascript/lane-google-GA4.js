@@ -60,32 +60,36 @@
         }
     });
 
+	
+	
     L.on("tracker:trackableEvent", function(event) {
-        window.gtag('event', event.category, {
-            'event_action': event.action,
-            'event_label': event.label,
-            'event_value': event.value
-        });
+		if(window.gtag){
+	        window.gtag('event', event.category, {
+	            'event_action': event.action,
+	            'event_label': event.label,
+	            'event_value': event.value
+	        });
+        }
     });
 
     L.on("tracker:trackablePageview", function(event) {
-        if (event.external) {
-            if (event.query !== undefined && event.query !== '') {
-                window.gtag('event', 'lane:offsite', {
-                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
-                    'event_label': event.host + event.path + event.query
-                });
-
-            } else {
-                window.gtag('event', 'lane:offsite', {
-                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
-                    'event_label': event.host + event.path
-                });
-            }
-        } else {
-            window.gtag('event', 'page_view', {
-                'page_location':'/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
-            })
+		    if ( window.gtag && event.external) {
+	            if (event.query !== undefined && event.query !== '') {
+	                window.gtag('event', 'lane:offsite', {
+	                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+	                    'event_label': event.host + event.path + event.query
+	                });
+	
+	            } else {
+	                window.gtag('event', 'lane:offsite', {
+	                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+	                    'event_label': event.host + event.path
+	                });
+	            }
+	        } else if(window.gtag){
+	            window.gtag('event', 'page_view', {
+	                'page_location':'/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
+	            })
         }
     });
 })();
