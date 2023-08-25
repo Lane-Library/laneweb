@@ -6,6 +6,9 @@
 	</properties>
 	<body>
 		<release date="2023-08-25" version="3.12.0" description="FOLIO release">
+			<action date="2023-08-23" dev="alainb" issue="LANEWEB-11179" type="fix">
+				search drop-down sometimes flaky (fix for Ghostery extension)
+			</action>
 			<action date="2023-08-10" dev="ryanmax" issue="LANEWEB-11125" type="add">
 				build FOLIO request links
 			</action>
