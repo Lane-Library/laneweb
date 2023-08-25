@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
-    
+
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
-    
+
+    <xsl:variable name="requests-host" select="'requests.stanford.edu'"/>
+
+    <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'"/>
 
     <xsl:template match="s:desc-linebreak">
         <br />
@@ -56,15 +59,15 @@
                 </a>
             </xsl:when>
             <xsl:when test=". = 'sul'">
-                <a href="https://searchworks.stanford.edu/view/{../s:recordId}" title="SearchWorks Record">
+                <a href="https://{$searchworks-host}/view/{f:folioInstanceId(..)}" title="SearchWorks Record">
                     <xsl:copy-of select="$label" />
-                    SearchWorks
+                    View Details
                 </a>
             </xsl:when>
             <xsl:when test=". = 'bib'">
-                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={../s:recordId}" title="Lane Catalog Record">
+                <a href="https://{$searchworks-host}/view/{f:folioInstanceId(..)}" title="Lane Record in SearchWorks">
                     <xsl:copy-of select="$label" />
-                    Lane Catalog
+                    View Details
                 </a>
             </xsl:when>
             <xsl:when test=". = 'class'">
@@ -345,15 +348,13 @@
         <xsl:param name="eresource" />
         <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
-            <xsl:variable name="itemsAvailableButMaybeNotRequestable" select="sum($eresource/s:link/s:available) &gt; 0" />
-            <!-- catalog-service availableBibItems.sql intentionally excludes non-circulating, 2-hour, etc. items -->
-            <xsl:variable name="itemsRequestableInVoyager" select="$eresource/s:available &gt; 0" />
+            <xsl:variable name="itemsAvailable" select="sum($eresource/s:link/s:available) &gt; 0" />
             <div class="hldgsContainer no-bookmarking">
                 <xsl:if test="count($links) = 1 or $total-resources = 1">
                     <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="$itemsAvailableButMaybeNotRequestable">
+                    <xsl:when test="$itemsAvailable">
                         <span class="hldgsHeader available">
                             <xsl:if test="count($links) > 1">
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
@@ -364,20 +365,21 @@
                             <i class="fa-solid fa-angle-down"></i>
                             <i class="fa-solid fa-angle-up"></i>
                         </span>
-                        <xsl:if test="$itemsRequestableInVoyager">
+                        <!-- Print Request button above holdings table when only one holding -->
+                        <xsl:if test="count($links) = 1 and $links[1]/s:available &gt; 0">
                             <span class="requestIt">
-                                <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.req=true" rel="popup console 1020 800">Request Print</a>
+                                <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
-                    <xsl:when test="$eresource/s:total &gt; 0 and $eresource/s:available = 0">
+                    <xsl:when test="count($links) = 1 and $links[1]/s:checkedOut &gt; 0">
                         <span class="hldgsHeader unavailable">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Unavailable: Checked out
                         </span>
                         <span class="requestIt">
-                            <a class="btn alt" href="https://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={$eresource/s:recordId}&amp;lw.recall=true" rel="popup console 1020 800">Recall Item</a>
+                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Recall Item</a>
                         </span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
@@ -393,7 +395,6 @@
                         <span class="hldgsHeader">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                            Status unknown
                         </span>
                         <span class="hldgsTrigger" />
                     </xsl:otherwise>
@@ -411,6 +412,7 @@
                             </div>
                             <div class="table-head">Call Number</div>
                             <div class="table-head">Items</div>
+                            <div class="table-head"><!-- empty for request button --></div>
 
                         </div>
                         <xsl:for-each select="$links">
@@ -433,7 +435,16 @@
                                     <xsl:apply-templates select="s:callnumber" />
                                 </div>
                                 <div class="table-cell">
-                                    <xsl:value-of select="s:available" />
+                                    <xsl:if test="s:total &gt; 0">
+                                        <xsl:value-of select="s:total" />
+                                    </xsl:if>
+                                </div>
+                                <div class="table-cell request-cell">
+                                    <xsl:if test="s:available &gt; 0 and count($links) &gt; 1">
+                                        <span class="requestIt">
+                                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={s:locationCode}" rel="popup console 1020 800">Request</a>
+                                        </span>
+                                    </xsl:if>
                                 </div>
                             </div>
                         </xsl:for-each>
@@ -479,6 +490,23 @@
         <xsl:param name="eresource" />
         <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 
         and contains($eresource/s:link[1]/s:locationUrl,'/view/bib/')" />
+    </xsl:function>
+
+    <!--  raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->
+    <!--  idiosyncratic rules around SearchWorks/FOLIO ID prefixes: -->
+    <!--    retain "in" for all Folio-created records -->
+    <!--    strip "a" from migrated SUL records -->
+    <!--    retain "L" from migrated Lane records -->
+    <xsl:function name="f:folioInstanceId" as="xsd:string">
+        <xsl:param name="eresource" />
+        <xsl:variable name="prefix">
+            <xsl:choose>
+                <xsl:when test="starts-with($eresource/s:recordId,'000')">in</xsl:when>
+                <xsl:when test="'bib' = $eresource/s:recordType">L</xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="concat($prefix, $eresource/s:recordId)"/>
     </xsl:function>
 
 </xsl:stylesheet>

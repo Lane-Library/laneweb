@@ -61,7 +61,7 @@
     <xsl:template match="s:primaryType">
         <xsl:if test="$browse-query and (contains($browse-query,'Book') or contains($browse-query,'Journal'))">
             <xsl:choose>
-                <xsl:when test="not(contains(., 'Print')) and ../s:link[s:label = 'Lane Catalog Record']">Digital/Print</xsl:when>
+                <xsl:when test="not(contains(., 'Print')) and ../s:link[s:label = 'Lane Record in SearchWorks']">Digital/Print</xsl:when>
                 <xsl:when test="contains(., 'Print')">Print</xsl:when>
                 <xsl:otherwise>Digital</xsl:otherwise>
             </xsl:choose>

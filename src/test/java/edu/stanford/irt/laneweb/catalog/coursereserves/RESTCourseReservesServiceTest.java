@@ -40,7 +40,7 @@ public class RESTCourseReservesServiceTest {
 
     @Test
     public void testGetCourses() throws URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/coursereserves/courses")), isA(TypeReference.class)))
+        expect(this.restService.getObject(eq(new URI("/folio/coursereserves/courses")), isA(TypeReference.class)))
                 .andReturn(Collections.emptyList());
         replay(this.restService);
         assertSame(Collections.emptyList(), this.service.getCourses());
@@ -49,7 +49,7 @@ public class RESTCourseReservesServiceTest {
 
     @Test
     public void testGetItems() throws URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/coursereserves/items")), same(CourseReservesItemList.class)))
+        expect(this.restService.getObject(eq(new URI("/folio/coursereserves/items")), same(CourseReservesItemList.class)))
                 .andReturn(this.itemList);
         replay(this.restService);
         assertSame(this.itemList, this.service.getItems());
@@ -58,10 +58,10 @@ public class RESTCourseReservesServiceTest {
 
     @Test
     public void testGetItemsInt() throws URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/coursereserves/items?id=0")),
+        expect(this.restService.getObject(eq(new URI("/folio/coursereserves/items?id=0")),
                 same(CourseReservesItemList.class))).andReturn(this.itemList);
         replay(this.restService);
-        assertSame(this.itemList, this.service.getItems(0));
+        assertSame(this.itemList, this.service.getItems("0"));
         verify(this.restService);
     }
 }

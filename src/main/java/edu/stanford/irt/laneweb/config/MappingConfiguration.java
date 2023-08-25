@@ -12,11 +12,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.laneweb.catalog.equipment.EquipmentStatus;
 import edu.stanford.irt.laneweb.mapping.ApplicationStatusDeserializer;
 import edu.stanford.irt.laneweb.mapping.CourseDeserializer;
 import edu.stanford.irt.laneweb.mapping.CourseReservesItemListDeserializer;
-import edu.stanford.irt.laneweb.mapping.EquipmentStatusDeserializer;
 import edu.stanford.irt.laneweb.mapping.IPGroupSerializer;
 import edu.stanford.irt.laneweb.mapping.ResultDeserializer;
 import edu.stanford.irt.laneweb.mapping.TicketSerializer;
@@ -40,7 +38,6 @@ public class MappingConfiguration {
         module.addDeserializer(Result.class, new ResultDeserializer());
         module.addDeserializer(CourseReservesItemList.class, new CourseReservesItemListDeserializer());
         module.addDeserializer(Course.class, new CourseDeserializer());
-        module.addDeserializer(EquipmentStatus.class, new EquipmentStatusDeserializer());
         module.addDeserializer(ApplicationStatus.class, new ApplicationStatusDeserializer());
         objectMapper.registerModule(module);
         objectMapper.registerModule(new JavaTimeModule());

@@ -197,7 +197,8 @@ public class Eresource {
             linkType = LinkType.SUL_PRINT;
         } else if ("sul".equals(this.recordType) && this.primaryType.contains("Print")) {
             linkType = LinkType.SUL_PRINT;
-        } else if (null != linkUrl && linkUrl.contains("//lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID")) {
+        } else if ("bib".equals(this.recordType) && linkUrl != null
+                && linkUrl.contains("//searchworks.stanford.edu/view")) {
             linkType = LinkType.LANE_PRINT;
         } else if (null != v.getLocationName() && v.getLocationName().toLowerCase().contains("digital")) {
             linkType = LinkType.LANE_DIGITAL;

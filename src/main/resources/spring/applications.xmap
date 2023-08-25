@@ -129,15 +129,8 @@
         </map:match>
     </map:pipeline>
     <map:pipeline type="noncaching">
-        <map:match type="wildcard" pattern="equipment.xml">
-            <map:generate type="equipment"/>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match type="wildcard" pattern="equipment.html">
-            <map:generate type="equipment"/>
-            <map:transform type="saxon" src="classpath:/xsl/equipment.xsl"/>
-            <map:transform type="equipment-status"/>
-            <map:transform type="saxon" src="classpath:/xsl/equipment-status.xsl"/>
+            <map:generate type="equipment-list"/>
             <map:serialize type="html5"/>
         </map:match>
         <map:match type="wildcard" pattern="course-reserves/courses.xml">

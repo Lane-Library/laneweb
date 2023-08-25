@@ -47,7 +47,7 @@ public class EresourceSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException, IOException {
-        int[] itemCount = { 1, 1 };
+        int[] itemCount = { 1, 1, 0 };
         expect(this.eresource.getId()).andReturn("2");
         expect(this.eresource.getRecordId()).andReturn("3");
         expect(this.eresource.getRecordType()).andReturn(Resource.RECORD_TYPE);
@@ -75,6 +75,7 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.version.getCallnumber()).andReturn("callnumber");
         expect(this.version.getItemCount()).andReturn(itemCount);
+        expect(this.version.getLocationCode()).andReturn("locationCode");
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn("locationUrl");
         // link 2
@@ -89,6 +90,7 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.version.getCallnumber()).andReturn("callnumber");
         expect(this.version.getItemCount()).andReturn(itemCount);
+        expect(this.version.getLocationCode()).andReturn("locationCode");
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn("locationUrl");
         // link 3
@@ -103,6 +105,7 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.version.getCallnumber()).andReturn(null);
         expect(this.version.getItemCount()).andReturn(null);
+        expect(this.version.getLocationCode()).andReturn("locationCode");
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn(null);
         // link 4
@@ -118,6 +121,7 @@ public class EresourceSAXStrategyTest {
         expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
         expect(this.version.getCallnumber()).andReturn("callnumber");
         expect(this.version.getItemCount()).andReturn(itemCount);
+        expect(this.version.getLocationCode()).andReturn("locationCode");
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn("locationUrl");
         replay(this.eresource, this.link, this.version);

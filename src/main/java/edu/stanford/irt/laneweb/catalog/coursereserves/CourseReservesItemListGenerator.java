@@ -11,7 +11,7 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class CourseReservesItemListGenerator extends AbstractGenerator {
 
-    private int id;
+    private String id;
 
     private SAXStrategy<CourseReservesItemList> saxStrategy;
 
@@ -26,14 +26,14 @@ public class CourseReservesItemListGenerator extends AbstractGenerator {
     @Override
     public void setModel(final Map<String, Object> model) {
         if (model.containsKey(Model.ID)) {
-            this.id = Integer.parseInt(ModelUtil.getString(model, Model.ID));
+            this.id = ModelUtil.getString(model, Model.ID);
         }
     }
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         CourseReservesItemList list;
-        if (this.id == 0) {
+        if (null == this.id || this.id.isBlank()) {
             list = this.service.getItems();
         } else {
             list = this.service.getItems(this.id);

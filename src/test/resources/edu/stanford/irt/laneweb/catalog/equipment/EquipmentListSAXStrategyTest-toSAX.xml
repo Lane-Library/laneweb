@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ul>
+   <li class="resource" data-bibid="bibid">
+      <div class="pure-g">
+         <div class="pure-u-1-6">
+            <div class="equipment-icon">
+               <i aria-hidden="true" class="fa-4x fa-brands fa-android"/>
+            </div>
+         </div>
+         <div class="pure-u-5-6">
+            <div>Android Thing</div>
+            <div>Checkout for 2 hours</div>
+            <div>
+               <strong>Status: </strong>Available <strong>4</strong>
+            </div>
+         </div>
+      </div>
+   </li>
+</ul>
