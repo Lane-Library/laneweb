@@ -5,6 +5,35 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2023-08-25" version="3.12.0" description="FOLIO release">
+			<action date="2023-08-10" dev="ryanmax" issue="LANEWEB-11125" type="add">
+				build FOLIO request links
+			</action>
+			<action date="2023-08-10" dev="ryanmax" issue="LANEWEB-11154" type="add">
+				equipment records should not have request button
+			</action>
+			<action date="2023-08-03" dev="ryanmax" issue="LANEWEB-11167" type="add">
+				LANE-AV records should not be requestable
+			</action>
+			<action date="2023-08-01" dev="ryanmax" issue="LANEWEB-11162" type="add">
+				change definition for Lane Equipment records - loc code LANE-EQUIP
+			</action>
+			<action date="2023-07-31" dev="ryanmax" issue="LANEWEB-11157" type="add">
+				recall button is not appearing correctly
+			</action>
+			<action date="2023-07-28" dev="ryanmax" issue="LANEWEB-11161" type="add">
+				searchworks link has incorrect record ID
+			</action>
+			<action date="2023-07-26" dev="ryanmax" issue="LANEWEB-11155" type="add">
+				"request print" buttons need to be location-specific
+			</action>
+			<action date="2023-07-03" dev="ryanmax" issue="LANEWEB-11143" type="add">
+				link to SearchWorks
+			</action>
+			<action date="2023-06-15" dev="ryanmax" issue="LANEWEB-11142" type="add">
+				Lane Search: change "Lane Catalog" link labels
+			</action>
+		</release>
 		<release date="2023-08-21" version="3.11.45" description="bug fix and update release">
 			<action date="2023-08-09" dev="alainb" issue="LANEWEB-11183" type="fix">
 				Rename event_name to laneTrends:bookmark
