@@ -10,8 +10,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             var triggers = document.querySelectorAll(".hldgsTrigger");
             Y.Assert.areEqual(2, triggers.length);
             triggers.forEach(function(trigger){
-                Y.Assert.areEqual("View All ", trigger.textContent);
-                Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-angle-double-down').length);
+                Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-solid.fa-angle-down').length);
             });
         },
 
@@ -23,10 +22,10 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
                 });
             triggers.forEach(function(trigger){
                 trigger.click();
-                Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-angle-double-up').length);
+                Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-solid.fa-angle-up').length);
                 Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);
                 Y.Assert.areEqual("lane:hldgsTrigger", trackEvent.category);
-                Y.Assert.isTrue(trackEvent.action.indexOf(' -- open') > -1);
+                Y.Assert.isTrue(trackEvent.action.indexOf(' -- close') > -1);
                 Y.Assert.areEqual("Lancet", trackEvent.label);
                 handler.detach();
             });

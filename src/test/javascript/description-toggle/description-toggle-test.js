@@ -8,8 +8,8 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testTriggerContentPresent: function() {
             var triggers = Y.all(".descriptionTrigger");
-            Y.Assert.areEqual(" Preview Abstract ", triggers.item(0).get("text"));
-            Y.Assert.areEqual(" View Description ", triggers.item(1).get("text"));
+            Y.Assert.areEqual("Abstract", triggers.item(0).get("text"));
+            Y.Assert.areEqual("Read Full Description", triggers.item(1).get("text"));
             Y.Assert.areEqual(2, Y.all(".descriptionTrigger").size());
         },
 
@@ -22,8 +22,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             items.each(function(node) {
                 Y.Assert.isTrue(node.hasClass("active"));
             });
-            triggers.each(function(node) {
-                Y.Assert.areEqual("close... ", node.get("text"));
+            triggers.each(function(node, index) {
+                if (index === 0) {
+                    Y.Assert.areEqual("Abstract ", node.get("text"));
+                } else {
+                    Y.Assert.areEqual(" Read Full Description ", node.get("text"));
+                }
             });
         },
 
@@ -38,9 +42,9 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             });
             triggers.each(function(node, index) {
                 if (index === 0) {
-                    Y.Assert.areEqual(" Preview Abstract ", node.get("text"));
+                    Y.Assert.areEqual("Abstract ", node.get("text"));
                 } else {
-                    Y.Assert.areEqual(" View Description ", node.get("text"));
+                    Y.Assert.areEqual(" Read Full Description ", node.get("text"));
                 }
             });
         }
