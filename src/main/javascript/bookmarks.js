@@ -11,7 +11,6 @@
      * It fires events when the collection changes
      *
      * @class Bookmarks
-     * @uses EventTarget
      * @constructor
      * @param bookmarks {array} may be undefined
      */
@@ -31,7 +30,6 @@
         /**
          * @event add
          * @description Fired when a bookmark is added.
-         * @preventable _defAddFn
          */
         this.publish("add", {defaultFn: this._defAddFn});
 
@@ -44,7 +42,6 @@
         /**
          * @event move
          * @description Fired when a bookmark is moved
-         * @prefentable _defMoveFn
          */
         this.publish("move", {defaultFn : this._defMoveFn});
 
@@ -57,7 +54,6 @@
         /**
          * @event remove
          * @description Fired when a bookmark is removed.
-         * @preventable _defRemoveFn
          */
         this.publish("remove", {defaultFn: this._defRemoveFn});
 
@@ -70,7 +66,6 @@
         /**
          * @event update
          * @description Fired when a bookmark is updated.
-         * @preventable _defUpdateFn
          */
         this.publish("update", {defaultFn: this._defUpdateFn});
 

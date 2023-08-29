@@ -6,12 +6,9 @@
      * A class for representing a bookmark with attributes for the label and url.
      *
      * @class Bookmark
-     * @uses EventTarget
      * @constructor
-     * @param label
-     *            {string} the label
-     * @param url
-     *            {string} the url
+     * @param label  {string} the label
+     * @param url {string} the url
      */
     var Bookmark = function(label, url) {
         this.publish("valueChange", {
