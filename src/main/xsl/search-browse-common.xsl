@@ -129,14 +129,6 @@
             <div>
                 <xsl:apply-templates select="$eresource/s:recordType" />
             </div>
-            <xsl:if test="count($eresource//s:link[@type = 'lane-impactFactor']) > 0">
-                <div class="impactFactor">
-                    <a title="journal profile from Journal Citation Reports" href="{$eresource//s:link[@type = 'lane-impactFactor']/s:url}">
-                        <i class="fa-regular fa-chart-simple"></i>
-                        Impact Factor
-                    </a>
-                </div>
-            </xsl:if>
         </div>
     </xsl:function>
 

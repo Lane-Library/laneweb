@@ -82,28 +82,6 @@
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="Scenario for testing template with match 's:link[@type = 'impactFactor']">
-        <x:context>
-        <s:result type="eresource">
-            <s:link type="lane-impactFactor"><s:url>url</s:url></s:link>
-        </s:result>
-        </x:context>
-        <x:expect label="s:link should become a link with the s:url as href and Impact Factor as text inside a div">      	
-		<li  class="resource" data-sid="" data-index=""><div class="resource-detail"><span class="primaryType" />
-		<div><a class="primaryLink"   href="url" title="" /></div></div><div class="bookcover-container" />
-		<div class="more-detail-container"><i class="fa-solid fa-ellipsis fa-xl" /><div class="sourceInfo no-bookmarking">
-		<div class="permalink">
-			<a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view//"><i class="fa-solid fa-link fa-rotate-180" />
-                    Get Shareable Link
-                </a></div><div />
-                <div class="impactFactor">
-                <a title="journal profile from Journal Citation Reports" href="url"><i class="fa-regular fa-chart-simple" />
-                        Impact Factor
-                    </a></div></div></div>
-        </li>
-        </x:expect>
-    </x:scenario>
-
     <x:scenario label="Scenario for testing template with match 's:primaryType">
         <x:context>
             <s:primaryType>primaryType</s:primaryType>
