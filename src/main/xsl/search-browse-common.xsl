@@ -129,14 +129,6 @@
             <div>
                 <xsl:apply-templates select="$eresource/s:recordType" />
             </div>
-            <xsl:if test="count($eresource//s:link[@type = 'lane-impactFactor']) > 0">
-                <div class="impactFactor">
-                    <a title="journal profile from Journal Citation Reports" href="{$eresource//s:link[@type = 'lane-impactFactor']/s:url}">
-                        <i class="fa-regular fa-chart-simple"></i>
-                        Impact Factor
-                    </a>
-                </div>
-            </xsl:if>
         </div>
     </xsl:function>
 
@@ -488,8 +480,8 @@
 
     <xsl:function name="f:isPrintRecordPointingToParent" as="xsd:boolean">
         <xsl:param name="eresource" />
-        <xsl:sequence select="$eresource/s:total = 0 and count($eresource/s:link[@type='lane-digital']) = 0 
-        and contains($eresource/s:link[1]/s:locationUrl,'/view/bib/')" />
+        <xsl:sequence select="$eresource/s:total = 0
+        and contains($eresource/s:link/s:locationUrl,'/view/bib/')" />
     </xsl:function>
 
     <!--  raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->

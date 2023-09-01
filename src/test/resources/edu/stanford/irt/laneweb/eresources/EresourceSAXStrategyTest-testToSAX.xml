@@ -43,17 +43,6 @@
       <available>1</available>
       <checkedOut>0</checkedOut>
    </link>
-   <link type="lane-impactFactor">
-      <label>impact factor</label>
-      <link-text>link-text</link-text>
-      <url>url</url>
-      <additional-text>additional-text</additional-text>
-      <holdings-dates>holdings-dates</holdings-dates>
-      <publisher>publisher</publisher>
-      <version-text>version-text</version-text>
-      <locationCode>locationCode</locationCode>
-      <locationName>locationName</locationName>
-   </link>
    <link type="normal">
       <link-text>link-text</link-text>
       <url>url</url>
