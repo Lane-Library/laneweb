@@ -5,6 +5,14 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2023-09-01" version="3.12.1" description="bug fix and update release">
+			<action date="2023-08-29" dev="alainb" issue="LANEWEB-11149" type="update">
+				Remove Impact Factor processing from Lane Search
+			</action>
+			<action date="2023-09-01" dev="alainb" issue="LANEWEB-11191" type="update">
+				Improve print css
+			</action>
+		</release>
 		<release date="2023-08-25" version="3.12.0" description="FOLIO release">
 			<action date="2023-08-23" dev="alainb" issue="LANEWEB-11179" type="fix">
 				search drop-down sometimes flaky (fix for Ghostery extension)
