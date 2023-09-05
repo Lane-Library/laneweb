@@ -116,6 +116,6 @@ section.header a {
 		top:0;
 	}
 	header:first-of-type {
-		display: none;
+		display: block;
 	}
 }
