@@ -6,7 +6,10 @@
 	</properties>
 	<body>
 		<release date="2023-09-01" version="3.12.1" description="bug fix and update release">
-			<action date="2023-08-29" dev="alainb" issue="LANEWEB-11149" type="update">
+			<action date="2023-08-29" dev="ryanmax" issue="LANEWEB-11168" type="fix">
+				"Click on Series link(s) for access options" is confusing
+			</action>
+			<action date="2023-08-29" dev="ryanmax" issue="LANEWEB-11149" type="update">
 				Remove Impact Factor processing from Lane Search
 			</action>
 			<action date="2023-09-01" dev="alainb" issue="LANEWEB-11191" type="update">
