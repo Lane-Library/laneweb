@@ -480,8 +480,13 @@
 
     <xsl:function name="f:isPrintRecordPointingToParent" as="xsd:boolean">
         <xsl:param name="eresource" />
-        <xsl:sequence select="$eresource/s:total = 0
-        and contains($eresource/s:link/s:locationUrl,'/view/bib/')" />
+        <xsl:variable name="parentLink">
+            <xsl:for-each select="$eresource/s:link">
+                <xsl:if test="contains(./s:locationUrl,'/view/bib/')">true</xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="urls" select="$eresource/s:link/s:locationUrl"/>
+        <xsl:sequence select="$eresource/s:total = 0 and contains($parentLink,'true')" />
     </xsl:function>
 
     <!--  raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->
