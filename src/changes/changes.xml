@@ -5,7 +5,7 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
-		<release date="2023-09-06" version="3.12.1" description="emergency release">
+		<release date="2023-09-06" version="3.12.2" description="emergency release">
 			<action date="2023-09-06" dev="ryanmax" issue="LANEWEB-11196" type="fix">
 				search and browse lists sometimes not showing results
 			</action>
