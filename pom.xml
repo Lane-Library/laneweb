@@ -7,7 +7,7 @@
         <version>132</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.12.2-SNAPSHOT</version>
+    <version>3.12.3-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
