@@ -5,6 +5,14 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2023-09-011" version="3.12.3" description="bug fix and update release">
+			<action date="2023-09-08" dev="alainb" issue="LANEWEB-11198" type="update">
+				Live chat button on page?
+			</action>
+			<action date="2023-09-08" dev="alainb" issue="LANEWEB-11199" type="update">
+				Remove red header from mobile and tablet
+			</action>
+		</release>
 		<release date="2023-09-06" version="3.12.2" description="emergency release">
 			<action date="2023-09-06" dev="ryanmax" issue="LANEWEB-11196" type="fix">
 				search and browse lists sometimes not showing results
