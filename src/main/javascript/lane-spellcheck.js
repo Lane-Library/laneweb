@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var spellCheck = document.querySelector('#spellCheck'),
+    var spellCheck = document.querySelector('.spellCheck'),
         model = L.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "";
