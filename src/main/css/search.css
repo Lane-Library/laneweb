@@ -24,7 +24,7 @@
     display: list-item;
 }
 
-.popin #spellCheck {
+.popin .spellCheck {
     display: block;
     position: relative;
     text-align: center;
@@ -42,7 +42,7 @@
     color: #8c1515;
 }
 
-#spellCheck .popInLabel {
+.spellCheck .popInLabel {
     padding-right: 6px;
 }
 
