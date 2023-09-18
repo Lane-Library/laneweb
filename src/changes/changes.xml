@@ -5,7 +5,12 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
-		<release date="2023-09-011" version="3.12.3" description="bug fix and update release">
+		<release date="2023-09-18" version="3.12.4" description="bug fix and update release">
+			<action date="2023-09-15" dev="ryanmax" issue="LANEWEB-11203" type="update">
+				SpellCheck Element IDs are not unique on No Results Found pages
+			</action>
+		</release>
+		<release date="2023-09-11" version="3.12.3" description="bug fix and update release">
 			<action date="2023-09-08" dev="alainb" issue="LANEWEB-11198" type="update">
 				Live chat button on page?
 			</action>
