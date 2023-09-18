@@ -1,10 +1,14 @@
 /* these are the default anchor styles*/
-a, a .fa, a .fa-solid, a .fa-regular, a .fa-light, a .fa-thin {
+a {
+    color: #007c92;
+    text-decoration: underline;
+}
+a .fa, a .fa-solid, a .fa-regular, a .fa-light, a .fa-thin {
     color: #007c92;
     text-decoration: none;
 }
 a:active, a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 a.disabled {
     color: #ccc;

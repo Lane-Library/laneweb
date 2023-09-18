@@ -72,6 +72,11 @@
     text-align: center;
     border: none;
     padding: 0;
+    text-decoration: underline;
+}
+
+.slide ul li:hover, .slide a:hover, .slide a i:hover {
+    text-decoration: none;
 }
 
 .slide ul.staff-overview {
@@ -125,7 +130,7 @@
 }
 
 .staff-list .slide ul.staff-detail a {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* In case it's missing on of the detail ie no phone */
