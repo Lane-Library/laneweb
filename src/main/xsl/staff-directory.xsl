@@ -88,6 +88,7 @@
             <a>
                 <xsl:if test="s:stanford-profile/text() != ''">
                     <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
+                    <xsl:attribute name="aria-label" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' Stanford Profile')" />
                 </xsl:if>
                 <div class="overlay">
                 </div>
