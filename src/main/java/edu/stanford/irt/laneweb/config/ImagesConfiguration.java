@@ -25,7 +25,7 @@ import edu.stanford.irt.laneweb.images.BassettImageListSAXStrategy;
 public class ImagesConfiguration {
    
     @Autowired
-    BassettImageService  service;
+    private BassettImageService  service;
         
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")

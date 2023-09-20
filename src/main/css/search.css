@@ -24,7 +24,7 @@
     display: list-item;
 }
 
-.popin #spellCheck {
+.popin .spellCheck {
     display: block;
     position: relative;
     text-align: center;
@@ -42,7 +42,7 @@
     color: #8c1515;
 }
 
-#spellCheck .popInLabel {
+.spellCheck .popInLabel {
     padding-right: 6px;
 }
 
@@ -236,6 +236,11 @@ li.active .description {
     display: table;
 }
 
+.hldgsContainer .request-cell {
+    display:table-cell;
+    vertical-align:middle;
+}
+
 .versionText {
     opacity: 0.75;
     margin: 0 10px;
@@ -243,10 +248,6 @@ li.active .description {
 
 span.versionText:first-child {
     margin-left: 0;
-}
-
-.requestIt {
-    padding: 10px;
 }
 
 .requestIt .btn {

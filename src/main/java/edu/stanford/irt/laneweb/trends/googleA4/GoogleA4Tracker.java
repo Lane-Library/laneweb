@@ -24,8 +24,6 @@ public class GoogleA4Tracker {
     
     private URL url;
     
-    private static final  String EVENT_NAME = "public_computer_trends";
-    
     
     
     public GoogleA4Tracker(String endPoint, String measurementId, String apiSecret, String clientId){
@@ -51,7 +49,7 @@ public class GoogleA4Tracker {
     
     private  String getPayLoad( String path,  String category,  String action, String label, int value) {
         Payload payLoad = new Payload(this.clientId);
-        Event event = new Event(EVENT_NAME);
+        Event event = new Event(category.replace(":","_"));
         event.addParamters("label", label);
         event.addParamters("category", category);
         event.addParamters("action", action);
