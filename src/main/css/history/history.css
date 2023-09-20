@@ -12,13 +12,13 @@ body {
 
 a {
     color: #007c92;
-    text-decoration: underline;
+    text-decoration: none;
     border-bottom: none;
     cursor: pointer;
 }
 
 a:active, a:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 /*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
@@ -188,7 +188,7 @@ h1 i {
 
 .menu-container li a:hover {
     background-color: #555555;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .menu-container li a.menuitem-active {

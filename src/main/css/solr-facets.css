@@ -55,7 +55,7 @@
 }
 
 .facet-container li  a:hover .facetLabel {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .facet-container .facetCount {
