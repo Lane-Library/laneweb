@@ -19,7 +19,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
-import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentServiceTest {
@@ -33,7 +32,7 @@ public class RESTEquipmentServiceTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = getClass().getResource("").toURI();
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.service = new RESTEquipmentService(this.uri, this.restService);
     }
 
