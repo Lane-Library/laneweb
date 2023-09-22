@@ -30,19 +30,19 @@ public class EresourceSearchService extends AbstractRestService{
     }
 
     public  Map<String, String> suggestFindAll(final String searchTerm) {
-        String path = "/search/suggest/" + this.urlEncode(searchTerm);
+        String path = "search/suggest/" + this.urlEncode(searchTerm);
         log.info("Suggest Eresource service {}",path);
         return this.restService.getObject(this.getURI(path), SUGGESTION_ERESOURCES_TYPE);
     }
 
     public Map<String, String> suggestFindByType(String searchTerm, String type) {
-        String path = "/search/suggest/".concat(type).concat("/").concat(this.urlEncode(searchTerm));
+        String path = "search/suggest/".concat(type).concat("/").concat(this.urlEncode(searchTerm));
         log.info("Suggest by Type eresource service {}",path);
         return this.restService.getObject(this.getURI(path), SUGGESTION_ERESOURCES_TYPE);
     }
 
     public Eresource getByBibID(final String bibID) {
-        String path = "/search/bib/" + this.urlEncode(bibID);
+        String path = "search/bib/" + this.urlEncode(bibID);
         log.info("Bib Id resource service {}",path);
         return this.restService.getObject(this.getURI(path), Eresource.class);
     }
@@ -55,7 +55,7 @@ public class EresourceSearchService extends AbstractRestService{
     }
 
     public Page<Eresource> searchWithFilters(String searchTerm, String facets, Pageable pageRequest) {
-        String path = "/search/facets/".concat(this.urlEncode(searchTerm));
+        String path = "search/facets/".concat(this.urlEncode(searchTerm));
         List<NameValuePair> parameters = Collections.singletonList(new BasicNameValuePair("facets", facets));
         URI uri = this.getURIWithParameters(path, pageRequest, parameters);
         log.info("Search eresource service {}",uri);
@@ -63,7 +63,7 @@ public class EresourceSearchService extends AbstractRestService{
     }
 
     public Page<Eresource> searchType(String type, String searchTerm, Pageable pageRequest) {
-        String path = "/search/type/".concat(this.urlEncode(searchTerm));
+        String path = "search/type/".concat(this.urlEncode(searchTerm));
         List<NameValuePair> parameters = Collections.singletonList(new BasicNameValuePair("type", type));
         URI uri = this.getURIWithParameters(path, pageRequest, parameters);
         log.info("Search by Type eresource service {}",uri);

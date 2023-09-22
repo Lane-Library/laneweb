@@ -23,19 +23,19 @@ public class EresourceBrowseService extends AbstractRestService {
     }
 
     public List<Eresource> browseByQuery(String searchTerm, char charAt) {
-        URI path = this.getURI("/browse/".concat(searchTerm).concat("/").concat(String.valueOf(charAt)));
+        URI path = this.getURI("browse/".concat(searchTerm).concat("/").concat(String.valueOf(charAt)));
         return this.restService.getObject(path, LIST_ERESOURCES_TYPE);
     }
 
     public List<Eresource> browseByQuery(String searchTerm) {
-        URI path = this.getURI("/browse/" + searchTerm);
+        URI path = this.getURI("browse/" + searchTerm);
         return this.restService.getObject(path, LIST_ERESOURCES_TYPE);
     }
 
     public Map<String, List<FacetFieldEntry>> facetByField(final String query, final String filters, final String field,
             final int pageNumber, final int facetLimit, final int facetMinCount,
             final FacetSort facetSort) {
-        String path = "/facet/field/".concat(query);
+        String path = "facet/field/".concat(query);
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("filters", filters));
         parameters.add(new BasicNameValuePair("field", field));

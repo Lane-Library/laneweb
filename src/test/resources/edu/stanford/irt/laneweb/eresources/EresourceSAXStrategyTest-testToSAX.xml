@@ -25,6 +25,7 @@
       <locationUrl>locationUrl</locationUrl>
       <total>1</total>
       <available>1</available>
+      <checkedOut>0</checkedOut>
    </link>
    <link type="normal">
       <label>get password</label>
@@ -40,17 +41,7 @@
       <locationUrl>locationUrl</locationUrl>
       <total>1</total>
       <available>1</available>
-   </link>
-   <link type="lane-impactFactor">
-      <label>impact factor</label>
-      <link-text>link-text</link-text>
-      <url>url</url>
-      <additional-text>additional-text</additional-text>
-      <holdings-dates>holdings-dates</holdings-dates>
-      <publisher>publisher</publisher>
-      <version-text>version-text</version-text>
-      <locationCode>locationCode</locationCode>
-      <locationName>locationName</locationName>
+      <checkedOut>0</checkedOut>
    </link>
    <link type="normal">
       <link-text>link-text</link-text>
@@ -65,5 +56,6 @@
       <locationUrl>locationUrl</locationUrl>
       <total>1</total>
       <available>1</available>
+      <checkedOut>0</checkedOut>
    </link>
 </result>

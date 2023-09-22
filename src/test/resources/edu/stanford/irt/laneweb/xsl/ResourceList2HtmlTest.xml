@@ -17,13 +17,7 @@
       <holdings-dates>2009</holdings-dates>
       <publisher>Springer</publisher>
     </link>
-    <link type="lane-impactFactor">
-      <label>Impact Factor</label>
-      <link-text>Impact Factor</link-text>
-      <url>http://impactfactor.org/</url>
-    </link>
   </result>
-  <!-- impact factor links should never be first, but test just in case -->
   <result score="1" type="eresource">
     <id>bib-123</id>
     <recordId>123</recordId>
@@ -31,11 +25,6 @@
     <title><keyword>Music</keyword> that works</title>
     <description>Introduction : <keyword>music</keyword> that works</description>
     <primaryType>Book Digital</primaryType>
-    <link type="lane-impactFactor">
-      <label>Impact Factor</label>
-      <link-text>Impact Factor</link-text>
-      <url>http://impactfactor.org/</url>
-    </link>
     <link type="lane-digital">
       <label>Fulltext</label>
       <link-text>2009</link-text>

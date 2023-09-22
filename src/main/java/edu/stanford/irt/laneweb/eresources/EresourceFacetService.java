@@ -23,7 +23,7 @@ public class EresourceFacetService extends AbstractRestService {
 
     public Map<String,List<FacetFieldEntry>> facetByField(final String searchTerm, final String filters, final String field,
             final int facetLimit, final int facetMinCount, final FacetSort facetSort) {
-        String path = "/facet/field/sort/".concat(this.urlEncode(searchTerm));
+        String path = "facet/field/sort/".concat(this.urlEncode(searchTerm));
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("filters", filters));
         parameters.add(new BasicNameValuePair("field", field));
@@ -36,7 +36,7 @@ public class EresourceFacetService extends AbstractRestService {
 
     public Map<String,List<FacetFieldEntry>>  facetByFieldContains(final String query, final String searchTerm, final String field,
             final String filters, final int facetMinCount) {
-        String path = "/facet/many/field/contains/".concat(this.urlEncode(query));
+        String path = "facet/many/field/contains/".concat(this.urlEncode(query));
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("searchTerm", searchTerm));
         parameters.add(new BasicNameValuePair("field", field));
@@ -47,7 +47,7 @@ public class EresourceFacetService extends AbstractRestService {
     }
 
     public Map<String,List<FacetFieldEntry>>  facetByManyFields(final String searchTerm, final String filters, final int facetLimit) {
-        String path = "/facet/many/field/".concat(this.urlEncode(searchTerm));
+        String path = "facet/many/field/".concat(this.urlEncode(searchTerm));
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("filters", filters));
         parameters.add(new BasicNameValuePair("facetLimit", String.valueOf(facetLimit)));
