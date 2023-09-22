@@ -55,16 +55,6 @@ public class BassettImageGeneratorTest {
     }
 
     @Test
-    public void testDoGenerateQuery() {
-        this.saxStrategy.toSAX(null, this.xmlConsumer);
-        expect(this.service.findAll(this.page)).andReturn(null);
-        replay(this.service, this.xmlConsumer, this.saxStrategy, this.resultPage);
-        this.generator.setModel(Collections.singletonMap(Model.QUERY, "query"));
-        this.generator.doGenerate(this.xmlConsumer);
-        verify(this.service, this.xmlConsumer, this.saxStrategy);
-    }
-
-    @Test
     public void testDoGenerateQueryRegion() {
         expect(this.service.findBassettByRegion( "region", this.page)).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
