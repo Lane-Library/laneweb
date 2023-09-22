@@ -32,9 +32,6 @@
         <div class="search-indicator">
             <i class="fa-solid fa-spinner fa-spin"></i>
         </div>
-        <div class="medium-screen-hide">
-            <a id="live-chat-sticky-button" rel="popup console 625 797" href="https://lanestanford.libanswers.com/chat/widget/7abdce3609a333d78020f5acbf66f033" class="live-chat">Live Chat</a>
-        </div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}-${git.commit.id.abbrev}"></script>
     </body>

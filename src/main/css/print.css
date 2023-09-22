@@ -1,10 +1,11 @@
 form,
 input,
-.library-contact,
-.login,
-footer {
-    height: 0;
-    display: none;
+header:first-child,
+#navigation,
+footer,
+.mobile-screen-menu.lrg-screen-hide,
+.menu-container.mobile {
+    display: none !important;
 }
 
 /* case 92684: hack for firefox printing bug */
@@ -18,7 +19,5 @@ footer {
         display: block;
         float: left;
     }
-    #searchFacets {
-        display: none;
-    }
+
 }

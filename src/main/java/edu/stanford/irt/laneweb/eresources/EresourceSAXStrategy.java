@@ -72,7 +72,6 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
         if (null != itemCount) {
             maybeCreateElement(xmlConsumer, "total", Integer.toString(itemCount[0]));
             maybeCreateElement(xmlConsumer, "available", Integer.toString(itemCount[1]));
-            maybeCreateElement(xmlConsumer, "checkedOut", Integer.toString(itemCount[2]));
         }
         XMLUtils.endElement(xmlConsumer, Resource.NAMESPACE, Resource.LINK);
     }

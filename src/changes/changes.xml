@@ -5,6 +5,41 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+		<release date="2023-09-18" version="3.12.4" description="bug fix and update release">
+			<action date="2023-09-15" dev="ryanmax" issue="LANEWEB-11203" type="update">
+				SpellCheck Element IDs are not unique on No Results Found pages
+			</action>
+		</release>
+		<release date="2023-09-11" version="3.12.3" description="bug fix and update release">
+			<action date="2023-09-08" dev="alainb" issue="LANEWEB-11198" type="update">
+				Live chat button on page?
+			</action>
+			<action date="2023-09-08" dev="alainb" issue="LANEWEB-11199" type="update">
+				Remove red header from mobile and tablet
+			</action>
+		</release>
+		<release date="2023-09-06" version="3.12.2" description="emergency release">
+			<action date="2023-09-06" dev="ryanmax" issue="LANEWEB-11196" type="fix">
+				search and browse lists sometimes not showing results
+			</action>
+			<action date="2023-09-06" dev="alainb" issue="LANEWEB-11195" type="fix">
+				hours don't display on small devices
+			</action>
+			<action date="2023-09-06" dev="alainb" issue="LANEWEB-11141" type="update">
+				make red banner/header sticky
+			</action>
+		</release>
+		<release date="2023-09-01" version="3.12.1" description="bug fix and update release">
+			<action date="2023-08-29" dev="ryanmax" issue="LANEWEB-11168" type="fix">
+				"Click on Series link(s) for access options" is confusing
+			</action>
+			<action date="2023-08-29" dev="ryanmax" issue="LANEWEB-11149" type="update">
+				Remove Impact Factor processing from Lane Search
+			</action>
+			<action date="2023-09-01" dev="alainb" issue="LANEWEB-11191" type="update">
+				Improve print css
+			</action>
+		</release>
 		<release date="2023-08-25" version="3.12.0" description="FOLIO release">
 			<action date="2023-08-23" dev="alainb" issue="LANEWEB-11179" type="fix">
 				search drop-down sometimes flaky (fix for Ghostery extension)

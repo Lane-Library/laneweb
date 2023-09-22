@@ -12,7 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,9 +26,9 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class BassettCountSAXStrategyTest {
 
-    private  Map<String, Map<String, Integer>> facetPage;
+    private Map<String, Map<String, Integer>> facetPage;
 
-    private   Map<String, Integer> page;
+    private Map<String, Integer> page;
 
     private BassettCountSAXStrategy strategy;
 
@@ -42,16 +44,17 @@ public class BassettCountSAXStrategyTest {
 
     @Test
     public void testToSAX() throws SAXException {
-        Map<String, Integer> regions = new HashMap<>();
-        Map<String, Integer> subregions = new HashMap<>();
-        regions.put("Region1", 10);
-        regions.put("Region2", 5);
-       
-        expect(this.facetPage.get("region")).andReturn(regions);
-        subregions.put("Region1_sub_region_Subregion1", 5);
-        subregions.put("Region1_sub_region_Subregion2", 5);
-        subregions.put("Region2_sub_region_Subregion1", 5);
-        expect(this.facetPage.get("sub_region")).andReturn(subregions);
+        Set<String> regions = new HashSet<>();
+        Map<String, Integer> subregions1 = new HashMap<>();
+        Map<String, Integer> subregions2 = new HashMap<>();
+        regions.add("Region1");
+        regions.add("Region2");
+        subregions1.put("Region1_sub_region_Subregion1", 5);
+        subregions1.put("Region1_sub_region_Subregion2", 5);
+        subregions2.put("Region2_sub_region_Subregion1", 5);
+        expect(this.facetPage.keySet()).andReturn(regions);
+        expect(this.facetPage.get("Region1")).andReturn(subregions1);
+        expect(this.facetPage.get("Region2")).andReturn(subregions2);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
@@ -80,12 +83,13 @@ public class BassettCountSAXStrategyTest {
         this.xmlConsumer.endDocument();
         replay(this.facetPage, this.page, this.xmlConsumer);
         this.strategy.toSAX(this.facetPage, this.xmlConsumer);
-        verify(this.xmlConsumer);
+        verify(this.xmlConsumer, this.facetPage);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testToSAXEmptyMap() throws SAXException {
+        expect(this.facetPage.keySet()).andReturn(Collections.emptySet());
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
