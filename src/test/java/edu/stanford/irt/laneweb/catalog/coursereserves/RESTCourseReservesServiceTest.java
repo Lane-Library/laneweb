@@ -24,10 +24,8 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 public class RESTCourseReservesServiceTest {
 
     private CourseReservesItemList itemList;
-
-    private RESTService restService;
     
-    private BasicAuthRESTService basicAuthestService;
+    private BasicAuthRESTService restService;
 
     private RESTCourseReservesService service;
 
@@ -36,8 +34,8 @@ public class RESTCourseReservesServiceTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
-        this.restService = mock(RESTService.class);
-        this.service = new RESTCourseReservesService(this.uri, this.basicAuthestService);
+        this.restService = mock(BasicAuthRESTService.class);
+        this.service = new RESTCourseReservesService(this.uri, this.restService);
         this.itemList = mock(CourseReservesItemList.class);
     }
 

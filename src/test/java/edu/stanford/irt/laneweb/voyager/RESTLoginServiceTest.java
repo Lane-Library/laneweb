@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.springframework.web.client.RestClientException;
 
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
-import edu.stanford.irt.laneweb.rest.RESTService;
+
 
 public class RESTLoginServiceTest {
 
@@ -27,7 +27,7 @@ public class RESTLoginServiceTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.service = new RESTLoginService(this.uri, this.restService);
     }
 

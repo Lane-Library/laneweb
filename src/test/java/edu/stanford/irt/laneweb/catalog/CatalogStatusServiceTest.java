@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTException;
-import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.status.ApplicationStatus;
 
 public class CatalogStatusServiceTest {
@@ -28,7 +27,7 @@ public class CatalogStatusServiceTest {
 
     @Before
     public void setUp() throws URISyntaxException {
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.service = new CatalogStatusService(new URI("/"), this.restService);
     }
 
