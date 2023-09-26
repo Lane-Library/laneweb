@@ -9,6 +9,7 @@
     /**
      * An editor widget for an individual bookmark.
      * @class BookmarkEditor
+     * @requires Widget
      * @constructor
      */
     BookmarkEditor = Y.Base.create("bookmark-editor", Y.Widget, [], {

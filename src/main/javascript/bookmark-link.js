@@ -18,6 +18,8 @@
          * when clicked.
          *
          * @class BookmarksLink
+         * @requires Base
+         * @requires LinkInfo
          * @constructor
          */
         BookmarkLink = function() {

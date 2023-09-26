@@ -6,6 +6,7 @@
      * A class for representing a bookmark with attributes for the label and url.
      *
      * @class Bookmark
+     * @requires EventTarget
      * @constructor
      * @param label  {string} the label
      * @param url {string} the url

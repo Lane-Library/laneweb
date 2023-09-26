@@ -11,6 +11,7 @@
      * It fires events when the collection changes
      *
      * @class Bookmarks
+     * @requires EventTarget
      * @constructor
      * @param bookmarks {array} may be undefined
      */

@@ -9,7 +9,7 @@
      * with a thumbnail that can be clicked upon to get the video.
      *
      * @class YouTubeNode
-     * @type {Object}
+     * @constructor
      * @param iframe
      *            {node} the youtube iframe node
      */
