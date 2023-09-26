@@ -50,12 +50,9 @@ public class EresourcesConfiguration {
    
   private static final int FACETS_TO_SHOW_SEARCH = 4;
 
-    private Collection<String> facetFields;
+  private Collection<String> facetFields;
 
-    @Value("${edu.stanford.irt.laneweb.solr.laneSearch.collectionName}")
-    private String laneSearchCollectionName;
-
-    private Collection<String> publicationTypes;
+  private Collection<String> publicationTypes;
 
   public EresourcesConfiguration() {
     this.facetFields = Arrays.asList("type", "publicationType", "recordType", "publicationTitle");
@@ -112,12 +109,6 @@ public class EresourcesConfiguration {
         generator.setFacet(this.facetFields);
         return generator;
     }
-
-  
-  @Bean
-  public String laneSearchCollectionName() {
-    return this.laneSearchCollectionName;
-  }
 
   @Bean
   public SAXStrategy<Eresource> linkWithCoverSAXStrategy() {
