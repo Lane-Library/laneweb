@@ -52,13 +52,6 @@
                     View Details
                 </a>
                   </div>
-                  <div class="impactFactor">
-                     <a title="journal profile from Journal Citation Reports"
-                        href="http://impactfactor.org/">
-                        <i class="fa-regular fa-chart-simple"/>
-                        Impact Factor
-                    </a>
-                  </div>
                </div>
             </div>
          </li>
@@ -67,7 +60,7 @@
                <span class="primaryType">Book</span>
                <div>
                   <a class="primaryLink"
-                     href="http://impactfactor.org/"
+                     href="http://link.springer.com/978-3-211-75120-6"
                      title="Music that works">
                      <strong>Music</strong> that works</a>
                </div>
@@ -107,13 +100,6 @@
                         <i class="fa-solid fa-arrow-right-from-bracket"/>
                     View Details
                 </a>
-                  </div>
-                  <div class="impactFactor">
-                     <a title="journal profile from Journal Citation Reports"
-                        href="http://impactfactor.org/">
-                        <i class="fa-regular fa-chart-simple"/>
-                        Impact Factor
-                    </a>
                   </div>
                </div>
             </div>

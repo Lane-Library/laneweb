@@ -59,7 +59,7 @@ public class EresourceSAXStrategyTest {
         expect(this.eresource.getTotal()).andReturn(10);
         expect(this.eresource.getAvailable()).andReturn(5);
         expect(this.eresource.getLinks())
-                .andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link, this.link }));
+                .andReturn(Arrays.asList(new Link[] { this.link, this.link, this.link }));
         expect(this.eresource.getDois()).andReturn(Collections.singletonList("doi"));
         expect(this.eresource.getIsbns()).andReturn(Collections.singletonList("isbn"));
         expect(this.eresource.getIssns()).andReturn(Collections.singletonList("issn"));
@@ -94,21 +94,6 @@ public class EresourceSAXStrategyTest {
         expect(this.version.getLocationName()).andReturn("locationName");
         expect(this.version.getLocationUrl()).andReturn("locationUrl");
         // link 3
-        expect(this.link.getType()).andReturn(LinkType.LANE_IMPACTFACTOR);
-        expect(this.link.getLabel()).andReturn("impact factor");
-        expect(this.link.getUrl()).andReturn(Resource.URL);
-        expect(this.link.getLinkText()).andReturn(Resource.LINK_TEXT);
-        expect(this.link.getVersion()).andReturn(this.version);
-        expect(this.version.getHoldingsAndDates()).andReturn("holdings-dates");
-        expect(this.version.getPublisher()).andReturn("publisher");
-        expect(this.version.getAdditionalText()).andReturn("version-text");
-        expect(this.link.getAdditionalText()).andReturn(Resource.ADDITIONAL_TEXT);
-        expect(this.version.getCallnumber()).andReturn(null);
-        expect(this.version.getItemCount()).andReturn(null);
-        expect(this.version.getLocationCode()).andReturn("locationCode");
-        expect(this.version.getLocationName()).andReturn("locationName");
-        expect(this.version.getLocationUrl()).andReturn(null);
-        // link 4
         expect(this.eresource.getIsAnExactMatch()).andReturn("false");
         expect(this.link.getType()).andReturn(LinkType.NORMAL);
         expect(this.link.getLabel()).andReturn(null);

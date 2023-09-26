@@ -190,9 +190,7 @@ public class Eresource {
         Version v = l.getVersion();
         LinkType linkType = LinkType.NORMAL;
         String linkUrl = l.getUrl();
-        if ("impact factor".equalsIgnoreCase(l.getLabel())) {
-            linkType = LinkType.LANE_IMPACTFACTOR;
-        } else if ("sul".equals(this.recordType) && linkUrl != null
+        if ("sul".equals(this.recordType) && linkUrl != null
                 && linkUrl.contains("//searchworks.stanford.edu/view")) {
             linkType = LinkType.SUL_PRINT;
         } else if ("sul".equals(this.recordType) && this.primaryType.contains("Print")) {
@@ -220,9 +218,6 @@ public class Eresource {
                 l.setVersion(v);
                 LinkType lt = computeLinkType(l);
                 l.setType(lt);
-                if (LinkType.LANE_IMPACTFACTOR.equals(lt)) {
-                    v.setPublisher("Journal Citation Reports");
-                }
                 this.linksList.add(l);
             });
         }
