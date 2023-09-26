@@ -13,7 +13,8 @@
     /**
      * A class that provides an autocomplete widget for inputs.
      * @class Suggest
-	 * @type {Object}
+     * @requires EventTarget
+	 * @constructor
      * @param input {Node} the input node.
      * @param limit {String} the limit parameter for the request.
 	 * @param sourceBase {String}.
