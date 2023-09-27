@@ -29,18 +29,9 @@ public class SitemapController extends AbstractSitemapController {
     @Override
     @RequestMapping(value = {"/*.html", "/*/*.html", "/*/*/*.html", "/*/*/*/*.html", "/*/*/*/*/*.html"}, method = { RequestMethod.GET, RequestMethod.HEAD })
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-      String path = request.getServletPath();
       doHandleRequest(request, response, "");
     }
     
     
-//    @Override
-//    @RequestMapping(value = {"/**"}, method = { RequestMethod.GET, RequestMethod.HEAD })
-//    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-//      String path = request.getServletPath();
-//      System.out.println(path);
-//      if(path.endsWith(".html")) {
-//        doHandleRequest(request, response, "");
-//      }
-//    }
+    
 }
