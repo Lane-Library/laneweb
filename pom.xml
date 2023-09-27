@@ -341,14 +341,14 @@
             <version>1.5</version>
         </dependency>
         <dependency>
-          <groupId>commons-validator</groupId>
-          <artifactId>commons-validator</artifactId>
-          <version>1.7</version>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.7</version>
         </dependency>
-         <dependency>
-          <groupId>com.google.code.gson</groupId>
-          <artifactId>gson</artifactId>
-          <version>2.10.1</version>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
         </dependency>
     </dependencies>
     <build>
@@ -423,171 +423,32 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.5.1</version>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.6</version>
                 <executions>
                     <execution>
+                        <id>lane-minify</id>
+                        <configuration>
+                            <webappSourceDir>${project.basedir}/src/main</webappSourceDir>
+                            <webappTargetDir>${project.build.directory}/classes/resources</webappTargetDir>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <cssSourceDir>css</cssSourceDir>
+                            <jsSourceDir>javascript</jsSourceDir>
+                            <bundleConfiguration>${project.basedir}/lane-minify-bundles.json</bundleConfiguration>
+                        </configuration>
                         <goals>
-                            <goal>compress</goal>
+                            <goal>minify</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <webappDirectory>${project.build.directory}/laneweb-${project.version}</webappDirectory>
-                    <excludes>
-                        <exclude>**/lane-all.css</exclude>
-                        <exclude>**/lane-all.js</exclude>
-                        <exclude>**/lane-history.js</exclude>
-                        <exclude>**/test/*/*.js</exclude>
-                        <exclude>**/yui*.*</exclude>
-                    </excludes>
-                    <aggregations>
-                        <aggregation>
-                            <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/classes/resources/css/lane-all.css</output>
-                            <includes>
-                                <include>reset-min.css</include>
-                                <include>pure-grids-min.css</include>
-                                <include>googlefonts-min.css</include>
-                                <include>fontawesome-min.css</include>
-                                <include>main-body-min.css</include>
-                                <include>bassett-min.css</include>
-                                <include>fontawesome-local-min.css</include>
-                                <include>som-colors-min.css</include>
-                                <include>header-min.css</include>
-                                <include>search-form-min.css</include>
-                                <include>dropdown-min.css</include>
-                                <include>nav-min.css</include>
-                                <include>lists-min.css</include>
-                                <include>anchors-min.css</include>
-                                <include>footer-min.css</include>
-                                <include>headings-min.css</include>
-                                <include>module-min.css</include>
-                                <include>guides-min.css</include>
-                                <include>staff-min.css</include>
-                                <include>search-min.css</include>
-                                <include>popups-min.css</include>
-                                <include>online-resources-min.css</include>
-                                <include>tooltips-min.css</include>
-                                <include>miscellaneous-min.css</include>
-                                <include>events-min.css</include>
-                                <include>buttons-min.css</include>
-                                <include>forms-min.css</include>
-                                <include>discovery-login-min.css</include>
-                                <include>tables-min.css</include>
-                                <include>lightbox-min.css</include>
-                                <include>popular-min.css</include>
-                                <include>business-card-min.css</include>
-                                <include>bookmarks-min.css</include>
-                                <include>suggest-min.css</include>
-                                <include>resource-list-pagination-min.css</include>
-                                <include>classes-min.css</include>
-                                <include>shc-portal-min.css</include>
-                                <include>menu-min.css</include>
-                                <include>gutters-min.css</include>
-                                <include>back-to-top-min.css</include>
-                                <include>solr-facets-min.css</include>
-                                <include>equipment-min.css</include>
-                                <include>clinical-search-min.css</include>
-                                <include>newsfeed-item-min.css</include>
-                                <include>youtube-thumbnail-min.css</include>
-                                <include>calendar-min.css</include>
-                                <include>password-table-min.css</include>
-                                <include>portals-min.css</include>
-                                <include>course-reserves-min.css</include>
-                                <include>explore-min.css</include>
-                                <include>subscription-min.css</include>
-                                <include>contacts-min.css</include>
-                                <include>liaisons-directory-min.css</include>
-                                <include>use-lane-min.css</include>
-                                <include>IE-min.css</include>
-                                <include>responsive-min.css</include>
-                            </includes>
-                        </aggregation>
-                        <aggregation>
-                            <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/classes/resources/javascript/lane-all.js</output>
-                            <includes>
-                                <include>${basedir}/src/main/javascript/yui-3.18.1.js</include>
-                                <include>lane-min.js</include>
-                                <include>util-min.js</include>
-                                <include>menu-min.js</include>
-                                <include>navigation-min.js</include>
-                                <include>model-min.js</include>
-                                <include>guides-min.js</include>
-                                <include>link-info-min.js</include>
-                                <include>lane-ie-min.js</include>
-                                <include>lane-persistent-login-min.js</include>
-                                <include>search-indicator-min.js</include>
-                                <include>lane-bassett-min.js</include>
-                                <include>suggest-min.js</include>
-                                <include>slideshow-min.js</include>
-                                <include>search-min.js</include>
-                                <include>search-reset-min.js</include>
-                                <include>search-dropdown-min.js</include>
-                                <include>search-placeholder-min.js</include>
-                                <include>search-help-min.js</include>
-                                <include>search-suggest-min.js</include>
-                                <include>search-pico-toggle-min.js</include>
-                                <include>search-pico-fields-min.js</include>
-                                <include>search-pico-min.js</include>
-                                <include>bookmark-min.js</include>
-                                <include>bookmarks-min.js</include>
-                                <include>bookmarks-widget-min.js</include>
-                                <include>bookmark-editor-min.js</include>
-                                <include>bookmarks-editor-min.js</include>
-                                <include>bookmark-link-min.js</include>
-                                <include>bookmark-animation-min.js</include>
-                                <include>lane-lightbox-min.js</include>
-                                <include>bookmark-login-min.js</include>
-                                <include>lane-tracking-min.js</include>
-                                <include>lane-google-GA4-min.js</include>
-                                <include>lane-google-min.js</include>
-                                <include>lane-popup-min.js</include>
-                                <include>lane-tooltips-min.js</include>
-                                <include>lane-spellcheck-min.js</include>
-                                <include>description-toggle-min.js</include>
-                                <include>shibboleth-sfx-min.js</include>
-                                <include>youtube-min.js</include>
-                                <include>back-to-top-min.js</include>
-                                <include>solr-facets-min.js</include>
-                                <include>solr-facet-suggest-min.js</include>
-                                <include>solr-pagination-min.js</include>
-                                <include>bookcovers-min.js</include>
-                                <include>browzine-min.js</include>
-                                <include>viewport-min.js</include>
-                                <include>authors-toggle-min.js</include>
-                                <include>clinical-toggle-min.js</include>
-                                <include>search-form-scroll-min.js</include>
-                                <include>message-min.js</include>
-                                <include>course-reserves-min.js</include>
-                                <include>permalink-toggle-min.js</include>
-                                <include>validation-min.js</include>
-                                <include>holdings-toggle-min.js</include>
-                                <include>table-hide-empty-columns-min.js</include>
-                                <include>zotero-min.js</include>
-                            </includes>
-                        </aggregation>
-                        <aggregation>
-                            <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/classes/resources/css/history/lane-history.css</output>
-                            <includes>
-                                <include>history-min.css</include>
-                                <include>history-responsive-min.css</include>
-                            </includes>
-                        </aggregation>
-                        <aggregation>
-                            <removeIncluded>false</removeIncluded>
-                            <output>${project.build.directory}/classes/resources/javascript/history/lane-history.js</output>
-                            <includes>
-                                <include>history-photos-min.js</include>
-                                <include>../back-to-top-min.js</include>
-                            </includes>
-                        </aggregation>
-                    </aggregations>
-                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.plexus</groupId>
+                        <artifactId>plexus-utils</artifactId>
+                        <version>3.0.24</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <!-- disable (temporarily?) grover JS tests: istanbul is dependent on ancient node version
             also had to remove jenkins "grover" task:
@@ -610,20 +471,20 @@
                 </executions>
             </plugin>
              -->
-			<plugin>
-				<groupId>uk.org.adamretter.maven</groupId>
-				<artifactId>xspec-maven-plugin</artifactId>
-				<version>1.2</version>
-				<executions>
-					<execution>
-						<id>test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>run-xspec</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <groupId>uk.org.adamretter.maven</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run-xspec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.cj.jshintmojo</groupId>
                 <artifactId>jshint-maven-plugin</artifactId>
@@ -671,34 +532,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>net.alchim31.maven</groupId>
-                                        <artifactId>yuicompressor-maven-plugin</artifactId>
-                                        <versionRange>[1.2,)</versionRange>
-                                        <goals>
-                                            <goal>compress</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore />
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
     <reporting>
         <plugins>

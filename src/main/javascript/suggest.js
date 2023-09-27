@@ -12,12 +12,12 @@
 
     /**
      * A class that provides an autocomplete widget for inputs.
-     *
      * @class Suggest
-     * @uses EventTarget
-     * @constructor
+     * @requires EventTarget
+	 * @constructor
      * @param input {Node} the input node.
      * @param limit {String} the limit parameter for the request.
+	 * @param sourceBase {String}.
      */
     Suggest = function(input,  minQueryLength, sourceBase) {
         var yuiinput = input._node ? input : new Y.Node(input);
