@@ -48,7 +48,7 @@ public class EresourceSearchService extends AbstractRestService{
     }
 
     public Map<String, Integer> searchCount(final String searchTerm) {
-        URI path = this.getURI("/search/count/" + this.urlEncode(searchTerm));
+        URI path = this.getURI("search/count/" + this.urlEncode(searchTerm));
         log.info("count  Eresource service {}",path);
         return this.restService.getObject(path, new TypeReference<Map<String, Integer>>() {
         });
