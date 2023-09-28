@@ -15,8 +15,10 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
@@ -67,6 +69,12 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         return handlerMapping;
     }
 
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        // Use AntPathMatcher as the path matching strategy to allow /**/*.html
+        configurer.setPathMatcher(new AntPathMatcher());
+    }
+    
     @Bean
     SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(
             final SitemapController sitemapController) {

@@ -27,7 +27,7 @@ public class SitemapController extends AbstractSitemapController {
     }
 
     @Override
-    @RequestMapping(value = {"/*.html", "/*/*.html", "/*/*/*.html", "/*/*/*/*.html", "/*/*/*/*/*.html"}, method = { RequestMethod.GET, RequestMethod.HEAD })
+    @RequestMapping(value = {"/**/*.html"}, method = { RequestMethod.GET, RequestMethod.HEAD })
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
       doHandleRequest(request, response, "");
     }
