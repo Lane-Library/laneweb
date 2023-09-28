@@ -14,22 +14,10 @@
     <inceptionYear>2002</inceptionYear>
     <developers>
         <developer>
-            <id>ceyates</id>
-            <name>Charles Yates</name>
-            <email>ceyates@stanford.edu</email>
-            <organization>IRT Systems Development</organization>
-        </developer>
-        <developer>
             <id>alainb</id>
             <name>Alain Boussard</name>
             <email>alainb@stanford.edu</email>
             <organization>IRT Systems Development</organization>
-        </developer>
-        <developer>
-            <id>olgary</id>
-            <name>Olya Gary</name>
-            <email>olgary@stanford.edu</email>
-            <organization>Lane Medical Library</organization>
         </developer>
         <developer>
             <id>ryanmax</id>
