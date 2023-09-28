@@ -41,7 +41,6 @@ public class TicketSerializerTest {
 
     @Test
     public void testSerializeTicketJsonGeneratorSerializerProvider() throws IOException {
-        System.out.println(this.ticket.toString());
         this.jgen.writeString(this.ticket.toString());
         replay(this.jgen, this.provider);
         this.serializer.serialize(this.ticket, this.jgen, this.provider);
