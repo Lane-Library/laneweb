@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns="http://lane.stanford.edu/resources/1.0"
-            size="539"
-            start="0"
-            length="539"
-            page="-1"
-            pages="4"
-            facetCount="539">
+           size="539"
+           start="0"
+           length="539"
+           page="-1"
+           pages="4"
+           facetCount="539">
    <query>query</query>
    <contentHitCounts/>
 </resources>
