@@ -40,7 +40,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:git@gitlab.med.stanford.edu:lane/laneweb.git</developerConnection>
-        <tag>laneweb-3.12.6</tag>
+        <tag>laneweb-3.11.42</tag>
     </scm>
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
