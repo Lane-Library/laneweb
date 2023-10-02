@@ -5,6 +5,14 @@
 		<title>Laneweb Releases</title>
 	</properties>
 	<body>
+        <release date="2023-10-02" version="3.12.6" description="bug fix and update release">
+            <action date="2023-09-15" dev="ryanmax" issue="LANEWEB-11205" type="update">
+                Accessibility and links
+            </action>
+            <action date="2023-10-02" dev="alainb" issue="LANEWEB-11214" type="update">
+                Replace YUI css and javascript compressor
+            </action>
+        </release>
 		<release date="2023-09-25" version="3.12.5" description="bug fix and update release">
 			<action date="2023-09-01" dev="alainb" issue="LANEWEB-11192" type="update">
 				Retire lmldb-history metasearch engine
