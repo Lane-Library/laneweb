@@ -2,19 +2,19 @@
 
     "use strict";
 
-    let nodelist, iframes = [], iframeNode, i,
+    var nodelist, iframes = [], iframeNode, i,
 
     /**
      * A class for representing an embeded youtube iframe that replaces the iframe
      * with a thumbnail that can be clicked upon to get the video.
      *
      * @class YouTubeNode
-     * @type {Object}
      * @constructor
-     * @param iframe  {node} the youtube iframe node
+     * @param iframe
+     *            {node} the youtube iframe node
      */
-    YouTubesNode = function(iframe) {
-        let id, url,
+    YouTubeNode = function(iframe) {
+        var id, url,
                 src = iframe.src,
                 temp = document.createElement("div"),
                 self = this,
