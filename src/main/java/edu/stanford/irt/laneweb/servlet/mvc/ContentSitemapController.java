@@ -26,7 +26,7 @@ public class ContentSitemapController extends AbstractSitemapController {
     }
 
     @Override
-    @RequestMapping(value = {"/content/*.html", "/content/*/*.html", "/content/*/*/*.html", "/content/*/*/*/*.html"}, method = { RequestMethod.GET, RequestMethod.HEAD })
+    @RequestMapping(value = {"/content/**/*.html"}, method = { RequestMethod.GET, RequestMethod.HEAD })
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         doHandleRequest(request, response, "/content");
     }
