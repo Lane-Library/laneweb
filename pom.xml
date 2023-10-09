@@ -7,7 +7,7 @@
         <version>135-springsix</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.12.6-SNAPSHOT</version>
+    <version>3.12.7-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -442,7 +442,6 @@
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <configuration>
                     <rules>
-                        `
                         <requireJavaVersion>
                             <version>21</version>
                         </requireJavaVersion>
