@@ -80,7 +80,7 @@
 }
 
 .slide ul.staff-overview {
-    height: 106px;
+    height: 115px;
     padding: 0 9px;
     background: transparent linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%) 0% 0% no-repeat;
 }
@@ -113,7 +113,7 @@
 }
 
 .staff-list .slide div.staff-info {
-    bottom: -95px;
+    bottom: -106px;
 }
 
 .staff-list .slide ul.staff-overview li:first-of-type {
