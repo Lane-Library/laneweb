@@ -11,7 +11,7 @@ header section, footer section, .content{
 
 
 header:first-of-type{
- 	background-color: #8c1515;;
+ 	background-color: #8c1515;
  	color: white;
  }
 
@@ -26,7 +26,7 @@ header:nth-of-type(2){
 }
 
 .content {
-	color: #333333;
+	color: black;
 	position: relative;
 }
 
