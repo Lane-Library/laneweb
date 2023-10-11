@@ -121,6 +121,11 @@
     font-weight: normal;
 }
 
+.staff-list .slide ul.staff-overview li:nth-of-type(2) {
+    font-size: 12px;
+    font-weight: 300;
+}
+
 .staff-list .slide ul.staff-detail {
     background-color: #333;
     padding: 8px;
@@ -202,7 +207,7 @@
     .module.directory {
         padding: 1em;
     }
-    
+
     .staff-list .slide ul.staff-overview li:first-of-type {
         font-size: 1.2em;
     }
