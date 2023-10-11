@@ -57,6 +57,9 @@
                             <xsl:text> </xsl:text>
                             <xsl:value-of select="s:last-name/text()" />
                         </li>
+                         <li>
+                            <xsl:value-of select="s:pronouns/text()" />
+                        </li>
                         <li>
                             <xsl:value-of select="s:job-title/text()" />
                         </li>
