@@ -1,4 +1,4 @@
-FROM us-docker.pkg.dev/som-laneweb/docker-private/jre-parent:eclipse-temurin-11.0.19_7-jre
+FROM us-docker.pkg.dev/som-laneweb/docker-private/jre-parent:eclipse-temurin-11.0.20.1_1-jre
 COPY target/laneweb.war laneweb.war
 
 ENV SPRING_CONFIG_LOCATION=/secrets/application.properties,/config/application.properties
