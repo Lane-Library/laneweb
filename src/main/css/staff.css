@@ -191,6 +191,8 @@
 @media (max-width : 812px) {
     .staff-list .slide {
         flex: 0 1 49%;
+        font-size: 13px;
+        min-width: inherit;
     }
 
     .staff-list {
@@ -200,12 +202,7 @@
     .module.directory {
         padding: 1em;
     }
-
-    .staff-list .slide {
-        font-size: 13px;
-        min-width: inherit;
-    }
-
+    
     .staff-list .slide ul.staff-overview li:first-of-type {
         font-size: 1.2em;
         padding-bottom: 6px;
