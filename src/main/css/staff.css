@@ -4,6 +4,14 @@
     height: 280px;
 }
 
+#slide-show .slide div.staff-info {
+    bottom: -15px;
+}
+
+#slide-show .slide ul.staff-overview li {
+    line-height: 19px;
+}
+
 .slide-container,
 .staff-list {
     position: relative;
@@ -85,13 +93,13 @@
     background: transparent linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%) 0% 0% no-repeat;
 }
 
-.slide ul.staff-overview li:first-of-type {
-    font-weight: 700;
-}
-
-.slide ul.staff-overview li:last-of-type {
+.slide ul.staff-overview li {
     font-weight: 300;
     line-height: 1.3em;
+}
+
+.slide ul.staff-overview li:first-of-type {
+    font-weight: 700;
 }
 
 /* Team directory specific */
@@ -113,17 +121,12 @@
 }
 
 .staff-list .slide div.staff-info {
-    bottom: -106px;
+    bottom: -115px;
 }
 
 .staff-list .slide ul.staff-overview li:first-of-type {
     font-size: 1.3em;
     font-weight: normal;
-}
-
-.staff-list .slide ul.staff-overview li:nth-of-type(2) {
-    font-size: 12px;
-    font-weight: 300;
 }
 
 .staff-list .slide ul.staff-detail {
@@ -134,6 +137,7 @@
 .staff-list .slide ul.staff-detail a {
     text-decoration: underline;
 }
+
 
 /* In case it's missing on of the detail ie no phone */
 .staff-list .slide ul.staff-detail li {
@@ -176,6 +180,12 @@
 .staff-list .banner.liaison {
     background-color: #007c92;
 }
+
+.slide ul.staff-overview li:nth-of-type(2) {
+    font-size: 12px;
+    font-weight: 300;
+}
+
 
 .slide.empty {
     height: 0;
