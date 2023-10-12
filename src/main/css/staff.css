@@ -4,6 +4,14 @@
     height: 280px;
 }
 
+#slide-show .slide div.staff-info {
+    bottom: -15px;
+}
+
+#slide-show .slide ul.staff-overview li {
+    line-height: 19px;
+}
+
 .slide-container,
 .staff-list {
     position: relative;
@@ -85,13 +93,13 @@
     background: transparent linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%) 0% 0% no-repeat;
 }
 
-.slide ul.staff-overview li:first-of-type {
-    font-weight: 700;
-}
-
-.slide ul.staff-overview li:last-of-type {
+.slide ul.staff-overview li {
     font-weight: 300;
     line-height: 1.3em;
+}
+
+.slide ul.staff-overview li:first-of-type {
+    font-weight: 700;
 }
 
 /* Team directory specific */
@@ -113,7 +121,7 @@
 }
 
 .staff-list .slide div.staff-info {
-    bottom: -106px;
+    bottom: -115px;
 }
 
 .staff-list .slide ul.staff-overview li:first-of-type {
