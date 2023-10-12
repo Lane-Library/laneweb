@@ -1,4 +1,4 @@
-FROM us-docker.pkg.dev/som-laneweb/docker-private/jre-parent:eclipse-temurin-20.0.1_9-jre
+FROM us-docker.pkg.dev/som-laneweb/docker-private/jre-parent:eclipse-temurin-21_35-jre
 
 COPY target/laneweb.war laneweb.war
 
