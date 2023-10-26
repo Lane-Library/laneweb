@@ -22,7 +22,7 @@ public class ShibTester {
             "postalAddress", "sn", "street", "suAffiliation", "suDisplayNameLF", "suUnivID", "targeted-id",
             "telephoneNumber", "title", "uid", "unscoped-affiliation", "upn");
 
-    @GetMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
+    @GetMapping(value = { "/secure/header-test", "/patron-registration/header-test" })
     public void testUrl(final HttpServletRequest request, final ServletResponse response) throws IOException {
         response.setContentType("text/plain");
         PrintWriter result = response.getWriter();
