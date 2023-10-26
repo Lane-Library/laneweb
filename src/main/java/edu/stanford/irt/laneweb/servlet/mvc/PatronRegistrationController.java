@@ -24,20 +24,18 @@ import edu.stanford.irt.laneweb.folio.UserService;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 @Controller
-@RequestMapping(value = "/secure/folio/user/")
-public class FolioUserController {
+@RequestMapping(value = "/patron-registration/")
+public class PatronRegistrationController {
 
     private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
 
-    private static final String CONFIRMATION_PAGE = "redirect:/secure/patron-registration/confirmation.html";
+    private static final String CONFIRMATION_PAGE = "redirect:/patron-registration/confirmation.html";
 
-    private static final String ERROR_PAGE = "redirect:/secure/patron-registration/error.html";
+    private static final String ERROR_PAGE = "redirect:/patron-registration/error.html";
 
     private static final String FORM_MIME_TYPE = "application/x-www-form-urlencoded";
 
-    private static final Logger log = LoggerFactory.getLogger(FolioUserController.class);
-
-    private static final String REGISTRATION_PATH = "registration";
+    private static final Logger log = LoggerFactory.getLogger(PatronRegistrationController.class);
 
     private UserService folioUserService;
 
@@ -45,14 +43,14 @@ public class FolioUserController {
 
     private DataBinder userDataBinder;
 
-    public FolioUserController(final UserService folioUserService, final DataBinder userDataBinder,
+    public PatronRegistrationController(final UserService folioUserService, final DataBinder userDataBinder,
             final EMailSender sender) {
         this.folioUserService = folioUserService;
         this.userDataBinder = userDataBinder;
         this.sender = sender;
     }
 
-    @PostMapping(value = REGISTRATION_PATH, consumes = FORM_MIME_TYPE)
+    @PostMapping(value = "register", consumes = FORM_MIME_TYPE)
     public String formSubmitUserRegistration(final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
         User user = folioUserFromMap(map);

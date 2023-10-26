@@ -10,9 +10,9 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.rest.RESTService;
 
-public class FolioUserConfigurationTest {
+public class PatronRegistrationConfigurationTest {
 
-    private FolioUserConfiguration configuration;
+    private PatronRegistrationConfiguration configuration;
 
     private RESTService restService;
 
@@ -22,7 +22,7 @@ public class FolioUserConfigurationTest {
     public void setUp() throws Exception {
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
-        this.configuration = new FolioUserConfiguration();
+        this.configuration = new PatronRegistrationConfiguration();
     }
 
     @Test

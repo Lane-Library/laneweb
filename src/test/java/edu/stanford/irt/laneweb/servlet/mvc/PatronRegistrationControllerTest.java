@@ -25,13 +25,13 @@ import edu.stanford.irt.laneweb.folio.UserService;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
-public class FolioUserControllerTest {
+public class PatronRegistrationControllerTest {
 
     @AfterClass
     public static void tearDownAfterClass() throws Exception {
     }
 
-    private FolioUserController controller;
+    private PatronRegistrationController controller;
 
     private UserService folioUserService;
 
@@ -56,7 +56,7 @@ public class FolioUserControllerTest {
         this.request = mock(HttpServletRequest.class);
         this.map = mock(Map.class);
         this.reqAttributes = mock(RedirectAttributes.class);
-        this.controller = new FolioUserController(this.folioUserService, this.userDataBinder, this.sender);
+        this.controller = new PatronRegistrationController(this.folioUserService, this.userDataBinder, this.sender);
     }
 
     @Test
