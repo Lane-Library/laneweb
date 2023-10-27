@@ -42,13 +42,6 @@
         <developerConnection>scm:git:git@gitlab.med.stanford.edu:lane/laneweb.git</developerConnection>
         <tag>laneweb-3.11.42</tag>
     </scm>
-    <repositories>
-        <repository>
-            <id>folio-nexus</id>
-            <name>FOLIO Maven repository</name>
-            <url>https://repository.folio.org/repository/maven-folio</url>
-        </repository>
-    </repositories>
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>**/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
