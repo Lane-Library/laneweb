@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>136</version>
+        <version>137</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.12.8-SNAPSHOT</version>
@@ -173,7 +173,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>bassett</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -250,7 +250,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
-            <version>3.9.15</version>
+            <version>3.9.16</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -267,7 +267,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>coursereserves</artifactId>
-            <version>3.2.4</version>
+            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
@@ -277,7 +277,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.2.5.RELEASE</version>
+            <version>6.2.6.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
