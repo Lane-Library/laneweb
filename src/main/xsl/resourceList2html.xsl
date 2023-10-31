@@ -1,55 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:r="http://lane.stanford.edu/results/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="f h r s xsd" version="2.0">
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0"
+    xmlns:r="http://lane.stanford.edu/results/1.0" xmlns:f="https://lane.stanford.edu/functions"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h r s xsd" version="2.0">
     <xsl:param name="facets" />
-
     <xsl:param name="ipgroup" />
-
     <xsl:param name="proxy-links" />
-
     <xsl:param name="page" />
-
     <xsl:param name="query" />
-
     <xsl:param name="query-string" />
-
     <xsl:param name="sort" />
-
     <xsl:param name="source" />
-
     <xsl:param name="url-encoded-query" />
-
     <xsl:variable name="guest-mode">
-        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
+        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">
+            true
+        </xsl:if>
     </xsl:variable>
-
-    <xsl:variable name="pubmed-baseUrl">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
-
+    <xsl:variable name="pubmed-baseUrl">
+        https://pubmed.ncbi.nlm.nih.gov/
+    </xsl:variable>
     <xsl:include href="resourceListPagination.xsl" />
-
     <xsl:include href="resourceListSortBy.xsl" />
-
     <xsl:include href="search-browse-common.xsl" />
-
     <xsl:template match="attribute::node() | child::node()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node() | child::node()" />
         </xsl:copy>
     </xsl:template>
-
     <xsl:template match="/doc">
         <xsl:apply-templates select="h:html" />
     </xsl:template>
-
     <xsl:template match="h:ul[@class='lwSearchResults']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()" />
             <xsl:apply-templates select="/doc/r:results/s:result" />
         </xsl:copy>
     </xsl:template>
-
     <xsl:template match="s:resources">
         <html>
             <head>
@@ -74,7 +61,6 @@
             </body>
         </html>
     </xsl:template>
-
     <!-- transforms metasearch result node into displayable -->
     <xsl:template match="s:result[@type='searchContent']">
         <xsl:variable name="resourceName">
@@ -98,7 +84,6 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-
         <li class="resource" data-sid="{s:contentId}" data-index="{ /doc/r:results/@start + position() -1 }">
             <div class="resource-detail">
                 <span class="primaryType">Article</span>
@@ -107,18 +92,15 @@
                         <xsl:apply-templates select="s:title" />
                     </a>
                 </div>
-
                 <!-- display authors if NOT clinical or peds interface -->
-                <xsl:if test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
+                <xsl:if
+                    test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
                     <xsl:apply-templates select="s:pub-author" />
                 </xsl:if>
-
                 <xsl:if test="s:pub-text">
                     <xsl:apply-templates select="s:pub-text" />
                 </xsl:if>
-
                 <xsl:copy-of select="f:descriptionTrigger(.)" />
-
                 <div class="sourceInfo">
                     <span>
                         <xsl:text>Source: </xsl:text>
@@ -133,22 +115,21 @@
             </div>
         </li>
     </xsl:template>
-
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-          
         <li class="resource" data-sid="{s:id}" data-index="{/s:resources/@length * /s:resources/@page + position()}">
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)" />
             <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                 <xsl:attribute name="class">resource exact-match-resource</xsl:attribute>
             </xsl:if>
+            <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
+                <div class="exact-match">
+                    Exact Match
+                    <i class="fa-regular fa-info-circle yui3-tooltip-trigger"
+                        title="Your search terms closely match the title of this resource."></i>
+                </div>
+            </xsl:if>
             <div class="resource-detail">
-                <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
-                    <div class="exact-match">
-                        Exact Match
-                        <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="Your search terms closely match the title of this resource."></i>
-                    </div>
-                </xsl:if>
                 <span class="primaryType">
                     <xsl:apply-templates select="s:primaryType" />
                 </span>
@@ -176,13 +157,12 @@
                         <xsl:apply-templates select="s:pub-text" />
                         <xsl:apply-templates select="s:link[position() > 1]" />
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
-                        <xsl:if test="s:primaryType = 'Article' and count(s:link) = 1"> 
+                        <xsl:if test="s:primaryType = 'Article' and count(s:link) = 1">
                             <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'normal'])" />
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
-
             <div class="bookcover-container">
                 <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
                     <div class="bookcover">
@@ -191,7 +171,6 @@
                 </xsl:if>
                 <xsl:if test="s:primaryType = 'Article'">
                     <div class="bookcover">
-
                     </div>
                 </xsl:if>
             </div>
@@ -201,19 +180,18 @@
             </div>
         </li>
     </xsl:template>
-
     <xsl:template match="s:desc-link">
         <a href="{s:link}">
             <xsl:value-of select="s:label" />
         </a>
     </xsl:template>
-
     <!-- confusing! Lane records (recordType = 'bib') don't use this; Lane records use handleXxxXxxLinks functions -->
     <!-- sul records use this for 'sul-print' type links only -->
     <!-- it is also used for pubmed, web, etc. records -->
     <xsl:template match="s:link">
         <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')" />
-        <xsl:if test="(position() > 1 or (s:link-text and 'null' != s:link-text) or s:version-text or s:publisher)">
+        <xsl:if
+            test="(position() > 1 or (s:link-text and 'null' != s:link-text) or s:version-text or s:publisher)">
             <div class="resultInfo">
                 <xsl:copy-of select="f:build-link-label(.)" />
                 <xsl:if test="$simple-primary-type != string(s:label)">
@@ -236,7 +214,6 @@
             </div>
         </xsl:if>
     </xsl:template>
-
     <xsl:template match="s:primaryType">
         <xsl:choose>
             <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
@@ -247,21 +224,22 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template match="s:pub-author">
         <xsl:variable name="max-first-line-length" select="95" />
         <div class="author">
             <xsl:choose>
-                <!-- when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (105 chars) -->
-                <xsl:when test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
+                <!-- when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first 
+                    line (105 chars) -->
+                <xsl:when
+                    test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
                     <xsl:variable name="authorTokens" select="tokenize(.,', ')" />
                     <xsl:variable name="authorString">
                         <xsl:value-of select="f:split-authors($max-first-line-length, $authorTokens, 12)" />
                     </xsl:variable>
                     <xsl:value-of select="$authorString" />
-                    <span> ... </span>
+                    <span> ...</span>
                     <span class="authorsTrigger no-bookmarking active">
-                        <a href="#"> Show More </a>
+                        <a href="#"> Show More</a>
                         <i class="fa-regular fa-angles-down fa-xs"></i>
                     </span>
                     <span class="authors-hide">
@@ -274,20 +252,19 @@
             </xsl:choose>
         </div>
     </xsl:template>
-
     <xsl:template match="s:contentId[starts-with(.,'PMID:')]">
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')" />
         </xsl:variable>
         <span class="pmid">
             <a>
-            <xsl:attribute name="href" select="concat($pubmed-baseUrl,$pmid,'/?otool=stanford')"></xsl:attribute>
-            PMID:<xsl:value-of select="$pmid" /></a>
+                <xsl:attribute name="href" select="concat($pubmed-baseUrl,$pmid,'/?otool=stanford')"></xsl:attribute>
+                PMID:
+                <xsl:value-of select="$pmid" />
+            </a>
         </span>
     </xsl:template>
-
     <xsl:template match="s:contentId" />
-
     <xsl:template match="s:desc-label">
         <xsl:if test="position() > 1">
             <br />
@@ -297,5 +274,4 @@
         </strong>
         <xsl:text>: </xsl:text>
     </xsl:template>
-
 </xsl:stylesheet>
