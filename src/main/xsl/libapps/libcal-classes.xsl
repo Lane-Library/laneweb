@@ -15,7 +15,7 @@
 	</xsl:template>
 
 	<xsl:template match="class">
-		<div class="class">
+		<div class="class no-bookmarking">
 			<div class="pure-g">
 				<div class="pure-u-7-24">
 					<div class="date">

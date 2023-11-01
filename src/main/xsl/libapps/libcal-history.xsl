@@ -13,7 +13,7 @@
    </xsl:template>
 
    <xsl:template match="class">
-      <div class="event">
+      <div class="event no-bookmarking">
          <div class="pure-g">
             <div class="pure-u-1-6">
                <div class="event-date">

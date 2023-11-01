@@ -9,12 +9,10 @@
 	<xsl:template match="/classes">
 		<html>
 			<body>
-				
-				<ul class="classes">
-							<xsl:apply-templates select="class[position() &lt;= 3]" />
-							<xsl:call-template name="all-classes-link"></xsl:call-template>					
-						</ul>
-				
+                <ul class="classes">
+                    <xsl:apply-templates select="class[position() &lt;= 3]" />
+                    <xsl:call-template name="all-classes-link"></xsl:call-template>
+                </ul>
 			</body>
 		</html>
 	</xsl:template>
