@@ -9,9 +9,9 @@
      * with a thumbnail that can be clicked upon to get the video.
      *
      * @class YouTubeNode
+     * @type {Object}
      * @constructor
-     * @param iframe
-     *            {node} the youtube iframe node
+     * @param iframe {Node} the youtube iframe node
      */
     YouTubeNode = function(iframe) {
         var id, url,
