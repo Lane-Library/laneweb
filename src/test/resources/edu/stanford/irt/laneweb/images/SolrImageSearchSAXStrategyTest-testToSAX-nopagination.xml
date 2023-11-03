@@ -17,12 +17,12 @@
          </div>
       </div>
       <div class="pagination">
-         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-fast-backward no-bookmarking"/>
+         <a class="actived" href="&amp;auto=no&amp;page=1">
+            <span class="fa-solid fa-fast-backward"/>
             <span class="small-screen-hide"> First</span>
          </a>
-         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-step-backward no-bookmarking"/>
+         <a class="actived" href="&amp;auto=no&amp;page=1">
+            <span class="fa-solid fa-step-backward"/>
             <span class="small-screen-hide"> Previous</span>
          </a>
          <label>Page </label>
@@ -89,12 +89,12 @@
    </div>
    <div class="result-summary">
       <div class="pagination">
-         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-fast-backward no-bookmarking"/>
+         <a class="actived" href="&amp;auto=no&amp;page=1">
+            <span class="fa-solid fa-fast-backward"/>
             <span class="small-screen-hide"> First</span>
          </a>
-         <a class="actived no-bookmarking" href="&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-step-backward no-bookmarking"/>
+         <a class="actived" href="&amp;auto=no&amp;page=1">
+            <span class="fa-solid fa-step-backward"/>
             <span class="small-screen-hide"> Previous</span>
          </a>
          <label>Page </label>

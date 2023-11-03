@@ -15,7 +15,7 @@
 	</xsl:template>
 
 	<xsl:template match="class">
-		<div class="class no-bookmarking">
+		<div class="class">
 			<div class="pure-g">
 				<div class="pure-u-7-24">
 					<div class="date">
@@ -55,8 +55,9 @@
 	<xsl:template match="title">
 		<h4>
 			<a>
-				<xsl:attribute name="href">
-    	        <xsl:value-of select="../url/public" />
+                <xsl:attribute name="class">bookmarking</xsl:attribute>
+                <xsl:attribute name="href">
+    	           <xsl:value-of select="../url/public" />
         	  	</xsl:attribute>
 				<xsl:value-of select="." />
 			</a>

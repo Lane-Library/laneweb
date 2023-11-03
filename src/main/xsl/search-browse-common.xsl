@@ -119,7 +119,7 @@
 
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
-        <div class="sourceInfo no-bookmarking">
+        <div class="sourceInfo">
             <div class="permalink">
                 <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
                     <i class="fa-solid fa-link fa-rotate-180"></i>
@@ -216,14 +216,14 @@
         <xsl:choose>
             <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                 <div>
-                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
+                    <a class="primaryLink bookmarking" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
                         <xsl:apply-templates select="$eresource/s:title" />
                     </a>
                 </div>
             </xsl:when>
             <xsl:otherwise>
                 <div>
-                    <a class="primaryLink" href="{$link/s:url}" title="{$eresource/s:title}">
+                    <a class="primaryLink bookmarking" href="{$link/s:url}" title="{$eresource/s:title}">
                         <xsl:apply-templates select="$eresource/s:title" />
                     </a>
                 </div>
@@ -235,7 +235,7 @@
     <xsl:function name="f:handleDigitalLinks">
         <xsl:param name="links" />
         <xsl:if test="count($links) = 1">
-            <div class="hldgsContainer no-bookmarking">
+            <div class="hldgsContainer">
                 <span class="hldgsHeader available">
                     <i class="fa-solid fa-desktop fa-sm"></i>
                     Digital Access
@@ -262,9 +262,9 @@
             </xsl:if>
         </xsl:if>
         <xsl:if test="count($links) > 1">
-            <div class="hldgsContainer no-bookmarking">
+            <div class="hldgsContainer">
                 <xsl:if test="$total-resources = 1">
-                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                    <xsl:attribute name="class">hldgsContainer active</xsl:attribute>
                 </xsl:if>
                 <span class="hldgsHeader hldgsTrigger available">
                     <i class="fa-solid fa-desktop  fa-sm"></i>
@@ -321,7 +321,7 @@
 
     <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
-        <div class="hldgsContainer no-bookmarking">
+        <div class="hldgsContainer">
             <span class="hldgsHeader available">
                 <i class="fa-solid fa-desktop fa-sm"></i>
                 Digital Access
@@ -341,9 +341,9 @@
         <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
             <xsl:variable name="itemsAvailable" select="sum($eresource/s:link/s:available) &gt; 0" />
-            <div class="hldgsContainer no-bookmarking">
+            <div class="hldgsContainer">
                 <xsl:if test="count($links) = 1 or $total-resources = 1">
-                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                    <xsl:attribute name="class">hldgsContainer active</xsl:attribute>
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="$itemsAvailable">
@@ -452,13 +452,13 @@
             <div class="resultInfo">
                 <xsl:choose>
                     <xsl:when test="$eresource/@type = 'searchContent'">
-                        <span class="descriptionTrigger searchContent no-bookmarking" />
+                        <span class="descriptionTrigger searchContent" />
                     </xsl:when>
                     <xsl:when test="$eresource/s:recordType = 'pubmed'">
-                        <span class="descriptionTrigger searchContent pumed no-bookmarking" />
+                        <span class="descriptionTrigger searchContent pumed" />
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="descriptionTrigger eresource no-bookmarking" />
+                        <span class="descriptionTrigger eresource" />
                     </xsl:otherwise>
                 </xsl:choose>
             </div>

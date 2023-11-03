@@ -334,10 +334,10 @@
 	<xsl:variable name="lower-page-class">
 		<xsl:choose>
 			<xsl:when test="$current-page = '1'">
-				<xsl:text>pagingButton disabled no-bookmarking</xsl:text>
+				<xsl:text>pagingButton disabled</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>pagingButton  no-bookmarking</xsl:text>
+				<xsl:text>pagingButton </xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -373,10 +373,10 @@
 	<xsl:variable name="upper-page-class">
 		<xsl:choose>
 			<xsl:when test="/doc/b:bassetts/b:total-pages/@b:value = $current-page">
-				<xsl:text>pagingButton disabled no-bookmarking</xsl:text>
+				<xsl:text>pagingButton disabled</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>pagingButton  no-bookmarking</xsl:text>
+				<xsl:text>pagingButton </xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
