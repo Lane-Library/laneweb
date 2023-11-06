@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.folio;
 
 import java.net.URI;
-
-import org.folio.rest.jaxrs.model.User;
+import java.util.Map;
 
 import edu.stanford.irt.laneweb.rest.RESTService;
 
@@ -20,7 +19,7 @@ public class RESTUserService implements UserService {
     }
 
     @Override
-    public boolean addUser(final User user) {
+    public boolean addUser(final Map<String, Object> user) {
         return this.restService.postObject(this.catalogServiceURI, user, Boolean.class).booleanValue();
     }
 }

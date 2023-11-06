@@ -7,8 +7,9 @@ import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.folio.rest.jaxrs.model.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class RESTUserServiceTest {
 
     @Test
     public final void testAddUser() throws Exception {
-        User user = new User();
+        Map<String, Object> user = new HashMap<>();
         expect(this.restService.postObject(new URI("/users/user"), user, Boolean.class)).andReturn(Boolean.TRUE);
         replay(this.restService);
         assertTrue(this.service.addUser(user));

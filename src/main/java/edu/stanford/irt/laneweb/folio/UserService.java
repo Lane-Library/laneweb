@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.folio;
 
-import org.folio.rest.jaxrs.model.User;
+import java.util.Map;
 
 public interface UserService {
 
-    public boolean addUser(final User user);
+    public boolean addUser(final Map<String, Object> user);
 }

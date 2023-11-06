@@ -349,11 +349,6 @@
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.folio</groupId>
-            <artifactId>mod-users</artifactId>
-            <version>19.1.1</version>
-        </dependency>
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>
