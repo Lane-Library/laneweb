@@ -55,7 +55,6 @@
 	<xsl:template match="title">
 		<h4>
 			<a>
-                <xsl:attribute name="class">bookmarking</xsl:attribute>
                 <xsl:attribute name="href">
     	           <xsl:value-of select="../url/public" />
         	  	</xsl:attribute>
