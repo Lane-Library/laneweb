@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public final class LcnQueryInspector implements QueryInspector {
 
-    private static final Pattern PATTERN = Pattern.compile("\\bbibid ?:? ?l?([0-9]{1,8})\\b", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN = Pattern.compile("\\bbibid ?:? ?l?(\\d{1,8})\\b", Pattern.CASE_INSENSITIVE);
 
     @Override
     public boolean combinable() {
