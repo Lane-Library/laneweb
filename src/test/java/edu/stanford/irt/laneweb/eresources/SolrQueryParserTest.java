@@ -127,5 +127,7 @@ public class SolrQueryParserTest {
                 this.parser.parse("https://doi.org/10.1016/j.cjca.2019.11.034"));
         assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI:10.1016/j.cjca.2019.11.034"));
         assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI: 10.1016/j.cjca.2019.11.034"));
+        assertEquals("\\*\\*\\*The Lumbee Indians", this.parser.parse("***The Lumbee Indians"));
+        assertEquals("* \\*\\*The Lumbee Indians", this.parser.parse("* **The Lumbee Indians"));
     }
 }
