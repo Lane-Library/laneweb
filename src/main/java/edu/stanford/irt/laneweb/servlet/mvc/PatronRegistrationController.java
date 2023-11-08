@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.folio.UserService;
-import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 @Controller
 @RequestMapping(value = "/patron-registration/")
@@ -37,22 +37,22 @@ public class PatronRegistrationController {
 
     private EMailSender sender;
     
-    private UserDataBinder userDataBinder;
+    private DataBinder userDataBinder;
 
-    public PatronRegistrationController(final UserService folioUserService, final UserDataBinder userDataBinder, final EMailSender sender) {
+    public PatronRegistrationController(final UserService folioUserService, final DataBinder userDataBinder, final EMailSender sender) {
         this.folioUserService = folioUserService;
         this.userDataBinder = userDataBinder;
         this.sender = sender;
     }
 
     @PostMapping(value = "register", consumes = FORM_MIME_TYPE)
-    public String formSubmitUserRegistration(final @ModelAttribute(USER) Map<String, Object> user,
+    public String formSubmitUserRegistration(final @ModelAttribute(FOLIO_USER) Map<String, Object> user,
             final Model model) {
         Map<String, Object> map = model.asMap();
         try {
             if (this.folioUserService.addUser(user)) {
                 map.put("recipient", ASKUS_ADDRESS);
-                map.remove(USER);
+                map.remove(FOLIO_USER);
                 map.remove(edu.stanford.irt.laneweb.model.Model.USER);
                 map.remove(edu.stanford.irt.laneweb.model.Model.AUTH);
                 this.sender.sendEmail(map);
@@ -92,7 +92,7 @@ public class PatronRegistrationController {
         address.put(ADDRESS_TYPE_ID, getValueOrDefault(model, req, ADDRESS_TYPE_ID, ADDRESS_TYPE_ID_DEFAULT_VALUE));
         personal.put(ADDRESSES, Collections.singleton(address));
         user.put(PERSONAL, personal);
-        model.addAttribute(USER, user);
+        model.addAttribute(FOLIO_USER, user);
         model.addAttribute(SUBJECT, req.getParameter(SUBJECT));        
     }
 
@@ -103,11 +103,11 @@ public class PatronRegistrationController {
         return value;
     }
 
-    private static final String USER = "folio-user";
+    private static final String FOLIO_USER = "folio-user";
     
     private static final String PREFERERED_CONTACT_TYPE_ID = "preferredContactTypeId";
 
-    private static final String USER_NAME = "userName";
+    private static final String USER_NAME = "username";
 
     private static final String USER_ID = "userid";
 
