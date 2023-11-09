@@ -7,7 +7,7 @@
         <version>135-springsix</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.12.7-SNAPSHOT</version>
+    <version>3.12.10-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -163,7 +163,7 @@
         <dependency>
             <artifactId>xstream</artifactId>
             <groupId>com.thoughtworks.xstream</groupId>
-            <version>1.4.20</version>
+            <version>1.4.19</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -199,7 +199,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
-            <version>3.9.15</version>
+            <version>3.9.16</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -216,7 +216,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>coursereserves</artifactId>
-            <version>3.2.4</version>
+            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -385,7 +385,7 @@
                     <dependency>
                         <groupId>org.codehaus.plexus</groupId>
                         <artifactId>plexus-utils</artifactId>
-                        <version>3.0.24</version>
+                        <version>4.0.0</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -142,13 +142,13 @@
             <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                 <xsl:attribute name="class">resource exact-match-resource</xsl:attribute>
             </xsl:if>
-            <div class="resource-detail">
-                <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
+            <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                     <div class="exact-match">
                         Exact Match
                         <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="Your search terms closely match the title of this resource."></i>
                     </div>
-                </xsl:if>
+            </xsl:if>
+            <div class="resource-detail">
                 <span class="primaryType">
                     <xsl:apply-templates select="s:primaryType" />
                 </span>

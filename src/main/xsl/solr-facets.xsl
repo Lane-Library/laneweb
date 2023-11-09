@@ -145,7 +145,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='type']) > $values-per-facet">
                         <li>
-                            <input name="contains" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="contains" aria-label="Search by Resource Type" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -157,7 +157,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationType']) > ($values-per-facet -1)">
                         <li>
-                            <input name="contains" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="contains" aria-label="Search by Article Type" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -176,8 +176,8 @@
                         <span id="facet-error-message">
                         </span>
                         <form action="" method="get" id="solr-date-form">
-                            <input name="start-year" type="number" class="date start" min="1400" max="{$current-year}" value="{$start-year}" required="true" placeholder="From" />
-                            <input name="end-year" type="number" class="date end" min="1400" max="{$current-year}" value="{$end-year}" required="true" placeholder="To" />
+                            <input name="start-year" aria-label="Start Year" type="number" class="date start" min="1400" max="{$current-year}" value="{$start-year}" required="true" placeholder="From" />
+                            <input name="end-year" aria-label="End Year" type="number" class="date end" min="1400" max="{$current-year}" value="{$end-year}" required="true" placeholder="To" />
                             <input type="submit" value="Add" class="date" />
                         </form>
                     </div>
@@ -191,7 +191,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationTitle']) > $values-per-facet">
                         <li>
-                            <input name="contains" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="contains" aria-label="Search by Journal Title" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
