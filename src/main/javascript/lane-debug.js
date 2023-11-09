@@ -70,7 +70,6 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "lane-lightbox.js",
             "bookmark-login.js",
             "lane-tracking.js",
-            "lane-google.js",
             "lane-google-GA4.js",
             "lane-popup.js",
             "lane-tooltips.js",

@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.config;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
 import org.junit.Before;
@@ -18,11 +20,11 @@ public class TrendsConfigurationTest {
 
     @Test
     public void testBookmarkTrendsReporter() throws UnknownHostException {
-        assertNotNull(this.configuration.bookmarkTrendsReporter(null, null, null));
+        assertNotNull(this.configuration.bookmarkTrendsReporter(null, null));
     }
 
     @Test
-    public void testGoogleTracker() {
-        assertNotNull(this.configuration.googleTracker());
+    public void testGoogleTracker() throws URISyntaxException, MalformedURLException {
+        assertNotNull(this.configuration.googleA4Tracker());
     }
 }
