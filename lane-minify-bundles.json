@@ -100,7 +100,6 @@
         "bookmark-login.js",
         "lane-tracking.js",
         "lane-google-GA4.js",
-        "lane-google.js",
         "lane-popup.js",
         "lane-tooltips.js",
         "lane-spellcheck.js",

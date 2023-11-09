@@ -17,25 +17,21 @@ public class BookmarkTrendsReporterTest {
 
     private BookmarkTrendsReporter reporter;
 
-    private GoogleTracker tracker;
-    
     private GoogleA4Tracker ga4tracker;
 
     @Before
     public void setUp() throws Exception {
         this.bookmarkService = mock(BookmarkService.class);
-        this.tracker = mock(GoogleTracker.class);
         this.ga4tracker = mock(GoogleA4Tracker.class);
-        this.reporter = new BookmarkTrendsReporter(this.bookmarkService, this.tracker, this.ga4tracker, "localhost");
+        this.reporter = new BookmarkTrendsReporter(this.bookmarkService, this.ga4tracker, "localhost");
     }
 
     @Test
     public final void testReportCount() throws Exception {
         expect(this.bookmarkService.getRowCount()).andReturn(10);
-        this.tracker.trackEvent("/bookmarks", "laneTrends:bookmark", "localhost", "dailyUserCount", 10);
         this.ga4tracker.trackEvent("/bookmarks", "laneTrends:bookmark", "localhost", "dailyUserCount", 10);
-        replay(this.tracker, this.ga4tracker, this.bookmarkService);
+        replay(this.ga4tracker, this.bookmarkService);
         this.reporter.reportCount();
-        verify(this.tracker, this.ga4tracker, this.bookmarkService);
+        verify(this.ga4tracker, this.bookmarkService);
     }
 }
