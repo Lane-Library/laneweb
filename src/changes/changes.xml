@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2023-11-13" version="3.12.10" description="bug fix and update release">
+            <action date="2023-11-13" dev="alainb" issue="LANEWEB-11244" type="remove">
+                Remove google universal analytics from laneweb
+             </action>
+            <action date="2023-11-13" dev="ryanmax" issue="LANEWEB-11241" type="update">
+                Queries with multiple asterisks
+            </action>
+        </release>
         <release date="2023-11-06" version="3.12.9" description="bug fix and update release">
             <action date="2023-10-27" dev="alainb" issue="LANEWEB-11224" type="update">
                 Update alignment of Exact Match label in search
