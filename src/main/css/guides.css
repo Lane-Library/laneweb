@@ -10,11 +10,11 @@
     cursor: pointer;
 }
 
-.guide-menu-toggle i {
+.guide-menu-toggle svg {
     color: black;
     position: absolute;
     right: 0px;
-    margin-top: 12px;
+    margin-top: 4px;
 }
 
 .guide-container ul {

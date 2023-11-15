@@ -51,22 +51,22 @@ ul .nav-menu {
 }
 
 /* Icons close to the menu header */
-.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
+.nav-menu svg.fa-angle-up, .nav-menu svg.fa-angle-down {
 	text-align: center;
 	padding-left: 3px;
 	color: black;
 	vertical-align: middle;
 }
 
-.nav-menu i.fa-angle-up {
+.nav-menu svg.fa-angle-up {
 	display: none;
 }
 
-.nav-menu:hover i.fa-angle-up {
+.nav-menu:hover svg.fa-angle-up {
 	display: inline-block;
 }
 
-.nav-menu:hover i.fa-angle-down {
+.nav-menu:hover svg.fa-angle-down {
 	display: none;
 }
 
@@ -218,13 +218,13 @@ ul .nav-menu {
 	#nav-toggle-on {
 		display: block;
 		position: inherit;
-		padding: 22px
+		padding: 20px
 	}
-	#nav-toggle-off i {
-		margin: 30px 42px 0 0;
+	#nav-toggle-off svg {
+		margin-right:  42px;
 		padding-left: 10px;
 	}
-	.menu-toggle span, .menu-toggle i, .menu-toggle i.fa-regular{
+	.menu-toggle span, .menu-toggle svg, .menu-toggle svg.fa-regular{
     color: black;
     display: initial;
     }
@@ -242,11 +242,11 @@ ul .nav-menu {
 		text-align: right;
 		background-color: #f0f0f0;
 	}
-	.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
+	.nav-menu svg.fa-angle-up, .nav-menu svg.fa-angle-down {
 		float: right;
-		margin: 30px 40px 0 0;
+		margin: 20px 40px 0 0;
 	}
-	#nav-toggle-off i, #nav-toggle-on i {
+	#nav-toggle-off i, #nav-toggle-on svg {
 		text-align: center;
 	}
 	.nav-menu>span, .nav-menu.nav-menu-active>span {
@@ -283,7 +283,7 @@ ul .nav-menu {
 		background-color: #8c1515;
 		color: white;
 	}
-	.nav-login .login > li .favorites.dropdown i {
+	.nav-login .login > li .favorites.dropdown svg {
 		color: white;
 		padding: inherit;	
 	}
@@ -326,7 +326,7 @@ ul .nav-menu {
 	.mobile-screen-menu div {
 		text-align: center;
 	}
-	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i
+	.mobile-screen-menu a, .mobile-screen-menu a svg, .mobile-screen-menu .login a svg
 		{
 		color: black;
 		display: block;
@@ -337,15 +337,15 @@ ul .nav-menu {
 	
 	/* Nav angle icon */
 	
-	.nav-menu:hover i.fa-angle-up{
+	.nav-menu:hover svg.fa-angle-up{
 		display: none;
 	}	
 
-	.nav-menu.nav-menu-active-on-click i.fa-angle-up, .nav-menu:hover i.fa-angle-down {
+	.nav-menu.nav-menu-active-on-click svg.fa-angle-up, .nav-menu:hover svg.fa-angle-down {
 		display: inline-block;
 	}
 
-	.nav-menu.nav-menu-active-on-click i.fa-angle-down {
+	.nav-menu.nav-menu-active-on-click svg.fa-angle-down {
 		display: none;
 	}
 

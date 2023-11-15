@@ -32,11 +32,11 @@ footer:nth-of-type(3){
 	text-align: center;
 }
 
-.footer-link-bar a, .footer-link-bar i {
+.footer-link-bar a, .footer-link-bar svg {
 	color: #fff;
 }
 
-.footer-link-bar i {
+.footer-link-bar svg {
 	font-size: 1.125em;
 	padding-right: 4px;
 }
@@ -172,21 +172,20 @@ footer:nth-of-type(3){
 	margin-right: 8px;
 	width: 2em;
 }
-.footer-organization .fa-facebook {
-	font-size: 2.0em;
+.footer-organization svg.fa-facebook {
+	font-size: 2em;
 	color:#1877F2;
+}
+
+.footer-organization .svg-inline--fa.fa-stack-2x {
+    height: 1em;
+    width: 1em;
 }
 
 .footer-organization .fa-twitter, .footer-organization .fa-youtube, 
 .footer-organization .fa-instagram {
-	margin-top: 1px; 
+    font-size: 1.2em; 
 }
-
-.footer-organization .fa-instagram {
-	font-weight: 600;
-}
-
-
 
 @media ( max-width : 700px) {
 	.footer-organization-address {

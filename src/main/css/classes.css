@@ -42,12 +42,12 @@
     text-align: right;
 }
 
-.location i {
+.location svg {
     margin-right: 4%;
     margin-left: 3px;
 }
 
-.location, .location a, .location .fa-solid {
+.location, .location a, .location svg {
     color: white;
 }
 

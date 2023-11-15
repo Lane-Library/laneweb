@@ -24,9 +24,9 @@
     text-decoration: none;
 }
 
-.menu-container  h2 i {
+.menu-container  h2 svg {
     float: right;
-    padding: 11px 7px;
+    padding: 0 7px;
     display: none;
 }
 
@@ -35,11 +35,11 @@
         padding: 0;
         margin: 24px 32px 0;
     }
-    .menu-container, .menu-container h2 i:first-of-type, .menu-container.active h2 i:nth-of-type(2)
+    .menu-container, .menu-container h2 svg:first-of-type, .menu-container.active h2 svg:nth-of-type(2)
         {
         display: block;
     }
-    .menu-container.mobile  ul, .menu-container.active h2 i:first-of-type {
+    .menu-container.mobile  ul, .menu-container.active h2 svg:first-of-type {
         display: none;
     }
     .menu-container.active ul {

@@ -47,16 +47,16 @@
 	display: block;
 }
 
-#laneaskus .laneaskus-button a, #laneaskus .laneaskus-button .fa,
-	#laneaskus:target .laneaskus-button a, #laneaskus:target .laneaskus-button .fa,
-	#ejp:target .ejp-button a, #ejp:target .ejp-button .fa, #sfp-journal:target .sfp-journal-button,
+#laneaskus .laneaskus-button a, #laneaskus .laneaskus-button svg,
+	#laneaskus:target .laneaskus-button a, #laneaskus:target .laneaskus-button svg,
+	#ejp:target .ejp-button a, #ejp:target .ejp-button svg, #sfp-journal:target .sfp-journal-button,
 	#sfp-journal:target .sfp-journal-button  a, #sfp-journal:target .sfp-button a,
 	#sfp-journal:target .sfp-button a, #sfp-other:target .sfp-other-button a,
 	#sfp-other:target .sfp-other-button a, #sfp-other:target .sfp-button,
 	#sfp-other:target .sfp-button a, #sfp-book:target .sfp-book-button,
 	#sfp-book:target .sfp-book-button a, #sfp-book:target .sfp-button a,
-	#sfp-book:target .sfp-button a, #sfp-book:target .sfp-button i.icon,
-	#sfp-other:target .sfp-button i.icon, #sfp-journal:target .sfp-button i.icon
+	#sfp-book:target .sfp-button a, #sfp-book:target .sfp-button svg.icon,
+	#sfp-other:target .sfp-button svg.icon, #sfp-journal:target .sfp-button svg.icon
 	{
 	background-color: #007C92;
 	color: #F0F0F0;

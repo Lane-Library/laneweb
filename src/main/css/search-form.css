@@ -172,12 +172,12 @@
 	display: none;
 }
 
-.search-reset .fa-solid {
+.search-reset svg {
 	color: #8c1515;
 	font-size: 1.125em;
 }
 
-.search-reset .fa-solid:hover {
+.search-reset svg:hover {
 	color: #428bca;
 }
 
@@ -194,7 +194,7 @@
 }
 
 
-.search-button .fa-solid.fa-magnifying-glass {
+.search-button svg.fa-magnifying-glass {
 	color: lightslategrey;
     padding-left: 9px;
 }

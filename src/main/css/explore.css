@@ -18,14 +18,14 @@
 	position: relative;
 }
 
-.explore i {
+.explore svg {
 	color: white;
-	margin-top: 28px;
+	margin-top: 14px;
 	margin-left: 16px;
 	vertical-align: middle;
 }
 
-.explore:last-of-type i {
+.explore:last-of-type svg {
 	margin-left: 12px;
 }
 
