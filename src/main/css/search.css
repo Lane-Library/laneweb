@@ -60,7 +60,7 @@
     min-width: 90px;
 }
 
-.resource .bookcover i {
+.resource .bookcover svg{
     font-size: 5.375em;
 }
 
@@ -85,13 +85,13 @@
     padding: 12px;
 }
 
-.descriptionTrigger a, .descriptionTrigger i {
+.descriptionTrigger a, .descriptionTrigger svg {
     color: black;
 }
 
-.descriptionTrigger i {
+.descriptionTrigger svg{
     float: right;
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 li.active .descriptionTrigger {

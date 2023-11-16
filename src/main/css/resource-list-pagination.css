@@ -70,15 +70,15 @@
      cursor: default;
  }
 
- .pagingButton i {
+ .pagingButton svg {
      color: #007c92;
  }
 
- .pagingButton i:hover {
+ .pagingButton svg:hover {
      color: #428bca;
  }
 
- .pagingButton.disabled i {
+ .pagingButton.disabled svg {
      color: #ccc;
  }
 
@@ -90,7 +90,7 @@
      padding: 0 8px;
  }
 
- .view-by.sort i {
+ .view-by.sort svg {
      margin-left: 20px;
  }
 
@@ -128,7 +128,7 @@
      font-size: smaller;
  }
 
- .exact-match i {
+ .exact-match svg {
      margin-left: 15px;
      color: black;
      font-size: smaller;

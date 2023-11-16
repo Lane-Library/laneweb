@@ -21,9 +21,9 @@
     transition: opacity .9s;
 }
 
-.back-to-top .fa-solid {
+.back-to-top svg {
     color: #fff;
-    padding-left: 25px;
+    padding-left: 23px;
 }
 
 @media ( max-width : 812px) {

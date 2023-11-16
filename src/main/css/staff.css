@@ -80,7 +80,7 @@
 
 .slide ul li,
 .slide a,
-.slide a i {
+.slide a svg {
     color: white;
     text-align: center;
     border: none;

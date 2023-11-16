@@ -86,7 +86,10 @@
 	display: none;
 }
 
-.search-form .fa-solid, .search-form .fa-regular, .search-form a, .search-form a:hover, .search-form a:visited,
+.search-form .fa-angle-down{
+    color: #666;
+}
+.search-form svg, .search-form a, .search-form a:hover, .search-form a:visited,
 	.search-form a:active {
 	color: white;
 	text-decoration: none;
@@ -207,7 +210,7 @@
 	display: none;
 }
 
-.search-indicator .fa-solid {
+.search-indicator svg {
 	color: black;
 	font-size: 6.25em;
 }

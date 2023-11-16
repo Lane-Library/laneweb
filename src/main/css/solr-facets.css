@@ -3,7 +3,7 @@
     float: right;
 }
 
-.filter-facet div span, .filter-facet div i {
+.filter-facet div span, .filter-facet div svg{
     display: inline-block;
     color: white;
     background-color: #8C1515;
@@ -34,15 +34,15 @@
     padding: 0;
 }
 
-.facet-container .facet i.fa-square, .facet-container .facet i.fa-square-check{
+.facet-container .facet svg.fa-square, .facet-container .facet svg.fa-square-check{
     font-size: 13px;
     margin-right: 6px;
 }
 
-.facet-container .facet i.fa-square{
+.facet-container .facet svg.fa-square{
     color: black;
 }
-.facet-container .facet i.fa-square-check {
+.facet-container .facet svg.fa-square-check {
     color: #8C1515;
 }
 
@@ -69,7 +69,7 @@
     padding-top: 12px
 }
 
-.facet-container .see-more i {
+.facet-container .see-more svg {
     color: black;
 }
 

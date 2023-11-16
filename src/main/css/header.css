@@ -67,8 +67,8 @@ section.header a {
 	margin-right: 45px
 }
 
-.header .live-chat .fa-comments {
-	color: white;
+.header .live-chat svg {
+    fill:#ffffff;
 	margin-right: 3px
 }
 
