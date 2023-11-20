@@ -1,0 +1,17 @@
+/* Altmetric badge and citation widgets in search/browse results */
+span.altmetric-embed, .__dimensions_badge_embed__ {
+    float: right;
+    padding-left: 15px;
+}
+.altmetric-embed img {
+    height: 21px;
+    width: unset;
+}
+@media ( max-width : 812px) {
+    span.altmetric-embed, .__dimensions_badge_embed__ {
+        float: unset;
+        display: block;
+        padding: 0;
+        margin-top: 12px;
+    }
+}

@@ -93,7 +93,9 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "course-reserves.js",
             "validation.js",
             "holdings-toggle.js",
-            "table-hide-empty-columns.js"
+            "table-hide-empty-columns.js",
+            "zotero.js",
+            "altmetric.js"
 
         ];
 
