@@ -14,7 +14,7 @@
             copyNode.setSelectionRange(0, 99999);
             document.execCommand("copy");
             copyNode.blur();
-            node.innerHTML = '<i class="fa-regular fa-check"></i> Link copied';
+            node.innerHTML = '<span class="fa-layers"><svg><use xlink:href="/resources/svg/regular.svg#check"></use></svg></span> Link copied';
             L.fire("tracker:trackableEvent", {
                 category: "lane:permalinkCopied",
                 action: event.target.textContent,

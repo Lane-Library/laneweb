@@ -9,15 +9,11 @@
      gap: 24px;
      align-items: baseline;
      justify-content: space-between;
+     font-size: 1.125em;
  }
 
  .view-by .dropdown {
      white-space: nowrap;
- }
-
-
- .resourceListPagination {
-     font-size: 1.125em;
  }
 
  .pagingLabels {
@@ -71,20 +67,19 @@
  }
 
  .pagingButton svg {
-     color: #007c92;
+     fill: #007c92;
+     vertical-align: -2px;
  }
 
  .pagingButton svg:hover {
-     color: #428bca;
+     fill: #428bca;
  }
 
  .pagingButton.disabled svg {
-     color: #ccc;
+     fill: #ccc;
  }
 
- .view-by .dropdown {
-     white-space: nowrap;
- }
+
 
  .view-by.sort .general-dropdown-trigger {
      padding: 0 8px;

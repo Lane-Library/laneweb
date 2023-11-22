@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/2000/svg"
+    xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd xlink" version="2.0">
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
-
-    <xsl:variable name="requests-host" select="'requests.stanford.edu'"/>
-
-    <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'"/>
-
+    <xsl:variable name="requests-host" select="'requests.stanford.edu'" />
+    <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'" />
     <xsl:template match="s:desc-linebreak">
         <br />
     </xsl:template>
-
     <xsl:template match="s:description">
         <div class="description">
             <xsl:apply-templates />
         </div>
     </xsl:template>
-
     <xsl:template match="s:keyword">
         <strong>
             <xsl:value-of select="." />
         </strong>
     </xsl:template>
-
     <xsl:template match="s:locationName">
         <xsl:choose>
             <xsl:when test="../s:locationUrl">
@@ -40,20 +35,23 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template match="s:pub-text">
         <div class="citation">
             <xsl:apply-templates />
         </div>
     </xsl:template>
-
     <xsl:template match="s:recordType">
         <xsl:variable name="label">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span class="fa-layers">
+            <svg>
+                <use xlink:href="/resources/svg/solid.svg#arrow-right-from-bracket"></use>
+            </svg>
+        </span>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test=". = 'pubmed'">
-                <a href="https://pubmed.ncbi.nlm.nih.gov/{../s:recordId}/?otool=Stanford" title="PubMed: PMID {../s:recordId}">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/{../s:recordId}/?otool=Stanford"
+                    title="PubMed: PMID {../s:recordId}">
                     <xsl:copy-of select="$label" />
                     PubMed
                 </a>
@@ -83,7 +81,8 @@
                 </a>
             </xsl:when>
             <xsl:when test=". = 'redivis'">
-                <a href="https://redivis.com/StanfordPHS" title="Redivis - Stanford Center for Population Health Sciences">
+                <a href="https://redivis.com/StanfordPHS"
+                    title="Redivis - Stanford Center for Population Health Sciences">
                     <xsl:copy-of select="$label" />
                     Redivis
                 </a>
@@ -96,17 +95,16 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template match="s:title">
         <xsl:apply-templates />
     </xsl:template>
-
     <!-- LANEWEB-10982: replace "CALL# VARIES" with a search by title link -->
     <xsl:template match="s:callnumber">
         <xsl:choose>
             <xsl:when test="contains(.,'CALL# VARIES')">
                 Call number varies. Search for
-                <a href="{concat('/search.html?source=catalog-all&amp;q=%22',../../s:title,'%22 NOT title:%22',../../s:title,'%22')}">
+                <a
+                    href="{concat('/search.html?source=catalog-all&amp;q=%22',../../s:title,'%22 NOT title:%22',../../s:title,'%22')}">
                     <xsl:value-of select="../../s:title" />
                 </a>
                 to find individual volumes of this title.
@@ -116,13 +114,15 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
         <div class="sourceInfo no-bookmarking">
             <div class="permalink">
-                <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
-                    <i class="fa-solid fa-link fa-rotate-180"></i>
+                <a title="click to copy a shareable link to this record"
+                    href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
+                    <span class="fa-layers">
+                        <svg><use xlink:href="/resources/svg/solid.svg#link"></use></svg>
+                    </span>
                     Get Shareable Link
                 </a>
             </div>
@@ -131,7 +131,6 @@
             </div>
         </div>
     </xsl:function>
-
     <xsl:function name="f:build-link-label">
         <xsl:param name="link" />
         <xsl:variable name="primaryType" select="$link/../s:primaryType" />
@@ -158,15 +157,14 @@
             </xsl:if>
         </span>
     </xsl:function>
-
     <!-- assume authors are a comma-separated string; break the string at a separator before max-string-length -->
     <xsl:function name="f:split-authors">
         <xsl:param name="max-string-length" />
         <xsl:param name="tokens" />
         <xsl:param name="index" />
-
         <xsl:choose>
-            <xsl:when test="string-length(string-join($tokens[position() &lt; $index], ', ')) &gt; $max-string-length">
+            <xsl:when
+                test="string-length(string-join($tokens[position() &lt; $index], ', ')) &gt; $max-string-length">
                 <xsl:value-of select="f:split-authors($max-string-length, $tokens, $index - 1)" />
             </xsl:when>
             <xsl:otherwise>
@@ -174,32 +172,30 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
     <xsl:function name="f:maybe-add-bcids-attribute">
         <xsl:param name="eresource" />
         <xsl:variable name="bcids">
             <xsl:if test="$eresource/s:isbn">
                 <xsl:for-each select="$eresource/s:isbn">
                     <xsl:text>isbn-</xsl:text>
-                    <xsl:value-of select="."/>
+                    <xsl:value-of select="." />
                     <xsl:text>,</xsl:text>
                 </xsl:for-each>
             </xsl:if>
             <xsl:if test="$eresource/s:issn">
                 <xsl:for-each select="$eresource/s:issn">
                     <xsl:text>issn-</xsl:text>
-                    <xsl:value-of select="."/>
+                    <xsl:value-of select="." />
                     <xsl:text>,</xsl:text>
                 </xsl:for-each>
             </xsl:if>
             <!-- record id last to prioritize isxn lookup in bookcovers.js -->
-            <xsl:value-of select="concat($eresource/s:recordType,'-',$eresource/s:recordId)"/>
+            <xsl:value-of select="concat($eresource/s:recordType,'-',$eresource/s:recordId)" />
         </xsl:variable>
         <xsl:attribute name="data-bcids">
-            <xsl:value-of select="$bcids"/>
+            <xsl:value-of select="$bcids" />
         </xsl:attribute>
     </xsl:function>
-
     <xsl:function name="f:maybe-add-doi-attribute">
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:doi[1]">
@@ -208,7 +204,6 @@
             </xsl:attribute>
         </xsl:if>
     </xsl:function>
-
     <xsl:function name="f:primaryLink">
         <xsl:param name="link" />
         <xsl:variable name="eresource" select="$link/.." />
@@ -216,7 +211,8 @@
         <xsl:choose>
             <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                 <div>
-                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
+                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}"
+                        rel="popup console 610 800">
                         <xsl:apply-templates select="$eresource/s:title" />
                     </a>
                 </div>
@@ -230,14 +226,15 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
     <!-- used for Lane and SUL digital links -->
     <xsl:function name="f:handleDigitalLinks">
         <xsl:param name="links" />
         <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader available">
-                    <i class="fa-solid fa-desktop fa-sm"></i>
+                    <svg class="fa-sm">
+                        <use xlink:href="/resources/svg/solid.svg#desktop"></use>
+                    </svg>
                     Digital Access
                 </span>
                 <span>
@@ -267,25 +264,33 @@
                     <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
                 </xsl:if>
                 <span class="hldgsHeader hldgsTrigger available">
-                    <i class="fa-solid fa-desktop  fa-sm"></i>
+                    <svg class="fa-sm">
+                        <use xlink:href="/resources/svg/solid.svg#desktop"></use>
+                    </svg>
                     Digital Access
-                    <i class="fa-solid fa-angle-down"></i>
-                    <i class="fa-solid fa-angle-up"></i>
+                    <svg class="angle-down">
+                        <use xlink:href="/resources/svg/solid.svg#angle-down"></use>
+                    </svg>
+                    <svg class="angle-up">
+                        <use xlink:href="/resources/svg/solid.svg#angle-up"></use>
+                    </svg>
                 </span>
                 <div class="table-main hide-empty-columns">
                     <div class="table-row">
                         <div class="table-head">Provider</div>
                         <div class="table-head">
                             Version
-                            <i class="fa-regular fa-info-circle yui3-tooltip-trigger"
+                            <svg class="yui3-tooltip-trigger"
                                 title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
-                                    most recent issue." />
+                                    most recent issue.">
+                                <use xlink:href="/resources/svg/regular.svg#circle-info"></use>
+                            </svg>
                         </div>
                     </div>
-
                     <xsl:for-each select="$links">
-                        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')" />
+                        <xsl:variable name="simple-primary-type"
+                            select="replace(../s:primaryType,'(Journal|Book) ','')" />
                         <div class="table-row">
                             <div class="table-cell">
                                 <xsl:if test="not(s:publisher) and s:label">
@@ -317,24 +322,27 @@
             </div>
         </xsl:if>
     </xsl:function>
-
-
     <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
         <div class="hldgsContainer no-bookmarking">
             <span class="hldgsHeader available">
-                <i class="fa-solid fa-desktop fa-sm"></i>
+                <svg class="fa-sm">
+                    <use xlink:href="/resources/svg/solid.svg#desktop"></use>
+                </svg>
                 Digital Access
             </span>
             <span>
                 <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
-                    <i class="fa-regular fa-arrow-up-right-from-square"></i>
+                    <span class="fa-layers">
+                        <svg>
+                            <use xlink:href="/resources/svg/regular.svg#arrow-up-right-from-square"></use>
+                        </svg>
+                    </span>
                     <span>Access Options</span>
                 </a>
             </span>
         </div>
     </xsl:function>
-
     <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links" />
         <xsl:param name="eresource" />
@@ -351,41 +359,58 @@
                             <xsl:if test="count($links) > 1">
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
                             </xsl:if>
-                            <i class="fa-solid fa-book-open-cover"></i>
+                            <svg>
+                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                            </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Access
-                            <i class="fa-solid fa-angle-down"></i>
-                            <i class="fa-solid fa-angle-up"></i>
+                            <svg class="angle-down">
+                                <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                            </svg>
+                            <svg class="angle-up">
+                                <use xlink:href="/resources/svg/regular.svg#angle-up"></use>
+                            </svg>
                         </span>
                         <!-- Print Request button above holdings table when only one holding -->
                         <xsl:if test="count($links) = 1 and $links[1]/s:available &gt; 0">
                             <span class="requestIt">
-                                <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Request</a>
+                                <a class="btn alt"
+                                    href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}"
+                                    rel="popup console 1020 800">Request</a>
                             </span>
                         </xsl:if>
                     </xsl:when>
                     <xsl:when test="count($links) = 1 and $links[1]/s:checkedOut &gt; 0">
                         <span class="hldgsHeader unavailable">
-                            <i class="fa-solid fa-book-open-cover"></i>
+                            <svg>
+                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                            </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Unavailable: Checked out
                         </span>
                         <span class="requestIt">
-                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}" rel="popup console 1020 800">Recall Item</a>
+                            <a class="btn alt"
+                                href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={$links[1]/s:locationCode}"
+                                rel="popup console 1020 800">Recall Item</a>
                         </span>
                     </xsl:when>
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                         <span class="hldgsHeader">
-                            <i class="fa-solid fa-book-open-cover"></i>
+                             <svg>
+                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                            </svg>
                             Access via
-                            <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults">
+                            <a rel="popup console 610 800" class="citation"
+                                href="{$links[1]/s:locationUrl}#searchResults">
                                 <xsl:value-of select="$links[1]/s:locationName" />
                             </a>
                         </span>
                     </xsl:when>
                     <xsl:otherwise>
                         <span class="hldgsHeader">
-                            <i class="fa-solid fa-book-open-cover"></i>
+                             <svg>
+                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                            </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                         </span>
                         <span class="hldgsTrigger" />
@@ -397,15 +422,17 @@
                             <div class="table-head">Location</div>
                             <div class="table-head">
                                 Version
-                                <i class="fa-regular fa-info-circle yui3-tooltip-trigger"
+                                 <svg class="yui3-tooltip-trigger"
                                     title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
-                                    most recent issue." />
+                                    most recent issue." >
+                                <use xlink:href="/resources/svg/regular.svg#circle-info"></use>
+                            </svg>
                             </div>
                             <div class="table-head">Call Number</div>
                             <div class="table-head">Items</div>
-                            <div class="table-head"><!-- empty for request button --></div>
-
+                            <div class="table-head"><!-- empty for request button -->
+                            </div>
                         </div>
                         <xsl:for-each select="$links">
                             <div class="table-row">
@@ -434,7 +461,9 @@
                                 <div class="table-cell request-cell">
                                     <xsl:if test="s:available &gt; 0 and count($links) &gt; 1">
                                         <span class="requestIt">
-                                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={s:locationCode}" rel="popup console 1020 800">Request</a>
+                                            <a class="btn alt"
+                                                href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={s:locationCode}"
+                                                rel="popup console 1020 800">Request</a>
                                         </span>
                                     </xsl:if>
                                 </div>
@@ -445,7 +474,6 @@
             </div>
         </xsl:if>
     </xsl:function>
-
     <xsl:function name="f:descriptionTrigger">
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:description">
@@ -468,42 +496,46 @@
             </xsl:if>
         </xsl:if>
     </xsl:function>
-
     <!-- print books, journals, databases, etc. should get "Print" label things like USB cords shouldn't get labeled "Print" -->
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource" />
         <xsl:choose>
-            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))">Print</xsl:when>
+            <xsl:when test="not(contains('Other|Equipment',$eresource/s:primaryType))">
+                Print
+            </xsl:when>
             <xsl:otherwise />
         </xsl:choose>
     </xsl:function>
-
     <xsl:function name="f:isPrintRecordPointingToParent" as="xsd:boolean">
         <xsl:param name="eresource" />
         <xsl:variable name="parentLink">
             <xsl:for-each select="$eresource/s:link">
-                <xsl:if test="contains(./s:locationUrl,'/view/bib/')">true</xsl:if>
+                <xsl:if test="contains(./s:locationUrl,'/view/bib/')">
+                    true
+                </xsl:if>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="urls" select="$eresource/s:link/s:locationUrl"/>
+        <xsl:variable name="urls" select="$eresource/s:link/s:locationUrl" />
         <xsl:sequence select="$eresource/s:total = 0 and contains($parentLink,'true')" />
     </xsl:function>
-
-    <!--  raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->
-    <!--  idiosyncratic rules around SearchWorks/FOLIO ID prefixes: -->
-    <!--    retain "in" for all Folio-created records -->
-    <!--    strip "a" from migrated SUL records -->
-    <!--    retain "L" from migrated Lane records -->
+    <!-- raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->
+    <!-- idiosyncratic rules around SearchWorks/FOLIO ID prefixes: -->
+    <!-- retain "in" for all Folio-created records -->
+    <!-- strip "a" from migrated SUL records -->
+    <!-- retain "L" from migrated Lane records -->
     <xsl:function name="f:folioInstanceId" as="xsd:string">
         <xsl:param name="eresource" />
         <xsl:variable name="prefix">
             <xsl:choose>
-                <xsl:when test="starts-with($eresource/s:recordId,'000')">in</xsl:when>
-                <xsl:when test="'bib' = $eresource/s:recordType">L</xsl:when>
-                <xsl:otherwise/>
+                <xsl:when test="starts-with($eresource/s:recordId,'000')">
+                    in
+                </xsl:when>
+                <xsl:when test="'bib' = $eresource/s:recordType">
+                    L
+                </xsl:when>
+                <xsl:otherwise />
             </xsl:choose>
         </xsl:variable>
-        <xsl:value-of select="concat($prefix, $eresource/s:recordId)"/>
+        <xsl:value-of select="concat($prefix, $eresource/s:recordId)" />
     </xsl:function>
-
 </xsl:stylesheet>

@@ -65,7 +65,7 @@
 
         addFulltextLink = function(node, label, url) {
            var link = node.querySelector('.resource-detail .hldgsContainer span a'),
-               span = link.querySelector('span');
+               span = link.querySelector('span:nth-child(2)');
             link.href = url;
             span.textContent = label;
         },
@@ -73,7 +73,7 @@
         addRetractedArticleLink = function(node, type, label, url) {
             node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
                 '<div><a class="bzFT" href="' + url + '">' + 
-                '<i class="fa-light fa-file-' + type + '"></i>' + 
+                '<span class="fa-layers"><svg><use xlink:href="/resources/svg/light.svg#file-' + type + '"></use></svg></span>'+
                 label + '</a></div>'
             )
         },

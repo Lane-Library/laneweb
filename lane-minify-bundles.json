@@ -65,12 +65,6 @@
       "type": "js",
       "name": "lane-all.js",
       "files": [
-        "font-awesome/fontawesome.js",
-        "font-awesome/brands.js",
-        "font-awesome/light.js",
-        "font-awesome/regular.js",
-        "font-awesome/solid.js",
-        "font-awesome/thin.js",
         "yui-3.18.1.js",
         "lane.js",
         "util.js",

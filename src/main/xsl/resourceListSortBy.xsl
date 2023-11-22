@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/resources/1.0"
-    exclude-result-prefixes="h s" version="2.0">
-
-    <xsl:variable name="query-string-no-page"
-        select="replace($query-string,'&amp;page=\d+','')" />
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0"
+    xmlns:xlink="http://www.w3.org/2000/svg" exclude-result-prefixes="h s" version="2.0">
+    <xsl:variable name="query-string-no-page" select="replace($query-string,'&amp;page=\d+','')" />
     <xsl:variable name="base-query"
         select="replace($query-string-no-page,'&amp;sort=(\w| |%20|,|_|%2C)+','')" />
-
     <xsl:variable name="sorts">
         <s:sorts>
             <s:sort name="relevance" default="true" />
@@ -18,7 +13,6 @@
             <s:sort name="year (old to new)" arg="date asc,title_sort asc" />
         </s:sorts>
     </xsl:variable>
-
     <xsl:variable name="active-sort-name">
         <xsl:choose>
             <xsl:when test="count($sorts//s:sort[@arg = $sort]) = 1">
@@ -29,14 +23,15 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-
     <xsl:template name="sortBy">
         <div class="view-by sort no-bookmarking">
             <span>Sort by</span>
             <div class="general-dropdown dropdown">
                 <div class="general-dropdown-trigger">
                     <xsl:value-of select="$active-sort-name" />
-                    <i class="fa-regular fa-angle-down fa-sm"></i>
+                    <svg class="fa-sm">
+                        <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                    </svg>
                 </div>
                 <div class="general-dropdown-content dropdown-content">
                     <xsl:choose>
@@ -77,5 +72,4 @@
             </div>
         </div>
     </xsl:template>
-
 </xsl:stylesheet>

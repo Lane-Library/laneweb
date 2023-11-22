@@ -10,7 +10,9 @@ import edu.stanford.irt.laneweb.util.XMLUtils;
 public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXStrategy<T> {
 
     protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
-
+    
+    protected static final String SVG_NS = "http://www.w3.org/2000/svg";
+    
     private static final String A = "a";
 
     private static final String BODY = "body";
@@ -36,9 +38,24 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
     private static final String STRONG = "strong";
 
     private static final String TITLE = "title";
-
+    
+    private static final String SVG = "svg";
+    
+    private static final String USE = "use";
+    
     private static final String UL = "ul";
 
+    protected void createSvg(final XMLConsumer xmlConsumer, final String clazz, final String path, final String icon)
+            throws SAXException {
+        String href = path+"#"+icon;
+        startElementWithClass(xmlConsumer, SVG, clazz == null ? EMPTY : clazz);
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY, HREF, HREF, CDATA,  href);
+        XMLUtils.startElement(xmlConsumer, XHTML_NS, USE, atts);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, USE);
+        XMLUtils.endElement(xmlConsumer, XHTML_NS, SVG);
+    }
+    
     protected void createAnchor(final XMLConsumer xmlConsumer, final String href, final String text)
             throws SAXException {
         startAnchor(xmlConsumer, href);

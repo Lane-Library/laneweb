@@ -1,23 +1,22 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/staff/1.0"
-    exclude-result-prefixes="h s" version="2.0">
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xlink="http://www.w3.org/2000/svg" xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://lane.stanford.edu/staff/1.0" exclude-result-prefixes="h s" version="2.0">
     <xsl:param name="manager" />
-
     <xsl:template match="/s:staff-directory">
         <xsl:if test="$manager = 'TRUE'">
-            <xsl:apply-templates select="s:staff[s:banner-content = 'Director' and s:team-directory = 'TRUE']">
+            <xsl:apply-templates
+                select="s:staff[s:banner-content = 'Director' and s:team-directory = 'TRUE']">
                 <xsl:sort select="s:order" order="ascending" />
             </xsl:apply-templates>
         </xsl:if>
         <xsl:if test="$manager != 'TRUE'">
-            <xsl:apply-templates select="s:staff[ (not(s:banner-content) or s:banner-content != 'Director')  and s:team-directory = 'TRUE']">
+            <xsl:apply-templates
+                select="s:staff[ (not(s:banner-content) or s:banner-content != 'Director')  and s:team-directory = 'TRUE']">
                 <xsl:sort select="lower-case(s:last-name)" order="ascending" />
                 <xsl:sort select="lower-case(s:first-name)" order="ascending" />
             </xsl:apply-templates>
         </xsl:if>
-
     </xsl:template>
-
     <xsl:template match="s:staff">
         <div>
             <xsl:attribute name="class">slide</xsl:attribute>
@@ -41,14 +40,14 @@
                                 </xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
+                <xsl:attribute name="alt"
+                    select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
             </img>
             <div>
                 <xsl:attribute name="class">staff-info</xsl:attribute>
                 <a>
                     <xsl:if test="s:stanford-profile/text() != ''">
                         <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
-
                     </xsl:if>
                     <ul>
                         <xsl:attribute name="class">staff-overview</xsl:attribute>
@@ -83,7 +82,9 @@
                         <a>
                             <xsl:attribute name="href" select="s:stanford-profile/text()" />
                             <xsl:text>Stanford Profile </xsl:text>
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <svg>
+                                <use xlink:href="/resources/svg/solid.svg#arrow-right"></use>
+                            </svg>
                         </a>
                     </li>
                 </ul>
@@ -91,13 +92,12 @@
             <a>
                 <xsl:if test="s:stanford-profile/text() != ''">
                     <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
-                    <xsl:attribute name="aria-label" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' Stanford Profile')" />
+                    <xsl:attribute name="aria-label"
+                        select="concat(s:first-name/text(), ' ', s:last-name/text(), ' Stanford Profile')" />
                 </xsl:if>
                 <div class="overlay">
                 </div>
             </a>
         </div>
     </xsl:template>
-
-
 </xsl:stylesheet>

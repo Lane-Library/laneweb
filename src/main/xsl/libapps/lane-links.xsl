@@ -24,6 +24,14 @@
       </xsl:copy>
    </xsl:template>
    
+   <xsl:template match="h:svg">
+    <xsl:copy>
+        <use>
+            <xsl:attribute name="href" select="concat('//lane.stanford.edu', h:use/@href)" />
+        </use>
+    </xsl:copy>
+    </xsl:template>
+   
      <!-- xincludes often include html/head and html/body, this ignores them-->
     <xsl:template match="h:html">
         <xsl:apply-templates select="h:body/child::node()"/>

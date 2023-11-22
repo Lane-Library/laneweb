@@ -11,7 +11,7 @@
 }
 
 .guide-menu-toggle svg {
-    color: black;
+    fill: black;
     position: absolute;
     right: 0px;
     margin-top: 4px;

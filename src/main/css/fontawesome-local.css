@@ -1,16 +1,129 @@
 svg {
-    color: #666;
     fill: #666;
+    vertical-align: -.25em;
+    padding: 0;
+    margin: 0;
+    height: 1em;
+    width: 1em;
+}
+
+
+svg.fa-2xs {
+    height: 0.625em;
+    width: 0.625em;
+}
+
+svg.fa-xs {
+    height: 0.75em;
+    width: 0.75em;
+}
+
+svg.fa-sm {
+    height: 0.875em;
+    width: 0.875em;
+}
+
+svg.fa-lg {
+    height: 1.25em;
+    width: 1.25em;
+}
+
+svg.fa-xl {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+
+svg.fa-2xl {
+    height: 2em;
+    width: 2em;
+}
+
+svg.fa-25x {
+    height: 2.5em;
+    width: 2.5em;
+}
+
+svg.fa-3x {
+    height: 3em;
+    width: 3em;
+}
+
+svg.fa-4x {
+    height: 4em;
+    width: 4em;
+}
+
+svg.fa-5x {
+    height: 5em;
+    width: 5em;
+}
+
+svg.fa-6x {
+    height: 6em;
+    width: 6em;
+}
+
+svg.fa-7x {
+    height: 7em;
+    width: 7em;
+}
+
+svg.fa-8x {
+    height: 8em;
+    width: 8em;
+}
+svg.fa-9x {
+    height: 9em;
+    width: 9em;
+}
+svg.fa-10x {
+    height: 10em;
+    width: 10em;
+}
+svg.fa-11x {
+    height: 11em;
+    width: 11em;
+}
+
+svg.white{
+    fill:white;
+}
+svg.grey{
+    fill:#F0F0F0;
+}
+svg.green-556 {
+    fill: #556222;
+}
+svg.red {
+    fill: #8c1515;
+}
+
+
+
+
+span.fa-layers{
+    border-radius: 50%;
+    line-height: 0;
+    display: inline-block;
+    padding: 4px;
+}
+
+
+
+span.fa-layers svg{
+   fill:white;
 }
 
 .fa-fw {
     padding-right: 2px;
 }
 
-.fa-25x {
-    font-size: 2.5em;
-}
-
-.fa-6x {
-    font-size: 6em;
+.fa-spin {
+    animation-name: fa-spin;
+    animation-delay: var(--fa-animation-delay, 0s);
+    animation-direction: var(--fa-animation-direction, normal);
+    animation-duration: var(--fa-animation-duration, 2s);
+    animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+    animation-timing-function: var(--fa-animation-timing, linear);
 }

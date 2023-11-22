@@ -112,15 +112,14 @@
         },
 
         resetSubRegions = function() {
-            var i, iElement,
+            var i, svg, use,
                 subRegion = document.querySelector('#bassett-menu').querySelectorAll('li');
             for (i = 1; i < subRegion.length; i++) {
-                iElement = subRegion[i].querySelector('i');
-                if (iElement) {
-                    iElement.classList.add('fa-square');
-                    iElement.classList.add('fa-regular');
-                    iElement.classList.remove('fa-solid');
-                    iElement.classList.remove('fa-square-check');
+                svg = subRegion[i].querySelector('svg');
+                if (svg) {
+                    svg.classList.remove('bg-red');
+                    use = svg.querySelector('use');
+                    use.setAttribute('href', "/resources/svg/regular.svg#square");
                 }
             }
         },
@@ -147,14 +146,12 @@
         },
 
         surlineSubRegion = function(event) {
-            var i, li = event.currentTarget;
+            var svg, use, li = event.currentTarget;
             resetSubRegions();
-            li.classList.add('enabled');
-            i = li.querySelector('i');
-            i.classList.remove('fa-square');
-            i.classList.remove('fa-regular');
-            i.classList.add('fa-solid');
-            i.classList.add('fa-square-check');
+            svg = li.querySelector('svg');
+            svg.classList.add('bg-red');
+            svg.querySelector('use').setAttribute('href', "/resources/svg/solid.svg#square-check");
+            
         };
 
     if (bassettContent) {

@@ -33,12 +33,12 @@
     visibility: hidden;
 }
 
-.popular a, .popular a .fa {
+.popular a  {
     color: #fff;
 }
 
-.menu-container.popular h2 i{
-    color: white;
+.menu-container.popular h2 svg{
+    fill: white;    
 }
 
 
@@ -76,7 +76,7 @@
 
 @media ( max-width : 1100px) {
     
-    .top-resources.menu-container.mobile h2 i, .top-resources.menu-container.mobile.active h2 i,.popular.menu-container  hr
+    .top-resources.menu-container.mobile h2 svg, .top-resources.menu-container.mobile.active h2 svg,.popular.menu-container  hr
     {
         display: none;
     }

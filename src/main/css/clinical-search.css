@@ -42,22 +42,21 @@
     color: black;
 }
 
-.clinical-toggle .fa-solid {
-    color: #3e3f40;
-    font-size: 2.875em;
-    padding: 0 18px;
+.clinical-toggle svg {
+    fill: #3e3f40;
+    margin: 0 18px;
     vertical-align: middle;
 } 
 
 
- .clinical-facets a .fa-square,  .clinical-facets a .fa-square-check {
-    color: black;
+ .clinical-facets a svg{
+    fill: black;
     font-size: 13px;
     margin-right: 6px;
  }
  
 .clinical-facets a .fa-square-check{
-        color: #8C1515;
+        fill: #8C1515;
  }
 
 .clinical-facets a span{

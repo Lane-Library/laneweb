@@ -26,8 +26,12 @@
                        <div class="addBookmarkContainer">
                             <button name="action" value="add" type="submit">
                                 <span>Add Bookmark</span>
-                                <i class="fa-solid fa-angle-down"></i>
-                                <i class="fa-solid fa-angle-up"></i>
+                                 <svg>
+                                    <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                                </svg>
+                                <svg>
+                                    <use xlink:href="/resources/svg/regular.svg#angle-up"></use>
+                                </svg>
                             </button>
                         </div>
                     </fieldset>

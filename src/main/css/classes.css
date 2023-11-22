@@ -45,9 +45,10 @@
 .location svg {
     margin-right: 4%;
     margin-left: 3px;
+    fill:white;
 }
 
-.location, .location a, .location svg {
+.location, .location a{
     color: white;
 }
 

@@ -97,7 +97,7 @@ http://lane.stanford.edu/samples/button-css.html
 
 
 .btn  .icon {
-    color: #F0F0F0;
+    fill: #F0F0F0;
     background-color: #8C1515;
     margin-right: 5px;
 }
@@ -111,12 +111,12 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn.outline  .icon {
-    color: #8C1515;
+    fill: #8C1515;
     background-color: #F0F0F0;
 }
 
 .btn.outline:hover  .icon {
-    color: #F0F0F0;
+    fill: #F0F0F0;
     background-color: #8C1515;
 }
 
@@ -125,12 +125,12 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn.alt  .icon {
-    color: #F0F0F0;
+    fill: #F0F0F0;
     background-color: #007C92;
 }
 
 .btn.alt:hover  .icon {
-    color: #F0F0F0;
+    fill: #F0F0F0;
     background-color: #005766;
 }
 
@@ -139,12 +139,12 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn.alt.outline  .icon {
-    color: #007C92;
+    fill: #007C92;
     background-color: #F0F0F0;
 }
 
 .btn.alt.outline:hover  .icon {
-    color: #F0F0F0;
+    fill: #F0F0F0;
     background-color: #007C92;
 }
 
@@ -169,62 +169,62 @@ http://lane.stanford.edu/samples/button-css.html
 }
 
 .btn .icon-alt {
-	color: #8C1515;
+	fill: #8C1515;
 	background-color: #F0F0F0;
 }
 
 .btn:hover .icon-alt {
-	color: #651C32;
+	fill: #651C32;
 }
 
 .btn:active .icon-alt {
-	color: #430A0A;
+	fill: #430A0A;
 }
 
 .btn.outline  .icon-alt {
-	color: #F0F0F0;
+	fill: #F0F0F0;
 	background-color: #8C1515;
 }
 
 .btn.outline:hover  .icon-alt {
-	color: #8C1515;
+	fill: #8C1515;
 	background-color: #F0F0F0;
 }
 
 .btn.outline:active  .icon-alt {
-	color: #651C32;
+	fill: #651C32;
 }
 
 .btn.alt  .icon-alt {
-	color: #007C92;
+	fill: #007C92;
 	background-color: #F0F0F0;
 }
 
 .btn.alt:hover  .icon-alt {
-	color: #005766;
+	fill: #005766;
 }
 
 .btn.alt:active  .icon-alt {
-	color: #002B33;
+	fill: #002B33;
 }
 
 .btn.alt  .icon-alt {
-	color: #007C92;
+	fill: #007C92;
 	background-color: #F0F0F0;
 }
 
 .btn.alt.outline  .icon-alt {
-	color: #F0F0F0;
+	fill: #F0F0F0;
 	background-color: #007C92;
 }
 
 .btn.alt.outline:hover  .icon-alt {
-	color: #007C92;
+	fill: #007C92;
 	background-color: #F0F0F0;
 }
 
 .btn.alt.outline:active  .icon-alt {
-	color: #005766;
+	fill: #005766;
 }
 
 /* I do not like to use the !important but in this case I thought it is making sense  because it will
@@ -239,12 +239,12 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 }
 
 .btn.disabled .icon-alt {
-    color: #F0F0F0 !important;
+    fill: #F0F0F0 !important;
     background-color: #555 !important;
 }
 
 
 .btn.disabled .icon {
-    color: #F0F0F0 !important;
+    fill: #F0F0F0 !important;
     background-color: #666666 !important;    
 }

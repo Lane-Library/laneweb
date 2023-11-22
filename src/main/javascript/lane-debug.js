@@ -40,12 +40,6 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
         window.L = {};
 
         var i, laneJavascript = [
-            "font-awesome/fontawesome.js",
-            "font-awesome/brands.js",
-            "font-awesome/light.js",
-            "font-awesome/regular.js",
-            "font-awesome/solid.js",
-            "font-awesome/thin.js",
             "util.js",
             "menu.js",
             "model.js",

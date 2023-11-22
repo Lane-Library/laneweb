@@ -93,11 +93,11 @@
 }
 
 .bookmark-link svg {
-    color: gray;
+  vertical-align: -.1em;
 }
 
 .bookmark-link.active svg, .bookmark-link.bookmarking svg {
-    color: #b40d1a;
+    fill: #b40d1a;
 }
 
 /* HTML template for each bookmark editor */

@@ -376,6 +376,10 @@
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
+                <directory>src/main/svg</directory>
+                <targetPath>resources/svg</targetPath>
+            </resource>
+            <resource>
                 <directory>src/main/css</directory>
                 <targetPath>resources/css</targetPath>
             </resource>

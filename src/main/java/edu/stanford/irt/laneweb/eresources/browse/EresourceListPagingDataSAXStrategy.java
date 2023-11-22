@@ -80,7 +80,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
             sb.append(upperAlpha).append("a-").append(upperAlpha).append('z');
         }
         XMLUtils.data(xmlConsumer, sb.toString());
-        createElementWithClass(xmlConsumer, "i", "fa-regular fa-angle-down fa-sm", "");
+        createSvg(xmlConsumer, "fa-sm", "/resources/svg/regular.svg", "angle-down");
         endDiv(xmlConsumer);
         startDivWithClass(xmlConsumer, "general-dropdown-content dropdown-content");
         startUlWithClass(xmlConsumer, "pagingLabels");
@@ -123,7 +123,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         startAnchor(xmlConsumer, sb.toString());
         XMLUtils.data(xmlConsumer,
                 new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ").toString());
-        createElementWithClass(xmlConsumer, "i", "fa-solid fa-arrow-right", "");
+        createSvg(xmlConsumer, "", "/resources/svg/solid.svg", "arrow-right");
         endAnchor(xmlConsumer);
     }
 

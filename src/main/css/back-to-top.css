@@ -22,8 +22,8 @@
 }
 
 .back-to-top svg {
-    color: #fff;
-    padding-left: 23px;
+    fill: #fff;
+    margin-left: 23px;
 }
 
 @media ( max-width : 812px) {

@@ -22,6 +22,7 @@ ul .nav-menu {
  }
 .nav-menu>span a {
 	color: black;
+	cursor: pointer;
 }
 .nav-menu>span {
 	color: black;
@@ -31,15 +32,9 @@ ul .nav-menu {
 	white-space: nowrap;
 	line-height: 64px;
 	font-weight: 600;
-}
-
-.nav-menu>span {
 	cursor: default;
 }
 
-.nav-menu>span a {
-	cursor: pointer;
-}
 
 .nav-menu:hover, .nav-menu:active, .nav-menu-active {
 	background-color: #f0f4f5;
@@ -51,24 +46,21 @@ ul .nav-menu {
 }
 
 /* Icons close to the menu header */
-.nav-menu svg.fa-angle-up, .nav-menu svg.fa-angle-down {
+.nav-menu svg.angle-up, .nav-menu svg.angle-down {
 	text-align: center;
 	padding-left: 3px;
 	color: black;
 	vertical-align: middle;
 }
 
-.nav-menu svg.fa-angle-up {
+.nav-menu svg.angle-up, .nav-menu:hover svg.angle-down {
 	display: none;
 }
 
-.nav-menu:hover svg.fa-angle-up {
+.nav-menu:hover svg.angle-up {
 	display: inline-block;
 }
 
-.nav-menu:hover svg.fa-angle-down {
-	display: none;
-}
 
 /* Menu content */
 .nav-menu .nav-menu-content {
@@ -217,12 +209,12 @@ ul .nav-menu {
 	}
 	#nav-toggle-on {
 		display: block;
-		position: inherit;
-		padding: 20px
+		padding: 18px
 	}
 	#nav-toggle-off svg {
 		margin-right:  42px;
-		padding-left: 10px;
+		margin-left: 10px;
+        vertical-align: -5px;
 	}
 	.menu-toggle span, .menu-toggle svg, .menu-toggle svg.fa-regular{
     color: black;
@@ -330,7 +322,8 @@ ul .nav-menu {
 		{
 		color: black;
 		display: block;
-		padding-bottom: 3px;
+		margin:auto;
+		margin-bottom: 3px;
 		line-height: normal;
 	}
 	/* END of menu for small and medium screen */

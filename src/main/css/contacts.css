@@ -19,11 +19,16 @@
 	margin-bottom: 24px;
 }
 
+
 .contacts-choice li, .contacts-choice  li:last-child {
 	flex: 1 1 auto;
 	margin: 3px 2%;
 	padding: 0px;
 	border-radius: 9px;
+}
+
+.contacts-info svg{
+    margin-right: 6px;
 }
 
 .contacts-choice li a {
@@ -60,6 +65,7 @@
 	{
 	background-color: #007C92;
 	color: #F0F0F0;
+	fill: #F0F0F0;
 	cursor: not-allowed;
 }
 

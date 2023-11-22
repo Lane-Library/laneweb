@@ -13,6 +13,7 @@
             <map:generate type="file" src="cocoon://content/includes/template/search-container.html"/>
          </map:aggregate>
          <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
          <map:transform type="saxon" src="classpath:/xsl/libapps/headers.xsl"/>
          <map:serialize type="html5"/>
       </map:match>
