@@ -19,24 +19,19 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
     public void toSAX(final Eresource eresource, final XMLConsumer xmlConsumer) {
         try {
             String bibID = eresource.getRecordId();
-            String href = eresource.getLinks()
-                    .stream()
-                    .findFirst()
-                    .orElseThrow(() -> new LanewebException("no link for eresource " + bibID))
-                    .getUrl();
-            String fontAwesomeClass;
-            if (eresource.getPrimaryType().startsWith("Journal")) {
-                fontAwesomeClass = "fa-solid fa-newspaper";
-            } else {
-                fontAwesomeClass = "fa-light fa-book";
-            }
+            String href = eresource.getLinks().stream().findFirst()
+                    .orElseThrow(() -> new LanewebException("no link for eresource " + bibID)).getUrl();
             startAnchor(xmlConsumer, href);
             String title = eresource.getTitle();
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
             atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover");
             XMLUtils.startElement(xmlConsumer, XHTML_NS, "div", atts);
-            createElementWithClass(xmlConsumer, "i", fontAwesomeClass, "");
+            if (eresource.getPrimaryType().startsWith("Journal")) {
+                createSvg(xmlConsumer, null, "/resources/svg/solid.svg", "newspaper");
+            } else {
+                createSvg(xmlConsumer, null, "/resources/svg/light.svg", "book");
+            }
             endDiv(xmlConsumer);
             endAnchor(xmlConsumer);
             createAnchor(xmlConsumer, href, title);

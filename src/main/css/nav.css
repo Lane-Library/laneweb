@@ -49,7 +49,7 @@ ul .nav-menu {
 .nav-menu svg.angle-up, .nav-menu svg.angle-down {
 	text-align: center;
 	padding-left: 3px;
-	color: black;
+	fill: black;
 	vertical-align: middle;
 }
 

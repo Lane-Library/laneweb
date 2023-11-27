@@ -123,7 +123,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
         startAnchor(xmlConsumer, sb.toString());
         XMLUtils.data(xmlConsumer,
                 new StringBuilder("All").append(maybeGetQuotedAlpha(alpha)).append(" titles ").toString());
-        createSvg(xmlConsumer, "", "/resources/svg/solid.svg", "arrow-right");
+        createSvg(xmlConsumer, null , "/resources/svg/solid.svg", "arrow-right");
         endAnchor(xmlConsumer);
     }
 

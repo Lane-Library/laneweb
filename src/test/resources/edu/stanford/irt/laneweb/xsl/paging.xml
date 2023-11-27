@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/2000/svg">
    <head>
       <title>search results</title>
    </head>
@@ -8,13 +8,17 @@
       <div class="view-by sort no-bookmarking">
          <span>Sort by</span>
          <div class="general-dropdown dropdown">
-            <div class="general-dropdown-trigger">relevance<i class="fa-regular fa-angle-down fa-sm"/>
+            <div class="general-dropdown-trigger">relevance<svg class="fa-sm">
+                  <use xlink:href="/resources/svg/regular.svg#angle-down"/>
+               </svg>
             </div>
             <div class="general-dropdown-content dropdown-content">
                <ul class="pagingLabels">
                   <li>
                      <a href="?">relevance</a>
-                     <i class="fa-regular fa-check"/>
+                     <svg>
+                        <use xlink:href="/resources/svg/regular.svg#check"/>
+                     </svg>
                   </li>
                   <li>
                      <a href="?&amp;sort=title_sort+asc,year+desc">title</a>

@@ -41,17 +41,23 @@
                 <div id="bookmark-editor-template">
                     <div class="actions">
                         <button name="action" value="edit" type="submit">
-                            <i class="fa-solid fa-lg fa-pen-to-square"></i>
+                            <svg>
+                                <use xlink:href="/resources/svg/solid.svg#pen-to-square"></use>
+                            </svg>
                         </button>
                         | 
                         <button name="action" value="delete" type="submit">
-                            <i class="fa-solid fa-lg fa-trash-can"></i>
+                            <svg>
+                                <use xlink:href="/resources/svg/solid.svg#trash-can"></use>
+                            </svg>
                         </button>
                     </div> 
                     <div class="editContainer">
                         <div class="close">
                             <button name="action" value="cancel" type="submit">
-                                <i class="fa-regular fa-xmark"></i>
+                                <svg>
+                                    <use xlink:href="/resources/svg/regular.svg#xmark"></use>
+                                </svg>
                             </button>
                         </div>
                         <div class="editPanel">

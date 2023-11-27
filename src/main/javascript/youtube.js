@@ -28,7 +28,7 @@
             id = id.substring(0, id.indexOf("?"));
         }
         url = "//img.youtube.com/vi/" + id + "/mqdefault.jpg";
-        temp.innerHTML = "<div class=\"youtube-thumbnail\"><img src=\"" + url + "\"/><i class=\"fa fa-play\"></i></div>";
+        temp.innerHTML = "<div class=\"youtube-thumbnail\"><img src=\"" + url + "\"/><svg><use xlink:href=\"/resources/svg/regular.svg#play\"></use></svg></div>";
         this._thumbnail = temp.firstChild;
         if (Element.prototype.addEventListener) {
             this._thumbnail.addEventListener("click", click);

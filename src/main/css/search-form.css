@@ -56,13 +56,13 @@
     width: 95%;
 }
 
-.search-form svg{
-    fill:white;
+.search-form svg {
+    fill: white;
 }
 
-.search-form .search-dropdown svg{
-    fill: black;
-    padding-top: 3px;
+.search-form .search-dropdown svg {
+    vertical-align: -4px;
+    fill: #666;
 }
 
 .search-dropdown select {
@@ -187,6 +187,7 @@
 .search-reset svg {
     fill: #8c1515;
     font-size: 1.125em;
+    vertical-align: -6px;
 }
 
 .search-reset svg:hover {

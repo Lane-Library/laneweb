@@ -11,8 +11,6 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     protected static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
     
-    protected static final String SVG_NS = "http://www.w3.org/2000/svg";
-    
     private static final String A = "a";
 
     private static final String BODY = "body";
@@ -47,8 +45,13 @@ public abstract class AbstractXHTMLSAXStrategy<T extends Object> implements SAXS
 
     protected void createSvg(final XMLConsumer xmlConsumer, final String clazz, final String path, final String icon)
             throws SAXException {
+        if(clazz == null || clazz.isEmpty()) {
+            XMLUtils.startElement(xmlConsumer, XHTML_NS, SVG);
+        }
+        else {
+            startElementWithClass(xmlConsumer, SVG, clazz);
+        }
         String href = path+"#"+icon;
-        startElementWithClass(xmlConsumer, SVG, clazz == null ? EMPTY : clazz);
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY, HREF, HREF, CDATA,  href);
         XMLUtils.startElement(xmlConsumer, XHTML_NS, USE, atts);

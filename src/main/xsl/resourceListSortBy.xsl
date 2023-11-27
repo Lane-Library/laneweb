@@ -61,7 +61,9 @@
                                     <li>
                                         <xsl:copy-of select="$anchor" />
                                         <xsl:if test="@arg = $sort or ($sort = '' and not(@arg))">
-                                            <i class="fa-regular fa-check" />
+                                          <svg>
+                                            <use xlink:href="/resources/svg/regular.svg#check"></use>
+                                        </svg>
                                         </xsl:if>
                                     </li>
                                 </xsl:for-each>

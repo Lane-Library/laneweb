@@ -42,8 +42,8 @@
          data-sid=""
          data-index=""><div class="resource-detail"><span class="primaryType" /><div><a class="primaryLink"
              href=""
-             title="" /></div></div><div class="bookcover-container" /><div class="more-detail-container"><i class="fa-solid fa-ellipsis fa-xl" /><div class="sourceInfo no-bookmarking"><div class="permalink"><a title="click to copy a shareable link to this record"
-                href="https://lane.stanford.edu/view/foo/12345"><i class="fa-solid fa-link fa-rotate-180" />
+             title="" /></div></div><div class="bookcover-container" /><div class="more-detail-container"><svg class="fa-xl"><use xlink:href="/resources/svg/regular.svg#ellipsis"></use></svg><div class="sourceInfo no-bookmarking"><div class="permalink"><a title="click to copy a shareable link to this record"
+                href="https://lane.stanford.edu/view/foo/12345"><svg><use xlink:href="/resources/svg/solid.svg#link"></use></svg>
                     Get Shareable Link
                 </a></div><div /></div></div></li>
         </x:expect>
@@ -55,7 +55,7 @@
             <s:recordType>web</s:recordType>
         </x:context>
         <x:expect label="TODO: need to more actual types">
-        <a href="/index.html"><i class="fa-solid fa-arrow-right-from-bracket" />
+        <a href="/index.html"><svg class=""><use xlink:href="/resources/svg/solid.svg#arrow-right-from-bracket"></use></svg>
                     Lane Website
                 </a>
         </x:expect>

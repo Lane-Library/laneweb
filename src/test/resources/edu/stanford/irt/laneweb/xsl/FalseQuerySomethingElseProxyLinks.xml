@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ul xmlns="http://www.w3.org/1999/xhtml" class="login">
+<ul xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xlink="http://www.w3.org/2000/svg"
+    class="login">
    <li class="login-item-active">
       <a href="/secure/login.html?url=%3Fsomething%3Delse%26param%3Donemore">
-         <i class="fa fa-lock"/> STANFORD LOGIN</a>
+         <svg>
+            <use xlink:href="/resources/svg/regular.svg#lock"/>
+         </svg>STANFORD LOGIN</a>
    </li>
    <li>
       <div class="favorites dropdown">
          <a href="/favorites.html">
-            <i class="fa fa-bookmark"/> My Bookmarks</a>
+            <svg>
+               <use xlink:href="/resources/svg/regular.svg#lock"/>
+            </svg>
+            My Bookmarks</a>
          <div class="dropdown-content">
             </div>
       </div>
