@@ -42,6 +42,7 @@ public class LaneSearchIT {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
         this.ns = new HashMap<>();
         this.ns.put("h", "http://www.w3.org/1999/xhtml");
+        this.ns.put("xlink", "xmlns:xlink=\"http://www.w3.org/2000/svg");
         this.ns.put("s", "http://lane.stanford.edu/resources/1.0");
     }
 
