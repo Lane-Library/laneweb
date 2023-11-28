@@ -2,6 +2,7 @@
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xlink="http://www.w3.org/2000/svg"
     version="1.0"
     pass-through="all">
     
