@@ -15,7 +15,11 @@ public class EquipmentListSAXStrategy extends AbstractXHTMLSAXStrategy<List<Equi
     private static final String CDATA = "CDATA";
 
     private static final String CLASS = "class";
-
+    
+    private static final String SOLID_SVG_PATH = "/resources/svg/solid.svg";
+    
+    private static final String BRANDS_SVG_PATH = "/resources/svg/brands.svg";
+    
     @Override
     public void toSAX(final List<Equipment> list, final XMLConsumer xmlConsumer) {
         try {
@@ -32,11 +36,7 @@ public class EquipmentListSAXStrategy extends AbstractXHTMLSAXStrategy<List<Equi
                 startDivWithClass(xmlConsumer, "pure-g");
                 startDivWithClass(xmlConsumer, "pure-u-1-6");
                 startDivWithClass(xmlConsumer, "equipment-icon");
-                AttributesImpl iconAtts = new AttributesImpl();
-                iconAtts.addAttribute(XHTML_NS, "aria-hidden", "aria-hidden", CDATA, "true");
-                iconAtts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, iconClass(title));
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", iconAtts);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
+                this.createIconElement(xmlConsumer, title);
                 endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
                 startDivWithClass(xmlConsumer, "pure-u-5-6");
@@ -66,31 +66,29 @@ public class EquipmentListSAXStrategy extends AbstractXHTMLSAXStrategy<List<Equi
         }
     }
 
-    private String iconClass(final String title) {
-        StringBuilder sb = new StringBuilder("fa-4x ");
+    private void createIconElement( final XMLConsumer xmlConsumer,final String title) throws SAXException {
         if (title.contains("iPad")) {
-            sb.append("fa-solid fa-tablet-screen-button");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "tablet-screen-button");
         } else if (title.contains("Apple")) {
-            sb.append("fa-brands fa-apple");
+            createSvg(xmlConsumer, "fa-4x", BRANDS_SVG_PATH, "apple");
         } else if (title.contains("Android")) {
-            sb.append("fa-brands fa-android");
+            createSvg(xmlConsumer, "fa-4x", BRANDS_SVG_PATH, "android");            
         } else if (title.contains("Keyboard")) {
-            sb.append("fa-solid fa-keyboard");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "keyboard");
         } else if (title.contains("Headphones")) {
-            sb.append("fa-solid fa-headphones");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "headphones");
         } else if (title.contains("Tablet")) {
-            sb.append("fa-solid fa-tablet-screen-button");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "tablet-screen-button");
         } else if (title.contains("USB")) {
-            sb.append("fa-brands fa-usb");
+            createSvg(xmlConsumer, "fa-4x", BRANDS_SVG_PATH, "usb");
         } else if (title.contains("Cable")) {
-            sb.append("fa-brands fa-gg");
+            createSvg(xmlConsumer, "fa-4x", BRANDS_SVG_PATH, "gg");
         } else if (title.contains("Recorder")) {
-            sb.append("fa-solid fa-microphone");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "microphone");
         } else if (title.contains("Polling")) {
-            sb.append("fa-solid fa-users");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "users");
         } else if (title.contains("magnifying")) {
-            sb.append("fa-solid fa-magnifying-glass");
+            createSvg(xmlConsumer, "fa-4x", SOLID_SVG_PATH, "magnifying-glass");
         }
-        return sb.toString();
     }
 }

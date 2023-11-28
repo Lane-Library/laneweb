@@ -18,9 +18,7 @@
             true
         </xsl:if>
     </xsl:variable>
-    <xsl:variable name="pubmed-baseUrl">
-        https://pubmed.ncbi.nlm.nih.gov/
-    </xsl:variable>
+    <xsl:variable name="pubmed-baseUrl">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
     <xsl:include href="resourceListPagination.xsl" />
     <xsl:include href="resourceListSortBy.xsl" />
     <xsl:include href="search-browse-common.xsl" />
@@ -242,9 +240,9 @@
                         <xsl:value-of select="f:split-authors($max-first-line-length, $authorTokens, 12)" />
                     </xsl:variable>
                     <xsl:value-of select="$authorString" />
-                    <span> ...</span>
+                    <span> ... </span>
                     <span class="authorsTrigger no-bookmarking active">
-                        <a href="#"> Show More</a>
+                        <a href="#"> Show More </a>
                         <svg class="fa-xs">
                             <use xlink:href="/resources/svg/regular.svg#angles-down"></use>
                         </svg>
@@ -263,12 +261,10 @@
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')" />
         </xsl:variable>
-        <span class="pmid">
+          <span class="pmid">
             <a>
-                <xsl:attribute name="href" select="concat($pubmed-baseUrl,$pmid,'/?otool=stanford')"></xsl:attribute>
-                PMID:
-                <xsl:value-of select="$pmid" />
-            </a>
+            <xsl:attribute name="href" select="concat($pubmed-baseUrl,$pmid,'/?otool=stanford')"></xsl:attribute>
+            PMID:<xsl:value-of select="$pmid" /></a>
         </span>
     </xsl:template>
     <xsl:template match="s:contentId" />

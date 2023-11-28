@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/2000/svg"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd xlink" version="2.0">
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
     <xsl:variable name="requests-host" select="'requests.stanford.edu'" />
     <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'" />

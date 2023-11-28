@@ -1,7 +1,7 @@
 <xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/2000/svg"
-    xmlns:r="http://lane.stanford.edu/results/1.0">
+    xmlns:r="http://lane.stanford.edu/results/1.0" >
     <xsl:param name="facet" />
     <xsl:param name="source" />
     <xsl:param name="query" />

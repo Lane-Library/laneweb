@@ -4,7 +4,9 @@
       <div class="pure-g">
          <div class="pure-u-1-6">
             <div class="equipment-icon">
-               <svg class="fa-4x"><use xlink:href="/resources/svg/brands.svg#android"></use></svg>
+               <svg class="fa-4x">
+                  <use href="/resources/svg/brands.svg#android"/>
+               </svg>
             </div>
          </div>
          <div class="pure-u-5-6">

@@ -7,45 +7,31 @@ svg {
     width: 1em;
 }
 
-
-svg.white{
-    fill:white;
-}
-svg.grey{
-    fill:#F0F0F0;
-}
-svg.green-556 {
-    fill: #556222;
-}
-svg.red {
-    fill: #8c1515;
-}
-
-
-
-
-span.fa-layers{
+span.fa-layers {
     border-radius: 50%;
     line-height: 0;
     display: inline-block;
     padding: 4px;
+    width: auto;
+    height: auto;
 }
 
+svg.white,span.fa-layers svg {
+    fill: white;
+}
 
+svg.grey {
+    fill: #F0F0F0;
+}
 
-span.fa-layers svg{
-   fill:white;
+svg.green-556 {
+    fill: #556222;
+}
+
+svg.red {
+    fill: #8c1515;
 }
 
 .fa-fw {
     padding-right: 2px;
-}
-
-.fa-spin {
-    animation-name: fa-spin;
-    animation-delay: var(--fa-animation-delay, 0s);
-    animation-direction: var(--fa-animation-direction, normal);
-    animation-duration: var(--fa-animation-duration, 2s);
-    animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-    animation-timing-function: var(--fa-animation-timing, linear);
 }
