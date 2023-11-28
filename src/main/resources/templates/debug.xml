@@ -4,7 +4,7 @@
     <head>
         <title>Lane Medical Library - Stanford University School of Medicine</title>
         <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/svg-with-js.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/pure-grids.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-local.css" />
