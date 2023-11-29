@@ -22,20 +22,24 @@
     <xsl:include href="resourceListPagination.xsl" />
     <xsl:include href="resourceListSortBy.xsl" />
     <xsl:include href="search-browse-common.xsl" />
+    
     <xsl:template match="attribute::node() | child::node()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node() | child::node()" />
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="/doc">
         <xsl:apply-templates select="h:html" />
     </xsl:template>
+    
     <xsl:template match="h:ul[@class='lwSearchResults']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()" />
             <xsl:apply-templates select="/doc/r:results/s:result" />
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="s:resources">
         <html>
             <head>
@@ -60,6 +64,7 @@
             </body>
         </html>
     </xsl:template>
+    
     <!-- transforms metasearch result node into displayable -->
     <xsl:template match="s:result[@type='searchContent']">
         <xsl:variable name="resourceName">
@@ -92,8 +97,7 @@
                     </a>
                 </div>
                 <!-- display authors if NOT clinical or peds interface -->
-                <xsl:if
-                    test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
+                <xsl:if test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
                     <xsl:apply-templates select="s:pub-author" />
                 </xsl:if>
                 <xsl:if test="s:pub-text">
@@ -114,6 +118,7 @@
             </div>
         </li>
     </xsl:template>
+    
     <!-- transforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <li class="resource" data-sid="{s:id}" data-index="{/s:resources/@length * /s:resources/@page + position()}">
@@ -183,11 +188,13 @@
             </div>
         </li>
     </xsl:template>
+    
     <xsl:template match="s:desc-link">
         <a href="{s:link}">
             <xsl:value-of select="s:label" />
         </a>
     </xsl:template>
+    
     <!-- confusing! Lane records (recordType = 'bib') don't use this; Lane records use handleXxxXxxLinks functions -->
     <!-- sul records use this for 'sul-print' type links only -->
     <!-- it is also used for pubmed, web, etc. records -->
@@ -217,6 +224,7 @@
             </div>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template match="s:primaryType">
         <xsl:choose>
             <xsl:when test="starts-with(.,'Book') or starts-with(.,'Journal')">
@@ -227,14 +235,13 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template match="s:pub-author">
         <xsl:variable name="max-first-line-length" select="95" />
         <div class="author">
             <xsl:choose>
-                <!-- when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first 
-                    line (105 chars) -->
-                <xsl:when
-                    test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
+                <!-- when there are more than approximately 2 lines of authors (250 chars), include a toggle after the first line (105 chars) -->
+                <xsl:when test="contains(substring(., 0, $max-first-line-length), ', ') and string-length(.) > 250">
                     <xsl:variable name="authorTokens" select="tokenize(.,', ')" />
                     <xsl:variable name="authorString">
                         <xsl:value-of select="f:split-authors($max-first-line-length, $authorTokens, 12)" />
@@ -257,17 +264,20 @@
             </xsl:choose>
         </div>
     </xsl:template>
+    
     <xsl:template match="s:contentId[starts-with(.,'PMID:')]">
         <xsl:variable name="pmid">
             <xsl:value-of select="substring-after(.,'PMID:')" />
         </xsl:variable>
-          <span class="pmid">
+        <span class="pmid">
             <a>
             <xsl:attribute name="href" select="concat($pubmed-baseUrl,$pmid,'/?otool=stanford')"></xsl:attribute>
             PMID:<xsl:value-of select="$pmid" /></a>
         </span>
     </xsl:template>
+    
     <xsl:template match="s:contentId" />
+    
     <xsl:template match="s:desc-label">
         <xsl:if test="position() > 1">
             <br />
@@ -277,4 +287,5 @@
         </strong>
         <xsl:text>: </xsl:text>
     </xsl:template>
+    
 </xsl:stylesheet>

@@ -15,6 +15,7 @@
         <xsl:apply-templates
             select="./channel/item[category[ . = 'Highlighted Resource'] ] [position() &lt; 2]" />
     </xsl:template>
+    
     <xsl:template match="item">
         <div class="newsfeed">
             <div>
@@ -39,6 +40,7 @@
             </div>
         </div>
     </xsl:template>
+    
     <xsl:template match="h:img">
         <xsl:param name="link" />
         <xsl:if test="@class='webfeedsFeaturedVisual wp-post-image'">
@@ -51,4 +53,5 @@
             </a>
         </xsl:if>
     </xsl:template>
+    
 </xsl:stylesheet>

@@ -3,6 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/staff/1.0"
     xmlns:xlink="http://www.w3.org/2000/svg" exclude-result-prefixes="h s" version="2.0">
     <xsl:param name="liaison" />
+    
     <xsl:template match="/s:staff-directory/s:staff[@id = $liaison]">
         <div class="business-card no-bookmarking">
             <h3>Your Librarian</h3>
@@ -42,5 +43,7 @@
             </div>
         </div>
     </xsl:template>
+    
     <xsl:template match="text()" />
+    
 </xsl:stylesheet>

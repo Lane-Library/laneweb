@@ -43,7 +43,7 @@
 }
 
 .facet-container .facet a svg {
-    fill: #666;
+    fill: black;
 }
 
 .facet-container .facet a svg.bg-red {
@@ -74,7 +74,7 @@
 }
 
 .facet-container .see-more svg {
-    color: black;
+    fill: black;
 }
 
 .facet-container input.facet-suggestion,

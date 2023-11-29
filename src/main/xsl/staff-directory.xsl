@@ -17,6 +17,7 @@
             </xsl:apply-templates>
         </xsl:if>
     </xsl:template>
+
     <xsl:template match="s:staff">
         <div>
             <xsl:attribute name="class">slide</xsl:attribute>
@@ -40,8 +41,7 @@
                                 </xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:attribute name="alt"
-                    select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
+                <xsl:attribute name="alt" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' photo')" />
             </img>
             <div>
                 <xsl:attribute name="class">staff-info</xsl:attribute>
@@ -92,8 +92,7 @@
             <a>
                 <xsl:if test="s:stanford-profile/text() != ''">
                     <xsl:attribute name="href" select="s:stanford-profile"></xsl:attribute>
-                    <xsl:attribute name="aria-label"
-                        select="concat(s:first-name/text(), ' ', s:last-name/text(), ' Stanford Profile')" />
+                    <xsl:attribute name="aria-label" select="concat(s:first-name/text(), ' ', s:last-name/text(), ' Stanford Profile')" />
                 </xsl:if>
                 <div class="overlay">
                 </div>

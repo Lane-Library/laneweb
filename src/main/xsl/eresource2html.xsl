@@ -4,15 +4,18 @@
     xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:xlink="http://www.w3.org/2000/svg" exclude-result-prefixes="h f s xsd" version="2.0">
     <xsl:param name="browse-query" />
+    
     <xsl:include href="search-browse-common.xsl" />
     <xsl:template match="child::node()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()" />
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="." />
     </xsl:template>
+    
     <!-- transforms eresource bib result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <li class="resource" data-sid="{s:id}" data-index="{ position() -1}">
@@ -49,25 +52,21 @@
             </div>
         </li>
     </xsl:template>
+    
     <xsl:template match="s:primaryType">
         <xsl:if test="$browse-query and (contains($browse-query,'Book') or contains($browse-query,'Journal'))">
             <xsl:choose>
-                <xsl:when
-                    test="not(contains(., 'Print')) and ../s:link[s:label = 'Lane Record in SearchWorks']">
-                    Digital/Print
-                </xsl:when>
-                <xsl:when test="contains(., 'Print')">
-                    Print
-                </xsl:when>
-                <xsl:otherwise>
-                    Digital
-                </xsl:otherwise>
+                <xsl:when test="not(contains(., 'Print')) and ../s:link[s:label = 'Lane Record in SearchWorks']">Digital/Print</xsl:when>
+                <xsl:when test="contains(., 'Print')">Print</xsl:when>
+                <xsl:otherwise>Digital</xsl:otherwise>
             </xsl:choose>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template match="s:pub-author">
         <div>
             <xsl:value-of select="." />
         </div>
     </xsl:template>
+    
 </xsl:stylesheet>

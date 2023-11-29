@@ -272,6 +272,7 @@ span.versionText:first-child {
 .hldgsContainer .hldgsHeader svg{
     margin-right: 6px;
     fill: #AEBDC5;
+    vertical-align: text-bottom;
 }
 
 .hldgsHeader .fa-light.fa-book {

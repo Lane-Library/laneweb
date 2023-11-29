@@ -12,13 +12,12 @@
     <xsl:param name="facet.sort" />
     <xsl:param name="source" />
     <xsl:param name="url-encoded-query" />
+    
     <xsl:variable name="encoded-facets" select="replace(replace($facets, '\[', '%5B'), '\]','%5D')" />
     <xsl:variable name="start-year" select="substring-before(substring-after($facets, 'year:['), ' TO')" />
-    <xsl:variable name="end-year"
-        select="substring-before(substring-after(substring-after($facets, 'year:['), 'TO '), ']')" />
+    <xsl:variable name="end-year" select="substring-before(substring-after(substring-after($facets, 'year:['), 'TO '), ']')" />
     <xsl:variable name="pageless-query-string" select="replace($query-string,'&amp;page=\d+','')" />
-    <xsl:variable name="facet-search-base-path"
-        select="concat('?',replace($pageless-query-string,'&amp;(facets=[^&amp;]+|facet.sort=index|facets=)',''))" />
+    <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;(facets=[^&amp;]+|facet.sort=index|facets=)',''))" />
     <xsl:variable name="values-per-facet" select="4" />
     <xsl:variable name="current-year" select="year-from-date(current-date())" />
     <xsl:variable name="filter-facet">
@@ -29,8 +28,7 @@
             </h2>
             <div>
                 <xsl:for-each select="/f:facetResult/f:facet">
-                    <xsl:variable name="facet-id"
-                        select="concat(./@f:key ,':',  '&quot;' , ./@f:name, '&quot;')" />
+                    <xsl:variable name="facet-id" select="concat(./@f:key ,':',  '&quot;' , ./@f:name, '&quot;')" />
                     <xsl:if test="contains($facets,$facet-id)">
                         <xsl:variable name="furl" select="fct:getFacetUrl($facet-id)"></xsl:variable>
                         <a href="{$facet-search-base-path}{ $furl}">
@@ -44,8 +42,7 @@
                     </xsl:if>
                 </xsl:for-each>
                 <xsl:if test="$start-year != '' or $end-year != ''">
-                    <xsl:variable name="year-facet"
-                        select="concat('year:%5B', $start-year, ' TO ', $end-year, '%5D')"></xsl:variable>
+                    <xsl:variable name="year-facet" select="concat('year:%5B', $start-year, ' TO ', $end-year, '%5D')"></xsl:variable>
                     <xsl:variable name="furl" select="fct:getFacetUrl($year-facet)" />
                     <a href="{$facet-search-base-path}{ $furl}">
                         <span>
@@ -72,6 +69,7 @@
             </svg>
         </h2>
     </xsl:variable>
+    
     <xsl:template match="f:facet">
         <xsl:variable name="count-formatted" select="format-number(./@f:value, '###,##0')" />
         <xsl:variable name="facet-id" select="concat(./@f:key ,':',  '&quot;' , ./@f:name, '&quot;' )" />
@@ -111,6 +109,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template name="field">
         <xsl:param name="id" />
         <xsl:param name="label" />
@@ -126,6 +125,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template match="/">
         <html>
             <body>
@@ -138,6 +138,7 @@
             </body>
         </html>
     </xsl:template>
+    
     <xsl:template match="f:facetResult">
         <!-- xsl:if test="$counts > 0 and (./entry or string-length($facets) > 0)" -->
         <xsl:if test="count(/f:facetResult//f:facet) &gt; 0">
@@ -208,6 +209,7 @@
             </ul>
         </xsl:if>
     </xsl:template>
+    
     <xsl:function name="fct:getLabel">
         <xsl:param name="name" />
         <xsl:choose>
@@ -248,6 +250,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+    
     <xsl:function name="fct:getFacetUrl">
         <xsl:param name="facet-id" />
         <xsl:choose>

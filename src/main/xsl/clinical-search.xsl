@@ -5,11 +5,13 @@
     <xsl:param name="facet" />
     <xsl:param name="source" />
     <xsl:param name="query" />
+
     <xsl:template match="attribute::node() | child::node()">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node() | child::node()" />
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="h:span[starts-with(@r:ref, '@')]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name() = 'r:ref')]" />
@@ -17,9 +19,9 @@
                 select="/doc/r:results/attribute::node()[name() = substring-after(current()/@r:ref, '@')]" />
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="h:span[starts-with(@r:ref, 'resource@')][ends-with(@r:ref, '/@count')]">
-        <xsl:variable name="content-count"
-            select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@count'), '@')]/@count" />
+        <xsl:variable name="content-count" select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@count'), '@')]/@count" />
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name() = 'r:ref')]" />
             <xsl:choose>
@@ -32,6 +34,7 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
+    
     <!-- Element used for google analytics -->
     <xsl:template
         match="h:a[@class='clinical-facet'][$facet][substring-after(@href,'facet=') = $facet]/h:i[1]">
@@ -39,11 +42,13 @@
             <use xlink:href="/resources/svg/solid.svg#square-check"></use>
         </svg>
     </xsl:template>
+    
     <xsl:template match="h:a[@class='clinical-facet'][not($facet)][not(contains(@href, 'facet'))]/h:i">
         <svg class="fa-lg">
             <use xlink:href="/resources/svg/solid.svg#square-check"></use>
         </svg>
     </xsl:template>
+    
     <xsl:template match="h:span[@class='search-summary']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()" />
@@ -67,6 +72,7 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="h:span[starts-with(@r:ref, 'resource@')][ends-with(@r:ref, '/@hits')]">
         <xsl:variable name="hits"
             select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@hits'), '@')]/@hits" />
@@ -82,6 +88,7 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="h:a[starts-with(@r:ref, 'resource@')][ends-with(@r:ref, '/@url')]">
         <xsl:variable name="url"
             select="/doc/r:results/r:resource[@id=substring-after(substring-before(current()/@r:ref, '/@url'), '@')]/@url" />
@@ -91,6 +98,7 @@
             <xsl:apply-templates />
         </xsl:copy>
     </xsl:template>
+    
     <xsl:template match="h:div[starts-with(@class, 's-pagination')]">
         <xsl:if test="number(/doc/r:results/@pages) &gt; 1">
             <xsl:copy>
@@ -98,12 +106,15 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='source']/@value">
         <xsl:attribute name="value" select="$source" />
     </xsl:template>
+    
     <xsl:template match="h:form[@class='pagingForm']/h:input[@name='page']/@value">
         <xsl:attribute name="value" select="number(/doc/r:results/@page)" />
     </xsl:template>
+    
     <xsl:template match="h:span[contains(@class, 'paging-button-back')]">
         <xsl:if test="number(/doc/r:results/@page) &gt; 1">
             <a>
@@ -118,6 +129,7 @@
             </a>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template match="h:span[contains(@class, 'paging-button-forward')]">
         <xsl:if test="number(/doc/r:results/@page) &lt; number(/doc/r:results/@pages)">
             <a>
@@ -132,4 +144,5 @@
             </a>
         </xsl:if>
     </xsl:template>
+    
 </xsl:stylesheet>

@@ -6,19 +6,23 @@
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
     <xsl:variable name="requests-host" select="'requests.stanford.edu'" />
     <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'" />
+    
     <xsl:template match="s:desc-linebreak">
         <br />
     </xsl:template>
+    
     <xsl:template match="s:description">
         <div class="description">
             <xsl:apply-templates />
         </div>
     </xsl:template>
+    
     <xsl:template match="s:keyword">
         <strong>
             <xsl:value-of select="." />
         </strong>
     </xsl:template>
+    
     <xsl:template match="s:locationName">
         <xsl:choose>
             <xsl:when test="../s:locationUrl">
@@ -35,11 +39,13 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template match="s:pub-text">
         <div class="citation">
             <xsl:apply-templates />
         </div>
     </xsl:template>
+    
     <xsl:template match="s:recordType">
         <xsl:variable name="label">
         <span class="fa-layers">
@@ -50,8 +56,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test=". = 'pubmed'">
-                <a href="https://pubmed.ncbi.nlm.nih.gov/{../s:recordId}/?otool=Stanford"
-                    title="PubMed: PMID {../s:recordId}">
+                <a href="https://pubmed.ncbi.nlm.nih.gov/{../s:recordId}/?otool=Stanford" title="PubMed: PMID {../s:recordId}">
                     <xsl:copy-of select="$label" />
                     PubMed
                 </a>
@@ -81,8 +86,7 @@
                 </a>
             </xsl:when>
             <xsl:when test=". = 'redivis'">
-                <a href="https://redivis.com/StanfordPHS"
-                    title="Redivis - Stanford Center for Population Health Sciences">
+                <a href="https://redivis.com/StanfordPHS" title="Redivis - Stanford Center for Population Health Sciences">
                     <xsl:copy-of select="$label" />
                     Redivis
                 </a>
@@ -95,16 +99,17 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:template match="s:title">
         <xsl:apply-templates />
     </xsl:template>
+    
     <!-- LANEWEB-10982: replace "CALL# VARIES" with a search by title link -->
     <xsl:template match="s:callnumber">
         <xsl:choose>
             <xsl:when test="contains(.,'CALL# VARIES')">
                 Call number varies. Search for
-                <a
-                    href="{concat('/search.html?source=catalog-all&amp;q=%22',../../s:title,'%22 NOT title:%22',../../s:title,'%22')}">
+                <a href="{concat('/search.html?source=catalog-all&amp;q=%22',../../s:title,'%22 NOT title:%22',../../s:title,'%22')}">
                     <xsl:value-of select="../../s:title" />
                 </a>
                 to find individual volumes of this title.
@@ -114,12 +119,12 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
         <div class="sourceInfo no-bookmarking">
             <div class="permalink">
-                <a title="click to copy a shareable link to this record"
-                    href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
+                <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
                     <span class="fa-layers">
                         <svg><use xlink:href="/resources/svg/solid.svg#link"></use></svg>
                     </span>
@@ -131,6 +136,7 @@
             </div>
         </div>
     </xsl:function>
+    
     <xsl:function name="f:build-link-label">
         <xsl:param name="link" />
         <xsl:variable name="primaryType" select="$link/../s:primaryType" />
@@ -157,6 +163,7 @@
             </xsl:if>
         </span>
     </xsl:function>
+    
     <!-- assume authors are a comma-separated string; break the string at a separator before max-string-length -->
     <xsl:function name="f:split-authors">
         <xsl:param name="max-string-length" />
@@ -172,6 +179,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+    
     <xsl:function name="f:maybe-add-bcids-attribute">
         <xsl:param name="eresource" />
         <xsl:variable name="bcids">
@@ -196,6 +204,7 @@
             <xsl:value-of select="$bcids" />
         </xsl:attribute>
     </xsl:function>
+    
     <xsl:function name="f:maybe-add-doi-attribute">
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:doi[1]">
@@ -204,6 +213,7 @@
             </xsl:attribute>
         </xsl:if>
     </xsl:function>
+    
     <xsl:function name="f:primaryLink">
         <xsl:param name="link" />
         <xsl:variable name="eresource" select="$link/.." />
@@ -232,7 +242,7 @@
         <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader available">
-                    <svg class="fa-sm">
+                    <svg>
                         <use xlink:href="/resources/svg/solid.svg#desktop"></use>
                     </svg>
                     Digital Access
@@ -264,7 +274,7 @@
                     <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
                 </xsl:if>
                 <span class="hldgsHeader hldgsTrigger available">
-                    <svg class="fa-sm">
+                    <svg>
                         <use xlink:href="/resources/svg/solid.svg#desktop"></use>
                     </svg>
                     Digital Access
@@ -289,8 +299,7 @@
                         </div>
                     </div>
                     <xsl:for-each select="$links">
-                        <xsl:variable name="simple-primary-type"
-                            select="replace(../s:primaryType,'(Journal|Book) ','')" />
+                        <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')" />
                         <div class="table-row">
                             <div class="table-cell">
                                 <xsl:if test="not(s:publisher) and s:label">
@@ -322,11 +331,12 @@
             </div>
         </xsl:if>
     </xsl:function>
+    
     <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
         <div class="hldgsContainer no-bookmarking">
             <span class="hldgsHeader available">
-                <svg class="fa-sm">
+                <svg>
                     <use xlink:href="/resources/svg/solid.svg#desktop"></use>
                 </svg>
                 Digital Access
@@ -474,6 +484,7 @@
             </div>
         </xsl:if>
     </xsl:function>
+    
     <xsl:function name="f:descriptionTrigger">
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:description">
@@ -496,6 +507,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:function>
+    
     <!-- print books, journals, databases, etc. should get "Print" label things like USB cords shouldn't get labeled "Print" -->
     <xsl:function name="f:itemTypeLabel">
         <xsl:param name="eresource" />

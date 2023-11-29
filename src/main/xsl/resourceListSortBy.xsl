@@ -5,6 +5,7 @@
     <xsl:variable name="query-string-no-page" select="replace($query-string,'&amp;page=\d+','')" />
     <xsl:variable name="base-query"
         select="replace($query-string-no-page,'&amp;sort=(\w| |%20|,|_|%2C)+','')" />
+    
     <xsl:variable name="sorts">
         <s:sorts>
             <s:sort name="relevance" default="true" />
@@ -13,6 +14,7 @@
             <s:sort name="year (old to new)" arg="date asc,title_sort asc" />
         </s:sorts>
     </xsl:variable>
+    
     <xsl:variable name="active-sort-name">
         <xsl:choose>
             <xsl:when test="count($sorts//s:sort[@arg = $sort]) = 1">
@@ -23,6 +25,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+   
     <xsl:template name="sortBy">
         <div class="view-by sort no-bookmarking">
             <span>Sort by</span>

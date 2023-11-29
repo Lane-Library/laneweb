@@ -2,18 +2,22 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:rss="http://purl.org/rss/1.0/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:h="http://www.w3.org/1999/xhtml"  xmlns:xlink="http://www.w3.org/2000/svg"
 	xmlns="http://www.w3.org/1999/xhtml" exclude-result-prefixes="rss h content" version="2.0">
+	
 	<xsl:template match="node()">
 		<xsl:copy>
 			<xsl:apply-templates select="node()|@*" />
 		</xsl:copy>
 	</xsl:template>
+	
 	<xsl:template match="@*">
 		<xsl:copy-of select="." />
 	</xsl:template>
+	
 	<xsl:template match="rss">
 		<xsl:apply-templates
 			select="channel/item[ (category[ . = 'New Resource'] or category[ . = 'News']) and not(category[. = 'Highlighted Resource']) ] [position() &lt; 3 ]" />
 	</xsl:template>
+	
 	<xsl:template match="item">
 		<div class="newsfeed">
 			<div>
@@ -38,6 +42,7 @@
 			</div>
 		</div>
 	</xsl:template>
+	
 	<xsl:template match="h:img">
 		<xsl:param name="link" />
 		<xsl:if test="@class='webfeedsFeaturedVisual wp-post-image'">
@@ -50,4 +55,5 @@
 			</a>
 		</xsl:if>
 	</xsl:template>
+	
 </xsl:stylesheet>

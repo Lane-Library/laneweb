@@ -289,9 +289,13 @@
         }();
 
         document.addEventListener('click', function(e) {
-            var leftClick = e.button === 0,
-                t = e.target,
-                setLocation = function() {
+            let leftClick = e.button === 0,
+                t = e.target;
+                //The element use from svg has a href and was set as location instead of the parent link  
+                if(t.nodeName == 'use'){
+                    t = t.closest('a');
+                };
+                let setLocation = function() {
                     L.setLocationHref(t.href);
                 };
             Tracker.trackEvent(e);
