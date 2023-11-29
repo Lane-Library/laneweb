@@ -5,7 +5,9 @@
         <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
     </head>
     <body class="yui3-skin-sam">
-            <ul class="menu">
+             <div id="menu" class="menu-container mobile">
+                <h2>Menu</h2>
+                <ul>
                 <li><a href="/samples/menu/ac.html">Academic Calendar</a></li>
                 <li><a href="/samples/menu/leadership/index.html">Leadership</a>
                     <ul>
@@ -18,8 +20,8 @@
                         </li>
                         <li><a href="/samples/menu/leadership/vd.html">Vice Dean</a></li>
                         <li><a href="/samples/menu/leadership/sad.html">Senior Associate Deans</a></li>
-                        <li><a href="/samples/menu/leadership/so.html">School Officers</a></li>
-                        <li><a href="/samples/menu/leadership/dil.html">Department &amp; Institute Leaders</a></li>
+                        <li><a id="selected-link" href="#thispage">School Officers</a></li>
+                        <li><a id="local-link" href="#thispage">Department &amp; Institute Leaders</a></li>
                     </ul>
                 </li>
                 <li><a href="/samples/menu/directory.html">School Directory</a></li>
@@ -45,7 +47,8 @@
                         <li><a href="/samples/menu/contacts/maps.html">Maps &amp; Directions</a></li>
                     </ul>
                 </li>
-            </ul>
+                </ul>
+            </div>
         <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
         <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
         <script src="../../../main/javascript/util.js" type="text/javascript"></script>
