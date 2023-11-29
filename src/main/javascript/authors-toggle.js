@@ -9,7 +9,7 @@
                 triggerNode.addEventListener("click", function(event) {
                     var node = event.currentTarget,
                         anchorNode = node.querySelector('a'),
-                        iconNode = node.querySelector('i'),
+                        iconNode = node.querySelector('use'),
                         hideNode = node.parentNode.querySelector(".authors-hide");
 
                     event.stopPropagation();
@@ -19,14 +19,12 @@
                         node.previousElementSibling.textContent = " - ";
                         hideNode.style.display = "block";
                         anchorNode.textContent = ' Show Less ';
-                        iconNode.classList.remove('fa-angle-double-down');
-                        iconNode.classList.add('fa-angle-double-up');
+                        iconNode.setAttribute('href', "/resources/svg/regular.svg#angle-double-up');
                     } else {
                         node.previousElementSibling.textContent = " ... ";
                         hideNode.style.display = "none";
                         anchorNode.textContent = ' Show More ';
-                        iconNode.classList.remove('fa-angle-double-up');
-                        iconNode.classList.add('fa-angle-double-down');
+                        iconNode.setAttribute('href', "/resources/svg/regular.svg#angle-double-down');
                     }
                 });
             }
