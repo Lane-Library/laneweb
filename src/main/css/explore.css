@@ -22,13 +22,10 @@
 	color: white;
 	fill: white;
 	margin-top: 14px;
-	margin-left: 16px;
+	margin-left: 14px;
 	vertical-align: middle;
 }
 
-.explore:last-of-type svg {
-	margin-left: 12px;
-}
 
 .explore .detail a {
 	font-size: 1.25em;
