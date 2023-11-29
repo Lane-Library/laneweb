@@ -6,9 +6,9 @@
         var triggers = document.querySelectorAll(".descriptionTrigger");
         triggers.forEach(function(node) {
             if (node.classList.contains("eresource")) {
-                node.innerHTML = "<a href=\"#\">Read Full Description <svg><use xlink:href=\"/resources/svg/regular.svg#angle-down\"></use></svg></a>";
+                node.innerHTML = "<a href=\"#\">Read Full Description<svg><use xlink:href=\"/resources/svg/regular.svg#angle-down\"></use></svg></a>";
             } else if (node.classList.contains("searchContent")) {
-                node.innerHTML = "<a href=\"#\">Abstract <svg><use xlink:href=\"/resources/svg/regular.svg#angle-down\"></use></svg></a>";
+                node.innerHTML = "<a href=\"#\">Abstract<svg><use xlink:href=\"/resources/svg/regular.svg#angle-down\"></use></svg></a>";
             }
         });
     };
