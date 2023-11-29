@@ -19,12 +19,12 @@
                         node.previousElementSibling.textContent = " - ";
                         hideNode.style.display = "block";
                         anchorNode.textContent = ' Show Less ';
-                        iconNode.setAttribute('href', "/resources/svg/regular.svg#angle-double-up');
+                        iconNode.setAttribute('href', '/resources/svg/regular.svg#angle-double-up');
                     } else {
                         node.previousElementSibling.textContent = " ... ";
                         hideNode.style.display = "none";
                         anchorNode.textContent = ' Show More ';
-                        iconNode.setAttribute('href', "/resources/svg/regular.svg#angle-double-down');
+                        iconNode.setAttribute('href', '/resources/svg/regular.svg#angle-double-down');
                     }
                 });
             }
