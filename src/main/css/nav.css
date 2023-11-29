@@ -321,6 +321,7 @@ ul .nav-menu {
 	.mobile-screen-menu a, .mobile-screen-menu a svg, .mobile-screen-menu .login a svg
 		{
 		color: black;
+		fill:black;
 		display: block;
 		margin:auto;
 		margin-bottom: 3px;
