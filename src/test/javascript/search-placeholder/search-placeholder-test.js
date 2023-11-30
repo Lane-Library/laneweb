@@ -12,7 +12,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         "test initially has default": function() {
             if (placeholderEnabled) {
-                Y.Assert.areEqual("default placeholder", this.input.placeholder);
+                Y.Assert.areEqual("All Search placeholder", this.input.placeholder);
             }  else {
                 Y.Assert.areEqual("default placeholder", this.input.value);
                 Y.Assert.areEqual("inputHint", this.input.className);
