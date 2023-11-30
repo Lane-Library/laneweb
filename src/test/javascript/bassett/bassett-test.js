@@ -19,15 +19,14 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testSurlineSubRegion : function() {
-            var li = Y.all('#bassett-menu li').item(1);
-            var i = li.one("i");
-            Y.Assert.isFalse(li.hasClass("enabled"));
-            Y.Assert.isTrue(i.hasClass("fa-circle-o"));
-            Y.Assert.isFalse(i.hasClass("fa-check-circle"));
+            var li = Y.all('#bassett-menu li').item(1),
+            use = li.one("use"),
+            svg = li.one("svg");
+            Y.Assert.isFalse(svg._node.classList.contains("bg-red"));
+            Y.Assert.areEqual("/resources/svg/regular.svg#square", use._node.href.baseVal);
             li.simulate('click');
-            Y.Assert.isTrue(li.hasClass("enabled"));
-            Y.Assert.isTrue(i.hasClass("fa-check-circle"));
-            Y.Assert.isFalse(i.hasClass("fa-circle-o"));
+            Y.Assert.areEqual("/resources/svg/solid.svg#square-check" , use._node.href.baseVal );
+            Y.Assert.isTrue(svg._node.classList.contains("bg-red"));
         },
 
         testFoo: function() {
