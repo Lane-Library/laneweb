@@ -16,7 +16,8 @@ span.fa-layers {
     height: auto;
 }
 
-svg.white,span.fa-layers svg {
+svg.white,
+span.fa-layers svg {
     fill: white;
 }
 
@@ -33,7 +34,8 @@ svg.red {
 }
 
 .fa-25x {
-  font-size: 2.5em; }
+    font-size: 2.5em;
+}
 
 .fa-fw {
     padding-right: 2px;
