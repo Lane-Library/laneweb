@@ -32,6 +32,9 @@ svg.red {
     fill: #8c1515;
 }
 
+.fa-25x {
+  font-size: 2.5em; }
+
 .fa-fw {
     padding-right: 2px;
 }
