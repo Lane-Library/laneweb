@@ -67,8 +67,8 @@ public class PatronRegistrationControllerTest {
     public final void testFormSubmitUserRegistration() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
-        expect(this.model.getAttribute("suEmail")).andReturn("suEmail");
-        expect(this.folioUserService.getUser("externalSystemId", "suEmail")).andReturn(Collections.emptyList());
+        expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.folioUserService.getUser("externalSystemId", "email")).andReturn(Collections.emptyList());
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
         expect(this.map.remove("user")).andReturn(null);
         expect(this.map.remove("auth")).andReturn(null);
@@ -85,8 +85,8 @@ public class PatronRegistrationControllerTest {
     public final void testFormSubmitUserRegistrationError() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
-        expect(this.model.getAttribute("suEmail")).andReturn("suEmail");
-        expect(this.folioUserService.getUser("externalSystemId", "suEmail")).andReturn(Collections.emptyList());
+        expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.folioUserService.getUser("externalSystemId", "email")).andReturn(Collections.emptyList());
         expect(this.folioUserService.addUser(isA(Map.class))).andReturn(false);
         replay(this.folioUserService, this.userDataBinder, this.sender, this.model, this.map);
         String redirect = this.controller.formSubmitUserRegistration(this.map, this.model, this.reqAttributes);
@@ -98,8 +98,8 @@ public class PatronRegistrationControllerTest {
     public final void testFormSubmitUserRegistrationException() {
         expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
-        expect(this.model.getAttribute("suEmail")).andReturn("suEmail");
-        expect(this.folioUserService.getUser("externalSystemId", "suEmail")).andThrow(new RESTException(new IOException()));
+        expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.folioUserService.getUser("externalSystemId", "email")).andThrow(new RESTException(new IOException()));
         replay(this.folioUserService, this.userDataBinder, this.unividDataBinder, this.sender, this.model, this.map);
         String redirect = this.controller.formSubmitUserRegistration(this.map, this.model, this.reqAttributes);
         assertTrue(redirect.contains("error"));
@@ -120,7 +120,7 @@ public class PatronRegistrationControllerTest {
         personal.put("lastName", "value_lastName");
         personal.put("firstName", "value_firstName");
         personal.put("middleName", "value_middleName");
-        personal.put("email", "value_suEmail");
+        personal.put("email", "value_email");
         personal.put("phone", "value_phone");
         address.put("addressLine1", "value_addressLine1");
         address.put("addressLine2", "value_addressLine2");
@@ -139,8 +139,8 @@ public class PatronRegistrationControllerTest {
         expect(this.model.addAttribute("firstName", "value_firstName")).andReturn(this.model);
         expect(this.request.getParameter("middleName")).andReturn("value_middleName").times(2);
         expect(this.model.addAttribute("middleName", "value_middleName")).andReturn(this.model);
-        expect(this.request.getParameter("suEmail")).andReturn("value_suEmail").times(2);
-        expect(this.model.addAttribute("suEmail", "value_suEmail")).andReturn(this.model);
+        expect(this.request.getParameter("email")).andReturn("value_email").times(2);
+        expect(this.model.addAttribute("email", "value_email")).andReturn(this.model);
         expect(this.request.getParameter("phone")).andReturn("value_phone").times(2);
         expect(this.model.addAttribute("phone", "value_phone")).andReturn(this.model);
         expect(this.request.getParameter("addressLine1")).andReturn("value_addressLine1").times(2);

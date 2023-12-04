@@ -61,7 +61,7 @@ public class PatronRegistrationController {
 
     private static final String USER_INPUT_CITY = "city";
 
-    private static final String USER_INPUT_EMAIL = "suEmail";
+    private static final String USER_INPUT_EMAIL = "email";
 
     private static final String USER_INPUT_FIRST_NAME = "firstName";
 
