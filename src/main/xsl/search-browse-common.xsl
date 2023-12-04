@@ -538,13 +538,9 @@
         <xsl:param name="eresource" />
         <xsl:variable name="prefix">
             <xsl:choose>
-                <xsl:when test="starts-with($eresource/s:recordId,'000')">
-                    in
-                </xsl:when>
-                <xsl:when test="'bib' = $eresource/s:recordType">
-                    L
-                </xsl:when>
-                <xsl:otherwise />
+                <xsl:when test="starts-with($eresource/s:recordId,'000')">in</xsl:when>
+                <xsl:when test="'bib' = $eresource/s:recordType">L</xsl:when>
+                <xsl:otherwise/>
             </xsl:choose>
         </xsl:variable>
         <xsl:value-of select="concat($prefix, $eresource/s:recordId)" />

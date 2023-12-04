@@ -14,9 +14,7 @@
     <xsl:param name="source" />
     <xsl:param name="url-encoded-query" />
     <xsl:variable name="guest-mode">
-        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">
-            true
-        </xsl:if>
+        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
     <xsl:variable name="pubmed-baseUrl">https://pubmed.ncbi.nlm.nih.gov/</xsl:variable>
     <xsl:include href="resourceListPagination.xsl" />
