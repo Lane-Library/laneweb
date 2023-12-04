@@ -221,8 +221,7 @@
         <xsl:choose>
             <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                 <div>
-                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}"
-                        rel="popup console 610 800">
+                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}"   rel="popup console 610 800">
                         <xsl:apply-templates select="$eresource/s:title" />
                     </a>
                 </div>
