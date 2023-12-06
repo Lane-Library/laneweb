@@ -384,11 +384,12 @@
                         </span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader">
+                        <span class="hldgsHeader hldgsTrigger">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
+                            <i class="fa-solid fa-angle-down"></i>
+                            <i class="fa-solid fa-angle-up"></i>
                         </span>
-                        <span class="hldgsTrigger" />
                     </xsl:otherwise>
                 </xsl:choose>
                 <div class="table-container">
