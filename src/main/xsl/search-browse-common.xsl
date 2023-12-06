@@ -214,7 +214,7 @@
         <xsl:variable name="eresource" select="$link/.." />
         <!-- use s:locationUrl for Lane Catalog records that point to a parent record -->
         <xsl:choose>
-            <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
+            <xsl:when test="f:isPrintRecordPointingToParent($eresource) and count($eresource/s:link[@type='lane-digital']) = 0">
                 <div>
                     <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
                         <xsl:apply-templates select="$eresource/s:title" />
@@ -388,11 +388,12 @@
                         </span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader">
+                        <span class="hldgsHeader hldgsTrigger">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
+                            <i class="fa-solid fa-angle-down"></i>
+                            <i class="fa-solid fa-angle-up"></i>
                         </span>
-                        <span class="hldgsTrigger" />
                     </xsl:otherwise>
                 </xsl:choose>
                 <div class="table-container">
@@ -489,7 +490,6 @@
                 <xsl:if test="contains(./s:locationUrl,'/view/bib/')">true</xsl:if>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="urls" select="$eresource/s:link/s:locationUrl"/>
         <xsl:sequence select="$eresource/s:total = 0 and contains($parentLink,'true')" />
     </xsl:function>
 
