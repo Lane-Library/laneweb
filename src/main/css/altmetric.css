@@ -4,7 +4,7 @@ div.altmetric-container {
 }
 
 span.altmetric-embed, .__dimensions_badge_embed__ {
-    margin-left: 12px !important;
+    margin-left: 12px;
     float: left;
 }
 
@@ -16,7 +16,10 @@ span.altmetric-embed, .__dimensions_badge_embed__ {
 @media ( max-width : 812px) {
     div.altmetric-container {
         float: unset;
-        margin: 12px -12px !important;
+        margin: 12px 0;
         display: block;
+    }
+    span.altmetric-embed, .__dimensions_badge_embed__ {
+        margin: 0 12px 0 0 !important;
     }
 }
