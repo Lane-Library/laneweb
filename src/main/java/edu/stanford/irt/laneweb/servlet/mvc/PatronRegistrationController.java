@@ -140,9 +140,10 @@ public class PatronRegistrationController {
         user.put(USER_INPUT_PREFERERED_CONTACT_TYPE_ID, "002");
         String userid = (String) model.getAttribute(USER_ID);
         if (userid != null && userid.contains("@")) {
+            userid = userid.toLowerCase();
             // @stanford.edu users: set folio username and use UnivId for external system ID
             // other users get SSO username as external system id and no folio username
-            if (userid.toLowerCase().endsWith("@stanford.edu")) {
+            if (userid.endsWith("@stanford.edu")) {
                 user.put(USER_NAME, userid.substring(0, userid.indexOf('@')));
                 user.put(EXTERNAL_SYSTEM_ID, model.getAttribute(edu.stanford.irt.laneweb.model.Model.UNIVID));
             } else {
