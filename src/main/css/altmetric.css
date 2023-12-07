@@ -8,6 +8,10 @@ span.altmetric-embed, .__dimensions_badge_embed__ {
     float: left;
 }
 
+.altmetric-hidden {
+    display: none;
+}
+
 .altmetric-embed img {
     height: 21px;
     width: unset;
