@@ -2,6 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
 
+    <xsl:param name="userid"/>
+
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
 
     <xsl:variable name="requests-host" select="'requests.stanford.edu'"/>
@@ -515,6 +517,7 @@
         <xsl:param name="eresource" />
         <xsl:if test="$eresource/s:recordType = 'pubmed' or $eresource/s:doi">
             <div class="altmetric-container">
+                <!-- citations -->
                 <span class="__dimensions_badge_embed__" data-legend="hover-bottom" data-style="large_rectangle" data-hide-zero-citations="true">
                     <xsl:choose>
                         <xsl:when test="$eresource/s:recordType = 'pubmed'">
@@ -526,17 +529,20 @@
                         <xsl:otherwise />
                     </xsl:choose>
                 </span>
-                <span class="altmetric-embed" data-badge-popover="bottom" data-hide-less-than="1">
-                    <xsl:choose>
-                        <xsl:when test="$eresource/s:recordType = 'pubmed'">
-                            <xsl:attribute name="data-pmid" select="$eresource/s:recordId"/>
-                        </xsl:when>
-                        <xsl:when test="$eresource/s:doi[1]">
-                            <xsl:attribute name="data-doi" select="$eresource/s:doi[1]"/>
-                        </xsl:when>
-                        <xsl:otherwise />
-                    </xsl:choose>
-                </span>
+                <!-- altmetric badges: only show for authenticated users -->
+                <xsl:if test="string-length($userid) &gt; 0">
+                    <span class="altmetric-embed" data-badge-popover="bottom" data-hide-less-than="1">
+                        <xsl:choose>
+                            <xsl:when test="$eresource/s:recordType = 'pubmed'">
+                                <xsl:attribute name="data-pmid" select="$eresource/s:recordId"/>
+                            </xsl:when>
+                            <xsl:when test="$eresource/s:doi[1]">
+                                <xsl:attribute name="data-doi" select="$eresource/s:doi[1]"/>
+                            </xsl:when>
+                            <xsl:otherwise />
+                        </xsl:choose>
+                    </span>
+                </xsl:if>
             </div>
         </xsl:if>
     </xsl:function>
