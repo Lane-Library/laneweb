@@ -43,8 +43,8 @@ addEventListener("load", function() {
                 });
                 if (qString.length) {
                     qString = qString.replace(/\)\(/g, ") AND (");
-                    if (qString.indexOf('(') === 0 && qString.indexOf(')') === qString.length - 1) {
-                        qString = qString.replace(/(\(|\))/g, '');
+                    if (qString.startsWith('(') && qString.indexOf(')') === qString.length - 1) {
+                        qString = qString.replace(/[()]/g, '');
                     }
                 }
                 return qString;
