@@ -57,8 +57,8 @@
             }
         });
         query = query.replace(/\)\(/g, ") AND (");
-        if (query.indexOf('(') === 0 && query.indexOf(')') === query.length - 1) {
-            query = query.replace(/(\(|\))/g, '');
+        if (query.startsWith('(') && query.indexOf(')') === query.length - 1) {
+            query = query.replace(/[()]/g, '');
         }
         L.search.setQuery(query);
     });
