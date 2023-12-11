@@ -2,10 +2,10 @@
 
     "use strict";
 
-    var fields = [],
+    let fields = [],
 
         PicoField = function(input) {
-            var suggest,
+            let suggest,
                 self = this;
             suggest = new L.Suggest(input);
             suggest.on("select", function() {
@@ -49,9 +49,9 @@
     });
 
     fields.on("input", function() {
-        var query = "";
+        let query = "";
         fields.forEach(function(field) {
-            var value = field.getValue();
+            let value = field.getValue();
             if (value) {
                 query += "(" + value + ")";
             }

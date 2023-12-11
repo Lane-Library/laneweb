@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
 "use strict";
 
-var searchPicoToggleTestCase = new Y.Test.Case({
+let searchPicoToggleTestCase = new Y.Test.Case({
 
     on: document.querySelector(".pico-on"),
 
@@ -35,11 +35,11 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     "test on click": function() {
         this.on.classList.add("pico-on-active");
         this.toggle.classList.add("pico-toggle-active");
-        var active;
+        let active;
         L.once("picoToggle:change", function(event) {
             active = event.active;
         });
-        var click = document.createEvent("MouseEvent");
+        let click = document.createEvent("MouseEvent");
         click.initEvent("click", true, false);
         this.on.dispatchEvent(click);
         Y.Assert.isTrue(active);
@@ -51,11 +51,11 @@ var searchPicoToggleTestCase = new Y.Test.Case({
     "test off click": function() {
         this.off.classList.add("pico-off-active");
         this.toggle.classList.add("pico-toggle-active");
-        var active;
+        let active;
         L.once("picoToggle:change", function(event) {
             active = event.active;
         });
-        var click = document.createEvent("MouseEvent");
+        let click = document.createEvent("MouseEvent");
         click.initEvent("click", true, false);
         this.off.dispatchEvent(click);
         Y.Assert.isFalse(active);

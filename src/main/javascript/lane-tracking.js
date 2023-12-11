@@ -2,12 +2,12 @@
 
     "use strict";
 
-    var model = L.Model,
+    let model = L.Model,
         searchSource = model.get(model.URL_ENCODED_SOURCE),
         Tracker = function() {
             //TODO more thorough documentation
-            var getSearchResultsTrackingData = function(link) {
-                var trackingData = {},
+            let getSearchResultsTrackingData = function(link) {
+                let trackingData = {},
                     
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
                     trackingData.value = link.closest("li").dataset['index'];
@@ -24,7 +24,7 @@
                     return trackingData;
             },
             getEventTrackingDataByAncestor = function(link) {
-                var i, trackingData = {},
+                let i, trackingData = {},
                 handlers = [
                             {selector:"#bookmarks", category:"lane:bookmarkClick"},
                             {selector:".yui3-bookmark-editor-content", category:"lane:bookmarkClick"},
@@ -46,7 +46,7 @@
                 return trackingData;
             },
             getEventTrackingData = function(event) {
-                var link = event.target.closest("a"),
+                let link = event.target.closest("a"),
                     trackingData = {};
                 if (link.closest(".lwSearchResults")) {
                     trackingData = getSearchResultsTrackingData(link);
@@ -72,7 +72,7 @@
                 return node.hostname.match('^(?:login\\.)?laneproxy.stanford.edu$');
             },
             isProxyOrCMELogin = function(link) {
-                var search = link.search,
+                let search = link.search,
                     pathname = link.pathname,
                     returnValue = false;
                 if (search && search.indexOf("url=") > -1 && /(secure\/apps\/proxy\/credential|redirect\/cme)/.test(pathname)) {
@@ -81,15 +81,15 @@
                 return returnValue;
             },
             isSecureVideo = function(link) {
-                var pathname = link.pathname;
+                let pathname = link.pathname;
                 return (pathname && (/\/secure\/edtech\//).test(pathname));
             },
             isLocalPopup = function(node) {
-                var rel = node.getAttribute("rel");
+                let rel = node.getAttribute("rel");
                 return rel && rel.indexOf("popup local") === 0;
             },
             getTrackedHost = function(node) {
-                var host, pathname = node.pathname;
+                let host, pathname = node.pathname;
                 if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
@@ -103,7 +103,7 @@
                 return host;
             },
             getTrackedPath = function(node) {
-                var path, host, pathname = node.pathname;
+                let path, host, pathname = node.pathname;
                 if (isLocalPopup(node)) {
                     path = location.pathname;
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
@@ -125,7 +125,7 @@
                 return path;
             },
             getTrackedQuery = function(node) {
-                var query, host, path;
+                let query, host, path;
                 if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                     host = (node.search.substring(node.search.indexOf('//') + 2));
                     if (host.indexOf('/') > -1) {
@@ -144,7 +144,7 @@
                 return query;
             },
             getTrackedExternal = function(node) {
-                var external;
+                let external;
                 if (!node.hostname) {
                     external = false;
                 } else if (isProxyOrCMELogin(node) || isProxyHost(node) || isSecureVideo(node)) {
@@ -155,7 +155,7 @@
                 return external;
             },
             getPageviewTrackingData = function(event) {
-                var node = event.target,
+                let node = event.target,
                     trackingData = {},
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
                 if (node.nodeName !== "A" && node.querySelector("a")) {
@@ -177,7 +177,7 @@
                 return trackingData;
             },
             isTrackableLocalClick = function(link) {
-                var isTrackable, pathname = link.pathname;
+                let isTrackable, pathname = link.pathname;
                 // rely on page tracking for \.html$ and \/$pages 
                 if ((/\.html$/).test(pathname) || (/libguides/).test(pathname) || (/\/$/).test(pathname)) {
                     isTrackable =  false;
@@ -188,7 +188,7 @@
                 return isTrackable;
             },
             getTitleFromImg = function(node) {
-                var i, title, img = node.querySelectorAll('img');
+                let i, title, img = node.querySelectorAll('img');
                 for (i = 0; i < img.length; i++) {
                     if (img[i].alt) {
                         title = img[i].alt;
@@ -205,7 +205,7 @@
                 //figures out the title string for a node
                 getTrackedTitle: function(node) {
                     //if there is a title attribute, use that.
-                    var title = node.title;
+                    let title = node.title;
                     //next try alt attribute.
                     if (!title) {
                         title = node.alt;
@@ -230,7 +230,7 @@
                     return title;
                 },
                 isTrackableAsEvent: function(event) {
-                    var link = event.target.closest("a"),
+                    let link = event.target.closest("a"),
                         isTrackable = false;
                     if (link) {
                         // bookmarklet drag or right-click or child of .seeAll
@@ -243,7 +243,7 @@
                     return isTrackable;
                 },
                 isTrackableAsPageview: function(theLink) {
-                    var isTrackable = false,
+                    let isTrackable = false,
                         link = theLink;
                     if (link.isTrackableAsPageView) {
                         isTrackable = true;
@@ -262,7 +262,7 @@
                     return isTrackable;
                 },
                 trackEvent: function(event) {
-                    var trackingData;
+                    let trackingData;
                     if (event.type === "click" && this.isTrackableAsPageview(event.target)) {
                         trackingData = getPageviewTrackingData(event);
                         this.fire("trackablePageview", {
@@ -289,7 +289,7 @@
         }();
 
         document.addEventListener('click', function(e) {
-            var leftClick = e.button === 0,
+            let leftClick = e.button === 0,
                 t = e.target,
                 setLocation = function() {
                     L.setLocationHref(t.href);

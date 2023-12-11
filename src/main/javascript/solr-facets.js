@@ -4,7 +4,7 @@
 
     if (document.querySelector("#solr-date-form")) {
 
-        var ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year", 
+        let ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year", 
             searchForm = document.querySelector(".search-form"),
             dateSolrForm = document.querySelector("#solr-date-form"),
             startYearInput = document.querySelector(".date.start"),
@@ -14,7 +14,7 @@
             facets = searchForm.querySelector("input[name=facets]"),
             errorMessage  = document.querySelector("#facet-error-message"),
             model = function(input1, input2) {
-                var m = {
+                let m = {
                     startYear: input1,
                     endYear: input2,
                 }
@@ -50,7 +50,7 @@
                         }
                     },
                     setYearFromFacets: function() {
-                        var currentYearFacetValue = 'year:[' + model.startYear.value + ' TO ' + model.endYear.value + ']';
+                        let currentYearFacetValue = 'year:[' + model.startYear.value + ' TO ' + model.endYear.value + ']';
                         if (model.startYear.value != '' || model.endYear.value != '') {
                             if (facets && facets.value != '') {
                                 facets.value = facets.value + '::' + currentYearFacetValue;

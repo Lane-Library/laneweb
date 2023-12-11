@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var searchPicoTestCase = new Y.Test.Case({
+    let searchPicoTestCase = new Y.Test.Case({
 
         name: "Search Pico TestCase",
 
@@ -14,7 +14,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         "test p to q": function() {
             this.p.value = "p";
-            var e = document.createEvent("UIEvents");
+            let e = document.createEvent("UIEvents");
             e.initEvent("input", true, false);
             this.p.dispatchEvent(e);
             Y.Assert.areEqual("p", this.q.value);
@@ -23,7 +23,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         "test p and i to q": function() {
             this.p.value = "P";
             this.i.value = "I"
-                var e = document.createEvent("UIEvents");
+                let e = document.createEvent("UIEvents");
             e.initEvent("input", true, false);
             this.p.dispatchEvent(e);
             this.i.dispatchEvent(e);

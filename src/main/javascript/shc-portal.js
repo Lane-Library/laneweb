@@ -3,11 +3,11 @@ addEventListener("load", function() {
     "use strict";
 
     (function() {
-        var forms = document.querySelectorAll('form');
+        let forms = document.querySelectorAll('form');
 
         forms.forEach(function(form) {
             form.addEventListener("submit", function(event) {
-                var trackingData = {}, re;
+                let trackingData = {}, re;
                 trackingData.title = event.target.name;
                 if (!trackingData.title && event.target.className === 'search-form') {
                     trackingData.title = 'SHC-Epic Lane search ' + L.search.getSource();
@@ -29,13 +29,13 @@ addEventListener("load", function() {
     })();
 
     (function() {
-        var form = document.querySelector('.verticalPico'),
+        let form = document.querySelector('.verticalPico'),
             inputs = form.querySelectorAll('input[type="text"]'),
             queryInput = form.querySelector("input[name=q]"),
             searchTerms = document.querySelector(".search-form input[name=q]"),
             //build query terms from pico inputs:
             getPicoQuery = function() {
-                var qString = '';
+                let qString = '';
                 inputs.forEach(function(input) {
                     if (input.value) {
                         qString += "(" + input.value + ")";
@@ -50,7 +50,7 @@ addEventListener("load", function() {
                 return qString;
             },
             eventHandler = function() {
-                var picoQuery = getPicoQuery();
+                let picoQuery = getPicoQuery();
                 if (picoQuery) {
                     searchTerms.value = picoQuery;
                     queryInput.value = picoQuery;
@@ -58,7 +58,7 @@ addEventListener("load", function() {
             };
 
         inputs.forEach(function(input) {
-            var suggest;
+            let suggest;
             suggest = new L.Suggest(input);
             suggest.on("suggest:select", eventHandler);
             input.addEventListener("blur", eventHandler);

@@ -2,16 +2,16 @@ YUI({fetchCSS:false}).use("test", "test-console", "dom", "node-event-simulate", 
 
     "use strict";
 
-    var tooltipTestCase = new Y.Test.Case({
+    let tooltipTestCase = new Y.Test.Case({
 
         name: 'Lane Tooltip Test Case',
 
         testStaysOnPage: function() {
-            var b = Y.one("#b");
-            var right = Y.DOM.viewportRegion().right;
-            var inside = false;
-            var eventHandle = L.ToolTips.after("visibleChange", function(e) {
-                var boundingBox = this.get("boundingBox");
+            let b = Y.one("#b");
+            let right = Y.DOM.viewportRegion().right;
+            let inside = false;
+            let eventHandle = L.ToolTips.after("visibleChange", function(e) {
+                let boundingBox = this.get("boundingBox");
                 inside = Y.DOM.inViewportRegion(Y.Node.getDOMNode(boundingBox));
                 eventHandle.detach();
             });

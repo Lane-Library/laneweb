@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var laneYouTubeTestCase = new Y.Test.Case({
+    let laneYouTubeTestCase = new Y.Test.Case({
 
         name: 'Lane YouTube Test Case',
 

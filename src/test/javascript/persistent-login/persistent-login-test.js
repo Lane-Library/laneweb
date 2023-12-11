@@ -21,7 +21,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             }
     };
 
-    var persistentLoginTestCase = new Y.Test.Case({
+    let persistentLoginTestCase = new Y.Test.Case({
 
         name : 'persistent-login Test Case',
 
@@ -41,9 +41,9 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         "test unchecked is persistent login" : function() {
-            var node = document.querySelector("#is-persistent-login");
+            let node = document.querySelector("#is-persistent-login");
             node.checked = false;
-            var event = document.createEvent("Event");
+            let event = document.createEvent("Event");
             event.initEvent("change", false, true); 
             node.dispatchEvent(event);
             Y.Assert.areSame("remove", this.cookieArgs.name);
@@ -51,9 +51,9 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         "test checked is persistent login" : function() {
-            var node = document.querySelector("#is-persistent-login");
+            let node = document.querySelector("#is-persistent-login");
             node.checked = true;
-            var event = document.createEvent("Event");
+            let event = document.createEvent("Event");
             event.initEvent("change", false, true); 
             node.dispatchEvent(event);
             Y.Assert.areSame("set", this.cookieArgs.name);

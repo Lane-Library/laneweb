@@ -4,14 +4,14 @@
   
 if (document.querySelector(".solrFacets")) {
 
-        var model = L.Model,
+        let model = L.Model,
             basePath = model.get(model.BASE_PATH) || "",
             searchForm = document.querySelector(".search-form"),
             RESULT_NOT_FOUND ="No match found",
             facetsNode = searchForm.querySelector("input[name=facets]"),
             
             FacetSuggestion = function(input) {
-                var facet = input.dataset.facet,
+                let facet = input.dataset.facet,
                 searchTerm = input.dataset.searchterm,
                 facets = input.dataset.facets,
                 SOURCE_BASE = basePath + '/apps/solr/facet/suggest?q=' + searchTerm + '&contains={query}&facet=' + facet +'&facets='+ encodeURI(facets),

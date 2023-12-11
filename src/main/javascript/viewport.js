@@ -2,8 +2,8 @@
 
     "use strict";
 
-    var viewport = function() {
-            var scrolled = false,
+    let viewport = function() {
+            let scrolled = false,
                 updateScrolled = function() {
                     scrolled = true;
                 },
@@ -20,7 +20,7 @@
                 // viewportMultiplier: how many times the viewport's current height
                 // to still be considered in or near the viewport
                 nearView: function(node, viewportMultiplier) {
-                    var rect = node.getBoundingClientRect();
+                    let rect = node.getBoundingClientRect();
                     return rect.bottom >= 0 && rect.top <= viewportMultiplier * (window.innerHeight || document.documentElement.clientHeight);
                 },
                 inView: function(node) {

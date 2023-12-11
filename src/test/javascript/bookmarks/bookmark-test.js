@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var Bookmark = L.Bookmark,
+    let Bookmark = L.Bookmark,
 
     bookmarkTestCase = new Y.Test.Case({
 
@@ -23,7 +23,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testNewBookmarkNoUrl : function() {
-            var bookmark = null;
+            let bookmark = null;
             try {
                 bookmark = new Bookmark(null, "url");
             } catch(e) {}
@@ -31,7 +31,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testNewBookmarkNoLabel : function() {
-            var bookmark = null;
+            let bookmark = null;
             try {
                 bookmark = new Bookmark("label", null);
             } catch(e) {}
@@ -63,7 +63,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testChangeEventSetLabel : function() {
-            var label = this.bookmark.getLabel();
+            let label = this.bookmark.getLabel();
             this.bookmark.on("valueChange", function(event) {
                 label = event.newLabel;
             });
@@ -72,7 +72,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testSetLabelPreventDefault : function() {
-            var label = this.bookmark.getLabel();
+            let label = this.bookmark.getLabel();
             this.bookmark.on("valueChange", function(event) {
                 event.preventDefault();
             });
@@ -81,7 +81,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testChangeEventSetUrl : function() {
-            var url = this.bookmark.getUrl();
+            let url = this.bookmark.getUrl();
             this.bookmark.on("valueChange", function(event) {
                 url = event.newUrl;
             });
@@ -90,7 +90,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testSetUrlPreventDefault : function() {
-            var url = this.bookmark.getUrl();
+            let url = this.bookmark.getUrl();
             this.bookmark.on("valueChange", function(event) {
                 event.preventDefault();
             });
@@ -99,8 +99,8 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testChangeEventSetValues : function() {
-            var label = this.bookmark.getLabel();
-            var url = this.bookmark.getUrl();
+            let label = this.bookmark.getLabel();
+            let url = this.bookmark.getUrl();
             this.bookmark.on("valueChange", function(event) {
                 label = event.newLabel;
                 url = event.newUrl;
@@ -111,8 +111,8 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testSetValuesPreventDefault : function() {
-            var label = this.bookmark.getLabel();
-            var url = this.bookmark.getUrl();
+            let label = this.bookmark.getLabel();
+            let url = this.bookmark.getUrl();
             this.bookmark.on("valueChange", function(event) {
                 event.preventDefault();
             });
