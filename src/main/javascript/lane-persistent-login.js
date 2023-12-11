@@ -3,7 +3,7 @@
     "use strict";
 
     // the check box for persistent login on the discovery login page
-    var    persistentLoginCheckbox = document.getElementById('is-persistent-login');
+    let persistentLoginCheckbox = document.getElementById('is-persistent-login');
     
     // handle checking or unchecking the check box on the discovery login page
     if (persistentLoginCheckbox) {
