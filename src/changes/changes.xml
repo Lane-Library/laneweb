@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2023-12-11" version="3.12.12" description="bug fix and update release">
+            <action date="2023-11-05" dev="ryanmax" issue="LANEWEB-11252" type="fix">
+                holdings not showing in results view
+            </action>
+            <action date="2023-11-05" dev="ryanmax" issue="LANEWEB-11260" type="update">
+                move irt-cocoon-sitemap XSD files out of AFS
+            </action>
+        </release>
          <release date="2023-12-04" version="3.12.11" description="bug fix and update release">
             <action date="2023-11-14" dev="alainb" issue="LANEWEB-11248" type="fix">
                 Facebook icon smaller than the others
