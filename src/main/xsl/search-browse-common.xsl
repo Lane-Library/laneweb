@@ -2,6 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
 
+    <xsl:param name="ipgroup" />
+
     <xsl:param name="userid"/>
 
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
@@ -9,6 +11,12 @@
     <xsl:variable name="requests-host" select="'requests.stanford.edu'"/>
 
     <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'"/>
+
+    <xsl:variable name="show-altmetric">
+        <xsl:if test="string-length($userid) &gt; 0 or $ipgroup = 'SU' or $ipgroup = 'SHC' or $ipgroup = 'LPCH'">
+            <xsl:text>true</xsl:text>
+        </xsl:if>
+    </xsl:variable>
 
     <xsl:template match="s:desc-linebreak">
         <br />
@@ -529,8 +537,8 @@
                         <xsl:otherwise />
                     </xsl:choose>
                 </span>
-                <!-- altmetric badges: only show for authenticated users -->
-                <xsl:if test="string-length($userid) &gt; 0">
+                <!-- altmetric badges: only show for Stanford-authenticated users -->
+                <xsl:if test="$show-altmetric = 'true'">
                     <span class="altmetric-embed" data-badge-popover="bottom" data-hide-less-than="1">
                         <xsl:choose>
                             <xsl:when test="$eresource/s:recordType = 'pubmed'">

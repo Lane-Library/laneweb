@@ -5,8 +5,6 @@
 
     <xsl:param name="facets" />
 
-    <xsl:param name="ipgroup" />
-
     <xsl:param name="proxy-links" />
 
     <xsl:param name="page" />

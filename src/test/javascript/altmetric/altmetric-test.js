@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", "node-event-simulate", function(Y) {
 
     "use strict";
 
@@ -6,9 +6,11 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         name: "altmetric Test Case",
 
-        testAltmetricAuthd: function() {
-            let scripts = document.getElementsByTagName('script');
-            Y.Assert.isTrue(scripts.length > 8);
+        testAltmetric: function() {
+            this.wait(function() {
+                let loadedBadgeJs = document.querySelectorAll("script[src='https://badge.dimensions.ai/badge.js'], script[src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js']");
+                Y.Assert.isTrue(loadedBadgeJs.length == 2);
+            }, 200);
         }
     });
 
