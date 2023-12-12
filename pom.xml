@@ -97,7 +97,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>12.3</version>
+            <version>12.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -250,7 +250,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>catalog</artifactId>
-            <version>3.9.16</version>
+            <version>3.9.17</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -277,7 +277,7 @@
         <dependency>
             <groupId>io.lettuce</groupId>
             <artifactId>lettuce-core</artifactId>
-            <version>6.2.6.RELEASE</version>
+            <version>6.3.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -308,7 +308,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.82</version>
+            <version>9.0.83</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -520,7 +520,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>5.0.0</version>
+                <version>7.0.0</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
