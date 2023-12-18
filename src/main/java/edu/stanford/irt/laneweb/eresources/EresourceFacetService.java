@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
@@ -16,6 +18,9 @@ public class EresourceFacetService extends AbstractRestService {
 
     RESTService restService;
 
+    private static final Logger log = LoggerFactory.getLogger(EresourceFacetService.class);
+
+    
     public EresourceFacetService(final URI uri, final RESTService restService) {
         super(uri);
         this.restService = restService;
@@ -31,6 +36,7 @@ public class EresourceFacetService extends AbstractRestService {
         parameters.add(new BasicNameValuePair("facetMinCount", String.valueOf(facetMinCount)));
         parameters.add(new BasicNameValuePair("facetSort", facetSort.name()));
         URI uri = this.getURIWithParameters(path, null, parameters);
+        log.info("EresourceFacetService facetByField {}", uri);
         return this.restService.getObject(uri, FACET_PAGE_ERESOURCES_TYPE);
     }
 
@@ -43,6 +49,7 @@ public class EresourceFacetService extends AbstractRestService {
         parameters.add(new BasicNameValuePair("filters", filters));
         parameters.add(new BasicNameValuePair("facetMinCount", String.valueOf(facetMinCount)));
         URI uri = this.getURIWithParameters(path, null, parameters);
+        log.info("EresourceFacetService facetByFieldContains {}", uri);
         return this.restService.getObject(uri, FACET_PAGE_ERESOURCES_TYPE);
     }
 
@@ -52,6 +59,7 @@ public class EresourceFacetService extends AbstractRestService {
         parameters.add(new BasicNameValuePair("filters", filters));
         parameters.add(new BasicNameValuePair("facetLimit", String.valueOf(facetLimit)));
         URI uri = this.getURIWithParameters(path, null, parameters);
+        log.info("EresourceFacetService facetByManyFields {}", uri);
         return this.restService.getObject(uri, FACET_PAGE_ERESOURCES_TYPE);
     }
 }
