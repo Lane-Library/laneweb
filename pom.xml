@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>135-springsix</version>
+        <version>142-springsix-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.12.10-SNAPSHOT</version>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.9.1</version>
+            <version>5.10.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
