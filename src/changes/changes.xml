@@ -5,6 +5,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2023-12-18" version="3.12.13" description="bug fix and update release">
+            <action date="2023-11-14" dev="ryanmax" issue="LANEWEB-11247" type="update">
+                Altmetric and Dimensions citation widgets in Lane Search and browse results
+            </action>
+         </release>
          <release date="2023-12-11" version="3.12.12" description="bug fix and update release">
             <action date="2023-11-05" dev="ryanmax" issue="LANEWEB-11252" type="fix">
                 holdings not showing in results view
