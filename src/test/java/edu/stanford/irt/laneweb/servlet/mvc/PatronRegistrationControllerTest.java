@@ -66,9 +66,10 @@ public class PatronRegistrationControllerTest {
     @Test
     public final void testFormSubmitUserRegistration() {
         expect(this.model.asMap()).andReturn(this.map);
+        expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
-        expect(this.folioUserService.getUser("externalSystemId", "email")).andReturn(Collections.emptyList());
+        expect(this.folioUserService.getUser("username", "externalSystemId", "email")).andReturn(Collections.emptyList());
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
         expect(this.map.remove("user")).andReturn(null);
         expect(this.map.remove("auth")).andReturn(null);
@@ -84,9 +85,10 @@ public class PatronRegistrationControllerTest {
     @Test
     public final void testFormSubmitUserRegistrationError() {
         expect(this.model.asMap()).andReturn(this.map);
+        expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
-        expect(this.folioUserService.getUser("externalSystemId", "email")).andReturn(Collections.emptyList());
+        expect(this.folioUserService.getUser("username", "externalSystemId", "email")).andReturn(Collections.emptyList());
         expect(this.folioUserService.addUser(isA(Map.class))).andReturn(false);
         replay(this.folioUserService, this.userDataBinder, this.sender, this.model, this.map);
         String redirect = this.controller.formSubmitUserRegistration(this.map, this.model, this.reqAttributes);
@@ -97,9 +99,10 @@ public class PatronRegistrationControllerTest {
     @Test
     public final void testFormSubmitUserRegistrationException() {
         expect(this.model.asMap()).andReturn(this.map);
+        expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
-        expect(this.folioUserService.getUser("externalSystemId", "email")).andThrow(new RESTException(new IOException()));
+        expect(this.folioUserService.getUser("username", "externalSystemId", "email")).andThrow(new RESTException(new IOException()));
         replay(this.folioUserService, this.userDataBinder, this.unividDataBinder, this.sender, this.model, this.map);
         String redirect = this.controller.formSubmitUserRegistration(this.map, this.model, this.reqAttributes);
         assertTrue(redirect.contains("error"));

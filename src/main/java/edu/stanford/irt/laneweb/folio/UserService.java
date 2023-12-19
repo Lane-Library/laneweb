@@ -7,5 +7,5 @@ public interface UserService {
 
     public boolean addUser(final Map<String, Object> user);
 
-    public List<Map<String, Object>> getUser(final String externalSystemId, final String email);
+    public List<Map<String, Object>> getUser(final String username, final String externalSystemId, final String email);
 }

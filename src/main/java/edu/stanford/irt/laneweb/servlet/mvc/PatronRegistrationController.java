@@ -81,7 +81,7 @@ public class PatronRegistrationController {
 
     private static final String USER_INPUT_ZIP_CODE = "zip";
 
-    private static final String USER_NAME = "username";
+    private static final String USERNAME = "username";
 
     private UserService folioUserService;
 
@@ -104,9 +104,8 @@ public class PatronRegistrationController {
             final Model model, final RedirectAttributes atts) {
         Map<String, Object> map = model.asMap();
         try {
-            if (!this.folioUserService
-                    .getUser((String) user.get(EXTERNAL_SYSTEM_ID), (String) model.getAttribute(USER_INPUT_EMAIL))
-                    .isEmpty()) {
+            if (!this.folioUserService.getUser((String) user.get(USERNAME), (String) user.get(EXTERNAL_SYSTEM_ID),
+                    (String) model.getAttribute(USER_INPUT_EMAIL)).isEmpty()) {
                 return ERROR_USER_EXISTS_PAGE;
             }
             if (this.folioUserService.addUser(user)) {
@@ -141,12 +140,13 @@ public class PatronRegistrationController {
         String userid = (String) model.getAttribute(USER_ID);
         if (userid != null && userid.contains("@")) {
             userid = userid.toLowerCase();
-            // @stanford.edu users: set folio username and use UnivId for external system ID
-            // other users get SSO username as external system id and no folio username
+            // @stanford.edu users: use SUNetID/userid as FOLIO username, UnivId for FOLIO external system ID
+            // hospital users: use SSO userid for both FOLIO username and external system ID
             if (userid.endsWith("@stanford.edu")) {
-                user.put(USER_NAME, userid.substring(0, userid.indexOf('@')));
+                user.put(USERNAME, userid.substring(0, userid.indexOf('@')));
                 user.put(EXTERNAL_SYSTEM_ID, model.getAttribute(edu.stanford.irt.laneweb.model.Model.UNIVID));
             } else {
+                user.put(USERNAME, userid);
                 user.put(EXTERNAL_SYSTEM_ID, userid);
             }
             // leave this in the model so staff see SSO username in the notification email

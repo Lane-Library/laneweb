@@ -11,7 +11,8 @@ public class RESTUserService implements UserService {
 
     private static final String ENDPOINT_PATH_FORMAT = "users/user";
 
-    private static final String ENDPOINT_QUERY_FORMAT = ENDPOINT_PATH_FORMAT + "?externalSystemId=%s&email=%s";
+    private static final String ENDPOINT_QUERY_FORMAT = ENDPOINT_PATH_FORMAT
+            + "?username=%s&externalSystemId=%s&email=%s";
 
     private static final TypeReference<List<Map<String, Object>>> TYPE = new TypeReference<>() {
     };
@@ -32,8 +33,8 @@ public class RESTUserService implements UserService {
     }
 
     @Override
-    public List<Map<String, Object>> getUser(final String externalSystemId, final String email) {
-        String pathAndQuery = String.format(ENDPOINT_QUERY_FORMAT, externalSystemId, email);
+    public List<Map<String, Object>> getUser(final String username, final String externalSystemId, final String email) {
+        String pathAndQuery = String.format(ENDPOINT_QUERY_FORMAT, username, externalSystemId, email);
         URI uri = this.catalogServiceURI.resolve(pathAndQuery);
         return this.restService.getObject(uri, TYPE);
     }
