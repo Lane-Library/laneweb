@@ -8,16 +8,16 @@ YUI().use("test", "test-console", function(Y) {
         });
     });
 
-    var shcPortalTestCase = new Y.Test.Case({
+    let shcPortalTestCase = new Y.Test.Case({
 
         name: "SHC Portal TestCase",
 
         "test tracking uptodate": function() {
-            var event;
-            var handle = L.on("tracker:trackablePageview", function(e) {
+            let event;
+            let handle = L.on("tracker:trackablePageview", function(e) {
                 event = e;
             });
-            var submit = document.createEvent("Event");
+            let submit = document.createEvent("Event");
             submit.initEvent("submit", true, true); 
             document.querySelector("form").dispatchEvent(submit);
             handle.detach();
@@ -28,11 +28,11 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test tracking lane search": function() {
-            var event;
-            var handle = L.on("tracker:trackablePageview", function(e) {
+            let event;
+            let handle = L.on("tracker:trackablePageview", function(e) {
                 event = e;
             });
-            var submit = document.createEvent("Event");
+            let submit = document.createEvent("Event");
             submit.initEvent("submit", false, true); 
             document.querySelector(".search-form").dispatchEvent(submit);
             handle.detach();
@@ -43,11 +43,11 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test tracking unexpected search": function() {
-            var event = null;
-            var handle = L.on("tracker:trackablePageview", function(e) {
+            let event = null;
+            let handle = L.on("tracker:trackablePageview", function(e) {
                 event = e;
             });
-            var submit = document.createEvent("Event");
+            let submit = document.createEvent("Event");
             submit.initEvent("submit", false, true); 
             document.querySelector("#unexpected").dispatchEvent(submit);
             handle.detach();
@@ -55,14 +55,14 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test pico": function() {
-            var pInput = document.querySelector("input[name='p']");
-            var iInput = document.querySelector("input[name='i']");
-            var qInput = document.querySelectorAll("input[name='q']");
+            let pInput = document.querySelector("input[name='p']");
+            let iInput = document.querySelector("input[name='i']");
+            let qInput = document.querySelectorAll("input[name='q']");
             pInput.value = "P";
             iInput.value = "I";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            var blur = document.createEvent("Event");
+            let blur = document.createEvent("Event");
             blur.initEvent("blur", false, true); 
             pInput.dispatchEvent(blur);
             Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(0).value);
@@ -70,14 +70,14 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test pico no query": function() {
-            var pInput = document.querySelector("input[name='p']");
-            var iInput = document.querySelector("input[name='i']");
-            var qInput = document.querySelectorAll("input[name='q']");
+            let pInput = document.querySelector("input[name='p']");
+            let iInput = document.querySelector("input[name='i']");
+            let qInput = document.querySelectorAll("input[name='q']");
             pInput.value = "";
             iInput.value = "";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            var blur = document.createEvent("Event");
+            let blur = document.createEvent("Event");
             blur.initEvent("blur", false, true); 
             pInput.dispatchEvent(blur);
             Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(0).value);
@@ -85,14 +85,14 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test pico parens query": function() {
-            var pInput = document.querySelector("input[name='p']");
-            var iInput = document.querySelector("input[name='i']");
-            var qInput = document.querySelectorAll("input[name='q']");
+            let pInput = document.querySelector("input[name='p']");
+            let iInput = document.querySelector("input[name='i']");
+            let qInput = document.querySelectorAll("input[name='q']");
             pInput.value = "(A";
             iInput.value = "";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            var blur = document.createEvent("Event");
+            let blur = document.createEvent("Event");
             blur.initEvent("blur", false, true); 
             pInput.dispatchEvent(blur);
             Y.Assert.areEqual("A", document.querySelectorAll("input[name='q']").item(0).value);
@@ -100,14 +100,14 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test keyup": function() {
-            var pInput = document.querySelector("input[name='p']");
-            var iInput = document.querySelector("input[name='i']");
-            var qInput = document.querySelectorAll("input[name='q']");
+            let pInput = document.querySelector("input[name='p']");
+            let iInput = document.querySelector("input[name='i']");
+            let qInput = document.querySelectorAll("input[name='q']");
             pInput.value = "P";
             iInput.value = "I";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            var keyup = document.createEvent("Event");
+            let keyup = document.createEvent("Event");
             keyup.initEvent("keyup", false, true); 
             pInput.dispatchEvent(keyup);
             Y.Assert.areEqual("(P) AND (I)", document.querySelectorAll("input[name='q']").item(0).value);
@@ -115,14 +115,14 @@ YUI().use("test", "test-console", function(Y) {
         },
 
         "test keyup no values": function() {
-            var pInput = document.querySelector("input[name='p']");
-            var iInput = document.querySelector("input[name='i']");
-            var qInput = document.querySelectorAll("input[name='q']");
+            let pInput = document.querySelector("input[name='p']");
+            let iInput = document.querySelector("input[name='i']");
+            let qInput = document.querySelectorAll("input[name='q']");
             pInput.value = "";
             iInput.value = "";
             qInput.item(0).value = "";
             qInput.item(1).value = "";
-            var keyup = document.createEvent("Event");
+            let keyup = document.createEvent("Event");
             keyup.initEvent("keyup", false, true); 
             iInput.dispatchEvent(keyup);
             Y.Assert.areEqual("", document.querySelectorAll("input[name='q']").item(0).value);

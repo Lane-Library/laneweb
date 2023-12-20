@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var lightboxTestCase = new Y.Test.Case({
+    let lightboxTestCase = new Y.Test.Case({
 
         name: 'Lane Feedback Test Case',
 

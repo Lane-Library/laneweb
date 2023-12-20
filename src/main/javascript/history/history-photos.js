@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var images = [],
+    let images = [],
 
         historyPhotos = document.querySelector(".history-photos"),
 
@@ -11,7 +11,7 @@
         photoService = {
 
             getFactor: function(imagesToFactor) {
-                var width = 0,
+                let width = 0,
                     factor = 1000,
                     i = 0;
 
@@ -24,18 +24,18 @@
             },
 
             resize: function(image) {
-                var aspect = image.width / image.height;
+                let aspect = image.width / image.height;
                 image.height = 200;
                 image.width = 200 * aspect;
             },
 
             getPhotos: function() {
-                var request = new XMLHttpRequest();
+                let request = new XMLHttpRequest();
                 request.open("GET", "../apps/getHistoryPhotoList", true);
                 request.onload = function() {
                     if (request.status >= 200 && request.status < 400) {
-                        var photos = JSON.parse(request.responseText);
-                        for(var i = 0; i < 6; i++) {
+                        let photos = JSON.parse(request.responseText);
+                        for(let i = 0; i < 6; i++) {
                             photos[i].image = new Image();
                             photos[i].image.src = photos[i].thumbnail;
                             photos[i].image.alt = photos[i].title;
@@ -43,7 +43,7 @@
                         setTimeout(function() {
                             historyPhotos.style.opacity = 0;
                             setTimeout(function() {
-                                var factor, j;
+                                let factor, j;
                                 images = [];
                                 for (j = 0; j < 6; j++) {
                                     photoService.resize(photos[j].image);
@@ -66,7 +66,7 @@
         },
 
         imagesComplete = function() {
-            var complete = true;
+            let complete = true;
             if (links.length !== images.length) {
                 complete = false;
             } else {
@@ -80,7 +80,7 @@
         },
 
         handleImagesComplete = function() {
-            var i, factor = photoService.getFactor(images);
+            let i, factor = photoService.getFactor(images);
             for (i = 0; i < 6; i++) {
                 images[i].parentNode.style.width = Math.round(images[i].width * factor) + "px";
             }

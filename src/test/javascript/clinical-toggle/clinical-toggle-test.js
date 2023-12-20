@@ -2,13 +2,13 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var clinicalToggleTestCase = new Y.Test.Case({
+    let clinicalToggleTestCase = new Y.Test.Case({
 
         name : "Clinical Toggle TestCase",
 
         "test indicator active on click" : function() {
-            var toggle = document.querySelector(".clinical-toggle");
-            var indicator = document.querySelector(".search-indicator");
+            let toggle = document.querySelector(".clinical-toggle");
+            let indicator = document.querySelector(".search-indicator");
             Y.Assert.isFalse(indicator.classList.contains("search-indicator-active"));
             toggle.click();
             Y.Assert.isTrue(indicator.classList.contains("search-indicator-active"));

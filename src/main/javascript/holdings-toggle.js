@@ -6,7 +6,7 @@
     document.querySelectorAll('.hldgsTrigger').forEach(function(node) {
         node.addEventListener("click", function(event) {
             event.preventDefault();
-            var eresource = node.closest("li"),
+            let eresource = node.closest("li"),
                 ancestor = node.closest(".hldgsContainer"),
                 active = ancestor.classList.contains("active"),
                 actionLabel;

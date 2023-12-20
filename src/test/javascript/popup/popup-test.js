@@ -13,7 +13,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         }
     };
 
-    var lanePopupTestCase = new Y.Test.Case({
+    let lanePopupTestCase = new Y.Test.Case({
 
         name: 'Lane Popup Test Case',
 

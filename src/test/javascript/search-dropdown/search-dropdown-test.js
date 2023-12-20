@@ -2,7 +2,7 @@ YUI({ fetchCSS: false }).use("test", "test-console", function(Y) {
 
 	"use strict";
 
-	var dropdown_label = document.querySelector('.search-form .general-dropdown-trigger span');
+	let dropdown_label = document.querySelector('.search-form .general-dropdown-trigger span');
 
 
 	Y.Test.Runner.add(new Y.Test.Case({
@@ -10,7 +10,7 @@ YUI({ fetchCSS: false }).use("test", "test-console", function(Y) {
 		name: "Search Dropdown TestCase",
 
 		"test dropdown  click activates": function() {
-			var dropdown = document.querySelector("#main-search"),
+			let dropdown = document.querySelector("#main-search"),
 			event = document.createEvent("UIEvent");
 			event.initEvent("change", true, false);
 			Y.Assert.areEqual("All", dropdown_label.innerHTML);
@@ -21,11 +21,11 @@ YUI({ fetchCSS: false }).use("test", "test-console", function(Y) {
 		},
 
 		"test dropdown select bubbles": function() {
-			var event = document.createEvent("UIEvent");
+			let event = document.createEvent("UIEvent");
 			event.initEvent("change", true, false);
-			var dropdown = document.querySelector("#main-search"),
+			let dropdown = document.querySelector("#main-search"),
 			lastSource = dropdown[dropdown.selectedIndex].value;
-			var newSource, oldSource;
+			let newSource, oldSource;
 			L.once("searchDropdown:change", function(event) {
 				newSource = event.newVal.source;
 				oldSource = event.oldVal.source;
@@ -40,13 +40,13 @@ YUI({ fetchCSS: false }).use("test", "test-console", function(Y) {
 
 
 		"test tracking": function() {
-			var dropdown = document.querySelector("#main-search"),
+			let dropdown = document.querySelector("#main-search"),
 				lastSource = dropdown[dropdown.selectedIndex].value,
 				trackEvent,
 				handler = L.on("tracker:trackableEvent", function(e) {
 					trackEvent = e;
 				});
-			var event = document.createEvent("UIEvent");
+			let event = document.createEvent("UIEvent");
 			event.initEvent("change", true, false);
 			dropdown[2].selected = 'selected';
 			dropdown.dispatchEvent(event);
