@@ -73,14 +73,16 @@ public class SolrQueryParserTest {
                 this.parser.parse(
                         "Lancet Neurol. 2013 Feb;12(2):186-94. doi: 10.1016/S1474-4422(12)70296-X. Epub 2012 Dec 21."));
         assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("10.1016/j.it.2015.02.003"));
-        assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
+        assertEquals("dois:\"10.1016/j.it.2015.02.003\"",
+                this.parser.parse("http://dx.doi.org/10.1016/j.it.2015.02.003"));
         assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("dx.doi.org/10.1016/j.it.2015.02.003"));
         assertEquals("dois:\"10.1016/j.it.2015.02.003\"", this.parser.parse("doi.org/10.1016/j.it.2015.02.003"));
         assertEquals("BMJ 2015; 351 doi\\: \"10.1136/bmj.h5942\"",
                 this.parser.parse("BMJ 2015; 351 doi: http://dx.doi.org/10.1136/bmj.h5942"));
         assertEquals("\"10.1016/j.it.2015.02.003\" 10.1136/bmj.h5942",
                 this.parser.parse("doi.org/10.1016/j.it.2015.02.003 http://dx.doi.org/10.1136/bmj.h5942"));
-        assertEquals("dois:\"10.1056/NEJMra2005230\"", this.parser.parse("https://www.nejm.org/doi/10.1056/NEJMra2005230"));
+        assertEquals("dois:\"10.1056/NEJMra2005230\"",
+                this.parser.parse("https://www.nejm.org/doi/10.1056/NEJMra2005230"));
         assertEquals(
                 "Best Practices\\: Application of NI\\-RADS for Posttreatment Surveillance Imaging of Head and Neck Cancer\n"
                         + "Read More\\: \"10.2214/AJR.20.23841\"",
@@ -117,10 +119,15 @@ public class SolrQueryParserTest {
                 "Fibroblast Growth Factor\\-21 Controls Dietary Protein Intake in Male Mice. Endocrinology. 2019 May 1;160\\(5\\)\\:1069\\-1080. doi\\: \"10.1210/en.2018\\-01056\" pmid\\:30802283; \"PMC6469953\"",
                 this.parser.parse(
                         "Fibroblast Growth Factor-21 Controls Dietary Protein Intake in Male Mice. Endocrinology. 2019 May 1;160(5):1069-1080. doi: 10.1210/en.2018-01056. PubMed PMID: 30802283; PubMed Central PMCID: PMC6469953."));
-        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI:https://doi.org/10.1016/j.cjca.2019.11.034"));
-        assertEquals("DOI\\: \"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI: https://doi.org/10.1016/j.cjca.2019.11.034"));
-        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("https://doi.org/10.1016/j.cjca.2019.11.034"));
+        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"",
+                this.parser.parse("DOI:https://doi.org/10.1016/j.cjca.2019.11.034"));
+        assertEquals("DOI\\: \"10.1016/j.cjca.2019.11.034\"",
+                this.parser.parse("DOI: https://doi.org/10.1016/j.cjca.2019.11.034"));
+        assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"",
+                this.parser.parse("https://doi.org/10.1016/j.cjca.2019.11.034"));
         assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI:10.1016/j.cjca.2019.11.034"));
         assertEquals("dois:\"10.1016/j.cjca.2019.11.034\"", this.parser.parse("DOI: 10.1016/j.cjca.2019.11.034"));
+        assertEquals("\\*\\*\\*The Lumbee Indians", this.parser.parse("***The Lumbee Indians"));
+        assertEquals("* \\*\\*The Lumbee Indians", this.parser.parse("* **The Lumbee Indians"));
     }
 }

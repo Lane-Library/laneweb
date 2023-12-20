@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    var mock = function() {
+    let mock = function() {
         return {
             fire: function() {
                 this.fn.call(this, {suggestion: "suggestion"});
@@ -14,7 +14,7 @@
             }
         };
     };
-    var singleton = false;
+    let singleton = false;
     L.Suggest = function() {
         if (!singleton) {
             singleton = new mock();

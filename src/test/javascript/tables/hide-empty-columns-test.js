@@ -2,16 +2,16 @@ YUI({ fetchCSS: false }).use("test", "test-console", "dom", "node-event-simulate
 
     "use strict";
 
-    var tableHideColsTestCase = new Y.Test.Case({
+    let tableHideColsTestCase = new Y.Test.Case({
 
         name: 'Table Hide Empty Columns Test Case',
 
         testHideCols: function() {
-            var rawTable = document.querySelector('.raw');
+            let rawTable = document.querySelector('.raw');
             rawTable.querySelectorAll('tr th:nth-child(3),tr td:nth-child(3)').forEach(function(node) {
                 Y.Assert.areNotEqual("none", node.style.display);
             })
-            var hideTable = document.querySelector('.hide-empty-columns');
+            let hideTable = document.querySelector('.hide-empty-columns');
             hideTable.querySelectorAll('tr th:nth-child(3),tr td:nth-child(3)').forEach(function(node) {
                 Y.Assert.areEqual("none", node.style.display);
             })

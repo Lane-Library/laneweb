@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var BookmarksEditor,
+    let BookmarksEditor,
         BookmarkEditor = L.BookmarkEditor,
         editorsNode = document.querySelector("#bookmarks-editor");
 
@@ -18,7 +18,7 @@
          * @method bindUI
          */
         bindUI : function() {
-            var srcNode = this.get("srcNode"),
+            let srcNode = this.get("srcNode"),
                 bookmarks = this.get("bookmarks"),
                 dragManager = Y.DD.DDM;
             srcNode.all("fieldset button").on("click", this._handleButtonClick, this);
@@ -41,7 +41,7 @@
          * @method syncUI
          */
         syncUI : function() {
-            var editor, editors = [], i,
+            let editor, editors = [], i,
                 srcNode = this.get("srcNode"),
                 items = srcNode.all("li"),
                 bookmarks = this.get("bookmarks");
@@ -64,7 +64,7 @@
          * @method add
          */
         add : function() {
-            var items = this.get("srcNode").one("ul"),
+            let items = this.get("srcNode").one("ul"),
             item = Y.Node.create("<li><a></a></li>"),
             addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
             editors = this.get("editors"),
@@ -103,7 +103,7 @@
          * @returns {Array}
          */
         _getSerializedEditors : function() {
-            var filteredEditors = [];
+            let filteredEditors = [];
             this.get("editors").forEach(function(editor) {
                 if (editor.get("srcNode").one("a").get("href") != "") {
                     filteredEditors.push(editor);
@@ -130,7 +130,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkMove : function(event) {
-            var editors = this._getSerializedEditors();
+            let editors = this._getSerializedEditors();
             editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
             this.set("editors", editors);
         },
@@ -143,7 +143,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarksRemove : function(event) {
-            var i, editors = this._getSerializedEditors();
+            let i, editors = this._getSerializedEditors();
             for (i = event.positions.length - 1; i >= 0; --i) {
                 this._dd[event.positions[i]].destroy(true);
                 this._dd.splice(event.positions[i], 1);
@@ -158,7 +158,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkUpdate : function(event) {
-            var editors = this._getSerializedEditors();
+            let editors = this._getSerializedEditors();
             editors[event.position].update();
         },
 
@@ -174,7 +174,7 @@
             //pressing return generates a click on the add button for some reason
             //pageX is 0 in that situation
             if (event.pageX !== 0) {
-                var fn = this[event.currentTarget.getAttribute("value")];
+                let fn = this[event.currentTarget.getAttribute("value")];
                 if (fn) {
                     fn.call(this);
                 }
@@ -188,7 +188,7 @@
          * @param event {CustomEvent}
          */
         _handleDestroyEditor : function(event) {
-            var editors = this.get("editors"),
+            let editors = this.get("editors"),
                 position = editors.indexOf(event.target);
             editors.splice(position, 1);
         },
@@ -200,7 +200,7 @@
          */
         _handleDrag :  function(event) {
             //Get the last y point
-            var y = event.target.lastXY[1];
+            let y = event.target.lastXY[1];
             //is it greater than the lastY var?
             if (y < this._lastY) {
                 //We are going up
@@ -219,7 +219,7 @@
          * @param event {CustomEvent}
          */
         _handleDragEnd : function(event) {
-            var drag = event.target;
+            let drag = event.target;
             //Put our styles back
             drag.get('node').setStyles({
                 visibility: '',
@@ -238,7 +238,7 @@
          */
         _handleDragStart : function(event) {
             //Get our drag object
-            var drag = event.target, node = drag.get("node"), dragNode = drag.get("dragNode");
+            let drag = event.target, node = drag.get("node"), dragNode = drag.get("dragNode");
             //Set some styles here
             dragNode.empty();
             node.setStyle('opacity', '.25');
@@ -264,7 +264,7 @@
          */
         _handleDropOver : function(event) {
             //Get a reference to our drag and drop nodes
-            var drag = event.drag.get('node'),
+            let drag = event.drag.get('node'),
             drop = event.drop.get('node');
 
             //Are we dropping on an editor node?
@@ -281,7 +281,7 @@
         },
 
         _syncDD : function() {
-            var i, srcNode = this.get("srcNode"),
+            let i, srcNode = this.get("srcNode"),
                 editors = this.get("editors");
             this._dd = this._dd || [];
             for (i = 0; i < this._dd.length; i++) {

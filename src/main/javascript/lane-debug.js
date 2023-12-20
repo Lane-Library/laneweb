@@ -39,7 +39,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
 
         window.L = {};
 
-        var i, laneJavascript = [
+        let i, laneJavascript = [
             "util.js",
             "menu.js",
             "model.js",
@@ -70,7 +70,6 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "lane-lightbox.js",
             "bookmark-login.js",
             "lane-tracking.js",
-            "lane-google.js",
             "lane-google-GA4.js",
             "lane-popup.js",
             "lane-tooltips.js",
@@ -94,12 +93,14 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "course-reserves.js",
             "validation.js",
             "holdings-toggle.js",
-            "table-hide-empty-columns.js"
+            "table-hide-empty-columns.js",
+            "zotero.js",
+            "altmetric.js"
 
         ];
 
         //Model doesn't exist yet, get basePath by hand:
-        var basePath = "", errorHandler;
+        let basePath = "", errorHandler;
 
         if (window.model) {
             basePath = window.model["base-path"] || basePath;

@@ -59,7 +59,8 @@
         "liaisons-directory.css",
         "use-lane.css",
         "IE.css",
-        "responsive.css"
+        "responsive.css",
+        "altmetric.css"
       ]
     },
     {
@@ -100,7 +101,6 @@
         "bookmark-login.js",
         "lane-tracking.js",
         "lane-google-GA4.js",
-        "lane-google.js",
         "lane-popup.js",
         "lane-tooltips.js",
         "lane-spellcheck.js",
@@ -123,7 +123,8 @@
         "validation.js",
         "holdings-toggle.js",
         "table-hide-empty-columns.js",
-        "zotero.js"
+        "zotero.js",
+        "altmetric.js"
       ]
     },
     {

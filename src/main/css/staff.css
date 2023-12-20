@@ -4,7 +4,16 @@
     height: 280px;
 }
 
-.slide-container, .staff-list {
+#slide-show .slide div.staff-info {
+    bottom: -15px;
+}
+
+#slide-show .slide ul.staff-overview li {
+    line-height: 19px;
+}
+
+.slide-container,
+.staff-list {
     position: relative;
     background-color: white;
     display: flex;
@@ -48,7 +57,8 @@
     left: 12px;
 }
 
-#previous-slide, #next-slide {
+#previous-slide,
+#next-slide {
     position: absolute;
     display: block;
     top: 170px;
@@ -56,7 +66,8 @@
     color: #aabec6;
 }
 
-#previous-slide.disable, #next-slide.disable {
+#previous-slide.disable,
+#next-slide.disable {
     display: none;
 }
 
@@ -67,7 +78,9 @@
     position: relative;
 }
 
-.slide ul li, .slide a, .slide a i {
+.slide ul li,
+.slide a,
+.slide a i {
     color: white;
     text-align: center;
     border: none;
@@ -75,20 +88,18 @@
 }
 
 .slide ul.staff-overview {
-    height: 92px;
+    height: 115px;
     padding: 0 9px;
-    background: transparent
-        linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%)
-        0% 0% no-repeat;
+    background: transparent linear-gradient(180deg, #2C070700 0%, #0D0202B4 52%, #000000 100%) 0% 0% no-repeat;
+}
+
+.slide ul.staff-overview li {
+    font-weight: 300;
+    line-height: 1.3em;
 }
 
 .slide ul.staff-overview li:first-of-type {
     font-weight: 700;
-}
-
-.slide ul.staff-overview li:last-of-type {
-    font-weight: 300;
-    line-height: 1.3em;
 }
 
 /* Team directory specific */
@@ -110,13 +121,12 @@
 }
 
 .staff-list .slide div.staff-info {
-    bottom: -95px;
+    bottom: -115px;
 }
 
 .staff-list .slide ul.staff-overview li:first-of-type {
     font-size: 1.3em;
     font-weight: normal;
-    padding-bottom: 12px;
 }
 
 .staff-list .slide ul.staff-detail {
@@ -127,6 +137,7 @@
 .staff-list .slide ul.staff-detail a {
     text-decoration: underline;
 }
+
 
 /* In case it's missing on of the detail ie no phone */
 .staff-list .slide ul.staff-detail li {
@@ -170,39 +181,47 @@
     background-color: #007c92;
 }
 
+.slide ul.staff-overview li:nth-of-type(2) {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+
 .slide.empty {
     height: 0;
     min-height: unset;
     width: 300px;
 }
 
-@media ( max-width :1100px) {
+@media (max-width :1100px) {
     .staff-list .slide {
         flex-basis: 30%;
     }
+
     .staff-list {
         justify-content: space-evenly;
     }
 }
 
-@media ( max-width : 812px) {
+@media (max-width : 812px) {
     .staff-list .slide {
         flex: 0 1 49%;
-    }
-    .staff-list {
-        gap: 6px 3px;
-    }
-    .module.directory {
-        padding: 1em;
-    }
-    .staff-list .slide {
         font-size: 13px;
         min-width: inherit;
     }
+
+    .staff-list {
+        gap: 6px 3px;
+    }
+
+    .module.directory {
+        padding: 1em;
+    }
+
     .staff-list .slide ul.staff-overview li:first-of-type {
         font-size: 1.2em;
-        padding-bottom: 6px;
     }
+
     .staff-list .slide div.staff-info {
         bottom: -100px;
     }

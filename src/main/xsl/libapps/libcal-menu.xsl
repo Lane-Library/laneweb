@@ -3,7 +3,7 @@
     <xsl:template match="/classes">
         <html>
             <body>
-                <div class="menu-container mobile hoverline">
+                <div class="menu-container mobile hoverline no-bookmarking">
                     <h2>Categories
                        <i class="fa-regular fa-angle-down fa-lg"></i>
                        <i class="fa-regular fa-angle-up fa-lg"></i>

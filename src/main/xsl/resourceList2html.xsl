@@ -142,13 +142,13 @@
             <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                 <xsl:attribute name="class">resource exact-match-resource</xsl:attribute>
             </xsl:if>
-            <div class="resource-detail">
-                <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
+            <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                     <div class="exact-match">
                         Exact Match
                         <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="Your search terms closely match the title of this resource."></i>
                     </div>
-                </xsl:if>
+            </xsl:if>
+            <div class="resource-detail">
                 <span class="primaryType">
                     <xsl:apply-templates select="s:primaryType" />
                 </span>
@@ -162,13 +162,13 @@
                             <xsl:apply-templates select="s:pub-text" />
                         </xsl:if>
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
-                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'])" />
+                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'],.)" />
                         <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)" />
                     </xsl:when>
                     <xsl:when test="s:recordType = 'sul'">
                         <xsl:apply-templates select="s:pub-text" />
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
-                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'normal'])" />
+                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'normal'],.)" />
                         <xsl:apply-templates select="s:link[@type = 'sul-print']" />
                     </xsl:when>
                     <xsl:otherwise>
@@ -177,7 +177,7 @@
                         <xsl:apply-templates select="s:link[position() > 1]" />
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
                         <xsl:if test="s:primaryType = 'Article' and count(s:link) = 1"> 
-                            <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'normal'])" />
+                            <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'normal'], .)" />
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>

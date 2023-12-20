@@ -4,10 +4,10 @@
 
     L.Popup = Y.Base.create("popup", Y.Widget, [Y.WidgetStdMod, Y.WidgetPosition, Y.WidgetPositionConstrain]);
 
-    var popup, maybeCreatePopup, popupWindow, showWindow;
+    let popup, maybeCreatePopup, popupWindow, showWindow;
 
     maybeCreatePopup = function(title, body, w, xy) {
-        var boundingBox,
+        let boundingBox,
             width = w;
         if (width === "0px" || width === "auto") {
             width = 350;
@@ -31,7 +31,7 @@
         popup.set("xy", xy);
     };
     showWindow = function(url, type, width, height) {
-        var strWidth = width,
+        let strWidth = width,
             strHeight = height;
         if (popupWindow !== undefined && !popupWindow.closed) {
             popupWindow.close();
@@ -40,7 +40,7 @@
             strWidth = screen.availWidth;
             strHeight = screen.availHeight;
         }
-        var tools = '';
+        let tools = '';
         if (type === 'standard') {
             tools = 'resizable,toolbar=yes,location=yes,scrollbars=yes,menubar=yes';
         }
@@ -57,7 +57,7 @@
         popupWindow.focus();
     };
     document.addEventListener("click", function(event) {
-        var args, popupElement, title, body,
+        let args, popupElement, title, body,
             anchor = event.target.closest("a"),
             rel = anchor && anchor.rel;
         if (rel && rel.indexOf("popup") === 0) {

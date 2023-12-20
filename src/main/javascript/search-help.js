@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var helpNode = document.querySelector(".search-help a"),
+    let helpNode = document.querySelector(".search-help a"),
 
         view = function() {
 
@@ -18,7 +18,7 @@
 
             return {
                 change: function(event) {
-                    var newVal = event.newVal;
+                    let newVal = event.newVal;
                     view.update(newVal[newVal.source].help);
                 }
             };

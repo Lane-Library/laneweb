@@ -23,6 +23,7 @@ public final class EscapingQueryInspector implements QueryInspector {
     static {
         // these seem harmless | &
         // these seem useful and harmless " * ~
+        // although ** needs escaping
         // parentheses handled in ParenthesesQueryInspector
         ESCAPEABLE_CHARS.add(Character.valueOf('+'));
         ESCAPEABLE_CHARS.add(Character.valueOf('-'));
@@ -59,9 +60,13 @@ public final class EscapingQueryInspector implements QueryInspector {
 
     private static String maybeEscape(final String query) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < query.length(); i++) {
+        int length = query.length();
+        for (int i = 0; i < length; i++) {
             char c = query.charAt(i);
-            if (isEscapableCharacter(c) || (':' == c && !isField(sb.toString()))) {
+            char n = length > i + 1 ? query.charAt(i + 1) : 0;
+            char p = length > 0 && i > 0 ? query.charAt(i - 1) : 0;
+            if (isEscapableCharacter(c)
+                    || (':' == c && !isField(sb.toString()) || ('*' == c && '*' == n) || ('*' == c && '*' == p))) {
                 sb.append('\\');
             }
             sb.append(c);

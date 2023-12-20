@@ -2,13 +2,13 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var courseReservesFilterTest = new Y.Test.Case({
+    let courseReservesFilterTest = new Y.Test.Case({
 
         name : "Course Reserves Filter TestCase",
 
         "test filter": function() {
-            var input = document.querySelector("#course-reserves-search");
-            var keyup = document.createEvent("Event");
+            let input = document.querySelector("#course-reserves-search");
+            let keyup = document.createEvent("Event");
             Y.Assert.areEqual("", document.querySelectorAll("tr").item(1).style.display);
             Y.Assert.areEqual("", document.querySelectorAll("tr").item(2).style.display);
             input.value = "cowa"
