@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var Bookmarks,
+    let Bookmarks,
         Model = L.Model,
         BASE_PATH = Model.get(Model.BASE_PATH) || "";
 
@@ -16,7 +16,7 @@
      * @param bookmarks {array} may be undefined
      */
     Bookmarks = function(bookmarks) {
-        var i;
+        let i;
         this._bookmarks = [];
         if (bookmarks && !(bookmarks instanceof Array)) {
             throw("bad config");
@@ -125,7 +125,7 @@
              * @param bookmark {Bookmark}
              */
             updateBookmark : function(bookmark) {
-                var position = this._bookmarks.indexOf(bookmark);
+                let position = this._bookmarks.indexOf(bookmark);
                 this.fire("update", {bookmark : bookmark, position : position});
             },
 
@@ -138,7 +138,7 @@
             },
 
             hasURL : function(url) {
-                for (var i = 0; i < this._bookmarks.length; i++) {
+                for (let i = 0; i < this._bookmarks.length; i++) {
                     if (url === this._bookmarks[i].getUrl()) {
                         return true;
                     }
@@ -160,8 +160,8 @@
              * @returns {String} a string representation
              */
             toString : function() {
-                var string = "Bookmarks[";
-                for (var i = 0; i < this._bookmarks.length; i++) {
+                let string = "Bookmarks[";
+                for (let i = 0; i < this._bookmarks.length; i++) {
                     string += this._bookmarks[i];
                     if (i < this._bookmarks.length - 1) {
                         string += ",";
@@ -179,7 +179,7 @@
              * @param event {CustomEvent}
              */
             _defAddFn : function(event) {
-                var data = JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
+                let data = JSON.stringify({label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
                 L.io(BASE_PATH + "/bookmarks", {
                     method : "post",
                     data : data,
@@ -209,7 +209,7 @@
              * @param event {CustomEvent}
              */
             _defMoveFn : function(event) {
-                var data = JSON.stringify({to : event.to, from : event.from});
+                let data = JSON.stringify({to : event.to, from : event.from});
                 L.io(BASE_PATH + "/bookmarks/move", {
                     method : "post",
                     data : data,
@@ -236,7 +236,7 @@
              * @param event {CustomEvent}
              */
             _defRemoveFn : function(event) {
-                var indexes = JSON.stringify(event.positions);
+                let indexes = JSON.stringify(event.positions);
                 L.io(BASE_PATH + "/bookmarks?indexes=" + encodeURIComponent(indexes), {
                     method : "delete",
                     on : {
@@ -262,7 +262,7 @@
              * @param event {CustomEvent}
              */
             _defUpdateFn : function(event) {
-                var data = JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
+                let data = JSON.stringify({position : event.position, label : event.bookmark.getLabel(), url : event.bookmark.getUrl()});
                 L.io(BASE_PATH + "/bookmarks", {
                     method : "put",
                     data : data,
@@ -330,7 +330,7 @@
              * @param event {CustomEvent}
              */
             _handleRemoveSync : function(event) {
-                for (var i = event.positions.length - 1; i >=0; --i) {
+                for (let i = event.positions.length - 1; i >=0; --i) {
                     this._bookmarks.splice(event.positions[i], 1);
                 }
             },

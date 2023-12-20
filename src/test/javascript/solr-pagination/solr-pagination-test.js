@@ -5,12 +5,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var solrPaginationTestCase = new Y.Test.Case({
+    let solrPaginationTestCase = new Y.Test.Case({
 
         name: "Solr Pagination TestCase",
 
         testSubmitInvalid1: function() {
-            var form = Y.one("form"),
+            let form = Y.one("form"),
             parentDiv = Y.one(".s-pagination");
             form.one("input[name=page]").set('value','999');
             form.simulate("submit");
@@ -19,7 +19,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testSubmitInvalid2: function() {
-            var form = Y.one("form"),
+            let form = Y.one("form"),
             parentDiv = Y.one(".s-pagination");
             form.one("input[name=page]").set('value','0');
             form.simulate("submit");
@@ -28,7 +28,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testSubmitInvalidTwice: function() {
-            var form = Y.one("form"),
+            let form = Y.one("form"),
             parentDiv = Y.one(".s-pagination");
             form.one("input[name=page]").set('value','0');
             form.simulate("submit");
@@ -39,7 +39,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testSubmitValid: function() {
-            var form = Y.one("form"),
+            let form = Y.one("form"),
             parentDiv = Y.one(".s-pagination"),
             pages = form.get('pages');
             form.one("input[name=page]").set('value','23');

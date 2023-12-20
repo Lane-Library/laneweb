@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var authorsToggleTestCase = new Y.Test.Case({
+    let authorsToggleTestCase = new Y.Test.Case({
 
         name: "authors toggle Test Case",
 
         testToggleAuthors: function() {
-            var trigger = document.querySelector(".authorsTrigger"), 
+            let trigger = document.querySelector(".authorsTrigger"), 
                 parent = trigger.parentNode,
                 hiddenAuthors = parent.querySelector(".authors-hide");
 

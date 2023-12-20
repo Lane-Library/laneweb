@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div class="resourceListPagination">
+<div class="resourceListPagination no-bookmarking">
    <span id="pageStart">1</span> to 100 of <a href="?a=a&amp;page=all">220 matches</a>
    <a id="seeAll" href="?a=a&amp;page=all">See All</a>
    <div class="paginationNumbers">1 | <a href="?a=a&amp;page=2">2</a> | <a href="?a=a&amp;page=3">3</a>

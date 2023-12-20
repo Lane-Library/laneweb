@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var bookmarkTestCase = new Y.Test.Case({
+    let bookmarkTestCase = new Y.Test.Case({
 
         name : 'Bookmark Editor Test Case',
 
@@ -13,14 +13,14 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         }),
 
         testSetEditingTrue : function() {
-            var srcNode = this.editor.get("srcNode");
+            let srcNode = this.editor.get("srcNode");
             Y.Assert.isFalse(srcNode.hasClass("yui3-bookmark-editor-active"));
             this.editor.set("editing", true);
             Y.Assert.isTrue(srcNode.hasClass("yui3-bookmark-editor-active"));
         },
 
         testSetEditingFalse : function() {
-            var srcNode = this.editor.get("srcNode");
+            let srcNode = this.editor.get("srcNode");
             Y.Assert.isTrue(srcNode.hasClass("yui3-bookmark-editor-active"));
             this.editor.set("editing", false);
             Y.Assert.isFalse(srcNode.hasClass("yui3-bookmark-editor-active"));
@@ -34,7 +34,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testCancelNew : function() {
             Y.one("body").append("<div id='new'><input type='hidden'/><a>a</a></div>");
-            var anew = new L.BookmarkEditor({srcNode:Y.one("#new"),render:true});
+            let anew = new L.BookmarkEditor({srcNode:Y.one("#new"),render:true});
             anew.set("editing", true);
             Y.one("#new button[value='cancel']").simulate("click");
             Y.Assert.areSame(null, Y.one("#new"));
@@ -42,12 +42,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testSaveNoLabel : function() {
             this.editor.set("editing", true);
-            var label = this.editor.get("bookmark").getLabel();
-            var input = Y.one("input[name='label']");
+            let label = this.editor.get("bookmark").getLabel();
+            let input = Y.one("input[name='label']");
             input.set("value", "");
             Y.one("button[value='save']").simulate("click");
             Y.Assert.areSame(label, this.editor.get("bookmark").getLabel());
-            var value = input.getAttribute("placeholder");
+            let value = input.getAttribute("placeholder");
             if (!value) {
                 value = input.get("value")
             }
@@ -57,12 +57,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testSaveNoUrl : function() {
             this.editor.set("editing", true);
-            var url = this.editor.get("bookmark").getUrl();
-            var input = Y.one("input[name='url']");
+            let url = this.editor.get("bookmark").getUrl();
+            let input = Y.one("input[name='url']");
             input.set("value", "");
             Y.one("button[value='save']").simulate("click");
             Y.Assert.areSame(url, this.editor.get("bookmark").getUrl());
-            var value = input.getAttribute("placeholder");
+            let value = input.getAttribute("placeholder");
             if (!value) {
                 value = input.get("value")
             }
@@ -72,16 +72,16 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testSave : function() {
             this.editor.set("editing", true);
-            var input = Y.one("input[name='url']");
+            let input = Y.one("input[name='url']");
             input.set("value", "a new url");
             Y.one("button[value='save']").simulate("click");
             Y.Assert.areSame("a new url", this.editor.get("bookmark").getUrl());
         },
 
         testDelete : function() {
-            var fired = false;
-            var bookmarks = L.BookmarksWidget.get("bookmarks");
-            var handler = bookmarks.on("remove", function(event) {
+            let fired = false;
+            let bookmarks = L.BookmarksWidget.get("bookmarks");
+            let handler = bookmarks.on("remove", function(event) {
                 event.preventDefault();
                 fired = true;
             });

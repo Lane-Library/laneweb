@@ -2,20 +2,20 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var descriptionToggleTestCase = new Y.Test.Case({
+    let descriptionToggleTestCase = new Y.Test.Case({
 
         name: "description toggle Test Case",
 
         testTriggerContentPresent: function() {
-            var triggers = Y.all(".descriptionTrigger");
+            let triggers = Y.all(".descriptionTrigger");
             Y.Assert.areEqual("Abstract", triggers.item(0).get("text"));
             Y.Assert.areEqual("Read Full Description", triggers.item(1).get("text"));
             Y.Assert.areEqual(2, Y.all(".descriptionTrigger").size());
         },
 
         testToggleDescriptionOn: function() {
-            var triggers = Y.all(".descriptionTrigger");
-            var items = Y.all("#searchResults li");
+            let triggers = Y.all(".descriptionTrigger");
+            let items = Y.all("#searchResults li");
             triggers.each(function(node) {
                 node.simulate("click");
             });
@@ -32,8 +32,8 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testToggleDescriptionOff: function() {
-            var triggers = Y.all(".descriptionTrigger");
-            var items = Y.all("#searchResults li");
+            let triggers = Y.all(".descriptionTrigger");
+            let items = Y.all("#searchResults li");
             triggers.each(function(node) {
                 node.simulate("click");
             });

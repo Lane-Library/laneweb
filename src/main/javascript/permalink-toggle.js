@@ -4,10 +4,10 @@
 
     if (document.querySelector(".permalink")) {
 
-        var handlePermalinkClick = function(node, event) {
+        let handlePermalinkClick = function(node, event) {
             event.stopPropagation();
             event.preventDefault();
-            var anchor = node.querySelector('a'), copyNode, originalHtml = node.innerHTML;
+            let anchor = node.querySelector('a'), copyNode, originalHtml = node.innerHTML;
             anchor.insertAdjacentHTML("afterend",'<input value="' + anchor.href + '"/>');
             copyNode = node.querySelector("input");
             copyNode.select();
@@ -26,7 +26,7 @@
         };
 
         document.querySelector(".lwSearchResults").addEventListener("click", function(event) {
-            var permalink = event.target.closest(".permalink");
+            let permalink = event.target.closest(".permalink");
             if (permalink) {
                 handlePermalinkClick(permalink, event);
             }

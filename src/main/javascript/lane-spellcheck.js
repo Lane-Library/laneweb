@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var spellCheck = document.querySelector('.spellCheck'),
+    let spellCheck = document.querySelector('.spellCheck'),
         model = L.Model,
         encodedQuery = model.get(model.URL_ENCODED_QUERY),
         basePath = model.get(model.BASE_PATH) || "";
@@ -11,7 +11,7 @@
         L.io(basePath + '/apps/spellcheck/json?q=' + encodedQuery, {
             on: {
                 success:function(id, o) {
-                    var sc = JSON.parse(o.responseText), a, correctedUrl;
+                    let sc = JSON.parse(o.responseText), a, correctedUrl;
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup
                         //and add the suggestion to the href

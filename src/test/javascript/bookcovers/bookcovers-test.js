@@ -2,40 +2,37 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var bookcoversTestCase = new Y.Test.Case({
+    let bookcoversTestCase = new Y.Test.Case({
 
         name: "Lane Bookcovers Testcase",
 
         "test viewport:init": function() {
-            var inview = 0;
             L.fire("viewport:init", {
                 viewport: {
-                    inView: function() {
-                        return inview++ === 0;
+                    nearView: function(node) {
+                        return node.dataset.bcids === "bib-1";
                     }
                 }
             });
-            Y.Assert.areEqual("//www.example.com/srcbib-1", document.querySelector("div[data-bcid='bib-1'] img").getAttribute("src"))
+            Y.Assert.areEqual("//www.example.com/srcbib-1", document.querySelector("div[data-bcids='bib-1'] img").getAttribute("src"))
         },
 
         "test viewport:scrolled 1": function() {
-            var inview = 0;
             L.fire("viewport:scrolled", {
                 viewport: {
-                    inView: function() {
-                        return inview++ === 0;
+                    nearView: function(node) {
+                        return node.dataset.bcids === "sul-2";
                     }
                 }
             });
-            Y.Assert.areEqual("//www.example.com/srcsul-2", document.querySelector("div[data-bcid='sul-2'] img").getAttribute("src"))
+            Y.Assert.areEqual("//www.example.com/srcsul-2", document.querySelector("div[data-bcids='sul-2'] img").getAttribute("src"))
         },
         
         "test viewport:scrolled 2": function() {
-            var inview = 0;
             L.fire("viewport:scrolled", {
                 viewport: {
-                    inView: function() {
-                        return inview++ === 0;
+                    nearView: function(node) {
+                        return node.dataset.bibid === "3";
                     }
                 }
             });

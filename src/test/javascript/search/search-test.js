@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var submitted = false,
+    let submitted = false,
 
     searchTestCase = {
 
@@ -36,7 +36,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testQueryChangeEvent: function() {
-                var value;
+                let value;
                 this.search.once("queryChange", function() {
                     value = this.getQuery();
                 });
@@ -45,7 +45,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testQueryChangeEventBubble: function() {
-                var newVal, oldVal;
+                let newVal, oldVal;
                 L.once("search:queryChange", function(event) {
                     newVal = event.newVal;
                     oldVal = event.oldVal;
@@ -76,7 +76,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSourceChangeEvent: function() {
-                var value;
+                let value;
                 this.search.once("sourceChange", function(event) {
                     value = event.newVal;
                 });
@@ -85,7 +85,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSourceChangeEventBubble: function() {
-                var newVal, oldVal;
+                let newVal, oldVal;
                 L.once("search:sourceChange", function(event) {
                     newVal = event.newVal;
                     oldVal = event.oldVal;
@@ -116,7 +116,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSearch: function() {
-                var searched = false;
+                let searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });
@@ -127,7 +127,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSearchNoQuery: function() {
-                var searched = false;
+                let searched = false;
                 this.search.once("search", function(e) {
                     searched = true;
                 });
@@ -137,7 +137,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSearchEventBubble: function() {
-                var searched = false;
+                let searched = false;
                 L.once("search:search", function(event) {
                     searched = true;
                 });
@@ -159,7 +159,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSubmit: function() {
-                var searched = false;
+                let searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });
@@ -170,7 +170,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             },
 
             testSubmitNoQuery: function() {
-                var searched = false;
+                let searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });
@@ -181,7 +181,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
             testInputChange: function() {
                 this.queryInput.set("value", "query");
-                var e = document.createEvent("UIEvents");
+                let e = document.createEvent("UIEvents");
                 e.initEvent("input", true, false);
                 this.queryInput._node.dispatchEvent(e);
                 Y.Assert.areEqual("query", this.search.getQuery());
@@ -196,7 +196,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
             "searchDropdown:change submits if query": function() {
                 this.search.setQuery("query");
-                var searched = false;
+                let searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });
@@ -208,7 +208,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
             "searchDropdown:change doesn't submit if no query": function() {
                 this.search.setQuery("");
-                var searched = false;
+                let searched = false;
                 this.search.once("search", function(event) {
                     searched = true;
                 });

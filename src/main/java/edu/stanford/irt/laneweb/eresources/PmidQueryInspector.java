@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public final class PmidQueryInspector implements QueryInspector {
 
     private static final Pattern PMID_PATTERN = Pattern
-            .compile("(?:pmid|pubmed|pubmed pmid|pubmed ?id) ?[ :#]? ?([0-9]{1,8})\\b", Pattern.CASE_INSENSITIVE);
+            .compile("(?:pmid|pubmed|pubmed pmid|pubmed ?id) ?[ :#]? ?(\\d{1,8})\\b", Pattern.CASE_INSENSITIVE);
 
     @Override
     public boolean combinable() {

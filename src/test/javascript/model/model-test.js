@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var modelTestCase = new Y.Test.Case({
+    let modelTestCase = new Y.Test.Case({
 
         name: 'Lane Model Test Case',
 
