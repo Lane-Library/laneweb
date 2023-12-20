@@ -13,7 +13,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             }
         };
         
-        var googleTestCase = new Y.Test.Case({
+        let googleTestCase = new Y.Test.Case({
 
             name: 'Lane Google Test Case',
 

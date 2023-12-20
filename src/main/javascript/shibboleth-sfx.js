@@ -5,7 +5,7 @@
 
     "use strict";
 
-    var shibbLinks = document.querySelector('#shibboleth-links'), inFrame = function() {
+    let shibbLinks = document.querySelector('#shibboleth-links'), inFrame = function() {
         try {
             return window.self !== window.top;
         } catch (e) {

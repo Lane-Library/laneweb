@@ -59,6 +59,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/IE.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/use-lane.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/subscription.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/altmetric.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>

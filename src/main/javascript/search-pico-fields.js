@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var PICO_FIELDS = "pico-fields",
+    let PICO_FIELDS = "pico-fields",
         PICO_FIELDS_ACTIVE = PICO_FIELDS + "-active",
 
         picoView = function(pico) {

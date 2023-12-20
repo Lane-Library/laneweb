@@ -2,8 +2,8 @@
 
     "use strict";
 
-    var getTrackerId = function() {
-        var host = location.host,
+    let getTrackerId = function() {
+        let host = location.host,
             trackerId;
         if (host.match("lane.stanford.edu")) {
             trackerId = "G-Y6KGXN1JXT";
@@ -28,7 +28,7 @@
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
     L.Get.script("https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID, {
         onSuccess: function() {
-            var model = L.Model, bookmark,
+            let model = L.Model, bookmark,
                 ipGroup = model.get(model.IPGROUP),
                 auth =  model.get(model.AUTH),
                 dimensions = new Map();

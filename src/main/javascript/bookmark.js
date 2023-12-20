@@ -11,7 +11,7 @@
      * @param label  {string} the label
      * @param url {string} the url
      */
-    var Bookmark = function(label, url) {
+    let Bookmark = function(label, url) {
         this.publish("valueChange", {
             defaultFn : this._valueChange
         });
@@ -93,7 +93,7 @@
             if (!newUrl) {
                 throw ("null or empty newUrl");
             }
-            var changed = newLabel !== this._label || newUrl !== this._url;
+            let changed = newLabel !== this._label || newUrl !== this._url;
             if (changed) {
                 this.fire("valueChange", {
                     prevLabel : this._label,

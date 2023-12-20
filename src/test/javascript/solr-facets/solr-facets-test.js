@@ -7,7 +7,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
 L.Model.set(L.Model.URL_ENCODED_QUERY, "foo");
 
- var dateSolrForm = document.querySelector("#solr-date-form"),
+let dateSolrForm = document.querySelector("#solr-date-form"),
     startYearInput = document.querySelector(".date.start"),
     endYearInput = document.querySelector(".date.end"),
     errorMessage  = document.querySelector("#facet-error-message"),
@@ -18,7 +18,7 @@ L.Model.set(L.Model.URL_ENCODED_QUERY, "foo");
      
 
 
-var solrFacetsTestCase = new Y.Test.Case({
+let solrFacetsTestCase = new Y.Test.Case({
 
       name: "Check Min Start Date",
         testCheckStartValue: function() {

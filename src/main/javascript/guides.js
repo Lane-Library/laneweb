@@ -5,7 +5,7 @@
 
     if (document.querySelector(".guide")) {
 
-        var defaultGuide = '#all-guides',
+        let defaultGuide = '#all-guides',
             allGuidesClosed = '#off',
             hash,
 

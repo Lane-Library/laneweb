@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var menuTestCase = new Y.Test.Case({
+    let menuTestCase = new Y.Test.Case({
 
         name: 'Lane Menu Test Case',
 
         testClickOnH2: function() {
-            var h2 = Y.one("h2"),
+            let h2 = Y.one("h2"),
             menu = Y.one("#menu");
             Y.Assert.isTrue(menu._node.className === 'menu-container mobile');
             h2.simulate("click");

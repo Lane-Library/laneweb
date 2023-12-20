@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var placeholderEnabled = document.createElement("input").placeholder !== undefined;
+    let placeholderEnabled = document.createElement("input").placeholder !== undefined;
 
     Y.Test.Runner.add(new Y.Test.Case({
 

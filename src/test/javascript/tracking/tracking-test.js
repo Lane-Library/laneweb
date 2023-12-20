@@ -8,7 +8,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     L.setLocationHref = function() {};
 
-    var trackingTestCase = new Y.Test.Case({
+    let trackingTestCase = new Y.Test.Case({
 
         name: "Lane Tracking TestCase",
 
@@ -47,7 +47,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testBookmarksClick: function() {
             L.Model.set(L.Model.AUTH, "auth");
-            var link = Y.one("#bookmarks a");
+            let link = Y.one("#bookmarks a");
             link.simulate("click");
             L.Model.set(L.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
@@ -60,7 +60,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testBookmarksEditorClick: function() {
             L.Model.set(L.Model.AUTH, "auth");
-            var link = Y.one(".yui3-bookmark-editor-content a");
+            let link = Y.one(".yui3-bookmark-editor-content a");
             link.simulate("click");
             L.Model.set(L.Model.AUTH, null);
             Y.Assert.areEqual(link.get("text"), this.event.label);
@@ -72,7 +72,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testBrowseResultClick: function() {
-            var link = Y.one(".lwSearchResults a");
+            let link = Y.one(".lwSearchResults a");
             link.simulate("click");
             Y.Assert.areEqual("id-123 -> Primary Type -> " + link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:browseResultClick", this.event.category);
@@ -84,7 +84,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testSearchResultClick: function() {
             L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
-            var link = Y.one(".lwSearchResults a");
+            let link = Y.one(".lwSearchResults a");
             link.simulate("click");
             Y.Assert.areEqual("id-123 -> Primary Type -> " + link.get("text"), this.event.label);
             Y.Assert.areEqual("lane:searchResultClick", this.event.category);
@@ -96,7 +96,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickOnImage: function() {
-            var link = Y.one("#eventImageLink");
+            let link = Y.one("#eventImageLink");
             link.simulate("click");
             Y.Assert.areEqual(this.fixPath(link.get("parentNode").get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("alt"), this.pageView.title);
@@ -104,7 +104,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickOnImageNoAlt: function() {
-            var link = Y.one("#eventImageNoAlt");
+            let link = Y.one("#eventImageNoAlt");
             link.simulate("click");
             Y.Assert.areEqual(this.fixPath(link.get("parentNode").get("pathname")) , this.pageView.path);
             Y.Assert.areEqual(link.get("src"), this.pageView.title);
@@ -112,7 +112,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickPopup: function() {
-            var link = Y.one("#popup");
+            let link = Y.one("#popup");
             link.simulate("click");
             Y.Assert.areEqual(location.host, this.pageView.host);
             Y.Assert.areEqual(location.pathname , this.pageView.path);
@@ -122,7 +122,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickProxyCredential: function() {
-            var link = Y.one("#proxylink");
+            let link = Y.one("#proxylink");
             link.simulate("click");
             Y.Assert.areEqual("www.google.com", this.pageView.host);
             Y.Assert.areEqual("/foo/bar" , this.pageView.path);
@@ -131,7 +131,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickProxyCme: function() {
-            var link = Y.one("#cmelink");
+            let link = Y.one("#cmelink");
             link.simulate("click");
             Y.Assert.areEqual("www.uptodate.com", this.pageView.host);
             Y.Assert.areEqual("/online" , this.pageView.path);
@@ -140,7 +140,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickSecureVideo: function() {
-            var link = Y.one("#secureVideo");
+            let link = Y.one("#secureVideo");
             link.simulate("click");
             Y.Assert.areEqual("lane.stanford.edu", this.pageView.host);
             Y.Assert.areEqual("/secure/edtech/" , this.pageView.path);
@@ -149,7 +149,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickSeeAll: function() {
-            var link = Y.one("#seeAll");
+            let link = Y.one("#seeAll");
             link.simulate("click");
             Y.Assert.areEqual("lane:searchSeeAllClick", this.event.category);
             Y.Assert.areEqual("Resource Type see all", this.event.label);
@@ -159,7 +159,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickLaneproxy: function() {
-            var link1 = Y.one("#laneproxy1"), link2 = Y.one("#laneproxy2");
+            let link1 = Y.one("#laneproxy1"), link2 = Y.one("#laneproxy2");
             link1.simulate("click");
             Y.Assert.areEqual("www.nejm.org", this.pageView.host);
             Y.Assert.areEqual("/" , this.pageView.path);
@@ -173,7 +173,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testClickEndsWithHtml: function() {
-            var link = Y.one("#endswithhtml");
+            let link = Y.one("#endswithhtml");
             link.simulate("click");
             Y.Assert.isNull(this.pageView);
             Y.Assert.isNull(this.event);

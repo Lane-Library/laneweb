@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var bassettContent = document.querySelector('#bassettContent'),
+    let bassettContent = document.querySelector('#bassettContent'),
         model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
         HIDE = 'Hide',
@@ -13,7 +13,7 @@
         subRegionToShow = 4,
 
         formatAjaxUrl = function(string) {
-            var url, href;
+            let url, href;
             href = string.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
             href = href.split("?");
@@ -30,7 +30,7 @@
         },
 
         submitPagination = function(e) {
-            var page = e.target.page.value,
+            let page = e.target.page.value,
                 pages = e.target.pages;
             if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.value)) {
                 e.preventDefault();
@@ -43,7 +43,7 @@
         },
 
         loadContent = function(string) {
-            var url = basePath + "/plain/biomed-resources/bassett/raw".concat(string);
+            let url = basePath + "/plain/biomed-resources/bassett/raw".concat(string);
             function successHandler(_id, o) {
                 bassettContent.innerHTML = o.responseText;
                 registerLinksContainer(bassettContent);
@@ -59,7 +59,7 @@
         },
 
         handleClick = function(ev) {
-            var url;
+            let url;
             if (this.id === "diagram-choice") {
                 diagramDisplay = true;
             }
@@ -91,7 +91,7 @@
 
         registerLinksContainer = function(container) {
             if (container) {
-                var anchors = container.querySelectorAll('a');
+                let anchors = container.querySelectorAll('a');
                 anchors.forEach(function(anchor) {
                     if (!anchor.rel || anchor.rel === "propagation") {
                         anchor.addEventListener('click', handleClick);
@@ -102,7 +102,7 @@
 
         // For the bassett menu
         hideSubRegions = function(event) {
-            var i, region = event.currentTarget.closest("ul"),
+            let i, region = event.currentTarget.closest("ul"),
                 subRegion = region.querySelectorAll('li');
             resetSubRegions();
             region.querySelector('.see-all').innerHTML = SEE_ALL;
@@ -112,7 +112,7 @@
         },
 
         resetSubRegions = function() {
-            var i, svg, use,
+            let i, svg, use,
                 subRegion = document.querySelector('#bassett-menu').querySelectorAll('li');
             for (i = 1; i < subRegion.length; i++) {
                 svg = subRegion[i].querySelector('svg');
@@ -125,7 +125,7 @@
         },
 
         expandSubRegion = function(event) {
-            var i, subRegion,
+            let i, subRegion,
                 region = event.currentTarget.closest("ul");
             resetSubRegions();
             region.querySelector('.see-all').innerHTML = HIDE;
@@ -136,7 +136,7 @@
         },
 
         displaySubRegion = function(event) {
-            var seeAllContent = event.currentTarget.innerHTML;
+            let seeAllContent = event.currentTarget.innerHTML;
             if (seeAllContent === HIDE) {
                 hideSubRegions(event);
             }
@@ -146,7 +146,7 @@
         },
 
         surlineSubRegion = function(event) {
-            var svg, use, li = event.currentTarget;
+            let svg, use, li = event.currentTarget;
             resetSubRegions();
             svg = li.querySelector('svg');
             svg.classList.add('bg-red');

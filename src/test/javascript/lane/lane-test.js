@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var laneTestCase = new Y.Test.Case({
+    let laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",
         "test L exists" : function() {
             Y.Assert.isObject(L);

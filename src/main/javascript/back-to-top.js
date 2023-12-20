@@ -3,7 +3,7 @@
     "use strict";
 
     // backToTop node should be present in footer
-    var backToTop = document.querySelector('.back-to-top'),
+    let backToTop = document.querySelector('.back-to-top'),
 
         /**
          * @method fadeIn display the backToTop node

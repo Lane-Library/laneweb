@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var nodelist, iframes = [], iframeNode, i,
+    let nodelist, iframes = [], iframeNode, i,
 
     /**
      * A class for representing an embeded youtube iframe that replaces the iframe
@@ -14,7 +14,7 @@
      * @param iframe {Node} the youtube iframe node
      */
     YouTubeNode = function(iframe) {
-        var id, url,
+        let id, url,
                 src = iframe.src,
                 temp = document.createElement("div"),
                 self = this,

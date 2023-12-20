@@ -4,7 +4,7 @@ if (document.querySelector(".search-form"))  {
 
     "use strict";
 
-    var form = document.querySelector(".search-form"),
+    let form = document.querySelector(".search-form"),
 
         queryInput = form.querySelector("input[name=q]"),
 
@@ -32,7 +32,7 @@ if (document.querySelector(".search-form"))  {
             return {
                 sourceChange: function(event) {
                     // default suggest limit is mesh-di
-                    var source = event.newVal,
+                    let source = event.newVal,
                         limit;
                     if (source.match(/^(all|catalog)/)) {
                         limit = "er-mesh";

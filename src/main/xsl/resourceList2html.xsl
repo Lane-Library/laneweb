@@ -147,13 +147,13 @@
                             <xsl:apply-templates select="s:pub-text" />
                         </xsl:if>
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
-                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'])" />
+                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'],.)" />
                         <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)" />
                     </xsl:when>
                     <xsl:when test="s:recordType = 'sul'">
                         <xsl:apply-templates select="s:pub-text" />
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
-                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'normal'])" />
+                        <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'normal'],.)" />
                         <xsl:apply-templates select="s:link[@type = 'sul-print']" />
                     </xsl:when>
                     <xsl:otherwise>
@@ -162,7 +162,7 @@
                         <xsl:apply-templates select="s:link[position() > 1]" />
                         <xsl:copy-of select="f:descriptionTrigger(.)" />
                         <xsl:if test="s:primaryType = 'Article' and count(s:link) = 1">
-                            <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'normal'])" />
+                            <xsl:copy-of select="f:handleDigitalArticleLinks(s:link[@type = 'normal'], .)" />
                         </xsl:if>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -198,8 +198,7 @@
     <!-- it is also used for pubmed, web, etc. records -->
     <xsl:template match="s:link">
         <xsl:variable name="simple-primary-type" select="replace(../s:primaryType,'(Journal|Book) ','')" />
-        <xsl:if
-            test="(position() > 1 or (s:link-text and 'null' != s:link-text) or s:version-text or s:publisher)">
+        <xsl:if test="(position() > 1 or (s:link-text and 'null' != s:link-text) or s:version-text or s:publisher)">
             <div class="resultInfo">
                 <xsl:copy-of select="f:build-link-label(.)" />
                 <xsl:if test="$simple-primary-type != string(s:label)">

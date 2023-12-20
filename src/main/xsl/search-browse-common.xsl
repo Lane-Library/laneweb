@@ -3,8 +3,11 @@
     xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/2000/svg"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
+  
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
+  
     <xsl:variable name="requests-host" select="'requests.stanford.edu'" />
+  
     <xsl:variable name="searchworks-host" select="'searchworks.stanford.edu'" />
     
     <xsl:template match="s:desc-linebreak">
@@ -219,7 +222,7 @@
         <xsl:variable name="eresource" select="$link/.." />
         <!-- use s:locationUrl for Lane Catalog records that point to a parent record -->
         <xsl:choose>
-            <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
+            <xsl:when test="f:isPrintRecordPointingToParent($eresource) and count($eresource/s:link[@type='lane-digital']) = 0">
                 <div>
                     <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}"   rel="popup console 610 800">
                         <xsl:apply-templates select="$eresource/s:title" />
@@ -238,6 +241,7 @@
     <!-- used for Lane and SUL digital links -->
     <xsl:function name="f:handleDigitalLinks">
         <xsl:param name="links" />
+        <xsl:param name="eresource" />
         <xsl:if test="count($links) = 1">
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader available">
@@ -251,6 +255,7 @@
                         <xsl:value-of select="concat($links[1]/s:publisher, ' ', $links[1]/s:link-text)" />
                     </a>
                 </span>
+                 <xsl:copy-of select="f:altmetricsBadge($eresource)"/>
             </div>
             <xsl:if test="$links[1]/s:version-text or $links[1]/s:additional-text">
                 <div>
@@ -333,6 +338,7 @@
     
     <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
+        <xsl:param name="eresource" />
         <div class="hldgsContainer no-bookmarking">
             <span class="hldgsHeader available">
                 <svg>
@@ -350,8 +356,10 @@
                     <span>Access Options</span>
                 </a>
             </span>
+             <xsl:copy-of select="f:altmetricsBadge($eresource)"/>
         </div>
     </xsl:function>
+  
     <xsl:function name="f:handleLanePrintLinks">
         <xsl:param name="links" />
         <xsl:param name="eresource" />
@@ -409,20 +417,24 @@
                                 <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
                             </svg>
                             Access via
-                            <a rel="popup console 610 800" class="citation"
-                                href="{$links[1]/s:locationUrl}#searchResults">
+                            <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults">
                                 <xsl:value-of select="$links[1]/s:locationName" />
                             </a>
                         </span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader">
+                        <span class="hldgsHeader hldgsTrigger">
                              <svg>
                                 <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
                             </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
-                        </span>
-                        <span class="hldgsTrigger" />
+                            <svg class="angle-down">
+                        <use xlink:href="/resources/svg/solid.svg#angle-down"></use>
+                    </svg>
+                    <svg class="angle-up">
+                        <use xlink:href="/resources/svg/solid.svg#angle-up"></use>
+                    </svg>
+                        </span>                     
                     </xsl:otherwise>
                 </xsl:choose>
                 <div class="table-container">
@@ -470,9 +482,7 @@
                                 <div class="table-cell request-cell">
                                     <xsl:if test="s:available &gt; 0 and count($links) &gt; 1">
                                         <span class="requestIt">
-                                            <a class="btn alt"
-                                                href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={s:locationCode}"
-                                                rel="popup console 1020 800">Request</a>
+                                            <a class="btn alt" href="https://{$requests-host}/requests/new?item_id={f:folioInstanceId($eresource)}&amp;origin=LANE-MED&amp;origin_location={s:locationCode}" rel="popup console 1020 800">Request</a>
                                         </span>
                                     </xsl:if>
                                 </div>
@@ -526,7 +536,6 @@
                 </xsl:if>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="urls" select="$eresource/s:link/s:locationUrl" />
         <xsl:sequence select="$eresource/s:total = 0 and contains($parentLink,'true')" />
     </xsl:function>
     <!-- raw FOLIO instance hrid is not stored in Solr, only the numeric portion is stored as recordId -->
@@ -545,4 +554,39 @@
         </xsl:variable>
         <xsl:value-of select="concat($prefix, $eresource/s:recordId)" />
     </xsl:function>
+    
+      <!-- altmetrics: conditionally show badge and citation count widgets -->
+    <xsl:function name="f:altmetricsBadge">
+        <xsl:param name="eresource" />
+        <xsl:if test="$eresource/s:recordType = 'pubmed' or $eresource/s:doi">
+            <div class="altmetric-container">
+                <!-- citations -->
+                <span class="__dimensions_badge_embed__" data-legend="hover-bottom" data-style="large_rectangle" data-hide-zero-citations="true">
+                    <xsl:choose>
+                        <xsl:when test="$eresource/s:recordType = 'pubmed'">
+                            <xsl:attribute name="data-pmid" select="$eresource/s:recordId"/>
+                        </xsl:when>
+                        <xsl:when test="$eresource/s:doi[1]">
+                            <xsl:attribute name="data-doi" select="$eresource/s:doi[1]"/>
+                        </xsl:when>
+                        <xsl:otherwise />
+                    </xsl:choose>
+                </span>
+                <!-- altmetric badges -->
+                <span class="altmetric-embed" data-badge-popover="bottom" data-hide-less-than="1">
+                    <xsl:choose>
+                        <xsl:when test="$eresource/s:recordType = 'pubmed'">
+                            <xsl:attribute name="data-pmid" select="$eresource/s:recordId"/>
+                        </xsl:when>
+                        <xsl:when test="$eresource/s:doi[1]">
+                            <xsl:attribute name="data-doi" select="$eresource/s:doi[1]"/>
+                        </xsl:when>
+                        <xsl:otherwise />
+                    </xsl:choose>
+                </span>
+            </div>
+        </xsl:if>
+    </xsl:function>
+
+    
 </xsl:stylesheet>

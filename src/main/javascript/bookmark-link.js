@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var BookmarkLink,
+    let BookmarkLink,
         Model = L.Model,
         OFF = "off",
         READY = "ready",
@@ -63,7 +63,7 @@
                 Y.delegate("mouseover", this._handleTargetMouseover,"section.content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,"section.content", "a", this);
                 this.on("statusChange", this._handleStatusChange);
-                var bookmarks = this.get("bookmarks");
+                let bookmarks = this.get("bookmarks");
                 if (bookmarks) {
                     bookmarks.after("addSync", this._handleSyncEvent, this);
                 }
@@ -106,7 +106,7 @@
              * @private
              */
             _handleClick : function() {
-                var target = this.get("target"),
+                let target = this.get("target"),
                     linkinfo = new L.LinkInfo(target._node),
                     label, url, query, bookmarks;
                 label = linkinfo.title;
@@ -160,7 +160,7 @@
              * @returns {Boolean}
              */
             _isAlreadyBookmarked : function(target) {
-                var url, bookmarks, query,
+                let url, bookmarks, query,
                     linkinfo = new L.LinkInfo(target._node);
                 if (linkinfo.local) {
                     url = linkinfo.path;
@@ -226,7 +226,7 @@
              */
             _handleStatusChange : function(event) {
                 this._clearTimer();
-                var node = this.get("node"), target = this.get("target");
+                let node = this.get("node"), target = this.get("target");
                 //IE messes up the event handling if set up on initialization
                 //so purging and selectively set them when the status changes.
                 node.purge(false);

@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var backToTopTestCase = new Y.Test.Case({
+    let backToTopTestCase = new Y.Test.Case({
 
         name : 'back-to-top Test Case',
 

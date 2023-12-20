@@ -4,7 +4,7 @@ if (document.querySelector(".pico-toggle"))  {
 
     "use strict";
 
-    var ACTIVE = "-active",
+    let ACTIVE = "-active",
         PICO_ON = "pico-on",
         PICO_ON_ACTIVE = PICO_ON + ACTIVE,
         PICO_OFF = "pico-off",
@@ -14,7 +14,7 @@ if (document.querySelector(".pico-toggle"))  {
 
         picoView = function(toggle) {
 
-            var on = toggle.querySelector("." + PICO_ON),
+            let on = toggle.querySelector("." + PICO_ON),
                 off = toggle.querySelector("." + PICO_OFF),
                 v = {
                     activate: function() {
@@ -55,7 +55,7 @@ if (document.querySelector(".pico-toggle"))  {
         }(document.querySelector("." + PICO_TOGGLE));
 
         (function(view) {
-            var controller = {
+            let controller = {
                 on: function() {
                     controller.fire("change", {active:true});
                 },

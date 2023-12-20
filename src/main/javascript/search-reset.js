@@ -2,14 +2,14 @@
 
     "use strict";
 
-    var SEARCH_RESET = "search-reset",
+    let SEARCH_RESET = "search-reset",
         SEARCH_RESET_ACTIVE = SEARCH_RESET + "-active",
         CLICK = "click",
         EMPTY = "",
 
         view = function(reset) {
 
-            var v = {
+            let v = {
                     hide: function() {
                         reset.classList.remove(SEARCH_RESET_ACTIVE);
                     },
