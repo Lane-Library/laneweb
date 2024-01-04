@@ -44,6 +44,8 @@
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
             <map:transform type="description-labeling"/>
+            <map:transform type="description-linebreak"/>
+            <map:transform type="description-linking"/>
             <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>
