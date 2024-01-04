@@ -308,7 +308,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.83</version>
+            <version>9.0.84</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
