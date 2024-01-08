@@ -55,7 +55,6 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>5.2.0</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
