@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.folio.UserService;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UnividDataBinder;
+import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 @Controller
 @RequestMapping(value = "/patron-registration/")
@@ -83,6 +85,8 @@ public class PatronRegistrationController {
 
     private static final String USERNAME = "username";
 
+    private DataBinder emailDataBinder;
+
     private UserService folioUserService;
 
     private EMailSender sender;
@@ -91,11 +95,14 @@ public class PatronRegistrationController {
 
     private DataBinder userDataBinder;
 
-    public PatronRegistrationController(final UserService folioUserService, final DataBinder userDataBinder,
-            final UnividDataBinder unividDataBinder, final EMailSender sender) {
+    public PatronRegistrationController(final UserService folioUserService, final UserDataBinder userDataBinder,
+            final UnividDataBinder unividDataBinder,
+            @Qualifier("edu.stanford.irt.laneweb.servlet.binding.DataBinder/email") final DataBinder emailDataBinder,
+            final EMailSender sender) {
         this.folioUserService = folioUserService;
         this.userDataBinder = userDataBinder;
         this.unividDataBinder = unividDataBinder;
+        this.emailDataBinder = emailDataBinder;
         this.sender = sender;
     }
 
@@ -133,6 +140,7 @@ public class PatronRegistrationController {
     protected void getParameters(final HttpServletRequest req, final Model model) {
         this.userDataBinder.bind(model.asMap(), req);
         this.unividDataBinder.bind(model.asMap(), req);
+        this.emailDataBinder.bind(model.asMap(), req);
         Map<String, Object> user = new HashMap<>();
         Map<String, Object> personal = new HashMap<>();
         Map<String, Object> address = new HashMap<>();
