@@ -76,9 +76,7 @@ public class PatronRegistrationControllerTest {
         expect(this.folioUserService.getUser("username", "externalSystemId", "email"))
                 .andReturn(Collections.emptyList());
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
-        expect(this.map.remove("user")).andReturn(null);
-        expect(this.map.remove("auth")).andReturn(null);
-        expect(this.map.remove("folio-user")).andReturn(null);
+        expect(this.map.remove(isA(String.class))).andReturn(null).times(4);
         expect(this.folioUserService.addUser(isA(Map.class))).andReturn(true);
         this.sender.sendEmail(this.map);
         replay(this.folioUserService, this.userDataBinder, this.sender, this.model, this.map);

@@ -55,6 +55,10 @@ public class PatronRegistrationController {
 
     private static final String PERSONAL = "personal";
 
+    private static final String[] STRIP_FROM_EMAIL = new String[] { FOLIO_USER,
+            "org.springframework.validation.BindingResult." + FOLIO_USER, edu.stanford.irt.laneweb.model.Model.USER,
+            edu.stanford.irt.laneweb.model.Model.AUTH };
+
     private static final String USER_ID = "userid";
 
     private static final String USER_INPUT_ADDRESSES_LINE_1 = "addressLine1";
@@ -117,9 +121,9 @@ public class PatronRegistrationController {
             }
             if (this.folioUserService.addUser(user)) {
                 map.put("recipient", ASKUS_ADDRESS);
-                map.remove(FOLIO_USER);
-                map.remove(edu.stanford.irt.laneweb.model.Model.USER);
-                map.remove(edu.stanford.irt.laneweb.model.Model.AUTH);
+                for (String field : STRIP_FROM_EMAIL) {
+                    map.remove(field);
+                }
                 this.sender.sendEmail(map);
                 return CONFIRMATION_PAGE;
             }
