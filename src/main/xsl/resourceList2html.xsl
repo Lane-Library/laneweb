@@ -275,14 +275,5 @@
     
     <xsl:template match="s:contentId" />
     
-    <xsl:template match="s:desc-label">
-        <xsl:if test="position() > 1">
-            <br />
-        </xsl:if>
-        <strong>
-            <xsl:value-of select="." />
-        </strong>
-        <xsl:text>: </xsl:text>
-    </xsl:template>
-    
+     
 </xsl:stylesheet>

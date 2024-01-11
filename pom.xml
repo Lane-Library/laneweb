@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>139</version>
+        <version>140</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.12.14-SNAPSHOT</version>
+    <version>3.12.15-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -55,7 +55,6 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <version>5.2.0</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -308,7 +307,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>9.0.83</version>
+            <version>9.0.84</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>

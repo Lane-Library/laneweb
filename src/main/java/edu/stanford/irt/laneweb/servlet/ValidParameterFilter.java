@@ -24,6 +24,34 @@ import org.slf4j.LoggerFactory;
 @WebFilter({ "/biomed-resources/*", "/search.html" })
 public class ValidParameterFilter extends AbstractLanewebFilter {
 
+    private static class ParameterLengthValidator implements Validator<String> {
+
+        // count "words" by splitting on any punctuation character or whitespace but count word apostrophe s as one
+        private static final String WORDS = "[\\p{P}\\s&&[^'s]]";
+
+        private int maxChars;
+
+        private int maxWords;
+
+        private String name;
+
+        private ParameterLengthValidator(final String name, final int maxChars, final int maxWords) {
+            this.name = name;
+            this.maxChars = maxChars;
+            this.maxWords = maxWords;
+        }
+
+        @Override
+        public Validity isValid(final String value) {
+            String[] words = value.split(WORDS);
+            if (value.length() < this.maxChars && words.length < this.maxWords) {
+                return Validity.VALID;
+            }
+            return new Validity(false, String.format("invalid length for %s: chars %s, words %s", this.name,
+                    value.length(), words.length));
+        }
+    }
+
     private static class ParameterMapEntryValidator implements Validator<Entry<String, String[]>> {
 
         private Map<String, Validator<String>> parameterValidators;
@@ -41,7 +69,7 @@ public class ValidParameterFilter extends AbstractLanewebFilter {
             this.parameterValidators.put("r", valid);
             this.parameterValidators.put("bn", valid);
             this.parameterValidators.put("t", valid);
-            this.parameterValidators.put("q", valid);
+            this.parameterValidators.put("q", new ParameterLengthValidator("q", 500, 90));
             this.parameterValidators.put("laneNav", valid);
             this.parameterValidators.put("template", valid);
             this.parameterValidators.put("source", valid);

@@ -5,6 +5,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2024-01-08" version="3.12.14" description="bug fix and update release">
+            <action date="2024-01-04" dev="ryanmax" issue="LANEWEB-11264" type="fix">
+                lengthy queries result in Solr errors
+            </action>
+            <action date="2023-12-20" dev="alainb" issue="LANEWEB-11263" type="fix">
+                ::Summary## is not substituted by Summary on browse pages
+            </action>
+            <action date="2023-12-19" dev="ryanmax" issue="LANEWEB-11227" type="new">
+                on-demand FOLIO patron registration
+            </action>
+            <action date="2023-12-14" dev="ryanmax" issue="LANEWEB-11229" type="new">
+                user-facing form for patron self registration, including confirmation and error message
+            </action>
+         </release>
          <release date="2023-12-18" version="3.12.13" description="bug fix and update release">
             <action date="2023-11-14" dev="ryanmax" issue="LANEWEB-11247" type="update">
                 Altmetric and Dimensions citation widgets in Lane Search and browse results
