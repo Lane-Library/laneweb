@@ -116,6 +116,17 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template match="s:desc-label">
+        <xsl:if test="position() > 1">
+            <br />
+        </xsl:if>
+        <strong>
+            <xsl:value-of select="." />
+        </strong>
+        <xsl:text>: </xsl:text>
+    </xsl:template>
+    
 
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
@@ -542,6 +553,5 @@
             </div>
         </xsl:if>
     </xsl:function>
-
 
 </xsl:stylesheet>
