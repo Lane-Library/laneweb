@@ -123,13 +123,13 @@ public class PatronRegistrationControllerTest {
         Map<String, Object> user = new HashMap<>();
         Map<String, Object> personal = new HashMap<>();
         Map<String, Object> address = new HashMap<>();
-        user.put("preferredContactTypeId", "002");
         user.put("username", "univ-user");
         user.put("externalSystemId", "univid");
         personal.put("lastName", "value_lastName");
         personal.put("firstName", "value_firstName");
         personal.put("middleName", "value_middleName");
         personal.put("email", "value_email");
+        personal.put("preferredContactTypeId", "email");
         personal.put("phone", "value_phone");
         address.put("addressLine1", "value_addressLine1");
         address.put("addressLine2", "value_addressLine2");
