@@ -2,7 +2,8 @@
 <xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h"
 >
-
+    
+    <xsl:variable name="libapp-svg-url" >//libapps.s3.amazonaws.com/sites/18925/include/laneweb-svgs.svg#</xsl:variable>
   
    <xsl:template match="/">
       <xsl:apply-templates select="*"/>
@@ -25,9 +26,10 @@
    </xsl:template>
    
    <xsl:template match="h:svg">
+    <xsl:variable name="svg-value" select="substring-after(h:use/@href, '#')"></xsl:variable>
     <xsl:copy>
         <use>
-            <xsl:attribute name="href" select="concat('//lane.stanford.edu', h:use/@href)" />
+            <xsl:attribute name="href" select="concat($libapp-svg-url, $svg-value)" />
         </use>
     </xsl:copy>
     </xsl:template>
