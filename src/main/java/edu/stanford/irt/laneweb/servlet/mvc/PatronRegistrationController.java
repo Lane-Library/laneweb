@@ -29,8 +29,6 @@ public class PatronRegistrationController {
 
     private static final String ADDRESS_TYPE_ID = "addressTypeId";
 
-    private static final String ADDRESS_TYPE_ID_DEFAULT_VALUE = "93d3d88d-499b-45d0-9bc7-ac73c3a19880";
-
     private static final String ADDRESSES = "addresses";
 
     private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
@@ -148,7 +146,6 @@ public class PatronRegistrationController {
         Map<String, Object> user = new HashMap<>();
         Map<String, Object> personal = new HashMap<>();
         Map<String, Object> address = new HashMap<>();
-        user.put(USER_INPUT_PREFERERED_CONTACT_TYPE_ID, "002");
         String userid = (String) model.getAttribute(USER_ID);
         if (userid != null && userid.contains("@")) {
             userid = userid.toLowerCase();
@@ -168,13 +165,14 @@ public class PatronRegistrationController {
         personal.put(USER_INPUT_FIRST_NAME, getValueOrDefault(model, req, USER_INPUT_FIRST_NAME, ""));
         personal.put(USER_INPUT_MIDDLE_NAME, getValueOrDefault(model, req, USER_INPUT_MIDDLE_NAME, ""));
         personal.put(EMAIL, getValueOrDefault(model, req, USER_INPUT_EMAIL, ""));
+        personal.put(USER_INPUT_PREFERERED_CONTACT_TYPE_ID, EMAIL);
         personal.put(USER_INPUT_PHONE, getValueOrDefault(model, req, USER_INPUT_PHONE, ""));
         address.put(USER_INPUT_ADDRESSES_LINE_1, getValueOrDefault(model, req, USER_INPUT_ADDRESSES_LINE_1, ""));
         address.put(USER_INPUT_ADDRESSES_LINE_2, getValueOrDefault(model, req, USER_INPUT_ADDRESSES_LINE_2, ""));
         address.put(USER_INPUT_CITY, getValueOrDefault(model, req, USER_INPUT_CITY, ""));
         address.put(USER_INPUT_REGION, getValueOrDefault(model, req, USER_INPUT_STATE, ""));
         address.put(USER_INPUT_POSTAL_CODE, getValueOrDefault(model, req, USER_INPUT_ZIP_CODE, ""));
-        address.put(ADDRESS_TYPE_ID, getValueOrDefault(model, req, ADDRESS_TYPE_ID, ADDRESS_TYPE_ID_DEFAULT_VALUE));
+        address.put(ADDRESS_TYPE_ID, getValueOrDefault(model, req, ADDRESS_TYPE_ID, "Home"));
         personal.put(ADDRESSES, Collections.singleton(address));
         user.put(PERSONAL, personal);
         model.addAttribute(FOLIO_USER, user);
