@@ -3,10 +3,7 @@
       xmlns:r="http://lane.stanford.edu/results/1.0"
       id="clinical-all">
    <ul class="lwSearchResults">
-      <li xmlns:xlink="http://www.w3.org/2000/svg"
-          class="resource"
-          data-sid="PMID:25195623"
-          data-index="1">
+      <li class="resource" data-sid="PMID:25195623" data-index="1">
          <div class="resource-detail">
             <span class="primaryType">Article</span>
             <div>
@@ -33,10 +30,7 @@
             </div>
          </div>
       </li>
-      <li xmlns:xlink="http://www.w3.org/2000/svg"
-          class="resource"
-          data-sid=""
-          data-index="2">
+      <li class="resource" data-sid="" data-index="2">
          <div class="resource-detail">
             <span class="primaryType">Article</span>
             <div>
@@ -49,10 +43,7 @@
             </div>
          </div>
       </li>
-      <li xmlns:xlink="http://www.w3.org/2000/svg"
-          class="resource"
-          data-sid="PMID:36335037"
-          data-index="3">
+      <li class="resource" data-sid="PMID:36335037" data-index="3">
          <div class="resource-detail">
             <span class="primaryType">Article</span>
             <div>

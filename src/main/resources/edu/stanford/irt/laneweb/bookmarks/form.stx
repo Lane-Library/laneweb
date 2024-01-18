@@ -2,7 +2,6 @@
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:xlink="http://www.w3.org/2000/svg"
     version="1.0"
     pass-through="all">
     
@@ -28,10 +27,10 @@
                             <button name="action" value="add" type="submit">
                                 <span>Add Bookmark</span>
                                  <svg>
-                                    <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                                    <use href="/resources/svg/regular.svg#angle-down"></use>
                                 </svg>
                                 <svg>
-                                    <use xlink:href="/resources/svg/regular.svg#angle-up"></use>
+                                    <use href="/resources/svg/regular.svg#angle-up"></use>
                                 </svg>
                             </button>
                         </div>
@@ -43,13 +42,13 @@
                     <div class="actions">
                         <button name="action" value="edit" type="submit">
                             <svg>
-                                <use xlink:href="/resources/svg/solid.svg#pen-to-square"></use>
+                                <use href="/resources/svg/solid.svg#pen-to-square"></use>
                             </svg>
                         </button>
                         | 
                         <button name="action" value="delete" type="submit">
                             <svg>
-                                <use xlink:href="/resources/svg/solid.svg#trash-can"></use>
+                                <use href="/resources/svg/solid.svg#trash-can"></use>
                             </svg>
                         </button>
                     </div> 
@@ -57,7 +56,7 @@
                         <div class="close">
                             <button name="action" value="cancel" type="submit">
                                 <svg>
-                                    <use xlink:href="/resources/svg/regular.svg#xmark"></use>
+                                    <use href="/resources/svg/regular.svg#xmark"></use>
                                 </svg>
                             </button>
                         </div>

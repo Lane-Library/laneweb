@@ -31,7 +31,7 @@
         BookmarkLink.ATTRS = {
                 node : {
                     valueFn : function() {
-                        return Y.Node.create("<span title='Add to My Bookmarks' class='bookmark-link'><svg><use xlink:href='/resources/svg/solid.svg#star'></use></svg></span>");
+                        return Y.Node.create("<span title='Add to My Bookmarks' class='bookmark-link'><svg><use href='/resources/svg/solid.svg#star'></use></svg></span>");
                     }
                 },
                 bookmarks : {

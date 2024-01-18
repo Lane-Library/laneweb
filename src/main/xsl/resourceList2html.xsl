@@ -2,8 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0"
     xmlns:r="http://lane.stanford.edu/results/1.0" xmlns:f="https://lane.stanford.edu/functions"
-    xmlns:xlink="http://www.w3.org/2000/svg" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="f h r s xsd" version="2.0">
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"  exclude-result-prefixes="f h r s xsd" version="2.0">
     <xsl:param name="facets" />
     <xsl:param name="ipgroup" />
     <xsl:param name="proxy-links" />
@@ -129,7 +128,7 @@
                     Exact Match
                     <svg class="yui3-tooltip-trigger"
                         title="Your search terms closely match the title of this resource.">
-                        <use xlink:href="/resources/svg/regular.svg#circle-info"></use>
+                        <use href="/resources/svg/regular.svg#circle-info"></use>
                     </svg>
                 </div>
             </xsl:if>
@@ -180,7 +179,7 @@
             </div>
             <div class="more-detail-container">
                 <svg class="fa-xl">
-                    <use xlink:href="/resources/svg/solid.svg#ellipsis"></use>
+                    <use href="/resources/svg/solid.svg#ellipsis"></use>
                 </svg>
                 <xsl:copy-of select="f:build-source-info(.)" />
             </div>
@@ -248,7 +247,7 @@
                     <span class="authorsTrigger no-bookmarking active">
                         <a href="#"> Show More </a>
                         <svg class="fa-xs">
-                            <use xlink:href="/resources/svg/regular.svg#angles-down"></use>
+                            <use href="/resources/svg/regular.svg#angles-down"></use>
                         </svg>
                     </span>
                     <span class="authors-hide">

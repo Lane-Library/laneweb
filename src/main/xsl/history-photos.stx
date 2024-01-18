@@ -1,4 +1,4 @@
-<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"  xmlns:xlink="http://www.w3.org/2000/svg"
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns" 
     xmlns="http://www.w3.org/1999/xhtml"
     version="1.0"
     pass-through="all">
@@ -16,7 +16,7 @@
             <stx:process-children/>
         </div>
         <stx:if test="$photos-count &gt;= 10">
-            <div><a href="https://exhibits.stanford.edu/medhistory/catalog?f%5Bformat_main_ssim%5D%5B%5D=Image&amp;search_field=search&amp;q={$query}">More Images for <strong><stx:value-of select="$query"/></strong><stx:text> </stx:text><svg><use xlink:href="/resources/svg/solid.svg#arrow-right"></use></svg></a></div>
+            <div><a href="https://exhibits.stanford.edu/medhistory/catalog?f%5Bformat_main_ssim%5D%5B%5D=Image&amp;search_field=search&amp;q={$query}">More Images for <strong><stx:value-of select="$query"/></strong><stx:text> </stx:text><svg><use href="/resources/svg/solid.svg#arrow-right"></use></svg></a></div>
         </stx:if>
     </stx:template>
 

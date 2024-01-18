@@ -1,6 +1,6 @@
 <xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xlink="http://www.w3.org/2000/svg"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:r="http://lane.stanford.edu/results/1.0" >
     <xsl:param name="facet" />
     <xsl:param name="source" />
@@ -39,13 +39,13 @@
     <xsl:template
         match="h:a[@class='clinical-facet'][$facet][substring-after(@href,'facet=') = $facet]/h:i[1]">
         <svg class="fa-lg">
-            <use xlink:href="/resources/svg/solid.svg#square-check"></use>
+            <use href="/resources/svg/solid.svg#square-check"></use>
         </svg>
     </xsl:template>
     
     <xsl:template match="h:a[@class='clinical-facet'][not($facet)][not(contains(@href, 'facet'))]/h:i">
         <svg class="fa-lg">
-            <use xlink:href="/resources/svg/solid.svg#square-check"></use>
+            <use href="/resources/svg/solid.svg#square-check"></use>
         </svg>
     </xsl:template>
     

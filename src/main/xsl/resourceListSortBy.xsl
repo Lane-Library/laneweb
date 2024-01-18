@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0"
-    xmlns:xlink="http://www.w3.org/2000/svg" exclude-result-prefixes="h s" version="2.0">
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0"  exclude-result-prefixes="h s" version="2.0">
     <xsl:variable name="query-string-no-page" select="replace($query-string,'&amp;page=\d+','')" />
     <xsl:variable name="base-query"
         select="replace($query-string-no-page,'&amp;sort=(\w| |%20|,|_|%2C)+','')" />
@@ -33,7 +32,7 @@
                 <div class="general-dropdown-trigger">
                     <xsl:value-of select="$active-sort-name" />
                     <svg class="fa-sm">
-                        <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                        <use href="/resources/svg/regular.svg#angle-down"></use>
                     </svg>
                 </div>
                 <div class="general-dropdown-content dropdown-content">
@@ -65,7 +64,7 @@
                                         <xsl:copy-of select="$anchor" />
                                         <xsl:if test="@arg = $sort or ($sort = '' and not(@arg))">
                                           <svg>
-                                            <use xlink:href="/resources/svg/regular.svg#check"></use>
+                                            <use href="/resources/svg/regular.svg#check"></use>
                                         </svg>
                                         </xsl:if>
                                     </li>

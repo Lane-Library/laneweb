@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns:f="http://lane.stanford.edu/resources/1.0"
-    xmlns:fct="http://lane.stanford.edu/function" xmlns:xlink="http://www.w3.org/2000/svg"
+    xmlns:fct="http://lane.stanford.edu/function"
     exclude-result-prefixes="f h fct" version="2.0">
     <xsl:param name="base-path" />
     <xsl:param name="facet" />
@@ -35,7 +35,7 @@
                             <span>
                                 <xsl:value-of select="fct:getLabel(./@f:name)" />
                                 <svg>
-                                    <use xlink:href="/resources/svg/regular.svg#xmark"></use>
+                                    <use href="/resources/svg/regular.svg#xmark"></use>
                                 </svg>
                             </span>
                         </a>
@@ -50,7 +50,7 @@
                             To
                             <xsl:value-of select="$end-year" />
                             <svg>
-                                <use xlink:href="/resources/svg/regular.svg#xmark"></use>
+                                <use href="/resources/svg/regular.svg#xmark"></use>
                             </svg>
                         </span>
                     </a>
@@ -62,10 +62,10 @@
         <h2>
             Filter Results
             <svg class="fa-lg">
-                <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                <use href="/resources/svg/regular.svg#angle-down"></use>
             </svg>
             <svg class="fa-lg">
-                <use xlink:href="/resources/svg/regular.svg#angle-up"></use>
+                <use href="/resources/svg/regular.svg#angle-up"></use>
             </svg>
         </h2>
     </xsl:variable>
@@ -80,7 +80,7 @@
                     <a href="{$facet-search-base-path}{$furl}">
                         <span class="facetLabel">
                             <svg class="bg-red">
-                                <use xlink:href="/resources/svg/solid.svg#square-check"></use>
+                                <use href="/resources/svg/solid.svg#square-check"></use>
                             </svg>
                             <span>
                                 <xsl:copy-of select="fct:getLabel(./@f:name)" />
@@ -97,7 +97,7 @@
                     <a href="{$facet-search-base-path}{$furl}">
                         <span class="facetLabel">
                             <svg>
-                                <use xlink:href="/resources/svg/regular.svg#square"></use>
+                                <use href="/resources/svg/regular.svg#square"></use>
                             </svg>
                             <xsl:copy-of select="fct:getLabel(./@f:name)" />
                         </span>

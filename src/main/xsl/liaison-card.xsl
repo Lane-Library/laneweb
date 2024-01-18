@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/staff/1.0"
-    xmlns:xlink="http://www.w3.org/2000/svg" exclude-result-prefixes="h s" version="2.0">
+    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/staff/1.0" exclude-result-prefixes="h s" version="2.0">
     <xsl:param name="liaison" />
     
     <xsl:template match="/s:staff-directory/s:staff[@id = $liaison]">
@@ -28,7 +27,7 @@
                     <a>
                         <xsl:attribute name="href" select="s:cap-profile" />
                         <svg>
-                            <use xlink:href="/resources/svg/regular.svg#users"></use>
+                            <use href="/resources/svg/regular.svg#users"></use>
                         </svg>
                         <xsl:text>CAP Profile</xsl:text>
                     </a>

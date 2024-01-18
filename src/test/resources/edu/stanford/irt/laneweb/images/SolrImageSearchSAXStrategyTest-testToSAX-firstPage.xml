@@ -4,7 +4,7 @@
       <div class="result">1 to 1 of 2 results</div>
       <div>
          <div class="view-by" id="sourceFilter">Filter by source <div class="general-dropdown dropdown">
-               <div class="general-dropdown-trigger">Bassett (2)<svg><use xlink:href="/resources/svg/regular.svg#angles-down"></use>
+               <div class="general-dropdown-trigger">Bassett (2)<svg><use href="/resources/svg/regular.svg#angles-down"></use>
 </svg>
                </div>
                <div class="general-dropdown-content dropdown-content">

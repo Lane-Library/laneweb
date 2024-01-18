@@ -1,6 +1,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xlink="http://www.w3.org/2000/svg" xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/staff/1.0" exclude-result-prefixes="h s" version="2.0">
+    xmlns:h="http://www.w3.org/1999/xhtml"   xmlns:s="http://lane.stanford.edu/staff/1.0" 
+    exclude-result-prefixes="h s" version="2.0">
+    
     <xsl:param name="manager" />
     <xsl:template match="/s:staff-directory">
         <xsl:if test="$manager = 'TRUE'">
@@ -83,7 +84,7 @@
                             <xsl:attribute name="href" select="s:stanford-profile/text()" />
                             <xsl:text>Stanford Profile </xsl:text>
                             <svg>
-                                <use xlink:href="/resources/svg/solid.svg#arrow-right"></use>
+                                <use href="/resources/svg/solid.svg#arrow-right"></use>
                             </svg>
                         </a>
                     </li>

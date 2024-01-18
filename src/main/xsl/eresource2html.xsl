@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://www.w3.org/1999/xhtml" xmlns:s="http://lane.stanford.edu/resources/1.0"
     xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:xlink="http://www.w3.org/2000/svg" exclude-result-prefixes="h f s xsd" version="2.0">
+    exclude-result-prefixes="h f s xsd" version="2.0">
    
     <xsl:param name="browse-query" />
     
@@ -37,7 +37,7 @@
                 <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)" />
                 <div class="more-detail-container">
                     <svg class="fa-xl">
-                        <use xlink:href="/resources/svg/solid.svg#ellipsis"></use>
+                        <use href="/resources/svg/solid.svg#ellipsis"></use>
                     </svg>
                     <xsl:copy-of select="f:build-source-info(.)" />
                 </div>

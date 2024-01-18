@@ -1,13 +1,13 @@
-<ul xmlns="http://www.w3.org/1999/xhtml"  xmlns:xlink="http://www.w3.org/2000/svg"  class="login">
+<ul xmlns="http://www.w3.org/1999/xhtml" class="login">
     <li>
         <a href="/secure/login.html"> 
-        <svg><use xlink:href="/resources/svg/regular.svg#lock"></use> 
+        <svg><use href="/resources/svg/regular.svg#lock"></use> 
         </svg>STANFORD LOGIN</a>
     </li>
     <li class="nav-menu">
         <div class="favorites dropdown">
             <a href="/favorites.html">
-               <svg><use xlink:href="/resources/svg/regular.svg#lock"></use>
+               <svg><use href="/resources/svg/regular.svg#lock"></use>
             </svg>
             My Bookmarks</a>
             

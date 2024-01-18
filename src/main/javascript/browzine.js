@@ -73,7 +73,7 @@
         addRetractedArticleLink = function(node, type, label, url) {
             node.querySelector('.sourceInfo').insertAdjacentHTML("beforeend",
                 '<div><a class="bzFT" href="' + url + '">' + 
-                '<span class="fa-layers"><svg><use xlink:href="/resources/svg/light.svg#file-' + type + '"></use></svg></span>'+
+                '<span class="fa-layers"><svg><use href="/resources/svg/light.svg#file-' + type + '"></use></svg></span>'+
                 label + '</a></div>'
             )
         },

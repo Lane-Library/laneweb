@@ -37,7 +37,7 @@
             <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="0" start="0" end="0" page="1" pages="0" total="100"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:xlink="http://www.w3.org/2000/svg"
+                    
                     xmlns:r="http://lane.stanford.edu/results/1.0">
                     <span class="search-summary">
                         <span class="search-summary-none">no results</span>
@@ -52,7 +52,7 @@
             <doc>
                 <results xmlns="http://lane.stanford.edu/results/1.0" size="0" start="0" end="0" page="1" pages="0" total="100"/>
                 <html xmlns="http://www.w3.org/1999/xhtml"
-                    xmlns:xlink="http://www.w3.org/2000/svg"
+                    
                     xmlns:r="http://lane.stanford.edu/results/1.0">
                     <span class="search-summary">no results</span>
                 </html>

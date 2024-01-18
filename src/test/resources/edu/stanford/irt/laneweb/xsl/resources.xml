@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/2000/svg">
+<html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <title>search results</title>
    </head>
@@ -22,7 +22,7 @@
                <div class="hldgsContainer no-bookmarking">
                   <span class="hldgsHeader available">
                      <svg>
-                        <use xlink:href="/resources/svg/solid.svg#desktop"/>
+                        <use href="/resources/svg/solid.svg#desktop"/>
                      </svg>
                     Digital Access
                 </span>
@@ -39,7 +39,7 @@
             </div>
             <div class="more-detail-container">
                <svg class="fa-xl">
-                  <use xlink:href="/resources/svg/solid.svg#ellipsis"/>
+                  <use href="/resources/svg/solid.svg#ellipsis"/>
                </svg>
                <div class="sourceInfo no-bookmarking">
                   <div class="permalink">
@@ -47,7 +47,7 @@
                         href="https://lane.stanford.edu/view/bib/301866">
                         <span class="fa-layers">
                            <svg>
-                              <use xlink:href="/resources/svg/solid.svg#link"/>
+                              <use href="/resources/svg/solid.svg#link"/>
                            </svg>
                         </span>
                     Get Shareable Link
@@ -58,7 +58,7 @@
                         title="Lane Record in SearchWorks">
                         <span class="fa-layers">
                            <svg>
-                              <use xlink:href="/resources/svg/solid.svg#arrow-right-from-bracket"/>
+                              <use href="/resources/svg/solid.svg#arrow-right-from-bracket"/>
                            </svg>
                         </span>
                     View Details
@@ -83,7 +83,7 @@
                <div class="hldgsContainer no-bookmarking">
                   <span class="hldgsHeader available">
                      <svg>
-                        <use xlink:href="/resources/svg/solid.svg#desktop"/>
+                        <use href="/resources/svg/solid.svg#desktop"/>
                      </svg>
                     Digital Access
                 </span>
@@ -100,7 +100,7 @@
             </div>
             <div class="more-detail-container">
                <svg class="fa-xl">
-                  <use xlink:href="/resources/svg/solid.svg#ellipsis"/>
+                  <use href="/resources/svg/solid.svg#ellipsis"/>
                </svg>
                <div class="sourceInfo no-bookmarking">
                   <div class="permalink">
@@ -108,7 +108,7 @@
                         href="https://lane.stanford.edu/view/bib/123">
                         <span class="fa-layers">
                            <svg>
-                              <use xlink:href="/resources/svg/solid.svg#link"/>
+                              <use href="/resources/svg/solid.svg#link"/>
                            </svg>
                         </span>
                     Get Shareable Link
@@ -119,7 +119,7 @@
                         title="Lane Record in SearchWorks">
                         <span class="fa-layers">
                            <svg>
-                              <use xlink:href="/resources/svg/solid.svg#arrow-right-from-bracket"/>
+                              <use href="/resources/svg/solid.svg#arrow-right-from-bracket"/>
                            </svg>
                         </span>
                     View Details

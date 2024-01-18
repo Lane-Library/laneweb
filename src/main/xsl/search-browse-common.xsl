@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/2000/svg"
-    xmlns:s="http://lane.stanford.edu/resources/1.0" xmlns:f="https://lane.stanford.edu/functions"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="f h s xsd" version="2.0">
+    xmlns="http://www.w3.org/1999/xhtml"  xmlns:s="http://lane.stanford.edu/resources/1.0" 
+    xmlns:f="https://lane.stanford.edu/functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    exclude-result-prefixes="f h s xsd" version="2.0">
   
     <xsl:variable name="total-resources" select="count(//s:result)"></xsl:variable>
   
@@ -53,7 +53,7 @@
         <xsl:variable name="label">
         <span class="fa-layers">
             <svg>
-                <use xlink:href="/resources/svg/solid.svg#arrow-right-from-bracket"></use>
+                <use href="/resources/svg/solid.svg#arrow-right-from-bracket"></use>
             </svg>
         </span>
         </xsl:variable>
@@ -140,7 +140,7 @@
             <div class="permalink">
                 <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
                     <span class="fa-layers">
-                        <svg><use xlink:href="/resources/svg/solid.svg#link"></use></svg>
+                        <svg><use href="/resources/svg/solid.svg#link"></use></svg>
                     </span>
                     Get Shareable Link
                 </a>
@@ -257,7 +257,7 @@
             <div class="hldgsContainer no-bookmarking">
                 <span class="hldgsHeader available">
                     <svg>
-                        <use xlink:href="/resources/svg/solid.svg#desktop"></use>
+                        <use href="/resources/svg/solid.svg#desktop"></use>
                     </svg>
                     Digital Access
                 </span>
@@ -290,14 +290,14 @@
                 </xsl:if>
                 <span class="hldgsHeader hldgsTrigger available">
                     <svg>
-                        <use xlink:href="/resources/svg/solid.svg#desktop"></use>
+                        <use href="/resources/svg/solid.svg#desktop"></use>
                     </svg>
                     Digital Access
                     <svg class="angle-down">
-                        <use xlink:href="/resources/svg/solid.svg#angle-down"></use>
+                        <use href="/resources/svg/solid.svg#angle-down"></use>
                     </svg>
                     <svg class="angle-up">
-                        <use xlink:href="/resources/svg/solid.svg#angle-up"></use>
+                        <use href="/resources/svg/solid.svg#angle-up"></use>
                     </svg>
                 </span>
                 <div class="table-main hide-empty-columns">
@@ -309,7 +309,7 @@
                                 title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue.">
-                                <use xlink:href="/resources/svg/regular.svg#circle-info"></use>
+                                <use href="/resources/svg/regular.svg#circle-info"></use>
                             </svg>
                         </div>
                     </div>
@@ -353,7 +353,7 @@
         <div class="hldgsContainer no-bookmarking">
             <span class="hldgsHeader available">
                 <svg>
-                    <use xlink:href="/resources/svg/solid.svg#desktop"></use>
+                    <use href="/resources/svg/solid.svg#desktop"></use>
                 </svg>
                 Digital Access
             </span>
@@ -361,7 +361,7 @@
                 <a href="{$links[1]/s:url}" title="{$links[1]/s:label}">
                     <span class="fa-layers">
                         <svg>
-                            <use xlink:href="/resources/svg/regular.svg#arrow-up-right-from-square"></use>
+                            <use href="/resources/svg/regular.svg#arrow-up-right-from-square"></use>
                         </svg>
                     </span>
                     <span>Access Options</span>
@@ -388,15 +388,15 @@
                                 <xsl:attribute name="class">hldgsHeader hldgsTrigger available</xsl:attribute>
                             </xsl:if>
                             <svg>
-                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                                <use href="/resources/svg/solid.svg#book-open-cover"></use>
                             </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Access
                             <svg class="angle-down">
-                                <use xlink:href="/resources/svg/regular.svg#angle-down"></use>
+                                <use href="/resources/svg/regular.svg#angle-down"></use>
                             </svg>
                             <svg class="angle-up">
-                                <use xlink:href="/resources/svg/regular.svg#angle-up"></use>
+                                <use href="/resources/svg/regular.svg#angle-up"></use>
                             </svg>
                         </span>
                         <!-- Print Request button above holdings table when only one holding -->
@@ -411,7 +411,7 @@
                     <xsl:when test="count($links) = 1 and $links[1]/s:checkedOut &gt; 0">
                         <span class="hldgsHeader unavailable">
                             <svg>
-                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                                <use href="/resources/svg/solid.svg#book-open-cover"></use>
                             </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             Unavailable: Checked out
@@ -425,7 +425,7 @@
                     <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
                         <span class="hldgsHeader">
                              <svg>
-                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                                <use href="/resources/svg/solid.svg#book-open-cover"></use>
                             </svg>
                             Access via
                             <a rel="popup console 610 800" class="citation" href="{$links[1]/s:locationUrl}#searchResults">
@@ -436,14 +436,14 @@
                     <xsl:otherwise>
                         <span class="hldgsHeader hldgsTrigger">
                              <svg>
-                                <use xlink:href="/resources/svg/solid.svg#book-open-cover"></use>
+                                <use href="/resources/svg/solid.svg#book-open-cover"></use>
                             </svg>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
                             <svg class="angle-down">
-                        <use xlink:href="/resources/svg/solid.svg#angle-down"></use>
+                        <use href="/resources/svg/solid.svg#angle-down"></use>
                     </svg>
                     <svg class="angle-up">
-                        <use xlink:href="/resources/svg/solid.svg#angle-up"></use>
+                        <use href="/resources/svg/solid.svg#angle-up"></use>
                     </svg>
                         </span>                     
                     </xsl:otherwise>
@@ -458,7 +458,7 @@
                                     title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue." >
-                                <use xlink:href="/resources/svg/regular.svg#circle-info"></use>
+                                <use href="/resources/svg/regular.svg#circle-info"></use>
                             </svg>
                             </div>
                             <div class="table-head">Call Number</div>

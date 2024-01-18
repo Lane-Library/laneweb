@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head>
+     <link rel="prefetch" href="/resources/svg/laneweb-svgs.svg" as="image" type="image/svg+xml"/>
+    
         <title>Lane Medical Library - Stanford University School of Medicine</title>
         <link rel="stylesheet" type="text/css" href="/resources/css/reset.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.css" />
