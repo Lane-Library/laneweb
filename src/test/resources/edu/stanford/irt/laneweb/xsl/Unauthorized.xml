@@ -3,14 +3,14 @@
    <li>
       <a href="/base/secure/login.html?url=%2Fbase%2Ferror_authz.html">
          <svg>
-            <use href="/resources/svg/regular.svg#lock"/>
+            <use href="/base/resources/svg/regular.svg#lock"/>
          </svg>STANFORD LOGIN</a>
    </li>
    <li>
       <div class="favorites dropdown">
          <a href="/base/favorites.html">
             <svg>
-               <use href="/resources/svg/regular.svg#lock"/>
+               <use href="/base/resources/svg/regular.svg#lock"/>
             </svg>
             My Bookmarks</a>
          <div class="dropdown-content">
