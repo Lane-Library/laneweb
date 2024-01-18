@@ -3,8 +3,7 @@
    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h"
 >
     
-    <xsl:variable name="libapp-svg-url" >//libapps.s3.amazonaws.com/sites/18925/include/laneweb-svgs.svg#</xsl:variable>
-  
+   
    <xsl:template match="/">
       <xsl:apply-templates select="*"/>
    </xsl:template>
@@ -25,14 +24,11 @@
       </xsl:copy>
    </xsl:template>
    
-   <xsl:template match="h:svg">
-    <xsl:variable name="svg-value" select="substring-after(h:use/@href, '#')"></xsl:variable>
-    <xsl:copy>
-        <use>
-            <xsl:attribute name="href" select="concat($libapp-svg-url, $svg-value)" />
-        </use>
-    </xsl:copy>
-    </xsl:template>
+   <xsl:template match="h:use">
+        <xsl:copy>
+            <xsl:attribute name="href" select="concat('#', substring-after(@href, '#'))" />
+        </xsl:copy>
+    </xsl:template> 
    
      <!-- xincludes often include html/head and html/body, this ignores them-->
     <xsl:template match="h:html">
