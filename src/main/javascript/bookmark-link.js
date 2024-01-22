@@ -180,7 +180,7 @@
              * Determine if a link is bookmarkable.  For now true if its display property is inline
              * or inline-block and it does not contain an img element.
              * Added logic for if link was already bookmarked case 75199
-             * added logic for using class="no-bookmarking" for individual nodes and descendants for
+             * added logic for using for individual nodes and descendants for
              * case 101724
              * 2/4/15 added bookmarkable = false if no href
              * @method _isBookmarkable
@@ -189,10 +189,11 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                return target.get("href")
+               return  target.get("href")
                     && target.getStyle("display").indexOf("inline") === 0
                     && !target.one("img")
-                    && !target.ancestor(".no-bookmarking", true)
+                    && target.ancestor(".bookmarking", true)
+                    && !((target._node.classList) ? target._node.classList.contains("no-bookmarking") : false)
                     && !this._isAlreadyBookmarked(target);
             },
 

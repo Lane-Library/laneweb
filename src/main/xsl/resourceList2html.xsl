@@ -64,7 +64,7 @@
                     <xsl:apply-templates select="s:result" />
                 </ul>
                 <xsl:if test="count(s:result) &gt;= 10 and number(@size) &gt;= number(@length)">
-                    <div class="s-tb no-bookmarking">
+                    <div class="s-tb">
                         <xsl:call-template name="paginationLinks" />
                     </div>
                 </xsl:if>
@@ -103,7 +103,7 @@
             <div class="resource-detail">
                 <span class="primaryType">Article</span>
                 <div>
-                    <a class="primaryLink" href="{$primaryLink}">
+                    <a class="primaryLink bookmarking" href="{$primaryLink}">
                         <xsl:apply-templates select="s:title" />
                     </a>
                 </div>
@@ -260,7 +260,7 @@
                     </xsl:variable>
                     <xsl:value-of select="$authorString" />
                     <span> ... </span>
-                    <span class="authorsTrigger no-bookmarking active">
+                    <span class="authorsTrigger active">
                         <a href="#"> Show More </a>
                         <i class="fa-regular fa-angles-down fa-xs"></i>
                     </span>
