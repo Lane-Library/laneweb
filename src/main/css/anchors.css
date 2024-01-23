@@ -1,5 +1,5 @@
 /* these are the default anchor styles*/
-a, a svg{
+a{
     color: #007c92;
     text-decoration: none;
 }

@@ -15,7 +15,7 @@ public class AtoZBrowseSAXStrategy extends AbstractXHTMLSAXStrategy<List<BrowseL
     @Override
     public void toSAX(final List<BrowseLetter> letters, final XMLConsumer xmlConsumer) {
         try {
-            startUlWithClass(xmlConsumer, "browseTabs no-bookmarking");
+            startUlWithClass(xmlConsumer, "browseTabs");
             for (BrowseLetter letter : letters) {
                 startLi(xmlConsumer);
                 if (letter.getCount() > 0 && "#".equals(letter.getLetter())) {

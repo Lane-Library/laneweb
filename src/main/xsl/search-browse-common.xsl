@@ -116,10 +116,21 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
+    <xsl:template match="s:desc-label">
+        <xsl:if test="position() > 1">
+            <br />
+        </xsl:if>
+        <strong>
+            <xsl:value-of select="." />
+        </strong>
+        <xsl:text>: </xsl:text>
+    </xsl:template>
+    
 
     <xsl:function name="f:build-source-info">
         <xsl:param name="eresource" />
-        <div class="sourceInfo no-bookmarking">
+        <div class="sourceInfo">
             <div class="permalink">
                 <a title="click to copy a shareable link to this record" href="https://lane.stanford.edu/view/{$eresource/s:recordType}/{$eresource/s:recordId}">
                     <i class="fa-solid fa-link fa-rotate-180"></i>
@@ -214,16 +225,16 @@
         <xsl:variable name="eresource" select="$link/.." />
         <!-- use s:locationUrl for Lane Catalog records that point to a parent record -->
         <xsl:choose>
-            <xsl:when test="f:isPrintRecordPointingToParent($eresource)">
+            <xsl:when test="f:isPrintRecordPointingToParent($eresource) and count($eresource/s:link[@type='lane-digital']) = 0">
                 <div>
-                    <a class="primaryLink" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
+                    <a class="primaryLink bookmarking" href="{$link/s:locationUrl}#searchResults" title="{$eresource/s:title}" rel="popup console 610 800">
                         <xsl:apply-templates select="$eresource/s:title" />
                     </a>
                 </div>
             </xsl:when>
             <xsl:otherwise>
                 <div>
-                    <a class="primaryLink" href="{$link/s:url}" title="{$eresource/s:title}">
+                    <a class="primaryLink bookmarking" href="{$link/s:url}" title="{$eresource/s:title}">
                         <xsl:apply-templates select="$eresource/s:title" />
                     </a>
                 </div>
@@ -234,8 +245,9 @@
     <!-- used for Lane and SUL digital links -->
     <xsl:function name="f:handleDigitalLinks">
         <xsl:param name="links" />
+        <xsl:param name="eresource" />
         <xsl:if test="count($links) = 1">
-            <div class="hldgsContainer no-bookmarking">
+            <div class="hldgsContainer">
                 <span class="hldgsHeader available">
                     <i class="fa-solid fa-desktop fa-sm"></i>
                     Digital Access
@@ -245,6 +257,7 @@
                         <xsl:value-of select="concat($links[1]/s:publisher, ' ', $links[1]/s:link-text)" />
                     </a>
                 </span>
+                <xsl:copy-of select="f:altmetricsBadge($eresource)"/>
             </div>
             <xsl:if test="$links[1]/s:version-text or $links[1]/s:additional-text">
                 <div>
@@ -262,9 +275,9 @@
             </xsl:if>
         </xsl:if>
         <xsl:if test="count($links) > 1">
-            <div class="hldgsContainer no-bookmarking">
+            <div class="hldgsContainer">
                 <xsl:if test="$total-resources = 1">
-                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                    <xsl:attribute name="class">hldgsContainer active</xsl:attribute>
                 </xsl:if>
                 <span class="hldgsHeader hldgsTrigger available">
                     <i class="fa-solid fa-desktop  fa-sm"></i>
@@ -321,7 +334,8 @@
 
     <xsl:function name="f:handleDigitalArticleLinks">
         <xsl:param name="links" />
-        <div class="hldgsContainer no-bookmarking">
+        <xsl:param name="eresource" />
+        <div class="hldgsContainer">
             <span class="hldgsHeader available">
                 <i class="fa-solid fa-desktop fa-sm"></i>
                 Digital Access
@@ -332,6 +346,7 @@
                     <span>Access Options</span>
                 </a>
             </span>
+            <xsl:copy-of select="f:altmetricsBadge($eresource)"/>
         </div>
     </xsl:function>
 
@@ -341,9 +356,9 @@
         <xsl:if test="count($links) > 0">
             <!-- items can be available but not requestable (reserves, equipment, reference) -->
             <xsl:variable name="itemsAvailable" select="sum($eresource/s:link/s:available) &gt; 0" />
-            <div class="hldgsContainer no-bookmarking">
+            <div class="hldgsContainer">
                 <xsl:if test="count($links) = 1 or $total-resources = 1">
-                    <xsl:attribute name="class">hldgsContainer no-bookmarking active</xsl:attribute>
+                    <xsl:attribute name="class">hldgsContainer active</xsl:attribute>
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="$itemsAvailable">
@@ -384,11 +399,12 @@
                         </span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="hldgsHeader">
+                        <span class="hldgsHeader hldgsTrigger">
                             <i class="fa-solid fa-book-open-cover"></i>
                             <xsl:value-of select="f:itemTypeLabel($eresource)" />
+                            <i class="fa-solid fa-angle-down"></i>
+                            <i class="fa-solid fa-angle-up"></i>
                         </span>
-                        <span class="hldgsTrigger" />
                     </xsl:otherwise>
                 </xsl:choose>
                 <div class="table-container">
@@ -452,13 +468,13 @@
             <div class="resultInfo">
                 <xsl:choose>
                     <xsl:when test="$eresource/@type = 'searchContent'">
-                        <span class="descriptionTrigger searchContent no-bookmarking" />
+                        <span class="descriptionTrigger searchContent" />
                     </xsl:when>
                     <xsl:when test="$eresource/s:recordType = 'pubmed'">
-                        <span class="descriptionTrigger searchContent pumed no-bookmarking" />
+                        <span class="descriptionTrigger searchContent pumed" />
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="descriptionTrigger eresource no-bookmarking" />
+                        <span class="descriptionTrigger eresource" />
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
@@ -485,7 +501,6 @@
                 <xsl:if test="contains(./s:locationUrl,'/view/bib/')">true</xsl:if>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="urls" select="$eresource/s:link/s:locationUrl"/>
         <xsl:sequence select="$eresource/s:total = 0 and contains($parentLink,'true')" />
     </xsl:function>
 
@@ -504,6 +519,39 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:value-of select="concat($prefix, $eresource/s:recordId)"/>
+    </xsl:function>
+
+    <!-- altmetrics: conditionally show badge and citation count widgets -->
+    <xsl:function name="f:altmetricsBadge">
+        <xsl:param name="eresource" />
+        <xsl:if test="$eresource/s:recordType = 'pubmed' or $eresource/s:doi">
+            <div class="altmetric-container">
+                <!-- citations -->
+                <span class="__dimensions_badge_embed__" data-legend="hover-bottom" data-style="large_rectangle" data-hide-zero-citations="true">
+                    <xsl:choose>
+                        <xsl:when test="$eresource/s:recordType = 'pubmed'">
+                            <xsl:attribute name="data-pmid" select="$eresource/s:recordId"/>
+                        </xsl:when>
+                        <xsl:when test="$eresource/s:doi[1]">
+                            <xsl:attribute name="data-doi" select="$eresource/s:doi[1]"/>
+                        </xsl:when>
+                        <xsl:otherwise />
+                    </xsl:choose>
+                </span>
+                <!-- altmetric badges -->
+                <span class="altmetric-embed" data-badge-popover="bottom" data-hide-less-than="1">
+                    <xsl:choose>
+                        <xsl:when test="$eresource/s:recordType = 'pubmed'">
+                            <xsl:attribute name="data-pmid" select="$eresource/s:recordId"/>
+                        </xsl:when>
+                        <xsl:when test="$eresource/s:doi[1]">
+                            <xsl:attribute name="data-doi" select="$eresource/s:doi[1]"/>
+                        </xsl:when>
+                        <xsl:otherwise />
+                    </xsl:choose>
+                </span>
+            </div>
+        </xsl:if>
     </xsl:function>
 
 </xsl:stylesheet>

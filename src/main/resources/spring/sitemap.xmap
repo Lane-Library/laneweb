@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
         <map:match pattern="search/*" type="wildcard">
             <!-- TODO: set error http codes where necessary -->

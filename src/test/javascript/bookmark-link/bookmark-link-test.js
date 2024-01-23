@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
 
     "use strict";
 
-    var bookmarkLinkTestCase = new Y.Test.Case({
+    let bookmarkLinkTestCase = new Y.Test.Case({
 
         name : "BookmarkLink Test Case",
 
@@ -27,39 +27,39 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
         },
 
         testTargetMouseover : function() {
-            var bookmarkable = Y.one("#bookmarkable");
+            let bookmarkable = Y.one("#bookmarkable");
             bookmarkable.simulate("mouseover");
             Y.Assert.areSame("ready", this.link.get("status"));
             Y.Assert.areSame(bookmarkable._node, this.link.get("target")._node);
         },
 
         testTargetBlock : function() {
-            var bookmarkable = Y.one("#block");
+            let bookmarkable = Y.one("#block");
             bookmarkable.simulate("mouseover");
             Y.Assert.areSame("off", this.link.get("status"));
         },
 
         testTargetNoBookmarking : function() {
-            var bookmarkable = Y.one("a.no-bookmarking");
+            let bookmarkable = Y.one("a.no-bookmarking");
             bookmarkable.simulate("mouseover");
             Y.Assert.areSame("off", this.link.get("status"));
         },
 
         testTargetAncestorNoBookmarking : function() {
-            var bookmarkable = Y.one("div.no-bookmarking a");
+            let bookmarkable = Y.one("div.no-bookmarking a");
             bookmarkable.simulate("mouseover");
             Y.Assert.areSame("off", this.link.get("status"));
         },
 
         testTargetInlineBlock : function() {
-            var bookmarkable = Y.one("#inline-block");
+            let bookmarkable = Y.one("#inline-block");
             bookmarkable.simulate("mouseover");
             Y.Assert.areSame("ready", this.link.get("status"));
             Y.Assert.areSame(bookmarkable._node, this.link.get("target")._node);
         },
 
         testTargetMouseout : function() {
-            var bookmarkable = Y.one("#bookmarkable");
+            let bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", "ready");
             bookmarkable.simulate("mouseout");
@@ -67,32 +67,32 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
         },
 
         testNodeMouseover : function() {
-            var bookmarkable = Y.one("#bookmarkable");
+            let bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", "timing");
-            var event = document.createEvent("MouseEvents");
+            let event = document.createEvent("MouseEvents");
             event.initMouseEvent("mouseover", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
             this.link.get("node")._node.dispatchEvent(event);
             Y.Assert.areSame("active", this.link.get("status"));
         },
 
         testNodeMouseout : function() {
-            var bookmarkable = Y.one("#bookmarkable");
+            let bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", "active");
-            var event = document.createEvent("MouseEvents");
+            let event = document.createEvent("MouseEvents");
             event.initMouseEvent("mouseout", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
             this.link.get("node")._node.dispatchEvent(event);
             Y.Assert.areSame("timing", this.link.get("status"));
         },
 
         testClick : function() {
-            var bookmarkable = Y.one("#bookmarkable");
+            let bookmarkable = Y.one("#bookmarkable");
             this.link.set("target", bookmarkable);
             this.link.set("status", "active");
-            var self = this;
-            var status = "off";
-            var data = "";
+            let self = this;
+            let status = "off";
+            let data = "";
             L.io = function(url, config) {
                 status = self.link.get("status");
                 data = config.data;
@@ -108,12 +108,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
         },
 
         testLocalClick : function() {
-            var bookmarkable = Y.one("#local");
+            let bookmarkable = Y.one("#local");
             this.link.set("target", bookmarkable);
             this.link.set("status", "active");
-            var self = this;
-            var data = "";
-            var status = "off";
+            let self = this;
+            let data = "";
+            let status = "off";
             L.io = function(url, config) {
                 status = self.link.get("status");
                 data = config.data;
@@ -122,7 +122,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", "node-p
             this.link.get("node")._node.click();
             Y.Assert.areSame("bookmarking", status);
             Y.Assert.areSame("off", this.link.get("status"));
-            var expected = '{"label":"local","url":"' + L.Model.get(L.Model.BASE_PATH) + '/foo?bar=baz"}';
+            let expected = '{"label":"local","url":"' + L.Model.get(L.Model.BASE_PATH) + '/foo?bar=baz"}';
             Y.Assert.areSame(expected, data);
         },
 

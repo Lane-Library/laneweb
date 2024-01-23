@@ -3,7 +3,7 @@
 
     "use strict";
 
-    var model = L.Model,
+    let model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
     DEFAULT_SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
     DEFAULT_LIMIT = "mesh",
@@ -21,7 +21,7 @@
 	 * @param sourceBase {String} .
      */
     Suggest = function(input,  minQueryLength, sourceBase) {
-        var yuiinput = input._node ? input : new Y.Node(input);
+        let yuiinput = input._node ? input : new Y.Node(input);
         yuiinput.plug(Y.Plugin.AutoComplete, {
             minQueryLength: minQueryLength ? minQueryLength : DEFAULT_QUERY_LENGTH,
             source: sourceBase ? sourceBase :(  DEFAULT_SOURCE_BASE + DEFAULT_LIMIT),

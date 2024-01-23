@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var bassettTestCase = new Y.Test.Case({
+    let bassettTestCase = new Y.Test.Case({
 
         name : 'Lane Basset Test Case',
 
@@ -14,13 +14,13 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testHideClick : function() {
             Y.one('.see-all').simulate('click');
-            var another = Y.one("#anotherItem");
+            let another = Y.one("#anotherItem");
             Y.Assert.areEqual("none", another.getStyle("display"));
         },
 
         testSurlineSubRegion : function() {
-            var li = Y.all('#bassett-menu li').item(1);
-            var i = li.one("i");
+            let li = Y.all('#bassett-menu li').item(1);
+            let i = li.one("i");
             Y.Assert.isFalse(li.hasClass("enabled"));
             Y.Assert.isTrue(i.hasClass("fa-circle-o"));
             Y.Assert.isFalse(i.hasClass("fa-check-circle"));
@@ -52,7 +52,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testPageValueNotNumber: function() {
             Y.one('.see-all').simulate('click');
-            var form = Y.one("form"), prevented;
+            let form = Y.one("form"), prevented;
             Y.one('.bassett-error').setStyle('display', 'none');
             form.one("input[name=page]").set("value", "foo");
             form._node.addEventListener("submit", function(event) {
@@ -66,7 +66,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testPageLessThanOne: function() {
             Y.one('.see-all').simulate('click');
-            var form = Y.one("form"), prevented;
+            let form = Y.one("form"), prevented;
             Y.one('.bassett-error').setStyle('display', 'none');
             form.one("input[name=page]").set("value", "0");
             form._node.addEventListener("submit", function(event) {
@@ -80,7 +80,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testPageMoreThanPages: function() {
             Y.one('.see-all').simulate('click');
-            var form = Y.one("form"), prevented;
+            let form = Y.one("form"), prevented;
             Y.one('.bassett-error').setStyle('display', 'none');
             form.one("input[name=page]").set("value", "10");
             form._node.addEventListener("submit", function(event) {

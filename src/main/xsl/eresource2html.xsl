@@ -36,7 +36,7 @@
                 <xsl:apply-templates select="s:pub-text"/>
             </xsl:if>
             <xsl:copy-of select="f:descriptionTrigger(.)"/>
-            <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'])"/>
+            <xsl:copy-of select="f:handleDigitalLinks(s:link[@type = 'lane-digital'],.)"/>
             <xsl:copy-of select="f:handleLanePrintLinks(s:link[@type = 'lane-print'], .)"/>
             <div class="more-detail-container">
                 <i class="fa-solid fa-ellipsis fa-xl"></i>

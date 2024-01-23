@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var BookmarkLink,
+    let BookmarkLink,
         Model = L.Model,
         OFF = "off",
         READY = "ready",
@@ -63,7 +63,7 @@
                 Y.delegate("mouseover", this._handleTargetMouseover,"section.content", "a", this);
                 Y.delegate("mouseout", this._handleTargetMouseout,"section.content", "a", this);
                 this.on("statusChange", this._handleStatusChange);
-                var bookmarks = this.get("bookmarks");
+                let bookmarks = this.get("bookmarks");
                 if (bookmarks) {
                     bookmarks.after("addSync", this._handleSyncEvent, this);
                 }
@@ -106,7 +106,7 @@
              * @private
              */
             _handleClick : function() {
-                var target = this.get("target"),
+                let target = this.get("target"),
                     linkinfo = new L.LinkInfo(target._node),
                     label, url, query, bookmarks;
                 label = linkinfo.title;
@@ -160,7 +160,7 @@
              * @returns {Boolean}
              */
             _isAlreadyBookmarked : function(target) {
-                var url, bookmarks, query,
+                let url, bookmarks, query,
                     linkinfo = new L.LinkInfo(target._node);
                 if (linkinfo.local) {
                     url = linkinfo.path;
@@ -180,7 +180,7 @@
              * Determine if a link is bookmarkable.  For now true if its display property is inline
              * or inline-block and it does not contain an img element.
              * Added logic for if link was already bookmarked case 75199
-             * added logic for using class="no-bookmarking" for individual nodes and descendants for
+             * added logic for using for individual nodes and descendants for
              * case 101724
              * 2/4/15 added bookmarkable = false if no href
              * @method _isBookmarkable
@@ -189,10 +189,11 @@
              * @returns {Boolean}
              */
             _isBookmarkable : function(target) {
-                return target.get("href")
+               return  target.get("href")
                     && target.getStyle("display").indexOf("inline") === 0
                     && !target.one("img")
-                    && !target.ancestor(".no-bookmarking", true)
+                    && target.ancestor(".bookmarking", true)
+                    && !((target._node.classList) ? target._node.classList.contains("no-bookmarking") : false)
                     && !this._isAlreadyBookmarked(target);
             },
 
@@ -226,7 +227,7 @@
              */
             _handleStatusChange : function(event) {
                 this._clearTimer();
-                var node = this.get("node"), target = this.get("target");
+                let node = this.get("node"), target = this.get("target");
                 //IE messes up the event handling if set up on initialization
                 //so purging and selectively set them when the status changes.
                 node.purge(false);

@@ -4,14 +4,14 @@
 
     // view handles interactions with the DOM, created a with a NodeList
     // div nodes that have class bookcover.
-    var view = function(bookImageNodes) {
+    let view = function(bookImageNodes) {
 
             // an object that maps bookcover ids (bcids) to img nodes
-            var imageMap = {};
+            let imageMap = {};
 
             // initialize the imageMap
             bookImageNodes.forEach(function(imageNode) {
-                var bcids = imageNode.dataset.bcids ? imageNode.dataset.bcids.split(',') : [];
+                let bcids = imageNode.dataset.bcids ? imageNode.dataset.bcids.split(',') : [];
                 // course reserves and equipment records will have a data-bibid (change to data-bcid?)
                 if (imageNode.dataset.bibid) {
                     bcids.push("bib-" + imageNode.dataset.bibid);
@@ -28,7 +28,7 @@
                 // receive notification that the viewport has changed and return a list of
                 // img nodes that are in the viewport and requiring src attributes.
                 getImgsForUpdate: function(viewport) {
-                    var imagesForUpdate = [],
+                    let imagesForUpdate = [],
                         bcid, i;
                     for (bcid in imageMap) {
                         if (imageMap.hasOwnProperty(bcid)) {
@@ -45,7 +45,7 @@
 
                 // add src attributes to imag nodes
                 update: function(updates) {
-                    var bcid, src, i;
+                    let bcid, src, i;
                     for (bcid in updates) {
                         if (updates[bcid]) {
                             for (i = 0; i < imageMap[bcid].length; i++) {
@@ -65,13 +65,13 @@
         // communicates with the server to get bookcover thumbnail urls for bcids
         bookcoverService = function() {
 
-            var baseURL = window.model["base-path"] + "/apps/bookcovers?",
+            let baseURL = window.model["base-path"] + "/apps/bookcovers?",
 
                 service = {
 
                     // get thumbnail urls for bcids from the server
                     getBookCoverURLs: function(bcids) {
-                        var i, request, url = baseURL;
+                        let i, request, url = baseURL;
                         // don't get more than 20
                         for (i = 0; i < bcids.length && i < 20; i++) {
                             url += "bcid=" + bcids[i] + "&";
@@ -104,7 +104,7 @@
             // handler for the viewport update event, gets bcids from the view
             // and asks the service of bookcover urls for them.
             update: function(viewport) {
-                var bcids = view.getImgsForUpdate(viewport);
+                let bcids = view.getImgsForUpdate(viewport);
                 if (bcids.length > 0) {
                     bookcoverService.getBookCoverURLs(bcids);
                 }

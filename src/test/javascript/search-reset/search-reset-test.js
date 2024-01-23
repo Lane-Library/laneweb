@@ -16,7 +16,7 @@ Y.Test.Runner.add(new Y.Test.Case({
 
     "test Reset Click Deactivates": function() {
         this.reset.className = "search-reset search-reset-active";
-        var event = document.createEvent("UIEvent");
+        let event = document.createEvent("UIEvent");
         event.initEvent("click", true, false);
         L.once("searchReset:reset", function() {
             L.fire("search:queryChange", {newVal:"", oldVal:"query"});
@@ -37,12 +37,12 @@ Y.Test.Runner.add(new Y.Test.Case({
     },
 
     "test tracking": function() {
-        var trackEvent;
+        let trackEvent;
         L.once("tracker:trackableEvent", function(e) {
             trackEvent = e;
         });
         this.reset.className = "search-reset search-reset-active";
-        var event = document.createEvent("UIEvent");
+        let event = document.createEvent("UIEvent");
         event.initEvent("click", true, false);
         this.reset.dispatchEvent(event);
         Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);

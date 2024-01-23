@@ -4,7 +4,7 @@
 
     document.querySelectorAll('.s-pagination form[name=pagination]').forEach(function(form) {
         form.addEventListener("submit", function(event) {
-            var p = this.page,
+            let p = this.page,
                 parent = this.parentNode,
                 page = Number(p.value.replace(/[^\d]/g,'')),
                 pages = this.pages,

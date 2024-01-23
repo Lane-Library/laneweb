@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var historyPhotosTestCase = new Y.Test.Case({
+    let historyPhotosTestCase = new Y.Test.Case({
 
         name: 'History Photos Test Case'
 

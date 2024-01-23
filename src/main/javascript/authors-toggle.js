@@ -2,12 +2,12 @@
 
     "use strict";
 
-    var initializeAuthorToggles = function() {
+    let initializeAuthorToggles = function() {
         document.querySelectorAll(".authorsTrigger").forEach(function(triggerNode) {
             if (!triggerNode.authorsTriggerSubscribed) {
                 triggerNode.authorsTriggerSubscribed = true;
                 triggerNode.addEventListener("click", function(event) {
-                    var node = event.currentTarget,
+                    let node = event.currentTarget,
                         anchorNode = node.querySelector('a'),
                         iconNode = node.querySelector('i'),
                         hideNode = node.parentNode.querySelector(".authors-hide");

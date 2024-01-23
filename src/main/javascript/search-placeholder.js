@@ -4,7 +4,7 @@ if (document.querySelector(".search-form"))  {
 
     "use strict";
 
-    var PLACEHOLDER = "placeholder", SEARCH_DROPDOWN ='main-search',
+    let PLACEHOLDER = "placeholder", SEARCH_DROPDOWN ='main-search',
 
         inputNode = document.querySelector(".search-form input[name=q]"),
 		 dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
@@ -35,7 +35,7 @@ if (document.querySelector(".search-form"))  {
                 },
 
                 tabChange: function(event) {
-                    var newVal = event.newVal;
+                    let newVal = event.newVal;
                     model.current = newVal[newVal.source].placeholder;
                     view.setPlaceholder(model.current);
                 }

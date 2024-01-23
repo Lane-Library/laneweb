@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var permalinkToggleTestCase = new Y.Test.Case({
+    let permalinkToggleTestCase = new Y.Test.Case({
 
         name: "permalink toggle Test Case",
 
         testTogglePermalinks: function() {
-            var permaSpans = Y.all(".permalink"),
+            let permaSpans = Y.all(".permalink"),
                 links = Y.all(".permalink a");
             Y.Assert.areEqual(2, links.size());
             links.each(function(node) {

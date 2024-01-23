@@ -4,7 +4,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     L.on("viewport:init", function(event) {
 
-        var viewportTestCase = new Y.Test.Case({
+        let viewportTestCase = new Y.Test.Case({
 
             name: "Lane Viewport Testcase",
 
@@ -29,7 +29,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             },
 
             "test scroll event": function() {
-                var topInView = this.viewport.inView(document.querySelector("#top"));
+                let topInView = this.viewport.inView(document.querySelector("#top"));
                 Y.Assert.isFalse(topInView);
                 L.once("viewport:scrolled", function(event) {
                     topInView = event.viewport.inView(document.querySelector("#top"));

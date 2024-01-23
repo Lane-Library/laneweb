@@ -2,8 +2,8 @@
 
     "use strict";
 
-    var initializeDescriptionToggles = function() {
-        var triggers = document.querySelectorAll(".descriptionTrigger");
+    let initializeDescriptionToggles = function() {
+        let triggers = document.querySelectorAll(".descriptionTrigger");
         triggers.forEach(function(node) {
             if (node.classList.contains("eresource")) {
                 node.innerHTML = "<a href=\"#\">Read Full Description<i class=\"fa-regular fa-angle-down\"></i></a>";
@@ -16,8 +16,8 @@
     //add trigger markup and delegate click events on class "descriptionTrigger"
     if (document.querySelector("#searchResults")) {
 
-        var handleClick = function(node, event) {
-            var eresource = node.classList.contains("eresource"),
+        let handleClick = function(node, event) {
+            let eresource = node.classList.contains("eresource"),
                 searchContent = node.classList.contains("searchContent"),
                 ancestor = node.closest("li"),
                 active = ancestor.classList.contains("active");
@@ -41,7 +41,7 @@
         };
 
         document.querySelector("#searchResults").addEventListener("click", function(event) {
-            var node = event.target.closest(".descriptionTrigger");
+            let node = event.target.closest(".descriptionTrigger");
             if (node) {
                 handleClick(node, event);
             }

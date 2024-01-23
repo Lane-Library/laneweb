@@ -5,7 +5,7 @@
 	if (document.querySelectorAll("#slide-show .slide") !== undefined && document.querySelectorAll("#slide-show .slide").length > 0) {
 
 
-		var container = document.getElementById("slide-show"),
+		let container = document.getElementById("slide-show"),
 			previousButton = document.getElementById("previous-slide"),
 			nextButton = document.getElementById("next-slide"),
 			padding = 24, imagesLoaded = false,
@@ -13,7 +13,7 @@
 
 			model = function(slides) {
 
-				var m = {
+				let m = {
 					slides: slides,
 					index: 0,
 					imageDisplayedNumber: 1
@@ -29,7 +29,7 @@
 						//This is mostly to not load the image in mobile view
 						if (viewport.nearView(container, 2) && !imagesLoaded) {
 							model.slides.forEach(function(div) {
-								var img = div.querySelector("img");
+								let img = div.querySelector("img");
 								img.src = img.dataset.src;
 							})
                             imagesLoaded = true;
@@ -60,21 +60,21 @@
 			controller = function() {
 				return {
 					next: function() {
-						for (var i = model.imageDisplayedNumber; i > 0 && model.index > 0; i--) {
+						for (let i = model.imageDisplayedNumber; i > 0 && model.index > 0; i--) {
 							model.index--;
 							view.showSlide();
 						}
 						view.updateButton();
 					},
 					previous: function() {
-						for (var i = 0; i < model.imageDisplayedNumber && model.index + model.imageDisplayedNumber < model.slides.length; i++) {
+						for (let i = 0; i < model.imageDisplayedNumber && model.index + model.imageDisplayedNumber < model.slides.length; i++) {
 							view.hideSlide();
 							model.index++;
 						}
 						view.updateButton();
 					},
 					calculateImageDisplayed: function() {
-						var imageDiv = model.slides[model.slides.length - 1],
+						let imageDiv = model.slides[model.slides.length - 1],
 							t = parseFloat(container.offsetWidth + padding) / (parseFloat(imageDiv.offsetWidth + padding));
 						model.imageDisplayedNumber = parseInt(t);						
 					}

@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var messageTestCase = new Y.Test.Case({
+    let messageTestCase = new Y.Test.Case({
 
         name: "Lane Message TestCase",
 
         test: function() {
-            var message = "";
+            let message = "";
             window.alert = function(m) {
                 message = m;
             }

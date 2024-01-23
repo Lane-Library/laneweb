@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var menuTestCase = new Y.Test.Case({
+    let menuTestCase = new Y.Test.Case({
 
         name: 'Lane Menu Test Case',
 
         testCloseItem: function() {
-            var up = Y.one(".fa-chevron-up");
+            let up = Y.one(".fa-chevron-up");
             up.simulate("click");
             Y.Assert.isTrue(up._node.className === 'fa fa-chevron-down');
         }

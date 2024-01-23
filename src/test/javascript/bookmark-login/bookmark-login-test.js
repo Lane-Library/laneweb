@@ -6,7 +6,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         config.on.success.apply(this, [0,{responseText:'<div><a href="/foo?bar=baz" id="yes-bookmark-login">yes</a><a id="no-bookmark-login">no</a></div>'}, config.arguments]);
     };
 
-    var bookmarkLoginTestCase = new Y.Test.Case({
+    let bookmarkLoginTestCase = new Y.Test.Case({
 
         name : "BookmarkLogin Test Case",
 
@@ -14,10 +14,10 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         testAddBookmark: function() {
             this.login.addBookmark("label", "url");
-            var loc = encodeURIComponent(location.href);
-            var yes = Y.one("#yes-bookmark-login");
-            var no = Y.one("#no-bookmark-login");
-            var doc = location.protocol + "//" + location.host;
+            let loc = encodeURIComponent(location.href);
+            let yes = Y.one("#yes-bookmark-login");
+            let no = Y.one("#no-bookmark-login");
+            let doc = location.protocol + "//" + location.host;
             Y.Assert.areSame(doc + "/foo?bar=baz&label=label&url=url&redirect=" + loc, yes.get("href"));
             no.simulate("click");
             Y.Assert.areSame(false, L.Lightbox.get("visible"));

@@ -2,7 +2,7 @@ YUI({filter:"debug"}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var laneTestCase = new Y.Test.Case({
+    let laneTestCase = new Y.Test.Case({
 
         name: "Util TestCase",
 

@@ -5,7 +5,7 @@
 
 
 	<xsl:template match="/s:staff-directory/s:staff[@id = $liaison]">
-		<div class="business-card no-bookmarking">
+		<div class="business-card">
 			<h3>Your Librarian</h3>
 			<div class="pure-g">
 				<div class="pure-u-1-4">
@@ -29,7 +29,7 @@
 
 					<a>
 						<xsl:attribute name="href" select="s:cap-profile" />
-						<i class="fa fa-users"></i>
+						<i class="fa-regular fa-users"></i>
 					 <xsl:text>CAP Profile</xsl:text>
 					</a>
 					<br />

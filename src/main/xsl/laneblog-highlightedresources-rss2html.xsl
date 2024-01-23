@@ -23,7 +23,7 @@
 					</xsl:apply-templates>
 				</figure>
 			</div>
-			<div class="newsfeed-title">
+			<div class="newsfeed-title bookmarking">
 				<a href="{link}" title="feed link---{../../channel/title}">
 					<xsl:value-of select="title" />
 				</a>

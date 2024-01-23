@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var browzineTestCase = new Y.Test.Case({
+    let browzineTestCase = new Y.Test.Case({
 
         name: "Lane Browzine Testcase",
 
@@ -14,7 +14,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            var links = document.querySelectorAll("li[data-doi='10.1'] a"),
+            let links = document.querySelectorAll("li[data-doi='10.1'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
         },
@@ -27,7 +27,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            var links = document.querySelectorAll("li[data-doi='10.2'] a"),
+            let links = document.querySelectorAll("li[data-doi='10.2'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("fulltext-url", lastLink.getAttribute("href"))
         },
@@ -40,7 +40,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            var links = document.querySelectorAll("li[data-sid='bib-3'] a"),
+            let links = document.querySelectorAll("li[data-sid='bib-3'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("sfx-link", lastLink.getAttribute("href"))
         },
@@ -53,7 +53,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            var links = document.querySelectorAll("li[data-doi='10.4'] a"),
+            let links = document.querySelectorAll("li[data-doi='10.4'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("contentLocation", lastLink.getAttribute("href"))
         },
@@ -66,7 +66,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            var links = document.querySelectorAll("li[data-sid='pubmed-5'] a"),
+            let links = document.querySelectorAll("li[data-sid='pubmed-5'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("sfx-link", lastLink.getAttribute("href"))
         },
@@ -79,7 +79,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                     }
                 }
             });
-            var links = document.querySelectorAll("li[data-doi='10.6'] a"),
+            let links = document.querySelectorAll("li[data-doi='10.6'] a"),
                 lastLink = links[links.length - 1];
             Y.Assert.areEqual("retractionNoticeUrl", lastLink.getAttribute("href"))
             Y.Assert.areEqual(true, lastLink.isTrackableAsEvent)

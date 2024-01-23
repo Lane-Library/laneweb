@@ -3,12 +3,12 @@
    <div class="result-summary">
       <div class="result">105 to 106 of 106 results</div>
       <div class="pagination">
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-fast-backward no-bookmarking"/>
+         <a class="actived" href="/path&amp;auto=no&amp;page=1">
+            <span class="fa-solid fa-fast-backward"/>
             <span class="small-screen-hide"> First</span>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
-            <span class="fa-solid fa-step-backward no-bookmarking"/>
+         <a class="actived" href="/path&amp;auto=no&amp;page=2">
+            <span class="fa-solid fa-step-backward"/>
             <span class="small-screen-hide"> Previous</span>
          </a>
          <label>Page </label>
@@ -20,13 +20,13 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">
+         <a class="actived" href="/path&amp;auto=no&amp;page=4">
             <span class="small-screen-hide">Next </span>
-            <span class="fa-solid fa-step-forward no-bookmarking"/>
+            <span class="fa-solid fa-step-forward"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">
+         <a class="actived" href="/path&amp;auto=no&amp;page=15">
             <span class="small-screen-hide">Last </span>
-            <span class="fa-solid fa-fast-forward no-bookmarking"/>
+            <span class="fa-solid fa-fast-forward"/>
          </a>
       </div>
    </div>
@@ -83,12 +83,12 @@
    </div>
    <div class="result-summary">
       <div class="pagination">
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=1">
-            <span class="fa-solid fa-fast-backward no-bookmarking"/>
+         <a class="actived" href="/path&amp;auto=no&amp;page=1">
+            <span class="fa-solid fa-fast-backward"/>
             <span class="small-screen-hide"> First</span>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
-            <span class="fa-solid fa-step-backward no-bookmarking"/>
+         <a class="actived" href="/path&amp;auto=no&amp;page=2">
+            <span class="fa-solid fa-step-backward"/>
             <span class="small-screen-hide"> Previous</span>
          </a>
          <label>Page </label>
@@ -100,13 +100,13 @@
             <input type="text" size="4" value="3" name="page"/>
          </form>
          <label> of 15</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=4">
+         <a class="actived" href="/path&amp;auto=no&amp;page=4">
             <span class="small-screen-hide">Next </span>
-            <span class="fa-solid fa-step-forward no-bookmarking"/>
+            <span class="fa-solid fa-step-forward"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=15">
+         <a class="actived" href="/path&amp;auto=no&amp;page=15">
             <span class="small-screen-hide">Last </span>
-            <span class="fa-solid fa-fast-forward no-bookmarking"/>
+            <span class="fa-solid fa-fast-forward"/>
          </a>
       </div>
    </div>

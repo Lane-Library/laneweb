@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var BookmarksWidget,
+    let BookmarksWidget,
         Bookmark = L.Bookmark,
         Bookmarks = L.Bookmarks,
         Model = L.Model,
@@ -25,7 +25,7 @@
          * @method bindUI
          */
         bindUI : function() {
-            var bookmarks = this.get("bookmarks");
+            let bookmarks = this.get("bookmarks");
             bookmarks.after("addSync", this._bookmarkAdded, this);
             bookmarks.after("moveSync", this._bookmarkMoved, this);
             bookmarks.after("removeSync", this._bookmarksRemoved, this);
@@ -59,7 +59,7 @@
          * @param event {CustomEvent}
          */
         _bookmarkAdded : function(event) {
-            var url = event.bookmark.getUrl();
+            let url = event.bookmark.getUrl();
             if (PROXY_LINKS && url.match(/^http[s]?:/)) {
                 url = BASE_PATH + "/apps/proxy/credential?url=" + url;
             }
@@ -74,7 +74,7 @@
          * @param event {CustomEvent}
          */
         _bookmarkMoved : function(event) {
-            var srcNode = this.get("srcNode"),
+            let srcNode = this.get("srcNode"),
                 children = srcNode.get("children"),
                 moved = children.item(event.from),
                 current = children.item(event.to),
@@ -91,7 +91,7 @@
          * @param event {CustomEvent}
          */
         _bookmarksRemoved : function(event) {
-            var i, items = this.get("srcNode").all("li");
+            let i, items = this.get("srcNode").all("li");
             for (i = event.positions.length - 1; i >= 0; --i) {
                 items.item(event.positions[i]).remove(true);
             }
@@ -105,7 +105,7 @@
          * @param event {CustomEvent}
          */
         _bookmarkUpdated : function(event) {
-            var bookmark = this.get("bookmarks").getBookmark(event.position),
+            let bookmark = this.get("bookmarks").getBookmark(event.position),
                 anchor = this.get("srcNode").all("li").item(event.position).one("a");
             anchor.set("innerHTML", bookmark.getLabel());
             anchor.set("href", bookmark.getUrl());
@@ -118,7 +118,7 @@
          * @private
          */
         _truncateLabels : function() {
-            var i, anchor, label, anchors = this.get("srcNode").all("a");
+            let i, anchor, label, anchors = this.get("srcNode").all("a");
             for (i = 0; i < anchors.size(); i++) {
                 anchor = anchors.item(i);
                 label = anchor.get("innerHTML");
@@ -134,7 +134,7 @@
          * @private;
          */
         _hideSomeItems : function() {
-            var i, displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li");
+            let i, displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li");
             for (i = 0; i < displayLimit && i < items.size(); i++) {
                 items.item(i).setStyle("display", "block");
             }
@@ -149,7 +149,7 @@
          * @private;
          */
         _showManageBookmarks: function() {
-            var displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li"),
+            let displayLimit = this.get("displayLimit"), items = this.get("srcNode").all("li"),
                 manageBookmarks = document.querySelector(".manageBookmarks");
             if (manageBookmarks) {
                 if (items.size() == 0) {
@@ -171,7 +171,7 @@
         HTML_PARSER : {
             items : ["li"],
             bookmarks : function(srcNode) {
-                var i, anchor, linkinfo, label, url, query, bookmarks = [], anchors = srcNode.all("a");
+                let i, anchor, linkinfo, label, url, query, bookmarks = [], anchors = srcNode.all("a");
                 for (i = 0; i < anchors.size(); i++) {
                     anchor = anchors.item(i);
                     linkinfo = new L.LinkInfo(anchor._node);

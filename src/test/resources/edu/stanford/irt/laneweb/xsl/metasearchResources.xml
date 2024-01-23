@@ -7,7 +7,7 @@
          <div class="resource-detail">
             <span class="primaryType">Article</span>
             <div>
-               <a class="primaryLink"
+               <a class="primaryLink bookmarking"
                   href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed&amp;id=pmid:25195623&#xA;&#x9;&#x9;&#x9;">
                   <keyword xmlns="http://lane.stanford.edu/results/1.0"
                            xmlns:s="http://lane.stanford.edu/resources/1.0">Music</keyword>
@@ -17,7 +17,7 @@
             <div class="author">Gordon RL</div>
             <div class="citation">Dev Sci. 2014 Sep 7</div>
             <div class="resultInfo">
-               <span class="descriptionTrigger searchContent no-bookmarking"/>
+               <span class="descriptionTrigger searchContent"/>
             </div>
             <div class="description">description</div>
             <span class="pmid">
@@ -34,7 +34,7 @@
          <div class="resource-detail">
             <span class="primaryType">Article</span>
             <div>
-               <a class="primaryLink"
+               <a class="primaryLink bookmarking"
                   href="https://www.uptodate.com/contents/skin-lesions-in-the-newborn-and-infant?search=skin">Skin lesions in the newborn and infant</a>
             </div>
             <div class="sourceInfo">
@@ -47,13 +47,13 @@
          <div class="resource-detail">
             <span class="primaryType">Article</span>
             <div>
-               <a class="primaryLink"
+               <a class="primaryLink bookmarking"
                   href="http://sfx.stanford.edu/local?sid=stanford:laneweb-search-pubmed_rct&amp;id=pmid:36335037&#xA;&#x9;&#x9;&#x9;">Radiation-induced skin </a>
             </div>
             <div class="author">Purswani JM,Tattersall IW, Gerber NK.</div>
             <div class="citation">Clin Breast Cancer. 2022 Oct 08</div>
             <div class="resultInfo">
-               <span class="descriptionTrigger searchContent no-bookmarking"/>
+               <span class="descriptionTrigger searchContent"/>
             </div>
             <div class="description">::INTRODUCTION##The purpose of this study is to
 				systematically review data</div>

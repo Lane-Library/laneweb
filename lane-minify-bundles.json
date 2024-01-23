@@ -58,7 +58,8 @@
         "liaisons-directory.css",
         "use-lane.css",
         "IE.css",
-        "responsive.css"
+        "responsive.css",
+        "altmetric.css"
       ]
     },
     {
@@ -127,7 +128,8 @@
         "validation.js",
         "holdings-toggle.js",
         "table-hide-empty-columns.js",
-        "zotero.js"
+        "zotero.js",
+        "altmetric.js"
       ]
     },
     {

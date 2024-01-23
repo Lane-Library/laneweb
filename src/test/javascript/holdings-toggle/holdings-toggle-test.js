@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var holdingsToggleTestCase = new Y.Test.Case({
+    let holdingsToggleTestCase = new Y.Test.Case({
 
         name: "holdings toggle Test Case",
 
         testTriggerContentPresent: function() {
-            var triggers = document.querySelectorAll(".hldgsTrigger");
+            let triggers = document.querySelectorAll(".hldgsTrigger");
             Y.Assert.areEqual(2, triggers.length);
             triggers.forEach(function(trigger){
                 Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-solid.fa-angle-down').length);
@@ -15,7 +15,7 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
 
         testToggleHoldings: function() {
-            var triggers = document.querySelectorAll(".hldgsTrigger"),
+            let triggers = document.querySelectorAll(".hldgsTrigger"),
                 trackEvent,
                 handler = L.on("tracker:trackableEvent", function(e) {
                     trackEvent = e;

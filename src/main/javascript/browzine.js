@@ -4,14 +4,14 @@
 
     // view handles interactions with the DOM, created a with a NodeList
     // of search result li nodes with data-doi attributes
-    var view = function(searchResultNodes) {
+    let view = function(searchResultNodes) {
 
             // an object that maps dois to data nodes
-            var doiMap = {};
+            let doiMap = {};
 
             // initialize the doiMap
             searchResultNodes.forEach(function(searchResultNode) {
-                var doi = searchResultNode.dataset.doi.toLowerCase();
+                let doi = searchResultNode.dataset.doi.toLowerCase();
                 doiMap[doi] = searchResultNode;
             });
 
@@ -20,7 +20,7 @@
 
                 // return a list of search result nodes that require article lookups
                 getDoisForUpdate: function(viewport) {
-                    var doisForUpdate = [],
+                    let doisForUpdate = [],
                         doi;
                     for (doi in doiMap) {
                         if (doiMap.hasOwnProperty(doi)) {
@@ -34,7 +34,7 @@
 
                 // add PDF link search result nodes
                 update: function(article) {
-                    var retractionNoticeUrl = article.data.retractionNoticeUrl,
+                    let retractionNoticeUrl = article.data.retractionNoticeUrl,
                         fulltextUrl = article.data.fullTextFile,
                         contentLocation = article.data.contentLocation,
                         doi = article.data.doi ? article.data.doi.toLowerCase() : null,
@@ -64,7 +64,7 @@
         }(document.querySelectorAll("li[data-doi]")),
 
         addFulltextLink = function(node, label, url) {
-           var link = node.querySelector('.resource-detail .hldgsContainer span a'),
+           let link = node.querySelector('.resource-detail .hldgsContainer span a'),
                span = link.querySelector('span');
             link.href = url;
             span.textContent = label;
@@ -81,13 +81,13 @@
         // service to communicate with the server to fetch article data for each DOI
         articleLookupService = function() {
 
-            var baseURL = window.model["base-path"] + "/apps/browzine/doi/",
+            let baseURL = window.model["base-path"] + "/apps/browzine/doi/",
 
                 service = {
 
                     // fetch article data from API
                     getArticleData: function(doi) {
-                        var request, url = baseURL + doi;
+                        let request, url = baseURL + doi;
                         request = new XMLHttpRequest();
                         request.open("GET", url, true);
                         request.onload = function() {
@@ -120,7 +120,7 @@
             // handler for the viewport update event, gets dois from the view
             // and asks the service of bookcover urls for them.
             update: function(viewport) {
-                var dois = view.getDoisForUpdate(viewport);
+                let dois = view.getDoisForUpdate(viewport);
                 if (dois.length > 0) {
                     dois.forEach(function(doi){
                         if (doi.trim()) {

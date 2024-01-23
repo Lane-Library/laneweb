@@ -24,7 +24,7 @@
         </x:context>
         <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
             <li class="resource" data-sid="" data-index=""><div class="resource-detail">
-            <span class="primaryType">Article</span><div><a class="primaryLink"
+            <span class="primaryType">Article</span><div><a class="primaryLink bookmarking"
              href="" /></div><div class="sourceInfo"><span>Source: <a href=""> - NaN </a></span></div></div></li>
         </x:expect>
     </x:scenario>
@@ -40,9 +40,9 @@
         <x:expect label="eresource goes in a li with resultInfo and sourceInfo divs">
      	<li  class="resource"
          data-sid=""
-         data-index=""><div class="resource-detail"><span class="primaryType" /><div><a class="primaryLink"
+         data-index=""><div class="resource-detail"><span class="primaryType" /><div><a class="primaryLink bookmarking"
              href=""
-             title="" /></div></div><div class="bookcover-container" /><div class="more-detail-container"><i class="fa-solid fa-ellipsis fa-xl" /><div class="sourceInfo no-bookmarking"><div class="permalink"><a title="click to copy a shareable link to this record"
+             title="" /></div></div><div class="bookcover-container" /><div class="more-detail-container"><i class="fa-solid fa-ellipsis fa-xl" /><div class="sourceInfo"><div class="permalink"><a title="click to copy a shareable link to this record"
                 href="https://lane.stanford.edu/view/foo/12345"><i class="fa-solid fa-link fa-rotate-180" />
                     Get Shareable Link
                 </a></div><div /></div></div></li>

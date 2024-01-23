@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://lane.stanford.edu/irt-cocoon/sitemap/1.1"
+  xmlns="http://lane.stanford.edu/irt-cocoon/sitemap/1.1">
+
+  <xsd:element name="sitemap">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+          <xsd:element ref="match" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element ref="select" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:choice>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="pipeline">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:group ref="pipeline-content"/>
+      </xsd:sequence>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="parameter">
+    <xsd:complexType>
+      <xsd:attribute name="name" type="xsd:string" use="required"/>
+      <xsd:attribute name="value" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:group name="pipeline-content">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="aggregate"/>
+        <xsd:element ref="generate"/>
+        <xsd:element ref="transform"/>
+        <xsd:element ref="serialize"/>
+        <xsd:element ref="select"/>
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:group>
+
+  <xsd:element name="match">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="match" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="pipeline" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+      <xsd:attribute name="pattern" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="aggregate">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="generate" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+      <xsd:attribute name="element" type="xsd:string" use="required"/>
+      <xsd:attribute name="ns" type="xsd:string" use="optional"/>
+      <xsd:attribute name="prefix" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="generate">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="src" type="xsd:string" use="optional"/>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="transform">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="src" type="xsd:string" use="optional"/>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="serialize">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="src" type="xsd:string" use="optional"/>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="select">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="when" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="otherwise" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+      <xsd:attribute name="type" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="when">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="match" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:group ref="pipeline-content"/>
+      </xsd:sequence>
+      <xsd:attribute name="test" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="otherwise">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="match" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:group ref="pipeline-content"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>

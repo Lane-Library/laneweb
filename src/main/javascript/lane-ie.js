@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var userAgent = L.getUserAgent();
+    let userAgent = L.getUserAgent();
 
 
      /* IE 10 and Earlier and IE 11*/

@@ -31,7 +31,7 @@
     </xsl:variable>
 
     <xsl:template name="sortBy">
-        <div class="view-by sort no-bookmarking">
+        <div class="view-by sort">
             <span>Sort by</span>
             <div class="general-dropdown dropdown">
                 <div class="general-dropdown-trigger">

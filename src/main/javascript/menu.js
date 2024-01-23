@@ -14,7 +14,7 @@
 
     document.querySelectorAll('.menu-container ul li a[href^="#"]').forEach(function(link) {
         link.addEventListener('click', function(event) {
-           var clickTarget = event.target;
+           let clickTarget = event.target;
            clickTarget.closest('ul').querySelectorAll('li a').forEach(function(anchor) {
                 anchor.classList.remove('menuitem-active');
             });
@@ -24,7 +24,7 @@
 
     
     window.addEventListener("load", function() {
-    var hash = window.location.hash;
+    let hash = window.location.hash;
     document.querySelectorAll('.menu-container ul li a[href^="#"]').forEach(function(link) {
         if(hash === link.hash){
             link.classList.add('menuitem-active');

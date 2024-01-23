@@ -5,7 +5,7 @@
     "use strict";
 
     if (/.*\/search\.html/.test(location.pathname)) {
-        var i = 0,
+        let i = 0,
             // adjust scroll based on device width
             scrollAmount = (window.innerWidth < 812) ? 30 : 130,
             offset = document.forms[0].offsetTop - scrollAmount ,
