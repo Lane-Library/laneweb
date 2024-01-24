@@ -73,6 +73,11 @@ public class PatronRegistrationControllerTest {
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.model.getAttribute("firstName")).andReturn("firstName");
+        expect(this.model.getAttribute("middleName")).andReturn("middleName");
+        expect(this.model.getAttribute("lastName")).andReturn("lastName");
+        expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.map.put("email", "firstName middleName lastName <email>")).andReturn(true);
         expect(this.folioUserService.getUser("username", "externalSystemId", "email"))
                 .andReturn(Collections.emptyList());
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
