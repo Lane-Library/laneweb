@@ -23,7 +23,8 @@ public class EMailSender {
 
   private static final String EMAIL = "email";
 
-  private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$", Pattern.CASE_INSENSITIVE);
+  // "name@domain.com" or "jane doe <name@domain.com>"
+  private static final Pattern EMAIL_PATTERN = Pattern.compile("^(?:[\\w ]+ <)?[\\w\\.%\\+\\-]+@[\\w.-]+\\.[A-Z]{2,4}>?$", Pattern.CASE_INSENSITIVE);
 
   private static final String RECIPIENT = "recipient";
 
