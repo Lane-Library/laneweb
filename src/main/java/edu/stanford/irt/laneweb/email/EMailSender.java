@@ -88,9 +88,8 @@ public class EMailSender {
   }
 
   /*
-   * To Send email to lane-crm-dev@stanford.edu if the host is not
-   * lane.stnford.edu Email Controller must bind data httpreuqest by using
-   * emailDataBinder
+   * Send email to lane-crm-dev@stanford.edu if the host is not lane.stanford.edu. emailDataBinder (gets host from
+   * HttpServletRequest) is required when using EMailSender
    */
   private String getRecipient(Map<String, Object> map) {
     String host = (String) map.get(Model.HOST);
