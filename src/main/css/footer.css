@@ -155,35 +155,47 @@ footer:nth-of-type(3){
 	padding-top: 5px;
 }
 
+
+
+/*social-logos like facebook, twitter, etc. */
 .footer-organization .social-logos {
-	padding-top: 1.25em;
+    display: flex;
+    align-items: center;
 }
 
 .footer-organization .social-logos a {
-	text-decoration: none;
+    margin-top: 21px;
+    margin-right: 12px;
 }
 
-.footer-organization .fab{
-		font-size: 1.3em;
+.footer-organization .social-logos span {
+    font-size: 21px;
+    border-radius: 50%;
+    line-height: 0;
+    display: inline-block;
+    padding: 6px;
+    width: auto;
+    height: auto;
+    color: white
 }
 
-.footer-organization span.fa-stack {
-	-fa-inverse: white; 
-	margin-right: 8px;
-	width: 2em;
-}
-.footer-organization .fa-facebook {
-	font-size: 2em;
-	color:#1877F2;
+.footer-organization .social-logos a:first-child span {
+    padding: 0;
+    color: #1877f2;
+    font-size: 33px;
 }
 
-.footer-organization .fa-twitter, .footer-organization .fa-youtube, 
-.footer-organization .fa-instagram {
-	margin-top: 1px; 
+.footer-organization .social-logos a:nth-child(2) span {
+    background-color: #1DA1F2;
 }
 
-.footer-organization .fa-instagram {
-	font-weight: 600;
+.footer-organization .social-logos a:nth-child(3) span {
+    background-color: red;
+}
+
+.footer-organization .social-logos a:nth-child(4) span {
+    background-color: black;
+    font-weight: 600;
 }
 
 
