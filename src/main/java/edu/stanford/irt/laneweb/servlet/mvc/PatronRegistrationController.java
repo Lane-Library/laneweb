@@ -122,6 +122,7 @@ public class PatronRegistrationController {
                 for (String field : STRIP_FROM_EMAIL) {
                     map.remove(field);
                 }
+                map.put(EMAIL, nameAndEmail(model));
                 this.sender.sendEmail(map);
                 return CONFIRMATION_PAGE;
             }
@@ -136,6 +137,22 @@ public class PatronRegistrationController {
         String value = (request.getParameter(key) == null) ? defaultValue : request.getParameter(key);
         model.addAttribute(key, value);
         return value;
+    }
+
+    private String nameAndEmail(final Model model) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(model.getAttribute(USER_INPUT_FIRST_NAME));
+        String middle = (String) model.getAttribute(USER_INPUT_MIDDLE_NAME);
+        sb.append(" ");
+        if (null != middle && !middle.isBlank()) {
+            sb.append(middle);
+            sb.append(" ");
+        }
+        sb.append(model.getAttribute(USER_INPUT_LAST_NAME));
+        sb.append(" <");
+        sb.append(model.getAttribute(EMAIL));
+        sb.append(">");
+        return sb.toString();
     }
 
     @ModelAttribute
