@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<title>solr-facets javascript unit tests</title>
-<link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+    <title>solr-facets javascript unit tests</title>
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
 </head>
-<body class="yui3-skin-sam">
-        <div class="pure-g">
-            <div class="pure-u-1-4">
-                <div id="searchFacets" class="solrFacets module leftColumn">
-                </div>
+
+<body>
+
+    <form action="" method="get" class="search-form">
+        <input name="facets" type="hidden" value="" />
+    </form>
+
+    <ul>
+        <li class="facet facetHeader">
+            Year
+            <div>
+                <span id="facet-error-message" />
+                <form action="" method="get" id="solr-date-form">
+                    <input name="start-year" aria-label="Start Year" type="number" class="date start" min="1400"
+                        max="2023" value="::123" required="true" placeholder="From">
+                    <input name="end-year" aria-label="End Year" type="number" class="date end" min="1400" max="2023"
+                        value="123::" required="true" placeholder="To">
+                    <input type="submit" id="submit" value="Add" class="date">
+                </form>
             </div>
-            <div class="pure-u-3-4">
-                <div id="solrLimits" ><strong>Filters applied: </strong></div>
-                <div class="module">
-                    <div class="solrSearch" id="searchResults">
-                    search results
-                    </div>
-                </div>
-            </div>
-        </div>
+        </li>
+    </ul>
     <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
     <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
     <script src="../../../main/javascript/util.js" type="text/javascript"></script>
@@ -27,4 +35,5 @@
     <script src="solr-facets-test.js" type="text/javascript"></script>
     <script src="../../../main/javascript/solr-facets.js" type="text/javascript"></script>
 </body>
+
 </html>

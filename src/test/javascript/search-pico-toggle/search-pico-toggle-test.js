@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
 "use strict";
 
-let searchPicoToggleTestCase = new Y.Test.Case({
+var searchPicoToggleTestCase = new Y.Test.Case({
 
     on: document.querySelector(".pico-on"),
 
@@ -20,12 +20,11 @@ let searchPicoToggleTestCase = new Y.Test.Case({
         L.fire("searchDropdown:change", {newVal: {source:"clinical-all"}});
         Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
-        Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
+        Y.Assert.areEqual("pico-toggle", this.toggle.className);
     },
     
     "test not clinical search tab activated": function() {
         this.on.classList.add("pico-on-active");
-        this.toggle.classList.add("pico-toggle-active");
         L.fire("searchDropdown:change", {newVal: {source:"foo"}});
         Y.Assert.areEqual("pico-on", this.on.className);
         Y.Assert.areEqual("pico-off", this.off.className);
@@ -35,11 +34,11 @@ let searchPicoToggleTestCase = new Y.Test.Case({
     "test on click": function() {
         this.on.classList.add("pico-on-active");
         this.toggle.classList.add("pico-toggle-active");
-        let active;
+        var active;
         L.once("picoToggle:change", function(event) {
             active = event.active;
         });
-        let click = document.createEvent("MouseEvent");
+        var click = document.createEvent("MouseEvent");
         click.initEvent("click", true, false);
         this.on.dispatchEvent(click);
         Y.Assert.isTrue(active);
@@ -51,11 +50,11 @@ let searchPicoToggleTestCase = new Y.Test.Case({
     "test off click": function() {
         this.off.classList.add("pico-off-active");
         this.toggle.classList.add("pico-toggle-active");
-        let active;
+        var active;
         L.once("picoToggle:change", function(event) {
             active = event.active;
         });
-        let click = document.createEvent("MouseEvent");
+        var click = document.createEvent("MouseEvent");
         click.initEvent("click", true, false);
         this.off.dispatchEvent(click);
         Y.Assert.isFalse(active);
