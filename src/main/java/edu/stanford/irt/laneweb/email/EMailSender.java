@@ -75,9 +75,11 @@ public class EMailSender {
                 }
             }
             helper.setText(text.toString());
-            if (null != files) {
+            if (files != null) {
                 for (File file : files) {
-                helper.addAttachment(file.getName(), file);
+                    if (file != null) {
+                        helper.addAttachment(file.getName(), file);
+                    }
                 }
             }
         } catch (MessagingException e) {
