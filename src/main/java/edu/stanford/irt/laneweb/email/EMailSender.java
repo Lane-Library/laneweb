@@ -55,11 +55,11 @@ public class EMailSender {
         sendEmail(map, null);
     }
 
-    public void sendEmail(final Map<String, Object> map, final File file) {
+    public void sendEmail(final Map<String, Object> map, final File[] files) {
         final MimeMessage message = this.mailSender.createMimeMessage();
         MimeMessageHelper helper;
         try {
-            helper = new MimeMessageHelper(message, (file != null));
+            helper = new MimeMessageHelper(message, (files != null));
             helper.setSubject((String) map.get(SUBJECT));
             helper.setTo(getRecipient(map));
             String from = (String) map.get(EMAIL);
@@ -75,8 +75,10 @@ public class EMailSender {
                 }
             }
             helper.setText(text.toString());
-            if (null != file) {
+            if (null != files) {
+                for (File file : files) {
                 helper.addAttachment(file.getName(), file);
+                }
             }
         } catch (MessagingException e) {
             throw new LanewebException(e);
