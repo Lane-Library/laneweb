@@ -24,7 +24,7 @@ import edu.stanford.irt.laneweb.email.EMailSender;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.spam.SpamService;
 
-// TODO: the individual methods for each address probably can be combined
+
 @Controller
 @RequestMapping(value = "/apps/mail/")
 public class EMailController {
@@ -36,8 +36,6 @@ public class EMailController {
     private static final String ASKUS_PATH = "askus";
 
     private static final String ASKUS_PORTAL = "laneaskus";
-
-    private static final String CONFIRMATION_PAGE = "redirect:/contacts/confirmation.html";
 
     private static final String CONFIRMATION_PAGE_EJP = "redirect:/contacts/ejp-confirmation.html";
 
