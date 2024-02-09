@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentService implements EquipmentService {
 
-    private static final String LIST_ENDPOINT_PATH = "folio/equipment/list";
+    private static final String LIST_ENDPOINT_PATH = "equipment/list";
 
     private static final TypeReference<List<Map<String, String>>> TYPE = new TypeReference<>() {
     };
