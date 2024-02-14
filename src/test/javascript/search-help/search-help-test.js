@@ -5,12 +5,15 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
     window.model = {"base-path":""};
 
     Y.Test.Runner.add(new Y.Test.Case({
+        
+        
+        linkHelp : document.querySelector(".search-help a"),
 
         name: "Search Help TestCase",
 
         "test searchDropdown:change": function() {
             L.fire("searchDropdown:change", {newVal:{source:"foo",foo:{help:"new href"}}});
-            Y.Assert.areEqual("new href", document.querySelector(".search-help").getAttribute("href"));
+            Y.Assert.areEqual("new href", this.linkHelp.getAttribute("href"));
         }
 
     }));

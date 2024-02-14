@@ -53,7 +53,7 @@ public class LanewebIT {
         ns.put("h", "http://www.w3.org/1999/xhtml");
         this.mockMvc.perform(get("/search.html?source=clinical-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk())
-                .andExpect(xpath("//h:li[position() >= 10]//h:a[@class='primaryLink']/h:strong", ns).exists())
+                .andExpect(xpath("//h:li[position() >= 10]//h:a[@class='primaryLink bookmarking']/h:strong", ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
@@ -112,7 +112,7 @@ public class LanewebIT {
         this.mockMvc
                 .perform(
                         get("/apps/search/content/html/pubmed?q=Ebola").servletPath("/apps/search/content/html/pubmed"))
-                .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink']/h:strong", ns).exists())
+                .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink bookmarking']/h:strong", ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }
 

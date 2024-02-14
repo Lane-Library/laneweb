@@ -26,13 +26,13 @@
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
+         <a class="actived" href="/path&amp;auto=no&amp;page=2">
             <span class="small-screen-hide">Next </span>
-            <span class="fa-solid fa-step-forward no-bookmarking"/>
+            <span class="fa-solid fa-step-forward"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
+         <a class="actived" href="/path&amp;auto=no&amp;page=2">
             <span class="small-screen-hide">Last </span>
-            <span class="fa-solid fa-fast-forward no-bookmarking"/>
+            <span class="fa-solid fa-fast-forward"/>
          </a>
       </div>
    </div>
@@ -98,13 +98,13 @@
             <input type="text" size="4" value="1" name="page"/>
          </form>
          <label> of 2</label>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
+         <a class="actived" href="/path&amp;auto=no&amp;page=2">
             <span class="small-screen-hide">Next </span>
-            <span class="fa-solid fa-step-forward no-bookmarking"/>
+            <span class="fa-solid fa-step-forward"/>
          </a>
-         <a class="actived no-bookmarking" href="/path&amp;auto=no&amp;page=2">
+         <a class="actived" href="/path&amp;auto=no&amp;page=2">
             <span class="small-screen-hide">Last </span>
-            <span class="fa-solid fa-fast-forward no-bookmarking"/>
+            <span class="fa-solid fa-fast-forward"/>
          </a>
       </div>
    </div>

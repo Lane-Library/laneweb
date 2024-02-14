@@ -49,7 +49,7 @@ public class LaneSearchIT {
     public void testLaneSearch20428285() throws Exception {
         // known PMID
         this.mockMvc.perform(get("/eresources/search.html?q=20428285").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and contains(@href,'20428285')]",
                         this.ns).exists())
                 .andExpect(xpath("//h:li", this.ns).nodeCount(1));
     }
@@ -59,7 +59,7 @@ public class LaneSearchIT {
         // accessmedicine
         this.mockMvc.perform(get("/eresources/search.html?q=accessmedicine").servletPath("/eresources/search.html"))
                 .andExpect(
-                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and contains(@title,'AccessMedicine')]",
                                 this.ns).exists());
     }
 
@@ -68,7 +68,7 @@ public class LaneSearchIT {
         // AccessMedicine
         this.mockMvc.perform(get("/eresources/search.html?q=AccessMedicine").servletPath("/eresources/search.html"))
                 .andExpect(
-                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and contains(@title,'AccessMedicine')]",
                                 this.ns).exists());
     }
 
@@ -77,7 +77,7 @@ public class LaneSearchIT {
         // Access Medicine
         this.mockMvc.perform(get("/eresources/search.html?q=Access Medicine").servletPath("/eresources/search.html"))
                 .andExpect(
-                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and contains(@title,'AccessMedicine')]",
+                        xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and contains(@title,'AccessMedicine')]",
                                 this.ns).exists());
     }
 
@@ -85,7 +85,7 @@ public class LaneSearchIT {
     public void testLaneSearchAnatomyImages() throws Exception {
         // anatomy images
         this.mockMvc.perform(get("/eresources/search.html?q=anatomy images").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='e-Anatomy']", this.ns)
+                .andExpect(xpath("//h:li[position() <= 10]//h:a[@class='primaryLink bookmarking' and @title='e-Anatomy']", this.ns)
                         .exists());
     }
 
@@ -107,7 +107,7 @@ public class LaneSearchIT {
         // Bates Guide
         this.mockMvc.perform(get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@title,\"Bates' Guide to physical examination and history taking.\")]",
+                        "//h:li[position() <= 10]//h:a[@class='primaryLink bookmarking' and contains(@title,\"Bates' Guide to physical examination and history taking.\")]",
                         this.ns).exists());
     }
 
@@ -117,7 +117,7 @@ public class LaneSearchIT {
         this.mockMvc
                 .perform(get("/eresources/search.html?q=reference management").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and contains(@href,'laneguides.stanford.edu/reference-management')]",
+                        "//h:li[position() <= 10]//h:a[@class='primaryLink bookmarking' and contains(@href,'laneguides.stanford.edu/reference-management')]",
                         this.ns).exists());
     }
 
@@ -126,7 +126,7 @@ public class LaneSearchIT {
         // Classes
         this.mockMvc.perform(get("/eresources/search.html?q=lane classes").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'laneclasses.html')]",
+                        "//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@href,'laneclasses.html')]",
                         this.ns).exists());
     }
 
@@ -135,7 +135,7 @@ public class LaneSearchIT {
         // directions
         this.mockMvc.perform(get("/eresources/search.html?q=directions to lane").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'directions-maps.html')]",
+                        "//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@href,'directions-maps.html')]",
                         this.ns).exists());
     }
 
@@ -143,7 +143,7 @@ public class LaneSearchIT {
     public void testLaneSearchEndNote() throws Exception {
         // EndNote
         this.mockMvc.perform(get("/eresources/search.html?q=EndNote").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li//h:a[@class='primaryLink' and contains(@title,'EndNote')]", this.ns).exists());
+                .andExpect(xpath("//h:li//h:a[@class='primaryLink bookmarking' and contains(@title,'EndNote')]", this.ns).exists());
     }
 
     @Test
@@ -152,7 +152,7 @@ public class LaneSearchIT {
         this.mockMvc
                 .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-175.")
                         .servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@href,'20428285')]",
                         this.ns).exists());
     }
 
@@ -163,7 +163,7 @@ public class LaneSearchIT {
                 .perform(get("/eresources/search.html?q=Guide to the evaluation of permanent impairment")
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@title,'Guides to the evaluation of permanent impairment')]",
+                        "//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@title,'Guides to the evaluation of permanent impairment')]",
                         this.ns).exists());
     }
 
@@ -172,7 +172,7 @@ public class LaneSearchIT {
         // Harrison's
         this.mockMvc.perform(get("/eresources/search.html?q=Harrison's").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 3]//h:a[@class='primaryLink' and starts-with(@title,\"Harrison's\")]",
+                        "//h:li[position() <= 3]//h:a[@class='primaryLink bookmarking' and starts-with(@title,\"Harrison's\")]",
                         this.ns).exists());
     }
 
@@ -180,7 +180,7 @@ public class LaneSearchIT {
     public void testLaneSearchJAAD() throws Exception {
         // jaad
         this.mockMvc.perform(get("/eresources/search.html?q=jaad").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and @title='Journal of the American Academy of Dermatology']",
+                xpath("//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and @title='Journal of the American Academy of Dermatology']",
                         this.ns).exists());
     }
 
@@ -188,7 +188,7 @@ public class LaneSearchIT {
     public void testLaneSearchJAMA() throws Exception {
         // jama
         this.mockMvc.perform(get("/eresources/search.html?q=jama").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='JAMA']", this.ns).exists());
+                xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='JAMA']", this.ns).exists());
     }
 
     @Test
@@ -198,7 +198,7 @@ public class LaneSearchIT {
                 .perform(get("/eresources/search.html?q=journal of medical research")
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 15]//h:a[@class='primaryLink' and @title='Journal of medical research']",
+                        "//h:li[position() <= 15]//h:a[@class='primaryLink bookmarking' and @title='Journal of medical research']",
                         this.ns).exists());
     }
 
@@ -208,7 +208,7 @@ public class LaneSearchIT {
         this.mockMvc
                 .perform(get("/eresources/search.html?q=J Med Libr Assoc. 2010 April 98(2):171-5.")
                         .servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@href,'20428285')]",
                         this.ns).exists());
     }
 
@@ -217,7 +217,7 @@ public class LaneSearchIT {
         // movement disorder; test that top results include "Movement disorder" and "Movement disorders" titles
         this.mockMvc.perform(get("/eresources/search.html?q=movement disorder").servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 20]//h:a[@class='primaryLink' and contains(@title,'Movement disorders')]",
+                        "//h:li[position() <= 20]//h:a[@class='primaryLink bookmarking' and contains(@title,'Movement disorders')]",
                         this.ns).exists());
     }
 
@@ -225,7 +225,7 @@ public class LaneSearchIT {
     public void testLaneSearchNEJM() throws Exception {
         // nejm
         this.mockMvc.perform(get("/eresources/search.html?q=nejm").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='New England journal of medicine']",
+                xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='New England journal of medicine']",
                         this.ns).exists());
     }
 
@@ -235,7 +235,7 @@ public class LaneSearchIT {
         this.mockMvc
                 .perform(get("/eresources/search.html?q=JMLA. 2010 4 98(2):171-5.")
                         .servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'20428285')]",
+                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@href,'20428285')]",
                         this.ns).exists());
     }
 
@@ -246,21 +246,21 @@ public class LaneSearchIT {
                 .perform(get("/eresources/search.html?q=journal of the american medical association")
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath(
-                        "//h:li[position() <= 10]//h:a[@class='primaryLink' and @title='Journal of the American Medical Association']",
+                        "//h:li[position() <= 10]//h:a[@class='primaryLink bookmarking' and @title='Journal of the American Medical Association']",
                         this.ns).exists());
     }
 
     @Test
     public void testLaneSearchpubmed() throws Exception {
         this.mockMvc.perform(get("/eresources/search.html?q=pubmed").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", this.ns).exists());
+                xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='PubMed']", this.ns).exists());
     }
 
     @Test
     public void testLaneSearchPubMed() throws Exception {
         // PubMed
         this.mockMvc.perform(get("/eresources/search.html?q=PubMed").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='PubMed']", this.ns).exists());
+                xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='PubMed']", this.ns).exists());
         // pubmed
     }
 
@@ -268,7 +268,7 @@ public class LaneSearchIT {
     public void testLaneSearchScience() throws Exception {
         // science
         this.mockMvc.perform(get("/eresources/search.html?q=science").servletPath("/eresources/search.html")).andExpect(
-                xpath("//h:li[position() <= 3]//h:a[@class='primaryLink' and @title='Science']", this.ns).exists())
+                xpath("//h:li[position() <= 3]//h:a[@class='primaryLink bookmarking' and @title='Science']", this.ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
@@ -284,21 +284,21 @@ public class LaneSearchIT {
         this.mockMvc
                 .perform(get("/eresources/search.html?q=10.1113/jphysiol.1972.sp009847")
                         .servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink' and contains(@href,'5039275')]",
+                .andExpect(xpath("//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@href,'5039275')]",
                         this.ns).exists());
     }
 
     @Test
     public void testLaneSearchUpdashTodashDate() throws Exception {
         this.mockMvc.perform(get("/eresources/search.html?q=Up-To-Date").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
+                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='UpToDate']", this.ns)
                         .exists());
     }
 
     @Test
     public void testLaneSearchUpSpaceToSpaceDate() throws Exception {
         this.mockMvc.perform(get("/eresources/search.html?q=Up To Date").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
+                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='UpToDate']", this.ns)
                         .exists());
     }
 
@@ -306,14 +306,14 @@ public class LaneSearchIT {
     public void testLaneSearchuptodate() throws Exception {
         // UpToDate and variants
         this.mockMvc.perform(get("/eresources/search.html?q=uptodate").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
+                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='UpToDate']", this.ns)
                         .exists());
     }
 
     @Test
     public void testLaneSearchUpToDate() throws Exception {
         this.mockMvc.perform(get("/eresources/search.html?q=UpToDate").servletPath("/eresources/search.html"))
-                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink' and @title='UpToDate']", this.ns)
+                .andExpect(xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='UpToDate']", this.ns)
                         .exists());
     }
 
@@ -324,7 +324,7 @@ public class LaneSearchIT {
                 "/eresources/search.html?source=all-all&q=usmle OR nbme OR \"examination questions\"&facets=recordType:\"bib\"::type:\"Book Digital\"")
                         .servletPath("/eresources/search.html"))
                 .andExpect(xpath("//h:li[position() = 1]//h:span[@class='primaryType']", this.ns).string("Book"))
-                .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink' and contains(@title,'USMLE')]",
+                .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink bookmarking' and contains(@title,'USMLE')]",
                         this.ns).exists());
     }
 }

@@ -29,8 +29,6 @@ public class PatronRegistrationController {
 
     private static final String ADDRESS_TYPE_ID = "addressTypeId";
 
-    private static final String ADDRESS_TYPE_ID_DEFAULT_VALUE = "93d3d88d-499b-45d0-9bc7-ac73c3a19880";
-
     private static final String ADDRESSES = "addresses";
 
     private static final String ASKUS_ADDRESS = "LaneAskUs@stanford.edu";
@@ -124,6 +122,7 @@ public class PatronRegistrationController {
                 for (String field : STRIP_FROM_EMAIL) {
                     map.remove(field);
                 }
+                map.put(EMAIL, nameAndEmail(model));
                 this.sender.sendEmail(map);
                 return CONFIRMATION_PAGE;
             }
@@ -140,6 +139,22 @@ public class PatronRegistrationController {
         return value;
     }
 
+    private String nameAndEmail(final Model model) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(model.getAttribute(USER_INPUT_FIRST_NAME));
+        String middle = (String) model.getAttribute(USER_INPUT_MIDDLE_NAME);
+        sb.append(" ");
+        if (null != middle && !middle.isBlank()) {
+            sb.append(middle);
+            sb.append(" ");
+        }
+        sb.append(model.getAttribute(USER_INPUT_LAST_NAME));
+        sb.append(" <");
+        sb.append(model.getAttribute(EMAIL));
+        sb.append(">");
+        return sb.toString();
+    }
+
     @ModelAttribute
     protected void getParameters(final HttpServletRequest req, final Model model) {
         this.userDataBinder.bind(model.asMap(), req);
@@ -148,7 +163,6 @@ public class PatronRegistrationController {
         Map<String, Object> user = new HashMap<>();
         Map<String, Object> personal = new HashMap<>();
         Map<String, Object> address = new HashMap<>();
-        user.put(USER_INPUT_PREFERERED_CONTACT_TYPE_ID, "002");
         String userid = (String) model.getAttribute(USER_ID);
         if (userid != null && userid.contains("@")) {
             userid = userid.toLowerCase();
@@ -168,13 +182,14 @@ public class PatronRegistrationController {
         personal.put(USER_INPUT_FIRST_NAME, getValueOrDefault(model, req, USER_INPUT_FIRST_NAME, ""));
         personal.put(USER_INPUT_MIDDLE_NAME, getValueOrDefault(model, req, USER_INPUT_MIDDLE_NAME, ""));
         personal.put(EMAIL, getValueOrDefault(model, req, USER_INPUT_EMAIL, ""));
+        personal.put(USER_INPUT_PREFERERED_CONTACT_TYPE_ID, EMAIL);
         personal.put(USER_INPUT_PHONE, getValueOrDefault(model, req, USER_INPUT_PHONE, ""));
         address.put(USER_INPUT_ADDRESSES_LINE_1, getValueOrDefault(model, req, USER_INPUT_ADDRESSES_LINE_1, ""));
         address.put(USER_INPUT_ADDRESSES_LINE_2, getValueOrDefault(model, req, USER_INPUT_ADDRESSES_LINE_2, ""));
         address.put(USER_INPUT_CITY, getValueOrDefault(model, req, USER_INPUT_CITY, ""));
         address.put(USER_INPUT_REGION, getValueOrDefault(model, req, USER_INPUT_STATE, ""));
         address.put(USER_INPUT_POSTAL_CODE, getValueOrDefault(model, req, USER_INPUT_ZIP_CODE, ""));
-        address.put(ADDRESS_TYPE_ID, getValueOrDefault(model, req, ADDRESS_TYPE_ID, ADDRESS_TYPE_ID_DEFAULT_VALUE));
+        address.put(ADDRESS_TYPE_ID, getValueOrDefault(model, req, ADDRESS_TYPE_ID, "Home"));
         personal.put(ADDRESSES, Collections.singleton(address));
         user.put(PERSONAL, personal);
         model.addAttribute(FOLIO_USER, user);

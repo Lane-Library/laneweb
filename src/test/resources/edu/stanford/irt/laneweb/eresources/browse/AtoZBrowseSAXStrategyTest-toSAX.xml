@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div>
-   <ul class="browseTabs no-bookmarking">
+   <ul class="browseTabs">
       <li>
          <a href="base-path.html?a=%23" title="non-alphabetical characters">#</a>
       </li>

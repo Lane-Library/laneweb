@@ -5,6 +5,24 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2024-01-29" version="3.12.17" description="bug fix and update release">
+            <action date="2024-01-25" dev="alainb" issue="LANEWEB-11276" type="update"> 
+                Clean up .social-logos in the footer.html
+            </action>
+            <action date="2024-01-24" dev="ryanmax" issue="LANEWEB-11275" type="fix">
+                Add user's name to from field when sending "new folio patron registration" emails
+            </action>
+         </release>   
+        <release date="2024-01-22" version="3.12.16" description="bug fix and update release">
+            <action date="2024-01-22" dev="alainb" issue="LANEWEB-11274" type="update"> 
+                Reverse bookmarking to no-bookmarking by default
+            </action>
+         </release>   
+         <release date="2024-01-12" version="3.12.15" description="bug fix and update release">
+            <action date="2024-01-09" dev="ryanmax" issue="LANEWEB-11268" type="fix"> 
+                Production patron registration notifications are sent to lane-crm-dev@stanford.edu
+            </action>
+         </release>    
          <release date="2024-01-08" version="3.12.14" description="bug fix and update release">
             <action date="2024-01-04" dev="ryanmax" issue="LANEWEB-11264" type="fix">
                 lengthy queries result in Solr errors

@@ -73,6 +73,11 @@ public class PatronRegistrationControllerTest {
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.model.getAttribute("firstName")).andReturn("firstName");
+        expect(this.model.getAttribute("middleName")).andReturn("middleName");
+        expect(this.model.getAttribute("lastName")).andReturn("lastName");
+        expect(this.model.getAttribute("email")).andReturn("email");
+        expect(this.map.put("email", "firstName middleName lastName <email>")).andReturn(true);
         expect(this.folioUserService.getUser("username", "externalSystemId", "email"))
                 .andReturn(Collections.emptyList());
         expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
@@ -123,13 +128,13 @@ public class PatronRegistrationControllerTest {
         Map<String, Object> user = new HashMap<>();
         Map<String, Object> personal = new HashMap<>();
         Map<String, Object> address = new HashMap<>();
-        user.put("preferredContactTypeId", "002");
         user.put("username", "univ-user");
         user.put("externalSystemId", "univid");
         personal.put("lastName", "value_lastName");
         personal.put("firstName", "value_firstName");
         personal.put("middleName", "value_middleName");
         personal.put("email", "value_email");
+        personal.put("preferredContactTypeId", "email");
         personal.put("phone", "value_phone");
         address.put("addressLine1", "value_addressLine1");
         address.put("addressLine2", "value_addressLine2");

@@ -43,7 +43,7 @@ public class RESTEquipmentServiceTest {
         map.put("count", "1");
         map.put("title", "title");
         map.put("note", "note");
-        expect(this.restService.getObject(eq(this.uri.resolve("folio/equipment/list")), isA(TypeReference.class)))
+        expect(this.restService.getObject(eq(this.uri.resolve("equipment/list")), isA(TypeReference.class)))
                 .andReturn(Collections.singletonList(map));
         replay(this.restService);
         List<Equipment> list = this.service.getList();

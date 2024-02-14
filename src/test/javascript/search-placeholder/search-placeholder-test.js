@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    let placeholderEnabled = document.createElement("input").placeholder !== undefined;
+    var placeholderEnabled = document.createElement("input").placeholder !== undefined;
 
     Y.Test.Runner.add(new Y.Test.Case({
 
@@ -12,7 +12,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         "test initially has default": function() {
             if (placeholderEnabled) {
-                Y.Assert.areEqual("default placeholder", this.input.placeholder);
+                Y.Assert.areEqual("All Search placeholder", this.input.placeholder);
             }  else {
                 Y.Assert.areEqual("default placeholder", this.input.value);
                 Y.Assert.areEqual("inputHint", this.input.className);
