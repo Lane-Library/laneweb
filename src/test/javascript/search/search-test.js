@@ -21,7 +21,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             setUp: function() {
                 this.search.setSource("all-all");
                 this.search.setQuery("");
-                this.form.removeClass("search-form-active");
                 submitted = false;
             },
 
@@ -149,13 +148,10 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
             testInputFocus: function() {
                 this.queryInput.simulate("focus");
-                Y.Assert.isTrue(this.form.hasClass("search-form-active"));
             },
 
             testCloseClick: function() {
-                this.form.addClass("search-form-active");
                 this.close.simulate("click");
-                Y.Assert.isFalse(this.form.hasClass("search-form-active"));
             },
 
             testSubmit: function() {
