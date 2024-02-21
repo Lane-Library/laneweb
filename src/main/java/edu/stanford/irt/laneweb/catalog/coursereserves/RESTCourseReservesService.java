@@ -5,7 +5,7 @@ import java.util.List;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTCourseReservesService implements CourseReservesService {
@@ -21,9 +21,9 @@ public class RESTCourseReservesService implements CourseReservesService {
 
     private URI catalogServiceURI;
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
-    public RESTCourseReservesService(final URI catalogServiceURI, final RESTService restService) {
+    public RESTCourseReservesService(final URI catalogServiceURI, final BasicAuthRESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
         this.restService = restService;
     }

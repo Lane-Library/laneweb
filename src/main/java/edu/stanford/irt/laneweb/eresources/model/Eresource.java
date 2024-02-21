@@ -1,78 +1,51 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.eresources.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
-import org.apache.solr.client.solrj.beans.Field;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.solr.core.mapping.SolrDocument;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import edu.stanford.irt.laneweb.LanewebException;
-
-@SolrDocument(collection = "#{@eresourcesConfiguration.laneSearchCollectionName()}")
 public class Eresource {
 
-    private static final ObjectMapper mapper = JsonMapper.builder()
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).build();
+    Gson gon = new GsonBuilder().create();
 
-    @Field("availableItems")
     private int available;
 
-    @Field
     private String description;
 
-    @Field
     private Collection<String> dois;
 
-    @Id
-    @Field
     private String id;
 
     private boolean isAnExactMatch = false;
 
-    @Field
     private Collection<String> isbns;
 
-    @Field
     private Collection<String> issns;
 
     @Transient
     private Collection<Link> linksList = new ArrayList<>();
 
-    @Field
     private String primaryType;
 
-    @Field
     private String publicationAuthorsText;
 
-    @Field
     private String publicationText;
 
-    @Field
     private String recordId;
 
-    @Field
     private String recordType;
 
-    @Field
     private String title;
 
-    @Field("totalItems")
     private int total;
 
-    @Field
     private String versionsJson;
 
-    protected Eresource() {
-        // spring-data-solr mapping needs this constructor
-    }
+    public Eresource() {}
 
     public int getAvailable() {
         return this.available;
@@ -103,10 +76,10 @@ public class Eresource {
     }
 
     public Collection<Link> getLinks() {
-        if (this.linksList.isEmpty()) {
-            setLinks();
+        if (this.linksList.isEmpty() && this.versionsJson != null) {
+            setLinksAndVersion();
         }
-        return Collections.unmodifiableCollection(this.linksList);
+        return linksList;
     }
 
     public String getPrimaryType() {
@@ -186,11 +159,10 @@ public class Eresource {
         return new StringBuilder("title:").append(this.title).append(" versions:").append(this.linksList).toString();
     }
 
-    private LinkType computeLinkType(final Link l) {
-        Version v = l.getVersion();
+    private LinkType computeLinkType(final Link l, final Version v) {
         LinkType linkType = LinkType.NORMAL;
         String linkUrl = l.getUrl();
-        if ("sul".equals(this.recordType) && linkUrl != null
+         if ("sul".equals(this.recordType) && linkUrl != null
                 && linkUrl.contains("//searchworks.stanford.edu/view")) {
             linkType = LinkType.SUL_PRINT;
         } else if ("sul".equals(this.recordType) && this.primaryType.contains("Print")) {
@@ -204,19 +176,12 @@ public class Eresource {
         return linkType;
     }
 
-    private void setLinks() {
-        Version[] versions;
-        try {
-            // versionJson can sometimes contain the string "null" as a value
-            // string replace is simpler than using a jackson custom filter
-            versions = mapper.readValue(this.versionsJson.replace("\"null\"", "\"\""), Version[].class);
-        } catch (IOException e) {
-            throw new LanewebException(e);
-        }
+    private void setLinksAndVersion() {
+        Version[] versions = gon.fromJson(this.versionsJson, Version[].class);
         for (Version v : versions) {
             v.getLinks().stream().forEach((final Link l) -> {
                 l.setVersion(v);
-                LinkType lt = computeLinkType(l);
+                LinkType lt = computeLinkType(l, v);
                 l.setType(lt);
                 this.linksList.add(l);
             });

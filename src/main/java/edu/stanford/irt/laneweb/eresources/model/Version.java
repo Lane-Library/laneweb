@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.eresources.model;
 
 import java.util.List;
 

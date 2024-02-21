@@ -216,23 +216,6 @@
 	display: block;
 }
 
-.search-form-active {
-	overflow: visible;
-}
-
-.search-form-active.search-form-results {
-	max-height: 200px;
-}
-
-.search-form-active .search-pico a {
-	opacity: 1;
-}
-
-.search-form-active fieldset {
-	width: 100%;
-}
-
-
 @media ( max-width : 812px) {
 	.hero-unit-front-page, .hero-unit {
 		padding-top: 30px;

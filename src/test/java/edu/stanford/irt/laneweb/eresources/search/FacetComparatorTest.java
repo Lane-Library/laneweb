@@ -9,9 +9,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.Test;
-import org.springframework.data.solr.core.query.SimpleField;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.Field;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+
+
+
 
 public class FacetComparatorTest {
 
@@ -28,36 +30,36 @@ public class FacetComparatorTest {
         Set<FacetFieldEntry> set = new TreeSet<>(comparator);
         Iterator<FacetFieldEntry> i;
 //        // basic order by count
-        SimpleField fieldName = new SimpleField( "fieldName");
-        set.add(new SimpleFacetFieldEntry( fieldName, "value", 1));
-        set.add(new SimpleFacetFieldEntry(fieldName, "value", 0));
+        Field fieldName = new Field( "fieldName");
+        set.add(new FacetFieldEntry( fieldName, "value", 1));
+        set.add(new FacetFieldEntry(fieldName, "value", 0));
         i = set.iterator();
         assertEquals(1, i.next().getValueCount());
         assertEquals(0, i.next().getValueCount());
         set.clear();
         // order by index when counts are equal
-        set.add(new SimpleFacetFieldEntry(fieldName, "value2", 1));
-        set.add(new SimpleFacetFieldEntry(fieldName, "value1", 1));
+        set.add(new FacetFieldEntry(fieldName, "value2", 1));
+        set.add(new FacetFieldEntry(fieldName, "value1", 1));
         i = set.iterator();
         assertEquals("value1", i.next().getValue());
         assertEquals("value2", i.next().getValue());
         set.clear();
 ////        // case 110125: Have article type display 3 items at all times (even if results are 0)
-        SimpleField publicationType = new SimpleField( "publicationType");
-        set.add(new SimpleFacetFieldEntry(fieldName, "foo", 10));
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 2", 0));
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 3", 0));
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 1", 0));
+        Field publicationType = new Field( "publicationType");
+        set.add(new FacetFieldEntry(fieldName, "foo", 10));
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 2", 0));
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 3", 0));
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 1", 0));
         i = set.iterator();
         assertEquals("Req Pub 1", i.next().getValue());
         assertEquals("Req Pub 2", i.next().getValue());
         assertEquals("Req Pub 3", i.next().getValue());
         assertEquals("foo", i.next().getValue());
         set.clear();
-        set.add(new SimpleFacetFieldEntry(fieldName, "foo", 100));
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 1", 5));
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 2", 0));
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 3", 10));
+        set.add(new FacetFieldEntry(fieldName, "foo", 100));
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 1", 5));
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 2", 0));
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 3", 10));
         i = set.iterator();
         assertEquals("Req Pub 3", i.next().getValue());
         assertEquals("Req Pub 1", i.next().getValue());
@@ -65,10 +67,10 @@ public class FacetComparatorTest {
         assertEquals("foo", i.next().getValue());
 
         set.clear();
-        SimpleField topPriority = new SimpleField( "topPriority");
-        set.add(new SimpleFacetFieldEntry(fieldName, "foo", 100)); 
-        set.add(new SimpleFacetFieldEntry(publicationType, "Req Pub 1", 10));
-        set.add(new SimpleFacetFieldEntry(topPriority, "Number One", 1));
+        Field topPriority = new Field( "topPriority");
+        set.add(new FacetFieldEntry(fieldName, "foo", 100)); 
+        set.add(new FacetFieldEntry(publicationType, "Req Pub 1", 10));
+        set.add(new FacetFieldEntry(topPriority, "Number One", 1));
         i = set.iterator();
         assertEquals("Number One", i.next().getValue());
         assertEquals("Req Pub 1", i.next().getValue());
@@ -81,12 +83,12 @@ public class FacetComparatorTest {
         comparator.addTopPrioritiesFromFacets("type:\"Book\"::type:\"Pictorial\"");
         Set<FacetFieldEntry> set = new TreeSet<>(comparator);
         Iterator<FacetFieldEntry> i;
-        SimpleField fieldName = new SimpleField( "fieldName");
-        SimpleField fieldType = new SimpleField( "type");
-        set.add(new SimpleFacetFieldEntry(fieldName, "value1", 1));
-        set.add(new SimpleFacetFieldEntry(fieldName, "value2", 100));
-        set.add(new SimpleFacetFieldEntry(fieldType, "Pictorial", 10));
-        set.add(new SimpleFacetFieldEntry(fieldType, "Book", 50));
+        Field fieldName = new Field( "fieldName");
+        Field fieldType = new Field( "type");
+        set.add(new FacetFieldEntry(fieldName, "value1", 1));
+        set.add(new FacetFieldEntry(fieldName, "value2", 100));
+        set.add(new FacetFieldEntry(fieldType, "Pictorial", 10));
+        set.add(new FacetFieldEntry(fieldType, "Book", 50));
         i = set.iterator();
         assertEquals("Book", i.next().getValue());
         assertEquals("Pictorial", i.next().getValue());
@@ -96,9 +98,9 @@ public class FacetComparatorTest {
     
     @Test(expected = IllegalArgumentException.class)
     public final void testException() {
-        Set<SimpleFacetFieldEntry> set = new TreeSet<>(new FacetComparator(PUB_TYPES));
-        SimpleField fieldName = new SimpleField( "fieldName");
-        set.add(new SimpleFacetFieldEntry(fieldName, "value", 1));
+        Set<FacetFieldEntry> set = new TreeSet<>(new FacetComparator(PUB_TYPES));
+        Field fieldName = new Field( "fieldName");
+        set.add(new FacetFieldEntry(fieldName, "value", 1));
         set.add(null);
     }
 }

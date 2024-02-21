@@ -9,7 +9,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-
 /**
  * @author alainb
  */
@@ -37,7 +36,7 @@ public class BassettAccordionGenerator extends AbstractGenerator {
         if (null == this.query || "".equals(this.query)) {
             this.query = "*";
         }
-        Map<String, Map<String, Integer>> facet = this.service.facetBassettOnRegionAndSubRegion();
-        this.saxStrategy.toSAX(facet, xmlConsumer);
+        Map<String, Map<String, Integer>> facets = this.service.facetBassettOnRegionAndSubRegion();
+        this.saxStrategy.toSAX(facets, xmlConsumer);
     }
 }

@@ -3,13 +3,13 @@ package edu.stanford.irt.laneweb.eresources.search;
 import java.util.Collection;
 import java.util.Map;
 
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 

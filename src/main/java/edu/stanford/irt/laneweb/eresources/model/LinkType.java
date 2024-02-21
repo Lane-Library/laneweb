@@ -1,11 +1,11 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.eresources.model;
 
 /**
  * An enum of the different types of Links
  */
 public enum LinkType {
 
-    LANE_DIGITAL("lane-digital"), LANE_PRINT("lane-print"), NORMAL("normal"), SUL_PRINT("sul-print");
+    LANE_DIGITAL("lane-digital"),  LANE_PRINT("lane-print"), NORMAL( "normal"), SUL_PRINT("sul-print");
 
     private String type;
 

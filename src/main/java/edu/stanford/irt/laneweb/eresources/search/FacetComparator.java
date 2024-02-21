@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+
 
 public class FacetComparator implements Comparator<FacetFieldEntry> {
 

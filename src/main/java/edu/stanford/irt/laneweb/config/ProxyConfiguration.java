@@ -2,14 +2,13 @@ package edu.stanford.irt.laneweb.config;
 
 import java.util.concurrent.Executors;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.sitemap.select.Selector;
-import edu.stanford.irt.laneweb.eresources.search.FacetService;
+import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
 import edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer;
 import edu.stanford.irt.laneweb.proxy.ProxyHostManager;
@@ -43,8 +42,7 @@ public class ProxyConfiguration {
     }
 
     @Bean
-    public ProxyServersService proxyServersService(
-            @Qualifier("edu.stanford.irt.laneweb.solr.FacetService") final FacetService facetService) {
+    public ProxyServersService proxyServersService(final EresourceFacetService facetService) {
         return new SolrProxyServersService(facetService);
     }
 }

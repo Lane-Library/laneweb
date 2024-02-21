@@ -14,6 +14,7 @@ import edu.stanford.irt.bassett.model.BassettImage;
 import edu.stanford.irt.bassett.service.BassettImageService;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
+
 import edu.stanford.irt.laneweb.images.BassettAccordionGenerator;
 import edu.stanford.irt.laneweb.images.BassettCountSAXStrategy;
 import edu.stanford.irt.laneweb.images.BassettImageGenerator;
@@ -22,21 +23,20 @@ import edu.stanford.irt.laneweb.images.BassettImageListSAXStrategy;
 @Configuration
 @Import({ BassettConfiguration.class })
 public class ImagesConfiguration {
-
+   
     @Autowired
-    private BassettImageService imageService;
-
-    
+    private BassettImageService  service;
+        
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett-accordion")
     @Scope("prototype")
     Generator bassettAccordionGenerator() {
-        return new BassettAccordionGenerator(this.imageService, countSAXStrategy());
+        return new BassettAccordionGenerator(this.service, countSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/bassett")
     @Scope("prototype")
     Generator bassettGenerator() {
-        return new BassettImageGenerator(this.imageService, pageSAXStrategy());
+        return new BassettImageGenerator(this.service, pageSAXStrategy());
     }
 
     @Bean

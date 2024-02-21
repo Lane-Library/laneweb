@@ -4,7 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +16,10 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
@@ -47,7 +50,6 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(new PersistentLoginHandlerInterceptor()).addPathPatterns("/secure/**",
                 "/redirect/cme/**");
         registry.addInterceptor(redirectHandlerInterceptor());
-       
     }
 
     @Override
@@ -59,36 +61,52 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    public SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final ResourceHttpRequestHandler staticRequestHandler) {
+    SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(HashMap<String, Object> urlMapping) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
-        handlerMapping.setUrlMap(Collections.singletonMap("/**/*.*", staticRequestHandler));
+        handlerMapping.setUrlMap(urlMapping);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
         handlerMapping.setInterceptors(redirectHandlerInterceptor());
         return handlerMapping;
     }
 
     @Bean
-    public SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(
-            final SitemapController sitemapController) {
+    HashMap<String, Object> getUrlMapping(final ResourceHttpRequestHandler staticRequestHandler) {
+        HashMap<String, Object> handlerMap = new LinkedHashMap<>();
+        handlerMap.put("/favicon.ico", staticRequestHandler);
+        handlerMap.put("/*/*", staticRequestHandler);
+        handlerMap.put("/*/*/*", staticRequestHandler);
+        handlerMap.put("/*/*/*/*", staticRequestHandler);
+        handlerMap.put("/*/*/*/*/*", staticRequestHandler);
+        return handlerMap;
+    }
+
+    // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
+    // file and by Using AntPathMatcher as the path matching strategy to allow /**/*.html
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        configurer.setPathMatcher(new AntPathMatcher());
+    }
+
+    @Bean
+    SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
         return new SitemapHandlerExceptionResolver(sitemapController);
     }
 
-
     @Bean
-    public RedirectHandlerInterceptor redirectHandlerInterceptor() {
+    RedirectHandlerInterceptor redirectHandlerInterceptor() {
         return new RedirectHandlerInterceptor(this.redirectProcessor);
     }
 
     @Bean
-    public UrlBasedViewResolver redirectViewResolver() {
+    UrlBasedViewResolver redirectViewResolver() {
         UrlBasedViewResolver redirectViewResolver = new UrlBasedViewResolver();
         redirectViewResolver.setViewClass(RedirectView.class);
         return redirectViewResolver;
     }
 
     @Bean
-    public ResourceHttpRequestHandler staticRequestHandler(
-            @Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase) throws MalformedURLException {
+    ResourceHttpRequestHandler staticRequestHandler(@Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase)
+            throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
         handler.setLocations(Arrays.asList(new ClassPathResource("/"), new ClassPathResource("/static/"),
                 new UrlResource(liveBase.toURL())));

@@ -9,11 +9,12 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestResult;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class SolrPagingEresourceSAXStrategy implements SAXStrategy<SolrSearchResult> {
+public class SolrPagingEresourceSAXStrategy implements SAXStrategy<RestResult<Eresource>> {
 
     private static final String LENGTH = "length";
 
@@ -30,7 +31,7 @@ public class SolrPagingEresourceSAXStrategy implements SAXStrategy<SolrSearchRes
     }
 
     @Override
-    public void toSAX(final SolrSearchResult object, final XMLConsumer xmlConsumer) {
+    public void toSAX(final RestResult<Eresource> object, final XMLConsumer xmlConsumer) {
         Page<Eresource> page = object.getPage();
         List<Eresource> eresources = page.getContent();
         String query = object.getQuery();

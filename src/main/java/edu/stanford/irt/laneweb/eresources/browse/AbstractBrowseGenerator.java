@@ -11,7 +11,7 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class AbstractBrowseGenerator extends AbstractGenerator {
@@ -25,7 +25,7 @@ public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
     protected String browseQuery;
 
-    protected SolrService solrService;
+    protected EresourceBrowseService restBrowseService;
 
     private String componentType;
 
@@ -33,9 +33,9 @@ public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
     private Validity validity;
 
-    protected AbstractBrowseGenerator(final String componentType, final SolrService solrService) {
+    protected AbstractBrowseGenerator(final String componentType, final EresourceBrowseService restBrowseService) {
         this.componentType = componentType;
-        this.solrService = solrService;
+        this.restBrowseService = restBrowseService;
     }
 
     @Override

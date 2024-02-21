@@ -2,10 +2,10 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.util.regex.Pattern;
 
-import javax.servlet.FilterChain;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebFilter("/main/*")
 public class JavascriptTestFilter extends AbstractLanewebFilter {

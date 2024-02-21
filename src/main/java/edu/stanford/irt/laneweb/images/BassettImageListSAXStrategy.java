@@ -12,7 +12,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-
 public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImage>> {
 
     private static final String BASSETT = "bassett";
@@ -146,4 +145,5 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
             XMLUtils.data(xmlConsumer, sb.substring(0, subRegion.length() - 1).concat("."));
             XMLUtils.endElement(xmlConsumer, NAMESPACE, REGIONS);
         }
-    }}
+    }
+}

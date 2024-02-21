@@ -10,8 +10,6 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,9 +26,9 @@ import edu.stanford.irt.laneweb.LanewebException;
 
 public class BassettCountSAXStrategyTest {
 
-    private  Map<String, Map<String, Integer>> facets;
+    private Map<String, Map<String, Integer>> facetPage;
 
-    private   Map<String, Integer> page;
+    private Map<String, Integer> page;
 
     private BassettCountSAXStrategy strategy;
 
@@ -40,23 +38,23 @@ public class BassettCountSAXStrategyTest {
     public void setUp() throws Exception {
         this.strategy = new BassettCountSAXStrategy();
         this.xmlConsumer = mock(XMLConsumer.class);
-        this.facets = mock(Map.class);
+        this.facetPage = mock(Map.class);
         this.page = mock(Map.class);
     }
 
     @Test
     public void testToSAX() throws SAXException {
-        Map<String, Integer> subregions = new HashMap<>();
+        Set<String> regions = new HashSet<>();
+        Map<String, Integer> subregions1 = new HashMap<>();
         Map<String, Integer> subregions2 = new HashMap<>();
-        Set<String> regions =  new HashSet<>();
-        regions.add("region");
-        regions.add("region2");        
-        subregions.put("Region1_sub_region_Subregion1", 5);
-        subregions.put("Region1_sub_region_Subregion2", 5);
+        regions.add("Region1");
+        regions.add("Region2");
+        subregions1.put("Region1_sub_region_Subregion1", 5);
+        subregions1.put("Region1_sub_region_Subregion2", 5);
         subregions2.put("Region2_sub_region_Subregion1", 5);
-        expect(this.facets.keySet()).andReturn(regions);
-        expect(this.facets.get("region")).andReturn(subregions);
-        expect(this.facets.get("region2")).andReturn(subregions2);
+        expect(this.facetPage.keySet()).andReturn(regions);
+        expect(this.facetPage.get("Region1")).andReturn(subregions1);
+        expect(this.facetPage.get("Region2")).andReturn(subregions2);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
@@ -83,15 +81,15 @@ public class BassettCountSAXStrategyTest {
                 eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.facets, this.page, this.xmlConsumer);
-        this.strategy.toSAX(this.facets, this.xmlConsumer);
-        verify(this.xmlConsumer);
+        replay(this.facetPage, this.page, this.xmlConsumer);
+        this.strategy.toSAX(this.facetPage, this.xmlConsumer);
+        verify(this.xmlConsumer, this.facetPage);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testToSAXEmptyMap() throws SAXException {
-        expect(this.facets.keySet()).andReturn(Collections.emptySet());
+        expect(this.facetPage.keySet()).andReturn(Collections.emptySet());
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://lane.stanford.edu/bassett/ns");
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),
@@ -100,8 +98,11 @@ public class BassettCountSAXStrategyTest {
                 eq("bassett_count"));
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
-        replay(this.xmlConsumer, this.facets, this.page);
-        this.strategy.toSAX(this.facets, this.xmlConsumer);
+        expect(this.facetPage.get("region")).andReturn(this.page);
+        expect(this.page.entrySet()).andReturn(Collections.EMPTY_SET);
+        expect(this.facetPage.get("sub_region")).andReturn(this.page);
+        replay(this.xmlConsumer, this.facetPage, this.page);
+        this.strategy.toSAX(this.facetPage, this.xmlConsumer);
         verify(this.xmlConsumer);
     }
 
@@ -111,7 +112,7 @@ public class BassettCountSAXStrategyTest {
         expectLastCall().andThrow(new SAXException());
         replay(this.xmlConsumer);
         try {
-            this.strategy.toSAX(this.facets, this.xmlConsumer);
+            this.strategy.toSAX(this.facetPage, this.xmlConsumer);
         } catch (LanewebException e) {
             assertTrue(e.getCause() instanceof SAXException);
         }

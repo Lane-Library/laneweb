@@ -1,13 +1,12 @@
 package edu.stanford.irt.laneweb.config;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class LanewebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    @Override
     public void onStartup(final ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
         servletContext.getFilterRegistration("javamelody").setInitParameter("storage-directory",

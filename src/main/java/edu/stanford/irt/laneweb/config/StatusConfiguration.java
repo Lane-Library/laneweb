@@ -12,8 +12,6 @@ import org.springframework.core.annotation.Order;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.source.SourceResolver;
-import edu.stanford.irt.laneweb.eresources.EresourceStatusProvider;
-import edu.stanford.irt.laneweb.eresources.SolrService;
 import edu.stanford.irt.laneweb.servlet.mvc.IndexDotHtmlStatusProvider;
 import edu.stanford.irt.laneweb.status.LanewebStatusService;
 import edu.stanford.irt.laneweb.suggest.SuggestStatusProvider;
@@ -26,21 +24,9 @@ import edu.stanford.irt.status.StatusService;
 @Configuration
 public class StatusConfiguration {
 
-    private static final int MIN_BIB_COUNT = 200_000;
-
-    private static final int MIN_PUBMED_COUNT = 27_000_000;
-
-    private static final int MIN_SUL_COUNT = 2_000_000;
-
     private static final int SLOW_INDEX_HTML_TIME = 250;
 
     private static final int SLOW_SUGGESTION_TIME = 250;
-
-    @Bean
-    @Order(4)
-    public EresourceStatusProvider eresourceStatusProvider(final SolrService solrService) {
-        return new EresourceStatusProvider(solrService, MIN_BIB_COUNT, MIN_PUBMED_COUNT, MIN_SUL_COUNT);
-    }
 
     @Bean
     @Order(3)

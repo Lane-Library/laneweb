@@ -8,18 +8,17 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.search.FacetService;
+import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
 
 public class SolrProxyServersServiceTest {
 
@@ -32,37 +31,27 @@ public class SolrProxyServersServiceTest {
 
     private SolrProxyServersService proxyService;
 
-    private FacetService solrService;
+    private EresourceFacetService solrService;
 
+    private Map<String,List<FacetFieldEntry>> fps;
+    
     @Before
     public void setUp() throws Exception {
-        this.solrService = mock(FacetService.class);
+        this.solrService = mock(EresourceFacetService.class);
         this.proxyService = new SolrProxyServersService(this.solrService);
+        FacetFieldEntry ffe = new FacetFieldEntry(null, "foo", 443);
+        List<FacetFieldEntry> list = Collections.singletonList(ffe);
+        this.fps =  new HashMap<>();
+        this.fps.put("proxyHosts", list);
     }
 
     @Test
     public final void testWrite() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        FacetPage<Eresource> fps = mock(FacetPage.class);
-        expect(this.solrService.facetByField("*", null, "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(fps);
-        Collection<Page<FacetFieldEntry>> facetResultPages = mock(Collection.class);
-        Iterator<Page<FacetFieldEntry>> it1 = mock(Iterator.class);
-        Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
-        Page<FacetFieldEntry> page1 = mock(Page.class);
-        FacetFieldEntry ffe = mock(FacetFieldEntry.class);
-        expect(fps.getFacetResultPages()).andReturn(facetResultPages);
-        expect(facetResultPages.iterator()).andReturn(it1);
-        expect(it1.hasNext()).andReturn(true);
-        expect(it1.next()).andReturn(page1);
-        expect(page1.iterator()).andReturn(it2);
-        expect(it2.hasNext()).andReturn(true);
-        expect(it2.next()).andReturn(ffe);
-        expect(ffe.getValue()).andReturn("foo");
-        expect(it2.hasNext()).andReturn(false);
-        expect(it1.hasNext()).andReturn(false);
-        replay(this.solrService, fps, facetResultPages, it1, it2, page1, ffe);
+         expect(this.solrService.facetByField("*", null, "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(this.fps);
+        replay(this.solrService);
         this.proxyService.write(baos);
         assertEquals(this.expectedOutput, baos.toString(StandardCharsets.UTF_8.name()));
-        verify(this.solrService, fps, facetResultPages, it1, it2, page1, ffe);
+        verify(this.solrService);
     }
 }

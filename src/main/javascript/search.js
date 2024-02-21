@@ -66,7 +66,6 @@ if (document.querySelector(".search-form"))  {
 
                 v = {
                     close: function() {
-                        form.classList.remove("search-form-active");
                         document.documentElement.scrollIntoView();
                         view.fire("close");
                     },
@@ -74,7 +73,6 @@ if (document.querySelector(".search-form"))  {
                         view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
-                        form.classList.add("search-form-active");
                         view.fire("open");
                     },
                     reset: function() {

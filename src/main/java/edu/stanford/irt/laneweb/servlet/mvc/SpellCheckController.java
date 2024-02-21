@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.spell.SpellCheckException;
 import edu.stanford.irt.spell.SpellChecker;
 
@@ -19,11 +19,11 @@ public class SpellCheckController {
 
     private static final Logger log = LoggerFactory.getLogger(SpellCheckController.class);
 
-    private SolrService service;
+    private EresourceSearchService service;
 
     private SpellChecker spellChecker;
 
-    public SpellCheckController(final SpellChecker spellChecker, final SolrService service) {
+    public SpellCheckController(final SpellChecker spellChecker, final EresourceSearchService service) {
         this.service = service;
         this.spellChecker = spellChecker;
     }

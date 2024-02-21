@@ -12,12 +12,12 @@ import java.util.Map;
 import org.apache.commons.collections4.map.HashedMap;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.solr.core.query.SimpleField;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
+
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.Field;
 
 public class FacetStrategyTest {
 
@@ -31,13 +31,13 @@ public class FacetStrategyTest {
     public void setUp() {
         solrResult = new HashedMap<String, Collection<FacetFieldEntry>>();
         Collection<FacetFieldEntry> typeResult = new ArrayList<FacetFieldEntry>();
-        SimpleField fieldType = new SimpleField("type");
-        typeResult.add(new SimpleFacetFieldEntry(fieldType, "index", 10));
+        Field fieldType = new Field("type");
+        typeResult.add(new FacetFieldEntry(fieldType, "index", 10));
         solrResult.put(fieldType.getName(), typeResult);
         Collection<FacetFieldEntry> publicationTypeResult = new ArrayList<FacetFieldEntry>();
-        SimpleField fieldPublicationType = new SimpleField("publicationType");
-        publicationTypeResult.add(new SimpleFacetFieldEntry(fieldPublicationType, "requiredIndex", 100));
-        publicationTypeResult.add(new SimpleFacetFieldEntry(fieldPublicationType, "requiredIndex2", 10));
+        Field fieldPublicationType = new Field("publicationType");
+        publicationTypeResult.add(new FacetFieldEntry(fieldPublicationType, "requiredIndex", 100));
+        publicationTypeResult.add(new FacetFieldEntry(fieldPublicationType, "requiredIndex2", 10));
         solrResult.put(fieldPublicationType.getName(), publicationTypeResult);
         Collection<String> facets = Arrays.asList("type", "publicationType", "test");
         this.strategy = new FacetSAXStrategy(facets);
