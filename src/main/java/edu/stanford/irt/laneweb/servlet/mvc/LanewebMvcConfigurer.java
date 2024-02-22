@@ -73,6 +73,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     HashMap<String, Object> getUrlMapping(final ResourceHttpRequestHandler staticRequestHandler) {
         HashMap<String, Object> handlerMap = new LinkedHashMap<>();
         handlerMap.put("/favicon.ico", staticRequestHandler);
+        handlerMap.put("/*", staticRequestHandler);
         handlerMap.put("/*/*", staticRequestHandler);
         handlerMap.put("/*/*/*", staticRequestHandler);
         handlerMap.put("/*/*/*/*", staticRequestHandler);
