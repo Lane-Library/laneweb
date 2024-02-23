@@ -232,22 +232,28 @@
 }
 
 @media ( max-width : 812px) {
-	.search-form {
+    .search-form {
 		width: 100%;
 		margin: 20px 2em 0;
 	}
+	
 	.search-results .search-form {
-		margin: 20px 12px 0;
+	    margin: 20px 12px 0;
 	}
-	.pico-toggle span:last-child {
-		display: block;
-		float: unset;
-		width: 150px;
-		text-align: center;
-		margin: auto;
+	
+	.pico-toggle {
+	    width: 100%;
+	    padding: 0 12px;
 	}
-	.pico-fields, .pico-toggle span:not(:last-of-type), 
-	.pico-fields.pico-fields-active{
-		display: none;
+	
+    .pico-fields .pure-g {
+        justify-content: space-between;
 	}
+	
+	.pico-fields .pure-g > div.pure-u-1-4 {
+	    width: 49%;
+	    padding: 0 !important;
+	    margin: 6px 0;
+	}
+	
 }
