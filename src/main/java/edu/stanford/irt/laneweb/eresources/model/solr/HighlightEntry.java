@@ -17,14 +17,14 @@ public class HighlightEntry<T> implements Serializable {
 
     private final List<Highlight> highlights = new ArrayList<>(1);
 
-    /**
-     * @param entity
-     *            must not be null
-     */
+   
     public HighlightEntry() {
         this.entity = null;
     }
-    
+    /**
+     * @param entity  must not be null
+     * 
+     */ 
     public HighlightEntry(T entity) {
         Assert.notNull(entity, "Entity must not be null!");
         this.entity = entity;
