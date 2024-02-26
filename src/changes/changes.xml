@@ -5,6 +5,26 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2024-02-26" version="3.13.0" description="bug fix and update release">
+            <action date="2023-05-22" dev="alainb" issue="LANEWEB-11089" type="update"> 
+                Upgrade to Spring 6, Spring Boot 3 and java21
+            </action>
+            <action date="2023-09-15" dev="alainb" issue="LANEWEB-11275" type="update">
+                Remove  Universal google Analytics
+            </action>
+            <action date="2024-02-21" dev="alainb" issue="LANEWEB-11258" type="update"> 
+                Clean up .search-form-active
+            </action>
+            <action date="2024-01-24" dev="alainb" issue="LANEWEB-11275" type="update">
+                Attachments and ejp form
+            </action>
+            <action date="2024-02-12" dev="alainb" issue="LANEWEB-11282" type="update"> 
+                Update ehcache 3.10.8
+            </action>
+            <action date="2024-02-24" dev="alainb" issue="LANEWEB-11286" type="fix">
+                pico feature doesn't work on phone and tablette
+            </action>
+         </release>
          <release date="2024-01-29" version="3.12.17" description="bug fix and update release">
             <action date="2024-01-25" dev="alainb" issue="LANEWEB-11276" type="update"> 
                 Clean up .social-logos in the footer.html
