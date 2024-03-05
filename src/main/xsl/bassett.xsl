@@ -10,8 +10,9 @@
 	
 
 	<xsl:variable name="thumbnail-directory"><xsl:value-of select="$images-url" />/small/</xsl:variable>
-	<xsl:variable name="large-image-directory"><xsl:value-of select="$images-url" />/large/</xsl:variable>
 	<xsl:variable name="medium-image-directory"><xsl:value-of select="$images-url" />/medium/</xsl:variable>
+	<xsl:variable name="large-image-directory"><xsl:value-of select="$images-url" />/large/</xsl:variable>
+	<xsl:variable name="highres-image-directory"><xsl:value-of select="$images-url" />/high/</xsl:variable>
 	<xsl:variable name="image-directory">
 		<xsl:if test="$type != 'largerView'">
 		<xsl:value-of select="$medium-image-directory" />
@@ -178,11 +179,16 @@
 
 	<xsl:template match="h:td[@id='image']/h:a/h:img/@src | h:td[@id='image']/h:img/@src">
 		<xsl:attribute name="src">
-        <xsl:value-of select="$image-directory" />
-        <xsl:value-of select="/doc/b:bassetts/b:bassett/b:bassett_image" />
+        <xsl:choose>
+            <xsl:when test="$type = 'largerView'">
+                <xsl:value-of select="concat($highres-image-directory, /doc/b:bassetts/b:bassett/@b:bassett_number,'_l.jpg')" />
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="concat($image-directory,/doc/b:bassetts/b:bassett/b:bassett_image)" />
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:attribute>
 	</xsl:template>
-
 
 	<xsl:template match="h:td[@id='diagram-image']/h:a/h:img/@src | h:td[@id='diagram-image']/h:img/@src">
 		<xsl:attribute name="src">
@@ -334,10 +340,10 @@
 	<xsl:variable name="lower-page-class">
 		<xsl:choose>
 			<xsl:when test="$current-page = '1'">
-				<xsl:text>pagingButton disabled</xsl:text>
+				<xsl:text>pagingButton disabled no-bookmarking</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>pagingButton </xsl:text>
+				<xsl:text>pagingButton  no-bookmarking</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
@@ -373,10 +379,10 @@
 	<xsl:variable name="upper-page-class">
 		<xsl:choose>
 			<xsl:when test="/doc/b:bassetts/b:total-pages/@b:value = $current-page">
-				<xsl:text>pagingButton disabled</xsl:text>
+				<xsl:text>pagingButton disabled no-bookmarking</xsl:text>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>pagingButton </xsl:text>
+				<xsl:text>pagingButton  no-bookmarking</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:variable>
