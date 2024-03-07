@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -57,9 +58,9 @@ public class LanewebConfiguration {
     private static final List<String> DEFAULT_LOCATIONS = Arrays
             .asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
-    private static final int HTTP_CONNECT_TIMEOUT = 5_000;
+    private static final int HTTP_CONNECT_TIMEOUT = 5;
 
-    private static final int HTTP_READ_TIMEOUT = 30_000;
+    private static final int HTTP_READ_TIMEOUT = 10;
 
     private Map<String, Object> constants;
 
@@ -106,13 +107,7 @@ public class LanewebConfiguration {
         return new CacheFactoryBean(jCacheManagerFactoryBean().getObject());
     }
 
-    @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory() {
-      RestTemplateBuilder builder = new RestTemplateBuilder();
-      builder.setConnectTimeout(Duration.ofMillis(HTTP_CONNECT_TIMEOUT));
-      builder.setReadTimeout(Duration.ofMillis(HTTP_READ_TIMEOUT));
-      return builder.buildRequestFactory();
-    }
+   
 
     @Bean
     public ComponentFactory componentFactory(BeanFactory beanFactory) {
@@ -141,6 +136,14 @@ public class LanewebConfiguration {
     public Map<String, Object> model() {
         return new HashMap<>(this.constants);
     }
+    
+    @Bean
+    public ClientHttpRequestFactory clientHttpRequestFactory(RestTemplateBuilderConfigurer configurer) {
+        return configurer.configure(new RestTemplateBuilder())
+            .setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT))
+            .setReadTimeout(Duration.ofSeconds(HTTP_READ_TIMEOUT)).buildRequestFactory();
+        
+    }
 
     @Bean
     public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory,
@@ -155,7 +158,7 @@ public class LanewebConfiguration {
         template.setMessageConverters(messageConverters);
         return template;
     }
-
+    
     @Bean
     public RESTService restService(final RestOperations restOperations) {
         return new RESTService(restOperations);
