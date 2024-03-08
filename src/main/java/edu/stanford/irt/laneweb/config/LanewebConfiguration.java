@@ -14,6 +14,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -53,6 +54,8 @@ import jakarta.servlet.ServletContext;
 @ComponentScan({ "edu.stanford.irt.laneweb.config", "edu.stanford.irt.solr.service",
         "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks",
         "edu.stanford.irt.laneweb.livechat" })
+// AutoConfigureWebClient only needed to run as a servlet under tomcat; not needed for running as spring boot app directly
+@AutoConfigureWebClient
 public class LanewebConfiguration {
 
     private static final List<String> DEFAULT_LOCATIONS = Arrays
