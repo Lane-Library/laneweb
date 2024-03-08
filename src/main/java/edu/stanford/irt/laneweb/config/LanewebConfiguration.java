@@ -62,26 +62,6 @@ public class LanewebConfiguration {
 
     private static final int HTTP_READ_TIMEOUT = 10;
 
-    private Map<String, Object> constants;
-
-    public LanewebConfiguration(@Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
-            @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
-            @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
-            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking, ServletContext servletContext,
-            @Value("${edu.stanford.irt.laneweb.version}") final String version,
-            @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken) {
-        this.constants = new HashMap<>();
-        this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
-        this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
-        this.constants.put(Model.LIBCAL_SERVICE_URI, libcalServiceURI);
-        this.constants.put(Model.CONTENT_BASE, contentBase);
-        this.constants.put(Model.BOOKMARKING, bookmarking);
-        this.constants.put(Model.VERSION, version);
-        this.constants.put(Model.BROWZINE_TOKEN, browzineToken);
-        // set the http.agent system property:
-        System.setProperty("http.agent", "laneweb-" + version);
-    }
-
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
             final Environment environment, final ResourceLoader resourceLoader) {
@@ -102,15 +82,40 @@ public class LanewebConfiguration {
         return pspc;
     }
 
+    private Map<String, Object> constants;
+
+    public LanewebConfiguration(@Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
+            @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
+            @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
+            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking,
+            final ServletContext servletContext, @Value("${edu.stanford.irt.laneweb.version}") final String version,
+            @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken) {
+        this.constants = new HashMap<>();
+        this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
+        this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
+        this.constants.put(Model.LIBCAL_SERVICE_URI, libcalServiceURI);
+        this.constants.put(Model.CONTENT_BASE, contentBase);
+        this.constants.put(Model.BOOKMARKING, bookmarking);
+        this.constants.put(Model.VERSION, version);
+        this.constants.put(Model.BROWZINE_TOKEN, browzineToken);
+        // set the http.agent system property:
+        System.setProperty("http.agent", "laneweb-" + version);
+    }
+
     @Bean
     public CacheFactoryBean cache() throws URISyntaxException {
         return new CacheFactoryBean(jCacheManagerFactoryBean().getObject());
     }
 
-   
+    @Bean
+    public ClientHttpRequestFactory clientHttpRequestFactory(final RestTemplateBuilderConfigurer configurer) {
+        return configurer.configure(new RestTemplateBuilder())
+                .setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT))
+                .setReadTimeout(Duration.ofSeconds(HTTP_READ_TIMEOUT)).buildRequestFactory();
+    }
 
     @Bean
-    public ComponentFactory componentFactory(BeanFactory beanFactory) {
+    public ComponentFactory componentFactory(final BeanFactory beanFactory) {
         return new SpringComponentFactory(beanFactory);
     }
 
@@ -136,14 +141,6 @@ public class LanewebConfiguration {
     public Map<String, Object> model() {
         return new HashMap<>(this.constants);
     }
-    
-    @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory(RestTemplateBuilderConfigurer configurer) {
-        return configurer.configure(new RestTemplateBuilder())
-            .setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT))
-            .setReadTimeout(Duration.ofSeconds(HTTP_READ_TIMEOUT)).buildRequestFactory();
-        
-    }
 
     @Bean
     public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory,
@@ -158,7 +155,7 @@ public class LanewebConfiguration {
         template.setMessageConverters(messageConverters);
         return template;
     }
-    
+
     @Bean
     public RESTService restService(final RestOperations restOperations) {
         return new RESTService(restOperations);
