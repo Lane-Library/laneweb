@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -52,34 +54,16 @@ import jakarta.servlet.ServletContext;
 @ComponentScan({ "edu.stanford.irt.laneweb.config", "edu.stanford.irt.solr.service",
         "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks",
         "edu.stanford.irt.laneweb.livechat" })
+// AutoConfigureWebClient only needed to run as a servlet under tomcat; not needed for running as spring boot app directly
+@AutoConfigureWebClient
 public class LanewebConfiguration {
 
     private static final List<String> DEFAULT_LOCATIONS = Arrays
             .asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
 
-    private static final int HTTP_CONNECT_TIMEOUT = 5_000;
+    private static final int HTTP_CONNECT_TIMEOUT = 5;
 
-    private static final int HTTP_READ_TIMEOUT = 30_000;
-
-    private Map<String, Object> constants;
-
-    public LanewebConfiguration(@Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
-            @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
-            @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
-            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking, ServletContext servletContext,
-            @Value("${edu.stanford.irt.laneweb.version}") final String version,
-            @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken) {
-        this.constants = new HashMap<>();
-        this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
-        this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
-        this.constants.put(Model.LIBCAL_SERVICE_URI, libcalServiceURI);
-        this.constants.put(Model.CONTENT_BASE, contentBase);
-        this.constants.put(Model.BOOKMARKING, bookmarking);
-        this.constants.put(Model.VERSION, version);
-        this.constants.put(Model.BROWZINE_TOKEN, browzineToken);
-        // set the http.agent system property:
-        System.setProperty("http.agent", "laneweb-" + version);
-    }
+    private static final int HTTP_READ_TIMEOUT = 10;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
@@ -101,21 +85,40 @@ public class LanewebConfiguration {
         return pspc;
     }
 
+    private Map<String, Object> constants;
+
+    public LanewebConfiguration(@Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
+            @Qualifier("java.net.URI/libcal-service") final URI libcalServiceURI,
+            @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
+            @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking,
+            final ServletContext servletContext, @Value("${edu.stanford.irt.laneweb.version}") final String version,
+            @Value("${edu.stanford.irt.laneweb.browzine-token}") final String browzineToken) {
+        this.constants = new HashMap<>();
+        this.constants.put(Model.BASE_PATH, servletContext.getContextPath());
+        this.constants.put(Model.LIBGUIDE_SERVICE_URI, libguideServiceURI);
+        this.constants.put(Model.LIBCAL_SERVICE_URI, libcalServiceURI);
+        this.constants.put(Model.CONTENT_BASE, contentBase);
+        this.constants.put(Model.BOOKMARKING, bookmarking);
+        this.constants.put(Model.VERSION, version);
+        this.constants.put(Model.BROWZINE_TOKEN, browzineToken);
+        // set the http.agent system property:
+        System.setProperty("http.agent", "laneweb-" + version);
+    }
+
     @Bean
     public CacheFactoryBean cache() throws URISyntaxException {
         return new CacheFactoryBean(jCacheManagerFactoryBean().getObject());
     }
 
     @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory() {
-      RestTemplateBuilder builder = new RestTemplateBuilder();
-      builder.setConnectTimeout(Duration.ofMillis(HTTP_CONNECT_TIMEOUT));
-      builder.setReadTimeout(Duration.ofMillis(HTTP_READ_TIMEOUT));
-      return builder.buildRequestFactory();
+    public ClientHttpRequestFactory clientHttpRequestFactory(final RestTemplateBuilderConfigurer configurer) {
+        return configurer.configure(new RestTemplateBuilder())
+                .setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT))
+                .setReadTimeout(Duration.ofSeconds(HTTP_READ_TIMEOUT)).buildRequestFactory();
     }
 
     @Bean
-    public ComponentFactory componentFactory(BeanFactory beanFactory) {
+    public ComponentFactory componentFactory(final BeanFactory beanFactory) {
         return new SpringComponentFactory(beanFactory);
     }
 
