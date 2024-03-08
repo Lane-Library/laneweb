@@ -11,11 +11,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.annotation.Resource;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,9 +22,11 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import jakarta.annotation.Resource;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
+@ContextConfiguration(classes = {edu.stanford.irt.laneweb.config.LanewebConfiguration.class, RestTemplateBuilderConfigurer.class})
 public class LanewebIT {
 
     private static final MediaType APPLICATION_JAVASCRIPT = new MediaType("application", "javascript",
@@ -34,8 +35,6 @@ public class LanewebIT {
     private static final MediaType IMAGE_PNG = new MediaType("image", "png");
 
     private static final MediaType TEXT_HTML = new MediaType("text", "html", StandardCharsets.UTF_8);
-
-    private static final MediaType TEXT_XML = new MediaType("text", "xml", StandardCharsets.UTF_8);
 
     private MockMvc mockMvc;
 
