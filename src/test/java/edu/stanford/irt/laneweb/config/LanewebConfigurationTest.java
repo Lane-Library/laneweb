@@ -15,7 +15,6 @@ import jakarta.servlet.ServletContext;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 
@@ -26,18 +25,15 @@ public class LanewebConfigurationTest {
 
     private LanewebConfiguration configuration;
 
-    RestTemplateBuilderConfigurer restTemplateBuilderConfigurer;
-    
     @Before
     public void setUp() throws URISyntaxException {
         this.configuration = new LanewebConfiguration(new URI("libguide"), new URI("libcal"), new URI("content"), "rw",
                 mock(ServletContext.class), "version", "browzine-token");
-        this.restTemplateBuilderConfigurer =  new RestTemplateBuilderConfigurer();
     }
 
     @Test
     public void testClientHttpRequestFactory() {
-        assertNotNull(this.configuration.clientHttpRequestFactory(this.restTemplateBuilderConfigurer));
+        assertNotNull(this.configuration.clientHttpRequestFactory());
     }
 
     @Test
@@ -85,7 +81,7 @@ public class LanewebConfigurationTest {
 
     @Test
     public void testRestOperations() {
-        assertNotNull(this.configuration.restOperations(this.configuration.clientHttpRequestFactory(this.restTemplateBuilderConfigurer), null));
+        assertNotNull(this.configuration.restOperations(this.configuration.clientHttpRequestFactory(), null));
     }
 
     @Test

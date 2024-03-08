@@ -10,10 +10,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -22,13 +23,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.user.User;
-import jakarta.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {edu.stanford.irt.laneweb.config.LanewebConfiguration.class, RestTemplateBuilderConfigurer.class})
+@ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class CMERedirectControllerIT {
-    
+
     private static final User USER = new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo");
 
     private MockMvc mockMvc;
