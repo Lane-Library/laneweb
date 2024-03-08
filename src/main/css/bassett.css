@@ -9,9 +9,8 @@
 }
 
 .choice {
-	display: block; padding : 10px;
-	padding-top: 0;
-	padding: 10px;
+	display: block;
+	padding : 10px;
 }
 
 #paging span {
