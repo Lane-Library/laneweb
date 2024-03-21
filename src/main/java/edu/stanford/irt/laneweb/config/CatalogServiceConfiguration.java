@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestOperations;
 
 import edu.stanford.irt.laneweb.catalog.CatalogStatusService;
@@ -34,9 +35,9 @@ public class CatalogServiceConfiguration {
     }
     
     @Bean
-    public BasicAuthRESTService getBasicAuthRESTService( RestOperations restOperations,
+    public BasicAuthRESTService getBasicAuthRESTService( RestClient restClient,
         @Value("${edu.stanford.irt.laneweb.catalog-service.userInfo}") final String userInfo) {
-      return new BasicAuthRESTService(restOperations, userInfo);
+      return new BasicAuthRESTService(restClient, userInfo);
     }
     
 }
