@@ -154,61 +154,32 @@ public class LanewebConfiguration {
     public Map<String, Object> model() {
         return new HashMap<>(this.constants);
     }
-    // @Bean
-    // public ClientHttpRequestFactory clientHttpRequestFactory() {
-    // RestTemplateBuilder builder = new RestTemplateBuilder();
-    // builder.setConnectTimeout(Duration.ofMillis(HTTP_CONNECT_TIMEOUT));
-    // builder.setReadTimeout(Duration.ofMillis(HTTP_READ_TIMEOUT));
-    // return builder.buildRequestFactory();
-    // }
-    //
-    // @Bean
-    // public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory,
-    // final ObjectMapper objectMapper) {
-    // RestTemplate template = new RestTemplate(clientHttpRequestFactory);
-    // List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-    // StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-    // stringConverter.setWriteAcceptCharset(false);
-    // messageConverters.add(stringConverter);
-    // messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
-    // messageConverters.add(new ResourceHttpMessageConverter());
-    // template.setMessageConverters(messageConverters);
-    // return template;
-    // }
 
-    
     @Bean
-     HttpComponentsClientHttpRequestFactory requestFactory() {
+    HttpComponentsClientHttpRequestFactory requestFactory() {
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectionRequestTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+                .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS).build();
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
         return new HttpComponentsClientHttpRequestFactory(httpClient);
     }
-    
-    @Bean List<HttpMessageConverter<?>> getMessageConverters(ObjectMapper objectMapper){
-        
+
+    @Bean
+    List<HttpMessageConverter<?>> getMessageConverters(ObjectMapper objectMapper) {
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-         stringConverter.setWriteAcceptCharset(false);
-         messageConverters.add(stringConverter);
-         messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
-         messageConverters.add(new ResourceHttpMessageConverter());
-         return messageConverters;
+        stringConverter.setWriteAcceptCharset(false);
+        messageConverters.add(stringConverter);
+        messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
+        messageConverters.add(new ResourceHttpMessageConverter());
+        return messageConverters;
     }
-    
-    
-    
+
     @Bean
-    RestClient getRestClient(final  List<HttpMessageConverter<?>> messageConverters , HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
+    RestClient getRestClient(final List<HttpMessageConverter<?>> messageConverters,
+            HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
         return RestClient.builder().requestFactory(httpComponentsClientHttpRequestFactory)
-                .messageConverters(
-                        converters -> 
-                        converters.addAll(0, messageConverters)
-                        
-                        )
-                .build();
+                .messageConverters(converters -> converters.addAll(0, messageConverters)).build();
     }
 
     @Bean
