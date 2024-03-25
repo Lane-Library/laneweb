@@ -6,9 +6,11 @@ import java.net.URI;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+@Service
 public class RESTService {
 
     private RestClient restClient;
@@ -61,7 +63,7 @@ public class RESTService {
 
     public void putObject(final URI uri, final Object object) throws RESTException {
         try {
-            this.restClient.put().uri(uri).body(object);
+            this.restClient.put().uri(uri).body(object).retrieve();
         } catch (RestClientException e) {
             throw new RESTException(e);
         }
