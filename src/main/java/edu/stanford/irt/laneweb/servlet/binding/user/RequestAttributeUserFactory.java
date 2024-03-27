@@ -108,7 +108,7 @@ public class RequestAttributeUserFactory implements UserFactory {
             id = remoteUser;
         } else {
             // seems like this should never happen; can we remove all domain and SHIBBOLETH_PROVIDER checking?
-            log.warn("no domain from remoteUser {} ; buidling one from shibboleth provider domain", remoteUser);
+            log.error("no domain from remoteUser {} ; buidling one from shibboleth provider domain", remoteUser);
             id = new StringBuilder(remoteUser).append(AT).append(getDomain(request)).toString();
         }
         return id;
