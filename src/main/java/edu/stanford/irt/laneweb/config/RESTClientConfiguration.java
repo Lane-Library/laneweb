@@ -31,10 +31,10 @@ public class RESTClientConfiguration {
 
     @Bean
     HttpComponentsClientHttpRequestFactory getRequestFactory() {
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS).build();
+        RequestConfig requestConfig = RequestConfig.custom().setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
+                .build();
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
-        HttpComponentsClientHttpRequestFactory hcchrf =  new HttpComponentsClientHttpRequestFactory(httpClient);
+        HttpComponentsClientHttpRequestFactory hcchrf = new HttpComponentsClientHttpRequestFactory(httpClient);
         hcchrf.setConnectionRequestTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
         hcchrf.setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
         return hcchrf;
@@ -52,20 +52,15 @@ public class RESTClientConfiguration {
     }
 
     @Bean
-    RestClientCustomizer restClientCustomizer(final List<HttpMessageConverter<?>> messageConverters,
+    RestClient restClientCustomizer(final List<HttpMessageConverter<?>> messageConverters,
             HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
-        return (restClientBuilder) -> restClientBuilder.requestFactory(httpComponentsClientHttpRequestFactory)
+        return  RestClient.builder()
+                .requestFactory( httpComponentsClientHttpRequestFactory)
                 .messageConverters(converters -> converters.addAll(0, messageConverters)).build();
     }
 
     @Bean
-    RestClient restClient(RestClient.Builder builder) {
-        return builder.build();
-    }
-    
-    @Bean
     RESTService restService(RestClient restClient) {
         return new RESTService(restClient);
     }
-    
 }

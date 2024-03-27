@@ -20,9 +20,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 
-import edu.stanford.irt.laneweb.config.RESTClientConfiguration;
-
-@ContextConfiguration(classes = { RESTClientConfiguration.class })
+@ContextConfiguration(classes = { RESTClientTestConfiguration.class })
 @RestClientTest({ RESTService.class })
 class RestServiceTest {
 
