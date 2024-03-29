@@ -1,139 +1,139 @@
 package edu.stanford.irt.laneweb.rest;
 
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.mock;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.same;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.core.io.Resource;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestOperations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.test.web.client.match.MockRestRequestMatchers;
+import org.springframework.test.web.client.response.MockRestResponseCreators;
 
-public class RESTServiceTest {
+@ContextConfiguration(classes = { RESTClientTestConfiguration.class })
+@RestClientTest({ RESTService.class })
+class RESTServiceTest {
 
-    private ResponseEntity<String> entity;
+    @Autowired
+    private MockRestServiceServer server;
 
-    private RestOperations restOperations;
-
-    private String result;
-
+    @Autowired
     private RESTService service;
 
-    private TypeReference<String> type;
+    private final URI uri = URI.create("http://localhost:8080/");
 
-    private URI uri;
+    private TypeReference<String> type = new TypeReference<String>() {
+    };
 
-    @Before
-    public void setUp() throws URISyntaxException {
-        this.restOperations = mock(RestOperations.class);
-        this.service = new RESTService(this.restOperations);
-        this.uri = new URI("/");
-        this.type = new TypeReference<String>() {
-        };
-        this.entity = mock(ResponseEntity.class);
-        this.result = "";
+    private String json = "{\"publicationType\":[{\"valueCount\":1477475,\"value\":\"Research Support, Non-U.S. Gov't\",\"field\":{\"name\":\"publicationType\"},\"key\":{\"name\":\"publicationType\"}}]}";
+
+    @Test
+    void testGetInputStream() throws IOException, RESTException, URISyntaxException {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri))
+                .andRespond(MockRestResponseCreators.withSuccess().body(this.json));
+        assertSame(new ByteArrayInputStream(json.getBytes()).getClass(), this.service.getInputStream(uri).getClass());
+        this.server.verify();
     }
 
     @Test
-    public void testGetInputStream() throws IOException {
-        InputStream input = mock(InputStream.class);
-        Resource resource = mock(Resource.class);
-        expect(this.restOperations.getForObject(this.uri, Resource.class)).andReturn(resource);
-        expect(resource.getInputStream()).andReturn(input);
-        replay(this.restOperations, resource);
-        assertSame(input, this.service.getInputStream(this.uri));
-        verify(this.restOperations, resource);
-    }
-
-    @Test(expected = RESTException.class)
-    public void testGetInputStreamThrows() throws IOException {
-        Resource resource = mock(Resource.class);
-        new IOException();
-        expect(this.restOperations.getForObject(this.uri, Resource.class)).andReturn(resource);
-        expect(resource.getInputStream()).andThrow(new IOException());
-        replay(this.restOperations, resource);
-        this.service.getInputStream(this.uri);
+    void testGetInputStreamThrows() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.GET))
+                .andRespond(MockRestResponseCreators.withServerError());
+        try {
+            this.service.getInputStream(this.uri);
+        } catch (RESTException e) {
+            assertSame(RESTException.class, e.getClass());
+        }
+        this.server.verify();
     }
 
     @Test
-    public void testGetObjectURIClass() {
-        expect(this.restOperations.getForObject(this.uri, String.class)).andReturn(this.result);
-        replay(this.restOperations);
-        assertSame(this.result, this.service.getObject(this.uri, String.class));
-        verify(this.restOperations);
-    }
-
-    @Test(expected = RESTException.class)
-    public void testGetObjectURIClassThrows() {
-        expect(this.restOperations.getForObject(this.uri, String.class)).andThrow(new RestClientException("oopsie"));
-        replay(this.restOperations);
-        this.service.getObject(this.uri, String.class);
+    void testGetObjectURIClass() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.GET))
+                .andRespond(MockRestResponseCreators.withSuccess().body(this.json));
+        assertEquals(this.service.getObject(uri, String.class), json);
+        this.server.verify();
     }
 
     @Test
-    public void testGetObjectURITypeReference() {
-        expect(this.restOperations.exchange(this.uri, HttpMethod.GET, null, this.type)).andReturn(this.entity);
-        expect(this.entity.getBody()).andReturn(this.result);
-        replay(this.restOperations, this.entity);
-        assertSame(this.result, this.service.getObject(this.uri, this.type));
-        verify(this.restOperations, this.entity);
-    }
-
-    @Test(expected = RESTException.class)
-    public void testGetObjectURITypeReferenceThrows() {
-        expect(this.restOperations.exchange(this.uri, HttpMethod.GET, null, this.type))
-                .andThrow(new RestClientException("oopsie"));
-        replay(this.restOperations);
-        this.service.getObject(this.uri, this.type);
+    void testGetObjectURIClassThrows() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.GET))
+                .andRespond(MockRestResponseCreators.withServerError().body(this.json));
+        try {
+            this.service.getObject(this.uri, String.class);
+        } catch (RESTException e) {
+            assertSame(RESTException.class, e.getClass());
+        }
+        this.server.verify();
     }
 
     @Test
-    public void testPostURLEncodedString() {
-        expect(this.restOperations.exchange(isA(RequestEntity.class), same(String.class))).andReturn(this.entity);
-        expect(this.entity.getStatusCodeValue()).andReturn(9);
-        replay(this.restOperations, this.entity);
-        assertEquals(9, this.service.postURLEncodedString(this.uri, "foo"));
-        verify(this.restOperations, this.entity);
-    }
-
-    @Test(expected = RESTException.class)
-    public void testPostURLEncodedStringThrows() {
-        expect(this.restOperations.exchange(isA(RequestEntity.class), same(String.class)))
-                .andThrow(new RestClientException("oopsie"));
-        replay(this.restOperations);
-        this.service.postURLEncodedString(this.uri, "foo");
+    void testGetObjectURITypeReference() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.GET))
+                .andRespond(MockRestResponseCreators.withSuccess().body(this.json));
+        assertEquals(this.json, this.service.getObject(this.uri, this.type));
+        this.server.verify();
     }
 
     @Test
-    public void testPutObject() {
-        Object obj = new Object();
-        this.restOperations.put(this.uri, obj);
-        replay(this.restOperations);
-        this.service.putObject(this.uri, obj);
-        verify(this.restOperations);
+    void testGetObjectURITypeReferenceThrows() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.GET))
+                .andRespond(MockRestResponseCreators.withServerError());
+        try {
+            this.service.getObject(this.uri, this.type);
+        } catch (RESTException e) {
+            assertSame(RESTException.class, e.getClass());
+        }
+        this.server.verify();
     }
 
-    @Test(expected = RESTException.class)
-    public void testPutObjectThrows() {
-        Object obj = new Object();
-        this.restOperations.put(this.uri, obj);
-        expectLastCall().andThrow(new RestClientException("oopsie"));
-        replay(this.restOperations);
-        this.service.putObject(this.uri, obj);
+    @Test
+    void testPostURLEncodedString() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.POST))
+                .andExpect(content().string(this.json)).andRespond(MockRestResponseCreators.withSuccess());
+        assertEquals(200, this.service.postURLEncodedString(uri, this.json));
+        this.server.verify();
+    }
+
+    @Test
+    void testPostURLEncodedStringThrows() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.POST))
+                .andExpect(content().string(this.json)).andRespond(MockRestResponseCreators.withServerError());
+        try {
+            this.service.postURLEncodedString(uri, this.json);
+        } catch (RESTException e) {
+            assertSame(RESTException.class, e.getClass());
+        }
+        this.server.verify();
+    }
+
+    @Test
+    void testPutObject() {
+        this.server.expect(MockRestRequestMatchers.requestTo(this.uri)).andExpect(method(HttpMethod.PUT))
+                .andExpect(content().string(this.json)).andRespond(withSuccess());
+        this.service.putObject(this.uri, this.json);
+        this.server.verify();
+    }
+
+    @Test
+    void testPutObjectThrows() {
+        this.server.expect(MockRestRequestMatchers.requestTo(uri)).andExpect(method(HttpMethod.PUT))
+                .andExpect(content().string(this.json)).andRespond(MockRestResponseCreators.withSuccess());
+        try {
+            this.service.putObject(this.uri, this.json);
+        } catch (RESTException e) {
+            assertSame(RESTException.class, e.getClass());
+        }
+        this.server.verify();
     }
 }

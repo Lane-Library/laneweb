@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +11,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,17 +21,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.ResourceHttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.xstream.XStream;
 
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
@@ -42,7 +31,6 @@ import edu.stanford.irt.cocoon.spring.SpringComponentFactory;
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
 import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.rest.RESTService;
 import jakarta.servlet.ServletContext;
 
 @Configuration
@@ -56,10 +44,6 @@ public class LanewebConfiguration {
 
     private static final List<String> DEFAULT_LOCATIONS = Arrays
             .asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
-
-    private static final int HTTP_CONNECT_TIMEOUT = 5_000;
-
-    private static final int HTTP_READ_TIMEOUT = 30_000;
 
     private Map<String, Object> constants;
 
@@ -82,7 +66,7 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
+    static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
             final Environment environment, final ResourceLoader resourceLoader) {
         List<Resource> locations = DEFAULT_LOCATIONS.stream().map((final String s) -> s + "application.properties")
                 .map(resourceLoader::getResource).collect(Collectors.toList());
@@ -102,32 +86,24 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    public CacheFactoryBean cache() throws URISyntaxException {
+    CacheFactoryBean cache() throws URISyntaxException {
         return new CacheFactoryBean(jCacheManagerFactoryBean().getObject());
     }
 
     @Bean
-    public ClientHttpRequestFactory clientHttpRequestFactory() {
-      RestTemplateBuilder builder = new RestTemplateBuilder();
-      builder.setConnectTimeout(Duration.ofMillis(HTTP_CONNECT_TIMEOUT));
-      builder.setReadTimeout(Duration.ofMillis(HTTP_READ_TIMEOUT));
-      return builder.buildRequestFactory();
-    }
-
-    @Bean
-    public ComponentFactory componentFactory(BeanFactory beanFactory) {
+    ComponentFactory componentFactory(BeanFactory beanFactory) {
         return new SpringComponentFactory(beanFactory);
     }
 
     @Bean
-    public JCacheManagerFactoryBean jCacheManagerFactoryBean() throws URISyntaxException {
+    JCacheManagerFactoryBean jCacheManagerFactoryBean() throws URISyntaxException {
         JCacheManagerFactoryBean factoryBean = new JCacheManagerFactoryBean();
         factoryBean.setCacheManagerUri(getClass().getResource("/ehcache.xml").toURI());
         return factoryBean;
     }
 
     @Bean
-    public Marshaller marshaller() {
+    Marshaller marshaller() {
         XStreamMarshaller marshaller = new XStreamMarshaller();
         Map<String, Class<?>> aliases = new HashMap<>();
         aliases.put("bookmark", Bookmark.class);
@@ -138,26 +114,8 @@ public class LanewebConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.Model")
     @Scope("request")
-    public Map<String, Object> model() {
+    Map<String, Object> model() {
         return new HashMap<>(this.constants);
     }
 
-    @Bean
-    public RestOperations restOperations(final ClientHttpRequestFactory clientHttpRequestFactory,
-            final ObjectMapper objectMapper) {
-        RestTemplate template = new RestTemplate(clientHttpRequestFactory);
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
-        stringConverter.setWriteAcceptCharset(false);
-        messageConverters.add(stringConverter);
-        messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
-        messageConverters.add(new ResourceHttpMessageConverter());
-        template.setMessageConverters(messageConverters);
-        return template;
-    }
-
-    @Bean
-    public RESTService restService(final RestOperations restOperations) {
-        return new RESTService(restOperations);
-    }
 }

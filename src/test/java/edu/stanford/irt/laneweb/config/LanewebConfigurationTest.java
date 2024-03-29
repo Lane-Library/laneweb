@@ -11,8 +11,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-import jakarta.servlet.ServletContext;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.core.env.Environment;
@@ -20,6 +18,7 @@ import org.springframework.core.io.ResourceLoader;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
+import jakarta.servlet.ServletContext;
 
 public class LanewebConfigurationTest {
 
@@ -32,11 +31,6 @@ public class LanewebConfigurationTest {
     }
 
     @Test
-    public void testClientHttpRequestFactory() {
-        assertNotNull(this.configuration.clientHttpRequestFactory());
-    }
-
-    @Test
     public void testComponentFactory() {
         assertNotNull(this.configuration.componentFactory(null));
     }
@@ -45,16 +39,16 @@ public class LanewebConfigurationTest {
     public void testJCacheManagerFactoryBean() throws URISyntaxException {
         assertNotNull(this.configuration.jCacheManagerFactoryBean());
     }
-  
+
     @Test
     public void testModel() {
         Map<String, Object> model = this.configuration.model();
         assertEquals("version", model.get(Model.VERSION));
         assertEquals("content", ModelUtil.getObject(model, Model.CONTENT_BASE, URI.class).toString());
         assertEquals("libguide", ModelUtil.getObject(model, Model.LIBGUIDE_SERVICE_URI, URI.class).toString());
-        assertEquals("libcal", ModelUtil.getObject(model, Model.LIBCAL_SERVICE_URI, URI.class).toString()); 
+        assertEquals("libcal", ModelUtil.getObject(model, Model.LIBCAL_SERVICE_URI, URI.class).toString());
         assertEquals("rw", ModelUtil.getString(model, Model.BOOKMARKING));
-        assertEquals("browzine-token",  ModelUtil.getString(model, Model.BROWZINE_TOKEN));
+        assertEquals("browzine-token", ModelUtil.getString(model, Model.BROWZINE_TOKEN));
     }
 
     @Test
@@ -77,15 +71,5 @@ public class LanewebConfigurationTest {
         replay(environment, resourceLoader);
         assertNotNull(LanewebConfiguration.propertySourcesPlaceholderConfigurer(environment, resourceLoader));
         verify(environment, resourceLoader);
-    }
-
-    @Test
-    public void testRestOperations() {
-        assertNotNull(this.configuration.restOperations(this.configuration.clientHttpRequestFactory(), null));
-    }
-
-    @Test
-    public void testRestService() {
-        assertNotNull(this.configuration.restService(null));
     }
 }
