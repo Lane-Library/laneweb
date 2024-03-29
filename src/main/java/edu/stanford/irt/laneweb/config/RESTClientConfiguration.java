@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
-import org.springframework.boot.web.client.RestClientCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -31,7 +30,8 @@ public class RESTClientConfiguration {
 
     @Bean
     HttpComponentsClientHttpRequestFactory getRequestFactory() {
-        RequestConfig requestConfig = RequestConfig.custom().setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
+        RequestConfig requestConfig = RequestConfig.custom()
+                .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
                 .build();
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
         HttpComponentsClientHttpRequestFactory hcchrf = new HttpComponentsClientHttpRequestFactory(httpClient);

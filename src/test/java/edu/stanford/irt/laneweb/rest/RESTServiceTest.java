@@ -22,7 +22,7 @@ import org.springframework.test.web.client.response.MockRestResponseCreators;
 
 @ContextConfiguration(classes = { RESTClientTestConfiguration.class })
 @RestClientTest({ RESTService.class })
-class RestServiceTest {
+class RESTServiceTest {
 
     @Autowired
     private MockRestServiceServer server;
