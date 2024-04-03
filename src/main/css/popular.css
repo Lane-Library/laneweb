@@ -93,13 +93,13 @@
     .top-resources.active.menu-container.mobile  ul, .top-resources.menu-container.mobile  ul {
         display: flex;
         flex-flow: column wrap;
-        margin: -11px 6% 0 24px;
+        margin: 0 6% 0 24px;
         height: 114px;
         padding: 16px 0;        
     }
     .top-resources.menu-container.mobile h2 {
-        margin: 24px;
-        padding: 24px 0;
+        margin: 0 18px;
+        padding: 18px 0;
         border-bottom: 1px solid #d8dbdc;
         cursor: default;
     }
