@@ -76,7 +76,7 @@
 
 @media ( max-width : 1100px) {
     
-    .top-resources.menu-container.mobile h2 i, .top-resources.menu-container.mobile.active h2 i,.popular.menu-container  hr
+    .top-resources.menu-container.mobile h2 i:first-of-type, .top-resources.menu-container.mobile.active i:nth-of-type(2) 
     {
         display: none;
     }
@@ -90,12 +90,12 @@
     .popular.menu-container  div div{
         padding: 12px 27px;
     }
-    .top-resources.menu-container.mobile  ul {
+    .top-resources.active.menu-container.mobile  ul, .top-resources.menu-container.mobile  ul {
         display: flex;
         flex-flow: column wrap;
-        margin-left: 6%;
+        margin: -11px 6% 0 24px;
         height: 114px;
-        padding: 16px 0;
+        padding: 16px 0;        
     }
     .top-resources.menu-container.mobile h2 {
         margin: 24px;
@@ -136,15 +136,15 @@
         border: none;
         cursor: pointer;
     }
-    .top-resources.menu-container h2 i:first-of-type, .top-resources.menu-container.active h2 i:nth-of-type(2)
+    .top-resources.menu-container.mobile h2 i:first-of-type, .top-resources.menu-container.active.mobile h2 i:nth-of-type(2)
         {
         display: block;
-    }
+        }
     .top-resources.menu-container.mobile  ul, .top-resources.menu-container.active h2 i:first-of-type
         {
         display: none;
-    }
-    .top-resources.menu-container.active ul {
+    }   
+    .top-resources.menu-container.active.mobile ul {
         display: flex;
         margin-left: 9%;
         flex-flow: row wrap;

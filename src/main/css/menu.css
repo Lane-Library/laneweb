@@ -1,63 +1,167 @@
+/*  menu with link */ 
 .menu-container li {
-    border: none;
-    padding: 0;
-    margin: 0;
+	border: none;
+	padding: 0;
+	margin: 0;
 }
 
 .menu-container li a {
-    display: inline-block;
-    width: 100%;
-    padding: 9px 24px;
+	display: inline-block;
+	width: 100%;
+	padding: 9px 24px;
 }
 
 .menu-container.hoverline li a:hover {
-    color: white;
-    background-color: #666;
-    text-decoration: none;
+	color: white;
+	background-color: #666;
+	text-decoration: none;
 }
 
 .menu-container li a.menuitem-active, .menu-container li a:hover.menuitem-active
-    {
-    background-color: #8c1515;
-    color: white;
-    cursor: default;
-    text-decoration: none;
+	{
+	background-color: #8c1515;
+	color: white;
+	cursor: default;
+	text-decoration: none;
 }
 
 .menu-container  h2 i {
-    float: right;
-    padding: 11px 7px;
-    display: none;
+	float: right;
+	padding: 11px 7px;
+	display: none;
+}
+
+/* content closable on phone view with 3 images  */
+.menu-container section.articles {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.menu-container section.articles:first-of-type {
+    padding-bottom: 39px;
+}
+
+.menu-container section.articles article {
+    position: relative;
+    padding-bottom: 12px;
+    width: 32%;
+}
+
+.menu-container article h4 {
+    padding: 0;
+    margin: 15px 0 8px;
+}
+
+.menu-container article .button-link-retainer-space {
+    height: 63px;
+}
+
+.menu-container article .button-link-retainer-space a {
+    position: absolute;
+    bottom: 21px;
+}
+
+.menu-container section li a {
+    padding: 0;
 }
 
 @media ( max-width :1100px) {
-    .menu-container.mobile {
-        padding: 0;
-        margin: 24px 32px 0;
+	.menu-container.mobile {
+		padding: 0;
+		margin: 24px 32px 0;
+	}
+	.menu-container.mobile h2 i:first-of-type,.menu-container.mobile.active h2 i:nth-of-type(2) {
+		display: block;
+	}
+	.menu-container.mobile ul, .menu-container.mobile section,
+		.menu-container.mobile.active h2 i:first-of-type {
+		display: none;
+	}
+	 
+	.menu-container.active.mobile ul, .menu-container.active.mobile section
+	{
+		display: block;
+		margin: 0 16px;
+	}
+	
+	.menu-container.active.mobile  section ul {
+        margin: 0 ;
     }
-    .menu-container, .menu-container h2 i:first-of-type, .menu-container.active h2 i:nth-of-type(2)
-        {
-        display: block;
+	
+	
+	.menu-container.mobile h2 {
+		padding: 16px;
+	}
+	
+	.menu-container.active.mobile section:last-of-type, .menu-container.active.mobile ul:last-of-type
+    {
+        padding-bottom: 16px;
     }
-    .menu-container.mobile  ul, .menu-container.active h2 i:first-of-type {
-        display: none;
+    
+    .menu-container.active.mobile article:last-of-type
+    {
+        padding-bottom: 0;
     }
-    .menu-container.active ul {
-        display: block;
-        margin: 16px;
-    }
-    .menu-container.mobile h2 {
-        padding: 16px;
-    }
-    .menu-container.mobile h2, .menu-container.mobile h2:before {
-        margin-bottom: 0;
-        border: none;
-        cursor: pointer;
-    }
+    
+    
+	.menu-container.mobile h2, .menu-container.mobile h2:before {
+		margin-bottom: 0;
+		border: none;
+		cursor: pointer;
+	}
+	
+	
 }
 
 @media ( max-width :812px) {
-    .menu-container.mobile {
-        margin: 24px 15px 0;
+	.menu-container.mobile, .menu-container.phone {
+	   padding: 0;
+	   margin: 24px 15px 0;
+	}
+	
+	.menu-container.phone section:last-of-type,.menu-container.phone ul:last-of-type
+    {
+        padding-bottom: 16px;
     }
+	
+	.menu-container.phone article:last-of-type
+    {
+        margin-bottom: 0;
+    }
+	
+	.menu-container.phone ul, .menu-container.phone section,
+		.menu-container.phone.active h2 i:first-of-type {
+		display: none;
+		padding-bottom: 0;
+	}
+	
+	.menu-container.active.phone section, .menu-container.phone h2 i:first-of-type,
+        .menu-container.phone.active h2 i:nth-of-type(2) {
+        display: block;
+    }
+	
+	.menu-container.phone h2 {
+		padding: 16px;
+	}
+	
+	.menu-container.phone h2, .menu-container.phone h2:before {
+		margin-bottom: 0;
+		border: none;
+		cursor: pointer;
+	}
+	/* content closable with 3 images  */
+    .menu-container section.articles article, .menu-container section article img {
+        width: 100%;
+    }
+    .menu-container section.articles article {
+        margin-bottom: 30px;
+    }
+    .menu-container section.articles article>div {
+        padding: 6px 12px;
+    }
+    .menu-container.articles article h4 {
+        margin: 0;
+    }
+	
 }
