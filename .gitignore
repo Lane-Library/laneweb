@@ -11,3 +11,4 @@
 /javamelody/
 /xerces/
 /xspec-master/
+*.code-workspace
