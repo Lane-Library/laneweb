@@ -15,7 +15,10 @@ import jakarta.annotation.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,9 +29,13 @@ import edu.stanford.irt.laneweb.user.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
+@TestPropertySource(locations = "classpath:/config/application.properties")
 @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class CMERedirectControllerIT {
 
+    @MockBean
+    JavaMailSender JavaMailSender;
+    
     private static final User USER = new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo");
 
     private MockMvc mockMvc;
