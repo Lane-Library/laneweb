@@ -16,6 +16,6 @@ public class EmailConfigurationTest {
 
     @Test
     public void testEMailSender() {
-        assertNotNull(this.configuration.eMailSender(null, 0));
+        assertNotNull(this.configuration.eMailSender(null));
     }
 }

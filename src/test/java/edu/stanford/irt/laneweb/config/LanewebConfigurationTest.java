@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -13,8 +10,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.core.env.Environment;
-import org.springframework.core.io.ResourceLoader;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
@@ -50,26 +45,5 @@ public class LanewebConfigurationTest {
         assertEquals("rw", ModelUtil.getString(model, Model.BOOKMARKING));
         assertEquals("browzine-token", ModelUtil.getString(model, Model.BROWZINE_TOKEN));
     }
-
-    @Test
-    public void testPropertySourcesPlaceholderConfigurer() {
-        ResourceLoader resourceLoader = mock(ResourceLoader.class);
-        Environment environment = mock(Environment.class);
-        expect(resourceLoader.getResource("classpath:/application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("classpath:/config/application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./config/application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:/laneweb.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:/etc/laneweb.conf")).andReturn(null);
-        expect(environment.getActiveProfiles()).andReturn(new String[] { "gce" });
-        expect(resourceLoader.getResource("classpath:/application-gce.properties")).andReturn(null);
-        expect(resourceLoader.getResource("classpath:/config/application-gce.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./application-gce.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./config/application-gce.properties")).andReturn(null);
-        expect(environment.getProperty("spring.config.location"))
-                .andReturn("file:/laneweb.properties,file:/etc/laneweb.conf");
-        replay(environment, resourceLoader);
-        assertNotNull(LanewebConfiguration.propertySourcesPlaceholderConfigurer(environment, resourceLoader));
-        verify(environment, resourceLoader);
-    }
+   
 }
