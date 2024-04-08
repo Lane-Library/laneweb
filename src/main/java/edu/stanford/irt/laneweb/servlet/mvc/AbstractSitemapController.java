@@ -3,9 +3,6 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import java.io.IOException;
 import java.util.Map;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -15,7 +12,6 @@ import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.sitemap.SitemapContextImpl;
 import edu.stanford.irt.cocoon.source.SourceResolver;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.AbstractLanewebFilter;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public abstract class AbstractSitemapController {

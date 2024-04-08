@@ -96,7 +96,7 @@
 	.menu-container.active.mobile h2 {
 		color: #333;
 		margin-bottom: 1.2em;
-		padding-bottom: 1.2em;
+		padding-bottom: 0.6em;
 		border-bottom: 1px solid #d8dbdc;
 	}
 	.menu-container.active.mobile h2:before {
@@ -143,7 +143,7 @@
 	.menu-container.active.phone h2 {
 		color: #333;
 		margin-bottom: 1.2em;
-		padding-bottom: 1.2em;
+		padding-bottom: 0.6em;
 		border-bottom: 1px solid #d8dbdc;
 	}
 	.menu-container.active.phone h2:before {
