@@ -2,8 +2,11 @@ package edu.stanford.irt.laneweb.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +17,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
 
@@ -35,6 +42,9 @@ import jakarta.servlet.ServletContext;
         "edu.stanford.irt.laneweb.livechat" })
 public class LanewebConfiguration {
 
+    private static final List<String> DEFAULT_LOCATIONS = Arrays
+            .asList("classpath:/,classpath:/config/,file:./,file:./config/".split(","));
+
     private Map<String, Object> constants;
 
     public LanewebConfiguration(@Qualifier("java.net.URI/libguide-service") final URI libguideServiceURI,
@@ -54,7 +64,27 @@ public class LanewebConfiguration {
         // set the http.agent system property:
         System.setProperty("http.agent", "laneweb-" + version);
     }
-    
+
+    @Bean
+    static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer(
+            final Environment environment, final ResourceLoader resourceLoader) {
+        List<Resource> locations = DEFAULT_LOCATIONS.stream().map((final String s) -> s + "application.properties")
+                .map(resourceLoader::getResource).collect(Collectors.toList());
+        Arrays.stream(environment.getActiveProfiles())
+                .forEach((final String profile) -> locations.addAll(
+                        DEFAULT_LOCATIONS.stream().map((final String s) -> s + "application-" + profile + ".properties")
+                                .map(resourceLoader::getResource).collect(Collectors.toList())));
+        String springConfigProperty = environment.getProperty("spring.config.location");
+        if (springConfigProperty != null) {
+            locations.addAll(Arrays.stream(springConfigProperty.split(",")).map(resourceLoader::getResource)
+                    .collect(Collectors.toList()));
+        }
+        PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
+        pspc.setIgnoreResourceNotFound(true);
+        pspc.setLocations(locations.toArray(new Resource[locations.size()]));
+        return pspc;
+    }
+
     @Bean
     CacheFactoryBean cache() throws URISyntaxException {
         return new CacheFactoryBean(jCacheManagerFactoryBean().getObject());

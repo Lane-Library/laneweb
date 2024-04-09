@@ -15,11 +15,8 @@ import jakarta.annotation.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,16 +25,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@TestPropertySource(locations = "classpath:config/application.properties")
 @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class LaneSearchIT {
 
     private static final MediaType TEXT_HTML = new MediaType("text", "html", StandardCharsets.UTF_8);
 
     private MockMvc mockMvc;
-    
-    @MockBean
-    JavaMailSender JavaMailSender;
 
     private Map<String, String> ns;
 

@@ -11,24 +11,20 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.annotation.Resource;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import jakarta.annotation.Resource;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@TestPropertySource(locations = "classpath:config/application.properties")
 @ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
 public class LanewebIT {
 
@@ -39,10 +35,9 @@ public class LanewebIT {
 
     private static final MediaType TEXT_HTML = new MediaType("text", "html", StandardCharsets.UTF_8);
 
-    private MockMvc mockMvc;
+    private static final MediaType TEXT_XML = new MediaType("text", "xml", StandardCharsets.UTF_8);
 
-    @MockBean
-    private JavaMailSender mailSender;
+    private MockMvc mockMvc;
 
     @Resource
     private WebApplicationContext webApplicationContext;
@@ -52,18 +47,17 @@ public class LanewebIT {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
     }
 
-//    @Test
+    @Test
     public void testClinicalSearch() throws Exception {
         Map<String, String> ns = new HashMap<>();
         ns.put("h", "http://www.w3.org/1999/xhtml");
         this.mockMvc.perform(get("/search.html?source=clinical-all&q=test").servletPath("/search.html"))
                 .andExpect(status().isOk())
-                .andExpect(
-                        xpath("//h:li[position() >= 10]//h:a[@class='primaryLink bookmarking']/h:strong", ns).exists())
+                .andExpect(xpath("//h:li[position() >= 10]//h:a[@class='primaryLink bookmarking']/h:strong", ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
-//    @Test
+    @Test
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
                 .andExpect(content().contentType(IMAGE_PNG));
@@ -72,8 +66,8 @@ public class LanewebIT {
     @Test
     public void testEresourceBrowse() throws Exception {
         this.mockMvc
-                .perform(get("/eresources/browse/query/type:Journal.html")
-                        .servletPath("/eresources/browse/query/type:Journal.html"))
+                .perform(
+                        get("/eresources/browse/query/type:Journal.html").servletPath("/eresources/browse/query/type:Journal.html"))
                 .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
     }
 
@@ -89,7 +83,7 @@ public class LanewebIT {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
-//    @Test
+    @Test
     public void testIndex() throws Exception {
         this.mockMvc.perform(get("/index.html").servletPath("/index.html")).andExpect(status().isOk())
                 .andExpect(content().contentType(TEXT_HTML));
@@ -118,8 +112,7 @@ public class LanewebIT {
         this.mockMvc
                 .perform(
                         get("/apps/search/content/html/pubmed?q=Ebola").servletPath("/apps/search/content/html/pubmed"))
-                .andExpect(
-                        xpath("//h:li[position() <= 3]//h:a[@class='primaryLink bookmarking']/h:strong", ns).exists())
+                .andExpect(xpath("//h:li[position() <= 3]//h:a[@class='primaryLink bookmarking']/h:strong", ns).exists())
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
@@ -130,6 +123,9 @@ public class LanewebIT {
         this.mockMvc.perform(get("/help/")).andExpect(status().isFound())
                 .andExpect(header().string("location", "/help/index.html"));
         this.mockMvc.perform(get("/help/me/")).andExpect(status().isFound())
-                .andExpect(header().string("location", "/help/me/index.html"));
+                .andExpect(header().string("location", "/help/me/index.html"));        
     }
+
+  
+
 }
