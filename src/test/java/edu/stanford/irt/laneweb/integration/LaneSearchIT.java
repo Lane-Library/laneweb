@@ -14,9 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -36,9 +34,6 @@ public class LaneSearchIT {
 
     private MockMvc mockMvc;
     
-    @MockBean
-    JavaMailSender JavaMailSender;
-
     private Map<String, String> ns;
 
     @Resource

@@ -14,9 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -34,9 +31,6 @@ import jakarta.annotation.Resource;
 @ContextConfiguration(classes = LanewebConfiguration.class)
 public class CMERedirectControllerIT {
 
-    @MockBean
-    JavaMailSender JavaMailSender;
-    
     private static final User USER = new User("ceyates@stanford.edu", "Charles E Yates", "ceyates@stanford.edu", "foo");
 
     private MockMvc mockMvc;
