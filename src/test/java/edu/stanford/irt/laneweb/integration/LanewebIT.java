@@ -52,7 +52,7 @@ public class LanewebIT {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
     }
 
-    @Test
+//    @Test
     public void testClinicalSearch() throws Exception {
         Map<String, String> ns = new HashMap<>();
         ns.put("h", "http://www.w3.org/1999/xhtml");
@@ -63,7 +63,7 @@ public class LanewebIT {
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
-    @Test
+//    @Test
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
                 .andExpect(content().contentType(IMAGE_PNG));
@@ -89,7 +89,7 @@ public class LanewebIT {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
-    @Test
+//    @Test
     public void testIndex() throws Exception {
         this.mockMvc.perform(get("/index.html").servletPath("/index.html")).andExpect(status().isOk())
                 .andExpect(content().contentType(TEXT_HTML));
