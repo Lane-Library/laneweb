@@ -10,27 +10,28 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.annotation.Resource;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import edu.stanford.irt.laneweb.config.LanewebConfiguration;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.user.User;
+import jakarta.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@TestPropertySource(locations = "classpath:/config/application.properties")
-@ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
+@SpringBootTest()
+@ContextConfiguration(classes = LanewebConfiguration.class)
 public class CMERedirectControllerIT {
 
     @MockBean

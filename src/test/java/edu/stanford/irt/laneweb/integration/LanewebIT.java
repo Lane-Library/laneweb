@@ -14,22 +14,23 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import edu.stanford.irt.laneweb.config.LanewebConfiguration;
 import jakarta.annotation.Resource;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@TestPropertySource(locations = "classpath:config/application.properties")
-@ContextConfiguration(classes = edu.stanford.irt.laneweb.config.LanewebConfiguration.class)
+@SpringBootTest()
+@ContextConfiguration(classes = LanewebConfiguration.class)
 public class LanewebIT {
 
     private static final MediaType APPLICATION_JAVASCRIPT = new MediaType("application", "javascript",
@@ -42,7 +43,7 @@ public class LanewebIT {
     private MockMvc mockMvc;
 
     @MockBean
-    private JavaMailSender mailSender;
+    JavaMailSender JavaMailSender;
 
     @Resource
     private WebApplicationContext webApplicationContext;
@@ -52,7 +53,7 @@ public class LanewebIT {
         this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
     }
 
-//    @Test
+    @Test
     public void testClinicalSearch() throws Exception {
         Map<String, String> ns = new HashMap<>();
         ns.put("h", "http://www.w3.org/1999/xhtml");
@@ -63,7 +64,7 @@ public class LanewebIT {
                 .andExpect(content().contentType(TEXT_HTML));
     }
 
-//    @Test
+    @Test
     public void testContentAwareRequestHandler() throws Exception {
         this.mockMvc.perform(get("/apple-touch-icon.png")).andExpect(status().isOk())
                 .andExpect(content().contentType(IMAGE_PNG));
@@ -89,7 +90,7 @@ public class LanewebIT {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
-//    @Test
+    @Test
     public void testIndex() throws Exception {
         this.mockMvc.perform(get("/index.html").servletPath("/index.html")).andExpect(status().isOk())
                 .andExpect(content().contentType(TEXT_HTML));
