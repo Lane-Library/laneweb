@@ -8,20 +8,20 @@ import java.net.URI;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 
 public class PatronRegistrationConfigurationTest {
 
     private PatronRegistrationConfiguration configuration;
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private URI uri;
 
     @Before
     public void setUp() throws Exception {
         this.uri = new URI("/");
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.configuration = new PatronRegistrationConfiguration();
     }
 

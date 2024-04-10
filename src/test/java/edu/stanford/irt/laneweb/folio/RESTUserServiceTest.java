@@ -13,11 +13,11 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 
 public class RESTUserServiceTest {
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private RESTUserService service;
 
@@ -26,7 +26,7 @@ public class RESTUserServiceTest {
     @Before
     public void setUp() throws Exception {
         this.uri = new URI("/");
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.service = new RESTUserService(this.uri, this.restService);
     }
 

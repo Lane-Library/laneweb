@@ -8,14 +8,14 @@ import org.springframework.context.annotation.Configuration;
 
 import edu.stanford.irt.laneweb.folio.RESTUserService;
 import edu.stanford.irt.laneweb.folio.UserService;
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 
 @Configuration
 public class PatronRegistrationConfiguration {
 
     @Bean
     public UserService userService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final RESTService restService) {
+            final BasicAuthRESTService restService) {
         return new RESTUserService(catalogServiceURI, restService);
     }
 }
