@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>147-springsix</version>
+        <version>148-springsix</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.13.4-SNAPSHOT</version>
@@ -64,7 +64,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>3.2.1</version>
+            <version>3.2.2</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
@@ -250,7 +250,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>10.1.19</version>
+            <version>10.1.20</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
@@ -472,7 +472,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>8.0.1</version>
+                <version>8.0.2</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
