@@ -12,3 +12,5 @@
 /xerces/
 /xspec-master/
 *.code-workspace
+.vscode/settings.json
+.gitignore
