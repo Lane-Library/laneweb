@@ -151,7 +151,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>bassett</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
