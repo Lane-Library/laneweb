@@ -1,8 +1,12 @@
 package edu.stanford.irt.laneweb.rest;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.client.RestClient;
 
+@Configuration
+@Profile("test")
 public class RESTClientTestConfiguration {
 
     @Bean
