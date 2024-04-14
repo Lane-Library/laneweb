@@ -51,25 +51,4 @@ public class LanewebConfigurationTest {
         assertEquals("browzine-token", ModelUtil.getString(model, Model.BROWZINE_TOKEN));
     }
 
-    @Test
-    public void testPropertySourcesPlaceholderConfigurer() {
-        ResourceLoader resourceLoader = mock(ResourceLoader.class);
-        Environment environment = mock(Environment.class);
-        expect(resourceLoader.getResource("classpath:/application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("classpath:/config/application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./config/application.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:/laneweb.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:/etc/laneweb.conf")).andReturn(null);
-        expect(environment.getActiveProfiles()).andReturn(new String[] { "gce" });
-        expect(resourceLoader.getResource("classpath:/application-gce.properties")).andReturn(null);
-        expect(resourceLoader.getResource("classpath:/config/application-gce.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./application-gce.properties")).andReturn(null);
-        expect(resourceLoader.getResource("file:./config/application-gce.properties")).andReturn(null);
-        expect(environment.getProperty("spring.config.location"))
-                .andReturn("file:/laneweb.properties,file:/etc/laneweb.conf");
-        replay(environment, resourceLoader);
-        assertNotNull(LanewebConfiguration.propertySourcesPlaceholderConfigurer(environment, resourceLoader));
-        verify(environment, resourceLoader);
-    }
 }

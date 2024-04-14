@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>lane-parent</artifactId>
@@ -151,7 +152,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>bassett</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <artifactId>suggest-query</artifactId>
@@ -181,8 +182,7 @@
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
             <!-- LANEWEB-10667: performance problems with xerces 2.12.1 -->
-            <!-- add runtime
-            -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeAwareParserConfiguration -->
+            <!-- add runtime -Dorg.apache.xerces.xni.parser.XMLParserConfiguration=org.apache.xerces.parsers.XIncludeAwareParserConfiguration -->
             <version>2.12.2</version>
             <exclusions>
                 <exclusion>
@@ -230,12 +230,12 @@
             <classifier>jakarta</classifier>
             <scope>runtime</scope>
             <!-- Added exclusion because there was some warning during the mvn package  -->
-              <exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>org.glassfish.jaxb</groupId>
                     <artifactId>jaxb-runtime</artifactId>
                 </exclusion>
-            </exclusions> 
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
@@ -401,10 +401,8 @@
             <!-- disable (temporarily?) grover JS tests: istanbul is dependent
             on ancient node version
             also had to remove jenkins "grover" task:
-            -U
-            -Dspring.config.location=file:${HOME}/tomcat/instances/laneweb/conf/laneweb.properties
-            clean verify grover:coverage $SONAR_MAVEN_GOAL
-            -Dsonar.host.url=$SONAR_HOST_URL
+            -U -Dspring.config.location=file:${HOME}/tomcat/instances/laneweb/conf/laneweb.properties
+            clean verify grover:coverage $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL
             <plugin>
                 <groupId>edu.stanford.irt</groupId>
                 <artifactId>grover-maven-plugin</artifactId>
