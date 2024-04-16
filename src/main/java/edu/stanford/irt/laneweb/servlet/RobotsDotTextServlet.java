@@ -26,10 +26,14 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private static final byte[] NONPRODUCTION = "User-agent: *\nDisallow: /".getBytes(StandardCharsets.UTF_8);
 
-    private static final byte[] PRODUCTION = ("User-agent: *\nCrawl-delay: 7\n"
-            + "Disallow: /search.html\nDisallow: /search/\nDisallow: /secure/\n"
-            + "Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml")
-                    .getBytes(StandardCharsets.UTF_8);
+    private static final byte[] PRODUCTION = ("""
+            User-agent: *
+            Crawl-delay: 7
+            Disallow: /search.html
+            Disallow: /search/
+            Disallow: /secure/
+            Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml
+                    """).getBytes(StandardCharsets.UTF_8);
 
     private static final long serialVersionUID = 1L;
 
