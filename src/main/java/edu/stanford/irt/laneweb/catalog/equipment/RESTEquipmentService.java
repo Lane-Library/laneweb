@@ -29,6 +29,6 @@ public class RESTEquipmentService implements EquipmentService {
         List<Map<String, String>> list = this.restService.getObject(this.catalogServiceURI.resolve(LIST_ENDPOINT_PATH),
                 TYPE);
         return list.stream().map(m -> new Equipment(m.get("bibID"), m.get("count"), m.get("note"), m.get("title")))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

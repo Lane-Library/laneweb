@@ -17,27 +17,27 @@ import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 @Controller
 public class FacetSuggestionController {
 
-    private static final String RESULT_NOT_FOUND_MESSAGE="No match found";
-    
+    private static final String RESULT_NOT_FOUND_MESSAGE = "No match found";
+
     private EresourceFacetService restFacetService;
 
     private static final int FACET_MIN_COUNT = 1;
-    
-    
+
     public FacetSuggestionController(final EresourceFacetService solrFacetService) {
         this.restFacetService = solrFacetService;
     }
 
     @GetMapping(value = "/apps/solr/facet/suggest")
     @ResponseBody
-    public Collection<String> getSuggestions(@RequestParam(name="contains") final String containsTerm, 
+    public Collection<String> getSuggestions(@RequestParam(name = "contains") final String containsTerm,
             @RequestParam(name = "q") final String searchQuery, final String facet, final String facets) {
-        Map<String,List<FacetFieldEntry>>  facetPage = this.restFacetService.facetByFieldContains( containsTerm,  searchQuery, facet, facets, FACET_MIN_COUNT);
-        List<FacetFieldEntry>  facetFieldEntry = facetPage.get(facet);
-        List<String> facetsResult = facetFieldEntry.stream().map(FacetFieldEntry::getValue).collect(Collectors.toList());
-        if(facetsResult.isEmpty()) {
-            return Collections.singleton( RESULT_NOT_FOUND_MESSAGE);
+        Map<String, List<FacetFieldEntry>> facetPage = this.restFacetService.facetByFieldContains(containsTerm,
+                searchQuery, facet, facets, FACET_MIN_COUNT);
+        List<FacetFieldEntry> facetFieldEntry = facetPage.get(facet);
+        List<String> facetsResult = facetFieldEntry.stream().map(FacetFieldEntry::getValue).toList();
+        if (facetsResult.isEmpty()) {
+            return Collections.singleton(RESULT_NOT_FOUND_MESSAGE);
         }
-        return  facetsResult;
+        return facetsResult;
     }
 }

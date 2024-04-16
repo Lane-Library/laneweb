@@ -49,7 +49,7 @@ public class HistoryPhotoListCreator {
             photos.addAll(getPhotosFromMap(map));
             next = (String) ((Map<String, ?>) map.get("links")).get("next");
         }
-        List<String> photoList = photos.stream().map(this::buildString).collect(Collectors.toList());
+        List<String> photoList = photos.stream().map(this::buildString).toList();
         photoList.stream().forEach(out::println);
     }
 

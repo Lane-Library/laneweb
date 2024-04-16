@@ -26,6 +26,6 @@ public class HistoryPhotoListService {
                 generated.add(next);
             }
         }
-        return generated.stream().map(this.photos::get).collect(Collectors.toList());
+        return generated.stream().map(this.photos::get).toList();
     }
 }

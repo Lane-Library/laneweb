@@ -28,7 +28,7 @@ public class ClinicalSearchResultsFactory {
                 .filter((final Result r) -> r.getStatus() == SearchStatus.SUCCESSFUL)
                 .flatMap((final Result r) -> r.getChildren().stream())
                 .filter((final Result r) -> r.getStatus() == SearchStatus.SUCCESSFUL)
-                .collect(Collectors.toList());
+                .toList();
         List<SearchResult> results = this.conversionStrategy.convertResult(result);
         int total = results.size();
         if (!facets.isEmpty()) {
@@ -38,7 +38,7 @@ public class ClinicalSearchResultsFactory {
                     .flatMap((final Result r) -> r.getChildren().stream())
                     .filter((final Result r) -> r.getStatus() == SearchStatus.SUCCESSFUL)
                     .filter((final Result r) -> facets.contains(r.getId()))
-                    .collect(Collectors.toList());
+                    .toList();
             results = this.conversionStrategy.convertResults(facetResult, query);
         }
         Collections.sort(results);
