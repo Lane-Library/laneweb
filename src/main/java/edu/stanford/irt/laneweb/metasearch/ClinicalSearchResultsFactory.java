@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.metasearch;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.stanford.irt.laneweb.resource.PagingData;
 import edu.stanford.irt.laneweb.resource.PagingList;
