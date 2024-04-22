@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://lane.stanford.edu/resources/1.0" xmlns:fct="http://lane.stanford.edu/function" exclude-result-prefixes="f h fct" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://lane.stanford.edu/resources/1.0"
+    xmlns:fct="http://lane.stanford.edu/function" exclude-result-prefixes="f h fct" version="2.0">
 
     <xsl:param name="base-path" />
     <xsl:param name="facet" />
@@ -59,7 +62,7 @@
 
     <xsl:variable name="header">
         <h2>
-            Filter Results
+            Filter Results TEST
             <i class="fa-regular fa-angle-down fa-lg"></i>
             <i class="fa-regular fa-angle-up fa-lg"></i>
         </h2>
@@ -207,9 +210,8 @@
         <xsl:choose>
             <xsl:when test="$name = 'pubmed'">PubMed</xsl:when>
             <xsl:when test="$name = 'sul'">
-                <span class="yui3-tooltip-trigger" 
-                      title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University."
-                      >SearchWorks (<i>biomedical subset</i>)</span>
+                <span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">SearchWorks (<i>biomedical subset</i>)
+                </span>
             </xsl:when>
             <xsl:when test="$name = 'bib'">
                 <span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span>
