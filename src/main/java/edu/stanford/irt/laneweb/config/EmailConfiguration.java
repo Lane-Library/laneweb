@@ -12,28 +12,8 @@ import edu.stanford.irt.laneweb.email.EMailSender;
 @Configuration
 public class EmailConfiguration {
 
-    @Value("${spring.mail.host}")
-    private String host;
-
-    @Value("${spring.mail.port}")
-    private int port;
-
-    @Value("${spring.mail.username}")
-    private String username;
-
-    @Value("${spring.mail.password}")
-    private String password;
-
     @Bean
-    EMailSender eMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(host);
-        mailSender.setPort(port);
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+    EMailSender eMailSender(JavaMailSenderImpl mailSender) {
         return new EMailSender(mailSender);
     }
 }
