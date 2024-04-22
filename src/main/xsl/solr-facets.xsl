@@ -62,7 +62,7 @@
 
     <xsl:variable name="header">
         <h2>
-            Filter Results TEST
+            Filter Results
             <i class="fa-regular fa-angle-down fa-lg"></i>
             <i class="fa-regular fa-angle-up fa-lg"></i>
         </h2>
