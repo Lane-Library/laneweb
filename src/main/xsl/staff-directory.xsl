@@ -73,12 +73,15 @@
                             <xsl:value-of select="s:email/text()" />
                         </a>
                     </li>
-                    <li>
-                        <a>
-                            <xsl:attribute name="href" select="concat('tel:',s:phone/text())" />
-                            <xsl:value-of select="s:phone/text()" />
-                        </a>
-                    </li>
+                    <!-- phone number is optional and some staff don't have one -->
+                    <xsl:if test="s:phone/text() != ''">
+                        <li>
+                            <a>
+                                <xsl:attribute name="href" select="concat('tel:',s:phone/text())" />
+                                <xsl:value-of select="s:phone/text()" />
+                            </a>
+                        </li>
+                    </xsl:if>
                     <li>
                         <a>
                             <xsl:attribute name="href" select="s:stanford-profile/text()" />
