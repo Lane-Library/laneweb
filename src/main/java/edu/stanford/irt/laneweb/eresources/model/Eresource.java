@@ -45,9 +45,6 @@ public class Eresource {
 
     Gson gon = new GsonBuilder().create();
 
-    public Eresource() {
-    }
-
     public int getAvailable() {
         return this.available;
     }
