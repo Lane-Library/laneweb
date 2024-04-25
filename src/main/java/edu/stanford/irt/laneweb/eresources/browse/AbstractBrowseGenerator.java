@@ -16,22 +16,22 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
-    protected static final String BASE_BROWSE_QUERY = "advanced:true recordType:bib AND isRecent:1";
-
     // the default cache expiration time, 20 minutes
     private static final long DEFAULT_EXPIRES = Duration.ofMinutes(20).toMillis();
 
-    protected String basePath;
-
-    protected String browseQuery;
-
-    protected EresourceBrowseService restBrowseService;
+    protected static final String BASE_BROWSE_QUERY = "advanced:true recordType:bib AND isRecent:1";
 
     private String componentType;
 
     private long expires = DEFAULT_EXPIRES;
 
     private Validity validity;
+
+    protected String basePath;
+
+    protected String browseQuery;
+
+    protected EresourceBrowseService restBrowseService;
 
     protected AbstractBrowseGenerator(final String componentType, final EresourceBrowseService restBrowseService) {
         this.componentType = componentType;

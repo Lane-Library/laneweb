@@ -10,8 +10,6 @@ import com.google.gson.GsonBuilder;
 
 public class Eresource {
 
-    Gson gon = new GsonBuilder().create();
-
     private int available;
 
     private String description;
@@ -45,7 +43,10 @@ public class Eresource {
 
     private String versionsJson;
 
-    public Eresource() {}
+    Gson gon = new GsonBuilder().create();
+
+    public Eresource() {
+    }
 
     public int getAvailable() {
         return this.available;
@@ -79,7 +80,7 @@ public class Eresource {
         if (this.linksList.isEmpty() && this.versionsJson != null) {
             setLinksAndVersion();
         }
-        return linksList;
+        return this.linksList;
     }
 
     public String getPrimaryType() {
@@ -162,8 +163,7 @@ public class Eresource {
     private LinkType computeLinkType(final Link l, final Version v) {
         LinkType linkType = LinkType.NORMAL;
         String linkUrl = l.getUrl();
-         if ("sul".equals(this.recordType) && linkUrl != null
-                && linkUrl.contains("//searchworks.stanford.edu/view")) {
+        if ("sul".equals(this.recordType) && linkUrl != null && linkUrl.contains("//searchworks.stanford.edu/view")) {
             linkType = LinkType.SUL_PRINT;
         } else if ("sul".equals(this.recordType) && this.primaryType.contains("Print")) {
             linkType = LinkType.SUL_PRINT;
@@ -177,7 +177,7 @@ public class Eresource {
     }
 
     private void setLinksAndVersion() {
-        Version[] versions = gon.fromJson(this.versionsJson, Version[].class);
+        Version[] versions = this.gon.fromJson(this.versionsJson, Version[].class);
         for (Version v : versions) {
             v.getLinks().stream().forEach((final Link l) -> {
                 l.setVersion(v);

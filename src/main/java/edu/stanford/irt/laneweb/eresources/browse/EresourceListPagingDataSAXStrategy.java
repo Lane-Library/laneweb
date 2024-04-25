@@ -32,7 +32,6 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 startDivWithClass(xmlConsumer, "view-by");
                 createPagingDropdown(xmlConsumer, hrefBase, pagingData, alpha);
                 endDiv(xmlConsumer);
-               
             } else {
                 createDisplayingMarkup(xmlConsumer, pagingData, alpha);
             }
