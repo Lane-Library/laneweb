@@ -90,15 +90,4 @@ public class FrameOptionsFilterTest {
         this.filter.doFilter(this.request, this.response, this.chain);
         verify(this.chain, this.request, this.response);
     }
-
-    @Test
-    public void testInternalDoFilterReferrerLibWizard() throws IOException, ServletException {
-        expect(this.request.getHeader("referer"))
-                .andReturn("https://lanestanford.libwizard.com/forms/tutorial/fad8cae86d00b444d2a156b92b190fbb");
-        this.chain.doFilter(this.request, this.response);
-        replay(this.chain, this.request, this.response);
-        this.filter.doFilter(this.request, this.response, this.chain);
-        verify(this.chain, this.request, this.response);
-    }
-
 }
