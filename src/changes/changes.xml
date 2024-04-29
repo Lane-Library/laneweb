@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
     <properties>
         <title>Laneweb Releases</title>
     </properties>
     <body>
-         <release date="2024-04-15" version="3.13.4" description="bug fix and update release">
+        <release date="2024-04-29" version="3.13.5" description="bug fix and update release">
+            <action date="2024-04-24" dev="ryanmax" issue="LANEWEB-11315" type="update"> 
+                Ninor UI and accessibility issue on staff directory
+            </action>
+        </release>
+        <release date="2024-04-15" version="3.13.4" description="bug fix and update release">
             <action date="2023-04-10" dev="ryanmax" issue="LANEWEB-11310" type="update"> 
               Catalog-service not forcing basic auth
             </action>
             <action date="2023-07-20" dev="alainb" issue="LANEWEB-11150" type="update"> 
                Medmail migration
-            </action>            
-         </release>
-         <release date="2024-04-01" version="3.13.3" description="bug fix and update release">
+            </action>
+        </release>
+        <release date="2024-04-01" version="3.13.3" description="bug fix and update release">
             <action date="2023-03-08" dev="alainb" issue="LANEWEB-11392" type="update"> 
                 Replace RestTemplate with RestClient or WebClient
             </action>
             <action date="2023-03-08" dev="alainb" issue="LANEWEB-11391" type="update"> 
                 REST connection timeouts not honored
-            </action>            
-         </release>
-         <release date="2024-03-18" version="3.13.2" description="bug fix and update release">
+            </action>
+        </release>
+        <release date="2024-03-18" version="3.13.2" description="bug fix and update release">
             <action date="2023-03-12" dev="ryanmax" issue="LANEWEB-11301" type="update"> 
                 SHC updating their SSO and moving to Azure
             </action>
@@ -31,16 +36,16 @@
             <action date="2024-03-15" dev="ryanmax" issue="LANEWEB-11305" type="update"> 
                 Adding Wilson book on Internet Archive to Medical History search
             </action>
-         </release>
-         <release date="2024-03-11" version="3.13.1" description="bug fix and update release">
+        </release>
+        <release date="2024-03-11" version="3.13.1" description="bug fix and update release">
             <action date="2023-03-04" dev="ryanmax" issue="LANEWEB-11269" type="update"> 
                 add higher resolution images to Bassett site
             </action>
             <action date="2024-02-28" dev="alainb" issue="LANEWEB-11288" type="fix"> 
                 Bassett images page moving too much during the page load
             </action>
-         </release>
-         <release date="2024-02-26" version="3.13.0" description="bug fix and update release">
+        </release>
+        <release date="2024-02-26" version="3.13.0" description="bug fix and update release">
             <action date="2023-05-22" dev="alainb" issue="LANEWEB-11089" type="update"> 
                 Upgrade to Spring 6, Spring Boot 3 and java21
             </action>
@@ -59,26 +64,26 @@
             <action date="2024-02-24" dev="alainb" issue="LANEWEB-11286" type="fix">
                 pico feature doesn't work on phone and tablette
             </action>
-         </release>
-         <release date="2024-01-29" version="3.12.17" description="bug fix and update release">
+        </release>
+        <release date="2024-01-29" version="3.12.17" description="bug fix and update release">
             <action date="2024-01-25" dev="alainb" issue="LANEWEB-11276" type="update"> 
                 Clean up .social-logos in the footer.html
             </action>
             <action date="2024-01-24" dev="ryanmax" issue="LANEWEB-11275" type="fix">
                 Add user's name to from field when sending "new folio patron registration" emails
             </action>
-         </release>   
+        </release>
         <release date="2024-01-22" version="3.12.16" description="bug fix and update release">
             <action date="2024-01-22" dev="alainb" issue="LANEWEB-11274" type="update"> 
                 Reverse bookmarking to no-bookmarking by default
             </action>
-         </release>   
-         <release date="2024-01-12" version="3.12.15" description="bug fix and update release">
+        </release>
+        <release date="2024-01-12" version="3.12.15" description="bug fix and update release">
             <action date="2024-01-09" dev="ryanmax" issue="LANEWEB-11268" type="fix"> 
                 Production patron registration notifications are sent to lane-crm-dev@stanford.edu
             </action>
-         </release>    
-         <release date="2024-01-08" version="3.12.14" description="bug fix and update release">
+        </release>
+        <release date="2024-01-08" version="3.12.14" description="bug fix and update release">
             <action date="2024-01-04" dev="ryanmax" issue="LANEWEB-11264" type="fix">
                 lengthy queries result in Solr errors
             </action>
@@ -91,13 +96,13 @@
             <action date="2023-12-14" dev="ryanmax" issue="LANEWEB-11229" type="new">
                 user-facing form for patron self registration, including confirmation and error message
             </action>
-         </release>
-         <release date="2023-12-18" version="3.12.13" description="bug fix and update release">
+        </release>
+        <release date="2023-12-18" version="3.12.13" description="bug fix and update release">
             <action date="2023-11-14" dev="ryanmax" issue="LANEWEB-11247" type="update">
                 Altmetric and Dimensions citation widgets in Lane Search and browse results
             </action>
-         </release>
-         <release date="2023-12-11" version="3.12.12" description="bug fix and update release">
+        </release>
+        <release date="2023-12-11" version="3.12.12" description="bug fix and update release">
             <action date="2023-11-05" dev="ryanmax" issue="LANEWEB-11252" type="fix">
                 holdings not showing in results view
             </action>
@@ -105,7 +110,7 @@
                 move irt-cocoon-sitemap XSD files out of AFS
             </action>
         </release>
-         <release date="2023-12-04" version="3.12.11" description="bug fix and update release">
+        <release date="2023-12-04" version="3.12.11" description="bug fix and update release">
             <action date="2023-11-14" dev="alainb" issue="LANEWEB-11248" type="fix">
                 Facebook icon smaller than the others
             </action>
@@ -116,7 +121,7 @@
         <release date="2023-11-13" version="3.12.10" description="bug fix and update release">
             <action date="2023-11-13" dev="alainb" issue="LANEWEB-11244" type="remove">
                 Remove google universal analytics from laneweb
-             </action>
+            </action>
             <action date="2023-11-13" dev="ryanmax" issue="LANEWEB-11241" type="update">
                 Queries with multiple asterisks
             </action>
@@ -124,7 +129,7 @@
         <release date="2023-11-06" version="3.12.9" description="bug fix and update release">
             <action date="2023-10-27" dev="alainb" issue="LANEWEB-11224" type="update">
                 Update alignment of Exact Match label in search
-             </action>
+            </action>
             <action date="2023-10-27" dev="alainb" issue="LANEWEB-11233" type="remove">
                 Remove bookmarking star icon from all links on upcoming classes page
             </action>
@@ -2265,8 +2270,7 @@
                 where possible
             </action>
             <action date="2017-11-28" dev="ceyates" issue="137371" type="fix">
-                /classes/calendar.ics has content-type
-                application/xml;charset=utf-8
+                /classes/calendar.ics has content-type application/xml;charset=utf-8
             </action>
         </release>
         <release date="2017-11-27" version="3.3.54" description="3.3.54 bug fix release">
