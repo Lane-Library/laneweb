@@ -5,6 +5,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+         <release date="2024-05-06" version="3.13.6" description="bug fix and update release">
+            <action date="2024-04-15" dev="ryanmax" issue="LANEWEB-11311" type="update">
+                Iframe not working in LaneWeb in Springshare's LibWizard
+            </action>
+        </release>
         <release date="2024-04-29" version="3.13.5" description="bug fix and update release">
             <action date="2024-04-24" dev="ryanmax" issue="LANEWEB-11315" type="update">
                 Minor UI and accessibility issue on staff directory
