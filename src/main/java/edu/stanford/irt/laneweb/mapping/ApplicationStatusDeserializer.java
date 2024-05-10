@@ -19,16 +19,17 @@ public class ApplicationStatusDeserializer extends JsonDeserializer<ApplicationS
 
     private static List<StatusItem> getItems(final JsonNode node) {
         List<StatusItem> items = new ArrayList<>();
-        node.forEach((final JsonNode n)
-                -> items.add(new StatusItem(Status.valueOf(n.get("status").asText()), n.get("message").asText())));
+        node.forEach((final JsonNode n) -> items
+                .add(new StatusItem(Status.valueOf(n.get("status").asText()), n.get("message").asText())));
         return items;
     }
 
     @Override
     public ApplicationStatus deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);
+        String jvmVersion = null != node.get("jvmVersion") ? node.get("jvmVersion").asText() : "?";
         return new ApplicationStatus(node.get("name").asText(), node.get("version").asText(), node.get("host").asText(),
-                node.get("pid").asInt(),
+                jvmVersion, node.get("pid").asInt(),
                 ZonedDateTime.parse(node.get("time").asText(), DateTimeFormatter.ISO_ZONED_DATE_TIME),
                 getItems(node.get("items")));
     }
