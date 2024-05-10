@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.status;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,7 +18,9 @@ public class LanewebStatusService {
     private List<StatusService> services;
 
     public LanewebStatusService(final List<StatusService> services) {
-        this.services = new ArrayList<>(services);
+        List<StatusService> sorted = new ArrayList<>(services);
+        sorted.sort(Comparator.comparing(service -> service.getClass().getSimpleName()));
+        this.services = sorted;
     }
 
     public List<ApplicationStatus> getStatus() {
