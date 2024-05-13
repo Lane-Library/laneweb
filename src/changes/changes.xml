@@ -5,7 +5,12 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-         <release date="2024-05-08" version="3.13.7" description="emergency release">
+       <release date="2024-05-13" version="3.13.8" description="emergency release">
+            <action date="2024-05-08" dev="ryanmax" issue="LANEWEB-11326" type="update">
+                Update error message when moving bookmark fails
+            </action>
+        </release>
+        <release date="2024-05-08" version="3.13.7" description="emergency release">
             <action date="2024-05-08" dev="ryanmax" issue="LANEWEB-11325" type="fix">
                 broken query highlighting
             </action>
