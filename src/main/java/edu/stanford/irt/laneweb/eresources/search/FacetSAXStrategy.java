@@ -19,7 +19,7 @@ public class FacetSAXStrategy implements SAXStrategy<Map<String, Collection<Face
 
     private Collection<String> facetFields;
 
-    public FacetSAXStrategy(Collection<String> facetFields) {
+    public FacetSAXStrategy(final Collection<String> facetFields) {
         this.facetFields = facetFields;
     }
 
@@ -44,7 +44,7 @@ public class FacetSAXStrategy implements SAXStrategy<Map<String, Collection<Face
         }
     }
 
-    private void saxFacet(FacetFieldEntry facet, final XMLConsumer xmlConsumer) throws SAXException {
+    private void saxFacet(final FacetFieldEntry facet, final XMLConsumer xmlConsumer) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(Resource.NAMESPACE, "key", "key", CDATA, facet.getKey().getName());
         attributes.addAttribute(Resource.NAMESPACE, "name", "name", CDATA, facet.getValue());

@@ -38,9 +38,9 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
 
     private Integer pageNumber = Integer.valueOf(0);
 
-    private String searchTerm;
-
     private EresourceSearchService searchService;
+
+    private String searchTerm;
 
     private String sort;
 
@@ -90,6 +90,20 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
         }
     }
 
+    private Pageable getPageRequest() {
+        List<Order> orders = new ArrayList<>();
+        for (String string : this.sort.split(",")) {
+            String[] s = string.split(" ");
+            if (s.length == 2 && !s[0].isEmpty()) {
+                orders.add(new Order(Direction.fromString(s[1]), s[0]));
+            }
+        }
+        if (!orders.isEmpty()) {
+            return of(this.pageNumber.intValue(), DEFAULT_RESULTS, Sort.by(orders));
+        }
+        return of(this.pageNumber.intValue(), DEFAULT_RESULTS);
+    }
+
     private void highlightPage(final Page<Eresource> page) {
         RestPage<Eresource> solrPage = (RestPage<Eresource>) page;
         if (!solrPage.getHighlighted().isEmpty()) {
@@ -110,20 +124,6 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
                 });
             });
         }
-    }
-
-    private Pageable getPageRequest() {
-        List<Order> orders = new ArrayList<>();
-        for (String string : this.sort.split(",")) {
-            String[] s = string.split(" ");
-            if (s.length == 2 && !s[0].isEmpty()) {
-                orders.add(new Order(Direction.fromString(s[1]), s[0]));
-            }
-        }
-        if (!orders.isEmpty()) {
-            return of(this.pageNumber.intValue(), DEFAULT_RESULTS, Sort.by(orders));
-        }
-        return of(this.pageNumber.intValue(), DEFAULT_RESULTS);
     }
 
     @Override

@@ -340,7 +340,7 @@
              * @param message {String}
              */
             _handleSyncFailure : function(message) {
-                L.showMessage("Sorry, " + message + " bookmark failed. Please try again later.");
+                L.showMessage("Sorry, " + message + " bookmark failed. Please reload the page and try again later.");
             }
     };
 

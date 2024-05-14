@@ -31,9 +31,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     private String queryString;
 
-    private SAXStrategy<PagingEresourceList> saxStrategy;
-
     private EresourceBrowseService restBrowseService;
+
+    private SAXStrategy<PagingEresourceList> saxStrategy;
 
     private Validity validity;
 

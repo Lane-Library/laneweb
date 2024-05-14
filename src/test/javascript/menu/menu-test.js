@@ -2,12 +2,12 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
     "use strict";
 
-    var menuTestCase = new Y.Test.Case({
+    let menuTestCase = new Y.Test.Case({
 
         name: 'Lane Menu Test Case',
 
         testClickOnH2: function() {
-            var h2 = Y.one("h2"),
+            let h2 = Y.one("h2"),
             menu = Y.one("#menu");
             Y.Assert.isTrue(menu._node.className === 'menu-container mobile');
             h2.simulate("click");
@@ -15,11 +15,13 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
         },
       
        testClickOnSamePageLink: function(){
-            var anchor = Y.one("#local-link")
-            Y.Assert.isFalse(anchor._node.className === 'menuitem-active');
-            anchor.simulate("click");
-            Y.Assert.isTrue(anchor._node.className === 'menuitem-active');
-        }      
+        let anchor1 = Y.one("#internal-1"), anchor2 = Y.one("#internal-2");
+        Y.Assert.isFalse(anchor1._node.className === 'menuitem-active');
+        Y.Assert.isFalse(anchor2._node.className === 'menuitem-active');
+        anchor1.simulate("click");
+        Y.Assert.isTrue(anchor1._node.className === 'menuitem-active');
+        Y.Assert.isFalse(anchor2._node.className === 'menuitem-active');
+    }      
 
       
     });

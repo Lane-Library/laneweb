@@ -14,13 +14,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
 @JsonIgnoreProperties(ignoreUnknown = true, value = { "pageable" })
-
 public class RestPage<T> extends PageImpl<T> {
 
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("highlighted")
     private List<HighlightEntry<T>> highlighted = Collections.emptyList();
+
+    public RestPage() {
+        super(new ArrayList<>());
+    }
+
+    public RestPage(final List<T> content) {
+        super(content);
+    }
 
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public RestPage(@JsonProperty("content") List<T> content,
@@ -33,20 +40,11 @@ public class RestPage<T> extends PageImpl<T> {
             @JsonProperty("sort") JsonNode sort,
             @JsonProperty("first") boolean first,
             @JsonProperty("numberOfElements") int numberOfElements) {
-
         super(content, PageRequest.of(number, size), totalElements);
     }
 
-    public RestPage(List<T> content, Pageable pageable, long total) {
+    public RestPage(final List<T> content, final Pageable pageable, final long total) {
         super(content, pageable, total);
-    }
-
-    public RestPage(List<T> content) {
-        super(content);
-    }
-
-    public RestPage() {
-        super(new ArrayList<>());
     }
 
     @Override
@@ -58,11 +56,10 @@ public class RestPage<T> extends PageImpl<T> {
     }
 
     public List<HighlightEntry<T>> getHighlighted() {
-        return highlighted;
+        return this.highlighted;
     }
 
-    public void setHighlighted(List<HighlightEntry<T>> highlighted) {
+    public void setHighlighted(final List<HighlightEntry<T>> highlighted) {
         this.highlighted = highlighted;
     }
-
 }

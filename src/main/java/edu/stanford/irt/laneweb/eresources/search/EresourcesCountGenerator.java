@@ -19,10 +19,10 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     private static final String FACETS_NS = "http://lane.stanford.edu/hitcounts/1.0";
 
     private String query;
-    
+
     private EresourceSearchService searchService;
 
-    public EresourcesCountGenerator(EresourceSearchService searchService) {
+    public EresourcesCountGenerator(final EresourceSearchService searchService) {
         this.searchService = searchService;
     }
 

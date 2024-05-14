@@ -6,17 +6,16 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.status.ApplicationStatus;
 import edu.stanford.irt.status.StatusService;
 
-public class EresourceStatusService implements StatusService{
+public class EresourceStatusService implements StatusService {
+
+    private URI eresourceServiceURI;
 
     RESTService restService;
 
-    private URI eresourceServiceURI;
-    
     public EresourceStatusService(final URI uri, final RESTService restService) {
-       this.eresourceServiceURI = uri;
+        this.eresourceServiceURI = uri;
         this.restService = restService;
     }
-
 
     @Override
     public ApplicationStatus getStatus() {

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-
-
-
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
@@ -31,17 +28,7 @@ public class AtoZBrowseGenerator extends AbstractBrowseGenerator {
         this.saxStrategy = saxStrategy;
     }
 
-    @Override
-    protected void doGenerate(final XMLConsumer xmlConsumer) {
-        if (null != this.browseQuery) {
-            Map<String,List<FacetFieldEntry>> fps = this.restBrowseService.facetByField(BASE_BROWSE_QUERY, this.browseQuery,
-                    "title_starts", 0, MAX_FACETS, 0, FacetSort.INDEX);
-            List<BrowseLetter> letters = extractFacets(fps);
-            this.saxStrategy.toSAX(letters, xmlConsumer);
-        }
-    }
-
-    private List<BrowseLetter> extractFacets(final  Map<String,List<FacetFieldEntry>>  facetResultPages) {
+    private List<BrowseLetter> extractFacets(final Map<String, List<FacetFieldEntry>> facetResultPages) {
         List<BrowseLetter> letters = new ArrayList<>();
         for (List<FacetFieldEntry> page : facetResultPages.values()) {
             for (FacetFieldEntry entry : page) {
@@ -56,5 +43,15 @@ public class AtoZBrowseGenerator extends AbstractBrowseGenerator {
             }
         }
         return letters;
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        if (null != this.browseQuery) {
+            Map<String, List<FacetFieldEntry>> fps = this.restBrowseService.facetByField(BASE_BROWSE_QUERY,
+                    this.browseQuery, "title_starts", 0, MAX_FACETS, 0, FacetSort.INDEX);
+            List<BrowseLetter> letters = extractFacets(fps);
+            this.saxStrategy.toSAX(letters, xmlConsumer);
+        }
     }
 }

@@ -5,10 +5,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>148-springsix</version>
+        <version>150-springsix</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.13.5-SNAPSHOT</version>
+    <version>3.13.9-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -210,7 +210,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>coursereserves</artifactId>
-            <version>4.0.2</version>
+            <version>4.0.3</version>
         </dependency>
         <dependency>
             <groupId>javax.cache</groupId>
@@ -244,12 +244,12 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
-            <version>10.1.20</version>
+            <version>10.1.23</version>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>status</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -388,7 +388,7 @@
                     <dependency>
                         <groupId>org.codehaus.plexus</groupId>
                         <artifactId>plexus-utils</artifactId>
-                        <version>4.0.0</version>
+                        <version>4.0.1</version>
                     </dependency>
                 </dependencies>
             </plugin>

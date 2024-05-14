@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -22,23 +21,23 @@ public class FacetsGenerator extends AbstractGenerator {
 
     private static final String PUBLICATION_TYPE = "publicationType";
 
-    private String query;
+    private FacetComparator facetComparator;
+
+    private Map<String, Collection<FacetFieldEntry>> facetFieldEntries;
+
+    private Collection<String> facetFields;
 
     private String facets;
 
     private int facetsToShow;
 
-    private EresourceFacetService service;
-
     private Collection<String> prioritizedPublicationTypes;
+
+    private String query;
 
     private SAXStrategy<Map<String, Collection<FacetFieldEntry>>> saxStrategy;
 
-    private FacetComparator facetComparator;
-
-    private Collection<String> facetFields;
-
-    private Map<String, Collection<FacetFieldEntry>> facetFieldEntries;
+    private EresourceFacetService service;
 
     public FacetsGenerator(final EresourceFacetService service,
             final SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSolrSAXStrategy, final int facetsToShow,
@@ -51,32 +50,15 @@ public class FacetsGenerator extends AbstractGenerator {
         this.facetFieldEntries = new HashMap<>();
     }
 
+    public void setFacet(final Collection<String> facetFields) {
+        this.facetFields = facetFields;
+    }
+
     @Override
     public void setModel(final Map<String, Object> model) {
         this.facets = ModelUtil.getString(model, Model.FACETS, EMPTY);
-        this.facetComparator.addTopPrioritiesFromFacets(facets);
+        this.facetComparator.addTopPrioritiesFromFacets(this.facets);
         this.query = ModelUtil.getString(model, Model.QUERY);
-    }
-
-    @Override
-    protected void doGenerate(final XMLConsumer xmlConsumer) {
-        Map<String,List<FacetFieldEntry>>  fps = this.service.facetByManyFields(this.query, this.facets, this.facetsToShow);
-        orderFacets(fps);
-        maybeRequestMorePublicationTypes();
-        this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);
-    }
-
-    private void orderFacets( Map<String,List<FacetFieldEntry>> facetEntries ) {
-        for (String facetName : this.facetFields) {
-            List<FacetFieldEntry> facetPage = facetEntries.get(facetName);
-            orderFacet(facetName, facetPage);
-        }
-    }
-
-    private void orderFacet(String facetName, List<FacetFieldEntry> entryList) {
-        Collection<FacetFieldEntry> orderedFacets = new TreeSet<>(this.facetComparator);
-        orderedFacets.addAll(entryList);
-        this.facetFieldEntries.put(facetName, orderedFacets);
     }
 
     private void maybeRequestMorePublicationTypes() {
@@ -84,14 +66,32 @@ public class FacetsGenerator extends AbstractGenerator {
         long count = facetList.stream()
                 .filter((final FacetFieldEntry s) -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
         if (count < this.prioritizedPublicationTypes.size()) {
-            Map<String,List<FacetFieldEntry>> fps = this.service.facetByField(this.query, this.facets, PUBLICATION_TYPE, 1000, 1 , FacetSort.COUNT);
+            Map<String, List<FacetFieldEntry>> fps = this.service.facetByField(this.query, this.facets,
+                    PUBLICATION_TYPE, 1000, 1, FacetSort.COUNT);
             List<FacetFieldEntry> facetPage = fps.get(PUBLICATION_TYPE);
             orderFacet(PUBLICATION_TYPE, facetPage);
         }
     }
 
-    
-    public void setFacet(Collection<String> facetFields) {
-        this.facetFields = facetFields;
+    private void orderFacet(final String facetName, final List<FacetFieldEntry> entryList) {
+        Collection<FacetFieldEntry> orderedFacets = new TreeSet<>(this.facetComparator);
+        orderedFacets.addAll(entryList);
+        this.facetFieldEntries.put(facetName, orderedFacets);
+    }
+
+    private void orderFacets(final Map<String, List<FacetFieldEntry>> facetEntries) {
+        for (String facetName : this.facetFields) {
+            List<FacetFieldEntry> facetPage = facetEntries.get(facetName);
+            orderFacet(facetName, facetPage);
+        }
+    }
+
+    @Override
+    protected void doGenerate(final XMLConsumer xmlConsumer) {
+        Map<String, List<FacetFieldEntry>> fps = this.service.facetByManyFields(this.query, this.facets,
+                this.facetsToShow);
+        orderFacets(fps);
+        maybeRequestMorePublicationTypes();
+        this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);
     }
 }

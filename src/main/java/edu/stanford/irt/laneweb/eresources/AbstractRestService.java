@@ -5,7 +5,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,43 +23,25 @@ import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public abstract class AbstractRestService {
 
+    protected static final TypeReference<Map<String, List<FacetFieldEntry>>> FACET_PAGE_ERESOURCES_TYPE = new TypeReference<>() {
+    };
+
+    protected static final TypeReference<List<Eresource>> LIST_ERESOURCES_TYPE = new TypeReference<>() {
+    };
+
+    protected static final TypeReference<RestPage<Eresource>> PAGE_ERESOURCES_TYPE = new TypeReference<>() {
+    };
+
+    protected static final TypeReference<LinkedHashMap<String, String>> SUGGESTION_ERESOURCES_TYPE = new TypeReference<>() {
+    };
+
     private URI searchServiceURI;
 
-    protected static final TypeReference<List<Eresource>> LIST_ERESOURCES_TYPE = new TypeReference<List<Eresource>>() {
-    };
-    
-    protected static final TypeReference<Map<String,List<FacetFieldEntry>>> FACET_PAGE_ERESOURCES_TYPE = new TypeReference<Map<String,List<FacetFieldEntry>>>() {
-    };
- 
-    protected static final TypeReference<RestPage<Eresource>> PAGE_ERESOURCES_TYPE = new TypeReference<RestPage<Eresource>>() {
-    };
-    
-    protected static final TypeReference<LinkedHashMap<String, String>> SUGGESTION_ERESOURCES_TYPE = new TypeReference<LinkedHashMap<String, String>>() {
-    };
-    
-    
     AbstractRestService(final URI uri) {
         this.searchServiceURI = uri;
     }
 
-
-    protected URI getURIWithParameters(String path, Pageable pageable, List<NameValuePair> parameters) {
-        try {
-            path = this.searchServiceURI.getPath().concat(path);
-            URIBuilder builder = new URIBuilder(this.searchServiceURI).setPath(path);
-            if(pageable != null) {
-                addPagingToURI(builder, pageable);
-            }
-            if (parameters != null && !parameters.isEmpty()) {
-                builder.addParameters(parameters);
-            }
-            return builder.build();
-        } catch (URISyntaxException e) {
-            throw new LanewebException(e);
-        }
-    }
-    
-    private void addPagingToURI( URIBuilder builder,  Pageable pageable ) {
+    private void addPagingToURI(final URIBuilder builder, final Pageable pageable) {
         if (pageable.getPageSize() != 0) {
             builder.addParameter("size", String.valueOf(pageable.getPageSize()));
         }
@@ -69,9 +50,7 @@ public abstract class AbstractRestService {
         }
         Sort sort = pageable.getSort();
         if (!sort.isEmpty()) {
-            Iterator<Order> orders = sort.iterator();
-            while (orders.hasNext()) {
-                Order order = orders.next();
+            for (Order order : sort) {
                 builder.addParameter("sort", order.getProperty() + "," + order.getDirection().name());
             }
         }
@@ -86,7 +65,23 @@ public abstract class AbstractRestService {
         }
     }
 
-    protected String urlEncode(String value) {
+    protected URI getURIWithParameters(String path, final Pageable pageable, final List<NameValuePair> parameters) {
+        try {
+            path = this.searchServiceURI.getPath().concat(path);
+            URIBuilder builder = new URIBuilder(this.searchServiceURI).setPath(path);
+            if (pageable != null) {
+                addPagingToURI(builder, pageable);
+            }
+            if (parameters != null && !parameters.isEmpty()) {
+                builder.addParameters(parameters);
+            }
+            return builder.build();
+        } catch (URISyntaxException e) {
+            throw new LanewebException(e);
+        }
+    }
+
+    protected String urlEncode(final String value) {
         try {
             return URLEncoder.encode(value, StandardCharsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException e) {

@@ -11,23 +11,18 @@ import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.ImmutableEmptyAttributes;
 
 /**
- * A {@code Transformer} to highlight query terms found in title and description fields. Relies on Solr for query
- * highlighting.
+ * A {@code Transformer} to highlight query terms found in title and description
+ * fields. Relies on Solr for query highlighting. ___ and ::: are start/end tags
+ * as defined in
+ * edu.stanford.irt.eresource.repository.solr.SolrRepository.HighlightTags
+ * 
  */
 public class SolrQueryHighlightingTransformer extends AbstractTextProcessingTransformer {
 
     private static final Attributes EMPTY_ATTRIBUTES = new ImmutableEmptyAttributes();
 
+    private static final Pattern SOLR_HIGHLIGHT_PATTERN = Pattern.compile("___((?:(?!___).)+):::");
 
-    public static final String HIGHLIGHTTAG_END = ":::";
-
-    public static final String HIGHLIGHTTAG_START = "___";
-
-
-    private static final Pattern SOLR_HIGHLIGHT_PATTERN = Pattern.compile(HIGHLIGHTTAG_START + "([^"
-            + HIGHLIGHTTAG_START + "]+)" + HIGHLIGHTTAG_END);
-
-     
     @Override
     protected void createSAXEvents(final XMLConsumer consumer, final Matcher matcher) throws SAXException {
         consumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
