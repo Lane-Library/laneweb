@@ -12,7 +12,7 @@ public class FailedApplicationStatus extends ApplicationStatus {
     private static final String UNKNOWN = "unknown";
 
     public FailedApplicationStatus(final String name, final String message) {
-        super(name, UNKNOWN, UNKNOWN, -1, ZonedDateTime.now(),
+        super(name, UNKNOWN, UNKNOWN, UNKNOWN, -1, ZonedDateTime.now(),
                 Collections.singletonList(new StatusItem(Status.ERROR, message)));
     }
 }

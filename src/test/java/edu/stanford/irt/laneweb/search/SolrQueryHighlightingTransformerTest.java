@@ -15,14 +15,12 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.resource.Resource;
 
 public class SolrQueryHighlightingTransformerTest {
-    
-    
+
     public static final String END = ":::";
 
     public static final String START = "___";
 
-
-    private static final String SAMPLE = "data " + START + "keyword"   + END + " data";
+    private static final String SAMPLE = "data ___keyword::: data ___3:::___D::: printing: ___this _ text::: has an underscore but needs highlighting";
 
     private static final char[] SAMPLE_CHARS = SAMPLE.toCharArray();
 
@@ -45,7 +43,21 @@ public class SolrQueryHighlightingTransformerTest {
                 isA(Attributes.class));
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(7));
         this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
-        this.xmlConsumer.characters(isA(char[].class), eq(18), eq(5));
+        this.xmlConsumer.characters(isA(char[].class), eq(18), eq(6));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD),
+                isA(Attributes.class));
+        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(1));
+        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD),
+                isA(Attributes.class));
+        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(1));
+        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
+        this.xmlConsumer.characters(isA(char[].class), eq(38), eq(11));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD),
+                isA(Attributes.class));
+        this.xmlConsumer.characters(isA(char[].class), eq(0), eq(11));
+        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
+        this.xmlConsumer.characters(isA(char[].class), eq(66), eq(41));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION);
         replay(this.xmlConsumer);
         this.transformer.startElement(Resource.NAMESPACE, Resource.DESCRIPTION, Resource.DESCRIPTION, null);

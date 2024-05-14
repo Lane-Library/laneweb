@@ -7,7 +7,7 @@
         <version>150-springsix</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.13.6-SNAPSHOT</version>
+    <version>3.13.9-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -254,7 +254,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>status</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
