@@ -83,7 +83,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
         this.transformer.setParameter(Model.PROXY_LINKS, "false");
         this.transformer.setParameter(Model.USER_ID, "sunetid@stanford.edu");
         this.transformer.setParameter(Model.IPGROUP, "SOM");
-        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
+        this.transformer.setParameter(Model.SERVLET_PATH, "/redirectPath");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("FalseUserIdSOM.xml"), sw.toString());
     }
@@ -178,6 +178,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.REQUEST_URI, "/base/error_authz.html");
+        this.transformer.setParameter(Model.SERVLET_PATH, "/error_authz.html");
         this.transformer.setParameter(Model.BASE_PATH, "/base");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("Unauthorized.xml"), sw.toString());
@@ -188,7 +189,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
         StringWriter sw = new StringWriter();
         Result result = new StreamResult(sw);
         this.transformer.setParameter(Model.QUERY_STRING, "something=else&proxy-links=true&param=onemore");
-        this.transformer.setParameter(Model.REQUEST_URI, "/redirectPath");
+        this.transformer.setParameter(Model.SERVLET_PATH, "/redirectPath");
         this.transformer.transform(this.source, result);
         assertEquals(getExpectedResult("urlRedirect.xml"), sw.toString());
     }

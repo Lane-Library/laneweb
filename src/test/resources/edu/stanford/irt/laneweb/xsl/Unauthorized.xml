@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ul xmlns="http://www.w3.org/1999/xhtml" class="login">
    <li>
-      <a href="/base/secure/login.html?url=%2Fbase%2Ferror_authz.html">
+      <a href="/base/secure/login.html?url=%2Ferror_authz.html">
          <i class="fa fa-lock"/> STANFORD LOGIN</a>
    </li>
    <li>
