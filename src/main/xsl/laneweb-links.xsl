@@ -1,8 +1,10 @@
 <xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="h">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="h">
+
+    <!-- the request-path ( not including parameters and context ) -->
+    <xsl:param name="servlet-path"/>
 
     <!-- href and src attributes template -->
     <xsl:template match="@href">
@@ -26,7 +28,7 @@
                 <xsl:attribute name="href">
                     <xsl:value-of select="."/>
                     <xsl:text>&amp;target=</xsl:text>
-                     <xsl:value-of select="substring-after($return,'target=')"/>
+                    <xsl:value-of select="substring-after($return,'target=')"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:otherwise>
@@ -106,7 +108,7 @@
                 <xsl:when test="$link = '/secure/login.html'">
                     <xsl:copy-of select="."/>
                     <xsl:text>?url=</xsl:text>
-                    <xsl:value-of select="encode-for-uri($request-uri)" />
+                    <xsl:value-of select="encode-for-uri($servlet-path)" />
                     <xsl:if test="string-length($query-string) != 0">
                         <xsl:variable name="no-proxylinks-query">
                             <xsl:variable name="starts-with-proxylinks" select="starts-with($query-string, 'proxy-links=')"/>
