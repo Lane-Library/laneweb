@@ -60,6 +60,11 @@
             <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-spring-boot-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
             <version>${org.springframework.boot.version}</version>
@@ -92,17 +97,6 @@
         <dependency>
             <artifactId>jackson-databind</artifactId>
             <groupId>com.fasterxml.jackson.core</groupId>
-        </dependency>
-        <dependency>
-            <artifactId>javamelody-core</artifactId>
-            <groupId>net.bull.javamelody</groupId>
-            <scope>runtime</scope>
-            <version>2.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bull.javamelody</groupId>
-            <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>2.2.0</version>
         </dependency>
         <dependency>
             <artifactId>joost</artifactId>
