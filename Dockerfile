@@ -4,4 +4,4 @@ COPY target/laneweb.war laneweb.war
 
 ENV SPRING_CONFIG_ADDITIONAL_LOCATION=/secrets/application.properties
 
-CMD ["/usr/bin/tini", "--","java", "-jar", "laneweb.war"]
+CMD ["/usr/bin/tini", "--","java", "-jar", "laneweb.jar"]

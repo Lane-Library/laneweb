@@ -4,11 +4,11 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>152</version>
+        <version>153</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.13.9-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
     <inceptionYear>2002</inceptionYear>
