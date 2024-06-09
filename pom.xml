@@ -330,13 +330,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
-                    <embeddedLaunchScriptProperties>
-                        <confFolder>/etc/laneweb</confFolder>
-                    </embeddedLaunchScriptProperties>
                 </configuration>
                 <executions>
                     <execution>
-                        <!-- repackage will break the integration-test class-path, so schedule after -->
                         <phase>post-integration-test</phase>
                         <goals>
                             <goal>repackage</goal>
