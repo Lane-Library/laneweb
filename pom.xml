@@ -333,12 +333,18 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>post-integration-test</phase>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.samaxes.maven</groupId>
