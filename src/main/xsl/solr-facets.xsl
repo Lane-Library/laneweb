@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://lane.stanford.edu/resources/1.0" xmlns:fct="http://lane.stanford.edu/function" exclude-result-prefixes="f h fct" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://lane.stanford.edu/resources/1.0"
+    xmlns:fct="http://lane.stanford.edu/function" exclude-result-prefixes="f h fct" version="2.0">
 
     <xsl:param name="base-path" />
     <xsl:param name="facet" />
@@ -145,7 +148,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='type']) > $values-per-facet">
                         <li>
-                            <input name="contains" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="contains" aria-label="Search by Resource Type" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -157,7 +160,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationType']) > ($values-per-facet -1)">
                         <li>
-                            <input name="contains" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="contains" aria-label="Search by Article Type" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -176,8 +179,8 @@
                         <span id="facet-error-message">
                         </span>
                         <form action="" method="get" id="solr-date-form">
-                            <input name="start-year" type="number" class="date start" min="1400" max="{$current-year}" value="{$start-year}" required="true" placeholder="From" />
-                            <input name="end-year" type="number" class="date end" min="1400" max="{$current-year}" value="{$end-year}" required="true" placeholder="To" />
+                            <input name="start-year" aria-label="Start Year" type="number" class="date start" min="1400" max="{$current-year}" value="{$start-year}" required="true" placeholder="From" />
+                            <input name="end-year" aria-label="End Year" type="number" class="date end" min="1400" max="{$current-year}" value="{$end-year}" required="true" placeholder="To" />
                             <input type="submit" value="Add" class="date" />
                         </form>
                     </div>
@@ -191,7 +194,7 @@
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationTitle']) > $values-per-facet">
                         <li>
-                            <input name="contains" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
+                            <input name="contains" aria-label="Search by Journal Title" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
                 </xsl:if>
@@ -207,9 +210,8 @@
         <xsl:choose>
             <xsl:when test="$name = 'pubmed'">PubMed</xsl:when>
             <xsl:when test="$name = 'sul'">
-                <span class="yui3-tooltip-trigger" 
-                      title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University."
-                      >SearchWorks (<i>biomedical subset</i>)</span>
+                <span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">SearchWorks (<i>biomedical subset</i>)
+                </span>
             </xsl:when>
             <xsl:when test="$name = 'bib'">
                 <span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span>

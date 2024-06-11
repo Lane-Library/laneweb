@@ -3,19 +3,18 @@ package edu.stanford.irt.laneweb.proxy;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
+
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.search.FacetService;
+import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
 
 public class SolrProxyServersService implements ProxyServersService {
 
@@ -29,16 +28,18 @@ public class SolrProxyServersService implements ProxyServersService {
 
     private static final byte[] U_HTTPS = { 'U', ' ', 'h', 't', 't', 'p', 's', ':', '/', '/' };
 
-    private FacetService solrService;
+    private EresourceFacetService restFacetService;
+    
+    private static final String FACET_NAME = "proxyHosts";
 
-    public SolrProxyServersService(final FacetService solrService) {
-        this.solrService = solrService;
+    public SolrProxyServersService(final EresourceFacetService solrService) {
+        this.restFacetService = solrService;
     }
 
     @Override
     public Set<String> getHosts() {
-        FacetPage<Eresource> fps = this.solrService.facetByField("*", null, "proxyHosts",  MAX_HOSTS, 1, FacetSort.INDEX);
-        Set<String> hosts = extractHosts(fps.getFacetResultPages());
+        Map<String,List<FacetFieldEntry>>  fps = this.restFacetService.facetByField("*", null, FACET_NAME,  MAX_HOSTS, 1, FacetSort.INDEX);
+       Set<String> hosts = extractHosts(fps);
         hosts.add("bodoni.stanford.edu");
         hosts.add("library.stanford.edu");
         hosts.add("searchworks.stanford.edu");
@@ -72,12 +73,12 @@ public class SolrProxyServersService implements ProxyServersService {
         }
     }
 
-    private Set<String> extractHosts(final Collection<Page<FacetFieldEntry>> facetResultPages) {
+    private Set<String> extractHosts(final Map<String,List<FacetFieldEntry>> facetResultPages) {
         Set<String> hosts = new TreeSet<>();
-        for (Page<FacetFieldEntry> page : facetResultPages) {
-            for (FacetFieldEntry entry : page) {
+        List<FacetFieldEntry> facetEntries = facetResultPages.get(FACET_NAME);
+        for (FacetFieldEntry entry : facetEntries) {
                 hosts.add(entry.getValue());
-            }
+           
         }
         return hosts;
     }

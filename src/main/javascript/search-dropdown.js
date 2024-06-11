@@ -4,14 +4,14 @@ if (document.querySelector(".search-form")) {
 
 		"use strict";
 
-		var CHANGE = "change",
+		let CHANGE = "change",
 			SEARCH_DROPDOWN = "main-search",
 			dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
 			options = dropdown.querySelectorAll("option"),
 			dropdown_label = document.querySelector('.search-form .general-dropdown-trigger span'),
 			model = function(source) {
 
-				var m = {
+				let m = {
 					source: source
 				};
 
@@ -30,7 +30,7 @@ if (document.querySelector(".search-form")) {
 			}(dropdown[dropdown.selectedIndex].value),
 
 			view = function() {
-				var v = {
+				let v = {
 					change: function(label) {
 						dropdown_label.innerHTML = label;
 					},
@@ -49,7 +49,7 @@ if (document.querySelector(".search-form")) {
 
 				return {
 					update: function(source) {
-						var prop, newVal = {};
+						let prop, newVal = {};
 						for (prop in model) {
 							newVal[prop] = model[prop];
 						}

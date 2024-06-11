@@ -1,169 +1,163 @@
 /* COMMON TO THE TWO IMAGE VIEWS  */
 #bassettContent td {
-    border: none;
-    width: 50%;
+	border: none;
+	width: 50%;
 }
 
 #bassettContent .s-pagination {
-    padding: 0 18px;
+	padding: 0 18px;
 }
 
 .choice {
-    float: left;
-    padding: 10px;
-    padding-top: 0;
+	display: block;
+	padding : 10px;
 }
 
 #paging span {
-    margin-left: 10px;
-    padding-bottom: 15px;
+	margin-left: 10px;
+	padding-bottom: 15px;
 }
 
 #bassett-title-header {
-    margin: 30px 10px 0;
-    padding-bottom: 6px;
-    font-size: 1.5em;
-    font-weight: 600;
+	margin: 30px 10px 0;
+	padding-bottom: 6px;
+	font-size: 1.5em;
+	font-weight: 600;
 }
 
 #bassett-menu li:nth-child(n+6) {
-    display: none;
+	display: none;
 }
 
-
 .menu-container #bassett-menu li a {
-    padding: 6px 0px;
-    width: 100%;
+	padding: 6px 0px;
+	width: 100%;
 }
 
 .menu-container #bassett-menu li a i {
-    color: #666;
-    text-decoration: none;
-    font-size: 13px;
-    margin-right: 3px;
+	color: #666;
+	text-decoration: none;
+	font-size: 13px;
+	margin-right: 3px;
 }
 
 .menu-container #bassett-menu li a i.fa-square-check {
-    color: #8c1515;
+	color: #8c1515;
 }
 
 .region span {
-    color: black;
-    float: right;
+	color: black;
+	float: right;
 }
 
 /* Multi IMAGES VIEW */
-.bassett-images, .paging, .bassett-image {
-    clear: both;
+.bassett-images {
+	display: inline-flex;
+	flex-wrap: wrap;
 }
 
 .menu-container #bassett-menu li a.see-all {
-    float: right;
-    width: auto;
-    padding: 0;
+	width: auto;
+	padding: 0;
+	float: right;
 }
 
-.bassett-images div {
-    padding: 0 0 30px 19px;
-    float: left;
+.image-container {
+	padding: 0 0 30px 19px;
 }
 
 #bassettContent .hr {
-    padding: 0 0 7px 0;
-    float: none;
-}
-
-#bassettContent .image-text {
-    padding: 3px 0 0 0;
+	height: 104px;
+	width: 120px;
 }
 
 .bassett-error {
-    color: red;
-    padding-bottom: 10px;
-    display: none;
+	color: red;
+	padding-bottom: 10px;
+	display: none;
 }
 
 /* IMAGE VIEW */
 .legend-title {
-    padding-top: 7px;
-    color: #820000;
-    font-size: 1.8em;
+	padding-top: 7px;
+	color: #820000;
+	font-size: 1.8em;
 }
 
 #bassett-number {
-    font-weight: bold;
-    margin-top: 1em;
-    margin-left: 12px;
+	font-weight: bold;
+	margin-top: 1em;
+	margin-left: 12px;
 }
 
 #second-region {
-    color: #999999;
-    font-size: 0.625em;
-    padding-left: 12px;
+	color: #999999;
+	font-size: 0.625em;
+	padding-left: 12px;
 }
 
 .bassett-image table {
-    margin-bottom: 30px;
-    text-align: center;
-    vertical-align: middle;
-    width:100%;
+	margin-bottom: 30px;
+	text-align: center;
+	vertical-align: middle;
+	width: 100%;
 }
 
 .bassett-image td#image {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .bassett-image td#legend-image, .bassett-image td#legend {
-    padding-top: 20px;
+	padding-top: 20px;
 }
 
 .bassett-image td#diagram-image, .bassett-image td#legend-image {
-    vertical-align: top;
+	vertical-align: top;
 }
 
 .bassett-image td#legend-image img, .bassett-image td#image img {
-    width: 90%;
+	width: 90%;
 }
 
 #legend table {
-    width: 100%;
+	width: 100%;
 }
 
 #legend td {
-    padding: 3px 0 0 2px;
-    text-align: left;
-    vertical-align: top;
+	padding: 3px 0 0 2px;
+	text-align: left;
+	vertical-align: top;
 }
 
 #legend .legend-title, #legend .legend-sub-title {
-    text-align: center;
+	text-align: center;
 }
 
 #legend .legend-title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 1em;
-    color: #3f3c30;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 1em;
+	color: #3f3c30;
 }
 
 #legend .legend-sub-title {
-    padding-bottom: 5px;
-    font-style: italic;
+	padding-bottom: 5px;
+	font-style: italic;
 }
 
 #legend .legend-description {
-    padding: 9px;
-    padding-bottom: 15px;
+	padding: 9px;
+	padding-bottom: 15px;
 }
 
 #legend table table td {
-    padding-left: 9px;
+	padding-left: 9px;
 }
 
 #legend table td:first-child {
-    width: 5%;
+	width: 5%;
 }
 
 #legend table td:nth-last-of-type() {
-    width: 95%;
+	width: 95%;
 }

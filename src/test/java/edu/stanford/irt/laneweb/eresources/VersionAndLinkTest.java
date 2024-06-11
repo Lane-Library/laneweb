@@ -8,6 +8,10 @@ import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.eresources.model.Link;
+import edu.stanford.irt.laneweb.eresources.model.LinkType;
+import edu.stanford.irt.laneweb.eresources.model.Version;
+
 public class VersionAndLinkTest {
 
     private Link link;

@@ -14,7 +14,7 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
     @Override
     public void toSAX(final EresourceListPagingData pagingData, final XMLConsumer xmlConsumer) {
         try {
-            startDivWithClass(xmlConsumer, "resourceListPagination");
+            startDivWithClass(xmlConsumer, "resourceListPagination no-bookmarking");
             String alpha = pagingData.getAlpha();
             if (alpha == null || "all".equals(alpha)) {
                 alpha = "";
@@ -32,7 +32,6 @@ public class EresourceListPagingDataSAXStrategy extends AbstractXHTMLSAXStrategy
                 startDivWithClass(xmlConsumer, "view-by");
                 createPagingDropdown(xmlConsumer, hrefBase, pagingData, alpha);
                 endDiv(xmlConsumer);
-               
             } else {
                 createDisplayingMarkup(xmlConsumer, pagingData, alpha);
             }

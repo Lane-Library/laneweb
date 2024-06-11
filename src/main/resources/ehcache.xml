@@ -1,8 +1,6 @@
-<config xmlns='http://www.ehcache.org/v3'
-    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xmlns:jsr107='http://www.ehcache.org/v3/jsr107'
-    xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.1.xsd
-    http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.1.xsd">
+<config
+    xmlns='http://www.ehcache.org/v3'
+    xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
 
   <cache alias="cocoon-cache">
     <key-type>java.io.Serializable</key-type>

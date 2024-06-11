@@ -5,7 +5,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class HistoryPhotoListService {
 
@@ -26,6 +25,6 @@ public class HistoryPhotoListService {
                 generated.add(next);
             }
         }
-        return generated.stream().map(this.photos::get).collect(Collectors.toList());
+        return generated.stream().map(this.photos::get).toList();
     }
 }

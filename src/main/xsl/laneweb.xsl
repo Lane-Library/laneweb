@@ -228,7 +228,7 @@
 
     <!-- add active to class to search form query present -->
     <xsl:template match="h:form[@class='search-form' and $query]/@class">
-        <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
+        <xsl:attribute name="class" select="'search-form search-form-results'"/>
     </xsl:template>
 
     <!-- add active to the pico container is on if $search-source=clinical-all  -->
@@ -239,7 +239,7 @@
 
     <!-- add active to class to search form for search help pages -->
     <xsl:template match="h:form[@class='search-form' and matches($path,'/(pico|lane)search.html')]/@class">
-        <xsl:attribute name="class" select="'search-form search-form-active search-form-results'"/>
+        <xsl:attribute name="class" select="'search-form search-form-results'"/>
     </xsl:template>
 
     <!-- add active to the pico-on link if $search-source=clinical-all and no PICO values present -->

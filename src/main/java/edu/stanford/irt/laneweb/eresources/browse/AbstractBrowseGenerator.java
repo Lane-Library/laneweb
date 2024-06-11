@@ -11,21 +11,15 @@ import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
-    protected static final String BASE_BROWSE_QUERY = "advanced:true recordType:bib AND isRecent:1";
-
     // the default cache expiration time, 20 minutes
     private static final long DEFAULT_EXPIRES = Duration.ofMinutes(20).toMillis();
 
-    protected String basePath;
-
-    protected String browseQuery;
-
-    protected SolrService solrService;
+    protected static final String BASE_BROWSE_QUERY = "advanced:true recordType:bib AND isRecent:1";
 
     private String componentType;
 
@@ -33,9 +27,15 @@ public abstract class AbstractBrowseGenerator extends AbstractGenerator {
 
     private Validity validity;
 
-    protected AbstractBrowseGenerator(final String componentType, final SolrService solrService) {
+    protected String basePath;
+
+    protected String browseQuery;
+
+    protected EresourceBrowseService restBrowseService;
+
+    protected AbstractBrowseGenerator(final String componentType, final EresourceBrowseService restBrowseService) {
         this.componentType = componentType;
-        this.solrService = solrService;
+        this.restBrowseService = restBrowseService;
     }
 
     @Override

@@ -6,7 +6,7 @@
 
 ## Build Laneweb image
 
-### Clone the laneweb repo and build app war
+### Clone the laneweb repo and build app jar
     
 ```
 $ cd $HOME/projects/lane

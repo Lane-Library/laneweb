@@ -2,15 +2,15 @@
 
     "use strict";
 
-    var LightboxBg = Y.Base.create("lightboxbg", Y.Widget, [], {});
+    let LightboxBg = Y.Base.create("lightboxbg", Y.Widget, [], {});
 
-    var Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
+    let Lightbox = Y.Base.create("lightbox", Y.Widget, [ Y.WidgetPosition, Y.WidgetPositionAlign, Y.WidgetPositionConstrain ], {
         bindUI : function () {
-            var self = this;
+            let self = this;
             this.on("visibleChange", this._onVisibleChange);
             this.after("visibleChange", this._afterVisibleChange);
             document.addEventListener("click", function(event) {
-                var node = event.target.closest("a[rel^='lightbox']");
+                let node = event.target.closest("a[rel^='lightbox']");
                 if (node) {
                     event.preventDefault();
                     self._lightboxLinkClick.call(self, node);
@@ -36,7 +36,7 @@
             }
         },
         _animate : function() {
-            var boundingBox = this.get("boundingBox"),
+            let boundingBox = this.get("boundingBox"),
                 width = boundingBox.get("clientWidth"),
                 height = boundingBox.get("clientHeight"),
                 left = boundingBox.get("offsetLeft"),
@@ -68,7 +68,7 @@
             anim2.run();
         },
         _lightboxLinkClick: function(node) {
-            var lightbox, model, basePath,  hash, url, regex, disableBackground,
+            let lightbox, model, basePath,  hash, url, regex, disableBackground,
                 disableAnimation,
                 rel = node.rel;
             if (rel && rel.indexOf("lightbox") === 0) {
@@ -137,8 +137,8 @@
     });
 
     // anchor with class=autoLightbox will automatically render on page load
-    var initializeAutoLightbox = function() {
-        var href, hash,
+    let initializeAutoLightbox = function() {
+        let href, hash,
             autoLightboxAnchor = document.querySelector("a.autoLightbox");
         if (autoLightboxAnchor) {
             href = autoLightboxAnchor.href;
@@ -146,7 +146,7 @@
             L.io(href, {
                 on : {
                     success : function(id, o) {
-                        var lightbox = L.Lightbox;
+                        let lightbox = L.Lightbox;
                         lightbox.set("url", href);
                         lightbox.set("hash", hash);
                         lightbox.setContent(o.responseText);

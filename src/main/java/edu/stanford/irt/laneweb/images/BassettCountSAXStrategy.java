@@ -11,7 +11,7 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
-public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Map<String, Integer>>>{
+public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Map<String, Integer>>> {
 
     private static final String BASSETT_COUNT = "bassett_count";
 
@@ -25,7 +25,6 @@ public class BassettCountSAXStrategy implements SAXStrategy<Map<String, Map<Stri
 
     private static final String SUB_REGION = "sub_region";
 
-   
     @Override
     public void toSAX(final Map<String, Map<String, Integer>> facets, final XMLConsumer xmlConsumer) {
         try {

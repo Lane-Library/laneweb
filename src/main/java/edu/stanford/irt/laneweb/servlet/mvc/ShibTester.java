@@ -6,8 +6,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class ShibTester {
             "postalAddress", "sn", "street", "suAffiliation", "suDisplayNameLF", "suUnivID", "targeted-id",
             "telephoneNumber", "title", "uid", "unscoped-affiliation", "upn");
 
-    @GetMapping(value = { "/secure/header-test", "/shib-secure/header-test" })
+    @GetMapping(value = { "/secure/header-test", "/patron-registration/header-test" })
     public void testUrl(final HttpServletRequest request, final ServletResponse response) throws IOException {
         response.setContentType("text/plain");
         PrintWriter result = response.getWriter();

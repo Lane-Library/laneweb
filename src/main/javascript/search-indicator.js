@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var SEARCH_INDICATOR = "search-indicator",
+    let SEARCH_INDICATOR = "search-indicator",
         SEARCH_INDICATOR_ACTIVE = SEARCH_INDICATOR + "-active",
         indicatorNode = document.querySelector("." + SEARCH_INDICATOR),
 

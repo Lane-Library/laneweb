@@ -2,8 +2,8 @@ package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 

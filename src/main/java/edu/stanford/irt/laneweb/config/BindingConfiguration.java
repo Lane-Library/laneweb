@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -168,7 +168,6 @@ public class BindingConfiguration {
     templateNames.add("bassettLargerView");
     templateNames.add("none");
     templateNames.add("history");
-    templateNames.add("wilson");
     Map<String, String> templateMap = new HashMap<>();
     templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "bassettLargerView");
     templateMap.put("^/discoveryLoginPage.html", "none");

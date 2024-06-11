@@ -3,17 +3,19 @@ package edu.stanford.irt.laneweb.suggest;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SolrSuggestionManager implements SuggestionManager {
 
-    private SolrService searchService;
+    private EresourceSearchService searchService;
 
-    public SolrSuggestionManager(final SolrService searchService) {
+    public SolrSuggestionManager(final EresourceSearchService searchService) {
         this.searchService = searchService;
     }
 
@@ -36,14 +38,15 @@ public class SolrSuggestionManager implements SuggestionManager {
         return suggestionsFromEresources(this.searchService.suggestFindByType(term, type));
     }
 
-    private List<Suggestion> suggestionsFromEresources(final List<Eresource> eresources) {
+    private List<Suggestion> suggestionsFromEresources(final Map<String, String> eresourceTitles) {
         List<Suggestion> suggestions = new ArrayList<>();
-        for (Eresource eresource : eresources) {
-            String title = eresource.getTitle();
+        Set<Entry<String, String>> pairs = eresourceTitles.entrySet() ;
+        for (Entry<String,String> suggestion : pairs) {
+            String title = suggestion.getValue();
             if (title.endsWith(".") || title.endsWith("/")) {
                 title = title.substring(0, title.length() - 1);
             }
-            suggestions.add(new Suggestion(eresource.getId(), title.trim()));
+            suggestions.add(new Suggestion(suggestion.getKey(), title.trim()));
         }
         return suggestions;
     }

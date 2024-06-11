@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var searchIndicatorTestCase = new Y.Test.Case({
+    let searchIndicatorTestCase = new Y.Test.Case({
 
         name: "Lane Search Indicator Test Case",
 

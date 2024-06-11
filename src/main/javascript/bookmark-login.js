@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var model = L.Model,
+    let model = L.Model,
         lightbox = L.Lightbox,
         basePath = model.get(model.BASE_PATH),
 
@@ -21,7 +21,7 @@
              * @param url {string} the url
              */
             addBookmark: function(label, url) {
-                var queryString = "&label=" + encodeURIComponent(label);
+                let queryString = "&label=" + encodeURIComponent(label);
                 queryString += "&url=" + encodeURIComponent(url);
                 queryString += "&redirect=" + encodeURIComponent(location.href);
                 L.io(basePath + "/plain/bookmark-login.html", {
@@ -55,7 +55,7 @@
              * @param args {object} the arguments passed to L.io, in this case the query string
              */
             _handleSuccess: function(id, o, args) {
-                var queryString = args.queryString, yes, no;
+                let queryString = args.queryString, yes, no;
                 lightbox.setContent(o.responseText);
                 yes = document.querySelector("#yes-bookmark-login");
                 no = document.querySelector("#no-bookmark-login");

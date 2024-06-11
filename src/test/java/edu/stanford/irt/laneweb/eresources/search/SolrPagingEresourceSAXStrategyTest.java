@@ -15,7 +15,8 @@ import org.springframework.data.domain.Page;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestResult;
 
 public class SolrPagingEresourceSAXStrategyTest {
 
@@ -25,7 +26,7 @@ public class SolrPagingEresourceSAXStrategyTest {
 
     private Page<Eresource> page;
 
-    private SolrSearchResult result;
+    private RestResult<Eresource> result;
 
     private SolrPagingEresourceSAXStrategy strategy;
 
@@ -38,7 +39,7 @@ public class SolrPagingEresourceSAXStrategyTest {
         this.xmlConsumer = new TestXMLConsumer();
         this.page = mock(Page.class);
         this.eresource = mock(Eresource.class);
-        this.result = mock(SolrSearchResult.class);
+        this.result = mock(RestResult.class);
     }
 
     @Test

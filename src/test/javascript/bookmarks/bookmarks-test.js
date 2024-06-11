@@ -2,7 +2,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
     "use strict";
 
-    var Bookmark = L.Bookmark,
+    let Bookmark = L.Bookmark,
 
     Bookmarks = L.Bookmarks,
 
@@ -21,14 +21,14 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         ioSuccess : function() {
-            var bar = arguments[1].on.success;
-            var args = arguments[1]["arguments"];
-            var rcv = arguments[1].context;
+            let bar = arguments[1].on.success;
+            let args = arguments[1]["arguments"];
+            let rcv = arguments[1].context;
             bar.apply(rcv,[args]);
         },
 
         setUp : function() {
-            var bm = [];
+            let bm = [];
             bm.push(new Bookmark("0","0"));
             bm.push(new Bookmark("1","1"));
             bm.push(new Bookmark("2","2"));
@@ -63,7 +63,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testAddBookmarkEvent : function() {
-            var added = null, bookmark = new Bookmark("label2", "url2");
+            let added = null, bookmark = new Bookmark("label2", "url2");
             this.eventHandle = this.bookmarks.on("addSync", function(event) {
                 added = event.bookmark;
             });
@@ -80,7 +80,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testGetBookmark : function() {
-            var bookmark = new Bookmark("label4", "url4");
+            let bookmark = new Bookmark("label4", "url4");
             this.bookmarks.addBookmark(bookmark);
             Y.Assert.areEqual(bookmark, this.bookmarks.getBookmark(0));
         },
@@ -98,7 +98,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testRemoveBookmarksEvent : function() {
-            var positions = null;
+            let positions = null;
             this.bookmarks.addBookmark(new Bookmark("label6", "url6"));
             this.eventHandle = this.bookmarks.on("removeSync", function(event) {
                 positions = event.positions;
@@ -118,7 +118,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testUpdateBookmark : function() {
-            var b = null, p = -1, bookmark = new Bookmark("label8", "url8");
+            let b = null, p = -1, bookmark = new Bookmark("label8", "url8");
             this.bookmarks.addBookmark(bookmark);
             this.eventHandle = this.bookmarks.on("update", function(event) {
                 b = event.bookmark;
@@ -151,7 +151,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
         },
 
         testIndexOf: function() {
-            var bookmark = this.bookmarks.getBookmark(2);
+            let bookmark = this.bookmarks.getBookmark(2);
             Y.Assert.areSame(2, this.bookmarks.indexOf(bookmark));
         },
 
@@ -160,7 +160,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.addBookmark(new Bookmark("label9", "url9"));
-            Y.Assert.areSame("Sorry, add bookmark failed. Please try again later.", this.message);
+            Y.Assert.areSame("Sorry, add bookmark failed. Please reload the page and try again later.", this.message);
         },
 
         testMoveFail: function() {
@@ -168,7 +168,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.moveBookmark(3, 0);
-            Y.Assert.areSame("Sorry, move bookmark failed. Please try again later.", this.message);
+            Y.Assert.areSame("Sorry, move bookmark failed. Please reload the page and try again later.", this.message);
         },
 
         testRemoveFail: function() {
@@ -176,7 +176,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.removeBookmarks([0]);
-            Y.Assert.areSame("Sorry, delete bookmark failed. Please try again later.", this.message);
+            Y.Assert.areSame("Sorry, delete bookmark failed. Please reload the page and try again later.", this.message);
         },
 
         testUpdateFail: function() {
@@ -184,7 +184,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
                 config.on.failure.apply(config.context, [0]);
             };
             this.bookmarks.getBookmark(0).setLabel("foo");
-            Y.Assert.areSame("Sorry, update bookmark failed. Please try again later.", this.message);
+            Y.Assert.areSame("Sorry, update bookmark failed. Please reload the page and try again later.", this.message);
         }
     });
 

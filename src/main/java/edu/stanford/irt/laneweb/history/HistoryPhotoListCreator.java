@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -49,7 +48,7 @@ public class HistoryPhotoListCreator {
             photos.addAll(getPhotosFromMap(map));
             next = (String) ((Map<String, ?>) map.get("links")).get("next");
         }
-        List<String> photoList = photos.stream().map(this::buildString).collect(Collectors.toList());
+        List<String> photoList = photos.stream().map(this::buildString).toList();
         photoList.stream().forEach(out::println);
     }
 

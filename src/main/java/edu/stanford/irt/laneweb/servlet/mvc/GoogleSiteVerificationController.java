@@ -9,7 +9,7 @@ public class GoogleSiteVerificationController {
 
     private static final String VERIFICATION_STRING = "google-site-verification: google708f1eef3c6d1e52.html";
 
-    @GetMapping(value = "/**/google708f1eef3c6d1e52.html")
+    @GetMapping(value = "/*/google708f1eef3c6d1e52.html")
     @ResponseBody
     public String getVerificationString() {
         return VERIFICATION_STRING;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
     	<map:match pattern="biomed-resources/**" type="wildcard">
             <map:match pattern="biomed-resources/(ej|eb|cc|db|exam|video|images|statistics|software|a2z-test).html" type="regexp">
@@ -111,7 +111,7 @@
                 <map:aggregate type="default" element="doc">
                     <map:generate type="search-engine">
                         <map:parameter name="timeout" value="14000"/>
-                        <map:parameter name="engines" value="stanford-daily,wilson_somhistory,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
+                        <map:parameter name="engines" value="stanford-daily,openlibrary-wilson,openlibrary-LegacyofMedical002,openlibrary-FirstHundredCombined,openlibrary-25years002,openlibrary-CooperBarkan1954001,openlibrary-Recollections005,openlibrary-Rytand,openlibrary-Pizzo,openlibrary-Versailles,openlibrary-Reinventing,openlibrary-CulturalResources,openlibrary-HistoryOfLane19121967,openlibrary-Whitfield,openlibrary-Challenge,openlibrary-Alway,openlibrary-Dedication006,openlibrary-BillNorthwayHistory,openlibrary-40Careers,openlibrary-Graduates"/>
                     </map:generate>
                     <map:generate type="html" src="{content-base}/med-history/search-results.html"/>
                 </map:aggregate>

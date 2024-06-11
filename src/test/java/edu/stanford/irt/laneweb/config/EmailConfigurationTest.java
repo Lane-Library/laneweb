@@ -4,10 +4,13 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 public class EmailConfigurationTest {
 
     private EmailConfiguration configuration;
+
+    private JavaMailSenderImpl mailSender;
 
     @Before
     public void setUp() {
@@ -16,6 +19,6 @@ public class EmailConfigurationTest {
 
     @Test
     public void testEMailSender() {
-        assertNotNull(this.configuration.eMailSender(null, 0));
+        assertNotNull(this.configuration.eMailSender(mailSender));
     }
 }

@@ -8,6 +8,9 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.LanewebException;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.Link;
+import edu.stanford.irt.laneweb.eresources.model.Version;
 import edu.stanford.irt.laneweb.resource.Resource;
 import edu.stanford.irt.laneweb.util.XMLUtils;
 
@@ -29,7 +32,8 @@ public class EresourceSAXStrategy implements SAXStrategy<Eresource> {
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_ID, eresource.getRecordId());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.RECORD_TYPE, eresource.getRecordType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.TITLE, eresource.getTitle());
-            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.IS_AN_EXACT_MATCH, eresource.getIsAnExactMatch());
+            XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, Resource.IS_AN_EXACT_MATCH,
+                    eresource.getIsAnExactMatch());
             maybeCreateElement(xmlConsumer, "primaryType", eresource.getPrimaryType());
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "total", Integer.toString(eresource.getTotal()));
             XMLUtils.createElementNS(xmlConsumer, Resource.NAMESPACE, "available",

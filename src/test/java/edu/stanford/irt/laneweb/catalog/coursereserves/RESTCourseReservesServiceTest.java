@@ -17,14 +17,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTCourseReservesServiceTest {
 
     private CourseReservesItemList itemList;
-
-    private RESTService restService;
+    
+    private BasicAuthRESTService restService;
 
     private RESTCourseReservesService service;
 
@@ -33,14 +34,14 @@ public class RESTCourseReservesServiceTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.service = new RESTCourseReservesService(this.uri, this.restService);
         this.itemList = mock(CourseReservesItemList.class);
     }
 
     @Test
     public void testGetCourses() throws URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/folio/coursereserves/courses")), isA(TypeReference.class)))
+        expect(this.restService.getObject(eq(new URI("/coursereserves/courses")), isA(TypeReference.class)))
                 .andReturn(Collections.emptyList());
         replay(this.restService);
         assertSame(Collections.emptyList(), this.service.getCourses());
@@ -49,7 +50,7 @@ public class RESTCourseReservesServiceTest {
 
     @Test
     public void testGetItems() throws URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/folio/coursereserves/items")), same(CourseReservesItemList.class)))
+        expect(this.restService.getObject(eq(new URI("/coursereserves/items")), same(CourseReservesItemList.class)))
                 .andReturn(this.itemList);
         replay(this.restService);
         assertSame(this.itemList, this.service.getItems());
@@ -58,7 +59,7 @@ public class RESTCourseReservesServiceTest {
 
     @Test
     public void testGetItemsInt() throws URISyntaxException {
-        expect(this.restService.getObject(eq(new URI("/folio/coursereserves/items?id=0")),
+        expect(this.restService.getObject(eq(new URI("/coursereserves/items?id=0")),
                 same(CourseReservesItemList.class))).andReturn(this.itemList);
         replay(this.restService);
         assertSame(this.itemList, this.service.getItems("0"));

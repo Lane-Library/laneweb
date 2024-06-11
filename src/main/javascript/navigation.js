@@ -4,7 +4,7 @@
 
     if (document.querySelector(".nav-menu")) {
 
-        var superHeader = document.querySelector("header:first-of-type"),
+        let superHeader = document.querySelector("header:first-of-type"),
             blurableNodes = document.querySelectorAll(".content, footer, .mobile-screen-menu.lrg-screen-hide"),
             toggleSuperHeader = function(){
                 if (superHeader) {
@@ -23,7 +23,7 @@
 
         document.querySelectorAll(".nav-menu").forEach(function(node) {
             node.addEventListener("click", function(event) {
-                var isSmallMedia = !window.matchMedia("(min-width: 1100px)").matches,
+                let isSmallMedia = !window.matchMedia("(min-width: 1100px)").matches,
                     nav = event.currentTarget, 
                     clickTarget = event.target,
                     navContent = nav.querySelector('.dropdown-content');

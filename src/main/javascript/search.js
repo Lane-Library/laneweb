@@ -4,9 +4,9 @@ if (document.querySelector(".search-form"))  {
 
     "use strict";
 
-    var model = function(q, s) {
+    let model = function(q, s) {
 
-            var query = q,
+            let query = q,
                 source = s,
                 m = {
                     getQuery: function() {
@@ -21,7 +21,7 @@ if (document.querySelector(".search-form"))  {
                         }
                     },
                     setQuery: function(newQuery) {
-                        var oldQuery = query;
+                        let oldQuery = query;
                         if (typeof newQuery === "string") {
                             query = newQuery;
                             this.fire("queryChange", {
@@ -31,7 +31,7 @@ if (document.querySelector(".search-form"))  {
                         }
                     },
                     setSource: function(newSource) {
-                        var oldSource = source;
+                        let oldSource = source;
                         if (typeof newSource === "string") {
                             this.fire("sourceChange", {
                                 newVal: newSource,
@@ -59,14 +59,13 @@ if (document.querySelector(".search-form"))  {
                 document.querySelector(".search-form input[name=source]").value),
 
         view = function(form) {
-            var queryInput = form.querySelector("input[name=q]"),
+            let queryInput = form.querySelector("input[name=q]"),
                 sourceInput = form.querySelector("input[name=source]"),
                 facetsInput = form.querySelector("input[name=facets]"),
                 sortInput = form.querySelector("input[name=sort]"),
 
                 v = {
                     close: function() {
-                        form.classList.remove("search-form-active");
                         document.documentElement.scrollIntoView();
                         view.fire("close");
                     },
@@ -74,7 +73,6 @@ if (document.querySelector(".search-form"))  {
                         view.fire("inputChange", queryInput.value);
                     },
                     open: function() {
-                        form.classList.add("search-form-active");
                         view.fire("open");
                     },
                     reset: function() {
@@ -114,7 +112,7 @@ if (document.querySelector(".search-form"))  {
         }(document.querySelector(".search-form"));
 
         (function() {
-            var controller = {
+            let controller = {
                     open: function() {
                         model.fire("activeChange", {active:true});
                     },

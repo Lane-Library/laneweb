@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="throttling">
         <map:parameter name="request-key" value="remote-addr={remote-addr};request-uri={request-uri};source={source};q={query};facets={facets}:token={token}"/>
         <map:match pattern="er-search.xml" type="wildcard">
@@ -43,6 +43,9 @@
             <map:generate type="er-browse-html">
                 <map:parameter name="query" value="{1}"/>
             </map:generate>
+            <map:transform type="description-labeling"/>
+            <map:transform type="description-linebreak"/>
+            <map:transform type="description-linking"/>
             <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
                 <map:parameter name="browse-query" value="{1}"/>
             </map:transform>

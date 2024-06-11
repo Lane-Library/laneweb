@@ -9,7 +9,7 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.junit.Before;
 import org.junit.Test;

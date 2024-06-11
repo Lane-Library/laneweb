@@ -18,12 +18,12 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentServiceTest {
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private RESTEquipmentService service;
 
@@ -32,7 +32,7 @@ public class RESTEquipmentServiceTest {
     @Before
     public void setUp() throws URISyntaxException {
         this.uri = getClass().getResource("").toURI();
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.service = new RESTEquipmentService(this.uri, this.restService);
     }
 
@@ -43,7 +43,7 @@ public class RESTEquipmentServiceTest {
         map.put("count", "1");
         map.put("title", "title");
         map.put("note", "note");
-        expect(this.restService.getObject(eq(this.uri.resolve("folio/equipment/list")), isA(TypeReference.class)))
+        expect(this.restService.getObject(eq(this.uri.resolve("equipment/list")), isA(TypeReference.class)))
                 .andReturn(Collections.singletonList(map));
         replay(this.restService);
         List<Equipment> list = this.service.getList();

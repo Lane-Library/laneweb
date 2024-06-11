@@ -8,12 +8,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class RequestAttributeUserFactoryTest {
 
@@ -75,6 +74,22 @@ public class RequestAttributeUserFactoryTest {
         assertEquals("mail", user.getEmail());
         assertEquals("first name", user.getName());
         assertEquals("911531548a5ea68cf13f5e0506367956@domain", user.getHashedId());
+        verify(this.request);
+    }
+
+    @Test
+    public void testCreateUserNewShcProvider() {
+        expect(this.request.getRemoteUser()).andReturn("user");
+        expect(this.request.getAttribute("Shib-Identity-Provider"))
+                .andReturn("https://sts.windows.net/9866b506-dc9d-48dd-b720-3a50db77a1cc/");
+        expect(this.request.getAttribute("displayName")).andReturn("name");
+        expect(this.request.getAttribute("mail")).andReturn("email");
+        replay(this.request);
+        User user = this.factory.createUser(this.request);
+        assertEquals("email", user.getEmail());
+        assertEquals("18b3f463d233d2e2764493fb5c951523@stanfordhealthcare.org", user.getHashedId());
+        assertEquals("user@stanfordhealthcare.org", user.getId());
+        assertEquals("name", user.getName());
         verify(this.request);
     }
 

@@ -11,3 +11,6 @@
 /javamelody/
 /xerces/
 /xspec-master/
+*.code-workspace
+.vscode
+.gitignore

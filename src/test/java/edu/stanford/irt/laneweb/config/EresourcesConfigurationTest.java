@@ -1,13 +1,10 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.easymock.EasyMock.mock;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.solr.core.convert.SolrConverter;
-import org.springframework.data.solr.server.support.HttpSolrClientFactory;
+
 
 public class EresourcesConfigurationTest {
 
@@ -59,19 +56,11 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
-    public void testSolrClient() {
-        assertNotNull(this.configuration.solrClient("/"));
-    }
-
-    @Test
     public void testSolrPagingEresourceSAXStrategy() {
         assertNotNull(this.configuration.solrPagingEresourceSAXStrategy());
     }
 
-    @Test
-    public void testSolrQueryParser() {
-        assertNotNull(this.configuration.solrQueryParser());
-    }
+   
 
     @Test
     public void testSolrSearchFacetsGenerator() {
@@ -82,14 +71,5 @@ public class EresourcesConfigurationTest {
     public void testSolrSearchGenerator() {
         assertNotNull(this.configuration.solrSearchGenerator(null));
     }
-
-    @Test
-    public void testSolrService() {
-        assertNotNull(this.configuration.solrService(null, null));
-    }
-
-    @Test
-    public void testSolrTemplate() {
-        assertNotNull(this.configuration.solrTemplate(mock(SolrClient.class), mock(SolrConverter.class)));
-    }
+   
 }

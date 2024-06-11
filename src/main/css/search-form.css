@@ -1,7 +1,7 @@
 .hero-unit {
 	color: white;
-	background-color:  #8c1515;
-	background-image: url('../images/hero-bkgrd.jpg'); 
+	background-color: #8c1515;
+	background-image: url('../images/hero-bkgrd.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center bottom;
@@ -11,8 +11,8 @@
 }
 
 .hero-unit-front-page {
-    padding-top: 98px;
-    min-height: 264px;
+	padding-top: 98px;
+	min-height: 264px;
 }
 
 .search-form {
@@ -21,7 +21,7 @@
 	margin: auto;
 }
 
-.search-form  .search-field{
+.search-form  .search-field {
 	position: relative;
 	color: black;
 	padding: 0px;
@@ -40,14 +40,14 @@
 	border-right: 1px solid rgb(0 0 0/ 20%);
 	overflow: hidden;
 }
- 
-.search-form .search-input-container{
-	display:inline-block;
+
+.search-form .search-input-container {
+	display: inline-block;
 	width: 100%;
-	position: relative;	
+	position: relative;
 }
 
-.search-form input{
+.search-form input {
 	font-size: 0.875em;
 	height: 46px;
 	padding-left: 30px;
@@ -56,8 +56,8 @@
 	width: 95%;
 }
 
-.search-form .search-dropdown .fa-solid,
-.search-form .search-dropdown .fa-regular {
+.search-form .search-dropdown .fa-solid, .search-form .search-dropdown .fa-regular
+	{
 	color: black;
 	padding-top: 3px;
 }
@@ -82,12 +82,12 @@
 	padding-top: 6px;
 }
 
-.search-pico.search-pico-active ~ .search-help{
+.search-pico.search-pico-active ~ .search-help {
 	display: none;
 }
 
-.search-form .fa-solid, .search-form .fa-regular, .search-form a, .search-form a:hover, .search-form a:visited,
-	.search-form a:active {
+.search-form .fa-solid, .search-form .fa-regular, .search-form a,
+	.search-form a:hover, .search-form a:visited, .search-form a:active {
 	color: white;
 	text-decoration: none;
 }
@@ -102,18 +102,17 @@
 	display: none;
 }
 
-.search-pico.search-pico-active{
+.search-pico.search-pico-active {
 	display: block;
 }
 
-.pico-toggle{
+.pico-toggle {
 	width: 60%;
-    margin: auto;
-    display: block;
+	margin: auto;
+	display: block;
 }
 
-
-.pico-toggle span:last-child{
+.pico-toggle span:last-child {
 	float: right;
 }
 
@@ -125,24 +124,26 @@
 	display: inline;
 	cursor: pointer;
 }
- 
+
 /* see case 125259 */
 .search-form input[name='q']::-ms-clear {
 	display: none;
 }
 
 .pico-fields {
-	display: none;	
+	display: none;
 }
 
 .search-pico .pure-g>div:not(:first-child):not(:last-child) {
-    padding: 0 6px;
+	padding: 0 6px;
 }
+
 .search-pico .pure-g>div:first-child {
-    padding-right: 6px;
+	padding-right: 6px;
 }
+
 .search-pico .pure-g>div:last-child {
-    padding-left: 6px;
+	padding-left: 6px;
 }
 
 .pico-fields input {
@@ -154,7 +155,6 @@
 	box-sizing: border-box;
 	border: 0;
 }
-
 
 .search-form .pico-fields-active {
 	display: block;
@@ -189,14 +189,13 @@
 	cursor: pointer;
 	border: none;
 	background-color: transparent;
-    position: absolute;
-    top: 14px;
+	position: absolute;
+	top: 14px;
 }
-
 
 .search-button .fa-solid.fa-magnifying-glass {
 	color: lightslategrey;
-    padding-left: 9px;
+	padding-left: 9px;
 }
 
 .search-indicator {
@@ -216,24 +215,7 @@
 	display: block;
 }
 
-.search-form-active {
-	overflow: visible;
-}
-
-.search-form-active.search-form-results {
-	max-height: 200px;
-}
-
-.search-form-active .search-pico a {
-	opacity: 1;
-}
-
-.search-form-active fieldset {
-	width: 100%;
-}
-
-
-@media ( max-width : 812px) {
+@media ( max-width : 1100px) {
 	.hero-unit-front-page, .hero-unit {
 		padding-top: 30px;
 		padding-bottom: 33px;
@@ -242,6 +224,15 @@
 		display: flex;
 	}
 	.search-form {
+		width: 70%;
+	}
+	.pico-fields .pure-u-1-4 {
+		width: 25%;
+	}
+}
+
+@media ( max-width : 812px) {
+    .search-form {
 		width: 100%;
 		margin: 20px 2em 0;
 	}
@@ -249,4 +240,20 @@
 	.search-results .search-form {
 	    margin: 20px 12px 0;
 	}
+	
+	.pico-toggle {
+	    width: 100%;
+	    padding: 0 12px;
+	}
+	
+    .pico-fields .pure-g {
+        justify-content: space-between;
+	}
+	
+	.pico-fields .pure-g > div.pure-u-1-4 {
+	    width: 49%;
+	    padding: 0 !important;
+	    margin: 6px 0;
+	}
+	
 }

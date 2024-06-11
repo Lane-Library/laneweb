@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +26,14 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     private static final byte[] NONPRODUCTION = "User-agent: *\nDisallow: /".getBytes(StandardCharsets.UTF_8);
 
-    private static final byte[] PRODUCTION = ("User-agent: *\nCrawl-delay: 7\n"
-            + "Disallow: /search.html\nDisallow: /search/\nDisallow: /secure/\n"
-            + "Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml")
-                    .getBytes(StandardCharsets.UTF_8);
+    private static final byte[] PRODUCTION = ("""
+            User-agent: *
+            Crawl-delay: 7
+            Disallow: /search.html
+            Disallow: /search/
+            Disallow: /secure/
+            Sitemap: http://lane.stanford.edu/biomed-resources/bassett/bassett-sitemap.xml
+                    """).getBytes(StandardCharsets.UTF_8);
 
     private static final long serialVersionUID = 1L;
 

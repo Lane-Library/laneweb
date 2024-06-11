@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var BookmarkEditor,
+    let BookmarkEditor,
         Bookmark = L.Bookmark,
         HTMLTemplate = document.querySelector("#bookmark-editor-template");
 
@@ -36,7 +36,7 @@
          * @method syncUI
          */
         syncUI : function() {
-            var srcNode = this.get("srcNode");
+            let srcNode = this.get("srcNode");
             this._labelInput = srcNode.one("input[name='label']");
             this._urlInput = srcNode.one("input[name='url']");
             srcNode.one("input[name='url']").after("focus", this._setDefaultUrlInputText, this);
@@ -50,7 +50,7 @@
          * @method cancel
          */
         cancel : function() {
-            var addBookmarkContainer = document.querySelector(".addBookmarkContainer");
+            let addBookmarkContainer = document.querySelector(".addBookmarkContainer");
             if (this.get("bookmark")) {
                 this.set("editing", false);
             } else {
@@ -79,7 +79,7 @@
          * @method delete
          */
         "delete" : function() {
-            var bookmarks = L.BookmarksWidget.get("bookmarks"),
+            let bookmarks = L.BookmarksWidget.get("bookmarks"),
                 index = bookmarks.indexOf(this.get("bookmark"));
             bookmarks.removeBookmarks([index]);
         },
@@ -91,7 +91,7 @@
          * @method save
          */
         save : function() {
-            var newlabel = this._labelInput.get("value"),
+            let newlabel = this._labelInput.get("value"),
             newurl = this._urlInput.get("value"),
             bookmark = this.get("bookmark");
             if (!newlabel || !newurl) {
@@ -121,7 +121,7 @@
          * @method reset
          */
         reset : function() {
-            var bookmark = this.get("bookmark");
+            let bookmark = this.get("bookmark");
             this._labelInput.set("placeholder", "Name");
             this._urlInput.set("placeholder", "Location");
             if (bookmark) {
@@ -138,7 +138,7 @@
          * @method update
          */
         update : function() {
-            var anchor = this.get("srcNode").one("a"),
+            let anchor = this.get("srcNode").one("a"),
             bookmark = this.get("bookmark");
             anchor.set("innerHTML", bookmark.getLabel());
             anchor.set("href", bookmark.getUrl());
@@ -163,7 +163,7 @@
          * @param event {CustomEvent}
          */
         _handleEditingChange : function(event) {
-            var srcNode = this.get("srcNode"),
+            let srcNode = this.get("srcNode"),
             activeClass = this.getClassName() + "-active";
             srcNode._node.classList.toggle('active');
             if (event.newVal) {
@@ -180,7 +180,7 @@
          * @private
          */
         _truncateLabel : function() {
-            var anchor = this.get("srcNode").one("a"),
+            let anchor = this.get("srcNode").one("a"),
             label = anchor.get("innerHTML");
             if (label.length > 130) {
                 anchor.set("innerHTML", label.substring(0, 130) + "...");

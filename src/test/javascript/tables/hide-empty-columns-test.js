@@ -8,11 +8,12 @@ YUI({ fetchCSS: false }).use("test", "test-console", "dom", "node-event-simulate
 
         testHideCols: function() {
             var rawTable = document.querySelector('.raw');
-            rawTable.querySelectorAll('tr th:nth-child(3),tr td:nth-child(3)').forEach(function(node) {
+            rawTable.querySelectorAll('.table-head:nth-child(3),table-cell td:nth-child(3)').forEach(function(node) {
                 Y.Assert.areNotEqual("none", node.style.display);
             })
             var hideTable = document.querySelector('.hide-empty-columns');
-            hideTable.querySelectorAll('tr th:nth-child(3),tr td:nth-child(3)').forEach(function(node) {
+            hideTable.querySelectorAll('.table-head:nth-child(3),table-cell td:nth-child(3)').forEach(function(node) {
+              
                 Y.Assert.areEqual("none", node.style.display);
             })
         }

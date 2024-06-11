@@ -15,29 +15,27 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.data.domain.Page;
-import org.springframework.data.solr.core.query.FacetOptions.FacetSort;
-import org.springframework.data.solr.core.query.SimpleField;
-import org.springframework.data.solr.core.query.result.FacetFieldEntry;
-import org.springframework.data.solr.core.query.result.FacetPage;
-import org.springframework.data.solr.core.query.result.SimpleFacetFieldEntry;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.Eresource;
+import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
+import edu.stanford.irt.laneweb.eresources.model.solr.Field;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class SolrSearchFacetsGeneratorTest {
 
     Collection<Page<FacetFieldEntry>> facetPages;
 
-    private FacetPage<Eresource> eresourcesPage;
+    private Map<String,List<FacetFieldEntry>> eresourcesPage;
 
     private FacetsGenerator generator;
 
     private Map<String, Object> model;
 
-    private Page<FacetFieldEntry> pageFieldFacet;
+    private List<FacetFieldEntry> pageFieldFacet;
 
-    private FacetService service;
+    private EresourceFacetService service;
     
    
     
@@ -45,13 +43,13 @@ public class SolrSearchFacetsGeneratorTest {
 
     @Before
     public void setUp() {
-        this.service = mock(FacetService.class);
+        this.service = mock(EresourceFacetService.class);
         this.facetSAXStrategy = mock(SAXStrategy.class);
-        this.pageFieldFacet = mock(Page.class);
-        this.eresourcesPage = mock(FacetPage.class);
+        this.eresourcesPage = mock(Map.class);
         this.facetPages = mock(Collection.class);
         this.model = new HashMap<String, Object>();
         this.model.put(Model.QUERY, "skin");
+        this.pageFieldFacet = new ArrayList<>();
     }
 
     @Test
@@ -61,14 +59,14 @@ public class SolrSearchFacetsGeneratorTest {
         this.generator = new FacetsGenerator(this.service, facetSAXStrategy, 4, publicationTypes);
         this.generator.setFacet(facets);
         this.generator.setModel(model);
-        SimpleField field = new SimpleField("publicationType");
+        Field field = new Field("publicationType");
         expect(this.service.facetByManyFields("skin", "", 5)).andReturn(this.eresourcesPage);
-        expect(this.eresourcesPage.getFacetResultPage("publicationType")).andReturn(this.pageFieldFacet);
-        expect(this.pageFieldFacet.getContent())
-                .andReturn(Arrays.asList(new SimpleFacetFieldEntry(field, "Required1", 100)));
-        replay(this.service, this.eresourcesPage, this.pageFieldFacet);
+        expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
+        expect(this.pageFieldFacet).andReturn(Arrays.asList(new FacetFieldEntry(field, "Required1", 100)));
+        expect(this.service.facetByField("skin", "","publicationType",1000, 1, FacetSort.COUNT)).andReturn(this.eresourcesPage);
+        replay(this.service, this.eresourcesPage);
         this.generator.generate();
-        verify(this.service, this.eresourcesPage, this.pageFieldFacet);
+        verify(this.service, this.eresourcesPage);
     }
     
     @Test
@@ -78,24 +76,23 @@ public class SolrSearchFacetsGeneratorTest {
         this.generator = new FacetsGenerator(this.service, facetSAXStrategy, 4, publicationTypes);
         this.generator.setFacet(facets);
         this.generator.setModel(model);
-        SimpleField fieldType = new SimpleField("type");
-        SimpleField fieldPublicationType = new SimpleField("publicationType");
+        Field fieldType = new Field("type");
+        Field fieldPublicationType = new Field("publicationType");
         List<FacetFieldEntry> resultFromSolr = new ArrayList<FacetFieldEntry>();
-        resultFromSolr.add(new SimpleFacetFieldEntry(fieldType, "index", 10));
-        resultFromSolr.add(new SimpleFacetFieldEntry(fieldPublicationType, "requiredIndex", 100));
+        resultFromSolr.add(new FacetFieldEntry(fieldType, "index", 10));
+        resultFromSolr.add(new FacetFieldEntry(fieldPublicationType, "requiredIndex", 100));
         
         expect(this.service.facetByManyFields("skin", "", 5)).andReturn(this.eresourcesPage);
-        expect(this.eresourcesPage.getFacetResultPage("type")).andReturn(this.pageFieldFacet);
-        expect(this.eresourcesPage.getFacetResultPage("publicationType")).andReturn(this.pageFieldFacet);
-        expect(this.pageFieldFacet.getContent()).andReturn(resultFromSolr).times(3);
+        expect(this.eresourcesPage.get("type")).andReturn(this.pageFieldFacet);
+        expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
         
         //Second call to the facetService
         expect(this.service.facetByField("skin", "","publicationType", 1000, 1, FacetSort.COUNT)).andReturn(this.eresourcesPage);
-        expect(this.eresourcesPage.getFacetResultPage("publicationType")).andReturn(this.pageFieldFacet);
+        expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
         
-        replay(this.service, this.eresourcesPage, this.pageFieldFacet);
+        replay(this.service, this.eresourcesPage);
         this.generator.generate();
-        verify(this.service, this.eresourcesPage, this.pageFieldFacet);
+        verify(this.service, this.eresourcesPage);
     }
     
     

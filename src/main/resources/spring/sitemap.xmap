@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://www.stanford.edu/group/lane/irt-cocoon-sitemap-1.0.xsd">
+    xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
         <map:match pattern="search/*" type="wildcard">
             <!-- TODO: set error http codes where necessary -->
@@ -25,7 +25,7 @@
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
-       <map:match pattern="plain/**.html" type="wildcard">
+        <map:match pattern="plain/**.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/{1}.html"/>
             <map:select type="cme-links">
                 <map:when test="true">
@@ -38,15 +38,6 @@
                     <map:transform type="proxy-links"/>
                 </map:when>
             </map:select>
-            <map:transform type="namespace-filter"/>
-            <map:serialize type="html5"/>
-       </map:match>
-        <map:match pattern="med-history/wilson/*.html" type="wildcard">
-            <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
-                <map:generate type="file" src="cocoon://content/med-history/wilson/{1}.html"/>
-                <map:generate type="file" src="cocoon://content/templates/wilson.xml"/>
-            </map:aggregate>
-            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:transform type="namespace-filter"/>
             <map:serialize type="html5"/>
         </map:match>

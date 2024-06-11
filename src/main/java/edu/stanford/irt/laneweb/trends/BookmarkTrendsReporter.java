@@ -14,8 +14,6 @@ public class BookmarkTrendsReporter {
 
     private BookmarkService bookmarkService;
 
-    private GoogleTracker googleTracker;
-    
     private GoogleA4Tracker googleA4Tracker;
 
     private String localHostname;
@@ -23,16 +21,14 @@ public class BookmarkTrendsReporter {
     /**
      * @param bookmarkService
      *            the bookmarkService to set
-     * @param googleTracker
-     *            the googleTracker to set
+     * @param googleA4Tracker
+     *            the googleA4Tracker to set
      * @param googleA4Tracker 
      * @param localHostName
      *            the hostname
      */
-    public BookmarkTrendsReporter(final BookmarkService bookmarkService, final GoogleTracker googleTracker,
-            GoogleA4Tracker googleA4Tracker, final String localHostName) {
+    public BookmarkTrendsReporter(final BookmarkService bookmarkService, GoogleA4Tracker googleA4Tracker, final String localHostName) {
         this.bookmarkService = bookmarkService;
-        this.googleTracker = googleTracker;
         this.googleA4Tracker = googleA4Tracker;
         this.localHostname = localHostName;
     }
@@ -42,8 +38,7 @@ public class BookmarkTrendsReporter {
     public void reportCount() {
         try {
         	int boobkemarkCount = this.bookmarkService.getRowCount();
-        	this.googleTracker.trackEvent("/bookmarks", "laneTrends:bookmark", this.localHostname, "dailyUserCount", boobkemarkCount);
-            this.googleA4Tracker.trackEvent("/bookmarks" , "laneTrends:bookmark", this.localHostname, "dailyUserCount" , boobkemarkCount);
+        	this.googleA4Tracker.trackEvent("/bookmarks" , "laneTrends:bookmark", this.localHostname, "dailyUserCount" , boobkemarkCount);
         } catch (LanewebException e) {
             log.error(e.getMessage(), e);
         }

@@ -6,7 +6,7 @@
 
     "use strict";
 
-    var PROXY_HOST_PATTERN = "^(?:login\\.)?laneproxy.stanford.edu$",
+    let PROXY_HOST_PATTERN = "^(?:login\\.)?laneproxy.stanford.edu$",
         PROXY_LOGIN_PATH = "/login",
         basePath = L.Model.get("base-path") || "",
         documentHostName = location.hostname,
@@ -18,12 +18,12 @@
     linkInfo.prototype = {
 
         _isLocalPopup : function(node) {
-            var rel = node.rel;
+            let rel = node.rel;
             return rel && rel.indexOf("popup local") === 0;
         },
 
         _getTitleFromImg : function() {
-            var i, title, img = this.node.querySelectorAll('img');
+            let i, title, img = this.node.querySelectorAll('img');
             for (i = 0; i < img.length; i++) {
                 if (img.item(i).alt) {
                     title = img.item(i).alt;
@@ -42,7 +42,7 @@
         linkHost : {
             writeable: false,
             get: function() {
-                var host = this.node.hostname;
+                let host = this.node.hostname;
                 host = host || documentHostName;
                 if (host.indexOf(":") > -1) {
                     host = host.substring(0, host.indexOf(":"));
@@ -59,7 +59,7 @@
         path : {
             writeable: false,
             get: function() {
-                var path = this.node.pathname;
+                let path = this.node.pathname;
                 path = path === undefined || path === "" ? location.pathname : path;
                 return path.indexOf("/") === 0 ? path : "/" + path;
             }
@@ -95,7 +95,7 @@
             writeable: false,
             get: function() {
                 //if there is a title attribute, use that.
-                var node = this.node, title = node.title;
+                let node = this.node, title = node.title;
                 //next try alt attribute.
                 if (!title) {
                     title = node.alt;
@@ -133,7 +133,7 @@
         trackingData : {
             writeable: false,
             get: function() {
-                var host, path, query, title, external;
+                let host, path, query, title, external;
                 if ( this.proxy || this.proxyLogin) {
                     host = this.url;
                     host = host.substring(host.indexOf("//") + 2);
@@ -160,7 +160,7 @@
         url : {
             writeable: false,
             get: function() {
-                var href = this.node.href;
+                let href = this.node.href;
                 if (this.proxy || this.proxyLogin) {
                     href = href.substring(href.indexOf("url=") + 4);
                 } 

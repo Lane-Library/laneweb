@@ -2,7 +2,7 @@
 
     "use strict";
 
-    var Lang = Y.Lang,
+    let Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
         OY = -10000,
@@ -85,7 +85,7 @@
          * to set the content of the tooltip for the current trigger node
          */
         setTriggerContent : function(content) {
-            var i, l, contentBox = this.get("contentBox");
+            let i, l, contentBox = this.get("contentBox");
             contentBox.set("innerHTML", "");
 
             if (content) {
@@ -135,7 +135,7 @@
          * current delegate node
          */
         _bindDelegate : function() {
-            var eventHandles = this._eventHandles;
+            let eventHandles = this._eventHandles;
 
             if (eventHandles.delegate) {
                 eventHandles.delegate.detach();
@@ -151,7 +151,7 @@
          * if the mouseover enters a trigger node.
          */
         _onNodeMouseEnter : function(e) {
-            var node = e.currentTarget;
+            let node = e.currentTarget;
             if (node && (!this._currTrigger.node || !node.compareTo(this._currTrigger.node))) {
                 this._enterTrigger(node, e.pageX, e.pageY, e.clientX, e.clientY);
             }
@@ -191,7 +191,7 @@
          * if the default handler has not been prevented.
          */
         _defTriggerEnterFn : function(e) {
-            var delay, node = e.node;
+            let delay, node = e.node;
             if (!this.get("disabled")) {
                 this._clearTimers();
                 delay = (this.get("visible")) ? 0 : this.get("showDelay");
@@ -230,7 +230,7 @@
          * position.
          */
         _showTooltip : function() {
-            var tt = document.querySelector(".yui3-tooltip"),
+            let tt = document.querySelector(".yui3-tooltip"),
                 height = tt.clientHeight,
                 width = tt.clientWidth,
                 x = this._currTrigger.mouseX,
@@ -279,7 +279,7 @@
          * c). From the title attribute if set.
          */
         _setTriggerContent : function(node) {
-            var content = this.get("content");
+            let content = this.get("content");
             if (content && !(content instanceof Node || Lang.isString(content))) {
                 content = content[node.get("id")] || node.getAttribute("title");
             }
@@ -293,7 +293,7 @@
          */
         _setCurrentTrigger : function(node, x, y, mouseClientX, mouseClientY) {
 
-            var currTrigger = this._currTrigger,
+            let currTrigger = this._currTrigger,
                 triggerHandles = this._eventHandles.trigger,
                 title;
 
@@ -321,7 +321,7 @@
          */
         _clearCurrentTrigger : function() {
 
-            var currTrigger = this._currTrigger,
+            let currTrigger = this._currTrigger,
                 triggerHandles = this._eventHandles.trigger,
                 node,
                 title;
@@ -347,7 +347,7 @@
          * Cancel any existing show/hide timers
          */
         _clearTimers : function() {
-            var timers = this._timers;
+            let timers = this._timers;
             if (timers.hide) {
                 timers.hide.cancel();
                 timers.hide = null;
@@ -362,7 +362,7 @@
          * Detach any stored event handles
          */
         _clearHandles : function() {
-            var eventHandles = this._eventHandles;
+            let eventHandles = this._eventHandles;
 
             if (eventHandles.delegate) {
                 this._eventHandles.delegate.detach();
@@ -463,7 +463,7 @@
     }),
 
     createTooltips = function() {
-            var tooltipTriggerIds,
+            let tooltipTriggerIds,
                 tooltipContainer, tooltipId, i, j, tt, content = {},
                 tooltipContainerNodeList = document.querySelectorAll('.tooltips');
             for (i = 0; i < tooltipContainerNodeList.length; i++) {

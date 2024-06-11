@@ -20,9 +20,10 @@ import org.junit.Test;
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
+
 
 public class AbstractEresourcesGeneratorTest {
 
@@ -30,14 +31,14 @@ public class AbstractEresourcesGeneratorTest {
 
         private List<Eresource> eresourceList;
 
-        public TestAbstractEresourcesGenerator(final SolrService solrService,
+        public TestAbstractEresourcesGenerator(final EresourceBrowseService restBrowseService,
                 final SAXStrategy<PagingEresourceList> saxStrategy, final List<Eresource> eresourceList) {
-            super("type", solrService, saxStrategy);
+            super("type", restBrowseService, saxStrategy);
             this.eresourceList = eresourceList;
         }
 
         @Override
-        protected List<Eresource> getEresourceList(final SolrService solrService) {
+        protected List<Eresource> getEresourceList(final  EresourceBrowseService restBrowseService) {
             return this.eresourceList;
         }
 
@@ -55,27 +56,27 @@ public class AbstractEresourcesGeneratorTest {
 
     private SAXStrategy<PagingEresourceList> saxStrategy;
 
-    private SolrService solrService;
+    private EresourceBrowseService restBrowseService;
 
     private XMLConsumer xmlConsumer;
 
     @Before
     public void setUp() throws Exception {
-        this.solrService = mock(SolrService.class);
+        this.restBrowseService = mock(EresourceBrowseService.class);
         this.eresource = mock(Eresource.class);
         this.eresourceList = Collections.singletonList(this.eresource);
         this.saxStrategy = mock(SAXStrategy.class);
         this.xmlConsumer = mock(XMLConsumer.class);
-        this.generator = new TestAbstractEresourcesGenerator(this.solrService, this.saxStrategy, this.eresourceList);
+        this.generator = new TestAbstractEresourcesGenerator(this.restBrowseService, this.saxStrategy, this.eresourceList);
     }
 
     @Test
     public void testDoGenerate() {
         this.generator.setModel(Collections.emptyMap());
         this.saxStrategy.toSAX(isA(PagingEresourceList.class), eq(this.xmlConsumer));
-        replay(this.solrService, this.eresource, this.saxStrategy, this.xmlConsumer);
+        replay(this.restBrowseService, this.eresource, this.saxStrategy, this.xmlConsumer);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.solrService, this.eresource, this.saxStrategy, this.xmlConsumer);
+        verify(this.restBrowseService, this.eresource, this.saxStrategy, this.xmlConsumer);
     }
 
     @Test

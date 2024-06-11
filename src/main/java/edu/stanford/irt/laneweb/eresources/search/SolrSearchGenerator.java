@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
+import static org.springframework.data.domain.PageRequest.of;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -13,20 +15,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.data.solr.core.query.SolrPageRequest;
-import org.springframework.data.solr.core.query.result.HighlightEntry;
-import org.springframework.data.solr.core.query.result.HighlightEntry.Highlight;
-import org.springframework.data.solr.core.query.result.SolrResultPage;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.eresources.Eresource;
-import edu.stanford.irt.laneweb.eresources.SolrService;
+import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
+import edu.stanford.irt.laneweb.eresources.model.Eresource;
+import edu.stanford.irt.laneweb.eresources.model.solr.HighlightEntry;
+import edu.stanford.irt.laneweb.eresources.model.solr.HighlightEntry.Highlight;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestPage;
+import edu.stanford.irt.laneweb.eresources.model.solr.RestResult;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
 
-public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResult> {
+public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eresource>> {
 
     private static final int DEFAULT_RESULTS = 20;
 
@@ -36,17 +38,18 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
 
     private Integer pageNumber = Integer.valueOf(0);
 
-    private String searchTerm;
+    private EresourceSearchService searchService;
 
-    private SolrService solrService;
+    private String searchTerm;
 
     private String sort;
 
     private String type;
 
-    public SolrSearchGenerator(final SolrService solrService, final SAXStrategy<SolrSearchResult> saxStrategy) {
+    public SolrSearchGenerator(final EresourceSearchService searchService,
+            final SAXStrategy<RestResult<Eresource>> saxStrategy) {
         super(saxStrategy);
-        this.solrService = solrService;
+        this.searchService = searchService;
     }
 
     @Override
@@ -87,31 +90,7 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
         }
     }
 
-    private void highlightResults(final Page<Eresource> page) {
-        if (null != page) {
-            SolrResultPage<Eresource> solrPage = (SolrResultPage<Eresource>) page;
-            if (!solrPage.getHighlighted().isEmpty()) {
-                solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
-                    Eresource er = hightlight.getEntity();
-                    hightlight.getHighlights().forEach((final Highlight h) -> {
-                        String field = h.getField().getName();
-                        String highlightedData = h.getSnipplets().get(0);
-                        if ("title".equals(field)) {
-                            er.setTitle(highlightedData);
-                        } else if ("description".equals(field)) {
-                            er.setDescription(highlightedData);
-                        } else if ("publicationText".equals(field)) {
-                            er.setPublicationText(highlightedData);
-                        } else if ("publicationAuthorsText".equals(field)) {
-                            er.setPublicationAuthorsText(highlightedData);
-                        }
-                    });
-                });
-            }
-        }
-    }
-
-    private Sort parseSortParam() {
+    private Pageable getPageRequest() {
         List<Order> orders = new ArrayList<>();
         for (String string : this.sort.split(",")) {
             String[] s = string.split(" ");
@@ -120,30 +99,51 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<SolrSearchResul
             }
         }
         if (!orders.isEmpty()) {
-            return Sort.by(orders);
+            return of(this.pageNumber.intValue(), DEFAULT_RESULTS, Sort.by(orders));
         }
-        return null;
+        return of(this.pageNumber.intValue(), DEFAULT_RESULTS);
+    }
+
+    private void highlightPage(final Page<Eresource> page) {
+        RestPage<Eresource> solrPage = (RestPage<Eresource>) page;
+        if (!solrPage.getHighlighted().isEmpty()) {
+            solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
+                Eresource er = hightlight.getEntity();
+                hightlight.getHighlights().forEach((final Highlight h) -> {
+                    String field = h.getField().getName();
+                    String highlightedData = h.getSnipplets().get(0);
+                    if ("title".equals(field)) {
+                        er.setTitle(highlightedData);
+                    } else if ("description".equals(field)) {
+                        er.setDescription(highlightedData);
+                    } else if ("publicationText".equals(field)) {
+                        er.setPublicationText(highlightedData);
+                    } else if ("publicationAuthorsText".equals(field)) {
+                        er.setPublicationAuthorsText(highlightedData);
+                    }
+                });
+            });
+        }
     }
 
     @Override
-    protected SolrSearchResult doSearch(final String query) {
-        Sort sorts = parseSortParam();
-        Pageable pageRequest = new SolrPageRequest(this.pageNumber.intValue(), DEFAULT_RESULTS, sorts);
+    protected RestResult<Eresource> doSearch(final String query) {
+        Pageable pageRequest = this.getPageRequest();
         Page<Eresource> page;
         if (this.type == null) {
-            page = this.solrService.searchWithFilters(query, this.facets, pageRequest);
+            page = this.searchService.searchWithFilters(query, this.facets, pageRequest);
         } else {
-            page = this.solrService.searchType(this.type, this.searchTerm, pageRequest);
+            page = this.searchService.searchType(this.type, this.searchTerm, pageRequest);
         }
-        highlightResults(page);
+        highlightPage(page);
         if (this.pageNumber == 0) {
             checkForExactMatch(page);
         }
-        return new SolrSearchResult(query, page);
+        return new RestResult<>(query, page);
     }
 
     @Override
-    protected SolrSearchResult getEmptyResult() {
-        return SolrSearchResult.EMPTY_RESULT;
+    protected RestResult<Eresource> getEmptyResult() {
+        return RestResult.EMPTY_RESULT;
     }
 }
