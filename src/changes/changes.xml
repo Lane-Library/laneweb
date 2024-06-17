@@ -5,7 +5,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-       <release date="2024-05-13" version="3.13.8" description="emergency release">
+       <release date="2024-06-17" version="3.13.8" description="bug fix and update release">
+            <action date="2024-06-17" dev="alainb" issue="LANEWEB-11330" type="update">
+                Update the laneweb packaging from war to jar
+            </action>
+            <action date="2024-06-17" dev="alainb" issue="LANEWEB-11327" type="update">
+                The login doesn't work if there is a context path
+            </action>
+       </release>
+       <release date="2024-05-13" version="3.13.8" description="bug fix and update release">
             <action date="2024-05-08" dev="ryanmax" issue="LANEWEB-11326" type="update">
                 Update error message when moving bookmark fails
             </action>
