@@ -30,9 +30,6 @@ import jakarta.servlet.ServletContext;
 @ImportResource({ "classpath:/spring/applications.xmap", "classpath:/spring/bookmarks.xmap",
         "classpath:/spring/libcals.xmap", "classpath:/spring/content.xmap", "classpath:/spring/eresources.xmap",
         "classpath:/spring/libguides.xmap", "classpath:/spring/rss.xmap", "classpath:/spring/sitemap.xmap" })
-@ComponentScan({ "edu.stanford.irt.laneweb.config", "edu.stanford.irt.solr.service",
-        "edu.stanford.irt.laneweb.servlet.mvc", "edu.stanford.irt.laneweb.bookmarks",
-        "edu.stanford.irt.laneweb.livechat" })
 public class LanewebConfiguration {
 
     private Map<String, Object> constants;
