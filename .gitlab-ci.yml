@@ -2,6 +2,10 @@ include:
   - project: "irt-lane/som-laneweb"
     file: "/cicd/build-maven-image.yml"
   - project: "irt-lane/som-laneweb"
+    file: "/cicd/sonar-maven-scan.yml"
+  - project: "irt-lane/som-laneweb"
+    file: "/cicd/snyk-maven-scan.yml"
+  - project: "irt-lane/som-laneweb"
     file: "/cicd/trigger-downstream.yml"
 
 variables:

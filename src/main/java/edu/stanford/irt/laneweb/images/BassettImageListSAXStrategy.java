@@ -75,32 +75,34 @@ public class BassettImageListSAXStrategy implements SAXStrategy<Page<BassettImag
 
     private void handleEresource(final XMLConsumer xmlConsumer, final BassettImage bassett) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
-        attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT, attributes);
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, TITLE);
-        XMLUtils.data(xmlConsumer, bassett.getTitle());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, TITLE);
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT_IMAGE);
-        XMLUtils.data(xmlConsumer, bassett.getSource());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT_IMAGE);
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, DIAGRAM);
-        XMLUtils.data(xmlConsumer, bassett.getDiagram());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, DIAGRAM);
-        XMLUtils.startElement(xmlConsumer, NAMESPACE, LEGEND_IMAGE);
-        XMLUtils.data(xmlConsumer, bassett.getLatinLegend());
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, LEGEND_IMAGE);
-        if (null != bassett.getEnglishLegend()) {
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, LEGEND);
-            XMLUtils.data(xmlConsumer, bassett.getEnglishLegend());
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, LEGEND);
+        if (bassett != null) {
+            attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT, attributes);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, TITLE);
+            XMLUtils.data(xmlConsumer, bassett.getTitle());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, TITLE);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, BASSETT_IMAGE);
+            XMLUtils.data(xmlConsumer, bassett.getSource());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT_IMAGE);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, DIAGRAM);
+            XMLUtils.data(xmlConsumer, bassett.getDiagram());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, DIAGRAM);
+            XMLUtils.startElement(xmlConsumer, NAMESPACE, LEGEND_IMAGE);
+            XMLUtils.data(xmlConsumer, bassett.getLatinLegend());
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, LEGEND_IMAGE);
+            if (null != bassett.getEnglishLegend()) {
+                XMLUtils.startElement(xmlConsumer, NAMESPACE, LEGEND);
+                XMLUtils.data(xmlConsumer, bassett.getEnglishLegend());
+                XMLUtils.endElement(xmlConsumer, NAMESPACE, LEGEND);
+            }
+            if (null != bassett.getDescription()) {
+                XMLUtils.startElement(xmlConsumer, NAMESPACE, DESCRIPTION);
+                XMLUtils.data(xmlConsumer, bassett.getDescription());
+                XMLUtils.endElement(xmlConsumer, NAMESPACE, DESCRIPTION);
+            }
+            handleRegion(xmlConsumer, bassett);
+            XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT);
         }
-        if (null != bassett.getDescription()) {
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, DESCRIPTION);
-            XMLUtils.data(xmlConsumer, bassett.getDescription());
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, DESCRIPTION);
-        }
-        handleRegion(xmlConsumer, bassett);
-        XMLUtils.endElement(xmlConsumer, NAMESPACE, BASSETT);
     }
 
     private void handlePaging(final XMLConsumer xmlConsumer, final Page<BassettImage> page) throws SAXException {
