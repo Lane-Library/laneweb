@@ -1,36 +1,14 @@
 include:
   - project: "irt-lane/som-laneweb"
     file: "/cicd/build-maven-image.yml"
-  # temporarily disable sonar scanning
+  # disable sonar scanning: integration tests are failing because runner lacks access to eresource-service, etc.
+  # on-prem Jenkins CICD does sonar scanning so likely not needed here
   #- project: "irt-lane/som-laneweb"
   #  file: "/cicd/sonar-maven-scan.yml"
   - project: "irt-lane/som-laneweb"
     file: "/cicd/snyk-maven-scan.yml"
   - project: "irt-lane/som-laneweb"
     file: "/cicd/trigger-downstream.yml"
-
-# test to use "gce" profile during integration tests
-sonar-scan:
-  stage: code-analysis
-  image: maven:latest
-  variables:
-    #SONAR_TOKEN: "defined in .gitlab-ci.sec"
-    SONAR_HOST_URL: "https://sonarqube.med.stanford.edu"
-    GIT_DEPTH: 0
-    SONAR_SCAN_OPT: "-Dsonar.qualitygate.wait=true"
-  script:
-    - git clone --depth 1 https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/irt-lane/som-laneweb.git som-laneweb
-    - mkdir -p .mvn && cp -n som-laneweb/maven-settings/.mvn/* .mvn/
-    - cp -n som-laneweb/maven-settings/settings.xml settings.xml
-    #- mvn -s settings.xml verify sonar:sonar $SONAR_SCAN_OPT
-    #- mvn -s settings.xml verify sonar:sonar -Dspring.config.additional-location=file:./src/main/resources/config/application-gce.properties -Dspring.profiles.active=gce -Dsonar.qualitygate.wait=true
-    - curl -v https://lane-api-dev.stanford.edu/eresource-service/status.txt
-    - mvn -X -s settings.xml verify sonar:sonar \ 
-      -Dsonar.qualitygate.wait=true \
-      -Dedu.stanford.irt.laneweb.eresource-search-service.scheme=https \
-      -Dedu.stanford.irt.laneweb.eresource-search-service.host=lane-api-dev.stanford.edu \
-      -Dedu.stanford.irt.laneweb.eresource-search-service.port=443 \
-      -Dedu.stanford.irt.laneweb.eresource-search-service.path=/eresource-service/
 
   cache:
     key: mavenrepo
