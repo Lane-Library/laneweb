@@ -10,14 +10,6 @@ include:
   - project: "irt-lane/som-laneweb"
     file: "/cicd/trigger-downstream.yml"
 
-  cache:
-    key: mavenrepo
-    paths:
-      - ./.m2/repository
-  allow_failure: true
-  tags:
-    - prod-services
-
 variables:
   IMAGE_NAME: "laneweb"
   KANIKO_CACHE: "true"
