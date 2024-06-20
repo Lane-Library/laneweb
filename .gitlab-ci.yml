@@ -17,12 +17,13 @@ sonar-scan:
     #SONAR_TOKEN: "defined in .gitlab-ci.sec"
     SONAR_HOST_URL: "https://sonarqube.med.stanford.edu"
     GIT_DEPTH: 0
-    SONAR_SCAN_OPT: "-Dspring.profiles.active=gce -Dsonar.qualitygate.wait=true"
+    SONAR_SCAN_OPT: "-Dspring.config.additional-location=file:./src/main/resources/config/application-gce.properties -Dspring.profiles.active=gce -Dsonar.qualitygate.wait=true"
   script:
     - git clone --depth 1 https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/irt-lane/som-laneweb.git som-laneweb
     - mkdir -p .mvn && cp -n som-laneweb/maven-settings/.mvn/* .mvn/
     - cp -n som-laneweb/maven-settings/settings.xml settings.xml
-    - mvn -s settings.xml verify sonar:sonar $SONAR_SCAN_OPT
+    #- mvn -s settings.xml verify sonar:sonar $SONAR_SCAN_OPT
+    - mvn -s settings.xml verify sonar:sonar -Dspring.config.additional-location=file:./src/main/resources/config/application-gce.properties -Dspring.profiles.active=gce -Dsonar.qualitygate.wait=true
   cache:
     key: mavenrepo
     paths:
