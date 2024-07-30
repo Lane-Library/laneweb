@@ -22,7 +22,7 @@
     <xsl:variable name="pageless-query-string" select="replace($query-string,'&amp;page=\d+','')" />
     <xsl:variable name="facet-search-base-path" select="concat('?',replace($pageless-query-string,'&amp;(facets=[^&amp;]+|facet.sort=index|facets=)',''))" />
     <xsl:variable name="values-per-facet" select="4" />
-    <xsl:variable name="current-year" select="year-from-date(current-date())" />
+    <xsl:variable name="max-year" select="year-from-date(current-date()) + 5" />
 
     <xsl:variable name="filter-facet">
         <div class="filter-facet module">
@@ -179,8 +179,8 @@
                         <span id="facet-error-message">
                         </span>
                         <form action="" method="get" id="solr-date-form">
-                            <input name="start-year" aria-label="Start Year" type="number" class="date start" min="1400" max="{$current-year}" value="{$start-year}" required="true" placeholder="From" />
-                            <input name="end-year" aria-label="End Year" type="number" class="date end" min="1400" max="{$current-year}" value="{$end-year}" required="true" placeholder="To" />
+                            <input name="start-year" aria-label="Start Year" type="number" class="date start" min="1400" max="{$max-year}" value="{$start-year}" required="true" placeholder="From" />
+                            <input name="end-year" aria-label="End Year" type="number" class="date end" min="1400" max="{$max-year}" value="{$end-year}" required="true" placeholder="To" />
                             <input type="submit" value="Add" class="date" />
                         </form>
                     </div>
