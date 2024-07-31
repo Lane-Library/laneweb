@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>156</version>
+        <version>157</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.13.11-SNAPSHOT</version>
@@ -47,7 +47,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>${org.springframework.boot.version}</version>
-        </dependency>
+         </dependency>
          <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
@@ -71,7 +71,8 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>${org.springframework.boot.version}</version>
+            <!-- <version>${org.springframework.boot.version}</version> -->
+            <version>3.3.1</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
@@ -81,7 +82,7 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.10.2</version>
+            <version>5.10.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,7 +92,7 @@
         <dependency>
             <artifactId>commons-codec</artifactId>
             <groupId>commons-codec</groupId>
-            <version>1.16.1</version>
+            <version>1.17.1</version>
         </dependency>
         <dependency>
             <artifactId>jackson-databind</artifactId>
@@ -112,7 +113,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>12.4</version>
+            <version>12.5</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -459,7 +460,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>8.0.2</version>
+                <version>9.0.1</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
