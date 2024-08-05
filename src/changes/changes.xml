@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+       <release date="2024-08-05" version="3.13.11" description="bug fix and update release">
+            <action date="2024-07-30" dev="ryanmax" issue="LANEWEB-11337" type="update"> 
+                Lane Search: cannot filter to include 2025 
+            </action>
+            <action date="2024-06-19" dev="alainb" issue="LANEWEB-11343" type="update"> 
+                Update footer background color 
+            </action>
+        </release>
        <release date="2024-06-24" version="3.13.10" description="bug fix and update release">
             <action date="2024-04-26" dev="ryanmax" issue="LANEWEB-11317" type="update">
                  Use Artifact Registry instead of Nexus
