@@ -1,8 +1,10 @@
 include:
   - project: "irt-lane/som-laneweb"
     file: "/cicd/build-maven-image.yml"
-  - project: "irt-lane/som-laneweb"
-    file: "/cicd/sonar-maven-scan.yml"
+  # disable sonar scanning: integration tests are failing because runner lacks access to eresource-service, etc.
+  # on-prem Jenkins CICD does sonar scanning so likely not needed here
+  #- project: "irt-lane/som-laneweb"
+  #  file: "/cicd/sonar-maven-scan.yml"
   - project: "irt-lane/som-laneweb"
     file: "/cicd/snyk-maven-scan.yml"
   - project: "irt-lane/som-laneweb"
