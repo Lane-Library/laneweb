@@ -22,28 +22,26 @@ ul .nav-menu {
  }
 .nav-menu>span a {
 	color: black;
+	cursor: pointer;
 }
 .nav-menu>span {
-	color: black;
 	display: block;
 	font-size: 1.125em;
 	text-align: center;
 	white-space: nowrap;
 	line-height: 64px;
 	font-weight: 600;
-}
-
-.nav-menu>span {
 	cursor: default;
+	
 }
 
-.nav-menu>span a {
-	cursor: pointer;
+.nav-menu>span.btm-brdr-red label{
+	border-bottom: 4px solid #8c1515;
+	padding-bottom: 17px;
 }
 
 .nav-menu:hover, .nav-menu:active, .nav-menu-active {
-	background-color: #f0f4f5;
-	border: none;
+	background-color: #f0f4f5;	
 }
 
 .nav-menu.nav-menu-active>span, .nav-menu:hover>span {

@@ -15,13 +15,34 @@ ol li{
     border-bottom: none;
 }
 
+.content .bulleted-list li, .content ol li{
+    border-bottom: none;
+}
+
 .bulleted-list{
     font-size: 1em;
     list-style-type: disc;
     padding: 0 0 20px 20px;
 }
 
-.bulleted-list li{
-    border-bottom: none;
+.bulleted-list li, .links-list li{
     padding: 0;
+}
+.links-list li{
+    padding: 18px 0;
+    border-bottom-color: #D5DADC;
+}
+
+.links-list li a{
+    font-size: 1em;
+    text-decoration: solid underline;    
+}
+
+
+.links-list li a::after{
+    content: "\f061";
+	font-size: 1em;
+    font-family: FontAwesome, Arial, sans-serif;	
+    margin-left: 6px;
+    display:inline-block;
 }

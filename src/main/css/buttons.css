@@ -106,6 +106,13 @@ http://lane.stanford.edu/samples/button-css.html
     background-color: #651C32;
 }
 
+.btn.angle-down::after {
+	content: "\f107";
+	font-family: FontAwesome, Arial, sans-serif;
+	font-size: 1em;
+	margin-left: 9px;
+}
+
 .btn:active  .icon {
     background-color: #430A0A;
 }
@@ -157,7 +164,7 @@ http://lane.stanford.edu/samples/button-css.html
 /*  Alternate icon without background */
 .btn  .icon-alt {
 	border-radius: 12px;
-	font-size: 0.9375em;
+	font-size:  0.75em;
 	height: 24px;
 	width: 24px;
 	padding: 4px;
