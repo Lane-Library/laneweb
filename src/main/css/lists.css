@@ -7,7 +7,7 @@ ol li{
 
 .content li{
     border-bottom: solid 1px #f0f4f5;
-    padding: 6px 0;
+    padding: 0.375em 0;
     font-size: 1em;
 }
 
@@ -25,21 +25,23 @@ ol li{
     padding: 0 0 20px 20px;
 }
 
-.bulleted-list li, .links-list li{
-    padding: 0;
+
+.links-list{
+    padding-top: 18px 0;
 }
 .links-list li{
-    padding: 18px 0;
+    margin: 12px 0;
     border-bottom-color: #D5DADC;
 }
 
-.links-list li a{
+.links-list li a:first-child{
     font-size: 1em;
     text-decoration: solid underline;    
+    margin-right: 0.375em;
 }
 
 
-.links-list li a::after{
+.links-list li a:first-child:after{
     content: "\f061";
 	font-size: 1em;
     font-family: FontAwesome, Arial, sans-serif;	

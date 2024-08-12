@@ -1,11 +1,13 @@
 #navigation {
 	flex: 1;
+	max-width: 900px;
+    margin-left: auto;
+	margin-right: auto;
 }
 
 nav>ul {
 	display: flex;
 	justify-content: space-between;
-	padding-left: 5%;
 }
 
 /* Menu header */
@@ -13,8 +15,9 @@ ul .nav-menu {
 	display: inline-block;
 	flex: 1 1 auto;
 	border: 0;
-	padding: 0;
+	padding-top:1.6875em
 }
+
 
  ul .nav-login{
  	display: flex;
@@ -29,15 +32,13 @@ ul .nav-menu {
 	font-size: 1.125em;
 	text-align: center;
 	white-space: nowrap;
-	line-height: 64px;
-	font-weight: 600;
 	cursor: default;
 	
 }
 
 .nav-menu>span.btm-brdr-red label{
 	border-bottom: 4px solid #8c1515;
-	padding-bottom: 17px;
+	padding-bottom: 0.6875em;
 }
 
 .nav-menu:hover, .nav-menu:active, .nav-menu-active {
