@@ -20,14 +20,12 @@
 .general-dropdown-trigger{
     cursor: pointer;
     position: relative;
-    padding: 4px 8px;
-    border: 1px solid #dadad9;
-    margin-left: 6px;
     white-space: nowrap;
 }
 
-.general-dropdown-trigger .fa-regular{
-    margin-left: 8px;
+
+.general-dropdown-trigger .fa{
+    margin-left: 18px;
 }
 
 .general-dropdown-content {

@@ -1,13 +1,16 @@
 .hero-unit {
 	color: white;
-	background-color: #8c1515;
-	background-image: url('../images/hero-bkgrd.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center bottom;
 	width: 100%;
 	padding-top: 67px;
 	min-height: 204px;
+	background: linear-gradient(180deg, rgba(0, 128, 145, 0.50) 0%, rgba(184, 228, 234, 0.50) 100%), 
+								linear-gradient(0deg, rgba(50, 133, 169, 0.70) 0%,
+								 rgba(50, 133, 169, 0.70) 100%), 
+								 linear-gradient(0deg, rgba(0, 73, 89, 0.20) 0%, 
+								 rgba(0, 73, 89, 0.20) 100%), 
+								 url('../images/hero-books-bkgrd.jpg') lightgray -482px -502.171px / 129.561% 518.39% 
+								 no-repeat;
+	background-blend-mode: normal, normal, multiply, normal;
 }
 
 .hero-unit-front-page {
@@ -16,6 +19,7 @@
 }
 
 .search-form {
+	font-size: 1.125em;
 	position: relative;
 	width: 50%;
 	margin: auto;
@@ -27,17 +31,15 @@
 	padding: 0px;
 	display: flex;
 	background-color: white;
-	height: 46px;
+	height: 60px;
 }
 
 .search-form .search-dropdown {
-	height: 46px;
-	padding-top: 13px;
+	padding: 1.125em 1.6875em;
 	margin-left: 0;
 	border: none;
 	border-radius: 0;
 	display: inline-block;
-	border-right: 1px solid rgb(0 0 0/ 20%);
 	overflow: hidden;
 }
 
@@ -48,9 +50,8 @@
 }
 
 .search-form input {
-	font-size: 0.875em;
-	height: 46px;
-	padding-left: 30px;
+	height: 60px;
+	padding-left: 36px;
 	border: 1px white;
 	outline: none;
 	width: 95%;
@@ -67,7 +68,7 @@
 	display: block;
 	top: -1px;
 	left: 0;
-	height: 46px;
+	height: 60px;
 	outline: 0;
 	margin: 0;
 	opacity: 0;
@@ -168,7 +169,7 @@
 	background-color: transparent;
 	position: absolute;
 	right: 15px;
-	top: 14px;
+	top: 21px;
 	display: none;
 }
 
@@ -196,6 +197,7 @@
 .search-button .fa-solid.fa-magnifying-glass {
 	color: lightslategrey;
 	padding-left: 9px;
+	padding-top: 7px;
 }
 
 .search-indicator {
