@@ -3,6 +3,7 @@
 	max-width: 900px;
     margin-left: auto;
 	margin-right: auto;
+	padding: 0px 12px;
 }
 
 nav>ul {
@@ -15,7 +16,6 @@ ul .nav-menu {
 	display: inline-block;
 	flex: 1 1 auto;
 	border: 0;
-	padding-top:1.6875em
 }
 
 
@@ -33,12 +33,17 @@ ul .nav-menu {
 	text-align: center;
 	white-space: nowrap;
 	cursor: default;
-	
+	line-height: 64px;	
+	padding-top: 5px;
 }
 
 .nav-menu>span.btm-brdr-red label{
 	border-bottom: 4px solid #8c1515;
-	padding-bottom: 0.6875em;
+	padding-bottom: 17px;
+}
+.nav-menu:hover span.btm-brdr-red label{
+	border: none;
+	
 }
 
 .nav-menu:hover, .nav-menu:active, .nav-menu-active {
