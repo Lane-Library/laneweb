@@ -60,7 +60,8 @@
         "use-lane.css",
         "IE.css",
         "responsive.css",
-        "altmetric.css"
+        "altmetric.css",
+        "basic-card.css"
       ]
     },
     {

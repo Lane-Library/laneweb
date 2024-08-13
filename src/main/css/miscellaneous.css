@@ -137,11 +137,6 @@ hr {
     text-transform: uppercase;
 }
 
-.centered-text {
-    text-align: center;
-}   
-
-
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 .bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE, .no-js {
     display: none;
@@ -245,6 +240,10 @@ hr {
 .zotero-metadata {
     display: none;
 }
+
+.centered-text {
+    text-align: center;
+} 
 
 .centered {
 	position: relative;
