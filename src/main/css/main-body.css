@@ -20,11 +20,6 @@ header:nth-of-type(2){
 }
 
 
-.centered {
-	position: relative;
-	margin: 0 5%;
-}
-
 .content {
 	color: black;
 	position: relative;
@@ -34,3 +29,4 @@ header:nth-of-type(2){
     position: sticky;
     top: 80px;
 }
+

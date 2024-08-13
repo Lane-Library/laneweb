@@ -25,6 +25,18 @@
 	width: 25%;
 }
 
+#mc_embed_signup input[type='email'] {
+	padding: 11px;
+	margin-right: 6px;
+	outline: none;
+	width: 25%;
+	border: 1px solid #D5D5D4;
+	border-bottom: 3px solid #D5D5D4;
+}
+#mc_embed_signup div.mailchimp {
+	display: inline-block;
+}
+
 @media ( max-width :812px) {
 	.subscription>div {
 		padding: 1em;
