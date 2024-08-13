@@ -30,9 +30,11 @@
 	margin-right: 6px;
 	outline: none;
 	width: 25%;
+	border-radius: 3px;
 	border: 1px solid #D5D5D4;
-	border-bottom: 3px solid #D5D5D4;
+	border-bottom: 2px solid #6D6C69;
 }
+
 #mc_embed_signup div.mailchimp {
 	display: inline-block;
 }
