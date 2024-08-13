@@ -23,8 +23,9 @@
     });
 
     // to select menu  from the header 
-    document.querySelectorAll("li.dropdown.nav-menu span").forEach(function (span) {
+    document.querySelectorAll("nav ul li.nav-menu span").forEach(function (span) {
         span.parentElement.querySelectorAll("a").forEach(function (link) {
+            console.log(link.pathname + " " + window.location.pathname + " " + link.hash + " " + window.location.hash);
             if (link.pathname == window.location.pathname && link.hash == window.location.hash) {
                 span.classList.add("red");
                 span.classList.add("btm-brdr-red");
