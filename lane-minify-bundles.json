@@ -61,7 +61,8 @@
         "IE.css",
         "responsive.css",
         "altmetric.css",
-        "basic-card.css"
+        "basic-card.css",
+        "spacings.css"
       ]
     },
     {

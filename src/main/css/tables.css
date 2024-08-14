@@ -16,11 +16,12 @@ tbody tr:nth-child(odd) {
     background: #ddd;
 }
 
-th, td {
+th,
+td {
     padding: 6px;
 }
 
-thead  th {
+thead th {
     vertical-align: top;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -41,4 +42,45 @@ td:last-child {
 
 tbody tr:last-child {
     border-bottom: 1px solid #d0d8da;
+}
+
+.table {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: 16px;
+    gap: 26px;
+}
+
+.table .header {
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #d0d8da;
+}
+
+.table .row {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.table .cell,
+.table .header {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 11px;
+    word-break: break-word;
+}
+
+
+.table .cell {
+    border-bottom: 1px solid #d0d8da;
+    padding: 28px;
+}
+
+.table .row:nth-child(even) {
+    background-color: #f0f4f5;
 }
