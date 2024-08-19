@@ -3,3 +3,7 @@
 .equipment-icon {
     text-align: center;
 }
+
+.equipment-icon i {
+    color:#666;
+}
