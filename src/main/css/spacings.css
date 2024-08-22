@@ -1,90 +1,321 @@
-.space-md {
+.space-xxs {
     margin: 1px 1px;
 }
 
-.space-lg {
+.space-xs {
     margin: 5px 6px;
 }
 
-.space-xl {
+.space-sm {
     margin: 7px 8px;
 }
 
-.space-2xl {
+.space-md {
     margin: 12px 3px;
 }
 
-.space-3xl {
+.space-lg {
     margin: 18px 10px;
 }
 
-.space-4xl {
-    margin: 22x 10px;
+.space-xl {
+    margin: 22px 10px;
 }
 
-.space-5xl {
+.space-2xl {
     margin: 31px 18px;
 }
 
-.space-6xl {
+.space-3xl {
     margin: 40px 28px;
 }
 
-.space-7xl {
+.space-4xl {
     margin: 49px 36px;
 }
 
-.space-8xl {
+.space-5xl {
     margin: 67px 54px;
 }
 
-.space-9xl {
+.space-6xl {
     margin: 94px 81px;
 }
 
 
 @media (max-width : 812px) {
-    .space-md {
+    .space-xxs {
         margin: 0px 3px;
     }
 
-    .space-lg {
+    .space-xs {
         margin: 0px 3px;
     }
 
-    .space-xl {
+    .space-sm {
         margin: 0px 6px;
     }
 
-    .space-2xl {
+    .space-md {
         margin: 4px;
     }
 
-    .space-3xl {
+    .space-lg {
         margin: 5px;
     }
 
-    .space-4xl {
+    .space-xl {
         margin: 7px;
     }
 
-    .space-5xl {
+    .space-2xl {
         margin: 11px 10px;
     }
 
-    .space-6xl {
+    .space-3xl {
         margin: 13px 7px;
     }
 
-    .space-7xl {
+    .space-4xl {
         margin: 16px 3px;
     }
 
-    .space-8xl {
+    .space-5xl {
         margin: 21px 8px;
     }
 
-    .space-9xl {
+    .space-6xl {
         margin: 26px 13px;
+    }
+}
+
+
+
+
+
+.space-padding-xxs {
+    padding: 1px 1px;
+}
+
+.space-padding-xs {
+    padding: 5px 6px;
+}
+
+.space-padding-sm {
+    padding: 7px 8px;
+}
+
+.space-padding-md {
+    padding: 12px 3px;
+}
+
+.space-padding-lg {
+    padding: 18px 10px;
+}
+
+.space-padding-xl {
+    padding: 22px 10px;
+}
+
+.space-padding-2xl {
+    padding: 31px 18px;
+}
+
+.space-padding-3xl {
+    padding: 40px 28px;
+}
+
+.space-padding-4xl {
+    padding: 49px 36px;
+}
+
+.space-padding-5xl {
+    padding: 67px 54px;
+}
+
+.space-padding-6xl {
+    padding: 94px 81px;
+}
+
+
+@media (max-width : 812px) {
+    .space-padding-xxs {
+        padding: 0px 3px;
+    }
+
+    .space-padding-xs {
+        padding: 0px 3px;
+    }
+
+    .space-padding-sm {
+        padding: 0px 6px;
+    }
+
+    .space-padding-md {
+        padding: 4px;
+    }
+
+    .space-padding-lg {
+        padding: 5px;
+    }
+
+    .space-padding-xl {
+        padding: 7px;
+    }
+
+    .space-padding-2xl {
+        padding: 11px 10px;
+    }
+
+    .space-padding-3xl {
+        padding: 13px 7px;
+    }
+
+    .space-padding-4xl {
+        padding: 16px 3px;
+    }
+
+    .space-padding-5xl {
+        padding: 21px 8px;
+    }
+
+    .space-padding-6xl {
+        padding: 26px 13px;
+    }
+}
+
+
+
+.space-top-xxs {
+    margin-top: 1px;
+}
+
+.space-top-xs {
+    margin-top: 5px;
+}
+
+.space-top-sm {
+    margin-top: 7px;
+}
+
+.space-top-md {
+    margin-top: 12px;
+}
+
+.space-top-lg {
+    margin-top: 18px;
+}
+
+.space-top-xl {
+    margin-top: 22px;
+}
+
+.space-top-2xl {
+    margin-top: 31px;
+}
+
+.space-top-3xl {
+    margin-top: 40px;
+}
+
+.space-top-4xl {
+    margin-top: 49px;
+}
+
+.space-top-5xl {
+    margin-top: 67px;
+}
+
+.space-top-6xl {
+    margin-top: 94px;
+}
+
+
+@media (max-width : 812px) {
+    .space-top-xxs {
+        margin-top: 0px;
+    }
+
+    .space-top-xs {
+        margin-top: 0px;
+    }
+
+    .space-top-sm {
+        margin-top: 0px;
+    }
+
+    .space-top-md {
+        margin-top: 4px;
+    }
+
+    .space-top-lg {
+        margin-top: 5px;
+    }
+
+    .space-top-xl {
+        margin-top: 7px;
+    }
+
+    .space-top-2xl {
+        margin-top: 11px;
+    }
+
+    .space-top-3xl {
+        margin-top: 13px;
+    }
+
+    .space-top-4xl {
+        margin-top: 16px;
+    }
+
+    .space-top-5xl {
+        margin-top: 21px;
+    }
+
+    .space-top-6xl {
+        margin-top: 26px;
+    }
+}
+
+.space-gap-xxs {
+    gap: 3px;
+}
+
+.space-gap-xs {
+    gap: 6px;
+}
+
+.space-gap-sm {
+    gap: 12px;
+}
+
+.space-gap-sm {
+    gap: 18px;
+}
+
+.space-gap-lg {
+    gap: 38px;
+}
+
+.space-gap-xl {
+    gap: 48px;
+}
+
+
+.space-gap-2xl {
+    gap: 58px;
+}
+
+
+@media (max-width : 1100px) {
+
+    .space-gap-xxs,
+    .space-gap-xs,
+    .space-gap-sm,
+    .space-gap-md,
+    .space-gap-lg,
+    .space-gap-xl,
+    .space-gap-2xl {
+        gap: 0;
     }
 }

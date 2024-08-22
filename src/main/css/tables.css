@@ -78,7 +78,7 @@ tbody tr:last-child {
 
 .table .cell {
     border-bottom: 1px solid #d0d8da;
-    padding: 28px;
+    padding: 14px 28px;
 }
 
 .table .row:nth-child(even) {

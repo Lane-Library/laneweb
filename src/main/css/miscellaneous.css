@@ -1,5 +1,9 @@
 /* This file has rules that don't seem to fit anywhere else */
-body, select, input, button, textarea {
+body,
+select,
+input,
+button,
+textarea {
     font-family: 'Source Sans Pro', sans-serif, Arial;
 }
 
@@ -138,12 +142,16 @@ hr {
 }
 
 /*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-.bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE, .no-js {
+.bookmarklet-ie,
+.bookmarklet-edge,
+#bookmarkletIE,
+.no-js {
     display: none;
 }
 
 /*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
-.quote, .quote-sig {
+.quote,
+.quote-sig {
     font-size: 170%;
     line-height: 180%;
 }
@@ -156,6 +164,7 @@ hr {
 .quote-sig {
     text-align: right;
 }
+
 /*the official SoM color palette */
 .backgr-white {
     background-color: #ffffff;
@@ -243,30 +252,59 @@ hr {
 
 .centered-text {
     text-align: center;
-} 
+}
 
 .centered {
-	position: relative;
-	margin: 0 5%;
-}
-.centered-20{
-	position: relative;
-	margin: 0 20%;
+    position: relative;
+    margin: 0 5%;
 }
 
-.centered-30{
-	position: relative;
-	margin: 0 30%;
+.centered-10 {
+    position: relative;
+    margin: 0 10%;
 }
 
-.centered-40{
-	position: relative;
-	margin: 0 40%;
+.centered-20 {
+    position: relative;
+    margin: 0 20%;
 }
- .centered-50{
-	position: relative;
-	margin: 0 50%;
+
+.centered-30 {
+    position: relative;
+    margin: 0 30%;
 }
- .v-space{
-    padding: 8px 0 12px 0;
- }
+
+.centered-40 {
+    position: relative;
+    margin: 0 40%;
+}
+
+.centered-50 {
+    position: relative;
+    margin: 0 50%;
+}
+
+.bottom-line,
+.top-line {
+    position: relative
+}
+
+.bottom-line::before,
+.top-line::before {
+    content: " ";
+    position: absolute;
+    width: 78px;
+    border-top: 3px solid #8C1515;
+    bottom: -12px;
+    left: calc(50% - 39px);
+}
+
+.top-line::before {
+    bottom: 0;
+    top: -18px;
+}
+
+.callout {
+    padding: 12px 24px;
+    background-color: #E1E7E9;
+}

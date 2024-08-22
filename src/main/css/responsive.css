@@ -23,6 +23,19 @@ img {
     z-index: 1;
 }
 
+
+.font-size-l {
+    font-size: 1.3215em;
+}
+
+.font-size-xl {
+    font-size: 1.5em;
+}
+
+.font-size-xxl {
+    font-size: 2.0em;
+}
+
 .menu-toggle:hover {
     text-decoration: none;
 }
@@ -44,6 +57,21 @@ img {
     section.content {
         min-width: 0;
     }
+
+
+    .font-size-l {
+        font-size: 1em;
+    }
+
+    .font-size-xl {
+        font-size: 1.321em;
+        ;
+    }
+
+    .font-size-xxl {
+        font-size: 1.75em;
+    }
+
 
     /* first container if no h1   */
     .top-container {
@@ -144,6 +172,14 @@ img {
     header section {
         padding-left: 12px;
         padding-right: 12px;
+    }
+
+    .font-size-xl {
+        font-size: 1em;
+    }
+
+    .font-size-xxl {
+        font-size: 1.4375em;
     }
 
     .small-screen-hide,

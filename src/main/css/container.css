@@ -1,0 +1,56 @@
+.basic-card {
+    padding-top: 18px;
+}
+
+.basic-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 28px;
+}
+
+
+.basic-card i {
+    display: inline-block;
+    margin-bottom: 18px;
+}
+
+
+.basic-card p {
+    margin-bottom: 18px;
+}
+
+.basic-card div {
+    margin-bottom: 36px;
+}
+
+.basic-card .btn {
+    display: block;
+    width: fit-content;
+    margin-top: 12px;
+}
+
+.basic-container {
+    margin-top: 24px;
+    padding: 2em;
+    box-sizing: border-box;
+    line-height: 1.6em;
+    position: relative;
+    scroll-margin-top: 5em;
+}
+
+.basic-container p {
+    margin-bottom: 6px;
+}
+
+.basic-container div {
+    margin-bottom: 12px;
+}
+
+.basic-container.same-height {
+    height: calc(100% - 24px);
+}
+
+.basic-container a,
+.basic-card a {
+    text-decoration: underline;
+}

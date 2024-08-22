@@ -3,7 +3,6 @@ html {
 	scroll-behavior: smooth;
 }
 
-
 header section, footer section, .content{
 	max-width: 1700px;
 	margin: auto;	

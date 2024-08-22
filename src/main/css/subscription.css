@@ -1,50 +1,51 @@
 .subscription>div {
-	background-color: #eee;
-	padding: 2.5em;
+    background-color: #eee;
+    padding: 2.5em;
 }
 
 .subscription section {
-	position: relative;
+    position: relative;
 }
 
 .subscription input[type='email'] {
-	padding: 9px;
-	margin-right: 3px;
-	outline: none;
-	width: 70%;
-	border: none;
+    padding: 9px;
+    margin-right: 3px;
+    outline: none;
+    width: 70%;
+    border: none;
 }
 
-.subscription .btn.outline{
-	padding: 8px 12px;
-	border-radius:inherit;	
+.subscription .btn.outline {
+    padding: 8px 12px;
+    border-radius: inherit;
 }
 
 .subscription div.mailchimp {
-	display: inline-block;
-	width: 25%;
+    display: inline-block;
+    width: 25%;
 }
 
 #mc_embed_signup input[type='email'] {
-	padding: 11px;
-	margin-right: 6px;
-	outline: none;
-	width: 25%;
-	border-radius: 3px;
-	border: 1px solid #D5D5D4;
-	border-bottom: 2px solid #6D6C69;
+    padding: 11px;
+	padding-top: 13px;
+    margin-right: 6px;
+    outline: none;
+    border-radius: 3px;
+    border: 1px solid #D5D5D4;
+    border-bottom: 2px solid #6D6C69;
 }
 
 #mc_embed_signup div.mailchimp {
-	display: inline-block;
+    display: inline-block;
 }
 
-@media ( max-width :812px) {
-	.subscription>div {
-		padding: 1em;
-	}	
-	.subscription input[type='email'] {
-		width: 58%;
-	}
+@media (max-width :812px) {
+    .subscription>div {
+        padding: 1em;
+    }
+
+    .subscription input[type='email'] {
+        width: 58%;
+    }
 
 }

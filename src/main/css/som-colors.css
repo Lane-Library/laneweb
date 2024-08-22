@@ -2,36 +2,48 @@
 .white {
     color: #ffffff;
 }
+
 .bg-white {
     background-color: #ffffff;
-}   
+}
+
 .grey-ddd {
     color: #dddddd;
 }
+
 .grey-ccc {
     color: #cccccc;
 }
+
 .grey-999 {
     color: #999999;
 }
+
 .grey-666 {
     color: #666666;
 }
+
 .grey-333 {
     color: #333;
 }
+
 .black {
     color: #000000;
 }
+
 .bg-black {
     background-color: #000000;
+    color: white;
 }
+
 .blue-f0f {
     color: #f0f4f5;
 }
+
 .blue-aab {
     color: #aabec6;
 }
+
 .blue-009 {
     color: #009abb;
 }
@@ -39,73 +51,135 @@
 .bg-blue-009 {
     background-color: #009abb;
 }
-.blue-007,.lagunita {
+
+
+.bg-img-lagunita,
+.bg-img-lagunita i,
+.bg-img-lagunita h2,
+.bg-img-lagunita h3,
+.bg-img-lagunita h4,
+.bg-img-lagunita h5,
+.bg-img-lagunita h6,
+.bg-img-lagunita p,
+.bg-img-lagunita a {
+    color: white;
+}
+
+
+.bg-img-lagunita {
+    background: linear-gradient(0deg, rgba(0, 124, 146, 0.90) 0%, rgba(0, 124, 146, 0.90) 100%), url('../images/hero-books-bkgrd.jpg') lightgray 50% / cover no-repeat;
+}
+
+
+.bg-img-lagunita h2.level5.border-thick::before,
+.bg-img-lagunita h2.level4.border-thick::before,
+.bg-img-lagunita h2.level3.border-thick:before,
+.bg-img-lagunita h2.level2.border-thick::before,
+.bg-img-lagunita h3.level4.border-thick::before,
+.bg-img-lagunita h3.level3.border-thick:before,
+.bg-img-lagunita h3.level2.border-thick::before,
+.bg-img-lagunita h4.level2.border-thick::before {
+    border-top: 3px solid white;
+}
+
+
+
+.blue-007,
+.lagunita {
     color: #007c92;
 }
-.bg-blue-007, .bg-lagunita {
+
+.bg-blue-007,
+.bg-lagunita {
     background-color: #007c92;
+    color: white;
 }
+
+
 .lagunita-dark {
     color: #006B81;
 }
- .bg-lagunita-dark {
+
+.bg-lagunita-dark {
     background-color: #006B81;
+    color: white;
 }
 
 .blue-094 {
     color: #09425a;
 }
+
 .green-c7d {
     color: #c7d1c6;
 }
+
 .green-809 {
     color: #80982a;
 }
+
 .green-556 {
     color: #556222;
 }
+
 .orange-b96 {
     color: #b96d12;
 }
+
 .purple-532 {
     color: #53284f;
 }
+
 .brown-5e3 {
     color: #5e3032;
 }
-.red, .cardinal {
+
+.red,
+.cardinal {
     color: #8c1515;
 }
-.bg-red, .bg-cardinal {
+
+.bg-red,
+.bg-cardinal {
     background-color: #8c1515;
+    color: white;
 }
-.gray-50{
-    color: #C8CDCF;   
+
+.gray-50 {
+    color: #C8CDCF;
 }
-.bg-gray-50{
+
+.bg-gray-50 {
     background-color: #C8CDCF;
 }
-.gray-40{
- color:#D5DADC;
+
+.gray-40 {
+    color: #D5DADC;
 }
-.bg-gray-40{
+
+.bg-gray-40 {
     background-color: #D5DADC;
 }
-.gray-30{
+
+.gray-30 {
     color: #E1E7E9;
 }
-.bg-gray-30{
+
+.bg-gray-30 {
     background-color: #E1E7E9;
 }
-.gray-20{
+
+.gray-20 {
     color: #EAEFF0;
 }
-.bg-gray-20{
-    background-color:#EAEFF0;
+
+.bg-gray-20 {
+    background-color: #EAEFF0;
 }
-.gray-10{
+
+.gray-10 {
     color: #F0F4F5;
 }
-.bg-gray-10{
-    background-color:#F0F4F5;
+
+.bg-gray-10 {
+    background-color: #F0F4F5;
 }

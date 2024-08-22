@@ -1,50 +1,59 @@
 /* these are the default list styles */
-ol li{
+ol li {
     list-style-type: decimal;
     list-style-position: inside;
+    padding: 0;
     font-size: 1em;
 }
 
-.content li{
+
+.content li {
     border-bottom: solid 1px #f0f4f5;
-    padding: 0.375em 0;
     font-size: 1em;
 }
 
-.content li:last-child{
+.content li:last-child {
     border-bottom: none;
 }
 
-.content .bulleted-list li, .content ol li{
+.content .bulleted-list li,
+.content ol li {
     border-bottom: none;
+
 }
 
-.bulleted-list{
+.bulleted-list,
+ol {
+    margin-left: 6px;
+}
+
+.bulleted-list {
     font-size: 1em;
     list-style-type: disc;
     padding: 0 0 20px 20px;
 }
 
 
-.links-list{
+.links-list {
     padding-top: 18px 0;
 }
-.links-list li{
+
+.links-list li {
     margin: 12px 0;
     border-bottom-color: #D5DADC;
 }
 
-.links-list li a:first-child{
+.links-list li a:first-child {
     font-size: 1em;
-    text-decoration: solid underline;    
+    text-decoration: solid underline;
     margin-right: 0.375em;
 }
 
 
-.links-list li a:first-child:after{
+.links-list li a:first-child:after {
     content: "\f061";
-	font-size: 1em;
-    font-family: FontAwesome, Arial, sans-serif;	
+    font-size: 1em;
+    font-family: FontAwesome, Arial, sans-serif;
     margin-left: 6px;
-    display:inline-block;
+    display: inline-block;
 }
