@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+       <release date="2024-08-26" version="3.13.12" description="bug fix and update release">
+            <action date="2024-08-19" dev="ryanmax" issue="LANEWEB-11354" type="update"> 
+                equipment page missing icons, icons inconsistent colors
+            </action>
+            <action date="2024-08-23" dev="alainb" issue="LANEWEB-11356" type="update"> 
+                Add LinkedIn Icon to social media icons in footer
+            </action>
+       </release>
        <release date="2024-08-05" version="3.13.11" description="bug fix and update release">
             <action date="2024-07-30" dev="ryanmax" issue="LANEWEB-11337" type="update"> 
                 Lane Search: cannot filter to include 2025 
@@ -12,7 +20,7 @@
             <action date="2024-06-19" dev="alainb" issue="LANEWEB-11343" type="update"> 
                 Update footer background color 
             </action>
-        </release>
+       </release>
        <release date="2024-06-24" version="3.13.10" description="bug fix and update release">
             <action date="2024-04-26" dev="ryanmax" issue="LANEWEB-11317" type="update">
                  Use Artifact Registry instead of Nexus
@@ -20,7 +28,7 @@
             <action date="2024-06-19" dev="alainb" issue="LANEWEB-11332" type="update">
                To improve basset handling null pointer exception
             </action>
-        </release> 
+       </release> 
        <release date="2024-06-17" version="3.13.9" description="bug fix and update release">
             <action date="2024-06-17" dev="alainb" issue="LANEWEB-11330" type="update">
                 Update the laneweb packaging from war to jar
@@ -39,7 +47,7 @@
                 broken query highlighting
             </action>
         </release>
-         <release date="2024-05-06" version="3.13.6" description="bug fix and update release">
+        <release date="2024-05-06" version="3.13.6" description="bug fix and update release">
             <action date="2024-04-15" dev="ryanmax" issue="LANEWEB-11311" type="update">
                 Iframe not working in LaneWeb in Springshare's LibWizard
             </action>
