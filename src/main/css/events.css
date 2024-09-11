@@ -20,7 +20,6 @@ li.event:last-of-type {
 }
 
 .event .title {
-	display: block;
 	word-break: break-word;
 	overflow: hidden;
 	text-overflow: ellipsis;
