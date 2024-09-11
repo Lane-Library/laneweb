@@ -308,3 +308,14 @@ hr {
     padding: 12px 24px;
     background-color: #E1E7E9;
 }
+
+@media (max-width : 1100px) {
+
+    .centered-10,
+    .centered-20,
+    .centered-30,
+    .centered-40,
+    .centered-50 {
+        margin: 0 5%;
+    }
+}

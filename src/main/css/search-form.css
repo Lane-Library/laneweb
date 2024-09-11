@@ -30,16 +30,13 @@
     padding: 0px;
     display: flex;
     background-color: white;
-    height: 60px;
 }
 
 .search-form .search-dropdown {
-    padding: 1.125em 1.6875em;
+    padding: 0 1.6875em;
+    line-height: 60px;
     margin-left: 0;
     border: none;
-    border-radius: 0;
-    display: inline-block;
-    overflow: hidden;
 }
 
 .search-form .search-input-container {
@@ -49,7 +46,7 @@
 }
 
 .search-form input {
-    height: 60px;
+    line-height: 59px;
     padding-left: 36px;
     border: 1px white;
     outline: none;
@@ -79,7 +76,7 @@
 
 .search-help {
     text-align: center;
-    padding-top: 6px;
+    padding-top: 10px;
 }
 
 .search-pico.search-pico-active~.search-help {
@@ -165,7 +162,7 @@
 
 .search-form .pico-fields-active {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     padding: 0;
 }
 
@@ -175,7 +172,7 @@
     background-color: transparent;
     position: absolute;
     right: 15px;
-    top: 21px;
+    top: 18px;
     display: none;
 }
 

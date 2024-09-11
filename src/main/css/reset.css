@@ -1,19 +1,20 @@
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
-width: 100%;
+    width: 100%;
+    font-size: 18px;
 }
 
 body {
-    font-size: 1em;
     line-height: 1.231;
 }
 
-ol, ul {
+ol,
+ul {
     list-style: none;
 }
 
@@ -21,12 +22,35 @@ fieldset {
     border: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-size: 100%;
     font-weight: normal;
 }
 
-address, caption, cite, code, dfn, em, strong, th, var {
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
     font-style: normal;
     font-weight: normal;
+}
+
+@media (max-width : 1100px) {
+
+    html,
+    body {
+        font-size: 16px;
+    }
+
+
 }

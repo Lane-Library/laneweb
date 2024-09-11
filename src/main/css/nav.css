@@ -30,12 +30,13 @@ ul .nav-login {
 
 .nav-menu>span {
     display: block;
-    font-size: 1.125em;
+    font-size: 18px;
     text-align: center;
     white-space: nowrap;
     cursor: default;
-    line-height: 64px;
+    line-height: 68px;
     padding-top: 5px;
+    font-weight: 600;
 }
 
 .nav-menu>span.btm-brdr-red label {
@@ -47,7 +48,7 @@ ul .nav-login {
     position: absolute;
     width: 100%;
     border-top: 4px solid #8C1515;
-    bottom: -21px;
+    bottom: -23px;
 }
 
 .nav-menu:hover span.btm-brdr-red label::before {

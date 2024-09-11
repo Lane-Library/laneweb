@@ -1,44 +1,45 @@
 .explore-container {
-	display: flex;
-	flex-wrap: wrap;
-	row-gap: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 48px;
 }
 
 .explore {
-	flex: 1 1 50%;
-	display: flex;
+    flex: 1 1 50%;
+    display: flex;
 }
 
 .explore .icon {
-	background-color: #8c1515;
-	display: inline-block;
-	height: 60px;
-	width: 60px;
-	vertical-align: middle;
-	position: relative;
+    background-color: #8c1515;
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    vertical-align: middle;
+    position: relative;
 }
 
 .explore i {
-	color: white;
-	margin-top: 28px;
-	margin-left: 16px;
-	vertical-align: middle;
+    color: white;
+    margin-top: 28px;
+    margin-left: 16px;
+    vertical-align: middle;
+    font-size: 32px;
 }
 
 .explore:last-of-type i {
-	margin-left: 12px;
+    margin-left: 12px;
 }
 
 .explore .detail a {
-	font-size: 1.25em;
-	font-weight: 600;
-	color: black;
-	padding: 17px 10px;
-	display: block;
+    font-size: 1.25em;
+    font-weight: 600;
+    color: black;
+    padding: 17px 10px;
+    display: block;
 }
 
-@media ( max-width : 812px) {
-	.explore {
-		flex-basis: 100%;
-	}
+@media (max-width : 812px) {
+    .explore {
+        flex-basis: 100%;
+    }
 }

@@ -2,9 +2,3 @@
 .pure-g {
     gap: 24px
 }
-
-@media (max-width : 1100px) {
-    .pure-g {
-        gap: 0px;
-    }
-}
