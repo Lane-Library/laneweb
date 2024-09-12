@@ -115,14 +115,13 @@ public class PatronRegistrationController {
         try {
             if (!this.folioUserService.getUser((String) user.get(USERNAME), (String) user.get(EXTERNAL_SYSTEM_ID),
                     (String) model.getAttribute(USER_INPUT_EMAIL)).isEmpty()) {
+                map = prepMapForEmail(model);
+                map.put(ASKUS_EMAIL_SUBJECT, "folio patron registration attempt");
+                this.sender.sendEmail(map);
                 return ERROR_USER_EXISTS_PAGE;
             }
             if (this.folioUserService.addUser(user)) {
-                map.put("recipient", ASKUS_ADDRESS);
-                for (String field : STRIP_FROM_EMAIL) {
-                    map.remove(field);
-                }
-                map.put(EMAIL, nameAndEmail(model));
+                map = prepMapForEmail(model);
                 this.sender.sendEmail(map);
                 return CONFIRMATION_PAGE;
             }
@@ -130,6 +129,16 @@ public class PatronRegistrationController {
             log.error(e.getMessage(), e);
         }
         return ERROR_PAGE;
+    }
+
+    private Map<String, Object> prepMapForEmail(final Model model) {
+        Map<String, Object> map = model.asMap();
+        map.put("recipient", ASKUS_ADDRESS);
+        for (String field : STRIP_FROM_EMAIL) {
+            map.remove(field);
+        }
+        map.put(EMAIL, nameAndEmail(model));
+        return map;
     }
 
     private String getValueOrDefault(final Model model, final HttpServletRequest request, final String key,
