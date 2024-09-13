@@ -35,7 +35,7 @@ section.header a {
 .login>.login-item-active {
     display: initial;
     line-height: 68px;
-    padding-top: 5px;
+    padding-top: 3px;
 }
 
 .login .fa {
@@ -109,11 +109,11 @@ section.header a {
     background-image: url('../images/sm-logo.svg');
     background-repeat: no-repeat;
     background-size: 46%;
-    padding: 12px 0 0 143px;
+    padding: 12px 0 0 125px;
     color: #333333;
     font-weight: 400;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 @media (max-width : 1100px) {

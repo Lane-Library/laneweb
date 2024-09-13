@@ -1,9 +1,7 @@
 #navigation {
     flex: 1;
     max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0px 12px;
+    padding: 0px 51px;
 }
 
 nav>ul {
@@ -35,7 +33,7 @@ ul .nav-login {
     white-space: nowrap;
     cursor: default;
     line-height: 68px;
-    padding-top: 5px;
+    padding-top: 3px;
     font-weight: 600;
 }
 
