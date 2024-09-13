@@ -1,7 +1,9 @@
 #navigation {
     flex: 1;
-    max-width: 850px;
-    padding: 0px 51px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 45px;
 }
 
 nav>ul {
