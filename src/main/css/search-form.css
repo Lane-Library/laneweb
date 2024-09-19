@@ -47,7 +47,7 @@
 
 .search-form input {
     line-height: 59px;
-    padding-left: 36px;
+    padding-left: 45px;
     border: 1px white;
     outline: none;
     width: 95%;
@@ -194,13 +194,13 @@
     border: none;
     background-color: transparent;
     position: absolute;
-    top: 14px;
+    top: 20px;
+    left: 14px;
 }
+
 
 .search-button .fa-solid.fa-magnifying-glass {
     color: lightslategrey;
-    padding-left: 9px;
-    padding-top: 7px;
 }
 
 .search-indicator {

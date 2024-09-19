@@ -48,9 +48,7 @@ tbody tr:last-child {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    font-size: 16px;
     margin: 16px;
-    gap: 26px;
 }
 
 .table .header {
@@ -59,7 +57,8 @@ tbody tr:last-child {
     border-bottom: 1px solid #d0d8da;
 }
 
-.table .row {
+.table .row,
+.table .thead {
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -78,9 +77,25 @@ tbody tr:last-child {
 
 .table .cell {
     border-bottom: 1px solid #d0d8da;
-    padding: 14px 28px;
+    padding: 9px 28px 9px 11px;
 }
 
-.table .row:nth-child(even) {
+
+.table.shade .row:nth-child(even) {
     background-color: #f0f4f5;
+}
+
+
+/* css for search the table input */
+#table-search-input {
+    width: 100%;
+    height: 58px;
+    padding-left: 45px;
+    border: 1px solid #D5DADC;
+    box-sizing: border-box;
+}
+
+#table-search-input~.search-button {
+    bottom: -25px;
+    left: 37px;
 }

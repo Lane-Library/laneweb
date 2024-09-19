@@ -264,10 +264,22 @@ hr {
     margin: 0 10%;
 }
 
+.centered-15 {
+    position: relative;
+    margin: 0 15%;
+}
+
+
 .centered-20 {
     position: relative;
     margin: 0 20%;
 }
+
+.centered-25 {
+    position: relative;
+    margin: 0 25%;
+}
+
 
 .centered-30 {
     position: relative;

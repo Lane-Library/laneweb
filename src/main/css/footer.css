@@ -200,6 +200,9 @@ footer:nth-of-type(3) {
     font-weight: 600;
 }
 
+.footer-organization .social-logos a:nth-child(5) span {
+    background-color: #0077B5;
+}
 
 
 @media (max-width : 700px) {

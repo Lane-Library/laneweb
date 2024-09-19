@@ -36,7 +36,6 @@ ul .nav-login {
     cursor: default;
     line-height: 68px;
     padding-top: 3px;
-    font-weight: 600;
 }
 
 .nav-menu>span.btm-brdr-red label {
@@ -210,6 +209,7 @@ ul .nav-login {
         z-index: 2;
         right: 0px;
         width: 100%;
+        padding-right: 0;
     }
 
     #navigation nav {
@@ -254,7 +254,7 @@ ul .nav-login {
     #nav-toggle-on {
         display: block;
         position: inherit;
-        padding: 22px
+        padding: 20px
     }
 
     #nav-toggle-off i {

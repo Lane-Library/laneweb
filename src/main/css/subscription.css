@@ -25,10 +25,9 @@
     width: 25%;
 }
 
-#mc_embed_signup input[type='email'] {
-    padding: 11px;
-	padding-top: 13px;
-    margin-right: 6px;
+.su-design #mc_embed_signup input[type='email'] {
+    width: 315px;
+    padding: 13px 6px 11px 11px;
     outline: none;
     border-radius: 3px;
     border: 1px solid #D5D5D4;

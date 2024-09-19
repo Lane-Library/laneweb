@@ -18,8 +18,8 @@ header:nth-of-type(2) {
 
 section.header {
     display: flex;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     justify-content: space-between;
 }
 
@@ -109,7 +109,7 @@ section.header a {
     background-image: url('../images/sm-logo.svg');
     background-repeat: no-repeat;
     background-size: 46%;
-    padding: 12px 0 0 125px;
+    padding: 8px 0 0 125px;
     color: #333333;
     font-weight: 400;
     text-decoration: none;

@@ -1,41 +1,65 @@
-.basic-card {
-    padding-top: 18px;
+.su-design section.content>div.centered:first-of-type {
+    margin: 0;
+    padding: 0;
 }
 
-.basic-card img {
+.su-design section.content {
+    max-width: 2300px;
+}
+
+.su-design .footer-organizations {
+    margin-top: 0;
+}
+
+
+.basic-card {
+    margin-top: 18px;
+}
+
+.basic-card img,
+.centered-basic-card img {
     width: 100%;
     height: auto;
     margin-bottom: 28px;
 }
 
 
-.basic-card i {
+.basic-card i,
+.centered-basic-card i {
     display: inline-block;
     margin-bottom: 18px;
 }
 
-
-.basic-card p {
+.basic-card p,
+.centered-basic-card {
     margin-bottom: 18px;
 }
 
-.basic-card div {
+.basic-card div,
+.centered-basic-card div {
     margin-bottom: 36px;
 }
 
-.basic-card .btn {
+.basic-card .btn,
+.centered-basic-card .btn {
     display: block;
     width: fit-content;
     margin-top: 12px;
+}
+
+.centered-basic-card,
+.centered-basic-card .btn,
+.centered-basic-card h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .basic-container {
     margin-top: 24px;
     padding: 2em;
     box-sizing: border-box;
-    line-height: 1.6em;
     position: relative;
-    scroll-margin-top: 5em;
 }
 
 .basic-container p {
@@ -46,12 +70,83 @@
     margin-bottom: 12px;
 }
 
-
 .basic-container.same-height {
     height: calc(100% - 24px);
 }
 
-.basic-container a,
-.basic-card a {
-    text-decoration: underline;
+.banner {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+}
+
+.banner div {
+    display: block;
+}
+
+.banner>div:first-of-type {
+    width: 76px;
+}
+
+.banner>div:nth-child(2) {
+    width: 95%;
+}
+
+.landing-page-container {
+    padding: 98px 200px;
+}
+
+.secondary-page-container {
+    padding: 42px 100px;
+    margin: 42px 100px;
+}
+
+/* @media (max-width : 1200px) { */
+@media (max-width : 1600px) {
+    .landing-page-container {
+        padding: 42px 100px;
+    }
+
+    .secondary-page-container {
+        padding: 42px 50px;
+        margin: 42px 50px;
+    }
+}
+
+@media (max-width : 990px) {
+    .landing-page-container {
+        padding: 42px 80px;
+    }
+
+    .secondary-page-container {
+        padding: 42px 30px;
+        margin: 42px 30px;
+    }
+}
+
+
+@media (max-width : 768px) {
+    .landing-page-container {
+        padding: 42px 50px;
+    }
+
+    .secondary-page-container {
+        padding: 42px 20px;
+        margin: 42px 20px;
+    }
+}
+
+@media (max-width : 812px) {
+    .banner {
+        flex-flow: row wrap;
+    }
+
+    .landing-page-container {
+        padding: 42px 20px;
+    }
+
+    .secondary-page-container {
+        padding: 42px 10px;
+        margin: 42px 10px;
+    }
 }

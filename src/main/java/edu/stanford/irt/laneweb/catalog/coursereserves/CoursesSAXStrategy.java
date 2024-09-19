@@ -17,8 +17,9 @@ public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
         try {
             xmlConsumer.startDocument();
             for (Course course : list) {
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "tr");
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "td");
+                startDivWithClass(xmlConsumer, "row");
+                startDivWithClass(xmlConsumer, "cell");
+                startDiv(xmlConsumer);
                 startAnchorWithClass(xmlConsumer, "course-reserves-list.html?id=" + course.getId(), "course-name");
                 XMLUtils.data(xmlConsumer, course.getName());
                 endAnchor(xmlConsumer);
@@ -26,10 +27,15 @@ public class CoursesSAXStrategy extends AbstractXHTMLSAXStrategy<List<Course>> {
                 String courseInfo = new StringBuilder(" (").append(course.getNumber()).append(")").toString();
                 XMLUtils.data(xmlConsumer, courseInfo);
                 XMLUtils.endElement(xmlConsumer, XHTML_NS, "span");
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "td");
-                createElement(xmlConsumer, "td", course.getInstructor());
-                createElement(xmlConsumer, "td", course.getDepartment());
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "tr");
+                endDiv(xmlConsumer);
+                endDiv(xmlConsumer);
+                startDivWithClass(xmlConsumer, "cell");
+                XMLUtils.data(xmlConsumer, course.getInstructor());
+                endDiv(xmlConsumer);
+                startDivWithClass(xmlConsumer, "cell");
+                XMLUtils.data(xmlConsumer, course.getDepartment());
+                endDiv(xmlConsumer);
+                endDiv(xmlConsumer);
             }
             xmlConsumer.endDocument();
         } catch (SAXException e) {
