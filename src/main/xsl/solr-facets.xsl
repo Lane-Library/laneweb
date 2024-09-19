@@ -219,6 +219,7 @@
             <xsl:when test="$name = 'redivis'">
                 <span class="yui3-tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span>
             </xsl:when>
+            <xsl:when test="$name = 'sfx'">Lane Knowledge Base</xsl:when>
             <xsl:when test="$name = 'web'">Lane Web Site</xsl:when>
             <xsl:when test="$name = 'class'">Lane Classes</xsl:when>
             <xsl:when test="$name = 'laneblog'">Lane Blog</xsl:when>
