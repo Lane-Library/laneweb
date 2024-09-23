@@ -5,7 +5,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-     <release date="2024-09-16" version="3.13.13" description="bug fix and update release">
+        <release date="2024-09-23" version="3.13.14" description="bug fix and update release">
+            <action date="2024-09-20" dev="ryanmax" issue="LANEWEB-11362" type="update"> 
+                SFX labeling in Lane Search
+            </action>
+            <action date="2024-09-23" dev="ryanmax" issue="LANEWEB-11368" type="update"> 
+                Clean up redirects no longer used
+            </action>
+       </release>
+       <release date="2024-09-16" version="3.13.13" description="bug fix and update release">
             <action date="2024-09-12" dev="ryanmax" issue="LANEWEB-11361" type="update"> 
                 Notify AS staff when patrons attempt to register but a FOLIO user record already exists
             </action>
