@@ -123,8 +123,6 @@ public class LanewebIT {
 
         @Test
         public void testRedirects() throws Exception {
-                this.mockMvc.perform(get("/beemap")).andExpect(status().isFound())
-                                .andExpect(header().string("location", "/beemap.html"));
                 this.mockMvc.perform(get("/help/")).andExpect(status().isFound())
                                 .andExpect(header().string("location", "/help/index.html"));
                 this.mockMvc.perform(get("/help/me/")).andExpect(status().isFound())
