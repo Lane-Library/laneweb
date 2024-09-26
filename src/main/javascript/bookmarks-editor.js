@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     "use strict";
 
@@ -17,7 +17,7 @@
          * Sets up various event handlers.
          * @method bindUI
          */
-        bindUI : function() {
+        bindUI: function () {
             let srcNode = this.get("srcNode"),
                 bookmarks = this.get("bookmarks"),
                 dragManager = Y.DD.DDM;
@@ -33,20 +33,20 @@
             this._goingUp = false;
             dragManager.on('drag:drag', this._handleDrag, this);
             dragManager.on('drop:over', this._handleDropOver, this);
-            this.publish("move", {defaultFn : this._editorMoved});
+            this.publish("move", { defaultFn: this._editorMoved });
         },
 
         /**
          * Creates the BookmarkEditors.
          * @method syncUI
          */
-        syncUI : function() {
+        syncUI: function () {
             let editor, editors = [], i,
                 srcNode = this.get("srcNode"),
                 items = srcNode.all("li"),
                 bookmarks = this.get("bookmarks");
             for (i = 0; i < items.size(); i++) {
-                editor = new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)});
+                editor = new BookmarkEditor({ srcNode: items.item(i), render: true, bookmark: bookmarks.getBookmark(i) });
                 editor.after("destroy", this._handleDestroyEditor, this);
                 editors.push(editor);
             }
@@ -63,13 +63,13 @@
          * the top of the list and sets it editing state to true.
          * @method add
          */
-        add : function() {
+        add: function () {
             let items = this.get("srcNode").one("ul"),
-            item = Y.Node.create("<li><a></a></li>"),
-            addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
-            editors = this.get("editors"),
-            adding = editors.length && editors[0].get("editing"),
-            editor;
+                item = Y.Node.create("<li><a></a></li>"),
+                addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
+                editors = this.get("editors"),
+                adding = editors.length && editors[0].get("editing"),
+                editor;
             // toggle add bookmark button
             if (addBookmarkContainer) {
                 addBookmarkContainer.classList.toggle("active");
@@ -80,7 +80,7 @@
                 editors[0].destroy();
             } else {
                 items.prepend(item);
-                editor = new BookmarkEditor({srcNode : item, render : true});
+                editor = new BookmarkEditor({ srcNode: item, render: true });
                 editor.after("destroy", this._handleDestroyEditor, this);
                 editors.unshift(editor);
                 editor.set("editing", true);
@@ -91,7 +91,7 @@
          * @method _editorMoved
          * @private
          */
-        _editorMoved : function() {
+        _editorMoved: function () {
             this.get("bookmarks").moveBookmark(this._to, this._from);
         },
 
@@ -102,9 +102,9 @@
          * @private
          * @returns {Array}
          */
-        _getSerializedEditors : function() {
+        _getSerializedEditors: function () {
             let filteredEditors = [];
-            this.get("editors").forEach(function(editor) {
+            this.get("editors").forEach(function (editor) {
                 if (editor.get("srcNode").one("a").get("href") != "") {
                     filteredEditors.push(editor);
                 }
@@ -118,7 +118,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarkAdd : function(event) {
+        _handleBookmarkAdd: function (event) {
             this.get("editors")[event.target.indexOf(event.bookmark)].update();
             this._syncDD();
         },
@@ -129,7 +129,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarkMove : function(event) {
+        _handleBookmarkMove: function (event) {
             let editors = this._getSerializedEditors();
             editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
             this.set("editors", editors);
@@ -142,7 +142,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarksRemove : function(event) {
+        _handleBookmarksRemove: function (event) {
             let i, editors = this._getSerializedEditors();
             for (i = event.positions.length - 1; i >= 0; --i) {
                 this._dd[event.positions[i]].destroy(true);
@@ -157,7 +157,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarkUpdate : function(event) {
+        _handleBookmarkUpdate: function (event) {
             let editors = this._getSerializedEditors();
             editors[event.position].update();
         },
@@ -168,7 +168,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleButtonClick : function(event) {
+        _handleButtonClick: function (event) {
             event.preventDefault();
             //see case 67695
             //pressing return generates a click on the add button for some reason
@@ -187,7 +187,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleDestroyEditor : function(event) {
+        _handleDestroyEditor: function (event) {
             let editors = this.get("editors"),
                 position = editors.indexOf(event.target);
             editors.splice(position, 1);
@@ -198,7 +198,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleDrag :  function(event) {
+        _handleDrag: function (event) {
             //Get the last y point
             let y = event.target.lastXY[1];
             //is it greater than the lastY var?
@@ -218,7 +218,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleDragEnd : function(event) {
+        _handleDragEnd: function (event) {
             let drag = event.target;
             //Put our styles back
             drag.get('node').setStyles({
@@ -227,7 +227,7 @@
             });
             this._to = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
             if (this._to !== this._from) {
-                this.fire("move", {to : this._to, from : this._from});
+                this.fire("move", { to: this._to, from: this._from });
             }
         },
 
@@ -236,7 +236,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleDragStart : function(event) {
+        _handleDragStart: function (event) {
             //Get our drag object
             let drag = event.target, node = drag.get("node"), dragNode = drag.get("dragNode");
             //Set some styles here
@@ -262,10 +262,10 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleDropOver : function(event) {
+        _handleDropOver: function (event) {
             //Get a reference to our drag and drop nodes
             let drag = event.drag.get('node'),
-            drop = event.drop.get('node');
+                drop = event.drop.get('node');
 
             //Are we dropping on an editor node?
             if (drop.hasClass('yui3-bookmark-editor')) {
@@ -280,7 +280,7 @@
             }
         },
 
-        _syncDD : function() {
+        _syncDD: function () {
             let i, srcNode = this.get("srcNode"),
                 editors = this.get("editors");
             this._dd = this._dd || [];
@@ -290,40 +290,42 @@
             this._dd = [];
             for (i = 0; i < editors.length; i++) {
                 this._dd.push(new Y.DD.Drag({
-                    node : editors[i].get("boundingBox"),
+                    node: editors[i].get("boundingBox"),
                     target: {
                         padding: '0 0 0 20',
                         useShim: false
-                    }}).plug(Y.Plugin.DDConstrained, {
-                        constrain : srcNode.one("ul")
-                    }).plug(Y.Plugin.DDProxy, {
-                        moveOnEnd: false
-                    }).removeInvalid('a'));
+                    }
+                }).plug(Y.Plugin.DDConstrained, {
+                    constrain: srcNode.one("ul")
+                }).plug(Y.Plugin.DDProxy, {
+                    moveOnEnd: false
+                }).removeInvalid('a'));
             }
         }
     },
-    {
-        ATTRS : {
-            editors : {
-                value : null
-            },
-            bookmarks : {
-                value : null
+        {
+            ATTRS: {
+                editors: {
+                    value: null
+                },
+                bookmarks: {
+                    value: null
+                }
             }
-        }
-    });
+        });
 
     //Create a new BookmarksEditor
     if (editorsNode) {
         if (L.BookmarksWidget) {
             L.BookmarksEditor = new BookmarksEditor({
-                srcNode : "#bookmarks-editor",
-                bookmarks : L.BookmarksWidget.get("bookmarks"),
-                render : true});
+                srcNode: "#bookmarks-editor",
+                bookmarks: L.BookmarksWidget.get("bookmarks"),
+                render: true
+            });
         } else {
             // case 141805 bookmark edit buttons fail if bookmarks editor not initialized
-            editorsNode.querySelectorAll("button").forEach(function(node) {
-                node.addEventListener("click", function(event) {
+            editorsNode.querySelectorAll("button").forEach(function (node) {
+                node.addEventListener("click", function (event) {
                     event.preventDefault();
                 });
             });

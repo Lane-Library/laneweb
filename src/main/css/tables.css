@@ -96,6 +96,6 @@ tbody tr:last-child {
 }
 
 #table-search-input~.search-button {
-    bottom: -25px;
-    left: 37px;
+    bottom: 16px;
+    left: 16px;
 }

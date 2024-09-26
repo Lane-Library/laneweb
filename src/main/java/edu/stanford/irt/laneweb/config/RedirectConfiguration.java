@@ -23,17 +23,19 @@ public class RedirectConfiguration {
     public RedirectProcessor redirectProcessor() {
         List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
         redirectProcessors.add(new TrailingSlashRedirectProcessor());
-        Map<String, String> redirectMap =  HashMap.newHashMap(7);
+        Map<String, String> redirectMap = HashMap.newHashMap(7);
         redirectMap.put("/classes", "/classes-consult/laneclasses.html");
         redirectMap.put("/beemap", "/beemap.html");
         redirectMap.put("/about/contact.html", "/contacts/index.html");
+        redirectMap.put("/search.html\\?q=(.*)&source=(Journal|Book)",
+                "search.html?q=$1&source=all-all&facets=type%3A\"$2\"");
         redirectMap.put("/about/staff-dir.html", "/contacts/staff-dir.html");
         redirectMap.put("/about/liaisons.html", "/contacts/liaisons.html");
         redirectMap.put("/portals/lpch-cerner.html\\?(sourceid=cerner&q=.*)", "/search.html?source=peds-all&$1");
         redirectMap.put("/using-lib/computing.html", "/using-lib/study-computing-spaces.html");
         DefaultRedirectProcessor redirectProcessor = new DefaultRedirectProcessor(redirectMap);
         redirectProcessors.add(redirectProcessor);
-        Map<String, String> shcRedirectMap =  HashMap.newHashMap(6);
+        Map<String, String> shcRedirectMap = HashMap.newHashMap(6);
         shcRedirectMap.put("/shc/cardiology.html(?:\\??)(.*)", SEARCH_CLINICAL);
         shcRedirectMap.put("/shc/gastroenterology.html(?:\\??)(.*)", SEARCH_CLINICAL);
         shcRedirectMap.put("/shc/icu.html(?:\\??)(.*)", SEARCH_CLINICAL);

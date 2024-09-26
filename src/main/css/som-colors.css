@@ -94,6 +94,16 @@
 
 
 
+.lagunita-light {
+    color: #009ab4;
+}
+
+
+.bg-lagunita-light {
+    background-color: #009ab4;
+    color: white;
+}
+
 .blue-007,
 .lagunita {
     color: #007c92;
