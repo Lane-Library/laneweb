@@ -93,8 +93,6 @@
 
     <xsl:variable name="search-source">
         <xsl:choose>
-            <xsl:when test="starts-with($path,'/biomed-resources/ej.html')">Journal</xsl:when>
-            <xsl:when test="starts-with($path,'/biomed-resources/eb.html')">Book</xsl:when>
             <xsl:when test="starts-with($path,'/portals/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">all-all</xsl:when>
