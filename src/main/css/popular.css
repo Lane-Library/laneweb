@@ -76,6 +76,22 @@
     width: revert;
 }
 
+/* popular from ej page */
+
+.no-search-content .popular-eresources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 0;
+}
+
+.no-search-content .ej-eresources li {
+    flex: 25%;
+    border: none;
+    padding-right: 24px;
+}
+
+
+
 @media (max-width : 1100px) {
 
     .top-resources.menu-container.mobile div.pure-u-1-2,
@@ -123,6 +139,14 @@
     .top-resources li {
         flex: inherit;
     }
+
+    .no-search-content .popular-eresources li {
+        flex: 33%;
+    }
+
+    .no-search-content .popular-book-eresources li {
+        flex: 100%;
+    }
 }
 
 @media (max-width : 812px) {
@@ -158,4 +182,9 @@
     .top-resources.menu-container li {
         flex: 0 1 50%;
     }
+
+    .no-search-content .popular-eresources li {
+        flex: 50%;
+    }
+
 }

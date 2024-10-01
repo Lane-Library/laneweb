@@ -1,3 +1,9 @@
+.full-page-bg {
+    background: url('../images/linear-gradient-bkgrd.jpg') no-repeat;
+    background-size: 100% 1050px;
+}
+
+
 /*the official SoM color palette */
 .white {
     color: #ffffff;

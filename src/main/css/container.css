@@ -11,7 +11,6 @@
     margin-top: 0;
 }
 
-
 .basic-card {
     margin-top: 18px;
 }
@@ -112,8 +111,6 @@
 .banner div:first-of-type i.fa-7x {
     width: 165px;
 }
-
-
 
 .banner>div:nth-child(2) {
     width: 95%;
