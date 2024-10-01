@@ -4,20 +4,14 @@
     padding: 88px 7% 24px;
 }
 
-.no-search-content .search-container {
-    margin-top: 54px;
-    margin-bottom: 82px;
-    margin-left: auto;
-    position: relative;
-}
 
-
-.no-search-content .search-container fieldset {
+.no-search-content .search-form fieldset {
     position: relative;
     padding: 0;
 }
 
 .no-search-content .search-form {
+    margin: 54px auto 82px;
     width: 70%;
 }
 
@@ -36,4 +30,11 @@
 
 .no-search-content input {
     width: 100%;
+}
+
+@media (max-width: 812px) {
+    .no-search-content .search-form {
+        margin: 54px auto 82px;
+        width: 85%;
+    }
 }

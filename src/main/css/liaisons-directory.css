@@ -1,45 +1,62 @@
+@media (max-width : 812px) {
+
+    .liaisons-directory .table,
+    .liaisons-directory .thead,
+    .liaisons-directory .header,
+    .liaisons-directory .cell,
+    .liaisons-directory .row {
+        display: block;
+    }
+
+    .liaisons-directory .thead .header {
+        display: none;
+    }
+
+    .liaisons-directory .cell {
+        border: none;
+    }
+
+    .liaisons-directory .cell:first-child {
+        border-left: none;
+    }
+
+    .liaisons-directory .cell:last-child {
+        border-right: none;
+    }
+
+    .liaisons-directory .cell {
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 38%;
+    }
+
+    .liaisons-directory .cell:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
 
 
+    .liaisons-directory .cell:nth-of-type(1):before {
+        content: "Department";
+    }
 
-@media ( max-width : 812px) {
-	.liaisons-directory table, .liaisons-directory thead, .liaisons-directory tbody, .liaisons-directory th, .liaisons-directory td, .liaisons-directory tr { 
-		display: block; 
-	}
-	
-	.liaisons-directory thead tr { 
-		display:none;
-	}
-	
-	.liaisons-directory td{
-		border: none;
-	}
-	 
-	.liaisons-directory td:first-child{
-		border-left:none;
-	}
-	
-	.liaisons-directory td:last-child{
-		border-right:none;
-	} 
-	
-	.liaisons-directory td { 
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 38%; 
-	}
-	
-	.liaisons-directory td:before { 
-		position: absolute;
-	 	top: 6px;
-	 	left: 6px; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}
-	
+    .liaisons-directory .cell:nth-of-type(2):before {
+        content: "Name";
+    }
 
-	.liaisons-directory td:nth-of-type(1):before { content: "Department"; }
-	.liaisons-directory td:nth-of-type(2):before { content: "Name"; }
-	.liaisons-directory td:nth-of-type(3):before { content: "Email"; }
-	.liaisons-directory td:nth-of-type(4):before { content: "Phone"; }	
-	 
+    .liaisons-directory .cell:nth-of-type(3):before {
+        content: "Email";
+    }
+
+    .liaisons-directory .cell:nth-of-type(4):before {
+        content: "Phone";
+    }
+
+    .liaisons-directory .row:nth-child(even) {
+        background-color: #f0f4f5;
+    }
+
 }
