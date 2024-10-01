@@ -4,12 +4,6 @@
     padding: 88px 7% 24px;
 }
 
-
-/* needed because the the right colunm jump when the font size changed at 1500px */
-.no-search-content>h3 {
-    height: 30px;
-}
-
 .no-search-content .search-container {
     margin-top: 54px;
     margin-bottom: 82px;
@@ -17,12 +11,18 @@
     position: relative;
 }
 
+
+.no-search-content .search-container fieldset {
+    position: relative;
+    padding: 0;
+}
+
 .no-search-content .search-form {
     width: 70%;
 }
 
 .no-search-content .search-reset {
-    top: 58px;
+    top: 52px;
 }
 
 .no-search-content .search-help-link {
@@ -36,14 +36,4 @@
 
 .no-search-content input {
     width: 100%;
-}
-
-.no-search-content .search-container .search-button {
-    top: 61px;
-    left: 15px;
-}
-
-
-.no-search-content .popular-book-eresources li {
-    flex: 50%;
 }

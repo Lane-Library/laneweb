@@ -84,12 +84,18 @@
     gap: 18px 0;
 }
 
-.no-search-content .ej-eresources li {
-    flex: 25%;
+.no-search-content .popular-eresources li {
     border: none;
     padding-right: 24px;
 }
 
+.no-search-content .ej-eresources li {
+    flex: 25%;
+}
+
+.no-search-content .eb-eresources li {
+    flex: 50%;
+}
 
 
 @media (max-width : 1100px) {
@@ -144,7 +150,7 @@
         flex: 33%;
     }
 
-    .no-search-content .popular-book-eresources li {
+    .no-search-content .eb-eresources li {
         flex: 100%;
     }
 }
