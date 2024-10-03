@@ -38,9 +38,6 @@
     margin-top: 213px;
 }
 
-.no-search-content input {
-    width: 100%;
-}
 
 @media (max-width: 812px) {
     .no-search-content .search-form {
