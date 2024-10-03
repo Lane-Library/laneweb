@@ -4,11 +4,6 @@
     padding: 88px 7% 24px;
 }
 
-.no-search-content .search-form h3 {
-    height: 30px;
-}
-
-
 .no-search-content .ankle-footer {
     margin-bottom: -80px;
     margin-left: -8%;
@@ -34,9 +29,6 @@
     padding-top: 10px;
 }
 
-.no-search-content .right-col {
-    margin-top: 213px;
-}
 
 
 @media (max-width: 812px) {
