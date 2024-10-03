@@ -40,6 +40,11 @@
 }
 
 
+/* Liaision table */
+.liaisons-directory .table.phone-view *:nth-of-type(3) {
+    flex-grow: 2;
+}
+
 @media (max-width : 812px) {
 
     .table.phone-view {
@@ -110,6 +115,7 @@
     .liaisons-directory .table.phone-view .cell:nth-of-type(3):before {
         content: "Email";
     }
+
 
     .liaisons-directory .table.phone-view .cell:nth-of-type(4):before {
         content: "Phone";
