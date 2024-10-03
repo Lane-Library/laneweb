@@ -3,13 +3,8 @@
     width: 100%;
     padding-top: 67px;
     min-height: 204px;
-    background: linear-gradient(180deg, rgba(0, 128, 145, 0.50) 0%, rgba(184, 228, 234, 0.50) 100%),
-        linear-gradient(0deg, rgba(50, 133, 169, 0.70) 0%,
-            rgba(50, 133, 169, 0.70) 100%),
-        linear-gradient(0deg, rgba(0, 73, 89, 0.20) 0%,
-            rgba(0, 73, 89, 0.20) 100%),
-        url('../images/hero-books-bkgrd.jpg') lightgray -482px -502.171px / 129.561% 518.39% no-repeat;
-    background-blend-mode: normal, normal, multiply, normal;
+    background: url('../images/hero-gradient-bkgrd.jpg') no-repeat;
+    background-size: 100% 270px;
 }
 
 .hero-unit-front-page {
