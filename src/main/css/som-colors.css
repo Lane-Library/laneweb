@@ -21,6 +21,11 @@
     color: #cccccc;
 }
 
+.bg-grey-ccc {
+    background-color: #cccccc;
+}
+
+
 .grey-999 {
     color: #999999;
 }
@@ -50,6 +55,12 @@
     color: #aabec6;
 }
 
+.bg-blue-aab {
+    background-color: #aabec6;
+}
+
+
+
 .blue-009 {
     color: #009abb;
 }
@@ -58,6 +69,10 @@
     background-color: #009abb;
 }
 
+.bg-blue-094 {
+    color: white;
+    background-color: #09425a
+}
 
 .bg-img-lagunita,
 .bg-img-lagunita i,

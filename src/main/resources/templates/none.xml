@@ -3,6 +3,7 @@
 <head>
 <title>Lane Medical Library, Stanford University Medical Center</title>
     <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}-${git.commit.id.abbrev}"/>
+     <style type="text/css">html {background-color:#fff;}</style>
 </head>
 <body>
     <?laneweb content?>

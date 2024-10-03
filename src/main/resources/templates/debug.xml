@@ -24,7 +24,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/events.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/no-search.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/no-search-template.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/discovery-login.css" />
@@ -52,7 +52,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/portals.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/course-reserves.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/liaisons-directory.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/contacts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/explore.css" />

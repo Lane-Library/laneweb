@@ -4,6 +4,9 @@
     padding: 88px 7% 24px;
 }
 
+.no-search-content .search-form h3 {
+    height: 30px;
+}
 
 .no-search-content .search-form fieldset {
     position: relative;
@@ -36,5 +39,13 @@
     .no-search-content .search-form {
         margin: 54px auto 82px;
         width: 85%;
+    }
+
+    .no-search-content {
+        padding: 43px 0 24px;
+    }
+
+    .no-search-content h1 {
+        margin-left: 9px;
     }
 }
