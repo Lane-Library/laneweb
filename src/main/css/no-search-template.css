@@ -8,6 +8,13 @@
     height: 30px;
 }
 
+
+.no-search-content .ankle-footer {
+    margin-bottom: -80px;
+    margin-left: -8%;
+    margin-right: -8%;
+}
+
 .no-search-content .search-form fieldset {
     position: relative;
     padding: 0;
