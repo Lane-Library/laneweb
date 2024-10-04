@@ -2,30 +2,52 @@
 
     "use strict";
 
-    let
-        Bookmark = L.Bookmark,
+    let Bookmark = L.Bookmark,
         HTMLTemplate = document.querySelector("#bookmark-editor-template");
 
-    /**
-     * An editor widget for an individual bookmark.
-     * @class BookmarkEditor
-     * @requires Widget
-     * @constructor
-     */
-    class BookmarkEditor {
+
+    class EventEmitter {
         constructor() {
-            {
-                this.bookmark = null;
-                this.editing = false;
-            }
+            this.events = {};
         }
 
+        on(event, listener) {
+            if (!this.events[event]) {
+                this.events[event] = [];
+            }
+            this.events[event].push(listener);
+        }
+
+        emit(event, ...args) {
+            if (this.events[event]) {
+                this.events[event].forEach(listener => listener.apply(this, args));
+            }
+        }
+    }
+
+    class BookmarkEditor extends EventEmitter {
+        constructor(args) {
+            super(); // Call the parent class constructor
+            this.bookmark = args.bookmark;
+            this.editing = args.render;
+            this.srcNode = args.srcNode;
+            this.initializer();
+        }
+
+
+        initializer() {
+            if (HTMLTemplate != null) {
+                this.renderUI();
+                this.bindUI();
+                this.syncUI();
+            }
+        }
         /**
          * Creates text inputs and buttons for the editor using the #bookmark-editor-template from form.stx.
          * @method renderUI
          */
         renderUI() {
-            this.get("srcNode").append(HTMLTemplate.innerHTML);
+            this.srcNode.append(HTMLTemplate.innerHTML);
         }
 
         /**
@@ -33,7 +55,11 @@
          * @method bindUI
          */
         bindUI() {
-            this.get("srcNode").all("button").on("click", this._handleButtonClick, this);
+            this.srcNode.all("button").on("click", this._handleButtonClick, this);
+            // const buttons = this.srcNode.querySelectorAll("button");
+            // buttons.forEach(button => {
+            //     button.addEventListener("click", (event) => this._handleButtonClick(event));
+            // });
             this.on("editingChange", this._handleEditingChange, this);
         }
 
@@ -42,10 +68,12 @@
          * @method syncUI
          */
         syncUI() {
-            let srcNode = this.get("srcNode");
+            let srcNode = this.srcNode;
             this._labelInput = srcNode.one("input[name='label']");
             this._urlInput = srcNode.one("input[name='url']");
-            srcNode.one("input[name='url']").after("focus", this._setDefaultUrlInputText, this);
+            const urlInputElement = srcNode.one("input[name='url']");
+            // urlInputElement.addEventListener("focus", (event) => this._setDefaultUrlInputText(event));
+            urlInputElement.on("focus", this._setDefaultUrlInputText, this);
             this._truncateLabel();
         }
 
@@ -57,8 +85,8 @@
          */
         cancel() {
             let addBookmarkContainer = document.querySelector(".addBookmarkContainer");
-            if (this.get("bookmark")) {
-                this.set("editing", false);
+            if (this.bookmark) {
+                this.editing = false;
             } else {
                 this._labelInput.destroy();
                 this._urlInput.destroy();
@@ -74,8 +102,8 @@
          * @method edit
          */
         edit() {
-            if (this.get("bookmark")) {
-                this.set("editing", true);
+            if (this.bookmark) {
+                this.editing = true;
             }
         }
 
@@ -85,8 +113,8 @@
          * @method delete
          */
         delete() {
-            let bookmarks = L.BookmarksWidget.get("bookmarks"),
-                index = bookmarks.indexOf(this.get("bookmark"));
+            let bookmarks = L.BookmarksWidget.bookmarks,
+                index = bookmarks.indexOf(this.bookmark);
             bookmarks.removeBookmarks([index]);
         }
 
@@ -97,9 +125,9 @@
          * @method save
          */
         save() {
-            let newlabel = this._labelInput.get("value"),
-                newurl = this._urlInput.get("value"),
-                bookmark = this.get("bookmark");
+            let newlabel = this._labelInput.value,
+                newurl = this._urlInput.value,
+                bookmark = this.bookmark;
             if (!newlabel || !newurl) {
                 if (!newlabel) {
                     this._labelInput.set("placeholder", "required");
@@ -116,7 +144,7 @@
             } else {
                 bookmark = new Bookmark(newlabel, newurl);
                 this.set("bookmark", bookmark);
-                L.BookmarksWidget.get("bookmarks").addBookmark(bookmark);
+                L.BookmarksWidget.bookmarks.addBookmark(bookmark);
             }
             this.set("editing", false);
         }
@@ -127,15 +155,15 @@
          * @method reset
          */
         reset() {
-            let bookmark = this.get("bookmark");
-            this._labelInput.set("placeholder", "Name");
-            this._urlInput.set("placeholder", "Location");
+            let bookmark = this.bookmark;
+            this._labelInput.placeholder = "Name";
+            this._urlInput.placeholder = "Location";
             if (bookmark) {
-                this._labelInput.set("value", bookmark.getLabel());
-                this._urlInput.set("value", bookmark.getUrl());
+                this._labelInput.value = bookmark.getLabel();
+                this._urlInput.value = bookmark.getUrl();
             } else {
-                this._labelInput.set("value", "");
-                this._urlInput.set("value", "");
+                this._labelInput.value = ""
+                this._urlInput.value = ""
             }
         }
 
@@ -144,8 +172,8 @@
          * @method update
          */
         update() {
-            let anchor = this.get("srcNode").one("a"),
-                bookmark = this.get("bookmark");
+            let anchor = this.srcNode.one("a"),
+                bookmark = this.bookmark;
             anchor.set("innerHTML", bookmark.getLabel());
             anchor.set("href", bookmark.getUrl());
             this._truncateLabel();
@@ -169,7 +197,7 @@
         //  * @param event {CustomEvent}
         //  */
         _handleEditingChange(event) {
-            let srcNode = this.get("srcNode"),
+            let srcNode = this.srcNode,
                 activeClass = this.getClassName() + "-active";
             srcNode._node.classList.toggle('active');
             if (event.newVal) {
@@ -186,11 +214,15 @@
          * @private
          */
         _truncateLabel() {
-            let anchor = this.get("srcNode").one("a"),
-                label = anchor.get("innerHTML");
+            let anchor = this.srcNode.one("a"),
+                label = anchor.innerHTML;
+            label = anchor.get("innerHTML");
             if (label.length > 130) {
                 anchor.set("innerHTML", label.substring(0, 130) + "...");
             }
+            // if (label.length > 130) {
+            //     anchor.innerHTML = label.substring(0, 130) + "...";
+            // }
         }
 
 
@@ -200,15 +232,12 @@
          * @private
          */
         _setDefaultUrlInputText() {
-            if (this._urlInput.get("value") === "") {
-                this._urlInput.set("value", "https://");
+            if (this._urlInput.value === "") {
+                this._urlInput.value = "https://";
             }
         }
     }
-
-
-
-    L.BookmarkEditor = new BookmarkEditor();
+    L.BookmarkEditor = BookmarkEditor;
 
 })();
 
