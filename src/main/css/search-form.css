@@ -43,9 +43,10 @@
 .search-form input {
     line-height: 59px;
     padding-left: 45px;
+    padding-right: 45px;
     border: 1px white;
-    outline: none;
-    width: 95%;
+    outline: 0;
+    width: 100%;
 }
 
 .search-form .search-dropdown .fa-solid,
@@ -239,6 +240,10 @@
     .search-form {
         width: 100%;
         margin: 20px 2em 0;
+    }
+
+    .search-form .general-dropdown.dropdown {
+        display: none
     }
 
     .search-results .search-form {
