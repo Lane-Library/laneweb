@@ -5,9 +5,7 @@
 }
 
 .no-search-content .ankle-footer {
-    margin-bottom: -80px;
-    margin-left: -8%;
-    margin-right: -8%;
+    margin: 3em -8% -80px;
 }
 
 .no-search-content .search-form fieldset {
@@ -43,5 +41,10 @@
 
     .no-search-content h1 {
         margin-left: 9px;
+    }
+
+    .no-search-content .ankle-footer {
+        padding-bottom: 3em;
+        margin: 6em auto -74px;
     }
 }
