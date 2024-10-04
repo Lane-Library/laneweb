@@ -18,14 +18,22 @@
     width: 70%;
 }
 
+.no-search-content .search-form input {
+    padding-right: 45px;
+    width: 100%;
+}
+
 .no-search-content .search-reset {
     top: 52px;
 }
+
+
 
 .no-search-content .search-help-link {
     text-align: center;
     padding-top: 10px;
 }
+
 
 
 
