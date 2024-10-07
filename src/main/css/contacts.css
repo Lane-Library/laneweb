@@ -52,14 +52,9 @@
 #sfp-journal:target,
 #sfp-other:target {
     display: block;
+    scroll-margin-top: 500px;
 }
 
-#laneaskus .laneaskus-button a,
-#laneaskus .laneaskus-button .fa,
-#laneaskus:target .laneaskus-button a,
-#laneaskus:target .laneaskus-button .fa,
-#ejp:target .ejp-button a,
-#ejp:target .ejp-button .fa,
 #sfp-journal:target .sfp-journal-button,
 #sfp-journal:target .sfp-journal-button a,
 #sfp-journal:target .sfp-button a,
