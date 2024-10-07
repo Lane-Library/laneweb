@@ -34,7 +34,8 @@ section.header a {
 
 .login>.login-item-active {
     display: initial;
-    margin-top: 1px;
+    line-height: 68px;
+    padding-top: 1px;
 }
 
 .login .fa {
