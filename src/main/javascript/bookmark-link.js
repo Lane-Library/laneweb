@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     "use strict";
 
@@ -22,32 +22,32 @@
          * @requires LinkInfo
          * @constructor
          */
-        BookmarkLink = function() {
+        BookmarkLink = function () {
             BookmarkLink.superclass.constructor.apply(this, arguments);
         };
 
         BookmarkLink.NAME = "bookmark-link";
 
         BookmarkLink.ATTRS = {
-                node : {
-                    valueFn : function() {
-                        return Y.Node.create("<span title='Add to My Bookmarks' class='bookmark-link'><i class='fa fa-star'></i></span>");
-                    }
-                },
-                bookmarks : {
-                    valueFn : function() {
-                        return L.BookmarksWidget ? L.BookmarksWidget.get("bookmarks") : null;
-                    }
-                },
-                target : {
-                    value : null
-                },
-                hideDelay : {
-                    value:500
-                },
-                status : {
-                    value : OFF
+            node: {
+                valueFn: function () {
+                    return Y.Node.create("<span title='Add to My Bookmarks' class='bookmark-link'><i class='fa fa-star'></i></span>");
                 }
+            },
+            bookmarks: {
+                valueFn: function () {
+                    return L.BookmarksWidget ? L.BookmarksWidget.bookmarks : null;
+                }
+            },
+            target: {
+                value: null
+            },
+            hideDelay: {
+                value: 500
+            },
+            status: {
+                value: OFF
+            }
         };
 
         Y.extend(BookmarkLink, Y.Base, {
@@ -56,12 +56,12 @@
              * Sets up event handlers and creates the timer attribute.
              * @method initializer
              */
-            initializer : function() {
+            initializer: function () {
                 this._timer = null;
-                Y.delegate("mouseover", this._handleTargetMouseover,"ul.content", "a", this);
-                Y.delegate("mouseout", this._handleTargetMouseout,"ul.content", "a", this);
-                Y.delegate("mouseover", this._handleTargetMouseover,"section.content", "a", this);
-                Y.delegate("mouseout", this._handleTargetMouseout,"section.content", "a", this);
+                Y.delegate("mouseover", this._handleTargetMouseover, "ul.content", "a", this);
+                Y.delegate("mouseout", this._handleTargetMouseout, "ul.content", "a", this);
+                Y.delegate("mouseover", this._handleTargetMouseover, "section.content", "a", this);
+                Y.delegate("mouseout", this._handleTargetMouseout, "section.content", "a", this);
                 this.on("statusChange", this._handleStatusChange);
                 let bookmarks = this.get("bookmarks");
                 if (bookmarks) {
@@ -74,7 +74,7 @@
              * @method _handleSyncEvent
              * @private
              */
-            _handleSyncEvent : function() {
+            _handleSyncEvent: function () {
                 this.set("status", OFF);
                 // fire an added event for favorites animation
                 L.fire("bookmarks:added");
@@ -85,7 +85,7 @@
              * @method _handleBookmarkMouseOut
              * @private
              */
-            _handleBookmarkMouseout : function() {
+            _handleBookmarkMouseout: function () {
                 this.set("status", TIMING);
             },
 
@@ -94,7 +94,7 @@
              * @method _handleBookmarkMouseover
              * @private
              */
-            _handleBookmarkMouseover : function() {
+            _handleBookmarkMouseover: function () {
                 this.set("status", ACTIVE);
             },
 
@@ -105,7 +105,7 @@
              * @method _handleClick
              * @private
              */
-            _handleClick : function() {
+            _handleClick: function () {
                 let target = this.get("target"),
                     linkinfo = new L.LinkInfo(target._node),
                     label, url, query, bookmarks;
@@ -133,7 +133,7 @@
              * @private
              * @param event {CustomEvent}
              */
-            _handleTargetMouseout : function(event) {
+            _handleTargetMouseout: function (event) {
                 if (this._isBookmarkable(event.currentTarget)) {
                     this.set("status", TIMING);
                 }
@@ -145,7 +145,7 @@
              * @private
              * @param event {CustomEvent}
              */
-            _handleTargetMouseover : function(event) {
+            _handleTargetMouseover: function (event) {
                 if (this._isBookmarkable(event.currentTarget)) {
                     this.set("target", event.currentTarget);
                     this.set("status", READY);
@@ -159,7 +159,7 @@
              * @param target the target anchor
              * @returns {Boolean}
              */
-            _isAlreadyBookmarked : function(target) {
+            _isAlreadyBookmarked: function (target) {
                 let url, bookmarks, query,
                     linkinfo = new L.LinkInfo(target._node);
                 if (linkinfo.local) {
@@ -188,8 +188,8 @@
              * @param target the target anchor
              * @returns {Boolean}
              */
-            _isBookmarkable : function(target) {
-               return  target.get("href")
+            _isBookmarkable: function (target) {
+                return target.get("href")
                     && target.getStyle("display").indexOf("inline") === 0
                     && !target.one("img")
                     && target.ancestor(".bookmarking", true)
@@ -202,7 +202,7 @@
              * @method _turnOff
              * @private
              */
-            _turnOff : function() {
+            _turnOff: function () {
                 this.set("status", OFF);
             },
 
@@ -211,7 +211,7 @@
              * @method _clearTimer
              * @private
              */
-            _clearTimer : function() {
+            _clearTimer: function () {
                 if (this._timer) {
                     this._timer.cancel();
                     this._timer = null;
@@ -225,42 +225,42 @@
              * @private
              * @param event {CustomEvent}
              */
-            _handleStatusChange : function(event) {
+            _handleStatusChange: function (event) {
                 this._clearTimer();
                 let node = this.get("node"), target = this.get("target");
                 //IE messes up the event handling if set up on initialization
                 //so purging and selectively set them when the status changes.
                 node.purge(false);
-                switch(event.newVal) {
-                //OFF: not visible
-                case OFF :
-                    node.remove(false);
-                    node.removeClass("active");
-                    node.removeClass("bookmarking");
-                    break;
-                //READY: visible but not enabled
-                case READY :
-                    target.insert(node, "after");
-                    break;
-                //ACTIVE: enabled (mouseover)
-                case ACTIVE :
-                    node.on("mouseout", this._handleBookmarkMouseout, this);
-                    node.on("click", this._handleClick, this);
-                    node.addClass("active");
-                    break;
-                //BOOKMARKING: clicked and waiting for server sync message
-                case BOOKMARKING :
-                    node.on("mouseout", this._handleBookmarkMouseout, this);
-                    node.replaceClass("active", "bookmarking");
-                    break;
-                //TIMING: waiting to hide
-                case TIMING :
-                    node.on("mouseover",this._handleBookmarkMouseover, this);
-                    node.removeClass("active");
-                    node.removeClass("bookmarking");
-                    this._timer = Y.later(this.get("hideDelay"), this, this._turnOff);
-                    break;
-                default:
+                switch (event.newVal) {
+                    //OFF: not visible
+                    case OFF:
+                        node.remove(false);
+                        node.removeClass("active");
+                        node.removeClass("bookmarking");
+                        break;
+                    //READY: visible but not enabled
+                    case READY:
+                        target.insert(node, "after");
+                        break;
+                    //ACTIVE: enabled (mouseover)
+                    case ACTIVE:
+                        node.on("mouseout", this._handleBookmarkMouseout, this);
+                        node.on("click", this._handleClick, this);
+                        node.addClass("active");
+                        break;
+                    //BOOKMARKING: clicked and waiting for server sync message
+                    case BOOKMARKING:
+                        node.on("mouseout", this._handleBookmarkMouseout, this);
+                        node.replaceClass("active", "bookmarking");
+                        break;
+                    //TIMING: waiting to hide
+                    case TIMING:
+                        node.on("mouseover", this._handleBookmarkMouseover, this);
+                        node.removeClass("active");
+                        node.removeClass("bookmarking");
+                        this._timer = Y.later(this.get("hideDelay"), this, this._turnOff);
+                        break;
+                    default:
                 }
             }
         });

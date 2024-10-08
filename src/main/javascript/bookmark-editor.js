@@ -29,25 +29,19 @@
         constructor(args) {
             super(); // Call the parent class constructor
             this.bookmark = args.bookmark;
-            this.editing = args.render;
             this.srcNode = args.srcNode;
-            this.initializer();
+            this.renderUI();
+            this.bindUI();
+            this.syncUI();
         }
 
-
-        initializer() {
-            if (HTMLTemplate != null) {
-                this.renderUI();
-                this.bindUI();
-                this.syncUI();
-            }
-        }
         /**
          * Creates text inputs and buttons for the editor using the #bookmark-editor-template from form.stx.
          * @method renderUI
          */
         renderUI() {
-            this.srcNode.append(HTMLTemplate.innerHTML);
+            this.srcNode.classList.add("bookmark-editor-content");
+            this.srcNode.innerHTML += HTMLTemplate.innerHTML;
         }
 
         /**
@@ -55,11 +49,10 @@
          * @method bindUI
          */
         bindUI() {
-            this.srcNode.all("button").on("click", this._handleButtonClick, this);
-            // const buttons = this.srcNode.querySelectorAll("button");
-            // buttons.forEach(button => {
-            //     button.addEventListener("click", (event) => this._handleButtonClick(event));
-            // });
+            const buttons = this.srcNode.querySelectorAll("button");
+            buttons.forEach(button => {
+                button.addEventListener("click", (event) => this._handleButtonClick(event));
+            });
             this.on("editingChange", this._handleEditingChange, this);
         }
 
@@ -69,11 +62,11 @@
          */
         syncUI() {
             let srcNode = this.srcNode;
-            this._labelInput = srcNode.one("input[name='label']");
-            this._urlInput = srcNode.one("input[name='url']");
-            const urlInputElement = srcNode.one("input[name='url']");
-            // urlInputElement.addEventListener("focus", (event) => this._setDefaultUrlInputText(event));
-            urlInputElement.on("focus", this._setDefaultUrlInputText, this);
+            this._labelInput = srcNode.querySelector("input[name='label']");
+            this._urlInput = srcNode.querySelector("input[name='url']");
+            const urlInputElement = srcNode.querySelector("input[name='url']");
+            urlInputElement.addEventListener("focus", (event) => this._setDefaultUrlInputText(event));
+
             this._truncateLabel();
         }
 
@@ -174,8 +167,8 @@
         update() {
             let anchor = this.srcNode.one("a"),
                 bookmark = this.bookmark;
-            anchor.set("innerHTML", bookmark.getLabel());
-            anchor.set("href", bookmark.getUrl());
+            anchor.lengthrHTML = bookmark.getLabel();
+            anchor.href = bookmark.getUrl();
             this._truncateLabel();
         }
 
@@ -187,7 +180,7 @@
          */
         _handleButtonClick(event) {
             event.preventDefault();
-            this[event.currentTarget.getAttribute("value")].call(this, e);
+            this[event.currentTarget.getAttribute("value")].call(this, event);
         }
 
         // /**
@@ -214,15 +207,11 @@
          * @private
          */
         _truncateLabel() {
-            let anchor = this.srcNode.one("a"),
+            let anchor = this.srcNode.querySelector("a"),
                 label = anchor.innerHTML;
-            label = anchor.get("innerHTML");
             if (label.length > 130) {
-                anchor.set("innerHTML", label.substring(0, 130) + "...");
+                anchor.innerHTML = label.substring(0, 130) + "...";
             }
-            // if (label.length > 130) {
-            //     anchor.innerHTML = label.substring(0, 130) + "...";
-            // }
         }
 
 

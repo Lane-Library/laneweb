@@ -1,8 +1,8 @@
-(function() {
+(function () {
 
     "use strict";
 
-    let getTrackerId = function() {
+    let getTrackerId = function () {
         let host = location.host,
             trackerId;
         if (host.match("lane.stanford.edu")) {
@@ -27,14 +27,14 @@
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
     L.Get.script("https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID, {
-        onSuccess: function() {
+        onSuccess: function () {
             let model = L.Model, bookmark,
                 ipGroup = model.get(model.IPGROUP),
-                auth =  model.get(model.AUTH),
+                auth = model.get(model.AUTH),
                 dimensions = new Map();
 
             window.dataLayer = window.dataLayer || [];
-            window.gtag = window.gtag || function() {
+            window.gtag = window.gtag || function () {
                 dataLayer.push(arguments);
             }
             gtag('js', new Date());
@@ -44,7 +44,7 @@
             }
             if (auth) {
                 dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
-                if (L.BookmarksWidget && L.BookmarksWidget.get("bookmarks").size() > 0) {
+                if (L.BookmarksWidget && L.BookmarksWidget.bookmarks.length > 0) {
                     dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
                     bookmark = auth;
                 }
@@ -54,42 +54,42 @@
                 'custom_map': dimensions
             });
 
-            gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup , 'auth': auth,  'bookmark': bookmark });
+            gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup, 'auth': auth, 'bookmark': bookmark });
 
 
         }
     });
 
-	
-	
-    L.on("tracker:trackableEvent", function(event) {
-		if(window.gtag){
-	        window.gtag('event', event.category, {
-	            'event_action': event.action,
-	            'event_label': event.label,
-	            'event_value': event.value
-	        });
+
+
+    L.on("tracker:trackableEvent", function (event) {
+        if (window.gtag) {
+            window.gtag('event', event.category, {
+                'event_action': event.action,
+                'event_label': event.label,
+                'event_value': event.value
+            });
         }
     });
 
-    L.on("tracker:trackablePageview", function(event) {
-		    if ( window.gtag && event.external) {
-	            if (event.query !== undefined && event.query !== '') {
-	                window.gtag('event', 'lane:offsite', {
-	                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
-	                    'event_label': event.host + event.path + event.query
-	                });
-	
-	            } else {
-	                window.gtag('event', 'lane:offsite', {
-	                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
-	                    'event_label': event.host + event.path
-	                });
-	            }
-	        } else if(window.gtag){
-	            window.gtag('event', 'page_view', {
-	                'page_location':'/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
-	            })
+    L.on("tracker:trackablePageview", function (event) {
+        if (window.gtag && event.external) {
+            if (event.query !== undefined && event.query !== '') {
+                window.gtag('event', 'lane:offsite', {
+                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+                    'event_label': event.host + event.path + event.query
+                });
+
+            } else {
+                window.gtag('event', 'lane:offsite', {
+                    'event_action': "/OFFSITE-CLICK-EVENT/" + encodeURIComponent(event.title),
+                    'event_label': event.host + event.path
+                });
+            }
+        } else if (window.gtag) {
+            window.gtag('event', 'page_view', {
+                'page_location': '/ONSITE/' + encodeURIComponent(event.title) + '/' + event.path
+            })
         }
     });
 })();

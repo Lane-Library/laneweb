@@ -10,7 +10,8 @@
     z-index: 2;
 }
 
-.favorites .dropdown-content a.manageBookmarks.btn, .favorites .dropdown-content a.manageBookmarks.btn:hover {
+.favorites .dropdown-content a.manageBookmarks.btn,
+.favorites .dropdown-content a.manageBookmarks.btn:hover {
     color: white;
     border: none;
     background-color: #8C1515;
@@ -41,37 +42,114 @@
 }
 
 .favorites.dropdown .fa-bookmark.shake {
-  animation: bookmarks-shake 0.5s;
-  animation-iteration-count: 6;
+    animation: bookmarks-shake 0.5s;
+    animation-iteration-count: 6;
 }
 
 @keyframes bookmarks-shake {
-  0% { transform: rotate(0deg); }
-  4% { transform: rotate(-5deg); }
-  8% { transform: rotate(-10deg); }
-  12% { transform: rotate(-15deg); }
-  16% { transform: rotate(-20deg); }
-  20% { transform: rotate(-25deg); }
-  24% { transform: rotate(-30deg); }
-  28% { transform: rotate(-25deg); }
-  32% { transform: rotate(-20deg); }
-  36% { transform: rotate(-15deg); }
-  40% { transform: rotate(-10deg); }
-  44% { transform: rotate(-5deg); }
-  48% { transform: rotate(0deg); }
-  52% { transform: rotate(5deg); }
-  56% { transform: rotate(10deg); }
-  60% { transform: rotate(15deg); }
-  64% { transform: rotate(20deg); }
-  68% { transform: rotate(25deg); }
-  72% { transform: rotate(30deg); }
-  76% { transform: rotate(25deg); }
-  80% { transform: rotate(20deg); }
-  84% { transform: rotate(15deg); }
-  88% { transform: rotate(10deg); }
-  92% { transform: rotate(5deg); }
-  96% { transform: rotate(0deg); }
-  100% { transform: rotate(-5deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    4% {
+        transform: rotate(-5deg);
+    }
+
+    8% {
+        transform: rotate(-10deg);
+    }
+
+    12% {
+        transform: rotate(-15deg);
+    }
+
+    16% {
+        transform: rotate(-20deg);
+    }
+
+    20% {
+        transform: rotate(-25deg);
+    }
+
+    24% {
+        transform: rotate(-30deg);
+    }
+
+    28% {
+        transform: rotate(-25deg);
+    }
+
+    32% {
+        transform: rotate(-20deg);
+    }
+
+    36% {
+        transform: rotate(-15deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    44% {
+        transform: rotate(-5deg);
+    }
+
+    48% {
+        transform: rotate(0deg);
+    }
+
+    52% {
+        transform: rotate(5deg);
+    }
+
+    56% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(15deg);
+    }
+
+    64% {
+        transform: rotate(20deg);
+    }
+
+    68% {
+        transform: rotate(25deg);
+    }
+
+    72% {
+        transform: rotate(30deg);
+    }
+
+    76% {
+        transform: rotate(25deg);
+    }
+
+    80% {
+        transform: rotate(20deg);
+    }
+
+    84% {
+        transform: rotate(15deg);
+    }
+
+    88% {
+        transform: rotate(10deg);
+    }
+
+    92% {
+        transform: rotate(5deg);
+    }
+
+    96% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-5deg);
+    }
 }
 
 /* .bookmark-link: "Add to My Bookmarks" star button on most links */
@@ -96,36 +174,38 @@
     color: gray;
 }
 
-.bookmark-link.active .fa, .bookmark-link.bookmarking .fa {
+.bookmark-link.active .fa,
+.bookmark-link.bookmarking .fa {
     color: #b40d1a;
 }
 
 /* HTML template for each bookmark editor */
 #bookmark-editor-template {
-    display:none;
+    display: none;
 }
 
 /* styles for bookmark editors (div around li) on /favorites.html */
-.yui3-bookmark-editor {
+.bookmark-editor {
     cursor: move;
     margin: 2px 0;
 }
 
-.yui3-bookmark-editor:hover {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.12),0 2px 4px 0 rgba(0,0,0,.24);
-  transition: box-shadow .5s;
+.bookmark-editor:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .24);
+    transition: box-shadow .5s;
 }
 
-.yui3-bookmark-editor:nth-child(even) {
+.bookmark-editor:nth-child(even) {
     background: #fff;
 }
 
-.yui3-bookmark-editor:nth-child(odd) {
+.bookmark-editor:nth-child(odd) {
     background: #f0f4f5;
 }
 
-.yui3-bookmark-editor-active label, .yui3-bookmark-editor-active input,
-    .yui3-bookmark-editor-active button {
+.bookmark-editor-active label,
+.bookmark-editor-active input,
+.bookmark-editor-active button {
     display: inline;
 }
 
@@ -170,6 +250,7 @@
     background-color: #f0f4f5;
     padding: 3px 12px;
 }
+
 .addBookmarkContainer i {
     color: black;
     margin-left: 10px;
@@ -183,25 +264,26 @@
     cursor: pointer;
     color: #007c92;
 }
+
 .addBookmarkContainer .fa-angle-up {
-    display:none;
+    display: none;
 }
 
 .addBookmarkContainer.active .fa-angle-up {
-    display:inline-flex;
+    display: inline-flex;
 }
 
 .addBookmarkContainer.active .fa-angle-down {
-    display:none;
+    display: none;
 }
 
 /* li container holding bookmark, editor */
-li.yui3-bookmark-editor-content {
+li.bookmark-editor-content {
     padding: 10px 12px;
     display: flex;
 }
 
-.yui3-bookmark-editor-content a {
+.bookmark-editor-content a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -209,11 +291,12 @@ li.yui3-bookmark-editor-content {
     font-size: 1.125em;
 }
 
-.yui3-bookmark-editor-content.active a, .yui3-bookmark-editor-content.active .actions {
+.bookmark-editor-content.active a,
+.bookmark-editor-content.active .actions {
     display: none;
 }
 
-.yui3-bookmark-editor-content .editContainer {
+.bookmark-editor-content .editContainer {
     display: none;
     color: #666;
     align-items: start;
@@ -221,64 +304,65 @@ li.yui3-bookmark-editor-content {
     margin-top: -5px;
 }
 
-.yui3-bookmark-editor-content.active .editContainer {
+.bookmark-editor-content.active .editContainer {
     display: flex;
 }
 
-.yui3-bookmark-editor-content .editContainer .btn {
+.bookmark-editor-content .editContainer .btn {
     padding: 3px 0;
     width: 95px;
 }
 
-.yui3-bookmark-editor-content .editPanel {
-  width: 69%;
-  display: flex;
+.bookmark-editor-content .editPanel {
+    width: 69%;
+    display: flex;
 }
 
-.yui3-bookmark-editor-content .editPanel .editItem:first-child {
-  padding-left: 0;
+.bookmark-editor-content .editPanel .editItem:first-child {
+    padding-left: 0;
 }
 
-.yui3-bookmark-editor-content .editPanel:last-child {
+.bookmark-editor-content .editPanel:last-child {
     width: 29%;
     margin: 26px 25px 0;
 }
 
-.yui3-bookmark-editor-content .editItem {
+.bookmark-editor-content .editItem {
     width: 51%;
     padding: 12px;
 }
 
-.yui3-bookmark-editor-content .editItem label {
+.bookmark-editor-content .editItem label {
     display: inline-block;
     min-width: 45px;
 }
 
-.yui3-bookmark-editor-content .editPanel:last-child .editItem {
+.bookmark-editor-content .editPanel:last-child .editItem {
     text-align: center;
 }
 
-.yui3-bookmark-editor-content .actions {
+.bookmark-editor-content .actions {
     white-space: nowrap;
 }
 
-.yui3-bookmark-editor-content .actions button, .yui3-bookmark-editor-content .close button {
+.bookmark-editor-content .actions button,
+.bookmark-editor-content .close button {
     margin: 0 15px;
     border-color: transparent;
     background-color: transparent;
     cursor: pointer;
 }
 
-.yui3-bookmark-editor-content .actions button i {
-    color:#333;
+.bookmark-editor-content .actions button i {
+    color: #333;
 }
 
-.yui3-bookmark-editor-content .actions button i:hover {
-    color:#666;
+.bookmark-editor-content .actions button i:hover {
+    color: #666;
 }
 
-.yui3-bookmark-editor-content .actions button i:active {
-    color:#000;
+.bookmark-editor-content .actions button i:active {
+    color: #000;
 }
 
 /* next two are for the login required lightbox popup */
@@ -297,29 +381,33 @@ li.yui3-bookmark-editor-content {
     padding-bottom: 28px;
 }
 
-@media ( max-width : 1100px) {
+@media (max-width : 1100px) {
     .manageBookmarks {
         font-size: 1em;
     }
 }
 
-@media ( max-width : 812px) {
+@media (max-width : 812px) {
     .favorites li {
         margin: 9px 0;
     }
+
     #bookmarks-editor .close {
         right: 10px;
     }
-    .yui3-bookmark-editor-content .editItem {
+
+    .bookmark-editor-content .editItem {
         width: 100%;
         padding-left: 0;
     }
-    .yui3-bookmark-editor-content .editPanel {
-      width: 55%;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
+
+    .bookmark-editor-content .editPanel {
+        width: 55%;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
     }
-    .yui3-bookmark-editor:hover {
-      box-shadow: none;
+
+    .bookmark-editor:hover {
+        box-shadow: none;
     }
 }

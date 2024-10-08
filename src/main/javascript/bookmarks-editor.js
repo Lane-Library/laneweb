@@ -1,9 +1,9 @@
-(function() {
+(function () {
 
     "use strict";
 
-    let BookmarksEditor,
-        BookmarkEditor = L.BookmarkEditor,
+
+    let BookmarkEditor = L.BookmarkEditor,
         editorsNode = document.querySelector("#bookmarks-editor");
 
 
@@ -11,65 +11,78 @@
      * The BookmarksEditor.
      * Contains one BookmarkEditor for each bookmark.
      */
-    BookmarksEditor = Y.Base.create("bookmarks-editor", Y.Widget, [], {
+    class BookmarksEditor {
+        constructor(args) {
+            this.srcNode = args.srcNode;
+            this.bookmarks = args.bookmarks;
+            this.render = args.render;
+            this.events = {};
 
-        /**
-         * Sets up various event handlers.
-         * @method bindUI
-         */
-        bindUI : function() {
-            let srcNode = this.get("srcNode"),
-                bookmarks = this.get("bookmarks"),
+            if (this.render) {
+                this.bindUI();
+                this.syncUI();
+            }
+        }
+
+
+        bindUI() {
+            let srcNode = this.srcNode,
+                bookmarks = this.bookmarks,
                 dragManager = Y.DD.DDM;
-            srcNode.all("fieldset button").on("click", this._handleButtonClick, this);
-            bookmarks.after("removeSync", this._handleBookmarksRemove, this);
-            bookmarks.after("addSync", this._handleBookmarkAdd, this);
-            bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
-            bookmarks.after("moveSync", this._handleBookmarkMove, this);
+            const buttons = this.srcNode.querySelectorAll("fieldset button");
+            buttons.forEach(button => {
+                button.addEventListener("click", (event) => this._handleButtonClick(event));
+            });
+            // bookmarks.after("removeSync", this._handleBookmarksRemove, this);
+            // bookmarks.after("addSync", this._handleBookmarkAdd, this);
+            // bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
+            // bookmarks.after("moveSync", this._handleBookmarkMove, this);
 
-            dragManager.on('drag:start', this._handleDragStart, this);
-            dragManager.on('drag:end', this._handleDragEnd, this);
+            // dragManager.on('drag:start', this._handleDragStart, this);
+            // dragManager.on('drag:end', this._handleDragEnd, this);
             this._lastY = 0;
             this._goingUp = false;
-            dragManager.on('drag:drag', this._handleDrag, this);
-            dragManager.on('drop:over', this._handleDropOver, this);
-            this.publish("move", {defaultFn : this._editorMoved});
-        },
+            // dragManager.on('drag:drag', this._handleDrag, this);
+            // dragManager.on('drop:over', this._handleDropOver, this);
+            // this.publish("move", { defaultFn: this._editorMoved });
+        }
 
         /**
          * Creates the BookmarkEditors.
          * @method syncUI
          */
-        syncUI : function() {
+        syncUI() {
             let editor, editors = [], i,
-                srcNode = this.get("srcNode"),
-                items = srcNode.all("li"),
-                bookmarks = this.get("bookmarks");
-            for (i = 0; i < items.size(); i++) {
-                editor = new BookmarkEditor({srcNode : items.item(i), render : true, bookmark : bookmarks.getBookmark(i)});
-                editor.after("destroy", this._handleDestroyEditor, this);
+                srcNode = this.srcNode,
+                items = srcNode.querySelectorAll("li"),
+                bookmarks = this.bookmarks;
+            for (i = 0; i < items.length; i++) {
+                editor = new BookmarkEditor({ srcNode: items.item(i), render: true, bookmark: bookmarks.getBookmark(i) });
+                // editor.after("destroy", this._handleDestroyEditor, this);
                 editors.push(editor);
             }
-            this.set("editors", editors);
+            this.editors = editors;
             this._syncDD();
             // show add bookmarks if no bookmarks present
-            if (0 == items.size()) {
+            if (0 == items.length) {
                 this.add();
             }
-        },
+        }
 
         /**
          * Responds to a click on the add button.  Adds a list item and associated BookmarkEditor to
          * the top of the list and sets it editing state to true.
          * @method add
          */
-        add : function() {
-            let items = this.get("srcNode").one("ul"),
-            item = Y.Node.create("<li><a></a></li>"),
-            addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
-            editors = this.get("editors"),
-            adding = editors.length && editors[0].get("editing"),
-            editor;
+        add() {
+            let items = this.srcNode.one("ul"),
+                item = document.createElement('li'),
+                a = document.createElement('a'),
+                addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
+                editors = this.editors,
+                adding = editors.length && editors[0].get("editing"),
+                editor;
+            item.appendChild(a);
             // toggle add bookmark button
             if (addBookmarkContainer) {
                 addBookmarkContainer.classList.toggle("active");
@@ -80,20 +93,19 @@
                 editors[0].destroy();
             } else {
                 items.prepend(item);
-                editor = new BookmarkEditor({srcNode : item, render : true});
-                editor.after("destroy", this._handleDestroyEditor, this);
-                editors.unshift(editor);
-                editor.set("editing", true);
-            }
-        },
+                editor = new BookmarkEditor({ srcNode: item, render: true });
 
-        /**
-         * @method _editorMoved
-         * @private
-         */
-        _editorMoved : function() {
+                // editor.after("destroy", this._handleDestroyEditor, this);
+
+                editors.unshift(editor);
+
+                // editor.set("editing", true);
+            }
+        }
+
+        _editorMoved() {
             this.get("bookmarks").moveBookmark(this._to, this._from);
-        },
+        }
 
         /**
          * Return an Array of BookmarkEditors that have been written to disk (have an a/href]).
@@ -102,15 +114,15 @@
          * @private
          * @returns {Array}
          */
-        _getSerializedEditors : function() {
+        _getSerializedEditors() {
             let filteredEditors = [];
-            this.get("editors").forEach(function(editor) {
+            this.get("editors").forEach(function (editor) {
                 if (editor.get("srcNode").one("a").get("href") != "") {
                     filteredEditors.push(editor);
                 }
             });
             return filteredEditors;
-        },
+        }
 
         /**
          * Responds to the bookmarks:addSync event, call update() on the appropriate BookmarkEditor.
@@ -118,10 +130,10 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarkAdd : function(event) {
+        _handleBookmarkAdd(event) {
             this.get("editors")[event.target.indexOf(event.bookmark)].update();
             this._syncDD();
-        },
+        }
 
         /**
          * Responds to the bookmarks:moveSync event, rearranges the editors appropriately
@@ -129,11 +141,11 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarkMove : function(event) {
+        _handleBookmarkMove(event) {
             let editors = this._getSerializedEditors();
             editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
             this.set("editors", editors);
-        },
+        }
 
         /**
          * Responds to the bookmarks:removeSync event, calls destroy on each BookmarkEditor
@@ -142,14 +154,14 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarksRemove : function(event) {
+        _handleBookmarksRemove(event) {
             let i, editors = this._getSerializedEditors();
             for (i = event.positions.length - 1; i >= 0; --i) {
                 this._dd[event.positions[i]].destroy(true);
                 this._dd.splice(event.positions[i], 1);
                 editors[event.positions[i]].destroy(true);
             }
-        },
+        }
 
         /**
          * Responds to the bookmarks:updateSync event, calls update() on the appropriate BookmarkEditor.
@@ -157,10 +169,10 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleBookmarkUpdate : function(event) {
+        _handleBookmarkUpdate(event) {
             let editors = this._getSerializedEditors();
             editors[event.position].update();
-        },
+        }
 
         /**
          * The click handler for buttons, delegates to the function named the same as the buttons value.
@@ -168,7 +180,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleButtonClick : function(event) {
+        _handleButtonClick(event) {
             event.preventDefault();
             //see case 67695
             //pressing return generates a click on the add button for some reason
@@ -179,7 +191,7 @@
                     fn.call(this);
                 }
             }
-        },
+        }
 
         /**
          * Removes a destroyed editor from the backing Array.
@@ -187,18 +199,18 @@
          * @private
          * @param event {CustomEvent}
          */
-        _handleDestroyEditor : function(event) {
+        _handleDestroyEditor(event) {
             let editors = this.get("editors"),
                 position = editors.indexOf(event.target);
             editors.splice(position, 1);
-        },
+        }
 
         /**
          * @method _handleDrag
          * @private
          * @param event {CustomEvent}
          */
-        _handleDrag :  function(event) {
+        _handleDrag(event) {
             //Get the last y point
             let y = event.target.lastXY[1];
             //is it greater than the lastY var?
@@ -211,14 +223,14 @@
             }
             //Cache for next check
             this._lastY = y;
-        },
+        }
 
         /**
          * @method _handleDragEnd
          * @private
          * @param event {CustomEvent}
          */
-        _handleDragEnd : function(event) {
+        _handleDragEnd(event) {
             let drag = event.target;
             //Put our styles back
             drag.get('node').setStyles({
@@ -227,16 +239,16 @@
             });
             this._to = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
             if (this._to !== this._from) {
-                this.fire("move", {to : this._to, from : this._from});
+                this.fire("move", { to: this._to, from: this._from });
             }
-        },
+        }
 
         /**
          * @method _handleDragStart
          * @private
          * @param event {CustomEvent}
          */
-        _handleDragStart : function(event) {
+        _handleDragStart(event) {
             //Get our drag object
             let drag = event.target, node = drag.get("node"), dragNode = drag.get("dragNode");
             //Set some styles here
@@ -255,17 +267,17 @@
                 fontSize: "12px"
             });
             this._from = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(node);
-        },
+        }
 
         /**
          * @method _handleDragOver
          * @private
          * @param event {CustomEvent}
          */
-        _handleDropOver : function(event) {
+        _handleDropOver(event) {
             //Get a reference to our drag and drop nodes
             let drag = event.drag.get('node'),
-            drop = event.drop.get('node');
+                drop = event.drop.get('node');
 
             //Are we dropping on an editor node?
             if (drop.hasClass('yui3-bookmark-editor')) {
@@ -278,52 +290,45 @@
                 //Resize this nodes shim, so we can drop on it later.
                 event.drop.sizeShim();
             }
-        },
+        }
 
-        _syncDD : function() {
-            let i, srcNode = this.get("srcNode"),
-                editors = this.get("editors");
+        _syncDD() {
+            let i, srcNode = this.srcNode,
+                editors = this.editors;
             this._dd = this._dd || [];
             for (i = 0; i < this._dd.length; i++) {
                 this._dd[i].destroy();
             }
             this._dd = [];
-            for (i = 0; i < editors.length; i++) {
-                this._dd.push(new Y.DD.Drag({
-                    node : editors[i].get("boundingBox"),
-                    target: {
-                        padding: '0 0 0 20',
-                        useShim: false
-                    }}).plug(Y.Plugin.DDConstrained, {
-                        constrain : srcNode.one("ul")
-                    }).plug(Y.Plugin.DDProxy, {
-                        moveOnEnd: false
-                    }).removeInvalid('a'));
-            }
+            // for (i = 0; i < editors.length; i++) {
+            //     this._dd.push(new Y.DD.Drag({
+            //         node: editors[i].get("boundingBox"),
+            //         target: {
+            //             padding: '0 0 0 20',
+            //             useShim: false
+            //         }
+            //     }).plug(Y.Plugin.DDConstrained, {
+            //         constrain: srcNode.one("ul")
+            //     }).plug(Y.Plugin.DDProxy, {
+            //         moveOnEnd: false
+            //     }).removeInvalid('a'));
+            // }
         }
-    },
-    {
-        ATTRS : {
-            editors : {
-                value : null
-            },
-            bookmarks : {
-                value : null
-            }
-        }
-    });
+    };
+
 
     //Create a new BookmarksEditor
     if (editorsNode) {
         if (L.BookmarksWidget) {
             L.BookmarksEditor = new BookmarksEditor({
-                srcNode : "#bookmarks-editor",
-                bookmarks : L.BookmarksWidget.get("bookmarks"),
-                render : true});
+                srcNode: document.querySelector("#bookmarks-editor"),
+                bookmarks: L.BookmarksWidget.bookmarks,
+                render: true
+            });
         } else {
             // case 141805 bookmark edit buttons fail if bookmarks editor not initialized
-            editorsNode.querySelectorAll("button").forEach(function(node) {
-                node.addEventListener("click", function(event) {
+            editorsNode.querySelectorAll("button").forEach(function (node) {
+                node.addEventListener("click", function (event) {
                     event.preventDefault();
                 });
             });
