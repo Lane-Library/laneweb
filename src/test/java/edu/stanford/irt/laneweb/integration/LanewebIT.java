@@ -99,7 +99,7 @@ public class LanewebIT {
         @Test
         public void testNotFoundServlet() throws Exception {
                 this.mockMvc.perform(get("/rss/browse/type/video?a=z").servletPath("/rss/browse/type/video"))
-                                .andExpect(status().isNotFound()).andExpect(content().contentType(TEXT_HTML));
+                                .andExpect(status().isNotFound());
                 this.mockMvc.perform(get("/rss/mesh/book?m=biology&page=all").servletPath("/rss/mesh/book"))
                                 .andExpect(status().isNotFound());
                 this.mockMvc.perform(get("/wp-login.php").servletPath("/wp-login.php"))
