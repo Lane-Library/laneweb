@@ -197,13 +197,6 @@
             <map:serialize type="xml"/>
         </map:match>
         <map:match pattern="portals/**" type="wildcard">
-            <map:match type="regexp" pattern="portals/(rheumatology)\.html$">
-                <map:generate type="html" src="{content-base}/portals/{1}.html"/>
-                <map:transform type="link-with-cover"/>
-                <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="classpath:/xsl/rss2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:generate type="html" src="{content-base}/portals/{1}"/>
             <map:transform type="link-with-cover"/>
             <map:transform type="xinclude"/>
