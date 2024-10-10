@@ -28,7 +28,7 @@ import jakarta.servlet.ServletContext;
 @Configuration
 @ImportResource({ "classpath:/spring/applications.xmap", "classpath:/spring/bookmarks.xmap",
         "classpath:/spring/libcals.xmap", "classpath:/spring/content.xmap", "classpath:/spring/eresources.xmap",
-        "classpath:/spring/libguides.xmap", "classpath:/spring/rss.xmap", "classpath:/spring/sitemap.xmap" })
+        "classpath:/spring/libguides.xmap", "classpath:/spring/sitemap.xmap" })
 public class LanewebConfiguration {
 
     private Map<String, Object> constants;
