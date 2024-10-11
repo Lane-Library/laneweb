@@ -114,7 +114,7 @@
          */
         _bookmarkUpdated(event) {
             let bookmark = this.bookmarks.getBookmark(event.position),
-                anchor = this.srcNode.querySelectorAll("li").item(event.position).one("a");
+                anchor = this.srcNode.querySelectorAll("li").item(event.position).querySelector("a");
             anchor.innerHTML = bookmark.getLabel();
             anchor.href, bookmark.getUrl();
             this.syncUI();

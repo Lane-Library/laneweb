@@ -15,3 +15,4 @@
 .vscode
 .gitignore
 launch.json
+src/main/resources/config/application.properties

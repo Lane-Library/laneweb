@@ -6,6 +6,7 @@
         HTMLTemplate = document.querySelector("#bookmark-editor-template");
 
 
+
     class EventEmitter {
         constructor() {
             this.events = {};
@@ -27,13 +28,16 @@
 
     class BookmarkEditor extends EventEmitter {
         constructor(args) {
-            super(); // Call the parent class constructor
+            super();
             this.bookmark = args.bookmark;
             this.srcNode = args.srcNode;
+            this.className = "bookmark-editor";
+            this.editing = false;
             this.renderUI();
             this.bindUI();
             this.syncUI();
         }
+
 
         /**
          * Creates text inputs and buttons for the editor using the #bookmark-editor-template from form.stx.
@@ -53,7 +57,7 @@
             buttons.forEach(button => {
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
-            this.on("editingChange", this._handleEditingChange, this);
+            this.on("editingChange", (e) => this._handleEditingChange(e));
         }
 
         /**
@@ -70,6 +74,11 @@
             this._truncateLabel();
         }
 
+        setEditing(newVal) {
+            this.editing = newVal;
+            this.emit("editingChange", { newVal: newVal });
+        }
+
         /**
          * Responds to the cancel button.  If there is no associated bookmark, like when this editor
          * is for a new bookmark that hasn't been created yet, this editor gets destroyed, otherwise
@@ -79,15 +88,22 @@
         cancel() {
             let addBookmarkContainer = document.querySelector(".addBookmarkContainer");
             if (this.bookmark) {
-                this.editing = false;
+                this.setEditing(false);
             } else {
-                this._labelInput.destroy();
-                this._urlInput.destroy();
-                this.destroy(true);
+                this._labelInput = null;
+                this._urlInput = null;
+                this.destroy();
                 if (addBookmarkContainer) {
                     addBookmarkContainer.classList.toggle("active");
                 }
             }
+        }
+
+        destroy() {
+            this.setEditing(false);
+            this.bookmark = null;
+            this.srcNode.remove();
+            this.emit("destroy", { editor: this });
         }
 
         /**
@@ -96,7 +112,8 @@
          */
         edit() {
             if (this.bookmark) {
-                this.editing = true;
+                this.setEditing(true);
+                this.reset();
             }
         }
 
@@ -123,23 +140,24 @@
                 bookmark = this.bookmark;
             if (!newlabel || !newurl) {
                 if (!newlabel) {
-                    this._labelInput.set("placeholder", "required");
+                    this._labelInput.placeholder = "required";
                 }
                 if (!newurl) {
-                    this._urlInput.set("placeholder", "required");
+                    this._urlInput.placeholder = "required";
                 }
                 return;
             }
             if (bookmark) {
                 if (newlabel !== bookmark.getLabel() || newurl !== bookmark.getUrl()) {
                     bookmark.setValues(newlabel, newurl);
+                    this.srcNode.querySelector("a").textContent = newlabel;
                 }
             } else {
                 bookmark = new Bookmark(newlabel, newurl);
-                this.set("bookmark", bookmark);
+                this.bookmark = bookmark;
                 L.BookmarksWidget.bookmarks.addBookmark(bookmark);
             }
-            this.set("editing", false);
+            this.setEditing(false);
         }
 
         /**
@@ -165,9 +183,9 @@
          * @method update
          */
         update() {
-            let anchor = this.srcNode.one("a"),
+            let anchor = this.srcNode.querySelector("a"),
                 bookmark = this.bookmark;
-            anchor.lengthrHTML = bookmark.getLabel();
+            anchor.innerHTML = bookmark.getLabel();
             anchor.href = bookmark.getUrl();
             this._truncateLabel();
         }
@@ -180,7 +198,11 @@
          */
         _handleButtonClick(event) {
             event.preventDefault();
-            this[event.currentTarget.getAttribute("value")].call(this, event);
+            const eventName = event.currentTarget.getAttribute("value");
+            // this.events[eventName][0].call(event);
+            this[eventName].call(this, event);
+            // Yui has a event on "editing" attribute change that toggles the active class on the srcNode.         
+
         }
 
         // /**
@@ -191,13 +213,13 @@
         //  */
         _handleEditingChange(event) {
             let srcNode = this.srcNode,
-                activeClass = this.getClassName() + "-active";
-            srcNode._node.classList.toggle('active');
+                activeClass = this.className + "-active";
+            srcNode.classList.toggle('active');
             if (event.newVal) {
-                srcNode.addClass(activeClass);
+                srcNode.classList.add(activeClass);
                 this.reset();
             } else {
-                srcNode.removeClass(activeClass);
+                srcNode.classList.remove(activeClass);
             }
         }
 

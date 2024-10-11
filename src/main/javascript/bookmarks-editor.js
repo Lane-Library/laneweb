@@ -16,13 +16,13 @@
             this.srcNode = args.srcNode;
             this.bookmarks = args.bookmarks;
             this.render = args.render;
-            this.events = {};
-
+            this.editing = false;
             if (this.render) {
                 this.bindUI();
                 this.syncUI();
             }
         }
+
 
 
         bindUI() {
@@ -33,10 +33,10 @@
             buttons.forEach(button => {
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
-            // bookmarks.after("removeSync", this._handleBookmarksRemove, this);
-            // bookmarks.after("addSync", this._handleBookmarkAdd, this);
-            // bookmarks.after("updateSync", this._handleBookmarkUpdate, this);
-            // bookmarks.after("moveSync", this._handleBookmarkMove, this);
+            bookmarks.on("removeSync", (e) => this._handleBookmarksRemove(e));
+            bookmarks.on("addSync", (e) => this._handleBookmarkAdd(e));
+            bookmarks.on("updateSync", (e) => this._handleBookmarkUpdate(e));
+            bookmarks.on("moveSync", (e) => this._handleBookmarkMove(e));
 
             // dragManager.on('drag:start', this._handleDragStart, this);
             // dragManager.on('drag:end', this._handleDragEnd, this);
@@ -44,7 +44,7 @@
             this._goingUp = false;
             // dragManager.on('drag:drag', this._handleDrag, this);
             // dragManager.on('drop:over', this._handleDropOver, this);
-            // this.publish("move", { defaultFn: this._editorMoved });
+            //this.publish("move", { defaultFn: this._editorMoved });
         }
 
         /**
@@ -58,7 +58,7 @@
                 bookmarks = this.bookmarks;
             for (i = 0; i < items.length; i++) {
                 editor = new BookmarkEditor({ srcNode: items.item(i), render: true, bookmark: bookmarks.getBookmark(i) });
-                // editor.after("destroy", this._handleDestroyEditor, this);
+                editor.on("destroy", (e) => this._handleDestroyEditor(e));
                 editors.push(editor);
             }
             this.editors = editors;
@@ -75,14 +75,13 @@
          * @method add
          */
         add() {
-            let items = this.srcNode.one("ul"),
+            let items = this.srcNode.querySelector("ul"),
                 item = document.createElement('li'),
-                a = document.createElement('a'),
                 addBookmarkContainer = document.querySelector(".addBookmarkContainer"),
                 editors = this.editors,
-                adding = editors.length && editors[0].get("editing"),
+                adding = editors.length && editors[0].editing,
                 editor;
-            item.appendChild(a);
+            item.innerHTML += "<a href=''></a>";
             // toggle add bookmark button
             if (addBookmarkContainer) {
                 addBookmarkContainer.classList.toggle("active");
@@ -94,17 +93,14 @@
             } else {
                 items.prepend(item);
                 editor = new BookmarkEditor({ srcNode: item, render: true });
-
-                // editor.after("destroy", this._handleDestroyEditor, this);
-
+                editor.on("destroy", (e) => this._handleDestroyEditor(e));
                 editors.unshift(editor);
-
-                // editor.set("editing", true);
+                editor.setEditing(true);
             }
         }
 
         _editorMoved() {
-            this.get("bookmarks").moveBookmark(this._to, this._from);
+            this.bookmarks.moveBookmark(this._to, this._from);
         }
 
         /**
@@ -116,8 +112,8 @@
          */
         _getSerializedEditors() {
             let filteredEditors = [];
-            this.get("editors").forEach(function (editor) {
-                if (editor.get("srcNode").one("a").get("href") != "") {
+            this.editors.forEach(function (editor) {
+                if (editor.srcNode) {
                     filteredEditors.push(editor);
                 }
             });
@@ -131,7 +127,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkAdd(event) {
-            this.get("editors")[event.target.indexOf(event.bookmark)].update();
+            this.editors[0].update();
             this._syncDD();
         }
 
@@ -144,7 +140,7 @@
         _handleBookmarkMove(event) {
             let editors = this._getSerializedEditors();
             editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
-            this.set("editors", editors);
+            this.editors = editors;
         }
 
         /**
@@ -157,8 +153,10 @@
         _handleBookmarksRemove(event) {
             let i, editors = this._getSerializedEditors();
             for (i = event.positions.length - 1; i >= 0; --i) {
-                this._dd[event.positions[i]].destroy(true);
-                this._dd.splice(event.positions[i], 1);
+
+                // this._dd[event.positions[i]].destroy(true);
+                // this._dd.splice(event.positions[i], 1);
+
                 editors[event.positions[i]].destroy(true);
             }
         }
@@ -200,8 +198,8 @@
          * @param event {CustomEvent}
          */
         _handleDestroyEditor(event) {
-            let editors = this.get("editors"),
-                position = editors.indexOf(event.target);
+            let editors = this.editors,
+                position = editors.indexOf(event.editor);
             editors.splice(position, 1);
         }
 
@@ -237,7 +235,7 @@
                 visibility: '',
                 opacity: '1'
             });
-            this._to = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(drag.get("node"));
+            this._to = this.srcNode.querySelectorAll("bookmark-editor").indexOf(drag.get("node"));
             if (this._to !== this._from) {
                 this.fire("move", { to: this._to, from: this._from });
             }
@@ -266,7 +264,7 @@
                 padding: "12px 0 12px 36px",
                 fontSize: "12px"
             });
-            this._from = this.get("srcNode").all(".yui3-bookmark-editor").indexOf(node);
+            this._from = this.srcNode.querySelectorAll("bookmark-editor").indexOf(node);
         }
 
         /**
