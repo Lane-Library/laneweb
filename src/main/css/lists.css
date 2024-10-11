@@ -8,7 +8,7 @@ ol li {
 
 
 .content li {
-    border-bottom: solid 1px #f0f4f5;
+    padding: 12px 0;
     font-size: 1em;
 }
 
