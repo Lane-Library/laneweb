@@ -18,7 +18,9 @@
       
 
         <section class="no-search-content">
+            <div>
                 <?laneweb content?>
+            </div>
         </section>
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">

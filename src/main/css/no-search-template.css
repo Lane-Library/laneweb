@@ -4,6 +4,11 @@
     padding: 88px 7% 24px;
 }
 
+.no-search-content>div {
+    max-width: 2300px;
+    margin: auto;
+}
+
 .no-search-content .ankle-footer {
     margin: 3em -8% -80px;
 }
