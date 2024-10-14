@@ -127,7 +127,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkAdd(event) {
-            this.editors[0].update();
+            this.editors[event.target.indexOf(event.bookmark)].update();
             this._syncDD();
         }
 

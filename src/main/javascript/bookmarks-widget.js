@@ -71,7 +71,12 @@
             if (PROXY_LINKS && url.match(/^http[s]?:/)) {
                 url = BASE_PATH + "/apps/proxy/credential?url=" + url;
             }
-            this.srcNode.prepend("<li><a href='" + url + "'>" + event.bookmark.getLabel() + "</a></li>");
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = url;
+            a.textContent = event.bookmark.getLabel();
+            li.appendChild(a);
+            this.srcNode.prepend(li);
             this.syncUI();
         }
 

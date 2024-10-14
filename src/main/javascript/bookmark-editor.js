@@ -198,11 +198,7 @@
          */
         _handleButtonClick(event) {
             event.preventDefault();
-            const eventName = event.currentTarget.getAttribute("value");
-            // this.events[eventName][0].call(event);
-            this[eventName].call(this, event);
-            // Yui has a event on "editing" attribute change that toggles the active class on the srcNode.         
-
+            this[event.currentTarget.getAttribute("value")].call(this, event);
         }
 
         // /**

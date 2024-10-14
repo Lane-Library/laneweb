@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     "use strict";
 
@@ -11,27 +11,12 @@
      * @param label  {string} the label
      * @param url {string} the url
      */
-    let Bookmark = function(label, url) {
-        this.publish("valueChange", {
-            defaultFn : this._valueChange
-        });
+    let Bookmark = function (label, url) {
         this.setValues(label, url);
     };
 
     Bookmark.prototype = {
 
-        /**
-         * The default changeEvent handler
-         *
-         * @method _valueChange
-         * @private
-         * @param event
-         *            {CustomEvent} the valueChange event
-         */
-        _valueChange : function(event) {
-            this._label = event.newLabel;
-            this._url = event.newUrl;
-        },
 
         /**
          * getter for the label
@@ -39,7 +24,7 @@
          * @method getLabel
          * @returns {string} the label
          */
-        getLabel : function() {
+        getLabel: function () {
             return this._label;
         },
 
@@ -49,7 +34,7 @@
          * @method getUrl
          * @returns {string} the url
          */
-        getUrl : function() {
+        getUrl: function () {
             return this._url;
         },
 
@@ -61,7 +46,7 @@
          * @param newLabel
          *            {string}
          */
-        setLabel : function(newLabel) {
+        setLabel: function (newLabel) {
             this.setValues(newLabel, this._url);
         },
 
@@ -73,7 +58,7 @@
          * @param newUrl
          *            {string}
          */
-        setUrl : function(newUrl) {
+        setUrl: function (newUrl) {
             this.setValues(this._label, newUrl);
         },
 
@@ -86,7 +71,7 @@
          * @param newUrl
          *            {string}
          */
-        setValues : function(newLabel, newUrl) {
+        setValues: function (newLabel, newUrl) {
             if (!newLabel) {
                 throw ("null or empty newLabel");
             }
@@ -95,11 +80,13 @@
             }
             let changed = newLabel !== this._label || newUrl !== this._url;
             if (changed) {
+                this._label = newLabel;
+                this._url = newUrl;
                 this.fire("valueChange", {
-                    prevLabel : this._label,
-                    prevUrl : this._url,
-                    newLabel : newLabel,
-                    newUrl : newUrl
+                    prevLabel: this._label,
+                    prevUrl: this._url,
+                    newLabel: newLabel,
+                    newUrl: newUrl
                 });
             }
         },
@@ -108,15 +95,15 @@
          * @method toString
          * @return {string} a string with the label and url values
          */
-        toString : function() {
+        toString: function () {
             return "Bookmark{label:" + this._label + ",url:" + this._url + "}";
         }
     };
 
     // Add EventTarget attributes to the Bookmark prototype
     L.addEventTarget(Bookmark, {
-        emitFacade : true,
-        prefix : 'bookmark'
+        emitFacade: true,
+        prefix: 'bookmark'
     });
 
     // make the Bookmark constructor globally accessible
