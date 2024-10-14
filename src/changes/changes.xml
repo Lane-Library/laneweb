@@ -5,7 +5,15 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2024-09-23" version="3.13.14" description="bug fix and update release">
+        <release date="2024-10-14" version="3.13.15" description="bug fix and update release">
+            <action date="2024-10-10" dev="ryanmax" issue="LANEWEB-11372" type="update"> 
+                Eresources browse pages are not cached
+            </action>
+            <action date="2024-10-10" dev="ryanmax" issue="LANEWEB-11373" type="update"> 
+                Remove RSS processing
+            </action>
+       </release> 
+       <release date="2024-09-23" version="3.13.14" description="bug fix and update release">
             <action date="2024-09-20" dev="ryanmax" issue="LANEWEB-11362" type="update"> 
                 SFX labeling in Lane Search
             </action>
