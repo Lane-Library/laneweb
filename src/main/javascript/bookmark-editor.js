@@ -3,30 +3,10 @@
     "use strict";
 
     let Bookmark = L.Bookmark,
+        BookmarkEvent = L.BookmarkEvent,
         HTMLTemplate = document.querySelector("#bookmark-editor-template");
 
-
-
-    class EventEmitter {
-        constructor() {
-            this.events = {};
-        }
-
-        on(event, listener) {
-            if (!this.events[event]) {
-                this.events[event] = [];
-            }
-            this.events[event].push(listener);
-        }
-
-        emit(event, ...args) {
-            if (this.events[event]) {
-                this.events[event].forEach(listener => listener.apply(this, args));
-            }
-        }
-    }
-
-    class BookmarkEditor extends EventEmitter {
+    class BookmarkEditor extends BookmarkEvent {
         constructor(args) {
             super();
             this.bookmark = args.bookmark;

@@ -35,7 +35,7 @@
          * @method bindUI
          */
         bindUI() {
-            this.bookmarks.on("addSync", (e) => this._bookmarkAdded(e));
+            this.bookmarks.first("addSync", (e) => this._bookmarkAdded(e));
             this.bookmarks.on("moveSync", (e) => this._bookmarkMoved(e));
             this.bookmarks.on("removeSync", (e) => this._bookmarksRemoved(e));
             this.bookmarks.on("updateSync", (e) => this._bookmarkUpdated(e));

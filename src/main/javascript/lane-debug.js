@@ -60,6 +60,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "search-pico-toggle.js",
             "search-pico-fields.js",
             "search-pico.js",
+            "bookmark-event.js",
             "bookmark.js",
             "bookmarks.js",
             "bookmarks-widget.js",
