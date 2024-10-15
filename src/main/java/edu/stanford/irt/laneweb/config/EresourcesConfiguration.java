@@ -47,24 +47,24 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 @Configuration
 public class EresourcesConfiguration {
 
-   
-  private static final int FACETS_TO_SHOW_SEARCH = 4;
+    private static final int FACETS_TO_SHOW_SEARCH = 4;
 
-  private Collection<String> facetFields;
+    private Collection<String> facetFields;
 
-  private Collection<String> publicationTypes;
+    private Collection<String> publicationTypes;
 
-  public EresourcesConfiguration() {
-    this.facetFields = Arrays.asList("type", "publicationType", "recordType", "publicationTitle");
-    this.facetFields = Collections.unmodifiableCollection(this.facetFields);
-    this.publicationTypes = Arrays.asList("Review", "Clinical Trial", "Randomized Controlled Trial", "Systematic Review");
-    this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
-  }
+    public EresourcesConfiguration() {
+        this.facetFields = Arrays.asList("type", "publicationType", "recordType", "publicationTitle");
+        this.facetFields = Collections.unmodifiableCollection(this.facetFields);
+        this.publicationTypes = Arrays.asList("Review", "Clinical Trial", "Randomized Controlled Trial",
+                "Systematic Review");
+        this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
+    }
 
-  @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/er-a2z-browse-xml")
-  public SAXStrategy<List<BrowseLetter>> aToZBrowseSAXStrategy() {
-    return new AtoZBrowseSAXStrategy();
-  }
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/er-a2z-browse-xml")
+    public SAXStrategy<List<BrowseLetter>> aToZBrowseSAXStrategy() {
+        return new AtoZBrowseSAXStrategy();
+    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-a2z-browse-html")
     @Scope("prototype")
@@ -72,10 +72,10 @@ public class EresourcesConfiguration {
         return new AtoZBrowseGenerator("er-a2z-browse-html", restBrowseService, aToZBrowseSAXStrategy());
     }
 
-  @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
-  public SAXStrategy<Eresource> eresourceSAXStrategy() {
-    return new EresourceSAXStrategy();
-  }
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
+    public SAXStrategy<Eresource> eresourceSAXStrategy() {
+        return new EresourceSAXStrategy();
+    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-all-html")
     @Scope("prototype")
@@ -92,14 +92,14 @@ public class EresourcesConfiguration {
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/eresources-count")
     @Scope("prototype")
-    public Generator eresourcesCountGenerator( final EresourceSearchService searchService) {
+    public Generator eresourcesCountGenerator(final EresourceSearchService searchService) {
         return new EresourcesCountGenerator(searchService);
     }
 
-  @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/facetSaxStrategy-xml")
-  public SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSAXStrategy() {
-    return new FacetSAXStrategy(this.facetFields);
-  }
+    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/facetSaxStrategy-xml")
+    public SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSAXStrategy() {
+        return new FacetSAXStrategy(this.facetFields);
+    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-facets")
     @Scope("prototype")
@@ -110,10 +110,10 @@ public class EresourcesConfiguration {
         return generator;
     }
 
-  @Bean
-  public SAXStrategy<Eresource> linkWithCoverSAXStrategy() {
-    return new LinkWithCoverEresourceSAXStrategy();
-  }
+    @Bean
+    public SAXStrategy<Eresource> linkWithCoverSAXStrategy() {
+        return new LinkWithCoverEresourceSAXStrategy();
+    }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-with-cover")
     @Scope("prototype")
@@ -122,10 +122,11 @@ public class EresourcesConfiguration {
                 new ExpiresValidity(Duration.ofHours(1).toMillis()));
     }
 
-  @Bean
-  public SAXStrategy<PagingEresourceList> pagingEresourceListHTMLSAXStrategy() {
-    return new PagingEresourceListXHTMLSAXStrategy(eresourceSAXStrategy(), new EresourceListPagingDataSAXStrategy());
-  }
+    @Bean
+    public SAXStrategy<PagingEresourceList> pagingEresourceListHTMLSAXStrategy() {
+        return new PagingEresourceListXHTMLSAXStrategy(eresourceSAXStrategy(),
+                new EresourceListPagingDataSAXStrategy());
+    }
 
     @Bean
     public SAXStrategy<RestResult<Eresource>> solrPagingEresourceSAXStrategy() {
@@ -138,48 +139,37 @@ public class EresourcesConfiguration {
         return new SolrSearchGenerator(searchService, solrPagingEresourceSAXStrategy());
     }
 
-
-
     /**************************************************************/
-    
     @Bean
-    EresourceSearchService getRESTSearchService(
-            @Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
+    EresourceSearchService getRESTSearchService(@Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
             final RESTService restService) {
         return new EresourceSearchService(searchServiceURI, restService);
     }
 
     @Bean
-    EresourceFacetService getRESTFacetService(
-            @Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
+    EresourceFacetService getRESTFacetService(@Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
             final RESTService restService) {
         return new EresourceFacetService(searchServiceURI, restService);
     }
-    
+
     @Bean
-    EresourceBrowseService getRESTBrowseService(
-            @Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
+    EresourceBrowseService getRESTBrowseService(@Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
             final RESTService restService) {
         return new EresourceBrowseService(searchServiceURI, restService);
     }
-    
+
     @Bean
-    EresourceStatusService getRESTStatusService(
-            @Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
+    EresourceStatusService getRESTStatusService(@Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
             final RESTService restService) {
         return new EresourceStatusService(searchServiceURI, restService);
     }
-    
+
     @Bean("java.net.URI/eresource-service")
-    URI searchServiceURI(
-            @Value("${edu.stanford.irt.laneweb.eresource-search-service.scheme}") final String scheme,
+    URI searchServiceURI(@Value("${edu.stanford.irt.laneweb.eresource-search-service.scheme}") final String scheme,
             @Value("${edu.stanford.irt.laneweb.eresource-search-service.host}") final String host,
             @Value("${edu.stanford.irt.laneweb.eresource-search-service.port}") final int port,
             @Value("${edu.stanford.irt.laneweb.eresource-search-service.path}") final String path)
             throws URISyntaxException {
         return new URI(scheme, null, host, port, path, null, null);
     }
-    
-    
-    
 }
