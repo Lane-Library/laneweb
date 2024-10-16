@@ -32,6 +32,7 @@ import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
 import edu.stanford.irt.laneweb.eresources.browse.BrowseLetter;
 import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrategy;
+import edu.stanford.irt.laneweb.eresources.browse.LinkWithoutCoverEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
 import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.model.Eresource;
@@ -115,10 +116,22 @@ public class EresourcesConfiguration {
         return new LinkWithCoverEresourceSAXStrategy();
     }
 
+    @Bean
+    public SAXStrategy<Eresource> linkWithoutCoverSAXStrategy() {
+        return new LinkWithoutCoverEresourceSAXStrategy();
+    }
+
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-with-cover")
     @Scope("prototype")
     public Transformer linkWithCoverTransformer(final EresourceSearchService restSearchService) {
         return new BibIDToEresourceTransformer(restSearchService, linkWithCoverSAXStrategy(), "link-with-cover",
+                new ExpiresValidity(Duration.ofHours(1).toMillis()));
+    }
+
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-without-cover")
+    @Scope("prototype")
+    public Transformer linkWithoutCoverTransformer(final EresourceSearchService restSearchService) {
+        return new BibIDToEresourceTransformer(restSearchService, linkWithoutCoverSAXStrategy(), "link-without-cover",
                 new ExpiresValidity(Duration.ofHours(1).toMillis()));
     }
 

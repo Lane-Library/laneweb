@@ -18,8 +18,6 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BibIDToEresourceTransformer extends AbstractXMLPipe implements Transformer {
 
-    private boolean connectionFailed;
-
     private String key;
 
     private SAXStrategy<Eresource> saxStrategy;
@@ -70,9 +68,18 @@ public class BibIDToEresourceTransformer extends AbstractXMLPipe implements Tran
     public void startElement(final String uri, final String loc, final String raw, final Attributes atts)
             throws SAXException {
         super.startElement(uri, loc, raw, atts);
+        // TODO: phase out use of data-bibid in favor of data-lsid
+        // and consider renaming this class to LaneSearchIdToEresourceTransformer
         String bibID = atts.getValue("data-bibid");
-        if (bibID != null && !this.connectionFailed) {
+        if (bibID != null) {
             Eresource eresource = this.searchService.getByBibID(bibID);
+            if (eresource != null) {
+                this.saxStrategy.toSAX(eresource, this.xmlConsumer);
+            }
+        }
+        String laneSearchId = atts.getValue("data-lsid");
+        if (laneSearchId != null) {
+            Eresource eresource = this.searchService.getByLaneSearchId(laneSearchId);
             if (eresource != null) {
                 this.saxStrategy.toSAX(eresource, this.xmlConsumer);
             }
