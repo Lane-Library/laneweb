@@ -33,4 +33,8 @@ public class TitleNormalizer {
         }
         return titleCased;
     }
+
+    private TitleNormalizer() {
+        // private constructor
+    }
 }

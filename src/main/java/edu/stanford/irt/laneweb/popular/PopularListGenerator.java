@@ -72,7 +72,7 @@ public class PopularListGenerator extends AbstractGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Map<String, String>> resources = Collections.emptyList();
+        List<Map<String, String>> resources;
         if ("all".equals(this.resourceType)) {
             resources = this.service.getAllPopularResources();
         } else {
