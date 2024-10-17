@@ -81,7 +81,8 @@
 .no-search-content .popular-eresources {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px 0;
+    flex-direction: column;
+    height: 300px;
 }
 
 .no-search-content .popular-eresources li {
@@ -90,11 +91,18 @@
 }
 
 .no-search-content .ej-eresources li {
-    flex: 25%;
+    flex: 33%;
+    width: 25%;
+}
+
+.no-search-content .eb-eresources {
+    height: 450px;
 }
 
 .no-search-content .eb-eresources li {
-    flex: 50%;
+    height: 20%;
+    width: 47%;
+    padding-top: 12px;
 }
 
 
@@ -147,11 +155,17 @@
     }
 
     .no-search-content .popular-eresources li {
-        flex: 33%;
+        flex: 25%;
+        width: 33%;
+    }
+
+    .no-search-content .eb-eresources {
+        display: block;
+        height: auto;
     }
 
     .no-search-content .eb-eresources li {
-        flex: 100%;
+        width: auto;
     }
 }
 
@@ -189,8 +203,13 @@
         flex: 0 1 50%;
     }
 
+    .no-search-content .popular-eresources {
+        display: block;
+        height: auto;
+    }
+
     .no-search-content .popular-eresources li {
-        flex: 50%;
+        width: auto;
     }
 
 }
