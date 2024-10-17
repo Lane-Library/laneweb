@@ -14,10 +14,12 @@ import org.springframework.context.annotation.Scope;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.popular.BigqueryService;
+import edu.stanford.irt.laneweb.popular.BigqueryStatusService;
 import edu.stanford.irt.laneweb.popular.PopularListGenerator;
 import edu.stanford.irt.laneweb.popular.PopularResourcesSAXStrategy;
 import edu.stanford.irt.laneweb.popular.RESTBigqueryService;
 import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.status.StatusService;
 
 @Configuration
 public class PopularResourcesConfiguration {
@@ -28,6 +30,12 @@ public class PopularResourcesConfiguration {
             @Value("${edu.stanford.irt.laneweb.bigquery-service.port}") final int port,
             @Value("${edu.stanford.irt.laneweb.bigquery-service.path}") final String path) throws URISyntaxException {
         return new URI(scheme, null, host, port, path, null, null);
+    }
+
+    @Bean
+    public StatusService bigqueryStatusService(@Qualifier("java.net.URI/bigquery-service") final URI bigqueryServiceURI,
+            final RESTService restService) {
+        return new BigqueryStatusService(bigqueryServiceURI, restService);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/popular-resources-list")
