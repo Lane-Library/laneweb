@@ -16,6 +16,10 @@ public class LinkWithoutCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrate
             String href = eresource.getLinks().stream().findFirst()
                     .orElseThrow(() -> new LanewebException("no link for eresource " + recId)).getUrl();
             String title = eresource.getTitle();
+            if (title.endsWith(".")) {
+                title = title.substring(0, title.length() - 1);
+            }
+            title = TitleNormalizer.toTitleCase(title);
             createAnchor(xmlConsumer, href, title);
         } catch (SAXException e) {
             throw new LanewebException(e);
