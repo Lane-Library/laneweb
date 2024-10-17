@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.popular;
 
 import java.io.Serializable;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -71,10 +72,20 @@ public class PopularListGenerator extends AbstractGenerator {
 
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
-        List<Map<String, String>> resources = this.service.getPopularResources(this.resourceType);
+        List<Map<String, String>> resources = Collections.emptyList();
+        if ("all".equals(this.resourceType)) {
+            resources = this.service.getAllPopularResources();
+        } else {
+            resources = this.service.getPopularResources(this.resourceType);
+        }
         if (!resources.isEmpty() && resources.size() > this.limit) {
             resources = resources.subList(0, this.limit);
         }
+        resources.sort((map1, map2) -> {
+            String title1 = map1.getOrDefault("title", "");
+            String title2 = map2.getOrDefault("title", "");
+            return title1.compareTo(title2);
+        });
         this.saxStrategy.toSAX(resources, xmlConsumer);
     }
 }

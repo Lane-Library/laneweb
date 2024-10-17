@@ -58,6 +58,23 @@ public class PopularListGeneratorTest {
     }
 
     @Test
+    public void testDoGenerateXMLConsumerAll() {
+        List<Map<String, String>> resources = new ArrayList<>();
+        resources.add(new HashMap<>());
+        resources.add(new HashMap<>());
+        resources.add(new HashMap<>());
+        Map<String, String> params = new HashMap<>();
+        params.put(Model.TYPE, "all");
+        params.put(Model.LIMIT, "10");
+        this.generator.setParameters(params);
+        expect(this.service.getAllPopularResources()).andReturn(resources);
+        this.saxStrategy.toSAX(resources, this.xmlConsumer);
+        replay(this.service, this.saxStrategy, this.xmlConsumer);
+        this.generator.doGenerate(this.xmlConsumer);
+        verify(this.service, this.saxStrategy, this.xmlConsumer);
+    }
+
+    @Test
     public void testDoGenerateXMLConsumerEmpty() {
         this.generator.setParameters(Collections.singletonMap(Model.TYPE, "type"));
         expect(this.service.getPopularResources("type")).andReturn(Collections.emptyList());
