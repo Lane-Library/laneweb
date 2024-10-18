@@ -5,9 +5,17 @@ html {
 
 header section,
 footer section,
-.content * :not(.ankle-footer) {
-    max-width: 1700px;
+.content {
     margin: auto;
+}
+
+header section,
+footer section {
+    max-width: 1700px;
+}
+
+.content .centered> :not(.ankle-footer) {
+    max-width: 1700px;
 }
 
 .max-width-page,
