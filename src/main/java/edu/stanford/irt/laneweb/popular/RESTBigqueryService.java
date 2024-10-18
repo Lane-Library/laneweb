@@ -1,6 +1,9 @@
 package edu.stanford.irt.laneweb.popular;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +35,13 @@ public class RESTBigqueryService implements BigqueryService {
 
     @Override
     public List<Map<String, String>> getPopularResources(final String resourceType) {
-        String pathWithTypeParam = String.format(POPULAR_BY_TYPE_ENDPOINT_PATH, resourceType);
+        String type = "";
+        try {
+            type = URLEncoder.encode(resourceType, StandardCharsets.UTF_8.displayName()).replace("+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            // won't happen
+        }
+        String pathWithTypeParam = String.format(POPULAR_BY_TYPE_ENDPOINT_PATH, type);
         URI uri = this.bigqueryServiceURI.resolve(pathWithTypeParam);
         return this.restService.getObject(uri, TYPE);
     }

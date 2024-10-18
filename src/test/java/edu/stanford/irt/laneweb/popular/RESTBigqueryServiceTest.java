@@ -41,10 +41,25 @@ public class RESTBigqueryServiceTest {
         Map<String, String> map = new HashMap<>();
         map.put("id", "1");
         map.put("title", "title");
-        expect(this.restService.getObject(eq(this.uri.resolve("popular/type/resourceType")),
-                isA(TypeReference.class))).andReturn(Collections.singletonList(map));
+        expect(this.restService.getObject(eq(this.uri.resolve("popular/type/resourceType")), isA(TypeReference.class)))
+                .andReturn(Collections.singletonList(map));
         replay(this.restService);
         List<Map<String, String>> list = this.service.getPopularResources("resourceType");
+        Map<String, String> res = list.get(0);
+        assertEquals("1", res.get("id"));
+        assertEquals("title", res.get("title"));
+        verify(this.restService);
+    }
+
+    @Test
+    public void testGetListTypeWithSpaces() {
+        Map<String, String> map = new HashMap<>();
+        map.put("id", "1");
+        map.put("title", "title");
+        expect(this.restService.getObject(eq(this.uri.resolve("popular/type/type%20with%20spaces")),
+                isA(TypeReference.class))).andReturn(Collections.singletonList(map));
+        replay(this.restService);
+        List<Map<String, String>> list = this.service.getPopularResources("type with spaces");
         Map<String, String> res = list.get(0);
         assertEquals("1", res.get("id"));
         assertEquals("title", res.get("title"));
