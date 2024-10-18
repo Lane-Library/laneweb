@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.popular;
 
 import java.io.Serializable;
 import java.time.Duration;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
