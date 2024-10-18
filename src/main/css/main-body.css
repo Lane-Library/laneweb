@@ -1,31 +1,45 @@
 html {
-	background-color: #f0f4f5;
-	scroll-behavior: smooth;
+    background-color: #f0f4f5;
+    scroll-behavior: smooth;
 }
 
-header section, footer section, .content{
-	max-width: 1700px;
-	margin: auto;	
+header section,
+footer section,
+.content {
+    margin: auto;
 }
 
+header section,
+footer section {
+    max-width: 1700px;
+}
 
-header:first-of-type{
- 	background-color: #8c1515;
- 	color: white;
- }
+.content .centered> :not(.ankle-footer) {
+    max-width: 1700px;
+}
 
-header:nth-of-type(2){
-	background: white;
+.no-search-content div> :not(.ankle-footer),
+.su-design .content div.centered> :not(.ankle-footer) {
+    max-width: 2300px;
+}
+
+header:first-of-type {
+    background-color: #8c1515;
+    color: white;
+}
+
+header:nth-of-type(2) {
+    background: white;
 }
 
 
 .content {
-	color: black;
-	position: relative;
+    color: black;
+    position: relative;
 }
 
-.module.sticky,.sticky{
+.module.sticky,
+.sticky {
     position: sticky;
     top: 80px;
 }
-
