@@ -18,7 +18,6 @@ footer section {
     max-width: 1700px;
 }
 
-.max-width-page,
 .no-search-content div> :not(.ankle-footer),
 .su-design .content div.centered> :not(.ankle-footer) {
     max-width: 2300px;
