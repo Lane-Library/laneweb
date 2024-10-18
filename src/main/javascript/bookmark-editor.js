@@ -11,12 +11,14 @@
             super();
             this.bookmark = args.bookmark;
             this.srcNode = args.srcNode;
+            this.position = args.position;
             this.className = "bookmark-editor";
             this.editing = false;
             this.renderUI();
             this.bindUI();
             this.syncUI();
         }
+
 
 
         /**
@@ -38,6 +40,10 @@
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
             this.on("editingChange", (e) => this._handleEditingChange(e));
+            this.srcNode.addEventListener("drag", (event) => { });
+            this.srcNode.addEventListener("dragstart", (event) => { this._handleDragStart(event) });
+            this.srcNode.addEventListener("drop", (event) => { this._handleDragDrop(event) });
+            this.srcNode.addEventListener("dragover", (event) => { this._handleDragOver(event) }, false);
         }
 
         /**
@@ -50,7 +56,6 @@
             this._urlInput = srcNode.querySelector("input[name='url']");
             const urlInputElement = srcNode.querySelector("input[name='url']");
             urlInputElement.addEventListener("focus", (event) => this._setDefaultUrlInputText(event));
-
             this._truncateLabel();
         }
 
@@ -223,7 +228,23 @@
                 this._urlInput.value = "https://";
             }
         }
+
+        _handleDragStart(event) {
+            this.emit("dragStart", { from: this.position });
+        }
+
+        _handleDragDrop(event) {
+            event.preventDefault();
+            this.emit("dragDrop", { to: this.position });
+        }
+
+        _handleDragOver(event) {
+            event.preventDefault();
+            this.emit("dragOver", { to: this.position });
+        }
     }
+
+
     L.BookmarkEditor = BookmarkEditor;
 
 })();

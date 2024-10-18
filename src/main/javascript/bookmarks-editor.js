@@ -15,21 +15,17 @@
         constructor(args) {
             this.srcNode = args.srcNode;
             this.bookmarks = args.bookmarks;
-            this.render = args.render;
             this.editing = false;
-            if (this.render) {
-                this.bindUI();
-                this.syncUI();
-            }
+            this.bindUI();
+            this.syncUI();
+
         }
 
 
 
         bindUI() {
-            let srcNode = this.srcNode,
-                bookmarks = this.bookmarks,
-                dragManager = Y.DD.DDM;
-            const buttons = this.srcNode.querySelectorAll("fieldset button");
+            let bookmarks = this.bookmarks,
+                buttons = this.srcNode.querySelectorAll("fieldset button");
             buttons.forEach(button => {
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
@@ -37,14 +33,6 @@
             bookmarks.on("addSync", (e) => this._handleBookmarkAdd(e));
             bookmarks.on("updateSync", (e) => this._handleBookmarkUpdate(e));
             bookmarks.on("moveSync", (e) => this._handleBookmarkMove(e));
-
-            // dragManager.on('drag:start', this._handleDragStart, this);
-            // dragManager.on('drag:end', this._handleDragEnd, this);
-            this._lastY = 0;
-            this._goingUp = false;
-            // dragManager.on('drag:drag', this._handleDrag, this);
-            // dragManager.on('drop:over', this._handleDropOver, this);
-            //this.publish("move", { defaultFn: this._editorMoved });
         }
 
         /**
@@ -57,12 +45,14 @@
                 items = srcNode.querySelectorAll("li"),
                 bookmarks = this.bookmarks;
             for (i = 0; i < items.length; i++) {
-                editor = new BookmarkEditor({ srcNode: items.item(i), render: true, bookmark: bookmarks.getBookmark(i) });
+                editor = new BookmarkEditor({ srcNode: items.item(i), bookmark: bookmarks.getBookmark(i), position: i });
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
+                editor.on("dragDrop", (e) => this._handleDragDrop(e));
+                editor.on("dragOver", (e) => this._handleDragOver(e));
+                editor.on("dragStart", (e) => this._handleDragStart(e));
                 editors.push(editor);
             }
             this.editors = editors;
-            this._syncDD();
             // show add bookmarks if no bookmarks present
             if (0 == items.length) {
                 this.add();
@@ -92,15 +82,14 @@
                 editors[0].destroy();
             } else {
                 items.prepend(item);
-                editor = new BookmarkEditor({ srcNode: item, render: true });
+                editor = new BookmarkEditor({ srcNode: item, position: 0 });
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
+                editor.on("dragDrop", (e) => this._handleDragDrop(e));
+                editor.on("dragOver", (e) => this._handleDragOver(e));
+                editor.on("dragStart", (e) => this._handleDragStart(e));
                 editors.unshift(editor);
                 editor.setEditing(true);
             }
-        }
-
-        _editorMoved() {
-            this.bookmarks.moveBookmark(this._to, this._from);
         }
 
         /**
@@ -128,7 +117,7 @@
          */
         _handleBookmarkAdd(event) {
             this.editors[event.target.indexOf(event.bookmark)].update();
-            this._syncDD();
+            this._syncPosition();
         }
 
         /**
@@ -138,27 +127,24 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkMove(event) {
-            let editors = this._getSerializedEditors();
-            editors.splice(event.to, 0, editors.splice(event.from, 1)[0]);
-            this.editors = editors;
+            this.editors.splice(event.to, 0, this.editors.splice(event.from, 1)[0]);
+            this._syncPosition();
         }
 
+
         /**
-         * Responds to the bookmarks:removeSync event, calls destroy on each BookmarkEditor
-         * associated with removed bookmarks.
-         * @method _handleBookmarksRemove
-         * @private
-         * @param event {CustomEvent}
-         */
+     * Responds to the bookmarks:removeSync event, calls destroy on each BookmarkEditor
+     * associated with removed bookmarks.
+     * @method _handleBookmarksRemove
+     * @private
+     * @param event {CustomEvent}
+     */
         _handleBookmarksRemove(event) {
             let i, editors = this._getSerializedEditors();
             for (i = event.positions.length - 1; i >= 0; --i) {
-
-                // this._dd[event.positions[i]].destroy(true);
-                // this._dd.splice(event.positions[i], 1);
-
                 editors[event.positions[i]].destroy(true);
             }
+            this._syncPosition();
         }
 
         /**
@@ -201,127 +187,59 @@
             let editors = this.editors,
                 position = editors.indexOf(event.editor);
             editors.splice(position, 1);
+            this._syncPosition();
         }
 
-        /**
-         * @method _handleDrag
-         * @private
-         * @param event {CustomEvent}
-         */
-        _handleDrag(event) {
-            //Get the last y point
-            let y = event.target.lastXY[1];
-            //is it greater than the lastY var?
-            if (y < this._lastY) {
-                //We are going up
-                this._goingUp = true;
-            } else {
-                //We are going down.
-                this._goingUp = false;
-            }
-            //Cache for next check
-            this._lastY = y;
+        _handleDragStart(e) {
+            this.drag_from = e.from;
         }
 
-        /**
-         * @method _handleDragEnd
-         * @private
-         * @param event {CustomEvent}
-         */
-        _handleDragEnd(event) {
-            let drag = event.target;
-            //Put our styles back
-            drag.get('node').setStyles({
-                visibility: '',
-                opacity: '1'
-            });
-            this._to = this.srcNode.querySelectorAll("bookmark-editor").indexOf(drag.get("node"));
-            if (this._to !== this._from) {
-                this.fire("move", { to: this._to, from: this._from });
-            }
-        }
+        _handleDragOver(event) {
+            if (this.drag_from !== event.to) {
+                this.drag_to = event.to;
+                if (this.drag_from !== this.drag_to) {
+                    //Get a reference to our drag and drop nodes
+                    let drag = this.editors[this.drag_from].srcNode,
+                        drop = this.editors[this.drag_to].srcNode;
+                    if (drop.classList.contains('bookmark-editor-content')) {
 
-        /**
-         * @method _handleDragStart
-         * @private
-         * @param event {CustomEvent}
-         */
-        _handleDragStart(event) {
-            //Get our drag object
-            let drag = event.target, node = drag.get("node"), dragNode = drag.get("dragNode");
-            //Set some styles here
-            dragNode.empty();
-            node.setStyle('opacity', '.25');
-            dragNode.append(node.one("a").cloneNode(true));
-            dragNode.setStyles({
-                opacity: '.5',
-                textAlign: "left",
-                borderColor: node.getStyle('borderColor'),
-                backgroundColor: node.getStyle('backgroundColor')
-            });
-            dragNode.one("a").setStyles({
-                display: "block",
-                padding: "12px 0 12px 36px",
-                fontSize: "12px"
-            });
-            this._from = this.srcNode.querySelectorAll("bookmark-editor").indexOf(node);
-        }
-
-        /**
-         * @method _handleDragOver
-         * @private
-         * @param event {CustomEvent}
-         */
-        _handleDropOver(event) {
-            //Get a reference to our drag and drop nodes
-            let drag = event.drag.get('node'),
-                drop = event.drop.get('node');
-
-            //Are we dropping on an editor node?
-            if (drop.hasClass('yui3-bookmark-editor')) {
-                //Are we not going up?
-                if (!this._goingUp) {
-                    drop = drop.get('nextSibling');
+                        if (this.drag_to > this.drag_from && drop.nextElementSibling) {
+                            drop = drop.nextElementSibling;
+                        }
+                        //Add the node to this list
+                        if (drop.nextElementSibling) {
+                            drop.parentNode.insertBefore(drag, drop);
+                        }
+                        else {
+                            drop.parentNode.appendChild(drag);
+                        }
+                    }
                 }
-                //Add the node to this list
-                event.drop.get('node').get('parentNode').insertBefore(drag, drop);
-                //Resize this nodes shim, so we can drop on it later.
-                event.drop.sizeShim();
             }
         }
 
-        _syncDD() {
-            let i, srcNode = this.srcNode,
-                editors = this.editors;
-            this._dd = this._dd || [];
-            for (i = 0; i < this._dd.length; i++) {
-                this._dd[i].destroy();
+        _handleDragDrop(event) {
+            if (this.drag_from !== this.drag_to) {
+                this.bookmarks.moveBookmark(this.drag_to, this.drag_from);
             }
-            this._dd = [];
-            // for (i = 0; i < editors.length; i++) {
-            //     this._dd.push(new Y.DD.Drag({
-            //         node: editors[i].get("boundingBox"),
-            //         target: {
-            //             padding: '0 0 0 20',
-            //             useShim: false
-            //         }
-            //     }).plug(Y.Plugin.DDConstrained, {
-            //         constrain: srcNode.one("ul")
-            //     }).plug(Y.Plugin.DDProxy, {
-            //         moveOnEnd: false
-            //     }).removeInvalid('a'));
-            // }
         }
-    };
 
 
+        _syncPosition() {
+            let i = 0;
+            this.editors.forEach(function (editor) {
+                editor.position = i++;
+            });
+
+        };
+
+    }
     //Create a new BookmarksEditor
     if (editorsNode) {
         if (L.BookmarksWidget) {
             L.BookmarksEditor = new BookmarksEditor({
                 srcNode: document.querySelector("#bookmarks-editor"),
-                bookmarks: L.BookmarksWidget.bookmarks,
-                render: true
+                bookmarks: L.BookmarksWidget.bookmarks
             });
         } else {
             // case 141805 bookmark edit buttons fail if bookmarks editor not initialized

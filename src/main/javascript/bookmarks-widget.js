@@ -90,10 +90,13 @@
             let srcNode = this.srcNode,
                 children = srcNode.children,
                 moved = children.item(event.from),
-                current = children.item(event.to),
-                position = event.to > event.from ? "after" : "before";
+                current = children.item(event.to);
             srcNode.removeChild(moved);
-            current.insert(moved, position);
+            if (event.to > event.from) {
+                current.after(moved);
+            } else {
+                current.before(moved);
+            }
             this.syncUI();
         }
 

@@ -185,21 +185,21 @@
 }
 
 /* styles for bookmark editors (div around li) on /favorites.html */
-.bookmark-editor {
+.bookmark-editor-content {
     cursor: move;
     margin: 2px 0;
 }
 
-.bookmark-editor:hover {
+.bookmark-editor-content:hover {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .24);
     transition: box-shadow .5s;
 }
 
-.bookmark-editor:nth-child(even) {
+.bookmark-editor-content:nth-child(even) {
     background: #fff;
 }
 
-.bookmark-editor:nth-child(odd) {
+.bookmark-editor-content:nth-child(odd) {
     background: #f0f4f5;
 }
 
