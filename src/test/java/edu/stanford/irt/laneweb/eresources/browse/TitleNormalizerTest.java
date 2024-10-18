@@ -11,7 +11,11 @@ public class TitleNormalizerTest {
 
     @Test
     public void testToTitleCase() {
+        assertTitleCase(null, null);
+        assertTitleCase("", "");
         assertTitleCase("e-Anatomy", "e-Anatomy");
+        assertTitleCase("The Atlantic.", "The Atlantic");
+        assertTitleCase("NEJM AI.", "NEJM AI");
         assertTitleCase("Red book (American Academy of Pediatrics)", "Red Book (American Academy of Pediatrics)");
         assertTitleCase("New York times (National edition)", "New York Times (National Edition)");
         assertTitleCase("The New York times", "The New York Times");

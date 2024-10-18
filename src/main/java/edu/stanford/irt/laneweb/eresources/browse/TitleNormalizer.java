@@ -7,20 +7,24 @@ public class TitleNormalizer {
             "upon", "when", "with", "yet" };
 
     public static String toTitleCase(final String string) {
-        // e-Anatomy ... maybe others? worth a special case?
-        if (string.matches("^[a-zA-Z]-.*")) {
+        if (string == null || string.trim().isEmpty()) {
             return string;
+        }
+        String title = string.trim();
+        if (title.endsWith(".")) {
+            title = title.substring(0, title.length() - 1);
+        }
+        // e-Anatomy ... maybe others? worth a special case?
+        if (title.matches("^[a-zA-Z]-.*")) {
+            return title;
         }
         StringBuilder sb = new StringBuilder();
         boolean capitalizeNext = true;
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
+        for (char c : title.toCharArray()) {
             if (Character.isWhitespace(c)) {
                 capitalizeNext = true;
                 sb.append(c);
-                continue;
-            }
-            if (capitalizeNext) {
+            } else if (capitalizeNext) {
                 sb.append(Character.toTitleCase(c));
                 capitalizeNext = false;
             } else {
