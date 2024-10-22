@@ -257,20 +257,19 @@
                 switch (event.newVal) {
                     //OFF: not visible
                     case OFF:
-                        console.log("OFF is set");
-                        this._node.remove(false);
+                        this._node.remove();
                         this._node.classList.remove("active");
                         this._node.classList.remove("bookmarking");
-
                         break;
                     //READY: visible but not enabled
                     case READY:
-                        console.log("READY is set");
-                        this._node = this.node;
+                        if (!this._node) {
+                            this._node = this.node;
+                            this._node.addEventListener("mouseleave", (e) => this._handleBookmarkMouseout(e));
+                            this._node.addEventListener("click", (e) => this._handleClick(e));
+                            this._node.addEventListener("mouseover", this._handleBookmarkMouseover.bind(this));
+                        }
                         target.insertAdjacentElement("afterend", this._node);
-                        this._node.addEventListener("mouseleave", (e) => this._handleBookmarkMouseout(e));
-                        this._node.addEventListener("click", (e) => this._handleClick(e));
-                        this._node.addEventListener("mouseover", this._handleBookmarkMouseover.bind(this));
                         break;
                     //ACTIVE: enabled (mouseover)
                     case ACTIVE:
