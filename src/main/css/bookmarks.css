@@ -287,7 +287,6 @@ li.bookmark-editor-content {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 90%;
     font-size: 1.125em;
 }
 
@@ -343,6 +342,8 @@ li.bookmark-editor-content {
 
 .bookmark-editor-content .actions {
     white-space: nowrap;
+    position: absolute;
+    right: 37px;
 }
 
 .bookmark-editor-content .actions button,

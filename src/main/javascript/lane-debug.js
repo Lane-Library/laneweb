@@ -63,6 +63,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "bookmark-event.js",
             "bookmark.js",
             "bookmarks.js",
+            "bookmark-animation.js",
             "bookmarks-widget.js",
             "bookmark-editor.js",
             "bookmarks-editor.js",

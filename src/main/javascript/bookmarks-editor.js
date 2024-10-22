@@ -127,7 +127,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkMove(event) {
-            this.editors.splice(event.to, 0, this.editors.splice(event.from, 1)[0]);
+            this.editors.splice(this.to, 0, this.editors.splice(this.from, 1)[0]);
             this._syncPosition();
         }
 
@@ -191,37 +191,46 @@
         }
 
         _handleDragStart(e) {
-            this.drag_from = e.from;
+            this.dragged_source = e.target;
+            this.from = e.position;
         }
 
         _handleDragOver(event) {
-            if (this.drag_from !== event.to) {
-                this.drag_to = event.to;
-                if (this.drag_from !== this.drag_to) {
-                    //Get a reference to our drag and drop nodes
-                    let drag = this.editors[this.drag_from].srcNode,
-                        drop = this.editors[this.drag_to].srcNode;
-                    if (drop.classList.contains('bookmark-editor-content')) {
+            this.to = this.getNodeIndex(event.target);
+            let ul = this.srcNode.querySelector("ul"),
+                lis = ul.children,
+                index_from = this.getNodeIndex(this.dragged_source),
+                drag = lis[index_from],
+                drop = lis[this.to];
 
-                        if (this.drag_to > this.drag_from && drop.nextElementSibling) {
-                            drop = drop.nextElementSibling;
-                        }
-                        //Add the node to this list
-                        if (drop.nextElementSibling) {
-                            drop.parentNode.insertBefore(drag, drop);
-                        }
-                        else {
-                            drop.parentNode.appendChild(drag);
-                        }
+            if (drop.classList.contains('bookmark-editor-content')) {
+                if (this.to > index_from) {
+                    if (this.to + 1 == lis.length) {
+                        ul.appendChild(drag);
                     }
+                    else {
+                        drop = lis[this.to + 1];
+                    }
+                }
+                if (this.to + 1 != lis.length) {
+                    drop.parentNode.insertBefore(drag, drop);
                 }
             }
         }
 
-        _handleDragDrop(event) {
-            if (this.drag_from !== this.drag_to) {
-                this.bookmarks.moveBookmark(this.drag_to, this.drag_from);
+        getNodeIndex(node) {
+            let lis = this.srcNode.querySelector("ul").children;
+            for (let i = 0; i < lis.length; i++) {
+                if (lis[i] === node) {
+                    return i;
+                }
             }
+            return -1;
+        }
+
+
+        _handleDragDrop(event) {
+            this.bookmarks.moveBookmark(this.to, this.from);
         }
 
 

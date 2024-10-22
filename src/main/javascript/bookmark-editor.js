@@ -40,10 +40,12 @@
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
             this.on("editingChange", (e) => this._handleEditingChange(e));
+            this.srcNode.draggable = true;
             this.srcNode.addEventListener("drag", (event) => { });
             this.srcNode.addEventListener("dragstart", (event) => { this._handleDragStart(event) });
+            this.srcNode.addEventListener("dragend", (event) => { this._handleDragEnd(event) });
             this.srcNode.addEventListener("drop", (event) => { this._handleDragDrop(event) });
-            this.srcNode.addEventListener("dragover", (event) => { this._handleDragOver(event) }, false);
+            this.srcNode.addEventListener("dragover", (event) => { this._handleDragOver(event) });
         }
 
         /**
@@ -87,7 +89,7 @@
         destroy() {
             this.setEditing(false);
             this.bookmark = null;
-            this.srcNode.remove();
+            this.srcNode.remove(true);
             this.emit("destroy", { editor: this });
         }
 
@@ -230,17 +232,29 @@
         }
 
         _handleDragStart(event) {
-            this.emit("dragStart", { from: this.position });
+            this.startNodePositon = this.position;
+            const draggedNode = event.target;
+            draggedNode.style.border = "1px solid #000";
+            draggedNode.querySelector("div").style.display = "none";
+            this.emit("dragStart", { position: this.position, target: draggedNode });
+        }
+
+        _handleDragEnd(event) {
+            const draggedNode = event.target;
+            draggedNode.style.border = "none";
+            draggedNode.querySelector("div").style.display = "block";
         }
 
         _handleDragDrop(event) {
             event.preventDefault();
-            this.emit("dragDrop", { to: this.position });
+            this.emit("dragDrop");
         }
 
         _handleDragOver(event) {
             event.preventDefault();
-            this.emit("dragOver", { to: this.position });
+            if (this.startNodePositon != this.position) {
+                this.emit("dragOver", { position: this.position, target: event.target });
+            }
         }
     }
 
