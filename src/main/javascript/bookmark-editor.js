@@ -235,14 +235,14 @@
             this.startNodePositon = this.position;
             const draggedNode = event.target;
             draggedNode.style.border = "1px solid #000";
-            draggedNode.querySelector("div").style.display = "none";
+            draggedNode.querySelector("div").classList.toggle("hidden");
             this.emit("dragStart", { position: this.position, target: draggedNode });
         }
 
         _handleDragEnd(event) {
             const draggedNode = event.target;
             draggedNode.style.border = "none";
-            draggedNode.querySelector("div").style.display = "block";
+            draggedNode.querySelector("div").classList.toggle("hidden");
         }
 
         _handleDragDrop(event) {
