@@ -203,7 +203,7 @@
                 drag = lis[index_from],
                 drop = lis[this.to];
 
-            if (drop.classList.contains('bookmark-editor-content')) {
+            if (drop.classList && drop.classList.contains('bookmark-editor-content')) {
                 if (this.to > index_from) {
                     if (this.to + 1 == lis.length) {
                         ul.appendChild(drag);
