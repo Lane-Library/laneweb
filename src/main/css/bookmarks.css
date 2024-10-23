@@ -281,6 +281,7 @@
 li.bookmark-editor-content {
     padding: 10px 12px;
     display: flex;
+    border: none;
 }
 
 .bookmark-editor-content a {
