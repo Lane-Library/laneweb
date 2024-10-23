@@ -2,33 +2,34 @@
     display: none;
 }
 
-.yui3-popup {
+.popup {
     z-index: 2;
     position: absolute;
 }
 
-.yui3-popup-hidden {
+.popup-hidden {
     visibility: hidden;
 }
 
-.yui3-popup-content {
+.popup-content {
     border-radius: 3px;
     background-color: white;
     padding: 20px;
     text-align: left;
     border: 1px solid #9e9d98;
+    max-width: 500px;
+    cursor: move;
 }
 
-.yui3-popup-content .yui3-widget-hd {
+.popup-content .widget-hd {
     color: #820000;
     font-size: 1.8em;
     letter-spacing: .05em;
     line-height: 1.2em;
     margin-bottom: .2em;
-    cursor: move;
 }
 
-.yui3-popup-content .yui3-widget-bd {
+.popup-content .widget-bd {
     font-size: 1em;
     line-height: 1.6em;
 }
