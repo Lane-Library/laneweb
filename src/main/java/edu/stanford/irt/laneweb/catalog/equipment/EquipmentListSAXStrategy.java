@@ -20,46 +20,30 @@ public class EquipmentListSAXStrategy extends AbstractXHTMLSAXStrategy<List<Equi
     public void toSAX(final List<Equipment> list, final XMLConsumer xmlConsumer) {
         try {
             xmlConsumer.startDocument();
-            startUl(xmlConsumer);
             for (Equipment equipment : list) {
-                String bid = equipment.getBibID();
                 String title = equipment.getTitle();
                 String count = equipment.getCount();
-                AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, "resource");
-                atts.addAttribute(XHTML_NS, "data-bibid", "data-bibid", CDATA, bid);
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "li", atts);
-                startDivWithClass(xmlConsumer, "pure-g");
-                startDivWithClass(xmlConsumer, "pure-u-1-6");
-                startDivWithClass(xmlConsumer, "equipment-icon");
-                AttributesImpl iconAtts = new AttributesImpl();
-                iconAtts.addAttribute(XHTML_NS, "aria-hidden", "aria-hidden", CDATA, "true");
-                iconAtts.addAttribute(XHTML_NS, CLASS, CLASS, CDATA, iconClass(title));
-                XMLUtils.startElement(xmlConsumer, XHTML_NS, "i", iconAtts);
-                XMLUtils.endElement(xmlConsumer, XHTML_NS, "i");
-                endDiv(xmlConsumer);
-                endDiv(xmlConsumer);
-                startDivWithClass(xmlConsumer, "pure-u-5-6");
-                startDiv(xmlConsumer);
+                startDivWithClass(xmlConsumer, "row");
+                startDivWithClass(xmlConsumer, "cell");
+
                 XMLUtils.data(xmlConsumer, title);
+
                 endDiv(xmlConsumer);
-                startDiv(xmlConsumer);
-                XMLUtils.data(xmlConsumer, equipment.getNote());
-                endDiv(xmlConsumer);
-                startDiv(xmlConsumer);
-                createStrong(xmlConsumer, "Status: ");
+                startDivWithClass(xmlConsumer, "cell");
                 if ("0".equals(count)) {
                     XMLUtils.data(xmlConsumer, "Checked out");
                 } else {
-                    XMLUtils.data(xmlConsumer, "Available ");
-                    createStrong(xmlConsumer, count);
+                    XMLUtils.data(xmlConsumer, count);
+                    XMLUtils.data(xmlConsumer, " Available ");
                 }
                 endDiv(xmlConsumer);
+                startDivWithClass(xmlConsumer, "cell");
+                XMLUtils.data(xmlConsumer, equipment.getNote());
                 endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
-                endLi(xmlConsumer);
+
             }
-            endUl(xmlConsumer);
+
             xmlConsumer.endDocument();
         } catch (SAXException e) {
             throw new LanewebException(e);

@@ -40,9 +40,18 @@
 }
 
 
-/* Liaision table */
+/* Here liaison  table */
+
 .liaisons-directory .table.phone-view *:nth-of-type(3),
 .liaisons-directory .table.phone-view *:nth-of-type(1) {
+    flex-grow: 1.5;
+}
+
+
+
+/* Here  table in page equipment.html */
+
+.table.phone-view.equipment div *:nth-of-type(1) {
     flex-grow: 1.5;
 }
 
@@ -90,6 +99,7 @@
         padding: 12px 0;
     }
 
+
     /* Specific for each tables need to set the row name */
     /* Here course reserve table */
     .table.phone-view.course-reserves .cell:nth-of-type(1):before {
@@ -104,7 +114,9 @@
         content: "Department";
     }
 
-    /* Here liaison reserve table */
+    /* Here liaison  table */
+
+
     .liaisons-directory .table.phone-view .cell:nth-of-type(1):before {
         content: "Department";
     }
@@ -136,5 +148,17 @@
         content: "Loan Period";
     }
 
+    /* Here  table in page equipment.html */
 
+    .table.phone-view.equipment .cell:nth-of-type(1):before {
+        content: "Item";
+    }
+
+    .table.phone-view.equipment .cell:nth-of-type(2):before {
+        content: "Status";
+    }
+
+    .table.phone-view.equipment .cell:nth-of-type(3):before {
+        content: "Checkout Period";
+    }
 }

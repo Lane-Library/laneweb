@@ -10,17 +10,12 @@ footer section,
 }
 
 header section,
-footer section {
-    max-width: 1700px;
-}
-
-.content .centered> :not(.ankle-footer) {
-    max-width: 1700px;
-}
-
-.no-search-content div> :not(.ankle-footer),
-.su-design .content div.centered> :not(.ankle-footer) {
+footer section,
+.content,
+.no-search-content>div:not(.ankle-footer),
+.su-design .content div.centered>div:not(.ankle-footer) {
     max-width: 2300px;
+    margin: auto;
 }
 
 header:first-of-type {

@@ -52,8 +52,7 @@
 }
 
 .basic-container {
-    margin-top: 24px;
-    padding: 2em;
+    padding: 98px;
     box-sizing: border-box;
     position: relative;
 }
@@ -113,13 +112,13 @@
     width: 95%;
 }
 
-.landing-page-container {
-    padding: 98px 10%;
+.landing-page-container>* {
+    padding-left: 11%;
+    padding-right: 11%;
 }
 
-.secondary-page-container {
-    padding: 42px 100px;
-    margin: 42px 100px;
+.service-page {
+    padding: 42px 7%;
 }
 
 @media (max-width : 1100px) {
@@ -127,7 +126,7 @@
         padding: 42px 80px;
     }
 
-    .secondary-page-container {
+    .service-page {
         padding: 42px 30px;
         margin: 42px 30px;
     }
@@ -147,7 +146,7 @@
         padding: 42px 50px;
     }
 
-    .secondary-page-container {
+    .service-page {
         padding: 42px 20px;
         margin: 42px 20px;
     }
@@ -162,7 +161,7 @@
         padding: 42px 20px;
     }
 
-    .secondary-page-container {
+    .service-page {
         padding: 42px 10px;
         margin: 42px 10px;
     }

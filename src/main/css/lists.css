@@ -41,7 +41,7 @@ ol {
 .links-list li {
     margin: 12px 0;
     padding-bottom: 12px;
-    border-bottom-color: #D5DADC;
+    border-bottom: #D5DADC solid 1px;
 }
 
 .links-list li a:first-child {
