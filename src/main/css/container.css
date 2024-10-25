@@ -51,18 +51,30 @@
     margin-right: auto;
 }
 
-.basic-container {
+.su-design .content>.centered .basic-container {
     padding: 98px;
     box-sizing: border-box;
     position: relative;
 }
 
+.basic-container h2,
+.basic-container h3,
+.basic-container h4 {
+    margin-bottom: 26px;
+}
+
+
+
 .basic-container p {
-    margin-bottom: 6px;
+    margin-bottom: 12px;
 }
 
 .basic-container div {
-    margin-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+.basic-container.btn {
+    margin: 12px 0;
 }
 
 .basic-container.same-height {
@@ -112,10 +124,16 @@
     width: 95%;
 }
 
-.landing-page-container>* {
+.su-design .content>.centered .landing-page-container>* {
     padding-left: 11%;
     padding-right: 11%;
 }
+
+.su-design .content>.centered .service-container>* {
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
 
 .service-page {
     padding: 42px 7%;

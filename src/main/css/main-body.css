@@ -9,13 +9,18 @@ footer section,
     margin: auto;
 }
 
+
 header section,
 footer section,
 .content,
 .no-search-content>div:not(.ankle-footer),
-.su-design .content div.centered>div:not(.ankle-footer) {
+.content div.centered div.service-page {
     max-width: 2300px;
     margin: auto;
+}
+
+.su-design .content {
+    max-width: none;
 }
 
 header:first-of-type {
