@@ -122,8 +122,6 @@
              * @private
              */
             _handleClick() {
-                console.log("_handleclicked");
-
                 let target = this.target,
                     linkinfo = new L.LinkInfo(target),
                     label, url, query, bookmarks;
