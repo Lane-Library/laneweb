@@ -41,7 +41,6 @@
             });
             this.on("editingChange", (e) => this._handleEditingChange(e));
             this.srcNode.draggable = true;
-            this.srcNode.addEventListener("drag", (event) => { });
             this.srcNode.addEventListener("dragstart", (event) => { this._handleDragStart(event) });
             this.srcNode.addEventListener("dragend", (event) => { this._handleDragEnd(event) });
             this.srcNode.addEventListener("drop", (event) => { this._handleDragDrop(event) });
@@ -233,14 +232,15 @@
 
         _handleDragStart(event) {
             this.startNodePositon = this.position;
-            const draggedNode = event.target;
+            const draggedNode = event.currentTarget;
             draggedNode.style.border = "1px solid #000";
             draggedNode.querySelector("div").classList.toggle("hidden");
             this.emit("dragStart", { position: this.position, target: draggedNode });
         }
 
         _handleDragEnd(event) {
-            const draggedNode = event.target;
+            event.preventDefault();
+            const draggedNode = event.currentTarget;
             draggedNode.style.border = "none";
             draggedNode.querySelector("div").classList.toggle("hidden");
         }
@@ -253,7 +253,7 @@
         _handleDragOver(event) {
             event.preventDefault();
             if (this.startNodePositon != this.position) {
-                this.emit("dragOver", { position: this.position, target: event.target });
+                this.emit("dragOver", { position: this.position, target: event.currentTarget });
             }
         }
     }
