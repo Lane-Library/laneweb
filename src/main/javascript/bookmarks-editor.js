@@ -203,7 +203,7 @@
                 drag = lis[index_from],
                 drop = lis[this.to];
 
-            if (drop.classList && drop.classList.contains('bookmark-editor-content')) {
+            if (drop && drop.classList.contains('bookmark-editor-content')) {
                 if (this.to > index_from) {
                     if (this.to + 1 == lis.length) {
                         ul.appendChild(drag);
@@ -216,6 +216,16 @@
                     drop.parentNode.insertBefore(drag, drop);
                 }
             }
+
+            // Ensure the draggable element stays within the boundaries
+            let rect = this.srcNode.getBoundingClientRect(),
+                x = event.clientX - rect.left - drag.offsetWidth / 2,
+                y = event.clientY - rect.top - drag.offsetHeight / 2,
+                maxX = rect.width - drag.offsetWidth,
+                maxY = rect.height - drag.offsetHeight;
+            drag.style.left = `${Math.max(0, Math.min(x, maxX))}px`;
+            drag.style.top = `${Math.max(0, Math.min(y, maxY))}px`;
+
         }
 
         getNodeIndex(node) {
@@ -232,14 +242,11 @@
         _handleDragDrop(event) {
             this.bookmarks.moveBookmark(this.to, this.from);
         }
-
-
         _syncPosition() {
             let i = 0;
             this.editors.forEach(function (editor) {
                 editor.position = i++;
             });
-
         };
 
     }
