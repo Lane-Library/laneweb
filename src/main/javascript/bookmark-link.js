@@ -81,11 +81,8 @@
 
 
             setStatus(status) {
-                if (this.status !== status) {
-                    this.status = status;
-                    this.emit("statusChange", { newVal: status });
-
-                }
+                this.status = status;
+                this.emit("statusChange", { newVal: status });
             }
 
             /**
@@ -250,10 +247,6 @@
             _handleStatusChange(event) {
                 this._clearTimer();
                 let target = this.target;
-
-                //IE messes up the event handling if set up on initialization
-                //so purging and selectively set them when the status changes.
-                // node.purge(false);
                 switch (event.newVal) {
                     //OFF: not visible
                     case OFF:
