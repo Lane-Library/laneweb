@@ -47,9 +47,10 @@
             for (i = 0; i < items.length; i++) {
                 editor = new BookmarkEditor({ srcNode: items.item(i), bookmark: bookmarks.getBookmark(i), position: i });
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
-                editor.on("dragDrop", (e) => this._handleDragDrop(e));
                 editor.on("dragOver", (e) => this._handleDragOver(e));
                 editor.on("dragStart", (e) => this._handleDragStart(e));
+                editor.on("drag", (e) => this._handleDrag(e));
+                editor.on("dragEnd", (e) => this._handleDragEnd(e));
                 editors.push(editor);
             }
             this.editors = editors;
@@ -84,9 +85,10 @@
                 items.prepend(item);
                 editor = new BookmarkEditor({ srcNode: item, position: 0 });
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
-                editor.on("dragDrop", (e) => this._handleDragDrop(e));
                 editor.on("dragOver", (e) => this._handleDragOver(e));
                 editor.on("dragStart", (e) => this._handleDragStart(e));
+                editor.on("drag", (e) => this._handleDrag(e));
+                editor.on("dragEnd", (e) => this._handleDragEnd(e));
                 editors.unshift(editor);
                 editor.setEditing(true);
             }
@@ -223,12 +225,13 @@
 
         _handleDragOver(event) {
             this.to = this.getNodeIndex(event.target);
+
+
             let ul = this.srcNode.querySelector("ul"),
                 lis = ul.children,
                 index_from = this.getNodeIndex(this.dragged_source),
                 drag = lis[index_from],
                 drop = lis[this.to];
-
             if (drop && drop.classList.contains('bookmark-editor-content')) {
                 if (this.to > index_from) {
                     if (this.to + 1 == lis.length) {
@@ -255,9 +258,11 @@
         }
 
 
-        _handleDragDrop(event) {
+        _handleDragEnd(event) {
             this.bookmarks.moveBookmark(this.to, this.from);
         }
+
+
         _syncPosition() {
             let i = 0;
             this.editors.forEach(function (editor) {
