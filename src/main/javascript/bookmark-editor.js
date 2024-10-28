@@ -41,6 +41,7 @@
             });
             this.on("editingChange", (e) => this._handleEditingChange(e));
             this.srcNode.draggable = true;
+            this.srcNode.addEventListener("drag", (event) => { this._handleDrag(event); });
             this.srcNode.addEventListener("dragstart", (event) => { this._handleDragStart(event) });
             this.srcNode.addEventListener("dragend", (event) => { this._handleDragEnd(event) });
             this.srcNode.addEventListener("drop", (event) => { this._handleDragDrop(event) });
@@ -230,6 +231,16 @@
             }
         }
 
+        _handleDrag(event) {
+            event.preventDefault();
+            this.emit("drag", {
+                position: this.position,
+                target: event.target,
+                X: event.pageX,
+                Y: event.pageY
+            });
+        }
+
         _handleDragStart(event) {
             this.startNodePositon = this.position;
             const draggedNode = event.currentTarget;
@@ -243,17 +254,20 @@
             const draggedNode = event.currentTarget;
             draggedNode.style.border = "none";
             draggedNode.querySelector("div").classList.toggle("hidden");
+            this.emit("dragEnd");
         }
 
         _handleDragDrop(event) {
             event.preventDefault();
-            this.emit("dragDrop");
         }
 
         _handleDragOver(event) {
             event.preventDefault();
             if (this.startNodePositon != this.position) {
-                this.emit("dragOver", { position: this.position, target: event.currentTarget });
+                this.emit("dragOver", {
+                    position: this.position,
+                    target: event.currentTarget,
+                });
             }
         }
     }

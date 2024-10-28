@@ -190,6 +190,32 @@
             this._syncPosition();
         }
 
+
+        _handleDrag(event) {
+            let draggable = event.target,
+                parent = draggable.parentElement,
+
+                // Get the bounding rectangle of the parent element
+                parentRect = parent.getBoundingClientRect();
+
+            // Calculate the maximum allowed positions for the draggable element
+            let maxX = parentRect.right - draggable.offsetWidth,
+                maxY = parentRect.bottom - draggable.offsetHeight,
+
+                // Ensure the draggable element stays within the parent's boundaries
+                x = event.clientX - draggable.offsetWidth / 2,
+                y = event.clientY - draggable.offsetHeight / 2;
+
+            x = Math.max(0, Math.min(x, maxX));
+            y = Math.max(0, Math.min(y, maxY));
+
+            // Update the draggable element's position
+            draggable.style.left = x + 'px';
+            draggable.style.top = y + 'px';
+
+        }
+
+
         _handleDragStart(e) {
             this.dragged_source = e.target;
             this.from = e.position;
@@ -216,16 +242,6 @@
                     drop.parentNode.insertBefore(drag, drop);
                 }
             }
-
-            // Ensure the draggable element stays within the boundaries
-            let rect = this.srcNode.getBoundingClientRect(),
-                x = event.clientX - rect.left - drag.offsetWidth / 2,
-                y = event.clientY - rect.top - drag.offsetHeight / 2,
-                maxX = rect.width - drag.offsetWidth,
-                maxY = rect.height - drag.offsetHeight;
-            drag.style.left = `${Math.max(0, Math.min(x, maxX))}px`;
-            drag.style.top = `${Math.max(0, Math.min(y, maxY))}px`;
-
         }
 
         getNodeIndex(node) {
