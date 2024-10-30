@@ -30,9 +30,6 @@ public class EquipmentListSAXStrategy extends AbstractXHTMLSAXStrategy<List<Equi
                     XMLUtils.data(xmlConsumer, " Available ");
                 }
                 endDiv(xmlConsumer);
-                startDivWithClass(xmlConsumer, "cell");
-                XMLUtils.data(xmlConsumer, equipment.getNote());
-                endDiv(xmlConsumer);
                 endDiv(xmlConsumer);
             }
             xmlConsumer.endDocument();
