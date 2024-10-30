@@ -3,7 +3,7 @@
     "use strict";
 
     let Model = L.Model,
-        BookmarkEvent = L.BookmarkEvent,
+        LaneEvent = L.LaneEvent,
         OFF = "off",
         READY = "ready",
         ACTIVE = "active",
@@ -22,7 +22,7 @@
          * @requires LinkInfo
          * @constructor
          */
-        class BookmarkLink extends BookmarkEvent {
+        class BookmarkLink extends LaneEvent {
             constructor() {
                 super();
                 const span = document.createElement('span');

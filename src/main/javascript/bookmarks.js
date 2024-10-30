@@ -3,10 +3,10 @@
     "use strict";
 
     let Model = L.Model,
-        BookmarkEvent = L.BookmarkEvent,
+        LaneEvent = L.LaneEvent,
         BASE_PATH = Model.get(Model.BASE_PATH) || "";
 
-    class Bookmarks extends L.BookmarkEvent {
+    class Bookmarks extends L.LaneEvent {
         constructor(bookmarks) {
             super();
             let i;

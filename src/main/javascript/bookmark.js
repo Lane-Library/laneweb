@@ -11,7 +11,7 @@
      * @param label  {string} the label
      * @param url {string} the url
      */
-    class Bookmark extends L.BookmarkEvent {
+    class Bookmark extends L.LaneEvent {
         constructor(label, url) {
             super();
             this.first("valueChange", (e) => this._valueChange(e));

@@ -7,6 +7,9 @@
         };
 
         maybeCreatePopup(title, body, width, xy) {
+            if (width === "0px" || width === "auto") {
+                width = 350;
+            }
             let titleDiv, contentDiv, bodyDiv, closedDiv;
             this.clearPopup();
             this.popupWindow = document.createElement('div');
@@ -27,6 +30,7 @@
             this.popupWindow.appendChild(contentDiv);
             this.popupWindow.style.width = width + "px";
             this.popupWindow.style.position = "absolute";
+            this.popupWindow.style.maxWidth = "90%";
 
             closedDiv = document.createElement('div');
             closedDiv.classList.add("fa-close")

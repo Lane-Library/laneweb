@@ -3,7 +3,7 @@
     "use strict";
 
 
-    class BookmarkEvent {
+    class LaneEvent {
         constructor() {
             this.events = {};
         }
@@ -33,6 +33,6 @@
             }
         }
     }
-    L.BookmarkEvent = BookmarkEvent;
+    L.LaneEvent = LaneEvent;
 
 })();

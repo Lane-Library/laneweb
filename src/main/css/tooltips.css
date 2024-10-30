@@ -1,4 +1,4 @@
-.yui3-tooltip-content {
+.tooltip-content {
     padding: 10px;
     max-width: 300px;
     border: 1px solid #ccc;
@@ -6,19 +6,15 @@
     text-align: left;
 }
 
-.yui3-tooltip {
+.tooltip {
     position: absolute;
 }
 
-.yui3-tooltip-hidden {
-    visibility: hidden;
-}
-
-.yui3-tooltip-trigger {
+.tooltip-trigger {
     cursor: pointer;
 }
 
-.yui3-tooltip-content p:last-child {
+.tooltip-content p:last-child {
     margin-bottom: 0;
 }
 
