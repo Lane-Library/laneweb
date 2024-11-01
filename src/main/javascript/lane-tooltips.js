@@ -78,8 +78,6 @@
              */
             syncUI: function () {
                 this._uiSetNodes(this.get("triggerNodes"));
-                console.log(this.get("triggerNodes"));
-
             },
 
             /*
