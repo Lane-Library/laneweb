@@ -31,7 +31,7 @@ public class LinkWithCoverEresourceSAXStrategy extends AbstractXHTMLSAXStrategy<
                 fontAwesomeClass = "fa-light fa-book";
             }
             startAnchor(xmlConsumer, href);
-            String title = TitleNormalizer.toTitleCase(eresource.getTitle());
+            String title = eresource.getTitle();
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute(EMPTY_NS, "data-bibid", "data-bibid", CDATA, bibID);
             atts.addAttribute(EMPTY_NS, "class", "class", CDATA, "bookcover");
