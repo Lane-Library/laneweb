@@ -1,25 +1,25 @@
-(function() {
+(function () {
 
     "use strict";
 
     let helpNode = document.querySelector(".search-help a"),
 
-        view = function() {
+        view = function () {
 
             return {
-                    update: function(href) {
-                        helpNode.href = window.model["base-path"] + href;
-                    }
-                };
+                update: function (href) {
+                    helpNode.href = window.model["base-path"] + href;
+                }
+            };
 
         }(),
 
-        controller = function() {
+        controller = function () {
 
             return {
-                change: function(event) {
-                    let newVal = event.newVal;
-                    view.update(newVal[newVal.source].help);
+                change: function (event) {
+                    let help = event.option.help;
+                    view.update(help);
                 }
             };
 

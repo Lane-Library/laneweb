@@ -9,14 +9,6 @@
         BASE_PATH = Model.get(Model.BASE_PATH) || "",
         PROXY_LINKS = Model.get(Model.PROXY_LINKS);
 
-    /**
-     * The Bookmarks Widget.  This is created by parsing the ul element
-     * with id #bookmarks.
-     *
-     * @class BookmarksWidget
-     * @extends Widget
-     * @constructor
-     */
     class BookmarksWidget {
         constructor(args) {
             this.items = ["li"];
@@ -24,7 +16,6 @@
             this.srcNode = args.srcNode;
             this.displayLimit = args.displayLimit;
             this.events = {};
-
             this.bindUI();
             this.syncUI();
         }

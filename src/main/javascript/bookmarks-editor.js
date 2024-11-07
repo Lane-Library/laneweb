@@ -24,6 +24,11 @@
 
 
         bindUI() {
+            //Add EventTarget attributes to the Bookmarks prototype
+            L.addEventTarget(this, {
+                prefix: 'bookmarksEditor'
+            });
+
             let bookmarks = this.bookmarks,
                 buttons = this.srcNode.querySelectorAll("fieldset button");
             buttons.forEach(button => {
@@ -118,7 +123,7 @@
          * @param event {CustomEvent}
          */
         _handleBookmarkAdd(event) {
-            this.editors[event.target.indexOf(event.bookmark)].update();
+            this.editors[0].update();
             this._syncPosition();
         }
 
@@ -194,26 +199,7 @@
 
 
         _handleDrag(event) {
-            let draggable = event.target,
-                parent = draggable.parentElement,
-
-                // Get the bounding rectangle of the parent element
-                parentRect = parent.getBoundingClientRect();
-
-            // Calculate the maximum allowed positions for the draggable element
-            let maxX = parentRect.right - draggable.offsetWidth,
-                maxY = parentRect.bottom - draggable.offsetHeight,
-
-                // Ensure the draggable element stays within the parent's boundaries
-                x = event.clientX - draggable.offsetWidth / 2,
-                y = event.clientY - draggable.offsetHeight / 2;
-
-            x = Math.max(0, Math.min(x, maxX));
-            y = Math.max(0, Math.min(y, maxY));
-
-            // Update the draggable element's position
-            draggable.style.left = x + 'px';
-            draggable.style.top = y + 'px';
+            let draggable = event.target;
 
         }
 

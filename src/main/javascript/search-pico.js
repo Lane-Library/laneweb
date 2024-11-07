@@ -1,56 +1,55 @@
-(function() {
+(function () {
 
     "use strict";
 
     let fields = [],
 
-        PicoField = function(input) {
-            let suggest,
-                self = this;
-            suggest = new L.Suggest(input);
-            suggest.on("select", function() {
-                self.fire("input");
-            });
-            input.addEventListener("input", function() {
-                self.fire("input");
-            });
+        PicoField = function (input) {
+            let suggest;
 
-            this.addTarget(fields);
+            suggest = new L.Suggest(input);
+            L.addEventTarget(suggest);
+            suggest.on("suggest:select", function () {
+                fields.fire("input");
+            });
+            input.addEventListener("input", function () {
+                fields.fire("input");
+            });
             return {
-                enable: function(enable) {
+                enable: function (enable) {
                     input.disabled = !enable;
                 },
-                getValue: function() {
+                getValue: function () {
                     return input.value;
                 },
-                reset: function() {
+                reset: function () {
                     input.value = "";
                 }
             };
         };
 
-    L.addEventTarget(PicoField);
     L.addEventTarget(fields);
 
-    document.querySelectorAll(".pico-fields input").forEach(function(input) {
+
+    document.querySelectorAll(".pico-fields input").forEach(function (input) {
         fields.push(new PicoField(input));
     });
 
-    L.on("picoFields:change", function(event) {
-        fields.forEach(function(field) {
+    L.on("picoFields:change", function (event) {
+        fields.forEach(function (field) {
             field.enable(event.active);
         });
     });
 
-    L.on("searchReset:reset", function() {
-        fields.forEach(function(field) {
+    L.on("searchReset:reset", function () {
+        fields.forEach(function (field) {
             field.reset();
         });
     });
 
-    fields.on("input", function() {
+    fields.on("input", function () {
         let query = "";
-        fields.forEach(function(field) {
+        fields.forEach(function (field) {
             let value = field.getValue();
             if (value) {
                 query += "(" + value + ")";
@@ -62,5 +61,6 @@
         }
         L.search.setQuery(query);
     });
+
 
 })();

@@ -3,12 +3,10 @@
     "use strict";
 
     let Bookmark = L.Bookmark,
-        LaneEvent = L.LaneEvent,
         HTMLTemplate = document.querySelector("#bookmark-editor-template");
 
-    class BookmarkEditor extends LaneEvent {
+    class BookmarkEditor {
         constructor(args) {
-            super();
             this.bookmark = args.bookmark;
             this.srcNode = args.srcNode;
             this.position = args.position;
@@ -35,13 +33,17 @@
          * @method bindUI
          */
         bindUI() {
+            //Add EventTarget attributes to the Bookmarks prototype
+            L.addEventTarget(this, {
+                prefix: 'bookmarkEditor'
+            });
+
             const buttons = this.srcNode.querySelectorAll("button");
             buttons.forEach(button => {
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
             this.on("editingChange", (e) => this._handleEditingChange(e));
             this.srcNode.draggable = true;
-            this.srcNode.addEventListener("drag", (event) => { this._handleDrag(event); });
             this.srcNode.addEventListener("dragstart", (event) => { this._handleDragStart(event) });
             this.srcNode.addEventListener("dragend", (event) => { this._handleDragEnd(event) });
             this.srcNode.addEventListener("drop", (event) => { this._handleDragDrop(event) });
@@ -63,7 +65,7 @@
 
         setEditing(newVal) {
             this.editing = newVal;
-            this.emit("editingChange", { newVal: newVal });
+            this.fire("editingChange", { newVal: newVal });
         }
 
         /**
@@ -90,7 +92,7 @@
             this.setEditing(false);
             this.bookmark = null;
             this.srcNode.remove(true);
-            this.emit("destroy", { editor: this });
+            this.fire("destroy", { editor: this });
         }
 
         /**
@@ -231,55 +233,12 @@
             }
         }
 
-
-        _handleDrag(event) {
-            event.preventDefault();
-            const target = event.target;
-            const clone = target.dragClone; // Access the clone
-
-            // Move the clone with the mouse
-            if (clone) {
-                clone.style.left = event.clientX - (target.offsetWidth / 2) + 'px';
-                clone.style.top = event.clientY - (target.offsetHeight / 2) + 'px';
-            }
-            // this.emit("drag", {
-            //     position: this.position,
-            //     target: event.target,
-            //     X: event.pageX,
-            //     Y: event.pageY
-            // });
-        }
-
         _handleDragStart(event) {
-            let source = event.currentTarget;
             this.startNodePositon = this.position;
-            source.style.left = 0 + "px";
-
-            source.style.border = "1px solid #000";
-            source.querySelector("div").classList.toggle("hidden");
-
-            //source.style.visibility = "hidden";
-            let dragNode = source.cloneNode(true);
-
-
-            dragNode.style.textAlign = "left";
-            dragNode.style.backgroundColor = "red";
-
-            // Center the clone under the mouse
-            let dragContainer = document.createElement("div");
-            dragContainer.appendChild(dragNode);
-            dragContainer.style.position = "absolute";
-            dragContainer.style.pointerEvents = "none"; // Prevent mouse events on the clone
-            dragContainer.style.left = source.clientX + 'px';
-            dragContainer.style.top = source.clientY + 'px';
-            dragContainer.style.backgroundColor = "red";
-            dragContainer.style.width = source.clientWidth + "px";
-            dragContainer.style.height = source.clientHeight + "px";
-
-            document.body.appendChild(dragContainer);
-            event.target.dragClone = dragContainer; // Store
-
-            this.emit("dragStart", { position: this.position, target: source, dragClone: dragContainer });
+            const draggedNode = event.currentTarget;
+            draggedNode.style.border = "1px solid #000";
+            draggedNode.querySelector("div").classList.toggle("hidden");
+            this.fire("dragStart", { position: this.position, target: draggedNode });
         }
 
         _handleDragEnd(event) {
@@ -287,26 +246,24 @@
             const draggedNode = event.currentTarget;
             draggedNode.style.border = "none";
             draggedNode.querySelector("div").classList.toggle("hidden");
-            this.emit("dragEnd");
-            event.stopPropagation();
+            this.fire("dragEnd");
         }
 
         _handleDragDrop(event) {
-            event.stopPropagation();
             event.preventDefault();
         }
 
         _handleDragOver(event) {
             event.preventDefault();
-            event.stopPropagation();
             if (this.startNodePositon != this.position) {
-                this.emit("dragOver", {
-                    position: this.position,
-                    target: event.currentTarget,
-                });
+                this.fire("dragOver", { position: this.position, target: event.currentTarget });
             }
         }
     }
+
+    L.addEventTarget(BookmarkEditor, {
+        prefix: 'bookmarkEditor'
+    });
 
 
     L.BookmarkEditor = BookmarkEditor;

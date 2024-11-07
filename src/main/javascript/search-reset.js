@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     "use strict";
 
@@ -7,22 +7,19 @@
         CLICK = "click",
         EMPTY = "",
 
-        view = function(reset) {
+        view = function (reset) {
 
             let v = {
-                    hide: function() {
-                        reset.classList.remove(SEARCH_RESET_ACTIVE);
-                    },
-                    show: function() {
-                        reset.classList.add(SEARCH_RESET_ACTIVE);
-                    },
-                    click: function() {
-                        v.fire(CLICK);
-                    }
-                };
-
-            L.addEventTarget(v);
-
+                hide: function () {
+                    reset.classList.remove(SEARCH_RESET_ACTIVE);
+                },
+                show: function () {
+                    reset.classList.add(SEARCH_RESET_ACTIVE);
+                },
+                click: function () {
+                    view.fire(CLICK);
+                }
+            };
             // case 131334 javascript error on discovery login page
             if (reset) {
                 reset.addEventListener(CLICK, v.click);
@@ -32,17 +29,17 @@
 
         }(document.querySelector("." + SEARCH_RESET)),
 
-        controller = function() {
+        controller = function () {
 
             return {
-                change: function(event) {
+                change: function (event) {
                     if (event.newVal === EMPTY) {
                         view.hide();
                     } else if (event.oldVal === EMPTY) {
                         view.show();
                     }
                 },
-                reset: function() {
+                reset: function () {
                     controller.fire("reset");
                     L.fire("tracker:trackableEvent", {
                         category: "lane:searchFormReset",
@@ -56,6 +53,8 @@
         prefix: "searchReset",
         emitFacade: true
     });
+
+    L.addEventTarget(view);
 
     controller.addTarget(L);
 

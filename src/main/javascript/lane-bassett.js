@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     "use strict";
 
@@ -12,7 +12,7 @@
         history = window.history,
         subRegionToShow = 4,
 
-        formatAjaxUrl = function(string) {
+        formatAjaxUrl = function (string) {
             let url, href;
             href = string.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
@@ -29,12 +29,12 @@
             return url;
         },
 
-        submitPagination = function(e) {
+        submitPagination = function (e) {
             let page = e.target.page.value,
                 pages = e.target.pages;
             if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.value)) {
                 e.preventDefault();
-                document.querySelectorAll(".bassett-error").forEach(function(node) {
+                document.querySelectorAll(".bassett-error").forEach(function (node) {
                     node.style.display = "block";
                 });
                 return;
@@ -42,23 +42,26 @@
             pages.remove();
         },
 
-        loadContent = function(string) {
+        loadContent = function (string) {
             let url = basePath + "/plain/biomed-resources/bassett/raw".concat(string);
             function successHandler(_id, o) {
                 bassettContent.innerHTML = o.responseText;
                 registerLinksContainer(bassettContent);
-                document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function(node) {
+                document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function (node) {
                     node.addEventListener('submit', submitPagination);
                 });
             }
-            L.io(url, {
-                on: {
-                    success: successHandler
-                }
-            });
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    successHandler(null, { responseText: data });
+                })
+                .catch(error => {
+                    console.error('Error fetching content:', error);
+                });
         },
 
-        handleClick = function(ev) {
+        handleClick = function (ev) {
             let url;
             if (this.id === "diagram-choice") {
                 diagramDisplay = true;
@@ -76,11 +79,11 @@
             ev.preventDefault();
         },
 
-        initializeHistory = function() {
+        initializeHistory = function () {
             if (history.state && history.state.bassett) {
                 loadContent(history.state.bassett);
             }
-            window.addEventListener("popstate", function(event) {
+            window.addEventListener("popstate", function (event) {
                 if (event.state) {
                     loadContent(event.state && event.state.bassett);
                 } else {
@@ -89,10 +92,10 @@
             });
         },
 
-        registerLinksContainer = function(container) {
+        registerLinksContainer = function (container) {
             if (container) {
                 let anchors = container.querySelectorAll('a');
-                anchors.forEach(function(anchor) {
+                anchors.forEach(function (anchor) {
                     if (!anchor.rel || anchor.rel === "propagation") {
                         anchor.addEventListener('click', handleClick);
                     }
@@ -101,7 +104,7 @@
         },
 
         // For the bassett menu
-        hideSubRegions = function(event) {
+        hideSubRegions = function (event) {
             let i, region = event.currentTarget.closest("ul"),
                 subRegion = region.querySelectorAll('li');
             resetSubRegions();
@@ -111,7 +114,7 @@
             }
         },
 
-        resetSubRegions = function() {
+        resetSubRegions = function () {
             let i, iElement,
                 subRegion = document.querySelector('#bassett-menu').querySelectorAll('li');
             for (i = 1; i < subRegion.length; i++) {
@@ -125,7 +128,7 @@
             }
         },
 
-        expandSubRegion = function(event) {
+        expandSubRegion = function (event) {
             let i, subRegion,
                 region = event.currentTarget.closest("ul");
             resetSubRegions();
@@ -136,7 +139,7 @@
             }
         },
 
-        displaySubRegion = function(event) {
+        displaySubRegion = function (event) {
             let seeAllContent = event.currentTarget.innerHTML;
             if (seeAllContent === HIDE) {
                 hideSubRegions(event);
@@ -146,7 +149,7 @@
             }
         },
 
-        surlineSubRegion = function(event) {
+        surlineSubRegion = function (event) {
             let i, li = event.currentTarget;
             resetSubRegions();
             li.classList.add('enabled');
@@ -163,13 +166,13 @@
         if (accordion) {
             registerLinksContainer(accordion);
             registerLinksContainer(bassettContent);
-            document.querySelectorAll('.see-all').forEach(function(node) {
+            document.querySelectorAll('.see-all').forEach(function (node) {
                 node.addEventListener('click', displaySubRegion);
             });
-            document.querySelectorAll('.region li:not(:first-child)').forEach(function(node) {
+            document.querySelectorAll('.region li:not(:first-child)').forEach(function (node) {
                 node.addEventListener('click', surlineSubRegion);
             });
-            document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function(node) {
+            document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function (node) {
                 node.addEventListener('submit', submitPagination);
             });
             initializeHistory();

@@ -26,39 +26,38 @@
 
     // load analytics.js and add the ga object
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/#the_javascript_measurement_snippet
-    L.Get.script("https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID, {
-        onSuccess: function () {
-            let model = L.Model, bookmark,
-                ipGroup = model.get(model.IPGROUP),
-                auth = model.get(model.AUTH),
-                dimensions = new Map();
+    let script = document.createElement('script');
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+    script.onload = function () {
+        let model = L.Model, bookmark,
+            ipGroup = model.get(model.IPGROUP),
+            auth = model.get(model.AUTH),
+            dimensions = new Map();
 
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = window.gtag || function () {
-                dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-
-            if (ipGroup) {
-                dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
-            }
-            if (auth) {
-                dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
-                if (L.BookmarksWidget && L.BookmarksWidget.bookmarks.length > 0) {
-                    dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
-                    bookmark = auth;
-                }
-            }
-
-            gtag('config', GA_MEASUREMENT_ID, {
-                'custom_map': dimensions
-            });
-
-            gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup, 'auth': auth, 'bookmark': bookmark });
-
-
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () {
+            dataLayer.push(arguments);
         }
-    });
+        gtag('js', new Date());
+
+        if (ipGroup) {
+            dimensions.set(IP_GROUP_DIMENSION, 'ipGroup');
+        }
+        if (auth) {
+            dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
+            if (L.BookmarksWidget && L.BookmarksWidget.bookmarks.length > 0) {
+                dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
+                bookmark = auth;
+            }
+        }
+
+        gtag('config', GA_MEASUREMENT_ID, {
+            'custom_map': dimensions
+        });
+
+        gtag('event', LANEWEB_DIMENSION, { 'ipGroup': ipGroup, 'auth': auth, 'bookmark': bookmark });
+    };
+    document.head.appendChild(script);
 
 
 

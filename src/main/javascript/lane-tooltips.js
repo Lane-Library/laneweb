@@ -4,20 +4,17 @@
     "use strict";
 
     let
-        LaneEvent = L.LaneEvent,
         OX = -10000,
-        OY = -10000;
+        OY = -10000,
+
+        OFFSET_X = 15,
+        OFFSET_Y = 15;
 
 
-    class Tooltip extends LaneEvent {
+    class Tooltip {
 
-        static OFFSET_X = 15;
-        static OFFSET_Y = 15;
-        static OFFSCREEN_X = OX;
-        static OFFSCREEN_Y = OY;
 
         constructor(args) {
-            super();
             this.showDelay = 250;
             this.hideDelay = 10;
             this.visible = false;
@@ -73,6 +70,10 @@
          * listeners
          */
         bindUI() {
+            L.addEventTarget(this, {
+                prefix: 'tooltip',
+            });
+
             // Publish events introduced by Tooltip. Note the triggerEnter event is preventable,
             // with the default behavior defined in the _defTriggerEnterFn method
             this.on("triggerEnter", (e) => this._defTriggerEnterFn(e));
@@ -183,7 +184,7 @@
          */
         _enterTrigger(node, x, y, mouseClientX, mouseClientY) {
             this._setCurrentTrigger(node, x, y, mouseClientX, mouseClientY);
-            this.emit("triggerEnter", { node: node, pageX: x, pageY: y, mouseClientX: mouseClientX, mouseClientY: mouseClientY });
+            this.fire("triggerEnter", { node: node, pageX: x, pageY: y, mouseClientX: mouseClientX, mouseClientY: mouseClientY });
         }
 
         /*
@@ -228,7 +229,7 @@
          * position.
          */
         _showTooltip() {
-            let tt = document.querySelector(".tooltip"),
+            let tt = document.querySelector(".tooltip.tooltip-content"),
                 height = tt.clientHeight,
                 width = tt.clientWidth,
                 x = this._currTrigger.mouseX,
@@ -237,23 +238,26 @@
                 mouseClientY = this._currTrigger.mouseClientY;
 
             if (mouseClientX >= document.documentElement.clientWidth - width) {
-                x = x - width - Tooltip.OFFSET_X;
+                x = x - width - OFFSET_X;
                 if (x < 0) {
-                    x = Tooltip.OFFSET_X;
+                    x = OFFSET_X;
                 }
 
             } else {
-                x = x + Tooltip.OFFSET_X;
+                x = x + OFFSET_X;
             }
 
             if (mouseClientY >= document.documentElement.clientHeight - height) {
-                y = y - height - Tooltip.OFFSET_Y;
+                y = y - height - OFFSET_Y;
             } else {
-                y = y + Tooltip.OFFSET_Y;
+                y = y + OFFSET_Y;
             }
+
 
             tt.style.left = x + "px";
             tt.style.top = y + "px";
+
+
 
 
             this._clearTimers();

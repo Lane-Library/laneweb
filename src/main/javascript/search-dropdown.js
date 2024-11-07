@@ -1,6 +1,6 @@
 if (document.querySelector(".search-form")) {
 
-	(function() {
+	(function () {
 
 		"use strict";
 
@@ -9,13 +9,13 @@ if (document.querySelector(".search-form")) {
 			dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
 			options = dropdown.querySelectorAll("option"),
 			dropdown_label = document.querySelector('.search-form .general-dropdown-trigger span'),
-			model = function(source) {
+			model = function (source) {
 
 				let m = {
 					source: source
 				};
 
-				options.forEach(function(option) {
+				options.forEach(function (option) {
 					m[option.value] = {
 						placeholder: option.dataset.placeholder,
 						source: option.value,
@@ -29,43 +29,42 @@ if (document.querySelector(".search-form")) {
 
 			}(dropdown[dropdown.selectedIndex].value),
 
-			view = function() {
+			view = function () {
 				let v = {
-					change: function(label) {
+					change: function (label) {
 						dropdown_label.innerHTML = label;
 					},
-					click: function() {
-						view.fire(CHANGE, dropdown[dropdown.selectedIndex].value);
+					click: function () {
+						let selectedValue = dropdown[dropdown.selectedIndex].value;
+						view.fire(CHANGE, { source: selectedValue });
 					}
 				}
-
-				L.addEventTarget(v);
 				dropdown.addEventListener(CHANGE, v.click);
 				return v;
 			}(),
 
 
-			controller = function() {
+			controller = function () {
 
 				return {
-					update: function(source) {
-						let prop, newVal = {};
-						for (prop in model) {
-							newVal[prop] = model[prop];
-						}
-						newVal.source = source;
-						view.change(newVal[source].text);
+					update: function (event) {
+						let prop,
+							previousVal = model.source,
+							text = model[event.source].text;
+
+						view.change(text);
 						L.fire("tracker:trackableEvent", {
 							category: "lane:searchDropdownSelection",
-							action: source,
-							label: "from " + model.source + " to " + source
+							action: event.source,
+							label: "from " + previousVal + " to " + event.source
 						});
-						this.fire(CHANGE, { newVal: newVal, oldVal: model });
-						model = newVal;
+						controller.fire(CHANGE, { newVal: event.source, option: model[event.source] });
 					}
 				};
 
 			}();
+
+		L.addEventTarget(view);
 
 		L.addEventTarget(controller, {
 			prefix: "searchDropdown",
@@ -73,8 +72,9 @@ if (document.querySelector(".search-form")) {
 		});
 
 		controller.addTarget(L);
+		view.on(CHANGE, controller.update)
 
-		view.on(CHANGE, controller.update, controller);
+
 
 	})();
 

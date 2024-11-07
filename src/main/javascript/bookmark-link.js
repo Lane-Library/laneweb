@@ -3,7 +3,6 @@
     "use strict";
 
     let Model = L.Model,
-        LaneEvent = L.LaneEvent,
         OFF = "off",
         READY = "ready",
         ACTIVE = "active",
@@ -13,18 +12,9 @@
     //create BookmarkLink only if bookmarking = rw
     if (Model.get(Model.BOOKMARKING) === "rw") {
 
-        /**
-         * A link that appears when mousing over bookmarkable links and adds that link to bookmarks
-         * when clicked.
-         *
-         * @class BookmarksLink
-         * @requires Base
-         * @requires LinkInfo
-         * @constructor
-         */
-        class BookmarkLink extends LaneEvent {
+        class BookmarkLink {
+
             constructor() {
-                super();
                 const span = document.createElement('span');
                 span.title = 'Add to My Bookmarks';
                 span.className = 'bookmark-link';
@@ -36,8 +26,15 @@
                 this.target = null;
                 this.status = OFF;
                 this.hideDelay = 500;
+                this.bindUI();
                 this.initializer();
                 this._timer = null;
+            }
+
+            bindUI() {
+                L.addEventTarget(this, {
+                    prefix: 'bookmarkLink'
+                });
             }
 
             /**
@@ -67,7 +64,6 @@
                     }.bind(this));
                     sectionContent.addEventListener("mouseout", function (event) {
                         if (event.target.matches("a")) {
-
                             this._handleTargetMouseout(event);
                         }
                     }.bind(this));
@@ -82,7 +78,7 @@
 
             setStatus(status) {
                 this.status = status;
-                this.emit("statusChange", { newVal: status });
+                this.fire("statusChange", { newVal: status });
             }
 
             /**
@@ -248,9 +244,11 @@
                 switch (event.newVal) {
                     //OFF: not visible
                     case OFF:
-                        this._node.remove();
-                        this._node.classList.remove("active");
-                        this._node.classList.remove("bookmarking");
+                        if (this._node) {
+                            this._node.remove();
+                            this._node.classList.remove("active");
+                            this._node.classList.remove("bookmarking");
+                        }
                         break;
                     //READY: visible but not enabled
                     case READY:
@@ -280,6 +278,8 @@
                 }
             }
         }
+
+
         //create a BookmarkLink and save reference
         L.BookmarkLink = new BookmarkLink();
 

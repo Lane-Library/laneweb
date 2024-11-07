@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     "use strict";
 
@@ -20,19 +20,25 @@
              * @param label {string} the label
              * @param url {string} the url
              */
-            addBookmark: function(label, url) {
+            addBookmark: function (label, url) {
                 let queryString = "&label=" + encodeURIComponent(label);
                 queryString += "&url=" + encodeURIComponent(url);
                 queryString += "&redirect=" + encodeURIComponent(location.href);
-                L.io(basePath + "/plain/bookmark-login.html", {
-                    on: {
-                        success: BookmarkLogin._handleSuccess,
-                        failure: BookmarkLogin._handleFailure
-                    },
-                    "arguments": {
-                        queryString: queryString
-                    }
-                });
+                fetch(basePath + "/plain/bookmark-login.html", {
+                    method: 'GET'
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        BookmarkLogin._handleSuccess(null, { responseText: data }, { queryString: queryString });
+                    })
+                    .catch(error => {
+                        BookmarkLogin._handleFailure();
+                    });
             },
 
             /**
@@ -41,7 +47,7 @@
              * @method _handleFailure
              * @private
              */
-            _handleFailure: function() {
+            _handleFailure: function () {
                 L.showMessage("You must log in in order to create bookmarks.");
             },
 
@@ -54,18 +60,18 @@
              * @param o {object} the ajax response object
              * @param args {object} the arguments passed to L.io, in this case the query string
              */
-            _handleSuccess: function(id, o, args) {
+            _handleSuccess: function (id, o, args) {
                 let queryString = args.queryString, yes, no;
                 lightbox.setContent(o.responseText);
                 yes = document.querySelector("#yes-bookmark-login");
                 no = document.querySelector("#no-bookmark-login");
                 yes.href += queryString;
-                no.addEventListener("click", function() {
+                no.addEventListener("click", function () {
                     lightbox.hide();
                 });
                 lightbox.show();
             }
-    };
+        };
 
     //make BookmarkLogin globally available
     L.BookmarkLogin = BookmarkLogin;

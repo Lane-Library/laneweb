@@ -67,7 +67,6 @@
       "type": "js",
       "name": "lane-all.js",
       "files": [
-        "yui-3.18.1.js",
         "lane.js",
         "util.js",
         "menu.js",
@@ -90,7 +89,6 @@
         "search-pico-toggle.js",
         "search-pico-fields.js",
         "search-pico.js",
-        "bookmark-event.js",
         "bookmark.js",
         "bookmarks.js",
         "bookmarks-widget.js",
@@ -98,7 +96,6 @@
         "bookmarks-editor.js",
         "bookmark-link.js",
         "bookmark-animation.js",
-        "lane-lightbox.js",
         "bookmark-login.js",
         "lane-tracking.js",
         "lane-google-GA4.js",

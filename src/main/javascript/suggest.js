@@ -1,103 +1,200 @@
 
-(function() {
+(function () {
 
     "use strict";
 
     let model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
-    DEFAULT_SOURCE_BASE = basePath + "/apps/suggest/getSuggestionList?q={query}&l=",
-    DEFAULT_LIMIT = "mesh",
-    DEFAULT_QUERY_LENGTH = 3,
-    SELECT = "select",
+        DEFAULT_SOURCE_BASE = basePath + `/apps/suggest/getSuggestionList?q={query}&l=`,
+        DEFAULT_LIMIT = "mesh",
+        DEFAULT_QUERY_LENGTH = 3,
+        SELECT = "suggest:select";
 
-    /**
-     * A class that provides an autocomplete widget for inputs.
-     * @class Suggest
-     * @type {Object}
-     * @requires EventTarget
-	 * @constructor
-     * @param input {Node} the input node.
-     * @param limit {String} the limit parameter for the request.
-	 * @param sourceBase {String} .
-     */
-    Suggest = function(input,  minQueryLength, sourceBase) {
-        let yuiinput = input._node ? input : new Y.Node(input);
-        yuiinput.plug(Y.Plugin.AutoComplete, {
-            minQueryLength: minQueryLength ? minQueryLength : DEFAULT_QUERY_LENGTH,
-            source: sourceBase ? sourceBase :(  DEFAULT_SOURCE_BASE + DEFAULT_LIMIT),
-            width: "100%"
-        });
+    class Suggest {
+        constructor(input, minQueryLength, sourceBase) {
+            this._input = input;
+            this._ac = [];
+            this.selectedItem = null;
+            this.limit = DEFAULT_LIMIT;
+            this.queryLength = minQueryLength || DEFAULT_QUERY_LENGTH;
+            this.sourceBase = sourceBase || DEFAULT_SOURCE_BASE;
+            this.isKeyDown = false;
+            this.bindUI();
+        }
 
-        /**
-         * @event select
-         * @description fired when a suggestion is selected
-         */
-        this.publish(SELECT,{
-            emitFacade : true
-        });
 
-        //save the input
-        this._input = yuiinput;
 
-        //save the autocomplete object
-        this._ac = yuiinput.ac;
-
-        //hoveredItemChange is fired on mouseover events in the suggestion list
-        this._ac.after("hoveredItemChange", this._handleHoveredItemChange, this);
-
-        //select is fired on clicks or return pressed in suggestion list
-        this._ac.after(SELECT, this._handleSelect, this);
-
-        // disable suggestion list after lane search submitted
-        L.on("search:search", function(){
-            yuiinput.ac.destroy();
-        });
-    };
-
-    Suggest.prototype = {
-
-        /**
-         * Sets the active item to the mouseovered one.
-         * @method _handleHoveredItemChanage
-         * @param event {CustomEvent} the hoveredItemChange event
-         * @private
-         */
-        _handleHoveredItemChange : function(event) {
-            if (event.newVal) {
-                this._ac.set("activeItem", event.newVal);
-            }
-        },
-
-        /**
-         * Fires the select event when an autocomplete item is selected
-         * @method _handleSelect
-         * @param event {CustomEvent} the autocomplete select event
-         * @private
-         */
-        _handleSelect : function(event) {
-            this.fire(SELECT, {
-                suggestion : event.result.text,
-                input : this._input
+        bindUI() {
+            L.on("search:search", (e) => function (e) {
+                this._destroy();
             });
-        },
+            this._input.addEventListener('input', (event) => this._displaySuggestions(event));
+            this._input.addEventListener("focusout", (event) => this._destroy());
+        }
+
+        _displaySuggestions() {
+            let query = this._input.value,
+                urlEndpoint = this.sourceBase.replace("{query}", encodeURIComponent(query));
+            urlEndpoint += this.limit;
+            if (query.length >= this.queryLength) {
+                fetch(urlEndpoint)
+                    .then(response => response.json())
+                    .then(data => {
+                        let suggestions = data || [],
+                            suggestionContainer = document.createElement('div'),
+                            dropdown = document.createElement('ul');
+                        dropdown.className = 'aclist-list';
+                        suggestions.forEach(suggestion => {
+                            let item = document.createElement('li');
+                            item.className = 'aclist-item';
+                            item.textContent = suggestion;
+                            dropdown.appendChild(item);
+                            suggestionContainer.className = 'aclist-content';
+                        });
+                        this._destroy();
+                        this._ac = dropdown.querySelectorAll('.aclist-item');
+                        suggestionContainer.appendChild(dropdown);
+                        this._handleEvents();
+                        this._input.after(suggestionContainer);
+                    });
+            }
+        }
+
+
+        _handleEvents() {
+            this._ac.forEach(item => {
+                item.addEventListener('click', (event) => this._handleMouseClickItemChange(event));
+                item.addEventListener('mouseenter', (event) => this._handleMouseEnterItemChange(event));
+                item.addEventListener('mouseleave', (event) => this._handleMouseLeaveItemChange(event));
+            });
+            this._input.addEventListener('keydown', (event) => this._handleKeysDownChange(event));
+            this._input.addEventListener('keyup', (event) => this._handleKeysUpChange(event));
+        }
+
+        _destroy() {
+            this._ac.forEach(item => {
+                item.removeEventListener('click', (event) => this._handleMouseClickItemChange(event));
+                item.removeEventListener('mouseenter', (event) => this._handleMouseEnterItemChange(event));
+                item.removeEventListener('mouseleave', (event) => this._handleMouseLeaveItemChange(event));
+            });
+            this._input.removeEventListener('keydown', (event) => this._handleKeysDownChange(event));
+            this._input.removeEventListener('keyup', (event) => this._handleKeysUpChange(event));
+            this._ac = [];
+            document.querySelectorAll('.aclist-content').forEach(item => item.remove());
+            this.selectedItem = null;
+        }
+
+
+
+        _updateInputValue(event) {
+            this._input.value = event.target.textContent;
+            this.fire(SELECT, {
+                suggestion: event.target.textContent,
+                input: this._input
+            });
+            this._destroy();
+        }
+
+        _handleKeysDownChange(event) {
+            if (this._ac.length > 0) {
+                if (event.key === 'ArrowDown' && !this.isKeyDown) {
+                    this._handleArrowDownChange();
+                    this.setKeyDown();
+                } else if (event.key === 'ArrowUp' && !this.isKeyDown) {
+                    this._handlArrowUpChange();
+                    this.setKeyDown();
+                    event.preventDefault();
+                } else if (event.key === 'Enter' && this.selectedItem != null) {
+                    this._updateInputValue({ target: this._ac[this.selectedItem] });
+                    event.preventDefault();
+                } else if (event.key === 'Tab' && this.selectedItem != null) {
+                    this._updateInputValue({ target: this._ac[this.selectedItem] });
+                    event.preventDefault();
+                }
+            }
+        };
+
+        setKeyDown() {
+            this.isKeyDown = true;
+            setTimeout(() => {
+                this.isKeyDown = false;
+            }, 100);
+        }
+
+
+        _removedActiveClass() {
+            this._ac.forEach(item => {
+                if (item.classList.contains('aclist-item-active')) {
+                    item.classList.remove('aclist-item-active');
+                }
+            });
+        }
+
+
+        _handleKeysUpChange(event) {
+            this._input.addEventListener('keyup', (event) => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp' && this.isKeyDown) {
+                    this.isKeyDown = false;
+                }
+            });
+        }
+
+
+        _handleArrowDownChange(event) {
+            this._removedActiveClass();
+            if (this.selectedItem == null) {
+                this.selectedItem = 0;
+            } else {
+                if (++this.selectedItem === this._ac.length) {
+                    this.selectedItem = 0;
+                }
+            }
+            this._ac[this.selectedItem].classList.add('aclist-item-active');
+        }
+
+        _handlArrowUpChange(event) {
+            this._removedActiveClass();
+            if (!this.selectedItem) {
+                this.selectedItem = this._ac.length - 1;
+            } else {
+
+                if (--this.selectedItem == -1) {
+                    this.selectedItem = this._ac.length - 1;
+                }
+            }
+            this._ac[this.selectedItem].classList.add('aclist-item-active');
+        }
+
+        _handleMouseEnterItemChange(event) {
+            this.selectedItem = Array.from(this._ac).indexOf(event.target);
+            event.target.classList.add('aclist-item-active');
+        }
+
+        _handleMouseLeaveItemChange(event) {
+            this._removedActiveClass();
+        }
+
+        _handleMouseClickItemChange(event) {
+            this._updateInputValue(event);
+        }
 
         /**
          * Set the limit parameter for the request, setting it to the default if the value is empty.
          * @method setLimit
          * @param limit {String} the limit parameter
          */
-        setLimit : function(limit) {
-            this._ac.set("source", DEFAULT_SOURCE_BASE + (limit || DEFAULT_LIMIT));
+        setLimit(limit) {
+            this.limit = limit || DEFAULT_LIMIT;
         }
-        
-      
     };
 
     //Add EventTarget attributes to the Suggest prototype
     L.addEventTarget(Suggest, {
-        emitFacade : true,
-        prefix     : 'suggest'
+        prefix: 'suggest'
     });
+
+    //Add EventTarget attributes to the Suggest prototype
+    L.addEventTarget(Suggest);
 
     //make the Suggest constructor globally accessible
     L.Suggest = Suggest;

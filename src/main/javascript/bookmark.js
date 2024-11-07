@@ -2,18 +2,13 @@
 
     "use strict";
 
-    /**
-     * A class for representing a bookmark with attributes for the label and url.
-     *
-     * @class Bookmark
-     * @requires EventTarget
-     * @constructor
-     * @param label  {string} the label
-     * @param url {string} the url
-     */
-    class Bookmark extends L.LaneEvent {
+
+    class Bookmark {
+
         constructor(label, url) {
-            super();
+            L.addEventTarget(this, {
+                prefix: 'bookmark'
+            });
             this.first("valueChange", (e) => this._valueChange(e));
             this.setValues(label, url);
         };
@@ -95,7 +90,7 @@
             }
             let changed = newLabel !== this._label || newUrl !== this._url;
             if (changed) {
-                this.emit("valueChange", {
+                this.fire("valueChange", {
                     prevLabel: this._label,
                     prevUrl: this._url,
                     newLabel: newLabel,
@@ -114,11 +109,7 @@
         }
     };
 
-    // Add EventTarget attributes to the Bookmark prototype
-    L.addEventTarget(Bookmark, {
-        emitFacade: true,
-        prefix: 'bookmark'
-    });
+
 
     // make the Bookmark constructor globally accessible
     L.Bookmark = Bookmark;
