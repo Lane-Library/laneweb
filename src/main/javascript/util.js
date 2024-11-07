@@ -58,18 +58,6 @@
             obj.targets = obj.targets || [];
             obj.targets.push(target);
             obj.prefix = args.prefix;
-            // if (args && args.prefix) {
-            //     let events = Object.keys(target.eventListeners);
-            //     events.forEach(function (event) {
-            //         if (event.startsWith(args.prefix + ":")) {
-            //             let callbacks = target.eventListeners[event];
-            //             callbacks.forEach(callback => {
-            //                 obj.on(event, callback);
-            //             });
-            //         }
-            //     });
-            // }
-
         }
     };
 
@@ -95,9 +83,7 @@
     });
 
     L.addEventTarget(L, {
-        prefix: "lane",
-        emitFacade: true,
-        broadcast: 1
+        prefix: "lane"
     });
 
 

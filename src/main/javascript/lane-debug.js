@@ -100,18 +100,6 @@
         document.head.appendChild(script);
     }
 
-    // //load each javascript file separately
-    // for (i = 0; i < laneJavascript.length; i++) {
-    //     let script = document.createElement('script');
-    //     script.src = basePath + "/resources/javascript/" + laneJavascript[i];
-    //     script.onload = function () {
-    //         console.log('Loaded: ' + script.src);
-    //     };
-    //     script.onerror = function (err) {
-    //         console.log('Error loading JS: ' + script.src, 'error');
-    //     };
-    //     document.head.appendChild(script);
-    // }
     loadScriptsSequentially(laneJavascript);
 
 })();

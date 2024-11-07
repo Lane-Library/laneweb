@@ -48,8 +48,7 @@
 
 
     L.addEventTarget(controller, {
-        prefix: "picoFields",
-        emitFacade: true
+        prefix: "picoFields"
     });
 
 

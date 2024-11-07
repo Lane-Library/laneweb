@@ -50,8 +50,7 @@
         }();
 
     L.addEventTarget(controller, {
-        prefix: "searchReset",
-        emitFacade: true
+        prefix: "searchReset"
     });
 
     L.addEventTarget(view);

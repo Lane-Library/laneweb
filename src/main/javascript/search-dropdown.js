@@ -67,8 +67,7 @@ if (document.querySelector(".search-form")) {
 		L.addEventTarget(view);
 
 		L.addEventTarget(controller, {
-			prefix: "searchDropdown",
-			emitFacade: true
+			prefix: "searchDropdown"
 		});
 
 		controller.addTarget(L);
