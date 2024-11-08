@@ -66,19 +66,29 @@
             objects.forEach(obj => {
                 if (obj.targets) {
                     obj.targets.forEach(target => {
-                        let events = Object.keys(target.eventListeners);
-                        events.forEach(event => {
-                            if (event.startsWith(obj.prefix + ":")) {
-                                let callbacks = target.eventListeners[event];
-                                callbacks.forEach(callback => {
-                                    let eventName = event.split(":")[1];
-                                    obj.on(eventName, callback);
-                                });
-                            }
-                        });
+                        addEventsListenerToObject(target, obj);
                     });
                 }
             });
+        }
+        function addEventsListenerToObject(target, obj) {
+            let events = Object.keys(target.eventListeners);
+            events.forEach(targetEventName => {
+                targetEventName.split(",").forEach(e => {
+                    addEventListenerToObject(e, targetEventName, target, obj)
+                });
+            });
+        }
+
+        function addEventListenerToObject(event, targetEventName, target, obj) {
+            if (event.startsWith(obj.prefix + ":")) {
+                let callbacks = target.eventListeners[targetEventName];
+                callbacks.forEach(callback => {
+                    let eventName = event.split(":")[1];
+                    obj.on(eventName, callback);
+                });
+            }
+
         }
     });
 
