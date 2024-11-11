@@ -46,6 +46,7 @@
         "lane-popup.js",
         "lane-tooltips.js",
         "lane-spellcheck.js",
+        "shc-portal.js",
         "description-toggle.js",
         "shibboleth-sfx.js",
         "youtube.js",
