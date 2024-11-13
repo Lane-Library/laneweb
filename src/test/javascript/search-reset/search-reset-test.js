@@ -40,7 +40,7 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
 
         "test tracking": function () {
             let trackEvent;
-            L.fire("tracker:trackableEvent", function (e) {
+            L.on("tracker:trackableEvent", function (e) {
                 trackEvent = e;
             });
             L.mergeEvents();
