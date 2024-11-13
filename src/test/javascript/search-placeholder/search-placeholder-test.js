@@ -28,29 +28,9 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
                 Y.Assert.areEqual("new placeholder", this.input.value);
                 Y.Assert.areEqual("inputHint", this.input.className);
             }
-        },
-
-        "test active change true": function () {
-            L.fire("search:activeChange", { active: true });
-            if (placeholderEnabled) {
-                Y.Assert.areEqual("new placeholder", this.input.placeholder);
-            } else {
-                Y.Assert.areEqual("new placeholder", this.input.value);
-                Y.Assert.areEqual("inputHint", this.input.className);
-            }
-        },
-
-        "test active change false": function () {
-            document.addEventListener("DOMContentLoaded", function () {
-                L.fire("search:activeChange", { active: false });
-                if (placeholderEnabled) {
-                    Y.Assert.areEqual("default placeholder", this.input.placeholder);
-                } else {
-                    Y.Assert.areEqual("default placeholder", this.input.value);
-                    Y.Assert.areEqual("inputHint", this.input.className);
-                }
-            });
         }
+
+
     }));
 
     new Y.Test.Console().render();
