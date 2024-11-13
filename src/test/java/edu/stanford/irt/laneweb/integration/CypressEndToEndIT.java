@@ -40,8 +40,10 @@ public class CypressEndToEndIT {
 
                 @Override
                 public void accept(final OutputFrame outputFrame) {
-                    // output can be very verbose, only print non-empty lines
-                    if (!outputFrame.getUtf8String().equals("\n")) {
+                    // selectively print to console
+                    if (outputFrame.getUtf8String().contains("Running:")
+                            || outputFrame.getUtf8String().contains(" failed (")
+                            || outputFrame.getUtf8String().contains("All specs passed!")) {
                         System.out.println(outputFrame.getUtf8String());
                     }
                     // brittle test to determine if tests have failed
@@ -62,7 +64,7 @@ public class CypressEndToEndIT {
         GenericContainer<?> result = new GenericContainer<>(DOCKER_IMAGE);
         result.withClasspathResourceMapping("e2e", "/e2e", BindMode.READ_WRITE);
         result.withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("bash", "-c",
-                "rm -rf cypress/reports/mochawesome && npm install && chmod a+wx -R node_modules && cypress run --headless"));
+                "npm install && chmod a+wx -R node_modules && cypress run --headless"));
         result.setWorkingDirectory("/e2e");
         result.addEnv("CYPRESS_baseUrl", "http://host.testcontainers.internal:" + this.port);
         return result;
