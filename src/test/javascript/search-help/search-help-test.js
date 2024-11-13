@@ -1,18 +1,18 @@
-YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
 
     "use strict";
 
-    window.model = {"base-path":""};
+    window.model = { "base-path": "" };
 
     Y.Test.Runner.add(new Y.Test.Case({
-        
-        
-        linkHelp : document.querySelector(".search-help a"),
+
+
+        linkHelp: document.querySelector(".search-help a"),
 
         name: "Search Help TestCase",
 
-        "test searchDropdown:change": function() {
-            L.fire("searchDropdown:change", {newVal:{source:"foo",foo:{help:"new href"}}});
+        "test searchDropdown:change": function () {
+            L.fire("searchDropdown:change", { option: { help: "new href" } });
             Y.Assert.areEqual("new href", this.linkHelp.getAttribute("href"));
         }
 

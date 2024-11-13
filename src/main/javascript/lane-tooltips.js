@@ -411,11 +411,7 @@
             autoHideDelay: 60000,
             delegate: ".content"
         });
-        tt.on('visibleChange', function (e) {
-            if (!e.newVal) {
-                e.target.reset();
-            }
-        });
+
 
         L.ToolTips = tt;
     };

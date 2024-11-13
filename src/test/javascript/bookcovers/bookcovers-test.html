@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>bookcovers javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
-    </head>
-    <body class="yui3-skin-sam">
-        <div class="bookcover" data-bcids="bib-1"><i/></div>
-        <div class="bookcover" data-bcids="sul-2"><i/></div>
-        <div class="bookcover" data-bibid="3"><i/></div>
-        <script type="text/javascript">
-var XMLHttpRequest = function() {
-    return {
-        status: 200,
-        open: function(a, b, c) {
-            this.bcid = /\/apps\/bookcovers\?bcid=([a-z]+-\d)/.exec(b)[1];
-        },
-        send: function () {
-            var result = {};
-            result[this.bcid] = "http://www.example.com/src" + this.bcid;
-            this.responseText = JSON.stringify(result);
-            this.onload();
+
+<head>
+    <title>bookcovers javascript unit tests</title>
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+</head>
+
+<body class="yui3-skin-sam">
+    <div class="bookcover" data-bcids="bib-1"><i /></div>
+    <div class="bookcover" data-bcids="sul-2"><i /></div>
+    <div class="bookcover" data-bibid="3"><i /></div>
+    <script type="text/javascript">
+        var XMLHttpRequest = function () {
+            return {
+                status: 200,
+                open: function (a, b, c) {
+                    this.bcid = /\/apps\/bookcovers\?bcid=([a-z]+-\d)/.exec(b)[1];
+                },
+                send: function () {
+                    var result = {};
+                    result[this.bcid] = "http://www.example.com/src" + this.bcid;
+                    this.responseText = JSON.stringify(result);
+                    this.onload();
+                }
+            }
         }
-    }
-}
-            
-            window.model = {"base-path":""};
-        </script>
-        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/util.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/model.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/bookcovers.js" type="text/javascript"></script>
-        <script src="bookcovers-test.js" type="text/javascript"></script>
-    </body>
+
+        window.model = { "base-path": "" };
+    </script>
+    <script type="text/javascript" src="../yui-3.18.1.js"></script>
+    <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+    <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/util.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/model.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/bookcovers.js" type="text/javascript"></script>
+    <script src="bookcovers-test.js" type="text/javascript"></script>
+</body>
+
 </html>

@@ -1,34 +1,34 @@
-YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
 
-"use strict";
+    "use strict";
 
-let bookmarksTestCase = new Y.Test.Case({
+    let bookmarksTestCase = new Y.Test.Case({
 
-    name : 'Bookmarks Editor Test Case',
+        name: 'Bookmarks Editor Test Case',
 
-    editor : L.BookmarksEditor,
+        editor: L.BookmarksEditor,
 
-    setUp : function() {
-        this.editor._clearChecked();
-    },
+        setUp: function () {
+            this.editor._clearChecked();
+        },
 
-    "test exists" : function() {
-        Y.Assert.isObject(this.editor);
-    },
+        "test exists": function () {
+            Y.Assert.isObject(this.editor);
+        },
 
-    "test add" : function() {
-        let editorsCount = Y.all("#editors li").size();
-        this.editor.add();
-        Y.Assert.areEqual(editorsCount + 1, Y.all("#editors li").size());
-        this.editor.get("editors")[0].cancel();
-    }
+        "test add": function () {
+            let editorsCount = Y.all("#editors li").size();
+            this.editor.add();
+            Y.Assert.areEqual(editorsCount + 1, Y.all("#editors li").size());
+            this.editor.editors[0].cancel();
+        }
 
-});
+    });
 
-new Y.Test.Console().render();
+    new Y.Test.Console().render();
 
-Y.Test.Runner.add(bookmarksTestCase);
-Y.Test.Runner.masterSuite.name = "bookmarks-editor-test.js";
-Y.Test.Runner.run();
+    Y.Test.Runner.add(bookmarksTestCase);
+    Y.Test.Runner.masterSuite.name = "bookmarks-editor-test.js";
+    Y.Test.Runner.run();
 
 });

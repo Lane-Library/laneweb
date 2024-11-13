@@ -9,9 +9,9 @@
     if (persistentLoginCheckbox) {
         persistentLoginCheckbox.addEventListener("change", function (event) {
             if (event.target.checked) {
-                document.cookie = "isPersistent=yes; path=/";
+                L.Cookie.set("isPersistent", "yes");
             } else {
-                document.cookie = "isPersistent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                L.Cookie.remove("isPersistent");
             }
         });
     }

@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
 
     "use strict";
 
@@ -12,7 +12,7 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         q: document.querySelector("input[name=q]"),
 
-        "test p to q": function() {
+        "test p to q": function () {
             this.p.value = "p";
             let e = document.createEvent("UIEvents");
             e.initEvent("input", true, false);
@@ -20,10 +20,10 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
             Y.Assert.areEqual("p", this.q.value);
         },
 
-        "test p and i to q": function() {
+        "test p and i to q": function () {
             this.p.value = "P";
             this.i.value = "I"
-                let e = document.createEvent("UIEvents");
+            let e = document.createEvent("UIEvents");
             e.initEvent("input", true, false);
             this.p.dispatchEvent(e);
             this.i.dispatchEvent(e);

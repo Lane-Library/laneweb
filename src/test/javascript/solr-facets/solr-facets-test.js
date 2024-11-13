@@ -22,7 +22,7 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
             startYearInput.value = 100;
             submit = new Event("submit", { bubbles: true, cancelable: true });
             dateSolrForm.dispatchEvent(submit);
-            Y.Assert.areEqual("Please select a value that is no less than 1400.", errorMessage.textContent);
+            Y.Assert.areEqual("Value must be greater than or equal to 1400.", errorMessage.textContent);
         },
 
         // Check Null Start Date
@@ -30,7 +30,7 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
             startYearInput.value = '';
             submit = new Event("submit", { bubbles: true, cancelable: true });
             dateSolrForm.dispatchEvent(submit);
-            Y.Assert.areEqual("Please enter a number.", errorMessage.textContent);
+            Y.Assert.areEqual("Please fill out this field.", errorMessage.textContent);
         },
 
         // Check if start Date bigger than than end Data

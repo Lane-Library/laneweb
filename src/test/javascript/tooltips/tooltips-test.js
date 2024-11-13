@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", "dom", "node-event-simulate", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", "dom", "node-event-simulate", function (Y) {
 
     "use strict";
 
@@ -6,17 +6,17 @@ YUI({fetchCSS:false}).use("test", "test-console", "dom", "node-event-simulate", 
 
         name: 'Lane Tooltip Test Case',
 
-        testStaysOnPage: function() {
+        testStaysOnPage: function () {
             let b = Y.one("#b");
             let right = Y.DOM.viewportRegion().right;
             let inside = false;
-            let eventHandle = L.ToolTips.after("visibleChange", function(e) {
+            let eventHandle = L.ToolTips.on("visibleChange", function (e) {
                 let boundingBox = this.get("boundingBox");
                 inside = Y.DOM.inViewportRegion(Y.Node.getDOMNode(boundingBox));
                 eventHandle.detach();
             });
-            b.simulate("mouseover",{clientX:right,pageX:right});
-            this.wait(function() {
+            b.simulate("mouseover", { clientX: right, pageX: right });
+            this.wait(function () {
                 Y.Assert.isTrue(inside);
             }, 500);
             b.simulate("mouseout");

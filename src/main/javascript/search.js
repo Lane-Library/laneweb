@@ -37,20 +37,16 @@ if (document.querySelector(".search-form")) {
                                 newVal: newSource,
                                 oldVal: oldSource
                             });
+                            source = newSource;
                         }
                     }
                 };
 
             L.addEventTarget(m, {
-                prefix: "search",
-                emitFacade: true
+                prefix: "search"
             });
 
-            // m.publish("sourceChange", {
-            //     defaultFn: function(event) {
-            //         source = event.newVal;
-            //     }
-            // });
+
             m.addTarget(L);
 
             return m;
@@ -148,6 +144,8 @@ if (document.querySelector(".search-form")) {
             model.on("queryChange", controller.queryChange);
             model.on("sourceChange", controller.sourceChange);
             model.on("search", controller.search);
+
+
 
             view.on("submit", controller.submit);
             view.on("inputChange", controller.inputChange);

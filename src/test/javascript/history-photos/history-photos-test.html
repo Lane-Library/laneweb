@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>history-photos javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
-    </head>
-    <body class="yui3-skin-sam">
-        <div class="history-photos">
-        <a><img src="img.jpg"/></a>
-        <a><img src="img.jpg"/></a>
-        <a><img src="img.jpg"/></a>
-        <a><img src="img.jpg"/></a>
-        <a><img src="img.jpg"/></a>
-        <a><img src="img.jpg"/></a>
-        </div>
-        <script type="text/javascript">
-        window.XMLHttpRequest = function() {
+
+<head>
+    <title>history-photos javascript unit tests</title>
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+</head>
+
+<body class="yui3-skin-sam">
+    <div class="history-photos">
+        <a><img src="img.jpg" /></a>
+        <a><img src="img.jpg" /></a>
+        <a><img src="img.jpg" /></a>
+        <a><img src="img.jpg" /></a>
+        <a><img src="img.jpg" /></a>
+        <a><img src="img.jpg" /></a>
+    </div>
+    <script type="text/javascript">
+        window.XMLHttpRequest = function () {
             return {
-                open: function() {},
-                send: function() {
+                open: function () { },
+                send: function () {
                     var i,
                         response = [],
-                        img = {thumbnail:'img.jpg'};
+                        img = { thumbnail: 'img.jpg' };
                     for (i = 0; i < 6; i++) {
                         response.push(img);
                     }
@@ -30,9 +32,11 @@
                 }
             }
         }
-        </script>
-        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script type="text/javascript" src="../../../main/javascript/history/history-photos.js"></script>
-        <script type="text/javascript" src="history-photos-test.js"></script>
-    </body>
+    </script>
+    <script type="text/javascript" src="../yui-3.18.1.js"></script>
+    <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+    <script type="text/javascript" src="../../../main/javascript/history/history-photos.js"></script>
+    <script type="text/javascript" src="history-photos-test.js"></script>
+</body>
+
 </html>

@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
 
     "use strict";
 
@@ -10,43 +10,46 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         input: document.querySelector("input"),
 
-        "test initially has default": function() {
+        "test initially has default": function () {
             if (placeholderEnabled) {
                 Y.Assert.areEqual("All Search placeholder", this.input.placeholder);
-            }  else {
+            } else {
                 Y.Assert.areEqual("default placeholder", this.input.value);
                 Y.Assert.areEqual("inputHint", this.input.className);
             }
         },
 
-        "test tab change": function() {
-            L.fire("searchDropdown:change", {newVal:{source:"clinical-all", "clinical-all":{placeholder:"new placeholder"}}});
+        "test tab change": function () {
+            L.fire("searchDropdown:change", { newVal: "clinical-all", option: { placeholder: "new placeholder" } });
+
             if (placeholderEnabled) {
                 Y.Assert.areEqual("new placeholder", this.input.placeholder);
-            }  else {
+            } else {
                 Y.Assert.areEqual("new placeholder", this.input.value);
                 Y.Assert.areEqual("inputHint", this.input.className);
             }
         },
 
-        "test active change true": function() {
-            L.fire("search:activeChange", {active:true});
+        "test active change true": function () {
+            L.fire("search:activeChange", { active: true });
             if (placeholderEnabled) {
                 Y.Assert.areEqual("new placeholder", this.input.placeholder);
-            }  else {
+            } else {
                 Y.Assert.areEqual("new placeholder", this.input.value);
                 Y.Assert.areEqual("inputHint", this.input.className);
             }
         },
 
-        "test active change false": function() {
-            L.fire("search:activeChange", {active:false});
-            if (placeholderEnabled) {
-                Y.Assert.areEqual("default placeholder", this.input.placeholder);
-            }  else {
-                Y.Assert.areEqual("default placeholder", this.input.value);
-                Y.Assert.areEqual("inputHint", this.input.className);
-            }
+        "test active change false": function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                L.fire("search:activeChange", { active: false });
+                if (placeholderEnabled) {
+                    Y.Assert.areEqual("default placeholder", this.input.placeholder);
+                } else {
+                    Y.Assert.areEqual("default placeholder", this.input.value);
+                    Y.Assert.areEqual("inputHint", this.input.className);
+                }
+            });
         }
     }));
 

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>browzine javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
-    </head>
-    <body class="yui3-skin-sam">
+
+<head>
+    <title>browzine javascript unit tests</title>
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+</head>
+
+<body class="yui3-skin-sam">
 
     <ul>
         <li class="resource" data-doi="10.1" data-sid="pubmed-1">
@@ -22,7 +24,7 @@
                     </span>
                 </div>
             </div>
-            <div class="bookcover"><i/></div>
+            <div class="bookcover"><i /></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
@@ -41,7 +43,7 @@
                     </span>
                 </div>
             </div>
-            <div class="bookcover"><i/></div>
+            <div class="bookcover"><i /></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
@@ -60,7 +62,7 @@
                     </span>
                 </div>
             </div>
-            <div class="bookcover"><i/></div>
+            <div class="bookcover"><i /></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
@@ -79,7 +81,7 @@
                     </span>
                 </div>
             </div>
-            <div class="bookcover"><i/></div>
+            <div class="bookcover"><i /></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
@@ -98,7 +100,7 @@
                     </span>
                 </div>
             </div>
-            <div class="bookcover"><i/></div>
+            <div class="bookcover"><i /></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
@@ -117,17 +119,17 @@
                     </span>
                 </div>
             </div>
-            <div class="bookcover"><i/></div>
+            <div class="bookcover"><i /></div>
             <div class="resultInfo"></div>
             <div class="sourceInfo"></div>
         </li>
     </ul>
 
     <script type="text/javascript">
-        var XMLHttpRequest = function() {
+        var XMLHttpRequest = function () {
             return {
                 status: 200,
-                open: function(a, b, c) {
+                open: function (a, b, c) {
                     this.id = /\/apps\/browzine\/[a-z]+\/(.*)/.exec(b)[1];
                 },
                 send: function () {
@@ -143,14 +145,16 @@
                 }
             }
         }
-            
-            window.model = {"base-path":""};
-        </script>
-        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/util.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/model.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/browzine.js" type="text/javascript"></script>
-        <script src="browzine-test.js" type="text/javascript"></script>
-    </body>
+
+        window.model = { "base-path": "" };
+    </script>
+    <script type="text/javascript" src="../yui-3.18.1.js"></script>
+    <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+    <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/util.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/model.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/browzine.js" type="text/javascript"></script>
+    <script src="browzine-test.js" type="text/javascript"></script>
+</body>
+
 </html>

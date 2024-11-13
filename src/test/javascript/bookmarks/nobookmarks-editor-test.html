@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>bookmarks editor javascript unit tests</title>
-        <link type="text/css" rel="stylesheet" href="../../css/bookmarks.css"/>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
-    </head>
-    <body class="yui3-skin-sam">
-        <h1>bookmarks editor javascript test</h1>
-        <form action="/bookmarks" method="post" id="bookmarks-editor">
-            <fieldset>
-                <button class="btn alt" name="action" value="add" type="submit">
-                    <span><i class="icon fa fa-plus"></i>Add</span>
-                </button>
-                <button class="button" name="action" value="delete" type="submit">
-                    <span><i class="icon fa fa-minus"></i>Delete</span>
-                </button>
-                <button class="button" name="action" value="edit" type="submit">
-                    <span><i class="icon fa fa-edit"></i>Edit</span>
-                </button>
-            </fieldset>
-        </form>
-        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/util.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/model.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/link-info.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/bookmark.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/bookmarks.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/bookmarks-widget.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/bookmark-editor.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/bookmarks-editor.js" type="text/javascript"></script>
-        <script src="nobookmarks-editor-test.js" type="text/javascript"></script>
-    </body>
+
+<head>
+    <title>bookmarks editor javascript unit tests</title>
+    <link type="text/css" rel="stylesheet" href="../../css/bookmarks.css" />
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+</head>
+
+<body class="yui3-skin-sam">
+    <h1>bookmarks editor javascript test</h1>
+    <form action="/bookmarks" method="post" id="bookmarks-editor">
+        <fieldset>
+            <button class="btn alt" name="action" value="add" type="submit">
+                <span><i class="icon fa fa-plus"></i>Add</span>
+            </button>
+            <button class="button" name="action" value="delete" type="submit">
+                <span><i class="icon fa fa-minus"></i>Delete</span>
+            </button>
+            <button class="button" name="action" value="edit" type="submit">
+                <span><i class="icon fa fa-edit"></i>Edit</span>
+            </button>
+        </fieldset>
+    </form>
+    <script type="text/javascript" src="../yui-3.18.1.js"></script>
+    <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+    <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/util.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/model.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/link-info.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/bookmark.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/bookmarks.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/bookmarks-widget.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/bookmark-editor.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/bookmarks-editor.js" type="text/javascript"></script>
+    <script src="nobookmarks-editor-test.js" type="text/javascript"></script>
+</body>
 
 </html>

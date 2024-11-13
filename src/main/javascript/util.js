@@ -23,33 +23,65 @@
             if (!this.eventListeners) {
                 this.eventListeners = {};
             }
+            if (event instanceof Array) {
+                event.forEach(e => {
+                    this.pushEvent(e, callback);
+                })
+            } else {
+                this.pushEvent(event, callback);
+            }
+        };
+
+        obj.pushEvent = function (event, callback) {
             if (!this.eventListeners[event]) {
                 this.eventListeners[event] = [];
             }
             this.eventListeners[event].push(callback);
-        };
+        }
 
-        obj.first = function (event, listener) {
+        obj.first = function (event, callback) {
             if (!this.eventListeners) {
                 this.eventListeners = {};
             }
+            if (event instanceof Array) {
+                event.forEach(e => {
+                    this.unshiftEvent(e, callback);
+                })
+            } else {
+                this.unshiftEvent(event, callback);
+            }
+        };
+
+        obj.unshiftEvent = function (event, callback) {
             if (!this.eventListeners[event]) {
                 this.eventListeners[event] = [];
             }
-            this.eventListeners[event].unshift(listener);
-        };
+            this.eventListeners[event].unshift(callback);
+        }
 
-        obj.removeEventListener = function (event, callback) {
+        obj.removeEventsListener = function (event, callback) {
             if (this.eventListeners && this.eventListeners[event]) {
-                const index = this.eventListeners[event].indexOf(callback);
-                if (index > -1) {
-                    this.eventListeners[event].splice(index, 1);
+                if (event instanceof Array) {
+                    event.forEach(e => {
+                        this.spliceEvent(e, callback)
+                    })
+                } else {
+                    this.spliceEvent(event, callback)
                 }
             }
-        };
+        }
+
+        obj.spliceEvent = function (event, callback) {
+            let index = this.eventListeners[event].indexOf(callback);
+            if (index > -1) {
+                this.eventListeners[event].splice(index, 1);
+            }
+        }
+
 
         obj.fire = function (event, args) {
             if (this.eventListeners && this.eventListeners[event]) {
+                args = args || {};
                 this.eventListeners[event].forEach(callback => callback.call(this, args));
             }
         };
@@ -61,36 +93,44 @@
         }
     };
 
+
     document.addEventListener('readystatechange', event => {
         if (event.target.readyState === "complete") {
-            objects.forEach(obj => {
-                if (obj.targets) {
-                    obj.targets.forEach(target => {
-                        addEventsListenerToObject(target, obj);
-                    });
-                }
-            });
-        }
-        function addEventsListenerToObject(target, obj) {
-            let events = Object.keys(target.eventListeners);
-            events.forEach(targetEventName => {
-                targetEventName.split(",").forEach(e => {
-                    addEventListenerToObject(e, targetEventName, target, obj)
-                });
-            });
-        }
-
-        function addEventListenerToObject(event, targetEventName, target, obj) {
-            if (event.startsWith(obj.prefix + ":")) {
-                let callbacks = target.eventListeners[targetEventName];
-                callbacks.forEach(callback => {
-                    let eventName = event.split(":")[1];
-                    obj.on(eventName, callback);
-                });
-            }
-
+            mergeEvents();
         }
     });
+
+    function mergeEvents() {
+        objects.forEach(obj => {
+            if (obj.targets) {
+                obj.targets.forEach(target => {
+                    addEventsListenerToObject(target, obj);
+                });
+            }
+        });
+    }
+
+    function addEventsListenerToObject(target, obj) {
+        let events = Object.keys(target.eventListeners);
+        events.forEach(targetEventName => {
+            targetEventName.split(",").forEach(e => {
+                addEventListenerToObject(e, targetEventName, target, obj)
+            });
+        });
+    }
+
+    function addEventListenerToObject(event, targetEventName, target, obj) {
+        if (event.startsWith(obj.prefix + ":")) {
+            let callbacks = target.eventListeners[targetEventName];
+            callbacks.forEach(callback => {
+                let eventName = event.split(":")[1];
+                obj.on(eventName, callback);
+            });
+        }
+    }
+
+    //For testing
+    L.mergeEvents = mergeEvents;
 
     L.addEventTarget(L, {
         prefix: "lane"

@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", "node-event-simulate", function (Y) {
 
     "use strict";
 
@@ -6,28 +6,29 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
 
         name: "holdings toggle Test Case",
 
-        testTriggerContentPresent: function() {
+        testTriggerContentPresent: function () {
             let triggers = document.querySelectorAll(".hldgsTrigger");
             Y.Assert.areEqual(2, triggers.length);
-            triggers.forEach(function(trigger){
+            triggers.forEach(function (trigger) {
                 Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-solid.fa-angle-down').length);
             });
         },
 
-        testToggleHoldings: function() {
+        testToggleHoldings: function () {
             let triggers = document.querySelectorAll(".hldgsTrigger"),
-                trackEvent,
-                handler = L.on("tracker:trackableEvent", function(e) {
-                    trackEvent = e;
-                });
-            triggers.forEach(function(trigger){
+                trackEvent;
+
+            L.on("tracker:trackableEvent", function (e) {
+                trackEvent = e;
+            });
+            triggers.forEach(function (trigger) {
                 trigger.click();
                 Y.Assert.areEqual(1, trigger.querySelectorAll('.fa-solid.fa-angle-up').length);
                 Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);
                 Y.Assert.areEqual("lane:hldgsTrigger", trackEvent.category);
                 Y.Assert.isTrue(trackEvent.action.indexOf(' -- close') > -1);
                 Y.Assert.areEqual("Lancet", trackEvent.label);
-                handler.detach();
+
             });
         }
     });

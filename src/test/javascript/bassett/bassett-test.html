@@ -1,82 +1,78 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>lane-bassett javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
-    </head>
-    <body class="yui3-skin-sam">
-        <div class="bassett-error">bassett error</div>
-        <div id="bassett-menu">
-            <ul class="region" id="abdomen">
-                <li class="solrFacet facetHeader">Abdomen <a
-                        class="see-all" href="/biomed-resources/bassett/bassettsView.html?r=Abdomen"
-                        >see
-                        all</a></li>
-                <li id="yui_3_18_1_1_1463225240535_1651">
-                    <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Overview">
-                        <i class="fa fa-circle-o fa-lg"></i> Overview   <span id="overview"
-                            >33</span>
-                    </a>
-                </li>
-                <li id="yui_3_18_1_1_1463225240535_1647">
-                    <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Adrenal+Gland">
-                        <i class="fa fa-circle-o fa-lg"></i> Adrenal Gland
-                <span id="adrenal gland">29</span></a>
-                </li>
-                <li>
-                    <a
-                        href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Bones+Cartilage+Joints">
-                        <i class="fa fa-circle-o fa-lg"
-                            ></i> Bones Cartilage Joints
-                <span id="bones cartilage joints">4</span></a>
-                </li>
-                <li>
-                    <a
-                        href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Central+Nervous+System">
-                        <i class="fa fa-circle-o fa-lg"
-                            ></i> Central Nervous System
-                <span id="central nervous system">2</span></a>
-                </li>
-                <li id="anotherItem" style="display:none">another item</li>
-            </ul>
+
+<head>
+    <title>lane-bassett javascript unit tests</title>
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+</head>
+
+<body class="yui3-skin-sam">
+    <div class="bassett-error">bassett error</div>
+    <div id="bassett-menu">
+        <ul class="region" id="abdomen">
+            <li class="solrFacet facetHeader">Abdomen <a class="see-all" href="/biomed-resources/bassett/bassettsView.html?r=Abdomen">see
+                    all</a></li>
+            <li id="yui_3_18_1_1_1463225240535_1651">
+                <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Overview">
+                    <i class="fa fa-circle-o fa-lg"></i> Overview <span id="overview">33</span>
+                </a>
+            </li>
+            <li id="yui_3_18_1_1_1463225240535_1647">
+                <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Adrenal+Gland">
+                    <i class="fa fa-circle-o fa-lg"></i> Adrenal Gland
+                    <span id="adrenal gland">29</span></a>
+            </li>
+            <li>
+                <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Bones+Cartilage+Joints">
+                    <i class="fa fa-circle-o fa-lg"></i> Bones Cartilage Joints
+                    <span id="bones cartilage joints">4</span></a>
+            </li>
+            <li>
+                <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Central+Nervous+System">
+                    <i class="fa fa-circle-o fa-lg"></i> Central Nervous System
+                    <span id="central nervous system">2</span></a>
+            </li>
+            <li id="anotherItem" style="display:none">another item</li>
+        </ul>
+    </div>
+    <div id="bassettContent">
+        <div class='s-pagination'>
+            <form action='/pagination' name='bassett-pagination'><input name='page' value='1' /><input name='pages' value='8' /></form>
         </div>
-        <div id="bassettContent"><div class='s-pagination'><form action='/pagination' name='bassett-pagination'><input name='page' value='1'/><input name='pages' value='8'/></form></div>
-            <span class="choice"> VIEW: <a
-                    href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Central%20Nervous%20System&amp;page=1"
-                    id="photo-choice">
-                    <span>Photos</span>
-                </a>
-                <a
-                    href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Central%20Nervous%20System&amp;t=diagram&amp;page=1"
-                    id="diagram-choice">
-                    <span>Diagrams</span>
-                </a>
-            </span>
-            <div id="thumbnail" class="bassett-images">
-                <div class="image-container">
-                    <div class="hr">
-                        <a href="/biomed-resources/bassett/bassettView.html?bn=151-3">img</a>
-                    </div>
-                    <div class="image-text"> #151-3 <br />
-                        <a title="a" href="/biomed-resources/bassett/bassettView.html?bn=151-3"
-                            >View Larger</a>
-                    </div>
+        <span class="choice"> VIEW: <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Central%20Nervous%20System&amp;page=1"
+                id="photo-choice">
+                <span>Photos</span>
+            </a>
+            <a href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Central%20Nervous%20System&amp;t=diagram&amp;page=1"
+                id="diagram-choice">
+                <span>Diagrams</span>
+            </a>
+        </span>
+        <div id="thumbnail" class="bassett-images">
+            <div class="image-container">
+                <div class="hr">
+                    <a href="/biomed-resources/bassett/bassettView.html?bn=151-3">img</a>
+                </div>
+                <div class="image-text"> #151-3 <br />
+                    <a title="a" href="/biomed-resources/bassett/bassettView.html?bn=151-3">View Larger</a>
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/util.js" type="text/javascript"></script>
-        <script type="text/javascript">
-var content = document.querySelector("#bassettContent").innerHTML;
-L.io = function(url, config) {
-        var responseText = "<span>" + url + "</span>" + content;
-        config.on.success.apply(config.context, [0, {responseText:responseText}, {}]);
-};
-        </script>
-        <script src="../../../main/javascript/model.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/lane-bassett.js" type="text/javascript"></script>
-        <script src="bassett-test.js" type="text/javascript"></script>
-    </body>
+    </div>
+    <script type="text/javascript" src="../yui-3.18.1.js"></script>
+    <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+    <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/util.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var content = document.querySelector("#bassettContent").innerHTML;
+        L.io = function (url, config) {
+            var responseText = "<span>" + url + "</span>" + content;
+            config.on.success.apply(config.context, [0, { responseText: responseText }, {}]);
+        };
+    </script>
+    <script src="../../../main/javascript/model.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/lane-bassett.js" type="text/javascript"></script>
+    <script src="bassett-test.js" type="text/javascript"></script>
+</body>
 
 </html>

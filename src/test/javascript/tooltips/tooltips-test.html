@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>lane-tooltips javascript unit tests</title>
-        <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css"/>
-        <style type="text/css">
-    .yui3-tooltip {
-        position:absolute;
-    }
 
-    .yui3-tooltip-hidden {
-        visibility:hidden;
-    }
-</style>
-        
-    </head>
-    <body class="yui3-skin-sam">
-        <div class="search-tab" title="search tab tool tip">search tab</div>
-        <ul style="position:relative">
-            <li><a id="a">link A</a></li>
-            <li style="float:right"><a id="b">link B</a></li>
-            <li><a id="c">link C</a></li>
-            <li><a id="d" title="title tip">link D</a></li>
-        </ul>
-        <div class="tooltips">
-            <div style="width:100%" id="aTooltip">
-                <h3>Google Scholar</h3>
-                <p>Cross disciplinary academic articles, theses and online book searching with
-                    article results ranked by author's importance, number of linked references and
-                    journal ranking. Advanced search features that allow access to Stanford fulltext
-                    and useful filters including for articles in Medicine, Pharmacology, and
-                    Veterinary Science. Includes patents and legal documents.</p>
-            </div>
-            <div style="width:40%" id="bTooltip">
-                <h3>Web of Science</h3>
-                <p>Citation database with multidisciplinary coverage of high-impact journals in the
-                    sciences, social sciences, and arts and humanities, as well as international
-                    proceedings. Citation linking and filtering by subject and document types.</p>
-            </div>
-            <div id="cTooltip">
-                <h3>PubMed</h3>
-                <p>A public domain database of article citations across these Biomedical - Life
-                    Science - journals and periodicals. A PubMed search result on one article
-                    includes a citation: title, abstract, authors, publication, issue, volume, page
-                    plus indexing (done by subject matter experts) for publication type, age group
-                    and Medical Subject Headings (MeSH) terms.</p>
-            </div>
-            <span id="dTooltip"></span>
+<head>
+    <title>lane-tooltips javascript unit tests</title>
+    <link rel="stylesheet" type="text/css" href="../yui-test-3.18.1.css" />
+    <style type="text/css">
+        .yui3-tooltip {
+            position: absolute;
+        }
+
+        .yui3-tooltip-hidden {
+            visibility: hidden;
+        }
+    </style>
+
+</head>
+
+<body class="yui3-skin-sam">
+    <div class="search-tab" title="search tab tool tip">search tab</div>
+    <ul style="position:relative">
+        <li><a id="a">link A</a></li>
+        <li style="float:right"><a id="b">link B</a></li>
+        <li><a id="c">link C</a></li>
+        <li><a id="d" title="title tip">link D</a></li>
+    </ul>
+    <div class="tooltips">
+        <div style="width:100%" id="aTooltip">
+            <h3>Google Scholar</h3>
+            <p>Cross disciplinary academic articles, theses and online book searching with
+                article results ranked by author's importance, number of linked references and
+                journal ranking. Advanced search features that allow access to Stanford fulltext
+                and useful filters including for articles in Medicine, Pharmacology, and
+                Veterinary Science. Includes patents and legal documents.</p>
         </div>
-        <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
-        <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/util.js" type="text/javascript"></script>
-        <script src="../../../main/javascript/lane-tooltips.js" type="text/javascript"></script>
-        <script src="tooltips-test.js" type="text/javascript"></script>
-    </body>
+        <div style="width:40%" id="bTooltip">
+            <h3>Web of Science</h3>
+            <p>Citation database with multidisciplinary coverage of high-impact journals in the
+                sciences, social sciences, and arts and humanities, as well as international
+                proceedings. Citation linking and filtering by subject and document types.</p>
+        </div>
+        <div id="cTooltip">
+            <h3>PubMed</h3>
+            <p>A public domain database of article citations across these Biomedical - Life
+                Science - journals and periodicals. A PubMed search result on one article
+                includes a citation: title, abstract, authors, publication, issue, volume, page
+                plus indexing (done by subject matter experts) for publication type, age group
+                and Medical Subject Headings (MeSH) terms.</p>
+        </div>
+        <span id="dTooltip"></span>
+    </div>
+    <script type="text/javascript" src="../yui-3.18.1.js"></script>
+    <script type="text/javascript" src="../yui-test-3.18.1.js"></script>
+    <script src="../../../main/javascript/lane.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/util.js" type="text/javascript"></script>
+    <script src="../../../main/javascript/lane-tooltips.js" type="text/javascript"></script>
+    <script src="tooltips-test.js" type="text/javascript"></script>
+</body>
+
 </html>

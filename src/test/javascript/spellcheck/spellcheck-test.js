@@ -1,4 +1,4 @@
-YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
+YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
 
     "use strict";
 
@@ -6,11 +6,11 @@ YUI({fetchCSS:false}).use("test", "test-console", function(Y) {
 
         name: 'Lane Spellcheck Test Case',
 
-        testSpellCheck: function() {
-            let node = Y.one(".spellCheck").one("a");
-            Y.Assert.areEqual("suggestion", node.get("text"));
-            Y.Assert.areEqual(location.href, node.get("href"));
-            Y.Assert.areEqual("inline", node.getStyle("display"));
+        testSpellCheck: function () {
+            let node = document.querySelector(".spellCheck a");
+            Y.Assert.areEqual("suggestion", node.text);
+            Y.Assert.areEqual(location.href, node.getAttribute("href"));
+            Y.Assert.areEqual("inline", node.style, display);
         }
     });
 

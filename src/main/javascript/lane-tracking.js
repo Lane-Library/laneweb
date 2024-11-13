@@ -27,7 +27,7 @@
                     let i, trackingData = {},
                         handlers = [
                             { selector: "#bookmarks", category: "lane:bookmarkClick" },
-                            { selector: ".yui3-bookmark-editor-content", category: "lane:bookmarkClick" },
+                            { selector: ".bookmark-editor-content", category: "lane:bookmarkClick" },
                             { selector: "footer", category: "lane:laneNav-footer" }
                         ];
                     for (i = 0; i < handlers.length; i++) {
@@ -335,7 +335,7 @@
     document.querySelectorAll("a[href*='secure/edtech']").forEach(function (node) {
         node.isTrackableAsPageView = true;
     });
-    document.querySelectorAll("#bookmarks a, .yui3-bookmark-editor-content a, .lwSearchResults a, footer a").forEach(function (node) {
+    document.querySelectorAll("#bookmarks a, .bookmark-editor-content a, .lwSearchResults a, footer a").forEach(function (node) {
         node.isTrackableAsEvent = true;
     });
 })();
