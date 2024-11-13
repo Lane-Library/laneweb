@@ -15,16 +15,16 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
         },
 
         "test Reset Click Deactivates": function () {
-            document.addEventListener("DOMContentLoaded", function () {
-                this.reset.className = "search-reset search-reset-active";
-                let event = document.createEvent("UIEvent");
-                event.initEvent("click", true, false);
-                L.on("searchReset:reset", function () {
-                    L.fire("search:queryChange", { newVal: "", oldVal: "query" });
-                });
-                this.reset.dispatchEvent(event);
-                Y.Assert.areEqual("search-reset", this.reset.className);
-            })
+            this.reset.className = "search-reset search-reset-active";
+            let event = document.createEvent("UIEvent");
+            event.initEvent("click", true, false);
+            L.on("searchReset:reset", function () {
+                L.fire("search:queryChange", { newVal: "", oldVal: "query" });
+            });
+            L.mergeEvents();
+            this.reset.dispatchEvent(event);
+            Y.Assert.areEqual("search-reset", this.reset.className);
+
         },
 
         "test Query Change Activates": function () {
@@ -39,19 +39,17 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
         },
 
         "test tracking": function () {
-            document.addEventListener("DOMContentLoaded", function () {
-                let trackEvent;
-                L.on("tracker:trackableEvent", function (e) {
-                    trackEvent = e;
-                });
-                this.reset.className = "search-reset search-reset-active";
-                let event = document.createEvent("UIEvent");
-                event.initEvent("click", true, false);
-                this.reset.dispatchEvent(event);
-                Y.Assert.areEqual("tracker:trackableEvent", trackEvent.type);
-                Y.Assert.areEqual(location.pathname, trackEvent.action);
-                Y.Assert.areEqual("lane:searchFormReset", trackEvent.category);
-            })
+            let trackEvent;
+            L.fire("tracker:trackableEvent", function (e) {
+                trackEvent = e;
+            });
+            L.mergeEvents();
+            this.reset.className = "search-reset search-reset-active";
+            let event = document.createEvent("UIEvent");
+            event.initEvent("click", true, false);
+            this.reset.dispatchEvent(event);
+            Y.Assert.areEqual(location.pathname, trackEvent.action);
+            Y.Assert.areEqual("lane:searchFormReset", trackEvent.category);
         }
 
     }));
