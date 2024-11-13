@@ -32,41 +32,38 @@ YUI({ fetchCSS: false }).use("test", "test-console", function (Y) {
         },
 
         "test on click": function () {
-            document.addEventListener("DOMContentLoaded", function () {
-                this.on.classList.add("pico-on-active");
-                this.toggle.classList.add("pico-toggle-active");
-                var active;
-                L.on("picoToggle:change", function (event) {
-                    active = event.active;
-                });
-                var click = document.createEvent("MouseEvent");
-                click.initEvent("click", true, false);
-                this.on.dispatchEvent(click);
-                Y.Assert.isTrue(active);
-                Y.Assert.areEqual("pico-on", this.on.className);
-                Y.Assert.areEqual("pico-off pico-off-active", this.off.className);
-                Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
+            this.on.classList.add("pico-on-active");
+            this.toggle.classList.add("pico-toggle-active");
+            var active;
+            L.on("picoToggle:change", function (event) {
+                active = event.active;
+            });
+            L.mergeEvents();
+            var click = document.createEvent("MouseEvent");
+            click.initEvent("click", true, false);
+            this.on.dispatchEvent(click);
+            Y.Assert.isTrue(active);
+            Y.Assert.areEqual("pico-on", this.on.className);
+            Y.Assert.areEqual("pico-off pico-off-active", this.off.className);
+            Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
 
-            })
         },
 
         "test off click": function () {
-            document.addEventListener("DOMContentLoaded", function () {
-                this.off.classList.add("pico-off-active");
-                this.toggle.classList.add("pico-toggle-active");
-                var active;
-                L.on("picoToggle:change", function (event) {
-                    active = event.active;
-                });
-                var click = document.createEvent("MouseEvent");
-                click.initEvent("click", true, false);
-                this.off.dispatchEvent(click);
-                Y.Assert.isFalse(active);
-                Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
-                Y.Assert.areEqual("pico-off", this.off.className);
-                Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
-            }
-            )
+            this.off.classList.add("pico-off-active");
+            this.toggle.classList.add("pico-toggle-active");
+            var active;
+            L.on("picoToggle:change", function (event) {
+                active = event.active;
+            });
+            L.mergeEvents();
+            var click = document.createEvent("MouseEvent");
+            click.initEvent("click", true, false);
+            this.off.dispatchEvent(click);
+            Y.Assert.isFalse(active);
+            Y.Assert.areEqual("pico-on pico-on-active", this.on.className);
+            Y.Assert.areEqual("pico-off", this.off.className);
+            Y.Assert.areEqual("pico-toggle pico-toggle-active", this.toggle.className);
         },
 
         "test active change resets": function () {
