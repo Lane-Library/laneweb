@@ -40,12 +40,15 @@ describe('Bassett', () => {
             expect($img).to.have.attr('src').match(/.*L.jpg/);
         });
 
+        // waits in place for slower processors, like on lane-dev
         cy.get('#diagram-choice').click();
+        cy.wait(750);
         cy.get('#thumbnail img').each(($img) => {
             expect($img).to.have.attr('src').match(/.*D.jpg/);
         });
 
         cy.get('#photo-choice').click();
+        cy.wait(750);
         cy.get('#thumbnail img').each(($img) => {
             expect($img).to.have.attr('src').match(/.*L.jpg/);
         });
