@@ -44,7 +44,7 @@ public class CypressEndToEndIT {
                     if (outputFrame.getUtf8String().contains("Running:")
                             || outputFrame.getUtf8String().contains(" failed (")
                             || outputFrame.getUtf8String().contains("All specs passed!")) {
-                        System.out.println(outputFrame.getUtf8String());
+                        System.out.print(outputFrame.getUtf8String());
                     }
                     // brittle test to determine if tests have failed
                     if (outputFrame.getUtf8String().contains(" failed (")) {
