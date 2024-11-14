@@ -1,0 +1,47 @@
+{
+    "data": {
+        "id": 452871434,
+        "type": "articles",
+        "title": "A bibliometric analysis of acute respiratory distress syndrome (ARDS) research from 2010 to 2019",
+        "date": "2021-04-01",
+        "authors": "Zhang, Xinyu; Wang, Chengyuan; Zhao, Hongwen",
+        "inPress": false,
+        "abandoned": false,
+        "doi": "10.21037/apm-20-2050",
+        "linkResolverOpenUrl": "http://sfx.stanford.edu/local?genre=article&aulast=Zhang&issn=2224-5820&title=Annals%20of%20Palliative%20Medicine&atitle=A%20bibliometric%20analysis%20of%20acute%20respiratory%20distress%20syndrome%20(ARDS)%20research%20from%202010%20to%202019&volume=10&issue=4&spage=3750&epage=3762&date=2021&doi=10.21037%2Fapm-20-2050&sid=LibKey",
+        "pmid": "33752427",
+        "openAccess": true,
+        "unpaywallUsable": true,
+        "fullTextFile": "https://libkey.io/libraries/1462/articles/452871434/full-text-file?utm_source=api_334",
+        "contentLocation": "https://libkey.io/libraries/1462/articles/452871434/content-location?utm_source=api_334",
+        "availableThroughBrowzine": true,
+        "startPage": "3750",
+        "endPage": "3762",
+        "browzineWebLink": "https://browzine.com/libraries/1462/journals/307860/issues/404019236?showArticleInContext=doi:10.21037%2Fapm-20-2050&utm_source=api_334",
+        "relationships": {
+            "journal": {
+                "data": {
+                    "type": "journals",
+                    "id": 307860
+                }
+            }
+        },
+        "bestIntegratorLink": {
+            "bestLink": "https://libkey.io/libraries/1462/articles/452871434/full-text-file?utm_source=api_334",
+            "linkType": "fullTextFile",
+            "recommendedLinkText": "Download PDF"
+        }
+    },
+    "included": [
+        {
+            "id": 307860,
+            "type": "journals",
+            "title": "Annals of Palliative Medicine",
+            "issn": "22245820",
+            "sjrValue": 0,
+            "coverImageUrl": "https://s3.amazonaws.com/thirdiron-assets/images/covers/2224-5820.png",
+            "browzineEnabled": true,
+            "browzineWebLink": "https://browzine.com/libraries/1462/journals/307860?utm_source=api_334"
+        }
+    ]
+}
