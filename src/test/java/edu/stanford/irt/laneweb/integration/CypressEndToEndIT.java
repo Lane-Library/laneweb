@@ -41,11 +41,11 @@ public class CypressEndToEndIT {
                 @Override
                 public void accept(final OutputFrame outputFrame) {
                     // selectively print to console
-                    if (outputFrame.getUtf8String().contains("Running:")
-                            || outputFrame.getUtf8String().contains(" failed (")
-                            || outputFrame.getUtf8String().contains("All specs passed!")) {
+                    // if (outputFrame.getUtf8String().contains("Running:")
+                    //         || outputFrame.getUtf8String().contains(" failed (")
+                    //         || outputFrame.getUtf8String().contains("All specs passed!")) {
                         System.out.print(outputFrame.getUtf8String());
-                    }
+                    // }
                     // brittle test to determine if tests have failed
                     if (outputFrame.getUtf8String().contains(" failed (")) {
                         countDownLatch.countDown();
