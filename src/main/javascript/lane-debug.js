@@ -30,7 +30,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
     "widget-position-constrain",
     "widget-stack",
     "widget-stdmod",
-    function(Y) {
+    function (Y) {
 
         "use strict";
 
@@ -89,7 +89,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "clinical-toggle.js",
             "search-form-scroll.js",
             "message.js",
-            "navigation.js",
+            "mobile-navigation.js",
             "course-reserves.js",
             "validation.js",
             "holdings-toggle.js",
@@ -106,7 +106,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             basePath = window.model["base-path"] || basePath;
         }
 
-        errorHandler = function(err) {
+        errorHandler = function (err) {
             if (err) {
                 console.log('Error loading JS: ' + err[0].error, 'error');
                 return;

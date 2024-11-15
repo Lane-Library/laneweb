@@ -72,7 +72,7 @@
         "lane.js",
         "util.js",
         "menu.js",
-        "navigation.js",
+        "mobile-navigation.js",
         "model.js",
         "guides.js",
         "link-info.js",
