@@ -36,24 +36,32 @@ public class CypressEndToEndIT {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         try (GenericContainer<?> container = createCypressContainer()) {
             container.start();
+            // array so we can modify it in the consumer
+            final int[] failing = { 0 };
             container.followOutput(new Consumer<OutputFrame>() {
 
                 @Override
                 public void accept(final OutputFrame outputFrame) {
+                    String line = outputFrame.getUtf8String();
                     // stream output to console, but strip a little extra whitespace
-                    if (!outputFrame.getUtf8String().equals("\n")){
-                        System.out.print(outputFrame.getUtf8String());
+                    if (!line.equals("\n")) {
+                        System.out.print(line);
                     }
-                    // brittle test to determine if tests have failed
-                    if (outputFrame.getUtf8String().contains(" failed (")) {
-                        countDownLatch.countDown();
-                        fail("Failure while running Cypress tests");
-                    } else if (outputFrame.getUtf8String().contains("All specs passed!")) {
+                    if (line.contains("Failing:      ")) {
+                        failing[0] += Integer.parseInt(line.split("Failing:")[1].trim().split("\\s+")[0]);
+                    } else if (line.contains("All specs passed!") || line.contains(" failed (")) {
                         countDownLatch.countDown();
                     }
                 }
             });
-            countDownLatch.await(MAX_TOTAL_TEST_TIME_IN_MINUTES, TimeUnit.MINUTES);
+            boolean testsDidNotTimeOut = countDownLatch.await(MAX_TOTAL_TEST_TIME_IN_MINUTES, TimeUnit.MINUTES);
+            if (testsDidNotTimeOut) {
+                if (failing[0] > 0) {
+                    fail("Failing Cypress tests: " + failing[0]);
+                }
+            } else {
+                fail("Cypress tests did not complete in " + MAX_TOTAL_TEST_TIME_IN_MINUTES + " minutes");
+            }
         }
     }
 
