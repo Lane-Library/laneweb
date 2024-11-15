@@ -5,12 +5,4 @@ describe('Altmetric', () => {
         // next script only loads for folks auth'd or on campus
         //cy.get('script[src*="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"]').should('have.length', 1);
     })
-    it('break for demo', () => {
-        cy.visit('/xxxsearch.html?q=32764183&source=all-all');
-        cy.get('script[src*="https://badge.dimensions.ai/badge.js"]').should('have.length', 1);
-    })
-    it('break for demo2', () => {
-        cy.visit('/yyysearch.html?q=32764183&source=all-all');
-        cy.get('script[src*="https://badge.dimensions.ai/badge.js"]').should('have.length', 1);
-    })
 })
