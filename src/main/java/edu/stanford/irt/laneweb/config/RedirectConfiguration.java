@@ -23,11 +23,8 @@ public class RedirectConfiguration {
     public RedirectProcessor redirectProcessor() {
         List<RedirectProcessor> redirectProcessors = new ArrayList<>(3);
         redirectProcessors.add(new TrailingSlashRedirectProcessor());
-        Map<String, String> redirectMap =  HashMap.newHashMap(7);
-        redirectMap.put("/classes", "/classes-consult/laneclasses.html");
-        redirectMap.put("/beemap", "/beemap.html");
+        Map<String, String> redirectMap =  HashMap.newHashMap(4);
         redirectMap.put("/about/contact.html", "/contacts/index.html");
-        redirectMap.put("/about/staff-dir.html", "/contacts/staff-dir.html");
         redirectMap.put("/about/liaisons.html", "/contacts/liaisons.html");
         redirectMap.put("/portals/lpch-cerner.html\\?(sourceid=cerner&q=.*)", "/search.html?source=peds-all&$1");
         redirectMap.put("/using-lib/computing.html", "/using-lib/study-computing-spaces.html");

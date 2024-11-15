@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
@@ -29,7 +28,7 @@ import jakarta.servlet.ServletContext;
 @Configuration
 @ImportResource({ "classpath:/spring/applications.xmap", "classpath:/spring/bookmarks.xmap",
         "classpath:/spring/libcals.xmap", "classpath:/spring/content.xmap", "classpath:/spring/eresources.xmap",
-        "classpath:/spring/libguides.xmap", "classpath:/spring/rss.xmap", "classpath:/spring/sitemap.xmap" })
+        "classpath:/spring/libguides.xmap", "classpath:/spring/sitemap.xmap" })
 public class LanewebConfiguration {
 
     private Map<String, Object> constants;
