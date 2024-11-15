@@ -10,12 +10,12 @@ describe('Google Analytics Tracking', () => {
         // find first visible external link
         cy.get('a[href^="http"]').filter(':visible').first().as('externalLink');
 
-        // intercept external link request and return a 404 status code
+        // intercept external link request
         // this allows the test to continue without actually navigating to the external link
         cy.get('@externalLink').then(($link) => {
             const externalLinkHref = $link.attr('href');
             cy.intercept(externalLinkHref, {
-                statusCode: 404
+                statusCode: 200
             });
         });
 
@@ -34,20 +34,18 @@ describe('Google Analytics Tracking', () => {
         cy.visit('/index.html');
 
         // find first visible internal link
-        cy.get('a[href^="/"]').filter(':visible').first().as('internalLink');
+        cy.get('a[href^="/about"]').filter(':visible').first().as('internalLink');
 
         cy.get('@internalLink').then(($link) => {
             const internalLinkHref = $link.attr('href');
             cy.intercept(internalLinkHref, {
-                statusCode: 404
+                statusCode: 200
             });
         });
 
-        // intercept the GA request and count the number of ONSITE-CLICK-EVENT click events
+        // intercept the GA request and ensure the request body does not contain the string "ONSITE"
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            console.log(req.body);
-            const onsiteClickCount = (req.body.match(/ONSITE/g) || []).length;
-            expect(onsiteClickCount).to.eq(0);
+            expect(req.body).not.to.include('ONSITE');
         });
 
         cy.get('@internalLink').click();
