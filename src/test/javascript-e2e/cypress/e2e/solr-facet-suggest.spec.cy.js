@@ -34,7 +34,7 @@ describe('Suggest', () => {
         cy.get('@input').type('book');
         cy.get('.yui3-aclist-item').first().click();
         //Check url after click
-        cy.url().should('include', 'http://localhost:8080/search.html?q=skin&source=all-all&facets=type%3A%22Book%22');
+        cy.url().should('include', '/search.html?q=skin&source=all-all&facets=type%3A%22Book%22');
         //check Filter Applied Value
         cy.get('.filter-facet div a').should('have.text', 'Book');
         //check the Resource Type value is selected
