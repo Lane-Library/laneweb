@@ -1,0 +1,46 @@
+{
+    "data": {
+        "id": 473832291,
+        "type": "articles",
+        "title": "Predicting Acute Respiratory Distress Syndrome in Severe Blunt Trauma: The Utility of Interleukin-18",
+        "date": "2021-11-01",
+        "authors": "Beattie, Genna; Cohan, Caitlin M.; Victorino, Gregory P.",
+        "inPress": false,
+        "abandoned": false,
+        "doi": "10.1089/sur.2021.084",
+        "linkResolverOpenUrl": "http://sfx.stanford.edu/local?genre=article&aulast=Beattie&issn=1096-2964&title=Surgical%20Infections&atitle=Predicting%20Acute%20Respiratory%20Distress%20Syndrome%20in%20Severe%20Blunt%20Trauma%3A%20The%20Utility%20of%20Interleukin-18&volume=22&issue=9&spage=948&epage=954&date=2021&doi=10.1089%2Fsur.2021.084&sid=LibKey",
+        "pmid": "33983849",
+        "openAccess": false,
+        "unpaywallUsable": true,
+        "fullTextFile": "",
+        "contentLocation": "",
+        "availableThroughBrowzine": false,
+        "startPage": "948",
+        "endPage": "954",
+        "relationships": {
+            "journal": {
+                "data": {
+                    "type": "journals",
+                    "id": 32309
+                }
+            }
+        },
+        "bestIntegratorLink": {
+            "bestLink": "http://sfx.stanford.edu/local?genre=article&aulast=Beattie&issn=1096-2964&title=Surgical%20Infections&atitle=Predicting%20Acute%20Respiratory%20Distress%20Syndrome%20in%20Severe%20Blunt%20Trauma%3A%20The%20Utility%20of%20Interleukin-18&volume=22&issue=9&spage=948&epage=954&date=2021&doi=10.1089%2Fsur.2021.084&sid=LibKey",
+            "linkType": "linkResolverOpenUrl",
+            "recommendedLinkText": "Access Options"
+        }
+    },
+    "included": [
+        {
+            "id": 32309,
+            "type": "journals",
+            "title": "Surgical Infections",
+            "issn": "10962964",
+            "sjrValue": 0.581,
+            "coverImageUrl": "https://assets.thirdiron.com/images/covers/1096-2964.png",
+            "browzineEnabled": false,
+            "externalLink": "http://lane.stanford.edu/search.html?q=1096-2964&source=all-all&facets=type%3A%22Journal+Digital%22"
+        }
+    ]
+}

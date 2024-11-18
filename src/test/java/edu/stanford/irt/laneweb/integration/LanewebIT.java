@@ -97,9 +97,14 @@ public class LanewebIT {
         }
 
         @Test
-        public void testNotFoundServlet() throws Exception {
-                this.mockMvc.perform(get("/rss/browse/type/video?a=z").servletPath("/rss/browse/type/video"))
+        public void testNotFound() throws Exception {
+                // HTML content type set for missing *.html requests
+                this.mockMvc.perform(get("/fake.html").servletPath("/fake.html"))
                                 .andExpect(status().isNotFound()).andExpect(content().contentType(TEXT_HTML));
+                // no HTML content type expected for non-*.html requests
+                // NOTE: tests below do not route through the NoContentServlet
+                this.mockMvc.perform(get("/rss/browse/type/video?a=z").servletPath("/rss/browse/type/video"))
+                                .andExpect(status().isNotFound());
                 this.mockMvc.perform(get("/rss/mesh/book?m=biology&page=all").servletPath("/rss/mesh/book"))
                                 .andExpect(status().isNotFound());
                 this.mockMvc.perform(get("/wp-login.php").servletPath("/wp-login.php"))

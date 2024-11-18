@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.io.Serializable;
 import java.nio.CharBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,6 +8,8 @@ import java.util.regex.Pattern;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.cache.Validity;
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.AbstractXMLPipe;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -52,6 +55,16 @@ public abstract class AbstractTextProcessingTransformer extends AbstractXMLPipe 
             ++this.parseLevel;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
+    }
+
+    @Override
+    public Serializable getKey() {
+        return "none";
+    }
+
+    @Override
+    public Validity getValidity() {
+        return AlwaysValid.SHARED_INSTANCE;
     }
 
     @Override
