@@ -4,19 +4,19 @@ describe('Popup functionality', () => {
         cy.visit('/patron-registration/index.html');
 
         // popup should not be present on the page initially
-        cy.get('.yui3-popup').should('not.exist');
+        cy.get('.popup').should('not.exist');
 
         cy.get('a[rel="popup local popup-id-shc"]').click();
 
-        cy.get('.yui3-popup').should('exist');
+        cy.get('.popup').should('exist');
 
         // verify popup is draggable
-        cy.get('.yui3-popup').should('have.class', 'yui3-dd-draggable');
+        cy.get('.popup').should('have.attr', 'draggable', 'true');
 
-        cy.get('.yui3-popup .close').click();
+        cy.get('.popup .fa-close').click();
 
         // verify popup is closed
-        cy.get('.yui3-popup').should('not.be.visible');
+        cy.get('.popup').should('not.exist');
 
     });
 
@@ -33,9 +33,9 @@ describe('Popup functionality', () => {
         cy.get('#larger-view-link a').click();
         cy.get('@windowOpen')
             .should(
-                'be.calledWith', 
-                `${Cypress.config('baseUrl')}biomed-resources/bassett/raw/bassettLargerView.html?t=largerView&bn=132-5`, 
-                'newWin', 
+                'be.calledWith',
+                `${Cypress.config('baseUrl')}biomed-resources/bassett/raw/bassettLargerView.html?t=largerView&bn=132-5`,
+                'newWin',
                 'resizable,toolbar=no,location=no,scrollbars=yes,width=1320,height=1925');
     });
 
