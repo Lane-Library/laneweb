@@ -1,0 +1,54 @@
+describe('Suggest', () => {
+
+    beforeEach(() => {
+        cy.viewport(1200, 1000);
+        cy.visit('/index.html');
+
+        // Parameters
+        cy.get('.hero-unit input[name=q]').as('input');
+
+    })
+
+    it('suggestion should not exist on loading page', () => {
+        cy.get('.yui3-aclist-item').should('not.exist');
+    })
+
+    it('suggestion should not exist after typing 2 characters', () => {
+        cy.get('@input').type('ca');
+        cy.get('.yui3-aclist-item').should('not.exist');
+    })
+
+
+    it('suggestion should exist after typing 3 characters', () => {
+        cy.get('@input').type('ski');
+        cy.get('.yui3-aclist-item').should('exist');
+        //count how many suggestions
+        cy.get('.yui3-aclist-item').should('have.length', 10);
+    })
+
+    it('suggestion should not exist after typing an unknown word', () => {
+        cy.get('@input').type('inconnu');
+        cy.get('.yui3-aclist-item').should('not.exist');
+    })
+
+    //click on the suggest and check the input value
+    it('click on suggestion', () => {
+        cy.get('@input').type('skin');
+        cy.get('.yui3-aclist-item').first().click();
+        //Check input value from the first suggestion
+        cy.get('@input').should('have.value', 'Skin');
+        //Check url after click
+        cy.url().should('include', 'search.html?q=Skin');
+    })
+
+    //Test suggestion after the search input loosing the focus
+    it('suggestion should not exist after loosing focus', () => {
+        cy.get('@input').type('skin');
+        cy.get('.yui3-aclist-item').should('exist');
+        cy.get('#pubmed').focus();
+        cy.get('.yui3-aclist-item').should('not.visible');
+    })
+
+
+
+})
