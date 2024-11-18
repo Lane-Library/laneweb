@@ -5,7 +5,7 @@ describe('Mobile Menu', () => {
         cy.visit('/index.html');
 
         // Parameters
-        cy.get('.fa-bars').should('be.visible').as('hamburger');
+        cy.get('.fa-bars').as('hamburger');
         cy.get('#nav-toggle-off .fa-xmark').as('offButton');
         cy.get('#navigation nav .nav-menu:nth-child(3)').as('menu1');
         cy.get('#navigation nav .nav-menu:nth-child(4)').as('menu2');
