@@ -117,7 +117,7 @@ public class LaneSearchIT {
                 this.mockMvc.perform(
                                 get("/eresources/search.html?q=Bates Guide").servletPath("/eresources/search.html"))
                                 .andExpect(xpath(
-                                                "//h:li[position() <= 10]//h:a[@class='primaryLink bookmarking' and contains(@title,\"Bates' Guide to physical examination and history taking.\")]",
+                                                "//h:li[position() <= 10]//h:a[@class='primaryLink bookmarking' and contains(@title,\"Bates' Guide to Physical Examination and History Taking.\")]",
                                                 this.ns).exists());
         }
 
@@ -179,7 +179,7 @@ public class LaneSearchIT {
                                 .perform(get("/eresources/search.html?q=Guide to the evaluation of permanent impairment")
                                                 .servletPath("/eresources/search.html"))
                                 .andExpect(xpath(
-                                                "//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@title,'Guides to the evaluation of permanent impairment')]",
+                                                "//h:li[position() <= 5]//h:a[@class='primaryLink bookmarking' and contains(@title,'Guides to the Evaluation of Permanent Impairment')]",
                                                 this.ns).exists());
         }
 
@@ -217,7 +217,7 @@ public class LaneSearchIT {
                                 .perform(get("/eresources/search.html?q=journal of medical research")
                                                 .servletPath("/eresources/search.html"))
                                 .andExpect(xpath(
-                                                "//h:li[position() <= 15]//h:a[@class='primaryLink bookmarking' and @title='Journal of medical research']",
+                                                "//h:li[position() <= 15]//h:a[@class='primaryLink bookmarking' and @title='Journal of Medical Research']",
                                                 this.ns).exists());
         }
 
@@ -239,7 +239,7 @@ public class LaneSearchIT {
                 this.mockMvc.perform(get("/eresources/search.html?q=movement disorder")
                                 .servletPath("/eresources/search.html"))
                                 .andExpect(xpath(
-                                                "//h:li[position() <= 20]//h:a[@class='primaryLink bookmarking' and contains(@title,'Movement disorders')]",
+                                                "//h:li[position() <= 20]//h:a[@class='primaryLink bookmarking' and contains(@title,'Movement Disorders')]",
                                                 this.ns).exists());
         }
 
@@ -248,7 +248,7 @@ public class LaneSearchIT {
                 // nejm
                 this.mockMvc.perform(get("/eresources/search.html?q=nejm").servletPath("/eresources/search.html"))
                                 .andExpect(
-                                                xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='New England journal of medicine']",
+                                                xpath("//h:li[position() = 1]//h:a[@class='primaryLink bookmarking' and @title='New England Journal of Medicine']",
                                                                 this.ns).exists());
         }
 
