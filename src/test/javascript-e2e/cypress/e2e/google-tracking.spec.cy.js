@@ -19,14 +19,15 @@ describe('Google Analytics Tracking', () => {
             });
         });
 
-        // intercept the GA request and count the number of OFFSITE-CLICK-EVENT click events
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            const offsiteClickCount = (req.body.match(/OFFSITE-CLICK-EVENT/g) || []).length;
-            expect(offsiteClickCount).to.eq(1);
+            if (req.body.includes('OFFSITE-CLICK-EVENT')) {
+                req.alias = 'gaCollect';
+            }
         });
 
         cy.get('@externalLink').click();
 
+        cy.wait('@gaCollect');
     })
 
     it('internal click should not send tracking event data to GA', () => {
@@ -44,12 +45,13 @@ describe('Google Analytics Tracking', () => {
         });
 
         // intercept the GA request and ensure the request body does not contain the string "ONSITE"
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            expect(req.body).not.to.include('ONSITE');
-        });
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
 
         cy.get('@internalLink').click();
 
+        cy.wait('@gaCollect').then((interception) => {
+            expect(interception.request.body).to.not.include('ONSITE');
+        });
     })
 
 })

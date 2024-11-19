@@ -8,7 +8,7 @@ describe('Description Toggle', () => {
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             const descriptionTriggerCount = (req.body.match(/descriptionTrigger/g) || []).length;
             expect(descriptionTriggerCount).to.eq(2);
-        });
+        }).as('gaCollect');
 
         cy.get('.descriptionTrigger').as('descriptionTrigger');
         cy.get('@descriptionTrigger').invoke('text').should('contain', 'Abstract');
@@ -20,6 +20,8 @@ describe('Description Toggle', () => {
 
         cy.get('@descriptionTrigger').click();
         cy.get('@description').should('not.be.visible');
+
+        cy.wait('@gaCollect');
 
     })
 
