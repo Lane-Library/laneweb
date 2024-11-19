@@ -35,7 +35,7 @@ describe('Suggest', () => {
     it('click on suggestion', () => {
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AsuggestSelect*').as('gaCollect');
         cy.get('@input').type('skin');
-        //Cli ck on Skin
+        //Click on Skin
         cy.get('.yui3-aclist-item').first().click();
         //Check if request sent to google analytics
         cy.wait('@gaCollect').then((interception) => {
