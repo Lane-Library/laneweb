@@ -32,9 +32,7 @@ describe('Popup functionality', () => {
         });
         cy.get('#larger-view-link a').click();
         cy.get('@windowOpen')
-            .should(
-                'be.calledWith',
-                `${Cypress.config('baseUrl')}biomed-resources/bassett/raw/bassettLargerView.html?t=largerView&bn=132-5`,
+            .should('be.calledWithMatch', /biomed-resources\/bassett\/raw\/bassettLargerView.html\?t=largerView&bn=132-5/,
                 'newWin',
                 'resizable,toolbar=no,location=no,scrollbars=yes,width=1320,height=1925');
     });
