@@ -33,12 +33,24 @@ describe('Suggest', () => {
 
     //click on the suggest and check the input value
     it('click on suggestion', () => {
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AsuggestSelect*').as('gaCollect');
         cy.get('@input').type('skin');
+        //Cli ck on Skin
         cy.get('.yui3-aclist-item').first().click();
+        //Check if request sent to google analytics
+        cy.wait('@gaCollect').then((interception) => {
+            expect(interception.request.url).to.include('ep.event_label=Skin');
+            expect(interception.request.url).to.include('ep.event_action=all-all');
+        });
         //Check input value from the first suggestion
         cy.get('@input').should('have.value', 'Skin');
         //Check url after click
         cy.url().should('include', 'search.html?q=Skin');
+        //check if request sent to google analytics 
+
+
+
+
     })
 
     //Test suggestion after the search input loosing the focus
@@ -48,6 +60,8 @@ describe('Suggest', () => {
         cy.get('#pubmed').focus();
         cy.get('.yui3-aclist-item').should('not.visible');
     })
+
+
 
 
 
