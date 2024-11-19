@@ -11,4 +11,13 @@
         })
     });
 
+    // to select menu  from the header 
+    document.querySelectorAll("nav ul li.nav-menu span").forEach(function (span) {
+        span.parentElement.querySelectorAll("a").forEach(function (link) {
+            if (link.pathname == window.location.pathname && link.hash == window.location.hash) {
+                span.classList.add("red");
+                span.classList.add("btm-brdr-red");
+            }
+        });
+    });
 })();
