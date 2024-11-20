@@ -76,7 +76,6 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "lane-spellcheck.js",
             "description-toggle.js",
             "shibboleth-sfx.js",
-            "youtube.js",
             "back-to-top.js",
             "solr-facets.js",
             "solr-pagination.js",
