@@ -11,7 +11,7 @@ describe('Suggest', () => {
         cy.get('.yui3-aclist-item').should('not.exist');
     })
 
-    it('suggestion should not exist after typing 2 characters', () => {
+    it('suggestion should exist after typing 1 characters', () => {
         cy.get('@input').type('b');
         cy.get('.yui3-aclist-item').should('exist');
     })
@@ -25,7 +25,9 @@ describe('Suggest', () => {
     })
 
     it('suggestion should not exist after typing an unknown word', () => {
+        cy.intercept('/apps/solr/facet/suggest*', { fixture: 'solr-suggest-not-found.json' }).as('suggestNoMatch');
         cy.get('@input').type('inconnu');
+        cy.wait('@suggestNoMatch');
         cy.get('.yui3-aclist-item').first().should('have.text', 'No match found');
     })
 

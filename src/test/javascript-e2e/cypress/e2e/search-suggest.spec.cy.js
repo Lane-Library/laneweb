@@ -26,8 +26,10 @@ describe('Suggest', () => {
         cy.get('.yui3-aclist-item').should('have.length', 10);
     })
 
-    it('suggestion should not exist after typing an unknown word', () => {
-        cy.get('@input').type('inconnu');
+    it('suggestion should not not found', () => {
+        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest-not-found.json' }).as('suggestNoMatch');
+        cy.get('@input').type('notFoundtest');
+        cy.wait('@suggestNoMatch');
         cy.get('.yui3-aclist-item').should('not.exist');
     })
 
