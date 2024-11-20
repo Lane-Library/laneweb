@@ -2,9 +2,11 @@ describe('Permalink Toggle Test', () => {
     it('should toggle permalinks correctly', () => {
         cy.viewport(1101, 750);
 
-        // intercept the GA POST and make sure "permalinkCopied" is present in the body
-        cy.intercept('POST', 'https://www.google-analytics.com/j/collect', (req) => {
-            expect(req.body).to.include('lane:permalinkCopied');
+        // intercept the GA POST and make sure "permalinkCopied" is present in the body (below)
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
+            if (req.body.includes('permalinkCopied')) {
+                req.alias = 'gaCollect';
+            }
         });
 
         cy.visit('/search.html?source=all-all&q=12&facets=recordType:%22bib%22');
@@ -26,5 +28,10 @@ describe('Permalink Toggle Test', () => {
         cy.wait(2100);
 
         cy.get('.permalink').invoke('text').should('contain', 'Get Shareable Link');
+
+        cy.wait('@gaCollect').then((interception) => {
+            expect(interception.request.body).to.include('lane%3ApermalinkCopied');
+        });
+
     });
 });
