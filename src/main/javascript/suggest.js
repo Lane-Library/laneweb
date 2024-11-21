@@ -25,12 +25,13 @@
 
 
         bindUI() {
-            L.on("search:search", (e) => function (e) {
+            L.on("search:search", (e) => {
                 this._destroy();
             });
             this._input.addEventListener('input', (event) => this._displaySuggestions(event));
-            this._input.addEventListener("focusout", (event) => this._destroy());
+            document.addEventListener("click", (event) => this._destroyOnClick(event));
         }
+
 
         _displaySuggestions() {
             let query = this._input.value,
@@ -56,7 +57,10 @@
                         suggestionContainer.appendChild(dropdown);
                         this._handleEvents();
                         this._input.after(suggestionContainer);
+
                     });
+            } else {
+                this._destroy();
             }
         }
 
@@ -72,18 +76,27 @@
         }
 
         _destroy() {
-            this._ac.forEach(item => {
-                item.removeEventListener('click', (event) => this._handleMouseClickItemChange(event));
-                item.removeEventListener('mouseenter', (event) => this._handleMouseEnterItemChange(event));
-                item.removeEventListener('mouseleave', (event) => this._handleMouseLeaveItemChange(event));
-            });
-            this._input.removeEventListener('keydown', (event) => this._handleKeysDownChange(event));
-            this._input.removeEventListener('keyup', (event) => this._handleKeysUpChange(event));
-            this._ac = [];
-            document.querySelectorAll('.aclist-content').forEach(item => item.remove());
-            this.selectedItem = null;
+            if (this._ac.length === 0) {
+                this._ac.forEach(item => {
+                    item.removeEventListener('click', (event) => this._handleMouseClickItemChange(event));
+                    item.removeEventListener('mouseenter', (event) => this._handleMouseEnterItemChange(event));
+                    item.removeEventListener('mouseleave', (event) => this._handleMouseLeaveItemChange(event));
+                });
+                this._input.removeEventListener('keydown', (event) => this._handleKeysDownChange(event));
+                this._input.removeEventListener('keyup', (event) => this._handleKeysUpChange(event));
+                this._ac = [];
+                document.querySelectorAll('.aclist-list').forEach(item => item.remove());
+                this.selectedItem = null;
+            }
         }
 
+
+        _destroyOnClick(event) {
+            if (!event.target.classList.contains('aclist-item')) {
+                this._destroy();
+                event.stopPropagation();
+            }
+        }
 
 
         _updateInputValue(event) {
