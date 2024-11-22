@@ -3,11 +3,13 @@ package edu.stanford.irt.laneweb.config;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.util.Timeout;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -26,14 +28,30 @@ public class RESTClientConfiguration {
 
     private static final int HTTP_CONNECT_TIMEOUT = 5;
 
-    private static final int HTTP_READ_TIMEOUT = 30;
+    private static final int HTTP_READ_TIMEOUT = 15;
+
+    private static final int MAX_CONNECTIONS_PER_ROUTE = 5;
+
+    private static final int MAX_TOTAL_CONNECTIONS = 25;
 
     @Bean
     HttpComponentsClientHttpRequestFactory getRequestFactory() {
+        PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
+        connectionManager.setMaxTotal(MAX_TOTAL_CONNECTIONS);
+        connectionManager.setDefaultMaxPerRoute(MAX_CONNECTIONS_PER_ROUTE);
+        ConnectionConfig connectionConfig = ConnectionConfig.custom()
+            .setSocketTimeout(Timeout.ofSeconds(HTTP_READ_TIMEOUT))
+            .setConnectTimeout(Timeout.ofSeconds(HTTP_CONNECT_TIMEOUT))
+            .build();
+        connectionManager.setDefaultConnectionConfig(connectionConfig);
         RequestConfig requestConfig = RequestConfig.custom()
-                .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
-                .build();
-        CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+            .setResponseTimeout(Timeout.ofSeconds(HTTP_READ_TIMEOUT))
+            .setConnectionRequestTimeout(Timeout.ofSeconds(HTTP_CONNECT_TIMEOUT))
+            .build();
+        CloseableHttpClient httpClient = HttpClients.custom()
+            .setConnectionManager(connectionManager)
+            .setDefaultRequestConfig(requestConfig)
+            .build();
         HttpComponentsClientHttpRequestFactory hcchrf = new HttpComponentsClientHttpRequestFactory(httpClient);
         hcchrf.setConnectionRequestTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
         hcchrf.setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
@@ -41,7 +59,7 @@ public class RESTClientConfiguration {
     }
 
     @Bean
-    List<HttpMessageConverter<?>> getMessageConverters(ObjectMapper objectMapper) {
+    List<HttpMessageConverter<?>> getMessageConverters(final ObjectMapper objectMapper) {
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setWriteAcceptCharset(false);
@@ -53,14 +71,13 @@ public class RESTClientConfiguration {
 
     @Bean
     RestClient restClientCustomizer(final List<HttpMessageConverter<?>> messageConverters,
-            HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
-        return  RestClient.builder()
-                .requestFactory( httpComponentsClientHttpRequestFactory)
+            final HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
+        return RestClient.builder().requestFactory(httpComponentsClientHttpRequestFactory)
                 .messageConverters(converters -> converters.addAll(0, messageConverters)).build();
     }
 
     @Bean
-    RESTService restService(RestClient restClient) {
+    RESTService restService(final RestClient restClient) {
         return new RESTService(restClient);
     }
 }
