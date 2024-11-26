@@ -3,7 +3,8 @@
     float: right;
 }
 
-.filter-facet div span, .filter-facet div i {
+.filter-facet div span,
+.filter-facet div i {
     display: inline-block;
     color: white;
     background-color: #8C1515;
@@ -34,14 +35,16 @@
     padding: 0;
 }
 
-.facet-container .facet i.fa-square, .facet-container .facet i.fa-square-check{
+.facet-container .facet i.fa-square,
+.facet-container .facet i.fa-square-check {
     font-size: 13px;
     margin-right: 6px;
 }
 
-.facet-container .facet i.fa-square{
+.facet-container .facet i.fa-square {
     color: black;
 }
+
 .facet-container .facet i.fa-square-check {
     color: #8C1515;
 }
@@ -54,7 +57,7 @@
     text-decoration: none;
 }
 
-.facet-container li  a:hover .facetLabel {
+.facet-container li a:hover .facetLabel {
     text-decoration: underline;
 }
 
@@ -73,16 +76,22 @@
     color: black;
 }
 
-.facet-container  input.facet-suggestion, .facet-container .yui3-aclist-content
-    {
+.facet-container .solr-search-input {
+    position: relative;
+    padding: 0;
+}
+
+.facet-container input.facet-suggestion,
+.facet-container .aclist-content {
     width: 80%;
 }
 
-.yui3-aclist-list{
+
+.aclist-list {
     border: solid 1px #ddd;
 }
 
-.facet-container  input {
+.facet-container input {
     padding: 6px;
     margin-top: 12px;
     font-size: 12px;
@@ -90,11 +99,11 @@
     outline: 0;
 }
 
-.facet-container  input::placeholder {
+.facet-container input::placeholder {
     color: #ccc;
 }
 
-.facet-container  input.date {
+.facet-container input.date {
     width: 24%;
     font-size: 16px;
     margin: 12px;
@@ -102,7 +111,7 @@
     margin-right: 0;
 }
 
-.facet-container  input.date[type=submit] {
+.facet-container input.date[type=submit] {
     background-color: #666;
     color: white;
     cursor: pointer;
@@ -113,14 +122,14 @@
     color: red;
 }
 
-@media ( max-width : 1100px) {
+@media (max-width : 1100px) {
     .filter-facet {
         margin-left: 32px;
         margin-right: 32px;
     }
 }
 
-@media ( max-width : 812px) {
+@media (max-width : 812px) {
     .filter-facet {
         margin-left: 15px;
         margin-right: 15px;
