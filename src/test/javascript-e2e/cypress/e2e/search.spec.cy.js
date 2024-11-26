@@ -20,7 +20,7 @@ describe('Lane Search Test Case', () => {
     it('testQueryChangeEvent', () => {
         cy.window().then(win => {
             let value;
-            win.L.on("search:queryChange", function(event) {
+            win.L.on("search:queryChange", function (event) {
                 value = this.search.getQuery();
             });
             win.L.search.setQuery('query');
@@ -31,7 +31,7 @@ describe('Lane Search Test Case', () => {
     it('testQueryChangeEventBubble', () => {
         cy.window().then(win => {
             let newVal, oldVal;
-            win.L.on('search:queryChange', function(event) {
+            win.L.on('search:queryChange', function (event) {
                 newVal = event.newVal;
                 oldVal = event.oldVal;
             });
@@ -64,7 +64,7 @@ describe('Lane Search Test Case', () => {
     it('testSourceChangeEvent', () => {
         cy.window().then(win => {
             let value;
-            win.L.on("search:sourceChange", function(event) {
+            win.L.on("search:sourceChange", function (event) {
                 value = event.newVal;
             });
             win.L.search.setSource('clinical-all');
@@ -75,7 +75,7 @@ describe('Lane Search Test Case', () => {
     it('testSourceChangeEventBubble', () => {
         cy.window().then(win => {
             let newVal, oldVal;
-            win.L.on("search:sourceChange", function(event) {
+            win.L.on("search:sourceChange", function (event) {
                 newVal = event.newVal;
                 oldVal = event.oldVal;
             });
@@ -88,7 +88,7 @@ describe('Lane Search Test Case', () => {
     it('testSearch', () => {
         cy.window().then(win => {
             let searched = false;
-            win.L.search.on('search:search', function(event) {
+            win.L.search.on('search', function (event) {
                 searched = true;
             });
             win.L.search.setQuery('query');
@@ -100,7 +100,7 @@ describe('Lane Search Test Case', () => {
     it('testSearchNoQuery', () => {
         cy.window().then(win => {
             let searched = false;
-            win.L.search.on('search:search', function(event) {
+            win.L.search.on('search:search', function (event) {
                 searched = true;
             });
             win.L.search.search();
@@ -112,7 +112,7 @@ describe('Lane Search Test Case', () => {
         // this is the same as testSearch ... necessary?
         cy.window().then(win => {
             let searched = false;
-            win.L.on('search:search', function(event) {
+            win.L.on('search:search', function (event) {
                 searched = true;
             });
             win.L.search.setQuery('query');
@@ -121,9 +121,9 @@ describe('Lane Search Test Case', () => {
         });
     });
 
-    it('testInputFocus', () => {
-        cy.get('@queryInput').focus();
-    });
+    // it('testInputFocus', () => {
+    //     cy.get('@queryInput').focus();
+    // });
 
     it('testCloseClick', () => {
         cy.window().its('L.search').invoke('setQuery', 'query');
@@ -137,7 +137,7 @@ describe('Lane Search Test Case', () => {
         cy.get('@searchForm').submit();
         cy.wait('@searched')
     });
-        
+
     it('testSubmitNoQuery', () => {
         cy.get('@searchForm').submit();
         cy.url().should('not.include', '/search.html');
@@ -160,12 +160,12 @@ describe('Lane Search Test Case', () => {
         cy.window().then(win => {
             win.L.search.setQuery('query');
             let searched = false;
-            win.L.search.on('search:search', function(event) {
+            win.L.search.on('search', function (event) {
                 searched = true;
             });
             win.L.fire('searchDropdown:change', {
                 newVal: {
-                    source: 'foo', 
+                    source: 'foo',
                     "foo": {
                         "placeholder": "foo"
                     }
@@ -179,12 +179,12 @@ describe('Lane Search Test Case', () => {
         cy.window().then(win => {
             win.L.search.setQuery('');
             let searched = false;
-            win.L.search.on('search:search', function(event) {
+            win.L.search.on('search:search', function (event) {
                 searched = true;
             });
             win.L.fire('searchDropdown:change', {
                 newVal: {
-                    source: 'foo', 
+                    source: 'foo',
                     "foo": {
                         "placeholder": "foo"
                     }

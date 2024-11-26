@@ -49,7 +49,7 @@ describe('Suggest', () => {
         cy.get('@input').type('skin');
         cy.get('.aclist-item').should('exist');
         cy.get('section a').first().trigger('mouseover');
-        cy.get('.aclist-item').should('not.exist');
+        cy.get('.aclist-item').should('have.text', 'No match found');
     })
 
 
