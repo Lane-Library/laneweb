@@ -290,7 +290,7 @@
                         <div class="table-head">Provider</div>
                         <div class="table-head">
                             Version
-                            <i class="fa-regular fa-info-circle yui3-tooltip-trigger"
+                            <i class="fa-regular fa-info-circle tooltip-trigger"
                                 title="Look here for issue, volume, and year information about the items in Lane 
                                     Library's collection. If a date range has no end date, our collection includes the 
                                     most recent issue." />

@@ -21,7 +21,7 @@
                 <xsl:attribute name="href" select="./a/@href"></xsl:attribute>
                 <xsl:if test="$description != ''">
                     <xsl:attribute name="id" select="concat($type, '-guide-', position() )"></xsl:attribute>
-                    <xsl:attribute name="class">yui3-tooltip-trigger</xsl:attribute>
+                    <xsl:attribute name="class">tooltip-trigger</xsl:attribute>
                 </xsl:if>
                 <xsl:value-of select="./a/text()" />
             </a>

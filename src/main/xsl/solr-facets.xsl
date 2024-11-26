@@ -147,7 +147,7 @@
                         <xsl:with-param name="label">Resource Type</xsl:with-param>
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='type']) > $values-per-facet">
-                        <li>
+                        <li class="solr-search-input">
                             <input name="contains" aria-label="Search by Resource Type" placeholder="Search" data-facet="type" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
@@ -159,7 +159,7 @@
                         <xsl:with-param name="label" select="'Article Type'" />
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationType']) > ($values-per-facet -1)">
-                        <li>
+                        <li class="solr-search-input">
                             <input name="contains" aria-label="Search by Article Type" placeholder="Search" data-facet="publicationType" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
@@ -193,7 +193,7 @@
                         <xsl:with-param name="label" select="'Journal Title'" />
                     </xsl:call-template>
                     <xsl:if test="count(f:facet[@f:key='publicationTitle']) > $values-per-facet">
-                        <li>
+                        <li class="solr-search-input">
                             <input name="contains" aria-label="Search by Journal Title" placeholder="Search" data-facet="publicationTitle" data-searchterm="{$query}" data-facets="{$facets}" class="facet-suggestion" />
                         </li>
                     </xsl:if>
@@ -210,21 +210,21 @@
         <xsl:choose>
             <xsl:when test="$name = 'pubmed'">PubMed</xsl:when>
             <xsl:when test="$name = 'sul'">
-                <span class="yui3-tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">SearchWorks (<i>biomedical subset</i>)
+                <span class="tooltip-trigger" title="A curated subset of journals, books, databases and other resources of biomedical relevance available from Stanford University.">SearchWorks (<i>biomedical subset</i>)
                 </span>
             </xsl:when>
             <xsl:when test="$name = 'bib'">
-                <span class="yui3-tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span>
+                <span class="tooltip-trigger" title="The journals, books and other resources uniquely available from Lane Medical Library.">Lane Catalog</span>
             </xsl:when>
             <xsl:when test="$name = 'redivis'">
-                <span class="yui3-tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span>
+                <span class="tooltip-trigger" title="Curated datasets provided by Stanford Center for Population Health Sciences hosted on Redivis.">Redivis - PHS</span>
             </xsl:when>
             <xsl:when test="$name = 'sfx'">Lane Knowledge Base</xsl:when>
             <xsl:when test="$name = 'web'">Lane Web Site</xsl:when>
             <xsl:when test="$name = 'class'">Lane Classes</xsl:when>
             <xsl:when test="$name = 'laneblog'">Lane Blog</xsl:when>
             <xsl:when test="$name = 'dnlm'">
-                <span class="yui3-tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span>
+                <span class="tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$name" />
