@@ -26,10 +26,10 @@
          * @method bindUI
          */
         bindUI() {
-            this.bookmarks.first("addSync", (e) => this._bookmarkAdded(e));
-            this.bookmarks.on("moveSync", (e) => this._bookmarkMoved(e));
-            this.bookmarks.on("removeSync", (e) => this._bookmarksRemoved(e));
-            this.bookmarks.on("updateSync", (e) => this._bookmarkUpdated(e));
+            this.bookmarks.after("addSync", (e) => this._bookmarkAdded(e));
+            this.bookmarks.after("moveSync", (e) => this._bookmarkMoved(e));
+            this.bookmarks.after("removeSync", (e) => this._bookmarksRemoved(e));
+            this.bookmarks.after("updateSync", (e) => this._bookmarkUpdated(e));
         }
 
         /**

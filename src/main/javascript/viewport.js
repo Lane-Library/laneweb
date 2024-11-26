@@ -34,7 +34,5 @@
         prefix: "viewport"
     });
 
-    viewport.addTarget(L);
-
     viewport.fire("init", { viewport: viewport });
 })();

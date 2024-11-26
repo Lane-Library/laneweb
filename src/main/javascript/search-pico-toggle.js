@@ -68,7 +68,7 @@ if (document.querySelector(".pico-toggle")) {
                     }
                 },
                 tabChange: function (event) {
-                    if (event.newVal === "clinical-all") {
+                    if (event.newVal.source === "clinical-all") {
                         view.activate();
                     } else {
                         view.deactivate();
@@ -88,7 +88,6 @@ if (document.querySelector(".pico-toggle")) {
             L.addEventTarget(controller, {
                 prefix: "picoToggle"
             });
-            controller.addTarget(L);
 
         })(picoView);
 

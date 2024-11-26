@@ -18,7 +18,6 @@
             this.editing = false;
             this.bindUI();
             this.syncUI();
-
         }
 
 
@@ -34,10 +33,10 @@
             buttons.forEach(button => {
                 button.addEventListener("click", (event) => this._handleButtonClick(event));
             });
-            bookmarks.on("removeSync", (e) => this._handleBookmarksRemove(e));
-            bookmarks.on("addSync", (e) => this._handleBookmarkAdd(e));
-            bookmarks.on("updateSync", (e) => this._handleBookmarkUpdate(e));
-            bookmarks.on("moveSync", (e) => this._handleBookmarkMove(e));
+            bookmarks.after("removeSync", (e) => this._handleBookmarksRemove(e));
+            bookmarks.after("addSync", (e) => this._handleBookmarkAdd(e));
+            bookmarks.after("updateSync", (e) => this._handleBookmarkUpdate(e));
+            bookmarks.after("moveSync", (e) => this._handleBookmarkMove(e));
         }
 
         /**
@@ -91,7 +90,7 @@
                 editor = new BookmarkEditor({ srcNode: item, position: 0 });
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
                 editor.on("dragOver", (e) => this._handleDragOver(e));
-                editor.on("dragStart", (e) => this._handleDragStart(e));
+                editor.after("dragStart", (e) => this._handleDragStart(e));
                 editor.on("drag", (e) => this._handleDrag(e));
                 editor.on("dragEnd", (e) => this._handleDragEnd(e));
                 editors.unshift(editor);

@@ -9,7 +9,7 @@
             L.addEventTarget(this, {
                 prefix: 'bookmark'
             });
-            this.first("valueChange", (e) => this._valueChange(e));
+            this.on("valueChange", (e) => this._valueChange(e));
             this.setValues(label, url);
         };
 

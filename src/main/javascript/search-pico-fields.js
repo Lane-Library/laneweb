@@ -56,6 +56,6 @@
     L.on("searchDropdown:change", controller.tabChange);
     L.on("picoToggle:change", controller.toggleChange);
 
-    controller.addTarget(L);
+
 
 })();

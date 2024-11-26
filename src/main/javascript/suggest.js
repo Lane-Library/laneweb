@@ -29,7 +29,6 @@
                 this._destroy();
             });
             this._input.addEventListener('input', (event) => this._displaySuggestions(event));
-            document.addEventListener("click", (event) => this._destroyOnClick(event));
         }
 
 
@@ -73,10 +72,11 @@
             });
             this._input.addEventListener('keydown', (event) => this._handleKeysDownChange(event));
             this._input.addEventListener('keyup', (event) => this._handleKeysUpChange(event));
+            document.addEventListener("click", (event) => this._destroyOnClick(event));
         }
 
         _destroy() {
-            if (this._ac.length === 0) {
+            if (this._ac.length !== 0) {
                 this._ac.forEach(item => {
                     item.removeEventListener('click', (event) => this._handleMouseClickItemChange(event));
                     item.removeEventListener('mouseenter', (event) => this._handleMouseEnterItemChange(event));
@@ -84,8 +84,9 @@
                 });
                 this._input.removeEventListener('keydown', (event) => this._handleKeysDownChange(event));
                 this._input.removeEventListener('keyup', (event) => this._handleKeysUpChange(event));
+                document.removeEventListener("click", (event) => this._destroyOnClick(event));
                 this._ac = [];
-                document.querySelectorAll('.aclist-list').forEach(item => item.remove());
+                document.querySelectorAll('.aclist-content').forEach(item => item.remove());
                 this.selectedItem = null;
             }
         }
@@ -94,7 +95,6 @@
         _destroyOnClick(event) {
             if (!event.target.classList.contains('aclist-item')) {
                 this._destroy();
-                event.stopPropagation();
             }
         }
 

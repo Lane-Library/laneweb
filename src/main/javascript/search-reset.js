@@ -55,7 +55,6 @@
 
     L.addEventTarget(view);
 
-    controller.addTarget(L);
 
     L.on("search:queryChange", controller.change);
 

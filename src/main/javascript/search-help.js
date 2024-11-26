@@ -18,8 +18,8 @@
 
             return {
                 change: function (event) {
-                    let help = event.option.help;
-                    view.update(help);
+                    let newVal = event.newVal;
+                    view.update(newVal[newVal.source].help);
                 }
             };
 

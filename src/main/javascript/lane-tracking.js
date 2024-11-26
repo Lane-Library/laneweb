@@ -327,8 +327,6 @@
         prefix: "tracker"
     });
 
-    Tracker.addTarget(L);
-
     document.querySelectorAll(".searchFacet a, *[rel^='popup local']").forEach(function (node) {
         node.isTrackableAsPageView = true;
     });

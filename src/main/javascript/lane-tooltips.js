@@ -311,7 +311,7 @@
             node.addEventListener("mouseleave", this._onNodeMouseLeave.bind(this));
 
             title = node.getAttribute("title");
-            if (title != '') {
+            if (title && title != '') {
                 node.setAttribute("title", "");
             }
             currTrigger.mouseX = x;

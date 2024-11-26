@@ -4,8 +4,18 @@ if (document.querySelector(".search-form")) {
 
         "use strict";
 
-        let inputNode = document.querySelector(".search-form input[name=q]"),
+        let PLACEHOLDER = "placeholder", SEARCH_DROPDOWN = 'main-search',
 
+            inputNode = document.querySelector(".search-form input[name=q]"),
+            dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
+
+            model = function (def, current) {
+                return {
+                    def: def,
+                    current: current
+                };
+            }(inputNode.dataset[PLACEHOLDER],
+                dropdown.options[dropdown.selectedIndex].dataset.placeholder),
 
             view = function () {
 
@@ -20,14 +30,20 @@ if (document.querySelector(".search-form")) {
             controller = function () {
 
                 return {
+                    activeChange: function (event) {
+                        view.setPlaceholder(event.active ? model.current : model.def);
+                    },
+
                     tabChange: function (event) {
-                        let placeholder = event.option.placeholder;
-                        view.setPlaceholder(placeholder);
+                        let newVal = event.newVal;
+                        model.current = newVal[newVal.source].placeholder;
+                        view.setPlaceholder(model.current);
                     }
                 };
             }();
 
         L.on("searchDropdown:change", controller.tabChange);
+        L.on("search:activeChange", controller.activeChange);
 
 
     })();

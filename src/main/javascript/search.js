@@ -46,9 +46,6 @@ if (document.querySelector(".search-form")) {
                 prefix: "search"
             });
 
-
-            m.addTarget(L);
-
             return m;
 
         }(document.querySelector(".search-form input[name=q]").value,
@@ -130,7 +127,7 @@ if (document.querySelector(".search-form")) {
                     view.reset();
                 },
                 searchDropdownChange: function (event) {
-                    model.setSource(event.newVal);
+                    model.setSource(event.newVal.source);
                     model.search();
                 },
                 queryChange: function (event) {

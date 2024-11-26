@@ -15,16 +15,16 @@
             }
             if (bookmarks) {
                 for (i = 0; i < bookmarks.length; i++) {
-                    bookmarks[i].on("valueChange", (e) => this._handleValueChange(e));
+                    bookmarks[i].after("valueChange", (e) => this._handleValueChange(e));
                     this._bookmarks.push(bookmarks[i]);
                 }
             }
+
 
             //Add EventTarget attributes to the Bookmarks prototype
             L.addEventTarget(this, {
                 prefix: 'bookmarks'
             });
-
 
             /**
              * @event add
@@ -36,7 +36,7 @@
              * @event addSync
              * @description fired after an add is successfully synced with the server
              */
-            this.first("addSync", (e) => this._handleAddSync(e));
+            this.on("addSync", (e) => this._handleAddSync(e));
 
             /**
              * @event move
@@ -68,11 +68,7 @@
              */
             this.on("update", (e) => this._defUpdateFn(e));
 
-            /**
-             * @event updateSync
-             * @description fired when an update is successfully synced with the server
-             */
-            // this.on("updateSync", { preventable: false });
+
         }
 
 
@@ -196,6 +192,7 @@
                 .catch(() => {
                     this._handleSyncFailure("add");
                 });
+
         }
 
         /**
@@ -221,6 +218,7 @@
                     }
                     this.fire("moveSync", { success: true, to: event.to, from: event.from });
                 })
+
                 .catch(() => {
                     this._handleSyncFailure("move");
                 });
@@ -274,8 +272,12 @@
                     }
                     this.fire("updateSync", { success: true, position: event.position });
                 })
-                .catch(() => {
+                .catch((error) => {
+                    console.error('An error occurred:', error.message);
+                    console.error('Stack trace:', error.stack);
                     this._handleSyncFailure("update");
+
+
                 });
         }
 
@@ -300,7 +302,7 @@
          * @param event {CustomEvent}
          */
         _handleAddSync(event) {
-            event.bookmark.on("valueChange", (e) => this._handleValueChange(e));
+            event.bookmark.after("valueChange", (e) => this._handleValueChange(e));
             this._bookmarks.unshift(event.bookmark);
             L.fire("tracker:trackableEvent", {
                 category: "lane:bookmarkAdd",
@@ -341,6 +343,7 @@
         }
 
     }
+
 
 
     //make the Bookmarks constructor globally accessible

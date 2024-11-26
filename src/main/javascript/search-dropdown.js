@@ -35,8 +35,7 @@ if (document.querySelector(".search-form")) {
 						dropdown_label.innerHTML = label;
 					},
 					click: function () {
-						let selectedValue = dropdown[dropdown.selectedIndex].value;
-						view.fire(CHANGE, { source: selectedValue });
+						view.fire(CHANGE, dropdown[dropdown.selectedIndex].value);
 					}
 				}
 				dropdown.addEventListener(CHANGE, v.click);
@@ -47,18 +46,19 @@ if (document.querySelector(".search-form")) {
 			controller = function () {
 
 				return {
-					update: function (event) {
-						let prop,
-							previousVal = model.source,
-							text = model[event.source].text;
-
-						view.change(text);
+					update: function (source) {
+						let prop, newVal = {};
+						for (prop in model) {
+							newVal[prop] = model[prop];
+						}
+						newVal.source = source;
+						view.change(newVal[source].text);
 						L.fire("tracker:trackableEvent", {
 							category: "lane:searchDropdownSelection",
-							action: event.source,
-							label: "from " + previousVal + " to " + event.source
+							action: source,
+							label: "from " + model.source + " to " + source
 						});
-						controller.fire(CHANGE, { newVal: event.source, option: model[event.source] });
+						controller.fire(CHANGE, { newVal: newVal, oldVal: model });
 					}
 				};
 
@@ -70,7 +70,6 @@ if (document.querySelector(".search-form")) {
 			prefix: "searchDropdown"
 		});
 
-		controller.addTarget(L);
 		view.on(CHANGE, controller.update)
 
 

@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
 	"use strict";
 
@@ -11,7 +11,7 @@
 			padding = 24, imagesLoaded = false,
 
 
-			model = function(slides) {
+			model = function (slides) {
 
 				let m = {
 					slides: slides,
@@ -22,27 +22,27 @@
 
 			}(document.querySelectorAll(".slide")),
 
-			view = function() {
+			view = function () {
 				previousButton.className = "disable";
 				return {
-					loadImages: function(viewport) {
+					loadImages: function (viewport) {
 						//This is mostly to not load the image in mobile view
 						if (viewport.nearView(container, 2) && !imagesLoaded) {
-							model.slides.forEach(function(div) {
+							model.slides.forEach(function (div) {
 								let img = div.querySelector("img");
 								img.src = img.dataset.src;
 							})
-                            imagesLoaded = true;
+							imagesLoaded = true;
 						}
 					}
 					,
-					showSlide: function() {
+					showSlide: function () {
 						model.slides[model.index].className = "slide";
 					},
-					hideSlide: function() {
+					hideSlide: function () {
 						model.slides[model.index].className = "slide desactive-next";
 					},
-					updateButton: function() {
+					updateButton: function () {
 						if (model.index + model.imageDisplayedNumber >= model.slides.length) {
 							nextButton.className = "disable";
 						} else {
@@ -57,65 +57,69 @@
 				}
 			}(),
 
-			controller = function() {
+			controller = function () {
 				return {
-					next: function() {
+					next: function () {
 						for (let i = model.imageDisplayedNumber; i > 0 && model.index > 0; i--) {
 							model.index--;
 							view.showSlide();
 						}
 						view.updateButton();
 					},
-					previous: function() {
+					previous: function () {
 						for (let i = 0; i < model.imageDisplayedNumber && model.index + model.imageDisplayedNumber < model.slides.length; i++) {
 							view.hideSlide();
 							model.index++;
 						}
 						view.updateButton();
 					},
-					calculateImageDisplayed: function() {
+					calculateImageDisplayed: function () {
 						let imageDiv = model.slides[model.slides.length - 1],
 							t = parseFloat(container.offsetWidth + padding) / (parseFloat(imageDiv.offsetWidth + padding));
-						model.imageDisplayedNumber = parseInt(t);						
+						model.imageDisplayedNumber = parseInt(t);
 					}
 				}
 			}();
 
 
-		L.on(["viewport:init","viewport:scrolled"], function(event){
+		L.on("viewport:init", function (event) {
+			view.loadImages(event.viewport);
+		});
+		L.on("viewport:scrolled", function (event) {
 			view.loadImages(event.viewport);
 		});
 
-		window.addEventListener("load", function() {
+
+		window.addEventListener("load", function () {
 			view.updateButton();
 			controller.calculateImageDisplayed();
 		}, false);
 
-		window.addEventListener("resize", function() {
+		window.addEventListener("resize", function () {
 			controller.calculateImageDisplayed();
 		}, false);
 
-		window.addEventListener("orientationchange", function() {
+		window.addEventListener("orientationchange", function () {
 			controller.calculateImageDisplayed();
 		}, false);
 
 		nextButton.addEventListener(
-			"click", function(e) {
+			"click", function (e) {
 				controller.previous();
 			}, false);
 
 		previousButton.addEventListener(
-			"click", function(e) {
+			"click", function (e) {
 				controller.next();
 			}, false);
 
-	
 
 
- 
-  
 
-}
+
+
+
+	}
 
 
 
