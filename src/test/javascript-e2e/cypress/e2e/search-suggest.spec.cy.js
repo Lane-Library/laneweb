@@ -27,7 +27,7 @@ describe('Suggest', () => {
     })
 
     it('suggestion should not not found', () => {
-        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest-not-found.json' }).as('suggestNoMatch');
+        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest/suggest-not-found.json' }).as('suggestNoMatch');
         cy.get('@input').type('notFoundtest');
         cy.wait('@suggestNoMatch');
         cy.get('.aclist-item').should('not.exist');
@@ -35,7 +35,7 @@ describe('Suggest', () => {
 
     //click on the suggest and check the input value
     it('click on suggestion', () => {
-        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest.json' }).as('suggest10Match');
+        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest/suggest.json' }).as('suggest10Match');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AsuggestSelect*').as('gaCollect');
         cy.get('@input').type('skin');
         cy.wait('@suggest10Match');

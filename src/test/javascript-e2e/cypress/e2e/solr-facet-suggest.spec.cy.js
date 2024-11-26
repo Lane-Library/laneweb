@@ -25,7 +25,7 @@ describe('Suggest', () => {
     })
 
     it('suggestion should not exist after typing an unknown word', () => {
-        cy.intercept('/apps/solr/facet/suggest*', { fixture: 'solr-suggest-not-found.json' }).as('suggestNoMatch');
+        cy.intercept('/apps/solr/facet/suggest*', { fixture: 'suggest/solr-suggest-not-found.json' }).as('suggestNoMatch');
         cy.get('@input').type('inconnu');
         cy.wait('@suggestNoMatch');
         cy.get('.aclist-item').first().should('have.text', 'No match found');
