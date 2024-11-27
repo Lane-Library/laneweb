@@ -49,7 +49,6 @@
         "shc-portal.js",
         "description-toggle.js",
         "shibboleth-sfx.js",
-        "youtube.js",
         "back-to-top.js",
         "solr-facets.js",
         "solr-pagination.js",
