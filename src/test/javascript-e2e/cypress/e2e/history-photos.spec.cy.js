@@ -7,9 +7,16 @@
 //  another server request is made after 15 seconds (untested)
 describe('History Photos', () => {
 
+    beforeEach(() => {
+        cy.intercept('GET', 'https://purl.stanford.edu/*', {
+            fixture: 'history/history.jpg'
+        })
+    });
+
+
     it('should show embedded images after images load from server', () => {
         cy.intercept('GET', '/apps/getHistoryPhotoList', {
-            fixture: 'history-photos.json'
+            fixture: 'history/history-photos.json'
         }).as('getHistoryPhotos');
         cy.visit('/med-history/index.html');
         cy.get('.history-photos a').should('have.length', 12);
@@ -29,7 +36,7 @@ describe('History Photos', () => {
 
     it('after 15s, should load images and update links', () => {
         cy.intercept('GET', '/apps/getHistoryPhotoList', {
-            fixture: 'history-photos.json'
+            fixture: 'history/history-photos.json'
         }).as('getHistoryPhotos');
         cy.visit('/med-history/index.html');
         cy.wait('@getHistoryPhotos').then((interception) => {
