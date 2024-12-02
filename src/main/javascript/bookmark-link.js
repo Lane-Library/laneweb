@@ -42,32 +42,14 @@
              * @method initializer
              */
             initializer() {
-                const ulContent = document.querySelector("ul.content"),
-                    sectionContent = document.querySelector("section.content");
-                if (ulContent) {
-                    ulContent.addEventListener("mouseover", function (event) {
-                        if (event.target.matches("a")) {
-                            this._handleTargetMouseover(event);
-                        }
-                    }.bind(this));
-                    ulContent.addEventListener("mouseout", function (event) {
-                        if (event.target.matches("a")) {
-                            this._handleTargetMouseout(event);
-                        }
-                    }.bind(this));
-                }
-                if (sectionContent) {
-                    sectionContent.addEventListener("mouseover", function (event) {
-                        if (event.target.matches("a")) {
-                            this._handleTargetMouseover(event);
-                        }
-                    }.bind(this));
-                    sectionContent.addEventListener("mouseout", function (event) {
-                        if (event.target.matches("a")) {
-                            this._handleTargetMouseout(event);
-                        }
-                    }.bind(this));
-                }
+                const links = document.querySelectorAll("section a");
+                links.forEach(link => link.addEventListener("mouseover", function (event) {
+                    this._handleTargetMouseover(event);
+                }.bind(this)));
+                links.forEach(link => link.addEventListener("mouseout", function (event) {
+                    this._handleTargetMouseout(event);
+                }.bind(this)));
+
                 this.on("statusChange", this._handleStatusChange);
                 let bookmarks = this.bookmarks;
                 if (bookmarks) {
