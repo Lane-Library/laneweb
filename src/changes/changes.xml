@@ -9,6 +9,9 @@
             <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11394" type="fix"> 
                 laneweb/bookmarks outage 2024-11-21
             </action>
+            <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11392" type="update"> 
+                Remove youtube thumbnail functionality
+            </action>
        </release> 
         <release date="2024-11-18" version="3.13.16" description="bug fix and update release">
             <action date="2024-11-15" dev="alainb" issue="LANEWEB-11390" type="fix"> 
