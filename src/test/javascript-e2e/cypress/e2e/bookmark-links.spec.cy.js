@@ -25,7 +25,7 @@ describe('Bookmark Links', () => {
         cy.get('@div-bookmarking').trigger('mouseleave');
         cy.get('.bookmark-link').should('be.visible');
         cy.get('.bookmark-link').trigger('mouseover');
-        // cy.get('.bookmark-link').should('have.class', 'active');
+        cy.get('.bookmark-link').should('have.class', 'active');
     })
 
     it('mouse over #link-bookmarking  link icon to be active', () => {
@@ -33,7 +33,7 @@ describe('Bookmark Links', () => {
         cy.get('@link-bookmarking').trigger('mouseleave');
         cy.get('.bookmark-link').should('be.visible');
         cy.get('.bookmark-link').trigger('mouseover');
-        // cy.get('.bookmark-link').should('have.class', 'active');
+        cy.get('.bookmark-link').should('have.class', 'active');
     })
 
     it('test leave icon but back to the link', () => {
@@ -52,22 +52,35 @@ describe('Bookmark Links', () => {
         cy.get('.bookmark-link').trigger('mouseover').as('bookmarkLink');
         cy.get('@bookmarkLink').trigger('mouseleave');
         cy.get('#not-bookmarking').trigger('mouseover');
-        // cy.wait(300);
-        // cy.get('@bookmarkLink').should('be.not.exist');
+        cy.get('@bookmarkLink').should('be.not.exist');
     })
 
-    it('test click on icon', () => {
+    it('test click on icon and check bookmarkWidget', () => {
         cy.intercept(
             'POST',
             '/bookmarks',
             {
                 statusCode: 200
             }).as('addBookmark');
-        cy.get('@div-bookmarking').trigger('mouseover');
-        cy.get('@div-bookmarking').trigger('mouseleave');
+        cy.get('#bookmarks li').should('have.length', 7);
+        cy.get('@link-bookmarking').trigger('mouseover');
+        cy.get('@link-bookmarking').trigger('mouseleave');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
-        // cy.wait('@addBookmark');
+        cy.wait('@addBookmark');
+        cy.get('#bookmarks li').should('have.length', 8);
+        cy.get('#bookmarks li').first().should('contain', 'Bookmarking');
+    })
+
+    it('test click bookmark login', () => {
+        cy.visit('/index.html');
+        cy.get('#pubmed').trigger('mouseover');
+        cy.get('#pubmed').trigger('mouseleave');
+        cy.get('.bookmark-link').trigger('mouseover');
+        cy.get('.bookmark-link').click();
+        cy.on('window:alert', (str) => {
+            expect(str).to.equal('You must log in in order to create bookmarks.')
+        })
     })
 
 });
