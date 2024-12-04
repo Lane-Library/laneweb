@@ -82,21 +82,21 @@ describe('Bookmark editor', () => {
                 statusCode: 200,
                 body: {
                     "label": "DynaMed_test",
-                    "url": "http://search.ebscohost.com"
+                    "url": "http://google.com"
                 }
             }).as('updateBookmark');
         cy.get('@editorButton').click();
         cy.get('@bookmarkLabel').clear();
         cy.get('@bookmarkLabel').type('DynaMed_test');
         cy.get('@bookmarkUrl').clear();
-        cy.get('@bookmarkUrl').type('http://search.ebscohost.com');
+        cy.get('@bookmarkUrl').type('http://google.com');
         cy.get('@saveButton').click();
         cy.wait('@updateBookmark');
         cy.get('#bookmarks-editor ul li:nth(3) input[name=label]').should('have.value', 'DynaMed_test');
-        cy.get('#bookmarks-editor ul li:nth(3) input[name=url]').should('have.value', 'http://search.ebscohost.com');
+        cy.get('#bookmarks-editor ul li:nth(3) input[name=url]').should('have.value', 'http://google.com');
         //check bookmark widget
-        cy.get('#bookmarks li a:nth(3)').should('have.attr', 'href', 'http://search.ebscohost.com');
-        cy.get('#bookmarks li a:nth(3)').should('contain', 'DynaMed_test');
+        cy.get('#bookmarks li a:nth(3)').should('have.attr', 'href', 'http://google.com');
+        cy.get('#bookmarks li a:nth(3)').contains('DynaMed_test');
     })
 
     it('test delete bookmark', () => {
@@ -132,6 +132,48 @@ describe('Bookmark editor', () => {
         cy.on('window:alert', (str) => {
             expect(str).to.equal(`Sorry, delete bookmark failed. Please reload the page and try again later.`)
         })
+    })
+
+    it('test a fail Move bookmark', () => {
+        cy.intercept(
+            'POST',
+            'bookmarks/move',
+            {
+                statusCode: 404,
+            }).as('moveBookmark');
+        cy.on('window:alert', (str) => {
+            expect(str).to.equal(`Sorry, move bookmark failed. Please reload the page and try again later.`)
+        })
+    })
+
+    it('test move bookmark', () => {
+        cy.intercept(
+            'POST',
+            'bookmarks/move',
+            {
+                statusCode: 200,
+            }).as('moveBookmark');
+        //move bookmark to the bottom
+        cy.get('#bookmarks-editor ul li:nth(0) a').contains('Sanford Guide');
+        cy.get('#bookmarks-editor ul li:nth(0)').trigger('dragstart');
+        cy.get('#bookmarks-editor ul li:nth(6)').trigger('dragover');
+        cy.get('#bookmarks-editor ul li:nth(6)').trigger('dragend');
+        cy.wait('@moveBookmark');
+        cy.get('#bookmarks-editor ul li:nth(6) a').contains('Sanford Guide');
+
+        //move  bookmark back to the top
+        cy.get('#bookmarks-editor ul li:nth(6)').trigger('dragstart');
+        cy.get('#bookmarks-editor ul li:nth(0)').trigger('dragover');
+        cy.get('#bookmarks-editor ul li:nth(0)').trigger('dragend');
+        cy.wait('@moveBookmark');
+        cy.get('#bookmarks-editor ul li:nth(0) a').contains('Sanford Guide');
+
+        //move  bookmark back to the tird position
+        cy.get('#bookmarks-editor ul li:nth(0)').trigger('dragstart');
+        cy.get('#bookmarks-editor ul li:nth(2)').trigger('dragover');
+        cy.get('#bookmarks-editor ul li:nth(2)').trigger('dragend');
+        cy.wait('@moveBookmark');
+        cy.get('#bookmarks-editor ul li:nth(2) a').contains('Sanford Guide');
     })
 
 });
