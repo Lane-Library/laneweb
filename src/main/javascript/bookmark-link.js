@@ -240,7 +240,11 @@
                             this._node.addEventListener("click", (e) => this._handleClick(e));
                             this._node.addEventListener("mouseover", this._handleBookmarkMouseover.bind(this));
                         }
-                        target.insertAdjacentElement("afterend", this._node);
+                        if (target.closest(".ellipsis")) {
+                            target.insertAdjacentElement("beforebegin", this._node);
+                        } else {
+                            target.insertAdjacentElement("afterend", this._node);
+                        }
                         break;
                     //ACTIVE: enabled (mouseover)
                     case ACTIVE:
