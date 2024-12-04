@@ -140,6 +140,7 @@
                 if (newlabel !== bookmark.getLabel() || newurl !== bookmark.getUrl()) {
                     bookmark.setValues(newlabel, newurl);
                     this.srcNode.querySelector("a").textContent = newlabel;
+                    this.srcNode.querySelector("a").href = newurl;
                 }
             } else {
                 bookmark = new Bookmark(newlabel, newurl);
