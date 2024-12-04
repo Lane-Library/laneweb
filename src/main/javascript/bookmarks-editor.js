@@ -53,7 +53,6 @@
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
                 editor.on("dragOver", (e) => this._handleDragOver(e));
                 editor.on("dragStart", (e) => this._handleDragStart(e));
-                editor.on("drag", (e) => this._handleDrag(e));
                 editor.on("dragEnd", (e) => this._handleDragEnd(e));
                 editors.push(editor);
             }
@@ -91,7 +90,6 @@
                 editor.on("destroy", (e) => this._handleDestroyEditor(e));
                 editor.on("dragOver", (e) => this._handleDragOver(e));
                 editor.after("dragStart", (e) => this._handleDragStart(e));
-                editor.on("drag", (e) => this._handleDrag(e));
                 editor.on("dragEnd", (e) => this._handleDragEnd(e));
                 editors.unshift(editor);
                 editor.setEditing(true);
@@ -196,11 +194,6 @@
             this._syncPosition();
         }
 
-
-        _handleDrag(event) {
-            let draggable = event.target;
-
-        }
 
 
         _handleDragStart(e) {
