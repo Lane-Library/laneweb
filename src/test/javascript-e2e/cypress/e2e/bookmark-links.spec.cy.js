@@ -22,7 +22,7 @@ describe('Bookmark Links', () => {
 
     it('mouse over #div-bookmarking  link icon to be active', () => {
         cy.get('@div-bookmarking').trigger('mouseover');
-        cy.get('@div-bookmarking').trigger('mouseleave');
+        cy.get('@div-bookmarking').trigger('mouseout');
         cy.get('.bookmark-link').should('be.visible');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').should('have.class', 'active');
@@ -30,7 +30,7 @@ describe('Bookmark Links', () => {
 
     it('mouse over #link-bookmarking  link icon to be active', () => {
         cy.get('@link-bookmarking').trigger('mouseover');
-        cy.get('@link-bookmarking').trigger('mouseleave');
+        cy.get('@link-bookmarking').trigger('mouseout');
         cy.get('.bookmark-link').should('be.visible');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').should('have.class', 'active');
@@ -38,9 +38,9 @@ describe('Bookmark Links', () => {
 
     it('test leave icon but back to the link', () => {
         cy.get('@div-bookmarking').trigger('mouseover');
-        cy.get('@div-bookmarking').trigger('mouseleave');
+        cy.get('@div-bookmarking').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover').as('bookmarkLink');
-        cy.get('@bookmarkLink').trigger('mouseleave');
+        cy.get('@bookmarkLink').trigger('mouseout');
         cy.get('@div-bookmarking').trigger('mouseover');
         cy.get('.bookmark-link').should('be.visible');
         cy.get('.bookmark-link.active').should('be.not.exist');
@@ -48,9 +48,9 @@ describe('Bookmark Links', () => {
 
     it('test leave icon and after leaving  link ', () => {
         cy.get('@link-bookmarking').trigger('mouseover');
-        cy.get('@link-bookmarking').trigger('mouseleave');
+        cy.get('@link-bookmarking').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover').as('bookmarkLink');
-        cy.get('@bookmarkLink').trigger('mouseleave');
+        cy.get('@bookmarkLink').trigger('mouseout');
         cy.get('#not-bookmarking').trigger('mouseover');
         cy.get('@bookmarkLink').should('be.not.exist');
     })
@@ -64,7 +64,7 @@ describe('Bookmark Links', () => {
             }).as('addBookmark');
         cy.get('#bookmarks li').should('have.length', 7);
         cy.get('@link-bookmarking').trigger('mouseover');
-        cy.get('@link-bookmarking').trigger('mouseleave');
+        cy.get('@link-bookmarking').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
         cy.get('.favorites .fa.fa-bookmark').should('have.class', 'shake');
@@ -83,7 +83,7 @@ describe('Bookmark Links', () => {
                 statusCode: 404
             }).as('addBookmark');
         cy.get('#pubmed').trigger('mouseover');
-        cy.get('#pubmed').trigger('mouseleave');
+        cy.get('#pubmed').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
         cy.wait('@addBookmark');
@@ -96,7 +96,7 @@ describe('Bookmark Links', () => {
     it('test add bookmark login', () => {
         cy.visit('/index.html');
         cy.get('#pubmed').trigger('mouseover');
-        cy.get('#pubmed').trigger('mouseleave');
+        cy.get('#pubmed').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
         cy.get('.bookmark-login').should('be.visible');

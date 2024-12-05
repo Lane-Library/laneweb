@@ -236,7 +236,7 @@
                     case READY:
                         if (!this._node) {
                             this._node = this.node;
-                            this._node.addEventListener("mouseleave", (e) => this._handleBookmarkMouseout(e));
+                            this._node.addEventListener("mouseout", (e) => this._handleBookmarkMouseout(e));
                             this._node.addEventListener("click", (e) => this._handleClick(e));
                             this._node.addEventListener("mouseover", this._handleBookmarkMouseover.bind(this));
                         }
