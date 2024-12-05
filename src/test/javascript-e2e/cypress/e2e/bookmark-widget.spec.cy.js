@@ -17,7 +17,7 @@ describe('Bookmark Widget', () => {
             }).as('addBookmark');
         cy.get('#bookmarks li').should('have.length', 7);
         cy.get('@long-bookmarking').trigger('mouseover');
-        cy.get('@long-bookmarking').trigger('mouseleave');
+        cy.get('@long-bookmarking').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
         cy.get('.favorites .fa.fa-bookmark').should('have.class', 'shake');
