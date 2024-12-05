@@ -71,6 +71,7 @@
         "menu.js",
         "navigation.js",
         "model.js",
+        "lightbox.js",
         "guides.js",
         "link-info.js",
         "lane-ie.js",

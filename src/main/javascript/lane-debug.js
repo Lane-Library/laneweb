@@ -15,6 +15,7 @@
         "util.js",
         "menu.js",
         "model.js",
+        "lightbox.js",
         "slideshow.js",
         "guides.js",
         "link-info.js",

@@ -1,21 +1,21 @@
 /*---------------lightbox positioning-------------------------------------------------------*/
-.yui3-lightbox {
-    position: absolute;
+.lightbox {
+    position: fixed;
     z-index: 4;
     margin-top: 13px;
 }
 
-.yui3-lightbox-hidden,
-.yui3-lightboxbg-hidden,
+.lightbox-hidden,
+.lightboxbg-hidden,
 .autoLightbox {
     visibility: hidden;
 }
 
-.yui3-lightbox-content {
+.lightbox-content {
     position: relative;
 }
 
-.yui3-lightboxbg {
+.lightboxbg {
     position: fixed;
     background-color: black;
     opacity: .75;

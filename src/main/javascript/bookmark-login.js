@@ -4,6 +4,7 @@
 
     let model = L.Model,
         lightbox = L.Lightbox,
+
         basePath = model.get(model.BASE_PATH),
 
         /**
@@ -36,9 +37,9 @@
                     .then(data => {
                         BookmarkLogin._handleSuccess(null, { responseText: data }, { queryString: queryString });
                     })
-                    .catch(error => {
-                        BookmarkLogin._handleFailure();
-                    });
+                // .catch(error => {
+                //     BookmarkLogin._handleFailure();
+                // });
             },
 
             /**
@@ -61,7 +62,7 @@
              * @param args {object} the arguments passed to L.io, in this case the query string
              */
             _handleSuccess: function (id, o, args) {
-                let queryString = args.queryString, yes, no;
+                let queryString = args.queryString, yes, no
                 lightbox.setContent(o.responseText);
                 yes = document.querySelector("#yes-bookmark-login");
                 no = document.querySelector("#no-bookmark-login");
