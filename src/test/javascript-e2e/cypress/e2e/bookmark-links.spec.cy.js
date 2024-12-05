@@ -71,7 +71,7 @@ describe('Bookmark Links', () => {
         cy.wait('@addBookmark');
         cy.get('.favorites .fa.fa-bookmark').should('not.have.class', 'shake');
         cy.get('#bookmarks li').should('have.length', 8);
-        cy.get('#bookmarks li').first().should('contain', 'Bookmarking');
+        cy.get('#bookmarks li').first().should('have.text', 'Bookmarking');
     })
 
     it('test a bookmark-login.html loading fail ', () => {
@@ -94,7 +94,7 @@ describe('Bookmark Links', () => {
 
 
     it('test add bookmark login', () => {
-        cy.visit('/index.html?debug=true');
+        cy.visit('/index.html');
         cy.get('#pubmed').trigger('mouseover');
         cy.get('#pubmed').trigger('mouseleave');
         cy.get('.bookmark-link').trigger('mouseover');
