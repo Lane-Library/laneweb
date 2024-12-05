@@ -37,9 +37,9 @@
                     .then(data => {
                         BookmarkLogin._handleSuccess(null, { responseText: data }, { queryString: queryString });
                     })
-                // .catch(error => {
-                //     BookmarkLogin._handleFailure();
-                // });
+                    .catch(error => {
+                        BookmarkLogin._handleFailure();
+                    });
             },
 
             /**
