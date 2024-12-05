@@ -67,20 +67,41 @@ describe('Bookmark Links', () => {
         cy.get('@link-bookmarking').trigger('mouseleave');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
+        cy.get('.favorites .fa.fa-bookmark').should('have.class', 'shake');
         cy.wait('@addBookmark');
+        cy.get('.favorites .fa.fa-bookmark').should('not.have.class', 'shake');
         cy.get('#bookmarks li').should('have.length', 8);
         cy.get('#bookmarks li').first().should('contain', 'Bookmarking');
     })
 
-    it('test click bookmark login', () => {
+    it('test a bookmark-login.html loading fail ', () => {
         cy.visit('/index.html');
+        cy.intercept(
+            'GET',
+            '/plain/bookmark-login.html',
+            {
+                statusCode: 404
+            }).as('addBookmark');
         cy.get('#pubmed').trigger('mouseover');
         cy.get('#pubmed').trigger('mouseleave');
         cy.get('.bookmark-link').trigger('mouseover');
         cy.get('.bookmark-link').click();
+        cy.wait('@addBookmark');
         cy.on('window:alert', (str) => {
             expect(str).to.equal('You must log in in order to create bookmarks.')
         })
+    })
+
+
+    it('test add bookmark login', () => {
+        cy.visit('/index.html?debug=true');
+        cy.get('#pubmed').trigger('mouseover');
+        cy.get('#pubmed').trigger('mouseleave');
+        cy.get('.bookmark-link').trigger('mouseover');
+        cy.get('.bookmark-link').click();
+        cy.get('.bookmark-login').should('be.visible');
+        cy.get('#yes-bookmark-login').should('attr', 'href')
+            .and('include', '/secure/addBookmark?&label=PubMed');
     })
 
 });
