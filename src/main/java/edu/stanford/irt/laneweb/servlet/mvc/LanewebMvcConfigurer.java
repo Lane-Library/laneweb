@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,8 +12,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -73,11 +72,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     HashMap<String, Object> getUrlMapping(final ResourceHttpRequestHandler staticRequestHandler) {
         HashMap<String, Object> handlerMap = new LinkedHashMap<>();
         handlerMap.put("/favicon.ico", staticRequestHandler);
-        handlerMap.put("/*", staticRequestHandler);
-        handlerMap.put("/*/*", staticRequestHandler);
-        handlerMap.put("/*/*/*", staticRequestHandler);
-        handlerMap.put("/*/*/*/*", staticRequestHandler);
-        handlerMap.put("/*/*/*/*/*", staticRequestHandler);
+        handlerMap.put("/**", staticRequestHandler);
         return handlerMap;
     }
 
@@ -109,8 +104,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     ResourceHttpRequestHandler staticRequestHandler(@Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase)
             throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new ClassPathResource("/"), new ClassPathResource("/static/"),
-                new UrlResource(liveBase.toURL())));
+        handler.setLocationValues(Arrays.asList("classpath:/","classpath:/static/", liveBase.toString()));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
