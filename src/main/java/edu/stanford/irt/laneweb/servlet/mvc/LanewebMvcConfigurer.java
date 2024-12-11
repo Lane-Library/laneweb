@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -59,8 +58,15 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));
     }
 
+    // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
+    // file and by Using AntPathMatcher as the path matching strategy to allow /**/*.html
+    @Override
+    public void configurePathMatch(final PathMatchConfigurer configurer) {
+        configurer.setPathMatcher(new AntPathMatcher());
+    }
+
     @Bean
-    SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(HashMap<String, Object> urlMapping) {
+    SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final HashMap<String, Object> urlMapping) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setUrlMap(urlMapping);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
@@ -69,23 +75,16 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
+    SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
+        return new SitemapHandlerExceptionResolver(sitemapController);
+    }
+
+    @Bean
     HashMap<String, Object> getUrlMapping(final ResourceHttpRequestHandler staticRequestHandler) {
         HashMap<String, Object> handlerMap = new LinkedHashMap<>();
         handlerMap.put("/favicon.ico", staticRequestHandler);
         handlerMap.put("/**", staticRequestHandler);
         return handlerMap;
-    }
-
-    // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
-    // file and by Using AntPathMatcher as the path matching strategy to allow /**/*.html
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.setPathMatcher(new AntPathMatcher());
-    }
-
-    @Bean
-    SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
-        return new SitemapHandlerExceptionResolver(sitemapController);
     }
 
     @Bean
@@ -104,7 +103,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     ResourceHttpRequestHandler staticRequestHandler(@Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase)
             throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocationValues(Arrays.asList("classpath:/","classpath:/static/", liveBase.toString()));
+        handler.setLocationValues(Arrays.asList("classpath:/", "classpath:/static/", liveBase.toString()));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;
