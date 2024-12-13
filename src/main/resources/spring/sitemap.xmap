@@ -19,9 +19,9 @@
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
-        <!-- javascript unit tests: -->
+        <!-- YUI javascript unit tests: -->
         <map:match pattern="resources/test/**.html" type="wildcard">
-            <map:generate type="html" src="classpath:/resources/test/{1}.html"/>
+            <map:generate type="html" src="classpath:/static/resources/test/{1}.html"/>
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
