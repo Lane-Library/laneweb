@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <title>Cypress TEST</title>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.min.css?${project.version}-${git.commit.id.abbrev}" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/header.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+
+
+        <section class="content">
+            <div class="centered">
+                <?laneweb content?>
+            </div>
+        </section>
+
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
+        <div class="search-indicator">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+        </div>
+        <script type="text/javascript" src="/resources/javascript/yui-3.18.1.js"></script>
+        <script type="text/javascript" id="model">//</script>
+        <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
+    </body>
+</html>

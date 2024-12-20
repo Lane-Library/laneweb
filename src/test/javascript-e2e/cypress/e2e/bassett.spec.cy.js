@@ -2,7 +2,7 @@ describe('Bassett', () => {
 
     it('displays and hides the tablet Bassett collection menu', () => {
         // default viewport is 1000px x 660px
-        cy.visit('/biomed-resources/bassett/index.html');
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
         cy.get('h2').as('collectionHome');
         cy.get('#abdomen a.see-all').as('abdomenSeeAll');
 
@@ -15,7 +15,7 @@ describe('Bassett', () => {
 
     it('displays and hides the Abdomen See All menu', () => {
         cy.viewport(1101, 750);
-        cy.visit('/biomed-resources/bassett/index.html');
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
 
         cy.get('#abdomen a.see-all').as('abdomenSeeAll');
 
@@ -31,7 +31,7 @@ describe('Bassett', () => {
 
     it('shows diagrams instead of images', () => {
         cy.viewport(1101, 750);
-        cy.visit('/biomed-resources/bassett/index.html');
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
 
         cy.get('#abdomen a.see-all').click();
 
@@ -56,7 +56,7 @@ describe('Bassett', () => {
 
     it('pagination form contains appropriate page data', () => {
         cy.viewport(1101, 750);
-        cy.visit('/biomed-resources/bassett/index.html');
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
 
         cy.get('#abdomen a.see-all').click();
 
@@ -76,7 +76,7 @@ describe('Bassett', () => {
 
     it('pagination form handles error values', () => {
         cy.viewport(1101, 750);
-        cy.visit('/biomed-resources/bassett/index.html');
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
 
         cy.get('#abdomen a.see-all').click();
 
@@ -105,7 +105,7 @@ describe('Bassett', () => {
 
     it('pagination form handles valid values', () => {
         cy.viewport(1101, 750);
-        cy.visit('/biomed-resources/bassett/index.html');
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
 
         cy.get('#abdomen a.see-all').click();
 

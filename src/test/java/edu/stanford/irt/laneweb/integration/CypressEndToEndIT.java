@@ -30,6 +30,8 @@ public class CypressEndToEndIT {
     @LocalServerPort
     private int port;
 
+    private static final String INSTRUMENTED_FILES_DIR = "target/test-classes/e2e/coverage";
+
     @Test
     public void runCypressTests() throws InterruptedException {
         Testcontainers.exposeHostPorts(this.port);
@@ -69,10 +71,13 @@ public class CypressEndToEndIT {
     private GenericContainer<?> createCypressContainer() {
         GenericContainer<?> result = new GenericContainer<>(DOCKER_IMAGE);
         result.withClasspathResourceMapping("e2e", "/e2e", BindMode.READ_WRITE);
+        result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage", BindMode.READ_WRITE);
+
         result.withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("bash", "-c",
                 "npm install && chmod a+wx -R node_modules && cypress run --headless"));
         result.setWorkingDirectory("/e2e");
         result.addEnv("CYPRESS_baseUrl", "http://host.testcontainers.internal:" + this.port);
+        result.addEnv("INSTRUMENTED_FILES_DIR", "/e2e/coverage");
         return result;
     }
 }

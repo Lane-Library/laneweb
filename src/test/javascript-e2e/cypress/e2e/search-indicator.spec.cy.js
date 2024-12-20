@@ -1,6 +1,6 @@
 describe('Lane Search Indicator Test Case', () => {
     beforeEach(() => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.get('.search-indicator').as('searchIndicator');
         cy.get('#main-search').as('searchDropdown');
     });

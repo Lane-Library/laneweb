@@ -1,6 +1,6 @@
 describe('Persistent Login Checkbox', () => {
     beforeEach(() => {
-        cy.visit('/discoveryLoginPage.html');
+        cy.visit('/cypress-test/discoveryLoginPage.html');
     });
 
     it('should set cookie when checkbox is checked', () => {

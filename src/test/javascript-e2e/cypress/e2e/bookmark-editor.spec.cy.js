@@ -2,7 +2,7 @@ describe('Bookmark editor', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 750);
-        cy.visit('/test/test-bookmarks.html?template=none');
+        cy.visit('/cypress-test/test/test-bookmarks.html');
         cy.get('#bookmarks-editor [value=add]').first().as('editorButton');
         cy.get('#bookmarks-editor .editContainer').first().as('editorContainer');
         cy.get('#bookmarks-editor input[name=label]').first().as('bookmarkLabel');
@@ -83,7 +83,9 @@ describe('Bookmark editor', () => {
                 body: { id: 8, label: 'Test bookmark', url: 'google.com' }
             }
         ).as('addBookmark');
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AbookmarkAdd*').as('gaCollect');
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AbookmarkAdd*',
+            { statusCode: 204 }
+        ).as('gaCollect');
         cy.get('#bookmarks-editor ul li').should('have.length', 7);
         cy.get('@editorButton').click();
         cy.get('@bookmarkLabel').type('Test bookmark');
@@ -93,6 +95,7 @@ describe('Bookmark editor', () => {
         cy.wait('@gaCollect').then((interception) => {
             expect(interception.request.url).to.include('en=lane%3AbookmarkAdd');
             expect(interception.request.url).to.include('ep.event_label=Test%20bookmark');
+
         });
         cy.get('#bookmarks-editor ul li').should('have.length', 8);
         cy.get('#bookmarks li').first().should('contain', 'Test bookmark');

@@ -1,7 +1,7 @@
 describe('Lane Tooltip Test Case', () => {
 
     beforeEach(() => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
 
         cy.get('.tooltip-trigger').first().as('tooltipTrigger');
         cy.get('@tooltipTrigger').invoke('attr', 'id').as('tooltipTriggerId');

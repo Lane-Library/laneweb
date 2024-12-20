@@ -1,6 +1,6 @@
 describe('Slideshow functionality', () => {
 	beforeEach(() => {
-		cy.visit('/index.html');
+		cy.visit('/cypress-test/index.html');
 	});
 
 	it('should load images when in viewport', () => {

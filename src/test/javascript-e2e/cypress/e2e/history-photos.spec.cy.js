@@ -8,6 +8,7 @@
 describe('History Photos', () => {
 
     beforeEach(() => {
+        cy.viewport(1101, 750);
         cy.intercept('GET', 'https://purl.stanford.edu/*', {
             fixture: 'history/history.jpg'
         })
@@ -19,6 +20,7 @@ describe('History Photos', () => {
             fixture: 'history/history-photos.json'
         }).as('getHistoryPhotos');
         cy.visit('/med-history/index.html');
+
         cy.get('.history-photos a').should('have.length', 12);
         cy.wait('@getHistoryPhotos');
         cy.get('.history-photos').should('have.css', 'opacity', '1');

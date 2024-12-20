@@ -2,7 +2,7 @@ describe('Search pico toogle', () => {
 
     beforeEach(() => {
         cy.viewport(1200, 1000);
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
     })
 
 

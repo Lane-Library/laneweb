@@ -2,7 +2,7 @@ describe('Suggest', () => {
 
     beforeEach(() => {
         cy.viewport(1200, 1000);
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
 
         // Parameters
         cy.get('.hero-unit input[name=q]').as('input');

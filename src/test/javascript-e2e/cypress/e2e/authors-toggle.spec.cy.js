@@ -1,6 +1,6 @@
 describe('Authors Toggle', () => {
     it('displays the authors toggle and shows/hides lots of authors accordingly', () => {
-        cy.visit('/search.html?q=18188003&source=all-all');
+        cy.visit('/cypress-test/search.html?q=18188003&source=all-all');
 
         cy.get('.authors-hide').as('hiddenAuthors');
         cy.get('.authorsTrigger').as('authorsTrigger');

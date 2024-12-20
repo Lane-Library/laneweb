@@ -9,7 +9,7 @@ describe('Permalink Toggle Test', () => {
             }
         });
 
-        cy.visit('/search.html?source=all-all&q=12&facets=recordType:%22bib%22');
+        cy.visit('/cypress-test/search.html?source=all-all&q=12&facets=recordType:%22bib%22');
 
         //hover over the more-detail-container container to make the permalink visible
         cy.get('.more-detail-container').trigger('mouseover');
