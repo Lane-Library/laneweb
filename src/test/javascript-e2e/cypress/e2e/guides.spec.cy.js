@@ -2,7 +2,7 @@ describe('Guide Menus', () => {
 
     beforeEach(() => {
         cy.viewport(2101, 3000);
-        cy.visit('/help/guides/index.html#event-guides');
+        cy.visit('/cypress-test/help/guides/index.html#event-guides');
 
         // Parameters
         cy.get('#event-guides a[href="#off"]').as('hideMenu');
@@ -54,7 +54,7 @@ describe('Guide Menus', () => {
     });
 
     it('test the guide menu whitout ash', () => {
-        cy.visit('/help/guides/index.html');
+        cy.visit('/cypress-test/help/guides/index.html');
 
         cy.get('#all-guides a[href="#off"]').as('hideMenu');
         cy.get('#all-guides a[href="#all-guides"]').as('showMenu');

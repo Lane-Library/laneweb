@@ -1,6 +1,6 @@
 describe('Lane Help Link Test Case', () => {
     beforeEach(() => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.get('.search-help a').as('searchHelp');
         cy.get('#main-search').as('searchDropdown');
     });

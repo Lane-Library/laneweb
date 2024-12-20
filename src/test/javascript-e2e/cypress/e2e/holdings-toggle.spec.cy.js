@@ -2,7 +2,7 @@ describe('Holdings Toggle', () => {
 
     it('should show/hide holdings info and report the clicks to GA', () => {
 
-        cy.visit('/search.html?q=12&source=all-all&facets=recordType:"bib"');
+        cy.visit('/cypress-test/search.html?q=12&source=all-all&facets=recordType:"bib"');
 
         // intercept the GA request and count the number of click events
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {

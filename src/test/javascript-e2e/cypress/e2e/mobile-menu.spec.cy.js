@@ -2,7 +2,7 @@ describe('Mobile Menu', () => {
 
     beforeEach(() => {
         cy.viewport(801, 1000);
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
 
         // Parameters
         cy.get('.fa-bars').as('hamburger');
@@ -80,7 +80,7 @@ describe('Mobile Menu', () => {
     })
 
     it('Test Blur effect on click on OFF icon and loaded with hash #navigation', () => {
-        cy.visit('/index.html#navigation');
+        cy.visit('/cypress-test/index.html#navigation');
         cy.get('@offButton').click();
         cy.get('@hamburger').click();
         cy.get('.content').should('have.class', 'blur');

@@ -30,7 +30,7 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
     "widget-position-constrain",
     "widget-stack",
     "widget-stdmod",
-    function(Y) {
+    function (Y) {
 
         "use strict";
 
@@ -105,16 +105,22 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             basePath = window.model["base-path"] || basePath;
         }
 
-        errorHandler = function(err) {
+        errorHandler = function (err) {
             if (err) {
                 console.log('Error loading JS: ' + err[0].error, 'error');
                 return;
             }
         };
 
+        let path = "/resources/javascript/";
+        //cypress test path is different from the normal path to the intrumented javascript files
+        if (window.location.pathname.startsWith('/cypress-test')) {
+            path = path.concat("instrumented/");
+        }
+
         //load each javascript file separately
         for (i = 0; i < laneJavascript.length; i++) {
-            Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], errorHandler);
+            Y.Get.js(basePath + path + laneJavascript[i], errorHandler);
         }
 
     });

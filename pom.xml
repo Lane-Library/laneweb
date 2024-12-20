@@ -35,7 +35,7 @@
         <sonar.exclusions>
             **/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>
-            ${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
+            ${project.build.directory}/test-classes/e2e/coverage/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
         <dependency>
@@ -329,6 +329,10 @@
                 <directory>src/test/javascript-e2e</directory>
                 <targetPath>e2e</targetPath>
             </testResource>
+            <testResource>
+                <directory>src/main/javascript</directory>
+                <targetPath>e2e/javascript</targetPath>
+            </testResource>            
         </testResources>
         <plugins>
             <plugin>
@@ -351,6 +355,28 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>run-javascript-tests</id>
+                        <phase>pre-integration-test</phase> 
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>npm</executable>
+                            <workingDirectory>${project.build.directory}/test-classes/e2e</workingDirectory>
+                            <arguments>
+                                <argument>run</argument>
+                                <argument>instrument</argument>
+                            </arguments>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -486,6 +512,7 @@
                     </execution>
                 </executions>
             </plugin>
+           
         </plugins>
     </build>
     <reporting>

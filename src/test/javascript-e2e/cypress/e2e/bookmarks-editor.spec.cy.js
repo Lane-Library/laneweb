@@ -5,7 +5,7 @@ describe('Bookmark editor', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1050);
-        cy.visit('/test/test-bookmarks.html?template=none');
+        cy.visit('/cypress-test/test/test-bookmarks.html');
 
         cy.get('#bookmarks-editor ul li:nth(3) button[value=edit]').as('editorButton');
         cy.get('#bookmarks-editor ul li:nth(3) input[name=label]').first().as('bookmarkLabel');

@@ -3,7 +3,7 @@ describe('Bookmark Links', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1750);
-        cy.visit('/test/test-bookmarks.html?template=none');
+        cy.visit('/cypress-test/test/test-bookmarks.html');
         cy.get('#div-bookmarking').as('div-bookmarking');
         cy.get('#link-bookmarking').as('link-bookmarking');
     })
@@ -75,7 +75,7 @@ describe('Bookmark Links', () => {
     })
 
     it('test a bookmark-login.html loading fail ', () => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.intercept(
             'GET',
             '/plain/bookmark-login.html',
@@ -94,7 +94,7 @@ describe('Bookmark Links', () => {
 
 
     it('test add bookmark login', () => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.get('#pubmed').trigger('mouseover');
         cy.get('#pubmed').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover');

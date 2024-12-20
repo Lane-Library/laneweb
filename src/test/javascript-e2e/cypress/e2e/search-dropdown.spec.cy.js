@@ -1,6 +1,6 @@
 describe('Search Dropdown TestCase', () => {
     beforeEach(() => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.get('#main-search').as('searchDropdown');
         cy.get('#search-dropdown-label').as('searchDropdownLabel');
 

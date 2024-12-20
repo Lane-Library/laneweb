@@ -19,6 +19,15 @@
             <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
+        <!-- e2e javascript  tests: -->
+        <map:match pattern="cypress-test/**.html" type="wildcard">
+            <map:aggregate type="default" element="doc" ns="http://lane.stanford.edu/ns/template">
+                <map:generate type="file" src="cocoon://content/{1}.html"/>
+                <map:generate type="file" src="cocoon://content/templates/cypress-test.xml"/>
+            </map:aggregate>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
+            <map:serialize type="html5"/>
+        </map:match>
         <!-- javascript unit tests: -->
         <map:match pattern="resources/test/**.html" type="wildcard">
             <map:generate type="html" src="classpath:/resources/test/{1}.html"/>

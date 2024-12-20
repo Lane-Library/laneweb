@@ -2,7 +2,7 @@ describe('Menu', () => {
 
     it('test the mobile  menu', () => {
         cy.viewport(801, 600);
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
 
         // Parameters
         cy.get('.menu-container.mobile').as('mobileMenu');

@@ -1,6 +1,6 @@
 describe('Lane Search Place Holder Test Case', () => {
     beforeEach(() => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.get('input[name=q]').as('queryInput');
         cy.get('#main-search').as('searchDropdown');
     });

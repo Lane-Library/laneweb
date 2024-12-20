@@ -2,7 +2,7 @@ describe('Suggest', () => {
 
     beforeEach(() => {
         cy.viewport(1200, 1000);
-        cy.visit('/search.html?q=skin&source=all-all');
+        cy.visit('/cypress-test/search.html?q=skin&source=all-all');
         // Parameters
         cy.get('.solrFacets input[data-facet=type]').as('input');
     })

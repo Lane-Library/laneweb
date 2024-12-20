@@ -4,7 +4,7 @@ describe('Bookmark Widget', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1750);
-        cy.visit('/test/test-bookmarks.html?template=none');
+        cy.visit('/cypress-test/test/test-bookmarks.html');
         cy.get('#long-bookmarking').as('long-bookmarking');
     })
 

@@ -2,7 +2,6 @@ describe('Lane Tooltip Test Case', () => {
 
     beforeEach(() => {
         cy.visit('/index.html');
-
         cy.get('.yui3-tooltip-trigger').first().as('tooltipTrigger');
         cy.get('@tooltipTrigger').invoke('attr', 'id').as('tooltipTriggerId');
         cy.get('@tooltipTriggerId').then((id) => {

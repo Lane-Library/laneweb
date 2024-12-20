@@ -2,7 +2,7 @@ describe('Google Analytics Tracking', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1500);
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
     });
     // this is basic ento-to-end test of GA tracking
     //the rest of google - GA4.js should be tested in unit tests
@@ -34,7 +34,7 @@ describe('Google Analytics Tracking', () => {
 
     it('internal click should  send tracking event data to GA', () => {
         // find first visible internal link
-        cy.visit('/help/searchtools.html')
+        cy.visit('/cypress-test/help/searchtools.html')
         cy.get('.btn.alt').first().as('popup');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('ONSITE')) {

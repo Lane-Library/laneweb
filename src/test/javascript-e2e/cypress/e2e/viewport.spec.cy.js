@@ -1,17 +1,17 @@
 describe('Viewport Tests', () => {
 
     beforeEach(() => {
-        cy.visit('/index.html');
-        
+        cy.visit('/cypress-test/index.html');
+
         // fire viewport:scrolled so we can put attach viewport to window
-        cy.scrollTo(1,1);
+        cy.scrollTo(1, 1);
 
         cy.window().then((win) => {
             win.viewport = {};
             // win.L.on("viewport:init", function(event) {
             //     viewport = event.viewport;
             // });
-            win.L.on("viewport:scrolled", function(event) {
+            win.L.on("viewport:scrolled", function (event) {
                 win.viewport = event.viewport;
             });
         });

@@ -3,7 +3,7 @@ describe('hide table columns', () => {
 
   it('should hide columns without data', () => {
 
-    cy.visit('/search.html?q=206242&source=catalog-all&facets=recordType%3A%22bib%22');
+    cy.visit('/cypress-test/search.html?q=206242&source=catalog-all&facets=recordType%3A%22bib%22');
 
     cy.get('.hide-empty-columns').as('table');
 
