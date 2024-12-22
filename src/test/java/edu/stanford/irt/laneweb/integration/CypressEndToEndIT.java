@@ -73,8 +73,6 @@ public class CypressEndToEndIT {
     private GenericContainer<?> createCypressContainer() {
         GenericContainer<?> result = new GenericContainer<>(DOCKER_IMAGE);
         result.withClasspathResourceMapping("e2e", "/e2e", BindMode.READ_WRITE);
-        result.withCreateContainerCmdModifier(cmd -> ((CreateContainerCmd) cmd).withUser(301 + ":" + 300));
-        result.withPrivilegedMode(false);
         result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage",
                 BindMode.READ_WRITE);
 
