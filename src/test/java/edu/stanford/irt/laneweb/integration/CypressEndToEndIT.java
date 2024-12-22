@@ -17,6 +17,8 @@ import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.OutputFrame;
 
+import com.github.dockerjava.api.command.CreateContainerCmd;
+
 import edu.stanford.irt.laneweb.Laneweb;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -71,7 +73,10 @@ public class CypressEndToEndIT {
     private GenericContainer<?> createCypressContainer() {
         GenericContainer<?> result = new GenericContainer<>(DOCKER_IMAGE);
         result.withClasspathResourceMapping("e2e", "/e2e", BindMode.READ_WRITE);
-        result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage", BindMode.READ_WRITE);
+        result.withCreateContainerCmdModifier(cmd -> ((CreateContainerCmd) cmd).withUser(301 + ":" + 300));
+        result.withPrivilegedMode(false);
+        result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage",
+                BindMode.READ_WRITE);
 
         result.withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("bash", "-c",
                 "npm install && chmod a+wx -R node_modules && cypress run --headless"));
