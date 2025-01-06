@@ -359,23 +359,39 @@
                 </executions>
             </plugin>
              <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.1</version>
                 <executions>
                     <execution>
-                        <id>run-javascript-tests</id>
-                        <phase>pre-integration-test</phase> 
+                        <id>install node and npm</id>
+                        <phase>package</phase> 
                         <goals>
-                            <goal>exec</goal>
+                            <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <executable>npm</executable>
-                            <workingDirectory>${project.build.directory}/test-classes/e2e</workingDirectory>
-                            <arguments>
-                                <argument>run</argument>
-                                <argument>instrument</argument>
-                            </arguments>
+                            <nodeVersion>v23.1.0</nodeVersion>
+                            <npmVersion>7.0.0</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <phase>package</phase> 
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install --prefix ${project.basedir}/target/test-classes/e2e</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm run</id>
+                        <phase>pre-integration-test</phase>  
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run instrument --prefix ${project.basedir}/target/test-classes/e2e</arguments>
                         </configuration>
                     </execution>
                 </executions>
