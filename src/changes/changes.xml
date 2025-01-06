@@ -5,6 +5,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-01-06" version="3.13.18" description="bug fix and update release">
+            <action date="2024-12-11" dev="ryanmax" issue="LANEWEB-11401" type="fix"> 
+                Classpath contents are publicly accessible     
+            </action>
+       </release> 
         <release date="2024-12-02" version="3.13.17" description="bug fix and update release">
             <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11394" type="fix"> 
                 laneweb/bookmarks outage 2024-11-21
