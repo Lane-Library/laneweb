@@ -24,3 +24,5 @@ src/main/javascript/coverage/
 src/test/javascript-e2e/.nyc_output/
 src/test/javascript-e2e/coverage/
 src/test/javascript-e2e/src/
+node/
+

@@ -12,6 +12,7 @@
     window.L = {};
 
     let i, laneJavascript = [
+        "lane.js",
         "util.js",
         "menu.js",
         "model.js",
@@ -93,8 +94,12 @@
         }
 
         const script = document.createElement('script');
-        script.src = basePath + "/resources/javascript/" + scripts[0];
-
+        let path = basePath + "/resources/javascript/";
+        //cypress test path is different from the normal path to the intrumented javascript files
+        if (window.location.pathname.startsWith('/cypress-test')) {
+            path = path.concat("instrumented/");
+        }
+        script.src = path + scripts[0];
         script.onload = () => {
             loadScriptsSequentially(scripts.slice(1));
         };

@@ -7,10 +7,11 @@
 
     L.Cookie = {
         get: function (name) {
-            const value = `; 
-            ${document.cookie}`;
+            const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
+            if (parts.length === 2) {
+                return parts.pop().split(';').shift();
+            }
         },
         set: function (name, value, days) {
             let expires = "";

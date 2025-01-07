@@ -29,6 +29,10 @@
                         label: "suggestion=" + sc.suggestion
                     });
                 }
+
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
     }
 

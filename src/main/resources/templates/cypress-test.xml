@@ -31,7 +31,6 @@
         <div class="search-indicator">
             <i class="fa-solid fa-spinner fa-spin"></i>
         </div>
-        <script type="text/javascript" src="/resources/javascript/yui-3.18.1.js"></script>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="/resources/javascript/lane-debug.js"></script>
     </body>
