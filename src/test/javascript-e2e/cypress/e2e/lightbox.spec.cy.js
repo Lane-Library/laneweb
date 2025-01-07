@@ -2,7 +2,7 @@ describe('lightbox', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1050);
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
     })
 
     it('test lightbox show', () => {
