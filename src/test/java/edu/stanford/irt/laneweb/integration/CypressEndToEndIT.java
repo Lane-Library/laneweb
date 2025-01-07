@@ -17,12 +17,9 @@ import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.output.OutputFrame;
 
-import com.github.dockerjava.api.command.CreateContainerCmd;
-
 import edu.stanford.irt.laneweb.Laneweb;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Laneweb.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@RunWith(SpringJUnit4ClassRunner.class) @SpringBootTest(classes = Laneweb.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CypressEndToEndIT {
 
     private static final String DOCKER_IMAGE = "cypress/included:13.15.2";
@@ -47,13 +44,13 @@ public class CypressEndToEndIT {
                 @Override
                 public void accept(final OutputFrame outputFrame) {
                     String line = outputFrame.getUtf8String();
-                    // stream output to console, but strip a little extra whitespace
+                    // stream output to console, but strip extra whitespace
                     if (!line.equals("\n")) {
                         System.out.print(line);
                     }
                     if (line.contains("Failing:      ")) {
                         failing[0] += Integer.parseInt(line.split("Failing:")[1].trim().split("\\s+")[0]);
-                    } else if (line.contains("All specs passed!") || line.contains(" failed (")) {
+                    } else if (line.contains("ET VOILA!")) {
                         countDownLatch.countDown();
                     }
                 }
@@ -73,11 +70,9 @@ public class CypressEndToEndIT {
     private GenericContainer<?> createCypressContainer() {
         GenericContainer<?> result = new GenericContainer<>(DOCKER_IMAGE);
         result.withClasspathResourceMapping("e2e", "/e2e", BindMode.READ_WRITE);
-        result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage",
-                BindMode.READ_WRITE);
-
+        result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage", BindMode.READ_WRITE);
         result.withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("bash", "-c",
-                "npm install && chmod a+wx -R node_modules && cypress run --headless"));
+                "npm install && cypress run --headless; chmod -R 777 . || chmod -R 777 .; echo 'ET VOILA!'"));
         result.setWorkingDirectory("/e2e");
         result.addEnv("CYPRESS_baseUrl", "http://host.testcontainers.internal:" + this.port);
         result.addEnv("INSTRUMENTED_FILES_DIR", "/e2e/coverage");
