@@ -86,7 +86,7 @@ describe('Bookmark Links', () => {
     });
 
     it('test a bookmark-login.html loading fail ', () => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.intercept(
             'GET',
             '/plain/bookmark-login.html',
@@ -105,7 +105,7 @@ describe('Bookmark Links', () => {
 
 
     it('test add bookmark login', () => {
-        cy.visit('/index.html');
+        cy.visit('/cypress-test/index.html');
         cy.get('#pubmed').trigger('mouseover');
         cy.get('#pubmed').trigger('mouseout');
         cy.get('.bookmark-link').trigger('mouseover');
@@ -116,6 +116,9 @@ describe('Bookmark Links', () => {
         cy.get('.bookmark-login').should('be.visible');
         cy.get('#yes-bookmark-login').should('attr', 'href')
             .and('include', '/secure/addBookmark?&label=PubMed');
+        cy.get(".lightboxbg").should('be.exist');
+        cy.get('#no-bookmark-login').click();
+        cy.get(".lightboxbg.lightboxbg-hidden").should('be.exist');
     })
 
 });
