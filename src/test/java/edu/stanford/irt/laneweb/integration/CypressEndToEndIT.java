@@ -72,7 +72,7 @@ public class CypressEndToEndIT {
         result.withClasspathResourceMapping("e2e", "/e2e", BindMode.READ_WRITE);
         result.withFileSystemBind(INSTRUMENTED_FILES_DIR, "/e2e/coverage", BindMode.READ_WRITE);
         result.withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("bash", "-c",
-                "npm install && cypress run --headless; chmod -R 777 . || chmod -R 777 .; echo 'ET VOILA!'"));
+                "npm install && cypress run --headless; chmod -R 777 .; echo 'ET VOILA!'"));
         result.setWorkingDirectory("/e2e");
         result.addEnv("CYPRESS_baseUrl", "http://host.testcontainers.internal:" + this.port);
         result.addEnv("INSTRUMENTED_FILES_DIR", "/e2e/coverage");
