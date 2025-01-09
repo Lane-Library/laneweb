@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.Laneweb;
 @RunWith(SpringJUnit4ClassRunner.class) @SpringBootTest(classes = Laneweb.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CypressEndToEndIT {
 
-    private static final String DOCKER_IMAGE = "cypress/included:13.15.2";
+    private static final String DOCKER_IMAGE = "cypress/included:13.17.0";
 
     private static final int MAX_TOTAL_TEST_TIME_IN_MINUTES = 5;
 
