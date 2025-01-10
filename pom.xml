@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>166</version>
+        <version>168</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.13.18-SNAPSHOT</version>
@@ -71,8 +71,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <!-- <version>${org.springframework.boot.version}</version> -->
-            <version>3.3.3</version>
+            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
@@ -82,7 +81,7 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.10.3</version>
+            <version>5.11.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
