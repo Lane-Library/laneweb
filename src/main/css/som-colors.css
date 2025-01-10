@@ -91,6 +91,9 @@
     border-color: white;
 }
 
+.bg-img-lagunita a {
+    text-decoration: underline;
+}
 
 .bg-img-lagunita {
     background: linear-gradient(0deg, rgba(0, 124, 146, 0.90) 0%, rgba(0, 124, 146, 0.90) 100%), url('../images/hero-books-bkgrd.jpg') lightgray 50% / cover no-repeat;
