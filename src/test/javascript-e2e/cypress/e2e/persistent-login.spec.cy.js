@@ -9,7 +9,9 @@ describe('Persistent Login Checkbox', () => {
     });
 
     it('should remove cookie when checkbox is unchecked', () => {
+        cy.get('#is-persistent-login').check();
         cy.get('#is-persistent-login').uncheck();
         cy.getCookie('isPersistent').should('not.exist');
     });
+
 });
