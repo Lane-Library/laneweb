@@ -10,7 +10,7 @@
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
             if (parts.length === 2) {
-                return parts.pop().split(';').shift();
+                return cookie = parts.pop().split(';').shift();
             }
         },
         set: function (name, value, days) {
@@ -23,7 +23,7 @@
             document.cookie = name + "=" + (value || "") + expires + "; path=/";
         },
         remove: function (name) {
-            document.cookie = name + '=; Max-Age=-99999999;';
+            this.set(name, '', -1);
         }
     };
 
