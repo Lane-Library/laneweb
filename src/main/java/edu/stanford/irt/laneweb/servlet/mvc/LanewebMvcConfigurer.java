@@ -103,7 +103,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     ResourceHttpRequestHandler staticRequestHandler(@Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase)
             throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocationValues(Arrays.asList("classpath:/", "classpath:/static/", liveBase.toString()));
+        handler.setLocationValues(Arrays.asList("classpath:/static/", liveBase.toString()));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

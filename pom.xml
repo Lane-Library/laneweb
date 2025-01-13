@@ -7,7 +7,7 @@
         <version>168</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.13.18-SNAPSHOT</version>
+    <version>3.13.19-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -300,23 +300,20 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
                 <directory>src/main/css</directory>
-                <targetPath>resources/css</targetPath>
+                <targetPath>static/resources/css</targetPath>
             </resource>
             <resource>
                 <directory>src/main/javascript</directory>
-                <targetPath>resources/javascript</targetPath>
+                <targetPath>static/resources/javascript</targetPath>
+            </resource>
+            <resource>
+                <directory>src/test/javascript</directory>
+                <targetPath>static/resources/test</targetPath>
             </resource>
             <resource>
                 <directory>src/main/xsl</directory>
                 <targetPath>xsl</targetPath>
-            </resource>
-            <resource>
-                <directory>src/test/javascript</directory>
-                <targetPath>resources/test</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -372,7 +369,7 @@
                         <configuration>
                             <webappSourceDir>${project.basedir}/src/main</webappSourceDir>
                             <webappTargetDir>
-                                ${project.build.directory}/classes/resources</webappTargetDir>
+                                ${project.build.directory}/classes/static/resources</webappTargetDir>
                             <jsEngine>CLOSURE</jsEngine>
                             <cssSourceDir>css</cssSourceDir>
                             <jsSourceDir>javascript</jsSourceDir>
