@@ -10,7 +10,7 @@
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
             if (parts.length === 2) {
-                return cookie = parts.pop().split(';').shift();
+                return parts.pop().split(';').shift();
             }
         },
         set: function (name, value, days) {
