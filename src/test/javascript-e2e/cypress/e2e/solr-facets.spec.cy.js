@@ -1,4 +1,4 @@
-describe('Suggest', () => {
+describe('Date Solr Facet', () => {
 
     beforeEach(() => {
         cy.viewport(1200, 3000);
