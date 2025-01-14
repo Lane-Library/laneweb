@@ -43,6 +43,14 @@ describe('Bookmark editor', () => {
     })
 
 
+    it('test a save empty label', () => {
+        cy.get('.bookmark-editor-content .actions button[value=edit]').first().click();
+        cy.get('@bookmarkLabel').type('{backspace}').type('{backspace}').type('{backspace}').type('{backspace}').type('{backspace}').type('{backspace}');
+        cy.get('#bookmarks-editor [value=save]').first().as('saveButton');
+        cy.get('@saveButton').click();
+        cy.get('@bookmarkLabel').should('have.attr', 'placeholder', 'required');
+    })
+
     it('test clear button', () => {
         cy.get('@editorButton').click();
         cy.get('@bookmarkLabel').type('test bookmark');
@@ -115,5 +123,6 @@ describe('Bookmark editor', () => {
         cy.wait('@addBookmark');
         cy.get('#bookmarks-editor ul li').first().should('contain', 'To find out the word and character count of your writing, simply copy and paste text into the tool or write directly into the text...');
     })
+
 
 })
