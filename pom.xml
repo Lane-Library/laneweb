@@ -333,7 +333,7 @@
             <testResource>
                 <directory>src/main/javascript</directory>
                 <targetPath>e2e/javascript</targetPath>
-            </testResource>            
+            </testResource>
         </testResources>
         <plugins>
             <plugin>
@@ -366,7 +366,7 @@
                 <executions>
                     <execution>
                         <id>install node and npm</id>
-                        <phase>package</phase> 
+                        <phase>package</phase>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
@@ -377,7 +377,7 @@
                     </execution>
                     <execution>
                         <id>npm install</id>
-                        <phase>package</phase> 
+                        <phase>package</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -387,7 +387,7 @@
                     </execution>
                     <execution>
                         <id>npm run</id>
-                        <phase>pre-integration-test</phase>  
+                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -446,29 +446,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- disable (temporarily?) grover JS tests: istanbul is dependent
-            on ancient node version
-            also had to remove jenkins "grover" task:
-            -U -Dspring.config.location=file:${HOME}/tomcat/instances/laneweb/conf/laneweb.properties
-            clean verify grover:coverage $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL
-            <plugin>
-                <groupId>edu.stanford.irt</groupId>
-                <artifactId>grover-maven-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <testDir>src/test/javascript</testDir>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>grover</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-             -->
             <plugin>
                 <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
@@ -529,7 +506,6 @@
                     </execution>
                 </executions>
             </plugin>
-           
         </plugins>
     </build>
     <reporting>
