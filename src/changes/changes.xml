@@ -5,6 +5,24 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-01-13" version="3.13.19" description="bug fix and update release">
+            <action date="2025-01-13" dev="ryanmax" issue="LANEWEB-11405" type="update"> 
+                Upgrade to springframework-6.2.X
+            </action>
+       </release> 
+        <release date="2025-01-06" version="3.13.18" description="bug fix and update release">
+            <action date="2024-12-11" dev="ryanmax" issue="LANEWEB-11407" type="fix"> 
+                Classpath contents are publicly accessible     
+            </action>
+       </release> 
+        <release date="2024-12-02" version="3.13.17" description="bug fix and update release">
+            <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11394" type="fix"> 
+                laneweb/bookmarks outage 2024-11-21
+            </action>
+            <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11392" type="update"> 
+                Remove youtube thumbnail functionality
+            </action>
+       </release> 
         <release date="2024-11-18" version="3.13.16" description="bug fix and update release">
             <action date="2024-11-15" dev="alainb" issue="LANEWEB-11390" type="fix"> 
                 In popular header the arrow down and up menu are visible in tablette view
@@ -92,10 +110,10 @@
             </action>
         </release>
         <release date="2024-04-01" version="3.13.3" description="bug fix and update release">
-            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11392" type="update">
+            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11292" type="update">
                 Replace RestTemplate with RestClient or WebClient
             </action>
-            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11391" type="update">
+            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11291" type="update">
                 REST connection timeouts not honored
             </action>
         </release>

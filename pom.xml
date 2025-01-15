@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>165</version>
+        <version>168</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.13.17-SNAPSHOT</version>
+    <version>3.13.20-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -47,8 +47,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>${org.springframework.boot.version}</version>
-         </dependency>
-         <dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${org.springframework.boot.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>${org.springframework.boot.version}</version>
@@ -66,13 +71,12 @@
         <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot-starter</artifactId>
-            <version>2.3.0</version>
+            <version>2.4.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <!-- <version>${org.springframework.boot.version}</version> -->
-            <version>3.3.3</version>
+            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
@@ -82,7 +86,7 @@
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.10.3</version>
+            <version>5.11.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -302,23 +306,20 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-            <resource>
                 <directory>src/main/css</directory>
-                <targetPath>resources/css</targetPath>
+                <targetPath>static/resources/css</targetPath>
             </resource>
             <resource>
                 <directory>src/main/javascript</directory>
-                <targetPath>resources/javascript</targetPath>
+                <targetPath>static/resources/javascript</targetPath>
+            </resource>
+            <resource>
+                <directory>src/test/javascript</directory>
+                <targetPath>static/resources/test</targetPath>
             </resource>
             <resource>
                 <directory>src/main/xsl</directory>
                 <targetPath>xsl</targetPath>
-            </resource>
-            <resource>
-                <directory>src/test/javascript</directory>
-                <targetPath>resources/test</targetPath>
             </resource>
         </resources>
         <testResources>
@@ -425,7 +426,7 @@
                         <configuration>
                             <webappSourceDir>${project.basedir}/src/main</webappSourceDir>
                             <webappTargetDir>
-                                ${project.build.directory}/classes/resources</webappTargetDir>
+                                ${project.build.directory}/classes/static/resources</webappTargetDir>
                             <jsEngine>CLOSURE</jsEngine>
                             <cssSourceDir>css</cssSourceDir>
                             <jsSourceDir>javascript</jsSourceDir>
