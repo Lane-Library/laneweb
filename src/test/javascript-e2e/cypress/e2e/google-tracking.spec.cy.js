@@ -63,5 +63,28 @@ describe('Google Analytics Tracking', () => {
         cy.wait('@gaCollect');
     });
 
+    it('test metasearch and google analytics', () => {
+        cy.visit('/cypress-test/search.html?q=skin&source=clinical-all');
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
+            if (req.body.includes('en=lane%3AsearchResultClick')) {
+                req.alias = 'gaCollect';
+            }
+        });
+        cy.get('.lwSearchResults a.primaryLink.bookmarking').first().click();
+        cy.wait('@gaCollect');
+    });
+
+    it('test browse and google analytics', () => {
+        cy.visit('/cypress-test/biomed-resources/ej.html?a=a');
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
+            if (req.body.includes('en=lane%3AbrowseResultClick')) {
+                req.alias = 'gaCollect';
+            }
+        });
+        cy.get('.lwSearchResults a.primaryLink.bookmarking').first().click();
+        cy.wait('@gaCollect');
+    });
+
+
 
 })
