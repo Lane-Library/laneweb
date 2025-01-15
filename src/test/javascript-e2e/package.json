@@ -5,7 +5,7 @@
   "scripts": {
     "instrument": "nyc  instrument --compact false  ./javascript ./instrumented",
     "pretest": "npm run instrument",
-    "postinstrument": "cp -rf ./instrumented ../../classes/resources/javascript/",
+    "postinstrument": "cp -rf ./instrumented ../../classes/static/resources/javascript/",
     "test": "cypress run"
   },
   "author": "",

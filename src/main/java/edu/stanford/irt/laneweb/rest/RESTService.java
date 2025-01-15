@@ -63,7 +63,7 @@ public class RESTService {
 
     public void putObject(final URI uri, final Object object) throws RESTException {
         try {
-            this.restClient.put().uri(uri).body(object).retrieve();
+            this.restClient.put().uri(uri).body(object).retrieve().toBodilessEntity();
         } catch (RestClientException e) {
             throw new RESTException(e);
         }

@@ -26,12 +26,13 @@ public class RESTClientConfiguration {
 
     private static final int HTTP_CONNECT_TIMEOUT = 5;
 
-    private static final int HTTP_READ_TIMEOUT = 30;
+    private static final int HTTP_READ_TIMEOUT = 15;
 
     @Bean
     HttpComponentsClientHttpRequestFactory getRequestFactory() {
         RequestConfig requestConfig = RequestConfig.custom()
                 .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
+                .setConnectionRequestTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
         HttpComponentsClientHttpRequestFactory hcchrf = new HttpComponentsClientHttpRequestFactory(httpClient);
@@ -41,7 +42,7 @@ public class RESTClientConfiguration {
     }
 
     @Bean
-    List<HttpMessageConverter<?>> getMessageConverters(ObjectMapper objectMapper) {
+    List<HttpMessageConverter<?>> getMessageConverters(final ObjectMapper objectMapper) {
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setWriteAcceptCharset(false);
@@ -53,14 +54,13 @@ public class RESTClientConfiguration {
 
     @Bean
     RestClient restClientCustomizer(final List<HttpMessageConverter<?>> messageConverters,
-            HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
-        return  RestClient.builder()
-                .requestFactory( httpComponentsClientHttpRequestFactory)
+            final HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
+        return RestClient.builder().requestFactory(httpComponentsClientHttpRequestFactory)
                 .messageConverters(converters -> converters.addAll(0, messageConverters)).build();
     }
 
     @Bean
-    RESTService restService(RestClient restClient) {
+    RESTService restService(final RestClient restClient) {
         return new RESTService(restClient);
     }
 }
