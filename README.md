@@ -42,3 +42,37 @@ _NOTE_: Do not add newline at the end of the token.
 ```
 $ make gl-setup
 ```
+
+## Running Cypress Tests
+
+To run Cypress tests, follow these steps:
+
+1. **Prepare the environment:**
+    - Ensure you have all necessary dependencies installed.
+    - Run `mvn clean package` to copy the JavaScript files to `/target/test-classes/e2e`.
+
+2. **Run Cypress from the UI:**
+    - Navigate to the directory containing the Cypress tests:
+      ```
+      $ cd target/test-classes/e2e
+      ```
+    - Instrument the code:
+      ```
+      $ npm run instrument
+      ```
+    - Open the Cypress UI:
+      ```
+      $ npx cypress open
+      ```
+
+3. **Run all Cypress tests via the command line:**
+    - Navigate to the directory containing the Cypress tests:
+      ```
+      $ cd target/test-classes/e2e
+      ```
+    - Execute the tests:
+      ```
+      $ npm test
+      ```
+
+
