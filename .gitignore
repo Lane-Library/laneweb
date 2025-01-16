@@ -14,6 +14,7 @@
 *.code-workspace
 .vscode
 .gitignore
+/node/
 node_modules
 src/test/javascript-e2e/cypress/reports
 src/test/javascript-e2e/cypress/videos
