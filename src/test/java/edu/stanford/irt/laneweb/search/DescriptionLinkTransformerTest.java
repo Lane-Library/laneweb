@@ -5,12 +5,14 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.cocoon.cache.validity.AlwaysValid;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.resource.Resource;
 
@@ -61,6 +63,16 @@ public class DescriptionLinkTransformerTest {
         replay(this.xmlConsumer);
         this.transformer.endElement(null, null, null);
         verify(this.xmlConsumer);
+    }
+
+    @Test
+    public void testGetKey() {
+        assertEquals("none", this.transformer.getKey());
+    }
+
+    @Test
+    public void testGetValidity() {
+        assertEquals(AlwaysValid.SHARED_INSTANCE, this.transformer.getValidity());
     }
 
     @Test

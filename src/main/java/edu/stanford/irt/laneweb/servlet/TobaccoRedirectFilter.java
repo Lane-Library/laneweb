@@ -12,6 +12,6 @@ public class TobaccoRedirectFilter extends AbstractLanewebFilter {
     protected void internalDoFilter(final HttpServletRequest request, final HttpServletResponse response,
             final FilterChain chain) {
         response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-        response.addHeader("Location", "http://tobacco.stanford.edu/");
+        response.addHeader("Location", "https://tobacco.stanford.edu/");
     }
 }

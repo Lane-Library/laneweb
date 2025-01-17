@@ -69,7 +69,7 @@ public class PatronRegistrationControllerTest {
 
     @Test
     public final void testFormSubmitUserRegistration() {
-        expect(this.model.asMap()).andReturn(this.map);
+        expect(this.model.asMap()).andReturn(this.map).times(2);
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");

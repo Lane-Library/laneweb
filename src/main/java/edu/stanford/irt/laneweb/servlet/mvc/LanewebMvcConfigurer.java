@@ -11,8 +11,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -60,8 +58,15 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));
     }
 
+    // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
+    // file and by Using AntPathMatcher as the path matching strategy to allow /**/*.html
+    @Override
+    public void configurePathMatch(final PathMatchConfigurer configurer) {
+        configurer.setPathMatcher(new AntPathMatcher());
+    }
+
     @Bean
-    SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(HashMap<String, Object> urlMapping) {
+    SimpleUrlHandlerMapping getSimpleUrlHandlerMapping(final HashMap<String, Object> urlMapping) {
         SimpleUrlHandlerMapping handlerMapping = new SimpleUrlHandlerMapping();
         handlerMapping.setUrlMap(urlMapping);
         handlerMapping.setDefaultHandler(new DefaultRequestHandler());
@@ -70,27 +75,16 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     }
 
     @Bean
-    HashMap<String, Object> getUrlMapping(final ResourceHttpRequestHandler staticRequestHandler) {
-        HashMap<String, Object> handlerMap = new LinkedHashMap<>();
-        handlerMap.put("/favicon.ico", staticRequestHandler);
-        handlerMap.put("/*", staticRequestHandler);
-        handlerMap.put("/*/*", staticRequestHandler);
-        handlerMap.put("/*/*/*", staticRequestHandler);
-        handlerMap.put("/*/*/*/*", staticRequestHandler);
-        handlerMap.put("/*/*/*/*/*", staticRequestHandler);
-        return handlerMap;
-    }
-
-    // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
-    // file and by Using AntPathMatcher as the path matching strategy to allow /**/*.html
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.setPathMatcher(new AntPathMatcher());
+    SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
+        return new SitemapHandlerExceptionResolver(sitemapController);
     }
 
     @Bean
-    SitemapHandlerExceptionResolver getSitemapHandlerExceptionResolver(final SitemapController sitemapController) {
-        return new SitemapHandlerExceptionResolver(sitemapController);
+    HashMap<String, Object> getUrlMapping(final ResourceHttpRequestHandler staticRequestHandler) {
+        HashMap<String, Object> handlerMap = new LinkedHashMap<>();
+        handlerMap.put("/favicon.ico", staticRequestHandler);
+        handlerMap.put("/**", staticRequestHandler);
+        return handlerMap;
     }
 
     @Bean
@@ -109,8 +103,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
     ResourceHttpRequestHandler staticRequestHandler(@Value("${edu.stanford.irt.laneweb.live-base}/") final URI liveBase)
             throws MalformedURLException {
         ResourceHttpRequestHandler handler = new ResourceHttpRequestHandler();
-        handler.setLocations(Arrays.asList(new ClassPathResource("/"), new ClassPathResource("/static/"),
-                new UrlResource(liveBase.toURL())));
+        handler.setLocationValues(Arrays.asList("classpath:/static/", liveBase.toString()));
         handler.setCacheSeconds(ONE_YEAR_IN_SECONDS);
         handler.setSupportedMethods("HEAD", "GET");
         return handler;

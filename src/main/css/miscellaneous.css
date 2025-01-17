@@ -66,14 +66,6 @@ em {
     margin-bottom: 24px;
 }
 
-.rss-link {
-    float: right;
-}
-
-.rss-link .fa {
-    color: black;
-}
-
 .announce {
     text-align: center;
     background-color: #80982a;

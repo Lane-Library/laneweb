@@ -5,6 +5,58 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-01-13" version="3.13.19" description="bug fix and update release">
+            <action date="2025-01-13" dev="ryanmax" issue="LANEWEB-11405" type="update"> 
+                Upgrade to springframework-6.2.X
+            </action>
+       </release> 
+        <release date="2025-01-06" version="3.13.18" description="bug fix and update release">
+            <action date="2024-12-11" dev="ryanmax" issue="LANEWEB-11407" type="fix"> 
+                Classpath contents are publicly accessible     
+            </action>
+       </release> 
+        <release date="2024-12-02" version="3.13.17" description="bug fix and update release">
+            <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11394" type="fix"> 
+                laneweb/bookmarks outage 2024-11-21
+            </action>
+            <action date="2024-11-21" dev="ryanmax" issue="LANEWEB-11392" type="update"> 
+                Remove youtube thumbnail functionality
+            </action>
+       </release> 
+        <release date="2024-11-18" version="3.13.16" description="bug fix and update release">
+            <action date="2024-11-15" dev="alainb" issue="LANEWEB-11390" type="fix"> 
+                In popular header the arrow down and up menu are visible in tablette view
+            </action>
+       </release> 
+        <release date="2024-10-14" version="3.13.15" description="bug fix and update release">
+            <action date="2024-10-10" dev="ryanmax" issue="LANEWEB-11372" type="update"> 
+                Eresources browse pages are not cached
+            </action>
+            <action date="2024-10-10" dev="ryanmax" issue="LANEWEB-11373" type="update"> 
+                Remove RSS processing
+            </action>
+       </release> 
+       <release date="2024-09-23" version="3.13.14" description="bug fix and update release">
+            <action date="2024-09-20" dev="ryanmax" issue="LANEWEB-11362" type="update"> 
+                SFX labeling in Lane Search
+            </action>
+            <action date="2024-09-23" dev="ryanmax" issue="LANEWEB-11368" type="update"> 
+                Clean up redirects no longer used
+            </action>
+       </release>
+       <release date="2024-09-16" version="3.13.13" description="bug fix and update release">
+            <action date="2024-09-12" dev="ryanmax" issue="LANEWEB-11361" type="update"> 
+                Notify AS staff when patrons attempt to register but a FOLIO user record already exists
+            </action>
+       </release>
+       <release date="2024-08-26" version="3.13.12" description="bug fix and update release">
+            <action date="2024-08-19" dev="ryanmax" issue="LANEWEB-11354" type="update"> 
+                equipment page missing icons, icons inconsistent colors
+            </action>
+            <action date="2024-08-23" dev="alainb" issue="LANEWEB-11356" type="update"> 
+                Add LinkedIn Icon to social media icons in footer
+            </action>
+       </release>
        <release date="2024-08-05" version="3.13.11" description="bug fix and update release">
             <action date="2024-07-30" dev="ryanmax" issue="LANEWEB-11337" type="update"> 
                 Lane Search: cannot filter to include 2025 
@@ -12,7 +64,7 @@
             <action date="2024-06-19" dev="alainb" issue="LANEWEB-11343" type="update"> 
                 Update footer background color 
             </action>
-        </release>
+       </release>
        <release date="2024-06-24" version="3.13.10" description="bug fix and update release">
             <action date="2024-04-26" dev="ryanmax" issue="LANEWEB-11317" type="update">
                  Use Artifact Registry instead of Nexus
@@ -20,7 +72,7 @@
             <action date="2024-06-19" dev="alainb" issue="LANEWEB-11332" type="update">
                To improve basset handling null pointer exception
             </action>
-        </release> 
+       </release> 
        <release date="2024-06-17" version="3.13.9" description="bug fix and update release">
             <action date="2024-06-17" dev="alainb" issue="LANEWEB-11330" type="update">
                 Update the laneweb packaging from war to jar
@@ -39,7 +91,7 @@
                 broken query highlighting
             </action>
         </release>
-         <release date="2024-05-06" version="3.13.6" description="bug fix and update release">
+        <release date="2024-05-06" version="3.13.6" description="bug fix and update release">
             <action date="2024-04-15" dev="ryanmax" issue="LANEWEB-11311" type="update">
                 Iframe not working in LaneWeb in Springshare's LibWizard
             </action>
@@ -58,10 +110,10 @@
             </action>
         </release>
         <release date="2024-04-01" version="3.13.3" description="bug fix and update release">
-            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11392" type="update">
+            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11292" type="update">
                 Replace RestTemplate with RestClient or WebClient
             </action>
-            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11391" type="update">
+            <action date="2023-03-08" dev="alainb" issue="LANEWEB-11291" type="update">
                 REST connection timeouts not honored
             </action>
         </release>

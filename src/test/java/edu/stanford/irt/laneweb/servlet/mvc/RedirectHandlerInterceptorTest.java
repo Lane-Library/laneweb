@@ -47,18 +47,6 @@ public class RedirectHandlerInterceptorTest {
     }
 
     @Test
-    public void testSlashClasses() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("/classes");
-        expect(this.request.getContextPath()).andReturn("");
-        expect(this.request.getQueryString()).andReturn(null);
-        expect(this.redirectProcessor.getRedirectURL("/classes", "", null)).andReturn("/classes/");
-        this.response.sendRedirect("/classes/");
-        replay(this.request, this.response, this.redirectProcessor);
-        assertFalse(this.interceptor.preHandle(this.request, this.response, null));
-        verify(this.request, this.response, this.redirectProcessor);
-    }
-
-    @Test
     public void testSlashClinician() throws IOException {
         expect(this.request.getRequestURI()).andReturn("/clinician");
         expect(this.request.getContextPath()).andReturn("");
@@ -82,15 +70,4 @@ public class RedirectHandlerInterceptorTest {
         verify(this.request, this.response, this.redirectProcessor);
     }
 
-    @Test
-    public void testSlashM() throws IOException {
-        expect(this.request.getRequestURI()).andReturn("/laneweb/m");
-        expect(this.request.getContextPath()).andReturn("/laneweb");
-        expect(this.request.getQueryString()).andReturn(null);
-        expect(this.redirectProcessor.getRedirectURL("/m", "/laneweb", null)).andReturn("/laneweb/m/");
-        this.response.sendRedirect("/laneweb/m/");
-        replay(this.request, this.response, this.redirectProcessor);
-        assertFalse(this.interceptor.preHandle(this.request, this.response, null));
-        verify(this.request, this.response, this.redirectProcessor);
-    }
 }

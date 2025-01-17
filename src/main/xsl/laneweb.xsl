@@ -206,7 +206,7 @@
         </xsl:variable>
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="$path = '/index.html' or $path = '/m/index.html'">
+                <xsl:when test="$path = '/index.html'">
                     <xsl:value-of select="."/>
                 </xsl:when>
                 <xsl:otherwise>
