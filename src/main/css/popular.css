@@ -25,230 +25,217 @@
     color: #ffffff;
     text-align: center;
     background-image: none;
+}
 
-    .popular h2,
-    .popular h3,
-    .popular h4 {
-        text-transform: uppercase;
-        font-family: 'Fjord One', serif;
-        color: #ffffff;
-        text-align: center;
-        background-image: none;
+.popular h2:before {
+    border: none;
+    border: none;
+}
+
+.popular li {
+    border-bottom: none;
+    border-bottom: none;
+}
+
+.popular:after {
+    content: '.';
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+    content: '.';
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.popular a,
+.popular a .fa {
+    color: #fff;
+}
+
+.menu-container.popular h2 i {
+    color: white;
+    color: white;
+}
+
+.menu-container.popular li a {
+    padding: 3px 0;
+    padding: 3px 0;
+}
+
+.top-resources {
+    line-height: 1.6em;
+    background-color: white;
+    color: black;
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    line-height: 1.6em;
+    background-color: white;
+    color: black;
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+}
+
+.top-resources ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -11px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -11px;
+}
+
+.top-resources li {
+    border-bottom: none;
+    flex: 0 1 50%;
+    border-bottom: none;
+    flex: 0 1 50%;
+}
+
+.top-resources.menu-container a {
+    color: black;
+    padding: 6px;
+    /* LANEWEB-11037: 100% width interferes with bookmark icon */
+    width: revert;
+}
+
+/* popular from ej page */
+
+.no-search-content .popular-eresources {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 200px;
+}
+
+.no-search-content .popular-eresources li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 12px;
+}
+
+.no-search-content .ej-eresources li {
+    flex: 25%;
+    width: 30%;
+}
+
+.no-search-content .eb-eresources li {
+    height: 20%;
+    width: 45%;
+}
+
+
+@media (max-width : 1100px) {
+
+    .top-resources.menu-container.mobile div.pure-u-1-2,
+    .popular.menu-container div.pure-u-1-2 {
+        width: 50%;
+        display: inline-block;
     }
 
-    .popular h2:before {
-        border: none;
-        border: none;
+    .top-resources.menu-container.mobile div.pure-g {
+        display: flex;
     }
 
-    .popular li {
-        border-bottom: none;
-        border-bottom: none;
+    .popular.menu-container div div {
+        padding: 12px 27px;
     }
 
-    .popular:after {
-        content: '.';
+    .top-resources.active.menu-container.mobile ul,
+    .top-resources.menu-container.mobile ul {
+        display: flex;
+        flex-flow: column wrap;
+        margin: 0 6% 0 24px;
+        height: 114px;
+    }
+
+    .top-resources.menu-container.mobile h2 {
+        margin-bottom: 1.2em;
+        padding-bottom: 0.6em;
+        border-bottom: 1px solid #d8dbdc;
+        cursor: default;
+    }
+
+    .top-resources.menu-container.mobile h2:before {
+        content: " ";
+        position: absolute;
+        width: 3em;
+        border-top: 3px solid #8C1515;
+        bottom: -2px;
+    }
+
+    .top-resources.menu-container.mobile h2 i:first-of-type,
+    .top-resources.menu-container.mobile.active h2 i:nth-of-type(2) {
+        display: none;
+    }
+
+    .top-resources li {
+        flex: inherit;
+    }
+
+    .no-search-content .popular-eresources li {
+        flex: 25%;
+        width: 33%;
+    }
+
+    .no-search-content .eb-eresources {
         display: block;
-        height: 0;
-        font-size: 0;
-        clear: both;
-        visibility: hidden;
-        content: '.';
-        display: block;
-        height: 0;
-        font-size: 0;
-        clear: both;
-        visibility: hidden;
+        height: auto;
     }
 
-    .popular a,
-    .popular a .fa {
-        color: #fff;
+    .no-search-content .eb-eresources li {
+        width: auto;
+    }
+}
 
-        .popular a,
-        .popular a .fa {
-            color: #fff;
-        }
+@media (max-width : 812px) {
+    .top-resource-container .module {
+        padding: 1em;
+    }
 
-        .menu-container.popular h2 i {
-            color: white;
-            color: white;
-        }
+    .top-resources.menu-container.mobile h2,
+    .top-resources.menu-container.mobile h2:before {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border: none;
+        cursor: pointer;
+    }
 
-        .menu-container.popular li a {
-            padding: 3px 0;
-            padding: 3px 0;
-        }
+    .top-resources.menu-container.mobile h2 i:first-of-type,
+    .top-resources.menu-container.active.mobile h2 i:nth-of-type(2) {
+        display: block;
+    }
 
-        .top-resources {
-            line-height: 1.6em;
-            background-color: white;
-            color: black;
-            box-sizing: border-box;
-            position: relative;
-            height: 100%;
-            line-height: 1.6em;
-            background-color: white;
-            color: black;
-            box-sizing: border-box;
-            position: relative;
-            height: 100%;
-        }
+    .top-resources.menu-container.mobile ul,
+    .top-resources.menu-container.active h2 i:first-of-type {
+        display: none;
+    }
 
-        .top-resources ul {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: -11px;
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: -11px;
-        }
+    .top-resources.menu-container.active.mobile ul {
+        display: flex;
+        margin-left: 9%;
+        flex-flow: row wrap;
+        height: auto;
+    }
 
-        .top-resources li {
-            border-bottom: none;
-            flex: 0 1 50%;
-            border-bottom: none;
-            flex: 0 1 50%;
-        }
+    .top-resources.menu-container li {
+        flex: 0 1 50%;
+    }
 
-        .top-resources.menu-container a {
-            color: black;
-            padding: 6px;
-            /* LANEWEB-11037: 100% width interferes with bookmark icon */
-            width: revert;
-        }
+    .no-search-content .popular-eresources {
+        display: block;
+        height: auto;
+    }
 
-        /* popular from ej page */
+    .no-search-content .popular-eresources li {
+        width: auto;
+    }
 
-        .no-search-content .popular-eresources {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            height: 200px;
-        }
-
-        .no-search-content .popular-eresources li {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            padding-right: 12px;
-        }
-
-        .no-search-content .ej-eresources li {
-            flex: 25%;
-            width: 30%;
-        }
-
-        .no-search-content .eb-eresources li {
-            height: 20%;
-            width: 45%;
-        }
-
-
-        @media (max-width : 1100px) {
-
-            .top-resources.menu-container.mobile div.pure-u-1-2,
-            .popular.menu-container div.pure-u-1-2 {
-                width: 50%;
-                display: inline-block;
-            }
-
-            .top-resources.menu-container.mobile div.pure-g {
-                display: flex;
-            }
-
-            .popular.menu-container div div {
-                padding: 12px 27px;
-            }
-
-            .top-resources.active.menu-container.mobile ul,
-            .top-resources.menu-container.mobile ul {
-                display: flex;
-                flex-flow: column wrap;
-                margin: 0 6% 0 24px;
-                height: 114px;
-            }
-
-            .top-resources.menu-container.mobile h2 {
-                margin-bottom: 1.2em;
-                padding-bottom: 0.6em;
-                border-bottom: 1px solid #d8dbdc;
-                cursor: default;
-            }
-
-            .top-resources.menu-container.mobile h2:before {
-                content: " ";
-                position: absolute;
-                width: 3em;
-                border-top: 3px solid #8C1515;
-                bottom: -2px;
-            }
-
-            .top-resources.menu-container.mobile h2 i:first-of-type,
-            .top-resources.menu-container.mobile.active h2 i:nth-of-type(2) {
-                display: none;
-            }
-
-            .top-resources li {
-                flex: inherit;
-            }
-
-            .no-search-content .popular-eresources li {
-                flex: 25%;
-                width: 33%;
-            }
-
-            .no-search-content .eb-eresources {
-                display: block;
-                height: auto;
-            }
-
-            .no-search-content .eb-eresources li {
-                width: auto;
-            }
-        }
-
-        @media (max-width : 812px) {
-            .top-resource-container .module {
-                padding: 1em;
-            }
-
-            .top-resources.menu-container.mobile h2,
-            .top-resources.menu-container.mobile h2:before {
-                margin-bottom: 0;
-                padding-bottom: 0;
-                border: none;
-                cursor: pointer;
-            }
-
-            .top-resources.menu-container.mobile h2 i:first-of-type,
-            .top-resources.menu-container.active.mobile h2 i:nth-of-type(2) {
-                display: block;
-            }
-
-            .top-resources.menu-container.mobile ul,
-            .top-resources.menu-container.active h2 i:first-of-type {
-                display: none;
-            }
-
-            .top-resources.menu-container.active.mobile ul {
-                display: flex;
-                margin-left: 9%;
-                flex-flow: row wrap;
-                height: auto;
-            }
-
-            .top-resources.menu-container li {
-                flex: 0 1 50%;
-            }
-
-            .no-search-content .popular-eresources {
-                display: block;
-                height: auto;
-            }
-
-            .no-search-content .popular-eresources li {
-                width: auto;
-            }
-
-        }
+}
