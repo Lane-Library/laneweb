@@ -3,12 +3,13 @@
     padding: 0;
 }
 
-
 .su-design .footer-organizations {
     margin-top: 0;
 }
 
-.basic-card {
+.basic-card,
+.centered-basic-card {
+    position: relative;
     margin-top: 18px;
 }
 
@@ -27,7 +28,7 @@
 }
 
 .basic-card p,
-.centered-basic-card {
+.centered-basic-card p {
     margin-bottom: 18px;
 }
 
@@ -35,6 +36,18 @@
 .centered-basic-card div {
     margin-bottom: 36px;
 }
+
+.basic-card>*:last-child,
+.centered-basic-card>*:last-child {
+    margin-bottom: 0;
+}
+
+.basic-card>*:first-child,
+.centered-basic-card>*:first-child {
+    margin-top: 0;
+}
+
+
 
 .basic-card .btn,
 .centered-basic-card .btn {
@@ -49,6 +62,26 @@
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+
+/* To set the button at the same level when the basic-card have the same-height */
+.same-height .basic-card,
+.same-height .centered-basic-card {
+    padding-bottom: 50px;
+}
+
+.same-height .basic-card .btn:last-of-type,
+.same-height .centered-basic-card .btn:last-of-type {
+    position: absolute;
+    bottom: 0;
+}
+
+.same-height .centered-basic-card .btn {
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
 }
 
 .su-design .content>.centered .basic-container {
@@ -72,6 +105,16 @@
 .basic-container div {
     margin-bottom: 24px;
 }
+
+.basic-container>*:last-child {
+    margin-bottom: 0;
+}
+
+.basic-container>*:first-child {
+    margin-top: 0;
+}
+
+
 
 .basic-container.btn {
     margin: 12px 0;
@@ -124,10 +167,13 @@
     width: 95%;
 }
 
-.su-design .content>.centered .landing-page-container>* {
+.su-design .content>.centered .landing-page-container>.basic-container {
     padding-left: 11%;
     padding-right: 11%;
 }
+
+
+
 
 .su-design .content>.centered .service-container>* {
     padding-left: 7%;
@@ -136,17 +182,17 @@
 
 
 .service-page {
-    padding: 42px 7%;
+    padding: 0 7% 42px;
 }
 
 @media (max-width : 1100px) {
     .landing-page-container {
-        padding: 42px 80px;
+        padding: 0 80px 42px;
     }
 
     .service-page {
-        padding: 42px 30px;
-        margin: 42px 30px;
+        padding: 0 30px 42px;
+        margin: 0 30px 42px
     }
 
     .banner .medium-screen-hide {
@@ -161,12 +207,12 @@
 
 @media (max-width : 768px) {
     .landing-page-container {
-        padding: 42px 50px;
+        padding: 0 50px 42px;
     }
 
     .service-page {
-        padding: 42px 20px;
-        margin: 42px 20px;
+        padding: 0 20px 42px;
+        margin: 0 20px 42px;
     }
 }
 
@@ -176,11 +222,11 @@
     }
 
     .landing-page-container {
-        padding: 42px 20px;
+        padding: 0 20px 42px;
     }
 
     .service-page {
-        padding: 42px 10px;
-        margin: 42px 10px;
+        padding: 0 10px 42px;
+        margin: 0 10px 42px;
     }
 }

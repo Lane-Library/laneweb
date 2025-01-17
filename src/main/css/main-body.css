@@ -15,8 +15,14 @@ footer section,
 .content,
 .no-search-content>div:not(.ankle-footer),
 .content div.centered div.service-page {
-    max-width: 2300px;
+    max-width: 2000px;
     margin: auto;
+}
+
+.landing-page-container>.basic-container>* {
+    max-width: 2000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .su-design .content {

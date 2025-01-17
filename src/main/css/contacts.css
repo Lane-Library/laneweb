@@ -1,5 +1,12 @@
 #contacts {
-    margin-top: 98px;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contacts>div {
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #contacts fieldset:last-child {
@@ -107,6 +114,18 @@
 
 .contact-confirmation div .btn {
     margin: 126px 0px 30px 0px;
+}
+
+@media (max-width : 1100px) {
+    #contacts {
+        max-width: 100%;
+    }
+
+    #contacts>div {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
 }
 
 @media (max-width : 812px) {
