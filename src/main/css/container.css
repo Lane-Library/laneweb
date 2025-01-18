@@ -69,6 +69,7 @@
 .same-height .basic-card,
 .same-height .centered-basic-card {
     padding-bottom: 50px;
+    position: relative;
 }
 
 .same-height .basic-card .btn:last-of-type,
@@ -80,7 +81,7 @@
 .same-height .centered-basic-card .btn {
     right: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%);
     white-space: nowrap;
 }
 
