@@ -10,7 +10,6 @@
 .basic-card,
 .centered-basic-card {
     position: relative;
-    margin-top: 18px;
 }
 
 .basic-card img,
@@ -42,8 +41,9 @@
     margin-bottom: 0;
 }
 
-.basic-card>*:first-child,
-.centered-basic-card>*:first-child {
+
+.basic-card>*:not(h3, h2):first-child,
+.centered-basic-card>*:not(h3, h2):first-child {
     margin-top: 0;
 }
 
@@ -97,13 +97,11 @@
     margin-bottom: 26px;
 }
 
-
-
 .basic-container p {
     margin-bottom: 12px;
 }
 
-.basic-container div {
+.basic-container>div {
     margin-bottom: 24px;
 }
 
