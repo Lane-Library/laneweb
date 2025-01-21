@@ -24,6 +24,7 @@ a.disabled {
 .basic-card a,
 .basic-container a,
 .banner a,
-.bg-img-lagunita a {
+.bg-img-lagunita a,
+.no-search-content a {
     text-decoration: underline;
 }
