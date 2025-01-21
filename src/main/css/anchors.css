@@ -25,6 +25,7 @@ a.disabled {
 .basic-container a,
 .banner a,
 .bg-img-lagunita a,
-.no-search-content a {
+.no-search-content a,
+.su-design .content a {
     text-decoration: underline;
 }
