@@ -309,8 +309,8 @@ hr {
 }
 
 .callout {
-    padding: 12px 24px;
-    margin: 31px 18px;
+    padding: 20px 24px;
+    margin: 31px auto;
     font-size: 21px;
     text-align: center;
     background-color: #E1E7E9;
