@@ -1,5 +1,5 @@
 .module {
-    margin-top: 32px;
+    margin-top: 38px;
     padding: 2em;
     box-sizing: border-box;
     line-height: 1.6em;
@@ -19,7 +19,7 @@
 }
 
 .module.same-height {
-    height: calc(100% - 32px);
+    height: calc(100% - 38px);
 }
 
 .module fieldset {
