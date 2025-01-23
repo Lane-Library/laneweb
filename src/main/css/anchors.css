@@ -12,6 +12,7 @@ a .fa-thin {
 a:active,
 a:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 a.disabled {
@@ -28,4 +29,5 @@ a.disabled {
 .no-search-content a,
 .su-design .content a {
     text-decoration: underline;
+    text-underline-offset: 3px;
 }
