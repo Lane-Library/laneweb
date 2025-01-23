@@ -86,7 +86,11 @@
 .search-form a:visited,
 .search-form a:active {
     color: white;
-    text-decoration: none;
+}
+
+.search-form a:link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .search-pico {
@@ -116,6 +120,8 @@
 .pico-on,
 .pico-off {
     display: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .pico-toggle-active,
@@ -123,6 +129,7 @@
 .pico-off-active {
     display: inline;
     cursor: pointer;
+
 }
 
 /* see case 125259 */
