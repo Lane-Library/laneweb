@@ -181,9 +181,26 @@
     padding: 0 7% 98px;
 }
 
+
+.callout {
+    padding: 20px 24px;
+    margin: 31px auto;
+    font-size: 21px;
+    text-align: center;
+    background-color: #E1E7E9;
+    width: fit-content;
+}
+
+
 @media (max-width : 1100px) {
     .landing-page-container {
         padding: 0 80px 42px;
+    }
+
+    .callout {
+        padding: 6px 12px;
+        margin: 15px 9px;
+        font-size: 18px;
     }
 
     .service-page {
