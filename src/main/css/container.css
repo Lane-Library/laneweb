@@ -72,6 +72,10 @@
     position: relative;
 }
 
+.same-height div div.basic-card {
+    height: 100%;
+}
+
 .same-height .basic-card .btn:last-of-type,
 .same-height .centered-basic-card .btn:last-of-type {
     position: absolute;
@@ -84,6 +88,7 @@
     transform: translate(-50%);
     white-space: nowrap;
 }
+
 
 .su-design .content>.centered .basic-container {
     padding: 98px;
@@ -178,7 +183,7 @@
 
 
 .service-page {
-    padding: 0 7% 98px;
+    padding: 0 100px 98px;
 }
 
 
@@ -194,7 +199,7 @@
 
 @media (max-width : 1100px) {
     .landing-page-container {
-        padding: 0 80px 42px;
+        padding: 0 40px 42px;
     }
 
     .callout {
@@ -220,7 +225,7 @@
 
 @media (max-width : 768px) {
     .landing-page-container {
-        padding: 0 50px 42px;
+        padding: 0 40px 42px;
     }
 
     .service-page {
@@ -234,10 +239,7 @@
         flex-flow: row wrap;
     }
 
-    .landing-page-container {
-        padding: 0 20px 42px;
-    }
-
+    .landing-page-container,
     .service-page {
         padding: 0 10px 42px;
         margin: 0 10px 42px;
