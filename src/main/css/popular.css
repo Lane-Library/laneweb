@@ -7,14 +7,6 @@
     border: 1px solid #333333;
     box-sizing: border-box;
     position: relative;
-    margin-top: 24px;
-    padding: 24px;
-    line-height: 1.6em;
-    background-color: #333333;
-    color: #ffffff;
-    border: 1px solid #333333;
-    box-sizing: border-box;
-    position: relative;
 }
 
 .popular h2,
@@ -29,21 +21,13 @@
 
 .popular h2:before {
     border: none;
-    border: none;
 }
 
 .popular li {
     border-bottom: none;
-    border-bottom: none;
 }
 
 .popular:after {
-    content: '.';
-    display: block;
-    height: 0;
-    font-size: 0;
-    clear: both;
-    visibility: hidden;
     content: '.';
     display: block;
     height: 0;
@@ -59,21 +43,13 @@
 
 .menu-container.popular h2 i {
     color: white;
-    color: white;
 }
 
 .menu-container.popular li a {
     padding: 3px 0;
-    padding: 3px 0;
 }
 
 .top-resources {
-    line-height: 1.6em;
-    background-color: white;
-    color: black;
-    box-sizing: border-box;
-    position: relative;
-    height: 100%;
     line-height: 1.6em;
     background-color: white;
     color: black;
@@ -86,14 +62,9 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: -11px;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: -11px;
 }
 
 .top-resources li {
-    border-bottom: none;
-    flex: 0 1 50%;
     border-bottom: none;
     flex: 0 1 50%;
 }
