@@ -51,9 +51,6 @@ em {
     color: #808080;
 }
 
-.top-container {
-    margin-top: 24px;
-}
 
 .more a {
     margin-right: 6px;
@@ -248,7 +245,7 @@ hr {
 
 .centered {
     position: relative;
-    margin: 0 7%;
+    margin: 0 5%;
 }
 
 .centered-10 {

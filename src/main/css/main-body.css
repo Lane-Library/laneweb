@@ -13,12 +13,12 @@ footer section,
 header section,
 footer section,
 .content,
-.no-search-content>div:not(.ankle-footer),
 .content div.centered div.service-page {
     max-width: 1800px;
     margin: auto;
 }
 
+.no-search-content>div:not(.ankle-footer),
 .landing-page-container>.basic-container>* {
     max-width: 1600px;
     margin-left: auto;

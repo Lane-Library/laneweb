@@ -9,7 +9,7 @@
 }
 
 .no-search-content .ankle-footer {
-    margin: 10em -8% -80px;
+    margin: 6em -100px -90px;
 }
 
 .no-search-content .search-form fieldset {
@@ -35,6 +35,18 @@
 
 
 
+@media (max-width : 1100px) {
+
+    .no-search-content {
+        padding: 0 40px 42px;
+    }
+
+    .no-search-content .ankle-footer {
+        margin: 6em -40px -90px;
+    }
+
+}
+
 
 @media (max-width: 812px) {
     .no-search-content .search-form {
@@ -51,7 +63,8 @@
     }
 
     .no-search-content .ankle-footer {
-        padding-bottom: 3em;
-        margin: 6em auto -74px;
+        margin: 9em 0 -90px;
     }
+
+
 }
