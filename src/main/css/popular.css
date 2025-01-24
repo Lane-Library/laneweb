@@ -41,6 +41,11 @@
     color: #fff;
 }
 
+.top-resource-container {
+    min-width: 282px;
+    max-width: 350px;
+}
+
 .menu-container.popular h2 i {
     color: white;
 }
@@ -164,6 +169,10 @@
     .no-search-content .eb-eresources li {
         width: auto;
     }
+
+    .top-resource-container {
+        max-width: unset;
+    }
 }
 
 @media (max-width : 812px) {
@@ -174,7 +183,6 @@
     .top-resources.menu-container.mobile h2,
     .top-resources.menu-container.mobile h2:before {
         margin-bottom: 0;
-        padding-bottom: 0;
         border: none;
         cursor: pointer;
     }
