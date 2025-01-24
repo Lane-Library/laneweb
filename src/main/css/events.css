@@ -1,8 +1,12 @@
 ul.classes {
     display: flex;
     gap: 18px;
+}
+
+ul.classes span a:link {
     text-decoration: underline;
     text-underline-offset: 3px;
+    ;
 }
 
 li.event {
