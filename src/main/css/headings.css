@@ -195,8 +195,8 @@ h4.level1 {
 
 .headings {
     max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
+    padding: 0px 30px;
 }
 
 @media (max-width : 1500px) {
