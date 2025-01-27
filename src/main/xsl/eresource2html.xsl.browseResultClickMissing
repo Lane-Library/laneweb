@@ -6,7 +6,7 @@
     xmlns:f="https://lane.stanford.edu/functions"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="h f s xsd" version="2.0">
-    
+
     <xsl:param name="browse-query"/>
 
     <xsl:include href="search-browse-common.xsl"/>
@@ -16,7 +16,7 @@
             <xsl:apply-templates select="attribute::node()|child::node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="."/>
     </xsl:template>
@@ -27,12 +27,12 @@
             <xsl:copy-of select="f:maybe-add-doi-attribute(.)"/>
             <div class="resource-detail">
             <span class="primaryType">
-            	<xsl:apply-templates select="s:primaryType"/>
+                <xsl:apply-templates select="s:primaryType"/>
             </span>
             <xsl:copy-of select="f:primaryLink(s:link[1])"/>
             <xsl:apply-templates select="s:pub-author"/>
             <!-- don't show citation/pub-text when already present in "access via" link to parent record -->
-            <xsl:if test="s:link/s:locationName != s:pub-text"> 
+            <xsl:if test="s:link/s:locationName != s:pub-text">
                 <xsl:apply-templates select="s:pub-text"/>
             </xsl:if>
             <xsl:copy-of select="f:descriptionTrigger(.)"/>
@@ -42,7 +42,7 @@
                 <i class="fa-solid fa-ellipsis fa-xl"></i>
                 <xsl:copy-of select="f:build-source-info(.)" />
             </div>
-            
+
             </div>
             <div class="bookcover-container">
             <xsl:if test="contains(s:primaryType, 'Book') or contains(s:primaryType, 'Journal')">
@@ -54,7 +54,7 @@
                 <div class="bookcover"></div>
             </xsl:if>
             </div>
-            
+
         </li>
     </xsl:template>
 
@@ -76,5 +76,5 @@
             <xsl:value-of select="."/>
         </div>
     </xsl:template>
-    
+
 </xsl:stylesheet>
