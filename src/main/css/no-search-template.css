@@ -38,11 +38,11 @@
 @media (max-width : 1100px) {
 
     .no-search-content {
-        padding: 0 40px 42px;
+        padding: 0 30px 42px;
     }
 
     .no-search-content .ankle-footer {
-        margin: 42px -40px -90px;
+        margin: 42px -30px -90px;
     }
 
 }
@@ -55,7 +55,7 @@
     }
 
     .no-search-content {
-        padding: 43px 0 24px;
+        padding: 43px 20px 24px;
     }
 
     .no-search-content h1 {
@@ -63,7 +63,7 @@
     }
 
     .no-search-content .ankle-footer {
-        margin: 42px 0 -90px;
+        margin: 42px -20px -90px;
     }
 
 
