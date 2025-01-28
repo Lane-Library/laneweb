@@ -237,7 +237,9 @@
 
 
         _handleDragEnd(event) {
-            this.bookmarks.moveBookmark(this.to, this.from);
+            if (this.from != this.to) {
+                this.bookmarks.moveBookmark(this.to, this.from);
+            }
         }
 
 
