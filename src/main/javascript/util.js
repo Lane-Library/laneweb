@@ -52,11 +52,9 @@
 
         obj.fire = function (event, args) {
             if (this.eventListeners && this.eventListeners[event]) {
-                console.log("fire event: " + event);
                 this.eventListeners[event].forEach(callback => callback.call(this, args));
             }
             if (obj.eventPrefix && obj.eventPrefix !== "lane") {
-                console.log("repost LANE event: " + obj.eventPrefix + ":" + event);
                 L.fire(obj.eventPrefix + ":" + event, args);
             }
         };
