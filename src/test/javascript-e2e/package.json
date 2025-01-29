@@ -1,0 +1,23 @@
+{
+  "name": "javascript-e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "instrument": "nyc  instrument --compact false  ./javascript ./instrumented",
+    "pretest": "npm run instrument",
+    "postinstrument": "cp -rf ./instrumented ../../classes/static/resources/javascript/",
+    "test": "cypress run"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.13.9",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
+    "cypress": "^13.15.2",
+    "istanbul-lib-coverage": "^3.2.2",
+    "nyc": "^17.1.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2"
+  }
+}

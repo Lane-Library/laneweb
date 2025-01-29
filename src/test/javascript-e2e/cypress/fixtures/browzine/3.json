@@ -1,0 +1,48 @@
+{
+    "data": {
+        "id": 560729803,
+        "type": "articles",
+        "title": "Same but Different—ECMO in COVID-19 and ARDS of Other Etiologies. Comparison of Survival Outcomes and Management in Different ARDS Groups",
+        "date": "2023-02-19",
+        "authors": "Golicnik, Alenka; Zivanovic, Ina; Gorjup, Vojka; Berden, Jernej",
+        "inPress": false,
+        "abandoned": false,
+        "doi": "10.1177/08850666231157286",
+        "linkResolverOpenUrl": "http://sfx.stanford.edu/local?genre=article&aulast=Golicnik&issn=0885-0666&title=Journal%20of%20Intensive%20Care%20Medicine&atitle=Same%20but%20Different%E2%80%94ECMO%20in%20COVID-19%20and%20ARDS%20of%20Other%20Etiologies.%20Comparison%20of%20Survival%20Outcomes%20and%20Management%20in%20Different%20ARDS%20Groups&volume=38&issue=7&spage=635&epage=642&date=2023&doi=10.1177%2F08850666231157286&sid=LibKey",
+        "pmid": "36803290",
+        "openAccess": true,
+        "unpaywallUsable": true,
+        "fullTextFile": "",
+        "contentLocation": "https://libkey.io/libraries/1462/articles/560729803/content-location?utm_source=api_334",
+        "availableThroughBrowzine": true,
+        "startPage": "635",
+        "endPage": "642",
+        "avoidUnpaywallPublisherLinks": true,
+        "browzineWebLink": "https://browzine.com/libraries/1462/journals/3756/issues/523236052?showArticleInContext=doi:10.1177%2F08850666231157286&utm_source=api_334",
+        "relationships": {
+            "journal": {
+                "data": {
+                    "type": "journals",
+                    "id": 3756
+                }
+            }
+        },
+        "bestIntegratorLink": {
+            "bestLink": "https://libkey.io/libraries/1462/articles/560729803/content-location?utm_source=api_334",
+            "linkType": "contentLocation",
+            "recommendedLinkText": "View Article"
+        }
+    },
+    "included": [
+        {
+            "id": 3756,
+            "type": "journals",
+            "title": "Journal of Intensive Care Medicine",
+            "issn": "08850666",
+            "sjrValue": 1.043,
+            "coverImageUrl": "https://assets.thirdiron.com/images/covers/1525-1489.png",
+            "browzineEnabled": true,
+            "browzineWebLink": "https://browzine.com/libraries/1462/journals/3756?utm_source=api_334"
+        }
+    ]
+}

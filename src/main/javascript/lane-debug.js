@@ -112,9 +112,15 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             }
         };
 
+        let path = "/resources/javascript/";
+        //cypress test path is different from the normal path to the intrumented javascript files
+        if (window.location.pathname.startsWith('/cypress-test')) {
+            path = path.concat("instrumented/");
+        }
+
         //load each javascript file separately
         for (i = 0; i < laneJavascript.length; i++) {
-            Y.Get.js(basePath + "/resources/javascript/" + laneJavascript[i], errorHandler);
+            Y.Get.js(basePath + path + laneJavascript[i], errorHandler);
         }
 
     });

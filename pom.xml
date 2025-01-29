@@ -7,7 +7,7 @@
         <version>168</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.13.20-SNAPSHOT</version>
+    <version>3.13.21-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -35,7 +35,7 @@
         <sonar.exclusions>
             **/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>
-            ${project.build.directory}/grover/lcov/lcov.info</sonar.javascript.lcov.reportPaths>
+            ${project.build.directory}/test-classes/e2e/coverage/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
         <dependency>
@@ -277,6 +277,12 @@
             <artifactId>gson</artifactId>
             <version>2.11.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>1.20.4</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -316,6 +322,19 @@
                 <targetPath>xsl</targetPath>
             </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>src/test/javascript-e2e</directory>
+                <targetPath>e2e</targetPath>
+            </testResource>
+            <testResource>
+                <directory>src/main/javascript</directory>
+                <targetPath>e2e/javascript</targetPath>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -337,6 +356,44 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+             <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.15.1</version>
+                <executions>
+                    <execution>
+                        <id>install node and npm</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v23.1.0</nodeVersion>
+                            <npmVersion>7.0.0</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install --prefix ${project.basedir}/target/test-classes/e2e</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm run</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run instrument --prefix ${project.basedir}/target/test-classes/e2e</arguments>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -389,29 +446,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- disable (temporarily?) grover JS tests: istanbul is dependent
-            on ancient node version
-            also had to remove jenkins "grover" task:
-            -U -Dspring.config.location=file:${HOME}/tomcat/instances/laneweb/conf/laneweb.properties
-            clean verify grover:coverage $SONAR_MAVEN_GOAL -Dsonar.host.url=$SONAR_HOST_URL
-            <plugin>
-                <groupId>edu.stanford.irt</groupId>
-                <artifactId>grover-maven-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <testDir>src/test/javascript</testDir>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>grover</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-             -->
             <plugin>
                 <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
