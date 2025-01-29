@@ -20,7 +20,7 @@
         "slideshow.js",
         "guides.js",
         "link-info.js",
-        "lane-ie.js",
+        "lane-bookmarklet.js",
         "lane-persistent-login.js",
         "search-indicator.js",
         "lane-bassett.js",

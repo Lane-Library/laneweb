@@ -1,5 +1,9 @@
 /* This file has rules that don't seem to fit anywhere else */
-body, select, input, button, textarea {
+body,
+select,
+input,
+button,
+textarea {
     font-family: 'Source Sans Pro', sans-serif, Arial;
 }
 
@@ -130,13 +134,15 @@ hr {
 }
 
 
-/*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-.bookmarklet-ie, .bookmarklet-edge, #bookmarkletIE, .no-js {
+/*hide Edge bookmarklet instructions, made visible via javascript (lane-bookmarklet.js)*/
+.bookmarklet-edge,
+.no-js {
     display: none;
 }
 
 /*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
-.quote, .quote-sig {
+.quote,
+.quote-sig {
     font-size: 170%;
     line-height: 180%;
 }
@@ -149,6 +155,7 @@ hr {
 .quote-sig {
     text-align: right;
 }
+
 /*the official SoM color palette */
 .backgr-white {
     background-color: #ffffff;
