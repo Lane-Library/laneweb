@@ -146,6 +146,10 @@ ul .nav-login {
     font-weight: 800;
 }
 
+.nav-cols-content div p a i {
+    color: black;
+}
+
 .content .nav-menu-content.nav-cols-content li:last-child {
     border: none;
 }
