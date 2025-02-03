@@ -47,18 +47,14 @@
     margin-top: 9px;
 }
 
-#ejp,
+
 #sfp-book,
 #sfp-journal,
 #sfp-other {
     display: none;
 }
 
-:target~#laneaskus {
-    display: none;
-}
 
-#ejp:target,
 #sfp-book:target,
 #sfp-journal:target,
 #sfp-other:target {
