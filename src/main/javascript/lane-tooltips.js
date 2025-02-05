@@ -424,5 +424,6 @@
             L.ToolTips.destructor();
             createTooltips();
         });
+    });
 
-    })();
+})();

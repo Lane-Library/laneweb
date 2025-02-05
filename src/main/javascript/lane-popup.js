@@ -14,8 +14,6 @@
             this.clearPopup();
             this.popupWindow = document.createElement('div');
             this.popupWindow.classList.add("popup");
-            this.popupWindow = document.createElement('div');
-            this.popupWindow.classList.add("popup");
             contentDiv = document.createElement('div');
             contentDiv.classList.add("popup-content");
             titleDiv = document.createElement('div');
